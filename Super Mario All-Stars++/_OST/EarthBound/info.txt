@@ -1,0 +1,55 @@
+Earthbound (Mother 2)
+Dumped by: Tomato, CoolDude, gehn, SonicPanda, YK, Osaka, nensondubois, Luciano
+ID666 tags by: Adam Blake, SonicPanda, Datschge, YK, Osaka, Tanookirby
+Downloaded from: http://snesmusic.org
+
+Update 8:
+-7 unused jingles added.
+
+Update 7:
+-"Complete" versions of the Sound Stone jingles added.
+-"Ominous Rumbling" removed. It was just a duplicate of
+ "Giygas Disintegrates" at a very low volume.
+
+Update 6:
+-Yes, the biggest SPC set in existance just got bigger.
+ *More* missing tracks added. Many are jingles or ambient-ish,
+ and most are unused, taken from the hidden Sound Mode.
+
+Update 5:
+-Total set cleanup: several tracks redumped, several additional
+ variants added. Tagging and titling cleaned up somewhat, timers
+ fixed, and unnecessary tracks removed. Set re-ordered to work
+ in essential tracks.
+
+Update 4:
+-Even *more* new missing songs and jingles added.
+ Will this set ever be 100% finished?!
+
+Update 3:
+-Yet *another* missing track added (Someone's Knocking at the Door).
+-Three tracks redumped: 020 (A Good Night's Rest), 065 (Winters' Wake Up 
+ Call), and 130d (Smiles and Tears).
+-Order slightly changed. (Tracks 129 and 130 switched around.)
+-Added more notes on Mother 1 remixes.
+
+Update 2:
+-Even more missing tracks added. mo2-128.spc (formerly the problematic
+ mo2-126.spc, rearranged due to additional tracks) fixed.
+-All key sound effects, including the two mentioned in v2.0, dumped.
+
+Update:
+-Missing tracks dumped, Extended info cites OST pieces and Mother 1
+ remixes. Pieces with SFX embedded redumped, and whole set 
+ essentially redone from the ground up.
+-Two known issues: mo2-126.spc plays way too softly, and key SFX
+ (such as The OK Man & Belch's Burp) couldn't be isolated to rip.
+
+Version: v1.1
+New set now using the extended id666 tag format
+
+
+
+
+
+
