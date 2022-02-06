@@ -1,0 +1,5 @@
+frames=10
+framespeed=2
+name="Spencer Everly Intro - #1: Head Spin"
+grid=16
+priority=-3

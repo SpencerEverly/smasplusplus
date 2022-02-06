@@ -1,0 +1,11 @@
+gfxwidth=36
+gfxheight=64
+width=36
+height=64
+framestyle=2
+frames=4
+cliffturn=1
+grabtop=1
+playerblocktop=1
+speed=2
+nogravity=1

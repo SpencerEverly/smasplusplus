@@ -1,0 +1,13 @@
+{
+	"style" : "groupbox",
+	"title" : "Warp HUB Settings",
+	"layout": [
+		{
+			"control": "lineEdit",
+			"name": "name",
+			"title": "Display Name",
+			"tooltip": "The name that will show up in the warp menu",
+			"value-default": ""
+		}
+	]
+}

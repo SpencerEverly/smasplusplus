@@ -1,0 +1,116 @@
+local playerManager = require("playerManager")
+local npcManager = require("npcManager")
+local yoshi = require("yiYoshi/yiYoshi")
+
+
+local costume = {}
+
+function costume.onInit(p)
+	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("costumes/klonoa/SMA3/main.png")
+	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("costumes/klonoa/SMA3/babyMario.png")
+	yoshi.generalSettings.jumpSound  = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Hop"))
+    yoshi.generalSettings.hurtSound  = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Hyuaa"))
+    yoshi.generalSettings.deathSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Owowow"))
+    --yoshi.generalSettings.coinSound  = SFX.open(Misc.resolveSoundFile("yiYoshi/coin"))
+	
+	--yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_bubbleCreated"))
+    --yoshi.generalSettings.babyPopBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/pop"))
+    --yoshi.generalSettings.babyCrySound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_cry"))
+    --yoshi.generalSettings.babyRescuedSound = SFX.open(Misc.resolveSoundFile("yoshi"))
+    --yoshi.generalSettings.babyKidnappedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_kidnapped"))
+    --yoshi.generalSettings.babyCarriedOffSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_carriedOff"))
+
+    --yoshi.generalSettings.starCounterBackImage = Graphics.loadImageResolved("yiYoshi/starCounter_back.png")
+    --yoshi.generalSettings.starCounterNumbersImage = Graphics.loadImageResolved("yiYoshi/starCounter_numbers.png")
+
+    --yoshi.generalSettings.starCounterReplenishedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_replenished"))
+    --yoshi.generalSettings.starCounterSlowBeepingSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_slowBeeping"))
+    --yoshi.generalSettings.starCounterFastBeepingSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_fastBeeping"))
+    --yoshi.generalSettings.starCounterIncreaseSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_increase")),
+	
+	yoshi.introSettings.sound = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Game Start (SFX).ogg"))
+	
+	yoshi.customExitSettings.keyVictorySound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Yoshi"))
+    --yoshi.customExitSettings.keyOpenSound = SFX.open(Misc.resolveSoundFile("yiYoshi/reveal"))
+    --yoshi.customExitSettings.keyCloseSound = SFX.open(Misc.resolveSoundFile("yiYoshi/exit_keyClose"))
+
+    yoshi.customExitSettings.passOnMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Goal.ogg"))
+    yoshi.customExitSettings.keyMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
+    yoshi.customExitSettings.keyMusicStar = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
+    yoshi.customExitSettings.scoreMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Score (SFX).ogg"))
+	
+	yoshi.flutterSettings.sound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Hyrrrrrm.wav"))
+	yoshi.flutterSettings.soundDelay = 0
+	
+	yoshi.tongueSettings.image = Graphics.loadImageResolved("costumes/klonoa/SMA3/tongue.png")
+	yoshi.tongueSettings.startSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Hyum"))
+    --yoshi.tongueSettings.failedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/tongue_failed"))
+    yoshi.tongueSettings.spitSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Plum"))
+    --yoshi.tongueSettings.swallowSound = SFX.open(Misc.resolveSoundFile("yoshi-swallow"))
+
+    --yoshi.tongueSettings.createEggSound = SFX.open(Misc.resolveSoundFile("yiYoshi/pop"))
+    --yoshi.tongueSettings.startAimSound = SFX.open(Misc.resolveSoundFile("yoshi-tongue"))
+    --yoshi.tongueSettings.cycleEggsSound = SFX.open(Misc.resolveSoundFile("swim"))
+    yoshi.tongueSettings.eggThrowSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Ha"))
+    yoshi.tongueSettings.failedThrowSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/Ha"))
+    --yoshi.tongueSettings.eggAimSound = SFX.open(Misc.resolveSoundFile("yiYoshi/aim"))
+	
+	yoshi.groundPoundSettings.startSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/plying"))
+    yoshi.groundPoundSettings.landSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/plying-ha-haonly"))
+end
+
+function costume.onCleanup(p)
+	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("yiYoshi/main.png")
+	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("yiYoshi/babyMario.png")
+	yoshi.generalSettings.jumpSound  = SFX.open(Misc.resolveSoundFile("yiYoshi/jump"))
+    yoshi.generalSettings.hurtSound  = SFX.open(Misc.resolveSoundFile("yoshi-hurt"))
+    yoshi.generalSettings.deathSound = SFX.open(Misc.resolveSoundFile("yiYoshi/death"))
+    yoshi.generalSettings.coinSound  = SFX.open(Misc.resolveSoundFile("yiYoshi/coin"))
+	
+	yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_bubbleCreated"))
+    yoshi.generalSettings.babyPopBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/pop"))
+    yoshi.generalSettings.babyCrySound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_cry"))
+    yoshi.generalSettings.babyRescuedSound = SFX.open(Misc.resolveSoundFile("yoshi"))
+    yoshi.generalSettings.babyKidnappedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_kidnapped"))
+    yoshi.generalSettings.babyCarriedOffSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_carriedOff"))
+
+    yoshi.generalSettings.starCounterBackImage = Graphics.loadImageResolved("yiYoshi/starCounter_back.png")
+    yoshi.generalSettings.starCounterNumbersImage = Graphics.loadImageResolved("yiYoshi/starCounter_numbers.png")
+
+    yoshi.generalSettings.starCounterReplenishedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_replenished"))
+    yoshi.generalSettings.starCounterSlowBeepingSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_slowBeeping"))
+    yoshi.generalSettings.starCounterFastBeepingSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_fastBeeping"))
+    yoshi.generalSettings.starCounterIncreaseSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_increase"))
+	
+	yoshi.introSettings.sound = SFX.open(Misc.resolveSoundFile("yiYoshi/intro.ogg"))
+	
+	yoshi.customExitSettings.keyVictorySound = SFX.open(Misc.resolveSoundFile("yoshi"))
+    yoshi.customExitSettings.keyOpenSound = SFX.open(Misc.resolveSoundFile("yiYoshi/reveal"))
+    yoshi.customExitSettings.keyCloseSound = SFX.open(Misc.resolveSoundFile("yiYoshi/exit_keyClose"))
+
+    yoshi.customExitSettings.passOnMusic = SFX.open(Misc.resolveSoundFile("yiYoshi/exit_start"))
+    yoshi.customExitSettings.keyMusic = SFX.open(Misc.resolveSoundFile("yiYoshi/exit_key"))
+    yoshi.customExitSettings.keyMusicStar = SFX.open(Misc.resolveSoundFile("yiYoshi/exit_key_star"))
+    yoshi.customExitSettings.scoreMusic = SFX.open(Misc.resolveSoundFile("yiYoshi/exit_score"))
+	
+	yoshi.flutterSettings.sound = SFX.open(Misc.resolveSoundFile("yiYoshi/flutter"))
+	yoshi.flutterSettings.soundDelay = 6
+	
+	yoshi.tongueSettings.image = Graphics.loadImageResolved("yiYoshi/tongue.png")
+	yoshi.tongueSettings.startSound = SFX.open(Misc.resolveSoundFile("yiYoshi/tongue_start"))
+    yoshi.tongueSettings.failedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/tongue_failed"))
+    yoshi.tongueSettings.spitSound = SFX.open(Misc.resolveSoundFile("birdo-spit"))
+    yoshi.tongueSettings.swallowSound = SFX.open(Misc.resolveSoundFile("yoshi-swallow"))
+
+    yoshi.tongueSettings.createEggSound = SFX.open(Misc.resolveSoundFile("yiYoshi/pop"))
+    yoshi.tongueSettings.startAimSound = SFX.open(Misc.resolveSoundFile("yoshi-tongue"))
+    yoshi.tongueSettings.cycleEggsSound = SFX.open(Misc.resolveSoundFile("swim"))
+    yoshi.tongueSettings.eggThrowSound = SFX.open(Misc.resolveSoundFile("yiYoshi/egg_thrown"))
+    yoshi.tongueSettings.failedThrowSound = SFX.open(Misc.resolveSoundFile("yiYoshi/egg_failedThrow"))
+    yoshi.tongueSettings.eggAimSound = SFX.open(Misc.resolveSoundFile("yiYoshi/aim"))
+	
+	yoshi.groundPoundSettings.startSound = SFX.open(Misc.resolveSoundFile("yiYoshi/groundPound_start"))
+    yoshi.groundPoundSettings.landSound = SFX.open(Misc.resolveSoundFile("yiYoshi/groundPound_land"))
+end
+
+return costume

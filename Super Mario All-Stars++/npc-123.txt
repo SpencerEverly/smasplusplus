@@ -1,0 +1,16 @@
+width = 32
+height = 32
+gfxwidth = 56
+gfxheight = 64
+gfxoffsetx = 0
+gfxoffsety = 2
+frames = 3
+framestyle = 1
+framespeed = 8
+
+turnFrames= 1 
+turnTime = 8
+
+shellID = 115
+beachKoopaID = 119
+nonWingedKoopaID = 111

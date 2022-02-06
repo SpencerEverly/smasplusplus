@@ -1,0 +1,34 @@
+{
+	"style" : "groupbox",
+	"title" : "Warp Settings",
+	"layout": [
+		{
+			"control": "lineEdit",
+			"name": "warpName",
+			"title": "Warp Name",
+			"tooltip": "The internal name of the warp (not shown to the player)."
+		},
+		{
+			"control": "lineEdit",
+			"name": "destinationWarpName",
+			"title": "Destination Warp's Name",
+			"tooltip": "The internal name of the warp that this warp leads to (not shown to the player). (Note that only this OR the destination path needs to be specified.)"
+		},
+
+        {
+			"control": "lineEdit",
+			"name": "destinationPathName",
+			"title": "Destination Path's Name",
+			"tooltip": "The name of the path that this warp leads to. (Note that only this OR the destination warp needs to be specified.)"
+		},
+        {
+            "control": "comboBox",
+            "name": "pathWalkingDirection",
+            "title": "Path Walking Direction",
+            "tooltip": "The direction that the player walks along the destination path (only relevant is destination path is specified).",
+            "elements": ["Forward", "Backward"],
+            "value-default": 0
+        }
+	]
+}
+

@@ -1,0 +1,7 @@
+width=30
+height=32
+gfxwidth=30
+gfxheight=64
+playerblocktop=1
+grabtop=1
+speed=2

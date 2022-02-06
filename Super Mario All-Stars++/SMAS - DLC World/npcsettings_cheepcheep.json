@@ -1,0 +1,29 @@
+{
+	"style" : "groupbox",
+	"title" : "Cheep Cheep Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"name": "offset",
+			"title": "Offset",
+			"type": "int",
+			"tooltip": "How far down it starts the jump from.",
+			"value-default": 64,
+			"value-min": 0,
+			"value-max": 1000,
+			"single-step": 16
+		},
+		{
+			"control": "spinBox",
+			"name": "jumpHeight",
+			"title": "Jump Height",
+			"type": "int",
+			"tooltip": "How far it jumps up (in pixels).",
+			"value-default": 48,
+			"value-min": 0,
+			"value-max": 1000,
+			"single-step": 16
+		}
+	]
+}
+

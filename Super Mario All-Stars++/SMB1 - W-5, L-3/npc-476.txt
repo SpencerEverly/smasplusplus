@@ -1,0 +1,4 @@
+height=17
+speed=0.5
+name="Elevator (Medium)"
+gridalign=0

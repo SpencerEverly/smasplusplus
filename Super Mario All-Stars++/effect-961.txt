@@ -1,0 +1,9 @@
+[first]
+import=AI_SINGLE
+framespeed=10
+frames=8
+speedY=-1.25:-0.25
+xOffset=-24:24
+yOffset=-4:4
+xAlign=MID
+yAlign=MID

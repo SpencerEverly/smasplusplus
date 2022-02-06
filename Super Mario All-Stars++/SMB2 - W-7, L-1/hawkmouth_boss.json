@@ -1,0 +1,13 @@
+{
+	"style" : "tree",
+	"title" : "Rocket Settings",
+	"layout": [
+		{
+			"control": "pointBox",
+			"name": "tele",
+			"title": "Teleport to...",
+			"value-default" : {"x":0, "y":0}
+		}
+	]
+}
+

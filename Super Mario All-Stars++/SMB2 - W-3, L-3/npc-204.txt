@@ -1,0 +1,8 @@
+gfxwidth=62
+gfxheight=32
+width=62
+height=32
+noblockcollision=1
+frames=10
+framespeed=7
+framestyle=2

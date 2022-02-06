@@ -1,0 +1,276 @@
+{
+--[1]--
+{
+   ["goombaStomps"]=0,
+   ["__launcher"]={2},
+   ["yiYoshi"]={3},
+   ["__costumes"]={4},
+   ["inventoryTable"]={5},
+   ["usePWing"]=false,
+   ["starmansused"]=0,
+   ["totalfireflowers"]=0,
+   ["totalleafs"]=0,
+   ["steveData"]={6},
+   ["megamushroomssused"]=0,
+   ["totalmushrooms"]=0,
+   ["useStarman"]=false,
+   ["ut_enabled"]=0,
+   ["failsafeMessageOne"]=0,
+   ["disableX2char"]=0,
+   ["deathCount"]=0,
+   ["totaliceflowers"]=0,
+   ["_basegame"]={7},
+   ["koopaStomps"]=0,
+   ["GameOverCount"]=0,
+   ["starsgrabbed"]=0,
+   ["totalcoins"]=0,
+   ["firstBootCompleted"]=1,
+   ["smwMap"]={8},
+   ["warphub"]={9},
+   ["totaltanookis"]=0,
+   ["totalhammersuits"]=0
+},
+--[2]--
+{
+
+},
+--[3]--
+{
+   ["currentColour"]=0,
+   ["savedEggs"]={10}
+},
+--[4]--
+{
+
+},
+--[5]--
+{
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   [0]=0
+},
+--[6]--
+{
+   ["items"]={11}
+},
+--[7]--
+{
+   ["bigSwitch"]={12},
+   ["_characterdata"]={13},
+   ["starcoinCounter"]=0,
+   ["hud"]={14},
+   ["starcoin"]={15}
+},
+--[8]--
+{
+   ["encounterData"]={16},
+   ["unlockedPaths"]={17},
+   ["beatenLevels"]={18},
+   ["unlockedCheckpoints"]={19}
+},
+--[9]--
+{
+   ["MALC - HUB.lvlx"]={20}
+},
+--[10]--
+{
+
+},
+--[11]--
+{
+
+},
+--[12]--
+{
+
+},
+--[13]--
+{
+   ["8"]={21},
+   ["10"]={22},
+   ["9"]={23},
+   ["6"]={24},
+   ["16"]={25},
+   ["11"]={26},
+   ["12"]={27},
+   ["7"]={28},
+   ["15"]={29},
+   ["13"]={30},
+   ["14"]={31}
+},
+--[14]--
+{
+   ["score"]=17300
+},
+--[15]--
+{
+   ["SMAS - Start.lvlx"]={32},
+   ["MALC - HUB.lvlx"]={33},
+   ["SMAS - Intro.lvlx"]={34},
+   ["SMAS - Game Help.lvlx"]={35},
+   ["SMAS - True Ending.lvlx"]={36}
+},
+--[16]--
+{
+
+},
+--[17]--
+{
+
+},
+--[18]--
+{
+
+},
+--[19]--
+{
+   ["SMAS - True Ending.lvlx"]={37}
+},
+--[20]--
+{
+
+},
+--[21]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=2,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[22]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[23]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=2,
+   ["0x16"]=2,
+   ["0x108"]=0
+},
+--[24]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=2,
+   ["0x16"]=3,
+   ["0x108"]=0
+},
+--[25]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[26]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[27]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[28]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[29]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[30]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[31]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=2,
+   ["0x16"]=2,
+   ["0x108"]=0
+},
+--[32]--
+{
+   ["maxID"]=0,
+   ["alive"]={38}
+},
+--[33]--
+{
+   ["maxID"]=0,
+   ["alive"]={39}
+},
+--[34]--
+{
+   ["maxID"]=0,
+   ["alive"]={40}
+},
+--[35]--
+{
+   ["maxID"]=0,
+   ["alive"]={41}
+},
+--[36]--
+{
+   ["maxID"]=0,
+   ["alive"]={42}
+},
+--[37]--
+{
+   true,
+   true
+},
+--[38]--
+{
+
+},
+--[39]--
+{
+
+},
+--[40]--
+{
+
+},
+--[41]--
+{
+
+},
+--[42]--
+{
+
+}
+}

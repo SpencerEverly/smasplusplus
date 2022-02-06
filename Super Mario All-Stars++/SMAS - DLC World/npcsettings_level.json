@@ -1,0 +1,114 @@
+{
+	"style" : "groupbox",
+	"title" : "Level Settings",
+	"layout": [
+		{
+			"control": "levelFile",
+			"name": "levelFilename",
+			"title": "Level Filename",
+			"tooltip": "Filename of the level that this tile leads to.",
+			"value-default": ""
+		},
+		{
+			"control": "lineEdit",
+			"name": "levelTitle",
+			"title": "Level Title",
+			"tooltip": "Title shown when standing on this tile.",
+			"value-default": ""
+		},
+		{
+			"control": "spinBox",
+			"name": "warpIndex",
+			"title": "Entrance\nWarp Index",
+			"tooltip": "The warp that the player starts at when entering the level. 0 means no warp and starting from the usual start point.",
+			"type": "int",
+			"value-default": 0,
+			"value-min": 0,
+			"value-max": 200
+		},
+		{
+			"control": "checkBox",
+			"name": "alwaysVisible",
+			"title": "Always Visible",
+			"tooltip": "If checked, the level will always be visible, even when locked.",
+			"value-default": false
+		},
+		{
+			"control": "checkBox",
+			"name": "destroyAfterWin",
+			"title": "Destroy After Win",
+			"tooltip": "If checked, the level will play a destroyed animation after being beaten (if it has one).",
+			"value-default": false
+		},
+
+		{
+			"control": "group",
+			"name": "..",
+			"title": "Unlock Settings",
+			"children": [
+				{
+					"control": "comboBox",
+					"name": "unlock_up",
+					"title": "Top Unlock",
+					"tooltip": "Type of victory needed to unlock the top.",
+					"elements": ["* - None","* - Always Unlocked","* - Any Win","1 - Card Roulette","2 - SMB3 Orb","3 - Offscreen","4 - Keyhole","5 - SMB2 Orb","6 - Warp","7 - SMB3 Star","8 - Goal Tape"],
+					"value-default": 2
+				},
+				{
+					"control": "comboBox",
+					"name": "unlock_right",
+					"title": "Right Unlock",
+					"tooltip": "Type of victory needed to unlock the right.",
+					"elements": ["* - None","* - Always Unlocked","* - Any Win","1 - Card Roulette","2 - SMB3 Orb","3 - Offscreen","4 - Keyhole","5 - SMB2 Orb","6 - Warp","7 - SMB3 Star","8 - Goal Tape"],
+					"value-default": 2
+				},
+				{
+					"control": "comboBox",
+					"name": "unlock_down",
+					"title": "Bottom Unlock",
+					"tooltip": "Type of victory needed to unlock the bottom.",
+					"elements": ["* - None","* - Always Unlocked","* - Any Win","1 - Card Roulette","2 - SMB3 Orb","3 - Offscreen","4 - Keyhole","5 - SMB2 Orb","6 - Warp","7 - SMB3 Star","8 - Goal Tape"],
+					"value-default": 2
+				},
+				{
+					"control": "comboBox",
+					"name": "unlock_left",
+					"title": "Left Unlock",
+					"tooltip": "Type of victory needed to unlock the left.",
+					"elements": ["* - None","* - Always Unlocked","* - Any Win","1 - Card Roulette","2 - SMB3 Orb","3 - Offscreen","4 - Keyhole","5 - SMB2 Orb","6 - Warp","7 - SMB3 Star","8 - Goal Tape"],
+					"value-default": 2
+				},
+		
+				{
+					"control": "lineEdit",
+					"name": "path_up",
+					"title": "Top Path",
+					"tooltip": "Name of the path that is on the level's top.",
+					"value-default": ""
+				},
+				{
+					"control": "lineEdit",
+					"name": "path_right",
+					"title": "Right Path",
+					"tooltip": "Name of the path that is on the level's right.",
+					"value-default": ""
+				},
+				{
+					"control": "lineEdit",
+					"name": "path_down",
+					"title": "Bottom Path",
+					"tooltip": "Name of the path that is on the level's bottom.",
+					"value-default": ""
+				},
+				{
+					"control": "lineEdit",
+					"name": "path_left",
+					"title": "Left Path",
+					"tooltip": "Name of the path that is on the level's left.",
+					"value-default": ""
+				}
+			]
+		}
+	]
+}
+

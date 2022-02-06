@@ -1,0 +1,4 @@
+frames=4
+framespeed=8
+width=32
+height=32

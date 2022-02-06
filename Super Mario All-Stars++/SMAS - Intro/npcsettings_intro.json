@@ -1,0 +1,14 @@
+{
+	"style" : "groupbox",
+	"title" : "Intro Assets",
+	"layout": [
+		{
+			"control": "npc",
+			"name": "1 - Spinning Head",
+			"title": "1 - Spinning Head",
+			"tooltip": "Intro asset 1.",
+			"value-default": false
+		}
+	]
+}
+

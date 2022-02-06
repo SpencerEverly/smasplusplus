@@ -1,0 +1,7 @@
+gfxwidth=66
+gfxheight=36
+width=66
+height=36
+nofireball=1
+frames=2
+framestyle=1

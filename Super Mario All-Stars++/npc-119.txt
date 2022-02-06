@@ -1,0 +1,20 @@
+width = 32
+height = 32
+gfxwidth = 32
+gfxheight = 32
+gfxoffsetx = 0
+gfxoffsety = 2
+frames = 4
+framestyle = 1
+framespeed = 8
+
+kickFrames = 1
+slidingFrames = 1
+
+beforeKickTime = 16
+afterKickTime = 16
+
+quickerSliding = true
+
+speed = 1.5
+cliffturn = true

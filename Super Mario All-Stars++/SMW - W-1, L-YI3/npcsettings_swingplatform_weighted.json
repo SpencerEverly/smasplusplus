@@ -1,0 +1,99 @@
+{
+	"style" : "groupbox",
+	"title" : "Swinging Platform Settings",
+	"layout": [
+		{
+			"control": "itemSelect",
+			"name": "platformID",
+			"title": "Platform NPC",
+			"type": "npc",
+			"tooltip": "Which NPC the platforms are.",
+			"value-default": 0
+		},
+		{
+			"control": "spinbox",
+			"name": "platformWidth",
+			"title": "Platform Width",
+			"type": "int",
+			"tooltip": "The width of the platform (in blocks).",
+			"value-default": 4,
+			"value-min": 0,
+			"value-max": 100
+		},
+		{
+			"control": "spinbox",
+			"name": "platformCount",
+			"title": "Platform Count",
+			"type": "int",
+			"tooltip": "How many platforms are attached.",
+			"value-default": 1,
+			"value-min": 1,
+			"value-max": 100
+		},
+		{
+			"control": "spinbox",
+			"name": "radius",
+			"title": "Radius",
+			"type": "int",
+			"tooltip": "How far away the platform is from the controller.",
+			"value-default": 128,
+			"value-min": 0,
+			"value-max": 9999,
+			"single-step": 16
+		},
+		{
+			"control": "spinbox",
+			"name": "startingRotation",
+			"title": "Starting Rotation",
+			"type": "int",
+			"tooltip": "How many degrees it starts out at.",
+			"value-default": 0,
+			"value-min": -360,
+			"value-max": 360
+		},
+		{
+			"control": "spinbox",
+			"name": "rotationAcceleration",
+			"title": "Rotation Acceleration",
+			"type": "double",
+			"tooltip": "How many degrees the rotation speed increases by each frame the player is standing on it.",
+			"value-default": 0.02,
+			"value-min": 0,
+			"value-max": 360,
+			"decimals": 2,
+			"single-step": 0.01
+		},
+		{
+			"control": "spinbox",
+			"name": "rotationMaxSpeed",
+			"title": "Rotation Max Speed",
+			"type": "double",
+			"tooltip": "The maximum number of degrees it can rotate each frame.",
+			"value-default": 100,
+			"value-min": 0,
+			"value-max": 360,
+			"decimals": 2,
+			"single-step": 0.5
+		},
+		{
+			"control": "checkBox",
+			"name": "displayCentreJoint",
+			"title": "Display Centre Joint",
+			"tooltip": "If ticked, a joint will be present where the centre of rotation is. Recommended to be set to false if attached to a block.",
+			"value-default": true
+		},
+		{
+			"control": "spinbox",
+			"name": "lineSpeed",
+			"title": "Lineguided\nMovement Speed",
+			"type": "double",
+			"tooltip": "How fast it moves, if attached to a lineguide.",
+			"value-default": 1.5,
+			"value-min": 0,
+			"value-max": 360,
+			"decimals": 2,
+			"single-step": 0.1
+		}
+	]
+}
+

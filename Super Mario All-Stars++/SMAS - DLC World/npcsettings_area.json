@@ -1,0 +1,69 @@
+{
+	"style" : "groupbox",
+	"title" : "Area Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"name": "width",
+			"title": "Width",
+			"type": "int",
+			"tooltip": "How wide the area is, in pixels.",
+			"value-default": 668,
+			"value-min": 0,
+			"value-max": 100000
+		},
+		{
+			"control": "spinBox",
+			"name": "height",
+			"title": "Height",
+			"type": "int",
+			"tooltip": "How tall the area is, in pixels.",
+			"value-default": 404,
+			"value-min": 0,
+			"value-max": 100000
+		},
+		{
+			"control": "checkBox",
+			"name": "restrictCamera",
+			"title": "Restrict Camera",
+			"tooltip": "If ticked, the camera will not be able to leave this area while the player is in it.",
+			"value-default": false
+		},
+		{
+			"control": "comboBox",
+			"name": "music",
+			"title": "Music",
+			"tooltip": "The music played whilst in this section.",
+			"elements": ["Don't change","None","Custom","SMW Yoshi's Island","SMW Donut Plains","SMW Vanilla Dome","SMW Forest of Illusion","SMW Valley of Bowser","SMW Star Road","SMW Special World","SMB3 Grass Land","SMB3 Desert Land","SMB3 Water Land","SMB3 Giant Land","SMB3 Sky Land","SMB3 Ice Land","SMB3 Pipe Land","SMB3 Dark Land"],
+			"value-default": 0
+		},
+		{
+			"control": "musicFile",
+			"name": "customMusicPath",
+			"title": "Custom Music Path",
+			"tooltip": "Path of the file used if the above option is set to 'Custom'.",
+			"directory": "episode",
+			"directory-relative": "episode",
+			"value-default": ""
+		},
+		{
+			"control": "lineEdit",
+			"name": "backgroundName",
+			"title": "Background Name",
+			"tooltip": "Name of the background used while in this area. Leave blank for no background. Images come from smwMap/background-X.png.",
+			"value-default": "water"
+		},
+		{
+			"control": "color",
+			"name": "backgroundColor",
+			"title": "Background Color",
+			"tooltip": "The color of the background, if the image is not specified.",
+			"value-default": "#000000"
+		},
+		{
+			"control": "description",
+			"text": "<b>Note:</b> This should be placed in the top left corner of where you want the area to be. The player can also be in multiple areas at once."
+		}
+	]
+}
+

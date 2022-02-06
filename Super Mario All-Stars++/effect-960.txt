@@ -1,0 +1,71 @@
+[1]
+xAlign = MID
+yAlign = MID
+frames = 6
+framespeed = 4
+lifetime = 8
+
+[star]
+import = AI_SINGLE
+xAlign = MID
+yAlign = MID
+frames = 6
+framespeed = 6
+animationFrame = 2
+gravity = 0.075
+
+delay = 8
+
+x = 8
+y = -16
+speedX = 0.75
+speedY = -3.75
+
+[2]
+template=star
+x = -8
+y = -16
+speedX = -0.75
+speedY = -3.75
+
+[3]
+template=star
+x = 16
+y = -8
+speedX = 3
+speedY = -1.5
+
+[4]
+template=star
+x = 16
+y = 8
+speedX = 3
+speedY = 0.75
+
+[5]
+template=star
+x = 8
+y = 16
+speedX = 0.75
+speedY = 2.625
+
+[6]
+template=star
+x = -8
+y = 16
+speedX = -0.75
+speedY = 2.625
+
+[7]
+template=star
+x = -16
+y = -8
+speedX = -3
+speedY = -1.5
+
+[8]
+template=star
+x = -16
+y = 8
+speedX = -3
+speedY = 0.75

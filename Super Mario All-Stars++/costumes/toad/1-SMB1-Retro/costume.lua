@@ -1,0 +1,243 @@
+local pm = require("playerManager")
+
+local costume = {}
+
+costume.playersList = {}
+costume.playerData = {}
+
+local eventsRegistered = false
+
+function costume.onInit(p)
+	-- If events have not been registered yet, do so
+	if not eventsRegistered then
+		registerEvent(costume,"onStart")
+		registerEvent(costume,"onTick")
+		registerEvent(costume,"onTickEnd")
+		registerEvent(costume,"onCleanup")
+		registerEvent(costume,"onInputUpdate")
+
+		eventsRegistered = true
+		
+		-- Add this player to the list
+	if costume.playerData[p] == nil then
+		costume.playerData[p] = {
+			currentAnimation = "",
+		}
+		
+		table.insert(costume.playersList,p)
+		end
+	end
+end
+
+--function costume.onStart()
+  --Audio.playSFX("costumes/toad/1-SMB1-Retro/toad-letsago.ogg")
+--if player:mem(0x13e, FIELD_WORD) > 0 then return false end
+--if player:mem(0x122, FIELD_WORD) > 0 then return false end
+--if player:mem(0x108, FIELD_WORD) > 0 then return false end
+
+--end
+
+function costume.onTickEnd()
+	for _,p in ipairs(costume.playersList) do
+		local data = costume.playerData[p]
+	end
+end
+	
+function costume.onTick() --WIP
+	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/player-jump.ogg")
+	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/stomped.ogg")
+	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/block-hit.ogg")
+	Audio.sounds[4].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/block-smash.ogg")
+	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/player-shrink.ogg")
+	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/player-grow.ogg")
+	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/mushroom.ogg")
+	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/player-died.ogg")
+	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/shell-hit.ogg")
+	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/player-slide.ogg")
+	Audio.sounds[11].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/item-dropped.ogg")
+	Audio.sounds[12].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/has-item.ogg")
+	Audio.sounds[13].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/camera-change.ogg")
+	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/coin.ogg")
+	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/1up.ogg")
+	Audio.sounds[16].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/lava.ogg")
+	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/warp.ogg")
+	Audio.sounds[18].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/fireball.ogg")
+	Audio.sounds[19].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/level-win.ogg")
+	Audio.sounds[20].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/boss-beat.ogg")
+	Audio.sounds[21].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/dungeon-win.ogg")
+	Audio.sounds[22].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/bullet-bill.ogg")
+	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/grab.ogg")
+	Audio.sounds[24].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/spring.ogg")
+	Audio.sounds[25].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/hammer.ogg")
+	Audio.sounds[29].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/do.ogg")
+	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/key.ogg")
+	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/pswitch.ogg")
+	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/tail.ogg")
+	Audio.sounds[34].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/racoon.ogg")
+	Audio.sounds[35].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/boot.ogg")
+	Audio.sounds[36].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/smash.ogg")
+	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/thwomp.ogg")
+	Audio.sounds[38].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/birdo-spit.ogg")
+	Audio.sounds[39].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/birdo-hit.ogg")
+	Audio.sounds[41].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/birdo-beat.ogg")
+	Audio.sounds[42].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/npc-fireball.ogg")
+	Audio.sounds[43].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/fireworks.ogg")
+	Audio.sounds[44].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/bowser-killed.ogg")
+	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/door.ogg")
+	Audio.sounds[47].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/message.ogg")
+	Audio.sounds[48].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/yoshi.ogg")
+	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/yoshi-hurt.ogg")
+	Audio.sounds[50].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/yoshi-tongue.ogg")
+	Audio.sounds[51].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/yoshi-egg.ogg")
+	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/got-star.ogg")
+	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/player-died2.ogg")
+	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/yoshi-swallow.ogg")
+	Audio.sounds[57].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/dry-bones.ogg")
+	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/smw-checkpoint.ogg")
+	Audio.sounds[59].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/dragon-coin.ogg")
+	Audio.sounds[61].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/smw-blaarg.ogg")
+	Audio.sounds[62].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/wart-bubble.ogg")
+	Audio.sounds[63].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/wart-die.ogg")
+	Audio.sounds[71].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/climbing.ogg")
+	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/swim.ogg")
+	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/grab2.ogg")
+	--Audio.sounds[74].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/saw.ogg")
+	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/smb2-throw.ogg")
+	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/smb2-hit.ogg")
+	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/toad/1-SMB1-Retro/bubble.ogg")
+	
+	Graphics.sprites.background2[11].img = Graphics.loadImage("graphics/NES/background2/background2-11.png")
+	
+	Graphics.sprites.block[2].img = Graphics.loadImage("graphics/NES/block/block-2.png")
+	Graphics.sprites.block[4].img = Graphics.loadImage("graphics/NES/block/block-4.png")
+	Graphics.sprites.block[5].img = Graphics.loadImage("graphics/NES/block/block-5.png")
+	Graphics.sprites.block[21].img = Graphics.loadImage("graphics/NES/block/block-21.png")
+	Graphics.sprites.block[22].img = Graphics.loadImage("graphics/NES/block/block-22.png")
+	Graphics.sprites.block[23].img = Graphics.loadImage("graphics/NES/block/block-23.png")
+	Graphics.sprites.block[24].img = Graphics.loadImage("graphics/NES/block/block-24.png")
+	Graphics.sprites.block[38].img = Graphics.loadImage("graphics/NES/block/block-38.png")
+	Graphics.sprites.block[39].img = Graphics.loadImage("graphics/NES/block/block-39.png")
+	Graphics.sprites.block[40].img = Graphics.loadImage("graphics/NES/block/block-40.png")
+	Graphics.sprites.block[41].img = Graphics.loadImage("graphics/NES/block/block-41.png")
+	Graphics.sprites.block[42].img = Graphics.loadImage("graphics/NES/block/block-42.png")
+	Graphics.sprites.block[43].img = Graphics.loadImage("graphics/NES/block/block-43.png")
+	Graphics.sprites.block[44].img = Graphics.loadImage("graphics/NES/block/block-44.png")
+	Graphics.sprites.block[45].img = Graphics.loadImage("graphics/NES/block/block-45.png")
+	Graphics.sprites.block[46].img = Graphics.loadImage("graphics/NES/block/block-46.png")
+	Graphics.sprites.block[56].img = Graphics.loadImage("graphics/NES/block/block-56.png")
+	Graphics.sprites.block[57].img = Graphics.loadImage("graphics/NES/block/block-57.png")
+	Graphics.sprites.block[58].img = Graphics.loadImage("graphics/NES/block/block-58.png")
+	Graphics.sprites.block[59].img = Graphics.loadImage("graphics/NES/block/block-59.png")
+	Graphics.sprites.block[60].img = Graphics.loadImage("graphics/NES/block/block-60.png")
+	Graphics.sprites.block[61].img = Graphics.loadImage("graphics/NES/block/block-61.png")
+	Graphics.sprites.block[62].img = Graphics.loadImage("graphics/NES/block/block-62.png")
+	Graphics.sprites.block[63].img = Graphics.loadImage("graphics/NES/block/block-63.png")
+	Graphics.sprites.block[64].img = Graphics.loadImage("graphics/NES/block/block-64.png")
+	Graphics.sprites.block[65].img = Graphics.loadImage("graphics/NES/block/block-65.png")
+end
+
+function costume.onCleanup(p)
+	-- Remove the player from the list
+	if costume.playerData[p] ~= nil then
+		Audio.sounds[1].sfx  = nil
+		Audio.sounds[2].sfx  = nil
+		Audio.sounds[3].sfx  = nil
+		Audio.sounds[4].sfx  = nil
+		Audio.sounds[5].sfx  = nil
+		Audio.sounds[6].sfx  = nil
+		Audio.sounds[7].sfx  = nil
+		Audio.sounds[8].sfx  = nil
+		Audio.sounds[9].sfx  = nil
+		Audio.sounds[10].sfx = nil
+		Audio.sounds[11].sfx = nil
+		Audio.sounds[12].sfx = nil
+		Audio.sounds[13].sfx = nil
+		Audio.sounds[14].sfx = nil
+		Audio.sounds[15].sfx = nil
+		Audio.sounds[16].sfx = nil
+		Audio.sounds[17].sfx = nil
+		Audio.sounds[18].sfx = nil
+		Audio.sounds[19].sfx = nil
+		Audio.sounds[20].sfx = nil
+		Audio.sounds[21].sfx = nil
+		Audio.sounds[22].sfx = nil
+		Audio.sounds[23].sfx = nil
+		Audio.sounds[24].sfx = nil
+		Audio.sounds[25].sfx = nil
+		Audio.sounds[29].sfx = nil
+		Audio.sounds[31].sfx = nil
+		Audio.sounds[32].sfx = nil
+		Audio.sounds[33].sfx = nil
+		Audio.sounds[34].sfx = nil
+		Audio.sounds[35].sfx = nil
+		Audio.sounds[36].sfx = nil
+		Audio.sounds[37].sfx = nil
+		Audio.sounds[38].sfx = nil
+		Audio.sounds[39].sfx = nil
+		Audio.sounds[41].sfx = nil
+		Audio.sounds[42].sfx = nil
+		Audio.sounds[43].sfx = nil
+		Audio.sounds[44].sfx = nil
+		Audio.sounds[46].sfx = nil
+		Audio.sounds[47].sfx = nil
+		Audio.sounds[48].sfx = nil
+		Audio.sounds[49].sfx = nil
+		Audio.sounds[50].sfx = nil
+		Audio.sounds[51].sfx = nil
+		Audio.sounds[52].sfx = nil
+		Audio.sounds[54].sfx = nil
+		Audio.sounds[55].sfx = nil
+		Audio.sounds[56].sfx = nil
+		Audio.sounds[57].sfx = nil
+		Audio.sounds[58].sfx = nil
+		Audio.sounds[59].sfx = nil
+		Audio.sounds[61].sfx = nil
+		Audio.sounds[62].sfx = nil
+		Audio.sounds[63].sfx = nil
+		Audio.sounds[71].sfx = nil
+		Audio.sounds[72].sfx = nil
+		Audio.sounds[73].sfx = nil
+		--Audio.sounds[74].sfx = nil
+		Audio.sounds[75].sfx = nil
+		Audio.sounds[76].sfx = nil
+		Audio.sounds[77].sfx = nil
+		Audio.sounds[78].sfx = nil
+		Audio.sounds[79].sfx = nil
+		Audio.sounds[80].sfx = nil
+		Audio.sounds[81].sfx = nil
+		Audio.sounds[82].sfx = nil
+		Audio.sounds[91].sfx = nil
+		
+		Graphics.sprites.background2[11].img = nil
+	
+		Graphics.sprites.block[2].img = nil
+		Graphics.sprites.block[4].img = nil
+		Graphics.sprites.block[5].img = nil
+		Graphics.sprites.block[21].img = nil
+		Graphics.sprites.block[22].img = nil
+		Graphics.sprites.block[23].img = nil
+		Graphics.sprites.block[24].img = nil
+		Graphics.sprites.block[38].img = nil
+		Graphics.sprites.block[39].img = nil
+		Graphics.sprites.block[40].img = nil
+		Graphics.sprites.block[41].img = nil
+		Graphics.sprites.block[42].img = nil
+		Graphics.sprites.block[43].img = nil
+		Graphics.sprites.block[44].img = nil
+		Graphics.sprites.block[45].img = nil
+		Graphics.sprites.block[46].img = nil
+		Graphics.sprites.block[56].img = nil
+		Graphics.sprites.block[57].img = nil
+		Graphics.sprites.block[58].img = nil
+		Graphics.sprites.block[59].img = nil
+		Graphics.sprites.block[60].img = nil
+		Graphics.sprites.block[61].img = nil
+		Graphics.sprites.block[62].img = nil
+		Graphics.sprites.block[63].img = nil
+		Graphics.sprites.block[64].img = nil
+		Graphics.sprites.block[65].img = nil
+		costume.playerData[p] = nil
+	end
+end
+
+return costume;

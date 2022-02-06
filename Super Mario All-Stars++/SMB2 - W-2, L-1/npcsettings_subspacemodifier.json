@@ -1,0 +1,16 @@
+{
+	"style" : "groupbox",
+	"title" : "Subspace Behaviour Modifier Settings",
+	"layout": [
+		{
+			"control": "comboBox",
+			"name": "behaviour",
+			"title": "Behaviour",
+			"type": "int",
+			"tooltip": "How will the nearby NPC act with subspace?",
+			"value-default": 0,
+			"elements": ["Only in Original", "In Both", "Only in Subspace"]
+		}
+	]
+}
+

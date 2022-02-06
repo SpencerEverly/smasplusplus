@@ -1,0 +1,4 @@
+frames=6
+framespeed=60
+name="Tourist Center (Information Booth: Lit Up Sign)"
+grid=16

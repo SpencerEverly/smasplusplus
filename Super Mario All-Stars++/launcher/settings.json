@@ -1,0 +1,17 @@
+{
+    "game": {
+        "update-check-website": "http://codehaus.wohlsoft.ru/version/update-check.json",
+		"update-error-website": "http://codehaus.moe/blog/",
+		"update-error-message": "Could not find the latest server version!",
+        "version-1": 0,
+        "version-2": 0,
+        "version-3": 0,
+        "version-4": 2
+    },
+    "updates": {
+        "version-1-update": true,
+        "version-2-update": true,
+        "version-3-update": true,
+        "version-4-update": true,
+    }
+}
