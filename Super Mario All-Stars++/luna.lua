@@ -1,5 +1,6 @@
 local smwMap = require("smwMap")
 local starman = require("starman/star")
+local mega2 = require("mega/megashroom")
 local playerManager = require("playermanager")
 local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
@@ -133,114 +134,133 @@ function onTick()
 	local costumes
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_2012beta.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/0-SMASPlusPlus-Beta/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "1-SMB1-RETRO" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-smb1.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "2-SMB1-RECOLORED" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/2-SMB1-Recolored/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "3-SMB1-SMAS" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/3-SMB1-SMAS/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "4-SMB2-RETRO" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-smb2.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/4-SMB2-RETRO/starman")
 		starman.duration[996] = 577
 		starman.duration[994] = 577
 	end
 	if currentCostume == "5-SMB2-SMAS" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/5-SMB2-SMAS/starman")
 		starman.duration[996] = 577
 		starman.duration[994] = 577
 	end
 	if currentCostume == "6-SMB3-RETRO" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-smb3.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/6-SMB3-Retro/starman")
 		starman.duration[996] = 705
 		starman.duration[994] = 705
 	end
 	if currentCostume == "9-SMW-Pirate" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("costumes/mario/9-SMW-Pirate/starman-alt.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/9-SMW-Pirate/starman.ogg")
 		starman.duration[996] = 2200
 		starman.duration[994] = 2200
 	end
 	if currentCostume == "11-SMA1" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/11-SMA1/starman")
 		starman.duration[996] = 577
 		starman.duration[994] = 577
 	end
 	if currentCostume == "12-SMA2" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/12-SMA2/starman")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 	end
 	if currentCostume == "13-SMA4" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/13-SMA4/starman")
 		starman.duration[996] = 705
 		starman.duration[994] = 705
 	end
 	if currentCostume == "A2XT-DEMO" then
 		littleDialogue.characterNames[1] = "Demo"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/A2XT-Demo/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "JCFOSTERTAKESITTOTHEMOON" then
 		littleDialogue.characterNames[1] = "JC Foster"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/JCFosterTakesItToTheMoon/starman")
 		starman.duration[996] = 1026
 		starman.duration[994] = 1026
 	end
 	if currentCostume == "SP-1-ERICCARTMAN" then
 		littleDialogue.characterNames[1] = "Eric"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/SP-1-EricCartman/starman")
 		starman.duration[996] = 962
 		starman.duration[994] = 962
 	end
 	if currentCostume == "SMG4" then
 		littleDialogue.characterNames[1] = "SMG4"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "PRINCESSRESCUE" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("costumes/mario/PrincessRescue/starman")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/PrincessRescue/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "SMW-MARIO" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/SMW-Mario/starman")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 	end
 	if currentCostume == "GA-CAILLOU" then
 		littleDialogue.characterNames[1] = "Caillou"
-		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/GA-Caillou/starman")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("_OST/GoAnimate/Old Songs/Action - Electric Gutiar.mp3")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 	end
 	if currentCostume == "Z-SMW2-ADULTMARIO" then
 		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/Z-SMW2-AdultMario/starman")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
@@ -249,36 +269,42 @@ function onTick()
 	
 	if currentCostume == "0-SPENCEREVERLY" then
 		littleDialogue.characterNames[2] = "Spencer"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/luigi/0-SpencerEverly/starman")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
 	end
 	if currentCostume == "LARRYTHECUCUMBER" then
 		littleDialogue.characterNames[2] = "Larry"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "WALUIGI" then
 		littleDialogue.characterNames[2] = "Waluigi"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "A2XT-IRIS" then
 		littleDialogue.characterNames[2] = "Iris"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/luigi/A2XT-Iris/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "UNDERTALE-FRISK" then
 		littleDialogue.characterNames[2] = "Frisk"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "9-SMB3-MARIOCLOTHES" then
 		littleDialogue.characterNames[2] = "Marigi"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
@@ -287,24 +313,28 @@ function onTick()
 	
 	if currentCostume == "A2XT-KOOD" then
 		littleDialogue.characterNames[3] = "Kood"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/peach/A2XT-Kood/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "DAISY" then
 		littleDialogue.characterNames[3] = "Daisy"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "KIRBY-SMB3" then
 		littleDialogue.characterNames[3] = "Kirby"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "PAULINE" then
 		littleDialogue.characterNames[3] = "Pauline"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
@@ -313,30 +343,35 @@ function onTick()
 	
 	if currentCostume == "SEE-TANGENT" then
 		littleDialogue.characterNames[4] = "Tangent"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "SONIC" then
 		littleDialogue.characterNames[4] = "Sonic"
+		mega2.sfxFile = Misc.resolveSoundFile("costumes/toad/Sonic/starman")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/toad/Sonic/starman")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
 	end
 	if currentCostume == "TOADETTE" then
 		littleDialogue.characterNames[4] = "Toadette"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "YOSHI-SMB3" then
 		littleDialogue.characterNames[4] = "Yoshi"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "A2XT-RAOCOW" then
 		littleDialogue.characterNames[4] = "Raocow"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/toad/A2XT-Raocow/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
@@ -346,30 +381,35 @@ function onTick()
 	
 	if currentCostume == "A2XT-SHEATH" then
 		littleDialogue.characterNames[5] = "Sheath"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/link/A2XT-Sheath/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "SMB3-BANDANA-DEE" then
 		littleDialogue.characterNames[5] = "Bandana Dee"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "NESS" then
 		littleDialogue.characterNames[5] = "Ness"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "TAKESHI" then
 		littleDialogue.characterNames[5] = "Takeshi"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
 	if currentCostume == "TAKESHI-SNES" then
 		littleDialogue.characterNames[5] = "Takeshi"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
