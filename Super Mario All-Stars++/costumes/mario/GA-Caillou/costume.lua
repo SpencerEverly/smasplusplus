@@ -94,7 +94,6 @@ function costume.onCleanup(p)
 	Defines.player_runspeed = 6
 	Defines.jumpheight_bounce = 32
 	Defines.player_grav = 0.4
-	costume.playerData[p] = nil
 end
 
 return costume
