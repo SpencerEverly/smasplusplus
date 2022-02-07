@@ -74,6 +74,24 @@ end
 	--Routine.run(quitgame)
 --end
 
+local function x2modedisable()
+	paused = false
+	Misc.unpause()
+	if SaveData.disableX2char == 0 then
+		SaveData.disableX2char = SaveData.disableX2char + 1
+		Level.load(Level.filename())
+	end
+end
+
+local function x2modeenable()
+	paused = false
+	Misc.unpause()
+	if SaveData.disableX2char == 1 then
+		SaveData.disableX2char = SaveData.disableX2char - 1
+		Level.load(Level.filename())
+	end
+end
+
 local function quitgame()
 	--Graphics.drawImageWP{image = blackscreen, x = 0, y = 0, sourceX = 0, sourceY = 0, priority = 10}
 	--Audio.MusicVolume(0)
@@ -415,6 +433,12 @@ local function drawPauseMenu(y, alpha)
 		end
 		if not Level.filename() == "SMAS - DLC World.lvlx" then
 			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
+		end
+		if SaveData.disableX2char == 1 then
+			table.insert(pause_options, {name="Turn OFF 1.3 Mode", action = x2modeenable});
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options, {name="Turn ON 1.3 Mode", action = x2modedisable});
 		end
 		table.insert(pause_options, {name="Go Back to the Main Menu", action = mainmenu});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});

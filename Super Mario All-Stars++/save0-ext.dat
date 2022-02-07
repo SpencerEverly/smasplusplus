@@ -108,17 +108,18 @@
 },
 --[14]--
 {
-   ["score"]=19180
+   ["score"]=20700
 },
 --[15]--
 {
    ["SMAS - Start.lvlx"]={32},
    ["SMAS - Game Help.lvlx"]={33},
-   ["MALC - HUB.lvlx"]={34},
-   ["SMAS - DLC World.lvlx"]={35},
-   ["SMAS - Intro.lvlx"]={36},
-   ["SMB1 - W-1, L-1.lvlx"]={37},
-   ["SMAS - True Ending.lvlx"]={38}
+   ["SMAS - Intro.lvlx"]={34},
+   ["MALC - HUB.lvlx"]={35},
+   ["SMAS - DLC World.lvlx"]={36},
+   ["SMBLL - W-7, L-1.lvlx"]={37},
+   ["SMB1 - W-1, L-1.lvlx"]={38},
+   ["SMAS - True Ending.lvlx"]={39}
 },
 --[16]--
 {
@@ -137,7 +138,7 @@
 },
 --[19]--
 {
-   ["SMAS - True Ending.lvlx"]={39}
+   ["SMAS - True Ending.lvlx"]={40}
 },
 --[20]--
 {
@@ -234,46 +235,47 @@
 --[32]--
 {
    ["maxID"]=0,
-   ["alive"]={40}
+   ["alive"]={41}
 },
 --[33]--
 {
    ["maxID"]=0,
-   ["alive"]={41}
+   ["alive"]={42}
 },
 --[34]--
 {
    ["maxID"]=0,
-   ["alive"]={42}
+   ["alive"]={43}
 },
 --[35]--
 {
    ["maxID"]=0,
-   ["alive"]={43}
+   ["alive"]={44}
 },
 --[36]--
 {
    ["maxID"]=0,
-   ["alive"]={44}
+   ["alive"]={45}
 },
 --[37]--
 {
    ["maxID"]=0,
-   ["alive"]={45}
+   ["alive"]={46}
 },
 --[38]--
 {
    ["maxID"]=0,
-   ["alive"]={46}
+   ["alive"]={47}
 },
 --[39]--
 {
-   true,
-   true
+   ["maxID"]=0,
+   ["alive"]={48}
 },
 --[40]--
 {
-
+   true,
+   true
 },
 --[41]--
 {
@@ -296,6 +298,14 @@
 
 },
 --[46]--
+{
+
+},
+--[47]--
+{
+
+},
+--[48]--
 {
 
 }
