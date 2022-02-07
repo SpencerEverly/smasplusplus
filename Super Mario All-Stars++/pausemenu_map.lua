@@ -2,6 +2,7 @@ local textplus = require("textplus")
 local imagic = require("imagic")
 local rng = require("rng")
 local Routine = require("routine")
+local playerManager = require("playermanager")
 
 local active = true
 local active2 = false
@@ -157,6 +158,29 @@ local function dlcteleport()
 	SFX.play("world_warp.ogg")
 end
 
+local function costumechange()
+	paused = false
+	cooldown = 5
+	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	SFX.play("charcost_costume.ogg")
+	SFX.play("charcost-selected.wav")
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	
+	local costumeIdx = table.ifind(costumes,currentCostume)
+
+	if costumeIdx ~= nil then
+		player:setCostume(costumes[costumeIdx + 1])
+	else
+		player:setCostume(costumes[1])
+		onePressedState = true
+	end
+end
+
 local function wip()
 	SFX.play("wrong.wav")
 end
@@ -183,6 +207,7 @@ local function drawPauseMenu(y, alpha)
 			{name="Continue", action=unpause}
 		}
 		
+		table.insert(pause_options, {name="Change Costume", action = costumechange});
 		table.insert(pause_options, {name="Teleport back to the Start", action = startteleport});
 		table.insert(pause_options, {name="Teleport to the HUB", action = hubmapteleport});
 		table.insert(pause_options, {name="Teleport to the Side Quest", action = sideteleport});
@@ -274,7 +299,7 @@ function pausemenu2.onInputUpdate()
 					end
 				end
 			end
-			SFX.play("quitmenu.wav")
+			--SFX.play("quitmenu.wav")
 			pause_options[pause_index+1].action();
 			Misc.unpause();
 		end
