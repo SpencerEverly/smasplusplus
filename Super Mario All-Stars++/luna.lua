@@ -269,7 +269,7 @@ function onTick()
 	
 	if currentCostume == "0-SPENCEREVERLY" then
 		littleDialogue.characterNames[2] = "Spencer"
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_smbs.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/luigi/0-SpencerEverly/starman")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
