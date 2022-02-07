@@ -30,6 +30,6 @@
 </div>
 
 <p align="center">
-    Due to an <a href="https://github.com/SpencerEverly/smasplusplus/issues/2">issue</a>, commits are still being made in the same place as prevously, in Google Drive. They won't be as updated but they'll be a little more stable. Check them out <a href="https://drive.google.com/drive/folders/18L0N2lt-A2bIBuSITHEiN5fZjhvnMLKg?usp=sharing">here</a>.
+    Due to an <a href="https://github.com/SpencerEverly/smasplusplus/issues/2">issue</a>, commits are still being made in the same place as previously, in Google Drive. They won't be as updated but they'll be a little more stable than what's being updated here. Check them out <a href="https://drive.google.com/drive/folders/18L0N2lt-A2bIBuSITHEiN5fZjhvnMLKg?usp=sharing">by clicking here</a>.
     <br />
 </div>
