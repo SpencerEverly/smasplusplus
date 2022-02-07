@@ -10,8 +10,6 @@ local inventory = require("customInventory")
 
 local textplus = require("textplus")
 
-local debugbox = require("debugbox") --Uncomment in the final release
-
 local costumes = {}
 
 local dying = false;
@@ -38,6 +36,9 @@ function dependencies2.onInitAPI()
 end
 
 function dependencies2.onStart()
+	if Misc.inEditor() then
+		debugbox = require("debugbox")
+	end
 	if SaveData.disableX2char == 0 then
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")

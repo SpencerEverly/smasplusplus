@@ -11,8 +11,6 @@ local datetime = require("datetime")
 
 local musicalchairs = require("musicalchairs")
 
-local debugbox = require("debugbox") --Uncomment in the final release
-
 local dying = false;
 local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
@@ -41,6 +39,9 @@ function dependencies.onInitAPI()
 end
 
 function dependencies.onStart()
+	if Misc.inEditor() then
+		debugbox = require("debugbox")
+	end
 	if SaveData.ut_enabled == nil then
 		SaveData.ut_enabled = SaveData.ut_enabled or 0
 	end
