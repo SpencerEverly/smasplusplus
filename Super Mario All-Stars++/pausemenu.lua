@@ -374,7 +374,10 @@ local function drawPauseMenu(y, alpha)
 		if Level.filename() == "SMAS - DLC World.lvlx" then
 			table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
 		end
-		if not Level.filename() == "SMAS - DLC World.lvlx" then
+		if not Level.filename() == "SMAS - DLC World.lvlx" or SaveData.disableX2char == 0 then
+			table.insert(pause_options, {name="Restart", action = restartlevel});
+		end
+		if not Level.filename() == "SMAS - DLC World.lvlx" or SaveData.disableX2char == 1 then
 			table.insert(pause_options, {name="Restart", action = restartlevel});
 		end
 		if Level.filename() == "MALC - HUB.lvlx" then

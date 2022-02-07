@@ -13,13 +13,13 @@ local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 
 littleDialogue.registerStyle("smbx13",{
-	textXScale = 2,
-    textYScale = 2,
+	textXScale = 1,
+    textYScale = 1,
     borderSize = 36,
 	textMaxWidth = 500,
 	speakerNameGap = 6,
-	speakerNameXScale = 2.2,        -- X scale of the speaker's name.
-    speakerNameYScale = 2.2,
+	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+    speakerNameYScale = 1.2,
 	
 	openSpeed = 5,
 	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
