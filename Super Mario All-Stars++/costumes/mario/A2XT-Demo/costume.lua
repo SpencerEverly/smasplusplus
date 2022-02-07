@@ -2,57 +2,7 @@ local pm = require("playerManager")
 
 local costume = {}
 
-costume.playersList = {}
-costume.playerData = {}
-
-local eventsRegistered = false
-
-Graphics.sprites.hardcoded[48-0].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Container0.png")
-Graphics.sprites.hardcoded[48-1].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Container1.png")
-Graphics.sprites.hardcoded[33-0].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface0.png")
-Graphics.sprites.hardcoded[33-1].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface1.png")
-Graphics.sprites.hardcoded[33-2].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface2.png")
-Graphics.sprites.hardcoded[33-3].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface3.png")
-Graphics.sprites.hardcoded[33-5].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface5.png")
-Graphics.sprites.hardcoded[33-6].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface6.png")
-Graphics.sprites.hardcoded[33-7].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface7.png")
-Graphics.sprites.hardcoded[33-8].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface8.png")
-Graphics.sprites.hardcoded[26-2].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Mount.png")
-Graphics.sprites.hardcoded[25-1].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Boot1.png")
-Graphics.sprites.hardcoded[25-2].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Boot2.png")
-Graphics.sprites.hardcoded[25-3].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Boot3.png")
-
-local normalGFX = ""
-
 function costume.onInit(p)
-	-- If events have not been registered yet, do so
-	if not eventsRegistered then
-		registerEvent(costume,"onStart")
-		registerEvent(costume,"onTick")
-		registerEvent(costume,"onTickEnd")
-		registerEvent(costume,"onCleanup")
-		registerEvent(costume,"onInputUpdate")
-
-		eventsRegistered = true
-		
-		-- Add this player to the list
-	if costume.playerData[p] == nil then
-		costume.playerData[p] = {
-			currentAnimation = "",
-		}
-		
-		table.insert(costume.playersList,p)
-		end
-	end
-end
-
-function costume.onTickEnd()
-	for _,p in ipairs(costume.playersList) do
-		local data = costume.playerData[p]
-	end
-end
-	
-function costume.onTick()
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/A2XT-Demo/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/A2XT-Demo/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/A2XT-Demo/block-hit.ogg")
@@ -86,10 +36,14 @@ function costume.onTick()
 	Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/boot.ogg")
 	Audio.sounds[36].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/smash.ogg")
 	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/thwomp.ogg")
+	Audio.sounds[38].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/birdo-spit.ogg")
+	Audio.sounds[39].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/birdo-hit.ogg")
+	Audio.sounds[41].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/birdo-beat.ogg")
 	Audio.sounds[42].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/npc-fireball.ogg")
 	Audio.sounds[43].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/fireworks.ogg")
 	Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/bowser-killed.ogg")
 	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/door.ogg")
+	Audio.sounds[47].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/message.ogg")
 	Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/yoshi.ogg")
 	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/yoshi-hurt.ogg")
 	Audio.sounds[50].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/yoshi-tongue.ogg")
@@ -106,80 +60,97 @@ function costume.onTick()
 	Audio.sounds[71].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/climbing.ogg")
 	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/swim.ogg")
 	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/grab2.ogg")
+	--Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/saw.ogg")
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/smb2-throw.ogg")
 	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/smb2-hit.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/A2XT-Demo/bubble.ogg")
-	
-	--starman.sfxFile = Misc.resolveSoundFile("starman-demo")
+
 end
 
 function costume.onCleanup(p)
-	-- Remove the player from the list
-	if costume.playerData[p] ~= nil then
-		Audio.sounds[1].sfx  = nil
-		Audio.sounds[2].sfx  = nil
-		Audio.sounds[3].sfx  = nil
-		Audio.sounds[4].sfx  = nil
-		Audio.sounds[5].sfx  = nil
-		Audio.sounds[6].sfx  = nil
-		Audio.sounds[7].sfx  = nil
-		Audio.sounds[8].sfx  = nil
-		Audio.sounds[9].sfx  = nil
-		Audio.sounds[10].sfx = nil
-		Audio.sounds[11].sfx = nil
-		Audio.sounds[12].sfx = nil
-		Audio.sounds[13].sfx = nil
-		Audio.sounds[14].sfx = nil
-		Audio.sounds[15].sfx = nil
-		Audio.sounds[16].sfx = nil
-		Audio.sounds[17].sfx = nil
-		Audio.sounds[18].sfx = nil
-		Audio.sounds[19].sfx = nil
-		Audio.sounds[20].sfx = nil
-		Audio.sounds[21].sfx = nil
-		Audio.sounds[22].sfx = nil
-		Audio.sounds[23].sfx = nil
-		Audio.sounds[24].sfx = nil
-		Audio.sounds[25].sfx = nil
-		Audio.sounds[29].sfx = nil
-		Audio.sounds[31].sfx = nil
-		Audio.sounds[32].sfx = nil
-		Audio.sounds[33].sfx = nil
-		Audio.sounds[34].sfx = nil
-		Audio.sounds[35].sfx = nil
-		Audio.sounds[36].sfx = nil
-		Audio.sounds[37].sfx = nil
-		Audio.sounds[42].sfx = nil
-		Audio.sounds[43].sfx = nil
-		Audio.sounds[44].sfx = nil
-		Audio.sounds[46].sfx = nil
-		Audio.sounds[48].sfx = nil
-		Audio.sounds[49].sfx = nil
-		Audio.sounds[50].sfx = nil
-		Audio.sounds[51].sfx = nil
-		Audio.sounds[54].sfx = nil
-		Audio.sounds[55].sfx = nil
-		Audio.sounds[56].sfx = nil
-		Audio.sounds[57].sfx = nil
-		Audio.sounds[58].sfx = nil
-		Audio.sounds[59].sfx = nil
-		Audio.sounds[61].sfx = nil
-		Audio.sounds[62].sfx = nil
-		Audio.sounds[63].sfx = nil
-		Audio.sounds[71].sfx = nil
-		Audio.sounds[72].sfx = nil
-		Audio.sounds[73].sfx = nil
-		Audio.sounds[75].sfx = nil
-		Audio.sounds[76].sfx = nil
-		Audio.sounds[78].sfx = nil
-		Audio.sounds[79].sfx = nil
-		Audio.sounds[80].sfx = nil
-		Audio.sounds[81].sfx = nil
-		Audio.sounds[82].sfx = nil
-		Audio.sounds[91].sfx = nil
-		
-		costume.playerData[p] = nil
-	end
+	Audio.sounds[1].sfx  = nil	
+	Audio.sounds[2].sfx  = nil
+	Audio.sounds[3].sfx  = nil
+	Audio.sounds[4].sfx  = nil
+	Audio.sounds[5].sfx  = nil
+	Audio.sounds[6].sfx  = nil
+	Audio.sounds[7].sfx  = nil
+	Audio.sounds[8].sfx  = nil
+	Audio.sounds[9].sfx  = nil
+	Audio.sounds[10].sfx = nil
+	Audio.sounds[11].sfx = nil
+	Audio.sounds[12].sfx = nil
+	Audio.sounds[13].sfx = nil
+	Audio.sounds[14].sfx = nil
+	Audio.sounds[15].sfx = nil
+	Audio.sounds[16].sfx = nil
+	Audio.sounds[17].sfx = nil
+	Audio.sounds[18].sfx = nil
+	Audio.sounds[19].sfx = nil
+	Audio.sounds[20].sfx = nil
+	Audio.sounds[21].sfx = nil
+	Audio.sounds[22].sfx = nil
+	Audio.sounds[23].sfx = nil
+	Audio.sounds[24].sfx = nil
+	Audio.sounds[25].sfx = nil
+	Audio.sounds[29].sfx = nil
+	Audio.sounds[31].sfx = nil
+	Audio.sounds[32].sfx = nil
+	Audio.sounds[33].sfx = nil
+	Audio.sounds[34].sfx = nil
+	Audio.sounds[35].sfx = nil
+	Audio.sounds[36].sfx = nil
+	Audio.sounds[37].sfx = nil
+	Audio.sounds[38].sfx = nil
+	Audio.sounds[39].sfx = nil
+	Audio.sounds[41].sfx = nil
+	Audio.sounds[42].sfx = nil
+	Audio.sounds[43].sfx = nil
+	Audio.sounds[44].sfx = nil
+	Audio.sounds[46].sfx = nil
+	Audio.sounds[47].sfx = nil
+	Audio.sounds[48].sfx = nil
+	Audio.sounds[49].sfx = nil
+	Audio.sounds[50].sfx = nil
+	Audio.sounds[51].sfx = nil
+	Audio.sounds[52].sfx = nil
+	Audio.sounds[54].sfx = nil
+	Audio.sounds[55].sfx = nil
+	Audio.sounds[56].sfx = nil
+	Audio.sounds[57].sfx = nil
+	Audio.sounds[58].sfx = nil
+	Audio.sounds[59].sfx = nil
+	Audio.sounds[61].sfx = nil
+	Audio.sounds[62].sfx = nil
+	Audio.sounds[63].sfx = nil
+	Audio.sounds[71].sfx = nil
+	Audio.sounds[72].sfx = nil
+	Audio.sounds[73].sfx = nil
+	Audio.sounds[75].sfx = nil
+	Audio.sounds[76].sfx = nil
+	Audio.sounds[77].sfx = nil
+	Audio.sounds[78].sfx = nil
+	Audio.sounds[79].sfx = nil
+	Audio.sounds[80].sfx = nil
+	Audio.sounds[81].sfx = nil
+	Audio.sounds[82].sfx = nil
+	Audio.sounds[91].sfx = nil
 end
 
-return costume;
+return costume
+
+
+Graphics.sprites.hardcoded[48-0].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Container0.png")
+Graphics.sprites.hardcoded[48-1].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Container1.png")
+Graphics.sprites.hardcoded[33-0].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface0.png")
+Graphics.sprites.hardcoded[33-1].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface1.png")
+Graphics.sprites.hardcoded[33-2].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface2.png")
+Graphics.sprites.hardcoded[33-3].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface3.png")
+Graphics.sprites.hardcoded[33-5].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface5.png")
+Graphics.sprites.hardcoded[33-6].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface6.png")
+Graphics.sprites.hardcoded[33-7].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface7.png")
+Graphics.sprites.hardcoded[33-8].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/interface8.png")
+Graphics.sprites.hardcoded[26-2].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Mount.png")
+Graphics.sprites.hardcoded[25-1].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Boot1.png")
+Graphics.sprites.hardcoded[25-2].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Boot2.png")
+Graphics.sprites.hardcoded[25-3].img = Graphics.loadImage("graphics/AdventuresOfDemo/ui/Boot3.png")

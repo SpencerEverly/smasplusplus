@@ -549,7 +549,7 @@ local function findAnimation(p)
 end
 
 function costume.onStart()
-	if not levelname == "SMAS - Start.lvlx" or "SMAS - Intro.lvlx" or "SMAS - Game Over.lvlx" then
+	if not levelname == "SMAS - Start.lvlx" or not "SMAS - Intro.lvlx" or not "SMAS - Game Over.lvlx" or not "SMAS - DLC World.lvlx" then
 		Audio.playSFX("costumes/mario/12-SMA2/mario-letsago.ogg")
 	end
 end
