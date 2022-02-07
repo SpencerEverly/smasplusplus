@@ -229,7 +229,9 @@ local function drawPauseMenu(y, alpha)
 			{name="Continue", action=unpause}
 		}
 		
-		table.insert(pause_options, {name="Change Costume", action = costumechange});
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options, {name="Change Costume", action = costumechange});
+		end
 		table.insert(pause_options, {name="Teleport back to the Start", action = startteleport});
 		table.insert(pause_options, {name="Teleport to the HUB", action = hubmapteleport});
 		table.insert(pause_options, {name="Teleport to the Side Quest", action = sideteleport});
