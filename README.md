@@ -8,7 +8,7 @@
 <h3 align="center">Super Mario All-Stars++</h3>
 
 <p align="center">
-    A project that recreates Super Mario All-Stars++, with a lot of new characters, mechanics, and surprises
+    A project that recreates Super Mario All-Stars, with a lot of new characters, mechanics, and surprises
     <br />
     <br />
     <a href="https://www.youtube.com/c/SpencerEverly1"><strong>YouTube Channel</strong></a>
