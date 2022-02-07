@@ -28,3 +28,8 @@
     For more information on the people responsible for the episode, please take a look at the <a href="https://github.com/SpencerEverly/smasplusplus/blob/main/Super%20Mario%20All-Stars%2B%2B/_CREDITS.txt">_CREDITS.txt</a> file.
     <br />
 </div>
+
+<p align="center">
+    Due to an <a href="https://github.com/SpencerEverly/smasplusplus/issues/2">issue</a>, commits are still being made in the same place as prevously, in Google Drive. They won't be as updated but they'll be a little more stable. Check them out <a href="https://drive.google.com/drive/folders/18L0N2lt-A2bIBuSITHEiN5fZjhvnMLKg?usp=sharing">here</a>.
+    <br />
+</div>
