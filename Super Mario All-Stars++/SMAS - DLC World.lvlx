@@ -10,8 +10,6 @@ ID:819;X:-198992;Y:-199920;W:64;H:48;
 ID:818;X:-198928;Y:-199920;W:64;H:48;
 ID:819;X:-198864;Y:-199920;W:64;H:48;
 ID:818;X:-198800;Y:-199920;W:64;H:48;
-ID:818;X:-199056;Y:-199984;W:64;H:48;
-ID:819;X:-199056;Y:-199952;W:64;H:48;
 ID:818;X:-199056;Y:-199920;W:64;H:48;
 ID:817;X:-199040;Y:-199872;W:32;H:16;
 ID:817;X:-199040;Y:-199856;W:32;H:16;
@@ -181,8 +179,6 @@ ID:810;X:-199088;Y:-200032;W:14;H:14;
 ID:810;X:-198944;Y:-199840;W:14;H:14;
 BLOCK_END
 NPC
-ID:752;X:-199040;Y:-199968;D:-1;XTRA:"{\n    \"name\"\: \"toMAP\"\,\n    \"points\"\: \"0\,32\, 0\,-32\"\n}\n";
-ID:801;X:-199040;Y:-199936;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"SMAS - World Map Warp.lvlx\"\,\n    \"levelTitle\"\: \"Return to the Main Map\"\,\n    \"path_left\"\: \"toMALC\"\,\n    \"path_right\"\: \"toDLC1\"\,\n    \"path_up\"\: \"toMAP\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 1\n}\n";
 ID:802;X:-198784;Y:-199936;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"DLC - U-1\, L-ComingSoon.lvlx\"\,\n    \"levelTitle\"\: \"More DLC Coming Soon!\"\,\n    \"path_left\"\: \"toDLC4\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 0\,\n    \"unlock_up\"\: 0\n}\n";
 ID:802;X:-198912;Y:-199936;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"DLC - U-1\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"DLC Level 2 (TBD)\"\,\n    \"path_left\"\: \"toDLC2\"\,\n    \"path_right\"\: \"toDLC3\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 0\n}\n";
 ID:752;X:-198944;Y:-199936;D:-1;XTRA:"{\n    \"name\"\: \"toDLC2\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
@@ -192,10 +188,10 @@ ID:753;X:-199344;Y:-200216;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n   
 ID:802;X:-198976;Y:-199936;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"DLC - U-1\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"DLC Level 1 (TBD)\"\,\n    \"path_left\"\: \"toDLC1\"\,\n    \"path_right\"\: \"toDLC2\"\,\n    \"unlock_left\"\: 0\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 0\n}\n";
 ID:752;X:-199072;Y:-199936;D:-1;XTRA:"{\n    \"name\"\: \"toMALC\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
 ID:752;X:-199008;Y:-199936;D:-1;XTRA:"{\n    \"name\"\: \"toDLC1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
-ID:811;X:-199040;Y:-200000;D:-1;XTRA:"{\n    \"levelTitle\"\: \"START\"\,\n    \"path_down\"\: \"toMAP\"\,\n    \"unlock_down\"\: 1\,\n    \"unlock_left\"\: 0\,\n    \"unlock_right\"\: 0\,\n    \"unlock_up\"\: 0\n}\n";
 ID:814;X:-199104;Y:-199936;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"MALC - HUB.lvlx\"\,\n    \"levelTitle\"\: \"Me and Larry City\"\,\n    \"path_right\"\: \"toMALC\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_left\"\: 0\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 0\,\n    \"warpIndex\"\: 39\n}\n";
 ID:752;X:-198816;Y:-199936;D:-1;XTRA:"{\n    \"name\"\: \"toDLC4\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
-ID:751;X:-199040;Y:-200000;D:-1;LR:"PlayerMap";
+ID:811;X:-199040;Y:-199936;D:-1;XTRA:"{\n    \"levelTitle\"\: \"START\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toMALC\"\,\n    \"path_right\"\: \"toDLC1\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 0\n}\n";
+ID:751;X:-199040;Y:-199936;D:-1;LR:"PlayerMap";
 NPC_END
 LAYERS
 LR:"Default";

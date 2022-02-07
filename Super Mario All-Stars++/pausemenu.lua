@@ -3,7 +3,7 @@ local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
 
-local SMASLogoPause = Graphics.loadImage(Misc.episodePath().."title-final.png")
+local blackscreen = Graphics.loadImage(Misc.episodePath().."black-screen.png")
 
 local active = true
 local active2 = false
@@ -70,12 +70,16 @@ function pausemenu2.onStart()
 	if not ready then return end
 end
 
+--local function prequitgame()
+	--Routine.run(quitgame)
+--end
+
 local function quitgame()
-	--Graphics.drawScreen{color = Color.black, priority = 10}
+	--Graphics.drawImageWP{image = blackscreen, x = 0, y = 0, sourceX = 0, sourceY = 0, priority = 10}
 	--Audio.MusicVolume(0)
 	--SFX.play("savequit.wav")
 	--Routine.wait(1.5, true)
-	--paused = false
+	paused = false
 	Misc.unpause()
 	Misc.saveGame();
 	Misc.exitEngine();
@@ -367,8 +371,12 @@ local function drawPauseMenu(y, alpha)
 		{
 			{name="Continue", action=unpause}
 		}
-
-		table.insert(pause_options, {name="Restart", action = restartlevel});
+		if Level.filename() == "SMAS - DLC World.lvlx" then
+			table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
+		end
+		if not Level.filename() == "SMAS - DLC World.lvlx" then
+			table.insert(pause_options, {name="Restart", action = restartlevel});
+		end
 		if Level.filename() == "MALC - HUB.lvlx" then
 			table.insert(pause_options, {name="Teleport to the Tourist Center", action = touristhub});
 		end

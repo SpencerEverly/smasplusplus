@@ -4417,7 +4417,7 @@ smwMap.selectStartPointSettings = {
 
 smwMap.transitionSettings = {
     selectedLevelSettings = {
-        drawFunction = smwMap.TRANSITION_MOSAIC,
+        drawFunction = smwMap.TRANSITION_WINDOW,
         progressTime = 28,
         priority = 6,
     },
@@ -4429,7 +4429,7 @@ smwMap.transitionSettings = {
     },
 
     enterMapSettings = {
-        drawFunction = smwMap.TRANSITION_MOSAIC,
+        drawFunction = smwMap.TRANSITION_FADE,
         progressTime = 28,
         priority = 6,
         
