@@ -23,3 +23,8 @@
     <a href="https://github.com/SpencerEverly/smasplusplus/wiki">How to install</a>
   </p>
 </div>
+
+<p align="center">
+    For more information on the people responsible for the episode, please take a look at the <a href="https://github.com/SpencerEverly/smasplusplus/blob/main/Super%20Mario%20All-Stars%2B%2B/_CREDITS.txt">_CREDITS.txt</a> file.
+    <br />
+</div>
