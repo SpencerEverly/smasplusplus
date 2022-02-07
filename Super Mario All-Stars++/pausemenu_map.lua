@@ -159,12 +159,31 @@ local function dlcteleport()
 end
 
 local function costumechange()
-	paused = false
 	cooldown = 5
-	Misc.unpause()
 	player:mem(0x17A,FIELD_BOOL,false)
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	SFX.play("charcost_costume.ogg")
+	SFX.play("charcost-selected.wav")
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	
+	local costumeIdx = table.ifind(costumes,currentCostume)
+
+	if costumeIdx ~= nil then
+		player:setCostume(costumes[costumeIdx + 1])
+	else
+		player:setCostume(costumes[1])
+		onePressedState = true
+	end
+end
+
+local function costumechangenopause()
+	cooldown = 5
+	player:mem(0x172,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x172,FIELD_BOOL,true)
 	end
 	SFX.play("charcost_costume.ogg")
 	SFX.play("charcost-selected.wav")
@@ -187,14 +206,17 @@ end
 
 local function drawPauseMenu(y, alpha)
 	local name = "Super Mario All-Stars++"
-	local levelcurrent = "You can change characters using left & right."
+	local changechar = "You can change characters using left & right,"
+	local costinfo = "and/or change costumes using the Change Costumes option."
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(changechar, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
+	local layout3 = textplus.layout(textplus.parse(costinfo, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 157 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
 	textplus.render{layout = layout2, x = 457 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout3, x = 340 - w*0.5, y = y+22, color = Color.white..alpha, priority = 7}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -318,6 +340,8 @@ function pausemenu2.onInputUpdate()
 				--SFX.play("quitmenu.wav")
 				pause_options[pause_index+1].action();
 				Misc.unpause();
+			elseif(player2.keys.altRun == KEYS_PRESSED) then
+				cooldown = 5
 			end
 		end
 	end
