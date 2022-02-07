@@ -381,7 +381,7 @@ local function drawPauseMenu(y, alpha)
 		if Level.filename() == "MALC - HUB.lvlx" then
 			table.insert(pause_options, {name="Teleport Back to the Start", action = starthub});
 		end
-		if not Level.filename() == "MALC - HUB.lvlx" then
+		if not Level.name() == "MALC - HUB" then
 			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
 		end
 		if not Level.filename() == "MALC - HUB.lvlx" or SaveData.disableX2char == 0 then

@@ -21,8 +21,8 @@ function costume.onInit(p)
 end
 
 function costume.onStart()
-	if not levelname == "SMAS - Start.lvlx" or not "SMAS - Intro.lvlx" or not "SMAS - Game Over.lvlx" or not "SMAS - DLC World.lvlx" then
-		Audio.playSFX("costumes/mario/SP-1-EricCartman/cartman-respectmyauthority.ogg")
+	if not Level.filename() == "SMAS - Start.lvlx" or not Level.filename() == "SMAS - Intro.lvlx" or not Level.filename() == "SMAS - Game Over.lvlx" or not Level.filename() == "SMAS - DLC World.lvlx" then
+		SFX.play("costumes/mario/SP-1-EricCartman/cartman-respectmyauthority.ogg")
 	end
 end
 

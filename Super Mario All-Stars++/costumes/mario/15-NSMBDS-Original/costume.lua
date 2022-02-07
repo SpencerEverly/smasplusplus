@@ -62,6 +62,7 @@ function costume.onInit(p)
 	--Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/14-NSMBDS-SMBX/bubble.ogg")
 end
 
+function costume.onCleanup(p)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
