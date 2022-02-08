@@ -394,8 +394,8 @@ local function drawPauseMenu(y, alpha)
 	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
 	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 160 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout2, x = 780 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout, x = 160 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout2, x = 780 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;

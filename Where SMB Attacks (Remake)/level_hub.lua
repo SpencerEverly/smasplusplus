@@ -3,10 +3,8 @@ local levelname = Level.filename()
 local levelformat = Level.format()
 
 local anotherPowerDownLibrary = require("anotherPowerDownLibrary")
-
+local playerphysicspatch = require("playerphysicspatch")
 pausemenu_hub = require("pausemenu_hub")
-
-local exitcommands_wsmbaa = require("exitcommands_wsmba")
 
 function onStart()
     Misc.saveGame()

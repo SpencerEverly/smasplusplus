@@ -342,8 +342,6 @@ function pausemenu2.onInputUpdate()
 				--SFX.play("quitmenu.wav")
 				pause_options[pause_index+1].action();
 				Misc.unpause();
-			elseif(player2.keys.altRun == KEYS_PRESSED) then
-				cooldown = 5
 			end
 		end
 	end

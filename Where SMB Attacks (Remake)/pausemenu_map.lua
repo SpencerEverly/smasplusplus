@@ -67,9 +67,9 @@ end
 
 local function quitgame()
 	paused = false
-	Misc.unpause()
 	Misc.saveGame();
 	cooldown = 5
+	Misc.unpause()
 	player:mem(0x17A,FIELD_BOOL,false)
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
@@ -80,7 +80,12 @@ end
 
 local function quitonly()
 	paused = false
+	cooldown = 5
 	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Misc.loadEpisode("Super Mario All-Stars++")
 end
@@ -88,8 +93,8 @@ end
 local function savegame()
 	paused = false
 	SFX.play("save_dismiss.ogg")
-	Misc.saveGame()
 	cooldown = 5
+	Misc.saveGame()
 	player:mem(0x17A,FIELD_BOOL,false)
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
@@ -104,8 +109,6 @@ local function restartlevel()
 end
 
 local function characterchange13()
-	paused = false
-	Misc.unpause()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
 		player:transform(2, true)
@@ -135,8 +138,6 @@ local function characterchange13()
 end
 
 local function characterchange13_2p()
-	paused = false
-	Misc.unpause()
 	local character = player2.character;
 	if (character == CHARACTER_MARIO) then
 		player2:transform(2, true)
@@ -167,7 +168,12 @@ end
 
 local function startteleport()
 	paused = false
+	cooldown = 5
 	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
 	SFX.play("hub_travelactivated.wav")
 	world.playerX = 832
 	world.playerY = -1152
@@ -176,7 +182,12 @@ end
 
 local function hubmapteleport()
 	paused = false
+	cooldown = 5
 	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
 	SFX.play("hub_travelactivated.wav")
 	world.playerX = 320
 	world.playerY = -1088
@@ -185,12 +196,6 @@ end
 
 local function wip()
 	SFX.play("wrong.wav")
-end
-
-local function hubteleport()
-	paused = false
-	Misc.unpause()
-	Level.load("MariosTown.lvlx", nil, nil)
 end
 
 local function drawPauseMenu(y, alpha)
@@ -229,7 +234,7 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "<color rainbow><wave 2>"..n.."</wave></color>";
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
@@ -279,7 +284,7 @@ function pausemenu2.onInputUpdate()
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
 		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused()) then
-			--Misc.pause();
+			Misc.pause();
 			paused = true
 			pauseactive = true
 			pause_index = 0;

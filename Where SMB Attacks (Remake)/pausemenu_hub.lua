@@ -215,7 +215,7 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "<color rainbow><wave 2>"..n.."</wave></color>";
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)

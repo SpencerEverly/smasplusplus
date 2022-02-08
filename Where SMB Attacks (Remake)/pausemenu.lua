@@ -186,7 +186,7 @@ local function drawPauseMenu(y, alpha)
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="right", color=Color.canary..1.0}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 178 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
 	textplus.render{layout = layout2, x = 800 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
@@ -217,7 +217,7 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "<color rainbow><wave 2>"..n.."</wave></color>";
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
