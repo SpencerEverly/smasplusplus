@@ -4,7 +4,7 @@ local steve = require("steve")
 
 local costume = {}
 
-function costume.onInit(p)
+function costume.onInit(p)        
     steve.skinSettings.name = "cubixtron"
     steve.loadMeshes()
 end

@@ -563,7 +563,7 @@ end
 
 function onExit()
 	--Player.setCostume(9, nil)
-	Player.setCostume(14, nil)
+	--Player.setCostume(14, nil)
 	if playerlives == 0 then
 		if killed == true then
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
