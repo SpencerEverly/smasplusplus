@@ -70,6 +70,11 @@ function dependencies.onStart()
 	if SaveData.disableX2char == 1 then
 		littleDialogue.defaultStyleName = "smbx13"
 		Audio.sounds[46].sfx = Audio.SfxOpen("door-smbx13.ogg")
+		Player.setCostume(1, nil)
+		Player.setCostume(2, nil)
+		Player.setCostume(3, nil)
+		Player.setCostume(4, nil)
+		Player.setCostume(5, nil)
 	end
 	if character == "CHARACTER_LUIGI" then
 		if currentCostume == "UNDERTALE-FRISK" then

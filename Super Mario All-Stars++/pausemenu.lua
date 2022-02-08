@@ -180,8 +180,6 @@ local function switchhub()
 end
 
 local function characterchange()
-	paused = false
-	Misc.unpause()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
 		player:transform(2, true)
@@ -266,8 +264,6 @@ local function characterchange()
 end
 
 local function characterchange13()
-	paused = false
-	Misc.unpause()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
 		player:transform(2, true)
@@ -297,8 +293,6 @@ local function characterchange13()
 end
 
 local function characterchange13_2p()
-	paused = false
-	Misc.unpause()
 	local character = player2.character;
 	if (character == CHARACTER_MARIO) then
 		player2:transform(2, true)
@@ -328,8 +322,6 @@ local function characterchange13_2p()
 end
 
 local function costumechange()
-	paused = false
-	Misc.unpause()
 	SFX.play("charcost_costume.ogg")
 	SFX.play("charcost-selected.wav")
 	local costumes = playerManager.getCostumes(player.character)

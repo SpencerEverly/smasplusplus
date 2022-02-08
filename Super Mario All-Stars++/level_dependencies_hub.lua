@@ -64,6 +64,11 @@ function dependencies2.onStart()
 	if SaveData.disableX2char == 1 then
 		littleDialogue.defaultStyleName = "smbx13"
 		Audio.sounds[46].sfx = Audio.SfxOpen("door-smbx13.ogg")
+		Player.setCostume(1, nil)
+		Player.setCostume(2, nil)
+		Player.setCostume(3, nil)
+		Player.setCostume(4, nil)
+		Player.setCostume(5, nil)
 	end
 end
 
@@ -76,16 +81,25 @@ function dependencies2.onTick()
 	local currentCostume = player:getCostume()
 
 	local costumes
+if currentCostume == nil then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
+	end
 	if currentCostume == "1-SMB1-RETRO" then
 		if SaveData.disableX2char == 0 then
 			warpTransition.doorclose = ("costumes/mario/1-SMB1-Retro/door-close.ogg")
 		end
 	end
 	if currentCostume == "2-SMB1-RECOLORED" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/2-SMB1-Recolored/door-close.ogg")
+		end
 	end
 	if currentCostume == "3-SMB1-SMAS" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/3-SMB1-SMAS/door-close.ogg")
+		end
 	end
 	if currentCostume == "4-SMB2-RETRO" then
 		if SaveData.disableX2char == 0 then
@@ -93,46 +107,66 @@ function dependencies2.onTick()
 		end
 	end
 	if currentCostume == "5-SMB2-SMAS" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/5-SMB2-SMAS/door-close.ogg")
+		end
 	end
 	if currentCostume == "6-SMB3-RETRO" then
 		if SaveData.disableX2char == 0 then
 			warpTransition.doorclose = ("costumes/mario/6-SMB3-Retro/door-close.ogg")
 		end
 	end
-	if currentCostume == "Z-SMW2-ADULTMARIO" then
-		return
-	end
 	if currentCostume == "A2XT-DEMO" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/A2XT-Demo/door-close.ogg")
+		end
+	end
+	if currentCostume == "GA-CAILLOU" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "JCFOSTERTAKESITTOTHEMOON" then
-		return
-	end
-	if currentCostume == "SP-1-ERICCARTMAN" then
-		return
-	end
-	if currentCostume == "SMG4" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "PRINCESSRESCUE" then
 		if SaveData.disableX2char == 0 then
 			warpTransition.doorclose = ("costumes/mario/PrincessRescue/door-close.ogg")
 		end
 	end
-	if currentCostume == "SMW-MARIO" then
-		return
+	if currentCostume == "SP-1-ERICCARTMAN" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
-	if currentCostume == "GA-CAILLOU" then
-		return
+	if currentCostume == "SMG4" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
+	end
+	if currentCostume == "SMW-MARIO" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
+	end
+	if currentCostume == "Z-SMW2-ADULTMARIO" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/Z-SMW2-AdultMario/door-close.ogg")
+		end
 	end
 	
 	
 	if currentCostume == "0-SPENCEREVERLY" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "LARRYTHECUCUMBER" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "WALUIGI" then
 		if SaveData.disableX2char == 0 then
@@ -140,7 +174,9 @@ function dependencies2.onTick()
 		end
 	end
 	if currentCostume == "A2XT-IRIS" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/A2XT-Demo/door-close.ogg")
+		end
 	end
 	if currentCostume == "UNDERTALE-FRISK" then
 		if SaveData.disableX2char == 0 then
@@ -148,47 +184,71 @@ function dependencies2.onTick()
 		end
 	end
 	if currentCostume == "9-SMB3-MARIOCLOTHES" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	
 	
 	if currentCostume == "A2XT-KOOD" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/A2XT-Demo/door-close.ogg")
+		end
 	end
 	if currentCostume == "DAISY" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "KIRBY-SMB3" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "PAULINE" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	
 	
 	if currentCostume == "SEE-TANGENT" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "SONIC" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "TOADETTE" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "YOSHI-SMB3" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "A2XT-RAOCOW" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/A2XT-Demo/door-close.ogg")
+		end
 	end
 	
 	
 	
 	if currentCostume == "A2XT-SHEATH" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("costumes/mario/A2XT-Demo/door-close.ogg")
+		end
 	end
 	if currentCostume == "SMB3-BANDANA-DEE" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 	if currentCostume == "NESS" then
 		if SaveData.disableX2char == 0 then
@@ -201,7 +261,9 @@ function dependencies2.onTick()
 		end
 	end
 	if currentCostume == "TAKESHI-SNES" then
-		return
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
 	end
 end
 	

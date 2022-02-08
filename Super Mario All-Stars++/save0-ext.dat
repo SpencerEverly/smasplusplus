@@ -13,22 +13,22 @@
    ["steveData"]={6},
    ["megamushroomssused"]=0,
    ["totalmushrooms"]=0,
-   ["useStarman"]=false,
+   ["totalhammersuits"]=0,
    ["ut_enabled"]=0,
    ["failsafeMessageOne"]=0,
    ["disableX2char"]=0,
-   ["deathCount"]=0,
+   ["warphub"]={7},
    ["totaliceflowers"]=0,
-   ["_basegame"]={7},
-   ["koopaStomps"]=0,
-   ["GameOverCount"]=0,
-   ["starsgrabbed"]=0,
-   ["totalcoins"]=0,
    ["firstBootCompleted"]=1,
-   ["smwMap"]={8},
-   ["warphub"]={9},
+   ["koopaStomps"]=0,
+   ["starsgrabbed"]=0,
+   ["GameOverCount"]=0,
+   ["totalcoins"]=0,
+   ["_basegame"]={8},
+   ["smwMap"]={9},
+   ["deathCount"]=0,
    ["totaltanookis"]=0,
-   ["totalhammersuits"]=0
+   ["useStarman"]=false
 },
 --[2]--
 {
@@ -41,7 +41,7 @@
 },
 --[4]--
 {
-
+   ["9"]="SMA3"
 },
 --[5]--
 {
@@ -61,24 +61,24 @@
 },
 --[7]--
 {
-   ["bigSwitch"]={12},
-   ["_characterdata"]={13},
-   ["starcoinCounter"]=0,
-   ["hud"]={14},
-   ["starcoin"]={15}
+   ["MALC - HUB.lvlx"]={12}
 },
 --[8]--
 {
-   ["encounterData"]={16},
-   ["beatenLevels"]={17},
-   ["playerX"]=-199024,
-   ["playerY"]=-199920,
-   ["unlockedPaths"]={18},
-   ["unlockedCheckpoints"]={19}
+   ["bigSwitch"]={13},
+   ["_characterdata"]={14},
+   ["starcoin"]={15},
+   ["hud"]={16},
+   ["starcoinCounter"]=0
 },
 --[9]--
 {
-   ["MALC - HUB.lvlx"]={20}
+   ["encounterData"]={17},
+   ["beatenLevels"]={18},
+   ["playerX"]=-199024,
+   ["playerY"]=-199920,
+   ["unlockedPaths"]={19},
+   ["unlockedCheckpoints"]={20}
 },
 --[10]--
 {
@@ -94,6 +94,10 @@
 },
 --[13]--
 {
+
+},
+--[14]--
+{
    ["8"]={21},
    ["10"]={22},
    ["9"]={23},
@@ -106,24 +110,20 @@
    ["13"]={30},
    ["14"]={31}
 },
---[14]--
-{
-   ["score"]=20700
-},
 --[15]--
 {
    ["SMAS - Start.lvlx"]={32},
-   ["SMAS - Game Help.lvlx"]={33},
-   ["SMAS - Intro.lvlx"]={34},
+   ["SMAS - True Ending.lvlx"]={33},
+   ["SMB1 - W-1, L-1.lvlx"]={34},
    ["MALC - HUB.lvlx"]={35},
    ["SMAS - DLC World.lvlx"]={36},
-   ["SMBLL - W-7, L-1.lvlx"]={37},
-   ["SMB1 - W-1, L-1.lvlx"]={38},
-   ["SMAS - True Ending.lvlx"]={39}
+   ["SMAS - Intro.lvlx"]={37},
+   ["SMBLL - W-7, L-1.lvlx"]={38},
+   ["SMAS - Game Help.lvlx"]={39}
 },
 --[16]--
 {
-
+   ["score"]=20930
 },
 --[17]--
 {
@@ -131,18 +131,18 @@
 },
 --[18]--
 {
+
+},
+--[19]--
+{
    ["toDLC2"]=true,
    ["toMALC"]=true,
    ["toDLC3"]=true,
    ["toDLC4"]=true
 },
---[19]--
-{
-   ["SMAS - True Ending.lvlx"]={40}
-},
 --[20]--
 {
-
+   ["SMAS - True Ending.lvlx"]={40}
 },
 --[21]--
 {
