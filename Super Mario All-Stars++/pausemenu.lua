@@ -435,10 +435,10 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
 		end
 		if SaveData.disableX2char == 1 then
-			table.insert(pause_options, {name="Turn OFF 1.3 Mode", action = x2modeenable});
+			table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
 		end
 		if SaveData.disableX2char == 0 then
-			table.insert(pause_options, {name="Turn ON 1.3 Mode", action = x2modedisable});
+			table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
 		end
 		table.insert(pause_options, {name="Go Back to the Main Menu", action = mainmenu});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
