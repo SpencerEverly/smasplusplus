@@ -2210,19 +2210,19 @@ function musicalchairs.onTick()
 	--CHARACTER_YOSHI
 	if currentCostume == "SMA3" then
 		if level == "SMB1 - W-1, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Advance 3/Overworld.ogg")
-			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Overworld.ogg")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 3/Flower Garden.ogg")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Underground BGM.ogg")
 		end
 		if level == "SMB1 - W-1, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Underground.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Underground BGM.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 3/Flower Garden.ogg")
+			Audio.MusicChange(3, "_OST/Super Mario Advance 3/Underground BGM.ogg")
 		end
 		if level == "SMB1 - W-1, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 3/Athletic.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Overworld.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
 			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
