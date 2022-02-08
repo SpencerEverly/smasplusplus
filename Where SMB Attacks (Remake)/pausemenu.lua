@@ -7,6 +7,8 @@ local active = true
 local active2 = false
 local ready = false
 
+local cooldown = 0
+
 onePressedState = false
 twoPressedState = false
 threePressedState = false
@@ -179,7 +181,7 @@ end
 
 local function drawPauseMenu(y, alpha)
 	local name = "Where SMB Attacks (Remake)"
-	local levelcurrent = "Current level:"
+	local levelcurrent = "Paused."
 	local levelname = Level.name()
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
@@ -188,11 +190,11 @@ local function drawPauseMenu(y, alpha)
 	local layout3 = textplus.layout(textplus.parse(levelname, {xscale=2, yscale=2, align="right", color=Color.yellow..1.0}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 180 - w*0.5, y = y+16, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout2, x = 520 - w*0.5, y = y+16, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout2, x = 780 - w*0.5, y = y+16, color = Color.white..alpha, priority = 7}
 	textplus.render{layout = layout3, x = 600 - w*0.3, y = y+16, color = Color.white..alpha, priority = 7}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
-	h = h+16+16--font.charHeight;
+	h = h+16+8--font.charHeight;
 	y = y+h;
 	
 	
@@ -243,7 +245,7 @@ function pausemenu2.onDraw()
 			pause_height = drawPauseMenu(-600,0);
 			pause_box = imagic.Create{x=400,y=300,width=800,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x000000BB);
+		pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
@@ -265,15 +267,18 @@ function pausemenu2.onInputUpdate()
 			paused = false
 			pauseactive = false
 			SFX.play("pausemenu-closed.wav")
-			if Misc.inEditor() then
-				Misc.unpause(); --To prevent softlocking when exiting the pause menu during testing
-			end
+			cooldown = 5
+			Misc.unpause()
+			player:mem(0x11E,FIELD_BOOL,false)
 		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused()) then
 			--Misc.pause();
 			paused = true
 			pauseactive = true
 			pause_index = 0;
 			SFX.play("pausemenu.wav")
+		end
+		if cooldown <= 0 then
+			player:mem(0x11E,FIELD_BOOL,true)
 		end
 	end
 	lastPauseKey = player.keys.pause;
@@ -290,7 +295,15 @@ function pausemenu2.onInputUpdate()
 			until(not pause_options[pause_index+1].inactive);
 			SFX.play("pausemenu_cursor.wav")
 		elseif(player.keys.jump == KEYS_PRESSED) then
-			SFX.play("quitmenu.wav")
+			player:mem(0x11E,FIELD_BOOL,false)
+			for i=1, 3 do
+				for k,v in ipairs(pause_options[i]) do
+					if v then
+						v.activeLerp = 0
+					end
+				end
+			end
+			--SFX.play("quitmenu.wav")
 			pause_options[pause_index+1].action();
 			Misc.unpause();
 		end
@@ -306,7 +319,7 @@ function pausemenu2.onInputUpdate()
 				until(not pause_options[pause_index+1].inactive);
 				SFX.play("pausemenu_cursor.wav")
 			elseif(player2.keys.jump == KEYS_PRESSED) then
-				SFX.play("quitmenu.wav")
+				--SFX.play("quitmenu.wav")
 				pause_options[pause_index+1].action();
 				Misc.unpause();
 			end
