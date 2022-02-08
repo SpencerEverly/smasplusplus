@@ -562,7 +562,7 @@ function onTick()
 end
 
 function onExit()
-	Player.setCostume(9, nil)
+	--Player.setCostume(9, nil)
 	Player.setCostume(14, nil)
 	if playerlives == 0 then
 		if killed == true then

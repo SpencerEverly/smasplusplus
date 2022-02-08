@@ -1,17 +1,33 @@
 local playerManager = require("playerManager")
 local npcManager = require("npcManager")
-local yoshi = require("yiYoshi/yiYoshi")
-
+local Routine = require("routine")
 
 local costume = {}
 
+local eventsRegistered = false
+
 function costume.onInit(p)
+	registerEvent(costume,"onStart")
+	registerEvent(costume,"onTick")
+	eventsRegistered = true
+end
+
+function costumechange()
+	Routine.wait(0.01)
+	yoshi = require("yiYoshi/yiYoshi")
 	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("costumes/klonoa/SMA3/main.png")
 	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("costumes/klonoa/SMA3/babyMario.png")
+	yoshi.tongueSettings.image = Graphics.loadImageResolved("costumes/klonoa/SMA3/tongue.png")
+
 	yoshi.generalSettings.jumpSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/jump2"))
     yoshi.generalSettings.hurtSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/hurt"))
     yoshi.generalSettings.deathSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/dies"))
     yoshi.generalSettings.coinSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/coin"))
+	
+	Audio.sounds[1].sfx  = yoshi.generalSettings.jumpSound
+    Audio.sounds[5].sfx  = yoshi.generalSettings.hurtSound
+    Audio.sounds[8].sfx  = yoshi.generalSettings.deathSound
+    Audio.sounds[14].sfx = yoshi.generalSettings.coinSound
 	
 	--yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_bubbleCreated"))
     --yoshi.generalSettings.babyPopBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/pop"))
@@ -26,25 +42,21 @@ function costume.onInit(p)
     --yoshi.generalSettings.starCounterReplenishedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_replenished"))
     yoshi.generalSettings.starCounterSlowBeepingSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/countdownTimerNormal"))
     yoshi.generalSettings.starCounterFastBeepingSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/countdownTimerCritical"))
-    --yoshi.generalSettings.starCounterIncreaseSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_increase")),
+    yoshi.generalSettings.starCounterIncreaseSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/coin"))
 	
 	yoshi.introSettings.sound = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Game Start (SFX).ogg"))
 	
 	yoshi.customExitSettings.keyVictorySound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/yoshi-chant2"))
     --yoshi.customExitSettings.keyOpenSound = SFX.open(Misc.resolveSoundFile("yiYoshi/reveal"))
     --yoshi.customExitSettings.keyCloseSound = SFX.open(Misc.resolveSoundFile("yiYoshi/exit_keyClose"))
-
-    yoshi.customExitSettings.passOnMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Goal.ogg"))
-    yoshi.customExitSettings.keyMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
-    yoshi.customExitSettings.keyMusicStar = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
+	
     yoshi.customExitSettings.scoreMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Score (SFX).ogg"))
 	
 	yoshi.flutterSettings.sound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/flutter"))
 	yoshi.flutterSettings.soundDelay = 0
 	
-	yoshi.tongueSettings.image = Graphics.loadImageResolved("costumes/klonoa/SMA3/tongue.png")
 	yoshi.tongueSettings.startSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/tongue"))
-    --yoshi.tongueSettings.failedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/tongue_failed"))
+    yoshi.tongueSettings.failedSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/hurt-minor"))
     yoshi.tongueSettings.spitSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/spit"))
     --yoshi.tongueSettings.swallowSound = SFX.open(Misc.resolveSoundFile("yoshi-swallow"))
 
@@ -59,7 +71,29 @@ function costume.onInit(p)
     yoshi.groundPoundSettings.landSound = SFX.open(Misc.resolveSoundFile("costumes/klonoa/SMA3/SFX/pound-withrumble"))
 end
 
+function costume.onStart(p)
+	Routine.run(costumechange)
+end
+
+function costume.onTick(p)
+	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("costumes/klonoa/SMA3/main.png")
+	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("costumes/klonoa/SMA3/babyMario.png")
+	yoshi.tongueSettings.image = Graphics.loadImageResolved("costumes/klonoa/SMA3/tongue.png")
+	yoshi.customExitSettings.passOnMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Goal.ogg"))
+    yoshi.customExitSettings.keyMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
+    yoshi.customExitSettings.keyMusicStar = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
+end
+
 function costume.onCleanup(p)
+	yoshi = require("yiYoshi/yiYoshi")
+	Audio.sounds[1].sfx  = nil
+    Audio.sounds[5].sfx  = nil
+    Audio.sounds[8].sfx  = nil
+    Audio.sounds[14].sfx = nil
+    Audio.sounds[19].sfx = nil
+    Audio.sounds[60].sfx = nil
+    Audio.sounds[21].sfx = nil
+    Audio.sounds[40].sfx = nil
 	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("yiYoshi/main.png")
 	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("yiYoshi/babyMario.png")
 	yoshi.generalSettings.jumpSound  = SFX.open(Misc.resolveSoundFile("yiYoshi/jump"))
