@@ -187,11 +187,9 @@ local function drawPauseMenu(y, alpha)
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
 	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="right", color=Color.canary..1.0}), pause_width)
-	local layout3 = textplus.layout(textplus.parse(levelname, {xscale=2, yscale=2, align="right", color=Color.yellow..1.0}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 180 - w*0.5, y = y+16, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout2, x = 780 - w*0.5, y = y+16, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout3, x = 600 - w*0.3, y = y+16, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout, x = 178 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout2, x = 800 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -206,9 +204,7 @@ local function drawPauseMenu(y, alpha)
 		
 		table.insert(pause_options, {name="Restart", action = restartlevel});
 		table.insert(pause_options, {name="Teleport to Mario's City", action = hubteleport});
-		if SaveData.disableX2char == 0 then
-			table.insert(pause_options, {name="Change Character", action = characterchange});
-		end
+		table.insert(pause_options, {name="Change Character", action = characterchange});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Exit to SMAS++", action = quitgame});
@@ -228,7 +224,7 @@ local function drawPauseMenu(y, alpha)
 		local h2 = layout.height
 		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
-		h2 = h2+2+16--font.charHeight;
+		h2 = h2+2+6--font.charHeight;
 		y = y+h2;
 		h = h+h2;
 	end
@@ -243,7 +239,7 @@ function pausemenu2.onDraw()
 		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=800,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)
