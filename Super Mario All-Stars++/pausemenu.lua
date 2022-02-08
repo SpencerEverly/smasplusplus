@@ -182,142 +182,168 @@ end
 local function characterchange()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
-		player:transform(2, true)
+		player:transform(2, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
-		player:transform(3, true)
+		player:transform(3, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
-		player:transform(4, true)
+		player:transform(4, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
-		player:transform(5, true)
+		player:transform(5, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
-		player:transform(6, true)
+		player:transform(6, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_MEGAMAN) then
-		player:transform(7, true)
+		player:transform(7, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_WARIO) then
-		player:transform(8, true)
+		player:transform(8, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_BOWSER) then
-		player:transform(9, true)
+		player:transform(9, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_KLONOA) then
-		player:transform(10, true)
+		player:transform(10, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_NINJABOMBERMAN) then
-		player:transform(11, true)
+		player:transform(11, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ROSALINA) then
-		player:transform(12, true)
+		player:transform(12, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_SNAKE) then
-		player:transform(13, true)
+		player:transform(13, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ZELDA) then
-		player:transform(14, true)
+		player:transform(14, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ULTIMATERINKA) then
-		player:transform(15, true)
+		player:transform(15, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_UNCLEBROADSWORD) then
-		player:transform(16, true)
+		player:transform(16, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_SAMUS) then
-		player:transform(1, true)
+		player:transform(1, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 end
 
 local function characterchange13()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
-		player:transform(2, true)
+		player:transform(2, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
-		player:transform(3, true)
+		player:transform(3, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
-		player:transform(4, true)
+		player:transform(4, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
-		player:transform(5, true)
+		player:transform(5, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
-		player:transform(1, true)
+		player:transform(1, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 end
 
 local function characterchange13_2p()
 	local character = player2.character;
 	if (character == CHARACTER_MARIO) then
-		player2:transform(2, true)
+		player2:transform(2, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
-		player2:transform(3, true)
+		player2:transform(3, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
-		player2:transform(4, true)
+		player2:transform(4, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
-		player2:transform(5, true)
+		player2:transform(5, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
-		player2:transform(1, true)
+		player2:transform(1, false)
 		SFX.play(32)
 		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
 end
 
@@ -405,7 +431,7 @@ local function drawPauseMenu(y, alpha)
 		if not Level.name() == "MALC - HUB" then
 			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
 		end
-		if not Level.filename() == "MALC - HUB.lvlx" or SaveData.disableX2char == 0 then
+		if SaveData.disableX2char == 0 then
 			table.insert(pause_options, {name="Change Character", action = characterchange});
 		end
 		if SaveData.disableX2char == 1 then
@@ -419,9 +445,7 @@ local function drawPauseMenu(y, alpha)
 			end
 		end
 		if SaveData.disableX2char == 0 then
-			if not (character == CHARACTER_YOSHI) or not Level.filename() == "SMAS - DLC World.lvlx" or not Level.filename() == "MALC - HUB.lvlx" then
-				table.insert(pause_options, {name="Change Costume", action = costumechange});
-			end
+			table.insert(pause_options, {name="Change Costume", action = costumechange});
 		end
 		if not Level.filename() == "SMAS - DLC World.lvlx" then
 			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
@@ -468,7 +492,7 @@ function pausemenu2.onDraw()
 			pause_height = drawPauseMenu(-600,0);
 			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x000000BB);
+		pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause

@@ -191,21 +191,21 @@ function onTick()
 	end
 	if currentCostume == "11-SMA1" then
 		littleDialogue.characterNames[1] = "Mario"
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-sma.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/11-SMA1/starman")
 		starman.duration[996] = 577
 		starman.duration[994] = 577
 	end
 	if currentCostume == "12-SMA2" then
 		littleDialogue.characterNames[1] = "Mario"
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-sma.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/12-SMA2/starman")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 	end
 	if currentCostume == "13-SMA4" then
 		littleDialogue.characterNames[1] = "Mario"
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-sma.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/13-SMA4/starman")
 		starman.duration[996] = 705
 		starman.duration[994] = 705

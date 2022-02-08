@@ -269,7 +269,7 @@ function pausemenu2.onDraw()
 			pause_height = drawPauseMenu(-600,0);
 			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x000000BB);
+		pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
