@@ -25,9 +25,9 @@ function onTick()
 		Audio.MusicChange(3, "_OST/Super Mario All-Stars++ (Beta)/CastleSMB4.ogg")
 	end
 	if currentCostume == "1-SMB1-RETRO" then
-		Audio.MusicChange(0, "_OST/Super Smash Bros. Ultimate/Mario/a29c_ppm_medley_part3.ogg")
-		Audio.MusicChange(1, "_OST/Super Smash Bros. Ultimate/Mario/a29c_ppm_medley_part3.ogg")
-		Audio.MusicChange(2, "_OST/Super Smash Bros. Ultimate/Mario/a29c_ppm_medley_part3.ogg")
-		Audio.MusicChange(3, "_OST/Super Smash Bros. Ultimate/Mario/a29c_ppm_medley_part3.ogg")
+		Audio.MusicChange(0, "_OST/Super Mario Bros Spencer/Castle.ogg")
+		Audio.MusicChange(1, "_OST/Super Mario Bros Spencer/Castle.ogg")
+		Audio.MusicChange(2, "_OST/Super Mario Bros Spencer/Castle.ogg")
+		Audio.MusicChange(3, "_OST/Super Mario Bros Spencer/Castle.ogg")
 	end
 end
