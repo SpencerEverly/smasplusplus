@@ -30,6 +30,6 @@
 </div>
 
 <p align="center">
-    Due to an <a href="https://github.com/SpencerEverly/smasplusplus/issues/2">issue</a>, commits are still being made in the same place as previously, in Google Drive. They won't be as updated but they'll be a little more stable than what's being updated here. Check them out <a href="https://drive.google.com/drive/folders/18L0N2lt-A2bIBuSITHEiN5fZjhvnMLKg?usp=sharing">by clicking here</a>.
+    Due to a <a href="https://github.com/SpencerEverly/smasplusplus/issues/2">bug</a>, Please download the SMASLauncher to launch and even update the episode. Check it out <a href="https://www.supermariobrosx.org/forums/viewtopic.php?f=69&t=27581">by clicking here</a>.
     <br />
 </div>
