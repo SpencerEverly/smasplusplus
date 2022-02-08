@@ -28,13 +28,23 @@ if not exist "bootLauncher_changecam.wav" goto missingwavs
 if not exist "bootLauncher_dlSFX.wav" goto missingwavs
 if not exist "bootLauncher_coin.wav" goto missingwavs
 if not exist "bootLauncher_chosen.wav" goto missingwavs
-echo Checking for SMBX2.exe...
+echo Checking to see if SMBX2.exe exists...
 @timeout 0 /nobreak>nul
 cd..
 if not exist "SMBX2.exe" goto directorycheck
 cd _smaslauncher
-echo Checking for SMAS^+^+ updates... ^(The episode isn^'t released yet so this will skip.^)
+echo Checking to see if SMAS^+^+ is installed...
 @timeout 0 /nobreak>nul
+cd..
+cd data
+cd worlds
+if not exist "Super Mario All-Stars++" goto directorycheck2
+cd "Super Mario All-Stars++"
+if not exist "__World Map.wld" goto directorycheck3
+cd..
+cd..
+cd..
+cd _smaslauncher
 goto simplelaunch
 
 :directorycheck
@@ -42,26 +52,58 @@ cd..
 if not exist "SMBX2\" goto wrongdirectory
 goto dlsmbx2
 
+:directorycheck2
+cd..
+cd..
+cd _smaslauncher
+goto dlsmas
+
+:directorycheck3
+cd..
+cd..
+cd..
+cd _smaslauncher
+goto dlsmas
+
 :exitlauncher
 exit
+
+:dlsmas
+start cmdmp3win.exe bootLauncher_changecam.wav
+cls
+echo Would you like to download Super Mario All-Stars^+^+^? (SMAS^+^+)
+echo.
+echo It is recommended to download SMAS^+^+ here for future updating
+echo and more stability.
+echo.
+echo If you want to download SMAS^+^+^, press 1 and then press enter.
+echo To try again later, press 2 and enter to quit.
+echo.
+set dlsmas=
+set /p dlsmas=
+if not '%dlsmas%'=='' set choice=%choice:~0,1%
+if '%dlsmas%'=='1' goto startdlsmas2
+if '%dlsmas%'=='2' goto exitasap
+ECHO "%dlsmas%" is not valid, try again
+ECHO.
+goto dlsmas
 
 :dlsmbx2
 cls
 cd SMBX2
 cd _smaslauncher
 start cmdmp3win.exe bootLauncher_changecam.wav
-echo Looks like you don^'t have SMBX2 in the previous folder.
+echo To make the episode work, you'll need to install Super Mario Bros. X2.
 echo.
-echo If this isn't an error^, you can download SMBX2 without going
-echo to the Codehaus website^^!
+echo Without Super Mario Bros. X2, this episode would not function and operate.
 echo.
-echo If you want to download SMBX2^, press 1 and then press enter.
-echo If this is an error and you have SMBX2^, press 2 and enter to quit and
-echo try running this launcher again when you have SMBX2.exe in the folder below
-echo this folder.
+echo Please download SMBX2^ by pressing press 1, then press enter.
+echo To start this later, press 2 and enter to quit and
+echo try running this launcher again when you have time.
 echo.
-echo If you already downloaded SMBX2 but haven^'t installed it, move it to the
-echo smasluancher folder then press 3, and then press enter.
+echo If you already downloaded SMBX2 but haven^'t installed it, move it to this
+echo folder ^(^_smaslauncher^) then press 3 and enter.
+echo.
 set dlsmbx=
 set /p dlsmbx=
 if not '%dlsmbx%'=='' set choice=%choice:~0,1%
@@ -74,6 +116,44 @@ goto dlsmbx2
 
 :exitasap
 exit
+
+:startdlsmas2
+cls
+start cmdmp3win.exe bootLauncher_chosen.wav
+echo Because of the size of SMAS^+^+, this download will take a while
+echo depending on your Internet connection.
+echo.
+echo Make sure that you are in an fast internet connection hotspot,
+echo then press enter when you are ready.
+pause
+start cmdmp3win.exe bootLauncher_dlSFX.wav
+echo Now starting... DON^'T CLOSE THIS WINDOW^^, OR ELSE THE DOWNLOAD WILL FAIL!
+cd..
+cd data
+cd worlds
+mkdir "__PortableGit"
+cd..
+cd..
+cd _smaslauncher
+start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\PortableGit\" "SMBX2\data\worlds\__PortableGit"
+cd..
+cd data
+cd worlds
+PING -n 5 127.0.0.1>nul
+call __PortableGit\bin\git.exe init
+call __PortableGit\bin\git.exe remote add origin https://github.com/SpencerEverly/smasplusplus.git
+call __PortableGit\bin\git.exe pull origin main
+cd..
+cd..
+cd _smaslauncher
+start cmdmp3win.exe bootLauncher_coin.wav
+echo Super Mario All-Stars^+^+ is now installed!
+echo.
+echo Pressing enter will recheck dependencies. Make sure the episode is IN the
+echo worlds folder before you press enter^^! ^(The PortableGit folder in the data folder
+echo will be used for updating the episode, this is normal^.)
+pause
+goto start
 
 :startdlsmbx2
 cls
@@ -151,7 +231,7 @@ echo Extracting EXE...
 7zG.exe x "SMBX2_Installer.exe"
 echo Moving the SMBX2 folder to the folder before ^"smaslauncher^"...
 cd..
-start /wait move_smbx2_exextracted.bat "SMBX2\smaslauncher\7zip\SMBX2\" "SMBX2\"
+start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\7zip\SMBX2\" "SMBX2\"
 echo Renaming the EXE back to normal...
 cd SMBX2
 cd _smaslauncher
@@ -194,14 +274,85 @@ if /I "%autoboot1%"=="y" goto loadgame1
 if /I "%autoboot1%"=="Y" goto loadgame1
 if /I "%autoboot1%"=="" goto simplelaunch
 
+:updatesmas
+cls
+@timeout 1 /nobreak>nul
+echo Checking for SMAS^+^+ updates...
+@timeout 0 /nobreak>nul
+cd..
+cd data
+cd worlds
+if not exist .git ( goto nogit )
+
+:yesgit
+cls
+cd..
+cd..
+cd _smaslauncher
+cmdmp3win.exe bootLauncher_2playermode.wav
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Here you can download the latest updates and releases.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Enter 1 to update the episode.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Enter 0 to return to the main menu.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p autoboot1=
+if /I "%autoboot1%"=="1" goto updatesmas2
+if /I "%autoboot1%"=="2" goto simplelaunch
+if /I "%autoboot1%"=="" goto simplelaunch
+
+:nogit
+cls
+echo Unfortnately, this updater only works if you have downloaded the episode
+echo from this launcher ^(It's using git^).
+echo.
+echo Please redownload the episode from here and try again.
+pause
+goto simplelaunch
+
+:updatesmas2
+cls
+cmdmp3win.exe bootLauncher_dlSFX.wav
+pushd "%~dp0"
+echo Pulling the latest update from GitHub...
+cd..
+cd data
+cd worlds
+call __PortableGit\bin\git.exe pull origin main
+cls
+cd..
+cd..
+cd _smaslauncher
+echo The episode has been updated^^! Restarting in 5 seconds...
+start "" "%~dp0"
+@timeout 5 /nobreak>nul
+cls
+goto start
+
+
 :simplelaunch
 cls
 set a=^&^#61^;
 mode con:cols=80 lines=30
 color 06
 start cmdmp3win.exe bootLauncher_start.wav
-echo v1.7.0
-echo.
+echo v2.0.0
 echo.
 set s=Hello^^! Welcome to the Super Mario All-Stars^+^+ launcher.
 for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
@@ -246,6 +397,12 @@ set s=CustomLoad^1^-9: Load any episode of your choice^^! Default settings
 for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
 set s=!s:~1,%size%!& echo(!s!
 set s=from Start1^-9 will apply. To load with custom settings, use ^"Start^".
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=UpdateSMAS: Update SMAS^+^+ to the latest version^^! Make sure you
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=have downloaded the episode from the launcher first.
 for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
 set s=!s:~1,%size%!& echo(!s!
 echo.
@@ -356,6 +513,10 @@ if '%simplelaunch%'=='eXit' goto exitlauncher
 if '%simplelaunch%'=='exIt' goto exitlauncher
 if '%simplelaunch%'=='exiT' goto exitlauncher
 if '%simplelaunch%'=='eXIt' goto exitlauncher
+if '%simplelaunch%'=='updatesmas' goto updatesmas
+if '%simplelaunch%'=='Updatesmas' goto updatesmas
+if '%simplelaunch%'=='updateSMAS' goto updatesmas
+if '%simplelaunch%'=='UpdateSMAS' goto updatesmas
 ECHO "%simplelaunch%" is not valid, try again
 ECHO.
 goto simplelaunch
