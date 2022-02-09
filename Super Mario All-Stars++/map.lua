@@ -10,12 +10,15 @@ local yoshi = require("yiYoshi/yiYoshi")
 
 local lib3d = require("lib3d")
 
+local travL = require("travL")
+
+local wandR = require("wandRr")
+ 
 function onStart()
-	m = ""
-	if m == nil then
+	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == nil then
 		Misc.showRichDialog("EXE Extraction Install detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this way. As such,\ncustom map music and map3d will be disabled. Please use the official installination\non your own computer to make the game work as intended.\n\nThank you!", true)
 	end
-	if m == "" then
+	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == true then
 		pause_music = require("map_music")
 		if SaveData.disableX2char == 0 then
 			map3d = require("mapp3d")
@@ -25,8 +28,6 @@ function onStart()
 		end
 	end
 	if SaveData.disableX2char == 0 then
-		travL = require("travL")
-		wandR = require("wandRr")
 		inventory = require("customInventory")
 		smoothWorld = require("smoothWorld")
 	end
