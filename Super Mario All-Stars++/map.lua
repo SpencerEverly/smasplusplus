@@ -13,23 +13,23 @@ local lib3d = require("lib3d")
 local travL = require("travL")
 
 local wandR = require("wandRr")
+
+local pause_music = require("map_music")
  
 function onStart()
 	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == nil then
-		pause_music = require("map_music")
-		if SaveData.disableX2char == 0 then
-			map3d = require("mapp3d")
-			map3d.CameraSettings.fov = 65
-			map3d.BGPlane.tile = 394
-			map3d.Light.enabled = false
-		end
+		--Nothing
 	end
 	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == true then
-		Misc.showRichDialog("EXE Extraction Install detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this way. As such,\ncustom map music and map3d will be disabled. Please use the official installination\non your own computer to make the game work as intended.\n\nThank you!", true)
+		Misc.showRichDialog("EXE Extraction installination detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this\nway. Please use the official installination on your own\ncomputer to make the game work as intended.\n\nThank you!", true)
 	end
 	if SaveData.disableX2char == 0 then
 		inventory = require("customInventory")
 		smoothWorld = require("smoothWorld")
+		map3d = require("mapp3d")
+		map3d.CameraSettings.fov = 65
+		map3d.BGPlane.tile = 394
+		map3d.Light.enabled = false
 	end
 	if SaveData.disableX2char == 1 then
 		--For now, nothing
