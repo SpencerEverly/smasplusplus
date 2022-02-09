@@ -12,9 +12,9 @@ local lib3d = require("lib3d")
 
 function onStart()
 	if f == nil then
-		Misc.showRichDialog("Warning", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this way. As such, map music\n and map3d will be disabled. Please use the official installination on your own computer to make the\ngame work as intended.\n\nThank you!", true)
+		Misc.showRichDialog("EXE Extraction Install detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this way. As such,\nmap music and map3d will be disabled. Please use the official installination on your own computer\nto make the game work as intended.\n\nThank you!", true)
 	end
-	if not f == nil then
+	if f == true then
 		pause_music = require("map_music")
 		if SaveData.disableX2char == 0 then
 			map3d = require("mapp3d")
