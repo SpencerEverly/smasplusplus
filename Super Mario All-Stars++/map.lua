@@ -8,19 +8,7 @@ local pausemenu = require("pausemenu_map")
 
 local jukebox = require("jukebox_v11")
 
-local map3d = API.load("mapp3d")
-
 local textplus = require("textplus")
-
-local smoothWorld = require("smoothWorld")
-
-map3d.CameraSettings.fov = 65
-map3d.BGPlane.tile = 394
-map3d.Light.enabled = false
-
-local travL = API.load("travL")
-local wandR = API.load("wandR")
-wandR.speed = 7
 
 local playerManager = require("playermanager")
 
@@ -28,16 +16,28 @@ local yoshi = require("yiYoshi/yiYoshi")
 
 local lib3d = require("lib3d")
 
-local inventory = require("customInventory")
-
 function onStart()
+	if SaveData.disableX2char == 0 then
+		map3d = API.load("mapp3d")
+		map3d.CameraSettings.fov = 65
+		map3d.BGPlane.tile = 394
+		map3d.Light.enabled = false
+		travL = API.load("travL")
+		wandR = API.load("wandR")
+		wandR.speed = 7
+		inventory = require("customInventory")
+		smoothWorld = require("smoothWorld")
+	end
+	if SaveData.disableX2char == 1 then
+		--For now, nothing
+	end
 	Audio.MusicVolume(nil)
 	mem(0xB25728, FIELD_BOOL, false) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
 end
 
 function onTick()
 	jukebox.setTrack(750, "_OST/Super Mario Bros/World Music/Super Players.ogg")
-		jukebox.setTrack(751, "_OST/All Stars Menu/World Music/Game Select.ogg")
+	jukebox.setTrack(751, "_OST/All Stars Menu/World Music/Game Select.ogg")
 	jukebox.setTrack(752, "_OST/Super Mario Bros/World 1.ogg")
 	jukebox.setTrack(753, "_OST/Super Mario Bros/World 2.ogg")
 	jukebox.setTrack(754, "_OST/Super Mario Bros/World 3.ogg")
