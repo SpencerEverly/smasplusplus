@@ -165,7 +165,7 @@ cd..
 cd data
 cd worlds
 cd "Super Mario All-Stars++"
-__7zip\7zG.exe x -ao "__World Map.7z"
+__7zip\7zG.exe x -o "__World Map.7z"
 cd..
 cd..
 cd..
@@ -266,7 +266,7 @@ cd..
 cd data
 cd worlds
 cd "Super Mario All-Stars"""
-copy NUL exeextracted
+copy "Remove this file if you're playing SMAS on an official installination" exeextracted.txt
 cd..
 cd..
 cd..
@@ -372,7 +372,7 @@ call __PortableGit\bin\git.exe reset --hard
 call __PortableGit\bin\git.exe pull origin main
 cls
 cd "Super Mario All-Stars++"
-__7zip\7zG.exe x -ao "__World Map.7z"
+__7zip\7zG.exe x -o "__World Map.7z"
 cd..
 cd..
 cd..
