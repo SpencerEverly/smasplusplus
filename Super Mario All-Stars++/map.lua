@@ -6,7 +6,7 @@ local steve = require("steve")
 
 local pausemenu = require("pausemenu_map")
 
-local jukebox = require("jukebox_v1.1")
+local jukebox = require("jukebox_v11")
 
 local map3d = require("mapp3d")
 
