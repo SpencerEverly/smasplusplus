@@ -20,7 +20,7 @@ function onStart()
 	if SaveData.disableX2char == 0 then
 		map3d = API.load("mapp3d")
 		map3d.CameraSettings.fov = 65
-		map3d.BGPlane.tile = 394
+		--map3d.BGPlane.tile = 394
 		map3d.Light.enabled = false
 		travL = API.load("travL")
 		wandR = API.load("wandR")

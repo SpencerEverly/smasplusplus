@@ -466,7 +466,7 @@ map3d.BGPlane = {
 				--Whether or not to draw the "infinite" tile plane
 				enabled = true, 
 				--Which tile ID to use for the tile plane (supports only "tile-##.png" objects)
-				tile = 89,
+				tile = 394,
 				--The size of the tile plane. It is recommended to make the plane wider than it is deep, to account for the aspect ratio
 				size = vectr.v2(8192,4096)
 				};
