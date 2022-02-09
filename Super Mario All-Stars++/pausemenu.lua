@@ -410,12 +410,7 @@ local function drawPauseMenu(y, alpha)
 		if Level.filename() == "SMAS - DLC World.lvlx" then
 			table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
 		end
-		if not Level.filename() == "SMAS - DLC World.lvlx" or SaveData.disableX2char == 0 then
-			table.insert(pause_options, {name="Restart", action = restartlevel});
-		end
-		if not Level.filename() == "SMAS - DLC World.lvlx" or SaveData.disableX2char == 1 then
-			table.insert(pause_options, {name="Restart", action = restartlevel});
-		end
+		table.insert(pause_options, {name="Restart", action = restartlevel});
 		if Level.filename() == "MALC - HUB.lvlx" then
 			table.insert(pause_options, {name="Teleport to the Tourist Center", action = touristhub});
 		end
@@ -435,9 +430,7 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Change Character", action = characterchange});
 		end
 		if SaveData.disableX2char == 1 then
-			if not Level.filename() == "MALC - HUB.lvlx" then
-				table.insert(pause_options, {name="Change 1P's Character", action = characterchange13});
-			end
+			table.insert(pause_options, {name="Change 1P's Character", action = characterchange13});
 		end
 		if SaveData.disableX2char == 1 then
 			if Player.count() == 2 then
