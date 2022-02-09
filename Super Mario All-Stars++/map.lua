@@ -219,7 +219,7 @@ local lib3d = require("lib3d")
 
 function onStart()
 	if f == nil then
-		Misc.showRichDialog("Warning", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install> If so, things may be\nunstable with the episode running everything this way. Please\n\use the official installination on your own computer to make the game work as intended. Thank you!", true)
+		Misc.showRichDialog("Warning", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install? If so, things may be\nunstable with the episode running everything this way. Please\n\use the official installination on your own computer to make the game work as intended. Thank you!", true)
 	end
 	if SaveData.disableX2char == 0 then
 		map3d = require("mapp3d")
