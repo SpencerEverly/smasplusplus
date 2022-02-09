@@ -22,7 +22,7 @@ end
 local startX, startY
 
 wandR.grid = 32
-wandR.speed = 2
+wandR.speed = 7
 
 function wandR.onStart()
 	startX = world.playerX%wandR.grid

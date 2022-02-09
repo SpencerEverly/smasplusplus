@@ -1,7 +1,3 @@
--- TASbot stuff, removing in the final
---if Misc.saveSlot() == 32767 then --or Misc.inEditor() then
---	require("__speedrun/speedrun")
---end
 local steve = require("steve")
 
 local pausemenu = require("pausemenu_map")
@@ -9,7 +5,7 @@ local pausemenu = require("pausemenu_map")
 local jukebox = require("jukebox-v11")
 
 --SMB1 Secret Warps
-jukebox.setTrack(750, jukebox.resolveMusicFile("_OST/Super Mario Bros/World Music/Super Players.ogg"))
+jukebox.setTrack(750, jukebox.resolveMusicFile(Misc.episodePath().."_OST/Super Mario Bros/World Music/Super Players.ogg"))
 jukebox.setMusicBox(750, 256, 704)
 jukebox.setMusicBox(750, 320, 704)
 jukebox.setMusicBox(750, 736, 960)
@@ -228,8 +224,7 @@ function onStart()
 		map3d.BGPlane.tile = 394
 		map3d.Light.enabled = false
 		travL = require("travL")
-		wandR = require("wandR")
-		wandR.speed = 7
+		wandR = require("wandRr")
 		inventory = require("customInventory")
 		smoothWorld = require("smoothWorld")
 	end
