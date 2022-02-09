@@ -8,7 +8,7 @@ local pausemenu = require("pausemenu_map")
 
 local jukebox = require("jukebox_v11")
 
-local map3d = require("mapp3d")
+local map3d = API.load("mapp3d")
 
 local textplus = require("textplus")
 
