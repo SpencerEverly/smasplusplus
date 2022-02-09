@@ -165,7 +165,7 @@ cd..
 cd data
 cd worlds
 cd "Super Mario All-Stars++"
-start "__7zip\7zG.exe x -o "__World Map.7z""
+__7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
 cd..
 cd..
@@ -372,7 +372,7 @@ call __PortableGit\bin\git.exe reset --hard
 call __PortableGit\bin\git.exe pull origin main
 cls
 cd "Super Mario All-Stars++"
-start "__7zip\7zG.exe x -o "__World Map.7z""
+__7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
 cd..
 cd..
