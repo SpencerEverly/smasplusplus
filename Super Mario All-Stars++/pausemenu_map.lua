@@ -4,6 +4,9 @@ local rng = require("rng")
 local Routine = require("routine")
 local playerManager = require("playermanager")
 
+local pausefont = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+local pausefont2 = textplus.loadFont("littleDialogue/font/smb1-a.ini")
+
 local active = true
 local active2 = false
 local ready = false
@@ -158,12 +161,343 @@ local function dlcteleport()
 	SFX.play("world_warp.ogg")
 end
 
-local function costumechange()
-	cooldown = 5
-	player:mem(0x17A,FIELD_BOOL,false)
-	if cooldown <= 0 then
-		player:mem(0x17A,FIELD_BOOL,true)
+local function characterchange()
+	local character = player.character;
+	if (character == CHARACTER_MARIO) then
+		player:transform(2, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
 	end
+	if (character == CHARACTER_LUIGI) then
+		player:transform(3, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_PEACH) then
+		player:transform(4, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_TOAD) then
+		player:transform(5, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LINK) then
+		player:transform(6, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_MEGAMAN) then
+		player:transform(7, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_WARIO) then
+		player:transform(8, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_BOWSER) then
+		player:transform(9, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_KLONOA) then
+		player:transform(10, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_NINJABOMBERMAN) then
+		player:transform(11, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_ROSALINA) then
+		player:transform(12, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_SNAKE) then
+		player:transform(13, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_ZELDA) then
+		player:transform(14, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_ULTIMATERINKA) then
+		player:transform(15, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_UNCLEBROADSWORD) then
+		player:transform(16, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_SAMUS) then
+		player:transform(1, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+end
+
+local function characterchange13()
+	local character = player.character;
+	if (character == CHARACTER_MARIO) then
+		player:transform(2, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LUIGI) then
+		player:transform(3, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_PEACH) then
+		player:transform(4, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_TOAD) then
+		player:transform(5, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LINK) then
+		player:transform(1, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+end
+
+local function characterchange13_2p()
+	local character = player2.character;
+	if (character == CHARACTER_MARIO) then
+		player2:transform(2, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LUIGI) then
+		player2:transform(3, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_PEACH) then
+		player2:transform(4, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_TOAD) then
+		player2:transform(5, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LINK) then
+		player2:transform(1, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+end
+
+local function characterchangeleft()
+	local character = player.character;
+	if (character == CHARACTER_MARIO) then
+		player:transform(16, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LUIGI) then
+		player:transform(1, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_PEACH) then
+		player:transform(2, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_TOAD) then
+		player:transform(3, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LINK) then
+		player:transform(4, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_MEGAMAN) then
+		player:transform(5, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_WARIO) then
+		player:transform(6, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_BOWSER) then
+		player:transform(7, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_KLONOA) then
+		player:transform(8, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_NINJABOMBERMAN) then
+		player:transform(9, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_ROSALINA) then
+		player:transform(10, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_SNAKE) then
+		player:transform(11, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_ZELDA) then
+		player:transform(12, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_ULTIMATERINKA) then
+		player:transform(13, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_UNCLEBROADSWORD) then
+		player:transform(14, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_SAMUS) then
+		player:transform(15, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+end
+
+local function characterchange13left()
+	local character = player.character;
+	if (character == CHARACTER_MARIO) then
+		player:transform(5, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LUIGI) then
+		player:transform(1, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_PEACH) then
+		player:transform(2, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_TOAD) then
+		player:transform(3, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LINK) then
+		player:transform(4, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+end
+
+local function characterchange13_2pleft()
+	local character = player2.character;
+	if (character == CHARACTER_MARIO) then
+		player2:transform(5, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LUIGI) then
+		player2:transform(1, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_PEACH) then
+		player2:transform(2, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_TOAD) then
+		player2:transform(3, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+	if (character == CHARACTER_LINK) then
+		player2:transform(4, false)
+		SFX.play(32)
+		SFX.play("charcost-selected.wav")
+		SFX.play("racoon-changechar.ogg")
+	end
+end
+
+local function costumechangeright()
 	SFX.play("charcost_costume.ogg")
 	SFX.play("charcost-selected.wav")
 	local costumes = playerManager.getCostumes(player.character)
@@ -179,12 +513,7 @@ local function costumechange()
 	end
 end
 
-local function costumechangenopause()
-	cooldown = 5
-	player:mem(0x172,FIELD_BOOL,false)
-	if cooldown <= 0 then
-		player:mem(0x172,FIELD_BOOL,true)
-	end
+local function costumechangeleft()
 	SFX.play("charcost_costume.ogg")
 	SFX.play("charcost-selected.wav")
 	local costumes = playerManager.getCostumes(player.character)
@@ -193,7 +522,7 @@ local function costumechangenopause()
 	local costumeIdx = table.ifind(costumes,currentCostume)
 
 	if costumeIdx ~= nil then
-		player:setCostume(costumes[costumeIdx + 1])
+		player:setCostume(costumes[costumeIdx - 1])
 	else
 		player:setCostume(costumes[1])
 		onePressedState = true
@@ -205,18 +534,15 @@ local function wip()
 end
 
 local function drawPauseMenu(y, alpha)
-	local name = "Super Mario All-Stars++"
-	local changechar = "You can change characters using left & right,"
-	local costinfo = "and/or change costumes using the Change Costumes option."
+	local name = "<color rainbow>SUPER MARIO ALL-STARS++</color>"
+	local levelcurrent = "Paused."
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(changechar, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
-	local layout3 = textplus.layout(textplus.parse(costinfo, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.red..1.0, font=pausefont2}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 157 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout2, x = 457 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout3, x = 340 - w*0.5, y = y+22, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout, x = 235 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout2, x = 835 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -230,7 +556,32 @@ local function drawPauseMenu(y, alpha)
 		}
 		
 		if SaveData.disableX2char == 0 then
-			table.insert(pause_options, {name="Change Costume", action = costumechange});
+			table.insert(pause_options, {name="Change Character (Left)", action = characterchangeleft});
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options, {name="Change Character (Right)", action = characterchange});
+		end
+		if SaveData.disableX2char == 1 then
+			table.insert(pause_options, {name="Change 1P's Character (Left)", action = characterchange13left});
+		end
+		if SaveData.disableX2char == 1 then
+			table.insert(pause_options, {name="Change 1P's Character (Right)", action = characterchange13});
+		end
+		if SaveData.disableX2char == 1 then
+			if Player.count() == 2 then
+				table.insert(pause_options, {name="Change 2P's Character (Left)", action = characterchange13_2pleft});
+			end
+		end
+		if SaveData.disableX2char == 1 then
+			if Player.count() == 2 then
+				table.insert(pause_options, {name="Change 2P's Character (Right)", action = characterchange13_2p});
+			end
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options, {name="Change Costume (Left)", action = costumechangeleft});
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options, {name="Change Costume (Right)", action = costumechangeright});
 		end
 		table.insert(pause_options, {name="Teleport back to the Start", action = startteleport});
 		table.insert(pause_options, {name="Teleport to the HUB", action = hubmapteleport});
@@ -247,7 +598,7 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "<color rainbow><wave 1>"..n.."</wave></color>";
+			n = "<color yellow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
@@ -314,6 +665,10 @@ function pausemenu2.onInputUpdate()
 				pause_index = (pause_index-1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
 			SFX.play("pausemenu_cursor.wav")
+		elseif player.keys.left == KEYS_PRESSED then
+			player.keys.left = KEYS_UNPRESSED
+		elseif player.keys.right == KEYS_PRESSED then
+			player.keys.right = KEYS_UNPRESSED
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			player:mem(0x11E,FIELD_BOOL,false)
 			for i=1, 3 do
