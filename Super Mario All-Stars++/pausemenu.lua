@@ -665,7 +665,7 @@ local function drawCharacterMenu(y, alpha)
 	local name = "Paused."
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.red..1.0, font=pausefont2}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
