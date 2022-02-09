@@ -226,6 +226,26 @@ function dependencies.onTick()
 			warpTransition.doorclose = ("costumes/mario/6-SMB3-Retro/door-close.ogg")
 		end
 	end
+	if currentCostume == "9-SMW-PIRATE" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("nothing.ogg")
+		end
+	end
+	if currentCostume == "11-SMA1" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
+	end
+	if currentCostume == "12-SMA2" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
+	end
+	if currentCostume == "13-SMA4" then
+		if SaveData.disableX2char == 0 then
+			warpTransition.doorclose = ("door-close.ogg")
+		end
+	end
 	if currentCostume == "A2XT-DEMO" then
 		if SaveData.disableX2char == 0 then
 			warpTransition.doorclose = ("costumes/mario/A2XT-Demo/door-close.ogg")

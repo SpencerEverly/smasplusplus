@@ -2,12 +2,14 @@ local textplus = require("textplus")
 local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
+local Routine = require("routine")
 
-local blackscreen = Graphics.loadImage(Misc.episodePath().."black-screen.png")
+local blackscreen = Graphics.loadImage("blackscreen.png")
 
 local active = true
 local active2 = false
 local ready = false
+local exitscreen = false
 
 local cooldown = 0
 
@@ -34,13 +36,16 @@ local levelname = Level.filename()
 local levelformat = Level.format()
 
 local paused = false;
+local paused_char = false;
 local pause_box;
 local pause_height = 0;
 local pause_width = 700;
 
 local pause_options;
+local pause_options_char;
 local character_options;
 local pause_index = 0;
+local pause_index_char = 0;
 
 local pauseactive = false
 local charactive = false
@@ -70,9 +75,33 @@ function pausemenu2.onStart()
 	if not ready then return end
 end
 
---local function prequitgame()
-	--Routine.run(quitgame)
---end
+local function switchtochar()
+	SFX.play("quitmenu.wav")
+	cooldown = 5
+	if(player.keys.jump == KEYS_PRESSED) then
+		player.rawKeys.jump = false
+	end
+	pause_index_char = 0
+	paused = false
+	paused_char = true
+	if cooldown <= 0 then
+		player:mem(0x11E,FIELD_BOOL,true)
+	end
+end
+
+local function pausemenureturn()
+	SFX.play("quitmenu_close.wav")
+	cooldown = 5
+	if(player.keys.jump == KEYS_PRESSED) then
+		player.rawKeys.jump = false
+	end
+	pause_index_char = 0
+	paused_char = false
+	paused = true
+	if cooldown <= 0 then
+		player:mem(0x11E,FIELD_BOOL,true)
+	end
+end
 
 local function x2modedisable()
 	paused = false
@@ -93,24 +122,18 @@ local function x2modeenable()
 end
 
 local function quitgame()
-	--Graphics.drawImageWP{image = blackscreen, x = 0, y = 0, sourceX = 0, sourceY = 0, priority = 10}
-	--Audio.MusicVolume(0)
-	--SFX.play("savequit.wav")
-	--Routine.wait(1.5, true)
+	Audio.MusicVolume(0)
+	Misc.saveGame()
+	SFX.play("savequit.wav")
 	paused = false
-	Misc.unpause()
-	Misc.saveGame();
-	Misc.exitEngine();
+	Routine.run(function() exitscreen = true Routine.wait(1.8, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function quitonly()
-	--Graphics.drawScreen{color = Color.black.. opacity,priority = 10}
-	--Audio.MusicVolume(0)
-	--SFX.play("nosave.wav")
-	--Routine.wait(1.0, true)
-	paused = false
-	Misc.unpause()
-	Misc.exitEngine();
+	Graphics.drawScreen{color = Color.black, priority = 10}
+	Audio.MusicVolume(0)
+	SFX.play("nosave.wav")
+	Routine.run(function() exitscreen = true Routine.wait(0.9, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegame()
@@ -122,27 +145,30 @@ end
 
 local function exitlevelsave()
 	paused = false
-	Misc.unpause()
-	Misc.saveGame();
-	Level.exit()
+	Audio.MusicVolume(0)
+	SFX.play("world_warp.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(0.7, true) Misc.unpause() Audio.MusicVolume(nil) Misc.saveGame() Level.exit() end)
 end
 
 local function exitlevel()
 	paused = false
-	Misc.unpause()
-	Level.exit()
+	Audio.MusicVolume(0)
+	SFX.play("quitmenu_close.wav")
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function restartlevel()
 	paused = false
-	Misc.unpause()
-	Level.load(Level.filename())
+	Audio.MusicVolume(0)
+	SFX.play("skip-intro.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(1.1, true) Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
 	paused = false
-	Misc.unpause()
-	Level.load("MALC - HUB.lvlx", nil, nil)
+	Audio.MusicVolume(0)
+	SFX.play("skip-intro.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(1.1, true) Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
 local function returntomainchar()
@@ -347,7 +373,7 @@ local function characterchange13_2p()
 	end
 end
 
-local function costumechange()
+local function costumechangeright()
 	SFX.play("charcost_costume.ogg")
 	SFX.play("charcost-selected.wav")
 	local costumes = playerManager.getCostumes(player.character)
@@ -357,6 +383,22 @@ local function costumechange()
 
 	if costumeIdx ~= nil then
 		player:setCostume(costumes[costumeIdx + 1])
+	else
+		player:setCostume(costumes[1])
+		onePressedState = true
+	end
+end
+
+local function costumechangeleft()
+	SFX.play("charcost_costume.ogg")
+	SFX.play("charcost-selected.wav")
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	
+	local costumeIdx = table.ifind(costumes,currentCostume)
+
+	if costumeIdx ~= nil then
+		player:setCostume(costumes[costumeIdx - 1])
 	else
 		player:setCostume(costumes[1])
 		onePressedState = true
@@ -426,20 +468,6 @@ local function drawPauseMenu(y, alpha)
 		if not Level.name() == "MALC - HUB" then
 			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
 		end
-		if SaveData.disableX2char == 0 then
-			table.insert(pause_options, {name="Change Character", action = characterchange});
-		end
-		if SaveData.disableX2char == 1 then
-			table.insert(pause_options, {name="Change 1P's Character", action = characterchange13});
-		end
-		if SaveData.disableX2char == 1 then
-			if Player.count() == 2 then
-				table.insert(pause_options, {name="Change 2P's Character", action = characterchange13_2p});
-			end
-		end
-		if SaveData.disableX2char == 0 then
-			table.insert(pause_options, {name="Change Costume", action = costumechange});
-		end
 		if not Level.filename() == "SMAS - DLC World.lvlx" then
 			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
 		end
@@ -449,6 +477,7 @@ local function drawPauseMenu(y, alpha)
 		if SaveData.disableX2char == 0 then
 			table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
 		end
+		table.insert(pause_options, {name="Character Options", action = switchtochar});
 		table.insert(pause_options, {name="Go Back to the Main Menu", action = mainmenu});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
@@ -478,6 +507,69 @@ local function drawPauseMenu(y, alpha)
 	return h;
 end
 
+local function drawCharacterMenu(y, alpha)
+	local name = "Super Mario All-Stars++"
+	local levelcurrent = "Paused."
+	local levelname = Level.name()
+	--local font = textblox.FONT_SPRITEDEFAULT3X2;
+	
+	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
+	local w,h = layout.width, layout.height
+	textplus.render{layout = layout, x = 160 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout2, x = 780 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
+	
+	h = h+16+8--font.charHeight;
+	y = y+h;
+	
+	
+	if(pause_options_char == nil) then
+		pause_options_char = 
+		{
+			{name2="Go Back", action=pausemenureturn}
+		}
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options_char, {name2="Change Character", action = characterchange});
+		end
+		if SaveData.disableX2char == 1 then
+			table.insert(pause_options_char, {name2="Change 1P's Character", action = characterchange13});
+		end
+		if SaveData.disableX2char == 1 then
+			if Player.count() == 2 then
+				table.insert(pause_options_char, {name2="Change 2P's Character", action = characterchange13_2p});
+			end
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
+		end
+	end
+	for k,v in ipairs(pause_options_char) do
+		local c = 0xFFFFFF00;
+		local n = v.name2;
+		if(v.inactive) then
+			c = 0x99999900;
+		end
+		if(k == pause_index_char+1) then
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
+		end
+			
+		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
+		local h2 = layout.height
+		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
+		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
+		h2 = h2+2+6--font.charHeight;
+		y = y+h2;
+		h = h+h2;
+	end
+
+	
+	return h;
+end
+
 function pausemenu2.onDraw()
 	if paused then
 		Misc.pause()
@@ -491,13 +583,21 @@ function pausemenu2.onDraw()
 		--Fix for anything calling Misc.unpause
 		Misc.pause();
 	end
+	if paused_char then
+		if(pause_box == nil) then
+			pause_height = drawCharacterMenu(-600,0);
+			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+		end
+		pause_box:Draw(5, 0x00000077);
+		drawCharacterMenu(300-pause_height*0.5,1)
+		
+		--Fix for anything calling Misc.unpause
+		Misc.pause();
+	end
+	if exitscreen then
+		Graphics.drawScreen{color = Color.black, priority = 10}
+	end
 end
-
---function pausemenu2.onDraw()
---	if(paused) then
---		drawPauseMenu(-600,0)
---	end
---end
 
 local lastPauseKey = false;
 
@@ -505,6 +605,7 @@ function pausemenu2.onInputUpdate()
 	if(player.keys.pause and not lastPauseKey) then
 		if paused then
 			paused = false
+			paused_char = false
 			pauseactive = false
 			SFX.play("pausemenu-closed.wav")
 			cooldown = 5
@@ -519,6 +620,9 @@ function pausemenu2.onInputUpdate()
 		end
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
+		end
+		if pause_index_char == 0 then
+			pause_index_char = pause_index_char + 1
 		end
 	end
 	lastPauseKey = player.keys.pause;
@@ -561,6 +665,48 @@ function pausemenu2.onInputUpdate()
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				--SFX.play("quitmenu.wav")
 				pause_options[pause_index+1].action();
+				Misc.unpause();
+			end
+		end
+	end
+	if(paused_char and pause_options_char) then
+		if(player.keys.down == KEYS_PRESSED) then
+			repeat
+				pause_index_char = (pause_index_char+1)%#pause_options_char;
+			until(not pause_options_char[pause_index_char+1].inactive);
+			SFX.play("pausemenu_cursor.wav")
+		elseif(player.keys.up == KEYS_PRESSED) then
+			repeat
+				pause_index_char = (pause_index_char-1)%#pause_options_char;
+			until(not pause_options_char[pause_index_char+1].inactive);
+			SFX.play("pausemenu_cursor.wav")
+		elseif(player.keys.jump == KEYS_PRESSED) then
+			player:mem(0x11E,FIELD_BOOL,false)
+			for i=1, 3 do
+				for k,v in ipairs(pause_options_char[i]) do
+					if v then
+						v.activeLerp = 0
+					end
+				end
+			end
+			--SFX.play("quitmenu.wav")
+			pause_options_char[pause_index_char+1].action();
+			Misc.unpause();
+		end
+		if player.count() == 2 then
+			if(player2.keys.down == KEYS_PRESSED) then
+				repeat
+					pause_index_char = (pause_index_char+1)%#pause_options_char;
+				until(not pause_options_char[pause_index_char+1].inactive);
+				SFX.play("pausemenu_cursor.wav")
+			elseif(player2.keys.up == KEYS_PRESSED) then
+				repeat
+					pause_index_char = (pause_index_char-1)%#pause_options_char;
+				until(not pause_options_char[pause_index_char+1].inactive);
+				SFX.play("pausemenu_cursor.wav")
+			elseif(player2.keys.jump == KEYS_PRESSED) then
+				--SFX.play("quitmenu.wav")
+				pause_options_char[pause_index_char+1].action();
 				Misc.unpause();
 			end
 		end

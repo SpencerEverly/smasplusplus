@@ -186,8 +186,8 @@ function onTick()
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("costumes/mario/9-SMW-Pirate/starman-alt.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/9-SMW-Pirate/starman.ogg")
-		starman.duration[996] = 2200
-		starman.duration[994] = 2200
+		starman.duration[996] = 1410
+		starman.duration[994] = 1410
 	end
 	if currentCostume == "11-SMA1" then
 		littleDialogue.characterNames[1] = "Mario"

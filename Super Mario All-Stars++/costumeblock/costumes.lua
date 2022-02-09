@@ -30,23 +30,7 @@ function costumeblock.onPostBlockHit(v, fromUpper, playerOrNil)
 			end
 		end
 	end
-	--if CHARACTER_STEVE then
-		--playerManager.getCostume(character)
-		--local steveskins = Misc.listLocalFiles("costumes/steve/")
-		--for i = 1, #steveskins do
-			--if string.endswith(steveskins[i], ".lua") then
-				--table.insert(steveskinfiles, files[i])
-			--end
-			--if #steveskinfiles ~= 0 then
-				--return
-			--end
-			--if #steveskinfiles == 1 then
-				--require(steveskinfiles[1])
-			--end
-		--steve.skinSettings.name = require(steveskinfiles)
-		--end
-	--end
-	local newCostume = (oldCostume[character]+1) % (#costumes[character] + 1);
+	local newCostume = (oldCostume[character]-1) % (#costumes[character] - 1);
 	playerManager.setCostume(character,costumes[character][newCostume])
 	oldCostume[character] = newCostume
 	
