@@ -16,9 +16,6 @@ local wandR = require("wandRr")
  
 function onStart()
 	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == nil then
-		Misc.showRichDialog("EXE Extraction Install detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this way. As such,\ncustom map music and map3d will be disabled. Please use the official installination\non your own computer to make the game work as intended.\n\nThank you!", true)
-	end
-	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == true then
 		pause_music = require("map_music")
 		if SaveData.disableX2char == 0 then
 			map3d = require("mapp3d")
@@ -26,6 +23,9 @@ function onStart()
 			map3d.BGPlane.tile = 394
 			map3d.Light.enabled = false
 		end
+	end
+	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == true then
+		Misc.showRichDialog("EXE Extraction Install detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this way. As such,\ncustom map music and map3d will be disabled. Please use the official installination\non your own computer to make the game work as intended.\n\nThank you!", true)
 	end
 	if SaveData.disableX2char == 0 then
 		inventory = require("customInventory")

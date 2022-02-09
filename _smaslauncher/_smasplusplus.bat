@@ -262,6 +262,15 @@ cd _smaslauncher
 cd 7zip_smbx2
 rename "SMBX2_Installer.exe" "SMBX2b4.4.1 Installer.exe"
 cd..
+cd..
+cd data
+cd worlds
+cd "Super Mario All-Stars"""
+copy NUL exeextracted
+cd..
+cd..
+cd..
+cd _smaslauncher
 start cmdmp3win.exe bootLauncher_coin.wav
 echo Done. Dependencies will now be rechecked in 5 seconds.
 @timeout 5 /nobreak>nul
