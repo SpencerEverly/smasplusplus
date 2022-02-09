@@ -89,8 +89,8 @@ end
 
 function jukebox.setMusicBox(id, x, y)
     if not isOverworld then return end
-    local m = Musicbox.getIntersecting(x, y, x+32, y+32)[1]
-    m.id = id
+    local mus = Musicbox.getIntersecting(x, y, x+32, y+32)[1]
+    mus.id = id
 end
 
 function jukebox.playTrack(trackID)
