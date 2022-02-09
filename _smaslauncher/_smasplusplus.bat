@@ -127,7 +127,7 @@ echo Make sure that you are in an fast internet connection hotspot,
 echo then press enter when you are ready.
 pause
 start cmdmp3win.exe bootLauncher_dlSFX.wav
-echo Now starting... DON^'T CLOSE THIS WINDOW^^, OR ELSE THE DOWNLOAD WILL FAIL!
+echo Now starting... DON^'T CLOSE THIS WINDOW^^, OR ELSE THE DOWNLOAD WILL FAIL^^!
 cd..
 cd data
 cd worlds
@@ -135,7 +135,12 @@ mkdir "__PortableGit"
 cd..
 cd..
 cd _smaslauncher
-start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\PortableGit\" "SMBX2\data\worlds\__PortableGit"
+start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\__PortableGit\" "SMBX2\data\worlds\__PortableGit"
+echo Make sure that the ^"^_^_PortableGit^" folder has moved to the worlds folder.
+echo This is so that the episode can update whenever choosing to update on the launcher.
+echo.
+echo Press enter if the folder has been moved. If not, move it yourself.
+pause
 cd..
 cd data
 cd worlds
@@ -143,6 +148,25 @@ PING -n 5 127.0.0.1>nul
 call __PortableGit\bin\git.exe init
 call __PortableGit\bin\git.exe remote add origin https://github.com/SpencerEverly/smasplusplus.git
 call __PortableGit\bin\git.exe pull origin main
+echo Super Mario All-Stars^+^+ is now installed!
+echo.
+echo We still need to do some post-prequisites before letting you into the episode,
+echo such as fixing the map.
+echo.
+echo Press enter to begin.
+pause
+cd..
+cd..
+start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\__7zip\" "SMBX2\data\worlds\__7zip\"
+echo Make sure the 7zip folder from the ^_smaslaucher folder has been moved to the
+echo SMAS^+^+ episode folder, then press enter.
+pause
+cd..
+cd data
+cd worlds
+cd "Super Mario All-Stars++"
+__7zip\7zG.exe x -ao "__World Map.7z"
+cd..
 cd..
 cd..
 cd _smaslauncher
@@ -150,8 +174,8 @@ start cmdmp3win.exe bootLauncher_coin.wav
 echo Super Mario All-Stars^+^+ is now installed!
 echo.
 echo Pressing enter will recheck dependencies. Make sure the episode is IN the
-echo worlds folder before you press enter^^! ^(The PortableGit folder in the data folder
-echo will be used for updating the episode, this is normal^.)
+echo worlds folder before you press enter^^! ^(The PortableGit and 7zip folders in the
+echo data and episode folders will be used for updating the episode, this is normal^.)
 pause
 goto start
 
@@ -168,7 +192,7 @@ goto exeto7zip
 
 :exeto7zip
 echo Moving file to the 7zip folder...
-move "SMBX2b4.4.1 Installer.exe" "7zip\"
+move "SMBX2b4.4.1 Installer.exe" "7zip_smbx2\"
 goto choosesmbx2install
 
 :choosesmbx2install
@@ -202,9 +226,9 @@ echo.
 echo Install SMBX2 to the folder BEFORE the SMBX2 folder^, or this launcher will still say
 echo that SMBX2 doesn't exist^^!
 echo.
-echo After installing^, you can rename the SMBX2 folder to anything you want.
+echo After installing^, the window will automatically update.
 echo.
-cd 7zip
+cd 7zip_smbx2
 set smbx2exe=SMBX2b4.4.1 Installer.exe
 "%smbx2exe%"
 cd..
@@ -225,7 +249,7 @@ echo.
 echo To start extracting^, press enter.
 pause
 echo Renaming EXE...
-cd 7zip
+cd 7zip_smbx2
 rename "SMBX2b4.4.1 Installer.exe" "SMBX2_Installer.exe"
 echo Extracting EXE...
 7zG.exe x "SMBX2_Installer.exe"
@@ -235,7 +259,7 @@ start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\7zip\SMBX2\" "SMBX2\
 echo Renaming the EXE back to normal...
 cd SMBX2
 cd _smaslauncher
-cd 7zip
+cd 7zip_smbx2
 rename "SMBX2_Installer.exe" "SMBX2b4.4.1 Installer.exe"
 cd..
 start cmdmp3win.exe bootLauncher_coin.wav
@@ -301,6 +325,7 @@ echo.
 echo.
 echo.
 echo.
+echo.
 set s=Here you can download the latest updates and releases.
 for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
 set s=!s:~1,%size%!& echo(!s!
@@ -329,18 +354,21 @@ goto simplelaunch
 :updatesmas2
 cls
 cmdmp3win.exe bootLauncher_dlSFX.wav
-pushd "%~dp0"
 echo Pulling the latest update from GitHub...
 cd..
 cd data
 cd worlds
+call __PortableGit\bin\git.exe fetch --all
+call __PortableGit\bin\git.exe reset --hard
 call __PortableGit\bin\git.exe pull origin main
 cls
+cd "Super Mario All-Stars++"
+__7zip\7zG.exe x -ao "__World Map.7z"
+cd..
 cd..
 cd..
 cd _smaslauncher
 echo The episode has been updated^^! Restarting in 5 seconds...
-start "" "%~dp0"
 @timeout 5 /nobreak>nul
 cls
 goto start
@@ -352,7 +380,8 @@ set a=^&^#61^;
 mode con:cols=80 lines=30
 color 06
 start cmdmp3win.exe bootLauncher_start.wav
-echo v2.0.0
+echo v2.0.1
+echo.
 echo.
 set s=Hello^^! Welcome to the Super Mario All-Stars^+^+ launcher.
 for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
