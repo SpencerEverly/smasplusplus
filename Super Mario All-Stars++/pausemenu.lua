@@ -161,14 +161,14 @@ local function restartlevel()
 	paused = false
 	Audio.MusicVolume(0)
 	SFX.play("skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.1, true) Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
 	paused = false
 	Audio.MusicVolume(0)
 	SFX.play("skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.1, true) Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
 local function returntomainchar()
