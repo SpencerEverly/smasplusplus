@@ -428,15 +428,12 @@ local function wip()
 end
 
 local function drawPauseMenu(y, alpha)
-	local name = "<color rainbow>SUPER MARIO ALL-STARS++</color>"
-	local levelcurrent = "Paused."
+	local name = "<color rainbow>Paused.</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.red..1.0, font=pausefont2}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 235 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout2, x = 835 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 7}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -512,7 +509,7 @@ function pausemenu2.onDraw()
 	if paused then
 		if(pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)

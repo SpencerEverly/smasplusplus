@@ -586,15 +586,12 @@ local function dlcmapload()
 end
 
 local function drawPauseMenu(y, alpha)
-	local name = "<color rainbow>SUPER MARIO ALL-STARS++</color>"
-	local levelcurrent = "Paused."
+	local name = "<color rainbow>Paused.</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.red..1.0, font=pausefont2}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 235 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
-	textplus.render{layout = layout2, x = 835 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -653,7 +650,7 @@ local function drawPauseMenu(y, alpha)
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
 		local h2 = layout.height
-		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
+		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 8}
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
 		h2 = h2+2+6--font.charHeight;
 		y = y+h2;
@@ -665,15 +662,12 @@ local function drawPauseMenu(y, alpha)
 end
 
 local function drawCharacterMenu(y, alpha)
-	local name = "SUPER MARIO ALL-STARS++"
-	local levelcurrent = "Paused."
+	local name = "Paused."
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.red..1.0, font=pausefont2}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 235 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
-	textplus.render{layout = layout2, x = 835 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -685,6 +679,7 @@ local function drawCharacterMenu(y, alpha)
 		{
 			{name2="Character Options", action=nothing}
 		}
+		
 		table.insert(pause_options_char, {name2="Go Back", action = pausemenureturn});
 		if SaveData.disableX2char == 0 then
 			table.insert(pause_options_char, {name2="Change Character (Left)", action = characterchangeleft});
@@ -739,7 +734,7 @@ function pausemenu2.onDraw()
 		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)
@@ -754,7 +749,7 @@ function pausemenu2.onDraw()
 		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawCharacterMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		pause_box:Draw(5, 0x00000077);
 		drawCharacterMenu(300-pause_height*0.5,1)
