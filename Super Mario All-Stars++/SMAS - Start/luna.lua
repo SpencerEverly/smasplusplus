@@ -581,8 +581,18 @@ function onEvent(eventName)
 		end
 	end
 	if eventName == "BootWSMBA" then
-		Misc.loadEpisode("Where SMB Attacks (SMAS++)")
-		if Misc.loadEpisode("Where SMB Attacks (SMAS++)") == false then
+		Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
+		if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
+			--SFX.play("wrong.ogg")
+			triggerEvent("WSMBANotFound")
+			player.jumpKeyPressing = true
+			player.runKeyPressing = true
+			active = false
+		end
+	end
+	if eventName == "BootWSMBAOG" then
+		Misc.loadEpisode("Where SMB Attacks (Original)")
+		if Misc.loadEpisode("Where SMB Attacks (Original)") == false then
 			--SFX.play("wrong.ogg")
 			triggerEvent("WSMBANotFound")
 			player.jumpKeyPressing = true

@@ -11,6 +11,9 @@ local active2 = false
 local ready = false
 local exitscreen = false
 
+local pausefont = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+local pausefont2 = textplus.loadFont("littleDialogue/font/smb1-a.ini")
+
 local cooldown = 0
 
 onePressedState = false
@@ -44,8 +47,8 @@ local pause_width = 700;
 local pause_options;
 local pause_options_char;
 local character_options;
-local pause_index = 0;
-local pause_index_char = 0;
+local pause_index = 0
+local pause_index_char = 0
 
 local pauseactive = false
 local charactive = false
@@ -65,6 +68,10 @@ function pausemenu2.onInitAPI()
 	ready = true
 end
 
+local function nothing()
+	--Nothing happens here
+end
+
 local function unpause()
 	paused = false
 	Misc.unpause()
@@ -77,30 +84,19 @@ end
 
 local function switchtochar()
 	SFX.play("quitmenu.wav")
-	cooldown = 5
-	if(player.keys.jump == KEYS_PRESSED) then
-		player.rawKeys.jump = false
-	end
 	pause_index_char = 0
-	paused = false
+	Routine.run(function() Routine.wait(0.01, true) pause_index_char = 1 end)
+	cooldown = 1
 	paused_char = true
-	if cooldown <= 0 then
-		player:mem(0x11E,FIELD_BOOL,true)
-	end
+	paused = false
 end
 
 local function pausemenureturn()
 	SFX.play("quitmenu_close.wav")
-	cooldown = 5
-	if(player.keys.jump == KEYS_PRESSED) then
-		player.rawKeys.jump = false
-	end
 	pause_index_char = 0
-	paused_char = false
+	cooldown = 1
 	paused = true
-	if cooldown <= 0 then
-		player:mem(0x11E,FIELD_BOOL,true)
-	end
+	paused_char = false
 end
 
 local function x2modedisable()
@@ -169,12 +165,6 @@ local function restartlevelhub()
 	Audio.MusicVolume(0)
 	SFX.play("skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
-end
-
-local function returntomainchar()
-	SFX.play("charcost-close.wav")
-	pauseactive = true
-	charactive = false
 end
 
 local function warpzonehub()
@@ -428,16 +418,15 @@ local function dlcmapload()
 end
 
 local function drawPauseMenu(y, alpha)
-	local name = "Super Mario All-Stars++"
+	local name = "SUPER MARIO ALL-STARS++"
 	local levelcurrent = "Paused."
-	local levelname = Level.name()
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.red..1.0, font=pausefont2}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 160 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
-	textplus.render{layout = layout2, x = 780 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout, x = 235 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout2, x = 835 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -508,16 +497,15 @@ local function drawPauseMenu(y, alpha)
 end
 
 local function drawCharacterMenu(y, alpha)
-	local name = "Super Mario All-Stars++"
+	local name = "SUPER MARIO ALL-STARS++"
 	local levelcurrent = "Paused."
-	local levelname = Level.name()
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.red..1.0, font=pausefont2}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 160 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
-	textplus.render{layout = layout2, x = 780 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout, x = 235 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout2, x = 835 - w*0.5, y = y, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -527,8 +515,9 @@ local function drawCharacterMenu(y, alpha)
 	if(pause_options_char == nil) then
 		pause_options_char = 
 		{
-			{name2="Go Back", action=pausemenureturn}
+			{name2="Character Options", action=nothing}
 		}
+		table.insert(pause_options_char, {name2="Go Back", action = pausemenureturn});
 		if SaveData.disableX2char == 0 then
 			table.insert(pause_options_char, {name2="Change Character", action = characterchange});
 		end
@@ -583,7 +572,11 @@ function pausemenu2.onDraw()
 		--Fix for anything calling Misc.unpause
 		Misc.pause();
 	end
+	if not paused then
+		pause_box = nil
+	end
 	if paused_char then
+		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawCharacterMenu(-600,0);
 			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
@@ -593,6 +586,9 @@ function pausemenu2.onDraw()
 		
 		--Fix for anything calling Misc.unpause
 		Misc.pause();
+	end
+	if not paused_char then
+		pause_box = nil
 	end
 	if exitscreen then
 		Graphics.drawScreen{color = Color.black, priority = 10}
@@ -647,7 +643,6 @@ function pausemenu2.onInputUpdate()
 					end
 				end
 			end
-			--SFX.play("quitmenu.wav")
 			pause_options[pause_index+1].action();
 			Misc.unpause();
 		end
@@ -663,7 +658,6 @@ function pausemenu2.onInputUpdate()
 				until(not pause_options[pause_index+1].inactive);
 				SFX.play("pausemenu_cursor.wav")
 			elseif(player2.keys.jump == KEYS_PRESSED) then
-				--SFX.play("quitmenu.wav")
 				pause_options[pause_index+1].action();
 				Misc.unpause();
 			end
@@ -681,15 +675,6 @@ function pausemenu2.onInputUpdate()
 			until(not pause_options_char[pause_index_char+1].inactive);
 			SFX.play("pausemenu_cursor.wav")
 		elseif(player.keys.jump == KEYS_PRESSED) then
-			player:mem(0x11E,FIELD_BOOL,false)
-			for i=1, 3 do
-				for k,v in ipairs(pause_options_char[i]) do
-					if v then
-						v.activeLerp = 0
-					end
-				end
-			end
-			--SFX.play("quitmenu.wav")
 			pause_options_char[pause_index_char+1].action();
 			Misc.unpause();
 		end
@@ -705,7 +690,6 @@ function pausemenu2.onInputUpdate()
 				until(not pause_options_char[pause_index_char+1].inactive);
 				SFX.play("pausemenu_cursor.wav")
 			elseif(player2.keys.jump == KEYS_PRESSED) then
-				--SFX.play("quitmenu.wav")
 				pause_options_char[pause_index_char+1].action();
 				Misc.unpause();
 			end
@@ -716,6 +700,14 @@ end
 function pausemenu2.onTick()
 	if(paused) then
 		Misc.pause();
+	end
+	if(paused_char) then
+		if pause_index_char == 0 then
+			pause_index_char = 1
+		end
+		if pause_options_char == 0 then
+			pause_options_char = 1
+		end
 	end
 end
 
