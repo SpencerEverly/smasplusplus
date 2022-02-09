@@ -17,10 +17,10 @@ local wandR = require("wandRr")
 local pause_music = require("map_music")
  
 function onStart()
-	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == nil then
+	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted.txt") == nil then
 		--Nothing
 	end
-	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted") == true then
+	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted.txt") == true then
 		Misc.showRichDialog("EXE Extraction installination detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this\nway. Please use the official installination on your own\ncomputer to make the game work as intended.\n\nThank you!", true)
 	end
 	if SaveData.disableX2char == 0 then
