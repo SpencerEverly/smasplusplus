@@ -89,11 +89,11 @@ jukebox.setMusicBox(755, 1856, 736);
 jukebox.setMusicBox(755, 1952, 672);
 
 --SMB1 World 5
-jukebox.setMusicBox(756, 2112, 672);
-jukebox.setMusicBox(756, 2144, 736);
-jukebox.setMusicBox(756, 2144, 672);
-jukebox.setMusicBox(756, 2176, 864);
-jukebox.setMusicBox(756, 2304, 928);
+jukebox.setMusicBox(756, 2112, 672)
+jukebox.setMusicBox(756, 2144, 736)
+jukebox.setMusicBox(756, 2144, 672)
+jukebox.setMusicBox(756, 2176, 864)
+jukebox.setMusicBox(756, 2304, 928)
 
 --SMB1 World 6
 jukebox.setMusicBox(757, 2464, 928);
