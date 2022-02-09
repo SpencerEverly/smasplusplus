@@ -32,34 +32,34 @@ jukebox.setTrack(771, "_OST/The Lost Levels/World 8.ogg");
 jukebox.setTrack(772, "_OST/Super Mario Bros Spencer/World Music/World 1.ogg");
 jukebox.setTrack(773, "_OST/Super Mario Bros Spencer/World Music/World 2.ogg");
 
-	--SMB1 Secret Warps
-jukebox.setMusicBox(750, 256, 704);
-jukebox.setMusicBox(750, 320, 704);
-jukebox.setMusicBox(750, 736, 960);
-jukebox.setMusicBox(750, 800, 960);
-jukebox.setMusicBox(750, 1312, 960);
-jukebox.setMusicBox(750, 1376, 960);
-jukebox.setMusicBox(750, 1792, 960);
-jukebox.setMusicBox(750, 1792, 1024);
-jukebox.setMusicBox(750, 1792, 1120);
-jukebox.setMusicBox(750, 2112, 1184);
-jukebox.setMusicBox(750, 2176, 1184);
-jukebox.setMusicBox(750, 2720, 1632);
-jukebox.setMusicBox(750, 2752, 1664);
-jukebox.setMusicBox(750, 2784, 1632);
+--SMB1 Secret Warps
+jukebox.setMusicBox(750, 256, 704)
+jukebox.setMusicBox(750, 320, 704)
+jukebox.setMusicBox(750, 736, 960)
+jukebox.setMusicBox(750, 800, 960)
+jukebox.setMusicBox(750, 1312, 960)
+jukebox.setMusicBox(750, 1376, 960)
+jukebox.setMusicBox(750, 1792, 960)
+jukebox.setMusicBox(750, 1792, 1024)
+jukebox.setMusicBox(750, 1792, 1120)
+jukebox.setMusicBox(750, 2112, 1184)
+jukebox.setMusicBox(750, 2176, 1184)
+jukebox.setMusicBox(750, 2720, 1632)
+jukebox.setMusicBox(750, 2752, 1664)
+jukebox.setMusicBox(750, 2784, 1632)
 
 --Game Select
-jukebox.setMusicBox(751, -3040, -2048);
-jukebox.setMusicBox(751, -3040, -1760);
-jukebox.setMusicBox(751, -2912, -1760);
-jukebox.setMusicBox(751, -2880, -1664);
-jukebox.setMusicBox(751, -2624, -1760);
-jukebox.setMusicBox(751, -2336, -1760);
-jukebox.setMusicBox(751, -2048, -1760);
-jukebox.setMusicBox(751, -1760, -1760);
-jukebox.setMusicBox(751, -1472, -1760);
-jukebox.setMusicBox(751, -1184, -1760);
-jukebox.setMusicBox(751, -896, -1760);
+jukebox.setMusicBox(751, -3040, -2048)
+jukebox.setMusicBox(751, -3040, -1760)
+jukebox.setMusicBox(751, -2912, -1760)
+jukebox.setMusicBox(751, -2880, -1664)
+jukebox.setMusicBox(751, -2624, -1760)
+jukebox.setMusicBox(751, -2336, -1760)
+jukebox.setMusicBox(751, -2048, -1760)
+jukebox.setMusicBox(751, -1760, -1760)
+jukebox.setMusicBox(751, -1472, -1760)
+jukebox.setMusicBox(751, -1184, -1760)
+jukebox.setMusicBox(751, -896, -1760)
 
 --SMB1 World 1
 jukebox.setMusicBox(752, 160, 352);
