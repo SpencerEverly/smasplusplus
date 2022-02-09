@@ -1,16 +1,19 @@
--- megaluavania.lua v0.9.6
+-- megaluavania.lua 2.1
 -- By Spinda
 -- drawImageRotated by Rednaxela
+-- Ported to Beta 4 by Spencer Everly
 
 local megaluavania = {}
 local colliders = API.load("colliders")
 local rng = API.load("rng")
-local inputos = API.load("inputos")
-local textblox = API.load("textblox")
+local textplus = API.load("textplus")
 local playerAnim = API.load("playerAnim")
+local particles = API.load("particles")
 --local savestate = API.load("savestate")
 
-megaluavania.resourcePath = "/megaluavania"
+local cooldown = 0
+
+megaluavania.resourcePath = "megaluavania/"
 megaluavania.HCOLOR_RED = 0
 megaluavania.HCOLOR_BLUETOP = 1
 megaluavania.HCOLOR_BLUE = 1
@@ -19,6 +22,7 @@ megaluavania.HCOLOR_BLUELEFT = 3
 megaluavania.HCOLOR_BLUERIGHT = 4
 megaluavania.HCOLOR_GREEN = 5
 megaluavania.HCOLOR_PURPLE = 6
+megaluavania.HCOLOR_YELLOW = 7
 megaluavania.BCOLOR_WHITE = 0
 megaluavania.BCOLOR_CYAN = 1
 megaluavania.BCOLOR_ORANGE = 2
@@ -26,6 +30,7 @@ megaluavania.BCOLOR_GREEN = 3
 megaluavania.BULLET_NORMAL = 0
 megaluavania.BULLET_ARROW = 1
 megaluavania.BULLET_REVARROW = 2
+megaluavania.BULLET_BONE = 3
 megaluavania.PHASE_ATTACKCHOICE = 0
 megaluavania.PHASE_RESULT = 1
 megaluavania.PHASE_ENEMYDIALOGUE = 2
@@ -53,31 +58,22 @@ megaluavania.DIRECTION_LEFT = 3
 megaluavania.BOUNDS_BOTH = 0
 megaluavania.BOUNDS_NONE = 1
 
-local determinationGFX = Graphics.loadImage("determination.png") or Graphics.loadImage(megaluavania.resourcePath.."determination.png")
-local determinationYGFX = Graphics.loadImage("determinationYellow.png") or Graphics.loadImage(megaluavania.resourcePath.."determinationYellow.png")
-local dotumCheGFX = Graphics.loadImage("dotumChe.png") or Graphics.loadImage(megaluavania.resourcePath.."dotumChe.png")
-local damageGFX = Graphics.loadImage("damage.png") or Graphics.loadImage(megaluavania.resourcePath.."damage.png")
-local nameGFX = Graphics.loadImage("name.png") or Graphics.loadImage(megaluavania.resourcePath.."name.png")
+local determinationGFX = Misc.resolveFile("megaluavania/determination.png")
+local determinationYGFX = Misc.resolveFile("megaluavania/determinationYellow.png")
+local dotumCheGFX = Misc.resolveFile("megaluavania/dotumChe.png")
+local damageGFX = Misc.resolveFile("megaluavania/damage.png")
+local nameGFX = Misc.resolveFile("megaluavania/name.png")
 
-local determinationFProps = {charWidth = 16,charHeight = 32,image = determinationGFX,kerning = 0}
-megaluavania.determination = textblox.Font(textblox.FONTTYPE_SPRITE,determinationFProps)
-
-local determinationYFProps = {charWidth = 16,charHeight = 32,image = determinationYGFX,kerning = 0}
-megaluavania.determinationY = textblox.Font(textblox.FONTTYPE_SPRITE,determinationYFProps)
-
-local dotumCheFProps = {charWidth = 12,charHeight = 20,image = dotumCheGFX,kerning = 0}
-megaluavania.dotumChe = textblox.Font(textblox.FONTTYPE_SPRITE,dotumCheFProps)
-
-local damageFProps = {charWidth = 38,charHeight = 28,image = damageGFX,kerning = 0}
-megaluavania.damageF = textblox.Font(textblox.FONTTYPE_SPRITE,damageFProps) 
-
-local nameFProps = {charWidth = 18,charHeight = 24,image = nameGFX,kerning = -3}
-megaluavania.nameF = textblox.Font(textblox.FONTTYPE_SPRITE,nameFProps)
+megaluavania.determination = textplus.loadFont("littleDialogue/font/determination.ini")
+megaluavania.determinationY = textplus.loadFont("littleDialogue/font/determinationYellow.ini")
+megaluavania.dotumChe = textplus.loadFont("littleDialogue/font/dotumChe.ini")
+megaluavania.damageF = textplus.loadFont("littleDialogue/font/damage.ini") 
+megaluavania.nameF = textplus.loadFont("littleDialogue/font/name.ini")
 
 megaluavania.determinationProps = {	width = 560,
 									height = 130,
-									scaleMode = textblox.SCALE_AUTO,
-									boxType = textblox.BOXTYPE_NONE,
+									scaleMode = textplus.SCALE_AUTO,
+									boxType = textplus.BOXTYPE_NONE,
 									font = megaluavania.determination,
 									visible = true}
 
@@ -85,8 +81,8 @@ megaluavania.determinationProps = {	width = 560,
 
 megaluavania.determinationYProps = {width = 560,
 									height = 130,
-									scaleMode = textblox.SCALE_AUTO,
-									boxType = textblox.BOXTYPE_NONE,
+									scaleMode = textplus.SCALE_AUTO,
+									boxType = textplus.BOXTYPE_NONE,
 									font = megaluavania.determinationY,
 									visible = true}
 							
@@ -94,8 +90,8 @@ megaluavania.determinationYProps = {width = 560,
 
 megaluavania.dotumCheProps = {	width = 160,
 								height = 180,
-								scaleMode = textblox.SCALE_AUTO,
-								boxType = textblox.BOXTYPE_NONE,
+								scaleMode = textplus.SCALE_AUTO,
+								boxType = textplus.BOXTYPE_NONE,
 								font = megaluavania.dotumChe,
 								visible = true}
 						
@@ -103,11 +99,11 @@ megaluavania.dotumCheProps = {	width = 160,
 
 megaluavania.damageProps = {width = 300,
 							height = 30,
-							scaleMode = textblox.SCALE_AUTO,
-							boxType = textblox.BOXTYPE_NONE,
+							scaleMode = textplus.SCALE_AUTO,
+							boxType = textplus.BOXTYPE_NONE,
 							font = megaluavania.damageF,
 							visible = true,
-							boxAnchorX = textblox.HALIGN_MID}
+							boxAnchorX = textplus.HALIGN_MID}
 
 local fight = Graphics.loadImage("fight.png") or Graphics.loadImage(megaluavania.resourcePath.."fight.png")
 local act = Graphics.loadImage("act.png") or Graphics.loadImage(megaluavania.resourcePath.."act.png")
@@ -153,6 +149,7 @@ local heartFlee = {}
 heartFlee[0] = Graphics.loadImage("heartGTFO0.png") or Graphics.loadImage(megaluavania.resourcePath.."heartGTFO0.png")
 heartFlee[1] = Graphics.loadImage("heartGTFO1.png") or Graphics.loadImage(megaluavania.resourcePath.."heartGTFO1.png")
 local border = Graphics.loadImage("border.png") or Graphics.loadImage(megaluavania.resourcePath.."border.png")
+local stringGFX = Graphics.loadImage("string.png") or Graphics.loadImage(megaluavania.resourcePath.."string.png")
 
 local battlestartSFX = Audio.SfxOpen(megaluavania.resourcePath.."battlestart.ogg") -- channel 1
 local blockSFX = Audio.SfxOpen(megaluavania.resourcePath.."block.ogg") -- channel 2
@@ -170,6 +167,7 @@ local swingSFX = Audio.SfxOpen(megaluavania.resourcePath.."swing.ogg") -- channe
 
 megaluavania.encounter = {}
 megaluavania.phase = megaluavania.PHASE_ATTACKCHOICE
+megaluavania.choice = megaluavania.CHOICE_FIGHT
 megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
 megaluavania.centerX = megaluavania.CENTER_X
 megaluavania.centerY = megaluavania.CENTER_Y
@@ -212,41 +210,41 @@ megaluavania.saveNPC = 102
 megaluavania.saveEvent = "UTSave"
 megaluavania.blank = Graphics.loadImage(megaluavania.resourcePath.."blank.png")
 
-textblox.overrideMessageBox = true
-textblox.overrideProps =   {scaleMode = textblox.SCALE_FIXED, 
+textplus.overrideMessageBox = true
+textplus.overrideProps =   {scaleMode = textplus.SCALE_FIXED, 
 							startSound = nil,
 							typeSounds = {megaluavania.resourcePath.."typewriter.ogg"},
 							finishSound = nil,
 							closeSound = nil,
 							width = 548,
 							height = 40,
-							bind = textblox.BIND_SCREEN,
+							bind = textplus.BIND_SCREEN,
 							font = megaluavania.determination,
 							speed = 0.75,
-							boxType = textblox.BOXTYPE_MENU,
+							boxType = textplus.BOXTYPE_MENU,
 							boxColor = 0x000000FF,
 							autoTime = true, 
 							pauseGame = true, 
 							inputClose = true, 
-							boxAnchorX = textblox.HALIGN_MID, 
-							boxAnchorY = textblox.VALIGN_MID, 
-							textAnchorX = textblox.HALIGN_TOP, 
-							textAnchorY = textblox.VALIGN_LEFT,
+							boxAnchorX = textplus.HALIGN_MID, 
+							boxAnchorY = textplus.VALIGN_MID, 
+							textAnchorX = textplus.HALIGN_TOP, 
+							textAnchorY = textplus.VALIGN_LEFT,
 							marginX = 6,
 							marginY = 40}
 							
-textblox.overrideProps.borderTable = {}
-textblox.overrideProps.borderTable = {}
-textblox.overrideProps.borderTable["ulImg"] = border
-textblox.overrideProps.borderTable["uImg"] = border
-textblox.overrideProps.borderTable["urImg"] = border
-textblox.overrideProps.borderTable["rImg"] = border
-textblox.overrideProps.borderTable["drImg"] = border
-textblox.overrideProps.borderTable["dImg"] = border
-textblox.overrideProps.borderTable["dlImg"] = border
-textblox.overrideProps.borderTable["lImg"] = border
-textblox.overrideProps.borderTable["thick"] = 5
-textblox.overrideProps.borderTable["col"] = 0xFFFFFFFF
+textplus.overrideProps.borderTable = {}
+textplus.overrideProps.borderTable = {}
+textplus.overrideProps.borderTable["ulImg"] = border
+textplus.overrideProps.borderTable["uImg"] = border
+textplus.overrideProps.borderTable["urImg"] = border
+textplus.overrideProps.borderTable["rImg"] = border
+textplus.overrideProps.borderTable["drImg"] = border
+textplus.overrideProps.borderTable["dImg"] = border
+textplus.overrideProps.borderTable["dlImg"] = border
+textplus.overrideProps.borderTable["lImg"] = border
+textplus.overrideProps.borderTable["thick"] = 5
+textplus.overrideProps.borderTable["col"] = 0xFFFFFFFF
 
 local set = false
 local indexX = 0
@@ -262,7 +260,6 @@ local isGrounded = false
 local moving = 0
 local shakeCounter = 0
 local dummyBlocks = {}
-local choice = 0 -- 0: fight, 1: act, 2: item, 3: mercy
 local actSelection = 1
 local actsTB = {}
 local actsOT = {}
@@ -304,7 +301,7 @@ local turnSet = false
 local funcSet = false
 local dir
 local fightCounter = 0
-local barX
+local barX = -100
 local dmgSet = false
 local newEnemyHP
 local displayEnemyHP
@@ -334,14 +331,22 @@ local bound
 local webDir
 local boxWhite = colliders.Box(0,0,0,0)
 local boxBlack = colliders.Box(0,0,0,0)
-local HPC = colliders.Box(0,0,0,20)
-local HPCRed = colliders.Box(0,0,0,20)
+local HPC = colliders.Box(353,520,0,20)
+local HPCRed = colliders.Box(0,520,0,20)
 local monsterHP = colliders.Box(0,0,0,18)
 local monsterHPR = colliders.Box(0,0,0,18)
 local boxGrey = colliders.Box(0,0,0,13)
 local box = colliders.Box(0,0,0,13)
 local savepoint
 local savedEncounters = {}
+local nameText = "Chara"
+local HPShow = 0
+local maxHPShow = 0
+local spaceX = 0
+local spaceY = 0
+local boxY
+local ESPXOld
+local minDelay = {}
 local data = Data(Data.DATA_LEVEL, "save", true)
 
 
@@ -354,6 +359,54 @@ end
 
 attacks.mt = {__index = dummyAttack}
 
+local function glDrawFromCol(color,c,p)
+	local col = particles.ColFromHexRGBA(color)
+	Graphics.glDraw{primitive = Graphics.GL_TRIANGLE_STRIP,
+					priority = p or 1,
+					color = {col.r,col.g,col.b,col.a},
+					vertexCoords = {c.x,c.y,
+									c.x,c.y + c.height,
+									c.x + c.width,c.y,
+									c.x + c.width,c.y + c.height}}
+end
+
+local function _rot1(x, y, s1, c1)
+	local x2 = (x*c1) - (y*s1)
+	local y2 = (y*c1) + (x*s1)
+	return x2, y2
+end
+
+local function drawImageRotated(img, x, y, w, h, rotate)
+	rotate = rotate*math.pi/180
+	local s1 = math.sin(rotate)
+	local c1 = math.cos(rotate)
+	w = w * 0.5
+	h = h * 0.5
+	local x1 = (-w*c1) - (-h*s1)
+	local y1 = (-h*c1) + (-w*s1)
+	local x2 = (w*c1) - (h*s1)
+	local y2 = (h*c1) + (w*s1)
+	local vertCoords = {}
+	vertCoords[0], vertCoords[1] = _rot1(-w, -h, s1, c1);
+	vertCoords[2], vertCoords[3] = _rot1(-w, h, s1, c1);
+	vertCoords[4], vertCoords[5] = _rot1(w, -h, s1, c1);
+	vertCoords[6], vertCoords[7] = _rot1(w, h, s1, c1);
+	vertCoords[8], vertCoords[9] = _rot1(-w, h, s1, c1);
+	vertCoords[10], vertCoords[11] = _rot1(w, -h, s1, c1);
+	for i = 0,11,2 do
+		vertCoords[i] = vertCoords[i] + x + w
+		vertCoords[i+1] = vertCoords[i+1] + y + h
+	end
+	local textCoords = {}
+	textCoords[0]  = 0; textCoords[1]  = 0;
+	textCoords[2]  = 0; textCoords[3]  = 1;
+	textCoords[4]  = 1; textCoords[5]  = 0;
+	textCoords[6]  = 1; textCoords[7]  = 1;
+	textCoords[8]  = 0; textCoords[9]  = 1;
+	textCoords[10] = 1; textCoords[11] = 0;
+	Graphics.glDraw{texture = img,vertexCoords = vertCoords,textureCoords = textCoords}
+end
+
 function megaluavania.onInitAPI()
 	registerEvent(megaluavania,"onStart","onStart",false)
 	registerEvent(megaluavania,"onHUDDraw","onHUDDraw",false)
@@ -361,16 +414,17 @@ function megaluavania.onInitAPI()
 	registerEvent(megaluavania,"onCameraUpdate","onCameraUpdate",false)
 	registerEvent(megaluavania,"onInputUpdate","onInputUpdate",false)
 	registerEvent(megaluavania,"onEvent","onEvent",false)
+	registerEvent(megaluavania,"onDraw","onDraw",false)
 end
 
 function megaluavania.onStart()
 	cameras = Camera.get()
 	megaluavania.cameraX = cameras[1].x
 	megaluavania.cameraY = cameras[1].y
-	--savepoint = savestate.save()
+	--[[savepoint = savestate.save()
 	for k,v in ipairs(megaluavania.encounter) do
-		--savedEncounters[k] = v
-	end
+		savedEncounters[k] = v
+	end]]
 end
 
 function megaluavania.onHUDDraw()
@@ -389,16 +443,15 @@ function megaluavania.onTick()
 		v.talkEventName = megaluavania.saveEvent
 		v.msg = "* You saved your game."
 	end
-	if player:mem(0x13C, FIELD_DWORD) ~= 0 then
+	--[[if player:mem(0x13C, FIELD_DWORD) ~= 0 then
 		Audio.SfxStop(-1)
 		playMusic(player.section)
-		--savestate.load(savepoint,savestate.STATE_ALL)
-		megaluavania.playerHP = megaluavania.playerHPMax
+		savestate.load(savepoint,savestate.STATE_ALL)
 		player.jumpKeyPressing = false
 		for k,v in ipairs(savedEncounters) do
 			megaluavania.encounter[k] = v
 		end
-	end
+	end]]
 end
 
 function megaluavania.onCameraUpdate()
@@ -419,21 +472,188 @@ function megaluavania.onCameraUpdate()
 	end
 end
 
+local function drawUI(v)
+	--Graphics.draw{type = RTYPE_IMAGE,image = v.background,x = 0,y = 0,priority = 0,opacity = megaluavania.HUDOpacity or 1}
+	Graphics.drawImageWP(v.background or background,0,0,megaluavania.HUDOpacity or 1,0)
+	textplus.print(nameText,63,523,megaluavania.nameF,nil,nil,nil,megaluavania.HUDOpacity)
+	textplus.print(megaluavania.playerHP.." / "..megaluavania.playerHPMax,369 + maxHPShow,523,megaluavania.nameF,nil,nil,nil,megaluavania.HUDOpacity)
+	textplus.print("LV "..megaluavania.LV or 1,169,523,megaluavania.nameF,nil,nil,nil,megaluavania.HUDOpacity)
+	glDrawFromCol(0xFFFFFF00 + math.ceil((megaluavania.HUDOpacity or 1)*255),boxWhite,0.4)
+	glDrawFromCol(0x000000FF,boxBlack,0.4)
+	glDrawFromCol(0xFF000000 + math.ceil((megaluavania.HUDOpacity or 1)*255),HPCRed)
+	glDrawFromCol(0xFFFF0000 + math.ceil((megaluavania.HUDOpacity or 1)*255),HPC)
+	if megaluavania.choice == megaluavania.CHOICE_FIGHT then
+		Graphics.draw{type = RTYPE_IMAGE,image = fight,x = 63,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = act2,x = 248,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = item2,x = 440,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = mercy2,x = 627,y = 552}
+	elseif megaluavania.choice == megaluavania.CHOICE_ACT then
+		Graphics.draw{type = RTYPE_IMAGE,image = fight2,x = 63,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = act,x = 248,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = item2,x = 440,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = mercy2,x = 627,y = 552}
+	elseif megaluavania.choice == megaluavania.CHOICE_ITEM then
+		Graphics.draw{type = RTYPE_IMAGE,image = fight2,x = 63,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = act2,x = 248,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = item,x = 440,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = mercy2,x = 627,y = 552}
+	elseif megaluavania.choice == megaluavania.CHOICE_MERCY then
+		Graphics.draw{type = RTYPE_IMAGE,image = fight2,x = 63,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = act2,x = 248,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = item2,x = 440,y = 552}
+		Graphics.draw{type = RTYPE_IMAGE,image = mercy,x = 627,y = 552}
+	end
+	--Graphics.draw{type = RTYPE_IMAGE,image = encounterSprite,x = v.spriteX,y = v.spriteY + v.sourceY,sourceY = v.sourceY,sourceHeight = encounterSprite.height - v.sourceY,opacity = v.opacity or 1,priority = 0.6}
+	Graphics.drawImageWP(encounterSprite,v.spriteX,v.spriteY + v.sourceY,0,v.sourceY,encounterSprite.width,encounterSprite.height - v.sourceY,v.opacity or 1,0.1)
+end
+
+local function drawBattle(v)
+	if attackCounter ~= attack.time and not attack.stop then
+		if megaluavania.heart.color == megaluavania.HCOLOR_GREEN then
+			Graphics.draw{type = RTYPE_IMAGE,image = greenCircle,x = megaluavania.heart.x - 22,y = megaluavania.heart.y - 22}
+			if shieldCounter > 0 then
+				drawImageRotated(shield.image1,megaluavania.heart.x - 25,megaluavania.heart.y - 25,62,62,angle)
+			else
+				drawImageRotated(shield.image,megaluavania.heart.x - 25,megaluavania.heart.y - 25,62,62,angle)
+			end
+		elseif megaluavania.heart.color == megaluavania.HCOLOR_PURPLE then
+			for k,v in pairs(strings) do
+				if v >= megaluavania.centerY - spaceY/2 and v < megaluavania.centerY + spaceY/2 then
+					glDrawFromCol(0x6A1A6CFF,stringsCol[k],0.5)
+				end
+			end
+		end
+		if (megaluavania.heart.invincibility == 0 or attackCounter % 4 ~= 0) and (doAttack or resizeCounter > 0) then
+			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
+		end	
+	end
+	if doAttack and not ((attackCounter == attack.time or attack.stop) and (attack.boxWidth ~= OBW or attack.boxHeight ~= OBH)) and attackCounter > 0 then
+		for i = #megaluavania.bullets,1,-1 do
+			local v = megaluavania.bullets[i]
+			if not v.hidden and v.sprite ~= nil then
+				if v.type ~= megaluavania.BULLET_ARROW or #attack.arrowGFXTable == 0 then
+					--Graphics.draw{type = RTYPE_IMAGE,image = v.sprite,x = v.x,y = v.y,sourceX = v.GFXOffsetX or v.offsetX,sourceY = v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,sourceWidth = v.GFXWidth,sourceHeight = v.GFXHeight}
+					Graphics.drawImageWP(v.sprite,v.x,v.y,v.GFXOffsetX or v.offsetX,v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,v.GFXWidth,v.GFXHeight,v.opacity,v.priority)
+				end
+			end
+		end
+		for i = #megaluavania.bullets,1,-1 do
+			local v = megaluavania.bullets[i]
+			if v.type == megaluavania.BULLET_ARROW then
+				if v == minDelay.bullet then
+					--Graphics.draw{type = RTYPE_IMAGE,image = attack.arrowGFXTableR[v.direction],x = v.x,y = v.y,sourceX = v.GFXOffsetX or v.offsetX,sourceY = v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,sourceWidth = v.GFXWidth,sourceHeight = v.GFXHeight}
+					Graphics.drawImageWP(attack.arrowGFXTableR[v.direction] or v.sprite,v.x,v.y,v.GFXOffsetX or v.offsetX,v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,v.GFXWidth,v.GFXHeight,v.opacity,v.priority)
+				else
+					--Graphics.draw{type = RTYPE_IMAGE,image = v.sprite,x = v.x,y = v.y,sourceX = v.GFXOffsetX or v.offsetX,sourceY = v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,sourceWidth = v.GFXWidth,sourceHeight = v.GFXHeight}
+					Graphics.drawImageWP(v.sprite,v.x,v.y,v.GFXOffsetX or v.offsetX,v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,v.GFXWidth,v.GFXHeight,v.opacity,v.priority)
+				end
+			end
+		end
+	end
+end
+
+function megaluavania.onDraw()
+	for _,v in pairs(megaluavania.encounter) do
+		if v.initiated == megaluavania.BATTLE_INTRO then
+			if (HBCounter < 25 and HBCounter % 2 == 0) or HBCounter < 47 then
+				Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
+			end
+		end
+		if v.initiated == megaluavania.BATTLE_ACTIVE or v.initiated == megaluavania.BATTLE_SPARED or v.initiated == megaluavania.BATTLE_RAN then
+			megaluavania.onDrawBattle(v)
+			drawUI(v)
+			if v.initiated == megaluavania.BATTLE_RAN then
+				if killCounter % 10 < 5 then
+					Graphics.draw{type = RTYPE_IMAGE,image = heartFlee[0],x = tX + 24 - 1.5*killCounter,y = tY + 62}
+				else
+					Graphics.draw{type = RTYPE_IMAGE,image = heartFlee[1],x = tX + 24 - 1.5*killCounter,y = tY + 62}
+				end
+			elseif megaluavania.phase == megaluavania.PHASE_ATTACKCHOICE then
+				if megaluavania.heart.x ~= nil and megaluavania.heart.y ~= nil then
+					Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
+				end
+				if megaluavania.choiceLV == megaluavania.CHOICELV_ENEMYSELECTION then
+					if megaluavania.choice == megaluavania.CHOICE_FIGHT then
+						glDrawFromCol(0xFF0000FF,monsterHPR)
+						glDrawFromCol(0x00FF00FF,monsterHP)
+					end
+				elseif megaluavania.choiceLV == megaluavania.CHOICELV_ACTIONSELECTION then
+					if megaluavania.choice == megaluavania.CHOICE_FIGHT then
+						Graphics.draw{type = RTYPE_IMAGE,image = target,x = 127,y = 323}
+						Graphics.draw{type = RTYPE_IMAGE,image = bar,x = barX - 6,y = 315}	
+					end
+				end
+			elseif megaluavania.phase == megaluavania.PHASE_RESULT then
+				if pressedFight then
+					Graphics.draw{type = RTYPE_IMAGE,image = target,x = 127,y = 323}
+					if fightCounter % 6 < 3 and not (barX > megaluavania.centerX + 287 or barX < megaluavania.centerX - 287) then
+						Graphics.draw{type = RTYPE_IMAGE,image = bar2,x = barX - 6,y = 315}
+					elseif not (barX > megaluavania.centerX + 287 or barX < megaluavania.centerX - 287) then
+						Graphics.draw{type = RTYPE_IMAGE,image = bar,x = barX - 6,y = 315}
+					end
+					if fightCounter == 40 then
+						if megaluavania.dmg == 0 then
+							Graphics.draw{type = RTYPE_IMAGE,image = miss,x = megaluavania.centerX - 58,y = boxY - 48}
+						end
+					elseif fightCounter > 40 then
+						if fightBox == nil then
+							Graphics.draw{type = RTYPE_IMAGE,image = miss,x = megaluavania.centerX - 58,y = math.min(boxY - 32,boxY - 49 + (fightCounter - 42)*(fightCounter - 42)/4)}
+						elseif megaluavania.dmg > 0 then
+							glDrawFromCol(0x404040FF,boxGrey)
+							glDrawFromCol(0x00FF00FF,box)
+						end
+					end
+					if megaluavania.dmg > 0 then
+						for i = 0,5 do
+							if fightCounter < 6*(i + 1) then
+								Graphics.draw{type = RTYPE_IMAGE,image = swing[i],x = megaluavania.centerX - 7,y = 182 - v.sprite.height/2}
+								break
+							end
+						end
+					end	
+				end
+			elseif megaluavania.phase == megaluavania.PHASE_ENEMYDIALOGUE then
+				if megaluavania.dialogue[megaluavania.textCounter].text ~= "" then
+					Graphics.draw{type = RTYPE_IMAGE,image = bubble,x = bX,y = bY}
+				end
+			elseif megaluavania.phase == megaluavania.PHASE_ENEMYATTACK and attack ~= nil then
+				drawBattle(v)
+			end
+		elseif v.initiated == megaluavania.BATTLE_LOST and GOCounter ~= nil then
+			if GOCounter < 30 then
+				Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[0],x = megaluavania.heart.x,y = megaluavania.heart.y}
+			elseif GOCounter == 30 then
+				Graphics.draw{type = RTYPE_IMAGE,image = heartbreak,x = megaluavania.heart.x - 2,y = megaluavania.heart.y}
+			elseif GOCounter <= 55 then
+				Graphics.draw{type = RTYPE_IMAGE,image = heartbreak,x = megaluavania.heart.x - 2,y = megaluavania.heart.y}
+			elseif GOCounter > 55 then
+				for _,v in pairs(heartshards) do
+					Graphics.draw{type = RTYPE_IMAGE,image = v.sprite,x = v.x,y = v.y}
+				end
+			end
+			if GOCounter > 200 then
+				Graphics.draw{type = RTYPE_IMAGE,image = gameover,x = 192,y = 33}
+			end
+		end
+		megaluavania.onDrawBattleEnd(v)
+	end
+end
+
 function megaluavania.onInputUpdate()
 	for _,v in pairs(megaluavania.encounter) do
 		if v.initiated == megaluavania.BATTLE_INTRO then
 			Graphics.activateHud(false)
 			megaluavania.battleStart(v)
 			HBCounter = HBCounter + 1
-			inputos.locked["all"] = true
+			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = true
 		end
 		if v.initiated == megaluavania.BATTLE_ACTIVE or v.initiated == megaluavania.BATTLE_SPARED or v.initiated == megaluavania.BATTLE_RAN then
 			Graphics.activateHud(false)
 			megaluavania.battle(v)
-			inputos.locked["all"] = true
+			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = true
 		elseif v.initiated == megaluavania.BATTLE_LOST then
 			Graphics.activateHud(false)
-			inputos.locked["all"] = true
+			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = true
 			megaluavania.gameOver(v)
 		elseif v.initiated == megaluavania.BATTLE_EXIT then
 			player.sectionObj.backgroundID = v.backgroundID
@@ -450,8 +670,18 @@ function megaluavania.onInputUpdate()
 			end	
 			player:mem(0x122,FIELD_WORD,0)
 			Audio.ReleaseStream(-1)
-			inputos.locked["all"] = false
+			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = false
 			Graphics.activateHud(true)
+			megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
+			megaluavania.phase = megaluavania.PHASE_ATTACKCHOICE
+			megaluavania.choice = megaluavania.CHOICE_FIGHT
+			actSelection = 1
+			itemSelection = 1
+			mercySelection = 1
+			killCounter = nil
+			HBCounter = 0
+			GOCounter = nil
+			moving = 0
 		end
 	end
 end
@@ -490,12 +720,11 @@ function megaluavania.onEvent(eventName)
 			Audio.SeizeStream(-1)
 			Audio.MusicStop()
 		end
-	end
-	if eventName == megaluavania.saveEvent then
-		--savepoint = savestate.save()
+	--[[elseif eventName == megaluavania.saveEvent then
+		savepoint = savestate.save()
 		for k,v in ipairs(megaluavania.encounter) do
-			--savedEncounters[k] = v
-		end
+			savedEncounters[k] = v
+		end]]
 	end
 end
 
@@ -512,71 +741,34 @@ function megaluavania.battleStart(encounter)
 		end
 		moving = 1
 	end
-	if HBCounter < 25 then
-		if HBCounter % 2 == 1 then
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
-		end	
-	elseif HBCounter < 47 then
+	if HBCounter > 25 and HBCounter < 47 then
 		megaluavania.heart.x = megaluavania.heart.x + megaluavania.heart.speedX
 		megaluavania.heart.y = megaluavania.heart.y + megaluavania.heart.speedY
-		Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
 	elseif HBCounter == 47 then
 		encounter.initiated = megaluavania.BATTLE_ACTIVE
-		moving = false
+		moving = 0
 	end
 end
 
 function megaluavania.battle(encounter)
 	megaluavania.playerHP = megaluavania.playerHP or megaluavania.playerHPMax or 20
 	encounter.enemyHP = encounter.enemyHP or encounter.enemyHPMax or 500
-	--Graphics.draw{type = RTYPE_IMAGE,image = background,x = 0,y = 0,priority = 0.5,opacity = megaluavania.HUDOpacity or 1}
-	Graphics.drawImageWP(encounter.background or background,0,0,megaluavania.HUDOpacity or 1,0.5)
-	local nameText = megaluavania.name or "Chara"
-	textblox.print(nameText,63,523,megaluavania.nameF,nil,nil,nil,megaluavania.HUDOpacity)
-	boxWhite.x = megaluavania.cameraX + megaluavania.centerX - boxWidth/2
-	boxWhite.y = megaluavania.cameraY + megaluavania.centerY - boxHeight/2
+	nameText = megaluavania.name or "Frisk"
+	textplus.print({text=nameText,x=63,y=523,font=megaluavania.nameF})--megaluavania.HUDOpacity
+	boxWhite.x = megaluavania.centerX - boxWidth/2
+	boxWhite.y = megaluavania.centerY - boxHeight/2
 	boxWhite.width = boxWidth
 	boxWhite.height = boxHeight
-	boxWhite:Draw(0xFFFFFF00 + math.ceil((megaluavania.HUDOpacity or 1)*255))
 	boxBlack.x = boxWhite.x + 5
 	boxBlack.y = boxWhite.y + 5
 	boxBlack.width = boxWidth - 10
 	boxBlack.height = boxHeight - 10
-	boxBlack:Draw(0x000000FF)
-	local HPShow = math.ceil(megaluavania.playerHP * 1.25)
-	local maxHPShow = math.ceil(megaluavania.playerHPMax * 1.25)
-	textblox.print(megaluavania.playerHP.." / "..megaluavania.playerHPMax,369 + maxHPShow,523,megaluavania.nameF,nil,nil,nil,megaluavania.HUDOpacity)
-	HPCRed.x = megaluavania.cameraX + 353 + HPShow
-	HPCRed.y = megaluavania.cameraY + 520
+	HPShow = math.ceil(megaluavania.playerHP * 1.25)
+	maxHPShow = math.ceil(megaluavania.playerHPMax * 1.25)
+	HPCRed.x = 353 + HPShow
 	HPCRed.width = maxHPShow - HPShow
-	HPCRed:Draw(0xFF000000 + math.ceil((megaluavania.HUDOpacity or 1)*255))
-	HPC.x = megaluavania.cameraX + 353
-	HPC.y = HPCRed.y
 	HPC.width = HPShow
-	HPC:Draw(0xFFFF0000 + math.ceil((megaluavania.HUDOpacity or 1)*255))
-	if choice == megaluavania.CHOICE_FIGHT then
-		Graphics.draw{type = RTYPE_IMAGE,image = fight,x = 63,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = act2,x = 248,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = item2,x = 440,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = mercy2,x = 627,y = 552}
-	elseif choice == megaluavania.CHOICE_ACT then
-		Graphics.draw{type = RTYPE_IMAGE,image = fight2,x = 63,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = act,x = 248,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = item2,x = 440,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = mercy2,x = 627,y = 552}
-	elseif choice == megaluavania.CHOICE_ITEM then
-		Graphics.draw{type = RTYPE_IMAGE,image = fight2,x = 63,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = act2,x = 248,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = item,x = 440,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = mercy2,x = 627,y = 552}
-	elseif choice == megaluavania.CHOICE_MERCY then
-		Graphics.draw{type = RTYPE_IMAGE,image = fight2,x = 63,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = act2,x = 248,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = item2,x = 440,y = 552}
-		Graphics.draw{type = RTYPE_IMAGE,image = mercy,x = 627,y = 552}
-	end
-	textblox.print("LV "..megaluavania.LV or 1,169,523,megaluavania.nameF,nil,nil,nil,megaluavania.HUDOpacity)
-	if encounter.music ~= EMOld and encounter.enemyHP ~= 0 and encounter.initiated ~= 5 then
+	if encounter.music ~= EMOld and encounter.enemyHP > 0 and encounter.initiated ~= megaluavania.BATTLE_SPARED and encounter.initated ~= megaluavania.BATTLE_SPARED and encounter.initiated ~= megaluavania.BATTLE_RAN then
 		Audio.MusicOpen(encounter.music)
 		Audio.MusicPlay()
 	end
@@ -598,7 +790,7 @@ function megaluavania.battle(encounter)
 	elseif encounter.initiated == megaluavania.BATTLE_RAN then
 		megaluavania.flee(encounter)
 	elseif megaluavania.phase == megaluavania.PHASE_ATTACKCHOICE then
-		megaluavania.choice(encounter)
+		megaluavania.choose(encounter)
 	elseif megaluavania.phase == megaluavania.PHASE_RESULT then
 		megaluavania.result(encounter)
 	elseif megaluavania.phase == megaluavania.PHASE_ENEMYDIALOGUE then
@@ -618,11 +810,9 @@ function megaluavania.battle(encounter)
 		bX = megaluavania.centerX + encounterSprite.width/2 + 20
 	end
 	megaluavania.onLoopBattle(encounter)
-	--Graphics.draw{type = RTYPE_IMAGE,image = encounterSprite,x = encounter.spriteX,y = encounter.spriteY + encounter.sourceY,sourceY = encounter.sourceY,sourceHeight = encounterSprite.height - encounter.sourceY,opacity = encounter.opacity or 1,priority = 0.6}
-	Graphics.drawImageWP(encounterSprite,encounter.spriteX,encounter.spriteY + encounter.sourceY,0,encounter.sourceY,encounterSprite.width,encounterSprite.height - encounter.sourceY,encounter.opacity or 1,0.6)
 end
 
-function megaluavania.choice(encounter)
+function megaluavania.choose(encounter)
 	if not turnSet then
 		encounter.turn = encounter.turn + 1
 		turnSet = true
@@ -634,94 +824,92 @@ function megaluavania.choice(encounter)
 			if flavorText == "" then
 				flavorText = megaluavania.assignText(encounter.flavorText) or "* No text defined.<br>* This may happen if all of your<br>  requirements return false."
 			end
-			textBox = textblox.Block(tX + 11,tY + 45,flavorText,megaluavania.determinationProps)
+			textBox = textplus.Block(tX + 11,tY + 45,flavorText,megaluavania.determinationProps)
 			OT = textBox.text
 			set = true
 		end
-		if choice == megaluavania.CHOICE_FIGHT then
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = 72,y = 567}
-			if inputos.state["jump"] == inputos.PRESS then
+		if megaluavania.choice == megaluavania.CHOICE_FIGHT then
+			megaluavania.heart.x,megaluavania.heart.y = 72, 567
+			if player.keys.jump == KEYS_PRESSED then
 				megaluavania.choiceLV = megaluavania.CHOICELV_ENEMYSELECTION
 			end
-		elseif choice == megaluavania.CHOICE_ACT then
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = 257,y = 567}
-			if inputos.state["jump"] == inputos.PRESS then
+		elseif megaluavania.choice == megaluavania.CHOICE_ACT then
+			megaluavania.heart.x,megaluavania.heart.y = 257, 567
+			if player.keys.jump == KEYS_PRESSED then
 				megaluavania.choiceLV = megaluavania.CHOICELV_ENEMYSELECTION
 			end	
-		elseif choice == megaluavania.CHOICE_ITEM then
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = 449,y = 567}
-			if inputos.state["jump"] == inputos.PRESS and #megaluavania.items ~= 0 then
+		elseif megaluavania.choice == megaluavania.CHOICE_ITEM then
+			megaluavania.heart.x,megaluavania.heart.y = 449, 567
+			if player.keys.jump == KEYS_PRESSED and #megaluavania.items ~= 0 then
 				megaluavania.choiceLV = megaluavania.CHOICELV_ACTIONSELECTION
 			end	
-		elseif choice == megaluavania.CHOICE_MERCY then
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = 636,y = 567}
-			if inputos.state["jump"] == inputos.PRESS then
+		elseif megaluavania.choice == megaluavania.CHOICE_MERCY then
+		megaluavania.heart.x,megaluavania.heart.y = 636, 567
+			if player.keys.jump == KEYS_PRESSED then
 				megaluavania.choiceLV = megaluavania.CHOICELV_ACTIONSELECTION
 			end
 		end
-		if inputos.state["right"] == inputos.PRESS then
-			choice = math.min(choice + 1,megaluavania.CHOICE_MERCY)
+		if player.keys.right == KEYS_PRESSED then
+			megaluavania.choice = math.min(megaluavania.choice + 1,megaluavania.CHOICE_MERCY)
 			Audio.SfxPlayCh(10,menu1SFX,0)
 		end	
-		if inputos.state["left"] == inputos.PRESS then
-			choice = math.max(choice - 1,megaluavania.CHOICE_FIGHT)
+		if player.keys.left == KEYS_PRESSED then
+			megaluavania.choice = math.max(megaluavania.choice - 1,megaluavania.CHOICE_FIGHT)
 			Audio.SfxPlayCh(10,menu1SFX,0)
 		end
-		if inputos.state["jump"] == inputos.PRESS then
+		if player.keys.jump == KEYS_PRESSED then
 			set = false
 			textBox:delete()
 			textBox = nil
 			Audio.SfxPlayCh(10,menu1SFX,0)
-		elseif inputos.state["run"] == inputos.PRESS then
+		elseif player.keys.run == KEYS_PRESSED then
 			textBox:finish()
 		end
 	elseif megaluavania.choiceLV == megaluavania.CHOICELV_ENEMYSELECTION then
-		if choice == megaluavania.CHOICE_FIGHT then
+		if megaluavania.choice == megaluavania.CHOICE_FIGHT then
 			if not set then
 				megaluavania.determinationProps.typeSounds = {}
-				textBox = textblox.Block(tX + 49,tY + 45,"* "..encounter.name,megaluavania.determinationProps)
+				textBox = textplus.Block(tX + 49,tY + 45,"* "..encounter.name,megaluavania.determinationProps)
 				textBox:finish()
 				OT = textBox.text
 				set = true
 			end
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = tX + 24,y = tY + 32}
-			monsterHPR.x = megaluavania.cameraX + megaluavania.centerX
-			monsterHPR.y = megaluavania.cameraY + tY + 31
+			megaluavania.heart.x,megaluavania.heart.y = tX + 24, tY + 32
+			monsterHPR.x = megaluavania.centerX
+			monsterHPR.y = tY + 31
 			monsterHPR.width = math.min(275,encounter.sprite.width)
-			monsterHPR:Draw(0xFF0000FF)
 			monsterHP.x = monsterHPR.x
 			monsterHP.y = monsterHPR.y
 			monsterHP.width = encounter.enemyHP/encounter.enemyHPMax * monsterHPR.width
-			monsterHP:Draw(0x00FF00FF)
-			if inputos.state["jump"] == inputos.PRESS then
+			if player.keys.jump == KEYS_PRESSED then
 				set = false
 				textBox:delete()
 				textBox = nil
 				megaluavania.choiceLV = megaluavania.CHOICELV_ACTIONSELECTION
 				Audio.SfxPlayCh(10,menu2SFX,0)
-			elseif inputos.state["run"] == inputos.PRESS then
+			elseif player.keys.run == KEYS_PRESSED then
 				set = false
 				textBox:delete()
 				textBox = nil
 				megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
 				Audio.SfxPlayCh(10,menu2SFX,0)
 			end	
-		elseif choice == megaluavania.CHOICE_ACT then
+		elseif megaluavania.choice == megaluavania.CHOICE_ACT then
 			if not set then
 				megaluavania.determinationProps.typeSounds = {}
-				textBox = textblox.Block(tX + 49,tY + 45,"* ".. encounter.name,megaluavania.determinationProps)
+				textBox = textplus.Block(tX + 49,tY + 45,"* ".. encounter.name,megaluavania.determinationProps)
 				textBox:finish()
 				OT = textBox.text
 				set = true
 			end
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = tX + 24,y = tY + 32}
-			if inputos.state["jump"] == inputos.PRESS then
+			megaluavania.heart.x,megaluavania.heart.y = tX + 24, tY + 32
+			if player.keys.jump == KEYS_PRESSED then
 				set = false
 				textBox:delete()
 				textBox = nil
 				megaluavania.choiceLV = megaluavania.CHOICELV_ACTIONSELECTION
 				Audio.SfxPlayCh(10,menu2SFX,0)
-			elseif inputos.state["run"] == inputos.PRESS then
+			elseif player.keys.run == KEYS_PRESSED then
 				set = false
 				textBox:delete()
 				textBox = nil
@@ -730,8 +918,8 @@ function megaluavania.choice(encounter)
 			end	
 		end
 	elseif megaluavania.choiceLV == megaluavania.CHOICELV_ACTIONSELECTION then
-		if choice == megaluavania.CHOICE_FIGHT then
-			Graphics.draw{type = RTYPE_IMAGE,image = target,x = 127,y = 323}
+		if megaluavania.choice == megaluavania.CHOICE_FIGHT then
+			megaluavania.heart.x,megaluavania.heart.y = nil,nil
 			if not set then
 				dir = 2*rng.randomInt(0,1) - 1
 				fightCounter = 0
@@ -739,22 +927,21 @@ function megaluavania.choice(encounter)
 				speed = rng.random(6,9)
 			end
 			barX = megaluavania.centerX - (287 - speed * fightCounter)*dir
-			Graphics.draw{type = RTYPE_IMAGE,image = bar,x = barX - 6,y = 315}
 			fightCounter = fightCounter + 1
-			if inputos.state["jump"] == inputos.PRESS or barX > megaluavania.centerX + 287 or barX < megaluavania.centerX - 287 then
+			if player.keys.jump == KEYS_PRESSED or barX > megaluavania.centerX + 287 or barX < megaluavania.centerX - 287 then
 				megaluavania.phase = 1
 				pressedFight = true
 				set = false
 				fightCounter = 0
 			end
-		elseif choice == megaluavania.CHOICE_ACT then
+		elseif megaluavania.choice == megaluavania.CHOICE_ACT then
 			for k,v in pairs(encounter.acts) do
 				if k % 2 == 1 and not set then
-					actsTB[k] = textblox.Block(tX + 49,tY + 30 + 15*k,"* ".. v.name,megaluavania.determinationProps)
+					actsTB[k] = textplus.Block(tX + 49,tY + 30 + 15*k,"* ".. v.name,megaluavania.determinationProps)
 					actsTB[k]:finish()
 					actsOT[k] = actsTB[k].text
 				elseif not set then
-					actsTB[k] = textblox.Block(tX + 315,tY + 15 + 15*k,"* ".. v.name,megaluavania.determinationProps)	
+					actsTB[k] = textplus.Block(tX + 315,tY + 15 + 15*k,"* ".. v.name,megaluavania.determinationProps)	
 					actsTB[k]:finish()
 					actsOT[k] = actsTB[k].text
 				end
@@ -762,11 +949,11 @@ function megaluavania.choice(encounter)
 			set = true
 			megaluavania.tableShake(actsTB,actsOT)
 			if actSelection % 2 == 1 then
-				Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = tX + 24,y = tY + 17 + 15*actSelection}
+				megaluavania.heart.x,megaluavania.heart.y = tX + 24, tY + 17 + 15*actSelection
 			else
-				Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = tX + 290,y = tY + 2 + 15*actSelection}
+				megaluavania.heart.x,megaluavania.heart.y = tX + 290, tY + 2 + 15*actSelection
 			end
-			if inputos.state["jump"] == inputos.PRESS then
+			if player.keys.jump == KEYS_PRESSED then
 				set = false
 				for _,v in pairs(actsTB) do
 					v:delete()
@@ -776,7 +963,7 @@ function megaluavania.choice(encounter)
 				megaluavania.phase = megaluavania.PHASE_RESULT
 				flavorText = ""
 				Audio.SfxPlayCh(10,menu2SFX,0)
-			elseif inputos.state["run"] == inputos.PRESS then
+			elseif player.keys.run == KEYS_PRESSED then
 				set = false
 				for _,v in pairs(actsTB) do
 					v:delete()
@@ -785,28 +972,28 @@ function megaluavania.choice(encounter)
 				megaluavania.choiceLV = megaluavania.CHOICELV_ENEMYSELECTION
 				actSelection = 1
 				Audio.SfxPlayCh(10,menu2SFX,0)
-			elseif inputos.state["left"]	== inputos.PRESS and actSelection % 2 == 0 then
+			elseif player.keys.left == KEYS_PRESSED and actSelection % 2 == 0 then
 				actSelection = actSelection - 1
 				Audio.SfxPlayCh(10,menu1SFX,0)
-			elseif inputos.state["right"] == inputos.PRESS and actSelection % 2 == 1 and actSelection ~= #encounter.acts then
+			elseif player.keys.right == KEYS_PRESSED and actSelection % 2 == 1 and actSelection ~= #encounter.acts then
 				actSelection = actSelection + 1
 				Audio.SfxPlayCh(10,menu1SFX,0)
-			elseif inputos.state["up"] == inputos.PRESS and actSelection > 2 then
+			elseif player.keys.up == KEYS_PRESSED and actSelection > 2 then
 				actSelection = actSelection - 2
 				Audio.SfxPlayCh(10,menu1SFX,0)
-			elseif inputos.state["down"] == inputos.PRESS and actSelection < #encounter.acts - 1 then
+			elseif player.keys.down == KEYS_PRESSED and actSelection < #encounter.acts - 1 then
 				actSelection = actSelection + 2
 				Audio.SfxPlayCh(10,menu1SFX,0)
 			end
-		elseif choice == megaluavania.CHOICE_ITEM then
+		elseif megaluavania.choice == megaluavania.CHOICE_ITEM then
 			if itemSelection < 5 then
 				for i = 1,math.min(4,#megaluavania.items) do
 					if i % 2 == 1 and not set then
-						itemsTB[i] = textblox.Block(tX + 49,tY + 30 + 15*i,"* ".. megaluavania.items[i].name,megaluavania.determinationProps)
+						itemsTB[i] = textplus.Block(tX + 49,tY + 30 + 15*i,"* ".. megaluavania.items[i].name,megaluavania.determinationProps)
 						itemsTB[i]:finish()
 						itemsOT[i] = itemsTB[i].text
 					elseif not set then
-						itemsTB[i] = textblox.Block(tX + 315,tY + 15 + 15*i,"* ".. megaluavania.items[i].name,megaluavania.determinationProps)
+						itemsTB[i] = textplus.Block(tX + 315,tY + 15 + 15*i,"* ".. megaluavania.items[i].name,megaluavania.determinationProps)
 						itemsTB[i]:finish()
 						itemsOT[i] = itemsTB[i].text
 					elseif page == 2 then
@@ -816,7 +1003,7 @@ function megaluavania.choice(encounter)
 					end
 				end
 				if #megaluavania.items > 4 and not set then
-					itemsTB[5] = textblox.Block(tX + 315, tY + 105,"PAGE 1",megaluavania.determinationProps)
+					itemsTB[5] = textplus.Block(tX + 315, tY + 105,"PAGE 1",megaluavania.determinationProps)
 					itemsTB[5]:finish()
 					itemsOT[5] = itemsTB[5].text
 				elseif page == 2 then
@@ -846,11 +1033,11 @@ function megaluavania.choice(encounter)
 			end
 			megaluavania.tableShake(itemsTB,itemsOT)
 			if itemSelection % 2 == 1 then
-				Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = tX + 24,y = tY + 17 + 15*((itemSelection - 1) % 4 + 1)}
+				megaluavania.heart.x,megaluavania.heart.y = tX + 24, tY + 17 + 15*((itemSelection - 1) % 4 + 1)
 			else
-				Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = tX + 290,y = tY + 2 + 15*((itemSelection - 1) % 4 + 1)}
+				megaluavania.heart.x,megaluavania.heart.y = tX + 290, tY + 2 + 15*((itemSelection - 1) % 4 + 1)
 			end
-			if inputos.state["jump"] == inputos.PRESS then
+			if player.keys.jump == KEYS_PRESSED then
 				pressedItem = true
 				set = false
 				for _,v in pairs(itemsTB) do
@@ -860,7 +1047,7 @@ function megaluavania.choice(encounter)
 				megaluavania.phase = megaluavania.PHASE_RESULT
 				Audio.SfxPlayCh(10,menu2SFX,0)
 				page = 1
-			elseif inputos.state["run"] == inputos.PRESS then
+			elseif player.keys.run == KEYS_PRESSED then
 				megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
 				set = false
 				for _,v in pairs(itemsTB) do
@@ -870,7 +1057,7 @@ function megaluavania.choice(encounter)
 				itemSelection = 1
 				page = 1
 				Audio.SfxPlayCh(10,menu2SFX,0)
-			elseif inputos.state["left"]	== inputos.PRESS then
+			elseif player.keys.left == KEYS_PRESSED then
 				if itemSelection % 2 == 0 then
 					itemSelection = itemSelection - 1
 				elseif itemSelection > 4 then
@@ -879,7 +1066,7 @@ function megaluavania.choice(encounter)
 					itemSelection = math.min(itemSelection + 5,#megaluavania.items)
 				end
 				Audio.SfxPlayCh(10,menu1SFX,0)
-			elseif inputos.state["right"] == inputos.PRESS and actSelection % 2 == 1 then
+			elseif player.keys.right == KEYS_PRESSED and actSelection % 2 == 1 then
 				if itemSelection == #megaluavania.items then
 					itemSelection = 1	
 				elseif itemSelection % 2 == 1 then
@@ -890,33 +1077,33 @@ function megaluavania.choice(encounter)
 					itemSelection = itemSelection - 5
 				end
 				Audio.SfxPlayCh(10,menu1SFX,0)
-			elseif inputos.state["up"] == inputos.PRESS and (itemSelection -1) % 4 > 1 then
+			elseif player.keys.up == KEYS_PRESSED and (itemSelection -1) % 4 > 1 then
 				itemSelection = itemSelection - 2
 				Audio.SfxPlayCh(10,menu1SFX,0)
-			elseif inputos.state["down"] == inputos.PRESS and itemSelection < 3 and itemSelection < #megaluavania.items - 1 then
+			elseif player.keys.down == KEYS_PRESSED and itemSelection < 3 and itemSelection < #megaluavania.items - 1 then
 				itemSelection = itemSelection + 2	
 				Audio.SfxPlayCh(10,menu1SFX,0)
 			end
-		elseif choice == megaluavania.CHOICE_MERCY then
+		elseif megaluavania.choice == megaluavania.CHOICE_MERCY then
 			if encounter.canspare then
 				font = megaluavania.determinationYProps
 			else
 				font = megaluavania.determinationProps
 			end	
 			if not set then
-				mercyTB[1] = textblox.Block(tX + 49,tY + 45,"* Spare",font)
+				mercyTB[1] = textplus.Block(tX + 49,tY + 45,"* Spare",font)
 				mercyTB[1]:finish()
 				mercyOT[1] = mercyTB[1].text
 				if encounter.canflee then
-					mercyTB[2] = textblox.Block(tX + 49, tY + 75,"* Flee",megaluavania.determinationProps)
+					mercyTB[2] = textplus.Block(tX + 49, tY + 75,"* Flee",megaluavania.determinationProps)
 					mercyTB[2]:finish()
 					mercyOT[2] = mercyTB[2].text
 				end	
 				set = true
 			end
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = tX + 24,y = tY + 2 + 30*mercySelection}
+			megaluavania.heart.x,megaluavania.heart.y = tX + 24, tY + 2 + 30*mercySelection
 			megaluavania.tableShake(mercyTB,mercyOT)
-			if inputos.state["jump"] == inputos.PRESS then
+			if player.keys.jump == KEYS_PRESSED then
 				pressedMercy = true
 				set = false
 				for _,v in pairs(mercyTB) do
@@ -925,7 +1112,7 @@ function megaluavania.choice(encounter)
 				end
 				megaluavania.phase = megaluavania.PHASE_RESULT
 				Audio.SfxPlayCh(10,menu2SFX,0)
-			elseif inputos.state["run"] == inputos.PRESS then
+			elseif player.keys.run == KEYS_PRESSED then
 				megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
 				set = false
 				for _,v in pairs(mercyTB) do
@@ -934,10 +1121,10 @@ function megaluavania.choice(encounter)
 				end
 				mercySelection = 1
 				Audio.SfxPlayCh(10,menu2SFX,0)
-			elseif inputos.state["up"] == inputos.PRESS and mercySelection == 2 then
+			elseif player.keys.up == KEYS_PRESSED and mercySelection == 2 then
 				mercySelection = 1
 				Audio.SfxPlayCh(10,menu1SFX,0)
-			elseif inputos.state["down"] == inputos.PRESS and mercySelection == 1 and encounter.canflee then
+			elseif player.keys.down == KEYS_PRESSED and mercySelection == 1 and encounter.canflee then
 				mercySelection = 2
 				Audio.SfxPlayCh(10,menu1SFX,0)
 			end	
@@ -946,11 +1133,11 @@ function megaluavania.choice(encounter)
 end
 
 function megaluavania.result(encounter)
+	megaluavania.heart.x,megaluavania.heart.y = nil,nil
 	turnSet = false
 	megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
 	flavorText = ""
 	if pressedFight then
-		local boxY
 		local baseDmg = 1 - math.abs(barX - megaluavania.centerX)/287
 		if barX > megaluavania.centerX + 287 or barX < megaluavania.centerX - 287 then
 			megaluavania.dmg = 0
@@ -960,16 +1147,10 @@ function megaluavania.result(encounter)
 		megaluavania.dialogue = megaluavania.onFight(encounter) or megaluavania.assignText(encounter.randomDialogue) or {"No text<br>defined."}
 		newEnemyHP = math.max(encounter.enemyHPMin or 0,encounter.enemyHP - megaluavania.dmg)
 		megaluavania.displayText = {""}
-		Graphics.draw{type = RTYPE_IMAGE,image = target,x = 127,y = 323}
 		if encounter.spriteY - 64 < 10 then
 			boxY = 246 + math.ceil(encounter.sprite.height/4)
 		else
 			boxY = encounter.spriteY - 16
-		end
-		if fightCounter % 6 < 3 and not (barX > megaluavania.centerX + 287 or barX < megaluavania.centerX - 287) then
-			Graphics.draw{type = RTYPE_IMAGE,image = bar2,x = barX - 6,y = 315}
-		elseif not (barX > megaluavania.centerX + 287 or barX < megaluavania.centerX - 287) then
-			Graphics.draw{type = RTYPE_IMAGE,image = bar,x = barX - 6,y = 315}
 		end
 		if fightCounter == 0 then
 			if megaluavania.dmg > 0 then
@@ -977,47 +1158,34 @@ function megaluavania.result(encounter)
 			end	
 			displayEnemyHP = encounter.enemyHP
 		elseif fightCounter == 40 then
+			ESPXOld = encounter.spriteX
 			if megaluavania.dmg > 0 then
-				fightBox = textblox.Block(megaluavania.centerX,boxY - 48,tostring(megaluavania.dmg),megaluavania.damageProps)
+				fightBox = textplus.Block(megaluavania.centerX,boxY - 48,tostring(megaluavania.dmg),megaluavania.damageProps)
 				fightBox:finish()
 				Audio.SfxPlayCh(7,hitSFX,0)
-			else
-				Graphics.draw{type = RTYPE_IMAGE,image = miss,x = megaluavania.centerX - 58,y = boxY - 48}
 			end
-		elseif fightCounter > 40 and fightCounter < 68 then
+		elseif fightCounter > 40 and fightCounter <= 68 then
 			displayEnemyHP = math.max(displayEnemyHP - megaluavania.dmg/27,encounter.enemyHPMin or 0)
 			if megaluavania.dmg > 0 then
-				encounter.spriteX = encounter.spriteX + math.min(20,megaluavania.dmg)*math.sin(fightCounter)
+				encounter.spriteX = encounter.spriteX + math.min(30,megaluavania.dmg)*math.sin(fightCounter/7*math.pi)
 			end	
-		elseif fightCounter >= 68 then
-			encounter.spriteX = megaluavania.centerX - encounterSprite.width/2
+		elseif fightCounter > 68 then
+			encounter.spriteX = ESPXOld or encounter.spriteX
 		end
 		if fightCounter > 40 then
 			if fightBox ~= nil then
 				fightBox.y = math.min(boxY - 32,boxY - 49 + (fightCounter - 42)*(fightCounter - 42)/4)
-			else
-				Graphics.draw{type = RTYPE_IMAGE,image = miss,x = megaluavania.centerX - 58,y = math.min(boxY - 32,boxY - 49 + (fightCounter - 42)*(fightCounter - 42)/4)}
 			end
 			if megaluavania.dmg > 0 then
 				encounterSprite = encounter.spriteHurt or encounter.sprite
-				boxGrey.x = megaluavania.cameraX + encounter.spriteX
-				boxGrey.y = megaluavania.cameraY + boxY
+				boxGrey.x = encounter.spriteX
+				boxGrey.y = boxY
 				boxGrey.width = encounterSprite.width
-				boxGrey:Draw(0x404040FF)
 				box.x = boxGrey.x
 				box.y = boxGrey.y
 				box.width = displayEnemyHP/encounter.enemyHPMax * encounterSprite.width
-				box:Draw(0x00FF00FF)
 			end	
 		end
-		if megaluavania.dmg > 0 then
-			for i = 0,5 do
-				if fightCounter < 6*(i + 1) then
-					Graphics.draw{type = RTYPE_IMAGE,image = swing[i],x = megaluavania.centerX - 7,y = 182 - encounter.sprite.height/2}
-					break
-				end
-			end
-		end	
 		fightCounter = fightCounter + 1
 	elseif pressedAct then
 		megaluavania.displayText = encounter.acts[actSelection].text
@@ -1063,11 +1231,11 @@ function megaluavania.result(encounter)
 	end
 	if not set then
 		megaluavania.determinationProps.typeSounds = {megaluavania.resourcePath.."typewriter.ogg"}
-		textBox = textblox.Block(tX + 11,tY + 45,megaluavania.displayText[megaluavania.textCounter] or "",megaluavania.determinationProps)
+		textBox = textplus.Block(tX + 11,tY + 45,megaluavania.displayText[megaluavania.textCounter] or "",megaluavania.determinationProps)
 		OT = textBox.text
 		set = true
 	end	
-	if (inputos.state["jump"] == inputos.PRESS and textBox:isFinished() and not pressedFight) or fightCounter == 75 or (not pressedFight and megaluavania.displayText[megaluavania.textCounter] == "") then
+	if (player.keys.jump == KEYS_PRESSED and textBox:isFinished() and not pressedFight) or fightCounter == 75 or (not pressedFight and megaluavania.displayText[megaluavania.textCounter] == "") then
 		fightCounter = 0
 		encounter.enemyHP = newEnemyHP or encounter.enemyHP
 		if fightBox ~= nil then
@@ -1091,18 +1259,15 @@ function megaluavania.result(encounter)
 			megaluavania.textCounter = 0
 		end	
 		megaluavania.textCounter = megaluavania.textCounter + 1
-	elseif inputos.state["run"] == inputos.PRESS then
+	elseif player.keys.run == KEYS_PRESSED then
 		textBox:finish()
 	end	
 end
 
 function megaluavania.enemyDialogue(encounter)
-	if megaluavania.dialogue[megaluavania.textCounter].text ~= "" then
-		Graphics.draw{type = RTYPE_IMAGE,image = bubble,x = bX,y = bY}
-	end
 	if not set then
 		megaluavania.dotumCheProps.typeSounds = megaluavania.dialogue[megaluavania.textCounter].typeSounds or encounter.typeSounds or defaultVoice
-		textBox = textblox.Block(bX + 36,bY + 24,megaluavania.dialogue[megaluavania.textCounter].text or "No text<br>defined.",megaluavania.dotumCheProps)
+		textBox = textplus.Block(bX + 36,bY + 24,megaluavania.dialogue[megaluavania.textCounter].text or "No text<br>defined.",megaluavania.dotumCheProps)
 		OT = textBox.text
 		if megaluavania.dialogue[megaluavania.textCounter].func ~= nil then
 			megaluavania.dialogue[megaluavania.textCounter].func()
@@ -1110,7 +1275,7 @@ function megaluavania.enemyDialogue(encounter)
 		set = true
 	end
 	encounterSprite = megaluavania.dialogue[megaluavania.textCounter].sprite or encounter.sprite
-	if (inputos.state["jump"] == inputos.PRESS and textBox:isFinished()) or megaluavania.dialogue[megaluavania.textCounter].text == "" then
+	if (player.keys.jump == KEYS_PRESSED and textBox:isFinished()) or megaluavania.dialogue[megaluavania.textCounter].text == "" then
 		set = false
 		textBox:delete()
 		textBox = nil
@@ -1120,7 +1285,7 @@ function megaluavania.enemyDialogue(encounter)
 			megaluavania.textCounter = 0
 		end
 		megaluavania.textCounter = megaluavania.textCounter + 1
-	elseif inputos.state["run"] == inputos.PRESS then
+	elseif player.keys.run == KEYS_PRESSED then
 		textBox:finish()
 	end
 end
@@ -1132,96 +1297,106 @@ function megaluavania.enemyAttack(encounter)
 		setmetatable(attack,attacks.mt)
 		BWd = OBW
 		BHd = OBH
+		megaluavania.heart.x = megaluavania.centerX - megaluavania.heart.width/2
+		megaluavania.heart.y = megaluavania.centerY - megaluavania.heart.height/2
 	end
 	if attackCounter ~= attack.time and not attack.stop then
-		local spaceX = megaluavania.spaceX or (boxWidth - 10)
-		local spaceY = megaluavania.spaceY or (boxHeight - 10)
+		spaceX = megaluavania.spaceX or (boxWidth - 10)
+		spaceY = megaluavania.spaceY or (boxHeight - 10)
 		if megaluavania.heart.color == megaluavania.HCOLOR_RED or megaluavania.heart.color == megaluavania.HCOLOR_BLUE or megaluavania.heart.color == megaluavania.HCOLOR_BLUETOP or megaluavania.heart.color == megaluavania.HCOLOR_PURPLE then
 			megaluavania.heart.speedX = 0
 		end	
 		if megaluavania.heart.color == megaluavania.HCOLOR_RED or megaluavania.heart.color == megaluavania.HCOLOR_BLUELEFT or megaluavania.heart.color == megaluavania.HCOLOR_BLUERIGHT or megaluavania.heart.color == megaluavania.HCOLOR_PURPLE then
 			megaluavania.heart.speedY = 0
 		end	
-		if (inputos.state["run"] == inputos.HOLD or inputos.state["run"] == inputos.PRESS) then
+		if (player.keys.run == KEYS_DOWN or player.keys.run == KEYS_PRESSED) then
 			speed = 2
 		else
 			speed = 3
 		end
 		if megaluavania.heart.color == megaluavania.HCOLOR_RED then
-			if (inputos.state["up"] == inputos.HOLD or inputos.state["up"] == inputos.PRESS) and (inputos.state["down"] == inputos.HOLD or inputos.state["down"] == inputos.PRESS) then
+			if (player.keys.up == KEYS_DOWN or player.keys.up == KEYS_PRESSED) and (player.keys.down == KEYS_DOWN or player.keys.down == KEYS_PRESSED) then
 				megaluavania.heart.speedY = 0
-			elseif inputos.state["down"] == inputos.HOLD or inputos.state["down"] == inputos.PRESS then
+			elseif player.keys.down == KEYS_DOWN or player.keys.down == KEYS_PRESSED then
 				megaluavania.heart.speedY = speed
-			elseif inputos.state["up"] == inputos.HOLD or inputos.state["up"] == inputos.PRESS then
+			elseif player.keys.up == KEYS_DOWN or player.keys.up == KEYS_PRESSED then
 				megaluavania.heart.speedY = - speed
 			end
-			if (inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS) and (inputos.state["right"] == inputos.HOLD or inputos.state["right"] ==  inputos.PRESS) then
+			if (player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED) and (player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED) then
 				megaluavania.heart.speedX = 0
-			elseif inputos.state["right"] == inputos.HOLD or inputos.state["right"] == inputos.PRESS then
+			elseif player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED then
 				megaluavania.heart.speedX = speed
-			elseif inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS then
+			elseif player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED then
 				megaluavania.heart.speedX = - speed
 			end
 		elseif megaluavania.heart.color == megaluavania.HCOLOR_BLUE then
 			megaluavania.heart.speedY = math.min(5,megaluavania.heart.speedY + 0.1)
-			if (inputos.state["up"] == inputos.HOLD or inputos.state["up"] == inputos.PRESS) and megaluavania.heart.y == megaluavania.centerY + boxHeight/2 - 5 - megaluavania.heart.height then
+			if (player.keys.up == KEYS_DOWN or player.keys.up == KEYS_PRESSED) and megaluavania.heart.y == megaluavania.centerY + boxHeight/2 - 5 - megaluavania.heart.height then
 				megaluavania.heart.speedY = -4
+			elseif player.keys.up == KEYS_UNPRESSED then
+				megaluavania.heart.speedY = math.max(0,megaluavania.heart.speedY)
 			end
-			if (inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS) and (inputos.state["right"] == inputos.HOLD or inputos.state["right"] == inputos.PRESS) then
+			if (player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED) and (player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED) then
 				megaluavania.heart.speedX = 0
-			elseif inputos.state["right"] == inputos.HOLD or inputos.state["right"] == inputos.PRESS then
+			elseif player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED then
 				megaluavania.heart.speedX = speed
-			elseif inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS then
+			elseif player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED then
 				megaluavania.heart.speedX = - speed
 			end
 		elseif megaluavania.heart.color == megaluavania.HCOLOR_BLUETOP then
 			megaluavania.heart.speedY = math.max(-5,megaluavania.heart.speedY - 0.1)
-			if (inputos.state["down"] == inputos.HOLD or inputos.state["down"] == inputos.PRESS) and megaluavania.heart.y == megaluavania.centerY - boxHeight/2 + 5 then
+			if (player.keys.down == KEYS_DOWN or player.keys.down == KEYS_PRESSED) and megaluavania.heart.y == megaluavania.centerY - boxHeight/2 + 5 then
 				megaluavania.heart.speedY = 4
+			elseif player.keys.down == KEYS_UNPRESSED then
+				megaluavania.heart.speedY = math.min(0,megaluavania.heart.speedY)
 			end
-			if (inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS) and (inputos.state["right"] == inputos.HOLD or inputos.state["right"] == inputos.PRESS) then
+			if (player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED) and (player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED) then
 				megaluavania.heart.speedX = 0
-			elseif inputos.state["right"] == inputos.HOLD or inputos.state["right"] == inputos.PRESS then
+			elseif player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED then
 				megaluavania.heart.speedX = speed
-			elseif inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS then
+			elseif player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED then
 				megaluavania.heart.speedX = - speed
 			end	
 		elseif megaluavania.heart.color == megaluavania.HCOLOR_BLUELEFT then
 			megaluavania.heart.speedX = math.max(-5,megaluavania.heart.speedX - 0.1)
-			if (inputos.state["right"] == inputos.HOLD or inputos.state["right"] == inputos.PRESS) and megaluavania.heart.x == megaluavania.centerX - boxWidth/2 + 5 then
+			if (player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED) and megaluavania.heart.x == megaluavania.centerX - boxWidth/2 + 5 then
 				megaluavania.heart.speedX = 4
+			elseif player.keys.up == KEYS_UNPRESSED then
+				megaluavania.heart.speedX = math.min(0,megaluavania.heart.speedY)
 			end
-			if (inputos.state["up"] == inputos.HOLD or inputos.state["up"] == inputos.PRESS) and (inputos.state["down"] == inputos.HOLD or inputos.state["down"] == inputos.PRESS) then
+			if (player.keys.up == KEYS_DOWN or player.keys.up == KEYS_PRESSED) and (player.keys.down == KEYS_DOWN or player.keys.down == KEYS_PRESSED) then
 				megaluavania.heart.speedY = 0
-			elseif inputos.state["down"] == inputos.HOLD or inputos.state["down"] == inputos.PRESS then
+			elseif player.keys.down == KEYS_DOWN or player.keys.down == KEYS_PRESSED then
 				megaluavania.heart.speedY = speed
-			elseif inputos.state["up"] == inputos.HOLD or inputos.state["up"] == inputos.PRESS then
+			elseif player.keys.up == KEYS_DOWN or player.keys.up == KEYS_PRESSED then
 				megaluavania.heart.speedY = - speed
 			end
 		elseif megaluavania.heart.color == megaluavania.HCOLOR_BLUERIGHT then
 			megaluavania.heart.speedX = math.min(5,megaluavania.heart.speedX + 0.1)
-			if (inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS) and megaluavania.heart.x == megaluavania.centerX + boxWidth/2 - 5 - megaluavania.heart.width then
+			if (player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED) and megaluavania.heart.x == megaluavania.centerX + boxWidth/2 - 5 - megaluavania.heart.width then
 				megaluavania.heart.speedX = -4
+			elseif player.keys.up == KEYS_UNPRESSED then
+				megaluavania.heart.speedX = math.max(0,megaluavania.heart.speedY)
 			end
-			if (inputos.state["up"] == inputos.HOLD or inputos.state["up"] == inputos.PRESS) and (inputos.state["down"] == inputos.HOLD or inputos.state["down"] == inputos.PRESS) then
+			if (player.keys.up == KEYS_DOWN or player.keys.up == KEYS_PRESSED) and (player.keys.down == KEYS_DOWN or player.keys.down == KEYS_PRESSED) then
 				megaluavania.heart.speedY = 0
-			elseif inputos.state["down"] == inputos.HOLD or inputos.state["down"] == inputos.PRESS then
+			elseif player.keys.down == KEYS_DOWN or player.keys.down == KEYS_PRESSED then
 				megaluavania.heart.speedY = speed
-			elseif inputos.state["up"] == inputos.HOLD or inputos.state["up"] == inputos.PRESS then
+			elseif player.keys.up == KEYS_DOWN or player.keys.up == KEYS_PRESSED then
 				megaluavania.heart.speedY = - speed
 			end
 		elseif megaluavania.heart.color == megaluavania.HCOLOR_GREEN then
 			megaluavania.heart.move = false
-			if inputos.state["up"] == inputos.PRESS and shieldDir ~= megaluavania.DIRECTION_UP then
+			if player.keys.up == KEYS_PRESSED and shieldDir ~= megaluavania.DIRECTION_UP then
 				shieldDirNew = megaluavania.DIRECTION_UP
 				rotCounter = 5
-			elseif inputos.state["down"] == inputos.PRESS and shieldDir ~= megaluavania.DIRECTION_DOWN then
+			elseif player.keys.down == KEYS_PRESSED and shieldDir ~= megaluavania.DIRECTION_DOWN then
 				shieldDirNew = megaluavania.DIRECTION_DOWN
 				rotCounter = 5
-			elseif inputos.state["left"] == inputos.PRESS and shieldDir ~= megaluavania.DIRECTION_LEFT then
+			elseif player.keys.left == KEYS_PRESSED and shieldDir ~= megaluavania.DIRECTION_LEFT then
 				shieldDirNew = megaluavania.DIRECTION_LEFT
 				rotCounter = 5
-			elseif inputos.state["right"] == inputos.PRESS and shieldDir ~= megaluavania.DIRECTION_RIGHT then
+			elseif player.keys.right == KEYS_PRESSED and shieldDir ~= megaluavania.DIRECTION_RIGHT then
 				shieldDirNew = megaluavania.DIRECTION_RIGHT
 				rotCounter = 5
 			end
@@ -1279,19 +1454,13 @@ function megaluavania.enemyAttack(encounter)
 					table.remove(megaluavania.bullets,i)
 				end
 			end
-			Graphics.draw{type = RTYPE_IMAGE,image = greenCircle,x = megaluavania.heart.x - 22,y = megaluavania.heart.y - 22}
-			if shieldCounter > 0 then
-				megaluavania.drawImageRotated(shield.image1,megaluavania.heart.x - 25,megaluavania.heart.y - 25,62,62,angle)
-			else
-				megaluavania.drawImageRotated(shield.image,megaluavania.heart.x - 25,megaluavania.heart.y - 25,62,62,angle)
-			end
 			shieldCounter = math.max(shieldCounter - 1,0)
 		elseif megaluavania.heart.color == megaluavania.HCOLOR_PURPLE then
-			if (inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS) and (inputos.state["right"] == inputos.HOLD or inputos.state["right"] ==  inputos.PRESS) then
+			if (player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED) and (player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED) then
 				megaluavania.heart.speedX = 0
-			elseif inputos.state["right"] == inputos.HOLD or inputos.state["right"] == inputos.PRESS then
+			elseif player.keys.right == KEYS_DOWN or player.keys.right == KEYS_PRESSED then
 				megaluavania.heart.speedX = speed
-			elseif inputos.state["left"] == inputos.HOLD or inputos.state["left"] == inputos.PRESS then
+			elseif player.keys.left == KEYS_DOWN or player.keys.left == KEYS_PRESSED then
 				megaluavania.heart.speedX = - speed
 			end
 			spaceX = boxWidth - 26
@@ -1323,36 +1492,33 @@ function megaluavania.enemyAttack(encounter)
 			end
 			for k,v in pairs(strings) do
 				strings[k] = v + (megaluavania.stringSpeed or 0)
-				stringsCol[k].x = megaluavania.centerX - boxWidth/2 + 21 + megaluavania.cameraX
-				stringsCol[k].y = v + megaluavania.cameraY
+				stringsCol[k].x = megaluavania.centerX - boxWidth/2 + 21
+				stringsCol[k].y = v
 				stringsCol[k].width = boxWidth - 42
-				if v >= megaluavania.centerY - spaceY/2 and v < megaluavania.centerY + spaceY/2 then
-					stringsCol[k]:Draw(0x6A1A6CFF)
-				end
 			end
 			if bound == megaluavania.BOUNDS_NONE then
 				for i = -math.max(math.ceil((boxHeight - 35)/stringDist),5),math.max(math.ceil((boxHeight - 35)/stringDist),5) do
 					strings[megaluavania.heart.string + i] = strings[megaluavania.heart.string] - stringDist*i
-					stringsCol[megaluavania.heart.string + i] = colliders.Box(megaluavania.centerX - boxWidth/2 + 21 + megaluavania.cameraX,strings[megaluavania.heart.string + i] + megaluavania.cameraY,boxWidth - 42,1)
+					stringsCol[megaluavania.heart.string + i] = colliders.Box(megaluavania.centerX - boxWidth/2 + 21,strings[megaluavania.heart.string + i],boxWidth - 42,1)
 				end
 			end
 			if webDir == nil then
-				if inputos.state["up"] == inputos.PRESS and inputos.state["down"] == inputos.PRESS then
-				elseif inputos.state["down"] == inputos.PRESS and (megaluavania.heart.string > 1 or (bound == megaluavania.BOUNDS_NONE)) and strings[megaluavania.heart.string - 1] < megaluavania.centerY + spaceY/2 - megaluavania.heart.height then
+				if player.keys.up == KEYS_PRESSED and player.keys.down == KEYS_PRESSED then
+				elseif player.keys.down == KEYS_PRESSED and (megaluavania.heart.string > 1 or (bound == megaluavania.BOUNDS_NONE)) and strings[megaluavania.heart.string - 1] < megaluavania.centerY + spaceY/2 - megaluavania.heart.height then
 					webDir = megaluavania.DIRECTION_DOWN
-				elseif inputos.state["up"] == inputos.PRESS and megaluavania.heart.string < nStrings and strings[megaluavania.heart.string + 1] >= megaluavania.centerY - spaceY/2 then
+				elseif player.keys.up == KEYS_PRESSED and megaluavania.heart.string < nStrings and strings[megaluavania.heart.string + 1] >= megaluavania.centerY - spaceY/2 then
 					webDir = megaluavania.DIRECTION_UP
 				end
 				newY = strings[megaluavania.heart.string] - megaluavania.heart.height/2
 			elseif webDir == megaluavania.DIRECTION_UP then
-				newY = math.max(strings[megaluavania.heart.string + 1] - megaluavania.heart.height/2,megaluavania.heart.y - 3 + megaluavania.stringSpeed)
+				newY = math.max(strings[megaluavania.heart.string + 1] - megaluavania.heart.height/2,megaluavania.heart.y - 5 + megaluavania.stringSpeed)
 				if newY == strings[megaluavania.heart.string + 1] - megaluavania.heart.height/2 then
 					megaluavania.heart.string = megaluavania.heart.string + 1
 					webDir = nil
 				end
 				megaluavania.heart.speedX = 0
 			elseif webDir == megaluavania.DIRECTION_DOWN then
-				newY = math.min(strings[megaluavania.heart.string - 1] - megaluavania.heart.height/2,megaluavania.heart.y + 3 + megaluavania.stringSpeed)
+				newY = math.min(strings[megaluavania.heart.string - 1] - megaluavania.heart.height/2,megaluavania.heart.y + 5 + megaluavania.stringSpeed)
 				if newY == strings[megaluavania.heart.string - 1] - megaluavania.heart.height/2 then
 					megaluavania.heart.string = megaluavania.heart.string - 1
 					webDir = nil
@@ -1389,9 +1555,6 @@ function megaluavania.enemyAttack(encounter)
 		else
 			megaluavania.heart.isMoving = true
 		end
-		if (megaluavania.heart.invincibility == 0 or attackCounter % 4 ~= 0) and (doAttack or resizeCounter > 0) then
-			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
-		end	
 		megaluavania.heart.col.x = megaluavania.heart.x + 2 + megaluavania.cameraX
 		megaluavania.heart.col.y = megaluavania.heart.y + 2 + megaluavania.cameraY
 	end
@@ -1408,6 +1571,7 @@ function megaluavania.enemyAttack(encounter)
 			resizeCounter = 0
 			attackCounter = 0
 			megaluavania.phase = megaluavania.PHASE_ATTACKCHOICE
+			megaluavania.heart.x,megaluavania.heart.y = nil,nil
 			attack.stop = false
 			attack = nil
 			doAttack = false
@@ -1418,6 +1582,7 @@ function megaluavania.enemyAttack(encounter)
 		resizeCounter = 0
 		attackCounter = 0
 		megaluavania.phase = megaluavania.PHASE_ATTACKCHOICE
+		megaluavania.heart.x,megaluavania.heart.y = nil,nil
 		attack.stop = false
 		attack = nil
 		doAttack = false
@@ -1468,7 +1633,7 @@ function megaluavania.enemyAttack(encounter)
 		attack.func(attackCounter)
 		attackCounter = attackCounter + 1
 		local heartarea = colliders.Circle(megaluavania.heart.x + megaluavania.heart.width/2 + megaluavania.cameraX,megaluavania.heart.y + megaluavania.heart.height/2 + megaluavania.cameraY,75)
-		local minDelay = {bullet = nil,time = math.huge}
+		minDelay = {bullet = nil,time = math.huge}
 		for i = #megaluavania.bullets,1,-1 do
 			local v = megaluavania.bullets[i]
 			if v.removed then
@@ -1517,28 +1682,19 @@ function megaluavania.enemyAttack(encounter)
 							v.y = 2*megaluavania.centerY - v.colCY - v.height/2
 						end
 					end
-				end
-				if not v.hidden and v.sprite ~= nil then
-					if v.type == megaluavania.BULLET_ARROW then
-						if v.delay <= minDelay.time then
-							minDelay = {bullet = v,time = v.delay}
-						end
+				elseif v.type == megaluavania.BULLET_BONE then
+					v.x = v.x + v.speedX
+					if v.heightChange ~= nil then
+						megaluavania.setBoneHeight(v,v.heightChange(attackCounter))
+					end
+					if v.x > megaluavania.centerX + amalgamAttacks[2].boxWidth/2 - v.width or v.x < megaluavania.centerX - amalgamAttacks[2].boxWidth/2 then
+						v.hidden = true
 					else
-						--Graphics.draw{type = RTYPE_IMAGE,image = v.sprite,x = v.x,y = v.y,sourceX = v.GFXOffsetX or v.offsetX,sourceY = v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,sourceWidth = v.GFXWidth,sourceHeight = v.GFXHeight}
-						Graphics.drawImageWP(v.sprite,v.x,v.y,v.GFXOffsetX or v.offsetX,v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,v.GFXWidth,v.GFXHeight,v.opacity,v.priority)
+						v.hidden = false
 					end
 				end
-			end
-		end
-		for i = #megaluavania.bullets,1,-1 do
-			local v = megaluavania.bullets[i]
-			if v.type == megaluavania.BULLET_ARROW then
-				if v == minDelay.bullet then
-					--Graphics.draw{type = RTYPE_IMAGE,image = attack.arrowGFXTableR[v.direction],x = v.x,y = v.y,sourceX = v.GFXOffsetX or v.offsetX,sourceY = v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,sourceWidth = v.GFXWidth,sourceHeight = v.GFXHeight}
-					Graphics.drawImageWP(attack.arrowGFXTableR[v.direction] or v.sprite,v.x,v.y,v.GFXOffsetX or v.offsetX,v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,v.GFXWidth,v.GFXHeight,v.opacity,v.priority)
-				else
-					--Graphics.draw{type = RTYPE_IMAGE,image = v.sprite,x = v.x,y = v.y,sourceX = v.GFXOffsetX or v.offsetX,sourceY = v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,sourceWidth = v.GFXWidth,sourceHeight = v.GFXHeight}
-					Graphics.drawImageWP(v.sprite,v.x,v.y,v.GFXOffsetX or v.offsetX,v.GFXOffsetY or v.offsetY + (v.frame - 1)*v.GFXHeight,v.GFXWidth,v.GFXHeight,v.opacity,v.priority)
+				if not v.hidden and v.sprite ~= nil and v.type == megaluavania.BULLET_ARROW and v.delay <= minDelay.time then
+					minDelay = {bullet = v,time = v.delay}
 				end
 			end
 		end
@@ -1578,13 +1734,8 @@ function megaluavania.gameOver(encounter)
 		Audio.MusicStop()
 		GOCounter = 0
 	end
-	if GOCounter < 30 then
-		Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[0],x = megaluavania.heart.x,y = megaluavania.heart.y}
-	elseif GOCounter == 30 then
+	if GOCounter == 30 then
 		Audio.SfxPlayCh(6,heartbreakSFX,0)
-		Graphics.draw{type = RTYPE_IMAGE,image = heartbreak,x = megaluavania.heart.x - 2,y = megaluavania.heart.y}
-	elseif GOCounter < 55 then
-		Graphics.draw{type = RTYPE_IMAGE,image = heartbreak,x = megaluavania.heart.x - 2,y = megaluavania.heart.y}
 	elseif GOCounter == 55 then
 		heartshards[0].dir = 2*rng.randomInt(0,1) - 1
 		heartshards[1].dir = 2*rng.randomInt(0,1) - 1
@@ -1599,18 +1750,17 @@ function megaluavania.gameOver(encounter)
 		heartshards[5].dir = 2*rng.randomInt(0,1) - 1
 		heartshards[6].dir = 2*rng.randomInt(0,1) - 1
 		for _,v in pairs(heartshards) do
-			v.x = megaluavania.heart.x + 8 + 2*v.dir
+			v.x = megaluavania.heart.x + 8 + 2 * v.dir
 			v.y = megaluavania.heart.y + 8
 			v.speedX = rng.random(1,3) * v.dir
-			v.speedY = - rng.random(-2,5)
+			v.speedY = rng.random(-5,2)
 		end
 		Audio.SfxPlayCh(5,heartboomSFX,0)
-	else
+	elseif GOCounter > 55 then
 		for _,v in pairs(heartshards) do
 			v.x = v.x + v.speedX
 			v.speedY = v.speedY + 0.1
 			v.y = v.y + v.speedY
-			Graphics.draw{type = RTYPE_IMAGE,image = v.sprite,x = v.x,y = v.y}
 		end
 	end
 	if GOCounter > 55 and GOCounter % 6 == 0 then
@@ -1634,21 +1784,16 @@ function megaluavania.flee(encounter)
 		killCounter = 0
 		Audio.SfxPlayCh(3,fleeSFX,0)
 		local fleeText = megaluavania.fleeText or {"* I'm outta here.","* I've got better to do.","* Escaped...","* Don't slow me down."}
-		textBox = textblox.Block(tX + 11,tY + 45,fleeText[rng.randomInt(1,#fleeText)],megaluavania.determinationProps)
+		textBox = textplus.Block(tX + 11,tY + 45,rng.irandomEntry(fleeText),megaluavania.determinationProps)
 		OT = textBox.text
 	end
-	if killCounter % 10 < 5 then
-		Graphics.draw{type = RTYPE_IMAGE,image = heartFlee[0],x = tX + 24 - 1.5*killCounter,y = tY + 62}
-	else
-		Graphics.draw{type = RTYPE_IMAGE,image = heartFlee[1],x = tX + 24 - 1.5*killCounter,y = tY + 62}
-	end
 	killCounter = killCounter + 1
-	if inputos.state["jump"] == inputos.PRESS and textBox:isFinished() then
+	if player.keys.jump == KEYS_PRESSED and textBox:isFinished() then
 		encounter.initiated = megaluavania.BATTLE_EXIT
 		textBox:delete()
 		textBox = nil
 		killCounter = nil
-	elseif inputos.state["run"] == inputos.PRESS then
+	elseif player.keys.run == KEYS_PRESSED then
 		textBox:finish()
 	end
 end
@@ -1660,8 +1805,8 @@ function megaluavania.kill(encounter)
 		for i = 0,encounter.sprite.width/2 do
 			pxTable[i] = {}
 		end
-		megaluavania.exp = megaluavania.exp + encounter.exp
-		megaluavania.gold = megaluavania.gold + encounter.gold
+		megaluavania.exp = megaluavania.exp + (encounter.exp or 0)
+		megaluavania.gold = megaluavania.gold + (encounter.gold or 0)
 		while megaluavania.exp >= megaluavania.expPerLV(megaluavania.LV + 1) do
 			megaluavania.playerHP = megaluavania.playerHP - megaluavania.HPPerLV(megaluavania.LV) + megaluavania.HPPerLV(megaluavania.LV + 1)
 			megaluavania.LV = megaluavania.LV + 1
@@ -1674,7 +1819,7 @@ function megaluavania.kill(encounter)
 		end
 		megaluavania.playerHPMax = megaluavania.HPPerLV(megaluavania.LV)
 		megaluavania.playerAtk = megaluavania.atkPerLV(megaluavania.LV)
-		textBox = textblox.Block(tX + 11,tY + 45,"* YOU WON!<br>* You earned "..encounter.gold.." gold and "..encounter.exp.." XP."..megaluavania.increaseText,megaluavania.determinationProps)
+		textBox = textplus.Block(tX + 11,tY + 45,"* YOU WON!<br>* You earned "..encounter.gold.." gold and "..encounter.exp.." XP."..megaluavania.increaseText,megaluavania.determinationProps)
 		OT = textBox.text
 		Audio.SfxPlayCh(12,dustSFX,0)
 		megaluavania.increaseText = ""
@@ -1694,12 +1839,12 @@ function megaluavania.kill(encounter)
 		end
 	end
 	killCounter = killCounter + 1
-	if inputos.state["jump"] == inputos.PRESS and textBox:isFinished() then
+	if player.keys.jump == KEYS_PRESSED and textBox:isFinished() then
 		encounter.initiated = megaluavania.BATTLE_EXIT
 		textBox:delete()
 		textBox = nil
 		killCounter = nil
-	elseif inputos.state["run"] == inputos.PRESS then
+	elseif player.keys.run == KEYS_PRESSED then
 		textBox:finish()
 	end	
 end
@@ -1708,7 +1853,7 @@ function megaluavania.spare(encounter)
 	if killCounter == nil then
 		Audio.MusicStop()
 		killCounter = 0
-		textBox = textblox.Block(tX + 11,tY + 45,"* YOU WON!<br>* You earned "..encounter.gold.." GOLD and 0 EXP.",megaluavania.determinationProps)
+		textBox = textplus.Block(tX + 11,tY + 45,"* YOU WON!<br>* You earned "..encounter.gold.." GOLD and 0 EXP.",megaluavania.determinationProps)
 		OT = textBox.text
 		Audio.SfxPlayCh(12,dustSFX,0)
 		megaluavania.exp = megaluavania.exp + encounter.exp
@@ -1737,54 +1882,18 @@ function megaluavania.spare(encounter)
 	encounterSprite = encounter.spriteHurt
 	encounter.opacity = 0.5
 	killCounter = killCounter + 1
-	if inputos.state["jump"] == inputos.PRESS and textBox:isFinished() then
+	if player.keys.jump == KEYS_PRESSED and textBox:isFinished() then
 		encounter.initiated = megaluavania.BATTLE_EXIT
 		textBox:delete()
 		textBox = nil
 		killCounter = nil
-	elseif inputos.state["run"] == inputos.PRESS then
+	elseif player.keys.run == KEYS_PRESSED then
 		textBox:finish()
 	end	
 end
 
 function megaluavania.shake(TextBlock,OT)
-	shakeCounter = (shakeCounter + 1) % 130
-	if oldT == nil or oldT ~= TextBlock.text then
-		text = TextBlock.text
-		pureText = string.gsub(text,"<(.-)>","")
-		rem = {}
-		rem[1] = {}
-		local i = 1
-		rem[i][1] = string.find(text,"<")
-		rem[i][2] = string.find(text,">",rem[i][1])
-		while rem[i][1] ~= nil and rem[i][2] ~= nil do
-			i = i + 1
-			rem[i] = {}
-			rem[i][1] = string.find(text,"<",rem[i-1][2])
-			rem[i][2] = string.find(text,">",rem[i][1])
-		end
-	end
-	if shakeCounter == 0 and pureText ~= "" and TextBlock:isFinished() then
-		local pos
-		local inCommand = true
-		while inCommand do
-			inCommand = false
-			pos = rng.randomInt(1,string.len(text))
-			for _,v in pairs(rem) do
-				if v[1] ~= nil and v[2] ~= nil then
-					if pos >= v[1] and pos <= v[2] then
-						inCommand = true
-						break
-					end
-				end
-			end
-		end
-		TextBlock:setText(string.sub(text,1,pos - 1).."<tremble>"..string.sub(text,pos,pos).."</tremble>"..string.sub(text,pos + 1))
-		TextBlock:finish()
-	elseif shakeCounter == 20 and TextBlock:isFinished() then
-		TextBlock:setText(OT)
-	end
-	oldT = TextBlock.text
+	megaluavania.tableShake({TextBlock},{OT})
 end
 
 function megaluavania.tableShake(TBArray,OTArray)
@@ -1827,9 +1936,10 @@ function megaluavania.tableShake(TBArray,OTArray)
 			TBArray[TBPos]:setText(string.sub(text[TBPos],1,pos - 1).."<tremble>"..string.sub(text[TBPos],pos,pos).."</tremble>"..string.sub(text[TBPos],pos + 1))
 			TBArray[TBPos]:finish()
 		end
-	elseif TBPos ~= nil then
+	elseif TBPos ~= nil and TBArray[TBPos] ~= nil then
 		if shakeCounter == 20 and TBArray[TBPos]:isFinished() then
 			TBArray[TBPos]:setText(OTArray[TBPos])
+			TBPos = nil
 		end	
 	end
 	oldT = TBArray[1].text
@@ -1902,7 +2012,7 @@ function megaluavania.assignText(t)
 				if v.func ~= nil then
 					v.func()
 				end
-				return v.text[rng.randomInt(1,#v.text)]
+				return rng.irandomEntry(v.text)
 			end
 		end
 	end
@@ -1912,41 +2022,45 @@ function megaluavania.remove(bullet)
 	bullet.removed = true
 end
 
-function megaluavania.drawImageRotated(img, x, y, w, h, rotate)
-	rotate = rotate*math.pi/180
-	local s1 = math.sin(rotate)
-	local c1 = math.cos(rotate)
-	w = w * 0.5
-	h = h * 0.5
-	local x1 = (-w*c1) - (-h*s1)
-	local y1 = (-h*c1) + (-w*s1)
-	local x2 = (w*c1) - (h*s1)
-	local y2 = (h*c1) + (w*s1)
-	local vertCoords = {}
-	vertCoords[0], vertCoords[1] = megaluavania._rot1(-w, -h, s1, c1);
-	vertCoords[2], vertCoords[3] = megaluavania._rot1(-w, h, s1, c1);
-	vertCoords[4], vertCoords[5] = megaluavania._rot1(w, -h, s1, c1);
-	vertCoords[6], vertCoords[7] = megaluavania._rot1(w, h, s1, c1);
-	vertCoords[8], vertCoords[9] = megaluavania._rot1(-w, h, s1, c1);
-	vertCoords[10], vertCoords[11] = megaluavania._rot1(w, -h, s1, c1);
-	for i = 0,11,2 do
-		vertCoords[i] = vertCoords[i] + x + w
-		vertCoords[i+1] = vertCoords[i+1] + y + h
+function megaluavania.createBone(t)
+	local newB
+	if t.direction == megaluavania.DIRECTION_DOWN then
+		newB = megaluavania.createBullet{	sprite = t.sprite,
+											x = t.x,
+											y = megaluavania.centerY - amalgamAttacks[2].boxHeight/2 + 5,
+											height = t.height or 50,
+											GFXOffsetY = t.sprite.height - (t.height or 50),
+											color = t.color,
+											priority = t.priority,
+											dmg = t.dmg}
+		newB.speedX = t.speed or 0
+		newB.dir = t.direction
+	else
+		newB = megaluavania.createBullet{	sprite = t.sprite,
+											x = t.x,
+											y = megaluavania.centerY + amalgamAttacks[2].boxHeight/2 - 5 - (t.height or 50),
+											height = t.height or 50,
+											color = t.color,
+											priority = t.priority,
+											dmg = t.dmg}
+		
+		newB.speedX = t.speed or 0
+		newB.dir = t.direction or megaluavania.DIRECTION_UP
 	end
-	local textCoords = {}
-	textCoords[0]  = 0; textCoords[1]  = 0;
-	textCoords[2]  = 0; textCoords[3]  = 1;
-	textCoords[4]  = 1; textCoords[5]  = 0;
-	textCoords[6]  = 1; textCoords[7]  = 1;
-	textCoords[8]  = 0; textCoords[9]  = 1;
-	textCoords[10] = 1; textCoords[11] = 0;
-	Graphics.glDraw{texture = img,vertexCoords = vertCoords,textureCoords = textCoords}
+	newB.heightChange = t.heightChange
+	newB.hidden = true
+	newB.type = megaluavania.BULLET_BONE
+	return newB
 end
 
-function megaluavania._rot1(x, y, s1, c1)
-	local x2 = (x*c1) - (y*s1)
-	local y2 = (y*c1) + (x*s1)
-	return x2, y2
+function megaluavania.setBoneHeight(b,h)
+	b.height = h
+	b.GFXHeight = h
+	if b.dir == megaluavania.DIRECTION_DOWN then
+		b.GFXOffsetY = b.sprite.height - h
+	else
+		b.y = megaluavania.centerY + amalgamAttacks[2].boxHeight/2 - 5 - h	
+	end
 end
 
 function megaluavania.onLoopBattle(encounter)
@@ -1962,6 +2076,12 @@ function megaluavania.onKill(encounter)
 end
 
 function megaluavania.onSpare(encounter)
+end
+
+function megaluavania.onDrawBattle(encounter)
+end
+
+function megaluavania.onDrawBattleEnd(encounter)
 end
 
 return megaluavania

@@ -75,7 +75,7 @@ jukebox.setMusicBox(751, -2880, -1664);
 jukebox.setMusicBox(751, -2624, -1760);
 jukebox.setMusicBox(751, -2336, -1760);
 jukebox.setMusicBox(751, -2048, -1760);
---jukebox.setMusicBox(751, -1760, -1568);
+jukebox.setMusicBox(751, -1760, -1760);
 jukebox.setMusicBox(751, -1472, -1760);
 jukebox.setMusicBox(751, -1184, -1760);
 jukebox.setMusicBox(751, -896, -1760);

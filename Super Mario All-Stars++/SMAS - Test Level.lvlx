@@ -5,8 +5,8 @@ SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:15;MF:"";BG:10;
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:24;MF:"_OST/Undertale/mus_temvillage.ogg";BG:6;OE:1;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario World (NES\, Pirate) - OST.nsf|0\;g=2";BG:2;
-SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/MIDIs/Overworld.mid|s2\;";BG:5;CS:1;CSV:1;
-SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/MIDIs/Overworld.mid|s4\;x={e}_OST/Super Mario All-Stars++ (Beta)/MIDIs/MIDIs.sf2\;c1\;r1\;";BG:58;CS:1;CSV:1;
+SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Undertale/mus_dogsong.ogg";BG:5;CS:1;CSV:1;
+SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Advance 4/Normal Level 1.ogg";BG:58;CS:1;CSV:1;
 SECTION_END
 STARTPOINT
 ID:1;X:-179580;Y:-180086;D:1;

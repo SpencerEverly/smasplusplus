@@ -3,7 +3,7 @@ local commandlist = require("commandlist")
 local textplus = require("textplus")
 local littleDialogue = require("littleDialogue")
 local pausemenu = require("pausemenu")
-
+--local megaluavania = require("megaluavania")
 local debugbox = require("debugbox") --Uncomment in the final release
 
 warpTransition.musicFadeOut = false
@@ -22,7 +22,5 @@ function onStart()
 end
 
 function onEvent(eventName)
-	if eventName == "changethemusic1" then
-		Audio.MusicChange(4, 72)
-	end
+	--Nothing
 end
