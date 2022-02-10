@@ -273,7 +273,8 @@ local function BootSMASPlusPlusPreExecute()
 	logo = true
 	Routine.wait(3.0)
 	exitscreen = true
-	Routine.wait(1.5)
+	Audio.MusicChange(0, 0)
+	Routine.wait(1.0)
 	if (player.keys.down == KEYS_DOWN) == true then
 		Routine.run(mapExit)
 	end
@@ -283,6 +284,7 @@ local function BootSMASPlusPlusPreExecute()
 end
 	
 local function BootWSMBA()
+	Audio.MusicChange(0, 0)
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
@@ -294,6 +296,7 @@ local function BootWSMBA()
 	end
 end
 local function BootWSMBAOG()
+	Audio.MusicChange(0, 0)
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Original)")
