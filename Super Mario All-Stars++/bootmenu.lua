@@ -247,6 +247,7 @@ end
 
 local function ExitGame1()
 	exitscreen = true
+	Audio.MusicChange(0, 0)
 	Misc.saveGame()
 	Routine.wait(0.4)
 	Misc.exitEngine()
@@ -773,7 +774,7 @@ littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction 
 
 
 littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes",chosenFunction = function() if SaveData.disableX2char == 0 then Routine.run(DisableX2) elseif if SaveData.disableX2char == 1 then Routine.run(EnableX2) end})
+littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes",chosenFunction = function() if SaveData.disableX2char == 0 then Routine.run(DisableX2) elseif SaveData.disableX2char == 1 then Routine.run(EnableX2) end})
 
 
 littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
