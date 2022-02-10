@@ -1,5 +1,6 @@
 local bootmenu = require("bootmenu")
 local littleDialogue = require("littleDialogue")
+local autoscroll = require("autoscroll")
 
 local m = RNG.randomInt(1,56-1)
 

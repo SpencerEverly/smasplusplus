@@ -22,7 +22,7 @@ function onPause(evt)
 end
 
 function onEvent(eventName)
-	if eventName == "ExitToMap" then
+	if eventName == "ExitToMap2" then
 		Level.exit()
 	end
 end

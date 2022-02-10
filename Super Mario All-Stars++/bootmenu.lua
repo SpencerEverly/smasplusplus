@@ -94,19 +94,11 @@ local function theme10()
 	Level.load("intro_SMBX2b3.lvlx", nil, nil)
 end
 
-
-local function introExit()
-	autoscroll.scrollTo(-200000, -200000, 10000)
-	Routine.waitFrames(38)
-	autoscroll.scrollTo(-200000, -200000, 10000)
-	Level.load("SMAS - Intro.lvlx", nil, nil)
-end
-
 local function mapExit()
 	autoscroll.scrollTo(-200000, -200000, 10000)
 	Routine.waitFrames(38)
 	autoscroll.scrollTo(-200000, -200000, 10000)
-	Level.exit()
+	Level.load("SMAS - World Map Warp.lvlx", nil, nil)
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
@@ -377,26 +369,19 @@ local function ExitToIntro()
 end
 
 local function ExitToMap()
-	Level.exit()
+	Level.load("SMAS - World Map Warp.lvlx", nil, nil)
 end
 
 local function BootSMASPlusPlusPreExecute()
-	SFX.play("boot_wsmba.wav")
-	active3 = true
-	logo = true
-	Routine.wait(3.0)
 	exitscreen = true
 	autoscroll.scrollTo(-200000, -200000, 10000)
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
-	Routine.wait(1.0)
 	autoscroll.scrollTo(-200000, -200000, 10000)
-	if (player.keys.down == KEYS_DOWN) == true then
-		Routine.run(mapExit)
-	end
-	if (player.keys.down == KEYS_DOWN) == false then 
-		Routine.run(introExit)
-	end
+	Routine.wait(0.4)
+	Misc.saveGame()
+	autoscroll.scrollTo(-200000, -200000, 10000)
+	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 	
 local function BootWSMBAPreExecute()
@@ -468,6 +453,7 @@ end
 
 local function BootGameHelpPreExecute()
 	exitscreen = true
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
 	autoscroll.scrollTo(-200000, -200000, 10000)
