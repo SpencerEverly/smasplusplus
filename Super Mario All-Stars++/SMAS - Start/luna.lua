@@ -62,6 +62,9 @@ function onStart()
 	if SaveData.introselect == nil then
         SaveData.introselect = SaveData.introselect or 1
     end
+	if SaveData.firstBootCompleted == nil then
+        SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
+    end
 	Misc.saveGame()
 	Routine.run(introselection)
 end

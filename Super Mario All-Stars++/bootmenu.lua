@@ -120,6 +120,84 @@ local function easterEgg() --SnooPINGAS I see? ._.
 	active4 = true
 end
 
+local function SaveDataError2()
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(1.5)
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.0>It looks like SavaData couldn't be read or corrupted.<page>If that is happening, you probably loaded this episode on the broken X2 launcher found in the actual SMBX2 program.<page>Unfortunately, this means that SaveData could be corrupted.<page>Next time, please launch the game using the X2 launch menu found on SMBX2.exe, or use the SMASLauncher.<page>Please close this dialogue box by pressing jump, then press pause to exit the game.", speakerName = "Whoops!", pauses = false, updatesInPause = true})
+end
+
+local function FirstBoot1()
+	Routine.wait(1.5)
+	active = true
+	logo = false
+	pressjumpp = false
+	Audio.SeizeStream(0)
+	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>Welcome to Super Mario All-Stars Plus Plus.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
+end
+
+local function FirstBoot3()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.0>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
+end
+
+local function FirstBoot4()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.2>What is your name? (WIP)<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
+end
+
+local function FirstBoot5()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
+end
+
+local function FirstBoot6()
+	Audio.SeizeStream(0)
+	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
+	Audio.MusicChange(1, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.2>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
+	if SaveData.firstBootCompleted == 0 then
+		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
+	end
+	Misc.saveGame()
+	if SaveData.firstBootCompleted == 2 then
+		SaveData.firstBootCompleted = SaveData.firstBootCompleted - 2
+	end
+end
+	
+local function FirstBootGameHelp()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
+	Misc.saveGame()
+end
+
+local function FirstBootGHReturn()
+	active = true
+end
+
+local function FirstBootGHReturn2()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.2>Looks like you've returned from the Game Help level. Do you want to enter the level again, or skip?<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
+	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
+end
+
+local function FirstBoot6GH()
+	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
+	SaveData.firstBootCompleted = SaveData.firstBootCompleted or 1
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.2>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
+	Misc.saveGame()
+end
+
+local function TimeFixInfo1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.1><setPos 400 32 0.5 -1.2>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
+end
+
+local function FailsafeMessage1()
+	active = true
+	if SaveData.failsafeMessageOne == 1 then
+		SaveData.failsafeMessageOne = SaveData.failsafeMessageOne - 1
+	end
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>It looks like the menu restarted.<page>When that happened, you probably died here in the boot screen.<page>If there are any problems, don't hesitate to email spencer.everly at gmail.com or contact them on Discord at Spencer Everly#1997.<question ToMenuResetTwo>", speakerName = "Whoops!", pauses = false, updatesInPause = true})
+end
+
 local function bootDialogue()
 	active = true
 	active4 = false
@@ -174,7 +252,7 @@ local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == 1 then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.0>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == 0 or not Level.filename() == "intro_SMAS.lvlx" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters and revertto the original theme to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters and revert to the original theme to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	elseif Level.filename() == "intro_SMAS.lvlx" then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
@@ -247,18 +325,34 @@ local function BootDialogueMusicReset()
 	active = true
 end
 
+local function ExitDialogueFirstBoot()
+	active = false
+	logo = true
+	pressjumpp = true
+	if SaveData.firstBootCompleted == 1 then
+		GameData.startedmenu = GameData.startedmenu - 1
+	end
+	if GameData.startedmenu == nil then
+		GameData.startedmenu = 0
+	end
+end
+
 local function ExitDialogue()
 	active = false
 	logo = true
 	pressjumpp = true
-	GameData.startedmenu = GameData.startedmenu - 1
+	if SaveData.firstBootCompleted == 1 then
+		GameData.startedmenu = GameData.startedmenu - 1
+	end
 end
 
 local function ExitDialogueMusicReset()
 	active = false
 	logo = true
 	pressjumpp = true
-	GameData.startedmenu = GameData.startedmenu - 1
+	if SaveData.firstBootCompleted == 1 then
+		GameData.startedmenu = GameData.startedmenu - 1
+	end
 end
 
 local function ExitGame1()
@@ -405,6 +499,7 @@ function bootmenu.onStart()
     end
 	if SaveData.firstBootCompleted == 0 then
 		Routine.run(FirstBoot1)
+		GameData.startedmenu = 1
 	end
 	if SaveData.firstBootCompleted == 1 then
 		Routine.run(easterEgg, whilePaused)
@@ -428,6 +523,15 @@ function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
 end
 
 function bootmenu.onTick()
+	if SaveData.firstBootCompleted == nil then
+        SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
+    end
+	if SaveData.firstBootCompleted == 0 then
+		GameData.startedmenu = 1
+	end
+	if SaveData.firstBootCompleted == 1 then
+		Routine.run(easterEgg, whilePaused)
+	end
 	if GameData.startedmenu == nil then
 		GameData.startedmenu = GameData.startedmenu or 0
 	end
@@ -522,7 +626,12 @@ function bootmenu.onInputUpdate()
 	end
 	if GameData.startedmenu == 1 then
 		if player.keys.jump == KEYS_PRESSED then
-			--nothing
+			--Nothing
+		end
+	end
+	if GameData.startedmenu == 2 then
+		if player.keys.jump == KEYS_PRESSED then
+			--Nothing
 		end
 	end
 end
@@ -630,7 +739,12 @@ end
 function bootmenu.onExit()
 	autoscroll.scrollTo(-200000, -200000, 10000)
 	Audio.MusicVolume(nil)
-	GameData.startedmenu = 0
+	if SaveData.firstBootCompleted == 1 then
+		GameData.startedmenu = 0
+	end
+	if SaveData.firstBootCompleted == 0 then
+		GameData.startedmenu = 1
+	end
 end
 
 Cheats.deregister("iwannabootbackhome") --We're already home, you dolt
@@ -821,7 +935,7 @@ littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Skip",chosenFunct
 
 
 
-littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogue) end})
+littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogueFirstBoot) end})
 
 
 
