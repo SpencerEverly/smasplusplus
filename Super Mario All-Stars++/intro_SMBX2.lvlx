@@ -2,7 +2,7 @@ HEAD
 TL:"SMAS++ Title Theme\: SMBX2";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:5;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 0\n    }\n}\n";
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"_OST/New Super Mario Bros. DS/Walking the Plains.ogg";BG:5;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 0\n    }\n}\n";
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:0;MF:"";BG:0;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
@@ -122,8 +122,6 @@ BGO_END
 NPC
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBABootSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"boot_wsmba.wav\"\,\n    \"volume\"\: 1.4\n}\n";
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBAErrorSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"wrong.ogg\"\,\n    \"volume\"\: 1.4\n}\n";
-ID:90;X:-199632;Y:-200336;D:-1;NM:1;LR:"LifeFailsafe";
-ID:90;X:-199632;Y:-200512;D:-1;NM:1;LR:"LifeFailsafe";
 ID:465;X:-179856;Y:-180384;D:-1;ED:"BootWSMBA";
 ID:465;X:-179376;Y:-180384;D:-1;ED:"BootWSMBA";
 NPC_END
@@ -146,7 +144,7 @@ LR:"LogoFirstBoot";
 LR:"BG";HD:1;
 LR:"WSMBABootSound";HD:1;
 LR:"WSMBAErrorSound";HD:1;
-LR:"Logo";
+LR:"Logo";HD:1;
 LR:"StartBlock";
 LR:"WallDyingPrevention";
 LR:"Black Layer 2";

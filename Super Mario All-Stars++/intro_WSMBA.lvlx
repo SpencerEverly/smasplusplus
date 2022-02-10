@@ -1168,8 +1168,6 @@ BGO_END
 NPC
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBABootSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"boot_wsmba.wav\"\,\n    \"volume\"\: 1.4\n}\n";
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBAErrorSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"wrong.ogg\"\,\n    \"volume\"\: 1.4\n}\n";
-ID:90;X:-199632;Y:-200336;D:-1;NM:1;LR:"LifeFailsafe";
-ID:90;X:-199632;Y:-200512;D:-1;NM:1;LR:"LifeFailsafe";
 ID:465;X:-179856;Y:-180384;D:-1;ED:"BootWSMBA";
 ID:465;X:-179376;Y:-180384;D:-1;ED:"BootWSMBA";
 NPC_END
@@ -1287,7 +1285,7 @@ ET:"ExitToIntro";AS:0;AX:0;AY:0;
 ET:"ExitToMap";AS:0;AX:0;AY:0;
 ET:"ThemeAlreadyInUse";AS:0;AX:0;AY:0;
 ET:"ThemeMenu1";AS:0;AX:0;AY:0;
-ET:"MovementStuff";TE:"MovementStuff2";TD:205;AS:0;AX:0;AY:0;
+ET:"MovementStuff";TE:"MovementStuff2";TD:195;AS:0;AX:0;AY:0;
 ET:"MovementStuff2";TE:"MovementStuff";TD:80;AS:0;AX:0;AY:0;
 ET:"MovementStuffPreExecute";TE:"MovementStuff";TD:2;AU:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

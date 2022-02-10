@@ -1479,8 +1479,6 @@ BGO_END
 NPC
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBABootSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"boot_wsmba.wav\"\,\n    \"volume\"\: 1.4\n}\n";
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBAErrorSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"wrong.ogg\"\,\n    \"volume\"\: 1.4\n}\n";
-ID:90;X:-199632;Y:-200336;D:-1;NM:1;LR:"LifeFailsafe";
-ID:90;X:-199632;Y:-200512;D:-1;NM:1;LR:"LifeFailsafe";
 ID:244;X:-195968;Y:-200192;D:1;S1:1;
 ID:10;X:-199454;Y:-200352;D:-1;
 ID:10;X:-198846;Y:-200256;D:-1;
