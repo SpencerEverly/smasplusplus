@@ -262,7 +262,7 @@ end
 local function ExitToIntro()
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
-+-
+
 local function ExitToMap()
 	Level.exit()
 end
