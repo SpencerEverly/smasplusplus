@@ -79,6 +79,16 @@ local function theme7()
 	Level.load("intro_SMBX2.lvlx", nil, nil)
 end
 
+local function theme8()
+	SaveData.introselect = 8
+	Level.load("intro_bossedit8.lvlx", nil, nil)
+end
+
+local function theme9()
+	SaveData.introselect = 9
+	Level.load("intro_SMBX1.3og.lvlx", nil, nil)
+end
+
 
 local function introExit()
 	Routine.waitFrames(38)
@@ -303,6 +313,7 @@ local function BootWSMBAPreExecute()
 	Audio.sounds[37].sfx  = nil
 	Audio.sounds[42].sfx  = nil
 	Audio.sounds[43].sfx  = nil
+	Audio.sounds[91].sfx  = nil
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
@@ -358,6 +369,7 @@ function bootmenu.onInitAPI()
 	registerEvent(bootmenu,"onInputUpdate")
 	registerEvent(bootmenu,"onEvent")
 	registerEvent(bootmenu,"onDraw")
+	registerEvent(bootmenu,"onPlayerHarm")
 	
 	local Routine = require("routine")
 	
@@ -388,11 +400,18 @@ function bootmenu.onStart()
 	Misc.saveGame()
 end
 
+function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
+    if stateVar == 1 then
+        eventToken.cancelled = true
+    end
+end
+
 function bootmenu.onTick()
 	if GameData.startedmenu == nil then
 		GameData.startedmenu = GameData.startedmenu or 0
 	end
 	player:setFrame(50)
+	player:mem(0x142, FIELD_BOOL, true)
 	if SaveData == nil then
 		Routine.run(SaveDataError1)
 	end
@@ -462,6 +481,7 @@ function bootmenu.onTick()
 	Audio.sounds[37].sfx  = Audio.SfxOpen("nothing.ogg")
 	Audio.sounds[42].sfx  = Audio.SfxOpen("nothing.ogg")
 	Audio.sounds[43].sfx  = Audio.SfxOpen("nothing.ogg")
+	Audio.sounds[91].sfx  = Audio.SfxOpen("nothing.ogg")
 end
 
 function bootmenu.onPause(evt)
@@ -713,11 +733,12 @@ littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = funct
 
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() Routine.run(theme1) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() Routine.run(theme6) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() Routine.run(theme2) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() Routine.run(theme3) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() Routine.run(theme4) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() Routine.run(theme9) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() Routine.run(theme5) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() Routine.run(theme6) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
 
