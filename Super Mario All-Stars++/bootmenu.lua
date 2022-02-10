@@ -184,7 +184,7 @@ end
 
 local function FailsafeMessage1()
 	local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
-	playerlives + 1
+	playerlives = playerlives + 1
 end
 
 local function PathFix1()
