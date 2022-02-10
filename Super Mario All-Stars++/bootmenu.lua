@@ -91,12 +91,16 @@ end
 
 
 local function introExit()
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Routine.waitFrames(38)
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 
 local function mapExit()
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Routine.waitFrames(38)
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Level.exit()
 end
 
@@ -280,8 +284,10 @@ local function BootSMASPlusPlusPreExecute()
 	logo = true
 	Routine.wait(3.0)
 	exitscreen = true
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Audio.MusicChange(0, 0)
 	Routine.wait(1.0)
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	if (player.keys.down == KEYS_DOWN) == true then
 		Routine.run(mapExit)
 	end
@@ -357,8 +363,10 @@ end
 local function BootGameHelpPreExecute()
 	exitscreen = true
 	Audio.MusicChange(0, 0)
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Routine.wait(0.4)
 	Misc.saveGame()
+	autoscroll.scrollTo(-200000, -200000, 10000)
 	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
 end
 
