@@ -163,7 +163,7 @@ local function TwoPlayerDisEnable1()
 	end
 end
 
-local function FramerateToggle1"()
+local function FramerateToggle1()
 	Cheats.trigger("framerate")
 	Defines.player_hasCheated = false
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
