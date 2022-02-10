@@ -100,6 +100,230 @@ local function easterEgg() --SnooPINGAS I see? ._.
 	active4 = true
 end
 
+local function bootDialogue()
+	active = true
+	active4 = false
+	logo = false
+	pressjumpp = false
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+end
+
+local function menuDialogue()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+end
+
+local function optionsMenu1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
+end
+local function themeMenu1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
+end
+local function themeAlreadyInUse()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.3>This theme is in use.<question OkayToMenuTheme>", pauses = false, updatesInPause = true})
+end
+local function credits1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
+end
+
+local function InputConfig1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+end
+local function X2DisableCheck1()
+		if Player.count() == 1 then
+			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
+		end
+		if Player.count() == 2 then
+			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		end
+	end
+local function DisableX2Check()
+	if SaveData.disableX2char == 0 then
+		Routine.run(DisableX2)
+		SFX.play("1.3-mode-enabled.wav)
+		SaveData.disableX2char = SaveData.disableX2char + 1
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	end
+	if SaveData.disableX2char == 1 then
+		Routine.run(EnableX2)
+		SFX.play("x2-mode-enabled.wav")
+		SaveData.disableX2char = SaveData.disableX2char - 1
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	end
+end
+
+local function TwoPlayerDisEnable1()
+	if SaveData.disableX2char == 1 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
+	end
+	if SaveData.disableX2char == 0 or not Level.filename() == "intro_SMAS.lvlx" then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters and revertto the original theme to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+	end
+	if Level.filename() == "intro_SMAS.lvlx" then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+	end
+end
+
+local function FramerateToggle1"()
+	Cheats.trigger("framerate")
+	Defines.player_hasCheated = false
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
+end
+
+local function TwoPlayerCheck()
+	if Player.count() == 1 then
+		Cheats.trigger("2player")
+		Defines.player_hasCheated = false
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>2 Player settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	end
+	if Player.count() == 2 then
+		Cheats.trigger("1player")
+		Defines.player_hasCheated = false
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>2 Player settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	end
+end
+
+local function FailsafeMessage1()
+	local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
+	playerlives + 1
+end
+
+local function PathFix1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Would you like to fix the world map paths? Only do this if future updates break the map.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+
+end
+local function ChangeChar1()
+	if SaveData.disableX2char == 0 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
+	end
+	if SaveData.disableX2char == 1 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change into? (X2 Characters Disabled)<question CharacterList>", pauses = false, updatesInPause = true})
+	end
+end
+
+local function ChangedCharacter()
+	SFX.play("charcost-selected.wav")
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.65>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+end
+
+local function SaveOptions1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7><question SavingMenuOne>", speakerName = "Saving Options", pauses = false, updatesInPause = true})
+end
+
+local function SaveSlot1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Select slot by typing the number above. Press jump when you have picked the right slot (Max is 32,767) DATA FROM THE PREVIOUS SLOT, IF ANY, WILL BE OVERWRITTEN! Don't put a number in to cancel this option.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+end
+
+local function SaveEraseComplete()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
+end
+
+local function EraseSave1()
+	Audio.MusicChange(0, 0)
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
+end
+
+local function EraseSave2()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
+end
+
+local function BootDialogueMusicReset()
+	active = true
+end
+
+local function ExitDialogue()
+	active = false
+	logo = true
+	pressjumpp = true
+	GameData.startedmenu = GameData.startedmenu - 1
+end
+
+local function ExitDialogueMusicReset()
+	active = false
+	logo = true
+	pressjumpp = true
+	GameData.startedmenu = GameData.startedmenu - 1
+end
+
+local function ExitGame1()
+	exitscreen = true
+	Misc.saveGame()
+	Routine.wait(0.4)
+	Misc.exitEngine()
+end
+
+local function SaveEraseStart()
+	SaveData.clear()
+	GameData.clear()
+	SaveData.flush()
+	--os.remove(Misc.resolveFile("save"..Misc.saveSlot()..".sav"))
+	--os.remove(Misc.resolveFile("save"..Misc.saveSlot().."-ext.dat"))
+end
+
+local function ExitToIntro()
+	Level.load("SMAS - Intro.lvlx", nil, nil)
+end
++-
+local function ExitToMap()
+	Level.exit()
+end
+
+local function BootSMASPlusPlusPreExecute()
+	SFX.play("boot_wsmba.wav")
+	active3 = true
+	logo = true
+	Routine.wait(3.0)
+	if (player.keys.down == KEYS_DOWN) == true then
+		Routine.run(mapExit)
+	end
+	if (player.keys.down == KEYS_DOWN) == false then 
+		Routine.run(introExit)
+	end
+	exitscreen = true
+	Routine.wait(0.5)
+end
+	
+local function BootWSMBA()
+	exitscreen = true
+	Routine.wait(0.5)
+	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
+	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
+		SFX.play("wrong.ogg")
+		player.jumpKeyPressing = true
+		player.runKeyPressing = true
+		active = false
+	end
+end
+local function BootWSMBAOG()
+	exitscreen = true
+	Routine.wait(0.5)
+	Misc.loadEpisode("Where SMB Attacks (Original)")
+	if Misc.loadEpisode("Where SMB Attacks (Original)") == false then
+		SFX.play("wrong.ogg")
+		player.jumpKeyPressing = true
+		player.runKeyPressing = true
+		active = false
+	end
+end
+
+local function WSMBAOGComing()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.5>The original has NOT been found yet! We're still trying to find and perserve the original WSMBA to release with this episode. If you know someone who might have it downloaded, contact spencer.everly at gmail.com, or DM me on Discord at Spencer Everly#1997!<question OkayToMenu>", pauses = false, updatesInPause = true})
+end
+
+local function RestartSMASPlusPlus()
+	Misc.loadEpisode("Super Mario All-Stars++")
+	if Misc.loadEpisode("Super Mario All-Stars++") == false then
+		SFX.play("wrong.ogg")
+		player.jumpKeyPressing = true
+		player.runKeyPressing = true
+		active = false
+	end
+end
+
+local function BootGameHelp()
+	Misc.saveGame()
+	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
+end
+
 function bootmenu.onInitAPI()
 	registerEvent(bootmenu,"onExitLevel", "onExit")
 	registerEvent(bootmenu,"onStart")
@@ -120,7 +344,7 @@ function bootmenu.onStart()
         SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
     end
 	if SaveData.firstBootCompleted == 0 then
-		triggerEvent("FirstBoot1")
+		Routine.run(FirstBoot1)
 	end
 	if SaveData.firstBootCompleted == 1 then
 		Routine.run(easterEgg, whilePaused)
@@ -143,7 +367,7 @@ function bootmenu.onTick()
 	end
 	player:setFrame(50)
 	if SaveData == nil then
-		triggerEvent("SaveDataError1")
+		Routine.run(SaveDataError1)
 	end
 	if Player.count() == 1 then
 		twoplayercheck = active
@@ -178,7 +402,7 @@ function bootmenu.onTick()
 		--Nothing happens
 	end
 	if SaveData.failsafeMessageOne == 1 then
-		triggerEvent("FailsafeMessage1")
+		Routine.run(FailsafeMessage1)
 	end
 	--player.upKeyPressing = false;
 	--player.downKeyPressing = false;
@@ -225,7 +449,7 @@ function bootmenu.onInputUpdate()
 	end
 	if GameData.startedmenu == 0 then
 		if player.keys.jump == KEYS_PRESSED then
-			triggerEvent("BootDialogue")
+			Routine.run(bootDialogue)
 			GameData.startedmenu = GameData.startedmenu + 1
 		end
 	end
@@ -237,237 +461,6 @@ function bootmenu.onInputUpdate()
 end
 
 function bootmenu.onEvent(eventName)
-	if eventName == "BootDialogue" then
-		active = true
-		active4 = false
-	end
-	if eventName == "MenuDialogue" then
-		logo = false
-		pressjumpp = false
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
-	end
-	if eventName == "ExitDialoguePCheck" then
-		if Player.count() == 1 then
-			triggerEvent("ExitDialogue1P")
-		end
-		if Player.count() == 2 then
-			triggerEvent("ExitDialogue2P")
-		end
-	end
-	if eventName == "OptionsMenu1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
-	end
-	if eventName == "ThemeMenu1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
-	end
-	if eventName == "ThemeAlreadyInUse" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.3>This theme is in use.<question OkayToMenuTheme>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "Credits1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
-	end
-	if eventName == "InputConfig1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "X2DisableCheck1" then
-		if Player.count() == 1 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
-		end
-		if Player.count() == 2 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
-		end
-	end
-	if eventName == "DisableX2Check" then
-		if SaveData.disableX2char == 0 then
-			triggerEvent("DisableX2")
-			SFX.play("1.3-mode-enabled.wav")
-		end
-		if SaveData.disableX2char == 1 then
-			triggerEvent("EnableX2")
-			SFX.play("x2-mode-enabled.wav")
-		end
-	end
-	if eventName == "EnableX2" then
-		SaveData.disableX2char = SaveData.disableX2char - 1
-		triggerEvent("DisableX2Check2")
-	end
-	if eventName == "DisableX2" then
-		SaveData.disableX2char = SaveData.disableX2char + 1
-		triggerEvent("DisableX2Check2")
-	end
-	if eventName == "DisableX2Check2" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "2PlayerDisEnable1" then
-		if SaveData.disableX2char == 1 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>Since you have X2 characters disabled, you can use 2 player mode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
-		end
-		if SaveData.disableX2char == 0 or not Level.filename() == "intro_SMAS.lvlx" then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters and revert to the original theme to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
-		end
-		if Level.filename()  == "intro_SMAS.lvlx" then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
-		end
-	end
-	if eventName == "FramerateToggle1" then
-		Cheats.trigger("framerate")
-		Defines.player_hasCheated = false
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "2PlayerCheck" then
-		if Player.count() == 1 then
-			triggerEvent("Enable2Player")
-		end
-		if Player.count() == 2 then
-			triggerEvent("Disable2Player")
-		end
-	end
-	if eventName == "Enable2Player" then
-		Cheats.trigger("2player")
-		Defines.player_hasCheated = false
-		triggerEvent("2PlayerDisEnable2")
-	end
-	if eventName == "Disable2Player" then
-		Cheats.trigger("1player")
-		Defines.player_hasCheated = false
-		triggerEvent("2PlayerDisEnable2")
-	end
-	if eventName == "2PlayerDisEnable2" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>2 Player settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "PathFix1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Would you like to fix the world map paths? Only do this if future updates break the map.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "ChangeChar1" then
-		if SaveData.disableX2char == 0 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
-		end
-		if SaveData.disableX2char == 1 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change into? (X2 Characters Disabled)<question CharacterList>", pauses = false, updatesInPause = true})
-		end
-	end
-	if eventName == "ChangedCharacter" then
-		SFX.play("charcost-selected.wav")
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.65>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "SaveOptions1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7><question SavingMenuOne>", speakerName = "Saving Options", pauses = false, updatesInPause = true})
-	end
-	if eventName == "SaveSlot1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Select slot by typing the number above. Press jump when you have picked the right slot (Max is 32,767) DATA FROM THE PREVIOUS SLOT, IF ANY, WILL BE OVERWRITTEN! Don't put a number in to cancel this option.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "SaveEraseComplete" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "EraseSave1" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "EraseSave2" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "BootDialogueMusicReset" then
-		active = true
-	end
-	if eventName == "ExitDialogue" then
-		active = false
-		logo = true
-		pressjumpp = true
-		GameData.startedmenu = GameData.startedmenu - 1
-	end
-	if eventName == "ExitDialogueMusicReset" then
-		active = false
-		logo = true
-		pressjumpp = true
-		GameData.startedmenu = GameData.startedmenu - 1
-	end
-	if eventName == "ExitGame1" then
-		exitscreen = true
-		Misc.saveGame()
-	end
-	if eventName == "ExitGame2" then
-		Misc.exitEngine()
-	end
-	if eventName == "SaveEraseStart" then
-		SaveData.clear()
-		GameData.clear()
-		SaveData.flush()
-		--os.remove(Misc.resolveFile("save"..Misc.saveSlot()..".sav"))
-		--os.remove(Misc.resolveFile("save"..Misc.saveSlot().."-ext.dat"))
-	end
-	if eventName == "ExitToIntro" then
-		Level.load("SMAS - Intro.lvlx", nil, nil)
-	end
-	if eventName == "ExitToMap" then
-		Level.exit()
-	end
-	if eventName == "BootSMASPlusPlusPreExecute" then
-		SFX.play("boot_wsmba.wav")
-		active3 = true
-		logo = true
-	end
-	if eventName == "BootSMASPlusPlus2" then
-		active3 = false
-		player:teleport(-179744, -180448)
-		if player.count(2) then
-			Cheats.trigger("1player")
-		end
-	end
-	if eventName == "BootSMASPlusPlus3" then
-		if (player.keys.down == KEYS_DOWN) == true then
-			Routine.run(mapExit)
-		end
-		if (player.keys.down == KEYS_DOWN) == false then 
-			Routine.run(introExit)
-		end
-	end
-	if eventName == "BootWSMBA" then
-		Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
-		if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
-			--SFX.play("wrong.ogg")
-			triggerEvent("WSMBANotFound")
-			player.jumpKeyPressing = true
-			player.runKeyPressing = true
-			active = false
-		end
-	end
-	if eventName == "BootWSMBAOG" then
-		Misc.loadEpisode("Where SMB Attacks (Original)")
-		if Misc.loadEpisode("Where SMB Attacks (Original)") == false then
-			--SFX.play("wrong.ogg")
-			triggerEvent("WSMBANotFound")
-			player.jumpKeyPressing = true
-			player.runKeyPressing = true
-			active = false
-		end
-	end
-	if eventName == "WSMBAOGComing" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.5>The original has NOT been found yet! We're still trying to find and perserve the original WSMBA to release with this episode. If you know someone who might have it downloaded, contact spencer.everly at gmail.com, or DM me on Discord at Spencer Everly#1997!<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
-	if eventName == "BootWSMBAOG" then
-		triggerEvent("WSMBAOGComing")
-		--Misc.loadEpisode("Where SMB Attacks")
-		--if Misc.loadEpisode("Where SMB Attacks") == false then
-			--SFX.play("wrong.ogg")
-		--	triggerEvent("WSMBANotFound")
-		--	player.jumpKeyPressing = true
-		--	player.runKeyPressing = true
-		--	active = false
-		--end
-	end
-	if eventName == "RestartSMASPlusPlus" then
-		Misc.loadEpisode("Super Mario All-Stars++")
-		if Misc.loadEpisode("Super Mario All-Stars++") == false then
-			--SFX.play("wrong.ogg")
-			triggerEvent("WSMBANotFound")
-			player.jumpKeyPressing = true
-			player.runKeyPressing = true
-			active = false
-		end
-	end
-	if eventName == "BootGameHelp" then
-		Misc.saveGame()
-		Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
-	end
 	if eventName == "MovementStuffPreExecute" then
 		autoscroll.scrollTo(-200000, -200000, 10000)
 	end
@@ -669,161 +662,172 @@ Cheats.deregister("needablueshoe")
 
 
 
-littleDialogue.registerAnswer("MainMenu",{text = "Start Super Mario All-Stars++",chosenFunction = function() triggerEvent("BootSMASPlusPlusPreExecute") end})
-littleDialogue.registerAnswer("MainMenu",{text = "Start Where SMB Attacks",chosenFunction = function() triggerEvent("BootWSMBAPreExecute") end})
-littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() triggerEvent("BootGameHelpPreExecute") end})
-littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() triggerEvent("OptionsMenu1") end})
-littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() triggerEvent("ExitDialogue") end})
-littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() triggerEvent("ExitGame1") end})
+littleDialogue.registerAnswer("MainMenu",{text = "Start Super Mario All-Stars++",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
+littleDialogue.registerAnswer("MainMenu",{text = "Start Where SMB Attacks",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
+littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
+littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
+littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
 
 
 
 
-littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() triggerEvent("BootDialogue") end})
-littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunction = function() triggerEvent("ChangeChar1") end})
-littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() triggerEvent("2PlayerDisEnable1") end})
-littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() triggerEvent("X2DisableCheck1") end})
-littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() triggerEvent("ThemeMenu1") end})
-littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() triggerEvent("InputConfig1") end})
-littleDialogue.registerAnswer("Options",{text = "Fix Broken Map Paths",chosenFunction = function() triggerEvent("PathFix1") end})
-littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() triggerEvent("FramerateToggle1") end})
-littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() triggerEvent("SaveOptions1") end})
-littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() triggerEvent("Credits1") end})
+littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
+littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
+littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
+littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
+littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
+littleDialogue.registerAnswer("Options",{text = "Fix Broken Map Paths",chosenFunction = function() Routine.run(PathFix1) end})
+littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
+littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
+littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
 
 
 
+littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() Routine.run(theme1) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() Routine.run(theme2) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() Routine.run(theme3) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() Routine.run(theme4) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() Routine.run(theme5) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() Routine.run(theme6) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
 
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Return to Previous Menu",chosenFunction = function() triggerEvent("OptionsMenu0") end})
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Move Save to a Different Slot",chosenFunction = function() triggerEvent("SaveSlot1") end})
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Erase Save Data",chosenFunction = function() triggerEvent("EraseSave1") end})
 
 
+littleDialogue.registerAnswer("SavingMenuOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("SavingMenuOne",{text = "Move Save to a Different Slot",chosenFunction = function() Routine.run(SaveSlot1) end})
+littleDialogue.registerAnswer("SavingMenuOne",{text = "Erase Save Data",chosenFunction = function() Routine.run(EraseSave1) end})
 
 
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "Don't Erase",chosenFunction = function() triggerEvent("BootDialogueMusicReset") end})
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() triggerEvent("SaveEraseStart") end})
 
 
+littleDialogue.registerAnswer("SaveEraseChoice",{text = "Don't Erase",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
+littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() Routine.run(SaveEraseStart) end})
 
 
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() triggerEvent("EraseSave2") end})
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() triggerEvent("BootDialogueMusicReset") end})
 
 
+littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
+littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
 
 
-littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = function() triggerEvent("BootDialogue") end})
 
 
+littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() triggerEvent("RestartSMASPlusPlusPreExecute") end})
 
 
+littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlusPreExecute) end})
 
-littleDialogue.registerAnswer("FirstBootMenuOne",{text = "Begin",chosenFunction = function() triggerEvent("FirstBoot3") end})
 
 
+littleDialogue.registerAnswer("FirstBootMenuOne",{text = "Begin",chosenFunction = function() Routine.run(FirstBoot3) end})
 
 
-littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "Yes",chosenFunction = function() triggerEvent("FirstBoot4") end})
-littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "No",chosenFunction = function() triggerEvent("TimeFixInfo1") end})
 
 
+littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "Yes",chosenFunction = function() Routine.run(FirstBoot4) end})
+littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "No",chosenFunction = function() Routine.run(TimeFixInfo1) end})
 
 
-littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunction = function() triggerEvent("FirstBoot5") end})
 
 
+littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunction = function() Routine.run(FirstBoot5) end})
 
 
-littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() triggerEvent("FirstBootGameHelp") end})
-littleDialogue.registerAnswer("FirstBootMenuFour",{text = "Skip",chosenFunction = function() triggerEvent("FirstBoot6") end})
 
 
+littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(FirstBootGameHelp) end})
+littleDialogue.registerAnswer("FirstBootMenuFour",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
 
-littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Start Game Help",chosenFunction = function() triggerEvent("BootGameHelpPreExecute") end})
-littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Skip",chosenFunction = function() triggerEvent("FirstBoot6") end})
 
 
+littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Start Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
+littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
 
-littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() triggerEvent("ExitDialogue") end})
 
 
+littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogue) end})
 
-littleDialogue.registerAnswer("FirstBootMenuTimeFix",{text = "Recheck",chosenFunction = function() triggerEvent("FirstBoot3") end})
 
 
+littleDialogue.registerAnswer("FirstBootMenuTimeFix",{text = "Recheck",chosenFunction = function() Routine.run(FirstBoot3) end})
 
-littleDialogue.registerAnswer("SaveSlotMove1",{text = "WIP",chosenFunction = function() triggerEvent("BootDialogue") end})
 
 
+littleDialogue.registerAnswer("SaveSlotMove1",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction = function() triggerEvent("BootDialogue") end})
 
 
+littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunction = function() triggerEvent("OptionsMenu1") end})
-littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes",chosenFunction = function() triggerEvent("DisableX2Check") end})
 
 
-littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes",chosenFunction = function() triggerEvent("2PlayerCheck") end})
-littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() triggerEvent("OptionsMenu1") end})
+littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes",chosenFunction = function() Routine.run(DisableX2Check) end})
 
 
-littleDialogue.registerAnswer("ToBeAddedSoon",{text = "WIP",chosenFunction = function() triggerEvent("BootDialogue") end})
+littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
+littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
+littleDialogue.registerAnswer("ToBeAddedSoon",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("OkayToMenuTwo",{text = "Alright.",chosenFunction = function() triggerEvent("BootDialogue") end})
 
 
+littleDialogue.registerAnswer("OkayToMenuTwo",{text = "Alright.",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("OkayToMenuTwoOptions",{text = "Alright.",chosenFunction = function() triggerEvent("OptionsMenu1") end})
 
 
+littleDialogue.registerAnswer("OkayToMenuTwoOptions",{text = "Alright.",chosenFunction = function() Routine.run(optionsMenu1) end})
 
-littleDialogue.registerAnswer("OkayToMenu",{text = "Okay!",chosenFunction = function() triggerEvent("BootDialogue") end})
 
 
+littleDialogue.registerAnswer("OkayToMenu",{text = "Okay!",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("OkayToMenuOptions",{text = "Okay!",chosenFunction = function() triggerEvent("OptionsMenu1") end})
 
 
+littleDialogue.registerAnswer("OkayToMenuOptions",{text = "Okay!",chosenFunction = function() Routine.run(optionsMenu1) end})
 
-littleDialogue.registerAnswer("OkayToMenuTheme",{text = "Oh yeah, right.",chosenFunction = function() triggerEvent("ThemeMenu1") end})
 
 
+littleDialogue.registerAnswer("OkayToMenuTheme",{text = "Oh yeah, right.",chosenFunction = function() Routine.run(themeMenu1) end})
 
-littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() triggerEvent("ExitDialogueMusicReset") end})
 
 
-littleDialogue.registerAnswer("CharacterList",{text = "Return to Previous Menu",chosenFunction = function() triggerEvent("BootDialogue") end})
-littleDialogue.registerAnswer("CharacterList",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterList",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterList",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterList",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterList",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) triggerEvent("ChangedCharacter") end})
+littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() Routine.run(ExitDialogueMusicReset) end})
 
 
-littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() triggerEvent("BootDialogue") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Mega Man (Slot 6)",chosenFunction = function() player:transform(6, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 9)",chosenFunction = function() player:transform(9, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Ninja Bomberman (Slot 10)",chosenFunction = function() player:transform(10, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) triggerEvent("ChangedCharacter") end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() triggerEvent("BootDialogue") end})
+littleDialogue.registerAnswer("CharacterList",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("CharacterList",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
+
+
+littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Mega Man (Slot 6)",chosenFunction = function() player:transform(6, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Ninja Bomberman (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
 return bootmenu

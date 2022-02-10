@@ -12,8 +12,8 @@ ID:1;X:-199628;Y:-200326;D:1;
 ID:2;X:-199628;Y:-200332;D:-1;
 STARTPOINT_END
 BLOCK
-ID:281;X:-199632;Y:-200368;W:32;H:32;LR:"StartBlock";EH:"BootDialogue";
-ID:281;X:-199632;Y:-200544;W:32;H:32;LR:"StartBlock2P";EH:"BootDialogue";
+ID:281;X:-199632;Y:-200368;W:32;H:32;LR:"StartBlock";
+ID:281;X:-199632;Y:-200544;W:32;H:32;LR:"StartBlock2P";
 ID:65;X:-159904;Y:-160416;W:32;H:32;LR:"WallDyingPrevention";
 ID:65;X:-159840;Y:-160320;W:32;H:32;LR:"WallDyingPrevention";
 ID:65;X:-159904;Y:-160352;W:32;H:32;LR:"WallDyingPrevention";
@@ -109,7 +109,6 @@ ID:1006;X:-199584;Y:-200512;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-199648;Y:-200448;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-199616;Y:-200576;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-199616;Y:-200448;W:32;H:32;LR:"WallDyingPrevention";
-ID:1006;X:-199584;Y:-200448;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-199232;Y:-200032;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-199264;Y:-200032;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-199296;Y:-200032;W:32;H:32;LR:"WallDyingPrevention";
@@ -194,10 +193,9 @@ ID:1006;X:-200000;Y:-200160;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-200000;Y:-200128;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-200000;Y:-200096;W:32;H:32;LR:"WallDyingPrevention";
 ID:1006;X:-200000;Y:-200064;W:32;H:32;LR:"WallDyingPrevention";
+ID:1006;X:-199584;Y:-200448;W:32;H:32;LR:"WallDyingPrevention";
 BLOCK_END
 BGO
-ID:850;X:-200000;Y:-200048;LR:"Press Jump to Start";
-ID:851;X:-199824;Y:-200464;LR:"Logo";
 ID:853;X:-200000;Y:-200600;LR:"BG";
 ID:845;X:-200000;Y:-200600;LR:"Black Layer";
 ID:854;X:-200000;Y:-200600;LR:"WSMBAError";
@@ -208,8 +206,6 @@ NPC
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBABootSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"boot_wsmba.wav\"\,\n    \"volume\"\: 1.4\n}\n";
 ID:669;X:-199632;Y:-200480;D:-1;LR:"WSMBAErrorSound";XTRA:"{\n    \"falloffType\"\: 2\,\n    \"source\"\: \"wrong.ogg\"\,\n    \"volume\"\: 1.4\n}\n";
 ID:465;X:-199632;Y:-200480;D:-1;
-ID:90;X:-199632;Y:-200336;D:-1;NM:1;LR:"LifeFailsafe";
-ID:90;X:-199632;Y:-200512;D:-1;NM:1;LR:"LifeFailsafe";
 ID:465;X:-199632;Y:-200304;D:-1;
 ID:465;X:-179856;Y:-180384;D:-1;ED:"BootWSMBA";
 ID:465;X:-179376;Y:-180384;D:-1;ED:"BootWSMBA";
@@ -237,7 +233,7 @@ LR:"Logo";
 LR:"StartBlock";HD:1;
 LR:"WallDyingPrevention";
 LR:"Black Layer 2";
-LR:"LifeFailsafe";HD:1;
+LR:"LifeFailsafe";
 LR:"StartBlock2P";HD:1;
 LR:"FadeOutToIntroSMAS";
 LR:"PreFadeOutSMAS";HD:1;
@@ -263,12 +259,9 @@ ET:"WSMBANotFound2";LH:["WSMBAErrorSound"];TE:"ErrorMessageClose";TD:47;DS:1;AS:
 ET:"ErrorMessageClose";LH:["WSMBAError"];DS:1;AS:0;AX:0;AY:0;
 ET:"DisableRunKey";TE:"WSMBABootActivated";AS:0;AX:0;AY:0;
 ET:"FirstBootEvent1";AS:0;AX:0;AY:0;
-ET:"BootDialogueMusicReset";LH:["StartBlock"];TE:"MenuDialogue";TD:1;DS:1;PC:000100000000;AS:0;AX:0;AY:0;
-ET:"BootDialogue";LH:["StartBlock"];LS:["WallDyingPrevention"];TE:"MenuDialogue";TD:1;DS:1;PC:000100000000;AS:0;AX:0;AY:0;
-ET:"MenuDialogue";LH:["Press Jump to Start","Logo","StartBlock","StartBlock2P"];LS:["WallDyingPrevention"];DS:1;AS:0;AX:0;AY:0;
-ET:"OptionsMenu0";TE:"OptionsMenu1";TD:1;AS:0;AX:0;AY:0;
-ET:"OptionsMenu1";AS:0;AX:0;AY:0;
-ET:"OptionsMenu2";TE:"MenuDialogue";TD:1;PC:000001000000;AS:0;AX:0;AY:0;
+ET:"BootDialogueMusicReset";LH:["StartBlock"];DS:1;PC:000100000000;AS:0;AX:0;AY:0;
+ET:"OptionsMenu0";AS:0;AX:0;AY:0;
+ET:"OptionsMenu2";PC:000001000000;AS:0;AX:0;AY:0;
 ET:"ExitGame1";LS:["Black Layer"];SSS:["ID\:0\;MI\:0\;"];TE:"ExitGame2";TD:4;DS:1;PC:000100000000;AS:0;AX:0;AY:0;
 ET:"ExitGame2";AS:0;AX:0;AY:0;
 ET:"ExitDialogueMusicReset";LS:["Logo","Press Jump to Start"];TE:"ExitDialogue1P";TD:5;DS:1;AS:0;AX:0;AY:0;
@@ -278,7 +271,6 @@ ET:"ExitDialogue1P";LS:["StartBlock"];DS:1;AS:0;AX:0;AY:0;
 ET:"ExitDialogue2P";LS:["StartBlock2P"];DS:1;AS:0;AX:0;AY:0;
 ET:"BootGameHelp";AS:0;AX:0;AY:0;
 ET:"BootGameHelpPreExecute";LS:["Black Layer"];SSS:["ID\:0\;MI\:0\;"];TE:"BootGameHelp";DS:1;AS:0;AX:0;AY:0;
-ET:"Credits1";AS:0;AX:0;AY:0;
 ET:"SaveOptions1";AS:0;AX:0;AY:0;
 ET:"SaveSlot1";AS:0;AX:0;AY:0;
 ET:"EraseSave1";SSS:["ID\:0\;MI\:0\;"];AS:0;AX:0;AY:0;
@@ -324,5 +316,4 @@ ET:"StartSMASPP";LS:["FadeOutToIntroSMAS"];DS:1;AS:0;AX:0;AY:0;
 ET:"ExitToIntro";AS:0;AX:0;AY:0;
 ET:"ExitToMap";AS:0;AX:0;AY:0;
 ET:"ThemeAlreadyInUse";AS:0;AX:0;AY:0;
-ET:"ThemeMenu1";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
