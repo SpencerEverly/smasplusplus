@@ -125,41 +125,37 @@ local function credits1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
-local function InputConfig1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
-end
-local function X2DisableCheck1()
-		if Player.count() == 1 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
-		end
-		if Player.count() == 2 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
-		end
-	end
-local function DisableX2()
+local function X2Char()
 	if SaveData.disableX2char == 0 then
 		SFX.play("1.3-mode-enabled.wav")
 		SaveData.disableX2char = SaveData.disableX2char + 1
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
-end
-
-local function EnableX2()
-	if SaveData.disableX2char == 1 then
+	elseif SaveData.disableX2char == 1 then
 		SFX.play("x2-mode-enabled.wav")
 		SaveData.disableX2char = SaveData.disableX2char - 1
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
 
+local function InputConfig1()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+end
+
+local function X2DisableCheck1()
+	if Player.count() == 1 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
+	end
+	if Player.count() == 2 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+	end
+end
+
 local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == 1 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
-	end
-	if SaveData.disableX2char == 0 or not Level.filename() == "intro_SMAS.lvlx" then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.0>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
+	elseif SaveData.disableX2char == 0 or not Level.filename() == "intro_SMAS.lvlx" then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters and revertto the original theme to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
-	end
-	if Level.filename() == "intro_SMAS.lvlx" then
+	elseif Level.filename() == "intro_SMAS.lvlx" then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
@@ -175,8 +171,7 @@ local function TwoPlayerCheck()
 		Cheats.trigger("2player")
 		Defines.player_hasCheated = false
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>2 Player settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
-	if Player.count() == 2 then
+	elseif Player.count() == 2 then
 		Cheats.trigger("1player")
 		Defines.player_hasCheated = false
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>2 Player settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
@@ -285,8 +280,29 @@ local function BootSMASPlusPlusPreExecute()
 	end
 end
 	
-local function BootWSMBA()
+local function BootWSMBAPreExecute()
 	Audio.MusicChange(0, 0)
+	Audio.sounds[1].sfx  = nil
+	Audio.sounds[2].sfx  = nil
+	Audio.sounds[3].sfx  = nil
+	Audio.sounds[4].sfx  = nil
+	Audio.sounds[5].sfx  = nil
+	Audio.sounds[6].sfx  = nil
+	Audio.sounds[7].sfx  = nil
+	Audio.sounds[9].sfx  = nil
+	Audio.sounds[10].sfx  = nil
+	Audio.sounds[11].sfx  = nil
+	Audio.sounds[12].sfx  = nil
+	Audio.sounds[13].sfx  = nil
+	Audio.sounds[14].sfx  = nil
+	Audio.sounds[15].sfx  = nil
+	Audio.sounds[18].sfx  = nil
+	Audio.sounds[22].sfx  = nil
+	Audio.sounds[25].sfx  = nil
+	Audio.sounds[28].sfx  = nil
+	Audio.sounds[37].sfx  = nil
+	Audio.sounds[42].sfx  = nil
+	Audio.sounds[43].sfx  = nil
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
@@ -297,7 +313,7 @@ local function BootWSMBA()
 		active = false
 	end
 end
-local function BootWSMBAOG()
+local function BootWSMBAOGPreExecute()
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	Routine.wait(0.5)
@@ -315,6 +331,9 @@ local function WSMBAOGComing()
 end
 
 local function RestartSMASPlusPlus()
+	Audio.MusicChange(0, 0)
+	exitscreen = true
+	Routine.wait(0.5)
 	Misc.loadEpisode("Super Mario All-Stars++")
 	if Misc.loadEpisode("Super Mario All-Stars++") == false then
 		SFX.play("wrong.ogg")
@@ -324,7 +343,10 @@ local function RestartSMASPlusPlus()
 	end
 end
 
-local function BootGameHelp()
+local function BootGameHelpPreExecute()
+	exitscreen = true
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
 end
@@ -378,7 +400,6 @@ function bootmenu.onTick()
 		twoplayercheck = active
 	end
 	if Player.count() == 2 then
-		player2:setFrame(50)
 		twoplayercheck = not active
 	end
 	if SaveData.disableX2char == nil then
@@ -745,7 +766,7 @@ littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunct
 
 
 
-littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(FirstBootGameHelp) end})
+littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
 littleDialogue.registerAnswer("FirstBootMenuFour",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
 
@@ -774,7 +795,7 @@ littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction 
 
 
 littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes",chosenFunction = function() if SaveData.disableX2char == 0 then Routine.run(DisableX2) elseif SaveData.disableX2char == 1 then Routine.run(EnableX2) end})
+littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes", chosenFunction = function() Routine.run(X2Char) end})
 
 
 littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
