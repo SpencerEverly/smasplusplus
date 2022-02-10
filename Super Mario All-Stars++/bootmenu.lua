@@ -89,6 +89,11 @@ local function theme9()
 	Level.load("intro_SMBX1.3og.lvlx", nil, nil)
 end
 
+local function theme10()
+	SaveData.introselect = 10
+	Level.load("intro_SMBX2b3.lvlx", nil, nil)
+end
+
 
 local function introExit()
 	autoscroll.scrollTo(-200000, -200000, 10000)
@@ -107,6 +112,7 @@ end
 local function easterEgg() --SnooPINGAS I see? ._.
 	Routine.wait(1800)
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	Routine.wait(596)
 	Audio.MusicChange(0, "_OST/All Stars Secrets/ZZZ_Easter Egg.ogg")
 	Audio.MusicChange(1, "_OST/All Stars Secrets/ZZZ_Easter Egg.ogg")
@@ -229,6 +235,7 @@ end
 
 local function EraseSave1()
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
 end
 
@@ -257,6 +264,7 @@ end
 local function ExitGame1()
 	exitscreen = true
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	Misc.saveGame()
 	Routine.wait(0.4)
 	Misc.exitEngine()
@@ -286,6 +294,7 @@ local function BootSMASPlusPlusPreExecute()
 	exitscreen = true
 	autoscroll.scrollTo(-200000, -200000, 10000)
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	Routine.wait(1.0)
 	autoscroll.scrollTo(-200000, -200000, 10000)
 	if (player.keys.down == KEYS_DOWN) == true then
@@ -298,6 +307,7 @@ end
 	
 local function BootWSMBAPreExecute()
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	Audio.sounds[1].sfx  = nil
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
@@ -332,6 +342,7 @@ local function BootWSMBAPreExecute()
 end
 local function BootWSMBAOGPreExecute()
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Original)")
@@ -349,6 +360,7 @@ end
 
 local function RestartSMASPlusPlus()
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Super Mario All-Stars++")
@@ -363,6 +375,7 @@ end
 local function BootGameHelpPreExecute()
 	exitscreen = true
 	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
 	autoscroll.scrollTo(-200000, -200000, 10000)
 	Routine.wait(0.4)
 	Misc.saveGame()
@@ -747,6 +760,7 @@ littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction =
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() Routine.run(theme4) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() Routine.run(theme9) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() Routine.run(theme5) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() Routine.run(theme10) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
 

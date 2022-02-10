@@ -53,6 +53,9 @@ local function introselection()
 	if SaveData.introselect == 9 then
 		Level.load("intro_SMBX1.3og.lvlx", nil, nil)
 	end
+	if SaveData.introselect == 10 then
+		Level.load("intro_SMBX2b3.lvlx", nil, nil)
+	end
 end
 
 function onStart()
