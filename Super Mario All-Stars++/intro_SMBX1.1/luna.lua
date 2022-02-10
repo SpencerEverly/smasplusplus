@@ -36,6 +36,11 @@ local function theme7()
 	Level.load("intro_SMBX2.lvlx", nil, nil)
 end
 
+local function theme8()
+	SaveData.introselect = 8
+	Level.load("intro_bossedit8.lvlx", nil, nil)
+end
+
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() triggerEvent("OptionsMenu0") end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() Routine.run(theme1) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0",chosenFunction = function() triggerEvent("ThemeAlreadyInUse") end})
@@ -44,6 +49,7 @@ littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2",chosenFunction = f
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3",chosenFunction = function() Routine.run(theme5) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() Routine.run(theme6) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "bossedit8",chosenFunction = function() Routine.run(theme8) end})
 
 function onStart()
 	Audio.MusicChange(0, "_OST/Super Mario 64/Title Theme.ogg")
