@@ -138,13 +138,11 @@ local function X2DisableCheck1()
 	end
 local function DisableX2Check()
 	if SaveData.disableX2char == 0 then
-		Routine.run(DisableX2)
 		SFX.play("1.3-mode-enabled.wav")
 		SaveData.disableX2char = SaveData.disableX2char + 1
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 	if SaveData.disableX2char == 1 then
-		Routine.run(EnableX2)
 		SFX.play("x2-mode-enabled.wav")
 		SaveData.disableX2char = SaveData.disableX2char - 1
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
@@ -202,7 +200,7 @@ end
 
 local function ChangedCharacter()
 	SFX.play("charcost-selected.wav")
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.65>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.9>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 end
 
 local function SaveOptions1()
