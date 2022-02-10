@@ -12,6 +12,8 @@ playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 
+local player2_alt = Player(2)
+
 littleDialogue.registerStyle("smbx13",{
 	textXScale = 1,
     textYScale = 1,
@@ -71,6 +73,33 @@ function onPause(evt)
     isPauseMenuOpen = not isPauseMenuOpen
 end
 
+
+function onCameraUpdate(c, camIdx)
+	if c == 1 then
+		camera.renderX, camera.rendery = 0, 0
+		camera.width, camera.height = 800, 600
+	else
+		camera2.renderX  = 800
+	end
+	local screenType = mem(0x00B25130,FIELD_WORD)
+
+    if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
+        return camIdx
+    elseif screenType == 5 then -- dynamic screen
+        if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
+            return 2
+        elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
+            return 1
+        else
+            return 0
+        end
+    elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
+        return 0
+    else
+        return 1
+    end
+end
+
 function onStart()
 	--if not Misc.inEditor() then
 		--loadingSoundObject:FadeOut(500)
@@ -79,6 +108,13 @@ function onStart()
 end
 	
 function onTick()
+	mem(0x00B25130, FIELD_WORD, 3)
+	if player.count(2) then
+		mem(0x00B25132, FIELD_WORD, 5)
+		if player:mem(0xD8, FIELD_DFLOAT) == 850 then
+			player2.kill()
+		end
+	end
 	Defines.player_hasCheated = false
 	if playerlives == 0 then
         if(not killed and player:mem(0x13E,FIELD_BOOL)) then
@@ -569,6 +605,9 @@ function onExit()
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
 		end
 	end
+	--if mem(0x00B2C89C, FIELD_BOOL, true) then --Let's prevent the credits from execution. I have plans to make a Credits Sequence later
+	--	Level.load("SMAS - Start.lvlx", nil, nil)
+	--end
 end
 	
 	

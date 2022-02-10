@@ -729,7 +729,7 @@ local function drawCharacterMenu(y, alpha)
 	return h;
 end
 
-function pausemenu2.onDraw()
+function pausemenu2.onDraw(isSplit)
 	if paused then
 		Misc.pause()
 		if(pause_box == nil) then
@@ -783,6 +783,8 @@ function pausemenu2.onInputUpdate()
 			pauseactive = true
 			pause_index = 0;
 			SFX.play("pausemenu.wav")
+		elseif player.count(2) then
+			--Nothing, yet
 		end
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)

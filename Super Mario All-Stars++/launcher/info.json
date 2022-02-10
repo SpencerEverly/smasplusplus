@@ -2,6 +2,6 @@
 	"mainPage": "index.html",
 	"title" : "Super Mario All-Stars++",
 	"current-version": [0, 0, 1],
-	"allowTwoPlayer": "false",
+	"allowTwoPlayer": false,
 	"episodeIcon": "icon.png"
 }

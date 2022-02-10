@@ -107,6 +107,7 @@ Code for certain parts made by:
 - Lukinsky Play
 - JustOneMGuy
 - Yoshi021
+- SetaYoshi
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
