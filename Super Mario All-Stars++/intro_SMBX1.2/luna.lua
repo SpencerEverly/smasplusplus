@@ -275,7 +275,7 @@ end
 
 function onStart()
 	Audio.MusicVolume(nil)
-	Audio.MusicChange(0, 56)
+	Audio.MusicChange(0, 53)
 	if SaveData.firstBootCompleted == nil then
         SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
     end
@@ -512,7 +512,7 @@ function onEvent(eventName)
 	end
 	if eventName == "BootDialogueMusicReset" then
 		active = true
-		Audio.MusicChange(0, 56)
+		Audio.MusicChange(0, 53)
 	end
 	if eventName == "ExitDialogue" then
 		active = false
@@ -524,7 +524,7 @@ function onEvent(eventName)
 		active = false
 		logo = true
 		pressjumpp = true
-		Audio.MusicChange(0, 56)
+		Audio.MusicChange(0, 53)
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
 	if eventName == "ExitGame1" then
