@@ -193,7 +193,7 @@ local function PathFix1()
 end
 local function ChangeChar1()
 	if SaveData.disableX2char == 0 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
 	end
 	if SaveData.disableX2char == 1 then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change into? (X2 Characters Disabled)<question CharacterList>", pauses = false, updatesInPause = true})
@@ -272,14 +272,14 @@ local function BootSMASPlusPlusPreExecute()
 	active3 = true
 	logo = true
 	Routine.wait(3.0)
+	exitscreen = true
+	Routine.wait(1.5)
 	if (player.keys.down == KEYS_DOWN) == true then
 		Routine.run(mapExit)
 	end
 	if (player.keys.down == KEYS_DOWN) == false then 
 		Routine.run(introExit)
 	end
-	exitscreen = true
-	Routine.wait(0.5)
 end
 	
 local function BootWSMBA()
