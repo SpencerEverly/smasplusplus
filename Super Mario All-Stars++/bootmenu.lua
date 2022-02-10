@@ -136,12 +136,15 @@ local function X2DisableCheck1()
 			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 		end
 	end
-local function DisableX2Check()
+local function DisableX2()
 	if SaveData.disableX2char == 0 then
 		SFX.play("1.3-mode-enabled.wav")
 		SaveData.disableX2char = SaveData.disableX2char + 1
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
+end
+
+local function EnableX2()
 	if SaveData.disableX2char == 1 then
 		SFX.play("x2-mode-enabled.wav")
 		SaveData.disableX2char = SaveData.disableX2char - 1
@@ -770,7 +773,7 @@ littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction 
 
 
 littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes",chosenFunction = function() Routine.run(DisableX2Check) end})
+littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes",chosenFunction = function() if SaveData.disableX2char == 0 then Routine.run(DisableX2) elseif if SaveData.disableX2char == 1 then Routine.run(EnableX2) end})
 
 
 littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
