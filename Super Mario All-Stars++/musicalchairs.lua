@@ -411,6 +411,32 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Adventures of Demo/happyska.it")
 		end
 	end
+	if currentCostume == "DEMO-XMASPILY" then
+		if level == "SMB1 - W-1, L-1.lvlx" then
+			Audio.MusicChange(0, "_OST/Adventures of Demo/analysis-8.mod")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
+		end
+		if level == "SMB1 - W-1, L-2.lvlx" then
+			Audio.MusicChange(1, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/analysis-8.mod")
+			Audio.MusicChange(3, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
+		end
+		if level == "SMB1 - W-1, L-3.lvlx" then
+			Audio.MusicChange(0, "_OST/Adventures of Demo/humble_down_theroad.mod")
+		end
+		if level == "SMB1 - W-1, L-4.lvlx" then
+			Audio.MusicChange(1, "_OST/Adventures of Demo/asmt-imperial.spc|0;g=2.5")
+		end
+		if level == "SMB1 - W-2, L-1.lvlx" then
+			Audio.MusicChange(0, "_OST/Adventures of Demo/happyska.it")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/Subway_spc.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
+		end
+		if level == "SMB1 - W-2, L-2.lvlx" then
+			Audio.MusicChange(1, "_OST/Adventures of Demo/monkey_island_v1.xm")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/happyska.it")
+		end
+	end
 	if currentCostume == "GA-CAILLOU" then
 		if level == "SMB1 - W-1, L-1.lvlx" then
 			Audio.MusicChange(0, "_OST/GoAnimate/Old Songs/Action - Adventure.mp3")
@@ -2632,6 +2658,31 @@ function musicalchairs.onEvent(eventName)
 		end
 	end
 	if currentCostume == "A2XT-DEMO" then
+		if eventName == "Level - Start" then
+			if level == "SMB1 - W-1, L-2.lvlx" then
+				SFX.play("_OST/Adventures of Demo/Going Underground.ogg")
+			end
+			if level == "SMB1 - W-2, L-2.lvlx" then
+				SFX.play("_OST/Adventures of Demo/Going Underground.ogg")
+			end
+		end
+		if eventName == "CostChangeMusic" then
+			if level == "SMB1 - W-1, L-4.lvlx" then
+				Audio.MusicChange(0, "_OST/Adventures of Demo/time_is_running.spc|0;g=2.5")
+			end
+		end
+		if eventName == "Boss Start" then
+			if level == "SMB1 - W-1, L-4.lvlx" then
+				Audio.MusicChange(0, "_OST/Adventures of Demo/aws_spac.xm")
+			end
+		end
+		if eventName == "Boss End" then
+			if level == "SMB1 - W-1, L-4.lvlx" then
+				SFX.play("_OST/Adventures of Demo/Game Beat!.ogg")
+			end
+		end
+	end
+	if currentCostume == "DEMO-XMASPILY" then
 		if eventName == "Level - Start" then
 			if level == "SMB1 - W-1, L-2.lvlx" then
 				SFX.play("_OST/Adventures of Demo/Going Underground.ogg")

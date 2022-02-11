@@ -1,0 +1,10 @@
+{
+	"general" : {
+		"player" : "peach",
+		"npc" : 982
+	},
+
+	"gfx" : {
+		"type" : "playable"
+	}
+}

@@ -22,6 +22,10 @@ local month = os.date("%m")
 
 local exacttime = os.date("%X")
 
+local minute = os.date("%M")
+
+local second = os.date("%S")
+
 local infobooth1 = textplus.loadFont("littleDialogue/font/smb3-c.ini")
 
 areaNames.sectionNames = {
@@ -43,180 +47,6 @@ areaNames.sectionNames = {
 
 function onStart()
 	Audio.MusicVolume(nil)
-	if hour == "00" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
-	end
-	if hour == "01" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
-	end
-	if hour == "02" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
-	end
-	if hour == "03" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
-	end
-	if hour == "04" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
-	end
-	if hour == "05" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
-	end
-	if hour == "06" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
-	end
-	if hour == "07" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
-	end
-	if hour == "08" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
-	end
-	if hour == "09" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
-	end
-	if hour == "10" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
-	end
-	if hour == "11" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
-	end
-	if hour == "12" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
-	end
-	if hour == "13" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
-	end
-	if hour == "14" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
-	end
-	if hour == "15" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
-	end
-	if hour == "16" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
-	end
-	if hour == "17" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
-	end
-	if hour == "18" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
-	end
-	if hour == "19" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
-	end
-	if hour == "20" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
-	end
-	if hour == "21" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
-	end
-	if hour == "22" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
-	end
-	if hour == "23" then
-		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
-		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
-		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
-	end
-	if month == "04" and day == "04" then
-		Audio.MusicChange(0, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(1, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(2, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(3, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(4, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(5, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(6, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(7, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(8, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(9, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(10, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(11, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(12, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		Audio.MusicChange(13, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
-		triggerEvent("SEDay")
-	end
-	if month == "12" and day == "25" then
-		Section(0).getWeatherEffect(2)
-		Section(6).getWeatherEffect(2)
-		Section(10).getWeatherEffect(2)
-		Audio.MusicChange(0, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
-		Audio.MusicChange(1, "_OST/GoAnimate/Old Songs/Jingle Bells (1).mp3")
-		Audio.MusicChange(2, "_OST/GoAnimate/Old Songs/Jingle Bells (1).mp3")
-		Audio.MusicChange(3, "_OST/GoAnimate/Old Songs/Jingle Bells (1).mp3")
-		Audio.MusicChange(4, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
-		Audio.MusicChange(5, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
-		Audio.MusicChange(6, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
-		Audio.MusicChange(7, "_OST/GoAnimate/Old Songs/Deck the Halls (Jazz Classic).mp3")
-		Audio.MusicChange(8, "_OST/GoAnimate/Old Songs/Deck the Halls (Jazz Classic).mp3")
-		Audio.MusicChange(9, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
-		Audio.MusicChange(10, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
-		Audio.MusicChange(11, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
-		Audio.MusicChange(12, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
-		Audio.MusicChange(13, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
-		triggerEvent("Christmas")
-	end
-	if month == "04" and day == "20" then
-		Audio.MusicChange(0, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(1, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(2, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(3, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(4, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(5, "__OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(6, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(7, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(8, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(9, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(10, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(11, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(12, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		Audio.MusicChange(13, "_OST/All Stars Secrets/smok wed everyda.ogg")
-		triggerEvent("Weed")
-	end
 	if stars >= 4 then
 		triggerEvent("Stage0.5")
 	end
@@ -418,6 +248,180 @@ function onDraw()
 end
 
 function onTick()
+	if hour == "00" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
+	end
+	if hour == "01" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
+	end
+	if hour == "02" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
+	end
+	if hour == "03" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
+	end
+	if hour == "04" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
+	end
+	if hour == "05" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
+	end
+	if hour == "06" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
+	end
+	if hour == "07" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
+	end
+	if hour == "08" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
+	end
+	if hour == "09" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
+	end
+	if hour == "10" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
+	end
+	if hour == "11" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
+	end
+	if hour == "12" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
+	end
+	if hour == "13" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
+	end
+	if hour == "14" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
+	end
+	if hour == "15" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
+	end
+	if hour == "16" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
+	end
+	if hour == "17" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
+	end
+	if hour == "18" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
+	end
+	if hour == "19" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
+	end
+	if hour == "20" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
+	end
+	if hour == "21" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
+	end
+	if hour == "22" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
+	end
+	if hour == "23" then
+		Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
+		Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
+		Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
+	end
+	if month == "04" and day == "04" then
+		Audio.MusicChange(0, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(1, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(2, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(3, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(4, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(5, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(6, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(7, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(8, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(9, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(10, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(11, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(12, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		Audio.MusicChange(13, "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg")
+		triggerEvent("SEDay")
+	end
+	if month == "12" and day == "25" then
+		Section(0).getWeatherEffect(2)
+		Section(6).getWeatherEffect(2)
+		Section(10).getWeatherEffect(2)
+		Audio.MusicChange(0, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
+		Audio.MusicChange(1, "_OST/GoAnimate/Old Songs/Jingle Bells (1).mp3")
+		Audio.MusicChange(2, "_OST/GoAnimate/Old Songs/Jingle Bells (1).mp3")
+		Audio.MusicChange(3, "_OST/GoAnimate/Old Songs/Jingle Bells (1).mp3")
+		Audio.MusicChange(4, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
+		Audio.MusicChange(5, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
+		Audio.MusicChange(6, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
+		Audio.MusicChange(7, "_OST/GoAnimate/Old Songs/Deck the Halls (Jazz Classic).mp3")
+		Audio.MusicChange(8, "_OST/GoAnimate/Old Songs/Deck the Halls (Jazz Classic).mp3")
+		Audio.MusicChange(9, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
+		Audio.MusicChange(10, "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3")
+		Audio.MusicChange(11, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
+		Audio.MusicChange(12, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
+		Audio.MusicChange(13, "_OST/GoAnimate/Old Songs/God Rest Ye Merry Gentlemen (hip-hop gangsta).mp3")
+		triggerEvent("Christmas")
+	end
+	if month == "04" and day == "20" then
+		Audio.MusicChange(0, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(1, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(2, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(3, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(4, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(5, "__OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(6, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(7, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(8, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(9, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(10, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(11, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(12, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		Audio.MusicChange(13, "_OST/All Stars Secrets/smok wed everyda.ogg")
+		triggerEvent("Weed")
+	end
 	if SaveData.disableX2char == nil then
         SaveData.disableX2char = SaveData.disableX2char or 0
     end
@@ -436,77 +440,76 @@ function onTick()
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	local costumes
-	--if Audio.MusicChange(0, "") and 
-	if hour == "00" then
+	if hour == "00" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "01" then
+	if hour == "01" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "02" then
+	if hour == "02" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "03" then
+	if hour == "03" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "04" then
+	if hour == "04" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "05" then
+	if hour == "05" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "06" then
+	if hour == "06" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "07" then
+	if hour == "07" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "08" then
+	if hour == "08" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "09" then
+	if hour == "09" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "10" then
+	if hour == "10" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "11" then
+	if hour == "11" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "12" then
+	if hour == "12" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "13" then
+	if hour == "13" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "14" then
+	if hour == "14" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "15" then
+	if hour == "15" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "16" then
+	if hour == "16" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "17" then
+	if hour == "17" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "18" then
+	if hour == "18" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "19" then
+	if hour == "19" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "20" then
+	if hour == "20" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "21" then
+	if hour == "21" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "22" then
+	if hour == "22" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
-	if hour == "23" then
+	if hour == "23" and minute == "00" and second == "00" then
 		triggerEvent("HourChange")
 	end
 	if player.section == 9 then
@@ -849,6 +852,16 @@ function onTick()
 		Audio.MusicChange(13, "_OST/New Super Mario Bros. DS/Toad House.ogg")
 	end
 	if currentCostume == "A2XT-DEMO" then
+		Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+		Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+		Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+		Audio.MusicChange(7, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+		Audio.MusicChange(8, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+		Audio.MusicChange(11, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+		Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+		Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+	end
+	if currentCostume == "DEMO-XMASPILY" then
 		Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 		Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 		Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
@@ -2083,123 +2096,123 @@ function onEvent(eventName)
 		SaveData.disableX2char = SaveData.disableX2char + 1
 	end
 	if eventName == "HourChange" then
-		--SFX.play("hour-change.ogg")
-		if hour == "00" then
+		SFX.play("hour-change.ogg")
+		if hour == "00" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg")
 		end
-		if hour == "01" then
+		if hour == "01" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg")
 		end
-		if hour == "02" then
+		if hour == "02" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg")
 		end
-		if hour == "03" then
+		if hour == "03" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg")
 		end
-		if hour == "04" then
+		if hour == "04" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg")
 		end
-		if hour == "05" then
+		if hour == "05" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg")
 		end
-		if hour == "06" then
+		if hour == "06" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg")
 		end
-		if hour == "07" then
+		if hour == "07" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg")
 		end
-		if hour == "08" then
+		if hour == "08" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg")
 		end
-		if hour == "09" then
+		if hour == "09" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg")
 		end
-		if hour == "10" then
+		if hour == "10" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg")
 		end
-		if hour == "11" then
+		if hour == "11" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg")
 		end
-		if hour == "12" then
+		if hour == "12" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg")
 		end
-		if hour == "13" then
+		if hour == "13" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg")
 		end
-		if hour == "14" then
+		if hour == "14" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg")
 		end
-		if hour == "15" then
+		if hour == "15" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg")
 		end
-		if hour == "16" then
+		if hour == "16" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg")
 		end
-		if hour == "17" then
+		if hour == "17" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg")
 		end
-		if hour == "18" then
+		if hour == "18" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg")
 		end
-		if hour == "19" then
+		if hour == "19" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg")
 		end
-		if hour == "20" then
+		if hour == "20" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg")
 		end
-		if hour == "21" then
+		if hour == "21" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg")
 		end
-		if hour == "22" then
+		if hour == "22" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg")
 		end
-		if hour == "23" then
+		if hour == "23" and minute == "00" and second == "00" then
 			Audio.MusicChange(0, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
 			Audio.MusicChange(6, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")
 			Audio.MusicChange(10, "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg")

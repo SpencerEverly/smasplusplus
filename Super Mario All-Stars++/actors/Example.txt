@@ -1,0 +1,61 @@
+TIPS AND GUIDELINES:
+
+- If the Actor has 
+
+- The sequences.npc subsection of sequences should only be used for Actors based on NPC spritesheets;  sequences defined there override the corresponding keys in sequences.left and sequences.right subsections and 
+  increase the frame numbers in the sequences by (gfx.npcLeftStart-1) and (gfx.npcRightStart-1) respectively.  So, for example, if sequences.npc.walk is "1,3,5", gfx.npcLeftStart is 5, and gfx.npcRightStart is 12,
+  this would be equivalent to defining sequences.left.walk as "5, 7, 9" and sequences.right.walk as "12, 14, 16"
+
+- 
+
+{
+	"general" : {
+		"player" : the corresponding player name string (i.e. "mario")
+		"npc" : the corresponding npc id (i.e. 980)
+		"width" : the hitbox width in pixels at 1px resolution
+		"height" : the hitbox height in pixels at 1px resolution
+	},
+
+	"gfx" : {
+		"sheet" : This should be the path string to the spritesheet image file (i.e. "actors/anmx_pal.png")
+		"type" : If "playable" or "npc", the sheet will be taken from the corresponding SpriteOverride image
+		"rows" : The total number of rows on the spritesheet
+		"columns" : The total number of columns on the spritesheet
+		"npcLeftStart" : The frame number that the left-facing frames start on;  if not defined, defaults to 1
+		"npcRightStart" : The frame number that the right-facing frames start on;  if not defined, defaults to 1
+	}
+
+	"sequences" : 
+	{
+		"npc" : {
+			"stand" : "1"
+			"stand-bark" : "2"
+			"jump" : "3"
+			"jump-bark" : "4"
+			"fall" : "5"
+			"fall-bark" : "6"
+			"walk" : "1,3,5"
+			"walk-bark" : "2,4,6"
+			"sleep" : "7,8"
+			"sniff" : "9,10"
+			"happy" : "11,12"
+			"dig" : "13,14,15,16"
+			"scared" : "17"
+			"angry" : "18"
+			"shocked" : "19"
+			"look" : "1p4,21,22p2,21,1,20p2"
+		},
+
+		"left" : {
+			
+		},
+
+		"right" : {
+			
+		},
+
+		"default" : {
+			
+		}
+	}
+}

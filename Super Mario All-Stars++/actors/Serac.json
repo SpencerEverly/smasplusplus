@@ -1,0 +1,24 @@
+{
+	"general" : {
+		"npc" : 936
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_serac.png",
+		"rows" : 3,
+		"columns" : 4
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"idle-annoyed" : "2",
+			"lookback" : "3",
+			"lookback-annoyed" : "4",
+			"hold" : "5",
+			"tentacles" : "6,7ls,8,9,10le,7,6",
+			"sneakers" : "11"
+		}
+	}
+}

@@ -1,0 +1,29 @@
+{
+	"general" : {
+		"npc" : 973,
+		"xScale" : -1,
+		"height" : 48,
+		"gfxoffsety" : 4
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_tam.png",
+		"rows" : 2,
+		"columns" : 5
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"guide" : "1",
+			"idle" : "2",
+			"shrug" : "3",
+			"aside" : "4",
+			"happy" : "5",
+			"angry" : "6",
+			"scared" : "7",
+			"sad" : "8",
+			"walk" : "9,2,10,2"
+		}
+	}
+}

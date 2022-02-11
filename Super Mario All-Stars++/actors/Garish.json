@@ -1,0 +1,31 @@
+{
+	"general" : {
+		"npc" : 962,
+		"xScale" : -1,
+		"height" : 56,
+		"gfxoffsety" : 2
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_garish.png",
+		"rows" : 3,
+		"columns" : 6
+	},
+
+	"sequences" : {
+		"default" : {
+			"idle" : "1",
+			"frown" : "2",
+			"lookback" : "3",
+			"lookbackfrown" : "4",
+			"shocked" : "5",
+			"shockedair" : "6",
+			"walk" : "7,8,9,10,11,12,13",
+			"jump" : "14",
+			"fall" : "14",
+			"smug" : "15",
+			"seriously" : "16",
+			"happy" : "17"
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"general" : {
+		"npc" : 857,
+		"xScale" : 1,
+		"gfxoffsety" : 96
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_2021XmasGift.png",
+		"rows" : 1,
+		"columns" : 8
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1s4",
+			"open" : "1s4,2,3,4,5,6,7,8ls",
+			"close" : "7s4,6,5,4,3,2,1ls"
+		}
+	}
+}

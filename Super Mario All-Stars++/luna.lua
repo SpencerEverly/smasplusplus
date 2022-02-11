@@ -227,6 +227,13 @@ function onTick()
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
+	if currentCostume == "DEMO-XMASPILY" then
+		littleDialogue.characterNames[1] = "Pily"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
+	end
 	if currentCostume == "JCFOSTERTAKESITTOTHEMOON" then
 		littleDialogue.characterNames[1] = "JC Foster"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")

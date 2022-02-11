@@ -1,0 +1,27 @@
+{
+	"general" : {
+		"npc" : 929,
+		"xScale" : 1,
+		"width" : 24,
+		"height" : 60
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_sturg.png",
+		"rows" : 3,
+		"columns" : 4
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"sit" : "2",
+			"heckyeah" : "3",
+			"scheming" : "4",
+			"lookback" : "5",
+			"dance" : "1,6,7,6,1,8,9,8",
+			"walk" : "10,11,12,11"
+		}
+	}
+}

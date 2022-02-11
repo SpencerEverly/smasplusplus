@@ -1,0 +1,51 @@
+{
+	"general" : {
+		"npc" : 931,
+		"xScale" : 1,
+		"width" : 32,
+		"height" : 64
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_cortex.png",
+		"rows" : 4,
+		"columns" : 8
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"idle_gunless" : "19",
+			"idle_back" : "3",
+			"idle_gunless_back" : "21",
+			"idle_back_gunless" : "21",
+			"smirk" : "2",
+			"smirk_gunless" : "20",
+			"smirk_back" : "4",
+			"smirk_back_gunless" : "22",
+			"shoot" : "6",
+			"angry" : "5",
+			"angry_gunless" : "23",
+			"angry_shoot" : "7",
+			"scared" : "10",
+			"scared_back" : "8",
+			"scared_shoot" : "9",
+			"walk" : "11,12,13,12",
+			"walk_gunless" : "24,25,26,25",
+			"laugh" : "14,15",
+			"hurt" : "16",
+			"zappy" : "16s2,17",
+			"crispy" : "18",
+			"pulltnt" : "27",
+			"pulltnt_back" : "27",
+			"pullnitro" : "28",
+			"pullnitro_back" : "28",
+			"throw" : "29",
+			"throw_back" : "30",
+			"shakeoff" : "19s2,21",
+			"concerned_gunless": "31",
+			"worried_gunless": "32"
+		}
+	}
+}
