@@ -39,10 +39,35 @@ function dependencies.onInitAPI()
 	registerEvent(dependencies, "onLoad")
 	registerEvent(dependencies, "onTick")
 	registerEvent(dependencies, "onDraw")
+	registerEvent(dependencies, "onCameraUpdate")
 end
 
-function dependencies.onLoad()
-	
+function dependencies.onCameraUpdate(c, camIdx)
+	if player.count(2) then
+		if c == 1 then
+			camera.renderX, camera.rendery = 0, 0
+			camera.width, camera.height = 800, 600
+		else
+			camera2.renderX  = 800
+		end
+		local screenType = mem(0x00B25130,FIELD_WORD)
+
+		if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
+			return camIdx
+		elseif screenType == 5 then -- dynamic screen
+			if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
+				return 2
+			elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
+				return 1
+			else
+				return 0
+			end
+		elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
+			return 0
+		else
+			return 1
+		end
+	end
 end
 
 function dependencies.onStart()

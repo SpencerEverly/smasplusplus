@@ -180,8 +180,8 @@ local function theme9scrolling()
 	autoscroll.scrollRight(6)
 	Routine.wait(13.8)
 	autoscroll.scrollLeft(15)
-	Routine.wait(5.2)
-	Routine.loop(1235, theme9scrolling, true)
+	Routine.wait(6.2)
+	Routine.loop(1265, theme9scrolling, true)
 end
 
 local function theme10()
