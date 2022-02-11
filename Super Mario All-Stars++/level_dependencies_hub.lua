@@ -10,6 +10,8 @@ local inventory = require("customInventory")
 
 local textplus = require("textplus")
 
+local autoscroll = require("autoscroll")
+
 local costumes = {}
 
 local dying = false;

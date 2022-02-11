@@ -1,20 +1,21 @@
-local versionnumber = "Demo 2" --This is the version number of this episode. It can be changed to any version we're on.
-
+local versionnumber = "Open Source Edition (v0.0.0.1)" --This is the version number of this episode. It can be changed to any version we're on.
+local littleDialogue = require("littleDialogue")
+local textplus = require("textplus")
 --if Misc.inEditor() then
 	--Misc.showRichDialog("SMAS++ Boot Menu Level", "Hello!\n\nYou are trying to access the boot level through the editor. What are YOU doing here?\nI bet you just wanna snoop around and mess with the episode, eh?\n\nOh well, I don't blame you. Everything is open, so go right ahead!", true)
 --end
-local autoscroll = require("autoscroll")
+local autoscroll = require("autoscrolla")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 
 local ready = false
 
+local fontthree = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+
 runPressedState = false
 
-local Routine = require("routine")
-local textplus = require("textplus")
-local littleDialogue = require("littleDialogue")
-
 local bootmenu = {}
+
+local Routine = require("routine")
 
 local level = Level.filename()
 
@@ -46,59 +47,158 @@ local exacttime = os.date("%X")
 
 local function theme1()
 	SaveData.introselect = 1
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMAS.lvlx", nil, nil)
 end
 
 local function theme2()
 	SaveData.introselect = 2
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMBX1.0.lvlx", nil, nil)
 end
 
 local function theme3()
 	SaveData.introselect = 3
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMBX1.1.lvlx", nil, nil)
 end
 
 local function theme4()
 	SaveData.introselect = 4
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMBX1.2.lvlx", nil, nil)
+end
+
+local function theme4scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(19)
+	autoscroll.scrollLeft(15)
+	Routine.wait(8.2)
+	Routine.loop(1768, theme4scrolling, true)
 end
 
 local function theme5()
 	SaveData.introselect = 5
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMBX1.3.lvlx", nil, nil)
+end
+
+local function theme5scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(17)
+	autoscroll.scrollLeft(15)
+	Routine.wait(7.2)
+	Routine.loop(1573, theme5scrolling, true)
 end
 
 local function theme6()
 	SaveData.introselect = 6
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_WSMBA.lvlx", nil, nil)
+end
+
+local function theme6scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(19.5)
+	autoscroll.scrollLeft(15)
+	Routine.wait(8)
+	Routine.loop(1787, theme6scrolling, true)
 end
 
 local function theme7()
 	SaveData.introselect = 7
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMBX2.lvlx", nil, nil)
 end
 
 local function theme8()
 	SaveData.introselect = 8
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_bossedit8.lvlx", nil, nil)
+end
+
+local function theme8scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(17.5)
+	autoscroll.scrollLeft(15)
+	Routine.wait(7.5)
+	Routine.loop(1625, theme8scrolling, true)
 end
 
 local function theme9()
 	SaveData.introselect = 9
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMBX1.3og.lvlx", nil, nil)
+end
+
+local function theme9scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(13.8)
+	autoscroll.scrollLeft(15)
+	Routine.wait(5.2)
+	Routine.loop(1235, theme9scrolling, true)
 end
 
 local function theme10()
 	SaveData.introselect = 10
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
 	Level.load("intro_SMBX2b3.lvlx", nil, nil)
 end
 
 local function mapExit()
-	autoscroll.scrollTo(-200000, -200000, 10000)
+	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
-	autoscroll.scrollTo(-200000, -200000, 10000)
-	Level.load("SMAS - World Map Warp.lvlx", nil, nil)
+	Level.exit()
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
@@ -369,18 +469,16 @@ local function ExitToIntro()
 end
 
 local function ExitToMap()
-	Level.load("SMAS - World Map Warp.lvlx", nil, nil)
+	Level.exit()
 end
 
 local function BootSMASPlusPlusPreExecute()
 	exitscreen = true
-	autoscroll.scrollTo(-200000, -200000, 10000)
+	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
-	autoscroll.scrollTo(-200000, -200000, 10000)
 	Routine.wait(0.4)
 	Misc.saveGame()
-	autoscroll.scrollTo(-200000, -200000, 10000)
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 	
@@ -453,13 +551,11 @@ end
 
 local function BootGameHelpPreExecute()
 	exitscreen = true
-	autoscroll.scrollTo(-200000, -200000, 10000)
+	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
-	autoscroll.scrollTo(-200000, -200000, 10000)
 	Routine.wait(0.4)
 	Misc.saveGame()
-	autoscroll.scrollTo(-200000, -200000, 10000)
 	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
 end
 
@@ -500,6 +596,18 @@ function bootmenu.onStart()
 		x2noticecheck = not active
 	end
 	Misc.saveGame()
+	if Level.filename() == "intro_SMBX1.2.lvlx" then
+		Routine.run(theme4scrolling)
+	end
+	if Level.filename() == "intro_SMBX1.3.lvlx" then
+		Routine.run(theme5scrolling)
+	end
+	if Level.filename() == "intro_bossedit8.lvlx" then
+		Routine.run(theme8scrolling)
+	end
+	if Level.filename() == "intro_SMBX1.3og.lvlx" then
+		Routine.run(theme9scrolling)
+	end
 end
 
 function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
@@ -602,7 +710,7 @@ end
 
 function bootmenu.onInputUpdate()
 	if player.rawKeys.pause == KEYS_PRESSED then
-		Misc.exitEngine()
+		--Misc.exitEngine()
 	end
 	if GameData.startedmenu == 0 then
 		if player.keys.jump == KEYS_PRESSED then
@@ -622,27 +730,15 @@ function bootmenu.onInputUpdate()
 	end
 end
 
-function bootmenu.onEvent(eventName)
-	if eventName == "MovementStuffPreExecute" then
-		autoscroll.scrollTo(-200000, -200000, 10000)
-	end
-	if eventName == "MovementStuff" then
-		autoscroll.scrollRight(6)
-	end
-	if eventName == "MovementStuff2" then
-		autoscroll.scrollLeft(15)
-	end
-end
-
 function bootmenu.onDraw()
 	local smaslogo = Graphics.loadImageResolved("SMAS - Start/background-851.png")
 	local pressstart = Graphics.loadImageResolved("SMAS - Start/background-850-startonly.png")
 	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
 	
-	Graphics.drawBox{x=748, y=5, width=47, height=20, color=Color.black..0.5, priority=-7}
+	Graphics.drawBox{x=600, y=5, width=195, height=20, color=Color.black..0.5, priority=-7}
 	
-	textplus.print{x=757, y=10, text = versionnumber, priority=-6, color=Color.white} --Version number of the episode
+	textplus.print{x=608, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
 	if logo then
 		Graphics.drawImage(smaslogo, 176, 136, 2)
 	end
@@ -723,8 +819,8 @@ function bootmenu.onDraw()
 end
 
 function bootmenu.onExit()
-	autoscroll.scrollTo(-200000, -200000, 10000)
 	Audio.MusicVolume(nil)
+	autoscroll.unlockSection(0, 1)
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = 0
 	end

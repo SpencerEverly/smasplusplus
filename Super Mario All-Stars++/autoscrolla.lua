@@ -1,6 +1,7 @@
 --autoscroll.lua
---v1.0.2
+--v1.0.5
 --Created by Rednaxela, 2015
+--Edited by Spencer Everly
 
 if (not API.isLoadingShared()) then
 	Misc.warning("autoscroll API should be loaded shared")
@@ -15,6 +16,7 @@ local GM_ORIG_LVL_BOUNDS = mem(0x00B2587C, FIELD_DWORD)
 
 --Deferring events if they're called "too early" so that the camera has time to catch up
 local preOnCameraDraw = true
+local shouldDiscardOnCameraDraw = false
 
 local deferredEvents = {}
 
@@ -57,8 +59,8 @@ end
 function autoscroll.onInitAPI()
 	if (player.isValid) then
 		registerEvent(autoscroll, "onTick")
-		registerEvent(autoscroll, "onCameraDraw")--, "_onCameraDraw", false)
-		registerEvent(characters, "onExit", "onExitLevel")
+		registerEvent(autoscroll, "onCameraDraw")
+		registerEvent(autoscroll, "onExit")
 	end
 end
 
@@ -68,6 +70,10 @@ end
 
 function autoscroll.onTick()
 	--Text.print("bao", 100, 150)
+	
+	if shouldDiscardOnCameraDraw then
+		shouldDiscardOnCameraDraw = false
+	end
 
 	for section, state in pairs(active_scrolls) do
 		local x1, y1, y2, x2 = getSectionBounds(section)
@@ -101,7 +107,7 @@ function autoscroll.onCameraDraw()
 			v.func(v.args[1], v.args[2], v.args[3], v.args[4], v.args[5], v.args[6])
 		end
 		deferredEvents = {}
-		--shouldDiscardOnCameraDraw = true
+		shouldDiscardOnCameraDraw = true
 	end
 end
 
@@ -307,10 +313,6 @@ end
 function autoscroll.isSectionScrolling(section)
 	if section == nil then section = player.section end
 	return (active_scrolls[section] ~= nil)
-end
-
-function autoscroll.onExit()
-	shouldReturnOnCameraDraw = true
 end
 
 return autoscroll

@@ -11,6 +11,8 @@ local datetime = require("datetime")
 
 local musicalchairs = require("musicalchairs")
 
+local autoscroll = require("autoscroll")
+
 local dying = false;
 local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
@@ -34,11 +36,17 @@ local dependencies = {}
 
 function dependencies.onInitAPI()
 	registerEvent(dependencies, "onStart")
+	registerEvent(dependencies, "onLoad")
 	registerEvent(dependencies, "onTick")
 	registerEvent(dependencies, "onDraw")
 end
 
+function dependencies.onLoad()
+	
+end
+
 function dependencies.onStart()
+	--autoscroll.scrollTo(-200000, -200000, 10000)
 	if Misc.inEditor() then
 		debugbox = require("debugbox")
 	end

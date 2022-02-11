@@ -5,6 +5,7 @@ local playerManager = require("playermanager")
 local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local handycam = require("handycam")
+local autoscroll = require("autoscroll")
 
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))

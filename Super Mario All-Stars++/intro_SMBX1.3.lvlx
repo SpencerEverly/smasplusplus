@@ -1662,7 +1662,4 @@ ET:"ExitToIntro";AS:0;AX:0;AY:0;
 ET:"ExitToMap";AS:0;AX:0;AY:0;
 ET:"ThemeAlreadyInUse";AS:0;AX:0;AY:0;
 ET:"ThemeMenu1";AS:0;AX:0;AY:0;
-ET:"MovementStuff";TE:"MovementStuff2";TD:173;AS:0;AX:0;AY:0;
-ET:"MovementStuff2";TE:"MovementStuff";TD:72;AS:0;AX:0;AY:0;
-ET:"MovementStuffPreExecute";TE:"MovementStuff";TD:2;AU:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

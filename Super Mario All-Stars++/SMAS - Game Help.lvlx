@@ -860,7 +860,6 @@ ID:151;X:-197320;Y:-200368;D:-1;MG:"Looks like there's a downhill path below! An
 ID:1;X:-196960;Y:-200160;D:-1;
 ID:1;X:-197024;Y:-200192;D:-1;
 ID:151;X:-179720;Y:-180080;D:-1;MG:"It looks like there is a frightened Toad over there.<page>Just like reading signs\, NPCs (Non-Playable Characters) can also be talked to\, provided that there is a question mark over their heads.<page>Why don't you talk to the Toad? Go over there and press the up key and see what he has to say.";FD:1;
-ID:151;X:-199984;Y:-200240;D:-1;MG:"<speakerName \"Debug Information\">This is a sign to tell you that the map has some debug levels you can enter on the map by going to the Debug Warp level. If you are seeing this on the final release\, contact spencer.everly@gmail.com";FD:1;LR:"Debug Stuff (Disable when fully released)";
 ID:151;X:-199272;Y:-200112;D:-1;MG:"Use your jump button to stomp it on it's head. Don't walk onto it or else you'll die!";FD:1;LR:"Goomba 1";
 ID:226;X:-159904;Y:-160128;D:-1;LR:"Freefalling";
 ID:213;X:-159896;Y:-160096;D:-1;LR:"Freefalling";
@@ -870,6 +869,7 @@ ID:213;X:-159896;Y:-160000;D:-1;LR:"Freefalling";
 ID:213;X:-159896;Y:-159968;D:-1;LR:"Freefalling";
 ID:213;X:-159896;Y:-159936;D:-1;LR:"Freefalling";
 ID:151;X:-159040;Y:-160176;D:-1;MG:"Hey\, you're good at looking for secrets!<page>If looking here finds your interest\, try looking for the Lava Lands secrets all over the episode!<page>For now\, try something new\: FREE FALLIN'!";FD:1;LR:"Freefalling";ET:"Secret Found 1";
+ID:151;X:-199984;Y:-200240;D:-1;MG:"<speakerName \"Debug Information\">This is a sign to tell you that the map has some debug levels you can enter on the map by going to the Debug Warp level. If you are seeing this on the final release\, contact spencer.everly@gmail.com";FD:1;LR:"Debug Stuff (Disable when fully released)";
 NPC_END
 PHYSICS
 ET:0;X:-179904;Y:-180256;W:32;H:208;
@@ -891,7 +891,7 @@ LR:"Spawned NPCs";
 LR:"Goomba 1";HD:1;
 LR:"Arrow";HD:1;
 LR:"Blockage";
-LR:"Debug Stuff (Disable when fully released)";
+LR:"Debug Stuff (Disable when fully released)";HD:1;
 LR:"Failsafe 2";
 LR:"Sign";
 LR:"Freefalling";
