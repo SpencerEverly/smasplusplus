@@ -617,20 +617,16 @@ local function drawPauseMenu(y, alpha)
 		if Level.filename() == "MALC - HUB.lvlx" then
 			table.insert(pause_options, {name="Teleport Back to the Start", action = starthub});
 		end
-		if not Level.name() == "MALC - HUB" then
-			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
-		end
-		if not Level.filename() == "SMAS - DLC World.lvlx" then
-			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
-		end
 		if SaveData.disableX2char == 1 then
 			table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
 		end
 		if SaveData.disableX2char == 0 then
 			table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
 		end
-		table.insert(pause_options, {name="Character Options", action = switchtochar});
+		table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
+		table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
 		table.insert(pause_options, {name="Go Back to the Main Menu", action = mainmenu});
+		table.insert(pause_options, {name="Character Options", action = switchtochar});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Quit", action = quitgame});
@@ -660,7 +656,7 @@ local function drawPauseMenu(y, alpha)
 end
 
 local function drawCharacterMenu(y, alpha)
-	local name = "Paused."
+	local name = "<color rainbow>Paused.</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
@@ -711,7 +707,7 @@ local function drawCharacterMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index_char+1) then
-			n = "<color rainbow><wave 1>"..n.."</wave></color>";
+			n = "<color yellow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
