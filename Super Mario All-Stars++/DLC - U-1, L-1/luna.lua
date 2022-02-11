@@ -6,10 +6,7 @@ function onTick()
 		killed = true
 		mem(0x00B2C5AC,FIELD_FLOAT)
 	end
-end
-
-function onEnd()
-	if killed == true then
+	if player.deathTimer > 175 then
 		Level.load("SMAS - DLC World.lvlx", nil, nil)
 	end
 end

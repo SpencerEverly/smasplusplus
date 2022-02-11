@@ -543,7 +543,6 @@ local function costumechangeright()
 		player:setCostume(costumes[costumeIdx + 1])
 	else
 		player:setCostume(costumes[1])
-		onePressedState = true
 	end
 end
 
@@ -559,7 +558,6 @@ local function costumechangeleft()
 		player:setCostume(costumes[costumeIdx - 1])
 	else
 		player:setCostume(costumes[1])
-		onePressedState = true
 	end
 end
 
