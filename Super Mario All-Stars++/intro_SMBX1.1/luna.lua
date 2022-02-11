@@ -22,5 +22,5 @@ end
 
 function onDraw()
 	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
-	Graphics.drawImage(bluecurtains, 0, 0, 2)
+	Graphics.drawImageWP(bluecurtains, 0, 0, -12)
 end

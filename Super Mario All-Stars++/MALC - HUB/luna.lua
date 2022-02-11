@@ -1877,6 +1877,12 @@ function onEvent(eventName)
 	if eventName == "OtherList" then
 		littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE GOT TO WAIT UNTIL THIS LIST WORKS.<page>THIS PART OF THE INFORMATION BOOTH WILL TELL YOU OTHER THINGS NOT RELATED TO ANYTHING.<page>COME BACK WHEN THE FULL EPISODE IS RELEASED. THANK YOU FOR YOUR TIME."})
 	end
+	if eventName == "Stage5" then
+		Audio.MusicChange(4, "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg")
+	end
+	if eventName == "Stage6" then
+		Audio.MusicChange(4, "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg")
+	end
 	if eventName == "MarioChar" then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1898,7 +1904,6 @@ function onEvent(eventName)
 		Audio.MusicChange(13, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
 	end
 	if eventName == "PeachChar" then
-		
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
