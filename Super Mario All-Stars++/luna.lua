@@ -82,6 +82,16 @@ function onStart()
 end
 	
 function onTick()
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	local costumeIdx = table.ifind(costumes,currentCostume)
+	
+	if currentCostume == "DEMO-XMASPIL-RUNLEFT" then
+		player.setCostume(1, "DEMO-XMASPILY")
+	end
+	if currentCostume == "DEMO-XMASPILY-RUNRIGHT" then
+		player.setCostume(1, "GA-CAILLOU")
+	end
 	mem(0x00B25130, FIELD_WORD, 2)
 	if player.count(2) then
 		mem(0x00B25132, FIELD_WORD, 5)
@@ -143,6 +153,7 @@ function onTick()
 	local currentCostume = player:getCostume()
 
 	local costumes
+	
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_2012beta.ogg")

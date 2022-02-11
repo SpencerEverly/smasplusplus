@@ -40,6 +40,7 @@ local levelformat = Level.format()
 
 local paused = false;
 local paused_char = false;
+local paused_char_temp = false;
 local pause_box;
 local pause_height = 0;
 local pause_width = 700;
@@ -532,33 +533,33 @@ local function characterchange13_2pleft()
 end
 
 local function costumechangeright()
-	SFX.play("charcost_costume.ogg")
-	SFX.play("charcost-selected.wav")
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
-	
 	local costumeIdx = table.ifind(costumes,currentCostume)
-
+	
 	if costumeIdx ~= nil then
 		player:setCostume(costumes[costumeIdx + 1])
 	else
 		player:setCostume(costumes[1])
 	end
+	SFX.play("charcost_costume.ogg")
+	SFX.play("charcost-selected.wav")
+	Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
 end
 
 local function costumechangeleft()
-	SFX.play("charcost_costume.ogg")
-	SFX.play("charcost-selected.wav")
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
-	
 	local costumeIdx = table.ifind(costumes,currentCostume)
-
+	
 	if costumeIdx ~= nil then
 		player:setCostume(costumes[costumeIdx - 1])
 	else
 		player:setCostume(costumes[1])
 	end
+	SFX.play("charcost_costume.ogg")
+	SFX.play("charcost-selected.wav")
+	Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
 end
 
 local function mainmenu()
@@ -693,11 +694,11 @@ local function drawCharacterMenu(y, alpha)
 				table.insert(pause_options_char, {name2="Change 2P's Character (Right)", action = characterchange13_2p});
 			end
 		end
+		--if SaveData.disableX2char == 0 then
+			--table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
+		--end
 		if SaveData.disableX2char == 0 then
-			table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
-		end
-		if SaveData.disableX2char == 0 then
-			table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
+			table.insert(pause_options_char, {name2="Change Costume", action = costumechangeright});
 		end
 	end
 	for k,v in ipairs(pause_options_char) do
@@ -753,6 +754,18 @@ function pausemenu2.onDraw(isSplit)
 	end
 	if not paused_char then
 		pause_box = nil
+	end
+	if paused_char_temp then
+		--Misc.pause()
+		if(pause_box == nil) then
+			pause_height = drawCharacterMenu(-600,0);
+			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+		end
+		pause_box:Draw(5, 0x00000077);
+		drawCharacterMenu(300-pause_height*0.5,1)
+		
+		--Fix for anything calling Misc.unpause
+		--Misc.pause();
 	end
 	if exitscreen then
 		Graphics.drawScreen{color = Color.black, priority = 10}

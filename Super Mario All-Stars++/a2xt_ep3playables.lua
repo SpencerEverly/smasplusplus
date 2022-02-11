@@ -1,7 +1,7 @@
 local animatx = require("animatx2")
 local particles = require("particles")
-local megashroom = require("NPCs/ai/megashroom")
-local starman = require("NPCs/ai/starman")
+local megashroom = require("mega/megashroom")
+local starman = require("starman/star")
 
 local spintrail = require ("a2xt_spintrail")
 
@@ -465,7 +465,7 @@ local forcedStateMap = {
 	[499] = {state="mega", speed=3, scale=function(p,v)
 		local startCount = lunatime.tick() - v.megaStartFrame
 		local endCount = lunatime.tick() - v.megaEndFrame
-		local changeDuration = 48
+		local changeDuration = 94
 
 		if  startCount < changeDuration+8  then
 			v.megaShrinking = false

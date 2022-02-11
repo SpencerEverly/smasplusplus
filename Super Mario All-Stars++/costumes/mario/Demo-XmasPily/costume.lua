@@ -31,6 +31,8 @@ local costume = {
 	keepPowerupOnHit = true
 }
 
+costume.playerData = {}
+
 local animeShader = Shader()
 animeShader:compileFromFile(nil, Misc.resolveFile(costume.path .. "/p_anime.frag"))
 local animeNoise = Graphics.loadImageResolved(costume.path .. "/perlinNoise.png")
@@ -970,9 +972,9 @@ local drawEndEvent = function(playerData, p)
 
 	-- WARNING !! MEGASHROOM
 	if  p.isMega  and  not playerData.megaShrinking  then
-		megaWarningAlpha = math.min(megaWarningAlpha+0.1, 1)
+		megaWarningAlpha = math.min(megaWarningAlpha+0.05, 1)
 	else
-		megaWarningAlpha = math.max(megaWarningAlpha-0.1, 0)
+		megaWarningAlpha = math.max(megaWarningAlpha-0.05, 0)
 	end
 
 
@@ -1245,7 +1247,6 @@ function costume.onCleanup(playerObj)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
-	players[playerObj] = nil
 	spintrail.colorOverride[CHARACTER_MARIO] = nil
 	spintrail.resetParam("colTime")
 	spintrail.resetParam("lifetime")
@@ -1256,6 +1257,7 @@ function costume.onCleanup(playerObj)
 	ep3Playables.cleanup(playerObj, costume, costumeTable, extraInputFunct, extraAnimFunct, extraDrawFunct);
 	playerCount = playerCount-1
 	coyotetime.onJump = lastCt
+	players[playerObj] = nil
 	local config = NPC.config[171]
 	for  k,v in pairs(oldHammerConfig)  do
 		config[k] = v

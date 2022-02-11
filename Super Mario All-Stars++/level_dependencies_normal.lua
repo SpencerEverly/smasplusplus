@@ -13,6 +13,8 @@ local musicalchairs = require("musicalchairs")
 
 local autoscroll = require("autoscroll")
 
+local Routine = require("routine")
+
 local dying = false;
 local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
