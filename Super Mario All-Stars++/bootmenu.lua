@@ -45,6 +45,16 @@ local month = os.date("%m")
 
 local exacttime = os.date("%X")
 
+local function introExit()
+	Routine.waitFrames(38)
+	Level.load("SMAS - Intro.lvlx", nil, nil)
+end
+
+local function mapExit()
+	Routine.waitFrames(38)
+	Level.exit()
+end
+
 local function theme1()
 	SaveData.introselect = 1
 	exitscreen = true
@@ -473,13 +483,24 @@ local function ExitToMap()
 end
 
 local function BootSMASPlusPlusPreExecute()
+	SFX.play("boot_wsmba.wav")
+	active3 = true
+	logo = true
+	Routine.wait(3.0)
 	exitscreen = true
+	logo = false
+	active3 = false
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
-	Routine.wait(0.4)
+	Routine.wait(0.5)
 	Misc.saveGame()
-	Level.load("SMAS - Intro.lvlx", nil, nil)
+	if (player.keys.down == KEYS_DOWN) == true then
+		Routine.run(mapExit)
+	end
+	if (player.keys.down == KEYS_DOWN) == false then 
+		Routine.run(introExit)
+	end
 end
 	
 local function BootWSMBAPreExecute()
