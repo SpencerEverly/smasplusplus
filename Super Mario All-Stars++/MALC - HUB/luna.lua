@@ -2104,9 +2104,11 @@ function onEvent(eventName)
 	if eventName == ("DisEnabledX2Char") then
 		if SaveData.disableX2char == 0 then
 			triggerEvent("HUBDisableX2")
+			Level.load(Level.filename())
 		end
 		if SaveData.disableX2char == 1 then
 			triggerEvent("HUBEnableX2")
+			Level.load(Level.filename())
 		end
 	end
 	if eventName == "HUBEnableX2" then
