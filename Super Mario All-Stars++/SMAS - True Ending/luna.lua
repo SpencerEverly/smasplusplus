@@ -1,8 +1,6 @@
 local level_dependencies_normal= require("level_dependencies_normal")
 local Routine = require("routine")
 
-local pausemenu = require("pausemenu")
-
 local stars = mem(0x00B251E0, FIELD_WORD)
 
 local whiteflash = false
@@ -114,6 +112,7 @@ function onEvent(eventName)
 		if SaveData.racaActivated == nil then
 			SaveData.racaActivated = SaveData.racaActivated or 1
 		end
+		SaveData.introselect == 1
 		Misc.saveGame()
 		Routine.run(WhiteFadeInSlow)
 		SFX.play("_OST/_Sound Effects/raca-chant.ogg")

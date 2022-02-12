@@ -100,8 +100,7 @@ function dependencies2.onStart()
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
 		pausemenu13 = require("pausemenu13")
-		littleDialogue.defaultStyleName = "smbx13"
-		Audio.sounds[46].sfx = Audio.SfxOpen("door-smbx13.ogg")
+		littleDialogue.defaultStyleName = "smbx13og"
 		Player.setCostume(1, nil)
 		Player.setCostume(2, nil)
 		Player.setCostume(3, nil)

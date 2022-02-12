@@ -22,5 +22,10 @@ function onStart()
 end
 
 function onEvent(eventName)
-	--Nothing
+	if eventName == "pauseenable" then
+		pausemenu.pauseactivated = true
+	end
+	if eventName == "pausedisable" then
+		pausemenu.pauseactivated = false
+	end
 end

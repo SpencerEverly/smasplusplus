@@ -756,22 +756,19 @@ function bootmenu.onInputUpdate()
 		end
 	end
 	if GameData.startedmenu == 2 then
-		--Nothing
+		if player.keys.jump == KEYS_PRESSED then
+			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
+			sec.effects = 0
+			logo = false
+			active2 = false
+			active = true
+			pressjumpp = false
+			sec.backgroundID = 6
+			Routine.run(PigeonRaca1)
+		end
 	end
 	if SaveData.racaActivated == 1 then
 		GameData.startedmenu = 2
-		if GameData.startedmenu == 2 then
-			if player.keys.jump == KEYS_PRESSED then
-				Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
-				sec.effects = 0
-				logo = false
-				active2 = false
-				active = true
-				pressjumpp = false
-				sec.backgroundID = 6
-				Routine.run(PigeonRaca1)
-			end
-		end
 	end
 end
 

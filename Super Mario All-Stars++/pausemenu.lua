@@ -30,9 +30,9 @@ zeroPressedState = false
 local flag = true
 local str = "Loading HUB..."
 
-local pausemenu2 = {}
+local pausemenu = {}
 
-local pauseactivated = true
+pausemenu.pauseactivated = true
 
 local soundObject
 
@@ -58,13 +58,13 @@ local charactive = false
 
 local level = Level.filename()
 
-function pausemenu2.onInitAPI()
-	registerEvent(pausemenu2, "onKeyboardPress")
-	registerEvent(pausemenu2, "onDraw")
-	registerEvent(pausemenu2, "onLevelExit")
-	registerEvent(pausemenu2, "onTick")
-	registerEvent(pausemenu2, "onInputUpdate")
-	registerEvent(pausemenu2, "onStart")
+function pausemenu.onInitAPI()
+	registerEvent(pausemenu, "onKeyboardPress")
+	registerEvent(pausemenu, "onDraw")
+	registerEvent(pausemenu, "onLevelExit")
+	registerEvent(pausemenu, "onTick")
+	registerEvent(pausemenu, "onInputUpdate")
+	registerEvent(pausemenu, "onStart")
 	
 	local Routine = require("routine")
 	
@@ -81,7 +81,7 @@ local function unpause()
 	SFX.play("pausemenu-closed.wav")
 end
 
-function pausemenu2.onStart()
+function pausemenu.onStart()
 	if not ready then return end
 end
 
@@ -726,7 +726,7 @@ local function drawCharacterMenu(y, alpha)
 	return h;
 end
 
-function pausemenu2.onDraw(isSplit)
+function pausemenu.onDraw(isSplit)
 	if paused then
 		Misc.pause()
 		if(pause_box == nil) then
@@ -776,8 +776,8 @@ end
 
 local lastPauseKey = false;
 
-function pausemenu2.onInputUpdate()
-	if(player.keys.pause and not lastPauseKey) then
+function pausemenu.onInputUpdate()
+	if(player.keys.pause == true and not lastPauseKey) then
 		if paused then
 			paused = false
 			paused_char = false
@@ -786,14 +786,30 @@ function pausemenu2.onInputUpdate()
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
-		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pauseactivated == true) then
+		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
 			--Misc.pause();
 			paused = true
 			pauseactive = true
 			pause_index = 0;
 			SFX.play("pausemenu.wav")
 		elseif player.count(2) then
-			--Nothing, yet
+			if paused then
+				paused = false
+				paused_char = false
+				pauseactive = false
+				SFX.play("pausemenu-closed.wav")
+				cooldown = 5
+				Misc.unpause()
+				player2:mem(0x11E,FIELD_BOOL,false)
+			end
+		elseif player.count(2) then
+			if(player2:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
+				--Misc.pause();
+				paused = true
+				pauseactive = true
+				pause_index = 0;
+				SFX.play("pausemenu.wav")
+			end
 		end
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
@@ -878,7 +894,7 @@ function pausemenu2.onInputUpdate()
 	end
 end
 
-function pausemenu2.onTick()
+function pausemenu.onTick()
 	if(paused) then
 		Misc.pause();
 	end
@@ -890,6 +906,16 @@ function pausemenu2.onTick()
 			pause_options_char = 1
 		end
 	end
+	if pausemenu.pauseactivated == true then
+		if player.pauseKeyPressing == false then
+			player.pauseKeyPressing = true
+		end
+	end
+	if pausemenu.pauseactivated == false then
+		if player.pauseKeyPressing == true then
+			player.pauseKeyPressing = false
+		end
+	end
 end
 
-return pausemenu2
+return pausemenu
