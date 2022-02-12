@@ -102,12 +102,6 @@ local function savegame()
 	Misc.unpause()
 end
 
-local function restartlevel()
-	paused = false
-	Misc.unpause()
-	Level.load(Level.filename())
-end
-
 local function characterchange13()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
@@ -201,7 +195,6 @@ end
 local function drawPauseMenu(y, alpha)
 	local name = "Where SMB Attacks (Remake)"
 	local levelcurrent = "Paused."
-	local levelname = Level.name()
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
