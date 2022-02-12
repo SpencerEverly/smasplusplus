@@ -4,6 +4,7 @@ local megashroom = require("mega/megashroom")
 local starman = require("starman/star")
 
 local spintrail = require ("a2xt_spintrail")
+local costume = require ("a2xt_costumes")
 
 ep3Playables = {}
 

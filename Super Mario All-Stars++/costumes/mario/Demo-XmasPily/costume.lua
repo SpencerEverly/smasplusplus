@@ -988,7 +988,7 @@ local drawEndEvent = function(playerData, p)
 			vertexCoords = vertsScreen,
 			textureCoords = texScreen,
 			primitive = Graphics.GL_TRIANGLE_FAN,
-			priority = 0,
+			priority = 4,
 			uniforms = {
 				iTime = lunatime.time()
 			}
@@ -1036,7 +1036,7 @@ local drawEndEvent = function(playerData, p)
 				width = v.img.width, height = v.img.height,
 
 				color = Color.black .. megaWarningAlpha,
-				priority = 1
+				priority = 6
 			}
 
 			Graphics.drawBox(args)
@@ -1175,8 +1175,14 @@ function costume.onInit(playerObj)
 	inputEvent, animEvent, drawEndEvent);
 
 	registerEvent(costume, "onPostNPCKill");
-	--registerEvent(costume, "onInputUpdate");
+	registerEvent(costume, "onTicke");
 	playerCount = playerCount+1
+end
+
+function costume.onTick()
+	for _,p in ipairs(costume.playersList) do
+		local data = costume.playerData[playerObj]
+	end	
 end
 
 function costume.onCleanup(playerObj)
@@ -1257,6 +1263,7 @@ function costume.onCleanup(playerObj)
 	ep3Playables.cleanup(playerObj, costume, costumeTable, extraInputFunct, extraAnimFunct, extraDrawFunct);
 	playerCount = playerCount-1
 	coyotetime.onJump = lastCt
+	costume.playerData[playerObj] = nil
 	players[playerObj] = nil
 	local config = NPC.config[171]
 	for  k,v in pairs(oldHammerConfig)  do

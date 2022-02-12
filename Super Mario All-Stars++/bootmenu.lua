@@ -6,6 +6,7 @@ local textplus = require("textplus")
 --end
 local autoscroll = require("autoscrolla")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
+local sec = Section(0)
 
 local ready = false
 
@@ -580,6 +581,16 @@ local function BootGameHelpPreExecute()
 	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
 end
 
+local function PigeonRaca1()
+	if player.keys.jump == KEYS_PRESSED then
+		player.keys.jump = KEYS_UNPRESSED
+		GameData.startedmenu = 2
+		Routine.wait(4.5)
+		GameData.startedmenu = 0
+		Level.load("SMAS - Raca's World (Part 0).lvlx", nil, nil)
+	end
+end
+
 function bootmenu.onInitAPI()
 	registerEvent(bootmenu,"onExitLevel", "onExit")
 	registerEvent(bootmenu,"onStart")
@@ -628,6 +639,9 @@ function bootmenu.onStart()
 	end
 	if Level.filename() == "intro_SMBX1.3og.lvlx" then
 		Routine.run(theme9scrolling)
+	end
+	if SaveData.racaActivated == 1 then
+		Routine.run(PigeonRaca1)
 	end
 end
 
@@ -744,9 +758,17 @@ function bootmenu.onInputUpdate()
 			--Nothing
 		end
 	end
-	if GameData.startedmenu == 2 then
+	if SaveData.racaActivated == 1 then
+		GameData.startedmenu = 2
 		if player.keys.jump == KEYS_PRESSED then
-			--Nothing
+			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
+			sec.effects = 0
+			logo = false
+			active2 = false
+			active = true
+			pressjumpp = false
+			sec.backgroundID = 6
+			Routine.run(PigeonRaca1)
 		end
 	end
 end
@@ -801,9 +823,6 @@ function bootmenu.onDraw()
 	end
 	if active then
 		--nothing
-	end
-	if not active2 then
-		return
 	end
 	if active2 then
 		Graphics.drawBox{x=719, y=575, width=76, height=20, color=Color.black..0.2, priority=8}

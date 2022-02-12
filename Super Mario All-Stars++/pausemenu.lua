@@ -544,7 +544,7 @@ local function costumechangeright()
 	end
 	SFX.play("charcost_costume.ogg")
 	SFX.play("charcost-selected.wav")
-	Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
+	--Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
 end
 
 local function costumechangeleft()
@@ -559,7 +559,7 @@ local function costumechangeleft()
 	end
 	SFX.play("charcost_costume.ogg")
 	SFX.play("charcost-selected.wav")
-	Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
+	--Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
 end
 
 local function mainmenu()
@@ -694,11 +694,11 @@ local function drawCharacterMenu(y, alpha)
 				table.insert(pause_options_char, {name2="Change 2P's Character (Right)", action = characterchange13_2p});
 			end
 		end
-		--if SaveData.disableX2char == 0 then
-			--table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
-		--end
 		if SaveData.disableX2char == 0 then
-			table.insert(pause_options_char, {name2="Change Costume", action = costumechangeright});
+			table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
 		end
 	end
 	for k,v in ipairs(pause_options_char) do

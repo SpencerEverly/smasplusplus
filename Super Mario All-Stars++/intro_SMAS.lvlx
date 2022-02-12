@@ -238,6 +238,7 @@ LR:"StartBlock2P";HD:1;
 LR:"FadeOutToIntroSMAS";
 LR:"PreFadeOutSMAS";HD:1;
 LR:"PreFadeOutWSMBA";HD:1;
+LR:"CrashScreen";
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
@@ -316,4 +317,6 @@ ET:"StartSMASPP";LS:["FadeOutToIntroSMAS"];DS:1;AS:0;AX:0;AY:0;
 ET:"ExitToIntro";AS:0;AX:0;AY:0;
 ET:"ExitToMap";AS:0;AX:0;AY:0;
 ET:"ThemeAlreadyInUse";AS:0;AX:0;AY:0;
+ET:"PigeonRaca1";AS:0;AX:0;AY:0;
+ET:"PigeonRaca2";SSS:["ID\:0\;BG\:6\;"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

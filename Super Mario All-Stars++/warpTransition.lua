@@ -135,7 +135,7 @@ do
         warpTransition.transitionTimer = warpTransition.transitionTimer + 1.0
 
         local opacity = (warpTransition.transitionTimer/warpTransition.transitionSpeeds[warpTransition.currentTransitionType])
-        local middle = math.floor(warpTransition.transitionSpeeds[warpTransition.currentTransitionType]*0.90)
+        local middle = math.floor(warpTransition.transitionSpeeds[warpTransition.currentTransitionType]*1.00)
 
         if warpTransition.transitionIsFromLevelStart then
             middle = 0
@@ -150,7 +150,7 @@ do
             doorTransitionEffects()
             Misc.pause(true)
         elseif warpTransition.transitionTimer > middle then
-            opacity = 0.90-((warpTransition.transitionTimer-middle)/warpTransition.transitionSpeeds[warpTransition.currentTransitionType])
+            opacity = 1.00-((warpTransition.transitionTimer-middle)/warpTransition.transitionSpeeds[warpTransition.currentTransitionType])
 
             if opacity <= 0 then
                 stopTransition()

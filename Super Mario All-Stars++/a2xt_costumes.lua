@@ -4,6 +4,34 @@ costumes = {}
 --** Costume info            **
 --*****************************
 
+CHARACTER_DEMO = CHARACTER_MARIO;
+CHARACTER_IRIS = CHARACTER_LUIGI;
+CHARACTER_KOOD = CHARACTER_PEACH;
+CHARACTER_RAOCOW = CHARACTER_TOAD;
+CHARACTER_SHEATH = CHARACTER_LINK;
+
+CHARACTER_NAME = {
+                    [CHARACTER_MARIO] = "Demo",
+                    [CHARACTER_LUIGI] = "Iris",
+                    [CHARACTER_PEACH] = "Kood",
+                    [CHARACTER_TOAD]  = "Raocow",
+                    [CHARACTER_LINK]  = "Sheath"
+                  }
+
+CHARACTER_CONSTANT = {
+                        mario=CHARACTER_MARIO,
+                        luigi=CHARACTER_LUIGI,
+                        peach=CHARACTER_PEACH,
+                        toad=CHARACTER_TOAD,
+                        link=CHARACTER_LINK,
+
+                        demo=CHARACTER_MARIO,
+                        iris=CHARACTER_LUIGI,
+                        kood=CHARACTER_PEACH,
+                        raocow=CHARACTER_TOAD,
+                        sheath=CHARACTER_LINK
+                      }
+
 local charids = {mario=CHARACTER_MARIO, luigi=CHARACTER_LUIGI, peach=CHARACTER_PEACH, toad=CHARACTER_TOAD, link=CHARACTER_LINK, unclebroadsword=CHARACTER_UNCLEBROADSWORD}
 
 
@@ -14,11 +42,12 @@ costumes.charLists = {}
 costumes.data = 
 {
 	-- Template
-	DEMO_TEMPLATE   = {path = "Demo-Centered", name = "Default"},
+	DEMO_TEMPLATE   = {path = "A2XT-Demo", name = "Default"},
 	IRIS_TEMPLATE   = {path = "Iris-Centered", name = "Default"},
 	KOOD_TEMPLATE   = {path = "Kood-Centered", name = "Default"},
 	RAOCOW_TEMPLATE = {path = "Raocow-Centered", name = "Default"},
 	SHEATH_TEMPLATE = {path = "Sheath-Centered", name = "Default"},
+	CAILLOU_TEMPLATE   = {path = "GA-Caillou", name = "Default"},
 	
 	--Player 2 Set
 	DEMO_PLAYER2   = {path = "Demo-Player2", name = "Player 2", collectName = "Player 2 (Demo)", set = "PLAYER2"},
