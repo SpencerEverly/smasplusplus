@@ -622,7 +622,7 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "!".."<color white>"..n.."</color>";
+			n = "! ".."<color white>"..n.."</color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2, font = pausefont}), pause_width)
@@ -645,7 +645,7 @@ function pausemenu13.onDraw(isSplit)
 		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=380,height=pause_height,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_box = imagic.Create{x=393,y=300,width=390,height=pause_height,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		pause_box:Draw(5, 0x000000FF);
 		drawPauseMenu(300-pause_height*0.5,1)

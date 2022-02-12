@@ -2902,7 +2902,8 @@ ET:"Cutscene 2 - 9";LS:["SansTeleport"];TE:"Cutscene 2 - 10";TD:2;DS:1;PC:000010
 ET:"Cutscene 2 - 10";LH:["SansTeleport","SansIdle","SansFaceRight","SansTalkable","SansShrug"];TE:"Cutscene 2 - 11";TD:10;DS:1;PC:000010000000;AS:0;AX:0;AY:0;
 ET:"Cutscene 2 - 11";MG:"<setPos 400 32 0.05 -6.3>Uhhhh... what...?!";TE:"Cutscene 2 - 12";TD:1;AS:0;AX:0;AY:0;
 ET:"Cutscene 2 - 12";SD:27;LS:["DoorExit"];TE:"Cutscene 2 - 13";TD:1;AS:0;AX:0;AY:0;
-ET:"Cutscene 2 - 13";LH:["RedSpinyIdle"];LS:["RedSpinyTalk"];DS:1;AS:0;AX:0;AY:0;
+ET:"Cutscene 2 - 13";LH:["RedSpinyIdle"];LS:["RedSpinyTalk"];TE:"Cutscene 2 - end";TD:1;DS:1;AS:0;AX:0;AY:0;
+ET:"Cutscene 2 - end";AS:0;AX:0;AY:0;
 ET:"flip";LH:["AntigravityDoor","GravityNormal"];DS:1;AS:0;AX:0;AY:0;
 ET:"flipNormal";LH:["GravityFlipped"];LS:["GravityNormal","AntigravityDoor"];DS:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

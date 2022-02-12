@@ -22,6 +22,7 @@ local level = Level.filename()
 
 local logo = true
 local pressjumpp = true
+local pressjumpp2 = false
 local active = false
 local active2 = true
 local active3 = false
@@ -221,6 +222,28 @@ local function easterEgg() --SnooPINGAS I see? ._.
 	Audio.MusicChange(1, "_OST/All Stars Secrets/ZZZ_Easter Egg.ogg")
 	Routine.wait(4.2)
 	active4 = true
+end
+
+local function pressjumptostart()
+	pressjumpp = true
+	Routine.wait(1)
+	pressjumpp = false
+	Routine.wait(1)
+	Routine.loop(130, pressjumptostart, true)
+	if GameData.startedmenu == 0 then
+		if player.keys.jump == KEYS_PRESSED then
+			Routine.run(pressjumptostartinactive)
+			Routine.pause(pressjumptostartinactive)
+			Routine.yield(pressjumptostartinactive)
+		end
+	end
+end
+
+local function pressjumptostartinactive()
+	if GameData.startedmenu == 1 then
+		Routine.continue(pressjumptostartinactive)
+		Routine.resume(pressjumptostartinactive)
+	end
 end
 
 local function SaveDataError2()
@@ -584,7 +607,6 @@ end
 local function PigeonRaca1()
 	if player.keys.jump == KEYS_PRESSED then
 		player.keys.jump = KEYS_UNPRESSED
-		GameData.startedmenu = 2
 		Routine.wait(4.5)
 		GameData.startedmenu = 0
 		Level.load("SMAS - Raca's World (Part 0).lvlx", nil, nil)
@@ -616,7 +638,8 @@ function bootmenu.onStart()
 		GameData.startedmenu = 1
 	end
 	if SaveData.firstBootCompleted == 1 then
-		Routine.run(easterEgg, whilePaused)
+		Routine.run(easterEgg, true)
+		Routine.run(pressjumptostart, true)
 	end
 	if month == "12" and day == "25" then
 		Section(0).getWeatherEffect(2)
@@ -742,17 +765,18 @@ end
 
 function bootmenu.onInputUpdate()
 	if player.rawKeys.pause == KEYS_PRESSED then
-		--Misc.exitEngine()
+		Routine.run(ExitGame1)
 	end
 	if GameData.startedmenu == 0 then
 		if player.keys.jump == KEYS_PRESSED then
 			Routine.run(bootDialogue)
+			pressjumpp = false
 			GameData.startedmenu = GameData.startedmenu + 1
 		end
 	end
 	if GameData.startedmenu == 1 then
 		if player.keys.jump == KEYS_PRESSED then
-			--Nothing
+			pressjumpp = true
 		end
 	end
 	if GameData.startedmenu == 2 then
@@ -767,9 +791,9 @@ function bootmenu.onInputUpdate()
 			Routine.run(PigeonRaca1)
 		end
 	end
-	if SaveData.racaActivated == 1 then
-		GameData.startedmenu = 2
-	end
+	--if SaveData.racaActivated == 1 then
+		--GameData.startedmenu = 2
+	--end
 end
 
 function bootmenu.onDraw()
@@ -790,11 +814,11 @@ function bootmenu.onDraw()
 	if not logo then
 		--nothing
 	end
+	if pressjumpp2 then
+		
+	end
 	if pressjumpp then
 		Graphics.drawImage(pressstart, 150, 552, 5)
-	end
-	if not pressjumpp then
-		--nothing
 	end
 	if twoplayercheck then
 		textplus.print{x=295, y=10, text = "Two player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}

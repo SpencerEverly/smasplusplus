@@ -7,3 +7,13 @@ player:transform(1, false)
 Graphics.activateHud(false)
 pausemenu.pauseactivated = false
 
+function onStart()
+	Misc.saveGame()
+end
+
+function onTick()
+	if SaveData.racaActvated == 1 then
+		SaveData.racaActvated = SaveData.racaActvated - 1
+		Misc.saveGame()
+	end
+end

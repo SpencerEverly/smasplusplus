@@ -31,7 +31,7 @@ local str = "Loading HUB..."
 
 local pausemenu13 = {}
 
-local pauseactivated = true
+pausemenu13.pauseactivated = true
 
 local soundObject
 
@@ -619,7 +619,7 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "!".."<color white>"..n.."</color>";
+			n = "! ".."<color white>"..n.."</color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2, font = pausefont}), pause_width)
@@ -642,7 +642,7 @@ function pausemenu13.onDraw(isSplit)
 		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=380,height=pause_height,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_box = imagic.Create{x=393,y=300,width=405,height=pause_height,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		pause_box:Draw(5, 0x000000FF);
 		drawPauseMenu(300-pause_height*0.5,1)
@@ -670,14 +670,31 @@ function pausemenu13.onInputUpdate()
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
-		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pauseactivated == true) then
+		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu13.pauseactivated == true) then
 			--Misc.pause();
 			paused = true
 			pauseactive = true
 			pause_index = 0;
 			SFX.play(30)
 		elseif player.count(2) then
-			--Nothing, yet
+			if paused then
+				paused = false
+				paused_char = false
+				aused_tele = false
+				pauseactive = false
+				SFX.play(30)
+				cooldown = 5
+				Misc.unpause()
+				player2:mem(0x11E,FIELD_BOOL,false)
+			end
+		elseif player.count(2) then
+			if(player2:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
+				--Misc.pause();
+				paused = true
+				pauseactive = true
+				pause_index = 0;
+				SFX.play(30)
+			end
 		end
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
@@ -772,6 +789,26 @@ function pausemenu13.onTick()
 		end
 		if pause_options_char == 0 then
 			pause_options_char = 1
+		end
+	end
+	if pausemenu13.pauseactivated == true then
+		if player.pauseKeyPressing == false then
+			player.pauseKeyPressing = true
+		end
+		if player.count() == 2 then
+			if player2.pauseKeyPressing == false then
+				player2.pauseKeyPressing = true
+			end
+		end
+	end
+	if pausemenu13.pauseactivated == false then
+		if player.pauseKeyPressing == true then
+			player.pauseKeyPressing = false
+		end
+		if player.count() == 2 then
+			if player2.pauseKeyPressing == true then
+				player2.pauseKeyPressing = false
+			end
 		end
 	end
 end

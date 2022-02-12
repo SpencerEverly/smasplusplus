@@ -37,13 +37,6 @@ ID:81;X:-199264;Y:-200032;W:32;H:32;
 ID:81;X:-199232;Y:-200032;W:32;H:32;
 ID:81;X:-199200;Y:-200032;W:32;H:32;
 ID:81;X:-199168;Y:-200032;W:32;H:32;
-ID:681;X:-199904;Y:-200160;W:32;H:32;
-ID:681;X:-199328;Y:-200160;W:32;H:32;
-ID:622;X:-199808;Y:-200160;W:32;H:32;
-ID:623;X:-199712;Y:-200160;W:32;H:32;
-ID:624;X:-199520;Y:-200160;W:32;H:32;
-ID:625;X:-199456;Y:-200160;W:32;H:32;
-ID:631;X:-199392;Y:-200160;W:32;H:32;
 BLOCK_END
 BGO
 ID:52;X:-199936;Y:-200448;
@@ -163,5 +156,5 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Message";MG:"Hello! Sorry I'm not home\, but I have gone to recuse my friends who were captured by Bowser.                           - Yoshi<page>This place also looks like a mini HUB to change through certain characters/costumes.<page>For more characters\, check out the Me and Larry City HUB! You can head there by pressing F5\, then press 2.";AS:0;AX:0;AY:0;
+ET:"Message";MG:"Hello! Sorry I'm not home\, but I have gone to recuse my friends who were captured by Bowser.                           - Yoshi";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

@@ -9,6 +9,14 @@ function onEvent(eventName)
 	if eventName == "flipNormal" then
 		SFX.play("ender_portal.ogg")
 	end
+	if eventName == "Cutscene 1" then
+		if SaveData.disableX2char == 0 then
+			pausemenu.pauseactivated = false
+		end
+		if SaveData.disableX2char == 1 then
+			pausemenu13.pauseactivated = false
+		end
+	end
 	if eventName == "Cutscene 2 - 5" then
 		SFX.play("_OST/Undertale/mus_rimshot_smbxsfx.ogg")
 	end
@@ -17,5 +25,13 @@ function onEvent(eventName)
 	end
 	if eventName == "Cutscene 2 - 10" then
 		SFX.play("ut_noise.ogg")
+	end
+	if eventName == "Cutscene 2 - 13" then
+		if SaveData.disableX2char == 0 then
+			pausemenu.pauseactivated = true
+		end
+		if SaveData.disableX2char == 1 then
+			pausemenu13.pauseactivated = true
+		end
 	end
 end
