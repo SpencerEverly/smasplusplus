@@ -640,9 +640,6 @@ function bootmenu.onStart()
 	if Level.filename() == "intro_SMBX1.3og.lvlx" then
 		Routine.run(theme9scrolling)
 	end
-	if SaveData.racaActivated == 1 then
-		Routine.run(PigeonRaca1)
-	end
 end
 
 function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
@@ -714,28 +711,28 @@ function bootmenu.onTick()
 	if runPressedState == true then
 		player.runKeyPressing = false
 	end
-	Audio.sounds[1].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[2].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[3].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[4].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[5].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[6].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[7].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[9].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[10].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[11].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[12].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[13].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[14].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[15].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[18].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[22].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[25].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[28].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[37].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[42].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[43].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[91].sfx  = Audio.SfxOpen("nothing.ogg")
+	Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[3].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[4].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[5].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[6].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[7].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[9].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[10].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[11].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[12].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[13].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[14].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[15].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[18].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[22].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[25].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[28].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[37].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[42].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[43].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[91].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 end
 
 function bootmenu.onPause(evt)
@@ -758,17 +755,22 @@ function bootmenu.onInputUpdate()
 			--Nothing
 		end
 	end
+	if GameData.startedmenu == 2 then
+		--Nothing
+	end
 	if SaveData.racaActivated == 1 then
 		GameData.startedmenu = 2
-		if player.keys.jump == KEYS_PRESSED then
-			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
-			sec.effects = 0
-			logo = false
-			active2 = false
-			active = true
-			pressjumpp = false
-			sec.backgroundID = 6
-			Routine.run(PigeonRaca1)
+		if GameData.startedmenu == 2 then
+			if player.keys.jump == KEYS_PRESSED then
+				Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
+				sec.effects = 0
+				logo = false
+				active2 = false
+				active = true
+				pressjumpp = false
+				sec.backgroundID = 6
+				Routine.run(PigeonRaca1)
+			end
 		end
 	end
 end

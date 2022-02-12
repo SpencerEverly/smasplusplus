@@ -16,6 +16,12 @@ local numberup = 0
 local opacity = timer1/speed
 local middle = math.floor(timer1*numberup)
 
+local function Crash()
+	Routine.wait(0.1, true)
+	--mem(0x00B257F0, FIELD_FLOAT, 245353464654)
+	Misc.exitEngine()
+end
+
 local function WhiteFadeInSlow()
 	whiteflashpre1 = true
 	Routine.wait(0.9, true)
@@ -43,8 +49,8 @@ function onStart()
 end
 
 function onTick()
-	Audio.sounds[52].sfx  = Audio.SfxOpen("nothing.ogg")
-	Audio.sounds[45].sfx  = Audio.SfxOpen("nothing.ogg")
+	Audio.sounds[52].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[45].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	if invisible == true then
 		player:setFrame(50)
 	end
@@ -83,7 +89,9 @@ function onEvent(eventName)
 		whiteflash = true
 		player.setCostume(1, nil)
 		player:transform(1, false)
-		Audio.sounds[1].sfx  = Audio.SfxOpen("nothing.ogg")
+		Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+		Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+		Audio.sounds[3].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	end
 	if eventName == "NormalCutscene1" then
 		whiteflash = false
@@ -103,17 +111,16 @@ function onEvent(eventName)
 		Audio.MusicChange(6, 0)
 	end
 	if eventName == "NormalCutscene6" then
+		if SaveData.racaActivated == nil then
+			SaveData.racaActivated = SaveData.racaActivated or 1
+		end
+		Misc.saveGame()
 		Routine.run(WhiteFadeInSlow)
 		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
 		SFX.play("_OST/Undertale/mus_cymbal.ogg")
 	end
 	if eventName == "CrashExecute" then
-		if SaveData.racaActivated == nil then
-			SaveData.racaActivated = SaveData.racaActivated or 1
-		end
-		SaveData.racaActvated = 1
-		Misc.saveGame()
-		mem(0x00B257F0, FIELD_FLOAT, 245353464654)
+		Routine.run(Crash)
 	end
 end
 

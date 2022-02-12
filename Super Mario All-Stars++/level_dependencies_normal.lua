@@ -263,7 +263,7 @@ function dependencies.onTick()
 	end
 	if currentCostume == "9-SMW-PIRATE" then
 		if SaveData.disableX2char == 0 then
-			warpTransition.doorclose = ("nothing.ogg")
+			warpTransition.doorclose = ("_OST/_Sound Effects/nothing.ogg")
 		end
 	end
 	if currentCostume == "11-SMA1" then

@@ -1132,6 +1132,7 @@ function costume.onInit(playerObj)
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smb2-throw.ogg")
 	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smb2-hit.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/bubble.ogg")
+	Graphics.registerCharacterHUD(1, Graphics.HUD_HEARTS)
 	coyotetime = require("coyotetime");
 	ppp = require("playerphysicspatch");
 	spintrail = require("a2xt_spintrail")
@@ -1186,7 +1187,8 @@ function costume.onTick()
 end
 
 function costume.onCleanup(playerObj)
-	Audio.sounds[1].sfx  = nil	
+	Graphics.registerCharacterHUD(1, Graphics.HUD_ITEMBOX)
+	Audio.sounds[1].sfx  = nil
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
 	Audio.sounds[4].sfx  = nil
