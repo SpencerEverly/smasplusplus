@@ -1,0 +1,383 @@
+{
+--[1]--
+{
+   ["totaliceflowers"]=0,
+   ["goombaStomps"]=0,
+   ["__launcher"]={2},
+   ["yiYoshi"]={3},
+   ["totaltanookis"]=0,
+   ["__costumes"]={4},
+   ["inventoryTable"]={5},
+   ["warphub"]={6},
+   ["starmansused"]=0,
+   ["koopaStomps"]=0,
+   ["GameOverCount"]=0,
+   ["steveData"]={7},
+   ["megamushroomssused"]=0,
+   ["racaActvated"]=1,
+   ["deathCount"]=0,
+   ["totalmushrooms"]=0,
+   ["ut_enabled"]=0,
+   ["firstBootCompleted"]=1,
+   ["failsafeMessageOne"]=5,
+   ["disableX2char"]=0,
+   ["totalleafs"]=0,
+   ["totalhammersuits"]=0,
+   ["totalfireflowers"]=0,
+   ["introselect"]=1,
+   ["starsgrabbed"]=0,
+   ["_basegame"]={8},
+   ["totalcoins"]=0,
+   ["usePWing"]=false,
+   ["smwMap"]={9},
+   ["costumes"]={10},
+   ["racaActivated"]=0,
+   ["useStarman"]=false
+},
+--[2]--
+{
+
+},
+--[3]--
+{
+   ["currentColour"]=0,
+   ["savedEggs"]={11}
+},
+--[4]--
+{
+   ["1"]="DEMO-XMASPILY"
+},
+--[5]--
+{
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   [0]=0
+},
+--[6]--
+{
+   ["MALC - HUB.lvlx"]={12}
+},
+--[7]--
+{
+   ["items"]={13}
+},
+--[8]--
+{
+   ["bigSwitch"]={14},
+   ["_characterdata"]={15},
+   ["starcoin"]={16},
+   ["hud"]={17},
+   ["starcoinCounter"]=0
+},
+--[9]--
+{
+   ["encounterData"]={18},
+   ["beatenLevels"]={19},
+   ["unlockedCheckpoints"]={20},
+   ["unlockedPaths"]={21}
+},
+--[10]--
+{
+
+},
+--[11]--
+{
+
+},
+--[12]--
+{
+
+},
+--[13]--
+{
+
+},
+--[14]--
+{
+
+},
+--[15]--
+{
+   ["8"]={22},
+   ["10"]={23},
+   ["9"]={24},
+   ["6"]={25},
+   ["16"]={26},
+   ["11"]={27},
+   ["12"]={28},
+   ["7"]={29},
+   ["15"]={30},
+   ["13"]={31},
+   ["14"]={32}
+},
+--[16]--
+{
+   ["SMAS - World Map Warp.lvlx"]={33},
+   ["intro_SMBX1.2.lvlx"]={34},
+   ["SMAS - Credits.lvlx"]={35},
+   ["SMAS - Game Help (Boot Menu).lvlx"]={36},
+   ["SMAS - Intro.lvlx"]={37},
+   ["SMB2 - W-1, L-3.lvlx"]={38},
+   ["intro_SMBX2b3.lvlx"]={39},
+   ["SMAS - Start.lvlx"]={40},
+   ["SMB2 - W-1, L-1.lvlx"]={41},
+   ["intro_SMBX1.3og.lvlx"]={42},
+   ["MALC - HUB.lvlx"]={43},
+   ["intro_SMAS.lvlx"]={44},
+   ["intro_bossedit8.lvlx"]={45},
+   ["SMBS - W-1, L-A.lvlx"]={46},
+   ["SMAS - True Ending.lvlx"]={47}
+},
+--[17]--
+{
+   ["score"]=121960
+},
+--[18]--
+{
+
+},
+--[19]--
+{
+
+},
+--[20]--
+{
+   ["SMAS - True Ending.lvlx"]={48}
+},
+--[21]--
+{
+
+},
+--[22]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[23]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[24]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[25]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[26]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=2,
+   ["0x16"]=3,
+   ["0x108"]=0
+},
+--[27]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[28]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[29]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[30]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[31]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[32]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[33]--
+{
+   ["maxID"]=0,
+   ["alive"]={49}
+},
+--[34]--
+{
+   ["maxID"]=0,
+   ["alive"]={50}
+},
+--[35]--
+{
+   ["maxID"]=0,
+   ["alive"]={51}
+},
+--[36]--
+{
+   ["maxID"]=0,
+   ["alive"]={52}
+},
+--[37]--
+{
+   ["maxID"]=0,
+   ["alive"]={53}
+},
+--[38]--
+{
+   ["maxID"]=0,
+   ["alive"]={54}
+},
+--[39]--
+{
+   ["maxID"]=0,
+   ["alive"]={55}
+},
+--[40]--
+{
+   ["maxID"]=0,
+   ["alive"]={56}
+},
+--[41]--
+{
+   ["maxID"]=0,
+   ["alive"]={57}
+},
+--[42]--
+{
+   ["maxID"]=0,
+   ["alive"]={58}
+},
+--[43]--
+{
+   ["maxID"]=0,
+   ["alive"]={59}
+},
+--[44]--
+{
+   ["maxID"]=0,
+   ["alive"]={60}
+},
+--[45]--
+{
+   ["maxID"]=0,
+   ["alive"]={61}
+},
+--[46]--
+{
+   ["maxID"]=0,
+   ["alive"]={62}
+},
+--[47]--
+{
+   ["maxID"]=0,
+   ["alive"]={63}
+},
+--[48]--
+{
+   true
+},
+--[49]--
+{
+
+},
+--[50]--
+{
+
+},
+--[51]--
+{
+
+},
+--[52]--
+{
+
+},
+--[53]--
+{
+
+},
+--[54]--
+{
+
+},
+--[55]--
+{
+
+},
+--[56]--
+{
+
+},
+--[57]--
+{
+
+},
+--[58]--
+{
+
+},
+--[59]--
+{
+
+},
+--[60]--
+{
+
+},
+--[61]--
+{
+
+},
+--[62]--
+{
+
+},
+--[63]--
+{
+
+}
+}

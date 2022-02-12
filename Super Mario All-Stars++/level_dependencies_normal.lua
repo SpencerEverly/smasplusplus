@@ -1,7 +1,4 @@
-	
 local littleDialogue = require("littleDialogue")
-
-local pausemenu = require("pausemenu")
 
 local playerManager = require("playerManager")
 
@@ -86,6 +83,7 @@ function dependencies.onStart()
 
 	local costumes
 	if SaveData.disableX2char == 0 then
+		pausemenu = require("pausemenu")
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 		playerphysicspatch = require("playerphysicspatch")
@@ -108,6 +106,7 @@ function dependencies.onStart()
 		end
 	end
 	if SaveData.disableX2char == 1 then
+		pausemenu13 = require("pausemenu13")
 		littleDialogue.defaultStyleName = "smbx13"
 		Audio.sounds[46].sfx = Audio.SfxOpen("door-smbx13.ogg")
 		Player.setCostume(1, nil)
