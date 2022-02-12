@@ -1,6 +1,8 @@
 local level_dependencies_normal= require("level_dependencies_normal")
 local Routine = require("routine")
 
+local pausemenu = require("pausemenu")
+
 local stars = mem(0x00B251E0, FIELD_WORD)
 
 local whiteflash = false
@@ -64,6 +66,7 @@ function onEvent(eventName)
 		SFX.play("_OST/All Stars Secrets/True Ending Completed (SFX).ogg")
 	end
 	if eventName == "NormalCutsceneBegin" then
+		pausemenu.pauseactivated = false
 		player:teleport(-78784, -80128)
 		triggerEvent("NormalCutsceneBegin2")
 		player.keys.left = false
@@ -108,7 +111,7 @@ function onEvent(eventName)
 		if SaveData.racaActivated == nil then
 			SaveData.racaActivated = SaveData.racaActivated or 1
 		end
-		SaveData.introselect = 1
+		SaveData.racaActvated = 1
 		Misc.saveGame()
 		mem(0x00B257F0, FIELD_FLOAT, 245353464654)
 	end

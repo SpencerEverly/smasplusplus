@@ -32,6 +32,8 @@ local str = "Loading HUB..."
 
 local pausemenu2 = {}
 
+local pauseactivated = true
+
 local soundObject
 
 local levelfolder = Level.folderPath()
@@ -784,7 +786,7 @@ function pausemenu2.onInputUpdate()
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
-		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused()) then
+		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pauseactivated == true) then
 			--Misc.pause();
 			paused = true
 			pauseactive = true

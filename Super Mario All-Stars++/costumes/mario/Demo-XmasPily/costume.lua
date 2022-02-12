@@ -500,7 +500,7 @@ local inputEvent = function(playerData, p)
 				pilyData.alreadyCaped = pilyData.alreadyCaped + 1
 				-- we only have 1 and 2 right now
 				local idx = math.min(pilyData.alreadyCaped, 2)
-				SFX.play(Misc.resolveSoundFile("extended/cape-swoop".. idx ..".ogg"))
+				SFX.play(Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/extended/cape-swoop".. idx ..".ogg"))
 				pilyData.capeDirection = p.direction
 				pilyData.capeStartTime = lunatime.time()
 				p.speedY = math.max(math.min(p.speedY, 0) -5, -10)
@@ -604,7 +604,7 @@ local inputEvent = function(playerData, p)
 					if  playerData.powerup == 6  then
 						SFX.play("sound/character/ur_claw.ogg")
 					elseif  playerData.powerup == 3  then
-						SFX.play("sound/extended/flame-shield-dash.ogg")
+						SFX.play("costumes/mario/Demo-XmasPily/sound/extended/flame-shield-dash.ogg")
 					else
 						SFX.play("sound/boot.ogg")
 					end
@@ -671,7 +671,7 @@ local inputEvent = function(playerData, p)
 		else
 			p.speedY = -10
 		end
-		SFX.play{sound=(pilyData.customSounds.bounce  or  "sound/extended/bubble-shield-jump.ogg"), volume=0.5}
+		SFX.play{sound=(pilyData.customSounds.bounce  or  "costumes/mario/Demo-XmasPily/extended/bubble-shield-jump.ogg"), volume=0.5}
 
 		p.speedY = -p.speedY
 		local reduceSpeedY = false
