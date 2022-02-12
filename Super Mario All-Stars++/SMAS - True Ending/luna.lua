@@ -39,11 +39,14 @@ local function WhiteFadeInSlow()
 	whiteflash = true
 end
 
+function onLoad()
+	if SaveData.disableX2char == 1 then
+		SaveData.disableX2char = SaveData.disableX2char - 1
+	end
+end
+
 function onStart()
 	Audio.MusicVolume(nil)
-	--if stars >= 100 then
-		--triggerEvent("GenosideEnding")
-	--end
 end
 
 function onTick()
@@ -112,7 +115,7 @@ function onEvent(eventName)
 		if SaveData.racaActivated == nil then
 			SaveData.racaActivated = SaveData.racaActivated or 1
 		end
-		SaveData.introselect == 1
+		SaveData.introselect = 1
 		Misc.saveGame()
 		Routine.run(WhiteFadeInSlow)
 		SFX.play("_OST/_Sound Effects/raca-chant.ogg")

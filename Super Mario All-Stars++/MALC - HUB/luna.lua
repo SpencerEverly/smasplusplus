@@ -861,6 +861,16 @@ function onTick()
 		Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 	end
+	if currentCostume == "E-GOOMBA" then
+		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+		Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+	end
 	if currentCostume == "DEMO-XMASPILY" then
 		Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 		Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
@@ -870,6 +880,16 @@ function onTick()
 		Audio.MusicChange(11, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+	end
+	if currentCostume == "C-GOLDENMARIO" then
+		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+		Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 	end
 	if currentCostume == "MODERN" then
 		Audio.MusicChange(1, "_OST/Modern Mario/SMB2 - Character Select.ogg")

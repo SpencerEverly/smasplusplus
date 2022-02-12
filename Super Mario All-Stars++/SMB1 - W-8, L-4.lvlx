@@ -6409,7 +6409,7 @@ ID:176;X:-58560;Y:-60288;D:-1;S1:1;
 ID:93;X:-58768;Y:-60240;D:-1;
 ID:198;X:-39456;Y:-40192;D:-1;FD:1;
 ID:97;X:-39600;Y:-40288;D:-1;LR:"Hidden";
-ID:465;X:-39936;Y:-40168;D:-1;ED:"Pigeon Cutscene Sequel 1";
+ID:465;X:-39936;Y:-40168;D:-1;ED:"Pigeon Cutscene Sequel 0";
 ID:400;X:60224;Y:59712;D:-1;
 NPC_END
 PHYSICS
@@ -6537,6 +6537,7 @@ ET:"Pigeon Cutscene 2";MG:"<boxStyle dr>Sorry <characterName>. To rescue the pri
 ET:"Pigeon Cutscene 3";TE:"Pigeon Cutscene 4";TD:1;PC:000010000000;AS:0;AX:0;AY:0;
 ET:"Pigeon Cutscene 4";MG:"<boxStyle dr>PIGEON ATTACK! RUN!!1!!1!1!!!!";TE:"Pigeon Cutscene 5";TD:5;AS:0;AX:0;AY:0;
 ET:"Pigeon Cutscene 5";AS:0;AX:0;AY:0;
+ET:"Pigeon Cutscene Sequel 0";TE:"Pigeon Cutscene Sequel 1";TD:23;AS:0;AX:0;AY:0;
 ET:"Pigeon Cutscene Sequel 1";MG:"<boxStyle dr>Aw great! I thought you wouldn't survive in that trap!<page>Oh well... I guess I'll have to set a new one...!<page>See me on Super Mario Bros. 3. HAHAHAHAHAHAHAHA!";TE:"Pigeon Cutscene Sequel 2";TD:1;AS:0;AX:0;AY:0;
 ET:"Pigeon Cutscene Sequel 2";LS:["Cutscene Moving Layer"];TE:"Pigeon Cutscene Sequel 3";TD:20;DS:1;ML:"Cutscene Moving Layer";MX:0;MY:-5.90769;AS:0;AX:0;AY:0;
 ET:"Pigeon Cutscene Sequel 3";SD:20;LS:["Hidden"];AS:0;AX:0;AY:0;
