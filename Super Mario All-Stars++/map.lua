@@ -1,7 +1,5 @@
 local steve = require("steve")
 
-local pausemenu = require("pausemenu_map")
-
 local textplus = require("textplus")
 
 local playerManager = require("playermanager")
@@ -24,9 +22,10 @@ function onLoad()
 		map3d.CameraSettings.fov = 65
 		map3d.BGPlane.tile = 394
 		map3d.Light.enabled = false
+		pausemenu = require("pausemenu_map")
 	end
 	if SaveData.disableX2char == 1 then
-		--For now, nothing
+		pausemenu13 = require("pausemenu13map")
 	end
 end
 
