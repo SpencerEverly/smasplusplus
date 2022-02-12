@@ -48,8 +48,8 @@ end
 function onEvent(eventName)
 	if eventName == "LoadWSMBA" then
 		Misc.saveGame()
-		Misc.loadEpisode("Where SMB Attacks (SMAS++)")
-		if Misc.loadEpisode("Where SMB Attacks (SMAS++)") == false then
+		Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
+		if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
 			Misc.saveGame()
 			SFX.play("wrong.wav")
 			player:teleport(-199632, -200176)
