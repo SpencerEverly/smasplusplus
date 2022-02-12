@@ -596,7 +596,7 @@ local function mainmenu()
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
-local function wip()
+local function wrong()
 	SFX.play("_OST/_Sound Effects/wrong.ogg")
 end
 
@@ -609,7 +609,7 @@ end
 local function dlcmapload()
 	paused = false
 	Misc.unpause()
-	Level.load("SMAS - DLC Levels.lvlx", nil, nil)
+	Level.load("SMAS - DLC World.lvlx", nil, nil)
 end
 
 local function drawPauseMenu(y, alpha)
@@ -630,22 +630,26 @@ local function drawPauseMenu(y, alpha)
 		{
 			{name="Continue", action=unpause}
 		}
+		table.insert(pause_options, {name="Restart", action = restartlevel});
 		if Level.filename() == "SMAS - DLC World.lvlx" then
 			table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
 		end
-		table.insert(pause_options, {name="Restart", action = restartlevel});
-		if Level.filename() == "MALC - HUB.lvlx" then
-			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
+		if (Level.name() == "SMAS - DLC World") == false then
+			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
 		end
-		table.insert(pause_options, {name="Character Options", action = switchtochar});
+		if (Level.name() == "MALC - HUB") == false then
+			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
+		end
 		if SaveData.disableX2char == 1 then
 			table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
 		end
 		if SaveData.disableX2char == 0 then
 			table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
 		end
-		table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
-		table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
+		if Level.filename() == "MALC - HUB.lvlx" then
+			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
+		end
+		table.insert(pause_options, {name="Character Options", action = switchtochar});
 		table.insert(pause_options, {name="Go Back to the Main Menu", action = mainmenu});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
