@@ -613,7 +613,7 @@ local function dlcmapload()
 end
 
 local function drawPauseMenu(y, alpha)
-	local name = "<color rainbow>PAUSED</color>"
+	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
@@ -663,7 +663,7 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "<color yellow><wave 1>"..n.."</wave></color>";
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
@@ -680,7 +680,7 @@ local function drawPauseMenu(y, alpha)
 end
 
 local function drawCharacterMenu(y, alpha)
-	local name = "<color rainbow>PAUSED</color>"
+	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
@@ -731,7 +731,7 @@ local function drawCharacterMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index_char+1) then
-			n = "<color yellow><wave 1>"..n.."</wave></color>";
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
@@ -748,7 +748,7 @@ local function drawCharacterMenu(y, alpha)
 end
 
 local function drawHUBTeleportMenu(y, alpha)
-	local name = "<color rainbow>PAUSED</color>"
+	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
@@ -779,7 +779,7 @@ local function drawHUBTeleportMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index_tele+1) then
-			n = "<color yellow><wave 1>"..n.."</wave></color>";
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)

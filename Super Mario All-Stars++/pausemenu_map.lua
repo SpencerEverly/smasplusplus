@@ -4,8 +4,9 @@ local rng = require("rng")
 local Routine = require("routine")
 local playerManager = require("playermanager")
 
-local pausefont = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+local pausefont = textplus.loadFont("littleDialogue/font/sonicMania-bigFont.ini")
 local pausefont2 = textplus.loadFont("littleDialogue/font/smb1-a.ini")
+local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
 
 local active = true
 local active2 = false
@@ -43,7 +44,7 @@ local pause_index = 0;
 local pauseactive = false
 local charactive = false
 
-local mapselectsfx = "charcost_mapselect.wav"
+local mapselectsfx = "charcost_mapselect.ogg"
 
 function pausemenu2.onInitAPI()
 	registerEvent(pausemenu2, "onKeyboardPress")
@@ -59,7 +60,7 @@ end
 local function unpause()
 	paused = false;
 	cooldown = 5
-	SFX.play("pausemenu-closed.wav")
+	SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 	player:mem(0x17A,FIELD_BOOL,false)
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
@@ -102,7 +103,7 @@ local function savegame()
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
 	Misc.saveGame();
-	SFX.play("save_dismiss.ogg")
+	SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
 end
 
 local function startteleport()
@@ -113,10 +114,10 @@ local function startteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("hub_travelactivated.wav")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
 	world.playerX = -2880
 	world.playerY = -1664
-	SFX.play("world_warp.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
 local function sideteleport()
@@ -127,10 +128,10 @@ local function sideteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("hub_travelactivated.wav")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
 	world.playerX = -3168
 	world.playerY = -1536
-	SFX.play("world_warp.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
 local function hubmapteleport()
@@ -141,10 +142,10 @@ local function hubmapteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("hub_travelactivated.wav")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
 	world.playerX = -3040
 	world.playerY = -1760
-	SFX.play("world_warp.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
 local function dlcteleport()
@@ -155,77 +156,77 @@ local function dlcteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("hub_travelactivated.wav")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
 	world.playerX = -1760
 	world.playerY = -1568
-	SFX.play("world_warp.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
 local function characterchange()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
 		player:transform(2, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(3, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(4, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(5, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(6, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_MEGAMAN) then
 		player:transform(7, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_WARIO) then
 		player:transform(8, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_BOWSER) then
 		player:transform(9, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_KLONOA) then
 		player:transform(10, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_NINJABOMBERMAN) then
 		player:transform(11, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_ROSALINA) then
 		player:transform(12, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_SNAKE) then
 		player:transform(13, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_ZELDA) then
 		player:transform(14, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_ULTIMATERINKA) then
 		player:transform(15, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_UNCLEBROADSWORD) then
 		player:transform(16, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_SAMUS) then
 		player:transform(1, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 end
 
@@ -233,23 +234,23 @@ local function characterchange13()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
 		player:transform(2, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(3, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(4, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(5, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(1, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 end
 
@@ -257,23 +258,23 @@ local function characterchange13_2p()
 	local character = player2.character;
 	if (character == CHARACTER_MARIO) then
 		player2:transform(2, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player2:transform(3, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player2:transform(4, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player2:transform(5, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player2:transform(1, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 end
 
@@ -281,67 +282,67 @@ local function characterchangeleft()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
 		player:transform(16, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(1, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(2, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(3, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(4, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_MEGAMAN) then
 		player:transform(5, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_WARIO) then
 		player:transform(6, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_BOWSER) then
 		player:transform(7, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_KLONOA) then
 		player:transform(8, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_NINJABOMBERMAN) then
 		player:transform(9, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_ROSALINA) then
 		player:transform(10, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_SNAKE) then
 		player:transform(11, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_ZELDA) then
 		player:transform(12, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_ULTIMATERINKA) then
 		player:transform(13, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_UNCLEBROADSWORD) then
 		player:transform(14, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_SAMUS) then
 		player:transform(15, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 end
 
@@ -349,23 +350,23 @@ local function characterchange13left()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
 		player:transform(5, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(1, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(2, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(3, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(4, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 end
 
@@ -373,28 +374,28 @@ local function characterchange13_2pleft()
 	local character = player2.character;
 	if (character == CHARACTER_MARIO) then
 		player2:transform(5, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player2:transform(1, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player2:transform(2, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player2:transform(3, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player2:transform(4, false)
-		SFX.play("charcost_mapselect.wav")
+		SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	end
 end
 
 local function costumechangeright()
-	SFX.play("charcost_mapselect.wav")
+	SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
@@ -409,7 +410,7 @@ local function costumechangeright()
 end
 
 local function costumechangeleft()
-	SFX.play("charcost_mapselect.wav")
+	SFX.play("_OST/_Sound Effects/charcost_mapselect.ogg")
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
@@ -424,14 +425,14 @@ local function costumechangeleft()
 end
 
 local function wip()
-	SFX.play("wrong.wav")
+	SFX.play("_OST/_Sound Effects/wrong.ogg")
 end
 
 local function drawPauseMenu(y, alpha)
-	local name = "<color rainbow>Paused.</color>"
+	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 7}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
@@ -489,10 +490,10 @@ local function drawPauseMenu(y, alpha)
 			c = 0x99999900;
 		end
 		if(k == pause_index+1) then
-			n = "<color yellow><wave 1>"..n.."</wave></color>";
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
-		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
+		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
@@ -532,7 +533,7 @@ function pausemenu2.onInputUpdate()
 		if paused then
 			paused = false
 			pauseactive = false
-			SFX.play("pausemenu-closed.wav")
+			SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 			cooldown = 5
 			Misc.unpause()
 		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld) and not Misc.isPaused()) then
@@ -540,7 +541,7 @@ function pausemenu2.onInputUpdate()
 			paused = true
 			pauseactive = true
 			pause_index = 0;
-			SFX.play("pausemenu.wav")
+			SFX.play("_OST/_Sound Effects/pausemenu.ogg")
 		end
 	end
 	lastPauseKey = player.keys.pause;
@@ -550,12 +551,12 @@ function pausemenu2.onInputUpdate()
 			repeat
 				pause_index = (pause_index+1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play("pausemenu_cursor.wav")
+			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index = (pause_index-1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play("pausemenu_cursor.wav")
+			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
 		elseif player.keys.left == KEYS_PRESSED then
 			player.keys.left = KEYS_UNPRESSED
 		elseif player.keys.right == KEYS_PRESSED then
@@ -569,7 +570,7 @@ function pausemenu2.onInputUpdate()
 					end
 				end
 			end
-			--SFX.play("quitmenu.wav")
+			--SFX.play("_OST/_Sound Effects/quitmenu.ogg")
 			pause_options[pause_index+1].action();
 			Misc.unpause();
 		end
@@ -578,14 +579,14 @@ function pausemenu2.onInputUpdate()
 				repeat
 					pause_index = (pause_index+1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index = (pause_index-1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
 			elseif(player2.keys.jump == KEYS_PRESSED) then
-				--SFX.play("quitmenu.wav")
+				--SFX.play("_OST/_Sound Effects/quitmenu.ogg")
 				pause_options[pause_index+1].action();
 				Misc.unpause();
 			end

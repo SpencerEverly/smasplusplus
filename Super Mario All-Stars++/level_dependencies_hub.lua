@@ -4,8 +4,6 @@ local thecostume = require("thecostume")
 
 local playerManager = require("playerManager")
 
-local pausemenu = require("pausemenu")
-
 local inventory = require("customInventory")
 
 local textplus = require("textplus")
@@ -71,6 +69,7 @@ function dependencies2.onStart()
 		debugbox = require("debugbox")
 	end
 	if SaveData.disableX2char == 0 then
+		pausemenu = require("pausemenu")
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 		playerphysicspatch = require("playerphysicspatch")
