@@ -694,7 +694,8 @@ function littleDialogue.create(args)
 
     box.mainWidth = 0
     box.mainHeight = 0
-
+	
+	box.closebox = false
 
     box.typewriterLimit = 0
     box.typewriterDelay = 0
@@ -724,7 +725,8 @@ function littleDialogue.create(args)
 
     box.overwriteSettings = args.settings or {}
     box:setStyle(args.style or littleDialogue.defaultStyleName)
-
+	
+	box.commandexecute = args.chosenFunction
 
     box:updateLayouts()
     
@@ -736,12 +738,17 @@ function littleDialogue.create(args)
     if not box.silent and box.settings.openSoundEnabled then
         SFX.play(box.settings.openSound)
     end
+	
+	if box.closebox == true then
+		box.state = STATE.OUT
+	end
 
-
+	
     table.insert(littleDialogue.boxes,box)
 
     return box
 end
+
 
 
 
@@ -1125,7 +1132,6 @@ function boxInstanceFunctions:addDialogue(text,deleteFurtherText)
     self:updateLayouts()
 end
 
-
 function boxInstanceFunctions:close()
     self.state = STATE.OUT
 
@@ -1272,6 +1278,9 @@ function boxInstanceFunctions:update()
 				if Player.count() == 2 then
 					if player2.rawKeys.jump == KEYS_PRESSED then
 						self:progress(true)
+					end
+					if player2.rawKeys.jump == false then
+						self:progress(false)
 					end
 				end
             else
