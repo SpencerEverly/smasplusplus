@@ -1,7 +1,6 @@
 local bootmenu = require("bootmenu")
 
 function onStart()
-	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
 	Misc.saveGame()
 end
 

@@ -15,6 +15,7 @@ local opacity = timer1/speed
 local middle = math.floor(timer1*numberup)
 
 local function Crash()
+	Misc.saveGame()
 	Routine.wait(0.1, true)
 	--mem(0x00B257F0, FIELD_FLOAT, 245353464654)
 	Misc.exitEngine()
@@ -113,15 +114,18 @@ function onEvent(eventName)
 	end
 	if eventName == "NormalCutscene6" then
 		if SaveData.racaActivated == nil then
-			SaveData.racaActivated = SaveData.racaActivated or 1
+			SaveData.racaActivated = SaveData.racaActivated or 0
 		end
+		SaveData.racaActivated = 1
 		SaveData.introselect = 1
 		Misc.saveGame()
 		Routine.run(WhiteFadeInSlow)
 		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
 		SFX.play("_OST/Undertale/mus_cymbal.ogg")
+		Misc.saveGame()
 	end
 	if eventName == "CrashExecute" then
+		Misc.saveGame()
 		Routine.run(Crash)
 	end
 end

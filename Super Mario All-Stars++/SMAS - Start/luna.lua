@@ -1,14 +1,34 @@
 local player2_alt = Player(2)
 
-runPressedState = false
-
 local active = false
+local bootshow = true
+
+onePressedState = false
+twoPressedState = false
+threePressedState = false
+fourPressedState = false
+fivePressedState = false
+sixPressedState = false
+sevenPressedState = false
+eightPressedState = false
+ninePressedState = false
+zeroPressedState = false
+
+f8PressedState = false
 
 local cooldown = 0
+
+local timer = 128
+local flag = true
+
+local blackbg = false
+
+local f8pressed = false
 
 Graphics.activateHud(false)
 
 local Routine = require("routine")
+local deltaTime = Routine.deltaTime
 
 local middle = 0
 
@@ -25,7 +45,9 @@ local month = os.date("%m")
 
 local exacttime = os.date("%X")
 
-local function introselection()
+local runPressedState = false
+
+local function preboot()
 	if SaveData.introselect == 1 then
 		Level.load("intro_SMAS.lvlx", nil, nil)
 	end
@@ -58,6 +80,100 @@ local function introselection()
 	end
 end
 
+function onKeyboardPress(k, v)
+	if k == VK_F8 then
+		f8PressedState = true
+		active = true
+	end
+	if active then
+		if k == VK_F8 then
+			onePressedState = false
+			twoPressedState = false
+			threePressedState = false
+			fourPressedState = false
+		end
+	end
+	if active then
+		onePressedState = false
+		if k == VK_1 then
+			player.setCostume(1, nil)
+			player.setCostume(2, nil)
+			player.setCostume(3, nil)
+			player.setCostume(4, nil)
+			player.setCostume(5, nil)
+			player.setCostume(6, nil)
+			player.setCostume(7, nil)
+			player.setCostume(8, nil)
+			player.setCostume(9, nil)
+			player.setCostume(10, nil)
+			player.setCostume(11, nil)
+			player.setCostume(12, nil)
+			player.setCostume(13, nil)
+			player.setCostume(14, nil)
+			player.setCostume(15, nil)
+			player.setCostume(16, nil)
+			Routine.run(preboot)
+			onePressedState = true
+		end
+	end
+	if active then
+		twoPressedState = false
+		if k == VK_2 then
+			SaveData.introselect = 1
+			Routine.run(preboot)
+			twoPressedState = true
+		end
+	end
+	if active then
+		threePressedState = false
+		if k == VK_3 then
+			SaveData.clear()
+			SaveData.flush()
+			Routine.run(preboot)
+			threePressedState = true
+		end
+	end
+	if active then
+		fourPressedState = false
+		if k == VK_4 then
+			Routine.run(preboot)
+			fourPressedState = true
+		end
+	end
+	if not active then
+		if k == VK_F8 then
+			f8PressedState = true
+		end
+	end
+end
+
+function onDraw()
+	local bootimage = Graphics.loadImageResolved("SMAS - Start/bootscreen_final.png")
+	
+	if bootshow then
+		Graphics.drawImage(bootimage, 0, 0, 8)
+	end
+	if active then
+		Graphics.drawScreen{color = Color.black, priority = 8}
+		textplus.print{x=10, y=10, text = "Press 1 to reset all costumes (Including X2 character costumes).", priority=9, color=Color.white}
+		textplus.print{x=10, y=30, text = "Press 2 to reset the main menu's theme.", priority=9, color=Color.white}
+		textplus.print{x=10, y=50, text = "Press 3 to reset only SaveData.", priority=9, color=Color.white}
+		textplus.print{x=10, y=70, text = "Press 4 to continue booting like normal.", priority=9, color=Color.white}
+	end
+end
+
+function onTick()
+	timer = timer - 1
+	
+	if timer <= 0 then
+		Routine.run(preboot)
+	end
+	
+	if active then
+		timer = timer + 1
+	end
+end
+
 function onStart()
 	if SaveData.introselect == nil then
         SaveData.introselect = SaveData.introselect or 1
@@ -66,16 +182,11 @@ function onStart()
         SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
     end
 	Misc.saveGame()
-	Routine.run(introselection)
 end
 
 function onPause(evt)
     evt.cancelled = true;
     isPauseMenuOpen = not isPauseMenuOpen
-end
-
-function onDraw()
-	Graphics.drawScreen{x=0, y=0, width=800, height=600, color=Color.black..1, priority=10}
 end
 
 

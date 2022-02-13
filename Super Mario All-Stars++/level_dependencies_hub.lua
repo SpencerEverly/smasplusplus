@@ -92,7 +92,10 @@ function dependencies2.onStart()
 		end
 	end
 	if SaveData.disableX2char == 1 then
-	warpTransition = require("warpTransition")
+		Cheats.deregister("dressmeup")
+		Cheats.deregister("undress")
+		Cheats.deregister("laundryday")
+		warpTransition = require("warpTransition")
 		warpTransition.musicFadeOut = false
 		warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -183,12 +186,15 @@ function dependencies2.onTick()
 	if player.character == CHARACTER_NINJABOMBERMAN then
 		Graphics.activateHud(true)
 	end
+	if player.character == CHARACTER_SNAKE then
+		Graphics.activateHud(true)
+	end
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 
 	local costumes
-if currentCostume == nil then
+	if currentCostume == nil then
 		if SaveData.disableX2char == 0 then
 			warpTransition.doorclose = ("door-close.ogg")
 		end

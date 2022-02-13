@@ -7,7 +7,7 @@ SC:1;L:-180000;R:-179200;T:-183168;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spe
 SC:2;L:-163680;R:-159200;T:-160800;B:-160000;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/Battle Plains.ogg";BG:8;
 SC:3;L:-140000;R:-136000;T:-140608;B:-140000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Caves.ogg";BG:30;
 SC:4;L:-120000;R:-119200;T:-127424;B:-120000;MZ:24;MF:"_OST/All Stars Secrets/Finale.ogg";BG:29;
-SC:5;L:-100000;R:-96224;T:-101600;B:-100000;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/Land.ogg";BG:1;
+SC:5;L:-100000;R:-96224;T:-101600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Overworld.ogg";BG:1;
 SC:6;L:-80000;R:-77568;T:-80600;B:-80000;MZ:24;MF:"_OST/Undertale/mus_smallshock.ogg";BG:9;
 SC:7;L:-60000;R:-59200;T:-62208;B:-60000;MZ:24;MF:"_OST/Undertale/mus_smallshock.ogg";BG:54;
 SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:24;MF:"_OST/All Stars Secrets/End Level Music.ogg";BG:8;
@@ -3145,6 +3145,21 @@ ID:1006;X:-79584;Y:-80064;W:32;H:32;LR:"CutsceneFlooring";
 ID:1006;X:-79616;Y:-80064;W:32;H:32;LR:"CutsceneFlooring";
 ID:1006;X:-79648;Y:-80064;W:32;H:32;LR:"CutsceneFlooring";
 ID:1006;X:-79680;Y:-80064;W:32;H:32;LR:"CutsceneFlooring";
+ID:572;X:-99040;Y:-100992;W:64;H:64;
+ID:572;X:-99104;Y:-100992;W:64;H:64;
+ID:69;X:-98880;Y:-101120;W:32;H:32;
+ID:69;X:-98912;Y:-101120;W:32;H:32;
+ID:69;X:-98944;Y:-101120;W:32;H:32;
+ID:69;X:-98976;Y:-101120;W:32;H:32;
+ID:69;X:-99008;Y:-101120;W:32;H:32;
+ID:69;X:-99040;Y:-101120;W:32;H:32;
+ID:69;X:-98944;Y:-101248;W:32;H:32;
+ID:69;X:-98976;Y:-101248;W:32;H:32;
+ID:193;X:-98960;Y:-101376;W:32;H:32;CN:-25;
+ID:65;X:-97056;Y:-100992;W:32;H:32;
+ID:65;X:-97056;Y:-101024;W:32;H:32;
+ID:65;X:-97664;Y:-100736;W:32;H:32;
+ID:65;X:-97664;Y:-100768;W:32;H:32;
 BLOCK_END
 BGO
 ID:29;X:-196640;Y:-200128;
@@ -3550,7 +3565,7 @@ ID:91;X:-138240;Y:-140064;D:-1;CN:34;
 ID:371;X:-136992;Y:-140256;D:-1;LR:"MainEnding";
 ID:134;X:-136284;Y:-140232;D:-1;GE:1;GT:1;GD:2;GM:30;
 ID:28;X:-137824;Y:-140288;D:-1;S1:2;LR:"MainEnding";
-ID:75;X:-119491;Y:-121206;D:-1;MG:"OH MY GOSH YOU MADE IT!!!!! The last star is VERRRRY close\, just a few more pushing through!";FD:1;
+ID:75;X:-119491;Y:-121206;D:-1;MG:"OH MY GOSH YOU MADE IT!!!!!<page>Though\, I don't remember what happened while you were getting here... but!<page>The last star is VERRRRY close!<page>Just a few more pushing through\, and you'll be there in no time!";FD:1;
 ID:221;X:-119640;Y:-124192;D:-1;
 ID:221;X:-119640;Y:-124224;D:-1;
 ID:221;X:-119640;Y:-124256;D:-1;
@@ -3642,10 +3657,9 @@ ID:151;X:-119633;Y:-124112;D:-1;MG:"Times like these make me think... why DID I 
 ID:151;X:-119633;Y:-125200;D:-1;MG:"But there IS one thing for sure that made this quite a game for me...";FD:1;
 ID:151;X:-119632;Y:-126289;D:-1;MG:"This game was fun to make while it lasted. Thank you for playing\, player. It was nice playing with you.";FD:1;
 ID:223;X:-119608;Y:-126200;D:-1;
-ID:95;X:-99584;Y:-100128;D:-1;LR:"MainEnding";
 ID:95;X:-199424;Y:-200128;D:-1;MG:"Yoshi Yoshi! (Good luck!)";FD:1;NM:1;LR:"MainEnding";
 ID:26;X:-98272;Y:-100384;D:-1;
-ID:610;X:-98176;Y:-101056;D:-1;LR:"MainEnding";
+ID:610;X:-98176;Y:-101248;D:-1;LR:"MainEnding";
 ID:389;X:-98560;Y:-100800;D:1;LR:"MainEnding";
 ID:157;X:-98400;Y:-100800;D:-1;
 ID:157;X:-98432;Y:-100800;D:-1;
@@ -3674,10 +3688,9 @@ IX:-163440;IY:-160128;OX:-139952;OY:-140480;DT:1;ID:3;OD:1;AI:1;
 IX:-136528;IY:-140416;OX:-99888;OY:-100192;DT:1;ID:1;OD:3;AI:1;
 IX:-39632;IY:-40128;DT:2;ID:1;OD:1;LF:"SMAS - True Ending (Secret Ending).lvlx";LI:0;EX:1;SL:400;
 OX:-39632;OY:-40128;DT:2;ID:1;OD:1;ET:1;
-IX:-59600;IY:-61888;OX:-119632;OY:-120320;DT:1;ID:1;OD:3;TW:1;
-IX:-77728;IY:-80096;OX:-59936;OY:-60064;DT:2;ID:1;OD:1;TW:1;
-IX:-96480;IY:-101056;OX:-79920;OY:-80160;DT:1;ID:4;OD:3;TW:1;
-OX:-119520;OY:-127104;DT:2;ID:1;OD:1;ET:1;
+IX:-59600;IY:-61888;OX:-119632;OY:-120320;DT:1;ID:1;OD:3;
+IX:-77728;IY:-80096;OX:-59936;OY:-60064;DT:2;ID:1;OD:1;
+IX:-96480;IY:-101056;OX:-79920;OY:-80160;DT:1;ID:4;OD:3;NV:1;
 IX:-39232;IY:-40128;OX:-200000;OY:-200128;DT:3;ID:1;OD:1;TW:1;
 DOORS_END
 LAYERS

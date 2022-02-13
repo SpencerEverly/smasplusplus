@@ -21,8 +21,7 @@ local Routine = require("routine")
 local level = Level.filename()
 
 local logo = true
-local pressjumpp = true
-local pressjumpp2 = false
+local pressjumpwords = true
 local active = false
 local active2 = true
 local active3 = false
@@ -224,28 +223,6 @@ local function easterEgg() --SnooPINGAS I see? ._.
 	active4 = true
 end
 
-local function pressjumptostart()
-	pressjumpp = true
-	Routine.wait(1)
-	pressjumpp = false
-	Routine.wait(1)
-	Routine.loop(130, pressjumptostart, true)
-	if GameData.startedmenu == 0 then
-		if player.keys.jump == KEYS_PRESSED then
-			Routine.run(pressjumptostartinactive)
-			Routine.pause(pressjumptostartinactive)
-			Routine.yield(pressjumptostartinactive)
-		end
-	end
-end
-
-local function pressjumptostartinactive()
-	if GameData.startedmenu == 1 then
-		Routine.continue(pressjumptostartinactive)
-		Routine.resume(pressjumptostartinactive)
-	end
-end
-
 local function SaveDataError2()
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
@@ -254,10 +231,11 @@ local function SaveDataError2()
 end
 
 local function FirstBoot1()
+	Audio.MusicChange(0, "_OST/_Sound Effects/nothing.ogg")
 	Routine.wait(1.5)
 	active = true
 	logo = false
-	pressjumpp = false
+	pressjumpwords = false
 	Audio.SeizeStream(0)
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>Welcome to Super Mario All-Stars Plus Plus.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
@@ -328,7 +306,7 @@ local function bootDialogue()
 	active = true
 	active4 = false
 	logo = false
-	pressjumpp = false
+	pressjumpwords = false
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
@@ -454,7 +432,7 @@ end
 local function ExitDialogueFirstBoot()
 	active = false
 	logo = true
-	pressjumpp = true
+	pressjumpwords = true
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
@@ -466,7 +444,7 @@ end
 local function ExitDialogue()
 	active = false
 	logo = true
-	pressjumpp = true
+	pressjumpwords = true
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
@@ -475,7 +453,7 @@ end
 local function ExitDialogueMusicReset()
 	active = false
 	logo = true
-	pressjumpp = true
+	pressjumpwords = true
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
@@ -628,7 +606,6 @@ function bootmenu.onInitAPI()
 end
 
 function bootmenu.onStart()
-	if not ready then return end
 	Audio.MusicVolume(nil)
 	if SaveData.firstBootCompleted == nil then
         SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
@@ -639,7 +616,6 @@ function bootmenu.onStart()
 	end
 	if SaveData.firstBootCompleted == 1 then
 		Routine.run(easterEgg, true)
-		Routine.run(pressjumptostart, true)
 	end
 	if month == "12" and day == "25" then
 		Section(0).getWeatherEffect(2)
@@ -651,6 +627,16 @@ function bootmenu.onStart()
 		x2noticecheck = not active
 	end
 	Misc.saveGame()
+	if Level.filename() == "intro_SMAS.lvlx" then
+		if SaveData.firstBootCompleted == 0 then
+			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
+		end
+	end
+	if Level.filename() == "intro_SMAS.lvlx" then
+		if SaveData.firstBootCompleted == 1 then
+			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
+		end
+	end
 	if Level.filename() == "intro_SMBX1.2.lvlx" then
 		Routine.run(theme4scrolling)
 	end
@@ -770,13 +756,12 @@ function bootmenu.onInputUpdate()
 	if GameData.startedmenu == 0 then
 		if player.keys.jump == KEYS_PRESSED then
 			Routine.run(bootDialogue)
-			pressjumpp = false
 			GameData.startedmenu = GameData.startedmenu + 1
 		end
 	end
 	if GameData.startedmenu == 1 then
 		if player.keys.jump == KEYS_PRESSED then
-			pressjumpp = true
+			--Nothing
 		end
 	end
 	if GameData.startedmenu == 2 then
@@ -786,14 +771,14 @@ function bootmenu.onInputUpdate()
 			logo = false
 			active2 = false
 			active = true
-			pressjumpp = false
+			pressjumpwords = false
 			sec.backgroundID = 6
 			Routine.run(PigeonRaca1)
 		end
 	end
-	--if SaveData.racaActivated == 1 then
-		--GameData.startedmenu = 2
-	--end
+	if SaveData.racaActivated == 1 then
+		GameData.startedmenu = 2
+	end
 end
 
 function bootmenu.onDraw()
@@ -805,6 +790,10 @@ function bootmenu.onDraw()
 	Graphics.drawBox{x=600, y=5, width=195, height=20, color=Color.black..0.5, priority=-7}
 	
 	textplus.print{x=608, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
+	
+	if pressjumpwords then
+		Graphics.drawImage(pressstart, 150, 552, 1)
+	end
 	if logo then
 		Graphics.drawImage(smaslogo, 176, 136, 2)
 	end
@@ -813,12 +802,6 @@ function bootmenu.onDraw()
 	end
 	if not logo then
 		--nothing
-	end
-	if pressjumpp2 then
-		
-	end
-	if pressjumpp then
-		Graphics.drawImage(pressstart, 150, 552, 5)
 	end
 	if twoplayercheck then
 		textplus.print{x=295, y=10, text = "Two player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}

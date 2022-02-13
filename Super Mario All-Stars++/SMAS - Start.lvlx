@@ -2,7 +2,7 @@ HEAD
 TL:"SMAS++ Boot Screen (DO NOT REMOVE)";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:0;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 6\n    }\n}\n";
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:0;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 0\n    }\n}\n";
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:0;MF:"";BG:0;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;

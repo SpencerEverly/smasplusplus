@@ -593,6 +593,7 @@ end
 local function mainmenu()
 	paused = false
 	Misc.unpause()
+	Misc.saveGame()
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
@@ -650,11 +651,11 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
 		end
 		table.insert(pause_options, {name="Character Options", action = switchtochar});
-		table.insert(pause_options, {name="Go Back to the Main Menu", action = mainmenu});
+		table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Quit", action = quitgame});
-		table.insert(pause_options, {name="Exit without Saving (DATA WILL BE LOST)", action = quitonly});
+		table.insert(pause_options, {name="Exit without Saving", action = quitonly});
 	end
 	for k,v in ipairs(pause_options) do
 		local c = 0xFFFFFF00;
