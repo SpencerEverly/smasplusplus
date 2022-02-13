@@ -817,7 +817,7 @@ NPC
 ID:789;X:-159856;Y:-160280;D:-1;FD:1;NM:1;LR:"Blackness Layer";
 ID:790;X:-159480;Y:-160296;D:-1;FD:1;NM:1;LR:"Blackness Layer";
 ID:791;X:-159808;Y:-160648;D:-1;LR:"Logo Shine";
-ID:669;X:-199632;Y:-200336;D:-1;LR:"skip-intro-sfx";XTRA:"{\n    \"source\"\: \"skip-intro.ogg\"\,\n    \"volume\"\: 1.6\n}\n";
+ID:669;X:-199632;Y:-200336;D:-1;LR:"skip-intro-sfx";XTRA:"{\n    \"source\"\: \"_OST/_Sound Effects/skip-intro.ogg\"\,\n    \"volume\"\: 1.6\n}\n";
 ID:669;X:-179632;Y:-180272;D:-1;LR:"skip-intro-sfx";XTRA:"{\n    \"source\"\: \"skip-intro.ogg\"\,\n    \"volume\"\: 1.4\n}\n";
 ID:669;X:-159632;Y:-160304;D:-1;LR:"skip-intro-sfx";XTRA:"{\n    \"source\"\: \"skip-intro.ogg\"\,\n    \"volume\"\: 1.4\n}\n";
 ID:669;X:-139632;Y:-140304;D:-1;LR:"skip-intro-sfx";XTRA:"{\n    \"source\"\: \"skip-intro.ogg\"\,\n    \"volume\"\: 1.4\n}\n";
