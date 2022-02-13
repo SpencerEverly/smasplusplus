@@ -115,6 +115,7 @@ Code for certain parts made by:
 - JustOneMGuy
 - Yoshi021
 - SetaYoshi
+- Marioman2007
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 

@@ -2,11 +2,13 @@ HEAD
 CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:0;OE:1;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:9;OE:1;
+SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:0;MF:"";BG:0;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
+SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:26;CS:1;CSV:1;
 SECTION_END
 STARTPOINT
-ID:1;X:-199724;Y:-200342;D:1;
-ID:2;X:-199484;Y:-200316;D:1;
+ID:1;X:-139644;Y:-140550;D:1;
 STARTPOINT_END
 BLOCK
 ID:63;X:-200000;Y:-200032;W:32;H:32;
@@ -35,14 +37,60 @@ ID:63;X:-199296;Y:-200032;W:32;H:32;
 ID:63;X:-199264;Y:-200032;W:32;H:32;
 ID:63;X:-199232;Y:-200032;W:32;H:32;
 BLOCK_END
+BGO
+ID:764;X:-139648;Y:-140640;LR:"mariofall1";
+ID:762;X:-200000;Y:-200112;LR:"racaappear1";
+ID:763;X:-200000;Y:-200600;LR:"racaappear2";
+BGO_END
+NPC
+ID:638;X:-199272;Y:-200568;D:-1;LR:"bullets1";XTRA:"{\n    \"delay\"\: 10\,\n    \"homing\"\: true\n}\n";
+ID:638;X:-199936;Y:-200560;D:-1;LR:"bullets1stop";XTRA:"{\n    \"delay\"\: 10\,\n    \"enabled\"\: false\,\n    \"homing\"\: true\n}\n";
+ID:639;X:-199288;Y:-200568;D:-1;LR:"fish1";XTRA:"{\n    \"delay\"\: 15\,\n    \"sound\"\: 25\n}\n";
+ID:639;X:-199976;Y:-200584;D:-1;LR:"fish1stop";XTRA:"{\n    \"delay\"\: 15\,\n    \"enabled\"\: false\,\n    \"sound\"\: 25\n}\n";
+ID:636;X:-199232;Y:-200160;D:-1;LR:"boodemouth1";XTRA:"{\n    \"state\"\: 3\n}\n";
+ID:426;X:-199237;Y:-200568;D:-1;LR:"balls1";
+ID:426;X:-199373;Y:-200560;D:-1;LR:"balls1";
+ID:426;X:-199509;Y:-200560;D:-1;LR:"balls1";
+ID:426;X:-199701;Y:-200552;D:1;LR:"balls2";
+ID:426;X:-199821;Y:-200560;D:1;LR:"balls2";
+ID:426;X:-199957;Y:-200552;D:1;LR:"balls2";
+ID:636;X:-200000;Y:-200160;D:-1;LR:"boodemouth2";XTRA:"{\n    \"state\"\: 0\n}\n";
+ID:753;X:-199496;Y:-200512;D:-1;LR:"heart1";
+NPC_END
 LAYERS
 LR:"Default";
 LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
+LR:"mariofall1";
+LR:"racaappear1";
+LR:"racaappear2";HD:1;
+LR:"bullets1";HD:1;
+LR:"bullets1stop";HD:1;
+LR:"fish1";HD:1;
+LR:"fish1stop";HD:1;
+LR:"balls1";HD:1;
+LR:"balls2";HD:1;
+LR:"boodemouth1";HD:1;
+LR:"boodemouth2";HD:1;
+LR:"heart1";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";TE:"1";TD:1;AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"1";MG:"Not done yet\, exit offscreen";AS:0;AX:0;AY:0;
+ET:"1";TE:"2";TD:126;ML:"mariofall1";MX:0;MY:0.984615;AS:0;AX:0;AY:0;
+ET:"2";TE:"3";TD:30;AS:0;AX:0;AY:0;
+ET:"3";TE:"4";TD:30;AS:0;AX:0;AY:0;
+ET:"4";LS:["racaappear1"];TE:"5";TD:50;DS:1;ML:"racaappear1";MX:0;MY:-1.47692;AS:0;AX:0;AY:0;
+ET:"5";TE:"6";TD:20;ML:"racaappear1";MX:0;MY:0;AS:0;AX:0;AY:0;
+ET:"6";LH:["racaappear1"];LS:["racaappear2"];TE:"7";TD:40;DS:1;AS:0;AX:0;AY:0;
+ET:"7";LH:["racaappear2"];LS:["racaappear1"];TE:"BattleBegin1";TD:1;DS:1;AS:0;AX:0;AY:0;
+ET:"BattleBegin1";LS:["bullets1"];TE:"BattleBegin2";TD:30;DS:1;AS:0;AX:0;AY:0;
+ET:"BattleBegin2";LH:["bullets1"];LS:["bullets1stop","fish1"];TE:"BattleBegin3";TD:30;AS:0;AX:0;AY:0;
+ET:"BattleBegin3";LH:["fish1"];LS:["fish1stop","balls1"];TE:"BattleBegin4";TD:30;DS:1;AS:0;AX:0;AY:0;
+ET:"BattleBegin4";LH:["balls1"];LS:["balls2","heart1"];TE:"BattleBegin5";TD:30;DS:1;AS:0;AX:0;AY:0;
+ET:"BattleBegin5";LH:["balls2"];LS:["boodemouth1"];TE:"BattleBegin6";TD:95;DS:1;AS:0;AX:0;AY:0;
+ET:"BattleBegin6";LS:["boodemouth2"];DS:1;AS:0;AX:0;AY:0;
+ET:"BattleBegin7";TE:"BattleBegin7";TD:100;AS:0;AX:0;AY:0;
+ET:"BattlePreCut1";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

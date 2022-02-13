@@ -1,0 +1,14 @@
+{
+	"style" : "groupbox",
+	"title" : "Luma Settings",
+	"layout": [
+		{
+			"control": "combobox",
+			"name": "color",
+			"title": "Color of the Luma",
+			"tooltip": "The color of this Luma.",
+			"elements": ["Yellow", "Red", "Light Brown", "Green", "Light Blue", "Dark Blue", "Pink", "Purple", "Dark Brown (blue eyes)", "Dark Brown (black eyes)", "Peach", "Orange"],
+			"value-default": 0
+		}
+	]
+}

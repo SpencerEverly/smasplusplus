@@ -1,0 +1,14 @@
+{
+	"style" : "groupbox",
+	"title" : "Starbit Settings",
+	"layout": [
+		{
+			"control": "combobox",
+			"name": "color",
+			"title": "Color of the Starbit",
+			"tooltip": "The color of this starbit.",
+			"elements": ["Yellow", "Red", "Light Brown", "Green", "Light Blue", "Dark Blue", "Pink", "Purple", "Dark Brown", "White", "Peach", "Orange"],
+			"value-default": 0
+		}
+	]
+}

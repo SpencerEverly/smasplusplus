@@ -1,22 +1,54 @@
---------------------------------------------------
--- Level code
--- Created 20:52 2022-2-12
---------------------------------------------------
+local Routine = require("routine")
+local pausemenu = require("pausemenu")
+local littleDialogue = require("littleDialogue")
 
--- Run code on level start
-function onStart()
-    SaveData.racaActivated = 0
+local SmgLifeSystem = require("SmgLifeSystem")
+SmgLifeSystem.healthX = 650
+SmgLifeSystem.healthY = 10
+
+function onLoadSection0()
+	SmgLifeSystem.daredevilActive = false
+	SmgLifeSystem.AirMeterActive = false
 end
 
--- Run code every frame (~1/65 second)
--- (code will be executed before game logic will be processed)
+local blacklayer = false
+
+Graphics.activateHud(false)
+pausemenu.pauseactivated = false
+local invisible = true
+
+function onDraw()
+	if blacklayer then
+		local blackbglayer = Graphics.drawScreen{color = Color.black, priority = 10}
+	end
+end
+
 function onTick()
-    --Your code here
+	if invisible == true then
+		player:setFrame(50)
+	end
 end
 
--- Run code when internal event of the SMBX Engine has been triggered
--- eventName - name of triggered event
 function onEvent(eventName)
-    --Your code here
+	if eventName == "1" then
+		SFX.play("_OST/All Stars Secrets/The True Final Battle Begins (With Screaming, SFX).ogg")
+	end
+	if eventName == "2" then
+		blacklayer = true
+	end
+	if eventName == "3" then
+		blacklayer = false
+		invisible = false
+		player:teleport(-199632, -200544)
+	end
+	if eventName == "5" then
+		SFX.play("_OST/_Sound Effects/is-the-pool-clean-evilmode.ogg")
+	end
+	if eventName == "6" then
+		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
+		SFX.play("_OST/_Sound Effects/pigeon_attack.ogg")
+	end
+	if eventName == "7" then
+		Audio.MusicChange(0, "_OST/Undertale/mus_f_part1.ogg")
+	end
 end
-
