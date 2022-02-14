@@ -134,8 +134,8 @@ yoshi.highPriorityFadeIn = 0
 
 
 local function setMaxSpeed()
-    Defines.player_walkspeed = yoshi.generalSettings.walkSpeed
-    Defines.player_runspeed  = yoshi.generalSettings.runSpeed
+    Defines.player_walkspeed = yoshi.generalSettings.walkSpeed/baseCharacterSpeedModifier
+    Defines.player_runspeed  = yoshi.generalSettings.runSpeed /baseCharacterSpeedModifier
 end
 
 
