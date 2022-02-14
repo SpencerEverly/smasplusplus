@@ -673,6 +673,9 @@ function bootmenu.onStart()
 	if Level.filename() == "intro_SMBX1.3.lvlx" then
 		Routine.run(theme5scrolling)
 	end
+	if Level.filename() == "intro_WSMBA.lvlx" then
+		Routine.run(theme6scrolling)
+	end
 	if Level.filename() == "intro_bossedit8.lvlx" then
 		Routine.run(theme8scrolling)
 	end
