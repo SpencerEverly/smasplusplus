@@ -1332,6 +1332,16 @@ function onTick()
 		Audio.MusicChange(12, "_OST/EarthBound/019b Onett Theme.spc|0;g=2.3")
 		Audio.MusicChange(13, "_OST/EarthBound/019b Onett Theme.spc|0;g=2.3")
 	end
+	if currentCostume == "SEE-SHERBERTLUSSIEBACK" then
+		Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+		Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+		Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+		Audio.MusicChange(7, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+		Audio.MusicChange(8, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+		Audio.MusicChange(11, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+		Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+		Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
+	end
 	if currentCostume == "TAKESHI" then
 		Audio.MusicChange(1, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")
 		Audio.MusicChange(2, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")

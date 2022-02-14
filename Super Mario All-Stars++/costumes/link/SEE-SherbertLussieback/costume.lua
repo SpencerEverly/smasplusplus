@@ -47,7 +47,7 @@ function costume.onTick() --WIP
 	Audio.sounds[86].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	
 	Defines.player_walkspeed = 4
-	Defines.player_runspeed = 4
+	Defines.player_runspeed = 5
 	Defines.jumpheight = 25
 	Defines.jumpheight_bounce = 25
 	Defines.projectilespeedx = 7.0
