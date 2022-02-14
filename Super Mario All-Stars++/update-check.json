@@ -1,0 +1,19 @@
+{
+	"current-version":
+	{
+		"version-1": 0,
+		"version-2": 0,
+		"version-3": 0,
+		"version-4": 5
+	},
+	"update-message": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-message-1": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-message-2": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-message-3": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-message-4": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-message-5": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-message-6": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-message-7": "We recommend you to get the SMASLauncher to update/run the episode.",
+	"update-url-page": "https://github.com/SpencerEverly/smasplusplus/tree/main/_smaslauncher/______BuildsAndVersions",
+        "update-version-name": "SMAS++ SMASLauncher"
+}
