@@ -25,10 +25,6 @@ local deathDelay = lunatime.toTicks(1.2)
 local deathTimer = deathDelay
 
 local costumes = {}
-
-local nbm = require("Characters/ninjabomberman");
-nbm.usesavestate = false;
-nbm.deathDelay = deathVisibleCount;
 	
 local mm = require("Characters/megaman");
 mm.playIntro = false;
@@ -82,7 +78,12 @@ function dependencies.onStart()
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
-
+	
+	if player.character == CHARACTER_NINJABOMBERMAN then
+		Defines.player_walkspeed = 6
+		Defines.player_runspeed = 6
+	end
+	
 	local costumes
 	if SaveData.disableX2char == 0 then
 		pausemenu = require("pausemenu")

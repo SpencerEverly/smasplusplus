@@ -33,7 +33,7 @@ local isOnSMWMap = (smwMap ~= nil and Level.filename() == smwMap.levelFilename)
 local yoshi = {}
 
 
-_G.CHARACTER_YOSHI = CHARACTER_KLONOA
+_G.CHARACTER_YOSHI = CHARACTER_NINJABOMBERMAN
 
 playerManager.overrideCharacterLib(CHARACTER_YOSHI,yoshi)
 
@@ -134,8 +134,8 @@ yoshi.highPriorityFadeIn = 0
 
 
 local function setMaxSpeed()
-    Defines.player_walkspeed = yoshi.generalSettings.walkSpeed/baseCharacterSpeedModifier
-    Defines.player_runspeed  = yoshi.generalSettings.runSpeed /baseCharacterSpeedModifier
+    Defines.player_walkspeed = 6
+    Defines.player_runspeed  = 6
 end
 
 
@@ -4444,8 +4444,8 @@ function yoshi.onDraw()
     -- Make the player image blank
     local image = yoshi.generalSettings.emptyPlayerSheet
 
-    if Graphics.sprites.klonoa[p.powerup].img ~= image then
-        Graphics.sprites.klonoa[p.powerup].img = image
+    if Graphics.sprites.ninjabomberman[p.powerup].img ~= image then
+        Graphics.sprites.ninjabomberman[p.powerup].img = image
     end
 
 
@@ -4719,8 +4719,8 @@ end
 
 -- Cheats! because why not
 do
-    Cheats.addAlias("itsameklonoa","itsameyoshi")
-    Cheats.addAlias("itsameklonoa","eggthrower")
+    --Cheats.addAlias("itsameklonoa","itsameyoshi")
+    --Cheats.addAlias("itsameklonoa","eggthrower")
 
 
     Cheats.register("heavyweapons",{

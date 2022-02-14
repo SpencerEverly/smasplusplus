@@ -191,10 +191,15 @@ function dependencies2.onTick()
 	if player.character == CHARACTER_SNAKE then
 		Graphics.activateHud(true)
 	end
+	if player.character == CHARACTER_NINJABOMBERMAN then
+		Defines.player_walkspeed = 6
+		Defines.player_runspeed = 6
+	end
+	
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
-
+	
 	local costumes
 	if currentCostume == nil then
 		if SaveData.disableX2char == 0 then
