@@ -1,17 +1,24 @@
+--Originally by the A2XT Team, this removes everything A2XT-ey and replaces it with another costume system
+
 local animatx = require("animatx2")
 local particles = require("particles")
 local megashroom = require("mega/megashroom")
 local starman = require("starman/star")
 
-local spintrail = require ("a2xt_spintrail")
+local costume = require ("a2xt_costumes")
 
-ep3Playables = {}
+extendedcostumes = {}
 
 local powerupShader = Shader();
 powerupShader:compileFromFile(nil, Misc.resolveFile("shaders/ep3PlayerAura.frag"))
 
 local starmanShader = Misc.multiResolveFile("starman.frag", "shaders\\npc\\starman.frag")
 local blankPlayerSheet = Graphics.loadImageResolved("graphics/blankVanillaPlayerSheet.png")
+
+local paletteenabled = false
+local emittersenabled = false
+local scaledisabled = true
+local spintrailenabled = true
 
 
 local characterData = {
@@ -42,15 +49,15 @@ local costumeData = {}
 local players = {}
 
 
-function ep3Playables.onInitAPI()
-	registerEvent(ep3Playables, "onDraw");
-	registerEvent(ep3Playables, "onTickEnd");
-	registerEvent(ep3Playables, "onInputUpdate", "onInputUpdate", false);
-	registerEvent(ep3Playables, "onPlayerHarm");
-	registerEvent(ep3Playables, "onPostPlayerHarm");
-	registerEvent(ep3Playables, "onPlayerKill");
+function extendedcostumes.onInitAPI()
+	registerEvent(extendedcostumes, "onDraw");
+	registerEvent(extendedcostumes, "onTickEnd");
+	registerEvent(extendedcostumes, "onInputUpdate", "onInputUpdate", false);
+	registerEvent(extendedcostumes, "onPlayerHarm");
+	registerEvent(extendedcostumes, "onPostPlayerHarm");
+	registerEvent(extendedcostumes, "onPlayerKill");
 
-	registerEvent(ep3Playables, "onReset");
+	registerEvent(extendedcostumes, "onReset");
 end
 
 
@@ -71,7 +78,7 @@ end
 
 local storedPower = {}
 
-function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAnimFunct, extraDrawFunct)
+function extendedcostumes.register(playerObj, costumeTable, extraInputFunct, extraAnimFunct, extraDrawFunct)
     --Misc.dialog("Registering a costume for "..characterInfo.name)
 
     local pathPrefix = costumeTable.path
@@ -90,8 +97,10 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
         costDat.set = costDat.namespace.actorArgs.animSet
 
         -- Palette info
-        costDat.paletteTexture = Graphics.loadImageResolved(pathPrefix .. "/palettes.png")
-        costDat.paletteDimensions = vector(costDat.paletteTexture.width, costDat.paletteTexture.height)
+		if paletteenabled == true then
+			costDat.paletteTexture = Graphics.loadImageResolved(pathPrefix .. "/palettes.png")
+			costDat.paletteDimensions = vector(costDat.paletteTexture.width, costDat.paletteTexture.height)
+		end
     end
     
     -- Get the base character data
@@ -162,22 +171,24 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
     for  _,i in ipairs{1,2,3,4,5,6,7,"starman","megashroom"}  do
 
         -- Emitters
-        local emPathList = costumeTable.powerupParticlesNames[i]
+		if emittersenabled == true then
+			local emPathList = costumeTable.powerupParticlesNames[i]
 
-        if  emPathList ~= nil  then
-            local emList = {}
-            local resolved
+			if  emPathList ~= nil  then
+				local emList = {}
+				local resolved
 
-            for  _,v in ipairs(emPathList)  do
-                resolved = Misc.resolveFile(pathPrefix .. "/" .. v ..".ini")
+				for  _,v in ipairs(emPathList)  do
+					resolved = Misc.resolveFile(pathPrefix .. "/" .. v ..".ini")
 
-                local em = particles.Emitter(0,0, resolved)
-                --em:Attach(playerObj)
-                em.enabled = false
-                table.insert(emList, em)
+					local em = particles.Emitter(0,0, resolved)
+					--em:Attach(playerObj)
+					em.enabled = false
+					table.insert(emList, em)
+				end
+
+				pDat.powerupEmitters[i] = emList
             end
-
-            pDat.powerupEmitters[i] = emList
         end
     end
 
@@ -197,18 +208,6 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
         - text           (string)   the line of dialogue to call a message box with
         - calls a2xt_message.showMessageBox and passes in the arguments for this function
     --]]
-	pDat.Talk = function (self, args)
-        local n = table.clone(args)
-        n.target = self.p
-        return message.showMessageBox (n)
-    end
-
-    pDat.Emote = function (self, icon)
-        if  icon == nil  then
-            icon = "blank"
-        end
-        emote[icon](self.p, self.costume.namespace.talkOffsetY)
-    end
 
     pDat.LookAt = function(self, target)
 
@@ -297,7 +296,7 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
     return pDat
 end
 
-function ep3Playables.cleanup(p, characterInfo, costume)
+function extendedcostumes.cleanup(p, characterInfo, costume)
     --Misc.dialog("Cleaning up a costume for "..characterInfo.name)
 
     -- Unlink objects, then remove the player data from the table
@@ -477,7 +476,7 @@ local forcedStateMap = {
 	[499] = {state="mega", speed=3, scale=function(p,v)
 		local startCount = lunatime.tick() - v.megaStartFrame
 		local endCount = lunatime.tick() - v.megaEndFrame
-		local changeDuration = 48
+		local changeDuration = 94
 
 		if  startCount < changeDuration+8  then
 			v.megaShrinking = false
@@ -517,7 +516,7 @@ local forcedStatePowerups = {
 }
 
 
-function ep3Playables.onTickEnd()
+function extendedcostumes.onTickEnd()
 	for  p,pDat in pairs(players)  do
         
         -- Override reserve system
@@ -575,8 +574,8 @@ function ep3Playables.onTickEnd()
 	-- 	local culpritObj = Player.get()[culprit]
 
 	-- 	if  NPC.config[v.id].isshell  or  v.id == 45  or  v.id == 263  then
-	-- 		v.data.ep3Playables = v.data.ep3Playables  or  {playerKicked = false}
-	-- 		local data = v.data.ep3Playables
+	-- 		v.data.extendedcostumes = v.data.extendedcostumes  or  {playerKicked = false}
+	-- 		local data = v.data.extendedcostumes
 			
 	-- 		if  isProjectile  then
 	-- 			if  culprit ~= nil  and  culprit ~= 0  and  not data.playerKicked  then
@@ -594,7 +593,7 @@ function ep3Playables.onTickEnd()
 	-- end
 end
 
-function ep3Playables.onPlayerHarm(eventToken, harmedPlayer)
+function extendedcostumes.onPlayerHarm(eventToken, harmedPlayer)
     if  harmedPlayer.hasStarman  then
         eventToken.cancelled = true
         return
@@ -609,7 +608,7 @@ function ep3Playables.onPlayerHarm(eventToken, harmedPlayer)
         end
     end
 end
-function ep3Playables.onPostPlayerHarm(harmedPlayer)
+function extendedcostumes.onPostPlayerHarm(harmedPlayer)
     local pDat = players[harmedPlayer]
 
     if  pDat ~= nil  then
@@ -631,7 +630,7 @@ function ep3Playables.onPostPlayerHarm(harmedPlayer)
 end
 
 
-function ep3Playables.onInputUpdate()
+function extendedcostumes.onInputUpdate()
 
     for  p,v in pairs(players)  do
 
@@ -642,7 +641,7 @@ function ep3Playables.onInputUpdate()
     end
 end
 
-function ep3Playables.onDraw()
+function extendedcostumes.onDraw()
 
     local k = 1
     for  p,v in pairs(players)  do
@@ -651,10 +650,12 @@ function ep3Playables.onDraw()
         local charDat = characterData[v.costume.baseCharID]
         local costDat = v.costume
         if p.character == v.costume.baseCharID then-- Initialize the instance
-            if  v.inst == nil  then
-                v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=2, state="idle", yAlign=animatx.ALIGN.BOTTOM, sceneCoords=false, visible=true}
-            end
-    
+			if scaledisabled == true and v.inst == nil then
+				v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=1, state="idle", yAlign=animatx.ALIGN.CENTER, sceneCoords=false, visible=true}
+			elseif scaledisabled == false and v.inst == nil then
+				v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=2, state="idle", yAlign=animatx.ALIGN.CENTER, sceneCoords=false, visible=true}
+			end
+			
             local inst = v.inst
             local screen = p.screen
     
@@ -667,12 +668,21 @@ function ep3Playables.onDraw()
             if  not v.posing  then
                 inst.speed = 1
             end
-    
-            if  not v.transformable  then
-                inst.x = screen.left + 0.5*p.width
-                inst.y = screen.bottom + 2
-                inst.angle = 0
-                inst.scale = v.scaleOverride  or  2
+			
+			if scaledisabled == false then
+				if not v.transformable then
+					inst.x = screen.left + 0.5*p.width
+					inst.y = screen.bottom + 2
+					inst.angle = 0
+					inst.scale = v.scaleOverride  or  2
+				end
+			elseif scaledisabled == true then
+				if not v.transformable then
+					inst.x = screen.left + 2.1*p.width
+					inst.y = screen.bottom - 6
+					inst.angle = 0
+					inst.scale = v.scaleOverride  or  1
+				end
                 if  p.forcedState ~= 2  then
                     v.lastPowerup = p.powerup
                 end
@@ -703,16 +713,6 @@ function ep3Playables.onDraw()
             if  not isSpinjumping then
                 v.spinStartDir = -p.direction
             end
-    
-            inst.visible = ((p.forcedState ~= 8
-                             and  not p:mem(0x142, FIELD_BOOL) -- not blinking
-                             --and  not p:mem(0x0C, FIELD_BOOL)  -- not fairy
-                             and  p.deathTimer <= 0)
-                        or   p.forcedState == 499
-                        or   p.isMega)
-                        and  v.visible
-    
-            spintrail.visible = v.visible
     
     
             -- get frame-specific or forced state-specific animation info
@@ -1195,7 +1195,7 @@ end
 
 
 -- rooms.lua resets
-function ep3Playables.onReset(fromRespawn)
+function extendedcostumes.onReset(fromRespawn)
     if  fromRespawn  then
         for  p,pDat in pairs(players)  do
             pDat.hp = 2
@@ -1208,6 +1208,6 @@ end
 
 
 -- Expose and return
-_G["Ep3PlayablesData"] = _G["Ep3PlayablesData"]  or  players;
+_G["extendedcostumesData"] = _G["extendedcostumesData"]  or  players;
 
-return ep3Playables;
+return extendedcostumes;

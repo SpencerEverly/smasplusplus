@@ -1195,7 +1195,7 @@ function costume.onTick()
 	end	
 end
 
-function costume.onCleanup(playerObj, pDat)
+function costume.onCleanup(playerObj, p)
 	Graphics.registerCharacterHUD(1, Graphics.HUD_ITEMBOX)
 	Audio.sounds[1].sfx  = nil
 	Audio.sounds[2].sfx  = nil
@@ -1276,6 +1276,9 @@ function costume.onCleanup(playerObj, pDat)
 	playerCount = playerCount-1
 	coyotetime.onJump = lastCt
 	players[playerObj] = nil
+	for _,p in ipairs(costume.playersList) do
+		ep3Playables.cleanup(p, characterInfo, costume)
+	end
 	local config = NPC.config[171]
 	if ep3Playables == true then return end
 	for  k,v in pairs(oldHammerConfig)  do
