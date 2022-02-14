@@ -10,7 +10,7 @@ local pman = API.load("playermanager")
 --local costumes = API.load("a2xt_costumes")
 
 
-local a2xt_actor = {}
+local extendedcostactor = {}
 
 CHARACTER_NAME = {
                     [CHARACTER_MARIO] = "Demo",
@@ -34,9 +34,9 @@ CHARACTER_CONSTANT = {
                         sheath=CHARACTER_LINK
                       }
 
-function a2xt_actor.onInitAPI()
-	--registerEvent (a2xt_actor, "onTick")
-	registerEvent (a2xt_actor, "onDraw")
+function extendedcostactor.onInitAPI()
+	--registerEvent (extendedcostactor, "onTick")
+	registerEvent (extendedcostactor, "onDraw")
 end
 
 
@@ -97,7 +97,7 @@ end
 --*************************************
 --** Misc class variables and stuff  **
 --*************************************
-a2xt_actor.groundY = nil
+extendedcostactor.groundY = nil
 
 -- Add named references for the player characters' emotive frames to animDefaults
 for  k,v in ipairs{CHARACTER_DEMO, CHARACTER_IRIS, CHARACTER_KOOD, CHARACTER_RAOCOW, CHARACTER_SHEATH}  do
@@ -531,7 +531,7 @@ do  -- Metamethods
 			newBounds.top = player.sectionObj.boundary.top-1000
 			newBounds.left = player.sectionObj.boundary.left-1000
 			newBounds.right = player.sectionObj.boundary.right+1000
-			newBounds.bottom = a2xt_actor.groundY  or  player.sectionObj.boundary.bottom-100
+			newBounds.bottom = extendedcostactor.groundY  or  player.sectionObj.boundary.bottom-100
 
 			local specialDefs = {
 			                     x      = args.x      or  current.x + currentAdd.x,
@@ -617,7 +617,7 @@ do  -- Non-meta methods
 				top = player.sectionObj.boundary.top-1000,
 				left = player.sectionObj.boundary.left-1000,
 				right = player.sectionObj.boundary.right+1000,
-				bottom = a2xt_actor.groundY  or  player.sectionObj.boundary.bottom-100
+				bottom = extendedcostactor.groundY  or  player.sectionObj.boundary.bottom-100
 			}
 		end
 
@@ -1561,14 +1561,14 @@ do
 		-- Set the metatables and make this thing a dedicated namespace
 		setmetatable(inst.objects, ObjectCacheMT)
 		setmetatable(inst, NamespaceMT)
-		a2xt_actor[name] = inst
-		_G["ACTOR_"..string.upper(name)] = a2xt_actor[name]
-		table.insert(a2xt_actor.presetNames, name)
+		extendedcostactor[name] = inst
+		_G["ACTOR_"..string.upper(name)] = extendedcostactor[name]
+		table.insert(extendedcostactor.presetNames, name)
 	end
 
 
 	-- Loop through the json files and generate the namespaces from them
-	a2xt_actor.presetNames = {}
+	extendedcostactor.presetNames = {}
 	for k,v in ipairs (table.append (Misc.listLocalFiles("../actors"), Misc.listLocalFiles("actors")))  do
 
 		-- Replace with more performant extension filtering
@@ -1584,8 +1584,8 @@ end
 --*************************************
 --** Preset lists                    **
 --*************************************
-a2xt_actor.krew = {ACTOR_DEMO, ACTOR_IRIS, ACTOR_KOOD, ACTOR_RAOCOW, ACTOR_SHEATH}
-a2xt_actor.uncles = {ACTOR_BROADSWORD, ACTOR_ASBESTOS, ACTOR_DENMARK, ACTOR_REWIND, ACTOR_PUMPERNICKEL}
+extendedcostactor.krew = {ACTOR_DEMO, ACTOR_IRIS, ACTOR_KOOD, ACTOR_RAOCOW, ACTOR_SHEATH}
+extendedcostactor.uncles = {ACTOR_BROADSWORD, ACTOR_ASBESTOS, ACTOR_DENMARK, ACTOR_REWIND, ACTOR_PUMPERNICKEL}
 
 
 --*************************************
@@ -1593,63 +1593,63 @@ a2xt_actor.uncles = {ACTOR_BROADSWORD, ACTOR_ASBESTOS, ACTOR_DENMARK, ACTOR_REWI
 --*************************************
 
 -- Use ACTOR_NAME constants for the chars lists
-function a2xt_actor.ToActors(chars) 
+function extendedcostactor.ToActors(chars) 
 	for  _,v in ipairs (chars)  do
 		v:ToActor()
 	end
 end
-function a2xt_actor.KrewToActors()
-	a2xt_actor.ToActors(a2xt_actor.krew)
+function extendedcostactor.KrewToActors()
+	extendedcostactor.ToActors(extendedcostactor.krew)
 end
-function a2xt_actor.UnclesToActors()
-	a2xt_actor.ToActors(a2xt_actor.uncles)
+function extendedcostactor.UnclesToActors()
+	extendedcostactor.ToActors(extendedcostactor.uncles)
 end
 
-function a2xt_actor.ToNPCs(chars) 
+function extendedcostactor.ToNPCs(chars) 
 	for  _,v in ipairs (chars)  do
 		v:BecomeNPC()
 	end
 end
-function a2xt_actor.KrewToNPCs()
-	a2xt_actor.ToNPCs(a2xt_actor.krew)
+function extendedcostactor.KrewToNPCs()
+	extendedcostactor.ToNPCs(extendedcostactor.krew)
 end
-function a2xt_actor.UnclesToNPCs()
-	a2xt_actor.ToNPCs(a2xt_actor.uncles)
+function extendedcostactor.UnclesToNPCs()
+	extendedcostactor.ToNPCs(extendedcostactor.uncles)
 end
 
 
-function a2xt_actor.Remove(chars) 
+function extendedcostactor.Remove(chars) 
 	for  _,v in ipairs (chars)  do
 		v:Remove()
 	end
 end
 
-function a2xt_actor.RemoveKrew()
-	a2xt_actor.Remove(a2xt_actor.krew)
+function extendedcostactor.RemoveKrew()
+	extendedcostactor.Remove(extendedcostactor.krew)
 end
 
-function a2xt_actor.Restore(chars)
+function extendedcostactor.Restore(chars)
 	for  _,v in ipairs (chars)  do
 		v:Restore()
 	end
 end
 
-function a2xt_actor.RestoreKrew()
-	a2xt_actor.Restore(a2xt_actor.krew)
+function extendedcostactor.RestoreKrew()
+	extendedcostactor.Restore(extendedcostactor.krew)
 end
 
 
 local playerkeys = { [1]="Demo", [2]="Iris", [3]="Kood", [4]="Raocow", [5]="Sheath", [15]="Broadsword" }
-function a2xt_actor.HidePlayer()
+function extendedcostactor.HidePlayer()
 	local preset = playerkeys[player.character]
 	if  preset ~= nil  then
-		a2xt_actor[preset]:_ManageObjects()
+		extendedcostactor[preset]:_ManageObjects()
 		player:mem(0x122, FIELD_WORD, 8)
 	end
 end
 
 
-function a2xt_actor.MovePlayerToNPC(target)
+function extendedcostactor.MovePlayerToNPC(target)
 	if target == nil then
 		local d = math.huge
 		for _,v in ipairs(NPC.get(krewCharToNPC(player.character))) do
@@ -1673,10 +1673,10 @@ end
 --** Library events                  **
 --*************************************
 
-function a2xt_actor.onTick ()
+function extendedcostactor.onTick ()
 	-- LOOP THROUGH ALL NAMESPACES
-	for  k,v in ipairs(a2xt_actor.presetNames)  do
-		local namespace = a2xt_actor[v]
+	for  k,v in ipairs(extendedcostactor.presetNames)  do
+		local namespace = extendedcostactor[v]
 		local actorObj = namespace.objects.actor
 		local currentObj = namespace.objects.current
 
@@ -1694,15 +1694,15 @@ function a2xt_actor.onTick ()
 	end
 end
 
-function a2xt_actor.onDraw ()
+function extendedcostactor.onDraw ()
 
 	if not Misc.isPaused() then
-		a2xt_actor.onTick()
+		extendedcostactor.onTick()
 	end
 
 	local i = 1
-	for  k,v in ipairs(a2xt_actor.presetNames)  do
-		local namespace = a2xt_actor[v]
+	for  k,v in ipairs(extendedcostactor.presetNames)  do
+		local namespace = extendedcostactor[v]
 		local actorObj = namespace.objects.actor
 
 		if  namespace.objects.current ~= nil  then
@@ -1721,7 +1721,7 @@ end
 --**************************************
 local readOnly = {krew=1,uncles=1,Player=1}
 
-local a2xt_actorMT = {
+local extendedcostactorMT = {
 	__index = function(obj, key)
 		if  key == "Player"  then
 			return obj[CHARACTER_NAME[player.character]]
@@ -1738,8 +1738,8 @@ local a2xt_actorMT = {
 		end
 	end
 }
-setmetatable(a2xt_actor, a2xt_actorMT)
-_G["ACTOR_PLAYER"] = a2xt_actor.Player
+setmetatable(extendedcostactor, extendedcostactorMT)
+_G["ACTOR_PLAYER"] = extendedcostactor.Player
 
 
-return a2xt_actor
+return extendedcostactor
