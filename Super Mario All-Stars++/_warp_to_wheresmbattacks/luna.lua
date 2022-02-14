@@ -51,7 +51,7 @@ function onEvent(eventName)
 		Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
 		if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
 			Misc.saveGame()
-			SFX.play("wrong.wav")
+			SFX.play("_OST/_Sound Effects/wrong.ogg")
 			player:teleport(-199632, -200176)
 			triggerEvent("WSMBANotFound")
 		end

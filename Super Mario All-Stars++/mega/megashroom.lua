@@ -163,7 +163,7 @@ function mega2.StopMega(pobj, useShrink)
 	
 	if(useShrink) then
 		growing[pobj] = -growthTime;
-		SFX.play("mega_shrink.wav");
+		SFX.play("_OST/_Sound Effects/mega_shrink.ogg");
 		Defines.player_walkspeed = nil;
 	elseif(used_donthurtme) then
 		Defines.cheat_donthurtme = used_donthurtme;
@@ -206,7 +206,7 @@ function mega2.StartMega(p, id)
 	p = p or player;
 	if inMega[p] then
 		megaTimers[p] = mega2.duration;
-		SFX.play("mega_grow.wav");
+		SFX.play("_OST/_Sound Effects/mega_grow.ogg");
 		return
 		--mega.StopMega(p, false);
 	else
@@ -256,13 +256,13 @@ function mega2.StartMega(p, id)
 			
 			if(Graphics.getHUDType(p.character) == Graphics.HUD_ITEMBOX) then
 				p.reservePowerup = id;
-				SFX.play("mega_grow.wav");
+				SFX.play("_OST/_Sound Effects/mega_grow.ogg");
 			else
 				p:mem(0x16,FIELD_WORD,p:mem(0x16,FIELD_WORD)+1);
 				if(p.powerup == 1) then
 					p:mem(0x140, FIELD_WORD, 50);
 					p:mem(0x120, FIELD_WORD, 1);
-					SFX.play("mega_grow.wav");
+					SFX.play("_OST/_Sound Effects/mega_grow.ogg");
 				else
 					SFX.play(12);
 				end
@@ -275,7 +275,7 @@ function mega2.StartMega(p, id)
 	end
 	
 	if(canGrow) then
-		SFX.play("mega_grow.wav");
+		SFX.play("_OST/_Sound Effects/mega_grow.ogg");
 		
 		starman.stop(p);
 

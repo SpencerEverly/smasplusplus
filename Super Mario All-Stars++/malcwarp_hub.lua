@@ -50,7 +50,7 @@ function malcwarp.onKeyboardPress(k)
 	end
 	if active then
 		if k == VK_F5 then
-		SFX.play("hub_easytravel.wav")
+		SFX.play("_OST/_Sound Effects/hub_easytravel.ogg")
 		onePressedState = false
 		twoPressedState = false
 		threePressedState = false
@@ -94,7 +94,7 @@ function malcwarp.onKeyboardPress(k)
 	end
 	if not active then
 		if k == VK_F5 then
-			SFX.play("hub_quitmenu.wav")
+			SFX.play("_OST/_Sound Effects/hub_quitmenu.ogg")
 			player.pauseKeyPressing = true
 			fourPressedState = true
 		end

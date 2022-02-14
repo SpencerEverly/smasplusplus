@@ -32,7 +32,7 @@ end
 
 function onEvent(eventName)
 	if eventName == "Game Over Timing Execution 2" then
-		SFX.play("game-over-sfx.wav")
+		SFX.play("_OST/_Sound Effects/game-over-sfx.ogg")
 	end
     if eventName == "Game Over Timing Execution 3" then
 		Level.load("SMAS - Start.lvlx", nil, nil)

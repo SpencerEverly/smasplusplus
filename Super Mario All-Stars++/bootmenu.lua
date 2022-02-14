@@ -359,11 +359,11 @@ end
 
 local function X2Char()
 	if SaveData.disableX2char == 0 then
-		SFX.play("1.3-mode-enabled.wav")
+		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
 		SaveData.disableX2char = SaveData.disableX2char + 1
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == 1 then
-		SFX.play("x2-mode-enabled.wav")
+		SFX.play("_OST/_Sound Effects/x2-mode-enabled.ogg")
 		SaveData.disableX2char = SaveData.disableX2char - 1
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
@@ -429,7 +429,7 @@ local function ChangeChar1()
 end
 
 local function ChangedCharacter()
-	SFX.play("charcost-selected.wav")
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.9>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 end
 
@@ -515,7 +515,7 @@ local function ExitToMap()
 end
 
 local function BootSMASPlusPlusPreExecute()
-	SFX.play("boot_wsmba.wav")
+	SFX.play("_OST/_Sound Effects/boot_wsmba.ogg")
 	active3 = true
 	logo = true
 	Routine.wait(3.0)

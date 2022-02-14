@@ -1,1 +1,0 @@
-[{"deathx":{},"deathy":{},"complete":0,"deathcount":0,"besttime":[[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]],[[false,false],[false,false]]]}]

@@ -36,14 +36,14 @@ function pausemenu.onInputUpdate()
 	end
 	if active then
 		if player.rawKeys.pause == KEYS_PRESSED then
-			SFX.play("pausemenu.wav")
+			SFX.play("_OST/_Sound Effects/pausemenu.ogg")
 			Misc.pause()
 			pausedPressedState = true
 		end
 	end
 	if active then
 		if player.rawKeys.up == KEYS_PRESSED then
-			SFX.play("save_dismiss.wav")
+			SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
 			Misc.saveGame()
 			Misc.unpause()
 			upPressedState = true
@@ -65,7 +65,7 @@ function pausemenu.onInputUpdate()
 			pausedPressedState = true
 			upPressedState = true
 			downPressedState = true
-			SFX.play("pausemenu-closed.wav")
+			SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 			Misc.unpause()
 		end
 	end

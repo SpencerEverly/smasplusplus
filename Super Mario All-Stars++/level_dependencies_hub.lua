@@ -87,7 +87,7 @@ function dependencies2.onStart()
 		littleDialogue.defaultStyleName = "smw"
 		if currentCostume == nil then
 			if SaveData.disableX2char == 0 then
-				warpTransition.doorclose = ("door-close.wav")
+				warpTransition.doorclose = ("_OST/_Sound Effects/door-close.ogg")
 			end
 		end
 	end

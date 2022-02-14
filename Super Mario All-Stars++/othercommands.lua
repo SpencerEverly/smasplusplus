@@ -49,7 +49,7 @@ function malcwarp.onKeyboardPress(k)
 	end
 	if active then
 		if k == VK_F7 then
-		SFX.play("othersettings_open.wav")
+		SFX.play("_OST/_Sound Effects/othersettings_open.ogg")
 		onePressedState = false
 		twoPressedState = false
 		threePressedState = false
@@ -70,7 +70,7 @@ function malcwarp.onKeyboardPress(k)
 	end
 	if active2 then
 		if k == VK_1 then
-		SFX.play("othersettings_open.wav")
+		SFX.play("_OST/_Sound Effects/othersettings_open.ogg")
 		onePressedState = false
 		twoPressedState = false
 		threePressedState = false
@@ -103,13 +103,13 @@ function malcwarp.onKeyboardPress(k)
 	end
 	if not active then
 		if k == VK_F7 then
-			SFX.play("othersettings_close.wav")
+			SFX.play("_OST/_Sound Effects/othersettings_close.ogg")
 			player.pauseKeyPressing = true
 		end
 	end
 	if not active2 then
 		if k == VK_F7 then
-			SFX.play("othersettings_close.wav")
+			SFX.play("_OST/_Sound Effects/othersettings_close.ogg")
 			player.pauseKeyPressing = true
 		end
 	end

@@ -2326,12 +2326,12 @@ littleDialogue.registerAnswer("YesNoX2Char",{text = "No thanks.",addText = "Gotc
 
 
 littleDialogue.registerAnswer("strangerQuestion",{text = "Uh...",addText = "What? Are you afraid imma KILL YA? <question strangerQuestionTwo>"})
-littleDialogue.registerAnswer("strangerQuestion",{text = "No thanks.",addText = "You ASKED for it!! HAHAHAHA!",chosenFunction = function() player:kill() SFX.play("evil-laugh.wav") end})
+littleDialogue.registerAnswer("strangerQuestion",{text = "No thanks.",addText = "You ASKED for it!! HAHAHAHA!",chosenFunction = function() player:kill() SFX.play("_OST/_Sound Effects/evil-laugh.ogg") end})
 
 
 
 littleDialogue.registerAnswer("strangerQuestionTwo",{text = "Nonononono!",addText = "Huh... well imma kill someone else now, bye!"})
-littleDialogue.registerAnswer("strangerQuestionTwo",{text = "YES!",addText = "Well today's your LUCKY DAY!!!! HAHAHAHA!",chosenFunction = function() player:kill() SFX.play("evil-laugh.wav") end})
+littleDialogue.registerAnswer("strangerQuestionTwo",{text = "YES!",addText = "Well today's your LUCKY DAY!!!! HAHAHAHA!",chosenFunction = function() player:kill() SFX.play("_OST/_Sound Effects/evil-laugh.ogg") end})
 
 
 

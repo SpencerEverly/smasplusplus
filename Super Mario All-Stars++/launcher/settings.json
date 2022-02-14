@@ -1,12 +1,12 @@
 {
     "game": {
-        "update-check-website": "http://codehaus.wohlsoft.ru/version/update-check.json",
-		"update-error-website": "http://codehaus.moe/blog/",
-		"update-error-message": "Could not find the latest server version!",
+        "update-check-website": "https://github.com/SpencerEverly/smasplusplus/raw/main/Super%20Mario%20All-Stars%2B%2B/update-check.json",
+		"update-error-website": "https://github.com/SpencerEverly/smasplusplus/tree/main/_smaslauncher/______BuildsAndVersions",
+		"update-error-message": "Could not load info to download SMASLauncher.",
         "version-1": 0,
         "version-2": 0,
         "version-3": 0,
-        "version-4": 2
+        "version-4": 1
     },
     "updates": {
         "version-1-update": true,

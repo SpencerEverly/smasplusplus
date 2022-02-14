@@ -35,12 +35,12 @@ function exitcommands.onKeyboardPress(k)
 	end
 	if active then
 		if k == VK_F1 then
-			SFX.play("quitmenu.wav")
+			SFX.play("_OST/_Sound Effects/quitmenu.ogg")
 		end
 	end
 	if active then
 		if k == VK_1 then
-			SFX.play("save_dismiss.wav")
+			SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
 			Misc.saveGame()
 			twoPressedState = true
 			active = false
@@ -61,7 +61,7 @@ function exitcommands.onKeyboardPress(k)
 	end
 	if not active then
 		if k == VK_F1 then
-			SFX.play("quitmenu_close.wav")
+			SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
 			player.pauseKeyPressing = true
 			onePressedState = true
 			twoPressedState = true
