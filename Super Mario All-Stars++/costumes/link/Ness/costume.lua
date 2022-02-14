@@ -109,7 +109,7 @@ function costume.onCleanup(p)
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
 	
-		
+	
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 3
 	Defines.player_runspeed = 6

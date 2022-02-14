@@ -2102,6 +2102,16 @@ function onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
 	end
+	if eventName == "KlonoaChar" then
+		Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(7, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(8, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Threer.ogg")
+		Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Threer.ogg")
+		Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
+	end
 	if eventName == "StageGenoside" then
 		Audio.MusicChange(0, "_OST/Me and Larry City/Main Theme (Genoside).ogg")
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme (Genoside).ogg")
