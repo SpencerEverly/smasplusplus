@@ -1,0 +1,3 @@
+frames=16
+framespeed=2
+priority=-85

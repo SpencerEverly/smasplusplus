@@ -1,15 +1,15 @@
 local pm = require("playerManager")
+local spintrail = require ("a2xt_spintrail")
 
 local costume = {}
 
-function costume.onInit(p)
+function costume.onInit(playerObj)
 	registerEvent(costume,"onTick")
 	Defines.jumpheight = 19
 	Defines.player_walkspeed = 2.6
 	Defines.player_runspeed = 6.3
 	Defines.jumpheight_bounce = 29.5
 	Defines.player_grav = 0.42
-	
 	ready = true
 end
 
@@ -34,7 +34,7 @@ function costume.onTick()
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/smb2-throw.ogg")
 end
 
-function costume.onCleanup(p)
+function costume.onCleanup(playerObj)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil

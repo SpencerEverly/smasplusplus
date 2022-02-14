@@ -78,6 +78,9 @@ local function preboot()
 	if SaveData.introselect == 10 then
 		Level.load("intro_SMBX2b3.lvlx", nil, nil)
 	end
+	if SaveData.introselect == 11 then
+		Level.load("intro_8bit.lvlx", nil, nil)
+	end
 end
 
 function onKeyboardPress(k, v)
@@ -155,10 +158,11 @@ function onDraw()
 	end
 	if active then
 		Graphics.drawScreen{color = Color.black, priority = 8}
-		textplus.print{x=10, y=10, text = "Press 1 to reset all costumes (Including X2 character costumes).", priority=9, color=Color.white}
-		textplus.print{x=10, y=30, text = "Press 2 to reset the main menu's theme.", priority=9, color=Color.white}
-		textplus.print{x=10, y=50, text = "Press 3 to reset only SaveData.", priority=9, color=Color.white}
-		textplus.print{x=10, y=70, text = "Press 4 to continue booting like normal.", priority=9, color=Color.white}
+		textplus.print{x=10, y=10, text = "Super Mario All-Stars++ Temporary Boot Option List", priority=9, color=Color.white}
+		textplus.print{x=10, y=32, text = "1) Reset all costumes (Including X2 character costumes)", priority=9, color=Color.white}
+		textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=9, color=Color.white}
+		textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
+		textplus.print{x=10, y=68, text = "4) Continue booting", priority=9, color=Color.white}
 	end
 end
 

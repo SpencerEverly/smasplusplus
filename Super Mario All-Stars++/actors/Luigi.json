@@ -1,0 +1,10 @@
+{
+	"general" : {
+		"player" : "luigi",
+		"npc" : 980
+	},
+
+	"gfx" : {
+		"type" : "playable"
+	}
+}

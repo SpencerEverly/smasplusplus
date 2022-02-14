@@ -28,6 +28,23 @@ local second = os.date("%S")
 
 local infobooth1 = textplus.loadFont("littleDialogue/font/smb3-c.ini")
 
+
+littleDialogue.registerStyle("endingtextone",{
+	openSpeed = 1,
+	pageScrollSpeed = 1, -- How fast it scrolls when switching pages.
+    answerPageScrollSpeed = 1, -- How fast it scrolls when switching answer pages.
+
+	windowingOpeningEffectEnabled = true,
+
+	typewriterEnabled = false,
+    showTextWhileOpening = false,
+
+	closeSoundEnabled = false,
+	continueArrowEnabled = false,
+	scrollArrowEnabled   = false,
+	selectorImageEnabled = false,
+})
+
 areaNames.sectionNames = {
 	[0] = "Me and Larry City (Main City)",
 	[1] = "Building 3: ???",
@@ -861,7 +878,7 @@ function onTick()
 		Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 	end
-	if currentCostume == "E-GOOMBA" then
+	if currentCostume == "GOOMBA" then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -881,7 +898,7 @@ function onTick()
 		Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 	end
-	if currentCostume == "C-GOLDENMARIO" then
+	if currentCostume == "GOLDENMARIO" then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")

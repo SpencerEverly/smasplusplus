@@ -2,6 +2,22 @@ local Routine = require("routine")
 local pausemenu = require("pausemenu")
 local littleDialogue = require("littleDialogue")
 
+littleDialogue.registerStyle("endingtextone",{
+	openSpeed = 1,
+	pageScrollSpeed = 1, -- How fast it scrolls when switching pages.
+    answerPageScrollSpeed = 1, -- How fast it scrolls when switching answer pages.
+
+	windowingOpeningEffectEnabled = true,
+
+	typewriterEnabled = false,
+    showTextWhileOpening = false,
+
+	closeSoundEnabled = false,
+	continueArrowEnabled = false,
+	scrollArrowEnabled   = false,
+	selectorImageEnabled = false,
+})
+
 local SmgLifeSystem = require("SmgLifeSystem")
 SmgLifeSystem.healthX = 650
 SmgLifeSystem.healthY = 10
@@ -16,6 +32,12 @@ local blacklayer = false
 Graphics.activateHud(false)
 pausemenu.pauseactivated = false
 local invisible = true
+
+function onStart()
+	Misc.saveGame()
+	player.setCostume(1, nil)
+	player:transform(1, false)
+end
 
 function onDraw()
 	if blacklayer then
@@ -45,10 +67,26 @@ function onEvent(eventName)
 		SFX.play("_OST/_Sound Effects/is-the-pool-clean-evilmode.ogg")
 	end
 	if eventName == "6" then
+		Defines.earthquake = 15
 		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
 		SFX.play("_OST/_Sound Effects/pigeon_attack.ogg")
 	end
 	if eventName == "7" then
 		Audio.MusicChange(0, "_OST/Undertale/mus_f_part1.ogg")
+	end
+	if eventName == "BattlePreCut1" then
+		SFX.play("_OST/_Sound Effects/mus_f_alarm.ogg")
+	end
+	if eventName == "BattleDodge1" then
+		blacklayer = true
+		Audio.MusicChange(0, 0)
+		player:teleport(-179664, -180272)
+		SFX.play("ut_noise.ogg")
+	end
+	if eventName == "BattleDodge2" then
+		blacklayer = false
+		SFX.play("ut_noise.ogg")
+		player:teleport(-159632, -160224)
+		Audio.MusicChange(2, "_OST/Undertale/mus_f_6s_1.ogg")
 	end
 end

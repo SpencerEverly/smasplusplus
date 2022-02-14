@@ -47,7 +47,6 @@ costumes.data =
 	KOOD_TEMPLATE   = {path = "Kood-Centered", name = "Default"},
 	RAOCOW_TEMPLATE = {path = "Raocow-Centered", name = "Default"},
 	SHEATH_TEMPLATE = {path = "Sheath-Centered", name = "Default"},
-	CAILLOU_TEMPLATE   = {path = "GA-Caillou", name = "Default"},
 	
 	--Player 2 Set
 	DEMO_PLAYER2   = {path = "Demo-Player2", name = "Player 2", collectName = "Player 2 (Demo)", set = "PLAYER2"},
@@ -60,64 +59,8 @@ costumes.data =
 	-- Unique
 	DEMO_BOBBLE = {path = "Demo-BobbleHat", name = "Bobble Hat Demo"},
 	DEMO_SAFETYBEE = {path = "Demo-SafetyBee", name = "D the Safety Bee"},
-
-	--[[
-	IRIS_XMAS = {path = "Iris-Centered", name = "Christmas Tree Iris"},
-	IRIS_CATPLANET = {path = "Iris-Centered", name = "Cat Planet Cat"},
-
-	KOOD_DOCTOR = {path = "Kood-Centered", name = "Doctor Kood"},
-	KOOD_ROBIN = {path = "Kood-Centered", name = "Robin Kood"},
-
-	RAOCOW_SKELETON = {path = "Raocow-Centered", name = "Skelecow"},
-	RAOCOW_MEGAMAN = {path = "Raocow-Centered", name = "Megacow"},
-	RAOCOW_MIKE = {path = "Raocow-Centered", name = "Mike Raones"},
-	RAOCOW_CLASSIC = {path = "Raocow-Centered", name = "Vintage Raocow"},
-
-	SHEATH_SHETH = {path = "Sheath-Centered", name = "SHETH"},
-	SHEATH_BOKI = {path = "Sheath-Centered", name = "Boki"},
-	]]
+	GA_CAILLOU   = {path = "GA-Caillou", name = "Default"}
 }
-
--- Sets
---[[
-local setData = {
-	Player2 = {},
-	Paper = {},
-	Gameboy = {
-		costName = "GB"
-	},
-	Cosplay = {
-		uniqueNames = {Kood="Princess Kood", Sheath="Lanko"}
-	},
-	Cat = {
-		uniqueNames = {Demo="Demeow", Iris="Irhiss", Kood="Mewd", Raocow="Meowcow"}
-	},
-	Robot = {
-		uniqueNames = {Demo="D3.M0", Iris="IrIS Mk.II", Kood="Koodborg", Raocow="Robocow", Sheath="Sh347h"}
-	},
-	Real = {
-		uniqueNames = {Demo="Daisy Maria Owen", Iris="Iris Owen", Kood="Duke the Turtle", Raocow="Let's Player raocow", Sheath="Sarah Heath"}
-	}
-}
-for  _,v in pairs(charids)  do
-	if  v ~= CHARACTER_UNCLEBROADSWORD  then
-		local name = CHARACTER_NAME[v]
-		local uName = string.upper(name)
-		local lName = string.lower(name)
-
-		for  k2,v2 in pairs{setData}  do
-			local setName = k2
-			local uSetName = string.upper(k2)
-			local uniqueName
-			if  v2.uniqueNames ~= nil  then
-				uniqueName = v2.uniqueNames[name]
-			end
-
-			costumes.data[uName.."_"..uSetName] = {path = name.."-"..setName, name = uniqueName  or  (v2.costName  or  setName).." "..name, set=uSetName}
-		end
-	end
-end
---]]
 
 costumes.defaults =
 {	

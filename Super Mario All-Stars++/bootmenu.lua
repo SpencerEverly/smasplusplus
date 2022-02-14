@@ -206,6 +206,25 @@ local function theme10()
 	Level.load("intro_SMBX2b3.lvlx", nil, nil)
 end
 
+local function theme11()
+	SaveData.introselect = 11
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_8bit.lvlx", nil, nil)
+end
+
+local function theme11scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(16.2)
+	autoscroll.scrollLeft(15)
+	Routine.wait(7.2)
+	Routine.loop(1521, theme11scrolling, true)
+end
+
 local function mapExit()
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
@@ -649,6 +668,9 @@ function bootmenu.onStart()
 	if Level.filename() == "intro_SMBX1.3og.lvlx" then
 		Routine.run(theme9scrolling)
 	end
+	if Level.filename() == "intro_8bit.lvlx" then
+		Routine.run(theme11scrolling)
+	end
 end
 
 function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
@@ -1005,6 +1027,7 @@ littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() Routine.run(theme10) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() Routine.run(theme11) end})
 
 
 

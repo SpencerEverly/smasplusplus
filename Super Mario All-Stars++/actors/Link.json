@@ -1,0 +1,10 @@
+{
+	"general" : {
+		"player" : "link",
+		"npc" : 980
+	},
+
+	"gfx" : {
+		"type" : "playable"
+	}
+}

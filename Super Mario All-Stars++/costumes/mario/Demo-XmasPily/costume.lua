@@ -28,10 +28,14 @@ local costume = {
 	},
 
 	namespace = ACTOR_XMASPILY,
-	keepPowerupOnHit = true
+	keepPowerupOnHit = true,
+	paletteenabled = true,
+	emittersenabled = true,
+	scaledisabled = false
 }
 
 costume.playerData = {}
+costume.playersList = {}
 
 local animeShader = Shader()
 animeShader:compileFromFile(nil, Misc.resolveFile(costume.path .. "/p_anime.frag"))
@@ -246,7 +250,7 @@ local function initPilyData(pDat)
 		
 		pDat.shootFireball = function(self, args)
 			self.pily.fireballTimer = 16
-
+		
 			
 			-- Defaults
 			if  args == nil  then
@@ -290,6 +294,10 @@ local function initPilyData(pDat)
 			shootFireball(args)
 		end
 	end
+end
+
+local function uninitPilyData(pDat)
+	pDat.pily = false
 end
 
 local function getInitialPlayerKeys(playerObj)
@@ -1069,8 +1077,9 @@ local coyotetime
 local ppp
 local lastCt
 local spintrail
+local pDat
 
-function costume.onInit(playerObj)
+function costume.onInit(playerObj, pDat)
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/block-hit.ogg")
@@ -1176,7 +1185,7 @@ function costume.onInit(playerObj)
 	inputEvent, animEvent, drawEndEvent);
 
 	registerEvent(costume, "onPostNPCKill");
-	registerEvent(costume, "onTicke");
+	registerEvent(costume, "onTick");
 	playerCount = playerCount+1
 end
 
@@ -1186,7 +1195,7 @@ function costume.onTick()
 	end	
 end
 
-function costume.onCleanup(playerObj)
+function costume.onCleanup(playerObj, pDat)
 	Graphics.registerCharacterHUD(1, Graphics.HUD_ITEMBOX)
 	Audio.sounds[1].sfx  = nil
 	Audio.sounds[2].sfx  = nil
@@ -1262,12 +1271,13 @@ function costume.onCleanup(playerObj)
 	spintrail.resetParam("xOffset")
 	spintrail.resetParam("yOffset")
 	spintrail.resetParam("rate")
-	ep3Playables.cleanup(playerObj, costume, costumeTable, extraInputFunct, extraAnimFunct, extraDrawFunct);
+	ep3Playables.cleanup(playerObj, costume, costumeTable, extraInputFunct, extraAnimFunct, extraDrawFunct, 
+	inputEvent, animEvent, drawEndEvent);
 	playerCount = playerCount-1
 	coyotetime.onJump = lastCt
-	costume.playerData[playerObj] = nil
 	players[playerObj] = nil
 	local config = NPC.config[171]
+	if ep3Playables == true then return end
 	for  k,v in pairs(oldHammerConfig)  do
 		config[k] = v
 	end
@@ -1283,11 +1293,11 @@ function costume.onCleanup(playerObj)
 	end
 	--]]
 
-
 	if  playerCount == 0  then
 		unregisterEvent(costume, "onPostNPCKill");
 		--unregisterEvent(costume, "onInputUpdate");
 	end
+	
 end
 
 
