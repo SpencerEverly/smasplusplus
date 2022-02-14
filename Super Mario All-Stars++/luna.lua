@@ -482,6 +482,13 @@ function onTick()
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
+	if currentCostume == "SEE-SHERBERTLUSSIEBACK" then
+		littleDialogue.characterNames[5] = "Sherbert"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
+	end
 	if currentCostume == "TAKESHI-SNES" then
 		littleDialogue.characterNames[5] = "Takeshi"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
