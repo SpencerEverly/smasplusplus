@@ -225,6 +225,17 @@ local function theme11scrolling()
 	Routine.loop(1521, theme11scrolling, true)
 end
 
+local function theme12()
+	SaveData.introselect = 11
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Audio.SeizeStream(0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_S!TS!.lvlx", nil, nil)
+end
+
 local function mapExit()
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
@@ -1028,6 +1039,7 @@ littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction
 littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() Routine.run(theme11) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() Routine.run(theme12) end})
 
 
 
