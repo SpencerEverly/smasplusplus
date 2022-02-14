@@ -134,8 +134,8 @@ yoshi.highPriorityFadeIn = 0
 
 
 local function setMaxSpeed()
-    Defines.player_walkspeed = 6
-    Defines.player_runspeed  = 6
+    Defines.player_walkspeed = yoshi.generalSettings.walkSpeed
+    Defines.player_runspeed  = yoshi.generalSettings.runSpeed
 end
 
 
@@ -1058,7 +1058,7 @@ do
         return (
             not isOnGroundRedigit()
             and p:mem(0x34,FIELD_WORD) == 0 -- underwater
-
+			
             and (p.mount ~= MOUNT_BOOT or p.mountColor ~= BOOTCOLOR_BLUE)
             and p.mount ~= MOUNT_CLOWNCAR
             and (p.mount ~= MOUNT_BOOT or p:mem(0x10C,FIELD_WORD) == 0) -- hopping in a boot
@@ -1078,6 +1078,7 @@ do
         return (
             isOnGroundRedigit()
             or (p.mount == MOUNT_BOOT and p:mem(0x10C,FIELD_WORD) > 0) -- hopping in a boot
+			or player:mem(0x1C, FIELD_WORD, -1)
         )
     end
 
@@ -4799,8 +4800,8 @@ yoshi.generalSettings = {
     -- Can be BABY_MARIO or HEARTS
     healthSystem = HEALTH_SYSTEM.BABY_MARIO,
 
-    walkSpeed = 6,
-    runSpeed = 6,
+    walkSpeed = 7,
+    runSpeed = 7,
 
 
     starCounterMin = 10,
