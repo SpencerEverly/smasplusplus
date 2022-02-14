@@ -61,7 +61,7 @@ gameData.savedStarsPath  = gameData.savedStarsPath  or nil
 local FULL_PATH_ADDR = 0x00B2C618
 local CHECKPOINT_PATH_ADDR = 0x00B250B0
 
-local baseCharacterSpeedModifier = 1.07
+local baseCharacterSpeedModifier =0.07
 
 
 
