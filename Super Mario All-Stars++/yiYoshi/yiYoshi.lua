@@ -61,7 +61,7 @@ gameData.savedStarsPath  = gameData.savedStarsPath  or nil
 local FULL_PATH_ADDR = 0x00B2C618
 local CHECKPOINT_PATH_ADDR = 0x00B250B0
 
-local baseCharacterSpeedModifier =0.07
+local baseCharacterSpeedModifier =0.87
 
 
 
@@ -4800,8 +4800,8 @@ yoshi.generalSettings = {
     -- Can be BABY_MARIO or HEARTS
     healthSystem = HEALTH_SYSTEM.BABY_MARIO,
 
-    walkSpeed = 5,
-    runSpeed = 5,
+    walkSpeed = 6,
+    runSpeed = 6,
 
 
     starCounterMin = 10,
