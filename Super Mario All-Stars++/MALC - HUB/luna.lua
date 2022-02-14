@@ -246,16 +246,6 @@ end
 
 function onDraw()
 	Graphics.drawImageWP(HUDimage, 0, 0, 4)
-	Graphics.drawBox{x=719, y=575, width=76, height=20, color=Color.black..0.2, priority=8}
-	textplus.print{x=724, y=580, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
-	textplus.print{x=755, y=580, text = os.date("%I"), priority=8, color=Color.white}
-	textplus.print{x=765, y=580, text = ":", priority=8, color=Color.white}
-	textplus.print{x=768, y=580, text = os.date("%M"), priority=8, color=Color.white}
-	textplus.print{x=780, y=580, text = os.date("%p"), priority=8, color=Color.white}
-	Graphics.drawBox{x=695, y=552, width=100, height=20, color=Color.black..0.2, priority=8}
-	textplus.print{x=700, y=557, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
-	textplus.print{x=733, y=557, text = os.date("%a"), priority=8, color=Color.white}
-	textplus.print{x=752, y=557, text = os.date("%x"), priority=8, color=Color.white}
 	
 	if player.section == 9 then
 		textplus.print{x=-19760, y=-20272, text = "Floor 1: Star List", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}

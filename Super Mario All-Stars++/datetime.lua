@@ -20,6 +20,18 @@ local str = "Loading HUB..."
 
 local datetime = {}
 
+local exacttime = os.date("%X")
+
+local minute = os.date("%M")
+
+local second = os.date("%S")
+
+local hour = os.date("%H")
+
+local day = os.date("%d")
+
+local month = os.date("%m")
+
 local soundObject
 
 local levelfolder = Level.folderPath()

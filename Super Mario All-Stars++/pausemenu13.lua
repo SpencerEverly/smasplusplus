@@ -84,6 +84,15 @@ function pausemenu13.onStart()
 	if not ready then return end
 end
 
+local function x2modeenable()
+	paused = false
+	Misc.unpause()
+	if SaveData.disableX2char == 0 then
+		SaveData.disableX2char = SaveData.disableX2char - 1
+		Level.load(Level.filename())
+	end
+end
+
 local function x2modedisable()
 	paused = false
 	Misc.unpause()
@@ -256,12 +265,12 @@ function pausemenu13.onInputUpdate()
 				repeat
 					pause_index = (pause_index+1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play(26)
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index = (pause_index-1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play(26)
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options[pause_index+1].action();
 				Misc.unpause();
@@ -273,12 +282,12 @@ function pausemenu13.onInputUpdate()
 			repeat
 				pause_index_char = (pause_index_char+1)%#pause_options_char;
 			until(not pause_options_char[pause_index_char+1].inactive);
-			SFX.play("pausemenu_cursor.wav")
+			SFX.play(26)
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index_char = (pause_index_char-1)%#pause_options_char;
 			until(not pause_options_char[pause_index_char+1].inactive);
-			SFX.play("pausemenu_cursor.wav")
+			SFX.play(26)
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			pause_options_char[pause_index_char+1].action();
 			Misc.unpause();
@@ -288,12 +297,12 @@ function pausemenu13.onInputUpdate()
 				repeat
 					pause_index_char = (pause_index_char+1)%#pause_options_char;
 				until(not pause_options_char[pause_index_char+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play(26)
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index_char = (pause_index_char-1)%#pause_options_char;
 				until(not pause_options_char[pause_index_char+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play(26)
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options_char[pause_index_char+1].action();
 				Misc.unpause();

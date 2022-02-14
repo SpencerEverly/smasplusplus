@@ -4,11 +4,13 @@ local playerManager = require("playerManager")
 
 local inventory = require("customInventory")
 
+local textplus = require("textplus")
+
+local autoscroll = require("autoscroll")
+
 local datetime = require("datetime")
 
 local musicalchairs = require("musicalchairs")
-
-local autoscroll = require("autoscroll")
 
 local Routine = require("routine")
 
