@@ -2,49 +2,21 @@ local pm = require("playerManager")
 
 local costume = {}
 
-costume.playersList = {}
-costume.playerData = {}
-
-local eventsRegistered = false
-
 function costume.onInit(p)
-	-- If events have not been registered yet, do so
-	if not eventsRegistered then
-		registerEvent(costume,"onStart")
-		registerEvent(costume,"onTick")
-		registerEvent(costume,"onTickEnd")
-		registerEvent(costume,"onCleanup")
-		registerEvent(costume,"onInputUpdate")
-
-		eventsRegistered = true
-		
-		-- Add this player to the list
-	if costume.playerData[p] == nil then
-		costume.playerData[p] = {
-			currentAnimation = "",
-		}
-		
-		table.insert(costume.playersList,p)
-		end
-	end
-end
-
---function costume.onStart()
-  --Audio.playSFX("costumes/link/Ness/link-letsago.ogg")
---if player:mem(0x13e, FIELD_WORD) > 0 then return false end
---if player:mem(0x122, FIELD_WORD) > 0 then return false end
---if player:mem(0x108, FIELD_WORD) > 0 then return false end
-
---end
-
-function costume.onTickEnd()
-	for _,p in ipairs(costume.playersList) do
-		local data = costume.playerData[p]
-	end
-end
-	
-function costume.onTick() --WIP
+	Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-stab.ogg")
+	Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-hurt.ogg")
+	Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-heart.ogg")
+	Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-died.ogg")
+	Audio.sounds[81].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-rupee.ogg")
+	--Audio.sounds[82].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-fire.ogg")
+	Audio.sounds[83].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-item.ogg")
+	--Audio.sounds[84].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-key.ogg")
+	--Audio.sounds[85].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-shield.ogg")
 	Audio.sounds[86].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	--Audio.sounds[87].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-fairy.ogg")
+	--Audio.sounds[88].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-grass.ogg")
+	Audio.sounds[89].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-hit.ogg")
+	--Audio.sounds[90].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-sword-beam.ogg")
 	
 	Defines.player_walkspeed = 4
 	Defines.player_runspeed = 5
@@ -55,8 +27,6 @@ function costume.onTick() --WIP
 end
 
 function costume.onCleanup(p)
-	-- Remove the player from the list
-	if costume.playerData[p] ~= nil then
 		Audio.sounds[1].sfx  = nil
 		Audio.sounds[2].sfx  = nil
 		Audio.sounds[3].sfx  = nil
@@ -135,8 +105,6 @@ function costume.onCleanup(p)
 		Defines.jumpheight_bounce = 32
 		Defines.projectilespeedx = 7.1
 		Defines.player_grav = 0.4
-		
-		costume.playerData[p] = nil
 	end
 end
 
