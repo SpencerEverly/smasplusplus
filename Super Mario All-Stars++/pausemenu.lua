@@ -652,9 +652,9 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
 		end
 		table.insert(pause_options, {name="Character Options", action = switchtochar});
-		table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
+		table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
 		table.insert(pause_options, {name="Save and Quit", action = quitgame});
 		table.insert(pause_options, {name="Exit without Saving", action = quitonly});
 	end
