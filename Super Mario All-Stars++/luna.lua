@@ -577,6 +577,9 @@ function onTick()
 	if currentCostume == "MC-RALSEI" then
 		littleDialogue.characterNames[14] = "Ralsei"
 	end
+	if currentCostume == "MC-RILEY" then
+		littleDialogue.characterNames[14] = "Riley"
+	end
 	if currentCostume == "MC-SONIC" then
 		littleDialogue.characterNames[14] = "Sonic"
 	end

@@ -1336,6 +1336,16 @@ function onTick()
 		Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 	end
+	if currentCostume == "MC-RILEY" then
+		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+	end
 	if currentCostume == "MC-SONIC" then
 		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
