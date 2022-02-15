@@ -117,6 +117,7 @@ Code for certain parts made by:
 - Yoshi021
 - SetaYoshi
 - Marioman2007
+- cold soup
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 

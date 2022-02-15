@@ -1,0 +1,4 @@
+[1]
+frames=6
+framespeed=6
+lifetime=36

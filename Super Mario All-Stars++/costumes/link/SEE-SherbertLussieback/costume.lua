@@ -8,15 +8,15 @@ function costume.onInit(p)
 	Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-heart.ogg")
 	Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-died.ogg")
 	Audio.sounds[81].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-rupee.ogg")
-	--Audio.sounds[82].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-fire.ogg")
+	Audio.sounds[82].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-fire.ogg")
 	Audio.sounds[83].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-item.ogg")
-	--Audio.sounds[84].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-key.ogg")
-	--Audio.sounds[85].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-shield.ogg")
+	Audio.sounds[84].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-key.ogg")
+	Audio.sounds[85].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-shield.ogg")
 	Audio.sounds[86].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	--Audio.sounds[87].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-fairy.ogg")
-	--Audio.sounds[88].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-grass.ogg")
-	--Audio.sounds[89].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-hit.ogg")
-	--Audio.sounds[90].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-sword-beam.ogg")
+	Audio.sounds[87].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-fairy.ogg")
+	Audio.sounds[88].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-grass.ogg")
+	Audio.sounds[89].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-hit.ogg")
+	Audio.sounds[90].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-sword-beam.ogg")
 	
 	Defines.player_walkspeed = 4
 	Defines.player_runspeed = 5
@@ -94,7 +94,6 @@ function costume.onCleanup(p)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
-	
 	
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 3
