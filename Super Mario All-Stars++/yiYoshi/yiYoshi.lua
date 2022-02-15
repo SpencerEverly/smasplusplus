@@ -61,7 +61,7 @@ gameData.savedStarsPath  = gameData.savedStarsPath  or nil
 local FULL_PATH_ADDR = 0x00B2C618
 local CHECKPOINT_PATH_ADDR = 0x00B250B0
 
-local baseCharacterSpeedModifier =0.87
+local baseCharacterSpeedModifier = 0.83
 
 
 
@@ -1109,6 +1109,11 @@ do
 
 
     function handleFlutterJump()
+		local character = player.character;
+		local costumes = playerManager.getCostumes(player.character)
+		local currentCostume = player:getCostume()
+
+		local costumes
         if not canUseFlutterJump() then
             resetFlutterJump()
             return
@@ -1140,6 +1145,10 @@ do
             if (not data.nextFlutterIsLong and data.flutterTimer > yoshi.flutterSettings.activeTime) or (data.nextFlutterIsLong and data.flutterTimer > yoshi.flutterSettings.longActiveTime) or not p.keys.jump or Level.winState() ~= 0 or p:mem(0x11C,FIELD_WORD) > 0 then
                 endFlutter()
             end
+			
+			if (currentCostume == "SMA3") then
+				SFX.play(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/flutter"), 1, 1, 45)
+			end
 
 
             data.flutterSoundTimer = data.flutterSoundTimer + 1
@@ -4329,25 +4338,25 @@ end
 
 
 local function resetData()
-    data.sprite = nil
-    data.tongueSprite = nil
+	data.sprite = nil
+	data.tongueSprite = nil
 
-    resetWaterMovementData()
-    resetFlutterJump()
-    resetTongueData()
-    resetGroundPoundData()
+	resetWaterMovementData()
+	resetFlutterJump()
+	resetTongueData()
+	resetGroundPoundData()
 
-    resetHealthData()
+	resetHealthData()
 
-    resetExitData()
+	resetExitData()
 
-    resetAnimationData()
+	resetAnimationData()
 
 
-    data.megaMushroomScale = 1
-    data.megaMushroomTimer = 0
+	data.megaMushroomScale = 1
+	data.megaMushroomTimer = 0
 
-    data.onTickFrame = p.frame
+	data.onTickFrame = p.frame
 end
 
 

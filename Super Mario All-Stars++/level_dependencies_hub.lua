@@ -185,15 +185,8 @@ function dependencies2.onStart()
 end
 
 function dependencies2.onTick()
-	if player.character == CHARACTER_NINJABOMBERMAN then
-		Graphics.activateHud(true)
-	end
 	if player.character == CHARACTER_SNAKE then
 		Graphics.activateHud(true)
-	end
-	if player.character == CHARACTER_NINJABOMBERMAN then
-		Defines.player_walkspeed = 6
-		Defines.player_runspeed = 6
 	end
 	
 	local character = player.character;
