@@ -19,6 +19,7 @@ local lib3d = require("lib3d")
 
 local steve = {}
 
+ready = false
 
 _G.CHARACTER_STEVE = CHARACTER_ULTIMATERINKA
 
@@ -1825,18 +1826,21 @@ end
 
 
 function steve.onInitAPI()
-	if not inOverworld then
+	registerEvent(steve,"onTick")
+	registerEvent(steve,"onTickEnd")
+
+	registerEvent(steve,"onCameraDraw")
+	registerEvent(steve,"onDraw")
+
+	registerEvent(steve,"onExitLevel")
+
+	registerEvent(steve,"onKeyboardPressDirect")
+		
+	ready = true
+	
+	if not isOverworld then
 		return
 	end
-    registerEvent(steve,"onTick")
-    registerEvent(steve,"onTickEnd")
-
-    registerEvent(steve,"onCameraDraw")
-    registerEvent(steve,"onDraw")
-
-    registerEvent(steve,"onExitLevel")
-
-    registerEvent(steve,"onKeyboardPressDirect")
 end
 
 
