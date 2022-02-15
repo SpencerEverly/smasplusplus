@@ -526,6 +526,9 @@ function onTick()
 	if currentCostume == "GEORGENOTFOUNDYT" then
 		littleDialogue.characterNames[14] = "GeorgeNotFound"
 	end
+	if currentCostume == "HANGOUTYOSHIGUYYT" then
+		littleDialogue.characterNames[14] = "Stone"
+	end
 	if currentCostume == "KARLJACOBSYT" then
 		littleDialogue.characterNames[14] = "Karl"
 	end
@@ -576,9 +579,6 @@ function onTick()
 	end
 	if currentCostume == "MC-RALSEI" then
 		littleDialogue.characterNames[14] = "Ralsei"
-	end
-	if currentCostume == "MC-RILEY" then
-		littleDialogue.characterNames[14] = "Riley"
 	end
 	if currentCostume == "MC-SONIC" then
 		littleDialogue.characterNames[14] = "Sonic"
@@ -642,6 +642,9 @@ function onTick()
 	end
 	if currentCostume == "TOMMYINNITYT" then
 		littleDialogue.characterNames[14] = "TommyInnit"
+	end
+	if currentCostume == "UNOFFICIALSTUDIOSYT" then
+		littleDialogue.characterNames[14] = "Riley"
 	end
 	
 	
