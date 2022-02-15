@@ -981,21 +981,25 @@ do
     end
 
     local function canChangeSelectedSlot()
-        return (
-            player.deathTimer == 0
-            and Level.winState() == 0
-        )
+		if inOverworld then
+			return (
+				player.deathTimer == 0
+				and Level.winState() == 0
+			)
+		end
     end
     local function canDropItem()
-        return (
-            player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
+		if inOverworld then
+			return (
+				player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
 
-            and player.holdingNPC == nil
-            and not player.climbing
-            and player:mem(0x26,FIELD_WORD) == 0
+				and player.holdingNPC == nil
+				and not player.climbing
+				and player:mem(0x26,FIELD_WORD) == 0
             
-            and Level.winState() == 0
-        )
+				and Level.winState() == 0
+			)
+		end
     end
 
 
@@ -1431,13 +1435,15 @@ do
 
 
     local function canMine()
-        return (
-            player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
+		if inOverworld then
+			return (
+				player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
 
-            and player:mem(0x26,FIELD_WORD) == 0 -- pulling something out of the ground
-            and player.holdingNPC == nil
-            and Level.winState() == 0
-        )
+				and player:mem(0x26,FIELD_WORD) == 0 -- pulling something out of the ground
+				and player.holdingNPC == nil
+				and Level.winState() == 0
+			)
+		end
     end
 
 
@@ -1538,15 +1544,17 @@ local handleCombat
 
 do
     local function canSwing()
-        return (
-            player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
+		if inOverworld then
+			return (
+				player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
 
-            and player:mem(0x26,FIELD_WORD) == 0 -- pulling something out of the ground
-            and player.holdingNPC == nil
-            and Level.winState() == 0
+				and player:mem(0x26,FIELD_WORD) == 0 -- pulling something out of the ground
+				and player.holdingNPC == nil
+				and Level.winState() == 0
 
-            and data.miningBlock == nil
-        )
+				and data.miningBlock == nil
+			)
+		end
     end
 
     local function hittableNPCFilter(v)
@@ -1635,15 +1643,17 @@ local drawPlacingBlockPreview
 
 do
     local function canPlaceBlocks()
-        return (
-            player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
+		if inOverworld then
+			return (
+				player.forcedState == FORCEDSTATE_NONE and player.deathTimer == 0
 
-            and player:mem(0x26,FIELD_WORD) == 0 -- pulling something out of the ground
-            and player.holdingNPC == nil
-            and Level.winState() == 0
+				and player:mem(0x26,FIELD_WORD) == 0 -- pulling something out of the ground
+				and player.holdingNPC == nil
+				and Level.winState() == 0
 
-            and data.miningBlock == nil
-        )
+				and data.miningBlock == nil
+			)
+		end
     end
 
     local function getPlacingBlockPosition()
