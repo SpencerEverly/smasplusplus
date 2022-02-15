@@ -244,21 +244,21 @@ function onTick()
 	end
 	if currentCostume == "11-SMA1" then
 		littleDialogue.characterNames[1] = "Mario"
-		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-sma.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_gba.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/11-SMA1/starman")
 		starman.duration[996] = 577
 		starman.duration[994] = 577
 	end
 	if currentCostume == "12-SMA2" then
 		littleDialogue.characterNames[1] = "Mario"
-		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-sma.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_gba.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/12-SMA2/starman")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 	end
 	if currentCostume == "13-SMA4" then
 		littleDialogue.characterNames[1] = "Mario"
-		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-sma.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_gba.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/13-SMA4/starman")
 		starman.duration[996] = 705
 		starman.duration[994] = 705
@@ -496,6 +496,17 @@ function onTick()
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
+	
+	
+	if currentCostume == "SMA3" then
+		littleDialogue.characterNames[10] = "Yoshi"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_gba.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_sma3.ogg")
+		starman.duration[996] = 1474
+		starman.duration[994] = 1474
+	end
+	
+	
 	
 	if currentCostume == "DJCTRE-CUBIXTRON" then
 		littleDialogue.characterNames[14] = "Cubix Tron"

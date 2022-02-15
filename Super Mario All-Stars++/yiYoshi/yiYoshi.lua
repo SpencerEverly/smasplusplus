@@ -4399,22 +4399,22 @@ function yoshi.onTick()
     -- Recreate the mega mushroom's growing/shrinking animation
     if p.forcedState == FORCEDSTATE_MEGASHROOM then
         if data.megaMushroomTimer == 0 then
-            data.megaMushroomTimer = 48
+            data.megaMushroomTimer = 95
         end
 
         if data.megaMushroomTimer > 0 then
             data.megaMushroomTimer = data.megaMushroomTimer - 1
-            data.megaMushroomScale = (1-(data.megaMushroomTimer/48))*3 + 1
+            data.megaMushroomScale = (1-(data.megaMushroomTimer/95))*3 + 1
 
             if data.megaMushroomTimer == 1 then
                 data.megaMushroomTimer = -48
             end
         elseif data.megaMushroomTimer < 0 then
             data.megaMushroomTimer = data.megaMushroomTimer + 1
-            data.megaMushroomScale = ((-data.megaMushroomTimer/48))*3 + 1
+            data.megaMushroomScale = ((-data.megaMushroomTimer/95))*3 + 1
         end
     elseif p.isMega and data.megaMushroomTimer < 0 then
-        data.megaMushroomTimer = -48
+        data.megaMushroomTimer = -95
         data.megaMushroomScale = 4
     else
         data.megaMushroomTimer = 0
