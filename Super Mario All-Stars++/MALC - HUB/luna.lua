@@ -1166,6 +1166,16 @@ function onTick()
 		Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 	end
+	if currentCostume == "HANGOUTYOSHIGUYYT" then
+		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+	end
 	if currentCostume == "KARLJACOBSYT" then
 		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1327,16 +1337,6 @@ function onTick()
 		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 	end
 	if currentCostume == "MC-RALSEI" then
-		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
-		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
-		Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
-		Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
-		Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
-		Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
-		Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
-		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
-	end
-	if currentCostume == "MC-RILEY" then
 		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1547,6 +1547,16 @@ function onTick()
 		Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 	end
 	if currentCostume == "TOMMYINNITYT" then
+		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
+		Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+	end
+	if currentCostume == "UNOFFICIALSTUDIOSYT" then
 		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
