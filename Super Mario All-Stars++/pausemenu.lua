@@ -40,6 +40,7 @@ local soundObject
 local levelfolder = Level.folderPath()
 local levelname = Level.filename()
 local levelformat = Level.format()
+local costumes = playerManager.getCostumes(player.character)
 
 local paused = false;
 local paused_char = false;
@@ -743,6 +744,22 @@ local function drawCharacterMenu(y, alpha)
 		y = y+h2;
 		h = h+h2;
 	end
+	
+	local currentCostume = player:getCostume()
+	if currentCostume then
+		costumename = "<color red>Current costume: "..currentCostume.."</color>"
+	end
+	if currentCostume == nil then
+		costumename = "<color red>Current costume: N/A</color>"
+	end
+	--local font = textblox.FONT_SPRITEDEFAULT3X2;
+	
+	local layout = textplus.layout(textplus.parse(costumename, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	textplus.render{layout = layout, x = 230 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
+	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
+	
+	h = h+16+8--font.charHeight;
+	y = y+h;
 
 	
 	return h;
