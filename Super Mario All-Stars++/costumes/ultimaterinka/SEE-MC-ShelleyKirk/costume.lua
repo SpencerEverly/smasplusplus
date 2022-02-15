@@ -1,15 +1,26 @@
 local pm = require("playerManager")
-local lib3d = require("lib3d")
-local steve = require("steve")
 
 local costume = {}
 
-function costume.onInit(p)        
+local eventsRegistered = false
+
+function costume.onInit(p)
+	Routine = require("routine")
+	Routine.run(costumechange)
+	eventsRegistered = true
+end
+
+function costumechange()
+	Routine.wait(0)
+	lib3d = require("lib3d")
+	steve = require("steve")
     steve.skinSettings.name = "shelleykirk"
     steve.loadMeshes()
 end
 
 function costume.onCleanup(p)
+	lib3d = require("lib3d")
+	steve = require("steve")
     steve.skinSettings.name = "steve"
     steve.loadMeshes()
 end

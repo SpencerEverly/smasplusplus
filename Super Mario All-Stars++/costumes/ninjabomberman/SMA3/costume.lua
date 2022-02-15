@@ -8,14 +8,12 @@ local eventsRegistered = false
 
 function costume.onInit(p)
 	Routine = require("routine")
-	registerEvent(costume,"onStart")
-	registerEvent(costume,"onTick")
 	Routine.run(costumechange)
 	eventsRegistered = true
 end
 
 function costumechange()
-	Routine.wait(0.1)
+	Routine.wait(0)
 	yoshi = require("yiYoshi/yiYoshi")
 	local resetAnimationData
 	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/main.png")
@@ -42,7 +40,7 @@ function costumechange()
 	--yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_bubbleCreated"))
     yoshi.generalSettings.babyPopBubbleSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/pop"))
     yoshi.generalSettings.babyCrySound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/babyMario"))
-    --yoshi.generalSettings.babyRescuedSound = SFX.open(Misc.resolveSoundFile("yoshi"))
+    yoshi.generalSettings.babyRescuedSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/yoshi"))
     --yoshi.generalSettings.babyKidnappedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_kidnapped"))
     --yoshi.generalSettings.babyCarriedOffSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_carriedOff"))
 
@@ -66,7 +64,7 @@ function costumechange()
 	yoshi.flutterSettings.soundDelay = 0
 	
 	yoshi.tongueSettings.startSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/tongue"))
-    yoshi.tongueSettings.failedSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/hurt-minor"))
+    yoshi.tongueSettings.failedSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/hurt"))
     yoshi.tongueSettings.spitSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/spit"))
     yoshi.tongueSettings.swallowSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/swallow"))
 
@@ -83,6 +81,11 @@ function costumechange()
 end
 
 function costume.onCleanup(p)
+	local character = player.character;
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+
+	local costumes
 	yoshi = require("yiYoshi/yiYoshi")
 	Audio.sounds[1].sfx  = nil
     Audio.sounds[5].sfx  = nil
@@ -143,7 +146,87 @@ function costume.onCleanup(p)
 	
 	yoshi.groundPoundSettings.startSound = SFX.open(Misc.resolveSoundFile("yiYoshi/groundPound_start"))
     yoshi.groundPoundSettings.landSound = SFX.open(Misc.resolveSoundFile("yiYoshi/groundPound_land"))
-	yoshi.initCharacter()
+	yoshi.flutterSettings.soundDelay = 6
+	
+	Defines.player_walkspeed = nil
+    Defines.player_runspeed = nil
+
+    Defines.player_grabSideEnabled = nil
+    Defines.player_grabTopEnabled = nil
+    Defines.player_grabShellEnabled = nil
+
+    Audio.sounds[1].sfx  = nil
+    Audio.sounds[5].sfx  = nil
+    Audio.sounds[8].sfx  = nil
+    Audio.sounds[14].sfx = nil
+    Audio.sounds[19].sfx = nil
+    Audio.sounds[60].sfx = nil
+    Audio.sounds[21].sfx = nil
+    Audio.sounds[40].sfx = nil
+	
+	if character == "CHARACTER_YOSHI" then
+		yoshi.initCharacter()
+	end
+	if character == "CHARACTER_MARIO" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_LUIGI" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_PEACH" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_TOAD" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_LINK" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_MEGAMAN" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_WARIO" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_BOWSER" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_KLONOA" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_ROSALINA" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_SNAKE" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_ZELDA" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_ULTIMATERINKA" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_UNCLEBROADSWORD" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
+	if character == "CHARACTER_SAMUS" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
 end
 
 return costume
