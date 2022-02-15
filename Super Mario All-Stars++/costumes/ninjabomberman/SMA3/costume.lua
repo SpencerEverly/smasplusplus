@@ -9,6 +9,62 @@ local eventsRegistered = false
 function costume.onInit(p)
 	Routine = require("routine")
 	Routine.run(costumechange)
+	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/stomped.ogg")
+	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-hit.ogg")
+	Audio.sounds[4].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-smash.ogg")
+	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-shrink.ogg")
+	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-grow.ogg")
+	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/mushroom.ogg")
+	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/shell-hit.ogg")
+	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-slide.ogg")
+	Audio.sounds[11].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/item-dropped.ogg")
+	Audio.sounds[12].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/has-item.ogg")
+	Audio.sounds[13].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/camera-change.ogg")
+	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/1up.ogg")
+	Audio.sounds[16].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/lava.ogg")
+	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/warp.ogg")
+	Audio.sounds[18].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/fireball.ogg")
+	Audio.sounds[20].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/boss-beat.ogg")
+	Audio.sounds[22].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bullet-bill.ogg")
+	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/grab.ogg")
+	Audio.sounds[24].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/spring.ogg")
+	Audio.sounds[25].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/hammer.ogg")
+	Audio.sounds[29].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/do.ogg")
+	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/key.ogg")
+	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/pswitch.ogg")
+	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/tail.ogg")
+	Audio.sounds[34].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/racoon.ogg")
+	Audio.sounds[35].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/boot.ogg")
+	Audio.sounds[36].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smash.ogg")
+	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/thwomp.ogg")
+	Audio.sounds[38].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-spit.ogg")
+	Audio.sounds[39].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-hit.ogg")
+	Audio.sounds[41].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-beat.ogg")
+	Audio.sounds[42].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/npc-fireball.ogg")
+	Audio.sounds[43].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/fireworks.ogg")
+	Audio.sounds[44].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bowser-killed.ogg")
+	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/door.ogg")
+	Audio.sounds[47].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/message.ogg")
+	Audio.sounds[48].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi.ogg")
+	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-hurt.ogg")
+	Audio.sounds[50].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-tongue.ogg")
+	Audio.sounds[51].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-egg.ogg")
+	--Audio.sounds[52].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/got-star.ogg")
+	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-died2.ogg")
+	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-swallow.ogg")
+	Audio.sounds[57].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/dry-bones.ogg")
+	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smw-checkpoint.ogg")
+	Audio.sounds[59].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/dragon-coin.ogg")
+	Audio.sounds[61].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smw-blaarg.ogg")
+	Audio.sounds[62].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/wart-bubble.ogg")
+	Audio.sounds[63].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/wart-die.ogg")
+	Audio.sounds[71].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/climbing.ogg")
+	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/swim.ogg")
+	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/grab2.ogg")
+	--Audio.sounds[74].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/saw.ogg")
+	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-throw.ogg")
+	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-hit.ogg")
+	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bubble.ogg")
 	eventsRegistered = true
 end
 
@@ -19,13 +75,10 @@ function costumechange()
 	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/main.png")
 	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/babyMario.png")
 	yoshi.tongueSettings.image = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/tongue.png")
+	
 	yoshi.customExitSettings.passOnMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Goal.ogg"))
     yoshi.customExitSettings.keyMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
     yoshi.customExitSettings.keyMusicStar = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
-	
-	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/main.png")
-	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/babyMario.png")
-	yoshi.tongueSettings.image = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/tongue.png")
 
 	yoshi.generalSettings.jumpSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/jump2"))
     yoshi.generalSettings.hurtSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/hurt"))
@@ -39,10 +92,10 @@ function costumechange()
 	
 	--yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_bubbleCreated"))
     yoshi.generalSettings.babyPopBubbleSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/pop"))
-    yoshi.generalSettings.babyCrySound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/babyMario"))
+    yoshi.generalSettings.babyCrySound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/babymario"))
     yoshi.generalSettings.babyRescuedSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/yoshi"))
-    --yoshi.generalSettings.babyKidnappedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_kidnapped"))
-    --yoshi.generalSettings.babyCarriedOffSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_carriedOff"))
+    yoshi.generalSettings.babyKidnappedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_kidnapped"))
+    yoshi.generalSettings.babyCarriedOffSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_carriedOff"))
 
     --yoshi.generalSettings.starCounterBackImage = Graphics.loadImageResolved("yiYoshi/starCounter_back.png")
     --yoshi.generalSettings.starCounterNumbersImage = Graphics.loadImageResolved("yiYoshi/starCounter_numbers.png")
@@ -81,22 +134,80 @@ function costumechange()
 end
 
 function costume.onCleanup(p)
+	Audio.sounds[1].sfx  = nil	
+	Audio.sounds[2].sfx  = nil
+	Audio.sounds[3].sfx  = nil
+	Audio.sounds[4].sfx  = nil
+	Audio.sounds[6].sfx  = nil
+	Audio.sounds[7].sfx  = nil
+	Audio.sounds[9].sfx  = nil
+	Audio.sounds[10].sfx = nil
+	Audio.sounds[11].sfx = nil
+	Audio.sounds[12].sfx = nil
+	Audio.sounds[13].sfx = nil
+	Audio.sounds[14].sfx = nil
+	Audio.sounds[15].sfx = nil
+	Audio.sounds[16].sfx = nil
+	Audio.sounds[17].sfx = nil
+	Audio.sounds[18].sfx = nil
+	Audio.sounds[19].sfx = nil
+	Audio.sounds[20].sfx = nil
+	Audio.sounds[21].sfx = nil
+	Audio.sounds[22].sfx = nil
+	Audio.sounds[23].sfx = nil
+	Audio.sounds[24].sfx = nil
+	Audio.sounds[25].sfx = nil
+	Audio.sounds[29].sfx = nil
+	Audio.sounds[31].sfx = nil
+	Audio.sounds[32].sfx = nil
+	Audio.sounds[33].sfx = nil
+	Audio.sounds[34].sfx = nil
+	Audio.sounds[35].sfx = nil
+	Audio.sounds[36].sfx = nil
+	Audio.sounds[37].sfx = nil
+	Audio.sounds[38].sfx = nil
+	Audio.sounds[39].sfx = nil
+	Audio.sounds[41].sfx = nil
+	Audio.sounds[42].sfx = nil
+	Audio.sounds[43].sfx = nil
+	Audio.sounds[44].sfx = nil
+	Audio.sounds[46].sfx = nil
+	Audio.sounds[47].sfx = nil
+	Audio.sounds[48].sfx = nil
+	Audio.sounds[49].sfx = nil
+	Audio.sounds[50].sfx = nil
+	Audio.sounds[51].sfx = nil
+	Audio.sounds[52].sfx = nil
+	Audio.sounds[54].sfx = nil
+	Audio.sounds[55].sfx = nil
+	Audio.sounds[56].sfx = nil
+	Audio.sounds[57].sfx = nil
+	Audio.sounds[58].sfx = nil
+	Audio.sounds[59].sfx = nil
+	Audio.sounds[61].sfx = nil
+	Audio.sounds[62].sfx = nil
+	Audio.sounds[63].sfx = nil
+	Audio.sounds[71].sfx = nil
+	Audio.sounds[72].sfx = nil
+	Audio.sounds[73].sfx = nil
+	Audio.sounds[75].sfx = nil
+	Audio.sounds[76].sfx = nil
+	Audio.sounds[77].sfx = nil
+	Audio.sounds[78].sfx = nil
+	Audio.sounds[79].sfx = nil
+	Audio.sounds[80].sfx = nil
+	Audio.sounds[81].sfx = nil
+	Audio.sounds[82].sfx = nil
+	Audio.sounds[91].sfx = nil
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 
 	local costumes
 	yoshi = require("yiYoshi/yiYoshi")
-	Audio.sounds[1].sfx  = nil
-    Audio.sounds[5].sfx  = nil
-    Audio.sounds[8].sfx  = nil
-    Audio.sounds[14].sfx = nil
-    Audio.sounds[19].sfx = nil
-    Audio.sounds[60].sfx = nil
-    Audio.sounds[21].sfx = nil
-    Audio.sounds[40].sfx = nil
 	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("yiYoshi/main.png")
 	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("yiYoshi/babyMario.png")
+	
 	yoshi.generalSettings.jumpSound  = SFX.open(Misc.resolveSoundFile("yiYoshi/jump"))
     yoshi.generalSettings.hurtSound  = SFX.open(Misc.resolveSoundFile("yoshi-hurt"))
     yoshi.generalSettings.deathSound = SFX.open(Misc.resolveSoundFile("yiYoshi/death"))
