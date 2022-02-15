@@ -164,9 +164,8 @@ function costume.onCleanup(p)
     Audio.sounds[21].sfx = nil
     Audio.sounds[40].sfx = nil
 	
-	if character == "CHARACTER_YOSHI" then
-		yoshi.initCharacter()
-	end
+	yoshi.cleanupCharacter()
+	
 	if character == "CHARACTER_MARIO" then
 		Defines.player_walkspeed = nil
 		Defines.player_runspeed = nil
