@@ -3,6 +3,7 @@ local pm = require("playerManager")
 local costume = {}
 
 function costume.onInit(p)
+	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/got-star.ogg")
 	Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-stab.ogg")
 	Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-hurt.ogg")
 	Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-heart.ogg")
