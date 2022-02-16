@@ -48,6 +48,7 @@ local paused_char_temp = false;
 local paused_tele = false;
 local pause_box;
 local pause_height = 0;
+local pause_height_char = 350;
 local pause_width = 700;
 
 local pause_options;
@@ -223,6 +224,108 @@ local function switchhub()
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/level-select.ogg")
 	player:teleport(40176, 39876, bottomCenterAligned)
+end
+
+local function charmario()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(1, false)
+end
+
+local function charluigi()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(2, false)
+end
+
+local function charpeach()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(3, false)
+end
+
+local function chartoad()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(4, false)
+end
+
+local function charlink()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(5, false)
+end
+
+local function charmegaman()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(6, false)
+end
+
+local function charmegaman()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(6, false)
+end
+
+local function charwario()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(7, false)
+end
+
+local function charbowser()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(8, false)
+end
+
+local function charklonoa()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(9, false)
+end
+
+local function charyoshi()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(10, false)
+end
+
+local function charrosalina()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(11, false)
+end
+
+local function charsnake()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(12, false)
+end
+
+local function charzelda()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(13, false)
+end
+
+local function charsteve()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(14, false)
+end
+
+local function charunclebroadsword()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(15, false)
+end
+
+local function charsamus()
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	player:transform(16, false)
 end
 
 local function characterchange()
@@ -614,6 +717,26 @@ local function dlcmapload()
 	Level.load("SMAS - DLC World.lvlx", nil, nil)
 end
 
+local function cycle(dir)
+	if #pause_options_char[pause_index_char] == 0 then return end
+	SFX.play(sfx.move)
+	currentMenuPosition[pause_index_char] = currentMenuPosition[pause_index_char] + dir
+	local pos = currentMenuPosition[pause_index_char]
+	if (not pause_options_char[pause_index_char][pos] and pos > 0 and pos <= #pause_options_char[pause_index_char]) then
+		return cycle(dir)
+	end
+
+	if currentMenuPosition[pause_index_char] <= 0 then
+		currentMenuPosition[pause_index_char] = #pause_options_char[pause_index_char] + 1
+		return cycle(dir)
+	end
+
+	if currentMenuPosition[pause_index_char] > #pause_options_char[pause_index_char] then
+		currentMenuPosition[pause_index_char] = 0
+		return cycle(dir)
+	end
+end
+
 local function drawPauseMenu(y, alpha)
 	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
@@ -726,6 +849,7 @@ local function drawCharacterMenu(y, alpha)
 			table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
 		end
 	end
+	
 	for k,v in ipairs(pause_options_char) do
 		local c = 0xFFFFFF00;
 		local n = v.name2;
@@ -899,7 +1023,7 @@ function pausemenu.onInputUpdate()
 			if paused then
 				paused = false
 				paused_char = false
-				aused_tele = false
+				paused_tele = false
 				pauseactive = false
 				SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 				cooldown = 5
@@ -918,8 +1042,13 @@ function pausemenu.onInputUpdate()
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
 		end
-		if pause_index_char == 0 then
-			pause_index_char = pause_index_char + 1
+		if pause_index_char == -1 then
+			if player.keys.down == KEYS_PRESSED then
+				cycle(1)
+			end
+			if player.keys.up == KEYS_PRESSED then
+				cycle(-1)
+			end
 		end
 		if pause_index_tele == 0 then
 			pause_index_tele = pause_index_tele + 1
