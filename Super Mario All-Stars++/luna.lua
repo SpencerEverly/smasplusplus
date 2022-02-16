@@ -300,7 +300,7 @@ function onTick()
 	end
 	if currentCostume == "SP-1-ERICCARTMAN" then
 		littleDialogue.characterNames[1] = "Eric"
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_southpark.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/SP-1-EricCartman/starman")
 		starman.duration[996] = 962
 		starman.duration[994] = 962
