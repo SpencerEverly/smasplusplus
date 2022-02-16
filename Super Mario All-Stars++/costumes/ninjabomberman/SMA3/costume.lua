@@ -71,7 +71,7 @@ end
 function costumechange()
 	Routine.wait(0)
 	yoshi = require("yiYoshi/yiYoshi")
-	local resetAnimationData
+
 	yoshi.generalSettings.mainImage = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/main.png")
 	yoshi.generalSettings.babyMarioImage = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/babyMario.png")
 	yoshi.tongueSettings.image = Graphics.loadImageResolved("costumes/ninjabomberman/SMA3/tongue.png")
@@ -90,7 +90,7 @@ function costumechange()
     Audio.sounds[8].sfx  = yoshi.generalSettings.deathSound
     Audio.sounds[14].sfx = yoshi.generalSettings.coinSound
 	
-	--yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("yiYoshi/baby_bubbleCreated"))
+	yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/baby_bubbleCreated"))
     yoshi.generalSettings.babyPopBubbleSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/pop"))
     yoshi.generalSettings.babyCrySound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/babymario"))
     yoshi.generalSettings.babyRescuedSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/yoshi"))
@@ -100,7 +100,7 @@ function costumechange()
     --yoshi.generalSettings.starCounterBackImage = Graphics.loadImageResolved("yiYoshi/starCounter_back.png")
     --yoshi.generalSettings.starCounterNumbersImage = Graphics.loadImageResolved("yiYoshi/starCounter_numbers.png")
 
-    --yoshi.generalSettings.starCounterReplenishedSound = SFX.open(Misc.resolveSoundFile("yiYoshi/starCounter_replenished"))
+    yoshi.generalSettings.starCounterReplenishedSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/starCounter_replenished"))
     yoshi.generalSettings.starCounterSlowBeepingSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/countdownTimerNormal"))
     yoshi.generalSettings.starCounterFastBeepingSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/countdownTimerCritical"))
     yoshi.generalSettings.starCounterIncreaseSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/starget"))
@@ -122,8 +122,8 @@ function costumechange()
     yoshi.tongueSettings.swallowSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/swallow"))
 
     yoshi.tongueSettings.createEggSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/swallow"))
-    --yoshi.tongueSettings.startAimSound = SFX.open(Misc.resolveSoundFile("yoshi-tongue"))
-    --yoshi.tongueSettings.cycleEggsSound = SFX.open(Misc.resolveSoundFile("swim"))
+    yoshi.tongueSettings.startAimSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/yoshi-tongue2"))
+    yoshi.tongueSettings.cycleEggsSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/swim2"))
     yoshi.tongueSettings.eggThrowSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/wah"))
     yoshi.tongueSettings.failedThrowSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/wah"))
     yoshi.tongueSettings.eggAimSound = SFX.open(Misc.resolveSoundFile("yiYoshi/aim"))
