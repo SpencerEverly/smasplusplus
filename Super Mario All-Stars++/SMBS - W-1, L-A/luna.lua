@@ -18,7 +18,7 @@ function onEvent(eventName)
 			Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/Mini Boss.ogg")
 		end
 		if eventName == "Boss End" then
-			Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/ssbb-zelda2.ogg")
+			Audio.MusicChange(1, "_OST/Super Smash Bros. Melee/shrine.ogg")
 		end
 	end
 end
@@ -30,9 +30,9 @@ function onTick()
 	local costumes
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
 		Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/AthleticSMB4.ogg")
-		Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/ssbb-zelda2.ogg")
+		Audio.MusicChange(1, "_OST/Super Smash Bros. Melee/shrine.ogg")
 		Audio.MusicChange(2, "_OST/Super Mario All-Stars++ (Beta)/AthleticSMB4.ogg")
-		Audio.MusicChange(3, "_OST/Super Mario All-Stars++ (Beta)/ssbb-zelda2.ogg")
+		Audio.MusicChange(3, "_OST/Super Smash Bros. Melee/shrine.ogg")
 	end
 	if currentCostume == "1-SMB1-RETRO" then
 		Audio.MusicChange(0, "_OST/Super Mario Bros Spencer/Forest.ogg")
