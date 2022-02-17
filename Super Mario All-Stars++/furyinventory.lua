@@ -467,7 +467,7 @@ function inventory.onInputUpdate()
     end
 
 
-  if player.rawKeys.dropItem == KEYS_PRESSED and not Misc.paused() then -- toggle inventory menu
+  if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
   inventory.activateinventory = true
     if inventory.notpaused == true then
     inventoryopen = false
