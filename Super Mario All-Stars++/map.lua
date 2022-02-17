@@ -7,15 +7,14 @@ local travL = require("travL")
 local wandR = require("wandRr")
 local jukebox = require("jukebox-v11")
 local pause_music = require("map_music")
-local map3d = require("mapp3d")
 
-map3d.CameraSettings.fov = 65
---map3d.CameraSettings.angle = 35;
-map3d.CameraSettings.height = 350;
-map3d.BGPlane.tile = 394
-map3d.Light.enabled = false
-map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
-map3d.Heightmap.position = vector.v2(6496, 0)
+--local map3d = require("mapp3d")
+--map3d.CameraSettings.fov = 65
+--map3d.CameraSettings.height = 350;
+--map3d.BGPlane.tile = 394
+--map3d.Light.enabled = false
+--map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
+--map3d.Heightmap.position = vector.v2(6496, 0)
 
 function onLoad()
 	if SaveData.disableX2char == 0 then
@@ -66,6 +65,9 @@ function onDraw()
 	textplus.print{x=700, y=557, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
 	textplus.print{x=733, y=557, text = os.date("%a"), priority=8, color=Color.white}
 	textplus.print{x=752, y=557, text = os.date("%x"), priority=8, color=Color.white}
+	
+	local customtileone = Graphics.loadImage("customtile401.png")
+	Graphics.drawImageToSceneWP(customtileone, -3328, -1824, 4)
 end
 
 --Some cheats will break playing this game. Demo 2 will start having these cheats that could break any point of the game disabled. Most things, like the framerate, chracter stuff, most other cheats that won't break the game in normal cases, and until the release, imtiredofallthiswalking, will be kept in. To see a list of disabled cheats for levels, check out the luna.lua in the root of the episode.
