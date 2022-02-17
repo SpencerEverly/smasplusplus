@@ -470,7 +470,7 @@ function onTick()
 	end
 	if currentCostume == "NESS" then
 		littleDialogue.characterNames[5] = "Ness"
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_earthbound.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
