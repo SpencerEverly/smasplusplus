@@ -469,17 +469,18 @@ function inventory.onInputUpdate()
 
   if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
   inventory.activateinventory = true
-    if inventory.notpaused == true then
-    inventoryopen = false
-        Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
-        Misc.unpause()
-        Audio.MusicVolume(64)
-    else
-    inventoryopen = true
+    if inventory.notpaused == false then
+		inventoryopen = false
+    elseif inventory.notpaused == true then
+	inventoryopen = true
         Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
         Misc.pause()
         Audio.MusicVolume(16)
-    end
+	inventoryopen = false
+        Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
+        Misc.unpause()
+        Audio.MusicVolume(64)
+	end
   end
 
   if inventory.activateinventory == true then
