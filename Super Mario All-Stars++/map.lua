@@ -1,29 +1,24 @@
 local steve = require("steve")
-
 local textplus = require("textplus")
-
 local playerManager = require("playermanager")
-
 local yoshi = require("yiYoshi/yiYoshi")
-
 local lib3d = require("lib3d")
-
 local travL = require("travL")
-
 local wandR = require("wandRr")
-
 local jukebox = require("jukebox-v11")
-
 local pause_music = require("map_music")
+local map3d = require("mapp3d")
+
+map3d.CameraSettings.fov = 65
+map3d.BGPlane.tile = 394
+map3d.Light.enabled = false
+map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
+map3d.Heightmap.position = vector.v2(6528, 96)
 
 function onLoad()
 	if SaveData.disableX2char == 0 then
 		inventory = require("customInventory")
 		smoothWorld = require("smoothWorld")
-		map3d = require("mapp3d")
-		map3d.CameraSettings.fov = 65
-		map3d.BGPlane.tile = 394
-		map3d.Light.enabled = false
 		pausemenu = require("pausemenu_map")
 	end
 	if SaveData.disableX2char == 1 then
@@ -43,25 +38,10 @@ function onStart()
 end
 
 function onTick()
-	local character = player.character;
-	local costumes = playerManager.getCostumes(player.character)
-	local currentCostume = player:getCostume()
-	
-	local costumes
-	
 	Defines.player_hasCheated = false
+	
 	if SaveData.disableX2char == 0 then
 		playerManager.overworldCharacters = {CHARACTER_MARIO, CHARACTER_LUIGI, CHARACTER_PEACH, CHARACTER_TOAD, CHARACTER_LINK, CHARACTER_MEGAMAN, CHARACTER_WARIO, CHARACTER_BOWSER, CHARACTER_YOSHI, CHARACTER_NINJABOMBERMAN, CHARACTER_ROSALINA, CHARACTER_SNAKE, CHARACTER_ZELDA, CHARACTER_ULTIMATERINKA, CHARACTER_UNCLEBROADSWORD, CHARACTER_SAMUS}
-		if currentCostume == "0-SMASPLUSPLUS-BETA" then
-			jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/smasselect.ogg"))
-			jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Title.ogg"))
-			jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Desert.ogg"))
-		end
-		if currentCostume == "1-SMB1-RETRO" then
-			jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
-			jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
-			jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
-		end
 	end
 	if SaveData.disableX2char == 1 then
 		playerManager.overworldCharacters = {CHARACTER_MARIO, CHARACTER_LUIGI, CHARACTER_PEACH, CHARACTER_TOAD, CHARACTER_LINK}

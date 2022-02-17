@@ -337,6 +337,10 @@ function costume.onCleanup(p)
 		Defines.player_walkspeed = nil
 		Defines.player_runspeed = nil
 	end
+	if character == "CHARACTER_STEVE" then
+		Defines.player_walkspeed = nil
+		Defines.player_runspeed = nil
+	end
 end
 
 return costume
