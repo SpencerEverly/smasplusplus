@@ -1,7 +1,5 @@
 local level_dependencies_normal = require("level_dependencies_hub")
 
-local playermanager = require("playerManager")
-
 local stars = mem(0x00B251E0, FIELD_WORD)
 
 local littleDialogue = require("littleDialogue")
@@ -1099,6 +1097,21 @@ function onTick()
 		Audio.MusicChange(11, "_OST/Takeshi's Challenge (SNES)/Main Theme (SNES).ogg")
 		Audio.MusicChange(12, "_OST/Takeshi's Challenge (SNES)/Main Theme (SNES).ogg")
 		Audio.MusicChange(13, "_OST/Takeshi's Challenge (SNES)/Main Theme (SNES).ogg")
+	end
+	
+	
+	
+	
+	--CHARACTER_KLONOA
+	if currentCostume == "YS-GREEN" then
+		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+		Audio.MusicChange(11, "_OST/Yoshi's Story/Yoshi's Song.ogg")
+		Audio.MusicChange(12, "_OST/Yoshi's Story/Yoshi's Song.ogg")
+		Audio.MusicChange(13, "_OST/Yoshi's Story/Yoshi's Song.ogg")
 	end
 	
 	

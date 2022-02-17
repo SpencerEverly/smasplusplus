@@ -1,4 +1,58 @@
 local jukebox = require("jukebox-v11")
+local playerManager = require("playerManager")
+
+local map_music = {}
+
+function map_music.onInitAPI()
+	registerEvent(map_music, "onStart")
+	registerEvent(map_music, "onTick")
+end
+
+function map_music.onStart()
+	local character = player.character;
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	
+	local costumes
+	if currentCostume == nil then
+		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
+		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
+		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
+	end
+	if currentCostume == "0-SMASPLUSPLUS-BETA" then
+		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/smasselect.ogg"))
+		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Title.ogg"))
+		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Desert.ogg"))
+	end
+	if currentCostume == "1-SMB1-RETRO" then
+		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
+		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
+		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
+	end
+end
+
+function map_music.onTick()
+	local character = player.character;
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	
+	local costumes
+	if currentCostume == nil then
+		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
+		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
+		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
+	end
+	if currentCostume == "0-SMASPLUSPLUS-BETA" then
+		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/smasselect.ogg"))
+		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Title.ogg"))
+		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Desert.ogg"))
+	end
+	if currentCostume == "1-SMB1-RETRO" then
+		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
+		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
+		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
+	end
+end
 
 --SMB1 Secret Warps
 jukebox.setTrack(750, jukebox.resolveMusicFile(Misc.episodePath().."_OST/Super Mario Bros/World Music/Super Players.ogg"))
@@ -204,3 +258,5 @@ jukebox.setMusicBox(772, 640, -1152)
 jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 jukebox.setMusicBox(773, 1152, -1376)
 jukebox.setMusicBox(773, 1536, -1856)
+
+return map_music

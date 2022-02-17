@@ -129,7 +129,7 @@ end
 function jukebox.onExit()
     if not isOverworld then return end
     curTrack = -1
-    Audio.MusicStop()
+    Audio.MusicFadeOut(-1, 1000)
     Audio.ReleaseStream(-1)
 end
 
