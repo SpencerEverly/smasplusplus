@@ -10,10 +10,12 @@ local pause_music = require("map_music")
 local map3d = require("mapp3d")
 
 map3d.CameraSettings.fov = 65
+--map3d.CameraSettings.angle = 35;
+map3d.CameraSettings.height = 350;
 map3d.BGPlane.tile = 394
 map3d.Light.enabled = false
 map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
-map3d.Heightmap.position = vector.v2(6528, 96)
+map3d.Heightmap.position = vector.v2(6496, 0)
 
 function onLoad()
 	if SaveData.disableX2char == 0 then
