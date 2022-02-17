@@ -3,7 +3,6 @@ local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
-local inventory = require("furyinventory")
 
 local blackscreen = Graphics.loadImage("blackscreen.png")
 
@@ -1015,14 +1014,12 @@ function pausemenu.onInputUpdate()
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
-			inventory.activateinventory = true
 		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
 			--Misc.pause();
 			pausemenu.paused = true
 			pausemenu.pauseactive = true
 			pause_index = 0;
 			SFX.play("_OST/_Sound Effects/pausemenu.ogg")
-			inventory.activateinventory = false
 		elseif player.count(2) then
 			if pausemenu.paused then
 				pausemenu.paused = false
@@ -1033,7 +1030,6 @@ function pausemenu.onInputUpdate()
 				cooldown = 5
 				Misc.unpause()
 				player2:mem(0x11E,FIELD_BOOL,false)
-				inventory.activateinventory = true
 			end
 		elseif player.count(2) then
 			if(player2:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
@@ -1042,7 +1038,6 @@ function pausemenu.onInputUpdate()
 				pausemenu.pauseactive = true
 				pause_index = 0;
 				SFX.play("_OST/_Sound Effects/pausemenu.ogg")
-				inventory.activateinventory = false
 			end
 		end
 		if cooldown <= 0 then
@@ -1191,13 +1186,11 @@ function pausemenu.onTick()
 	if pausemenu.pauseactivated == true then
 		if player.pauseKeyPressing == false then
 			player.pauseKeyPressing = true
-			inventory.activateinventory = true
 		end
 	end
 	if pausemenu.pauseactivated == false then
 		if player.pauseKeyPressing == true then
 			player.pauseKeyPressing = false
-			inventory.activateinventory = false
 		end
 	end
 end

@@ -20,8 +20,9 @@ local inventory = {}
 local inventory = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.png"))
 local inventorysmol = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventorysmol.png"))
 local selector = Graphics.loadImage(Misc.resolveFile("inventorystuff/selector.png"))
-
 local warpTransition = require("warpTransition")
+local littleDialogue = require("littleDialogue")
+local pausemenu = require("pausemenu")
 
 local selection = false
 local selectx = 30
@@ -30,7 +31,8 @@ local numx = 40
 local numy = 570
 
 
-inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
+inventory.activateinventory = false --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
+inventory.notpaused = false --This'll prevent certain things suck as littleDialogue and the puase menu getting in the way
 
 local inventoryopen = false
 
@@ -114,7 +116,7 @@ function inventory.onDraw()
     player.reservePowerup = 0 -- disables the item box
 
     if inventory.activateinventory == true then
-        if Misc.isPausedByLua() then
+        if inventory.notpaused == true then
             numx = 54
             numy = 574
 
@@ -212,7 +214,7 @@ function inventory.onDraw()
     end
 
     if inventory.activateinventory == true then
-        if Misc.isPausedByLua() then -- selects the powerup
+        if inventory.notpaused == true then -- selects the powerup
             if player.rawKeys.jump == KEYS_PRESSED then
                 if player.powerup == powerup[state] then
                     Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
@@ -279,7 +281,7 @@ function inventory.onDraw()
 
 
     if inventory.activateinventory == true then
-        if Misc.isPausedByLua() then
+        if inventory.notpaused == true then
             if SaveData.inventory.shroom == 0 then
                 Graphics.drawImage(noshroom, 30, 508 )
             end
@@ -375,6 +377,21 @@ end
 -- (code will be executed before game logic will be processed)
 function inventory.onTick()
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
+	if pausemenu.pauseactivated == true or pausemenu.paused == false or pausemenu.paused_char == false or pausemenu.paused_tele == false then
+		inventory.notpaused = true
+	end
+	if pausemenu.pauseactivated == false or pausemenu.paused == true or pausemenu.paused_char == true or pausemenu.paused_tele == true then
+		inventory.notpaused = false
+	end
+	if littleDialogue.boxes == {} then
+		inventory.notpaused = false
+	end
+	if warpTransition.transitionTimer >= 0.1 then
+		inventory.notpaused = false
+	end
+	if warpTransition.transitionTimer == 0 then
+		inventory.notpaused = true
+	end
 
     Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
     
@@ -450,9 +467,9 @@ function inventory.onInputUpdate()
     end
 
 
-  if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
+  if player.rawKeys.dropItem == KEYS_PRESSED and not Misc.paused() then -- toggle inventory menu
   inventory.activateinventory = true
-    if Misc.isPausedByLua() then
+    if inventory.notpaused == true then
     inventoryopen = false
         Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
         Misc.unpause()
@@ -466,12 +483,12 @@ function inventory.onInputUpdate()
   end
 
   if inventory.activateinventory == true then
-      if Misc.isPausedByLua() then
+      if inventory.notpaused == true then
         Graphics.drawImage(inventory, 30, 508)
         Graphics.drawImage(selector, selectx, selecty)
       end
 
-        if Misc.isPausedByLua() then -- move cursor right
+        if inventory.notpaused == true then -- move cursor right
             if player.rawKeys.right == KEYS_PRESSED then
                 Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
                 selectx = selectx + 64
@@ -480,7 +497,7 @@ function inventory.onInputUpdate()
 
         
         end
-        if Misc.isPausedByLua() then -- move cursor left
+        if inventory.notpaused == true then -- move cursor left
             if player.rawKeys.left == KEYS_PRESSED then
                 Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
                 selectx = selectx - 64
@@ -488,22 +505,22 @@ function inventory.onInputUpdate()
             end
       end
 
-        if Misc.isPausedByLua() then -- if the cursor is on the far right or left, it will loop around
+        if inventory.notpaused == true then -- if the cursor is on the far right or left, it will loop around
             if selectx < 30 then
                 selectx = 30 + 320
             end 
         end
-        if Misc.isPausedByLua() then
+        if inventory.notpaused == true then
             if selectx > 30 + 320 then
                 selectx = 30
             end 
         end
-        if Misc.isPausedByLua() then
+        if inventory.notpaused == true then
             if state > 6 then
                 state = 1
             end
         end
-        if Misc.isPausedByLua() then
+        if inventory.notpaused == true then
             if state < 1 then
                 state = 6
             end
