@@ -3,6 +3,7 @@ local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
+local inventory = require("furyinventory")
 
 local blackscreen = Graphics.loadImage("blackscreen.png")
 
@@ -42,11 +43,12 @@ local levelname = Level.filename()
 local levelformat = Level.format()
 local costumes = playerManager.getCostumes(player.character)
 
-local paused = false;
-local paused_char = false;
-local paused_char_temp = false;
-local paused_tele = false;
-local pause_box;
+pausemenu.paused = false;
+pausemenu.paused_char = false;
+pausemenu.paused_char_temp = false;
+pausemenu.paused_tele = false;
+
+pausemenu.pause_box = nil
 local pause_height = 0;
 local pause_height_char = 350;
 local pause_width = 700;
@@ -59,7 +61,7 @@ local pause_index = 0
 local pause_index_char = 0
 local pause_index_tele = 0
 
-local pauseactive = false
+pausemenu.pauseactive = false
 local charactive = false
 local teleactive = false
 
@@ -83,7 +85,7 @@ local function nothing()
 end
 
 local function unpause()
-	paused = false
+	pausemenu.paused = false
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 end
@@ -97,16 +99,16 @@ local function switchtochar()
 	pause_index_char = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_char = 1 end)
 	cooldown = 1
-	paused_char = true
-	paused = false
+	pausemenu.paused_char = true
+	pausemenu.paused = false
 end
 
 local function pausemenureturn()
 	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
 	pause_index_char = 0
 	cooldown = 1
-	paused = true
-	paused_char = false
+	pausemenu.paused = true
+	pausemenu.paused_char = false
 end
 
 local function switchtotele()
@@ -114,20 +116,20 @@ local function switchtotele()
 	pause_index_tele = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_tele = 1 end)
 	cooldown = 1
-	paused_tele = true
-	paused = false
+	pausemenu.paused_tele = true
+	pausemenu.paused = false
 end
 
 local function pausemenureturnhub()
 	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
 	pause_index_tele = 0
 	cooldown = 1
-	paused = true
-	paused_tele = false
+	pausemenu.paused = true
+	pausemenu.paused_tele = false
 end
 
 local function x2modedisable()
-	paused = false
+	pausemenu.paused = false
 	Misc.unpause()
 	if SaveData.disableX2char == 0 then
 		SaveData.disableX2char = SaveData.disableX2char + 1
@@ -136,7 +138,7 @@ local function x2modedisable()
 end
 
 local function x2modeenable()
-	paused = false
+	pausemenu.paused = false
 	Misc.unpause()
 	if SaveData.disableX2char == 1 then
 		SaveData.disableX2char = SaveData.disableX2char - 1
@@ -148,7 +150,7 @@ local function quitgame()
 	Audio.MusicVolume(0)
 	Misc.saveGame()
 	SFX.play("_OST/_Sound Effects/savequit.ogg")
-	paused = false
+	pausemenu.paused = false
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -160,67 +162,67 @@ local function quitonly()
 end
 
 local function savegame()
-	paused = false
+	pausemenu.paused = false
 	SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
 	Misc.saveGame()
 	Misc.unpause()
 end
 
 local function exitlevelsave()
-	paused = false
+	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.7, true) Misc.unpause() Audio.MusicVolume(nil) Misc.saveGame() Level.exit() end)
 end
 
 local function exitlevel()
-	paused = false
+	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function restartlevel()
-	paused = false
+	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
-	paused = false
+	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
 local function warpzonehub()
-	paused = false
-	paused_tele = false
+	pausemenu.paused = false
+	pausemenu.paused_tele = false
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/level-select.ogg")
 	player:teleport(20496, 19520, bottomCenterAligned)
 end
 
 local function touristhub()
-	paused = false
-	paused_tele = false
+	pausemenu.paused = false
+	pausemenu.paused_tele = false
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/level-select.ogg")
 	player:teleport(-119968, -120128, bottomCenterAligned)
 end
 
 local function starthub()
-	paused = false
-	paused_tele = false
+	pausemenu.paused = false
+	pausemenu.paused_tele = false
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/level-select.ogg")
 	player:teleport(-200608, -200128, bottomCenterAligned)
 end
 
 local function switchhub()
-	paused = false
-	paused_tele = false
+	pausemenu.paused = false
+	pausemenu.paused_tele = false
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/level-select.ogg")
 	player:teleport(40176, 39876, bottomCenterAligned)
@@ -676,7 +678,7 @@ local function costumechangeright()
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	--Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
+	--Routine.run(function() pausemenu.paused_char = false pausemenu.paused_char_temp = true Routine.waitFrames(2) pausemenu.paused_char = true pausemenu.paused_char_temp = false end)
 end
 
 local function costumechangeleft()
@@ -691,11 +693,11 @@ local function costumechangeleft()
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	--Routine.run(function() paused_char = false paused_char_temp = true Routine.waitFrames(2) paused_char = true paused_char_temp = false end)
+	--Routine.run(function() pausemenu.paused_char = false pausemenu.paused_char_temp = true Routine.waitFrames(2) pausemenu.paused_char = true pausemenu.paused_char_temp = false end)
 end
 
 local function mainmenu()
-	paused = false
+	pausemenu.paused = false
 	Misc.unpause()
 	Misc.saveGame()
 	Level.load("SMAS - Start.lvlx", nil, nil)
@@ -706,13 +708,13 @@ local function wrong()
 end
 
 local function hubteleport()
-	paused = false
+	pausemenu.paused = false
 	Misc.unpause()
 	Level.load("MALC - HUB.lvlx", nil, nil)
 end
 
 local function dlcmapload()
-	paused = false
+	pausemenu.paused = false
 	Misc.unpause()
 	Level.load("SMAS - DLC World.lvlx", nil, nil)
 end
@@ -938,58 +940,58 @@ local function drawHUBTeleportMenu(y, alpha)
 end
 
 function pausemenu.onDraw(isSplit)
-	if paused then
+	if pausemenu.paused then
 		Misc.pause()
-		if(pause_box == nil) then
+		if(pausemenu.pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x00000077);
+		pausemenu.pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
-		Misc.pause();
+		--Misc.pause();
 	end
-	if not paused then
-		pause_box = nil
+	if not pausemenu.paused then
+		pausemenu.pause_box = nil
 	end
-	if paused_char then
+	if pausemenu.paused_char then
 		Misc.pause()
-		if(pause_box == nil) then
+		if(pausemenu.pause_box == nil) then
 			pause_height = drawCharacterMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x00000077);
+		pausemenu.pause_box:Draw(5, 0x00000077);
 		drawCharacterMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
-		Misc.pause();
+		--Misc.pause();
 	end
-	if not paused_char then
-		pause_box = nil
+	if not pausemenu.paused_char then
+		pausemenu.pause_box = nil
 	end
-	if paused_tele then
+	if pausemenu.paused_tele then
 		Misc.pause()
-		if(pause_box == nil) then
+		if(pausemenu.pause_box == nil) then
 			pause_height = drawHUBTeleportMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x00000077);
+		pausemenu.pause_box:Draw(5, 0x00000077);
 		drawHUBTeleportMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
 		Misc.pause();
 	end
-	if not paused_tele then
-		pause_box = nil
+	if not pausemenu.paused_tele then
+		pausemenu.pause_box = nil
 	end
-	if paused_char_temp then
+	if pausemenu.paused_char_temp then
 		--Misc.pause()
-		if(pause_box == nil) then
+		if(pausemenu.pause_box == nil) then
 			pause_height = drawCharacterMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x00000077);
+		pausemenu.pause_box:Draw(5, 0x00000077);
 		drawCharacterMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
@@ -1004,39 +1006,43 @@ local lastPauseKey = false;
 
 function pausemenu.onInputUpdate()
 	if(player.pauseKeyPressing == true and not lastPauseKey) then
-		if paused then
-			paused = false
-			paused_char = false
-			paused_tele = false
-			pauseactive = false
+		if pausemenu.paused then
+			pausemenu.paused = false
+			pausemenu.paused_char = false
+			pausemenu.paused_tele = false
+			pausemenu.pauseactive = false
 			SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
+			inventory.activateinventory = true
 		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
 			--Misc.pause();
-			paused = true
-			pauseactive = true
+			pausemenu.paused = true
+			pausemenu.pauseactive = true
 			pause_index = 0;
 			SFX.play("_OST/_Sound Effects/pausemenu.ogg")
+			inventory.activateinventory = false
 		elseif player.count(2) then
-			if paused then
-				paused = false
-				paused_char = false
-				paused_tele = false
-				pauseactive = false
+			if pausemenu.paused then
+				pausemenu.paused = false
+				pausemenu.paused_char = false
+				pausemenu.paused_tele = false
+				pausemenu.pauseactive = false
 				SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 				cooldown = 5
 				Misc.unpause()
 				player2:mem(0x11E,FIELD_BOOL,false)
+				inventory.activateinventory = true
 			end
 		elseif player.count(2) then
 			if(player2:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
 				--Misc.pause();
-				paused = true
-				pauseactive = true
+				pausemenu.paused = true
+				pausemenu.pauseactive = true
 				pause_index = 0;
 				SFX.play("_OST/_Sound Effects/pausemenu.ogg")
+				inventory.activateinventory = false
 			end
 		end
 		if cooldown <= 0 then
@@ -1056,7 +1062,7 @@ function pausemenu.onInputUpdate()
 	end
 	lastPauseKey = player.keys.pause;
 	
-	if(paused and pause_options) then
+	if(pausemenu.paused and pause_options) then
 		if(player.keys.down == KEYS_PRESSED) then
 			repeat
 				pause_index = (pause_index+1)%#pause_options;
@@ -1096,7 +1102,7 @@ function pausemenu.onInputUpdate()
 			end
 		end
 	end
-	if(paused_char and pause_options_char) then
+	if(pausemenu.paused_char and pause_options_char) then
 		if(player.keys.down == KEYS_PRESSED) then
 			repeat
 				pause_index_char = (pause_index_char+1)%#pause_options_char;
@@ -1128,7 +1134,7 @@ function pausemenu.onInputUpdate()
 			end
 		end
 	end
-	if(paused_tele and pause_options_tele) then
+	if(pausemenu.paused_tele and pause_options_tele) then
 		if(player.keys.down == KEYS_PRESSED) then
 			repeat
 				pause_index_tele = (pause_index_tele+1)%#pause_options_tele;
@@ -1163,10 +1169,10 @@ function pausemenu.onInputUpdate()
 end
 
 function pausemenu.onTick()
-	if(paused) then
-		Misc.pause();
+	if(pausemenu.paused) then
+		--Misc.pause();
 	end
-	if(paused_char) then
+	if(pausemenu.paused_char) then
 		if pause_index_char == 0 then
 			pause_index_char = 1
 		end
@@ -1174,7 +1180,7 @@ function pausemenu.onTick()
 			pause_options_char = 1
 		end
 	end
-	if(paused_tele) then
+	if(pausemenu.paused_tele) then
 		if pause_index_tele == 0 then
 			pause_index_tele = 1
 		end
@@ -1185,11 +1191,13 @@ function pausemenu.onTick()
 	if pausemenu.pauseactivated == true then
 		if player.pauseKeyPressing == false then
 			player.pauseKeyPressing = true
+			inventory.activateinventory = true
 		end
 	end
 	if pausemenu.pauseactivated == false then
 		if player.pauseKeyPressing == true then
 			player.pauseKeyPressing = false
+			inventory.activateinventory = false
 		end
 	end
 end

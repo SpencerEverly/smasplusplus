@@ -7,6 +7,8 @@ This is my first library and lua script, so I apologize if the code is a bit mes
 I would like to thank Enjl, Marioman2007, Sambo, Hoeloe, and Rednaxela for helping me
 with all this stuff. I probably would have gone insane if they didn't help.
 
+Modded by Spencer Everly
+
 --------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
 --]]
@@ -19,6 +21,8 @@ local inventory = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.
 local inventorysmol = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventorysmol.png"))
 local selector = Graphics.loadImage(Misc.resolveFile("inventorystuff/selector.png"))
 
+local warpTransition = require("warpTransition")
+
 local selection = false
 local selectx = 30
 local selecty = 508
@@ -26,7 +30,7 @@ local numx = 40
 local numy = 570
 
 
-local activateinventory = true--this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
+inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
 
 local inventoryopen = false
 
@@ -109,7 +113,7 @@ function inventory.onDraw()
 
     player.reservePowerup = 0 -- disables the item box
 
-    if activateinventory == true then
+    if inventory.activateinventory == true then
         if Misc.isPausedByLua() then
             numx = 54
             numy = 574
@@ -207,7 +211,7 @@ function inventory.onDraw()
         SaveData.inventory.hammer = minhammer
     end
 
-    if activateinventory == true then
+    if inventory.activateinventory == true then
         if Misc.isPausedByLua() then -- selects the powerup
             if player.rawKeys.jump == KEYS_PRESSED then
                 if player.powerup == powerup[state] then
@@ -274,7 +278,7 @@ function inventory.onDraw()
     end
 
 
-    if activateinventory == true then
+    if inventory.activateinventory == true then
         if Misc.isPausedByLua() then
             if SaveData.inventory.shroom == 0 then
                 Graphics.drawImage(noshroom, 30, 508 )
@@ -441,13 +445,13 @@ function inventory.onInputUpdate()
 --this bit makes sure the inventory doesn't clash with dialogue systems
     if inventoryopen == false then
         if player.keys.up == KEYS_PRESSED then
-            activateinventory = false
+            inventory.activateinventory = false
         end
     end
 
 
   if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
-  activateinventory = true
+  inventory.activateinventory = true
     if Misc.isPausedByLua() then
     inventoryopen = false
         Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
@@ -461,7 +465,7 @@ function inventory.onInputUpdate()
     end
   end
 
-  if activateinventory == true then
+  if inventory.activateinventory == true then
       if Misc.isPausedByLua() then
         Graphics.drawImage(inventory, 30, 508)
         Graphics.drawImage(selector, selectx, selecty)
