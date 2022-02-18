@@ -537,7 +537,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/JC Foster Takes it to the Moon/mm2wood.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/JC Foster Takes it to the Moon/mm2wood.ogg")
 		end
 	end
 	if currentCostume == "MARINK" then
@@ -554,19 +554,19 @@ function musicalchairs.onTick()
 			Audio.MusicChange(0, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|9;g=2.1")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|2;g=2")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=2")
+			Audio.MusicChange(1, "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=2")
+			Audio.MusicChange(2, "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|7;g=2")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|4;g=2")
+			Audio.MusicChange(2, "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|9;g=2.1")
 		end
 	end
 	if currentCostume == "MODERN" then
@@ -595,7 +595,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Modern Mario/Desert (VRC6 by TrojanHorse711).nsf|0;g=2.2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros. 3 (NES, VRC6 by skydev) - OST.nsf|1;g=2.4")
 		end
 	end
 	if currentCostume == "PRINCESSRESCUE" then
@@ -624,7 +624,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Princess Rescue/Overworld.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Princess Rescue/Overworld.ogg")
 		end
 	end
 	if currentCostume == "SMB0" then
@@ -653,7 +653,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros 0/Overworld2.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros 0/Overworld2.ogg")
 		end
 	end
 	if currentCostume == "SMG4" then
@@ -682,7 +682,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Smash Bros. Ultimate/Mario/a85_smb3_chijyou.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Smash Bros. Ultimate/Mario/a67_sm64_slider.ogg")
 		end
 	end
 	if currentCostume == "SMW-MARIO" then
@@ -805,7 +805,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros Spencer/Ice Cream Desert (Missing Creams).ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros Spencer/Athletic.ogg")
 		end
 	end
 	if currentCostume == "3-SMB1-RETRO-MODERN" then
@@ -834,7 +834,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros (NES)/Desert.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros (NES)/Athletic.ogg")
 		end
 	end
 	if currentCostume == "4-SMB1-SMAS" then
@@ -892,7 +892,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros 2 (NES)/Sky.ogg")
 		end
 	end
 	if currentCostume == "6-SMB2-SMAS" then
@@ -1022,22 +1022,22 @@ function musicalchairs.onTick()
 			Audio.MusicChange(3, "_OST/Super Mario World (Pirate)/Bonus.ogg")
 		end
 		if level == "SMB1 - W-1, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario World (Pirate)/Athletic.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Super Mario World (Pirate)/Desert.ogg")
+			Audio.MusicChange(1, "_OST/Super Mario World (Pirate)/Bonus.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Super Mario World (NES, Pirate) - OST.nsf|13;g=2.2")
+			Audio.MusicChange(2, "_OST/Super Mario World (Pirate)/Desert.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario World (Pirate)/Athletic.ogg")
 		end
 	end
 	if currentCostume == "13-SMBDX" then
@@ -1075,27 +1075,27 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Underground.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Underground Level.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
+			Audio.MusicChange(3, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-3.lvlx" then
 			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/The Tree Skies.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Super Mario Brothers Water Level.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 	end
 	if currentCostume == "15-SMA2" then
@@ -1104,27 +1104,27 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Underground.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Underground Level.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
+			Audio.MusicChange(3, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-3.lvlx" then
 			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/The Tree Skies.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Super Mario Brothers Water Level.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 	end
 	if currentCostume == "16-SMA4" then
@@ -1135,25 +1135,25 @@ function musicalchairs.onTick()
 		if level == "SMB1 - W-1, L-2.lvlx" then
 			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Underground Level.ogg")
 			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
-			Audio.MusicChange(3, "_OST/Super Mario Advance 4/Bonus Level.ogg")
+			Audio.MusicChange(3, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-3.lvlx" then
 			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/The Tree Skies.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Underground Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 4/Super Mario Brothers Water Level.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
 		end
 	end
 	if currentCostume == "17-NSMBDS-SMBX" then
@@ -1162,27 +1162,27 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Bonus Stage.ogg")
 		end
 		if level == "SMB1 - W-1, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Underground.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Underground Theme.ogg")
+			Audio.MusicChange(2, "_OST/New Super Mario Bros. DS/Walking the Plains.ogg")
+			Audio.MusicChange(3, "_OST/New Super Mario Bros. DS/Bonus Stage.ogg")
 		end
 		if level == "SMB1 - W-1, L-3.lvlx" then
 			Audio.MusicChange(0, "_OST/New Super Mario Bros. DS/Mushroom Waltz.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Walking the Plains.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/New Super Mario Bros. DS/Walking the Hot Desert.ogg")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Bonus Stage.ogg")
+			Audio.MusicChange(2, "_OST/New Super Mario Bros. DS/Underground Theme.ogg")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Underwater.ogg")
+			Audio.MusicChange(2, "_OST/New Super Mario Bros. DS/Walking the Hot Desert.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/New Super Mario Bros. DS/Mushroom Waltz.ogg")
 		end
 	end
 	if currentCostume == "18-NSMBDS-ORIGINAL" then
@@ -1191,27 +1191,27 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Bonus Stage.ogg")
 		end
 		if level == "SMB1 - W-1, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Underground.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Underground Theme.ogg")
+			Audio.MusicChange(2, "_OST/New Super Mario Bros. DS/Walking the Plains.ogg")
+			Audio.MusicChange(3, "_OST/New Super Mario Bros. DS/Bonus Stage.ogg")
 		end
 		if level == "SMB1 - W-1, L-3.lvlx" then
 			Audio.MusicChange(0, "_OST/New Super Mario Bros. DS/Mushroom Waltz.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Walking the Plains.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/New Super Mario Bros. DS/Walking the Hot Desert.ogg")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Bonus Stage.ogg")
+			Audio.MusicChange(2, "_OST/New Super Mario Bros. DS/Underground Theme.ogg")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/New Super Mario Bros. DS/Underwater.ogg")
+			Audio.MusicChange(2, "_OST/New Super Mario Bros. DS/Walking the Hot Desert.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/New Super Mario Bros. DS/Mushroom Waltz.ogg")
 		end
 	end
 	if currentCostume == "A2XT-IRIS" then
@@ -1231,16 +1231,16 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/Adventures of Demo/asmt-imperial.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Adventures of Demo/happyska.it")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/Subway_spc.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/monkey_island_v1.xm")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/happyska.it")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Adventures of Demo/humble_down_theroad.mod")
 		end
 	end
 	if currentCostume == "LARRYTHECUCUMBER" then
@@ -1257,7 +1257,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(0, "_OST/VeggieTales/The Hairbrush Song.ogg")
 		end
 		if level == "SMB1 - W-1, L-4.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Album.spc|0;g=2.7")
+			Audio.MusicChange(1, "_OST/VeggieTales/Theme Song.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
 			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
@@ -1269,7 +1269,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/VeggieTales/The Hairbrush Song.ogg")
 		end
 	end
 	if currentCostume == "UNDERTALE-FRISK" then
@@ -1393,7 +1393,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros 2 (NES)/Sky.ogg")
 		end
 	end
 	if currentCostume == "4-SMB3-RETRO" then
@@ -1422,7 +1422,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|8;g=2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|9;g=2")
 		end
 	end
 	if currentCostume == "5-SMB3-SMAS" then
@@ -1471,16 +1471,16 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/Adventures of Demo/asmt-imperial.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Adventures of Demo/happyska.it")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/Subway_spc.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/monkey_island_v1.xm")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/happyska.it")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Adventures of Demo/humble_down_theroad.mod")
 		end
 	end
 	if currentCostume == "DAISY" then
@@ -1529,16 +1529,16 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.2")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.2")
+			Audio.MusicChange(1, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.2")
+			Audio.MusicChange(2, "_OST/Kirby Superstar/14 White Wing Dynablade.spc|0;g=2.1")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.2")
+			Audio.MusicChange(2, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Kirby Superstar/16 Peanut Plain.spc|0;g=2.4")
 		end
 	end
 	if currentCostume == "PAULINE" then
@@ -1633,7 +1633,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros 2 (NES)/Sky.ogg")
 		end
 	end
 	if currentCostume == "4-SMB2-RETRO-YELLOW" then
@@ -1662,7 +1662,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros 2 (NES)/Sky.ogg")
 		end
 	end
 	if currentCostume == "5-SMB2-RETRO-RED" then
@@ -1691,7 +1691,7 @@ function musicalchairs.onTick()
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Bros 2 (NES)/Sky.ogg")
 		end
 	end
 	if currentCostume == "6-SMB3-BLUE" then
@@ -1769,16 +1769,16 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/Adventures of Demo/asmt-imperial.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Adventures of Demo/happyska.it")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/Subway_spc.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/monkey_island_v1.xm")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/happyska.it")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Adventures of Demo/humble_down_theroad.mod")
 		end
 	end
 	if currentCostume == "SEE-TANGENT" then
@@ -2213,17 +2213,17 @@ function musicalchairs.onTick()
 		if level == "SMB1 - W-1, L-4.lvlx" then
 			Audio.MusicChange(1, "_OST/Adventures of Demo/asmt-imperial.spc|0;g=2.5")
 		end
-		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+	if level == "SMB1 - W-2, L-1.lvlx" then
+			Audio.MusicChange(0, "_OST/Adventures of Demo/happyska.it")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/Subway_spc.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/Medivo.spc|0;g=2.5")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Adventures of Demo/monkey_island_v1.xm")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/happyska.it")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Adventures of Demo/humble_down_theroad.mod")
 		end
 	end
 	if currentCostume == "NESS" then
@@ -2497,16 +2497,16 @@ function musicalchairs.onTick()
 			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Overworld.ogg")
 		end
 		if level == "SMB1 - W-2, L-1.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Desert.spc|0;g=2.2")
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Bonus.spc|0;g=2.7")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 3/Flower Garden.ogg")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Bonus Game.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 3/Underground BGM.ogg")
 		end
 		if level == "SMB1 - W-2, L-2.lvlx" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros/Swimming.spc|0;g=2.6")
-			Audio.MusicChange(2, "_OST/Super Mario Bros/Desert.spc|0;g=2.5")
+			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Overworld.ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance 3/Flower Garden.ogg")
 		end
 		if level == "SMB1 - W-2, L-3.lvlx" then
-			Audio.MusicChange(0, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(0, "_OST/Super Mario Advance 3/Athletic.ogg")
 		end
 	end
 	
@@ -2548,7 +2548,7 @@ function musicalchairs.onTick()
 	
 	
 	
-	if character == "CHARACTER_STEVE" then
+	if character == "CHARACTER_ULTIMATERINKA" then
 		if level == "SMB1 - W-1, L-1.lvlx" then
 			Audio.MusicChange(0, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
 			Audio.MusicChange(1, "_OST/Super Mario Bros/Bonus.spc|0;g=2.6")
