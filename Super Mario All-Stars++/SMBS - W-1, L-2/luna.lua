@@ -31,6 +31,10 @@ function onTick()
 		Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/Star.ogg")
 	end
 	if currentCostume == "1-SMB1-RETRO" then
+		Audio.MusicChange(0, "_OST/Super Mario Bros (NES)/Athletic (SMBS).ogg")
+		Audio.MusicChange(1, "_OST/Super Mario Bros Spencer/Star.ogg")
+	end
+	if currentCostume == "11-SMA1" then
 		Audio.MusicChange(0, "_OST/Super Mario Bros Spencer/Athletic.ogg")
 		Audio.MusicChange(1, "_OST/Super Mario Bros Spencer/Star.ogg")
 	end

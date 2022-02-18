@@ -87,7 +87,7 @@ end
 local function x2modeenable()
 	paused = false
 	Misc.unpause()
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == 1 then
 		SaveData.disableX2char = SaveData.disableX2char - 1
 		Level.load(Level.filename())
 	end
