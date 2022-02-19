@@ -1,23 +1,44 @@
-megaluavania = require("megaluavania")
+local megaluavania = require("megaluavania")
+local rng = API.load("rng")
+local colliders = API.load("colliders")
 
-if SaveData.ut_encounter == nil then
-	SaveData.ut_encounter = SaveData.ut_encounter or 0
+local undertaledepends = {}
+
+function undertaledepends.onInitAPI()
+	registerEvent(undertaledepends,"onEvent")
+	registerEvent(undertaledepends,"onPostNPCKill")
+	registerEvent(undertaledepends,"onPlayerHarm")
+	
+	eventsRegistered = true
 end
-if SaveData.ut_poiton == nil then
-	SaveData.ut_poiton = SaveData.ut_poiton or 0
+
+if SaveData.utencounter == nil then
+	SaveData.utencounter = 0
+end
+if SaveData.utpoiton == nil then
+	SaveData.utpoiton = 1
 end 
-if SaveData.ut_healfood == nil then
-	SaveData.ut_healfood = SaveData.ut_healfood or 0
+if SaveData.uthealfood == nil then
+	SaveData.uthealfood = 1
 end
-if SavaData.ut_xp == nil then
-	SavaData.ut_xp = SavaData.ut_xp or 0
+if SaveData.utxp == nil then
+	SaveData.utxp = 0
+end
+if SaveData.utspare == nil then
+	SaveData.utspare = 0
 end
 
+Misc.saveGame()
+
+megaluavania.playerHP = 20
 megaluavania.playerHPMax = 20
 megaluavania.LV = 1
 megaluavania.playerAtk = 15
+
+local eventsRegistered = false
+
 megaluavania.name = "Frisk"
-megaluavania.exp = undertale:get("xp")
+megaluavania.exp = SaveData.utxp
 megaluavania.gold = 0
 megaluavania.expPerLV = function(LV)
 	return 30 + 10 * LV * LV
@@ -38,37 +59,55 @@ megaluavania.atkPerLV = function(LV)
 end
 megaluavania.items = {}
 
-for i = 1,SaveData.ut_healfood do
-	table.insert(megaluavania.items,{name = "Monster Candy",text = {"* You ate the Monster Candy.<br>* ... tastes like licorice.<br>* You recovered 10 HP!<br>"},rec = 10})
+for i = 1,SaveData.uthealfood do
+	table.insert(megaluavania.items,{name = "Health Snacks",text = {"* You ate the Health Snacks.<br>* It's bad tastes reminds you of<br>how much you hate brocoilli.<br>"},rec = 10})
 end
 
-for i = 1,SaveData.ut_poiton do
-	table.insert(megaluavania.items,{name = "Spider Cider",text = {"* You drank the Spider Cider.<br>  You recovered 24 HP!<br>"},rec = 24})
+for i = 1,SaveData.utpoiton do
+	table.insert(megaluavania.items,{name = "Orange Wine",text = {"* You drank the Orange Wine.<br>* It tastes like a mix between orange<br>juice and wine (Duh).",""},rec = 20})
 end
 
---textboxes got 32 chars, dialogue boxes 14
-
-function onStart()
-	if SaveData.ut_encounter == 1 then
-		triggerEvent("ut_goombaspawn")
-	end
+function undertaledepends.onPostNPCKill(npc, eventName)
+    if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
+        triggerEvent("UNDERTALEBATTLEGoomba")
+		SaveData.utencounter = 1
+    end
+	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
+        --SaveData.koopaStomps = SaveData.koopaStomps + 1
+    --end
 end
 
-local goomba = Graphics.loadImage("megaluavania/goomba_normal.png")
-local goombahurt = Graphics.loadImage("megaluavania/goomba_hurt.png")
+function undertaledepends.onPlayerHarm(npc, id, eventName)
+    if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
+        triggerEvent("UNDERTALEBATTLEGoomba")
+		SaveData.utencounter = 1
+    end
+	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
+        --SaveData.koopaStomps = SaveData.koopaStomps + 1
+    --end
+end
 
 local goomba = megaluavania.newEncounter()
 
+local goombamain = Graphics.loadImage("megaluavania/goomba_normal.png")
+local goombahurt = Graphics.loadImage("megaluavania/goomba_hurt.png")
+local goombaattack1 = Graphics.loadImage("megaluavania/goomba_attack1.png")
+
+local goombatwirl = {}
+local goombaTwist = {}
+local goombaAttacks = {}
+
 goomba.name = "Goomba"
-goomba.NPCID = nil
-goomba.event = "goombautspawn"
-goomba.hideLayers = {"Default"}
+goomba.NPCID = 1
+goomba.event = "UNDERTALEBATTLEGoomba"
+--goomba.hideLayers = {""}
 goomba.enemyHPMax = 45
-goomba.overrideDeath = false
+goomba.overrideDeath = true
 goomba.enemyDef = -3
 goomba.canspare = true
 goomba.canflee = true
-goomba.randomDialogue = {{req = function() return goomba.turn == 1; end,text = {{{text = "<wave>Bowser<br>wants you<br>dead,<br>hero!</wave>",sprite = goomba}}}}
+goomba.randomDialogue = {{req = function() return goomba.turn == 1; end,text = {{{text = "<wave>Bowser<br>wants you<br>dead,<br>hero!</wave>",sprite = goombamain}}}}}
+goomba.randomDialogue = {{req = function() return goomba.turn == 2; end,text = {{{text = "<wave>All hail<br>King Bowser!</wave>",sprite = goombamain}}}}}
 goomba.flavorText = {{req = function() return goomba.turn == 1; end,text = {"* A Goomba appeared!"}},
 					{req = function() return goomba.turn == 2; end,text = {"* The Goomba thinks you're part<br>  of Mario's team!"}},
 					{req = function() return goomba.canspare; end,text = {"* The Goomba is sparing you."}},
@@ -77,68 +116,131 @@ goomba.acts = {	{name = "Check",text = {"* Goomba ATK 15 DEF -3<br>* Part of the
 				{name = "Talk",text = {"* You try to talk to the Goomba,<br>  reminding him that you're<br>  not Mario."}}}
 goomba.typeSounds = {"littleDialogue/dr/typewriter.ogg"}
 goomba.music = "_OST/Undertoad/Tough and Tumble.ogg"
-goomba.sprite = goomba
-goomba.spriteHurt = goombahurt
+goomba.sprite = goombamain
+goomba.spriteHurt = goombamain
 goomba.gold = 25
 goomba.exp = 220
-
-local new = {	boxWidth = 580,
-				boxHeight = 140,
-				time = math.huge}
-
-new.func = function(counter)
-	megaluavania.heart.move = false
-	megaluavania.heart.y = megaluavania.centerY - 12
-	textblox.print("Yes",210,megaluavania.centerY - 16,megaluavania.determination)
-	textblox.print("No",540,megaluavania.centerY - 16,megaluavania.determination)
-	if newChoice == 1 then
-		megaluavania.heart.x = 185
-		if player.rawKeys.right == KEYS_PRESSED then
-			newChoice = 2
-			Audio.playSFX(megaluavania.resourcePath.."menu1.ogg")
-		elseif player.rawKeys.jump == KEYS_PRESSED then
-			new.stop = true
-			gotTutorial = 1
-			Audio.playSFX(megaluavania.resourcePath.."menu2.ogg")
-			megaluavania.heart.move = true
-		end
-	else
-		megaluavania.heart.x = 515
-		if player.rawKeys.left == KEYS_PRESSED then
-			newChoice = 1
-			Audio.playSFX(megaluavania.resourcePath.."menu1.ogg")
-		elseif player.rawKeys.jump == KEYS_PRESSED then
-			new.stop = true
-			gotTutorial = 2
-			Audio.playSFX(megaluavania.resourcePath.."menu2.ogg")
-			megaluavania.heart.move = true
-		end
-	end
-end
-
-local tut1 = {	boxWidth = 250,
-				boxHeight = 200,
-				time = math.huge}
-				
-tut1.func = function(counter)
+					
+goombaAttacks[1] = {	boxWidth = 200,
+					boxHeight = 200,
+					time = 320}
+					
+goombaAttacks[1].func = function(counter)
 	if counter == 0 then
-		table.insert(fire1,megaluavania.createBullet{sprite = joeyFire,x = megaluavania.centerX - 8,y = megaluavania.centerY - tut1.boxHeight/2 + 5,height = 16,dmg = 7,nFrames = 4,frameSpeed = 6})
+		goombaTwist = {}
+		for i = 1,4 do
+			table.insert(goombaTwist,{x = rng.randomInt(megaluavania.centerX - goombaAttacks[3].boxWidth/2 + 5,megaluavania.centerX + goombaAttacks[3].boxWidth/2 - 31),y = rng.randomInt(megaluavania.centerY - goombaAttacks[3].boxHeight/2 + 5,megaluavania.centerY + goombaAttacks[3].boxHeight/2 - 17),speedX = 1.5*(2*rng.randomInt(0,1) - 1),speedY = 1.5*(2*rng.randomInt(0,1) - 1)})
+		end
 	end
-	if megaluavania.heart.isMoving then
-		hasMoved = true
+	if counter == 40 then
+		for k,v in pairs(goombaTwist) do
+			goombatwirl[k] = megaluavania.createBullet({sprite = goombaattack1,x = v.x,y = v.y,dmg = 2})
+		end
 	end
-	for _,v in pairs(fire1) do
-		v.y = math.min(v.y + 1,megaluavania.centerY + tut1.boxHeight/2 - 21)
-		if megaluavania.heart.invincibility ~= 0 then
-			tut1.stop = true
-			if hasMoved then
-				tutDia[1] = {{text = "<wave>Erm...<br>Are you<br>serious?</wave>",sprite = goomba},{text = "<wave>That was<br>literally<br>one bullet.</wave>",sprite = joeySassy},{text = "<wave>You know,<br>forget it,<br>I hope you<br>learned your<br>lesson.</wave>",sprite = joeySad},{text = "<wave>So, next up:<br>Cyan bullets.<br>Just don't<br>move and<br>they won't<br>hurt you.</wave>",sprite = joey,func = function() tutTurn = 3; end}}
-			else
-				tutDia[1] = {{text = "<wave>Erm...<br>Are you<br>serious?</wave>",sprite = goomba},{text = "<wave>You do know<br>that you can<br>move around,<br>right?</wave>",sprite = joeySassy},{text = "<wave>Wait,<br>actually, it<br>seems to be<br>your lucky<br>day!</wave>",sprite = joeyWink},{text = "<wave>Next up are<br>cyan bullets.<br>Just continue<br>not moving and<br>they won't<br>hurt you.</wave>",sprite = joey,func = function() tutTurn = 3; end}}
-			end
-		elseif v.y == megaluavania.centerY + tut1.boxHeight/2 - 21 then
-			tut1.stop = true
-			tutDia[1] = {{text = "<wave>Wow,<br>good job.</wave>",sprite = goomba},{text = "<wave>You dodged<br>one bullet.</wave>",sprite = joeySassy},{text = "<wave>I hope you're<br>proud of<br>yourself.</wave>",sprite = goomba},{text = "<wave>So, next up:<br>Cyan bullets.<br>Just don't<br>move and<br>they won't<br>hurt you.</wave>",sprite = goomba,func = function() tutTurn = 3; end}}
+	for k,v in ipairs(goombaTwist) do
+		v.x = math.min(megaluavania.centerX + goombaAttacks[3].boxWidth/2 - 31,math.max(megaluavania.centerX - goombaAttacks[3].boxWidth/2 + 5,v.x + v.speedX))
+		if v.x == megaluavania.centerX + goombaAttacks[3].boxWidth/2 - 31 or v.x == megaluavania.centerX - goombaAttacks[3].boxWidth/2 + 5 then
+			v.speedX = -v.speedX
+		end
+		v.y = math.min(megaluavania.centerY + goombaAttacks[3].boxHeight/2 - 17,math.max(megaluavania.centerY - goombaAttacks[3].boxHeight/2 + 5,v.y + v.speedY))
+		if v.y == megaluavania.centerY + goombaAttacks[3].boxHeight/2 - 17 or v.y == megaluavania.centerY - goombaAttacks[3].boxHeight/2 + 5 then
+			v.speedY = -v.speedY
+		end
+		if goombatwirl[k] ~= nil then
+			goombatwirl[k].x = v.x
+			goombatwirl[k].y = v.y
+		end
+	end
+	if counter < 40 then
+		for _,v in ipairs(goombaTwist) do
+			Graphics.drawImage(goombaattack1,v.x,v.y,counter/40)
 		end
 	end
 end
+
+goombaAttacks[2] = {	boxWidth = 200,
+					boxHeight = 200,
+					time = 320}
+					
+goombaAttacks[2].func = function(counter)
+	if counter == 0 then
+		goombaTwist = {}
+		for i = 1,4 do
+			table.insert(goombaTwist,{x = rng.randomInt(megaluavania.centerX - goombaAttacks[3].boxWidth/2 + 5,megaluavania.centerX + goombaAttacks[3].boxWidth/2 - 31),y = rng.randomInt(megaluavania.centerY - goombaAttacks[3].boxHeight/2 + 5,megaluavania.centerY + goombaAttacks[3].boxHeight/2 - 17),speedX = 1.5*(2*rng.randomInt(0,1) - 1),speedY = 1.5*(2*rng.randomInt(0,1) - 1)})
+		end
+	end
+	if counter == 40 then
+		for k,v in pairs(goombaTwist) do
+			goombatwirl[k] = megaluavania.createBullet({sprite = goombaattack1,x = v.x,y = v.y,dmg = 2})
+		end
+	end
+	for k,v in ipairs(goombaTwist) do
+		v.x = math.min(megaluavania.centerX + goombaAttacks[3].boxWidth/2 - 31,math.max(megaluavania.centerX - goombaAttacks[3].boxWidth/2 + 5,v.x + v.speedX))
+		if v.x == megaluavania.centerX + goombaAttacks[3].boxWidth/2 - 31 or v.x == megaluavania.centerX - goombaAttacks[3].boxWidth/2 + 5 then
+			v.speedX = -v.speedX
+		end
+		v.y = math.min(megaluavania.centerY + goombaAttacks[3].boxHeight/2 - 17,math.max(megaluavania.centerY - goombaAttacks[3].boxHeight/2 + 5,v.y + v.speedY))
+		if v.y == megaluavania.centerY + goombaAttacks[3].boxHeight/2 - 17 or v.y == megaluavania.centerY - goombaAttacks[3].boxHeight/2 + 5 then
+			v.speedY = -v.speedY
+		end
+		if goombatwirl[k] ~= nil then
+			goombatwirl[k].x = v.x
+			goombatwirl[k].y = v.y
+		end
+	end
+	if counter < 40 then
+		for _,v in ipairs(goombaTwist) do
+			Graphics.drawImage(goombaattack1,v.x,v.y,counter/40)
+		end
+	end
+end
+	
+goombaSpareA =	{	boxWidth = 175,
+					boxHeight = 175,
+					time = 1}
+				
+goombaSpareA.func = function(counter)
+end
+
+function megaluavania.onAttack(encounter)
+	if encounter == goomba then
+		if goomba.canspare then
+			return goomba.goombaSpareA
+		elseif goombaAttacks1 then
+			return goomba.goombaAttacks1
+		elseif goombaAttacks2 then
+			return goomba.goombaAttacks2
+		end
+	end
+end
+
+function megaluavania.onFight(encounter)
+	if encounter == goomba then
+		if encounter.turn == 1 and megaluavania.dmg > 0 then
+			megaluavania.dmg = 15
+			return {{text = "<wave>All hail<br>King Bowser!<br></wave>",sprite = goombamain}}
+		end
+		if encounter.turn == 2 and megaluavania.dmg > 0 then
+			megaluavania.dmg = 15
+			return {{text = "<wave>STOP!<br>I wanna live,<br>not die from<br>some girl!</wave>",sprite = goombamain}}
+		end
+	end
+end
+
+function megaluavania.onKill(encounter)
+	if encounter == goomba then
+		SaveData.utencounter = 0
+		SaveData.utxp = megaluavania.exp
+		Misc.saveGame()
+	end
+end
+
+function megaluavania.onSpareDialogue(encounter)
+	if encounter == goomba then
+		if encounter.turn ~= 1 then
+			SaveData.utspare = SaveData.utspare + 1
+		end
+	end
+end
+
+return undertaledepends

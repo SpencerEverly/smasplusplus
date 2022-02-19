@@ -31,6 +31,8 @@ textblox.overrideMessageBox = false
 
 textblox.currentMessage = nil
 
+textblox.active = false
+
 
 	
 		
@@ -44,7 +46,7 @@ textblox.currentMessage = nil
 	function textblox.getPath (filename)		
 		--windowDebug ("TEST")
 		
-		local localPath = Misc.resolveFile (filename)  
+		local localPath = Misc.resolveFile(filename)  
 						
 		if  localPath  ~=  nil  then
 			return localPath
@@ -117,7 +119,7 @@ do
 				thisFont.imageRef = properties["image"]
 			else
 				thisFont.imagePath = properties["imagePath"]  or  ""
-				thisFont.imageRef = Graphics.loadImage (Misc.resolveFile(thisFont.imagePath))
+				thisFont.imageRef = Graphics.loadImage(Misc.resolveGraphicsFile(thisFont.imagePath))
 			end
 			
 			thisFont.charWidth = properties["charWidth"]  or  16
@@ -208,21 +210,21 @@ end
 do 
 	textblox.FONT_DEFAULT = textblox.Font (textblox.FONTTYPE_DEFAULT, 4)  
 
-	textblox.IMGNAME_DEFAULTSPRITEFONT 		= textblox.getPath ("font_default.png")
-	textblox.IMGNAME_DEFAULTSPRITEFONTX2 	= textblox.getPath ("font_default_x2.png")
-	textblox.IMGNAME_DEFAULTSPRITEFONT2 	= textblox.getPath ("font_default2.png")
-	textblox.IMGNAME_DEFAULTSPRITEFONT2X2 	= textblox.getPath ("font_default2_x2.png")
-	textblox.IMGNAME_DEFAULTSPRITEFONT3 	= textblox.getPath ("font_default3.png")
-	textblox.IMGNAME_DEFAULTSPRITEFONT3X2 	= textblox.getPath ("font_default3_x2.png")
+	textblox.IMGNAME_DEFAULTSPRITEFONT 		= textblox.getPath ("textblox/font_default.png")
+	textblox.IMGNAME_DEFAULTSPRITEFONTX2 	= textblox.getPath ("textblox/font_default_x2.png")
+	textblox.IMGNAME_DEFAULTSPRITEFONT2 	= textblox.getPath ("textblox/font_default2.png")
+	textblox.IMGNAME_DEFAULTSPRITEFONT2X2 	= textblox.getPath ("textblox/font_default2_x2.png")
+	textblox.IMGNAME_DEFAULTSPRITEFONT3 	= textblox.getPath ("textblox/font_default3.png")
+	textblox.IMGNAME_DEFAULTSPRITEFONT3X2 	= textblox.getPath ("textblox/font_default3_x2.png")
 
-	textblox.IMGNAME_BUBBLE_BORDER_U 		= textblox.getPath ("bubbleBorderU.png")
-	textblox.IMGNAME_BUBBLE_BORDER_D 		= textblox.getPath ("bubbleBorderD.png")
-	textblox.IMGNAME_BUBBLE_BORDER_L 		= textblox.getPath ("bubbleBorderL.png")
-	textblox.IMGNAME_BUBBLE_BORDER_R 		= textblox.getPath ("bubbleBorderR.png")
-	textblox.IMGNAME_BUBBLE_BORDER_UL 		= textblox.getPath ("bubbleBorderUL.png")
-	textblox.IMGNAME_BUBBLE_BORDER_UR 		= textblox.getPath ("bubbleBorderUR.png")
-	textblox.IMGNAME_BUBBLE_BORDER_DL 		= textblox.getPath ("bubbleBorderDL.png")
-	textblox.IMGNAME_BUBBLE_BORDER_DR 		= textblox.getPath ("bubbleBorderDR.png")
+	textblox.IMGNAME_BUBBLE_BORDER_U 		= textblox.getPath ("textblox/bubbleBorderU.png")
+	textblox.IMGNAME_BUBBLE_BORDER_D 		= textblox.getPath ("textblox/bubbleBorderD.png")
+	textblox.IMGNAME_BUBBLE_BORDER_L 		= textblox.getPath ("textblox/bubbleBorderL.png")
+	textblox.IMGNAME_BUBBLE_BORDER_R 		= textblox.getPath ("textblox/bubbleBorderR.png")
+	textblox.IMGNAME_BUBBLE_BORDER_UL 		= textblox.getPath ("textblox/bubbleBorderUL.png")
+	textblox.IMGNAME_BUBBLE_BORDER_UR 		= textblox.getPath ("textblox/bubbleBorderUR.png")
+	textblox.IMGNAME_BUBBLE_BORDER_DL 		= textblox.getPath ("textblox/bubbleBorderDL.png")
+	textblox.IMGNAME_BUBBLE_BORDER_DR 		= textblox.getPath ("textblox/bubbleBorderDR.png")
 
 
 	textblox.IMGREF_DEFAULTSPRITEFONT 		= Graphics.loadImage (textblox.IMGNAME_DEFAULTSPRITEFONT)
@@ -689,13 +691,13 @@ do
 		thisTextBlock.closeSound = properties["closeSound"] or ""
 		
 		if  (thisTextBlock.startSound ~= "")  then
-			Audio.playSFX (textblox.getPath (thisTextBlock.startSound))
+			SFX.play (textblox.getPath (thisTextBlock.startSound))
 		end
 		
 		thisTextBlock.typeSoundChunks = {}
 		if  #thisTextBlock.typeSounds > 0  then
 			for  k,v in pairs (thisTextBlock.typeSounds)  do
-				thisTextBlock.typeSoundChunks[k] = Audio.SfxOpen (textblox.getPath (v))
+				thisTextBlock.typeSoundChunks[k] = SFX.open(textblox.getPath(v))
 			end
 		end
 		thisTextBlock.typeUsedChannel = 12
@@ -1041,7 +1043,7 @@ do
 		if  self.finishSoundPlayed == false  then
 			self.finishSoundPlayed = true
 			if  (self.finishSound ~= "")  then
-				Audio.playSFX (textblox.getPath (self.finishSound))
+				SFX.play (textblox.getPath(self.finishSound))
 			end
 		end
 	end
@@ -1071,7 +1073,7 @@ do
 		
 		-- Play close sound
 		if  (self.closeSound ~= "")  then
-			Audio.playSFX (textblox.getPath (self.closeSound))
+			SFX.play(textblox.getPath (self.closeSound))
 		end
 		
 		-- Delete
@@ -1217,10 +1219,10 @@ do
 						-- Play sound effect
 						elseif  commandName == 'sound' then
 							if  commandArgs ~= nil then
-								local sound = Misc.resolveFile (commandArgs)
+								local sound = Misc.resolveSoundFile (commandArgs)
 								
 								if sound ~= nil  then
-									Audio.playSFX (textblox.getPath (sound))
+									SFX.play(textblox.getPath (sound))
 								end
 							end
 							
@@ -1497,7 +1499,10 @@ do
 	
 	
 	function textblox.onMessageBox(eventObj, message)
-		if textblox.overrideMessageBox == true  then
+		if textblox.active == false then
+			--Nothing
+		end
+		if textblox.overrideMessageBox == true and textblox.active == true then
 			eventObj.cancelled = true
 			mem(0x00B250E4, FIELD_STRING, "")
 			textblox.currentMessage = TextBlock.create (400,192, message, textblox.overrideProps)

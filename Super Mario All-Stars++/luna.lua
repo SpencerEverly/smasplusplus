@@ -660,7 +660,7 @@ function onTick()
 end
 
 function onPostNPCKill(npc, harmType)
-    if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
+    if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
         SaveData.goombaStomps = SaveData.goombaStomps + 1
     end
 	if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then

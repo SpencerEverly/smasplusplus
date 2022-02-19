@@ -6,10 +6,11 @@
 local megaluavania = {}
 local colliders = API.load("colliders")
 local rng = API.load("rng")
-local textplus = API.load("textplus")
 local playerAnim = API.load("playerAnim")
 local textblox = API.load("textblox")
 local particles = API.load("particles")
+local inventory = require('furyinventory')
+local pausemenu = require("pausemenu")
 
 local cooldown = 0
 
@@ -58,13 +59,17 @@ megaluavania.DIRECTION_LEFT = 3
 megaluavania.BOUNDS_BOTH = 0
 megaluavania.BOUNDS_NONE = 1
 
-local blackscreenshow = false
+megaluavania.transitionTimer = 0
 
-local determinationGFX = Graphics.loadImage("determination.png") or Graphics.loadImage(megaluavania.resourcePath.."determination.png")
-local determinationYGFX = Graphics.loadImage("determinationYellow.png") or Graphics.loadImage(megaluavania.resourcePath.."determinationYellow.png")
-local dotumCheGFX = Graphics.loadImage("dotumChe.png") or Graphics.loadImage(megaluavania.resourcePath.."dotumChe.png")
-local damageGFX = Graphics.loadImage("damage.png") or Graphics.loadImage(megaluavania.resourcePath.."damage.png")
-local nameGFX = Graphics.loadImage("name.png") or Graphics.loadImage(megaluavania.resourcePath.."name.png")
+local blackscreenshow = false
+local mainblackscreenshow = false
+local hudshow = true
+
+local determinationGFX = Graphics.loadImage(Misc.episodePath().."megaluavania/determination.png")
+local determinationYGFX = Graphics.loadImage(Misc.episodePath().."megaluavania/determinationYellow.png")
+local dotumCheGFX = Graphics.loadImage(Misc.episodePath().."megaluavania/dotumChe.png")
+local damageGFX = Graphics.loadImage(Misc.episodePath().."megaluavania/damage.png")
+local nameGFX = Graphics.loadImage(Misc.episodePath().."megaluavania/name.png")
 
 local determinationFProps = {charWidth = 16,charHeight = 32,image = determinationGFX,kerning = 0}
 megaluavania.determination = textblox.Font(textblox.FONTTYPE_SPRITE,determinationFProps)
@@ -80,12 +85,6 @@ megaluavania.damageF = textblox.Font(textblox.FONTTYPE_SPRITE,damageFProps)
 
 local nameFProps = {charWidth = 18,charHeight = 24,image = nameGFX,kerning = -3}
 megaluavania.nameF = textblox.Font(textblox.FONTTYPE_SPRITE,nameFProps)
-
---megaluavania.determination = textplus.loadFont("littleDialogue/font/determination.ini")
---megaluavania.determinationY = textplus.loadFont("littleDialogue/font/determinationYellow.ini")
---megaluavania.dotumChe = textplus.loadFont("littleDialogue/font/dotumChe.ini")
---megaluavania.damageF = textplus.loadFont("littleDialogue/font/damage.ini") 
---megaluavania.nameF = textplus.loadFont("littleDialogue/font/name.ini")
 
 megaluavania.determinationProps = {	width = 560,
 									height = 130,
@@ -122,51 +121,51 @@ megaluavania.damageProps = {width = 300,
 							visible = true,
 							boxAnchorX = textblox.HALIGN_MID}
 
-local fight = Graphics.loadImage("fight.png") or Graphics.loadImage(megaluavania.resourcePath.."fight.png")
-local act = Graphics.loadImage("act.png") or Graphics.loadImage(megaluavania.resourcePath.."act.png")
-local item = Graphics.loadImage("item.png") or Graphics.loadImage(megaluavania.resourcePath.."item.png")
-local mercy = Graphics.loadImage("mercy.png") or Graphics.loadImage(megaluavania.resourcePath.."mercy.png")
-local fight2 = Graphics.loadImage("fight2.png") or Graphics.loadImage(megaluavania.resourcePath.."fight2.png")
-local act2 = Graphics.loadImage("act2.png") or Graphics.loadImage(megaluavania.resourcePath.."act2.png")
-local item2 = Graphics.loadImage("item2.png") or Graphics.loadImage(megaluavania.resourcePath.."item2.png")
-local mercy2 = Graphics.loadImage("mercy2.png") or Graphics.loadImage(megaluavania.resourcePath.."mercy2.png")
+local fight = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/fight.png"))
+local act = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/act.png"))
+local item = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/item.png"))
+local mercy = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/mercy.png"))
+local fight2 = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/fight2.png"))
+local act2 = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/act2.png"))
+local item2 = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/item2.png"))
+local mercy2 = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/mercy2.png"))
 local heartGFX = {}
 for i = 0,6 do
-	heartGFX[i] = Graphics.loadImage("heart"..tostring(i)..".png") or Graphics.loadImage(megaluavania.resourcePath.."heart"..tostring(i)..".png")
+	heartGFX[i] = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/heart"..tostring(i)..".png"))
 end
-local shield = {image = Graphics.loadImage("shield0.png") or Graphics.loadImage(megaluavania.resourcePath.."shield0.png"),image1 = Graphics.loadImage("shield1.png") or Graphics.loadImage(megaluavania.resourcePath.."shield1.png"),col = colliders.Box(0,0,60,3)}
-local greenCircle = Graphics.loadImage("greencircle.png") or Graphics.loadImage(megaluavania.resourcePath.."greencircle.png")
-local bubble = Graphics.loadImage(megaluavania.resourcePath.."speechbubble.png") or Graphics.loadImage(megaluavania.resourcePath.."speechbubble.png")
-local background = Graphics.loadImage("background.png") or Graphics.loadImage(megaluavania.resourcePath.."background.png")
-local backgroundB = Graphics.loadImage("backgroundB.png") or Graphics.loadImage(megaluavania.resourcePath.."backgroundB.png")
-local target = Graphics.loadImage("fighttarget.png") or Graphics.loadImage(megaluavania.resourcePath.."fighttarget.png")
-local bar = Graphics.loadImage("bar.png") or Graphics.loadImage(megaluavania.resourcePath.."bar.png")
-local bar2 = Graphics.loadImage("bar2.png") or Graphics.loadImage(megaluavania.resourcePath.."bar2.png")
+local shield = {image = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/shield0.png")),image1 = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/shield1.png")),col = colliders.Box(0,0,60,3)}
+local greenCircle = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/greencircle.png"))
+local bubble = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/speechbubble.png"))
+local background = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/background.png"))
+local backgroundB = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/backgroundB.png"))
+local target = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/fighttarget.png"))
+local bar = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/bar.png"))
+local bar2 = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/bar2.png"))
 local swing = {}
 for i = 0,5 do
-	swing[i] = Graphics.loadImage("swing"..tostring(i)..".png") or Graphics.loadImage(megaluavania.resourcePath.."swing"..tostring(i)..".png")
+	swing[i] = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/swing"..tostring(i)..".png"))
 end
-local miss = Graphics.loadImage("miss.png") or Graphics.loadImage(megaluavania.resourcePath.."miss.png")
-local heartbreak = Graphics.loadImage("heartbreak.png") or Graphics.loadImage(megaluavania.resourcePath.."heartbreak.png")
+local miss = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/miss.png"))
+local heartbreak = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/heartbreak.png"))
 local heartshardGFX = {}
 for i = 0,3 do
-	heartshardGFX[i] = Graphics.loadImage("heartshard"..tostring(i)..".png") or Graphics.loadImage(megaluavania.resourcePath.."heartshard"..tostring(i)..".png")
+	heartshardGFX[i] = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/heartshard"..tostring(i)..".png"))
 end
 local heartshards = {}
 for i = 0,6 do
 	heartshards[i] = {}
-	heartshards[i].sprite = Graphics.loadImage("heartshard"..tostring(i % 4)..".png") or Graphics.loadImage(megaluavania.resourcePath.."heartshard"..tostring(i % 4)..".png")
+	heartshards[i].sprite = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/heartshard"..tostring(i % 4)..".png"))
 end
-local gameover = Graphics.loadImage("gameover.png") or Graphics.loadImage(megaluavania.resourcePath.."gameover.png")
+local gameover = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/gameover.png"))
 local cloudGFX = {}
 for i = 0,2 do
-	cloudGFX[i] = Graphics.loadImage("cloud"..tostring(i)..".png") or Graphics.loadImage(megaluavania.resourcePath.."cloud"..tostring(i)..".png")
+	cloudGFX[i] = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/cloud"..tostring(i)..".png"))
 end
 local heartFlee = {}
-heartFlee[0] = Graphics.loadImage("heartGTFO0.png") or Graphics.loadImage(megaluavania.resourcePath.."heartGTFO0.png")
-heartFlee[1] = Graphics.loadImage("heartGTFO1.png") or Graphics.loadImage(megaluavania.resourcePath.."heartGTFO1.png")
-local border = Graphics.loadImage("border.png") or Graphics.loadImage(megaluavania.resourcePath.."border.png")
-local stringGFX = Graphics.loadImage("string.png") or Graphics.loadImage(megaluavania.resourcePath.."string.png")
+heartFlee[0] = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/heartGTFO0.png"))
+heartFlee[1] = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/heartGTFO1.png"))
+local border = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/border.png"))
+--local stringGFX = Graphics.loadImage(Misc.resolveGraphicsFile("megaluavania/string.png"))
 
 local battlestartSFX = Audio.SfxOpen(megaluavania.resourcePath.."battlestart.ogg") -- channel 1
 local blockSFX = Audio.SfxOpen(megaluavania.resourcePath.."block.ogg") -- channel 2
@@ -227,41 +226,41 @@ megaluavania.saveNPC = 102
 megaluavania.saveEvent = "UTSave"
 megaluavania.blank = Graphics.loadImage(megaluavania.resourcePath.."blank.png")
 
-textplus.overrideMessageBox = true
-textplus.overrideProps =   {scaleMode = textplus.SCALE_FIXED, 
+textblox.overrideMessageBox = true
+textblox.overrideProps =   {scaleMode = textblox.SCALE_FIXED, 
 							startSound = nil,
-							typeSounds = {megaluavania.resourcePath.."typewriter.ogg"},
+							typeSounds = {"uttypewriter.ogg"},
 							finishSound = nil,
 							closeSound = nil,
 							width = 548,
 							height = 40,
-							bind = textplus.BIND_SCREEN,
+							bind = textblox.BIND_SCREEN,
 							font = megaluavania.determination,
 							speed = 0.75,
-							boxType = textplus.BOXTYPE_MENU,
+							boxType = textblox.BOXTYPE_MENU,
 							boxColor = 0x000000FF,
 							autoTime = true, 
 							pauseGame = true, 
 							inputClose = true, 
-							boxAnchorX = textplus.HALIGN_MID, 
-							boxAnchorY = textplus.VALIGN_MID, 
-							textAnchorX = textplus.HALIGN_TOP, 
-							textAnchorY = textplus.VALIGN_LEFT,
+							boxAnchorX = textblox.HALIGN_MID, 
+							boxAnchorY = textblox.VALIGN_MID, 
+							textAnchorX = textblox.HALIGN_TOP, 
+							textAnchorY = textblox.VALIGN_LEFT,
 							marginX = 6,
 							marginY = 40}
 							
-textplus.overrideProps.borderTable = {}
-textplus.overrideProps.borderTable = {}
-textplus.overrideProps.borderTable["ulImg"] = border
-textplus.overrideProps.borderTable["uImg"] = border
-textplus.overrideProps.borderTable["urImg"] = border
-textplus.overrideProps.borderTable["rImg"] = border
-textplus.overrideProps.borderTable["drImg"] = border
-textplus.overrideProps.borderTable["dImg"] = border
-textplus.overrideProps.borderTable["dlImg"] = border
-textplus.overrideProps.borderTable["lImg"] = border
-textplus.overrideProps.borderTable["thick"] = 5
-textplus.overrideProps.borderTable["col"] = 0xFFFFFFFF
+textblox.overrideProps.borderTable = {}
+textblox.overrideProps.borderTable = {}
+textblox.overrideProps.borderTable["ulImg"] = border
+textblox.overrideProps.borderTable["uImg"] = border
+textblox.overrideProps.borderTable["urImg"] = border
+textblox.overrideProps.borderTable["rImg"] = border
+textblox.overrideProps.borderTable["drImg"] = border
+textblox.overrideProps.borderTable["dImg"] = border
+textblox.overrideProps.borderTable["dlImg"] = border
+textblox.overrideProps.borderTable["lImg"] = border
+textblox.overrideProps.borderTable["thick"] = 5
+textblox.overrideProps.borderTable["col"] = 0xFFFFFFFF
 
 local set = false
 local indexX = 0
@@ -594,8 +593,6 @@ function drawBattle(v)
 end
 
 function megaluavania.onDraw(v)
-	Text.print(encounter, 100, 120)
-	Text.print(encounterSprite, 100, 100)
 	for _,v in pairs(megaluavania.encounter) do
 		if v.initiated == megaluavania.BATTLE_INTRO then
 			if (HBCounter < 25 and HBCounter % 2 == 0) or HBCounter < 47 then
@@ -683,6 +680,9 @@ function megaluavania.onDraw(v)
 	if blackscreenshow then
 		Graphics.drawScreen{color = Color.black, priority = -5}
 	end
+	if mainblackscreenshow then
+		Graphics.drawScreen{color = Color.black, priority = -21}
+	end
 end
 
 function megaluavania.onInputUpdate()
@@ -691,29 +691,27 @@ function megaluavania.onInputUpdate()
 			Graphics.activateHud(false)
 			megaluavania.battleStart(v)
 			HBCounter = HBCounter + 1
-			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = true
 		end
 		if v.initiated == megaluavania.BATTLE_ACTIVE or v.initiated == megaluavania.BATTLE_SPARED or v.initiated == megaluavania.BATTLE_RAN then
 			Graphics.activateHud(false)
 			megaluavania.battle(v)
-			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = true
+			inventory.activateinventory = false
+			pausemenu.pauseactivated = false
+			mainblackscreenshow = false
+			textblox.active = true
+			hudshow = false
 		elseif v.initiated == megaluavania.BATTLE_LOST then
 			Graphics.activateHud(false)
-			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = true
 			megaluavania.gameOver(v)
 		elseif v.initiated == megaluavania.BATTLE_EXIT then
-			player.sectionObj.backgroundID = v.backgroundID
-			Graphics.sprites.background2[7].img = nil
+			table.insert(megaluavania.encounter,newTable)
+			Graphics.activateHud(true)
 			v.initiated = megaluavania.BATTLE_NONE
-			for _,w in pairs(v.hideLayers) do
-				local layerObj = Layer.get(w)
-				if layerObj ~= nil then
-					layerObj:show(true)
-				end
-			end
-			if v.NPCID ~= nil then
-				NPC.get(v.NPCID)[1].layerObj:show(true)
-			end	
+			Misc.unpause()
+			inventory.activateinventory = true
+			pausemenu.pauseactivated = true
+			textblox.active = false
+			hudshow = true
 			player:mem(0x122,FIELD_WORD,0)
 			Audio.ReleaseStream(-1)
 			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = false
@@ -734,38 +732,37 @@ end
 
 function megaluavania.onEvent(eventName)
 	for _,v in pairs(megaluavania.encounter) do
-		if v.NPCID ~= nil then
-			local monsters = NPC.get(102,player.section)
-			monsterX = monsters[1].x
-			monsterY = monsters[1].y
-			encounterSprite = encounter.spriteHurt or encounter.sprite
-		end	
-		playerX = player.x
-		playerY = player.y
-		cameras = Camera.get()
-		megaluavania.cameraX = cameras[1].x
-		megaluavania.cameraY = cameras[1].y
-		local relX = player.x - megaluavania.cameraX
-		local relY = player.y - megaluavania.cameraY
-		if player.powerup == PLAYER_SMALL then
-			megaluavania.heart.x = relX + 4
-			megaluavania.heart.y = relY + 10
-		else
-			megaluavania.heart.x = relX + 10
-			megaluavania.heart.y = relY + 22
-		end
-		Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
-		indexX,indexY = player:getCurrentSpriteIndex()
-		for _,w in pairs(v.hideLayers) do
-			local layerObj = Layer.get(w)
-			if layerObj ~= nil then
-				layerObj:hide(true)
+		if eventName == v.event then
+			if v.NPCID ~= nil then
+				local monsters = NPC.get(465,player.section)
+				monsterX = monsters[1].x
+				monsterY = monsters[1].y
+			end	
+			playerX = player.x
+			playerY = player.y
+			local relX = player.x - megaluavania.cameraX
+			local relY = player.y - megaluavania.cameraY
+			if player.powerup == PLAYER_SMALL then
+				megaluavania.heart.x = relX + 4
+				megaluavania.heart.y = relY + 10
+			else
+				megaluavania.heart.x = relX + 10
+				megaluavania.heart.y = relY + 22
 			end
+			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
+			indexX,indexY = player:getCurrentSpriteIndex()
+			--v.backgroundID = player.sectionObj.backgroundID
+			--Graphics.sprites.background2[7].img = backgroundB
+			--player.sectionObj.backgroundID = 6
+			v.initiated = megaluavania.BATTLE_INTRO
+			Audio.SeizeStream(-1)
+			Audio.MusicStop()
 		end
-		v.initiated = megaluavania.BATTLE_INTRO
-		blackscreenshow = true
-		Audio.SeizeStream(-1)
-		Audio.MusicStop()
+	--[[elseif eventName == megaluavania.saveEvent then
+		savepoint = savestate.save()
+		for k,v in ipairs(megaluavania.encounter) do
+			savedEncounters[k] = v
+		end]]
 	end
 end
 
@@ -776,9 +773,7 @@ function megaluavania.battleStart(encounter)
 		megaluavania.heart.speedY = (567 - megaluavania.heart.y)/23
 	elseif HBCounter == 25 then
 		if encounter.NPCID ~= nil then
-			for _,v in pairs(NPC.get(encounter.NPCID,player.section)) do
-				v.layerObj:hide(true)
-			end
+			
 		end
 		moving = 1
 	end
@@ -789,12 +784,14 @@ function megaluavania.battleStart(encounter)
 		encounter.initiated = megaluavania.BATTLE_ACTIVE
 		moving = 0
 	end
+	blackscreenshow = true
 end
 
 function megaluavania.battle(encounter)
 	encounterSprite = encounter.sprite
 	Misc.pause()
 	blackscreenshow = false
+	mainblackscreenshow = true
 	megaluavania.playerHP = megaluavania.playerHP or megaluavania.playerHPMax or 20
 	encounter.enemyHP = encounter.enemyHP or encounter.enemyHPMax or 500
 	nameText = megaluavania.name or "Frisk"
@@ -815,7 +812,6 @@ function megaluavania.battle(encounter)
 	if encounter.music ~= EMOld and encounter.enemyHP > 0 and encounter.initiated ~= megaluavania.BATTLE_SPARED and encounter.initated ~= megaluavania.BATTLE_SPARED and encounter.initiated ~= megaluavania.BATTLE_RAN then
 		Audio.MusicOpen(encounter.music)
 		Audio.MusicPlay()
-		Misc.unpause()
 	end
 	EMOld = encounter.music
 	megaluavania.dotumCheProps.typeSounds = encounter.typeSounds or defaultVoice
@@ -908,7 +904,7 @@ function megaluavania.choose(encounter)
 	end
 	if megaluavania.choiceLV == megaluavania.CHOICELV_MAINSELECTION then
 		if not set then
-			megaluavania.determinationProps.typeSounds = {megaluavania.resourcePath.."typewriter.ogg"}
+			megaluavania.determinationProps.typeSounds = {"uttypewriter.ogg"}
 			if flavorText == "" then
 				flavorText = megaluavania.assignText(encounter.flavorText) or "* No text defined.<br>* This may happen if all of your<br>  requirements return false."
 			end
@@ -1318,7 +1314,7 @@ function megaluavania.result(encounter)
 		megaluavania.dialogue = megaluavania.onSpareDialogue(encounter) or megaluavania.assignText(encounter.randomDialogue) or {{text = "No text<br>defined."}}
 	end
 	if not set then
-		megaluavania.determinationProps.typeSounds = {megaluavania.resourcePath.."typewriter.ogg"}
+		megaluavania.determinationProps.typeSounds = {"uttypewriter.ogg"}
 		textBox = textblox.Block(tX + 11,tY + 45,megaluavania.displayText[megaluavania.textCounter] or "",megaluavania.determinationProps)
 		OT = textBox.text
 		set = true
@@ -2037,7 +2033,7 @@ end
 function megaluavania.newEncounter()
 	local newTable = {}
 	newTable.initiated = megaluavania.BATTLE_NONE
-	newTable.hideLayers = {}
+	--newTable.hideLayers = {}
 	newTable.turn = 0
 	newTable.canspare = false
 	newTable.canflee = false

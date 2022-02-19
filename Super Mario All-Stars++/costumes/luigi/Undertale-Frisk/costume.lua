@@ -1,11 +1,11 @@
 local pm = require("playerManager")
+local Routine = require("routine")
 
 local costume = {}
 
 local eventsRegistered = false
 
 function costume.onInit(p)
-	Routine = require("routine")
 	Routine.run(costumechange)
 	
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/player-jump.ogg")
@@ -40,7 +40,7 @@ end
 
 function costumechange()
 	Routine.wait(0)
-	megaluavania = require("megaluavania")
+	undertaledepends = require("level_dependencies_undertale")
 end
 
 function costume.onCleanup(p)
@@ -116,7 +116,7 @@ function costume.onCleanup(p)
 	Defines.player_runspeed = 6
 	Defines.jumpheight_bounce = 32
 	Defines.player_grav = 0.4
-	return megaluavania
+	return undertaledepends
 end
 
 return costume

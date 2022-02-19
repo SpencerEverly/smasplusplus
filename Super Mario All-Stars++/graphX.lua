@@ -325,15 +325,15 @@ local mathematX = loadSharedAPI ("mathematX")
 	--***************************************************************************************************
 
 	
-	graphX.MENU_FILL = Graphics.loadImage(graphX.getPath("menuFillA.png"))
-	graphX.BORDER_UL = Graphics.loadImage(graphX.getPath("menuBorderUL.png"))
-	graphX.BORDER_UR = Graphics.loadImage(graphX.getPath("menuBorderUR.png"))
-	graphX.BORDER_DL = Graphics.loadImage(graphX.getPath("menuBorderDL.png"))
-	graphX.BORDER_DR = Graphics.loadImage(graphX.getPath("menuBorderDR.png"))
-	graphX.BORDER_U = Graphics.loadImage(graphX.getPath("menuBorderU.png"))
-	graphX.BORDER_D = Graphics.loadImage(graphX.getPath("menuBorderD.png"))
-	graphX.BORDER_L = Graphics.loadImage(graphX.getPath("menuBorderL.png"))
-	graphX.BORDER_R = Graphics.loadImage(graphX.getPath("menuBorderR.png"))
+	graphX.MENU_FILL = Graphics.loadImage(graphX.getPath("graphX/menuFillA.png"))
+	graphX.BORDER_UL = Graphics.loadImage(graphX.getPath("graphX/menuBorderUL.png"))
+	graphX.BORDER_UR = Graphics.loadImage(graphX.getPath("graphX/menuBorderUR.png"))
+	graphX.BORDER_DL = Graphics.loadImage(graphX.getPath("graphX/menuBorderDL.png"))
+	graphX.BORDER_DR = Graphics.loadImage(graphX.getPath("graphX/menuBorderDR.png"))
+	graphX.BORDER_U = Graphics.loadImage(graphX.getPath("graphX/menuBorderU.png"))
+	graphX.BORDER_D = Graphics.loadImage(graphX.getPath("graphX/menuBorderD.png"))
+	graphX.BORDER_L = Graphics.loadImage(graphX.getPath("graphX/menuBorderL.png"))
+	graphX.BORDER_R = Graphics.loadImage(graphX.getPath("graphX/menuBorderR.png"))
 
 	
 	function graphX.menuBoxLevel (x,y,w,h, col, fillTex, borderTable)
