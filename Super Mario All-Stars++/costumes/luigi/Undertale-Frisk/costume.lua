@@ -6,8 +6,6 @@ local costume = {}
 local eventsRegistered = false
 
 function costume.onInit(p)
-	Routine.run(costumechange)
-	
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/stomped.ogg")
 	--Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/block-hit.ogg")
@@ -38,17 +36,7 @@ function costume.onInit(p)
 	eventsRegistered = true
 end
 
-function costumechange()
-	Routine.wait(0)
-	undertaledepends = require("level_dependencies_undertale")
-	megaluavania = require("megaluavania")
-	megaluavania.enabled = true
-end
-
 function costume.onCleanup(p)
-	megaluavania = require("megaluavania")
-	undertaledepends = require("level_dependencies_undertale")
-	megaluavania.enabled = false
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
@@ -121,7 +109,6 @@ function costume.onCleanup(p)
 	Defines.player_runspeed = 6
 	Defines.jumpheight_bounce = 32
 	Defines.player_grav = 0.4
-	return undertaledepends
 end
 
 return costume

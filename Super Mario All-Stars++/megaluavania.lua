@@ -9,11 +9,9 @@ local rng = API.load("rng")
 local playerAnim = API.load("playerAnim")
 local textblox = API.load("textblox")
 local particles = API.load("particles")
-local inventory = require('furyinventory')
 local pausemenu = require("pausemenu")
 local datetime = require("datetime")
-
-megaluavania.enabled = true
+local inventory = require("furyinventory")
 
 local cooldown = 0
 
@@ -695,91 +693,77 @@ end
 
 function megaluavania.onInputUpdate()
 	for _,v in pairs(megaluavania.encounter) do
-		if megaluavania.enabled == true then
-			if v.initiated == megaluavania.BATTLE_INTRO then
-				Graphics.activateHud(false)
-				Misc.pause()
-				megaluavania.battleStart(v)
-				HBCounter = HBCounter + 1
-			end
+		if v.initiated == megaluavania.BATTLE_INTRO then
+			Graphics.activateHud(false)
+			Misc.pause()
+			megaluavania.battleStart(v)
+			HBCounter = HBCounter + 1
 		end
-		if megaluavania.enabled == true then
-			if v.initiated == megaluavania.BATTLE_ACTIVE or v.initiated == megaluavania.BATTLE_SPARED or v.initiated == megaluavania.BATTLE_RAN then
-				Graphics.activateHud(false)
-				megaluavania.battle(v)
-				inventory.activateinventory = false
-				pausemenu.pauseactivated = false
-				mainblackscreenshow = false
-				datetime.topright = true
-				datetime.bottomright = false
-				textblox.active = true
-				hudshow = false
-			elseif v.initiated == megaluavania.BATTLE_LOST then
-				Graphics.activateHud(false)
-				megaluavania.gameOver(v)
-			elseif v.initiated == megaluavania.BATTLE_EXIT then
-				Graphics.activateHud(true)
-				v.initiated = megaluavania.BATTLE_NONE
-				Misc.unpause()
-				inventory.activateinventory = true
-				pausemenu.pauseactivated = true
-				textblox.active = false
-				datetime.topright = false
-				datetime.bottomright = true
-				hudshow = true
-				player:mem(0x122,FIELD_WORD,0)
-				Audio.ReleaseStream(-1)
-				player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = false
-				Graphics.activateHud(true)
-				megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
-				megaluavania.phase = megaluavania.PHASE_ATTACKCHOICE
-				megaluavania.choice = megaluavania.CHOICE_FIGHT
-				actSelection = 1
-				itemSelection = 1
-				mercySelection = 1
-				killCounter = nil
-				HBCounter = 0
-				GOCounter = nil
-				moving = 0
-			end
+		if v.initiated == megaluavania.BATTLE_ACTIVE or v.initiated == megaluavania.BATTLE_SPARED or v.initiated == megaluavania.BATTLE_RAN then
+			Graphics.activateHud(false)
+			megaluavania.battle(v)
+			inventory.activateinventory = false
+			pausemenu.pauseactivated = false
+			mainblackscreenshow = false
+			datetime.topright = true
+			datetime.bottomright = false
+			textblox.active = true
+			hudshow = false
+		elseif v.initiated == megaluavania.BATTLE_LOST then
+			Graphics.activateHud(false)
+			megaluavania.gameOver(v)
+		elseif v.initiated == megaluavania.BATTLE_EXIT then
+			Graphics.activateHud(true)
+			v.initiated = megaluavania.BATTLE_NONE
+			Misc.unpause()
+			inventory.activateinventory = true
+			pausemenu.pauseactivated = true
+			textblox.active = false
+			datetime.topright = false
+			datetime.bottomright = true
+			hudshow = true
+			player:mem(0x122,FIELD_WORD,0)
+			Audio.ReleaseStream(-1)
+			player.rawKeys.up,down,left,right,jump,altJump,altRun,run,dropItem,pause = false
+			Graphics.activateHud(true)
+			megaluavania.choiceLV = megaluavania.CHOICELV_MAINSELECTION
+			megaluavania.phase = megaluavania.PHASE_ATTACKCHOICE
+			megaluavania.choice = megaluavania.CHOICE_FIGHT
+			actSelection = 1
+			itemSelection = 1
+			mercySelection = 1
+			killCounter = nil
+			HBCounter = 0
+			GOCounter = nil
+			moving = 0
 		end
 	end
 end
 
 function megaluavania.onEvent(eventName)
 	for _,v in pairs(megaluavania.encounter) do
-		if megaluavania.enabled == true then
-			if eventName == v.event then
-				if v.NPCID ~= nil then
-					local monsters = NPC.get(465,player.section)
-					monsterX = monsters[1].x
-					monsterY = monsters[1].y
-				end	
-				playerX = player.x
-				playerY = player.y
-				local relX = player.x - megaluavania.cameraX
-				local relY = player.y - megaluavania.cameraY
-				if player.powerup == PLAYER_SMALL then
-					megaluavania.heart.x = relX + 4
-					megaluavania.heart.y = relY + 10
-				else
-					megaluavania.heart.x = relX + 10
-					megaluavania.heart.y = relY + 22
-				end
-				Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
-				indexX,indexY = player:getCurrentSpriteIndex()
-				--v.backgroundID = player.sectionObj.backgroundID
-				--Graphics.sprites.background2[7].img = backgroundB
-				--player.sectionObj.backgroundID = 6
-				v.initiated = megaluavania.BATTLE_INTRO
-				Audio.SeizeStream(-1)
-				Audio.MusicStop()
+		if eventName == v.event then
+			if v.NPCID ~= nil then
+				local monsters = NPC.get(465,player.section)
+				monsterX = monsters[1].x
+				monsterY = monsters[1].y
+			end	
+			playerX = player.x
+			playerY = player.y
+			local relX = player.x - megaluavania.cameraX
+			local relY = player.y - megaluavania.cameraY
+			if player.powerup == PLAYER_SMALL then
+				megaluavania.heart.x = relX + 4
+				megaluavania.heart.y = relY + 10
+			else
+				megaluavania.heart.x = relX + 10
+				megaluavania.heart.y = relY + 22
 			end
-		--[[elseif eventName == megaluavania.saveEvent then
-			savepoint = savestate.save()
-			for k,v in ipairs(megaluavania.encounter) do
-				savedEncounters[k] = v
-			end]]
+			Graphics.draw{type = RTYPE_IMAGE,image = heartGFX[megaluavania.heart.color],x = megaluavania.heart.x,y = megaluavania.heart.y}
+			indexX,indexY = player:getCurrentSpriteIndex()
+			v.initiated = megaluavania.BATTLE_INTRO
+			Audio.SeizeStream(-1)
+			Audio.MusicStop()
 		end
 	end
 end
@@ -2049,9 +2033,6 @@ function megaluavania.createBullet(t)
 end
 
 function megaluavania.newEncounter()
-	if megaluavania.enabled == false then
-		table.remove(megaluavania.encounter,newTable)
-	end
 	local newTable = {}
 	newTable.initiated = megaluavania.BATTLE_NONE
 	newTable.turn = 0

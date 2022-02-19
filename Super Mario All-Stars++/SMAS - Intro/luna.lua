@@ -24,10 +24,7 @@ local section20 = 20
 Graphics.activateHud(false)
 
 local textplus = require("textplus")
-
-local commandlist = require("commandlist")
-
-local malcwarpintro = require("malcwarp_intro")
+local datetime = require("datetime")
 
 function onInitAPI()
 	registerEvent("onExitLevel", "onExit");
@@ -36,6 +33,8 @@ function onInitAPI()
 end
 
 function onStart(p)
+	datetime.topright = true
+	datetime.bottomright = false
 	p = p or player;
 	Audio.MusicVolume(80)
 end
@@ -63,19 +62,8 @@ function onDraw()
 	Graphics.draw{type = RTYPE_TEXT, x = 55, y = 580, priority = 10, text = "Press down to skip, jump for Game Help"}
 	
 	Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=7}
-	
 	textplus.print{x=10, y=10, text = "Press pause to quit.", priority=8, color=Color.yellow}
 	
-	Graphics.drawBox{x=695, y=5, width=100, height=20, color=Color.black..0.2, priority=8}
-	textplus.print{x=700, y=10, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
-	textplus.print{x=733, y=10, text = os.date("%a"), priority=8, color=Color.white}
-	textplus.print{x=751, y=10, text = os.date("%x"), priority=8, color=Color.white}
-	Graphics.drawBox{x=719, y=27, width=76, height=20, color=Color.black..0.2, priority=8}
-	textplus.print{x=724, y=32, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
-	textplus.print{x=755, y=32, text = os.date("%I"), priority=8, color=Color.white}
-	textplus.print{x=765, y=32, text = ":", priority=8, color=Color.white}
-	textplus.print{x=768, y=32, text = os.date("%M"), priority=8, color=Color.white}
-	textplus.print{x=780, y=32, text = os.date("%p"), priority=8, color=Color.white}
 	if player.downKeyPressing then
 		triggerEvent("Skip Intro")
 	end
@@ -89,8 +77,6 @@ function onPause(evt)
     evt.cancelled = true;
     isPauseMenuOpen = not isPauseMenuOpen
 end
-
---local introDetectData = introPassthrough:get("introFirstUse");
 
 function onEvent(eventName)
 	if eventName == "Logo Stage 1 - Head Movement" then
@@ -229,4 +215,6 @@ Cheats.deregister("needablueshoe")
 
 function onExit()
 	Audio.MusicVolume(nil)
+	datetime.topright = false
+	datetime.bottomright = true
 end

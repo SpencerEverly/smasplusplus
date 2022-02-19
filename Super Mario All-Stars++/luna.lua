@@ -6,7 +6,6 @@ local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local handycam = require("handycam")
 local autoscroll = require("autoscroll")
-local megaluavania = require("megaluavania")
 
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
@@ -372,15 +371,11 @@ function onTick()
 		starman.duration[994] = 769
 	end
 	if currentCostume == "UNDERTALE-FRISK" then
-		megaluavania.enabled = true
 		littleDialogue.characterNames[2] = "Frisk"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-	end
-	if not currentCostume == "UNDERTALE-FRISK" then
-		megaluavania.enabled = false
 	end
 	if currentCostume == "9-SMB3-MARIOCLOTHES" then
 		littleDialogue.characterNames[2] = "Marigi"

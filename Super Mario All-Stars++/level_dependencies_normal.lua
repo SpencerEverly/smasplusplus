@@ -1,18 +1,13 @@
 local littleDialogue = require("littleDialogue")
-
 local playerManager = require("playerManager")
-
 local inventory = require("customInventory")
-
 local textplus = require("textplus")
-
 local autoscroll = require("autoscroll")
-
 local datetime = require("datetime")
-
 local musicalchairs = require("musicalchairs")
-
 local Routine = require("routine")
+
+local undertaledepends = require("level_dependencies_undertale")
 
 local dying = false;
 local deathVisibleCount = 198;

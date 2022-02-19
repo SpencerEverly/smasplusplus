@@ -146,6 +146,8 @@ function inventory.onDraw()
 
 
         end
+		if inventory.activateinventory == false then
+		end
     end
 
 --makes sure that you don't go over the limit of items

@@ -65,7 +65,7 @@ function datetime.onDraw()
 		textplus.print{x=752, y=557, text = os.date("%x"), priority=8, color=Color.white}
 	end
 	if datetime.topright then
-		Graphics.drawBox{x=719, y=43, width=76, height=20, color=Color.black..0.2, priority=8}
+		Graphics.drawBox{x=719, y=33, width=76, height=20, color=Color.black..0.2, priority=8}
 		textplus.print{x=724, y=38, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
 		textplus.print{x=755, y=38, text = os.date("%I"), priority=8, color=Color.white}
 		textplus.print{x=765, y=38, text = ":", priority=8, color=Color.white}

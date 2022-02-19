@@ -68,13 +68,13 @@ for i = 1,SaveData.utpoiton do
 	table.insert(megaluavania.items,{name = "Orange Wine",text = {"* You drank the Orange Wine.<br>* It tastes like a mix between orange<br>juice and wine (Duh)."},rec = 20})
 end
 
-function undertaledepends.onPostNPCKill(npc, harmtype, eventName)
+function undertaledepends.onPostNPCKill(npc, harmtype)
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 
 	local costumes
-	local goombas = table.map{1,2,3,27,71,89,165,166,242,243,244,379,392,393,466,467}
+	local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
 	if goombas[npc.id] then
 		if harmtype == HARM_TYPE_JUMP then
 			if currentCostume == "UNDERTALE-FRISK" then
