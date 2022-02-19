@@ -10807,7 +10807,7 @@ ID:344;X:-99456;Y:-101056;D:-1;LR:"Snake Block Stuff";XTRA:"{\n    \"directionEn
 ID:466;X:-77536;Y:-80128;D:1;MG:"That's the ladder down to the Underwater Laddered Me City down in Earth.<page>Why the construction crew made the city this way is beyond my comprehension...<page>By the way\, you can't go down\, you can only go up. That's just how it's made.";FD:1;NM:1;LR:"Stage All - Mandatories";
 ID:151;X:-77832;Y:-80112;D:-1;MG:"Level 4\: Welcome to South Park<page>It looks like you're in... South Park?<page>You're here because one of Evil Me's henchmen has disguised to a person in South Park to impersonate someone!<page>Who will it be? Who knows... get in there and find out!";FD:1;
 ID:151;X:-77224;Y:-80432;D:-1;MG:"Level 5\: Fix the Ladders!<page>This level is under maintenance.";FD:1;
-ID:151;X:-76648;Y:-80112;D:-1;MG:"Level 6\: Name WIP<page>This level is under maintenance.";FD:1;
+ID:151;X:-76648;Y:-80112;D:-1;MG:"Level 6\: New Super Mario Bros. Land<page>This level is under maintenance.";FD:1;
 ID:466;X:-118432;Y:-120128;D:1;MG:"Check the room out right beside me!<page>In the room you can change your look of your own image\, along your character!<page>Try using it sometime.";FD:1;NM:1;LR:"Stage 4 - 28 Stars";
 ID:466;X:4000;Y:-128;D:-1;MG:"Hey. I'll let you in on a little secret.<page>The True Ending may be completed without completing The Lost Levels and Side Quests...<page>...but if you did manage to complete them both\, there's a secret area you can enter.<page>Don't tell anyone I said this. They don't want you to know.<page>Just kidding... but seriously\, it's a secret that I don't want told.";FD:1;NM:1;LR:"Stage 0 - 0 Stars";
 ID:466;X:2336;Y:-256;D:1;MG:"Fishing is a really good sport!<page>I actually once caught a big Galoonina!<page>Oh\, that's a Mars fish that's smiliar to a Shark.<page>Gosh\, what's up with people not knowing what fish are in these parts...?!";FD:1;NM:1;LR:"Stage 0 - 0 Stars";
@@ -11288,6 +11288,8 @@ IX:-19872;IY:-20096;OX:-19984;OY:-21216;DT:1;ID:2;OD:3;TW:1;
 IX:-118584;IY:-119840;OX:-118584;OY:-119552;DT:2;ID:1;OD:1;LR:"Stage 6 - 38 Stars";TW:1;
 IX:-119552;IY:-119840;OX:-120032;OY:-118944;DT:2;ID:1;OD:1;LR:"Stage 6 - 38 Stars";TW:1;
 IX:-200368;IY:-200096;DT:1;ID:3;OD:3;LF:"SMAS - DLC World.lvlx";LI:0;EX:1;LR:"DLCContentPipe";
+IX:-76560;IY:-80192;DT:1;ID:3;OD:3;LF:"MALC - L-6.lvlx";LI:1;EX:1;
+OX:-76560;OY:-80192;DT:1;ID:3;OD:3;ET:1;
 DOORS_END
 LAYERS
 LR:"Default";

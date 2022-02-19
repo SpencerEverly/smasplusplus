@@ -1,0 +1,7 @@
+width=66
+height=64
+gfxwidth=66
+gfxheight=64
+frames=7
+framestyle=1
+framespeed=3

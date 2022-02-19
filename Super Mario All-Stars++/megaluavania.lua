@@ -11,6 +11,7 @@ local textblox = API.load("textblox")
 local particles = API.load("particles")
 local inventory = require('furyinventory')
 local pausemenu = require("pausemenu")
+local datetime = require("datetime")
 
 local cooldown = 0
 
@@ -488,6 +489,11 @@ function megaluavania.onTick()
 		v.talkEventName = megaluavania.saveEvent
 		v.msg = "* You saved your game."
 	end
+	for _,v in pairs(megaluavania.encounter) do
+		if v.initiated == megaluavania.BATTLE_EXIT then
+			megaluavania.refreshEncounters()
+		end
+	end
 end
 
 function megaluavania.onPlayerHarm()
@@ -699,19 +705,22 @@ function megaluavania.onInputUpdate()
 			inventory.activateinventory = false
 			pausemenu.pauseactivated = false
 			mainblackscreenshow = false
+			datetime.topright = true
+			datetime.bottomright = false
 			textblox.active = true
 			hudshow = false
 		elseif v.initiated == megaluavania.BATTLE_LOST then
 			Graphics.activateHud(false)
 			megaluavania.gameOver(v)
 		elseif v.initiated == megaluavania.BATTLE_EXIT then
-			table.insert(megaluavania.encounter,newTable)
 			Graphics.activateHud(true)
 			v.initiated = megaluavania.BATTLE_NONE
 			Misc.unpause()
 			inventory.activateinventory = true
 			pausemenu.pauseactivated = true
 			textblox.active = false
+			datetime.topright = false
+			datetime.bottomright = true
 			hudshow = true
 			player:mem(0x122,FIELD_WORD,0)
 			Audio.ReleaseStream(-1)
@@ -2034,7 +2043,22 @@ end
 function megaluavania.newEncounter()
 	local newTable = {}
 	newTable.initiated = megaluavania.BATTLE_NONE
-	--newTable.hideLayers = {}
+	newTable.turn = 0
+	newTable.canspare = false
+	newTable.canflee = false
+	newTable.overrideDeath = false
+	newTable.overrideSpare = false
+	newTable.forceKill = false
+	newTable.forceSpare = false
+	newTable.sourceY = 0
+	table.insert(megaluavania.encounter,newTable)
+	return newTable
+end
+
+function megaluavania.refreshEncounters()
+	table.remove(megaluavania.encounter,newTable)
+	local newTable = {}
+	newTable.initiated = megaluavania.BATTLE_NONE
 	newTable.turn = 0
 	newTable.canspare = false
 	newTable.canflee = false

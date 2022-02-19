@@ -64,13 +64,15 @@ for i = 1,SaveData.uthealfood do
 end
 
 for i = 1,SaveData.utpoiton do
-	table.insert(megaluavania.items,{name = "Orange Wine",text = {"* You drank the Orange Wine.<br>* It tastes like a mix between orange<br>juice and wine (Duh).",""},rec = 20})
+	table.insert(megaluavania.items,{name = "Orange Wine",text = {"* You drank the Orange Wine.<br>* It tastes like a mix between orange<br>juice and wine (Duh)."},rec = 20})
 end
 
 function undertaledepends.onPostNPCKill(npc, eventName)
-    if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
-        triggerEvent("UNDERTALEBATTLEGoomba")
-		SaveData.utencounter = 1
+	if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
+		if npc.kill() == 1 then
+			triggerEvent("UNDERTALEBATTLEGoomba")
+			SaveData.utencounter = 1
+		end
     end
 	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
         --SaveData.koopaStomps = SaveData.koopaStomps + 1
@@ -79,7 +81,7 @@ end
 
 function undertaledepends.onPlayerHarm(npc, id, eventName)
     if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
-        triggerEvent("UNDERTALEBATTLEGoomba")
+		triggerEvent("UNDERTALEBATTLEGoomba")
 		SaveData.utencounter = 1
     end
 	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
@@ -102,9 +104,9 @@ goomba.NPCID = 1
 goomba.event = "UNDERTALEBATTLEGoomba"
 --goomba.hideLayers = {""}
 goomba.enemyHPMax = 45
-goomba.overrideDeath = true
+goomba.overrideDeath = false
 goomba.enemyDef = -3
-goomba.canspare = true
+goomba.canspare = false
 goomba.canflee = true
 goomba.randomDialogue = {{req = function() return goomba.turn == 1; end,text = {{{text = "<wave>Bowser<br>wants you<br>dead,<br>hero!</wave>",sprite = goombamain}}}}}
 goomba.randomDialogue = {{req = function() return goomba.turn == 2; end,text = {{{text = "<wave>All hail<br>King Bowser!</wave>",sprite = goombamain}}}}}
@@ -204,12 +206,12 @@ end
 
 function megaluavania.onAttack(encounter)
 	if encounter == goomba then
-		if goomba.canspare then
-			return goomba.goombaSpareA
-		elseif goombaAttacks1 then
+		if goombaAttacks1 then
 			return goomba.goombaAttacks1
 		elseif goombaAttacks2 then
 			return goomba.goombaAttacks2
+		elseif goomba.canspare then
+			return goomba.goombaSpareA
 		end
 	end
 end
@@ -222,7 +224,7 @@ function megaluavania.onFight(encounter)
 		end
 		if encounter.turn == 2 and megaluavania.dmg > 0 then
 			megaluavania.dmg = 15
-			return {{text = "<wave>STOP!<br>I wanna live,<br>not die from<br>some girl!</wave>",sprite = goombamain}}
+			return {{text = "<wave>OW!<br>Stop hitting<br>me you<br>idiot!</wave>",sprite = goombamain}}
 		end
 	end
 end
