@@ -689,6 +689,7 @@ function megaluavania.onInputUpdate()
 	for _,v in pairs(megaluavania.encounter) do
 		if v.initiated == megaluavania.BATTLE_INTRO then
 			Graphics.activateHud(false)
+			Misc.pause()
 			megaluavania.battleStart(v)
 			HBCounter = HBCounter + 1
 		end
