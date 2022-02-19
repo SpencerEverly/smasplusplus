@@ -258,6 +258,7 @@ ID:476;X:-197376;Y:-200256;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-197088;Y:-200225;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-196000;Y:-200288;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-198336;Y:-200256;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
+ID:465;X:-199968;Y:-200576;D:-1;
 NPC_END
 LAYERS
 LR:"Default";
