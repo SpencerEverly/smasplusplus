@@ -329,7 +329,7 @@ function onTick()
 	if currentCostume == "GA-CAILLOU" then
 		littleDialogue.characterNames[1] = "Caillou"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_goanimate.ogg")
-		starman.sfxFile = Misc.resolveSoundFile("_OST/GoAnimate/Old Songs/Action - Electric Gutiar.mp3")
+		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/GA-Caillou/starman")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 	end

@@ -8,7 +8,6 @@
 
 local textblox = {} --Package table
 local graphX = loadSharedAPI("graphX");
-local inputs = loadSharedAPI("inputs");
 local rng = loadSharedAPI("rng")
 
 
@@ -23,8 +22,8 @@ end
 
 textblox.textBlockRegister = {}
 --textblox.textBlockGarbageQueue = {}
-textblox.resourcePath = "textblox/"
-textblox.resourcePathOver = "textblox/"
+textblox.resourcePath = "textblox\\"
+textblox.resourcePathOver = "textblox\\"
 
 
 textblox.useGlForFonts = false
@@ -118,7 +117,7 @@ do
 				thisFont.imageRef = properties["image"]
 			else
 				thisFont.imagePath = properties["imagePath"]  or  ""
-				thisFont.imageRef = Graphics.loadImage(Misc.resolveFile(thisFont.imagePath))
+				thisFont.imageRef = Graphics.loadImage (Misc.resolveFile(thisFont.imagePath))
 			end
 			
 			thisFont.charWidth = properties["charWidth"]  or  16
@@ -1092,12 +1091,10 @@ do
 			--player.y = self.playerY
 			--player.speedX = 0
 			--player.speedY = 0
-			
-			--inputs.locked["all"] = true
 		end
 		
 		if  self.inputClose == true			and  
-			(inputs.state["jump"] == inputs.PRESS or inputs.state["run"] == inputs.PRESS or inputs.state["altrun"] == inputs.PRESS) then
+			(player.rawKeys.jump == KEYS_PRESSED or player.rawKeys.run == KEYS_PRESSED or player.rawKeys.altRun == KEYS_PRESSED) then
 			
 			if  self:getFinished () == true	 then
 				self:closeSelf ()
