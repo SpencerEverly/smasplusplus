@@ -1471,7 +1471,7 @@ do
 		end
 		
 		-- Run garbage collection		
-		collectgarbage("collect")
+		--collectgarbage("collect")
 	end	
 	
 	

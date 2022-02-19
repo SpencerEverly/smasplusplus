@@ -1,6 +1,7 @@
 local megaluavania = require("megaluavania")
 local rng = API.load("rng")
 local colliders = API.load("colliders")
+local playerManager = require("playermanager")
 
 local undertaledepends = {}
 
@@ -44,17 +45,17 @@ megaluavania.expPerLV = function(LV)
 	return 30 + 10 * LV * LV
 end
 megaluavania.HPPerLV = function(LV)
-	if LV ~= 20 then
-		return 16 + 4 * LV
+	if LV ~= 999 then
+		return 99 + 8 * LV
 	else
-		return 99
+		return 999
 	end	
 end
 megaluavania.atkPerLV = function(LV)
-	if LV ~= 20 then
-		return 5 + 2 * LV
+	if LV ~= 999 then
+		return 35 + 5 * LV
 	else
-		return 50
+		return 999
 	end
 end
 megaluavania.items = {}
@@ -67,11 +68,19 @@ for i = 1,SaveData.utpoiton do
 	table.insert(megaluavania.items,{name = "Orange Wine",text = {"* You drank the Orange Wine.<br>* It tastes like a mix between orange<br>juice and wine (Duh)."},rec = 20})
 end
 
-function undertaledepends.onPostNPCKill(npc, eventName)
-	if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
-		if npc.kill() == 1 then
-			triggerEvent("UNDERTALEBATTLEGoomba")
-			SaveData.utencounter = 1
+function undertaledepends.onPostNPCKill(npc, harmtype, eventName)
+	local character = player.character;
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+
+	local costumes
+	local goombas = table.map{1,2,3,27,71,89,165,166,242,243,244,379,392,393,466,467}
+	if goombas[npc.id] then
+		if harmtype == HARM_TYPE_JUMP then
+			if currentCostume == "UNDERTALE-FRISK" then
+				triggerEvent("_UNDERTALEBATTLEGoomba")
+				SaveData.utencounter = 1
+			end
 		end
     end
 	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
@@ -80,8 +89,9 @@ function undertaledepends.onPostNPCKill(npc, eventName)
 end
 
 function undertaledepends.onPlayerHarm(npc, id, eventName)
-    if npc.id == 1 or npc.id == 2 or npc.id == 3 or npc.id == 27 or npc.id == 71 or npc.id == 89 or npc.id == 165 or npc.id == 166 or npc.id == 242 or npc.id == 243 or npc.id == 244 or npc.id == 379 or npc.id == 392 or npc.id == 393 or npc.id == 466 or npc.id == 467 then
-		triggerEvent("UNDERTALEBATTLEGoomba")
+    local goombas = table.map{1,2,3,27,71,89,165,166,242,243,244,379,392,393,466,467}
+	if goombas[npc.id] then
+		triggerEvent("_UNDERTALEBATTLEGoomba")
 		SaveData.utencounter = 1
     end
 	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
@@ -101,7 +111,7 @@ local goombaAttacks = {}
 
 goomba.name = "Goomba"
 goomba.NPCID = 1
-goomba.event = "UNDERTALEBATTLEGoomba"
+goomba.event = "_UNDERTALEBATTLEGoomba"
 --goomba.hideLayers = {""}
 goomba.enemyHPMax = 45
 goomba.overrideDeath = false
@@ -121,7 +131,7 @@ goomba.music = "_OST/Undertoad/Tough and Tumble.ogg"
 goomba.sprite = goombamain
 goomba.spriteHurt = goombamain
 goomba.gold = 25
-goomba.exp = 220
+goomba.exp = 15
 					
 goombaAttacks[1] = {	boxWidth = 200,
 					boxHeight = 200,
@@ -224,7 +234,7 @@ function megaluavania.onFight(encounter)
 		end
 		if encounter.turn == 2 and megaluavania.dmg > 0 then
 			megaluavania.dmg = 15
-			return {{text = "<wave>OW!<br>Stop hitting<br>me you<br>idiot!</wave>",sprite = goombamain}}
+			return {{text = "<wave>OW!<br>Stop hitting<br>me you<br>idiot!</wave>",sprite = goombamain,req = function() return joeyE.canspare; end}}
 		end
 	end
 end
@@ -243,6 +253,10 @@ function megaluavania.onSpareDialogue(encounter)
 			SaveData.utspare = SaveData.utspare + 1
 		end
 	end
+end
+
+
+function undertaledepends.onCleanup()
 end
 
 return undertaledepends
