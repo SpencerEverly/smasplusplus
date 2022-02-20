@@ -1,5 +1,6 @@
 local level_dependencies_normal= require("level_dependencies_normal")
 local Routine = require("routine")
+local inventory = require("furyinventory")
 
 local stars = mem(0x00B251E0, FIELD_WORD)
 
@@ -10,6 +11,7 @@ local invisible = false
 local timer1 = 0
 local speed = 0
 local numberup = 0
+local time = 0
 
 local opacity = timer1/speed
 local middle = math.floor(timer1*numberup)
@@ -23,21 +25,6 @@ end
 
 local function WhiteFadeInSlow()
 	whiteflashpre1 = true
-	Routine.wait(0.9, true)
-	whiteflashpre1 = false
-	whiteflashpre2 = true
-	Routine.wait(0.9, true)
-	whiteflashpre2 = false
-	whiteflashpre3 = true
-	Routine.wait(0.9, true)
-	whiteflashpre3 = false
-	whiteflashpre4 = true
-	Routine.wait(0.9, true)
-	whiteflashpre4 = false
-	whiteflashpre5 = true
-	Routine.wait(0.9, true)
-	whiteflashpre5 = false
-	whiteflash = true
 end
 
 function onLoad()
@@ -87,6 +74,7 @@ function onEvent(eventName)
 		player.keys.altJump = false
 		Audio.MusicChange(6, 0)
 		Graphics.activateHud(false)
+		inventory.activateinventory = false
 		SFX.play("_OST/_Sound Effects/mus_explosion.ogg")
 		whiteflash = true
 		player.setCostume(1, nil)
@@ -138,19 +126,8 @@ function onDraw()
 		Graphics.drawScreen{color = Color.black, priority = 10}
 	end
 	if whiteflashpre1 then
-		Graphics.drawScreen{color = Color.white..0.1,priority = 10}
-	end
-	if whiteflashpre2 then
-		Graphics.drawScreen{color = Color.white..0.3,priority = 10}
-	end
-	if whiteflashpre3 then
-		Graphics.drawScreen{color = Color.white..0.5,priority = 10}
-	end
-	if whiteflashpre4 then
-		Graphics.drawScreen{color = Color.white..0.8,priority = 10}
-	end
-	if whiteflashpre5 then
-		Graphics.drawScreen{color = Color.white..0.9,priority = 10}
+		time = time + 1
+		Graphics.drawScreen{color = Color.white..math.max(0,time/293),priority = 10}
 	end
 end
 
