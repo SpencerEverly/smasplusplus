@@ -11,11 +11,17 @@ local letterWidths = {
 -- Address of the first player's character. Equivalent to 'player.character', except the player class doesn't exist in loading screens
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 
+package.path = package.path .. ";./scripts/?.lua"
+local episodePath = mem(0x00B2C61C, FIELD_STRING)
 
 local image = Graphics.loadImage("loadscreen.png")
 
 local loadicon = Graphics.loadImage("hardcoded-30-5.png")
 
+local frame = 0
+local frame2 = 0
+local timer = 0
+local speed = 0
 
 local letterData = {}
 
@@ -36,7 +42,7 @@ function onDraw()
     end
 
 
-    local opacity = math.min(1,time/32)
+    local opacity = math.min(1,time/42)
 
     local height = (image.height/#letterWidths)
     local sourceY = (message-1) * height
@@ -46,6 +52,12 @@ function onDraw()
     local xOffset = 0
 
     local count = #widths
+	
+	speed = speed - 1
+	Graphics.drawImage(loadicon, 672, 536, 0, frame2 * 64, 128, 64,opacity)
+	frame = math.floor(timer/speed)%7
+	timer = timer + 1	
+	frame2 = math.floor(timer/8)%7
 
     for index,width in ipairs(widths) do
         letterData[index] = letterData[index] or {offset = 0,speed = 0}
