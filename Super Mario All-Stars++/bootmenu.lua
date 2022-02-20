@@ -344,6 +344,10 @@ local function menuDialogue()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
+local function gamebootDialogue()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
+end
+
 local function optionsMenu1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
 end
@@ -538,6 +542,9 @@ end
 local function BootWSMBAPreExecute()
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
+	exitscreen = true
+	SFX.play(14)
+	Routine.wait(0.5)
 	Audio.sounds[1].sfx  = nil
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
@@ -560,8 +567,6 @@ local function BootWSMBAPreExecute()
 	Audio.sounds[42].sfx  = nil
 	Audio.sounds[43].sfx  = nil
 	Audio.sounds[91].sfx  = nil
-	exitscreen = true
-	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
 	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
 		SFX.play("wrong.ogg")
@@ -574,7 +579,30 @@ local function BootWSMBAOGPreExecute()
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
 	exitscreen = true
+	SFX.play(14)
 	Routine.wait(0.5)
+	Audio.sounds[1].sfx  = nil
+	Audio.sounds[2].sfx  = nil
+	Audio.sounds[3].sfx  = nil
+	Audio.sounds[4].sfx  = nil
+	Audio.sounds[5].sfx  = nil
+	Audio.sounds[6].sfx  = nil
+	Audio.sounds[7].sfx  = nil
+	Audio.sounds[9].sfx  = nil
+	Audio.sounds[10].sfx  = nil
+	Audio.sounds[11].sfx  = nil
+	Audio.sounds[12].sfx  = nil
+	Audio.sounds[13].sfx  = nil
+	Audio.sounds[14].sfx  = nil
+	Audio.sounds[15].sfx  = nil
+	Audio.sounds[18].sfx  = nil
+	Audio.sounds[22].sfx  = nil
+	Audio.sounds[25].sfx  = nil
+	Audio.sounds[28].sfx  = nil
+	Audio.sounds[37].sfx  = nil
+	Audio.sounds[42].sfx  = nil
+	Audio.sounds[43].sfx  = nil
+	Audio.sounds[91].sfx  = nil
 	Misc.loadEpisode("Where SMB Attacks (Original)")
 	if Misc.loadEpisode("Where SMB Attacks (Original)") == false then
 		SFX.play("wrong.ogg")
@@ -1007,13 +1035,19 @@ Cheats.deregister("needablueshoe")
 
 
 
-littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
+littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(gamebootDialogue) end})
 --littleDialogue.registerAnswer("MainMenu",{text = "Start Where SMB Attacks",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
 littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
 littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
 littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
 littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
 
+
+
+littleDialogue.registerAnswer("GameBoot",{text = "Start Super Mario All-Stars++",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
+littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Remake)",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
+littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Original)",chosenFunction = function() Routine.run(BootWSMBAOGPreExecute) end})
+littleDialogue.registerAnswer("GameBoot",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
 
