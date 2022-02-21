@@ -13,6 +13,7 @@ local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 
 package.path = package.path .. ";./scripts/?.lua"
 local episodePath = mem(0x00B2C61C, FIELD_STRING)
+local rng = require("base/rng")
 
 local image = Graphics.loadImage("loadscreen.png")
 
@@ -22,6 +23,10 @@ local frame = 0
 local frame2 = 0
 local timer = 0
 local speed = 0
+
+local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png"}
+local selecter = rng.randomInt(1,#didyouknow)
+local knowledge = Graphics.loadImage(episodePath..didyouknow[selecter]);
 
 local letterData = {}
 
@@ -58,6 +63,8 @@ function onDraw()
 	frame = math.floor(timer/speed)%7
 	timer = timer + 1	
 	frame2 = math.floor(timer/8)%7
+
+	Graphics.drawImage(knowledge, 0, 0, 1, 0, 800, 600,opacity)
 
     for index,width in ipairs(widths) do
         letterData[index] = letterData[index] or {offset = 0,speed = 0}
