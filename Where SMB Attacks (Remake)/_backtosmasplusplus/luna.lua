@@ -1,25 +1,9 @@
---Copy these, they'll be important for changing music throughout characters anywhere
-local section0 = 0
-local section1 = 1
-local section2 = 2
-local section3 = 3
-local section4 = 4
-local section5 = 5
-local section6 = 6
-local section7 = 7
-local section8 = 8
-local section9 = 9
-local section10 = 10
-local section11 = 11
-local section12 = 12
-local section13 = 13
-local section14 = 14
-local section15 = 15
-local section16 = 16
-local section17 = 17
-local section18 = 18
-local section19 = 19
-local section20 = 20
+local levelfolder = Level.folderPath()
+local levelname = Level.filename()
+local levelformat = Level.format()
+
+local anotherPowerDownLibrary = require("anotherPowerDownLibrary")
+local playerphysicspatch = require("playerphysicspatch")
 
 Graphics.activateHud(false)
 
@@ -30,6 +14,7 @@ end
 
 function onStart()
 	Audio.MusicVolume(nil)
+	Misc.saveGame()
 end
 
 function onTick()
@@ -50,6 +35,18 @@ function onEvent(eventName)
 			SFX.play("wrong.wav")
 			player:teleport(-199632, -200176)
 			triggerEvent("SMASNotFound")
+		end
+	end
+	if eventName == "2PlayerCheck" then
+		if player.count() == 1 then
+			Cheats.trigger("2player")
+			Defines.player_hasCheated = false
+		end
+	end
+	if eventName == "2PlayerCheck2" then
+		if player.count() == 2 then
+			Cheats.trigger("1player")
+			Defines.player_hasCheated = false
 		end
 	end
 end

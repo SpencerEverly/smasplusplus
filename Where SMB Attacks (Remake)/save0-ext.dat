@@ -45,9 +45,9 @@
 --[3]--
 {
    ["encounterData"]={12},
-   ["beatenLevels"]={13},
-   ["unlockedCheckpoints"]={14},
-   ["unlockedPaths"]={15}
+   ["unlockedCheckpoints"]={13},
+   ["unlockedPaths"]={14},
+   ["beatenLevels"]={15}
 },
 --[4]--
 {
@@ -145,30 +145,31 @@
    ["MALC - L-2, P-1.lvlx"]={36},
    ["SMAS - Intro.lvlx"]={37},
    ["SMB3 - W-2, L-Fortress.lvlx"]={38},
-   ["SMB1 - W-1, L-1.lvlx"]={39},
-   ["SMBS - W-2, L-1.lvlx"]={40},
-   ["SMB2 - W-4, L-1.lvlx"]={41},
-   ["MALC - HUB.lvlx"]={42},
-   ["SMAS - Start.lvlx"]={43},
+   ["SMB1 - W-1, L-2.lvlx"]={39},
+   ["SMAS - Start.lvlx"]={40},
+   ["SMBS - W-2, L-1.lvlx"]={41},
+   ["SMB2 - W-4, L-1.lvlx"]={42},
+   ["MALC - HUB.lvlx"]={43},
    ["SMBLL - W-5, L-3.lvlx"]={44},
-   ["SMW - W-1, L-YI4.lvlx"]={45},
-   ["SMAS - Game Help.lvlx"]={46},
-   ["SMB1 - W-1, L-2.lvlx"]={47},
-   ["MariosTown.lvlx"]={48},
-   ["SMW - W-1, L-YH.lvlx"]={49},
-   ["Rinkas;Tale.lvlx"]={50},
+   ["SMB1 - W-2, L-1.lvlx"]={45},
+   ["SMW - W-1, L-YI4.lvlx"]={46},
+   ["SMAS - Game Help.lvlx"]={47},
+   ["SMW - W-1, L-YH.lvlx"]={48},
+   ["MariosTown.lvlx"]={49},
+   ["SMBS - Warp (Scrapped).lvlx"]={50},
    ["MALC - L-Me City Underwater.lvlx"]={51},
-   ["SMAS - Test Level.lvlx"]={52},
-   ["SMB1 - W-2, L-1.lvlx"]={53},
-   ["SMB1 - Warp (Scrapped).lvlx"]={54},
-   ["MALC - L-1.lvlx"]={55},
+   ["SMAS - Game Help (Boot Menu).lvlx"]={52},
+   ["SMAS - Test Level.lvlx"]={53},
+   ["MALC - L-1.lvlx"]={54},
+   ["SMB1 - Warp (Scrapped).lvlx"]={55},
    ["SMB1 - W-1, L-3.lvlx"]={56},
    ["SMAS - Game Over.lvlx"]={57},
-   ["SMBS - Warp (Scrapped).lvlx"]={58},
-   ["SMB1 - W-8, L-4.lvlx"]={59},
-   ["SMB2 - Warp (Scrapped).lvlx"]={60},
-   ["MALC - L-2, P-2.lvlx"]={61},
-   ["SMAS - Game Help (Boot Menu).lvlx"]={62}
+   ["Rinkas;Tale.lvlx"]={58},
+   ["_backtosmasplusplus.lvlx"]={59},
+   ["SMB1 - W-8, L-4.lvlx"]={60},
+   ["SMB2 - Warp (Scrapped).lvlx"]={61},
+   ["SMB1 - W-1, L-1.lvlx"]={62},
+   ["MALC - L-2, P-2.lvlx"]={63}
 },
 --[20]--
 {
@@ -297,141 +298,142 @@
 --[36]--
 {
    ["maxID"]=0,
-   ["alive"]={63}
+   ["alive"]={64}
 },
 --[37]--
 {
    ["maxID"]=0,
-   ["alive"]={64}
+   ["alive"]={65}
 },
 --[38]--
 {
    ["maxID"]=0,
-   ["alive"]={65}
+   ["alive"]={66}
 },
 --[39]--
 {
    ["maxID"]=0,
-   ["alive"]={66}
+   ["alive"]={67}
 },
 --[40]--
 {
    ["maxID"]=0,
-   ["alive"]={67}
+   ["alive"]={68}
 },
 --[41]--
 {
    ["maxID"]=0,
-   ["alive"]={68}
+   ["alive"]={69}
 },
 --[42]--
 {
    ["maxID"]=0,
-   ["alive"]={69}
+   ["alive"]={70}
 },
 --[43]--
 {
    ["maxID"]=0,
-   ["alive"]={70}
+   ["alive"]={71}
 },
 --[44]--
 {
    ["maxID"]=0,
-   ["alive"]={71}
+   ["alive"]={72}
 },
 --[45]--
 {
    ["maxID"]=0,
-   ["alive"]={72}
+   ["alive"]={73}
 },
 --[46]--
 {
    ["maxID"]=0,
-   ["alive"]={73}
+   ["alive"]={74}
 },
 --[47]--
 {
    ["maxID"]=0,
-   ["alive"]={74}
+   ["alive"]={75}
 },
 --[48]--
 {
    ["maxID"]=0,
-   ["alive"]={75}
+   ["alive"]={76}
 },
 --[49]--
 {
    ["maxID"]=0,
-   ["alive"]={76}
+   ["alive"]={77}
 },
 --[50]--
 {
    ["maxID"]=0,
-   ["alive"]={77}
+   ["alive"]={78}
 },
 --[51]--
 {
    ["maxID"]=0,
-   ["alive"]={78}
+   ["alive"]={79}
 },
 --[52]--
 {
    ["maxID"]=0,
-   ["alive"]={79}
+   ["alive"]={80}
 },
 --[53]--
 {
    ["maxID"]=0,
-   ["alive"]={80}
+   ["alive"]={81}
 },
 --[54]--
 {
    ["maxID"]=0,
-   ["alive"]={81}
+   ["alive"]={82}
 },
 --[55]--
 {
    ["maxID"]=0,
-   ["alive"]={82}
+   ["alive"]={83}
 },
 --[56]--
 {
    ["maxID"]=0,
-   ["alive"]={83}
+   ["alive"]={84}
 },
 --[57]--
 {
    ["maxID"]=0,
-   ["alive"]={84}
+   ["alive"]={85}
 },
 --[58]--
 {
    ["maxID"]=0,
-   ["alive"]={85}
+   ["alive"]={86}
 },
 --[59]--
 {
    ["maxID"]=0,
-   ["alive"]={86}
+   ["alive"]={87}
 },
 --[60]--
 {
    ["maxID"]=0,
-   ["alive"]={87}
+   ["alive"]={88}
 },
 --[61]--
 {
    ["maxID"]=0,
-   ["alive"]={88}
+   ["alive"]={89}
 },
 --[62]--
 {
    ["maxID"]=0,
-   ["alive"]={89}
+   ["alive"]={90}
 },
 --[63]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={91}
 },
 --[64]--
 {
@@ -534,6 +536,14 @@
 
 },
 --[89]--
+{
+
+},
+--[90]--
+{
+
+},
+--[91]--
 {
 
 }

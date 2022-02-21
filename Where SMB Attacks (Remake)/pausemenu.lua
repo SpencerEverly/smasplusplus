@@ -13,6 +13,8 @@ local exitscreen = false
 
 local cooldown = 0
 
+local player2 = Player(2)
+
 local pausefont = textplus.loadFont("littleDialogue/font/sonicMania-bigFont.ini")
 local pausefont2 = textplus.loadFont("littleDialogue/font/smb1-a.ini")
 local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
@@ -78,7 +80,7 @@ local function quitgame()
 	Audio.MusicVolume(0)
 	SFX.play(59)
 	SFX.play(31)
-	Routine.run(function() exitscreen = true Routine.wait(2.1, true) Misc.saveGame() paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.loadEpisode("Super Mario All-Stars++") end)
+	Routine.run(function() exitscreen = true Routine.wait(2.1, true) Misc.saveGame() paused = false Misc.unpause() Misc.loadEpisode("Super Mario All-Stars++") end)
 end
 
 local function quitonly()
@@ -86,7 +88,7 @@ local function quitonly()
 	Misc.unpause()
 	SFX.play("wrong.ogg")
 	SFX.play(31)
-	Routine.run(function() exitscreen = true Routine.wait(2.1, true) paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.loadEpisode("Super Mario All-Stars++") end)
+	Routine.run(function() exitscreen = true Routine.wait(2.1, true) paused = false Misc.unpause() Misc.loadEpisode("Super Mario All-Stars++") end)
 end
 
 local function savegame()
@@ -99,19 +101,32 @@ end
 local function exitlevelsave()
 	Audio.MusicVolume(0)
 	SFX.play("world_warp.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.saveGame() Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.saveGame() Misc.unpause() Audio.MusicVolume(65) Level.exit() end)
 end
 
 local function exitlevel()
 	Audio.MusicVolume(0)
 	SFX.play("world_warp.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.unpause() Audio.MusicVolume(65) Level.exit() end)
 end
 
 local function restartlevel()
 	Audio.MusicVolume(0)
 	SFX.play("skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(Level.filename()) end)
+end
+
+local function twoplayercheck()
+	paused = false
+	Misc.unpause()
+	if player.count() == 1 then
+		Cheats.trigger("2player")
+		Defines.player_hasCheated = false
+	end
+	if player.count() == 2 then
+		Cheats.trigger("1player")
+		Defines.player_hasCheated = false
+	end
 end
 
 local function characterchange13()
@@ -204,6 +219,7 @@ local function drawPauseMenu(y, alpha)
 		if player.count() == 2 then
 			table.insert(pause_options, {name="Change Character (2P)", action = characterchange13_2p});
 		end
+		--table.insert(pause_options, {name="Enable/Disable 2 Player Mode", action = twoplayercheck});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Exit to SMAS++", action = quitgame});
