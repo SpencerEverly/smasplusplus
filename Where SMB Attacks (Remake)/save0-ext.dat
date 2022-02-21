@@ -1,43 +1,63 @@
 {
 --[1]--
 {
-   ["goombaStomps"]=0,
-   ["__launcher"]={2},
-   ["yiYoshi"]={1},
-   ["__costumes"]={3},
-   ["inventoryTable"]={4},
-   ["usePWing"]=false,
-   ["starmansused"]=0,
-   ["koopaStomps"]=0,
+   ["goombaStomps"]=2,
+   ["warphub"]={2},
+   ["koopaStomps"]=2,
    ["GameOverCount"]=21,
-   ["steveData"]={5},
-   ["megamushroomssused"]=0,
-   ["totalmushrooms"]=0,
-   ["totalhammersuits"]=0,
+   ["totalmushrooms"]=1,
    ["firstBootCompleted"]=1,
-   ["disableX2char"]=1,
-   ["ut_enabled"]=0,
-   ["_basegame"]={6},
-   ["totalleafs"]=0,
-   ["totalfireflowers"]=0,
+   ["disableX2char"]=0,
+   ["uthealfood"]=1,
    ["currentColour"]=0,
+   ["totalcoins"]=8,
+   ["smwMap"]={3},
+   ["useStarman"]=false,
+   ["utxp"]=0,
+   ["__launcher"]={4},
+   ["yiYoshi"]={1},
+   ["__costumes"]={5},
+   ["inventoryTable"]={6},
+   ["utencounter"]=0,
+   ["starmansused"]=0,
+   ["totalfireflowers"]=0,
+   ["utspare"]=0,
+   ["steveData"]={7},
+   ["megamushroomssused"]=0,
+   ["mandatoryStars"]=0,
    ["starsgrabbed"]=0,
-   ["totalcoins"]=0,
-   ["savedEggs"]={7},
+   ["inventory"]={8},
+   ["totalleafs"]=0,
+   ["savedEggs"]={9},
    ["failsafeMessageOne"]=0,
-   ["totaliceflowers"]=0,
+   ["totalhammersuits"]=0,
+   ["usePWing"]=false,
+   ["utpoiton"]=1,
+   ["ut_enabled"]=0,
+   ["_basegame"]={10},
    ["totaltanookis"]=0,
-   ["useStarman"]=false
+   ["totaliceflowers"]=0
 },
 --[2]--
 {
-
+   ["MALC - HUB.lvlx"]={11}
 },
 --[3]--
 {
-
+   ["encounterData"]={12},
+   ["beatenLevels"]={13},
+   ["unlockedCheckpoints"]={14},
+   ["unlockedPaths"]={15}
 },
 --[4]--
+{
+
+},
+--[5]--
+{
+
+},
+--[6]--
 {
    0,
    0,
@@ -48,26 +68,19 @@
    0,
    [0]=0
 },
---[5]--
-{
-   ["health"]=2,
-   ["items"]={8}
-},
---[6]--
-{
-   ["bigSwitch"]={9},
-   ["_characterdata"]={10},
-   ["starcoinCounter"]=0,
-   ["hud"]={11},
-   ["starcoin"]={12}
-},
 --[7]--
 {
-
+   ["health"]=2,
+   ["items"]={16}
 },
 --[8]--
 {
-
+   ["ice"]=0,
+   ["tanooki"]=0,
+   ["hammer"]=0,
+   ["fire"]=0,
+   ["shroom"]=0,
+   ["leaf"]=0
 },
 --[9]--
 {
@@ -75,57 +88,93 @@
 },
 --[10]--
 {
-   ["8"]={13},
-   ["10"]={14},
-   ["14"]={15},
-   ["9"]={16},
-   ["6"]={17},
-   ["16"]={18},
-   ["19"]={19},
-   ["11"]={20},
-   ["12"]={21},
-   ["15"]={22},
-   ["7"]={23},
-   ["18"]={24},
-   ["17"]={25},
-   ["13"]={26},
-   ["20"]={27}
+   ["bigSwitch"]={17},
+   ["_characterdata"]={18},
+   ["starcoin"]={19},
+   ["hud"]={20},
+   ["starcoinCounter"]=0
 },
 --[11]--
 {
-   ["score"]=103740
+
 },
 --[12]--
 {
-   ["MALC - L-2, P-1.lvlx"]={28},
-   ["SMAS - Intro.lvlx"]={29},
-   ["SMAS - Game Help (Boot Menu).lvlx"]={30},
-   ["SMAS - Start.lvlx"]={31},
-   ["SMBS - W-2, L-1.lvlx"]={32},
-   ["SMB2 - W-4, L-1.lvlx"]={33},
-   ["MALC - HUB.lvlx"]={34},
-   ["MALC - L-2, P-2.lvlx"]={35},
-   ["SMBLL - W-5, L-3.lvlx"]={36},
-   ["SMW - W-1, L-YI4.lvlx"]={37},
-   ["SMAS - Game Help.lvlx"]={38},
-   ["SMB1 - W-1, L-2.lvlx"]={39},
-   ["SMB3 - W-2, L-Fortress.lvlx"]={40},
-   ["SMB1 - W-8, L-4.lvlx"]={41},
-   ["SMAS - Test Level.lvlx"]={42},
-   ["MALC - L-Me City Underwater.lvlx"]={43},
-   ["Rinkas;Tale.lvlx"]={44},
-   ["SMAS - Game Over.lvlx"]={45},
-   ["SMB1 - Warp (Scrapped).lvlx"]={46},
-   ["SMB1 - W-1, L-3.lvlx"]={47},
-   ["MALC - L-1.lvlx"]={48},
-   ["SMB1 - W-2, L-1.lvlx"]={49},
-   ["SMBS - Warp (Scrapped).lvlx"]={50},
-   ["SMW - W-1, L-YH.lvlx"]={51},
-   ["SMB2 - Warp (Scrapped).lvlx"]={52},
-   ["SMB1 - W-1, L-1.lvlx"]={53},
-   ["MariosTown.lvlx"]={54}
+
 },
 --[13]--
+{
+
+},
+--[14]--
+{
+
+},
+--[15]--
+{
+
+},
+--[16]--
+{
+
+},
+--[17]--
+{
+
+},
+--[18]--
+{
+   ["8"]={21},
+   ["10"]={22},
+   ["20"]={23},
+   ["9"]={24},
+   ["6"]={25},
+   ["16"]={26},
+   ["19"]={27},
+   ["11"]={28},
+   ["12"]={29},
+   ["7"]={30},
+   ["17"]={31},
+   ["18"]={32},
+   ["15"]={33},
+   ["13"]={34},
+   ["14"]={35}
+},
+--[19]--
+{
+   ["MALC - L-2, P-1.lvlx"]={36},
+   ["SMAS - Intro.lvlx"]={37},
+   ["SMB3 - W-2, L-Fortress.lvlx"]={38},
+   ["SMB1 - W-1, L-1.lvlx"]={39},
+   ["SMBS - W-2, L-1.lvlx"]={40},
+   ["SMB2 - W-4, L-1.lvlx"]={41},
+   ["MALC - HUB.lvlx"]={42},
+   ["SMAS - Start.lvlx"]={43},
+   ["SMBLL - W-5, L-3.lvlx"]={44},
+   ["SMW - W-1, L-YI4.lvlx"]={45},
+   ["SMAS - Game Help.lvlx"]={46},
+   ["SMB1 - W-1, L-2.lvlx"]={47},
+   ["MariosTown.lvlx"]={48},
+   ["SMW - W-1, L-YH.lvlx"]={49},
+   ["Rinkas;Tale.lvlx"]={50},
+   ["MALC - L-Me City Underwater.lvlx"]={51},
+   ["SMAS - Test Level.lvlx"]={52},
+   ["SMB1 - W-2, L-1.lvlx"]={53},
+   ["SMB1 - Warp (Scrapped).lvlx"]={54},
+   ["MALC - L-1.lvlx"]={55},
+   ["SMB1 - W-1, L-3.lvlx"]={56},
+   ["SMAS - Game Over.lvlx"]={57},
+   ["SMBS - Warp (Scrapped).lvlx"]={58},
+   ["SMB1 - W-8, L-4.lvlx"]={59},
+   ["SMB2 - Warp (Scrapped).lvlx"]={60},
+   ["MALC - L-2, P-2.lvlx"]={61},
+   ["SMAS - Game Help (Boot Menu).lvlx"]={62}
+},
+--[20]--
+{
+   ["score"]=106620
+},
+--[21]--
 {
    ["reservePowerup"]=0,
    ["0x10A"]=0,
@@ -133,76 +182,12 @@
    ["0x16"]=0,
    ["0x108"]=0
 },
---[14]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=2,
-   ["0x16"]=2,
-   ["0x108"]=0
-},
---[15]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=2,
-   ["0x16"]=2,
-   ["0x108"]=0
-},
---[16]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=2,
-   ["0x16"]=2,
-   ["0x108"]=0
-},
---[17]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=2,
-   ["0x16"]=3,
-   ["0x108"]=0
-},
---[18]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=2,
-   ["0x16"]=3,
-   ["0x108"]=0
-},
---[19]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
-},
---[20]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
-},
---[21]--
-{
-   ["reservePowerup"]=0,
-   ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
-   ["0x108"]=0
-},
 --[22]--
 {
    ["reservePowerup"]=0,
    ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
+   ["powerup"]=2,
+   ["0x16"]=2,
    ["0x108"]=0
 },
 --[23]--
@@ -217,24 +202,24 @@
 {
    ["reservePowerup"]=0,
    ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
+   ["powerup"]=2,
+   ["0x16"]=2,
    ["0x108"]=0
 },
 --[25]--
 {
    ["reservePowerup"]=0,
    ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
+   ["powerup"]=2,
+   ["0x16"]=3,
    ["0x108"]=0
 },
 --[26]--
 {
    ["reservePowerup"]=0,
    ["0x10A"]=0,
-   ["powerup"]=1,
-   ["0x16"]=1,
+   ["powerup"]=2,
+   ["0x16"]=3,
    ["0x108"]=0
 },
 --[27]--
@@ -247,43 +232,67 @@
 },
 --[28]--
 {
-   ["maxID"]=0,
-   ["alive"]={55}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[29]--
 {
-   ["maxID"]=0,
-   ["alive"]={56}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[30]--
 {
-   ["maxID"]=0,
-   ["alive"]={57}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[31]--
 {
-   ["maxID"]=0,
-   ["alive"]={58}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[32]--
 {
-   ["maxID"]=0,
-   ["alive"]={59}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[33]--
 {
-   ["maxID"]=0,
-   ["alive"]={60}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[34]--
 {
-   ["maxID"]=0,
-   ["alive"]={61}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
 },
 --[35]--
 {
-   ["maxID"]=0,
-   ["alive"]={62}
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=2,
+   ["0x16"]=2,
+   ["0x108"]=0
 },
 --[36]--
 {
@@ -382,35 +391,43 @@
 },
 --[55]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={82}
 },
 --[56]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={83}
 },
 --[57]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={84}
 },
 --[58]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={85}
 },
 --[59]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={86}
 },
 --[60]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={87}
 },
 --[61]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={88}
 },
 --[62]--
 {
-
+   ["maxID"]=0,
+   ["alive"]={89}
 },
 --[63]--
 {
@@ -485,6 +502,38 @@
 
 },
 --[81]--
+{
+
+},
+--[82]--
+{
+
+},
+--[83]--
+{
+
+},
+--[84]--
+{
+
+},
+--[85]--
+{
+
+},
+--[86]--
+{
+
+},
+--[87]--
+{
+
+},
+--[88]--
+{
+
+},
+--[89]--
 {
 
 }

@@ -2,12 +2,20 @@ local textplus = require("textplus")
 local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
+local Routine = require("routine")
+
+local blackscreen = Graphics.loadImage("blackscreen.png")
 
 local active = true
 local active2 = false
 local ready = false
+local exitscreen = false
 
 local cooldown = 0
+
+local pausefont = textplus.loadFont("littleDialogue/font/sonicMania-bigFont.ini")
+local pausefont2 = textplus.loadFont("littleDialogue/font/smb1-a.ini")
+local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
 
 onePressedState = false
 twoPressedState = false
@@ -59,7 +67,7 @@ end
 local function unpause()
 	paused = false
 	Misc.unpause()
-	SFX.play("pausemenu-closed.wav")
+	SFX.play(30)
 end
 
 function pausemenu2.onStart()
@@ -67,110 +75,95 @@ function pausemenu2.onStart()
 end
 
 local function quitgame()
-	paused = false
-	Misc.unpause()
-	Misc.saveGame();
-	Graphics.drawScreen{color = Color.black, priority = 10}
-	Misc.loadEpisode("Super Mario All-Stars++")
+	Audio.MusicVolume(0)
+	SFX.play(59)
+	SFX.play(31)
+	Routine.run(function() exitscreen = true Routine.wait(2.1, true) Misc.saveGame() paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.loadEpisode("Super Mario All-Stars++") end)
 end
 
 local function quitonly()
 	paused = false
 	Misc.unpause()
-	Graphics.drawScreen{color = Color.black, priority = 10}
-	Misc.loadEpisode("Super Mario All-Stars++")
+	SFX.play("wrong.ogg")
+	SFX.play(31)
+	Routine.run(function() exitscreen = true Routine.wait(2.1, true) paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.loadEpisode("Super Mario All-Stars++") end)
 end
 
 local function savegame()
 	paused = false
-	SFX.play("save_dismiss.ogg")
+	SFX.play(58)
 	Misc.saveGame()
 	Misc.unpause()
 end
 
 local function exitlevelsave()
-	paused = false
-	Misc.unpause()
-	Misc.saveGame();
-	Level.exit()
+	Audio.MusicVolume(0)
+	SFX.play("world_warp.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.saveGame() Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function exitlevel()
-	paused = false
-	Misc.unpause()
-	Level.exit()
+	Audio.MusicVolume(0)
+	SFX.play("world_warp.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function restartlevel()
-	paused = false
-	Misc.unpause()
-	Level.load(Level.filename())
+	Audio.MusicVolume(0)
+	SFX.play("skip-intro.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
 end
 
 local function characterchange13()
-	paused = false
-	Misc.unpause()
 	local character = player.character;
 	if (character == CHARACTER_MARIO) then
-		player:transform(2, true)
+		player:transform(2, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_LUIGI) then
-		player:transform(3, true)
+		player:transform(3, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_PEACH) then
-		player:transform(4, true)
+		player:transform(4, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_TOAD) then
-		player:transform(5, true)
+		player:transform(5, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_LINK) then
-		player:transform(1, true)
+		player:transform(1, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 end
 
 local function characterchange13_2p()
-	paused = false
-	Misc.unpause()
 	local character = player2.character;
 	if (character == CHARACTER_MARIO) then
-		player2:transform(2, true)
+		player2:transform(2, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_LUIGI) then
-		player2:transform(3, true)
+		player2:transform(3, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_PEACH) then
-		player2:transform(4, true)
+		player2:transform(4, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_TOAD) then
-		player2:transform(5, true)
+		player2:transform(5, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 	if (character == CHARACTER_LINK) then
-		player2:transform(1, true)
+		player2:transform(1, false)
 		SFX.play(32)
-		SFX.play("charcost-selected.wav")
 	end
 end
 
 local function wip()
-	SFX.play("wrong.wav")
+	SFX.play("wrong.ogg")
 end
 
 local function hubteleport()
@@ -180,16 +173,12 @@ local function hubteleport()
 end
 
 local function drawPauseMenu(y, alpha)
-	local name = "Where SMB Attacks (Remake)"
-	local levelcurrent = "Paused."
-	local levelname = Level.name()
+	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=2, yscale=2, align="center", color=Color.red..1.0}), pause_width)
-	local layout2 = textplus.layout(textplus.parse(levelcurrent, {xscale=2, yscale=2, align="center", color=Color.canary..1.0}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 178 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
-	textplus.render{layout = layout2, x = 800 - w*0.5, y = y, color = Color.white..alpha, priority = 7}
+	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -202,13 +191,23 @@ local function drawPauseMenu(y, alpha)
 			{name="Continue", action=unpause}
 		}
 		
-		table.insert(pause_options, {name="Restart", action = restartlevel});
-		table.insert(pause_options, {name="Teleport to Mario's City", action = hubteleport});
-		table.insert(pause_options, {name="Change Character", action = characterchange});
+		if (Level.filename() == "MariosTown.lvlx") == false then
+			table.insert(pause_options, {name="Restart", action = restartlevel});
+		end
+		if Level.filename() == "MariosTown.lvlx" then
+			table.insert(pause_options, {name="Restart HUB", action = restartlevel});
+		end
+		if (Level.filename() == "MariosTown.lvlx") == false then
+			table.insert(pause_options, {name="Teleport to Mario's City", action = hubteleport});
+		end
+		table.insert(pause_options, {name="Change Character (1P)", action = characterchange13});
+		if player.count() == 2 then
+			table.insert(pause_options, {name="Change Character (2P)", action = characterchange13_2p});
+		end
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Exit to SMAS++", action = quitgame});
-		table.insert(pause_options, {name="Exit to SMAS++ without Saving (DATA WILL BE LOST)", action = quitonly});
+		table.insert(pause_options, {name="Exit to SMAS++ Without Saving", action = quitonly});
 	end
 	for k,v in ipairs(pause_options) do
 		local c = 0xFFFFFF00;
@@ -220,9 +219,9 @@ local function drawPauseMenu(y, alpha)
 			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
-		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2}), pause_width)
+		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
 		local h2 = layout.height
-		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
+		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 8}
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
 		h2 = h2+2+6--font.charHeight;
 		y = y+h2;
@@ -239,13 +238,16 @@ function pausemenu2.onDraw()
 		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
-			pause_box = imagic.Create{x=400,y=300,width=700,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		pause_box:Draw(5, 0x00000077);
 		drawPauseMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
 		Misc.pause();
+	end
+	if exitscreen then
+		Graphics.drawScreen{color = Color.black, priority = 10}
 	end
 end
 
@@ -262,7 +264,7 @@ function pausemenu2.onInputUpdate()
 		if paused then
 			paused = false
 			pauseactive = false
-			SFX.play("pausemenu-closed.wav")
+			SFX.play(30)
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
@@ -271,7 +273,7 @@ function pausemenu2.onInputUpdate()
 			paused = true
 			pauseactive = true
 			pause_index = 0;
-			SFX.play("pausemenu.wav")
+			SFX.play(30)
 		end
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
@@ -284,12 +286,12 @@ function pausemenu2.onInputUpdate()
 			repeat
 				pause_index = (pause_index+1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play("pausemenu_cursor.wav")
+			SFX.play(26)
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index = (pause_index-1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play("pausemenu_cursor.wav")
+			SFX.play(26)
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			player:mem(0x11E,FIELD_BOOL,false)
 			for i=1, 3 do
@@ -308,12 +310,12 @@ function pausemenu2.onInputUpdate()
 				repeat
 					pause_index = (pause_index+1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play(26)
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index = (pause_index-1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("pausemenu_cursor.wav")
+				SFX.play(26)
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				--SFX.play("quitmenu.wav")
 				pause_options[pause_index+1].action();
