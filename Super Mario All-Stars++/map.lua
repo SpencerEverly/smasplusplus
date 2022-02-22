@@ -206,7 +206,7 @@ function onDraw()
             p.direction = DIR_LEFT
 
             player:render{
-                x = 585,y = 25,
+                x = 575,y = 25,
                 ignorestate = true,sceneCoords = false,priority = 6,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
                 frame = frame,
             }
@@ -218,7 +218,7 @@ function onDraw()
 			if Player.count() == 2 then
 				p2 = player2 or Player(2)
 				p2:render{
-					x = 540,y = 20,
+					x = 510,y = 20,
 					ignorestate = true,sceneCoords = false,priority = 6,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
 					frame = frame,
 				}
