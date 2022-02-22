@@ -1,30 +1,15 @@
---Copy these, they'll be important for changing music throughout characters anywhere
-local section0 = 0
-local section1 = 1
-local section2 = 2
-local section3 = 3
-local section4 = 4
-local section5 = 5
-local section6 = 6
-local section7 = 7
-local section8 = 8
-local section9 = 9
-local section10 = 10
-local section11 = 11
-local section12 = 12
-local section13 = 13
-local section14 = 14
-local section15 = 15
-local section16 = 16
-local section17 = 17
-local section18 = 18
-local section19 = 19
-local section20 = 20
-
 Graphics.activateHud(false)
 
 local textplus = require("textplus")
 local datetime = require("datetime")
+
+local timer1 = 0
+local speed = 0
+local numberup = 0
+local time = 0
+
+local opacity = timer1/speed
+local middle = math.floor(timer1*numberup)
 
 function onInitAPI()
 	registerEvent("onExitLevel", "onExit");
@@ -71,6 +56,18 @@ function onDraw()
 		Graphics.draw{type = RTYPE_TEXT, x = 220, y = 20, priority = 10, text = "Loading Game Help..."}
 		triggerEvent("jumping")
 	end
+	if fadeout1 then
+		time = time + 1
+		Graphics.drawScreen{color = Color.black..math.max(0,time/20),priority = 5}
+	end
+	if fadeout2 then
+		time = time - 1
+		Graphics.drawScreen{color = Color.black..math.min(1,time/20),priority = 5}
+	end
+	if fadeout3 then
+		time = time + 1
+		Graphics.drawScreen{color = Color.black..math.max(0,time/20),priority = 5}
+	end
 end
 
 function onPause(evt)
@@ -93,12 +90,20 @@ function onEvent(eventName)
 	end
 	if eventName == "Logo Stage 9 - Fade Out 1" then
 		SFX.play("SMAS - Intro/sounds/intro-fadeout.ogg")
+		fadeout1 = true
+	end
+	if eventName == "Logo Stage 14 - Opening Transition Complete" then
+		fadeout1 = false
+	end
+	if eventName == "Opening Stage 1 - Fade In 1" then
+		fadeout2 = true
 	end
 	if eventName == "Opening Stage 5 - Lights On" then
 		SFX.play("SMAS - Intro/sounds/coin.ogg")
 	end
 	if eventName == "Opening Stage 7 - Fade Out 1" then
 		SFX.play("SMAS - Intro/sounds/opening-end.ogg")
+		fadeout3 = true
 	end
 	if eventName == "Opening Stage 10 - End of Intro" then
 		Audio.MusicVolume(nil)

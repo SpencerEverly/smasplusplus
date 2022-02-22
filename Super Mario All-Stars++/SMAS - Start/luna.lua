@@ -146,6 +146,13 @@ function onKeyboardPress(k, v)
 			fourPressedState = true
 		end
 	end
+	if active then
+		fivePressedState = false
+		if k == VK_5 then
+			Level.exit()
+			fivePressedState = true
+		end
+	end
 	if not active then
 		if k == VK_F8 then
 			f8PressedState = true
@@ -166,6 +173,7 @@ function onDraw()
 		textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=9, color=Color.white}
 		textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
 		textplus.print{x=10, y=68, text = "4) Continue booting", priority=9, color=Color.white}
+		textplus.print{x=10, y=80, text = "5) Load world map instantly (MAY BE UNSTABLE)", priority=9, color=Color.white}
 	end
 end
 

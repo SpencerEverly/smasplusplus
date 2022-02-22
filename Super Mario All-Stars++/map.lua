@@ -7,6 +7,20 @@ local travL = require("travL")
 local wandR = require("wandRr")
 local jukebox = require("jukebox-v11")
 local pause_music = require("map_music")
+local Routine = require("routine")
+
+local loadlevelanimation = false
+local levelnames = Level.get()
+local timer = 100
+local cooldown = 0
+
+local timer1 = 0
+local speed = 0
+local numberup = 0
+local time = 0
+
+local opacity = timer1/speed
+local middle = math.floor(timer1*numberup)
 
 local map3d = require("mapp3d")
 map3d.CameraSettings.fov = 65
@@ -16,6 +30,9 @@ map3d.Light.enabled = false
 map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
 map3d.Heightmap.position = vector.v2(6496, 0)
 
+local middle = 0
+local transitionTimer = 0
+
 function onLoad()
 	if SaveData.disableX2char == 0 then
 		inventory = require("customInventory")
@@ -24,6 +41,41 @@ function onLoad()
 	end
 	if SaveData.disableX2char == 1 then
 		pausemenu13 = require("pausemenu13map")
+	end
+end
+
+function levelload()
+	if player.rawKeys.jump == KEYS_PRESSED then
+		player.rawKeys.jump = KEYS_UNPRESSED
+	end
+	SFX.play("_OST/_Sound Effects/levelload.ogg")
+	middle = middle + 1
+	loadlevelanimation = true
+	Audio.MusicVolume(0)
+	Misc.pause()
+	player:mem(0x17A, FIELD_BOOL, true)
+	Routine.wait(1.2, true)
+	Misc.unpause()
+	player:mem(0xFA, FIELD_BOOL, true)
+	loadlevelanimation = nil
+	Audio.MusicVolume(56)
+	loadlevelanimationin = true
+	Routine.waitFrames(78, true)
+	loadlevelanimationin = nil
+end
+
+function onInputUpdate()
+	if Misc.isPausedByLua() == false then
+		if world.levelTitle and world.levelObj then
+			if player.rawKeys.jump == KEYS_PRESSED then
+				Routine.run(levelload)
+				if player.keys.left == KEYS_PRESSED then
+					player.keys.left = KEYS_UNPRESSED
+				elseif player.keys.right == KEYS_PRESSED then
+					player.keys.right = KEYS_UNPRESSED
+				end
+			end
+		end
 	end
 end
 
@@ -68,6 +120,14 @@ function onDraw()
 	
 	local customtileone = Graphics.loadImage("customtile401.png")
 	Graphics.drawImageToSceneWP(customtileone, -3328, -1824, 4)
+	if loadlevelanimation then
+		time = time + 1
+		Graphics.drawScreen{color = Color.black..math.max(0,time/32),priority = 10}
+	end
+	if loadlevelanimationin then
+		time = time - 1
+		Graphics.drawScreen{color = Color.black..math.min(1,time/32),priority = 10}
+	end
 end
 
 --Some cheats will break playing this game. Demo 2 will start having these cheats that could break any point of the game disabled. Most things, like the framerate, chracter stuff, most other cheats that won't break the game in normal cases, and until the release, imtiredofallthiswalking, will be kept in. To see a list of disabled cheats for levels, check out the luna.lua in the root of the episode.
