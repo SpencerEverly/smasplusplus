@@ -756,22 +756,22 @@ local function drawPauseMenu(y, alpha)
 			{name="Continue", action=unpause}
 		}
 		table.insert(pause_options, {name="Restart", action = restartlevel});
-		if Level.filename() == "SMAS - DLC World.lvlx" and isOverworld then
+		if Level.filename() == "SMAS - DLC World.lvlx" then
 			table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
 		end
-		if (Level.name() == "SMAS - DLC World") == false and isOverworld then
+		if (Level.name() == "SMAS - DLC World") == false then
 			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
 		end
-		if (Level.name() == "MALC - HUB") == false and isOverworld then
+		if (Level.name() == "MALC - HUB") == false then
 			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
 		end
-		if SaveData.disableX2char == 1 and isOverworld then
+		if SaveData.disableX2char == 1 then
 			table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
 		end
-		if SaveData.disableX2char == 0 or isOverworld then
+		if SaveData.disableX2char == 0 then
 			table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
 		end
-		if Level.filename() == "MALC - HUB.lvlx" and isOverworld then
+		if Level.filename() == "MALC - HUB.lvlx" then
 			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
 		end
 		table.insert(pause_options, {name="Character Options", action = switchtochar});
