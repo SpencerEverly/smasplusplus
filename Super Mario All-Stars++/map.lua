@@ -48,6 +48,12 @@ function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
 	end
+	if player.rawKeys.left == KEYS_PRESSED then
+		player.rawKeys.left = KEYS_UNPRESSED
+	end
+	if player.rawKeys.right == KEYS_PRESSED then
+		player.rawKeys.right = KEYS_UNPRESSED
+	end
 	world.playerWalkingFrame = 1
 	SFX.play("_OST/_Sound Effects/levelload.ogg")
 	Audio.MusicVolume(0)
@@ -71,11 +77,6 @@ function onInputUpdate()
 		if world.levelTitle and world.levelObj then
 			if player.rawKeys.jump == KEYS_PRESSED then
 				Routine.run(levelload)
-				if player.keys.left == KEYS_PRESSED then
-					player.keys.left = KEYS_UNPRESSED
-				elseif player.keys.right == KEYS_PRESSED then
-					player.keys.right = KEYS_UNPRESSED
-				end
 			end
 		end
 	end

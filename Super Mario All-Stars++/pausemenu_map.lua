@@ -813,6 +813,10 @@ function pausemenu2.onInputUpdate()
 			end
 			pause_options[pause_index+1].action();
 			Misc.unpause();
+		elseif player.keys.left == KEYS_PRESSED then
+			player.keys.left = KEYS_UNPRESSED
+		elseif player.keys.right == KEYS_PRESSED then
+			player.keys.right = KEYS_UNPRESSED
 		end
 		if player.count() == 2 then
 			if(player2.keys.down == KEYS_PRESSED) then
@@ -828,6 +832,10 @@ function pausemenu2.onInputUpdate()
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options[pause_index+1].action();
 				Misc.unpause();
+			elseif player2.keys.left == KEYS_PRESSED then
+				player2.keys.left = KEYS_UNPRESSED
+			elseif player2.keys.right == KEYS_PRESSED then
+				player2.keys.right = KEYS_UNPRESSED
 			end
 		end
 	end
@@ -845,6 +853,10 @@ function pausemenu2.onInputUpdate()
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			pause_options_char[pause_index_char+1].action();
 			Misc.unpause();
+		elseif player.keys.left == KEYS_PRESSED then
+			player.keys.left = KEYS_UNPRESSED
+		elseif player.keys.right == KEYS_PRESSED then
+			player.keys.right = KEYS_UNPRESSED
 		end
 		if player.count() == 2 then
 			if(player2.keys.down == KEYS_PRESSED) then
@@ -860,6 +872,10 @@ function pausemenu2.onInputUpdate()
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options_char[pause_index_char+1].action();
 				Misc.unpause();
+			elseif player2.keys.left == KEYS_PRESSED then
+				player2.keys.left = KEYS_UNPRESSED
+			elseif player2.keys.right == KEYS_PRESSED then
+				player2.keys.right = KEYS_UNPRESSED
 			end
 		end
 	end
@@ -877,6 +893,10 @@ function pausemenu2.onInputUpdate()
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			pause_options_tele[pause_index_tele+1].action();
 			Misc.unpause();
+		elseif player.keys.left == KEYS_PRESSED then
+			player.keys.left = KEYS_UNPRESSED
+		elseif player.keys.right == KEYS_PRESSED then
+			player.keys.right = KEYS_UNPRESSED
 		end
 		if player.count() == 2 then
 			if(player2.keys.down == KEYS_PRESSED) then
@@ -892,6 +912,10 @@ function pausemenu2.onInputUpdate()
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options_tele[pause_index_tele+1].action();
 				Misc.unpause();
+			elseif player2.keys.left == KEYS_PRESSED then
+				player2.keys.left = KEYS_UNPRESSED
+			elseif player2.keys.right == KEYS_PRESSED then
+				player2.keys.right = KEYS_UNPRESSED
 			end
 		end
 	end

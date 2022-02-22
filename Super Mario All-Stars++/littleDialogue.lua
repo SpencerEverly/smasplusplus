@@ -23,6 +23,8 @@ local player2 = Player(2)
 local smallScreen
 pcall(function() smallScreen = require("smallScreen") end)
 
+littleDialogue.boxenabled = false
+
 
 function littleDialogue.onInitAPI()
     registerEvent(littleDialogue,"onTick")
@@ -683,6 +685,10 @@ function littleDialogue.create(args)
 
     box.openingProgress = 0
     box.state = STATE.IN
+	
+	if box.state == STATE.IN then
+		littleDialogue.boxenabled = true
+	end
 
     box.page = 1
 
@@ -733,6 +739,7 @@ function littleDialogue.create(args)
 
     if box.pauses then
         Misc.pause(true)
+		littleDialogue.boxenabled = true
     end
 
     if not box.silent and box.settings.openSoundEnabled then
@@ -741,6 +748,7 @@ function littleDialogue.create(args)
 	
 	if box.closebox == true then
 		box.state = STATE.OUT
+		littleDialogue.boxenabled = false
 	end
 
 	

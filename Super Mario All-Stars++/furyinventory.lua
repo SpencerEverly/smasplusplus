@@ -384,14 +384,22 @@ function inventory.onTick()
 	if warpTransition.transitionTimer == 0 then
 		inventory.activateinventory = true
 	end
+	if warpTransition.levelStartTransition == warpTransition.TRANSITION_IRIS_OUT then
+		inventory.activateinventory = false
+	end
+	if warpTransition.crossSectionTransition == warpTransition.TRANSITION_FADE then
+		inventory.activateinventory = false
+	end
 	if pausemenu.pauseactivated == false then
 		inventory.activateinventory = false
 	end
 	if pausemenu.paused == true then
 		inventory.activateinventory = false
 	end
-	if littleDialogue.boxes == true then
+	if littleDialogue.boxenabled == true then
 		inventory.activateinventory = false
+	elseif littleDialogue.boxenabled == false then
+		inventory.activateinventory = true
 	end
 	
     Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
@@ -475,17 +483,17 @@ function inventory.onInputUpdate()
 
 
   if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
-  inventory.activateinventory = true
+    inventory.activateinventory = true
     if Misc.isPausedByLua() then
-    inventoryopen = false
-        Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
-        Misc.unpause()
-        Audio.MusicVolume(64)
+      inventoryopen = false
+      Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
+      Misc.unpause()
+      Audio.MusicVolume(64)
     else
-    inventoryopen = true
-        Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
-        Misc.pause()
-        Audio.MusicVolume(16)
+      inventoryopen = true
+      Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
+	  Misc.pause()
+      Audio.MusicVolume(16)
     end
   end
 
