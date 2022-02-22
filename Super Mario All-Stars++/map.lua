@@ -49,17 +49,16 @@ function levelload()
 		player.rawKeys.jump = KEYS_UNPRESSED
 	end
 	SFX.play("_OST/_Sound Effects/levelload.ogg")
-	middle = middle + 1
 	loadlevelanimation = true
 	Audio.MusicVolume(0)
 	Misc.pause()
 	player:mem(0x17A, FIELD_BOOL, true)
-	Routine.wait(1.2, true)
+	Routine.waitFrames(78, true)
 	Misc.unpause()
 	player:mem(0xFA, FIELD_BOOL, true)
 	loadlevelanimation = nil
-	Audio.MusicVolume(56)
 	loadlevelanimationin = true
+	Audio.MusicVolume(56)
 	Routine.waitFrames(78, true)
 	loadlevelanimationin = nil
 end
@@ -120,13 +119,14 @@ function onDraw()
 	
 	local customtileone = Graphics.loadImage("customtile401.png")
 	Graphics.drawImageToSceneWP(customtileone, -3328, -1824, 4)
+	
 	if loadlevelanimation then
 		time = time + 1
 		Graphics.drawScreen{color = Color.black..math.max(0,time/32),priority = 10}
 	end
 	if loadlevelanimationin then
 		time = time - 1
-		Graphics.drawScreen{color = Color.black..math.min(1,time/32),priority = 10}
+		Graphics.drawScreen{color = Color.black..math.min(1,time/24),priority = 10}
 	end
 end
 

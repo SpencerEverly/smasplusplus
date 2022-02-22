@@ -17,6 +17,7 @@ local inventory = {}
 
 local warpTransition = require("warpTransition")
 local pausemenu = require("pausemenu")
+local littleDialogue = require("littleDialogue")
 
 local inventory = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.png"))
 local inventorysmol = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventorysmol.png"))
@@ -363,6 +364,16 @@ function inventory.onPostNPCKill(v,reason)
 
 end
 
+local STATE = {
+    IN     = 0,
+    STAY   = 1,
+    SCROLL = 2,
+    OUT    = 3,
+    SCROLL_ANSWERS = 4,
+
+    REMOVE = -1,
+}
+
 -- Run code every frame (~1/65 second)
 -- (code will be executed before game logic will be processed)
 function inventory.onTick()
@@ -377,6 +388,9 @@ function inventory.onTick()
 		inventory.activateinventory = false
 	end
 	if pausemenu.paused == true then
+		inventory.activateinventory = false
+	end
+	if littleDialogue.boxes then
 		inventory.activateinventory = false
 	end
 	
