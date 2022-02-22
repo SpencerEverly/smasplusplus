@@ -698,7 +698,7 @@ local function mainmenu()
 	pausemenu.paused = false
 	Misc.unpause()
 	Misc.saveGame()
-	Level.load("SMAS - Start.lvlx", nil, nil)
+	Routine.run(function() exitscreen = true Audio.MusicVolume(0) SFX.play("_OST/_Sound Effects/shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
 end
 
 local function wrong()

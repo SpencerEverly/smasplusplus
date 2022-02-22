@@ -390,7 +390,7 @@ function inventory.onTick()
 	if pausemenu.paused == true then
 		inventory.activateinventory = false
 	end
-	if littleDialogue.boxes then
+	if littleDialogue.boxes == true then
 		inventory.activateinventory = false
 	end
 	

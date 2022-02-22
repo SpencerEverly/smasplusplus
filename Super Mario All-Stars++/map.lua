@@ -241,9 +241,16 @@ function onDraw()
 	Graphics.drawImageWP(coinicon, 330, 558, 5)
 	Graphics.drawImageWP(times, 348, 560, 5)
 	textplus.print{x=367, y=558, text = ""..SaveData.totalcoins.."", priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-	textplus.print{x=64, y=84, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+	textplus.print{x=64, y=70, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
 	if world.levelTitle then
 		textplus.print{x=64, y=111, text = world.levelTitle, priority=5, color=Color.yellow, font=font1} --Level title
+	end
+	if world.levelObj then
+		textplus.print{x=64, y=92, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2} --Filename
+		textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
+	end
+	if world.levelObj == nil then
+		textplus.print{x=64, y=92, text = "N/A", priority=5, color=Color.yellow, font=font2}
 	end
 	Graphics.drawBox{x=719, y=575, width=76, height=20, color=Color.black..0.2, priority=8}
 	textplus.print{x=724, y=580, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
