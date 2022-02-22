@@ -247,7 +247,7 @@ function onDraw()
 	end
 	if world.levelObj then
 		textplus.print{x=64, y=92, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2} --Filename
-		textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
+		--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
 	end
 	if world.levelObj == nil then
 		textplus.print{x=64, y=92, text = "N/A", priority=5, color=Color.yellow, font=font2}

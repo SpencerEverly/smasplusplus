@@ -16,7 +16,7 @@ local episodePath = mem(0x00B2C61C, FIELD_STRING)
 local rng = require("base/rng")
 
 local image = Graphics.loadImage("loadscreen.png")
-
+local blackscreen = Graphics.loadImage("black-screen.png")
 local loadicon = Graphics.loadImage("loadscreen-logo.png")
 
 local frame = 0
@@ -80,4 +80,12 @@ function onDraw()
     end
 
     time = time + 1
+	
+	--local time3 = 0
+	--local opacity3 = math.min(1,time3/42)
+	
+	--if onLoad() then
+		--time = time + 1
+		--Graphics.drawImageWP(blackscreen, 0, 0, 1, 0, 800, 600,opacity3, 10)
+	--end
 end

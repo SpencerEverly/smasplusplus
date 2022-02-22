@@ -6,7 +6,6 @@ local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local handycam = require("handycam")
 local autoscroll = require("autoscroll")
-local loadscreenext = require("loadscreenext")
 
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
@@ -15,6 +14,8 @@ local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 
 local player2_alt = Player(2)
+
+local fadetolevel = false
 
 littleDialogue.registerStyle("smbx13og",{
 	textXScale = 1,
@@ -92,12 +93,19 @@ littleDialogue.registerStyle("infobooth",{
     speakerNameOffsetY = 24,
 })
 
+local blackscreen = Graphics.loadImage("black-screen.png")
+
+--local timer1 = 0
+--local time = 0
+--local opacity = math.min(1,time/42)
+
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
 function onLoad()
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
+		fadetolevel = true
 	end
 end
 
@@ -108,6 +116,7 @@ function onPause(evt)
 end
 
 function onStart()
+	fadetolevel = false
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(500)
 	end
@@ -701,6 +710,13 @@ function onPostNPCKill(npc, harmType)
 	if npc.id == 277 or npc.id == 264 then
         SaveData.totaliceflowers = SaveData.totaliceflowers + 1
     end
+end
+
+function onDraw()
+	--if fadetolevel then
+		--time = time + 1
+		--Graphics.drawImageWP(blackscreen, 0, 0, 1, 0, 800, 600,opacity, 10)
+	--end
 end
 
 function onExit()

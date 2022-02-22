@@ -24,7 +24,7 @@ function map_music.onStart()
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Title.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Desert.ogg"))
 	end
-	if currentCostume == "1-SMB1-RETRO" then
+	if currentCostume then
 		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
@@ -47,7 +47,7 @@ function map_music.onTick()
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Title.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario All-Stars++ (Beta)/Desert.ogg"))
 	end
-	if currentCostume == "1-SMB1-RETRO" then
+	if currentCostume then
 		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
@@ -258,5 +258,11 @@ jukebox.setMusicBox(772, 640, -1152)
 jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 jukebox.setMusicBox(773, 1152, -1376)
 jukebox.setMusicBox(773, 1536, -1856)
+
+--SMW Chocolate Desert
+jukebox.setTrack(774, jukebox.resolveMusicFile("_OST/Super Mario World/World Music/Chocolate Desert.ogg"))
+jukebox.setMusicBox(774, 7584, 1280)
+jukebox.setMusicBox(774, 7168, 1440)
+jukebox.setMusicBox(774, 7392, 1312)
 
 return map_music
