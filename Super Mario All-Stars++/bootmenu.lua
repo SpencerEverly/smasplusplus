@@ -345,7 +345,7 @@ local function menuDialogue()
 end
 
 local function gamebootDialogue()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
 end
 
 local function optionsMenu1()
@@ -388,7 +388,7 @@ end
 
 local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == 1 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.0>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.5>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == 0 or not Level.filename() == "intro_SMAS.lvlx" then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters and revert to the original theme to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	elseif Level.filename() == "intro_SMAS.lvlx" then
@@ -406,11 +406,15 @@ local function TwoPlayerCheck()
 	if Player.count() == 1 then
 		Cheats.trigger("2player")
 		Defines.player_hasCheated = false
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>2 Player settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	elseif Player.count() == 2 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	end
+end
+
+local function OnePlayerCheck()
+	if Player.count() == 2 then
 		Cheats.trigger("1player")
 		Defines.player_hasCheated = false
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>2 Player settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.1>1 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -1045,8 +1049,8 @@ littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = fu
 
 
 littleDialogue.registerAnswer("GameBoot",{text = "Start Super Mario All-Stars++",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
-littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Remake)",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
-littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Original)",chosenFunction = function() Routine.run(BootWSMBAOGPreExecute) end})
+littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
+--littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Original)",chosenFunction = function() Routine.run(BootWSMBAOGPreExecute) end})
 littleDialogue.registerAnswer("GameBoot",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
@@ -1155,7 +1159,8 @@ littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunctio
 littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes", chosenFunction = function() Routine.run(X2Char) end})
 
 
-littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
+littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Players Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
+littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheck) end})
 littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 

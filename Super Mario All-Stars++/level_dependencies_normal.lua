@@ -7,8 +7,6 @@ local datetime = require("datetime")
 local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 
-local undertaledepends = require("level_dependencies_undertale")
-
 local dying = false;
 local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
@@ -81,6 +79,7 @@ function dependencies.onStart()
 	
 	local costumes
 	if SaveData.disableX2char == 0 then
+		undertaledepends = require("level_dependencies_undertale")
 		pausemenu = require("pausemenu")
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")

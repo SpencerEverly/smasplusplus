@@ -17,7 +17,7 @@ local rng = require("base/rng")
 
 local image = Graphics.loadImage("loadscreen.png")
 
-local loadicon = Graphics.loadImage("hardcoded-30-5.png")
+local loadicon = Graphics.loadImage("loadscreen-logo.png")
 
 local frame = 0
 local frame2 = 0

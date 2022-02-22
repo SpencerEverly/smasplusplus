@@ -96,6 +96,10 @@ end
 local function x2modedisable()
 	paused = false
 	Misc.unpause()
+	if Player.count() == 2 then
+		Cheats.trigger("1player")
+		Defines.player_hasCheated = false
+	end
 	if SaveData.disableX2char == 0 then
 		SaveData.disableX2char = SaveData.disableX2char + 1
 		Level.load(Level.filename())

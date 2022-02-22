@@ -190,6 +190,16 @@ function onStart()
 		Audio.MusicChange(12, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
 		Audio.MusicChange(13, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
 	end
+	if character == "CHARACTER_KLONOA" then
+		Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(7, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(8, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+		Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Threer.ogg")
+		Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Threer.ogg")
+		Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
+	end
 	if character == "CHARACTER_ZELDA" then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
