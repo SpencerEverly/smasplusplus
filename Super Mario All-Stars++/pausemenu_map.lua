@@ -121,27 +121,19 @@ local function switchtotele()
 	pausemenu2.paused = false
 end
 
-local function quitonly()
-	pausemenu2.paused = false
-	cooldown = 5
-	Misc.unpause()
-	player:mem(0x17A,FIELD_BOOL,false)
-	if cooldown <= 0 then
-		player:mem(0x17A,FIELD_BOOL,true)
-	end
-	Misc.exitEngine();
+local function quitgame()
+	Audio.MusicVolume(0)
+	Misc.saveGame()
+	SFX.play("_OST/_Sound Effects/savequit.ogg")
+	pausemenu.paused = false
+	Routine.run(function() exitscreen = true Routine.wait(1.8, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
-local function quitgame()
-	pausemenu2.paused = false
-	cooldown = 5
-	Misc.unpause()
-	player:mem(0x17A,FIELD_BOOL,false)
-	if cooldown <= 0 then
-		player:mem(0x17A,FIELD_BOOL,true)
-	end
-	Misc.saveGame();
-	Misc.exitEngine();
+local function quitonly()
+	Graphics.drawScreen{color = Color.black, priority = 10}
+	Audio.MusicVolume(0)
+	SFX.play("_OST/_Sound Effects/nosave.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(0.9, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegame()
@@ -500,7 +492,7 @@ local function drawPauseMenu(y, alpha)
 		table.insert(pause_options, {name="Character Options", action = switchtochar});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Quit", action = quitgame});
-		table.insert(pause_options, {name="Exit Without Saving (DATA WILL BE LOST)", action = quitonly});
+		table.insert(pause_options, {name="Exit Without Saving", action = quitonly});
 	end
 	for k,v in ipairs(pause_options) do
 		local c = 0xFFFFFF00;

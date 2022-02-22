@@ -48,12 +48,14 @@ function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
 	end
+	world.playerWalkingFrame = 1
 	SFX.play("_OST/_Sound Effects/levelload.ogg")
-	loadlevelanimation = true
 	Audio.MusicVolume(0)
 	Misc.pause()
 	player:mem(0x17A, FIELD_BOOL, true)
-	Routine.waitFrames(78, true)
+	Routine.waitFrames(20, true)
+	loadlevelanimation = true
+	Routine.waitFrames(58, true)
 	Misc.unpause()
 	player:mem(0xFA, FIELD_BOOL, true)
 	Routine.waitFrames(1, true)

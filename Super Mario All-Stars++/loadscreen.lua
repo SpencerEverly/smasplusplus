@@ -24,12 +24,11 @@ local frame2 = 0
 local timer = 0
 local speed = 0
 
-local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png"}
+local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png", "didyouknow12.png"}
 local selecter = rng.randomInt(1,#didyouknow)
 local knowledge = Graphics.loadImage(episodePath..didyouknow[selecter]);
 
 local letterData = {}
-
 
 local time = 0
 
@@ -45,7 +44,6 @@ function onDraw()
         message = #letterWidths
         widths = letterWidths[message]
     end
-
 
     local opacity = math.min(1,time/42)
 
@@ -80,7 +78,6 @@ function onDraw()
         Graphics.drawImage(image,baseX+xOffset,baseY+data.offset,xOffset,sourceY,width,height,opacity)
         xOffset = xOffset + width
     end
-
 
     time = time + 1
 end

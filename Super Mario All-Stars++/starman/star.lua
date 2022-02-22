@@ -203,11 +203,11 @@ local function drawStar(p)
 	local idx = p.idx;
 
 	if(starSoundObject ~= nil) then
-		if(Misc.isPaused()) then
-			starSoundObject:Pause()
-		else
-			starSoundObject:Resume()
-		end
+		--if(Misc.isPaused()) then
+			--starSoundObject:Pause()
+		--else
+			--starSoundObject:Resume()
+		--end
 	end
 	
 	if(starSparkleObjects[idx] ~= nil and p:mem(0x13E, FIELD_WORD) == 0) then

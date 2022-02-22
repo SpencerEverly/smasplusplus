@@ -6,6 +6,7 @@ local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local handycam = require("handycam")
 local autoscroll = require("autoscroll")
+local loadscreenext = require("loadscreenext")
 
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
@@ -91,13 +92,13 @@ littleDialogue.registerStyle("infobooth",{
     speakerNameOffsetY = 24,
 })
 
---loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
+loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
 function onLoad()
-	--if not Misc.inEditor() then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
-		--loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
-		--loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
-	--end
+	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
+		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
+		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
+	end
 end
 
 --New pause menu was made, this is to prevent the old pause menu from opening
@@ -107,10 +108,9 @@ function onPause(evt)
 end
 
 function onStart()
-	--if not Misc.inEditor() then
-		--loadingSoundObject:FadeOut(500)
-	--end
-	
+	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
+		loadingSoundObject:FadeOut(500)
+	end
 end
 	
 function onTick()
