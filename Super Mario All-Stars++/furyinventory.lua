@@ -15,6 +15,9 @@ with all this stuff. I probably would have gone insane if they didn't help.
 
 local inventory = {}
 
+local warpTransition = require("warpTransition")
+local pausemenu = require("pausemenu")
+
 local inventory = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.png"))
 local inventorysmol = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventorysmol.png"))
 local selector = Graphics.loadImage(Misc.resolveFile("inventorystuff/selector.png"))
@@ -364,7 +367,19 @@ end
 -- (code will be executed before game logic will be processed)
 function inventory.onTick()
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
-
+	if warpTransition.transitionTimer >= 0.1 then
+		inventory.activateinventory = false
+	end
+	if warpTransition.transitionTimer == 0 then
+		inventory.activateinventory = true
+	end
+	if pausemenu.pauseactivated == false then
+		inventory.activateinventory = false
+	end
+	if pausemenu.paused == true then
+		inventory.activateinventory = false
+	end
+	
     Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
     
         numx = 40
