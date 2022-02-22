@@ -9,10 +9,20 @@ local jukebox = require("jukebox-v11")
 local pause_music = require("map_music")
 local Routine = require("routine")
 
+local font1 = textplus.loadFont("littleDialogue/font/10.ini")
+local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+local hudborder = Graphics.loadImage("hardcoded-33-4-tp.png")
+local times = Graphics.loadImage("hardcoded-33-1.png")
+local coinicon = Graphics.loadImage("hardcoded-33-2.png")
+local oneupicon = Graphics.loadImage("hardcoded-33-3.png")
+local staricon = Graphics.loadImage("hardcoded-33-5.png")
+
 local loadlevelanimation = false
 local levelnames = Level.get()
 local timer = 100
 local cooldown = 0
+
+local playerSprite
 
 local timer1 = 0
 local speed = 0
@@ -33,17 +43,6 @@ map3d.Heightmap.position = vector.v2(6496, 0)
 local middle = 0
 local transitionTimer = 0
 
-function onLoad()
-	if SaveData.disableX2char == 0 then
-		inventory = require("customInventory")
-		smoothWorld = require("smoothWorld")
-		pausemenu = require("pausemenu_map")
-	end
-	if SaveData.disableX2char == 1 then
-		pausemenu13 = require("pausemenu13map")
-	end
-end
-
 function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
@@ -56,6 +55,7 @@ function levelload()
 	Routine.waitFrames(78, true)
 	Misc.unpause()
 	player:mem(0xFA, FIELD_BOOL, true)
+	Routine.waitFrames(1, true)
 	loadlevelanimation = nil
 	loadlevelanimationin = true
 	Audio.MusicVolume(56)
@@ -79,6 +79,7 @@ function onInputUpdate()
 end
 
 function onStart()
+	Graphics.activateHud(false)
 	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted.txt") == nil then
 		--Nothing
 	end
@@ -87,6 +88,14 @@ function onStart()
 	end
 	Audio.MusicVolume(nil)
 	mem(0xB25728, FIELD_BOOL, false) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
+	if SaveData.disableX2char == 0 then
+		inventory = require("customInventory")
+		smoothWorld = require("smoothWorld")
+		pausemenu = require("pausemenu_map")
+	end
+	if SaveData.disableX2char == 1 then
+		pausemenu13 = require("pausemenu13map")
+	end
 end
 
 function onTick()
@@ -106,6 +115,24 @@ function onPause(evt) --Because there's a new pause menu, the og pause menu has 
 end
 
 function onDraw()
+	Graphics.drawImageWP(hudborder, 0, 0, 3)
+	Graphics.drawImageWP(oneupicon, 70, 558, 5)
+	Graphics.drawImageWP(times, 105, 560, 5)
+	textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+	Graphics.drawImageWP(coinicon, 160, 558, 5)
+	Graphics.drawImageWP(times, 178, 560, 5)
+	textplus.print{x=197, y=558, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+	Graphics.drawImageWP(staricon, 236, 558, 5)
+	Graphics.drawImageWP(times, 254, 560, 5)
+	textplus.print{x=274, y=558, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+	Graphics.drawImageWP(coinicon, 326, 554, 4)
+	Graphics.drawImageWP(coinicon, 330, 558, 5)
+	Graphics.drawImageWP(times, 348, 560, 5)
+	textplus.print{x=367, y=558, text = ""..SaveData.totalcoins.."", priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+	textplus.print{x=64, y=84, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+	if world.levelTitle then
+		textplus.print{x=64, y=111, text = world.levelTitle, priority=5, color=Color.yellow, font=font1} --Level title
+	end
 	Graphics.drawBox{x=719, y=575, width=76, height=20, color=Color.black..0.2, priority=8}
 	textplus.print{x=724, y=580, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
 	textplus.print{x=755, y=580, text = os.date("%I"), priority=8, color=Color.white}
@@ -125,8 +152,8 @@ function onDraw()
 		Graphics.drawScreen{color = Color.black..math.max(0,time/32),priority = 10}
 	end
 	if loadlevelanimationin then
-		time = time - 1
-		Graphics.drawScreen{color = Color.black..math.min(1,time/24),priority = 10}
+		time = 2 - 1
+		Graphics.drawScreen{color = Color.black..math.min(1,time/28),priority = 10}
 	end
 end
 

@@ -180,6 +180,7 @@ function starman.onInitAPI()
 	registerEvent(starman, "onDraw", "onDraw", false)
 	registerEvent(starman, "onExitLevel")
     registerEvent(starman, "onNPCKill")
+	registerEvent(starman, "onPostNPCKill")
     
     for k,v in ipairs(starman.ids) do
         idMap[v] = true
@@ -258,6 +259,13 @@ function starman.onNPCKill(event,npc,reason)
 		if(t) then
 			starman.start(t, npc.id)
 		end
+	end
+end
+
+function starman.onPostNPCKill(npc, harmType)
+	local stars = table.map{97,196}
+	if stars[npc.id] then
+		starman.stop(p)
 	end
 end
 
