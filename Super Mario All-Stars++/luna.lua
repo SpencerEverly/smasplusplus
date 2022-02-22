@@ -93,12 +93,6 @@ littleDialogue.registerStyle("infobooth",{
     speakerNameOffsetY = 24,
 })
 
-local blackscreen = Graphics.loadImage("black-screen.png")
-
---local timer1 = 0
---local time = 0
---local opacity = math.min(1,time/42)
-
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
 function onLoad()
@@ -713,10 +707,7 @@ function onPostNPCKill(npc, harmType)
 end
 
 function onDraw()
-	--if fadetolevel then
-		--time = time + 1
-		--Graphics.drawImageWP(blackscreen, 0, 0, 1, 0, 800, 600,opacity, 10)
-	--end
+	
 end
 
 function onExit()

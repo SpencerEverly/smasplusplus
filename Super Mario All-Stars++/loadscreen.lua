@@ -68,8 +68,8 @@ function onDraw()
         letterData[index] = letterData[index] or {offset = 0,speed = 0}
         local data = letterData[index]
 
-        if (time/4)%(count+8) == index-1 then
-            data.speed = -2.5
+        if (time/8)%(count+8) == index-1 then
+            data.speed = -3.5
         end
 
         data.speed = data.speed + 0.26

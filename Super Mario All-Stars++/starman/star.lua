@@ -278,7 +278,7 @@ function starman.onTick()
 	if starman.active() then
 		if(not killed and player:mem(0x13E,FIELD_BOOL)) then
 			killed = true
-			stopMusicImmediately(idx)
+			starman.stop(p)
 		end
 	end
 end
