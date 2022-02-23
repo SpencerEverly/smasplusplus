@@ -2,7 +2,6 @@
 	"mainPage": "index.html",
 	"title" : "Super Mario All-Stars++",
 	"current-version": [0, 0, 1],
-	"update-check-website": "https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/gitfiles/update-check.json"
 	"allowTwoPlayer": false,
 	"episodeIcon": "icon.png"
 }
