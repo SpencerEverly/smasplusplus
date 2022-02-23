@@ -47,11 +47,9 @@ local transitionTimer = 0
 function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
-	end
-	if player.rawKeys.left == KEYS_PRESSED then
+	elseif player.rawKeys.left == KEYS_PRESSED then
 		player.rawKeys.left = KEYS_UNPRESSED
-	end
-	if player.rawKeys.right == KEYS_PRESSED then
+	elseif player.rawKeys.right == KEYS_PRESSED then
 		player.rawKeys.right = KEYS_UNPRESSED
 	end
 	world.playerWalkingFrame = 1
@@ -76,6 +74,11 @@ function onInputUpdate()
 	if Misc.isPausedByLua() == false then
 		if world.levelTitle and world.levelObj then
 			if player.rawKeys.jump == KEYS_PRESSED then
+				if player.keys.left == KEYS_PRESSED then
+					player.keys.left = KEYS_UNPRESSED
+				elseif player.keys.right == KEYS_PRESSED then
+					player.keys.right = KEYS_UNPRESSED
+				end
 				Routine.run(levelload)
 			end
 		end

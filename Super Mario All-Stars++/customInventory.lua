@@ -89,7 +89,7 @@ function inventory.onStart()
 
 	if not isOverworld and SaveData.useStarman then
 		NPC.spawn(293, player.x, player.y, player.section)
-		if player2 then
+		if player.count() == 2 then
 			NPC.spawn(293, player2.x, player2.y, player2.section)
 		end
 		SaveData.useStarman = false
@@ -175,16 +175,17 @@ function inventory.onDrawWorld()
 			sourceWidth = 40,
 			priority = 5.1
 		}
-		
-		Graphics.draw{
-			type = RTYPE_IMAGE,
-			image = invChar,
-			x = 430,
-			y = 320,
-			sourceX = tonumber(player2.character - 1) * 40,
-			sourceWidth = 40,
-			priority = 5.1
-		}
+		if player.count() == 2 then
+			Graphics.draw{
+				type = RTYPE_IMAGE,
+				image = invChar,
+				x = 430,
+				y = 320,
+				sourceX = tonumber(player2.character - 1) * 40,
+				sourceWidth = 40,
+				priority = 5.1
+			}
+		end
 
 		Text.printWP("Choose a", 330, 278, 5.3)
 		Text.printWP("Player", 346, 298, 5.3)
@@ -245,7 +246,7 @@ function inventory.onInputWorld()
 		if player.keys.jump == KEYS_PRESSED then
 			if SaveData.inventoryTable[selectedOffset] > 0 then
 				if selectedOffset < 6 then
-					if player2 then
+					if player.count() == 2 then
 						chooseIsOpen = true
 						SFX.play(29)
 						if cScale >= 1 then
@@ -275,7 +276,7 @@ function inventory.onInputWorld()
 					ps = PlayerSettings.get(player.character, 4)
 					player.height = ps.hitboxHeight
 
-					if player2 then
+					if player.count() == 2 then
 						player2.powerup = 4
 						ps = PlayerSettings.get(player2.character, 4)
 						player2.height = ps.hitboxHeight
@@ -298,11 +299,7 @@ function inventory.onTick()
 		player:mem(0x170, FIELD_WORD, 100)
 	end
 
-	if player2 then
-		if player.powerup ~= 4 and player2.powerup ~= 4  then
-			SaveData.usePWing = false
-		end
-	else
+	if player.count() == 2 then
 		if player.powerup ~= 4 then
 			SaveData.usePWing = false
 		end

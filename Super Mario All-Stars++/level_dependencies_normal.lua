@@ -18,9 +18,6 @@ local deathDelay = lunatime.toTicks(1.2)
 local deathTimer = deathDelay
 
 local costumes = {}
-	
-local mm = require("Characters/megaman");
-mm.playIntro = false;
 
 local dependencies = {}
 
@@ -30,38 +27,10 @@ function dependencies.onInitAPI()
 	registerEvent(dependencies, "onTick")
 	registerEvent(dependencies, "onDraw")
 	registerEvent(dependencies, "onCameraUpdate")
-end
-
-function dependencies.onCameraUpdate(c, camIdx)
-	if player.count(2) then
-		if c == 1 then
-			camera.renderX, camera.rendery = 0, 0
-			camera.width, camera.height = 800, 600
-		else
-			camera2.renderX  = 800
-		end
-		local screenType = mem(0x00B25130,FIELD_WORD)
-
-		if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
-			return camIdx
-		elseif screenType == 5 then -- dynamic screen
-			if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
-				return 2
-			elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
-				return 1
-			else
-				return 0
-			end
-		elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
-			return 0
-		else
-			return 1
-		end
-	end
+	registerEvent(dependencies, "onInputUpdate")
 end
 
 function dependencies.onStart()
-	--autoscroll.scrollTo(-200000, -200000, 10000)
 	if Misc.inEditor() then
 		debugbox = require("debugbox")
 	end
@@ -79,6 +48,8 @@ function dependencies.onStart()
 	
 	local costumes
 	if SaveData.disableX2char == 0 then
+		mm = require("Characters/megaman");
+		mm.playIntro = false;
 		undertaledepends = require("level_dependencies_undertale")
 		pausemenu = require("pausemenu")
 		warpTransition = require("warpTransition")
@@ -290,7 +261,34 @@ function dependencies.onStart()
 			end
 		end
 	end
-	
+end
+
+function dependencies.onInputUpdate()
+	if SaveData.disableX2char == 1 then
+		if player.count() == 1 then
+			--Nothing
+		end
+	end
+	if SaveData.disableX2char == 1 then
+		if player.count() == 2 then
+			if player.keys.altRun == KEYS_PRESSED then
+				if pausemenu13.paused == false then
+					player:teleport(Player(2).x - 32, Player(2).y)
+					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+				end
+			end
+		end
+	end
+	if SaveData.disableX2char == 1 then
+		if player.count() == 2 then
+			if player2.keys.altRun == KEYS_PRESSED then
+				if pausemenu13.paused == false then
+					Player(2):teleport(player.x + 32, player.y)
+					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+				end
+			end
+		end
+	end
 end
 
 function dependencies.onTick()

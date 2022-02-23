@@ -30,7 +30,7 @@ local numx = 40
 local numy = 570
 
 
-inventory.activateinventory = true--this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
+inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
 
 local inventoryopen = false
 
@@ -101,58 +101,57 @@ function inventory.onInitAPI()
 end
 
 function inventory.onDraw()
-
     player.reservePowerup = 0 -- disables the item box
+	if inventory.activateinventory == true then
+		if Misc.isPausedByLua() then
+			numx = 54
+			numy = 574
 
-    if inventory.activateinventory == true then
-        if Misc.isPausedByLua() then
-            numx = 54
-            numy = 574
+		
 
-        
+			if SaveData.inventory.shroom >= 10 then
+				Text.print(SaveData.inventory.shroom, numx-8, numy)
+			else
+				Text.print(SaveData.inventory.shroom, numx, numy)
+			end
 
-            if SaveData.inventory.shroom >= 10 then
-                Text.print(SaveData.inventory.shroom, numx-8, numy)
-            else
-                Text.print(SaveData.inventory.shroom, numx, numy)
-            end
+			if SaveData.inventory.fire >= 10 then
+				Text.print(SaveData.inventory.fire, numx+64-8, numy)
+			else
+				Text.print(SaveData.inventory.fire, numx+64, numy)
+			end
 
-            if SaveData.inventory.fire >= 10 then
-                Text.print(SaveData.inventory.fire, numx+64-8, numy)
-            else
-                Text.print(SaveData.inventory.fire, numx+64, numy)
-            end
+			if SaveData.inventory.ice >= 10 then
+				Text.print(SaveData.inventory.ice, numx+128-8, numy)
+			else
+				Text.print(SaveData.inventory.ice, numx+128, numy)
+			end
 
-            if SaveData.inventory.ice >= 10 then
-                Text.print(SaveData.inventory.ice, numx+128-8, numy)
-            else
-                Text.print(SaveData.inventory.ice, numx+128, numy)
-            end
+			if SaveData.inventory.leaf >= 10 then
+				Text.print(SaveData.inventory.leaf, numx+192-8, numy)
+			else
+				Text.print(SaveData.inventory.leaf, numx+192, numy)
+			end
 
-            if SaveData.inventory.leaf >= 10 then
-                Text.print(SaveData.inventory.leaf, numx+192-8, numy)
-            else
-                Text.print(SaveData.inventory.leaf, numx+192, numy)
-            end
+			if SaveData.inventory.tanooki >= 10 then
+				Text.print(SaveData.inventory.tanooki, numx+256-8, numy)
+			else
+				Text.print(SaveData.inventory.tanooki, numx+256, numy)
+			end
 
-            if SaveData.inventory.tanooki >= 10 then
-                Text.print(SaveData.inventory.tanooki, numx+256-8, numy)
-            else
-                Text.print(SaveData.inventory.tanooki, numx+256, numy)
-            end
-
-            if SaveData.inventory.hammer >= 10 then
-                Text.print(SaveData.inventory.hammer, numx+320-8, numy)
-            else
-                Text.print(SaveData.inventory.hammer, numx+320, numy)
-            end
-
+			if SaveData.inventory.hammer >= 10 then
+				Text.print(SaveData.inventory.hammer, numx+320-8, numy)
+			else
+				Text.print(SaveData.inventory.hammer, numx+320, numy)
+			end
 
 
-        end
-		if inventory.activateinventory == false then
+
+			if inventory.activateinventory == false then
+				--Nothing
+			end
 		end
-    end
+	end
 
 --makes sure that you don't go over the limit of items
     if SaveData.inventory.shroom >= maxshroom then
@@ -203,98 +202,94 @@ function inventory.onDraw()
     if SaveData.inventory.hammer <= minhammer then
         SaveData.inventory.hammer = minhammer
     end
+	if inventory.activateinventory == true then
+		if Misc.isPausedByLua() then -- selects the powerup
+			if player.rawKeys.jump == KEYS_PRESSED then
+				if player.powerup == powerup[state] then
+					Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+				elseif state == 1 then
+					if SaveData.inventory.shroom > 0 then -- mushroom
+						if player.powerup == 1 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+							Audio.playSFX(6)
+							player.powerup = powerup[state]
+							SaveData.inventory.shroom = SaveData.inventory.shroom - 1
+						end
+					elseif SaveData.inventory.shroom <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 2 then
+					if SaveData.inventory.fire > 0 then -- SaveData.inventory.fire flower
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(6)
+						player.powerup = powerup[state]
+						SaveData.inventory.fire = SaveData.inventory.fire - 1
+					elseif SaveData.inventory.fire <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 3 then
+					if SaveData.inventory.ice > 0 then -- SaveData.inventory.ice flower
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(6)
+						player.powerup = powerup[state]
+						SaveData.inventory.ice = SaveData.inventory.ice - 1
+					elseif SaveData.inventory.ice <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 4 then
+					if SaveData.inventory.leaf > 0 then -- super SaveData.inventory.leaf
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(34)
+						player.powerup = powerup[state]
+						SaveData.inventory.leaf = SaveData.inventory.leaf - 1
+					elseif SaveData.inventory.leaf <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 5 then
+					if SaveData.inventory.tanooki > 0 then -- SaveData.inventory.tanooki suit
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(34)
+						player.powerup = powerup[state]
+						SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
+					elseif SaveData.inventory.tanooki <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 6 then
+					if SaveData.inventory.hammer > 0 then -- SaveData.inventory.hammer suit
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(34)
+						player.powerup = powerup[state]
+						SaveData.inventory.hammer = SaveData.inventory.hammer - 1
+					elseif SaveData.inventory.hammer <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				end
+			end
+		end
+	end
 
-    if inventory.activateinventory == true then
-        if Misc.isPausedByLua() then -- selects the powerup
-            if player.rawKeys.jump == KEYS_PRESSED then
-                if player.powerup == powerup[state] then
-                    Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-                 elseif state == 1 then
-                    if SaveData.inventory.shroom > 0 then -- mushroom
-                        if player.powerup == 1 then
-                            Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                            Audio.playSFX(6)
-                            player.powerup = powerup[state]
-                            SaveData.inventory.shroom = SaveData.inventory.shroom - 1
-                        end
-                    elseif SaveData.inventory.shroom <= 0 then
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-                    end
-                elseif state == 2 then
-                    if SaveData.inventory.fire > 0 then -- SaveData.inventory.fire flower
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                        Audio.playSFX(6)
-                        player.powerup = powerup[state]
-                        SaveData.inventory.fire = SaveData.inventory.fire - 1
-                    elseif SaveData.inventory.fire <= 0 then
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-                    end
-                elseif state == 3 then
-                    if SaveData.inventory.ice > 0 then -- SaveData.inventory.ice flower
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                        Audio.playSFX(6)
-                        player.powerup = powerup[state]
-                        SaveData.inventory.ice = SaveData.inventory.ice - 1
-                    elseif SaveData.inventory.ice <= 0 then
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-                    end
-                elseif state == 4 then
-                    if SaveData.inventory.leaf > 0 then -- super SaveData.inventory.leaf
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                        Audio.playSFX(34)
-                        player.powerup = powerup[state]
-                        SaveData.inventory.leaf = SaveData.inventory.leaf - 1
-                    elseif SaveData.inventory.leaf <= 0 then
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-                    end
-                elseif state == 5 then
-                    if SaveData.inventory.tanooki > 0 then -- SaveData.inventory.tanooki suit
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                        Audio.playSFX(34)
-                        player.powerup = powerup[state]
-                        SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
-                    elseif SaveData.inventory.tanooki <= 0 then
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-                    end
-                elseif state == 6 then
-                    if SaveData.inventory.hammer > 0 then -- SaveData.inventory.hammer suit
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                        Audio.playSFX(34)
-                        player.powerup = powerup[state]
-                        SaveData.inventory.hammer = SaveData.inventory.hammer - 1
-                    elseif SaveData.inventory.hammer <= 0 then
-                        Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-                    end
-                end
-            end
-        end
-    end
-
-
-    if inventory.activateinventory == true then
-        if Misc.isPausedByLua() then
-            if SaveData.inventory.shroom == 0 then
-                Graphics.drawImage(noshroom, 30, 508 )
-            end
-            if SaveData.inventory.fire == 0 then
-                Graphics.drawImage(nofire, 94, 508 )
-            end
-            if SaveData.inventory.ice == 0 then
-                Graphics.drawImage(noice, 158, 508 )
-            end 
-            if SaveData.inventory.leaf == 0 then
-                Graphics.drawImage(noleaf, 222, 508 )
-            end
-            if SaveData.inventory.tanooki == 0 then
-                Graphics.drawImage(notanooki, 286, 508 )
-            end
-            if SaveData.inventory.hammer == 0 then
-                Graphics.drawImage(nohammer, 350, 508 )
-            end
-
-        end
-    end
-
+	if inventory.activateinventory == true then
+		if Misc.isPausedByLua() then
+			if SaveData.inventory.shroom == 0 then
+				Graphics.drawImage(noshroom, 30, 508 )
+			end
+			if SaveData.inventory.fire == 0 then
+				Graphics.drawImage(nofire, 94, 508 )
+			end
+			if SaveData.inventory.ice == 0 then
+				Graphics.drawImage(noice, 158, 508 )
+			end 
+			if SaveData.inventory.leaf == 0 then
+				Graphics.drawImage(noleaf, 222, 508 )
+			end
+			if SaveData.inventory.tanooki == 0 then
+				Graphics.drawImage(notanooki, 286, 508 )
+			end
+			if SaveData.inventory.hammer == 0 then
+				Graphics.drawImage(nohammer, 350, 508 )
+			end
+		end
+	end
 end
 
 
@@ -378,6 +373,7 @@ local STATE = {
 -- (code will be executed before game logic will be processed)
 function inventory.onTick()
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
+	
 	if warpTransition.transitionTimer >= 0.1 then
 		inventory.activateinventory = false
 	end
@@ -390,16 +386,14 @@ function inventory.onTick()
 	if warpTransition.crossSectionTransition == warpTransition.TRANSITION_FADE then
 		inventory.activateinventory = false
 	end
+	if warpTransition.sameSectionTransition == warpTransition.TRANSITION_PAN then
+		inventory.activateinventory = false
+	end
 	if pausemenu.pauseactivated == false then
 		inventory.activateinventory = false
 	end
 	if pausemenu.paused == true then
 		inventory.activateinventory = false
-	end
-	if littleDialogue.boxenabled == true then
-		inventory.activateinventory = false
-	elseif littleDialogue.boxenabled == false then
-		inventory.activateinventory = true
 	end
 	
     Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
@@ -445,104 +439,102 @@ function inventory.onTick()
 
 
 
-                if SaveData.inventory.shroom == 0 then
-            Graphics.drawImage(noshroomsmol, 32, 538 )
-        end
-        if SaveData.inventory.fire == 0 then
-            Graphics.drawImage(nofiresmol, 64, 538 )
-        end
-        if SaveData.inventory.ice == 0 then
-            Graphics.drawImage(noicesmol, 96, 538 )
-        end
-        if SaveData.inventory.leaf == 0 then
-            Graphics.drawImage(noleafsmol, 128, 538 )
-        end
-        if SaveData.inventory.tanooki == 0 then
-            Graphics.drawImage(notanookismol, 160, 538 )
-        end
-        if SaveData.inventory.hammer == 0 then
-            Graphics.drawImage(nohammersmol, 192, 538 )
-        end
+	if SaveData.inventory.shroom == 0 then
+        Graphics.drawImage(noshroomsmol, 32, 538 )
+    end
+    if SaveData.inventory.fire == 0 then
+        Graphics.drawImage(nofiresmol, 64, 538 )
+    end
+    if SaveData.inventory.ice == 0 then
+		Graphics.drawImage(noicesmol, 96, 538 )
+    end
+    if SaveData.inventory.leaf == 0 then
+        Graphics.drawImage(noleafsmol, 128, 538 )
+    end
+    if SaveData.inventory.tanooki == 0 then
+        Graphics.drawImage(notanookismol, 160, 538 )
+    end
+    if SaveData.inventory.hammer == 0 then
+        Graphics.drawImage(nohammersmol, 192, 538 )
+    end
 end
 
 
 function inventory.onInputUpdate()
 
 --this bit makes sure the inventory doesn't clash with dialogue systems
-    if inventoryopen == false then
-        if player.keys.up == KEYS_PRESSED then
-            inventory.activateinventory = false
-        end
+	if inventoryopen == false then
+		if player.keys.up == KEYS_PRESSED then
+			inventory.activateinventory = false
+		end
 		if player.keys.down == KEYS_PRESSED then
-            inventory.activateinventory = false
-        end
-		if player.keys.pause == KEYS_PRESSED then
-            inventory.activateinventory = false
-        end
-    end
+			inventory.activateinventory = false
+		end
+		if pausemenu.pauseactivated == false then
+			if player.rawKeys.dropItem == KEYS_PRESSED then
+				player.rawKeys.dropItem = KEYS_UNPRESSED
+			end
+		end
+		if pausemenu.pauseactivated == true then
+			if player.rawKeys.dropItem == KEYS_PRESSED then
+				--Nothing
+			end
+		end
+	end
 
+	if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
+		inventory.activateinventory = true
+		if Misc.isPausedByLua() then
+			inventoryopen = false
+			Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
+			Misc.unpause()
+		elseif not Misc.isPausedByLua() then
+			inventoryopen = true
+			Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
+			Misc.pause()
+		end
+	end
+	if inventory.activateinventory == true then
+		if Misc.isPausedByLua() then
+			Graphics.drawImage(inventory, 30, 508)
+			Graphics.drawImage(selector, selectx, selecty)
+		end
+	end
+	if Misc.isPausedByLua() then -- move cursor right
+		if player.rawKeys.right == KEYS_PRESSED then
+			Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
+			selectx = selectx + 64
+			state = state + 1
+		end
+	end
+	if Misc.isPausedByLua() then -- move cursor left
+		if player.rawKeys.left == KEYS_PRESSED then
+			Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
+			selectx = selectx - 64
+			state = state - 1
+		end
+	end
 
-  if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
-    inventory.activateinventory = true
-    if Misc.isPausedByLua() then
-      inventoryopen = false
-      Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
-      Misc.unpause()
-      Audio.MusicVolume(64)
-    else
-      inventoryopen = true
-      Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
-	  Misc.pause()
-      Audio.MusicVolume(16)
-    end
-  end
-
-  if inventory.activateinventory == true then
-      if Misc.isPausedByLua() then
-        Graphics.drawImage(inventory, 30, 508)
-        Graphics.drawImage(selector, selectx, selecty)
-      end
-
-        if Misc.isPausedByLua() then -- move cursor right
-            if player.rawKeys.right == KEYS_PRESSED then
-                Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
-                selectx = selectx + 64
-                state = state + 1
-            end
-
-        
-        end
-        if Misc.isPausedByLua() then -- move cursor left
-            if player.rawKeys.left == KEYS_PRESSED then
-                Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
-                selectx = selectx - 64
-                state = state - 1
-            end
-      end
-
-        if Misc.isPausedByLua() then -- if the cursor is on the far right or left, it will loop around
-            if selectx < 30 then
-                selectx = 30 + 320
-            end 
-        end
-        if Misc.isPausedByLua() then
-            if selectx > 30 + 320 then
-                selectx = 30
-            end 
-        end
-        if Misc.isPausedByLua() then
-            if state > 6 then
-                state = 1
-            end
-        end
-        if Misc.isPausedByLua() then
-            if state < 1 then
-                state = 6
-            end
-        end
-    end
+	if Misc.isPausedByLua() then -- if the cursor is on the far right or left, it will loop around
+		if selectx < 30 then
+			selectx = 30 + 320
+		end 
+	end
+	if Misc.isPausedByLua() then
+		if selectx > 30 + 320 then
+			selectx = 30
+		end 
+	end
+	if Misc.isPausedByLua() then
+		if state > 6 then
+			state = 1
+		end
+	end
+	if Misc.isPausedByLua() then
+		if state < 1 then
+			state = 6
+		end
+	end
 end
 
 return inventory
-
-

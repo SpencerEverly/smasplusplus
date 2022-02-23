@@ -39,9 +39,9 @@ local levelfolder = Level.folderPath()
 local levelname = Level.filename()
 local levelformat = Level.format()
 
-local paused = false;
-local paused_char = false;
-local paused_char_temp = false;
+pausemenu13.paused = false;
+pausemenu13.paused_char = false;
+pausemenu13.paused_char_temp = false;
 local pause_box;
 local pause_height = 0;
 local pause_width = 700;
@@ -75,7 +75,7 @@ local function nothing()
 end
 
 local function unpause()
-	paused = false
+	pausemenu13.paused = false
 	Misc.unpause()
 	SFX.play(30)
 end
@@ -85,21 +85,20 @@ function pausemenu13.onStart()
 end
 
 local function x2modeenable()
-	paused = false
-	Misc.unpause()
+	Graphics.activateHud(false)
+	Cheats.trigger("1player")
+	Defines.player_hasCheated = false
 	if SaveData.disableX2char == 1 then
 		SaveData.disableX2char = SaveData.disableX2char - 1
 		Level.load(Level.filename())
 	end
+	pausemenu13.paused = false
+	Misc.unpause()
 end
 
 local function x2modedisable()
-	paused = false
+	pausemenu13.paused = false
 	Misc.unpause()
-	if Player.count() == 2 then
-		Cheats.trigger("1player")
-		Defines.player_hasCheated = false
-	end
 	if SaveData.disableX2char == 0 then
 		SaveData.disableX2char = SaveData.disableX2char + 1
 		Level.load(Level.filename())
@@ -110,12 +109,12 @@ local function quitgame()
 	Audio.MusicVolume(0)
 	Misc.saveGame()
 	SFX.play(14)
-	paused = false
+	pausemenu13.paused = false
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegame()
-	paused = false
+	pausemenu13.paused = false
 	SFX.play(58)
 	Misc.saveGame()
 	Misc.unpause()
@@ -171,10 +170,8 @@ local function drawPauseMenu(y, alpha)
 	return h;
 end
 
-function pausemenu13.onDraw(isSplit)
-	local smbx13arrow = Graphics.loadImage("pausemenu13-arrow.png")
-
-	if paused then
+function pausemenu13.onDraw(camIdx,priority,isSplit)
+	if pausemenu13.paused then
 		Misc.pause()
 		if(pause_box == nil) then
 			pause_height = drawPauseMenu(-600,0);
@@ -186,7 +183,7 @@ function pausemenu13.onDraw(isSplit)
 		--Fix for anything calling Misc.unpause
 		Misc.pause();
 	end
-	if not paused then
+	if not pausemenu13.paused then
 		pause_box = nil
 	end
 	if exitscreen then
@@ -198,9 +195,9 @@ local lastPauseKey = false;
 
 function pausemenu13.onInputUpdate()
 	if(player.keys.pause and not lastPauseKey) then
-		if paused then
-			paused = false
-			paused_char = false
+		if pausemenu13.paused then
+			pausemenu13.paused = false
+			pausemenu13.paused_char = false
 			pauseactive = false
 			SFX.play(30)
 			cooldown = 5
@@ -208,14 +205,14 @@ function pausemenu13.onInputUpdate()
 			player:mem(0x11E,FIELD_BOOL,false)
 		elseif(player:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu13.pauseactivated == true) then
 			--Misc.pause();
-			paused = true
+			pausemenu13.paused = true
 			pauseactive = true
 			pause_index = 0;
 			SFX.play(30)
 		elseif player.count(2) then
-			if paused then
-				paused = false
-				paused_char = false
+			if pausemenu13.paused then
+				pausemenu13.paused = false
+				pausemenu13.paused_char = false
 				aused_tele = false
 				pauseactive = false
 				SFX.play(30)
@@ -226,7 +223,7 @@ function pausemenu13.onInputUpdate()
 		elseif player.count(2) then
 			if(player2:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
 				--Misc.pause();
-				paused = true
+				pausemenu13.paused = true
 				pauseactive = true
 				pause_index = 0;
 				SFX.play(30)
@@ -241,7 +238,7 @@ function pausemenu13.onInputUpdate()
 	end
 	lastPauseKey = player.keys.pause;
 	
-	if(paused and pause_options) then
+	if(pausemenu13.paused and pause_options) then
 		if(player.keys.down == KEYS_PRESSED) then
 			repeat
 				pause_index = (pause_index+1)%#pause_options;
@@ -281,7 +278,7 @@ function pausemenu13.onInputUpdate()
 			end
 		end
 	end
-	if(paused_char and pause_options_char) then
+	if(pausemenu13.paused_char and pause_options_char) then
 		if(player.keys.down == KEYS_PRESSED) then
 			repeat
 				pause_index_char = (pause_index_char+1)%#pause_options_char;
@@ -316,10 +313,10 @@ function pausemenu13.onInputUpdate()
 end
 
 function pausemenu13.onTick()
-	if(paused) then
+	if(pausemenu13.paused) then
 		Misc.pause();
 	end
-	if(paused_char) then
+	if(pausemenu13.paused_char) then
 		if pause_index_char == 0 then
 			pause_index_char = 1
 		end
