@@ -101,8 +101,8 @@ echo Please download SMBX2^ by pressing press 1, then press enter.
 echo To start this later, press 2 and enter to quit and
 echo try running this launcher again when you have time.
 echo.
-echo If you already downloaded SMBX2 but haven^'t installed it, move it to this
-echo folder ^(^_smaslauncher^) then press 3 and enter.
+echo If you already downloaded SMBX2 but haven^'t installed it, move the installination
+echo EXE to this folder ^(^_smaslauncher^) then press 3 and enter.
 echo.
 set dlsmbx=
 set /p dlsmbx=
@@ -151,14 +151,14 @@ call __PortableGit\bin\git.exe pull origin main
 echo Super Mario All-Stars^+^+ is now installed!
 echo.
 echo We still need to do some post-prequisites before letting you into the episode,
-echo such as fixing the map.
+echo such as fixing the map to prevent crashes.
 echo.
 echo Press enter to begin.
 pause
 cd..
 cd..
 start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\__7zip\" "SMBX2\data\worlds\__7zip\"
-echo Make sure the 7zip folder from the ^_smaslaucher folder has been moved to the
+echo Make sure the 7zip folder from the ^_smaslauncher folder has been moved to the
 echo SMAS^+^+ episode folder, then press enter.
 pause
 cd..
@@ -167,11 +167,18 @@ cd worlds
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
+cd "Where SMB Attacks"
+__7zip\7zG.exe x "__World Map.7z" -aoa
+cd..
 cd..
 cd..
 cd _smaslauncher
 start cmdmp3win.exe bootLauncher_coin.wav
-echo Super Mario All-Stars^+^+ is now installed!
+echo Super Mario All-Stars^+^+ is now installed! If you are planning to also launch
+echo Where SMB Attacks^, you can also extract the World Map to fix issues.
+echo.
+echo You'll need to manually extract it yourself though. Go to
+echo data^/worlds^/Where SMB Attacks^, then overwrite ^_^_World Map.wld with 7zip.
 echo.
 echo Pressing enter will recheck dependencies. Make sure the episode is IN the
 echo worlds folder before you press enter^^! ^(The PortableGit and 7zip folders in the
@@ -374,10 +381,17 @@ cls
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
+cd "Where SMB Attacks"
+__7zip\7zG.exe x "__World Map.7z" -aoa
+cd..
 cd..
 cd..
 cd _smaslauncher
 echo The episode has been updated^^! Restarting in 5 seconds...
+echo.
+echo ^(To launch Where SMB Attacks^, you'll have to extract the 7z file in
+echo the worlds folder and overwrite the world file manually. The file
+echo is ^"^_^_World Map.7z^")
 @timeout 5 /nobreak>nul
 cls
 goto start
@@ -389,7 +403,7 @@ set a=^&^#61^;
 mode con:cols=80 lines=30
 color 06
 start cmdmp3win.exe bootLauncher_start.wav
-echo v2.0.1
+echo v2.0.6
 echo.
 echo.
 set s=Hello^^! Welcome to the Super Mario All-Stars^+^+ launcher.
@@ -627,7 +641,7 @@ echo.
 set s=Only the first five shown can be used, the X2 characters
 for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
 set s=!s:~1,%size%!& echo(!s!
-set s=load after boot because of LunaLua patching.
+set s=load after boot because of LunaLua execution.
 for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
 set s=!s:~1,%size%!& echo(!s!
 echo.
@@ -1444,7 +1458,7 @@ set game="Super Mario All-Stars++/__World Map.wld"
 goto unfocused
 
 :setwsmba
-set game="Where SMB Attacks (SMAS++)/__World Map.wld"
+set game="Where SMB Attacks/__World Map.wld"
 
 goto unfocused
 
@@ -1579,7 +1593,9 @@ echo 47864587 75649492 49354756 84283424 58385644 97568945 68476458 33534646
 @timeout 0 /nobreak>nul
 echo Patched^, now executing X2 overdrive^^!
 echo Redigiting the engine...
+@timeout 0 /nobreak>nul
 echo 10 layered EXE .texts modded.
+@timeout 0 /nobreak>nul
 echo Opening window...
 echo Loading graphics^/hardcoded^/hardcoded^-30^4.png...
 echo Executing boot session in the engine...
@@ -1601,11 +1617,16 @@ echo WE GAMING, GRAB THE CONTROLLER^^!
 echo.
 echo INFORMATION ABOUT SUPER MARIO ALL^-STARS^+^+ ^/ WHERE SMB ATTACKS
 echo ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-
-echo If anything fails on either episode, contact spencer^.everly^@gmail.com.
+echo If anything fails on either episode, contact spencer^.everly^@gmail.com^,
+echo or submit a GitHub ticket over at the official page: 
+echo https^:^/^/github.com^/SpencerEverly^/smasplusplus^/
 echo.
-echo If the engine itself has an error, crashes, or any odd activity occur, it's
-echo out of my jurisdiction. Join https^:^/^/discord.gg^/cgVsmUX and
-echo ask the Codehaus team about the issue.
+echo If either episode fail on boot, please extract and overwrite the
+echo wld file in the 7z file in either world.
+echo.
+echo If the engine itself has an error, crashes, or any other odd activity
+echo occur^, it's out of my jurisdiction. Join https^:^/^/discord.gg^/cgVsmUX
+echo and ask the Codehaus team about the issue.
 echo.
 echo Have fun playing^, and see you next time^^!
 echo.
@@ -1619,7 +1640,7 @@ exit
 
 :missingaudio
 echo You are missing cmdmp3win.exe in the ^"smaslauncher^" folder. The file is
-echo important unless you want to remove the cmd stuff pertaining to it.
+echo important to play the sounds in this program.
 echo.
 echo Please redownload it from
 echo https^:^/^/lawlessguy.wordpress.com^/2015^/06^/27^/update-to-a-command-line-mp3-player-for-windows^/
@@ -1634,8 +1655,8 @@ exit
 echo You are missing one or more WAV files in the ^"smaslauncher^" folder. Those files are
 echo use to load with cmdmp3win.exe unless you want to remove the cmd stuff pertaining to it.
 echo.
-echo Please redownload Super Mario All-Stars^+^+ and see if the issue is fixed.
-echo If the issue isn't fixed, email me at spencer.everly^@gmail.com.
+echo Please redownload the Super Mario All-Stars^+^+ launcher and see if the
+echo issue is fixed. If the issue isn't fixed, email me at spencer.everly^@gmail.com.
 echo.
 echo Until you place all the WAVs into the specified folder, you cannot continue.
 echo.
@@ -1643,6 +1664,7 @@ pause
 exit
 
 :wrongdirectory
+cls
 echo Because you don't have SMBX2, due to complicated reasons
 echo the installer will generate a SMBX2 folder when installing.
 echo.
@@ -1653,6 +1675,7 @@ pause
 exit
 
 :missingtxt
+cls
 echo Uh oh. You are missing text files to load SMAS^+^+.
 echo
 echo Please generate txt files that have the names of the folder and
