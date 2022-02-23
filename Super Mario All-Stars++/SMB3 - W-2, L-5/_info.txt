@@ -1,0 +1,35 @@
+---        Chain Chomps       ---
+--- from MrDoubleA's NPC Pack ---
+---       (Give credit!)      ---
+
+
+
+Both NPCs have these properties for NPC configs and npc-n.txt files:
+
+
+- chains (Default: 4)
+How many chains the chomp has between it and its pole (although it doesn't affect how far it can go).
+
+- chainWidth  (Default: 16)
+- chainHeight (Default: 16)
+The size of the individual chains.
+
+
+
+The chained chain chomp has these properties for NPC configs and npc-n.txt files:
+
+
+- maxDistance (Default: 128)
+Maximum distance chomp can go before being tugged back.
+
+- roamDistance (Default: 80)
+How far the chomp will hop around before turning around.
+
+- lungeDistance (Default: 96)
+How close a player has to be to be lunged at.
+
+- lungesToEscape (Default: nil)
+How many lunges are need to escape from the pole. If this is nil, it cannot escape.
+
+- escapeID (Default: nil)
+What NPC ID to change to when escaping. If this is nil, it cannot escape.

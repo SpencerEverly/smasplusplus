@@ -67,7 +67,7 @@ do
 			SFX.play(warpTransition.doorclose)
         end
     end
-    local function stopTransition()
+    function warpTransition.stopTransition()
         warpTransition.currentTransitionType = warpTransition.TRANSITION_NONE
         warpTransition.transitionTimer = 0
     
@@ -126,7 +126,7 @@ do
         panCameraPosition = panCameraPosition + speed
 
         if panCameraPosition.x == targetPosition.x and panCameraPosition.y == targetPosition.y then -- The camera is in the right position
-            stopTransition()
+            warpTransition.stopTransition()
         end
     end
 
@@ -153,7 +153,7 @@ do
             opacity = 1.00-((warpTransition.transitionTimer-middle)/warpTransition.transitionSpeeds[warpTransition.currentTransitionType])
 
             if opacity <= 0 then
-                stopTransition()
+                warpTransition.stopTransition()
             end
         end
 
@@ -189,7 +189,7 @@ do
             radius = (warpTransition.transitionTimer-middle)*warpTransition.transitionSpeeds[warpTransition.currentTransitionType]
 
             if radius > startRadius then
-                stopTransition()
+                warpTransition.stopTransition()
             end
         end
 
@@ -225,7 +225,7 @@ do
             mosaic = (math.floor(warpTransition.transitionSpeeds[warpTransition.currentTransitionType]*1.35)/(warpTransition.transitionSpeeds[warpTransition.currentTransitionType]/64))-((warpTransition.transitionTimer-middle)/(warpTransition.transitionSpeeds[warpTransition.currentTransitionType]/64))
 
             if opacity <= 0 then
-                stopTransition()
+                warpTransition.stopTransition()
             end
         end
 
@@ -251,7 +251,7 @@ do
         local opacity = 1-(warpTransition.transitionTimer/warpTransition.transitionSpeeds[warpTransition.currentTransitionType])
 
         if opacity <= 0 then
-            stopTransition()
+            warpTransition.stopTransition()
         end
 
         Graphics.drawScreen{texture = buffer,color = Color.white.. opacity,priority = 0}
@@ -283,7 +283,7 @@ do
         end
 
         if done then
-            stopTransition()
+            warpTransition.stopTransition()
         end
 
         Graphics.drawScreen{texture = buffer,priority = 0,shader = meltShader,uniforms = {yOffsets = yOffsets}}
@@ -315,7 +315,7 @@ do
             progress = ((endPoint-warpTransition.transitionTimer)/warpTransition.transitionSpeeds[warpTransition.currentTransitionType])
 
             if progress < 0 then
-                stopTransition()
+                warpTransition.stopTransition()
             end
         end
 
