@@ -283,7 +283,7 @@ function dependencies.onInputUpdate()
 		if player.count() == 2 then
 			if player2.keys.altRun == KEYS_PRESSED then
 				if pausemenu13.paused == false then
-					Player(2):teleport(player.x + 32, player.y)
+					Player(2):teleport(player.x + player.width*0.5 + 32,player.y + player.height,true)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
 				end
 			end
