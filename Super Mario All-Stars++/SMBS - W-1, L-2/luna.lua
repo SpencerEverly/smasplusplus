@@ -27,8 +27,8 @@ function onTick()
 	local currentCostume = player:getCostume()
 	local costumes
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
-		Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/AthleticSMB4.ogg")
-		Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/Star.ogg")
+		Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/AthleticSMBS.ogg")
+		Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/StarSMBS.ogg")
 	end
 	if currentCostume == "1-SMB1-RETRO" then
 		Audio.MusicChange(0, "_OST/Super Mario Bros (NES)/Athletic (SMBS).ogg")
