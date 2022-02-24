@@ -271,7 +271,7 @@ function dependencies.onInputUpdate()
 		end
 	end
 	if SaveData.disableX2char == 1 then
-		if player.count() == 2 then
+		if Player.count() == 2 then
 			if player.keys.altRun == KEYS_PRESSED then
 				if pausemenu13.paused == false then
 					player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
@@ -286,7 +286,7 @@ function dependencies.onInputUpdate()
 		end
 	end
 	if SaveData.disableX2char == 1 then
-		if player.count() == 2 then
+		if Player.count() == 2 then
 			if player2.keys.altRun == KEYS_PRESSED then
 				if pausemenu13.paused == false then
 					player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)

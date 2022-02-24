@@ -18,7 +18,7 @@ local handycam = require("handycam")
 
 local littleDialogue = {}
 
---local player2 = Player(2)
+local cooldown = 0
 
 local smallScreen
 pcall(function() smallScreen = require("smallScreen") end)
@@ -1245,6 +1245,11 @@ function boxInstanceFunctions:update()
 					self.portraitTimer = 0
 					self:progress(true)
 					player.rawKeys.jump = KEYS_PRESSED
+					cooldown = 5
+					player:mem(0x172,FIELD_BOOL,false)
+					if cooldown <= 0 then
+						player:mem(0x172,FIELD_BOOL,true)
+					end
 				end
 				
 				if Player.count() == 2 then
@@ -1266,7 +1271,12 @@ function boxInstanceFunctions:update()
 						self.typewriterLimit = 0
 						self.portraitTimer = 0
 						self:progress(true)
-						player.rawKeys.jump = KEYS_PRESSED
+						player2.rawKeys.jump = KEYS_PRESSED
+						cooldown = 5
+						player:mem(0x172,FIELD_BOOL,false)
+						if cooldown <= 0 then
+							player:mem(0x172,FIELD_BOOL,true)
+						end
 					end
 				end
 
@@ -1346,9 +1356,20 @@ function boxInstanceFunctions:update()
                     self.typewriterLimit = characterCount
                     self.portraitTimer = 0
                 end
-				if player.rawKeys.run then
-					self.typewriterFinished = true
+				if player.rawKeys.run == KEYS_DOWN then
+                    player.rawKeys.jump = true
+                    SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+                    if not self.typewriterFinished then
+                        self.typewriterDelay = self.typewriterDelay or 0
+                    end
+                    self.typewriterFinished = true
+                    self.typewriterLongDelayWaiting = false
+                    self.typewriterDelay = 0
+                    self:activateTextEvents(self.typewriterLimit+0,nil)
+                    self.typewriterLimit = 0
+					self.portraitTimer = 0
 					self:progress(true)
+					player.rawKeys.jump = KEYS_PRESSED
 				end
 				
 				if Player.count() == 2 then
@@ -1360,9 +1381,20 @@ function boxInstanceFunctions:update()
 						self.typewriterLimit = characterCount
 						self.portraitTimer = 0
 					end
-					if player2.rawKeys.run then
+					if player2.rawKeys.run == KEYS_DOWN then
+						player2.rawKeys.jump = true
+						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+						if not self.typewriterFinished then
+							self.typewriterDelay = self.typewriterDelay or 0
+						end
 						self.typewriterFinished = true
+						self.typewriterLongDelayWaiting = false
+						self.typewriterDelay = 0
+						self:activateTextEvents(self.typewriterLimit+0,nil)
+						self.typewriterLimit = 0
+						self.portraitTimer = 0
 						self:progress(true)
+						player2.rawKeys.jump = KEYS_PRESSED
 					end
 				end
             end

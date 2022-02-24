@@ -290,6 +290,9 @@ function inventory.onDraw()
 			end
 		end
 	end
+	if inventory.activateinventory == false then
+		--Nothing
+	end
 end
 
 
