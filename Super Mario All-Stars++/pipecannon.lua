@@ -126,7 +126,7 @@ function pipecannon.logic()
 		--Change music, warpTransition is active and won't change the music automatically
 		
 		-- Cancel transition animation
-		player:mem(0x122, FIELD_WORD, 1)
+		player:mem(0x122, FIELD_WORD, 0)
 		-- Set player coordinates
 		player:mem(0x15a, FIELD_WORD, checksection(exitX, exitY)-1)
 		player.x = exitX
