@@ -122,7 +122,7 @@ function pipecannon.logic()
 	end
 	-- If the transition has ended
 	if pipecounter >= 60 then
-		local newSection = Section.getIdxFromCoords()
+		local newSection = Section.getIdxFromCoords(x, y)
 		--Change music, warpTransition is active and won't change the music automatically
 		
 		-- Cancel transition animation
