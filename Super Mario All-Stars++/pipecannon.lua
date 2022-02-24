@@ -44,7 +44,7 @@ function checksection(x, y)
 end
 
 -- Perform logic for pipe cannons
-function pipecannon.logic()
+function pipecannon.logic(x, y)
 	-- If the player just entered a pipe warp transition
 	if player:mem(0x122, FIELD_WORD) == 3 and not enteringPipe then
 		-- Find the relevant warp
@@ -123,6 +123,8 @@ function pipecannon.logic()
 	-- If the transition has ended
 	if pipecounter >= 60 then
 		local newSection = Section.getIdxFromCoords(x, y)
+		self.section = newSection
+		self.x, self.y = x, y
 		--Change music, warpTransition is active and won't change the music automatically
 		
 		-- Cancel transition animation
