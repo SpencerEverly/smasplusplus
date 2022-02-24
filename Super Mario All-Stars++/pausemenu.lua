@@ -876,6 +876,9 @@ local function drawCharacterMenu(y, alpha)
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
 		costumename = "<color red>Current costume: SMAS++ 2012 Beta Mario</color>"
 	end
+	if currentCostume == "1-SMB1-RETRO" then
+		costumename = "<color red>Current costume: Super Mario Bros. 1 (NES)</color>"
+	end
 	if currentCostume == nil then
 		costumename = "<color red>Current costume: N/A</color>"
 	end
