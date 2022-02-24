@@ -122,7 +122,8 @@ function pipecannon.logic()
 	end
 	-- If the transition has ended
 	if pipecounter >= 60 then
-		newSection = Section(player.section)
+		local sectionnumber = table.map{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}
+		newSection = Section(sectionnumber)
 		--Change music, warpTransition is active and won't change the music automatically
 		
 		-- Cancel transition animation
@@ -153,7 +154,7 @@ function pipecannon.logic()
 end
 
 function pipecannon.onInitAPI()
-	registerEvent(pipecannon, "onLoop", "logic")
+	registerEvent(pipecannon, "onTick", "logic")
 end
 
 return pipecannon
