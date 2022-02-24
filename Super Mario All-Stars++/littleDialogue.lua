@@ -661,10 +661,10 @@ function littleDialogue.create(args)
     box.isValid = true
 
     box.text = args.text or ""
-	if not player2.isValid then
+	if Player.count() == 1 then
 		box.speakerObj = args.speakerObj or player
 	end
-	if player2.isValid then
+	if Player.count() == 2 then
 		box.speakerObj = args.speakerObj or player or player2
 	end
     box.uncontrollable = args.uncontrollable or false
@@ -1247,7 +1247,7 @@ function boxInstanceFunctions:update()
 					player.rawKeys.jump = KEYS_PRESSED
 				end
 				
-				if player2.isValid then
+				if Player.count() == 2 then
 					if player2.rawKeys.run then
 						player2.rawKeys.jump = true
 						if SaveData.disableX2char == 0 then
@@ -1300,7 +1300,7 @@ function boxInstanceFunctions:update()
                         end
                     end
 					
-					if player2.isValid then
+					if Player.count() == 2 then
 						if player2.rawKeys.up == KEYS_PRESSED and self.selectedAnswer > 1 then
 							self.selectedAnswer = self.selectedAnswer - 1
 
@@ -1351,7 +1351,7 @@ function boxInstanceFunctions:update()
 					self:progress(true)
 				end
 				
-				if player2.isValid then
+				if Player.count() == 2 then
 					if player2.rawKeys.jump == KEYS_PRESSED then
 						self.typewriterFinished = true
 
@@ -1987,13 +1987,13 @@ function littleDialogue.onDraw()
 end
 
 function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
-	if not player2.isValid then
+	if Player.count() == 1 then
 		littleDialogue.create{
 			text = text,
 			speakerObj = npcObj or playerObj or player
 		}
 	end
-	if player2.isValid then
+	if Player.count() == 2 then
 		littleDialogue.create{
 			text = text,
 			speakerObj = npcObj or playerObj or player or player2
