@@ -2,18 +2,6 @@ local player2 = Player(2)
 
 Graphics.activateHud(false)
 
-local warpTransition = require("warpTransition")
-
-warpTransition.levelStartTransition = warpTransition.TRANSITION_CROSSFADE
-warpTransition.sameSectionTransition = warpTransition.TRANSITION_PAN
-warpTransition.crossSectionTransition = warpTransition.TRANSITION_FADE
-warpTransition.activateOnInstantWarps = true
-warpTransition.musicFadeOut = true
-warpTransition.TRANSITION_FADE = 35
-warpTransition.TRANSITION_SWIRL = 96
-warpTransition.TRANSITION_IRIS_OUT = 15
-warpTransition.TRANSITION_PAN = 15
-
 function onStart()
     if SaveData.GameOverCount == nil then
         SaveData.GameOverCount = SaveData.GameOverCount or 0
