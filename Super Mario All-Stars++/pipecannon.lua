@@ -122,6 +122,7 @@ function pipecannon.logic()
 	end
 	-- If the transition has ended
 	if pipecounter >= 60 then
+		local newSection = Section.getIdxFromCoords(x, y)
 		--Change music, warpTransition is active and won't change the music automatically
 		
 		-- Cancel transition animation
@@ -130,6 +131,7 @@ function pipecannon.logic()
 		player:mem(0x15a, FIELD_WORD, checksection(exitX, exitY)-1)
 		player.x = exitX
 		player.y = exitY
+		playMusic(newSection)
 		enteringPipe = false
 		-- Reset counter
 		pipecounter = 0
