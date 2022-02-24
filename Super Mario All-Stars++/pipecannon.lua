@@ -131,7 +131,7 @@ function pipecannon.logic()
 		player:mem(0x15a, FIELD_WORD, checksection(exitX, exitY)-1)
 		player.x = exitX
 		player.y = exitY
-		playMusic(newSection)
+		playMusic(newSection.music)
 		enteringPipe = false
 		-- Reset counter
 		pipecounter = 0
