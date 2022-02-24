@@ -121,7 +121,7 @@ function pipecannon.logic()
 		elseif enterDirection == ENTRANCE_RIGHT then enterX = enterX + 0.021*player.width end
 	end
 	-- If the transition has ended
-	if pipecounter >= 62 then
+	if pipecounter >= 65 then
 		-- Cancel transition animation
 		player:mem(0x122, FIELD_WORD, 0)
 		-- Set player coordinates
