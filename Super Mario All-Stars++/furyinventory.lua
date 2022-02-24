@@ -395,9 +395,9 @@ function inventory.onTick()
 	if pausemenu.pauseactivated == false then
 		inventory.activateinventory = false
 	end
-	if littleDialogue.onMessageBox then
-		inventory.activateinventory = false
-	end
+	--if littleDialogue.onMessageBox then --Apparently this is breaking the inventory...
+		--inventory.activateinventory = false
+	--end
 	if pausemenu.paused == true then
 		inventory.activateinventory = false
 	end
