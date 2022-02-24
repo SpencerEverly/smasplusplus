@@ -124,7 +124,7 @@ function pipecannon.logic()
 	if pipecounter >= 60 then
 		local sectionnumber = table.map{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}
 		--Change music, warpTransition is active and won't change the music automatically
-		playMusic(Section(sectionnumbr))
+		playMusic(Section(sectionnumber))
 		-- Cancel transition animation
 		player:mem(0x122, FIELD_WORD, 0)
 		-- Set player coordinates
