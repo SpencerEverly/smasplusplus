@@ -1924,6 +1924,9 @@ function onEvent(eventName)
 	end
 	if eventName == "HUBDisableX2" then
 		SaveData.disableX2char = SaveData.disableX2char + 1
+		Graphics.activateHud(false)
+		Cheats.trigger("1player")
+		Defines.player_hasCheated = false
 	end
 	if eventName == "HourChange" then
 		SFX.play("hour-change.ogg")

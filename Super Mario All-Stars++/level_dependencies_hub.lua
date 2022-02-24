@@ -36,6 +36,7 @@ function dependencies2.onInitAPI()
 	registerEvent(dependencies2, "onTick")
 	registerEvent(dependencies2, "onDraw")
 	registerEvent(dependencies2, "onCameraUpdate")
+	registerEvent(dependencies2, "onInputUpdate")
 end
 
 function dependencies2.onCameraUpdate(c, camIdx)
@@ -62,6 +63,44 @@ function dependencies2.onCameraUpdate(c, camIdx)
 			return 0
 		else
 			return 1
+		end
+	end
+end
+
+function dependencies2.onInputUpdate()
+	if SaveData.disableX2char == 1 then
+		if player.count() == 1 then
+			--Nothing
+		end
+	end
+	if SaveData.disableX2char == 1 then
+		if player.count() == 2 then
+			if player.keys.altRun == KEYS_PRESSED then
+				if pausemenu13.paused == false then
+					player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
+					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+					cooldown = 5
+					player:mem(0x172,FIELD_BOOL,false)
+				end
+				if cooldown <= 0 then
+					player:mem(0x172,FIELD_BOOL,true)
+				end
+			end
+		end
+	end
+	if SaveData.disableX2char == 1 then
+		if player.count() == 2 then
+			if player2.keys.altRun == KEYS_PRESSED then
+				if pausemenu13.paused == false then
+					player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+					cooldown = 5
+					player2:mem(0x172,FIELD_BOOL,false)
+				end
+				if cooldown <= 0 then
+					player2:mem(0x172,FIELD_BOOL,true)
+				end
+			end
 		end
 	end
 end

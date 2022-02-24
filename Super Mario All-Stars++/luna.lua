@@ -1,3 +1,12 @@
+local function anyValidFields()
+	sectionlist[1] = player.section
+	if player2 and player2.isValid then
+		sectionlist[2] = player2.section
+	else
+		sectionlist[2] = nil
+	end
+end
+
 local smwMap = require("smwMap")
 local starman = require("starman/star")
 local mega2 = require("mega/megashroom")
@@ -15,6 +24,23 @@ local killed = false
 local player2_alt = Player(2)
 
 local fadetolevel = false
+
+function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleporting
+	-- If using bottom center aligned coordinates, handle that sensibly
+	if bottomCenterAligned then
+		x = x - (player.width * 0.5)
+		y = y - player.height
+	end
+
+	-- Move the player and update section, including music
+	local oldSection = self.section
+	local newSection = Section.getIdxFromCoords(x, y)
+	self.x, self.y = x, y
+	if (newSection ~= oldSection) then
+		self.section = newSection
+		playMusic(newSection)
+	end
+end
 
 littleDialogue.registerStyle("smbx13og",{
 	textXScale = 1,
@@ -38,7 +64,10 @@ littleDialogue.registerStyle("smbx13og",{
 
 	windowingOpeningEffectEnabled = false,
 
-	typewriterEnabled = false,
+	typewriterEnabled = true,
+	typewriterDelayNormal = 0.5, -- The usual delay between each character.
+    typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
+    typewriterSoundDelay = 4.1,
     showTextWhileOpening = true,
 
 	closeSoundEnabled = false,

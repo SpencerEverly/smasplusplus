@@ -18,7 +18,7 @@ local handycam = require("handycam")
 
 local littleDialogue = {}
 
-local player2 = Player(2)
+--local player2 = Player(2)
 
 local smallScreen
 pcall(function() smallScreen = require("smallScreen") end)
@@ -661,10 +661,10 @@ function littleDialogue.create(args)
     box.isValid = true
 
     box.text = args.text or ""
-	if player.count() == 1 then
+	if not player2.isValid then
 		box.speakerObj = args.speakerObj or player
 	end
-	if player.count() == 2 then
+	if player2.isValid then
 		box.speakerObj = args.speakerObj or player or player2
 	end
     box.uncontrollable = args.uncontrollable or false
@@ -1225,6 +1225,50 @@ function boxInstanceFunctions:update()
                 end
 
                 self:activateTextEvents(self.typewriterLimit,self.typewriterLimit)
+				
+				if player.rawKeys.run then
+					player.rawKeys.jump = true
+					if SaveData.disableX2char == 0 then
+						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+					end
+					if SaveData.disableX2char == 1 then
+						SFX.play("_OST/_Sound Effects/fastscroll13.ogg")
+					end
+					if not self.typewriterFinished then
+						self.typewriterDelay = self.typewriterDelay or 0
+					end
+					self.typewriterFinished = true
+					self.typewriterLongDelayWaiting = false
+					self.typewriterDelay = 0
+					self:activateTextEvents(self.typewriterLimit+0,nil)
+					self.typewriterLimit = 0
+					self.portraitTimer = 0
+					self:progress(true)
+					player.rawKeys.jump = KEYS_PRESSED
+				end
+				
+				if player2.isValid then
+					if player2.rawKeys.run then
+						player2.rawKeys.jump = true
+						if SaveData.disableX2char == 0 then
+							SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+						end
+						if SaveData.disableX2char == 1 then
+							SFX.play("_OST/_Sound Effects/fastscroll13.ogg")
+						end
+						if not self.typewriterFinished then
+							self.typewriterDelay = self.typewriterDelay or 0
+						end
+						self.typewriterFinished = true
+						self.typewriterLongDelayWaiting = false
+						self.typewriterDelay = 0
+						self:activateTextEvents(self.typewriterLimit+0,nil)
+						self.typewriterLimit = 0
+						self.portraitTimer = 0
+						self:progress(true)
+						player.rawKeys.jump = KEYS_PRESSED
+					end
+				end
 
                 if not self.silent then
                     if self.voiceSound ~= nil then
@@ -1256,7 +1300,7 @@ function boxInstanceFunctions:update()
                         end
                     end
 					
-					if Player.count() == 2 then
+					if player2.isValid then
 						if player2.rawKeys.up == KEYS_PRESSED and self.selectedAnswer > 1 then
 							self.selectedAnswer = self.selectedAnswer - 1
 
@@ -1292,12 +1336,9 @@ function boxInstanceFunctions:update()
 					if player2.rawKeys.jump == KEYS_PRESSED then
 						self:progress(true)
 					end
-					if player2.rawKeys.jump == false then
-						self:progress(false)
-					end
 				end
             else
-                if player.rawKeys.jump == KEYS_PRESSED or player.rawKeys.run == KEYS_PRESSED then
+                if player.rawKeys.jump == KEYS_PRESSED then
                     self.typewriterFinished = true
 
                     self:activateTextEvents(self.typewriterLimit+1,nil)
@@ -1305,9 +1346,13 @@ function boxInstanceFunctions:update()
                     self.typewriterLimit = characterCount
                     self.portraitTimer = 0
                 end
+				if player.rawKeys.run then
+					self.typewriterFinished = true
+					self:progress(true)
+				end
 				
-				if Player.count() == 2 then
-					if player2.rawKeys.jump == KEYS_PRESSED or player2.rawKeys.run == KEYS_PRESSED then
+				if player2.isValid then
+					if player2.rawKeys.jump == KEYS_PRESSED then
 						self.typewriterFinished = true
 
 						self:activateTextEvents(self.typewriterLimit+1,nil)
@@ -1315,7 +1360,11 @@ function boxInstanceFunctions:update()
 						self.typewriterLimit = characterCount
 						self.portraitTimer = 0
 					end
-                end
+					if player2.rawKeys.run then
+						self.typewriterFinished = true
+						self:progress(true)
+					end
+				end
             end
         end
     elseif self.state == STATE.SCROLL then
@@ -1938,13 +1987,13 @@ function littleDialogue.onDraw()
 end
 
 function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
-	if player.count() == 1 then
+	if not player2.isValid then
 		littleDialogue.create{
 			text = text,
 			speakerObj = npcObj or playerObj or player
 		}
 	end
-	if player.count() == 2 then
+	if player2.isValid then
 		littleDialogue.create{
 			text = text,
 			speakerObj = npcObj or playerObj or player or player2

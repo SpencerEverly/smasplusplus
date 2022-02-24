@@ -11,6 +11,7 @@ local dying = false;
 local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
 local earlyDeathCheck = 3;
+local cooldown = 0
 
 local timer_deathTimer;
 local deltaTime = Routine.deltaTime
@@ -273,8 +274,13 @@ function dependencies.onInputUpdate()
 		if player.count() == 2 then
 			if player.keys.altRun == KEYS_PRESSED then
 				if pausemenu13.paused == false then
-					player:teleport(Player(2).x - 32, Player(2).y)
+					player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+					cooldown = 5
+					player:mem(0x172,FIELD_BOOL,false)
+				end
+				if cooldown <= 0 then
+					player:mem(0x172,FIELD_BOOL,true)
 				end
 			end
 		end
@@ -283,8 +289,13 @@ function dependencies.onInputUpdate()
 		if player.count() == 2 then
 			if player2.keys.altRun == KEYS_PRESSED then
 				if pausemenu13.paused == false then
-					Player(2):teleport(player.x + player.width*0.5 + 32,player.y + player.height,true)
+					player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+					cooldown = 5
+					player2:mem(0x172,FIELD_BOOL,false)
+				end
+				if cooldown <= 0 then
+					player2:mem(0x172,FIELD_BOOL,true)
 				end
 			end
 		end
