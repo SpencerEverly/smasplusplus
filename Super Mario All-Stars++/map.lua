@@ -8,6 +8,7 @@ local wandR = require("wandRr")
 local jukebox = require("jukebox-v11")
 local pause_music = require("map_music")
 local Routine = require("routine")
+local smoothWorld = require("smoothWorld")
 
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
@@ -97,7 +98,6 @@ function onStart()
 	mem(0xB25728, FIELD_BOOL, false) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
 	if SaveData.disableX2char == 0 then
 		inventory = require("customInventory")
-		smoothWorld = require("smoothWorld")
 		pausemenu = require("pausemenu_map")
 	end
 	if SaveData.disableX2char == 1 then
