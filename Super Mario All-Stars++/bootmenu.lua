@@ -284,9 +284,6 @@ local function FirstBoot5()
 end
 
 local function FirstBoot6()
-	Audio.SeizeStream(0)
-	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
-	Audio.MusicChange(1, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.2>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == 0 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
@@ -295,26 +292,11 @@ local function FirstBoot6()
 	if SaveData.firstBootCompleted == 2 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted - 2
 	end
+	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
 end
 	
 local function FirstBootGameHelp()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
-	Misc.saveGame()
-end
-
-local function FirstBootGHReturn()
-	active = true
-end
-
-local function FirstBootGHReturn2()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.2>Looks like you've returned from the Game Help level. Do you want to enter the level again, or skip?<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
-	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
-end
-
-local function FirstBoot6GH()
-	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
-	SaveData.firstBootCompleted = SaveData.firstBootCompleted or 1
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.2>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	Misc.saveGame()
 end
 
@@ -351,12 +333,12 @@ end
 local function optionsMenu1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
 end
+
 local function themeMenu1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
 end
-local function themeAlreadyInUse()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.3>This theme is in use.<question OkayToMenuTheme>", pauses = false, updatesInPause = true})
-end
+
+
 local function credits1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
