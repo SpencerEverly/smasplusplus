@@ -61,7 +61,6 @@ local function theme1()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMAS.lvlx", nil, nil)
@@ -72,7 +71,6 @@ local function theme2()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMBX1.0.lvlx", nil, nil)
@@ -83,7 +81,6 @@ local function theme3()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMBX1.1.lvlx", nil, nil)
@@ -94,7 +91,6 @@ local function theme4()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMBX1.2.lvlx", nil, nil)
@@ -113,7 +109,6 @@ local function theme5()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMBX1.3.lvlx", nil, nil)
@@ -132,7 +127,6 @@ local function theme6()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_WSMBA.lvlx", nil, nil)
@@ -151,7 +145,6 @@ local function theme7()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMBX2.lvlx", nil, nil)
@@ -162,7 +155,6 @@ local function theme8()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_bossedit8.lvlx", nil, nil)
@@ -181,7 +173,6 @@ local function theme9()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMBX1.3og.lvlx", nil, nil)
@@ -200,7 +191,6 @@ local function theme10()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_SMBX2b3.lvlx", nil, nil)
@@ -211,7 +201,6 @@ local function theme11()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_8bit.lvlx", nil, nil)
@@ -230,7 +219,6 @@ local function theme12()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_S!TS!.lvlx", nil, nil)
@@ -248,7 +236,6 @@ local function easterEgg() --SnooPINGAS I see? ._.
 	Audio.SeizeStream(0)
 	Routine.wait(596)
 	Audio.MusicChange(0, "_OST/All Stars Secrets/ZZZ_Easter Egg.ogg")
-	Audio.MusicChange(1, "_OST/All Stars Secrets/ZZZ_Easter Egg.ogg")
 	Routine.wait(4.2)
 	active4 = true
 end
@@ -266,7 +253,6 @@ local function FirstBoot1()
 	active = true
 	logo = false
 	pressjumpwords = false
-	Audio.SeizeStream(0)
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>Welcome to Super Mario All-Stars Plus Plus.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
@@ -284,6 +270,7 @@ local function FirstBoot5()
 end
 
 local function FirstBoot6()
+	Audio.MusicChange(0, 1)
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.2>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == 0 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
@@ -292,7 +279,6 @@ local function FirstBoot6()
 	if SaveData.firstBootCompleted == 2 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted - 2
 	end
-	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
 end
 	
 local function FirstBootGameHelp()
@@ -310,7 +296,6 @@ local function FailsafeMessage1()
 		SaveData.failsafeMessageOne = SaveData.failsafeMessageOne - 1
 	end
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>It looks like the menu restarted.<page>When that happened, you probably died here in the boot screen.<page>If there are any problems, don't hesitate to email spencer.everly at gmail.com or contact them on Discord at Spencer Everly#1997.<question ToMenuResetTwo>", speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
@@ -437,7 +422,6 @@ end
 
 local function EraseSave1()
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
 end
 
@@ -482,7 +466,6 @@ end
 local function ExitGame1()
 	exitscreen = true
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Misc.saveGame()
 	Routine.wait(0.4)
 	Misc.exitEngine()
@@ -514,7 +497,6 @@ local function BootSMASPlusPlusPreExecute()
 	active3 = false
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.5)
 	Misc.saveGame()
 	if (player.keys.down == KEYS_DOWN) == true then
@@ -527,7 +509,6 @@ end
 	
 local function BootWSMBAPreExecute()
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	exitscreen = true
 	SFX.play(14)
 	Routine.wait(0.5)
@@ -563,7 +544,6 @@ local function BootWSMBAPreExecute()
 end
 local function BootWSMBAOGPreExecute()
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	exitscreen = true
 	SFX.play(14)
 	Routine.wait(0.5)
@@ -604,7 +584,6 @@ end
 
 local function RestartSMASPlusPlus()
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Super Mario All-Stars++")
@@ -620,7 +599,6 @@ local function BootGameHelpPreExecute()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
@@ -642,6 +620,7 @@ function bootmenu.onInitAPI()
 	registerEvent(bootmenu,"onInputUpdate")
 	registerEvent(bootmenu,"onEvent")
 	registerEvent(bootmenu,"onDraw")
+	registerEvent(bootmenu,"onEvent")
 	registerEvent(bootmenu,"onPlayerHarm")
 	
 	local Routine = require("routine")
@@ -673,7 +652,7 @@ function bootmenu.onStart()
 	Misc.saveGame()
 	if Level.filename() == "intro_SMAS.lvlx" then
 		if SaveData.firstBootCompleted == 0 then
-			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
+			--Nothing
 		end
 	end
 	if Level.filename() == "intro_SMAS.lvlx" then

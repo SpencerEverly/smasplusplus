@@ -285,7 +285,7 @@ ET:"FirstBoot2";LH:["Logo"];DS:1;AS:0;AX:0;AY:0;
 ET:"FirstBoot3";AS:0;AX:0;AY:0;
 ET:"FirstBoot4";AS:0;AX:0;AY:0;
 ET:"FirstBoot5";AS:0;AX:0;AY:0;
-ET:"FirstBoot6";SSS:["ID\:0\;MI\:0\;"];TE:"FirstBoot7";TD:75;PC:010000000000;AS:0;AX:0;AY:0;
+ET:"FirstBoot6";AS:0;AX:0;AY:0;
 ET:"FirstBoot7";TE:"FirstBoot8";TD:2;PC:000001000000;AS:0;AX:0;AY:0;
 ET:"FirstBoot8";AS:0;AX:0;AY:0;
 ET:"FirstBoot6GH";SSS:["ID\:0\;MI\:0\;"];AS:0;AX:0;AY:0;
