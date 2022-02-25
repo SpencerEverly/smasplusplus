@@ -1,4 +1,4 @@
-local versionnumber = "Open Source Edition (v0.0.0.1)" --This is the version number of this episode. It can be changed to any version we're on.
+local versionnumber = "Demo 2" --This is the version number of this episode. It can be changed to any version we're on.
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
 --if Misc.inEditor() then
@@ -542,6 +542,14 @@ local function BootSMASPlusPlusPreExecute()
 		Routine.run(introExit)
 	end
 end
+
+local function BootCredits()
+	Audio.MusicChange(0, 0)
+	exitscreen = true
+	SFX.play(14)
+	Routine.wait(0.5)
+	Level.load("SMAS - Credits.lvlx", nil, nil)
+end
 	
 local function BootWSMBAPreExecute()
 	Audio.MusicChange(0, 0)
@@ -852,9 +860,8 @@ function bootmenu.onDraw()
 	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
 	
-	Graphics.drawBox{x=600, y=5, width=195, height=20, color=Color.black..0.5, priority=-7}
-	
-	textplus.print{x=608, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
+	Graphics.drawBox{x=739, y=5, width=56, height=20, color=Color.black..0.5, priority=-7}
+	textplus.print{x=746, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
 	
 	if pressjumpwords then
 		Graphics.drawImage(pressstart, 150, 552, 1)
@@ -1060,7 +1067,7 @@ littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunc
 littleDialogue.registerAnswer("Options",{text = "Fix Broken Map Paths",chosenFunction = function() Routine.run(PathFix1) end})
 littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
 littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
-littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
+littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(BootCredits) end})
 
 
 

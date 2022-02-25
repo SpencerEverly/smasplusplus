@@ -135,11 +135,10 @@ mkdir "__PortableGit"
 cd..
 cd..
 cd _smaslauncher
-start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\__PortableGit\" "SMBX2\data\worlds\__PortableGit"
-echo Make sure that the ^"^_^_PortableGit^" folder has moved to the worlds folder.
+echo Please move the ^"^_^_PortableGit^" folder onto the worlds folder.
 echo This is so that the episode can update whenever choosing to update on the launcher.
 echo.
-echo Press enter if the folder has been moved. If not, move it yourself.
+echo Press enter whenever the folder has been moved.
 pause
 cd..
 cd data
@@ -160,8 +159,7 @@ echo Press enter to begin.
 pause
 cd..
 cd..
-start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\__7zip\" "SMBX2\data\worlds\__7zip\"
-echo Make sure the 7zip folder from the ^_smaslauncher folder has been moved to the
+echo Please move the 7zip folder from the ^_smaslauncher folder to the
 echo SMAS^+^+ episode folder, then press enter.
 pause
 cd..
@@ -263,10 +261,10 @@ cd 7zip_smbx2
 rename "SMBX2b4.4.1 Installer.exe" "SMBX2_Installer.exe"
 echo Extracting EXE...
 7zG.exe x "SMBX2_Installer.exe"
-echo Moving the SMBX2 folder to the folder before ^"smaslauncher^"...
+echo Please move the SMBX2 folder from 7zip^/SMBX2 to the folder before ^"smaslauncher^".
 cd..
-start /wait move_smbx2_exextracted.bat "SMBX2\_smaslauncher\7zip\SMBX2\" "SMBX2\"
-echo Renaming the EXE back to normal...
+echo Press enter to continue.
+pause
 cd SMBX2
 cd _smaslauncher
 cd 7zip_smbx2

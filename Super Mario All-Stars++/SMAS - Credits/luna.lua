@@ -414,6 +414,9 @@ function onInputUpdate()
 	player.altRunKeyPressing = false;
 	player.dropItemKeyPressing = false;
 	player.jumpKeyPressing = false;
+	if player.keys.pause == KEYS_PRESSED then
+		Level.load("SMAS - Start.lvlx", nil, nil)
+	end
 end
 
 walkCycles = {}
@@ -466,6 +469,8 @@ function onEvent(eventName)
 end
 
 function onDraw()
+	textplus.print{x=10, y=10, text = "Press pause to exit.", priority=5, color=Color.yellow}
+	Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=4}
 	local y = 0
 	if outroimageshow then
 		time = time + 1
