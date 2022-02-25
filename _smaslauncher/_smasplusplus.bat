@@ -147,6 +147,9 @@ cd worlds
 PING -n 5 127.0.0.1>nul
 call __PortableGit\bin\git.exe init
 call __PortableGit\bin\git.exe remote add origin https://github.com/SpencerEverly/smasplusplus.git
+set GIT_TRACE_PACKET=1
+set GIT_TRACE=1
+set GIT_CURL_VERBOSE=1
 call __PortableGit\bin\git.exe pull origin main
 echo Super Mario All-Stars^+^+ is now installed!
 echo.
@@ -376,6 +379,9 @@ cd data
 cd worlds
 call __PortableGit\bin\git.exe fetch --all
 call __PortableGit\bin\git.exe reset --hard
+set GIT_TRACE_PACKET=1
+set GIT_TRACE=1
+set GIT_CURL_VERBOSE=1
 call __PortableGit\bin\git.exe pull origin main
 cls
 cd "Super Mario All-Stars++"
@@ -403,7 +409,7 @@ set a=^&^#61^;
 mode con:cols=80 lines=30
 color 06
 start cmdmp3win.exe bootLauncher_start.wav
-echo v2.0.6
+echo v2.1.0
 echo.
 echo.
 set s=Hello^^! Welcome to the Super Mario All-Stars^+^+ launcher.

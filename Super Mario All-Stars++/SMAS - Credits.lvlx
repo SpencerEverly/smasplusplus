@@ -63,5 +63,6 @@ ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Logo1";TE:"Logo2";TD:131;AU:1;AS:0;AX:0;AY:0;
-ET:"Logo2";ML:"logomove";MX:0;MY:-1.96923;AS:0;AX:0;AY:0;
+ET:"Logo2";TE:"BG1";TD:40;ML:"logomove";MX:0;MY:-1.96923;AS:0;AX:0;AY:0;
+ET:"BG1";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
