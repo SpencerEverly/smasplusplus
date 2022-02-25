@@ -52334,9 +52334,6 @@
 -1664
 1
 1408
--1664
-9
-1408
 -1696
 2
 1472
@@ -54550,6 +54547,9 @@
 7392
 1344
 2
+1408
+-1632
+12
 "next"
 416
 416
@@ -56011,7 +56011,7 @@
 992
 11
 "SMW - W-2, L-DSGH.lvlx"
-"Donut Secret House"
+"Donut Secret House (Coming soon)"
 -1
 -1
 4
@@ -56059,7 +56059,7 @@
 896
 14
 "SMW - W-2, L-DP2.lvlx"
-"Donut Plains 2"
+"Donut Plains 2 (Coming soon)"
 -1
 -1
 -1
@@ -56091,7 +56091,7 @@
 736
 11
 "SMW - W-2, L-DGH.lvlx"
-"Donut Ghost House"
+"Donut Ghost House (Coming soon)"
 4
 -1
 0
@@ -57019,7 +57019,7 @@
 -1728
 3
 ""
-"Toad House 1"
+"Toad House 1 (Coming soon)"
 -1
 -1
 -1
@@ -57032,10 +57032,10 @@
 -1
 #FALSE#
 1408
--1632
+-1664
 4
-"SMBS - W-2, L-Tower.lvlx"
-"2-Tower: Four-Way Verticles"
+""
+"2-Tower: Four-Way Verticles (Coming soon)"
 1
 -1
 -1
@@ -58074,8 +58074,8 @@
 -3008
 -1376
 13
-"MALC - L-5.lvlx"
-"5: TBD"
+""
+"5: Fix the Ladders! (TBD)"
 -1
 -1
 -1
@@ -58091,7 +58091,7 @@
 -1376
 13
 "MALC - L-6.lvlx"
-"6: TBD"
+"6: New Super Mario Bros. Land (TBD)"
 -1
 -1
 -1
@@ -58843,7 +58843,7 @@
 5088
 13
 "SMBLL - W-A, L-2.lvlx"
-"A-2: Around/Under the Extras"
+"A-2: Around/Under the Extras (Coming soon)"
 -1
 -1
 -1
@@ -59115,7 +59115,7 @@
 -2464
 10
 "SMB3 - W-2, L-Pyramid.lvlx"
-"Pyramid Caves"
+"Pyramid Caves (Coming soon)"
 -1
 -1
 -1
@@ -59515,7 +59515,7 @@
 -2464
 13
 "SMB3 - W-2, L-5.lvlx"
-"2-5: Heated Blocks"
+"2-5: Heated Blocks (Coming soon)"
 -1
 -1
 -1
@@ -59531,7 +59531,7 @@
 -2400
 26
 "SMB3 - W-2, L-Bonus2.lvlx"
-"Bonus Challenge! #3"
+"Bonus Challenge! #3 (Coming soon)"
 -1
 -1
 -1

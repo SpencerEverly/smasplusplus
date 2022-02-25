@@ -14,6 +14,7 @@ local playerManager = require("playermanager")
 local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local autoscroll = require("autoscroll")
+local comboSounds = require("comboSounds")
 
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
@@ -156,9 +157,6 @@ function onStart()
 	fadetolevel = false
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(500)
-	end
-	if SaveData.disableX2char == 0 then
-		comboSounds = require("comboSounds")
 	end
 end
 

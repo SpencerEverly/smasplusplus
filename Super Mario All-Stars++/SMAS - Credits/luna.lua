@@ -461,7 +461,7 @@ end
 
 function onEvent(eventName)
 	if eventName == "BG1" then
-		outroimageshow = true
+		outroimageshow = false
 	end
 end
 
@@ -469,7 +469,7 @@ function onDraw()
 	local y = 0
 	if outroimageshow then
 		time = time + 1
-		Graphics.draw{type = RTYPE_IMAGE, x = scrollOutroX*1 + -13984, y = 0, image = outroimg, priority = -10, sceneCoords = false, opacity = opacity}
+		Graphics.draw{type = RTYPE_IMAGE, x = scrollOutroX*1 + -13984, y = 0, image = outroimg, priority = -10, sceneCoords = false}
 	end
     for _,layout in ipairs(creditsLayouts) do
         textplus.render{layout = layout,priority = -1,x = 400 - layout.width*0.5,y = y - creditsScrollY + 605}
@@ -486,7 +486,8 @@ function onDraw()
 		Graphics.drawScreen{color = Color.black..math.min(1,time/40),priority = 9}
 	end
 	if scrolltextyes then
-		characterdraw = true
+		characterdraw = false
+		--Section(0).backgroundID = 8
 	end
 	if characterdraw then
 		for idx,p in ipairs(Player.get()) do
@@ -560,7 +561,7 @@ function onDraw()
 				}
 				player:render{
 					x = 450,y = 486,
-					ignorestate = true, sceneCoords = false, character = 4, powerup = 7, priority = -5, color = (Defines.cheat_shadowmario and Color.black) or Color.white, frame = frame,
+					ignorestate = true, sceneCoords = false, character = 4, powerup = 2, priority = -5, color = (Defines.cheat_shadowmario and Color.black) or Color.white, frame = frame,
 				}
 				player:render{
 					x = 525,y = 482,
