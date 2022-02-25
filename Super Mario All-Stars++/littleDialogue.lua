@@ -16,6 +16,8 @@ local tplusUtils = require("textplus/tplusutils")
 
 local handycam = require("handycam")
 
+local player2 = Player(2)
+
 local littleDialogue = {}
 
 local cooldown = 0

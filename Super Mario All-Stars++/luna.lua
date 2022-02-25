@@ -1,25 +1,10 @@
-local function anyValidFields()
+local function anyValidFields() --This is to prevent any player2 errors while switching btween 1/2 player modes. If it's still not working then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
 	sectionlist[1] = player.section
 	if player2 and player2.isValid then
 		sectionlist[2] = player2.section
 	else
 		sectionlist[2] = nil
 	end
-end
-
-if os then --This is to erase saves when selecting erase save under the boot menu
-	local nativeOS = os
-	local newOS = {}
-	newOS.clock = nativeOS.clock
-	newOS.date = nativeOS.date
-	newOS.time = nativeOS.time
-	newOS.difftime = nativeOS.difftime
-	newOS.remove = nativeOS.remove
-	newOS.rename = nativeOS.rename
-	newOS.exit = function() error("Shutdown") end
-	
-	os = newOS
-	_G.os = newOS
 end
 
 local smwMap = require("smwMap")
@@ -55,6 +40,21 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 		self.section = newSection
 		playMusic(newSection)
 	end
+end
+
+if os then --This is to erase saves when selecting erase save under the boot menu
+	local nativeOS = os
+	local newOS = {}
+	newOS.clock = nativeOS.clock
+	newOS.date = nativeOS.date
+	newOS.time = nativeOS.time
+	newOS.difftime = nativeOS.difftime
+	newOS.remove = nativeOS.remove
+	newOS.rename = nativeOS.rename
+	newOS.exit = function() error("Shutdown") end
+	
+	os = newOS
+	_G.os = newOS
 end
 
 littleDialogue.registerStyle("smbx13og",{

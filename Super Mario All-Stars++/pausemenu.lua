@@ -148,15 +148,14 @@ local function quitgame()
 	Audio.MusicVolume(0)
 	Misc.saveGame()
 	SFX.play("_OST/_Sound Effects/savequit.ogg")
-	pausemenu.paused = false
-	Routine.run(function() exitscreen = true Routine.wait(1.8, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
+	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function quitonly()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/nosave.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.9, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegame()
@@ -167,31 +166,27 @@ local function savegame()
 end
 
 local function exitlevelsave()
-	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.7, true) Misc.unpause() Audio.MusicVolume(nil) Misc.saveGame() Level.exit() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.7, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.saveGame() Level.exit() end)
 end
 
 local function exitlevel()
-	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.4, true) Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function restartlevel()
-	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
-	pausemenu.paused = false
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
 local function warpzonehub()

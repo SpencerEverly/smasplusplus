@@ -6,7 +6,7 @@ SC:0;L:-200000;R:-199200;T:-200832;B:-198816;MZ:24;MF:"_OST/Super Mario Bros 2/O
 SC:1;L:-180000;R:-174624;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:5;
 SC:2;L:-160096;R:-159296;T:-160600;B:-160000;MZ:24;MF:"_OST/Doki Doki Panic/Subspace.spc|0\;g=2.5";BG:5;XTRA:"{\n    \"darkness\"\: {\n        \"ambient\"\: \"#0d0d1919\"\,\n        \"enableDarkness\"\: true\,\n        \"playerlight\"\: {\n            \"enabled\"\: true\,\n            \"radius\"\: 999.9\n        }\n    }\n}\n";
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Doki Doki Panic/Subspace.spc|0\;g=2.5";BG:5;XTRA:"{\n    \"darkness\"\: {\n        \"ambient\"\: \"#0d0d1919\"\,\n        \"enableDarkness\"\: true\,\n        \"playerlight\"\: {\n            \"enabled\"\: true\,\n            \"radius\"\: 999.9\n        }\n    }\n}\n";
-SC:4;L:-120000;R:-116160;T:-120600;B:-120000;MZ:0;MF:"";BG:11;
+SC:4;L:-120000;R:-116160;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:11;
 SC:5;L:-100576;R:-98976;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.6";BG:25;
 SC:6;L:-80000;R:-79200;T:-80512;B:-78560;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:11;CS:1;
 SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
@@ -2417,7 +2417,7 @@ ID:215;X:-119608;Y:-120128;D:-1;
 ID:215;X:-119608;Y:-120160;D:-1;
 ID:215;X:-119608;Y:-120192;D:-1;
 ID:215;X:-119608;Y:-120224;D:-1;
-ID:39;X:-118176;Y:-120252;D:-1;EA:"BossBegin";ED:"BossEnd1";
+ID:39;X:-118176;Y:-120252;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:91;X:-159296;Y:-160064;D:-1;CN:138;
 ID:215;X:-159736;Y:-160096;D:-1;
 ID:215;X:-159736;Y:-160128;D:-1;
@@ -2658,7 +2658,6 @@ ID:400;X:-79488;Y:-78880;D:-1;
 ID:773;X:-59763;Y:-60452;D:-1;
 ID:773;X:-58451;Y:-60452;D:-1;
 ID:465;X:-116288;Y:-120480;D:-1;FD:1;NM:1;LR:"EventTrigger1";EA:"CostBossChanger";
-ID:465;X:-119616;Y:-120512;D:-1;FD:1;NM:1;LR:"EventTrigger1";EA:"CostBossChanger";
 NPC_END
 PHYSICS
 ET:1;X:-200000;Y:-200832;W:800;H:608;LR:"Rooms";
@@ -2713,9 +2712,9 @@ ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"10 Coin Yoshi";SD:20;LS:["Yoshi 10 Coin"];AS:0;AX:0;AY:0;
-ET:"BossBegin";AS:0;AX:0;AY:0;
-ET:"BossEnd1";SD:40;LS:["Birdo End"];SSS:["ID\:4\;MI\:0\;"];TE:"BossEnd2";TD:28;AS:0;AX:0;AY:0;
-ET:"BossEnd2";SSS:["ID\:4\;MI\:15\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End";SD:40;LS:["Birdo End"];SSS:["ID\:4\;MI\:0\;"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
+ET:"Boss End 2";SSS:["ID\:4\;MI\:15\;"];AS:0;AX:0;AY:0;
 ET:"Subcon Door Appear 1";SD:41;LS:["Subcon Door 1"];AS:0;AX:0;AY:0;
 ET:"Subcon Door Appear 2";SD:41;LS:["Subcon Door 2"];AS:0;AX:0;AY:0;
 ET:"Midway Message";MG:"This is a midway point.<page>These points are used to as when you die\, you'll respawn back here.";AS:0;AX:0;AY:0;

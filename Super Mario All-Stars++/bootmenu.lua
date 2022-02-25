@@ -19,6 +19,7 @@ local bootmenu = {}
 local Routine = require("routine")
 
 local level = Level.filename()
+local m = RNG.randomInt(1,56-1)
 
 local logo = true
 local pressjumpwords = true
@@ -422,15 +423,55 @@ end
 
 local function EraseSave1()
 	Audio.MusicChange(0, 0)
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
 end
 
 local function EraseSave2()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.0>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
 end
 
 local function BootDialogueMusicReset()
 	active = true
+	active4 = false
+	logo = false
+	pressjumpwords = false
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	if Level.filename() == "intro_8bit.lvlx" then
+		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
+	end
+	if Level.filename() == "intro_bossedit8.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Smash Bros. Melee/smari3.ogg")
+	end
+	if Level.filename() == "intro_S!TS!.lvlx" then
+		Audio.MusicChange(0, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
+	end
+	if Level.filename() == "intro_SMAS.lvlx" then
+		Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.0.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario 64/Title Theme.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.1.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario 64/Title Theme.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.2.lvlx" then
+		Audio.MusicChange(0, 53)
+	end
+	if Level.filename() == "intro_SMBX1.3.lvlx" then
+		Audio.MusicChange(0, 56)
+	end
+	if Level.filename() == "intro_SMBX1.3og.lvlx" then
+		Audio.MusicChange(0, 55)
+	end
+	if Level.filename() == "intro_SMBX2.lvlx" then
+		Audio.MusicChange(0, m)
+	end
+	if Level.filename() == "intro_SMBX2b3.lvlx" then
+		--Music doesn't mute
+	end
+	if Level.filename() == "intro_WSMBA.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario Bros. 3 (NES, VRC6 by skydev) - OST.nsf|0;g=2.2")
+	end
 end
 
 local function ExitDialogueFirstBoot()
@@ -1051,7 +1092,7 @@ littleDialogue.registerAnswer("SavingMenuOne",{text = "Erase Save Data",chosenFu
 
 
 
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "Don't Erase",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
+littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
 littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() Routine.run(SaveEraseStart) end})
 
 
@@ -1119,7 +1160,7 @@ littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunctio
 littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes", chosenFunction = function() Routine.run(X2Char) end})
 
 
-littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Players Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
+littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Player Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
 littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheck) end})
 littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
@@ -1168,8 +1209,8 @@ littleDialogue.registerAnswer("CharacterListX2",{text = "Link (Slot 5)",chosenFu
 littleDialogue.registerAnswer("CharacterListX2",{text = "Mega Man (Slot 6)",chosenFunction = function() player:transform(6, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Ninja Bomberman (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Klonoa (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
