@@ -157,6 +157,9 @@ function onStart()
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(500)
 	end
+	if SaveData.disableX2char == 0 then
+		comboSounds = require("comboSounds")
+	end
 end
 
 function onCameraUpdate(c, camIdx)
@@ -729,6 +732,19 @@ function onTick()
 		littleDialogue.characterNames[5] = "Link"
 		littleDialogue.characterNames[14] = "Steve"
 		steve.skinSettings.name = "steve"
+		if SaveData.disableX2char == 0 then
+			comboSounds.kick1 = Misc.resolveSoundFile("comboSounds-1")
+			comboSounds.kick2 = Misc.resolveSoundFile("comboSounds-2")
+			comboSounds.kick3 = Misc.resolveSoundFile("comboSounds-3")
+			comboSounds.kick4 = Misc.resolveSoundFile("comboSounds-4")
+			comboSounds.kick5 = Misc.resolveSoundFile("comboSounds-5")
+			comboSounds.kick6 = Misc.resolveSoundFile("comboSounds-6")
+			comboSounds.kick7 = Misc.resolveSoundFile("comboSounds-7")
+		end
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
 	end
 end
 
@@ -756,10 +772,12 @@ function onPostNPCKill(npc, harmType)
 	if coins[npc.id] then
 		SaveData.totalcoins = SaveData.totalcoins + 1
 	end
-	if npc.id == 184 or npc.id == 249 or npc.id == 9 or npc.id == 185 then
+	local mushrooms = table.map{9,184,185,249}
+	if mushrooms[npc.id] then
         SaveData.totalmushrooms = SaveData.totalmushrooms + 1
     end
-	if npc.id == 183 or npc.id == 14 or npc.id == 182 then
+	local fireflowers = table.map{14,182,183}
+	if fireflowers[npc.id] then
         SaveData.totalfireflowers = SaveData.totalfireflowers + 1
     end
 	if npc.id == 34 then
@@ -781,15 +799,13 @@ function onDraw()
 end
 
 function onExit()
-	--Player.setCostume(9, nil)
-	--Player.setCostume(14, nil)
 	if playerlives == 0 then
 		if killed == true then
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
 		end
 	end
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution. I have plans to make a Credits Sequence later
-		Level.load("SMAS - Start.lvlx", nil, nil)
+		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
 end
 
