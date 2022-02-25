@@ -255,11 +255,11 @@ local function FirstBoot1()
 	logo = false
 	pressjumpwords = false
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>Welcome to Super Mario All-Stars Plus Plus.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.5>Welcome to Super Mario All-Stars Plus Plus.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot3()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.0>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.2>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot4()
@@ -267,12 +267,12 @@ local function FirstBoot4()
 end
 
 local function FirstBoot5()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.0>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot6()
 	Audio.MusicChange(0, 1)
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.2>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.4>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == 0 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
 	end
@@ -283,12 +283,12 @@ local function FirstBoot6()
 end
 	
 local function FirstBootGameHelp()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
 	Misc.saveGame()
 end
 
 local function TimeFixInfo1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.1><setPos 400 32 0.5 -1.2>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3><setPos 400 32 0.5 -1.2>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
 end
 
 local function FailsafeMessage1()
@@ -417,10 +417,6 @@ local function SaveSlot1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Select slot by typing the number above. Press jump when you have picked the right slot (Max is 32,767) DATA FROM THE PREVIOUS SLOT, IF ANY, WILL BE OVERWRITTEN! Don't put a number in to cancel this option.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
 end
 
-local function SaveEraseComplete()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
-end
-
 local function EraseSave1()
 	Audio.MusicChange(0, 0)
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
@@ -516,8 +512,7 @@ local function SaveEraseStart()
 	SaveData.clear()
 	GameData.clear()
 	SaveData.flush()
-	os.remove(Misc.resolveFile("save"..Misc.saveSlot()..".sav"))
-	os.remove(Misc.resolveFile("save"..Misc.saveSlot().."-ext.dat"))
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1>Erasing complete (Save data erasing hasn't been added to SMBX2 yet, so your save is still available. Please erase the save by deleting your save slot in the episode folder).<question RestartOption>", pauses = false, updatesInPause = true})
 end
 
 local function ExitToIntro()
@@ -1108,7 +1103,7 @@ littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = funct
 
 
 
-littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlusPreExecute) end})
+littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlus) end})
 
 
 
@@ -1128,7 +1123,7 @@ littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunct
 
 
 
-littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
+littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(FirstBootGameHelp) end})
 littleDialogue.registerAnswer("FirstBootMenuFour",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
 

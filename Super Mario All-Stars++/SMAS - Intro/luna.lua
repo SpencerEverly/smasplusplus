@@ -7,6 +7,8 @@ local timer1 = 0
 local speed = 0
 local numberup = 0
 local time = 0
+local time2 = 0
+local time3 = 0
 
 local opacity = timer1/speed
 local middle = math.floor(timer1*numberup)
@@ -65,8 +67,8 @@ function onDraw()
 		Graphics.drawScreen{color = Color.black..math.min(1,time/20),priority = 5}
 	end
 	if fadeout3 then
-		time = time + 1
-		Graphics.drawScreen{color = Color.black..math.max(0,time/20),priority = 5}
+		time3 = time3 + 1
+		Graphics.drawScreen{color = Color.black..math.max(0,time3/20),priority = 5}
 	end
 end
 
