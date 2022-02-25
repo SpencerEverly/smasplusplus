@@ -7,18 +7,19 @@ setlocal enableDelayedExpansion
 set /a size=80-1 & rem screen size minus one
 
 title Super Mario All-Stars++ Updater
-echo Starting updater... MAKE SURE THIS BAT IS IN THE LAUNCHER FOLDER
-echo AND _PortableGit IS IN THE WORLDS FOLDER
-cd..
-cd..
-cls
+echo Starting updater... MAKE SURE THIS BAT
+echo AND PortableGit IS IN THE WORLDS FOLDER
 @timeout 1 /nobreak>nul
 echo Checking for SMAS^+^+ updates...
 @timeout 0 /nobreak>nul
-cd..
-cd data
-cd worlds
+if not exist PortableGit goto noportgit
 if not exist .git ( goto nogit )
+
+:noportgit
+echo PortableGit is not found. Please download it and extract it to
+echo the worlds folder and try again.
+pause
+exit
 
 :yesgit
 goto updatesmas
@@ -37,8 +38,8 @@ __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
 cd..
 cd..
-cd _smaslauncher
-echo The episode has been updated^^! Exiting in 5 seconds...
+start SMBX2.exe
+echo The episode has been updated^^! Executing SMBX2.exe and exiting in 5 seconds...
 @timeout 5 /nobreak>nul
 exit
 
@@ -56,7 +57,7 @@ __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
 cd..
 cd..
-cd _smaslauncher
-echo The episode has been updated^^! Exiting in 5 seconds...
+start SMBX2.exe
+echo The episode has been updated^^! Executing SMBX2.exe and exiting in 5 seconds...
 @timeout 5 /nobreak>nul
 exit
