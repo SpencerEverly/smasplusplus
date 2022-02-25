@@ -2148,6 +2148,8 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Last Bowser Battle.ogg"
 			elseif section.musicPath == "_OST/Super Mario World/Bowser (Advance).spc|0;g=2.6" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Final Battle.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros/Airship.spc|0;g=2.2" then
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/AirshipSMB1.ogg"
 			end
 		end
 		if currentCostume == "1-SMB1-RETRO" then

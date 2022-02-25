@@ -5,6 +5,6 @@ lightning.priority = -99
 
 function onEvent(eventName)
 	if eventName == ("Cutscene 4") then
-		SFX.play("pigeon_attack.ogg")
+		SFX.play("_OST/_Sound Effects/pigeon_attack.ogg")
 	end
 end
