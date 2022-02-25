@@ -302,9 +302,9 @@ function onDraw()
 	frame2 = math.floor(timer/8)%7
 	
 	Graphics.drawImage(knowledge, 0, 0, 1, 0, 800, 600, opacity)
-	textplus.print{x=695, y=15, text = "Date and time not", priority=1, color=Color.white}
-	textplus.print{x=695, y=30, text = "available until loading", priority=1, color=Color.white}
-	textplus.print{x=695, y=45, text = "is complete (Some areas).", priority=1, color=Color.white}
+	textplus.print{x=690, y=15, text = "Date and time not", priority=1, color=Color.white}
+	textplus.print{x=690, y=30, text = "available until loading", priority=1, color=Color.white}
+	textplus.print{x=690, y=45, text = "is complete (Some areas).", priority=1, color=Color.white}
 
     for index,width in ipairs(widths) do
         letterData[index] = letterData[index] or {offset = 0,speed = 0}

@@ -12,7 +12,6 @@ echo AND PortableGit IS IN THE WORLDS FOLDER
 @timeout 1 /nobreak>nul
 echo Checking for SMAS^+^+ updates...
 @timeout 0 /nobreak>nul
-if not exist PortableGit goto noportgit
 if not exist .git ( goto nogit )
 
 :noportgit

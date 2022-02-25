@@ -58649,7 +58649,7 @@
 #FALSE#
 5760
 3008
-13
+8
 "SMBLL - W-8, L-3.lvlx"
 "8-3: The Airship in the Skies"
 -1
@@ -58658,7 +58658,7 @@
 -1
 0
 #FALSE#
-#FALSE#
+#TRUE#
 #FALSE#
 -1
 -1
@@ -58745,9 +58745,9 @@
 #FALSE#
 5024
 3040
-4
+8
 "SMBLL - W-9, L-3.lvlx"
-"9-3: The Quiet Castle...?"
+"9-3: The Quiet Airship...?"
 7
 -1
 -1
