@@ -7,6 +7,21 @@ local function anyValidFields()
 	end
 end
 
+if os then --This is to erase saves when selecting erase save under the boot menu
+	local nativeOS = os
+	local newOS = {}
+	newOS.clock = nativeOS.clock
+	newOS.date = nativeOS.date
+	newOS.time = nativeOS.time
+	newOS.difftime = nativeOS.difftime
+	newOS.remove = nativeOS.remove
+	newOS.rename = nativeOS.rename
+	newOS.exit = function() error("Shutdown") end
+	
+	os = newOS
+	_G.os = newOS
+end
+
 local smwMap = require("smwMap")
 local starman = require("starman/star")
 local mega2 = require("mega/megashroom")
@@ -175,7 +190,6 @@ end
 function onTick()
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
-
 	
 	mem(0x00B25130, FIELD_WORD, 2)
 	if player.count(2) then

@@ -475,8 +475,8 @@ local function SaveEraseStart()
 	SaveData.clear()
 	GameData.clear()
 	SaveData.flush()
-	--os.remove(Misc.resolveFile("save"..Misc.saveSlot()..".sav"))
-	--os.remove(Misc.resolveFile("save"..Misc.saveSlot().."-ext.dat"))
+	os.remove(Misc.resolveFile("save"..Misc.saveSlot()..".sav"))
+	os.remove(Misc.resolveFile("save"..Misc.saveSlot().."-ext.dat"))
 end
 
 local function ExitToIntro()

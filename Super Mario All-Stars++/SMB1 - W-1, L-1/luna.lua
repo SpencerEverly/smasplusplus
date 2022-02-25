@@ -6,6 +6,6 @@ local HUDimage = Graphics.loadImage("level-hud.png")
 
 function onDraw()
 	if hudshow then
-		--Graphics.drawImageWP(HUDimage, 0, 0, 4)
+		Graphics.drawImageWP(HUDimage, 0, 0, -15)
 	end
 end

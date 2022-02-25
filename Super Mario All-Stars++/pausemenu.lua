@@ -877,13 +877,13 @@ local function drawCharacterMenu(y, alpha)
 		costumename = "<color red>Current costume: SMAS++ 2012 Beta Mario</color>"
 	end
 	if currentCostume == "1-SMB1-RETRO" then
-		costumename = "<color red>Current costume: Super Mario Bros. 1 (NES)</color>"
+		costumename = "<color red>Current costume: Super Mario Bros. (NES)</color>"
 	end
 	if currentCostume == "2-SMB1-RECOLORED" then
-		costumename = "<color red>Current costume: Super Mario Bros. 1 (NES, Recolored)</color>"
+		costumename = "<color red>Current costume: Super Mario Bros. (Recolored)</color>"
 	end
 	if currentCostume == "3-SMB1-SMAS" then
-		costumename = "<color red>Current costume: Super Mario Bros. 1 (SNES)</color>"
+		costumename = "<color red>Current costume: Super Mario Bros. (SNES)</color>"
 	end
 	if currentCostume == "4-SMB2-RETRO" then
 		costumename = "<color red>Current costume: Super Mario Bros. 2 (NES)</color>"
@@ -937,7 +937,7 @@ local function drawCharacterMenu(y, alpha)
 		costumename = "<color red>Current costume: Modern Mario Bros.</color>"
 	end
 	if currentCostume == "PRINCESSRESCUE" then
-		costumename = "<color red>Current costume: Princess Rescue (A2600)</color>"
+		costumename = "<color red>Current costume: Princess Rescue (Atari 2600)</color>"
 	end
 	if currentCostume == "SMB0" then
 		costumename = "<color red>Current costume: Super Mario Bros. 0 (SMBX)</color>"
@@ -954,6 +954,59 @@ local function drawCharacterMenu(y, alpha)
 	if currentCostume == "Z-SMW2-ADULTMARIO" then
 		costumename = "<color red>Current costume: Super Mario World 2 (SNES)</color>"
 	end
+	
+	if currentCostume == "0-SPENCEREVERLY" then
+		costumename = "<color red>Current costume: Spencer Everly (SMBS)</color>"
+	end
+	if currentCostume == "3-SMB1-RETRO-MODERN" then
+		costumename = "<color red>Current costume: Super Mario Bros. (NES, Modern)</color>"
+	end
+	if currentCostume == "4-SMB1-SMAS" then
+		costumename = "<color red>Current costume: Super Mario Bros. (SNES)</color>"
+	end
+	if currentCostume == "5-SMB2-RETRO" then
+		costumename = "<color red>Current costume: Super Mario Bros. 2 (NES)</color>"
+	end
+	if currentCostume == "6-SMB2-SMAS" then
+		costumename = "<color red>Current costume: Super Mario Bros. 2 (SNES)</color>"
+	end
+	if currentCostume == "7-SMB3-RETRO" then
+		costumename = "<color red>Current costume: Super Mario Bros. 3 (NES)</color>"
+	end
+	if currentCostume == "9-SMB3-MARIOCLOTHES" then
+		costumename = "<color red>Current costume: Marigi</color>"
+	end
+	if currentCostume == "10-SMW-ORIGINAL" then
+		costumename = "<color red>Current costume: Super Mario World (SNES)</color>"
+	end
+	if currentCostume == "13-SMBDX" then
+		costumename = "<color red>Current costume: Super Mario Bros. Deluxe (GBC)</color>"
+	end
+	if currentCostume == "15-SMA2" then
+		costumename = "<color red>Current costume: Super Mario Advance 2 (GBA)</color>"
+	end
+	if currentCostume == "16-SMA4" then
+		costumename = "<color red>Current costume: Super Mario Advance 4 (GBA)</color>"
+	end
+	if currentCostume == "17-NSMBDS-SMBX" then
+		costumename = "<color red>Current costume: New Super Mario Bros. (SMBX)</color>"
+	end
+	if currentCostume == "A2XT-IRIS" then
+		costumename = "<color red>Current costume: Iris (A2XT)</color>"
+	end
+	if currentCostume == "LARRYTHECUCUMBER" then
+		costumename = "<color red>Current costume: Larry (VeggieTales)</color>"
+	end
+	if currentCostume == "UNDERTALE-FRISK" then
+		costumename = "<color red>Current costume: Frisk (Undertale)</color>"
+	end
+	if currentCostume == "WALUIGI" then
+		costumename = "<color red>Current costume: Waluigi</color>"
+	end
+	if currentCostume == "SMW-LUIGI" then
+		costumename = "<color red>Current costume: Super Mario World (SMAS)</color>"
+	end
+	
 	if currentCostume == nil then
 		costumename = "<color red>Current costume: N/A</color>"
 	end
