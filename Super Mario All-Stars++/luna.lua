@@ -7,6 +7,7 @@ local function anyValidFields() --This is to prevent any player2 errors while sw
 	end
 end
 
+local classicevents = require("classiceventsmod")
 local smwMap = require("smwMap")
 local starman = require("starman/star")
 local mega2 = require("mega/megashroom")

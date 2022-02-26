@@ -8,6 +8,8 @@ local autoscroll = require("autoscrolla")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
+local player2 = Player(2)
+
 local ready = false
 
 local fontthree = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
@@ -271,7 +273,7 @@ local function FirstBoot5()
 end
 
 local function FirstBoot6()
-	Audio.MusicChange(0, 1)
+	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.5>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == 0 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
@@ -333,11 +335,11 @@ local function X2Char()
 	if SaveData.disableX2char == 0 then
 		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
 		SaveData.disableX2char = SaveData.disableX2char + 1
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == 1 then
 		SFX.play("_OST/_Sound Effects/x2-mode-enabled.ogg")
 		SaveData.disableX2char = SaveData.disableX2char - 1
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -347,20 +349,18 @@ end
 
 local function X2DisableCheck1()
 	if Player.count() == 1 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.7>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.75>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
 	end
 	if Player.count() == 2 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == 1 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.5>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
-	elseif SaveData.disableX2char == 0 or not Level.filename() == "intro_SMAS.lvlx" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters and revert to the original theme to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
-	elseif Level.filename() == "intro_SMAS.lvlx" then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
+	elseif SaveData.disableX2char == 0 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -393,20 +393,37 @@ end
 
 local function PathFix1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Would you like to fix the world map paths? Only do this if future updates break the map.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
-
 end
+
 local function ChangeChar1()
 	if SaveData.disableX2char == 0 then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
 	end
 	if SaveData.disableX2char == 1 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change into? (X2 Characters Disabled)<question CharacterList>", pauses = false, updatesInPause = true})
+		if Player.count() == 2 then
+			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
+		elseif Player.count() == 1 then
+			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
+		end
 	end
+end
+
+local function ChangeChar1P()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
+end
+
+local function ChangeChar2P()
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change Player 2 into? (X2 Characters Disabled)<question CharacterList2>", pauses = false, updatesInPause = true})
 end
 
 local function ChangedCharacter()
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.9>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+	if Player.count() == 1 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+	end
+	if Player.count() == 2 then
+		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+	end
 end
 
 local function SaveOptions1()
@@ -746,6 +763,10 @@ function bootmenu.onTick()
 	end
 	player:setFrame(50)
 	player:mem(0x142, FIELD_BOOL, true)
+	if Player.count() == 2 then
+		player2:setFrame(50)
+		player2:mem(0x142, FIELD_BOOL, true)
+	end
 	if SaveData == nil then
 		Routine.run(SaveDataError1)
 	end
@@ -1195,15 +1216,32 @@ littleDialogue.registerAnswer("OkayToMenuTheme",{text = "Oh yeah, right.",chosen
 littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() Routine.run(ExitDialogueMusicReset) end})
 
 
-littleDialogue.registerAnswer("CharacterList",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("CharacterList",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
 
 
-littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+
+littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 1",chosenFunction = function() Routine.run(ChangeChar1P) end})
+littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 2",chosenFunction = function() Routine.run(ChangeChar2P) end})
+
+
+
+littleDialogue.registerAnswer("CharacterList1",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("CharacterList1",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList1",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList1",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList1",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList1",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
+
+
+littleDialogue.registerAnswer("CharacterList2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("CharacterList2",{text = "Mario (Slot 1)",chosenFunction = function() player2:transform(1, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList2",{text = "Luigi (Slot 2)",chosenFunction = function() player2:transform(2, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList2",{text = "Peach (Slot 3)",chosenFunction = function() player2:transform(3, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList2",{text = "Toad (Slot 4)",chosenFunction = function() player2:transform(4, true) Routine.run(ChangedCharacter) end})
+littleDialogue.registerAnswer("CharacterList2",{text = "Link (Slot 5)",chosenFunction = function() player2:transform(5, true) Routine.run(ChangedCharacter) end})
+
+
+littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
