@@ -11222,7 +11222,7 @@ ID:466;X:-119920;Y:-118976;D:1;MG:"Still fixing this room!";FD:1;NM:1;LR:"Stage 
 ID:151;X:-19488;Y:-20144;D:-1;MG:"Welcome to the information booth.<page>Here\, you can retrieve information on the remaining stars you need to collect\,<page>which stars you missed\,<page>and any other information from the floors up.<page>As always\, good luck on your journey\, and have fun!";FD:1;LR:"Stage All - Mandatories";
 ID:235;X:-200448;Y:-200256;D:-1;MG:"<boxStyle infobooth>HELLO! WELCOME TO THE ME AND LARRY CITY WARP SCREEN! HOW MAY I HELP YOU TODAY?<question malcbeginmsg>";FD:1;NM:1;
 ID:151;X:-199904;Y:-200112;D:-1;MG:"Hello! Your name is <characterName>.<page>If it's wrong\, please talk to our mayor over at the 4th building.<page>And afterward\, give Spencer Everly an email at spencer.everly at gmail.com.";FD:1;LR:"Stage All - Mandatories";
-ID:151;X:-200048;Y:-200112;D:-1;MG:"Just like last time\, please note that not everything is finished.<page>If there are any bugs or important things you need to say about this project\,<page>Don't hesitate to ask me on the GitHub.<page>Thanks for understanding\, and enjoy the game!";FD:1;
+ID:151;X:-200128;Y:-200112;D:-1;MG:"Please note that not everything is finished.<page>If there are any bugs or important things you need to say about this project\,<page>Don't hesitate to ask me on the GitHub.<page>Thanks for understanding\, and enjoy the game!";FD:1;
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;
