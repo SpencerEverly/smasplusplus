@@ -14,25 +14,40 @@ local costumes = playerManager.getCostumes(player.character)
 local currentCostume = player:getCostume()
 local costumes
 
+local rain = false
+local snow = false
+local sunny = true
+
+local sec0 = Section(0)
+local sec6 = Section(6)
+local sec10 = Section(10)
+
 local ready = false
 
 function malcmusic.onInitAPI()
+	registerEvent(malcmusic, "onStart")
 	registerEvent(malcmusic, "onTick")
 	registerEvent(malcmusic, "onEvent")
 	ready = true
 end
 
 function malcmusic.onTick()
-		for i = 0,20 do
+	for i = 0,20 do
 		local SectionAll = Section(i)
 		if month == "04" and day == "04" then
 			SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
 			triggerEvent("SEDay")
 		end
 		if month == "12" and day == "25" then
-			Section(0).getWeatherEffect(2)
-			Section(6).getWeatherEffect(2)
-			Section(10).getWeatherEffect(2)
+			if player.section == 0 then
+				Section(player.section).effects.weather = WEATHER_SNOW
+			end
+			if player.section == 6 then
+				Section(player.section).effects.weather = WEATHER_SNOW
+			end
+			if player.section == 10 then
+				Section(player.section).effects.weather = WEATHER_SNOW
+			end
 			SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
 			triggerEvent("Christmas")
 		end
@@ -40,129 +55,445 @@ function malcmusic.onTick()
 			SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
 			triggerEvent("Weed")
 		end
-		if hour == "00" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
+		if rain == true then
+			if player.section == 0 then
+				Section(player.section).effects.weather = WEATHER_RAIN
+				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+			elseif player.section == 1 then
+				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+			elseif player.section == 2 then
+				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+			elseif player.section == 3 then
+				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+			elseif player.section == 4 then
+				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+			elseif player.section == 6 then
+				Section(player.section).effects.weather = WEATHER_RAIN
+				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+			elseif player.section == 7 then
+				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+			elseif player.section == 8 then
+				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+			elseif player.section == 9 then
+				Section(player.section).effects.weather = WEATHER_RAIN
+				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+			elseif player.section == 10 then
+				Section(player.section).effects.weather = WEATHER_RAIN
+				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+			elseif player.section == 11 then
+				Section(player.section).effects.weather = WEATHER_RAIN
+				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+			end
+			if hour == "00" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_RAINY.ogg"
+			end
+			if hour == "01" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_RAINY.ogg"
+			end
+			if hour == "02" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_RAINY.ogg"
+			end
+			if hour == "03" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_RAINY.ogg"
+			end
+			if hour == "04" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_RAINY.ogg"
+			end
+			if hour == "05" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_RAINY.ogg"
+			end
+			if hour == "06" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_RAINY.ogg"
+			end
+			if hour == "07" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_RAINY.ogg"
+			end
+			if hour == "08" then
+				ASection(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_RAINY.ogg"
+			end
+			if hour == "09" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_RAINY.ogg"
+			end
+			if hour == "10" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_RAINY.ogg"
+			end
+			if hour == "11" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_RAINY.ogg"
+			end
+			if hour == "12" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_RAINY.ogg"
+			end
+			if hour == "13" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_RAINY.ogg"
+			end
+			if hour == "14" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_RAINY.ogg"
+			end
+			if hour == "15" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_RAINY.ogg"
+			end
+			if hour == "16" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_RAINY.ogg"
+			end
+			if hour == "17" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_RAINY.ogg"
+			end
+			if hour == "18" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_RAINY.ogg"
+			end
+			if hour == "19" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_RAINY.ogg"
+			end
+			if hour == "20" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_RAINY.ogg"
+			end
+			if hour == "21" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_RAINY.ogg"
+			end
+			if hour == "22" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_RAINY.ogg"
+			end
+			if hour == "23" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_RAINY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_RAINY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_RAINY.ogg"
+			end
 		end
-		if hour == "01" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg"
-		end
-		if hour == "02" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg"
-		end
-		if hour == "03" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg"
-		end
-		if hour == "04" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg"
-		end
-		if hour == "05" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg"
-		end
-		if hour == "06" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg"
-		end
-		if hour == "07" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg"
-		end
-		if hour == "08" then
-			ASection(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg"
-		end
-		if hour == "09" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg"
-		end
-		if hour == "10" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg"
-		end
-		if hour == "11" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg"
-		end
-		if hour == "12" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg"
-		end
-		if hour == "13" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg"
-		end
-		if hour == "14" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg"
-		end
-		if hour == "15" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg"
-		end
-		if hour == "16" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg"
-		end
-		if hour == "17" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg"
-		end
-		if hour == "18" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg"
-		end
-		if hour == "19" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg"
-		end
-		if hour == "20" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg"
-		end
-		if hour == "21" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg"
-		end
-		if hour == "22" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg"
-		end
-		if hour == "23" then
-			Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
-			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
-			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
+		if sunny == true then
+			if hour == "00" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
+			end
+			if hour == "01" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SUNNY.ogg"
+			end
+			if hour == "02" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SUNNY.ogg"
+			end
+			if hour == "03" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SUNNY.ogg"
+			end
+			if hour == "04" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SUNNY.ogg"
+			end
+			if hour == "05" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SUNNY.ogg"
+			end
+			if hour == "06" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SUNNY.ogg"
+			end
+			if hour == "07" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SUNNY.ogg"
+			end
+			if hour == "08" then
+				ASection(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SUNNY.ogg"
+			end
+			if hour == "09" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SUNNY.ogg"
+			end
+			if hour == "10" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SUNNY.ogg"
+			end
+			if hour == "11" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SUNNY.ogg"
+			end
+			if hour == "12" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SUNNY.ogg"
+			end
+			if hour == "13" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SUNNY.ogg"
+			end
+			if hour == "14" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SUNNY.ogg"
+			end
+			if hour == "15" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SUNNY.ogg"
+			end
+			if hour == "16" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SUNNY.ogg"
+			end
+			if hour == "17" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SUNNY.ogg"
+			end
+			if hour == "18" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SUNNY.ogg"
+			end
+			if hour == "19" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SUNNY.ogg"
+			end
+			if hour == "20" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SUNNY.ogg"
+			end
+			if hour == "21" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SUNNY.ogg"
+			end
+			if hour == "22" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SUNNY.ogg"
+			end
+			if hour == "23" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
+			end
 		end
 
 		currentCostume = player:getCostume()
-
+		character = player.character
+		
+		if currentCostume == nil then
+			if character == "CHARACTER_MARIO" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
+				Audio.MusicChange(13, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
+			end
+			if character == "CHARACTER_LUIGI" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+				Audio.MusicChange(13, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			end
+			if character == "CHARACTER_PEACH" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
+				Audio.MusicChange(13, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
+			end
+			if character == "CHARACTER_TOAD" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
+				Audio.MusicChange(13, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
+			end
+			if character == "CHARACTER_LINK" then
+				Audio.MusicChange(1, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+				Audio.MusicChange(2, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+				Audio.MusicChange(3, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+				Audio.MusicChange(7, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+				Audio.MusicChange(8, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+				Audio.MusicChange(11, "_OST/Legend of Zelda - A Link to the Past/05a Majestic Castle.spc|0;g=2.5")
+				Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
+				Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
+			end
+			if character == "CHARACTER_WARIO" then
+				Audio.MusicChange(1, "_OST/Wario Land 3.gbs|3;g=2")
+				Audio.MusicChange(2, "_OST/Wario Land 3.gbs|3;g=2")
+				Audio.MusicChange(3, "_OST/Wario Land 3.gbs|3;g=2")
+				Audio.MusicChange(7, "_OST/Wario Land 3.gbs|3;g=2")
+				Audio.MusicChange(8, "_OST/Wario Land 3.gbs|3;g=2")
+				Audio.MusicChange(11, "_OST/Wario Land 3.gbs|3;g=2")
+				Audio.MusicChange(12, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
+				Audio.MusicChange(13, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
+			end
+			if character == "CHARACTER_YOSHI" then
+				Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+				Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+				Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+				Audio.MusicChange(7, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+				Audio.MusicChange(8, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+				Audio.MusicChange(11, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+				Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
+				Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
+			end
+			if character == "CHARACTER_BOWSER" then
+				Audio.MusicChange(1, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+				Audio.MusicChange(2, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+				Audio.MusicChange(3, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+				Audio.MusicChange(7, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+				Audio.MusicChange(8, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+				Audio.MusicChange(11, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+				Audio.MusicChange(12, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+				Audio.MusicChange(13, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			end
+			if character == "CHARACTER_NINJABOMBERMAN" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
+				Audio.MusicChange(13, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
+			end
+			if character == "CHARACTER_MEGAMAN" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
+				Audio.MusicChange(13, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
+			end
+			if character == "CHARACTER_KLONOA" then
+				Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+				Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+				Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+				Audio.MusicChange(7, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+				Audio.MusicChange(8, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+				Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
+				Audio.MusicChange(12, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
+				Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
+			end
+			if character == "CHARACTER_ZELDA" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
+				Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
+			end
+			if character == "CHARACTER_ROSALINA" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+				Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			end
+			if character == "CHARACTER_SAMUS" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Metroid - Zero Mission/Brinstar.ogg")
+				Audio.MusicChange(13, "_OST/Metroid - Zero Mission/Brinstar.ogg")
+			end
+			if character == "CHARACTER_UNCLEBROADSWORD" then
+				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+				Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+				Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+				Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			end
+			if character == "CHARACTER_ULTIMATERINKA" then
+				Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
+				Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
+				Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
+				Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
+				Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
+				Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
+				Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+				Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+			end
+		end
+		
 		--CHARACTER_MARIO
 		if currentCostume == "0-SMASPLUSPLUS-BETA" then
 			Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/ac_1700.ogg")
@@ -1303,169 +1634,6 @@ function malcmusic.onTick()
 			Audio.MusicChange(11, "_OST/Super Mario Advance 3/Flower Garden.ogg")
 			Audio.MusicChange(12, "_OST/Super Mario Advance 3/Training Course.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Advance 3/Training Course.ogg")
-		end
-		
-		
-		
-		if character == "CHARACTER_MARIO" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_LUIGI" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_PEACH" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_TOAD" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_LINK" then
-			Audio.MusicChange(1, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(7, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(8, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(11, "_OST/Legend of Zelda - A Link to the Past/05a Majestic Castle.spc|0;g=2.5")
-			Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_WARIO" then
-			Audio.MusicChange(1, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(2, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(3, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(7, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(8, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(11, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(12, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
-			Audio.MusicChange(13, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
-		end
-		if character == "CHARACTER_YOSHI" then
-			Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(7, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(8, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(11, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_BOWSER" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(2, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(3, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(7, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(8, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(11, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-		end
-		if character == "CHARACTER_NINJABOMBERMAN" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
-			Audio.MusicChange(13, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
-		end
-		if character == "CHARACTER_MEGAMAN" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
-			Audio.MusicChange(13, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
-		end
-		if character == "CHARACTER_KLONOA" then
-			Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(7, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(8, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
-			Audio.MusicChange(12, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
-			Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
-		end
-		if character == "CHARACTER_ZELDA" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_ROSALINA" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-		end
-		if character == "CHARACTER_SAMUS" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Metroid - Zero Mission/Brinstar.ogg")
-			Audio.MusicChange(13, "_OST/Metroid - Zero Mission/Brinstar.ogg")
-		end
-		if character == "CHARACTER_UNCLEBROADSWORD" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-		end
-		if character == "CHARACTER_ULTIMATERINKA" then
-			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
-			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
 	end
 end
