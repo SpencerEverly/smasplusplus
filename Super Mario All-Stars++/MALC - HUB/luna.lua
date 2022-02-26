@@ -15,7 +15,6 @@ local second = os.date("%S")
 local stars = mem(0x00B251E0, FIELD_WORD)
 local infobooth1 = textplus.loadFont("littleDialogue/font/smb3-c.ini")
 
-
 littleDialogue.registerStyle("endingtextone",{
 	openSpeed = 1,
 	pageScrollSpeed = 1, -- How fast it scrolls when switching pages.

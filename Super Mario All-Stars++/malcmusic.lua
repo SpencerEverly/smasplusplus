@@ -1,6 +1,7 @@
 local malcmusic = {}
 
 local playerManager = require("playerManager")
+local rng = require("base/rng")
 
 local hour = os.date("%H")
 local day = os.date("%d")
@@ -18,9 +19,30 @@ local rain = false
 local snow = false
 local sunny = true
 
+local rainoutsidesfx = SFX.open("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+local raininsidesfx = SFX.open("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+
+local prevSection = nil
+local rainState = false
+local snowState = false
+local prevState = false
+local prevRainState = false
+local prevSnowState = false
+local prevPreviousState = false
+--local insideMap = table.map{1, 2, 3, 4, 7, 8}
+local currentSfx = nil
+
 local sec0 = Section(0)
 local sec6 = Section(6)
 local sec10 = Section(10)
+
+local possibleWeather = {
+	{"sunny"},
+	{"rain"},
+	{"snow"}
+}
+local currentPossibleWeather = possibleWeather[1]
+local currentWeather = RNG.irandomEntry(currentPossibleWeather)
 
 local ready = false
 
@@ -29,6 +51,10 @@ function malcmusic.onInitAPI()
 	registerEvent(malcmusic, "onTick")
 	registerEvent(malcmusic, "onEvent")
 	ready = true
+end
+
+function malcmusic.onStart()
+	currentWeather = true
 end
 
 function malcmusic.onTick()
@@ -55,34 +81,239 @@ function malcmusic.onTick()
 			SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
 			triggerEvent("Weed")
 		end
+		if snow == true then
+			if player.section == 0 then
+				snowState = true
+				prevState = false
+			elseif player.section == 1 then
+				snowState = false
+				prevState = true
+			elseif player.section == 2 then
+				snowState = false
+				prevState = true
+			elseif player.section == 3 then
+				snowState = false
+				prevState = true
+			elseif player.section == 4 then
+				snowState = false
+				prevState = true
+			elseif player.section == 6 then
+				snowState = true
+				prevState = false
+			elseif player.section == 7 then
+				snowState = false
+				prevState = true
+			elseif player.section == 8 then
+				snowState = false
+				prevState = true
+			elseif player.section == 9 then
+				snowState = true
+				prevState = false
+			elseif player.section == 10 then
+				snowState = true
+				prevState = false
+			elseif player.section == 11 then
+				snowState = true
+				prevState = false
+			elseif player.section == 12 then
+				snowState = false
+				prevState = true
+			elseif player.section == 3 then
+				snowState = false
+				prevState = true
+			end
+			if (snowState ~= prevSnowState) or (prevSection ~= player.section) then
+				if snowState then
+					Section(player.section).effects.weather = WEATHER_SNOW
+				elseif prevState then
+					--Nothing
+				end
+				prevSection = player.section
+				prevSnowState = snowState
+				prevPreviousState = prevState
+			end
+			if hour == "00" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SNOWY.ogg"
+			end
+			if hour == "01" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR01_SNOWY.ogg"
+			end
+			if hour == "02" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR02_SNOWY.ogg"
+			end
+			if hour == "03" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR03_SNOWY.ogg"
+			end
+			if hour == "04" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR04_SNOWY.ogg"
+			end
+			if hour == "05" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR05_SNOWY.ogg"
+			end
+			if hour == "06" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR06_SNOWY.ogg"
+			end
+			if hour == "07" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR07_SNOWY.ogg"
+			end
+			if hour == "08" then
+				ASection(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR08_SNOWY.ogg"
+			end
+			if hour == "09" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR09_SNOWY.ogg"
+			end
+			if hour == "10" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR10_SNOWY.ogg"
+			end
+			if hour == "11" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR11_SNOWY.ogg"
+			end
+			if hour == "12" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR12_SNOWY.ogg"
+			end
+			if hour == "13" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR13_SNOWY.ogg"
+			end
+			if hour == "14" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR14_SNOWY.ogg"
+			end
+			if hour == "15" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR15_SNOWY.ogg"
+			end
+			if hour == "16" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR16_SNOWY.ogg"
+			end
+			if hour == "17" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR17_SNOWY.ogg"
+			end
+			if hour == "18" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR18_SNOWY.ogg"
+			end
+			if hour == "19" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR19_SNOWY.ogg"
+			end
+			if hour == "20" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR20_SNOWY.ogg"
+			end
+			if hour == "21" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR21_SNOWY.ogg"
+			end
+			if hour == "22" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR22_SNOWY.ogg"
+			end
+			if hour == "23" then
+				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SNOWY.ogg"
+				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SNOWY.ogg"
+				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SNOWY.ogg"
+			end
+		end
 		if rain == true then
 			if player.section == 0 then
-				Section(player.section).effects.weather = WEATHER_RAIN
-				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+				rainState = true
+				prevState = false
 			elseif player.section == 1 then
-				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+				rainState = false
+				prevState = true
 			elseif player.section == 2 then
-				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+				rainState = false
+				prevState = true
 			elseif player.section == 3 then
-				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+				rainState = false
+				prevState = true
 			elseif player.section == 4 then
-				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+				rainState = false
+				prevState = true
 			elseif player.section == 6 then
-				Section(player.section).effects.weather = WEATHER_RAIN
-				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+				rainState = true
+				prevState = false
 			elseif player.section == 7 then
-				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+				rainState = false
+				prevState = true
 			elseif player.section == 8 then
-				SFX.play("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+				rainState = false
+				prevState = true
 			elseif player.section == 9 then
-				Section(player.section).effects.weather = WEATHER_RAIN
-				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+				rainState = true
+				prevState = false
 			elseif player.section == 10 then
-				Section(player.section).effects.weather = WEATHER_RAIN
-				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+				rainState = true
+				prevState = false
 			elseif player.section == 11 then
-				Section(player.section).effects.weather = WEATHER_RAIN
-				SFX.play("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
+				rainState = true
+				prevState = false
+			elseif player.section == 12 then
+				rainState = false
+				prevState = true
+			elseif player.section == 3 then
+				rainState = false
+				prevState = true
+			end
+			if (rainState ~= prevRainState) or (prevSection ~= player.section) then
+				if rainState then
+					Section(player.section).effects.weather = WEATHER_RAIN
+					currentSfxOutRain = SFX.play(rainoutsidesfx, 1, 0)
+					if currentSfxInRain then
+						currentSfxInRain:fadeout(50)
+						currentSfxInRain = nil
+					end
+				elseif prevState then
+					currentSfxInRain = SFX.play(raininsidesfx, 1, 0)
+					if currentSfxOutRain then
+						currentSfxOutRain:fadeout(50)
+						currentSfxOutRain = nil
+					end
+				end
+				prevSection = player.section
+				prevRainState = rainState
+				prevPreviousState = prevState
+				--prevInsideState = insideState
+				--prevRainState = rainState
 			end
 			if hour == "00" then
 				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_RAINY.ogg"
