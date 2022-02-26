@@ -60,9 +60,17 @@ end
 function malcmusic.onTick()
 	for i = 0,20 do
 		local SectionAll = Section(i)
+		if month == "03" and day == "17" then
+			SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
+			triggerEvent("StPatricksDay")
+		end
 		if month == "04" and day == "04" then
 			SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
 			triggerEvent("SEDay")
+		end
+		if month == "04" and day == "20" then
+			SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
+			triggerEvent("Weed")
 		end
 		if month == "12" and day == "25" then
 			if player.section == 0 then
@@ -76,10 +84,6 @@ function malcmusic.onTick()
 			end
 			SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
 			triggerEvent("Christmas")
-		end
-		if month == "04" and day == "20" then
-			SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
-			triggerEvent("Weed")
 		end
 		if snow == true then
 			if player.section == 0 then
