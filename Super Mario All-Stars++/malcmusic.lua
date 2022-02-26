@@ -160,168 +160,8 @@ function malcmusic.onTick()
 			Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
 			Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SUNNY.ogg"
 		end
-		
-		if character == "CHARACTER_MARIO" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_LUIGI" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_PEACH" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_TOAD" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_LINK" then
-			Audio.MusicChange(1, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(7, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(8, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
-			Audio.MusicChange(11, "_OST/Legend of Zelda - A Link to the Past/05a Majestic Castle.spc|0;g=2.5")
-			Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_WARIO" then
-			Audio.MusicChange(1, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(2, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(3, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(7, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(8, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(11, "_OST/Wario Land 3.gbs|3;g=2")
-			Audio.MusicChange(12, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
-			Audio.MusicChange(13, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
-		end
-		if character == "CHARACTER_YOSHI" then
-			Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(7, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(8, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(11, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
-			Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_BOWSER" then
-			Audio.MusicChange(1, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(2, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(3, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(7, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(8, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(11, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
-		end
-		if character == "CHARACTER_NINJABOMBERMAN" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
-			Audio.MusicChange(13, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
-		end
-		if character == "CHARACTER_MEGAMAN" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
-			Audio.MusicChange(13, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
-		end
-		if character == "CHARACTER_KLONOA" then
-			Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(7, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(8, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
-			Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
-			Audio.MusicChange(12, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
-			Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
-		end
-		if character == "CHARACTER_ZELDA" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
-			Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
-		end
-		if character == "CHARACTER_ROSALINA" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-		end
-		if character == "CHARACTER_SAMUS" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Metroid - Zero Mission/Brinstar.ogg")
-			Audio.MusicChange(13, "_OST/Metroid - Zero Mission/Brinstar.ogg")
-		end
-		if character == "CHARACTER_UNCLEBROADSWORD" then
-			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
-			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
-			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
-		end
-		if character == "CHARACTER_ULTIMATERINKA" then
-			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
-			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
-			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
-		end
 
+		currentCostume = player:getCostume()
 
 		--CHARACTER_MARIO
 		if currentCostume == "0-SMASPLUSPLUS-BETA" then
@@ -1463,6 +1303,169 @@ function malcmusic.onTick()
 			Audio.MusicChange(11, "_OST/Super Mario Advance 3/Flower Garden.ogg")
 			Audio.MusicChange(12, "_OST/Super Mario Advance 3/Training Course.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Advance 3/Training Course.ogg")
+		end
+		
+		
+		
+		if character == "CHARACTER_MARIO" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
+			Audio.MusicChange(13, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
+		end
+		if character == "CHARACTER_LUIGI" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+			Audio.MusicChange(13, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
+		end
+		if character == "CHARACTER_PEACH" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
+		end
+		if character == "CHARACTER_TOAD" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
+		end
+		if character == "CHARACTER_LINK" then
+			Audio.MusicChange(1, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+			Audio.MusicChange(3, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+			Audio.MusicChange(7, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+			Audio.MusicChange(8, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
+			Audio.MusicChange(11, "_OST/Legend of Zelda - A Link to the Past/05a Majestic Castle.spc|0;g=2.5")
+			Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
+			Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
+		end
+		if character == "CHARACTER_WARIO" then
+			Audio.MusicChange(1, "_OST/Wario Land 3.gbs|3;g=2")
+			Audio.MusicChange(2, "_OST/Wario Land 3.gbs|3;g=2")
+			Audio.MusicChange(3, "_OST/Wario Land 3.gbs|3;g=2")
+			Audio.MusicChange(7, "_OST/Wario Land 3.gbs|3;g=2")
+			Audio.MusicChange(8, "_OST/Wario Land 3.gbs|3;g=2")
+			Audio.MusicChange(11, "_OST/Wario Land 3.gbs|3;g=2")
+			Audio.MusicChange(12, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
+			Audio.MusicChange(13, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
+		end
+		if character == "CHARACTER_YOSHI" then
+			Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+			Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+			Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+			Audio.MusicChange(7, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+			Audio.MusicChange(8, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+			Audio.MusicChange(11, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
+			Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
+			Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
+		end
+		if character == "CHARACTER_BOWSER" then
+			Audio.MusicChange(1, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			Audio.MusicChange(2, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			Audio.MusicChange(3, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			Audio.MusicChange(7, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			Audio.MusicChange(8, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			Audio.MusicChange(11, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
+		end
+		if character == "CHARACTER_NINJABOMBERMAN" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
+			Audio.MusicChange(13, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
+		end
+		if character == "CHARACTER_MEGAMAN" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
+			Audio.MusicChange(13, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
+		end
+		if character == "CHARACTER_KLONOA" then
+			Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+			Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+			Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+			Audio.MusicChange(7, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+			Audio.MusicChange(8, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
+			Audio.MusicChange(11, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
+			Audio.MusicChange(12, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
+			Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
+		end
+		if character == "CHARACTER_ZELDA" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
+			Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
+		end
+		if character == "CHARACTER_ROSALINA" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if character == "CHARACTER_SAMUS" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Metroid - Zero Mission/Brinstar.ogg")
+			Audio.MusicChange(13, "_OST/Metroid - Zero Mission/Brinstar.ogg")
+		end
+		if character == "CHARACTER_UNCLEBROADSWORD" then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if character == "CHARACTER_ULTIMATERINKA" then
+			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
+			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
+			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
+			Audio.MusicChange(7, "_OST/Minecraft/mc03_mce_earth.ogg")
+			Audio.MusicChange(8, "_OST/Minecraft/mc03_mce_earth.ogg")
+			Audio.MusicChange(11, "_OST/Minecraft/mc03_mce_earth.ogg")
+			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
+			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
 	end
 end
