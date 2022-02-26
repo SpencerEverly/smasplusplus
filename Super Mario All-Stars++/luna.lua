@@ -492,8 +492,8 @@ function onTick()
 	
 	if currentCostume == "SEE-TANGENT" then
 		littleDialogue.characterNames[4] = "Tangent"
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
-		starman.sfxFile = Misc.resolveSoundFile("starman")
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_nintendogs.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_nintendogs")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 	end
