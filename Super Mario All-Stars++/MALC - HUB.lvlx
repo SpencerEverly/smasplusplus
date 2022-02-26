@@ -11102,7 +11102,6 @@ ID:29;X:-40656;Y:-40976;D:1;MG:"Hammer time!!!! I like this room.";FD:1;NM:1;LR:
 ID:235;X:-38752;Y:-40960;D:-1;MG:"(The blooper is dead\, it doesn't move)";FD:1;NM:1;LR:"Stage 1 - 10 Stars";
 ID:467;X:-38496;Y:-41344;D:-1;MG:"I can kill you if you want!!!!! If you don't want me to\, please exit!";FD:1;NM:1;LR:"Stage 1 - 10 Stars";
 ID:77;X:-40576;Y:-41248;D:1;MG:"How do I order room service?";FD:1;NM:1;LR:"Stage 1 - 10 Stars";
-ID:151;X:-199904;Y:-200112;D:-1;MG:"Hello! Your name is <characterName>.<page>If it's wrong\, please talk to our mayor over at the 4th building.<page>And afterward\, give Spencer Everly an email at spencer.everly at gmail.com.";FD:1;LR:"Stage All - Mandatories";
 ID:466;X:-119840;Y:-120128;D:-1;MG:"Hi again! Got some more stars I see?<page>I'm actually getting used to the construction noises fortunately.<page>I bet when they're done it's like the silence will be dazzingly awkward...<page>You still need 64 stars to unlock the Hammer Suit. Have fun collecting!";FD:1;NM:1;LR:"Stage 6 - 38 Stars";
 ID:466;X:-138624;Y:-140128;D:-1;MG:"That's where that offensive painting used to be.<page>I'm glad that was taken down!";FD:1;NM:1;LR:"Stage 2 - 16 Stars";
 ID:466;X:-138968;Y:-140128;D:-1;MG:"Hoi! I'm selling NFTs!<page>HEY WAIT DON'T LEAAVE \:(";FD:1;NM:1;LR:"Stage 2 - 16 Stars";
@@ -11222,6 +11221,8 @@ ID:466;X:-118736;Y:-119872;D:1;MG:"At age 6 when I told my mom I was gonna grow 
 ID:466;X:-119920;Y:-118976;D:1;MG:"Still fixing this room!";FD:1;NM:1;LR:"Stage 6 - 38 Stars";
 ID:151;X:-19488;Y:-20144;D:-1;MG:"Welcome to the information booth.<page>Here\, you can retrieve information on the remaining stars you need to collect\,<page>which stars you missed\,<page>and any other information from the floors up.<page>As always\, good luck on your journey\, and have fun!";FD:1;LR:"Stage All - Mandatories";
 ID:235;X:-200448;Y:-200256;D:-1;MG:"<boxStyle infobooth>HELLO! WELCOME TO THE ME AND LARRY CITY WARP SCREEN! HOW MAY I HELP YOU TODAY?<question malcbeginmsg>";FD:1;NM:1;
+ID:151;X:-199904;Y:-200112;D:-1;MG:"Hello! Your name is <characterName>.<page>If it's wrong\, please talk to our mayor over at the 4th building.<page>And afterward\, give Spencer Everly an email at spencer.everly at gmail.com.";FD:1;LR:"Stage All - Mandatories";
+ID:151;X:-200048;Y:-200112;D:-1;MG:"Just like last time\, please note that not everything is finished.<page>If there are any bugs or important things you need to say about this project\,<page>Don't hesitate to ask me on the GitHub.<page>Thanks for understanding\, and enjoy the game!";FD:1;
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;

@@ -30,6 +30,6 @@
 </div>
 
 <p align="center">
-    Due to a <a href="https://github.com/SpencerEverly/smasplusplus/issues/2">bug</a>, Please download the SMASLauncher to launch and even update the episode. Check it out <a href="https://github.com/SpencerEverly/smasplusplus/tree/main/_smaslauncher">by clicking here</a>.
+    Due to a <a href="https://github.com/SpencerEverly/smasplusplus/issues/2">bug</a>, Please use the updater located in the Demo 2 package update the episode. To download Demo 2, <a href="https://drive.google.com/file/d/1QuGKnOQcQ3t5nF7Ty56zh0qfSzsdWQsi/view?usp=sharing">click here</a>.
     <br />
 </div>
