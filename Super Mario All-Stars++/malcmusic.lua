@@ -60,31 +60,31 @@ end
 function malcmusic.onTick()
 	for i = 0,20 do
 		local SectionAll = Section(i)
-		if month == "03" and day == "17" then
-			SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
-			triggerEvent("StPatricksDay")
-		end
-		if month == "04" and day == "04" then
-			SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
-			triggerEvent("SEDay")
-		end
-		if month == "04" and day == "20" then
-			SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
-			triggerEvent("Weed")
-		end
-		if month == "12" and day == "25" then
-			if player.section == 0 then
-				Section(player.section).effects.weather = WEATHER_SNOW
-			end
-			if player.section == 6 then
-				Section(player.section).effects.weather = WEATHER_SNOW
-			end
-			if player.section == 10 then
-				Section(player.section).effects.weather = WEATHER_SNOW
-			end
-			SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
-			triggerEvent("Christmas")
-		end
+		--if month == "03" and day == "17" then
+			--SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
+			--triggerEvent("StPatricksDay")
+		--end
+		--if month == "04" and day == "04" then
+			--SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
+			--triggerEvent("SEDay")
+		--end
+		--if month == "04" and day == "20" then
+			--SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
+			--triggerEvent("Weed")
+		--end
+		--if month == "12" and day == "25" then
+			--if player.section == 0 then
+				--Section(player.section).effects.weather = WEATHER_SNOW
+			--end
+			--if player.section == 6 then
+				--Section(player.section).effects.weather = WEATHER_SNOW
+			--end
+			--if player.section == 10 then
+				--Section(player.section).effects.weather = WEATHER_SNOW
+			--end
+			--SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
+			--triggerEvent("Christmas")
+		--end
 		if snow == true then
 			if player.section == 0 then
 				snowState = true
@@ -136,6 +136,7 @@ function malcmusic.onTick()
 				prevSnowState = snowState
 				prevPreviousState = prevState
 			end
+			--if not (eventName == "StPatricksDay") == true or (eventName == "SEDay") == true or (eventName == "Weed") == true or (eventName == "Christmas") == true then
 			if hour == "00" then
 				Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SNOWY.ogg"
 				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SNOWY.ogg"
@@ -256,6 +257,7 @@ function malcmusic.onTick()
 				Section(6).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SNOWY.ogg"
 				Section(10).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR23_SNOWY.ogg"
 			end
+			--end
 		end
 		if rain == true then
 			if player.section == 0 then
