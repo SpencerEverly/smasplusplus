@@ -14,12 +14,6 @@ echo Checking for SMAS^+^+ updates...
 @timeout 0 /nobreak>nul
 if not exist .git ( goto nogit )
 
-:noportgit
-echo PortableGit is not found. Please download it and extract it to
-echo the worlds folder and try again.
-pause
-exit
-
 :yesgit
 goto updatesmas
 
@@ -35,12 +29,8 @@ cls
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
-cd..
-cd..
-start SMBX2.exe
-echo The episode has been updated^^! Executing SMBX2.exe and exiting in 5 seconds...
-@timeout 5 /nobreak>nul
-exit
+if not exist "SMBX2.exe" goto dataexists
+if exist "SMBX2.exe" goto launchsmbx2
 
 :updatesmas
 echo Pulling the latest update from GitHub...
@@ -54,8 +44,14 @@ cls
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
+if not exist "SMBX2.exe" goto dataexists
+if exist "SMBX2.exe" goto launchsmbx2
+
+:dataexists
 cd..
-cd..
+goto launchsmbx2
+
+:launchsmbx2
 start SMBX2.exe
 echo The episode has been updated^^! Executing SMBX2.exe and exiting in 5 seconds...
 @timeout 5 /nobreak>nul
