@@ -17,6 +17,7 @@ local extendedKoopas = require("extendedKoopas")
 local autoscroll = require("autoscroll")
 local comboSounds = require("comboSounds")
 
+local enteringPipe = false
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 
@@ -24,7 +25,10 @@ local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 
 local player2_alt = Player(2)
-
+local pipecounter = 0
+local pipecounter2 = 0
+local doorcounter = 0
+local doorcounter2 = 0
 local fadetolevel = false
 
 function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleporting
@@ -731,15 +735,6 @@ function onTick()
 		littleDialogue.characterNames[5] = "Link"
 		littleDialogue.characterNames[14] = "Steve"
 		steve.skinSettings.name = "steve"
-		if SaveData.disableX2char == 0 then
-			comboSounds.kick1 = Misc.resolveSoundFile("comboSounds-1")
-			comboSounds.kick2 = Misc.resolveSoundFile("comboSounds-2")
-			comboSounds.kick3 = Misc.resolveSoundFile("comboSounds-3")
-			comboSounds.kick4 = Misc.resolveSoundFile("comboSounds-4")
-			comboSounds.kick5 = Misc.resolveSoundFile("comboSounds-5")
-			comboSounds.kick6 = Misc.resolveSoundFile("comboSounds-6")
-			comboSounds.kick7 = Misc.resolveSoundFile("comboSounds-7")
-		end
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769

@@ -12,6 +12,7 @@ local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
 local earlyDeathCheck = 3;
 local cooldown = 0
+local enteringPipe = false
 
 local timer_deathTimer;
 local deltaTime = Routine.deltaTime
