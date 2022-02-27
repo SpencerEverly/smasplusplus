@@ -2160,8 +2160,11 @@ function musicalchairs.onTick()
 	for i = 0,20 do
 		local section = Section(i)
 		if currentCostume == "0-SMASPLUSPLUS-BETA" then
+			--MALC HUB
+			if section.musicPath == "_OST/Me and Larry City/Character Switch Room.spc|0;g=2.5" then
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BonusSMB3.ogg"
 			--Super Mario Bros. 1
-			if section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
+			elseif section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Classic.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Bonus.ogg"
@@ -2186,7 +2189,7 @@ function musicalchairs.onTick()
 			elseif section.musicPath == "_OST/Super Mario Bros/Snow (Alternative).ogg" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SnowSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Forest.spc|0;g=2.5" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Classic.ogg"
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SkiesSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Ghost House.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BowserLandSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Last Battle.spc|0;g=2.5" then
