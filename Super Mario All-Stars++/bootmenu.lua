@@ -18,6 +18,9 @@ runPressedState = false
 
 local bootmenu = {}
 
+local aprilfools = false
+local aprilfoolserror = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
+
 local Routine = require("routine")
 
 local level = Level.filename()
@@ -495,7 +498,7 @@ local function ExitDialogueFirstBoot()
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
 	if GameData.startedmenu == nil then
-		GameData.startedmenu = 0
+		GameData.startedmenu = 4
 	end
 end
 
@@ -675,6 +678,13 @@ local function PigeonRaca1()
 	end
 end
 
+local function foolsinapril()
+	Routine.wait(5.5)
+	autoscroll.scrollLeft(5000)
+	Routine.wait(0.2)
+	GameData.startedmenu = 4
+end
+
 function bootmenu.onInitAPI()
 	registerEvent(bootmenu,"onExitLevel", "onExit")
 	registerEvent(bootmenu,"onStart")
@@ -712,6 +722,9 @@ function bootmenu.onStart()
 		x2noticecheck = not active
 	end
 	Misc.saveGame()
+	if os.date("*t").month == 04 and os.date("*t").day == 01 then
+		GameData.startedmenu = 1
+	end
 	if Level.filename() == "intro_SMAS.lvlx" then
 		if SaveData.firstBootCompleted == 0 then
 			--Nothing
@@ -871,6 +884,30 @@ function bootmenu.onInputUpdate()
 			Routine.run(PigeonRaca1)
 		end
 	end
+	if (os.date("*t").month == 04 and os.date("*t").day == 01) then
+		if player.keys.jump == KEYS_PRESSED then
+			player.jumpKeyPressing = false
+			player.keys.jump = false
+			player.rawKeys.jump = false
+			GameData.startedmenu = 1
+			Audio.MusicChange(0, 0)
+			logo = false
+			active2 = false
+			active = true
+			pressjumpwords = false
+			aprilfools = true
+			SFX.play("_OST/_Sound Effects/windows_error.ogg")
+			Routine.run(foolsinapril)
+		end
+	end
+	if GameData.startedmenu == 4 then
+		player.jumpKeyPressing = true
+		player.keys.jump = true
+		player.rawKeys.jump = true
+		if player.keys.jump == KEYS_PRESSED then
+			Level.load("SMAS - Start.lvlx", nil, nil)
+		end
+	end
 	if SaveData.racaActivated == 1 then
 		GameData.startedmenu = 2
 	end
@@ -955,6 +992,9 @@ function bootmenu.onDraw()
 	end
 	if not keyinput1 then
 		--nothing
+	end
+	if aprilfools then	
+		Graphics.drawImageWP(aprilfoolserror, 0, 0, 10)
 	end
 end
 

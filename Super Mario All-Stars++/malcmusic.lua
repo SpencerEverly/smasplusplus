@@ -56,12 +56,10 @@ end
 
 function malcmusic.onStart()
 	currentWeather = true
-end
-
-function malcmusic.onTick()
 	for i = 0,20 do
 		local SectionAll = Section(i)
 		if os.date("*t").month == 03 and os.date("*t").day == 17 then
+			holiday = true
 			if holiday == true then
 				SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
 				triggerEvent("StPatricksDay")
@@ -70,6 +68,7 @@ function malcmusic.onTick()
 		
 		
 		if os.date("*t").month == 04 and os.date("*t").day == 04 then
+			holiday = true
 			if holiday == true then
 				SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
 				triggerEvent("SEDay")
@@ -78,6 +77,7 @@ function malcmusic.onTick()
 		
 		
 		if os.date("*t").month == 04 and os.date("*t").day == 20 then
+			holiday = true
 			if holiday == true then
 				SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
 				triggerEvent("Weed")
@@ -86,6 +86,7 @@ function malcmusic.onTick()
 		
 		
 		if os.date("*t").month == 12 and os.date("*t").day == 25 then
+			holiday = true
 			if holiday == true then
 				if player.section == 0 then
 					Section(player.section).effects.weather = WEATHER_SNOW
@@ -100,8 +101,80 @@ function malcmusic.onTick()
 				triggerEvent("Christmas")
 			end
 		end
+	end
+end
+
+function malcmusic.onTick()
+	for i = 0,20 do
+		local SectionAll = Section(i)
+		if os.date("*t").month == 03 and os.date("*t").day == 17 then
+			if holiday == true then
+				SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
+			end
+		end
 		
 		
+		if os.date("*t").month == 04 and os.date("*t").day == 04 then
+			if holiday == true then
+				SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
+			end
+		end
+		
+		
+		if os.date("*t").month == 04 and os.date("*t").day == 20 then
+			if holiday == true then
+				SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
+			end
+		end
+		
+		
+		if os.date("*t").month == 12 and os.date("*t").day == 25 then
+			if holiday == true then
+				if player.section == 0 then
+					Section(player.section).effects.weather = WEATHER_SNOW
+				end
+				if player.section == 1 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 2 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 3 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 4 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 5 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 6 then
+					Section(player.section).effects.weather = WEATHER_SNOW
+				end
+				if player.section == 7 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 8 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 9 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 10 then
+					Section(player.section).effects.weather = WEATHER_SNOW
+				end
+				if player.section == 11 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 12 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				if player.section == 13 then
+					Section(player.section).effects.weather = WEATHER_NONE
+				end
+				SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
+			end
+		end
 		if snow == true then
 			if player.section == 0 then
 				snowState = true
