@@ -3,12 +3,12 @@ TL:"Super Mario Bros. 2\: World 6-1";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-194816;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Desert.ogg";BG:32;
-SC:1;L:-180000;R:-179200;T:-180608;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
-SC:2;L:-160000;R:-157952;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:25;
-SC:3;L:-140000;R:-138400;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:25;
-SC:4;L:-120000;R:-119200;T:-120600;B:-119520;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
-SC:5;L:-100000;R:-99200;T:-100600;B:-99520;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
-SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
+SC:1;L:-180000;R:-179200;T:-180608;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
+SC:2;L:-160000;R:-157952;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:25;
+SC:3;L:-140000;R:-138400;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.5";BG:25;
+SC:4;L:-120000;R:-119200;T:-120600;B:-119520;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
+SC:5;L:-100000;R:-99200;T:-100600;B:-99520;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
+SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
 SECTION_END
 STARTPOINT
 ID:1;X:-199772;Y:-200150;D:1;

@@ -2,15 +2,15 @@ HEAD
 TL:"Super Mario Bros. 2\: World 4-3";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground (Beta).spc|0\;g=2.7";BG:65;CS:1;
-SC:1;L:-180000;R:-173696;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:61;
-SC:2;L:-160000;R:-159200;T:-163392;B:-159744;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:21;
-SC:3;L:-140064;R:-138624;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:59;
-SC:4;L:-120000;R:-119200;T:-120600;B:-117152;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:21;
-SC:5;L:-99984;R:-99184;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:18;
-SC:6;L:-80000;R:-78880;T:-80600;B:-80000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:65;
-SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.7";BG:65;
-SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground (Beta).spc|0\;g=2.5";BG:65;CS:1;
+SC:1;L:-180000;R:-173696;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:61;
+SC:2;L:-160000;R:-159200;T:-163392;B:-159744;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:21;
+SC:3;L:-140064;R:-138624;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:59;
+SC:4;L:-120000;R:-119200;T:-120600;B:-117152;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:21;
+SC:5;L:-99984;R:-99184;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:18;
+SC:6;L:-80000;R:-78880;T:-80600;B:-80000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.5";BG:65;
+SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.5";BG:65;
+SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
 SECTION_END
 STARTPOINT
 ID:1;X:-199692;Y:-200182;D:1;

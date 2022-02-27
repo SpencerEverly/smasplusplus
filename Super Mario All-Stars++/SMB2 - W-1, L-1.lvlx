@@ -6,11 +6,11 @@ SC:0;L:-200000;R:-199200;T:-200832;B:-198816;MZ:24;MF:"_OST/Super Mario Bros 2/O
 SC:1;L:-180000;R:-174624;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:5;
 SC:2;L:-160096;R:-159296;T:-160600;B:-160000;MZ:24;MF:"_OST/Doki Doki Panic/Subspace.spc|0\;g=2.5";BG:5;XTRA:"{\n    \"darkness\"\: {\n        \"ambient\"\: \"#0d0d1919\"\,\n        \"enableDarkness\"\: true\,\n        \"playerlight\"\: {\n            \"enabled\"\: true\,\n            \"radius\"\: 999.9\n        }\n    }\n}\n";
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Doki Doki Panic/Subspace.spc|0\;g=2.5";BG:5;XTRA:"{\n    \"darkness\"\: {\n        \"ambient\"\: \"#0d0d1919\"\,\n        \"enableDarkness\"\: true\,\n        \"playerlight\"\: {\n            \"enabled\"\: true\,\n            \"radius\"\: 999.9\n        }\n    }\n}\n";
-SC:4;L:-120000;R:-116160;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:11;
-SC:5;L:-100576;R:-98976;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.6";BG:25;
+SC:4;L:-120000;R:-116160;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.5";BG:11;
+SC:5;L:-100576;R:-98976;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:25;
 SC:6;L:-80000;R:-79200;T:-80512;B:-78560;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:11;CS:1;
 SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
-SC:8;L:-40480;R:-38784;T:-40600;B:-40000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.6";BG:25;
+SC:8;L:-40480;R:-38784;T:-40600;B:-40000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:25;
 SC:9;L:-20000;R:-19200;T:-20600;B:-20000;MZ:0;MF:"";BG:0;
 SC:10;L:0;R:800;T:-600;B:0;MZ:0;MF:"";BG:0;
 SECTION_END

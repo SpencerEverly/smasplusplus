@@ -2,15 +2,15 @@ HEAD
 TL:"Super Mario Bros. 2\: World 3-3";SZ:2;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-198976;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground (Beta).spc|0\;g=2.7";BG:25;
-SC:1;L:-180000;R:-178080;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:5;
-SC:2;L:-161312;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:54;
-SC:3;L:-140000;R:-139200;T:-141824;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:54;
-SC:4;L:-120000;R:-119200;T:-123328;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:54;
-SC:5;L:-99968;R:-99168;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:18;
-SC:6;L:-80000;R:-79200;T:-84736;B:-79872;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:54;
-SC:7;L:-60000;R:-57600;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.7";BG:5;
-SC:8;L:-40000;R:-38720;T:-40600;B:-40000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:54;
+SC:0;L:-200000;R:-198976;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground (Beta).spc|0\;g=2.5";BG:25;
+SC:1;L:-180000;R:-178080;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:5;
+SC:2;L:-161312;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:54;
+SC:3;L:-140000;R:-139200;T:-141824;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:54;
+SC:4;L:-120000;R:-119200;T:-123328;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:54;
+SC:5;L:-99968;R:-99168;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:18;
+SC:6;L:-80000;R:-79200;T:-84736;B:-79872;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:54;
+SC:7;L:-60000;R:-57600;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.5";BG:5;
+SC:8;L:-40000;R:-38720;T:-40600;B:-40000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.5";BG:54;
 SC:9;L:-20000;R:-19200;T:-20600;B:-20000;MZ:0;MF:"";BG:54;
 SECTION_END
 STARTPOINT

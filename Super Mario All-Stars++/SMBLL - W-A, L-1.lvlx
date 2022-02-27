@@ -3,7 +3,7 @@ TL:"Super Mario Bros. Lost Levels\: World A-1";SZ:1;XTRA:"{\n    \"timer\"\: {\n
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-192800;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Overworld.spc|0\;g=2.5";BG:10;
-SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.6";BG:7;
+SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;
 SECTION_END
 STARTPOINT
 ID:1;X:-199884;Y:-200118;D:1;

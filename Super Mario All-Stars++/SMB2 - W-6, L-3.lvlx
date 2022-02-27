@@ -2,12 +2,12 @@ HEAD
 TL:"Super Mario Bros. 2\: World 6-3";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground (Beta).spc|0\;g=2.7";BG:39;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground (Beta).spc|0\;g=2.5";BG:39;
 SC:1;L:-180512;R:-176960;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Desert.ogg";BG:32;
 SC:2;L:-160000;R:-155872;T:-160600;B:-160000;MZ:24;MF:"_OST/Mario Forever/Human Lab.spc";BG:39;
 SC:3;L:-139984;R:-139184;T:-145024;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Desert.ogg";BG:11;
 SC:4;L:-120000;R:-117408;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Desert.ogg";BG:50;
-SC:5;L:-100000;R:-98336;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:57;
+SC:5;L:-100000;R:-98336;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.5";BG:57;
 SC:6;L:-80000;R:-78496;T:-80600;B:-80000;MZ:0;MF:"";BG:57;
 SECTION_END
 STARTPOINT

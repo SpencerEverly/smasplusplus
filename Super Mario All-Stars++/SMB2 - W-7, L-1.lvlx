@@ -2,13 +2,15 @@ HEAD
 TL:"Super Mario Bros. 2\: World 7-1";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Metroid/97 Continue.spc|0\;g=2.7";BG:11;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Metroid/97 Continue.spc|0\;g=2.5";BG:11;
 SC:1;L:-181152;R:-177312;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Dark Zone.spc|0\;g=2.5";BG:48;
-SC:2;L:-160016;R:-159216;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:44;
+SC:2;L:-160016;R:-159216;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:44;
 SC:3;L:-140128;R:-137632;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Dark Zone.spc|0\;g=2.5";BG:48;
 SC:4;L:-119984;R:-119184;T:-122232;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Dark Zone.spc|0\;g=2.5";BG:11;
-SC:5;L:-99808;R:-98304;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:44;XTRA:"{\n    \"darkness\"\: {\n        \"enableDarkness\"\: true\,\n        \"playerlight\"\: {\n            \"brightness\"\: 1.5\,\n            \"enabled\"\: true\,\n            \"radius\"\: 423\n        }\n    }\n}\n";
-SC:6;L:-80000;R:-78432;T:-78848;B:-77952;MZ:24;MF:"_OST/Super Metroid/97 Continue.spc|0\;g=2.7";BG:48;
+SC:5;L:-99808;R:-98304;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.5";BG:44;XTRA:"{\n    \"darkness\"\: {\n        \"enableDarkness\"\: true\,\n        \"playerlight\"\: {\n            \"brightness\"\: 1.5\,\n            \"enabled\"\: true\,\n            \"radius\"\: 423\n        }\n    }\n}\n";
+SC:6;L:-80000;R:-78432;T:-78848;B:-77952;MZ:24;MF:"_OST/Super Metroid/97 Continue.spc|0\;g=2.5";BG:48;
+SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:0;MF:"";BG:0;
+SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
 ID:1;X:-199852;Y:-200118;D:1;

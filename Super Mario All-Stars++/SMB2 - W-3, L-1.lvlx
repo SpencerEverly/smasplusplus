@@ -2,12 +2,12 @@ HEAD
 TL:"Super Mario Bros. 2\: World 3-1";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199008;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:5;
-SC:1;L:-180000;R:-179200;T:-183200;B:-178816;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:11;
-SC:2;L:-160544;R:-157344;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:11;
-SC:3;L:-140000;R:-138400;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.7";BG:25;
-SC:4;L:-120000;R:-117792;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.7";BG:25;
-SC:5;L:-100000;R:-99200;T:-100600;B:-99424;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
+SC:0;L:-200000;R:-199008;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:5;
+SC:1;L:-180000;R:-179200;T:-183200;B:-178816;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:11;
+SC:2;L:-160544;R:-157344;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:11;
+SC:3;L:-140000;R:-138400;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground.spc|0\;g=2.5";BG:25;
+SC:4;L:-120000;R:-117792;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros 2/Before Boss.spc|0\;g=2.5";BG:25;
+SC:5;L:-100000;R:-99200;T:-100600;B:-99424;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
 SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:0;MF:"";BG:0;
 SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:0;MF:"";BG:0;
 SECTION_END

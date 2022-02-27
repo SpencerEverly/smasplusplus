@@ -2,9 +2,9 @@ HEAD
 TL:"Super Mario Bros. 2\: World 5-1";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-198240;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:49;
+SC:0;L:-200000;R:-198240;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:49;
 SC:1;L:-180000;R:-175136;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Underground (Beta).spc|0\;g=2.5";BG:25;
-SC:2;L:-160096;R:-158944;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.7";BG:25;
+SC:2;L:-160096;R:-158944;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.5";BG:25;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
 SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:0;MF:"";BG:0;
 SECTION_END

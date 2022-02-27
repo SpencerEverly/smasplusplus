@@ -2,10 +2,10 @@ HEAD
 TL:"Super Mario Bros. 2\: World 4-1";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200064;R:-195040;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.7";BG:60;
-SC:1;L:-180128;R:-174656;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.7";BG:48;
-SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
-SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.7";BG:12;
+SC:0;L:-200064;R:-195040;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:60;
+SC:1;L:-180128;R:-174656;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.5";BG:48;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
+SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
 SECTION_END
 STARTPOINT
 ID:1;X:-199810;Y:-200310;D:1;

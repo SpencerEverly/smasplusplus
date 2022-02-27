@@ -2160,9 +2160,10 @@ function musicalchairs.onTick()
 	for i = 0,20 do
 		local section = Section(i)
 		if currentCostume == "0-SMASPLUSPLUS-BETA" then
-			if section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.3" then
+			--Super Mario Bros. 1
+			if section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Classic.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.7" then
+			elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Bonus.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Underground.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Caves.ogg"
@@ -2172,50 +2173,56 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BeforeCastleSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Castle.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Castle.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.2" then
+			elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/DesertSMB1.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.6" then
+			elseif section.musicPath == "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Star Power (HD).ogg"
 			elseif section.musicPath == "_OST/All Stars Secrets/Lineland.ogg" then
 				section.musicPath = "_OST/All Stars Secrets/Lineland.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Snow.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SnowSMB1.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros/Race.spc|0;g=2.6" then
+			elseif section.musicPath == "_OST/Super Mario Bros/Race.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/LakituSMB1.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros/Snow (Alternative).ogg" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SnowSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Snow (Alternative).ogg" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SnowSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Forest.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Classic.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Ghost House.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BowserLandSMB1.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros/Last Battle.spc|0;g=2.6" then
+			elseif section.musicPath == "_OST/Super Mario Bros/Last Battle.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Last Bowser Battle.ogg"
-			elseif section.musicPath == "_OST/Super Mario World/Bowser (Advance).spc|0;g=2.6" then
+			elseif section.musicPath == "_OST/Super Mario World/Bowser (Advance).spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Final Battle.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros/Airship.spc|0;g=2.2" then
+			--Super Mario Bros. Lost Levels
+			elseif section.musicPath == "_OST/Super Mario Bros/Airship.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/AirshipSMB1.ogg"
+			--Super Mario Bros. 2
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Subcon.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.6" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Subcon.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.7" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Subcon.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.6" then
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/CavesSMB2.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.7" then
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/CavesSMB2.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Jar.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/JarSMB2.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Jar.spc|0;g=2.6" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/JarSMB2.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Jar.spc|0;g=2.7" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/JarSMB2.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Before Boss.spc|0;g=2.7" then
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Before Boss.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BeforeBossSMB2.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground (Beta).spc|0;g=2.7" then
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Boss.spc|0;g=2.5" then
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BirdoAlt.ogg"
+			elseif section.music == 15 then
+				section.music = "_OST/Super Mario All-Stars++ (Beta)/BirdoAlt.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground (Beta).spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/CavesSMB2Beta.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros 2/The Tree Skies.ogg" then
+				section.musicPath = "_OST/Super Mario Bros 2/The Tree Skies.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Desert.ogg" then
+				section.musicPath = "_OST/Super Mario Bros 2/Desert.ogg"
+			elseif section.musicPath == "_OST/Super Metroid/97 Continue.spc|0;g=2.5" then
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Metrma.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Dark Zone.spc|0;g=2.5" then
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/F-F-Fire.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros 2/King Wart.ogg" then
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Wart.ogg"
 			end
 		end
 		if currentCostume == "1-SMB1-RETRO" then
