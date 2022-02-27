@@ -2206,6 +2206,8 @@ function musicalchairs.onTick()
 			--Super Mario Bros. 2
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Subcon.ogg"
+			elseif section.music == "subspace_music.spc|0;g=2.7;" then
+				section.music = "_OST/Super Mario All-Stars++ (Beta)/SubspaceDDP.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/CavesSMB2.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.5" then

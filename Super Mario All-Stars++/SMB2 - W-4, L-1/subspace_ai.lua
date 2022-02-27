@@ -163,9 +163,9 @@ local function getMusic(value)
     if type(value) == "string" then
         local filename = value:match("^(.*)|.*$") or value
 
-        -- If the file exists in the level folder, use that
-        if io.exists(Misc.levelPath().. filename) then
-            return Misc.levelFolder().. value
+        -- If the file exists in the episode folder, use that
+        if io.exists(Misc.episodePath().. filename) then
+            return value
         -- Otherwise, just use it as-is
         else
             return value
