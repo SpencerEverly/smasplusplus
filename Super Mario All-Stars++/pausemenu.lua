@@ -175,15 +175,14 @@ local function quitgamemap()
 	Audio.MusicVolume(0)
 	Misc.saveGame()
 	SFX.play("_OST/_Sound Effects/savequit.ogg")
-	pausemenu.paused = false
-	Routine.run(function() exitscreen = true Routine.wait(1.8, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
+	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function quitonlymap()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/nosave.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.9, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegamemap()

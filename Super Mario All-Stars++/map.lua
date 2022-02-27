@@ -10,6 +10,14 @@ local pause_music = require("map_music")
 local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
 
+local map3d = require("mapp3d")
+map3d.CameraSettings.fov = 60
+map3d.CameraSettings.height = 320;
+map3d.BGPlane.tile = 394
+map3d.Light.enabled = false
+--map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
+--map3d.Heightmap.position = vector.v2(6496, 0)
+
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
 local hudborder = Graphics.loadImage("hardcoded-33-4-tp.png")
@@ -33,14 +41,6 @@ local time = 0
 
 local opacity = timer1/speed
 local middle = math.floor(timer1*numberup)
-
-local map3d = require("mapp3d")
-map3d.CameraSettings.fov = 60
-map3d.CameraSettings.height = 320;
-map3d.BGPlane.tile = 394
-map3d.Light.enabled = false
---map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
---map3d.Heightmap.position = vector.v2(6496, 0)
 
 local middle = 0
 local transitionTimer = 0
