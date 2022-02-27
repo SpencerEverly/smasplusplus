@@ -2176,6 +2176,10 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BeforeCastleSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Castle.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Castle.ogg"
+			elseif section.music == 19 then
+				section.music = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Last Bowser Battle.ogg"
+			elseif section.music == 21 then
+				section.music = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/DesertSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.5" then
@@ -2226,6 +2230,8 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/F-F-Fire.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/King Wart.ogg" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Wart.ogg"
+			elseif section.music == 43 then
+				section.music = "_OST/Super Mario All-Stars++ (Beta)/Wart.ogg"
 			end
 		end
 		if currentCostume == "1-SMB1-RETRO" then
