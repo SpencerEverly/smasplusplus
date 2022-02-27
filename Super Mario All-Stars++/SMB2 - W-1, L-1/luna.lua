@@ -25,8 +25,7 @@ function onTick()
 	local currentCostume = player:getCostume()
 	
 	local costumes
-		
-
+	
 	if currentCostume == "4-SMB2-RETRO" then
 		Audio.MusicChange(0, "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2")
 		Audio.MusicChange(1, "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2")

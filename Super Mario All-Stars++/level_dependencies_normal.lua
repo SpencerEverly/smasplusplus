@@ -314,6 +314,113 @@ function dependencies.onTick()
 	local currentCostume = player:getCostume()
 
 	local costumes
+	if Level.filename() == "SMB2 - W-1, L-1.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-1, L-2.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-1, L-3.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-2, L-1.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-2, L-2.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-2, L-3.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-3, L-1.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-3, L-2.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-3, L-3.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-4, L-1.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-4, L-2.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-4, L-3.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-5, L-1.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-5, L-2.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-5, L-3.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-6, L-1.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-6, L-2.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-6, L-3.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-7, L-1.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
+		if NPC.config[274].score == 11 then
+			SFX.play("ace-coins-5.ogg")
+			NPC.config[274].score = 6
+		end
+	elseif Level.filename() then
+		if NPC.config[274].score == 11 then
+			NPC.config[274].score = 6 --Nothing plays btw, just resets
+		end
+	end
+	
+	
 	if currentCostume == nil then
 		if SaveData.disableX2char == 0 then
 			warpTransition.doorclose = ("door-close.ogg")

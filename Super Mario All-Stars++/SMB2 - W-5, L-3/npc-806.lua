@@ -1,5 +1,4 @@
 local npcManager = require("npcManager")
-local pnpc = require("pnpc");
 
 local albatoss = {}
 
