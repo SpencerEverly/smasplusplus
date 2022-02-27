@@ -15,7 +15,6 @@ local playerManager = require("playermanager")
 local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local autoscroll = require("autoscroll")
-local comboSounds = require("comboSounds")
 
 local enteringPipe = false
 local steve = require("steve")

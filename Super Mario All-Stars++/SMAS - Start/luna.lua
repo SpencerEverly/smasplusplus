@@ -173,7 +173,30 @@ function onDraw()
 		textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=9, color=Color.white}
 		textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
 		textplus.print{x=10, y=68, text = "4) Continue booting", priority=9, color=Color.white}
-		textplus.print{x=10, y=80, text = "5) Load world map instantly (MAY BE UNSTABLE)", priority=9, color=Color.white}
+		textplus.print{x=10, y=80, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=9, color=Color.white}
+	end
+end
+
+function onInputUpdate()
+	player.upKeyPressing = false;
+	player.downKeyPressing = false;
+	player.leftKeyPressing = false;
+	player.rightKeyPressing = false;
+	player.altJumpKeyPressing = false;
+	player.runKeyPressing = false;
+	player.altRunKeyPressing = false;
+	player.dropItemKeyPressing = false;
+	player.jumpKeyPressing = false;
+	if Player.count() == 2 then --Idk why this is needed here but oh well
+		player2.upKeyPressing = false;
+		player2.downKeyPressing = false;
+		player2.leftKeyPressing = false;
+		player2.rightKeyPressing = false;
+		player2.altJumpKeyPressing = false;
+		player2.runKeyPressing = false;
+		player2.altRunKeyPressing = false;
+		player2.dropItemKeyPressing = false;
+		player2.jumpKeyPressing = false;
 	end
 end
 
@@ -218,7 +241,7 @@ end
 
 
 
---The rest will disable most cheats to avoid breaking the boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
+--The rest will disable most cheats to avoid breaking the pre-boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
 Cheats.deregister("iwannabootbackhome") --We're going home, you dolt
 Cheats.deregister("letmeseetheintroagain") --You can see the intro again by starting SMAS++.

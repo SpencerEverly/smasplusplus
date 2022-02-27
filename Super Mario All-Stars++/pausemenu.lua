@@ -37,9 +37,12 @@ pausemenu.pauseactivated = true
 
 local soundObject
 
-local levelname = Level.filename()
-local levelformat = Level.format()
-local costumes = playerManager.getCostumes(player.character)
+if not isOverworld then
+	local levelname = Level.filename()
+	local levelformat = Level.format()
+	local costumes = playerManager.getCostumes(player.character)
+	local level = Level.filename()
+end
 
 pausemenu.paused = false;
 pausemenu.paused_char = false;
@@ -63,8 +66,6 @@ pausemenu.pauseactive = false
 local charactive = false
 local teleactive = false
 
-local level = Level.filename()
-
 function pausemenu.onInitAPI()
 	registerEvent(pausemenu, "onKeyboardPress")
 	registerEvent(pausemenu, "onDraw")
@@ -86,6 +87,11 @@ local function unpause()
 	pausemenu.paused = false
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
+	cooldown = 5
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
 end
 
 function pausemenu.onStart()
@@ -165,6 +171,33 @@ local function savegame()
 	Misc.unpause()
 end
 
+local function quitgamemap()
+	Audio.MusicVolume(0)
+	Misc.saveGame()
+	SFX.play("_OST/_Sound Effects/savequit.ogg")
+	pausemenu.paused = false
+	Routine.run(function() exitscreen = true Routine.wait(1.8, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
+end
+
+local function quitonlymap()
+	Graphics.drawScreen{color = Color.black, priority = 10}
+	Audio.MusicVolume(0)
+	SFX.play("_OST/_Sound Effects/nosave.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(0.9, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
+end
+
+local function savegamemap()
+	pausemenu.paused = false
+	cooldown = 5
+	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	Misc.saveGame();
+	SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
+end
+
 local function exitlevelsave()
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
@@ -219,6 +252,61 @@ local function switchhub()
 	Misc.unpause()
 	SFX.play("_OST/_Sound Effects/level-select.ogg")
 	player:teleport(40176, 39876, bottomCenterAligned)
+end
+
+local function startteleport()
+	pausemenu.paused_tele = false;
+	cooldown = 5
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	world.playerX = -2880
+	world.playerY = -1664
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+end
+
+local function sideteleport()
+	pausemenu.paused_tele = false;
+	cooldown = 5
+	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	world.playerX = -3168
+	world.playerY = -1536
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+end
+
+local function hubmapteleport()
+	pausemenu.paused_tele = false;
+	cooldown = 5
+	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	world.playerX = -3040
+	world.playerY = -1760
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+end
+
+local function dlcteleport()
+	pausemenu.paused_tele = false;
+	cooldown = 5
+	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	world.playerX = -1760
+	world.playerY = -1568
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
 local function charmario()
@@ -750,31 +838,72 @@ local function drawPauseMenu(y, alpha)
 		{
 			{name="Continue", action=unpause}
 		}
-		table.insert(pause_options, {name="Restart", action = restartlevel});
-		if Level.filename() == "SMAS - DLC World.lvlx" then
-			table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
+		if not isOverworld then
+			table.insert(pause_options, {name="Restart", action = restartlevel});
 		end
-		if (Level.name() == "SMAS - DLC World") == false then
-			table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
+		if not isOverworld then
+			if Level.filename() == "SMAS - DLC World.lvlx" then
+				table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
+			end
 		end
-		if (Level.name() == "MALC - HUB") == false then
-			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
+		if not isOverworld then
+			if (Level.name() == "SMAS - DLC World") == false then
+				table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
+			end
 		end
-		if SaveData.disableX2char == 1 then
-			table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
+		if not isOverworld then
+			if (Level.name() == "MALC - HUB") == false then
+				table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
+			end
 		end
-		if SaveData.disableX2char == 0 then
-			table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
+		if not isOverworld then
+			if SaveData.disableX2char == 1 then
+				table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
+			end
 		end
-		if Level.filename() == "MALC - HUB.lvlx" then
+		if not isOverworld then
+			if SaveData.disableX2char == 0 then
+				table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
+			end
+		end
+		if not isOverworld then
+			if Level.filename() == "MALC - HUB.lvlx" then
+				table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
+			end
+		end
+		if isOverworld then
 			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
 		end
-		table.insert(pause_options, {name="Character Options", action = switchtochar});
-		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
-		table.insert(pause_options, {name="Save and Continue", action = savegame});
-		table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
-		table.insert(pause_options, {name="Save and Quit", action = quitgame});
-		table.insert(pause_options, {name="Exit without Saving", action = quitonly});
+		if not isOverworld then
+			table.insert(pause_options, {name="Character Options", action = switchtochar});
+		end
+		if isOverworld then
+			table.insert(pause_options, {name="Character Options", action = switchtochar});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Save and Continue", action = savegame});
+		end
+		if isOverworld then
+			table.insert(pause_options, {name="Save and Continue", action = savegamemap});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Save and Quit", action = quitgame});
+		end
+		if isOverworld then
+			table.insert(pause_options, {name="Save and Quit", action = quitgamemap});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Exit without Saving", action = quitonly});
+		end
+		if isOverworld then
+			table.insert(pause_options, {name="Exit without Saving", action = quitonlymap});
+		end
 	end
 	for k,v in ipairs(pause_options) do
 		local c = 0xFFFFFF00;
@@ -1038,10 +1167,30 @@ local function drawHUBTeleportMenu(y, alpha)
 		}
 		
 		table.insert(pause_options_tele, {name3="Go Back", action = pausemenureturnhub});
-		table.insert(pause_options_tele, {name3="Teleport to the Tourist Center", action = touristhub});
-		table.insert(pause_options_tele, {name3="Teleport to the Warp Zone", action = warpzonehub});
-		table.insert(pause_options_tele, {name3="Teleport to the Character Switch Menu", action = switchhub});
-		table.insert(pause_options_tele, {name3="Teleport Back to the Start", action = starthub});
+		if not isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport to the Tourist Center", action = touristhub});
+		end
+		if not isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport to the Warp Zone", action = warpzonehub});
+		end
+		if not isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport to the Character Switch Menu", action = switchhub});
+		end
+		if not isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport Back to the Start", action = starthub});
+		end
+		if isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport back to the Start", action = startteleport});
+		end
+		if isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport to the HUB", action = hubmapteleport});
+		end
+		if isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport to the Side Quest", action = sideteleport});
+		end
+		if isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport to the DLC World", action = dlcteleport});
+		end
 	end
 	for k,v in ipairs(pause_options_tele) do
 		local c = 0xFFFFFF00;

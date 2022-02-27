@@ -11,8 +11,6 @@ local letterWidths = {
 package.path = package.path .. ";./scripts/?.lua"
 -- Address of the first player's character. Equivalent to 'player.character', except the player class doesn't exist in loading screens
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
-
---package.path = package.path .. ";./scripts/?.lua"
 local episodePath = mem(0x00B2C61C, FIELD_STRING)
 local rng = require("base/rng")
 
@@ -29,19 +27,6 @@ local speed = 0
 local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png", "didyouknow12.png", "didyouknow13.png", "didyouknow14.png", "didyouknow15.png", "didyouknow16.png", "didyouknow17.png"}
 local selecter = rng.randomInt(1,#didyouknow)
 local knowledge = Graphics.loadImage(episodePath..didyouknow[selecter]);
-
-if os ~= nil then
-	local nativeOS = os
-	local newOS = {}
-	newOS.clock = nativeOS.clock
-	newOS.date = nativeOS.date
-	newOS.time = nativeOS.time
-	newOS.difftime = nativeOS.difftime
-	newOS.exit = function() error("Shutdown") end
-	
-	os = newOS
-	_G.os = newOS
-end
 
 local letterData = {}
 

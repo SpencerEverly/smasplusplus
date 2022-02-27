@@ -98,7 +98,7 @@ function onStart()
 	mem(0xB25728, FIELD_BOOL, false) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
 	if SaveData.disableX2char == 0 then
 		inventory = require("customInventory")
-		pausemenu = require("pausemenu_map")
+		pausemenu = require("pausemenu")
 	end
 	if SaveData.disableX2char == 1 then
 		pausemenu13 = require("pausemenu13map")
