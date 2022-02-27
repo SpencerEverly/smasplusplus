@@ -2223,7 +2223,7 @@ function musicalchairs.onTick()
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Underground (Beta).spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/CavesSMB2Beta.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/The Tree Skies.ogg" then
-				section.musicPath = "_OST/Super Mario Bros 2/The Tree Skies.ogg"
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/The Tree Skies.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Desert.ogg" then
 				section.musicPath = "_OST/Super Mario Bros 2/Desert.ogg"
 			elseif section.musicPath == "_OST/Super Metroid/97 Continue.spc|0;g=2.5" then
