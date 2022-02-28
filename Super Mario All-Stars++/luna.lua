@@ -266,23 +266,17 @@ function onTick()
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
 		if Level.filename() == "SMB2 - W-1, L-1.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		end
-		if Level.filename() == "SMB2 - W-1, L-2.lvlx" then
+		elseif Level.filename() == "SMB2 - W-1, L-2.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		end
-		if Level.filename() == "SMB2 - W-1, L-3.lvlx" then
+		elseif Level.filename() == "SMB2 - W-1, L-3.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		end
-		if Level.filename() == "SMB2 - W-2, L-1.lvlx" then
+		elseif Level.filename() == "SMB2 - W-2, L-1.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		end
-		if Level.filename() == "SMB2 - W-2, L-2.lvlx" then
+		elseif Level.filename() == "SMB2 - W-2, L-2.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		end
-		if Level.filename() == "SMB2 - W-2, L-3.lvlx" then
+		elseif Level.filename() == "SMB2 - W-2, L-3.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		end
-		if Level.filename() == "SMB2 - W-3, L-1.lvlx" then
+		elseif Level.filename() == "SMB2 - W-3, L-1.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
 		elseif Level.filename() == "SMB2 - W-3, L-2.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
@@ -310,8 +304,9 @@ function onTick()
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
 		elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
+		elseif Level.filename() then
+			starman.sfxFile = Misc.resolveSoundFile("costumes/mario/0-SMASPlusPlus-Beta/starman")
 		end
-		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/0-SMASPlusPlus-Beta/starman")
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_2012beta.ogg")
 		starman.duration[996] = 769
