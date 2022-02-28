@@ -253,7 +253,7 @@ function onTick()
 		SaveData.mandatoryStars = SaveData.mandatoryStars or 0
 	end
 	--if SaveData.totalmandatoryStars == nil then
-		--SaveData.mandatoryStars = SaveData.mandatoryStars or 300 --Value isn't final, until all levels are made
+		--SaveData.mandatoryStars = SaveData.mandatoryStars or 999 --Value isn't final, until all levels are made
 	--end
 	
 	local characters = {}

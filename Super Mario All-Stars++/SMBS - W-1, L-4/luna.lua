@@ -21,6 +21,6 @@ end
 
 function onEvent(eventName)
 	if eventName == "Claps" then
-		SFX.play("pcoins-allcollected.wav")
+		SFX.play("_OST/_Sound Effects/pcoins-allcollected.ogg")
 	end
 end
