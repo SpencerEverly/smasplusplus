@@ -221,13 +221,23 @@ local function theme11scrolling()
 end
 
 local function theme12()
-	SaveData.introselect = 11
+	SaveData.introselect = 12
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("intro_S!TS!.lvlx", nil, nil)
+end
+
+local function theme13()
+	SaveData.introselect = 13
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_sunsetbeach.lvlx", nil, nil)
 end
 
 local function mapExit()

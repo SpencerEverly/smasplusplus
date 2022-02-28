@@ -84,6 +84,9 @@ local function preboot()
 	if SaveData.introselect == 12 then
 		Level.load("intro_S!TS!.lvlx", nil, nil)
 	end
+	if SaveData.introselect == 13 then
+		Level.load("intro_sunsetbeach.lvlx", nil, nil)
+	end
 end
 
 function onKeyboardPress(k, v)
