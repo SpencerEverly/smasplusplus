@@ -9,9 +9,6 @@ local autoscroll = require("autoscroll")
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 
-local snake = require("snakey")
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
-
 local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 

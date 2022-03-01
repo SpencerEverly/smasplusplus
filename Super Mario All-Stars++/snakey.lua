@@ -19,7 +19,7 @@ local defs = require("expandedDefines")
 
 local snake = {}
 
-_G.CHARACTER_SNAKE2 = CHARACTER_SNAKE
+_G.CHARACTER_SNAKE = CHARACTER_SNAKE
 
 --Generated enemy vision cone info
 local visioncones = {}
