@@ -42,9 +42,6 @@ end
 local classicevents = require("classiceventsmod")
 local globalgenerals = require("globalgenerals")
 
-local snake = require("snakey")
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
-
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
 function onLoad()
