@@ -308,9 +308,6 @@ function ep3Playables.cleanup(p, characterInfo, costume)
         storedPower[p] = pDat.powerup
         players[p] = nil
     end
-
-    -- Revert vanilla sheet overrides
-    unBlankCharacter(p.character)
 end
 
 

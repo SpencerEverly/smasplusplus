@@ -968,7 +968,10 @@ local function drawCharacterMenu(y, alpha)
 			end
 		end
 		if SaveData.disableX2char == 0 then
-			table.insert(pause_options_char, {name2="Change Costume", action = costumechangeright});
+			table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
+		end
+		if SaveData.disableX2char == 0 then
+			table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
 		end
 	end
 	

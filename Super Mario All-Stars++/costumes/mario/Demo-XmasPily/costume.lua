@@ -1275,13 +1275,22 @@ function costume.onCleanup(playerObj, p)
 	coyotetime.onJump = lastCt
 	players[playerObj] = nil
 	for _,p in ipairs(costume.playersList) do
-		ep3Playables.cleanup(p, characterInfo, costume)
+		ep3Playables.cleanup(playerObj, characterInfo, costume)
 	end
 	local config = NPC.config[171]
+	
+	local spot = table.ifind(costume.playersList,playerObj)
+
+	if spot ~= nil then
+		table.remove(costume.playersList,spot)
+	end
+
 	if ep3Playables == true then return end
 	for  k,v in pairs(oldHammerConfig)  do
 		config[k] = v
 	end
+	
+	
 
 	-- Clean up town Demo NPCs not appearing
 	--[[
