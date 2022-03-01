@@ -1040,7 +1040,7 @@ local function drawCharacterMenu(y, alpha)
 	if currentCostume == "A2XT-DEMO" then
 		costumename = "<color red>Current costume: Demo (A2XT)</color>"
 	end
-	if currentCostume == "ZZ-DEMO-XMASPILY" then
+	if currentCostume == "DEMO-XMASPILY" then
 		costumename = "<color red>Current costume: Pily (A2XT: Gaiden 2)</color>"
 	end
 	if currentCostume == "GA-CAILLOU" then
