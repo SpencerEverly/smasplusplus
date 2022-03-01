@@ -165,7 +165,7 @@ function snake.onInputUpdate()
 			return;
 		end
 		if((player.jumpKeyPressing or player.altJumpKeyPressing) and player:mem(0x60,FIELD_WORD) ~= -1) then
-			player.upKeyPressing = false;
+			--player.upKeyPressing = false;
 		end
 		if(player:mem(0x146,FIELD_WORD) == 0 and player:mem(0x48,FIELD_WORD) == 0 and (player:mem(0x40, FIELD_WORD) ~= 3 and player:mem(0x40, FIELD_WORD) ~= 2)) then
 			player.downKeyPressing = false;
@@ -440,7 +440,7 @@ function snake.onDraw()
 				climbTimer = climbtime;
 			end
 			--Draw alertness element
-			Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 748, 12, 5);
+			Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, 5);
 			local camo = tostring(math.ceil(100*(snake.alertCooldown-snake.alertTimer)/(snake.alertCooldown)));
 			--textblox.printExt("%",{x=774,y=38,font=textblox.FONT_SPRITEDEFAULT3, z=5});
 			FONT.text = "%"
@@ -448,7 +448,7 @@ function snake.onDraw()
 			FONT.y=38
 			FONT.maxWidth=nil
 			textplus.print(FONT)
-			Text.printWP(camo,1,782-#camo*18 - 8,36,5)
+			Text.printWP(camo,1,400-#camo*18 - 8,46,5)
 			
 			--Draw powerup elements
 			if(player:mem(0x16, FIELD_WORD) > 1 and player.forcedState ~= 1 and player.forcedState ~= 4) then
@@ -473,11 +473,11 @@ function snake.onDraw()
 					power.graphic = snake.HUD_POWER_MK22;
 				end
 				
-				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 16, 16, 5);
+				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 10, 5);
 				--textblox.printExt(power.label,{x=16,y=52,width=80,font=textblox.FONT_SPRITEDEFAULT3, z=5});
 				FONT.text = power.label
-				FONT.x=16
-				FONT.y=52
+				FONT.x=405
+				FONT.y=45
 				FONT.maxWidth=80
 				textplus.print(FONT)
 			end
@@ -491,7 +491,7 @@ end
 
 function snake.initCharacter()
 	-- CLEANUP NOTE: This is not safe if a level makes it's own use of activateHud
-	Graphics.activateHud(false)
+	--Graphics.activateHud(false)
 	
 	-- CLEANUP NOTE: This is not quite safe in various cases
 	Defines.player_link_shieldEnabled = false
@@ -499,7 +499,7 @@ end
 
 function snake.cleanupCharacter()
 	-- CLEANUP NOTE: This is not safe if a level makes it's own use of activateHud
-	Graphics.activateHud(true)
+	--Graphics.activateHud(true)
 	
 	-- CLEANUP NOTE: This is not quite safe in various cases
 	Defines.player_link_shieldEnabled = true
