@@ -11,6 +11,6 @@ function onPause(evt)
 end
 
 function onDraw()
-	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
-	Graphics.drawImageWP(redcurtains, 0, 0, -12)
+	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
+	Graphics.drawImageWP(bluecurtains, 0, 0, -12)
 end

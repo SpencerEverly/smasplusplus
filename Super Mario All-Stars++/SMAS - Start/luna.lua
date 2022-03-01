@@ -250,6 +250,8 @@ Cheats.deregister("iwannabootbackhome") --We're going home, you dolt
 Cheats.deregister("letmeseetheintroagain") --You can see the intro again by starting SMAS++.
 Cheats.deregister("bootgamehelp") --We can't boot Game Help yet.
 Cheats.deregister("ilikespencereverly") --Like ya too, but wait until you're on an actual level ;)
+Cheats.deregister("sherbertsmiddlenameistoto") --Bad luck is deactivated here. You're welcome, scaredy cats
+
 Cheats.deregister("getmeouttahere")
 Cheats.deregister("hadron")
 Cheats.deregister("groundhog")

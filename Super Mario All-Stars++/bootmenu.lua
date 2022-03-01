@@ -18,6 +18,8 @@ runPressedState = false
 
 local bootmenu = {}
 
+bootmenu.active = true
+
 local aprilfools = false
 local aprilfoolserror = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
 
@@ -51,6 +53,38 @@ local day = os.date("%d")
 local month = os.date("%m")
 
 local exacttime = os.date("%X")
+
+littleDialogue.registerStyle("smbx13",{
+	textXScale = 1,
+    textYScale = 1,
+    borderSize = 36,
+	textMaxWidth = 500,
+	speakerNameGap = 6,
+	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+    speakerNameYScale = 1.2,
+	
+	openSpeed = 5,
+	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+    answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+	borderSize = 8,
+	
+	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+    forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+    forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+    forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+    forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
+
+	windowingOpeningEffectEnabled = false,
+
+	typewriterEnabled = false,
+    showTextWhileOpening = true,
+
+	closeSoundEnabled = false,
+	continueArrowEnabled = false,
+	scrollArrowEnabled   = false,
+	selectorImageEnabled = true,
+	
+})
 
 local function introExit()
 	Routine.waitFrames(38)
@@ -689,9 +723,10 @@ local function PigeonRaca1()
 end
 
 local function foolsinapril()
-	Routine.wait(5.5)
 	autoscroll.scrollLeft(5000)
-	Routine.wait(0.2)
+	Misc.pause()
+	Routine.wait(5.5, true)
+	Misc.unpause()
 	GameData.startedmenu = 4
 end
 
@@ -732,6 +767,8 @@ function bootmenu.onStart()
 		x2noticecheck = not active
 	end
 	Misc.saveGame()
+	Defines.cheat_donthurtme = true
+	Defines.cheat_shadowmario = true
 	if os.date("*t").month == 04 and os.date("*t").day == 01 then
 		GameData.startedmenu = 1
 	end
@@ -785,25 +822,32 @@ function bootmenu.onTick()
 		GameData.startedmenu = GameData.startedmenu or 0
 	end
 	player:setFrame(50)
-	player:mem(0x142, FIELD_BOOL, true)
-	if Player.count() == 2 then
-		player2:setFrame(50)
-		player2:mem(0x142, FIELD_BOOL, true)
+	player:mem(0x140, FIELD_BOOL, 150)
+	if player:mem(0x140, FIELD_BOOL) == 0 then
+		player:mem(0x140, FIELD_BOOL, 150)
 	end
-	if SaveData == nil then
-		Routine.run(SaveDataError1)
-	end
+	player.x = camera.x + 400 - (player.width / 2)
+	player.y = camera.y + 300 - (player.height / 2)
 	if Player.count() == 1 then
 		twoplayercheck = active
 	end
 	if Player.count() == 2 then
+		player2:setFrame(50)
+		player2:mem(0x142, FIELD_BOOL, true)
 		twoplayercheck = not active
+		player2.x = camera.x + 432 - (player2.width / 2)
+		player2.y = camera.y + 300 - (player2.height / 2)
+	end
+	if SaveData == nil then
+		Routine.run(SaveDataError1)
 	end
 	if SaveData.disableX2char == nil then
         SaveData.disableX2char = SaveData.disableX2char or 0
     end
 	if SaveData.disableX2char == 0 then
 		x2noticecheck = active
+		Cheats.deregister("2player")
+		Cheats.deregister("1player")
 	end
 	if SaveData.disableX2char == 1 then
 		x2noticecheck = not active
@@ -812,11 +856,12 @@ function bootmenu.onTick()
 		Player.setCostume(3, nil)
 		Player.setCostume(4, nil)
 		Player.setCostume(5, nil)
+		Cheats.register("2player")
+		Cheats.register("1player")
 	end
 	if(not killed and player:mem(0x13E,FIELD_BOOL)) then
 		killed = true
 		SaveData.failsafeMessageOne = SaveData.failsafeMessageOne + 1
-		Level.load()
 	end
 	if SaveData.failsafeMessageOne == nil then
         SaveData.failsafeMessageOne = SaveData.failsafeMessageOne or 0
@@ -829,6 +874,7 @@ function bootmenu.onTick()
 	end
 	--player.upKeyPressing = false;
 	--player.downKeyPressing = false;
+	player.runKeyPressing = false;
 	player.altJumpKeyPressing = false;
 	player.altRunKeyPressing = false;
 	player.dropItemKeyPressing = false;
@@ -869,7 +915,7 @@ end
 
 function bootmenu.onInputUpdate()
 	if player.rawKeys.pause == KEYS_PRESSED then
-		Routine.run(ExitGame1)
+		--Routine.run(ExitGame1)
 	end
 	if GameData.startedmenu == 0 then
 		if player.keys.jump == KEYS_PRESSED then
@@ -1017,20 +1063,21 @@ function bootmenu.onExit()
 	if SaveData.firstBootCompleted == 0 then
 		GameData.startedmenu = 1
 	end
+	Defines.cheat_donthurtme = false
+	Defines.cheat_shadowmario = false
 end
 
 Cheats.deregister("iwannabootbackhome") --We're already home, you dolt
 Cheats.deregister("letmeseetheintroagain") --You can see the intro again by starting SMAS++.
 Cheats.deregister("bootgamehelp") --Wrong Game Help to boot.
 Cheats.deregister("ilikespencereverly") --Like ya too, but wait until you're on an actual level ;)
+Cheats.deregister("sherbertsmiddlenameistoto") --Bad luck is deactivated here. You're welcome, scaredy cats.
 
 --The rest will disable most cheats to avoid breaking the boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
 Cheats.deregister("getmeouttahere")
 Cheats.deregister("hadron")
 Cheats.deregister("groundhog")
-Cheats.deregister("newleaf")
-Cheats.deregister("donthurtme")
 Cheats.deregister("wingman")
 Cheats.deregister("sonicstooslow")
 Cheats.deregister("gottagofast")

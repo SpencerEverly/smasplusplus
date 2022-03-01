@@ -131,6 +131,7 @@ Cheats.deregister("iwannabootbackhome") --We're already home, you dolt
 Cheats.deregister("letmeseetheintroagain") --You can see the intro again by starting SMAS++.
 Cheats.deregister("bootgamehelp") --Wrong Game Help to boot.
 Cheats.deregister("ilikespencereverly") --Like ya too, but wait until you're on an actual level ;)
+Cheats.deregister("sherbertsmiddlenameistoto") --Bad luck is deactivated here. You're welcome, scaredy cats.
 
 --The rest will disable most cheats to avoid breaking the intro. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 

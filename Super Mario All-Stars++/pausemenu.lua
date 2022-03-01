@@ -6,6 +6,8 @@ local Routine = require("routine")
 
 local blackscreen = Graphics.loadImage("blackscreen.png")
 
+local player2 = Player(2)
+
 local active = true
 local active2 = false
 local ready = false
@@ -197,10 +199,10 @@ local function savegamemap()
 	SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
 end
 
-local function exitlevelsave()
+local function exitlevel2()
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.7, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.saveGame() Level.exit() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.7, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function exitlevel()
@@ -880,21 +882,21 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Character Options", action = switchtochar});
 		end
 		if not isOverworld then
-			table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
+			table.insert(pause_options, {name="Exit to Map", action = exitlevel2});
 		end
-		if not isOverworld then
+		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegame});
 		end
-		if isOverworld then
+		if isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegamemap});
 		end
-		if not isOverworld then
+		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
 		end
-		if not isOverworld then
+		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Quit", action = quitgame});
 		end
-		if isOverworld then
+		if isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Quit", action = quitgamemap});
 		end
 		if not isOverworld then
@@ -1296,7 +1298,7 @@ function pausemenu.onInputUpdate()
 			pausemenu.pauseactive = true
 			pause_index = 0;
 			SFX.play("_OST/_Sound Effects/pausemenu.ogg")
-		elseif player.count(2) then
+		elseif player.count() == 2 then
 			if pausemenu.paused then
 				pausemenu.paused = false
 				pausemenu.paused_char = false
@@ -1307,7 +1309,7 @@ function pausemenu.onInputUpdate()
 				Misc.unpause()
 				player2:mem(0x11E,FIELD_BOOL,false)
 			end
-		elseif player.count(2) then
+		elseif player.count() == 2 then
 			if(player2:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
 				--Misc.pause();
 				pausemenu.paused = true
@@ -1344,6 +1346,10 @@ function pausemenu.onInputUpdate()
 				pause_index = (pause_index-1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
 			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+		elseif(player.keys.left == KEYS_PRESSED) then
+			player.keys.left = KEYS_UNPRESSED
+		elseif(player.keys.right == KEYS_PRESSED) then
+			player.keys.right = KEYS_UNPRESSED
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			player:mem(0x11E,FIELD_BOOL,false)
 			for i=1, 3 do
@@ -1367,6 +1373,10 @@ function pausemenu.onInputUpdate()
 					pause_index = (pause_index-1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
 				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			elseif(player2.keys.left == KEYS_PRESSED) then
+				player2.keys.left = KEYS_UNPRESSED
+			elseif(player2.keys.right == KEYS_PRESSED) then
+				player2.keys.right = KEYS_UNPRESSED
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options[pause_index+1].action();
 				Misc.unpause();
@@ -1384,6 +1394,10 @@ function pausemenu.onInputUpdate()
 				pause_index_char = (pause_index_char-1)%#pause_options_char;
 			until(not pause_options_char[pause_index_char+1].inactive);
 			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+		elseif(player.keys.left == KEYS_PRESSED) then
+			player.keys.left = KEYS_UNPRESSED
+		elseif(player.keys.right == KEYS_PRESSED) then
+			player.keys.right = KEYS_UNPRESSED
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			pause_options_char[pause_index_char+1].action();
 			Misc.unpause();
@@ -1399,6 +1413,10 @@ function pausemenu.onInputUpdate()
 					pause_index_char = (pause_index_char-1)%#pause_options_char;
 				until(not pause_options_char[pause_index_char+1].inactive);
 				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			elseif(player2.keys.left == KEYS_PRESSED) then
+				player2.keys.left = KEYS_UNPRESSED
+			elseif(player2.keys.right == KEYS_PRESSED) then
+				player2.keys.right = KEYS_UNPRESSED
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options_char[pause_index_char+1].action();
 				Misc.unpause();
@@ -1416,6 +1434,10 @@ function pausemenu.onInputUpdate()
 				pause_index_tele = (pause_index_tele-1)%#pause_options_tele;
 			until(not pause_options_tele[pause_index_tele+1].inactive);
 			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+		elseif(player.keys.left == KEYS_PRESSED) then
+			player.keys.left = KEYS_UNPRESSED
+		elseif(player.keys.right == KEYS_PRESSED) then
+			player.keys.right = KEYS_UNPRESSED
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			pause_options_tele[pause_index_tele+1].action();
 			Misc.unpause();
@@ -1431,6 +1453,10 @@ function pausemenu.onInputUpdate()
 					pause_index_tele = (pause_index_tele-1)%#pause_options_tele;
 				until(not pause_options_tele[pause_index_tele+1].inactive);
 				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			elseif(player2.keys.left == KEYS_PRESSED) then
+				player2.keys.left = KEYS_UNPRESSED
+			elseif(player2.keys.right == KEYS_PRESSED) then
+				player2.keys.right = KEYS_UNPRESSED
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options_tele[pause_index_tele+1].action();
 				Misc.unpause();
