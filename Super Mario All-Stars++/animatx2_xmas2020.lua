@@ -551,7 +551,7 @@ function AnimSet.create(args)
 
 	-- Load sheet if provided as a string
 	if  type(p.sheet) == "string"  then
-		p.sheet = Graphics.loadImage(Misc.resolveFile("costumes/mario/Demo-XmasPily/sheet.png"))
+		p.sheet = Graphics.loadImage(Misc.resolveFile("costumes/mario/ZZ-Demo-XmasPily/sheet.png"))
 	end
 
 	-- Random number sets
