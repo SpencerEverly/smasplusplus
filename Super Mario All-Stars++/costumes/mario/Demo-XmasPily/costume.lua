@@ -13,9 +13,8 @@ local playerCount = 0
 -- Library table for the costume, config for default ep3Playables behavior goes here
 local costume = {
 	baseCharID = CHARACTER_MARIO,
-	name = "Pily",
-	index = "xmaspily",
-	path = "costumes/mario/ZZ-Demo-XmasPily",
+	index = "Demo-XmasPily",
+	path = "costumes/mario/Demo-XmasPily",
 
 	powerupParticlesNames = {
 		[3] = {"p_fireAura","p_fireEmbers"},
@@ -508,7 +507,7 @@ local inputEvent = function(playerData, p)
 				pilyData.alreadyCaped = pilyData.alreadyCaped + 1
 				-- we only have 1 and 2 right now
 				local idx = math.min(pilyData.alreadyCaped, 2)
-				SFX.play(Misc.resolveSoundFile("costumes/mario/ZZ-Demo-XmasPily/extended/cape-swoop".. idx ..".ogg"))
+				SFX.play(Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/extended/cape-swoop".. idx ..".ogg"))
 				pilyData.capeDirection = p.direction
 				pilyData.capeStartTime = lunatime.time()
 				p.speedY = math.max(math.min(p.speedY, 0) -5, -10)
@@ -612,7 +611,7 @@ local inputEvent = function(playerData, p)
 					if  playerData.powerup == 6  then
 						SFX.play("sound/character/ur_claw.ogg")
 					elseif  playerData.powerup == 3  then
-						SFX.play("costumes/mario/ZZ-Demo-XmasPily/sound/extended/flame-shield-dash.ogg")
+						SFX.play("costumes/mario/Demo-XmasPily/sound/extended/flame-shield-dash.ogg")
 					else
 						SFX.play("sound/boot.ogg")
 					end
@@ -679,7 +678,7 @@ local inputEvent = function(playerData, p)
 		else
 			p.speedY = -10
 		end
-		SFX.play{sound=(pilyData.customSounds.bounce  or  "costumes/mario/ZZ-Demo-XmasPily/extended/bubble-shield-jump.ogg"), volume=0.5}
+		SFX.play{sound=(pilyData.customSounds.bounce  or  "costumes/mario/Demo-XmasPily/extended/bubble-shield-jump.ogg"), volume=0.5}
 
 		p.speedY = -p.speedY
 		local reduceSpeedY = false
@@ -1080,67 +1079,67 @@ local spintrail
 local pDat
 
 function costume.onInit(playerObj, pDat)
-	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/player-jump.ogg")
-	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/stomped.ogg")
-	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/block-hit.ogg")
-	Audio.sounds[4].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/block-smash.ogg")
-	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/player-shrink.ogg")
-	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/player-grow.ogg")
-	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/mushroom.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/player-died.ogg")
-	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/shell-hit.ogg")
-	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/player-slide.ogg")
-	Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/item-dropped.ogg")
-	Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/has-item.ogg")
-	Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/camera-change.ogg")
-	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/coin.ogg")
-	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/1up.ogg")
-	Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/lava.ogg")
-	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/warp.ogg")
-	Audio.sounds[18].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/fireball.ogg")
-	Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/level-win.ogg")
-	Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/boss-beat.ogg")
-	Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/dungeon-win.ogg")
-	Audio.sounds[22].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/bullet-bill.ogg")
-	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/grab.ogg")
-	Audio.sounds[24].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/spring.ogg")
-	Audio.sounds[25].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/hammer.ogg")
-	--Audio.sounds[29].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/do.ogg")
-	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/key.ogg")
-	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/pswitch.ogg")
-	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/tail.ogg")
-	--Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/racoon.ogg")
-	--Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/boot.ogg")
-	--Audio.sounds[36].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/smash.ogg")
-	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/thwomp.ogg")
-	Audio.sounds[38].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/birdo-spit.ogg")
-	Audio.sounds[39].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/birdo-hit.ogg")
-	Audio.sounds[41].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/birdo-beat.ogg")
-	--Audio.sounds[42].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/npc-fireball.ogg")
-	--Audio.sounds[43].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/fireworks.ogg")
-	Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/bowser-killed.ogg")
-	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/door.ogg")
-	Audio.sounds[47].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/message.ogg")
-	Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/yoshi.ogg")
-	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/yoshi-hurt.ogg")
-	Audio.sounds[50].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/yoshi-tongue.ogg")
-	Audio.sounds[51].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/yoshi-egg.ogg")
-	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/got-star.ogg")
-	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/player-died2.ogg")
-	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/yoshi-swallow.ogg")
-	Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/dry-bones.ogg")
-	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/smw-checkpoint.ogg")
-	Audio.sounds[59].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/dragon-coin.ogg")
-	Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/smw-blaarg.ogg")
-	--Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/wart-bubble.ogg")
-	--Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/wart-die.ogg")
-	Audio.sounds[71].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/climbing.ogg")
-	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/swim.ogg")
-	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/grab2.ogg")
-	--Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/saw.ogg")
-	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/smb2-throw.ogg")
-	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/smb2-hit.ogg")
-	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/ZZ-Demo-XmasPily/bubble.ogg")
+	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/player-jump.ogg")
+	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/stomped.ogg")
+	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/block-hit.ogg")
+	Audio.sounds[4].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/block-smash.ogg")
+	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/player-shrink.ogg")
+	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/player-grow.ogg")
+	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/mushroom.ogg")
+	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/player-died.ogg")
+	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/Demo-XmasPily/shell-hit.ogg")
+	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/player-slide.ogg")
+	Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/item-dropped.ogg")
+	Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/has-item.ogg")
+	Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/camera-change.ogg")
+	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/coin.ogg")
+	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/1up.ogg")
+	Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/lava.ogg")
+	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/warp.ogg")
+	Audio.sounds[18].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/fireball.ogg")
+	Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/level-win.ogg")
+	Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/boss-beat.ogg")
+	Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/dungeon-win.ogg")
+	Audio.sounds[22].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/bullet-bill.ogg")
+	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/grab.ogg")
+	Audio.sounds[24].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/spring.ogg")
+	Audio.sounds[25].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/hammer.ogg")
+	--Audio.sounds[29].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/do.ogg")
+	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/key.ogg")
+	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/pswitch.ogg")
+	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/tail.ogg")
+	--Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/racoon.ogg")
+	--Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/boot.ogg")
+	--Audio.sounds[36].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smash.ogg")
+	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/thwomp.ogg")
+	Audio.sounds[38].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/birdo-spit.ogg")
+	Audio.sounds[39].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/birdo-hit.ogg")
+	Audio.sounds[41].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/birdo-beat.ogg")
+	--Audio.sounds[42].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/npc-fireball.ogg")
+	--Audio.sounds[43].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/fireworks.ogg")
+	Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/bowser-killed.ogg")
+	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/door.ogg")
+	Audio.sounds[47].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/message.ogg")
+	Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/yoshi.ogg")
+	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/yoshi-hurt.ogg")
+	Audio.sounds[50].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/yoshi-tongue.ogg")
+	Audio.sounds[51].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/yoshi-egg.ogg")
+	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/got-star.ogg")
+	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/player-died2.ogg")
+	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/yoshi-swallow.ogg")
+	Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/dry-bones.ogg")
+	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smw-checkpoint.ogg")
+	Audio.sounds[59].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/dragon-coin.ogg")
+	Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smw-blaarg.ogg")
+	--Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/wart-bubble.ogg")
+	--Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/wart-die.ogg")
+	Audio.sounds[71].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/climbing.ogg")
+	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/swim.ogg")
+	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/grab2.ogg")
+	--Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/saw.ogg")
+	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smb2-throw.ogg")
+	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smb2-hit.ogg")
+	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/bubble.ogg")
 	Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_HEARTS)
 	coyotetime = require("coyotetime");
 	ppp = require("playerphysicspatch");
@@ -1181,8 +1180,7 @@ function costume.onInit(playerObj, pDat)
 		end
 	end
 
-	players[playerObj] = ep3Playables.register(playerObj, costume, 
-	inputEvent, animEvent, drawEndEvent);
+	players[playerObj] = ep3Playables.register(playerObj, costume, inputEvent, animEvent, drawEndEvent);
 
 	registerEvent(costume, "onPostNPCKill");
 	registerEvent(costume, "onTick");

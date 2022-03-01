@@ -171,13 +171,13 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
             for  _,v in ipairs(emPathList)  do
                 resolved = Misc.resolveFile(pathPrefix .. "/" .. v ..".ini")
 
-                local em = particles.Emitter(0,0, resolved)
-                --em:Attach(playerObj)
-                em.enabled = false
-                table.insert(emList, em)
+				local em = particles.Emitter(0,0, resolved)
+				em:Attach(playerObj)
+				em.enabled = false
+				table.insert(emList, em)
             end
 
-            pDat.powerupEmitters[i] = emList
+           pDat.powerupEmitters[i] = emList
         end
     end
 

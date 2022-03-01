@@ -59,7 +59,8 @@ costumes.data =
 	-- Unique
 	DEMO_BOBBLE = {path = "Demo-BobbleHat", name = "Bobble Hat Demo"},
 	DEMO_SAFETYBEE = {path = "Demo-SafetyBee", name = "D the Safety Bee"},
-	GA_CAILLOU   = {path = "GA-Caillou", name = "Default"}
+	GA_CAILLOU   = {path = "GA-Caillou", name = "Default"},
+	DEMO_XMASPILY   = {path = "ZZ-Demo-XmasPily", name = "Default"}
 }
 
 costumes.defaults =
