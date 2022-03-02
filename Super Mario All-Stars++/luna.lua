@@ -1,4 +1,4 @@
-local function anyValidFields() --This is to prevent any player2 errors while switching btween 1/2 player modes. If it's still not working then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
+local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
 	sectionlist[1] = player.section
 	if player2 and player2.isValid then
 		sectionlist[2] = player2.section
