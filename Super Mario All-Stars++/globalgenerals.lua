@@ -173,12 +173,6 @@ function globalgenerals.onTick()
 	end
 	
 	mem(0x00B25130, FIELD_WORD, 2)
-	if player.count(2) then
-		mem(0x00B25132, FIELD_WORD, 5)
-		if player:mem(0xD8, FIELD_DFLOAT) == 850 then
-			player2.kill()
-		end
-	end
 	if playerlives == 0 then
         if(not killed and player:mem(0x13E,FIELD_BOOL)) then
             killed = true
