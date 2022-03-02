@@ -323,6 +323,13 @@ function globalgenerals.onTick()
 		starman.duration[996] = 705
 		starman.duration[994] = 705
 	end
+	if currentCostume == "7-SML2" then
+		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_sml2.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_sml2.ogg")
+		starman.duration[996] = 878
+		starman.duration[994] = 878
+	end
 	if currentCostume == "9-SMW-PIRATE" then
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("costumes/mario/9-SMW-Pirate/starman-alt.ogg")
