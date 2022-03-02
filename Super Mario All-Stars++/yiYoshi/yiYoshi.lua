@@ -2253,7 +2253,8 @@ do
         -- Update the trail
         local followingEggCount = #data.followingEggs
         local trailLength = 0
-
+		local currentCostume = player:getCostume()
+		
         if followingEggCount > 0 then
             local maxTrailSize = (followingEggCount+1)*yoshi.tongueSettings.eggDelay
 

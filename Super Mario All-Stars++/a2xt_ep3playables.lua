@@ -474,7 +474,7 @@ local forcedStateMap = {
 	[499] = {state="mega", speed=3, scale=function(p,v)
 		local startCount = lunatime.tick() - v.megaStartFrame
 		local endCount = lunatime.tick() - v.megaEndFrame
-		local changeDuration = 48
+		local changeDuration = 95
 
 		if  startCount < changeDuration+8  then
 			v.megaShrinking = false

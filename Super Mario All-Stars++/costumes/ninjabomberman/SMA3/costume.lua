@@ -277,67 +277,7 @@ function costume.onCleanup(p)
 	
 	yoshi.cleanupCharacter()
 	
-	if character == "CHARACTER_MARIO" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_LUIGI" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_PEACH" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_TOAD" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_LINK" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_MEGAMAN" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_WARIO" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_BOWSER" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_KLONOA" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_ROSALINA" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_SNAKE" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_ZELDA" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_ULTIMATERINKA" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_UNCLEBROADSWORD" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_SAMUS" then
-		Defines.player_walkspeed = nil
-		Defines.player_runspeed = nil
-	end
-	if character == "CHARACTER_STEVE" then
+	if character then
 		Defines.player_walkspeed = nil
 		Defines.player_runspeed = nil
 	end

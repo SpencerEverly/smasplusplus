@@ -168,6 +168,10 @@ function globalgenerals.onTick()
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
+	if currentCostume == "SMB3-WALUIGI" then
+		Player.setCostume(10, nil)
+	end
+	
 	mem(0x00B25130, FIELD_WORD, 2)
 	if player.count(2) then
 		mem(0x00B25132, FIELD_WORD, 5)
@@ -610,7 +614,7 @@ function globalgenerals.onTick()
 	if currentCostume == "DLC-FESTIVE-CHRISTMASTREE" then
 		littleDialogue.characterNames[14] = "Christmas Tree"
 	end
-	if currentCostume == "ED" then
+	if currentCostume == "ED-EDEDDANDEDDY" then
 		littleDialogue.characterNames[14] = "Ed"
 	end
 	if currentCostume == "EXPLODINGTNT" then

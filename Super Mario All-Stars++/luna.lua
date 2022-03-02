@@ -51,3 +51,10 @@ function onLoad()
 		fadetolevel = true
 	end
 end
+
+function onTick()
+	local currentCostume = player:getCostume()
+	if currentCostume == "SMB3-WALUIGI" then
+		Player.setCostume(10, nil)
+	end
+end

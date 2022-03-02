@@ -274,6 +274,24 @@ local function theme13()
 	Level.load("intro_sunsetbeach.lvlx", nil, nil)
 end
 
+local function theme14()
+	SaveData.introselect = 14
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_scrollingheights.lvlx", nil, nil)
+end
+
+local function theme14scrolling()
+	autoscroll.scrollUp(6)
+	Routine.wait(13.6)
+	autoscroll.scrollDown(15)
+	Routine.wait(6.4)
+	Routine.loop(1300, theme14scrolling, true)
+end
+
 local function mapExit()
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
@@ -620,70 +638,178 @@ local function BootWSMBAPreExecute()
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	SFX.play(14)
+	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	Audio.sounds[1].sfx  = nil
+	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
 	Audio.sounds[4].sfx  = nil
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
+	Audio.sounds[8].sfx  = nil
 	Audio.sounds[9].sfx  = nil
-	Audio.sounds[10].sfx  = nil
-	Audio.sounds[11].sfx  = nil
-	Audio.sounds[12].sfx  = nil
-	Audio.sounds[13].sfx  = nil
-	Audio.sounds[14].sfx  = nil
-	Audio.sounds[15].sfx  = nil
-	Audio.sounds[18].sfx  = nil
-	Audio.sounds[22].sfx  = nil
-	Audio.sounds[25].sfx  = nil
-	Audio.sounds[28].sfx  = nil
-	Audio.sounds[37].sfx  = nil
-	Audio.sounds[42].sfx  = nil
-	Audio.sounds[43].sfx  = nil
-	Audio.sounds[91].sfx  = nil
+	Audio.sounds[10].sfx = nil
+	Audio.sounds[11].sfx = nil
+	Audio.sounds[12].sfx = nil
+	Audio.sounds[13].sfx = nil
+	Audio.sounds[14].sfx = nil
+	Audio.sounds[15].sfx = nil
+	Audio.sounds[16].sfx = nil
+	Audio.sounds[17].sfx = nil
+	Audio.sounds[18].sfx = nil
+	Audio.sounds[19].sfx = nil
+	Audio.sounds[20].sfx = nil
+	Audio.sounds[21].sfx = nil
+	Audio.sounds[22].sfx = nil
+	Audio.sounds[23].sfx = nil
+	Audio.sounds[24].sfx = nil
+	Audio.sounds[25].sfx = nil
+	Audio.sounds[29].sfx = nil
+	Audio.sounds[31].sfx = nil
+	Audio.sounds[32].sfx = nil
+	Audio.sounds[33].sfx = nil
+	Audio.sounds[34].sfx = nil
+	Audio.sounds[35].sfx = nil
+	Audio.sounds[36].sfx = nil
+	Audio.sounds[37].sfx = nil
+	Audio.sounds[38].sfx = nil
+	Audio.sounds[39].sfx = nil
+	Audio.sounds[41].sfx = nil
+	Audio.sounds[42].sfx = nil
+	Audio.sounds[43].sfx = nil
+	Audio.sounds[44].sfx = nil
+	Audio.sounds[46].sfx = nil
+	Audio.sounds[47].sfx = nil
+	Audio.sounds[48].sfx = nil
+	Audio.sounds[49].sfx = nil
+	Audio.sounds[50].sfx = nil
+	Audio.sounds[51].sfx = nil
+	Audio.sounds[52].sfx = nil
+	Audio.sounds[54].sfx = nil
+	Audio.sounds[55].sfx = nil
+	Audio.sounds[56].sfx = nil
+	Audio.sounds[57].sfx = nil
+	Audio.sounds[58].sfx = nil
+	Audio.sounds[59].sfx = nil
+	Audio.sounds[61].sfx = nil
+	Audio.sounds[62].sfx = nil
+	Audio.sounds[63].sfx = nil
+	Audio.sounds[71].sfx = nil
+	Audio.sounds[72].sfx = nil
+	Audio.sounds[73].sfx = nil
+	Audio.sounds[75].sfx = nil
+	Audio.sounds[76].sfx = nil
+	Audio.sounds[77].sfx = nil
+	Audio.sounds[78].sfx = nil
+	Audio.sounds[79].sfx = nil
+	Audio.sounds[80].sfx = nil
+	Audio.sounds[81].sfx = nil
+	Audio.sounds[82].sfx = nil
+	Audio.sounds[83].sfx = nil
+	Audio.sounds[84].sfx = nil
+	Audio.sounds[85].sfx = nil
+	Audio.sounds[86].sfx = nil
+	Audio.sounds[87].sfx = nil
+	Audio.sounds[88].sfx = nil
+	Audio.sounds[89].sfx = nil
+	Audio.sounds[90].sfx = nil
+	Audio.sounds[91].sfx = nil
 	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
 	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
 		SFX.play("wrong.ogg")
-		player.jumpKeyPressing = true
-		player.runKeyPressing = true
-		active = false
+		GameData.startedmenu = 1
+		exitscreen = false
+		Misc.dialog("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
 	end
 end
 local function BootWSMBAOGPreExecute()
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	SFX.play(14)
+	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	Audio.sounds[1].sfx  = nil
+	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
 	Audio.sounds[4].sfx  = nil
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
+	Audio.sounds[8].sfx  = nil
 	Audio.sounds[9].sfx  = nil
-	Audio.sounds[10].sfx  = nil
-	Audio.sounds[11].sfx  = nil
-	Audio.sounds[12].sfx  = nil
-	Audio.sounds[13].sfx  = nil
-	Audio.sounds[14].sfx  = nil
-	Audio.sounds[15].sfx  = nil
-	Audio.sounds[18].sfx  = nil
-	Audio.sounds[22].sfx  = nil
-	Audio.sounds[25].sfx  = nil
-	Audio.sounds[28].sfx  = nil
-	Audio.sounds[37].sfx  = nil
-	Audio.sounds[42].sfx  = nil
-	Audio.sounds[43].sfx  = nil
-	Audio.sounds[91].sfx  = nil
+	Audio.sounds[10].sfx = nil
+	Audio.sounds[11].sfx = nil
+	Audio.sounds[12].sfx = nil
+	Audio.sounds[13].sfx = nil
+	Audio.sounds[14].sfx = nil
+	Audio.sounds[15].sfx = nil
+	Audio.sounds[16].sfx = nil
+	Audio.sounds[17].sfx = nil
+	Audio.sounds[18].sfx = nil
+	Audio.sounds[19].sfx = nil
+	Audio.sounds[20].sfx = nil
+	Audio.sounds[21].sfx = nil
+	Audio.sounds[22].sfx = nil
+	Audio.sounds[23].sfx = nil
+	Audio.sounds[24].sfx = nil
+	Audio.sounds[25].sfx = nil
+	Audio.sounds[29].sfx = nil
+	Audio.sounds[31].sfx = nil
+	Audio.sounds[32].sfx = nil
+	Audio.sounds[33].sfx = nil
+	Audio.sounds[34].sfx = nil
+	Audio.sounds[35].sfx = nil
+	Audio.sounds[36].sfx = nil
+	Audio.sounds[37].sfx = nil
+	Audio.sounds[38].sfx = nil
+	Audio.sounds[39].sfx = nil
+	Audio.sounds[41].sfx = nil
+	Audio.sounds[42].sfx = nil
+	Audio.sounds[43].sfx = nil
+	Audio.sounds[44].sfx = nil
+	Audio.sounds[46].sfx = nil
+	Audio.sounds[47].sfx = nil
+	Audio.sounds[48].sfx = nil
+	Audio.sounds[49].sfx = nil
+	Audio.sounds[50].sfx = nil
+	Audio.sounds[51].sfx = nil
+	Audio.sounds[52].sfx = nil
+	Audio.sounds[54].sfx = nil
+	Audio.sounds[55].sfx = nil
+	Audio.sounds[56].sfx = nil
+	Audio.sounds[57].sfx = nil
+	Audio.sounds[58].sfx = nil
+	Audio.sounds[59].sfx = nil
+	Audio.sounds[61].sfx = nil
+	Audio.sounds[62].sfx = nil
+	Audio.sounds[63].sfx = nil
+	Audio.sounds[71].sfx = nil
+	Audio.sounds[72].sfx = nil
+	Audio.sounds[73].sfx = nil
+	Audio.sounds[75].sfx = nil
+	Audio.sounds[76].sfx = nil
+	Audio.sounds[77].sfx = nil
+	Audio.sounds[78].sfx = nil
+	Audio.sounds[79].sfx = nil
+	Audio.sounds[80].sfx = nil
+	Audio.sounds[81].sfx = nil
+	Audio.sounds[82].sfx = nil
+	Audio.sounds[83].sfx = nil
+	Audio.sounds[84].sfx = nil
+	Audio.sounds[85].sfx = nil
+	Audio.sounds[86].sfx = nil
+	Audio.sounds[87].sfx = nil
+	Audio.sounds[88].sfx = nil
+	Audio.sounds[89].sfx = nil
+	Audio.sounds[90].sfx = nil
+	Audio.sounds[91].sfx = nil
 	Misc.loadEpisode("Where SMB Attacks (Original)")
 	if Misc.loadEpisode("Where SMB Attacks (Original)") == false then
 		SFX.play("wrong.ogg")
-		player.jumpKeyPressing = true
-		player.runKeyPressing = true
-		active = false
+		GameData.startedmenu = 1
+		exitscreen = false
+		Misc.dialog("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
 	end
 end
 
@@ -800,6 +926,9 @@ function bootmenu.onStart()
 	if Level.filename() == "intro_8bit.lvlx" then
 		Routine.run(theme11scrolling)
 	end
+	if Level.filename() == "intro_scrollingheights.lvlx" then
+		Routine.run(theme14scrolling)
+	end
 end
 
 function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
@@ -881,9 +1010,6 @@ function bootmenu.onTick()
 	--player.leftKeyPressing = false;
 	--player.rightKeyPressing = false;
 	
-	if runPressedState == true then
-		player.runKeyPressing = false
-	end
 	Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
@@ -891,21 +1017,74 @@ function bootmenu.onTick()
 	Audio.sounds[5].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	Audio.sounds[7].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[8].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	Audio.sounds[9].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[10].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[11].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[12].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[13].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[14].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[15].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[18].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[22].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[25].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[28].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[37].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[42].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[43].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
-	Audio.sounds[91].sfx  = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[10].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[11].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[12].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[13].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[14].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[15].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[16].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[17].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[18].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[19].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[20].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[21].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[22].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[23].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[24].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[25].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[29].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[31].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[32].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[33].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[34].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[35].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[36].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[37].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[42].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[43].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[44].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[46].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[48].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[49].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[50].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[51].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[52].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[54].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[55].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[57].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[58].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[59].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[61].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[62].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[63].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[71].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[72].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[73].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[74].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[75].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[76].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[77].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[78].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[79].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[80].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[81].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[82].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[83].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[84].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[85].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[86].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[87].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[88].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[89].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[90].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	Audio.sounds[91].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
+	
+	if runPressedState == true then
+		player.runKeyPressing = false
+	end
 end
 
 function bootmenu.onPause(evt)
@@ -1204,6 +1383,8 @@ littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edit
 littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() Routine.run(theme11) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() Routine.run(theme12) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() Routine.run(theme13) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() Routine.run(theme14) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
 

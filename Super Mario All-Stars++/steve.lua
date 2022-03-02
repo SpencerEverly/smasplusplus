@@ -19,6 +19,8 @@ local lib3d = require("lib3d")
 
 local steve = {}
 
+local timer = 0
+
 ready = false
 
 _G.CHARACTER_STEVE = CHARACTER_ULTIMATERINKA
@@ -366,7 +368,7 @@ do
 
     function resetPartAnimationData()
         for _,partData in ipairs(steve.bodyParts) do
-            data.partAnimationData[partData.name] = {offset = vector.zero3,rotation = vector.zero3}
+			data.partAnimationData[partData.name] = {offset = vector.zero3,rotation = vector.zero3}
         end
     end
 
