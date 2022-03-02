@@ -1070,6 +1070,15 @@ local function drawCharacterMenu(y, alpha)
 	if currentCostume == "SMG4" then
 		costumename = "<color red>Current costume: SuperMarioGlitchy4 (YouTube)</color>"
 	end
+	if currentCostume == "SMM2-LUIGI" then
+		costumename = "<color red>Current costume: Super Mario Maker (SMW, Luigi)</color>"
+	end
+	if currentCostume == "SMM2-TOADETTE" then
+		costumename = "<color red>Current costume: Super Mario Maker (SMW, Toadette)</color>"
+	end
+	if currentCostume == "SMM2-YELLOWTOAD" then
+		costumename = "<color red>Current costume: Super Mario Maker (SMW, Yellow Toad)</color>"
+	end
 	if currentCostume == "SMW-MARIO" then
 		costumename = "<color red>Current costume: Super Mario World (SNES)</color>"
 	end
@@ -1137,7 +1146,7 @@ local function drawCharacterMenu(y, alpha)
 	end
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(costumename, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	local layout = textplus.layout(textplus.parse(costumename, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	textplus.render{layout = layout, x = 230 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
