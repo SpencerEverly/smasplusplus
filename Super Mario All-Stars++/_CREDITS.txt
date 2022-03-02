@@ -86,6 +86,7 @@ Costumes:
 - Golden Mario by It's-A-Me
 - Playable Goomba by Turret 3471
 - Frisk Costume Block Sprites by Frisky
+- SMM2 SMW costumes by CaptainMonochrome
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
@@ -221,6 +222,7 @@ Themes made by:
 - TepigFan101
 - SMBX2 Staff
 - IkOshi1
+- Jake Brito
 
 -----Adventures of Demo-----
 

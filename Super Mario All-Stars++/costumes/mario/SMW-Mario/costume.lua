@@ -552,7 +552,10 @@ function costume.onInit(p)
 		registerEvent(costume,"onTickEnd")
 		registerEvent(costume,"onDraw")
 		Graphics.overrideHUD(minHUD.drawHUD)
-
+		
+		Audio.sounds[30].sfx = Audio.SfxOpen("costumes/mario/SMW-Mario/pause.ogg")
+		Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/SMW-Mario/got-star.ogg")
+		
 		eventsRegistered = true
 	end
 
@@ -619,8 +622,6 @@ end
 
 
 function costume.onTick()
-	Audio.sounds[30].sfx = Audio.SfxOpen("costumes/mario/SMW-Mario/pause.ogg")
-	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/SMW-Mario/got-star.ogg")
 	for _,p in ipairs(costume.playersList) do
 		local data = costume.playerData[p]
 
