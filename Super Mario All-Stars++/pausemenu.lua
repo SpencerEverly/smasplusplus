@@ -1071,7 +1071,13 @@ local function drawCharacterMenu(y, alpha)
 		costumename = "<color red>Current costume: SuperMarioGlitchy4 (YouTube)</color>"
 	end
 	if currentCostume == "SMM2-LUIGI" then
+		costumename = "<color red>Current costume: Super Mario Maker (SMW, Mario)</color>"
+	end
+	if currentCostume == "SMM2-LUIGI" then
 		costumename = "<color red>Current costume: Super Mario Maker (SMW, Luigi)</color>"
+	end
+	if currentCostume == "SMM2-TOAD" then
+		costumename = "<color red>Current costume: Super Mario Maker (SMW, Toad)</color>"
 	end
 	if currentCostume == "SMM2-TOADETTE" then
 		costumename = "<color red>Current costume: Super Mario Maker (SMW, Toadette)</color>"

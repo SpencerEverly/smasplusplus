@@ -1096,6 +1096,16 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 0/Intro.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 0/Intro.ogg")
 		end
+		if currentCostume == "SMM2-MARIO" then
+			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(7, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(8, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(11, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+		end
 		if currentCostume == "MARINK" then
 			Audio.MusicChange(1, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
 			Audio.MusicChange(2, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
@@ -1397,6 +1407,16 @@ function malcmusic.onTick()
 			Audio.MusicChange(11, "_OST/Nintendogs + Cats/CFR_BGM_WALK.ogg")
 			Audio.MusicChange(12, "_OST/Nintendogs + Cats/CFR_BGM_WALK.ogg")
 			Audio.MusicChange(13, "_OST/Nintendogs + Cats/CFR_BGM_WALK.ogg")
+		end
+		if currentCostume == "SMM2-TOAD" then
+			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(7, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(8, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(11, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
 		if currentCostume == "SMM2-TOADETTE" then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
