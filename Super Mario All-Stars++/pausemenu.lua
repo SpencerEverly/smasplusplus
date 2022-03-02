@@ -1070,7 +1070,7 @@ local function drawCharacterMenu(y, alpha)
 	if currentCostume == "SMG4" then
 		costumename = "<color red>Current costume: SuperMarioGlitchy4 (YouTube)</color>"
 	end
-	if currentCostume == "SMM2-LUIGI" then
+	if currentCostume == "SMM2-MARIO" then
 		costumename = "<color red>Current costume: Super Mario Maker (SMW, Mario)</color>"
 	end
 	if currentCostume == "SMM2-LUIGI" then
