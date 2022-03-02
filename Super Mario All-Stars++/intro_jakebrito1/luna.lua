@@ -1,22 +1,26 @@
---------------------------------------------------
--- Level code
--- Created 22:20 2022-2-28
---------------------------------------------------
+local bootmenu = require("bootmenu")
+local littleDialogue = require("littleDialogue")
 
--- Run code on level start
 function onStart()
-    --Your code here
+	Audio.MusicChange(0, "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg")
+	Misc.saveGame()
 end
 
--- Run code every frame (~1/65 second)
--- (code will be executed before game logic will be processed)
-function onTick()
-    --Your code here
+function onPause(evt)
+    evt.cancelled = true;
+    isPauseMenuOpen = not isPauseMenuOpen
 end
 
--- Run code when internal event of the SMBX Engine has been triggered
--- eventName - name of triggered event
-function onEvent(eventName)
-    --Your code here
+function onEvent()
+	if eventName == "BootDialogueMusicReset" then
+		Audio.MusicChange(0, "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg")
+	end
+	if eventName == "ExitDialogueMusicReset" then
+		Audio.MusicChange(0, "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg")
+	end
 end
 
+function onDraw()
+	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
+	Graphics.drawImageWP(bluecurtains, 0, 0, -12)
+end

@@ -292,6 +292,24 @@ local function theme14scrolling()
 	Routine.loop(1300, theme14scrolling, true)
 end
 
+local function theme15()
+	SaveData.introselect = 15
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_jakebrito1.lvlx", nil, nil)
+end
+
+local function theme15scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(26.2)
+	autoscroll.scrollLeft(15)
+	Routine.wait(11.0)
+	Routine.loop(2418, theme15scrolling, true)
+end
+
 local function mapExit()
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
@@ -550,6 +568,15 @@ local function BootDialogueMusicReset()
 	if Level.filename() == "intro_WSMBA.lvlx" then
 		Audio.MusicChange(0, "_OST/Super Mario Bros. 3 (NES, VRC6 by skydev) - OST.nsf|0;g=2.2")
 	end
+	if Level.filename() == "intro_sunsetbeach.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario Galaxy 2/SMG2_galaxy06_strm.ogg")
+	end
+	if Level.filename() == "intro_scrollingheights.lvlx" then
+		Audio.MusicChange(0, "_OST/Nintendo Land/J_Blf_night.w.48.dspadpcm.ogg")
+	end
+	if Level.filename() == "intro_jakebrito1.lvlx" then
+		Audio.MusicChange(0, "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg")
+	end
 end
 
 local function ExitDialogueFirstBoot()
@@ -579,6 +606,51 @@ local function ExitDialogueMusicReset()
 	pressjumpwords = true
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
+	end
+	if Level.filename() == "intro_8bit.lvlx" then
+		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
+	end
+	if Level.filename() == "intro_bossedit8.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Smash Bros. Melee/smari3.ogg")
+	end
+	if Level.filename() == "intro_S!TS!.lvlx" then
+		Audio.MusicChange(0, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
+	end
+	if Level.filename() == "intro_SMAS.lvlx" then
+		Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.0.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario 64/Title Theme.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.1.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario 64/Title Theme.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.2.lvlx" then
+		Audio.MusicChange(0, 53)
+	end
+	if Level.filename() == "intro_SMBX1.3.lvlx" then
+		Audio.MusicChange(0, 56)
+	end
+	if Level.filename() == "intro_SMBX1.3og.lvlx" then
+		Audio.MusicChange(0, 55)
+	end
+	if Level.filename() == "intro_SMBX2.lvlx" then
+		Audio.MusicChange(0, m)
+	end
+	if Level.filename() == "intro_SMBX2b3.lvlx" then
+		--Music doesn't mute
+	end
+	if Level.filename() == "intro_WSMBA.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario Bros. 3 (NES, VRC6 by skydev) - OST.nsf|0;g=2.2")
+	end
+	if Level.filename() == "intro_sunsetbeach.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario Galaxy 2/SMG2_galaxy06_strm.ogg")
+	end
+	if Level.filename() == "intro_scrollingheights.lvlx" then
+		Audio.MusicChange(0, "_OST/Nintendo Land/J_Blf_night.w.48.dspadpcm.ogg")
+	end
+	if Level.filename() == "intro_jakebrito1.lvlx" then
+		Audio.MusicChange(0, "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg")
 	end
 end
 
@@ -928,6 +1000,9 @@ function bootmenu.onStart()
 	end
 	if Level.filename() == "intro_scrollingheights.lvlx" then
 		Routine.run(theme14scrolling)
+	end
+	if Level.filename() == "intro_jakebrito1.lvlx" then
+		Routine.run(theme15scrolling)
 	end
 end
 
@@ -1384,6 +1459,7 @@ littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chos
 littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() Routine.run(theme12) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() Routine.run(theme13) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() Routine.run(theme14) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
