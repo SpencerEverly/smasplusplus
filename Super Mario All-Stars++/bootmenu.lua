@@ -1050,8 +1050,6 @@ function bootmenu.onTick()
     end
 	if SaveData.disableX2char == 0 then
 		x2noticecheck = active
-		Cheats.deregister("2player")
-		Cheats.deregister("1player")
 	end
 	if SaveData.disableX2char == 1 then
 		x2noticecheck = not active
@@ -1060,8 +1058,6 @@ function bootmenu.onTick()
 		Player.setCostume(3, nil)
 		Player.setCostume(4, nil)
 		Player.setCostume(5, nil)
-		Cheats.register("2player")
-		Cheats.register("1player")
 	end
 	if(not killed and player:mem(0x13E,FIELD_BOOL)) then
 		killed = true
