@@ -1178,8 +1178,8 @@ function costume.onInit(p)
 		registerEvent(costume,"onPlayerKill")
 		registerEvent(costume,"onPostNPCHarm")
 		
-		Audio.sounds[30].sfx = Audio.SfxOpen("costumes/luigi/SMM2-Luigi/pause.ogg")
-		Audio.sounds[52].sfx = Audio.SfxOpen("costumes/luigi/SMM2-Luigi/got-star.ogg")
+		Audio.sounds[30].sfx = Audio.SfxOpen("costumes/mario/SMM2-YellowToad/pause.ogg")
+		Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/SMM2-YellowToad/got-star.ogg")
 		
 		eventsRegistered = true
 	end
