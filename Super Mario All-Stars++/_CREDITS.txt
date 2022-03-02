@@ -87,6 +87,7 @@ Costumes:
 - Playable Goomba by Turret 3471
 - Frisk Costume Block Sprites by Frisky
 - SMM2 SMW costumes by CaptainMonochrome
+- Some SMB1 SMAS Stuff by ItsIggy
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
