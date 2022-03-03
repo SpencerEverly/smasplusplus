@@ -329,8 +329,8 @@ function pausemenu13.onTick()
 			player.pauseKeyPressing = true
 		end
 		if player.count() == 2 then
-			if player2.pauseKeyPressing == false then
-				player2.pauseKeyPressing = true
+			if Player(2).pauseKeyPressing == false then
+				Player(2).pauseKeyPressing = true
 			end
 		end
 	end
@@ -339,8 +339,8 @@ function pausemenu13.onTick()
 			player.pauseKeyPressing = false
 		end
 		if player.count() == 2 then
-			if player2.pauseKeyPressing == true then
-				player2.pauseKeyPressing = false
+			if Player(2).pauseKeyPressing == true then
+				Player(2).pauseKeyPressing = false
 			end
 		end
 	end

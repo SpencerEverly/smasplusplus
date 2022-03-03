@@ -6,6 +6,7 @@ local autoscroll = require("autoscroll")
 local datetime = require("datetime")
 local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
+local playersounds = require("playersounds")
 
 local dying = false;
 local deathVisibleCount = 198;
@@ -87,11 +88,6 @@ function dependencies.onStart()
 		warpTransition.activateOnInstantWarps = false
 		pausemenu13 = require("pausemenu13")
 		littleDialogue.defaultStyleName = "smbx13og"
-		Player.setCostume(1, nil)
-		Player.setCostume(2, nil)
-		Player.setCostume(3, nil)
-		Player.setCostume(4, nil)
-		Player.setCostume(5, nil)
 		Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-jump.ogg")
 		Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/stomped.ogg")
 		Audio.sounds[3].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/block-hit.ogg")

@@ -1,16 +1,11 @@
 local littleDialogue = require("littleDialogue")
-
 local playerManager = require("playerManager")
-
 local inventory = require("customInventory")
-
 local textplus = require("textplus")
-
 local autoscroll = require("autoscroll")
-
 local datetime = require("datetime")
-
 local Routine = require("routine")
+local playersounds = require("playersounds")
 
 local costumes = {}
 
@@ -90,15 +85,15 @@ function dependencies2.onInputUpdate()
 	end
 	if SaveData.disableX2char == 1 then
 		if Player.count() == 2 then
-			if player2.keys.altRun == KEYS_PRESSED then
+			if Player(2).keys.altRun == KEYS_PRESSED then
 				if pausemenu13.paused == false then
-					player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+					Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
 					cooldown = 5
-					player2:mem(0x172,FIELD_BOOL,false)
+					Player(2):mem(0x172,FIELD_BOOL,false)
 				end
 				if cooldown <= 0 then
-					player2:mem(0x172,FIELD_BOOL,true)
+					Player(2):mem(0x172,FIELD_BOOL,true)
 				end
 			end
 		end
@@ -145,11 +140,6 @@ function dependencies2.onStart()
 		warpTransition.activateOnInstantWarps = false
 		pausemenu13 = require("pausemenu13")
 		littleDialogue.defaultStyleName = "smbx13og"
-		Player.setCostume(1, nil)
-		Player.setCostume(2, nil)
-		Player.setCostume(3, nil)
-		Player.setCostume(4, nil)
-		Player.setCostume(5, nil)
 		Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-jump.ogg")
 		Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/stomped.ogg")
 		Audio.sounds[3].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/block-hit.ogg")

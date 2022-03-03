@@ -15,6 +15,14 @@ if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SM
 	warpTransition.activateOnInstantWarps = false
 end
 
+if SaveData.disableX2char == 1 then
+	warpTransition.musicFadeOut = false
+	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
+	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
+	warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
+	warpTransition.activateOnInstantWarps = false
+end
+
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 
@@ -879,7 +887,7 @@ function globalgenerals.onExit()
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
 		end
 	end
-	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution. I have plans to make a Credits Sequence later
+	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
 end
