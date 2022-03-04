@@ -1,4 +1,5 @@
 local pm = require("playerManager")
+local playersounds = require("playersounds")
 
 local costume = {}
 
@@ -23,17 +24,14 @@ function costume.onInit(p)
 	Graphics.sprites.block[1220].img = Graphics.loadImage("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.block[1221].img = Graphics.loadImage("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.npc[14].img = Graphics.loadImage("costumes/mario/0-SMASPlusPlus-Beta/fireflowerbeta.png")
-	if player then
-		Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died.ogg")
-		Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/got-star.ogg")
-		Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died2.ogg")
-	end
-	if player2 then
-		Audio.sounds[92].sfx  = Audio.SfxOpen("player-jump")
-		Audio.sounds[93].sfx  = Audio.SfxOpen("stomped")
-		Audio.sounds[99].sfx  = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died.ogg")
-		--Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/got-star.ogg")
-		--Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died2.ogg")
+	if Player(1) then
+		playersounds.playeronesound8  = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died.ogg")
+		playersounds.playeronesound52 = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/got-star.ogg")
+		playersounds.playeronesound54 = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died2.ogg")
+	elseif Player(2) and Player(2).isValid then
+		playersounds.playertwosound8  = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died.ogg")
+		playersounds.playertwosound52 = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/got-star.ogg")
+		playersounds.playertwosound54 = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died2.ogg")
 	end
 end
 

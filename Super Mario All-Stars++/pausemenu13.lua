@@ -3,6 +3,7 @@ local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
+local playersounds = require("playersounds")
 
 local blackscreen = Graphics.loadImage("blackscreen.png")
 
@@ -77,7 +78,7 @@ end
 local function unpause()
 	pausemenu13.paused = false
 	Misc.unpause()
-	SFX.play(30)
+	SFX.play(playersounds.playeronesound30)
 end
 
 function pausemenu13.onStart()
@@ -108,14 +109,14 @@ end
 local function quitgame()
 	Audio.MusicVolume(0)
 	Misc.saveGame()
-	SFX.play(14)
+	SFX.play(playersounds.playeronesound14)
 	pausemenu13.paused = false
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegame()
 	pausemenu13.paused = false
-	SFX.play(58)
+	SFX.play(playersounds.playeronesound58)
 	Misc.saveGame()
 	Misc.unpause()
 end
@@ -199,7 +200,7 @@ function pausemenu13.onInputUpdate()
 			pausemenu13.paused = false
 			pausemenu13.paused_char = false
 			pauseactive = false
-			SFX.play(30)
+			SFX.play(playersounds.playeronesound30)
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
@@ -208,14 +209,14 @@ function pausemenu13.onInputUpdate()
 			pausemenu13.paused = true
 			pauseactive = true
 			pause_index = 0;
-			SFX.play(30)
+			SFX.play(playersounds.playeronesound30)
 		elseif player.count(2) then
 			if pausemenu13.paused then
 				pausemenu13.paused = false
 				pausemenu13.paused_char = false
 				aused_tele = false
 				pauseactive = false
-				SFX.play(30)
+				SFX.play(playersounds.playertwosound30)
 				cooldown = 5
 				Misc.unpause()
 				player2:mem(0x11E,FIELD_BOOL,false)
@@ -226,7 +227,7 @@ function pausemenu13.onInputUpdate()
 				pausemenu13.paused = true
 				pauseactive = true
 				pause_index = 0;
-				SFX.play(30)
+				SFX.play(playersounds.playertwosound30)
 			end
 		end
 		if cooldown <= 0 then
@@ -243,12 +244,12 @@ function pausemenu13.onInputUpdate()
 			repeat
 				pause_index = (pause_index+1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play(26)
+			SFX.play(playersounds.playeronesound26)
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index = (pause_index-1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play(26)
+			SFX.play(playersounds.playeronesound26)
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			player:mem(0x11E,FIELD_BOOL,false)
 			for i=1, 3 do
@@ -261,18 +262,18 @@ function pausemenu13.onInputUpdate()
 			pause_options[pause_index+1].action();
 			Misc.unpause();
 		end
-		if player.count() == 2 then
-			if(player2.keys.down == KEYS_PRESSED) then
+		if Player(2) and Player(2).isValid then
+			if(Player(2).keys.down == KEYS_PRESSED) then
 				repeat
 					pause_index = (pause_index+1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play(26)
-			elseif(player2.keys.up == KEYS_PRESSED) then
+				SFX.play(playersounds.playertwosound26)
+			elseif(Player(2).keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index = (pause_index-1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play(26)
-			elseif(player2.keys.jump == KEYS_PRESSED) then
+				SFX.play(playersounds.playertwosound26)
+			elseif(Player(2).keys.jump == KEYS_PRESSED) then
 				pause_options[pause_index+1].action();
 				Misc.unpause();
 			end
@@ -283,12 +284,12 @@ function pausemenu13.onInputUpdate()
 			repeat
 				pause_index_char = (pause_index_char+1)%#pause_options_char;
 			until(not pause_options_char[pause_index_char+1].inactive);
-			SFX.play(26)
+			SFX.play(playersounds.playeronesound26)
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index_char = (pause_index_char-1)%#pause_options_char;
 			until(not pause_options_char[pause_index_char+1].inactive);
-			SFX.play(26)
+			SFX.play(playersounds.playeronesound26)
 		elseif(player.keys.jump == KEYS_PRESSED) then
 			pause_options_char[pause_index_char+1].action();
 			Misc.unpause();
@@ -298,12 +299,12 @@ function pausemenu13.onInputUpdate()
 				repeat
 					pause_index_char = (pause_index_char+1)%#pause_options_char;
 				until(not pause_options_char[pause_index_char+1].inactive);
-				SFX.play(26)
+				SFX.play(playersounds.playertwosound26)
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index_char = (pause_index_char-1)%#pause_options_char;
 				until(not pause_options_char[pause_index_char+1].inactive);
-				SFX.play(26)
+				SFX.play(playersounds.playertwosound26)
 			elseif(player2.keys.jump == KEYS_PRESSED) then
 				pause_options_char[pause_index_char+1].action();
 				Misc.unpause();

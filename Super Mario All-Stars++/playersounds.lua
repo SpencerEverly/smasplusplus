@@ -7,9 +7,27 @@ local climbsfxtimer = 1
 local pipecounter = 1
 local doorcounter = 1
 local slidecounter = 1
+local swallowcounter = 1
 local pipecounter2 = 1
 local doorcounter2 = 1
 local slidecounter2 = 1
+local swallowcounter2 = 1
+
+playersounds.playersound0 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg")) --General sound to mute anything, really
+
+local path = "_OST/_Sound Effects/player"
+playersounds.sounds = {}
+for i=1, 2 do -- player indices
+	playersounds.sounds[i] = {
+		playerJump = Misc.resolveSoundFile(path .. i .. "/player-jump"),
+		stomped = Misc.resolveSoundFile(path .. i .. "/stomped"),
+		blockHit = Misc.resolveSoundFile(path .. i .. "/block-hit"),
+		blockSmash = Misc.resolveSoundFile(path .. i .. "/block-smash"),
+		playerShrink = Misc.resolveSoundFile(path .. i .. "/player-shrink"),
+		playerGrow = Misc.resolveSoundFile(path .. i .. "/player-grow"),
+		mushroom = Misc.resolveSoundFile(path .. i .. "/mushroom")
+	}
+end
 
 --Player(1)
 playersounds.playeronesound1 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/player-jump.ogg"))
@@ -240,34 +258,36 @@ function playersounds.onInitAPI()
 end
 
 function playersounds.onTickEnd()
-	if Player(1) then
-		if not Misc.isPaused() then
-			if Level.endState() == 1 then
-				Level.finish(1, true)
-			end
-			if Level.endState() == 2 then
-				Level.finish(2, true)
-			end
-			if Level.endState() == 3 then
-				Level.finish(3, true)
-				SFX.play(playersounds.playeronesound31)
-			end
-			if Level.endState() == 4 then
-				Level.finish(4, true)
-			end
-			if Level.endState() == 6 then
-				Level.finish(6, true)
-			end
-			if Level.endState() == 7 then
-				Level.finish(7, true)
+	for idx, p in ipairs(Player.get()) do
+		if (playersounds.sounds[p.idx]) then
+			if not Misc.isPaused() then
+				if Level.endState() == 1 then
+					Level.finish(1, true)
+				end
+				if Level.endState() == 2 then
+					Level.finish(2, true)
+				end
+				if Level.endState() == 3 then
+					Level.finish(3, true)
+					SFX.play(playersounds.playeronesound31)
+				end
+				if Level.endState() == 4 then
+					Level.finish(4, true)
+				end
+				if Level.endState() == 6 then
+					Level.finish(6, true)
+				end
+				if Level.endState() == 7 then
+					Level.finish(7, true)
+				end
 			end
 		end
 	end
 end
 
-function playersounds.onTick()
-	if Player(1) then
-		if not Misc.isPaused() then
+function playersounds.onTick(playerOrNil)
+	if not Misc.isPaused() then
+		if Player(1) then
 			if player.forcedState == FORCEDSTATE_POWERUP_BIG or player.forcedState == FORCEDSTATE_POWERUP_FIRE or player.forcedState == FORCEDSTATE_POWERUP_HAMMER or player.forcedState == FORCEDSTATE_POWERUP_ICE then
 				if player.forcedTimer == 0 then
 					SFX.play(playersounds.playeronesound6)
@@ -323,52 +343,80 @@ function playersounds.onTick()
 					playersounds.playeronesound10:stop()
 				end
 			end
-		end
-	end
-	if Player(2) and Player(2).isValid then
-		if not Misc.isPaused() then
-			if Player(2).forcedState == FORCEDSTATE_POWERUP_BIG or Player(2).forcedState == FORCEDSTATE_POWERUP_FIRE or Player(2).forcedState == FFORCEDSTATE_POWERUP_HAMMER or Player(2).forcedState == FORCEDSTATE_POWERUP_ICE then
-				if Player(2).forcedTimer == 0 then
-					SFX.play(playersounds.playeronesound6)
-				end
-			end
-			if Player(2).forcedState == FORCEDSTATE_POWERUP_LEAF or Player(2).forcedState == FORCEDSTATE_POWERUP_TANOOKI then
-				if Player(2).forcedTimer == 0 then
-					SFX.play(playersounds.playeronesound34)
-				end
-			end
-			if Player(2).forcedState == FORCEDSTATE_POWERDOWN_SMALL and not Player(2).hasStarman then
-				if Player(2).forcedTimer == 0 then
-					SFX.play(playersounds.playertwosound5)
-				end
-			end
-			if Player(2).forcedState == FORCEDSTATE_PIPE then
-				if Player(2).forcedTimer == 0 and not Misc.isPaused() then
-					pipecounter2 = pipecounter2 - 1
-					SFX.play(playersounds.playeronesound17, 1, 1, 70)
-				end
-				if Player(2).forcedTimer == 2 and not Misc.isPaused() then
-					pipecounter2 = pipecounter2 - 1
-					SFX.play(playersounds.playeronesound17, 1, 1, 70)
-				end
-				if pipecounter2 <= 0 then
-					if playersounds.playeronesound17.playing then
-						playersounds.playeronesound17:stop()
+			if player:mem(0x74, FIELD_WORD) == 1 then
+				SFX.play(playersounds.playeronesound55)
+				if player:mem(0x74, FIELD_WORD) >= 2 then
+					if playersounds.playeronesound55.playing then
+						playersounds.playeronesound55:stop()
 					end
 				end
 			end
-			if Player(2).forcedState == FORCEDSTATE_DOOR then
-				if Player(2).forcedTimer == 0 and not Misc.isPaused() then
-					doorcounter2 = doorcounter2 - 1
-					SFX.play(playersounds.playeronesound46, 1, 1, 70)
+		end
+		if Player(2) and Player(2).isValid then
+			if not Misc.isPaused() then
+				if Player(2).forcedState == FORCEDSTATE_POWERUP_BIG or Player(2).forcedState == FORCEDSTATE_POWERUP_FIRE or Player(2).forcedState == FFORCEDSTATE_POWERUP_HAMMER or Player(2).forcedState == FORCEDSTATE_POWERUP_ICE then
+					if Player(2).forcedTimer == 0 then
+						SFX.play(playersounds.playertwosound6)
+					end
 				end
-				if Player(2).forcedTimer == 2 and not Misc.isPaused() then
-					doorcounter2 = doorcounter2 - 1
-					SFX.play(playersounds.playeronesound46, 1, 1, 70)
+				if Player(2).forcedState == FORCEDSTATE_POWERUP_LEAF or Player(2).forcedState == FORCEDSTATE_POWERUP_TANOOKI then
+					if Player(2).forcedTimer == 0 then
+						SFX.play(playersounds.playertwosound34)
+					end
 				end
-				if doorcounter2 <= 0 then
-					if playersounds.playeronesound46.playing then
-						playersounds.playeronesound46:stop()
+				if Player(2).forcedState == FORCEDSTATE_POWERDOWN_SMALL and not Player(2).hasStarman then
+					if Player(2).forcedTimer == 0 then
+						SFX.play(playersounds.playertwosound5)
+					end
+				end
+				if Player(2).forcedState == FORCEDSTATE_PIPE then
+					if Player(2).forcedTimer == 0 and not Misc.isPaused() then
+						pipecounter2 = pipecounter2 - 1
+						SFX.play(playersounds.playertwosound17, 1, 1, 190)
+					end
+					if Player(2).forcedTimer == 2 and not Misc.isPaused() then
+						pipecounter2 = pipecounter2 - 1
+						SFX.play(playersounds.playertwosound17, 1, 1, 190)
+					end
+					if pipecounter2 <= 0 then
+						if playersounds.playeronesound17.playing then
+							playersounds.playertwosound17:stop()
+						end
+					end
+				end
+				if Player(2).forcedState == FORCEDSTATE_DOOR then
+					if Player(2).forcedTimer == 0 then
+						doorcounter2 = doorcounter2 - 1
+						SFX.play(playersounds.playertwosound46, 1, 1, 70)
+					end
+					if Player(2).forcedTimer == 2 then
+						doorcounter2 = doorcounter2 - 1
+						SFX.play(playersounds.playertwosound46, 1, 1, 70)
+					end
+					if doorcounter2 <= 0 then
+						if playersounds.playertwosound46.playing then
+							playersounds.playertwosound46:stop()
+						end
+					end
+				end
+				if Player(2):mem(0x3C, FIELD_BOOL) == true then
+					slidecounter2 = slidecounter2 - 1
+					SFX.play(playersounds.playertwosound10)
+				end
+				if slidecounter2 <= 0 then
+					slidecounter2 = 1
+					if playersounds.playertwosound10.playing then
+						playersounds.playertwosound10:stop()
+					end
+				end
+				if Player(2):mem(0x74, FIELD_WORD) == 1 then
+					swallowcounter2 = swallowcounter2 - 1
+					SFX.play(playersounds.playertwosound55)
+				end
+				if swallowcounter2 <= 0 then
+					swallowcounter2 = 1
+					if playersounds.playertwosound55.playing then
+						playersounds.playertwosound55:stop()
 					end
 				end
 			end
@@ -386,18 +434,13 @@ function playersounds.onPostPlayerKill()
 end
 
 
-function playersounds.onPostBlockHit(block)
+function playersounds.onPostBlockHit(block, fromUpper, playerOrNil)
 	local bricks = table.map{4,60,188,226}
-	if Player(1) then
-		if not Misc.isPaused() then
+	if not Misc.isPaused() then
+		if Player(1) then
 			SFX.play(playersounds.playeronesound3)
-			if block:mem(0x10, FIELD_STRING) then
-				if bricks[block.id] then
-					SFX.play(playersounds.playeronesound4)
-				end
-			end
-			if block.contentID == nil then
-				--No sound
+			if block.contentID == nil then --Question Blocks, Special Blocks, etc.
+				SFX.play(playersounds.playersound0)
 			end
 			if block.contentID == 1225 then
 				SFX.play(playersounds.playeronesound92)
@@ -405,36 +448,51 @@ function playersounds.onPostBlockHit(block)
 				SFX.play(playersounds.playeronesound92)
 			elseif block.contentID == 1227 then
 				SFX.play(playersounds.playeronesound92)
+			elseif block.contentID == 0 then
+				SFX.play(playersounds.playersound0)
+			elseif block.contentID == 1000 then
+				SFX.play(playersounds.playersound0)
 			elseif block.contentID >= 1001 then
 				SFX.play(playersounds.playeronesound7)
 			elseif block.contentID <= 99 then
 				SFX.play(playersounds.playeronesound14)
 			end
-		end
-	end
-	if Player(2) and Player(2).isValid then
-		if not Misc.isPaused() then
-			SFX.play(playersounds.playertwosound3)
-			if block:mem(0x10, FIELD_STRING) then
-				if bricks[block.id] then
-					SFX.play(playersounds.playertwosound4)
+			if block:mem(0x10, FIELD_STRING) then --Bricks
+				if bricks[block.id] == (block.contentID >= 1) then
+					SFX.play(playersounds.playersound0)
+				elseif bricks[block.id] then
+					SFX.play(playersounds.playeronesound4)
 				end
 			end
-			if block.contentID == nil then
-				--No sound
-			end
-			if block.contentID == 1225 then
-				SFX.play(playersounds.playertwosound92)
-			elseif block.contentID == 1226 then
-				SFX.play(playersounds.playertwosound92)
-			elseif block.contentID == 1227 then
-				SFX.play(playersounds.playertwosound92)
-			elseif block.contentID >= 1001 then
-				SFX.play(playersounds.playertwosound7)
-			elseif block.contentID == 1000 then
-				--No sound
-			elseif block.contentID >= 1 then
-				SFX.play(playersounds.playertwosound14)
+		end
+		if Player(2) and Player(2).isValid then
+			if not Misc.isPaused() then
+				SFX.play(playersounds.playertwosound3)
+				if block.contentID == nil then --Question Blocks, Special Blocks, etc.
+					SFX.play(playersounds.playersound0)
+				end
+				if block.contentID == 1225 then
+					SFX.play(playersounds.playertwosound92)
+				elseif block.contentID == 1226 then
+					SFX.play(playersounds.playertwosound92)
+				elseif block.contentID == 1227 then
+					SFX.play(playersounds.playertwosound92)
+				elseif block.contentID == 0 then
+					SFX.play(playersounds.playersound0)
+				elseif block.contentID == 1000 then
+					SFX.play(playersounds.playersound0)
+				elseif block.contentID >= 1001 then
+					SFX.play(playersounds.playertwosound7)
+				elseif block.contentID <= 99 then
+					SFX.play(playersounds.playertwosound14)
+				end
+				if block:mem(0x10, FIELD_STRING) then --Bricks
+					if bricks[block.id] == (block.contentID >= 1) then
+						SFX.play(playersounds.playersound0)
+					elseif bricks[block.id] then
+						SFX.play(playersounds.playertwosound4)
+					end
+				end
 			end
 		end
 	end
@@ -444,15 +502,21 @@ end
 function playersounds.onPostPlayerHarm()
 	if Player(1) then
 		if not Misc.isPaused() then
-			if not player.hasStarman then
+			if not player.hasStarman or (player.mount == MOUNT_YOSHI) == false or (player.mount == MOUNT_BOOT) == false or (player.mount == MOUNT_CLOWNCAR) == false then
 				SFX.play(playersounds.playeronesound5)
+			end
+			if (player.mount == MOUNT_YOSHI) == true then
+				SFX.play(playersounds.playeronesound49)
 			end
 		end
 	end
 	if Player(2) and Player(2).isValid then
 		if not Misc.isPaused() then
-			if not Player(2).hasStarman then
+			if not Player(2).hasStarman or (Player(2).mount == MOUNT_YOSHI) == false or (Player(2).mount == MOUNT_BOOT) == false or (Player(2).mount == MOUNT_CLOWNCAR) == false then
 				SFX.play(playersounds.playertwosound5)
+			end
+			if (Player(2).mount == MOUNT_YOSHI) == true then
+				SFX.play(playersounds.playertwosound49)
 			end
 		end
 	end
@@ -467,12 +531,19 @@ function playersounds.onInputUpdate()
 			if player.climbing and player.rawKeys.jump == KEYS_PRESSED then
 				SFX.play(playersounds.playeronesound1)
 			end
-			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 then
+			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false then
 				if player.powerup == 3 then
 					SFX.play(playersounds.playeronesound18)
 				end
 				if player.powerup == 7 then
 					SFX.play(playersounds.playeronesound93)
+				end
+			end
+			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == true then
+				if player.mount == MOUNT_YOSHI and player:mem(0x10C, FIELD_WORD) then --If the tongue is out
+					SFX.play(playersounds.playeronesound50)
+				elseif player:mem(0x160, FIELD_WORD) >= 1 then
+					SFX.play(playersounds.playersound0)
 				end
 			end
 			if player.rawKeys.altJump == KEYS_PRESSED and player:mem(0x52, FIELD_WORD) >= 0 and player:isGroundTouching() then
@@ -485,15 +556,22 @@ function playersounds.onInputUpdate()
 			if Player(2).rawKeys.jump == KEYS_PRESSED and Player(2):isGroundTouching() then
 				SFX.play(playersounds.playertwosound1)
 			end
-			if Player(2).rawKeys.jump == KEYS_PRESSED and Player(2).isClimbing then
+			if Player(2).climbing and Player(2).rawKeys.jump == KEYS_PRESSED then
 				SFX.play(playersounds.playertwosound1)
 			end
-			if Player(2).rawKeys.run == KEYS_PRESSED and Player(2):mem(0x160, FIELD_WORD) <= 0 then
+			if Player(2).rawKeys.run == KEYS_PRESSED and Player(2):mem(0x160, FIELD_WORD) <= 0 and (Player(2).mount == MOUNT_YOSHI) == false and Player(2).climbing == false  then
 				if Player(2).powerup == 3 then
 					SFX.play(playersounds.playertwosound18)
 				end
 				if player.powerup == 7 then
 					SFX.play(playersounds.playertwosound93)
+				end
+			end
+			if Player(2).rawKeys.run == KEYS_PRESSED and Player(2):mem(0x160, FIELD_WORD) <= 0 and (Player(2).mount == MOUNT_YOSHI) == true then
+				if Player(2).mount == MOUNT_YOSHI and Player(2):mem(0x10C, FIELD_WORD) then --If the tongue is out
+					SFX.play(playersounds.playertwosound50)
+				elseif Player(2):mem(0x160, FIELD_WORD) >= 1 then
+					SFX.play(playersounds.playersound0)
 				end
 			end
 			if Player(2).rawKeys.altJump == KEYS_PRESSED and player:mem(0x52, FIELD_WORD) >= 0 and Player(2):isGroundTouching() then
@@ -518,6 +596,21 @@ function playersounds.onPostNPCKill(npc, harmtype)
 			end
 			if harmtype == HARM_TYPE_NPC then
 				SFX.play(playersounds.playeronesound9)
+			end
+			if harmtype == HARM_TYPE_HELD then
+				SFX.play(playersounds.playeronesound9)
+			end
+			if harmtype == HARM_TYPE_LAVA then
+				SFX.play(playersounds.playeronesound16)
+			end
+			if harmtype == HARM_TYPE_TAIL then
+				SFX.play(playersounds.playeronesound9)
+			end
+			if harmtype == HARM_TYPE_SPINJUMP then
+				SFX.play(playersounds.playeronesound36)
+			end
+			if harmtype == HARM_TYPE_SWORD then
+				SFX.play(playersounds.playeronesound53)
 			end
 			if harmtype == HARM_TYPE_EXT_FIRE then
 				SFX.play(playersounds.playeronesound9)
@@ -561,23 +654,9 @@ function playersounds.onPostNPCKill(npc, harmtype)
 				SFX.play(playersounds.playeronesound60)
 			end
 			if npc.id == 274 then
-				if NPC.config[274].score == 6 then
-					SFX.play(playersounds.playeronesound59)
-				end
-				if NPC.config[274].score == 7 then
-					SFX.play(playersounds.playeronesound59)
-				end
-				if NPC.config[274].score == 8 then
-					SFX.play(playersounds.playeronesound59)
-				end
-				if NPC.config[274].score == 9 then
-					SFX.play(playersounds.playeronesound59)
-				end
-				if NPC.config[274].score == 10 then
-					SFX.play(playersounds.playeronesound59)
-				end
-				if NPC.config[274].score == 11 then
-					SFX.play(playersounds.playeronesound59)
+				SFX.play(playersounds.playeronesound59)
+				if NPC.config[npc.id].score >= 11 then
+					--Play 1UP sound as well
 					SFX.play(playersounds.playeronesound15)
 				end
 			end
@@ -614,6 +693,42 @@ function playersounds.onPostNPCKill(npc, harmtype)
 			end
 			if oneups[npc.id] then
 				SFX.play(playersounds.playertwosound15)
+			end
+			if npc.id == 11 then
+				SFX.play(playersounds.playertwosound19)
+			end
+			if npc.id == 16 then
+				SFX.play(playersounds.playertwosound21)
+			end
+			if npc.id == 41 then
+				SFX.play(playersounds.playertwosound40)
+			end
+			if npc.id == 97 then
+				SFX.play(playersounds.playertwosound52)
+			end
+			if npc.id == 197 then
+				SFX.play(playersounds.playertwosound60)
+			end
+			if npc.id == 274 then
+				if NPC.config[274].score == 6 then
+					SFX.play(playersounds.playertwosound59)
+				end
+				if NPC.config[274].score == 7 then
+					SFX.play(playersounds.playertwosound59)
+				end
+				if NPC.config[274].score == 8 then
+					SFX.play(playersounds.playertwosound59)
+				end
+				if NPC.config[274].score == 9 then
+					SFX.play(playersounds.playertwosound59)
+				end
+				if NPC.config[274].score == 10 then
+					SFX.play(playersounds.playertwosound59)
+				end
+				if NPC.config[274].score == 11 then
+					SFX.play(playersounds.playertwosound59)
+					SFX.play(playersounds.playertwosound15)
+				end
 			end
 		end
 	end
