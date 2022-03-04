@@ -127,6 +127,10 @@ playersounds.playeronesound95 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound
 playersounds.playeronesound96 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/2up.ogg"))
 playersounds.playeronesound97 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/3up.ogg"))
 playersounds.playeronesound98 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/5up.ogg"))
+playersounds.playeronesound99 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/dragon-coin-get2.ogg"))
+playersounds.playeronesound100 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/dragon-coin-get3.ogg"))
+playersounds.playeronesound101 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/dragon-coin-get4.ogg"))
+playersounds.playeronesound102 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player1/dragon-coin-get5.ogg"))
 
 --Player(2)
 playersounds.playertwosound1 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/player-jump2.ogg"))
@@ -226,6 +230,10 @@ playersounds.playertwosound95 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound
 playersounds.playertwosound96 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/2up2.ogg"))
 playersounds.playertwosound97 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/3up2.ogg"))
 playersounds.playertwosound98 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/5up2.ogg"))
+playersounds.playertwosound99 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/dragon-coin2-get2.ogg"))
+playersounds.playertwosound100 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/dragon-coin2-get3.ogg"))
+playersounds.playertwosound101 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/dragon-coin2-get4.ogg"))
+playersounds.playertwosound102 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/player2/dragon-coin2-get5.ogg"))
 
 local winstates = {
         [LEVEL_END_STATE_ROULETTE] = true,
@@ -638,6 +646,9 @@ function playersounds.onPostNPCKill(npc, harmtype)
 			if oneups[npc.id] then
 				SFX.play(playersounds.playeronesound15)
 			end
+			if npc.id == 188 then
+				SFX.play(playersounds.playeronesound97)
+			end
 			if npc.id == 11 then
 				SFX.play(playersounds.playeronesound19)
 			end
@@ -654,9 +665,19 @@ function playersounds.onPostNPCKill(npc, harmtype)
 				SFX.play(playersounds.playeronesound60)
 			end
 			if npc.id == 274 then
-				SFX.play(playersounds.playeronesound59)
-				if NPC.config[npc.id].score >= 11 then
+				if NPC.config[npc.id].score == 6 then
+					SFX.play(playersounds.playeronesound59)
+				elseif NPC.config[npc.id].score == 7 then
+					SFX.play(playersounds.playeronesound59)
+				elseif NPC.config[npc.id].score == 8 then
+					SFX.play(playersounds.playeronesound99)
+				elseif NPC.config[npc.id].score == 9 then
+					SFX.play(playersounds.playeronesound100)
+				elseif NPC.config[npc.id].score == 10 then
+					SFX.play(playersounds.playeronesound101)
+				elseif NPC.config[npc.id].score >= 11 then
 					--Play 1UP sound as well
+					SFX.play(playersounds.playeronesound102)
 					SFX.play(playersounds.playeronesound15)
 				end
 			end
@@ -710,23 +731,18 @@ function playersounds.onPostNPCKill(npc, harmtype)
 				SFX.play(playersounds.playertwosound60)
 			end
 			if npc.id == 274 then
-				if NPC.config[274].score == 6 then
+				if NPC.config[npc.id].score == 6 then
 					SFX.play(playersounds.playertwosound59)
-				end
-				if NPC.config[274].score == 7 then
-					SFX.play(playersounds.playertwosound59)
-				end
-				if NPC.config[274].score == 8 then
-					SFX.play(playersounds.playertwosound59)
-				end
-				if NPC.config[274].score == 9 then
-					SFX.play(playersounds.playertwosound59)
-				end
-				if NPC.config[274].score == 10 then
-					SFX.play(playersounds.playertwosound59)
-				end
-				if NPC.config[274].score == 11 then
-					SFX.play(playersounds.playertwosound59)
+				elseif NPC.config[npc.id].score == 7 then
+					SFX.play(playersounds.playertwosound99)
+				elseif NPC.config[npc.id].score == 8 then
+					SFX.play(playersounds.playertwosound100)
+				elseif NPC.config[npc.id].score == 9 then
+					SFX.play(playersounds.playertwosound101)
+				elseif NPC.config[npc.id].score == 10 then
+					SFX.play(playersounds.playertwosound102)
+				elseif NPC.config[npc.id].score >= 11 then
+					--Play 1UP sound as well
 					SFX.play(playersounds.playertwosound15)
 				end
 			end
