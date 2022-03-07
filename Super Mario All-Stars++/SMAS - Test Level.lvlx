@@ -4,7 +4,7 @@ HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:15;MF:"";BG:10;
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:24;MF:"_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg";BG:6;OE:1;
-SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario World (NES\, Pirate) - OST.nsf|0\;g=2";BG:2;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Legend of Zelda - Link's Awakening (Switch)/38_Dangeon_Castle.ry.48.dspadpcm.ogg";BG:2;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Undertale/mus_dogsong.ogg";BG:5;CS:1;CSV:1;
 SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Advance 4/Normal Level 1.ogg";BG:58;CS:1;CSV:1;
 SC:5;L:-100000;R:-99200;T:-100600;B:-100000;MZ:0;MF:"";BG:0;
