@@ -9,12 +9,10 @@ local bowser
 if not isOverworld then
     bowser = require("characters/bowser")
 end
-local playersounds = require("playersounds")
 
 anotherPowerDownLibrary.enabled = true
 anotherPowerDownLibrary.customForcedState = 751
-anotherPowerDownLibrary.powerDownSFX = playersounds.playeronesound5
-anotherPowerDownLibrary.powerDownSFXp2 = playersounds.playertwosound5
+anotherPowerDownLibrary.powerDownSFX = 5
 
 local usableCharacters = { --most characters either don't work with it or have unique enough gameplay that warrants exclusion
     [CHARACTER_MARIO] = true,
@@ -50,11 +48,7 @@ function anotherPowerDownLibrary.onPlayerHarm(event, p)
             event.cancelled = false
         elseif p.powerup > 2 and p.mount == MOUNT_NONE and not p:mem(0x0C, FIELD_BOOL) and p:mem(0x16, FIELD_WORD) < 3 and not p.hasStarman then
             event.cancelled = true
-			if player then
-				SFX.play(anotherPowerDownLibrary.powerDownSFX)
-			elseif Player(2) and Player(2).isValid then
-				SFX.play(anotherPowerDownLibrary.powerDownSFXp2)
-			end
+			SFX.play(anotherPowerDownLibrary.powerDownSFX)
             p.forcedState = anotherPowerDownLibrary.customForcedState
         end
     end
