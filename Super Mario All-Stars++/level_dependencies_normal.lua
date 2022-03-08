@@ -6,6 +6,7 @@ local autoscroll = require("autoscroll")
 local datetime = require("datetime")
 local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
+local extrasounds = require("extrasounds")
 
 local dying = false;
 local deathVisibleCount = 198;

@@ -5,6 +5,7 @@ local textplus = require("textplus")
 local autoscroll = require("autoscroll")
 local datetime = require("datetime")
 local Routine = require("routine")
+local extrasounds = require("extrasounds")
 
 local costumes = {}
 
