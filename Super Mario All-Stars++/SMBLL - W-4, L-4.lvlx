@@ -2126,7 +2126,7 @@ ID:476;X:-174560;Y:-180080;D:-1;
 ID:589;X:-174014;Y:-180096;D:-1;XTRA:"{\n    \"jumpHeight\"\: 200\,\n    \"useFixed\"\: true\n}\n";
 ID:178;X:-173152;Y:-180224;D:-1;ED:"Axe";
 ID:796;X:-173344;Y:-180232;D:-1;EA:"Bowser Appear";ED:"Bowser Dead";
-ID:94;X:-172704;Y:-180118;D:-1;MG:"Thank you Mario! But our princess is in another castle!";FD:1;
+ID:94;X:-172704;Y:-180118;D:-1;MG:"Thank you <characterName>! But our princess is in another castle!";FD:1;
 ID:184;X:-174304;Y:-180224;D:-1;NM:1;
 ID:770;X:-179328;Y:-180192;D:-1;XTRA:"{\n    \"length\"\: 12\,\n    \"speed\"\: 3\n}\n";
 ID:770;X:-178272;Y:-180224;D:-1;XTRA:"{\n    \"length\"\: 12\,\n    \"speed\"\: 3\n}\n";
