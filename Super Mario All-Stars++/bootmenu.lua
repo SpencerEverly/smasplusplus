@@ -4,6 +4,7 @@ local textplus = require("textplus")
 --if Misc.inEditor() then
 	--Misc.showRichDialog("SMAS++ Boot Menu Level", "Hello!\n\nYou are trying to access the boot level through the editor. What are YOU doing here?\nI bet you just wanna snoop around and mess with the episode, eh?\n\nOh well, I don't blame you. Everything is open, so go right ahead!", true)
 --end
+local extrasounds = require("extrasounds")
 local autoscroll = require("autoscrolla")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
@@ -18,6 +19,7 @@ runPressedState = false
 
 local bootmenu = {}
 
+extrasounds.active = false
 bootmenu.active = true
 
 local aprilfools = false

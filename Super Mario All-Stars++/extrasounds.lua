@@ -1,17 +1,18 @@
+--extrasounds.lua by Spencer Everly
+--
+--To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,14,15,18,59 from (example):
+--
+--Audio.sounds[14].sfx = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
+--to
+--extrasounds.playersoundid14 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/(character)/(costume)/coin.ogg"))
+--
+--Check the lua file for info on which things does what
+
 local extrasounds = {}
 
-local ready = false
+extrasounds.active = true --Are the extra sounds active? If not, they won't play. If false the library won't be used and will revert to the stock sound system. Useful for muting all sounds for a boot menu, cutscene, or something like that by using Audio.sounds[id].muted = true instead.
 
-local climbsfxtimer = 1
-
-local pipecounter = 1
-local doorcounter = 1
-local slidecounter = 1
-local swallowcounter = 1
-local pipecounter2 = 1
-local doorcounter2 = 1
-local slidecounter2 = 1
-local swallowcounter2 = 1
+local ready = false --This library isn't ready until onInit is finished
 
 extrasounds.playersoundid0 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/nothing.ogg")) --General sound to mute anything, really
 
@@ -122,7 +123,7 @@ extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/drago
 extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get5.ogg"))
 extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/cherry.ogg"))
 
-function extrasounds.onInitAPI() --This'll require a bunch of events just in case
+function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
 	registerEvent(extrasounds, "onDraw")
 	registerEvent(extrasounds, "onLevelExit")
@@ -139,45 +140,56 @@ function extrasounds.onInitAPI() --This'll require a bunch of events just in cas
 	
 	local Routine = require("routine")
 	
-	ready = true
+	ready = true --We're ready, so we can begin
 end
 
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
-	Audio.sounds[4].muted = true
-	Audio.sounds[7].muted = true
-	Audio.sounds[14].muted = true
-	Audio.sounds[15].muted = true
-	Audio.sounds[18].muted = true
-	Audio.sounds[59].muted = true
-	
+	if extrasounds.active == true then --Only mute when active
+		Audio.sounds[4].muted = true
+		Audio.sounds[7].muted = true
+		Audio.sounds[14].muted = true
+		Audio.sounds[15].muted = true
+		Audio.sounds[18].muted = true
+		Audio.sounds[59].muted = true
+	end
+	if extrasounds.active == false then --Unmute when not active
+		Audio.sounds[4].muted = false
+		Audio.sounds[7].muted = false
+		Audio.sounds[14].muted = false
+		Audio.sounds[15].muted = false
+		Audio.sounds[18].muted = false
+		Audio.sounds[59].muted = false
+	end
 end
 
 function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil) --Let's start off with block hitting.
 	local bricks = table.map{4,60,188,226} --These are a list of breakable bricks.
 	if not Misc.isPaused() then --Making sure the sound only plays when not paused...
-		if block.contentID == nil then --For blocks that are already used
-			SFX.play(extrasounds.playersoundid0)
-		end
-		if block.contentID == 1225 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
-			SFX.play(extrasounds.playersoundid92)
-		elseif block.contentID == 1226 then
-			SFX.play(extrasounds.playersoundid92)
-		elseif block.contentID == 1227 then
-			SFX.play(extrasounds.playersoundid92)
-		elseif block.contentID == 0 then --This is to prevent a coin sound from playing when hitting an nonexistant block
-			SFX.play(extrasounds.playersoundid0)
-		elseif block.contentID == 1000 then --Same as last
-			SFX.play(extrasounds.playersoundid0)
-		elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
-			SFX.play(extrasounds.playersoundid7)
-		elseif block.contentID <= 99 then --Elseif, we'll play a coin sounds with things less than 99, the coin block limit
-			SFX.play(extrasounds.playersoundid14)
-		end
-		if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
-			if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+		if extrasounds.active == true then --If it's true, play them
+			if block.contentID == nil then --For blocks that are already used
 				SFX.play(extrasounds.playersoundid0)
-			elseif bricks[block.id] then --Or else play it
-				SFX.play(extrasounds.playersoundid4)
+			end
+			if block.contentID == 1225 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
+				SFX.play(extrasounds.playersoundid92)
+			elseif block.contentID == 1226 then
+				SFX.play(extrasounds.playersoundid92)
+			elseif block.contentID == 1227 then
+				SFX.play(extrasounds.playersoundid92)
+			elseif block.contentID == 0 then --This is to prevent a coin sound from playing when hitting an nonexistant block
+				SFX.play(extrasounds.playersoundid0)
+			elseif block.contentID == 1000 then --Same as last
+				SFX.play(extrasounds.playersoundid0)
+			elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
+				SFX.play(extrasounds.playersoundid7)
+			elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
+				SFX.play(extrasounds.playersoundid14)
+			end
+			if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
+				if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+					SFX.play(extrasounds.playersoundid0)
+				elseif bricks[block.id] then --Or else play it
+					SFX.play(extrasounds.playersoundid4)
+				end
 			end
 		end
 	end
@@ -185,12 +197,14 @@ end
 
 function extrasounds.onInputUpdate() --Button pressing for such commands
 	if not Misc.isPaused() then
-		if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, or the fireball/iceball cooldown is less than 0 before playing
-			if player.powerup == 3 then --Fireball sound
-				SFX.play(extrasounds.playersoundid18)
-			end
-			if player.powerup == 7 then --Iceball sound
-				SFX.play(extrasounds.playersoundid93)
+		if extrasounds.active == true then
+			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, or the fireball/iceball cooldown is less than 0 before playing
+				if player.powerup == 3 then --Fireball sound
+					SFX.play(extrasounds.playersoundid18)
+				end
+				if player.powerup == 7 then --Iceball sound
+					SFX.play(extrasounds.playersoundid93)
+				end
 			end
 		end
 	end
@@ -202,36 +216,38 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
 	local oneups = table.map{90,186,187}
 	local threeups = table.map{188}
 	if not Misc.isPaused() then
-		if coins[npc.id] then --Any coin ID that was marked above will play this sound when collected
-			SFX.play(extrasounds.playersoundid14)
-		end
-		if npc.id == 558 then --Cherry sound effect
-			SFX.play(extrasounds.playersoundid103)
-		end
-		if oneups[npc.id] then --1UP sound effect, so 3UPs can have a custom sound
-			SFX.play(extrasounds.playersoundid15)
-		end
-		if npc.id == 188 then --3UP sound effect
-			SFX.play(extrasounds.playersoundid97)
-		end
-		if npc.id == 274 then --Dragon coin counter sounds
-			if NPC.config[npc.id].score == 6 then
-				SFX.play(extrasounds.playersoundid59)
-			elseif NPC.config[npc.id].score == 7 then
-				SFX.play(extrasounds.playersoundid59)
-			elseif NPC.config[npc.id].score == 8 then
-				SFX.play(extrasounds.playersoundid99)
-			elseif NPC.config[npc.id].score == 9 then
-				SFX.play(extrasounds.playersoundid100)
-			elseif NPC.config[npc.id].score == 10 then
-				SFX.play(extrasounds.playersoundid101)
-			elseif NPC.config[npc.id].score >= 11 then
-				--Play 1UP sound as well when it says "1UP"
+		if extrasounds.active == true then
+			if coins[npc.id] then --Any coin ID that was marked above will play this sound when collected
+				SFX.play(extrasounds.playersoundid14)
+			end
+			if npc.id == 558 then --Cherry sound effect
+				SFX.play(extrasounds.playersoundid103)
+			end
+			if oneups[npc.id] then --1UP sound effect, so 3UPs can have a custom sound
 				SFX.play(extrasounds.playersoundid15)
-				SFX.play(extrasounds.playersoundid102)
+			end
+			if npc.id == 188 then --3UP sound effect
+				SFX.play(extrasounds.playersoundid97)
+			end
+			if npc.id == 274 then --Dragon coin counter sounds
+				if NPC.config[npc.id].score == 6 then
+					SFX.play(extrasounds.playersoundid59)
+				elseif NPC.config[npc.id].score == 7 then
+					SFX.play(extrasounds.playersoundid59)
+				elseif NPC.config[npc.id].score == 8 then
+					SFX.play(extrasounds.playersoundid99)
+				elseif NPC.config[npc.id].score == 9 then
+					SFX.play(extrasounds.playersoundid100)
+				elseif NPC.config[npc.id].score == 10 then
+					SFX.play(extrasounds.playersoundid101)
+				elseif NPC.config[npc.id].score >= 11 then
+					--Play 1UP sound as well when it says "1UP"
+					SFX.play(extrasounds.playersoundid15)
+					SFX.play(extrasounds.playersoundid102)
+				end
 			end
 		end
 	end
 end
 
-return extrasounds
+return extrasounds --This ends the library
