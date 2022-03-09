@@ -20,21 +20,18 @@ local player2 = Player(2)
 
 local littleDialogue = {}
 
+littleDialogue.boxenabled = false
 local cooldown = 0
 
 local smallScreen
 pcall(function() smallScreen = require("smallScreen") end)
 
-littleDialogue.boxenabled = false
-
-
 function littleDialogue.onInitAPI()
     registerEvent(littleDialogue,"onTick")
     registerEvent(littleDialogue,"onDraw")
-
+	registerEvent(littleDialogue,"onInputUpdate")
     registerEvent(littleDialogue,"onMessageBox")
 end
-
 
 local function getBoundaries()
     local b = camera.bounds
@@ -692,10 +689,6 @@ function littleDialogue.create(args)
 
     box.openingProgress = 0
     box.state = STATE.IN
-	
-	if box.state == STATE.IN then
-		littleDialogue.boxenabled = true
-	end
 
     box.page = 1
 
@@ -746,7 +739,6 @@ function littleDialogue.create(args)
 
     if box.pauses then
         Misc.pause(true)
-		littleDialogue.boxenabled = true
     end
 
     if not box.silent and box.settings.openSoundEnabled then
@@ -755,7 +747,6 @@ function littleDialogue.create(args)
 	
 	if box.closebox == true then
 		box.state = STATE.OUT
-		littleDialogue.boxenabled = false
 	end
 
 	
@@ -1439,7 +1430,6 @@ function boxInstanceFunctions:update()
 
         if self.openingProgress == 0 then
             self.state = STATE.REMOVE
-
             if self.pauses then
                 Misc.unpause()
             end
@@ -2000,6 +1990,12 @@ function littleDialogue.onTick()
             table.remove(littleDialogue.boxes,k)
             box.isValid = false
         end
+		if box.state == STATE.STAY then
+			littleDialogue.boxenabled = true
+		end
+		if box.state == STATE.REMOVE then
+			littleDialogue.boxenabled = false
+		end
     end
 end
 
@@ -2035,6 +2031,19 @@ function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
 	end
 
     eventObj.cancelled = true
+end
+
+function littleDialogue.onInputUpdate()
+	for k=#littleDialogue.boxes,1,-1 do
+        local box = littleDialogue.boxes[k]
+		
+		if box.state ~= STATE.IN then
+			player.keys.up = KEYS_PRESSED
+		end
+		if box.state == STATE.REMOVE then
+			player.keys.up = KEYS_UNPRESSED
+		end
+	end
 end
 
 
