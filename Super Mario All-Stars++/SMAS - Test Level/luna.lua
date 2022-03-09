@@ -5,7 +5,7 @@ local littleDialogue = require("littleDialogue")
 local pausemenu = require("pausemenu")
 --local megaluavania = require("megaluavania")
 local debugbox = require("debugbox") --Uncomment in the final release
---local playersounds = require("playersounds")
+local extrasounds = require("extrasounds")
 
 warpTransition.musicFadeOut = false
 warpTransition.levelStartTransition = warpTransition.TRANSITION_IRIS_OUT
