@@ -401,16 +401,16 @@ function globalgenerals.onTick()
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/14-NSMBDS-SMBX/starman")
-		starman.duration[996] = 962
-		starman.duration[994] = 962
+		starman.duration[996] = 641
+		starman.duration[994] = 641
 		warpTransition.doorclose = ("door-close.ogg")
 	end
 	if currentCostume == "14-NSMBDS-ORIGINAL" then
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/14-NSMBDS-Original/starman")
-		starman.duration[996] = 962
-		starman.duration[994] = 962
+		starman.duration[996] = 641
+		starman.duration[994] = 641
 		warpTransition.doorclose = ("door-close.ogg")
 	end
 	if currentCostume == "A2XT-DEMO" then
