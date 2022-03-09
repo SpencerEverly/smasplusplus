@@ -252,6 +252,11 @@ function globalgenerals.onTick()
 	
 	if SaveData.disableX2char == 1 then
 		warpTransition.doorclose = ("_OST/_Sound Effects/nothing.ogg")
+		Player.setCostume(1, nil)
+		Player.setCostume(2, nil)
+		Player.setCostume(3, nil)
+		Player.setCostume(4, nil)
+		Player.setCostume(5, nil)
 	end
 	
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then

@@ -95,7 +95,11 @@ function onTick()
 	end
 	if SaveData.disableX2char == 1 then
 		triggerEvent("HideX2Stuff")
-		--Player.setCostume(1, nil)
+		Player.setCostume(1, nil)
+		Player.setCostume(2, nil)
+		Player.setCostume(3, nil)
+		Player.setCostume(4, nil)
+		Player.setCostume(5, nil)
 	end
 	if player.section == 9 then
 		Text.printWP("Welcome to the information booth.", 10, 577, 5)
