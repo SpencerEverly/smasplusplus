@@ -1586,5 +1586,5 @@ ET:"Flying Block 1";TE:"Flying Block 2";TD:20;ML:"Flying Block";MX:0.984615;MY:0
 ET:"Flying Block 2";TE:"Flying Block 1";TD:20;ML:"Flying Block";MX:0.984615;MY:-0.492308;AS:0;AX:0;AY:0;
 ET:"Flying Block (Hit 1)";LS:["Event Activator 2"];ML:"Flying Block";MX:0;MY:0;AS:0;AX:0;AY:0;
 ET:"Flying Block (Hit 2)";LH:["Event Activator 2"];ML:"Flying Block";MX:0;MY:0;AS:0;AX:0;AY:0;
-ET:"Point of Advice";MG:"-POINT OF ADVICE-<page>You can hold an extra item in the box at the top of the screen. To use it\, press the \"Drop Item\" Button that's set in the SMBX2 options.";AS:0;AX:0;AY:0;
+ET:"Point of Advice";MG:"-POINT OF ADVICE-<page>You can hold extra items in the inventory on the bottom left corner. To use it\, press the -Drop Item- Button that's set using Left Shift (Or any other key you assigned it to).";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
