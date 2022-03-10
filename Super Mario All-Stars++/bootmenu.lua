@@ -1167,7 +1167,7 @@ end
 
 function bootmenu.onInputUpdate()
 	if player.rawKeys.pause == KEYS_PRESSED then
-		--Routine.run(ExitGame1)
+		Routine.run(ExitGame1)
 	end
 	if GameData.startedmenu == 0 then
 		if player.keys.jump == KEYS_PRESSED then
