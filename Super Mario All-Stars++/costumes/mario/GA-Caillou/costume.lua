@@ -1,19 +1,9 @@
 local pm = require("playerManager")
-local spintrail = require ("a2xt_spintrail")
+local extrasounds = require("extrasounds")
 
 local costume = {}
 
-function costume.onInit(playerObj)
-	registerEvent(costume,"onTick")
-	Defines.jumpheight = 19
-	Defines.player_walkspeed = 2.6
-	Defines.player_runspeed = 6.3
-	Defines.jumpheight_bounce = 29.5
-	Defines.player_grav = 0.42
-	ready = true
-end
-
-function costume.onTick()
+function costume.onInit(p)
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/stomped.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-shrink.ogg")
@@ -32,9 +22,14 @@ function costume.onTick()
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/player-died2.ogg")
 	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/grab2.ogg")
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/smb2-throw.ogg")
+	Defines.jumpheight = 19
+	Defines.player_walkspeed = 2.6
+	Defines.player_runspeed = 6.3
+	Defines.jumpheight_bounce = 29.5
+	Defines.player_grav = 0.42
 end
 
-function costume.onCleanup(playerObj)
+function costume.onCleanup(p)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
@@ -48,11 +43,11 @@ function costume.onCleanup(playerObj)
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	Audio.sounds[14].sfx = nil
-	Audio.sounds[15].sfx = nil
+	extrasounds.playersoundid14 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/coin.ogg"))
+	extrasounds.playersoundid15 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/1up.ogg"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	Audio.sounds[18].sfx = nil
+	extrasounds.playersoundid18 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/fireball.ogg"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil
@@ -102,6 +97,18 @@ function costume.onCleanup(playerObj)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
+	extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/sprout-vine.ogg"))
+	extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/iceball.ogg"))
+	extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_freeze.ogg"))
+	extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_icebreak.ogg"))
+	extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/2up.ogg"))
+	extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/3up.ogg"))
+	extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/5up.ogg"))
+	extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get2.ogg"))
+	extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get3.ogg"))
+	extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get4.ogg"))
+	extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get5.ogg"))
+	extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/cherry.ogg"))
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 3
 	Defines.player_runspeed = 6

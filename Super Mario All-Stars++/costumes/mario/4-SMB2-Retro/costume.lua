@@ -1,4 +1,5 @@
 local pm = require("playerManager")
+local extrasounds = require("extrasounds")
 
 local costume = {}
 
@@ -6,21 +7,21 @@ function costume.onInit(p)
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/block-hit.ogg")
-	Audio.sounds[4].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/block-smash.ogg")
+	extrasounds.playersoundid4  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/block-smash.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/player-grow.ogg")
-	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/mushroom.ogg")
+	extrasounds.playersoundid7  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/mushroom.ogg")
 	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/player-died.ogg")
 	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/shell-hit.ogg")
 	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/player-slide.ogg")
 	Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/item-dropped.ogg")
 	Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/has-item.ogg")
 	Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/camera-change.ogg")
-	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/coin.ogg")
-	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/1up.ogg")
+	extrasounds.playersoundid14 = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/coin.ogg")
+	extrasounds.playersoundid15 = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/1up.ogg")
 	Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/lava.ogg")
 	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/warp.ogg")
-	Audio.sounds[18].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/fireball.ogg")
+	extrasounds.playersoundid18 = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/fireball.ogg")
 	Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/level-win.ogg")
 	Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/boss-beat.ogg")
 	Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/dungeon-win.ogg")
@@ -53,7 +54,7 @@ function costume.onInit(p)
 	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/yoshi-swallow.ogg")
 	Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/dry-bones.ogg")
 	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/smw-checkpoint.ogg")
-	Audio.sounds[59].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/dragon-coin.ogg")
+	extrasounds.playersoundid59 = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/dragon-coin.ogg")
 	Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/smw-blaarg.ogg")
 	Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/wart-bubble.ogg")
 	Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/wart-die.ogg")
@@ -81,11 +82,11 @@ function costume.onCleanup(p)
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	Audio.sounds[14].sfx = nil
-	Audio.sounds[15].sfx = nil
+	extrasounds.playersoundid14 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/coin.ogg"))
+	extrasounds.playersoundid15 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/1up.ogg"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	Audio.sounds[18].sfx = nil
+	extrasounds.playersoundid18 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/fireball.ogg"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil
@@ -135,6 +136,18 @@ function costume.onCleanup(p)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
+	extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/sprout-vine.ogg"))
+	extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/iceball.ogg"))
+	extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_freeze.ogg"))
+	extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_icebreak.ogg"))
+	extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/2up.ogg"))
+	extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/3up.ogg"))
+	extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/5up.ogg"))
+	extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get2.ogg"))
+	extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get3.ogg"))
+	extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get4.ogg"))
+	extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get5.ogg"))
+	extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/cherry.ogg"))
 end
 
 return costume

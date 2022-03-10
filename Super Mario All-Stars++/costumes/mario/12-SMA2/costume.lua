@@ -17,6 +17,7 @@
 ]]
 
 local playerManager = require("playerManager")
+local extrasounds = require("extrasounds")
 
 local starman = require("starman/star")
 
@@ -567,21 +568,21 @@ function costume.onInit(p)
 		Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-jump.ogg")
 		Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/stomped.ogg")
 		Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/block-hit.ogg")
-		Audio.sounds[4].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/block-smash.ogg")
+		extrasounds.playersoundid4  = Audio.SfxOpen("costumes/mario/12-SMA2/block-smash.ogg")
 		Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-shrink.ogg")
 		Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-grow.ogg")
-		Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/mushroom.ogg")
+		extrasounds.playersoundid7  = Audio.SfxOpen("costumes/mario/12-SMA2/mushroom.ogg")
 		Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-died.ogg")
 		Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/shell-hit.ogg")
 		Audio.sounds[10].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/player-slide.ogg")
 		Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/item-dropped.ogg")
 		Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/has-item.ogg")
 		Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/camera-change.ogg")
-		Audio.sounds[14].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/coin.ogg")
-		Audio.sounds[15].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/1up.ogg")
+		extrasounds.playersoundid14 = Audio.SfxOpen("costumes/mario/12-SMA2/coin.ogg")
+		extrasounds.playersoundid15 = Audio.SfxOpen("costumes/mario/12-SMA2/1up.ogg")
 		Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/lava.ogg")
 		Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/warp.ogg")
-		Audio.sounds[18].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/fireball.ogg")
+		extrasounds.playersoundid18 = Audio.SfxOpen("costumes/mario/12-SMA2/fireball.ogg")
 		Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/level-win.ogg")
 		Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/boss-beat.ogg")
 		Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/dungeon-win.ogg")
@@ -610,7 +611,7 @@ function costume.onInit(p)
 		Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/yoshi-swallow.ogg")
 		Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/dry-bones.ogg")
 		Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smw-checkpoint.ogg")
-		Audio.sounds[59].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/dragon-coin.ogg")
+		extrasounds.playersoundid59 = Audio.SfxOpen("costumes/mario/12-SMA2/dragon-coin.ogg")
 		Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smw-blaarg.ogg")
 		Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/wart-bubble.ogg")
 		Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/wart-die.ogg")
@@ -662,7 +663,7 @@ end
 function costume.onCleanup(p)
 	-- Remove the player from the list
 	if costume.playerData[p] ~= nil then
-		Audio.sounds[1].sfx  = nil
+		Audio.sounds[1].sfx  = nil	
 		Audio.sounds[2].sfx  = nil
 		Audio.sounds[3].sfx  = nil
 		Audio.sounds[4].sfx  = nil
@@ -675,11 +676,11 @@ function costume.onCleanup(p)
 		Audio.sounds[11].sfx = nil
 		Audio.sounds[12].sfx = nil
 		Audio.sounds[13].sfx = nil
-		Audio.sounds[14].sfx = nil
-		Audio.sounds[15].sfx = nil
+		extrasounds.playersoundid14 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/coin.ogg"))
+		extrasounds.playersoundid15 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/1up.ogg"))
 		Audio.sounds[16].sfx = nil
 		Audio.sounds[17].sfx = nil
-		Audio.sounds[18].sfx = nil
+		extrasounds.playersoundid18 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/fireball.ogg"))
 		Audio.sounds[19].sfx = nil
 		Audio.sounds[20].sfx = nil
 		Audio.sounds[21].sfx = nil
@@ -695,10 +696,14 @@ function costume.onCleanup(p)
 		Audio.sounds[35].sfx = nil
 		Audio.sounds[36].sfx = nil
 		Audio.sounds[37].sfx = nil
+		Audio.sounds[38].sfx = nil
+		Audio.sounds[39].sfx = nil
+		Audio.sounds[41].sfx = nil
 		Audio.sounds[42].sfx = nil
 		Audio.sounds[43].sfx = nil
 		Audio.sounds[44].sfx = nil
 		Audio.sounds[46].sfx = nil
+		Audio.sounds[47].sfx = nil
 		Audio.sounds[48].sfx = nil
 		Audio.sounds[49].sfx = nil
 		Audio.sounds[50].sfx = nil
@@ -716,7 +721,6 @@ function costume.onCleanup(p)
 		Audio.sounds[71].sfx = nil
 		Audio.sounds[72].sfx = nil
 		Audio.sounds[73].sfx = nil
-		--Audio.sounds[74].sfx = nil
 		Audio.sounds[75].sfx = nil
 		Audio.sounds[76].sfx = nil
 		Audio.sounds[77].sfx = nil
@@ -726,6 +730,18 @@ function costume.onCleanup(p)
 		Audio.sounds[81].sfx = nil
 		Audio.sounds[82].sfx = nil
 		Audio.sounds[91].sfx = nil
+		extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/sprout-vine.ogg"))
+		extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/iceball.ogg"))
+		extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_freeze.ogg"))
+		extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_icebreak.ogg"))
+		extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/2up.ogg"))
+		extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/3up.ogg"))
+		extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/5up.ogg"))
+		extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get2.ogg"))
+		extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get3.ogg"))
+		extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get4.ogg"))
+		extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get5.ogg"))
+		extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/cherry.ogg"))
 		costume.playerData[p] = nil
 
 		local spot = table.ifind(costume.playersList,p)
