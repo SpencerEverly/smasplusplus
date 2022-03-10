@@ -2038,10 +2038,10 @@ function littleDialogue.onInputUpdate()
         local box = littleDialogue.boxes[k]
 		
 		if box.state ~= STATE.IN then
-			player.keys.up = KEYS_PRESSED
+			player.keys.down = KEYS_PRESSED
 		end
 		if box.state == STATE.REMOVE then
-			player.keys.up = KEYS_UNPRESSED
+			player.keys.down = KEYS_UNPRESSED
 		end
 	end
 end
