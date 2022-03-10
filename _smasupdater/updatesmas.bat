@@ -6,16 +6,29 @@ setlocal enableDelayedExpansion
 
 set /a size=80-1 & rem screen size minus one
 
-title Super Mario All-Stars++ Updater
+title Super Mario All-Stars++ Updater ^(v1.0.5^)
 echo Starting updater... MAKE SURE THIS BAT
-echo AND PortableGit IS IN THE WORLDS FOLDER
+echo IS IN THE SMBX2 FOLDER AND PortableGit IS IN
+echo THE WORLDS FOLDER
+pushd "%~dp0"
 @timeout 1 /nobreak>nul
 echo Checking for SMAS^+^+ updates...
 @timeout 0 /nobreak>nul
+cd data
+cd worlds
 if not exist .git ( goto nogit )
+if exist .git ( goto yesgit )
 
 :yesgit
 goto updatesmas
+
+:adminerror
+echo You can^'t run this as an admin.
+echo.
+echo Please restart the program as an normal elevated user
+echo and try again.
+pause
+exit
 
 :nogit
 PING -n 5 127.0.0.1>nul
@@ -25,12 +38,22 @@ set GIT_TRACE_PACKET=1
 set GIT_TRACE=1
 set GIT_CURL_VERBOSE=1
 call PortableGit\bin\git.exe pull origin main
-cls
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
-if not exist "SMBX2.exe" goto dataexists
-if exist "SMBX2.exe" goto launchsmbx2
+cd "Where SMB Attacks"
+__7zip\7zG.exe x "__World Map.7z" -aoa
+cd..
+cd..
+cd..
+echo Episode updated. Check above to see if there are any errors. If any,
+echo you can correct them by doing what is above.
+echo.
+echo If you want to run SMBX2.exe just press enter.
+echo If you don^'t want to^, just close this window.
+pause
+cls
+goto launchsmbx2
 
 :updatesmas
 echo Pulling the latest update from GitHub...
@@ -40,16 +63,27 @@ set GIT_TRACE_PACKET=1
 set GIT_TRACE=1
 set GIT_CURL_VERBOSE=1
 call PortableGit\bin\git.exe pull origin main
-cls
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
-if not exist "SMBX2.exe" goto dataexists
-if exist "SMBX2.exe" goto launchsmbx2
-
-:dataexists
+cd "Where SMB Attacks"
+__7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
+cd..
+cd..
+echo Episode updated. Check above to see if there are any errors. If any,
+echo you can correct them by doing what is above.
+echo.
+echo If you want to run SMBX2.exe just press enter.
+echo If you don^'t want to^, just close this window.
+pause
+cls
 goto launchsmbx2
+
+:dontlaunchsmbx2
+echo The episode has been updated^^! Exiting in 5 seconds...
+@timeout 5 /nobreak>nul
+exit
 
 :launchsmbx2
 start SMBX2.exe
