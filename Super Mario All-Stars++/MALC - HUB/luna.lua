@@ -49,6 +49,20 @@ areaNames.sectionNames = {
 }
 
 function onStart()
+	if SaveData.disableX2char == nil then
+		SaveData.disableX2char = SaveData.disableX2char or 0
+	end
+	if SaveData.disableX2char == 0 then
+		triggerEvent("ShowX2Stuff")
+	end
+	if SaveData.disableX2char == 1 then
+		triggerEvent("HideX2Stuff")
+		Player.setCostume(1, nil)
+		Player.setCostume(2, nil)
+		Player.setCostume(3, nil)
+		Player.setCostume(4, nil)
+		Player.setCostume(5, nil)
+	end
 	Audio.MusicVolume(nil)
 	if stars >= 4 then
 		triggerEvent("Stage0.5")
@@ -87,20 +101,6 @@ function onDraw()
 end
 
 function onTick()
-	if SaveData.disableX2char == nil then
-		SaveData.disableX2char = SaveData.disableX2char or 0
-	end
-	if SaveData.disableX2char == 0 then
-		triggerEvent("ShowX2Stuff")
-	end
-	if SaveData.disableX2char == 1 then
-		triggerEvent("HideX2Stuff")
-		Player.setCostume(1, nil)
-		Player.setCostume(2, nil)
-		Player.setCostume(3, nil)
-		Player.setCostume(4, nil)
-		Player.setCostume(5, nil)
-	end
 	if player.section == 9 then
 		Text.printWP("Welcome to the information booth.", 10, 577, 5)
 	end
