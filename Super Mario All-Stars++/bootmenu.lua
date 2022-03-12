@@ -30,6 +30,7 @@ local Routine = require("routine")
 local level = Level.filename()
 local m = RNG.randomInt(1,56-1)
 
+local versionactive = true
 local logo = true
 local pressjumpwords = true
 local active = false
@@ -319,10 +320,10 @@ local function mapExit()
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
-	Routine.wait(1800)
-	Audio.MusicChange(0, 0)
-	Audio.SeizeStream(0)
-	Routine.wait(596)
+	Routine.wait(900)
+	Audio.MusicFadeOut(player.section, 4000)
+	Routine.waitFrames(4000)
+	Routine.wait(300)
 	Audio.MusicChange(0, "_OST/All Stars Secrets/ZZZ_Easter Egg.ogg")
 	Routine.wait(4.2)
 	active4 = true
@@ -332,7 +333,7 @@ local function SaveDataError2()
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
 	Routine.wait(1.5)
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.0>It looks like SavaData couldn't be read or corrupted.<page>If that is happening, you probably loaded this episode on the broken X2 launcher found in the actual SMBX2 program.<page>Unfortunately, this means that SaveData could be corrupted.<page>Next time, please launch the game using the X2 launch menu found on SMBX2.exe, or use the SMASLauncher.<page>Please close this dialogue box by pressing jump, then press pause to exit the game.", speakerName = "Whoops!", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.0>It looks like SavaData couldn't be read or corrupted.<page>If that is happening, you probably loaded this episode on the broken X2 launcher found in the actual SMBX2 program.<page>Unfortunately, this means that SaveData could be corrupted.<page>Next time, please launch the game using the X2 launch menu found on SMBX2.exe.<page>Please close this dialogue box by pressing jump, then press pause to exit the game.", speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot1()
@@ -962,9 +963,11 @@ function bootmenu.onStart()
 	end
 	if SaveData.disableX2char == 0 then
 		x2noticecheck = active
+		x2noticecheckactive = not active
 	end
 	if SaveData.disableX2char == 1 then
 		x2noticecheck = not active
+		x2noticecheckactive = active
 	end
 	Misc.saveGame()
 	Defines.cheat_donthurtme = true
@@ -1036,11 +1039,13 @@ function bootmenu.onTick()
 	player.y = camera.y + 300 - (player.height / 2)
 	if Player.count() == 1 then
 		twoplayercheck = active
+		twoplayercheckactive = not active
 	end
 	if Player.count() == 2 then
 		player2:setFrame(50)
 		player2:mem(0x142, FIELD_BOOL, true)
 		twoplayercheck = not active
+		twoplayercheckactive = active
 		player2.x = camera.x + 432 - (player2.width / 2)
 		player2.y = camera.y + 300 - (player2.height / 2)
 	end
@@ -1052,9 +1057,11 @@ function bootmenu.onTick()
     end
 	if SaveData.disableX2char == 0 then
 		x2noticecheck = active
+		x2noticecheckactive = not active
 	end
 	if SaveData.disableX2char == 1 then
 		x2noticecheck = not active
+		x2noticecheckactive = active
 		Player.setCostume(1, nil)
 		Player.setCostume(2, nil)
 		Player.setCostume(3, nil)
@@ -1183,7 +1190,13 @@ function bootmenu.onInputUpdate()
 	if GameData.startedmenu == 2 then
 		if player.keys.jump == KEYS_PRESSED then
 			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
-			sec.effects = 0
+			Section(player.section).effects.weather = WEATHER_NONE
+			x2noticecheck = false
+			x2noticecheckactive = false
+			x2noticecheck = false
+			twoplayercheck = false
+			twoplayercheckactive = false
+			versionactive = false
 			logo = false
 			active2 = false
 			active = true
@@ -1227,8 +1240,10 @@ function bootmenu.onDraw()
 	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
 	
-	Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
-	textplus.print{x=667, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
+	if versionactive then
+		Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
+		textplus.print{x=667, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
+	end
 	
 	if pressjumpwords then
 		Graphics.drawImage(pressstart, 150, 552, 1)
@@ -1245,13 +1260,13 @@ function bootmenu.onDraw()
 	if twoplayercheck then
 		textplus.print{x=295, y=10, text = "Two player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
 	end
-	if not twoplayercheck then
+	if twoplayercheckactive then
 		textplus.print{x=300, y=10, text = "Two player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
 	end
 	if x2noticecheck then
 		textplus.print{x=303, y=20, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
 	end
-	if not x2noticecheck then
+	if x2noticecheckactive then
 		textplus.print{x=308, y=20, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
 	end
 	if charactercheck then

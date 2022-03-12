@@ -148,6 +148,9 @@ end
 
 function globalgenerals.onStart()
 	fadetolevel = false
+	if Misc.inEditor() then
+		debugbox = require("debugbox")
+	end
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(500)
 	end

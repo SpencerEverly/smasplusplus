@@ -41,7 +41,7 @@ end
 function debugbox.onKeyboardPress(k)
 	if k == VK_F8 then
 		SFX.play("cheating_victory.ogg")
-		littleDialogue.create({text = "NNW SMSK? (What shall you do?)<page><question DEBUG>", updatesInPause = true})
+		littleDialogue.create({text = "<boxStyle smbx13>NNW SMSK? (What shall you do?)<page><question DEBUG>", updatesInPause = true})
 	end
 end
 
