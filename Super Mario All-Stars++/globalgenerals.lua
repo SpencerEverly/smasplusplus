@@ -892,11 +892,6 @@ function globalgenerals.onExit()
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
 		end
 	end
-	if playerlives >= 1 then
-		if killed == true then
-			Level.exit()
-		end
-	end
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
