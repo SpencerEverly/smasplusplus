@@ -17,7 +17,6 @@ local blankPlayerSheet = Graphics.loadImageResolved("graphics/blankVanillaPlayer
 
 local paletteenabled = false
 local emittersenabled = false
-local scaledisabled = true
 local spintrailenabled = true
 
 
@@ -307,9 +306,6 @@ function extendedcostumes.cleanup(p, characterInfo, costume)
         storedPower[p] = pDat.powerup
         players[p] = nil
     end
-
-    -- Revert vanilla sheet overrides
-    unBlankCharacter(p.character)
 end
 
 
@@ -650,10 +646,8 @@ function extendedcostumes.onDraw()
         local charDat = characterData[v.costume.baseCharID]
         local costDat = v.costume
         if p.character == v.costume.baseCharID then-- Initialize the instance
-			if scaledisabled == true and v.inst == nil then
+			if v.inst == nil then
 				v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=1, state="idle", yAlign=animatx.ALIGN.CENTER, sceneCoords=false, visible=true}
-			elseif scaledisabled == false and v.inst == nil then
-				v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=2, state="idle", yAlign=animatx.ALIGN.CENTER, sceneCoords=false, visible=true}
 			end
 			
             local inst = v.inst
@@ -669,23 +663,15 @@ function extendedcostumes.onDraw()
                 inst.speed = 1
             end
 			
-			if scaledisabled == false then
-				if not v.transformable then
-					inst.x = screen.left + 0.5*p.width
-					inst.y = screen.bottom + 2
-					inst.angle = 0
-					inst.scale = v.scaleOverride  or  2
-				end
-			elseif scaledisabled == true then
-				if not v.transformable then
-					inst.x = screen.left + 2.1*p.width
-					inst.y = screen.bottom - 6
-					inst.angle = 0
-					inst.scale = v.scaleOverride  or  1
-				end
-                if  p.forcedState ~= 2  then
-                    v.lastPowerup = p.powerup
-                end
+			if not v.transformable then
+				inst.x = screen.left + 2.1*p.width
+				inst.y = screen.bottom - 4
+				inst.angle = 0
+				inst.scale = v.scaleOverride  or  1
+			end
+			
+            if  p.forcedState ~= 2  then
+                v.lastPowerup = p.powerup
             end
     
             if  p.isMega  then

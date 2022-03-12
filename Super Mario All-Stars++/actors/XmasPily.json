@@ -6,7 +6,7 @@
 	},
 
 	"gfx" : {
-		"sheet" : "costumes/mario/ZZ-Demo-XmasPily/sheet.png",
+		"sheet" : "costumes/mario/Demo-XmasPily/sheet.png",
 		"columns" : 11,
 		"rows" : 8
 	},

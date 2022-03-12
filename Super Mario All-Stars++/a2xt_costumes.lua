@@ -60,7 +60,8 @@ costumes.data =
 	DEMO_BOBBLE = {path = "Demo-BobbleHat", name = "Bobble Hat Demo"},
 	DEMO_SAFETYBEE = {path = "Demo-SafetyBee", name = "D the Safety Bee"},
 	GA_CAILLOU   = {path = "GA-Caillou", name = "Default"},
-	DEMO_XMASPILY   = {path = "ZZ-Demo-XmasPily", name = "Default"}
+	DEMO_XMASPILY   = {path = "ZZ-Demo-XmasPily", name = "Default"},
+	SMBDDX   = {path = "Demo-SMBDDX", name = "Default"}
 }
 
 costumes.defaults =

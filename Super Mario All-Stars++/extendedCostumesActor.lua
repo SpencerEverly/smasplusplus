@@ -7,7 +7,7 @@ local lunajson = API.load("ext/lunajson")
 local rng = API.load("rng")
 local pman = API.load("playermanager")
 
---local costumes = API.load("a2xt_costumes")
+local costumes = API.load("a2xt_costumes")
 
 
 local extendedcostactor = {}
