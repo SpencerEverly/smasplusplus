@@ -7,7 +7,7 @@ local extendedKoopas = require("extendedKoopas")
 local autoscroll = require("autoscroll")
 local warpTransition = require("warpTransition")
 
-if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - DLC World.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true then
+if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -890,6 +890,11 @@ function globalgenerals.onExit()
 	if playerlives == 0 then
 		if killed == true then
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
+		end
+	end
+	if playerlives >= 1 then
+		if killed == true then
+			Level.exit()
 		end
 	end
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.

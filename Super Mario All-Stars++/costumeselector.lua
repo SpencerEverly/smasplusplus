@@ -463,7 +463,7 @@ local function drawCostumeSelector(y, alpha)
 			{name="Go Back", action=unpause}
 		}
 		table.insert(pause_options, {name="Restart", action = restartlevel});
-		if Level.filename() == "SMAS - DLC World.lvlx" then
+		if Level.filename() == "SMAS - Map.lvlx" then
 			table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
 		end
 		if (Level.name() == "SMAS - DLC World") == false then

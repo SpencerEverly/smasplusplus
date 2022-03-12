@@ -154,6 +154,7 @@ end
 
 local function quitgame()
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	Misc.saveGame()
 	SFX.play("_OST/_Sound Effects/savequit.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
@@ -162,6 +163,7 @@ end
 local function quitonly()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/nosave.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
@@ -175,6 +177,7 @@ end
 
 local function quitgamemap()
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	Misc.saveGame()
 	SFX.play("_OST/_Sound Effects/savequit.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
@@ -183,6 +186,7 @@ end
 local function quitonlymap()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/nosave.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
@@ -201,24 +205,28 @@ end
 
 local function exitlevel2()
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.7, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function exitlevel()
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
 local function restartlevel()
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
 	Audio.MusicVolume(0)
+	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
@@ -798,7 +806,7 @@ end
 local function dlcmapload()
 	pausemenu.paused = false
 	Misc.unpause()
-	Level.load("SMAS - DLC World.lvlx", nil, nil)
+	Level.load("SMAS - Map.lvlx", nil, nil)
 end
 
 local function cycle(dir)
@@ -843,12 +851,12 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Restart", action = restartlevel});
 		end
 		if not isOverworld then
-			if Level.filename() == "SMAS - DLC World.lvlx" then
+			if Level.filename() == "SMAS - Map.lvlx" then
 				table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
 			end
 		end
 		if not isOverworld then
-			if (Level.name() == "SMAS - DLC World") == false then
+			if (Level.name() == "SMAS - Map") == false then
 				table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
 			end
 		end

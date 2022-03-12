@@ -19,7 +19,7 @@ local smwMap = {}
 
 
 -- Name of the level file that the map is on.
-smwMap.levelFilename = "SMAS - DLC World.lvlx"
+smwMap.levelFilename = "SMAS - Map.lvlx"
 
 
 
@@ -4283,8 +4283,8 @@ smwMap.playerSettings = {
     canEnterDestroyedBonusLevels = false,
 
 
-    walkSpeed = 2,
-    climbSpeed = 0.75,
+    walkSpeed = 5,
+    climbSpeed = 2.75,
 
 
     lookAroundArrowImage = Graphics.loadImageResolved("smwMap/lookAroundArrow.png"),
@@ -4310,7 +4310,7 @@ smwMap.playerSettings = {
 smwMap.pathSettings = {
     lockedColor = Color.fromHexRGBA(0x0000004E),
 
-    unlockAnimationFrequency = 12,
+    unlockAnimationFrequency = 8,
     unlockAnimationDistance = 32,
 
     unlockLoopSound = SFX.open(Misc.resolveSoundFile("smwMap/unlock_loop")),
@@ -4327,7 +4327,7 @@ smwMap.pathSettings = {
 smwMap.encounterSettings = {
     idleWanderDistance = 12,
 
-    walkSpeed = 4,
+    walkSpeed = 7,
 
     maxMovements = 6,
     keepWalkingChance = 3,
@@ -4338,7 +4338,7 @@ smwMap.encounterSettings = {
 
 
 smwMap.hudSettings = {
-    borderImage = Graphics.loadImageResolved("smwMap/hud_border.png"),
+    borderImage = Graphics.loadImageResolved("hardcoded-33-4-tp.png"),
 
     borderLeftWidth = 66,
     borderRightWidth = 66,
@@ -4349,8 +4349,8 @@ smwMap.hudSettings = {
 
 
 
-    playerOffsetX = 40,
-    playerOffsetY = -16,
+    playerOffsetX = 500,
+    playerOffsetY = -50,
 
     playerGap = 64,
 
@@ -4359,8 +4359,8 @@ smwMap.hudSettings = {
     
     counterFont = textplus.loadFont("smwMap/counterFont.ini"),
     counterColor = Color.white,
-    counterOffsetX = 64,
-    counterOffsetY = -16,
+    counterOffsetX = -502,
+    counterOffsetY = 450,
     counterText = "x %s",
     counterScale = 2,
     counterGap = 4,
@@ -4368,11 +4368,11 @@ smwMap.hudSettings = {
     countersEnabled = true,
 
 
-    levelTitleFont = textplus.loadFont("smwMap/levelTitleFont.ini"),
+    levelTitleFont = textplus.loadFont("smwMap/10.ini"),
     levelTitleColor = Color.yellow,
-    levelTitleOffsetX = 64,
-    levelTitleOffsetY = -16,
-    levelTitleScale = 2,
+    levelTitleOffsetX = -78,
+    levelTitleOffsetY = -4,
+    levelTitleScale = 1,
 
     levelTitleEnabled = true,
 
@@ -4417,13 +4417,13 @@ smwMap.selectStartPointSettings = {
 
 smwMap.transitionSettings = {
     selectedLevelSettings = {
-        drawFunction = smwMap.TRANSITION_WINDOW,
+        drawFunction = smwMap.TRANSITION_FADE,
         progressTime = 28,
         priority = 6,
     },
 
     enterEncounterSettings = {
-        drawFunction = smwMap.TRANSITION_MOSAIC,
+        drawFunction = smwMap.TRANSITION_FADE,
         progressTime = 28,
         priority = 6,
     },

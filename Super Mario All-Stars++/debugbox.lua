@@ -58,7 +58,7 @@ littleDialogue.registerAnswer("DEBUG",{text = "KIL (Kill Player)", chosenFunctio
 
 
 littleDialogue.registerAnswer("AREA",{text = "Up one",addText = "NNW SMSK? (What shall you do?)<page><question DEBUG>"})
-littleDialogue.registerAnswer("AREA",{text = "Boot Level",chosenFunction = function() Level.load("SMAS - Start.lvlx", nil, nil) end})
+littleDialogue.registerAnswer("AREA",{text = "Preboot Menu",chosenFunction = function() Level.load("SMAS - Start.lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "S.E. 2022 SMBX2 Remake Intro",chosenFunction = function() Level.load("SMAS - Intro.lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "HUB (MALC)",chosenFunction = function() Level.load("MALC - HUB.lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "HUB (MALC): True Ending",chosenFunction = function() Level.load("MALC - HUB.lvlx", nil, 15) end})
@@ -70,7 +70,6 @@ littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMBLL Game Select",chos
 littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMB1: World 8-4, Original Ver.",chosenFunction = function() Level.load("SMB1 - W-8, L-4 (Scrapped).lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMB1: Warp Level",chosenFunction = function() Level.load("SMB1 - Warp (Scrapped).lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMBLL: Warp Level",chosenFunction = function() Level.load("SMBLL - Warp (Scrapped).lvlx", nil, nil) end})
-littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMB2: Warp Level",chosenFunction = function() Level.load("SMB2 - Warp (Scrapped).lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMB2: Warp Level",chosenFunction = function() Level.load("SMB2 - Warp (Scrapped).lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMB3: Warp Level",chosenFunction = function() Level.load("SMB3 - Warp (Scrapped).lvlx", nil, nil) end})
 littleDialogue.registerAnswer("AREA",{text = "(SCRAPPED) SMW: Warp Level",chosenFunction = function() Level.load("SMW - Warp (Scrapped).lvlx", nil, nil) end})
@@ -97,7 +96,6 @@ littleDialogue.registerAnswer("MUSIC",{text = "BGM",addText = "1-57? (Which trac
 littleDialogue.registerAnswer("MUSIC",{text = "SE (SFX)",addText = "1-91? (Which sound?)<page><question SFX>"})
 
 littleDialogue.registerAnswer("BGM",{text = "Up one",addText = "SUND? (Which sound section?)<question MUSIC>"})
---littleDialogue.registerAnswer("BGM",{text = "Reset Room 1 Music",chosenFunction = function() Audio.MusicChange(0, "_OST/Undertale/mus_core_genoside.ogg") end, addText = "NNW SMSK? (What shall you do?)<page><question DEBUG>"})
 littleDialogue.registerAnswer("BGM",{text = "1",chosenFunction = function() Audio.MusicChange(0, 1) end, addText = "Playing in Room 0.<page>NNW SMSK? (What shall you do?)<page><question DEBUG>"})
 littleDialogue.registerAnswer("BGM",{text = "2",chosenFunction = function() Audio.MusicChange(0, 2) end, addText = "Playing in Room 0.<page>NNW SMSK? (What shall you do?)<page><question DEBUG>"})
 littleDialogue.registerAnswer("BGM",{text = "3",chosenFunction = function() Audio.MusicChange(0, 3) end, addText = "Playing in Room 0.<page>NNW SMSK? (What shall you do?)<page><question DEBUG>"})
