@@ -1,0 +1,10 @@
+Music: Finale
+Composer: Toby Fox
+FL version: 20.7
+FLP by: SSQMinky, this is a channel name (Base)
+
+External soundfont(s) needed: SGM-V2.01, squidfont_orchestral, THFont
+
+Updated: August 12, 2021
+
+This FLP still needs more work at the second part, but I kinda gave up and decided it's good.
