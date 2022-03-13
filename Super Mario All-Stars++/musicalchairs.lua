@@ -2235,6 +2235,10 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/The Tree Skies.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Desert.ogg" then
 				section.musicPath = "_OST/Super Mario Bros 2/Desert.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Albatrosses.ogg" then
+				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Albatosses.ogg"
+			elseif section.musicPath == "__OST/Mario Forever/Human Lab.spc" then
+				section.musicPath = "_OST/Mario Forever/Human Lab.spc"
 			elseif section.musicPath == "_OST/Super Metroid/97 Continue.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Metrma.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Dark Zone.spc|0;g=2.5" then
@@ -2329,6 +2333,10 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/The Tree Skies.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Desert.ogg" then
 				section.musicPath = "_OST/Super Mario Bros (NES)/Desert.ogg"
+			elseif section.musicPath == "_OST/Super Mario Bros 2/Albatrosses.ogg" then
+				section.musicPath = "_OST/Super Mario Bros 2/Albatrosses.ogg"
+			elseif section.musicPath == "__OST/Mario Forever/Human Lab.spc" then
+				section.musicPath = "_OST/Mario Forever/Human Lab.spc"
 			elseif section.musicPath == "_OST/Super Metroid/97 Continue.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Metroid/97 Continue.spc|0;g=2.5"
 			elseif section.musicPath == "_OST/Super Mario Bros 2/Dark Zone.spc|0;g=2.5" then
