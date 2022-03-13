@@ -4194,7 +4194,7 @@ ID:79;X:-139008;Y:-139104;
 BGO_END
 NPC
 ID:280;X:-159400;Y:-160144;D:-1;ED:"Boss Dead";
-ID:94;X:-173376;Y:-180118;D:-1;MG:"Thank you\, hero!<page>This game is about to get harder and harder.<page>Watch out for World 8! The princess is there\, and I mean it this time!<page>Good luck\, hero!";FD:1;
+ID:94;X:-173376;Y:-180118;D:-1;MG:"Thank you\, <characterName>!<page>This game is about to get harder and harder.<page>Watch out for World 8! The princess is there\, and I mean it this time!<page>Good luck\, hero!";FD:1;
 ID:97;X:-198208;Y:-200224;D:-1;
 ID:589;X:-179326;Y:-180096;D:-1;
 ID:476;X:-179424;Y:-180224;D:-1;

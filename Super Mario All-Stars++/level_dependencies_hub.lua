@@ -6,6 +6,7 @@ local autoscroll = require("autoscroll")
 local datetime = require("datetime")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
+local warpTransition = require("warpTransition")
 
 local costumes = {}
 
@@ -106,7 +107,6 @@ function dependencies2.onStart()
 	end
 	if SaveData.disableX2char == 0 then
 		pausemenu = require("pausemenu")
-		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 		playerphysicspatch = require("playerphysicspatch")
 		kindHurtBlock = require("kindHurtBlock")
@@ -132,7 +132,6 @@ function dependencies2.onStart()
 		Cheats.deregister("dressmeup")
 		Cheats.deregister("undress")
 		Cheats.deregister("laundryday")
-		warpTransition = require("warpTransition")
 		warpTransition.musicFadeOut = false
 		warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE

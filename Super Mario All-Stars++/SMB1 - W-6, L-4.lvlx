@@ -2063,7 +2063,7 @@ ID:770;X:-196992;Y:-200192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-197120;Y:-200352;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-197280;Y:-200192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-199232;Y:-200288;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
-ID:94;X:-194432;Y:-200118;D:-1;MG:"Thank you\, hero! But the princess is in another castle!";FD:1;
+ID:94;X:-194432;Y:-200118;D:-1;MG:"Thank you\, <characterName>! But the princess is in another castle!";FD:1;
 ID:589;X:-199102;Y:-200096;D:-1;XTRA:"{\n    \"jumpHeight\"\: 200\,\n    \"useFixed\"\: true\n}\n";
 ID:589;X:-198910;Y:-200096;D:-1;XTRA:"{\n    \"jumpHeight\"\: 200\,\n    \"useFixed\"\: true\n}\n";
 ID:589;X:-195390;Y:-200096;D:-1;XTRA:"{\n    \"jumpHeight\"\: 250\,\n    \"useFixed\"\: true\n}\n";
@@ -2093,6 +2093,6 @@ ET:"Boss Start";SSS:["ID\:0\;SL\:-195584\;ST\:-200600\;SB\:-200000\;SR\:-194720\
 ET:"Axe";LH:["Bridge"];AS:0;AX:0;AY:0;
 ET:"Boss";AS:0;AX:0;AY:0;
 ET:"Boss Death";SD:69;SSS:["ID\:0\;SL\:-194784\;ST\:-200600\;SB\:-200000\;SR\:-193920\;MI\:0\;"];AS:0;AX:0;AY:0;
-ET:"Toad Talk";MG:"Thank you\, Mario! This quest is now gonna be a little harder now\, so watch out! Oh. In realated news\, the princess is in another castle!";AS:0;AX:0;AY:0;
+ET:"Toad Talk";MG:"Thank you\, <characterName>! This quest is now gonna be a little harder now\, so watch out! Oh. In related news\, the princess is in another castle!";AS:0;AX:0;AY:0;
 ET:"Done Walk";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

@@ -2116,7 +2116,7 @@ function musicalchairs.onEvent(eventName)
 	
 	
 	
-	--CHARACTER_NINJABOMBERMAN
+	--CHARACTER_NINJABOMBERMAN (CHARACTER_YOSHI)
 	if currentCostume == "WALUIGI-SMB3" then
 		if eventName == "Level - Start" then
 			if level == "SMB1 - W-1, L-2.lvlx" then

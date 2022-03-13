@@ -6310,7 +6310,7 @@ ID:137;X:60256;Y:59712;
 ID:137;X:60256;Y:59744;
 BGO_END
 NPC
-ID:198;X:80544;Y:79808;D:-1;MG:"Thank you\, hero!<page>Your quest on the game 'Super Mario Bros' is now over.<page>Play the other games if you haven't!<page>I also heard that if you play all the games\, you'll unlock something special!<page>Keep collecting until you find out\, and here's your star!";FD:1;NM:1;
+ID:198;X:80544;Y:79808;D:-1;MG:"Thank you\, <characterName>!<page>Your quest on the game 'Super Mario Bros' is now over.<page>Play the other games if you haven't!<page>I also heard that if you play all the games\, you'll unlock something special!<page>Keep collecting until you find out\, and here's your star!";FD:1;NM:1;
 ID:178;X:40672;Y:39776;D:-1;LR:"Axe";ED:"Axed";
 ID:200;X:40480;Y:39768;D:-1;ED:"Fake Bowser Dead";
 ID:235;X:-138237;Y:-140123;D:-1;
@@ -6524,7 +6524,7 @@ ET:"SMB End Sequence Wait";AS:0;AX:0;AY:0;
 ET:"SMB End Sequence Happy 3";TE:"SMB End Sequence Wait";TD:7;PC:000000000111;AS:0;AX:0;AY:0;
 ET:"SMB End Sequence Wait 2";AS:0;AX:0;AY:0;
 ET:"SMB End Sequence Happy 3 2";TE:"SMB End Sequence Wait";TD:7;PC:000000000111;AS:0;AX:0;AY:0;
-ET:"SMB End Sequence Wait FINAL";MG:"Thank you\, hero!<page>Your quest on the game 'Super Mario Bros' is now over.<page>Play the other games if you haven't!<page>I also heard that if you play all the games\, you'll unlock something special!<page>Keep collecting until you find out\, and here's your star!";SD:27;LH:["Cage Closed"];LS:["Cage Opened"];TE:"SMB End Sequence Star";TD:2;DS:1;AS:0;AX:0;AY:0;
+ET:"SMB End Sequence Wait FINAL";MG:"Thank you\, <characterName>!<page>Your quest on the game 'Super Mario Bros' is now over.<page>Play the other games if you haven't!<page>I also heard that if you play all the games\, you'll unlock something special!<page>Keep collecting until you find out\, and here's your star!";SD:27;LH:["Cage Closed"];LS:["Cage Opened"];TE:"SMB End Sequence Star";TD:2;DS:1;AS:0;AX:0;AY:0;
 ET:"Bridge";AS:0;AX:0;AY:0;
 ET:"Axed";LH:["Bridge"];AS:0;AX:0;AY:0;
 ET:"New Event";AS:0;AX:0;AY:0;

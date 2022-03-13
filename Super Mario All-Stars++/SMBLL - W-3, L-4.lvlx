@@ -1791,7 +1791,7 @@ ID:178;X:-174240;Y:-180224;D:-1;ED:"Axe";
 ID:589;X:-174782;Y:-180096;D:-1;
 ID:589;X:-177630;Y:-180096;D:-1;
 ID:796;X:-174432;Y:-180232;D:-1;EA:"Bowser Appear";ED:"Bowser Dead";
-ID:94;X:-173760;Y:-180118;D:-1;MG:"Thank you\, hero! But our princess is in another castle!";FD:1;
+ID:94;X:-173760;Y:-180118;D:-1;MG:"Thank you\, <characterName>! But our princess is in another castle!";FD:1;
 ID:770;X:-176000;Y:-180320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-175680;Y:-180320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-175360;Y:-180192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";

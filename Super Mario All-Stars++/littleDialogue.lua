@@ -991,7 +991,7 @@ function boxInstanceFunctions:updateLayouts()
 
             for _,character in ipairs(segment) do
                 characterCount = characterCount + 1
-                table.insert(list,string.char(character))
+                --table.insert(list,string.char(character))
 
                 if character == 10 and not page._noMarkerIndices[characterCount] then
                     isForcedLine[page.formattedText[i]] = true

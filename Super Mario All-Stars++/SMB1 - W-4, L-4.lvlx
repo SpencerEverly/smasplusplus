@@ -3126,7 +3126,7 @@ ID:79;X:-175200;Y:-180416;
 BGO_END
 NPC
 ID:15;X:-159438;Y:-160182;D:-1;ED:"Boss End";
-ID:94;X:-173504;Y:-180118;D:-1;MG:"Thank you\, hero! But our princess is in another castle!";FD:1;
+ID:94;X:-173504;Y:-180118;D:-1;MG:"Thank you\, <characterName>! But our princess is in another castle!";FD:1;
 ID:93;X:-178704;Y:-180208;D:-1;
 ID:97;X:-197856;Y:-200224;D:-1;
 ID:177;X:-139776;Y:-140352;D:1;S1:3;

@@ -31,6 +31,10 @@ littleDialogue.registerStyle("endingtextone",{
 	selectorImageEnabled = false,
 })
 
+littleDialogue.registerStyle("smwjapanese",{
+
+})
+
 areaNames.sectionNames = {
 	[0] = "Me and Larry City (Main City)",
 	[1] = "Building 3: ???",
