@@ -16,7 +16,7 @@ local episodePath = mem(0x00B2C61C, FIELD_STRING)
 
 local image = Graphics.loadImage("loadscreen.png")
 
-local loadicon = Graphics.loadImage("hardcoded-30-5.png")
+local loadicon = Graphics.loadImage("loadscreen-icon.png")
 
 local frame = 0
 local frame2 = 0
