@@ -1024,7 +1024,7 @@ function bootmenu.onTick()
 		GameData.startedmenu = 1
 	end
 	if SaveData.firstBootCompleted == 1 then
-		Routine.run(easterEgg, whilePaused)
+		
 	end
 	if GameData.startedmenu == nil then
 		GameData.startedmenu = GameData.startedmenu or 0
