@@ -185,9 +185,9 @@ function globalgenerals.onCameraUpdate(c, camIdx)
 end
 	
 function globalgenerals.onTick()
-	Misc.SetEngineSpeed(0.46)
-	Misc.SetEngineTPS(20.5)
-	Misc.SetEngineTickDuration(20.5)
+	--Misc.SetEngineSpeed(0.46)
+	--Misc.SetEngineTPS(20.5)
+	--Misc.SetEngineTickDuration(20.5)
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
