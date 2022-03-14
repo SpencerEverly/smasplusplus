@@ -186,6 +186,8 @@ end
 	
 function globalgenerals.onTick()
 	Misc.SetEngineSpeed(0.46)
+	Misc.SetEngineTPS(65)
+	Misc.SetEngineTickDuration(65)
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
