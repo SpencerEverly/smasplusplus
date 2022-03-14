@@ -4,8 +4,6 @@ local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
 
-local blackscreen = Graphics.loadImage("blackscreen.png")
-
 local active = true
 local active2 = false
 local ready = false
