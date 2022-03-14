@@ -659,7 +659,6 @@ end
 
 local function ExitGame1()
 	exitscreen = true
-	SFX.play(14)
 	Audio.MusicChange(0, 0)
 	Misc.saveGame()
 	Routine.wait(0.4)
