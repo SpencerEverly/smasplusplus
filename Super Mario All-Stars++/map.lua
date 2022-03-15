@@ -20,11 +20,11 @@ map3d.Light.enabled = false
 
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
-local hudborder = Graphics.loadImage("hardcoded-33-4-tp.png")
-local times = Graphics.loadImage("hardcoded-33-1.png")
-local coinicon = Graphics.loadImage("hardcoded-33-2.png")
-local oneupicon = Graphics.loadImage("hardcoded-33-3.png")
-local staricon = Graphics.loadImage("hardcoded-33-5.png")
+local hudborder = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp.png")
+local times = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-1.png")
+local coinicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-2.png")
+local oneupicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-3.png")
+local staricon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-5.png")
 
 local loadlevelanimation = false
 local levelnames = Level.get()
