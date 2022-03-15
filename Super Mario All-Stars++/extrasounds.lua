@@ -1,6 +1,6 @@
 --extrasounds.lua by Spencer Everly
 --
---To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,14,15,18,59 from (example):
+--To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,14,15,18,43,59 from (example):
 --
 --Audio.sounds[14].sfx = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
 --to
@@ -122,6 +122,7 @@ extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon
 extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
 extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
 extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
+extrasounds.playersoundid104 = Audio.SfxOpen(Misc.resolveSoundFile("sound/explode.ogg"))
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
@@ -150,6 +151,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[14].muted = true
 		Audio.sounds[15].muted = true
 		Audio.sounds[18].muted = true
+		Audio.sounds[43].muted = true
 		Audio.sounds[59].muted = true
 	end
 	if extrasounds.active == false then --Unmute when not active
@@ -158,6 +160,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[14].muted = false
 		Audio.sounds[15].muted = false
 		Audio.sounds[18].muted = false
+		Audio.sounds[43].muted = false
 		Audio.sounds[59].muted = false
 	end
 end
@@ -192,6 +195,12 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil) --L
 				end
 			end
 		end
+	end
+end
+
+function extrasounds.onPostExplosion(effect)
+	if effect.id == 69 then
+		SFX.play(extrasounds.playersoundid104)
 	end
 end
 

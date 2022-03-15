@@ -1,3 +1,5 @@
+local extrasounds = require("extrasounds")
+
 local lightning = {}
 
 local lightningtimer = 0
@@ -30,7 +32,7 @@ function lightning.onTick()
 	end
 	for _,p in ipairs(Player.get()) do
 		if lightning.section[p.section+1] ~= nil and lightningtimer == 0 and lightningcountdown == lightning.speed then
-			SFX.play(43)
+			SFX.play(extrasounds.playersoundid43)
 		end
 	end
 end
