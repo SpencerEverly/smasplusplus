@@ -11,8 +11,8 @@ local smb2underbeta2x2 = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPl
 local fireflowerbeta = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/fireflowerbeta.png")
 
 function costume.onInit(p)
-	Graphics.sprites.background[48].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb1flagbeta.png")
-	Graphics.sprites.background[57].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb1flaglinebeta.png")
+	Graphics.sprites.bgo[48].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb1flagbeta.png")
+	Graphics.sprites.bgo[57].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb1flaglinebeta.png")
 	Graphics.sprites.block[207].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.block[201].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.block[208].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
