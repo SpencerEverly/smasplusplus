@@ -220,4 +220,9 @@ jukebox.setMusicBox(774, 7584, 1280)
 jukebox.setMusicBox(774, 7168, 1440)
 jukebox.setMusicBox(774, 7392, 1312)
 
+--SMBLL Worlds A-D
+jukebox.setTrack(775, jukebox.resolveMusicFile("_OST/The Lost Levels/Worlds A-D.ogg"))
+jukebox.setMusicBox(775, 5088, 4896)
+jukebox.setMusicBox(775, 5088, 5088)
+
 return map_music
