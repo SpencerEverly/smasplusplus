@@ -14,7 +14,7 @@ extrasounds.active = true --Are the extra sounds active? If not, they won't play
 
 local ready = false --This library isn't ready until onInit is finished
 
-extrasounds.playersoundid0 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/nothing.ogg")) --General sound to mute anything, really
+extrasounds.playersoundid0 = Audio.SfxOpen(Misc.resolveSoundFile("sound/nothing.ogg")) --General sound to mute anything, really
 
 --Stock SMBX Sounds
 extrasounds.playersoundid1 = Audio.SfxOpen(Misc.resolveSoundFile("player-jump.ogg"))
@@ -110,18 +110,18 @@ extrasounds.playersoundid90 = Audio.SfxOpen(Misc.resolveSoundFile("zelda-sword-b
 extrasounds.playersoundid91 = Audio.SfxOpen(Misc.resolveSoundFile("bubble.ogg"))
 
 --Additional SMBX Sounds
-extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/sprout-vine.ogg"))
-extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/iceball.ogg"))
-extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_freeze.ogg"))
-extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_icebreak.ogg"))
-extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/2up.ogg"))
-extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/3up.ogg"))
-extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/5up.ogg"))
-extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get2.ogg"))
-extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get3.ogg"))
-extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get4.ogg"))
-extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get5.ogg"))
-extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/cherry.ogg"))
+extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
+extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
+extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg"))
+extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg"))
+extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
+extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
+extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
+extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
+extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
+extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
+extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
+extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")

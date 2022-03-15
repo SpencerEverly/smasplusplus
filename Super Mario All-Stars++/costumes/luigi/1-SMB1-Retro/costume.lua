@@ -86,11 +86,11 @@ function costume.onCleanup(p)
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	extrasounds.playersoundid14 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/coin.ogg"))
-	extrasounds.playersoundid15 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/1up.ogg"))
+	extrasounds.playersoundid14 = Audio.SfxOpen(Misc.resolveSoundFile("sound/coin.ogg"))
+	extrasounds.playersoundid15 = Audio.SfxOpen(Misc.resolveSoundFile("sound/1up.ogg"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	extrasounds.playersoundid18 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/fireball.ogg"))
+	extrasounds.playersoundid18 = Audio.SfxOpen(Misc.resolveSoundFile("sound/fireball.ogg"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil
@@ -140,18 +140,18 @@ function costume.onCleanup(p)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
-	extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/sprout-vine.ogg"))
-	extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/iceball.ogg"))
-	extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_freeze.ogg"))
-	extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/yi_icebreak.ogg"))
-	extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/2up.ogg"))
-	extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/3up.ogg"))
-	extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/5up.ogg"))
-	extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get2.ogg"))
-	extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get3.ogg"))
-	extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get4.ogg"))
-	extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/dragon-coin-get5.ogg"))
-	extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sounds/cherry.ogg"))
+	extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
+	extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
+	extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg"))
+	extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg"))
+	extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
+	extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
+	extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
+	extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
+	extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
+	extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
+	extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
+	extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
 end
 
 return costume;
