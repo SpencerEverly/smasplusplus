@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario World\: Yoshi's Island 2";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-189696;T:-200992;B:-200000;MZ:24;MF:"_OST/Super Mario World/Forest.spc|0\;g=2.4";BG:12;
+SC:0;L:-200000;R:-189696;T:-200992;B:-200000;MZ:24;MF:"_OST/Super Mario World/Forest.spc|0\;g=2.5";BG:12;
 SC:1;L:-180064;R:-179008;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Underground.spc|0\;g=2.6";BG:30;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END
@@ -1244,5 +1244,5 @@ ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Flying Blocks Right";TE:"Flying Blocks Left";TD:20;AU:1;ML:"Flying Blocks";MX:0.5;MY:0;MLA:["LN\:\"Flying Blocks\"\;SX\:0.5\;"];AS:0;AX:0;AY:0;
 ET:"Flying Blocks Left";TE:"Flying Blocks Right";TD:20;ML:"Flying Blocks";MX:-0.5;MY:0;MLA:["LN\:\"Flying Blocks\"\;SX\:-0.5\;"];AS:0;AX:0;AY:0;
-ET:"Message 1";MG:"This gate marks the middle of this area. Bu cutting the tape here\, you can continue from close to this point.";AS:0;AX:0;AY:0;
+ET:"Message 1";MG:"This gate marks the middle of this area. By cutting the tape here\, you can continue from close to this point.";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
