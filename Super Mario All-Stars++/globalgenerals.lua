@@ -311,7 +311,7 @@ function globalgenerals.onTick()
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_2012beta.ogg")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "1-SMB1-RETRO" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -319,7 +319,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "2-SMB1-RECOLORED" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -335,7 +335,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/3-SMB1-SMAS/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "4-SMB2-RETRO" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -351,7 +351,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/5-SMB2-SMAS/starman")
 		starman.duration[996] = 577
 		starman.duration[994] = 577
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "6-SMB3-RETRO" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -367,7 +367,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman/starman_sml2.ogg")
 		starman.duration[996] = 878
 		starman.duration[994] = 878
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "9-SMW-PIRATE" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -407,7 +407,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/14-NSMBDS-SMBX/starman")
 		starman.duration[996] = 641
 		starman.duration[994] = 641
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "14-NSMBDS-ORIGINAL" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -415,7 +415,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/14-NSMBDS-Original/starman")
 		starman.duration[996] = 641
 		starman.duration[994] = 641
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "A2XT-DEMO" then
 		littleDialogue.characterNames[1] = "Demo"
@@ -439,7 +439,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/JCFosterTakesItToTheMoon/starman")
 		starman.duration[996] = 1026
 		starman.duration[994] = 1026
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "SP-1-ERICCARTMAN" then
 		littleDialogue.characterNames[1] = "Eric"
@@ -447,7 +447,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/SP-1-EricCartman/starman")
 		starman.duration[996] = 962
 		starman.duration[994] = 962
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "SMG4" then
 		littleDialogue.characterNames[1] = "SMG4"
@@ -455,7 +455,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "PRINCESSRESCUE" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -471,7 +471,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/SMW-Mario/starman")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "GA-CAILLOU" then
 		littleDialogue.characterNames[1] = "Caillou"
@@ -479,7 +479,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/GA-Caillou/starman")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "Z-SMW2-ADULTMARIO" then
 		littleDialogue.characterNames[1] = "Mario"
@@ -497,7 +497,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/luigi/0-SpencerEverly/starman")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "LARRYTHECUCUMBER" then
 		littleDialogue.characterNames[2] = "Larry"
@@ -513,7 +513,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "A2XT-IRIS" then
 		littleDialogue.characterNames[2] = "Iris"
@@ -537,7 +537,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	
 	
@@ -555,7 +555,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "KIRBY-SMB3" then
 		littleDialogue.characterNames[3] = "Kirby"
@@ -563,7 +563,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "PAULINE" then
 		littleDialogue.characterNames[3] = "Pauline"
@@ -571,7 +571,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	
 	
@@ -581,7 +581,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman/starman_nintendogs")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "SONIC" then
 		littleDialogue.characterNames[4] = "Sonic"
@@ -589,7 +589,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/toad/Sonic/starman")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "TOADETTE" then
 		littleDialogue.characterNames[4] = "Toadette"
@@ -597,7 +597,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "YOSHI-SMB3" then
 		littleDialogue.characterNames[4] = "Yoshi"
@@ -605,7 +605,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "A2XT-RAOCOW" then
 		littleDialogue.characterNames[4] = "Raocow"
@@ -632,7 +632,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "NESS" then
 		littleDialogue.characterNames[5] = "Ness"
@@ -640,7 +640,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman/starman_earthbound.ogg")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "TAKESHI" then
 		littleDialogue.characterNames[5] = "Takeshi"
@@ -656,7 +656,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "TAKESHI-SNES" then
 		littleDialogue.characterNames[5] = "Takeshi"
@@ -664,7 +664,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	
 	
@@ -674,12 +674,12 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman/starman_sma3.ogg")
 		starman.duration[996] = 1474
 		starman.duration[994] = 1474
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	
 	
 	if character == "CHARACTER_STEVE" then
-		warpTransition.doorclose = ("sounds/door-close.ogg")
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	
 	if currentCostume == "DJCTRE-CUBIXTRON" then

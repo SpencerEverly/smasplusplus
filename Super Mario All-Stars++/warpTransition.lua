@@ -11,7 +11,7 @@ local playerManager = require("playerManager")
 
 local warpTransition = {}
 
-warpTransition.doorclose = ("door-close.ogg")
+warpTransition.doorclose = ("sound/door-close.ogg")
 
 warpTransition.currentTransitionType = nil
 warpTransition.transitionTimer = 0
