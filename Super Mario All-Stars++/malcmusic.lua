@@ -663,7 +663,7 @@ function malcmusic.onTick()
 		character = player.character
 		
 		if currentCostume == nil then
-			if character == "CHARACTER_MARIO" then
+			if character == "CHARACTER_MARIO" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -673,7 +673,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
 				Audio.MusicChange(13, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
 			end
-			if character == "CHARACTER_LUIGI" then
+			if character == "CHARACTER_LUIGI" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -683,7 +683,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
 				Audio.MusicChange(13, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
 			end
-			if character == "CHARACTER_PEACH" then
+			if character == "CHARACTER_PEACH" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -693,7 +693,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
 				Audio.MusicChange(13, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
 			end
-			if character == "CHARACTER_TOAD" then
+			if character == "CHARACTER_TOAD" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -703,7 +703,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
 				Audio.MusicChange(13, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
 			end
-			if character == "CHARACTER_LINK" then
+			if character == "CHARACTER_LINK" and holiday == false then
 				Audio.MusicChange(1, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
 				Audio.MusicChange(2, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
 				Audio.MusicChange(3, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
@@ -713,7 +713,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
 				Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
 			end
-			if character == "CHARACTER_WARIO" then
+			if character == "CHARACTER_WARIO" and holiday == false then
 				Audio.MusicChange(1, "_OST/Wario Land 3.gbs|3;g=2")
 				Audio.MusicChange(2, "_OST/Wario Land 3.gbs|3;g=2")
 				Audio.MusicChange(3, "_OST/Wario Land 3.gbs|3;g=2")
@@ -723,7 +723,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
 				Audio.MusicChange(13, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
 			end
-			if character == "CHARACTER_YOSHI" then
+			if character == "CHARACTER_YOSHI" and holiday == false then
 				Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
 				Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
 				Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
@@ -733,7 +733,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
 				Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
 			end
-			if character == "CHARACTER_BOWSER" then
+			if character == "CHARACTER_BOWSER" and holiday == false then
 				Audio.MusicChange(1, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 				Audio.MusicChange(2, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 				Audio.MusicChange(3, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
@@ -743,7 +743,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 				Audio.MusicChange(13, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 			end
-			if character == "CHARACTER_NINJABOMBERMAN" then
+			if character == "CHARACTER_NINJABOMBERMAN" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -753,7 +753,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
 				Audio.MusicChange(13, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
 			end
-			if character == "CHARACTER_MEGAMAN" then
+			if character == "CHARACTER_MEGAMAN" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -763,7 +763,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
 				Audio.MusicChange(13, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
 			end
-			if character == "CHARACTER_KLONOA" then
+			if character == "CHARACTER_KLONOA" and holiday == false then
 				Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
 				Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
 				Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
@@ -773,7 +773,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
 				Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
 			end
-			if character == "CHARACTER_ZELDA" then
+			if character == "CHARACTER_ZELDA" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -783,7 +783,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
 				Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
 			end
-			if character == "CHARACTER_ROSALINA" then
+			if character == "CHARACTER_ROSALINA" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -793,7 +793,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 				Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			end
-			if character == "CHARACTER_SAMUS" then
+			if character == "CHARACTER_SAMUS" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -803,7 +803,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Metroid - Zero Mission/Brinstar.ogg")
 				Audio.MusicChange(13, "_OST/Metroid - Zero Mission/Brinstar.ogg")
 			end
-			if character == "CHARACTER_UNCLEBROADSWORD" then
+			if character == "CHARACTER_UNCLEBROADSWORD" and holiday == false then
 				Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 				Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -813,7 +813,7 @@ function malcmusic.onTick()
 				Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 				Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			end
-			if character == "CHARACTER_ULTIMATERINKA" then
+			if character == "CHARACTER_ULTIMATERINKA" and holiday == false then
 				Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 				Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 				Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -826,7 +826,7 @@ function malcmusic.onTick()
 		end
 		
 		--CHARACTER_MARIO
-		if currentCostume == "0-SMASPLUSPLUS-BETA" then
+		if currentCostume == "0-SMASPLUSPLUS-BETA" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario All-Stars++ (Beta)/ac_1700.ogg")
 			Audio.MusicChange(2, "_OST/Super Mario All-Stars++ (Beta)/ac_1700.ogg")
 			Audio.MusicChange(3, "_OST/Super Mario All-Stars++ (Beta)/ac_1700.ogg")
@@ -836,7 +836,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario All-Stars++ (Beta)/BonusSMB3.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario All-Stars++ (Beta)/BonusSMB3.ogg")
 		end
-		if currentCostume == "1-SMB1-RETRO" then
+		if currentCostume == "1-SMB1-RETRO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
 			Audio.MusicChange(2, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
 			Audio.MusicChange(3, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
@@ -846,7 +846,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2")
 			Audio.MusicChange(13, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2")
 		end
-		if currentCostume == "2-SMB1-RECOLORED" then
+		if currentCostume == "2-SMB1-RECOLORED" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -856,7 +856,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "3-SMB1-SMAS" then
+		if currentCostume == "3-SMB1-SMAS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -866,7 +866,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "4-SMB2-RETRO" then
+		if currentCostume == "4-SMB2-RETRO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
@@ -876,7 +876,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 		end
-		if currentCostume == "5-SMB2-SMAS" then
+		if currentCostume == "5-SMB2-SMAS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -886,7 +886,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "6-SMB3-RETRO" then
+		if currentCostume == "6-SMB3-RETRO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|15;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|15;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|15;g=2")
@@ -896,7 +896,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|16;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|16;g=2")
 		end
-		if currentCostume == "7-SML2" then
+		if currentCostume == "7-SML2" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Land 2 - OST.gbs|5;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Land 2 - OST.gbs|5;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Land 2 - OST.gbs|5;g=2")
@@ -906,7 +906,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Land 2 - OST.gbs|0;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Land 2 - OST.gbs|0;g=2")
 		end
-		if currentCostume == "9-SMW-PIRATE" then
+		if currentCostume == "9-SMW-PIRATE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World (NES, Pirate) - OST.nsf|5;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario World (NES, Pirate) - OST.nsf|5;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario World (NES, Pirate) - OST.nsf|5;g=2")
@@ -916,7 +916,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2")
 		end
-		if currentCostume == "Z-SMW2-ADULTMARIO" then
+		if currentCostume == "Z-SMW2-ADULTMARIO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 7).spc|0;g=2.0")
 			Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 2).spc|0;g=2.0")
 			Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 2).spc|0;g=2.0")
@@ -926,7 +926,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/104 Yoshi Start Demo - Prototype Music.spc|0;g=1.7")
 			Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/104 Yoshi Start Demo - Prototype Music.spc|0;g=1.7")
 		end
-		if currentCostume == "11-SMA1" then
+		if currentCostume == "11-SMA1" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(2, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(3, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
@@ -936,7 +936,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Advance/Choose A Player.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Advance/Choose A Player.ogg")
 		end
-		if currentCostume == "12-SMA2" then
+		if currentCostume == "12-SMA2" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(2, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(3, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
@@ -946,7 +946,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Advance 2/Choose A Game.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Advance 2/Choose A Game.ogg")
 		end
-		if currentCostume == "13-SMA4" then
+		if currentCostume == "13-SMA4" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(2, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(3, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
@@ -956,7 +956,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Advance 4/Choose A Game!.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Advance 4/Choose A Game!.ogg")
 		end
-		if currentCostume == "14-NSMBDS-SMBX" then
+		if currentCostume == "14-NSMBDS-SMBX" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -966,7 +966,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/New Super Mario Bros. DS/Toad House.ogg")
 			Audio.MusicChange(13, "_OST/New Super Mario Bros. DS/Toad House.ogg")
 		end
-		if currentCostume == "15-NSMBDS-ORIGINAL" then
+		if currentCostume == "15-NSMBDS-ORIGINAL" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -976,7 +976,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/New Super Mario Bros. DS/Toad House.ogg")
 			Audio.MusicChange(13, "_OST/New Super Mario Bros. DS/Toad House.ogg")
 		end
-		if currentCostume == "A2XT-DEMO" then
+		if currentCostume == "A2XT-DEMO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
@@ -986,7 +986,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		end
-		if currentCostume == "GOOMBA" then
+		if currentCostume == "GOOMBA" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -996,7 +996,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "DEMO-XMASPILY" then
+		if currentCostume == "DEMO-XMASPILY" and holiday == false then
 			Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
@@ -1006,7 +1006,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		end
-		if currentCostume == "GOLDENMARIO" then
+		if currentCostume == "GOLDENMARIO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1016,7 +1016,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "MODERN" then
+		if currentCostume == "MODERN" and holiday == false then
 			Audio.MusicChange(1, "_OST/Modern Mario/SMB2 - Character Select.ogg")
 			Audio.MusicChange(2, "_OST/Modern Mario/SMB2 - Character Select.ogg")
 			Audio.MusicChange(3, "_OST/Modern Mario/SMB2 - Character Select.ogg")
@@ -1026,7 +1026,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Modern Mario/SM64 - Bob-Omb Battlefield.ogg")
 			Audio.MusicChange(13, "_OST/Modern Mario/SM64 - Bob-Omb Battlefield.ogg")
 		end
-		if currentCostume == "PRINCESSRESCUE" then
+		if currentCostume == "PRINCESSRESCUE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Princess Rescue/Overworld.ogg")
 			Audio.MusicChange(2, "_OST/Princess Rescue/Overworld.ogg")
 			Audio.MusicChange(3, "_OST/Princess Rescue/Overworld.ogg")
@@ -1036,7 +1036,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Princess Rescue/Overworld.ogg")
 			Audio.MusicChange(13, "_OST/Princess Rescue/Overworld.ogg")
 		end
-		if currentCostume == "SMG4" then
+		if currentCostume == "SMG4" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1046,7 +1046,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Smash Bros. Ultimate/Mario/a70_smm_title.ogg")
 			Audio.MusicChange(13, "_OST/Super Smash Bros. Ultimate/Mario/a70_smm_title.ogg")
 		end
-		if currentCostume == "SMW-MARIO" then
+		if currentCostume == "SMW-MARIO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1056,7 +1056,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "SP-1-ERICCARTMAN" then
+		if currentCostume == "SP-1-ERICCARTMAN" and holiday == false then
 			Audio.MusicChange(1, "_OST/South Park (N64)/Insane Toys.ogg")
 			Audio.MusicChange(2, "_OST/South Park (N64)/Insane Toys.ogg")
 			Audio.MusicChange(3, "_OST/South Park (N64)/Insane Toys.ogg")
@@ -1066,7 +1066,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/South Park (N64)/Banjo Barnyard.ogg")
 			Audio.MusicChange(13, "_OST/South Park (N64)/Banjo Barnyard.ogg")
 		end
-		if currentCostume == "BOBTHETOMATO" then
+		if currentCostume == "BOBTHETOMATO" and holiday == false then
 			Audio.MusicChange(1, "_OST/VeggieTales/Theme Song.ogg")
 			Audio.MusicChange(2, "_OST/VeggieTales/Theme Song.ogg")
 			Audio.MusicChange(3, "_OST/VeggieTales/Theme Song.ogg")
@@ -1076,7 +1076,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/VeggieTales/Theme Song.ogg")
 			Audio.MusicChange(13, "_OST/VeggieTales/Theme Song.ogg")
 		end
-		if currentCostume == "GA-CAILLOU" then
+		if currentCostume == "GA-CAILLOU" and holiday == false then
 			Audio.MusicChange(1, "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3")
 			Audio.MusicChange(2, "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3")
 			Audio.MusicChange(3, "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3")
@@ -1086,7 +1086,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/GoAnimate/Very Old Songs/GoAnimate Song from YouTube.mp3")
 			Audio.MusicChange(13, "_OST/GoAnimate/Very Old Songs/GoAnimate Song from YouTube.mp3")
 		end
-		if currentCostume == "JCFOSTERTAKESITTOTHEMOON" then
+		if currentCostume == "JCFOSTERTAKESITTOTHEMOON" and holiday == false then
 			Audio.MusicChange(1, "_OST/JC Foster Takes it to the Moon/Overworld.spc|0;g=2.5")
 			Audio.MusicChange(2, "_OST/JC Foster Takes it to the Moon/Overworld.spc|0;g=2.5")
 			Audio.MusicChange(3, "_OST/JC Foster Takes it to the Moon/Overworld.spc|0;g=2.5")
@@ -1096,7 +1096,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/JC Foster Takes it to the Moon/Overworld.spc|0;g=2.5")
 			Audio.MusicChange(13, "_OST/JC Foster Takes it to the Moon/Overworld.spc|0;g=2.5")
 		end
-		if currentCostume == "SMB0" then
+		if currentCostume == "SMB0" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros 0/Shop.ogg")
 			Audio.MusicChange(2, "_OST/Super Mario Bros 0/Shop.ogg")
 			Audio.MusicChange(3, "_OST/Super Mario Bros 0/Shop.ogg")
@@ -1106,7 +1106,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 0/Intro.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 0/Intro.ogg")
 		end
-		if currentCostume == "SMM2-MARIO" then
+		if currentCostume == "SMM2-MARIO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1116,7 +1116,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "MARINK" then
+		if currentCostume == "MARINK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
 			Audio.MusicChange(2, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
 			Audio.MusicChange(3, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
@@ -1136,7 +1136,7 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_LUIGI
-		if currentCostume == "0-SPENCEREVERLY" then
+		if currentCostume == "0-SPENCEREVERLY" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1146,7 +1146,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros Spencer/Athletic.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Bros Spencer/Athletic.ogg")
 		end
-		if currentCostume == "3-SMB1-RETRO-MODERN" then
+		if currentCostume == "3-SMB1-RETRO-MODERN" and holiday == false then
 			Audio.MusicChange(1, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
 			Audio.MusicChange(2, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
 			Audio.MusicChange(3, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
@@ -1156,7 +1156,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2")
 			Audio.MusicChange(13, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2")
 		end
-		if currentCostume == "4-SMB1-SMAS" then
+		if currentCostume == "4-SMB1-SMAS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1166,7 +1166,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "5-SMB2-RETRO" then
+		if currentCostume == "5-SMB2-RETRO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
@@ -1176,7 +1176,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 		end
-		if currentCostume == "6-SMB2-SMAS" then
+		if currentCostume == "6-SMB2-SMAS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1186,7 +1186,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "7-SMB3-RETRO" then
+		if currentCostume == "7-SMB3-RETRO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|15;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|15;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|15;g=2")
@@ -1196,7 +1196,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|16;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros. 3 (NES) - OST.nsf|16;g=2")
 		end
-		if currentCostume == "9-SMB3-MARIOCLOTHES" then
+		if currentCostume == "9-SMB3-MARIOCLOTHES" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1206,7 +1206,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "10-SMW-ORIGINAL" then
+		if currentCostume == "10-SMW-ORIGINAL" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1216,7 +1216,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "13-SMBDX" then
+		if currentCostume == "13-SMBDX" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros Deluxe.gbs|20;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros Deluxe.gbs|20;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros Deluxe.gbs|20;g=2")
@@ -1226,7 +1226,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros Deluxe.gbs|11;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros Deluxe.gbs|11;g=2")
 		end
-		if currentCostume == "15-SMA2" then
+		if currentCostume == "15-SMA2" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(2, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
 			Audio.MusicChange(3, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
@@ -1236,7 +1236,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Advance 2/Choose A Game.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Advance 2/Choose A Game.ogg")
 		end
-		if currentCostume == "17-NSMBDS-SMBX" then
+		if currentCostume == "17-NSMBDS-SMBX" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1246,7 +1246,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/New Super Mario Bros. DS/Toad House.ogg")
 			Audio.MusicChange(13, "_OST/New Super Mario Bros. DS/Toad House.ogg")
 		end
-		if currentCostume == "A2XT-IRIS" then
+		if currentCostume == "A2XT-IRIS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
@@ -1256,7 +1256,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		end
-		if currentCostume == "LARRYTHECUCUMBER" then
+		if currentCostume == "LARRYTHECUCUMBER" and holiday == false then
 			Audio.MusicChange(1, "_OST/VeggieTales/Theme Song.ogg")
 			Audio.MusicChange(2, "_OST/VeggieTales/Theme Song.ogg")
 			Audio.MusicChange(3, "_OST/VeggieTales/Theme Song.ogg")
@@ -1266,7 +1266,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/VeggieTales/Theme Song.ogg")
 			Audio.MusicChange(13, "_OST/VeggieTales/Theme Song.ogg")
 		end
-		if currentCostume == "SMM2-LUIGI" then
+		if currentCostume == "SMM2-LUIGI" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1276,7 +1276,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "SMW-LUIGI" then
+		if currentCostume == "SMW-LUIGI" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1286,7 +1286,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "UNDERTALE-FRISK" then
+		if currentCostume == "UNDERTALE-FRISK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Undertale/mus_town.ogg")
 			Audio.MusicChange(2, "_OST/Undertale/mus_town.ogg")
 			Audio.MusicChange(3, "_OST/Undertale/mus_town.ogg")
@@ -1296,7 +1296,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Undertale/mus_zz_megalovania.ogg")
 			Audio.MusicChange(13, "_OST/Undertale/mus_zz_megalovania.ogg")
 		end
-		if currentCostume == "WALUIGI" then
+		if currentCostume == "WALUIGI" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1328,7 +1328,7 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_TOAD
-		if currentCostume == "1-SMB1-RETRO" then
+		if currentCostume == "1-SMB1-RETRO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
 			Audio.MusicChange(2, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
 			Audio.MusicChange(3, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|0;g=2")
@@ -1338,7 +1338,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2")
 			Audio.MusicChange(13, "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2")
 		end
-		if currentCostume == "2-SMB1-SMAS" then
+		if currentCostume == "2-SMB1-SMAS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1348,7 +1348,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "3-SMB2-RETRO" then
+		if currentCostume == "3-SMB2-RETRO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
@@ -1358,7 +1358,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 		end
-		if currentCostume == "4-SMB2-RETRO-YELLOW" then
+		if currentCostume == "4-SMB2-RETRO-YELLOW" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
@@ -1368,7 +1368,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 		end
-		if currentCostume == "5-SMB2-RETRO-RED" then
+		if currentCostume == "5-SMB2-RETRO-RED" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(2, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
 			Audio.MusicChange(3, "_OST/Super Mario Bros 2 (NES) - OST.nsf|5;g=2")
@@ -1378,7 +1378,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 2 (NES) - OST.nsf|1;g=2")
 		end
-		if currentCostume == "6-SMB3-BLUE" then
+		if currentCostume == "6-SMB3-BLUE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1388,7 +1388,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "7-SMB3-YELLOW" then
+		if currentCostume == "7-SMB3-YELLOW" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1398,7 +1398,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "A2XT-RAOCOW" then
+		if currentCostume == "A2XT-RAOCOW" and holiday == false then
 			Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
 			Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
@@ -1408,7 +1408,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		end
-		if currentCostume == "SEE-TANGENT" then
+		if currentCostume == "SEE-TANGENT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Nintendogs + Cats/CFR_BGM_SHOP_INTERIOR.ogg")
 			Audio.MusicChange(2, "_OST/Nintendogs + Cats/CFR_BGM_SHOP_HOTEL.ogg")
 			Audio.MusicChange(3, "_OST/Nintendogs + Cats/CFR_BGM_SHOP_INTERIOR.ogg")
@@ -1418,7 +1418,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Nintendogs + Cats/CFR_BGM_WALK.ogg")
 			Audio.MusicChange(13, "_OST/Nintendogs + Cats/CFR_BGM_WALK.ogg")
 		end
-		if currentCostume == "SMM2-TOAD" then
+		if currentCostume == "SMM2-TOAD" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1428,7 +1428,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "SMM2-TOADETTE" then
+		if currentCostume == "SMM2-TOADETTE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1438,7 +1438,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "SMM2-YELLOWTOAD" then
+		if currentCostume == "SMM2-YELLOWTOAD" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -1448,7 +1448,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
-		if currentCostume == "SONIC" then
+		if currentCostume == "SONIC" and holiday == false then
 			Audio.MusicChange(1, "_OST/Sonic Mania/MainMenu.ogg")
 			Audio.MusicChange(2, "_OST/Sonic Mania/MainMenu.ogg")
 			Audio.MusicChange(3, "_OST/Sonic Mania/MainMenu.ogg")
@@ -1458,7 +1458,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Sonic Mania/SaveSelect.ogg")
 			Audio.MusicChange(13, "_OST/Sonic Mania/SaveSelect.ogg")
 		end
-		if currentCostume == "TOADETTE" then
+		if currentCostume == "TOADETTE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1468,7 +1468,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
-		if currentCostume == "YOSHI-SMB3" then
+		if currentCostume == "YOSHI-SMB3" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1490,7 +1490,7 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_LINK
-		if currentCostume == "NESS" then
+		if currentCostume == "NESS" and holiday == false then
 			Audio.MusicChange(1, "_OST/EarthBound/021 Home Sweet Home.spc|0;g=2.3")
 			Audio.MusicChange(2, "_OST/EarthBound/024 Enjoy Your Stay.spc|0;g=2.3")
 			Audio.MusicChange(3, "_OST/EarthBound/021 Home Sweet Home.spc|0;g=2.3")
@@ -1500,7 +1500,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/EarthBound/019b Onett Theme.spc|0;g=2.3")
 			Audio.MusicChange(13, "_OST/EarthBound/019b Onett Theme.spc|0;g=2.3")
 		end
-		if currentCostume == "SEE-SHERBERTLUSSIEBACK" then
+		if currentCostume == "SEE-SHERBERTLUSSIEBACK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
@@ -1510,7 +1510,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
 		end
-		if currentCostume == "TAKESHI" then
+		if currentCostume == "TAKESHI" and holiday == false then
 			Audio.MusicChange(1, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")
 			Audio.MusicChange(2, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")
 			Audio.MusicChange(3, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")
@@ -1520,7 +1520,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")
 			Audio.MusicChange(13, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")
 		end
-		if currentCostume == "TAKESHI-SNES" then
+		if currentCostume == "TAKESHI-SNES" and holiday == false then
 			Audio.MusicChange(1, "_OST/Takeshi's Challenge (SNES)/Main Theme (SNES).ogg")
 			Audio.MusicChange(2, "_OST/Takeshi's Challenge (SNES)/Main Theme (SNES).ogg")
 			Audio.MusicChange(3, "_OST/Takeshi's Challenge (SNES)/Main Theme (SNES).ogg")
@@ -1535,7 +1535,7 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_KLONOA
-		if currentCostume == "YS-GREEN" then
+		if currentCostume == "YS-GREEN" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -1551,7 +1551,7 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_STEVE (ULTIMATE_RINKA)
-		if currentCostume == "DJCTRE-CUBIXTRON" then
+		if currentCostume == "DJCTRE-CUBIXTRON" and holiday == false then
 			Audio.MusicChange(1, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(2, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(3, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
@@ -1561,7 +1561,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(13, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 		end
-		if currentCostume == "DJCTRE-CUBIXTRONDAD" then
+		if currentCostume == "DJCTRE-CUBIXTRONDAD" and holiday == false then
 			Audio.MusicChange(1, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(2, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(3, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
@@ -1571,7 +1571,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(13, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 		end
-		if currentCostume == "DJCTRE-STULTUS" then
+		if currentCostume == "DJCTRE-STULTUS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(2, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(3, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
@@ -1581,7 +1581,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 			Audio.MusicChange(13, "_OST/Cubix Tron/Cubix! The Show!/Theme Song (Remake, Looping Version).ogg")
 		end
-		if currentCostume == "DLC-FESTIVE-CHRISTMASTREE" then
+		if currentCostume == "DLC-FESTIVE-CHRISTMASTREE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1591,7 +1591,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "ED-EDEDDANDEDDY" then
+		if currentCostume == "ED-EDEDDANDEDDY" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1601,7 +1601,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "EXPLODINGTNT" then
+		if currentCostume == "EXPLODINGTNT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1611,7 +1611,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "GEORGENOTFOUNDYT" then
+		if currentCostume == "GEORGENOTFOUNDYT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1621,7 +1621,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "HANGOUTYOSHIGUYYT" then
+		if currentCostume == "HANGOUTYOSHIGUYYT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1631,7 +1631,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "KARLJACOBSYT" then
+		if currentCostume == "KARLJACOBSYT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1641,7 +1641,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-ALEX" then
+		if currentCostume == "MC-ALEX" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1651,7 +1651,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-CAPTAINTOAD" then
+		if currentCostume == "MC-CAPTAINTOAD" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1661,7 +1661,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-FNF-BOYFRIEND" then
+		if currentCostume == "MC-FNF-BOYFRIEND" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1671,7 +1671,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-FNF-GIRLFRIEND" then
+		if currentCostume == "MC-FNF-GIRLFRIEND" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1681,7 +1681,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-FRISK" then
+		if currentCostume == "MC-FRISK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1691,7 +1691,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-HEROBRINE" then
+		if currentCostume == "MC-HEROBRINE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1701,7 +1701,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-IMPOSTOR" then
+		if currentCostume == "MC-IMPOSTOR" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1711,7 +1711,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-ITSJERRY" then
+		if currentCostume == "MC-ITSJERRY" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1721,7 +1721,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-ITSHARRY" then
+		if currentCostume == "MC-ITSHARRY" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1731,7 +1731,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-KERALIS" then
+		if currentCostume == "MC-KERALIS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1741,7 +1741,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-KRIS" then
+		if currentCostume == "MC-KRIS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1751,7 +1751,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-MARIO" then
+		if currentCostume == "MC-MARIO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1761,7 +1761,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-NOELLE-DELTARUNE" then
+		if currentCostume == "MC-NOELLE-DELTARUNE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1771,7 +1771,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-NOTCH" then
+		if currentCostume == "MC-NOTCH" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1781,7 +1781,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-PATRICK" then
+		if currentCostume == "MC-PATRICK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1791,7 +1791,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-RALSEI" then
+		if currentCostume == "MC-RALSEI" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1801,7 +1801,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-SONIC" then
+		if currentCostume == "MC-SONIC" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1811,7 +1811,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-SPIDERMAN" then
+		if currentCostume == "MC-SPIDERMAN" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1821,7 +1821,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-SPONGEBOB" then
+		if currentCostume == "MC-SPONGEBOB" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1831,7 +1831,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-SQUIDWARD" then
+		if currentCostume == "MC-SQUIDWARD" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1841,7 +1841,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-SUSIE-DELTARUNE" then
+		if currentCostume == "MC-SUSIE-DELTARUNE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1851,7 +1851,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-TAILS" then
+		if currentCostume == "MC-TAILS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1861,7 +1861,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "MC-ZOMBIE" then
+		if currentCostume == "MC-ZOMBIE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1871,7 +1871,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "QUACKITYYT" then
+		if currentCostume == "QUACKITYYT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -1881,7 +1881,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 			Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		end
-		if currentCostume == "SEE-MC-EVILME" then
+		if currentCostume == "SEE-MC-EVILME" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1891,7 +1891,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-GERANIUM" then
+		if currentCostume == "SEE-MC-GERANIUM" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1901,7 +1901,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-LEWBERTLUSSIEBACK" then
+		if currentCostume == "SEE-MC-LEWBERTLUSSIEBACK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1911,7 +1911,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-LILIJUCIEBACK" then
+		if currentCostume == "SEE-MC-LILIJUCIEBACK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1921,7 +1921,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-MIMIJUCIEBACK" then
+		if currentCostume == "SEE-MC-MIMIJUCIEBACK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1931,7 +1931,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-RONDAVIS" then
+		if currentCostume == "SEE-MC-RONDAVIS" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1941,7 +1941,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-SHENICLE" then
+		if currentCostume == "SEE-MC-SHENICLE" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1951,7 +1951,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-SHELLEYKIRK" then
+		if currentCostume == "SEE-MC-SHELLEYKIRK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1961,7 +1961,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-SHERBERTLUSSIEBACK" then
+		if currentCostume == "SEE-MC-SHERBERTLUSSIEBACK" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1971,7 +1971,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-SPENCER2" then
+		if currentCostume == "SEE-MC-SPENCER2" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1981,7 +1981,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-SPENCEREVERLY" then
+		if currentCostume == "SEE-MC-SPENCEREVERLY" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -1991,7 +1991,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "SEE-MC-TIANELY" then
+		if currentCostume == "SEE-MC-TIANELY" and holiday == false then
 			Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(3, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
@@ -2001,7 +2001,7 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		end
-		if currentCostume == "TOMMYINNITYT" then
+		if currentCostume == "TOMMYINNITYT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 			Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -2026,7 +2026,7 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_YOSHI (KLONOA)
-		if currentCostume == "SMA3" then
+		if currentCostume == "SMA3" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario Advance 3/Overworld.ogg")
 			Audio.MusicChange(2, "_OST/Super Mario Advance 3/Overworld.ogg")
 			Audio.MusicChange(3, "_OST/Super Mario Advance 3/Overworld.ogg")
@@ -2040,7 +2040,7 @@ function malcmusic.onTick()
 end
 
 function malcmusic.onEvent(eventName)
-	if eventName == "MarioChar" then
+	if eventName == "MarioChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2050,7 +2050,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
 	end
-	if eventName == "LuigiChar" then
+	if eventName == "LuigiChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2060,7 +2060,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Super Mario Bros/Athletic.spc|0;g=2.5")
 	end
-	if eventName == "PeachChar" then
+	if eventName == "PeachChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2070,7 +2070,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Super Mario Bros 2/Subspace.spc|0;g=2.5")
 	end
-	if eventName == "ToadChar" then
+	if eventName == "ToadChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2080,7 +2080,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5")
 	end
-	if eventName == "LinkChar" then
+	if eventName == "LinkChar" and holiday == false then
 		Audio.MusicChange(0, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
 		Audio.MusicChange(1, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
 		Audio.MusicChange(2, "_OST/Legend of Zelda - A Link to the Past/09 Kakariko Village.spc|0;g=2.5")
@@ -2093,7 +2093,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/08 Hyrule Field Main Theme.spc|0;g=2.5")
 	end
-	if eventName == "WarioChar" then
+	if eventName == "WarioChar" and holiday == false then
 		Audio.MusicChange(0, "_OST/Wario Land 3.gbs|3;g=2")
 		Audio.MusicChange(1, "_OST/Wario Land 3.gbs|3;g=2")
 		Audio.MusicChange(2, "_OST/Wario Land 3.gbs|3;g=2")
@@ -2106,7 +2106,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
 		Audio.MusicChange(13, "_OST/Wario Land - Super Mario Land 3.gbs|3;g=2")
 	end
-	if eventName == "BowserChar" then
+	if eventName == "BowserChar" and holiday == false then
 		Audio.MusicChange(0, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 		Audio.MusicChange(1, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 		Audio.MusicChange(2, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
@@ -2119,7 +2119,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 		Audio.MusicChange(13, "_OST/Super Mario Bros 3/Dark Land.spc|0;g=2.3")
 	end
-	if eventName == "BombChar" then
+	if eventName == "BombChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2129,7 +2129,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
 		Audio.MusicChange(13, "_OST/Bomberman GB - OST.gbs|0;g=1.7")
 	end
-	if eventName == "MegaChar" then
+	if eventName == "MegaChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2139,7 +2139,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
 		Audio.MusicChange(13, "_OST/Mega Man 10 - OST.nsf|7;g=1.7")
 	end
-	if eventName == "ZeldaChar" then
+	if eventName == "ZeldaChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2149,7 +2149,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Legend of Zelda - A Link to the Past/24 Meeting the Maidens.spc|0;g=2.5")
 	end
-	if eventName == "RosaChar" then
+	if eventName == "RosaChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2159,7 +2159,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 	end
-	if eventName == "SamusChar" then
+	if eventName == "SamusChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2169,7 +2169,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Metroid - Zero Mission/Brinstar.ogg")
 		Audio.MusicChange(13, "_OST/Metroid - Zero Mission/Brinstar.ogg")
 	end
-	if eventName == "UncleChar" then
+	if eventName == "UncleChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
 		Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2179,7 +2179,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 	end
-	if eventName == "RinkaChar" then
+	if eventName == "RinkaChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(2, "_OST/Minecraft/mc03_mce_earth.ogg")
 		Audio.MusicChange(3, "_OST/Minecraft/mc03_mce_earth.ogg")
@@ -2189,7 +2189,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 		Audio.MusicChange(13, "_OST/Minecraft/mc02_mc_toysonatear.ogg")
 	end
-	if eventName == "SnakeChar" then
+	if eventName == "SnakeChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Metal Gear - OST.nsf|8;g=2")
 		Audio.MusicChange(2, "_OST/Metal Gear - OST.nsf|8;g=2")
 		Audio.MusicChange(3, "_OST/Metal Gear - OST.nsf|8;g=2")
@@ -2199,7 +2199,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Metal Gear - OST.nsf|6;g=2")
 		Audio.MusicChange(13, "_OST/Metal Gear - OST.nsf|6;g=2")
 	end
-	if eventName == "YoshiChar" then
+	if eventName == "YoshiChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
 		Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
 		Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/107 Flower Garden.spc|0;g=2.5")
@@ -2209,7 +2209,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
 		Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/113 Athletic.spc|0;g=2.5")
 	end
-	if eventName == "KlonoaChar" then
+	if eventName == "KlonoaChar" and holiday == false then
 		Audio.MusicChange(1, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
 		Audio.MusicChange(2, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
 		Audio.MusicChange(3, "_OST/Klonoa (Wii)/113 - Eriko Imura - Melancholy Soldier.ogg")
@@ -2219,7 +2219,7 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(12, "_OST/Klonoa (Wii)/122 - Kanako Kakino - Count Three.ogg")
 		Audio.MusicChange(13, "_OST/Klonoa (Wii)/217 - Hiroshi Okubo - The Ring.ogg")
 	end
-	if eventName == "StageGenoside" then
+	if eventName == "StageGenoside" and holiday == false then
 		Audio.MusicChange(0, "_OST/Me and Larry City/Main Theme (Genoside).ogg")
 		Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme (Genoside).ogg")
 		Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme (Genoside).ogg")

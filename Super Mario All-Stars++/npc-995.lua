@@ -115,7 +115,7 @@ function emptytalkbox.onTickNPC(v)
   
   --If the NPC has already been dropped, then prevent respawning with it
   if data.dropped then
-    v.ai1 = 0
+    
   end    
 	
 	--If carrying an NPC, and spawn timer is over

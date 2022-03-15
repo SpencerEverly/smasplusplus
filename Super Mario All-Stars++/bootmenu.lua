@@ -40,6 +40,7 @@ local charactercheck = false
 local keyinput1 = false
 local killed = false
 local active4 = false
+local stpatricksday = false
 
 local cooldown = 0
 
@@ -534,6 +535,9 @@ local function BootDialogueMusicReset()
 	active4 = false
 	logo = false
 	pressjumpwords = false
+	if os.date("*t").month == 03 and os.date("*t").day == 17 then
+		stpatricksday = false
+	end
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 	if Level.filename() == "intro_8bit.lvlx" then
 		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
@@ -592,6 +596,9 @@ local function ExitDialogueFirstBoot()
 	if GameData.startedmenu == nil then
 		GameData.startedmenu = 4
 	end
+	if os.date("*t").month == 03 and os.date("*t").day == 17 then
+		stpatricksday = true
+	end
 end
 
 local function ExitDialogue()
@@ -601,6 +608,9 @@ local function ExitDialogue()
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
+	if os.date("*t").month == 03 and os.date("*t").day == 17 then
+		stpatricksday = true
+	end
 end
 
 local function ExitDialogueMusicReset()
@@ -609,6 +619,9 @@ local function ExitDialogueMusicReset()
 	pressjumpwords = true
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
+	end
+	if os.date("*t").month == 03 and os.date("*t").day == 17 then
+		stpatricksday = true
 	end
 	if Level.filename() == "intro_8bit.lvlx" then
 		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
@@ -974,6 +987,9 @@ function bootmenu.onStart()
 	if os.date("*t").month == 04 and os.date("*t").day == 01 then
 		GameData.startedmenu = 1
 	end
+	if os.date("*t").month == 03 and os.date("*t").day == 17 then
+		stpatricksday = true
+	end
 	if Level.filename() == "intro_SMAS.lvlx" then
 		if SaveData.firstBootCompleted == 0 then
 			--Nothing
@@ -1300,23 +1316,20 @@ function bootmenu.onDraw()
 	if active3 then
 		textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
 	end
-	if not active3 then
-		--nothing
-	end
 	if active4 then
 		textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
-	end
-	if not active4 then
-		--nothing
 	end
 	if keyinput1 then
 		textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=6, color=Color.lightred, font=statusFont}
 	end
-	if not keyinput1 then
-		--nothing
-	end
 	if aprilfools then	
 		Graphics.drawImageWP(aprilfoolserror, 0, 0, 10)
+	end
+	if stpatricksday then
+		textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=3, color=Color.green, font=statusFont}
+	end
+	if stpatricksday == false then
+		--Nothing
 	end
 end
 
