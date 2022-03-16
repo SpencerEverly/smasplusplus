@@ -84,30 +84,6 @@ function musicalchairs.onEvent(eventName)
 			end
 		end
 		if eventName == "Boss Start" then
-			if level == "SMB1 - W-1, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg")
-			end
-			if level == "SMB1 - W-2, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg")
-			end
-			if level == "SMB1 - W-3, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg")
-			end
-			if level == "SMB1 - W-4, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg")
-			end
-			if level == "SMB1 - W-5, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg")
-			end
-			if level == "SMB1 - W-6, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg")
-			end
-			if level == "SMB1 - W-7, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg")
-			end
-			if level == "SMB2 - W-1, L-1.lvlx" then
-				Audio.MusicChange(4, "_OST/Super Mario All-Stars++ (Beta)/BirdoAlt.ogg")
-			end
 		end
 		if eventName == "Boss End" then
 			if level == "SMB1 - W-1, L-4.lvlx" then
@@ -147,14 +123,9 @@ function musicalchairs.onEvent(eventName)
 				SFX.play("_OST/Super Mario Bros (NES)/Going Underground (SFX).ogg")
 			end
 		end
-		if eventName == "Boss Start" then
-			if level == "SMB1 - W-1, L-4.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario Bros (NES) - OST.nsf|3;g=2")
-			end
-		end
 		if eventName == "Boss End" then
 			if level == "SMB1 - W-1, L-4.lvlx" then
-				SFX.play("_OST/Super Mario Bros (NES) - OST.nsf|6;g=2")
+				--SFX.play("_OST/Super Mario Bros (NES) - OST.nsf|6;g=2")
 			end
 		end
 	end
@@ -2189,6 +2160,8 @@ function musicalchairs.onTick()
 				section.music = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Last Bowser Battle.ogg"
 			elseif section.music == 21 then
 				section.music = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg"
+			elseif section.music == "_OST/Super Mario Bros/Bowser.spc|0;g=2.5" then
+				section.music = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Bowser Battle.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/DesertSMB1.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.5" then
@@ -2286,6 +2259,8 @@ function musicalchairs.onTick()
 			elseif section.music == 19 then
 				section.music = "_OST/Super Mario Bros (NES)/Final Battle.ogg"
 			elseif section.music == 21 then
+				section.music = "_OST/Super Mario Bros (NES)/Bowser Battle.ogg"
+			elseif section.music == "_OST/Super Mario Bros/Bowser.spc|0;g=2.5" then
 				section.music = "_OST/Super Mario Bros (NES)/Bowser Battle.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario Bros (NES)/Desert.ogg"
