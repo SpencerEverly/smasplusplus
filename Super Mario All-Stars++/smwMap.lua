@@ -4338,7 +4338,7 @@ smwMap.encounterSettings = {
 
 
 smwMap.hudSettings = {
-    borderImage = Graphics.loadImageResolved("hardcoded-33-4-tp.png"),
+    borderImage = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp.png"),
 
     borderLeftWidth = 66,
     borderRightWidth = 66,
