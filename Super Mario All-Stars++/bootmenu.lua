@@ -441,7 +441,7 @@ local function X2Char()
 end
 
 local function InputConfig1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.1>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
 end
 
 local function X2DisableCheck1()
@@ -1472,10 +1472,10 @@ littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction =
 littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
 littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
 littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
-littleDialogue.registerAnswer("Options",{text = "Fix Broken Map Paths",chosenFunction = function() Routine.run(PathFix1) end})
+--littleDialogue.registerAnswer("Options",{text = "Fix Broken Map Paths",chosenFunction = function() Routine.run(PathFix1) end})
 littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
 littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
-littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(BootCredits) end})
+littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
 
 
 
