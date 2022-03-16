@@ -889,7 +889,7 @@ local function drawPauseMenu(y, alpha)
 		if isOverworld then
 			table.insert(pause_options, {name="Character Options", action = switchtochar});
 		end
-		if not isOverworld then
+		if not isOverworld and (Level.filename() == "SMAS - Map.lvlx") == false then
 			table.insert(pause_options, {name="Exit to Map", action = exitlevel2});
 		end
 		if not isOverworld and Defines.player_hasCheated == false then
