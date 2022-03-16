@@ -10,6 +10,8 @@
 
 local extrasounds = {}
 
+local spinballcounter = 1
+
 extrasounds.active = true --Are the extra sounds active? If not, they won't play. If false the library won't be used and will revert to the stock sound system. Useful for muting all sounds for a boot menu, cutscene, or something like that by using Audio.sounds[id].muted = true instead.
 
 local ready = false --This library isn't ready until onInit is finished
@@ -163,6 +165,28 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[43].muted = false
 		Audio.sounds[59].muted = false
 	end
+	if (player:mem(0x55, FIELD_WORD) == 255) or (player:mem(0x55, FIELD_WORD) == 0) then --This is code related to spinjump fireball/iceball shooting. It's not on the docs, I found this memory address myself
+		if player:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
+			spinballcounter = spinballcounter - 1
+			if player.powerup == 3 then --Fireball sound
+				SFX.play(extrasounds.playersoundid18, 1, 1, 30)
+			end
+			if player.powerup == 7 then --Iceball sound
+				SFX.play(extrasounds.playersoundid93, 1, 1, 30)
+			end
+			if spinballcounter <= 0 then --If it's zero, stop playing
+				if extrasounds.playersoundid18.playing then
+					extrasounds.playersoundid18:stop()
+				elseif extrasounds.playersoundid93.playing then
+					extrasounds.playersoundid93:stop()
+				end
+			end
+		end
+	end
+end
+
+function extrasounds.onDraw()
+	--Text.print(player:mem(0x55, FIELD_WORD), 100, 100)
 end
 
 function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil) --Let's start off with block hitting.
@@ -207,7 +231,7 @@ end
 function extrasounds.onInputUpdate() --Button pressing for such commands
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
-			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, or the fireball/iceball cooldown is less than 0 before playing
+			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than 0 before playing
 				if player.powerup == 3 then --Fireball sound
 					SFX.play(extrasounds.playersoundid18)
 				end
@@ -219,7 +243,7 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 	end
 end
 
-function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom coin sounds and etc.
+function extrasounds.onPostNPCKill(npc, harmtype, playerornil) --NPC Kill stuff, for custom coin sounds and etc.
 	local starmans = table.map{994,996}
 	local coins = table.map{10,33,88,103,138,258,528}
 	local oneups = table.map{90,186,187}
