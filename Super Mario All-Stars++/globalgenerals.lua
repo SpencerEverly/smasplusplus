@@ -678,6 +678,15 @@ function globalgenerals.onTick()
 	end
 	
 	
+	
+	if currentCostume == "SMW2-YOSHI" then
+		littleDialogue.characterNames[9] = "Yoshi"
+	end
+	if currentCostume == "YS-GREEN" then
+		littleDialogue.characterNames[9] = "Yoshi"
+	end
+	
+	
 	if character == "CHARACTER_STEVE" then
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
@@ -831,6 +840,7 @@ function globalgenerals.onTick()
 		littleDialogue.characterNames[3] = "Peach"
 		littleDialogue.characterNames[4] = "Toad"
 		littleDialogue.characterNames[5] = "Link"
+		littleDialogue.characterNames[9] = "Klonoa"
 		littleDialogue.characterNames[14] = "Steve"
 		steve.skinSettings.name = "steve"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")

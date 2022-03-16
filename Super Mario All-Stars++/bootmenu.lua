@@ -314,6 +314,16 @@ local function theme15scrolling()
 	Routine.loop(2418, theme15scrolling, true)
 end
 
+local function theme16()
+	SaveData.introselect = 16
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_marioforever.lvlx", nil, nil)
+end
+
 local function mapExit()
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
@@ -1485,6 +1495,7 @@ littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",c
 littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() Routine.run(theme13) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() Routine.run(theme14) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 

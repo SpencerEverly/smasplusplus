@@ -93,6 +93,9 @@ local function preboot()
 	if SaveData.introselect == 15 then
 		Level.load("intro_jakebrito1.lvlx", nil, nil)
 	end
+	if SaveData.introselect == 16 then
+		Level.load("intro_marioforever.lvlx", nil, nil)
+	end
 end
 
 function onKeyboardPress(k, v)
