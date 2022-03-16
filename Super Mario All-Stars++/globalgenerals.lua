@@ -688,6 +688,10 @@ function globalgenerals.onTick()
 	
 	
 	if character == "CHARACTER_STEVE" then
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	
@@ -717,6 +721,9 @@ function globalgenerals.onTick()
 	end
 	if currentCostume == "KARLJACOBSYT" then
 		littleDialogue.characterNames[14] = "Karl"
+	end
+	if currentCostume == "KOOPAPANZER" then
+		littleDialogue.characterNames[14] = "Koopapanzer"
 	end
 	if currentCostume == "MC-ALEX" then
 		littleDialogue.characterNames[14] = "Alex"
