@@ -18,6 +18,9 @@ local inventory = {}
 local warpTransition = require("warpTransition")
 local pausemenu = require("pausemenu")
 local littleDialogue = require("littleDialogue")
+local yoshi = require("yiYoshi/yiYoshi")
+
+GameData.inventoryopened = false
 
 local inventory = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.png"))
 local inventorysmol = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventorysmol.png"))
@@ -103,7 +106,7 @@ end
 function inventory.onDraw()
     player.reservePowerup = 0 -- disables the item box
 	if inventory.activateinventory == true then
-		if Misc.isPausedByLua() then
+		if GameData.inventoryopened == true then
 			numx = 54
 			numy = 574
 
@@ -203,7 +206,7 @@ function inventory.onDraw()
         SaveData.inventory.hammer = minhammer
     end
 	if inventory.activateinventory == true then
-		if Misc.isPausedByLua() then -- selects the powerup
+		if GameData.inventoryopened == true then -- selects the powerup
 			if player.rawKeys.jump == KEYS_PRESSED then
 				if player.powerup == powerup[state] then
 					Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
@@ -269,7 +272,7 @@ function inventory.onDraw()
 	end
 
 	if inventory.activateinventory == true then
-		if Misc.isPausedByLua() then
+		if GameData.inventoryopened == true then
 			if SaveData.inventory.shroom == 0 then
 				Graphics.drawImage(noshroom, 30, 508 )
 			end
@@ -385,7 +388,7 @@ function inventory.onTick()
 	if pausemenu.pauseactivated == false then
 		inventory.activateinventory = false
 	end
-	--if littleDialogue.onMessageBox then --Apparently this is breaking the inventory...
+	--if yoshi.rescueBaby then --Once again, breaking the inventory...
 		--inventory.activateinventory = false
 	--end
 	if pausemenu.paused == true then
@@ -480,30 +483,33 @@ function inventory.onInputUpdate()
 
 	if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
 		inventory.activateinventory = true
-		if Misc.isPausedByLua() then
+		GameData.inventoryopened = not GameData.inventoryopened
+		if GameData.inventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
 			inventoryopen = false
+			GameData.inventoryopened = false
 			Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
 			Misc.unpause()
-		elseif not Misc.isPausedByLua() then
+		elseif GameData.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
 			inventoryopen = true
+			GameData.inventoryopened = true
 			Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
 			Misc.pause()
 		end
 	end
 	if inventory.activateinventory == true then
-		if Misc.isPausedByLua() then
+		if GameData.inventoryopened == true then
 			Graphics.drawImage(inventory, 30, 508)
 			Graphics.drawImage(selector, selectx, selecty)
 		end
 	end
-	if Misc.isPausedByLua() then -- move cursor right
+	if GameData.inventoryopened == true then -- move cursor right
 		if player.rawKeys.right == KEYS_PRESSED then
 			Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
 			selectx = selectx + 64
 			state = state + 1
 		end
 	end
-	if Misc.isPausedByLua() then -- move cursor left
+	if GameData.inventoryopened == true then -- move cursor left
 		if player.rawKeys.left == KEYS_PRESSED then
 			Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
 			selectx = selectx - 64
@@ -511,22 +517,22 @@ function inventory.onInputUpdate()
 		end
 	end
 
-	if Misc.isPausedByLua() then -- if the cursor is on the far right or left, it will loop around
+	if GameData.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
 		if selectx < 30 then
 			selectx = 30 + 320
 		end 
 	end
-	if Misc.isPausedByLua() then
+	if GameData.inventoryopened == true then
 		if selectx > 30 + 320 then
 			selectx = 30
 		end 
 	end
-	if Misc.isPausedByLua() then
+	if GameData.inventoryopened == true then
 		if state > 6 then
 			state = 1
 		end
 	end
-	if Misc.isPausedByLua() then
+	if GameData.inventoryopened == true then
 		if state < 1 then
 			state = 6
 		end

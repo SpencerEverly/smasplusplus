@@ -4511,7 +4511,7 @@ function yoshi.onDraw()
 end
 
 
-local function giveCheckpointBonus()
+function yoshi.giveCheckpointBonus()
     if p.character ~= CHARACTER_YOSHI then
         return
     end
@@ -4542,7 +4542,7 @@ function yoshi.onCheckpoint(cp)
         return
     end
 
-    giveCheckpointBonus()
+    yoshi.giveCheckpointBonus()
     saveEggs()
 end
 
@@ -4554,7 +4554,7 @@ function yoshi.onPostNPCKill(npc,reason)
     end
 
     if npc.id == 192 and lunatime.tick() > 1 then -- legacy checkpoint
-        giveCheckpointBonus()
+        yoshi.giveCheckpointBonus()
         saveEggs()
     end
 
