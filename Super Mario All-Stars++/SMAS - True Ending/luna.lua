@@ -62,6 +62,7 @@ function onEvent(eventName)
 	end
 	if eventName == "NormalCutsceneBegin" then
 		pausemenu.pauseactivated = false
+		inventory.cutsceneActive = true
 		player:teleport(-78784, -80128)
 		triggerEvent("NormalCutsceneBegin2")
 		player.keys.left = false

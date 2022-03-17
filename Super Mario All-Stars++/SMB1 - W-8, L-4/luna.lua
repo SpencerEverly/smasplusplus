@@ -4,6 +4,7 @@ function onEvent(eventName)
 	if eventName == ("Pigeon Cutscene") then
 		if SaveData.disableX2char == 0 then
 			pausemenu.pauseactivated = false
+			inventory.cutsceneActive = true
 		end
 		if SaveData.disableX2char == 1 then
 			pausemenu13.pauseactivated = false
@@ -15,6 +16,7 @@ function onEvent(eventName)
 	if eventName == ("Pigeon Cutscene 5") then
 		if SaveData.disableX2char == 0 then
 			pausemenu.pauseactivated = true
+			inventory.cutsceneActive = false
 		end
 		if SaveData.disableX2char == 1 then
 			pausemenu13.pauseactivated = true
@@ -26,6 +28,7 @@ function onEvent(eventName)
 		SFX.play("_OST/_Sound Effects/is-the-pool-clean.ogg")
 		if SaveData.disableX2char == 0 then
 			pausemenu.pauseactivated = false
+			inventory.cutsceneActive = true
 		end
 		if SaveData.disableX2char == 1 then
 			pausemenu13.pauseactivated = false
@@ -38,6 +41,7 @@ function onEvent(eventName)
 	if eventName == ("Pigeon Cutscene Sequel 3") then
 		if SaveData.disableX2char == 0 then
 			pausemenu.pauseactivated = true
+			inventory.cutsceneActive = false
 		end
 		if SaveData.disableX2char == 1 then
 			pausemenu13.pauseactivated = true

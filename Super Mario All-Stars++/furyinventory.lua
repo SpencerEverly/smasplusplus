@@ -32,7 +32,7 @@ local selecty = 508
 local numx = 40
 local numy = 570
 
-
+inventory.cutsceneActive = false
 inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
 
 local inventoryopen = false
@@ -481,7 +481,7 @@ function inventory.onInputUpdate()
 		end
 	end
 
-	if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
+	if player.rawKeys.dropItem == KEYS_PRESSED and inventory.cutsceneActive == false then -- toggle inventory menu
 		inventory.activateinventory = true
 		GameData.inventoryopened = not GameData.inventoryopened
 		if GameData.inventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
