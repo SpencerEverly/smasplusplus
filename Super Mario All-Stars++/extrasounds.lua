@@ -211,11 +211,21 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil) --L
 			elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
 				SFX.play(extrasounds.playersoundid14)
 			end
-			if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
-				if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
-					SFX.play(extrasounds.playersoundid0)
-				elseif bricks[block.id] then --Or else play it
-					SFX.play(extrasounds.playersoundid4)
+			if player.powerup >= 2 then --Smash bricks only when you are big and up
+				if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
+					if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+						SFX.play(extrasounds.playersoundid0)
+					elseif bricks[block.id] then --Or else play it
+						SFX.play(extrasounds.playersoundid4)
+					end
+				end
+			elseif player.powerup == 1 then
+				if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
+					if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+						SFX.play(extrasounds.playersoundid0)
+					elseif bricks[block.id] then --Also don't when you are small
+						SFX.play(extrasounds.playersoundid0)
+					end
 				end
 			end
 		end
