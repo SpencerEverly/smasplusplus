@@ -12,7 +12,7 @@ function onEvent(eventName)
 	if eventName == "Cutscene 1" then
 		if SaveData.disableX2char == 0 then
 			pausemenu.pauseactivated = false
-			inventory.cutsceneActive = true
+			inventory.activated = false
 		end
 		if SaveData.disableX2char == 1 then
 			pausemenu13.pauseactivated = false
@@ -30,7 +30,7 @@ function onEvent(eventName)
 	if eventName == "Cutscene 2 - 13" then
 		if SaveData.disableX2char == 0 then
 			pausemenu.pauseactivated = true
-			inventory.cutsceneActive = false
+			inventory.activated = true
 		end
 		if SaveData.disableX2char == 1 then
 			pausemenu13.pauseactivated = true

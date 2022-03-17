@@ -20,7 +20,7 @@ local pausemenu = require("pausemenu")
 local littleDialogue = require("littleDialogue")
 local yoshi = require("yiYoshi/yiYoshi")
 
-GameData.inventoryopened = false
+inventory.inventoryopened = false
 
 local inventory = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.png"))
 local inventorysmol = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventorysmol.png"))
@@ -32,7 +32,7 @@ local selecty = 508
 local numx = 40
 local numy = 570
 
-inventory.cutsceneActive = false
+inventory.activated = true --This will activate the inventory only when it's true
 inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
 
 local inventoryopen = false
@@ -106,7 +106,7 @@ end
 function inventory.onDraw()
     player.reservePowerup = 0 -- disables the item box
 	if inventory.activateinventory == true then
-		if GameData.inventoryopened == true then
+		if inventory.inventoryopened == true then
 			numx = 54
 			numy = 574
 
@@ -206,7 +206,7 @@ function inventory.onDraw()
         SaveData.inventory.hammer = minhammer
     end
 	if inventory.activateinventory == true then
-		if GameData.inventoryopened == true then -- selects the powerup
+		if inventory.inventoryopened == true then -- selects the powerup
 			if player.rawKeys.jump == KEYS_PRESSED then
 				if player.powerup == powerup[state] then
 					Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
@@ -272,7 +272,7 @@ function inventory.onDraw()
 	end
 
 	if inventory.activateinventory == true then
-		if GameData.inventoryopened == true then
+		if inventory.inventoryopened == true then
 			if SaveData.inventory.shroom == 0 then
 				Graphics.drawImage(noshroom, 30, 508 )
 			end
@@ -362,37 +362,57 @@ function inventory.onPostNPCKill(v,reason)
             SaveData.inventory.ice = SaveData.inventory.ice + 1
         end
     end
-
 end
+
+local STATE = {
+    IN     = 0,
+    STAY   = 1,
+    SCROLL = 2,
+    OUT    = 3,
+    SCROLL_ANSWERS = 4,
+
+    REMOVE = -1,
+}
 
 -- Run code every frame (~1/65 second)
 -- (code will be executed before game logic will be processed)
 function inventory.onTick()
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
-	
-	if warpTransition.transitionTimer >= 0.1 then
-		inventory.activateinventory = false
-	end
-	if warpTransition.transitionTimer == 0 then
-		inventory.activateinventory = true
-	end
-	if warpTransition.levelStartTransition == warpTransition.TRANSITION_IRIS_OUT then
-		inventory.activateinventory = false
-	end
-	if warpTransition.crossSectionTransition == warpTransition.TRANSITION_FADE then
-		inventory.activateinventory = false
-	end
-	if warpTransition.sameSectionTransition == warpTransition.TRANSITION_PAN then
-		inventory.activateinventory = false
-	end
-	if pausemenu.pauseactivated == false then
-		inventory.activateinventory = false
-	end
-	--if yoshi.rescueBaby then --Once again, breaking the inventory...
-		--inventory.activateinventory = false
-	--end
-	if pausemenu.paused == true then
-		inventory.activateinventory = false
+	for k=#littleDialogue.boxes,1,-1 do
+		local box = littleDialogue.boxes[k]
+		if warpTransition.transitionTimer >= 0.1 then
+			inventory.activated = false
+		end
+		if warpTransition.transitionTimer == 0 then
+			inventory.activated = true
+		end
+		if warpTransition.levelStartTransition == warpTransition.TRANSITION_IRIS_OUT then
+			inventory.activated = false
+		end
+		if warpTransition.crossSectionTransition == warpTransition.TRANSITION_FADE then
+			inventory.activated = false
+		end
+		if warpTransition.sameSectionTransition == warpTransition.TRANSITION_PAN then
+			inventory.activated = false
+		end
+		if pausemenu.pauseactivated == false then
+			inventory.activated = false
+		end
+		if yoshi.rescueBaby then
+			inventory.activated = false
+		end
+		if yoshi.onCheckpoint then
+			inventory.activated = false
+		end
+		if littleDialogue.boxenabled == true then
+			inventory.activated = false
+		end
+		if littleDialogue.boxenabled == false then
+			inventory.activated = true
+		end
+		if pausemenu.paused == true then
+			inventory.activated = false
+		end
 	end
 	
     Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
@@ -481,35 +501,35 @@ function inventory.onInputUpdate()
 		end
 	end
 
-	if player.rawKeys.dropItem == KEYS_PRESSED and inventory.cutsceneActive == false then -- toggle inventory menu
+	if player.rawKeys.dropItem == KEYS_PRESSED and inventory.activated == true then -- toggle inventory menu
 		inventory.activateinventory = true
-		GameData.inventoryopened = not GameData.inventoryopened
-		if GameData.inventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
+		inventory.inventoryopened = not inventory.inventoryopened
+		if inventory.inventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
 			inventoryopen = false
-			GameData.inventoryopened = false
+			inventory.inventoryopened = false
 			Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
 			Misc.unpause()
-		elseif GameData.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
+		elseif inventory.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
 			inventoryopen = true
-			GameData.inventoryopened = true
+			inventory.inventoryopened = true
 			Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
 			Misc.pause()
 		end
 	end
 	if inventory.activateinventory == true then
-		if GameData.inventoryopened == true then
+		if inventory.inventoryopened == true then
 			Graphics.drawImage(inventory, 30, 508)
 			Graphics.drawImage(selector, selectx, selecty)
 		end
 	end
-	if GameData.inventoryopened == true then -- move cursor right
+	if inventory.inventoryopened == true then -- move cursor right
 		if player.rawKeys.right == KEYS_PRESSED then
 			Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
 			selectx = selectx + 64
 			state = state + 1
 		end
 	end
-	if GameData.inventoryopened == true then -- move cursor left
+	if inventory.inventoryopened == true then -- move cursor left
 		if player.rawKeys.left == KEYS_PRESSED then
 			Audio.playSFX(Misc.resolveFile("inventorystuff/menuselect.wav"))
 			selectx = selectx - 64
@@ -517,22 +537,22 @@ function inventory.onInputUpdate()
 		end
 	end
 
-	if GameData.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
+	if inventory.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
 		if selectx < 30 then
 			selectx = 30 + 320
 		end 
 	end
-	if GameData.inventoryopened == true then
+	if inventory.inventoryopened == true then
 		if selectx > 30 + 320 then
 			selectx = 30
 		end 
 	end
-	if GameData.inventoryopened == true then
+	if inventory.inventoryopened == true then
 		if state > 6 then
 			state = 1
 		end
 	end
-	if GameData.inventoryopened == true then
+	if inventory.inventoryopened == true then
 		if state < 1 then
 			state = 6
 		end

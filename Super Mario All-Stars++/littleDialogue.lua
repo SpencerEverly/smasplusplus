@@ -1985,18 +1985,16 @@ function littleDialogue.onTick()
         if box.state ~= STATE.REMOVE then
             if not box.updatesInPause then
                 box:update()
+				littleDialogue.boxenabled = true
             end
         else
             table.remove(littleDialogue.boxes,k)
             box.isValid = false
         end
-		if box.state == STATE.STAY then
-			littleDialogue.boxenabled = true
-		end
-		if box.state == STATE.REMOVE then
+		if box.state == STATE.IN then
 			littleDialogue.boxenabled = false
 		end
-    end
+	end
 end
 
 function littleDialogue.onDraw()
@@ -2031,19 +2029,6 @@ function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
 	end
 
     eventObj.cancelled = true
-end
-
-function littleDialogue.onInputUpdate()
-	for k=#littleDialogue.boxes,1,-1 do
-        local box = littleDialogue.boxes[k]
-		
-		if box.state ~= STATE.IN then
-			player.keys.down = KEYS_PRESSED
-		end
-		if box.state == STATE.REMOVE then
-			player.keys.down = KEYS_UNPRESSED
-		end
-	end
 end
 
 

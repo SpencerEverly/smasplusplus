@@ -704,7 +704,7 @@ function megaluavania.onInputUpdate()
 			megaluavania.battle(v)
 			inventory.activateinventory = false
 			pausemenu.pauseactivated = false
-			inventory.cutsceneActive = true
+			inventory.activated = false
 			mainblackscreenshow = false
 			datetime.topright = true
 			datetime.bottomright = false
@@ -719,7 +719,7 @@ function megaluavania.onInputUpdate()
 			Misc.unpause()
 			inventory.activateinventory = true
 			pausemenu.pauseactivated = true
-			inventory.cutsceneActive = false
+			inventory.activated = true
 			textblox.active = false
 			datetime.topright = false
 			datetime.bottomright = true
