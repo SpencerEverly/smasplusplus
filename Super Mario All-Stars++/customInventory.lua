@@ -88,9 +88,9 @@ function inventory.onStart()
 	pGet = Player.get()
 
 	if not isOverworld and SaveData.useStarman then
-		NPC.spawn(293, player.x, player.y, player.section)
+		NPC.spawn(996, player.x, player.y, player.section)
 		if player.count() == 2 then
-			NPC.spawn(293, player2.x, player2.y, player2.section)
+			NPC.spawn(996, player2.x, player2.y, player2.section)
 		end
 		SaveData.useStarman = false
 	end

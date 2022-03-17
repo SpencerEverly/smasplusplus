@@ -4893,7 +4893,6 @@ yoshi.customExitSettings = {
     },
     keyEnabked = {
         [LEVEL_END_STATE_SMB3ORB] = true,
-        [LEVEL_END_STATE_SMB2ORB] = true,
 		[LEVEL_END_STATE_STAR] = true,
     },
 
