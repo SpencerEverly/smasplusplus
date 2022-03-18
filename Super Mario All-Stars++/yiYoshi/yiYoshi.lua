@@ -1265,6 +1265,7 @@ do
         [47]  = NPC_TONGUE_BEHAVIOUR.INSTANT_SWALLOW, -- smb3 lakitu
         [74]  = NPC_TONGUE_BEHAVIOUR.BIG_EGG,         -- giant piranha plant
         [91]  = NPC_TONGUE_BEHAVIOUR.PASSES_THROUGH,  -- smb2 grass container
+		[159] = NPC_TONGUE_BEHAVIOUR.INSTANT_SWALLOW, -- smb2 diggable sand
         [168] = NPC_TONGUE_BEHAVIOUR.STOP,            -- bully
         [190] = NPC_TONGUE_BEHAVIOUR.PASSES_THROUGH,  -- bone lift
         [194] = NPC_TONGUE_BEHAVIOUR.NO_EGG,          -- rainbow shell
@@ -1520,7 +1521,7 @@ do
 
             npc.ai1 = newAI1
         end
-
+		
         -- Special case for keys: set link's "has key" flag
         if npc.id == 31 then
             p:mem(0x12,FIELD_BOOL,true)
@@ -1682,7 +1683,11 @@ do
                 data.tongueNPC.ai1 = 530
             end
         end
-
+		
+		if data.tongueNPC.id == 159 then
+			data.tongueNPC.ai2 = 450
+		end
+		
         -- Special case for throwable brick: enter thrown state
         if data.tongueNPC.id == 45 then
             data.tongueNPC.ai1 = 1
@@ -2109,7 +2114,7 @@ do
 
 
         if data.tongueState ~= TONGUE_STATE.INACTIVE then
-            p.keys.down = false
+			p.keys.down = false
         end
 
         if data.tongueState == TONGUE_STATE.AIMING then
