@@ -399,7 +399,7 @@ function dependencies2.onTick()
 	end
 	if currentCostume == "TAKESHI" then
 		if SaveData.disableX2char == 0 then
-			warpTransition.doorclose = ("costumes/link/Takeshidoor-close.ogg")
+			warpTransition.doorclose = ("costumes/link/Takeshi/door-close.ogg")
 		end
 	end
 	if currentCostume == "TAKESHI-SNES" then

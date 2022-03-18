@@ -8,8 +8,7 @@ local autoscroll = require("autoscroll")
 local warpTransition = require("warpTransition")
 local hudoverride = require("hudoverride")
 
-hudoverride.visible.itembox = false
-hudoverride.visible.starcoins = false
+hudoverride.visible.starcoins = false --There's no star coins in the entire game, but I'm only adding this because why not
 
 if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true then
 	warpTransition.musicFadeOut = false
@@ -189,7 +188,11 @@ function globalgenerals.onCameraUpdate(c, camIdx)
 end
 	
 function globalgenerals.onTick()
-	--Misc.SetEngineTPS(60)
+	if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
+		hudoverride.visible.itembox = true
+	elseif (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
+		hudoverride.visible.itembox = false
+	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
