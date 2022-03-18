@@ -2468,7 +2468,7 @@ do
         local blocks = Colliders.getColliding{a = col,btype = Colliders.BLOCK}
 
         for _,block in ipairs(blocks) do
-            if block.contentID == 0 and not block:mem(0x5A,FIELD_BOOL) and block.id ~= 90 and Block.MEGA_SMASH_MAP[block.id] then
+            if block.id == 370 or block.contentID == 0  and not block:mem(0x5A,FIELD_BOOL) and block.id ~= 90 and Block.MEGA_SMASH_MAP[block.id] then
                 block:remove(true)
             else
                 block:hit(true)
@@ -2481,6 +2481,11 @@ do
         for _,npc in ipairs(npcs) do
             if npc:mem(0x138,FIELD_WORD) ~= 5 and npc:mem(0x138,FIELD_WORD) ~= 6 then
                 if npc.id == 263 then -- ice block
+                    npc:harm(HARM_TYPE_FROMBELOW)
+                else
+                    npc:harm(HARM_TYPE_SPINJUMP)
+                end
+				if npc.id == 159 then -- smb2 diggable sand
                     npc:harm(HARM_TYPE_FROMBELOW)
                 else
                     npc:harm(HARM_TYPE_SPINJUMP)
