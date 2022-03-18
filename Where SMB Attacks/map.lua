@@ -1,6 +1,8 @@
-local malcwarp_map_wsmba = require("malcwarp_map_wsmba")
+local travL = require("travL")
+local wandR = require("wandR")
 
-local exitcommands_wsmbaa = require("exitcommands_wsmba")
+wandR.speed = 7
+travL.showArrows = false
 
 local pausemenu = require("pausemenu_map")
 
