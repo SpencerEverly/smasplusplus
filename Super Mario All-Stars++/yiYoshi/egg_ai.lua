@@ -6,6 +6,7 @@
 
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
+local extrasounds = require("extrasounds")
 
 local yoshi = require("yiYoshi/yiYoshi")
 
@@ -181,9 +182,10 @@ local function doBouncing(v,data,config,mimicConfig)
                 isSolid = false
 
                 SFX.play(3)
-            elseif obj.contentID == 0 and Block.MEGA_SMASH_MAP[obj.id] then
+            elseif obj.id == 370 or obj.contentID == 0 and Block.MEGA_SMASH_MAP[obj.id] then
                 obj:remove(true)
                 isSolid = false
+				SFX.play(extrasounds.playersoundid4)
             else
                 obj:hit()
             end
