@@ -6,6 +6,10 @@ local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local autoscroll = require("autoscroll")
 local warpTransition = require("warpTransition")
+local hudoverride = require("hudoverride")
+
+hudoverride.visible.itembox = false
+hudoverride.visible.starcoins = false
 
 if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true then
 	warpTransition.musicFadeOut = false

@@ -40,7 +40,6 @@ local charactercheck = false
 local keyinput1 = false
 local killed = false
 local active4 = false
-local stpatricksday = false
 
 local cooldown = 0
 
@@ -545,9 +544,7 @@ local function BootDialogueMusicReset()
 	active4 = false
 	logo = false
 	pressjumpwords = false
-	if os.date("*t").month == 03 and os.date("*t").day == 17 then
-		stpatricksday = false
-	end
+	stpatricksday = false
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 	if Level.filename() == "intro_8bit.lvlx" then
 		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
@@ -734,84 +731,10 @@ end
 local function BootWSMBAPreExecute()
 	Audio.MusicChange(0, 0)
 	exitscreen = true
-	SFX.play(14)
+	bluecurtains = false
+	redcurtains = false
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	Audio.sounds[1].sfx  = nil	
-	Audio.sounds[2].sfx  = nil
-	Audio.sounds[3].sfx  = nil
-	Audio.sounds[4].sfx  = nil
-	Audio.sounds[5].sfx  = nil
-	Audio.sounds[6].sfx  = nil
-	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
-	Audio.sounds[9].sfx  = nil
-	Audio.sounds[10].sfx = nil
-	Audio.sounds[11].sfx = nil
-	Audio.sounds[12].sfx = nil
-	Audio.sounds[13].sfx = nil
-	Audio.sounds[14].sfx = nil
-	Audio.sounds[15].sfx = nil
-	Audio.sounds[16].sfx = nil
-	Audio.sounds[17].sfx = nil
-	Audio.sounds[18].sfx = nil
-	Audio.sounds[19].sfx = nil
-	Audio.sounds[20].sfx = nil
-	Audio.sounds[21].sfx = nil
-	Audio.sounds[22].sfx = nil
-	Audio.sounds[23].sfx = nil
-	Audio.sounds[24].sfx = nil
-	Audio.sounds[25].sfx = nil
-	Audio.sounds[29].sfx = nil
-	Audio.sounds[31].sfx = nil
-	Audio.sounds[32].sfx = nil
-	Audio.sounds[33].sfx = nil
-	Audio.sounds[34].sfx = nil
-	Audio.sounds[35].sfx = nil
-	Audio.sounds[36].sfx = nil
-	Audio.sounds[37].sfx = nil
-	Audio.sounds[38].sfx = nil
-	Audio.sounds[39].sfx = nil
-	Audio.sounds[41].sfx = nil
-	Audio.sounds[42].sfx = nil
-	Audio.sounds[43].sfx = nil
-	Audio.sounds[44].sfx = nil
-	Audio.sounds[46].sfx = nil
-	Audio.sounds[47].sfx = nil
-	Audio.sounds[48].sfx = nil
-	Audio.sounds[49].sfx = nil
-	Audio.sounds[50].sfx = nil
-	Audio.sounds[51].sfx = nil
-	Audio.sounds[52].sfx = nil
-	Audio.sounds[54].sfx = nil
-	Audio.sounds[55].sfx = nil
-	Audio.sounds[56].sfx = nil
-	Audio.sounds[57].sfx = nil
-	Audio.sounds[58].sfx = nil
-	Audio.sounds[59].sfx = nil
-	Audio.sounds[61].sfx = nil
-	Audio.sounds[62].sfx = nil
-	Audio.sounds[63].sfx = nil
-	Audio.sounds[71].sfx = nil
-	Audio.sounds[72].sfx = nil
-	Audio.sounds[73].sfx = nil
-	Audio.sounds[75].sfx = nil
-	Audio.sounds[76].sfx = nil
-	Audio.sounds[77].sfx = nil
-	Audio.sounds[78].sfx = nil
-	Audio.sounds[79].sfx = nil
-	Audio.sounds[80].sfx = nil
-	Audio.sounds[81].sfx = nil
-	Audio.sounds[82].sfx = nil
-	Audio.sounds[83].sfx = nil
-	Audio.sounds[84].sfx = nil
-	Audio.sounds[85].sfx = nil
-	Audio.sounds[86].sfx = nil
-	Audio.sounds[87].sfx = nil
-	Audio.sounds[88].sfx = nil
-	Audio.sounds[89].sfx = nil
-	Audio.sounds[90].sfx = nil
-	Audio.sounds[91].sfx = nil
 	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
 	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
 		SFX.play("wrong.ogg")
@@ -823,84 +746,8 @@ end
 local function BootWSMBAOGPreExecute()
 	Audio.MusicChange(0, 0)
 	exitscreen = true
-	SFX.play(14)
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	Audio.sounds[1].sfx  = nil	
-	Audio.sounds[2].sfx  = nil
-	Audio.sounds[3].sfx  = nil
-	Audio.sounds[4].sfx  = nil
-	Audio.sounds[5].sfx  = nil
-	Audio.sounds[6].sfx  = nil
-	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
-	Audio.sounds[9].sfx  = nil
-	Audio.sounds[10].sfx = nil
-	Audio.sounds[11].sfx = nil
-	Audio.sounds[12].sfx = nil
-	Audio.sounds[13].sfx = nil
-	Audio.sounds[14].sfx = nil
-	Audio.sounds[15].sfx = nil
-	Audio.sounds[16].sfx = nil
-	Audio.sounds[17].sfx = nil
-	Audio.sounds[18].sfx = nil
-	Audio.sounds[19].sfx = nil
-	Audio.sounds[20].sfx = nil
-	Audio.sounds[21].sfx = nil
-	Audio.sounds[22].sfx = nil
-	Audio.sounds[23].sfx = nil
-	Audio.sounds[24].sfx = nil
-	Audio.sounds[25].sfx = nil
-	Audio.sounds[29].sfx = nil
-	Audio.sounds[31].sfx = nil
-	Audio.sounds[32].sfx = nil
-	Audio.sounds[33].sfx = nil
-	Audio.sounds[34].sfx = nil
-	Audio.sounds[35].sfx = nil
-	Audio.sounds[36].sfx = nil
-	Audio.sounds[37].sfx = nil
-	Audio.sounds[38].sfx = nil
-	Audio.sounds[39].sfx = nil
-	Audio.sounds[41].sfx = nil
-	Audio.sounds[42].sfx = nil
-	Audio.sounds[43].sfx = nil
-	Audio.sounds[44].sfx = nil
-	Audio.sounds[46].sfx = nil
-	Audio.sounds[47].sfx = nil
-	Audio.sounds[48].sfx = nil
-	Audio.sounds[49].sfx = nil
-	Audio.sounds[50].sfx = nil
-	Audio.sounds[51].sfx = nil
-	Audio.sounds[52].sfx = nil
-	Audio.sounds[54].sfx = nil
-	Audio.sounds[55].sfx = nil
-	Audio.sounds[56].sfx = nil
-	Audio.sounds[57].sfx = nil
-	Audio.sounds[58].sfx = nil
-	Audio.sounds[59].sfx = nil
-	Audio.sounds[61].sfx = nil
-	Audio.sounds[62].sfx = nil
-	Audio.sounds[63].sfx = nil
-	Audio.sounds[71].sfx = nil
-	Audio.sounds[72].sfx = nil
-	Audio.sounds[73].sfx = nil
-	Audio.sounds[75].sfx = nil
-	Audio.sounds[76].sfx = nil
-	Audio.sounds[77].sfx = nil
-	Audio.sounds[78].sfx = nil
-	Audio.sounds[79].sfx = nil
-	Audio.sounds[80].sfx = nil
-	Audio.sounds[81].sfx = nil
-	Audio.sounds[82].sfx = nil
-	Audio.sounds[83].sfx = nil
-	Audio.sounds[84].sfx = nil
-	Audio.sounds[85].sfx = nil
-	Audio.sounds[86].sfx = nil
-	Audio.sounds[87].sfx = nil
-	Audio.sounds[88].sfx = nil
-	Audio.sounds[89].sfx = nil
-	Audio.sounds[90].sfx = nil
-	Audio.sounds[91].sfx = nil
 	Misc.loadEpisode("Where SMB Attacks (Original)")
 	if Misc.loadEpisode("Where SMB Attacks (Original)") == false then
 		SFX.play("wrong.ogg")
@@ -1003,10 +850,7 @@ function bootmenu.onStart()
 	if Level.filename() == "intro_SMAS.lvlx" then
 		if SaveData.firstBootCompleted == 0 then
 			--Nothing
-		end
-	end
-	if Level.filename() == "intro_SMAS.lvlx" then
-		if SaveData.firstBootCompleted == 1 then
+		elseif SaveData.firstBootCompleted == 1 then
 			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
 		end
 	end
@@ -1200,6 +1044,7 @@ end
 function bootmenu.onInputUpdate()
 	if player.rawKeys.pause == KEYS_PRESSED then
 		Routine.run(ExitGame1)
+		SFX.play("littleDialogue/smbx13/choose.wav")
 	end
 	if GameData.startedmenu == 0 then
 		if player.keys.jump == KEYS_PRESSED then
@@ -1260,10 +1105,11 @@ function bootmenu.onInputUpdate()
 end
 
 function bootmenu.onDraw()
-	local smaslogo = Graphics.loadImageResolved("SMAS - Start/background-851.png")
-	local pressstart = Graphics.loadImageResolved("SMAS - Start/background-850-startonly.png")
+	local smaslogo = Graphics.loadImageResolved("smaslogo.png")
+	local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
 	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
+	local stpatricksday = false
 	
 	if versionactive then
 		Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
@@ -1337,9 +1183,6 @@ function bootmenu.onDraw()
 	end
 	if stpatricksday then
 		textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=3, color=Color.green, font=statusFont}
-	end
-	if stpatricksday == false then
-		--Nothing
 	end
 end
 
