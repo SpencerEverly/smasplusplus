@@ -10,6 +10,10 @@ local hudoverride = require("hudoverride")
 
 hudoverride.visible.starcoins = false --There's no star coins in the entire game, but I'm only adding this because why not
 
+local smasintros = {"8bit","bossedit8","jakebrito1","marioforever","S!TS!","scrollingheights","SMAS","SMBX1.0","SMBX1.1","SMBX1.2","SMBX1.3","SMBX1.3og","SMBX2","SMBX2b3","sunsetbeach","WSMBA"}
+
+local smasintros = {}
+
 if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
@@ -926,8 +930,10 @@ function globalgenerals.onExit()
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
-	if (Level.filename() == "MALC - HUB.lvlx") == false or (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then 
-		SaveData.lastLevelPlayed = Level.filename()
+	for _,name in ipairs(smasintros) do
+		if (Level.filename() == "MALC - HUB.lvlx") == false or (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false or (Level.filename() == "intro_"..smasintros..".lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false then
+			SaveData.lastLevelPlayed = Level.filename()
+		end
 	end
 end
 
