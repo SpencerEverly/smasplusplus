@@ -106,22 +106,22 @@ function undertaledepends.onPostNPCHarm(npc, harmtype)
 	local mushrooms = table.map{9,184,185,249}
 	local fireflowers = table.map{14,182,183}
 	local allEnemies = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921,1,2,27,71,89,242,243,379,392,393,466,467}
-	for i = 0,20 do
-		for k,v in ipairs (NPC.get(allEnemies[NPC.id])) do
-			local section = Section(i)
-			if currentCostume == "UNDERTALE-FRISK" then
-				if harmtype ~= HARM_TYPE_VANISH then
-					if v.isValid == false then
-						section.musicPath = "_OST/Undertale/mus_toomuch.ogg"
+	if currentCostume == "UNDERTALE-FRISK" then
+		for i = 0,20 do
+			for k,v in ipairs (NPC.get(allEnemies[npc.id])) do
+				local section = Section(i)
+					if harmtype ~= HARM_TYPE_VANISH then
+						if v.isValid == false then
+							section.musicPath = "_OST/Undertale/mus_toomuch.ogg"
+						end
 					end
 				end
 			end
-		end
-	end
-	for k, v in NPC.iterate(goombas) do
-		if currentCostume == "UNDERTALE-FRISK" then
-			stats.registerNPC(goombas[npc.id], 3, 5, 4) --NPCid, pow, def, xpdrop
-			stats.xpDrop(1, 4) --NPCID, reward
+		for k, v in NPC.iterate(goombas) do
+			if currentCostume == "UNDERTALE-FRISK" then
+				stats.registerNPC(goombas[npc.id], 3, 5, 4) --NPCid, pow, def, xpdrop
+				stats.xpDrop(1, 4) --NPCID, reward
+			end
 		end
 	end
 end
