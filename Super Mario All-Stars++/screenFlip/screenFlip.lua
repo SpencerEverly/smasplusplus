@@ -58,7 +58,7 @@ function screenFlip.onTick()
 end
 
 function screenFlip.onInputUpdate()
-    if (flip > 180 or flip < -180) then
+    if (flip == 180 or flip == -180) then
         local oldLeft = player.keys.left
 
         player.keys.left = player.keys.right
