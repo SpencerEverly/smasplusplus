@@ -7,7 +7,7 @@ function onLoadSection0()
 	screenFlip.enabled = true
 	screenFlip.flipSpeed = 10
 	screenFlip.flipDirection = 1
-	screenFlip.flipDelay = 256
+	screenFlip.flipDelay = 500
 	screenFlip.warnBeforeFlip = true
 end
 
@@ -15,6 +15,10 @@ function onLoadSection1()
 	screenFlip.enabled = true
 	screenFlip.flipSpeed = 10
 	screenFlip.flipDirection = 1
-	screenFlip.flipDelay = 500
+	screenFlip.flipDelay = 700
 	screenFlip.warnBeforeFlip = true
+end
+
+function onLoadSection2()
+	screenFlip.enabled = false
 end

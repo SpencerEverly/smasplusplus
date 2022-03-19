@@ -203,6 +203,13 @@ local function savegamemap()
 	SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
 end
 
+local function returntolastlevel()
+	Audio.MusicVolume(0)
+	Audio.MusicPause()
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(0.7, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(SaveData.lastLevelPlayed, nil, nil) end)
+end
+
 local function exitlevel2()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
@@ -851,13 +858,14 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Restart", action = restartlevel});
 		end
 		if not isOverworld then
-			if Level.filename() == "SMAS - Map.lvlx" then
-				table.insert(pause_options, {name="Return to the Main Map", action = exitlevel});
-			end
+			table.insert(pause_options, {name="Exit to the Main Map", action = exitlevel2});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Return to the Previous Level", action = returntolastlevel});
 		end
 		if not isOverworld then
 			if (Level.name() == "SMAS - Map") == false then
-				table.insert(pause_options, {name="Go to the DLC Map", action = dlcmapload});
+				table.insert(pause_options, {name="Go to the Extra Game/DLC Map", action = dlcmapload});
 			end
 		end
 		if not isOverworld then
@@ -888,9 +896,6 @@ local function drawPauseMenu(y, alpha)
 		end
 		if isOverworld then
 			table.insert(pause_options, {name="Character Options", action = switchtochar});
-		end
-		if not isOverworld and (Level.filename() == "SMAS - Map.lvlx") == false then
-			table.insert(pause_options, {name="Exit to Map", action = exitlevel2});
 		end
 		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegame});

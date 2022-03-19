@@ -157,6 +157,9 @@ function globalgenerals.onStart()
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(500)
 	end
+	if SaveData.lastLevelPlayed == nil then
+		SaveData.lastLevelPlayed = SaveData.lastLevelPlayed or Level.filename()
+	end
 end
 
 function globalgenerals.onCameraUpdate(c, camIdx)
@@ -922,6 +925,9 @@ function globalgenerals.onExit()
 	end
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
+	end
+	if (Level.filename() == "MALC - HUB.lvlx") == false or (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then 
+		SaveData.lastLevelPlayed = Level.filename()
 	end
 end
 
