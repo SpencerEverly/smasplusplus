@@ -3509,10 +3509,10 @@ function musicalchairs.onTick()
 			end
 		end
 		if currentCostume == "UNDERTALE-FRISK" then
-			if level == "SMB1 - W-1, L-1.lvlx" then
-				Audio.MusicChange(0, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
-				Audio.MusicChange(1, "_OST/Super Mario Bros/Bonus.spc|0;g=2.6")
-			end
+			--if level == "SMB1 - W-1, L-1.lvlx" then
+				--Audio.MusicChange(0, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")
+				--Audio.MusicChange(1, "_OST/Super Mario Bros/Bonus.spc|0;g=2.6")
+			--end
 			if level == "SMB1 - W-1, L-2.lvlx" then
 				Audio.MusicChange(1, "_OST/Super Mario Bros/Underground.spc|0;g=2.5")
 				Audio.MusicChange(2, "_OST/Super Mario Bros/Overworld.spc|0;g=2.5")

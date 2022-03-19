@@ -70,7 +70,7 @@ function dependencies.onStart()
 		playerphysicspatch = require("playerphysicspatch")
 		kindHurtBlock = require("kindHurtBlock")
 		comboSounds = require("comboSounds")
-		inventory = require('furyinventory')
+		inventory = require("furyinventory")
 		warpTransition.musicFadeOut = false
 		warpTransition.levelStartTransition = warpTransition.TRANSITION_IRIS_OUT
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_PAN

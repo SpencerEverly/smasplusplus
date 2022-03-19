@@ -81,6 +81,13 @@ for i = 1,SaveData.utpoiton do
 	table.insert(megaluavania.items,{name = "Orange Wine",text = {"* You drank the Orange Wine.<br>* It tastes like a mix between orange<br>juice and wine (Duh)."},rec = 20})
 end
 
+function delayedMusicChange(killedNPC)
+	Routine.wait(0)
+	for i=0, 20 do
+		Audio.MusicChange(i, "_OST/Undertale/mus_toomuch.ogg")
+	end
+end
+
 function undertaledepends.onTick(k,v)
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
@@ -90,50 +97,120 @@ function undertaledepends.onTick(k,v)
 	if currentCostume == "UNDERTALE-FRISK" then
 		stats.enabled = true
 		stats.alwaysBig = true
+		--Tables aren't detecting anything, so we have to manually put everything in spam mode...
+		
+		--Goombas
+		stats.registerNPC(1, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(1, 1) --NPCID, reward
+		stats.registerNPC(2, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(2, 1) --NPCID, reward
+		stats.registerNPC(3, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(3, 1) --NPCID, reward
+		stats.registerNPC(27, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(27, 1) --NPCID, reward
+		stats.registerNPC(71, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(71, 1) --NPCID, reward
+		stats.registerNPC(89, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(89, 1) --NPCID, reward
+		stats.registerNPC(242, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(242, 1) --NPCID, reward
+		stats.registerNPC(243, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(243, 1) --NPCID, reward
+		stats.registerNPC(379, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(379, 1) --NPCID, reward
+		stats.registerNPC(392, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(392, 1) --NPCID, reward
+		stats.registerNPC(393, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(393, 1) --NPCID, reward
+		stats.registerNPC(466, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(466, 1) --NPCID, reward
+		stats.registerNPC(467, 2, 3, 1) --NPCid, pow, def, xpdrop
+		stats.xpDrop(467, 1) --NPCID, reward
+		
+		--Koopas
+		stats.registerNPC(4, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(4, 2) --NPCID, reward
+		stats.registerNPC(5, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(5, 2) --NPCID, reward
+		stats.registerNPC(6, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(6, 2) --NPCID, reward
+		stats.registerNPC(7, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(7, 2) --NPCID, reward
+		stats.registerNPC(55, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(55, 2) --NPCID, reward
+		stats.registerNPC(72, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(72, 2) --NPCID, reward
+		stats.registerNPC(73, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(73, 2) --NPCID, reward
+		stats.registerNPC(76, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(76, 2) --NPCID, reward
+		stats.registerNPC(110, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(111, 2) --NPCID, reward
+		stats.registerNPC(110, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(111, 2) --NPCID, reward
+		stats.registerNPC(112, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(112, 2) --NPCID, reward
+		stats.registerNPC(113, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(113, 2) --NPCID, reward
+		stats.registerNPC(114, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(114, 2) --NPCID, reward
+		stats.registerNPC(115, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(115, 2) --NPCID, reward
+		stats.registerNPC(116, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(116, 2) --NPCID, reward
+		stats.registerNPC(117, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(117, 2) --NPCID, reward
+		stats.registerNPC(118, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(118, 2) --NPCID, reward
+		stats.registerNPC(119, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(119, 2) --NPCID, reward
+		stats.registerNPC(120, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(120, 2) --NPCID, reward
+		stats.registerNPC(121, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(121, 2) --NPCID, reward
+		stats.registerNPC(122, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(122, 2) --NPCID, reward
+		stats.registerNPC(123, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(123, 2) --NPCID, reward
+		stats.registerNPC(124, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(124, 2) --NPCID, reward
+		stats.registerNPC(161, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(161, 2) --NPCID, reward
+		stats.registerNPC(172, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(172, 2) --NPCID, reward
+		stats.registerNPC(173, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(173, 2) --NPCID, reward
+		stats.registerNPC(174, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(174, 2) --NPCID, reward
+		stats.registerNPC(175, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(175, 2) --NPCID, reward
+		stats.registerNPC(176, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(176, 2) --NPCID, reward
+		stats.registerNPC(177, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(177, 2) --NPCID, reward
+		stats.registerNPC(194, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(194, 2) --NPCID, reward
+		stats.registerNPC(578, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(578, 2) --NPCID, reward
+		stats.registerNPC(920, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(920, 2) --NPCID, reward
+		stats.registerNPC(921, 2, 3, 2) --NPCid, pow, def, xpdrop
+		stats.xpDrop(921, 2) --NPCID, reward
+		if #NPC.get(89) == 0 and #NPC.get(173) == 0 then
+			Routine.run(delayedMusicChange, killedNPC)
+		end
 	elseif currentCostume then
 		stats.enabled = false
 		stats.alwaysBig = false
 	end
 end
 
---local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
+local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
 local koopas = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
-local coins = table.map{10,33,88,103,258,528}
-local mushrooms = table.map{9,184,185,249}
-local fireflowers = table.map{14,182,183}
-local allEnemies = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921,1,2,27,71,89,242,243,379,392,393,466,467}
 
-local goombas = {
-	[1] = true,
-	[2] = true,
-	[3] = true,
-	[27] = true,
-	[71] = true,
-	[89] = true,
-	[242] = true,
-	[243] = true,
-	[379] = true,
-	[392] = true,
-	[393] = true,
-	[466] = true,
-	[467] = true,
-}
-
-stats.registerNPC(goombas, 2, 3, 1) --NPCid, pow, def, xpdrop
-stats.xpDrop(1, 1) --NPCID, reward
-
-function undertaledepends.onPostNPCHarm(killedNPC, harmtype, culpritOrNil)
-    local allSecs
-
-    for i = 0,20 do
-        allSecs = Section(i)
-    end
-
-    if (currentCostume == "UNDERTALE-FRISK") then
-        if allEnemies[killedNPC.id] then
-            allSecs.music = "_OST/Undertale/mus_toomuch.ogg"
-        end
-    end
+function undertaledepends.onPostNPCKill(killedNPC, harmtype, culpritOrNil)
+	local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
+	local koopas = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
 end
 
 function undertaledepends.onDraw()

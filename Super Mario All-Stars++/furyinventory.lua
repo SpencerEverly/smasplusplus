@@ -34,6 +34,7 @@ local numy = 570
 
 inventory.activated = true --This will activate the inventory only when it's true
 inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
+inventory.hidden = false
 
 local inventoryopen = false
 
@@ -104,197 +105,199 @@ function inventory.onInitAPI()
 end
 
 function inventory.onDraw()
-    player.reservePowerup = 0 -- disables the item box
-	if inventory.activateinventory == true then
-		if inventory.inventoryopened == true then
-			numx = 54
-			numy = 574
+	if inventory.hidden == false then
+		player.reservePowerup = 0 -- disables the item box
+		if inventory.activateinventory == true then
+			if inventory.inventoryopened == true then
+				numx = 54
+				numy = 574
 
-		
+			
 
-			if SaveData.inventory.shroom >= 10 then
-				Text.print(SaveData.inventory.shroom, numx-8, numy)
-			else
-				Text.print(SaveData.inventory.shroom, numx, numy)
-			end
+				if SaveData.inventory.shroom >= 10 then
+					Text.print(SaveData.inventory.shroom, numx-8, numy)
+				else
+					Text.print(SaveData.inventory.shroom, numx, numy)
+				end
 
-			if SaveData.inventory.fire >= 10 then
-				Text.print(SaveData.inventory.fire, numx+64-8, numy)
-			else
-				Text.print(SaveData.inventory.fire, numx+64, numy)
-			end
+				if SaveData.inventory.fire >= 10 then
+					Text.print(SaveData.inventory.fire, numx+64-8, numy)
+				else
+					Text.print(SaveData.inventory.fire, numx+64, numy)
+				end
 
-			if SaveData.inventory.ice >= 10 then
-				Text.print(SaveData.inventory.ice, numx+128-8, numy)
-			else
-				Text.print(SaveData.inventory.ice, numx+128, numy)
-			end
+				if SaveData.inventory.ice >= 10 then
+					Text.print(SaveData.inventory.ice, numx+128-8, numy)
+				else
+					Text.print(SaveData.inventory.ice, numx+128, numy)
+				end
 
-			if SaveData.inventory.leaf >= 10 then
-				Text.print(SaveData.inventory.leaf, numx+192-8, numy)
-			else
-				Text.print(SaveData.inventory.leaf, numx+192, numy)
-			end
+				if SaveData.inventory.leaf >= 10 then
+					Text.print(SaveData.inventory.leaf, numx+192-8, numy)
+				else
+					Text.print(SaveData.inventory.leaf, numx+192, numy)
+				end
 
-			if SaveData.inventory.tanooki >= 10 then
-				Text.print(SaveData.inventory.tanooki, numx+256-8, numy)
-			else
-				Text.print(SaveData.inventory.tanooki, numx+256, numy)
-			end
+				if SaveData.inventory.tanooki >= 10 then
+					Text.print(SaveData.inventory.tanooki, numx+256-8, numy)
+				else
+					Text.print(SaveData.inventory.tanooki, numx+256, numy)
+				end
 
-			if SaveData.inventory.hammer >= 10 then
-				Text.print(SaveData.inventory.hammer, numx+320-8, numy)
-			else
-				Text.print(SaveData.inventory.hammer, numx+320, numy)
-			end
+				if SaveData.inventory.hammer >= 10 then
+					Text.print(SaveData.inventory.hammer, numx+320-8, numy)
+				else
+					Text.print(SaveData.inventory.hammer, numx+320, numy)
+				end
 
 
 
-			if inventory.activateinventory == false then
-				--Nothing
+				if inventory.activateinventory == false then
+					--Nothing
+				end
 			end
 		end
-	end
 
---makes sure that you don't go over the limit of items
-    if SaveData.inventory.shroom >= maxshroom then
-        SaveData.inventory.shroom = maxshroom
-    end
+	--makes sure that you don't go over the limit of items
+		if SaveData.inventory.shroom >= maxshroom then
+			SaveData.inventory.shroom = maxshroom
+		end
 
-    if SaveData.inventory.fire >= maxfire then
-        SaveData.inventory.fire = maxfire
-    end
+		if SaveData.inventory.fire >= maxfire then
+			SaveData.inventory.fire = maxfire
+		end
 
-    if SaveData.inventory.ice >= maxice then
-        SaveData.inventory.ice = maxice
-    end
+		if SaveData.inventory.ice >= maxice then
+			SaveData.inventory.ice = maxice
+		end
 
-    if SaveData.inventory.leaf >= maxleaf then
-        SaveData.inventory.leaf = maxleaf
-    end
+		if SaveData.inventory.leaf >= maxleaf then
+			SaveData.inventory.leaf = maxleaf
+		end
 
-    if SaveData.inventory.tanooki >= maxtanooki then
-        SaveData.inventory.tanooki = maxtanooki
-    end
+		if SaveData.inventory.tanooki >= maxtanooki then
+			SaveData.inventory.tanooki = maxtanooki
+		end
 
-    if SaveData.inventory.hammer >= maxhammer then
-        SaveData.inventory.hammer = maxhammer
-    end
+		if SaveData.inventory.hammer >= maxhammer then
+			SaveData.inventory.hammer = maxhammer
+		end
 
-    -- same, but for minimum
-    if SaveData.inventory.shroom <= minshroom then
-        SaveData.inventory.shroom = minshroom
-    end
+		-- same, but for minimum
+		if SaveData.inventory.shroom <= minshroom then
+			SaveData.inventory.shroom = minshroom
+		end
 
-    if SaveData.inventory.fire <= minfire then
-        SaveData.inventory.fire = minfire
-    end
+		if SaveData.inventory.fire <= minfire then
+			SaveData.inventory.fire = minfire
+		end
 
-    if SaveData.inventory.ice <= minice then
-        SaveData.inventory.ice = minice
-    end
+		if SaveData.inventory.ice <= minice then
+			SaveData.inventory.ice = minice
+		end
 
-    if SaveData.inventory.leaf <= minleaf then
-        SaveData.inventory.leaf = minleaf
-    end
+		if SaveData.inventory.leaf <= minleaf then
+			SaveData.inventory.leaf = minleaf
+		end
 
-    if SaveData.inventory.tanooki <= mintanooki then
-        SaveData.inventory.tanooki = mintanooki
-    end
+		if SaveData.inventory.tanooki <= mintanooki then
+			SaveData.inventory.tanooki = mintanooki
+		end
 
-    if SaveData.inventory.hammer <= minhammer then
-        SaveData.inventory.hammer = minhammer
-    end
-	if inventory.activateinventory == true then
-		if inventory.inventoryopened == true then -- selects the powerup
-			if player.rawKeys.jump == KEYS_PRESSED then
-				if player.powerup == powerup[state] then
-					Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-				elseif state == 1 then
-					if SaveData.inventory.shroom > 0 then -- mushroom
-						if player.powerup == 1 then
+		if SaveData.inventory.hammer <= minhammer then
+			SaveData.inventory.hammer = minhammer
+		end
+		if inventory.activateinventory == true then
+			if inventory.inventoryopened == true then -- selects the powerup
+				if player.rawKeys.jump == KEYS_PRESSED then
+					if player.powerup == powerup[state] then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					elseif state == 1 then
+						if SaveData.inventory.shroom > 0 then -- mushroom
+							if player.powerup == 1 then
+								Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+								Audio.playSFX(6)
+								player.powerup = powerup[state]
+								SaveData.inventory.shroom = SaveData.inventory.shroom - 1
+							end
+						elseif SaveData.inventory.shroom <= 0 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+						end
+					elseif state == 2 then
+						if SaveData.inventory.fire > 0 then -- SaveData.inventory.fire flower
 							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
 							Audio.playSFX(6)
 							player.powerup = powerup[state]
-							SaveData.inventory.shroom = SaveData.inventory.shroom - 1
+							SaveData.inventory.fire = SaveData.inventory.fire - 1
+						elseif SaveData.inventory.fire <= 0 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 						end
-					elseif SaveData.inventory.shroom <= 0 then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-					end
-				elseif state == 2 then
-					if SaveData.inventory.fire > 0 then -- SaveData.inventory.fire flower
-						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-						Audio.playSFX(6)
-						player.powerup = powerup[state]
-						SaveData.inventory.fire = SaveData.inventory.fire - 1
-					elseif SaveData.inventory.fire <= 0 then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-					end
-				elseif state == 3 then
-					if SaveData.inventory.ice > 0 then -- SaveData.inventory.ice flower
-						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-						Audio.playSFX(6)
-						player.powerup = powerup[state]
-						SaveData.inventory.ice = SaveData.inventory.ice - 1
-					elseif SaveData.inventory.ice <= 0 then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-					end
-				elseif state == 4 then
-					if SaveData.inventory.leaf > 0 then -- super SaveData.inventory.leaf
-						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-						Audio.playSFX(34)
-						player.powerup = powerup[state]
-						SaveData.inventory.leaf = SaveData.inventory.leaf - 1
-					elseif SaveData.inventory.leaf <= 0 then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-					end
-				elseif state == 5 then
-					if SaveData.inventory.tanooki > 0 then -- SaveData.inventory.tanooki suit
-						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-						Audio.playSFX(34)
-						player.powerup = powerup[state]
-						SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
-					elseif SaveData.inventory.tanooki <= 0 then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-					end
-				elseif state == 6 then
-					if SaveData.inventory.hammer > 0 then -- SaveData.inventory.hammer suit
-						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-						Audio.playSFX(34)
-						player.powerup = powerup[state]
-						SaveData.inventory.hammer = SaveData.inventory.hammer - 1
-					elseif SaveData.inventory.hammer <= 0 then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					elseif state == 3 then
+						if SaveData.inventory.ice > 0 then -- SaveData.inventory.ice flower
+							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+							Audio.playSFX(6)
+							player.powerup = powerup[state]
+							SaveData.inventory.ice = SaveData.inventory.ice - 1
+						elseif SaveData.inventory.ice <= 0 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+						end
+					elseif state == 4 then
+						if SaveData.inventory.leaf > 0 then -- super SaveData.inventory.leaf
+							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+							Audio.playSFX(34)
+							player.powerup = powerup[state]
+							SaveData.inventory.leaf = SaveData.inventory.leaf - 1
+						elseif SaveData.inventory.leaf <= 0 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+						end
+					elseif state == 5 then
+						if SaveData.inventory.tanooki > 0 then -- SaveData.inventory.tanooki suit
+							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+							Audio.playSFX(34)
+							player.powerup = powerup[state]
+							SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
+						elseif SaveData.inventory.tanooki <= 0 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+						end
+					elseif state == 6 then
+						if SaveData.inventory.hammer > 0 then -- SaveData.inventory.hammer suit
+							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+							Audio.playSFX(34)
+							player.powerup = powerup[state]
+							SaveData.inventory.hammer = SaveData.inventory.hammer - 1
+						elseif SaveData.inventory.hammer <= 0 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+						end
 					end
 				end
 			end
 		end
-	end
 
-	if inventory.activateinventory == true then
-		if inventory.inventoryopened == true then
-			if SaveData.inventory.shroom == 0 then
-				Graphics.drawImage(noshroom, 30, 508 )
-			end
-			if SaveData.inventory.fire == 0 then
-				Graphics.drawImage(nofire, 94, 508 )
-			end
-			if SaveData.inventory.ice == 0 then
-				Graphics.drawImage(noice, 158, 508 )
-			end 
-			if SaveData.inventory.leaf == 0 then
-				Graphics.drawImage(noleaf, 222, 508 )
-			end
-			if SaveData.inventory.tanooki == 0 then
-				Graphics.drawImage(notanooki, 286, 508 )
-			end
-			if SaveData.inventory.hammer == 0 then
-				Graphics.drawImage(nohammer, 350, 508 )
+		if inventory.activateinventory == true then
+			if inventory.inventoryopened == true then
+				if SaveData.inventory.shroom == 0 then
+					Graphics.drawImage(noshroom, 30, 508 )
+				end
+				if SaveData.inventory.fire == 0 then
+					Graphics.drawImage(nofire, 94, 508 )
+				end
+				if SaveData.inventory.ice == 0 then
+					Graphics.drawImage(noice, 158, 508 )
+				end 
+				if SaveData.inventory.leaf == 0 then
+					Graphics.drawImage(noleaf, 222, 508 )
+				end
+				if SaveData.inventory.tanooki == 0 then
+					Graphics.drawImage(notanooki, 286, 508 )
+				end
+				if SaveData.inventory.hammer == 0 then
+					Graphics.drawImage(nohammer, 350, 508 )
+				end
 			end
 		end
-	end
-	if inventory.activateinventory == false then
-		--Nothing
+		if inventory.activateinventory == false then
+			--Nothing
+		end
 	end
 end
 
@@ -378,104 +381,91 @@ local STATE = {
 -- (code will be executed before game logic will be processed)
 function inventory.onTick()
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
-	for k=#littleDialogue.boxes,1,-1 do
-		local box = littleDialogue.boxes[k]
-		if warpTransition.transitionTimer >= 0.1 then
-			inventory.activated = false
-		end
-		if warpTransition.transitionTimer == 0 then
-			inventory.activated = true
-		end
-		if warpTransition.levelStartTransition == warpTransition.TRANSITION_IRIS_OUT then
-			inventory.activated = false
-		end
-		if warpTransition.crossSectionTransition == warpTransition.TRANSITION_FADE then
-			inventory.activated = false
-		end
-		if warpTransition.sameSectionTransition == warpTransition.TRANSITION_PAN then
-			inventory.activated = false
-		end
-		if pausemenu.pauseactivated == false then
-			inventory.activated = false
-		end
-		if yoshi.rescueBaby then
-			inventory.activated = false
-		end
-		if yoshi.onCheckpoint then
-			inventory.activated = false
-		end
-		if littleDialogue.boxenabled == true then
-			inventory.activated = false
-		end
-		if littleDialogue.boxenabled == false then
-			inventory.activated = true
-		end
-		if pausemenu.paused == true then
-			inventory.activated = false
-		end
+	if warpTransition.transitionTimer >= 0.1 then
+		inventory.activated = false
+	end
+	if warpTransition.transitionTimer == 0 then
+		inventory.activated = true
+	end
+	if warpTransition.levelStartTransition == warpTransition.TRANSITION_IRIS_OUT then
+		inventory.activated = false
+	end
+	if warpTransition.crossSectionTransition == warpTransition.TRANSITION_FADE then
+		inventory.activated = false
+	end
+	if warpTransition.sameSectionTransition == warpTransition.TRANSITION_PAN then
+		inventory.activated = false
+	end
+	if pausemenu.pauseactivated == false then
+		inventory.activated = false
+	end
+	if pausemenu.paused == true then
+		inventory.activated = false
 	end
 	
-    Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
-    
-        numx = 40
-        numy = 570
+	if inventory.hidden == false then
+		Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
+		
+			numx = 40
+			numy = 570
 
-    if SaveData.inventory.shroom >= 10 then
-        Text.print(SaveData.inventory.shroom, numx-10, numy)
-    else
-        Text.print(SaveData.inventory.shroom, numx, numy)
-    end
+		if SaveData.inventory.shroom >= 10 then
+			Text.print(SaveData.inventory.shroom, numx-10, numy)
+		else
+			Text.print(SaveData.inventory.shroom, numx, numy)
+		end
 
-    if SaveData.inventory.fire >= 10 then
-        Text.print(SaveData.inventory.fire, numx-10, numy)
-    else
-        Text.print(SaveData.inventory.fire, numx+32, numy)
-    end
+		if SaveData.inventory.fire >= 10 then
+			Text.print(SaveData.inventory.fire, numx-10, numy)
+		else
+			Text.print(SaveData.inventory.fire, numx+32, numy)
+		end
 
-    if SaveData.inventory.ice >= 10 then
-        Text.print(SaveData.inventory.ice, numx+64-10, numy)
-    else
-        Text.print(SaveData.inventory.ice, numx+64, numy)
-    end
+		if SaveData.inventory.ice >= 10 then
+			Text.print(SaveData.inventory.ice, numx+64-10, numy)
+		else
+			Text.print(SaveData.inventory.ice, numx+64, numy)
+		end
 
-    if SaveData.inventory.leaf >= 10 then
-        Text.print(SaveData.inventory.leaf, numx+96-10, numy)
-    else
-        Text.print(SaveData.inventory.leaf, numx+96, numy)
-    end
+		if SaveData.inventory.leaf >= 10 then
+			Text.print(SaveData.inventory.leaf, numx+96-10, numy)
+		else
+			Text.print(SaveData.inventory.leaf, numx+96, numy)
+		end
 
-    if SaveData.inventory.tanooki >= 10 then
-        Text.print(SaveData.inventory.tanooki, numx+128-10, numy)
-    else
-        Text.print(SaveData.inventory.tanooki, numx+128, numy)
-    end
+		if SaveData.inventory.tanooki >= 10 then
+			Text.print(SaveData.inventory.tanooki, numx+128-10, numy)
+		else
+			Text.print(SaveData.inventory.tanooki, numx+128, numy)
+		end
 
-    if SaveData.inventory.hammer >= 10 then
-        Text.print(SaveData.inventory.hammer, numx+160-10, numy)
-    else
-        Text.print(SaveData.inventory.hammer, numx+160, numy)
-    end
+		if SaveData.inventory.hammer >= 10 then
+			Text.print(SaveData.inventory.hammer, numx+160-10, numy)
+		else
+			Text.print(SaveData.inventory.hammer, numx+160, numy)
+		end
 
 
 
-	if SaveData.inventory.shroom == 0 then
-        Graphics.drawImage(noshroomsmol, 32, 538 )
-    end
-    if SaveData.inventory.fire == 0 then
-        Graphics.drawImage(nofiresmol, 64, 538 )
-    end
-    if SaveData.inventory.ice == 0 then
-		Graphics.drawImage(noicesmol, 96, 538 )
-    end
-    if SaveData.inventory.leaf == 0 then
-        Graphics.drawImage(noleafsmol, 128, 538 )
-    end
-    if SaveData.inventory.tanooki == 0 then
-        Graphics.drawImage(notanookismol, 160, 538 )
-    end
-    if SaveData.inventory.hammer == 0 then
-        Graphics.drawImage(nohammersmol, 192, 538 )
-    end
+		if SaveData.inventory.shroom == 0 then
+			Graphics.drawImage(noshroomsmol, 32, 538 )
+		end
+		if SaveData.inventory.fire == 0 then
+			Graphics.drawImage(nofiresmol, 64, 538 )
+		end
+		if SaveData.inventory.ice == 0 then
+			Graphics.drawImage(noicesmol, 96, 538 )
+		end
+		if SaveData.inventory.leaf == 0 then
+			Graphics.drawImage(noleafsmol, 128, 538 )
+		end
+		if SaveData.inventory.tanooki == 0 then
+			Graphics.drawImage(notanookismol, 160, 538 )
+		end
+		if SaveData.inventory.hammer == 0 then
+			Graphics.drawImage(nohammersmol, 192, 538 )
+		end
+	end
 end
 
 
@@ -500,20 +490,21 @@ function inventory.onInputUpdate()
 			end
 		end
 	end
-
-	if player.rawKeys.dropItem == KEYS_PRESSED and inventory.activated == true then -- toggle inventory menu
-		inventory.activateinventory = true
-		inventory.inventoryopened = not inventory.inventoryopened
-		if inventory.inventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
-			inventoryopen = false
-			inventory.inventoryopened = false
-			Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
-			Misc.unpause()
-		elseif inventory.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
-			inventoryopen = true
-			inventory.inventoryopened = true
-			Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
-			Misc.pause()
+	if inventory.activated == true and inventory.hidden == false then
+		if player.rawKeys.dropItem == KEYS_PRESSED then -- toggle inventory menu
+			inventory.activateinventory = true
+			inventory.inventoryopened = not inventory.inventoryopened
+			if inventory.inventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
+				inventoryopen = false
+				inventory.inventoryopened = false
+				Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
+				Misc.unpause()
+			elseif inventory.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
+				inventoryopen = true
+				inventory.inventoryopened = true
+				Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
+				Misc.pause()
+			end
 		end
 	end
 	if inventory.activateinventory == true then

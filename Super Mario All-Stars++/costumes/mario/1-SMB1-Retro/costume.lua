@@ -76,10 +76,10 @@ function costume.onCleanup(p)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
-	Audio.sounds[4].sfx  = nil
+	extrasounds.id4  = Audio.SfxOpen(Misc.resolveSoundFile("block-smash.ogg"))
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
-	Audio.sounds[7].sfx  = nil
+	extrasounds.id7  = Audio.SfxOpen(Misc.resolveSoundFile("mushroom.ogg"))
 	Audio.sounds[8].sfx  = nil
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
@@ -110,7 +110,7 @@ function costume.onCleanup(p)
 	Audio.sounds[39].sfx = nil
 	Audio.sounds[41].sfx = nil
 	Audio.sounds[42].sfx = nil
-	Audio.sounds[43].sfx = nil
+	extrasounds.id43 = Audio.SfxOpen(Misc.resolveSoundFile("fireworks.ogg"))
 	Audio.sounds[44].sfx = nil
 	Audio.sounds[46].sfx = nil
 	Audio.sounds[47].sfx = nil
@@ -124,7 +124,7 @@ function costume.onCleanup(p)
 	Audio.sounds[56].sfx = nil
 	Audio.sounds[57].sfx = nil
 	Audio.sounds[58].sfx = nil
-	Audio.sounds[59].sfx = nil
+	extrasounds.id59 = Audio.SfxOpen(Misc.resolveSoundFile("dragon-coin.ogg"))
 	Audio.sounds[61].sfx = nil
 	Audio.sounds[62].sfx = nil
 	Audio.sounds[63].sfx = nil

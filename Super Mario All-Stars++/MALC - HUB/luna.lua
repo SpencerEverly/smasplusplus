@@ -43,13 +43,14 @@ areaNames.sectionNames = {
 	[4] = "Building 1: Tourist Center",
 	[5] = "Building 5: The True Ending",
 	[6] = "Me and Larry City (Side Quest Area 1)",
-	[7] = "Building 6: Plumber Area",
+	[7] = "Building 7: Plumber Area",
 	[8] = "Hotel: Floors 1-5",
 	[9] = "Information Booth",
 	[10] = "Me and Larry City (Side Quest Area 2 & Ocean)",
 	[11] = "Me and Larry City (Warp Zone)",
 	[12] = "Character Switch Room",
 	[13] = "Character Testing Area",
+	[14] = "Building 6: Shop Area",
 }
 
 function onStart()
@@ -157,6 +158,11 @@ function onEvent(eventName)
 end
 
 -- Register questions
+
+
+littleDialogue.registerAnswer("shopstuff",{text = "Buy something",addText = "Alright! Whadda need?"})
+littleDialogue.registerAnswer("shopstuff",{text = "What is this?",addText = "This is the Me and Larry City Shop, full of rarities and things that's valuable!<page>As you collect coins, you have a total coin count you collect throughout your journey to spend on stuff here.<page>Spend wisely, is all I say! These items are worth your valuables!<page>That is all. Talk to me again if you need anything. Come again!"})
+littleDialogue.registerAnswer("shopstuff",{text = "Nevermind.",addText = "Okay! Let me know if you need anything. Come again!"})
 
 
 littleDialogue.registerAnswer("favgame1",{text = "Super Mario All-Stars Plus Plus",addText = "This must be the best game then, isn't it? I love it too!"})
