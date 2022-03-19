@@ -2,16 +2,32 @@ local megaluavania = require("megaluavania")
 local rng = API.load("rng")
 local colliders = API.load("colliders")
 local playerManager = require("playermanager")
+local stats = require("Stats")
+local textplus = require("textplus")
+
+local fontB = textplus.loadFont("textplus/font/6.ini")
+
+stats.registerNPC(127, 3, 0, 4) -- Bit
+stats.xpDrop(127, 4)
 
 local undertaledepends = {}
 
 function undertaledepends.onInitAPI()
+	registerEvent(undertaledepends,"onTick")
 	registerEvent(undertaledepends,"onEvent")
+	registerEvent(undertaledepends,"onDraw")
 	registerEvent(undertaledepends,"onPostNPCKill")
+	registerEvent(undertaledepends,"onPostNPCHarm")
 	registerEvent(undertaledepends,"onPlayerHarm")
 	
 	eventsRegistered = true
 end
+
+local character = player.character;
+local costumes = playerManager.getCostumes(player.character)
+local currentCostume = player:getCostume()
+
+local costumes
 
 if SaveData.utencounter == nil then
 	SaveData.utencounter = 0
@@ -68,35 +84,99 @@ for i = 1,SaveData.utpoiton do
 	table.insert(megaluavania.items,{name = "Orange Wine",text = {"* You drank the Orange Wine.<br>* It tastes like a mix between orange<br>juice and wine (Duh)."},rec = 20})
 end
 
-function undertaledepends.onPostNPCKill(npc, harmtype)
+function undertaledepends.onTick(k,v)
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
-
+	
 	local costumes
-	local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
-	if goombas[npc.id] then
-		if harmtype == HARM_TYPE_JUMP then
-			if currentCostume == "UNDERTALE-FRISK" then
-				triggerEvent("_UNDERTALEBATTLEGoomba")
-				SaveData.utencounter = 1
-			end
-		end
-    end
-	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
-        --SaveData.koopaStomps = SaveData.koopaStomps + 1
-    --end
+	if currentCostume == "UNDERTALE-FRISK" then
+		stats.enabled = true
+		stats.alwaysBig = true
+	elseif currentCostume then
+		stats.enabled = false
+		stats.alwaysBig = false
+	end
 end
 
-function undertaledepends.onPlayerHarm(npc, id, eventName)
-    local goombas = table.map{1,2,3,27,71,89,165,166,242,243,244,379,392,393,466,467}
-	if goombas[npc.id] then
-		triggerEvent("_UNDERTALEBATTLEGoomba")
-		SaveData.utencounter = 1
-    end
-	--if npc.id == 4 or npc.id == 5 or npc.id == 6 or npc.id == 7 or npc.id == 55 or npc.id == 72 or npc.id == 73 or npc.id == 76 or npc.id == 110 or npc.id == 111 or npc.id == 112 or npc.id == 113 or npc.id == 114 or npc.id == 115 or npc.id == 116 or npc.id == 117 or npc.id == 118 or npc.id == 119 or npc.id == 120 or npc.id == 121 or npc.id == 122 or npc.id == 123 or npc.id == 124 or npc.id == 161 or npc.id == 76 or npc.id == 172 or npc.id == 173 or npc.id == 174 or npc.id == 175 or npc.id == 176 or npc.id == 177 or npc.id == 194 or npc.id == 578 or npc.id == 920 or npc.id == 921 then
-        --SaveData.koopaStomps = SaveData.koopaStomps + 1
-    --end
+function undertaledepends.onPostNPCHarm(npc, harmtype)
+	local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
+	local koopas = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
+	local coins = table.map{10,33,88,103,258,528}
+	local mushrooms = table.map{9,184,185,249}
+	local fireflowers = table.map{14,182,183}
+	local allEnemies = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921,1,2,27,71,89,242,243,379,392,393,466,467}
+	for i = 0,20 do
+		for k,v in ipairs (NPC.get(allEnemies[NPC.id])) do
+			local section = Section(i)
+			if currentCostume == "UNDERTALE-FRISK" then
+				if harmtype ~= HARM_TYPE_VANISH then
+					if v.isValid == false then
+						section.musicPath = "_OST/Undertale/mus_toomuch.ogg"
+					end
+				end
+			end
+		end
+	end
+	for k, v in NPC.iterate(goombas) do
+		if currentCostume == "UNDERTALE-FRISK" then
+			stats.registerNPC(goombas[npc.id], 3, 5, 4) --NPCid, pow, def, xpdrop
+			stats.xpDrop(1, 4) --NPCID, reward
+		end
+	end
+end
+
+function undertaledepends.onDraw()
+	local fontB = textplus.loadFont("littleDialogue/font/name.ini")
+	if stats.enabled == true then
+		textplus.print{
+			x = 450,
+			y = 75,
+			xscale = 1,
+			yscale = 1,
+			font = fontB,
+			text = "LV: " .. stat.level,
+			priority = 5
+		}
+		textplus.print{
+			x = 330,
+			y = 99,
+			xscale = 1,
+			yscale = 1,
+			font = fontB,
+			text = "EXP: " .. stat.xp,
+			priority = 5
+		}
+		--textplus.print{
+		  --  x = 0,
+			--y = 20,
+		--    xscale = 2,
+		  --  yscale = 2,
+			--font = fontB,
+		   -- text = "FP: " .. stat.fp
+		--}
+		if stat.hp >= stats.criticalHP then
+			textplus.print{
+				x = 234,
+				y = 75,
+				xscale = 1,
+				yscale = 1,
+				font = fontB,
+				text = "HP: " .. stat.hp .. "/" .. stat.maxhp,
+				priority = 5
+			}
+		else
+			textplus.print{
+				x = 234,
+				y = 75,
+				xscale = 1,
+				yscale = 1,
+				font = fontB,
+				text = "HP: " .. stat.hp .."!/" .. stat.maxhp,
+				priority = 5
+			}
+		end
+	end
 end
 
 local goomba = megaluavania.newEncounter()

@@ -125,6 +125,8 @@ Code for certain parts made by:
 - cold soup
 - Coldcolor900
 - deice
+- Dragon0307
+- Jumper
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
