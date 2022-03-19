@@ -88,8 +88,8 @@ local function x2modeenable()
 	Graphics.activateHud(false)
 	Cheats.trigger("1player")
 	Defines.player_hasCheated = false
-	if SaveData.disableX2char == 1 then
-		SaveData.disableX2char = SaveData.disableX2char - 1
+	if SaveData.disableX2char == true then
+		SaveData.disableX2char = false
 		Level.load(Level.filename())
 	end
 	pausemenu13.paused = false
@@ -99,8 +99,8 @@ end
 local function x2modedisable()
 	pausemenu13.paused = false
 	Misc.unpause()
-	if SaveData.disableX2char == 0 then
-		SaveData.disableX2char = SaveData.disableX2char + 1
+	if SaveData.disableX2char == false then
+		SaveData.disableX2char = true
 		Level.load(Level.filename())
 	end
 end
@@ -138,10 +138,10 @@ local function drawPauseMenu(y, alpha)
 		{
 			{name="CONTINUE", action=unpause}
 		}
-		if SaveData.disableX2char == 1 then
+		if SaveData.disableX2char == true then
 			table.insert(pause_options, {name="TURN OFF SMBX 1.3 MODE", action = x2modeenable});
 		end
-		if SaveData.disableX2char == 0 then
+		if SaveData.disableX2char == false then
 			table.insert(pause_options, {name="TURN ON SMBX 1.3 MODE", action = x2modedisable});
 		end
 		table.insert(pause_options, {name="SAVE AND CONTINUE", action = savegame});

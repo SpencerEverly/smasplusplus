@@ -4,8 +4,6 @@
 
 local npcManager = require("npcManager")
 local SmgLifeSystem = require("SmgLifeSystem")
-local particles = require("particles")
-playerParticle = particles.Emitter(0, 0, Misc.resolveFile("p_sparkle.ini"))
 
 local FullHealShroom = {}
 local npcID = NPC_ID
@@ -77,14 +75,14 @@ function FullHealShroom.onPostNPCKill(v,reason)
 
     if npcManager.collected(v,reason) then
 		if not SmgLifeSystem.daredevilActive then
-			if (SmgLifeSystem.CurrentHealth < SmgLifeSystem.MainHealth) then
+			if (SmgLifeSystem.HealthCounter < SmgLifeSystem.MainHealth) then
 				SmgLifeSystem.setHealth(SmgLifeSystem.MainHealth, 1)
-			elseif (SmgLifeSystem.CurrentHealth < SmgLifeSystem.MaxHealth) and (SmgLifeSystem.CurrentHealth > SmgLifeSystem.MainHealth) then
+			elseif (SmgLifeSystem.HealthCounter < SmgLifeSystem.MaxHealth) and (SmgLifeSystem.HealthCounter > SmgLifeSystem.MainHealth) then
 				SmgLifeSystem.setHealth(SmgLifeSystem.MaxHealth, 1)
 			end
 		end
 
-		if (SmgLifeSystem.CurrentAir < SmgLifeSystem.AirMax) then
+		if (SmgLifeSystem.AirLeft < SmgLifeSystem.AirMax) then
 			SmgLifeSystem.setHealth(SmgLifeSystem.MaxHealth, 2)
 		end
 

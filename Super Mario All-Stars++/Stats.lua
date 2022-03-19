@@ -96,28 +96,30 @@ end
 function stats.onPlayerHarm() --Handles playerHP
 	if stats.enabled == true then
 		local subjectpow = 0 -- In case it complains
-		-- Check who the enemy is and how much POW they've got
-		for k,v in pairs(NPC.get()) do
-			if (colliders.collide(player, v)) then
-				subjectpow = enemyPOW[v.id] -- Records the target's POW
+		if not player.hasStarman then
+			-- Check who the enemy is and how much POW they've got
+			for k,v in pairs(NPC.get()) do
+				if (colliders.collide(player, v)) then
+					subjectpow = enemyPOW[v.id] -- Records the target's POW
+				end
 			end
-		end
-		local subjectpow = 0 -- In case it complains
-		local damagecalc = subjectpow - stat.def -- Calculates damage
-		if damagecalc < 1 then
-		   damagecalc = 1 -- No healing when an enemy hits you, because that's just dumb
-		end
-		stat.hp = stat.hp - damagecalc -- OUCH!
+			local subjectpow = 0 -- In case it complains
+			local damagecalc = subjectpow - stat.def -- Calculates damage
+			if damagecalc < 1 then
+			   damagecalc = 1 -- No healing when an enemy hits you, because that's just dumb
+			end
+			stat.hp = stat.hp - damagecalc -- OUCH!
 
-		if stat.hp < 1 then
-			player:kill() -- oof
-		end
+			if stat.hp < 1 then
+				player:kill() -- oof
+			end
 
-		if player.forcedState ~= FORCEDSTATE_POWERDOWN_SMALL then
-			SFX.play("costumes/luigi/Undertale-Frisk/player-shrink.ogg")
-			Player.forcedState = FORCEDSTATE_NONE -- Shamelessly stolen from SmgLifeSystem by Marioman2007. Thanks for solving my problem for me!
-			player:mem(0x140, FIELD_WORD, 150)
-			player.powerup = 2
+			if player.forcedState ~= FORCEDSTATE_POWERDOWN_SMALL then
+				SFX.play("costumes/luigi/Undertale-Frisk/player-shrink.ogg")
+				Player.forcedState = FORCEDSTATE_NONE -- Shamelessly stolen from SmgLifeSystem by Marioman2007. Thanks for solving my problem for me!
+				player:mem(0x140, FIELD_WORD, 150)
+				player.powerup = 2
+			end
 		end
 	end
 end
@@ -157,7 +159,7 @@ end
 function stats.onDraw()
 	local uthud = Graphics.loadImageResolved("friskhud.png")
 	if stats.enabled == true then
-		Graphics.drawImageWP(uthud, 0, 0, 4)
+		Graphics.drawImageWP(uthud, 0, 0, 0)
 		-- Prints your stats. It has to be global for some reason.
 		if stats.alwaysBig == true then
 			if player.powerup == 1 and player.forcedState ~= FORCEDSTATE_POWERDOWN_SMALL then

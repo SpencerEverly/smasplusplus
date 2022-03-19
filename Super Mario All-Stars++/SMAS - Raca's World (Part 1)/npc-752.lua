@@ -5,8 +5,6 @@
 local npcManager = require("npcManager")
 local SmgLifeSystem = require("SmgLifeSystem")
 local npcutils = require("npcs/npcutils")
-local particles = require("particles")
-playerParticle = particles.Emitter(0, 0, Misc.resolveFile("p_sparkle.ini"))
 
 local LifeUpHeart = {}
 local npcID = NPC_ID
@@ -92,26 +90,26 @@ function LifeUpHeart.onPostNPCKill(v,reason)
     if npcManager.collected(v,reason) then
 		if not SmgLifeSystem.daredevilActive then
 			if not SmgLifeSystem.doFancyAnim then
-				if SmgLifeSystem.CurrentHealth ~= SmgLifeSystem.MaxHealth then
+				if SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MaxHealth then
 					SmgLifeSystem.setHealth(SmgLifeSystem.MaxHealth, 1)
 					SFX.play(NPC.config[npcID].soundEffect, NPC.config[npcID].soundEffectVolume)
-				elseif SmgLifeSystem.CurrentHealth == SmgLifeSystem.MaxHealth then
+				elseif SmgLifeSystem.HealthCounter == SmgLifeSystem.MaxHealth then
 					if NPC.config[npcID].CoinsReward > 0 then
 						Misc.coins(NPC.config[npcID].CoinsReward, false)
 						SFX.play(NPC.config[npcID].soundEffectAlt, NPC.config[npcID].soundEffectVolumeAlt)
 					end
 				end
 			elseif SmgLifeSystem.doFancyAnim then
-				if SmgLifeSystem.CurrentHealth ~= SmgLifeSystem.MaxHealth then
+				if SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MaxHealth then
 					SFX.play(NPC.config[npcID].soundEffect, NPC.config[npcID].soundEffectVolume)
-				elseif SmgLifeSystem.CurrentHealth == SmgLifeSystem.MaxHealth then
+				elseif SmgLifeSystem.HealthCounter == SmgLifeSystem.MaxHealth then
 					if NPC.config[npcID].CoinsReward > 0 then
 						Misc.coins(NPC.config[npcID].CoinsReward, false)
 						SFX.play(NPC.config[npcID].soundEffectAlt, NPC.config[npcID].soundEffectVolumeAlt)
 					end
 				end
 
-				if SmgLifeSystem.CurrentHealth <= SmgLifeSystem.MainHealth then
+				if SmgLifeSystem.HealthCounter <= SmgLifeSystem.MainHealth then
 					SmgLifeSystem.CountUp()
 				else
 					SmgLifeSystem.setHealth(SmgLifeSystem.MaxHealth, 1)

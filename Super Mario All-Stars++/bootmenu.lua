@@ -428,13 +428,13 @@ local function credits1()
 end
 
 local function X2Char()
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
-		SaveData.disableX2char = SaveData.disableX2char + 1
+		SaveData.disableX2char = true
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	elseif SaveData.disableX2char == 1 then
+	elseif SaveData.disableX2char == true then
 		SFX.play("_OST/_Sound Effects/x2-mode-enabled.ogg")
-		SaveData.disableX2char = SaveData.disableX2char - 1
+		SaveData.disableX2char = false
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
@@ -453,9 +453,9 @@ local function X2DisableCheck1()
 end
 
 local function TwoPlayerDisEnable1()
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
-	elseif SaveData.disableX2char == 0 then
+	elseif SaveData.disableX2char == false then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
@@ -492,10 +492,10 @@ local function PathFix1()
 end
 
 local function ChangeChar1()
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
 	end
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		if Player.count() == 2 then
 			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
 		elseif Player.count() == 1 then
@@ -830,11 +830,11 @@ function bootmenu.onStart()
 	if month == "12" and day == "25" then
 		Section(0).getWeatherEffect(2)
 	end
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		x2noticecheck = active
 		x2noticecheckactive = not active
 	end
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		x2noticecheck = not active
 		x2noticecheckactive = active
 	end
@@ -922,13 +922,13 @@ function bootmenu.onTick()
 		Routine.run(SaveDataError1)
 	end
 	if SaveData.disableX2char == nil then
-        SaveData.disableX2char = SaveData.disableX2char or 0
+        SaveData.disableX2char = false
     end
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		x2noticecheck = active
 		x2noticecheckactive = not active
 	end
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		x2noticecheck = not active
 		x2noticecheckactive = active
 		Player.setCostume(1, nil)

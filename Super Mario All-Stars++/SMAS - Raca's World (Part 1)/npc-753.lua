@@ -4,8 +4,6 @@
 
 local npcManager = require("npcManager")
 local SmgLifeSystem = require("SmgLifeSystem")
-local particles = require("particles")
-playerParticle = particles.Emitter(0, 0, Misc.resolveFile("p_sparkle.ini"))
 
 local Heart = {}
 local npcID = NPC_ID
@@ -76,9 +74,9 @@ function Heart.onPostNPCKill(v,reason)
 
     if npcManager.collected(v,reason) then
 		if not SmgLifeSystem.daredevilActive then
-			if (SmgLifeSystem.CurrentHealth ~= SmgLifeSystem.MaxHealth) and (SmgLifeSystem.CurrentHealth ~= SmgLifeSystem.MainHealth) then
+			if (SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MaxHealth) and (SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MainHealth) then
 				SmgLifeSystem.addHealth(1, 1)
-			elseif (SmgLifeSystem.CurrentHealth == SmgLifeSystem.MaxHealth) or (SmgLifeSystem.CurrentHealth == SmgLifeSystem.MainHealth) then
+			elseif (SmgLifeSystem.HealthCounter == SmgLifeSystem.MaxHealth) or (SmgLifeSystem.HealthCounter == SmgLifeSystem.MainHealth) then
 				if NPC.config[npcID].CoinsReward > 0 then
 					Misc.coins(NPC.config[npcID].CoinsReward, false)
 				end

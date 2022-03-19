@@ -87,6 +87,7 @@ function Lumas.onDrawNPC(v)
 	local SourceX = data.color * Width
 
 	npcutils.drawNPC(v, {sourceX = SourceX, opacity = 1})
+	npcutils.hideNPC(v)
 end
 
 function Lumas.onInitAPI()

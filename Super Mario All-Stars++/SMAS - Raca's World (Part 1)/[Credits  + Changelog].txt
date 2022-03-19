@@ -2,6 +2,7 @@
 1.0  - Released the library
 1.01 - Removed particles as they were causing some errors
 1.1  - icantswim.lua support + fixed a bug related to starman invincibility
+1.2  - Fixed a few more bugs + made the health and air variables global
 
 
 -------- Credits --------

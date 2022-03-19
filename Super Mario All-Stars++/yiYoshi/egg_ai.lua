@@ -185,7 +185,7 @@ local function doBouncing(v,data,config,mimicConfig)
             elseif obj.id == 370 or obj.contentID == 0 and Block.MEGA_SMASH_MAP[obj.id] then
                 obj:remove(true)
                 isSolid = false
-				SFX.play(extrasounds.playersoundid4)
+				SFX.play(extrasounds.id4)
             else
                 obj:hit()
             end

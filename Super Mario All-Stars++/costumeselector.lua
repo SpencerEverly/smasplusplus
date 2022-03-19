@@ -472,10 +472,10 @@ local function drawCostumeSelector(y, alpha)
 		if (Level.name() == "MALC - HUB") == false then
 			table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
 		end
-		if SaveData.disableX2char == 1 then
+		if SaveData.disableX2char == true then
 			table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
 		end
-		if SaveData.disableX2char == 0 then
+		if SaveData.disableX2char == false then
 			table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
 		end
 		if Level.filename() == "MALC - HUB.lvlx" then

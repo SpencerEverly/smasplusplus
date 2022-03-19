@@ -96,11 +96,11 @@ function onStart()
 	end
 	Audio.MusicVolume(nil)
 	mem(0xB25728, FIELD_BOOL, false) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		inventory = require("customInventory")
 		pausemenu = require("pausemenu")
 	end
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		pausemenu13 = require("pausemenu13map")
 	end
 end
@@ -108,10 +108,10 @@ end
 function onTick()
 	Defines.player_hasCheated = false
 	
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		playerManager.overworldCharacters = {CHARACTER_MARIO, CHARACTER_LUIGI, CHARACTER_PEACH, CHARACTER_TOAD, CHARACTER_LINK, CHARACTER_MEGAMAN, CHARACTER_WARIO, CHARACTER_BOWSER, CHARACTER_YOSHI, CHARACTER_NINJABOMBERMAN, CHARACTER_ROSALINA, CHARACTER_SNAKE, CHARACTER_ZELDA, CHARACTER_ULTIMATERINKA, CHARACTER_UNCLEBROADSWORD, CHARACTER_SAMUS}
 	end
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		playerManager.overworldCharacters = {CHARACTER_MARIO, CHARACTER_LUIGI, CHARACTER_PEACH, CHARACTER_TOAD, CHARACTER_LINK}
 	end
 	local character = player.character;

@@ -1221,10 +1221,10 @@ function boxInstanceFunctions:update()
 				
 				if player.rawKeys.run then
 					player.rawKeys.jump = true
-					if SaveData.disableX2char == 0 then
+					if SaveData.disableX2char == false then
 						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
 					end
-					if SaveData.disableX2char == 1 then
+					if SaveData.disableX2char == true then
 						SFX.play("_OST/_Sound Effects/fastscroll13.ogg")
 					end
 					if not self.typewriterFinished then
@@ -1248,10 +1248,10 @@ function boxInstanceFunctions:update()
 				if Player.count() == 2 then
 					if player2.rawKeys.run then
 						player2.rawKeys.jump = true
-						if SaveData.disableX2char == 0 then
+						if SaveData.disableX2char == false then
 							SFX.play("_OST/_Sound Effects/fastscroll.ogg")
 						end
-						if SaveData.disableX2char == 1 then
+						if SaveData.disableX2char == true then
 							SFX.play("_OST/_Sound Effects/fastscroll13.ogg")
 						end
 						if not self.typewriterFinished then

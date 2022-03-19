@@ -73,8 +73,8 @@ function costume.onInit(playerObj)
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/block-hit.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/player-grow.ogg")
-	extrasounds.playersoundid14 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/coin.ogg")
-	extrasounds.playersoundid15 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/1up.ogg")
+	extrasounds.id14 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/coin.ogg")
+	extrasounds.id15 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/1up.ogg")
 	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/warp.ogg")
 	Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/boss-beat.ogg")
 	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/pswitch.ogg")
@@ -85,7 +85,7 @@ function costume.onInit(playerObj)
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/got-star.ogg")
 	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/yoshi-swallow.ogg")
 	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/smw-checkpoint.ogg")
-	extrasounds.playersoundid59 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/dragon-coin.ogg")
+	extrasounds.id59 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/dragon-coin.ogg")
 	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/swim.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/bubble.ogg")
 	
@@ -278,11 +278,11 @@ function costume.onCleanup(playerObj)
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	extrasounds.playersoundid14 = Audio.SfxOpen(Misc.resolveSoundFile("coin.ogg"))
-	extrasounds.playersoundid15 = Audio.SfxOpen(Misc.resolveSoundFile("1up.ogg"))
+	extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("coin.ogg"))
+	extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("1up.ogg"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	extrasounds.playersoundid18 = Audio.SfxOpen(Misc.resolveSoundFile("fireball.ogg"))
+	extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("fireball.ogg"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil
@@ -332,18 +332,18 @@ function costume.onCleanup(playerObj)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
-	extrasounds.playersoundid92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
-	extrasounds.playersoundid93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
-	extrasounds.playersoundid94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg"))
-	extrasounds.playersoundid95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg"))
-	extrasounds.playersoundid96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
-	extrasounds.playersoundid97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
-	extrasounds.playersoundid98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
-	extrasounds.playersoundid99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
-	extrasounds.playersoundid100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
-	extrasounds.playersoundid101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
-	extrasounds.playersoundid102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
-	extrasounds.playersoundid103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
+	extrasounds.id92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
+	extrasounds.id93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
+	extrasounds.id94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg"))
+	extrasounds.id95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg"))
+	extrasounds.id96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
+	extrasounds.id97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
+	extrasounds.id98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
+	extrasounds.id99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
+	extrasounds.id100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
+	extrasounds.id101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
+	extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
+	extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
 	local spot = table.ifind(players,playerObj)
 
 	if spot then

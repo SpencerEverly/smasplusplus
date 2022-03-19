@@ -54,12 +54,12 @@ areaNames.sectionNames = {
 
 function onStart()
 	if SaveData.disableX2char == nil then
-		SaveData.disableX2char = SaveData.disableX2char or 0
+		SaveData.disableX2char = false
 	end
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		triggerEvent("ShowX2Stuff")
 	end
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		triggerEvent("HideX2Stuff")
 		Player.setCostume(1, nil)
 		Player.setCostume(2, nil)
@@ -95,7 +95,7 @@ function onStart()
 end
 
 function onDraw()
-	Graphics.drawImageWP(HUDimage, 0, 0, 4)
+	Graphics.drawImageWP(HUDimage, 0, 0, -15)
 	
 	if player.section == 9 then
 		textplus.print{x=-19760, y=-20272, text = "Floor 1: Star List", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}
@@ -133,20 +133,20 @@ function onEvent(eventName)
 		Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
 	end
 	if eventName == ("DisEnabledX2Char") then
-		if SaveData.disableX2char == 0 then
+		if SaveData.disableX2char == false then
 			triggerEvent("HUBDisableX2")
 			Level.load(Level.filename())
 		end
-		if SaveData.disableX2char == 1 then
+		if SaveData.disableX2char == true then
 			triggerEvent("HUBEnableX2")
 			Level.load(Level.filename())
 		end
 	end
 	if eventName == "HUBEnableX2" then
-		SaveData.disableX2char = SaveData.disableX2char - 1
+		SaveData.disableX2char = false
 	end
 	if eventName == "HUBDisableX2" then
-		SaveData.disableX2char = SaveData.disableX2char + 1
+		SaveData.disableX2char = true
 		Graphics.activateHud(false)
 		Cheats.trigger("1player")
 		Defines.player_hasCheated = false

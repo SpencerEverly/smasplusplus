@@ -4,8 +4,6 @@
 
 local npcManager = require("npcManager")
 local SmgLifeSystem = require("SmgLifeSystem")
-local particles = require("particles")
-playerParticle = particles.Emitter(0, 0, Misc.resolveFile("p_sparkle.ini"))
 
 local LifeUpMushroom = {}
 local npcID = NPC_ID
@@ -75,9 +73,9 @@ function LifeUpMushroom.onPostNPCKill(v,reason)
     end
 
     if npcManager.collected(v,reason) then
-		if SmgLifeSystem.CurrentAir ~= SmgLifeSystem.AirMax then
+		if SmgLifeSystem.AirLeft ~= SmgLifeSystem.AirMax then
 			SmgLifeSystem.setHealth(SmgLifeSystem.AirMax, 2)
-		elseif SmgLifeSystem.CurrentAir == SmgLifeSystem.AirMax then
+		elseif SmgLifeSystem.AirLeft == SmgLifeSystem.AirMax then
 			Misc.coins(NPC.config[npcID].CoinsReward, false)
 		end
 

@@ -10,11 +10,11 @@ function onEvent(eventName)
 		SFX.play("ender_portal.ogg")
 	end
 	if eventName == "Cutscene 1" then
-		if SaveData.disableX2char == 0 then
+		if SaveData.disableX2char == false then
 			pausemenu.pauseactivated = false
 			inventory.activated = false
 		end
-		if SaveData.disableX2char == 1 then
+		if SaveData.disableX2char == true then
 			pausemenu13.pauseactivated = false
 		end
 	end
@@ -28,11 +28,11 @@ function onEvent(eventName)
 		SFX.play("ut_noise.ogg")
 	end
 	if eventName == "Cutscene 2 - 13" then
-		if SaveData.disableX2char == 0 then
+		if SaveData.disableX2char == false then
 			pausemenu.pauseactivated = true
 			inventory.activated = true
 		end
-		if SaveData.disableX2char == 1 then
+		if SaveData.disableX2char == true then
 			pausemenu13.pauseactivated = true
 		end
 	end

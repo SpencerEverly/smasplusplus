@@ -23,6 +23,20 @@ local costumes = {}
 
 local dependencies = {}
 
+function p1teleportdoor()
+	Routine.waitFrames(30)
+	player:mem(0x140,FIELD_WORD,100)
+	player2:mem(0x140,FIELD_WORD,100)
+	Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
+end
+
+function p2teleportdoor()
+	Routine.waitFrames(30)
+	player:mem(0x140,FIELD_WORD,100)
+	player2:mem(0x140,FIELD_WORD,100)
+	Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
+end
+
 function dependencies.onInitAPI()
 	registerEvent(dependencies, "onStart")
 	registerEvent(dependencies, "onLoad")
@@ -46,7 +60,7 @@ function dependencies.onStart()
 	end
 	
 	local costumes
-	if SaveData.disableX2char == 0 then
+	if SaveData.disableX2char == false then
 		mm = require("Characters/megaman");
 		mm.playIntro = false;
 		undertaledepends = require("level_dependencies_undertale")
@@ -68,12 +82,12 @@ function dependencies.onStart()
 		warpTransition.TRANSITION_PAN = 6
 		littleDialogue.defaultStyleName = "smw"
 		if currentCostume == nil then
-			if SaveData.disableX2char == 0 then
+			if SaveData.disableX2char == false then
 				warpTransition.doorclose = ("_OST/_Sound Effects/door-close.ogg")
 			end
 		end
 	end
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		Cheats.deregister("dressmeup")
 		Cheats.deregister("undress")
 		Cheats.deregister("laundryday")
@@ -88,21 +102,21 @@ function dependencies.onStart()
 		Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-jump.ogg")
 		Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/stomped.ogg")
 		Audio.sounds[3].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/block-hit.ogg")
-		Audio.sounds[4].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/block-smash.ogg")
+		extrasounds.id4  = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/block-smash.ogg"))
 		Audio.sounds[5].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-shrink.ogg")
 		Audio.sounds[6].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-grow.ogg")
-		Audio.sounds[7].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/mushroom.ogg")
+		extrasounds.id7  = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/mushroom.ogg"))
 		Audio.sounds[8].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-died.ogg")
 		Audio.sounds[9].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/shell-hit.ogg")
 		Audio.sounds[10].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-slide.ogg")
 		Audio.sounds[11].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/item-dropped.ogg")
 		Audio.sounds[12].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/has-item.ogg")
 		Audio.sounds[13].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/camera-change.ogg")
-		Audio.sounds[14].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/coin.ogg")
-		Audio.sounds[15].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/1up.ogg")
+		extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/coin.ogg"))
+		extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/1up.ogg"))
 		Audio.sounds[16].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/lava.ogg")
 		Audio.sounds[17].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/warp.ogg")
-		Audio.sounds[18].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/fireball.ogg")
+		extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/fireball.ogg"))
 		Audio.sounds[19].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/level-win.ogg")
 		Audio.sounds[20].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/boss-beat.ogg")
 		Audio.sounds[21].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/dungeon-win.ogg")
@@ -119,7 +133,7 @@ function dependencies.onStart()
 		Audio.sounds[36].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/smash.ogg")
 		Audio.sounds[37].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/thwomp.ogg")
 		Audio.sounds[42].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/npc-fireball.ogg")
-		Audio.sounds[43].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/fireworks.ogg")
+		extrasounds.id43 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/fireworks.ogg"))
 		Audio.sounds[44].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/bowser-killed.ogg")
 		Audio.sounds[46].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/door.ogg")
 		Audio.sounds[48].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/yoshi.ogg")
@@ -131,7 +145,7 @@ function dependencies.onStart()
 		Audio.sounds[55].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/yoshi-swallow.ogg")
 		Audio.sounds[57].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/dry-bones.ogg")
 		Audio.sounds[58].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/smw-checkpoint.ogg")
-		Audio.sounds[59].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")
+		extrasounds.id59 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg"))
 		Audio.sounds[61].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/smw-blaarg.ogg")
 		Audio.sounds[62].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/wart-bubble.ogg")
 		Audio.sounds[63].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/wart-die.ogg")
@@ -257,45 +271,35 @@ function dependencies.onStart()
 	end
 end
 
-function dependencies.onInputUpdate()
-	if SaveData.disableX2char == 1 then
-		if player.count() == 1 then
-			--Nothing
-		end
-	end
-	if SaveData.disableX2char == 1 then
-		if Player.count() == 2 then
-			if player.keys.altRun == KEYS_PRESSED then
-				if pausemenu13.paused == false then
-					player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
-					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
-					cooldown = 5
-					player:mem(0x172,FIELD_BOOL,false)
-				end
-				if cooldown <= 0 then
-					player:mem(0x172,FIELD_BOOL,true)
-				end
-			end
-		end
-	end
-	if SaveData.disableX2char == 1 then
-		if Player(2) and Player(2).isValid then
-			if Player(2).keys.altRun == KEYS_PRESSED then
-				if pausemenu13.paused == false then
-					Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
-					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
-					cooldown = 5
-					Player(2):mem(0x172,FIELD_BOOL,false)
-				end
-				if cooldown <= 0 then
-					Player(2):mem(0x172,FIELD_BOOL,true)
-				end
-			end
-		end
-	end
-end
-
 function dependencies.onTick()
+	if Player(2) and Player(2).isValid then
+		if Player(1).forcedState == FORCEDSTATE_PIPE then
+			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
+				player:mem(0x140,FIELD_WORD,100)
+				player2:mem(0x140,FIELD_WORD,100)
+				Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+			end
+		end
+		if Player(2).forcedState == FORCEDSTATE_PIPE then
+			if Player(2).forcedTimer >= 70 and not Misc.isPaused() then
+				player:mem(0x140,FIELD_WORD,100)
+				player2:mem(0x140,FIELD_WORD,100)
+				Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
+			end
+		end
+	end
+	if Player(2) and Player(2).isValid then
+		if Player(1).forcedState == FORCEDSTATE_DOOR then
+			if Player(1).forcedTimer == 1 then
+				Routine.run(p1teleportdoor)
+			end
+		end
+		if Player(2).forcedState == FORCEDSTATE_DOOR then
+			if Player(2).forcedTimer == 1 then
+				Routine.run(p2teleportdoor)
+			end
+		end
+	end
 	if player.character == CHARACTER_SNAKE then
 		Graphics.activateHud(true)
 	end

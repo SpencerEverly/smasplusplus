@@ -44,6 +44,15 @@ local globalgenerals = require("globalgenerals")
 
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
+function onStart()
+	if SaveData.disableX2char == 0 then --Migrate old saves if there are any
+		SaveData.disableX2char = false
+	end
+	if SaveData.disableX2char == 1 then
+		SaveData.disableX2char = true
+	end
+end
+
 function onLoad()
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)

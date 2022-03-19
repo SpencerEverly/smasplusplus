@@ -22,7 +22,7 @@ if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SM
 	warpTransition.activateOnInstantWarps = false
 end
 
-if SaveData.disableX2char == 1 then
+if SaveData.disableX2char == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -129,6 +129,9 @@ local ready = false
 
 local globalgenerals = {}
 
+local pipecounter1p = 0
+local pipecounter2p = 0
+
 function globalgenerals.onInitAPI()
 	registerEvent(globalgenerals,"onExitLevel", "onExit")
 	registerEvent(globalgenerals,"onStart")
@@ -166,6 +169,44 @@ function globalgenerals.onStart()
 	end
 end
 
+function globalgenerals.onInputUpdate()
+	if SaveData.disableX2char == true then
+		if player.count() == 1 then
+			--Nothing
+		end
+	end
+	if SaveData.disableX2char == true then
+		if Player.count() == 2 then
+			if player.keys.altRun == KEYS_PRESSED then
+				if pausemenu13.paused == false then
+					player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
+					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+					cooldown = 5
+					player:mem(0x172,FIELD_BOOL,false)
+				end
+				if cooldown <= 0 then
+					player:mem(0x172,FIELD_BOOL,true)
+				end
+			end
+		end
+	end
+	if SaveData.disableX2char == true then
+		if Player(2) and Player(2).isValid then
+			if Player(2).keys.altRun == KEYS_PRESSED then
+				if pausemenu13.paused == false then
+					Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
+					cooldown = 5
+					Player(2):mem(0x172,FIELD_BOOL,false)
+				end
+				if cooldown <= 0 then
+					Player(2):mem(0x172,FIELD_BOOL,true)
+				end
+			end
+		end
+	end
+end
+
 function globalgenerals.onCameraUpdate(c, camIdx)
 	if Player.count() == 2 then
 		if c == 1 then
@@ -195,10 +236,12 @@ function globalgenerals.onCameraUpdate(c, camIdx)
 end
 	
 function globalgenerals.onTick()
-	if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
-		hudoverride.visible.itembox = true
-	elseif (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
-		hudoverride.visible.itembox = false
+	if SaveData.disableX2char == false then
+		if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
+			hudoverride.visible.itembox = true
+		elseif (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
+			hudoverride.visible.itembox = false
+		end
 	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
@@ -268,7 +311,7 @@ function globalgenerals.onTick()
 
 	local costumes
 	
-	if SaveData.disableX2char == 1 then
+	if SaveData.disableX2char == true then
 		warpTransition.doorclose = ("_OST/_Sound Effects/nothing.ogg")
 		Player.setCostume(1, nil)
 		Player.setCostume(2, nil)

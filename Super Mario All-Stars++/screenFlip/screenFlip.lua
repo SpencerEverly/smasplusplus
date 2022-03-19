@@ -63,6 +63,12 @@ function screenFlip.onInputUpdate()
 
         player.keys.left = player.keys.right
         player.keys.right = oldLeft
+		if Player(2) and Player(2).isValid then
+			local oldLeft2 = player2.keys.left
+
+			player2.keys.left = player2.keys.right
+			player2.keys.right = oldLeft2
+		end
     end
 end
 

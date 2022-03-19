@@ -7,9 +7,6 @@ local textplus = require("textplus")
 
 local fontB = textplus.loadFont("textplus/font/6.ini")
 
-stats.registerNPC(127, 3, 0, 4) -- Bit
-stats.xpDrop(127, 4)
-
 local undertaledepends = {}
 
 function undertaledepends.onInitAPI()
@@ -99,31 +96,44 @@ function undertaledepends.onTick(k,v)
 	end
 end
 
-function undertaledepends.onPostNPCHarm(npc, harmtype)
-	local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
-	local koopas = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
-	local coins = table.map{10,33,88,103,258,528}
-	local mushrooms = table.map{9,184,185,249}
-	local fireflowers = table.map{14,182,183}
-	local allEnemies = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921,1,2,27,71,89,242,243,379,392,393,466,467}
-	if currentCostume == "UNDERTALE-FRISK" then
-		for i = 0,20 do
-			for k,v in ipairs (NPC.get(allEnemies[npc.id])) do
-				local section = Section(i)
-					if harmtype ~= HARM_TYPE_VANISH then
-						if v.isValid == false then
-							section.musicPath = "_OST/Undertale/mus_toomuch.ogg"
-						end
-					end
-				end
-			end
-		for k, v in NPC.iterate(goombas) do
-			if currentCostume == "UNDERTALE-FRISK" then
-				stats.registerNPC(goombas[npc.id], 3, 5, 4) --NPCid, pow, def, xpdrop
-				stats.xpDrop(1, 4) --NPCID, reward
-			end
-		end
-	end
+--local goombas = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
+local koopas = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
+local coins = table.map{10,33,88,103,258,528}
+local mushrooms = table.map{9,184,185,249}
+local fireflowers = table.map{14,182,183}
+local allEnemies = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921,1,2,27,71,89,242,243,379,392,393,466,467}
+
+local goombas = {
+	[1] = true,
+	[2] = true,
+	[3] = true,
+	[27] = true,
+	[71] = true,
+	[89] = true,
+	[242] = true,
+	[243] = true,
+	[379] = true,
+	[392] = true,
+	[393] = true,
+	[466] = true,
+	[467] = true,
+}
+
+stats.registerNPC(goombas, 2, 3, 1) --NPCid, pow, def, xpdrop
+stats.xpDrop(1, 1) --NPCID, reward
+
+function undertaledepends.onPostNPCHarm(killedNPC, harmtype, culpritOrNil)
+    local allSecs
+
+    for i = 0,20 do
+        allSecs = Section(i)
+    end
+
+    if (currentCostume == "UNDERTALE-FRISK") then
+        if allEnemies[killedNPC.id] then
+            allSecs.music = "_OST/Undertale/mus_toomuch.ogg"
+        end
+    end
 end
 
 function undertaledepends.onDraw()

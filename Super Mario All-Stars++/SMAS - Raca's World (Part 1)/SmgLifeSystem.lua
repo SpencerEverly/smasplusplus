@@ -1,6 +1,6 @@
 --[[
         SmgLifeSystem.lua
-        v1.01
+        v1.2
 
         By Marioman2007
         inspired from smgModder.lua by PixelPest
@@ -9,104 +9,10 @@
 local SmgLifeSystem = {}
 
 local Hudoverride = require("hudoverride") -- Hudoverride.lua is required to remove the display of hearts
-
--- Images
-SmgLifeSystem.health = Graphics.loadImageResolved("SmgLifeSystem/healthMeter.png")
-SmgLifeSystem.AirMeter = Graphics.loadImageResolved("SmgLifeSystem/AirMeter.png")
-SmgLifeSystem.FancyAnimSheet = Graphics.loadImageResolved("SmgLifeSystem/healthMeter_fancy.png")
-
-SmgLifeSystem.HarmedSheet = {
-        [CHARACTER_MARIO] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Mario Sheet.png"),
-        [CHARACTER_LUIGI] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Luigi Sheet.png"),
-        [CHARACTER_PEACH] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Peach Sheet.png"),
-        [CHARACTER_TOAD] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Toad Sheet.png")}
-
------------ A Ton of Customizable Stuff -----------
----- Health Meter related ----
-SmgLifeSystem.healthX = 0                                         -- X co-ordinate of the health meter
-SmgLifeSystem.healthY = 0                                         -- Y co-ordinate of the health meter
-SmgLifeSystem.MaxOffsetX = -24                                    -- Offset X bettwen the main health counter and max health counter
-SmgLifeSystem.MaxOffsetY = 0                                      -- Offset Y bettwen the main health counter and max health counter
-SmgLifeSystem.HealthMeterHeight = 96                              -- Height of the health bar, useful for drawing level specific health meters
-SmgLifeSystem.HealthMeterWidth = 86                               -- Width of the health bar
-SmgLifeSystem.HealthPriority = 5                                  -- Priority of the Health Meter stuff
-SmgLifeSystem.MainHealth = 3                                      -- Main Health of the player
-SmgLifeSystem.MaxHealth = 6                                       -- Max Health of the player
-SmgLifeSystem.CurrentHealth = HealthCounter                       -- READ-ONLY: the player's current Health
-
----- Air Meter related ----
-SmgLifeSystem.AirX = 0                                            -- X co-ordinate of the air meter for drawing level specific air meters
-SmgLifeSystem.AirY = 120                                          -- Y co-ordinate of the air meter
-SmgLifeSystem.AirMeterHeight = 96                                 -- Height of the health bar, useful for drawing level specific air meters
-SmgLifeSystem.AirMeterWidth = 86                                  -- Width of the health bar, useful, useful for drawing level specific health meters
-SmgLifeSystem.AirPriority = 6                                     -- Priority of the Air Meter stuff
-SmgLifeSystem.AirFadeSpeed = 0.05                                 -- How fast the Air Meter should fade
-SmgLifeSystem.AirAlwaysVisible = false                            -- Whether the Air Meter will be always visible
-SmgLifeSystem.AirMax = 6                                          -- Max value of the air meter
-SmgLifeSystem.CurrentAir = AirLeft                                -- READ-ONLY: the player's current Air
-
----- Bools (True/False) ----
-SmgLifeSystem.daredevilAllowPowerups = false                      -- Whether to allow powerups in daredevil run or not
-SmgLifeSystem.FreezeGameEnabled = true                            -- Whether the game will be freezed while powering up or down (Thanks to MrDoubleA!)
-SmgLifeSystem.SetHurtFrame = true                                 -- set a custom harmed frame when the player gets hurt? NOTE: to properly remove the hurt animation, you also need to remove the players' ini files
-SmgLifeSystem.icantswimSupport = true                             -- use the Air Meter with icantswim.lua?
-
-SmgLifeSystem.daredevilActive = false                             -- is the Daredevil Mode active?
-SmgLifeSystem.coinHealthActive = false                            -- is the Coin Health System active?
-SmgLifeSystem.AirMeterActive = false                              -- is the Air Meter active?
-
----- Variables ----
-SmgLifeSystem.CoinsToHeal = 10                                    -- Amount of coins needed to heal one health
-SmgLifeSystem.CoinsReward = 10                                    -- The amount of coins given to the player when the player collects a mushroom when the HP is full, NOTE: this is for the powerups in the SmgLifeSystem.HealingPowerups table, for custom powerups, use NPC configs
-SmgLifeSystem.EarthquakePower = 5                                 -- Power of the earthquake, when the player takes damage
-SmgLifeSystem.AirTime = 64                                        -- How long the player can air under-water (for one segment of Air Meter, in Ticks). NOTE: 64 Ticks = 1 Second
-SmgLifeSystem.AirRestoreTime = 64                                 -- Number of Ticks to restore 1 segment of Air Meter. NOTE: 64 Ticks = 1 Second
-
----- Tables ----
-SmgLifeSystem.HealingCoins = table.map{10, 33, 88, 138, 411}      -- Coins that once collected enough, restore HP
-SmgLifeSystem.BlueCoins = table.map{258}                          -- Coins that are equal to 5 normal coins
-
-SmgLifeSystem.HealingPowerups = table.map{9, 184, 185, 249, 250}  -- Power-Ups that restore HP, NOTE: this table is mainly for vanilla NPCs, custom NPCs can be set to grant HP (see example Power-Ups)
-
--- Forced-States in which the game will freeze if SmgLifeSystem.FreezeGameEnabled is true
-SmgLifeSystem.powerupStates = table.map{
-    FORCEDSTATE_POWERUP_BIG, FORCEDSTATE_POWERDOWN_SMALL, FORCEDSTATE_POWERUP_FIRE, FORCEDSTATE_POWERUP_LEAF, FORCEDSTATE_POWERUP_TANOOKI,
-    FORCEDSTATE_POWERUP_HAMMER, FORCEDSTATE_POWERUP_ICE, FORCEDSTATE_POWERDOWN_FIRE, FORCEDSTATE_POWERDOWN_ICE, FORCEDSTATE_MEGASHROOM,}
-
----- Fancy Animation related ----
-SmgLifeSystem.doFancyAnim = true                                  -- Will there be a fancy animation when the player's health gets to maximum value
-SmgLifeSystem.FancyAnimFrames = 4                                 -- frames of the fancy animation
-SmgLifeSystem.FancyAnimFrameSpeed = 16                            -- Speed of the fancy animation
-
----- Hurt Animation Related ----
-SmgLifeSystem.HarmedFrameSpeed = 5                                -- Speed of the hurt animation
-SmgLifeSystem.perFrameSideLength = 100                            -- the length of the side of each hurt frame
-
-SmgLifeSystem.HarmedFrames = {                                    -- Value of the frames the hurt animation has (Per-Character)
-        [CHARACTER_MARIO] = 2, [CHARACTER_LUIGI] = 2,
-        [CHARACTER_PEACH] = 2, [CHARACTER_TOAD] = 2}
-
-SmgLifeSystem.HarmedSheetRow = {                                  -- row of the image in the harmed frames image, starts from 0 (Per-Character)
-        [CHARACTER_MARIO] = 4, [CHARACTER_LUIGI] = 0,
-        [CHARACTER_PEACH] = 0, [CHARACTER_TOAD] = 0}
-
-SmgLifeSystem.HarmedFrameOffsetX = {                              -- X-Offset of the hurt animation (Per-Character)
-        [CHARACTER_MARIO] = 0, [CHARACTER_LUIGI] = 0,
-        [CHARACTER_PEACH] = 0, [CHARACTER_TOAD] = 0}
-
-SmgLifeSystem.HarmedFrameOffsetY = {                              -- Y-Offset of the hurt animation (Per-Character)
-        [CHARACTER_MARIO] = -3, [CHARACTER_LUIGI] = 0,
-        [CHARACTER_PEACH] = -12, [CHARACTER_TOAD] = -1}
-
----- Functions to add and set health air ----
--- SmgLifeSystem.addHealth(value, type) adds the given value to the type, set the type to 1 for the health meter and 2 for the air meter
--- SmgLifeSystem.setHealth(value, type) sets the given value to the type, set the type to 1 for the health meter and 2 for the air meter
-
+local npcManager = require("npcManager")
 
 ----------- Local stuff -----------
-local HealthCounter = SmgLifeSystem.MainHealth
-local AirLeft = SmgLifeSystem.AirMax
-local Air = SmgLifeSystem.AirTime
+local Air = 0
 local restoreAir = 0
 local AirMeterOpacity = 0
 local coinsCollected = 0
@@ -130,8 +36,7 @@ local icantswim_inWater = false
 
 
 function SmgLifeSystem.onStart()
-        HealthCounter = SmgLifeSystem.MainHealth
-        AirLeft = SmgLifeSystem.AirMax
+        Air = SmgLifeSystem.AirTime
 
 	for _,v in ipairs(Liquid.get()) do
 		if v.isQuicksand == false then
@@ -144,7 +49,7 @@ function SmgLifeSystem.onTick()
 	icantswim_inWater = false
 	for _,w in ipairs(icantswim_waterBoxes) do
 		if w.layer.isHidden == false then
-			if (table.maxn(Player.getIntersecting(w.x, w.y, w.x+w.width, w.y+w.height)) > 0) then
+			if (table.maxn(Player.getIntersecting(w.x, w.y, w.x + w.width, w.y + w.height)) > 0) then
 				icantswim_inWater = true
 			end
 		end
@@ -160,7 +65,7 @@ function SmgLifeSystem.onTick()
                 player.powerup = 2
         end
         
-        if HealthCounter == 0 and player.deathTimer == 0 then
+        if SmgLifeSystem.HealthCounter == 0 and player.deathTimer == 0 then
                 player:kill()
         end
 
@@ -187,7 +92,7 @@ function SmgLifeSystem.onTick()
         -- Activation of Daredevil Run
 	if SmgLifeSystem.daredevilActive then
 		SmgLifeSystem.daredevilRun()
-                HealthCounter = SmgLifeSystem.MainHealth
+                SmgLifeSystem.HealthCounter = SmgLifeSystem.MainHealth
 
                 Audio.sounds[5].muted = true
         else
@@ -211,7 +116,7 @@ function SmgLifeSystem.onDraw()
         local YcoordCalculation = camera.y + SmgLifeSystem.healthY
         local NewXcoordCalculation = XcoordCalculation + SmgLifeSystem.MaxOffsetX
         local NewYcoordCalculation = YcoordCalculation + SmgLifeSystem.MaxOffsetY
-        local YsourceCalculation = HealthCounter
+        local YsourceCalculation = SmgLifeSystem.HealthCounter
         local FancyXcoord = 0
         local FancyYcoord = 0
 
@@ -261,9 +166,9 @@ function SmgLifeSystem.onDraw()
                 SmgLifeSystem.StopFancyStuff()
         end
 
-        if HealthCounter <= SmgLifeSystem.MainHealth then
-                YsourceCalculation = HealthCounter
-        elseif HealthCounter > SmgLifeSystem.MainHealth then
+        if SmgLifeSystem.HealthCounter <= SmgLifeSystem.MainHealth then
+                YsourceCalculation = SmgLifeSystem.HealthCounter
+        elseif SmgLifeSystem.HealthCounter > SmgLifeSystem.MainHealth then
                 YsourceCalculation = SmgLifeSystem.MaxHealth + 2
         end
         ---- Calculation of the maximum health drawing system ENDS here ----
@@ -284,13 +189,13 @@ function SmgLifeSystem.onDraw()
                                 SmgLifeSystem.HealthPriority
                         )
 
-                        if (HealthCounter > SmgLifeSystem.MainHealth) and (DisplayMaxHealth or (not SmgLifeSystem.doFancyAnim)) then
+                        if (SmgLifeSystem.HealthCounter > SmgLifeSystem.MainHealth) and (DisplayMaxHealth or (not SmgLifeSystem.doFancyAnim)) then
                                 Graphics.drawImageToSceneWP(
                                         SmgLifeSystem.health,
                                         NewXcoordCalculation,
                                         NewYcoordCalculation,
                                         0,
-                                        SmgLifeSystem.HealthMeterHeight * HealthCounter,
+                                        SmgLifeSystem.HealthMeterHeight * SmgLifeSystem.HealthCounter,
                                         SmgLifeSystem.HealthMeterWidth,
                                         SmgLifeSystem.HealthMeterHeight,
                                         SmgLifeSystem.HealthPriority
@@ -359,7 +264,7 @@ function SmgLifeSystem.onDraw()
                         SmgLifeSystem.AirX,
                         SmgLifeSystem.AirY,
                         0,
-                        SmgLifeSystem.AirMeterHeight * AirLeft,
+                        SmgLifeSystem.AirMeterHeight * SmgLifeSystem.AirLeft,
                         SmgLifeSystem.AirMeterWidth,
                         SmgLifeSystem.AirMeterHeight,
                         AirMeterOpacity,
@@ -370,7 +275,7 @@ function SmgLifeSystem.onDraw()
 
 
         -- Set the opacity of the Air Meter to 1, when it should be always visible
-        if SmgLifeSystem.AirAlwaysVisible or AirLeft < SmgLifeSystem.AirMax then
+        if SmgLifeSystem.AirAlwaysVisible or SmgLifeSystem.AirLeft < SmgLifeSystem.AirMax then
                 AirMeterOpacity = 1
         end
 
@@ -386,11 +291,8 @@ function SmgLifeSystem.onDraw()
                 Hudoverride.visible.itembox = true
         end
 
-        SmgLifeSystem.CurrentHealth = HealthCounter -- SmgLifeSystem.CurrentHealth should be always equal to the Health Counter
-        SmgLifeSystem.CurrentAir = AirLeft -- SmgLifeSystem.CurrentAir should be always equal to the player's Air
-
         -- hurt animation stuff
-        if (SmgLifeSystem.daredevilActive) or (player.deathTimer > 0) or (HealthCounter == 0) then
+        if (SmgLifeSystem.daredevilActive) or (player.deathTimer > 0) or (SmgLifeSystem.HealthCounter == 0) then
                 canSethurtFrame = false
         else
                 canSethurtFrame = true
@@ -410,40 +312,39 @@ function SmgLifeSystem.onDraw()
                         end
                 end
         end
-
-        Text.print(icantswim_inWater,0,0)
 end
 
-function SmgLifeSystem.onNPCKill(eventObj, killedNPC, killReason)
-        -- Adding HP to the health counter when the player "kills" any of the healing powerups
-        if not SmgLifeSystem.daredevilActive then
-	        if (SmgLifeSystem.HealingPowerups[killedNPC.id]) then
-                        if HealthCounter ~= SmgLifeSystem.MainHealth and HealthCounter ~= SmgLifeSystem.MaxHealth then
-		                HealthCounter = HealthCounter + 1
-                                coinsCollected = 0
-                        else
-                                if SmgLifeSystem.CoinsReward > 0 then
-                                        Misc.coins(SmgLifeSystem.CoinsReward, false)
-                                        --spawn effect
+function SmgLifeSystem.onPostNPCKill(killedNPC, harmType)
+        if npcManager.collected(killedNPC, harmType) and harmType == HARM_TYPE_VANISH then
+                -- Adding HP to the health counter when the player "kills" any of the healing powerups
+                if not SmgLifeSystem.daredevilActive then
+                        if (SmgLifeSystem.HealingPowerups[killedNPC.id]) then
+                                if SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MainHealth and SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MaxHealth then
+                                        SmgLifeSystem.HealthCounter = SmgLifeSystem.HealthCounter + 1
+                                        coinsCollected = 0
+                                else
+                                        if SmgLifeSystem.CoinsReward > 0 then
+                                                Misc.coins(SmgLifeSystem.CoinsReward, false)
+                                        end
                                 end
-	                end
-                end
-        end
-
-        -- Counting how many coins the player has collected when HP is not full and daredevil mode is not active
-        if SmgLifeSystem.coinHealthActive then
-                if (SmgLifeSystem.HealingCoins[killedNPC.id]) then
-                        if HealthCounter ~= SmgLifeSystem.MainHealth and HealthCounter ~= SmgLifeSystem.MaxHealth then
-                                coinsCollected = coinsCollected + 1
                         end
-                elseif (SmgLifeSystem.BlueCoins[killedNPC.id]) then
-                        coinsCollected = coinsCollected + 5
+
+                        -- Counting how many coins the player has collected when HP is not full
+                        if SmgLifeSystem.coinHealthActive then
+                                if (SmgLifeSystem.HealingCoins[killedNPC.id]) then
+                                        if SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MainHealth and SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MaxHealth then
+                                                coinsCollected = coinsCollected + 1
+                                        end
+                                elseif (SmgLifeSystem.BlueCoins[killedNPC.id]) then
+                                        coinsCollected = coinsCollected + 5
+                                end
+                        end
                 end
         end
 end
 
 function SmgLifeSystem.onPostPlayerKill()
-        HealthCounter = 0
+        SmgLifeSystem.HealthCounter = 0
         Defines.earthquake = SmgLifeSystem.EarthquakePower -- Earthquake effect when the player dies
 end
 
@@ -451,13 +352,15 @@ function SmgLifeSystem.onPostPlayerHarm()
         if player.deathTimer == 0 then
                 if not daredevilActive then
                         if (player.mount ~= MOUNT_BOOT and player.mount ~= MOUNT_YOSHI) and player.powerup == 2 then
-                                HealthCounter = HealthCounter - 1
-                                Defines.earthquake = SmgLifeSystem.EarthquakePower
-                                coinsCollected = 0
+                                if not player.hasStarman then
+                                        SmgLifeSystem.HealthCounter = SmgLifeSystem.HealthCounter - 1
+                                        Defines.earthquake = SmgLifeSystem.EarthquakePower
+                                        coinsCollected = 0
+                                end
                         end
                 end
 
-                if HealthCounter == 0 then
+                if SmgLifeSystem.HealthCounter == 0 then
                         Audio.sounds[5].muted = true
                 else
                         Audio.sounds[5].muted = false
@@ -488,7 +391,7 @@ function SmgLifeSystem.StopFancyStuff()
         DisplayMaxHealth = true
 
         if not SmgLifeSystem.daredevilActive then
-                if SmgLifeSystem.CurrentHealth ~= SmgLifeSystem.MaxHealth then
+                if SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MaxHealth then
                         SmgLifeSystem.setHealth(SmgLifeSystem.MaxHealth, 1)
                 end
         end
@@ -516,26 +419,26 @@ function SmgLifeSystem.setHurtFrame()
 end
 
 local function PreventOverflow()
-        if HealthCounter > SmgLifeSystem.MaxHealth then
-                HealthCounter = SmgLifeSystem.MaxHealth
+        if SmgLifeSystem.HealthCounter > SmgLifeSystem.MaxHealth then
+                SmgLifeSystem.HealthCounter = SmgLifeSystem.MaxHealth
         end
 
-        if AirLeft > SmgLifeSystem.AirMax then
-                AirLeft = SmgLifeSystem.AirMax
+        if SmgLifeSystem.AirLeft > SmgLifeSystem.AirMax then
+                SmgLifeSystem.AirLeft = SmgLifeSystem.AirMax
         end
 end
 
 -- Function to Add Health / Air
 function SmgLifeSystem.addHealth(value, type)
-        local ExtraHp = SmgLifeSystem.MainHealth - HealthCounter
+        local ExtraHp = SmgLifeSystem.MainHealth - SmgLifeSystem.HealthCounter
 
         if type == 1 then
-                if HealthCounter <= SmgLifeSystem.MainHealth and value > ExtraHp then
+                if SmgLifeSystem.HealthCounter <= SmgLifeSystem.MainHealth and value > ExtraHp then
                         value = ExtraHp
                 end
-                HealthCounter = math.max(HealthCounter + value, 0)
+                SmgLifeSystem.HealthCounter = math.max(SmgLifeSystem.HealthCounter + value, 0)
         elseif type == 2 then
-                AirLeft = math.max(AirLeft + value, 0)
+                SmgLifeSystem.AirLeft = math.max(SmgLifeSystem.AirLeft + value, 0)
         end
 
         PreventOverflow()
@@ -544,9 +447,9 @@ end
 -- Function to Set Health / Air
 function SmgLifeSystem.setHealth(value, type)
         if type == 1 then
-                HealthCounter = math.max(value, 0)
+                SmgLifeSystem.HealthCounter = math.max(value, 0)
         elseif type == 2 then
-                AirLeft = math.max(value, 0)
+                SmgLifeSystem.AirLeft = math.max(value, 0)
         end
 
         PreventOverflow()
@@ -566,8 +469,8 @@ end
 -- Coin Health System
 function SmgLifeSystem.coinHealth()
         if coinsCollected == SmgLifeSystem.CoinsToHeal and not SmgLifeSystem.daredevilActive then
-                if HealthCounter ~= SmgLifeSystem.MainHealth and HealthCounter ~= SmgLifeSystem.MaxHealth then
-                        HealthCounter = HealthCounter + 1
+                if SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MainHealth and SmgLifeSystem.HealthCounter ~= SmgLifeSystem.MaxHealth then
+                        SmgLifeSystem.HealthCounter = SmgLifeSystem.HealthCounter + 1
                         coinsCollected = 0
                 end
         end
@@ -585,17 +488,16 @@ function SmgLifeSystem.airMeter()
                 end
         end
 
-        if AirLeft ~= SmgLifeSystem.AirMax and (restoreAir == SmgLifeSystem.AirRestoreTime) then
+        if SmgLifeSystem.AirLeft ~= SmgLifeSystem.AirMax and (restoreAir == SmgLifeSystem.AirRestoreTime) then
                 restoreAir = 0
-                AirLeft = AirLeft + 1
+                SmgLifeSystem.AirLeft = SmgLifeSystem.AirLeft + 1
         end
 
         if Air == 0 then
-                if AirLeft ~= 0 then
-                        AirLeft = AirLeft - 1
-                elseif AirLeft == 0 then
-                        HealthCounter = HealthCounter - 1
-
+                if SmgLifeSystem.AirLeft ~= 0 then
+                        SmgLifeSystem.AirLeft = SmgLifeSystem.AirLeft - 1
+                elseif SmgLifeSystem.AirLeft == 0 then
+                        SmgLifeSystem.HealthCounter = SmgLifeSystem.HealthCounter - 1
                         Defines.earthquake = SmgLifeSystem.EarthquakePower
                 end
 
@@ -604,13 +506,14 @@ function SmgLifeSystem.airMeter()
         end
 end
 
+
 -- registering the events
 function SmgLifeSystem.onInitAPI()
         -- Main Events
         registerEvent(SmgLifeSystem, "onStart", "onStart", false)
 	registerEvent(SmgLifeSystem, "onTick", "onTick", false)
 	registerEvent(SmgLifeSystem, "onDraw", "onDraw", false)
-	registerEvent(SmgLifeSystem, "onNPCKill", "onNPCKill", false)
+	registerEvent(SmgLifeSystem, "onPostNPCKill", "onPostNPCKill", false)
         registerEvent(SmgLifeSystem, "onPostPlayerKill", "onPostPlayerKill", false)
         registerEvent(SmgLifeSystem, "onPostPlayerHarm", "onPostPlayerHarm", false)
 
@@ -619,5 +522,98 @@ function SmgLifeSystem.onInitAPI()
         registerEvent(SmgLifeSystem, "coinHealth", "coinHealth", false)
         registerEvent(SmgLifeSystem, "airMeter", "airMeter", false)
 end
+
+
+-- Images
+SmgLifeSystem.health = Graphics.loadImageResolved("SmgLifeSystem/healthMeter.png")
+SmgLifeSystem.AirMeter = Graphics.loadImageResolved("SmgLifeSystem/AirMeter.png")
+SmgLifeSystem.FancyAnimSheet = Graphics.loadImageResolved("SmgLifeSystem/healthMeter_fancy.png")
+
+SmgLifeSystem.HarmedSheet = {
+        [CHARACTER_MARIO] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Mario Sheet.png"),
+        [CHARACTER_LUIGI] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Luigi Sheet.png"),
+        [CHARACTER_PEACH] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Peach Sheet.png"),
+        [CHARACTER_TOAD] = Graphics.loadImageResolved("SmgLifeSystem/Harmed Toad Sheet.png")}
+
+----------- A Ton of Customizable Stuff -----------
+---- Health Meter related ----
+SmgLifeSystem.healthX = 0                                         -- X co-ordinate of the health meter
+SmgLifeSystem.healthY = 0                                         -- Y co-ordinate of the health meter
+SmgLifeSystem.MaxOffsetX = -24                                    -- Offset X bettwen the main health counter and max health counter
+SmgLifeSystem.MaxOffsetY = 0                                      -- Offset Y bettwen the main health counter and max health counter
+SmgLifeSystem.HealthMeterHeight = 96                              -- Height of the health bar, useful for drawing level specific health meters
+SmgLifeSystem.HealthMeterWidth = 86                               -- Width of the health bar
+SmgLifeSystem.HealthPriority = 5                                  -- Priority of the Health Meter stuff
+SmgLifeSystem.MainHealth = 3                                      -- Main Health of the player
+SmgLifeSystem.MaxHealth = 6                                       -- Max Health of the player
+SmgLifeSystem.HealthCounter = SmgLifeSystem.MainHealth            -- the player's health
+
+---- Air Meter related ----
+SmgLifeSystem.AirX = 0                                            -- X co-ordinate of the air meter for drawing level specific air meters
+SmgLifeSystem.AirY = 120                                          -- Y co-ordinate of the air meter
+SmgLifeSystem.AirMeterHeight = 96                                 -- Height of the health bar, useful for drawing level specific air meters
+SmgLifeSystem.AirMeterWidth = 86                                  -- Width of the health bar, useful, useful for drawing level specific health meters
+SmgLifeSystem.AirPriority = 6                                     -- Priority of the Air Meter stuff
+SmgLifeSystem.AirFadeSpeed = 0.05                                 -- How fast the Air Meter should fade
+SmgLifeSystem.AirAlwaysVisible = false                            -- Whether the Air Meter will be always visible
+SmgLifeSystem.AirMax = 6                                          -- Max value of the air meter
+SmgLifeSystem.AirLeft = SmgLifeSystem.AirMax                      -- the player's  Air
+
+---- Bools (True/False) ----
+SmgLifeSystem.daredevilAllowPowerups = false                      -- Whether to allow powerups in daredevil run or not
+SmgLifeSystem.FreezeGameEnabled = true                            -- Whether the game will be freezed while powering up or down (Thanks to MrDoubleA!)
+SmgLifeSystem.SetHurtFrame = true                                 -- set a custom harmed frame when the player gets hurt? NOTE: to properly remove the hurt animation, you also need to remove the players' ini files
+SmgLifeSystem.icantswimSupport = true                             -- use the Air Meter with icantswim.lua?
+
+SmgLifeSystem.daredevilActive = false                             -- is the Daredevil Mode active?
+SmgLifeSystem.coinHealthActive = false                            -- is the Coin Health System active?
+SmgLifeSystem.AirMeterActive = false                              -- is the Air Meter active?
+
+---- Variables ----
+SmgLifeSystem.CoinsToHeal = 10                                    -- Amount of coins needed to heal one health
+SmgLifeSystem.CoinsReward = 10                                    -- The amount of coins given to the player when the player collects a mushroom when the HP is full, NOTE: this is for the powerups in the SmgLifeSystem.HealingPowerups table, for custom powerups, use NPC configs
+SmgLifeSystem.EarthquakePower = 5                                 -- Power of the earthquake, when the player takes damage
+SmgLifeSystem.AirTime = 64                                        -- How long the player can air under-water (for one segment of Air Meter, in Ticks). NOTE: 64 Ticks = 1 Second
+SmgLifeSystem.AirRestoreTime = 64                                 -- Number of Ticks to restore 1 segment of Air Meter. NOTE: 64 Ticks = 1 Second
+
+---- Tables ----
+SmgLifeSystem.HealingCoins = table.map{10, 33, 88, 138, 411}      -- Coins that once collected enough, restore HP
+SmgLifeSystem.BlueCoins = table.map{258}                          -- Coins that are equal to 5 normal coins
+
+SmgLifeSystem.HealingPowerups = table.map{9, 184, 185, 249, 250}  -- Power-Ups that restore HP, NOTE: this table is mainly for vanilla NPCs, custom NPCs can be set to grant HP (see example Power-Ups)
+
+-- Forced-States in which the game will freeze if SmgLifeSystem.FreezeGameEnabled is true
+SmgLifeSystem.powerupStates = table.map{
+    FORCEDSTATE_POWERUP_BIG, FORCEDSTATE_POWERDOWN_SMALL, FORCEDSTATE_POWERUP_FIRE, FORCEDSTATE_POWERUP_LEAF, FORCEDSTATE_POWERUP_TANOOKI,
+    FORCEDSTATE_POWERUP_HAMMER, FORCEDSTATE_POWERUP_ICE, FORCEDSTATE_POWERDOWN_FIRE, FORCEDSTATE_POWERDOWN_ICE, FORCEDSTATE_MEGASHROOM,}
+
+---- Fancy Animation related ----
+SmgLifeSystem.doFancyAnim = true                                  -- Will there be a fancy animation when the player's health gets to maximum value
+SmgLifeSystem.FancyAnimFrames = 4                                 -- frames of the fancy animation
+SmgLifeSystem.FancyAnimFrameSpeed = 16                            -- Speed of the fancy animation
+
+---- Hurt Animation Related ----
+SmgLifeSystem.HarmedFrameSpeed = 5                                -- Speed of the hurt animation
+SmgLifeSystem.perFrameSideLength = 100                            -- the length of the side of each hurt frame
+
+SmgLifeSystem.HarmedFrames = {                                    -- Value of the frames the hurt animation has (Per-Character)
+        [CHARACTER_MARIO] = 2, [CHARACTER_LUIGI] = 2,
+        [CHARACTER_PEACH] = 2, [CHARACTER_TOAD] = 2}
+
+SmgLifeSystem.HarmedSheetRow = {                                  -- row of the image in the harmed frames image, starts from 0 (Per-Character)
+        [CHARACTER_MARIO] = 4, [CHARACTER_LUIGI] = 0,
+        [CHARACTER_PEACH] = 0, [CHARACTER_TOAD] = 0}
+
+SmgLifeSystem.HarmedFrameOffsetX = {                              -- X-Offset of the hurt animation (Per-Character)
+        [CHARACTER_MARIO] = 0, [CHARACTER_LUIGI] = 0,
+        [CHARACTER_PEACH] = 0, [CHARACTER_TOAD] = 0}
+
+SmgLifeSystem.HarmedFrameOffsetY = {                              -- Y-Offset of the hurt animation (Per-Character)
+        [CHARACTER_MARIO] = -3, [CHARACTER_LUIGI] = 0,
+        [CHARACTER_PEACH] = -12, [CHARACTER_TOAD] = -1}
+
+---- Functions to add and set health air ----
+-- SmgLifeSystem.addHealth(value, type) adds the given value to the type, set the type to 1 for the health meter and 2 for the air meter
+-- SmgLifeSystem.setHealth(value, type) sets the given value to the type, set the type to 1 for the health meter and 2 for the air meter
 
 return SmgLifeSystem

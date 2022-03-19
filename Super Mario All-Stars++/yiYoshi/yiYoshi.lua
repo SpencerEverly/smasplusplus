@@ -2471,7 +2471,7 @@ do
         for _,block in ipairs(blocks) do
             if block.id == 370 or block.contentID == 0  and not block:mem(0x5A,FIELD_BOOL) and block.id ~= 90 and Block.MEGA_SMASH_MAP[block.id] then
                 block:remove(true)
-				SFX.play(extrasounds.playersoundid4)
+				SFX.play(extrasounds.id4)
             else
                 block:hit(true)
             end
