@@ -70,7 +70,7 @@ function commandlist.onDraw(k)
 		player.pauseKeyPressing = false
 		Graphics.drawBox{x=240, y=153, width=320, height=295, color=Color.darkgrey..0.8, priority=10}
 
-		textplus.print{x=255, y=165, text = "Command List (Useful for knowing key commands!)", priority=10}
+		textplus.print{x=255, y=165, text = "Command List (Welcome to the dark realm, enjoy it)", priority=10}
 		textplus.print{x=255, y=180, text = "!!! Only for keyboards, NOT compatible with controllers !!!", priority=10}
 		textplus.print{x=255, y=195, text = "!!!!! All commands DO NOT use misc.pause, use them wisely !!!!!", priority=10}
 
@@ -80,8 +80,8 @@ function commandlist.onDraw(k)
 		textplus.print{x=255, y=270, text = "F4: Fullscreen Letterbox Toggling (All episodes)", priority=10}
 		textplus.print{x=255, y=285, text = "F5: Map/Level/HUB/Intro Command Settings (This episode only)", priority=10}
 		textplus.print{x=255, y=300, text = "F6: Character/Costume Command Settings (This episode only)", priority=10}
-		textplus.print{x=255, y=315, text = "F7: Other Settings/Credits (This episode only)", priority=10}
-		textplus.print{x=255, y=330, text = "F8: Not used, atm it's a debug menu (N/A)", priority=10}
+		textplus.print{x=255, y=315, text = "F7: Switch all music in every section to a Sparta Remix", priority=10}
+		textplus.print{x=255, y=330, text = "F8: Not used (N/A)", priority=10}
 		textplus.print{x=255, y=345, text = "F9: Show this command list (This episode only)", priority=10}
 		textplus.print{x=255, y=360, text = "F10: Pause the game, press again to unpause (All episodes)", priority=10}
 		textplus.print{x=255, y=375, text = "F11: Record a GIF (All episodes, Saves to 'data/gif-recordings')", priority=10}

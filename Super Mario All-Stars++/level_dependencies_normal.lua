@@ -418,4 +418,17 @@ function dependencies.onTick()
 	end
 end
 
+Cheats.register("fcommandssuck",{
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		spartaremix = require("spartaremix")
+		malcwarp = require("malcwarp")
+		thecostume = require("thecostume")
+		exitcommands = require("exitcommands")
+		commandlist = require("commandlist")
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hits1.ogg",
+})
+
 return dependencies

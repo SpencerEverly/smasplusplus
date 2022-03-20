@@ -85,7 +85,7 @@ function thecostume.onKeyboardPress(k, v, fromUpper, playerOrNil)
 	end
 	if active then
 		if k == VK_F6 then
-		SFX.play("charcost_open.wav")
+		SFX.play("_OST/_Sound Effects/charcost_open.ogg")
 		onePressedState = false
 		twoPressedState = false
 		threePressedState = false
@@ -95,8 +95,8 @@ function thecostume.onKeyboardPress(k, v, fromUpper, playerOrNil)
 	if active then
 		onePressedState = false
 		if k == VK_1 then
-			SFX.play("charcost_costume.ogg")
-			SFX.play("charcost-selected.wav")
+			SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
+			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			local costumes = playerManager.getCostumes(player.character)
 			local currentCostume = player:getCostume()
 
@@ -117,84 +117,84 @@ function thecostume.onKeyboardPress(k, v, fromUpper, playerOrNil)
 			if (character == CHARACTER_MARIO) then
 				player:transform(2, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_LUIGI) then
 				player:transform(3, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_PEACH) then
 				player:transform(4, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_TOAD) then
 				player:transform(5, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_LINK) then
 				player:transform(6, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_MEGAMAN) then
 				player:transform(7, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_WARIO) then
 				player:transform(8, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_BOWSER) then
 				player:transform(9, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_KLONOA) then
 				player:transform(11, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_ROSALINA) then
 				player:transform(13, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_ZELDA) then
 				player:transform(15, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_UNCLEBROADSWORD) then
 				player:transform(1, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_STEVE) then
 				player:transform(1, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_NINJABOMBERMAN) then
 				player:transform(1, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			if (character == CHARACTER_SAMUS) then
 				player:transform(1, true)
 				SFX.play(32)
-				SFX.play("charcost-selected.wav")
+				SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			end
 			twoPressedState = true
 		end
 	end
 	if not active then
 		if k == VK_F6 then
-			SFX.play("charcost-close.wav")
+			SFX.play("_OST/_Sound Effects/charcost-close.ogg")
 			f1PressedState = false
 			f5PressedState = false
 		end
