@@ -105,8 +105,8 @@ function inventory.onInitAPI()
 end
 
 function inventory.onDraw()
+	player.reservePowerup = 0 -- disables the item box
 	if inventory.hidden == false then
-		player.reservePowerup = 0 -- disables the item box
 		if inventory.activateinventory == true then
 			if inventory.inventoryopened == true then
 				numx = 54

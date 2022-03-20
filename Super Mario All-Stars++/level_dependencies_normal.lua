@@ -7,6 +7,7 @@ local datetime = require("datetime")
 local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
+local anothercurrency = require("ShopSystem/anothercurrency")
 
 local dying = false;
 local deathVisibleCount = 198;
@@ -152,7 +153,6 @@ function dependencies.onStart()
 		Audio.sounds[71].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/climbing.ogg")
 		Audio.sounds[72].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/swim.ogg")
 		Audio.sounds[73].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/grab2.ogg")
-		--Audio.sounds[74].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/saw.ogg")
 		Audio.sounds[75].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/smb2-throw.ogg")
 		Audio.sounds[76].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/smb2-hit.ogg")
 		Audio.sounds[77].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/zelda-stab.ogg")

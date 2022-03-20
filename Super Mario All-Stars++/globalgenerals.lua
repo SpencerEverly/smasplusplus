@@ -10,9 +10,11 @@ local hudoverride = require("hudoverride")
 
 hudoverride.visible.starcoins = false --There's no star coins in the entire game, but I'm only adding this because why not
 
-local smasintros = {"8bit","bossedit8","jakebrito1","marioforever","S!TS!","scrollingheights","SMAS","SMBX1.0","SMBX1.1","SMBX1.2","SMBX1.3","SMBX1.3og","SMBX2","SMBX2b3","sunsetbeach","WSMBA"}
+SaveData._anothercurrency = {SaveData.totalcoins}
 
 local smasintros = {}
+
+local smasintros = {"8bit","bossedit8","jakebrito1","marioforever","S!TS!","scrollingheights","SMAS","SMBX1.0","SMBX1.1","SMBX1.2","SMBX1.3","SMBX1.3og","SMBX2","SMBX2b3","sunsetbeach","WSMBA"}
 
 if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true then
 	warpTransition.musicFadeOut = false
@@ -973,10 +975,8 @@ function globalgenerals.onExit()
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
-	for _,name in ipairs(smasintros) do
-		if (Level.filename() == "MALC - HUB.lvlx") == false or (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false or (Level.filename() == "intro_"..smasintros..".lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false then
-			SaveData.lastLevelPlayed = Level.filename()
-		end
+	if (Level.filename() == "MALC - HUB.lvlx") == false or (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false or (Level.filename() == "intro_"..smasintros..".lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false then
+		SaveData.lastLevelPlayed = Level.filename()
 	end
 end
 
@@ -1007,14 +1007,15 @@ Cheats.deregister("theessenjls") --Activates sonicstooslow, shadowstar, donthurt
 Cheats.deregister("fromthedepths") --Jump high when falling into a pit instead of dying. Dying is crucial for certain events, such as the Boot Level.
 Cheats.deregister("waitinginthesky") --Changes the starman music and duration. Starman breaking, probably (This uses a different lua script for the starman)
 Cheats.deregister("istillplaywithlegos") --Causes all broken blocks in the level to be restored. To prevent Steve from mining a ton of blocks at one time, this is disabled.
-Cheats.deregister("thestarmen") --Grants the starman effect.
-Cheats.deregister("bitemythumb") --Grants a mega mushroom.
+Cheats.deregister("thestarmen") --Grants the starman effect on the wrong ID.
+Cheats.deregister("bitemythumb") --Grants a mega mushroom on the wrong ID.
 Cheats.deregister("instantswitch") --Activates an automatic P-Switch.
 
 
 --Here's some cheats specific for the episode:
 Cheats.register("iwannabootbackhome",{
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		Level.load("SMAS - Start.lvlx", nil, nil)
 		return true -- this makes the cheat not toggleable
 	end),
@@ -1023,6 +1024,7 @@ Cheats.register("iwannabootbackhome",{
 
 Cheats.register("letmeseetheintroagain",{
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		Level.load("SMAS - Intro.lvlx", nil, nil)
 		return true -- this makes the cheat not toggleable
 	end),
@@ -1031,6 +1033,7 @@ Cheats.register("letmeseetheintroagain",{
 
 Cheats.register("bootgamehelp",{
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		Level.load("SMAS - Game Help.lvlx", nil, nil)
 		return true -- this makes the cheat not toggleable
 	end),
@@ -1039,6 +1042,7 @@ Cheats.register("bootgamehelp",{
 
 Cheats.register("sherbertsmiddlenameistoto",{
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		player:kill()
 		if Player.count() == 2 then
 			player2:kill()
@@ -1050,6 +1054,7 @@ Cheats.register("sherbertsmiddlenameistoto",{
 
 Cheats.register("ilikespencereverly",{
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		Audio.MusicChange(0, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		Audio.MusicChange(1, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")
 		Audio.MusicChange(2, "_OST/Spencer Everly/Spencer! The Show!/Theme Song/Theme Song (Looped Version).ogg")

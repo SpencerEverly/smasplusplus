@@ -5,6 +5,39 @@ local HUDimage = Graphics.loadImage("MALC-HUD.png")
 local playerManager = require("playerManager")
 local areaNames = require("areaNames")
 local textplus = require("textplus")
+local ShopSystem = require("ShopSystem/ShopSystem")
+local anothercurrency = require("ShopSystem/anothercurrency")
+local hudoverride = require("hudoverride")
+
+-- Images --
+local shopItems = Graphics.loadImageResolved("ShopSystem/ShopSystem/shopItems.png")
+local coinsIcon = Graphics.loadImageResolved("ShopSystem/ShopSystem/coinImage.png")
+
+-- anothercurrency stuff --
+coinCounter = anothercurrency.registerCurrency("totalcoins", true)
+
+-- shopsystem stuff --
+local myShop = ShopSystem.create{music = "_OST/Super Mario Bros Spencer/Shop.ogg"}
+
+local mushroom = myShop:RegisterItem{NPCid =   9, inEgg = true, image = shopItems, price = 10,  amount = 5, name = "Mushroom", sourceX = 0, sourceY = 0, sourceWidth = 32, sourceHeight = 32, currency = coinCounter}
+local fire =     myShop:RegisterItem{NPCid =  14, image = shopItems, price = 30,  amount = 5, name = "Fire Flower", description = "A burning flower!? Use this to shoot towards enemies.", sourceX = 0, sourceY = 32, sourceWidth = 32, sourceHeight = 32, currency = coinCounter}
+local leaf =     myShop:RegisterItem{NPCid =  34, image = shopItems, price = 50,  amount = 5, name = "Leaf", sourceX = 0, sourceY = 64, sourceWidth = 32, sourceHeight = 32, currency = coinCounter, description = "<wave 2>Something seems strange about this leaf...</wave> You can wave your tail towards enemies with it."}
+local tanooki =  myShop:RegisterItem{NPCid = 169, image = shopItems, price = 500,  amount = 5, name = "Tanooki Suit", sourceX = 0, sourceY = 96, sourceWidth = 32, sourceHeight = 32, currency = coinCounter, description = "Turn into a statue with this suit!"}
+local hammer =   myShop:RegisterItem{NPCid = 170, inEgg = true, image = shopItems, price = 500,  amount = 5, name = "Hammer Suit", sourceX = 0, sourceY = 128, sourceWidth = 32, sourceHeight = 32, currency = coinCounter, description = "No one stands a chance if you wear this suit. Hammer throwing for the win!"}
+local ice =      myShop:RegisterItem{NPCid = 264, inEgg = true, image = shopItems, price = 1000,  amount = 5, name = "Ice Flower", sourceX = 0, sourceY = 160, sourceWidth = 32, sourceHeight = 32, currency = coinCounter, description = "It's so cold! Use this to freeze enemies."}
+local yoshigreen =      myShop:RegisterItem{NPCid = 95, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Green)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshired =      myShop:RegisterItem{NPCid = 100, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Red)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshiblue =      myShop:RegisterItem{NPCid = 98, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Blue)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshiyellow =      myShop:RegisterItem{NPCid = 99, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Yellow)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshipurple =      myShop:RegisterItem{NPCid = 149, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Purple)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshipink =      myShop:RegisterItem{NPCid = 150, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Pink)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshicyan =      myShop:RegisterItem{NPCid = 228, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Cyan)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshiblack =      myShop:RegisterItem{NPCid = 148, inEgg = true, price = 500,  amount = 5, name = "Yoshi (Black)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies!"}
+local yoshiorange =      myShop:RegisterItem{NPCid = 988, inEgg = true, price = 1000,  amount = 5, name = "Yoshi (Orange)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies! <tremble 1>Looks like a rare Yoshi...!</tremble>"}
+local yoshiwhite =      myShop:RegisterItem{NPCid = 990, inEgg = true, price = 1000,  amount = 5, name = "Yoshi (White)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies! <tremble 1>Looks like a rare Yoshi...!</tremble>"}
+local yoshibrown =      myShop:RegisterItem{NPCid = 992, inEgg = true, price = 1000,  amount = 5, name = "Yoshi (Brown)", currency = coinCounter, description = "Yoshi is your companion to bring to any level and eat enemies! <tremble 1>Looks like a rare Yoshi...!</tremble>"}
+
+mushroom.description = "<tremble 1>Mmm.. a tasty mushroom!</tremble>"
 
 local hour = os.date("%H")
 local day = os.date("%d")
@@ -96,13 +129,17 @@ function onStart()
 end
 
 function onDraw()
-	Graphics.drawImageWP(HUDimage, 0, 0, -15)
+	Graphics.drawImageWP(HUDimage, 0, 0, 4.99)
 	
 	if player.section == 9 then
 		textplus.print{x=-19760, y=-20272, text = "Floor 1: Star List", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}
 		textplus.print{x=-19808, y=-20656, text = "Floor 2: General Info", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}
 		textplus.print{x=-19776, y=-21104, text = "Floor 3: Other Info", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}
 	end
+	if ShopSystem.activeShop.id ~= nil then -- detect if ANY shop is currently open
+        Graphics.drawBox{texture = coinsIcon, x = ShopSystem.movement.sidePanels.position + 22, y = 292, priority = ShopSystem.leastPriority + 0.65}
+        textplus.print{x = ShopSystem.movement.sidePanels.position + 58, y = 300, text = string.format("%04d", coinCounter:getMoney()), font = ShopSystem.font, priority = ShopSystem.leastPriority + 0.65}
+    end
 end
 
 function onTick()
@@ -117,6 +154,9 @@ function onEvent(eventName)
 	end
 	if eventName == "DLCWarpOpen" then
 		SFX.play(27)
+	end
+	if eventName == "ShopOpen2" then
+		myShop:open()
 	end
 	if eventName == "StarList" then
 		littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE AT LEAST "..stars.." STARS IN YOUR GAME PROGRESSION.<page>THE STARS YOU HAVE COLLECTED IN THE MANDATORY LEVELS IS (number). THE STARS YOU HAVE COLLECTED IN ALL OTHER LEVELS IS (tbd).<page>THE STAR COUNT OF EVERY STAR YOU COLLECTED OVERALL IS "..SaveData.starsgrabbed..".<page>TO FINISH YOUR GAME AND UNLOCK THE TRUE ENDING, YOU'LL NEED TO COLLECT (starcounttbd) MORE.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
@@ -157,10 +197,12 @@ function onEvent(eventName)
 	end
 end
 
+
+
 -- Register questions
 
 
-littleDialogue.registerAnswer("shopstuff",{text = "Buy something",addText = "Alright! Whadda need?"})
+littleDialogue.registerAnswer("shopstuff",{text = "Buy something",addText = "Alright! Whadda need?",chosenFunction = function() triggerEvent "ShopOpen" end})
 littleDialogue.registerAnswer("shopstuff",{text = "What is this?",addText = "This is the Me and Larry City Shop, full of rarities and things that's valuable!<page>As you collect coins, you have a total coin count you collect throughout your journey to spend on stuff here.<page>Spend wisely, is all I say! These items are worth your valuables!<page>That is all. Talk to me again if you need anything. Come again!"})
 littleDialogue.registerAnswer("shopstuff",{text = "Nevermind.",addText = "Okay! Let me know if you need anything. Come again!"})
 

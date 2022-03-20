@@ -270,6 +270,14 @@ local function switchhub()
 	player:teleport(40176, 39876, bottomCenterAligned)
 end
 
+local function shophub()
+	pausemenu.paused = false
+	pausemenu.paused_tele = false
+	Misc.unpause()
+	SFX.play("_OST/_Sound Effects/level-select.ogg")
+	player:teleport(80144, 79868, bottomCenterAligned)
+end
+
 local function startteleport()
 	pausemenu.paused_tele = false;
 	cooldown = 5
@@ -1207,6 +1215,9 @@ local function drawHUBTeleportMenu(y, alpha)
 		end
 		if not isOverworld then
 			table.insert(pause_options_tele, {name3="Teleport to the Character Switch Menu", action = switchhub});
+		end
+		if not isOverworld then
+			table.insert(pause_options_tele, {name3="Teleport to the Shop", action = shophub});
 		end
 		if not isOverworld then
 			table.insert(pause_options_tele, {name3="Teleport Back to the Start", action = starthub});

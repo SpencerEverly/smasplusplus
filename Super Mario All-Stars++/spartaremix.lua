@@ -57,7 +57,7 @@ function string.endswith(String,End)
 end
 
 local randomsong = function()
-  local files = Misc.listLocalFiles("../_OST/_Sparta Remixes/")
+  local files = Misc.listLocalFiles("../_OST/Sparta Remixes/")
   local musicfiles = {}
   for i = 1, #files do
     if string.endswith(files[i], ".mp3") or string.endswith(files[i], ".mp3") then
@@ -71,32 +71,32 @@ local randomsong = function()
     else
       songname = spartaremix.betterrng(musicfiles, prevsong)
     end
-    Audio.MusicOpen(Misc.resolveFile("../_OST/_Sparta Remixes/"..songname))
+    Audio.MusicOpen(Misc.resolveFile("../_OST/Sparta Remixes/"..songname))
     Audio.MusicPlay()
-	Audio.MusicChange(0, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(1, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(2, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(3, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(4, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(5, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(6, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(7, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(8, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(9, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(10, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(11, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(12, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(13, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(14, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(15, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(16, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(17, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(18, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(19, "/_OST/_Sparta Remixes/"..songname)
-	Audio.MusicChange(20, "/_OST/_Sparta Remixes/"..songname)
-	--randomsong.setFrameTimer(1, function() printplus("Remix playing: "..songname, 792, 8, 6, Color.white, vector.v2(1, 0)) end, 100)
-	--randomsong.setFrameTimer(1, function() printplus("If you are the creator and want this remix removed,", 792, 30, 6, Color.white, vector.v2(1, 0)) end, 100)
-	--randomsong.setFrameTimer(1, function() printplus("contact me at spencer.everly@gmail.com", 792, 52, 6, Color.white, vector.v2(1, 0)) end, 100)
+	Audio.MusicChange(0, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(1, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(2, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(3, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(4, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(5, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(6, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(7, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(8, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(9, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(10, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(11, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(12, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(13, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(14, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(15, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(16, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(17, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(18, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(19, "/_OST/Sparta Remixes/"..songname)
+	Audio.MusicChange(20, "/_OST/Sparta Remixes/"..songname)
+	randomsong.setFrameTimer(1, function() printplus("Remix playing: "..songname, 792, 8, 6, Color.white, vector.v2(1, 0)) end, 100)
+	randomsong.setFrameTimer(1, function() printplus("If you are the creator and want this remix removed,", 792, 30, 6, Color.white, vector.v2(1, 0)) end, 100)
+	randomsong.setFrameTimer(1, function() printplus("contact me at spencer.everly@gmail.com", 792, 52, 6, Color.white, vector.v2(1, 0)) end, 100)
     prevsong = songname
   end
 end
@@ -127,13 +127,13 @@ function spartaremix.onKeyboardPress(k)
 		active = not active
 	end
 	if active then
-		if k == VK_F8 then
+		if k == VK_F7 then
 		SFX.play("remix-on.ogg")
 		local myRoutine = Routine.run(randomsong)
 		end
 	end
 	if not active then
-		if k == VK_F8 then
+		if k == VK_F7 then
 			SFX.play("remix-off.ogg")
 			f8PressedState = false
 		end
@@ -144,8 +144,8 @@ function spartaremix.onDraw(k)
 	if active then
 		
 		Graphics.drawBox{x=0, y=565, width=558, height=46, color=Color.black..0.7, priority=10}
-		textplus.print{x=5, y=572, text = "Sparta Remix now playing. If it's not playing, change out of a costume first. Press F8 to exit and press F8 again to play another.", priority=10, color=Color.white}
-		textplus.print{x=5, y=586, text = "(To reset the music please reset the level using F5, this is due to MusicChange not having a reset command)", priority=10, color=Color.white}
+		textplus.print{x=5, y=572, text = "Sparta Remix now playing. If it's not playing, change out of a costume first. Press F7 to exit and press F7 again to play another.", priority=10, color=Color.white}
+		textplus.print{x=5, y=586, text = "(To reset the music please restart the level, this is due to MusicChange not having a reset command)", priority=10, color=Color.white}
 	end
 end
 

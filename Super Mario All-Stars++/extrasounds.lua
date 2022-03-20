@@ -127,6 +127,7 @@ extrasounds.id101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.
 extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
 extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
 extrasounds.id104 = Audio.SfxOpen(Misc.resolveSoundFile("sound/explode.ogg"))
+extrasounds.id105 = Audio.SfxOpen(Misc.resolveSoundFile("sound/hammerthrow.ogg"))
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
@@ -259,6 +260,9 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 				if player.powerup == 3 then --Fireball sound
 					SFX.play(extrasounds.id18)
 				end
+				if player.powerup == 6 then --Fireball sound
+					SFX.play(extrasounds.id105)
+				end
 				if player.powerup == 7 then --Iceball sound
 					SFX.play(extrasounds.id93)
 				end
@@ -274,19 +278,19 @@ function extrasounds.onPostNPCKill(npc, harmtype, playerornil) --NPC Kill stuff,
 	local threeups = table.map{188}
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
-			if coins[npc.id] then --Any coin ID that was marked above will play this sound when collected
+			if coins[npc.id] and HARM_TYPE_VANISH then --Any coin ID that was marked above will play this sound when collected
 				SFX.play(extrasounds.id14)
 			end
-			if npc.id == 558 then --Cherry sound effect
+			if npc.id == 558 and HARM_TYPE_VANISH then --Cherry sound effect
 				SFX.play(extrasounds.id103)
 			end
-			if oneups[npc.id] then --1UP sound effect, so 3UPs can have a custom sound
+			if oneups[npc.id] and HARM_TYPE_VANISH then --1UP sound effect, so 3UPs can have a custom sound
 				SFX.play(extrasounds.id15)
 			end
-			if npc.id == 188 then --3UP sound effect
+			if npc.id == 188 and HARM_TYPE_VANISH then --3UP sound effect
 				SFX.play(extrasounds.id97)
 			end
-			if npc.id == 274 then --Dragon coin counter sounds
+			if npc.id == 274  and HARM_TYPE_VANISH then --Dragon coin counter sounds
 				if NPC.config[npc.id].score == 6 then
 					SFX.play(extrasounds.id59)
 				elseif NPC.config[npc.id].score == 7 then
