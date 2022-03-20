@@ -1052,6 +1052,15 @@ Cheats.register("sherbertsmiddlenameistoto",{
 	flashPlayer = true,
 })
 
+Cheats.register("jario",{
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		spartaremix = require("spartaremix")
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = "_OST/_Sound Effects/HIT_4.ogg",
+})
+
 Cheats.register("ilikespencereverly",{
 	onActivate = (function()
 		Defines.player_hasCheated = false

@@ -60,7 +60,7 @@ local randomsong = function()
   local files = Misc.listLocalFiles("../_OST/Sparta Remixes/")
   local musicfiles = {}
   for i = 1, #files do
-    if string.endswith(files[i], ".mp3") or string.endswith(files[i], ".mp3") then
+    if string.endswith(files[i], ".mp3") or string.endswith(files[i], ".ogg") then
       table.insert(musicfiles, files[i])
     end
   end
@@ -94,9 +94,9 @@ local randomsong = function()
 	Audio.MusicChange(18, "/_OST/Sparta Remixes/"..songname)
 	Audio.MusicChange(19, "/_OST/Sparta Remixes/"..songname)
 	Audio.MusicChange(20, "/_OST/Sparta Remixes/"..songname)
-	randomsong.setFrameTimer(1, function() printplus("Remix playing: "..songname, 792, 8, 6, Color.white, vector.v2(1, 0)) end, 100)
-	randomsong.setFrameTimer(1, function() printplus("If you are the creator and want this remix removed,", 792, 30, 6, Color.white, vector.v2(1, 0)) end, 100)
-	randomsong.setFrameTimer(1, function() printplus("contact me at spencer.everly@gmail.com", 792, 52, 6, Color.white, vector.v2(1, 0)) end, 100)
+	--randomsong.setFrameTimer(1, function() printplus("Remix playing: "..songname, 792, 8, 6, Color.white, vector.v2(1, 0)) end, 100)
+	--randomsong.setFrameTimer(1, function() printplus("If you are the creator and want this remix removed,", 792, 30, 6, Color.white, vector.v2(1, 0)) end, 100)
+	--randomsong.setFrameTimer(1, function() printplus("contact me at spencer.everly@gmail.com", 792, 52, 6, Color.white, vector.v2(1, 0)) end, 100)
     prevsong = songname
   end
 end
@@ -121,7 +121,7 @@ function spartaremix.onStart()
 end
 
 function spartaremix.onKeyboardPress(k)
-	if k == VK_F8 then
+	if k == VK_F7 then
 		player.pauseKeyPressing = false
 		f8PressedState = true
 		active = not active
