@@ -5,6 +5,7 @@ screenFlip.enabled = false
 
 function onLoadSection0()
 	screenFlip.enabled = true
+	screenFlip.enabledfourway = false
 	screenFlip.flipSpeed = 10
 	screenFlip.flipDirection = 1
 	screenFlip.flipDelay = 500
@@ -13,12 +14,28 @@ end
 
 function onLoadSection1()
 	screenFlip.enabled = true
+	screenFlip.enabledfourway = false
 	screenFlip.flipSpeed = 10
 	screenFlip.flipDirection = 1
-	screenFlip.flipDelay = 700
+	screenFlip.flipDelay = 450
 	screenFlip.warnBeforeFlip = true
 end
 
 function onLoadSection2()
 	screenFlip.enabled = false
+	screenFlip.enabledfourway = false
+end
+
+function onLoadSection3()
+	screenFlip.enabled = true
+	screenFlip.enabledfourway = false
+	screenFlip.flipSpeed = 10
+	screenFlip.flipDirection = 1
+	screenFlip.flipDelay = 350
+	screenFlip.warnBeforeFlip = true
+end
+
+function onLoadSection4()
+	screenFlip.enabled = false
+	screenFlip.enabledfourway = false
 end
