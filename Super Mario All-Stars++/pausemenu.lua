@@ -192,6 +192,15 @@ local function changeresolution()
 	end
 end
 
+local function changeletterbox()
+	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
+	if SaveData.letterbox == true then
+		SaveData.letterbox = false
+	elseif SaveData.letterbox == false then
+		SaveData.letterbox = true
+	end
+end
+
 local function quitonlymap()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
@@ -914,7 +923,12 @@ local function drawPauseMenu(y, alpha)
 		if isOverworld then
 			table.insert(pause_options, {name="Character Options", action = switchtochar});
 		end
-		table.insert(pause_options, {name="Change Resolution", action = changeresolution});
+		if not isOverworld then
+			table.insert(pause_options, {name="Change Resolution", action = changeresolution});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
+		end
 		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegame});
 		end
@@ -966,10 +980,25 @@ local function drawPauseMenu(y, alpha)
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
-	textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 
-	h = h+4+6--font.charHeight;
+	h = h+4+8--font.charHeight;
+	y = y+h;
+	
+	if SaveData.letterbox == true then
+		letterboxshow = "<color red>Letterbox Enabled: Yes</color>"
+	end
+	if SaveData.letterbox == false then
+		letterboxshow = "<color red>Letterbox Enabled: No</color>"
+	end
+	--local font = textblox.FONT_SPRITEDEFAULT3X2;
+	
+	local layout = textplus.layout(textplus.parse(letterboxshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	textplus.render{layout = layout, x = 250 - w*0.5, y = y+434, color = Color.white..alpha, priority = 6}
+	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
+
+	h = h+4+8--font.charHeight;
 	y = y+h;
 
 	
@@ -1203,7 +1232,7 @@ local function drawCharacterMenu(y, alpha)
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(costumename, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
-	textplus.render{layout = layout, x = 300 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+4+8--font.charHeight;

@@ -358,7 +358,11 @@ function globalgenerals.onTick()
 	if SaveData.resolution == "widescreen" then
 		customCamera.defaultScreenHeight = 450
 		customCamera.defaultZoom = 0.75
-		smallScreen.scaleY = 1.35
+		if SaveData.letterbox == false then
+			smallScreen.scaleY = 1.35
+		elseif SaveData.letterbox == true then
+			smallScreen.scaleY = 1
+		end
 
 		hudoverride.offsets = {}
 		hudoverride.offsets.keys = 		{x = 64, 	y = 86, align = hudoverride.ALIGN_LEFT};

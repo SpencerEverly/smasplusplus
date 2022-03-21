@@ -39,3 +39,18 @@ function onLoadSection4()
 	screenFlip.enabled = false
 	screenFlip.enabledfourway = false
 end
+
+function onEvent(eventName)
+	if eventName == "Boss Start" then
+		screenFlip.enabled = false
+		screenFlip.enabledfourway = true
+		screenFlip.flipSpeed = 10
+		screenFlip.flipDirection = 1
+		screenFlip.flipDelay = 400
+		screenFlip.warnBeforeFlip = false
+	end
+	if eventName == "Boss End" then
+		screenFlip.enabled = false
+		screenFlip.enabledfourway = false
+	end
+end

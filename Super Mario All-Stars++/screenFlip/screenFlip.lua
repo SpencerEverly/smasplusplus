@@ -1,6 +1,6 @@
 local screenFlip = {}
 
-local handycam = require("handycam")
+local customCamera = require("customCamera")
 
 local flip = 0
 local fliptimer = 0
@@ -9,8 +9,7 @@ local flipwarningopacity = 0
 
 function screenFlip.onTick()
 	if screenFlip.enabled then
-		handycam[1].rotation = flip
-		handycam[2].rotation = flip
+		customCamera.defaultRotation = flip
 		fliptimer = fliptimer + 1
 		if screenFlip.warnBeforeFlip then
 			if fliptimer == (screenFlip.flipDelay - 64) then --Warm before flipping
@@ -39,25 +38,48 @@ function screenFlip.onTick()
 			flip = 180
 			flipphase = 1
 			fliptimer = 0
+			if SaveData.resolution == "widescreen" then
+				customCamera.defaultScreenOffsetY = -150
+			end
+			if SaveData.resolution == "fullscreen" then
+				customCamera.defaultScreenOffsetY = 0
+			end
 		elseif flip < -180 and flipphase == 0 then
 			flip = -180
 			flipphase = 1
 			fliptimer = 0
+			if SaveData.resolution == "widescreen" then
+				customCamera.defaultScreenOffsetY = -150
+			end
+			if SaveData.resolution == "fullscreen" then
+				customCamera.defaultScreenOffsetY = 0
+			end
 		end
 		if flip > 360 and flipphase == 1 then --Stop flipping again
 			flip = 0
 			flipphase = 0
 			fliptimer = 0
+			if SaveData.resolution == "widescreen" then
+				customCamera.defaultScreenOffsetY = 0
+			end
+			if SaveData.resolution == "fullscreen" then
+				customCamera.defaultScreenOffsetY = 0
+			end
 		elseif flip < -360 and flipphase == 1 then
 			flip = 0
 			flipphase = 0
 			fliptimer = 0
+			if SaveData.resolution == "widescreen" then
+				customCamera.defaultScreenOffsetY = 0
+			end
+			if SaveData.resolution == "fullscreen" then
+				customCamera.defaultScreenOffsetY = 0
+			end
 		end
 		
 		
 	elseif screenFlip.enabledfourway then
-		handycam[1].rotation = flip
-		handycam[2].rotation = flip
+		customCamera.defaultRotation = flip
 		fliptimer = fliptimer + 1
 		if screenFlip.warnBeforeFlip then
 			if fliptimer == (screenFlip.flipDelay - 64) then --Warm before flipping
@@ -144,31 +166,36 @@ function screenFlip.onTick()
 			fliptimer = 0
 		end
 	else
-		handycam[1].rotation = 0
-		handycam[2].rotation = 0
+		customCamera.defaultRotation = 0
 		flip = 0
 		fliptimer = 0
 		flipphase = 0
 		flipwarningopacity = 0
+		if SaveData.resolution == "widescreen" then
+				customCamera.defaultScreenOffsetY = 0
+		end
+		if SaveData.resolution == "fullscreen" then
+			customCamera.defaultScreenOffsetY = 0
+		end
 	end
 end
 
 function screenFlip.onInputUpdate()
 	if (flip == 90 or flip == -90) then
-		local oldLeft = player.keys.right
-		local oldRight = player.keys.left
-		local oldUp = player.keys.down
-		local oldDown = player.keys.up
+		local oldLeft = player.keys.left
+		local oldRight = player.keys.right
+		local oldUp = player.keys.up
+		local oldDown = player.keys.down
 
         player.keys.up = oldRight
         player.keys.down = oldLeft
 		player.keys.left = oldUp
 		player.keys.right = oldDown
 		if Player(2) and Player(2).isValid then
-			local oldLeft = player2.keys.left
-			local oldRight = player2.keys.right
-			local oldUp = player2.keys.up
-			local oldDown = player2.keys.down
+			local oldLeft2 = player2.keys.left
+			local oldRight2 = player2.keys.right
+			local oldUp2 = player2.keys.up
+			local oldDown2 = player2.keys.down
 
 			player2.keys.up = oldRight2
 			player2.keys.down = oldLeft2
@@ -195,20 +222,20 @@ function screenFlip.onInputUpdate()
 		end
     end
 	if (flip == 270 or flip == -270) then
-		local oldLeft = player.keys.left
-		local oldRight = player.keys.right
-		local oldUp = player.keys.up
-		local oldDown = player.keys.down
+		local oldLeft = player.keys.right
+		local oldRight = player.keys.left
+		local oldUp = player.keys.down
+		local oldDown = player.keys.up
 
         player.keys.up = oldRight
         player.keys.down = oldLeft
 		player.keys.left = oldUp
 		player.keys.right = oldDown
 		if Player(2) and Player(2).isValid then
-			local oldLeft2 = player2.keys.left
-			local oldRight2 = player2.keys.right
-			local oldUp2 = player2.keys.up
-			local oldDown2 = player2.keys.down
+			local oldLeft = player2.keys.left
+			local oldRight = player2.keys.right
+			local oldUp = player2.keys.up
+			local oldDown = player2.keys.down
 
 			player2.keys.up = oldRight2
 			player2.keys.down = oldLeft2
@@ -220,7 +247,12 @@ end
 
 function screenFlip.onDraw()
 	Graphics.drawScreen{color = Color.white .. flipwarningopacity, priority = 5}
-	Text.print(lunatime.toSeconds(fliptimer), 340, 80)
+	if SaveData.resolution == "fullscreen" then
+		Text.print(lunatime.toSeconds(fliptimer), 340, 80)
+	end
+	if SaveData.resolution == "widescreen" then
+		Text.print(lunatime.toSeconds(fliptimer), 340, 140)
+	end
 end
 
 function screenFlip.onInitAPI()

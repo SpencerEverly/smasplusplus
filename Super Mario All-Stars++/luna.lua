@@ -55,6 +55,9 @@ function onStart()
 	if SaveData.disableX2char == 1 then
 		SaveData.disableX2char = true
 	end
+	if SaveData.letterbox == nil then
+		SaveData.letterbox = true
+	end
 end
 
 function onLoad()
