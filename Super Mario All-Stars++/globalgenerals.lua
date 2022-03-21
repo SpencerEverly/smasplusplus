@@ -237,6 +237,8 @@ function globalgenerals.onInitAPI()
 	ready = true
 end
 
+globalgenerals.showitembox = false
+
 --New pause menu was made, this is to prevent the old pause menu from opening
 function globalgenerals.onPause(evt)
 	evt.cancelled = true;
@@ -328,6 +330,12 @@ function globalgenerals.onTick()
 			hudoverride.visible.itembox = true
 		elseif (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
 			hudoverride.visible.itembox = false
+		end
+		if globalgenerals.showitembox == false then
+			hudoverride.visible.itembox = false
+		end
+		if globalgenerals.showitembox == true then
+			hudoverride.visible.itembox = true
 		end
 	end
 	if SaveData.resolution == "fullscreen" then

@@ -20,6 +20,8 @@ local pausemenu = require("pausemenu")
 local littleDialogue = require("littleDialogue")
 local yoshi = require("yiYoshi/yiYoshi")
 local modernReserveItems = require("modernReserveItems")
+local hudoverride = require("hudoverride")
+local globalgenerals = require("globalgenerals")
 
 inventory.inventoryopened = false
 
@@ -574,11 +576,13 @@ function inventory.onInputUpdate()
 				inventory.inventoryopened = false
 				Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
 				Misc.unpause()
+				globalgenerals.showitembox = false
 			elseif inventory.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
 				inventoryopen = true
 				inventory.inventoryopened = true
 				Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
 				Misc.pause()
+				globalgenerals.showitembox = true
 			end
 		end
 	end
@@ -710,6 +714,9 @@ function inventory.onInputUpdate()
 		if state < 1 then
 			state = 7
 		end
+	end
+	if inventory.inventoryopene == false then
+		globalgenerals.showitembox = false
 	end
 end
 
