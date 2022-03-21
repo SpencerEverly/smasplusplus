@@ -265,87 +265,6 @@ function inventory.onDraw()
 		if SaveData.inventory.hammer <= minhammer then
 			SaveData.inventory.hammer = minhammer
 		end
-		if inventory.activateinventory == true then
-			if inventory.inventoryopened == true then -- selects the powerup
-				if player.rawKeys.jump == KEYS_PRESSED then
-					if player.powerup == powerup[state] then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-					elseif state == 1 then
-						if SaveData.inventory.shroom > 0 then -- mushroom
-							if player.powerup == 1 then
-								Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-								Audio.playSFX(6)
-								player.powerup = powerup[state]
-								SaveData.inventory.shroom = SaveData.inventory.shroom - 1
-							end
-						elseif SaveData.inventory.shroom <= 0 then
-							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-						end
-					elseif state == 2 then
-						if SaveData.inventory.fire > 0 then -- SaveData.inventory.fire flower
-							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-							Audio.playSFX(6)
-							player.powerup = powerup[state]
-							SaveData.inventory.fire = SaveData.inventory.fire - 1
-						elseif SaveData.inventory.fire <= 0 then
-							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-						end
-					elseif state == 3 then
-						if SaveData.inventory.ice > 0 then -- SaveData.inventory.ice flower
-							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-							Audio.playSFX(6)
-							player.powerup = powerup[state]
-							SaveData.inventory.ice = SaveData.inventory.ice - 1
-						elseif SaveData.inventory.ice <= 0 then
-							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-						end
-					elseif state == 4 then
-						if SaveData.inventory.leaf > 0 then -- super SaveData.inventory.leaf
-							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-							Audio.playSFX(34)
-							player.powerup = powerup[state]
-							SaveData.inventory.leaf = SaveData.inventory.leaf - 1
-						elseif SaveData.inventory.leaf <= 0 then
-							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-						end
-					elseif state == 5 then
-						if SaveData.inventory.tanooki > 0 then -- SaveData.inventory.tanooki suit
-							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-							Audio.playSFX(34)
-							player.powerup = powerup[state]
-							SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
-						elseif SaveData.inventory.tanooki <= 0 then
-							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-						end
-					elseif state == 6 then
-						if SaveData.inventory.hammer > 0 then -- SaveData.inventory.hammer suit
-							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-							Audio.playSFX(34)
-							player.powerup = powerup[state]
-							SaveData.inventory.hammer = SaveData.inventory.hammer - 1
-						elseif SaveData.inventory.hammer <= 0 then
-							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-						end
-					elseif state == 7 then
-						if SaveData.inventory.reserve >= 1 then
-							p = player
-							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-							modernReserveItems.drop(p.reservePowerup, p)
-							inventory.inventoryopened = false
-							cooldown = 5
-							Misc.unpause()
-							player:mem(0x11E,FIELD_BOOL,false)
-							if cooldown <= 0 then
-								player:mem(0x11E,FIELD_BOOL,true)
-							end
-						elseif SaveData.inventory.reserve <= 0 then
-							--modernReserveItems.dropped = false
-							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-						end
-					end
-				end
-			end
-		end
 
 		if inventory.activateinventory == true then
 			if inventory.inventoryopened == true then
@@ -664,6 +583,88 @@ function inventory.onInputUpdate()
 		end
 	end
 	if inventory.activateinventory == true then
+		if inventory.inventoryopened == true then -- selects the powerup
+			if player.rawKeys.jump == KEYS_PRESSED then
+				if player.powerup == powerup[state] then
+					Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+				elseif state == 1 then
+					if SaveData.inventory.shroom > 0 then -- mushroom
+						if player.powerup == 1 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+							Audio.playSFX(6)
+							player.powerup = powerup[state]
+							SaveData.inventory.shroom = SaveData.inventory.shroom - 1
+						end
+					elseif SaveData.inventory.shroom <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 2 then
+					if SaveData.inventory.fire > 0 then -- SaveData.inventory.fire flower
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(6)
+						player.powerup = powerup[state]
+						SaveData.inventory.fire = SaveData.inventory.fire - 1
+					elseif SaveData.inventory.fire <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 3 then
+					if SaveData.inventory.ice > 0 then -- SaveData.inventory.ice flower
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(6)
+						player.powerup = powerup[state]
+						SaveData.inventory.ice = SaveData.inventory.ice - 1
+					elseif SaveData.inventory.ice <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 4 then
+					if SaveData.inventory.leaf > 0 then -- super SaveData.inventory.leaf
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(34)
+						player.powerup = powerup[state]
+						SaveData.inventory.leaf = SaveData.inventory.leaf - 1
+					elseif SaveData.inventory.leaf <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 5 then
+					if SaveData.inventory.tanooki > 0 then -- SaveData.inventory.tanooki suit
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(34)
+						player.powerup = powerup[state]
+						SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
+					elseif SaveData.inventory.tanooki <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 6 then
+					if SaveData.inventory.hammer > 0 then -- SaveData.inventory.hammer suit
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						Audio.playSFX(34)
+						player.powerup = powerup[state]
+						SaveData.inventory.hammer = SaveData.inventory.hammer - 1
+					elseif SaveData.inventory.hammer <= 0 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				elseif state == 7 then
+					if SaveData.inventory.reserve >= 1 then
+						p = player
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						modernReserveItems.drop(p.reservePowerup, p)
+						inventory.inventoryopened = false
+						cooldown = 5
+						state = 1
+						Misc.unpause()
+						player:mem(0x11E,FIELD_BOOL,false)
+						if cooldown <= 0 then
+							player:mem(0x11E,FIELD_BOOL,true)
+						end
+					elseif SaveData.inventory.reserve <= 0 then
+						--modernReserveItems.dropped = false
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
+					end
+				end
+			end
+		end
+	end
+	if inventory.activateinventory == true then
 		if inventory.inventoryopened == true then
 			if SaveData.resolution == "fullscreen" then
 				Graphics.drawImage(inventory, 30, 508)
@@ -692,7 +693,7 @@ function inventory.onInputUpdate()
 
 	if inventory.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
 		if selectx < 30 then
-			selectx = 30 + 414
+			selectx = 30 + 384
 		end 
 	end
 	if inventory.inventoryopened == true then
