@@ -99,6 +99,9 @@ local mintanooki = 0
 local maxhammer = 5
 local minhammer = 0
 
+local maxreserve = 1
+local minreserve = 0
+
 
 function inventory.onInitAPI()
     registerEvent(inventory , "onStart")
@@ -235,6 +238,10 @@ function inventory.onDraw()
 
 		if SaveData.inventory.hammer >= maxhammer then
 			SaveData.inventory.hammer = maxhammer
+		end
+		
+		if SaveData.inventory.reserve == 0 then
+			SaveData.inventory.reserve = 1
 		end
 
 		-- same, but for minimum
