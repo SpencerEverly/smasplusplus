@@ -69,7 +69,7 @@ smallScreen.scaleY = 1
 smallScreen.offsetX = 0
 smallScreen.offsetY = 0
 
-smallScreen.priority = 10
+smallScreen.priority = 15
 
 smallScreen.croppingEnabled = true
 smallScreen.positionChangingEnabled = true

@@ -967,7 +967,7 @@ function boxInstanceFunctions:updateLayouts()
             height = height + self.settings.questionGap
 
             if answerPageCount > 1 and self.settings.scrollArrowEnabled and self.settings.scrollArrowImage ~= nil then
-                height = height + self.settings.scrollArrowImage.height*2
+				height = height + self.settings.scrollArrowImage.height*2
             end
         end
 
@@ -1778,9 +1778,9 @@ function boxInstanceFunctions:draw()
         y = math.clamp(y,b.top  + self.totalHeight*0.5 + minDistance,b.bottom - self.totalHeight*0.5 - minDistance)
     end
 
-
-    local scaleX  = math.lerp(self.settings.openStartScaleX ,1,self.openingProgress)
-    local scaleY  = math.lerp(self.settings.openStartScaleY ,1,self.openingProgress)
+	local scaleX  = math.lerp(self.settings.openStartScaleX ,1,self.openingProgress)
+	local scaleY  = math.lerp(self.settings.openStartScaleY ,1,self.openingProgress)
+	
     local opacity = math.lerp(self.settings.openStartOpacity,1,self.openingProgress)
 
     local topNameDarkening = 0
@@ -1814,10 +1814,9 @@ function boxInstanceFunctions:draw()
         }
     end
 
-
-    if self.settings.boxImage ~= nil then
-        drawSegmentedBox(self.settings.boxImage,self.priority,sceneCoords,Color.white.. opacity,x - boxWidth*0.5,y - boxHeight*0.5,boxWidth,boxHeight,boxCutoffWidth,boxCutoffHeight)
-    end
+	if self.settings.boxImage ~= nil then
+		drawSegmentedBox(self.settings.boxImage,self.priority,sceneCoords,Color.white.. opacity,x - boxWidth*0.5,y - boxHeight*0.5,boxWidth,boxHeight,boxCutoffWidth,boxCutoffHeight)
+	end
 
 
     fullBuffer:clear(self.priority)

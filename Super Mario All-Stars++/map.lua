@@ -11,12 +11,11 @@ local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
 
 local map3d = require("mapp3d")
+
 map3d.CameraSettings.fov = 60
 map3d.CameraSettings.height = 320;
 map3d.BGPlane.tile = 394
 map3d.Light.enabled = false
---map3d.Heightmap.texture = Graphics.loadImage("heightmap.png");
---map3d.Heightmap.position = vector.v2(6496, 0)
 
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
@@ -127,7 +126,7 @@ function onTick()
 		jukebox.setTrack(751, jukebox.resolveMusicFile("_OST/All Stars Menu/World Music/Game Select.ogg"))
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
-	end
+	end	
 end
 
 function onPause(evt) --Because there's a new pause menu, the og pause menu has to be disabled

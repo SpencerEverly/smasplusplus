@@ -799,7 +799,6 @@ ID:843;X:-200336;Y:-200192;LR:"Logo Words Fade In 1";
 ID:842;X:-199536;Y:-200200;LR:"Logo Words Fade In 2";
 ID:843;X:-199536;Y:-200200;LR:"Logo Words Fade In 1";
 ID:842;X:-200336;Y:-200192;LR:"Logo Words Fade In 2";
-ID:847;X:-200000;Y:-200600;LR:"Black Graphic Prevention";
 ID:847;X:-180000;Y:-180600;LR:"Black Graphic Prevention";
 ID:848;X:-160000;Y:-160864;LR:"Blackness Layer";
 ID:849;X:-160000;Y:-160800;LR:"Logo Shine";
@@ -812,6 +811,8 @@ ID:850;X:-199792;Y:-200608;LR:"Loading World Map...";
 ID:850;X:-179792;Y:-180608;LR:"Loading World Map...";
 ID:850;X:-159792;Y:-160608;LR:"Loading World Map...";
 ID:850;X:-139792;Y:-140608;LR:"Loading World Map...";
+ID:847;X:-199584;Y:-200600;LR:"Black Graphic Prevention";
+ID:847;X:-200384;Y:-200600;LR:"Black Graphic Prevention";
 BGO_END
 NPC
 ID:789;X:-159856;Y:-160280;D:-1;FD:1;NM:1;LR:"Blackness Layer";
@@ -889,7 +890,7 @@ LR:"Opening Blocks 2";
 LR:"skip-intro-sfx";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
-ET:"Level - Start";LS:["Head Spin","Head Spin Floor"];TE:"Logo Stage 1 - Head Movement";TD:3;DS:1;PC:000010000000;AS:0;AX:0;AY:0;
+ET:"Level - Start";LS:["Head Spin Floor"];TE:"Logo Stage 1 - Head Movement";TD:3;DS:1;PC:000010000000;AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Logo Stage 1 - Head Movement";LS:["Head Spin","Head Spin Floor"];SSS:["ID\:0\;MI\:24\;"];TE:"Logo Stage 2 - Bump";TD:6;DS:1;ML:"Head Spin Floor";MX:-14.66;MY:0;AS:0;AX:0;AY:0;
