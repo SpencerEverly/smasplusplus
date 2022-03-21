@@ -602,6 +602,7 @@ function inventory.onInputUpdate()
 							inventory.inventoryopened = false
 							cooldown = 5
 							Misc.unpause()
+							globalgenerals.showitembox = false
 							player:mem(0x11E,FIELD_BOOL,false)
 							if cooldown <= 0 then
 								player:mem(0x11E,FIELD_BOOL,true)
@@ -620,6 +621,7 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
+						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -637,6 +639,7 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
+						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -654,6 +657,7 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
+						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -671,6 +675,7 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
+						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -688,6 +693,7 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
+						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -704,6 +710,7 @@ function inventory.onInputUpdate()
 						state = 1
 						inventory.inventoryopened = false
 						Misc.unpause()
+						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -763,7 +770,7 @@ function inventory.onInputUpdate()
 			state = 7
 		end
 	end
-	if inventory.inventoryopene == false then
+	if inventory.inventoryopened == false then
 		globalgenerals.showitembox = false
 	end
 end
