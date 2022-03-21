@@ -424,34 +424,28 @@ function inventory.onPostNPCKill(v,reason)
     if player.powerup == PLAYER_BIG then
 		if pUpsTable[v.id] then
 			SaveData.inventory.shroom = SaveData.inventory.shroom + 1
-			SaveData.inventory.reserve = player.reservePowerup
 		end
     elseif player.powerup == PLAYER_FIREFLOWER then
         if pUpsTable[v.id] then
             SaveData.inventory.fire = SaveData.inventory.fire + 1
-			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_LEAF then
         if pUpsTable[v.id] then
             SaveData.inventory.leaf = SaveData.inventory.leaf + 1
-			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_TANOOKIE then
         if pUpsTable[v.id] then
             SaveData.inventory.tanooki = SaveData.inventory.tanooki + 1
-			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_HAMMER then
         if pUpsTable[v.id] then
             SaveData.inventory.hammer = SaveData.inventory.hammer + 1
-			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_ICE then
         if pUpsTable[v.id] then
             SaveData.inventory.ice = SaveData.inventory.ice + 1
-			SaveData.inventory.reserve = player.reservePowerup
         end
-	elseif player.reservePowerup then
+	elseif player.reservePowerup and not player.reservePowerup <= 0 then
 		SaveData.inventory.reserve = player.reservePowerup
     end
 end
@@ -471,6 +465,7 @@ function inventory.onTick()
 		numx = 40
 		numy = 500
 	end
+	SaveData.inventory.reserve = player.reservePowerup
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
 	if warpTransition.transitionTimer >= 0.1 then
 		inventory.activated = false
