@@ -327,9 +327,9 @@ end
 function globalgenerals.onTick()
 	if SaveData.disableX2char == false then
 		if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
-			hudoverride.visible.itembox = true
+			globalgenerals.showitembox = true
 		elseif (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
-			hudoverride.visible.itembox = false
+			globalgenerals.showitembox = false
 		end
 		if globalgenerals.showitembox == false then
 			hudoverride.visible.itembox = false
