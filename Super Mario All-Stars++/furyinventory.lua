@@ -329,17 +329,16 @@ function inventory.onDraw()
 					elseif state == 7 then
 						if SaveData.inventory.reserve >= 1 then
 							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-							modernReserveItems.dropped = true
+							modernReserveItems.drop(p.reservePowerup, p)
 							inventory.inventoryopened = false
 							cooldown = 5
 							Misc.unpause()
 							player:mem(0x11E,FIELD_BOOL,false)
-							Routine.run(makereservefalse)
 							if cooldown <= 0 then
 								player:mem(0x11E,FIELD_BOOL,true)
 							end
-						elseif SaveData.inventory.reserve <= 0 and player.reservePowerup == 0 and not player.reservePowerup >= 1 then
-							modernReserveItems.dropped = false
+						elseif SaveData.inventory.reserve <= 0 then
+							--modernReserveItems.dropped = false
 							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 						end
 					end
