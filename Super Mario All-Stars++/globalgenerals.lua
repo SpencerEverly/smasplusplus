@@ -43,13 +43,13 @@ local killed = false
 
 if SaveData.resolution == "fullscreen" then
 	littleDialogue.registerStyle("smbx13og",{
-		textXScale = 0.8,
-		textYScale = 0.8,
+		textXScale = 1,
+		textYScale = 1,
 		borderSize = 36,
 		textMaxWidth = 500,
 		speakerNameGap = 6,
-		speakerNameXScale = 1.0,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.0,
+		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+		speakerNameYScale = 1.2,
 		
 		openSpeed = 5,
 		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
@@ -77,13 +77,13 @@ if SaveData.resolution == "fullscreen" then
 		
 	})
 	littleDialogue.registerStyle("smbx13",{
-		textXScale = 0.8,
-		textYScale = 0.8,
+		textXScale = 1,
+		textYScale = 1,
 		borderSize = 36,
 		textMaxWidth = 500,
 		speakerNameGap = 6,
-		speakerNameXScale = 1.0,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.0,
+		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+		speakerNameYScale = 1.2,
 		
 		openSpeed = 5,
 		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
@@ -108,6 +108,8 @@ if SaveData.resolution == "fullscreen" then
 		
 	})
 	littleDialogue.registerStyle("infobooth",{
+		textXScale = 1,
+		textYScale = 1,
 		borderSize = 32,
 
 		openSpeed = 0.025,
@@ -119,17 +121,16 @@ if SaveData.resolution == "fullscreen" then
 		speakerNameOffsetY = 24,
 	})
 end
-
 
 if SaveData.resolution == "widescreen" then
 	littleDialogue.registerStyle("smbx13og",{
-		textXScale = 1.4,
-		textYScale = 1.4,
+		textXScale = 0.8,
+		textYScale = 0.8,
 		borderSize = 36,
 		textMaxWidth = 500,
 		speakerNameGap = 6,
-		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.2,
+		speakerNameXScale = 1.0,        -- X scale of the speaker's name.
+		speakerNameYScale = 1.0,
 		
 		openSpeed = 5,
 		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
@@ -157,13 +158,13 @@ if SaveData.resolution == "widescreen" then
 		
 	})
 	littleDialogue.registerStyle("smbx13",{
-		textXScale = 1.4,
-		textYScale = 1.4,
+		textXScale = 0.8,
+		textYScale = 0.8,
 		borderSize = 36,
 		textMaxWidth = 500,
 		speakerNameGap = 6,
-		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.2,
+		speakerNameXScale = 1.0,        -- X scale of the speaker's name.
+		speakerNameYScale = 1.0,
 		
 		openSpeed = 5,
 		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
@@ -188,8 +189,6 @@ if SaveData.resolution == "widescreen" then
 		
 	})
 	littleDialogue.registerStyle("infobooth",{
-		textXScale = 1.4,
-		textYScale = 1.4,
 		borderSize = 32,
 
 		openSpeed = 0.025,
@@ -200,12 +199,12 @@ if SaveData.resolution == "widescreen" then
 		speakerNameOnTop = true,
 		speakerNameOffsetY = 24,
 	})
+	
+	littleDialogue.registerStyle("smwwide",{
+		textXScale = 1.4,
+		textYScale = 1.4,
+	})
 end
-
-littleDialogue.registerStyle("smwwide",{
-	textXScale = 1.4,
-	textYScale = 1.4,
-})
 
 local player2_alt = Player(2)
 local pipecounter = 0

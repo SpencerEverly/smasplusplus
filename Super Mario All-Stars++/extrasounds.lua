@@ -251,6 +251,9 @@ function extrasounds.onPostExplosion(effect)
 	if effect.id == 69 then
 		SFX.play(extrasounds.id104)
 	end
+	if effect.id == 76 then
+		SFX.play(extrasounds.id43)
+	end
 end
 
 function extrasounds.onInputUpdate() --Button pressing for such commands
