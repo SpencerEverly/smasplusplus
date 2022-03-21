@@ -425,29 +425,35 @@ function inventory.onPostNPCKill(v,reason)
     if player.powerup == PLAYER_BIG then
 		if pUpsTable[v.id] then
 			SaveData.inventory.shroom = SaveData.inventory.shroom + 1
+			SaveData.inventory.reserve = player.reservePowerup
 		end
     elseif player.powerup == PLAYER_FIREFLOWER then
         if pUpsTable[v.id] then
             SaveData.inventory.fire = SaveData.inventory.fire + 1
+			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_LEAF then
         if pUpsTable[v.id] then
             SaveData.inventory.leaf = SaveData.inventory.leaf + 1
+			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_TANOOKIE then
         if pUpsTable[v.id] then
             SaveData.inventory.tanooki = SaveData.inventory.tanooki + 1
+			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_HAMMER then
         if pUpsTable[v.id] then
             SaveData.inventory.hammer = SaveData.inventory.hammer + 1
+			SaveData.inventory.reserve = player.reservePowerup
         end
     elseif player.powerup == PLAYER_ICE then
         if pUpsTable[v.id] then
             SaveData.inventory.ice = SaveData.inventory.ice + 1
+			SaveData.inventory.reserve = player.reservePowerup
         end
 	elseif player.reservePowerup then
-		SaveData.inventory.reserve =  SaveData.inventory.reserve or player.reservePowerup
+		SaveData.inventory.reserve = player.reservePowerup
     end
 end
 
