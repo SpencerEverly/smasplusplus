@@ -1,6 +1,7 @@
 local versionnumber = "Open Source Edition" --This is the version number of this episode. It can be changed to any version we're on.
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
+local datetime = require("datetime")
 --if Misc.inEditor() then
 	--Misc.showRichDialog("SMAS++ Boot Menu Level", "Hello!\n\nYou are trying to access the boot level through the editor. What are YOU doing here?\nI bet you just wanna snoop around and mess with the episode, eh?\n\nOh well, I don't blame you. Everything is open, so go right ahead!", true)
 --end
@@ -21,6 +22,8 @@ local bootmenu = {}
 
 extrasounds.active = false
 bootmenu.active = true
+datetime.bottomright = true
+datetime.topright = false
 
 local aprilfools = false
 local aprilfoolserror = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
@@ -34,7 +37,6 @@ local versionactive = true
 local logo = true
 local pressjumpwords = true
 local active = false
-local active2 = true
 local active3 = false
 local charactercheck = false
 local keyinput1 = false
@@ -1114,7 +1116,7 @@ function bootmenu.onInputUpdate()
 			twoplayercheckactive = false
 			versionactive = false
 			logo = false
-			active2 = false
+			datetime.bottomright = false
 			active = true
 			pressjumpwords = false
 			sec.backgroundID = 6
@@ -1129,7 +1131,7 @@ function bootmenu.onInputUpdate()
 			GameData.startedmenu = 1
 			Audio.MusicChange(0, 0)
 			logo = false
-			active2 = false
+			datetime.bottomright = false
 			active = true
 			pressjumpwords = false
 			aprilfools = true
@@ -1213,20 +1215,6 @@ function bootmenu.onDraw()
 	end
 	if active then
 		--nothing
-	end
-	if active2 then
-		Graphics.drawBox{x=719, y=575, width=76, height=20, color=Color.black..0.2, priority=8}
-		textplus.print{x=724, y=580, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
-		textplus.print{x=755, y=580, text = os.date("%I"), priority=8, color=Color.white}
-		textplus.print{x=765, y=580, text = ":", priority=8, color=Color.white}
-		textplus.print{x=768, y=580, text = os.date("%M"), priority=8, color=Color.white}
-		textplus.print{x=780, y=580, text = os.date("%p"), priority=8, color=Color.white}
-		Graphics.drawBox{x=695, y=552, width=100, height=20, color=Color.black..0.2, priority=8}
-		textplus.print{x=700, y=557, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
-		textplus.print{x=733, y=557, text = os.date("%a"), priority=8, color=Color.white}
-		textplus.print{x=752, y=557, text = os.date("%x"), priority=8, color=Color.white}
-		textplus.print{x=10, y=10, text = "Press pause to quit.", priority=-6, color=Color.yellow}
-		Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-7}
 	end
 	if active3 then
 		if SaveData.resolution == "fullscreen" then

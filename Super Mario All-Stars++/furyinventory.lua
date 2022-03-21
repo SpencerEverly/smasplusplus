@@ -28,9 +28,9 @@ local selector = Graphics.loadImage(Misc.resolveFile("inventorystuff/selector.pn
 
 local selection = false
 local selectx = 30
-local selecty = 438
+local selecty = 508
 local numx = 40
-local numy = 500
+local numy = 570
 
 inventory.activated = true --This will activate the inventory only when it's true
 inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
@@ -446,6 +446,18 @@ local STATE = {
 -- Run code every frame (~1/65 second)
 -- (code will be executed before game logic will be processed)
 function inventory.onTick()
+	if SaveData.resolution == "fullscreen" then
+		selectx = 30
+		selecty = 508
+		numx = 40
+		numy = 570
+	end
+	if SaveData.resolution == "widescreen" then
+		selectx = 30
+		selecty = 438
+		numx = 40
+		numy = 500
+	end
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
 	if warpTransition.transitionTimer >= 0.1 then
 		inventory.activated = false
