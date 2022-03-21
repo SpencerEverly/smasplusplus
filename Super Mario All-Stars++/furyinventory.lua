@@ -54,7 +54,6 @@ local powerup = {
                  6,
 				 7}
 local state = 1
-local state2 = 1
 
 -- how much of each powerup is being stored
 SaveData.inventory = SaveData.inventory or {
@@ -121,6 +120,7 @@ function makereservefalse()
 end
 
 function inventory.onDraw()
+	Text.print(state, 100, 100)
 	if inventory.hidden == false then
 		--player.reservePowerup = 0 -- disables the item box
 		if inventory.activateinventory == true then
@@ -598,6 +598,9 @@ function inventory.onInputUpdate()
 							Audio.playSFX(6)
 							player.powerup = powerup[state]
 							SaveData.inventory.shroom = SaveData.inventory.shroom - 1
+							state = 1
+							inventory.inventoryopened = false
+							Misc.unpause()
 						end
 					elseif SaveData.inventory.shroom <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
@@ -608,6 +611,9 @@ function inventory.onInputUpdate()
 						Audio.playSFX(6)
 						player.powerup = powerup[state]
 						SaveData.inventory.fire = SaveData.inventory.fire - 1
+						state = 1
+						inventory.inventoryopened = false
+						Misc.unpause()
 					elseif SaveData.inventory.fire <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -617,6 +623,9 @@ function inventory.onInputUpdate()
 						Audio.playSFX(6)
 						player.powerup = powerup[state]
 						SaveData.inventory.ice = SaveData.inventory.ice - 1
+						state = 1
+						inventory.inventoryopened = false
+						Misc.unpause()
 					elseif SaveData.inventory.ice <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -626,6 +635,9 @@ function inventory.onInputUpdate()
 						Audio.playSFX(34)
 						player.powerup = powerup[state]
 						SaveData.inventory.leaf = SaveData.inventory.leaf - 1
+						state = 1
+						inventory.inventoryopened = false
+						Misc.unpause()
 					elseif SaveData.inventory.leaf <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -635,6 +647,9 @@ function inventory.onInputUpdate()
 						Audio.playSFX(34)
 						player.powerup = powerup[state]
 						SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
+						state = 1
+						inventory.inventoryopened = false
+						Misc.unpause()
 					elseif SaveData.inventory.tanooki <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -644,6 +659,9 @@ function inventory.onInputUpdate()
 						Audio.playSFX(34)
 						player.powerup = powerup[state]
 						SaveData.inventory.hammer = SaveData.inventory.hammer - 1
+						state = 1
+						inventory.inventoryopened = false
+						Misc.unpause()
 					elseif SaveData.inventory.hammer <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -652,9 +670,9 @@ function inventory.onInputUpdate()
 						p = player
 						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
 						modernReserveItems.drop(p.reservePowerup, p)
-						inventory.inventoryopened = false
 						cooldown = 5
 						state = 1
+						inventory.inventoryopened = false
 						Misc.unpause()
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
