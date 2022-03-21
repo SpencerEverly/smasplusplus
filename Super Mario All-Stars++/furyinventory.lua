@@ -323,20 +323,21 @@ function inventory.onDraw()
 							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 						end
 					elseif state == 7 then
-						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-						modernReserveItems.dropped = true
-						inventory.inventoryopened = false
-						cooldown = 5
-						Misc.unpause()
-						player:mem(0x11E,FIELD_BOOL,false)
-						Routine.run(makereservefalse)
-						if cooldown <= 0 then
-							player:mem(0x11E,FIELD_BOOL,truee)
+						if SaveData.inventory.reserve > 0 then
+							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+							modernReserveItems.dropped = true
+							inventory.inventoryopened = false
+							cooldown = 5
+							Misc.unpause()
+							player:mem(0x11E,FIELD_BOOL,false)
+							Routine.run(makereservefalse)
+							if cooldown <= 0 then
+								player:mem(0x11E,FIELD_BOOL,truee)
+							end
+						elseif SaveData.inventory.reserve <= 0 and player.reservePowerup == 0 then
+							modernReserveItems.dropped = false
+							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 						end
-					end
-					if SaveData.inventory.reserve <= 0 and player.reservePowerup == 0 then
-						modernReserveItems.dropped = false
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
 				end
 			end
@@ -445,7 +446,7 @@ function inventory.onPostNPCKill(v,reason)
         if pUpsTable[v.id] then
             SaveData.inventory.ice = SaveData.inventory.ice + 1
         end
-	elseif player.reservePowerup and not player.reservePowerup <= 0 then
+	elseif player.reservePowerup then
 		SaveData.inventory.reserve = player.reservePowerup
     end
 end
