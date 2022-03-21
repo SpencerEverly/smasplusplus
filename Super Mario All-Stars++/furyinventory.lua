@@ -335,10 +335,6 @@ function inventory.onDraw()
 							player:mem(0x11E,FIELD_BOOL,truee)
 						end
 					end
-					if SaveData.inventory.reserve <= 0 then
-						modernReserveItems.dropped = false
-						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
-					end
 				end
 			end
 		end
