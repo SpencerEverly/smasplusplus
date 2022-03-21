@@ -115,7 +115,6 @@ function makereservefalse()
 end
 
 function inventory.onDraw()
-	Text.print(state, 100, 100)
 	if inventory.hidden == false then
 		--player.reservePowerup = 0 -- disables the item box
 		if inventory.activateinventory == true then
