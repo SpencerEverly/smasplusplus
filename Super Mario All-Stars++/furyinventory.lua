@@ -330,7 +330,7 @@ function inventory.onDraw()
 						Misc.unpause()
 						player:mem(0x11E,FIELD_BOOL,false)
 						Routine.run(makereservefalse)
-						--SaveData.inventory.reserve = 0
+						SaveData.inventory.reserve = player.reservePowerup
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,truee)
 						end
