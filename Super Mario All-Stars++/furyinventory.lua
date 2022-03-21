@@ -576,12 +576,14 @@ function inventory.onInputUpdate()
 				inventory.inventoryopened = false
 				Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
 				Misc.unpause()
+				state = 1
 				globalgenerals.showitembox = false
 			elseif inventory.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
 				inventoryopen = true
 				inventory.inventoryopened = true
 				Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
 				Misc.pause()
+				state = 1
 				globalgenerals.showitembox = true
 			end
 		end
