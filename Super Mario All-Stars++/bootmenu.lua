@@ -216,7 +216,7 @@ if SaveData.resolution == "widescreen" then
 		speakerNameOnTop = true,
 		speakerNameOffsetY = 24,
 	})
-	littleDialogue.registerStyle("smwwide",{
+	littleDialogue.registerStyle("smw",{
 		textXScale = 1.4,
 		textYScale = 1.4,
 	})
