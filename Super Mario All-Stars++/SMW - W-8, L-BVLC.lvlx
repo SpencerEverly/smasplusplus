@@ -1,5 +1,5 @@
 HEAD
-TL:"BVLC";SZ:1;CPID:"SMBX2";
+TL:"Super Mario World\: Valley of Bowser (Front/Back Door)";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-201344;B:-200000;MZ:24;MF:"_OST/Super Mario World/Castle.spc|0\;g=1.7";BG:23;
