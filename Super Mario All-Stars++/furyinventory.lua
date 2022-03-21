@@ -471,7 +471,6 @@ function inventory.onTick()
 		numx = 40
 		numy = 500
 	end
-	SaveData.inventory.reserve = player.reservePowerup
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
 	if warpTransition.transitionTimer >= 0.1 then
 		inventory.activated = false
