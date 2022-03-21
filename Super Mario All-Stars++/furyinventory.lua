@@ -600,7 +600,12 @@ function inventory.onInputUpdate()
 							SaveData.inventory.shroom = SaveData.inventory.shroom - 1
 							state = 1
 							inventory.inventoryopened = false
+							cooldown = 5
 							Misc.unpause()
+							player:mem(0x11E,FIELD_BOOL,false)
+							if cooldown <= 0 then
+								player:mem(0x11E,FIELD_BOOL,true)
+							end
 						end
 					elseif SaveData.inventory.shroom <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
@@ -613,7 +618,12 @@ function inventory.onInputUpdate()
 						SaveData.inventory.fire = SaveData.inventory.fire - 1
 						state = 1
 						inventory.inventoryopened = false
+						cooldown = 5
 						Misc.unpause()
+						player:mem(0x11E,FIELD_BOOL,false)
+						if cooldown <= 0 then
+							player:mem(0x11E,FIELD_BOOL,true)
+						end
 					elseif SaveData.inventory.fire <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -625,7 +635,12 @@ function inventory.onInputUpdate()
 						SaveData.inventory.ice = SaveData.inventory.ice - 1
 						state = 1
 						inventory.inventoryopened = false
+						cooldown = 5
 						Misc.unpause()
+						player:mem(0x11E,FIELD_BOOL,false)
+						if cooldown <= 0 then
+							player:mem(0x11E,FIELD_BOOL,true)
+						end
 					elseif SaveData.inventory.ice <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -637,7 +652,12 @@ function inventory.onInputUpdate()
 						SaveData.inventory.leaf = SaveData.inventory.leaf - 1
 						state = 1
 						inventory.inventoryopened = false
+						cooldown = 5
 						Misc.unpause()
+						player:mem(0x11E,FIELD_BOOL,false)
+						if cooldown <= 0 then
+							player:mem(0x11E,FIELD_BOOL,true)
+						end
 					elseif SaveData.inventory.leaf <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -649,7 +669,12 @@ function inventory.onInputUpdate()
 						SaveData.inventory.tanooki = SaveData.inventory.tanooki - 1
 						state = 1
 						inventory.inventoryopened = false
+						cooldown = 5
 						Misc.unpause()
+						player:mem(0x11E,FIELD_BOOL,false)
+						if cooldown <= 0 then
+							player:mem(0x11E,FIELD_BOOL,true)
+						end
 					elseif SaveData.inventory.tanooki <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
@@ -661,7 +686,12 @@ function inventory.onInputUpdate()
 						SaveData.inventory.hammer = SaveData.inventory.hammer - 1
 						state = 1
 						inventory.inventoryopened = false
+						cooldown = 5
 						Misc.unpause()
+						player:mem(0x11E,FIELD_BOOL,false)
+						if cooldown <= 0 then
+							player:mem(0x11E,FIELD_BOOL,true)
+						end
 					elseif SaveData.inventory.hammer <= 0 then
 						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
