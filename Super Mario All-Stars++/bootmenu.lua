@@ -423,6 +423,17 @@ local function themeMenu1()
 end
 
 
+
+local function ResolutionChange1()
+	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
+	if SaveData.resolution == "widescreen" then
+		SaveData.resolution = "fullscreen"
+	elseif SaveData.resolution == "fullscreen" then
+		SaveData.resolution = "widescreen"
+	end
+	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
+end
+
 local function credits1()
 	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
@@ -904,7 +915,7 @@ function bootmenu.onTick()
 	if player:mem(0x140, FIELD_BOOL) == 0 then
 		player:mem(0x140, FIELD_BOOL, 150)
 	end
-	player.x = camera.x + 400 - (player.width / 2)
+	player.x = camera.x + 1000 - (player.width / 2)
 	player.y = camera.y + 300 - (player.height / 2)
 	if Player.count() == 1 then
 		twoplayercheck = active
@@ -1109,6 +1120,9 @@ function bootmenu.onDraw()
 	local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
 	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
+	local smaslogowide = Graphics.loadImageResolved("smaslogo-wide.png")
+	local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
+	
 	local stpatricksday = false
 	
 	if versionactive then
@@ -1117,10 +1131,20 @@ function bootmenu.onDraw()
 	end
 	
 	if pressjumpwords then
-		Graphics.drawImage(pressstart, 150, 552, 1)
+		if SaveData.resolution == "fullscreen" then
+			Graphics.drawImageWP(pressstart, 150, 552, 1)
+		end
+		if SaveData.resolution == "widescreen" then
+			Graphics.drawImageWP(pressstartwide, 150, 482, 1)
+		end
 	end
 	if logo then
-		Graphics.drawImage(smaslogo, 176, 136, 2)
+		if SaveData.resolution == "fullscreen" then
+			Graphics.drawImageWP(smaslogo, 176, 136, 2)
+		end
+		if SaveData.resolution == "widescreen" then
+			Graphics.drawImageWP(smaslogowide, 176, 136, 2)
+		end
 	end
 	if exitscreen then
 		Graphics.drawScreen{color = Color.black, priority = 10}
@@ -1170,10 +1194,20 @@ function bootmenu.onDraw()
 		Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-7}
 	end
 	if active3 then
-		textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
+		if SaveData.resolution == "fullscreen" then
+			textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
+		end
+		if SaveData.resolution == "widescreen" then
+			textplus.print{x=160, y=500, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
+		end
 	end
 	if active4 then
-		textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
+		if SaveData.resolution == "fullscreen" then
+			textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
+		end
+		if SaveData.resolution == "widescreen" then
+			textplus.print{x=150, y=410, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
+		end
 	end
 	if keyinput1 then
 		textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=6, color=Color.lightred, font=statusFont}
@@ -1315,7 +1349,7 @@ littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction =
 littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
 littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
 littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
---littleDialogue.registerAnswer("Options",{text = "Fix Broken Map Paths",chosenFunction = function() Routine.run(PathFix1) end})
+littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionChange1) end})
 littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
 littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
 littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})

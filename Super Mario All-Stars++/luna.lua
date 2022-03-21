@@ -42,6 +42,10 @@ end
 local classicevents = require("classiceventsmod")
 local globalgenerals = require("globalgenerals")
 
+if SaveData.resolution == nil then
+	SaveData.resolution = "fullscreen"
+end
+
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
 function onStart()

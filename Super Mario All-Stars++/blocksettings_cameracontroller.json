@@ -1,0 +1,170 @@
+{
+	"style" : "groupbox",
+	"title" : "Camera Controller Settings",
+	"layout": [
+		{
+			"control": "itemSelect",
+			"name": "targetNPCID",
+			"title": "Target NPC Type",
+			"type": "npc",
+			"tooltip": "If set, the camera will lock onto this kind of NPC, in addition to the player.",
+			"value-default": 0
+		},
+		{
+			"control": "spinbox",
+			"name": "zoom",
+			"title": "Zoom",
+			"type": "double",
+			"tooltip": "The zoom to use inside of the controller. 0 represents no change, 1 is normal zoom.",
+			"value-default": 0,
+			"value-min": 0,
+			"value-max": 10,
+			"single-step": 0.25,
+			"decimals": 2
+		},
+		{
+			"control": "spinbox",
+			"name": "rotation",
+			"title": "Rotation",
+			"type": "double",
+			"tooltip": "The rotation to use inside of the controller (in degrees, clockwise).",
+			"value-default": 0,
+			"value-min": -360,
+			"value-max": 360,
+			"decimals": 2
+		},
+		{
+			"control": "spinbox",
+			"name": "offsetX",
+			"title": "X Offset",
+			"type": "int",
+			"tooltip": "The distance the camera will be horizontally offset from its targets.",
+			"value-default": 0,
+			"value-min": -600,
+			"value-max": 600
+		},
+		{
+			"control": "spinbox",
+			"name": "offsetY",
+			"title": "Y Offset",
+			"type": "int",
+			"tooltip": "The distance the camera will be vertically offset from its targets.",
+			"value-default": 0,
+			"value-min": -600,
+			"value-max": 600
+		},
+
+		{
+			"control": "description",
+			"text": ""
+		},
+
+		{
+			"control": "spinbox",
+			"name": "screenWidth",
+			"title": "Screen Width",
+			"type": "int",
+			"tooltip": "The width of the screen itself while in the controller. 0 will keep it at its default size.",
+			"value-default": 0,
+			"value-min": 0,
+			"value-max": 800
+		},
+		{
+			"control": "spinbox",
+			"name": "screenHeight",
+			"title": "Screen Height",
+			"type": "int",
+			"tooltip": "The height of the screen itself while in the controller. 0 will keep it at its default size.",
+			"value-default": 0,
+			"value-min": 0,
+			"value-max": 600
+		},
+		{
+			"control": "spinbox",
+			"name": "screenOffsetX",
+			"title": "Screen X Offset",
+			"type": "int",
+			"tooltip": "The distance the screen itself will be horizontally offset from its usual position.",
+			"value-default": 0,
+			"value-min": -600,
+			"value-max": 600
+		},
+		{
+			"control": "spinbox",
+			"name": "screenOffsetY",
+			"title": "Screen Y Offset",
+			"type": "int",
+			"tooltip": "The distance the screen itself will be vertically offset from its usual position.",
+			"value-default": 0,
+			"value-min": -600,
+			"value-max": 600
+		},
+
+		{
+			"control": "description",
+			"text": ""
+		},
+		
+		{
+			"control": "checkbox",
+			"name": "boundOnLeft",
+			"title": "Boundary on Left",
+			"tooltip": "If checked, the left side of the controller will act as a boundary for the camera.",
+			"value-default": false
+		},
+		{
+			"control": "checkbox",
+			"name": "boundOnRight",
+			"title": "Boundary on Right",
+			"tooltip": "If checked, the right side of the controller will act as a boundary for the camera.",
+			"value-default": false
+		},
+		{
+			"control": "checkbox",
+			"name": "boundOnTop",
+			"title": "Boundary on Top",
+			"tooltip": "If checked, the top side of the controller will act as a boundary for the camera.",
+			"value-default": false
+		},
+		{
+			"control": "checkbox",
+			"name": "boundOnBottom",
+			"title": "Boundary on Bottom",
+			"tooltip": "If checked, the bottom side of the controller will act as a boundary for the camera.",
+			"value-default": false
+		},
+		{
+			"control": "checkbox",
+			"name": "treatCameraBoundsAsPhysical",
+			"title": "Treat Camera Bounds\nAs Physical",
+			"tooltip": "If checked, the player will treat the boundaries for the camera as physical walls/death barriers while inside the controller.",
+			"value-default": false
+		},
+
+		{
+			"control": "description",
+			"text": ""
+		},
+
+		{
+			"control": "spinbox",
+			"name": "priority",
+			"title": "Priority",
+			"type": "int",
+			"tooltip": "A priority value that affects how it interacts with other camera controllers.",
+			"value-default": 5,
+			"value-min": 5,
+			"value-max": 10
+		},
+		
+		{
+			"control": "description",
+			"text": ""
+		},
+		{
+			"control": "description",
+			"text": "\n<center><b>Notes</b></center>\nZooming out: Unlike handycam, zooming outwards is supported. Do note, however, that it may be a bit buggy, especially for NPC's with custom rendering. Does not support darkness or foreground parallax layers."
+		}
+	]
+}
+

@@ -7,16 +7,16 @@ local extendedKoopas = require("extendedKoopas")
 local autoscroll = require("autoscroll")
 local warpTransition = require("warpTransition")
 local hudoverride = require("hudoverride")
+local customCamera = require("customCamera")
+local smallScreen = require("smallscreen")
+
+customCamera.transitionSpeed = 5
 
 hudoverride.visible.starcoins = false --There's no star coins in the entire game, but I'm only adding this because why not
 
 SaveData._anothercurrency = {SaveData.totalcoins}
 
-local smasintros = {}
-
-local smasintros = {"8bit","bossedit8","jakebrito1","marioforever","S!TS!","scrollingheights","SMAS","SMBX1.0","SMBX1.1","SMBX1.2","SMBX1.3","SMBX1.3og","SMBX2","SMBX2b3","sunsetbeach","WSMBA"}
-
-if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true then
+if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true or (Level.filename() == "intro_8bit.lvlx") == true or (Level.filename() == "intro_bossedit8.lvlx") == true  or (Level.filename() == "intro_jakebrito1.lvlx") == true or (Level.filename() == "intro_marioforever.lvlx") == true or (Level.filename() == "intro_S!TS!.lvlx") == true or (Level.filename() == "intro_scrollingheights.lvlx") == true or (Level.filename() == "intro_SMAS.lvlx") == true or (Level.filename() == "intro_SMBX1.0.lvlx") == true or (Level.filename() == "intro_SMBX1.1.lvlx") == true or (Level.filename() == "intro_SMBX1.2.lvlx") == true or (Level.filename() == "intro_SMBX1.3.lvlx") == true or (Level.filename() == "intro_SMBX1.3og.lvlx") == true or (Level.filename() == "intro_SMBX2.lvlx") == true or (Level.filename() == "intro_SMBX2b3.lvlx") == true or (Level.filename() == "intro_sunsetbeach.lvlx") == true or (Level.filename() == "intro_WSMBA.lvlx") == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -244,6 +244,41 @@ function globalgenerals.onTick()
 		elseif (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
 			hudoverride.visible.itembox = false
 		end
+	end
+	if SaveData.resolution == "fullscreen" then
+		customCamera.defaultScreenHeight = 600
+		customCamera.defaultZoom = 1
+		smallScreen.scaleY = 1
+		
+		hudoverride.offsets.keys = 		{x = 64, 	y = 26, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
+		hudoverride.offsets.hearts = 	{x = 5, 	y = 16, align = hudoverride.ALIGN_MID};
+		hudoverride.offsets.score = 	{x = 170, 	y = 47, align = hudoverride.ALIGN_RIGHT};
+
+		hudoverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_MID};
+		hudoverride.offsets.coins = 	{x = 88, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
+		hudoverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
+	end
+	if SaveData.resolution == "widescreen" then
+		customCamera.defaultScreenHeight = 450
+		customCamera.defaultZoom = 0.75
+		smallScreen.scaleY = 1.35
+
+		hudoverride.offsets = {}
+		hudoverride.offsets.keys = 		{x = 64, 	y = 86, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.itembox = 	{x = 0, 	y = 86, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
+		hudoverride.offsets.hearts = 	{x = 5, 	y = 86, align = hudoverride.ALIGN_MID};
+		hudoverride.offsets.score = 	{x = 170, 	y = 117, align = hudoverride.ALIGN_RIGHT};
+
+		hudoverride.offsets.bombs = 	{x = 0, 	y = 122, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_MID};
+		hudoverride.offsets.coins = 	{x = 88, 	y = 96, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.lives = 	{x = -166, 	y = 96, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.stars = 	{x = -150, 	y = 116, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
+		hudoverride.offsets.starcoins = {x = -384, y = 97, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
+		hudoverride.offsets.timer = {x = 264, y = 95, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
 	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
@@ -1051,6 +1086,102 @@ Cheats.register("sherbertsmiddlenameistoto",{
 	end),
 	flashPlayer = true,
 })
+
+if SaveData.disableX2char == false then
+	Cheats.register("huskiesareamazing",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(4, false)
+			playerManager.setCostume(CHARACTER_TOAD, "SEE-Tangent")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("itsametangent",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(4, false)
+			playerManager.setCostume(CHARACTER_TOAD, "SEE-Tangent")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("itsametakeshi",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(5, false)
+			playerManager.setCostume(CHARACTER_LINK, "Takeshi")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("itsamelarry",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(2, false)
+			playerManager.setCostume(CHARACTER_LUIGI, "LarryTheCucumber")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("itsamepily",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(1, false)
+			playerManager.setCostume(CHARACTER_MARIO, "Demo-XmasPily")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("itsameeric",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(1, false)
+			playerManager.setCostume(CHARACTER_MARIO, "SP-1-EricCartman")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("itsamejcfoster",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(1, false)
+			playerManager.setCostume(CHARACTER_MARIO, "JCFosterTakesItToTheMoon")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("itsamefrisk",{
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(2, false)
+			playerManager.setCostume(CHARACTER_LUIGI, "Undertale-Frisk")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
 
 Cheats.register("jario",{
 	onActivate = (function()

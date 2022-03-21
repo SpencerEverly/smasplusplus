@@ -174,18 +174,34 @@ end
 
 function onDraw()
 	local bootimage = Graphics.loadImageResolved("SMAS - Start/bootscreen_final.png")
+	local bootimagewide = Graphics.loadImageResolved("SMAS - Start/bootscreen_final_wide.png")
 	
 	if bootshow then
-		Graphics.drawImage(bootimage, 0, 0, 8)
+		if SaveData.resolution == "fullscreen" then
+			Graphics.drawImage(bootimage, 0, 0, 8)
+		end
+		if SaveData.resolution == "widescreen" then
+			Graphics.drawImage(bootimagewide, 0, 0, 8)
+		end
 	end
 	if active then
 		Graphics.drawScreen{color = Color.black, priority = 8}
-		textplus.print{x=10, y=10, text = "Super Mario All-Stars++ Temporary Boot Option List", priority=9, color=Color.white}
-		textplus.print{x=10, y=32, text = "1) Reset all costumes (Including X2 character costumes)", priority=9, color=Color.white}
-		textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=9, color=Color.white}
-		textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
-		textplus.print{x=10, y=68, text = "4) Continue booting", priority=9, color=Color.white}
-		textplus.print{x=10, y=80, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=9, color=Color.white}
+		if SaveData.resolution == "fullscreen" then
+			textplus.print{x=10, y=10, text = "Super Mario All-Stars++ Temporary Boot Option List", priority=9, color=Color.white}
+			textplus.print{x=10, y=32, text = "1) Reset all costumes (Including X2 character costumes)", priority=9, color=Color.white}
+			textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=9, color=Color.white}
+			textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
+			textplus.print{x=10, y=68, text = "4) Continue booting", priority=9, color=Color.white}
+			textplus.print{x=10, y=80, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=9, color=Color.white}
+		end
+		if SaveData.resolution == "widescreen" then
+			textplus.print{x=10, y=80, text = "Super Mario All-Stars++ Temporary Boot Option List", priority=9, color=Color.white}
+			textplus.print{x=10, y=102, text = "1) Reset all costumes (Including X2 character costumes)", priority=9, color=Color.white}
+			textplus.print{x=10, y=114, text = "2) Reset the main menu theme", priority=9, color=Color.white}
+			textplus.print{x=10, y=126, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
+			textplus.print{x=10, y=138, text = "4) Continue booting", priority=9, color=Color.white}
+			textplus.print{x=10, y=150, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=9, color=Color.white}
+		end
 	end
 end
 
@@ -253,99 +269,9 @@ end
 
 
 
---The rest will disable most cheats to avoid breaking the pre-boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
+--The rest of the code will disable cheats to avoid breaking the pre-boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
-Cheats.deregister("iwannabootbackhome") --We're going home, you dolt
-Cheats.deregister("letmeseetheintroagain") --You can see the intro again by starting SMAS++.
-Cheats.deregister("bootgamehelp") --We can't boot Game Help yet.
-Cheats.deregister("ilikespencereverly") --Like ya too, but wait until you're on an actual level ;)
-Cheats.deregister("sherbertsmiddlenameistoto") --Bad luck is deactivated here. You're welcome, scaredy cats
-
-Cheats.deregister("getmeouttahere")
-Cheats.deregister("hadron")
-Cheats.deregister("groundhog")
-Cheats.deregister("newleaf")
-Cheats.deregister("donthurtme")
-Cheats.deregister("wingman")
-Cheats.deregister("sonicstooslow")
-Cheats.deregister("gottagofast")
-Cheats.deregister("ahippinandahoppin")
-Cheats.deregister("jumpman")
-Cheats.deregister("flamethrower")
-Cheats.deregister("moneytree")
-Cheats.deregister("captainn")
-Cheats.deregister("passerby")
-Cheats.deregister("fromthedepths")
-Cheats.deregister("rinkamania")
-Cheats.deregister("rinkamadness")
-Cheats.deregister("iceage")
-Cheats.deregister("wariotime")
-Cheats.deregister("murder")
-Cheats.deregister("redrum")
-Cheats.deregister("wetwater")
-Cheats.deregister("itsrainingmen")
-Cheats.deregister("itsrainingmegan")
-Cheats.deregister("andmyaxe")
-Cheats.deregister("donttypethis")
-Cheats.deregister("boomtheroom")
-Cheats.deregister("liveforever")
-Cheats.deregister("rosebud")
-Cheats.deregister("fairymagic")
-Cheats.deregister("launchme")
-Cheats.deregister("getdown")
-Cheats.deregister("geddan")
-Cheats.deregister("horikawaisradicola")
-Cheats.deregister("worldpeace")
-Cheats.deregister("supermario2")
-Cheats.deregister("supermario4")
-Cheats.deregister("supermario8")
-Cheats.deregister("supermario16")
-Cheats.deregister("supermario32")
-Cheats.deregister("supermario64")
-Cheats.deregister("supermario128")
-Cheats.deregister("stophittingme")
-Cheats.deregister("suicide")
-Cheats.deregister("dressmeup")
-Cheats.deregister("undress")
-Cheats.deregister("laundryday")
-Cheats.deregister("wherearemycarkeys")
-Cheats.deregister("boingyboing")
-Cheats.deregister("bombsaway")
-Cheats.deregister("firemissiles")
-Cheats.deregister("powhammer")
-Cheats.deregister("hammerinmypants")
-Cheats.deregister("rainbowrider")
-Cheats.deregister("upandout")
-Cheats.deregister("burnthehousedown")
-Cheats.deregister("greenegg")
-Cheats.deregister("redegg")
-Cheats.deregister("blueegg")
-Cheats.deregister("yellowegg")
-Cheats.deregister("purpleegg")
-Cheats.deregister("pinkegg")
-Cheats.deregister("coldegg")
-Cheats.deregister("blackegg")
-Cheats.deregister("needashell")
-Cheats.deregister("needaredshell")
-Cheats.deregister("needablueshell")
-Cheats.deregister("needayellowshell")
-Cheats.deregister("needaturnip")
-Cheats.deregister("needa1up")
-Cheats.deregister("needamoon")
-Cheats.deregister("needatanookisuit")
-Cheats.deregister("needahammersuit")
-Cheats.deregister("needamushroom")
-Cheats.deregister("needaflower")
-Cheats.deregister("needaniceflower")
-Cheats.deregister("needanegg")
-Cheats.deregister("needaplant")
-Cheats.deregister("needagun")
-Cheats.deregister("needaswitch")
-Cheats.deregister("needaclock")
-Cheats.deregister("needabomb")
-Cheats.deregister("needashoe")
-Cheats.deregister("needaredshoe")
-Cheats.deregister("needablueshoe")
+Cheats.enabled = false
 
 function onExit()
 	Audio.MusicVolume(nil)

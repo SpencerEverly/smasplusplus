@@ -183,6 +183,15 @@ local function quitgamemap()
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
+local function changeresolution()
+	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
+	if SaveData.resolution == "widescreen" then
+		SaveData.resolution = "fullscreen"
+	elseif SaveData.resolution == "fullscreen" then
+		SaveData.resolution = "widescreen"
+	end
+end
+
 local function quitonlymap()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
@@ -848,12 +857,12 @@ local function drawPauseMenu(y, alpha)
 	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
-	h = h+16+8--font.charHeight;
+	h = h+16+4--font.charHeight;
 	y = y+h;
 	
 	
@@ -905,6 +914,9 @@ local function drawPauseMenu(y, alpha)
 		if isOverworld then
 			table.insert(pause_options, {name="Character Options", action = switchtochar});
 		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Change Resolution", action = changeresolution});
+		end
 		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegame});
 		end
@@ -937,14 +949,30 @@ local function drawPauseMenu(y, alpha)
 			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
-		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
+		local layout = textplus.layout(textplus.parse(n, {xscale=1, yscale=1, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 8}
+		
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
-		h2 = h2+2+6--font.charHeight;
+		h2 = h2+2+4--font.charHeight;
 		y = y+h2;
 		h = h+h2;
 	end
+	
+	if SaveData.resolution == "fullscreen" then
+		resolutionshow = "<color red>Resolution: Fullscreen (4:3)</color>"
+	end
+	if SaveData.resolution == "widescreen" then
+		resolutionshow = "<color red>Resolution: Widescreen (16:9)</color>"
+	end
+	--local font = textblox.FONT_SPRITEDEFAULT3X2;
+	
+	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	textplus.render{layout = layout, x = 200 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
+	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
+
+	h = h+4+6--font.charHeight;
+	y = y+h;
 
 	
 	return h;
@@ -954,12 +982,12 @@ local function drawCharacterMenu(y, alpha)
 	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
-	h = h+16+8--font.charHeight;
+	h = h+16+4--font.charHeight;
 	y = y+h;
 	
 	
@@ -1006,11 +1034,11 @@ local function drawCharacterMenu(y, alpha)
 			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
-		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
+		local layout = textplus.layout(textplus.parse(n, {xscale=1, yscale=1, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
-		h2 = h2+2+6--font.charHeight;
+		h2 = h2+2+4--font.charHeight;
 		y = y+h2;
 		h = h+h2;
 	end
@@ -1177,10 +1205,10 @@ local function drawCharacterMenu(y, alpha)
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(costumename, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
-	textplus.render{layout = layout, x = 230 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
+	textplus.render{layout = layout, x = 200 - w*0.5, y = y+4, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
-	h = h+16+8--font.charHeight;
+	h = h+4+8--font.charHeight;
 	y = y+h;
 
 	
@@ -1191,12 +1219,12 @@ local function drawHUBTeleportMenu(y, alpha)
 	local name = "<color yellow>PAUSED</color>"
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
-	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
+	local layout = textplus.layout(textplus.parse(name, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
-	h = h+16+8--font.charHeight;
+	h = h+16+4--font.charHeight;
 	y = y+h;
 	
 	
@@ -1245,11 +1273,11 @@ local function drawHUBTeleportMenu(y, alpha)
 			n = "<color rainbow><wave 1>"..n.."</wave></color>";
 		end
 			
-		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
+		local layout = textplus.layout(textplus.parse(n, {xscale=1, yscale=1, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
-		h2 = h2+2+6--font.charHeight;
+		h2 = h2+2+4--font.charHeight;
 		y = y+h2;
 		h = h+h2;
 	end

@@ -28,9 +28,9 @@ local selector = Graphics.loadImage(Misc.resolveFile("inventorystuff/selector.pn
 
 local selection = false
 local selectx = 30
-local selecty = 508
+local selecty = 438
 local numx = 40
-local numy = 570
+local numy = 500
 
 inventory.activated = true --This will activate the inventory only when it's true
 inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
@@ -105,49 +105,93 @@ function inventory.onInitAPI()
 end
 
 function inventory.onDraw()
-	player.reservePowerup = 0 -- disables the item box
 	if inventory.hidden == false then
+		player.reservePowerup = 0 -- disables the item box
 		if inventory.activateinventory == true then
 			if inventory.inventoryopened == true then
-				numx = 54
-				numy = 574
+				if SaveData.resolution == "fullscreen" then
+					numx = 54
+					numy = 574
 
-			
+				
 
-				if SaveData.inventory.shroom >= 10 then
-					Text.print(SaveData.inventory.shroom, numx-8, numy)
-				else
-					Text.print(SaveData.inventory.shroom, numx, numy)
+					if SaveData.inventory.shroom >= 10 then
+						Text.print(SaveData.inventory.shroom, numx-8, numy)
+					else
+						Text.print(SaveData.inventory.shroom, numx, numy)
+					end
+
+					if SaveData.inventory.fire >= 10 then
+						Text.print(SaveData.inventory.fire, numx+64-8, numy)
+					else
+						Text.print(SaveData.inventory.fire, numx+64, numy)
+					end
+
+					if SaveData.inventory.ice >= 10 then
+						Text.print(SaveData.inventory.ice, numx+128-8, numy)
+					else
+						Text.print(SaveData.inventory.ice, numx+128, numy)
+					end
+
+					if SaveData.inventory.leaf >= 10 then
+						Text.print(SaveData.inventory.leaf, numx+192-8, numy)
+					else
+						Text.print(SaveData.inventory.leaf, numx+192, numy)
+					end
+
+					if SaveData.inventory.tanooki >= 10 then
+						Text.print(SaveData.inventory.tanooki, numx+256-8, numy)
+					else
+						Text.print(SaveData.inventory.tanooki, numx+256, numy)
+					end
+
+					if SaveData.inventory.hammer >= 10 then
+						Text.print(SaveData.inventory.hammer, numx+320-8, numy)
+					else
+						Text.print(SaveData.inventory.hammer, numx+320, numy)
+					end
 				end
+				if SaveData.resolution == "widescreen" then
+					numx = 54
+					numy = 504
 
-				if SaveData.inventory.fire >= 10 then
-					Text.print(SaveData.inventory.fire, numx+64-8, numy)
-				else
-					Text.print(SaveData.inventory.fire, numx+64, numy)
-				end
+				
 
-				if SaveData.inventory.ice >= 10 then
-					Text.print(SaveData.inventory.ice, numx+128-8, numy)
-				else
-					Text.print(SaveData.inventory.ice, numx+128, numy)
-				end
+					if SaveData.inventory.shroom >= 10 then
+						Text.print(SaveData.inventory.shroom, numx-8, numy)
+					else
+						Text.print(SaveData.inventory.shroom, numx, numy)
+					end
 
-				if SaveData.inventory.leaf >= 10 then
-					Text.print(SaveData.inventory.leaf, numx+192-8, numy)
-				else
-					Text.print(SaveData.inventory.leaf, numx+192, numy)
-				end
+					if SaveData.inventory.fire >= 10 then
+						Text.print(SaveData.inventory.fire, numx+64-8, numy)
+					else
+						Text.print(SaveData.inventory.fire, numx+64, numy)
+					end
 
-				if SaveData.inventory.tanooki >= 10 then
-					Text.print(SaveData.inventory.tanooki, numx+256-8, numy)
-				else
-					Text.print(SaveData.inventory.tanooki, numx+256, numy)
-				end
+					if SaveData.inventory.ice >= 10 then
+						Text.print(SaveData.inventory.ice, numx+128-8, numy)
+					else
+						Text.print(SaveData.inventory.ice, numx+128, numy)
+					end
 
-				if SaveData.inventory.hammer >= 10 then
-					Text.print(SaveData.inventory.hammer, numx+320-8, numy)
-				else
-					Text.print(SaveData.inventory.hammer, numx+320, numy)
+					if SaveData.inventory.leaf >= 10 then
+						Text.print(SaveData.inventory.leaf, numx+192-8, numy)
+					else
+						Text.print(SaveData.inventory.leaf, numx+192, numy)
+					end
+
+					if SaveData.inventory.tanooki >= 10 then
+						Text.print(SaveData.inventory.tanooki, numx+256-8, numy)
+					else
+						Text.print(SaveData.inventory.tanooki, numx+256, numy)
+					end
+
+					if SaveData.inventory.hammer >= 10 then
+						Text.print(SaveData.inventory.hammer, numx+320-8, numy)
+					else
+						Text.print(SaveData.inventory.hammer, numx+320, numy)
+					end
 				end
 
 
@@ -275,23 +319,45 @@ function inventory.onDraw()
 
 		if inventory.activateinventory == true then
 			if inventory.inventoryopened == true then
-				if SaveData.inventory.shroom == 0 then
-					Graphics.drawImage(noshroom, 30, 508 )
+				if SaveData.resolution == "fullscreen" then
+					if SaveData.inventory.shroom == 0 then
+						Graphics.drawImage(noshroom, 30, 508 )
+					end
+					if SaveData.inventory.fire == 0 then
+						Graphics.drawImage(nofire, 94, 508 )
+					end
+					if SaveData.inventory.ice == 0 then
+						Graphics.drawImage(noice, 158, 508 )
+					end 
+					if SaveData.inventory.leaf == 0 then
+						Graphics.drawImage(noleaf, 222, 508 )
+					end
+					if SaveData.inventory.tanooki == 0 then
+						Graphics.drawImage(notanooki, 286, 508 )
+					end
+					if SaveData.inventory.hammer == 0 then
+						Graphics.drawImage(nohammer, 350, 508 )
+					end
 				end
-				if SaveData.inventory.fire == 0 then
-					Graphics.drawImage(nofire, 94, 508 )
-				end
-				if SaveData.inventory.ice == 0 then
-					Graphics.drawImage(noice, 158, 508 )
-				end 
-				if SaveData.inventory.leaf == 0 then
-					Graphics.drawImage(noleaf, 222, 508 )
-				end
-				if SaveData.inventory.tanooki == 0 then
-					Graphics.drawImage(notanooki, 286, 508 )
-				end
-				if SaveData.inventory.hammer == 0 then
-					Graphics.drawImage(nohammer, 350, 508 )
+				if SaveData.resolution == "widescreen" then
+					if SaveData.inventory.shroom == 0 then
+						Graphics.drawImage(noshroom, 30, 438 )
+					end
+					if SaveData.inventory.fire == 0 then
+						Graphics.drawImage(nofire, 94, 438 )
+					end
+					if SaveData.inventory.ice == 0 then
+						Graphics.drawImage(noice, 158, 438 )
+					end 
+					if SaveData.inventory.leaf == 0 then
+						Graphics.drawImage(noleaf, 222, 438 )
+					end
+					if SaveData.inventory.tanooki == 0 then
+						Graphics.drawImage(notanooki, 286, 438 )
+					end
+					if SaveData.inventory.hammer == 0 then
+						Graphics.drawImage(nohammer, 350, 438 )
+					end
 				end
 			end
 		end
@@ -404,66 +470,131 @@ function inventory.onTick()
 	end
 	
 	if inventory.hidden == false then
-		Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
-		
-			numx = 40
-			numy = 570
+		if SaveData.resolution == "fullscreen" then
+			Graphics.drawImage(inventorysmol, 32, 538) -- draws the inventory
+			
+				numx = 40
+				numy = 570
 
-		if SaveData.inventory.shroom >= 10 then
-			Text.print(SaveData.inventory.shroom, numx-10, numy)
-		else
-			Text.print(SaveData.inventory.shroom, numx, numy)
-		end
+			if SaveData.inventory.shroom >= 10 then
+				Text.print(SaveData.inventory.shroom, numx-10, numy)
+			else
+				Text.print(SaveData.inventory.shroom, numx, numy)
+			end
 
-		if SaveData.inventory.fire >= 10 then
-			Text.print(SaveData.inventory.fire, numx-10, numy)
-		else
-			Text.print(SaveData.inventory.fire, numx+32, numy)
-		end
+			if SaveData.inventory.fire >= 10 then
+				Text.print(SaveData.inventory.fire, numx-10, numy)
+			else
+				Text.print(SaveData.inventory.fire, numx+32, numy)
+			end
 
-		if SaveData.inventory.ice >= 10 then
-			Text.print(SaveData.inventory.ice, numx+64-10, numy)
-		else
-			Text.print(SaveData.inventory.ice, numx+64, numy)
-		end
+			if SaveData.inventory.ice >= 10 then
+				Text.print(SaveData.inventory.ice, numx+64-10, numy)
+			else
+				Text.print(SaveData.inventory.ice, numx+64, numy)
+			end
 
-		if SaveData.inventory.leaf >= 10 then
-			Text.print(SaveData.inventory.leaf, numx+96-10, numy)
-		else
-			Text.print(SaveData.inventory.leaf, numx+96, numy)
-		end
+			if SaveData.inventory.leaf >= 10 then
+				Text.print(SaveData.inventory.leaf, numx+96-10, numy)
+			else
+				Text.print(SaveData.inventory.leaf, numx+96, numy)
+			end
 
-		if SaveData.inventory.tanooki >= 10 then
-			Text.print(SaveData.inventory.tanooki, numx+128-10, numy)
-		else
-			Text.print(SaveData.inventory.tanooki, numx+128, numy)
-		end
+			if SaveData.inventory.tanooki >= 10 then
+				Text.print(SaveData.inventory.tanooki, numx+128-10, numy)
+			else
+				Text.print(SaveData.inventory.tanooki, numx+128, numy)
+			end
 
-		if SaveData.inventory.hammer >= 10 then
-			Text.print(SaveData.inventory.hammer, numx+160-10, numy)
-		else
-			Text.print(SaveData.inventory.hammer, numx+160, numy)
-		end
+			if SaveData.inventory.hammer >= 10 then
+				Text.print(SaveData.inventory.hammer, numx+160-10, numy)
+			else
+				Text.print(SaveData.inventory.hammer, numx+160, numy)
+			end
 
 
 
-		if SaveData.inventory.shroom == 0 then
-			Graphics.drawImage(noshroomsmol, 32, 538 )
+			if SaveData.inventory.shroom == 0 then
+				Graphics.drawImage(noshroomsmol, 32, 538 )
+			end
+			if SaveData.inventory.fire == 0 then
+				Graphics.drawImage(nofiresmol, 64, 538 )
+			end
+			if SaveData.inventory.ice == 0 then
+				Graphics.drawImage(noicesmol, 96, 538 )
+			end
+			if SaveData.inventory.leaf == 0 then
+				Graphics.drawImage(noleafsmol, 128, 538 )
+			end
+			if SaveData.inventory.tanooki == 0 then
+				Graphics.drawImage(notanookismol, 160, 538 )
+			end
+			if SaveData.inventory.hammer == 0 then
+				Graphics.drawImage(nohammersmol, 192, 538 )
+			end
 		end
-		if SaveData.inventory.fire == 0 then
-			Graphics.drawImage(nofiresmol, 64, 538 )
-		end
-		if SaveData.inventory.ice == 0 then
-			Graphics.drawImage(noicesmol, 96, 538 )
-		end
-		if SaveData.inventory.leaf == 0 then
-			Graphics.drawImage(noleafsmol, 128, 538 )
-		end
-		if SaveData.inventory.tanooki == 0 then
-			Graphics.drawImage(notanookismol, 160, 538 )
-		end
-		if SaveData.inventory.hammer == 0 then
-			Graphics.drawImage(nohammersmol, 192, 538 )
+		if SaveData.resolution == "widescreen" then
+			Graphics.drawImage(inventorysmol, 32, 468) -- draws the inventory
+			
+				numx = 40
+				numy = 500
+
+			if SaveData.inventory.shroom >= 10 then
+				Text.print(SaveData.inventory.shroom, numx-10, numy)
+			else
+				Text.print(SaveData.inventory.shroom, numx, numy)
+			end
+
+			if SaveData.inventory.fire >= 10 then
+				Text.print(SaveData.inventory.fire, numx-10, numy)
+			else
+				Text.print(SaveData.inventory.fire, numx+32, numy)
+			end
+
+			if SaveData.inventory.ice >= 10 then
+				Text.print(SaveData.inventory.ice, numx+64-10, numy)
+			else
+				Text.print(SaveData.inventory.ice, numx+64, numy)
+			end
+
+			if SaveData.inventory.leaf >= 10 then
+				Text.print(SaveData.inventory.leaf, numx+96-10, numy)
+			else
+				Text.print(SaveData.inventory.leaf, numx+96, numy)
+			end
+
+			if SaveData.inventory.tanooki >= 10 then
+				Text.print(SaveData.inventory.tanooki, numx+128-10, numy)
+			else
+				Text.print(SaveData.inventory.tanooki, numx+128, numy)
+			end
+
+			if SaveData.inventory.hammer >= 10 then
+				Text.print(SaveData.inventory.hammer, numx+160-10, numy)
+			else
+				Text.print(SaveData.inventory.hammer, numx+160, numy)
+			end
+
+
+
+			if SaveData.inventory.shroom == 0 then
+				Graphics.drawImage(noshroomsmol, 32, 468 )
+			end
+			if SaveData.inventory.fire == 0 then
+				Graphics.drawImage(nofiresmol, 64, 468 )
+			end
+			if SaveData.inventory.ice == 0 then
+				Graphics.drawImage(noicesmol, 96, 468 )
+			end
+			if SaveData.inventory.leaf == 0 then
+				Graphics.drawImage(noleafsmol, 128, 468 )
+			end
+			if SaveData.inventory.tanooki == 0 then
+				Graphics.drawImage(notanookismol, 160, 468 )
+			end
+			if SaveData.inventory.hammer == 0 then
+				Graphics.drawImage(nohammersmol, 192, 468 )
+			end
 		end
 	end
 end
@@ -509,8 +640,14 @@ function inventory.onInputUpdate()
 	end
 	if inventory.activateinventory == true then
 		if inventory.inventoryopened == true then
-			Graphics.drawImage(inventory, 30, 508)
-			Graphics.drawImage(selector, selectx, selecty)
+			if SaveData.resolution == "fullscreen" then
+				Graphics.drawImage(inventory, 30, 508)
+				Graphics.drawImage(selector, selectx, selecty)
+			end
+			if SaveData.resolution == "widescreen" then
+				Graphics.drawImage(inventory, 30, 438)
+				Graphics.drawImage(selector, selectx, selecty)
+			end
 		end
 	end
 	if inventory.inventoryopened == true then -- move cursor right
