@@ -23,6 +23,8 @@ local modernReserveItems = require("modernReserveItems")
 
 inventory.inventoryopened = false
 
+local cooldown = 0
+
 local inventory = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.png"))
 local inventorysmol = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventorysmol.png"))
 local selector = Graphics.loadImage(Misc.resolveFile("inventorystuff/selector.png"))
@@ -325,9 +327,14 @@ function inventory.onDraw()
 						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
 						modernReserveItems.dropped = true
 						inventory.inventoryopened = false
+						cooldown = 5
 						Misc.unpause()
+						player:mem(0x11E,FIELD_BOOL,false)
 						Routine.run(makereservefalse)
 						--SaveData.inventory.reserve = 0
+						if cooldown <= 0 then
+							player:mem(0x11E,FIELD_BOOL,truee)
+						end
 					end
 					if SaveData.inventory.reserve <= 0 then
 						modernReserveItems.dropped = false
