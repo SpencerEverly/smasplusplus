@@ -108,8 +108,6 @@ if SaveData.resolution == "fullscreen" then
 		
 	})
 	littleDialogue.registerStyle("infobooth",{
-		textXScale = 1,
-		textYScale = 1,
 		borderSize = 32,
 
 		openSpeed = 0.025,
@@ -139,7 +137,7 @@ if SaveData.resolution == "widescreen" then
 		
 		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
 		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+		forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
 		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
 		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
@@ -173,7 +171,7 @@ if SaveData.resolution == "widescreen" then
 		
 		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
 		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+		forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
 		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
 		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
@@ -189,6 +187,8 @@ if SaveData.resolution == "widescreen" then
 		
 	})
 	littleDialogue.registerStyle("infobooth",{
+		textXScale = 1.4,
+		textYScale = 1.4,
 		borderSize = 32,
 
 		openSpeed = 0.025,
@@ -199,7 +199,6 @@ if SaveData.resolution == "widescreen" then
 		speakerNameOnTop = true,
 		speakerNameOffsetY = 24,
 	})
-	
 	littleDialogue.registerStyle("smwwide",{
 		textXScale = 1.4,
 		textYScale = 1.4,
@@ -347,7 +346,9 @@ function globalgenerals.onTick()
 		hudoverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
 		hudoverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
 		hudoverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
-		littleDialogue.defaultStyleName = "smw"
+		if SaveData.disableX2char == false then
+			littleDialogue.defaultStyleName = "smw"
+		end
 	end
 	if SaveData.resolution == "widescreen" then
 		customCamera.defaultScreenHeight = 450
@@ -366,7 +367,9 @@ function globalgenerals.onTick()
 		hudoverride.offsets.stars = 	{x = -150, 	y = 116, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
 		hudoverride.offsets.starcoins = {x = -384, y = 97, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
 		hudoverride.offsets.timer = {x = 264, y = 95, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
-		littleDialogue.defaultStyleName = "smwwide"
+		if SaveData.disableX2char == false then
+			littleDialogue.defaultStyleName = "smwwide"
+		end
 	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
