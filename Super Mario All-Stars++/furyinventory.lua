@@ -328,6 +328,7 @@ function inventory.onDraw()
 						end
 					elseif state == 7 then
 						if SaveData.inventory.reserve >= 1 then
+							p = player
 							Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
 							modernReserveItems.drop(p.reservePowerup, p)
 							inventory.inventoryopened = false
