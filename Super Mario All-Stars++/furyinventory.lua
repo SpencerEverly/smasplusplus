@@ -52,6 +52,7 @@ local powerup = {
                  6,
 				 7}
 local state = 1
+local state2 = 1
 
 -- how much of each powerup is being stored
 SaveData.inventory = SaveData.inventory or {
@@ -239,10 +240,6 @@ function inventory.onDraw()
 		if SaveData.inventory.hammer >= maxhammer then
 			SaveData.inventory.hammer = maxhammer
 		end
-		
-		if SaveData.inventory.reserve == 0 then
-			SaveData.inventory.reserve = 1
-		end
 
 		-- same, but for minimum
 		if SaveData.inventory.shroom <= minshroom then
@@ -339,9 +336,9 @@ function inventory.onDraw()
 							player:mem(0x11E,FIELD_BOOL,false)
 							Routine.run(makereservefalse)
 							if cooldown <= 0 then
-								player:mem(0x11E,FIELD_BOOL,truee)
+								player:mem(0x11E,FIELD_BOOL,true)
 							end
-						elseif SaveData.inventory.reserve <= 0 and player.reservePowerup == 0 then
+						elseif SaveData.inventory.reserve <= 0 and player.reservePowerup == 0 and not player.reservePowerup >= 1 then
 							modernReserveItems.dropped = false
 							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 						end
