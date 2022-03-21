@@ -19,6 +19,7 @@ local warpTransition = require("warpTransition")
 local pausemenu = require("pausemenu")
 local littleDialogue = require("littleDialogue")
 local yoshi = require("yiYoshi/yiYoshi")
+local modernReserveItems = require("modernReserveItems")
 
 inventory.inventoryopened = false
 
@@ -46,7 +47,8 @@ local powerup = {
                  7, 
                  4, 
                  5, 
-                 6}
+                 6,
+				 7}
 local state = 1
 
 -- how much of each powerup is being stored
@@ -56,7 +58,8 @@ SaveData.inventory = SaveData.inventory or {
     ice = 0,
     leaf = 0,
     tanooki = 0,
-    hammer = 0
+    hammer = 0,
+	reserve = 0
 }
 
 --these are the graphics that show when you dont have any of one powerup
@@ -104,9 +107,15 @@ function inventory.onInitAPI()
     registerEvent(inventory , "onInputUpdate")
 end
 
+function makereservefalse()
+	Routine.wait(0.1)
+	modernReserveItems.dropped = false
+end
+
 function inventory.onDraw()
+	Text.print(state, 100, 100)
 	if inventory.hidden == false then
-		player.reservePowerup = 0 -- disables the item box
+		--player.reservePowerup = 0 -- disables the item box
 		if inventory.activateinventory == true then
 			if inventory.inventoryopened == true then
 				if SaveData.resolution == "fullscreen" then
@@ -312,6 +321,17 @@ function inventory.onDraw()
 						elseif SaveData.inventory.hammer <= 0 then
 							Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 						end
+					elseif state == 7 then
+						Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
+						modernReserveItems.dropped = true
+						inventory.inventoryopened = false
+						Misc.unpause()
+						Routine.run(makereservefalse)
+						--SaveData.inventory.reserve = 0
+					end
+					if SaveData.inventory.reserve <= 0 then
+						modernReserveItems.dropped = false
+						Audio.playSFX(Misc.resolveFile("inventorystuff/error.wav"))
 					end
 				end
 			end
@@ -369,47 +389,37 @@ end
 
 
 function inventory.onPostNPCKill(v,reason)
-
-
     if v.id == 14 or v.id == 183 or v.id == 182 then -- collecting fire flower
         if  player.isMega == true then
             SaveData.inventory.fire = SaveData.inventory.fire + 1
         end
-
     elseif v.id == 9 or v.id == 184 or v.id == 185 or v.id == 249 then -- collecting mushroom
         if player.powerup >= 2 or player.isMega == true then
             SaveData.inventory.shroom = SaveData.inventory.shroom + 1
         end
-
     elseif v.id == 264 or v.id == 277 then -- collecting ice flower
         if player.isMega == true then
             SaveData.inventory.ice = SaveData.inventory.ice + 1
         end
-
     elseif v.id == 34 then -- collecting super leaf
         if player.isMega == true then
             SaveData.inventory.leaf = SaveData.inventory.leaf + 1
         end
-
     elseif v.id == 169 then -- collecting tanooki suit
         if player.isMega == true then
             SaveData.inventory.tanooki = SaveData.inventory.tanooki + 1
         end
-
     elseif v.id == 170 then -- collecting hammer suit
         if player.isMega == true then
             SaveData.inventory.hammer = SaveData.inventory.hammer + 1
         end
-
     end
 
 
     if player.powerup == PLAYER_BIG then
-        if player.isMega then
-
-        elseif pUpsTable[v.id] then
-            SaveData.inventory.shroom = SaveData.inventory.shroom + 1
-        end
+		if pUpsTable[v.id] then
+			SaveData.inventory.shroom = SaveData.inventory.shroom + 1
+		end
     elseif player.powerup == PLAYER_FIREFLOWER then
         if pUpsTable[v.id] then
             SaveData.inventory.fire = SaveData.inventory.fire + 1
@@ -430,18 +440,10 @@ function inventory.onPostNPCKill(v,reason)
         if pUpsTable[v.id] then
             SaveData.inventory.ice = SaveData.inventory.ice + 1
         end
+	elseif player.reservePowerup then
+		SaveData.inventory.reserve =  SaveData.inventory.reserve or player.reservePowerup
     end
 end
-
-local STATE = {
-    IN     = 0,
-    STAY   = 1,
-    SCROLL = 2,
-    OUT    = 3,
-    SCROLL_ANSWERS = 4,
-
-    REMOVE = -1,
-}
 
 -- Run code every frame (~1/65 second)
 -- (code will be executed before game logic will be processed)
@@ -458,6 +460,7 @@ function inventory.onTick()
 		numx = 40
 		numy = 500
 	end
+	SaveData.inventory.reserve = player.reservePowerup
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
 	if warpTransition.transitionTimer >= 0.1 then
 		inventory.activated = false
@@ -679,22 +682,22 @@ function inventory.onInputUpdate()
 
 	if inventory.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
 		if selectx < 30 then
-			selectx = 30 + 320
+			selectx = 30 + 414
 		end 
 	end
 	if inventory.inventoryopened == true then
-		if selectx > 30 + 320 then
+		if selectx > 30 + 414 then
 			selectx = 30
 		end 
 	end
 	if inventory.inventoryopened == true then
-		if state > 6 then
+		if state > 7 then
 			state = 1
 		end
 	end
 	if inventory.inventoryopened == true then
 		if state < 1 then
-			state = 6
+			state = 7
 		end
 	end
 end
