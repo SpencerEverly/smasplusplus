@@ -59,6 +59,40 @@ local month = os.date("%m")
 
 local exacttime = os.date("%X")
 if SaveData.resolution == "fullscreen" then
+	littleDialogue.registerStyle("smbx13og",{
+		textXScale = 1,
+		textYScale = 1,
+		borderSize = 36,
+		textMaxWidth = 500,
+		speakerNameGap = 6,
+		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+		speakerNameYScale = 1.2,
+		
+		openSpeed = 5,
+		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+		borderSize = 8,
+		
+		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
+
+		windowingOpeningEffectEnabled = false,
+
+		typewriterEnabled = true,
+		typewriterDelayNormal = 0.5, -- The usual delay between each character.
+		typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
+		typewriterSoundDelay = 4.1,
+		showTextWhileOpening = true,
+
+		closeSoundEnabled = false,
+		continueArrowEnabled = false,
+		scrollArrowEnabled   = false,
+		selectorImageEnabled = true,
+		
+	})
 	littleDialogue.registerStyle("smbx13",{
 		textXScale = 1,
 		textYScale = 1,
@@ -90,9 +124,54 @@ if SaveData.resolution == "fullscreen" then
 		selectorImageEnabled = true,
 		
 	})
+	littleDialogue.registerStyle("infobooth",{
+		borderSize = 32,
+
+		openSpeed = 0.025,
+
+		windowingOpeningEffectEnabled = true,
+		showTextWhileOpening = true,
+
+		speakerNameOnTop = true,
+		speakerNameOffsetY = 24,
+	})
 end
 
 if SaveData.resolution == "widescreen" then
+	littleDialogue.registerStyle("smbx13og",{
+		textXScale = 0.8,
+		textYScale = 0.8,
+		borderSize = 36,
+		textMaxWidth = 500,
+		speakerNameGap = 6,
+		speakerNameXScale = 1.0,        -- X scale of the speaker's name.
+		speakerNameYScale = 1.0,
+		
+		openSpeed = 5,
+		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+		borderSize = 8,
+		
+		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+		forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
+
+		windowingOpeningEffectEnabled = false,
+
+		typewriterEnabled = true,
+		typewriterDelayNormal = 0.5, -- The usual delay between each character.
+		typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
+		typewriterSoundDelay = 4.1,
+		showTextWhileOpening = true,
+
+		closeSoundEnabled = false,
+		continueArrowEnabled = false,
+		scrollArrowEnabled   = false,
+		selectorImageEnabled = true,
+		
+	})
 	littleDialogue.registerStyle("smbx13",{
 		textXScale = 0.8,
 		textYScale = 0.8,
@@ -109,7 +188,7 @@ if SaveData.resolution == "widescreen" then
 		
 		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
 		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+		forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
 		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
 		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
@@ -123,6 +202,23 @@ if SaveData.resolution == "widescreen" then
 		scrollArrowEnabled   = false,
 		selectorImageEnabled = true,
 		
+	})
+	littleDialogue.registerStyle("infobooth",{
+		textXScale = 1.4,
+		textYScale = 1.4,
+		borderSize = 32,
+
+		openSpeed = 0.025,
+
+		windowingOpeningEffectEnabled = true,
+		showTextWhileOpening = true,
+
+		speakerNameOnTop = true,
+		speakerNameOffsetY = 24,
+	})
+	littleDialogue.registerStyle("smwwide",{
+		textXScale = 1.4,
+		textYScale = 1.4,
 	})
 end
 
