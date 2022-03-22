@@ -339,6 +339,9 @@ function globalgenerals.onTick()
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
+		if SaveData.disableX2char == false then
+			littleDialogue.defaultStyleName = "smw"
+		end
 		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
 		smallScreen.scaleY = 1

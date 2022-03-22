@@ -440,15 +440,18 @@ function snake.onDraw()
 				climbTimer = climbtime;
 			end
 			--Draw alertness element
-			Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, 5);
+			if SaveData.resolution == "fullscreen" then
+				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, 5);
+			elseif SaveData.resolution == "widescreen" then
+				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 82, 5);
+			end
 			local camo = tostring(math.ceil(100*(snake.alertCooldown-snake.alertTimer)/(snake.alertCooldown)));
 			--textblox.printExt("%",{x=774,y=38,font=textblox.FONT_SPRITEDEFAULT3, z=5});
-			FONT.text = "%"
-			FONT.x=774
-			FONT.y=38
-			FONT.maxWidth=nil
-			textplus.print(FONT)
-			Text.printWP(camo,1,400-#camo*18 - 8,46,5)
+			if SaveData.resolution == "fullscreen" then
+				Text.printWP(camo,1,400-#camo*18 - 8,46,5)
+			elseif SaveData.resolution == "widescreen" then
+				Text.printWP(camo,1,400-#camo*18 - 8,116,5)
+			end
 			
 			--Draw powerup elements
 			if(player:mem(0x16, FIELD_WORD) > 1 and player.forcedState ~= 1 and player.forcedState ~= 4) then
@@ -472,14 +475,24 @@ function snake.onDraw()
 					power.label = "MK22";
 					power.graphic = snake.HUD_POWER_MK22;
 				end
-				
-				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 10, 5);
-				--textblox.printExt(power.label,{x=16,y=52,width=80,font=textblox.FONT_SPRITEDEFAULT3, z=5});
-				FONT.text = power.label
-				FONT.x=405
-				FONT.y=45
-				FONT.maxWidth=80
-				textplus.print(FONT)
+				if SaveData.resolution == "fullscreen" then
+					Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 10, 5);
+				elseif SaveData.resolution == "widescreen" then
+					Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 90, 5);
+				end
+				if SaveData.resolution == "fullscreen" then
+					FONT.text = power.label
+					FONT.x=405
+					FONT.y=55
+					FONT.maxWidth=80
+					textplus.print(FONT)
+				elseif SaveData.resolution == "widescreen" then
+					FONT.text = power.label
+					FONT.x=405
+					FONT.y=125
+					FONT.maxWidth=80
+					textplus.print(FONT)
+				end
 			end
 			
 			--Draw mk22
