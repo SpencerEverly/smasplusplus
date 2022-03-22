@@ -199,7 +199,7 @@ if SaveData.resolution == "widescreen" then
 		speakerNameOnTop = true,
 		speakerNameOffsetY = 24,
 	})
-	littleDialogue.registerStyle("smw",{
+	littleDialogue.registerStyle("smwwide",{
 		textXScale = 1.4,
 		textYScale = 1.4,
 	})
@@ -342,6 +342,9 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
 		smallScreen.scaleY = 1
+		littleDialogue.defaultBoxSettings.forcedPosEnabled = false       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+		littleDialogue.defaultBoxSettings.forcedPosX = 400               -- The X position the box will appear at on screen, if forced positioning is enabled.
+		littleDialogue.defaultBoxSettings.forcedPosY = 220                -- The Y position the box will appear at on screen, if forced positioning is enabled.
 		
 		hudoverride.offsets.keys = 		{x = 64, 	y = 26, align = hudoverride.ALIGN_LEFT};
 		hudoverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
@@ -356,10 +359,16 @@ function globalgenerals.onTick()
 		hudoverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
 	end
 	if SaveData.resolution == "widescreen" then
+		if SaveData.disableX2char == false then
+			littleDialogue.defaultStyleName = "smwwide"
+		end
 		customCamera.defaultScreenHeight = 450
 		customCamera.defaultZoom = 0.75
+		littleDialogue.defaultBoxSettings.forcedPosEnabled = true       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+		littleDialogue.defaultBoxSettings.forcedPosX = 400               -- The X position the box will appear at on screen, if forced positioning is enabled.
+		littleDialogue.defaultBoxSettings.forcedPosY = 220                -- The Y position the box will appear at on screen, if forced positioning is enabled.
 		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1.35
+			smallScreen.scaleY = 1.33
 		elseif SaveData.letterbox == true then
 			smallScreen.scaleY = 1
 		end

@@ -3572,8 +3572,12 @@ do
 
         local baseX = (camObj.width*0.5)
         local baseY = (12 + math.max(backImage.height,numberHeight)*0.5)
-
-        Graphics.drawImageWP(backImage,baseX - backImage.width*0.5,baseY - backImage.height*0.5,priority)
+		
+		if SaveData.resolution == "fullscreen" then
+			Graphics.drawImageWP(backImage,baseX - backImage.width*0.5,baseY - backImage.height*0.5,priority)
+		elseif SaveData.resolution == "widescreen" then
+			Graphics.drawImageWP(backImage,baseX - backImage.width*0.5,baseY - backImage.height*(-0.53),priority)
+		end
 
 
         local numbersString = tostring(data.starCounter)
@@ -3587,8 +3591,11 @@ do
                 sourceY = sourceY + numbersImage.height*0.5
                 width = width*0.5
             end
-
-            Graphics.drawImageWP(numbersImage,baseX - numbersLength*width*0.5 + (i-1)*width,baseY - numberHeight*0.5,0,sourceY,numbersImage.width,numberHeight,priority)
+			if SaveData.resolution == "fullscreen" then
+				Graphics.drawImageWP(numbersImage,baseX - numbersLength*width*0.5 + (i-1)*width,baseY - numberHeight*0.5,0,sourceY,numbersImage.width,numberHeight,priority)
+			elseif SaveData.resolution == "widescreen" then
+				Graphics.drawImageWP(numbersImage,baseX - numbersLength*width*0.5 + (i-1)*width,baseY - numberHeight*(-1.57),0,sourceY,numbersImage.width,numberHeight,priority)
+			end
         end
     end
 

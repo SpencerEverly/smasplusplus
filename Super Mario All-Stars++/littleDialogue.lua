@@ -2245,6 +2245,10 @@ littleDialogue.registerStyle("drSmall",{
 
     continueArrowEnabled = false,
 })
+littleDialogue.registerStyle("smwwide",{
+	textXScale = 1.4,
+	textYScale = 1.4,
+})
 
 
 

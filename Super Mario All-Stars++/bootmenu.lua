@@ -216,7 +216,7 @@ if SaveData.resolution == "widescreen" then
 		speakerNameOnTop = true,
 		speakerNameOffsetY = 24,
 	})
-	littleDialogue.registerStyle("smw",{
+	littleDialogue.registerStyle("smwwide",{
 		textXScale = 1.4,
 		textYScale = 1.4,
 	})
@@ -960,691 +960,708 @@ function bootmenu.onInitAPI()
 end
 
 function bootmenu.onStart()
-	Audio.MusicVolume(nil)
-	if SaveData.firstBootCompleted == nil then
-        SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
-    end
-	if SaveData.firstBootCompleted == 0 then
-		Routine.run(FirstBoot1)
-		GameData.startedmenu = 1
-	end
-	if SaveData.firstBootCompleted == 1 then
-		Routine.run(easterEgg, true)
-	end
-	if month == "12" and day == "25" then
-		Section(0).getWeatherEffect(2)
-	end
-	if SaveData.disableX2char == false then
-		x2noticecheck = active
-		x2noticecheckactive = not active
-	end
-	if SaveData.disableX2char == true then
-		x2noticecheck = not active
-		x2noticecheckactive = active
-	end
-	Misc.saveGame()
-	Defines.cheat_donthurtme = true
-	Defines.cheat_shadowmario = true
-	if os.date("*t").month == 04 and os.date("*t").day == 01 then
-		GameData.startedmenu = 1
-	end
-	if os.date("*t").month == 03 and os.date("*t").day == 17 then
-		stpatricksday = true
-	end
-	if Level.filename() == "intro_SMAS.lvlx" then
-		if SaveData.firstBootCompleted == 0 then
-			--Nothing
-		elseif SaveData.firstBootCompleted == 1 then
-			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
+	if bootmenu.active == true then
+		Audio.MusicVolume(nil)
+		if SaveData.firstBootCompleted == nil then
+			SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
 		end
-	end
-	if Level.filename() == "intro_SMBX1.2.lvlx" then
-		Routine.run(theme4scrolling)
-	end
-	if Level.filename() == "intro_SMBX1.3.lvlx" then
-		Routine.run(theme5scrolling)
-	end
-	if Level.filename() == "intro_WSMBA.lvlx" then
-		Routine.run(theme6scrolling)
-	end
-	if Level.filename() == "intro_bossedit8.lvlx" then
-		Routine.run(theme8scrolling)
-	end
-	if Level.filename() == "intro_SMBX1.3og.lvlx" then
-		Routine.run(theme9scrolling)
-	end
-	if Level.filename() == "intro_8bit.lvlx" then
-		Routine.run(theme11scrolling)
-	end
-	if Level.filename() == "intro_scrollingheights.lvlx" then
-		Routine.run(theme14scrolling)
-	end
-	if Level.filename() == "intro_jakebrito1.lvlx" then
-		Routine.run(theme15scrolling)
+		if SaveData.firstBootCompleted == 0 then
+			Routine.run(FirstBoot1)
+			GameData.startedmenu = 1
+		end
+		if SaveData.firstBootCompleted == 1 then
+			Routine.run(easterEgg, true)
+		end
+		if month == "12" and day == "25" then
+			Section(0).getWeatherEffect(2)
+		end
+		if SaveData.disableX2char == false then
+			x2noticecheck = active
+			x2noticecheckactive = not active
+		end
+		if SaveData.disableX2char == true then
+			x2noticecheck = not active
+			x2noticecheckactive = active
+		end
+		Misc.saveGame()
+		Defines.cheat_donthurtme = true
+		Defines.cheat_shadowmario = true
+		if os.date("*t").month == 04 and os.date("*t").day == 01 then
+			GameData.startedmenu = 1
+		end
+		if os.date("*t").month == 03 and os.date("*t").day == 17 then
+			stpatricksday = true
+		end
+		if Level.filename() == "intro_SMAS.lvlx" then
+			if SaveData.firstBootCompleted == 0 then
+				--Nothing
+			elseif SaveData.firstBootCompleted == 1 then
+				Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
+			end
+		end
+		if Level.filename() == "intro_SMBX1.2.lvlx" then
+			Routine.run(theme4scrolling)
+		end
+		if Level.filename() == "intro_SMBX1.3.lvlx" then
+			Routine.run(theme5scrolling)
+		end
+		if Level.filename() == "intro_WSMBA.lvlx" then
+			Routine.run(theme6scrolling)
+		end
+		if Level.filename() == "intro_bossedit8.lvlx" then
+			Routine.run(theme8scrolling)
+		end
+		if Level.filename() == "intro_SMBX1.3og.lvlx" then
+			Routine.run(theme9scrolling)
+		end
+		if Level.filename() == "intro_8bit.lvlx" then
+			Routine.run(theme11scrolling)
+		end
+		if Level.filename() == "intro_scrollingheights.lvlx" then
+			Routine.run(theme14scrolling)
+		end
+		if Level.filename() == "intro_jakebrito1.lvlx" then
+			Routine.run(theme15scrolling)
+		end
 	end
 end
 
 function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
-    if stateVar == 1 then
-        eventToken.cancelled = true
-    end
+	if bootmenu.active == true then
+		if stateVar == 1 then
+			eventToken.cancelled = true
+		end
+	end
 end
 
 function bootmenu.onTick()
-	if SaveData.firstBootCompleted == nil then
-        SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
-    end
-	if SaveData.firstBootCompleted == 0 then
-		GameData.startedmenu = 1
-	end
-	if SaveData.firstBootCompleted == 1 then
-		
-	end
-	if GameData.startedmenu == nil then
-		GameData.startedmenu = GameData.startedmenu or 0
-	end
-	player:setFrame(50)
-	player:mem(0x140, FIELD_BOOL, 150)
-	if player:mem(0x140, FIELD_BOOL) == 0 then
+	if bootmenu.active == true then
+		if SaveData.firstBootCompleted == nil then
+			SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
+		end
+		if SaveData.firstBootCompleted == 0 then
+			GameData.startedmenu = 1
+		end
+		if SaveData.firstBootCompleted == 1 then
+			
+		end
+		if GameData.startedmenu == nil then
+			GameData.startedmenu = GameData.startedmenu or 0
+		end
+		player:setFrame(50)
 		player:mem(0x140, FIELD_BOOL, 150)
-	end
-	player.x = camera.x + 1000 - (player.width / 2)
-	player.y = camera.y + 300 - (player.height / 2)
-	if Player.count() == 1 then
-		twoplayercheck = active
-		twoplayercheckactive = not active
-	end
-	if Player.count() == 2 then
-		player2:setFrame(50)
-		player2:mem(0x142, FIELD_BOOL, true)
-		twoplayercheck = not active
-		twoplayercheckactive = active
-		player2.x = camera.x + 432 - (player2.width / 2)
-		player2.y = camera.y + 300 - (player2.height / 2)
-	end
-	if SaveData == nil then
-		Routine.run(SaveDataError1)
-	end
-	if SaveData.disableX2char == nil then
-        SaveData.disableX2char = false
-    end
-	if SaveData.disableX2char == false then
-		x2noticecheck = active
-		x2noticecheckactive = not active
-	end
-	if SaveData.disableX2char == true then
-		x2noticecheck = not active
-		x2noticecheckactive = active
-		Player.setCostume(1, nil)
-		Player.setCostume(2, nil)
-		Player.setCostume(3, nil)
-		Player.setCostume(4, nil)
-		Player.setCostume(5, nil)
-	end
-	if(not killed and player:mem(0x13E,FIELD_BOOL)) then
-		killed = true
-		SaveData.failsafeMessageOne = SaveData.failsafeMessageOne + 1
-	end
-	if SaveData.failsafeMessageOne == nil then
-        SaveData.failsafeMessageOne = SaveData.failsafeMessageOne or 0
-    end
-	if SaveData.failsafeMessageOne == 0 then
-		--Nothing happens
-	end
-	if SaveData.failsafeMessageOne == 1 then
-		Routine.run(FailsafeMessage1)
-	end
-	--player.upKeyPressing = false;
-	--player.downKeyPressing = false;
-	player.runKeyPressing = false;
-	player.altJumpKeyPressing = false;
-	player.altRunKeyPressing = false;
-	player.dropItemKeyPressing = false;
-	--player.leftKeyPressing = false;
-	--player.rightKeyPressing = false;
-	
-	Audio.sounds[1].muted = true
-	Audio.sounds[2].muted = true
-	Audio.sounds[3].muted = true
-	Audio.sounds[4].muted = true
-	Audio.sounds[5].muted = true
-	Audio.sounds[6].muted = true
-	Audio.sounds[7].muted = true
-	Audio.sounds[8].muted = true
-	Audio.sounds[9].muted = true
-	Audio.sounds[10].muted = true
-	Audio.sounds[11].muted = true
-	Audio.sounds[12].muted = true
-	Audio.sounds[13].muted = true
-	Audio.sounds[14].muted = true
-	Audio.sounds[15].muted = true
-	Audio.sounds[16].muted = true
-	Audio.sounds[17].muted = true
-	Audio.sounds[18].muted = true
-	Audio.sounds[19].muted = true
-	Audio.sounds[20].muted = true
-	Audio.sounds[21].muted = true
-	Audio.sounds[22].muted = true
-	Audio.sounds[23].muted = true
-	Audio.sounds[24].muted = true
-	Audio.sounds[25].muted = true
-	Audio.sounds[29].muted = true
-	Audio.sounds[31].muted = true
-	Audio.sounds[32].muted = true
-	Audio.sounds[33].muted = true
-	Audio.sounds[34].muted = true
-	Audio.sounds[35].muted = true
-	Audio.sounds[36].muted = true
-	Audio.sounds[37].muted = true
-	Audio.sounds[42].muted = true
-	Audio.sounds[43].muted = true
-	Audio.sounds[44].muted = true
-	Audio.sounds[46].muted = true
-	Audio.sounds[48].muted = true
-	Audio.sounds[49].muted = true
-	Audio.sounds[50].muted = true
-	Audio.sounds[51].muted = true
-	Audio.sounds[52].muted = true
-	Audio.sounds[54].muted = true
-	Audio.sounds[55].muted = true
-	Audio.sounds[57].muted = true
-	Audio.sounds[58].muted = true
-	Audio.sounds[59].muted = true
-	Audio.sounds[61].muted = true
-	Audio.sounds[62].muted = true
-	Audio.sounds[63].muted = true
-	Audio.sounds[71].muted = true
-	Audio.sounds[72].muted = true
-	Audio.sounds[73].muted = true
-	Audio.sounds[74].muted = true
-	Audio.sounds[75].muted = true
-	Audio.sounds[76].muted = true
-	Audio.sounds[77].muted = true
-	Audio.sounds[78].muted = true
-	Audio.sounds[79].muted = true
-	Audio.sounds[80].muted = true
-	Audio.sounds[81].muted = true
-	Audio.sounds[82].muted = true
-	Audio.sounds[83].muted = true
-	Audio.sounds[84].muted = true
-	Audio.sounds[85].muted = true
-	Audio.sounds[86].muted = true
-	Audio.sounds[87].muted = true
-	Audio.sounds[88].muted = true
-	Audio.sounds[89].muted = true
-	Audio.sounds[90].muted = true
-	Audio.sounds[91].muted = true
-	
-	if runPressedState == true then
-		player.runKeyPressing = false
+		if player:mem(0x140, FIELD_BOOL) == 0 then
+			player:mem(0x140, FIELD_BOOL, 150)
+		end
+		player.x = camera.x + 1000 - (player.width / 2)
+		player.y = camera.y + 300 - (player.height / 2)
+		if Player.count() == 1 then
+			twoplayercheck = active
+			twoplayercheckactive = not active
+		end
+		if Player.count() == 2 then
+			player2:setFrame(50)
+			player2:mem(0x142, FIELD_BOOL, true)
+			twoplayercheck = not active
+			twoplayercheckactive = active
+			player2.x = camera.x + 432 - (player2.width / 2)
+			player2.y = camera.y + 300 - (player2.height / 2)
+		end
+		if SaveData == nil then
+			Routine.run(SaveDataError1)
+		end
+		if SaveData.disableX2char == nil then
+			SaveData.disableX2char = false
+		end
+		if SaveData.disableX2char == false then
+			x2noticecheck = active
+			x2noticecheckactive = not active
+		end
+		if SaveData.disableX2char == true then
+			x2noticecheck = not active
+			x2noticecheckactive = active
+			Player.setCostume(1, nil)
+			Player.setCostume(2, nil)
+			Player.setCostume(3, nil)
+			Player.setCostume(4, nil)
+			Player.setCostume(5, nil)
+		end
+		if(not killed and player:mem(0x13E,FIELD_BOOL)) then
+			killed = true
+			SaveData.failsafeMessageOne = SaveData.failsafeMessageOne + 1
+		end
+		if SaveData.failsafeMessageOne == nil then
+			SaveData.failsafeMessageOne = SaveData.failsafeMessageOne or 0
+		end
+		if SaveData.failsafeMessageOne == 0 then
+			--Nothing happens
+		end
+		if SaveData.failsafeMessageOne == 1 then
+			Routine.run(FailsafeMessage1)
+		end
+		--player.upKeyPressing = false;
+		--player.downKeyPressing = false;
+		player.runKeyPressing = false;
+		player.altJumpKeyPressing = false;
+		player.altRunKeyPressing = false;
+		player.dropItemKeyPressing = false;
+		--player.leftKeyPressing = false;
+		--player.rightKeyPressing = false;
+		
+		Audio.sounds[1].muted = true
+		Audio.sounds[2].muted = true
+		Audio.sounds[3].muted = true
+		Audio.sounds[4].muted = true
+		Audio.sounds[5].muted = true
+		Audio.sounds[6].muted = true
+		Audio.sounds[7].muted = true
+		Audio.sounds[8].muted = true
+		Audio.sounds[9].muted = true
+		Audio.sounds[10].muted = true
+		Audio.sounds[11].muted = true
+		Audio.sounds[12].muted = true
+		Audio.sounds[13].muted = true
+		Audio.sounds[14].muted = true
+		Audio.sounds[15].muted = true
+		Audio.sounds[16].muted = true
+		Audio.sounds[17].muted = true
+		Audio.sounds[18].muted = true
+		Audio.sounds[19].muted = true
+		Audio.sounds[20].muted = true
+		Audio.sounds[21].muted = true
+		Audio.sounds[22].muted = true
+		Audio.sounds[23].muted = true
+		Audio.sounds[24].muted = true
+		Audio.sounds[25].muted = true
+		Audio.sounds[29].muted = true
+		Audio.sounds[31].muted = true
+		Audio.sounds[32].muted = true
+		Audio.sounds[33].muted = true
+		Audio.sounds[34].muted = true
+		Audio.sounds[35].muted = true
+		Audio.sounds[36].muted = true
+		Audio.sounds[37].muted = true
+		Audio.sounds[42].muted = true
+		Audio.sounds[43].muted = true
+		Audio.sounds[44].muted = true
+		Audio.sounds[46].muted = true
+		Audio.sounds[48].muted = true
+		Audio.sounds[49].muted = true
+		Audio.sounds[50].muted = true
+		Audio.sounds[51].muted = true
+		Audio.sounds[52].muted = true
+		Audio.sounds[54].muted = true
+		Audio.sounds[55].muted = true
+		Audio.sounds[57].muted = true
+		Audio.sounds[58].muted = true
+		Audio.sounds[59].muted = true
+		Audio.sounds[61].muted = true
+		Audio.sounds[62].muted = true
+		Audio.sounds[63].muted = true
+		Audio.sounds[71].muted = true
+		Audio.sounds[72].muted = true
+		Audio.sounds[73].muted = true
+		Audio.sounds[74].muted = true
+		Audio.sounds[75].muted = true
+		Audio.sounds[76].muted = true
+		Audio.sounds[77].muted = true
+		Audio.sounds[78].muted = true
+		Audio.sounds[79].muted = true
+		Audio.sounds[80].muted = true
+		Audio.sounds[81].muted = true
+		Audio.sounds[82].muted = true
+		Audio.sounds[83].muted = true
+		Audio.sounds[84].muted = true
+		Audio.sounds[85].muted = true
+		Audio.sounds[86].muted = true
+		Audio.sounds[87].muted = true
+		Audio.sounds[88].muted = true
+		Audio.sounds[89].muted = true
+		Audio.sounds[90].muted = true
+		Audio.sounds[91].muted = true
+		
+		if runPressedState == true then
+			player.runKeyPressing = false
+		end
 	end
 end
 
 function bootmenu.onPause(evt)
-    evt.cancelled = true;
-    isPauseMenuOpen = not isPauseMenuOpen
+	if bootmenu.active == true then
+		evt.cancelled = true;
+		isPauseMenuOpen = not isPauseMenuOpen
+	end
 end
 
 function bootmenu.onInputUpdate()
-	if player.rawKeys.pause == KEYS_PRESSED then
-		Routine.run(ExitGame1)
-		SFX.play("littleDialogue/smbx13/choose.wav")
-	end
-	if GameData.startedmenu == 0 then
-		if player.keys.jump == KEYS_PRESSED then
-			Routine.run(bootDialogue)
-			GameData.startedmenu = GameData.startedmenu + 1
+	if bootmenu.active == true then
+		if player.rawKeys.pause == KEYS_PRESSED then
+			Routine.run(ExitGame1)
+			SFX.play("littleDialogue/smbx13/choose.wav")
 		end
-	end
-	if GameData.startedmenu == 1 then
-		if player.keys.jump == KEYS_PRESSED then
-			--Nothing
+		if GameData.startedmenu == 0 then
+			if player.keys.jump == KEYS_PRESSED then
+				Routine.run(bootDialogue)
+				GameData.startedmenu = GameData.startedmenu + 1
+			end
 		end
-	end
-	if GameData.startedmenu == 2 then
-		if player.keys.jump == KEYS_PRESSED then
-			Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
-			Section(player.section).effects.weather = WEATHER_NONE
-			x2noticecheck = false
-			x2noticecheckactive = false
-			x2noticecheck = false
-			twoplayercheck = false
-			twoplayercheckactive = false
-			versionactive = false
-			logo = false
-			datetime.bottomright = false
-			active = true
-			pressjumpwords = false
-			sec.backgroundID = 6
-			Routine.run(PigeonRaca1)
+		if GameData.startedmenu == 1 then
+			if player.keys.jump == KEYS_PRESSED then
+				--Nothing
+			end
 		end
-	end
-	if (os.date("*t").month == 04 and os.date("*t").day == 01) then
-		if player.keys.jump == KEYS_PRESSED then
-			player.jumpKeyPressing = false
-			player.keys.jump = false
-			player.rawKeys.jump = false
-			GameData.startedmenu = 1
-			Audio.MusicChange(0, 0)
-			logo = false
-			datetime.bottomright = false
-			active = true
-			pressjumpwords = false
-			aprilfools = true
-			SFX.play("_OST/_Sound Effects/windows_error.ogg")
-			Routine.run(foolsinapril)
+		if GameData.startedmenu == 2 then
+			if player.keys.jump == KEYS_PRESSED then
+				Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (Crash SFX).ogg")
+				Section(player.section).effects.weather = WEATHER_NONE
+				x2noticecheck = false
+				x2noticecheckactive = false
+				x2noticecheck = false
+				twoplayercheck = false
+				twoplayercheckactive = false
+				versionactive = false
+				logo = false
+				datetime.bottomright = false
+				active = true
+				pressjumpwords = false
+				sec.backgroundID = 6
+				Routine.run(PigeonRaca1)
+			end
 		end
-	end
-	if GameData.startedmenu == 4 then
-		player.jumpKeyPressing = true
-		player.keys.jump = true
-		player.rawKeys.jump = true
-		if player.keys.jump == KEYS_PRESSED then
-			Level.load("SMAS - Start.lvlx", nil, nil)
+		if (os.date("*t").month == 04 and os.date("*t").day == 01) then
+			if player.keys.jump == KEYS_PRESSED then
+				player.jumpKeyPressing = false
+				player.keys.jump = false
+				player.rawKeys.jump = false
+				GameData.startedmenu = 1
+				Audio.MusicChange(0, 0)
+				logo = false
+				datetime.bottomright = false
+				active = true
+				pressjumpwords = false
+				aprilfools = true
+				SFX.play("_OST/_Sound Effects/windows_error.ogg")
+				Routine.run(foolsinapril)
+			end
 		end
-	end
-	if SaveData.racaActivated == 1 then
-		GameData.startedmenu = 2
+		if GameData.startedmenu == 4 then
+			player.jumpKeyPressing = true
+			player.keys.jump = true
+			player.rawKeys.jump = true
+			if player.keys.jump == KEYS_PRESSED then
+				Level.load("SMAS - Start.lvlx", nil, nil)
+			end
+		end
+		if SaveData.racaActivated == 1 then
+			GameData.startedmenu = 2
+		end
 	end
 end
 
 function bootmenu.onDraw()
-	local smaslogo = Graphics.loadImageResolved("smaslogo.png")
-	local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
-	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
-	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
-	local smaslogowide = Graphics.loadImageResolved("smaslogo-wide.png")
-	local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
-	
-	local stpatricksday = false
-	
-	if versionactive then
-		Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
-		textplus.print{x=667, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
-	end
-	
-	if pressjumpwords then
-		if SaveData.resolution == "fullscreen" then
-			Graphics.drawImageWP(pressstart, 150, 552, 1)
+	if bootmenu.active == true then
+		local smaslogo = Graphics.loadImageResolved("smaslogo.png")
+		local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
+		local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
+		local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
+		local smaslogowide = Graphics.loadImageResolved("smaslogo-wide.png")
+		local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
+		
+		local stpatricksday = false
+		
+		if versionactive then
+			Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
+			textplus.print{x=667, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
 		end
-		if SaveData.resolution == "widescreen" then
-			Graphics.drawImageWP(pressstartwide, 150, 482, 1)
+		
+		if pressjumpwords then
+			if SaveData.resolution == "fullscreen" then
+				Graphics.drawImageWP(pressstart, 150, 552, 1)
+			end
+			if SaveData.resolution == "widescreen" then
+				Graphics.drawImageWP(pressstartwide, 150, 482, 1)
+			end
 		end
-	end
-	if logo then
-		if SaveData.resolution == "fullscreen" then
-			Graphics.drawImageWP(smaslogo, 176, 136, 2)
+		if logo then
+			if SaveData.resolution == "fullscreen" then
+				Graphics.drawImageWP(smaslogo, 176, 136, 2)
+			end
+			if SaveData.resolution == "widescreen" then
+				Graphics.drawImageWP(smaslogowide, 176, 136, 2)
+			end
 		end
-		if SaveData.resolution == "widescreen" then
-			Graphics.drawImageWP(smaslogowide, 176, 136, 2)
+		if exitscreen then
+			Graphics.drawScreen{color = Color.black, priority = 10}
 		end
-	end
-	if exitscreen then
-		Graphics.drawScreen{color = Color.black, priority = 10}
-	end
-	if not logo then
-		--nothing
-	end
-	if twoplayercheck then
-		textplus.print{x=295, y=10, text = "Two player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
-	end
-	if twoplayercheckactive then
-		textplus.print{x=300, y=10, text = "Two player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
-	end
-	if x2noticecheck then
-		textplus.print{x=303, y=20, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
-	end
-	if x2noticecheckactive then
-		textplus.print{x=308, y=20, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
-	end
-	if charactercheck then
-		textplus.print{x=303, y=20, text = "P1's Active Character: ", priority=-7, color=Color.yellow, font=statusFont}
-	end
-	if not charactercheck then
-		--nothing
-	end
-	if not active then
-		textplus.print{x=290, y=520, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red}
-		textplus.print{x=286, y=517, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow}
-		textplus.print{x=286, y=530, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red}
-		textplus.print{x=282, y=527, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow}
-	end
-	if active then
-		--nothing
-	end
-	if active3 then
-		if SaveData.resolution == "fullscreen" then
-			textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
+		if not logo then
+			--nothing
 		end
-		if SaveData.resolution == "widescreen" then
-			textplus.print{x=160, y=500, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
+		if twoplayercheck then
+			textplus.print{x=295, y=10, text = "Two player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
 		end
-	end
-	if active4 then
-		if SaveData.resolution == "fullscreen" then
-			textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
+		if twoplayercheckactive then
+			textplus.print{x=300, y=10, text = "Two player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
 		end
-		if SaveData.resolution == "widescreen" then
-			textplus.print{x=150, y=410, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
+		if x2noticecheck then
+			textplus.print{x=303, y=20, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
 		end
-	end
-	if keyinput1 then
-		textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=6, color=Color.lightred, font=statusFont}
-	end
-	if aprilfools then	
-		Graphics.drawImageWP(aprilfoolserror, 0, 0, 10)
-	end
-	if stpatricksday then
-		textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=3, color=Color.green, font=statusFont}
+		if x2noticecheckactive then
+			textplus.print{x=308, y=20, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
+		end
+		if charactercheck then
+			textplus.print{x=303, y=20, text = "P1's Active Character: ", priority=-7, color=Color.yellow, font=statusFont}
+		end
+		if not charactercheck then
+			--nothing
+		end
+		if not active then
+			textplus.print{x=290, y=520, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red}
+			textplus.print{x=286, y=517, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow}
+			textplus.print{x=286, y=530, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red}
+			textplus.print{x=282, y=527, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow}
+		end
+		if active then
+			--nothing
+		end
+		if active3 then
+			if SaveData.resolution == "fullscreen" then
+				textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
+			end
+			if SaveData.resolution == "widescreen" then
+				textplus.print{x=160, y=500, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
+			end
+		end
+		if active4 then
+			if SaveData.resolution == "fullscreen" then
+				textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
+			end
+			if SaveData.resolution == "widescreen" then
+				textplus.print{x=150, y=410, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
+			end
+		end
+		if keyinput1 then
+			textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=6, color=Color.lightred, font=statusFont}
+		end
+		if aprilfools then	
+			Graphics.drawImageWP(aprilfoolserror, 0, 0, 10)
+		end
+		if stpatricksday then
+			textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=3, color=Color.green, font=statusFont}
+		end
 	end
 end
 
 function bootmenu.onExit()
-	Audio.MusicVolume(nil)
-	autoscroll.unlockSection(0, 1)
-	if SaveData.firstBootCompleted == 1 then
-		GameData.startedmenu = 0
+	if bootmenu.active == true then
+		Audio.MusicVolume(nil)
+		autoscroll.unlockSection(0, 1)
+		if SaveData.firstBootCompleted == 1 then
+			GameData.startedmenu = 0
+		end
+		if SaveData.firstBootCompleted == 0 then
+			GameData.startedmenu = 1
+		end
+		Defines.cheat_donthurtme = false
+		Defines.cheat_shadowmario = false
 	end
-	if SaveData.firstBootCompleted == 0 then
-		GameData.startedmenu = 1
-	end
-	Defines.cheat_donthurtme = false
-	Defines.cheat_shadowmario = false
 end
 
-Cheats.deregister("iwannabootbackhome") --We're already home, you dolt
-Cheats.deregister("letmeseetheintroagain") --You can see the intro again by starting SMAS++.
-Cheats.deregister("bootgamehelp") --Wrong Game Help to boot.
-Cheats.deregister("ilikespencereverly") --Like ya too, but wait until you're on an actual level ;)
-Cheats.deregister("sherbertsmiddlenameistoto") --Bad luck is deactivated here. You're welcome, scaredy cats.
-
---The rest will disable most cheats to avoid breaking the boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
-
-Cheats.deregister("getmeouttahere")
-Cheats.deregister("hadron")
-Cheats.deregister("groundhog")
-Cheats.deregister("wingman")
-Cheats.deregister("sonicstooslow")
-Cheats.deregister("gottagofast")
-Cheats.deregister("ahippinandahoppin")
-Cheats.deregister("jumpman")
-Cheats.deregister("flamethrower")
-Cheats.deregister("moneytree")
-Cheats.deregister("captainn")
-Cheats.deregister("passerby")
-Cheats.deregister("fromthedepths")
-Cheats.deregister("rinkamania")
-Cheats.deregister("rinkamadness")
-Cheats.deregister("iceage")
-Cheats.deregister("wariotime")
-Cheats.deregister("murder")
-Cheats.deregister("redrum")
-Cheats.deregister("wetwater")
-Cheats.deregister("itsrainingmen")
-Cheats.deregister("itsrainingmegan")
-Cheats.deregister("andmyaxe")
-Cheats.deregister("donttypethis")
-Cheats.deregister("boomtheroom")
-Cheats.deregister("liveforever")
-Cheats.deregister("rosebud")
-Cheats.deregister("fairymagic")
-Cheats.deregister("launchme")
-Cheats.deregister("getdown")
-Cheats.deregister("geddan")
-Cheats.deregister("horikawaisradicola")
-Cheats.deregister("worldpeace")
-Cheats.deregister("supermario2")
-Cheats.deregister("supermario4")
-Cheats.deregister("supermario8")
-Cheats.deregister("supermario16")
-Cheats.deregister("supermario32")
-Cheats.deregister("supermario64")
-Cheats.deregister("supermario128")
-Cheats.deregister("stophittingme")
-Cheats.deregister("suicide")
-Cheats.deregister("dressmeup")
-Cheats.deregister("undress")
-Cheats.deregister("laundryday")
-Cheats.deregister("wherearemycarkeys")
-Cheats.deregister("boingyboing")
-Cheats.deregister("bombsaway")
-Cheats.deregister("firemissiles")
-Cheats.deregister("powhammer")
-Cheats.deregister("hammerinmypants")
-Cheats.deregister("rainbowrider")
-Cheats.deregister("upandout")
-Cheats.deregister("burnthehousedown")
-Cheats.deregister("greenegg")
-Cheats.deregister("redegg")
-Cheats.deregister("blueegg")
-Cheats.deregister("yellowegg")
-Cheats.deregister("purpleegg")
-Cheats.deregister("pinkegg")
-Cheats.deregister("coldegg")
-Cheats.deregister("blackegg")
-Cheats.deregister("needashell")
-Cheats.deregister("needaredshell")
-Cheats.deregister("needablueshell")
-Cheats.deregister("needayellowshell")
-Cheats.deregister("needaturnip")
-Cheats.deregister("needa1up")
-Cheats.deregister("needamoon")
-Cheats.deregister("needatanookisuit")
-Cheats.deregister("needahammersuit")
-Cheats.deregister("needamushroom")
-Cheats.deregister("needaflower")
-Cheats.deregister("needaniceflower")
-Cheats.deregister("needanegg")
-Cheats.deregister("needaplant")
-Cheats.deregister("needagun")
-Cheats.deregister("needaswitch")
-Cheats.deregister("needaclock")
-Cheats.deregister("needabomb")
-Cheats.deregister("needashoe")
-Cheats.deregister("needaredshoe")
-Cheats.deregister("needablueshoe")
+if bootmenu.active == true then
+	Cheats.deregister("iwannabootbackhome") --We're already home, you dolt
+	Cheats.deregister("letmeseetheintroagain") --You can see the intro again by starting SMAS++.
+	Cheats.deregister("bootgamehelp") --Wrong Game Help to boot.
+	Cheats.deregister("ilikespencereverly") --Like ya too, but wait until you're on an actual level ;)
+	Cheats.deregister("sherbertsmiddlenameistoto") --Bad luck is deactivated here. You're welcome, scaredy cats.
+
+	--The rest will disable most cheats to avoid breaking the boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
+
+	Cheats.deregister("getmeouttahere")
+	Cheats.deregister("hadron")
+	Cheats.deregister("groundhog")
+	Cheats.deregister("wingman")
+	Cheats.deregister("sonicstooslow")
+	Cheats.deregister("gottagofast")
+	Cheats.deregister("ahippinandahoppin")
+	Cheats.deregister("jumpman")
+	Cheats.deregister("flamethrower")
+	Cheats.deregister("moneytree")
+	Cheats.deregister("captainn")
+	Cheats.deregister("passerby")
+	Cheats.deregister("fromthedepths")
+	Cheats.deregister("rinkamania")
+	Cheats.deregister("rinkamadness")
+	Cheats.deregister("iceage")
+	Cheats.deregister("wariotime")
+	Cheats.deregister("murder")
+	Cheats.deregister("redrum")
+	Cheats.deregister("wetwater")
+	Cheats.deregister("itsrainingmen")
+	Cheats.deregister("itsrainingmegan")
+	Cheats.deregister("andmyaxe")
+	Cheats.deregister("donttypethis")
+	Cheats.deregister("boomtheroom")
+	Cheats.deregister("liveforever")
+	Cheats.deregister("rosebud")
+	Cheats.deregister("fairymagic")
+	Cheats.deregister("launchme")
+	Cheats.deregister("getdown")
+	Cheats.deregister("geddan")
+	Cheats.deregister("horikawaisradicola")
+	Cheats.deregister("worldpeace")
+	Cheats.deregister("supermario2")
+	Cheats.deregister("supermario4")
+	Cheats.deregister("supermario8")
+	Cheats.deregister("supermario16")
+	Cheats.deregister("supermario32")
+	Cheats.deregister("supermario64")
+	Cheats.deregister("supermario128")
+	Cheats.deregister("stophittingme")
+	Cheats.deregister("suicide")
+	Cheats.deregister("dressmeup")
+	Cheats.deregister("undress")
+	Cheats.deregister("laundryday")
+	Cheats.deregister("wherearemycarkeys")
+	Cheats.deregister("boingyboing")
+	Cheats.deregister("bombsaway")
+	Cheats.deregister("firemissiles")
+	Cheats.deregister("powhammer")
+	Cheats.deregister("hammerinmypants")
+	Cheats.deregister("rainbowrider")
+	Cheats.deregister("upandout")
+	Cheats.deregister("burnthehousedown")
+	Cheats.deregister("greenegg")
+	Cheats.deregister("redegg")
+	Cheats.deregister("blueegg")
+	Cheats.deregister("yellowegg")
+	Cheats.deregister("purpleegg")
+	Cheats.deregister("pinkegg")
+	Cheats.deregister("coldegg")
+	Cheats.deregister("blackegg")
+	Cheats.deregister("needashell")
+	Cheats.deregister("needaredshell")
+	Cheats.deregister("needablueshell")
+	Cheats.deregister("needayellowshell")
+	Cheats.deregister("needaturnip")
+	Cheats.deregister("needa1up")
+	Cheats.deregister("needamoon")
+	Cheats.deregister("needatanookisuit")
+	Cheats.deregister("needahammersuit")
+	Cheats.deregister("needamushroom")
+	Cheats.deregister("needaflower")
+	Cheats.deregister("needaniceflower")
+	Cheats.deregister("needanegg")
+	Cheats.deregister("needaplant")
+	Cheats.deregister("needagun")
+	Cheats.deregister("needaswitch")
+	Cheats.deregister("needaclock")
+	Cheats.deregister("needabomb")
+	Cheats.deregister("needashoe")
+	Cheats.deregister("needaredshoe")
+	Cheats.deregister("needablueshoe")
+end
 
 
 
+if bootmenu.active == true then
+	littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(gamebootDialogue) end})
+	littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
+	littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
+	littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
+	littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
 
-littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(gamebootDialogue) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
 
 
+	littleDialogue.registerAnswer("GameBoot",{text = "Start Super Mario All-Stars++",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
+	littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
+	--littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Original)",chosenFunction = function() Routine.run(BootWSMBAOGPreExecute) end})
+	littleDialogue.registerAnswer("GameBoot",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("GameBoot",{text = "Start Super Mario All-Stars++",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
-littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
---littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Original)",chosenFunction = function() Routine.run(BootWSMBAOGPreExecute) end})
-littleDialogue.registerAnswer("GameBoot",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
+	littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
+	littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
+	littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
+	littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
+	littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
+	littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionChange1) end})
+	littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
+	littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
+	littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
 
-littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
-littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
-littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
-littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
-littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
-littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
-littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
-littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
 
 
+	littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() Routine.run(theme1) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() Routine.run(theme6) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() Routine.run(theme2) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() Routine.run(theme3) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() Routine.run(theme4) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() Routine.run(theme9) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() Routine.run(theme5) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() Routine.run(theme10) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() Routine.run(theme11) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() Routine.run(theme12) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() Routine.run(theme13) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() Routine.run(theme14) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 
-littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() Routine.run(theme1) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() Routine.run(theme6) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() Routine.run(theme2) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() Routine.run(theme3) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() Routine.run(theme4) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() Routine.run(theme9) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() Routine.run(theme5) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() Routine.run(theme10) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() Routine.run(theme11) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() Routine.run(theme12) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() Routine.run(theme13) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() Routine.run(theme14) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
+	littleDialogue.registerAnswer("SavingMenuOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+	littleDialogue.registerAnswer("SavingMenuOne",{text = "Move Save to a Different Slot",chosenFunction = function() Routine.run(SaveSlot1) end})
+	littleDialogue.registerAnswer("SavingMenuOne",{text = "Erase Save Data",chosenFunction = function() Routine.run(EraseSave1) end})
 
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Move Save to a Different Slot",chosenFunction = function() Routine.run(SaveSlot1) end})
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Erase Save Data",chosenFunction = function() Routine.run(EraseSave1) end})
 
 
 
+	littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
+	littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() Routine.run(SaveEraseStart) end})
 
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() Routine.run(SaveEraseStart) end})
 
 
 
+	littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
+	littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
 
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
 
 
 
+	littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
+	littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlus) end})
 
-littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlus) end})
 
 
+	littleDialogue.registerAnswer("FirstBootMenuOne",{text = "Begin",chosenFunction = function() Routine.run(FirstBoot3) end})
 
-littleDialogue.registerAnswer("FirstBootMenuOne",{text = "Begin",chosenFunction = function() Routine.run(FirstBoot3) end})
 
 
 
+	littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "Yes",chosenFunction = function() Routine.run(FirstBoot4) end})
+	littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "No",chosenFunction = function() Routine.run(TimeFixInfo1) end})
 
-littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "Yes",chosenFunction = function() Routine.run(FirstBoot4) end})
-littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "No",chosenFunction = function() Routine.run(TimeFixInfo1) end})
 
 
 
+	littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunction = function() Routine.run(FirstBoot5) end})
 
-littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunction = function() Routine.run(FirstBoot5) end})
 
 
 
+	littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(FirstBootGameHelp) end})
+	littleDialogue.registerAnswer("FirstBootMenuFour",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
-littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(FirstBootGameHelp) end})
-littleDialogue.registerAnswer("FirstBootMenuFour",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
 
 
+	littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Start Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
+	littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
-littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Start Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
-littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Skip",chosenFunction = function() Routine.run(FirstBoot6) end})
 
 
 
+	littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogueFirstBoot) end})
 
-littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogueFirstBoot) end})
 
 
+	littleDialogue.registerAnswer("FirstBootMenuTimeFix",{text = "Recheck",chosenFunction = function() Routine.run(FirstBoot3) end})
 
-littleDialogue.registerAnswer("FirstBootMenuTimeFix",{text = "Recheck",chosenFunction = function() Routine.run(FirstBoot3) end})
 
 
+	littleDialogue.registerAnswer("SaveSlotMove1",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("SaveSlotMove1",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
+	littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
+	littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
+	littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes", chosenFunction = function() Routine.run(X2Char) end})
 
-littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes", chosenFunction = function() Routine.run(X2Char) end})
 
+	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Player Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
+	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheck) end})
+	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
-littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Player Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
-littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheck) end})
-littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
+	littleDialogue.registerAnswer("ToBeAddedSoon",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("ToBeAddedSoon",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
+	littleDialogue.registerAnswer("OkayToMenuTwo",{text = "Alright.",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("OkayToMenuTwo",{text = "Alright.",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
+	littleDialogue.registerAnswer("OkayToMenuTwoOptions",{text = "Alright.",chosenFunction = function() Routine.run(optionsMenu1) end})
 
-littleDialogue.registerAnswer("OkayToMenuTwoOptions",{text = "Alright.",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
+	littleDialogue.registerAnswer("OkayToMenu",{text = "Okay!",chosenFunction = function() Routine.run(bootDialogue) end})
 
-littleDialogue.registerAnswer("OkayToMenu",{text = "Okay!",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
+	littleDialogue.registerAnswer("OkayToMenuOptions",{text = "Okay!",chosenFunction = function() Routine.run(optionsMenu1) end})
 
-littleDialogue.registerAnswer("OkayToMenuOptions",{text = "Okay!",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
+	littleDialogue.registerAnswer("OkayToMenuTheme",{text = "Oh yeah, right.",chosenFunction = function() Routine.run(themeMenu1) end})
 
-littleDialogue.registerAnswer("OkayToMenuTheme",{text = "Oh yeah, right.",chosenFunction = function() Routine.run(themeMenu1) end})
 
 
+	littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() Routine.run(ExitDialogueMusicReset) end})
 
-littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() Routine.run(ExitDialogueMusicReset) end})
 
 
 
 
+	littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 1",chosenFunction = function() Routine.run(ChangeChar1P) end})
+	littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 2",chosenFunction = function() Routine.run(ChangeChar2P) end})
 
-littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 1",chosenFunction = function() Routine.run(ChangeChar1P) end})
-littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 2",chosenFunction = function() Routine.run(ChangeChar2P) end})
 
 
+	littleDialogue.registerAnswer("CharacterList1",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+	littleDialogue.registerAnswer("CharacterList1",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList1",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList1",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList1",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList1",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
 
-littleDialogue.registerAnswer("CharacterList1",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("CharacterList1",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList1",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList1",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList1",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList1",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
 
+	littleDialogue.registerAnswer("CharacterList2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+	littleDialogue.registerAnswer("CharacterList2",{text = "Mario (Slot 1)",chosenFunction = function() player2:transform(1, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList2",{text = "Luigi (Slot 2)",chosenFunction = function() player2:transform(2, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList2",{text = "Peach (Slot 3)",chosenFunction = function() player2:transform(3, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList2",{text = "Toad (Slot 4)",chosenFunction = function() player2:transform(4, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterList2",{text = "Link (Slot 5)",chosenFunction = function() player2:transform(5, true) Routine.run(ChangedCharacter) end})
 
-littleDialogue.registerAnswer("CharacterList2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("CharacterList2",{text = "Mario (Slot 1)",chosenFunction = function() player2:transform(1, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList2",{text = "Luigi (Slot 2)",chosenFunction = function() player2:transform(2, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList2",{text = "Peach (Slot 3)",chosenFunction = function() player2:transform(3, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList2",{text = "Toad (Slot 4)",chosenFunction = function() player2:transform(4, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterList2",{text = "Link (Slot 5)",chosenFunction = function() player2:transform(5, true) Routine.run(ChangedCharacter) end})
 
-
-littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Mega Man (Slot 6)",chosenFunction = function() player:transform(6, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Klonoa (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Mega Man (Slot 6)",chosenFunction = function() player:transform(6, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Klonoa (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+end
 
 return bootmenu

@@ -134,7 +134,7 @@ function onDraw()
 		Graphics.drawImageWP(HUDimage, 0, 0, 4.99)
 	end
 	if SaveData.resolution == "widescreen" then
-		Graphics.drawImageWP(HUDimagewide, 0, 78, 4.99)
+		Graphics.drawImageWP(HUDimagewide, 0, 75, 4.99)
 	end
 	
 	if player.section == 9 then
@@ -156,7 +156,7 @@ end
 
 function onTick()
 	if player.section == 9 then
-		Text.printWP("Welcome to the information booth.", 10, 577, 5)
+		Text.printWP("Welcome to the information booth.", 10, 577, 4.9)
 	end
 end
 
