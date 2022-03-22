@@ -8,6 +8,9 @@ local pausemenu = require("pausemenu")
 wandR.speed = 7
 travL.showArrows = false
 
+local map3d = require("mapp3d")
+map3d.Light.enabled = false
+
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
 local hudborder = Graphics.loadImageResolved("hardcoded-33-4-tp.png")
@@ -35,15 +38,13 @@ local middle = math.floor(timer1*numberup)
 
 local middle = 0
 local transitionTimer = 0
+local nochangecharmap = false
 
 function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
-	elseif player.rawKeys.left == KEYS_PRESSED then
-		player.rawKeys.left = KEYS_UNPRESSED
-	elseif player.rawKeys.right == KEYS_PRESSED then
-		player.rawKeys.right = KEYS_UNPRESSED
 	end
+	nochangecharmap = true
 	world.playerWalkingFrame = 1
 	SFX.play("level-select2.ogg")
 	Audio.MusicVolume(0)
@@ -58,6 +59,7 @@ function levelload()
 	loadlevelanimation = nil
 	loadlevelanimationin = true
 	Audio.MusicVolume(56)
+	nochangecharmap = false
 	Routine.waitFrames(78, true)
 	loadlevelanimationin = nil
 end
@@ -66,13 +68,15 @@ function onInputUpdate()
 	if Misc.isPausedByLua() == false then
 		if world.levelTitle and world.levelObj then
 			if player.rawKeys.jump == KEYS_PRESSED then
-				if player.keys.left == KEYS_PRESSED then
-					player.keys.left = KEYS_UNPRESSED
-				elseif player.keys.right == KEYS_PRESSED then
-					player.keys.right = KEYS_UNPRESSED
-				end
 				Routine.run(levelload)
 			end
+		end
+	end
+	if nochangecharmap then
+		if player.keys.left == KEYS_PRESSED then
+			player.keys.left = KEYS_UNPRESSED
+		elseif player.keys.right == KEYS_PRESSED then
+			player.keys.right = KEYS_UNPRESSED
 		end
 	end
 end
@@ -121,6 +125,23 @@ local yoshiAnimationFrames = {
 	}
 	
 local bootBounceData = {}
+
+function onTick()
+	if SaveData.resolution == "fullscreen" then
+		map3d.CameraSettings.fov = 92.7
+		map3d.CameraSettings.distance = 32
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
+	end
+	if SaveData.resolution == "widescreen" then
+		map3d.CameraSettings.fov = 107.7 - 0.00872665
+		map3d.CameraSettings.distance = 32
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
+	end
+end
 
 function onDraw()
 	if SaveData.resolution == "fullscreen" then

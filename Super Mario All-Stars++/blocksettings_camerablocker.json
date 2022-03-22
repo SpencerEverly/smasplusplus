@@ -6,28 +6,28 @@
 			"control": "checkBox",
 			"name": "canBlockLeft",
 			"title": "Can Block from Left",
-			"tooltip": "If ticked, it can block the camera if it appears from the left of the screen.",
+			"tooltip": "If ticked, it can block the camera if it appears from its left side.",
 			"value-default": true
 		},
 		{
 			"control": "checkBox",
 			"name": "canBlockRight",
 			"title": "Can Block from Right",
-			"tooltip": "If ticked, it can block the camera if it appears from the right of the screen.",
+			"tooltip": "If ticked, it can block the camera if it appears from its right side.",
 			"value-default": true
 		},
 		{
 			"control": "checkBox",
 			"name": "canBlockTop",
 			"title": "Can Block from Top",
-			"tooltip": "If ticked, it can block the camera if it appears from the top of the screen.",
+			"tooltip": "If ticked, it can block the camera if it appears from its top side.",
 			"value-default": true
 		},
 		{
 			"control": "checkBox",
 			"name": "canBlockBottom",
 			"title": "Can Block from Bottom",
-			"tooltip": "If ticked, it can block the camera if it appears from the bottom of the screen.",
+			"tooltip": "If ticked, it can block the camera if it appears from its bottom side.",
 			"value-default": true
 		}
 	]

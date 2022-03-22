@@ -16,33 +16,62 @@ function smallScreen.onCameraDraw()
 
     
     buffer:captureAt(smallScreen.priority)
+	if not isOverworld then
+		local width  = smallScreen.width *smallScreen.scaleX
+		local height = smallScreen.height*smallScreen.scaleY
 
-    local width  = smallScreen.width *smallScreen.scaleX
-    local height = smallScreen.height*smallScreen.scaleY
+		local borderColor = Color.black
+		if Misc.inEditor() and Misc.GetKeyState(VK_B) then
+			borderColor = borderColor.. 0.4
+		end
 
-    local borderColor = Color.black
-    if Misc.inEditor() and Misc.GetKeyState(VK_B) then
-        borderColor = borderColor.. 0.4
-    end
+		local linearFiltered = false
+		local shader,uniforms
 
-    local linearFiltered = false
-    local shader,uniforms
+		if smallScreen.useCrispShader and (smallScreen.scaleX ~= 1 or smallScreen.scaleY ~= 1) then
+			shader = crispShader
+			uniforms = {inputSize = {camera.width,camera.height},crispScale = {camera.width/smallScreen.width,camera.height/smallScreen.height}}
+			linearFiltered = true
+		end
 
-    if smallScreen.useCrispShader and (smallScreen.scaleX ~= 1 or smallScreen.scaleY ~= 1) then
-        shader = crispShader
-        uniforms = {inputSize = {camera.width,camera.height},crispScale = {camera.width/smallScreen.width,camera.height/smallScreen.height}}
-        linearFiltered = true
-    end
+		Graphics.drawScreen{priority = smallScreen.priority,color = borderColor}
+		Graphics.drawBox{
+			texture = buffer,priority = smallScreen.priority,
+			linearFiltered = linearFiltered,shader = shader,uniforms = uniforms,
+			
+			x = (buffer.width*0.5)+smallScreen.offsetX,y = (buffer.height*0.5)+smallScreen.offsetY,centred = true,
+			width = width,height = height,sourceWidth = smallScreen.width,sourceHeight = smallScreen.height,
+			sourceX = (buffer.width*0.5)-(smallScreen.width*0.5),sourceY = (buffer.height*0.5)-(smallScreen.height*0.5),
+		}
+	end
+	if isOverworld then
+		local width  = camera.x *smallScreen.scaleX
+		local height = camera.y*smallScreen.scaleY
 
-    Graphics.drawScreen{priority = smallScreen.priority,color = borderColor}
-    Graphics.drawBox{
-        texture = buffer,priority = smallScreen.priority,
-        linearFiltered = linearFiltered,shader = shader,uniforms = uniforms,
-        
-        x = (buffer.width*0.5)+smallScreen.offsetX,y = (buffer.height*0.5)+smallScreen.offsetY,centred = true,
-        width = width,height = height,sourceWidth = smallScreen.width,sourceHeight = smallScreen.height,
-        sourceX = (buffer.width*0.5)-(smallScreen.width*0.5),sourceY = (buffer.height*0.5)-(smallScreen.height*0.5),
-    }
+		local borderColor = Color.black
+		if Misc.inEditor() and Misc.GetKeyState(VK_B) then
+			borderColor = borderColor.. 0.4
+		end
+
+		local linearFiltered = false
+		local shader,uniforms
+
+		if smallScreen.useCrispShader and (smallScreen.scaleX ~= 1 or smallScreen.scaleY ~= 1) then
+			shader = crispShader
+			uniforms = {inputSize = {camera.width,camera.height},crispScale = {camera.width/smallScreen.width,camera.height/smallScreen.height}}
+			linearFiltered = true
+		end
+
+		Graphics.drawScreen{priority = smallScreen.priority,color = borderColor}
+		Graphics.drawBox{
+			texture = buffer,priority = smallScreen.priority,
+			linearFiltered = linearFiltered,shader = shader,uniforms = uniforms,
+			
+			x = (buffer.width*0.5)+smallScreen.offsetX,y = (buffer.height*0.5)+smallScreen.offsetY,centred = true,
+			width = width,height = height,sourceWidth = smallScreen.width,sourceHeight = smallScreen.height,
+			sourceX = (buffer.width*0.5)-(smallScreen.width*0.5),sourceY = (buffer.height*0.5)-(smallScreen.height*0.5),
+		}
+	end
 end
 
 function smallScreen.onCameraUpdate()
@@ -58,12 +87,13 @@ function smallScreen.onCameraUpdate()
 		camera.y = math.clamp(player.y+player.height-(camera.height*0.5),b.top-heightDifference,b.bottom+heightDifference-camera.height)
 	end
 	if isOverworld then
-		local bworld = world.playerY
+		local bworld = camera.bounds
+		local player = Player(camIdx)
 		local widthDifference = ((camera.width-smallScreen.width)*0.5)
-		camera.x = math.clamp(world.playerX+(32*0.5)-(camera.width*0.5),bworld.left-widthDifference,bworld.right+widthDifference-camera.width)
+		camera.x = math.clamp(player.x+(player.width*0.5)-(camera.width*0.5),bworld.left-widthDifference,bworld.right+widthDifference-camera.width)
 
 		local heightDifference = ((camera.height-smallScreen.height)*0.5)
-		camera.y = math.clamp(world.playerY+32-(camera.height*0.5),bworld.top-heightDifference,bworld.bottom+heightDifference-camera.height)
+		camera.y = math.clamp(player.y+player.height-(camera.height*0.5),bworld.top-heightDifference,bworld.bottom+heightDifference-camera.height)
 	end
 end
 

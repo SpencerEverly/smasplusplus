@@ -396,7 +396,7 @@ function globalgenerals.onTick()
 		Player.setCostume(10, nil)
 	end
 	
-	mem(0x00B25130, FIELD_WORD, 2)
+	--mem(0x00B25130, FIELD_WORD, 2)
 	if playerlives == 0 then
         if(not killed and player:mem(0x13E,FIELD_BOOL)) then
             killed = true

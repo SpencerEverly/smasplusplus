@@ -44,15 +44,13 @@ local middle = math.floor(timer1*numberup)
 
 local middle = 0
 local transitionTimer = 0
+local nochangecharmap = false
 
 function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
-	elseif player.rawKeys.left == KEYS_PRESSED then
-		player.rawKeys.left = KEYS_UNPRESSED
-	elseif player.rawKeys.right == KEYS_PRESSED then
-		player.rawKeys.right = KEYS_UNPRESSED
 	end
+	nochangecharmap = true
 	world.playerWalkingFrame = 1
 	SFX.play("_OST/_Sound Effects/levelload.ogg")
 	Audio.MusicVolume(0)
@@ -67,6 +65,7 @@ function levelload()
 	loadlevelanimation = nil
 	loadlevelanimationin = true
 	Audio.MusicVolume(56)
+	nochangecharmap = false
 	Routine.waitFrames(78, true)
 	loadlevelanimationin = nil
 end
@@ -82,6 +81,13 @@ function onInputUpdate()
 				end
 				Routine.run(levelload)
 			end
+		end
+	end
+	if nochangecharmap then
+		if player.keys.left == KEYS_PRESSED then
+			player.keys.left = KEYS_UNPRESSED
+		elseif player.keys.right == KEYS_PRESSED then
+			player.keys.right = KEYS_UNPRESSED
 		end
 	end
 end
@@ -129,12 +135,12 @@ function onTick()
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 	end
 	if SaveData.resolution == "fullscreen" then
-		map3d.CameraSettings.fov = 60
-		map3d.CameraSettings.height = 320;
+		map3d.CameraSettings.fov = 65.00872665
+		map3d.CameraSettings.height = 600;
 	end
 	if SaveData.resolution == "widescreen" then
-		map3d.CameraSettings.fov = 70
-		map3d.CameraSettings.height = 320;
+		map3d.CameraSettings.fov = 80.00872665
+		map3d.CameraSettings.height = 600;
 	end
 end
 
@@ -296,6 +302,10 @@ function onDraw()
 		Graphics.drawImageWP(staricon, 236, 500, 5)
 		Graphics.drawImageWP(times, 254, 502, 5)
 		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 326, 496, 4)
+		Graphics.drawImageWP(coinicon, 330, 500, 5)
+		Graphics.drawImageWP(times, 348, 502, 5)
+		textplus.print{x=367, y=500, text = ""..SaveData.totalcoins.."", priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
 		if world.levelTitle then
 			textplus.print{x=150, y=159, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title

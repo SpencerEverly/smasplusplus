@@ -1,6 +1,6 @@
 --[[
 
-    customCamera.lua
+    customCamera.lua (v1.0.1)
     by MrDoubleA
 
     Adds more advanced camera controls to SMBX.
@@ -34,6 +34,7 @@
 ]]
 
 local blockutils = require("blocks/blockutils")
+local npcutils = require("npcs/npcutils")
 local playerManager = require("playerManager")
 local sizable = require("game/sizable")
 local handycam = require("handycam")
@@ -43,6 +44,9 @@ local customCamera = {}
 
 
 local zoomedBuffer = Graphics.CaptureBuffer(800,600)
+
+
+local STAR_COUNT_ADDR = 0x00B251E0
 
 
 customCamera.transitionSpeed = 0.05
@@ -68,6 +72,7 @@ customCamera.controllerID = 0 -- these two are filled in by the block-n.lua file
 customCamera.blockerID = 0
 
 customCamera.lastSection = nil
+customCamera.lastWarpCooldown = 0
 
 
 customCamera.debug = false
@@ -151,7 +156,7 @@ do
         local cos,sin
 
         if rotation%360 > 0 then
-            screenRotation = screenRotation + rotation
+            screenRotation = math.rad(screenRotation + rotation)
 
             cos = math.cos(screenRotation)
             sin = math.sin(screenRotation)
@@ -595,7 +600,7 @@ do
     local function renderBGO(args,b)
         local texture = Graphics.sprites.background[b.id].img
 
-        if texture == nil or customCamera.isInExclusion(args,b.x,b.y,b.width,b.height) then
+        if texture == nil or b.isHidden or customCamera.isInExclusion(args,b.x,b.y,b.width,b.height) then
             return
         end
 
@@ -694,10 +699,21 @@ do
         end
 
         
-
+        -- Render non-sizeable blocks
         for _,b in Block.iterateIntersecting(args.cullX1,args.cullY1,args.cullX2,args.cullY2) do
-            renderBlock(args,b)
+            if not Block.SIZEABLE_MAP[b.id] then
+                renderBlock(args,b)
+            end
         end
+
+        -- Render sizeables (must be done in a specific order, hence why it's done separate)
+        for _,b in Block.iterateSizable() do
+            if b.x < args.cullX2 and b.x+b.width > args.cullX1 and b.y < args.cullY2 and b.y+b.height > args.cullY1 then
+                renderBlock(args,b)
+            end
+        end
+
+
 
         for _,b in BGO.iterateIntersecting(args.cullX1,args.cullY1,args.cullX2,args.cullY2) do
             renderBGO(args,b)
@@ -771,6 +787,37 @@ do
 end
 
 
+-- Special compatbility for NPC's for drawScene
+do
+    local function drawBarrel(args,n)
+        if n.despawnTimer <= 0 or n.isHidden or customCamera.isInExclusion(args,n.x,n.y,n.width,n.height) then
+            return
+        end
+
+        local data = n.data._basegame
+        local sprite = data.sprite
+
+        if sprite == nil then
+            return
+        end
+
+        -- Copied from launchBarrel.lua
+        local config = NPC.config[n.id]
+
+        local p = -45
+        if config.foreground then
+            p = -15
+        end
+
+        customCamera.drawQuadToScene(args,sprite.texture,p,sprite.x,sprite.y,sprite.width,sprite.height,0,0,1,sprite.rotation)
+    end
+
+    for id = 600,603 do
+        customCamera.registerNPCDraw(id,drawBarrel)
+    end
+end
+
+
 
 function customCamera.getFullCameraPos()
     local b = player.sectionObj.boundary
@@ -836,6 +883,25 @@ function customCamera.isOnScreen(x,y,width,height) -- accepts an X/Y, X/Y/width/
     else
         return (x > fullX and x < fullX+fullWidth and y > fullY and y < fullY+fullHeight)
     end
+end
+
+
+
+local function canResetFromWarping()
+    if customCamera.lastSection ~= player.section or (player.forcedState == FORCEDSTATE_PIPE and player.forcedTimer == 101) then
+        return true
+    end
+
+    if player:mem(0x15C,FIELD_WORD) > customCamera.lastWarpCooldown then
+        -- Check if in an exit to a warp, if so we can guess that it came from a warp (not perfect, but hey!)
+        for _,warp in ipairs(Warp.getIntersectingExit(player.x,player.y,player.x+player.width,player.height)) do
+            if not warp.isHidden and not warp.toOtherLevel and not warp.locked and warp.warpType ~= 1 and mem(STAR_COUNT_ADDR,FIELD_WORD) >= warp.starsRequired then
+                return true
+            end
+        end
+    end
+
+    return false
 end
 
 
@@ -1282,10 +1348,12 @@ end
 
 
 function customCamera.onCameraUpdate()
-    if customCamera.lastSection ~= player.section then
-        customCamera.lastSection = player.section
+    if canResetFromWarping() then
         customCamera.resetCameraState()
     end
+
+    customCamera.lastWarpCooldown = player:mem(0x15C,FIELD_WORD)
+    customCamera.lastSection = player.section
 
 
     local focus
