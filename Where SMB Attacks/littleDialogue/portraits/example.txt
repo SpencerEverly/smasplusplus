@@ -1,0 +1,5 @@
+idleFrames=1
+idleFrameDelay=8
+speakingFrames=2
+speakingFrameDelay=8
+speakerName="Fox"

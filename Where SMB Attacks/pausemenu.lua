@@ -116,6 +116,24 @@ local function restartlevel()
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(Level.filename()) end)
 end
 
+local function changeresolution()
+	SFX.play("resolution-set.ogg")
+	if SaveData.resolution == "widescreen" then
+		SaveData.resolution = "fullscreen"
+	elseif SaveData.resolution == "fullscreen" then
+		SaveData.resolution = "widescreen"
+	end
+end
+
+local function changeletterbox()
+	SFX.play("resolution-set.ogg")
+	if SaveData.letterbox == true then
+		SaveData.letterbox = false
+	elseif SaveData.letterbox == false then
+		SaveData.letterbox = true
+	end
+end
+
 local function twoplayercheck()
 	paused = false
 	Misc.unpause()
@@ -219,7 +237,8 @@ local function drawPauseMenu(y, alpha)
 		if player.count() == 2 then
 			table.insert(pause_options, {name="Change Character (2P)", action = characterchange13_2p});
 		end
-		--table.insert(pause_options, {name="Enable/Disable 2 Player Mode", action = twoplayercheck});
+		table.insert(pause_options, {name="Change Resolution", action = changeresolution});
+		table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
 		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Exit to SMAS++", action = quitgame});
@@ -243,6 +262,21 @@ local function drawPauseMenu(y, alpha)
 		y = y+h2;
 		h = h+h2;
 	end
+	
+	if SaveData.resolution == "fullscreen" then
+		resolutionshow = "<color red>Resolution: Fullscreen (4:3)</color>"
+	end
+	if SaveData.resolution == "widescreen" then
+		resolutionshow = "<color red>Resolution: Widescreen (16:9)</color>"
+	end
+	--local font = textblox.FONT_SPRITEDEFAULT3X2;
+	
+	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	textplus.render{layout = layout, x = 220 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
+	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
+
+	h = h+4+8--font.charHeight;
+	y = y+h;
 
 	
 	return h;
