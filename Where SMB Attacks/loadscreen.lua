@@ -17,6 +17,7 @@ local episodePath = mem(0x00B2C61C, FIELD_STRING)
 local image = Graphics.loadImage("loadscreen.png")
 
 local loadicon = Graphics.loadImage("loadscreen-icon.png")
+local fullscreenborder = Graphics.loadImage("loadscreen-fullscreen-border.png")
 
 local frame = 0
 local frame2 = 0
@@ -54,10 +55,12 @@ function onDraw()
     local count = #widths
 	
 	speed = speed - 1
-	Graphics.drawImage(loadicon, 672, 536, 0, frame2 * 64, 128, 64,opacity)
+	Graphics.drawImage(loadicon, 672, 466, 1, frame2 * 64, 128, 64, opacity)
 	frame = math.floor(timer/speed)%7
 	timer = timer + 1	
 	frame2 = math.floor(timer/8)%7
+	
+	Graphics.drawImage(fullscreenborder, 0, 0, 1, 0, 800, 600, opacity)
 
     for index,width in ipairs(widths) do
         letterData[index] = letterData[index] or {offset = 0,speed = 0}

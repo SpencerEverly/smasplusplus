@@ -135,12 +135,12 @@ function onTick()
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 	end
 	if SaveData.resolution == "fullscreen" then
-		map3d.CameraSettings.fov = 65.00872665
-		map3d.CameraSettings.height = 600;
+		map3d.CameraSettings.fov = 75
+		map3d.CameraSettings.height = 300
 	end
 	if SaveData.resolution == "widescreen" then
-		map3d.CameraSettings.fov = 80.00872665
-		map3d.CameraSettings.height = 600;
+		map3d.CameraSettings.fov = 90
+		map3d.CameraSettings.height = 300
 	end
 end
 
