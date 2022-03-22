@@ -28,8 +28,8 @@ local levelformat = Level.format()
 
 if SaveData.resolution == "fullscreen" then
 	littleDialogue.registerStyle("smbx13",{
-		textXScale = 1.4,
-		textYScale = 1.4,
+		textXScale = 1,
+		textYScale = 1,
 		borderSize = 36,
 		textMaxWidth = 500,
 		speakerNameGap = 6,

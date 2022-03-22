@@ -431,4 +431,18 @@ Cheats.register("fcommandssuck",{
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hits1.ogg",
 })
 
+Cheats.register("fuckyou",{
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		spartaremix = require("spartaremix")
+		malcwarp = require("malcwarp")
+		thecostume = require("thecostume")
+		exitcommands = require("exitcommands")
+		commandlist = require("commandlist")
+		debugbox = require("debugbox")
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = 69,
+})
+
 return dependencies

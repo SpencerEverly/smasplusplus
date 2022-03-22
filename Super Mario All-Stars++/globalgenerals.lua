@@ -1298,6 +1298,15 @@ Cheats.register("jario",{
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/HIT_4.ogg",
 })
 
+Cheats.register("fourwallsmas",{
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		debugbox = require("debugbox")
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = 67,
+})
+
 Cheats.register("ilikespencereverly",{
 	onActivate = (function()
 		Defines.player_hasCheated = false
