@@ -29,6 +29,7 @@ local hudoverride = require("hudoverride")
 local customCamera = require("customCamera")
 local smallScreen = require("smallscreen")
 local extrasounds = require("extrasounds")
+local modernReserveItems = require("modernReserveItems")
 
 customCamera.transitionSpeed = 5
 
