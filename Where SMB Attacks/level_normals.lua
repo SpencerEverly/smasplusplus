@@ -4,7 +4,6 @@ local levelformat = Level.format()
 
 local anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 local playerphysicspatch = require("playerphysicspatch")
-pausemenu = require("pausemenu")
 
 function onStart()
     Misc.saveGame()

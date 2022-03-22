@@ -30,6 +30,7 @@ local customCamera = require("customCamera")
 local smallScreen = require("smallscreen")
 local extrasounds = require("extrasounds")
 local modernReserveItems = require("modernReserveItems")
+local pausemenu = require("pausemenu")
 
 customCamera.transitionSpeed = 5
 
@@ -51,6 +52,7 @@ function p2teleportdoor()
 end
 
 function onStart()
+	Audio.MusicVolume(64)
 	if SaveData.resolution == nil then
 		SaveData.resolution = "fullscreen"
 	end

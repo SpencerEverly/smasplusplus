@@ -35,10 +35,6 @@ local month = os.date("%m")
 
 local soundObject
 
-local levelfolder = Level.folderPath()
-local levelname = Level.filename()
-local levelformat = Level.format()
-
 function datetime.onInitAPI()
 	registerEvent(datetime, "onKeyboardPress")
 	registerEvent(datetime, "onDraw")

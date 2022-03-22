@@ -923,12 +923,8 @@ local function drawPauseMenu(y, alpha)
 		if isOverworld then
 			table.insert(pause_options, {name="Character Options", action = switchtochar});
 		end
-		if not isOverworld then
-			table.insert(pause_options, {name="Change Resolution", action = changeresolution});
-		end
-		if not isOverworld then
-			table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
-		end
+		table.insert(pause_options, {name="Change Resolution", action = changeresolution});
+		table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
 		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegame});
 		end
@@ -981,21 +977,6 @@ local function drawPauseMenu(y, alpha)
 	
 	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
-	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
-
-	h = h+4+8--font.charHeight;
-	y = y+h;
-	
-	if SaveData.letterbox == true then
-		letterboxshow = "<color red>Letterbox Enabled: Yes</color>"
-	end
-	if SaveData.letterbox == false then
-		letterboxshow = "<color red>Letterbox Enabled: No</color>"
-	end
-	--local font = textblox.FONT_SPRITEDEFAULT3X2;
-	
-	local layout = textplus.layout(textplus.parse(letterboxshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
-	textplus.render{layout = layout, x = 250 - w*0.5, y = y+434, color = Color.white..alpha, priority = 6}
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 
 	h = h+4+8--font.charHeight;

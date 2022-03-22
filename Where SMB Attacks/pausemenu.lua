@@ -36,10 +36,11 @@ local str = "Loading HUB..."
 local pausemenu2 = {}
 
 local soundObject
-
-local levelfolder = Level.folderPath()
-local levelname = Level.filename()
-local levelformat = Level.format()
+if not isOverworld then
+	local levelfolder = Level.folderPath()
+	local levelname = Level.filename()
+	local levelformat = Level.format()
+end
 
 local paused = false;
 local pause_box;
@@ -53,7 +54,9 @@ local pause_index = 0;
 local pauseactive = false
 local charactive = false
 
-local level = Level.filename()
+if not isOverworld then
+	local level = Level.filename()
+end
 
 function pausemenu2.onInitAPI()
 	registerEvent(pausemenu2, "onKeyboardPress")
@@ -69,7 +72,12 @@ end
 local function unpause()
 	paused = false
 	Misc.unpause()
+	cooldown = 5
 	SFX.play(30)
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
 end
 
 function pausemenu2.onStart()
@@ -85,7 +93,12 @@ end
 
 local function quitonly()
 	paused = false
+	cooldown = 5
 	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
 	SFX.play("wrong.ogg")
 	SFX.play(31)
 	Routine.run(function() exitscreen = true Routine.wait(2.1, true) paused = false Misc.unpause() Misc.loadEpisode("Super Mario All-Stars++") end)
@@ -95,7 +108,12 @@ local function savegame()
 	paused = false
 	SFX.play(58)
 	Misc.saveGame()
+	cooldown = 5
 	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
 end
 
 local function exitlevelsave()
@@ -132,6 +150,32 @@ local function changeletterbox()
 	elseif SaveData.letterbox == false then
 		SaveData.letterbox = true
 	end
+end
+
+local function startteleport()
+	paused = false
+	cooldown = 5
+	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	world.playerX = 832
+	world.playerY = -1152
+	SFX.play(34)
+end
+
+local function hubmapteleport()
+	paused = false
+	cooldown = 5
+	Misc.unpause()
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	world.playerX = 320
+	world.playerY = -1088
+	SFX.play(34)
 end
 
 local function twoplayercheck()
@@ -223,23 +267,40 @@ local function drawPauseMenu(y, alpha)
 		{
 			{name="Continue", action=unpause}
 		}
-		
-		if (Level.filename() == "MariosTown.lvlx") == false then
-			table.insert(pause_options, {name="Restart", action = restartlevel});
+		if not isOverworld then
+			if (Level.filename() == "MariosTown.lvlx") == false then
+				table.insert(pause_options, {name="Restart", action = restartlevel});
+			end
 		end
-		if Level.filename() == "MariosTown.lvlx" then
-			table.insert(pause_options, {name="Restart HUB", action = restartlevel});
+		if not isOverworld then
+			if (Level.filename() == "MariosTown.lvlx") == true then
+				table.insert(pause_options, {name="Restart HUB", action = restartlevel});
+			end
 		end
-		if (Level.filename() == "MariosTown.lvlx") == false then
-			table.insert(pause_options, {name="Teleport to Mario's City", action = hubteleport});
+		if not isOverworld then
+			if (Level.filename() == "MariosTown.lvlx") == false then
+				table.insert(pause_options, {name="Teleport to Mario's City", action = hubteleport});
+			end
 		end
-		table.insert(pause_options, {name="Change Character (1P)", action = characterchange13});
-		if player.count() == 2 then
-			table.insert(pause_options, {name="Change Character (2P)", action = characterchange13_2p});
+		if not isOverworld then
+			table.insert(pause_options, {name="Change Character (1P)", action = characterchange13});
+		end
+		if not isOverworld then
+			if player.count() == 2 then
+				table.insert(pause_options, {name="Change Character (2P)", action = characterchange13_2p});
+			end
 		end
 		table.insert(pause_options, {name="Change Resolution", action = changeresolution});
 		table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
-		table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
+		if isOverworld then
+			table.insert(pause_options, {name="Teleport back to the Start", action = startteleport});
+		end
+		if isOverworld then
+			table.insert(pause_options, {name="Teleport to the HUB", action = hubmapteleport});
+		end
+		if not isOverworld then
+			table.insert(pause_options, {name="Save and Exit to Map", action = exitlevelsave});
+		end
 		table.insert(pause_options, {name="Save and Continue", action = savegame});
 		table.insert(pause_options, {name="Save and Exit to SMAS++", action = quitgame});
 		table.insert(pause_options, {name="Exit to SMAS++ Without Saving", action = quitonly});

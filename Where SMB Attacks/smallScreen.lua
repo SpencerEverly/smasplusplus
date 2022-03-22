@@ -47,15 +47,24 @@ end
 
 function smallScreen.onCameraUpdate()
     if not smallScreen.positionChangingEnabled then return end
+	
+	local b = player.sectionObj.boundary
+	
+	if not isOverworld then
+		local widthDifference = ((camera.width-smallScreen.width)*0.5)
+		camera.x = math.clamp(player.x+(player.width*0.5)-(camera.width*0.5),b.left-widthDifference,b.right+widthDifference-camera.width)
 
+		local heightDifference = ((camera.height-smallScreen.height)*0.5)
+		camera.y = math.clamp(player.y+player.height-(camera.height*0.5),b.top-heightDifference,b.bottom+heightDifference-camera.height)
+	end
+	if isOverworld then
+		local bworld = world.playerY
+		local widthDifference = ((camera.width-smallScreen.width)*0.5)
+		camera.x = math.clamp(world.playerX+(32*0.5)-(camera.width*0.5),bworld.left-widthDifference,bworld.right+widthDifference-camera.width)
 
-    local b = player.sectionObj.boundary
-
-    local widthDifference = ((camera.width-smallScreen.width)*0.5)
-    camera.x = math.clamp(player.x+(player.width*0.5)-(camera.width*0.5),b.left-widthDifference,b.right+widthDifference-camera.width)
-
-    local heightDifference = ((camera.height-smallScreen.height)*0.5)
-    camera.y = math.clamp(player.y+player.height-(camera.height*0.5),b.top-heightDifference,b.bottom+heightDifference-camera.height)
+		local heightDifference = ((camera.height-smallScreen.height)*0.5)
+		camera.y = math.clamp(world.playerY+32-(camera.height*0.5),bworld.top-heightDifference,bworld.bottom+heightDifference-camera.height)
+	end
 end
 
 
@@ -69,7 +78,7 @@ smallScreen.scaleY = 1
 smallScreen.offsetX = 0
 smallScreen.offsetY = 0
 
-smallScreen.priority = 15
+smallScreen.priority = 10
 
 smallScreen.croppingEnabled = true
 smallScreen.positionChangingEnabled = true
