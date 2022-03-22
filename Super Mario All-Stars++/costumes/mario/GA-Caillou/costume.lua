@@ -10,8 +10,8 @@ function costume.onInit(p)
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-grow.ogg")
 	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-died.ogg")
 	Audio.sounds[10].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-slide.ogg")
-	extrasounds.id14  = Audio.SfxOpen("costumes/mario/GA-Caillou/coin.ogg")
-	extrasounds.id18  = Audio.SfxOpen("costumes/mario/GA-Caillou/fireball.ogg")
+	extrasounds.id14  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/GA-Caillou/coin.ogg"))
+	extrasounds.id18  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/GA-Caillou/fireball.ogg"))
 	Audio.sounds[21].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/dungeon-win.ogg")
 	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/grab.ogg")
 	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/tail.ogg")
@@ -33,10 +33,10 @@ function costume.onCleanup(p)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
-	Audio.sounds[4].sfx  = nil
+	extrasounds.id4  = Audio.SfxOpen(Misc.resolveSoundFile("block-smash.ogg"))
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
-	Audio.sounds[7].sfx  = nil
+	extrasounds.id7  = Audio.SfxOpen(Misc.resolveSoundFile("mushroom.ogg"))
 	Audio.sounds[8].sfx  = nil
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
