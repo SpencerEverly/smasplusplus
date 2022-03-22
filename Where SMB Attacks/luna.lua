@@ -31,6 +31,8 @@ local smallScreen = require("smallscreen")
 local extrasounds = require("extrasounds")
 local modernReserveItems = require("modernReserveItems")
 
+local test = true
+
 customCamera.transitionSpeed = 5
 
 local cooldown = 0
