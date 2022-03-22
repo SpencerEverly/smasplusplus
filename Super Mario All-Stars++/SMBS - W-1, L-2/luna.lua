@@ -10,7 +10,7 @@ function onEvent(eventName)
 	if eventName == "Boss Start" then
 		Audio.MusicChange(0, "_OST/Super Mario Bros 2/Boss.spc|0;g=2.5")
 		if currentCostume == "0-SMASPLUSPLUS-BETA" then
-			Audio.MusicChange(0, "Super Mario All-Stars++ (Beta)/Birdo.ogg")
+			Audio.MusicChange(0, "_OST/Super Mario All-Stars++ (Beta)/BirdoAlt.ogg")
 		end
 	end
 	if eventName == "Boss End" then
