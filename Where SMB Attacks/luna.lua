@@ -65,7 +65,7 @@ function onStart()
 end
 
 function onCameraUpdate(c, camIdx)
-	if Player(2) and Player(2).isValid then
+	if player.count(2) then
 		if c == 1 then
 			camera.renderX, camera.rendery = 0, 0
 			camera.width, camera.height = 800, 600
