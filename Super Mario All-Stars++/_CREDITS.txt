@@ -232,6 +232,20 @@ Themes made by:
 - Jake Brito
 - Softendo
 
+-----Where SMB Attacks-----
+
+Created by Spencer Everly
+Episode developed as early as July 14th, 2010
+Remake released on February 19th, 2020 (v1.0)
+
+LunaLua code made b:
+- Spencer Everly
+- MrDoubeA
+- KBM-Quine
+- Enjl
+
+Hotel Mario remix music by Keaton
+
 -----Adventures of Demo-----
 
 Adventures of Demo by Wohlstand
