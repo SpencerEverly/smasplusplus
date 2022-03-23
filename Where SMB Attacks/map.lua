@@ -129,13 +129,6 @@ local yoshiAnimationFrames = {
 local bootBounceData = {}
 
 function onTick()
-	if SaveData.resolution == "fullscreen" then
-		map3d.CameraSettings.fov = 92.7
-		map3d.CameraSettings.distance = 32
-		map3d.CameraSettings.height = 320
-		map3d.CameraSettings.angle = 90
-		map3d.CameraSettings.heightAdjust = false
-	end
 	if SaveData.resolution == "widescreen" then
 		map3d.CameraSettings.fov = 107.7 - 0.00872665
 		map3d.CameraSettings.distance = 32
@@ -143,30 +136,45 @@ function onTick()
 		map3d.CameraSettings.angle = 90
 		map3d.CameraSettings.heightAdjust = false
 	end
-end
-
-function onTickEnd()
-	local playerCam = Camera.get()[1]
-	for _, v in ipairs(cameraBoundaries) do
-		if(v ~= nil) then
-			if(check_range(world.playerX, v.x, v.x + v.width) and check_range(world.playerY, v.y, v.y + v.height)) then
-				if SaveData.resolution == "fullscreen" then
-					playerCam.x = math.max(v.x, math.min(playerCam.x, v.x + v.width - SCRWIDTH))
-					playerCam.y = math.max(v.y, math.min(playerCam.y, v.y + v.height - SCRHEIGHT))
-					break
-				end
-				if SaveData.resolution == "widescreen" then
-					playerCam.x = math.max(v.x, math.min(playerCam.x, v.x + v.width - SCRWIDTH))
-					playerCam.y = math.max(v.y, math.min(playerCam.y, v.y + v.height - SCRHEIGHT))
-					break
-				end
-			end
-		end
+	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
+		map3d.CameraSettings.fov = 92.7
+		map3d.CameraSettings.distance = 32
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
 	end
 end
 
 function onDraw()
-	if SaveData.resolution == "fullscreen" then
+	if SaveData.resolution == "widescreen" then
+		Graphics.drawImageWP(hudborderwide, 0, 0, 3)
+		if SaveData.letterbox == false then
+			smallScreen.scaleY = 1.33
+		elseif SaveData.letterbox == true then
+			smallScreen.scaleY = 1
+		end
+		Graphics.drawImageWP(oneupicon, 70, 500, 5)
+		Graphics.drawImageWP(times, 105, 502, 5)
+		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 160, 500, 5)
+		Graphics.drawImageWP(times, 178, 502, 5)
+		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 500, 5)
+		Graphics.drawImageWP(times, 254, 502, 5)
+		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+		if world.levelTitle then
+			textplus.print{x=150, y=159, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
+		end
+		if world.levelObj then
+			textplus.print{x=150, y=145, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=150, y=145, text = "N/A", priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
+		end
+	end
+	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
 		for idx,p in ipairs(Player.get()) do
 			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 
@@ -261,34 +269,6 @@ function onDraw()
 		end
 		if world.levelObj == nil then
 			textplus.print{x=64, y=92, text = "N/A", priority=5, color=Color.yellow, font=font2}
-		end
-	end
-	if SaveData.resolution == "widescreen" then
-		Graphics.drawImageWP(hudborderwide, 0, 0, 3)
-		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1.33
-		elseif SaveData.letterbox == true then
-			smallScreen.scaleY = 1
-		end
-		Graphics.drawImageWP(oneupicon, 70, 500, 5)
-		Graphics.drawImageWP(times, 105, 502, 5)
-		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 160, 500, 5)
-		Graphics.drawImageWP(times, 178, 502, 5)
-		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(staricon, 236, 500, 5)
-		Graphics.drawImageWP(times, 254, 502, 5)
-		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
-		if world.levelTitle then
-			textplus.print{x=150, y=159, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
-		end
-		if world.levelObj then
-			textplus.print{x=150, y=145, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
-			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
-		end
-		if world.levelObj == nil then
-			textplus.print{x=150, y=145, text = "N/A", priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
 		end
 	end
 	

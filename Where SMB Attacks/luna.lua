@@ -27,10 +27,11 @@ end
 local littleDialogue = require("littleDialogue")
 local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
-local smallScreen = require("smallscreen")
 local extrasounds = require("extrasounds")
 local modernReserveItems = require("modernReserveItems")
 local pausemenu = require("pausemenu")
+
+littleDialogue.defaultStyleName = "smbx13"
 
 customCamera.transitionSpeed = 5
 
@@ -115,6 +116,7 @@ function onInputUpdate()
 end
 
 function onTick()
+	littleDialogue.defaultStyleName = "smbx13"
 	if Player(2) and Player(2).isValid then
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
 			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
@@ -150,20 +152,53 @@ function onTick()
         end
 	end
 	if SaveData.resolution == "fullscreen" then
-		littleDialogue.defaultStyleName = "smbx13"
 		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
-		smallScreen.scaleY = 1
 	end
 	if SaveData.resolution == "widescreen" then
-		littleDialogue.defaultStyleName = "smbx13wide"
 		customCamera.defaultScreenHeight = 450
 		customCamera.defaultZoom = 0.75
 		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1
+			
 		elseif SaveData.letterbox == true then
-			smallScreen.scaleY = 1
+			
 		end
+	end
+	if SaveData.resolution == "ultrawide" then
+		customCamera.defaultScreenWidth = 800
+		customCamera.defaultScreenHeight = 337
+		customCamera.defaultZoom = 0.562
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+	end
+	if SaveData.resolution == "nes" then
+		customCamera.defaultScreenWidth = 512
+		customCamera.defaultScreenHeight = 448
+		customCamera.defaultZoom = 0.75
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+	end
+	if SaveData.resolution == "gameboy" then
+		customCamera.defaultScreenWidth = 320
+		customCamera.defaultScreenHeight = 228
+		customCamera.defaultZoom = 0.40
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+	end
+	if SaveData.resolution == "gba" then
+		customCamera.defaultScreenWidth = 480
+		customCamera.defaultScreenHeight = 320
+		customCamera.defaultZoom = 0.54
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
 	end
 end
 

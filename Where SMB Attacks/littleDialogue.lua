@@ -2258,6 +2258,7 @@ littleDialogue.registerStyle("smbx13",{
 	speakerNameGap = 6,
 	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
 	speakerNameYScale = 1.2,
+	priority = -1,
 	
 	openSpeed = 5,
 	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.

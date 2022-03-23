@@ -136,10 +136,18 @@ end
 
 local function changeresolution()
 	SFX.play("resolution-set.ogg")
-	if SaveData.resolution == "widescreen" then
-		SaveData.resolution = "fullscreen"
-	elseif SaveData.resolution == "fullscreen" then
+	if SaveData.resolution == "fullscreen" then
 		SaveData.resolution = "widescreen"
+	elseif SaveData.resolution == "widescreen" then
+		SaveData.resolution = "ultrawide"
+	elseif SaveData.resolution == "ultrawide" then
+		SaveData.resolution = "nes"
+	elseif SaveData.resolution == "nes" then
+		SaveData.resolution = "gameboy"
+	elseif SaveData.resolution == "gameboy" then
+		SaveData.resolution = "gba"
+	elseif SaveData.resolution == "gba" then
+		SaveData.resolution = "fullscreen"
 	end
 end
 
@@ -255,7 +263,12 @@ local function drawPauseMenu(y, alpha)
 	
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
-	textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 5}
+	if not isOverworld then
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 0}
+	end
+	if isOverworld then
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 2}
+	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
 	h = h+16+8--font.charHeight;
@@ -317,7 +330,12 @@ local function drawPauseMenu(y, alpha)
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
 		local h2 = layout.height
-		textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 8}
+		if not isOverworld then
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 0}
+		end
+		if isOverworld then
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 2}
+		end
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
 		h2 = h2+2+6--font.charHeight;
 		y = y+h2;
@@ -330,10 +348,26 @@ local function drawPauseMenu(y, alpha)
 	if SaveData.resolution == "widescreen" then
 		resolutionshow = "<color red>Resolution: Widescreen (16:9)</color>"
 	end
+	if SaveData.resolution == "ultrawide" then
+		resolutionshow = "<color red>Resolution: Ultrawide (21:9)</color>"
+	end
+	if SaveData.resolution == "nes" then
+		resolutionshow = "<color red>Resolution: NES/SNES</color>"
+	end
+	if SaveData.resolution == "gameboy" then
+		resolutionshow = "<color red>Resolution: Gameboy/Gameboy Color</color>"
+	end
+	if SaveData.resolution == "gba" then
+		resolutionshow = "<color red>Resolution: Gameboy Advance</color>"
+	end
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
-	
 	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
-	textplus.render{layout = layout, x = 220 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
+	if not isOverworld then
+		textplus.render{layout = layout, x = 220 - w*0.5, y = y+4, color = Color.white..alpha, priority = 0}
+	end
+	if isOverworld then
+		textplus.render{layout = layout, x = 220 - w*0.5, y = y+4, color = Color.white..alpha, priority = 2}
+	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 
 	h = h+4+8--font.charHeight;
@@ -351,7 +385,12 @@ function pausemenu2.onDraw()
 			pause_height = drawPauseMenu(-600,0);
 			pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(5, 0x00000077);
+		if not isOverworld then
+			pause_box:Draw(-1, 0x00000077);
+		end
+		if isOverworld then
+			pause_box:Draw(1, 0x00000077);
+		end
 		drawPauseMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause

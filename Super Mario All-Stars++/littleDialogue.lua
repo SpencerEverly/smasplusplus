@@ -24,7 +24,7 @@ local littleDialogue = {}
 littleDialogue.boxenabled = false
 local cooldown = 0
 
-local smallScreen = require("smallScreen")
+pcall(function() smallScreen = require("smallScreen") end)
 
 function littleDialogue.onInitAPI()
     registerEvent(littleDialogue,"onTick")

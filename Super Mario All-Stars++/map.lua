@@ -10,10 +10,11 @@ local pause_music = require("map_music")
 local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
 
-local map3d = require("mapp3d")
-
-map3d.BGPlane.tile = 394
-map3d.Light.enabled = false
+if SaveData.disableX2char == false then
+	local map3d = require("mapp3d")
+	map3d.BGPlane.tile = 394
+	map3d.Light.enabled = false
+end
 
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
@@ -132,13 +133,17 @@ function onTick()
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 	end
-	if SaveData.resolution == "fullscreen" then
-		map3d.CameraSettings.fov = 60
-		map3d.CameraSettings.height = 300
+	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
+		if SaveData.disableX2char == false then
+			map3d.CameraSettings.fov = 60
+			map3d.CameraSettings.height = 300
+		end
 	end
 	if SaveData.resolution == "widescreen" then
-		map3d.CameraSettings.fov = 75
-		map3d.CameraSettings.height = 300
+		if SaveData.disableX2char == false then
+			map3d.CameraSettings.fov = 75
+			map3d.CameraSettings.height = 300
+		end
 	end
 end
 
@@ -221,7 +226,7 @@ function onDraw()
 		textplus.print{x=733, y=477, text = os.date("%a"), priority=8, color=Color.white}
 		textplus.print{x=752, y=477, text = os.date("%x"), priority=8, color=Color.white}
 	end
-	if SaveData.resolution and not SaveData.resolution == "widescreen" then
+	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
 		for idx,p in ipairs(Player.get()) do
 			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 

@@ -1,14 +1,11 @@
-local smwMap = require("smwMap")
 local starman = require("starman/star")
 local mega2 = require("mega/megashroom")
 local playerManager = require("playermanager")
 local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
-local autoscroll = require("autoscroll")
 local warpTransition = require("warpTransition")
 local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
-local smallScreen = require("smallscreen")
 
 local wideborder = Graphics.loadImageResolved("widescreen.png")
 
@@ -298,34 +295,6 @@ function globalgenerals.onInputUpdate()
 		end
 	end
 end
-
-function globalgenerals.onCameraUpdate(c, camIdx)
-	if Player.count() == 2 then
-		if c == 1 then
-			camera.renderX, camera.rendery = 0, 0
-			camera.width, camera.height = 800, 600
-		else
-			camera2.renderX  = 800
-		end
-		local screenType = mem(0x00B25130,FIELD_WORD)
-
-		if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
-			return camIdx
-		elseif screenType == 5 then -- dynamic screen
-			if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
-				return 2
-			elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
-				return 1
-			else
-				return 0
-			end
-		elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
-			return 0
-		else
-			return 1
-		end
-	end
-end
 	
 function globalgenerals.onTick()
 	if SaveData.disableX2char == false then
@@ -349,7 +318,6 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
-		smallScreen.scaleY = 1
 	end
 	if SaveData.resolution == "widescreen" then
 		customCamera.defaultScreenWidth = 800
@@ -360,20 +328,19 @@ function globalgenerals.onTick()
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
 		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1
+			
 		elseif SaveData.letterbox == true then
-			smallScreen.scaleY = 1
+			
 		end
 	end
 	if SaveData.resolution == "ultrawide" then
 		customCamera.defaultScreenWidth = 800
 		customCamera.defaultScreenHeight = 337
-		customCamera.defaultZoom = 0.57
+		customCamera.defaultZoom = 0.562
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
-		smallScreen.scaleY = 1
 	end
 	if SaveData.resolution == "nes" then
 		customCamera.defaultScreenWidth = 512
@@ -383,7 +350,6 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
-		smallScreen.scaleY = 1
 	end
 	if SaveData.resolution == "gameboy" then
 		customCamera.defaultScreenWidth = 320
@@ -393,7 +359,6 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
-		smallScreen.scaleY = 1
 	end
 	if SaveData.resolution == "gba" then
 		customCamera.defaultScreenWidth = 480
@@ -403,7 +368,6 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
-		smallScreen.scaleY = 1
 	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
