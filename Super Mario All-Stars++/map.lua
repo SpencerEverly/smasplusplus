@@ -132,7 +132,7 @@ function onTick()
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 	end
-	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
+	if SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
 		if SaveData.disableX2char == true then
 			map3d.CameraSettings.fov = 75
 			map3d.CameraSettings.height = 300
@@ -142,14 +142,52 @@ function onTick()
 			map3d.CameraSettings.height = 300
 		end
 	end
-	if SaveData.resolution == "widescreen" then
+	if SaveData.resolution == "fullscreen" then
 		if SaveData.disableX2char == true then
-			map3d.CameraSettings.fov = 75
-			map3d.CameraSettings.height = 300
+			map3d.CameraSettings.fov = 92.7
+			map3d.CameraSettings.distance = 32
+			map3d.CameraSettings.height = 320
+			map3d.CameraSettings.angle = 90
+			map3d.CameraSettings.heightAdjust = false
 		end
 		if SaveData.disableX2char == false then
 			map3d.CameraSettings.fov = 75
+			map3d.CameraSettings.distance = 300
 			map3d.CameraSettings.height = 300
+			map3d.CameraSettings.angle = 50
+			map3d.CameraSettings.heightAdjust = true
+		end
+	end
+	if SaveData.resolution == "widescreen" then
+		if SaveData.disableX2char == true then
+			map3d.CameraSettings.fov = 107.7 - 0.00872665
+			map3d.CameraSettings.distance = 32
+			map3d.CameraSettings.height = 320
+			map3d.CameraSettings.angle = 90
+			map3d.CameraSettings.heightAdjust = false
+		end
+		if SaveData.disableX2char == false then
+			map3d.CameraSettings.fov = 60
+			map3d.CameraSettings.distance = 300
+			map3d.CameraSettings.height = 300
+			map3d.CameraSettings.angle = 50
+			map3d.CameraSettings.heightAdjust = true
+		end
+	end
+	if SaveData.resolution == "ultrawide" then
+		if SaveData.disableX2char == true then
+			map3d.CameraSettings.fov = 107.7 - 0.00872665
+			map3d.CameraSettings.distance = 32
+			map3d.CameraSettings.height = 320
+			map3d.CameraSettings.angle = 90
+			map3d.CameraSettings.heightAdjust = false
+		end
+		if SaveData.disableX2char == false then
+			map3d.CameraSettings.fov = 75
+			map3d.CameraSettings.distance = 300
+			map3d.CameraSettings.height = 300
+			map3d.CameraSettings.angle = 50
+			map3d.CameraSettings.heightAdjust = true
 		end
 	end
 end

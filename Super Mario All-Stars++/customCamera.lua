@@ -38,7 +38,7 @@ local npcutils = require("npcs/npcutils")
 local playerManager = require("playerManager")
 local sizable = require("game/sizable")
 
-local handycam = require("handycamm")
+local handycam = require("handycam")
 
 local customCamera = {}
 
