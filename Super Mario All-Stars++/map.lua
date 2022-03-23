@@ -183,7 +183,45 @@ local yoshiAnimationFrames = {
 local bootBounceData = {}
 
 function onDraw()
-	if SaveData.resolution == "fullscreen" then
+	if SaveData.resolution == "widescreen" then
+		Graphics.drawImageWP(hudborderwide, 0, 0, 3)
+		
+		Graphics.drawImageWP(oneupicon, 70, 500, 5)
+		Graphics.drawImageWP(times, 105, 502, 5)
+		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 160, 500, 5)
+		Graphics.drawImageWP(times, 178, 502, 5)
+		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 500, 5)
+		Graphics.drawImageWP(times, 254, 502, 5)
+		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 326, 496, 4)
+		Graphics.drawImageWP(coinicon, 330, 500, 5)
+		Graphics.drawImageWP(times, 348, 502, 5)
+		textplus.print{x=367, y=500, text = ""..SaveData.totalcoins.."", priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+		if world.levelTitle then
+			textplus.print{x=150, y=159, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
+		end
+		if world.levelObj then
+			textplus.print{x=150, y=145, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=150, y=145, text = "N/A", priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
+		end
+		Graphics.drawBox{x=719, y=495, width=76, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=724, y=500, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
+		textplus.print{x=755, y=500, text = os.date("%I"), priority=8, color=Color.white}
+		textplus.print{x=765, y=500, text = ":", priority=8, color=Color.white}
+		textplus.print{x=768, y=500, text = os.date("%M"), priority=8, color=Color.white}
+		textplus.print{x=780, y=500, text = os.date("%p"), priority=8, color=Color.white}
+		Graphics.drawBox{x=695, y=472, width=100, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=700, y=477, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
+		textplus.print{x=733, y=477, text = os.date("%a"), priority=8, color=Color.white}
+		textplus.print{x=752, y=477, text = os.date("%x"), priority=8, color=Color.white}
+	end
+	if SaveData.resolution and not SaveData.resolution == "widescreen" then
 		for idx,p in ipairs(Player.get()) do
 			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 
@@ -293,44 +331,6 @@ function onDraw()
 		textplus.print{x=700, y=557, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
 		textplus.print{x=733, y=557, text = os.date("%a"), priority=8, color=Color.white}
 		textplus.print{x=754, y=557, text = os.date("%x"), priority=8, color=Color.white}
-	end
-	if SaveData.resolution == "widescreen" then
-		Graphics.drawImageWP(hudborderwide, 0, 0, 3)
-		
-		Graphics.drawImageWP(oneupicon, 70, 500, 5)
-		Graphics.drawImageWP(times, 105, 502, 5)
-		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 160, 500, 5)
-		Graphics.drawImageWP(times, 178, 502, 5)
-		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(staricon, 236, 500, 5)
-		Graphics.drawImageWP(times, 254, 502, 5)
-		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 326, 496, 4)
-		Graphics.drawImageWP(coinicon, 330, 500, 5)
-		Graphics.drawImageWP(times, 348, 502, 5)
-		textplus.print{x=367, y=500, text = ""..SaveData.totalcoins.."", priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
-		if world.levelTitle then
-			textplus.print{x=150, y=159, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
-		end
-		if world.levelObj then
-			textplus.print{x=150, y=145, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
-			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
-		end
-		if world.levelObj == nil then
-			textplus.print{x=150, y=145, text = "N/A", priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
-		end
-		Graphics.drawBox{x=719, y=495, width=76, height=20, color=Color.black..0.2, priority=8}
-		textplus.print{x=724, y=500, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
-		textplus.print{x=755, y=500, text = os.date("%I"), priority=8, color=Color.white}
-		textplus.print{x=765, y=500, text = ":", priority=8, color=Color.white}
-		textplus.print{x=768, y=500, text = os.date("%M"), priority=8, color=Color.white}
-		textplus.print{x=780, y=500, text = os.date("%p"), priority=8, color=Color.white}
-		Graphics.drawBox{x=695, y=472, width=100, height=20, color=Color.black..0.2, priority=8}
-		textplus.print{x=700, y=477, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
-		textplus.print{x=733, y=477, text = os.date("%a"), priority=8, color=Color.white}
-		textplus.print{x=752, y=477, text = os.date("%x"), priority=8, color=Color.white}
 	end
 	
 	if loadlevelanimation then

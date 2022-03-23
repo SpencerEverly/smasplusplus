@@ -10,6 +10,8 @@ local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local smallScreen = require("smallscreen")
 
+local wideborder = Graphics.loadImageResolved("widescreen.png")
+
 customCamera.transitionSpeed = 5
 
 hudoverride.visible.starcoins = false --There's no star coins in the entire game, but I'm only adding this because why not
@@ -340,6 +342,7 @@ function globalgenerals.onTick()
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
+		customCamera.defaultScreenWidth = 800
 		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
 		customCamera.defaultScreenOffsetX = 0
@@ -347,20 +350,9 @@ function globalgenerals.onTick()
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
 		smallScreen.scaleY = 1
-		
-		hudoverride.offsets.keys = 		{x = 64, 	y = 26, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.hearts = 	{x = 5, 	y = 16, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.score = 	{x = 170, 	y = 47, align = hudoverride.ALIGN_RIGHT};
-
-		hudoverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.coins = 	{x = 88, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
-		hudoverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
 	end
 	if SaveData.resolution == "widescreen" then
+		customCamera.defaultScreenWidth = 800
 		customCamera.defaultScreenHeight = 450
 		customCamera.defaultZoom = 0.75
 		customCamera.defaultScreenOffsetX = 0
@@ -372,6 +364,46 @@ function globalgenerals.onTick()
 		elseif SaveData.letterbox == true then
 			smallScreen.scaleY = 1
 		end
+	end
+	if SaveData.resolution == "ultrawide" then
+		customCamera.defaultScreenWidth = 800
+		customCamera.defaultScreenHeight = 337
+		customCamera.defaultZoom = 0.57
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleY = 1
+	end
+	if SaveData.resolution == "nes" then
+		customCamera.defaultScreenWidth = 512
+		customCamera.defaultScreenHeight = 448
+		customCamera.defaultZoom = 0.75
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleY = 1
+	end
+	if SaveData.resolution == "gameboy" then
+		customCamera.defaultScreenWidth = 320
+		customCamera.defaultScreenHeight = 228
+		customCamera.defaultZoom = 0.40
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleY = 1
+	end
+	if SaveData.resolution == "gba" then
+		customCamera.defaultScreenWidth = 480
+		customCamera.defaultScreenHeight = 320
+		customCamera.defaultZoom = 0.54
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleY = 1
 	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
@@ -1091,7 +1123,9 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 end
 
 function globalgenerals.onDraw()
-	
+	if SaveData.resolution == "widescreen" then
+		Graphics.drawImageWP(wideborder, 0, 0, 10)
+	end
 end
 
 function globalgenerals.onExit()
