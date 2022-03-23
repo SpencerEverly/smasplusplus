@@ -64,6 +64,8 @@ function levelload()
 	loadlevelanimationin = nil
 end
 
+cameraBoundaries = {}
+
 function onInputUpdate()
 	if Misc.isPausedByLua() == false then
 		if world.levelTitle and world.levelObj then
@@ -140,6 +142,26 @@ function onTick()
 		map3d.CameraSettings.height = 320
 		map3d.CameraSettings.angle = 90
 		map3d.CameraSettings.heightAdjust = false
+	end
+end
+
+function onTickEnd()
+	local playerCam = Camera.get()[1]
+	for _, v in ipairs(cameraBoundaries) do
+		if(v ~= nil) then
+			if(check_range(world.playerX, v.x, v.x + v.width) and check_range(world.playerY, v.y, v.y + v.height)) then
+				if SaveData.resolution == "fullscreen" then
+					playerCam.x = math.max(v.x, math.min(playerCam.x, v.x + v.width - SCRWIDTH))
+					playerCam.y = math.max(v.y, math.min(playerCam.y, v.y + v.height - SCRHEIGHT))
+					break
+				end
+				if SaveData.resolution == "widescreen" then
+					playerCam.x = math.max(v.x, math.min(playerCam.x, v.x + v.width - SCRWIDTH))
+					playerCam.y = math.max(v.y, math.min(playerCam.y, v.y + v.height - SCRHEIGHT))
+					break
+				end
+			end
+		end
 	end
 end
 
@@ -220,7 +242,6 @@ function onDraw()
 			end
 		end
 		Graphics.drawImageWP(hudborder, 0, 0, 3)
-		smallScreen.scaleY = 1
 		Graphics.drawImageWP(oneupicon, 70, 558, 5)
 		Graphics.drawImageWP(times, 105, 560, 5)
 		textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}

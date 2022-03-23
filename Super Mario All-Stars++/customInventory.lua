@@ -44,7 +44,21 @@ local backSprite = Sprite{
 local chooseSprite = Sprite{
     image = invChoose,
     x = 400,
-	y = 342,
+	y = 382,
+	align = Sprite.align.CENTER,
+}
+
+local backSpriteWide = Sprite{
+    image = invBack,
+    x = 70,
+	y = 470,
+	align = Sprite.align.BOTTOMLEFT
+}
+
+local chooseSpriteWide = Sprite{
+    image = invChoose,
+    x = 400,
+	y = 242,
 	align = Sprite.align.CENTER,
 }
 
@@ -116,87 +130,172 @@ end
 
 
 function inventory.onDrawWorld()
-	-- Animation --
-	if invIsOpen then
-		if bScale < 1 then bScale = bScale + 0.1 end
-	else
-		if bScale > 0 then bScale = bScale - 0.1 end
+	if SaveData.resolution == "fullscreen" then
+		-- Animation --
+		if invIsOpen then
+			if bScale < 1 then bScale = bScale + 0.1 end
+		else
+			if bScale > 0 then bScale = bScale - 0.1 end
+		end
+
+		if chooseIsOpen then
+			if cScale < 1 then cScale = cScale + 0.1 end
+		else
+			if cScale > 0 then cScale = cScale - 0.1 end
+		end
+
+		-- Lets cap the scale --
+		if bScale < 0 then bScale = 0 end
+		if bScale > 1 then bScale = 1 end
+
+		if cScale < 0 then cScale = 0 end
+		if cScale > 1 then cScale = 1 end
+
+		-- Scaling the sprites --
+		if bScale > 0 then
+			backSprite:draw{}
+			backSprite.transform.scale = vector(1, bScale)
+		end
+
+		if cScale > 0 then
+			chooseSprite:draw{priority = 6}
+			chooseSprite.transform.scale = vector(cScale, cScale)
+		end
 	end
+	if SaveData.resolution == "widescreen" then
+		-- Animation --
+		if invIsOpen then
+			if bScale < 1 then bScale = bScale + 0.1 end
+		else
+			if bScale > 0 then bScale = bScale - 0.1 end
+		end
 
-	if chooseIsOpen then
-		if cScale < 1 then cScale = cScale + 0.1 end
-	else
-		if cScale > 0 then cScale = cScale - 0.1 end
-	end
+		if chooseIsOpen then
+			if cScale < 1 then cScale = cScale + 0.1 end
+		else
+			if cScale > 0 then cScale = cScale - 0.1 end
+		end
 
-	-- Lets cap the scale --
-	if bScale < 0 then bScale = 0 end
-	if bScale > 1 then bScale = 1 end
+		-- Lets cap the scale --
+		if bScale < 0 then bScale = 0 end
+		if bScale > 1 then bScale = 1 end
 
-	if cScale < 0 then cScale = 0 end
-	if cScale > 1 then cScale = 1 end
+		if cScale < 0 then cScale = 0 end
+		if cScale > 1 then cScale = 1 end
 
-	-- Scaling the sprites --
-	if bScale > 0 then
-		backSprite:draw{}
-		backSprite.transform.scale = vector(1, bScale)
-	end
+		-- Scaling the sprites --
+		if bScale > 0 then
+			backSpriteWide:draw{priority = 5.9}
+			backSpriteWide.transform.scale = vector(1, bScale)
+		end
 
-	if cScale > 0 then
-		chooseSprite:draw{priority = 5}
-		chooseSprite.transform.scale = vector(cScale, cScale)
+		if cScale > 0 then
+			chooseSpriteWide:draw{priority = 6}
+			chooseSpriteWide.transform.scale = vector(cScale, cScale)
+		end
 	end
 
 	-- Drawing the Item Icons --
 	if bScale >= 1 then
 		for i = 0, 7, 1 do
 			if selectedOffset == i then isSelected = 1 else isSelected = 0 end
-			textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=452, font=font, plaintext=true}
-			Graphics.draw{
-				type = RTYPE_IMAGE,
-				image = invIcons,
-				x = i * 82 + 94,
-				y = 478,
-				sourceY = i * 36,
-				sourceHeight = 36,
-				sourceX = isSelected * 36,
-				sourceWidth = 36
-			}
+			if SaveData.resolution == "fullscreen" then
+				textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=452, font=font, plaintext=true}
+				Graphics.draw{
+					type = RTYPE_IMAGE,
+					image = invIcons,
+					x = i * 82 + 94,
+					y = 478,
+					sourceY = i * 36,
+					sourceHeight = 36,
+					sourceX = isSelected * 36,
+					sourceWidth = 36
+				}
+			end
+			if SaveData.resolution == "widescreen" then
+				textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=392, font=font, plaintext=true, priority=6}
+				Graphics.draw{
+					type = RTYPE_IMAGE,
+					image = invIcons,
+					x = i * 82 + 94,
+					y = 418,
+					sourceY = i * 36,
+					sourceHeight = 36,
+					sourceX = isSelected * 36,
+					sourceWidth = 36,
+					priority = 6
+				}
+			end
 		end
 	end
 
 	if cScale == 1 then
-		Graphics.draw{
-			type = RTYPE_IMAGE,
-			image = invChar,
-			x = 330,
-			y = 320,
-			sourceX = tonumber(player.character - 1) * 40,
-			sourceWidth = 40,
-			priority = 5.1
-		}
-		if player.count() == 2 then
+		if SaveData.resolution == "fullscreen" then
 			Graphics.draw{
 				type = RTYPE_IMAGE,
 				image = invChar,
-				x = 430,
+				x = 330,
 				y = 320,
-				sourceX = tonumber(player2.character - 1) * 40,
+				sourceX = tonumber(player.character - 1) * 40,
 				sourceWidth = 40,
 				priority = 5.1
 			}
+			if player.count() == 2 then
+				Graphics.draw{
+					type = RTYPE_IMAGE,
+					image = invChar,
+					x = 430,
+					y = 320,
+					sourceX = tonumber(player2.character - 1) * 40,
+					sourceWidth = 40,
+					priority = 5.1
+				}
+			end
+			Text.printWP("Choose a", 330, 278, 5.3)
+			Text.printWP("Player", 346, 298, 5.3)
+
+			Graphics.draw{
+				type = RTYPE_IMAGE,
+				image = selector,
+				x = 100 * (selectedPlayer - 1) + 316,
+				y = 350,
+				priority = 5.2
+			}
 		end
+		
+		
+		if SaveData.resolution == "widescreen" then
+			Graphics.draw{
+				type = RTYPE_IMAGE,
+				image = invChar,
+				x = 330,
+				y = 260,
+				sourceX = tonumber(player.character - 1) * 40,
+				sourceWidth = 40,
+				priority = 6.1
+			}
+			if player.count() == 2 then
+				Graphics.draw{
+					type = RTYPE_IMAGE,
+					image = invChar,
+					x = 430,
+					y = 260,
+					sourceX = tonumber(player2.character - 1) * 40,
+					sourceWidth = 40,
+					priority = 6.1
+				}
+			end
+			Text.printWP("Choose a", 330, 378, 5.3)
+			Text.printWP("Player", 346, 398, 5.3)
 
-		Text.printWP("Choose a", 330, 278, 5.3)
-		Text.printWP("Player", 346, 298, 5.3)
-
-		Graphics.draw{
-			type = RTYPE_IMAGE,
-			image = selector,
-			x = 100 * (selectedPlayer - 1) + 316,
-			y = 350,
-			priority = 5.2
-		}
+			Graphics.draw{
+				type = RTYPE_IMAGE,
+				image = selector,
+				x = 100 * (selectedPlayer - 1) + 316,
+				y = 450,
+				priority = 6.2
+			}
+		end
 	end
 
 	if(type(shader) == "string") then

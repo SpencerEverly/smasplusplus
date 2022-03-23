@@ -53,12 +53,12 @@ end
 local worldBuffer = {0,0}
 
 if isOverworld and Graphics.getOverworldHudState() ~= WHUD_NONE then
-	worldBuffer = {68, 130}
+	worldBuffer = {0,0}
 end
 
 local function lerpCamera(camera, target, lerpTime)
-	camera.x = vectr.lerp(camera.x, target.x, lerpTime)*camLock.scaleX
-	camera.y = vectr.lerp(camera.y, target.y, lerpTime)*camLock.scaleY
+	camera.x = vectr.lerp(camera.x, target.x, lerpTime)
+	camera.y = vectr.lerp(camera.y, target.y, lerpTime)
 	
 	lerpedCamPos[camera.idx] = {x=camera.x, y=camera.y}
 end

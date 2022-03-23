@@ -11,6 +11,7 @@ local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
 local datetime = require("datetime")
 local smallScreen = require("smallScreen")
+local camLock = require("camlocksmas")
 
 local map3d = require("mapp3d")
 

@@ -58,169 +58,70 @@ local day = os.date("%d")
 local month = os.date("%m")
 
 local exacttime = os.date("%X")
-if SaveData.resolution == "fullscreen" then
-	littleDialogue.registerStyle("smbx13og",{
-		textXScale = 1,
-		textYScale = 1,
-		borderSize = 36,
-		textMaxWidth = 500,
-		speakerNameGap = 6,
-		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.2,
-		
-		openSpeed = 5,
-		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-		borderSize = 8,
-		
-		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
-		windowingOpeningEffectEnabled = false,
+littleDialogue.registerStyle("smbx13",{
+	textXScale = 1,
+	textYScale = 1,
+	borderSize = 36,
+	textMaxWidth = 500,
+	speakerNameGap = 6,
+	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+	speakerNameYScale = 1.2,
+	
+	openSpeed = 5,
+	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+	answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+	borderSize = 8,
+	
+	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
-		typewriterEnabled = true,
-		typewriterDelayNormal = 0.5, -- The usual delay between each character.
-		typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
-		typewriterSoundDelay = 4.1,
-		showTextWhileOpening = true,
+	windowingOpeningEffectEnabled = false,
 
-		closeSoundEnabled = false,
-		continueArrowEnabled = false,
-		scrollArrowEnabled   = false,
-		selectorImageEnabled = true,
-		
-	})
-	littleDialogue.registerStyle("smbx13",{
-		textXScale = 1,
-		textYScale = 1,
-		borderSize = 36,
-		textMaxWidth = 500,
-		speakerNameGap = 6,
-		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.2,
-		
-		openSpeed = 5,
-		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-		borderSize = 8,
-		
-		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
+	typewriterEnabled = false,
+	showTextWhileOpening = true,
 
-		windowingOpeningEffectEnabled = false,
+	closeSoundEnabled = false,
+	continueArrowEnabled = false,
+	scrollArrowEnabled   = false,
+	selectorImageEnabled = true,
+	
+})
 
-		typewriterEnabled = false,
-		showTextWhileOpening = true,
+littleDialogue.registerStyle("smbx13wide",{
+	textXScale = 0.8,
+	textYScale = 0.8,
+	borderSize = 36,
+	textMaxWidth = 500,
+	speakerNameGap = 6,
+	speakerNameXScale = 1.0,        -- X scale of the speaker's name.
+	speakerNameYScale = 1.0,
+	
+	openSpeed = 5,
+	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+	answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+	borderSize = 8,
+	
+	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
-		closeSoundEnabled = false,
-		continueArrowEnabled = false,
-		scrollArrowEnabled   = false,
-		selectorImageEnabled = true,
-		
-	})
-	littleDialogue.registerStyle("infobooth",{
-		borderSize = 32,
+	windowingOpeningEffectEnabled = false,
 
-		openSpeed = 0.025,
+	typewriterEnabled = false,
+	showTextWhileOpening = true,
 
-		windowingOpeningEffectEnabled = true,
-		showTextWhileOpening = true,
-
-		speakerNameOnTop = true,
-		speakerNameOffsetY = 24,
-	})
-end
-
-if SaveData.resolution == "widescreen" then
-	littleDialogue.registerStyle("smbx13og",{
-		textXScale = 0.8,
-		textYScale = 0.8,
-		borderSize = 36,
-		textMaxWidth = 500,
-		speakerNameGap = 6,
-		speakerNameXScale = 1.0,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.0,
-		
-		openSpeed = 5,
-		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-		borderSize = 8,
-		
-		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
-
-		windowingOpeningEffectEnabled = false,
-
-		typewriterEnabled = true,
-		typewriterDelayNormal = 0.5, -- The usual delay between each character.
-		typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
-		typewriterSoundDelay = 4.1,
-		showTextWhileOpening = true,
-
-		closeSoundEnabled = false,
-		continueArrowEnabled = false,
-		scrollArrowEnabled   = false,
-		selectorImageEnabled = true,
-		
-	})
-	littleDialogue.registerStyle("smbx13",{
-		textXScale = 0.8,
-		textYScale = 0.8,
-		borderSize = 36,
-		textMaxWidth = 500,
-		speakerNameGap = 6,
-		speakerNameXScale = 1.0,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.0,
-		
-		openSpeed = 5,
-		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-		borderSize = 8,
-		
-		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
-
-		windowingOpeningEffectEnabled = false,
-
-		typewriterEnabled = false,
-		showTextWhileOpening = true,
-
-		closeSoundEnabled = false,
-		continueArrowEnabled = false,
-		scrollArrowEnabled   = false,
-		selectorImageEnabled = true,
-		
-	})
-	littleDialogue.registerStyle("infobooth",{
-		textXScale = 1.4,
-		textYScale = 1.4,
-		borderSize = 32,
-
-		openSpeed = 0.025,
-
-		windowingOpeningEffectEnabled = true,
-		showTextWhileOpening = true,
-
-		speakerNameOnTop = true,
-		speakerNameOffsetY = 24,
-	})
-	littleDialogue.registerStyle("smwwide",{
-		textXScale = 1.4,
-		textYScale = 1.4,
-	})
-end
+	closeSoundEnabled = false,
+	continueArrowEnabled = false,
+	scrollArrowEnabled   = false,
+	selectorImageEnabled = true,
+	
+})
 
 local function introExit()
 	Routine.waitFrames(38)
@@ -476,7 +377,7 @@ local function SaveDataError2()
 	Audio.MusicChange(0, 0)
 	Audio.SeizeStream(0)
 	Routine.wait(1.5)
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.0>It looks like SavaData couldn't be read or corrupted.<page>If that is happening, you probably loaded this episode on the broken X2 launcher found in the actual SMBX2 program.<page>Unfortunately, this means that SaveData could be corrupted.<page>Next time, please launch the game using the X2 launch menu found on SMBX2.exe.<page>Please close this dialogue box by pressing jump, then press pause to exit the game.", speakerName = "Whoops!", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>It looks like SavaData couldn't be read or corrupted.<page>If that is happening, you probably loaded this episode on the broken X2 launcher found in the actual SMBX2 program.<page>Unfortunately, this means that SaveData could be corrupted.<page>Next time, please launch the game using the X2 launch menu found on SMBX2.exe.<page>Please close this dialogue box by pressing jump, then press pause to exit the game.", speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot1()
@@ -486,24 +387,24 @@ local function FirstBoot1()
 	logo = false
 	pressjumpwords = false
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.5>Welcome to Super Mario All-Stars++.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Please note that this is an Open Source project.<page>So please understand that BUGS may occur! Don't hesitate to report them on the GitHub page.<page>You can find it at https://github.com/SpencerEverly/smasplusplus/.<page>Other than that, please enjoy the game!<page>But, before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.5>Welcome to Super Mario All-Stars++.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Please note that this is an Open Source project.<page>So please understand that BUGS may occur! Don't hesitate to report them on the GitHub page.<page>You can find it at https://github.com/SpencerEverly/smasplusplus/.<page>Other than that, please enjoy the game!<page>But, before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot3()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.2>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot4()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>What is your name? (Not finished yet)<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>What is your name? (Not finished yet)<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot5()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.0>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.0>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot6()
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.5>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.5>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == 0 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
 	end
@@ -514,12 +415,12 @@ local function FirstBoot6()
 end
 	
 local function FirstBootGameHelp()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
 	Misc.saveGame()
 end
 
 local function TimeFixInfo1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.3><setPos 400 32 0.5 -1.2>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.3><setPos 400 32 0.5 -1.2>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
 end
 
 local function FailsafeMessage1()
@@ -528,7 +429,7 @@ local function FailsafeMessage1()
 		SaveData.failsafeMessageOne = SaveData.failsafeMessageOne - 1
 	end
 	Audio.MusicChange(0, 0)
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>It looks like the menu restarted.<page>When that happened, you probably died here in the boot screen.<page>If there are any problems, don't hesitate to email spencer.everly at gmail.com or contact them on Discord at Spencer Everly#1997.<question ToMenuResetTwo>", speakerName = "Whoops!", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>It looks like the menu restarted.<page>When that happened, you probably died here in the boot screen.<page>If there are any problems, don't hesitate to email spencer.everly at gmail.com or contact them on Discord at Spencer Everly#1997.<question ToMenuResetTwo>", speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
 local function bootDialogue()
@@ -536,23 +437,23 @@ local function bootDialogue()
 	active4 = false
 	logo = false
 	pressjumpwords = false
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function menuDialogue()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function gamebootDialogue()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.9><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.9><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
 end
 
 local function optionsMenu1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
 end
 
 local function themeMenu1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
 end
 
 
@@ -564,57 +465,57 @@ local function ResolutionChange1()
 	elseif SaveData.resolution == "fullscreen" then
 		SaveData.resolution = "widescreen"
 	end
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
 local function credits1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
 local function X2Char()
 	if SaveData.disableX2char == false then
 		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
 		SaveData.disableX2char = true
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == true then
 		SFX.play("_OST/_Sound Effects/x2-mode-enabled.ogg")
 		SaveData.disableX2char = false
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function InputConfig1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.1>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
 end
 
 local function X2DisableCheck1()
 	if Player.count() == 1 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.75>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -0.75>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
 	end
 	if Player.count() == 2 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == true then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == false then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function FramerateToggle1()
 	Cheats.trigger("framerate")
 	Defines.player_hasCheated = false
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function TwoPlayerCheck()
 	if Player.count() == 1 then
 		Cheats.trigger("2player")
 		Defines.player_hasCheated = false
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -622,7 +523,7 @@ local function OnePlayerCheck()
 	if Player.count() == 2 then
 		Cheats.trigger("1player")
 		Defines.player_hasCheated = false
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.1>1 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>1 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -632,55 +533,55 @@ local function FailsafeMessage1()
 end
 
 local function PathFix1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Would you like to fix the world map paths? Only do this if future updates break the map.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Would you like to fix the world map paths? Only do this if future updates break the map.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
 end
 
 local function ChangeChar1()
 	if SaveData.disableX2char == false then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.8>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
 	end
 	if SaveData.disableX2char == true then
 		if Player.count() == 2 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
+			littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
 		elseif Player.count() == 1 then
-			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
+			littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
 		end
 	end
 end
 
 local function ChangeChar1P()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
 end
 
 local function ChangeChar2P()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Who shall you change Player 2 into? (X2 Characters Disabled)<question CharacterList2>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 2 into? (X2 Characters Disabled)<question CharacterList2>", pauses = false, updatesInPause = true})
 end
 
 local function ChangedCharacter()
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 	if Player.count() == 1 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
 	if Player.count() == 2 then
-		littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function SaveOptions1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.7><question SavingMenuOne>", speakerName = "Saving Options", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.7><question SavingMenuOne>", speakerName = "Saving Options", pauses = false, updatesInPause = true})
 end
 
 local function SaveSlot1()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.9>Select slot by typing the number above. Press jump when you have picked the right slot (Max is 32,767) DATA FROM THE PREVIOUS SLOT, IF ANY, WILL BE OVERWRITTEN! Don't put a number in to cancel this option.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Select slot by typing the number above. Press jump when you have picked the right slot (Max is 32,767) DATA FROM THE PREVIOUS SLOT, IF ANY, WILL BE OVERWRITTEN! Don't put a number in to cancel this option.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
 end
 
 local function EraseSave1()
 	Audio.MusicChange(0, 0)
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.6>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
 end
 
 local function EraseSave2()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -2.0>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.0>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
 end
 
 local function BootDialogueMusicReset()
@@ -689,7 +590,7 @@ local function BootDialogueMusicReset()
 	logo = false
 	pressjumpwords = false
 	stpatricksday = false
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 	if Level.filename() == "intro_8bit.lvlx" then
 		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
 	end
@@ -833,7 +734,7 @@ local function SaveEraseStart()
 	SaveData.clear()
 	GameData.clear()
 	SaveData.flush()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.1>Erasing complete (Save data erasing hasn't been added to SMBX2 yet, so your save is still available. Please erase the save by deleting your save slot in the episode folder).<question RestartOption>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Erasing complete (Save data erasing hasn't been added to SMBX2 yet, so your save is still available. Please erase the save by deleting your save slot in the episode folder).<question RestartOption>", pauses = false, updatesInPause = true})
 end
 
 local function ExitToIntro()
@@ -902,7 +803,7 @@ local function BootWSMBAOGPreExecute()
 end
 
 local function WSMBAOGComing()
-	littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -0.5>The original has NOT been found yet! We're still trying to find and perserve the original WSMBA to release with this episode. If you know someone who might have it downloaded, contact spencer.everly at gmail.com, or DM me on Discord at Spencer Everly#1997!<question OkayToMenu>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.5>The original has NOT been found yet! We're still trying to find and perserve the original WSMBA to release with this episode. If you know someone who might have it downloaded, contact spencer.everly at gmail.com, or DM me on Discord at Spencer Everly#1997!<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function RestartSMASPlusPlus()
@@ -1053,8 +954,13 @@ function bootmenu.onTick()
 		if player:mem(0x140, FIELD_BOOL) == 0 then
 			player:mem(0x140, FIELD_BOOL, 150)
 		end
-		player.x = camera.x + 1000 - (player.width / 2)
-		player.y = camera.y + 300 - (player.height / 2)
+		player.x = camera.x + 450 - (player.width / 2)
+		player.y = camera.y + 599 - (player.height / 2)
+		if SaveData.resolution == "fullscreen" then
+			littleDialogue.defaultStyleName = "smbx13"
+		elseif SaveData.resolution == "widescreen" then
+			littleDialogue.defaultStyleName = "smbx13wide"
+		end
 		if Player.count() == 1 then
 			twoplayercheck = active
 			twoplayercheckactive = not active
