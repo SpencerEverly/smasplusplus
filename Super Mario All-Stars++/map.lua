@@ -539,16 +539,16 @@ function onDraw()
 			textplus.print{x=266, y=222, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.4, yscale=0.4} --Level title
 		end
 		
-		Graphics.drawBox{x=528, y=395, width=20, height=7, color=Color.black..0.2, priority=8} --What's the day, sir?!
-		textplus.print{x=530, y=397, text = "Date - ", priority=8, color=Color.white, xscale=0.4, yscale=0.4}
-		textplus.print{x=583, y=477, text = os.date("%a"), priority=8, color=Color.white}
-		textplus.print{x=602, y=477, text = os.date("%x"), priority=8, color=Color.white}
-		Graphics.drawBox{x=569, y=495, width=76, height=20, color=Color.black..0.2, priority=8} --What time is it...!?
-		textplus.print{x=574, y=500, text = "Time - ", priority=8, color=Color.white}
-		textplus.print{x=605, y=500, text = os.date("%I"), priority=8, color=Color.white}
-		textplus.print{x=615, y=500, text = ":", priority=8, color=Color.white}
-		textplus.print{x=618, y=500, text = os.date("%M"), priority=8, color=Color.white}
-		textplus.print{x=630, y=500, text = os.date("%p"), priority=8, color=Color.white}
+		Graphics.drawBox{x=524, y=395, width=33, height=7, color=Color.black..0.2, priority=8} --What's the day, sir?!
+		textplus.print{x=525, y=397, text = "Date - ", priority=8, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=534, y=397, text = os.date("%a"), priority=8, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=541, y=397, text = os.date("%x"), priority=8, color=Color.white, xscale=0.4, yscale=0.4}
+		Graphics.drawBox{x=532, y=404, width=25, height=7, color=Color.black..0.2, priority=8} --What time is it...!?
+		textplus.print{x=533, y=406, text = "Time - ", priority=8, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=540, y=406, text = os.date("%I"), priority=8, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=543, y=406, text = ":", priority=8, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=546, y=406, text = os.date("%M"), priority=8, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=550, y=406, text = os.date("%p"), priority=8, color=Color.white, xscale=0.4, yscale=0.4}
 	end
 	
 	if SaveData.resolution == "gba" then
