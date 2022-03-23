@@ -4256,7 +4256,7 @@ do
 
 
     function handleExit()
-		Graphics.drawHud(false)
+		Graphics.activateHud(false)
         handlePassOn()
         handleKey()
     end
