@@ -9,9 +9,6 @@ local jukebox = require("jukebox-v11")
 local pause_music = require("map_music")
 local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
-local datetime = require("datetime")
-local smallScreen = require("smallScreen")
-local camLock = require("camlocksmas")
 
 local map3d = require("mapp3d")
 
@@ -286,14 +283,20 @@ function onDraw()
 		if world.levelObj == nil then
 			textplus.print{x=64, y=92, text = "N/A", priority=5, color=Color.yellow, font=font2}
 		end
+		Graphics.drawBox{x=719, y=575, width=76, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=724, y=580, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
+		textplus.print{x=755, y=580, text = os.date("%I"), priority=8, color=Color.white}
+		textplus.print{x=765, y=580, text = ":", priority=8, color=Color.white}
+		textplus.print{x=768, y=580, text = os.date("%M"), priority=8, color=Color.white}
+		textplus.print{x=780, y=580, text = os.date("%p"), priority=8, color=Color.white}
+		Graphics.drawBox{x=695, y=552, width=100, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=700, y=557, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
+		textplus.print{x=733, y=557, text = os.date("%a"), priority=8, color=Color.white}
+		textplus.print{x=754, y=557, text = os.date("%x"), priority=8, color=Color.white}
 	end
 	if SaveData.resolution == "widescreen" then
 		Graphics.drawImageWP(hudborderwide, 0, 0, 3)
-		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1.33
-		elseif SaveData.letterbox == true then
-			smallScreen.scaleY = 1
-		end
+		
 		Graphics.drawImageWP(oneupicon, 70, 500, 5)
 		Graphics.drawImageWP(times, 105, 502, 5)
 		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -318,6 +321,16 @@ function onDraw()
 		if world.levelObj == nil then
 			textplus.print{x=150, y=145, text = "N/A", priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
 		end
+		Graphics.drawBox{x=719, y=495, width=76, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=724, y=500, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
+		textplus.print{x=755, y=500, text = os.date("%I"), priority=8, color=Color.white}
+		textplus.print{x=765, y=500, text = ":", priority=8, color=Color.white}
+		textplus.print{x=768, y=500, text = os.date("%M"), priority=8, color=Color.white}
+		textplus.print{x=780, y=500, text = os.date("%p"), priority=8, color=Color.white}
+		Graphics.drawBox{x=695, y=472, width=100, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=700, y=477, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
+		textplus.print{x=733, y=477, text = os.date("%a"), priority=8, color=Color.white}
+		textplus.print{x=752, y=477, text = os.date("%x"), priority=8, color=Color.white}
 	end
 	
 	if loadlevelanimation then

@@ -440,11 +440,7 @@ function snake.onDraw()
 				climbTimer = climbtime;
 			end
 			--Draw alertness element
-			if SaveData.resolution == "fullscreen" then
-				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, 5);
-			elseif SaveData.resolution == "widescreen" then
-				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 82, 5);
-			end
+			Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, -1.99999);
 			local camo = tostring(math.ceil(100*(snake.alertCooldown-snake.alertTimer)/(snake.alertCooldown)));
 			--textblox.printExt("%",{x=774,y=38,font=textblox.FONT_SPRITEDEFAULT3, z=5});
 			if SaveData.resolution == "fullscreen" then
@@ -475,11 +471,7 @@ function snake.onDraw()
 					power.label = "MK22";
 					power.graphic = snake.HUD_POWER_MK22;
 				end
-				if SaveData.resolution == "fullscreen" then
-					Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 10, 5);
-				elseif SaveData.resolution == "widescreen" then
-					Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 90, 5);
-				end
+				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 10, -1.9999);
 				if SaveData.resolution == "fullscreen" then
 					FONT.text = power.label
 					FONT.x=405

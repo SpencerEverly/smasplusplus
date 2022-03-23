@@ -291,7 +291,7 @@ local function drawPauseMenu(y, alpha)
 			end
 		end
 		table.insert(pause_options, {name="Change Resolution", action = changeresolution});
-		table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
+		--table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
 		if isOverworld then
 			table.insert(pause_options, {name="Teleport back to the Start", action = startteleport});
 		end

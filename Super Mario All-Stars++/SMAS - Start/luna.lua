@@ -177,31 +177,16 @@ function onDraw()
 	local bootimagewide = Graphics.loadImageResolved("SMAS - Start/bootscreen_final_wide.png")
 	
 	if bootshow then
-		if SaveData.resolution == "fullscreen" then
-			Graphics.drawImage(bootimage, 0, 0, 8)
-		end
-		if SaveData.resolution == "widescreen" then
-			Graphics.drawImage(bootimagewide, 0, 0, 8)
-		end
+		Graphics.drawImageWP(bootimage, 0, 0, -2)
 	end
 	if active then
-		Graphics.drawScreen{color = Color.black, priority = 8}
-		if SaveData.resolution == "fullscreen" then
-			textplus.print{x=10, y=10, text = "Super Mario All-Stars++ Temporary Boot Option List", priority=9, color=Color.white}
-			textplus.print{x=10, y=32, text = "1) Reset all costumes (Including X2 character costumes)", priority=9, color=Color.white}
-			textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=9, color=Color.white}
-			textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
-			textplus.print{x=10, y=68, text = "4) Continue booting", priority=9, color=Color.white}
-			textplus.print{x=10, y=80, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=9, color=Color.white}
-		end
-		if SaveData.resolution == "widescreen" then
-			textplus.print{x=10, y=80, text = "Super Mario All-Stars++ Temporary Boot Option List", priority=9, color=Color.white}
-			textplus.print{x=10, y=102, text = "1) Reset all costumes (Including X2 character costumes)", priority=9, color=Color.white}
-			textplus.print{x=10, y=114, text = "2) Reset the main menu theme", priority=9, color=Color.white}
-			textplus.print{x=10, y=126, text = "3) Clear/Flush SaveData", priority=9, color=Color.white}
-			textplus.print{x=10, y=138, text = "4) Continue booting", priority=9, color=Color.white}
-			textplus.print{x=10, y=150, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=9, color=Color.white}
-		end
+		Graphics.drawScreen{color = Color.black, priority = -1}
+		textplus.print{x=10, y=10, text = "Super Mario All-Stars++ Temporary Boot Option List", priority=0, color=Color.white}
+		textplus.print{x=10, y=32, text = "1) Reset all costumes (Including X2 character costumes)", priority=0, color=Color.white}
+		textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=0, color=Color.white}
+		textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=0, color=Color.white}
+		textplus.print{x=10, y=68, text = "4) Continue booting", priority=0, color=Color.white}
+		textplus.print{x=10, y=80, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=0, color=Color.white}
 	end
 end
 

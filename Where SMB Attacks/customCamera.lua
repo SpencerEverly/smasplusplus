@@ -39,7 +39,6 @@ local playerManager = require("playerManager")
 local sizable = require("game/sizable")
 local handycam = require("handycam")
 
-
 local customCamera = {}
 
 

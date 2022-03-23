@@ -25,7 +25,7 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 end
 
 local littleDialogue = require("littleDialogue")
-local hudoverride = require("hudoverride")
+local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local smallScreen = require("smallscreen")
 local extrasounds = require("extrasounds")
@@ -154,41 +154,16 @@ function onTick()
 		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
 		smallScreen.scaleY = 1
-		
-		hudoverride.offsets.keys = 		{x = 64, 	y = 26, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.hearts = 	{x = 5, 	y = 16, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.score = 	{x = 170, 	y = 47, align = hudoverride.ALIGN_RIGHT};
-
-		hudoverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.coins = 	{x = 88, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
-		hudoverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
 	end
 	if SaveData.resolution == "widescreen" then
 		littleDialogue.defaultStyleName = "smbx13wide"
 		customCamera.defaultScreenHeight = 450
 		customCamera.defaultZoom = 0.75
 		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1.33
+			smallScreen.scaleY = 1
 		elseif SaveData.letterbox == true then
 			smallScreen.scaleY = 1
 		end
-
-		hudoverride.offsets = {}
-		hudoverride.offsets.keys = 		{x = 64, 	y = 86, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.itembox = 	{x = 0, 	y = 86, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.hearts = 	{x = 5, 	y = 86, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.score = 	{x = 170, 	y = 117, align = hudoverride.ALIGN_RIGHT};
-
-		hudoverride.offsets.bombs = 	{x = 0, 	y = 122, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.coins = 	{x = 88, 	y = 96, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.lives = 	{x = -166, 	y = 96, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.stars = 	{x = -150, 	y = 116, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.starcoins = {x = -384, y = 97, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
-		hudoverride.offsets.timer = {x = 264, y = 95, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
 	end
 end
 

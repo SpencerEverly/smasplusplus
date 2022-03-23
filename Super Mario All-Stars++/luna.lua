@@ -45,6 +45,9 @@ local globalgenerals = require("globalgenerals")
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"
 end
+if SaveData.letterbox == nil then
+	SaveData.letterbox = true
+end
 
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
@@ -54,9 +57,6 @@ function onStart()
 	end
 	if SaveData.disableX2char == 1 then
 		SaveData.disableX2char = true
-	end
-	if SaveData.letterbox == nil then
-		SaveData.letterbox = true
 	end
 end
 
@@ -69,8 +69,8 @@ function onLoad()
 end
 
 function onTick()
-	local currentCostume = player:getCostume()
-	if currentCostume == "SMB3-WALUIGI" then
-		Player.setCostume(10, nil)
-	end
+	--local currentCostume = player:getCostume()
+	--if currentCostume == "SMB3-WALUIGI" then
+	--	Player.setCostume(10, nil)
+	--end
 end

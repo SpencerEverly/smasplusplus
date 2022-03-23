@@ -39,10 +39,10 @@ function screenFlip.onTick()
 			flipphase = 1
 			fliptimer = 0
 			if SaveData.resolution == "widescreen" then
-				customCamera.defaultScreenOffsetY = -150
+				customCamera.defaultOffsetY = -150
 			end
 			if SaveData.resolution == "fullscreen" then
-				customCamera.defaultScreenOffsetY = 0
+				customCamera.defaultOffsetY = 0
 			end
 		elseif flip < -180 and flipphase == 0 then
 			flip = -180
@@ -60,10 +60,10 @@ function screenFlip.onTick()
 			flipphase = 0
 			fliptimer = 0
 			if SaveData.resolution == "widescreen" then
-				customCamera.defaultScreenOffsetY = 0
+				customCamera.defaultOffsetY = 0
 			end
 			if SaveData.resolution == "fullscreen" then
-				customCamera.defaultScreenOffsetY = 0
+				customCamera.defaultOffsetY = 0
 			end
 		elseif flip < -360 and flipphase == 1 then
 			flip = 0

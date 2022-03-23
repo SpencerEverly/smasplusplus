@@ -36,30 +36,16 @@ function areanames.draw(name, t)
             textplus = require("textplus")
             font = textplus.loadFont("textplus/font/6.ini")
         end
-		if SaveData.resolution == "fullscreen" then
-			textplus.print{
-				x = 20,
-				y = 100,
-				text = name,
-				priority = 1,
-				limit = math.floor(t / 4),
-				font = font,
-				xscale = 2,
-				yscale = 2
-			}
-		end
-		if SaveData.resolution == "widescreen" then
-			textplus.print{
-				x = 20,
-				y = 150,
-				text = name,
-				priority = 1,
-				limit = math.floor(t / 4),
-				font = font,
-				xscale = 2,
-				yscale = 2
-			}
-		end
+		textplus.print{
+			x = 20,
+			y = 100,
+			text = name,
+			priority = -1,
+			limit = math.floor(t / 4),
+			font = font,
+			xscale = 2,
+			yscale = 2
+		}
     end
 end
 

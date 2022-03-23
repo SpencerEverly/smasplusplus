@@ -42,6 +42,7 @@ local charactercheck = false
 local keyinput1 = false
 local killed = false
 local active4 = false
+local escquit = true
 
 local cooldown = 0
 
@@ -76,38 +77,6 @@ littleDialogue.registerStyle("smbx13",{
 	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
 	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
 	forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
-
-	windowingOpeningEffectEnabled = false,
-
-	typewriterEnabled = false,
-	showTextWhileOpening = true,
-
-	closeSoundEnabled = false,
-	continueArrowEnabled = false,
-	scrollArrowEnabled   = false,
-	selectorImageEnabled = true,
-	
-})
-
-littleDialogue.registerStyle("smbx13wide",{
-	textXScale = 0.8,
-	textYScale = 0.8,
-	borderSize = 36,
-	textMaxWidth = 500,
-	speakerNameGap = 6,
-	speakerNameXScale = 1.0,        -- X scale of the speaker's name.
-	speakerNameYScale = 1.0,
-	
-	openSpeed = 5,
-	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-	answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-	borderSize = 8,
-	
-	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-	forcedPosY = 180,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
 	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
 	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
@@ -956,11 +925,7 @@ function bootmenu.onTick()
 		end
 		player.x = camera.x + 450 - (player.width / 2)
 		player.y = camera.y + 599 - (player.height / 2)
-		if SaveData.resolution == "fullscreen" then
-			littleDialogue.defaultStyleName = "smbx13"
-		elseif SaveData.resolution == "widescreen" then
-			littleDialogue.defaultStyleName = "smbx13wide"
-		end
+		littleDialogue.defaultStyleName = "smbx13"
 		if Player.count() == 1 then
 			twoplayercheck = active
 			twoplayercheckactive = not active
@@ -1179,22 +1144,15 @@ function bootmenu.onDraw()
 			Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
 			textplus.print{x=667, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
 		end
-		
+		if escquit then
+			textplus.print{x=10, y=10, text = "Press pause to quit.", priority=-6, color=Color.yellow}
+			Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-7}
+		end
 		if pressjumpwords then
-			if SaveData.resolution == "fullscreen" then
-				Graphics.drawImageWP(pressstart, 150, 552, 1)
-			end
-			if SaveData.resolution == "widescreen" then
-				Graphics.drawImageWP(pressstartwide, 150, 482, 1)
-			end
+			Graphics.drawImageWP(pressstart, 150, 552, 0)
 		end
 		if logo then
-			if SaveData.resolution == "fullscreen" then
-				Graphics.drawImageWP(smaslogo, 176, 136, 2)
-			end
-			if SaveData.resolution == "widescreen" then
-				Graphics.drawImageWP(smaslogowide, 176, 136, 2)
-			end
+			Graphics.drawImageWP(smaslogo, 176, 136, 0)
 		end
 		if exitscreen then
 			Graphics.drawScreen{color = Color.black, priority = 10}
@@ -1230,29 +1188,19 @@ function bootmenu.onDraw()
 			--nothing
 		end
 		if active3 then
-			if SaveData.resolution == "fullscreen" then
-				textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
-			end
-			if SaveData.resolution == "widescreen" then
-				textplus.print{x=160, y=500, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=3, color=Color.red, font=statusFont}
-			end
+			textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont}
 		end
 		if active4 then
-			if SaveData.resolution == "fullscreen" then
-				textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
-			end
-			if SaveData.resolution == "widescreen" then
-				textplus.print{x=150, y=410, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=3, color=Color.yellow, font=statusFont}
-			end
+			textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
 		end
 		if keyinput1 then
-			textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=6, color=Color.lightred, font=statusFont}
+			textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=0, color=Color.lightred, font=statusFont}
 		end
 		if aprilfools then	
 			Graphics.drawImageWP(aprilfoolserror, 0, 0, 10)
 		end
 		if stpatricksday then
-			textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=3, color=Color.green, font=statusFont}
+			textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=0, color=Color.green, font=statusFont}
 		end
 	end
 end

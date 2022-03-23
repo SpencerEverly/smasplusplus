@@ -2,13 +2,12 @@ local level_dependencies_normal = require("level_dependencies_hub")
 local malcmusic = require ("malcmusic")
 local littleDialogue = require("littleDialogue")
 local HUDimage = Graphics.loadImage("MALC-HUD.png")
-local HUDimagewide = Graphics.loadImage("MALC-HUD-wide.png")
 local playerManager = require("playerManager")
 local areaNames = require("areaNames")
 local textplus = require("textplus")
 local ShopSystem = require("ShopSystem/ShopSystem")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local hudoverride = require("hudoverride")
+local hudoverride = require("hudoverridee")
 
 -- Images --
 local shopItems = Graphics.loadImageResolved("ShopSystem/ShopSystem/shopItems.png")
@@ -130,12 +129,7 @@ function onStart()
 end
 
 function onDraw()
-	if SaveData.resolution == "fullscreen" then
-		Graphics.drawImageWP(HUDimage, 0, 0, 4.99)
-	end
-	if SaveData.resolution == "widescreen" then
-		Graphics.drawImageWP(HUDimagewide, 0, 75, 4.99)
-	end
+	Graphics.drawImageWP(HUDimage, 0, 0, -2.99)
 	
 	if player.section == 9 then
 		textplus.print{x=-19760, y=-20272, text = "Floor 1: Star List", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}
@@ -143,14 +137,8 @@ function onDraw()
 		textplus.print{x=-19776, y=-21104, text = "Floor 3: Other Info", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}
 	end
 	if ShopSystem.activeShop.id ~= nil then -- detect if ANY shop is currently open
-		if SaveData.resolution == "fullscreen" then
-			Graphics.drawBox{texture = coinsIcon, x = ShopSystem.movement.sidePanels.position + 22, y = 292, priority = ShopSystem.leastPriority + 0.65}
-			textplus.print{x = ShopSystem.movement.sidePanels.position + 58, y = 300, text = string.format("%04d", coinCounter:getMoney()), font = ShopSystem.font, priority = ShopSystem.leastPriority + 0.65}
-		end
-		if SaveData.resolution == "widescreen" then
-			Graphics.drawBox{texture = coinsIcon, x = ShopSystem.movement.sidePanels.position + 22, y = 292, priority = ShopSystem.leastPriority + 0.65}
-			textplus.print{x = ShopSystem.movement.sidePanels.position + 58, y = 300, text = string.format("%04d", coinCounter:getMoney()), font = ShopSystem.font, priority = ShopSystem.leastPriority + 0.65}
-		end
+		Graphics.drawBox{texture = coinsIcon, x = ShopSystem.movement.sidePanels.position + 22, y = 292, priority = ShopSystem.leastPriority + 0.65}
+		textplus.print{x = ShopSystem.movement.sidePanels.position + 58, y = 300, text = string.format("%04d", coinCounter:getMoney()), font = ShopSystem.font, priority = ShopSystem.leastPriority + 0.65}
     end
 end
 

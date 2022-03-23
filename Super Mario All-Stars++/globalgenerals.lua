@@ -6,7 +6,7 @@ local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local autoscroll = require("autoscroll")
 local warpTransition = require("warpTransition")
-local hudoverride = require("hudoverride")
+local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local smallScreen = require("smallscreen")
 
@@ -41,86 +41,84 @@ playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
 local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 
-if SaveData.resolution == "fullscreen" then
-	littleDialogue.registerStyle("smbx13og",{
-		textXScale = 1,
-		textYScale = 1,
-		borderSize = 36,
-		textMaxWidth = 500,
-		speakerNameGap = 6,
-		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.2,
-		
-		openSpeed = 5,
-		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-		borderSize = 8,
-		
-		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
+littleDialogue.registerStyle("smbx13og",{
+	textXScale = 1,
+	textYScale = 1,
+	borderSize = 36,
+	textMaxWidth = 500,
+	speakerNameGap = 6,
+	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+	speakerNameYScale = 1.2,
+	
+	openSpeed = 5,
+	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+	answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+	borderSize = 8,
+	
+	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
-		windowingOpeningEffectEnabled = false,
+	windowingOpeningEffectEnabled = false,
 
-		typewriterEnabled = true,
-		typewriterDelayNormal = 0.5, -- The usual delay between each character.
-		typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
-		typewriterSoundDelay = 4.1,
-		showTextWhileOpening = true,
+	typewriterEnabled = true,
+	typewriterDelayNormal = 0.5, -- The usual delay between each character.
+	typewriterDelayLong = 4,  -- The extended delay after any of the special delaying characters, listed below.
+	typewriterSoundDelay = 4.1,
+	showTextWhileOpening = true,
 
-		closeSoundEnabled = false,
-		continueArrowEnabled = false,
-		scrollArrowEnabled   = false,
-		selectorImageEnabled = true,
-		
-	})
-	littleDialogue.registerStyle("smbx13",{
-		textXScale = 1,
-		textYScale = 1,
-		borderSize = 36,
-		textMaxWidth = 500,
-		speakerNameGap = 6,
-		speakerNameXScale = 1.2,        -- X scale of the speaker's name.
-		speakerNameYScale = 1.2,
-		
-		openSpeed = 5,
-		pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-		answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-		borderSize = 8,
-		
-		forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-		forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-		forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
+	closeSoundEnabled = false,
+	continueArrowEnabled = false,
+	scrollArrowEnabled   = false,
+	selectorImageEnabled = true,
+	
+})
+littleDialogue.registerStyle("smbx13",{
+	textXScale = 1,
+	textYScale = 1,
+	borderSize = 36,
+	textMaxWidth = 500,
+	speakerNameGap = 6,
+	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+	speakerNameYScale = 1.2,
+	
+	openSpeed = 5,
+	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+	answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+	borderSize = 8,
+	
+	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
 
-		windowingOpeningEffectEnabled = false,
+	windowingOpeningEffectEnabled = false,
 
-		typewriterEnabled = false,
-		showTextWhileOpening = true,
+	typewriterEnabled = false,
+	showTextWhileOpening = true,
 
-		closeSoundEnabled = false,
-		continueArrowEnabled = false,
-		scrollArrowEnabled   = false,
-		selectorImageEnabled = true,
-		
-	})
-	littleDialogue.registerStyle("infobooth",{
-		borderSize = 32,
+	closeSoundEnabled = false,
+	continueArrowEnabled = false,
+	scrollArrowEnabled   = false,
+	selectorImageEnabled = true,
+	
+})
+littleDialogue.registerStyle("infobooth",{
+	borderSize = 32,
 
-		openSpeed = 0.025,
+	openSpeed = 0.025,
 
-		windowingOpeningEffectEnabled = true,
-		showTextWhileOpening = true,
+	windowingOpeningEffectEnabled = true,
+	showTextWhileOpening = true,
 
-		speakerNameOnTop = true,
-		speakerNameOffsetY = 24,
-	})
-end
+	speakerNameOnTop = true,
+	speakerNameOffsetY = 24,
+})
 
-if SaveData.resolution == "widescreen" then
+if SaveData.resolution == "tba" then
 	littleDialogue.registerStyle("smbx13og",{
 		textXScale = 0.8,
 		textYScale = 0.8,
@@ -199,11 +197,14 @@ if SaveData.resolution == "widescreen" then
 		speakerNameOnTop = true,
 		speakerNameOffsetY = 24,
 	})
-	littleDialogue.registerStyle("smwwide",{
-		textXScale = 1.4,
-		textYScale = 1.4,
-	})
 end
+
+littleDialogue.registerStyle("smwwide",{
+	textXScale = 1.4,
+	textYScale = 1.4,
+	speakerNameXScale = 1.6,
+	speakerNameYScale = 1.6,
+})
 
 local player2_alt = Player(2)
 local pipecounter = 0
@@ -339,15 +340,13 @@ function globalgenerals.onTick()
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
-		if SaveData.disableX2char == false then
-			littleDialogue.defaultStyleName = "smw"
-		end
 		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
 		smallScreen.scaleY = 1
-		littleDialogue.defaultBoxSettings.forcedPosEnabled = false       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		littleDialogue.defaultBoxSettings.forcedPosX = 400               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		littleDialogue.defaultBoxSettings.forcedPosY = 220                -- The Y position the box will appear at on screen, if forced positioning is enabled.
 		
 		hudoverride.offsets.keys = 		{x = 64, 	y = 26, align = hudoverride.ALIGN_LEFT};
 		hudoverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
@@ -362,32 +361,17 @@ function globalgenerals.onTick()
 		hudoverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
 	end
 	if SaveData.resolution == "widescreen" then
-		if SaveData.disableX2char == false then
-			littleDialogue.defaultStyleName = "smwwide"
-		end
 		customCamera.defaultScreenHeight = 450
 		customCamera.defaultZoom = 0.75
-		littleDialogue.defaultBoxSettings.forcedPosEnabled = true       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-		littleDialogue.defaultBoxSettings.forcedPosX = 400               -- The X position the box will appear at on screen, if forced positioning is enabled.
-		littleDialogue.defaultBoxSettings.forcedPosY = 220                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
 		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1.33
+			smallScreen.scaleY = 1
 		elseif SaveData.letterbox == true then
 			smallScreen.scaleY = 1
 		end
-
-		hudoverride.offsets = {}
-		hudoverride.offsets.keys = 		{x = 64, 	y = 86, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.itembox = 	{x = 0, 	y = 86, item = {x = 28, y = 28, align = hudoverride.ALIGN_MID}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.hearts = 	{x = 5, 	y = 86, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.score = 	{x = 170, 	y = 117, align = hudoverride.ALIGN_RIGHT};
-
-		hudoverride.offsets.bombs = 	{x = 0, 	y = 122, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_MID};
-		hudoverride.offsets.coins = 	{x = 88, 	y = 96, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.lives = 	{x = -166, 	y = 96, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.stars = 	{x = -150, 	y = 116, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = hudoverride.ALIGN_LEFT}, align = hudoverride.ALIGN_LEFT};
-		hudoverride.offsets.starcoins = {x = -384, y = 97, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = hudoverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = hudoverride.ALIGN_LEFT},	align = hudoverride.ALIGN_LEFT}
-		hudoverride.offsets.timer = {x = 264, y = 95, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = hudoverride.ALIGN_RIGHT}, align = hudoverride.ALIGN_LEFT}
 	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()

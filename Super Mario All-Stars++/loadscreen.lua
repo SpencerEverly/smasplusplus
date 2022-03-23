@@ -63,7 +63,7 @@ function onDraw()
 	timer = timer + 1	
 	frame2 = math.floor(timer/8)%7
 	
-	Graphics.drawImage(knowledge, 0, -70, 1, 0, 800, 600, opacity)
+	Graphics.drawImage(knowledge, 0, -75, 1, 0, 800, 600, opacity)
 	Graphics.drawImage(fullscreenborder, 0, 0, 1, 0, 800, 600, opacity)
 	Graphics.drawImage(datetimeunavailable, 0, 70, 1, 0, 800, 600, opacity)
 

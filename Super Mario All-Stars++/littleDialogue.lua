@@ -15,6 +15,7 @@ local textplus = require("textplus")
 local tplusUtils = require("textplus/tplusutils")
 
 local handycam = require("handycam")
+local customCamera = require("customCamera")
 
 local player2 = Player(2)
 
@@ -23,8 +24,7 @@ local littleDialogue = {}
 littleDialogue.boxenabled = false
 local cooldown = 0
 
-local smallScreen
-pcall(function() smallScreen = require("smallScreen") end)
+local smallScreen = require("smallScreen")
 
 function littleDialogue.onInitAPI()
     registerEvent(littleDialogue,"onTick")
@@ -37,8 +37,8 @@ local function getBoundaries()
     local b = camera.bounds
 
     if smallScreen ~= nil and smallScreen.croppingEnabled then
-        local widthDifference  = (camera.width  - smallScreen.width ) * 0.5
-        local heightDifference = (camera.height - smallScreen.height) * 0.5
+        local widthDifference  = (customCamera.defaultScreenWidth  - smallScreen.width ) * 0.5
+        local heightDifference = (customCamera.defaultScreenHeight - smallScreen.height) * 0.5
 
         b.left   = b.left   + widthDifference
         b.right  = b.right  - widthDifference
@@ -1756,16 +1756,16 @@ end
 function boxInstanceFunctions:draw()
     local x,y,sceneCoords = self:getDrawPosition()
 
-    -- Apply handycam zoom
+    -- Apply customCamera zoom
     if self.priority > 0 and sceneCoords then
-        local handycamObj = rawget(handycam,1)
+        local customCameraObj = customCamera
 
-        if handycamObj ~= nil then
-            local cameraX = camera.x + camera.width*0.5
-            local cameraY = camera.y + camera.height*0.5
+        if customCameraObj ~= nil then
+            local cameraX = camera.x + customCamera.defaultScreenWidth*0.5
+            local cameraY = camera.y + customCamera.defaultScreenHeight*0.5
 
-            x = (x - cameraX)*handycamObj.zoom + cameraX
-            y = (y - cameraY)*handycamObj.zoom + cameraY
+            x = (x - cameraX)*customCameraObj.defaultZoom + cameraX
+            y = (y - cameraY)*customCameraObj.defaultZoom + cameraY
         end
     end
 
@@ -1778,15 +1778,15 @@ function boxInstanceFunctions:draw()
         y = math.clamp(y,b.top  + self.totalHeight*0.5 + minDistance,b.bottom - self.totalHeight*0.5 - minDistance)
     end
 
-	local scaleX  = math.lerp(self.settings.openStartScaleX ,1,self.openingProgress)
-	local scaleY  = math.lerp(self.settings.openStartScaleY ,1,self.openingProgress)
+	local scaleX  = math.lerp(self.settings.openStartScaleX,1,self.openingProgress)
+	local scaleY  = math.lerp(self.settings.openStartScaleY,1,self.openingProgress)
 	
     local opacity = math.lerp(self.settings.openStartOpacity,1,self.openingProgress)
 
     local topNameDarkening = 0
-
-    local boxWidth = self.totalWidth * scaleX
-    local boxHeight = self.totalHeight * scaleY
+	
+	local boxWidth = self.totalWidth * scaleX
+	local boxHeight = self.totalHeight * scaleY
 
     local boxCutoffWidth
     local boxCutoffHeight
@@ -1813,7 +1813,6 @@ function boxInstanceFunctions:draw()
             x = x,y = y,width = self.totalWidth * scaleX,height = self.totalHeight * scaleY,
         }
     end
-
 	if self.settings.boxImage ~= nil then
 		drawSegmentedBox(self.settings.boxImage,self.priority,sceneCoords,Color.white.. opacity,x - boxWidth*0.5,y - boxHeight*0.5,boxWidth,boxHeight,boxCutoffWidth,boxCutoffHeight)
 	end
@@ -1857,11 +1856,10 @@ function boxInstanceFunctions:draw()
             nameTarget = fullBuffer
             nameColor = Color.white*opacity
         end
-        
-        textplus.render{
-            layout = self.speakerNameLayout,priority = self.priority,color = nameColor,target = nameTarget,sceneCoords = nameSceneCoords,x = nameX,y = nameY,
-            shader = self.settings.speakerNameTextShader,uniforms = getTextShaderUniforms(self.speakerNameLayout),
-        }
+		textplus.render{
+			layout = self.speakerNameLayout,priority = self.priority,color = nameColor,target = nameTarget,sceneCoords = nameSceneCoords,x = nameX,y = nameY,
+			shader = self.settings.speakerNameTextShader,uniforms = getTextShaderUniforms(self.speakerNameLayout),
+		}
     end
 
 
@@ -2004,7 +2002,6 @@ function littleDialogue.onDraw()
             if box.updatesInPause then
                 box:update()
             end
-
             box:draw()
         else
             table.remove(littleDialogue.boxes,k)
@@ -2075,7 +2072,7 @@ littleDialogue.defaultBoxSettings = {
 
     -- Other
     borderSize = 8, -- How much is added around the text to get the full size (pixels).
-    priority = 6,   -- The render priority of boxes.
+    priority = 0,   -- The render priority of boxes.
 
     minDistanceFromEdge = 16, -- The minimum distance away from the borders of the screen that the box can be while 'keepOnScreen' is enabled.
 
@@ -2248,6 +2245,8 @@ littleDialogue.registerStyle("drSmall",{
 littleDialogue.registerStyle("smwwide",{
 	textXScale = 1.4,
 	textYScale = 1.4,
+	speakerNameXScale = 1.6,
+	speakerNameYScale = 1.6,
 })
 
 

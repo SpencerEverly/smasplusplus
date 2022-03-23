@@ -36,9 +36,8 @@
 local blockutils = require("blocks/blockutils")
 local npcutils = require("npcs/npcutils")
 local playerManager = require("playerManager")
-local sizable = require("game/sizable")
 local handycam = require("handycam")
-
+local sizable = require("game/sizable")
 
 local customCamera = {}
 
@@ -64,6 +63,10 @@ customCamera.defaultScreenWidth = 0 -- 0 means to use camera.width/camera.height
 customCamera.defaultScreenHeight = 0
 customCamera.defaultScreenOffsetX = 0
 customCamera.defaultScreenOffsetY = 0
+
+customCamera.defaultScaleX = 1
+customCamera.defaultScaleY = 1
+customCamera.defaultPriority = 10
 
 customCamera.targets = {}
 
@@ -964,6 +967,9 @@ local function makeDefaultSettings()
     return {
         zoom = customCamera.defaultZoom,
         rotation = customCamera.defaultRotation,
+		scaleX = customCamera.defaultScaleX,
+		scaleY = customCamera.defaultScaleY,
+		priority = customCamera.defaultPriority,
 
         offsetX = customCamera.defaultOffsetX,
         offsetY = customCamera.defaultOffsetY,
