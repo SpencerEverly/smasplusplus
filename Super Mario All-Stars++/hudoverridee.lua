@@ -11,8 +11,8 @@ local timer
 local hasDied = false
 
 local textplus = require("textplus")
+local smasdeathsystem = require("smasdeathsystem")
 local tplusnumberfont = textplus.loadFont("textplus/font/1.ini")
-
 
 local textCache = {}
 local textCacheLifetime = 640
@@ -463,7 +463,7 @@ function HUDOverride.drawStars(splitOffset, thisCam, thisPlayer, priority)
 end
 
 function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
-	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), mem(0x00B2C5AC,FIELD_FLOAT), priority);
+	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.newlives, priority);
 end
 
 function HUDOverride.drawHUDLives(thisPlayer, priority)

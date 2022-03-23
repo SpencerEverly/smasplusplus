@@ -43,32 +43,33 @@ function onTick()
 		killed = true;
 		Level.load()
 	end
+	player:setFrame(50)
 end
 
 function onDraw()
-	Graphics.draw{type = RTYPE_TEXT, x = 55, y = 580, priority = 10, text = "Press down to skip, jump for Game Help"}
+	Graphics.draw{type = RTYPE_TEXT, x = 55, y = 580, priority = 0, text = "Press down to skip, jump for Game Help"}
 	
-	Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=7}
-	textplus.print{x=10, y=10, text = "Press pause to quit.", priority=8, color=Color.yellow}
+	Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-1}
+	textplus.print{x=10, y=10, text = "Press pause to quit.", priority=0, color=Color.yellow}
 	
 	if player.downKeyPressing then
 		triggerEvent("Skip Intro")
 	end
 	if player.jumpKeyPressing then
-		Graphics.draw{type = RTYPE_TEXT, x = 220, y = 20, priority = 10, text = "Loading Game Help..."}
+		Graphics.draw{type = RTYPE_TEXT, x = 220, y = 20, priority = 0, text = "Loading Game Help..."}
 		triggerEvent("jumping")
 	end
 	if fadeout1 then
 		time = time + 1
-		Graphics.drawScreen{color = Color.black..math.max(0,time/20),priority = 5}
+		Graphics.drawScreen{color = Color.black..math.max(0,time/20),priority = 3}
 	end
 	if fadeout2 then
 		time = time - 1
-		Graphics.drawScreen{color = Color.black..math.min(1,time/20),priority = 5}
+		Graphics.drawScreen{color = Color.black..math.min(1,time/20),priority = 3}
 	end
 	if fadeout3 then
 		time3 = time3 + 1
-		Graphics.drawScreen{color = Color.black..math.max(0,time3/20),priority = 5}
+		Graphics.drawScreen{color = Color.black..math.max(0,time3/20),priority = 3}
 	end
 end
 

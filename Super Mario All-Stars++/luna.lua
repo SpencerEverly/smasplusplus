@@ -49,6 +49,9 @@ end
 if SaveData.letterbox == nil then
 	SaveData.letterbox = true
 end
+if SaveData.borderEnabled == nil then
+	SaveData.borderEnabled = true
+end
 
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 

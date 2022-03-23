@@ -7,6 +7,7 @@ local warpTransition = require("warpTransition")
 local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
+local smasdeathsystem = require("smasdeathsystem")
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
@@ -1144,26 +1145,41 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 end
 
 function globalgenerals.onDraw()
+	Text.printWP(player.deathTimer, 100, 100, 10)
 	if SaveData.resolution == "widescreen" then
-		Graphics.drawImageWP(wideborder, 0, 0, 5)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(wideborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "ultrawide" then
-		Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "nes" then
-		Graphics.drawImageWP(nesborder, 0, 0, 5)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(nesborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "gameboy" then
-		Graphics.drawImageWP(gbborder, 0, 0, 5)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "gba" then
-		Graphics.drawImageWP(gbaborder, 0, 0, 5)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbaborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "iphone1st" then
-		Graphics.drawImageWP(iphoneoneborder, 0, 0, 5)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(iphoneoneborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "3ds" then
-		Graphics.drawImageWP(threedsborder, 0, 0, 5)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(threedsborder, 0, 0, 5)
+		end
 	end
 end
 

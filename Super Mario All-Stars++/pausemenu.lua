@@ -4,6 +4,8 @@ local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
 
+GameData.muteMusic = false
+local musicmuted = false
 local blackscreen = Graphics.loadImage("blackscreen.png")
 
 local player2 = Player(2)
@@ -50,23 +52,28 @@ pausemenu.paused = false;
 pausemenu.paused_char = false;
 pausemenu.paused_char_temp = false;
 pausemenu.paused_tele = false;
+pausemenu.paused_other = false;
 
 pausemenu.pause_box = nil
 local pause_height = 0;
 local pause_height_char = 350;
+local pause_height_other = 450;
 local pause_width = 700;
 
 local pause_options;
 local pause_options_char;
 local pause_options_tele;
+local pause_options_other;
 local character_options;
 local pause_index = 0
 local pause_index_char = 0
 local pause_index_tele = 0
+local pause_index_other = 0
 
 pausemenu.pauseactive = false
 local charactive = false
 local teleactive = false
+local otheractive = false
 
 function pausemenu.onInitAPI()
 	registerEvent(pausemenu, "onKeyboardPress")
@@ -75,6 +82,7 @@ function pausemenu.onInitAPI()
 	registerEvent(pausemenu, "onTick")
 	registerEvent(pausemenu, "onInputUpdate")
 	registerEvent(pausemenu, "onStart")
+	registerEvent(pausemenu, "onExit")
 	
 	local Routine = require("routine")
 	
@@ -109,14 +117,6 @@ local function switchtochar()
 	pausemenu.paused = false
 end
 
-local function pausemenureturn()
-	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
-	pause_index_char = 0
-	cooldown = 1
-	pausemenu.paused = true
-	pausemenu.paused_char = false
-end
-
 local function switchtotele()
 	SFX.play("_OST/_Sound Effects/quitmenu.ogg")
 	pause_index_tele = 0
@@ -126,12 +126,39 @@ local function switchtotele()
 	pausemenu.paused = false
 end
 
+local function switchtoothermenu()
+	SFX.play("_OST/_Sound Effects/quitmenu.ogg")
+	pause_index_other = 0
+	Routine.run(function() Routine.wait(0.01, true) pause_index_char = 1 end)
+	cooldown = 1
+	pausemenu.paused_other = true
+	pausemenu.paused = false
+end
+
+local function pausemenureturn()
+	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
+	pause_index_char = 0
+	Routine.run(function() Routine.wait(0.01, true) pause_index_other = 1 end)
+	cooldown = 1
+	pausemenu.paused = true
+	pausemenu.paused_char = false
+end
+
 local function pausemenureturnhub()
 	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
 	pause_index_tele = 0
 	cooldown = 1
 	pausemenu.paused = true
 	pausemenu.paused_tele = false
+end
+
+local function pausemenureturnother()
+	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
+	pause_index_char = 0
+	Routine.run(function() Routine.wait(0.01, true) pause_index_other = 1 end)
+	cooldown = 1
+	pausemenu.paused = true
+	pausemenu.paused_other = false
 end
 
 local function x2modedisable()
@@ -144,12 +171,31 @@ local function x2modedisable()
 end
 
 local function x2modeenable()
-	pausemenu.paused = false
-	Misc.unpause()
+	Graphics.activateHud(false)
+	Cheats.trigger("1player")
+	Defines.player_hasCheated = false
 	if SaveData.disableX2char == true then
 		SaveData.disableX2char = false
 		Level.load(Level.filename())
 	end
+	pausemenu.paused = false
+	Misc.unpause()
+end
+
+local function mutemusic()
+	GameData.muteMusic = not GameData.muteMusic
+	if GameData.muteMusic == true then
+		SFX.play("_OST/_Sound Effects/paused_on.ogg")
+		musicmuted = true
+	elseif GameData.muteMusic == false then
+		SFX.play("_OST/_Sound Effects/paused_off.ogg")
+		musicmuted = false
+	end
+	pausemenu.paused = false
+	pausemenu.paused_char = false
+	pausemenu.paused_tele = false
+	pausemenu.paused_other = false
+	Misc.unpause()
 end
 
 local function quitgame()
@@ -204,11 +250,22 @@ local function changeresolution()
 	end
 end
 
+local function changeresolutionborder()
+	if SaveData.borderEnabled == true then
+		SFX.play("_OST/_Sound Effects/resolutionborder-disable.ogg")
+		SaveData.borderEnabled = false
+	elseif SaveData.borderEnabled == false then
+		SFX.play("_OST/_Sound Effects/resolutionborder-enable.ogg")
+		SaveData.borderEnabled = true
+	end
+end
+
 local function changeletterbox()
-	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
 	if SaveData.letterbox == true then
+		SFX.play("_OST/_Sound Effects/letterbox-disable.ogg")
 		SaveData.letterbox = false
 	elseif SaveData.letterbox == false then
+		SFX.play("_OST/_Sound Effects/letterbox-enable.ogg")
 		SaveData.letterbox = true
 	end
 end
@@ -907,26 +964,6 @@ local function drawPauseMenu(y, alpha)
 			table.insert(pause_options, {name="Return to the Previous Level", action = returntolastlevel});
 		end
 		if not isOverworld then
-			if (Level.name() == "SMAS - Map") == false then
-				table.insert(pause_options, {name="Go to the Extra Game/DLC Map", action = dlcmapload});
-			end
-		end
-		if not isOverworld then
-			if (Level.name() == "MALC - HUB") == false then
-				table.insert(pause_options, {name="Teleport to the HUB", action = hubteleport});
-			end
-		end
-		if not isOverworld then
-			if SaveData.disableX2char == true then
-				table.insert(pause_options, {name="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
-			end
-		end
-		if not isOverworld then
-			if SaveData.disableX2char == false then
-				table.insert(pause_options, {name="Turn ON SMBX 1.3 Mode", action = x2modedisable});
-			end
-		end
-		if not isOverworld then
 			if Level.filename() == "MALC - HUB.lvlx" then
 				table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
 			end
@@ -934,13 +971,8 @@ local function drawPauseMenu(y, alpha)
 		if isOverworld then
 			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
 		end
-		if not isOverworld then
-			table.insert(pause_options, {name="Character Options", action = switchtochar});
-		end
-		if isOverworld then
-			table.insert(pause_options, {name="Character Options", action = switchtochar});
-		end
-		table.insert(pause_options, {name="Change Resolution", action = changeresolution});
+		table.insert(pause_options, {name="Character Options", action = switchtochar});
+		table.insert(pause_options, {name="Other Options", action = switchtoothermenu});
 		--table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
 		if not isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegame});
@@ -956,12 +988,6 @@ local function drawPauseMenu(y, alpha)
 		end
 		if isOverworld and Defines.player_hasCheated == false then
 			table.insert(pause_options, {name="Save and Quit", action = quitgamemap});
-		end
-		if not isOverworld then
-			table.insert(pause_options, {name="Exit without Saving", action = quitonly});
-		end
-		if isOverworld then
-			table.insert(pause_options, {name="Exit without Saving", action = quitonlymap});
 		end
 	end
 	for k,v in ipairs(pause_options) do
@@ -988,44 +1014,6 @@ local function drawPauseMenu(y, alpha)
 		y = y+h2;
 		h = h+h2;
 	end
-	
-	if SaveData.resolution == "fullscreen" then
-		resolutionshow = "<color red>Resolution: Fullscreen (4:3)</color>"
-	end
-	if SaveData.resolution == "widescreen" then
-		resolutionshow = "<color red>Resolution: Widescreen (16:9)</color>"
-	end
-	if SaveData.resolution == "ultrawide" then
-		resolutionshow = "<color red>Resolution: Ultrawide (21:9)</color>"
-	end
-	if SaveData.resolution == "nes" then
-		resolutionshow = "<color red>Resolution: NES/SNES</color>"
-	end
-	if SaveData.resolution == "gameboy" then
-		resolutionshow = "<color red>Resolution: Gameboy/Gameboy Color</color>"
-	end
-	if SaveData.resolution == "gba" then
-		resolutionshow = "<color red>Resolution: Gameboy Advance</color>"
-	end
-	if SaveData.resolution == "iphone1st" then
-		resolutionshow = "<color red>Resolution: iPhone (1st Generation)</color>"
-	end
-	if SaveData.resolution == "3ds" then
-		resolutionshow = "<color red>Resolution: Nintendo 3DS (Top Screen)</color>"
-	end
-	--local font = textblox.FONT_SPRITEDEFAULT3X2;
-	
-	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
-	if not isOverworld then
-		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 7}
-	end
-	if isOverworld then
-		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
-	end
-	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
-
-	h = h+4+16--font.charHeight;
-	y = y+h;
 
 	
 	return h;
@@ -1364,6 +1352,150 @@ local function drawHUBTeleportMenu(y, alpha)
 	return h;
 end
 
+local function drawOtherOptionMenu(y, alpha)
+	local name = "<color yellow>PAUSED</color>"
+	--local font = textblox.FONT_SPRITEDEFAULT3X2;
+	
+	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
+	local w,h = layout.width, layout.height
+	if not isOverworld then
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 7}
+	end
+	if isOverworld then
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 6}
+	end
+	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
+	
+	h = h+16+8--font.charHeight;
+	y = y+h;
+	
+	
+	if(pause_options_other == nil) then
+		pause_options_other = 
+		{
+			{name4="Other Options", action=nothing}
+		}
+		
+		table.insert(pause_options_other, {name4="Go Back", action = pausemenureturnother});
+		table.insert(pause_options_other, {name4="Change Resolution", action = changeresolution});
+		table.insert(pause_options_other, {name4="Toggle Letterbox Scaling", action = changeletterbox});
+		table.insert(pause_options_other, {name4="Toggle Resolution Border", action = changeresolutionborder});
+		if not isOverworld then
+			if (Level.name() == "SMAS - Map") == false then
+				table.insert(pause_options_other, {name4="Go to the Extra Game/DLC Map", action = dlcmapload});
+			end
+		end
+		if not isOverworld then
+			if (Level.name() == "MALC - HUB") == false then
+				table.insert(pause_options_other, {name4="Teleport to the HUB", action = hubteleport});
+			end
+		end
+		if not isOverworld then
+			table.insert(pause_options_other, {name4="Mute/Unmute Music", action = mutemusic});
+		end
+		if not isOverworld then
+			if SaveData.disableX2char == true then
+				table.insert(pause_options_other, {name4="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
+			end
+		end
+		if not isOverworld then
+			if SaveData.disableX2char == false then
+				table.insert(pause_options_other, {name4="Turn ON SMBX 1.3 Mode", action = x2modedisable});
+			end
+		end
+		if not isOverworld then
+			table.insert(pause_options_other, {name4="Exit without Saving", action = quitonly});
+		end
+		if isOverworld then
+			table.insert(pause_options_other, {name4="Exit without Saving", action = quitonlymap});
+		end
+	end
+	for k,v in ipairs(pause_options_other) do
+		local c = 0xFFFFFF00;
+		local n = v.name4;
+		if(v.inactive) then
+			c = 0x99999900;
+		end
+		if(k == pause_index_other+1) then
+			n = "<color rainbow><wave 1>"..n.."</wave></color>";
+		end
+			
+		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
+		local h2 = layout.height
+		if not isOverworld then
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 7}
+		end
+		if isOverworld then
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 6}
+		end
+		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
+		h2 = h2+2+8--font.charHeight;
+		y = y+h2;
+		h = h+h2;
+	end
+	
+	if SaveData.resolution == "fullscreen" then
+		resolutionshow = "<color red>Resolution: Fullscreen (4:3)</color>"
+	end
+	if SaveData.resolution == "widescreen" then
+		resolutionshow = "<color red>Resolution: Widescreen (16:9)</color>"
+	end
+	if SaveData.resolution == "ultrawide" then
+		resolutionshow = "<color red>Resolution: Ultrawide (21:9)</color>"
+	end
+	if SaveData.resolution == "nes" then
+		resolutionshow = "<color red>Resolution: NES/SNES</color>"
+	end
+	if SaveData.resolution == "gameboy" then
+		resolutionshow = "<color red>Resolution: Gameboy/Gameboy Color</color>"
+	end
+	if SaveData.resolution == "gba" then
+		resolutionshow = "<color red>Resolution: Gameboy Advance</color>"
+	end
+	if SaveData.resolution == "iphone1st" then
+		resolutionshow = "<color red>Resolution: iPhone (1st Generation)</color>"
+	end
+	if SaveData.resolution == "3ds" then
+		resolutionshow = "<color red>Resolution: Nintendo 3DS (Top Screen)</color>"
+	end
+	
+	if SaveData.letterbox == true then
+		letterboxscale = "<color red>Scaling enabled: No</color>"
+	end
+	if SaveData.letterbox == false then
+		letterboxscale = "<color red>Scaling enabled: Yes</color>"
+	end
+	
+	if SaveData.borderEnabled == true then
+		resolutiontheme = "<color red>Border enabled: Yes</color>"
+	end
+	if SaveData.borderEnabled == false then
+		resolutiontheme = "<color red>Border enabled: No</color>"
+	end
+	--local font = textblox.FONT_SPRITEDEFAULT3X2;
+
+	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(letterboxscale, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	local layout3 = textplus.layout(textplus.parse(resolutiontheme, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	if not isOverworld then
+		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout2, x = 222 - w*0.5, y = y+20, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout3, x = 222 - w*0.5, y = y+36, color = Color.white..alpha, priority = 7}
+	end
+	if isOverworld then
+		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
+		textplus.render{layout = layout2, x = 222 - w*0.5, y = y+20, color = Color.white..alpha, priority = 6}
+		textplus.render{layout = layout3, x = 222 - w*0.5, y = y+36, color = Color.white..alpha, priority = 6}
+	end
+	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
+
+	h = h+4+16--font.charHeight;
+	y = y+h;
+
+	
+	return h;
+end
+
 function pausemenu.onDraw(isSplit)
 	if pausemenu.paused then
 		Misc.pause()
@@ -1442,6 +1574,26 @@ function pausemenu.onDraw(isSplit)
 		--Fix for anything calling Misc.unpause
 		--Misc.pause();
 	end
+	if pausemenu.paused_other then
+		Misc.pause()
+		if(pausemenu.pause_box == nil) then
+			pause_height = drawCharacterMenu(-600,500);
+			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+		end
+		if not isOverworld then
+			pausemenu.pause_box:Draw(6, 0x00000077);
+		end
+		if isOverworld then
+			pausemenu.pause_box:Draw(5, 0x00000077);
+		end
+		drawOtherOptionMenu(300-pause_height*0.5,1)
+		
+		--Fix for anything calling Misc.unpause
+		--Misc.pause();
+	end
+	if not pausemenu.paused_other then
+		pausemenu.pause_box = nil
+	end
 	if exitscreen then
 		Graphics.drawScreen{color = Color.black, priority = 10}
 	end
@@ -1455,6 +1607,7 @@ function pausemenu.onInputUpdate()
 			pausemenu.paused = false
 			pausemenu.paused_char = false
 			pausemenu.paused_tele = false
+			pausemenu.paused_other = false
 			pausemenu.pauseactive = false
 			SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 			cooldown = 5
@@ -1466,18 +1619,18 @@ function pausemenu.onInputUpdate()
 			pausemenu.pauseactive = true
 			pause_index = 0;
 			SFX.play("_OST/_Sound Effects/pausemenu.ogg")
-		elseif player.count() == 2 then
+		elseif Player(2) and Player(2).isValid then
 			if pausemenu.paused then
 				pausemenu.paused = false
 				pausemenu.paused_char = false
 				pausemenu.paused_tele = false
+				pausemenu.paused_other = false
 				pausemenu.pauseactive = false
 				SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
 				cooldown = 5
 				Misc.unpause()
 				player2:mem(0x11E,FIELD_BOOL,false)
 			end
-		elseif player.count() == 2 then
 			if(player2:mem(0x13E, FIELD_WORD) == 0 and not dying and (isOverworld or Level.winState() == 0) and not Misc.isPaused() and pausemenu.pauseactivated == true) then
 				--Misc.pause();
 				pausemenu.paused = true
@@ -1499,6 +1652,9 @@ function pausemenu.onInputUpdate()
 		end
 		if pause_index_tele == 0 then
 			pause_index_tele = pause_index_tele + 1
+		end
+		if pause_index_other == 0 then
+			pause_index_other = pause_index_other + 1
 		end
 	end
 	lastPauseKey = player.keys.pause;
@@ -1631,9 +1787,59 @@ function pausemenu.onInputUpdate()
 			end
 		end
 	end
+	if(pausemenu.paused_other and pause_options_other) then
+		if(player.keys.down == KEYS_PRESSED) then
+			repeat
+				pause_index_other = (pause_index_other+1)%#pause_options_other;
+			until(not pause_options_other[pause_index_other+1].inactive);
+			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+		elseif(player.keys.up == KEYS_PRESSED) then
+			repeat
+				pause_index_other = (pause_index_other-1)%#pause_options_other;
+			until(not pause_options_other[pause_index_other+1].inactive);
+			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+		elseif(player.keys.left == KEYS_PRESSED) then
+			player.keys.left = KEYS_UNPRESSED
+		elseif(player.keys.right == KEYS_PRESSED) then
+			player.keys.right = KEYS_UNPRESSED
+		elseif(player.keys.jump == KEYS_PRESSED) then
+			pause_options_other[pause_index_other+1].action();
+			Misc.unpause();
+		end
+		if player.count() == 2 then
+			if(player2.keys.down == KEYS_PRESSED) then
+				repeat
+					pause_index_other = (pause_index_other+1)%#pause_options_other;
+				until(not pause_options_other[pause_index_other+1].inactive);
+				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			elseif(player2.keys.up == KEYS_PRESSED) then
+				repeat
+					pause_index_other = (pause_index_other-1)%#pause_options_other;
+				until(not pause_options_other[pause_index_other+1].inactive);
+				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			elseif(player2.keys.left == KEYS_PRESSED) then
+				player2.keys.left = KEYS_UNPRESSED
+			elseif(player2.keys.right == KEYS_PRESSED) then
+				player2.keys.right = KEYS_UNPRESSED
+			elseif(player2.keys.jump == KEYS_PRESSED) then
+				pause_options_other[pause_index_other+1].action();
+				Misc.unpause();
+			end
+		end
+	end
 end
 
 function pausemenu.onTick()
+	if musicmuted == true then
+		Audio.MusicVolume(0)
+	end
+	if musicmuted == false then
+		if GameData.starActive == true then
+			Audio.MusicVolume(0)
+		else
+			Audio.MusicVolume(64)
+		end
+	end
 	if(pausemenu.paused) then
 		--Misc.pause();
 	end
@@ -1653,16 +1859,38 @@ function pausemenu.onTick()
 			pause_options_tele = 1
 		end
 	end
+	if(pausemenu.paused_other) then
+		if pause_index_tele == 0 then
+			pause_index_other = 1
+		end
+		if pause_options_other == 0 then
+			pause_options_other = 1
+		end
+	end
 	if pausemenu.pauseactivated == true then
 		if player.pauseKeyPressing == false then
 			player.pauseKeyPressing = true
+		end
+		if Player(2) and Player(2).isValid then
+			if Player(2).pauseKeyPressing == false then
+				Player(2).pauseKeyPressing = true
+			end
 		end
 	end
 	if pausemenu.pauseactivated == false then
 		if player.pauseKeyPressing == true then
 			player.pauseKeyPressing = false
 		end
+		if Player(2) and Player(2).isValid then
+			if Player(2).pauseKeyPressing == true then
+				Player(2).pauseKeyPressing = false
+			end
+		end
 	end
+end
+
+function pausemenu.onExit()
+	musicmuted = false
 end
 
 return pausemenu

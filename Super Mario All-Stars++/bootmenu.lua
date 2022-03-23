@@ -433,7 +433,29 @@ end
 
 local function ResolutionChange1()
 	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+end
+
+local function ResolutionChangeBorder2()
+	if SaveData.borderEnabled == true then
+		SFX.play("_OST/_Sound Effects/resolutionborder-disable.ogg")
+		SaveData.borderEnabled = false
+	elseif SaveData.borderEnabled == false then
+		SFX.play("_OST/_Sound Effects/resolutionborder-enable.ogg")
+		SaveData.borderEnabled = true
+	end
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>Border toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+end
+
+local function ResolutionChangeScale3()
+	if SaveData.letterbox == true then
+		SFX.play("_OST/_Sound Effects/letterbox-disable.ogg")
+		SaveData.letterbox = false
+	elseif SaveData.letterbox == false then
+		SFX.play("_OST/_Sound Effects/letterbox-enable.ogg")
+		SaveData.letterbox = true
+	end
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Border toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
 end
 
 local function credits1()
@@ -714,10 +736,16 @@ local function ExitToMap()
 end
 
 local function BootSMASPlusPlusPreExecute()
-	SFX.play("_OST/_Sound Effects/boot_wsmba.ogg")
+	SFX.play("_OST/_Sound Effects/startsmasboot-executed.ogg")
+	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
 	active3 = true
 	logo = true
-	Routine.wait(3.0)
+	Routine.wait(1.0)
+	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
+	Routine.wait(1.0)
+	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
+	Routine.wait(1.0)
+	SFX.play("_OST/_Sound Effects/startsmasboot-fullyexecuted.ogg")
 	exitscreen = true
 	logo = false
 	active3 = false
@@ -1348,6 +1376,8 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
 	littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
 	littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionSelect1) end})
+	littleDialogue.registerAnswer("Options",{text = "Toggle Letterbox Scaling",chosenFunction = function() Routine.run(ResolutionChangeScale3) end})
+	littleDialogue.registerAnswer("Options",{text = "Toggle Resolution Border",chosenFunction = function() Routine.run(ResolutionChangeBorder2) end})
 	littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
 	littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
 	littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
@@ -1381,6 +1411,8 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("ResolutionSelect",{text = "NES, SNES, Genesis",chosenFunction = function() SaveData.resolution = "nes" Routine.run(ResolutionChange1) end})
 	littleDialogue.registerAnswer("ResolutionSelect",{text = "Gameboy, Gameboy Color",chosenFunction = function() SaveData.resolution = "gameboy" Routine.run(ResolutionChange1) end})
 	littleDialogue.registerAnswer("ResolutionSelect",{text = "Gameboy Advance",chosenFunction = function() SaveData.resolution = "gba" Routine.run(ResolutionChange1) end})
+	littleDialogue.registerAnswer("ResolutionSelect",{text = "iPhone (1st Generation)",chosenFunction = function() SaveData.resolution = "iphone1st" Routine.run(ResolutionChange1) end})
+	littleDialogue.registerAnswer("ResolutionSelect",{text = "Nintendo 3DS (Top Screen)",chosenFunction = function() SaveData.resolution = "3ds" Routine.run(ResolutionChange1) end})
 	littleDialogue.registerAnswer("ResolutionSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 	

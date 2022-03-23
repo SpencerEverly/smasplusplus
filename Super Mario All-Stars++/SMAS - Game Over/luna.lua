@@ -7,6 +7,7 @@ function onStart()
         SaveData.GameOverCount = SaveData.GameOverCount or 0
     end
 	SaveData.GameOverCount = SaveData.GameOverCount + 1
+	SaveData.newlives = 5
 	mem(0x00B2C5AC,FIELD_FLOAT, 3)
 end
 
