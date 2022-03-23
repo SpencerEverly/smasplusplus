@@ -232,6 +232,13 @@ Themes made by:
 - Jake Brito
 - Softendo
 
+----Resolution Credits----
+
+Resolution sizes deciphered from sources such as Wikipedia and https://www.wearethefirehouse.com/aspect-ratio-cheat-sheet
+
+- Nintendo 3DS front screen layout by BloodyYoshi
+- HD GBA logo by Dr Ocelot
+
 -----Where SMB Attacks-----
 
 Created by Spencer Everly

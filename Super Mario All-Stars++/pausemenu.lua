@@ -196,6 +196,10 @@ local function changeresolution()
 	elseif SaveData.resolution == "gameboy" then
 		SaveData.resolution = "gba"
 	elseif SaveData.resolution == "gba" then
+		SaveData.resolution = "iphone1st"
+	elseif SaveData.resolution == "iphone1st" then
+		SaveData.resolution = "3ds"
+	elseif SaveData.resolution == "3ds" then
 		SaveData.resolution = "fullscreen"
 	end
 end
@@ -877,7 +881,7 @@ local function drawPauseMenu(y, alpha)
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	if not isOverworld then
-		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 7}
 	end
 	if isOverworld then
 		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 6}
@@ -973,7 +977,7 @@ local function drawPauseMenu(y, alpha)
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		if not isOverworld then
-			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 0}
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 7}
 		end
 		if isOverworld then
 			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 6}
@@ -1003,11 +1007,17 @@ local function drawPauseMenu(y, alpha)
 	if SaveData.resolution == "gba" then
 		resolutionshow = "<color red>Resolution: Gameboy Advance</color>"
 	end
+	if SaveData.resolution == "iphone1st" then
+		resolutionshow = "<color red>Resolution: iPhone (1st Generation)</color>"
+	end
+	if SaveData.resolution == "3ds" then
+		resolutionshow = "<color red>Resolution: Nintendo 3DS (Top Screen)</color>"
+	end
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 	
 	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	if not isOverworld then
-		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 7}
 	end
 	if isOverworld then
 		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
@@ -1028,7 +1038,7 @@ local function drawCharacterMenu(y, alpha)
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	if not isOverworld then
-		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 7}
 	end
 	if isOverworld then
 		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 6}
@@ -1085,7 +1095,7 @@ local function drawCharacterMenu(y, alpha)
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		if not isOverworld then
-			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 0}
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 7}
 		end
 		if isOverworld then
 			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 6}
@@ -1259,7 +1269,7 @@ local function drawCharacterMenu(y, alpha)
 	
 	local layout = textplus.layout(textplus.parse(costumename, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	if not isOverworld then
-		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 7}
 	end
 	if isOverworld then
 		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
@@ -1280,7 +1290,7 @@ local function drawHUBTeleportMenu(y, alpha)
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	if not isOverworld then
-		textplus.render{layout = layout, x = 450 - w*0.5, y = y+8, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout, x = 450 - w*0.5, y = y+8, color = Color.white..alpha, priority = 7}
 	end
 	if isOverworld then
 		textplus.render{layout = layout, x = 450 - w*0.5, y = y+8, color = Color.white..alpha, priority = 6}
@@ -1339,7 +1349,7 @@ local function drawHUBTeleportMenu(y, alpha)
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		if not isOverworld then
-			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 0}
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 7}
 		end
 		if isOverworld then
 			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 6}
@@ -1362,7 +1372,7 @@ function pausemenu.onDraw(isSplit)
 			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		if not isOverworld then
-			pausemenu.pause_box:Draw(-1.99, 0x00000077);
+			pausemenu.pause_box:Draw(6, 0x00000077);
 		end
 		if isOverworld then
 			pausemenu.pause_box:Draw(5, 0x00000077);
@@ -1382,7 +1392,7 @@ function pausemenu.onDraw(isSplit)
 			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		if not isOverworld then
-			pausemenu.pause_box:Draw(-1.99, 0x00000077);
+			pausemenu.pause_box:Draw(6, 0x00000077);
 		end
 		if isOverworld then
 			pausemenu.pause_box:Draw(5, 0x00000077);
@@ -1402,7 +1412,7 @@ function pausemenu.onDraw(isSplit)
 			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		if not isOverworld then
-			pausemenu.pause_box:Draw(-1.99, 0x00000077);
+			pausemenu.pause_box:Draw(6, 0x00000077);
 		end
 		if isOverworld then
 			pausemenu.pause_box:Draw(5, 0x00000077);
@@ -1422,7 +1432,7 @@ function pausemenu.onDraw(isSplit)
 			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		if not isOverworld then
-			pausemenu.pause_box:Draw(-1.99, 0x00000077);
+			pausemenu.pause_box:Draw(6, 0x00000077);
 		end
 		if isOverworld then
 			pausemenu.pause_box:Draw(5, 0x00000077);

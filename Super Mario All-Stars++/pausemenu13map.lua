@@ -139,7 +139,7 @@ local function drawPauseMenu(y, alpha)
 			
 		local layout = textplus.layout(textplus.parse(n, {xscale=2, yscale=2, font = pausefont}), pause_width)
 		local h2 = layout.height
-		textplus.render{layout = layout, x = 565 - layout.width, y = y, color = Color.fromHex(c+alpha*255), priority = 0}
+		textplus.render{layout = layout, x = 565 - layout.width, y = y, color = Color.fromHex(c+alpha*255), priority = 6}
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
 		h2 = h2+2+18--font.charHeight;
 		y = y+h2;
@@ -159,7 +159,7 @@ function pausemenu13.onDraw(isSplit)
 			pause_height = drawPauseMenu(-600,0);
 			pause_box = imagic.Create{x=393,y=300,width=390,height=pause_height,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
-		pause_box:Draw(0, 0x000000FF);
+		pause_box:Draw(5, 0x000000FF);
 		drawPauseMenu(300-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause

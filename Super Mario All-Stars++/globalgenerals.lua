@@ -6,8 +6,15 @@ local extendedKoopas = require("extendedKoopas")
 local warpTransition = require("warpTransition")
 local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
+local smallScreen = require("smallScreen")
 
-local wideborder = Graphics.loadImageResolved("widescreen.png")
+local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
+local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
+local nesborder = Graphics.loadImageResolved("graphics/resolutionborders/nes.png")
+local gbborder = Graphics.loadImageResolved("graphics/resolutionborders/gb.png")
+local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png")
+local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
+local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
 
 customCamera.transitionSpeed = 5
 
@@ -318,6 +325,8 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
 	end
 	if SaveData.resolution == "widescreen" then
 		customCamera.defaultScreenWidth = 800
@@ -328,9 +337,15 @@ function globalgenerals.onTick()
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
 		if SaveData.letterbox == false then
-			
+			smallScreen.scaleX = 1.33
+			smallScreen.scaleY = 1.33
+			smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
 		elseif SaveData.letterbox == true then
-			
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
 		end
 	end
 	if SaveData.resolution == "ultrawide" then
@@ -341,15 +356,23 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
 	end
 	if SaveData.resolution == "nes" then
 		customCamera.defaultScreenWidth = 512
 		customCamera.defaultScreenHeight = 448
 		customCamera.defaultZoom = 0.75
 		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultScreenOffsetY = 0.20
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1.25
+		smallScreen.scaleY = 1.08
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
 	end
 	if SaveData.resolution == "gameboy" then
 		customCamera.defaultScreenWidth = 320
@@ -359,6 +382,10 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
 	end
 	if SaveData.resolution == "gba" then
 		customCamera.defaultScreenWidth = 480
@@ -368,6 +395,36 @@ function globalgenerals.onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+	end
+	if SaveData.resolution == "iphone1st" then
+		customCamera.defaultScreenWidth = 400
+		customCamera.defaultScreenHeight = 600
+		customCamera.defaultZoom = 0.62
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+	end
+	if SaveData.resolution == "3ds" then
+		customCamera.defaultScreenWidth = 700
+		customCamera.defaultScreenHeight = 419
+		customCamera.defaultZoom = 0.58
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 70
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
 	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
@@ -1088,7 +1145,25 @@ end
 
 function globalgenerals.onDraw()
 	if SaveData.resolution == "widescreen" then
-		Graphics.drawImageWP(wideborder, 0, 0, 10)
+		Graphics.drawImageWP(wideborder, 0, 0, 5)
+	end
+	if SaveData.resolution == "ultrawide" then
+		Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
+	end
+	if SaveData.resolution == "nes" then
+		Graphics.drawImageWP(nesborder, 0, 0, 5)
+	end
+	if SaveData.resolution == "gameboy" then
+		Graphics.drawImageWP(gbborder, 0, 0, 5)
+	end
+	if SaveData.resolution == "gba" then
+		Graphics.drawImageWP(gbaborder, 0, 0, 5)
+	end
+	if SaveData.resolution == "iphone1st" then
+		Graphics.drawImageWP(iphoneoneborder, 0, 0, 5)
+	end
+	if SaveData.resolution == "3ds" then
+		Graphics.drawImageWP(threedsborder, 0, 0, 5)
 	end
 end
 
