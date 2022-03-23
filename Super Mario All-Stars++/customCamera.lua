@@ -36,8 +36,9 @@
 local blockutils = require("blocks/blockutils")
 local npcutils = require("npcs/npcutils")
 local playerManager = require("playerManager")
-local handycam = require("handycam")
 local sizable = require("game/sizable")
+
+local handycam = require("handycamm")
 
 local customCamera = {}
 

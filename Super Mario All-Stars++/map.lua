@@ -10,16 +10,15 @@ local pause_music = require("map_music")
 local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
 
-if SaveData.disableX2char == false then
-	local map3d = require("mapp3d")
-	map3d.BGPlane.tile = 394
-	map3d.Light.enabled = false
-end
+local map3d = require("mapp3d")
+map3d.BGPlane.tile = 394
+map3d.Light.enabled = false
 
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
-local hudborder = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp.png")
+local hudborder = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-solidcoloronly.png")
 local hudborderwide = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-wide.png")
+local hudborderultrawide = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-ultrawide.png")
 local times = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-1.png")
 local coinicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-2.png")
 local oneupicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-3.png")
@@ -134,12 +133,20 @@ function onTick()
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 	end
 	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
+		if SaveData.disableX2char == true then
+			map3d.CameraSettings.fov = 75
+			map3d.CameraSettings.height = 300
+		end
 		if SaveData.disableX2char == false then
 			map3d.CameraSettings.fov = 60
 			map3d.CameraSettings.height = 300
 		end
 	end
 	if SaveData.resolution == "widescreen" then
+		if SaveData.disableX2char == true then
+			map3d.CameraSettings.fov = 75
+			map3d.CameraSettings.height = 300
+		end
 		if SaveData.disableX2char == false then
 			map3d.CameraSettings.fov = 75
 			map3d.CameraSettings.height = 300
@@ -188,6 +195,44 @@ local yoshiAnimationFrames = {
 local bootBounceData = {}
 
 function onDraw()
+	if SaveData.resolution == "ultrawide" then
+		Graphics.drawImageWP(hudborderultrawide, 0, 0, 3)
+		
+		Graphics.drawImageWP(oneupicon, 70, 500, 5)
+		Graphics.drawImageWP(times, 105, 502, 5)
+		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 160, 500, 5)
+		Graphics.drawImageWP(times, 178, 502, 5)
+		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 500, 5)
+		Graphics.drawImageWP(times, 254, 502, 5)
+		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 326, 496, 4)
+		Graphics.drawImageWP(coinicon, 330, 500, 5)
+		Graphics.drawImageWP(times, 348, 502, 5)
+		textplus.print{x=367, y=500, text = ""..SaveData.totalcoins.."", priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+		if world.levelTitle then
+			textplus.print{x=150, y=159, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
+		end
+		if world.levelObj then
+			textplus.print{x=150, y=145, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=150, y=145, text = "N/A", priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
+		end
+		Graphics.drawBox{x=719, y=495, width=76, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=724, y=500, text = "Time - ", priority=8, color=Color.white} --What time is it...!?
+		textplus.print{x=755, y=500, text = os.date("%I"), priority=8, color=Color.white}
+		textplus.print{x=765, y=500, text = ":", priority=8, color=Color.white}
+		textplus.print{x=768, y=500, text = os.date("%M"), priority=8, color=Color.white}
+		textplus.print{x=780, y=500, text = os.date("%p"), priority=8, color=Color.white}
+		Graphics.drawBox{x=695, y=472, width=100, height=20, color=Color.black..0.2, priority=8}
+		textplus.print{x=700, y=477, text = "Date - ", priority=8, color=Color.white} --What's the day, sir?!
+		textplus.print{x=733, y=477, text = os.date("%a"), priority=8, color=Color.white}
+		textplus.print{x=752, y=477, text = os.date("%x"), priority=8, color=Color.white}
+	end
 	if SaveData.resolution == "widescreen" then
 		Graphics.drawImageWP(hudborderwide, 0, 0, 3)
 		
@@ -226,7 +271,7 @@ function onDraw()
 		textplus.print{x=733, y=477, text = os.date("%a"), priority=8, color=Color.white}
 		textplus.print{x=752, y=477, text = os.date("%x"), priority=8, color=Color.white}
 	end
-	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
+	if SaveData.resolution == "fullscreen" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
 		for idx,p in ipairs(Player.get()) do
 			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 
