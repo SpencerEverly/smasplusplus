@@ -62,6 +62,20 @@ local chooseSpriteWide = Sprite{
 	align = Sprite.align.CENTER,
 }
 
+local backSpriteUltrawide = Sprite{
+    image = invBack,
+    x = 70,
+	y = 420,
+	align = Sprite.align.BOTTOMLEFT
+}
+
+local chooseSpriteUltrawide = Sprite{
+    image = invChoose,
+    x = 400,
+	y = 192,
+	align = Sprite.align.CENTER,
+}
+
 -- Textplus Font --
 local textplus = require("textplus")
 local font = textplus.loadFont("textplus/font/1.ini")
@@ -194,6 +208,38 @@ function inventory.onDrawWorld()
 			chooseSpriteWide.transform.scale = vector(cScale, cScale)
 		end
 	end
+	if SaveData.resolution == "ultrawide" then
+		-- Animation --
+		if invIsOpen then
+			if bScale < 1 then bScale = bScale + 0.1 end
+		else
+			if bScale > 0 then bScale = bScale - 0.1 end
+		end
+
+		if chooseIsOpen then
+			if cScale < 1 then cScale = cScale + 0.1 end
+		else
+			if cScale > 0 then cScale = cScale - 0.1 end
+		end
+
+		-- Lets cap the scale --
+		if bScale < 0 then bScale = 0 end
+		if bScale > 1 then bScale = 1 end
+
+		if cScale < 0 then cScale = 0 end
+		if cScale > 1 then cScale = 1 end
+
+		-- Scaling the sprites --
+		if bScale > 0 then
+			backSpriteUltrawide:draw{priority = 5.9}
+			backSpriteUltrawide.transform.scale = vector(1, bScale)
+		end
+
+		if cScale > 0 then
+			chooseSpriteUltrawide:draw{priority = 6}
+			chooseSpriteUltrawide.transform.scale = vector(cScale, cScale)
+		end
+	end
 
 	-- Drawing the Item Icons --
 	if bScale >= 1 then
@@ -214,6 +260,20 @@ function inventory.onDrawWorld()
 			end
 			if SaveData.resolution == "widescreen" then
 				textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=392, font=font, plaintext=true, priority=6}
+				Graphics.draw{
+					type = RTYPE_IMAGE,
+					image = invIcons,
+					x = i * 82 + 94,
+					y = 418,
+					sourceY = i * 36,
+					sourceHeight = 36,
+					sourceX = isSelected * 36,
+					sourceWidth = 36,
+					priority = 6
+				}
+			end
+			if SaveData.resolution == "ultrawide" then
+				textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=342, font=font, plaintext=true, priority=6}
 				Graphics.draw{
 					type = RTYPE_IMAGE,
 					image = invIcons,
@@ -293,6 +353,38 @@ function inventory.onDrawWorld()
 				image = selector,
 				x = 100 * (selectedPlayer - 1) + 316,
 				y = 450,
+				priority = 6.2
+			}
+		end
+		if SaveData.resolution == "ultrawide" then
+			Graphics.draw{
+				type = RTYPE_IMAGE,
+				image = invChar,
+				x = 330,
+				y = 210,
+				sourceX = tonumber(player.character - 1) * 40,
+				sourceWidth = 40,
+				priority = 6.1
+			}
+			if player.count() == 2 then
+				Graphics.draw{
+					type = RTYPE_IMAGE,
+					image = invChar,
+					x = 430,
+					y = 210,
+					sourceX = tonumber(player2.character - 1) * 40,
+					sourceWidth = 40,
+					priority = 6.1
+				}
+			end
+			Text.printWP("Choose a", 330, 328, 5.3)
+			Text.printWP("Player", 346, 348, 5.3)
+
+			Graphics.draw{
+				type = RTYPE_IMAGE,
+				image = selector,
+				x = 100 * (selectedPlayer - 1) + 316,
+				y = 400,
 				priority = 6.2
 			}
 		end

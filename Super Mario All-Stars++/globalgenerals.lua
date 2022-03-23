@@ -354,7 +354,7 @@ function globalgenerals.onTick()
 	if SaveData.resolution == "gameboy" then
 		customCamera.defaultScreenWidth = 320
 		customCamera.defaultScreenHeight = 228
-		customCamera.defaultZoom = 0.40
+		customCamera.defaultZoom = 0.38
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
