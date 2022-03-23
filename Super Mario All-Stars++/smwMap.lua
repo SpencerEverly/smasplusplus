@@ -3734,7 +3734,8 @@ do
 
 
         if hudSettings.borderEnabled and hudSettings.borderImage ~= nil then
-            Graphics.drawImageWP(hudSettings.borderImage,0,0,2)
+            Graphics.drawImageWP(hudSettings.borderImage,0,0,-2)
+			Graphics.drawImageWP(hudSettings.borderImageBG,-1000,0,-100)
         end
 
 
@@ -3800,7 +3801,7 @@ do
 
                     p:render{
                         x = x,y = y,
-                        ignorestate = true,sceneCoords = false,priority = 3,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+                        ignorestate = true,sceneCoords = false,priority = -1,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
                         frame = frame,
                     }
 
@@ -3841,7 +3842,7 @@ do
 
                     if icon ~= nil then
                         --Graphics.drawBox{texture = icon,priority = priority,x = xPosition,y = counterY - icon.height}
-                        Graphics.drawImageWP(icon,xPosition,counterY - icon.height,3)
+                        Graphics.drawImageWP(icon,xPosition,counterY - icon.height,-1)
                         totalWidth = totalWidth + icon.width
                         tallestElementHeight = math.max(tallestElementHeight,icon.height)
                     end
@@ -3854,7 +3855,7 @@ do
                         counter.oldText = currentText
                     end
 
-                    textplus.render{layout = counter.textLayout,priority = 3,x = xPosition + widestIconWidth,y = counterY - counter.textLayout.height}
+                    textplus.render{layout = counter.textLayout,priority = -1,x = xPosition + widestIconWidth,y = counterY - counter.textLayout.height}
                     totalWidth = totalWidth + counter.textLayout.width
                     tallestElementHeight = math.max(tallestElementHeight,counter.textLayout.height)
 
@@ -3932,7 +3933,7 @@ do
 
             smwMap.levelTitleLayout = textplus.layout(levelTitle, levelTitleMaxWidth, {font = hudSettings.levelTitleFont,xscale = hudSettings.levelTitleScale,yscale = hudSettings.levelTitleScale})
 
-            textplus.render{layout = smwMap.levelTitleLayout,color = smwMap.hudSettings.levelTitleColor,priority = 3,x = xPosition,y = hudSettings.borderTopHeight + hudSettings.levelTitleOffsetY - smwMap.levelTitleLayout.height}
+            textplus.render{layout = smwMap.levelTitleLayout,color = smwMap.hudSettings.levelTitleColor,priority = -1,x = xPosition,y = hudSettings.borderTopHeight + hudSettings.levelTitleOffsetY - smwMap.levelTitleLayout.height}
         end
     end
 
@@ -4338,7 +4339,8 @@ smwMap.encounterSettings = {
 
 
 smwMap.hudSettings = {
-    borderImage = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp.png"),
+    borderImage = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-solidcoloronly.png"),
+	borderImageBG = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-bg-solid.png"),
 
     borderLeftWidth = 66,
     borderRightWidth = 66,
@@ -4387,7 +4389,7 @@ smwMap.hudSettings = {
     starcoinsEnabled = true,
 
 
-    priority = 5,
+    priority = -2,
 }
 
 
