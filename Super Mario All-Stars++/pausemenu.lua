@@ -1312,7 +1312,7 @@ local function drawHUBTeleportMenu(y, alpha)
 			table.insert(pause_options_tele, {name3="Teleport back to the Start", action = startteleport});
 		end
 		if isOverworld then
-			table.insert(pause_options_tele, {name3="Teleport to the HUB", action = hubmapteleport});
+			table.insert(pause_options_tele, {name3="Teleport to the Hub", action = hubmapteleport});
 		end
 		if isOverworld then
 			table.insert(pause_options_tele, {name3="Teleport to the Side Quest", action = sideteleport});

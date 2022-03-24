@@ -187,6 +187,6 @@ end
 
 --SaveData.smasdeathsystem.gameOverCount = 0 --This is only when the library publically releases for the wild to use
 smasdeathsystem.hasDied = false --If the player died or not
-smasdeathsystem.extramapexit = false --This'll only be true on extra DLC levels/extra games in future updates
+smasdeathsystem.extramapexit = false --This'll only be true on extra DLC levels/extra games' level luna.lua's in future updates
 
 return smasdeathsystem

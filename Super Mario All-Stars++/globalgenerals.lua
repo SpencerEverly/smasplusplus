@@ -311,16 +311,17 @@ function globalgenerals.onTick()
 		Graphics.activateHud(true)
 	end
 	if SaveData.disableX2char == false then
-		if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
-			globalgenerals.showitembox = true
-		elseif (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
-			--Nothing
-		end
 		if globalgenerals.showitembox == false then
 			HUDOverride.visible.itembox = false
 		end
 		if globalgenerals.showitembox == true then
 			HUDOverride.visible.itembox = true
+		end
+		if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
+			globalgenerals.showitembox = true
+		end
+		if (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
+			--globalgenerals.showitembox = false
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
