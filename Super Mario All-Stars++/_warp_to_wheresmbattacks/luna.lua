@@ -30,10 +30,6 @@ function onInitAPI()
 	registerEvent("onKeyboardPress");
 end
 
-function onStart()
-	Audio.MusicVolume(nil)
-end
-
 function onTick()
 	--Prevent donthurtme cheat, for obvious reasons
 	Defines.cheat_donthurtme = used_donthurtme;
@@ -56,8 +52,4 @@ function onEvent(eventName)
 			triggerEvent("WSMBANotFound")
 		end
 	end
-end
-
-function onExit()
-	Audio.MusicVolume(nil)
 end

@@ -34,7 +34,7 @@ function onLoad()
 end
 
 function onStart()
-	Audio.MusicVolume(nil)
+	Audio.MusicVolume(65)
 end
 
 function onTick()

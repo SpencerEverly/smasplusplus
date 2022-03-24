@@ -443,23 +443,19 @@ function snake.onDraw()
 			Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, -1.99999);
 			local camo = tostring(math.ceil(100*(snake.alertCooldown-snake.alertTimer)/(snake.alertCooldown)));
 			--textblox.printExt("%",{x=774,y=38,font=textblox.FONT_SPRITEDEFAULT3, z=5});
-			if SaveData.resolution == "fullscreen" then
-				Text.printWP(camo,1,400-#camo*18 - 8,46,5)
-			elseif SaveData.resolution == "widescreen" then
-				Text.printWP(camo,1,400-#camo*18 - 8,116,5)
-			end
+			Text.printWP(camo,1,400-#camo*18 - 8,46,-5)
 			
 			--Draw powerup elements
 			if(player:mem(0x16, FIELD_WORD) > 1 and player.forcedState ~= 1 and player.forcedState ~= 4) then
 				local power = {label = "", graphic = snake.HUD_POWER_ARMOUR}
 				if(player.powerup <= PLAYER_BIG) then
-					power.label = "BODY ARMOUR";
+					power.label = "BODY ARMOR";
 					power.graphic = snake.HUD_POWER_ARMOUR;
 				elseif(player.powerup == PLAYER_FIREFLOWER) then
 					power.label = "C4";
 					power.graphic = snake.HUD_POWER_C4;
 				elseif(player.powerup == PLAYER_LEAF) then
-					power.label = "ATHLETIC ARMOUR";
+					power.label = "ATHLETIC ARMOR";
 					power.graphic = snake.HUD_POWER_ATHLETIC;
 				elseif(player.powerup == PLAYER_TANOOKIE) then
 					power.label = "STEALTH BOX";
@@ -471,20 +467,13 @@ function snake.onDraw()
 					power.label = "MK22";
 					power.graphic = snake.HUD_POWER_MK22;
 				end
-				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 410, 10, -1.9999);
-				if SaveData.resolution == "fullscreen" then
-					FONT.text = power.label
-					FONT.x=405
-					FONT.y=55
-					FONT.maxWidth=80
-					textplus.print(FONT)
-				elseif SaveData.resolution == "widescreen" then
-					FONT.text = power.label
-					FONT.x=405
-					FONT.y=125
-					FONT.maxWidth=80
-					textplus.print(FONT)
-				end
+				Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 400, 12, -5);
+				FONT.text = power.label
+				FONT.x=398
+				FONT.y=48
+				FONT.maxWidth=65
+				FONT.priority = -5
+				textplus.print(FONT)
 			end
 			
 			--Draw mk22

@@ -28,5 +28,5 @@ function onEvent(eventName)
 end
 
 function onExit()
-	Audio.MusicVolume(nil)
+	Audio.MusicVolume(65)
 end

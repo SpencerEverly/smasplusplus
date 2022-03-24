@@ -16,6 +16,7 @@ comboSounds.kick4 = extrasounds.id109
 comboSounds.kick5 = extrasounds.id110
 comboSounds.kick6 = extrasounds.id111
 comboSounds.kick7 = extrasounds.id112
+comboSounds.kick8 = extrasounds.id113
 
 comboSounds.sounds = {
     9,
@@ -26,7 +27,7 @@ comboSounds.sounds = {
     extrasounds.id110,
     extrasounds.id111,
     extrasounds.id112,
-	extrasounds.id112, --And then the same shell for rest of the hits
+	extrasounds.id113, --And then the same shell for rest of the hits
 }
 
 

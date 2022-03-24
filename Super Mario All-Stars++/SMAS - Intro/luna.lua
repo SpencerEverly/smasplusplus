@@ -23,6 +23,7 @@ function onStart(p)
 	datetime.topright = true
 	datetime.bottomright = false
 	p = p or player;
+	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(80)
 end
 
@@ -109,7 +110,7 @@ function onEvent(eventName)
 		fadeout3 = true
 	end
 	if eventName == "Opening Stage 10 - End of Intro" then
-		Audio.MusicVolume(nil)
+		Audio.MusicVolume(65)
 	end
 	if eventName == "Skip Intro" then
 		player.downKeyPressing = false
@@ -233,7 +234,8 @@ Cheats.deregister("needaredshoe")
 Cheats.deregister("needablueshoe")
 
 function onExit()
-	Audio.MusicVolume(nil)
+	GameData.cutsceneMusicControl = false
+	Audio.MusicVolume(65)
 	datetime.topright = false
 	datetime.bottomright = true
 end

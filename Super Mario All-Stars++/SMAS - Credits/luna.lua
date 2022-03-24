@@ -348,6 +348,7 @@ local creditsLayouts = {}
 local creditsScrollY = 0
 local scrollOutroX = 0
 function onStart()
+	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(80)
 	SaveData.hideCoinCounter = true
 	for i = 1, #credits do
@@ -401,6 +402,7 @@ function onTick()
 end
 
 function onExit()
+	GameData.cutsceneMusicControl = false
 	Audio.MusicVolume(64)
 end
 

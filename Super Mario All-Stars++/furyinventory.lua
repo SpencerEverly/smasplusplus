@@ -1,3 +1,6 @@
+--Modded tremendously by Spencer Everly. I took this broken code and did it justice. How did I do?
+--Original message and credits by Coldcolor900:
+
 --[[
 --------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
@@ -11,7 +14,7 @@ with all this stuff. I probably would have gone insane if they didn't help.
 --------------------------------------------------------------------------------------------
 --]]
 
-
+--Oh yeah, and I should give thanks to MDA for telling me I should write a variable instead, it helped BIG time.
 
 local inventory = {}
 
@@ -39,7 +42,7 @@ local numy = 570
 
 inventory.activated = true --This will activate the inventory only when it's true
 inventory.activateinventory = true --this is part of the code that makes sure dialogue systems dont mess with the inventory, but you can probably use it to your advantage when making levels.
-inventory.hidden = false
+inventory.hidden = false --To hide the inventory for certain cutscenes
 
 local inventoryopen = false
 
@@ -124,45 +127,131 @@ function inventory.onDraw()
 		--player.reservePowerup = 0 -- disables the item box
 		if inventory.activateinventory == true then
 			if inventory.inventoryopened == true then
-				numx = 54
-				numy = 574
+				if SaveData.resolution == "fullscreen" or SaveData.resolution == "widescreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" or SaveData.resolution == "3ds" then
+					numx = 54
+					numy = 574
 
-			
+				
 
-				if SaveData.inventory.shroom >= 10 then
-					Text.printWP(SaveData.inventory.shroom, numx-8, numy, -1.9)
-				else
-					Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
+					if SaveData.inventory.shroom >= 10 then
+						Text.printWP(SaveData.inventory.shroom, numx-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
+					end
+
+					if SaveData.inventory.fire >= 10 then
+						Text.printWP(SaveData.inventory.fire, numx+64-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.fire, numx+64, numy, -1.9)
+					end
+
+					if SaveData.inventory.ice >= 10 then
+						Text.printWP(SaveData.inventory.ice, numx+128-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.ice, numx+128, numy, -1.9)
+					end
+
+					if SaveData.inventory.leaf >= 10 then
+						Text.printWP(SaveData.inventory.leaf, numx+192-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.leaf, numx+192, numy, -1.9)
+					end
+
+					if SaveData.inventory.tanooki >= 10 then
+						Text.printWP(SaveData.inventory.tanooki, numx+256-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.tanooki, numx+256, numy, -1.9)
+					end
+
+					if SaveData.inventory.hammer >= 10 then
+						Text.printWP(SaveData.inventory.hammer, numx+320-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.hammer, numx+320, numy, -1.9)
+					end
 				end
+				if SaveData.resolution == "nes" then
+					numx = 114
+					numy = 554
 
-				if SaveData.inventory.fire >= 10 then
-					Text.printWP(SaveData.inventory.fire, numx+64-8, numy, -1.9)
-				else
-					Text.printWP(SaveData.inventory.fire, numx+64, numy, -1.9)
+				
+
+					if SaveData.inventory.shroom >= 10 then
+						Text.printWP(SaveData.inventory.shroom, numx-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
+					end
+
+					if SaveData.inventory.fire >= 10 then
+						Text.printWP(SaveData.inventory.fire, numx+64-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.fire, numx+64, numy, -1.9)
+					end
+
+					if SaveData.inventory.ice >= 10 then
+						Text.printWP(SaveData.inventory.ice, numx+128-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.ice, numx+128, numy, -1.9)
+					end
+
+					if SaveData.inventory.leaf >= 10 then
+						Text.printWP(SaveData.inventory.leaf, numx+192-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.leaf, numx+192, numy, -1.9)
+					end
+
+					if SaveData.inventory.tanooki >= 10 then
+						Text.printWP(SaveData.inventory.tanooki, numx+256-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.tanooki, numx+256, numy, -1.9)
+					end
+
+					if SaveData.inventory.hammer >= 10 then
+						Text.printWP(SaveData.inventory.hammer, numx+320-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.hammer, numx+320, numy, -1.9)
+					end
 				end
+				if SaveData.resolution == "iphone1st" then
+					numx = 214
+					numy = 574
 
-				if SaveData.inventory.ice >= 10 then
-					Text.printWP(SaveData.inventory.ice, numx+128-8, numy, -1.9)
-				else
-					Text.printWP(SaveData.inventory.ice, numx+128, numy, -1.9)
-				end
+				
 
-				if SaveData.inventory.leaf >= 10 then
-					Text.printWP(SaveData.inventory.leaf, numx+192-8, numy, -1.9)
-				else
-					Text.printWP(SaveData.inventory.leaf, numx+192, numy, -1.9)
-				end
+					if SaveData.inventory.shroom >= 10 then
+						Text.printWP(SaveData.inventory.shroom, numx-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
+					end
 
-				if SaveData.inventory.tanooki >= 10 then
-					Text.printWP(SaveData.inventory.tanooki, numx+256-8, numy, -1.9)
-				else
-					Text.printWP(SaveData.inventory.tanooki, numx+256, numy, -1.9)
-				end
+					if SaveData.inventory.fire >= 10 then
+						Text.printWP(SaveData.inventory.fire, numx+64-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.fire, numx+64, numy, -1.9)
+					end
 
-				if SaveData.inventory.hammer >= 10 then
-					Text.printWP(SaveData.inventory.hammer, numx+320-8, numy, -1.9)
-				else
-					Text.printWP(SaveData.inventory.hammer, numx+320, numy, -1.9)
+					if SaveData.inventory.ice >= 10 then
+						Text.printWP(SaveData.inventory.ice, numx+128-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.ice, numx+128, numy, -1.9)
+					end
+
+					if SaveData.inventory.leaf >= 10 then
+						Text.printWP(SaveData.inventory.leaf, numx+192-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.leaf, numx+192, numy, -1.9)
+					end
+
+					if SaveData.inventory.tanooki >= 10 then
+						Text.printWP(SaveData.inventory.tanooki, numx+256-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.tanooki, numx+256, numy, -1.9)
+					end
+
+					if SaveData.inventory.hammer >= 10 then
+						Text.printWP(SaveData.inventory.hammer, numx+320-8, numy, -1.9)
+					else
+						Text.printWP(SaveData.inventory.hammer, numx+320, numy, -1.9)
+					end
 				end
 
 
@@ -225,25 +314,71 @@ function inventory.onDraw()
 
 		if inventory.activateinventory == true then
 			if inventory.inventoryopened == true then
-				Graphics.drawImageWP(inventoryimg, 30, 508, -1.8)
-				Graphics.drawImageWP(selector, selectx, selecty, -1.9)
-				if SaveData.inventory.shroom == 0 then
-					Graphics.drawImageWP(noshroom, 30, 508, -1.98)
+				if SaveData.resolution == "fullscreen" or SaveData.resolution == "widescreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" or SaveData.resolution == "3ds" then
+					Graphics.drawImageWP(inventoryimg, 30, 508, -1.8)
+					Graphics.drawImageWP(selector, selectx, selecty, -1.9)
+					if SaveData.inventory.shroom == 0 then
+						Graphics.drawImageWP(noshroom, 30, 508, -1.98)
+					end
+					if SaveData.inventory.fire == 0 then
+						Graphics.drawImageWP(nofire, 94, 508, -1.98)
+					end
+					if SaveData.inventory.ice == 0 then
+						Graphics.drawImageWP(noice, 158, 508, -1.98)
+					end 
+					if SaveData.inventory.leaf == 0 then
+						Graphics.drawImageWP(noleaf, 222, 508, -1.98)
+					end
+					if SaveData.inventory.tanooki == 0 then
+						Graphics.drawImageWP(notanooki, 286, 508, -1.98)
+					end
+					if SaveData.inventory.hammer == 0 then
+						Graphics.drawImageWP(nohammer, 350, 508, -1.98)
+					end
 				end
-				if SaveData.inventory.fire == 0 then
-					Graphics.drawImageWP(nofire, 94, 508, -1.98)
+				if SaveData.resolution == "nes" then
+					Graphics.drawImageWP(inventoryimg, 90, 488, -1.8)
+					Graphics.drawImageWP(selector, selectx, selecty, -1.9)
+					if SaveData.inventory.shroom == 0 then
+						Graphics.drawImageWP(noshroom, 90, 488, -1.98)
+					end
+					if SaveData.inventory.fire == 0 then
+						Graphics.drawImageWP(nofire, 154, 488, -1.98)
+					end
+					if SaveData.inventory.ice == 0 then
+						Graphics.drawImageWP(noice, 218, 488, -1.98)
+					end 
+					if SaveData.inventory.leaf == 0 then
+						Graphics.drawImageWP(noleaf, 282, 488, -1.98)
+					end
+					if SaveData.inventory.tanooki == 0 then
+						Graphics.drawImageWP(notanooki, 346, 488, -1.98)
+					end
+					if SaveData.inventory.hammer == 0 then
+						Graphics.drawImageWP(nohammer, 410, 488, -1.98)
+					end
 				end
-				if SaveData.inventory.ice == 0 then
-					Graphics.drawImageWP(noice, 158, 508, -1.98)
-				end 
-				if SaveData.inventory.leaf == 0 then
-					Graphics.drawImageWP(noleaf, 222, 508, -1.98)
-				end
-				if SaveData.inventory.tanooki == 0 then
-					Graphics.drawImageWP(notanooki, 286, 508, -1.98)
-				end
-				if SaveData.inventory.hammer == 0 then
-					Graphics.drawImageWP(nohammer, 350, 508, -1.98)
+				if SaveData.resolution == "iphone1st" then
+					Graphics.drawImageWP(inventoryimg, 190, 508, -1.8)
+					Graphics.drawImageWP(selector, selectx, selecty, -1.9)
+					if SaveData.inventory.shroom == 0 then
+						Graphics.drawImageWP(noshroom, 190, 508, -1.98)
+					end
+					if SaveData.inventory.fire == 0 then
+						Graphics.drawImageWP(nofire, 254, 508, -1.98)
+					end
+					if SaveData.inventory.ice == 0 then
+						Graphics.drawImageWP(noice, 318, 508, -1.98)
+					end 
+					if SaveData.inventory.leaf == 0 then
+						Graphics.drawImageWP(noleaf, 382, 508, -1.98)
+					end
+					if SaveData.inventory.tanooki == 0 then
+						Graphics.drawImageWP(notanooki, 446, 508, -1.98)
+					end
+					if SaveData.inventory.hammer == 0 then
+						Graphics.drawImageWP(nohammer, 510, 508, -1.98)
+					end
 				end
 			end
 		end
@@ -311,13 +446,25 @@ function inventory.onPostNPCKill(v,reason)
     end
 end
 
--- Run code every frame (~1/65 second)
--- (code will be executed before game logic will be processed)
 function inventory.onTick()
-	selectx = 30
-	selecty = 508
-	numx = 40
-	numy = 570
+	if SaveData.resolution == "fullscreen" or SaveData.resolution == "widescreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" or SaveData.resolution == "3ds" then
+		selectx = 30
+		selecty = 508
+		numx = 40
+		numy = 570
+	end
+	if SaveData.resolution == "nes" then
+		selectx = 90
+		selecty = 488
+		numx = 70
+		numy = 550
+	end
+	if SaveData.resolution == "iphone1st" then
+		selectx = 190
+		selecty = 508
+		numx = 200
+		numy = 570
+	end
 	
 	SaveData.inventory.reserve = player.reservePowerup
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
@@ -344,66 +491,194 @@ function inventory.onTick()
 	end
 	
 	if inventory.hidden == false then
-		Graphics.drawImageWP(inventorysmol, 32, 538, -1.86) -- draws the inventory
-		
-			numx = 40
-			numy = 570
+		if SaveData.resolution == "fullscreen" or SaveData.resolution == "widescreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" or SaveData.resolution == "3ds" then
+			Graphics.drawImageWP(inventorysmol, 32, 538, -1.86) -- draws the inventory
+			
+				numx = 40
+				numy = 570
 
-		if SaveData.inventory.shroom >= 10 then
-			Text.printWP(SaveData.inventory.shroom, numx-10, numy, -1.9)
-		else
-			Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
-		end
+			if SaveData.inventory.shroom >= 10 then
+				Text.printWP(SaveData.inventory.shroom, numx-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
+			end
 
-		if SaveData.inventory.fire >= 10 then
-			Text.printWP(SaveData.inventory.fire, numx-10, numy, -1.9)
-		else
-			Text.printWP(SaveData.inventory.fire, numx+32, numy, -1.9)
-		end
+			if SaveData.inventory.fire >= 10 then
+				Text.printWP(SaveData.inventory.fire, numx-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.fire, numx+32, numy, -1.9)
+			end
 
-		if SaveData.inventory.ice >= 10 then
-			Text.printWP(SaveData.inventory.ice, numx+64-10, numy, -1.9)
-		else
-			Text.printWP(SaveData.inventory.ice, numx+64, numy, -1.9)
-		end
+			if SaveData.inventory.ice >= 10 then
+				Text.printWP(SaveData.inventory.ice, numx+64-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.ice, numx+64, numy, -1.9)
+			end
 
-		if SaveData.inventory.leaf >= 10 then
-			Text.printWP(SaveData.inventory.leaf, numx+96-10, numy, -1.9)
-		else
-			Text.printWP(SaveData.inventory.leaf, numx+96, numy, -1.9)
-		end
+			if SaveData.inventory.leaf >= 10 then
+				Text.printWP(SaveData.inventory.leaf, numx+96-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.leaf, numx+96, numy, -1.9)
+			end
 
-		if SaveData.inventory.tanooki >= 10 then
-			Text.printWP(SaveData.inventory.tanooki, numx+128-10, numy, -1.9)
-		else
-			Text.printWP(SaveData.inventory.tanooki, numx+128, numy, -1.9)
-		end
+			if SaveData.inventory.tanooki >= 10 then
+				Text.printWP(SaveData.inventory.tanooki, numx+128-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.tanooki, numx+128, numy, -1.9)
+			end
 
-		if SaveData.inventory.hammer >= 10 then
-			Text.printWP(SaveData.inventory.hammer, numx+160-10, numy, -1.9)
-		else
-			Text.printWP(SaveData.inventory.hammer, numx+160, numy, -1.9)
-		end
+			if SaveData.inventory.hammer >= 10 then
+				Text.printWP(SaveData.inventory.hammer, numx+160-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.hammer, numx+160, numy, -1.9)
+			end
 
 
 
-		if SaveData.inventory.shroom == 0 then
-			Graphics.drawImageWP(noshroomsmol, 32, 538, -1.981)
+			if SaveData.inventory.shroom == 0 then
+				Graphics.drawImageWP(noshroomsmol, 32, 538, -1.981)
+			end
+			if SaveData.inventory.fire == 0 then
+				Graphics.drawImageWP(nofiresmol, 64, 538, -1.981)
+			end
+			if SaveData.inventory.ice == 0 then
+				Graphics.drawImageWP(noicesmol, 96, 538, -1.981)
+			end
+			if SaveData.inventory.leaf == 0 then
+				Graphics.drawImageWP(noleafsmol, 128, 538, -1.981)
+			end
+			if SaveData.inventory.tanooki == 0 then
+				Graphics.drawImageWP(notanookismol, 160, 538, -1.981)
+			end
+			if SaveData.inventory.hammer == 0 then
+				Graphics.drawImageWP(nohammersmol, 192, 538, -1.981)
+			end
 		end
-		if SaveData.inventory.fire == 0 then
-			Graphics.drawImageWP(nofiresmol, 64, 538, -1.981)
+		if SaveData.resolution == "nes" then
+			Graphics.drawImageWP(inventorysmol, 92, 518, -1.86) -- draws the inventory
+			
+				numx = 100
+				numy = 550
+
+			if SaveData.inventory.shroom >= 10 then
+				Text.printWP(SaveData.inventory.shroom, numx-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
+			end
+
+			if SaveData.inventory.fire >= 10 then
+				Text.printWP(SaveData.inventory.fire, numx-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.fire, numx+32, numy, -1.9)
+			end
+
+			if SaveData.inventory.ice >= 10 then
+				Text.printWP(SaveData.inventory.ice, numx+64-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.ice, numx+64, numy, -1.9)
+			end
+
+			if SaveData.inventory.leaf >= 10 then
+				Text.printWP(SaveData.inventory.leaf, numx+96-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.leaf, numx+96, numy, -1.9)
+			end
+
+			if SaveData.inventory.tanooki >= 10 then
+				Text.printWP(SaveData.inventory.tanooki, numx+128-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.tanooki, numx+128, numy, -1.9)
+			end
+
+			if SaveData.inventory.hammer >= 10 then
+				Text.printWP(SaveData.inventory.hammer, numx+160-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.hammer, numx+160, numy, -1.9)
+			end
+
+
+
+			if SaveData.inventory.shroom == 0 then
+				Graphics.drawImageWP(noshroomsmol, 92, 518, -1.981)
+			end
+			if SaveData.inventory.fire == 0 then
+				Graphics.drawImageWP(nofiresmol, 124, 518, -1.981)
+			end
+			if SaveData.inventory.ice == 0 then
+				Graphics.drawImageWP(noicesmol, 156, 518, -1.981)
+			end
+			if SaveData.inventory.leaf == 0 then
+				Graphics.drawImageWP(noleafsmol, 284, 518, -1.981)
+			end
+			if SaveData.inventory.tanooki == 0 then
+				Graphics.drawImageWP(notanookismol, 220, 518, -1.981)
+			end
+			if SaveData.inventory.hammer == 0 then
+				Graphics.drawImageWP(nohammersmol, 252, 518, -1.981)
+			end
 		end
-		if SaveData.inventory.ice == 0 then
-			Graphics.drawImageWP(noicesmol, 96, 538, -1.981)
-		end
-		if SaveData.inventory.leaf == 0 then
-			Graphics.drawImageWP(noleafsmol, 128, 538, -1.981)
-		end
-		if SaveData.inventory.tanooki == 0 then
-			Graphics.drawImageWP(notanookismol, 160, 538, -1.981)
-		end
-		if SaveData.inventory.hammer == 0 then
-			Graphics.drawImageWP(nohammersmol, 192, 538, -1.981)
+		if SaveData.resolution == "iphone1st" then
+			Graphics.drawImageWP(inventorysmol, 202, 538, -1.86) -- draws the inventory
+			
+				numx = 210
+				numy = 570
+
+			if SaveData.inventory.shroom >= 10 then
+				Text.printWP(SaveData.inventory.shroom, numx-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.shroom, numx, numy, -1.9)
+			end
+
+			if SaveData.inventory.fire >= 10 then
+				Text.printWP(SaveData.inventory.fire, numx-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.fire, numx+32, numy, -1.9)
+			end
+
+			if SaveData.inventory.ice >= 10 then
+				Text.printWP(SaveData.inventory.ice, numx+64-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.ice, numx+64, numy, -1.9)
+			end
+
+			if SaveData.inventory.leaf >= 10 then
+				Text.printWP(SaveData.inventory.leaf, numx+96-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.leaf, numx+96, numy, -1.9)
+			end
+
+			if SaveData.inventory.tanooki >= 10 then
+				Text.printWP(SaveData.inventory.tanooki, numx+128-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.tanooki, numx+128, numy, -1.9)
+			end
+
+			if SaveData.inventory.hammer >= 10 then
+				Text.printWP(SaveData.inventory.hammer, numx+160-10, numy, -1.9)
+			else
+				Text.printWP(SaveData.inventory.hammer, numx+160, numy, -1.9)
+			end
+
+
+
+			if SaveData.inventory.shroom == 0 then
+				Graphics.drawImageWP(noshroomsmol, 202, 538, -1.981)
+			end
+			if SaveData.inventory.fire == 0 then
+				Graphics.drawImageWP(nofiresmol, 244, 538, -1.981)
+			end
+			if SaveData.inventory.ice == 0 then
+				Graphics.drawImageWP(noicesmol,276, 538, -1.981)
+			end
+			if SaveData.inventory.leaf == 0 then
+				Graphics.drawImageWP(noleafsmol, 308, 538, -1.981)
+			end
+			if SaveData.inventory.tanooki == 0 then
+				Graphics.drawImageWP(notanookismol, 340, 538, -1.981)
+			end
+			if SaveData.inventory.hammer == 0 then
+				Graphics.drawImageWP(nohammersmol, 372, 538, -1.981)
+			end
 		end
 	end
 end
@@ -602,25 +877,70 @@ function inventory.onInputUpdate()
 			state = state - 1
 		end
 	end
-
-	if inventory.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
-		if selectx < 30 then
-			selectx = 30 + 384
-		end 
-	end
-	if inventory.inventoryopened == true then
-		if selectx > 30 + 414 then
-			selectx = 30
-		end 
-	end
-	if inventory.inventoryopened == true then
-		if state > 7 then
-			state = 1
+	if SaveData.resolution == "fullscreen" or SaveData.resolution == "widescreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" or SaveData.resolution == "3ds" then
+		if inventory.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
+			if selectx < 30 then
+				selectx = 30 + 384
+			end 
+		end
+		if inventory.inventoryopened == true then
+			if selectx > 30 + 414 then
+				selectx = 30
+			end 
+		end
+		if inventory.inventoryopened == true then
+			if state > 7 then
+				state = 1
+			end
+		end
+		if inventory.inventoryopened == true then
+			if state < 1 then
+				state = 7
+			end
 		end
 	end
-	if inventory.inventoryopened == true then
-		if state < 1 then
-			state = 7
+	if SaveData.resolution == "nes" then
+		if inventory.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
+			if selectx < 90 then
+				selectx = 90 + 384
+			end 
+		end
+		if inventory.inventoryopened == true then
+			if selectx > 90 + 414 then
+				selectx = 90
+			end 
+		end
+		if inventory.inventoryopened == true then
+			if state > 7 then
+				state = 1
+			end
+		end
+		if inventory.inventoryopened == true then
+			if state < 1 then
+				state = 7
+			end
+		end
+	end
+	if SaveData.resolution == "iphone1st" then
+		if inventory.inventoryopened == true then -- if the cursor is on the far right or left, it will loop around
+			if selectx < 190 then
+				selectx = 190 + 384
+			end 
+		end
+		if inventory.inventoryopened == true then
+			if selectx > 190 + 414 then
+				selectx = 190
+			end 
+		end
+		if inventory.inventoryopened == true then
+			if state > 7 then
+				state = 1
+			end
+		end
+		if inventory.inventoryopened == true then
+			if state < 1 then
+				state = 7
+			end
 		end
 	end
 	if inventory.inventoryopened == false then

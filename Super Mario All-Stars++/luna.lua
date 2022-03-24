@@ -49,8 +49,13 @@ playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 
 local yoshi = require("yiYoshi/yiYoshi")
 
-local snake = require("snakey")
+playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
 playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
+playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
+playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
+playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
+playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
+playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
 
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"

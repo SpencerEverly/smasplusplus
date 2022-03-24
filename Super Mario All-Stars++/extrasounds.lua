@@ -114,27 +114,28 @@ extrasounds.id90 = Audio.SfxOpen(Misc.resolveSoundFile("zelda-sword-beam.ogg"))
 extrasounds.id91 = Audio.SfxOpen(Misc.resolveSoundFile("bubble.ogg"))
 
 --Additional SMBX Sounds
-extrasounds.id92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
-extrasounds.id93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
-extrasounds.id94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg"))
-extrasounds.id95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg"))
-extrasounds.id96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
-extrasounds.id97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
-extrasounds.id98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
-extrasounds.id99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
-extrasounds.id100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
-extrasounds.id101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
-extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
-extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
-extrasounds.id104 = Audio.SfxOpen(Misc.resolveSoundFile("sound/explode.ogg"))
-extrasounds.id105 = Audio.SfxOpen(Misc.resolveSoundFile("sound/hammerthrow.ogg"))
-extrasounds.id106 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo1.ogg"))
-extrasounds.id107 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo2.ogg"))
-extrasounds.id108 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo3.ogg"))
-extrasounds.id109 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo4.ogg"))
-extrasounds.id110 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo5.ogg"))
-extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg"))
-extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg"))
+extrasounds.id92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg")) --Vine sprout
+extrasounds.id93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg")) --Iceball
+extrasounds.id94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg")) --Freeze enemies
+extrasounds.id95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg")) --Enemy ice breaker
+extrasounds.id96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg")) --2UP
+extrasounds.id97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg")) --3UP
+extrasounds.id98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg")) --5UP
+extrasounds.id99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg")) --Dragon Coin #2
+extrasounds.id100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg")) --Dragon Coin #3
+extrasounds.id101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg")) --Dragon Coin #4
+extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg")) --Dragon Coin #5
+extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg")) --Cherry
+extrasounds.id104 = Audio.SfxOpen(Misc.resolveSoundFile("sound/explode.ogg")) --SMB2 Explosion
+extrasounds.id105 = Audio.SfxOpen(Misc.resolveSoundFile("sound/hammerthrow.ogg")) --Player hammer throw
+extrasounds.id106 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo1.ogg")) --Shell hit 2
+extrasounds.id107 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo2.ogg")) --Shell hit 3
+extrasounds.id108 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo3.ogg")) --Shell hit 4
+extrasounds.id109 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo4.ogg")) --Shell hit 5
+extrasounds.id110 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo5.ogg")) --Shell hit 6
+extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
+extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
+extrasounds.id113 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo8.ogg")) --Shell hit 9, basically a shell hit and a 1UP together
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")

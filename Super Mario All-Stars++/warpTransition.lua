@@ -379,7 +379,7 @@ end
 function warpTransition.onExitLevel()
     -- Music volume doesn't reset when restarting a level, so here's a fix
     if Audio.MusicVolume() == 0 then
-        Audio.MusicVolume(56)
+        Audio.MusicVolume(65)
     end
 end
 

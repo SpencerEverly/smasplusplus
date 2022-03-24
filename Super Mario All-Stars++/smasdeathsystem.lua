@@ -43,8 +43,8 @@ end
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
 	if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
 		if player.deathTimer == 0 then
-			GameData.starActive = true
-			Defines.earthquake = 8
+			GameData.cutsceneMusicControl = true
+			Defines.earthquake = 2
 			Audio.MusicVolume(0)
 			Misc.pause()
 			Routine.waitFrames(1, true)
@@ -72,8 +72,8 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 	end
 	if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
 		if player.deathTimer == 0 then
-			GameData.starActive = true
-			Defines.earthquake = 8
+			GameData.cutsceneMusicControl = true
+			Defines.earthquake = 2
 			Audio.MusicVolume(0)
 			Misc.pause()
 			Routine.waitFrames(1, true)
@@ -174,7 +174,7 @@ end
 
 function smasdeathsystem.onExit()
 	GameData.starActive = false --This is specific for my episode. Remove this if you wanna use this yourself.
-	Audio.MusicVolume(64) --Reset the music exiting the level
+	Audio.MusicVolume(65) --Reset the music exiting the level
 	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == false then
 		Level.exit()
 	elseif SaveData.newlives <= 0 then

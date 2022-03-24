@@ -9,7 +9,7 @@
 ]]
 
 local playerManager = require("playerManager")
-local HUDOverride = require("hudoverride")
+local HUDOverride = require("hudoverridee")
 local blockutils = require("blocks/blockutils")
 
 local configFileReader = require("configFileReader")

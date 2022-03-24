@@ -213,7 +213,7 @@ local function quitonly()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/nosave.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false pausemenu.paused_other = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegame()
@@ -901,12 +901,14 @@ end
 
 local function hubteleport()
 	pausemenu.paused = false
+	pausemenu.paused_other = false
 	Misc.unpause()
 	Level.load("MALC - HUB.lvlx", nil, nil)
 end
 
 local function dlcmapload()
 	pausemenu.paused = false
+	pausemenu.paused_other = false
 	Misc.unpause()
 	Level.load("SMAS - Map.lvlx", nil, nil)
 end
@@ -1827,10 +1829,10 @@ function pausemenu.onTick()
 		Audio.MusicVolume(0)
 	end
 	if musicmuted == false then
-		if GameData.starActive == true then
+		if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
 			Audio.MusicVolume(0)
 		else
-			Audio.MusicVolume(64)
+			Audio.MusicVolume(65)
 		end
 	end
 	if(pausemenu.paused) then

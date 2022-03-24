@@ -259,5 +259,5 @@ end
 Cheats.enabled = false
 
 function onExit()
-	Audio.MusicVolume(nil)
+	Audio.MusicVolume(65)
 end
