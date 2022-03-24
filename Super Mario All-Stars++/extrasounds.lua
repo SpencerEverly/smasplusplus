@@ -326,7 +326,7 @@ function extrasounds.onPostNPCKill(npc, harmtype, player) --NPC Kill stuff, for 
 					end
 				end
 			end
-			for key,npc in ipairs(NPC.get(allenemies[npc.id])) do
+			for key,npc in ipairs(NPC.get(allenemies[npc])) do
 				if NPC.config[npc.id].score == 11 then --Score values
 					SFX.play(extrasounds.id15)
 				end

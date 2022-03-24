@@ -56,7 +56,7 @@ pausemenu.paused_other = false;
 pausemenu.pause_box = nil
 local pause_height = 0;
 local pause_height_char = 350;
-local pause_height_other = 700;
+local pause_height_other = 725;
 local pause_width = 700;
 
 local pause_options;
@@ -128,7 +128,7 @@ end
 local function switchtoothermenu()
 	SFX.play("_OST/_Sound Effects/quitmenu.ogg")
 	pause_index_other = 0
-	Routine.run(function() Routine.wait(0.01, true) pause_index_char = 1 end)
+	Routine.run(function() Routine.wait(0.01, true) pause_index_other = 1 end)
 	cooldown = 1
 	pausemenu.paused_other = true
 	pausemenu.paused = false
@@ -190,11 +190,11 @@ local function mutemusic()
 		SFX.play("_OST/_Sound Effects/paused_off.ogg")
 		musicmuted = false
 	end
-	pausemenu.paused = false
-	pausemenu.paused_char = false
-	pausemenu.paused_tele = false
-	pausemenu.paused_other = false
-	Misc.unpause()
+	--pausemenu.paused = false
+	--pausemenu.paused_char = false
+	--pausemenu.paused_tele = false
+	--pausemenu.paused_other = false
+	--Misc.unpause()
 end
 
 local function quitgame()
@@ -1469,24 +1469,34 @@ local function drawOtherOptionMenu(y, alpha)
 	if SaveData.borderEnabled == false then
 		resolutiontheme = "<color red>Border enabled: No</color>"
 	end
+	
+	if musicmuted == true then
+		musicmutedialogue = "<color red>Music muted: Yes</color>"
+	end
+	if musicmuted == false then
+		musicmutedialogue = "<color red>Music muted: No</color>"
+	end
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
 
 	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	local layout2 = textplus.layout(textplus.parse(letterboxscale, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	local layout3 = textplus.layout(textplus.parse(resolutiontheme, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	local layout4 = textplus.layout(textplus.parse(musicmutedialogue, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	if not isOverworld then
-		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 7}
-		textplus.render{layout = layout2, x = 222 - w*0.5, y = y+20, color = Color.white..alpha, priority = 7}
-		textplus.render{layout = layout3, x = 222 - w*0.5, y = y+36, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout2, x = 250 - w*0.5, y = y+20, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout3, x = 250 - w*0.5, y = y+36, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout4, x = 250 - w*0.5, y = y+52, color = Color.white..alpha, priority = 7}
 	end
 	if isOverworld then
-		textplus.render{layout = layout, x = 222 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
-		textplus.render{layout = layout2, x = 222 - w*0.5, y = y+20, color = Color.white..alpha, priority = 6}
-		textplus.render{layout = layout3, x = 222 - w*0.5, y = y+36, color = Color.white..alpha, priority = 6}
+		textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = 6}
+		textplus.render{layout = layout2, x = 250 - w*0.5, y = y+20, color = Color.white..alpha, priority = 6}
+		textplus.render{layout = layout3, x = 250 - w*0.5, y = y+36, color = Color.white..alpha, priority = 6}
+		textplus.render{layout = layout4, x = 250 - w*0.5, y = y+52, color = Color.white..alpha, priority = 6}
 	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 
-	h = h+4+16--font.charHeight;
+	h = h+4+62--font.charHeight;
 	y = y+h;
 
 	
@@ -1557,8 +1567,8 @@ function pausemenu.onDraw(isSplit)
 	if pausemenu.paused_other then
 		Misc.pause()
 		if(pausemenu.pause_box == nil) then
-			pause_height_other = drawCharacterMenu(-600,0);
-			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height_other+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_height_other = drawOtherOptionMenu(-600,0);
+			pausemenu.pause_box = imagic.Create{x=400,y=300,width=460,height=pause_height_other+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		if not isOverworld then
 			pausemenu.pause_box:Draw(6, 0x00000077);
@@ -1566,7 +1576,7 @@ function pausemenu.onDraw(isSplit)
 		if isOverworld then
 			pausemenu.pause_box:Draw(5, 0x00000077);
 		end
-		drawOtherOptionMenu(300-pause_height*0.5,1)
+		drawOtherOptionMenu(231-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
 		--Misc.pause();
