@@ -1,28 +1,32 @@
+--comboSounds by MrDoubleA (ATWE)
+--Modded by Spencer Everly for SMAS++
+
 local npcManager = require("npcManager")
+local extrasounds = require("extrasounds")
 
 local comboSounds = {}
-
 
 local SCORE_ADDR = 0x00B2C8E4
 local LIVES_ADDR = 0x00B2C5AC
 
-comboSounds.kick1 = Misc.resolveSoundFile("comboSounds-1")
-comboSounds.kick2 = Misc.resolveSoundFile("comboSounds-2")
-comboSounds.kick3 = Misc.resolveSoundFile("comboSounds-3")
-comboSounds.kick4 = Misc.resolveSoundFile("comboSounds-4")
-comboSounds.kick5 = Misc.resolveSoundFile("comboSounds-5")
-comboSounds.kick6 = Misc.resolveSoundFile("comboSounds-6")
-comboSounds.kick7 = Misc.resolveSoundFile("comboSounds-7")
+comboSounds.kick1 = extrasounds.id106
+comboSounds.kick2 = extrasounds.id107
+comboSounds.kick3 = extrasounds.id108
+comboSounds.kick4 = extrasounds.id109
+comboSounds.kick5 = extrasounds.id110
+comboSounds.kick6 = extrasounds.id111
+comboSounds.kick7 = extrasounds.id112
 
 comboSounds.sounds = {
     9,
-    SFX.open(comboSounds.kick1),
-    SFX.open(comboSounds.kick2),
-    SFX.open(comboSounds.kick3),
-    SFX.open(comboSounds.kick4),
-    SFX.open(comboSounds.kick5),
-    SFX.open(comboSounds.kick6),
-    SFX.open(comboSounds.kick7),
+	extrasounds.id106, --Combo sounds 1-7, found under extrasounds
+    extrasounds.id107,
+    extrasounds.id108,
+    extrasounds.id109,
+    extrasounds.id110,
+    extrasounds.id111,
+    extrasounds.id112,
+	extrasounds.id112, --And then the same shell for rest of the hits
 }
 
 
@@ -39,6 +43,7 @@ local comboScores = {
     [2000] = 6,
     [4000] = 7,
     [8000] = 8,
+	[0] = 9, --1UP sound
 }
 
 
@@ -84,6 +89,7 @@ function comboSounds.onPostNPCHarm(v,reason,culprit)
     -- Used for calculating the combo later
     data.oldScore = getScore()
     data.oldLives = mem(LIVES_ADDR,FIELD_FLOAT)
+	data.newLives = SaveData.newlives
 end
 
 function comboSounds.onNPCKill(eventObj,v,reason)

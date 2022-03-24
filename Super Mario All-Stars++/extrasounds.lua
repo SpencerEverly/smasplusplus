@@ -128,6 +128,13 @@ extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.
 extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
 extrasounds.id104 = Audio.SfxOpen(Misc.resolveSoundFile("sound/explode.ogg"))
 extrasounds.id105 = Audio.SfxOpen(Misc.resolveSoundFile("sound/hammerthrow.ogg"))
+extrasounds.id106 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo1.ogg"))
+extrasounds.id107 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo2.ogg"))
+extrasounds.id108 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo3.ogg"))
+extrasounds.id109 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo4.ogg"))
+extrasounds.id110 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo5.ogg"))
+extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg"))
+extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg"))
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
@@ -299,7 +306,7 @@ function extrasounds.onPostNPCKill(npc, harmtype, player) --NPC Kill stuff, for 
 	local allenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,42,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,180,189,199,200,201,203,204,205,206,207,209,210,229,230,231,232,233,234,235,236,242,243,244,245,247,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,321,323,324,333,345,346,347,350,351,352,357,360,365,368,369,371,372,373,374,375,377,379,380,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,431,437,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,418,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,618,619,624,666}
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
-			for _,p in ipairs(Player.get()) do
+			for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
 				if coins[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
 					SFX.play(extrasounds.id14)
 				end
@@ -326,7 +333,22 @@ function extrasounds.onPostNPCKill(npc, harmtype, player) --NPC Kill stuff, for 
 					end
 				end
 			end
-			for key,npc in ipairs(NPC.get(allenemies[npc])) do
+			if NPC.config[npc.id].score == 11 then --Score values
+				SFX.play(extrasounds.id15)
+			end
+			if NPC.config[npc.id].score == 12 then
+				SFX.play(extrasounds.id96)
+			end
+			if NPC.config[npc.id].score == 13 then
+				SFX.play(extrasounds.id97)
+			end
+			if NPC.config[npc.id].score == 14 then
+				SFX.play(extrasounds.id98)
+			end
+			if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
+				SFX.play(extrasounds.id14)
+			end
+			for _,npc in ipairs(NPC.get(allenemies)) do
 				if NPC.config[npc.id].score == 11 then --Score values
 					SFX.play(extrasounds.id15)
 				end
@@ -339,9 +361,6 @@ function extrasounds.onPostNPCKill(npc, harmtype, player) --NPC Kill stuff, for 
 				if NPC.config[npc.id].score == 14 then
 					SFX.play(extrasounds.id98)
 				end
-			end
-			if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
-				SFX.play(extrasounds.id14)
 			end
 		end
 	end
