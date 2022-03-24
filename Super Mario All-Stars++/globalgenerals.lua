@@ -274,7 +274,7 @@ function globalgenerals.onInputUpdate()
 	if SaveData.disableX2char == true then
 		if Player.count() == 2 then
 			if player.keys.altRun == KEYS_PRESSED then
-				if pausemenu13.paused == false then
+				if pausemenu.paused == false then
 					player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
 					cooldown = 5
@@ -289,7 +289,7 @@ function globalgenerals.onInputUpdate()
 	if SaveData.disableX2char == true then
 		if Player(2) and Player(2).isValid then
 			if Player(2).keys.altRun == KEYS_PRESSED then
-				if pausemenu13.paused == false then
+				if pausemenu.paused == false then
 					Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
 					cooldown = 5
