@@ -1557,7 +1557,7 @@ function pausemenu.onDraw(isSplit)
 	if pausemenu.paused_other then
 		Misc.pause()
 		if(pausemenu.pause_box == nil) then
-			pause_height_other = drawCharacterMenu(-600,500);
+			pause_height_other = drawCharacterMenu(-600,0);
 			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height_other+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		if not isOverworld then
