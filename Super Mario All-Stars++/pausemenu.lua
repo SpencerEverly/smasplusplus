@@ -163,6 +163,7 @@ end
 local function x2modedisable()
 	pausemenu.paused = false
 	Misc.unpause()
+	player:transform(1, false)
 	if SaveData.disableX2char == false then
 		SaveData.disableX2char = true
 		Level.load(Level.filename())
