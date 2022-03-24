@@ -138,7 +138,9 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onInputUpdate")
 	registerEvent(extrasounds, "onStart")
 	registerEvent(extrasounds, "onPostNPCKill")
+	registerEvent(extrasounds, "onNPCKill")
 	registerEvent(extrasounds, "onPostNPCHarm")
+	registerEvent(extrasounds, "onNPCHarm")
 	registerEvent(extrasounds, "onPostPlayerHarm")
 	registerEvent(extrasounds, "onPostPlayerKill")
 	registerEvent(extrasounds, "onPostExplosion")
@@ -200,6 +202,10 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 	end
 end
 
+function extrasounds.onTickEnd()
+	
+end
+
 function extrasounds.onDraw()
 	--Text.print(NPC:mem(0x24, FIELD_WORD), 100, 100)
 end
@@ -259,7 +265,18 @@ end
 function extrasounds.onInputUpdate() --Button pressing for such commands
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
-			if player.rawKeys.run == KEYS_PRESSED or player.rawKeys.altRun == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than 0 before playing
+			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than 0 before playing
+				if player.powerup == 3 then --Fireball sound
+					SFX.play(extrasounds.id18)
+				end
+				if player.powerup == 6 then --Fireball sound
+					SFX.play(extrasounds.id105)
+				end
+				if player.powerup == 7 then --Iceball sound
+					SFX.play(extrasounds.id93)
+				end
+			end
+			if player.rawKeys.altRun == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than 0 before playing
 				if player.powerup == 3 then --Fireball sound
 					SFX.play(extrasounds.id18)
 				end
@@ -274,41 +291,61 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 	end
 end
 
-function extrasounds.onPostNPCKill(npc, harmtype, playerornil) --NPC Kill stuff, for custom coin sounds and etc.
+function extrasounds.onPostNPCKill(npc, harmtype, player) --NPC Kill stuff, for custom coin sounds and etc.
 	local starmans = table.map{994,996}
 	local coins = table.map{10,33,88,103,138,258,528}
 	local oneups = table.map{90,186,187}
 	local threeups = table.map{188}
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
-			if coins[npc.id] and HARM_TYPE_VANISH then --Any coin ID that was marked above will play this sound when collected
+			for _,p in ipairs(Player.get()) do
+				if coins[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
+					SFX.play(extrasounds.id14)
+				end
+				if npc.id == 558 and Colliders.collide(p, npc) then --Cherry sound effect
+					SFX.play(extrasounds.id103)
+				end
+				if oneups[npc.id] and Colliders.collide(p, npc) then --1UP sound effect, so 3UPs can have a custom sound
+					SFX.play(extrasounds.id15)
+				end
+				if npc.id == 188 and Colliders.collide(p, npc) then --3UP sound effect
+					SFX.play(extrasounds.id97)
+				end
+				if npc.id == 274 and Colliders.collide(p, npc) then --Dragon coin counter sounds
+					if NPC.config[npc.id].score == 7 then
+						SFX.play(extrasounds.id59)
+					elseif NPC.config[npc.id].score == 8 then
+						SFX.play(extrasounds.id99)
+					elseif NPC.config[npc.id].score == 9 then
+						SFX.play(extrasounds.id100)
+					elseif NPC.config[npc.id].score == 10 then
+						SFX.play(extrasounds.id101)
+					elseif NPC.config[npc.id].score == 11 then
+						SFX.play(extrasounds.id102)
+					end
+				end
+				if NPC.config[npc.id].score == 11 then --Score values
+					SFX.play(extrasounds.id15)
+				end
+				if NPC.config[npc.id].score == 12 then
+					SFX.play(extrasounds.id96)
+				end
+				if NPC.config[npc.id].score == 13 then
+					SFX.play(extrasounds.id97)
+				end
+				if NPC.config[npc.id].score == 14 then
+					SFX.play(extrasounds.id98)
+				end
+			end
+			if mem(0x00A3C87F, FIELD_BYTE) then --This plays a coin sound when NpcToCoin happens
 				SFX.play(extrasounds.id14)
 			end
-			if npc.id == 558 and HARM_TYPE_VANISH then --Cherry sound effect
-				SFX.play(extrasounds.id103)
-			end
-			if oneups[npc.id] and HARM_TYPE_VANISH then --1UP sound effect, so 3UPs can have a custom sound
+			if Defines.smb3RouletteScoreValueMushroom == 6 then --These are for the SMB3 Routlette
+				SFX.play(extrasounds.id0)
+			elseif Defines.smb3RouletteScoreValueFlower == 8 then
+				SFX.play(extrasounds.id0)
+			elseif Defines.smb3RouletteScoreValueStar == 10 then
 				SFX.play(extrasounds.id15)
-			end
-			if npc.id == 188 and HARM_TYPE_VANISH then --3UP sound effect
-				SFX.play(extrasounds.id97)
-			end
-			if npc.id == 274  and HARM_TYPE_VANISH then --Dragon coin counter sounds
-				if NPC.config[npc.id].score == 6 then
-					SFX.play(extrasounds.id59)
-				elseif NPC.config[npc.id].score == 7 then
-					SFX.play(extrasounds.id59)
-				elseif NPC.config[npc.id].score == 8 then
-					SFX.play(extrasounds.id99)
-				elseif NPC.config[npc.id].score == 9 then
-					SFX.play(extrasounds.id100)
-				elseif NPC.config[npc.id].score == 10 then
-					SFX.play(extrasounds.id101)
-				elseif NPC.config[npc.id].score >= 11 then
-					--Play 1UP sound as well when it says "1UP"
-					SFX.play(extrasounds.id15)
-					SFX.play(extrasounds.id102)
-				end
 			end
 		end
 	end

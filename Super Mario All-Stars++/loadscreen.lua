@@ -37,8 +37,6 @@ function onDraw()
     if image == nil then -- this sometimes happens?
         return
     end
-	
-	Misc.setLoadScreenTimeout(2)
 
     local message = mem(FIRST_PLAYER_CHARACTER_ADDR,FIELD_WORD)
     local widths = letterWidths[message]
@@ -85,7 +83,7 @@ function onDraw()
     end
 	
 	local opacityend = math.min(1,time/42)
-	if Misc.setLoadScreenTimeout(1.6) then
+	if Misc.setLoadScreenTimeout(1) then
 		Graphics.drawImage(blackscreen, 0, 0, 1, 0, 800, 600, opacityend)
 	end
 

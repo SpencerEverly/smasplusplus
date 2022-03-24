@@ -7,7 +7,6 @@ local warpTransition = require("warpTransition")
 local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
-local smasdeathsystem = require("smasdeathsystem")
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
@@ -338,7 +337,7 @@ function globalgenerals.onTick()
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
 		if SaveData.letterbox == false then
-			smallScreen.scaleX = 1.33
+			smallScreen.scaleX = 1
 			smallScreen.scaleY = 1.33
 			smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
@@ -361,6 +360,17 @@ function globalgenerals.onTick()
 		smallScreen.scaleY = 1
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1.80
+			smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 	end
 	if SaveData.resolution == "nes" then
 		customCamera.defaultScreenWidth = 512
@@ -1145,15 +1155,18 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 end
 
 function globalgenerals.onDraw()
-	Text.printWP(player.deathTimer, 100, 100, 10)
 	if SaveData.resolution == "widescreen" then
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(wideborder, 0, 0, 5)
+			if SaveData.letterbox == true then
+				Graphics.drawImageWP(wideborder, 0, 0, 5)
+			end
 		end
 	end
 	if SaveData.resolution == "ultrawide" then
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
+			if SaveData.letterbox == true then
+				Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
+			end
 		end
 	end
 	if SaveData.resolution == "nes" then
