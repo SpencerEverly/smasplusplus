@@ -162,6 +162,9 @@ end
 
 local function x2modedisable()
 	pausemenu.paused = false
+	pausemenu.paused_other = false
+	pausemenu.paused_tele = false
+	pausemenu.paused_char = false
 	Misc.unpause()
 	player:transform(1, false)
 	if SaveData.disableX2char == false then
