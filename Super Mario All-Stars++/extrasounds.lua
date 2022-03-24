@@ -348,17 +348,17 @@ function extrasounds.onPostNPCKill(npc, harmtype, player) --NPC Kill stuff, for 
 			if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
 				SFX.play(extrasounds.id14)
 			end
-			for _,npc in ipairs(NPC.get(allenemies)) do
-				if NPC.config[npc.id].score == 11 then --Score values
+			for _,npc in ipairs(NPC.get()) do
+				if npc.config[npc.id].score == 11 then --Score values
 					SFX.play(extrasounds.id15)
 				end
-				if NPC.config[npc.id].score == 12 then
+				if npc.config[npc.id].score == 12 then
 					SFX.play(extrasounds.id96)
 				end
-				if NPC.config[npc.id].score == 13 then
+				if npc.config[npc.id].score == 13 then
 					SFX.play(extrasounds.id97)
 				end
-				if NPC.config[npc.id].score == 14 then
+				if npc.config[npc.id].score == 14 then
 					SFX.play(extrasounds.id98)
 				end
 			end

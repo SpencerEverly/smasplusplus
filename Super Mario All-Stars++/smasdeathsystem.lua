@@ -41,28 +41,51 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 end
 
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
-	if player.deathTimer == 0 then
-		GameData.starActive = true
-		Defines.earthquake = 10
-		Audio.MusicVolume(0)
-		SFX.play("_OST/_Sound Effects/playerpostdead.ogg")
-		Misc.pause()
-		Routine.waitFrames(55, true)
-		Misc.unpause()
-		SaveData.newlives = SaveData.newlives - 1 --This subtracts when beginning to die. Hooray real time death tallies!
-		SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-		Misc.saveGame() --Save the game to save what we've added/edited
-		Routine.waitFrames(165, true)
-		Misc.pause()
-		fadeoutdeath = true --This starts the fade out animation
-		Routine.waitFrames(120, true)
-		fadeoutcompleted = true --When waited enough time, unpause and detect the life count
-		Misc.unpause()
-		if fadeoutcompleted and SaveData.newlives <= 0 then --If 0, then do a game over, or whatever you want to put here
-			Level.load("SMAS - Game Over.lvlx", nil, nil)
-		elseif fadeoutcompleted then --Or else, just exit the level
-			smasdeathsystem.hasDied = true
-			Level.exit()
+	if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
+		if player.deathTimer == 0 then
+			GameData.starActive = true
+			Defines.earthquake = 8
+			Audio.MusicVolume(0)
+			Misc.pause()
+			Routine.waitFrames(1, true)
+			Misc.unpause()
+			SaveData.newlives = SaveData.newlives - 1 --This subtracts when beginning to die. Hooray real time death tallies!
+			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+			Misc.saveGame() --Save the game to save what we've added/edited
+			Routine.waitFrames(165, true)
+			Misc.pause()
+			fadeoutdeath = true --This starts the fade out animation
+			Routine.waitFrames(120, true)
+			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
+			Misc.unpause()
+			if fadeoutcompleted and SaveData.newlives <= 0 then --If 0, then do a game over, or whatever you want to put here
+				Level.load("SMAS - Game Over.lvlx", nil, nil)
+			elseif fadeoutcompleted then --Or else, just exit the level
+				smasdeathsystem.hasDied = true
+				Level.exit()
+			end
+		end
+	end
+	if (player.character == CHARACTER_YOSHI) == true then --Do a different death animation with yiYoshi if active
+		if player.deathTimer == 0 then
+			GameData.starActive = true
+			Defines.earthquake = 8
+			Audio.MusicVolume(0)
+			Misc.pause()
+			Routine.waitFrames(1, true)
+			Misc.unpause()
+			SaveData.newlives = SaveData.newlives - 1 --This subtracts when beginning to die. Hooray real time death tallies!
+			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+			Misc.saveGame() --Save the game to save what we've added/edited
+			Routine.waitFrames(300, true)
+			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
+			Misc.unpause()
+			if fadeoutcompleted and SaveData.newlives <= 0 then --If 0, then do a game over, or whatever you want to put here
+				Level.load("SMAS - Game Over.lvlx", nil, nil)
+			elseif fadeoutcompleted then --Or else, just exit the level
+				smasdeathsystem.hasDied = true
+				Level.exit()
+			end
 		end
 	end
 end

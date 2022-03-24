@@ -42,6 +42,16 @@ end
 local classicevents = require("classiceventsmod")
 local globalgenerals = require("globalgenerals")
 local customCamera = require("customCamera")
+local playerManager = require("playermanager")
+
+local steve = require("steve")
+playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+
+local yiYoshi = require("yiYoshi/yiYoshi")
+playerManager.overrideCharacterLib(CHARACTER_NINJABOMBERMAN,require("yiYoshi/yiYoshi"))
+
+local snake = require("snakey")
+playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
 
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"

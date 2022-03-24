@@ -7,6 +7,7 @@ local warpTransition = require("warpTransition")
 local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
+local steve = require("steve")
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
@@ -17,8 +18,6 @@ local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/i
 local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
 
 customCamera.transitionSpeed = 5
-
-hudoverride.visible.starcoins = false --There's no star coins in the entire game, but I'm only adding this because why not
 
 SaveData._anothercurrency = {SaveData.totalcoins}
 
@@ -37,12 +36,6 @@ if SaveData.disableX2char == true then
 	warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 	warpTransition.activateOnInstantWarps = false
 end
-
-local steve = require("steve")
-playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
-
-local snake = require("snakey")
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
 
 local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
