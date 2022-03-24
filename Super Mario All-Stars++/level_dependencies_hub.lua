@@ -115,7 +115,7 @@ function dependencies2.onStart()
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
-		pausemenu13 = require("pausemenu13")
+		pausemenu = require("pausemenu")
 		littleDialogue.defaultStyleName = "smbx13og"
 		Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-jump.ogg")
 		Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/stomped.ogg")

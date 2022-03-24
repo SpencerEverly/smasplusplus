@@ -119,7 +119,7 @@ function onStart()
 		pausemenu = require("pausemenu")
 	end
 	if SaveData.disableX2char == true then
-		pausemenu13 = require("pausemenu13map")
+		pausemenu = require("pausemenu")
 	end
 end
 
