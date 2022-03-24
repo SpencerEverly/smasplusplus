@@ -62,7 +62,11 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 				Level.load("SMAS - Game Over.lvlx", nil, nil)
 			elseif fadeoutcompleted then --Or else, just exit the level
 				smasdeathsystem.hasDied = true
-				Level.exit()
+				if smasdeathsystem.extramapexit == false then
+					Level.exit()
+				elseif smasdeathsystem.extramapexit == true then
+					Level.load("SMAS - Map.lvlx", nil, nil)
+				end
 			end
 		end
 	end
@@ -77,14 +81,18 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			SaveData.newlives = SaveData.newlives - 1 --This subtracts when beginning to die. Hooray real time death tallies!
 			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 			Misc.saveGame() --Save the game to save what we've added/edited
-			Routine.waitFrames(300, true)
+			Routine.waitFrames(310, true)
 			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
 			Misc.unpause()
 			if fadeoutcompleted and SaveData.newlives <= 0 then --If 0, then do a game over, or whatever you want to put here
 				Level.load("SMAS - Game Over.lvlx", nil, nil)
 			elseif fadeoutcompleted then --Or else, just exit the level
 				smasdeathsystem.hasDied = true
-				Level.exit()
+				if smasdeathsystem.extramapexit == false then
+					Level.exit()
+				elseif smasdeathsystem.extramapexit == true then
+					Level.load("SMAS - Map.lvlx", nil, nil)
+				end
 			end
 		end
 	end
