@@ -1387,7 +1387,7 @@ local function drawOtherOptionMenu(y, alpha)
 		end
 		if not isOverworld then
 			if (Level.name() == "MALC - HUB") == false then
-				table.insert(pause_options_other, {name4="Teleport to the HUB", action = hubteleport});
+				table.insert(pause_options_other, {name4="Teleport to the Hub", action = hubteleport});
 			end
 		end
 		if not isOverworld then
