@@ -66,7 +66,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			end
 		end
 	end
-	if (player.character == CHARACTER_YOSHI) == true then --Do a different death animation with yiYoshi if active
+	if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
 		if player.deathTimer == 0 then
 			GameData.starActive = true
 			Defines.earthquake = 8
@@ -167,14 +167,18 @@ end
 function smasdeathsystem.onExit()
 	GameData.starActive = false --This is specific for my episode. Remove this if you wanna use this yourself.
 	Audio.MusicVolume(64) --Reset the music exiting the level
-	if smasdeathsystem.hasDied == true then
+	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == false then
 		Level.exit()
 	elseif SaveData.newlives <= 0 then
 		Level.load("SMAS - Game Over.lvlx", nil, nil)
+	end
+	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == true then
+		Level.load("SMAS - Map.lvlx", nil, nil)
 	end
 end
 
 --SaveData.smasdeathsystem.gameOverCount = 0 --This is only when the library publically releases for the wild to use
 smasdeathsystem.hasDied = false --If the player died or not
+smasdeathsystem.extramapexit = false --This'll only be true on extra DLC levels/extra games in future updates
 
 return smasdeathsystem

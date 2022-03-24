@@ -69,11 +69,6 @@ function dependencies.onStart()
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
-	if player.character == CHARACTER_NINJABOMBERMAN then
-		Defines.player_walkspeed = 6
-		Defines.player_runspeed = 6
-	end
-	
 	local costumes
 	if SaveData.disableX2char == false then
 		mm = require("Characters/megaman");

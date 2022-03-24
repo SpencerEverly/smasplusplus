@@ -4,10 +4,17 @@ local playerManager = require("playermanager")
 local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 local warpTransition = require("warpTransition")
-local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
 local steve = require("steve")
+local yoshi = require("yiYoshi/yiYoshi")
+local HUDOverride = require("hudoverridee")
+
+HUDOverride.priority = -5
+
+function HUDOverride.drawHUDCoins(thisPlayer, priority)
+	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.coins, priority);
+end
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
@@ -297,6 +304,12 @@ function globalgenerals.onInputUpdate()
 end
 	
 function globalgenerals.onTick()
+	if player.character == CHARACTER_SNAKE then
+		Graphics.activateHud(true)
+	end
+	if player.character == CHARACTER_NINJABOMBERMAN then
+		Graphics.activateHud(true)
+	end
 	if SaveData.disableX2char == false then
 		if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
 			globalgenerals.showitembox = true
@@ -304,10 +317,10 @@ function globalgenerals.onTick()
 			--Nothing
 		end
 		if globalgenerals.showitembox == false then
-			hudoverride.visible.itembox = false
+			HUDOverride.visible.itembox = false
 		end
 		if globalgenerals.showitembox == true then
-			hudoverride.visible.itembox = true
+			HUDOverride.visible.itembox = true
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
@@ -931,7 +944,7 @@ function globalgenerals.onTick()
 	end
 	
 	
-	if character == "CHARACTER_STEVE" then
+	if (character == CHARACTER_STEVE) == true then
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769

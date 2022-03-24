@@ -9,9 +9,10 @@
 
 ]]
 
-local playerManager = require("playerManager")
+local playerManager = require("playermanager")
 local npcManager = require("npcManager")
 local extrasounds = require("extrasounds")
+local smasdeathsystem = require("smasdeathsystem")
 
 local textplus = require("textplus")
 
@@ -33,9 +34,7 @@ local isOnSMWMap = (smwMap ~= nil and Level.filename() == smwMap.levelFilename)
 
 local yoshi = {}
 
-
 _G.CHARACTER_YOSHI = CHARACTER_NINJABOMBERMAN
-
 playerManager.overrideCharacterLib(CHARACTER_YOSHI,yoshi)
 
 local p = player
@@ -4610,7 +4609,7 @@ function yoshi.onBlockHit(eventObj,block,fromTop,culpritPlayer)
 end
 
 function yoshi.onExitLevel(exitType)
-    if exitType > 0 then
+    if exitType > 0 and smasdeathsystem.hasDied == false then
         saveEggs()
     end
 end
