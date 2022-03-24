@@ -71,7 +71,7 @@ function smasdeathsystem.onPostNPCKill(npc, harmtype, playerornil, obj, playerOb
 	local oneups = table.map{90,186,187} --A table map containing all the NPC ids, same as below
 	local threeups = table.map{188}
 	local coins = table.map{10,33,88,103,138,258,528} --This'll add a coin system
-	for k,v in pairs(NPC.get()) do
+	for key,npc in ipairs(NPC.get()) do
 		if NPC.config[npc.id].score == 11 then --Score values
 			SaveData.newlives = SaveData.newlives + 1
 		end

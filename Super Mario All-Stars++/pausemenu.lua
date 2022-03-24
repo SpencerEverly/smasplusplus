@@ -50,14 +50,13 @@ end
 
 pausemenu.paused = false;
 pausemenu.paused_char = false;
-pausemenu.paused_char_temp = false;
 pausemenu.paused_tele = false;
 pausemenu.paused_other = false;
 
 pausemenu.pause_box = nil
 local pause_height = 0;
 local pause_height_char = 350;
-local pause_height_other = 450;
+local pause_height_other = 700;
 local pause_width = 700;
 
 local pause_options;
@@ -870,7 +869,6 @@ local function costumechangeright()
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	--Routine.run(function() pausemenu.paused_char = false pausemenu.paused_char_temp = true Routine.waitFrames(2) pausemenu.paused_char = true pausemenu.paused_char_temp = false end)
 end
 
 local function costumechangeleft()
@@ -885,7 +883,6 @@ local function costumechangeleft()
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	--Routine.run(function() pausemenu.paused_char = false pausemenu.paused_char_temp = true Routine.waitFrames(2) pausemenu.paused_char = true pausemenu.paused_char_temp = false end)
 end
 
 local function mainmenu()
@@ -1557,28 +1554,11 @@ function pausemenu.onDraw(isSplit)
 	if not pausemenu.paused_tele then
 		pausemenu.pause_box = nil
 	end
-	if pausemenu.paused_char_temp then
-		--Misc.pause()
-		if(pausemenu.pause_box == nil) then
-			pause_height = drawCharacterMenu(-600,0);
-			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
-		end
-		if not isOverworld then
-			pausemenu.pause_box:Draw(6, 0x00000077);
-		end
-		if isOverworld then
-			pausemenu.pause_box:Draw(5, 0x00000077);
-		end
-		drawCharacterMenu(300-pause_height*0.5,1)
-		
-		--Fix for anything calling Misc.unpause
-		--Misc.pause();
-	end
 	if pausemenu.paused_other then
 		Misc.pause()
 		if(pausemenu.pause_box == nil) then
-			pause_height = drawCharacterMenu(-600,500);
-			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			pause_height_other = drawCharacterMenu(-600,500);
+			pausemenu.pause_box = imagic.Create{x=400,y=300,width=500,height=pause_height_other+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
 		end
 		if not isOverworld then
 			pausemenu.pause_box:Draw(6, 0x00000077);
