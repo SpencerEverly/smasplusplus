@@ -7,7 +7,7 @@ function onEvent(eventName)
 			inventory.activated = false
 		end
 		if SaveData.disableX2char == true then
-			pausemenu13.pauseactivated = false
+			pausemenu.pauseactivated = false
 		end
 	end
 	if eventName == ("Pigeon Cutscene 3") then
@@ -19,7 +19,7 @@ function onEvent(eventName)
 			inventory.activated = true
 		end
 		if SaveData.disableX2char == true then
-			pausemenu13.pauseactivated = true
+			pausemenu.pauseactivated = true
 		end
 		player:teleport(-99936, -100144)
 		Timer.activate(150)
@@ -31,7 +31,7 @@ function onEvent(eventName)
 			inventory.activated = false
 		end
 		if SaveData.disableX2char == true then
-			pausemenu13.pauseactivated = false
+			pausemenu.pauseactivated = false
 		end
 		Timer.deactivate()
 	end
@@ -44,7 +44,7 @@ function onEvent(eventName)
 			inventory.activated = true
 		end
 		if SaveData.disableX2char == true then
-			pausemenu13.pauseactivated = true
+			pausemenu.pauseactivated = true
 		end
 	end
 end

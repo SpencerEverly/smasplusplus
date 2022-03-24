@@ -15,7 +15,7 @@ function onEvent(eventName)
 			inventory.activated = false
 		end
 		if SaveData.disableX2char == true then
-			pausemenu13.pauseactivated = false
+			pausemenu.pauseactivated = false
 		end
 	end
 	if eventName == "Cutscene 2 - 5" then
@@ -33,7 +33,7 @@ function onEvent(eventName)
 			inventory.activated = true
 		end
 		if SaveData.disableX2char == true then
-			pausemenu13.pauseactivated = true
+			pausemenu.pauseactivated = true
 		end
 	end
 end
