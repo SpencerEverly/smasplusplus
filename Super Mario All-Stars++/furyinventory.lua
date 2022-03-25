@@ -474,9 +474,6 @@ function inventory.onTick()
 	if warpTransition.transitionTimer == 0 then
 		inventory.activated = true
 	end
-	if warpTransition.levelStartTransition == warpTransition.TRANSITION_IRIS_OUT then
-		inventory.activated = false
-	end
 	if warpTransition.crossSectionTransition == warpTransition.TRANSITION_FADE then
 		inventory.activated = false
 	end

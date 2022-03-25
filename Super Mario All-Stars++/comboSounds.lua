@@ -27,7 +27,7 @@ comboSounds.sounds = {
     extrasounds.id110,
     extrasounds.id111,
     extrasounds.id112,
-	extrasounds.id113, --And then the same shell for rest of the hits
+	extrasounds.id112, --And then the same shell for rest of the hits
 }
 
 

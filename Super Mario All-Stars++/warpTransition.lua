@@ -471,10 +471,10 @@ end
 -- The type of transition used when using a warp that leads to somewhere else in the same section. Can be 'warpTransition.TRANSITION_NONE', 'warpTransition.TRANSITION_FADE', 'warpTransition.TRANSITION_PAN', 'warpTransition.TRANSITION_IRIS_OUT', 'warpTransition.TRANSITION_MOSAIC', 'warpTransition.TRANSITION_CROSSFADE', 'warpTransition.TRANSITION_MELT', or 'warpTransition.TRANSITION_SWIRL'.
 warpTransition.sameSectionTransition = warpTransition.TRANSITION_PAN
 -- The type of transition used when using a warp that leads to a different section. Can be 'warpTransition.TRANSITION_NONE', 'warpTransition.TRANSITION_FADE', 'warpTransition.TRANSITION_IRIS_OUT', 'warpTransition.TRANSITION_MOSAIC', 'warpTransition.TRANSITION_CROSSFADE', 'warpTransition.TRANSITION_MELT', or 'warpTransition.TRANSITION_SWIRL'.
-warpTransition.crossSectionTransition = warpTransition.TRANSITION_IRIS_OUT
+warpTransition.crossSectionTransition = warpTransition.TRANSITION_FADE
 
 -- The type of transition used when entering the level. Can be 'warpTransition.TRANSITION_NONE', 'warpTransition.TRANSITION_FADE', 'warpTransition.TRANSITION_IRIS_OUT', 'warpTransition.TRANSITION_MOSAIC', or 'warpTransition.TRANSITION_SWIRL'.
-warpTransition.levelStartTransition = warpTransition.TRANSITION_IRIS_OUT
+warpTransition.levelStartTransition = warpTransition.TRANSITION_FADE
 
 
 warpTransition.transitionSpeeds = {

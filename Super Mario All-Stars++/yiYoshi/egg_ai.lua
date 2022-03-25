@@ -279,7 +279,7 @@ local function doBigEggPOW(v)
                 combo = math.min(10,combo + 1)
 
                 if combo >= 10 then
-                    SFX.play(15)
+                    SFX.play(extrasounds.id15)
                 end
             end
         end

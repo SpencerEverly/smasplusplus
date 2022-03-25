@@ -5,7 +5,7 @@ local littleDialogue = require("littleDialogue")
 local warpTransition = require("warpTransition")
 
 warpTransition.musicFadeOut = false
-warpTransition.levelStartTransition = warpTransition.TRANSITION_IRIS_OUT
+warpTransition.levelStartTransition = warpTransition.TRANSITION_FADE
 warpTransition.sameSectionTransition = warpTransition.TRANSITION_PAN
 warpTransition.crossSectionTransition = warpTransition.TRANSITION_FADE
 warpTransition.activateOnInstantWarps = false

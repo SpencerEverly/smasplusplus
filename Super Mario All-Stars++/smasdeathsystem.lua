@@ -1,4 +1,4 @@
---smasdeathsystem, or anotherDeathSystem by Spencer Everly
+--smasdeathsystem, or anotherDeathCoinSystem by Spencer Everly
 --Check all the comments, plus the end of the file for more info
 
 local Routine = require("routine")
@@ -45,7 +45,6 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 	if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
 		if player.deathTimer == 0 then
 			GameData.cutsceneMusicControl = true
-			Defines.earthquake = 2
 			Audio.MusicVolume(0)
 			Misc.pause()
 			Routine.waitFrames(1, true)
@@ -59,6 +58,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			Routine.waitFrames(120, true)
 			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
 			Misc.unpause()
+			GameData.cutsceneMusicControl = false
 			if fadeoutcompleted and SaveData.newlives <= 0 then --If 0, then do a game over, or whatever you want to put here
 				Level.load("SMAS - Game Over.lvlx", nil, nil)
 			elseif fadeoutcompleted then --Or else, just exit the level
@@ -74,7 +74,6 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 	if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
 		if player.deathTimer == 0 then
 			GameData.cutsceneMusicControl = true
-			Defines.earthquake = 2
 			Audio.MusicVolume(0)
 			Misc.pause()
 			Routine.waitFrames(1, true)
@@ -85,6 +84,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			Routine.waitFrames(310, true)
 			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
 			Misc.unpause()
+			GameData.cutsceneMusicControl = false
 			if fadeoutcompleted and SaveData.newlives <= 0 then --If 0, then do a game over, or whatever you want to put here
 				Level.load("SMAS - Game Over.lvlx", nil, nil)
 			elseif fadeoutcompleted then --Or else, just exit the level
@@ -188,7 +188,7 @@ function smasdeathsystem.onPlayerKill()
 end
 
 function smasdeathsystem.onExit()
-	GameData.starActive = false --This is specific for my episode. Remove this if you wanna use this yourself.
+	GameData.cutsceneMusicControl = false --This is specific for my episode. Remove this if you wanna use this yourself.
 	Audio.MusicVolume(65) --Reset the music exiting the level
 	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == false then
 		Level.exit()
@@ -200,7 +200,7 @@ function smasdeathsystem.onExit()
 	end
 end
 
---SaveData.smasdeathsystem.gameOverCount = 0 --This is only when the library publically releases for the wild to use
+--SaveData.gameOverCount = 0 --This is only when the library publically releases for the wild to use
 smasdeathsystem.hasDied = false --If the player died or not
 smasdeathsystem.extramapexit = false --This'll only be true on extra DLC levels/extra games' level luna.lua's in future updates
 
