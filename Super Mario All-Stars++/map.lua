@@ -309,59 +309,59 @@ local yoshiAnimationFrames = {
 local bootBounceData = {}
 
 function onDraw()
-	if SaveData.resolution == "fullscreen" then
-		for idx,p in ipairs(Player.get()) do
-			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
+	for idx,p in ipairs(Player.get()) do
+		local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 
-			if animation ~= nil then
-				local frame
+		if animation ~= nil then
+			local frame
 
-				local x = 500
-				local y = 10 - p.height
+			local x = 500
+			local y = 10 - p.height
 
-				if p.mount == MOUNT_BOOT then -- bouncing along in a boot
-					bootBounceData[idx] = bootBounceData[idx] or {speed = 0,offset = 0}
-					local bounceData = bootBounceData[idx]
-							
-					if not Misc.isPaused() then
-						bounceData.speed = bounceData.speed + Defines.player_grav
-						bounceData.offset = bounceData.offset + bounceData.speed
+			if p.mount == MOUNT_BOOT then -- bouncing along in a boot
+				bootBounceData[idx] = bootBounceData[idx] or {speed = 0,offset = 0}
+				local bounceData = bootBounceData[idx]
+						
+				if not Misc.isPaused() then
+					bounceData.speed = bounceData.speed + Defines.player_grav
+					bounceData.offset = bounceData.offset + bounceData.speed
 
-						if bounceData.offset >= 0 then
-							bounceData.speed = -3.4
-							bounceData.offset = 0
-						end
+					if bounceData.offset >= 0 then
+						bounceData.speed = -3.4
+						bounceData.offset = 0
 					end
-
-					y = y + bounceData.offset
-
-					frame = 1
-				elseif p.mount == MOUNT_CLOWNCAR then -- don't think this is even possible? but eh it's here
-					frame = 1
-				elseif p.mount == MOUNT_YOSHI then -- riding yoshi, yoshi's animation is a complete mess
-					frame = 30
-
-					local yoshiAnimationData = yoshiAnimationFrames[(math.floor(lunatime.tick() / 8) % #yoshiAnimationFrames) + 1]
-
-					local xOffset = 4
-					local yOffset = (72 - p.height)
-
-					p:mem(0x72,FIELD_WORD,yoshiAnimationData.headFrame + 5)
-					p:mem(0x7A,FIELD_WORD,yoshiAnimationData.bodyFrame + 7)
-
-					p:mem(0x6E,FIELD_WORD,20 - xOffset + yoshiAnimationData.headOffsetX)
-					p:mem(0x70,FIELD_WORD,10 - yOffset + yoshiAnimationData.headOffsetY)
-
-					p:mem(0x76,FIELD_WORD,0  - xOffset + yoshiAnimationData.bodyOffsetX)
-					p:mem(0x78,FIELD_WORD,42 - yOffset + yoshiAnimationData.bodyOffsetY)
-
-					p:mem(0x10E,FIELD_WORD,yoshiAnimationData.playerOffset - yOffset)
-				else -- just good ol' walking
-					local walkCycle = animation[p.powerup] or animation[PLAYER_BIG]
-
-					frame = walkCycle[(math.floor(lunatime.tick() / walkCycle.framespeed) % #walkCycle) + 1]
 				end
 
+				y = y + bounceData.offset
+
+				frame = 1
+			elseif p.mount == MOUNT_CLOWNCAR then -- don't think this is even possible? but eh it's here
+				frame = 1
+			elseif p.mount == MOUNT_YOSHI then -- riding yoshi, yoshi's animation is a complete mess
+				frame = 30
+
+				local yoshiAnimationData = yoshiAnimationFrames[(math.floor(lunatime.tick() / 8) % #yoshiAnimationFrames) + 1]
+
+				local xOffset = 4
+				local yOffset = (72 - p.height)
+
+				p:mem(0x72,FIELD_WORD,yoshiAnimationData.headFrame + 5)
+				p:mem(0x7A,FIELD_WORD,yoshiAnimationData.bodyFrame + 7)
+
+				p:mem(0x6E,FIELD_WORD,20 - xOffset + yoshiAnimationData.headOffsetX)
+				p:mem(0x70,FIELD_WORD,10 - yOffset + yoshiAnimationData.headOffsetY)
+
+				p:mem(0x76,FIELD_WORD,0  - xOffset + yoshiAnimationData.bodyOffsetX)
+				p:mem(0x78,FIELD_WORD,42 - yOffset + yoshiAnimationData.bodyOffsetY)
+
+				p:mem(0x10E,FIELD_WORD,yoshiAnimationData.playerOffset - yOffset)
+			else -- just good ol' walking
+				local walkCycle = animation[p.powerup] or animation[PLAYER_BIG]
+
+				frame = walkCycle[(math.floor(lunatime.tick() / walkCycle.framespeed) % #walkCycle) + 1]
+			end
+			
+			if SaveData.resolution == "fullscreen" then
 				p.direction = DIR_LEFT
 
 				player:render{
@@ -383,9 +383,54 @@ function onDraw()
 					}
 				end
 			end
+			if SaveData.resolution == "widescreen" then
+				p.direction = DIR_LEFT
+
+				player:render{
+					x = 525,y = 88,
+					ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+					frame = frame,
+				}
+
+
+				if idx < Player.count() then
+					xPosition = 485 + 65
+				end
+				if Player.count() == 2 then
+					p2 = player2 or Player(2)
+					p2:render{
+						x = 460,y = 88,
+						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+						frame = frame,
+					}
+				end
+			end
+			if SaveData.resolution == "ultrawide" then
+				p.direction = DIR_LEFT
+
+				player:render{
+					x = 615,y = 258,
+					ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+					frame = frame,
+				}
+
+
+				if idx < Player.count() then
+					xPosition = 485 + 65
+				end
+				if Player.count() == 2 then
+					p2 = player2 or Player(2)
+					p2:render{
+						x = 460,y = 88,
+						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+						frame = frame,
+					}
+				end
+			end
 		end
-		
-		
+	end
+	if SaveData.resolution == "fullscreen" then
+	
 		Graphics.drawImageWP(hudborder, 0, 0, 1)
 		
 		if SaveData.disableX2char == true then

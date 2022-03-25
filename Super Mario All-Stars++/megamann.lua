@@ -179,13 +179,13 @@ local isExternallyPaused = false
 local slideCollider = colliders.Box(0,0,0,0)
 
 local function drawBar(x, y, powerup, value, priority)
-	Graphics.drawImageWP(pm.getGraphic(CHARACTER_MEGAMAN,megamanHud), x - 8, y + 50, -5)
+	Graphics.drawImageWP(pm.getGraphic(CHARACTER_MEGAMAN,megamanHud), x - 8, y + 80, -5)
 	for i=1, value do
 		imagic.Draw{texture = pm.getGraphic(CHARACTER_MEGAMAN,energyBits),
 					rotation = 90,
 					align = imagic.ALIGN_CENTRE,
 					x=x,
-					y=115 + y + 50 - (4 * i),
+					y=115 + y + 80 - (4 * i),
 					priority=-5,
 					sourceY=12 * (powerup - 1),
 					sourceWidth=2,
