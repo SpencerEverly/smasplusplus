@@ -9,6 +9,13 @@ local smasdeathsystem = {}
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
 	SaveData.deathCount = 0
 end
+if SaveData.thirteenmodelives == nil then
+	if SaveData.disableX2char == false then
+		SaveData.thirteenmodelives = 0
+	elseif SaveData.disableX2char == true then
+		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
+	end
+end
 
 local killed = false
 local ready = false
@@ -72,10 +79,12 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 end
 
 function smasdeathsystem.onTick()
-	if mem(0x00B2C5AC, FIELD_FLOAT, 1) and SaveData.disableX2char == false then
-		mem(0x00B2C5AC, FIELD_FLOAT, 1)
+	if SaveData.disableX2char == false then
+		if mem(0x00B2C5AC, FIELD_FLOAT) <= 1 then
+			mem(0x00B2C5AC, FIELD_FLOAT, 1)
+		end
 	end
-	if mem(0x00B2C5AC, FIELD_FLOAT, 1) and SaveData.disableX2char == true then
+	if SaveData.disableX2char == true then
 		--Don't keep to one, just keep going down when dying
 	end
 end

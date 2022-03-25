@@ -10,11 +10,7 @@ local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local HUDOverride = require("hudoverridee")
 
-HUDOverride.priority = -5
-
-function HUDOverride.drawHUDCoins(thisPlayer, priority)
-	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.coins, priority);
-end
+HUDOverride.priority = -4.5
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
@@ -232,6 +228,7 @@ function globalgenerals.onTick()
 		Graphics.activateHud(true)
 	end
 	if SaveData.disableX2char == false then
+		HUDOverride.visible.lives = false
 		if globalgenerals.showitembox == false then
 			HUDOverride.visible.itembox = false
 		end
@@ -244,6 +241,11 @@ function globalgenerals.onTick()
 		if (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
 			--globalgenerals.showitembox = false
 		end
+	end
+	if SaveData.disableX2char == false then --This'll save the lives from 1.3 mode, and will reapply back whenever necessary
+		--Nothing happens
+	elseif SaveData.disableX2char == true then
+		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
 	end
 	if SaveData.resolution == "fullscreen" then
 		customCamera.defaultScreenWidth = 800
@@ -440,6 +442,7 @@ function globalgenerals.onTick()
 		Player.setCostume(3, nil)
 		Player.setCostume(4, nil)
 		Player.setCostume(5, nil)
+		HUDOverride.visible.lives = true
 	end
 	
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then

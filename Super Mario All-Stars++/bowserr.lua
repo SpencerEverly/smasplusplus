@@ -906,12 +906,12 @@ local function drawHUD()
 	--Life counter
 	Graphics.draw{x=234,y=26,type=RTYPE_IMAGE,image=Graphics.sprites.hardcoded["33-3"].img, priority=-5};
 	Graphics.draw{x=274,y=27,type=RTYPE_IMAGE,image=Graphics.sprites.hardcoded["33-1"].img, priority=-5};
-	Text.printWP(SaveData.newlives,1,296,27,-5);
+	Text.printWP(mem(0x00B2C5AC,FIELD_FLOAT),1,296,27,-5);
 	
 	--Coin counter
 	Graphics.draw{x=488,y=26,type=RTYPE_IMAGE,image=Graphics.sprites.hardcoded["33-2"].img, priority=-5};
 	Graphics.draw{x=512,y=27,type=RTYPE_IMAGE,image=Graphics.sprites.hardcoded["33-1"].img, priority=-5};
-	Text.printWP(SaveData.coins,1,552-18*(#tostring(SaveData.coins)-1),27, -5);
+	Text.printWP(mem(0x00B2C5A8,FIELD_WORD),1,552-18*(#tostring(mem(0x00B2C5A8,FIELD_WORD))-1),27, -5);
 	
 	--Score
 	Text.printWP(mem(0x00B2C8E4,FIELD_DWORD),1,552-18*(#tostring(mem( 0x00B2C8E4,FIELD_DWORD))-1),47, -5);

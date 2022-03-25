@@ -205,6 +205,7 @@ local function quitgame()
 	Audio.MusicPause()
 	Misc.saveGame()
 	SFX.play("_OST/_Sound Effects/savequit.ogg")
+	GameData.cutsceneMusicControl = true
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -213,6 +214,7 @@ local function quitonly()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/nosave.ogg")
+	GameData.cutsceneMusicControl = true
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false pausemenu.paused_other = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -227,6 +229,7 @@ local function quitgamemap()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	Misc.saveGame()
+	GameData.cutsceneMusicControl = true
 	SFX.play("_OST/_Sound Effects/savequit.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
@@ -277,6 +280,7 @@ local function quitonlymap()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/nosave.ogg")
+	GameData.cutsceneMusicControl = true
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -308,23 +312,26 @@ end
 
 local function exitlevel()
 	Audio.MusicVolume(0)
+	GameData.cutsceneMusicControl = true
 	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.cutsceneMusicControl = false Level.exit() end)
 end
 
 local function restartlevel()
 	Audio.MusicVolume(0)
+	GameData.cutsceneMusicControl = true
 	Audio.MusicPause()
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(Level.filename()) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.cutsceneMusicControl = false Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
+	GameData.cutsceneMusicControl = true
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load("MALC - HUB.lvlx", nil, nil) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.cutsceneMusicControl = false Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
 local function warpzonehub()
@@ -892,7 +899,8 @@ local function mainmenu()
 	pausemenu.paused = false
 	Misc.unpause()
 	Misc.saveGame()
-	Routine.run(function() exitscreen = true Audio.MusicVolume(0) SFX.play("_OST/_Sound Effects/shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
+	GameData.cutsceneMusicControl = true
+	Routine.run(function() exitscreen = true Audio.MusicVolume(0) SFX.play("_OST/_Sound Effects/shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() GameData.cutsceneMusicControl = false Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
 end
 
 local function wrong()

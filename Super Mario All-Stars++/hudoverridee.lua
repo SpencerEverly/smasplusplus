@@ -100,7 +100,7 @@ HUDOverride.visible.timer = true
 HUDOverride.visible.levelname = true
 HUDOverride.visible.overworldPlayer = true
 
-HUDOverride.priority = -4.99999;
+HUDOverride.priority = -4.5;
 
 HUDOverride.ALIGN_LEFT = 0;
 HUDOverride.ALIGN_RIGHT = 1;
@@ -596,7 +596,7 @@ end
 
 function HUDOverride.drawCoins(splitOffset, thisCam, thisPlayer, priority)
 	local s = GetSprite("coins", thisPlayer.character);
-	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(SaveData.coins), priority);
+	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(mem(0x00B2C5A8,FIELD_WORD)), priority);
 end
 
 

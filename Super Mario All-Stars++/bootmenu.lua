@@ -7,6 +7,7 @@ local datetime = require("datetime")
 --end
 local extrasounds = require("extrasounds")
 local autoscroll = require("autoscrolla")
+local HUDOverride = require("hudoverridee")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
@@ -46,7 +47,17 @@ local escquit = true
 
 local cooldown = 0
 
-Graphics.activateHud(false)
+HUDOverride.visible.keys = false
+HUDOverride.visible.itembox = false
+HUDOverride.visible.bombs = false
+HUDOverride.visible.coins = false
+HUDOverride.visible.score = false
+HUDOverride.visible.lives = false
+HUDOverride.visible.stars = false
+HUDOverride.visible.starcoins = false
+HUDOverride.visible.timer = false
+HUDOverride.visible.levelname = false
+HUDOverride.visible.overworldPlayer = false
 
 local middle = 0
 
@@ -466,6 +477,7 @@ local function X2Char()
 	if SaveData.disableX2char == false then
 		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
 		SaveData.disableX2char = true
+		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
 		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == true then
 		SFX.play("_OST/_Sound Effects/x2-mode-enabled.ogg")
@@ -977,7 +989,7 @@ function bootmenu.onTick()
 			HUDOverride.visible.lives = false
 		end
 		if SaveData.disableX2char == true then
-			HUDOverride.visible.lives = true
+			HUDOverride.visible.lives = false
 			x2noticecheck = not active
 			x2noticecheckactive = active
 			Player.setCostume(1, nil)

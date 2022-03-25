@@ -90,7 +90,6 @@ function comboSounds.onPostNPCHarm(v,reason,culprit)
     -- Used for calculating the combo later
     data.oldScore = getScore()
     data.oldLives = mem(LIVES_ADDR,FIELD_FLOAT)
-	data.newLives = SaveData.newlives
 end
 
 function comboSounds.onNPCKill(eventObj,v,reason)

@@ -200,12 +200,6 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 	end
 end
 
-function extrasounds.onDraw()
-	for key,npc in ipairs(NPC.get()) do
-		--Text.printWP(NPC.config[npc.id].score, 100, 100, 10)
-	end
-end
-
 function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil) --Let's start off with block hitting.
 	local bricks = table.map{4,60,188,226} --These are a list of breakable bricks.
 	if not Misc.isPaused() then --Making sure the sound only plays when not paused...

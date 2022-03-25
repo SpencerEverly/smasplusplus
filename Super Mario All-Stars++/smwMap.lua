@@ -3682,14 +3682,14 @@ do
         {
             icon = Graphics.loadImageResolved("smwMap/hud_lives.png"),
             getValue = (function()
-                return SaveData.newlives
+                return mem(0x00B2C5AC,FIELD_FLOAT)
             end),
         },
         -- Coins
         {
             icon = Graphics.sprites.hardcoded["33-2"],
             getValue = (function()
-                return SaveData.coins
+                return mem(0x00B2C5A8,FIELD_WORD)
             end),
         },
         -- Stars
