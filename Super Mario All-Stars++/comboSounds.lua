@@ -27,12 +27,12 @@ comboSounds.sounds = {
     extrasounds.id110,
     extrasounds.id111,
     extrasounds.id112,
-	extrasounds.id112, --And then the same shell for rest of the hits
+	extrasounds.id113, --And then the same shell but with a 1UP sound for rest of the hits
 }
 
 
 
-comboSounds.exclusionNPCs = table.map{263}
+comboSounds.exclusionNPCs = table.map{13,263,265}
 
 
 local comboScores = {

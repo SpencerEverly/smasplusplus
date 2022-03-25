@@ -30,6 +30,7 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 	registerEvent(smasdeathsystem, "onTickEnd")
 	registerEvent(smasdeathsystem, "onEvent")
 	registerEvent(smasdeathsystem, "onInputUpdate")
+	registerEvent(smasdeathsystem, "onNPCKill")
 	registerEvent(smasdeathsystem, "onPostNPCKill")
 	registerEvent(smasdeathsystem, "onPlayerKill")
 	registerEvent(smasdeathsystem, "onPostPlayerKill")
@@ -113,6 +114,54 @@ function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil)
 	end
 end
 
+local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
+    local oldKilled     = npc:mem(0x122,FIELD_WORD)
+    local oldProjectile = npc:mem(0x136,FIELD_BOOL)
+    local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
+    local oldImmune     = npc:mem(0x156,FIELD_WORD)
+    local oldID         = npc.id
+    local oldSpeedX     = npc.speedX
+    local oldSpeedY     = npc.speedY
+
+    npc:harm(...)
+
+    return (
+           oldKilled     ~= npc:mem(0x122,FIELD_WORD)
+        or oldProjectile ~= npc:mem(0x136,FIELD_BOOL)
+        or oldHitCount   ~= npc:mem(0x148,FIELD_FLOAT)
+        or oldImmune     ~= npc:mem(0x156,FIELD_WORD)
+        or oldID         ~= npc.id
+        or oldSpeedX     ~= npc.speedX
+        or oldSpeedY     ~= npc.speedY
+    )
+end
+
+function smasdeathsystem.onNPCKill(v)
+	local combo = 2
+
+    for _,npc in NPC.iterate(NPC.HITTABLE) do
+        if npc ~= v and npc.id > 0 then
+            -- Hurt the NPC, and make sure to not give the automatic score
+            --local oldScore = NPC.config[npc.id].score
+            --NPC.config[npc.id].score = 0
+
+            --local hurtNPC = harmNPC(npc,HARM_TYPE_NPC,15)
+            
+            --NPC.config[npc.id].score = oldScore
+			
+            
+			--if HARM_TYPE_NPC then
+				--combo = math.min(10,combo + 1)
+				--Misc.givePoints(combo,{x = npc.x+npc.width*0.5,y = npc.y+npc.height*0.5},true)
+				
+				--if combo >= 10 then
+					--SFX.play(extrasounds.id15)
+				--end
+            --end
+        end
+    end
+end
+
 function smasdeathsystem.onPostNPCKill(npc, harmtype, playerornil, obj, playerObj, npcObj) --This'll gain 1UPs when touching 1UPs, 3UPs, or etc.
 	local oneups = table.map{90,186,187} --A table map containing all the NPC ids, same as below
 	local threeups = table.map{188}
@@ -168,7 +217,9 @@ function smasdeathsystem.onTick()
 	if SaveData.newlives > 999 then --999 will be the max lives for SMAS++
 		SaveData.newlives = 999
 	end
-	mem(0x00B2C5AC,FIELD_FLOAT,95) --This is to make sure 1UPs get collected within this system
+	if mem(0x00B2C5AC,FIELD_FLOAT,95) then
+		mem(0x00B2C5AC,FIELD_FLOAT,85) --This is to make sure 1UPs get collected within this system, also useful for tracking 1UPs
+	end
 	mem(0x00B2C5A8, FIELD_WORD, 0) --Set the coin count to 0 as well, so that the new coin system will actually work
 end
 
