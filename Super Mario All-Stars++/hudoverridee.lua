@@ -463,15 +463,15 @@ function HUDOverride.drawStars(splitOffset, thisCam, thisPlayer, priority)
 end
 
 function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
-	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.newlives, priority);
+	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), mem(0x00B2C5AC,FIELD_FLOAT), priority);
 end
 
 function HUDOverride.drawHUDLives(thisPlayer, priority)
-	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.newlives, priority);
+	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), mem(0x00B2C5AC,FIELD_FLOAT), priority);
 end
 
 function HUDOverride.drawHUDCoins(thisPlayer, priority)
-	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.coins, priority);
+	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), mem(0x00B2C5A8,FIELD_WORD), priority);
 end
 
 function HUDOverride.drawHUDStars(thisPlayer, priority)

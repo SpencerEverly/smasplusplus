@@ -974,8 +974,10 @@ function bootmenu.onTick()
 		if SaveData.disableX2char == false then
 			x2noticecheck = active
 			x2noticecheckactive = not active
+			HUDOverride.visible.lives = false
 		end
 		if SaveData.disableX2char == true then
+			HUDOverride.visible.lives = true
 			x2noticecheck = not active
 			x2noticecheckactive = active
 			Player.setCostume(1, nil)
