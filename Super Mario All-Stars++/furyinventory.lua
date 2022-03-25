@@ -712,14 +712,12 @@ function inventory.onInputUpdate()
 				Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
 				Misc.unpause()
 				state = 1
-				globalgenerals.showitembox = false
 			elseif inventory.inventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
 				inventoryopen = true
 				inventory.inventoryopened = true
 				Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
 				Misc.pause()
 				state = 1
-				globalgenerals.showitembox = true
 			end
 		end
 	end
@@ -739,7 +737,6 @@ function inventory.onInputUpdate()
 							inventory.inventoryopened = false
 							cooldown = 5
 							Misc.unpause()
-							globalgenerals.showitembox = false
 							player:mem(0x11E,FIELD_BOOL,false)
 							if cooldown <= 0 then
 								player:mem(0x11E,FIELD_BOOL,true)
@@ -758,7 +755,6 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
-						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -776,7 +772,6 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
-						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -794,7 +789,6 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
-						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -812,7 +806,6 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
-						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -830,7 +823,6 @@ function inventory.onInputUpdate()
 						inventory.inventoryopened = false
 						cooldown = 5
 						Misc.unpause()
-						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -847,7 +839,6 @@ function inventory.onInputUpdate()
 						state = 1
 						inventory.inventoryopened = false
 						Misc.unpause()
-						globalgenerals.showitembox = false
 						player:mem(0x11E,FIELD_BOOL,false)
 						if cooldown <= 0 then
 							player:mem(0x11E,FIELD_BOOL,true)
@@ -941,7 +932,7 @@ function inventory.onInputUpdate()
 		end
 	end
 	if inventory.inventoryopened == false then
-		globalgenerals.showitembox = false
+		--Nothing
 	end
 end
 

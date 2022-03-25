@@ -45,7 +45,6 @@ function onStart()
         SaveData.GameOverCount = SaveData.GameOverCount or 0
     end
 	SaveData.GameOverCount = SaveData.GameOverCount + 1
-	mem(0x00B2C5AC,FIELD_FLOAT) = 5
 	mem(0x00B2C5AC,FIELD_FLOAT, 3)
 	SFX.play("_OST/_Sound Effects/gameover-sound.ogg")
 end
@@ -58,12 +57,22 @@ function onTick()
 	Audio.sounds[28].muted  = true
 end
 
+function onInputUpdate()
+	player.leftKeyPressing = false
+	player.rightKeyPressing = false
+	player.altJumpKeyPressing = false
+	player.runKeyPressing = false
+	player.altRunKeyPressing = false
+	player.dropItemKeyPressing = false
+	player.pauseKeyPressing = false
+end
+
 function onEvent(eventName)
 	if eventName == "Game Over Timing Execution 2" then
 		SFX.play("_OST/_Sound Effects/gameover-announcer.ogg")
 	end
 	if eventName == "Game Over Timing Execution 3" then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -3.5><boxStyle gameoverdialog><question gameoverselect>", pauses = true, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -4.5><boxStyle gameoverdialog><question gameoverselect>", pauses = true, updatesInPause = true})
 	end
 	if eventName == "Continued1" then
 		SFX.play(extrasounds.id27)

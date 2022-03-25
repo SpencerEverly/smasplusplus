@@ -9,9 +9,18 @@ local smallScreen = require("smallScreen")
 local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local HUDOverride = require("hudoverridee")
+local textplus = require("textplus")
+
+local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
 HUDOverride.priority = -4.5
 HUDOverride.visible.starcoins = false
+
+local eastercrash = false
+local eastercrashdone = false
+local eastercrashmsg = false
+local eastercrashprevload = false
+local blockidx5000check = false
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
@@ -162,7 +171,18 @@ function globalgenerals.onInitAPI()
 	ready = true
 end
 
-globalgenerals.showitembox = false
+function lavashroomeasteregg()
+	eastercrashprevload = true
+	GameData.cutsceneMusicControl = true
+	SFX.play("_OST/_Sound Effects/easteregg_smbx13crash.ogg")
+	eastercrashmsg = true
+	Routine.wait(2, true)
+	GameData.cutsceneMusicControl = false
+	Routine.wait(20, true)
+	eastercrashmsg = false
+	eastercrashdone = true
+	eastercrash = false
+end
 
 --New pause menu was made, this is to prevent the old pause menu from opening
 function globalgenerals.onPause(evt)
@@ -249,22 +269,14 @@ function globalgenerals.onTick()
 	end
 	if SaveData.disableX2char == false then
 		HUDOverride.visible.lives = false
-		if globalgenerals.showitembox == true then
-			HUDOverride.visible.itembox = true
-		elseif globalgenerals.showitembox == false then
-			HUDOverride.visible.itembox = false
-		end
-		if player.character == CHARACTER_PEACH or player.character == CHARACTER_TOAD or player.character == CHARACTER_LINK or player.character == CHARACTER_KLONOA or player.character == CHARACTER_ROSALINA or player.character == CHARACTER_UNCLEBROADSWORD or player.character == CHARACTER_SNAKE then
-			globalgenerals.showitembox = true
-			HUDOverride.visible.itembox = true
-		elseif player.character == CHARACTER_MARIO or player.character == CHARACTER_LUIGI or player.character == CHARACTER_MEGAMAN or player.character == CHARACTER_WARIO or player.character == CHARACTER_BOWSER or player.character == CHARACTER_NINJABOMBERMAN or player.character == CHARACTER_NINJABOMBERMAN or player.character == CHARACTER_ULTIMATERINKA or player.character == CHARACTER_SAMUS then
-			HUDOverride.visible.itembox = false
-		end
 	end
-	if SaveData.disableX2char == false then --This'll save the lives from 1.3 mode, and will reapply back whenever necessary
-		--Nothing happens
-	elseif SaveData.disableX2char == true then
+	if SaveData.disableX2char == true then
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
+	end
+	for k,block in ipairs(Block.get{371,405,30,406,1268,404,420,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487}) do
+		if block.idx >= 5000 then --Easter egg block IDX detection, for the epic 1.3 mode crash thingy
+			blockidx5000check = true
+		end
 	end
 	if SaveData.resolution == "fullscreen" then
 		customCamera.defaultScreenWidth = 800
@@ -1144,6 +1156,19 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 	if npc.id == 277 or npc.id == 264 then
         SaveData.totaliceflowers = SaveData.totaliceflowers + 1
     end
+	local interactable = table.map{9,10,14,31,33,34,35,88,90,92,139,140,141,142,143,144,145,146,147,153,154,155,156,157,169,170,184,185,186,187,188,191,193,249,250,258,274,293,425,462,559,994,996,997}
+	if SaveData.disableX2char == true then
+		if interactable[npc.id] then
+			if blockidx5000check == true then
+				if harmType == HARM_TYPE_LAVA then
+					eastercrash = true
+					if eastercrashprevload == false then
+						Routine.run(lavashroomeasteregg)
+					end
+				end
+			end
+		end
+	end
 end
 
 function globalgenerals.onDraw()
@@ -1185,6 +1210,11 @@ function globalgenerals.onDraw()
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(threedsborder, 0, 0, 5)
 		end
+	end
+	if eastercrashmsg then
+		textplus.print{x=145, y=80, text = "Congrats! You reached more than the 5000th block idx and burned a ", priority=-3, color=Color.yellow, font=statusFont}
+		textplus.print{x=155, y=90, text = "collectable in the lava. This would've crashed SMBX 1.3!", priority=-3, color=Color.yellow, font=statusFont}
+		textplus.print{x=195, y=100, text = "You're really good at finding secrets, player ;)", priority=-3, color=Color.yellow, font=statusFont}
 	end
 end
 
