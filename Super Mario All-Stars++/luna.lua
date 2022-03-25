@@ -76,6 +76,12 @@ function onStart()
 	if SaveData.disableX2char == 1 then
 		SaveData.disableX2char = true
 	end
+	if GameData.cutsceneMusicControl == false then
+		Audio.MusicVolume(65)
+	end
+	if GameData.cutsceneMusicControl == true then
+		Audio.MusicVolume(0)
+	end
 end
 
 function onCameraUpdate(c, camIdx)

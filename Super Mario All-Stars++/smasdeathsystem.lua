@@ -34,6 +34,7 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 	registerEvent(smasdeathsystem, "onPlayerKill")
 	registerEvent(smasdeathsystem, "onPostPlayerKill")
 	registerEvent(smasdeathsystem, "onStart")
+	registerEvent(smasdeathsystem, "onPostBlockHit")
 	
 	if Player(2) and Player(2).isValid then return end --Don't run this when Player(2) is active... for now (Support coming soon)
 	
@@ -95,6 +96,20 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 				end
 			end
 		end
+	end
+end
+
+function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil)
+	local bricks = table.map{4,60,188,226} --These are a list of breakable bricks.
+	if block.contentID == nil then --For blocks that are already used
+		SFX.play(extrasounds.id0)
+	end
+	if block.contentID == 0 then --This is to prevent coins from being collected when hitting an nonexistant block
+		SFX.play(extrasounds.id0)
+	elseif block.contentID == 1000 then --Same as last
+		SFX.play(extrasounds.id0)
+	elseif block.contentID <= 99 then --We'll get a coin with things less than 99, the coin block limit
+		SaveData.coins = SaveData.coins + 1
 	end
 end
 

@@ -14,7 +14,6 @@ local configFileReader = require("configFileReader")
 local textplus = require("textplus")
 local tplusUtils = require("textplus/tplusutils")
 
-local handycam = require("handycam")
 local customCamera = require("customCamera")
 
 local player2 = Player(2)

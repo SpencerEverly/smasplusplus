@@ -65,6 +65,7 @@ function levelload()
 	nochangecharmap = true
 	world.playerWalkingFrame = 1
 	SFX.play("_OST/_Sound Effects/levelload.ogg")
+	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(0)
 	Misc.pause()
 	player:mem(0x17A, FIELD_BOOL, true)
@@ -72,11 +73,12 @@ function levelload()
 	loadlevelanimation = true
 	Routine.waitFrames(58, true)
 	Misc.unpause()
+	GameData.cutsceneMusicControl = false
 	player:mem(0xFA, FIELD_BOOL, true)
 	Routine.waitFrames(1, true)
 	loadlevelanimation = nil
 	loadlevelanimationin = true
-	Audio.MusicVolume(56)
+	Audio.MusicVolume(65)
 	nochangecharmap = false
 	Routine.waitFrames(78, true)
 	loadlevelanimationin = nil
@@ -105,6 +107,12 @@ function onInputUpdate()
 end
 
 function onStart()
+	if GameData.cutsceneMusicControl == false then
+		Audio.MusicVolume(65)
+	end
+	if GameData.cutsceneMusicControl == true then
+		Audio.MusicVolume(0)
+	end
 	Graphics.activateHud(false)
 	if Misc.resolveFile("worlds/Super Mario All-Stars++/exeextracted.txt") == nil then
 		--Nothing
@@ -382,10 +390,10 @@ function onDraw()
 		Graphics.drawImageWP(hudborder, 0, 0, 3)
 		Graphics.drawImageWP(oneupicon, 70, 558, 5)
 		Graphics.drawImageWP(times, 105, 560, 5)
-		textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=124, y=558, text = tostring(SaveData.newlives), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(coinicon, 160, 558, 5)
 		Graphics.drawImageWP(times, 178, 560, 5)
-		textplus.print{x=197, y=558, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=197, y=558, text = tostring(SaveData.coins), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(staricon, 236, 558, 5)
 		Graphics.drawImageWP(times, 254, 560, 5)
 		textplus.print{x=272, y=558, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -433,10 +441,10 @@ function onDraw()
 		
 		Graphics.drawImageWP(oneupicon, 70, 500, 5)
 		Graphics.drawImageWP(times, 105, 502, 5)
-		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=124, y=500, text = tostring(SaveData.newlives), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(coinicon, 160, 500, 5)
 		Graphics.drawImageWP(times, 178, 502, 5)
-		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=197, y=500, text = tostring(SaveData.coins), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(staricon, 236, 500, 5)
 		Graphics.drawImageWP(times, 254, 502, 5)
 		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -472,10 +480,10 @@ function onDraw()
 		
 		Graphics.drawImageWP(oneupicon, 70, 440, 5)
 		Graphics.drawImageWP(times, 105, 442, 5)
-		textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=124, y=440, text = tostring(SaveData.newlives), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(coinicon, 160, 440, 5)
 		Graphics.drawImageWP(times, 178, 442, 5)
-		textplus.print{x=197, y=440, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=197, y=440, text = tostring(SaveData.coins), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(staricon, 236, 440, 5)
 		Graphics.drawImageWP(times, 254, 442, 5)
 		textplus.print{x=272, y=440, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -511,10 +519,10 @@ function onDraw()
 		
 		Graphics.drawImageWP(oneupicon, 155, 500, 5)
 		Graphics.drawImageWP(times, 190, 502, 5)
-		textplus.print{x=209, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=209, y=500, text = tostring(SaveData.newlives), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(coinicon, 245, 500, 5)
 		Graphics.drawImageWP(times, 263, 502, 5)
-		textplus.print{x=282, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=282, y=500, text = tostring(SaveData.coins), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(staricon, 321, 500, 5)
 		Graphics.drawImageWP(times, 339, 502, 5)
 		textplus.print{x=357, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -560,10 +568,10 @@ function onDraw()
 		
 		Graphics.drawImageWP(oneupicon, 250, 400, 0, 0, 16, 8, 5)
 		Graphics.drawImageWP(times, 270, 401, 0, 0, 6, 6, 5)
-		textplus.print{x=279, y=403, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
+		textplus.print{x=279, y=403, text = tostring(SaveData.newlives), priority=5, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
 		Graphics.drawImageWP(coinicon, 292, 400, 0, 0, 7, 7, 5)
 		Graphics.drawImageWP(times, 303, 401, 0, 0, 6, 6, 5)
-		textplus.print{x=313, y=403, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
+		textplus.print{x=313, y=403, text = tostring(SaveData.coins), priority=5, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
 		Graphics.drawImageWP(staricon, 323, 400, 0, 0, 7, 7, 5)
 		Graphics.drawImageWP(times, 334, 401, 0, 0, 6, 6, 5)
 		textplus.print{x=344, y=403, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
@@ -610,10 +618,10 @@ function onDraw()
 		
 		Graphics.drawImageWP(oneupicon, 165, 440, 5)
 		Graphics.drawImageWP(times, 200, 442, 5)
-		textplus.print{x=220, y=445, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1, yscale=1}
+		textplus.print{x=220, y=445, text = tostring(SaveData.newlives), priority=5, color=Color.white, font=font2, xscale=1, yscale=1}
 		Graphics.drawImageWP(coinicon, 245, 440, 5)
 		Graphics.drawImageWP(times, 264, 442, 5)
-		textplus.print{x=284, y=445, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1, yscale=1}
+		textplus.print{x=284, y=445, text = tostring(SaveData.coins), priority=5, color=Color.white, font=font2, xscale=1, yscale=1}
 		Graphics.drawImageWP(staricon, 310, 440, 5)
 		Graphics.drawImageWP(times, 334, 442, 5)
 		textplus.print{x=354, y=445, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1, yscale=1}
@@ -661,10 +669,10 @@ function onDraw()
 		
 		Graphics.drawImageWP(oneupicon, 70, 440, 5)
 		Graphics.drawImageWP(times, 105, 442, 5)
-		textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=124, y=440, text = tostring(SaveData.newlives), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(coinicon, 160, 440, 5)
 		Graphics.drawImageWP(times, 178, 442, 5)
-		textplus.print{x=197, y=440, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=197, y=440, text = tostring(SaveData.coins), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(staricon, 236, 440, 5)
 		Graphics.drawImageWP(times, 254, 442, 5)
 		textplus.print{x=272, y=440, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}

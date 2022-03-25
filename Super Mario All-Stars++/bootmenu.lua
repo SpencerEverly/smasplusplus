@@ -997,15 +997,6 @@ function bootmenu.onTick()
 		if SaveData.failsafeMessageOne == 1 then
 			Routine.run(FailsafeMessage1)
 		end
-		--player.upKeyPressing = false;
-		--player.downKeyPressing = false;
-		player.runKeyPressing = false;
-		player.altJumpKeyPressing = false;
-		player.altRunKeyPressing = false;
-		player.dropItemKeyPressing = false;
-		--player.leftKeyPressing = false;
-		--player.rightKeyPressing = false;
-		
 		Audio.sounds[1].muted = true
 		Audio.sounds[2].muted = true
 		Audio.sounds[3].muted = true
@@ -1092,6 +1083,10 @@ function bootmenu.onPause(evt)
 end
 
 function bootmenu.onInputUpdate()
+	player.runKeyPressing = false
+	player.altJumpKeyPressing = false
+	player.altRunKeyPressing = false
+	player.dropItemKeyPressing = false
 	if bootmenu.active == true then
 		if player.rawKeys.pause == KEYS_PRESSED then
 			Routine.run(ExitGame1)

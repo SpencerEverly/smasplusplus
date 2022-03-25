@@ -22,5 +22,5 @@ end
 
 function onDraw()
 	local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
-	Graphics.drawImageWP(redcurtains, 0, 0, -12)
+	Graphics.drawImageWP(redcurtains, -1000, 0, -12)
 end

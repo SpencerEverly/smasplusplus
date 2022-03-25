@@ -1383,14 +1383,10 @@ local function drawOtherOptionMenu(y, alpha)
 		table.insert(pause_options_other, {name4="Toggle Letterbox Scaling", action = changeletterbox});
 		table.insert(pause_options_other, {name4="Toggle Resolution Border", action = changeresolutionborder});
 		if not isOverworld then
-			if (Level.name() == "SMAS - Map") == false then
-				table.insert(pause_options_other, {name4="Go to the Extra Game/DLC Map", action = dlcmapload});
-			end
+			table.insert(pause_options_other, {name4="Go to the Extra Game/DLC Map", action = dlcmapload});
 		end
 		if not isOverworld then
-			if (Level.name() == "MALC - HUB") == false then
-				table.insert(pause_options_other, {name4="Teleport to the Hub", action = hubteleport});
-			end
+			table.insert(pause_options_other, {name4="Teleport to the Hub", action = hubteleport});
 		end
 		if not isOverworld then
 			table.insert(pause_options_other, {name4="Mute/Unmute Music", action = mutemusic});
@@ -1571,17 +1567,22 @@ function pausemenu.onDraw(isSplit)
 	end
 	if pausemenu.paused_other then
 		Misc.pause()
-		if(pausemenu.pause_box == nil) then
-			pause_height_other = drawOtherOptionMenu(-600,0);
-			pausemenu.pause_box = imagic.Create{x=400,y=300,width=460,height=pause_height_other+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
-		end
 		if not isOverworld then
+			if(pausemenu.pause_box == nil) then
+				pause_height_other = drawOtherOptionMenu(-600,0);
+				pausemenu.pause_box = imagic.Create{x=400,y=300,width=460,height=pause_height_other+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			end
 			pausemenu.pause_box:Draw(6, 0x00000077);
+			drawOtherOptionMenu(231-pause_height*0.5,1)
 		end
 		if isOverworld then
-			pausemenu.pause_box:Draw(5, 0x00000077);
+			if(pausemenu.pause_box == nil) then
+				pause_height_other = drawOtherOptionMenu(-600,0);
+				pausemenu.pause_box = imagic.Create{x=400,y=300,width=460,height=pause_height_other+16,primitive=imagic.TYPE_BOX,align=imagic.ALIGN_CENTRE}
+			end
+			pausemenu.pause_box:Draw(6, 0x00000077);
+			drawOtherOptionMenu(248-pause_height*0.5,1)
 		end
-		drawOtherOptionMenu(231-pause_height*0.5,1)
 		
 		--Fix for anything calling Misc.unpause
 		--Misc.pause();
