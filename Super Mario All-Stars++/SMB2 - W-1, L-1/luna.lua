@@ -74,47 +74,47 @@ function onEvent(eventName)
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
-	if eventName == "BossBegin" then
+	if eventName == "Boss Start" then
 		Audio.MusicChange(4, "_OST/Super Mario Bros 2/Boss.spc|0;g=2.5")
 	end
-	if eventName == "BossEnd2" then
+	if eventName == "Boss End 2" then
 		Audio.MusicChange(4, "_OST/Super Mario Bros 2/Boss.spc|0;g=2.5")
 	end
 	
 	local costumes
 	if currentCostume == "4-SMB2-RETRO" then
-		if eventName == "BossBegin" then
+		if eventName == "Boss Start" then
 			Audio.MusicChange(4, "_OST/Super Mario Bros 2 (NES) - OST.nsf|6;g=2")
 		end
 	end
 	if currentCostume == "4-SMB2-RETRO" then
-		if eventName == "BossEnd2" then
+		if eventName == "Boss End 2" then
 			Audio.MusicChange(4, "_OST/Super Mario Bros 2 (NES) - OST.nsf|6;g=2")
 		end
 	end
 	if currentCostume == "11-SMA1" then
-		if eventName == "BossBegin" then
+		if eventName == "Boss Start" then
 			Audio.MusicChange(4, "_OST/Super Mario Advance/Boss.ogg")
 			SFX.play("costumes/mario/11-SMA1/birdo-thisisasfarasyougo.wav")
 		end
 	end
 	if currentCostume == "11-SMA1" then
-		if eventName == "BossEnd1" then
+		if eventName == "Boss End" then
 			SFX.play("costumes/mario/11-SMA1/birdo-I'llrememberthis.wav")
 		end
 	end
 	if currentCostume == "11-SMA1" then
-		if eventName == "BossEnd2" then
+		if eventName == "Boss End 2" then
 			Audio.MusicChange(4, "_OST/Super Mario Advance/Boss.ogg")
 		end
 	end
 	if currentCostume == "12-SMA2" then
-		if eventName == "BossBegin" then
+		if eventName == "Boss Start" then
 			Audio.MusicChange(4, "_OST/Super Mario Advance/Boss.ogg")
 		end
 	end
 	if currentCostume == "12-SMA2" then
-		if eventName == "BossEnd2" then
+		if eventName == "Boss End 2" then
 			Audio.MusicChange(4, "_OST/Super Mario Advance/Boss.ogg")
 		end
 	end

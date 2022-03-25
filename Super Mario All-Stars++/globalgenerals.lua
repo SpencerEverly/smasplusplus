@@ -81,6 +81,7 @@ littleDialogue.registerStyle("smbx13og",{
 	selectorImageEnabled = true,
 	
 })
+
 littleDialogue.registerStyle("smbx13",{
 	textXScale = 1,
 	textYScale = 1,
@@ -112,6 +113,7 @@ littleDialogue.registerStyle("smbx13",{
 	selectorImageEnabled = true,
 	
 })
+
 littleDialogue.registerStyle("infobooth",{
 	borderSize = 32,
 
@@ -491,9 +493,51 @@ function globalgenerals.onTick()
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "1-SMB1-RETRO" then
+		if Level.filename() == "SMB2 - W-1, L-1.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-1, L-2.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-1, L-3.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-2, L-1.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-2, L-2.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-2, L-3.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-3, L-1.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-3, L-2.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-3, L-3.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-4, L-1.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-4, L-2.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-4, L-3.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-5, L-1.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-5, L-2.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-5, L-3.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-6, L-1.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-6, L-2.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-6, L-3.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-7, L-1.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
+			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
+		elseif Level.filename() then
+			starman.sfxFile = Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/starman")
+		end
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-smb1.ogg")
-		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 		warpTransition.doorclose = ("sound/door-close.ogg")
