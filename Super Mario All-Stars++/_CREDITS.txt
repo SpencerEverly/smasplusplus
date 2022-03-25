@@ -65,8 +65,9 @@ Costumes:
 - NES Toad, NES Mario & Luigi, Toadette, Daisy, Pauline, Luigi with Mario's clothes, and some Toad Colors by IsaacP2003
 - Sonic sprites by megamario1500, rodrig0 (Also costume code modified by Spencer Everly)
 - Daisy idle sprite by magibowser
-- Wario and Waluigi by couch tomato
-- Bass sprite by Unknown
+- Wario and Waluigi by couch tomato, ported by Inferno
+- Bass sprite by megaconnerx5, ported by Inferno
+- Proto Man sprite by KaratGaming, ported by Inferno
 - Kirby powerup hats by Kabi-Ribi
 - Yoshi sprite base from Joshr_691 and Supernova Bandana Dee
 - SMB2 Mario (Big) by Johnny Webb
@@ -81,7 +82,7 @@ Costumes:
 - JC Foster Takes it to the Moon by JC Foster Takes it to the Moon (Duh)
 - Larry the Cucumber by Cmanflip/Big Idea/Phil Vischer
 - GoAnimate Caillou/Boris by GoAnimate/Vyond, and Cookie Jar Entertainment
-- Marink character by Phil (The Legend of Mario)
+- Marink character (SSBM Alternate Costume 5) by Ancel3 and Phil (The Legend of Mario)
 - Super Mario Bros. 0 characters by BrokenAce
 - Minecraft Skins by Spencer Everly, uxiee36, breadconjurer0, HyperSanic666, SuperSaiyanT07, sadlove, overcasterz, Ledkalnis, Joa11, Legendboy1313, djgirlx, monsterboy772, raptyblocks, anniemichelle, M4PL3, GorillaMask, DoctorSkins, Valkorion, tayblecloth (UnofficialStudios/Riley), Master of Disaster, GeorgeNotFound, Tommyinnit, Karl, Quackity, ExplodingTNT, ItsJerryAndHarry, Notch, and the Mojang Staff
 - Golden Mario by It's-A-Me
@@ -90,6 +91,27 @@ Costumes:
 - SMM2 SMW costumes by CaptainMonochrome
 - Some SMB1 SMAS Stuff by ItsIggy
 - SMW Peach by LinkstormZ
+- Bandana Dee by Inferno
+- Roll by Exploding Rabbit (ported by Tiger Festival)
+- Yoshi (Luigi) by KooperKoopa
+- Rosalina (Mario) by CrystallicAshley
+- SMM2 Toad (Toad) by GlacialSiren484, MauricioN64, Jamestendo64, and LinkStormZ, ported by MrDoubleA
+- Captain Toad by GlacialSiren484, MauricioN64, Jamestendo64, LinkStormZ, and FutureNyanCat2002, ported by MrDoubleA and FutureNyanCat2002
+- Bill Rizer by Unknown
+- King Boo by neweegee, ported by Unknown
+- Hamtaro by Unknown
+- E. Gadd by Unknown
+- NES Mega Man by Unknown
+- Bad Box Art Mega Man by Unknown
+- Dr. Wily by Unknown
+- Marisa Kirisame (Player sprites from Megamari and map sprites from Touhou: The Book of the Grimoire) by Unknown
+- Marina Liteyears by Unknown
+- Metroid 1 Samus by Unknown
+- SMB2 Rosalina by Unknown
+- SMA4 Peach by Unknown
+- Wohlstand by Unknown
+- Tux by Grumbel and others, ported by Unknown
+- Utsuho Reiuji by Unknown
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
