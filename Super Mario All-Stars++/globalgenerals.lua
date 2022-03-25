@@ -11,6 +11,7 @@ local yoshi = require("yiYoshi/yiYoshi")
 local HUDOverride = require("hudoverridee")
 
 HUDOverride.priority = -4.5
+HUDOverride.visible.starcoins = false
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
@@ -222,24 +223,39 @@ end
 	
 function globalgenerals.onTick()
 	if player.character == CHARACTER_SNAKE then
-		Graphics.activateHud(true)
+		HUDOverride.visible.keys = true
+		HUDOverride.visible.itembox = true
+		HUDOverride.visible.bombs = true
+		HUDOverride.visible.coins = true
+		HUDOverride.visible.score = true
+		HUDOverride.visible.stars = true
+		HUDOverride.visible.timer = true
+		HUDOverride.visible.levelname = true
+		HUDOverride.visible.overworldPlayer = true
 	end
 	if player.character == CHARACTER_NINJABOMBERMAN then
-		Graphics.activateHud(true)
+		HUDOverride.visible.keys = true
+		HUDOverride.visible.itembox = true
+		HUDOverride.visible.bombs = true
+		HUDOverride.visible.coins = true
+		HUDOverride.visible.score = true
+		HUDOverride.visible.stars = true
+		HUDOverride.visible.timer = true
+		HUDOverride.visible.levelname = true
+		HUDOverride.visible.overworldPlayer = true
 	end
 	if SaveData.disableX2char == false then
 		HUDOverride.visible.lives = false
-		if globalgenerals.showitembox == false then
-			HUDOverride.visible.itembox = false
-		end
 		if globalgenerals.showitembox == true then
 			HUDOverride.visible.itembox = true
+		elseif globalgenerals.showitembox == false then
+			HUDOverride.visible.itembox = false
 		end
-		if (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true then
+		if player.character == CHARACTER_PEACH or player.character == CHARACTER_TOAD or player.character == CHARACTER_LINK or player.character == CHARACTER_KLONOA or player.character == CHARACTER_ROSALINA or player.character == CHARACTER_UNCLEBROADSWORD or player.character == CHARACTER_SNAKE then
 			globalgenerals.showitembox = true
-		end
-		if (player.character == CHARACTER_PEACH) == false or (player.character == CHARACTER_TOAD) == false or (player.character == CHARACTER_LINK) == false or (player.character == CHARACTER_KLONOA) == false or (player.character == CHARACTER_ROSALINA) == false or (player.character == CHARACTER_UNCLEBROADSWORD) == false then
-			--globalgenerals.showitembox = false
+			HUDOverride.visible.itembox = true
+		elseif player.character == CHARACTER_MARIO or player.character == CHARACTER_LUIGI or player.character == CHARACTER_MEGAMAN or player.character == CHARACTER_WARIO or player.character == CHARACTER_BOWSER or player.character == CHARACTER_NINJABOMBERMAN or player.character == CHARACTER_NINJABOMBERMAN or player.character == CHARACTER_ULTIMATERINKA or player.character == CHARACTER_SAMUS then
+			HUDOverride.visible.itembox = false
 		end
 	end
 	if SaveData.disableX2char == false then --This'll save the lives from 1.3 mode, and will reapply back whenever necessary

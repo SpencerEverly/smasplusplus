@@ -42,7 +42,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			Routine.waitFrames(165, true)
 			Misc.pause()
 			fadeoutdeath = true --This starts the fade out animation
-			Routine.waitFrames(100, true)
+			Routine.waitFrames(50, true)
 			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
 			Misc.unpause()
 			GameData.cutsceneMusicControl = false

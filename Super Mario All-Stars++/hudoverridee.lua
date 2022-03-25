@@ -107,26 +107,51 @@ HUDOverride.ALIGN_RIGHT = 1;
 HUDOverride.ALIGN_MID = 0.5;
 
 --TODO: Replace this with object-level offsets with named fields and alignments
-HUDOverride.offsets = {}
-HUDOverride.offsets.keys = 		{x = 64, 	y = 26, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = HUDOverride.ALIGN_MID}, align = HUDOverride.ALIGN_MID};
-HUDOverride.offsets.hearts = 	{x = 5, 	y = 16, align = HUDOverride.ALIGN_MID};
-HUDOverride.offsets.score = 	{x = 170, 	y = 47, align = HUDOverride.ALIGN_RIGHT};
+if SaveData.disableX2char == true then
+	HUDOverride.offsets = {}
+	HUDOverride.offsets.keys = 		{x = 64, 	y = 26, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = HUDOverride.ALIGN_MID}, align = HUDOverride.ALIGN_MID};
+	HUDOverride.offsets.hearts = 	{x = 5, 	y = 16, align = HUDOverride.ALIGN_MID};
+	HUDOverride.offsets.score = 	{x = 170, 	y = 47, align = HUDOverride.ALIGN_RIGHT};
 
-HUDOverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_MID};
-HUDOverride.offsets.coins = 	{x = 88, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = HUDOverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = HUDOverride.ALIGN_LEFT},	align = HUDOverride.ALIGN_LEFT}
-HUDOverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT}
+	HUDOverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_MID};
+	HUDOverride.offsets.coins = 	{x = 88, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = HUDOverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = HUDOverride.ALIGN_LEFT},	align = HUDOverride.ALIGN_LEFT}
+	HUDOverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT}
 
-HUDOverride.overworld = {offsets = {}};
-HUDOverride.overworld.offsets.lives = 		{x = -272, 	y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.overworld.offsets.coins = 		{x = -256, 	y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.overworld.offsets.stars = 		{x = -256, 	y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.overworld.offsets.levelname = 	{x = -156, 	y = 109, p2Offset = {x = 48, y = 0}, align = HUDOverride.ALIGN_LEFT};
-HUDOverride.overworld.offsets.player =		{x = -308, y = 124}
-HUDOverride.overworld.offsets.player2 =		{x = -308+48, y = 124}
+	HUDOverride.overworld = {offsets = {}};
+	HUDOverride.overworld.offsets.lives = 		{x = -272, 	y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.coins = 		{x = -256, 	y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.stars = 		{x = -256, 	y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.levelname = 	{x = -156, 	y = 109, p2Offset = {x = 48, y = 0}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.player =		{x = -308, y = 124}
+	HUDOverride.overworld.offsets.player2 =		{x = -308+48, y = 124}
+end
+
+if SaveData.disableX2char == false then
+	HUDOverride.offsets = {}
+	HUDOverride.offsets.keys = 		{x = -268, 	y = 26, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = HUDOverride.ALIGN_MID}, align = HUDOverride.ALIGN_MID};
+	HUDOverride.offsets.hearts = 	{x = 5, 	y = 16, align = HUDOverride.ALIGN_MID};
+	HUDOverride.offsets.score = 	{x = -254, 	y = 48, align = HUDOverride.ALIGN_RIGHT};
+
+	HUDOverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_MID};
+	HUDOverride.offsets.coins = 	{x = -380, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.stars = 	{x = -380, 	y = 68, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = HUDOverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = HUDOverride.ALIGN_LEFT},	align = HUDOverride.ALIGN_LEFT}
+	HUDOverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT}
+
+	HUDOverride.overworld = {offsets = {}};
+	HUDOverride.overworld.offsets.lives = 		{x = -272, 	y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.coins = 		{x = -256, 	y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.stars = 		{x = -256, 	y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.levelname = 	{x = -156, 	y = 109, p2Offset = {x = 48, y = 0}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.overworld.offsets.player =		{x = -308, y = 124}
+	HUDOverride.overworld.offsets.player2 =		{x = -308+48, y = 124}
+end
 
 Graphics.HUD_NONE = 0;
 Graphics.HUD_HEARTS = 1;
