@@ -244,6 +244,9 @@ function globalgenerals.onTick()
 		HUDOverride.visible.levelname = true
 		HUDOverride.visible.overworldPlayer = true
 	end
+	if player.character == CHARACTER_UNCLEBROADSWORD then
+		HUDOverride.visible.lives = false
+	end
 	if SaveData.disableX2char == false then
 		HUDOverride.visible.lives = false
 		if globalgenerals.showitembox == true then

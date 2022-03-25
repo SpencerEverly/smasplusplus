@@ -104,9 +104,9 @@ end
 local function paintHealth(countChoice, graphicChoice)
 	for i = 1, countChoice do
 		if i <= 10 then
-			Graphics.drawImageWP(graphicChoice, -13 + (18 * i), 45, -5)
+			Graphics.drawImageWP(graphicChoice, 292 + (18 * i), 45, -5)
 		else
-			Graphics.drawImageWP(graphicChoice, -13 + (18 * (i - 10)), 61, -5)
+			Graphics.drawImageWP(graphicChoice, 292 + (18 * (i - 10)), 61, -5)
 		end
 	end
 end
@@ -146,9 +146,9 @@ local function checkHealth()
 	if samusHealth == 0 and player:mem(0x13E,FIELD_WORD) == 0 then
 		player:kill()
 	end
-	Graphics.drawImageWP(pm.getGraphic(CHARACTER_SAMUS, healthBox), 5, 5, -5)
-	Text.printWP("SUPPLY", 39, 2, -5)
-	Text.printWP("Energy Tank", 5, 22,-5)
+	Graphics.drawImageWP(pm.getGraphic(CHARACTER_SAMUS, healthBox), 313, 5, -5)
+	Text.printWP("SUPPLY", 348, 2, -5)
+	Text.printWP("Energy Tank", 303, 22,-5)
 	paintHealth(samusMaxHealth, pm.getGraphic(CHARACTER_SAMUS, blackBox))
 	paintHealth(samusLocalMaxHealth, pm.getGraphic(CHARACTER_SAMUS, emptyBox))
 	paintHealth(samusHealth, pm.getGraphic(CHARACTER_SAMUS, fullBox))
@@ -724,16 +724,16 @@ function samus.initCharacter()
 	initDataStorage()
 	
 	-- CLEANUP NOTE: This is not safe if a level makes it's own use of activateHud
-	HUDOverride.visible.keys = false
-	HUDOverride.visible.bombs = false
-	HUDOverride.visible.coins = false
-	HUDOverride.visible.score = false
+	HUDOverride.visible.keys = true
+	HUDOverride.visible.bombs = true
+	HUDOverride.visible.coins = true
+	HUDOverride.visible.score = true
 	HUDOverride.visible.lives = false
-	HUDOverride.visible.stars = false
+	HUDOverride.visible.stars = true
 	HUDOverride.visible.starcoins = false
-	HUDOverride.visible.timer = false
-	HUDOverride.visible.levelname = false
-	HUDOverride.visible.overworldPlayer = false
+	HUDOverride.visible.timer = true
+	HUDOverride.visible.levelname = true
+	HUDOverride.visible.overworldPlayer = true
 	
 	-- CLEANUP NOTE: This is not quite safe in various cases
 	Defines.player_link_shieldEnabled = false
@@ -755,9 +755,9 @@ function samus.cleanupCharacter()
 	HUDOverride.visible.bombs = true
 	HUDOverride.visible.coins = true
 	HUDOverride.visible.score = true
-	HUDOverride.visible.lives = true
+	HUDOverride.visible.lives = false
 	HUDOverride.visible.stars = true
-	HUDOverride.visible.starcoins = true
+	HUDOverride.visible.starcoins = false
 	HUDOverride.visible.timer = true
 	HUDOverride.visible.levelname = true
 	HUDOverride.visible.overworldPlayer = true

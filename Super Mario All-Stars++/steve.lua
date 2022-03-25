@@ -2275,7 +2275,7 @@ steve.hudSettings = {
 
 
     -- How much certain HUD elements are moved when using the character.
-    moveHUDElementsDistance = 124,
+    moveHUDElementsDistance = 0,
 
 
     -- The font used in the HUD.
