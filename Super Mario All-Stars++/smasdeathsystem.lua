@@ -48,7 +48,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			GameData.cutsceneMusicControl = true
 			Audio.MusicVolume(0)
 			Misc.pause()
-			Routine.waitFrames(1, true)
+			--Routine.waitFrames(1, true)
 			Misc.unpause()
 			SaveData.newlives = SaveData.newlives - 1 --This subtracts when beginning to die. Hooray real time death tallies!
 			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
@@ -77,7 +77,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			GameData.cutsceneMusicControl = true
 			Audio.MusicVolume(0)
 			Misc.pause()
-			Routine.waitFrames(1, true)
+			--Routine.waitFrames(1, true)
 			Misc.unpause()
 			SaveData.newlives = SaveData.newlives - 1 --This subtracts when beginning to die. Hooray real time death tallies!
 			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
@@ -114,60 +114,12 @@ function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil)
 	end
 end
 
-local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
-    local oldKilled     = npc:mem(0x122,FIELD_WORD)
-    local oldProjectile = npc:mem(0x136,FIELD_BOOL)
-    local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
-    local oldImmune     = npc:mem(0x156,FIELD_WORD)
-    local oldID         = npc.id
-    local oldSpeedX     = npc.speedX
-    local oldSpeedY     = npc.speedY
-
-    npc:harm(...)
-
-    return (
-           oldKilled     ~= npc:mem(0x122,FIELD_WORD)
-        or oldProjectile ~= npc:mem(0x136,FIELD_BOOL)
-        or oldHitCount   ~= npc:mem(0x148,FIELD_FLOAT)
-        or oldImmune     ~= npc:mem(0x156,FIELD_WORD)
-        or oldID         ~= npc.id
-        or oldSpeedX     ~= npc.speedX
-        or oldSpeedY     ~= npc.speedY
-    )
-end
-
-function smasdeathsystem.onNPCKill(v)
-	local combo = 2
-
-    for _,npc in NPC.iterate(NPC.HITTABLE) do
-        if npc ~= v and npc.id > 0 then
-            -- Hurt the NPC, and make sure to not give the automatic score
-            --local oldScore = NPC.config[npc.id].score
-            --NPC.config[npc.id].score = 0
-
-            --local hurtNPC = harmNPC(npc,HARM_TYPE_NPC,15)
-            
-            --NPC.config[npc.id].score = oldScore
-			
-            
-			--if HARM_TYPE_NPC then
-				--combo = math.min(10,combo + 1)
-				--Misc.givePoints(combo,{x = npc.x+npc.width*0.5,y = npc.y+npc.height*0.5},true)
-				
-				--if combo >= 10 then
-					--SFX.play(extrasounds.id15)
-				--end
-            --end
-        end
-    end
-end
-
-function smasdeathsystem.onPostNPCKill(npc, harmtype, playerornil, obj, playerObj, npcObj) --This'll gain 1UPs when touching 1UPs, 3UPs, or etc.
+function smasdeathsystem.onPostNPCKill(npc, harmtype, playerornil, obj) --This'll gain 1UPs when touching 1UPs, 3UPs, or etc.
 	local oneups = table.map{90,186,187} --A table map containing all the NPC ids, same as below
 	local threeups = table.map{188}
 	local coins = table.map{10,33,88,103,138,258,528} --This'll add a coin system
 	for key,npc in ipairs(NPC.get()) do
-		if NPC.config[npc.id].score == 11 then --Score values
+		if NPC.config[npc.id].score == 11 then --Score values, doesn't work just yet
 			SaveData.newlives = SaveData.newlives + 1
 		end
 		if NPC.config[npc.id].score == 12 then
@@ -181,18 +133,6 @@ function smasdeathsystem.onPostNPCKill(npc, harmtype, playerornil, obj, playerOb
 		end
 	end
 	for _,p in ipairs(Player.get()) do
-		if NPC.config[npc.id].score == 11 then --Score values
-			SaveData.newlives = SaveData.newlives + 1
-		end
-		if NPC.config[npc.id].score == 12 then
-			SaveData.newlives = SaveData.newlives + 2
-		end
-		if NPC.config[npc.id].score == 13 then
-			SaveData.newlives = SaveData.newlives + 3
-		end
-		if NPC.config[npc.id].score == 14 then
-			SaveData.newlives = SaveData.newlives + 5
-		end
 		if oneups[npc.id] and HARM_TYPE_VANISH and Colliders.collide(p, npc) then --This'll gain the player a 1UP
 			SaveData.newlives = SaveData.newlives + 1
 		end
@@ -224,10 +164,10 @@ function smasdeathsystem.onTick()
 end
 
 function smasdeathsystem.onTickEnd()
-	if SaveData.coins <= 99 then
+	if SaveData.coins <= 99 then --If less than 99, keep it as is
 		SaveData.coins = SaveData.coins
 	end
-	if SaveData.coins >= 100 then
+	if SaveData.coins >= 100 then --But if more than 100, set to 0 and give a player a life
 		SaveData.coins = 0
 		SaveData.newlives = SaveData.newlives + 1
 		SFX.play(extrasounds.id15,1,1,40)
