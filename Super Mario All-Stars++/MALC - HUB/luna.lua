@@ -144,7 +144,7 @@ end
 
 function onTick()
 	if player.section == 9 then
-		Text.printWP("Welcome to the information booth.", 10, 577, 4.9)
+		--Text.printWP("Welcome to the information booth.", 10, 577, 4.9)
 	end
 end
 
@@ -165,7 +165,7 @@ function onEvent(eventName)
 		littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE GOT "..SaveData.GameOverCount.." GAME OVERS IN YOUR GAME PROGRESSION.<page>YOU ALSO HAVE RECENTLY WENT IN (number) LEVELS.<page>THE SCORE COUNT IS "..Misc.score().." AND THE COIN COUNT IS "..Misc.coins()..".<page>YOU HAVE ALSO STOMPED ON "..SaveData.goombaStomps.." GOOMBAS, AND "..SaveData.koopaStomps.." KOOPA TROOPAS.<page>THE TOTAL AMOUNT OF COINS COLLECTED OVERALL IS "..SaveData.totalcoins..".<page>OVERALL, YOU HAVE USED "..SaveData.totalmushrooms.." MUSHROOMS, "..SaveData.totalfireflowers.." FIRE FLOWERS, "..SaveData.totalleafs.." SUPER LEAFS, "..SaveData.totaltanookis.." TANOOKI SUITS, "..SaveData.totalhammersuits.." HAMMER SUITS, AND "..SaveData.totaliceflowers.." ICE FLOWERS.<page>YOU ALSO GRABBED "..SaveData.starsgrabbed.." TOTAL STARS REGARDLESS OF COMPLETION OR NOT, USED "..SaveData.starmansused.." STARMANS, "..SaveData.megamushroomssused.." MEGA MUSHROOMS,<page>AND I HOPE YOU'VE HAD A FUN TIME.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
 	end
 	if eventName == "OtherList" then
-		littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE GOT TO WAIT UNTIL THIS LIST WORKS.<page>THIS PART OF THE INFORMATION BOOTH WILL TELL YOU OTHER THINGS NOT RELATED TO ANYTHING.<page>COME BACK WHEN THE FULL EPISODE IS RELEASED. THANK YOU FOR YOUR TIME."})
+		littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE DIED "..SaveData.deathCount.." TIMES.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
 	end
 	if eventName == "Stage5" then
 		Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"

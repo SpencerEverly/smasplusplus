@@ -200,7 +200,24 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 	end
 end
 
-function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil) --Let's start off with block hitting.
+function extrasounds.onTickEnd()
+	for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+		if scoreboard.animationFrame == 9 then --1UP
+			SFX.play(extrasounds.id15, 1, 1, 70)
+		end
+		if scoreboard.animationFrame == 10 then --2UP
+			SFX.play(extrasounds.id96, 1, 1, 70)
+		end
+		if scoreboard.animationFrame == 11 then --3UP
+			SFX.play(extrasounds.id97, 1, 1, 70)
+		end
+		if scoreboard.animationFrame == 12 then --5UP
+			SFX.play(extrasounds.id98, 1, 1, 70)
+		end
+	end
+end
+
+function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
 	local bricks = table.map{4,60,188,226} --These are a list of breakable bricks.
 	if not Misc.isPaused() then --Making sure the sound only plays when not paused...
 		if extrasounds.active == true then --If it's true, play them
@@ -219,23 +236,25 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerOrNil) --L
 				SFX.play(extrasounds.id0)
 			elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
 				SFX.play(extrasounds.id7)
-			elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
+			elseif block.contentID <= 99 and (player.character == CHARACTER_LINK) == false then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
 				SFX.play(extrasounds.id14)
 			end
-			if player.powerup >= 2 then --Smash bricks only when you are big and up
-				if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
-					if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
-						SFX.play(extrasounds.id0)
-					elseif bricks[block.id] then --Or else play it
-						SFX.play(extrasounds.id4)
+			if (player.character == CHARACTER_LINK) == false and (player.character == CHARACTER_MEGAMAN) == false and (player.character == CHARACTER_SNAKE) == false and (player.character == CHARACTER_SAMUS) == false then --Making sure these sounds don't play when using these characters...
+				if player.powerup >= 2 then --Smash bricks only when you are big and up
+					if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
+						if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+							SFX.play(extrasounds.id0)
+						elseif bricks[block.id] then --Or else play it
+							SFX.play(extrasounds.id4)
+						end
 					end
-				end
-			elseif player.powerup == 1 then
-				if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
-					if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
-						SFX.play(extrasounds.id0)
-					elseif bricks[block.id] then --Also don't when you are small
-						SFX.play(extrasounds.id0)
+				elseif player.powerup == 1 then
+					if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
+						if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+							SFX.play(extrasounds.id0)
+						elseif bricks[block.id] then --Also don't when you are small
+							SFX.play(extrasounds.id0)
+						end
 					end
 				end
 			end
@@ -247,7 +266,7 @@ function extrasounds.onPostExplosion(effect)
 	if effect.id == 69 then
 		SFX.play(extrasounds.id104)
 	end
-	if effect.id == 76 then
+	if effect.id == 71 then
 		SFX.play(extrasounds.id43)
 	end
 end
@@ -255,26 +274,28 @@ end
 function extrasounds.onInputUpdate() --Button pressing for such commands
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
-			if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than 0 before playing
-				if player.powerup == 3 then --Fireball sound
-					SFX.play(extrasounds.id18)
+			if (player.character == CHARACTER_LINK) == false and (player.character == CHARACTER_MEGAMAN) == false and (player.character == CHARACTER_SNAKE) == false and (player.character == CHARACTER_SAMUS) == false then --Making sure these sounds don't play when using these characters...
+				if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than or equal to 0 before playing
+					if player.powerup == 3 then --Fireball sound
+						SFX.play(extrasounds.id18)
+					end
+					if player.powerup == 6 then --Hammer Throw sound
+						SFX.play(extrasounds.id105)
+					end
+					if player.powerup == 7 then --Iceball sound
+						SFX.play(extrasounds.id93)
+					end
 				end
-				if player.powerup == 6 then --Fireball sound
-					SFX.play(extrasounds.id105)
-				end
-				if player.powerup == 7 then --Iceball sound
-					SFX.play(extrasounds.id93)
-				end
-			end
-			if player.rawKeys.altRun == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than 0 before playing
-				if player.powerup == 3 then --Fireball sound
-					SFX.play(extrasounds.id18)
-				end
-				if player.powerup == 6 then --Fireball sound
-					SFX.play(extrasounds.id105)
-				end
-				if player.powerup == 7 then --Iceball sound
-					SFX.play(extrasounds.id93)
+				if player.rawKeys.altRun == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than or equal to 0 before playing
+					if player.powerup == 3 then --Fireball sound
+						SFX.play(extrasounds.id18)
+					end
+					if player.powerup == 6 then --Hammer Throw sound
+						SFX.play(extrasounds.id105)
+					end
+					if player.powerup == 7 then --Iceball sound
+						SFX.play(extrasounds.id93)
+					end
 				end
 			end
 		end
@@ -296,12 +317,6 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 				if npc.id == 558 and Colliders.collide(p, npc) then --Cherry sound effect
 					SFX.play(extrasounds.id103)
 				end
-				if oneups[npc.id] and Colliders.collide(p, npc) then --1UP sound effect, so 3UPs can have a custom sound
-					SFX.play(extrasounds.id15)
-				end
-				if npc.id == 188 and Colliders.collide(p, npc) then --3UP sound effect
-					SFX.play(extrasounds.id97)
-				end
 				if npc.id == 274 and Colliders.collide(p, npc) then --Dragon coin counter sounds
 					if NPC.config[npc.id].score == 7 then
 						SFX.play(extrasounds.id59)
@@ -313,7 +328,6 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 						SFX.play(extrasounds.id101)
 					elseif NPC.config[npc.id].score == 11 then
 						SFX.play(extrasounds.id102)
-						SFX.play(extrasounds.id15)
 					end
 				end
 			end

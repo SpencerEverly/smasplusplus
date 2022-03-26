@@ -211,9 +211,9 @@ local function cloneAreaToSubspace()
 
     local origAreaBounds = subspace.originalAreaBounds
 
-    local x1 = origAreaBounds.left   - 64
+    local x1 = origAreaBounds.left   - 256
     local y1 = origAreaBounds.top    - 64
-    local x2 = origAreaBounds.right  + 64
+    local x2 = origAreaBounds.right  + 256
     local y2 = origAreaBounds.bottom + 64
 
     for _,origBlock in Block.iterateIntersecting(x1,y1,x2,y2) do

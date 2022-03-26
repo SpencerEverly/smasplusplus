@@ -1262,7 +1262,7 @@ ID:19;X:-195328;Y:-200096;D:-1;NM:1;
 ID:19;X:-195232;Y:-200096;D:-1;NM:1;
 ID:151;X:-195552;Y:-200112;D:-1;MG:"Enemies like these can be picked up and thrown.<page>This only can happen with rare types of enemies outside of Super Mario Bros. 2 though!<page>Try picking them up and throwing them by using down and run.";FD:1;
 ID:86;X:-194863;Y:-200144;D:-1;FD:1;NM:1;
-ID:151;X:-195008;Y:-200112;D:-1;MG:"That's Bowser\, a villan who kidnaps Princesses for fun.<page>You'll get to verse him later in the game though. Be weary of his actions though!";FD:1;
+ID:151;X:-195008;Y:-200112;D:-1;MG:"That's Bowser\, a villian who kidnaps Princesses for fun.<page>You'll get to verse him later in the game. Be weary of his actions though!";FD:1;
 NPC_END
 PHYSICS
 ET:0;X:-179904;Y:-180256;W:32;H:208;

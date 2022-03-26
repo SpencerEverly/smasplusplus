@@ -211,7 +211,7 @@ function globalgenerals.onInputUpdate()
 	end
 	if SaveData.disableX2char == true then
 		if Player.count() == 2 then
-			if player.keys.altRun == KEYS_PRESSED then
+			if player.keys.altRun == KEYS_PRESSED and player.keys.up == KEYS_PRESSED then
 				if pausemenu.paused == false then
 					player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
@@ -226,7 +226,7 @@ function globalgenerals.onInputUpdate()
 	end
 	if SaveData.disableX2char == true then
 		if Player(2) and Player(2).isValid then
-			if Player(2).keys.altRun == KEYS_PRESSED then
+			if Player(2).keys.altRun == KEYS_PRESSED and Player(2).keys.up == KEYS_PRESSED then
 				if pausemenu.paused == false then
 					Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 					SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
@@ -247,7 +247,6 @@ function globalgenerals.onTick()
 		HUDOverride.visible.itembox = true
 		HUDOverride.visible.bombs = true
 		HUDOverride.visible.coins = true
-		HUDOverride.visible.score = true
 		HUDOverride.visible.stars = true
 		HUDOverride.visible.timer = true
 		HUDOverride.visible.levelname = true
@@ -258,7 +257,6 @@ function globalgenerals.onTick()
 		HUDOverride.visible.itembox = true
 		HUDOverride.visible.bombs = true
 		HUDOverride.visible.coins = true
-		HUDOverride.visible.score = true
 		HUDOverride.visible.stars = true
 		HUDOverride.visible.timer = true
 		HUDOverride.visible.levelname = true
@@ -269,6 +267,7 @@ function globalgenerals.onTick()
 	end
 	if SaveData.disableX2char == false then
 		HUDOverride.visible.lives = false
+		HUDOverride.visible.score = false
 	end
 	if SaveData.disableX2char == true then
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)

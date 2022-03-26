@@ -13,6 +13,7 @@ package.path = package.path .. ";./scripts/?.lua"
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = mem(0x00B2C61C, FIELD_STRING)
 local rng = require("base/rng")
+Misc.setLoadScreenTimeout(8)
 
 local image = Graphics.loadImage("loadscreen.png")
 local blackscreen = Graphics.loadImage("black-screen.png")
@@ -25,7 +26,7 @@ local frame2 = 0
 local timer = 0
 local speed = 0
 
-local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png", "didyouknow12.png", "didyouknow13.png", "didyouknow14.png", "didyouknow15.png", "didyouknow16.png", "didyouknow17.png", "didyouknow18.png", "didyouknow19.png", "didyouknow20.png"}
+local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png", "didyouknow12.png", "didyouknow13.png", "didyouknow14.png", "didyouknow15.png", "didyouknow16.png", "didyouknow17.png", "didyouknow18.png", "didyouknow19.png", "didyouknow20.png", "didyouknow21.png"}
 local selecter = rng.randomInt(1,#didyouknow)
 local knowledge = Graphics.loadImage(episodePath.."graphics/didyouknow/"..didyouknow[selecter]);
 
