@@ -387,7 +387,7 @@ function onDraw()
 				p.direction = DIR_LEFT
 
 				player:render{
-					x = 525,y = 88,
+					x = 525,y = 108,
 					ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
 					frame = frame,
 				}
@@ -399,7 +399,7 @@ function onDraw()
 				if Player.count() == 2 then
 					p2 = player2 or Player(2)
 					p2:render{
-						x = 460,y = 88,
+						x = 460,y = 108,
 						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
 						frame = frame,
 					}
@@ -421,7 +421,29 @@ function onDraw()
 				if Player.count() == 2 then
 					p2 = player2 or Player(2)
 					p2:render{
-						x = 460,y = 88,
+						x = 170,y = 258,
+						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+						frame = frame,
+					}
+				end
+			end
+			if SaveData.resolution == "nes" then
+				p.direction = DIR_LEFT
+
+				player:render{
+					x = 505,y = 115,
+					ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+					frame = frame,
+				}
+
+
+				if idx < Player.count() then
+					xPosition = 485 + 65
+				end
+				if Player.count() == 2 then
+					p2 = player2 or Player(2)
+					p2:render{
+						x = 440,y = 115,
 						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
 						frame = frame,
 					}
@@ -567,7 +589,9 @@ function onDraw()
 	end
 	if SaveData.resolution == "nes" then
 		Graphics.drawImageWP(hudbordernes, 0, 0, 1)
-		Graphics.drawImageWP(nesborder, 0, 0, 6)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(nesborder, 0, 0, 6)
+		end
 		
 		if SaveData.disableX2char == true then
 			Graphics.drawImageWP(oneupicon, 155, 500, 2)
@@ -618,7 +642,9 @@ function onDraw()
 	
 	if SaveData.resolution == "gameboy" then
 		Graphics.drawImageWP(hudbordergb, 0, 0, 1)
-		Graphics.drawImageWP(gbborder, 0, 0, 6)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbborder, 0, 0, 6)
+		end
 		
 		if SaveData.disableX2char == true then
 			Graphics.drawImageWP(oneupicon, 250, 400, 0, 0, 16, 8, 2)
@@ -670,7 +696,9 @@ function onDraw()
 	
 	if SaveData.resolution == "gba" then
 		Graphics.drawImageWP(hudbordergba, 0, 0, 1)
-		Graphics.drawImageWP(gbaborder, 0, 0, 6)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbaborder, 0, 0, 6)
+		end
 		
 		if SaveData.disableX2char == true then
 			Graphics.drawImageWP(oneupicon, 165, 440, 2)
@@ -723,7 +751,9 @@ function onDraw()
 	end
 	if SaveData.resolution == "iphone1st" then
 		Graphics.drawImageWP(hudborderiphoneone, 0, 0, 1)
-		Graphics.drawImageWP(iphoneoneborder, 0, 0, 6)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(iphoneoneborder, 0, 0, 6)
+		end
 		
 		if SaveData.disableX2char == true then
 			Graphics.drawImageWP(oneupicon, 70, 440, 2)
@@ -767,7 +797,9 @@ function onDraw()
 	
 	if SaveData.resolution == "3ds" then
 		Graphics.drawImageWP(hudbordergba, 0, 0, 1)
-		Graphics.drawImageWP(gbaborder, 0, 0, 6)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbaborder, 0, 0, 6)
+		end
 		
 		if SaveData.disableX2char == true then
 			Graphics.drawImageWP(oneupicon, 165, 440, 2)

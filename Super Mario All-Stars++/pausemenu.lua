@@ -108,7 +108,7 @@ function pausemenu.onStart()
 end
 
 local function switchtochar()
-	SFX.play("_OST/_Sound Effects/quitmenu.ogg")
+	SFX.play("_OST/_Sound Effects/charcost_open.ogg")
 	pause_index_char = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_char = 1 end)
 	cooldown = 1
@@ -117,7 +117,7 @@ local function switchtochar()
 end
 
 local function switchtotele()
-	SFX.play("_OST/_Sound Effects/quitmenu.ogg")
+	SFX.play("_OST/_Sound Effects/hub_easytravel.ogg")
 	pause_index_tele = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_tele = 1 end)
 	cooldown = 1
@@ -135,7 +135,7 @@ local function switchtoothermenu()
 end
 
 local function pausemenureturn()
-	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
+	SFX.play("_OST/_Sound Effects/charcost-close.ogg")
 	pause_index_char = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_other = 1 end)
 	cooldown = 1
@@ -144,7 +144,7 @@ local function pausemenureturn()
 end
 
 local function pausemenureturnhub()
-	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
+	SFX.play("_OST/_Sound Effects/hub_quitmenu.ogg")
 	pause_index_tele = 0
 	cooldown = 1
 	pausemenu.paused = true
@@ -299,8 +299,8 @@ end
 local function returntolastlevel()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.7, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(SaveData.lastLevelPlayed, nil, nil) end)
+	SFX.play("_OST/_Sound Effects/lastlevel_warp.ogg")
+	Routine.run(function() exitscreen = true Routine.wait(1.3, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(SaveData.lastLevelPlayed, nil, nil) end)
 end
 
 local function exitlevel2()
@@ -338,7 +338,8 @@ local function warpzonehub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/level-select.ogg")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 	player:teleport(20496, 19520, bottomCenterAligned)
 end
 
@@ -346,7 +347,8 @@ local function touristhub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/level-select.ogg")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 	player:teleport(-119968, -120128, bottomCenterAligned)
 end
 
@@ -354,7 +356,8 @@ local function starthub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/level-select.ogg")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 	player:teleport(-200608, -200128, bottomCenterAligned)
 end
 
@@ -362,7 +365,8 @@ local function switchhub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/level-select.ogg")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 	player:teleport(40176, 39876, bottomCenterAligned)
 end
 
@@ -370,7 +374,8 @@ local function shophub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/level-select.ogg")
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 	player:teleport(80144, 79868, bottomCenterAligned)
 end
 
