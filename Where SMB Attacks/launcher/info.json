@@ -1,5 +1,6 @@
 {
-	"title" : "Where SMB Attacks (SMAS++ Version)",
+	"mainPage": "index.html",
+	"title" : "Where SMB Attacks (Remake)",
 	"current-version": [0, 0, 1],
 	"allowTwoPlayer": true,
 	"episodeIcon": "icon.png"

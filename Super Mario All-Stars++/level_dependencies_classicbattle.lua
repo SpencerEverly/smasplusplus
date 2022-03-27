@@ -187,6 +187,20 @@ function dependencies.onInitAPI()
 end
 
 function dependencies.onInputUpdate()
+	if player.deathTimer == 1 then
+		GameData.p1lives = GameData.p1lives - 1
+		Routine.run(classicbattlerevivep1)
+	end
+	if player2.deathTimer == 1 then
+		GameData.p2lives = GameData.p2lives - 1
+		Routine.run(classicbattlerevivep2)
+	end
+	if player.deathTimer == 1 and GameData.p1lives <= 0 then
+		Routine.run(classicbattlep2wins)
+	end
+	if player2.deathTimer == 1 and GameData.p2lives <= 0 then
+		Routine.run(classicbattlep1wins)
+	end
 	if diedp1 then
 		player.upKeyPressing = false
 		player.downKeyPressing = false
@@ -555,21 +569,8 @@ end
 function dependencies.onTick()
 	if(not killed and player:mem(0x13E,FIELD_BOOL)) then
 		killed = true
+		if 
 		mem(0x00B2C5AC,FIELD_FLOAT, 1)
-	end
-	if player.deathTimer == 1 then
-		GameData.p1lives = GameData.p1lives - 1
-		Routine.run(classicbattlerevivep1)
-	end
-	if player2.deathTimer == 1 then
-		GameData.p2lives = GameData.p2lives - 1
-		Routine.run(classicbattlerevivep2)
-	end
-	if player.deathTimer == 1 and GameData.p1lives <= 0 then
-		Routine.run(classicbattlep2wins)
-	end
-	if player2.deathTimer == 1 and GameData.p2lives <= 0 then
-		Routine.run(classicbattlep1wins)
 	end
 	HUDOverride.visible.keys = false
 	HUDOverride.visible.itembox = true
