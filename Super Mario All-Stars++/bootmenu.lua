@@ -29,6 +29,8 @@ bootmenu.active = true
 datetime.bottomright = true
 datetime.topright = false
 
+GameData.bootmenuactive = true
+
 local aprilfools = false
 local aprilfoolserror = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
 
@@ -1270,11 +1272,11 @@ function bootmenu.onPause(evt)
 end
 
 function bootmenu.onInputUpdate()
-	player.runKeyPressing = false
-	player.altJumpKeyPressing = false
-	player.altRunKeyPressing = false
-	player.dropItemKeyPressing = false
 	if bootmenu.active == true then
+		player.runKeyPressing = false
+		player.altJumpKeyPressing = false
+		player.altRunKeyPressing = false
+		player.dropItemKeyPressing = false
 		if player.rawKeys.pause == KEYS_PRESSED then
 			Routine.run(ExitGame1)
 			SFX.play("littleDialogue/smbx13/choose.wav")
@@ -1338,16 +1340,108 @@ function bootmenu.onInputUpdate()
 	end
 end
 
+local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
+    local oldKilled     = npc:mem(0x122,FIELD_WORD)
+    local oldProjectile = npc:mem(0x136,FIELD_BOOL)
+    local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
+    local oldImmune     = npc:mem(0x156,FIELD_WORD)
+    local oldID         = npc.id
+    local oldSpeedX     = npc.speedX
+    local oldSpeedY     = npc.speedY
+
+    npc:harm(...)
+
+    return (
+           oldKilled     ~= npc:mem(0x122,FIELD_WORD)
+        or oldProjectile ~= npc:mem(0x136,FIELD_BOOL)
+        or oldHitCount   ~= npc:mem(0x148,FIELD_FLOAT)
+        or oldImmune     ~= npc:mem(0x156,FIELD_WORD)
+        or oldID         ~= npc.id
+        or oldSpeedX     ~= npc.speedX
+        or oldSpeedY     ~= npc.speedY
+    )
+end
+
 function bootmenu.onDraw()
 	if bootmenu.active == true then
 		local smaslogo = Graphics.loadImageResolved("smaslogo.png")
 		local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
 		local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 		local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
+		local orangecurtains = Graphics.loadImageResolved("theming_smbxcurtainsorange.png")
 		local smaslogowide = Graphics.loadImageResolved("smaslogo-wide.png")
 		local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
 		
 		local stpatricksday = false
+		local hitNPCs = Colliders.getColliding{a = cursor.scenepos, b = hitNPCs, btype = Colliders.NPC}
+		
+		if Level.filename() == "intro_8bit.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_bossedit8.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_S!TS!.lvlx" then
+			--No curtains
+		end
+		if Level.filename() == "intro_SMAS.lvlx" then
+			--No curtains
+		end
+		if Level.filename() == "intro_SMBX1.0.lvlx" then
+			Graphics.drawImageWP(redcurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_SMBX1.1.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_SMBX1.2.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_SMBX1.3.lvlx" then
+			Graphics.drawImageWP(orangecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_SMBX1.3og.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_SMBX2.lvlx" then
+			--No curtains
+		end
+		if Level.filename() == "intro_SMBX2b3.lvlx" then
+			Graphics.drawImageWP(orangecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_WSMBA.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_sunsetbeach.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_scrollingheights.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_jakebrito1.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		
+		if bootmenu.active == true then
+			if cursor.left == KEYS_DOWN then
+				Effect.spawn(80, cursor.sceneX, cursor.sceneY).variant = 2
+				for _,npc in ipairs(hitNPCs) do
+					if npc ~= v and npc.id > 0 then
+						-- Hurt the NPC, and make sure to not give the automatic score
+						local oldScore = NPC.config[npc.id].score
+						NPC.config[npc.id].score = 0
+						NPC.config[npc.id].score = oldScore
+						
+						local hurtNPC = harmNPC(npc,HARM_TYPE_NPC)
+						if hurtNPC then
+							Misc.givePoints(0,{x = npc.x+npc.width*0.5,y = npc.y+npc.height*0.5},true)
+						end
+					end
+				end
+			end
+			if cursor.left == KEYS_UP then
+				
+			end
+		end
 		
 		if versionactive then
 			Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
@@ -1415,6 +1509,7 @@ function bootmenu.onDraw()
 end
 
 function bootmenu.onExit()
+	GameData.bootmenuactive = false
 	if bootmenu.active == true then
 		Audio.MusicVolume(nil)
 		autoscroll.unlockSection(0, 1)

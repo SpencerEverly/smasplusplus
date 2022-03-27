@@ -30,21 +30,6 @@ function onStart()
 	Misc.saveGame()
 end
 
-function onEvent()
-	if eventName == "BootDialogueMusicReset" then
-		Audio.SeizeStream(0)
-		songToPlay = songList[rng.randomInt(1, #songList)]
-		Audio.MusicOpen(songToPlay)
-		Audio.MusicPlay()
-	end
-	if eventName == "ExitDialogueMusicReset" then
-		Audio.SeizeStream(0)
-		songToPlay = songList[rng.randomInt(1, #songList)]
-		Audio.MusicOpen(songToPlay)
-		Audio.MusicPlay()
-	end
-end
-
 function onPause(evt)
     evt.cancelled = true;
     isPauseMenuOpen = not isPauseMenuOpen

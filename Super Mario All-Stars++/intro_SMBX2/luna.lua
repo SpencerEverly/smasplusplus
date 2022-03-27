@@ -11,23 +11,12 @@ function onStart()
 	Misc.saveGame()
 end
 
-function onEvent()
-	if eventName == "BootDialogueMusicReset" then
-		Audio.MusicChange(0, m)
-	end
-	if eventName == "ExitDialogueMusicReset" then
-		Audio.MusicChange(0, m)
-	end
-end
-
 function onPause(evt)
     evt.cancelled = true;
     isPauseMenuOpen = not isPauseMenuOpen
 end
 
 function onDraw()
-	local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
-	Graphics.drawImage(bluecurtains, 0, 0, 2)
 	if not init then
 		Section(0).backgroundID = RNG.randomInt(1,65)
 

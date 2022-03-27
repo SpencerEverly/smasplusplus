@@ -1,8 +1,5 @@
 local bootmenu = require("bootmenu")
-
-function onStart()
-	Misc.saveGame()
-end
+local littleDialogue = require("littleDialogue")
 
 function onPause(evt)
     evt.cancelled = true;

@@ -8,6 +8,7 @@ crispShader:compileFromFile("scripts/shaders/crisp.vert", "scripts/shaders/crisp
 function smallScreen.onInitAPI()
     registerEvent(smallScreen,"onCameraUpdate")
     registerEvent(smallScreen,"onCameraDraw")
+	registerEvent(smallScreen,"onDraw")
 end
 
 local buffer = Graphics.CaptureBuffer(800,600)

@@ -17,6 +17,8 @@ function undertaledepends.onInitAPI()
 	registerEvent(undertaledepends,"onPostNPCHarm")
 	registerEvent(undertaledepends,"onPlayerHarm")
 	
+	if GameData.bootmenuactive == true then return end
+	
 	eventsRegistered = true
 end
 

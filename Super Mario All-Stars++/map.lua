@@ -58,8 +58,6 @@ local middle = 0
 local transitionTimer = 0
 local nochangecharmap = false
 
-local buffer = Graphics.CaptureBuffer(800,600)
-
 function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
@@ -84,18 +82,6 @@ function levelload()
 	nochangecharmap = false
 	Routine.waitFrames(78, true)
 	loadlevelanimationin = nil
-end
-
-function onCameraDraw()
-	buffer:captureAt(10)
-    Graphics.drawBox{
-        texture = buffer,priority = 10,
-        linearFiltered = linearFiltered,shader = shader,uniforms = uniforms,
-        
-        x = (buffer.width*0.5)+smallScreen.offsetX,y = (buffer.height*0.5)+smallScreen.offsetY,centred = true,
-        width = width,height = height,sourceWidth = smallScreen.width,sourceHeight = smallScreen.height,
-        sourceX = (buffer.width*0.5)-(smallScreen.width*0.5),sourceY = (buffer.height*0.5)-(smallScreen.height*0.5),
-    }
 end
 
 function onInputUpdate()
@@ -168,6 +154,49 @@ function onTick()
 		jukebox.setTrack(772, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 1.ogg"))
 		jukebox.setTrack(773, jukebox.resolveMusicFile("_OST/Super Mario Bros Spencer/World Music/World 2.ogg"))
 	end
+end
+
+function onPause(evt) --Because there's a new pause menu, the og pause menu has to be disabled
+	evt.cancelled = true;
+    isPauseMenuOpen = not isPauseMenuOpen
+end
+
+walkCycles = {}
+
+walkCycles[CHARACTER_MARIO]           = {[PLAYER_SMALL] = {1,2, framespeed = 8},[PLAYER_BIG] = {1,2,3,2, framespeed = 6}}
+walkCycles[CHARACTER_LUIGI]           = walkCycles[CHARACTER_MARIO]
+walkCycles[CHARACTER_PEACH]           = {[PLAYER_BIG] = {1,2,3,2, framespeed = 6}}
+walkCycles[CHARACTER_TOAD]            = walkCycles[CHARACTER_PEACH]
+walkCycles[CHARACTER_LINK]            = {[PLAYER_BIG] = {4,3,2,1, framespeed = 6}}
+walkCycles[CHARACTER_MEGAMAN]         = {[PLAYER_BIG] = {2,3,2,4, framespeed = 12}}
+walkCycles[CHARACTER_WARIO]           = walkCycles[CHARACTER_MARIO]
+walkCycles[CHARACTER_BOWSER]          = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_KLONOA]          = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_NINJABOMBERMAN]  = walkCycles[CHARACTER_PEACH]
+walkCycles[CHARACTER_ROSALINA]        = walkCycles[CHARACTER_PEACH]
+walkCycles[CHARACTER_SNAKE]           = walkCycles[CHARACTER_LINK]
+walkCycles[CHARACTER_ZELDA]           = walkCycles[CHARACTER_LUIGI]
+walkCycles[CHARACTER_ULTIMATERINKA]   = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_UNCLEBROADSWORD] = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_SAMUS]           = walkCycles[CHARACTER_LINK]
+
+walkCycles["SMW-MARIO"] = {[PLAYER_SMALL] = {1,2, framespeed = 8},[PLAYER_BIG] = {3,2,1, framespeed = 6}}
+walkCycles["SMW-LUIGI"] = walkCycles["SMW-MARIO"]
+
+walkCycles["ACCURATE-SMW-MARIO"] = walkCycles["SMW-MARIO"]
+walkCycles["ACCURATE-SMW-LUIGI"] = walkCycles["SMW-MARIO"]
+walkCycles["ACCURATE-SMW-TOAD"]  = walkCycles["SMW-MARIO"]
+
+local yoshiAnimationFrames = {
+        {bodyFrame = 0,headFrame = 0,headOffsetX = 0 ,headOffsetY = 0,bodyOffsetX = 0,bodyOffsetY = 0,playerOffset = 0},
+        {bodyFrame = 1,headFrame = 0,headOffsetX = -1,headOffsetY = 2,bodyOffsetX = 0,bodyOffsetY = 1,playerOffset = 1},
+        {bodyFrame = 2,headFrame = 0,headOffsetX = -2,headOffsetY = 4,bodyOffsetX = 0,bodyOffsetY = 2,playerOffset = 2},
+        {bodyFrame = 1,headFrame = 0,headOffsetX = -1,headOffsetY = 2,bodyOffsetX = 0,bodyOffsetY = 1,playerOffset = 1},
+	}
+	
+local bootBounceData = {}
+
+function onDraw()
 	if SaveData.resolution == "fullscreen" then
 		if SaveData.disableX2char == true then
 			map3d.CameraSettings.fov = 92.7 - 0.00872665
@@ -280,49 +309,6 @@ function onTick()
 			map3d.CameraSettings.heightAdjust = true
 		end
 	end
-end
-
-function onPause(evt) --Because there's a new pause menu, the og pause menu has to be disabled
-	evt.cancelled = true;
-    isPauseMenuOpen = not isPauseMenuOpen
-end
-
-walkCycles = {}
-
-walkCycles[CHARACTER_MARIO]           = {[PLAYER_SMALL] = {1,2, framespeed = 8},[PLAYER_BIG] = {1,2,3,2, framespeed = 6}}
-walkCycles[CHARACTER_LUIGI]           = walkCycles[CHARACTER_MARIO]
-walkCycles[CHARACTER_PEACH]           = {[PLAYER_BIG] = {1,2,3,2, framespeed = 6}}
-walkCycles[CHARACTER_TOAD]            = walkCycles[CHARACTER_PEACH]
-walkCycles[CHARACTER_LINK]            = {[PLAYER_BIG] = {4,3,2,1, framespeed = 6}}
-walkCycles[CHARACTER_MEGAMAN]         = {[PLAYER_BIG] = {2,3,2,4, framespeed = 12}}
-walkCycles[CHARACTER_WARIO]           = walkCycles[CHARACTER_MARIO]
-walkCycles[CHARACTER_BOWSER]          = walkCycles[CHARACTER_TOAD]
-walkCycles[CHARACTER_KLONOA]          = walkCycles[CHARACTER_TOAD]
-walkCycles[CHARACTER_NINJABOMBERMAN]  = walkCycles[CHARACTER_PEACH]
-walkCycles[CHARACTER_ROSALINA]        = walkCycles[CHARACTER_PEACH]
-walkCycles[CHARACTER_SNAKE]           = walkCycles[CHARACTER_LINK]
-walkCycles[CHARACTER_ZELDA]           = walkCycles[CHARACTER_LUIGI]
-walkCycles[CHARACTER_ULTIMATERINKA]   = walkCycles[CHARACTER_TOAD]
-walkCycles[CHARACTER_UNCLEBROADSWORD] = walkCycles[CHARACTER_TOAD]
-walkCycles[CHARACTER_SAMUS]           = walkCycles[CHARACTER_LINK]
-
-walkCycles["SMW-MARIO"] = {[PLAYER_SMALL] = {1,2, framespeed = 8},[PLAYER_BIG] = {3,2,1, framespeed = 6}}
-walkCycles["SMW-LUIGI"] = walkCycles["SMW-MARIO"]
-
-walkCycles["ACCURATE-SMW-MARIO"] = walkCycles["SMW-MARIO"]
-walkCycles["ACCURATE-SMW-LUIGI"] = walkCycles["SMW-MARIO"]
-walkCycles["ACCURATE-SMW-TOAD"]  = walkCycles["SMW-MARIO"]
-
-local yoshiAnimationFrames = {
-        {bodyFrame = 0,headFrame = 0,headOffsetX = 0 ,headOffsetY = 0,bodyOffsetX = 0,bodyOffsetY = 0,playerOffset = 0},
-        {bodyFrame = 1,headFrame = 0,headOffsetX = -1,headOffsetY = 2,bodyOffsetX = 0,bodyOffsetY = 1,playerOffset = 1},
-        {bodyFrame = 2,headFrame = 0,headOffsetX = -2,headOffsetY = 4,bodyOffsetX = 0,bodyOffsetY = 2,playerOffset = 2},
-        {bodyFrame = 1,headFrame = 0,headOffsetX = -1,headOffsetY = 2,bodyOffsetX = 0,bodyOffsetY = 1,playerOffset = 1},
-	}
-	
-local bootBounceData = {}
-
-function onDraw()
 	for idx,p in ipairs(Player.get()) do
 		local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 
@@ -810,9 +796,9 @@ function onDraw()
 	end
 	
 	if SaveData.resolution == "3ds" then
-		Graphics.drawImageWP(hudbordergba, 0, 0, 1)
+		Graphics.drawImageWP(hudborderthreeds, 0, 0, 1)
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(gbaborder, 0, 0, 6)
+			Graphics.drawImageWP(threedsborder, 0, 0, 6)
 		end
 		
 		if SaveData.disableX2char == true then

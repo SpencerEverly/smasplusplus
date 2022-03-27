@@ -23,6 +23,14 @@ local hudbordergba = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33
 local hudborderiphoneone = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-iphone1st.png")
 local hudborderthreeds = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-3ds.png")
 
+local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
+local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
+local nesborder = Graphics.loadImageResolved("graphics/resolutionborders/nes.png")
+local gbborder = Graphics.loadImageResolved("graphics/resolutionborders/gb.png")
+local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png")
+local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
+local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
+
 local times = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-1.png")
 local coinicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-2.png")
 local oneupicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-3.png")

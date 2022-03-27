@@ -118,20 +118,20 @@ end
 
 local function exitlevelsave()
 	Audio.MusicVolume(0)
-	SFX.play("world_warp.ogg")
+	SFX.play(59)
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.saveGame() Misc.unpause() Audio.MusicVolume(65) Level.exit() end)
 end
 
 local function exitlevel()
 	Audio.MusicVolume(0)
-	SFX.play("world_warp.ogg")
+	SFX.play(59)
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.unpause() Audio.MusicVolume(65) Level.exit() end)
 end
 
 local function restartlevel()
 	Audio.MusicVolume(0)
-	SFX.play("skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(Level.filename()) end)
+	SFX.play(59)
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(Level.filename()) end)
 end
 
 local function changeresolution()
@@ -147,15 +147,30 @@ local function changeresolution()
 	elseif SaveData.resolution == "gameboy" then
 		SaveData.resolution = "gba"
 	elseif SaveData.resolution == "gba" then
+		SaveData.resolution = "iphone1st"
+	elseif SaveData.resolution == "iphone1st" then
+		SaveData.resolution = "3ds"
+	elseif SaveData.resolution == "3ds" then
 		SaveData.resolution = "fullscreen"
 	end
 end
 
+local function changeresolutionborder()
+	if SaveData.borderEnabled == true then
+		SFX.play("resolutionborder-disable.ogg")
+		SaveData.borderEnabled = false
+	elseif SaveData.borderEnabled == false then
+		SFX.play("resolutionborder-enable.ogg")
+		SaveData.borderEnabled = true
+	end
+end
+
 local function changeletterbox()
-	SFX.play("resolution-set.ogg")
 	if SaveData.letterbox == true then
+		SFX.play("letterbox-disable.ogg")
 		SaveData.letterbox = false
 	elseif SaveData.letterbox == false then
+		SFX.play("letterbox-enable.ogg")
 		SaveData.letterbox = true
 	end
 end
@@ -304,7 +319,8 @@ local function drawPauseMenu(y, alpha)
 			end
 		end
 		table.insert(pause_options, {name="Change Resolution", action = changeresolution});
-		--table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
+		table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
+		table.insert(pause_options, {name="Toggle Resolution Border", action = changeresolutionborder});
 		if isOverworld then
 			table.insert(pause_options, {name="Teleport back to the Start", action = startteleport});
 		end
@@ -360,17 +376,45 @@ local function drawPauseMenu(y, alpha)
 	if SaveData.resolution == "gba" then
 		resolutionshow = "<color red>Resolution: Gameboy Advance</color>"
 	end
+	if SaveData.resolution == "iphone1st" then
+		resolutionshow = "<color red>Resolution: iPhone (1st Generation)</color>"
+	end
+	if SaveData.resolution == "3ds" then
+		resolutionshow = "<color red>Resolution: Nintendo 3DS (Top Screen)</color>"
+	end
+	
+	if SaveData.letterbox == true then
+		letterboxscale = "<color red>Scaling enabled: No</color>"
+	end
+	if SaveData.letterbox == false then
+		letterboxscale = "<color red>Scaling enabled: Yes</color>"
+	end
+	
+	if SaveData.borderEnabled == true then
+		resolutiontheme = "<color red>Border enabled: Yes</color>"
+	end
+	if SaveData.borderEnabled == false then
+		resolutiontheme = "<color red>Border enabled: No</color>"
+	end
+
 	--local font = textblox.FONT_SPRITEDEFAULT3X2;
-	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1, yscale=1, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+
+	local layout = textplus.layout(textplus.parse(resolutionshow, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	local layout2 = textplus.layout(textplus.parse(letterboxscale, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
+	local layout3 = textplus.layout(textplus.parse(resolutiontheme, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	if not isOverworld then
-		textplus.render{layout = layout, x = 220 - w*0.5, y = y+4, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout, x = 230 - w*0.5, y = y+4, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout2, x = 230 - w*0.5, y = y+20, color = Color.white..alpha, priority = 0}
+		textplus.render{layout = layout3, x = 230 - w*0.5, y = y+36, color = Color.white..alpha, priority = 0}
 	end
 	if isOverworld then
-		textplus.render{layout = layout, x = 220 - w*0.5, y = y+4, color = Color.white..alpha, priority = 2}
+		textplus.render{layout = layout, x = 230 - w*0.5, y = y+4, color = Color.white..alpha, priority = 2}
+		textplus.render{layout = layout2, x = 230 - w*0.5, y = y+20, color = Color.white..alpha, priority = 2}
+		textplus.render{layout = layout3, x = 230 - w*0.5, y = y+36, color = Color.white..alpha, priority = 2}
 	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 
-	h = h+4+8--font.charHeight;
+	h = h+4+44--font.charHeight;
 	y = y+h;
 
 	

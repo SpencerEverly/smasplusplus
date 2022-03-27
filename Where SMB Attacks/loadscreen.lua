@@ -55,7 +55,7 @@ function onDraw()
     local count = #widths
 	
 	speed = speed - 1
-	Graphics.drawImage(loadicon, 672, 466, 1, frame2 * 64, 128, 64, opacity)
+	Graphics.drawImage(loadicon, 672, 460, 1, frame2 * 64, 128, 64, opacity)
 	frame = math.floor(timer/speed)%7
 	timer = timer + 1	
 	frame2 = math.floor(timer/8)%7

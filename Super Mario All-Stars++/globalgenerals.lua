@@ -1052,8 +1052,8 @@ end
 
 function globalgenerals.onDraw()
 	if SaveData.resolution == "fullscreen" then
-		customCamera.defaultScreenWidth = 0
-		customCamera.defaultScreenHeight = 0
+		customCamera.defaultScreenWidth = 800
+		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0
@@ -1062,6 +1062,19 @@ function globalgenerals.onDraw()
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
 		smallScreen.priority = 4
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 	end
 	if SaveData.resolution == "widescreen" then
 		customCamera.defaultScreenWidth = 800
@@ -1190,7 +1203,7 @@ function globalgenerals.onDraw()
 		if SaveData.letterbox == false then
 			smallScreen.priority = 10
 			smallScreen.scaleX = 1.7
-			smallScreen.scaleY = 1.7
+			smallScreen.scaleY = 1.9
 			smallScreen.offsetX = 0
 			smallScreen.offsetY = 0
 		elseif SaveData.letterbox == true then
@@ -1218,10 +1231,10 @@ function globalgenerals.onDraw()
 		smallScreen.offsetY = 0
 		if SaveData.letterbox == false then
 			smallScreen.priority = 10
-			smallScreen.scaleX = 2
-			smallScreen.scaleY = 1
-			smallScreen.offsetX = 0
-			smallScreen.offsetY = 0
+			smallScreen.scaleX = 3.3
+			smallScreen.scaleY = 1.65
+			smallScreen.offsetX = 5
+			smallScreen.offsetY = -8
 		elseif SaveData.letterbox == true then
 			smallScreen.priority = 4
 			smallScreen.scaleX = 1
@@ -1247,10 +1260,10 @@ function globalgenerals.onDraw()
 		smallScreen.offsetY = 0
 		if SaveData.letterbox == false then
 			smallScreen.priority = 10
-			smallScreen.scaleX = 1.15
-			smallScreen.scaleY = 1.45
-			smallScreen.offsetX = 0
-			smallScreen.offsetY = -98
+			smallScreen.scaleX = 1.50
+			smallScreen.scaleY = 1.72
+			smallScreen.offsetX = 4
+			smallScreen.offsetY = -118
 		elseif SaveData.letterbox == true then
 			smallScreen.priority = 4
 			smallScreen.scaleX = 1

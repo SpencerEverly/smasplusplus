@@ -30,6 +30,15 @@ local customCamera = require("customCamera")
 local extrasounds = require("extrasounds")
 local modernReserveItems = require("modernReserveItems")
 local pausemenu = require("pausemenu")
+local smallScreen = require("smallScreen")
+
+local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
+local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
+local nesborder = Graphics.loadImageResolved("graphics/resolutionborders/nes.png")
+local gbborder = Graphics.loadImageResolved("graphics/resolutionborders/gb.png")
+local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png")
+local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
+local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
 
 littleDialogue.defaultStyleName = "smbx13"
 
@@ -151,9 +160,12 @@ function onTick()
             mem(0x00B2C5AC,FIELD_FLOAT, 1)
         end
 	end
+end
+
+function onDraw()
 	if SaveData.resolution == "fullscreen" then
-		customCamera.defaultScreenWidth = 0
-		customCamera.defaultScreenHeight = 0
+		customCamera.defaultScreenWidth = 800
+		customCamera.defaultScreenHeight = 600
 		customCamera.defaultZoom = 1
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0
@@ -161,6 +173,20 @@ function onTick()
 		customCamera.defaultOffsetY = 0
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
+		smallScreen.priority = 4
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 	end
 	if SaveData.resolution == "widescreen" then
 		customCamera.defaultScreenWidth = 800
@@ -171,15 +197,22 @@ function onTick()
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
 		if SaveData.letterbox == false then
+			smallScreen.priority = 10
 			smallScreen.scaleX = 1
 			smallScreen.scaleY = 1.33
 			smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
 		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
 			smallScreen.scaleX = 1
 			smallScreen.scaleY = 1
 			smallScreen.offsetX = 0
 			smallScreen.offsetY = 0
+		end
+		if SaveData.borderEnabled == true then
+			if SaveData.letterbox == true then
+				Graphics.drawImageWP(wideborder, 0, 0, 5)
+			end
 		end
 	end
 	if SaveData.resolution == "ultrawide" then
@@ -195,15 +228,22 @@ function onTick()
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
 		if SaveData.letterbox == false then
+			smallScreen.priority = 10
 			smallScreen.scaleX = 1
 			smallScreen.scaleY = 1.80
 			smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
+			smallScreen.offsetY = 0
 		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
 			smallScreen.scaleX = 1
 			smallScreen.scaleY = 1
 			smallScreen.offsetX = 0
 			smallScreen.offsetY = 0
+		end
+		if SaveData.borderEnabled == true then
+			if SaveData.letterbox == true then
+				Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
+			end
 		end
 	end
 	if SaveData.resolution == "nes" then
@@ -214,10 +254,24 @@ function onTick()
 		customCamera.defaultScreenOffsetY = 0.20
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1.25
-		smallScreen.scaleY = 1.08
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1.56
+			smallScreen.scaleY = 1.34
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1.25
+			smallScreen.scaleY = 1.08
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(nesborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "gameboy" then
 		customCamera.defaultScreenWidth = 320
@@ -231,6 +285,22 @@ function onTick()
 		smallScreen.scaleY = 1
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 2.5
+			smallScreen.scaleY = 2.65
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "gba" then
 		customCamera.defaultScreenWidth = 480
@@ -240,10 +310,24 @@ function onTick()
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
 		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1
-		smallScreen.scaleY = 1
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1.7
+			smallScreen.scaleY = 1.9
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbaborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "iphone1st" then
 		customCamera.defaultScreenWidth = 400
@@ -257,6 +341,22 @@ function onTick()
 		smallScreen.scaleY = 1
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 3.3
+			smallScreen.scaleY = 1.65
+			smallScreen.offsetX = 5
+			smallScreen.offsetY = -8
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(iphoneoneborder, 0, 0, 5)
+		end
 	end
 	if SaveData.resolution == "3ds" then
 		customCamera.defaultScreenWidth = 700
@@ -270,6 +370,22 @@ function onTick()
 		smallScreen.scaleY = 1
 		smallScreen.offsetX = 0
 		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1.50
+			smallScreen.scaleY = 1.72
+			smallScreen.offsetX = 4
+			smallScreen.offsetY = -118
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(threedsborder, 0, 0, 5)
+		end
 	end
 end
 
