@@ -13,12 +13,20 @@ map3d.Light.enabled = false
 
 local font1 = textplus.loadFont("littleDialogue/font/10.ini")
 local font2 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
-local hudborder = Graphics.loadImageResolved("hardcoded-33-4-tp.png")
-local hudborderwide = Graphics.loadImageResolved("hardcoded-33-4-tp-wide.png")
-local times = Graphics.loadImageResolved("hardcoded-33-1.png")
-local coinicon = Graphics.loadImageResolved("hardcoded-33-2.png")
-local oneupicon = Graphics.loadImageResolved("hardcoded-33-3.png")
-local staricon = Graphics.loadImageResolved("hardcoded-33-5.png")
+
+local hudborder = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp.png")
+local hudborderwide = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-wide.png")
+local hudborderultrawide = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-ultrawide.png")
+local hudbordernes = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-nes.png")
+local hudbordergb = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-gb.png")
+local hudbordergba = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-gba.png")
+local hudborderiphoneone = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-iphone1st.png")
+local hudborderthreeds = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-3ds.png")
+
+local times = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-1.png")
+local coinicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-2.png")
+local oneupicon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-3.png")
+local staricon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-5.png")
 
 local loadlevelanimation = false
 local levelnames = Level.get()
@@ -146,87 +154,59 @@ function onTick()
 end
 
 function onDraw()
-	if SaveData.resolution == "widescreen" then
-		Graphics.drawImageWP(hudborderwide, 0, 0, 3)
-		if SaveData.letterbox == false then
-			smallScreen.scaleY = 1.33
-		elseif SaveData.letterbox == true then
-			smallScreen.scaleY = 1
-		end
-		Graphics.drawImageWP(oneupicon, 70, 500, 5)
-		Graphics.drawImageWP(times, 105, 502, 5)
-		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 160, 500, 5)
-		Graphics.drawImageWP(times, 178, 502, 5)
-		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(staricon, 236, 500, 5)
-		Graphics.drawImageWP(times, 254, 502, 5)
-		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
-		if world.levelTitle then
-			textplus.print{x=150, y=159, text = world.levelTitle, priority=5, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
-		end
-		if world.levelObj then
-			textplus.print{x=150, y=145, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
-			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
-		end
-		if world.levelObj == nil then
-			textplus.print{x=150, y=145, text = "N/A", priority=5, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
-		end
-	end
-	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
-		for idx,p in ipairs(Player.get()) do
-			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
+	for idx,p in ipairs(Player.get()) do
+		local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 
-			if animation ~= nil then
-				local frame
+		if animation ~= nil then
+			local frame
 
-				local x = 500
-				local y = 10 - p.height
+			local x = 500
+			local y = 10 - p.height
 
-				if p.mount == MOUNT_BOOT then -- bouncing along in a boot
-					bootBounceData[idx] = bootBounceData[idx] or {speed = 0,offset = 0}
-					local bounceData = bootBounceData[idx]
-							
-					if not Misc.isPaused() then
-						bounceData.speed = bounceData.speed + Defines.player_grav
-						bounceData.offset = bounceData.offset + bounceData.speed
+			if p.mount == MOUNT_BOOT then -- bouncing along in a boot
+				bootBounceData[idx] = bootBounceData[idx] or {speed = 0,offset = 0}
+				local bounceData = bootBounceData[idx]
+						
+				if not Misc.isPaused() then
+					bounceData.speed = bounceData.speed + Defines.player_grav
+					bounceData.offset = bounceData.offset + bounceData.speed
 
-						if bounceData.offset >= 0 then
-							bounceData.speed = -3.4
-							bounceData.offset = 0
-						end
+					if bounceData.offset >= 0 then
+						bounceData.speed = -3.4
+						bounceData.offset = 0
 					end
-
-					y = y + bounceData.offset
-
-					frame = 1
-				elseif p.mount == MOUNT_CLOWNCAR then -- don't think this is even possible? but eh it's here
-					frame = 1
-				elseif p.mount == MOUNT_YOSHI then -- riding yoshi, yoshi's animation is a complete mess
-					frame = 30
-
-					local yoshiAnimationData = yoshiAnimationFrames[(math.floor(lunatime.tick() / 8) % #yoshiAnimationFrames) + 1]
-
-					local xOffset = 4
-					local yOffset = (72 - p.height)
-
-					p:mem(0x72,FIELD_WORD,yoshiAnimationData.headFrame + 5)
-					p:mem(0x7A,FIELD_WORD,yoshiAnimationData.bodyFrame + 7)
-
-					p:mem(0x6E,FIELD_WORD,20 - xOffset + yoshiAnimationData.headOffsetX)
-					p:mem(0x70,FIELD_WORD,10 - yOffset + yoshiAnimationData.headOffsetY)
-
-					p:mem(0x76,FIELD_WORD,0  - xOffset + yoshiAnimationData.bodyOffsetX)
-					p:mem(0x78,FIELD_WORD,42 - yOffset + yoshiAnimationData.bodyOffsetY)
-
-					p:mem(0x10E,FIELD_WORD,yoshiAnimationData.playerOffset - yOffset)
-				else -- just good ol' walking
-					local walkCycle = animation[p.powerup] or animation[PLAYER_BIG]
-
-					frame = walkCycle[(math.floor(lunatime.tick() / walkCycle.framespeed) % #walkCycle) + 1]
 				end
 
+				y = y + bounceData.offset
+
+				frame = 1
+			elseif p.mount == MOUNT_CLOWNCAR then -- don't think this is even possible? but eh it's here
+				frame = 1
+			elseif p.mount == MOUNT_YOSHI then -- riding yoshi, yoshi's animation is a complete mess
+				frame = 30
+
+				local yoshiAnimationData = yoshiAnimationFrames[(math.floor(lunatime.tick() / 8) % #yoshiAnimationFrames) + 1]
+
+				local xOffset = 4
+				local yOffset = (72 - p.height)
+
+				p:mem(0x72,FIELD_WORD,yoshiAnimationData.headFrame + 5)
+				p:mem(0x7A,FIELD_WORD,yoshiAnimationData.bodyFrame + 7)
+
+				p:mem(0x6E,FIELD_WORD,20 - xOffset + yoshiAnimationData.headOffsetX)
+				p:mem(0x70,FIELD_WORD,10 - yOffset + yoshiAnimationData.headOffsetY)
+
+				p:mem(0x76,FIELD_WORD,0  - xOffset + yoshiAnimationData.bodyOffsetX)
+				p:mem(0x78,FIELD_WORD,42 - yOffset + yoshiAnimationData.bodyOffsetY)
+
+				p:mem(0x10E,FIELD_WORD,yoshiAnimationData.playerOffset - yOffset)
+			else -- just good ol' walking
+				local walkCycle = animation[p.powerup] or animation[PLAYER_BIG]
+
+				frame = walkCycle[(math.floor(lunatime.tick() / walkCycle.framespeed) % #walkCycle) + 1]
+			end
+			
+			if SaveData.resolution == "fullscreen" then
 				p.direction = DIR_LEFT
 
 				player:render{
@@ -248,28 +228,428 @@ function onDraw()
 					}
 				end
 			end
+			if SaveData.resolution == "widescreen" then
+				p.direction = DIR_LEFT
+
+				player:render{
+					x = 525,y = 108,
+					ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+					frame = frame,
+				}
+
+
+				if idx < Player.count() then
+					xPosition = 485 + 65
+				end
+				if Player.count() == 2 then
+					p2 = player2 or Player(2)
+					p2:render{
+						x = 460,y = 108,
+						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+						frame = frame,
+					}
+				end
+			end
+			if SaveData.resolution == "ultrawide" then
+				p.direction = DIR_LEFT
+
+				player:render{
+					x = 615,y = 258,
+					ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+					frame = frame,
+				}
+
+
+				if idx < Player.count() then
+					xPosition = 485 + 65
+				end
+				if Player.count() == 2 then
+					p2 = player2 or Player(2)
+					p2:render{
+						x = 170,y = 258,
+						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+						frame = frame,
+					}
+				end
+			end
+			if SaveData.resolution == "nes" then
+				p.direction = DIR_LEFT
+
+				player:render{
+					x = 505,y = 115,
+					ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+					frame = frame,
+				}
+
+
+				if idx < Player.count() then
+					xPosition = 485 + 65
+				end
+				if Player.count() == 2 then
+					p2 = player2 or Player(2)
+					p2:render{
+						x = 440,y = 115,
+						ignorestate = true,sceneCoords = false,priority = 2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+						frame = frame,
+					}
+				end
+			end
 		end
-		Graphics.drawImageWP(hudborder, 0, 0, 3)
-		Graphics.drawImageWP(oneupicon, 70, 558, 5)
-		Graphics.drawImageWP(times, 105, 560, 5)
-		textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 160, 558, 5)
-		Graphics.drawImageWP(times, 178, 560, 5)
-		textplus.print{x=197, y=558, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(staricon, 236, 558, 5)
-		Graphics.drawImageWP(times, 254, 560, 5)
-		textplus.print{x=272, y=558, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=5, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		textplus.print{x=64, y=70, text = "Selected level/warp:", priority=5, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+	end
+	if SaveData.resolution == "widescreen" then
+		Graphics.drawImageWP(hudborderwide, 0, 0, 1)
+		if SaveData.letterbox == false then
+			smallScreen.scaleY = 1.33
+		elseif SaveData.letterbox == true then
+			smallScreen.scaleY = 1
+		end
+		Graphics.drawImageWP(oneupicon, 70, 500, 2)
+		Graphics.drawImageWP(times, 105, 502, 2)
+		textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 160, 500, 2)
+		Graphics.drawImageWP(times, 178, 502, 2)
+		textplus.print{x=197, y=500, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 500, 2)
+		Graphics.drawImageWP(times, 254, 502, 2)
+		textplus.print{x=272, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=150, y=124, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
 		if world.levelTitle then
-			textplus.print{x=64, y=111, text = world.levelTitle, priority=5, color=Color.yellow, font=font1} --Level title
+			textplus.print{x=150, y=159, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
 		end
 		if world.levelObj then
-			textplus.print{x=64, y=92, text = world.levelObj.filename, priority=5, color=Color.yellow, font=font2} --Filename
+			textplus.print{x=150, y=145, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
 			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
 		end
 		if world.levelObj == nil then
-			textplus.print{x=64, y=92, text = "N/A", priority=5, color=Color.yellow, font=font2}
+			textplus.print{x=150, y=145, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
 		end
+	end
+	if SaveData.resolution == "fullscreen" then
+		Graphics.drawImageWP(hudborder, 0, 0, 1)
+		Graphics.drawImageWP(oneupicon, 70, 558, 2)
+		Graphics.drawImageWP(times, 105, 560, 2)
+		textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 160, 558, 2)
+		Graphics.drawImageWP(times, 178, 560, 2)
+		textplus.print{x=197, y=558, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 558, 2)
+		Graphics.drawImageWP(times, 254, 560, 2)
+		textplus.print{x=272, y=558, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=64, y=70, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+		if world.levelTitle then
+			textplus.print{x=64, y=111, text = world.levelTitle, priority=2, color=Color.yellow, font=font1} --Level title
+		end
+		if world.levelObj then
+			textplus.print{x=64, y=92, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=64, y=92, text = "N/A", priority=2, color=Color.yellow, font=font2}
+		end
+	end
+	if SaveData.resolution == "ultrawide" then
+		Graphics.drawImageWP(hudborderultrawide, 0, 0, 1)
+		Graphics.drawImageWP(ultrawideborder, 0, 0, 6)
+		
+		if SaveData.disableX2char == true then
+			Graphics.drawImageWP(oneupicon, 70, 440, 2)
+			Graphics.drawImageWP(times, 105, 442, 2)
+			textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		end
+		Graphics.drawImageWP(coinicon, 160, 440, 2)
+		Graphics.drawImageWP(times, 178, 442, 2)
+		textplus.print{x=197, y=440, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 440, 2)
+		Graphics.drawImageWP(times, 254, 442, 2)
+		textplus.print{x=272, y=440, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 326, 436, 3)
+		Graphics.drawImageWP(coinicon, 330, 440, 2)
+		Graphics.drawImageWP(times, 348, 442, 2)
+		textplus.print{x=367, y=440, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=212, y=164, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1, yscale=1}
+		if world.levelTitle then
+			textplus.print{x=212, y=189, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.6, yscale=0.6} --Level title
+		end
+		if world.levelObj then
+			textplus.print{x=212, y=178, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=212, y=178, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6}
+		end
+		Graphics.drawBox{x=695, y=422, width=100, height=20, color=Color.black..0.2, priority=3} --What's the day, sir?!
+		textplus.print{x=700, y=427, text = "Date - ", priority=3, color=Color.white} 
+		textplus.print{x=733, y=427, text = os.date("%a"), priority=3, color=Color.white}
+		textplus.print{x=752, y=427, text = os.date("%x"), priority=3, color=Color.white}
+		Graphics.drawBox{x=719, y=445, width=76, height=20, color=Color.black..0.2, priority=3} --What time is it...!?
+		textplus.print{x=724, y=450, text = "Time - ", priority=3, color=Color.white}
+		textplus.print{x=755, y=450, text = os.date("%I"), priority=3, color=Color.white}
+		textplus.print{x=765, y=450, text = ":", priority=3, color=Color.white}
+		textplus.print{x=768, y=450, text = os.date("%M"), priority=3, color=Color.white}
+		textplus.print{x=780, y=450, text = os.date("%p"), priority=3, color=Color.white}
+	end
+	if SaveData.resolution == "nes" then
+		Graphics.drawImageWP(hudbordernes, 0, 0, 1)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(nesborder, 0, 0, 6)
+		end
+		
+		if SaveData.disableX2char == true then
+			Graphics.drawImageWP(oneupicon, 155, 500, 2)
+			Graphics.drawImageWP(times, 190, 502, 2)
+			textplus.print{x=209, y=500, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		end
+		Graphics.drawImageWP(coinicon, 245, 500, 2)
+		Graphics.drawImageWP(times, 263, 502, 2)
+		textplus.print{x=282, y=500, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 321, 500, 2)
+		Graphics.drawImageWP(times, 339, 502, 2)
+		textplus.print{x=357, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 411, 496, 3)
+		Graphics.drawImageWP(coinicon, 415, 500, 2)
+		Graphics.drawImageWP(times, 433, 502, 2)
+		textplus.print{x=452, y=500, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		
+		
+		textplus.print{x=185, y=140, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+		
+		
+		
+		if world.levelObj then
+			textplus.print{x=185, y=161, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=185, y=161, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
+		end
+		
+		
+		
+		if world.levelTitle then
+			textplus.print{x=185, y=175, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
+		end
+		
+		Graphics.drawBox{x=545, y=472, width=100, height=20, color=Color.black..0.2, priority=3} --What's the day, sir?!
+		textplus.print{x=550, y=477, text = "Date - ", priority=3, color=Color.white}
+		textplus.print{x=583, y=477, text = os.date("%a"), priority=3, color=Color.white}
+		textplus.print{x=602, y=477, text = os.date("%x"), priority=3, color=Color.white}
+		Graphics.drawBox{x=569, y=495, width=76, height=20, color=Color.black..0.2, priority=3} --What time is it...!?
+		textplus.print{x=574, y=500, text = "Time - ", priority=3, color=Color.white}
+		textplus.print{x=605, y=500, text = os.date("%I"), priority=3, color=Color.white}
+		textplus.print{x=615, y=500, text = ":", priority=3, color=Color.white}
+		textplus.print{x=618, y=500, text = os.date("%M"), priority=3, color=Color.white}
+		textplus.print{x=630, y=500, text = os.date("%p"), priority=3, color=Color.white}
+	end
+	
+	if SaveData.resolution == "gameboy" then
+		Graphics.drawImageWP(hudbordergb, 0, 0, 1)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbborder, 0, 0, 6)
+		end
+		
+		if SaveData.disableX2char == true then
+			Graphics.drawImageWP(oneupicon, 250, 400, 0, 0, 16, 8, 2)
+			Graphics.drawImageWP(times, 270, 401, 0, 0, 6, 6, 2)
+			textplus.print{x=279, y=403, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
+		end
+		Graphics.drawImageWP(coinicon, 292, 400, 0, 0, 7, 7, 2)
+		Graphics.drawImageWP(times, 303, 401, 0, 0, 6, 6, 2)
+		textplus.print{x=313, y=403, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
+		Graphics.drawImageWP(staricon, 323, 400, 0, 0, 7, 7, 2)
+		Graphics.drawImageWP(times, 334, 401, 0, 0, 6, 6, 2)
+		textplus.print{x=344, y=403, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
+		Graphics.drawImageWP(coinicon, 364, 396, 0, 0, 6, 6, 3)
+		Graphics.drawImageWP(coinicon, 368, 400, 0, 0, 6, 6, 2)
+		Graphics.drawImageWP(times, 379, 401, 0, 0, 6, 6, 2)
+		textplus.print{x=389, y=403, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
+		
+		
+		
+		textplus.print{x=266, y=209, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=0.4, yscale=0.4}
+		
+		
+		
+		if world.levelObj then
+			textplus.print{x=266, y=216, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.2, yscale=0.2} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=266, y=216, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.2, yscale=0.2}
+		end
+		
+		
+		
+		if world.levelTitle then
+			textplus.print{x=266, y=222, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.4, yscale=0.4} --Level title
+		end
+		
+		Graphics.drawBox{x=524, y=395, width=33, height=7, color=Color.black..0.2, priority=3} --What's the day, sir?!
+		textplus.print{x=525, y=397, text = "Date - ", priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=534, y=397, text = os.date("%a"), priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=541, y=397, text = os.date("%x"), priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+		Graphics.drawBox{x=532, y=404, width=25, height=7, color=Color.black..0.2, priority=3} --What time is it...!?
+		textplus.print{x=533, y=406, text = "Time - ", priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=540, y=406, text = os.date("%I"), priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=543, y=406, text = ":", priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=546, y=406, text = os.date("%M"), priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+		textplus.print{x=550, y=406, text = os.date("%p"), priority=3, color=Color.white, xscale=0.4, yscale=0.4}
+	end
+	
+	if SaveData.resolution == "gba" then
+		Graphics.drawImageWP(hudbordergba, 0, 0, 1)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbaborder, 0, 0, 6)
+		end
+		
+		if SaveData.disableX2char == true then
+			Graphics.drawImageWP(oneupicon, 165, 440, 2)
+			Graphics.drawImageWP(times, 200, 442, 2)
+			textplus.print{x=220, y=445, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		end
+		Graphics.drawImageWP(coinicon, 245, 440, 2)
+		Graphics.drawImageWP(times, 264, 442, 2)
+		textplus.print{x=284, y=445, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(staricon, 310, 440, 2)
+		Graphics.drawImageWP(times, 334, 442, 2)
+		textplus.print{x=354, y=445, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(coinicon, 388, 436, 3)
+		Graphics.drawImageWP(coinicon, 392, 440, 2)
+		Graphics.drawImageWP(times, 410, 442, 2)
+		textplus.print{x=430, y=445, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		
+		
+		
+		textplus.print{x=224, y=175, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
+		
+		
+		
+		if world.levelObj then
+			textplus.print{x=224, y=187, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.65, yscale=0.65} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=224, y=187, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
+		end
+		
+		
+		
+		if world.levelTitle then
+			textplus.print{x=224, y=200, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.5, yscale=0.5} --Level title
+		end
+		
+		
+		
+		Graphics.drawBox{x=555, y=425, width=80, height=15, color=Color.black..0.2, priority=3} --What's the day, sir?!
+		textplus.print{x=560, y=429, text = "Date - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=585, y=429, text = os.date("%a"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=600, y=429, text = os.date("%x"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		Graphics.drawBox{x=570, y=442, width=65, height=15, color=Color.black..0.2, priority=3} --What time is it...!?
+		textplus.print{x=575, y=447, text = "Time - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=600, y=447, text = os.date("%I"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=606, y=447, text = ":", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=613, y=447, text = os.date("%M"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=624, y=447, text = os.date("%p"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+	end
+	if SaveData.resolution == "iphone1st" then
+		Graphics.drawImageWP(hudborderiphoneone, 0, 0, 1)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(iphoneoneborder, 0, 0, 6)
+		end
+		
+		if SaveData.disableX2char == true then
+			Graphics.drawImageWP(oneupicon, 70, 440, 2)
+			Graphics.drawImageWP(times, 105, 442, 2)
+			textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		end
+		Graphics.drawImageWP(coinicon, 160, 440, 2)
+		Graphics.drawImageWP(times, 178, 442, 2)
+		textplus.print{x=197, y=440, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 440, 2)
+		Graphics.drawImageWP(times, 254, 442, 2)
+		textplus.print{x=272, y=440, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 326, 436, 3)
+		Graphics.drawImageWP(coinicon, 330, 440, 2)
+		Graphics.drawImageWP(times, 348, 442, 2)
+		textplus.print{x=367, y=440, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=212, y=164, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1, yscale=1}
+		if world.levelTitle then
+			textplus.print{x=295, y=245, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.35, yscale=0.35} --Level title
+		end
+		if world.levelObj then
+			textplus.print{x=212, y=178, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=212, y=178, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6}
+		end
+		Graphics.drawBox{x=10, y=552, width=100, height=20, color=Color.black..0.2, priority=3} --What's the day, sir?!
+		textplus.print{x=15, y=557, text = "Date - ", priority=3, color=Color.white}
+		textplus.print{x=48, y=557, text = os.date("%a"), priority=3, color=Color.white}
+		textplus.print{x=69, y=557, text = os.date("%x"), priority=3, color=Color.white}
+		
+		
+		Graphics.drawBox{x=10, y=575, width=76, height=20, color=Color.black..0.2, priority=3} --What time is it...!?
+		textplus.print{x=15, y=580, text = "Time - ", priority=3, color=Color.white}
+		textplus.print{x=46, y=580, text = os.date("%I"), priority=3, color=Color.white}
+		textplus.print{x=56, y=580, text = ":", priority=3, color=Color.white}
+		textplus.print{x=59, y=580, text = os.date("%M"), priority=3, color=Color.white}
+		textplus.print{x=71, y=580, text = os.date("%p"), priority=3, color=Color.white}
+	end
+	
+	if SaveData.resolution == "3ds" then
+		Graphics.drawImageWP(hudbordergba, 0, 0, 1)
+		if SaveData.borderEnabled == true then
+			Graphics.drawImageWP(gbaborder, 0, 0, 6)
+		end
+		
+		if SaveData.disableX2char == true then
+			Graphics.drawImageWP(oneupicon, 165, 440, 2)
+			Graphics.drawImageWP(times, 200, 442, 2)
+			textplus.print{x=220, y=445, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		end
+		Graphics.drawImageWP(coinicon, 245, 440, 2)
+		Graphics.drawImageWP(times, 264, 442, 2)
+		textplus.print{x=284, y=445, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(staricon, 310, 440, 2)
+		Graphics.drawImageWP(times, 334, 442, 2)
+		textplus.print{x=354, y=445, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(coinicon, 388, 436, 3)
+		Graphics.drawImageWP(coinicon, 392, 440, 2)
+		Graphics.drawImageWP(times, 410, 442, 2)
+		textplus.print{x=430, y=445, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		
+		
+		
+		textplus.print{x=224, y=175, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
+		
+		
+		
+		if world.levelObj then
+			textplus.print{x=224, y=187, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.65, yscale=0.65} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=224, y=187, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
+		end
+		
+		
+		
+		if world.levelTitle then
+			textplus.print{x=224, y=200, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.5, yscale=0.5} --Level title
+		end
+		
+		
+		
+		Graphics.drawBox{x=555, y=425, width=80, height=15, color=Color.black..0.2, priority=3} --What's the day, sir?!
+		textplus.print{x=560, y=429, text = "Date - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=585, y=429, text = os.date("%a"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=600, y=429, text = os.date("%x"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		Graphics.drawBox{x=570, y=442, width=65, height=15, color=Color.black..0.2, priority=3} --What time is it...!?
+		textplus.print{x=575, y=447, text = "Time - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=600, y=447, text = os.date("%I"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=606, y=447, text = ":", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=613, y=447, text = os.date("%M"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=624, y=447, text = os.date("%p"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
 	end
 	
 	if loadlevelanimation then

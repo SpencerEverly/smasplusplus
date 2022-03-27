@@ -187,20 +187,6 @@ function dependencies.onInitAPI()
 end
 
 function dependencies.onInputUpdate()
-	if player.deathTimer == 1 then
-		GameData.p1lives = GameData.p1lives - 1
-		Routine.run(classicbattlerevivep1)
-	end
-	if player2.deathTimer == 1 then
-		GameData.p2lives = GameData.p2lives - 1
-		Routine.run(classicbattlerevivep2)
-	end
-	if player.deathTimer == 1 and GameData.p1lives <= 0 then
-		Routine.run(classicbattlep2wins)
-	end
-	if player2.deathTimer == 1 and GameData.p2lives <= 0 then
-		Routine.run(classicbattlep1wins)
-	end
 	if diedp1 then
 		player.upKeyPressing = false
 		player.downKeyPressing = false
@@ -238,6 +224,20 @@ function dependencies.onPlayerKill()
 end
 
 function dependencies.onDraw()
+	if player.deathTimer == 1 then
+		GameData.p1lives = GameData.p1lives - 1
+		Routine.run(classicbattlerevivep1)
+	end
+	if player2.deathTimer == 1 then
+		GameData.p2lives = GameData.p2lives - 1
+		Routine.run(classicbattlerevivep2)
+	end
+	if player.deathTimer == 1 and GameData.p1lives <= 0 then
+		Routine.run(classicbattlep2wins)
+	end
+	if player2.deathTimer == 1 and GameData.p2lives <= 0 then
+		Routine.run(classicbattlep1wins)
+	end
 	if exitscreen then
 		Graphics.drawScreen{color = Color.black, priority = 10}
 	end

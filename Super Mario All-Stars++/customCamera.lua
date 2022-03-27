@@ -1240,10 +1240,7 @@ function customCamera.resetCameraState()
     customCamera.updateHandycamUse()
 end
 
-
-
-
-function customCamera.onTick()
+function customCamera.onDraw()
     -- Update settings
     local newSettings = getCurrentSettings()
 
@@ -1462,6 +1459,7 @@ function customCamera.onInitAPI()
     registerEvent(customCamera,"onTick")
     registerEvent(customCamera,"onCameraUpdate","onCameraUpdate")
     registerEvent(customCamera,"onCameraDraw")
+	registerEvent(customCamera,"onDraw")
 
     registerEvent(customCamera,"onStart")
 

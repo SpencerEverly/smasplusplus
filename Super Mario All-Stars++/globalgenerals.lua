@@ -277,126 +277,6 @@ function globalgenerals.onTick()
 			blockidx5000check = true
 		end
 	end
-	if SaveData.resolution == "fullscreen" then
-		customCamera.defaultScreenWidth = 0
-		customCamera.defaultScreenHeight = 0
-		customCamera.defaultZoom = 1
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-	end
-	if SaveData.resolution == "widescreen" then
-		customCamera.defaultScreenWidth = 800
-		customCamera.defaultScreenHeight = 450
-		customCamera.defaultZoom = 0.75
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		if SaveData.letterbox == false then
-			smallScreen.scaleX = 1
-			smallScreen.scaleY = 1.33
-			smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-		elseif SaveData.letterbox == true then
-			smallScreen.scaleX = 1
-			smallScreen.scaleY = 1
-			smallScreen.offsetX = 0
-			smallScreen.offsetY = 0
-		end
-	end
-	if SaveData.resolution == "ultrawide" then
-		customCamera.defaultScreenWidth = 800
-		customCamera.defaultScreenHeight = 337
-		customCamera.defaultZoom = 0.562
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1
-		smallScreen.scaleY = 1
-		smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-		if SaveData.letterbox == false then
-			smallScreen.scaleX = 1
-			smallScreen.scaleY = 1.80
-			smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-		elseif SaveData.letterbox == true then
-			smallScreen.scaleX = 1
-			smallScreen.scaleY = 1
-			smallScreen.offsetX = 0
-			smallScreen.offsetY = 0
-		end
-	end
-	if SaveData.resolution == "nes" then
-		customCamera.defaultScreenWidth = 512
-		customCamera.defaultScreenHeight = 448
-		customCamera.defaultZoom = 0.75
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0.20
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1.25
-		smallScreen.scaleY = 1.08
-		smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-	end
-	if SaveData.resolution == "gameboy" then
-		customCamera.defaultScreenWidth = 320
-		customCamera.defaultScreenHeight = 228
-		customCamera.defaultZoom = 0.38
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1
-		smallScreen.scaleY = 1
-		smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-	end
-	if SaveData.resolution == "gba" then
-		customCamera.defaultScreenWidth = 480
-		customCamera.defaultScreenHeight = 320
-		customCamera.defaultZoom = 0.54
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1
-		smallScreen.scaleY = 1
-		smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-	end
-	if SaveData.resolution == "iphone1st" then
-		customCamera.defaultScreenWidth = 400
-		customCamera.defaultScreenHeight = 600
-		customCamera.defaultZoom = 0.62
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 0
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1
-		smallScreen.scaleY = 1
-		smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-	end
-	if SaveData.resolution == "3ds" then
-		customCamera.defaultScreenWidth = 700
-		customCamera.defaultScreenHeight = 419
-		customCamera.defaultZoom = 0.58
-		customCamera.defaultScreenOffsetX = 0
-		customCamera.defaultScreenOffsetY = 70
-		customCamera.defaultOffsetX = 0
-		customCamera.defaultOffsetY = 0
-		smallScreen.scaleX = 1
-		smallScreen.scaleY = 1
-		smallScreen.offsetX = 0
-		smallScreen.offsetY = 0
-	end
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	
@@ -1171,7 +1051,39 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 end
 
 function globalgenerals.onDraw()
+	if SaveData.resolution == "fullscreen" then
+		customCamera.defaultScreenWidth = 0
+		customCamera.defaultScreenHeight = 0
+		customCamera.defaultZoom = 1
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		smallScreen.priority = 4
+	end
 	if SaveData.resolution == "widescreen" then
+		customCamera.defaultScreenWidth = 800
+		customCamera.defaultScreenHeight = 450
+		customCamera.defaultZoom = 0.75
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1.33
+			smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 		if SaveData.borderEnabled == true then
 			if SaveData.letterbox == true then
 				Graphics.drawImageWP(wideborder, 0, 0, 5)
@@ -1179,6 +1091,30 @@ function globalgenerals.onDraw()
 		end
 	end
 	if SaveData.resolution == "ultrawide" then
+		customCamera.defaultScreenWidth = 800
+		customCamera.defaultScreenHeight = 337
+		customCamera.defaultZoom = 0.562
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1.80
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 		if SaveData.borderEnabled == true then
 			if SaveData.letterbox == true then
 				Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
@@ -1186,26 +1122,142 @@ function globalgenerals.onDraw()
 		end
 	end
 	if SaveData.resolution == "nes" then
+		customCamera.defaultScreenWidth = 512
+		customCamera.defaultScreenHeight = 448
+		customCamera.defaultZoom = 0.75
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0.20
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1.56
+			smallScreen.scaleY = 1.34
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1.25
+			smallScreen.scaleY = 1.08
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(nesborder, 0, 0, 5)
 		end
 	end
 	if SaveData.resolution == "gameboy" then
+		customCamera.defaultScreenWidth = 320
+		customCamera.defaultScreenHeight = 228
+		customCamera.defaultZoom = 0.38
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 2.5
+			smallScreen.scaleY = 2.65
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(gbborder, 0, 0, 5)
 		end
 	end
 	if SaveData.resolution == "gba" then
+		customCamera.defaultScreenWidth = 480
+		customCamera.defaultScreenHeight = 320
+		customCamera.defaultZoom = 0.54
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1.7
+			smallScreen.scaleY = 1.7
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(gbaborder, 0, 0, 5)
 		end
 	end
 	if SaveData.resolution == "iphone1st" then
+		customCamera.defaultScreenWidth = 400
+		customCamera.defaultScreenHeight = 600
+		customCamera.defaultZoom = 0.62
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 0
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 2
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(iphoneoneborder, 0, 0, 5)
 		end
 	end
 	if SaveData.resolution == "3ds" then
+		customCamera.defaultScreenWidth = 700
+		customCamera.defaultScreenHeight = 419
+		customCamera.defaultZoom = 0.58
+		customCamera.defaultScreenOffsetX = 0
+		customCamera.defaultScreenOffsetY = 70
+		customCamera.defaultOffsetX = 0
+		customCamera.defaultOffsetY = 0
+		smallScreen.scaleX = 1
+		smallScreen.scaleY = 1
+		smallScreen.offsetX = 0
+		smallScreen.offsetY = 0
+		if SaveData.letterbox == false then
+			smallScreen.priority = 10
+			smallScreen.scaleX = 1.15
+			smallScreen.scaleY = 1.45
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = -98
+		elseif SaveData.letterbox == true then
+			smallScreen.priority = 4
+			smallScreen.scaleX = 1
+			smallScreen.scaleY = 1
+			smallScreen.offsetX = 0
+			smallScreen.offsetY = 0
+		end
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(threedsborder, 0, 0, 5)
 		end

@@ -58,6 +58,8 @@ local middle = 0
 local transitionTimer = 0
 local nochangecharmap = false
 
+local buffer = Graphics.CaptureBuffer(800,600)
+
 function levelload()
 	if player.rawKeys.jump == KEYS_PRESSED then
 		player.rawKeys.jump = KEYS_UNPRESSED
@@ -82,6 +84,18 @@ function levelload()
 	nochangecharmap = false
 	Routine.waitFrames(78, true)
 	loadlevelanimationin = nil
+end
+
+function onCameraDraw()
+	buffer:captureAt(10)
+    Graphics.drawBox{
+        texture = buffer,priority = 10,
+        linearFiltered = linearFiltered,shader = shader,uniforms = uniforms,
+        
+        x = (buffer.width*0.5)+smallScreen.offsetX,y = (buffer.height*0.5)+smallScreen.offsetY,centred = true,
+        width = width,height = height,sourceWidth = smallScreen.width,sourceHeight = smallScreen.height,
+        sourceX = (buffer.width*0.5)-(smallScreen.width*0.5),sourceY = (buffer.height*0.5)-(smallScreen.height*0.5),
+    }
 end
 
 function onInputUpdate()
