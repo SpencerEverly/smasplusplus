@@ -8,9 +8,12 @@ local datetime = require("datetime")
 local extrasounds = require("extrasounds")
 local autoscroll = require("autoscrolla")
 local HUDOverride = require("hudoverridee")
+local rng = require("base/rng")
+local cursor = require("cursor")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
+cursor.create()
 local player2 = Player(2)
 
 local ready = false
@@ -100,8 +103,10 @@ littleDialogue.registerStyle("smbx13",{
 	continueArrowEnabled = false,
 	scrollArrowEnabled   = false,
 	selectorImageEnabled = true,
-	
 })
+
+local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl"}
+local selecter = rng.randomInt(1,#battlelevelsrng)
 
 local function introExit()
 	Routine.waitFrames(38)
@@ -114,8 +119,6 @@ local function mapExit()
 end
 
 local function BattleRandomLevelSelect()
-	local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl"}
-	local selecter = rng.randomInt(1,#battlelevelsrng)
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
@@ -676,11 +679,9 @@ local function FramerateToggle1()
 end
 
 local function TwoPlayerCheck()
-	if Player.count() == 1 then
-		Cheats.trigger("2player")
-		Defines.player_hasCheated = false
-		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
+	Cheats.trigger("2player")
+	Defines.player_hasCheated = false
+	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function TwoPlayerCheckBattle()
@@ -690,19 +691,15 @@ local function TwoPlayerCheckBattle()
 end
 
 local function ExitClassicBattle()
-	if Player.count() == 2 then
-		Cheats.trigger("1player")
-		Defines.player_hasCheated = false
-	end
+	Cheats.trigger("1player")
+	Defines.player_hasCheated = false
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function OnePlayerCheck()
-	if Player.count() == 2 then
-		Cheats.trigger("1player")
-		Defines.player_hasCheated = false
-		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>1 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
-	end
+	Cheats.trigger("1player")
+	Defines.player_hasCheated = false
+	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>1 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function FailsafeMessage1()

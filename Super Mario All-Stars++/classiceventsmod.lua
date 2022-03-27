@@ -41,6 +41,9 @@ end
 
 local function checkKeyboardEvent(plObject, plIndex, plData, plFieldName, plFieldID)
     local plObjectValue = plObject[plFieldName]
+	if plObjectValue == nil then
+		return
+	end
     local plDataValue = plData[plFieldName]
     if(plDataValue == false and plObjectValue == true)then
         EventManager.callEventInternal("onKeyDown", {plFieldID, plIndex})

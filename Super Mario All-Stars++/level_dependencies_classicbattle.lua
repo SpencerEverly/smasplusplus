@@ -34,6 +34,8 @@ local costumes = {}
 
 local dependencies = {}
 
+local killed = false
+
 GameData.battlemodeactive = true
 
 if GameData.battlemodeactive == true then
@@ -88,7 +90,7 @@ function exitbattlemode()
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load(Level.filename(), nil, nil)
+	Level.load("SMAS - Start", nil, nil)
 end
 
 function p1teleportdoor()
@@ -551,6 +553,10 @@ function dependencies.onStart()
 end
 
 function dependencies.onTick()
+	if(not killed and player:mem(0x13E,FIELD_BOOL)) then
+		killed = true
+		mem(0x00B2C5AC,FIELD_FLOAT, 1)
+	end
 	if player.deathTimer == 1 then
 		GameData.p1lives = GameData.p1lives - 1
 		Routine.run(classicbattlerevivep1)
@@ -721,16 +727,14 @@ function dependencies.onTick()
 end
 
 function dependencies.onExit()
-	Level.load(Level.filename(), nil, nil)
+	if killed == true then
+		Level.load(Level.filename(), nil, nil)
+	end
+	GameData.battlemodeactive = false
 end
 
 littleDialogue.registerAnswer("MainSelect",{text = "Start a New Stage",chosenFunction = function() Routine.run(rngrunstate) end})
 littleDialogue.registerAnswer("MainSelect",{text = "Play this Stage Again",chosenFunction = function() Routine.run(restartmode) end})
 littleDialogue.registerAnswer("MainSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(exitbattlemode) end})
-
-littleDialogue.registerAnswer("MainSelectTwo",{text = "Continue",chosenFunction = function() Routine.run(rngrunstate) end})
-littleDialogue.registerAnswer("MainSelectTwo",{text = "Start a New Stage",chosenFunction = function() Routine.run(rngrunstate) end})
-littleDialogue.registerAnswer("MainSelectTwo",{text = "Play this Stage Again",chosenFunction = function() Routine.run(restartmode) end})
-littleDialogue.registerAnswer("MainSelectTwo",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(exitbattlemode) end})
 
 return dependencies

@@ -37,6 +37,10 @@ local str = "Loading HUB..."
 
 local pausemenu = {}
 
+local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
+local selecter = rng.randomInt(1,#battlelevelsrng)
+local randombattlelevel = battlelevelsrng[selecter]
+
 pausemenu.pauseactivated = true
 
 local soundObject
@@ -103,10 +107,6 @@ local function unpause()
 	end
 end
 
-local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
-local selecter = rng.randomInt(1,#battlelevelsrng)
-local randombattlelevel = battlelevelsrng[selecter]
-
 function pausemenu.onStart()
 	if not ready then return end
 end
@@ -115,17 +115,14 @@ local function battlemodenewstage()
 	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(0)
 	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(randombattlelevel, nil, nil) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(battlelevelsrng[selecter], nil, nil) end)
 end
 
 local function battlemodeexit()
 	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(0)
-	Graphics.activateHud(false)
-	Cheats.trigger("1player")
-	Defines.player_hasCheated = false
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(Level.filename(), nil, nil) end)
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
 end
 
 local function switchtochar()
@@ -990,7 +987,7 @@ local function drawPauseMenu(y, alpha)
 		{
 			{name="Continue", action=unpause}
 		}
-		if not isOverworld then
+		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false  then
 			table.insert(pause_options, {name="Restart", action = restartlevel});
 		end
 		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
@@ -1031,6 +1028,9 @@ local function drawPauseMenu(y, alpha)
 		end
 		if GameData.battlemodeactive == true then
 			table.insert(pause_options, {name="Start a New Stage", action = battlemodenewstage});
+		end
+		if GameData.battlemodeactive == true then
+			table.insert(pause_options, {name="Restart this Stage", action = restartlevel});
 		end
 		if GameData.battlemodeactive == true then
 			table.insert(pause_options, {name="Exit Battle Mode", action = battlemodeexit});

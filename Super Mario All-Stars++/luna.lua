@@ -39,9 +39,8 @@ if os then --This is to erase saves when selecting erase save under the boot men
 	_G.os = newOS
 end
 
-local classicevents = require("classiceventsmod")
 local globalgenerals = require("globalgenerals")
-local customCamera = require("customCamera")
+local classicEvents = require("classiceventsmod")
 local playerManager = require("playermanager")
 
 local steve = require("steve")
