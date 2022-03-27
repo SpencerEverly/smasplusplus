@@ -113,6 +113,152 @@ local function mapExit()
 	Level.exit()
 end
 
+local function BattleRandomLevelSelect()
+	local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl"}
+	local selecter = rng.randomInt(1,#battlelevelsrng)
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = true
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load(battlelevelsrng[selecter], nil, nil)
+end
+
+local function Battle1()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_battleshrooms.lvl", nil, nil)
+end
+
+local function Battle2()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_battle-zone.lvl", nil, nil)
+end
+
+local function Battle3()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_classic-castle-battle.lvl", nil, nil)
+end
+
+local function Battle4()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_dry-dry-desert.lvl", nil, nil)
+end
+
+local function Battle5()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_hyrule-temple.lvl", nil, nil)
+end
+
+local function Battle6()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_invasion-battlehammer.lvl", nil, nil)
+end
+
+local function Battle7()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_lakitu-mechazone.lvl", nil, nil)
+end
+
+local function Battle8()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_lethal-lava-level.lvl", nil, nil)
+end
+
+local function Battle9()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_retroville-underground.lvl", nil, nil)
+end
+
+local function Battle10()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_slippy-slap-snowland.lvl", nil, nil)
+end
+
+local function Battle11()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_woody-warzone.lvl", nil, nil)
+end
+
+local function Battle12()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_testlevel.lvlx", nil, nil)
+end
+
+
 local function theme1()
 	SaveData.introselect = 1
 	exitscreen = true
@@ -417,7 +563,7 @@ local function bootDialogue()
 	active4 = false
 	logo = false
 	pressjumpwords = false
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function menuDialogue()
@@ -426,6 +572,10 @@ end
 
 local function gamebootDialogue()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.9><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
+end
+
+local function battleModeDialogue()
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.2><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
 local function optionsMenu1()
@@ -441,6 +591,10 @@ local function ResolutionSelect1()
 end
 
 
+
+local function classicBattleSelect()
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>Select level.<question BattleLevelSelect>", pauses = false, updatesInPause = true})
+end
 
 local function ResolutionChange1()
 	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
@@ -501,9 +655,17 @@ end
 
 local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == true then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 playermode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 player mode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == false then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+	end
+end
+
+local function BattleModeDisEnable1()
+	if SaveData.disableX2char == true then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? We'll need to enable 2 player mode first.<question BattleTwoPlayerCheckOne>", pauses = false, updatesInPause = true})
+	elseif SaveData.disableX2char == false then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -519,6 +681,20 @@ local function TwoPlayerCheck()
 		Defines.player_hasCheated = false
 		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
+end
+
+local function TwoPlayerCheckBattle()
+	Cheats.trigger("2player")
+	Defines.player_hasCheated = false
+	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToBattle>", pauses = false, updatesInPause = true})
+end
+
+local function ExitClassicBattle()
+	if Player.count() == 2 then
+		Cheats.trigger("1player")
+		Defines.player_hasCheated = false
+	end
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function OnePlayerCheck()
@@ -1365,6 +1541,7 @@ end
 if bootmenu.active == true then
 	littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(gamebootDialogue) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
+	littleDialogue.registerAnswer("MainMenu",{text = "Minigames",chosenFunction = function() Routine.run(battleModeDialogue) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
@@ -1375,7 +1552,10 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks",chosenFunction = function() Routine.run(BootWSMBAPreExecute) end})
 	--littleDialogue.registerAnswer("GameBoot",{text = "Start Where SMB Attacks (Original)",chosenFunction = function() Routine.run(BootWSMBAOGPreExecute) end})
 	littleDialogue.registerAnswer("GameBoot",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-
+	
+	
+	littleDialogue.registerAnswer("BattleSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("BattleSelect",{text = "Classic Battle Mode (2P)",chosenFunction = function() Routine.run(BattleModeDisEnable1) end})
 
 
 	littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
@@ -1411,7 +1591,26 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+	
+	
 
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Random Level",chosenFunction = function() Routine.run(BattleRandomLevelSelect) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battle Zone (SMBX 1.3)",chosenFunction = function() Routine.run(Battle1) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battleshrooms (SMBX 1.3)",chosenFunction = function() Routine.run(Battle2) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Classic Castle Battle (SMBX 1.3)",chosenFunction = function() Routine.run(Battle3) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Dry Dry Desert (SMBX 1.3)",chosenFunction = function() Routine.run(Battle4) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Hyrule Temple (SMBX 1.3)",chosenFunction = function() Routine.run(Battle5) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Invasion Battlehammer (SMBX 1.3)",chosenFunction = function() Routine.run(Battle6) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lakitu Mechazone (SMBX 1.3)",chosenFunction = function() Routine.run(Battle7) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lethal Lava Level (SMBX 1.3)",chosenFunction = function() Routine.run(Battle8) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Retroville Underground (SMBX 1.3.0.1)",chosenFunction = function() Routine.run(Battle9) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Slippy Slap Snowland (SMBX 1.3)",chosenFunction = function() Routine.run(Battle10) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Woody Warzone (SMBX 1.3)",chosenFunction = function() Routine.run(Battle11) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Test Battle Level (Original)",chosenFunction = function() Routine.run(Battle12) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
+
+	
 	
 	littleDialogue.registerAnswer("ResolutionSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 	littleDialogue.registerAnswer("ResolutionSelect",{text = "Fullscreen (Default)",chosenFunction = function() SaveData.resolution = "fullscreen" Routine.run(ResolutionChange1) end})
@@ -1501,6 +1700,11 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes", chosenFunction = function() Routine.run(X2Char) end})
 
 
+	littleDialogue.registerAnswer("BattleTwoPlayerCheckOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheckBattle) end})
+	littleDialogue.registerAnswer("BattleTwoPlayerCheckOne",{text = "No",chosenFunction = function() Routine.run(ExitClassicBattle) end})
+
+
+
 	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Player Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
 	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheck) end})
 	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
@@ -1517,6 +1721,10 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("OkayToMenuTwoOptions",{text = "Alright.",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
+	
+	littleDialogue.registerAnswer("OkayToBattle",{text = "Alrighty!",chosenFunction = function() Routine.run(classicBattleSelect) end})
+	
+	
 
 	littleDialogue.registerAnswer("OkayToMenu",{text = "Okay!",chosenFunction = function() Routine.run(bootDialogue) end})
 

@@ -1,0 +1,1 @@
+level_dependencies_classicbattle = require("level_dependencies_classicbattle")

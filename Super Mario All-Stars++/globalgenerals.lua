@@ -278,8 +278,8 @@ function globalgenerals.onTick()
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
-		customCamera.defaultScreenWidth = 800
-		customCamera.defaultScreenHeight = 600
+		customCamera.defaultScreenWidth = 0
+		customCamera.defaultScreenHeight = 0
 		customCamera.defaultZoom = 1
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0

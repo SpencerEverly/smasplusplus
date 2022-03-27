@@ -17,6 +17,10 @@ if SaveData.thirteenmodelives == nil then
 	end
 end
 
+if Player(2) and Player(2).isValid then
+	local multiplayeractive = true
+end
+
 local killed = false
 local ready = false
 local time = 0
@@ -85,7 +89,42 @@ function smasdeathsystem.onTick()
 		end
 	end
 	if SaveData.disableX2char == true then
-		--Don't keep to one, just keep going down when dying
+		if GameData.battlemodeactive == true then
+			if mem(0x00B2C5AC, FIELD_FLOAT) <= 1 then
+				mem(0x00B2C5AC, FIELD_FLOAT, 1)
+			end
+		elseif GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+			--Nothing
+		end
+	end
+	if Player(2) and Player(2).isValid then
+		multiplayeractive = true
+	end
+	if not Player(2) and not Player(2).isValid then
+		multiplayeractive = false
+	end
+end
+
+function extrasounds.onTickEnd()
+	if GameData.battlemodeactive == true then
+		for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+			if scoreboard.animationFrame == 9 then --1UP
+				GameData.p1lives = GameData.p1lives + 1
+				GameData.p1lives = GameData.p2lives + 1
+			end
+			if scoreboard.animationFrame == 10 then --2UP
+				GameData.p1lives = GameData.p1lives + 2
+				GameData.p1lives = GameData.p2lives + 2
+			end
+			if scoreboard.animationFrame == 11 then --3UP
+				GameData.p1lives = GameData.p1lives + 3
+				GameData.p1lives = GameData.p2lives + 3
+			end
+			if scoreboard.animationFrame == 12 then --5UP
+				GameData.p1lives = GameData.p1lives + 5
+				GameData.p1lives = GameData.p2lives + 5
+			end
+		end
 	end
 end
 
@@ -97,10 +136,16 @@ function smasdeathsystem.onDraw()
 end
 
 function smasdeathsystem.onPlayerKill()
-	Routine.run(diedanimation) --This will run the animation. Without it, the player would just die
+	if GameData.battlemodeactive == false or GameData.battlemodeactive == nil and multiplayeractive == false then
+		Routine.run(diedanimation) --This will run the animation. Without it, the player would just die
+	end
 end
 
 function smasdeathsystem.onExit()
+	if GameData.battlemodeactive == true then
+		GameData.p1lives = 5
+		GameData.p2lives = 5
+	end
 	GameData.cutsceneMusicControl = false --This is specific for my episode. Remove this if you wanna use this yourself.
 	Audio.MusicVolume(65) --Reset the music exiting the level
 	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == false then
