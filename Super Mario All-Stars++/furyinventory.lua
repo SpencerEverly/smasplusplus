@@ -26,6 +26,7 @@ local modernReserveItems = require("modernReserveItems")
 local hudoverride = require("hudoverride")
 
 furyinventory.furyinventoryopened = false
+GameData.toggleoffinventory = false
 
 local cooldown = 0
 
@@ -688,21 +689,18 @@ function furyinventory.onInputUpdate()
 		if player.keys.down == KEYS_PRESSED then
 			furyinventory.activatefuryinventory = false
 		end
-		if pausemenu.pauseactivated == false then
-			
-		end
-		if pausemenu.pauseactivated == true then
-			if player.keys.dropItem == KEYS_PRESSED then
-				--Nothing
-			end
-		end
 	end
-	if furyinventory.activated == false or furyinventory.hidden == true then
-		if player.keys.dropItem == KEYS_PRESSED then
-			furyinventory.activatefuryinventory = false
-		end
+	if GameData.toggleoffinventory == true then
+		furyinventory.activatefuryinventory = false
+		furyinventory.activated = false
+		furyinventory.hidden = true
 	end
-	if furyinventory.activated == true or furyinventory.hidden == false then
+	if GameData.toggleoffinventory == false or GameData.toggleoffinventory == nil then
+		furyinventory.activatefuryinventory = false
+		furyinventory.activated = true
+		furyinventory.hidden = false
+	end
+	if furyinventory.activated == true or furyinventory.hidden == false or GameData.toggleoffinventory == false then
 		if player.rawKeys.dropItem == KEYS_PRESSED and furyinventory.activated == true then -- toggle furyinventory menu
 			furyinventory.activatefuryinventory = true
 			furyinventory.furyinventoryopened = not furyinventory.furyinventoryopened
@@ -714,13 +712,17 @@ function furyinventory.onInputUpdate()
 			if furyinventory.furyinventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
 				furyinventoryopen = false
 				furyinventory.furyinventoryopened = false
-				Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
+				if GameData.toggleoffinventory == false or GameData.toggleoffinventory == nil then
+					Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
+				end
 				Misc.unpause()
 				state = 1
 			elseif furyinventory.furyinventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
 				furyinventoryopen = true
 				furyinventory.furyinventoryopened = true
-				Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
+				if GameData.toggleoffinventory == false or GameData.toggleoffinventory == nil then
+					Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
+				end
 				Misc.pause()
 				state = 1
 			end

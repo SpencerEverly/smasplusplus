@@ -234,14 +234,14 @@ end
 
 function console.onInputUpdate()
 	if not repl.active then
-		furyinventory.activated = true
-		furyinventory.hidden = true
-		player.dropItemKeyPressing = true
+		if player.keys.dropItem == KEYS_PRESSED then
+			player.keys.dropItem = KEYS_PRESSED
+		end
 	end
 	if repl.active then
-		furyinventory.activated = false
-		furyinventory.hidden = true
-		player.dropItemKeyPressing = false
+		if player.keys.dropItem == KEYS_PRESSED then
+			player.keys.dropItem = KEYS_UNPRESSED
+		end
 	end
 end
 
@@ -252,6 +252,7 @@ function repl.onKeyboardPressDirect(vk, repeated, char)
 		if (vk == VK_TAB) and (not repeated) then
 			Misc.pause()
 			SFX.play("_OST/_Sound Effects/console/console_open.ogg")
+			GameData.toggleoffinventory = true
 			Misc.cheatBuffer("")
 			repl.active = true
 		end
@@ -265,6 +266,7 @@ function repl.onKeyboardPressDirect(vk, repeated, char)
 		if (not repeated) then
 			Misc.unpause()
 			SFX.play("_OST/_Sound Effects/console/console_close.ogg")
+			GameData.toggleoffinventory = false
 			repl.active = false
 		end
 	elseif vk == VK_RETURN then
