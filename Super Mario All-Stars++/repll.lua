@@ -278,7 +278,9 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 	end
 	
 	local rngkey = rng.randomInt(1,7)
-	SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+	if (not repeated) then
+		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+	end
 	
 	if vk == VK_TAB or vk == VK_ESCAPE then
 		if (not repeated) then

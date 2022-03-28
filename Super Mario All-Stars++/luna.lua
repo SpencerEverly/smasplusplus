@@ -90,7 +90,22 @@ function onCameraUpdate(c, camIdx)
     end
 end
 
+function onLoad(err)
+	if (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
+		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
+		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
+		fadetolevel = true
+	end
+	if error then
+		Audio.SfxStop(-1)
+	end
+end
+
 function onStart()
+	fadetolevel = false
+	if (Level.filename() == "SMAS - Start.lvlx") == false then
+		loadingSoundObject:FadeOut(800)
+	end
 	if SaveData.disableX2char == 0 then --Migrate old saves if there are any
 		SaveData.disableX2char = false
 	end
@@ -102,14 +117,6 @@ function onStart()
 	end
 	if GameData.cutsceneMusicControl == true then
 		Audio.MusicVolume(0)
-	end
-end
-
-function onLoad()
-	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
-		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
-		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
-		fadetolevel = true
 	end
 end
 
