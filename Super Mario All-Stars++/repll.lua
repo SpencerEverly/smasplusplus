@@ -1,6 +1,8 @@
-return repl
-
 local repll = {}
+
+if repl then
+	return repl
+end
 
 -- TODO: Handle unicode better. Textplus renders utf-8 fine, but repll for cursor management
 --       purposes repll is not respecting multi-byte characters properly.
