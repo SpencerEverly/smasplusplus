@@ -70,7 +70,7 @@ end
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
 -- Gets the index of the player that the camera belongs to. A return value of 0 means that it belongs to everybody
-function onCameraDraw(camIdx)
+function onCameraUpdate(c, camIdx)
     local screenType = mem(0x00B25130,FIELD_WORD)
 
     if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
