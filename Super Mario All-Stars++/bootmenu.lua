@@ -10,6 +10,7 @@ local autoscroll = require("autoscrolla")
 local HUDOverride = require("hudoverridee")
 local rng = require("base/rng")
 local cursor = require("cursor")
+local inputconfigurator = require("inputconfig")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
@@ -26,6 +27,7 @@ local bootmenu = {}
 
 extrasounds.active = false
 bootmenu.active = true
+bootmenu.menuactive = false
 datetime.bottomright = true
 datetime.topright = false
 
@@ -564,6 +566,7 @@ local function FailsafeMessage1()
 end
 
 local function bootDialogue()
+	bootmenu.menuactive = true
 	active = true
 	active4 = false
 	logo = false
@@ -632,6 +635,10 @@ local function credits1()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
+function startConfigurator()
+	inputconfigurator.controlConfigOpen = true
+end
+
 local function X2Char()
 	if SaveData.disableX2char == false then
 		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
@@ -646,7 +653,7 @@ local function X2Char()
 end
 
 local function InputConfig1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>To begin configuring the inputs of the game, please select Begin to get started.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>To begin configuring the inputs of the game, please select Begin to get started.<question StartInputs>", pauses = false, updatesInPause = true})
 end
 
 local function X2DisableCheck1()
@@ -762,6 +769,7 @@ local function EraseSave2()
 end
 
 local function BootDialogueMusicReset()
+	bootmenu.menuactive = true
 	active = true
 	active4 = false
 	logo = false
@@ -816,6 +824,7 @@ local function BootDialogueMusicReset()
 end
 
 local function ExitDialogueFirstBoot()
+	bootmenu.menuactive = false
 	active = false
 	logo = true
 	pressjumpwords = true
@@ -831,6 +840,7 @@ local function ExitDialogueFirstBoot()
 end
 
 local function ExitDialogue()
+	bootmenu.menuactive = false
 	active = false
 	logo = true
 	pressjumpwords = true
@@ -843,6 +853,7 @@ local function ExitDialogue()
 end
 
 local function ExitDialogueMusicReset()
+	bootmenu.menuactive = false
 	active = false
 	logo = true
 	pressjumpwords = true
@@ -1280,7 +1291,7 @@ function bootmenu.onInputUpdate()
 		player.altJumpKeyPressing = false
 		player.altRunKeyPressing = false
 		player.dropItemKeyPressing = false
-		if player.rawKeys.pause == KEYS_PRESSED then
+		if player.rawKeys.pause == KEYS_PRESSED and bootmenu.menuactive == false then
 			Routine.run(ExitGame1)
 			SFX.play("littleDialogue/smbx13/choose.wav")
 		end
@@ -1742,7 +1753,11 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
 	littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
 
-
+	
+	
+	littleDialogue.registerAnswer("StartInputs",{text = "Start",chosenFunction = function() Routine.run(startConfigurator) end})
+	littleDialogue.registerAnswer("StartInputs",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	
 
 
 	littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})

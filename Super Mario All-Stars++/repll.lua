@@ -6,7 +6,6 @@ local repl = {}
 local inspect = require("ext/inspect")
 local textplus = require("textplus")
 local rng = require("base/rng")
-local furyinventory = require("furyinventory")
 
 local unpack = _G.unpack or table.unpack
 local memo_mt = {__mode = "k"} --recommended by Rednaxela
