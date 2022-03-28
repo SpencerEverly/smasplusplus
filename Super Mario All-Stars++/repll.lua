@@ -1,15 +1,12 @@
 local repll = {}
 
-if repl then
-	return repl
-end
-
 -- TODO: Handle unicode better. Textplus renders utf-8 fine, but repll for cursor management
 --       purposes repll is not respecting multi-byte characters properly.
 
 local inspect = require("ext/inspect")
 local textplus = require("textplus")
 local rng = require("base/rng")
+local repl = require("game/repl")
 
 local unpack = _G.unpack or table.unpack
 local memo_mt = {__mode = "k"} --recommended by Rednaxela
@@ -239,10 +236,14 @@ function repll.onInitAPI()
 	registerEvent(repll, "onInputUpdate")
 end
 
-function console.onInputUpdate()
+function repll.onInputUpdate()
+	if Misc.inEditor() then
+		repl.activeInEpisode = false
+		repl.active = false
+	end
 	if not repll.active then
 		if player.keys.dropItem == KEYS_PRESSED then
-			player.keys.dropItem = KEYS_PRESSED
+
 		end
 	end
 	if repll.active then
@@ -256,9 +257,7 @@ function console.onInputUpdate()
 		end
 	end
 	if GameData.toggleoffkeys == false or GameData.toggleoffkeys == nil then
-		for k,v in pairs(player.keys) do
-			player.keys[k] = true
-		end
+		
 	end
 end
 
@@ -267,6 +266,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 
 	if not repll.active then
 		if (vk == VK_TAB) and (not repeated) then
+			repl.active = false
 			Misc.pause()
 			SFX.play("_OST/_Sound Effects/console/console_open.ogg")
 			GameData.toggleoffinventory = true
