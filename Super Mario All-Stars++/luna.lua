@@ -103,7 +103,6 @@ function onStart()
 	if GameData.cutsceneMusicControl == true then
 		Audio.MusicVolume(0)
 	end
-	convertAudioSourceExtra(sound)
 end
 
 function onLoad()
