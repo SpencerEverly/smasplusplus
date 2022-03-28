@@ -1,3 +1,5 @@
+return repl end
+
 local repll = {}
 
 -- TODO: Handle unicode better. Textplus renders utf-8 fine, but repll for cursor management
@@ -6,8 +8,6 @@ local repll = {}
 local inspect = require("ext/inspect")
 local textplus = require("textplus")
 local rng = require("base/rng")
-
-pcall(function() return repl end)
 
 local unpack = _G.unpack or table.unpack
 local memo_mt = {__mode = "k"} --recommended by Rednaxela
@@ -398,10 +398,10 @@ do
 	local function _print(str, x, y)
 		local textLayout = textplus.layout(str, nil, doprint)
 		y = y - textLayout.height
-		textplus.render{x = x, y = y, layout = textLayout, priority=10}
+		textplus.render{x = x, y = y, layout = textLayout, priority = -1}
 	end
 	
-	local bgobj = {color = repll.background, priority = 10}
+	local bgobj = {color = repll.background, priority = -2}
 	local printlist = {}
 	local listidx = 1
 	local function addprint(v)

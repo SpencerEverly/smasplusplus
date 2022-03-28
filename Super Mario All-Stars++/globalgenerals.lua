@@ -1318,6 +1318,16 @@ Cheats.deregister("instantswitch") --Activates an automatic P-Switch.
 
 
 --Here's some cheats specific for the episode:
+
+Cheats.register("fourthwall",{ --This one needs to be reregistered because I'm using a fork of the console, with sounds(TM)
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		repll.activeInEpisode == true
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = 67,
+})
+
 Cheats.register("iwannabootbackhome",{
 	onActivate = (function()
 		Defines.player_hasCheated = false
