@@ -569,7 +569,6 @@ end
 function dependencies.onTick()
 	if(not killed and player:mem(0x13E,FIELD_BOOL)) then
 		killed = true
-		if 
 		mem(0x00B2C5AC,FIELD_FLOAT, 1)
 	end
 	HUDOverride.visible.keys = false

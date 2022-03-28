@@ -24,21 +24,6 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 	end
 end
 
-if os then --This is to erase saves when selecting erase save under the boot menu
-	local nativeOS = os
-	local newOS = {}
-	newOS.clock = nativeOS.clock
-	newOS.date = nativeOS.date
-	newOS.time = nativeOS.time
-	newOS.difftime = nativeOS.difftime
-	newOS.remove = nativeOS.remove
-	newOS.rename = nativeOS.rename
-	newOS.exit = function() error("Shutdown") end
-	
-	os = newOS
-	_G.os = newOS
-end
-
 local globalgenerals = require("globalgenerals")
 local repll = require("repll")
 local classicEvents = require("classiceventsmod")
@@ -91,7 +76,7 @@ function onCameraUpdate(c, camIdx)
 end
 
 function onLoad(err)
-	if (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
+	if Misc.inEditor() or (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true

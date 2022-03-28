@@ -29,6 +29,8 @@ mm.playIntro = false;
 
 local dependencies2 = {}
 
+GameData.battlemodeactive = false
+
 function p1teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)

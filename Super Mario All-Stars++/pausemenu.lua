@@ -1014,7 +1014,7 @@ local function drawPauseMenu(y, alpha)
 		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			table.insert(pause_options, {name="Save and Continue", action = savegame});
 		end
-		if isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+		if isOverworld then
 			table.insert(pause_options, {name="Save and Continue", action = savegamemap});
 		end
 		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
@@ -1023,7 +1023,7 @@ local function drawPauseMenu(y, alpha)
 		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			table.insert(pause_options, {name="Save and Quit", action = quitgame});
 		end
-		if isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+		if isOverworld then
 			table.insert(pause_options, {name="Save and Quit", action = quitgamemap});
 		end
 		if GameData.battlemodeactive == true then
