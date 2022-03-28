@@ -40,6 +40,7 @@ if os then --This is to erase saves when selecting erase save under the boot men
 end
 
 local globalgenerals = require("globalgenerals")
+local repl = require("repll")
 local classicEvents = require("classiceventsmod")
 local playerManager = require("playermanager")
 

@@ -1186,6 +1186,9 @@ function bootmenu.onTick()
 		if SaveData.failsafeMessageOne == 1 then
 			Routine.run(FailsafeMessage1)
 		end
+		for i = 1,91 do
+			Audio.sounds[i].muted = true
+		end
 		Audio.sounds[1].muted = true
 		Audio.sounds[2].muted = true
 		Audio.sounds[3].muted = true
@@ -1421,9 +1424,15 @@ function bootmenu.onDraw()
 			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
 		end
 		
+		local rngspark = rng.randomInt(1,25)
+		local rngsparkmovement = rng.randomInt(1,1.2)
+		
 		if bootmenu.active == true then
 			if cursor.left == KEYS_DOWN then
-				Effect.spawn(80, cursor.sceneX, cursor.sceneY).variant = 2
+				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedX = rngsparkmovement
+				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedY = rngsparkmovement
+				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedX = -rngsparkmovement
+				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedY = -rngsparkmovement
 				for _,npc in ipairs(hitNPCs) do
 					if npc ~= v and npc.id > 0 then
 						-- Hurt the NPC, and make sure to not give the automatic score
@@ -1433,7 +1442,7 @@ function bootmenu.onDraw()
 						
 						local hurtNPC = harmNPC(npc,HARM_TYPE_NPC)
 						if hurtNPC then
-							Misc.givePoints(0,{x = npc.x+npc.width*0.5,y = npc.y+npc.height*0.5},true)
+							Misc.givePoints(0,{x = npc.x+npc.width*1.5,y = npc.y+npc.height*0.5},true)
 						end
 					end
 				end
