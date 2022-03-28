@@ -1444,10 +1444,8 @@ function bootmenu.onDraw()
 		
 		if bootmenu.active == true then
 			if cursor.left == KEYS_DOWN then
-				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedX = rngsparkmovement
-				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedY = rngsparkmovement
-				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedX = -rngsparkmovement
-				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedY = -rngsparkmovement
+				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedX = rngsparkmovement*0.5
+				Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedY = rngsparkmovement*0.5
 				for _,npc in ipairs(hitNPCs) do
 					if npc ~= v and npc.id > 0 then
 						-- Hurt the NPC, and make sure to not give the automatic score

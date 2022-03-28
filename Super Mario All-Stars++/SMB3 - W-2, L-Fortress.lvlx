@@ -2,8 +2,8 @@ HEAD
 TL:"Super Mario Bros. 3\: World 2 (Fortress)";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-195200;T:-200864;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Fortress 2.spc|0\;g=2.4";BG:3;
-SC:1;L:-180000;R:-178784;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/Fortress 2.spc|0\;g=2.4";BG:3;
+SC:0;L:-200000;R:-195200;T:-200864;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Fortress.spc|0\;g=2.2";BG:3;
+SC:1;L:-180000;R:-178784;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/Fortress.spc|0\;g=2.2";BG:3;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros. 3 (NES\, VRC6 by skydev) - OST.nsf|6\;g=2.2";BG:0;
 SECTION_END
 STARTPOINT

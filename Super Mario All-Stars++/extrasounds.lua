@@ -297,6 +297,9 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 						SFX.play(extrasounds.id93)
 					end
 				end
+				if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
+					SFX.play(extrasounds.id14)
+				end
 			end
 		end
 	end
@@ -330,9 +333,6 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 						SFX.play(extrasounds.id102)
 					end
 				end
-			end
-			if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
-				SFX.play(extrasounds.id14)
 			end
 		end
 	end

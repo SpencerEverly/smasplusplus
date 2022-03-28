@@ -13,7 +13,7 @@ package.path = package.path .. ";./scripts/?.lua"
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = mem(0x00B2C61C, FIELD_STRING)
 local rng = require("base/rng")
-Misc.setLoadScreenTimeout(8)
+Misc.setLoadScreenTimeout(3)
 
 local image = Graphics.loadImage("loadscreen.png")
 local blackscreen = Graphics.loadImage("black-screen.png")

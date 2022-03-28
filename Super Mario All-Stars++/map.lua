@@ -9,6 +9,7 @@ local jukebox = require("jukebox-v11")
 local pause_music = require("map_music")
 local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
+local repl = require("repll")
 
 local map3d = require("mapp3d")
 map3d.BGPlane.tile = 394

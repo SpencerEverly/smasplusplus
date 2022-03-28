@@ -69,6 +69,27 @@ end
 
 loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
+-- Gets the index of the player that the camera belongs to. A return value of 0 means that it belongs to everybody
+function onCameraDraw(camIdx)
+    local screenType = mem(0x00B25130,FIELD_WORD)
+
+    if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
+        return camIdx
+    elseif screenType == 5 then -- dynamic screen
+        if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
+            return 2
+        elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
+            return 1
+        else
+            return 0
+        end
+    elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
+        return 0
+    else
+        return 1
+    end
+end
+
 function onStart()
 	if SaveData.disableX2char == 0 then --Migrate old saves if there are any
 		SaveData.disableX2char = false
@@ -84,34 +105,6 @@ function onStart()
 	end
 end
 
-function onCameraUpdate(c, camIdx)
-	if Player(2) and Player(2).isValid then
-		if c == 1 then
-			camera.renderX, camera.rendery = 0, 0
-			camera.width, camera.height = 800, 600
-		else
-			camera2.renderX  = 800
-		end
-		local screenType = mem(0x00B25130,FIELD_WORD)
-
-		if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
-			return camIdx
-		elseif screenType == 5 then -- dynamic screen
-			if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
-				return 2
-			elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
-				return 1
-			else
-				return 0
-			end
-		elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
-			return 0
-		else
-			return 1
-		end
-	end
-end
-
 function onLoad()
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
@@ -121,8 +114,5 @@ function onLoad()
 end
 
 function onTick()
-	--local currentCostume = player:getCostume()
-	--if currentCostume == "SMB3-WALUIGI" then
-	--	Player.setCostume(10, nil)
-	--end
+	mem(0x00B25130,FIELD_WORD, 2)
 end
