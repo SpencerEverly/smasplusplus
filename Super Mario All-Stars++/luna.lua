@@ -24,22 +24,6 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 	end
 end
 
-local extrasounds = require("extrasounds")
-local function convertAudioSourceExtra(sound) --extrasounds support
-	local extnumber = {92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113}
-	extsndid = extrasounds.id[extnumber]
-	if type(sound) == "number" then
-		local d
-		if pcall(function() d = Audio.SfxExtraOpen(extrasounds.id[extnumber]) end) then
-			return sound, d.sfx
-		else
-			Misc.warn("Could not load this sound: "..sound..". Check to see if the path to the sound is right, and try again.", 3)
-			return
-		end
-	end
-end
-local sound, soundData = convertAudioSourceExtra(sound)
-
 if os then --This is to erase saves when selecting erase save under the boot menu
 	local nativeOS = os
 	local newOS = {}
