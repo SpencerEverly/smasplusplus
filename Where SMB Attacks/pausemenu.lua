@@ -433,7 +433,7 @@ function pausemenu2.onDraw()
 			pause_box:Draw(-1, 0x00000077);
 		end
 		if isOverworld then
-			pause_box:Draw(8, 0x00000077);
+			pause_box:Draw(7, 0x00000077);
 		end
 		drawPauseMenu(300-pause_height*0.5,1)
 		
