@@ -20,6 +20,7 @@ local player2 = Player(2)
 
 local littleDialogue = {}
 
+GameData.answersActive = false
 littleDialogue.boxenabled = false
 local cooldown = 0
 
@@ -28,7 +29,6 @@ pcall(function() smallScreen = require("smallScreen") end)
 function littleDialogue.onInitAPI()
     registerEvent(littleDialogue,"onTick")
     registerEvent(littleDialogue,"onDraw")
-	registerEvent(littleDialogue,"onInputUpdate")
     registerEvent(littleDialogue,"onMessageBox")
 end
 
@@ -808,7 +808,8 @@ function boxInstanceFunctions:addQuestion(pageIndex,answer)
 
     table.insert(answerPage.answers,answerObj)
     table.insert(page.plainAnswerList,answerObj)
-
+	
+	GameData.answersActive = true
     page.totalAnswersCount = page.totalAnswersCount + 1
 end
 
@@ -900,10 +901,10 @@ function boxInstanceFunctions:updateLayouts()
     for index,page in ipairs(self.pageData) do
         currentlyUpdatingPage = index
 
-        page.answerPages = {}
-        page.plainAnswerList = {}
-        page.totalAnswersCount = 0
-        page.answersPageIndex = page.answersPageIndex or 1
+		page.answerPages = {}
+		page.plainAnswerList = {}
+		page.totalAnswersCount = 0
+		page.answersPageIndex = page.answersPageIndex or 1
 
         page.lineMarkers = {}
         page._noMarkerIndices = {}
@@ -1147,8 +1148,8 @@ end
 
 
 function boxInstanceFunctions:progress(isFromPlayer)
-    local page = self.pageData[self.page]
-    local answer = page.plainAnswerList[self.selectedAnswer]
+	local page = self.pageData[self.page]
+	local answer = page.plainAnswerList[self.selectedAnswer]
 
     if answer ~= nil then
         if answer.addText ~= nil then
@@ -1166,6 +1167,7 @@ function boxInstanceFunctions:progress(isFromPlayer)
 
     if self.page < self.pageCount then
         self.state = STATE.SCROLL
+		GameData.answersActive = false
 
         self.selectedAnswer = 1
 
@@ -1217,60 +1219,6 @@ function boxInstanceFunctions:update()
                 end
 
                 self:activateTextEvents(self.typewriterLimit,self.typewriterLimit)
-				
-				if player.rawKeys.run then
-					player.rawKeys.jump = true
-					if SaveData.disableX2char == false then
-						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
-					end
-					if SaveData.disableX2char == true then
-						SFX.play("_OST/_Sound Effects/fastscroll13.ogg")
-					end
-					if not self.typewriterFinished then
-						self.typewriterDelay = self.typewriterDelay or 0
-					end
-					self.typewriterFinished = true
-					self.typewriterLongDelayWaiting = false
-					self.typewriterDelay = 0
-					self:activateTextEvents(self.typewriterLimit+0,nil)
-					self.typewriterLimit = 0
-					self.portraitTimer = 0
-					self:progress(true)
-					player.rawKeys.jump = KEYS_PRESSED
-					cooldown = 5
-					player:mem(0x172,FIELD_BOOL,false)
-					if cooldown <= 0 then
-						player:mem(0x172,FIELD_BOOL,true)
-					end
-				end
-				
-				if Player.count() == 2 then
-					if player2.rawKeys.run then
-						player2.rawKeys.jump = true
-						if SaveData.disableX2char == false then
-							SFX.play("_OST/_Sound Effects/fastscroll.ogg")
-						end
-						if SaveData.disableX2char == true then
-							SFX.play("_OST/_Sound Effects/fastscroll13.ogg")
-						end
-						if not self.typewriterFinished then
-							self.typewriterDelay = self.typewriterDelay or 0
-						end
-						self.typewriterFinished = true
-						self.typewriterLongDelayWaiting = false
-						self.typewriterDelay = 0
-						self:activateTextEvents(self.typewriterLimit+0,nil)
-						self.typewriterLimit = 0
-						self.portraitTimer = 0
-						self:progress(true)
-						player2.rawKeys.jump = KEYS_PRESSED
-						cooldown = 5
-						player:mem(0x172,FIELD_BOOL,false)
-						if cooldown <= 0 then
-							player:mem(0x172,FIELD_BOOL,true)
-						end
-					end
-				end
 
                 if not self.silent then
                     if self.voiceSound ~= nil then
@@ -1286,15 +1234,16 @@ function boxInstanceFunctions:update()
         if not self.uncontrollable then
             if self.typewriterFinished then
                 if page.totalAnswersCount > 0 then
+					GameData.answersActive = true
                     local answerPage = page.answerPages[page.answersPageIndex]
 					
-                    if player.rawKeys.up == KEYS_PRESSED and self.selectedAnswer > 1 then
+                    if player.keys.up == KEYS_PRESSED and self.selectedAnswer > 1 then
                         self.selectedAnswer = self.selectedAnswer - 1
 
                         if not self.silent and self.settings.moveSelectionSoundEnabled then
                             SFX.play(self.settings.moveSelectionSound)
                         end
-                    elseif player.rawKeys.down == KEYS_PRESSED and self.selectedAnswer < page.totalAnswersCount then
+                    elseif player.keys.down == KEYS_PRESSED and self.selectedAnswer < page.totalAnswersCount then
                         self.selectedAnswer = self.selectedAnswer + 1
                         
                         if not self.silent and self.settings.moveSelectionSoundEnabled then
@@ -1303,14 +1252,14 @@ function boxInstanceFunctions:update()
                     end
 					
 					if Player.count() == 2 then
-						if player2.rawKeys.up == KEYS_PRESSED and self.selectedAnswer > 1 then
+						if player2.keys.up == KEYS_PRESSED and self.selectedAnswer > 1 then
 							self.selectedAnswer = self.selectedAnswer - 1
 
 							if not self.silent and self.settings.moveSelectionSoundEnabled then
 								SFX.play(self.settings.moveSelectionSound)
 							end
 						end
-						if player2.rawKeys.down == KEYS_PRESSED and self.selectedAnswer < page.totalAnswersCount then
+						if player2.keys.down == KEYS_PRESSED and self.selectedAnswer < page.totalAnswersCount then
 							self.selectedAnswer = self.selectedAnswer + 1
                         
 							if not self.silent and self.settings.moveSelectionSoundEnabled then
@@ -1320,27 +1269,27 @@ function boxInstanceFunctions:update()
 					end
 
                     if self.selectedAnswer < answerPage.firstAnswerIndex then
+						GameData.answersActive = false
                         self.state = STATE.SCROLL_ANSWERS
                         self.answersPageTarget = page.answersPageIndex - 1
                     elseif self.selectedAnswer > answerPage.firstAnswerIndex+(#answerPage.answers - 1) then
+						GameData.answersActive = false
                         self.state = STATE.SCROLL_ANSWERS
                         self.answersPageTarget = page.answersPageIndex + 1
                     end
-					
-					
                 end
 
-                if player.rawKeys.jump == KEYS_PRESSED then
+                if player.keys.jump == KEYS_PRESSED then
                     self:progress(true)
                 end
 				
 				if Player.count() == 2 then
-					if player2.rawKeys.jump == KEYS_PRESSED then
+					if player2.keys.jump == KEYS_PRESSED then
 						self:progress(true)
 					end
 				end
             else
-                if player.rawKeys.jump == KEYS_PRESSED then
+                if player.keys.jump == KEYS_PRESSED then
                     self.typewriterFinished = true
 
                     self:activateTextEvents(self.typewriterLimit+1,nil)
@@ -1348,33 +1297,12 @@ function boxInstanceFunctions:update()
                     self.typewriterLimit = characterCount
                     self.portraitTimer = 0
                 end
-				if player.rawKeys.run == KEYS_DOWN then
-                    player.rawKeys.jump = true
-                    SFX.play("_OST/_Sound Effects/fastscroll.ogg")
-                    if not self.typewriterFinished then
-                        self.typewriterDelay = self.typewriterDelay or 0
-                    end
-                    self.typewriterFinished = true
-                    self.typewriterLongDelayWaiting = false
-                    self.typewriterDelay = 0
-                    self:activateTextEvents(self.typewriterLimit+0,nil)
-                    self.typewriterLimit = 0
-					self.portraitTimer = 0
-					self:progress(true)
-					player.rawKeys.jump = KEYS_PRESSED
-				end
-				
-				if Player.count() == 2 then
-					if player2.rawKeys.jump == KEYS_PRESSED then
-						self.typewriterFinished = true
-
-						self:activateTextEvents(self.typewriterLimit+1,nil)
-
-						self.typewriterLimit = characterCount
-						self.portraitTimer = 0
-					end
-					if player2.rawKeys.run == KEYS_DOWN then
-						player2.rawKeys.jump = true
+				if GameData.answersActive == false then
+					if player.keys.run == KEYS_DOWN then
+						player.keys.run = KEYS_UP
+						player.keys.jump = false
+						player.keys.run = KEYS_UNPRESSED
+						player.keys.jump = true
 						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
 						if not self.typewriterFinished then
 							self.typewriterDelay = self.typewriterDelay or 0
@@ -1386,7 +1314,33 @@ function boxInstanceFunctions:update()
 						self.typewriterLimit = 0
 						self.portraitTimer = 0
 						self:progress(true)
-						player2.rawKeys.jump = KEYS_PRESSED
+						player.keys.jump = KEYS_PRESSED
+					end
+				end
+				
+				if Player.count() == 2 then
+					if player2.keys.jump == KEYS_PRESSED then
+						self.typewriterFinished = true
+
+						self:activateTextEvents(self.typewriterLimit+1,nil)
+
+						self.typewriterLimit = characterCount
+						self.portraitTimer = 0
+					end
+					if player2.keys.run == KEYS_DOWN then
+						player2.keys.jump = true
+						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+						if not self.typewriterFinished then
+							self.typewriterDelay = self.typewriterDelay or 0
+						end
+						self.typewriterFinished = true
+						self.typewriterLongDelayWaiting = false
+						self.typewriterDelay = 0
+						self:activateTextEvents(self.typewriterLimit+0,nil)
+						self.typewriterLimit = 0
+						self.portraitTimer = 0
+						self:progress(true)
+						player2.keys.jump = KEYS_PRESSED
 					end
 				end
             end

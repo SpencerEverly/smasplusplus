@@ -205,30 +205,26 @@ end
 
 function globalgenerals.onInputUpdate()
 	if Player(2) and Player(2).isValid then
-		if Player(1).keys.altRun == KEYS_PRESSED and Player(1).keys.altJump == KEYS_PRESSED then
+		if Player(1).keys.altRun == KEYS_PRESSED and Player(1).keys.up == KEYS_PRESSED then
 			if pausemenu.paused == false then
 				Player(1):teleport(Player(2).x + 32, Player(2).y - 32, bottomCenterAligned)
 				SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
 				cooldown = 5
 				Player(1):mem(0x172,FIELD_BOOL,false)
-				Player(1):mem(0x120,FIELD_BOOL,false)
 			end
 			if cooldown <= 0 then
 				Player(1):mem(0x172,FIELD_BOOL,true)
-				Player(1):mem(0x120,FIELD_BOOL,true)
 			end
 		end
-		if Player(2).keys.altRun == KEYS_PRESSED and Player(2).keys.keys.altJump == KEYS_PRESSED then
+		if Player(2).keys.altRun == KEYS_PRESSED and Player(2).keys.up == KEYS_PRESSED then
 			if pausemenu.paused == false then
 				Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
 				SFX.play("_OST/_Sound Effects/player-tp-2player.ogg")
 				cooldown = 5
 				Player(2):mem(0x172,FIELD_BOOL,false)
-				Player(2):mem(0x120,FIELD_BOOL,false)
 			end
 			if cooldown <= 0 then
 				Player(2):mem(0x172,FIELD_BOOL,true)
-				Player(2):mem(0x120,FIELD_BOOL,true)
 			end
 		end
 	end

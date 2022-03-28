@@ -1,11 +1,13 @@
-local repl = {}
+local repll = {}
 
--- TODO: Handle unicode better. Textplus renders utf-8 fine, but repl for cursor management
---       purposes repl is not respecting multi-byte characters properly.
+-- TODO: Handle unicode better. Textplus renders utf-8 fine, but repll for cursor management
+--       purposes repll is not respecting multi-byte characters properly.
 
 local inspect = require("ext/inspect")
 local textplus = require("textplus")
 local rng = require("base/rng")
+
+pcall(function() return repl end)
 
 local unpack = _G.unpack or table.unpack
 local memo_mt = {__mode = "k"} --recommended by Rednaxela
@@ -36,13 +38,13 @@ end
 -- SYNTAX --
 ------------
 
-local repl_env = {}
-local repl_mt = {__index = Misc.getCustomEnvironment()}
-setmetatable(repl_env, repl_mt)
+local repll_env = {}
+local repll_mt = {__index = Misc.getCustomEnvironment()}
+setmetatable(repll_env, repll_mt)
 
 local rawload = load
 local function load(str)
-	return rawload(str, str, "t", repl_env)
+	return rawload(str, str, "t", repll_env)
 end
 load = memoize(load)
 
@@ -81,15 +83,15 @@ end
 ---------------------------
 
 
-if GameData._repl == nil then
-	GameData._repl = { history = {}, log = {} }
+if GameData._repll == nil then
+	GameData._repll = { history = {}, log = {} }
 end
 
-repl.log = GameData._repl.log
-repl.history = GameData._repl.history
-repl.buffer = ""
-repl.historyPos = 0
-repl.cursorPos = 0
+repll.log = GameData._repll.log
+repll.history = GameData._repll.history
+repll.buffer = ""
+repll.historyPos = 0
+repll.cursorPos = 0
 
 local function printString(str)
 	if str == nil then
@@ -97,10 +99,10 @@ local function printString(str)
 	end
 	if str:find("\n") then
 		for k,v in ipairs(str:split("\n")) do
-			table.insert(repl.log, v)
+			table.insert(repll.log, v)
 		end
 	elseif str then
-		table.insert(repl.log, str)
+		table.insert(repll.log, str)
 	end
 end
 
@@ -173,33 +175,36 @@ end
 local function cmd(str)
 	if isExpression(str) then
 		eval(str)
+		SFX.play("_OST/_Sound Effects/console/console_info.ogg")
 	elseif isValid(str) then
 		exec(str)
+		SFX.play("_OST/_Sound Effects/console/console_success.ogg")
 	else
 		printError(select(2, load(str)))
+		SFX.play("_OST/_Sound Effects/console/console_error.ogg")
 	end
 end
 
-function repl.cmd()
+function repll.cmd()
 	local isIncomplete = false
-	if not isExpression(repl.buffer) then
-		local _, err = load(repl.buffer)
+	if not isExpression(repll.buffer) then
+		local _, err = load(repll.buffer)
 		if err then
 			isIncomplete = err:match("expected near '<eof>'$") or err:match("'end' expected")
 		end
 	end
 	if isIncomplete then
-		repl.buffer = repl.buffer .. "\n"
-		repl.cursorPos = #repl.buffer
+		repll.buffer = repll.buffer .. "\n"
+		repll.cursorPos = #repll.buffer
 		return
 	end
-	printString(">" .. repl.buffer:gsub("\n", "\n "))
-	if repl.buffer ~= "" then
-		table.insert(repl.history, repl.buffer)
-		cmd(repl.buffer)
-		repl.buffer = ""
-		repl.historyPos = 0
-		repl.cursorPos = 0
+	printString(">" .. repll.buffer:gsub("\n", "\n "))
+	if repll.buffer ~= "" then
+		table.insert(repll.history, repll.buffer)
+		cmd(repll.buffer)
+		repll.buffer = ""
+		repll.historyPos = 0
+		repll.cursorPos = 0
 	end
 end
 
@@ -208,7 +213,7 @@ end
 -----------------------------
 
 local event_tbl = {}
-function repl_mt.__newindex(t, k, v)
+function repll_mt.__newindex(t, k, v)
 	if Misc.LUNALUA_EVENTS_TBL[k] then
 		if type(v) == "function" and type(event_tbl[k]) ~= "function" then
 			registerEvent(event_tbl, k)
@@ -221,40 +226,51 @@ function repl_mt.__newindex(t, k, v)
 	end
 end
 
-repl.active = false
-repl.activeInEpisode = false
-repl.background = Color(0,0,0,0.5)
+repll.active = false
+repll.activeInEpisode = false
+repll.background = Color(0,0,0,0.5)
 
-function repl.onInitAPI()
-	registerEvent(repl, "onKeyboardPressDirect")
-	registerEvent(repl, "onDraw")
-	registerEvent(repl, "onPasteText")
-	registerEvent(repl, "onInputUpdate")
+function repll.onInitAPI()
+	registerEvent(repll, "onKeyboardPressDirect")
+	registerEvent(repll, "onDraw")
+	registerEvent(repll, "onPasteText")
+	registerEvent(repll, "onInputUpdate")
 end
 
 function console.onInputUpdate()
-	if not repl.active then
+	if not repll.active then
 		if player.keys.dropItem == KEYS_PRESSED then
 			player.keys.dropItem = KEYS_PRESSED
 		end
 	end
-	if repl.active then
+	if repll.active then
 		if player.keys.dropItem == KEYS_PRESSED then
 			player.keys.dropItem = KEYS_UNPRESSED
 		end
 	end
+	if GameData.toggleoffkeys == true then
+		for k,v in pairs(player.keys) do
+			player.keys[k] = false
+		end
+	end
+	if GameData.toggleoffkeys == false or GameData.toggleoffkeys == nil then
+		for k,v in pairs(player.keys) do
+			player.keys[k] = true
+		end
+	end
 end
 
-function repl.onKeyboardPressDirect(vk, repeated, char)
-	if not (repl.activeInEpisode or Misc.inEditor()) then return end
+function repll.onKeyboardPressDirect(vk, repeated, char)
+	if not (repll.activeInEpisode or Misc.inEditor()) then return end
 
-	if not repl.active then
+	if not repll.active then
 		if (vk == VK_TAB) and (not repeated) then
 			Misc.pause()
 			SFX.play("_OST/_Sound Effects/console/console_open.ogg")
 			GameData.toggleoffinventory = true
+			GameData.toggleoffkeys = true
 			Misc.cheatBuffer("")
-			repl.active = true
+			repll.active = true
 		end
 		return
 	end
@@ -267,108 +283,112 @@ function repl.onKeyboardPressDirect(vk, repeated, char)
 			Misc.unpause()
 			SFX.play("_OST/_Sound Effects/console/console_close.ogg")
 			GameData.toggleoffinventory = false
-			repl.active = false
+			GameData.toggleoffkeys = false
+			repll.active = false
 		end
 	elseif vk == VK_RETURN then
+		SFX.play("_OST/_Sound Effects/console/console_keypressenter.ogg")
 		if Misc.GetKeyState(VK_SHIFT) then
-			local left, right = split(repl.buffer, repl.cursorPos)
-			repl.buffer = left .. "\n" .. right
-			repl.cursorPos = repl.cursorPos + 1
+			local left, right = split(repll.buffer, repll.cursorPos)
+			repll.buffer = left .. "\n" .. right
+			repll.cursorPos = repll.cursorPos + 1
 			blinker = 1
-			SFX.play("_OST/_Sound Effects/console/console_keypressenter.ogg")
 		else
-			repl.cmd()
+			repll.cmd()
 		end
 	elseif vk == VK_BACK then
-		local left, right = split(repl.buffer, repl.cursorPos)
-		repl.buffer = left:sub(1, -2) .. right
-		repl.cursorPos = math.max(0, repl.cursorPos - 1)
+		local left, right = split(repll.buffer, repll.cursorPos)
+		repll.buffer = left:sub(1, -2) .. right
+		repll.cursorPos = math.max(0, repll.cursorPos - 1)
 		SFX.play("_OST/_Sound Effects/console/console_keypressbackspace.ogg")
 		blinker = 1
 	elseif vk == VK_DELETE then
-		local left, right = split(repl.buffer, repl.cursorPos)
-		repl.buffer = left .. right:sub(2)
+		local left, right = split(repll.buffer, repll.cursorPos)
+		repll.buffer = left .. right:sub(2)
 		SFX.play("_OST/_Sound Effects/console/console_keypress7.ogg")
 		blinker = 1
 	elseif vk == VK_UP or vk == VK_DOWN then
 		if vk == VK_UP then
-			repl.historyPos = math.min(repl.historyPos + 1, #repl.history)
+			repll.historyPos = math.min(repll.historyPos + 1, #repll.history)
 		elseif vk == VK_DOWN then
-			repl.historyPos = math.max(0, repl.historyPos - 1)
+			repll.historyPos = math.max(0, repll.historyPos - 1)
 		end
-		if repl.historyPos == 0 then
-			repl.buffer = ""
+		if repll.historyPos == 0 then
+			repll.buffer = ""
 		else
-			repl.buffer = repl.history[#repl.history - repl.historyPos + 1]
+			repll.buffer = repll.history[#repll.history - repll.historyPos + 1]
 		end
-		repl.cursorPos = #repl.buffer
+		repll.cursorPos = #repll.buffer
 		blinker = 1
 	elseif vk == VK_LEFT then
-		repl.cursorPos = math.max(0, repl.cursorPos - 1)
+		repll.cursorPos = math.max(0, repll.cursorPos - 1)
 		blinker = 1
 	elseif vk == VK_RIGHT then
-		repl.cursorPos = math.min(repl.cursorPos + 1, #repl.buffer)
+		repll.cursorPos = math.min(repll.cursorPos + 1, #repll.buffer)
 		blinker = 1
 	elseif vk == VK_HOME then
+		SFX.play("_OST/_Sound Effects/console/console_resetfont.ogg")
 		if Misc.GetKeyState(VK_MENU) then
-			repl.resetFontSize()
+			repll.resetFontSize()
 		else
-			repl.cursorPos = 0
+			repll.cursorPos = 0
 			blinker = 1
 		end
 	elseif vk == VK_END then
-		repl.cursorPos = #repl.buffer
+		repll.cursorPos = #repll.buffer
 		blinker = 1
 	elseif vk == VK_PRIOR then
-		repl.increaseFontSize(0.1)
+		repll.increaseFontSize(0.1)
+		SFX.play("_OST/_Sound Effects/console/console_zoomin.ogg")
 	elseif vk == VK_NEXT then
-		repl.decreaseFontSize(0.1)
+		repll.decreaseFontSize(0.1)
+		SFX.play("_OST/_Sound Effects/console/console_zoomout.ogg")
 	elseif char ~= nil then
-		local left, right = split(repl.buffer, repl.cursorPos)
-		repl.buffer = left .. char .. right
-		repl.cursorPos = repl.cursorPos + #char
+		local left, right = split(repll.buffer, repll.cursorPos)
+		repll.buffer = left .. char .. right
+		repll.cursorPos = repll.cursorPos + #char
 		blinker = 1
 	end
 	Misc.cheatBuffer("")
 end
 
-function repl.onPasteText(pastedText)
-	local left, right = split(repl.buffer, repl.cursorPos)
-	repl.buffer = left .. pastedText .. right
-	repl.cursorPos = repl.cursorPos + #pastedText
+function repll.onPasteText(pastedText)
+	local left, right = split(repll.buffer, repll.cursorPos)
+	repll.buffer = left .. pastedText .. right
+	repll.cursorPos = repll.cursorPos + #pastedText
 	SFX.play("_OST/_Sound Effects/console/console_paste.ogg")
 	blinker = 1
 end
 
 do
-	local gtltreplace = {["<"] = "<lt>", [">"] = "<gt>", ["\n"] = "<br>"}
+	local gtltrepllace = {["<"] = "<lt>", [">"] = "<gt>", ["\n"] = "<br>"}
 
 	local doprint = {font=textplus.loadFont("textplus/font/5.ini"), color=Color.white, plaintext=true}
 	
-	doprint.xscale = GameData._repl.fontscale or 2
+	doprint.xscale = GameData._repll.fontscale or 2
 	doprint.yscale = doprint.xscale
 	
 	local glyphwid = (doprint.font.cellWidth + doprint.font.spacing)*doprint.xscale
 	
-	function repl.increaseFontSize(n)
+	function repll.increaseFontSize(n)
 		doprint.xscale = math.min(doprint.xscale + n, 3)
 		doprint.yscale = doprint.xscale
 		glyphwid = (doprint.font.cellWidth + doprint.font.spacing)*doprint.xscale
-		GameData._repl.fontscale = doprint.xscale
+		GameData._repll.fontscale = doprint.xscale
 	end
 	
-	function repl.decreaseFontSize(n)
+	function repll.decreaseFontSize(n)
 		doprint.xscale = math.max(doprint.xscale - n, 1)
 		doprint.yscale = doprint.xscale
 		glyphwid = (doprint.font.cellWidth + doprint.font.spacing)*doprint.xscale
-		GameData._repl.fontscale = doprint.xscale
+		GameData._repll.fontscale = doprint.xscale
 	end
 	
-	function repl.resetFontSize()
+	function repll.resetFontSize()
 		doprint.xscale = 2
 		doprint.yscale = doprint.xscale
 		glyphwid = (doprint.font.cellWidth + doprint.font.spacing)*doprint.xscale
-		GameData._repl.fontscale = doprint.xscale
+		GameData._repll.fontscale = doprint.xscale
 	end
 	
 	local gsub = string.gsub
@@ -381,7 +401,7 @@ do
 		textplus.render{x = x, y = y, layout = textLayout, priority=10}
 	end
 	
-	local bgobj = {color = repl.background, priority = 10}
+	local bgobj = {color = repll.background, priority = 10}
 	local printlist = {}
 	local listidx = 1
 	local function addprint(v)
@@ -390,17 +410,17 @@ do
 	end
 	local baseX, baseY = 0, 600
 	
-	function repl.onDraw()
-		if not repl.active then
+	function repll.onDraw()
+		if not repll.active then
 			return
 		end
 		
-		--Graphics.drawScreen(bgobj)
+		Graphics.drawScreen(bgobj)
 		local buffer
-		if find(repl.buffer, "\n") then
-			buffer = split(repl.buffer, "\n")
+		if find(repll.buffer, "\n") then
+			buffer = split(repll.buffer, "\n")
 		else
-			buffer = {repl.buffer}
+			buffer = {repll.buffer}
 		end
 
 		local y = baseY
@@ -427,10 +447,10 @@ do
 				local t = 0
 				for i = 1, #buffer do
 					local nt = t + #(buffer[i]) + 1
-					if nt > repl.cursorPos then
-						x = x + (glyphwid * (repl.cursorPos - t))
+					if nt > repll.cursorPos then
+						x = x + (glyphwid * (repll.cursorPos - t))
 						break
-					elseif nt == repl.cursorPos then
+					elseif nt == repll.cursorPos then
 						x = baseX + 4*doprint.xscale
 						y = y + 9*doprint.yscale
 						break
@@ -439,7 +459,7 @@ do
 					t = nt
 				end
 			else
-				x = x + (glyphwid * repl.cursorPos)
+				x = x + (glyphwid * repll.cursorPos)
 			end
 			_print("|", x, y)
 		end
@@ -448,13 +468,13 @@ do
 			blinker = -32
 		end
 		
-		for i = #repl.log, 1, -1 do
+		for i = #repll.log, 1, -1 do
 			y = y - 18
 			addprint("\n")
 			if y < 0 then
 				break
 			end
-			addprint(repl.log[i])
+			addprint(repll.log[i])
 		end
 
 		printlist[listidx] = nil
@@ -464,4 +484,4 @@ do
 	end
 end
 
-return repl
+return repll
