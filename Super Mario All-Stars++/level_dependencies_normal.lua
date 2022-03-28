@@ -8,6 +8,7 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local smasdeathsystem = require("smasdeathsystem")
+local comboSounds = require("comboSounds")
 
 local dying = false;
 local deathVisibleCount = 198;
@@ -165,7 +166,6 @@ function dependencies.onStart()
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 		playerphysicspatch = require("playerphysicspatch")
 		kindHurtBlock = require("kindHurtBlock")
-		comboSounds = require("comboSounds")
 		furyinventory = require("furyinventory")
 		warpTransition.musicFadeOut = false
 		warpTransition.levelStartTransition = warpTransition.TRANSITION_FADE
