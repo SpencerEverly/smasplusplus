@@ -662,7 +662,7 @@ function littleDialogue.create(args)
 	if Player.count() == 1 then
 		box.speakerObj = args.speakerObj or player
 	end
-	if Player.count() == 2 then
+	if Player(2) and Player(2).isValid then
 		box.speakerObj = args.speakerObj or player or player2
 	end
     box.uncontrollable = args.uncontrollable or false
@@ -1251,7 +1251,7 @@ function boxInstanceFunctions:update()
                         end
                     end
 					
-					if Player.count() == 2 then
+					if Player(2) and Player(2).isValid then
 						if player2.keys.up == KEYS_PRESSED and self.selectedAnswer > 1 then
 							self.selectedAnswer = self.selectedAnswer - 1
 
@@ -1283,7 +1283,7 @@ function boxInstanceFunctions:update()
                     self:progress(true)
                 end
 				
-				if Player.count() == 2 then
+				if Player(2) and Player(2).isValid then
 					if player2.keys.jump == KEYS_PRESSED then
 						self:progress(true)
 					end
@@ -1318,29 +1318,26 @@ function boxInstanceFunctions:update()
 					end
 				end
 				
-				if Player.count() == 2 then
-					if player2.keys.jump == KEYS_PRESSED then
-						self.typewriterFinished = true
-
-						self:activateTextEvents(self.typewriterLimit+1,nil)
-
-						self.typewriterLimit = characterCount
-						self.portraitTimer = 0
-					end
-					if player2.keys.run == KEYS_DOWN then
-						player2.keys.jump = true
-						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
-						if not self.typewriterFinished then
-							self.typewriterDelay = self.typewriterDelay or 0
+				if Player(2) and Player(2).isValid then
+					if GameData.answersActive == false then
+						if player2.keys.run == KEYS_DOWN then
+							player2.keys.run = KEYS_UP
+							player2.keys.jump = false
+							player2.keys.run = KEYS_UNPRESSED
+							player2.keys.jump = true
+							SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+							if not self.typewriterFinished then
+								self.typewriterDelay = self.typewriterDelay or 0
+							end
+							self.typewriterFinished = true
+							self.typewriterLongDelayWaiting = false
+							self.typewriterDelay = 0
+							self:activateTextEvents(self.typewriterLimit+0,nil)
+							self.typewriterLimit = 0
+							self.portraitTimer = 0
+							self:progress(true)
+							player2.keys.jump = KEYS_PRESSED
 						end
-						self.typewriterFinished = true
-						self.typewriterLongDelayWaiting = false
-						self.typewriterDelay = 0
-						self:activateTextEvents(self.typewriterLimit+0,nil)
-						self.typewriterLimit = 0
-						self.portraitTimer = 0
-						self:progress(true)
-						player2.keys.jump = KEYS_PRESSED
 					end
 				end
             end
@@ -1970,7 +1967,7 @@ function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
 			speakerObj = npcObj or playerObj or player
 		}
 	end
-	if Player.count() == 2 then
+	if Player(2) and Player(2).isValid then
 		littleDialogue.create{
 			text = text,
 			speakerObj = npcObj or playerObj or player or player2
