@@ -128,6 +128,11 @@ function dependencies2.onStart()
 		warpTransition.activateOnInstantWarps = false
 		pausemenu = require("pausemenu")
 		littleDialogue.defaultStyleName = "smbx13og"
+	end
+end
+
+function dependencies2.onTick()
+	if SaveData.disableX2char == true then
 		Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-jump.ogg")
 		Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/stomped.ogg")
 		Audio.sounds[3].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/block-hit.ogg")
@@ -221,9 +226,6 @@ function dependencies2.onStart()
 		extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo7.ogg")) --Shell hit 8
 		extrasounds.id113 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo8.ogg")) --Shell hit 9, basically a shell hit and a 1UP together
 	end
-end
-
-function dependencies2.onTick()
 	if Player(2) and Player(2).isValid then
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
 			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
