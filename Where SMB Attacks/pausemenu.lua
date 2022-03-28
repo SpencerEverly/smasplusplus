@@ -282,7 +282,7 @@ local function drawPauseMenu(y, alpha)
 		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 0}
 	end
 	if isOverworld then
-		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 2}
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 7}
 	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
@@ -350,7 +350,7 @@ local function drawPauseMenu(y, alpha)
 			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 0}
 		end
 		if isOverworld then
-			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 2}
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 7}
 		end
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
 		h2 = h2+2+6--font.charHeight;
@@ -408,9 +408,9 @@ local function drawPauseMenu(y, alpha)
 		textplus.render{layout = layout3, x = 230 - w*0.5, y = y+36, color = Color.white..alpha, priority = 0}
 	end
 	if isOverworld then
-		textplus.render{layout = layout, x = 230 - w*0.5, y = y+4, color = Color.white..alpha, priority = 2}
-		textplus.render{layout = layout2, x = 230 - w*0.5, y = y+20, color = Color.white..alpha, priority = 2}
-		textplus.render{layout = layout3, x = 230 - w*0.5, y = y+36, color = Color.white..alpha, priority = 2}
+		textplus.render{layout = layout, x = 230 - w*0.5, y = y+4, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout2, x = 230 - w*0.5, y = y+20, color = Color.white..alpha, priority = 7}
+		textplus.render{layout = layout3, x = 230 - w*0.5, y = y+36, color = Color.white..alpha, priority = 7}
 	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 
@@ -433,7 +433,7 @@ function pausemenu2.onDraw()
 			pause_box:Draw(-1, 0x00000077);
 		end
 		if isOverworld then
-			pause_box:Draw(1, 0x00000077);
+			pause_box:Draw(8, 0x00000077);
 		end
 		drawPauseMenu(300-pause_height*0.5,1)
 		

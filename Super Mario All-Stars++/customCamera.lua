@@ -67,7 +67,6 @@ customCamera.defaultScreenOffsetY = 0
 
 customCamera.defaultScaleX = 1
 customCamera.defaultScaleY = 1
-customCamera.defaultPriority = 10
 
 customCamera.targets = {}
 
@@ -970,7 +969,6 @@ local function makeDefaultSettings()
         rotation = customCamera.defaultRotation,
 		scaleX = customCamera.defaultScaleX,
 		scaleY = customCamera.defaultScaleY,
-		priority = customCamera.defaultPriority,
 
         offsetX = customCamera.defaultOffsetX,
         offsetY = customCamera.defaultOffsetY,
