@@ -40,7 +40,6 @@ function onDraw()
     end
 
     local message = mem(FIRST_PLAYER_CHARACTER_ADDR,FIELD_WORD)
-	local levelname = mem(0xB2C5A4, FIELD_STRING)
     local widths = letterWidths[message]
 
     if widths == nil then

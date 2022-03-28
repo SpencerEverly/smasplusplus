@@ -8,6 +8,10 @@ local mega2 = {}
 
 local offsets = nil;
 mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+mega2.megashrinksfx = Misc.resolveSoundFile("_OST/_Sound Effects/mega_shrink.ogg")
+mega2.megagrowsfx = Misc.resolveSoundFile("_OST/_Sound Effects/mega_grow.ogg")
+mega2.megarunningoutsfx = Misc.resolveSoundFile("megashroom-running-out.ogg")
+
 mega2.duration = lunatime.toTicks(13.8);
 local soundObject;
 local musicChunk;
@@ -163,7 +167,7 @@ function mega2.StopMega(pobj, useShrink)
 	
 	if(useShrink) then
 		growing[pobj] = -growthTime;
-		SFX.play("_OST/_Sound Effects/mega_shrink.ogg");
+		SFX.play(mega2.megashrinksfx);
 		Defines.player_walkspeed = nil;
 	elseif(used_donthurtme) then
 		Defines.cheat_donthurtme = used_donthurtme;
@@ -207,7 +211,7 @@ function mega2.StartMega(p, id)
 	p = p or player;
 	if inMega[p] then
 		megaTimers[p] = mega2.duration;
-		SFX.play("_OST/_Sound Effects/mega_grow.ogg");
+		SFX.play(mega2.megagrowsfx);
 		return
 		--mega.StopMega(p, false);
 	else
@@ -257,13 +261,13 @@ function mega2.StartMega(p, id)
 			
 			if(Graphics.getHUDType(p.character) == Graphics.HUD_ITEMBOX) then
 				p.reservePowerup = id;
-				SFX.play("_OST/_Sound Effects/mega_grow.ogg");
+				SFX.play(mega2.megagrowsfx);
 			else
 				p:mem(0x16,FIELD_WORD,p:mem(0x16,FIELD_WORD)+1);
 				if(p.powerup == 1) then
 					p:mem(0x140, FIELD_WORD, 50);
 					p:mem(0x120, FIELD_WORD, 1);
-					SFX.play("_OST/_Sound Effects/mega_grow.ogg");
+					SFX.play(mega2.megagrowsfx);
 				else
 					SFX.play(12);
 				end
@@ -276,7 +280,7 @@ function mega2.StartMega(p, id)
 	end
 	
 	if(canGrow) then
-		SFX.play("_OST/_Sound Effects/mega_grow.ogg");
+		SFX.play(mega2.megagrowsfx);
 		
 		starman.stop(p);
 
@@ -395,7 +399,7 @@ local function UpdateMegaState()
 						end
 						
 						if(megaTimers[p] == lunatime.toTicks(3.8)) then
-							SFX.play("megashroom-running-out.ogg")
+							SFX.play(mega2.megarunningoutsfx)
 						end
 						
 						--NO CLIMB THING

@@ -1405,10 +1405,10 @@ local function drawOtherOptionMenu(y, alpha)
 	local layout = textplus.layout(textplus.parse(name, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont}), pause_width)
 	local w,h = layout.width, layout.height
 	if not isOverworld then
-		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = -1}
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+16, color = Color.white..alpha, priority = -1}
 	end
 	if isOverworld then
-		textplus.render{layout = layout, x = 400 - w*0.5, y = y+8, color = Color.white..alpha, priority = 8}
+		textplus.render{layout = layout, x = 400 - w*0.5, y = y+16, color = Color.white..alpha, priority = 8}
 	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 	
@@ -1465,10 +1465,10 @@ local function drawOtherOptionMenu(y, alpha)
 		local layout = textplus.layout(textplus.parse(n, {xscale=1.5, yscale=1.5, font=pausefont3}), pause_width)
 		local h2 = layout.height
 		if not isOverworld then
-			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = -1}
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = -1}
 		end
 		if isOverworld then
-			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y, color = Color.fromHex(c+alpha*255), priority = 8}
+			textplus.render{layout = layout, x = 400 - layout.width*0.5, y = y+8, color = Color.fromHex(c+alpha*255), priority = 8}
 		end
 		--local _,h2 = textblox.printExt(n, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP,z=10, color = c+alpha*255})
 		h2 = h2+2+8--font.charHeight;
@@ -1528,16 +1528,16 @@ local function drawOtherOptionMenu(y, alpha)
 	local layout3 = textplus.layout(textplus.parse(resolutiontheme, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	local layout4 = textplus.layout(textplus.parse(musicmutedialogue, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), pause_width)
 	if not isOverworld then
-		textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = -1}
-		textplus.render{layout = layout2, x = 250 - w*0.5, y = y+20, color = Color.white..alpha, priority = -1}
-		textplus.render{layout = layout3, x = 250 - w*0.5, y = y+36, color = Color.white..alpha, priority = -1}
-		textplus.render{layout = layout4, x = 250 - w*0.5, y = y+52, color = Color.white..alpha, priority = -1}
+		textplus.render{layout = layout, x = 250 - w*0.5, y = y+16, color = Color.white..alpha, priority = -1}
+		textplus.render{layout = layout2, x = 250 - w*0.5, y = y+32, color = Color.white..alpha, priority = -1}
+		textplus.render{layout = layout3, x = 250 - w*0.5, y = y+48, color = Color.white..alpha, priority = -1}
+		textplus.render{layout = layout4, x = 250 - w*0.5, y = y+68, color = Color.white..alpha, priority = -1}
 	end
 	if isOverworld then
-		textplus.render{layout = layout, x = 250 - w*0.5, y = y+4, color = Color.white..alpha, priority = 8}
-		textplus.render{layout = layout2, x = 250 - w*0.5, y = y+20, color = Color.white..alpha, priority = 8}
-		textplus.render{layout = layout3, x = 250 - w*0.5, y = y+36, color = Color.white..alpha, priority = 8}
-		textplus.render{layout = layout4, x = 250 - w*0.5, y = y+52, color = Color.white..alpha, priority = 8}
+		textplus.render{layout = layout, x = 250 - w*0.5, y = y+16, color = Color.white..alpha, priority = 8}
+		textplus.render{layout = layout2, x = 250 - w*0.5, y = y+32, color = Color.white..alpha, priority = 8}
+		textplus.render{layout = layout3, x = 250 - w*0.5, y = y+48, color = Color.white..alpha, priority = 8}
+		textplus.render{layout = layout4, x = 250 - w*0.5, y = y+68, color = Color.white..alpha, priority = 8}
 	end
 	--local _,h = textblox.printExt(name, {x = 400, y = y, width=pause_width, font = font, halign = textblox.HALIGN_MID, valign = textblox.VALIGN_TOP, z=10, color = 0xFFFFFF00+alpha*255})
 
