@@ -1322,7 +1322,7 @@ Cheats.deregister("instantswitch") --Activates an automatic P-Switch.
 Cheats.register("fourthwall",{ --This one needs to be reregistered because I'm using a fork of the console, with sounds(TM)
 	onActivate = (function()
 		Defines.player_hasCheated = false
-		repll.activeInEpisode == true
+		repll.activeInEpisode = true
 		return true -- this makes the cheat not toggleable
 	end),
 	flashPlayer = true,activateSFX = 67,
