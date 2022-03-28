@@ -1,3 +1,5 @@
+local textplus = require("textplus")
+
 local inputconfigurator = {}
 
 function inputconfigurator.onInitAPI()
@@ -12,16 +14,19 @@ function inputconfigurator.onInitAPI()
 	ready = true
 end
 
+local smbx13font = textplus.loadFont("littleDialogue/smbx13/font.ini")
+local lockSelect = false
 inputconfigurator.controlConfigOpen = false
+
 local controlConfigCount = 0
-local controlConfigs = { 	[0] = "Press any button to start",
-							"Jump",
-							"Run",
-							"Alt Jump",
-							"Alt Run",
-							"Drop Item",
-							"Pause",
-							"Press any button to confirm"
+local controlConfigs = { 	[0] = "Press any button to start.",
+							"Press a key to assign Jump.",
+							"Press a key to assign Run.",
+							"Press a key to assign Alt Jump.",
+							"Press a key to assign Alt Run.",
+							"Press a key to assign Drop Item.",
+							"Press a key to assign Pause.",
+							"Press any button to confirm."
 						}
 						
 local configButtons = 	{	
@@ -38,6 +43,7 @@ local currentConfig = {}
 
 local function writeButtonConfigs()
 	if currentController == nil then
+		inputconfigurator.nocontroller = false
 		return
 	else
 		local t = nil
@@ -67,8 +73,11 @@ function inputconfigurator.onKeyboardPressDirect(k, repeated)
 	
 	if (k == VK_RETURN) then
 		inputconfigurator.returnPressedState = true
-	elseif (k == VK_BACKSPACE) then
+	elseif (k == VK_BACK) then
 		inputconfigurator.backspacePressedState = true
+		SFX.play("_OST/_Sound Effects/inputconfig/input_quit.ogg")
+		inputconfigurator.controlConfigOpen = false
+		GameData.reopenmenu = true
 	end
 end
 
@@ -77,55 +86,68 @@ function inputconfigurator.onControllerButtonPress(btn, pnum, controller)
 		if controlConfigCount == 0 then
 			currentController = { controller, pnum }
 			controlConfigCount = 1
+			SFX.play("_OST/_Sound Effects/inputconfig/input_started.ogg")
 			return
 		elseif currentController == nil then
 			currentController = { controller, pnum }
+			inputconfigurator.nocontroller = true
 		end
 		
 		if currentController[1] == controller and currentController[2] == pnum then
+			inputconfigurator.nocontroller = false
 			if controlConfigCount < #controlConfigs then
 				currentConfig[controlConfigCount] = btn
+				SFX.play("_OST/_Sound Effects/inputconfig/input_switchpressed.ogg")
 				controlConfigCount = controlConfigCount + 1
 			else
 				inputconfigurator.controlConfigOpen = false
-				Audio.playSFX(20)
+				SFX.play("_OST/_Sound Effects/inputconfig/input_success.ogg")
 				writeButtonConfigs()
 				lockSelect = true
+				GameData.reopenmenu = true
 			end
 		end
 	end
 end
 
+local function textPrint(t, x, y, color)
+	textplus.print{text=t, x=x, y=y, plaintext=true, xscale=1, yscale=1, color=color, priority = -1, font = smbx13font}
+end
+
+local function textPrintCentered(t, x, y, color)
+	textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1, yscale=1, color=color, priority = -1, font = smbx13font}
+end
+
 function inputconfigurator.onDraw()
 	if inputconfigurator.controlConfigOpen then
 		
-		local w = 400
-		local h = 256
+		local w = 580
+		local h = 260
 		
 		local xPos = 400 - w*0.5
 		local yPos = 300 - h*0.5
 		
-		Graphics.drawBox{x = xPos, y = yPos - 20, width = w, height = h, color={0,0,0,0.5}, priority = 10}
-		Graphics.drawImageWP(Graphics.sprites.hardcoded["57-0"].img, 400 - 128, 300 - 64 - 40, 10)
+		Graphics.drawBox{x = xPos, y = yPos - 20, width = w, height = h, color={0,0,0,0.75}, priority = -2}
+		Graphics.drawImageWP(Graphics.sprites.hardcoded["57-0"].img, 400 - 128, 300 - 64 - 40, -2)
 		
-		textPrintCentered("Controller Configurator", 400, yPos + 10)
+		textPrintCentered("Controller Configurator", 400, yPos + -1)
 		
 		textPrintCentered(controlConfigs[controlConfigCount], 400, yPos + 160)
 		
 		if configButtons[controlConfigCount] then
 			local v = configButtons[controlConfigCount]
-			Graphics.drawImageWP(Graphics.sprites.hardcoded["57-1"].img, 400 + v.pos.x, 300-40 + v.pos.y, 0, 20*v.img, 20, 20, 10)
+			Graphics.drawImageWP(Graphics.sprites.hardcoded["57-1"].img, 400 + v.pos.x, 300-40 + v.pos.y, 0, 20*v.img, 20, 20, -2)
 		end
 		
 		textPrintCentered("Press Backspace to cancel", 400, yPos + 210)
 		
 		if escPressedState then
 			inputconfigurator.controlConfigOpen = false
-			Audio.playSFX(30)
+			GameData.reopenmenu = true
 		end
 	end
 	inputconfigurator.returnPressedState = false
 	escPressedState = false
 end
 
-return inputconfig
+return inputconfigurator

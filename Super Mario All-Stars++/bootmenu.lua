@@ -635,10 +635,6 @@ local function credits1()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
-function startConfigurator()
-	inputconfigurator.controlConfigOpen = true
-end
-
 local function X2Char()
 	if SaveData.disableX2char == false then
 		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
@@ -653,7 +649,11 @@ local function X2Char()
 end
 
 local function InputConfig1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>To begin configuring the inputs of the game, please select Begin to get started.<question StartInputs>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>To begin configuring the inputs of the game, please select Begin to get started (Controller only).<question StartInputs>", pauses = false, updatesInPause = true})
+end
+
+local function startConfigurator()
+	inputconfigurator.controlConfigOpen = true
 end
 
 local function X2DisableCheck1()
@@ -1142,6 +1142,10 @@ function bootmenu.onTick()
 		end
 		if GameData.startedmenu == nil then
 			GameData.startedmenu = GameData.startedmenu or 0
+		end
+		if GameData.reopenmenu == true then
+			Routine.run(bootDialogue)
+			GameData.reopenmenu = false
 		end
 		player:setFrame(50)
 		player:mem(0x140, FIELD_BOOL, 150)
@@ -1755,7 +1759,7 @@ if bootmenu.active == true then
 
 	
 	
-	littleDialogue.registerAnswer("StartInputs",{text = "Start",chosenFunction = function() Routine.run(startConfigurator) end})
+	littleDialogue.registerAnswer("StartInputs",{text = "Begin",chosenFunction = function() Routine.run(startConfigurator) end})
 	littleDialogue.registerAnswer("StartInputs",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
 	
 
