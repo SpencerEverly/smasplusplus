@@ -689,9 +689,7 @@ function furyinventory.onInputUpdate()
 			furyinventory.activatefuryinventory = false
 		end
 		if pausemenu.pauseactivated == false then
-			if player.keys.dropItem == KEYS_PRESSED then
-				player.keys.dropItem = KEYS_UNPRESSED
-			end
+			
 		end
 		if pausemenu.pauseactivated == true then
 			if player.keys.dropItem == KEYS_PRESSED then

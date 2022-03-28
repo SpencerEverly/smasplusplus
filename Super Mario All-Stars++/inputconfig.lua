@@ -71,13 +71,13 @@ end
 function inputconfigurator.onKeyboardPressDirect(k, repeated)
 	if repeated then return end
 	
-	if (k == VK_RETURN) then
-		inputconfigurator.returnPressedState = true
-	elseif (k == VK_BACK) then
-		inputconfigurator.backspacePressedState = true
-		SFX.play("_OST/_Sound Effects/inputconfig/input_quit.ogg")
-		inputconfigurator.controlConfigOpen = false
-		GameData.reopenmenu = true
+	if inputconfigurator.controlConfigOpen then
+		if (k == VK_BACK) then
+			inputconfigurator.backspacePressedState = true
+			SFX.play("_OST/_Sound Effects/inputconfig/input_quit.ogg")
+			inputconfigurator.controlConfigOpen = false
+			GameData.reopenmenu = true
+		end
 	end
 end
 

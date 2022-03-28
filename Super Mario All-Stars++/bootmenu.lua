@@ -775,7 +775,7 @@ local function BootDialogueMusicReset()
 	logo = false
 	pressjumpwords = false
 	stpatricksday = false
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 	if Level.filename() == "intro_8bit.lvlx" then
 		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
 	end
@@ -1032,11 +1032,15 @@ local function PigeonRaca1()
 end
 
 local function foolsinapril()
-	autoscroll.scrollLeft(5000)
+	GameData.holidayrun = false
 	Misc.pause()
 	Routine.wait(5.5, true)
+	SFX.play("_OST/_Sound Effects/aprilfools.ogg")
+	Routine.wait(2, true)
 	Misc.unpause()
-	GameData.startedmenu = 4
+	aprilfools = false
+	GameData.reopenmenumusreset = true
+	GameData.startedmenu = 1
 end
 
 function bootmenu.onInitAPI()
@@ -1146,6 +1150,10 @@ function bootmenu.onTick()
 		if GameData.reopenmenu == true then
 			Routine.run(bootDialogue)
 			GameData.reopenmenu = false
+		end
+		if GameData.reopenmenumusreset == true then
+			Routine.run(BootDialogueMusicReset)
+			GameData.reopenmenumusreset = false
 		end
 		player:setFrame(50)
 		player:mem(0x140, FIELD_BOOL, 150)
@@ -1329,19 +1337,25 @@ function bootmenu.onInputUpdate()
 			end
 		end
 		if (os.date("*t").month == 04 and os.date("*t").day == 01) then
-			if player.keys.jump == KEYS_PRESSED then
-				player.jumpKeyPressing = false
-				player.keys.jump = false
-				player.rawKeys.jump = false
-				GameData.startedmenu = 1
-				Audio.MusicChange(0, 0)
-				logo = false
-				datetime.bottomright = false
-				active = true
-				pressjumpwords = false
-				aprilfools = true
-				SFX.play("_OST/_Sound Effects/windows_error.ogg")
-				Routine.run(foolsinapril)
+			if GameData.holidayonetime == nil then
+				if player.keys.jump == KEYS_PRESSED then
+					GameData.startedmenu = 1
+					Audio.MusicChange(0, 0)
+					logo = false
+					datetime.bottomright = false
+					active = true
+					pressjumpwords = false
+					aprilfools = true
+					SFX.play("_OST/_Sound Effects/windows_error.ogg")
+					GameData.holidayrun = true
+					if GameData.holidayrun == true then
+						GameData.holidayonetime = true
+						Routine.run(foolsinapril)
+					end
+				end
+				if GameData.holidayonetime == true then
+					--Do nothing
+				end
 			end
 		end
 		if GameData.startedmenu == 4 then
