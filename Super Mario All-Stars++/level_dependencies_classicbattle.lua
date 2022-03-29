@@ -84,13 +84,13 @@ end
 
 function exitbattlemode()
 	Graphics.activateHud(false)
-	Cheats.trigger("1player")
+	--Cheats.trigger("1player")
 	Defines.player_hasCheated = false
 	exitscreen = true
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("SMAS - Start", nil, nil)
+	Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
 function p1teleportdoor()

@@ -41,14 +41,15 @@ pausemenu.pauseactivated = true
 
 local soundObject
 
+local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
+local selecter = rng.randomInt(1,#battlelevelsrng)
+local randombattlelevel = battlelevelsrng[selecter]
+
 if not isOverworld then
 	local levelname = Level.filename()
 	local levelformat = Level.format()
 	local costumes = playerManager.getCostumes(player.character)
 	local level = Level.filename()
-	local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
-	local selecter = rng.randomInt(1,#battlelevelsrng)
-	local randombattlelevel = battlelevelsrng[selecter]
 end
 
 pausemenu.paused = false;
