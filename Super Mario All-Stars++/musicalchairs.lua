@@ -2253,6 +2253,14 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/SMW_Castle-KM.ogg"
 			elseif section.musicPath == "_OST/Super Mario World/Boss Battle.spc|0;g=2.5" then
 				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/BossSMW.ogg"
+			elseif section.musicPath == "_OST/Super Mario World/Memory/11 Here We Go.spc|0;g=2.5" then
+				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/SMWOverworld.ogg"
+			elseif section.musicPath == "_OST/Super Mario World/Memory/11 Here We Go.spc|0;g=2.5" then
+				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/SMWOverworld.ogg"
+			elseif section.musicPath == "_OST/Super Mario World/Swimming.spc|0;g=2.5" then
+				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/WaterSMW.ogg"
+			elseif section.musicPath == "_OST/Super Mario World/Underground 2.spc|0;g=2.5" then
+				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/Caves.ogg"
 			--Super Mario Bros. Spencer
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld.ogg" then
 				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/OverworldSMBS.ogg"
