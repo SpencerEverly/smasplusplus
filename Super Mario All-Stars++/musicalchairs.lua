@@ -2270,8 +2270,6 @@ function musicalchairs.onTick()
 				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/CavesSMBS.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Athletic.ogg" then
 				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/AthleticSMBS.ogg"
-			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Athletic.ogg" then
-				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/AthleticSMBS.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Going Underground.ogg" then
 				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/OverworldSMBS.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Tower.ogg" then
