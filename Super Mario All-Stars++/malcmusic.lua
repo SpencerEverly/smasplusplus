@@ -405,6 +405,16 @@ function malcmusic.onTick()
 						currentSfxOutRain:fadeout(50)
 						currentSfxOutRain = nil
 					end
+				elseif rainState == false then
+					if currentSfxOutRain then
+						currentSfxOutRain:fadeout(50)
+						currentSfxOutRain = nil
+					end
+				elseif prevState == false then
+					if currentSfxInRain then
+						currentSfxInRain:fadeout(50)
+						currentSfxInRain = nil
+					end
 				end
 				prevSection = player.section
 				prevRainState = rainState
