@@ -1209,9 +1209,6 @@ function bootmenu.onTick()
 		if SaveData.failsafeMessageOne == 1 then
 			Routine.run(FailsafeMessage1)
 		end
-		for i = 1,91 do
-			Audio.sounds[i].muted = true
-		end
 		Audio.sounds[1].muted = true
 		Audio.sounds[2].muted = true
 		Audio.sounds[3].muted = true
@@ -1576,6 +1573,7 @@ if bootmenu.active == true then
 	Cheats.deregister("itsameeric")
 	Cheats.deregister("itsamejcfoster")
 	Cheats.deregister("itsamefrisk")
+	Cheats.deregister("fuckyou")
 
 	--The rest will disable most cheats to avoid breaking the boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
