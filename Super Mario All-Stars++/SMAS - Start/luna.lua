@@ -138,7 +138,7 @@ function onKeyboardPress(k, v)
 		twoPressedState = false
 		if k == VK_2 then
 			SaveData.introselect = 1
-			Routine.run(preboot)
+			Level.load("intro_SMAS.lvlx", nil, nil)
 			twoPressedState = true
 		end
 	end
@@ -147,7 +147,7 @@ function onKeyboardPress(k, v)
 		if k == VK_3 then
 			SaveData.clear()
 			SaveData.flush()
-			Routine.run(preboot)
+			Level.load("intro_SMAS.lvlx", nil, nil)
 			threePressedState = true
 		end
 	end
