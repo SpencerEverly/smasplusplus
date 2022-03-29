@@ -1097,7 +1097,7 @@ ID:125;X:-179458;Y:-180120;D:-1;
 ID:147;X:-171072;Y:-180128;D:-1;GE:1;GT:2;GD:1;GM:17;LR:"Veggies";
 ID:147;X:-171136;Y:-180128;D:-1;GE:1;GT:2;GD:1;GM:20;LR:"Veggies";
 ID:147;X:-171008;Y:-180128;D:-1;GE:1;GT:2;GD:1;GM:14;LR:"Veggies";
-ID:209;X:-170800;Y:-180186;D:-1;EA:"Boss Begin";ED:"Boss End";
+ID:209;X:-170800;Y:-180186;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:208;X:-170816;Y:-180192;D:-1;
 ID:204;X:-178248;Y:-180252;D:-1;
 ID:21;X:-178080;Y:-180288;D:-1;
@@ -1158,7 +1158,7 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Begin";AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
 ET:"Boss End";LH:["Veggies"];LS:["Exit Pipe"];DS:1;AS:0;AX:0;AY:0;
 ET:"Bonus Opened";SD:27;LS:["Bonus Warp"];DS:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
