@@ -3,7 +3,9 @@ local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
-local musicalchairs = require("musicalchairs")
+if not isOverworld then
+	local musicalchairs = require("musicalchairs")
+end
 
 GameData.muteMusic = false
 local musicmuted = false
@@ -901,7 +903,9 @@ local function costumechangeright()
 	else
 		player:setCostume(costumes[1])
 	end
-	Routine.run(musicalchairs.switcher)
+	if not isOverworld then
+		Routine.run(musicalchairs.switcher)
+	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 end
@@ -916,7 +920,9 @@ local function costumechangeleft()
 	else
 		player:setCostume(costumes[1])
 	end
-	Routine.run(musicalchairs.switcher)
+	if not isOverworld then
+		Routine.run(musicalchairs.switcher)
+	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 end
