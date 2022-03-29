@@ -2251,10 +2251,6 @@ function musicalchairs.onStart()
 	Routine.run(musdelay)
 end
 
-function musicalchairs.onDraw()
-	Text.print(started, 100, 100)
-end
-
 --onTick is for sections that don't change the section music.
 function musicalchairs.onTick()
 	--section.musicPath is the command that changes sections. You can specify the original music path, and it'll replace it with the new path/to/file.extension.
