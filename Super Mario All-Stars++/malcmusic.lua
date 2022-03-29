@@ -51,10 +51,6 @@ function malcmusic.onInitAPI()
 	ready = true
 end
 
-function malcmusic.onDraw()
-	Text.print(weatherControl, 100, 100)
-end
-
 function malcmusic.onStart()
 	for i = 0,20 do
 		local SectionAll = Section(i)
