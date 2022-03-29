@@ -2233,7 +2233,8 @@ function musicalchairs.onTick()
 			--Super Mario Bros. 3
 			--TBD
 			--Super Mario World
-			--TBD
+			elseif section.musicPath == "_OST/Super Mario World/Here We Go (Advance).spc|0;g=2.7" then
+				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/SMWOverworld.ogg"
 			--Super Mario Bros. Spencer
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld.ogg" then
 				section.musicPath = "_OST\Super Mario All-Stars++ (Beta)/OverworldSMBS.ogg"
