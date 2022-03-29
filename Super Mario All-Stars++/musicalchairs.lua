@@ -2393,19 +2393,19 @@ function musicalchairs.onTick()
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld.ogg" then
 				section.musicPath = "_OST/Super Mario Bros (NES)/Overworld (SMBS).ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Star.ogg" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/StarSMBS.ogg"
+				section.musicPath = "_OST/Super Mario Bros (NES)/Star (SMBS).ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Caves.ogg" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/CavesSMBS.ogg"
+				section.musicPath = "_OST/Super Mario Bros (NES)/Caves (SMBS).ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Athletic.ogg" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/AthleticSMBS.ogg"
+				section.musicPath = "_OST/Super Mario Bros (NES)/Athletic (SMBS).ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Going Underground.ogg" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/OverworldSMBS.ogg"
+				section.musicPath = "_OST/Super Mario Bros (NES)/Overworld (SMBS).ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Tower.ogg" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/TowerSMBS.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Boss Battle.ogg" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BossBattleSMBS.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Going Underwater.ogg" then
-				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/OverworldSMBS.ogg"
+				section.musicPath = "_OST/Super Mario Bros (NES)/Overworld (SMBS).ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Water.ogg" then
 				section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/WaterSMBS.ogg"
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Forest.ogg" then
