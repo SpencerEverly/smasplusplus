@@ -2388,7 +2388,6 @@ function musicalchairs.onTick()
 				section.music = "_OST/Super Mario Bros (NES)/Final Battle.ogg"
 			elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
 				section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|11;g=1.5"
-			end
 			--Super Mario Bros. Spencer
 			elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld.ogg" then
 				section.musicPath = "_OST/Super Mario Bros (NES)/Overworld (SMBS).ogg"
