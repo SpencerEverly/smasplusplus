@@ -15,9 +15,9 @@ local costumes = playerManager.getCostumes(player.character)
 local currentCostume = player:getCostume()
 local costumes
 
-local rain = false
-local snow = false
-local sunny = true
+local rain
+local snow
+local sunny
 
 local rainoutsidesfx = SFX.open("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
 local raininsidesfx = SFX.open("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
@@ -38,12 +38,8 @@ local sec0 = Section(0)
 local sec6 = Section(6)
 local sec10 = Section(10)
 
-local possibleWeather = {
-	{"sunny", "rain", "snow"}
-}
-
-local currentPossibleWeather = possibleWeather[1]
-local currentWeather = RNG.irandomEntry(currentPossibleWeather)
+local possibleWeather = {"sunny","rain","snow"}
+local weatherControl = rng.randomEntry(possibleWeather)
 
 local ready = false
 
@@ -51,11 +47,15 @@ function malcmusic.onInitAPI()
 	registerEvent(malcmusic, "onStart")
 	registerEvent(malcmusic, "onTick")
 	registerEvent(malcmusic, "onEvent")
+	registerEvent(malcmusic, "onDraw")
 	ready = true
 end
 
+function malcmusic.onDraw()
+	Text.print(weatherControl, 100, 100)
+end
+
 function malcmusic.onStart()
-	currentWeather = true
 	for i = 0,20 do
 		local SectionAll = Section(i)
 		if os.date("*t").month == 03 and os.date("*t").day == 17 then
@@ -175,7 +175,7 @@ function malcmusic.onTick()
 				SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
 			end
 		end
-		if snow == true then
+		if weatherControl == "snow" then
 			if player.section == 0 then
 				snowState = true
 				prevState = false
@@ -349,7 +349,7 @@ function malcmusic.onTick()
 				end
 			end
 		end
-		if rain == true then
+		if weatherControl == "rain" then
 			if player.section == 0 then
 				rainState = true
 				prevState = false
@@ -534,7 +534,7 @@ function malcmusic.onTick()
 				end
 			end
 		end
-		if sunny == true then
+		if weatherControl == "sunny" then
 			if holiday == false then
 				if hour == "00" then
 					Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
