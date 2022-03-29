@@ -11,8 +11,9 @@
 
 local playerManager = require("playermanager")
 local npcManager = require("npcManager")
-local extrasounds = require("extrasounds")
-local smasdeathsystem = require("smasdeathsystem")
+if not isOverworld then
+	local extrasounds = require("extrasounds")
+end
 
 local textplus = require("textplus")
 
@@ -4609,7 +4610,7 @@ function yoshi.onBlockHit(eventObj,block,fromTop,culpritPlayer)
 end
 
 function yoshi.onExitLevel(exitType)
-    if exitType > 0 and smasdeathsystem.hasDied == false then
+    if exitType > 0 then
         saveEggs()
     end
 end
