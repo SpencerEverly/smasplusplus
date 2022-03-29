@@ -382,20 +382,25 @@ function malcmusic.onTick()
 			elseif player.section == 12 then
 				rainState = false
 				prevState = true
-			elseif player.section == 3 then
+			elseif player.section == 13 then
+				rainState = false
+				prevState = true
+			elseif player.section == 14 then
 				rainState = false
 				prevState = true
 			end
 			if (rainState ~= prevRainState) or (prevSection ~= player.section) then
-				if rainState then
+				if rainState == true then
 					Section(player.section).effects.weather = WEATHER_RAIN
 					currentSfxOutRain = SFX.play(rainoutsidesfx, 1, 0)
+					
 					if currentSfxInRain then
 						currentSfxInRain:fadeout(50)
 						currentSfxInRain = nil
 					end
-				elseif prevState then
+				elseif prevState == true then
 					currentSfxInRain = SFX.play(raininsidesfx, 1, 0)
+					
 					if currentSfxOutRain then
 						currentSfxOutRain:fadeout(50)
 						currentSfxOutRain = nil
@@ -404,8 +409,7 @@ function malcmusic.onTick()
 				prevSection = player.section
 				prevRainState = rainState
 				prevPreviousState = prevState
-				--prevInsideState = insideState
-				--prevRainState = rainState
+				prevInsideState = insideState
 			end
 			if holiday == false then
 				if hour == "00" then

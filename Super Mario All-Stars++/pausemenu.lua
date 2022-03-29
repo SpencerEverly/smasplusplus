@@ -37,10 +37,6 @@ local str = "Loading HUB..."
 
 local pausemenu = {}
 
-local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
-local selecter = rng.randomInt(1,#battlelevelsrng)
-local randombattlelevel = battlelevelsrng[selecter]
-
 pausemenu.pauseactivated = true
 
 local soundObject
@@ -50,6 +46,9 @@ if not isOverworld then
 	local levelformat = Level.format()
 	local costumes = playerManager.getCostumes(player.character)
 	local level = Level.filename()
+	local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
+	local selecter = rng.randomInt(1,#battlelevelsrng)
+	local randombattlelevel = battlelevelsrng[selecter]
 end
 
 pausemenu.paused = false;
@@ -987,22 +986,32 @@ local function drawPauseMenu(y, alpha)
 		{
 			{name="Continue", action=unpause}
 		}
-		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false  then
-			table.insert(pause_options, {name="Restart", action = restartlevel});
+		if not isOverworld then
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Restart", action = restartlevel});
+			end
 		end
-		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			table.insert(pause_options, {name="Exit to the Main Map", action = exitlevel2});
+		if not isOverworld then
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Exit to the Main Map", action = exitlevel2});
+			end
 		end
-		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			table.insert(pause_options, {name="Return to the Previous Level", action = returntolastlevel});
+		if not isOverworld then
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Return to the Previous Level", action = returntolastlevel});
+			end
 		end
-		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			if Level.filename() == "MALC - HUB.lvlx" then
-				table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
+		if not isOverworld then
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				if Level.filename() == "MALC - HUB.lvlx" then
+					table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
+				end
 			end
 		end
 		if isOverworld then
-			table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Teleporting Options", action = switchtotele});
+			end
 		end
 		if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			table.insert(pause_options, {name="Character Options", action = switchtochar});
@@ -1010,30 +1019,43 @@ local function drawPauseMenu(y, alpha)
 		if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			table.insert(pause_options, {name="Other Options", action = switchtoothermenu});
 		end
-		--table.insert(pause_options, {name="Toggle Widescreen Letterbox", action = changeletterbox});
-		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			table.insert(pause_options, {name="Save and Continue", action = savegame});
+		if not isOverworld then
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Save and Continue", action = savegame});
+			end
 		end
 		if isOverworld then
-			table.insert(pause_options, {name="Save and Continue", action = savegamemap});
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Save and Continue", action = savegamemap});
+			end
 		end
-		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
+		if not isOverworld then
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Save and Reset Game", action = mainmenu});
+			end
 		end
-		if not isOverworld and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			table.insert(pause_options, {name="Save and Quit", action = quitgame});
+		if not isOverworld then
+			if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+				table.insert(pause_options, {name="Save and Quit", action = quitgame});
+			end
 		end
 		if isOverworld then
 			table.insert(pause_options, {name="Save and Quit", action = quitgamemap});
 		end
-		if GameData.battlemodeactive == true then
-			table.insert(pause_options, {name="Start a New Stage", action = battlemodenewstage});
+		if not isOverworld then
+			if GameData.battlemodeactive == true then
+				table.insert(pause_options, {name="Start a New Stage", action = battlemodenewstage});
+			end
 		end
-		if GameData.battlemodeactive == true then
-			table.insert(pause_options, {name="Restart this Stage", action = restartlevel});
+		if not isOverworld then
+			if GameData.battlemodeactive == true then
+				table.insert(pause_options, {name="Restart this Stage", action = restartlevel});
+			end
 		end
-		if GameData.battlemodeactive == true then
-			table.insert(pause_options, {name="Exit Battle Mode", action = battlemodeexit});
+		if not isOverworld then
+			if GameData.battlemodeactive == true then
+				table.insert(pause_options, {name="Exit Battle Mode", action = battlemodeexit});
+			end
 		end
 	end
 	for k,v in ipairs(pause_options) do
