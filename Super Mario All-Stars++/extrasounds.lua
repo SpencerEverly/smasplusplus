@@ -263,11 +263,13 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 end
 
 function extrasounds.onPostExplosion(effect)
-	if effect.id == 69 then
-		SFX.play(extrasounds.id104)
-	end
-	if effect.id == 71 then
-		SFX.play(extrasounds.id43)
+	if extrasounds.active == true then
+		if effect.id == 69 then
+			SFX.play(extrasounds.id104)
+		end
+		if effect.id == 71 then
+			SFX.play(extrasounds.id43)
+		end
 	end
 end
 
