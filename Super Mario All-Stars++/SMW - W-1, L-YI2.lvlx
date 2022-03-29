@@ -3,7 +3,7 @@ TL:"Super Mario World\: Yoshi's Island 2";SZ:1;XTRA:"{\n    \"timer\"\: {\n     
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-189696;T:-200992;B:-200000;MZ:24;MF:"_OST/Super Mario World/Forest.spc|0\;g=2.5";BG:12;
-SC:1;L:-180064;R:-179008;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Underground.spc|0\;g=2.6";BG:30;
+SC:1;L:-180064;R:-179008;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Underground.spc|0\;g=2.5";BG:30;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT

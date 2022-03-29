@@ -2,9 +2,9 @@ HEAD
 TL:"Super Mario World\: Iggy's Castle (World 1)";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-195680;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Castle.spc|0\;g=2.7";BG:42;
-SC:1;L:-180000;R:-177792;T:-180672;B:-180000;MZ:24;MF:"_OST/Super Mario World/Castle.spc|0\;g=2.7";BG:42;
-SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario World/Boss Battle.spc|0\;g=2.7";BG:29;
+SC:0;L:-200000;R:-195680;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Castle.spc|0\;g=2.5";BG:42;
+SC:1;L:-180000;R:-177792;T:-180672;B:-180000;MZ:24;MF:"_OST/Super Mario World/Castle.spc|0\;g=2.5";BG:42;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario World/Boss Battle.spc|0\;g=2.5";BG:29;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
