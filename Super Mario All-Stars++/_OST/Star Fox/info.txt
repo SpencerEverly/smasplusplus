@@ -1,0 +1,27 @@
+Star Fox
+Dumped by: Datschge, YK, nensondubois, KungFuFurby
+ID666 tags by: Datschge
+Downloaded from: http://snesmusic.org
+
+Update 4:
+-Eight new songs/jingles/variations.
+-Boss (Macbeth) redumped.
+
+Update 3:
+-Tracks 20-24 redumped again.
+
+Update 2:
+-Three tracks (20, 22, 23) redumped.
+
+Update:
+-Missing song added.
+
+Version: v1.2
+New set now using the extended id666 tag format
+	 v1.1
+Replaced 18 songs with airplane-noise-free versions
+This should be the real final version now
+
+Version: v1.3
+Two missing tracks added. Old "Continue" theme renamed to
+"Game Over" to avoid confusion.
