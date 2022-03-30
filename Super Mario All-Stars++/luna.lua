@@ -95,6 +95,11 @@ function onStart()
 		yesterdaystring = tostring(yesterdaynumber)
 		SaveData.dateplayedyesterday = yesterdaystring
 	end
+	if SaveData.dateplayedtomorrow == nil then
+		tomorrownumber = tonumber(SaveData.dateplayedday) + 1
+		tomorrowstring = tostring(tomorrownumber)
+		SaveData.dateplayedtomorrow = tomorrowstring
+	end
 	fadetolevel = false
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(800)

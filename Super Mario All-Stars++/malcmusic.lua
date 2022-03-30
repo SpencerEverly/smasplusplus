@@ -58,13 +58,16 @@ function malcmusic.onStart()
 	--Daily weather, no rng intended anymore unless the day is tomorrow
 	if SaveData.dateplayedweather == nil then
 		SaveData.dateplayedweather = weatherControl
-		tempday = tonumber(SaveData.dateplayedday)
-		tempyesterday = tonumber(SaveData.dateplayedyesterday)
-		if tempday > tempyesterday then
-			weatherControlDay = SaveData.dateplayedweather
-		elseif tempday < tempyesterday then --This may be needed if the clock somehow changes backwards, like from daylight savings time or even an outage/anything that resets time
-			weatherControlDay = SaveData.dateplayedweather
-		end
+	end
+	tempday = tonumber(SaveData.dateplayedday)
+	tempyesterday = tonumber(SaveData.dateplayedyesterday)
+	temptomorrow = tonumber(SaveData.dateplayedtomorrow)
+	if tempday > tempyesterday or temptomorrow then
+		SaveData.dateplayedweather = weatherControl
+		weatherControlDay = SaveData.dateplayedweather
+	elseif tempday < temptomorrow or tempyesterday then --This may be needed if the clock somehow changes backwards, like from daylight savings time or even an outage/anything that resets time
+		SaveData.dateplayedweather = weatherControl
+		weatherControlDay = SaveData.dateplayedweather
 	end
 	for i = 0,20 do
 		local SectionAll = Section(i)
