@@ -3,9 +3,6 @@ local imagic = require("imagic")
 local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
-if not isOverworld then
-	local musicalchairs = require("musicalchairs")
-end
 
 GameData.muteMusic = false
 local musicmuted = false
@@ -40,6 +37,7 @@ local str = "Loading HUB..."
 
 local pausemenu = {}
 
+pausemenu.costumechanged = false
 pausemenu.pauseactivated = true
 
 local soundObject
@@ -903,8 +901,20 @@ local function costumechangeright()
 	else
 		player:setCostume(costumes[1])
 	end
-	if not isOverworld then
-		Routine.run(musicalchairs.switcher)
+	--pausemenu.costumechanged = true
+	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+end
+
+local function costumechangeleftmap()
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	local costumeIdx = table.ifind(costumes,currentCostume)
+	
+	if costumeIdx ~= nil then
+		player:setCostume(costumes[costumeIdx - 1])
+	else
+		player:setCostume(costumes[1])
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
@@ -920,8 +930,20 @@ local function costumechangeleft()
 	else
 		player:setCostume(costumes[1])
 	end
-	if not isOverworld then
-		Routine.run(musicalchairs.switcher)
+	--pausemenu.costumechanged = true
+	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
+	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+end
+
+local function costumechangerightmap()
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	local costumeIdx = table.ifind(costumes,currentCostume)
+	
+	if costumeIdx ~= nil then
+		player:setCostume(costumes[costumeIdx + 1])
+	else
+		player:setCostume(costumes[1])
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
@@ -1140,11 +1162,25 @@ local function drawCharacterMenu(y, alpha)
 				table.insert(pause_options_char, {name2="Change 2P's Character (Right)", action = characterchange13_2p});
 			end
 		end
-		if SaveData.disableX2char == false then
-			table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
+		if isOverworld then
+			if SaveData.disableX2char == false then
+				table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleftmap});
+			end
 		end
-		if SaveData.disableX2char == false then
-			table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
+		if isOverworld then
+			if SaveData.disableX2char == false then
+				table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangerightmap});
+			end
+		end
+		if not isOverworld then
+			if SaveData.disableX2char == false then
+				table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
+			end
+		end
+		if not isOverworld then
+			if SaveData.disableX2char == false then
+				table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
+			end
 		end
 	end
 	

@@ -8,6 +8,7 @@
 --For music, first add the requring stuffs:
 
 local playerManager = require("playerManager")
+local pausemenu = require("pausemenu")
 
 local levelfolder = Level.folderPath()
 local levelname = Level.filename()
@@ -22,8 +23,6 @@ local costumes = {}
 local musicalchairs = {}
 
 local started = false
-local musiclist = {[Section(0).music] = 1,[Section(1).music] = 2,[Section(2).music] = 3,[Section(3).music] = 4,[Section(4).music] = 5,[Section(5).music] = 6,[Section(6).music] = 7,[Section(7).music] = 8,[Section(8).music] = 9,[Section(9).music] = 10,[Section(10).music] = 11,[Section(11).music] = 12,[Section(12).music] = 13,[Section(13).music] = 14,[Section(14).music] = 15,[Section(15).music] = 16,[Section(16).music] = 17,[Section(17).music] = 18,[Section(18).music] = 19,[Section(19).music] = 20,[Section(20).music] = 21}
-GameData.levelMusicOriginal = musiclist
 
 --This starts the script as a seperate library
 function musicalchairs.onInitAPI()
@@ -2129,119 +2128,15 @@ function musicalchairs.switcher()
 	for i = 1,21 do
 		table.insert(musicfiles, files[i])
 	end
-	if #musicfiles ~= 0 then
-		local songname
-	end
-	if #musicfiles == 1 then
-		if Section(0) then
-			songname = musicfiles[1]
-		end
-	end
-	if #musicfiles == 2 then
-		if Section(1) then
-			songname = musicfiles[2]
-		end
-	end
-	if #musicfiles == 3 then
-		if Section(2) then
-			songname = musicfiles[3]
-		end
-	end
-	if #musicfiles == 4 then
-		if Section(3) then
-			songname = musicfiles[4]
-		end
-	end
-	if #musicfiles == 5 then
-		if Section(4) then
-			songname = musicfiles[5]
-		end
-	end
-	if #musicfiles == 6 then
-		if Section(5) then
-			songname = musicfiles[6]
-		end
-	end
-	if #musicfiles == 7 then
-		if Section(6) then
-			songname = musicfiles[7]
-		end
-	end
-	if #musicfiles == 8 then
-		if Section(7) then
-			songname = musicfiles[8]
-		end
-	end
-	if #musicfiles == 9 then
-		if Section(8) then
-			songname = musicfiles[9]
-		end
-	end
-	if #musicfiles == 10 then
-		if Section(9) then
-			songname = musicfiles[10]
-		end
-	end
-	if #musicfiles == 11 then
-		if Section(10) then
-			songname = musicfiles[11]
-		end
-	end
-	if #musicfiles == 12 then
-		if Section(11) then
-			songname = musicfiles[12]
-		end
-	end
-	if #musicfiles == 13 then
-		if Section(12) then
-			songname = musicfiles[13]
-		end
-	end
-	if #musicfiles == 14 then
-		if Section(13) then
-			songname = musicfiles[14]
-		end
-	end
-	if #musicfiles == 15 then
-		if Section(14) then
-			songname = musicfiles[15]
-		end
-	end
-	if #musicfiles == 16 then
-		if Section(15) then
-			songname = musicfiles[16]
-		end
-	end
-	if #musicfiles == 17 then
-		if Section(16) then
-			songname = musicfiles[17]
-		end
-	end
-	if #musicfiles == 18 then
-		if Section(17) then
-			songname = musicfiles[18]
-		end
-	end
-	if #musicfiles == 19 then
-		if Section(18) then
-			songname = musicfiles[19]
-		end
-	end
-	if #musicfiles == 20 then
-		if Section(19) then
-			songname = musicfiles[20]
-		end
-	end
-	if #musicfiles == 21 then
-		if Section(20) then
-			songname = musicfiles[21]
-		end
+	local musicfiless = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}
+	if #musicfiles >= 1 then
+		songname = musicfiles[#musicfiless]
 	end
 	for i = 0,20 do
 		local section = Section(i)
 		section.musicPath = songname
 	end
-	Routine.wait(0.05)
+	Routine.wait(0.02)
 	started = true
 end
 
@@ -2249,6 +2144,10 @@ function musicalchairs.onStart()
 	local musiclist = {[Section(0).music] = 1,[Section(1).music] = 2,[Section(2).music] = 3,[Section(3).music] = 4,[Section(4).music] = 5,[Section(5).music] = 6,[Section(6).music] = 7,[Section(7).music] = 8,[Section(8).music] = 9,[Section(9).music] = 10,[Section(10).music] = 11,[Section(11).music] = 12,[Section(12).music] = 13,[Section(13).music] = 14,[Section(14).music] = 15,[Section(15).music] = 16,[Section(16).music] = 17,[Section(17).music] = 18,[Section(18).music] = 19,[Section(19).music] = 20,[Section(20).music] = 21}
 	GameData.levelMusicOriginal = musiclist
 	Routine.run(musdelay)
+end
+
+function musicalchairs.onDraw()
+	Text.print(started, 100, 100)
 end
 
 --onTick is for sections that don't change the section music.
@@ -2263,6 +2162,10 @@ function musicalchairs.onTick()
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	local costumeIdx = table.ifind(costumes,currentCostume)
+	
+	if pausemenu.costumechanged == true then
+		Routine.run(musicalchairs.switcher)
+	end
 	
 	if started then
 	
@@ -2537,7 +2440,7 @@ function musicalchairs.onTick()
 				elseif section.musicPath == "_OST/Super Mario Bros Spencer/Tower.ogg" then
 					section.musicPath = "_OST/Super Mario Bros (NES)/Tower (SMBS).ogg"
 				elseif section.musicPath == "_OST/Super Mario Bros Spencer/Boss Battle.ogg" then
-					section.musicPath = "_OST/Super Mario Bros Spencer/Boss Battle.ogg"
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BossBattleSMBS.ogg"
 				elseif section.musicPath == "_OST/Super Mario Bros Spencer/Going Underwater.ogg" then
 					section.musicPath = "_OST/Super Mario Bros (NES)/Overworld (SMBS).ogg"
 				elseif section.musicPath == "_OST/Super Mario Bros Spencer/Water.ogg" then
