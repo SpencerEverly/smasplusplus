@@ -162,6 +162,27 @@ Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
      - True Ending Music (Heaven Music 1)
      - Dancing Mushrooms (By Blue Warrior, FL instrument remaster by me)
 
+Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research needed):
+
+- Jordan Bortner (ac_1700)
+- TheUltimateKoopa (Airship)
+- unknown (Athletic)
+- Blue Warrior (AthleticSMB4, Battle Plains)
+- NICKtendo DS (Birdo)
+- Pongball (Bonus)
+- Daniel Witt (Bowser)
+- Andrew Shand (Tower)
+
+Extra MIDIs (For theming) are by:
+
+- Spencer Everly (Various mods, original music, and other things)
+- m9blayke (AirshipSMB1)
+- StoopidGelatin (AthleticSMB1)
+- LucasGTGamer123 (BeforeBossSMB2)
+- JexuBandicoot527 (BirdoAlt)
+- Name Witheld (JarSMB2)
+- Ku9
+
 Other music played on the episode are made by:
 
 - Maxodex
