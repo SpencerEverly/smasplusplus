@@ -60,8 +60,6 @@ local function loadSaveSlot(slot)
 	return {}
 end
 
-loadSaveSlot(Misc.saveSlot())
-
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"
 end
@@ -178,6 +176,8 @@ function onStart()
 	if GameData.cutsceneMusicControl == true then
 		Audio.MusicVolume(0)
 	end
+	Misc.saveGame()
+	loadSaveSlot(Misc.saveSlot())
 end
 
 function onTick()
