@@ -38,6 +38,7 @@ local sec0 = Section(0)
 local sec6 = Section(6)
 local sec10 = Section(10)
 
+
 local possibleWeather = {"sunny","rain","snow"}
 local weatherControl = rng.randomEntry(possibleWeather)
 
@@ -55,6 +56,13 @@ function malcmusic.onInitAPI()
 end
 
 function malcmusic.onStart()
+	if SaveData.dateplayedday then --Daily weather, no rng intended anymore unless the day is tomorrow
+		if SaveData.dateplayedweather == nil then
+			SaveData.dateplayedweather = weatherControl
+		if SaveData.dateplayedday and not SaveData.dateplayedyesterday then
+			SaveData.dateplayedweather = weatherControl
+		end
+	end
 	for i = 0,20 do
 		local SectionAll = Section(i)
 		if os.date("*t").month == 03 and os.date("*t").day == 17 then
@@ -182,7 +190,7 @@ function malcmusic.onTick()
 				SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
 			end
 		end
-		if weatherControl == "snow" then
+		if SaveData.dateplayedweather == "snow" then
 			if player.section == 0 then
 				snowState = true
 				prevState = false
@@ -602,7 +610,7 @@ function malcmusic.onTick()
 				end
 			end
 		end
-		if weatherControl == "rain" then
+		if SaveData.dateplayedweather == "rain" then
 			if player.section == 0 then
 				rainState = true
 				prevState = false
@@ -1047,7 +1055,7 @@ function malcmusic.onTick()
 				end
 			end
 		end
-		if weatherControl == "sunny" then
+		if SaveData.dateplayedweather == "sunny" then
 			if holiday == false then
 				if acmusrng == "accf" then
 					if hour == "00" then

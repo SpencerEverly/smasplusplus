@@ -84,6 +84,17 @@ function onLoad(err)
 end
 
 function onStart()
+	if SaveData.dateplayedmonth == nil then
+		SaveData.dateplayedmonth = os.date("%m")
+	end
+	if SaveData.dateplayedday == nil then
+		SaveData.dateplayedday = os.date("%d")
+	end
+	if SaveData.dateplayedyesterday == nil then
+		yesterdaynumber = tonumber(SaveData.dateplayedday) - 1
+		yesterdaystring = tostring(yesterdaynumber)
+		SaveData.dateplayedyesterday = yesterdaystring
+	end
 	fadetolevel = false
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(800)
