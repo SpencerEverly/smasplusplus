@@ -41,7 +41,7 @@ local sec10 = Section(10)
 local possibleWeather = {"sunny","rain","snow"}
 local weatherControl = rng.randomEntry(possibleWeather)
 
-local animalcrossingrng = {"acnl","acnh"} --"ac","acww","accf",
+local animalcrossingrng = {"accf","acnl","acnh"} --"ac","acww",,
 local acmusrng = rng.randomEntry(animalcrossingrng)
 
 local ready = false
@@ -226,6 +226,128 @@ function malcmusic.onTick()
 				prevPreviousState = prevState
 			end
 			if holiday == false then
+								if acmusrng == "accf" then
+					if hour == "00" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_snow.ogg"
+					end
+					if hour == "01" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am_snow.ogg"
+					end
+					if hour == "02" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am_snow.ogg"
+					end
+					if hour == "03" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am_snow.ogg"
+					end
+					if hour == "04" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am_snow.ogg"
+					end
+					if hour == "05" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am_snow.ogg"
+					end
+					if hour == "06" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am_snow.ogg"
+					end
+					if hour == "07" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am_snow.ogg"
+					end
+					if hour == "08" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am_snow.ogg"
+					end
+					if hour == "09" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am_snow.ogg"
+					end
+					if hour == "10" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am_snow.ogg"
+					end
+					if hour == "11" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am_snow.ogg"
+					end
+					if hour == "12" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm_snow.ogg"
+					end
+					if hour == "13" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm_snow.ogg"
+					end
+					if hour == "14" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm_snow.ogg"
+					end
+					if hour == "15" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm_snow.ogg"
+					end
+					if hour == "16" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm_snow.ogg"
+					end
+					if hour == "17" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm_snow.ogg"
+					end
+					if hour == "18" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm_snow.ogg"
+					end
+					if hour == "19" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm_snow.ogg"
+					end
+					if hour == "20" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm_snow.ogg"
+					end
+					if hour == "21" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm_snow.ogg"
+					end
+					if hour == "22" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm_snow.ogg"
+					end
+					if hour == "23" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm_snow.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm_snow.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm_snow.ogg"
+					end
+				end
 				if acmusrng == "acnl" then
 					if hour == "00" then
 						Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SNOWY.ogg"
@@ -549,6 +671,128 @@ function malcmusic.onTick()
 				prevInsideState = insideState
 			end
 			if holiday == false then
+								if acmusrng == "accf" then
+					if hour == "00" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_rain.ogg"
+					end
+					if hour == "01" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am_rain.ogg"
+					end
+					if hour == "02" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am_rain.ogg"
+					end
+					if hour == "03" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am_rain.ogg"
+					end
+					if hour == "04" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am_rain.ogg"
+					end
+					if hour == "05" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am_rain.ogg"
+					end
+					if hour == "06" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am_rain.ogg"
+					end
+					if hour == "07" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am_rain.ogg"
+					end
+					if hour == "08" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am_rain.ogg"
+					end
+					if hour == "09" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am_rain.ogg"
+					end
+					if hour == "10" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am_rain.ogg"
+					end
+					if hour == "11" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am_rain.ogg"
+					end
+					if hour == "12" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm_rain.ogg"
+					end
+					if hour == "13" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm_rain.ogg"
+					end
+					if hour == "14" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm_rain.ogg"
+					end
+					if hour == "15" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm_rain.ogg"
+					end
+					if hour == "16" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm_rain.ogg"
+					end
+					if hour == "17" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm_rain.ogg"
+					end
+					if hour == "18" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm_rain.ogg"
+					end
+					if hour == "19" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm_rain.ogg"
+					end
+					if hour == "20" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm_rain.ogg"
+					end
+					if hour == "21" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm_rain.ogg"
+					end
+					if hour == "22" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm_rain.ogg"
+					end
+					if hour == "23" then
+						Section(0).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm_rain.ogg"
+						Section(6).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm_rain.ogg"
+						Section(10).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm_rain.ogg"
+					end
+				end
 				if acmusrng == "acnl" then
 					if hour == "00" then
 						Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_RAINY.ogg"
@@ -796,6 +1040,128 @@ function malcmusic.onTick()
 			end
 			if weatherControl == "sunny" then
 				if holiday == false then
+					if acmusrng == "accf" then
+						if hour == "00" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am.ogg"
+						end
+						if hour == "01" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/01-00_1_am.ogg"
+						end
+						if hour == "02" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/02-00_2_am.ogg"
+						end
+						if hour == "03" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/03-00_3_am.ogg"
+						end
+						if hour == "04" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/04-00_4_am.ogg"
+						end
+						if hour == "05" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/05-00_5_am.ogg"
+						end
+						if hour == "06" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/06-00_6_am.ogg"
+						end
+						if hour == "07" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/07-00_7_am.ogg"
+						end
+						if hour == "08" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/08-00_8_am.ogg"
+						end
+						if hour == "09" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/09-00_9_am.ogg"
+						end
+						if hour == "10" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/10-00_10_am.ogg"
+						end
+						if hour == "11" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/11-00_11_am.ogg"
+						end
+						if hour == "12" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/12-00_12_pm.ogg"
+						end
+						if hour == "13" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/13-00_1_pm.ogg"
+						end
+						if hour == "14" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/14-00_2_pm.ogg"
+						end
+						if hour == "15" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/15-00_3_pm.ogg"
+						end
+						if hour == "16" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/16-00_4_pm.ogg"
+						end
+						if hour == "17" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/17-00_5_pm.ogg"
+						end
+						if hour == "18" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/18-00_6_pm.ogg"
+						end
+						if hour == "19" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/19-00_7_pm.ogg"
+						end
+						if hour == "20" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/20-00_8_pm.ogg"
+						end
+						if hour == "21" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/21-00_9_pm.ogg"
+						end
+						if hour == "22" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/22-00_10_pm.ogg"
+						end
+						if hour == "23" then
+							Section(0).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm.ogg"
+							Section(6).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm.ogg"
+							Section(10).musicPath = "_OST/Animal Crossing - City Folk/23-00_11_pm.ogg"
+						end
+					end
 					if acmusrng == "acnl" then
 						if hour == "00" then
 							Section(0).musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_OUTDOOR00_SUNNY.ogg"
