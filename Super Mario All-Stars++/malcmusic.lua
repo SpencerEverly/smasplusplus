@@ -38,13 +38,6 @@ local sec0 = Section(0)
 local sec6 = Section(6)
 local sec10 = Section(10)
 
-
-local possibleWeather = {"sunny","rain","snow"}
-local weatherControl = rng.randomEntry(possibleWeather)
-
-local animalcrossingrng = {"accf","acnl","acnh"}
-local acmusrng = rng.randomEntry(animalcrossingrng)
-
 local ready = false
 
 function malcmusic.onInitAPI()
@@ -55,12 +48,22 @@ function malcmusic.onInitAPI()
 	ready = true
 end
 
+local possibleWeather = {"sunny","rain","snow"}
+local weatherControl = rng.randomEntry(possibleWeather)
+
+local animalcrossingrng = {"accf","acnl","acnh"}
+local acmusrng = rng.randomEntry(animalcrossingrng)
+
 function malcmusic.onStart()
-	if SaveData.dateplayedday then --Daily weather, no rng intended anymore unless the day is tomorrow
-		if SaveData.dateplayedweather == nil then
-			SaveData.dateplayedweather = weatherControl
-		if SaveData.dateplayedday and not SaveData.dateplayedyesterday then
-			SaveData.dateplayedweather = weatherControl
+	--Daily weather, no rng intended anymore unless the day is tomorrow
+	if SaveData.dateplayedweather == nil then
+		SaveData.dateplayedweather = weatherControl
+		tempday = tonumber(SaveData.dateplayedday)
+		tempyesterday = tonumber(SaveData.dateplayedyesterday)
+		if tempday > tempyesterday then
+			weatherControlDay = SaveData.dateplayedweather
+		elseif tempday < tempyesterday then --This may be needed if the clock somehow changes backwards, like from daylight savings time or even an outage/anything that resets time
+			weatherControlDay = SaveData.dateplayedweather
 		end
 	end
 	for i = 0,20 do
