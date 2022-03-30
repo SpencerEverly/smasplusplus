@@ -32,9 +32,7 @@ local playerManager = require("playermanager")
 
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
-
 local yoshi = require("yiYoshi/yiYoshi")
-
 playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
 playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
 playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
@@ -42,6 +40,27 @@ playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
 playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
 playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
 playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
+
+local function loadSaveSlot(slot)
+	local filename = "save"..slot.."-ext.dat"
+	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
+	if f then
+		local content = f:read("*all")
+		f:close()
+		if content ~= "" then
+			local s,e = pcall(serializer.deserialize, content, filename)
+			if s then
+				return e
+			else
+				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken X2 launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
+			end
+		end
+		return {}
+	end
+	return {}
+end
+
+loadSaveSlot(Misc.saveSlot())
 
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"
