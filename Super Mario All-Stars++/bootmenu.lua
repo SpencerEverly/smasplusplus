@@ -1485,10 +1485,10 @@ function bootmenu.onDraw()
 			Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-7}
 		end
 		if pressjumpwords then
-			Graphics.drawImageWP(pressstart, 150, 552, 0)
+			Graphics.drawImageWP(pressstart, 150, 552, -4)
 		end
 		if logo then
-			Graphics.drawImageWP(smaslogo, 176, 136, 0)
+			Graphics.drawImageWP(smaslogo, 176, 136, -4)
 		end
 		if exitscreen then
 			Graphics.drawScreen{color = Color.black, priority = 10}

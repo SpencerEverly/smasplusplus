@@ -19,6 +19,8 @@ zeroPressedState = false
 
 f8PressedState = false
 
+GameData.weatherset = true
+
 local cooldown = 0
 
 local timer = 128

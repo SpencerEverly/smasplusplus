@@ -97,8 +97,6 @@ end
   Note: You Can just plainly use 'isLeapYear()' if you just want to check if a year is a leap year!
 ]]--
 
-GameData.weatherset = true
-
 function tomorrowget()
 	tomorrownumber = os.date("*t").day + 1
 	tomorrowstring = tostring(tomorrownumber)
