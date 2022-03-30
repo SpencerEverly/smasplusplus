@@ -327,9 +327,11 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 	elseif vk == VK_LEFT then
 		repll.cursorPos = math.max(0, repll.cursorPos - 1)
 		blinker = 1
+		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
 	elseif vk == VK_RIGHT then
 		repll.cursorPos = math.min(repll.cursorPos + 1, #repll.buffer)
 		blinker = 1
+		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
 	elseif vk == VK_HOME then
 		SFX.play("_OST/_Sound Effects/console/console_resetfont.ogg")
 		if Misc.GetKeyState(VK_MENU) then
