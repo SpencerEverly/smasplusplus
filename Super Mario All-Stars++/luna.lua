@@ -23,24 +23,7 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 		playMusic(newSection)
 	end
 end
-
-local globalgenerals = require("globalgenerals")
-local repll = require("repll")
-local rng = require("base/rng")
-local classicEvents = require("classiceventsmod")
-local playerManager = require("playermanager")
-
-local steve = require("steve")
-playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
-local yoshi = require("yiYoshi/yiYoshi")
-playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
-playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
-playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
-playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
-playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
-playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
-
+local serializer = require("ext/serializer")
 local function loadSaveSlot(slot)
 	local filename = "save"..slot.."-ext.dat"
 	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
@@ -59,6 +42,25 @@ local function loadSaveSlot(slot)
 	end
 	return {}
 end
+
+Misc.saveGame()
+
+local globalgenerals = require("globalgenerals")
+local repll = require("repll")
+local rng = require("base/rng")
+local classicEvents = require("classiceventsmod")
+local playerManager = require("playermanager")
+
+local steve = require("steve")
+playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+local yoshi = require("yiYoshi/yiYoshi")
+playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
+playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
+playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
+playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
+playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
+playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
+playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
 
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"
@@ -127,6 +129,7 @@ function yesterdayget()
 end
 
 function onStart()
+	loadSaveSlot(Misc.saveSlot())
 	if SaveData.dateplayedweather == nil then
 		SaveData.dateplayedweather = weatherControl
 	end
@@ -176,8 +179,6 @@ function onStart()
 	if GameData.cutsceneMusicControl == true then
 		Audio.MusicVolume(0)
 	end
-	Misc.saveGame()
-	loadSaveSlot(Misc.saveSlot())
 end
 
 function onTick()

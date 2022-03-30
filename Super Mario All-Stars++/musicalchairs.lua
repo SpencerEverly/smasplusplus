@@ -2122,21 +2122,38 @@ end
 
 function musicalchairs.switcher()
 	started = false
-	Routine.wait(0)
+	Routine.wait(0.1)
 	local files = GameData.levelMusicOriginal
 	local musicfiles = {}
 	for i = 1,21 do
 		table.insert(musicfiles, files[i])
 	end
 	local musicfiless = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}
-	if #musicfiles >= 1 then
-		songname = musicfiles[#musicfiless]
+	if musicfiles == 1 then
+		if Section(0) then
+			songname = musicfiles[1]
+		end
+	end
+	if musicfiles == 2 then
+		if Section(1) then
+			songname = musicfiles[2]
+		end
+	end
+	if musicfiles == 3 then
+		if Section(2) then
+			songname = musicfiles[3]
+		end
+	end
+	if musicfiles == 4 then
+		if Section(3) then
+			songname = musicfiles[4]
+		end
 	end
 	for i = 0,20 do
 		local section = Section(i)
 		section.musicPath = songname
 	end
-	Routine.wait(0.02)
+	Routine.wait(0.1)
 	started = true
 end
 

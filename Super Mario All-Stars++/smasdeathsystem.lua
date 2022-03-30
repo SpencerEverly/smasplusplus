@@ -46,14 +46,14 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			Routine.waitFrames(165, true)
 			Misc.pause()
 			fadeoutdeath = true --This starts the fade out animation
-			Routine.waitFrames(50, true)
-			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
-			Misc.unpause()
+			Routine.waitFrames(110, true)
 			GameData.cutsceneMusicControl = false
+			Misc.unpause()
+			fadeoutcompleted = true --When waited enough time, unpause and reload the level
 			if fadeoutcompleted then --Or else, just exit the level
 				smasdeathsystem.hasDied = true
 				if smasdeathsystem.extramapexit == false then
-					--Keep going until actually dead
+					Level.load(Level.filename())
 				elseif smasdeathsystem.extramapexit == true then
 					Level.load("SMAS - Map.lvlx", nil, nil)
 				end
@@ -66,14 +66,14 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 			Audio.MusicVolume(0)
 			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 			Misc.saveGame() --Save the game to save what we've added/edited
-			Routine.waitFrames(310, true)
-			fadeoutcompleted = true --When waited enough time, unpause and detect the life count
-			Misc.unpause()
+			Routine.waitFrames(360, true)
 			GameData.cutsceneMusicControl = false
+			Misc.unpause()
+			fadeoutcompleted = true --When waited enough time, unpause and reload the level
 			if fadeoutcompleted then --Or else, just exit the level
 				smasdeathsystem.hasDied = true
 				if smasdeathsystem.extramapexit == false then
-					--Keep going until actually dead
+					Level.load(Level.filename())
 				elseif smasdeathsystem.extramapexit == true then
 					Level.load("SMAS - Map.lvlx", nil, nil)
 				end
@@ -97,10 +97,10 @@ function smasdeathsystem.onTick()
 			--Nothing
 		end
 	end
-	if Player(2) and Player(2).isValid then
+	if Player(2) and Player(2).isValid or SaveData.disableX2char == true then
 		multiplayeractive = true
 	end
-	if not Player(2) and not Player(2).isValid then
+	if not Player(2) and not Player(2).isValid or SaveData.disableX2char == false then
 		multiplayeractive = false
 	end
 end

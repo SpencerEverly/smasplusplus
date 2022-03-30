@@ -2,6 +2,7 @@ local levelfolder = Level.folderPath()
 local levelname = Level.filename()
 local levelformat = Level.format()
 
+local littleDialogue = require ("littleDialogue")
 local anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 local playerphysicspatch = require("playerphysicspatch")
 
@@ -54,3 +55,7 @@ end
 function onExit()
 	Audio.MusicVolume(nil)
 end
+
+littleDialogue.registerAnswer("WSMBASettings",{text = "Exit",chosenFunction = function() end})
+littleDialogue.registerAnswer("WSMBASettings",{text = "1 Player Mode",chosenFunction = function() triggerEvent("2PlayerCheck2") end})
+littleDialogue.registerAnswer("WSMBASettings",{text = "2 Player Mode",chosenFunction = function() triggerEvent("2PlayerCheck") end})
