@@ -1,3 +1,6 @@
+local debugbox = require("debugbox")
+debugbox.bootactive = false
+
 local player2_alt = Player(2)
 
 local active = false

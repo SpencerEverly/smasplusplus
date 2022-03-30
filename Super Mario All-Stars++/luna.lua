@@ -26,6 +26,7 @@ end
 
 local globalgenerals = require("globalgenerals")
 local repll = require("repll")
+local rng = require("base/rng")
 local classicEvents = require("classiceventsmod")
 local playerManager = require("playermanager")
 
@@ -83,7 +84,37 @@ function onLoad(err)
 	end
 end
 
+function isLeapYear(y)
+    return y % 4 == 0 and y % 100 ~= 0 or y % 400 == 0
+end
+
+local years = {}
+local startD, endD = 1, 2020
+for i = startD, endD do
+  if isLeapYear(i) then years[#years + 1] = i end
+end
+--[[
+  Note: You Can just plainly use 'isLeapYear()' if you just want to check if a year is a leap year!
+]]--
+
+GameData.weatherset = true
+
+function tomorrowget()
+	tomorrownumber = os.date("*t").day + 1
+	tomorrowstring = tostring(tomorrownumber)
+	SaveData.dateplayedtomorrow = tomorrowstring
+end
+
+function yesterdayget()
+	yesterdaynumber = os.date("*t").day - 1
+	yesterdaystring = tostring(yesterdaynumber)
+	SaveData.dateplayedyesterday = yesterdaystring
+end
+
 function onStart()
+	if SaveData.dateplayedweather == nil then
+		SaveData.dateplayedweather = weatherControl
+	end
 	if SaveData.dateplayedmonth == nil then
 		SaveData.dateplayedmonth = os.date("%m")
 	end
@@ -91,15 +122,29 @@ function onStart()
 		SaveData.dateplayedday = os.date("%d")
 	end
 	if SaveData.dateplayedyesterday == nil then
-		yesterdaynumber = tonumber(SaveData.dateplayedday) - 1
+		yesterdaynumber = os.date("*t").day - 1
 		yesterdaystring = tostring(yesterdaynumber)
 		SaveData.dateplayedyesterday = yesterdaystring
 	end
 	if SaveData.dateplayedtomorrow == nil then
-		tomorrownumber = tonumber(SaveData.dateplayedday) + 1
+		tomorrownumber = os.date("*t").day + 1
 		tomorrowstring = tostring(tomorrownumber)
 		SaveData.dateplayedtomorrow = tomorrowstring
 	end
+	if GameData.weatherset == true then
+		possibleWeather = {"sunny","rain","snow"}
+		weatherControl = rng.randomEntry(possibleWeather)
+		SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
+		GameData.weatherset = false
+	end
+	SaveData.dateplayedday = os.date("%d")
+	SaveData.dateplayedmonth = os.date("%m")
+	tomorrowget()
+	yesterdayget()
+	if SaveData.dateplayedyear == nil then
+		SaveData.dateplayedyear = os.date("%Y")
+	end
+	SaveData.dateplayedyear = os.date("%Y")
 	fadetolevel = false
 	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
 		loadingSoundObject:FadeOut(800)

@@ -20,6 +20,8 @@ local str = "Loading HUB..."
 
 local debugbox = {}
 
+debugbox.bootactive = false
+
 local soundObject
 
 local levelfolder = Level.folderPath()
@@ -71,9 +73,11 @@ function debugbox.onStart()
 end
 
 function debugbox.onKeyboardPress(k)
-	if k == VK_F8 then
-		SFX.play("cheating_victory.ogg")
-		littleDialogue.create({text = "<boxStyle smbx13>NNW SMSK? (What shall you do?)<page><question DEBUG>", updatesInPause = true})
+	if debugbox.bootactive == true then
+		if k == VK_F8 then
+			SFX.play("cheating_victory.ogg")
+			littleDialogue.create({text = "<boxStyle smbx13>NNW SMSK? (What shall you do?)<page><question DEBUG>", updatesInPause = true})
+		end
 	end
 end
 
