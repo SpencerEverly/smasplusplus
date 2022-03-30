@@ -1450,7 +1450,7 @@ function bootmenu.onDraw()
 			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
 		end
 		
-		local rngspark = rng.randomInt(1,25)
+		local rngspark = rng.randomInt(1,20)
 		local rngsparkmovement = rng.randomInt(1,1.2)
 		
 		if bootmenu.active == true then

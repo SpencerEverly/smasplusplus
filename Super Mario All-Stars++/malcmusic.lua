@@ -226,7 +226,7 @@ function malcmusic.onTick()
 				prevPreviousState = prevState
 			end
 			if holiday == false then
-								if acmusrng == "accf" then
+				if acmusrng == "accf" then
 					if hour == "00" then
 						Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_snow.ogg"
 						Section(6).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_snow.ogg"
@@ -671,7 +671,7 @@ function malcmusic.onTick()
 				prevInsideState = insideState
 			end
 			if holiday == false then
-								if acmusrng == "accf" then
+				if acmusrng == "accf" then
 					if hour == "00" then
 						Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_rain.ogg"
 						Section(6).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_rain.ogg"
