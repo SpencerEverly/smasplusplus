@@ -1396,23 +1396,19 @@ Cheats.deregister("mylifegoal") --This gives a a SMW goal exit
 Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb
 Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit
 Cheats.deregister("getdemstars") --This would ruin spoilers if this wasn't disabled
-Cheats.deregister("noclip") --Moves the player like a cursor
 
 
 --All of these would break the game, I think. It's there just in case if something happens:
+Cheats.deregister("noclip") --Moves the player like a cursor
 Cheats.deregister("speeddemon") --This uncaps the framerate... would rather disable it
-Cheats.deregister("stickyfingers") --Allows players to grab any NPC. Not every NPC can be grabbed.
-Cheats.deregister("nowiknowhowameatballfeels") --Allows Yoshi to eat any NPC. Not everything can be eaten.
 Cheats.deregister("shadowstar") --Anything involving shadowstar is disabled, to prevent clipping through blocks and breaking the game
 Cheats.deregister("holytrinity") --Activates shadowstar, donthurtme, jumpman. This has shadowstar.
 Cheats.deregister("theessentials") --Activates sonicstooslow, shadowstar, donthurtme, jumpman. This has shadowstar.
 Cheats.deregister("theessenjls") --Activates sonicstooslow, shadowstar, donthurtme, jumpman. Enjl is gonna get mad when he finds out his code is deactivated lmao
 Cheats.deregister("fromthedepths") --Jump high when falling into a pit instead of dying. Dying is crucial for certain events, such as the Boot Level.
-Cheats.deregister("waitinginthesky") --Changes the starman music and duration. Starman breaking, probably (This uses a different lua script for the starman)
-Cheats.deregister("istillplaywithlegos") --Causes all broken blocks in the level to be restored. To prevent Steve from mining a ton of blocks at one time, this is disabled.
+Cheats.deregister("waitinginthesky") --Changes the starman music and duration. Starman is on the wrong ID for this cheat (This episode uses a different lua script for the starman)
 Cheats.deregister("thestarmen") --Grants the starman effect on the wrong ID.
 Cheats.deregister("bitemythumb") --Grants a mega mushroom on the wrong ID.
-Cheats.deregister("instantswitch") --Activates an automatic P-Switch.
 
 
 --Here's some cheats specific for the episode:
