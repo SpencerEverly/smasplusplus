@@ -289,7 +289,7 @@ Created by Spencer Everly
 Episode developed as early as July 14th, 2010
 Remake released on February 19th, 2020 (v1.0)
 
-LunaLua code made b:
+LunaLua code made by:
 - Spencer Everly
 - MrDoubeA
 - KBM-Quine
