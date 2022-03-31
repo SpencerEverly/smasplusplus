@@ -11,6 +11,7 @@ local playerManager = require("playerManager")
 local blockutils = require("blocks/blockutils")
 local npcutils = require("npcs/npcutils")
 local sizeable = require("game/sizable")
+local extrasounds = require("extrasounds")
 
 local subspace = {}
 
@@ -603,7 +604,7 @@ function subspace.onTick()
                 and grabSpeed ~= nil and p:mem(0x26,FIELD_WORD) >= grabSpeed then
                     -- Give a coin
                     Misc.coins(1,true)
-
+					SFX.play(extrasounds.id14)
                     Effect.spawn(11,p.standingNPC.x + p.standingNPC.width*0.5,p.standingNPC.y)
 
                     -- Do normal stuff to end the grabbing animation
@@ -881,10 +882,10 @@ function subspace.onCameraDraw(camIdx)
 
     -- Flip screen
     if subspace.subspaceIsFlipped then
-        screenBuffer:captureAt(0.01)
+        screenBuffer:captureAt(-5)
 
         Graphics.drawBox{
-            texture = screenBuffer,priority = 0.01,
+            texture = screenBuffer,priority = -5,
             x = c.width,y = 0,width = -c.width,height = c.height,
             sourceWidth = c.width,sourceHeight = c.height,
         }
