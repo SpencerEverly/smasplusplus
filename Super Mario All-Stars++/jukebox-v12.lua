@@ -3,6 +3,7 @@
 --[[    "custom" overworld music library     ]]--
 -------------------------------------------------
 
+local iniParse = require("configFileReader")
 local jukebox = {}
 
 jukebox.autoPlayMusic = true
@@ -110,7 +111,7 @@ local function ParseMusicini(path, isBasegame) -- used to auto fill the track li
                 local pathString = jukebox.resolveMusicFile(fileInfo.fileName) or jukebox.resolveMusicFile("music\\" .. fileInfo.fileName) -- allows easy music overwriting in the same vain as sounds
                 local newFileInfo = deconstructFileString(pathString)
                 if (pathString) and newFileInfo.fileType == "spc" then -- add some gain to spcs
-                    pathString = pathString .. "|0;g=2.7"
+                    pathString = pathString .. "|0;g=2.5"
                 end
                 if (pathString) then
                     tracks[index] = pathString
@@ -122,10 +123,10 @@ end
 
 function jukebox.onInitAPI()
     if isOverworld then -- only worry about this if we're on the overworld
-		if io.exists(Misc.episodePath() .. "music.ini") then -- check to see if the episode has one...
-            ParseMusicini(Misc.episodePath() .. "music.ini") -- and then do it again if it does
-		end
         ParseMusicini(getSMBXPath() .. "\\music.ini", true) -- do it once for the basegame music.ini...
+        if io.exists(Misc.episodePath() .. "music.ini") then -- check to see if the episode has one...
+            ParseMusicini(Misc.episodePath() .. "music.ini") -- and then do it again if it does
+        end
     end
     
 	registerEvent(jukebox, "onStart")
