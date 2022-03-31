@@ -9,6 +9,7 @@ local smasdeathsystem = {}
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
 	SaveData.deathCount = 0
 end
+
 if SaveData.thirteenmodelives == nil then
 	if SaveData.disableX2char == false then
 		SaveData.thirteenmodelives = 0

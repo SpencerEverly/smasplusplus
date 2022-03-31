@@ -52,7 +52,12 @@ mleb.addShaderSection(0, {
         iAmplitude = 0.28,
         distortion = vector(0, 0),
     })
+
 	
+function onStart()
+
+end
+
 function onTick()
 	player:setFrame(50)
 	player:mem(0x140, FIELD_BOOL, 150)
