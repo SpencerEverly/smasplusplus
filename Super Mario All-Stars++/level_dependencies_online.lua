@@ -67,7 +67,6 @@ function dependencies.onStart()
 	if SaveData.disableX2char == false then
 		mm = require("megamann");
 		mm.playIntro = false;
-		undertaledepends = require("level_dependencies_undertale")
 		pausemenu = require("pausemenu")
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
@@ -349,32 +348,5 @@ function dependencies.onTick()
 		end
 	end
 end
-
-Cheats.register("fcommandssuck",{
-	onActivate = (function()
-		Defines.player_hasCheated = false
-		spartaremix = require("spartaremix")
-		malcwarp = require("malcwarp")
-		thecostume = require("thecostume")
-		exitcommands = require("exitcommands")
-		commandlist = require("commandlist")
-		return true -- this makes the cheat not toggleable
-	end),
-	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hits1.ogg",
-})
-
-Cheats.register("fuckyou",{
-	onActivate = (function()
-		Defines.player_hasCheated = false
-		spartaremix = require("spartaremix")
-		malcwarp = require("malcwarp")
-		thecostume = require("thecostume")
-		exitcommands = require("exitcommands")
-		commandlist = require("commandlist")
-		debugbox = require("debugbox")
-		return true -- this makes the cheat not toggleable
-	end),
-	flashPlayer = true,activateSFX = 69,
-})
 
 return dependencies
