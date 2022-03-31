@@ -97,7 +97,6 @@ end
 
 function onInputUpdate()
 	if cutscenerunning1 == true then
-		player.keys.jump = false
 		player.keys.left = false
 		player.keys.right = false
 		player.keys.dropItem = false
@@ -111,7 +110,6 @@ function onInputUpdate()
 		
 	end
 	if cutscenerunning2 == true then
-		player.keys.jump = false
 		player.keys.left = false
 		player.keys.right = false
 		player.keys.dropItem = false
@@ -140,10 +138,12 @@ function onEvent(eventName)
 	if eventName == "2" then
 		invisible = true
 		cutscenerunning1 = true
+		Audio.sounds[1].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	end
 	if eventName == "4" then
 		player:teleport(-197216, -200120)
 		Routine.run(box1)
+		Audio.sounds[3].sfx = Audio.SfxOpen("_OST/_Sound Effects/nothing.ogg")
 	end
 	if eventName == "5" then
 		cutscenerunning1 = false

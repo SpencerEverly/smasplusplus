@@ -1,6 +1,6 @@
 local level_dependencies_normal= require("level_dependencies_normal")
 local Routine = require("routine")
-local inventory = require("furyinventory")
+local furyinventory = require("furyinventory")
 
 local stars = mem(0x00B251E0, FIELD_WORD)
 
@@ -62,7 +62,7 @@ function onEvent(eventName)
 	end
 	if eventName == "NormalCutsceneBegin" then
 		pausemenu.pauseactivated = false
-		inventory.activated = false
+		furyinventory.activated = false
 		player:teleport(-78784, -80128)
 		triggerEvent("NormalCutsceneBegin2")
 		player.keys.left = false
@@ -75,7 +75,7 @@ function onEvent(eventName)
 		player.keys.altJump = false
 		Audio.MusicChange(6, 0)
 		Graphics.activateHud(false)
-		inventory.activateinventory = false
+		GameData.toggleoffinventory = true
 		SFX.play("_OST/_Sound Effects/mus_explosion.ogg")
 		whiteflash = true
 		player.setCostume(1, nil)
@@ -107,6 +107,9 @@ function onEvent(eventName)
 		end
 		SaveData.racaActivated = 1
 		SaveData.introselect = 1
+		SaveData.resolution = "fullscreen"
+		SaveData.borderEnabled = false
+		SaveData.letterbox = true
 		Misc.saveGame()
 		Routine.run(WhiteFadeInSlow)
 		SFX.play("_OST/_Sound Effects/raca-chant.ogg")

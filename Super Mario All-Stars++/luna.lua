@@ -23,6 +23,7 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 		playMusic(newSection)
 	end
 end
+
 local serializer = require("ext/serializer")
 local function loadSaveSlot(slot)
 	local filename = "save"..slot.."-ext.dat"

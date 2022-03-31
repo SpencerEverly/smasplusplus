@@ -8,6 +8,8 @@ Things to fix:
 - The camera vision cones on level seem to crach the game.
 ]]
 
+if Player(2) and Player(2).isValid then return end
+
 local colliders = require("colliders")
 local rng = require("rng");
 local vectr = require("vectr")

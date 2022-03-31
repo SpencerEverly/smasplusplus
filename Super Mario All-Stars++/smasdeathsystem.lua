@@ -38,45 +38,47 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 end
 
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
-	if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
-		if player.deathTimer == 0 then
-			GameData.cutsceneMusicControl = true
-			Audio.MusicVolume(0)
-			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-			Misc.saveGame() --Save the game to save what we've added/edited
-			Routine.waitFrames(165, true)
-			Misc.pause()
-			fadeoutdeath = true --This starts the fade out animation
-			Routine.waitFrames(110, true)
-			GameData.cutsceneMusicControl = false
-			Misc.unpause()
-			fadeoutcompleted = true --When waited enough time, unpause and reload the level
-			if fadeoutcompleted then --Or else, just exit the level
-				smasdeathsystem.hasDied = true
-				if smasdeathsystem.extramapexit == false then
-					Level.load(Level.filename())
-				elseif smasdeathsystem.extramapexit == true then
-					Level.load("SMAS - Map.lvlx", nil, nil)
+	if GameData.multiplayeractive == false or GameData.battlemodeactive == false or GameData.battlemodeactive == nil or SaveData.disableX2char == false then
+		if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
+			if player.deathTimer == 0 then
+				GameData.cutsceneMusicControl = true
+				Audio.MusicVolume(0)
+				SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+				Misc.saveGame() --Save the game to save what we've added/edited
+				Routine.waitFrames(165, true)
+				Misc.pause()
+				fadeoutdeath = true --This starts the fade out animation
+				Routine.waitFrames(110, true)
+				GameData.cutsceneMusicControl = false
+				Misc.unpause()
+				fadeoutcompleted = true --When waited enough time, unpause and reload the level
+				if fadeoutcompleted then --Or else, just exit the level
+					smasdeathsystem.hasDied = true
+					if smasdeathsystem.extramapexit == false then
+						Level.load(Level.filename())
+					elseif smasdeathsystem.extramapexit == true then
+						Level.load("SMAS - Map.lvlx", nil, nil)
+					end
 				end
 			end
 		end
-	end
-	if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
-		if player.deathTimer == 0 then
-			GameData.cutsceneMusicControl = true
-			Audio.MusicVolume(0)
-			SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-			Misc.saveGame() --Save the game to save what we've added/edited
-			Routine.waitFrames(360, true)
-			GameData.cutsceneMusicControl = false
-			Misc.unpause()
-			fadeoutcompleted = true --When waited enough time, unpause and reload the level
-			if fadeoutcompleted then --Or else, just exit the level
-				smasdeathsystem.hasDied = true
-				if smasdeathsystem.extramapexit == false then
-					Level.load(Level.filename())
-				elseif smasdeathsystem.extramapexit == true then
-					Level.load("SMAS - Map.lvlx", nil, nil)
+		if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
+			if player.deathTimer == 0 then
+				GameData.cutsceneMusicControl = true
+				Audio.MusicVolume(0)
+				SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+				Misc.saveGame() --Save the game to save what we've added/edited
+				Routine.waitFrames(360, true)
+				GameData.cutsceneMusicControl = false
+				Misc.unpause()
+				fadeoutcompleted = true --When waited enough time, unpause and reload the level
+				if fadeoutcompleted then --Or else, just exit the level
+					smasdeathsystem.hasDied = true
+					if smasdeathsystem.extramapexit == false then
+						Level.load(Level.filename())
+					elseif smasdeathsystem.extramapexit == true then
+						Level.load("SMAS - Map.lvlx", nil, nil)
+					end
 				end
 			end
 		end
@@ -99,10 +101,10 @@ function smasdeathsystem.onTick()
 		end
 	end
 	if Player(2) and Player(2).isValid or SaveData.disableX2char == true then
-		multiplayeractive = true
+		GameData.multiplayeractive = true
 	end
 	if not Player(2) and not Player(2).isValid or SaveData.disableX2char == false then
-		multiplayeractive = false
+		GameData.multiplayeractive = false
 	end
 end
 
@@ -137,9 +139,7 @@ function smasdeathsystem.onDraw()
 end
 
 function smasdeathsystem.onPlayerKill()
-	if GameData.battlemodeactive == false or GameData.battlemodeactive == nil and multiplayeractive == false then
-		Routine.run(diedanimation) --This will run the animation. Without it, the player would just die
-	end
+	Routine.run(diedanimation) --This will run the animation. Without it, the player would just die
 end
 
 function smasdeathsystem.onExit()
