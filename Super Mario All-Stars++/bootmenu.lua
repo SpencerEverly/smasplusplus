@@ -11,6 +11,7 @@ local HUDOverride = require("hudoverridee")
 local rng = require("base/rng")
 local cursor = require("cursor")
 local inputconfigurator = require("inputconfig")
+local keyboard = require("keyboard")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
@@ -604,6 +605,10 @@ local function classicBattleSelect()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>Select level.<question BattleLevelSelect>", pauses = false, updatesInPause = true})
 end
 
+local function ChangeName1()
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>To change your name in the game, please select Begin to get started (Keyboard only).<question StartNameChange>", pauses = false, updatesInPause = true})
+end
+
 local function ResolutionChange1()
 	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
@@ -654,6 +659,11 @@ end
 
 local function startConfigurator()
 	inputconfigurator.controlConfigOpen = true
+end
+
+local function startKeyboard()
+	keyboard.active = true
+	GameData.enablekeyboard = true
 end
 
 local function X2DisableCheck1()
@@ -1688,6 +1698,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
 	littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
 	littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
+	littleDialogue.registerAnswer("Options",{text = "Change Player Name",chosenFunction = function() Routine.run(ChangeName1) end})
 	littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
 	littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
 	littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionSelect1) end})
@@ -1766,7 +1777,12 @@ if bootmenu.active == true then
 
 	littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
 	littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
-
+	
+	
+	
+	littleDialogue.registerAnswer("StartNameChange",{text = "Begin",chosenFunction = function() Routine.run(startKeyboard) end})
+	littleDialogue.registerAnswer("StartNameChange",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	
 	
 	
 	littleDialogue.registerAnswer("StartInputs",{text = "Begin",chosenFunction = function() Routine.run(startConfigurator) end})

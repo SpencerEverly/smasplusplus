@@ -150,6 +150,7 @@ Code for certain parts made by:
 - deice
 - Dragon0307
 - Jumper
+- Blue Stag
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
