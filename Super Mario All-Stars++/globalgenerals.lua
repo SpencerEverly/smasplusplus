@@ -12,6 +12,7 @@ local HUDOverride = require("hudoverridee")
 local textplus = require("textplus")
 local repll = require("repll")
 local extrasounds = require("extrasounds")
+local namehover = require("namehover")
 
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 

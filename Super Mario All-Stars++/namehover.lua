@@ -1,5 +1,10 @@
 local namehover = {}
 
+namehover.active = false
+
+local textplus = require("textplus")
+local smbxdefault = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus.ini")
+
 local ready = false
 
 function namehover.onInitAPI() --This requires all the libraries that will be used
@@ -11,5 +16,18 @@ function namehover.onInitAPI() --This requires all the libraries that will be us
 end
 
 function namehover.onDraw()
-	Text.printWP("Spencerly", player.x, player.y - 64, 0)
+	if namehover.active == true then
+		local namep1 = "<color white>Spencerly</color>"
+		local name1 = textplus.layout(textplus.parse(namep1, {xscale=1, yscale=1, align="center", color=Color.white..1.0, font=smbxdefault, maxWidth=450}), player.x - camera.x + 16)
+		local w = name1.width
+		textplus.render{x = player.x - camera.x + 8 - name1.width*0.5, y = player.y - camera.y, layout = name1, priority = -4}
+		if Player(2) and Player(2).isValid then
+			local namep2 = "<color white>Spencerly 2</color>"
+			local name2 = textplus.layout(textplus.parse(namep2, {xscale=1, yscale=1, align="center", color=Color.white..1.0, font=smbxdefault, maxWidth=450}), Player(2).x - camera.x + 16)
+			local w2 = name2.width
+			textplus.render{x = Player(2).x - camera.x + 8 - name2.width*0.5, y = Player(2).y - camera.y, layout = name2, priority = -4}
+		end
+	end
 end
+
+return namehover

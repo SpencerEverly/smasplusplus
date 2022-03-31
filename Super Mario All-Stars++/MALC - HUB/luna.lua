@@ -8,7 +8,6 @@ local textplus = require("textplus")
 local ShopSystem = require("ShopSystem/ShopSystem")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local hudoverride = require("hudoverridee")
-local namehover = require("namehover")
 
 -- Images --
 local shopItems = Graphics.loadImageResolved("ShopSystem/ShopSystem/shopItems.png")
