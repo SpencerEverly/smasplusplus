@@ -30,16 +30,19 @@ end
 
 function keyboard.cmd()
 	printString("" .. keyboard.buffer:gsub("\n", "\n "))
-	if keyboard.buffer ~= "" then
-		SaveData.playerName = keyboard.buffer
-		keyboard.buffer = ""
-		keyboard.cursorPos = 0
-		SFX.play("_OST/_Sound Effects/console/console_success.ogg")
-		keyboard.active = false
-		GameData.enablekeyboard = false
-		GameData.reopenmenu = true
-		GameData.toggleoffkeys = false
-		GameData.toggleoffinventory = false
+	if GameData.playernameenter == true then
+		if keyboard.buffer ~= "" then
+			SaveData.playerName = keyboard.buffer
+			keyboard.buffer = ""
+			keyboard.cursorPos = 0
+			SFX.play("_OST/_Sound Effects/console/console_success.ogg")
+			keyboard.active = false
+			GameData.enablekeyboard = false
+			GameData.reopenmenu = true
+			GameData.toggleoffkeys = false
+			GameData.toggleoffinventory = false
+			GameData.playernameenter = false
+		end
 	end
 end
 
@@ -106,14 +109,7 @@ function keyboard.onKeyboardPressDirect(vk, repeated, char)
 	
 	if vk == VK_RETURN then
 		SFX.play("_OST/_Sound Effects/console/console_keypressenter.ogg")
-		if Misc.GetKeyState(VK_SHIFT) then
-			local left, right = split(keyboard.buffer, keyboard.cursorPos)
-			keyboard.buffer = left .. "\n" .. right
-			keyboard.cursorPos = keyboard.cursorPos + 1
-			blinker = 1
-		else
-			keyboard.cmd()
-		end
+		keyboard.cmd()
 	elseif vk == VK_BACK then
 		local left, right = split(keyboard.buffer, keyboard.cursorPos)
 		keyboard.buffer = left:sub(1, -2) .. right

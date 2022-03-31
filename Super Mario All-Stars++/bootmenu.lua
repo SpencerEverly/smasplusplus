@@ -664,6 +664,7 @@ end
 local function startKeyboard()
 	keyboard.active = true
 	GameData.enablekeyboard = true
+	GameData.playernameenter = true
 end
 
 local function X2DisableCheck1()
