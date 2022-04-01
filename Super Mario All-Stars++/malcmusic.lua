@@ -2034,6 +2034,16 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
+		if currentCostume == "SMW1-YOSHI" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
 		if currentCostume == "SMW-LUIGI" and holiday == false then
 			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
 			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
@@ -2064,6 +2074,16 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
+		if currentCostume == "WOHLSTAND" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
 		
 		
 		
@@ -2075,7 +2095,86 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_PEACH
-		
+		if currentCostume == "2-SMB1-SMAS" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "A2XT-KOOD" and holiday == false then
+			Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(7, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(8, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(11, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+		end
+		if currentCostume == "DAISY" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "KIRBY-SMB3" and holiday == false then
+			Audio.MusicChange(1, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(2, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(3, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(7, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(8, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(11, "_OST/Kirby Superstar/16 Peanut Plain.spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.7")
+		end
+		if currentCostume == "PAULINE" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "SMA4" and holiday == false then
+			Audio.MusicChange(1, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
+			Audio.MusicChange(2, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
+			Audio.MusicChange(3, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
+			Audio.MusicChange(7, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
+			Audio.MusicChange(8, "_OST/Super Mario Advance/Me and Larry City (GBA).ogg")
+			Audio.MusicChange(11, "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg")
+			Audio.MusicChange(12, "_OST/Super Mario Advance 4/N-Spade Bonus.ogg")
+			Audio.MusicChange(13, "_OST/Super Mario Advance 4/N-Spade Bonus.ogg")
+		end
+		if currentCostume == "SMW-PEACH" and holiday == false then
+			Audio.MusicChange(1, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(2, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(3, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(7, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(8, "_OST/Super Mario World/Status Screen.spc|0;g=2.6")
+			Audio.MusicChange(11, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+			Audio.MusicChange(12, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
+		end
+		if currentCostume == "TUX" and holiday == false then
+			Audio.MusicChange(1, "_OST/Tux Racer/Race 01.mp3")
+			Audio.MusicChange(2, "_OST/Tux Racer/Race 01.mp3")
+			Audio.MusicChange(3, "_OST/Tux Racer/Race 01.mp3")
+			Audio.MusicChange(7, "_OST/Tux Racer/Race 01.mp3")
+			Audio.MusicChange(8, "_OST/Tux Racer/Race 01.mp3")
+			Audio.MusicChange(11, "_OST/Tux Racer/Race 02.mp3")
+			Audio.MusicChange(12, "_OST/Tux Racer/Start Menu.mp3")
+			Audio.MusicChange(13, "_OST/Tux Racer/Start Menu.mp3")
+		end
 		
 		
 		
@@ -2165,6 +2264,16 @@ function malcmusic.onTick()
 			Audio.MusicChange(11, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+		end
+		if currentCostume == "CAPTAINTOAD" and holiday == false then
+			Audio.MusicChange(1, "_OST/Captain Toad - Treasure Tracker (Wii U)/Stm_Kp_bgm_Pinball (channels 2 and 3).ogg")
+			Audio.MusicChange(2, "_OST/Captain Toad - Treasure Tracker (Wii U)/Stm_Kp_bgm_Pinball (channels 2 and 3).ogg")
+			Audio.MusicChange(3, "_OST/Captain Toad - Treasure Tracker (Wii U)/Stm_Kp_bgm_Pinball (channels 2 and 3).ogg")
+			Audio.MusicChange(7, "_OST/Captain Toad - Treasure Tracker (Wii U)/Stm_Kp_bgm_Pinball (channels 2 and 3).ogg")
+			Audio.MusicChange(8, "_OST/Captain Toad - Treasure Tracker (Wii U)/Stm_Kp_bgm_Pinball (channels 2 and 3).ogg")
+			Audio.MusicChange(11, "_OST/Captain Toad - Treasure Tracker (Wii U)/Kp_bgm_Book02.nk.32.dspadpcm.ogg")
+			Audio.MusicChange(12, "_OST/Captain Toad - Treasure Tracker (Wii U)/Kp_bgm_Book01.nk.32.dspadpcm.ogg")
+			Audio.MusicChange(13, "_OST/Captain Toad - Treasure Tracker (Wii U)/Kp_bgm_Book01.nk.32.dspadpcm.ogg")
 		end
 		if currentCostume == "HAMTARO" and holiday == false then
 			Audio.MusicChange(1, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
@@ -2258,6 +2367,26 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_LINK
+		if currentCostume == "5-LINKWAKE-SNES" and holiday == false then
+			Audio.MusicChange(1, "_OST/Legend of Zelda - Link's Awakening (Switch)/15_Shop.ry.48.dspadpcm.ogg")
+			Audio.MusicChange(2, "_OST/Legend of Zelda - Link's Awakening (Switch)/15_Shop.ry.48.dspadpcm.ogg")
+			Audio.MusicChange(3, "_OST/Legend of Zelda - Link's Awakening (Switch)/15_Shop.ry.48.dspadpcm.ogg")
+			Audio.MusicChange(7, "_OST/Legend of Zelda - Link's Awakening (Switch)/15_Shop.ry.48.dspadpcm.ogg")
+			Audio.MusicChange(8, "_OST/Legend of Zelda - Link's Awakening (Switch)/15_Shop.ry.48.dspadpcm.ogg")
+			Audio.MusicChange(11, "_OST/Legend of Zelda - Link's Awakening (Switch)/12_StrangeForest.ry.48.dspadpcm.ogg")
+			Audio.MusicChange(12, "_OST/Legend of Zelda - Link's Awakening (Switch)/10_Field_Normal.ry.48.dspadpcm.ogg")
+			Audio.MusicChange(13, "_OST/Legend of Zelda - Link's Awakening (Switch)/10_Field_Normal.ry.48.dspadpcm.ogg")
+		end
+		if currentCostume == "A2XT-SHEATH" and holiday == false then
+			Audio.MusicChange(1, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(2, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(3, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(7, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(8, "_OST/Adventures of Demo/bossa-ing_around.s3m")
+			Audio.MusicChange(11, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
+		end
 		if currentCostume == "NESS" and holiday == false then
 			Audio.MusicChange(1, "_OST/EarthBound/021 Home Sweet Home.spc|0;g=2.3")
 			Audio.MusicChange(2, "_OST/EarthBound/024 Enjoy Your Stay.spc|0;g=2.3")
@@ -2277,6 +2406,36 @@ function malcmusic.onTick()
 			Audio.MusicChange(11, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
 			Audio.MusicChange(12, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
 			Audio.MusicChange(13, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
+		end
+		if currentCostume == "SMB1-SNES" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "SMB2-SNES" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "SMB3-BANDANA-DEE" and holiday == false then
+			Audio.MusicChange(1, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(2, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(3, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(7, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(8, "_OST/Kirby Superstar/15 Dynablade Overworld.spc|0;g=2.7")
+			Audio.MusicChange(11, "_OST/Kirby Superstar/16 Peanut Plain.spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Kirby Superstar/19 Candy Mountain.spc|0;g=2.7")
 		end
 		if currentCostume == "TAKESHI" and holiday == false then
 			Audio.MusicChange(1, "_OST/Takeshi no Chousenjou - OST.nsf|0;g=2")
@@ -2303,6 +2462,36 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_KLONOA
+		if currentCostume == "MARINALITEYEARS" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "MISCHEIFMAKERS-MARINA" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "SMW2-YOSHI" and holiday == false then
+			Audio.MusicChange(1, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 7).spc|0;g=2.0")
+			Audio.MusicChange(2, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 2).spc|0;g=2.0")
+			Audio.MusicChange(3, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 2).spc|0;g=2.0")
+			Audio.MusicChange(7, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 2).spc|0;g=2.0")
+			Audio.MusicChange(8, "_OST/Super Mario World 2 - Yoshi's Island/120 Map (part 3).spc|0;g=2.0")
+			Audio.MusicChange(11, "_OST/Super Mario World 2 - Yoshi's Island/104 Yoshi Start Demo - Prototype Music.spc|0;g=1.7")
+			Audio.MusicChange(12, "_OST/Super Mario World 2 - Yoshi's Island/104 Yoshi Start Demo - Prototype Music.spc|0;g=1.7")
+			Audio.MusicChange(13, "_OST/Super Mario World 2 - Yoshi's Island/104 Yoshi Start Demo - Prototype Music.spc|0;g=1.7")
+		end
 		if currentCostume == "YS-GREEN" and holiday == false then
 			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
 			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
@@ -2813,6 +3002,170 @@ function malcmusic.onTick()
 			Audio.MusicChange(11, "_OST/Super Mario Advance 3/Flower Garden.ogg")
 			Audio.MusicChange(12, "_OST/Super Mario Advance 3/Training Course.ogg")
 			Audio.MusicChange(13, "_OST/Super Mario Advance 3/Training Course.ogg")
+		end
+		
+		
+		
+		
+		
+		
+		
+		--CHARACTER_ROSALINA
+		if currentCostume == "KING BOO" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "SMB2-SMAS" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "UTSUHOREIUJI" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		
+		
+		
+		
+		
+		
+		
+		
+		--CHARACTER_MEGAMAN
+		if currentCostume == "BAD BOX ART MEGA MAN" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "BASS" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "DR. WILY" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "MARISAKIRISAME" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "MEGAMAN-NES" and holiday == false then
+			Audio.MusicChange(1, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|10;g=1.6")
+			Audio.MusicChange(2, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|10;g=1.6")
+			Audio.MusicChange(3, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|10;g=1.6")
+			Audio.MusicChange(7, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|10;g=1.6")
+			Audio.MusicChange(8, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|10;g=1.6")
+			Audio.MusicChange(11, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|9;g=1.6")
+			Audio.MusicChange(12, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|7;g=1.6")
+			Audio.MusicChange(13, "_OST/Mega Man 2 (NES, VRC6 by RushJet1) - OST.nsf|7;g=1.6")
+		end
+		if currentCostume == "PROTOMAN" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "ROLL" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "MEGAMAN-8BITMM" and holiday == false then
+			Audio.MusicChange(1, "_OST/Mega Man 2 - OST.nsf|3;g=1.4")
+			Audio.MusicChange(2, "_OST/Mega Man 2 - OST.nsf|3;g=1.4")
+			Audio.MusicChange(3, "_OST/Mega Man 2 - OST.nsf|3;g=1.4")
+			Audio.MusicChange(7, "_OST/Mega Man 2 - OST.nsf|3;g=1.4")
+			Audio.MusicChange(8, "_OST/Mega Man 2 - OST.nsf|3;g=1.4")
+			Audio.MusicChange(11, "_OST/Mega Man 2 - OST.nsf|4;g=1.4")
+			Audio.MusicChange(12, "_OST/Mega Man 2 - OST.nsf|6;g=1.4")
+			Audio.MusicChange(13, "_OST/Mega Man 2 - OST.nsf|6;g=1.4")
+		end
+		if currentCostume == "MEGAMAN-MARISA" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		
+		
+		
+		
+		
+		
+		--CHARACTER_SAMUS
+		if currentCostume == "BILLRIZER" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+		end
+		if currentCostume == "SAMUS-NES" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
 	end
 end

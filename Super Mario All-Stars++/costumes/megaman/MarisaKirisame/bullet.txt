@@ -1,0 +1,9 @@
+width=16
+height=16
+gfxwidth=22
+gfxheight=22
+gfxoffsetx=0
+gfxoffsety=-4
+frames=6
+framestyle=1
+framespeed=8

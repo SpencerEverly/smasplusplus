@@ -9,6 +9,8 @@ local plr
 function costume.onInit(p)
     plr = p
 	registerEvent(costume,"onStart")
+	registerEvent(costume,"onDraw")
+	registerEvent(costume,"onPlayerHarm")
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onCleanup")
@@ -92,23 +94,25 @@ end
 
 function costume.onPlayerHarm(e, p)
 	if costume.abilitesenabled == true then
-		if hit then
-			e.cancelled = true
-			return
-		end
+		if not player.hasStarman or not player.isMega then
+			if hit then
+				e.cancelled = true
+				return
+			end
 
-		if mem(0x00B2C5A8, FIELD_WORD) > 0 then
-			e.cancelled = true
-			hit = true
-			hitTicks = 0
-			plr.speedY = -8
-			plr.speedX = 0
-			Defines.gravity = Defines.gravity / 2
-			SFX.play(5)
-			mem(0x00B2C5A8, FIELD_WORD, 0)
-			Effect.spawn(11, p.x, p.y)
-		else
-			p:kill()
+			if mem(0x00B2C5A8, FIELD_WORD) > 0 then
+				e.cancelled = true
+				hit = true
+				hitTicks = 0
+				plr.speedY = -8
+				plr.speedX = 0
+				Defines.gravity = Defines.gravity / 2
+				SFX.play(5)
+				mem(0x00B2C5A8, FIELD_WORD, 0)
+				Effect.spawn(11, p.x, p.y)
+			else
+				p:kill()
+			end
 		end
 	end
 end
