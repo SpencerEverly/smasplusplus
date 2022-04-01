@@ -1362,7 +1362,8 @@ function bootmenu.onInputUpdate()
 					end
 				end
 				if GameData.holidayonetime == true then
-					--Do nothing
+					Routine.run(bootDialogue)
+					GameData.startedmenu = 1
 				end
 			end
 		end
@@ -1545,6 +1546,9 @@ function bootmenu.onDraw()
 		end
 		if aprilfools then	
 			Graphics.drawImageWP(aprilfoolserror, 0, 0, 10)
+		end
+		if not aprilfools then
+			
 		end
 		if stpatricksday then
 			textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=0, color=Color.green, font=statusFont}
