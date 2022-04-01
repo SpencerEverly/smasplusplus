@@ -1,122 +1,117 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local HUDOverride = require("hudoverridee")
+local rng = require("base/rng")
 
 local costume = {}
 
 local eventsRegistered = false
 local plr
+local jumpingactive = false
+local cooldown = 0
+local timer = 50
 
 function costume.onInit(p)
-    plr = p
+	plr = p
 	registerEvent(costume,"onStart")
 	registerEvent(costume,"onDraw")
 	registerEvent(costume,"onPlayerHarm")
+	registerEvent(costume,"onPlayerKill")
+	registerEvent(costume,"onPostNPCKill")
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onCleanup")
 	registerEvent(costume,"onInputUpdate")
 	local icantswim = require("icantswim")
-	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/toad/Sonic/player-jump.ogg")
-	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/toad/Sonic/stomped.ogg")
-	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/toad/Sonic/block-hit.ogg")
-	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/toad/Sonic/player-shrink.ogg")
-	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/toad/Sonic/player-grow.ogg")
-	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/toad/Sonic/mushroom.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/toad/Sonic/player-died.ogg")
-	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/toad/Sonic/shell-hit.ogg")
-	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/toad/Sonic/player-slide.ogg")
-	extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/coin.ogg"))
-	extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/1up.ogg"))
-	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/toad/Sonic/warp.ogg")
-	extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/fireball.ogg"))
-	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/toad/Sonic/grab.ogg")
-	Audio.sounds[24].sfx = Audio.SfxOpen("costumes/toad/Sonic/spring.ogg")
-	Audio.sounds[29].sfx = Audio.SfxOpen("costumes/toad/Sonic/do.ogg")
-	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/toad/Sonic/key.ogg")
-	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/toad/Sonic/pswitch.ogg")
-	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/toad/Sonic/tail.ogg")
-	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/toad/Sonic/got-star.ogg")
-	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/toad/Sonic/player-died2.ogg")
-	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/toad/Sonic/smw-checkpoint.ogg")
-	extrasounds.id59 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/dragon-coin.ogg"))
-	Audio.sounds[71].sfx = Audio.SfxOpen("costumes/toad/Sonic/climbing.ogg")
-	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/toad/Sonic/swim.ogg")
-	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/toad/Sonic/grab2.ogg")
-	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/toad/Sonic/smb2-throw.ogg")
-	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/toad/Sonic/smb2-hit.ogg")
+	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-jump.ogg")
+	--Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/stomped.ogg")
+	--Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/block-hit.ogg")
+	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-shrink.ogg")
+	--Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-grow.ogg")
+	--Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/mushroom.ogg")
+	--Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-died.ogg")
+	--Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/shell-hit.ogg")
+	--Audio.sounds[10].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-slide.ogg")
+	--extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/coin.ogg"))
+	--extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/1up.ogg"))
+	--Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/warp.ogg")
+	extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/fireball.ogg"))
+	--Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/grab.ogg")
+	--Audio.sounds[24].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/spring.ogg")
+	--Audio.sounds[29].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/do.ogg")
+	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/keyhole.ogg")
+	--Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/pswitch.ogg")
+	--Audio.sounds[33].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/tail.ogg")
+	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/got-star.ogg")
+	--Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-died2.ogg")
+	--Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/smw-checkpoint.ogg")
+	--extrasounds.id59 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/dragon-coin.ogg"))
+	--Audio.sounds[71].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/climbing.ogg")
+	--Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/swim.ogg")
+	--Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/grab2.ogg")
+	--Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/smb2-throw.ogg")
+	--Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/smb2-hit.ogg")
 	
-	--Sonic settings! This is useful for accuracy.
-	Defines.player_walkspeed = 9
-	Defines.player_runspeed = 9
-	Defines.jumpheight = 25
-	Defines.jumpheight_bounce = 31
-	Defines.projectilespeedx = 10
-	Defines.player_grav = 0.5
+	Defines.jumpheight = 14
+	Defines.player_walkspeed = 2.7
+	Defines.player_runspeed = 4.5
+	Defines.jumpheight_bounce = 32
+	Defines.projectilespeedx = 7.1
+	Defines.player_grav = 0.4
 	
 	costume.abilitesenabled = true
-	HUDOverride.visible.itembox = false
 end
 
-function costume.onTick()
+function costume.onStart()
+	if (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false or (Level.filename() == "SMAS - Game Over.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then
+		Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
+	end
+end
+
+function costume.onPostNPCKill(npc, harmType)
+	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264}
+	local rngkey = rng.randomInt(1,6)
+	if items[npc.id] then
+		SFX.play("costumes/mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
+    end
+end
+
+function costume.onTick(repeated)
 	if costume.abilitesenabled == true then
-		--plr.powerup = PLAYER_BIG
-		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
-
-		if hit then
-			hitTicks = hitTicks + 1
-
-			plr.keys.left = false
-			plr.keys.right = false
-			plr.keys.up = false
-			plr.keys.down = false
-			plr.keys.jump = false
-			plr.keys.altJump = false
-			plr.keys.run = false
-			plr.keys.altRun = false
-
-			plr.x = plr.x + 4 * plr.direction
-
-			if plr:isGroundTouching() and hitTicks > 5 or (plr:mem(0x148, FIELD_WORD) >= 2 or plr:mem(0x14C, FIELD_WORD) >= 2) then
-				hit = false
-				plr:mem(0x140, FIELD_WORD, 200)
-				Defines.gravity = Defines.gravity * 2
+		if player:isGroundTouching() == false then
+			if player.keys.jump == KEYS_PRESSED then
+				Defines.cheat_ahippinandahoppin = true
+				jumpingactive = true
+			end
+		end
+		if player:isGroundTouching() == true then
+			Defines.cheat_ahippinandahoppin = false
+			jumpingactive = false
+			timer = 50
+		end
+		if jumpingactive then
+			timer = timer - 5
+			if timer <= 0 then
+				if player.keys.jump == KEYS_PRESSED then
+					Defines.cheat_ahippinandahoppin = false
+					player:mem(0x11E, FIELD_BOOL, false)
+					cooldown = 5
+					timer = 50
+					if cooldown <= 0 then
+						player:mem(0x11E, FIELD_BOOL, true)
+					end
+				end
 			end
 		end
 	end
 end
 
-function costume.onDraw()
-	if costume.abilitesenabled == true then
-		if hit then
-			plr.frame = 16
-		end
-	end
+function costume.onPlayerHarm()
+	
 end
 
-function costume.onPlayerHarm(e, p)
-	if costume.abilitesenabled == true then
-		if player.hasStarman == false or player.isMega == false then
-			if hit then
-				e.cancelled = true
-				return
-			end
-
-			if mem(0x00B2C5A8, FIELD_WORD) > 0 then
-				e.cancelled = true
-				hit = true
-				hitTicks = 0
-				plr.speedY = -8
-				plr.speedX = 0
-				Defines.gravity = Defines.gravity / 2
-				SFX.play(5)
-				mem(0x00B2C5A8, FIELD_WORD, 0)
-				Effect.spawn(11, p.x, p.y)
-			else
-				p:kill()
-			end
-		end
-	end
+function costume.onPlayerKill()
+	local rngkey = rng.randomInt(1,7)
+	SFX.play("costumes/mario/SpongeBobSquarePants/spongebob-dead"..rngkey..".ogg")
 end
 
 function costume.onCleanup(p)
@@ -218,7 +213,6 @@ function costume.onCleanup(p)
 	Defines.player_grav = 0.4
 	
 	costume.abilitesenabled = false
-	HUDOverride.visible.itembox = true
 end
 
 return costume
