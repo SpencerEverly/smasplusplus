@@ -94,7 +94,7 @@ end
 
 function costume.onPlayerHarm(e, p)
 	if costume.abilitesenabled == true then
-		if not player.hasStarman or not player.isMega then
+		if player.hasStarman == false or player.isMega == false then
 			if hit then
 				e.cancelled = true
 				return
