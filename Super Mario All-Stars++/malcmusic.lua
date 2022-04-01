@@ -1875,14 +1875,24 @@ function malcmusic.onTick()
 			Audio.MusicChange(13, "_OST/Super Mario World/Choose a Game.spc|0;g=2.6")
 		end
 		if currentCostume == "MARINK" and holiday == false then
-			Audio.MusicChange(1, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
-			Audio.MusicChange(2, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
-			Audio.MusicChange(3, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
-			Audio.MusicChange(7, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
-			Audio.MusicChange(8, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|6;g=1.8")
-			Audio.MusicChange(11, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|2;g=1.8")
-			Audio.MusicChange(12, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|2;g=1.8")
-			Audio.MusicChange(13, "_OST/Zelda II - The Adventure of Link (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|2;g=1.8")
+			Audio.MusicChange(1, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob BB 44.ogg")
+			Audio.MusicChange(2, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob BB 44.ogg")
+			Audio.MusicChange(3, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob BB 44.ogg")
+			Audio.MusicChange(7, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob BB 44.ogg")
+			Audio.MusicChange(8, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob BB 44.ogg")
+			Audio.MusicChange(11, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob BB 44.ogg")
+			Audio.MusicChange(12, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob JF 44.ogg")
+			Audio.MusicChange(13, "_OST/SpongeBob Squarepants - Battle for Bikini Bottom (PS2)/MNU5 Spongebob JF 44.ogg")
+		end
+		if currentCostume == "SPONGEBOBSQUAREPANTS" and holiday == false then
+			Audio.MusicChange(1, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Me and Larry City/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7")
+			Audio.MusicChange(12, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
+			Audio.MusicChange(13, "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7")
 		end
 		
 		
