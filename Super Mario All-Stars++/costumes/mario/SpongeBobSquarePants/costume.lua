@@ -9,6 +9,10 @@ local plr
 local jumpingactive = false
 local cooldown = 0
 local timer = 50
+local timer2 = 5
+local p = player
+
+local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKI}
 
 function costume.onInit(p)
 	plr = p
@@ -31,8 +35,8 @@ function costume.onInit(p)
 	--Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-died.ogg")
 	--Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/shell-hit.ogg")
 	--Audio.sounds[10].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-slide.ogg")
-	--extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/coin.ogg"))
-	--extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/1up.ogg"))
+	extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/coin.ogg"))
+	extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/1up.ogg"))
 	--Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/warp.ogg")
 	extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/fireball.ogg"))
 	--Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/grab.ogg")
@@ -41,6 +45,7 @@ function costume.onInit(p)
 	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/keyhole.ogg")
 	--Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/pswitch.ogg")
 	--Audio.sounds[33].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/tail.ogg")
+	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/door.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/got-star.ogg")
 	--Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-died2.ogg")
 	--Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/smw-checkpoint.ogg")
@@ -51,6 +56,18 @@ function costume.onInit(p)
 	--Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/smb2-throw.ogg")
 	--Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/smb2-hit.ogg")
 	
+	flybeginsound = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/spongebob-flyingdown.ogg"))
+	
+	Graphics.sprites.hardcoded["33-2"].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/hardcoded-33-2.png")
+	Graphics.sprites.hardcoded["33-5"].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/hardcoded-33-5.png")
+	
+	Graphics.sprites.npc[10].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/npc-10.png")
+	Graphics.sprites.npc[33].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/npc-33.png")
+	Graphics.sprites.npc[88].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/npc-88.png")
+	Graphics.sprites.npc[97].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/npc-97.png")
+	Graphics.sprites.npc[103].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/npc-103.png")
+	Graphics.sprites.npc[258].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/npc-258.png")
+	
 	Defines.jumpheight = 14
 	Defines.player_walkspeed = 2.7
 	Defines.player_runspeed = 4.5
@@ -59,11 +76,43 @@ function costume.onInit(p)
 	Defines.player_grav = 0.4
 	
 	costume.abilitesenabled = true
+	costume.useFallingFrame = false
+end
+
+local function isOnGround(p)
+	return (
+		p.speedY == 0 -- "on a block"
+		or p:mem(0x176,FIELD_WORD) ~= 0 -- on an NPC
+		or p:mem(0x48,FIELD_WORD) ~= 0 -- on a slope
+	)
+end
+
+local atPSpeed = p:mem(0x16C,FIELD_BOOL) or p:mem(0x16E,FIELD_BOOL)
+
+local function isSlowFalling(p)
+	return (leafPowerups[p.powerup] and p.speedY > 0 and (p.keys.jump or p.keys.altJump))
+end
+
+local function canFall(p)
+	return (
+		p.forcedState == FORCEDSTATE_NONE
+		and p.deathTimer == 0 and not p:mem(0x13C,FIELD_BOOL) -- not dead
+		and not isOnGround(p)
+		and p.mount == MOUNT_NONE
+		and not p.climbing
+		and not p:mem(0x0C,FIELD_BOOL) -- fairy
+		and not p:mem(0x3C,FIELD_BOOL) -- sliding
+		and not p:mem(0x44,FIELD_BOOL) -- surfing on a rainbow shell
+		and not p:mem(0x4A,FIELD_BOOL) -- statue
+		and p:mem(0x34,FIELD_WORD) == 0 -- underwater
+	)
 end
 
 function costume.onStart()
-	if (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false or (Level.filename() == "SMAS - Game Over.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then
-		Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
+	if costume.abilitesenabled == true then
+		if (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false or (Level.filename() == "SMAS - Game Over.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then
+			Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
+		end
 	end
 end
 
@@ -75,15 +124,41 @@ function costume.onPostNPCKill(npc, harmType)
     end
 end
 
+function costume.onTickEnd()
+	if canFall(p) then
+		costume.useFallingFrame = player.speedY > 0
+	else
+		costume.useFallingFrame = false
+	end
+end
+
 function costume.onTick(repeated)
 	if costume.abilitesenabled == true then
+		if leafPowerups[p.powerup] then
+			if p.holdingNPC == nil then
+				if isSlowFalling(p) then
+					plr:setFrame(27)
+					timer2 = timer2 - 1
+					if timer2 == 4 then
+						SFX.play(flybeginsound, 1, 1, 10)
+					elseif timer2 <= 3 then
+						if flybeginsound.playing then
+							flybeginsound:stop()
+						end
+					end
+				end
+			end
+			if player:isGroundTouching() == true or player:isClimbing() == true then
+				timer2 = 5
+			end
+		end
 		if player:isGroundTouching() == false then
 			if player.keys.jump == KEYS_PRESSED then
 				Defines.cheat_ahippinandahoppin = true
 				jumpingactive = true
 			end
 		end
-		if player:isGroundTouching() == true then
+		if player:isGroundTouching() == true or player:isClimbing() == true then
 			Defines.cheat_ahippinandahoppin = false
 			jumpingactive = false
 			timer = 50
@@ -204,6 +279,16 @@ function costume.onCleanup(p)
 	extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
 	extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
 	extrasounds.id113 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo8.ogg")) --Shell hit 9, basically a shell hit and a 1UP together
+	
+	Graphics.sprites.hardcoded["33-2"].img = nil
+	Graphics.sprites.hardcoded["33-5"].img = nil
+	
+	Graphics.sprites.npc[10].img = nil
+	Graphics.sprites.npc[33].img = nil
+	Graphics.sprites.npc[88].img = nil
+	Graphics.sprites.npc[97].img = nil
+	Graphics.sprites.npc[103].img = nil
+	Graphics.sprites.npc[258].img = nil
 		
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 3

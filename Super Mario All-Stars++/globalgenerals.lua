@@ -13,7 +13,9 @@ local textplus = require("textplus")
 local repll = require("repll")
 local extrasounds = require("extrasounds")
 local namehover = require("namehover")
+local hearthover = require("hearthover")
 
+namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
 HUDOverride.priority = -4.5
@@ -677,6 +679,14 @@ function globalgenerals.onTick()
 		starman.duration[996] = 769
 		starman.duration[994] = 769
 		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "SPONGEBOBSQUAREPANTS" then
+		littleDialogue.characterNames[1] = "SpongeBob"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-spongebob.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_spongebob_alt")
+		starman.duration[996] = 1090
+		starman.duration[994] = 1090
+		warpTransition.doorclose = ("costumes/mario/SpongeBobSquarePants/door-close.ogg")
 	end
 	if currentCostume == "PRINCESSRESCUE" then
 		littleDialogue.characterNames[1] = "Mario"
