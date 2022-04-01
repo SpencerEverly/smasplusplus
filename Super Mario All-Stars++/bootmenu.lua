@@ -33,6 +33,7 @@ datetime.bottomright = true
 datetime.topright = false
 
 GameData.bootmenuactive = true
+GameData.holidayonetimeended = false
 
 local aprilfools = false
 local aprilfoolserror = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
@@ -115,6 +116,7 @@ local selecter = rng.randomInt(1,#battlelevelsrng)
 
 local function introExit()
 	Routine.waitFrames(38)
+	GameData.startedmenu = 0
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 
@@ -494,6 +496,7 @@ end
 local function mapExit()
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
+	GameData.startedmenu = 0
 	Level.exit()
 end
 
@@ -921,6 +924,58 @@ local function ExitDialogueMusicReset()
 	end
 end
 
+local function MusicReset()
+	bootmenu.menuactive = false
+	if os.date("*t").month == 03 and os.date("*t").day == 17 then
+		stpatricksday = true
+	end
+	if Level.filename() == "intro_8bit.lvlx" then
+		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
+	end
+	if Level.filename() == "intro_bossedit8.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Smash Bros. Melee/smari3.ogg")
+	end
+	if Level.filename() == "intro_S!TS!.lvlx" then
+		Audio.MusicChange(0, "_OST/Spencer Everly/S!TS! REBOOT (Theme Song).ogg")
+	end
+	if Level.filename() == "intro_SMAS.lvlx" then
+		Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.0.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario 64/Title Theme.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.1.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario 64/Title Theme.ogg")
+	end
+	if Level.filename() == "intro_SMBX1.2.lvlx" then
+		Audio.MusicChange(0, 53)
+	end
+	if Level.filename() == "intro_SMBX1.3.lvlx" then
+		Audio.MusicChange(0, 56)
+	end
+	if Level.filename() == "intro_SMBX1.3og.lvlx" then
+		Audio.MusicChange(0, 55)
+	end
+	if Level.filename() == "intro_SMBX2.lvlx" then
+		Audio.MusicChange(0, m)
+	end
+	if Level.filename() == "intro_SMBX2b3.lvlx" then
+		--Music doesn't mute
+	end
+	if Level.filename() == "intro_WSMBA.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario Bros. 3 (NES, VRC6 by skydev) - OST.nsf|0;g=2.2")
+	end
+	if Level.filename() == "intro_sunsetbeach.lvlx" then
+		Audio.MusicChange(0, "_OST/Super Mario Galaxy 2/SMG2_galaxy06_strm.ogg")
+	end
+	if Level.filename() == "intro_scrollingheights.lvlx" then
+		Audio.MusicChange(0, "_OST/Nintendo Land/J_Blf_night.w.48.dspadpcm.ogg")
+	end
+	if Level.filename() == "intro_jakebrito1.lvlx" then
+		Audio.MusicChange(0, "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg")
+	end
+end
+
 local function ExitGame1()
 	exitscreen = true
 	Audio.MusicChange(0, 0)
@@ -1050,8 +1105,13 @@ local function foolsinapril()
 	Routine.wait(2, true)
 	Misc.unpause()
 	aprilfools = false
-	GameData.reopenmenumusreset = true
-	GameData.startedmenu = 1
+	GameData.musreset = true
+	logo = true
+	datetime.bottomright = true
+	active = false
+	pressjumpwords = true
+	GameData.holidayonetimeended = true
+	GameData.startedmenu = GameData.startedmenu - 1
 end
 
 function bootmenu.onInitAPI()
@@ -1097,7 +1157,11 @@ function bootmenu.onStart()
 		Defines.cheat_donthurtme = true
 		Defines.cheat_shadowmario = true
 		if os.date("*t").month == 04 and os.date("*t").day == 01 then
-			GameData.startedmenu = 1
+			if GameData.holidayonetime == nil or GameData.holidayonetime == false and GameData.holidayonetimeended == false then
+				GameData.startedmenu = 1
+			elseif GameData.holidayonetimeended == true then
+				GameData.startedmenu = 0
+			end
 		end
 		if os.date("*t").month == 03 and os.date("*t").day == 17 then
 			stpatricksday = true
@@ -1165,6 +1229,10 @@ function bootmenu.onTick()
 		if GameData.reopenmenumusreset == true then
 			Routine.run(BootDialogueMusicReset)
 			GameData.reopenmenumusreset = false
+		end
+		if GameData.musreset == true then
+			Routine.run(MusicReset)
+			GameData.musreset = false
 		end
 		player:setFrame(50)
 		player:mem(0x140, FIELD_BOOL, 150)
@@ -1345,7 +1413,7 @@ function bootmenu.onInputUpdate()
 			end
 		end
 		if (os.date("*t").month == 04 and os.date("*t").day == 01) then
-			if GameData.holidayonetime == nil then
+			if GameData.holidayonetime == nil or GameData.holidayonetime == false and GameData.holidayonetimeended == false then
 				if player.keys.jump == KEYS_PRESSED then
 					GameData.startedmenu = 1
 					Audio.MusicChange(0, 0)
@@ -1362,8 +1430,11 @@ function bootmenu.onInputUpdate()
 					end
 				end
 				if GameData.holidayonetime == true then
-					Routine.run(bootDialogue)
-					GameData.startedmenu = 1
+					--Nothing
+				end
+			elseif GameData.holidayonetimeended == true then
+				if player.keys.jump == KEYS_PRESSED then
+					
 				end
 			end
 		end
@@ -1545,7 +1616,7 @@ function bootmenu.onDraw()
 			textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=0, color=Color.lightred, font=statusFont}
 		end
 		if aprilfools then	
-			Graphics.drawImageWP(aprilfoolserror, 0, 0, 10)
+			Graphics.drawImageWP(aprilfoolserror, 0, 0, 0)
 		end
 		if not aprilfools then
 			
