@@ -2166,6 +2166,16 @@ function malcmusic.onTick()
 			Audio.MusicChange(12, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 			Audio.MusicChange(13, "_OST/Adventures of Demo/menuet_of_game.spc|0;g=2.0")
 		end
+		if currentCostume == "HAMTARO" and holiday == false then
+			Audio.MusicChange(1, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+			Audio.MusicChange(2, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+			Audio.MusicChange(3, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+			Audio.MusicChange(7, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+			Audio.MusicChange(8, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+			Audio.MusicChange(11, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+			Audio.MusicChange(12, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+			Audio.MusicChange(13, "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg")
+		end
 		if currentCostume == "SEE-TANGENT" and holiday == false then
 			Audio.MusicChange(1, "_OST/Nintendogs + Cats/CFR_BGM_SHOP_INTERIOR.ogg")
 			Audio.MusicChange(2, "_OST/Nintendogs + Cats/CFR_BGM_SHOP_HOTEL.ogg")
