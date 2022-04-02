@@ -98,50 +98,50 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
 
     -- Base HUD Bar
     if hudBarSet == 1 then
-        Graphics.drawImageWP(hudBarB, 0, 0, priority)
+        Graphics.drawImageWP(hudBarB, 0, 0, -4.4)
     else
-        Graphics.drawImageWP(hudBarT, 0, 0, priority)
+        Graphics.drawImageWP(hudBarT, 0, 0, -4.4)
     end
 
     -- Reserve Box
-    Graphics.drawImageWP(reserveBox, 400 - reserveBox.width*0.5, 4, priority)
+    Graphics.drawImageWP(reserveBox, 400 - reserveBox.width*0.5, 4, -4.3)
 
     local itemImage = reserveItem[player.reservePowerup] or reserveItem[0]
 
     if player.reservePowerup > 0 and itemImage ~= nil then
-        Graphics.drawImageWP(itemImage, 392, 4, priority)
+        Graphics.drawImageWP(itemImage, 392, 4, -4.3)
     end
 
     -- Coins
-    Graphics.drawImageWP(coinCounter, 20, 4, priority)
-    textplus.print{text = tostring(mem(0x00B2C5A8, FIELD_WORD)), font = minFont, priority = 5, x = 54, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    Graphics.drawImageWP(coinCounter, 20, 4, -4.3)
+    textplus.print{text = tostring(mem(0x00B2C5A8, FIELD_WORD)), font = minFont, priority = -4.3, x = 54, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Lives or Death Counter
     if livesAltStyle == 2 then
-        Graphics.drawImageWP(deathCounter, 130, 4, priority)
-        textplus.print{text = tostring(SaveData.deathCount), font = minFont, priority = 5, x = 164, y = 4, xscale = 2, yscale = 2} 
+        Graphics.drawImageWP(deathCounter, 130, 4, -4.3)
+        textplus.print{text = tostring(SaveData.deathCount), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2} 
     else
-        Graphics.drawImageWP(lifeCounter, 114, 4, priority)
-        textplus.print{text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), font = minFont, priority = 5, x = 164, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        Graphics.drawImageWP(lifeCounter, 114, 4, -4.3)
+        textplus.print{text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end
 
     -- Stars
     if starCounterSet == 1 then
-        Graphics.drawImageWP(starCounter, 450, 4, priority)
-        textplus.print{text = tostring(mem(0x00B251E0, FIELD_WORD)), font = minFont, priority = 5, x = 484, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        Graphics.drawImageWP(starCounter, 450, 4, -4.3)
+        textplus.print{text = tostring(mem(0x00B251E0, FIELD_WORD)), font = minFont, priority = -4.3, x = 484, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end
 
     -- Score
-    textplus.print{text = tostring(SaveData._basegame.hud.score), font = minFont, priority = 5, x = 544, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData._basegame.hud.score), font = minFont, priority = -4.3, x = 544, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Time [SMBX Built In]
     if timeCounterSet == 1 then
         if timeAltStyle == 2 then
-            Graphics.drawImageWP(timeCounterB, 670, 4, priority)
+            Graphics.drawImageWP(timeCounterB, 670, 4, -4.4)
         else
-            Graphics.drawImageWP(timeCounter, 670, 4, priority)
+            Graphics.drawImageWP(timeCounter, 670, 4, -4.4)
         end
-        textplus.print{text = tostring(Timer.getValue()), font = minFont, priority = 5, x = 702, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        textplus.print{text = tostring(Timer.getValue()), font = minFont, priority = -4.3, x = 702, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end    
 
     -- Reserve power-up rendering
@@ -168,29 +168,29 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
             if hudBarSet == 1 then
                 if dragonAltStyle == 2 then
                     if dragonExtra == 2 then
-                        Graphics.drawImageWP(dragonCoinEmptyW, 204 + (index * 36), 4, priority)
+                        Graphics.drawImageWP(dragonCoinEmptyW, 204 + (index * 36), 4, -4.4)
                     else
-                        Graphics.drawImageWP(dragonCoinEmptyW, 204 + (index * 18), 4, priority)
+                        Graphics.drawImageWP(dragonCoinEmptyW, 204 + (index * 18), 4, -4.4)
                     end
                 else
                     if dragonExtra == 2 then
-                    Graphics.drawImageWP(dragonCoinEmptyB, 204 + (index * 36), 4, priority)
+                    Graphics.drawImageWP(dragonCoinEmptyB, 204 + (index * 36), 4, -4.4)
                     else
-                    Graphics.drawImageWP(dragonCoinEmptyB, 204 + (index * 18), 4, priority)
+                    Graphics.drawImageWP(dragonCoinEmptyB, 204 + (index * 18), 4, -4.4)
                     end
                 end
             else
                 if dragonExtra == 2 then
-                    Graphics.drawImageWP(dragonCoinEmpty, 204 + (index * 36), 4, priority)
+                    Graphics.drawImageWP(dragonCoinEmpty, 204 + (index * 36), 4, -4.4)
                 else
-                    Graphics.drawImageWP(dragonCoinEmpty, 204 + (index * 18), 4, priority)
+                    Graphics.drawImageWP(dragonCoinEmpty, 204 + (index * 18), 4, -4.4)
                 end
             end
         else
             if dragonExtra == 2 then
-                Graphics.drawImageWP(dragonCoinCollect, 204 + (index * 36), 4, priority)
+                Graphics.drawImageWP(dragonCoinCollect, 204 + (index * 36), 4, -4.4)
             else
-                Graphics.drawImageWP(dragonCoinCollect, 204 + (index * 18), 4, priority)
+                Graphics.drawImageWP(dragonCoinCollect, 204 + (index * 18), 4, -4.4)
             end
         end
     end

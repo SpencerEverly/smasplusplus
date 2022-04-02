@@ -876,7 +876,28 @@ local animEvent = function(playerData, p, inst)
 	playerData:CenterEmitter(em_charge)
 
 	em_charge:draw{priority=inst.z+0.01, nocull=true}
-
+	
+	
+	if player.deathTimer >= 0 then
+		onehp = false
+		twohp = false
+		threehp = false
+	end
+	if playerData.hp == 1 then
+		onehp = true
+		twohp = false
+		threehp = false
+	end
+	if playerData.hp == 2 then
+		onehp = false
+		twohp = true
+		threehp = false
+	end
+	if playerData.hp == 3 then
+		onehp = false
+		twohp = false
+		threehp = true
+	end
 
 	-- PALETTE ANIMATION
 	playerData.paletteOffset = nil
@@ -1141,7 +1162,7 @@ function costume.onInit(playerObj, pDat)
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smb2-throw.ogg")
 	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/smb2-hit.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/bubble.ogg")
-	Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_HEARTS)
+	Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_NONE)
 	coyotetime = require("coyotetime");
 	ppp = require("playerphysicspatch");
 	spintrail = require("a2xt_spintrail")
@@ -1185,17 +1206,41 @@ function costume.onInit(playerObj, pDat)
 
 	registerEvent(costume, "onPostNPCKill");
 	registerEvent(costume, "onTick");
+	registerEvent(costume, "onDraw");
 	playerCount = playerCount+1
+end
+
+function costume.onDraw()
+	local heartfull2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot.png")
+	local heartempty2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot_empty.png")
+	if onehp then
+		Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartempty2, player.x - camera.x,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+	end
+	if twohp then
+		Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+	end
+	if threehp then
+		Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartfull2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+	end
 end
 
 function costume.onTick()
 	for _,p in ipairs(costume.playersList) do
 		local data = costume.playerData[playerObj]
-	end	
+	end
 end
 
 function costume.onCleanup(playerObj, p)
 	Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_ITEMBOX)
+	onehp = false
+	twohp = false
+	threehp = false
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
