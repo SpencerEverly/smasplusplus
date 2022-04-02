@@ -1,18 +1,19 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
+local rng = require("base/rng")
 
 local costume = {}
 
+local killed = false
+
 function costume.onInit(p)
+	plr = p
 	registerEvent(costume,"onStart")
-	--Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/player-jump.ogg")
+	registerEvent(costume,"onPlayerKill")
+	registerEvent(costume,"onPlayerHarm")
+	registerEvent(costume,"onPostNPCKill")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/player-shrink.ogg")
-	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/player-grow.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/player-died.ogg")
-	extrasounds.id15 = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/1up.ogg")
 	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/key.ogg")
-	Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/racoon.ogg")
-	--Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/yoshi.ogg")
 	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/yoshi-hurt.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/got-star.ogg")
 	Defines.player_walkspeed = 2
@@ -23,8 +24,28 @@ end
 
 function costume.onStart()
 	if (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false or (Level.filename() == "SMAS - Game Over.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then
-		SFX.play("costumes/mario/SP-1-EricCartman/cartman-respectmyauthority.ogg")
+		SFX.play("costumes/mario/SP-1-EricCartman/voices/0005.ogg")
 	end
+end
+
+function costume.onPostNPCKill(npc, harmType)
+	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
+	local itemgetrng = rng.randomInt(1,7)
+	if items[npc.id] and Colliders.collide(plr, npc) then
+		SFX.play("costumes/mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
+    end
+end
+
+function costume.onPlayerHarm()
+	if not plr.hasStarman or plr.isMega then
+		local hurtvoicerng = rng.randomInt(1,10)
+		SFX.play("costumes/mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
+	end
+end
+
+function costume.onPlayerKill()
+	local dyingvoicerng = rng.randomInt(1,10)
+	SFX.play("costumes/mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
 end
 
 function costume.onCleanup(p)
