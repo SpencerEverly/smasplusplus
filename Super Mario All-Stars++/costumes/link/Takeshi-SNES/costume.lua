@@ -3,6 +3,8 @@ local pm = require("playerManager")
 local costume = {}
 
 function costume.onInit(p)
+	plr = p
+	registerEvent(costume,"onInputUpdate")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/link/Takeshi-SNES/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/link/Takeshi-SNES/stomped.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/link/Takeshi-SNES/player-grow.ogg")
@@ -30,6 +32,18 @@ function costume.onInit(p)
 	Defines.jumpheight_bounce = 27
 	Defines.projectilespeedx = 7.0
 	Defines.player_grav = 0.3
+	
+	costume.abilitesenabled = true
+end
+
+function costume.onInputUpdate()
+	if costume.abilitesenabled == true then
+		if player.keys.run == KEYS_DOWN then
+			plr:mem(0x168, FIELD_FLOAT, 10)
+		else
+			plr:mem(0x168, FIELD_FLOAT, 0)
+		end
+	end
 end
 
 function costume.onCleanup(p)

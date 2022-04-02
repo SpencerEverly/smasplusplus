@@ -3,6 +3,9 @@ local pm = require("playerManager")
 local costume = {}
 
 function costume.onInit(p)
+	plr = p
+	registerEvent(costume,"onInputUpdate")
+	registerEvent(costume,"onTick")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/link/Ness/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/link/Ness/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/link/Ness/block-hit.ogg")
@@ -38,6 +41,18 @@ function costume.onInit(p)
 	Defines.jumpheight_bounce = 20
 	Defines.projectilespeedx = 7.0
 	Defines.player_grav = 0.41
+	
+	costume.abilitesenabled = true
+end
+
+function costume.onInputUpdate()
+	if costume.abilitesenabled == true then
+		if player.keys.run == KEYS_DOWN then
+			plr:mem(0x168, FIELD_FLOAT, 10)
+		else
+			plr:mem(0x168, FIELD_FLOAT, 0)
+		end
+	end
 end
 
 function costume.onCleanup(p)

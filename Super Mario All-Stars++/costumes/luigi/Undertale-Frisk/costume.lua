@@ -1,5 +1,6 @@
 local pm = require("playerManager")
 local Routine = require("routine")
+local extrasounds = require("extrasounds")
 
 local costume = {}
 
@@ -14,8 +15,8 @@ function costume.onInit(p)
 	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/player-died.ogg")
 	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/shell-hit.ogg")
 	--Audio.sounds[13].sfx = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/camera-change.ogg")
-	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/coin.ogg")
-	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/1up.ogg")
+	extrasounds.id14 = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/coin.ogg")
+	extrasounds.id15 = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/1up.ogg")
 	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/warp.ogg")
 	--Audio.sounds[23].sfx = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/grab.ogg")
 	Audio.sounds[34].sfx = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/racoon.ogg")
@@ -50,11 +51,11 @@ function costume.onCleanup(p)
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	Audio.sounds[14].sfx = nil
-	Audio.sounds[15].sfx = nil
+	extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("sound/coin.ogg"))
+	extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("sound/1up.ogg"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	Audio.sounds[18].sfx = nil
+	extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("sound/fireball.ogg"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil
@@ -104,6 +105,19 @@ function costume.onCleanup(p)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
+	extrasounds.id92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
+	extrasounds.id93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
+	extrasounds.id94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg"))
+	extrasounds.id95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg"))
+	extrasounds.id96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
+	extrasounds.id97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
+	extrasounds.id98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
+	extrasounds.id99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
+	extrasounds.id100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
+	extrasounds.id101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
+	extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
+	extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
+	
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 3
 	Defines.player_runspeed = 6

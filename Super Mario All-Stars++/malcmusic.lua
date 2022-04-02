@@ -602,51 +602,17 @@ function malcmusic.onTick()
 			end
 		end
 		if SaveData.dateplayedweather == "rain" then
-			if player.section == 0 then
+			local rainSections = {[0] = true,[6] = true,[9] = true,[10] = true,[11] = true}
+			local insideSections = {[1] = true,[2] = true,[3] = true,[4] = true,[5] = true,[7] = true,[8] = true,[12] = true,[13] = true,[14] = true}
+			if rainSections[player.section] then
 				rainState = true
 				prevState = false
-			elseif player.section == 1 then
-				rainState = false
-				prevState = true
-			elseif player.section == 2 then
-				rainState = false
-				prevState = true
-			elseif player.section == 3 then
-				rainState = false
-				prevState = true
-			elseif player.section == 4 then
-				rainState = false
-				prevState = true
-			elseif player.section == 6 then
-				rainState = true
-				prevState = false
-			elseif player.section == 7 then
-				rainState = false
-				prevState = true
-			elseif player.section == 8 then
-				rainState = false
-				prevState = true
-			elseif player.section == 9 then
-				rainState = true
-				prevState = false
-			elseif player.section == 10 then
-				rainState = true
-				prevState = false
-			elseif player.section == 11 then
-				rainState = true
-				prevState = false
-			elseif player.section == 12 then
-				rainState = false
-				prevState = true
-			elseif player.section == 13 then
-				rainState = false
-				prevState = true
-			elseif player.section == 14 then
+			elseif insideSections[player.section] then
 				rainState = false
 				prevState = true
 			end
 			if (rainState ~= prevRainState) or (prevSection ~= player.section) then
-				if rainState == true then
+				if rainState then
 					Section(player.section).effects.weather = WEATHER_RAIN
 					currentSfxOutRain = SFX.play(rainoutsidesfx, 1, 0)
 					
@@ -654,22 +620,12 @@ function malcmusic.onTick()
 						currentSfxInRain:fadeout(50)
 						currentSfxInRain = nil
 					end
-				elseif prevState == true then
+				elseif prevState then
 					currentSfxInRain = SFX.play(raininsidesfx, 1, 0)
 					
 					if currentSfxOutRain then
 						currentSfxOutRain:fadeout(50)
 						currentSfxOutRain = nil
-					end
-				elseif rainState == false then
-					if currentSfxOutRain then
-						currentSfxOutRain:fadeout(50)
-						currentSfxOutRain = nil
-					end
-				elseif prevState == false then
-					if currentSfxInRain then
-						currentSfxInRain:fadeout(50)
-						currentSfxInRain = nil
 					end
 				end
 				prevSection = player.section

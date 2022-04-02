@@ -3,6 +3,8 @@ local pm = require("playerManager")
 local costume = {}
 
 function costume.onInit(p)
+	plr = p
+	registerEvent(costume,"onInputUpdate")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/got-star.ogg")
 	Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-stab.ogg")
 	Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-hurt.ogg")
@@ -25,6 +27,18 @@ function costume.onInit(p)
 	Defines.jumpheight_bounce = 25
 	Defines.projectilespeedx = 7.0
 	Defines.player_grav = 0.44
+	
+	costume.abilitesenabled = true
+end
+
+function costume.onInputUpdate()
+	if costume.abilitesenabled == true then
+		if player.keys.run == KEYS_DOWN then
+			plr:mem(0x168, FIELD_FLOAT, 10)
+		else
+			plr:mem(0x168, FIELD_FLOAT, 0)
+		end
+	end
 end
 
 function costume.onCleanup(p)
