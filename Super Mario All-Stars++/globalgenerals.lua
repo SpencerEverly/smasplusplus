@@ -1072,7 +1072,7 @@ function globalgenerals.onTick()
 	end
 	
 	
-	if currentCostume == nil then
+	if currentCostume == nil and SaveData.disableX2char == false then
 		littleDialogue.characterNames[1] = "Mario"
 		littleDialogue.characterNames[2] = "Luigi"
 		littleDialogue.characterNames[3] = "Peach"
