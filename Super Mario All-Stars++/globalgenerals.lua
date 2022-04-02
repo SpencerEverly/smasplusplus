@@ -683,7 +683,7 @@ function globalgenerals.onTick()
 	if currentCostume == "SPONGEBOBSQUAREPANTS" then
 		littleDialogue.characterNames[1] = "SpongeBob"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom-spongebob.ogg")
-		starman.sfxFile = Misc.resolveSoundFile("starman/starman_spongebob_alt")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_spongebob")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 		warpTransition.doorclose = ("costumes/mario/SpongeBobSquarePants/door-close.ogg")
