@@ -61,6 +61,7 @@ end
 function costume.lungeattack()
 	plr:mem(0x140, FIELD_WORD, 0)
 	player:mem(0x120, FIELD_BOOL, false)
+	plr:mem(0x172, FIELD_BOOL, false)
 	SFX.play("costumes/toad/SEE-Tangent/tangent-lunge.ogg")
 	if plr.direction == 1 then
 		plr.speedX = 5
@@ -123,8 +124,7 @@ end
 
 function costume.onInputUpdate()
 	if costume.abilitesenabled == true then
-		if player.keys.altRun == KEYS_PRESSED and not player.powerup == 5 then
-			plr:mem(0x172, FIELD_BOOL, false)
+		if player.keys.altRun == KEYS_PRESSED then
 			costume.lungeattack()
 		end
 	end
