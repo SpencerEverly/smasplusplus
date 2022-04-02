@@ -12,6 +12,7 @@ local rng = require("base/rng")
 local cursor = require("cursor")
 local inputconfigurator = require("inputconfig")
 local keyboard = require("keyboard")
+local hearthover = require("hearthover")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
@@ -1156,6 +1157,7 @@ function bootmenu.onStart()
 		Misc.saveGame()
 		Defines.cheat_donthurtme = true
 		Defines.cheat_shadowmario = true
+		hearthover.active = false
 		if os.date("*t").month == 04 and os.date("*t").day == 01 then
 			if GameData.holidayonetime == nil or GameData.holidayonetime == false and GameData.holidayonetimeended == false then
 				GameData.startedmenu = 1

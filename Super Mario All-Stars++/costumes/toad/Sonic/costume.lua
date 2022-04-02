@@ -95,13 +95,16 @@ function costume.onDraw()
 end
 
 function costume.onPlayerHarm(e, p)
-	if costume.abilitesenabled == true then
-		if hit then
-			e.cancelled = true
-			return
-		end
-		
-		if player.hasStarman == false or player.isMega == false then
+	if player.hasStarman == true or player.isMega == true then return end
+	
+	if player.hasStarman == false or player.isMega == false then
+		if costume.abilitesenabled == true then
+			if hit then
+				e.cancelled = true
+				return
+			end
+			
+			
 			if mem(0x00B2C5A8, FIELD_WORD) > 0 then
 				e.cancelled = true
 				hit = true

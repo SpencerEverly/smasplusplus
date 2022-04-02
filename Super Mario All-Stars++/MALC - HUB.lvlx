@@ -12115,7 +12115,7 @@ ID:169;X:4480;Y:-32;
 BGO_END
 NPC
 ID:31;X:-197088;Y:-201344;D:-1;
-ID:151;X:-200576;Y:-200112;D:-1;MG:"Welcome to Me and Larry City!<page>This is the central HUB for free powerups\, information\, and additional stars.<page>To leave the city\, head left.<page>To check out the HUB's side quest levels\, or the DLC content\, check the TV by the sign.<page>To head into the city\, keep walking right.<page>To quickly warp between city sections\, use the Barrel Cannon above.";FD:1;LR:"Stage All - Mandatories";
+ID:151;X:-200576;Y:-200112;D:-1;MG:"Welcome to Me and Larry City!<page>This is the central HUB for free powerups\, information\, and additional stars.<page>To leave the city\, head left.<page>To check out the HUB's side quest levels\, or the DLC content\, check the TV by the sign.<page>To head into the city\, keep walking right.<page>To quickly warp between city sections\, use the Barrel Cannon or the Pipe above.";FD:1;LR:"Stage All - Mandatories";
 ID:466;X:-199584;Y:-200128;D:-1;MG:"Greetings\, new hero! Welcome to our fine city!";FD:1;NM:1;LR:"Stage 0 - 0 Stars";
 ID:466;X:-198944;Y:-200128;D:-1;MG:"I overheard that one of these buildings are hiding a secret somewhere.<page>I wonder what it IS though...";FD:1;NM:1;LR:"Stage 0 - 0 Stars";
 ID:466;X:-198496;Y:-200128;D:-1;MG:"Did you know that the sky is blue in Earth?<page>I did not know that!";FD:1;NM:1;LR:"Stage 0 - 0 Stars";

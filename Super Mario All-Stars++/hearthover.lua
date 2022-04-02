@@ -81,6 +81,30 @@ function hearthover.onDraw()
 				Graphics.drawImageWP(heartfull, player.x - camera.x + 22,  player.y - camera.y - 55, -24)
 			end
 		end
+		if currentCostume == "SEE-TANGENT" then
+			local heartfull2 = Graphics.loadImageResolved("costumes/toad/SEE-Tangent/heartfull.png")
+			local heartempty2 = Graphics.loadImageResolved("costumes/toad/SEE-Tangent/heartempty.png")
+			if player.deathTimer >= 0 then
+				Graphics.drawImageWP(heartempty2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartempty2, player.x - camera.x,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+			end
+			if player.powerup == 1 then
+				Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartempty2, player.x - camera.x,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+			end
+			if player.powerup == 2 then
+				Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+			end
+			if player.powerup >= 3 then
+				Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+			end
+		end
 	end
 end
 
