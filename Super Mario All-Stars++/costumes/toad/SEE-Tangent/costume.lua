@@ -59,21 +59,23 @@ function costume.onDraw()
 end
 
 function costume.lungeattack()
-	plr:mem(0x140, FIELD_WORD, 0)
-	player:mem(0x120, FIELD_BOOL, false)
-	plr:mem(0x172, FIELD_BOOL, false)
-	SFX.play("costumes/toad/SEE-Tangent/tangent-lunge.ogg")
-	if plr.direction == 1 then
-		plr.speedX = 5
-		plr.speedY = -3
-	elseif plr.direction == -1 then
-		plr.speedX = -5
-		plr.speedY = -3
-	end
-	lungingTicks = 0
-	lunging = true
-	if lungingTicks > 15 then
-		lunging = false
+	if (plr.powerup == 5) == false then
+		plr:mem(0x140, FIELD_WORD, 0)
+		player:mem(0x120, FIELD_BOOL, false)
+		plr:mem(0x172, FIELD_BOOL, false)
+		SFX.play("costumes/toad/SEE-Tangent/tangent-lunge.ogg")
+		if plr.direction == 1 then
+			plr.speedX = 5
+			plr.speedY = -3
+		elseif plr.direction == -1 then
+			plr.speedX = -5
+			plr.speedY = -3
+		end
+		lungingTicks = 0
+		lunging = true
+		if lungingTicks > 15 then
+			lunging = false
+		end
 	end
 end
 
