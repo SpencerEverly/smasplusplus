@@ -1,0 +1,7 @@
+frames=4
+framestyle=1
+noiceball=1
+framespeed=4
+playerblocktop=0
+npcblocktop=0
+npcblock=0
