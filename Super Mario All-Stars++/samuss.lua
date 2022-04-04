@@ -45,7 +45,6 @@ function samus.onInitAPI()
 	registerEvent(samus, "onDraw", "onDraw", false)
 	registerEvent(samus, "onExitLevel", "onExitLevel", false)
 	registerEvent(samus, "onInputUpdate", "onInputUpdate", false)
-	registerEvent(samus, "onKeyDown", "onKeyDown", false)
 	registerEvent(samus, "onJumpEnd", "onJumpEnd", false)
 	registerEvent(samus, "onNPCKill", "onNPCKill", false)
 	registerEvent(samus, "onMessageBox", "onMessageBox", false)
@@ -207,15 +206,6 @@ local function initDataStorage()
 end
 initDataStorage()
 
-
-function samus.onKeyDown(keycode)
-	if player.character == CHARACTER_SAMUS and (keycode == KEY_JUMP and (player.powerup == 4 or player.powerup == 5) and hasJumpedCounter < 5 and canJump) then
-		player.speedY = -7
-		hasJumpedCounter = hasJumpedCounter + 1
-		twirl = Audio.SfxOpen(pm.getSound(CHARACTER_SAMUS, sfx_twirl))
-		Audio.SfxPlayCh(16, twirl, 0)
-	end
-end
 
 function samus.onJumpEnd()
 	if player.character == CHARACTER_SAMUS then
@@ -428,6 +418,12 @@ local wasRunKeyPressing = false
 function samus.onInputUpdate()
 	if (player.character == CHARACTER_SAMUS) then
 		pm.winStateCheck()
+		if player.keys.jump == KEYS_PRESSED and (player.powerup == 4 or player.powerup == 5) and hasJumpedCounter < 5 and canJump then
+			player.speedY = -7
+			hasJumpedCounter = hasJumpedCounter + 1
+			twirl = Audio.SfxOpen(pm.getSound(CHARACTER_SAMUS, sfx_twirl))
+			Audio.SfxPlayCh(16, twirl, 0)
+		end
 	end
 	
 	if Misc.isPaused() then return end

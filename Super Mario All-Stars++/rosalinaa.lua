@@ -120,7 +120,6 @@ local function findMePeterPan(rDirection)
 end
 
 function rosalina.onInitAPI()
-	registerEvent(rosalina, "onKeyDown", "onKeyDown", false)
 	registerEvent(rosalina, "onInputUpdate", "onInputUpdate", false)
 	registerEvent(rosalina, "onTick", "onTick", false)
 	registerEvent(rosalina, "onJump", "onJump", false)
@@ -141,51 +140,6 @@ local function getBombs()
 	for _, fireball in pairs(NPC.get(projectileType[player.powerup], player.section)) do
 		butts = fireball
 		table.insert(listOfBombs, butts)
-	end
-end
-
-function rosalina.onKeyDown(keycode)
-	if (player.character == CHARACTER_ROSALINA) then
-		if (keycode == KEY_JUMP) or (keycode == KEY_SPINJUMP) then
-			if (canJump) then
-				player.speedY = -8
-				playSFX(1)
-				canJump = false
-			end
-		end
-		if (keycode == KEY_SEL) then
-			if (player.powerup == 3 or player.powerup == 7) then
-				findMePeterPan(1)
-			end
-			if (player.powerup == 6) then
-				gotBombs = NPC.get(projectileType[player.powerup], player.section)
-				if #gotBombs >= 1 then
-					local bomb = gotBombs[1]
-					bomb.data.drop = true
-				end
-				--for _, fireball in pairs(NPC.get(projectileType[player.powerup], player.section)) do
-					--butts = fireball
-					--butts.data.drop = true
-				--end
-			end
-		end
-		if (keycode == KEY_RUN) then
-			if (not inStar) and (hasStar) then
-				hasStar = false
-				mem(0x00B2C5A8, FIELD_WORD, 0);
-				starman.startTheStar()
-			end
-		end
-		if hasFoundPeterPan then
-			if player.keys.dropItem == KEYS_DOWN then
-				if (keycode == KEY_RIGHT) then
-					findMePeterPan(1)
-				end
-				if (keycode == KEY_LEFT) then
-					findMePeterPan(-1)
-				end
-			end
-		end
 	end
 end
 
@@ -326,6 +280,46 @@ function rosalina.onInputUpdate()
 	if player.character == CHARACTER_ROSALINA then
 		pm.winStateCheck()
 		if(not Misc.isPaused()) then
+			if player.keys.jump == KEYS_PRESSED or player.keys.altJump == KEYS_PRESSED then
+				if (canJump) then
+					player.speedY = -8
+					playSFX(1)
+					canJump = false
+				end
+			end
+			if player.keys.altRun == KEYS_PRESSED then
+				if (player.powerup == 3 or player.powerup == 7) then
+					findMePeterPan(1)
+				end
+				if (player.powerup == 6) then
+					gotBombs = NPC.get(projectileType[player.powerup], player.section)
+					if #gotBombs >= 1 then
+						local bomb = gotBombs[1]
+						bomb.data.drop = true
+					end
+					--for _, fireball in pairs(NPC.get(projectileType[player.powerup], player.section)) do
+						--butts = fireball
+						--butts.data.drop = true
+					--end
+				end
+			end
+			if player.keys.run == KEYS_PRESSED then
+				if (not inStar) and (hasStar) then
+					hasStar = false
+					mem(0x00B2C5A8, FIELD_WORD, 0);
+					starman.startTheStar()
+				end
+			end
+			if hasFoundPeterPan then
+				if player.keys.dropItem == KEYS_DOWN then
+					if (keycode == KEY_RIGHT) then
+						findMePeterPan(1)
+					end
+					if (keycode == KEY_LEFT) then
+						findMePeterPan(-1)
+					end
+				end
+			end
 			if(player.runKeyPressing or player.altRunKeyPressing) then
 				if(not pressedRun) then
 					if(player.powerup == PLAYER_HAMMER and player.holdingNPC == nil and player.altRunKeyPressing) then

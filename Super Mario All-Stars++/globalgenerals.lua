@@ -331,6 +331,11 @@ function globalgenerals.onInputUpdate()
 end
 	
 function globalgenerals.onTick()
+	if Player(2) and Player(2).isValid then
+		customCamera.targets = {player, Player(2)}
+	else
+		customCamera.targets = {player}
+	end
 	if player.character == CHARACTER_SNAKE then
 		HUDOverride.visible.keys = true
 		HUDOverride.visible.itembox = true

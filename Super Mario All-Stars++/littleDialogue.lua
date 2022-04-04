@@ -659,11 +659,10 @@ function littleDialogue.create(args)
     box.isValid = true
 
     box.text = args.text or ""
-	if Player.count() == 1 then
-		box.speakerObj = args.speakerObj or player
-	end
 	if Player(2) and Player(2).isValid then
 		box.speakerObj = args.speakerObj or player or player2
+	else
+		box.speakerObj = args.speakerObj or player
 	end
     box.uncontrollable = args.uncontrollable or false
     box.uncloseableByPlayer = args.uncloseableByPlayer or false
@@ -1961,16 +1960,15 @@ function littleDialogue.onDraw()
 end
 
 function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
-	if Player.count() == 1 then
-		littleDialogue.create{
-			text = text,
-			speakerObj = npcObj or playerObj or player
-		}
-	end
 	if Player(2) and Player(2).isValid then
 		littleDialogue.create{
 			text = text,
 			speakerObj = npcObj or playerObj or player or player2
+		}
+	else
+		littleDialogue.create{
+			text = text,
+			speakerObj = npcObj or playerObj or player
 		}
 	end
 

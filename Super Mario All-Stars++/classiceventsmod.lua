@@ -41,9 +41,6 @@ end
 
 local function checkKeyboardEvent(plObject, plIndex, plData, plFieldName, plFieldID)
     local plObjectValue = plObject[plFieldName]
-	if plObjectValue == nil then
-		return
-	end
     local plDataValue = plData[plFieldName]
     if(plDataValue == false and plObjectValue == true)then
         EventManager.callEventInternal("onKeyDown", {plFieldID, plIndex})
@@ -53,6 +50,9 @@ local function checkKeyboardEvent(plObject, plIndex, plData, plFieldName, plFiel
         EventManager.callEventInternal("onKeyUp", {plFieldID, plIndex})
         return
     end
+	if plObjectValue == nil or plDataValue == nil then --Put this under line 52 of scripts/base/engine/classevents.lua
+		return
+	end
 end
 
 

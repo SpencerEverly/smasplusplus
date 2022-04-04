@@ -1,3 +1,5 @@
+local classicEvents = require("classiceventsmod")
+local EventManager = require("main_events_mod")
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
 	sectionlist[1] = player.section
 	if player2 and player2.isValid then
@@ -24,7 +26,7 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 	end
 end
 
-local serializer = require("ext/serializer")
+local serializer = require("scripts/ext/serializer")
 local function loadSaveSlot(slot)
 	local filename = "save"..slot.."-ext.dat"
 	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
@@ -49,7 +51,6 @@ Misc.saveGame()
 local globalgenerals = require("globalgenerals")
 local repll = require("repll")
 local rng = require("base/rng")
-local classicEvents = require("classiceventsmod")
 local playerManager = require("playermanager")
 
 local steve = require("steve")

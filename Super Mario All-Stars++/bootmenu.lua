@@ -720,9 +720,11 @@ local function TwoPlayerCheckBattle()
 end
 
 local function ExitClassicBattle()
-	--Cheats.trigger("1player")
-	--Defines.player_hasCheated = false
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Exiting battle mode activated. You'll need to manually turn off 2 player mode in the settings tab.<question OkayToMenu>", pauses = false, updatesInPause = true})
+end
+
+local function OnePlayerCheckWarning()
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Please note that there are errors and bugs that occur when switching back to 1 player mode within this option.<page>To prevent errors, we need you to press 'No' and restart the game by closing it.<page>But, if you wanna REALLY make sure you wanna error out the episode for debugging if you are smart enough to report a fix, please press 'Yes' instead.<question OnePlayerChoosing>", pauses = false, updatesInPause = true})
 end
 
 local function OnePlayerCheck()
@@ -1079,8 +1081,6 @@ local function RestartSMASPlusPlus()
 	Misc.loadEpisode("Super Mario All-Stars++")
 	if Misc.loadEpisode("Super Mario All-Stars++") == false then
 		SFX.play("wrong.ogg")
-		player.jumpKeyPressing = true
-		player.runKeyPressing = true
 		active = false
 	end
 end
@@ -1368,7 +1368,7 @@ function bootmenu.onTick()
 		Audio.sounds[91].muted = true
 		
 		if runPressedState == true then
-			player.runKeyPressing = false
+			player.keys.run = false
 		end
 	end
 end
@@ -1382,10 +1382,10 @@ end
 
 function bootmenu.onInputUpdate()
 	if bootmenu.active == true then
-		player.runKeyPressing = false
-		player.altJumpKeyPressing = false
-		player.altRunKeyPressing = false
-		player.dropItemKeyPressing = false
+		player.keys.run = false
+		player.keys.altJump = false
+		player.keys.altRun = false
+		player.keys.dropItem = false
 		if player.rawKeys.pause == KEYS_PRESSED and bootmenu.menuactive == false then
 			Routine.run(ExitGame1)
 			SFX.play("littleDialogue/smbx13/choose.wav")
@@ -1446,7 +1446,6 @@ function bootmenu.onInputUpdate()
 			end
 		end
 		if GameData.startedmenu == 4 then
-			player.jumpKeyPressing = true
 			player.keys.jump = true
 			player.rawKeys.jump = true
 			if player.keys.jump == KEYS_PRESSED then
@@ -1894,7 +1893,10 @@ if bootmenu.active == true then
 
 	littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunction = function() Routine.run(FirstBoot5) end})
 
-
+	
+	
+	littleDialogue.registerAnswer("OnePlayerChoosing",{text = "Yes",chosenFunction = function() Routine.run(OnePlayerCheck) end})
+	littleDialogue.registerAnswer("OnePlayerChoosing",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
 	littleDialogue.registerAnswer("FirstBootMenuFour",{text = "How do I play?",chosenFunction = function() Routine.run(FirstBootGameHelp) end})
@@ -1939,7 +1941,7 @@ if bootmenu.active == true then
 
 
 	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Player Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
-	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheck) end})
+	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheckWarning) end})
 	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 

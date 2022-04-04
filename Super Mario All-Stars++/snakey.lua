@@ -87,7 +87,6 @@ end
 function snake.onInitAPI()
 	registerEvent(snake, "onTick", "onTick", false)
 	registerEvent(snake, "onDraw", "onDraw", false)
-	registerEvent(snake, "onKeyDown", "onKeyDown", false)
 	registerEvent(snake, "onInputUpdate", "onInputUpdate", false)
 	registerEvent(snake, "onJump", "onJump", true)
 	registerEvent(snake, "onJumpEnd", "onJumpEnd", false)
@@ -117,11 +116,13 @@ local function npcfilter(v)
 	return not v.friendly and not v.isHidden and snake.enemies[v.id];
 end
 
-
-function snake.onKeyDown(key)
+--Disable up and down slash
+function snake.onInputUpdate()
 	if (player.character == CHARACTER_SNAKE) then
 		--Powerup handling
-		if(key == KEY_RUN and player:mem(0x114,FIELD_WORD) ~= 11 and player:mem(0x114,FIELD_WORD) ~= 10 and player:mem(0x40,FIELD_WORD)~= 3) then --Pressed Tanuki and not climbing
+		pm.winStateCheck()
+		--Pressed Tanuki and not climbing
+		if (player.keys.run == KEYS_PRESSED) and player:mem(0x114,FIELD_WORD) ~= 11 and player:mem(0x114,FIELD_WORD) ~= 10 and player:mem(0x40,FIELD_WORD) ~= 3 then
 			if(player.powerup == PLAYER_FIREFLOWER) then
 				if(c4 == nil) then
 					--Spawn new C4 object
@@ -156,13 +157,6 @@ function snake.onKeyDown(key)
 				end
 			end
 		end
-	end
-end
-
---Disable up and down slash
-function snake.onInputUpdate()
-	if (player.character == CHARACTER_SNAKE) then
-		pm.winStateCheck()
 		if(Misc.isPaused()) then
 			return;
 		end
