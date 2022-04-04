@@ -993,10 +993,16 @@ local function ExitGame1()
 end
 
 local function SaveEraseStart()
-	SaveData.clear()
-	GameData.clear()
-	SaveData.flush()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Erasing complete (Save data erasing hasn't been added to SMBX2 yet, so your save is still available. Please erase the save by deleting your save slot in the episode folder).<question RestartOption>", pauses = false, updatesInPause = true})
+	if __LUNALUA == "0.7 SEE Mod" then
+		SaveData.clear()
+		GameData.clear()
+		SaveData.flush()
+		os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot()..".sav")
+		os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot().."-ext.dat")
+		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
+	elseif __LUNALUA then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Erasing complete (Save data erasing hasn't been added to SMBX2 yet, so your save is still available. Please erase the save by deleting your save slot in the episode folder).<question RestartOption>", pauses = false, updatesInPause = true})
+	end
 end
 
 local function ExitToIntro()
