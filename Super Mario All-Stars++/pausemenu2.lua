@@ -27,6 +27,7 @@ function pausemenu2.onInitAPI()
 	registerEvent(pausemenu2, "onExit")
 	registerEvent(pausemenu2, "onPause")
 	registerEvent(pausemenu2, "onTickEnd")
+	registerEvent(pausemenu2, "onPlayerKill")
 	
 	ready = true
 end
@@ -68,6 +69,44 @@ local letterboxModes = {
 local costumenames = {
 	[COSTUME_NAME] = {costumenaming = "costume"},
 }
+
+function pausemenu2.onTick()
+	if GameData.deathquickoption == true then
+		Audio.sounds[8].muted = true
+		rooms.quickRespawn = true
+		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
+		rooms.collectiblesRespawn = true
+		-- Whether or not blocks reset themselves and the p-switch effect resets after dying (only affects quick respawn).
+		rooms.blocksReset = true
+		-- Whether or not non-saved star coins will reset after dying (only affects quick respawn).
+		rooms.starCoinsReset = false
+		-- Whether or not to create a pseudo "checkpoint" on entering a different section.
+		rooms.checkpointOnEnterSection = false
+		-- Whether or not everything is reset on entering a room.
+		rooms.resetOnEnteringRoom = true
+		smasdeathsystem.activated = false
+		rooms.deathSoundEffect = 54
+	elseif GameData.deathquickoption == false then
+		Audio.sounds[8].muted = true
+		rooms.quickRespawn = false
+		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
+		rooms.collectiblesRespawn = true
+		-- Whether or not blocks reset themselves and the p-switch effect resets after dying (only affects quick respawn).
+		rooms.blocksReset = false
+		-- Whether or not non-saved star coins will reset after dying (only affects quick respawn).
+		rooms.starCoinsReset = false
+		-- Whether or not to create a pseudo "checkpoint" on entering a different section.
+		rooms.checkpointOnEnterSection = false
+		-- Whether or not everything is reset on entering a room.
+		rooms.resetOnEnteringRoom = false
+		smasdeathsystem.activated = true
+		rooms.deathSoundEffect = 8
+	end
+end
+
+function pausemenu2.onPlayerKill()
+	SFX.play(rooms.deathSoundEffect)
+end
 
 local function changeresolution()
 	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
@@ -112,34 +151,14 @@ local function changeresolutionborder()
 end
 
 local function quickdeathoption()
-	if pauseplus.getSelectionValue("settings","Enable Quick Death") and SaveData.disablexchar == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-		SFX.play("_OST/_Sound Effects/quickdeath-enabled.ogg")
-		rooms.quickRespawn = true
-		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
-		rooms.collectiblesRespawn = true
-		-- Whether or not blocks reset themselves and the p-switch effect resets after dying (only affects quick respawn).
-		rooms.blocksReset = true
-		-- Whether or not non-saved star coins will reset after dying (only affects quick respawn).
-		rooms.starCoinsReset = false
-		-- Whether or not to create a pseudo "checkpoint" on entering a different section.
-		rooms.checkpointOnEnterSection = false
-		-- Whether or not everything is reset on entering a room.
-		rooms.resetOnEnteringRoom = true
-		smasdeathsystem.activated = false
+	if pauseplus.getSelectionValue("settings","Enable Quick Death") then
+		if SaveData.disablexchar == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+			GameData.deathquickoption = true
+			SFX.play("_OST/_Sound Effects/quickdeath_enabled.ogg")
+		end
 	else
-		SFX.play("_OST/_Sound Effects/quickdeath-disabled.ogg")
-		rooms.quickRespawn = false
-		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
-		rooms.collectiblesRespawn = true
-		-- Whether or not blocks reset themselves and the p-switch effect resets after dying (only affects quick respawn).
-		rooms.blocksReset = false
-		-- Whether or not non-saved star coins will reset after dying (only affects quick respawn).
-		rooms.starCoinsReset = false
-		-- Whether or not to create a pseudo "checkpoint" on entering a different section.
-		rooms.checkpointOnEnterSection = false
-		-- Whether or not everything is reset on entering a room.
-		rooms.resetOnEnteringRoom = false
-		smasdeathsystem.activated = true
+		GameData.deathquickoption  = false
+		SFX.play("_OST/_Sound Effects/quickdeath_disabled.ogg")
 	end
 end
 

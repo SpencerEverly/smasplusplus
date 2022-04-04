@@ -1134,7 +1134,7 @@ rooms.checkpointOnEnterSection = false
 rooms.resetOnEnteringRoom = false
 
 -- Sound effect to be played upon death. Set to nil for none, a number for a vanilla sound effect (see https://wohlsoft.ru/pgewiki/SFX_list_(SMBX64) for a list of IDs) or a string for a file.
-rooms.deathSoundEffect = 8
+rooms.deathSoundEffect = 54
 -- How big the "earthquake" effect is upon death. Set to 0 for none.
 rooms.deathEarthquake = 0
 -- Whether or not the game is paused during the respawn transition.
