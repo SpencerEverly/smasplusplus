@@ -862,6 +862,13 @@ pauseplus.verticalSpace   = 16
 pauseplus.backgroundDarkness = 0
 pauseplus.createSubmenu("main",{headerText = "<size 1.5>Paused.</size>"})
 pauseplus.createOption("main",{text = "Continue",closeMenu = true,description = "Continue the game.",action = function() SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg") end})
+if GameData.battlemodeactive == true then
+	if not isOverworld then
+		pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in Classic Battle Mode. The stage will be picked at random!",action = function() Routine.run(battlemodenewstage) end})
+		pauseplus.createOption("main",{text = "Restart this Stage",closeMenu = true,description = "Restarts the same stage over. Useful if you're stuck somewhere and need to restart the match.",action = function() Routine.run(restartlevel) end})
+		pauseplus.createOption("main",{text = "Exit Battle Mode",closeMenu = true,description = "To exit battle mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
+	end
+end
 if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	if not isOverworld then
 		pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
@@ -934,13 +941,6 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 		pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",closeMenu = true, action =  function() Routine.run(hubmapteleport) end})
 		pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true, action =  function() Routine.run(sideteleport) end})
 		pauseplus.createOption("teleportmenu",{text = "Teleport to the DLC World",closeMenu = true, action =  function() Routine.run(dlcteleport) end})
-	end
-end
-if GameData.battlemodeactive == true then
-	if isOverworld then
-		pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in Classic Battle Mode. The stage will be picked at random!",action = function() Routine.run(battlemodenewstage) end})
-		pauseplus.createOption("main",{text = "Restart this Stage",closeMenu = true,description = "Restarts the same stage over. Useful if you're stuck somewhere and need to restart the match.",action = function() Routine.run(restartlevel) end})
-		pauseplus.createOption("main",{text = "Exit Battle Mode",closeMenu = true,description = "To exit battle mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
 	end
 end
 
