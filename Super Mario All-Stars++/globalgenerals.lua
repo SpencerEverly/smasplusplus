@@ -196,6 +196,7 @@ function globalgenerals.onPause(evt)
 end
 
 function globalgenerals.onStart()
+	GameData.cutsceneMusicControl = false
 	if Misc.inEditor() then
 		debugbox = require("debugbox")
 	end
