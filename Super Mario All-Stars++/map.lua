@@ -79,8 +79,8 @@ function levelload()
 	Routine.waitFrames(58, true)
 	Misc.unpause()
 	player:mem(0xFA, FIELD_BOOL, true)
-	GameData.cutsceneMusicControl = false
 	Routine.waitFrames(1, true)
+	GameData.cutsceneMusicControl = false
 	loadlevelanimation = nil
 	loadlevelanimationin = true
 	Audio.MusicVolume(65)
