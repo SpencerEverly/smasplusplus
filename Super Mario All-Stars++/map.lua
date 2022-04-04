@@ -10,6 +10,10 @@ local pause_music = require("map_music")
 local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
 local repl = require("repll")
+local pausemenu = require("pausemenu2")
+local pauseplus = require("pauseplus")
+
+pauseplus.priority = 8
 
 local map3d = require("mapp3d")
 map3d.BGPlane.tile = 394
@@ -125,10 +129,9 @@ function onStart()
 	mem(0xB25728, FIELD_BOOL, false) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
 	if SaveData.disableX2char == false then
 		inventory = require("customInventory")
-		pausemenu = require("pausemenu")
 	end
 	if SaveData.disableX2char == true then
-		pausemenu = require("pausemenu")
+		
 	end
 end
 

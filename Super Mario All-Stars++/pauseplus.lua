@@ -113,7 +113,6 @@ do
             playSFX(pauseplus.openSFX)
         end
 
-
         submenuExistanceCheck(submenu or "main")
 
 
@@ -139,7 +138,7 @@ do
         if pauseplus.currentSubmenu ~= nil and not isSilent then
             playSFX(pauseplus.closeSFX)
         end
-
+		
         if not isOverworld then
             pauseplus.opener:mem(0x11E,FIELD_BOOL,false) -- stop the player jumping
             pauseplus.opener:mem(0x172,FIELD_BOOL,false) -- stop the player using fire flower
@@ -707,7 +706,8 @@ end
 do
     local function getMovementDirection(back,forward,currentOption,minOption,maxOption,step)
         step = step or 1
-
+		
+		
         if player.rawKeys[back] == KEYS_PRESSED and (currentOption-step) >= minOption then
             return -1*step
         elseif player.rawKeys[forward] == KEYS_PRESSED and (currentOption+step) <= maxOption then
@@ -875,6 +875,7 @@ function pauseplus.onInitAPI()
 
     registerEvent(pauseplus,"onPause")
     registerEvent(pauseplus,"onKeyboardPressDirect")
+	registerEvent(pauseplus,"onTick")
 end
 
 
@@ -921,7 +922,15 @@ function pauseplus.onDraw()
             pauseplus.currentMusicVolume = nil
         end
     end
-
+	
+	if mapswitchprevention then
+		if player.keys.left == KEYS_PRESSED then
+			player.keys.left = KEYS_UNPRESSED
+		end
+		if player.keys.right == KEYS_PRESSED then
+			player.keys.right = KEYS_UNPRESSED
+		end
+	end
 
     local openerCamera = getPlayerCamera(pauseplus.opener)
 
@@ -945,6 +954,9 @@ function pauseplus.onPause(eventObj,playerObj)
     if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) then
         pauseplus.open(nil,nil,playerObj)
     end
+	if isOverworld then
+		mapswitchprevention = true
+	end
 end
 
 function pauseplus.onKeyboardPressDirect(keycode,repeated,character) -- for shift+P shortcut
