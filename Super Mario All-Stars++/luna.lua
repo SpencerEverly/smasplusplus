@@ -26,7 +26,7 @@ function Player:teleport(x, y, bottomCenterAligned) --Fixing 2nd player teleport
 	end
 end
 
-local serializer = require("scripts/ext/serializer")
+local serializer = require("ext/serializer")
 local function loadSaveSlot(slot)
 	local filename = "save"..slot.."-ext.dat"
 	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
