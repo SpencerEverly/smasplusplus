@@ -9,6 +9,10 @@ local extrasounds = require("extrasounds")
 local warpTransition = require("warpTransition")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local smasdeathsystem = require("smasdeathsystem")
+local pausemenu2 = require("pausemenu2")
+--local pauseplus = require("pauseplus")
+
+--pauseplus.canPause = true
 
 local costumes = {}
 

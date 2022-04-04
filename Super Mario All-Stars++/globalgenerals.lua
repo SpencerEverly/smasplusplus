@@ -14,9 +14,6 @@ local repll = require("repll")
 local extrasounds = require("extrasounds")
 local namehover = require("namehover")
 local hearthover = require("hearthover")
-local pausemenu2 = require("pausemenu2")
-
-pausemenu2.canPause = false
 
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
@@ -1152,8 +1149,8 @@ end
 
 function globalgenerals.onDraw()
 	if SaveData.resolution == "fullscreen" then
-		customCamera.defaultScreenWidth = 800
-		customCamera.defaultScreenHeight = 600
+		customCamera.defaultScreenWidth = 0
+		customCamera.defaultScreenHeight = 0
 		customCamera.defaultZoom = 1
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0

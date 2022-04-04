@@ -8,6 +8,8 @@ local textplus = require("textplus")
 local exitFadeActive = false
 local exitFadeOut = 0
 
+local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+
 function pausemenu2.onInitAPI()
 	registerEvent(pausemenu2, "onKeyboardPress")
 	registerEvent(pausemenu2, "onDraw")
@@ -35,14 +37,14 @@ function pausemenu2.onTickEnd()
 	end
 end
 
-local RESOLUTION_FULL = "fullscreen"
-local RESOLUTION_WIDE = "widescreen"
-local RESOLUTION_ULTRAWIDE = "ultrawide"
-local RESOLUTION_NES = "nes"
-local RESOLUTION_GB = "gameboy"
-local RESOLUTION_GBA = "gba"
-local RESOLUTION_IPHONEONE = "iphone1st"
-local RESOLUTION_THREEDS = "3ds"
+local RESOLUTION_FULL = "Fullscreen (4:3)"
+local RESOLUTION_WIDE = "Widescreen (16:9)"
+local RESOLUTION_ULTRAWIDE = "Ultrawide (21:9)"
+local RESOLUTION_NES = "NES/SNES/Genesis"
+local RESOLUTION_GB = "Gameboy/Gameboy Color"
+local RESOLUTION_GBA = "Gameboy Advance"
+local RESOLUTION_IPHONEONE = "iPhone (1st Generation)"
+local RESOLUTION_THREEDS = "Nintendo 3DS (Top Screen)"
 
 local LETTERBOXYES = true
 local LETTERBOXNO = false
@@ -518,164 +520,170 @@ function pausemenu2.onDraw()
 		resolutiontheme = "<color red>Border enabled: No</color>"
 	end
 	
-	local currentCostume = player:getCostume()
-	if currentCostume then
-		costumename = "<color red>Current costume: "..currentCostume.."</color>"
-	end
-	if currentCostume == "0-SMASPLUSPLUS-BETA" then
-		costumename = "<color red>Current costume: SMAS++ 2012 Beta Mario</color>"
-	end
-	if currentCostume == "1-SMB1-RETRO" then
-		costumename = "<color red>Current costume: Super Mario Bros. (NES)</color>"
-	end
-	if currentCostume == "2-SMB1-RECOLORED" then
-		costumename = "<color red>Current costume: Super Mario Bros. (Recolored)</color>"
-	end
-	if currentCostume == "3-SMB1-SMAS" then
-		costumename = "<color red>Current costume: Super Mario Bros. (SNES)</color>"
-	end
-	if currentCostume == "4-SMB2-RETRO" then
-		costumename = "<color red>Current costume: Super Mario Bros. 2 (NES)</color>"
-	end
-	if currentCostume == "5-SMB2-SMAS" then
-		costumename = "<color red>Current costume: Super Mario Bros. 2 (SNES)</color>"
-	end
-	if currentCostume == "6-SMB3-RETRO" then
-		costumename = "<color red>Current costume: Super Mario Bros. 3 (NES)</color>"
-	end
-	if currentCostume == "7-SML2" then
-		costumename = "<color red>Current costume: Super Mario Land 2 (GB)</color>"
-	end
-	if currentCostume == "9-SMW-PIRATE" then
-		costumename = "<color red>Current costume: Super Mario World (NES, Bootleg)</color>"
-	end
-	if currentCostume == "11-SMA1" then
-		costumename = "<color red>Current costume: Super Mario Advance 1 (GBA)</color>"
-	end
-	if currentCostume == "12-SMA2" then
-		costumename = "<color red>Current costume: Super Mario Advance 2 (GBA)</color>"
-	end
-	if currentCostume == "13-SMA4" then
-		costumename = "<color red>Current costume: Super Mario Advance 4 (GBA)</color>"
-	end
-	if currentCostume == "14-NSMBDS-SMBX" then
-		costumename = "<color red>Current costume: New Super Mario Bros. (SMBX)</color>"
-	end
-	if currentCostume == "15-NSMBDS-ORIGINAL" then
-		costumename = "<color red>Current costume: New Super Mario Bros. (NDS)</color>"
-	end
-	if currentCostume == "A2XT-DEMO" then
-		costumename = "<color red>Current costume: Demo (A2XT)</color>"
-	end
-	if currentCostume == "DEMO-XMASPILY" then
-		costumename = "<color red>Current costume: Pily (A2XT: Gaiden 2)</color>"
-	end
-	if currentCostume == "GA-CAILLOU" then
-		costumename = "<color red>Current costume: Caillou (GoAnimate, Vyond)</color>"
-	end
-	if currentCostume == "GOLDENMARIO" then
-		costumename = "<color red>Current costume: Golden Mario (SMBX)</color>"
-	end
-	if currentCostume == "GOOMBA" then
-		costumename = "<color red>Current costume: Goomba (SMBX)</color>"
-	end
-	if currentCostume == "JCFOSTERTAKESITTOTHEMOON" then
-		costumename = "<color red>Current costume: JC Foster Takes it to the Moon</color>"
-	end
-	if currentCostume == "MARINK" then
-		costumename = "<color red>Current costume: The Legend of Mario (SMBX)</color>"
-	end
-	if currentCostume == "MODERN" then
-		costumename = "<color red>Current costume: Modern Mario Bros.</color>"
-	end
-	if currentCostume == "PRINCESSRESCUE" then
-		costumename = "<color red>Current costume: Princess Rescue (Atari 2600)</color>"
-	end
-	if currentCostume == "SMB0" then
-		costumename = "<color red>Current costume: Super Mario Bros. 0 (SMBX)</color>"
-	end
-	if currentCostume == "SMG4" then
-		costumename = "<color red>Current costume: SuperMarioGlitchy4 (YouTube)</color>"
-	end
-	if currentCostume == "SMM2-MARIO" then
-		costumename = "<color red>Current costume: Super Mario Maker (SMW, Mario)</color>"
-	end
-	if currentCostume == "SMM2-LUIGI" then
-		costumename = "<color red>Current costume: Super Mario Maker (SMW, Luigi)</color>"
-	end
-	if currentCostume == "SMM2-TOAD" then
-		costumename = "<color red>Current costume: Super Mario Maker (SMW, Toad)</color>"
-	end
-	if currentCostume == "SMM2-TOADETTE" then
-		costumename = "<color red>Current costume: Super Mario Maker (SMW, Toadette)</color>"
-	end
-	if currentCostume == "SMM2-YELLOWTOAD" then
-		costumename = "<color red>Current costume: Super Mario Maker (SMW, Yellow Toad)</color>"
-	end
-	if currentCostume == "SMW-MARIO" then
-		costumename = "<color red>Current costume: Super Mario World (SNES)</color>"
-	end
-	if currentCostume == "SP-1-ERICCARTMAN" then
-		costumename = "<color red>Current costume: Eric Cartman (South Park)</color>"
-	end
-	if currentCostume == "Z-SMW2-ADULTMARIO" then
-		costumename = "<color red>Current costume: Super Mario World 2 (SNES)</color>"
-	end
-	
-	if currentCostume == "0-SPENCEREVERLY" then
-		costumename = "<color red>Current costume: Spencer Everly (SMBS)</color>"
-	end
-	if currentCostume == "3-SMB1-RETRO-MODERN" then
-		costumename = "<color red>Current costume: Super Mario Bros. (NES, Modern)</color>"
-	end
-	if currentCostume == "4-SMB1-SMAS" then
-		costumename = "<color red>Current costume: Super Mario Bros. (SNES)</color>"
-	end
-	if currentCostume == "5-SMB2-RETRO" then
-		costumename = "<color red>Current costume: Super Mario Bros. 2 (NES)</color>"
-	end
-	if currentCostume == "6-SMB2-SMAS" then
-		costumename = "<color red>Current costume: Super Mario Bros. 2 (SNES)</color>"
-	end
-	if currentCostume == "7-SMB3-RETRO" then
-		costumename = "<color red>Current costume: Super Mario Bros. 3 (NES)</color>"
-	end
-	if currentCostume == "9-SMB3-MARIOCLOTHES" then
-		costumename = "<color red>Current costume: Marigi</color>"
-	end
-	if currentCostume == "10-SMW-ORIGINAL" then
-		costumename = "<color red>Current costume: Super Mario World (SNES)</color>"
-	end
-	if currentCostume == "13-SMBDX" then
-		costumename = "<color red>Current costume: Super Mario Bros. Deluxe (GBC)</color>"
-	end
-	if currentCostume == "15-SMA2" then
-		costumename = "<color red>Current costume: Super Mario Advance 2 (GBA)</color>"
-	end
-	if currentCostume == "16-SMA4" then
-		costumename = "<color red>Current costume: Super Mario Advance 4 (GBA)</color>"
-	end
-	if currentCostume == "17-NSMBDS-SMBX" then
-		costumename = "<color red>Current costume: New Super Mario Bros. (SMBX)</color>"
-	end
-	if currentCostume == "A2XT-IRIS" then
-		costumename = "<color red>Current costume: Iris (A2XT)</color>"
-	end
-	if currentCostume == "LARRYTHECUCUMBER" then
-		costumename = "<color red>Current costume: Larry (VeggieTales)</color>"
-	end
-	if currentCostume == "UNDERTALE-FRISK" then
-		costumename = "<color red>Current costume: Frisk (Undertale)</color>"
-	end
-	if currentCostume == "WALUIGI" then
-		costumename = "<color red>Current costume: Waluigi</color>"
-	end
-	if currentCostume == "SMW-LUIGI" then
-		costumename = "<color red>Current costume: Super Mario World (SMAS)</color>"
-	end
-	
-	if currentCostume == nil then
-		costumename = "<color red>Current costume: N/A</color>"
+	if pauseplus.getSelectionValue("charactermenu","Change Costume (Left)") or pauseplus.getSelectionValue("charactermenu","Change Costume (Right)") then
+		local currentCostume = player:getCostume()
+		if currentCostume then
+			costumename = "<color red>Current costume: "..currentCostume.."</color>"
+		end
+		if currentCostume == "0-SMASPLUSPLUS-BETA" then
+			costumename = "<color red>Current costume: SMAS++ 2012 Beta Mario</color>"
+		end
+		if currentCostume == "1-SMB1-RETRO" then
+			costumename = "<color red>Current costume: Super Mario Bros. (NES)</color>"
+		end
+		if currentCostume == "2-SMB1-RECOLORED" then
+			costumename = "<color red>Current costume: Super Mario Bros. (Recolored)</color>"
+		end
+		if currentCostume == "3-SMB1-SMAS" then
+			costumename = "<color red>Current costume: Super Mario Bros. (SNES)</color>"
+		end
+		if currentCostume == "4-SMB2-RETRO" then
+			costumename = "<color red>Current costume: Super Mario Bros. 2 (NES)</color>"
+		end
+		if currentCostume == "5-SMB2-SMAS" then
+			costumename = "<color red>Current costume: Super Mario Bros. 2 (SNES)</color>"
+		end
+		if currentCostume == "6-SMB3-RETRO" then
+			costumename = "<color red>Current costume: Super Mario Bros. 3 (NES)</color>"
+		end
+		if currentCostume == "7-SML2" then
+			costumename = "<color red>Current costume: Super Mario Land 2 (GB)</color>"
+		end
+		if currentCostume == "9-SMW-PIRATE" then
+			costumename = "<color red>Current costume: Super Mario World (NES, Bootleg)</color>"
+		end
+		if currentCostume == "11-SMA1" then
+			costumename = "<color red>Current costume: Super Mario Advance 1 (GBA)</color>"
+		end
+		if currentCostume == "12-SMA2" then
+			costumename = "<color red>Current costume: Super Mario Advance 2 (GBA)</color>"
+		end
+		if currentCostume == "13-SMA4" then
+			costumename = "<color red>Current costume: Super Mario Advance 4 (GBA)</color>"
+		end
+		if currentCostume == "14-NSMBDS-SMBX" then
+			costumename = "<color red>Current costume: New Super Mario Bros. (SMBX)</color>"
+		end
+		if currentCostume == "15-NSMBDS-ORIGINAL" then
+			costumename = "<color red>Current costume: New Super Mario Bros. (NDS)</color>"
+		end
+		if currentCostume == "A2XT-DEMO" then
+			costumename = "<color red>Current costume: Demo (A2XT)</color>"
+		end
+		if currentCostume == "DEMO-XMASPILY" then
+			costumename = "<color red>Current costume: Pily (A2XT: Gaiden 2)</color>"
+		end
+		if currentCostume == "GA-CAILLOU" then
+			costumename = "<color red>Current costume: Caillou (GoAnimate, Vyond)</color>"
+		end
+		if currentCostume == "GOLDENMARIO" then
+			costumename = "<color red>Current costume: Golden Mario (SMBX)</color>"
+		end
+		if currentCostume == "GOOMBA" then
+			costumename = "<color red>Current costume: Goomba (SMBX)</color>"
+		end
+		if currentCostume == "JCFOSTERTAKESITTOTHEMOON" then
+			costumename = "<color red>Current costume: JC Foster Takes it to the Moon</color>"
+		end
+		if currentCostume == "MARINK" then
+			costumename = "<color red>Current costume: The Legend of Mario (SMBX)</color>"
+		end
+		if currentCostume == "MODERN" then
+			costumename = "<color red>Current costume: Modern Mario Bros.</color>"
+		end
+		if currentCostume == "PRINCESSRESCUE" then
+			costumename = "<color red>Current costume: Princess Rescue (Atari 2600)</color>"
+		end
+		if currentCostume == "SMB0" then
+			costumename = "<color red>Current costume: Super Mario Bros. 0 (SMBX)</color>"
+		end
+		if currentCostume == "SMG4" then
+			costumename = "<color red>Current costume: SuperMarioGlitchy4 (YouTube)</color>"
+		end
+		if currentCostume == "SMM2-MARIO" then
+			costumename = "<color red>Current costume: Super Mario Maker (SMW, Mario)</color>"
+		end
+		if currentCostume == "SMM2-LUIGI" then
+			costumename = "<color red>Current costume: Super Mario Maker (SMW, Luigi)</color>"
+		end
+		if currentCostume == "SMM2-TOAD" then
+			costumename = "<color red>Current costume: Super Mario Maker (SMW, Toad)</color>"
+		end
+		if currentCostume == "SMM2-TOADETTE" then
+			costumename = "<color red>Current costume: Super Mario Maker (SMW, Toadette)</color>"
+		end
+		if currentCostume == "SMM2-YELLOWTOAD" then
+			costumename = "<color red>Current costume: Super Mario Maker (SMW, Yellow Toad)</color>"
+		end
+		if currentCostume == "SMW-MARIO" then
+			costumename = "<color red>Current costume: Super Mario World (SNES)</color>"
+		end
+		if currentCostume == "SP-1-ERICCARTMAN" then
+			costumename = "<color red>Current costume: Eric Cartman (South Park)</color>"
+		end
+		if currentCostume == "Z-SMW2-ADULTMARIO" then
+			costumename = "<color red>Current costume: Super Mario World 2 (SNES)</color>"
+		end
+		
+		if currentCostume == "0-SPENCEREVERLY" then
+			costumename = "<color red>Current costume: Spencer Everly (SMBS)</color>"
+		end
+		if currentCostume == "3-SMB1-RETRO-MODERN" then
+			costumename = "<color red>Current costume: Super Mario Bros. (NES, Modern)</color>"
+		end
+		if currentCostume == "4-SMB1-SMAS" then
+			costumename = "<color red>Current costume: Super Mario Bros. (SNES)</color>"
+		end
+		if currentCostume == "5-SMB2-RETRO" then
+			costumename = "<color red>Current costume: Super Mario Bros. 2 (NES)</color>"
+		end
+		if currentCostume == "6-SMB2-SMAS" then
+			costumename = "<color red>Current costume: Super Mario Bros. 2 (SNES)</color>"
+		end
+		if currentCostume == "7-SMB3-RETRO" then
+			costumename = "<color red>Current costume: Super Mario Bros. 3 (NES)</color>"
+		end
+		if currentCostume == "9-SMB3-MARIOCLOTHES" then
+			costumename = "<color red>Current costume: Marigi</color>"
+		end
+		if currentCostume == "10-SMW-ORIGINAL" then
+			costumename = "<color red>Current costume: Super Mario World (SNES)</color>"
+		end
+		if currentCostume == "13-SMBDX" then
+			costumename = "<color red>Current costume: Super Mario Bros. Deluxe (GBC)</color>"
+		end
+		if currentCostume == "15-SMA2" then
+			costumename = "<color red>Current costume: Super Mario Advance 2 (GBA)</color>"
+		end
+		if currentCostume == "16-SMA4" then
+			costumename = "<color red>Current costume: Super Mario Advance 4 (GBA)</color>"
+		end
+		if currentCostume == "17-NSMBDS-SMBX" then
+			costumename = "<color red>Current costume: New Super Mario Bros. (SMBX)</color>"
+		end
+		if currentCostume == "A2XT-IRIS" then
+			costumename = "<color red>Current costume: Iris (A2XT)</color>"
+		end
+		if currentCostume == "LARRYTHECUCUMBER" then
+			costumename = "<color red>Current costume: Larry (VeggieTales)</color>"
+		end
+		if currentCostume == "UNDERTALE-FRISK" then
+			costumename = "<color red>Current costume: Frisk (Undertale)</color>"
+		end
+		if currentCostume == "WALUIGI" then
+			costumename = "<color red>Current costume: Waluigi</color>"
+		end
+		if currentCostume == "SMW-LUIGI" then
+			costumename = "<color red>Current costume: Super Mario World (SMAS)</color>"
+		end
+		
+		if currentCostume == nil then
+			costumename = "<color red>Current costume: N/A</color>"
+		end
+		local layout = textplus.layout(textplus.parse(costumename, {xscale=1.5, yscale=1.5, align="center", color=Color.canary..1.0, font=pausefont3}), 400)
+		if not isOverworld then
+			textplus.render{layout = layout, x = 222 - w*0.5, y = 200, color = Color.white..alpha, priority = -1}
+		end
 	end
 end
 
@@ -849,7 +857,7 @@ pauseplus.createOption("settings",{text = "Toggle Letterbox Scaling",selectionTy
 pauseplus.createOption("settings",{text = "Toggle Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable borders when using other additional borders.", action =  function() changeresolutionborder() end})
 pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
 if not isOverworld then
-	pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to reenable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Misc.unpause() Level.load(Level.filename()) end}})
+	pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Graphics.activateHud(false) Cheats.trigger("1player") player:transform(1, false) Misc.unpause() Level.load(Level.filename()) end}})
 end
 if not isOverworld then
 	pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("SMAS - Map.lvlx", nil, nil) end}})

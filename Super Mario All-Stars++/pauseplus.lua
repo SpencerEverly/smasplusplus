@@ -756,7 +756,7 @@ do
         if player.rawKeys.run == KEYS_PRESSED then
             -- Go back
             local count = #pauseplus.history
-
+			
             if count == 0 then
                 pauseplus.close()
             else
@@ -764,7 +764,7 @@ do
 
                 pauseplus.open(entry[1],entry[2])
 
-                SFX.play(pauseplus.moveSFX)
+                SFX.play(pauseplus.backSFX)
 
                 pauseplus.history[count] = nil -- remove top entry
             end
@@ -950,7 +950,7 @@ end
 function pauseplus.onKeyboardPressDirect(keycode,repeated,character) -- for shift+P shortcut
     if not Misc.inEditor() or pauseplus.currentSubmenu ~= nil then return end
     
-    if not repeated and (keycode == VK_P) and pauseplus.canPause then
+    if not repeated and (keycode == VK_P) and Misc.GetKeyState(VK_RETURN) and pauseplus.canPause then
         pauseplus.open()
     end
 end
@@ -985,11 +985,12 @@ pauseplus.priority = 6
 pauseplus.openSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu.ogg"))
 pauseplus.closeSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu-closed.ogg"))
 pauseplus.moveSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu_cursor.ogg"))
-pauseplus.actionSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu.ogg"))
+pauseplus.actionSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/quitmenu.ogg"))
 pauseplus.saveSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/save_dismiss.ogg"))
 pauseplus.checkboxSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/paused_on.ogg"))
 pauseplus.quitgameSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/savequit.ogg"))
 pauseplus.checkbox2SFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/paused_off.ogg"))
+pauseplus.backSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/quitmenu_close.ogg"))
 
 -- How much space there is on any side of the "box". To mimic the default box, use 59 and 37
 pauseplus.horizontalSpace = 30

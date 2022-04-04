@@ -1,10 +1,11 @@
-local level_dependencies_normal= require("level_dependencies_normal")
+local level_dependencies_normal = require("level_dependencies_normal")
+local pauseplus = require("pauseplus")
 
 function onEvent(eventName)
 	if eventName == ("Pigeon Cutscene") then
 		if SaveData.disableX2char == false then
-			pausemenu.pauseactivated = false
-			inventory.activated = false
+			pauseplus.canPause = false
+			furyinventory.activated = false
 		end
 		if SaveData.disableX2char == true then
 			pausemenu.pauseactivated = false
@@ -15,8 +16,8 @@ function onEvent(eventName)
 	end
 	if eventName == ("Pigeon Cutscene 5") then
 		if SaveData.disableX2char == false then
-			pausemenu.pauseactivated = true
-			inventory.activated = true
+			pauseplus.canPause = true
+			furyinventory.activated = true
 		end
 		if SaveData.disableX2char == true then
 			pausemenu.pauseactivated = true
@@ -27,11 +28,11 @@ function onEvent(eventName)
 	if eventName == ("Pigeon Cutscene Sequel 0") then
 		SFX.play("_OST/_Sound Effects/is-the-pool-clean.ogg")
 		if SaveData.disableX2char == false then
-			pausemenu.pauseactivated = false
-			inventory.activated = false
+			pauseplus.canPause = false
+			furyinventory.activated = false
 		end
 		if SaveData.disableX2char == true then
-			pausemenu.pauseactivated = false
+			pauseplus.canPause = false
 		end
 		Timer.deactivate()
 	end
@@ -40,11 +41,11 @@ function onEvent(eventName)
 	end
 	if eventName == ("Pigeon Cutscene Sequel 3") then
 		if SaveData.disableX2char == false then
-			pausemenu.pauseactivated = true
-			inventory.activated = true
+			pauseplus.canPause = true
+			furyinventory.activated = true
 		end
 		if SaveData.disableX2char == true then
-			pausemenu.pauseactivated = true
+			pauseplus.canPause = true
 		end
 	end
 end

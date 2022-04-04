@@ -9,6 +9,10 @@ local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local smasdeathsystem = require("smasdeathsystem")
 local comboSounds = require("comboSounds")
+local pausemenu2 = require("pausemenu2")
+--local pauseplus = require("pauseplus")
+
+--pauseplus.canPause = true
 
 local dying = false;
 local deathVisibleCount = 198;

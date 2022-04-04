@@ -149,7 +149,7 @@ local function drawHealthBar(v)
 		end
 	end
 
-	data.hpIconSprite:draw{color = Color.white .. data.hpIconAlpha}
+	data.hpIconSprite:draw{color = Color.white .. data.hpIconAlpha, priority = -4}
 
 	local maxHP = 100
 
@@ -175,7 +175,7 @@ local function drawHealthBar(v)
 
 		hpSprite.position = vector(data.hpIconSprite.position.x - i*9, (data.hpTimer-2)*10 + 1)
 
-		hpSprite:draw{color = Color.white .. data.hpIconAlpha}
+		hpSprite:draw{color = Color.white .. data.hpIconAlpha, priority = -4}
 	end
 end
 
