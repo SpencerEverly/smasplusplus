@@ -1,6 +1,62 @@
 local steve = require("steve")
 local textplus = require("textplus")
 local playerManager = require("playermanager")
+local pressedKeys = {};
+function playerManager.onInputUpdate()
+	--Set up the world map to support changing to all characters via the pause menu
+	if(isOverworld) then
+		if(not player.rightKeyPressing) then
+			pressedKeys.right = false;
+		end
+		if(not player.leftKeyPressing) then
+			pressedKeys.left = false;
+		end
+			
+		--Adjust character if necessary
+		if(charoffset ~= nil) then
+			if characterindex == 0 or playerManager.overworldCharacters[characterindex] ~= player.character then
+				characterindex = 0
+				for k,v in ipairs(playerManager.overworldCharacters) do
+					if v == player.character then
+						characterindex = k
+						break
+					end
+				end
+			end
+		
+			local index
+
+			if characterindex > 0 then
+				characterindex = ((characterindex-1+charoffset)%#playerManager.overworldCharacters) + 1
+			else
+				characterindex = 1
+			end
+			index = playerManager.overworldCharacters[characterindex]
+			
+			if index == nil then
+				index = 1
+				characterindex = 0
+			end
+			
+			player:transform(index)
+			updateCharacterHitbox(player.character)
+			local ps = PlayerSettings.get(characters[player.character].base, player.powerup)
+			if player:mem(0x108,FIELD_WORD) == 1 then
+				player.height = 54
+			else
+				player.height = ps.hitboxHeight
+			end
+			player.width = ps.hitboxWidth
+			Audio.playSFX(26)
+		end
+			
+		--world:mem(0x112,FIELD_WORD,player.character)
+		--Disable vanilla character switch (can we do this better?)
+		player.rightKeyPressing = false;
+		player.leftKeyPressing = false;
+	end
+end
+
 local yoshi = require("yiYoshi/yiYoshi")
 local lib3d = require("lib3d")
 local travL = require("travL")
