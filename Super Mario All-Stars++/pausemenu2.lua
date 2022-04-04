@@ -4,11 +4,15 @@ local ready = false
 
 local pauseplus = require("pauseplus")
 local playerManager = require("playerManager")
+local rng = require("rng")
 local textplus = require("textplus")
 local exitFadeActive = false
 local exitFadeOut = 0
 
 local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+
+local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
+local selecter = rng.randomInt(1,#battlelevelsrng)
 
 function pausemenu2.onInitAPI()
 	registerEvent(pausemenu2, "onKeyboardPress")
@@ -487,7 +491,7 @@ function pausemenu2.onDraw()
 	if exitFadeActive then
 		Audio.MusicVolume(0)
 		Misc.pause(true)
-		exitFadeOut = math.min(1, exitFadeOut + 0.02)
+		exitFadeOut = math.min(1, exitFadeOut + 0.06)
 		Graphics.drawScreen{color = Color.black.. exitFadeOut,priority = 4}
 	end
 	local currentCostume = player:getCostume()
@@ -657,6 +661,26 @@ function pausemenu2.onDraw()
 	end
 end
 
+function battlemodenewstage()
+	pauseplus.canControlMenu = false
+	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
+	startFadeOut()
+	Routine.wait(1.5, true)
+	Misc.unpause()
+	exitFadeActive = false
+	Level.load(battlelevelsrng[selecter], nil, nil)
+end
+
+function battlemodeexit()
+	pauseplus.canControlMenu = false
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	startFadeOut()
+	Routine.wait(0.4, true)
+	Misc.unpause()
+	exitFadeActive = false
+	Level.load("SMAS - Start.lvlx", nil, nil)
+end
+
 function returntolastlevel()
 	pauseplus.canControlMenu = false
 	SFX.play("_OST/_Sound Effects/lastlevel_warp.ogg")
@@ -715,6 +739,17 @@ function restartlevel()
 	Misc.unpause()
 	exitFadeActive = false
 	Level.load(Level.filename())
+end
+
+function mainmenu()
+	pauseplus.canControlMenu = false
+	SFX.play("_OST/_Sound Effects/shutdown.ogg")
+	startFadeOut()
+	Misc.saveGame()
+	Routine.wait(2.4, true)
+	Misc.unpause()
+	exitFadeActive = false
+	Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
 local function warpzonehub()
@@ -815,76 +850,86 @@ pauseplus.verticalSpace   = 16
 pauseplus.backgroundDarkness = 0
 pauseplus.createSubmenu("main",{headerText = "<size 1.5>Paused.</size>"})
 pauseplus.createOption("main",{text = "Continue",closeMenu = true,description = "Continue the game.",action = function() SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg") end})
-if not isOverworld then
-	pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
-end
-if not isOverworld then
-	pauseplus.createOption("main",{text = "Return to the Main Map",closeMenu = true,description = "Returns to the main map of the game.",action = function() Routine.run(exitlevel2) end})
-end
-pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
-pauseplus.createSubmenu("charactermenu",{headerText = "<size 1.5>Character Options</size>"})
-pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
-if not isOverworld then
-	pauseplus.createOption("main",{text = "Return to the Previous Level",closeMenu = true,description = "Returns to the previously played level. Useful while you're in the Hub or the other map.",action = function() Routine.run(returntolastlevel) end})
-end
-pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
-pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
-if isOverworld then
-	pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
-elseif (Level.filename() == "MALC - HUB.lvlx") == true then
-	pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
-end
-pauseplus.createOption("main",{text = "Save and Continue",description = "Save and continue your game.",pauseplus.save,closeMenu = true,action = function() SFX.play("_OST/_Sound Effects/save_dismiss.ogg") end})
-pauseplus.createOption("main",{text = "Save and Quit",description = "Save and exit. You can continue later at any point. Remember to take breaks!",action = function() Routine.run(saveAndQuitRoutine) end})
+if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+	if not isOverworld then
+		pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
+	end
+	if not isOverworld then
+		pauseplus.createOption("main",{text = "Return to the Main Map",closeMenu = true,description = "Returns to the main map of the game.",action = function() Routine.run(exitlevel2) end})
+	end
+	pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
+	pauseplus.createSubmenu("charactermenu",{headerText = "<size 1.5>Character Options</size>"})
+	pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
+	if not isOverworld then
+		pauseplus.createOption("main",{text = "Return to the Previous Level",closeMenu = true,description = "Returns to the previously played level. Useful while you're in the Hub or the other map.",action = function() Routine.run(returntolastlevel) end})
+	end
+	pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
+	pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
+	if isOverworld then
+		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
+	elseif (Level.filename() == "MALC - HUB.lvlx") == true then
+		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
+	end
+	pauseplus.createOption("main",{text = "Save and Continue",description = "Save and continue your game.",pauseplus.save,closeMenu = true,action = function() SFX.play("_OST/_Sound Effects/save_dismiss.ogg") end})
+	pauseplus.createOption("main",{text = "Save and Reset Game",description = "Saves and resets the game back to the preboot menu. Useful for setting options you can't set in the pause menu.",pauseplus.save,closeMenu = true,action = function() Routine.run(mainmenu) end})
+	pauseplus.createOption("main",{text = "Save and Quit",description = "Save and exit. You can continue later at any point. Remember to take breaks!",action = function() Routine.run(saveAndQuitRoutine) end})
 
--- Settings
-pauseplus.createOption("settings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_NES,RESOLUTION_GB,RESOLUTION_GBA,RESOLUTION_IPHONEONE,RESOLUTION_THREEDS}, action = function() changeresolution() end})
-pauseplus.createOption("settings",{text = "Toggle Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Toggle scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
-pauseplus.createOption("settings",{text = "Toggle Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable borders when using other additional borders.", action =  function() changeresolutionborder() end})
-pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
-pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
-if not isOverworld then
-	pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Graphics.activateHud(false) Cheats.trigger("1player") player:transform(1, false) Misc.unpause() Level.load(Level.filename()) end}})
-end
-if not isOverworld then
-	pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("SMAS - Map.lvlx", nil, nil) end}})
-end
-if not isOverworld then
-	pauseplus.createOption("settings",{text = "Teleport to the Hub",description = "Teleport to the Me and Larry City Hub. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("MALC - HUB.lvlx", nil, nil) end}})
-end
-pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = {function() Routine.run(quitonly) end}})
+	-- Settings
+	pauseplus.createOption("settings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_NES,RESOLUTION_GB,RESOLUTION_GBA,RESOLUTION_IPHONEONE,RESOLUTION_THREEDS}, action = function() changeresolution() end})
+	pauseplus.createOption("settings",{text = "Toggle Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Toggle scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
+	pauseplus.createOption("settings",{text = "Toggle Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable borders when using other additional borders.", action =  function() changeresolutionborder() end})
+	pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
+	pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
+	if not isOverworld then
+		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Graphics.activateHud(false) Cheats.trigger("1player") player:transform(1, false) Misc.unpause() Level.load(Level.filename()) end}})
+	end
+	if not isOverworld then
+		pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("SMAS - Map.lvlx", nil, nil) end}})
+	end
+	if not isOverworld then
+		pauseplus.createOption("settings",{text = "Teleport to the Hub",description = "Teleport to the Me and Larry City Hub. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("MALC - HUB.lvlx", nil, nil) end}})
+	end
+	pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = {function() Routine.run(quitonly) end}})
 
---Character Menu
-if SaveData.disableX2char == false then
-	pauseplus.createOption("charactermenu",{text = "Change Character (Left)",description = "Switch the player's character to anything of your choice!", action =  function() characterchangeleft() end})
-	pauseplus.createOption("charactermenu",{text = "Change Character (Right)",description = "Switch the player's character to anything of your choice!", action =  function() characterchange() end})
-	pauseplus.createOption("charactermenu",{text = "Change Costumes (Left)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeleft() end})
-	pauseplus.createOption("charactermenu",{text = "Change Costumes (Right)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeright() end})
-end
-if SaveData.disableX2char == true then
-	pauseplus.createOption("charactermenu",{text = "Change Character 1P (Left)", action =  function() characterchange13left() end})
-	pauseplus.createOption("charactermenu",{text = "Change Character 1P (Right)", action =  function() characterchange13() end})
-	if Player.count() == 2 then
-		pauseplus.createOption("charactermenu",{text = "Change Character 2P (Left)", action =  function() characterchange13_2pleft() end})
-		pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)", action =  function() characterchange13_2p() end})
+	--Character Menu
+	if SaveData.disableX2char == false then
+		pauseplus.createOption("charactermenu",{text = "Change Character (Left)",description = "Switch the player's character to anything of your choice!", action =  function() characterchangeleft() end})
+		pauseplus.createOption("charactermenu",{text = "Change Character (Right)",description = "Switch the player's character to anything of your choice!", action =  function() characterchange() end})
+		pauseplus.createOption("charactermenu",{text = "Change Costumes (Left)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeleft() end})
+		pauseplus.createOption("charactermenu",{text = "Change Costumes (Right)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeright() end})
+	end
+	if SaveData.disableX2char == true then
+		pauseplus.createOption("charactermenu",{text = "Change Character 1P (Left)", action =  function() characterchange13left() end})
+		pauseplus.createOption("charactermenu",{text = "Change Character 1P (Right)", action =  function() characterchange13() end})
+		if Player.count() == 2 then
+			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Left)", action =  function() characterchange13_2pleft() end})
+			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)", action =  function() characterchange13_2p() end})
+		end
+	end
+
+	--Teleportation Menu
+	if not isOverworld then
+		if (Level.filename() == "MALC - HUB.lvlx") == true then
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Tourist Center",closeMenu = true, action =  function() Routine.run(touristhub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Warp Zone",closeMenu = true, action =  function() Routine.run(warpzonehub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Character Switch Menu",closeMenu = true, action =  function() Routine.run(switchhub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Shop",closeMenu = true, action =  function() Routine.run(shophub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport Back to the Start",closeMenu = true, action =  function() Routine.run(shophub) end})
+		end
+	end
+	if isOverworld then
+		pauseplus.createOption("teleportmenu",{text = "Teleport back to the Start",closeMenu = true, action =  function() Routine.run(startteleport) end})
+		pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",closeMenu = true, action =  function() Routine.run(hubmapteleport) end})
+		pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true, action =  function() Routine.run(sideteleport) end})
+		pauseplus.createOption("teleportmenu",{text = "Teleport to the DLC World",closeMenu = true, action =  function() Routine.run(dlcteleport) end})
 	end
 end
-
---Teleportation Menu
-if not isOverworld then
-	if (Level.filename() == "MALC - HUB.lvlx") == true then
-		pauseplus.createOption("teleportmenu",{text = "Teleport to the Tourist Center",closeMenu = true, action =  function() Routine.run(touristhub) end})
-		pauseplus.createOption("teleportmenu",{text = "Teleport to the Warp Zone",closeMenu = true, action =  function() Routine.run(warpzonehub) end})
-		pauseplus.createOption("teleportmenu",{text = "Teleport to the Character Switch Menu",closeMenu = true, action =  function() Routine.run(switchhub) end})
-		pauseplus.createOption("teleportmenu",{text = "Teleport to the Shop",closeMenu = true, action =  function() Routine.run(shophub) end})
-		pauseplus.createOption("teleportmenu",{text = "Teleport Back to the Start",closeMenu = true, action =  function() Routine.run(shophub) end})
+if GameData.battlemodeactive == true then
+	if isOverworld then
+		pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in Classic Battle Mode. The stage will be picked at random!",action = function() Routine.run(battlemodenewstage) end})
+		pauseplus.createOption("main",{text = "Restart this Stage",closeMenu = true,description = "Restarts the same stage over. Useful if you're stuck somewhere and need to restart the match.",action = function() Routine.run(restartlevel) end})
+		pauseplus.createOption("main",{text = "Exit Battle Mode",closeMenu = true,description = "To exit battle mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
 	end
-end
-if isOverworld then
-	pauseplus.createOption("teleportmenu",{text = "Teleport back to the Start",closeMenu = true, action =  function() Routine.run(startteleport) end})
-	pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",closeMenu = true, action =  function() Routine.run(hubmapteleport) end})
-	pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true, action =  function() Routine.run(sideteleport) end})
-	pauseplus.createOption("teleportmenu",{text = "Teleport to the DLC World",closeMenu = true, action =  function() Routine.run(dlcteleport) end})
 end
 
 return pausemenu2
