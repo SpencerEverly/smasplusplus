@@ -5,11 +5,13 @@ local pressedKeys = {};
 function playerManager.onInputUpdate()
 	--Set up the world map to support changing to all characters via the pause menu
 	if(isOverworld) then
-		if(not player.rightKeyPressing) then
-			pressedKeys.right = false;
-		end
-		if(not player.leftKeyPressing) then
-			pressedKeys.left = false;
+		if Misc.isPaused() then
+			if(not player.rightKeyPressing) then
+				pressedKeys.right = false;
+			end
+			if(not player.leftKeyPressing) then
+				pressedKeys.left = false;
+			end
 		end
 			
 		--Adjust character if necessary
@@ -52,8 +54,10 @@ function playerManager.onInputUpdate()
 			
 		--world:mem(0x112,FIELD_WORD,player.character)
 		--Disable vanilla character switch (can we do this better?)
-		player.rightKeyPressing = false;
-		player.leftKeyPressing = false;
+		if Misc.isPaused() then
+			player.rightKeyPressing = false;
+			player.leftKeyPressing = false;
+		end
 	end
 end
 
