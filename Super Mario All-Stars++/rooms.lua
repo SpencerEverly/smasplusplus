@@ -21,6 +21,8 @@ local starman          = require("starman/star")
 
 local rooms = {}
 
+if isOverworld then return end
+
 -- Declare constants
 rooms.TRANSITION_TYPE_NONE     = 0
 rooms.TRANSITION_TYPE_CONSTANT = 1
