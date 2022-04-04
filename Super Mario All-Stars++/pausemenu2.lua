@@ -7,6 +7,7 @@ local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
 local exitFadeActive = false
+local exitFadeActiveDone = false
 local exitFadeOut = 0
 
 local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
@@ -491,8 +492,11 @@ function pausemenu2.onDraw()
 	if exitFadeActive then
 		Audio.MusicVolume(0)
 		Misc.pause(true)
-		exitFadeOut = math.min(1, exitFadeOut + 0.06)
+		exitFadeOut = math.min(1, exitFadeOut + 0.05)
 		Graphics.drawScreen{color = Color.black.. exitFadeOut,priority = 4}
+	end
+	if exitFadeActiveDone then
+		Graphics.drawScreen{color = Color.black,priority = 4}
 	end
 	local currentCostume = player:getCostume()
 	if currentCostume then
@@ -668,6 +672,7 @@ function battlemodenewstage()
 	Routine.wait(1.5, true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Level.load(battlelevelsrng[selecter], nil, nil)
 end
 
@@ -678,6 +683,7 @@ function battlemodeexit()
 	Routine.wait(0.4, true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
@@ -689,6 +695,7 @@ function returntolastlevel()
 	Routine.wait(1.3,true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Level.load(SaveData.lastLevelPlayed, nil, nil)
 end
 
@@ -702,6 +709,7 @@ local function exitlevel2()
 	Routine.wait(0.7, true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Level.exit()
 end
 
@@ -713,6 +721,7 @@ function saveAndQuitRoutine()
 	Routine.wait(1.6,true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Misc.exitEngine()
 end
 
@@ -723,6 +732,7 @@ function quitonly()
 	Routine.wait(0.7,true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Misc.exitEngine()
 end
 
@@ -738,6 +748,7 @@ function restartlevel()
 	Routine.wait(1.6,true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Level.load(Level.filename())
 end
 
@@ -749,6 +760,7 @@ function mainmenu()
 	Routine.wait(2.4, true)
 	Misc.unpause()
 	exitFadeActive = false
+	exitFadeActiveDone = true
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
