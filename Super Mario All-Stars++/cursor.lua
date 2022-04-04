@@ -42,7 +42,7 @@ hist.y = 0
 
 -- Tools for drawing a cursor
 local defaultImg = Graphics.sprites.hardcoded["42-2"].img
-local default = {image = defaultImg, frames = 1, animationFrame = 0, framespeed = 8, offsetX = 0, offsetY = 0, priority = 0, angle = 0, color = Color.white}
+local default = {image = defaultImg, frames = 1, animationFrame = 0, framespeed = 8, offsetX = 0, offsetY = 0, priority = 9, angle = 0, color = Color.white}
 cursor.imgCur = {frame = 0, frames = 1, framespeed = 8, offsetX = 0, offsetY = 0, animationTimer = 0, angle = 0}
 imgCur = cursor.imgCur
 local imgData = {}
