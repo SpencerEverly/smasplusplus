@@ -6,6 +6,7 @@ local pauseplus = require("pauseplus")
 local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
+local rooms = require("rooms")
 local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
@@ -106,6 +107,36 @@ local function changeresolutionborder()
 	else
 		SFX.play("_OST/_Sound Effects/resolutionborder-disable.ogg")
 		SaveData.borderEnabled = false
+	end
+end
+
+local function quickdeathoption()
+	if pauseplus.getSelectionValue("settings","Enable Quick Death") and SaveData.disablexchar == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+		SFX.play("_OST/_Sound Effects/quickdeath-enabled.ogg")
+		rooms.quickRespawn = true
+		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
+		rooms.collectiblesRespawn = true
+		-- Whether or not blocks reset themselves and the p-switch effect resets after dying (only affects quick respawn).
+		rooms.blocksReset = true
+		-- Whether or not non-saved star coins will reset after dying (only affects quick respawn).
+		rooms.starCoinsReset = false
+		-- Whether or not to create a pseudo "checkpoint" on entering a different section.
+		rooms.checkpointOnEnterSection = false
+		-- Whether or not everything is reset on entering a room.
+		rooms.resetOnEnteringRoom = true
+	else
+		SFX.play("_OST/_Sound Effects/quickdeath-disabled.ogg")
+		rooms.quickRespawn = false
+		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
+		rooms.collectiblesRespawn = true
+		-- Whether or not blocks reset themselves and the p-switch effect resets after dying (only affects quick respawn).
+		rooms.blocksReset = false
+		-- Whether or not non-saved star coins will reset after dying (only affects quick respawn).
+		rooms.starCoinsReset = false
+		-- Whether or not to create a pseudo "checkpoint" on entering a different section.
+		rooms.checkpointOnEnterSection = false
+		-- Whether or not everything is reset on entering a room.
+		rooms.resetOnEnteringRoom = false
 	end
 end
 
@@ -901,6 +932,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	pauseplus.createOption("settings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_NES,RESOLUTION_GB,RESOLUTION_GBA,RESOLUTION_IPHONEONE,RESOLUTION_THREEDS}, action = function() changeresolution() end})
 	pauseplus.createOption("settings",{text = "Toggle Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Toggle scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
 	pauseplus.createOption("settings",{text = "Toggle Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable borders when using other additional borders.", action =  function() changeresolutionborder() end})
+	pauseplus.createOption("settings",{text = "Enable Quick Death",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable quick dying animations. This won't affect 1.3 Mode.", action =  function() quickdeathoption() end})
 	pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
 	pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
 	if not isOverworld then
