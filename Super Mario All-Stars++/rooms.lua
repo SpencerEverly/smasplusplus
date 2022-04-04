@@ -10,6 +10,10 @@
 
 ]]
 
+local rooms = {}
+
+if isOverworld then return end
+
 -- Load a bunch of necessary libraries
 local npcEventManager  = require("game/npceventmanager")
 local configFileReader = require("configfilereader") -- (used for parsing music.ini files)
@@ -18,10 +22,6 @@ local lineguide        = require("lineguide")
 local switch           = require("blocks/ai/synced")
 local megashroom       = require("mega/megashroom")
 local starman          = require("starman/star")
-
-local rooms = {}
-
-if isOverworld then return end
 
 -- Declare constants
 rooms.TRANSITION_TYPE_NONE     = 0
