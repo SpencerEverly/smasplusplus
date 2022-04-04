@@ -1,6 +1,7 @@
 local level_dependencies_normal= require("level_dependencies_normal")
-local inventory = require("furyinventory")
+local furyinventory = require("furyinventory")
 local flipperino = require("flipperino")
+local pauseplus = require("pauseplus")
 
 function onEvent(eventName)
 	if eventName == "flip" then
@@ -11,11 +12,11 @@ function onEvent(eventName)
 	end
 	if eventName == "Cutscene 1" then
 		if SaveData.disableX2char == false then
-			pausemenu.pauseactivated = false
-			inventory.activated = false
+			pauseplus.canPause = false
+			furyinventory.activated = false
 		end
 		if SaveData.disableX2char == true then
-			pausemenu.pauseactivated = false
+			pauseplus.canPause = false
 		end
 	end
 	if eventName == "Cutscene 2 - 5" then
@@ -29,11 +30,11 @@ function onEvent(eventName)
 	end
 	if eventName == "Cutscene 2 - 13" then
 		if SaveData.disableX2char == false then
-			pausemenu.pauseactivated = true
-			inventory.activated = true
+			pauseplus.canPause = true
+			furyinventory.activated = true
 		end
 		if SaveData.disableX2char == true then
-			pausemenu.pauseactivated = true
+			pauseplus.canPause = true
 		end
 	end
 end
