@@ -717,7 +717,23 @@ function pausemenu2.onDraw()
 		if not isOverworld then
 			textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
 		elseif isOverworld then
-			textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.5, yscale = 1.5}
+			if SaveData.resolution == "fullscreen" then
+				textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.5, yscale = 1.5}
+			elseif SaveData.resolution == "widescreen" then
+				textplus.print{x = 20, y = 490, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.5, yscale = 1.5}
+			elseif SaveData.resolution == "ultrawide" then
+				textplus.print{x = 20, y = 440, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.5, yscale = 1.5}
+			elseif SaveData.resolution == "nes" then
+				textplus.print{x = 160, y = 490, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.5, yscale = 1.5}
+			elseif SaveData.resolution == "gameboy" then
+				textplus.print{x = 250, y = 400, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 0.8, yscale = 0.8}
+			elseif SaveData.resolution == "gba" then
+				textplus.print{x = 190, y = 440, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.2, yscale = 1.2}
+			elseif SaveData.resolution == "iphone1st" then
+				textplus.print{x = 280, y = 490, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.2, yscale = 1.2}
+			elseif SaveData.resolution == "3ds" then
+				textplus.print{x = 300, y = 558, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.2, yscale = 1.2}
+			end
 		end
 	end
 end
