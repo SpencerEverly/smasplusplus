@@ -690,7 +690,12 @@ end
 
 local function BattleModeDisEnable1()
 	if SaveData.disableX2char == true then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? We'll need to enable 2 player mode first.<question BattleTwoPlayerCheckOne>", pauses = false, updatesInPause = true})
+		if Player.count() == 1 then
+			littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? We'll need to enable 2 player mode first.<question BattleTwoPlayerCheckOne>", pauses = false, updatesInPause = true})
+		end
+		if Player.count() == 2 then
+			littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? You already have 2 player mode enabled for this.<question BattleTwoPlayerCheckTwo>", pauses = false, updatesInPause = true})
+		end
 	elseif SaveData.disableX2char == false then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
@@ -715,9 +720,9 @@ local function TwoPlayerCheckBattle()
 end
 
 local function ExitClassicBattle()
-	Cheats.trigger("1player")
-	Defines.player_hasCheated = false
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	--Cheats.trigger("1player")
+	--Defines.player_hasCheated = false
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Exiting battle mode activated. You'll need to manually turn off 2 player mode in the settings tab.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function OnePlayerCheck()
@@ -1926,6 +1931,10 @@ if bootmenu.active == true then
 
 	littleDialogue.registerAnswer("BattleTwoPlayerCheckOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheckBattle) end})
 	littleDialogue.registerAnswer("BattleTwoPlayerCheckOne",{text = "No",chosenFunction = function() Routine.run(ExitClassicBattle) end})
+	
+	
+	littleDialogue.registerAnswer("BattleTwoPlayerCheckTwo",{text = "Yes",chosenFunction = function() Routine.run(classicBattleSelect) end})
+	littleDialogue.registerAnswer("BattleTwoPlayerCheckTwo",{text = "No",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 
 
 

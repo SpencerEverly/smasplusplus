@@ -11,7 +11,7 @@ local smasdeathsystem = require("smasdeathsystem")
 local HUDOverride = require("hudoverridee")
 local rng = require("base/rng")
 local warpTransition = require("warpTransition")
-local pausemenu = require("pausemenu")
+local pausemenu = require("pausemenu2")
 
 warpTransition.musicFadeOut = false
 warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
