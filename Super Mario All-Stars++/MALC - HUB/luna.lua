@@ -102,25 +102,25 @@ function onStart()
 		Player.setCostume(5, nil)
 	end
 	Audio.MusicVolume(nil)
-	if stars >= 4 then
+	if stars >= 4 and malcmusic.holiday == false then
 		triggerEvent("Stage0.5")
 	end
-	if stars >= 10 then
+	if stars >= 10 and malcmusic.holiday == false then
 		triggerEvent("Stage1")
 	end
-	if stars >= 16 then
+	if stars >= 16 and malcmusic.holiday == false then
 		triggerEvent("Stage2")
 	end
-	if stars >= 22 then
+	if stars >= 22 and malcmusic.holiday == false then
 		triggerEvent("Stage3")
 	end
-	if stars >= 28 then
+	if stars >= 28 and malcmusic.holiday == false then
 		triggerEvent("Stage4")
 	end
-	if stars >= 32 then
+	if stars >= 32 and malcmusic.holiday == false then
 		triggerEvent("Stage5")
 	end
-	if stars >= 38 then
+	if stars >= 38 and malcmusic.holiday == false then
 		triggerEvent("Stage6")
 	end
 	--if stars >= 100 then
