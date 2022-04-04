@@ -653,7 +653,7 @@ function pausemenu2.onDraw()
 		costtext = "N/A"
 	end
 	if pauseplus.currentSubmenu then
-		textplus.print{x = 10, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
+		textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
 	end
 end
 

@@ -31,6 +31,7 @@ pauseplus.submenuNames = {}
 
 pauseplus.currentSubmenu = nil
 pauseplus.currentOption  = nil
+currentOption  = nil
 
 pauseplus.opener = nil -- The player that opened the menu
 
@@ -118,6 +119,7 @@ do
 
         pauseplus.currentSubmenu = submenu or "main"
         pauseplus.currentOption  = option  or 1
+		currentOption = option  or 1
 
         pauseplus.opener = opener or pauseplus.opener or player
 
@@ -149,6 +151,7 @@ do
 
         pauseplus.currentSubmenu = nil
         pauseplus.currentOption  = nil
+		currentOption = nil
 
         pauseplus.opener = nil
 
@@ -599,6 +602,7 @@ do
 
         local y = (menuPosition.y +(pauseplus.verticalSpace*pauseplus.scale))
         local cursorPosition
+		local texthighlight
 
 
         if submenuObj.headerImage ~= nil then
@@ -667,6 +671,7 @@ do
 
             -- Position cursor if necessary
             if pauseplus.currentOption == index then
+				--index = "<color rainbow><wave 1>"..index.."</wave></color>"
                 cursorPosition = vector(drawX - pauseplus.cursorImage.width,y + optionObj.size.y*0.5)
 
                 -- Description
