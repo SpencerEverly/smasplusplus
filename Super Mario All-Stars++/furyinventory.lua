@@ -19,7 +19,7 @@ with all this stuff. I probably would have gone insane if they didn't help.
 local furyinventory = {}
 
 local warpTransition = require("warpTransition")
-local pausemenu = require("pausemenu")
+local pausemenu = require("pauseplus")
 local littleDialogue = require("littleDialogue")
 local yoshi = require("yiYoshi/yiYoshi")
 local modernReserveItems = require("modernReserveItems")
@@ -478,12 +478,6 @@ function furyinventory.onTick()
 		furyinventory.activated = false
 	end
 	if warpTransition.sameSectionTransition == warpTransition.TRANSITION_PAN then
-		furyinventory.activated = false
-	end
-	if pausemenu.pauseactivated == false then
-		furyinventory.activated = false
-	end
-	if pausemenu.paused == true then
 		furyinventory.activated = false
 	end
 	

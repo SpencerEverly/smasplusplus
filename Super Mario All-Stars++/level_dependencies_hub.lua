@@ -86,7 +86,6 @@ function dependencies2.onStart()
 		debugbox = require("debugbox")
 	end
 	if SaveData.disableX2char == false then
-		pausemenu = require("pausemenu")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 		playerphysicspatch = require("playerphysicspatch")
 		kindHurtBlock = require("kindHurtBlock")
@@ -117,7 +116,6 @@ function dependencies2.onStart()
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
-		pausemenu = require("pausemenu")
 		littleDialogue.defaultStyleName = "smbx13og"
 		Cheats.deregister("dressmeup")
 		Cheats.deregister("undress")
@@ -128,7 +126,6 @@ function dependencies2.onStart()
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
-		pausemenu = require("pausemenu")
 		littleDialogue.defaultStyleName = "smbx13og"
 	end
 end

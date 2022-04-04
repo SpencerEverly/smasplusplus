@@ -68,7 +68,6 @@ function dependencies.onStart()
 		mm = require("megamann");
 		mm.playIntro = false;
 		undertaledepends = require("level_dependencies_undertale")
-		pausemenu = require("pausemenu")
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 		playerphysicspatch = require("playerphysicspatch")
@@ -100,7 +99,6 @@ function dependencies.onStart()
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
-		pausemenu = require("pausemenu")
 		littleDialogue.defaultStyleName = "smbx13og"
 	end
 	if character == "CHARACTER_LUIGI" then

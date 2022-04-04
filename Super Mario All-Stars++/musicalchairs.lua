@@ -8,7 +8,7 @@
 --For music, first add the requring stuffs:
 
 local playerManager = require("playerManager")
-local pausemenu = require("pausemenu")
+local pausemenu = require("pauseplus")
 
 local levelfolder = Level.folderPath()
 local levelname = Level.filename()
@@ -2175,10 +2175,6 @@ function musicalchairs.onTick()
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
 	local costumeIdx = table.ifind(costumes,currentCostume)
-	
-	if pausemenu.costumechanged == true then
-		Routine.run(musicalchairs.switcher)
-	end
 	
 	if started then
 	

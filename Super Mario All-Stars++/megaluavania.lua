@@ -9,7 +9,7 @@ local rng = API.load("rng")
 local playerAnim = API.load("playerAnim")
 local textblox = API.load("textblox")
 local particles = API.load("particles")
-local pausemenu = require("pausemenu")
+local pausemenu = require("pauseplus")
 local datetime = require("datetime")
 local inventory = require("furyinventory")
 
@@ -703,7 +703,7 @@ function megaluavania.onInputUpdate()
 			Graphics.activateHud(false)
 			megaluavania.battle(v)
 			inventory.activateinventory = false
-			pausemenu.pauseactivated = false
+			pausemenu.canPause = false
 			inventory.activated = false
 			mainblackscreenshow = false
 			datetime.topright = true
@@ -718,7 +718,7 @@ function megaluavania.onInputUpdate()
 			v.initiated = megaluavania.BATTLE_NONE
 			Misc.unpause()
 			inventory.activateinventory = true
-			pausemenu.pauseactivated = true
+			pausemenu.canPause = true
 			inventory.activated = true
 			textblox.active = false
 			datetime.topright = false
