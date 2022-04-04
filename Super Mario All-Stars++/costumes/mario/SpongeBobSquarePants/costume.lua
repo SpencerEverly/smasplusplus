@@ -112,9 +112,7 @@ end
 
 function costume.onStart()
 	if costume.abilitesenabled == true then
-		if (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false or (Level.filename() == "SMAS - Game Over.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then
-			Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
-		end
+		Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
 	end
 end
 
@@ -163,7 +161,7 @@ function costume.onTick(repeated)
 				timer2 = 5
 			end
 		end
-		if player:isGroundTouching() == false then
+		if player:isGroundTouching() == false or player:mem(0x36, FIELD_BOOL, true) then
 			if player.keys.jump == KEYS_PRESSED then
 				Audio.sounds[1].muted = true
 				SFX.play("costumes/mario/SpongeBobSquarePants/player-jump-twice.ogg")

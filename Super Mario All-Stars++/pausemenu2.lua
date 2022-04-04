@@ -25,8 +25,14 @@ end
 function pausemenu2.onTickEnd()
 	if pauseplus.currentSubmenu == nil then
        Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
+	elseif GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
+		Audio.MusicVolume(0)
 	end
-	pauseplus.originalMusicVolume = pauseplus.getSelectionValue("settings","Music Volume")
+	if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
+		Audio.MusicVolume(0)
+	else
+		pauseplus.originalMusicVolume = pauseplus.getSelectionValue("settings","Music Volume")
+	end
 end
 
 local RESOLUTION_FULL = "fullscreen"
@@ -841,7 +847,7 @@ pauseplus.createOption("main",{text = "Save and Quit",description = "Save and ex
 pauseplus.createOption("settings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_NES,RESOLUTION_GB,RESOLUTION_GBA,RESOLUTION_IPHONEONE,RESOLUTION_THREEDS}, action = function() changeresolution() end})
 pauseplus.createOption("settings",{text = "Toggle Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Toggle scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
 pauseplus.createOption("settings",{text = "Toggle Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable borders when using other additional borders.", action =  function() changeresolutionborder() end})
-pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 10,selectionFormat = "%d%%"})
+pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
 if not isOverworld then
 	pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to reenable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Misc.unpause() Level.load(Level.filename()) end}})
 end
