@@ -947,7 +947,9 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
 	end
 	pauseplus.createOption("main",{text = "Save and Continue",description = "Save and continue your game.",pauseplus.save,closeMenu = true,action = function() SFX.play("_OST/_Sound Effects/save_dismiss.ogg") end})
-	pauseplus.createOption("main",{text = "Save and Reset Game",description = "Saves and resets the game back to the preboot menu. Useful for setting options you can't set in the pause menu.",pauseplus.save,closeMenu = true,action = function() Routine.run(mainmenu) end})
+	if not isOverworld then
+		pauseplus.createOption("main",{text = "Save and Reset Game",description = "Saves and resets the game back to the preboot menu. Useful for setting options you can't set in the pause menu.",pauseplus.save,closeMenu = true,action = function() Routine.run(mainmenu) end})
+	end
 	pauseplus.createOption("main",{text = "Save and Quit",description = "Save and exit. You can continue later at any point. Remember to take breaks!",action = function() Routine.run(saveAndQuitRoutine) end})
 
 	-- Settings
