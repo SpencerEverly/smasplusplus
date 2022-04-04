@@ -34,6 +34,14 @@ local letterData = {}
 
 local time = 0
 
+--loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
+
+--function onLoad()
+	--loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
+	--loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
+	--fadetolevel = true
+--end
+
 function onDraw()
     if image == nil then -- this sometimes happens?
         return

@@ -45,6 +45,7 @@ function malcmusic.onInitAPI()
 	registerEvent(malcmusic, "onTick")
 	registerEvent(malcmusic, "onEvent")
 	registerEvent(malcmusic, "onDraw")
+	registerEvent(malcmusic, "onExit")
 	ready = true
 end
 
@@ -3331,6 +3332,17 @@ function malcmusic.onEvent(eventName)
 		Audio.MusicChange(11, "_OST/Undertale/mus_chara.ogg")
 		Audio.MusicChange(12, "_OST/Undertale/mus_chara.ogg")
 		Audio.MusicChange(13, "_OST/Undertale/mus_chara.ogg")
+	end
+end
+
+function malcmusic.onExit()
+	if currentSfxInRain then
+		currentSfxInRain:fadeout(50)
+		currentSfxInRain = nil
+	end
+	if currentSfxOutRain then
+		currentSfxOutRain:fadeout(50)
+		currentSfxOutRain = nil
 	end
 end
 
