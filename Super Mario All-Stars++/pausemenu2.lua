@@ -7,6 +7,7 @@ local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
 local rooms = require("rooms")
+local smasdeathsystem = require("smasdeathsystem")
 local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
@@ -124,6 +125,7 @@ local function quickdeathoption()
 		rooms.checkpointOnEnterSection = false
 		-- Whether or not everything is reset on entering a room.
 		rooms.resetOnEnteringRoom = true
+		smasdeathsystem.activated = false
 	else
 		SFX.play("_OST/_Sound Effects/quickdeath-disabled.ogg")
 		rooms.quickRespawn = false
@@ -137,6 +139,7 @@ local function quickdeathoption()
 		rooms.checkpointOnEnterSection = false
 		-- Whether or not everything is reset on entering a room.
 		rooms.resetOnEnteringRoom = false
+		smasdeathsystem.activated = true
 	end
 end
 

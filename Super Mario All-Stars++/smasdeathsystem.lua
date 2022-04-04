@@ -38,7 +38,7 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 end
 
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
-	if GameData.multiplayeractive == false or GameData.battlemodeactive == false or GameData.battlemodeactive == nil or SaveData.disableX2char == false then
+	if GameData.multiplayeractive == false or GameData.battlemodeactive == false or GameData.battlemodeactive == nil or SaveData.disableX2char == false and smasdeathsystem.activated == true then
 		if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
 			if player.deathTimer == 0 then
 				GameData.cutsceneMusicControl = true
@@ -148,9 +148,9 @@ function smasdeathsystem.onExit()
 		GameData.p2lives = 5
 	end
 	GameData.cutsceneMusicControl = false --This is specific for my episode. Remove this if you wanna use this yourself.
-	Audio.MusicVolume(65) --Reset the music exiting the level
+	Audio.MusicVolume(64) --Reset the music exiting the level
 	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == false then
-		--Exit level
+		Level.exit()
 	elseif smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == true then
 		Level.load("SMAS - Map.lvlx", nil, nil)
 	end
@@ -159,5 +159,6 @@ end
 --SaveData.gameOverCount = 0 --This is only when the library publically releases for the wild to use
 smasdeathsystem.hasDied = false --If the player died or not
 smasdeathsystem.extramapexit = false --This'll only be true on extra DLC levels/extra games' level luna.lua's in future updates
+smasdeathsystem.activated = true --Whenever the death animation is activated
 
 return smasdeathsystem
