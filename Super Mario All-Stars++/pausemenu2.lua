@@ -12,8 +12,8 @@ local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
 
-if GameData.deathquickoption == nil then
-	GameData.deathquickoption = false
+if SaveData.deathquickoption == nil then
+	SaveData.deathquickoption = false
 end
 
 local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
@@ -75,7 +75,7 @@ local costumenames = {
 }
 
 function pausemenu2.onTick()
-	if GameData.deathquickoption == true then
+	if SaveData.deathquickoption == true then
 		Audio.sounds[8].muted = true
 		rooms.quickRespawn = true
 		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
@@ -90,7 +90,7 @@ function pausemenu2.onTick()
 		rooms.resetOnEnteringRoom = true
 		smasdeathsystem.activated = false
 		rooms.deathSoundEffect = 54
-	elseif GameData.deathquickoption == false then
+	elseif SaveData.deathquickoption == false then
 		Audio.sounds[8].muted = true
 		rooms.quickRespawn = false
 		-- Whether or not collectibles (coins, mushrooms, 1-ups, etc) respawn after dying (only affects quick respawn).
@@ -109,7 +109,9 @@ function pausemenu2.onTick()
 end
 
 function pausemenu2.onPlayerKill()
-	SFX.play(rooms.deathSoundEffect)
+	if SaveData.deathquickoption == true then
+		SFX.play(rooms.deathSoundEffect)
+	end
 end
 
 local function changeresolution()
@@ -157,11 +159,11 @@ end
 local function quickdeathoption()
 	if pauseplus.getSelectionValue("settings","Enable Quick Death") then
 		if SaveData.disablexchar == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			GameData.deathquickoption = true
+			SaveData.deathquickoption = true
 			SFX.play("_OST/_Sound Effects/quickdeath_enabled.ogg")
 		end
 	else
-		GameData.deathquickoption  = false
+		SaveData.deathquickoption  = false
 		SFX.play("_OST/_Sound Effects/quickdeath_disabled.ogg")
 	end
 end

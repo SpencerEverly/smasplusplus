@@ -23,6 +23,8 @@ local switch           = require("blocks/ai/synced")
 local megashroom       = require("mega/megashroom")
 local starman          = require("starman/star")
 
+local time = 0
+
 -- Declare constants
 rooms.TRANSITION_TYPE_NONE     = 0
 rooms.TRANSITION_TYPE_CONSTANT = 1
@@ -688,7 +690,7 @@ function rooms.onStart()
         end
 
         if not rooms.dontPlayMusicThroughLua then
-            Audio.SeizeStream(-1)
+            --Audio.SeizeStream(-1)
         end
 
 
@@ -838,7 +840,7 @@ function rooms.onDraw()
                 Audio.MusicOpen(newMusic)
 				Audio.MusicPlay()
             else
-				Audio.MusicPlay()
+				Audio.MusicResume()
             end
 
             currentlyPlayingMusic = newMusic
