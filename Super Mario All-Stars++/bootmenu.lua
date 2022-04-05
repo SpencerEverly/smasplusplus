@@ -1274,6 +1274,7 @@ function bootmenu.onTick()
 			Routine.run(MusicReset)
 			GameData.musreset = false
 		end
+		Graphics.activateHud(false)
 		player:setFrame(50) --Prevent the player from showing up on the boot menu
 		player:mem(0x140, FIELD_BOOL, 150)
 		if player:mem(0x140, FIELD_BOOL) == 0 then
