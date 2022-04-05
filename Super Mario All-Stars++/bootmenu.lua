@@ -576,11 +576,11 @@ local function bootDialogue()
 	active4 = false
 	logo = false
 	pressjumpwords = false
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function menuDialogue()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function gamebootDialogue()
@@ -813,7 +813,7 @@ local function BootDialogueMusicReset()
 	logo = false
 	pressjumpwords = false
 	stpatricksday = false
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 	if Level.filename() == "intro_8bit.lvlx" then
 		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
 	end
@@ -1121,6 +1121,15 @@ local function BootGameHelpPreExecute() --Boot the game help level, the boot men
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
+end
+
+local function BootOnlinePreExecute() --Boot the game help level, the boot menu version at least
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("SMAS - Online (Menu).lvlx", nil, nil)
 end
 
 local function PigeonRaca1() --This executes the True Final Battle
@@ -1794,6 +1803,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(gamebootDialogue) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Minigames",chosenFunction = function() Routine.run(battleModeDialogue) end})
+	littleDialogue.registerAnswer("MainMenu",{text = "Online Multiplayer",chosenFunction = function() Routine.run(BootOnlinePreExecute) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
