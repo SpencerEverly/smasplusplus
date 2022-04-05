@@ -105,7 +105,7 @@ local noloadingsounds = {
 
 function onLoad()
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		if not Misc.inEditor() or (Level.filename() == noloadingsounds[Level.filename()]) == true then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
+		if not Misc.inEditor() or (noloadingsounds[Level.filename()]) == true then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
 			loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 			loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 			fadetolevel = true
