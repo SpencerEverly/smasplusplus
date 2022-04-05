@@ -786,7 +786,7 @@ end
 local function SaveSlot1()
 	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>To begin switching the save slot, please select Begin to get started (Keyboard only). THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
-	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 or Misc.inEditor() then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You can't do this on this version of SMBX2. Please use the SEE Mod version to switch saves. You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
 end
