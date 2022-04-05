@@ -96,14 +96,17 @@ function onCameraUpdate(c, camIdx)
 end
 
 local loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
+local noloadingsounds = {
+	["SMAS - Start.lvlx"] = true
+}
 
 function onLoad()
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		--if not Misc.inEditor() then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
-		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
-		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
-		fadetolevel = true
-		--end
+		if not Misc.inEditor() or (Level.filename() == noloadingsounds[Level.filename()]) == true then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
+			loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
+			loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
+			fadetolevel = true
+		end
 	end
 end
 
@@ -141,8 +144,10 @@ function onStart()
 		GameData.weatherset = false
 	end
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		fadetolevel = false
-		loadingSoundObject:FadeOut(800)
+		if not Misc.inEditor() or (Level.filename() == noloadingsounds[Level.filename()]) == true then
+			fadetolevel = false
+			loadingSoundObject:FadeOut(800)
+		end
 	end
 	SaveData.dateplayedday = os.date("%d")
 	SaveData.dateplayedmonth = os.date("%m")

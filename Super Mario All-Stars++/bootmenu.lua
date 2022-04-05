@@ -1012,33 +1012,33 @@ local function SaveEraseStart()
 	end
 end
 
-local function ExitToIntro()
+local function ExitToIntro() --This command will auto load the intro
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 
-local function ExitToMap()
+local function ExitToMap() --This command will exit to the main map
 	Level.exit()
 end
 
-local function BootSMASPlusPlusPreExecute()
+local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
 	SFX.play("_OST/_Sound Effects/startsmasboot-executed.ogg")
 	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
 	active3 = true
 	logo = true
-	Routine.wait(1.0)
+	Routine.wait(1.0) --Each second play a sound
 	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
 	Routine.wait(1.0)
 	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
 	Routine.wait(1.0)
 	SFX.play("_OST/_Sound Effects/startsmasboot-fullyexecuted.ogg")
-	exitscreen = true
+	exitscreen = true --Black out everything
 	logo = false
 	active3 = false
-	autoscroll.scrollLeft(5000)
-	Audio.MusicChange(0, 0)
+	autoscroll.scrollLeft(5000) --Make sure that autoscroll doesn't move the player when loading any other level by accident
+	Audio.MusicChange(0, 0) --Change the music to nothing
 	Routine.wait(0.5)
 	Misc.saveGame()
-	if (player.keys.down == KEYS_DOWN) == true then
+	if (player.keys.down == KEYS_DOWN) == true then --Either one when holding down or not, executes a routine on which one to execute
 		Routine.run(mapExit)
 	end
 	if (player.keys.down == KEYS_DOWN) == false then 
@@ -1046,7 +1046,7 @@ local function BootSMASPlusPlusPreExecute()
 	end
 end
 
-local function BootCredits()
+local function BootCredits() --The credits lvl will proabbly be scrapped or not, depends
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	SFX.play(14)
@@ -1054,22 +1054,22 @@ local function BootCredits()
 	Level.load("SMAS - Credits.lvlx", nil, nil)
 end
 	
-local function BootWSMBAPreExecute()
+local function BootWSMBAPreExecute() --This will execute WSMBA, the other preincluded episode with SMAS++
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	bluecurtains = false
 	redcurtains = false
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")
-	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
+	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") --Make this launch as specific for the episode
+	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then --Else if not found... an error will occur
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
 		exitscreen = false
 		Misc.dialog("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
 	end
 end
-local function BootWSMBAOGPreExecute()
+local function BootWSMBAOGPreExecute() --This will be there whenever I find the original version of WSMBA. Currently, I don't have it. I doubt I'll find it anyway
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
@@ -1083,22 +1083,22 @@ local function BootWSMBAOGPreExecute()
 	end
 end
 
-local function WSMBAOGComing()
+local function WSMBAOGComing() --This will be the message for whenever it comes, but that's scrapped as well, for now
 	littleDialogue.create({text = "<setPos 400 32 0.5 -0.5>The original has NOT been found yet! We're still trying to find and perserve the original WSMBA to release with this episode. If you know someone who might have it downloaded, contact spencer.everly at gmail.com, or DM me on Discord at Spencer Everly#1997!<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
-local function RestartSMASPlusPlus()
+local function RestartSMASPlusPlus() --This restarts SMAS++ entirely, when i.e. erasing the save data
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	Routine.wait(0.5)
 	Misc.loadEpisode("Super Mario All-Stars++")
-	if Misc.loadEpisode("Super Mario All-Stars++") == false then
+	if Misc.loadEpisode("Super Mario All-Stars++") == false then --Idk why this is needed
 		SFX.play("wrong.ogg")
 		active = false
 	end
 end
 
-local function BootGameHelpPreExecute()
+local function BootGameHelpPreExecute() --Boot the game help level, the boot menu version at least
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Audio.MusicChange(0, 0)
@@ -1107,16 +1107,16 @@ local function BootGameHelpPreExecute()
 	Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
 end
 
-local function PigeonRaca1()
+local function PigeonRaca1() --This executes the True Final Battle
 	if player.keys.jump == KEYS_PRESSED then
 		player.keys.jump = KEYS_UNPRESSED
-		Routine.wait(4.5)
+		Routine.wait(4.5) --Wait until loading the True Final Battle cutscene...
 		GameData.startedmenu = 0
 		Level.load("SMAS - Raca's World (Part 0).lvlx", nil, nil)
 	end
 end
 
-local function foolsinapril()
+local function foolsinapril() --April Fools event for 4/1 of any year
 	GameData.holidayrun = false
 	Misc.pause()
 	Routine.wait(5.5, true)
@@ -1133,7 +1133,7 @@ local function foolsinapril()
 	GameData.startedmenu = GameData.startedmenu - 1
 end
 
-function bootmenu.onInitAPI()
+function bootmenu.onInitAPI() --This requires some libraries to start
 	registerEvent(bootmenu,"onExitLevel", "onExit")
 	registerEvent(bootmenu,"onStart")
 	registerEvent(bootmenu,"onTick")
@@ -1145,14 +1145,14 @@ function bootmenu.onInitAPI()
 	
 	local Routine = require("routine")
 	
-	ready = true
+	ready = true --We're ready, so we can begin
 end
 
 function bootmenu.onStart()
 	if bootmenu.active == true then
-		Audio.MusicVolume(nil)
+		Audio.MusicVolume(nil) --Let the music volume reset
 		if SaveData.firstBootCompleted == nil then
-			SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
+			SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0 --If starting for the first time, first boot will happen
 		end
 		if SaveData.firstBootCompleted == 0 then
 			Routine.run(FirstBoot1)
@@ -1161,8 +1161,8 @@ function bootmenu.onStart()
 		if SaveData.firstBootCompleted == 1 then
 			Routine.run(easterEgg, true)
 		end
-		if month == "12" and day == "25" then
-			Section(0).getWeatherEffect(2)
+		if month == "12" and day == "25" then --Change the weather on Christmas Day to snow
+			Section(0).effects.weather = WEATHER_SNOW
 		end
 		if SaveData.disableX2char == false then
 			x2noticecheck = active
@@ -1173,17 +1173,17 @@ function bootmenu.onStart()
 			x2noticecheckactive = active
 		end
 		Misc.saveGame()
-		Defines.cheat_donthurtme = true
+		Defines.cheat_donthurtme = true --These are to prevent the player from dying
 		Defines.cheat_shadowmario = true
-		hearthover.active = false
-		if os.date("*t").month == 04 and os.date("*t").day == 01 then
+		hearthover.active = false --No hearthover on the bootmenu
+		if os.date("*t").month == 04 and os.date("*t").day == 01 then --BSOD lmao
 			if GameData.holidayonetime == nil or GameData.holidayonetime == false and GameData.holidayonetimeended == false then
 				GameData.startedmenu = 1
 			elseif GameData.holidayonetimeended == true then
 				GameData.startedmenu = 0
 			end
 		end
-		if os.date("*t").month == 03 and os.date("*t").day == 17 then
+		if os.date("*t").month == 03 and os.date("*t").day == 17 then --St. Patrick's Day event
 			stpatricksday = true
 		end
 		if Level.filename() == "intro_SMAS.lvlx" then
@@ -1254,19 +1254,19 @@ function bootmenu.onTick()
 			Routine.run(MusicReset)
 			GameData.musreset = false
 		end
-		player:setFrame(50)
+		player:setFrame(50) --Prevent the player from showing up on the boot menu
 		player:mem(0x140, FIELD_BOOL, 150)
 		if player:mem(0x140, FIELD_BOOL) == 0 then
-			player:mem(0x140, FIELD_BOOL, 150)
+			player:mem(0x140, FIELD_BOOL, 150) --Make the player invincible, literally
 		end
-		player.x = camera.x + 450 - (player.width / 2)
+		player.x = camera.x + 450 - (player.width / 2) --Force the player somewhere to prevent deaths
 		player.y = camera.y + 599 - (player.height / 2)
-		littleDialogue.defaultStyleName = "smbx13"
+		littleDialogue.defaultStyleName = "smbx13" --Change the text box to the SMBX 1.3 textbox format
 		if Player.count() == 1 then
 			twoplayercheck = active
 			twoplayercheckactive = not active
 		end
-		if Player.count() == 2 then
+		if Player(2) and Player(2).isValid then --Do these things or Player(2)
 			player2:setFrame(50)
 			player2:mem(0x142, FIELD_BOOL, true)
 			twoplayercheck = not active
