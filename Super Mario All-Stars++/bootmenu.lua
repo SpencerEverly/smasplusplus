@@ -1078,20 +1078,21 @@ local function BootWSMBAPreExecute() --This will execute WSMBA, the other preinc
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") --Make this launch as specific for the episode
-	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then --Else if not found... an error will occur
+	if (Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")) == false then --Else if not found... an error will occur
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
 		exitscreen = false
 		error("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
 	end
 end
+
 local function BootWSMBAOGPreExecute() --This will be there whenever I find the original version of WSMBA. Currently, I don't have it. I doubt I'll find it anyway
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
 	Misc.loadEpisode("Where SMB Attacks (Original)")
-	if Misc.loadEpisode("Where SMB Attacks (Original)") == false then
+	if (Misc.loadEpisode("Where SMB Attacks (Original)")) == false then
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
 		exitscreen = false
