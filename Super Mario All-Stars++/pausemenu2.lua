@@ -528,9 +528,11 @@ end
 
 function pausemenu2.onDraw()
 	if pauseplus.currentSubmenu == nil then
-		Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
-	elseif GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
-		Audio.MusicVolume(0)
+		if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
+			Audio.MusicVolume(0)
+		else
+			Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
+		end
 	end
 	if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
 		Audio.MusicVolume(0)
