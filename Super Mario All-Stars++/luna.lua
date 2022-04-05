@@ -74,8 +74,6 @@ if SaveData.borderEnabled == nil then
 	SaveData.borderEnabled = true
 end
 
-loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
-
 -- Gets the index of the player that the camera belongs to. A return value of 0 means that it belongs to everybody
 function onCameraUpdate(c, camIdx)
     local screenType = mem(0x00B25130,FIELD_WORD)
@@ -97,12 +95,80 @@ function onCameraUpdate(c, camIdx)
     end
 end
 
-function onLoad(err)
-	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
+local loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
+
+function onLoad()
+	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		--if not Misc.inEditor() then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
+		--end
 	end
+end
+
+function onStart()
+	loadSaveSlot(Misc.saveSlot())
+	if SaveData.dateplayedweather == nil then
+		SaveData.dateplayedweather = weatherControl
+	end
+	if SaveData.dateplayedmonth == nil then
+		SaveData.dateplayedmonth = os.date("%m")
+	end
+	if SaveData.dateplayedday == nil then
+		SaveData.dateplayedday = os.date("%d")
+	end
+	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		fadetolevel = false
+	end
+	--if __LUNALUA == "0.7 SEE Mod" then
+		--GameData.fadetolevel = false
+	--end
+	if SaveData.dateplayedyesterday == nil then
+		yesterdaynumber = os.date("*t").day - 1
+		yesterdaystring = tostring(yesterdaynumber)
+		SaveData.dateplayedyesterday = yesterdaystring
+	end
+	if SaveData.dateplayedtomorrow == nil then
+		tomorrownumber = os.date("*t").day + 1
+		tomorrowstring = tostring(tomorrownumber)
+		SaveData.dateplayedtomorrow = tomorrowstring
+	end
+	if GameData.weatherset == true then
+		possibleWeather = {"sunny","rain","snow"}
+		weatherControl = rng.randomEntry(possibleWeather)
+		SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
+		GameData.weatherset = false
+	end
+	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		fadetolevel = false
+		loadingSoundObject:FadeOut(800)
+	end
+	SaveData.dateplayedday = os.date("%d")
+	SaveData.dateplayedmonth = os.date("%m")
+	tomorrowget()
+	yesterdayget()
+	if SaveData.dateplayedyear == nil then
+		SaveData.dateplayedyear = os.date("%Y")
+	end
+	SaveData.dateplayedyear = os.date("%Y")
+	if SaveData.disableX2char == 0 then --Migrate old saves if there are any
+		SaveData.disableX2char = false
+	end
+	if SaveData.disableX2char == 1 then
+		SaveData.disableX2char = true
+	end
+	if GameData.cutsceneMusicControl == false then
+		Audio.MusicVolume(65)
+	end
+	if GameData.cutsceneMusicControl == true then
+		Audio.MusicVolume(0)
+	end
+	--if __LUNALUA == "0.7 SEE Mod" then
+		--if GameData.fadetolevel == false then
+			--GameData.loadingSoundObject:FadeOut(800)
+		--end
+	---else
 end
 
 function isLeapYear(y)
@@ -130,59 +196,16 @@ function yesterdayget()
 	SaveData.dateplayedyesterday = yesterdaystring
 end
 
-function onStart()
-	loadSaveSlot(Misc.saveSlot())
-	if SaveData.dateplayedweather == nil then
-		SaveData.dateplayedweather = weatherControl
-	end
-	if SaveData.dateplayedmonth == nil then
-		SaveData.dateplayedmonth = os.date("%m")
-	end
-	if SaveData.dateplayedday == nil then
-		SaveData.dateplayedday = os.date("%d")
-	end
-	if SaveData.dateplayedyesterday == nil then
-		yesterdaynumber = os.date("*t").day - 1
-		yesterdaystring = tostring(yesterdaynumber)
-		SaveData.dateplayedyesterday = yesterdaystring
-	end
-	if SaveData.dateplayedtomorrow == nil then
-		tomorrownumber = os.date("*t").day + 1
-		tomorrowstring = tostring(tomorrownumber)
-		SaveData.dateplayedtomorrow = tomorrowstring
-	end
-	if GameData.weatherset == true then
-		possibleWeather = {"sunny","rain","snow"}
-		weatherControl = rng.randomEntry(possibleWeather)
-		SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
-		GameData.weatherset = false
-	end
-	SaveData.dateplayedday = os.date("%d")
-	SaveData.dateplayedmonth = os.date("%m")
-	tomorrowget()
-	yesterdayget()
-	if SaveData.dateplayedyear == nil then
-		SaveData.dateplayedyear = os.date("%Y")
-	end
-	SaveData.dateplayedyear = os.date("%Y")
-	fadetolevel = false
-	if not Misc.inEditor() and (Level.filename() == "SMAS - Start.lvlx") == false then
-		loadingSoundObject:FadeOut(800)
-	end
-	if SaveData.disableX2char == 0 then --Migrate old saves if there are any
-		SaveData.disableX2char = false
-	end
-	if SaveData.disableX2char == 1 then
-		SaveData.disableX2char = true
-	end
-	if GameData.cutsceneMusicControl == false then
-		Audio.MusicVolume(65)
-	end
-	if GameData.cutsceneMusicControl == true then
-		Audio.MusicVolume(0)
-	end
-end
-
 function onTick()
 	mem(0x00B25130,FIELD_WORD, 2)
+end
+
+function onExit()
+	--if __LUNALUA == "0.7 SEE Mod" then
+		--if not Misc.inEditor() then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
+			--loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
+			--GameData.loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
+			--GameData.fadetolevel = true
+		--end
+	--end
 end
