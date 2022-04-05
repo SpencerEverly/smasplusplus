@@ -44,6 +44,20 @@ function keyboard.cmd()
 			GameData.playernameenter = false
 		end
 	end
+	if GameData.playernameenterfirstboot == true then
+		if keyboard.buffer ~= "" then
+			SaveData.playerName = keyboard.buffer
+			keyboard.buffer = ""
+			keyboard.cursorPos = 0
+			SFX.play("_OST/_Sound Effects/console/console_success.ogg")
+			keyboard.active = false
+			GameData.enablekeyboard = false
+			GameData.firstbootfive = true
+			GameData.toggleoffkeys = false
+			GameData.toggleoffinventory = false
+			GameData.playernameenter = false
+		end
+	end
 	if GameData.saveslotswitchenter == true then
 		if keyboard.buffer ~= "" then
 			if keyboard.buffer >= "1" or keyboard.buffer <= "32767" then

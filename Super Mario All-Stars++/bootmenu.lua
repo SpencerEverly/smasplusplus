@@ -533,7 +533,7 @@ local function FirstBoot3()
 end
 
 local function FirstBoot4()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>What is your name? (Not finished yet)<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>And now, we need to know your name. What is your name? Press Begin and type up your name (You'll need to use a keyboard for this).<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot5()
@@ -669,6 +669,12 @@ local function startKeyboard()
 	keyboard.active = true
 	GameData.enablekeyboard = true
 	GameData.playernameenter = true
+end
+
+local function startKeyboardFirstBoot()
+	keyboard.active = true
+	GameData.enablekeyboard = true
+	GameData.playernameenterfirstboot = true
 end
 
 local function startSaveSwitcher1()
@@ -1255,6 +1261,10 @@ function bootmenu.onTick()
 		if GameData.reopenmenu == true then
 			Routine.run(bootDialogue)
 			GameData.reopenmenu = false
+		end
+		if GameData.firstbootfive == true then
+			Routine.run(FirstBoot5)
+			GameData.firstbootfive = false
 		end
 		if GameData.reopenmenumusreset == true then
 			Routine.run(BootDialogueMusicReset)
@@ -1918,7 +1928,7 @@ if bootmenu.active == true then
 
 
 
-	littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Confirm",chosenFunction = function() Routine.run(FirstBoot5) end})
+	littleDialogue.registerAnswer("FirstBootMenuThree",{text = "Begin",chosenFunction = function() Routine.run(startKeyboardFirstBoot) end})
 
 	
 	
