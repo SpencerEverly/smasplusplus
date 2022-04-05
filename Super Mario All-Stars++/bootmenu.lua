@@ -1082,7 +1082,7 @@ local function BootWSMBAPreExecute() --This will execute WSMBA, the other preinc
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
 		exitscreen = false
-		Misc.dialog("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
+		error("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
 	end
 end
 local function BootWSMBAOGPreExecute() --This will be there whenever I find the original version of WSMBA. Currently, I don't have it. I doubt I'll find it anyway
@@ -1095,7 +1095,7 @@ local function BootWSMBAOGPreExecute() --This will be there whenever I find the 
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
 		exitscreen = false
-		Misc.dialog("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
+		error("Where SMB Attacks (The Original Version) does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")
 	end
 end
 
