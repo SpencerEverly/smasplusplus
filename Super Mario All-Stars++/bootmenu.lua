@@ -1077,8 +1077,7 @@ local function BootWSMBAPreExecute() --This will execute WSMBA, the other preinc
 	redcurtains = false
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") --Make this launch as specific for the episode
-	if (Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")) == false then --Else if not found... an error will occur
+	if (Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")) == false then --Make this launch as specific for the episode, else if not found... an error will occur
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
 		exitscreen = false
@@ -1091,7 +1090,6 @@ local function BootWSMBAOGPreExecute() --This will be there whenever I find the 
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	Misc.loadEpisode("Where SMB Attacks (Original)")
 	if (Misc.loadEpisode("Where SMB Attacks (Original)")) == false then
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
