@@ -994,13 +994,20 @@ end
 
 local function SaveEraseStart()
 	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		--Start by flushing any SaveData/GameData that's still available
 		SaveData.clear()
 		GameData.clear()
 		SaveData.flush()
+		--Then start removing SMAS++'s save files...
 		os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot()..".sav")
 		os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot().."-ext.dat")
+		--...Along with Where SMB Attacks.
+		os.remove("worlds/Where SMB Attacks/save"..Misc.saveSlot()..".sav")
+		os.remove("worlds/Where SMB Attacks/save"..Misc.saveSlot().."-ext.dat")
+		--Then make the message telling that it's erased.
 		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
 	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		--If not on my SEE Mod, this message will pop up, and nothing will happen
 		littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Erasing complete (Save data erasing hasn't been added to SMBX2 yet, so your save is still available. Please erase the save by deleting your save slot in the episode folder).<question RestartOption>", pauses = false, updatesInPause = true})
 	end
 end
