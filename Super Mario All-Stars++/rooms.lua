@@ -836,9 +836,9 @@ function rooms.onDraw()
         if newMusic ~= currentlyPlayingMusic or (Audio.MusicIsPlaying() == not newMusic) then
             if newMusic ~= nil then
                 Audio.MusicOpen(newMusic)
-                Audio.MusicPlay()
+				Audio.MusicPlay()
             else
-                Audio.MusicStop()
+				Audio.MusicPlay()
             end
 
             currentlyPlayingMusic = newMusic
@@ -1148,7 +1148,7 @@ rooms.respawnEffect = rooms.RESPAWN_EFFECT_MOSAIC
 rooms.respawnBlankTime = 16
 
 -- When using quick respawn, music will be played via lua. However, this can cause problems with other music played through lua, so you can enable this option to disable the automatic music playing.
-rooms.dontPlayMusicThroughLua = true
+rooms.dontPlayMusicThroughLua = false
 
 -- When enabled, the respawn BGOs inside a room won't be used.
 rooms.neverUseRespawnBGOs = false
