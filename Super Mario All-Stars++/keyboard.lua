@@ -44,6 +44,35 @@ function keyboard.cmd()
 			GameData.playernameenter = false
 		end
 	end
+	if GameData.saveslotswitchenter == true then
+		if keyboard.buffer ~= "" >= 1 or "" <= 32767 then
+			os.rename("worlds/Super Mario All-Stars++/save"..Misc.saveSlot()..".sav","worlds/Super Mario All-Stars++/save"..keyboard.buffer..".sav")
+			os.rename("worlds/Super Mario All-Stars++/save"..Misc.saveSlot().."-ext.dat","worlds/Super Mario All-Stars++/save"..keyboard.buffer.."-ext.dat")
+			os.rename("worlds/Where SMB Attacks/save"..Misc.saveSlot()..".sav","worlds/Where SMB Attacks/save"..keyboard.buffer..".sav")
+			os.rename("worlds/Where SMB Attacks/save"..Misc.saveSlot().."-ext.dat","worlds/Where SMB Attacks/save"..keyboard.buffer.."-ext.dat")
+			Misc.saveSlot(keyboard.buffer)
+			Misc.saveGame()
+			keyboard.buffer = ""
+			keyboard.cursorPos = 0
+			SFX.play("_OST/_Sound Effects/console/console_success.ogg")
+			keyboard.active = false
+			GameData.enablekeyboard = false
+			GameData.reopenmenu = true
+			GameData.toggleoffkeys = false
+			GameData.toggleoffinventory = false
+			GameData.saveslotswitchenter = false
+		elseif keyboard.buffer ~= "" then
+			keyboard.buffer = ""
+			keyboard.cursorPos = 0
+			SFX.play("_OST/_Sound Effects/console/console_error.ogg")
+			keyboard.active = false
+			GameData.enablekeyboard = false
+			GameData.reopenmenu = true
+			GameData.toggleoffkeys = false
+			GameData.toggleoffinventory = false
+			GameData.saveslotswitchenter = false
+		end
+	end
 end
 
 function keyboard.onInitAPI()

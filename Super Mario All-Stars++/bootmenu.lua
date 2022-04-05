@@ -12,7 +12,7 @@ local rng = require("base/rng")
 local cursor = require("cursor")
 local inputconfigurator = require("inputconfig")
 local keyboard = require("keyboard")
-local hearthover = require("hearthover")
+local hearthover = require("hearthover") --Require hearthover to disable it
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
@@ -671,6 +671,12 @@ local function startKeyboard()
 	GameData.playernameenter = true
 end
 
+local function startSaveSwitcher1()
+	keyboard.active = true
+	GameData.enablekeyboard = true
+	GameData.saveslotswitchenter = true
+end
+
 local function X2DisableCheck1()
 	if Player.count() == 1 then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -0.75>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
@@ -778,7 +784,11 @@ local function SaveOptions1()
 end
 
 local function SaveSlot1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Select slot by typing the number above. Press jump when you have picked the right slot (Max is 32,767) DATA FROM THE PREVIOUS SLOT, IF ANY, WILL BE OVERWRITTEN! Don't put a number in to cancel this option.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
+	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>To begin switching the save slot, please select Begin to get started (Keyboard only). THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
+	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.5>You can't do this on this version of SMBX2. Please use the SEE Mod version to switch saves. You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+	end
 end
 
 local function EraseSave1()
@@ -1882,6 +1892,10 @@ if bootmenu.active == true then
 	
 	littleDialogue.registerAnswer("StartInputs",{text = "Begin",chosenFunction = function() Routine.run(startConfigurator) end})
 	littleDialogue.registerAnswer("StartInputs",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	
+	
+	littleDialogue.registerAnswer("StartSaveSwitcher",{text = "Begin",chosenFunction = function() Routine.run(startSaveSwitcher1) end})
+	littleDialogue.registerAnswer("StartSaveSwitcher",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
 	
 
 
