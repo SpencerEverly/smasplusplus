@@ -113,6 +113,59 @@ local noloadingsounds = {
 	["SMAS - Map.lvlx"] = true
 }
 
+local friendlyplaces = {
+	["SMAS - Start.lvlx"] = true,
+	["SMAS - Map.lvlx"] = true,
+	["intro_8bit.lvlx"] = true,
+	["intro_bossedit8.lvlx"] = true,
+	["intro_jakebrito1.lvlx"] = true,
+	["intro_marioforever.lvlx"] = true,
+	["intro_S!TS!.lvlx"] = true,
+	["intro_scrollingheights.lvlx"] = true,
+	["intro_SMAS.lvlx"] = true,
+	["intro_SMBX1.0.lvlx"] = true,
+	["intro_SMBX1.1.lvlx"] = true,
+	["intro_SMBX1.2.lvlx"] = true,
+	["intro_SMBX1.3.lvlx"] = true,
+	["intro_SMBX1.3og.lvlx"] = true,
+	["intro_SMBX2.lvlx"] = true,
+	["intro_SMBX2b3.lvlx"] = true,
+	["intro_sunsetbeach.lvlx"] = true,
+	["intro_WSMBA.lvlx"] = true,
+	["MALC - HUB.lvlx"] = true,
+	["SMAS - Credits.lvlx"] = true,
+	["SMAS - DLC Levels.lvlx"] = true,
+	["SMAS - Intro.lvlx"] = true,
+	["SMAS - Online (Menu).lvlx"] = true,
+	["SMAS - Test Level.lvlx"] = true,
+	["SMAS - True Ending.lvlx"] = true,
+	["SMAS - World Map Warp.lvlx"] = true,
+	["SMB1 - Level Backtrack 1.lvlx"] = true,
+	["SMB1 - Level Backtrack 2.lvlx"] = true,
+	["SMB1 - Level Backtrack 3.lvlx"] = true,
+	["SMB1 - Level Backtrack 4.lvlx"] = true,
+	["SMB1 - Level Backtrack 5.lvlx"] = true,
+	["SMB1 - Level Backtrack 6.lvlx"] = true,
+	["SMB1 - Level Backtrack 7.lvlx"] = true,
+	["SMB2 - Level Backtrack 1.lvlx"] = true,
+	["SMB2 - Level Backtrack 2.lvlx"] = true,
+	["SMB2 - Level Backtrack 3.lvlx"] = true,
+	["SMB2 - Level Backtrack 4.lvlx"] = true,
+	["SMB2 - Level Backtrack 5.lvlx"] = true,
+	["SMB2 - Level Backtrack 6.lvlx"] = true,
+	["SMBLL - Level Backtrack 1.lvlx"] = true,
+	["SMBLL - Level Backtrack 2.lvlx"] = true,
+	["SMBLL - Level Backtrack 3.lvlx"] = true,
+	["SMBLL - Level Backtrack 4.lvlx"] = true,
+	["SMBLL - Level Backtrack 5.lvlx"] = true,
+	["SMBLL - Level Backtrack 6.lvlx"] = true,
+	["SMBLL - Level Backtrack 7.lvlx"] = true,
+	["SMBS - Opening.lvlx"] = true,
+	["SMW - W-0, L-Green Switch.lvlx"] = true,
+	["SMW - W-0, L-Yellow Switch.lvlx"] = true,
+	["SMW - W-0, L-Blue Switch.lvlx"] = true
+}
+
 function onLoad()
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 		if not Misc.inEditor() or (noloadingsounds[Level.filename()]) == true then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated
@@ -136,6 +189,9 @@ function onStart()
 	end
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 		fadetolevel = false
+	end
+	if (friendlyplaces[Level.filename()]) == true then
+		GameData.friendlyArea = true
 	end
 	--if __LUNALUA == "0.7 SEE Mod" then
 		--GameData.fadetolevel = false
