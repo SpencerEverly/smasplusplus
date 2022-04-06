@@ -69,6 +69,10 @@ local function ExitToBootMenu()
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
+local function ExitMenu()
+	
+end
+
 function NotFinished()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Currently a work in progress. Please visit again some other time.<question QuitToMenuError>", pauses = false, updatesInPause = true})
 end
@@ -179,6 +183,6 @@ function onExit()
 	Defines.cheat_shadowmario = false
 end
 
-littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitToBootMenu) end})
+littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitMenu) end})
 
 littleDialogue.registerAnswer("StartConnecting",{text = "Let's get started!",chosenFunction = function() Routine.run(NotFinished) end})

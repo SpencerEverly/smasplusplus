@@ -1,5 +1,4 @@
 local wifiaccess = {}
-
---Nothing, for now
+local host = require("scripts/ext/wifi/host")
 
 return wifiaccess
