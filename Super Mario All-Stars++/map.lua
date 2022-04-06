@@ -248,6 +248,12 @@ walkCycles[CHARACTER_ZELDA]           = walkCycles[CHARACTER_LUIGI]
 walkCycles[CHARACTER_ULTIMATERINKA]   = walkCycles[CHARACTER_TOAD]
 walkCycles[CHARACTER_UNCLEBROADSWORD] = walkCycles[CHARACTER_TOAD]
 walkCycles[CHARACTER_SAMUS]           = walkCycles[CHARACTER_LINK]
+IF SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	walkCycles[CHARACTER_YIYOSHI]         = walkCycles[CHARACTER_PEACH]
+	walkCycles[CHARACTER_JUNI]            = walkCycles[CHARACTER_TOAD]
+	walkCycles[CHARACTER_MCSTEVE]         = walkCycles[CHARACTER_TOAD]
+	walkCycles[CHARACTER_PRINCESSRINKA]   = walkCycles[CHARACTER_TOAD]
+end
 
 walkCycles["SMW-MARIO"] = {[PLAYER_SMALL] = {1,2, framespeed = 8},[PLAYER_BIG] = {3,2,1, framespeed = 6}}
 walkCycles["SMW-LUIGI"] = walkCycles["SMW-MARIO"]
