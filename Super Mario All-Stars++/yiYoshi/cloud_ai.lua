@@ -9,8 +9,12 @@ local npcutils = require("npcs/npcutils")
 
 
 local yoshi
-pcall(function() yoshi = require("yiYoshi/yiYoshi") end)
 
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	pcall(function() yoshi = require("yiYoshi/yiYoshi") end)
+elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	pcall(function() yoshi = require("characters/yiyoshi") end)
+end
 
 
 local cloud = {}

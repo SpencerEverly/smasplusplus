@@ -53,16 +53,26 @@ local repll = require("repll")
 local rng = require("base/rng")
 local playerManager = require("playermanager")
 
-local steve = require("steve")
-playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
-local yoshi = require("yiYoshi/yiYoshi")
-playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
-playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
-playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
-playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
-playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
-playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
+if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	Graphics.sprites.block[647].img = Graphics.loadImageResolved("graphics/seemod/block/block-647.png")
+	Graphics.sprites.block[648].img = Graphics.loadImageResolved("graphics/seemod/block/block-648.png")
+	Graphics.sprites.block[655].img = Graphics.loadImageResolved("graphics/seemod/block/block-655.png")
+	Graphics.sprites.block[656].img = Graphics.loadImageResolved("graphics/seemod/block/block-656.png")
+elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	steve = require("steve")
+	playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+	yoshi = require("yiYoshi/yiYoshi")
+	playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
+	playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
+	playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
+	playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
+	playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
+	playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
+	playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
+	Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
+	Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
+	Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
+end
 
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"

@@ -3,7 +3,9 @@ local costumeblock = {}
 local blockmanager = require("blockmanager")
 local blockutils = require("blocks/blockutils")
 local playerManager = require("playerManager")
-local steve = require("steve")
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	steve = require("steve")
+end
 
 local oldCostume = {}
 local costumes = {}

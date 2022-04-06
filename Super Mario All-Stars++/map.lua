@@ -1,4 +1,8 @@
-local steve = require("steve")
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	steve = require("steve")
+	yoshi = require("yiYoshi/yiYoshi")
+end
+
 local textplus = require("textplus")
 local playerManager = require("playermanager")
 local pressedKeys = {};
@@ -60,8 +64,6 @@ function playerManager.onInputUpdate()
 		end
 	end
 end
-
-local yoshi = require("yiYoshi/yiYoshi")
 local lib3d = require("lib3d")
 local travL = require("travL")
 local wandR = require("wandRr")
@@ -261,6 +263,10 @@ local yoshiAnimationFrames = {
 local bootBounceData = {}
 
 function onDraw()
+	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		Graphics.sprites.player[10].img = Graphics.loadImageResolved("graphics/smbx2og/player/player-10.png")
+		Graphics.sprites.player[14].img = Graphics.loadImageResolved("graphics/smbx2og/player/player-14.png")
+	end
 	if SaveData.resolution == "fullscreen" then
 		if SaveData.disableX2char == true then
 			map3d.CameraSettings.fov = 92.7 - 0.00872665

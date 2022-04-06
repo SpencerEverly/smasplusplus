@@ -1,7 +1,7 @@
 local warpTransition = require("warpTransition")
 local textplus = require("textplus")
 local littleDialogue = require("littleDialogue")
-local pausemenu = require("pauseplus")
+local pausemenu = require("pausemenu2")
 --local megaluavania = require("megaluavania")
 local debugbox = require("debugbox")
 local extrasounds = require("extrasounds")
@@ -11,16 +11,13 @@ littleDialogue.defaultStyleName = "smbx13"
 
 function onStart()
 	if SaveData.disableX2char == false then
-		mm = require("Characters/megaman");
-		mm.playIntro = false;
 		undertaledepends = require("level_dependencies_undertale")
-		pausemenu = require("pausemenu")
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
 		playerphysicspatch = require("playerphysicspatch")
 		kindHurtBlock = require("kindHurtBlock")
 		comboSounds = require("comboSounds")
-		inventory = require("furyinventory")
+		furyinventory = require("furyinventory")
 		warpTransition.musicFadeOut = false
 		warpTransition.levelStartTransition = warpTransition.TRANSITION_FADE
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_PAN
@@ -47,7 +44,6 @@ function onStart()
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
-		pausemenu = require("pausemenu")
 		littleDialogue.defaultStyleName = "smbx13og"
 		Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/player-jump.ogg")
 		Audio.sounds[2].sfx  = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/stomped.ogg")

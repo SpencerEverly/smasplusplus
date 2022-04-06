@@ -4,8 +4,10 @@ local playerManager = require("playermanager")
 local littleDialogue = require("littleDialogue")
 local extendedKoopas = require("extendedKoopas")
 
-local steve = require("steve")
-playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	steve = require("steve")
+	playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+end
 
 local killed = false
 local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)

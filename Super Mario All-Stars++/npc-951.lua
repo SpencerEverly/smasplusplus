@@ -7,7 +7,11 @@
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
 
-local yoshi = require("yiYoshi/yiYoshi")
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	yoshi = require("yiYoshi/yiYoshi")
+elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	yoshi = require("characters/yiyoshi")
+end
 
 
 local star = {}

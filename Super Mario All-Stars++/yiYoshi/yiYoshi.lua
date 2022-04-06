@@ -35,6 +35,8 @@ local isOnSMWMap = (smwMap ~= nil and Level.filename() == smwMap.levelFilename)
 
 local yoshi = {}
 
+if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then return end
+
 _G.CHARACTER_YOSHI = CHARACTER_NINJABOMBERMAN
 playerManager.overrideCharacterLib(CHARACTER_YOSHI,yoshi)
 

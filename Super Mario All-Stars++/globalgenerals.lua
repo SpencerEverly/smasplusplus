@@ -6,14 +6,17 @@ local extendedKoopas = require("extendedKoopas")
 local warpTransition = require("warpTransition")
 local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
-local steve = require("steve")
-local yoshi = require("yiYoshi/yiYoshi")
 local HUDOverride = require("hudoverridee")
 local textplus = require("textplus")
 local repll = require("repll")
 local extrasounds = require("extrasounds")
 local namehover = require("namehover")
 local hearthover = require("hearthover")
+
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	steve = require("steve")
+	yoshi = require("yiYoshi/yiYoshi")
+end
 
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
@@ -1086,7 +1089,9 @@ function globalgenerals.onTick()
 		littleDialogue.characterNames[5] = "Link"
 		littleDialogue.characterNames[9] = "Klonoa"
 		littleDialogue.characterNames[14] = "Steve"
-		steve.skinSettings.name = "steve"
+		if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+			steve.skinSettings.name = "steve"
+		end
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769

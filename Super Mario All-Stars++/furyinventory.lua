@@ -21,7 +21,6 @@ local furyinventory = {}
 local warpTransition = require("warpTransition")
 local pausemenu = require("pauseplus")
 local littleDialogue = require("littleDialogue")
-local yoshi = require("yiYoshi/yiYoshi")
 local modernReserveItems = require("modernReserveItems")
 local hudoverride = require("hudoverride")
 

@@ -19,6 +19,8 @@ local lib3d = require("lib3d")
 
 local steve = {}
 
+if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then return end
+
 local timer = 0
 
 ready = false
@@ -1942,7 +1944,9 @@ function steve.onDraw()
         return
     end
 
-
+	
+	Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
+	
     if data.glintTimer ~= nil then
         data.glintSprite:draw{frame = math.floor(data.glintTimer/steve.generalSettings.glintFrameDelay)+1,priority = -5,sceneCoords = true}
     end

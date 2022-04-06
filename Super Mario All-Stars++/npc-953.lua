@@ -7,12 +7,12 @@
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
 
-local yoshi = require("yiYoshi/yiYoshi")
-
 if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	ai = require("yiYoshi/egg_ai")
+	yoshi = require("yiYoshi/yiYoshi")
 elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
 	ai = require("characters/yiYoshi/egg_ai")
+	yoshi = require("characters/yiYoshi")
 end
 
 
