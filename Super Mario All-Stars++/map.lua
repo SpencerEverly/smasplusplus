@@ -267,8 +267,8 @@ local bootBounceData = {}
 
 function onDraw()
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		Graphics.sprites.player[10].img = Graphics.loadImageResolved("graphics/smbx2og/player/player-10.png")
-		Graphics.sprites.player[14].img = Graphics.loadImageResolved("graphics/smbx2og/player/player-14.png")
+		--Graphics.sprites.player[10].img = Graphics.loadImageResolved("graphics/smbx2og/player/player-10.png")
+		--Graphics.sprites.player[14].img = Graphics.loadImageResolved("graphics/smbx2og/player/player-14.png")
 	end
 	if SaveData.resolution == "fullscreen" then
 		if SaveData.disableX2char == true then
