@@ -1,6 +1,10 @@
 if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	steve = require("steve")
 	yoshi = require("yiYoshi/yiYoshi")
+	map3d = require("mapp3d")
+end
+if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	map3d = require("map3d")
 end
 
 local textplus = require("textplus")
@@ -77,7 +81,6 @@ local pauseplus = require("pauseplus")
 
 pauseplus.priority = 8
 
-local map3d = require("mapp3d")
 map3d.BGPlane.tile = 394
 map3d.Light.enabled = false
 
