@@ -285,6 +285,22 @@ local function characterchange()
 	end
 	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
 		if (character == CHARACTER_JUNI) then
+			player:transform(19, false)
+			SFX.play(32)
+			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		end
+	end
+	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		if (character == CHARACTER_MCSTEVE) then
+			player:transform(20, false)
+			SFX.play(32)
+			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		end
+	end
+	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		if (character == CHARACTER_PRINCESSRINKA) then
 			player:transform(1, false)
 			SFX.play(32)
 			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
@@ -372,7 +388,7 @@ local function characterchangeleft()
 		end
 	elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
 		if (character == CHARACTER_MARIO) then
-			player:transform(18, false)
+			player:transform(20, false)
 			SFX.play(32)
 			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
@@ -479,6 +495,22 @@ local function characterchangeleft()
 	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
 		if (character == CHARACTER_JUNI) then
 			player:transform(17, false)
+			SFX.play(32)
+			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		end
+	end
+	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		if (character == CHARACTER_MCSTEVE) then
+			player:transform(18, false)
+			SFX.play(32)
+			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		end
+	end
+	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		if (character == CHARACTER_PRINCESSRINKA) then
+			player:transform(19, false)
 			SFX.play(32)
 			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
