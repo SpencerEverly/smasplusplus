@@ -3593,7 +3593,9 @@ do
 
 
     function initHUD()
-		Graphics.activateHud(true)
+		if not isOverworld then
+			Graphics.activateHud(true)
+		end
         local type = Graphics.HUD_HEARTS
         local actions
 
@@ -4483,7 +4485,7 @@ function yoshi.onDraw()
         end
 
         Graphics.drawScreen{
-            texture = yoshi.transitionBuffer,priority = 6,shader = yoshi.curveTransitionShader,uniforms = {
+            texture = yoshi.transitionBuffer,priority = 0,shader = yoshi.curveTransitionShader,uniforms = {
                 transitionMin = yoshi.curveTransitionMin,
                 transitionMax = yoshi.curveTransitionMax,
                 transitionLoopHeight = 0.25,
@@ -4498,7 +4500,7 @@ function yoshi.onDraw()
         end
 
         Graphics.drawScreen{
-            texture = yoshi.transitionBuffer,priority = 6,shader = yoshi.wipeTransitionShader,uniforms = {
+            texture = yoshi.transitionBuffer,priority = -1,shader = yoshi.wipeTransitionShader,uniforms = {
                 transitionTexture = yoshi.customExitSettings.keyWipeImage,
                 progress = yoshi.wipeTransitionProgress,
             },
@@ -4507,7 +4509,7 @@ function yoshi.onDraw()
 
 
     if yoshi.highPriorityFadeIn > 0 then
-        p:render{color = Color.white.. yoshi.highPriorityFadeIn,priority = 6.5,ignorestate = yoshi.introActive or data.keyActive}
+        p:render{color = Color.white.. yoshi.highPriorityFadeIn,priority = -0.5,ignorestate = yoshi.introActive or data.keyActive}
     end
 
     drawFollowingEggs()
