@@ -476,26 +476,49 @@ do
     end]]
 
     -- characterName tag
-    littleDialogue.characterNames = {
-        [1]  = "Mario",
-        [2]  = "Luigi",
-        [3]  = "Peach",
-        [4]  = "Toad",
-        [5]  = "Link",
-        [6]  = "Megaman",
-        [7]  = "Wario",
-        [8]  = "Bowser",
-        [9]  = "Klonoa",
-        [10] = "Yoshi",
-        [11] = "Rosalina",
-        [12] = "Snake",
-        [13] = "Zelda",
-        [14] = "Steve",
-        [15] = "Uncle Broadsword",
-        [16] = "Samus",
-		[17] = "Yoshi", --SEE Mod stuff
-		[18] = "Juni",
-    }
+	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		littleDialogue.characterNames = {
+			[1]  = "Mario",
+			[2]  = "Luigi",
+			[3]  = "Peach",
+			[4]  = "Toad",
+			[5]  = "Link",
+			[6]  = "Megaman",
+			[7]  = "Wario",
+			[8]  = "Bowser",
+			[9]  = "Klonoa",
+			[10] = "Ninja Bomberman",
+			[11] = "Rosalina",
+			[12] = "Snake",
+			[13] = "Zelda",
+			[14] = "Ultimate Rinka",
+			[15] = "Uncle Broadsword",
+			[16] = "Samus",
+			[17] = "Yoshi", --SEE Mod stuff
+			[18] = "Juni",
+			[19] = "Steve",
+			[20] = "Princess Rinka",
+		}
+	else
+		littleDialogue.characterNames = {
+			[1]  = "Mario",
+			[2]  = "Luigi",
+			[3]  = "Peach",
+			[4]  = "Toad",
+			[5]  = "Link",
+			[6]  = "Megaman",
+			[7]  = "Wario",
+			[8]  = "Bowser",
+			[9]  = "Klonoa",
+			[10] = "Yoshi",
+			[11] = "Rosalina",
+			[12] = "Snake",
+			[13] = "Zelda",
+			[14] = "Steve",
+			[15] = "Uncle Broadsword",
+			[16] = "Samus",
+		}
+	end
 
     function customTags.characterName(fmt,out,args)
         local text = ""
