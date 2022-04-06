@@ -1030,8 +1030,9 @@ local function getTargets()
     end
 
     -- Add player
-    table.insert(targets,player)
-    count = count + 1
+	local playerscount = {[Player(1)] = true,[Player(2)] = true}
+    table.insert(targets,playerscount)
+    count = count + Player.count()
 
     return targets
 end
@@ -1054,7 +1055,7 @@ local function getCameraFocusFromTargets(targets)
 
             total.x = total.x + x
             total.y = total.y + y
-            count = count + 1
+            count = count + Player.count()
         end
     end
 

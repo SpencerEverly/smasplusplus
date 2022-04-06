@@ -3593,6 +3593,7 @@ do
 
 
     function initHUD()
+		Graphics.activateHud(true)
         local type = Graphics.HUD_HEARTS
         local actions
 
@@ -4256,7 +4257,7 @@ do
 
 
     function handleExit()
-		Graphics.activateHud(false)
+		--Graphics.activateHud(false)
         handlePassOn()
         handleKey()
     end
@@ -4820,7 +4821,7 @@ end
 
 yoshi.generalSettings = {
     -- Can be BABY_MARIO or HEARTS
-    healthSystem = HEALTH_SYSTEM.BABY_MARIO,
+    healthSystem = HEALTH_SYSTEM.HEARTS,
 
     walkSpeed = 6,
     runSpeed = 6,

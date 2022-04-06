@@ -8964,6 +8964,8 @@ ID:95;X:1888;Y:-64;W:32;H:32;
 ID:98;X:1888;Y:-32;W:32;H:32;
 ID:95;X:1920;Y:-64;W:32;H:32;
 ID:98;X:1920;Y:-32;W:32;H:32;
+ID:661;X:40304;Y:39616;W:32;H:32;LR:"SEEModStuff";EH:"YoshiChar";
+ID:1292;X:40304;Y:39808;W:32;H:32;LR:"SEEModStuff";
 BLOCK_END
 BGO
 ID:202;X:-179456;Y:-180160;
@@ -12745,6 +12747,7 @@ LR:"BusinessesOpen";
 LR:"BusinessesClosed";HD:1;
 LR:"X2Stuff";
 LR:"XStuff";HD:1;
+LR:"SEEModStuff";HD:1;
 LR:"SideQuestPipe";HD:1;
 LR:"DLCContentPipe";HD:1;
 LR:"Debug Stuff (Enable on full release)";
@@ -12753,6 +12756,7 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
+ET:"SEEModStuff";LS:["SEEModStuff"];DS:1;AS:0;AX:0;AY:0;
 ET:"Game's End Credits 1";MG:"Since starting this project on March 9th\, 2012\, this game was created by Spencer Everly.";TE:"Game's End Credits 2";AS:0;AX:0;AY:0;
 ET:"Game's End Credits 2";MG:"The levels from Super Mario Bros. 1\, Super Mario Bros. 2\, Super Mario Bros. Lost Levels\, Super Mario Bros. 3\, and Super Mario World were originally made by Nintendo.";TE:"Game's End Credits 3";AS:0;AX:0;AY:0;
 ET:"Game's End Credits 3";MG:"Finally\, the special thanks\:";TE:"Game's End Credits 4";AS:0;AX:0;AY:0;

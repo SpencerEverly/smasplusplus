@@ -493,6 +493,8 @@ do
         [14] = "Steve",
         [15] = "Uncle Broadsword",
         [16] = "Samus",
+		[17] = "Yoshi", --SEE Mod stuff
+		[18] = "Juni",
     }
 
     function customTags.characterName(fmt,out,args)

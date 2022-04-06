@@ -9,7 +9,11 @@ local npcutils = require("npcs/npcutils")
 
 local yoshi = require("yiYoshi/yiYoshi")
 
-local ai = require("yiYoshi/egg_ai")
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	ai = require("yiYoshi/egg_ai")
+elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	ai = require("characters/yiYoshi/egg_ai")
+end
 
 
 local egg = {}
