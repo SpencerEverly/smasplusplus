@@ -52,6 +52,10 @@ local exacttime = os.date("%X")
 
 local runPressedState = false
 
+if GameData.menucomplete == nil then
+	GameData.menucomplete = false
+end
+
 local function preboot()
 	if SaveData.introselect == 1 then
 		Level.load("intro_SMAS.lvlx", nil, nil)

@@ -61,7 +61,7 @@ if Level.filename() ~= smwMap.levelFilename then
 
     function smwMap.onExit(winType)
         gameData.winType = winType
-		if GameData.menucomplete == true then
+		if GameData.menucomplete then
 			Level.load("SMAS - Map.lvlx", nil, nil)
 		end
     end
@@ -459,6 +459,9 @@ do
 
 
     function smwMap.onDrawTransition()
+		if lunatime.tick() <= 3 then
+			Graphics.drawScreen{color = Color.black..1,priority = 6}
+		end
         if smwMap.transitionDrawFunction ~= nil then
             if smwMap.transitionPauses then
                 updateTransition()
@@ -977,6 +980,7 @@ end
 
 
 function smwMap.onInitAPI()
+	registerEvent(smwMap,"onLoad")
     registerEvent(smwMap,"onStart")
 
     registerEvent(smwMap,"onCameraUpdate")
@@ -997,11 +1001,11 @@ function smwMap.onInitAPI()
     registerEvent(smwMap,"onTick","updateEncounters")
 
     registerEvent(smwMap,"onTickEnd")
+	registerEvent(smwMap,"onExit")
 end
 
-
 function smwMap.onStart()
-	if GameData.menucomplete == false or GameData.menucomplete == nil then
+	if not GameData.menucomplete then
 		Level.load("SMAS - Start.lvlx")
 	end
     for _,p in ipairs(Player.get()) do
@@ -1043,9 +1047,16 @@ end
 
 
 function smwMap.onTickEnd()
-    if lunatime.tick() == 1 then
-        smwMap.startTransition(nil,nil,smwMap.transitionSettings.enterMapSettings)
+	if GameData.menucomplete then
+		if lunatime.tick() == 3 then
+			smwMap.startTransition(nil,nil,smwMap.transitionSettings.enterMapSettings)
+		end
     end
+end
+
+function smwMap.onExit()
+	Audio.SeizeStream(-1)
+    Audio.MusicStop()
 end
 
 
@@ -4438,7 +4449,7 @@ smwMap.transitionSettings = {
     },
 	enterMapSettings = {
 		drawFunction = smwMap.TRANSITION_FADE,
-		progressTime = 0,
+		progressTime = 28,
 		priority = 6,
 		
 		waitTime = 0,startTime = 0, -- these are important! you probably shouldn't touch them

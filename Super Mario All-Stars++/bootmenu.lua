@@ -116,14 +116,11 @@ local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "
 local selecter = rng.randomInt(1,#battlelevelsrng)
 
 local function introExit()
+	GameData.menucomplete = true
+	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
 	GameData.startedmenu = 0
 	Level.load("SMAS - Intro.lvlx", nil, nil)
-end
-
-local function mapExit()
-	Routine.waitFrames(38)
-	Level.exit()
 end
 
 local function BattleRandomLevelSelect()
@@ -495,6 +492,7 @@ local function theme16()
 end
 
 local function mapExit()
+	GameData.menucomplete = true
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
 	GameData.startedmenu = 0
@@ -1029,14 +1027,12 @@ local function SaveEraseStart()
 end
 
 local function ExitToIntro() --This command will auto load the intro
-	GameData.menucomplete = true
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 
 local function ExitToMap() --This command will exit to the main map
-	GameData.menucomplete = true
-	--Level.exit()
-	Level.load("SMAS - Map.lvlx", nil, nil)
+	Level.exit()
+	--Level.load("SMAS - Map.lvlx", nil, nil)
 end
 
 local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
