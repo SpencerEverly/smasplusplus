@@ -834,17 +834,19 @@ function rooms.onDraw()
         elseif player.sectionObj.musicID > 0 then -- Vanilla music
             newMusic = vanillaMusicPaths["level-music-".. tostring(player.sectionObj.musicID)]
         end
+		
+		if player.deathTimer == 1 then
+			if newMusic ~= currentlyPlayingMusic or (Audio.MusicIsPlaying() == not newMusic) then
+				if newMusic ~= nil then
+					Audio.MusicOpen(newMusic)
+					Audio.MusicPlay()
+				else
+					Audio.MusicResume()
+				end
 
-        if newMusic ~= currentlyPlayingMusic or (Audio.MusicIsPlaying() == not newMusic) then
-            if newMusic ~= nil then
-                Audio.MusicOpen(newMusic)
-				Audio.MusicPlay()
-            else
-				Audio.MusicResume()
-            end
-
-            currentlyPlayingMusic = newMusic
-        end
+				currentlyPlayingMusic = newMusic
+			end
+		end
 
         if Level.winState() == 0 and not player.hasStarman and not player.isMega then
             if hasPausedMusic then

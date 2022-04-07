@@ -615,16 +615,9 @@ local function costumechangeleft()
 end
 
 function pausemenu2.onDraw()
-	if pauseplus.currentSubmenu == nil then
-		if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true or GameData.muteMusic == true then
-			Audio.MusicVolume(0)
-		elseif GameData.muteMusic == false or GameData.muteMusic == nil or GameData.starActive == false or GameData.megashroomActive == false or GameData.cutsceneMusicControl == false or GameData.starActive == nil or GameData.megashroomActive == nil or GameData.cutsceneMusicControl == nil then
-			Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
-		end
-	end
-	if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
+	if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true or GameData.muteMusic == true then
 		Audio.MusicVolume(0)
-	else
+	elseif GameData.muteMusic == false or GameData.muteMusic == nil or GameData.starActive == false or GameData.megashroomActive == false or GameData.cutsceneMusicControl == false or GameData.starActive == nil or GameData.megashroomActive == nil or GameData.cutsceneMusicControl == nil then
 		Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
 	end
 	sfxVolume = pauseplus.getSelectionValue("settings","SFX Volume")
