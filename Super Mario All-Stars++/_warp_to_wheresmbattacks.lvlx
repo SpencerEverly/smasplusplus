@@ -376,7 +376,7 @@ ET:"Moving BGO";AU:1;ML:"LGBTQ+ Like Colors";MX:2.95385;MY:0;AS:0;AX:0;AY:0;
 ET:"WSMBAPreboot";TE:"LoadWSMBA";TD:1;DS:1;AS:0;AX:0;AY:0;
 ET:"LoadWSMBA";AS:0;AX:0;AY:0;
 ET:"WSMBANotFound";LH:["PipeCannon"];LS:["errorpipe1"];TE:"ErrorMessage1";TD:5;DS:1;AS:0;AX:0;AY:0;
-ET:"ErrorMessage1";MG:"Error! Where SMB Attacks is not found. Reinstall Super Mario All-Stars Plus Plus and try again later when you have Where SMB Attacks in the worlds folder.";AS:0;AX:0;AY:0;
+ET:"ErrorMessage1";AS:0;AX:0;AY:0;
 ET:"PipeCannon1";AS:0;AX:0;AY:0;
 ET:"WSMBAogPreboot";TE:"LoadWSMBAog";AS:0;AX:0;AY:0;
 ET:"LoadWSMBAog";AS:0;AX:0;AY:0;
