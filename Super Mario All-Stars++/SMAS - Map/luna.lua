@@ -2,7 +2,7 @@ local smwMap = require("smwMap")
 
 local littleDialogue = require("littleDialogue")
 
-local pausemenu = require("pauseplus")
+local pausemenu = require("pausemenu2")
 
 local datetime = require("datetime")
 

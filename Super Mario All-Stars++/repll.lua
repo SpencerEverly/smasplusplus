@@ -402,12 +402,16 @@ do
 	local split = string.split
 	local find = string.find
 	local function _print(str, x, y)
-		local textLayout = textplus.layout(str, nil, doprint)
-		y = y - textLayout.height
-		textplus.render{x = x, y = y, layout = textLayout, priority = -1}
+		if not isOverworld then
+			local textLayout = textplus.layout(str, nil, doprint)
+			y = y - textLayout.height
+			textplus.render{x = x, y = y, layout = textLayout, priority = -1}
+		elseif isOverworld then
+			local textLayout = textplus.layout(str, nil, doprint)
+			y = y - textLayout.height
+			textplus.render{x = x, y = y, layout = textLayout, priority = 10}
+		end
 	end
-	
-	local bgobj = {color = repll.background, priority = -2}
 	local printlist = {}
 	local listidx = 1
 	local function addprint(v)
@@ -420,8 +424,11 @@ do
 		if not repll.active then
 			return
 		end
-		
-		Graphics.drawScreen(bgobj)
+		if not isOverworld then
+			Graphics.drawScreen({color = repll.background, priority = -2})
+		elseif isOverworld then
+			Graphics.drawScreen({color = repll.background, priority = 9})
+		end
 		local buffer
 		if find(repll.buffer, "\n") then
 			buffer = split(repll.buffer, "\n")

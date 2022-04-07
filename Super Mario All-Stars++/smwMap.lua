@@ -46,11 +46,12 @@ if Level.filename() ~= smwMap.levelFilename then
     function smwMap.onInitAPI()
         registerEvent(smwMap,"onStart")
         registerEvent(smwMap,"onCheckpoint")
-        registerEvent(smwMap,"onExitLevel")
+        registerEvent(smwMap,"onExit")
     end
 
     function smwMap.onStart()
         Audio.MusicVolume(64)
+		
     end
 
     function smwMap.onCheckpoint(c,_)
@@ -58,8 +59,11 @@ if Level.filename() ~= smwMap.levelFilename then
         saveData.unlockedCheckpoints[Level.filename()][c.idx] = true
     end
 
-    function smwMap.onExitLevel(winType)
+    function smwMap.onExit(winType)
         gameData.winType = winType
+		if GameData.menucomplete == true then
+			Level.load("SMAS - Map.lvlx", nil, nil)
+		end
     end
 
     return smwMap
@@ -997,6 +1001,9 @@ end
 
 
 function smwMap.onStart()
+	if GameData.menucomplete == false or GameData.menucomplete == nil then
+		Level.load("SMAS - Start.lvlx")
+	end
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
         p.forcedTimer = 0
@@ -1006,7 +1013,7 @@ function smwMap.onStart()
     smwMap.camera.height = SCREEN_HEIGHT - smwMap.hudSettings.borderTopHeight - smwMap.hudSettings.borderBottomHeight
     smwMap.camera.renderX = smwMap.hudSettings.borderLeftWidth
     smwMap.camera.renderY = smwMap.hudSettings.borderTopHeight
-
+	
     if warpTransition ~= nil then
         if warpTransition.currentTransitionType ~= nil then
             warpTransition.currentTransitionType = nil
@@ -4429,15 +4436,13 @@ smwMap.transitionSettings = {
         progressTime = 28,
         priority = 6,
     },
-
-    enterMapSettings = {
-        drawFunction = smwMap.TRANSITION_FADE,
-        progressTime = 28,
-        priority = 6,
-        
-        waitTime = 0,startTime = 0, -- these are important! you probably shouldn't touch them
-    },
-
+	enterMapSettings = {
+		drawFunction = smwMap.TRANSITION_FADE,
+		progressTime = 0,
+		priority = 6,
+		
+		waitTime = 0,startTime = 0, -- these are important! you probably shouldn't touch them
+	},
     warpToWarpSettings = {
         drawFunction = smwMap.TRANSITION_FADE,
         progressTime = 20,

@@ -1029,11 +1029,14 @@ local function SaveEraseStart()
 end
 
 local function ExitToIntro() --This command will auto load the intro
+	GameData.menucomplete = true
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 
 local function ExitToMap() --This command will exit to the main map
-	Level.exit()
+	GameData.menucomplete = true
+	--Level.exit()
+	Level.load("SMAS - Map.lvlx", nil, nil)
 end
 
 local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
