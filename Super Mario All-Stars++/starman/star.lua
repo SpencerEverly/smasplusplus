@@ -60,11 +60,12 @@ local function startMusic()
 		return
 	else
 	starSoundObject = SFX.play(starman.sfxFile, 1, 0)
-		if GameData.muteMusic == false then
-			GameData.starActive = true
-		end
 		if(musicvolcache == nil) then
 			musicvolcache = Audio.MusicVolume();
+			if GameData.muteMusic == true then
+				Audio.MusicVolume(0)
+			end
+			GameData.muteMusic = true
 			Audio.MusicVolume(0)
 		end
 	end
@@ -81,12 +82,7 @@ local function stopMusic(idx)
 	if(onlyPlayer and starSoundObject ~= nil) then
 		starSoundObject:FadeOut(500)
 		Audio.MusicVolume(musicvolcache);
-		if GameData.muteMusic == true then
-			Audio.MusicVolume(0)
-		end
-		if GameData.starActive == true then
-			GameData.starActive = false
-		end
+		GameData.muteMusic = false
 		musicvolcache = nil;
 	end
 end

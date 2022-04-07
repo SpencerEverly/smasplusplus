@@ -85,7 +85,7 @@ function pausemenu2.onTick()
 		-- Whether or not non-saved star coins will reset after dying (only affects quick respawn).
 		rooms.starCoinsReset = false
 		-- Whether or not to create a pseudo "checkpoint" on entering a different section.
-		rooms.checkpointOnEnterSection = false
+		rooms.checkpointOnEnterSection = true
 		-- Whether or not everything is reset on entering a room.
 		rooms.resetOnEnteringRoom = true
 		smasdeathsystem.activated = false
@@ -616,9 +616,9 @@ end
 
 function pausemenu2.onDraw()
 	if pauseplus.currentSubmenu == nil then
-		if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true then
+		if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true or GameData.muteMusic == true then
 			Audio.MusicVolume(0)
-		else
+		elseif GameData.muteMusic == false or GameData.muteMusic == nil or GameData.starActive == false or GameData.megashroomActive == false or GameData.cutsceneMusicControl == false or GameData.starActive == nil or GameData.megashroomActive == nil or GameData.cutsceneMusicControl == nil then
 			Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
 		end
 	end
