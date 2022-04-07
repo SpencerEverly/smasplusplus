@@ -58,6 +58,7 @@ if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
 	Graphics.sprites.block[648].img = Graphics.loadImageResolved("graphics/seemod/block/block-648.png")
 	Graphics.sprites.block[655].img = Graphics.loadImageResolved("graphics/seemod/block/block-655.png")
 	Graphics.sprites.block[656].img = Graphics.loadImageResolved("graphics/seemod/block/block-656.png")
+	princessRinka = require("characters/princessrinka")
 elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	steve = require("steve")
 	playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
@@ -186,7 +187,9 @@ function onStart()
 		SaveData.dateplayedday = os.date("%d")
 	end
 	if (friendlyplaces[Level.filename()]) == true then
-		GameData.friendlyArea = true
+		if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+			princessRinka.friendlyArea = true
+		end
 	end
 	--if __LUNALUA == "0.7 SEE Mod" then
 		--GameData.fadetolevel = false

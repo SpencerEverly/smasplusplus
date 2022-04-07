@@ -183,6 +183,6 @@ function onExit()
 	Defines.cheat_shadowmario = false
 end
 
-littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitMenu) end})
+littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitToBootMenu) end})
 
 littleDialogue.registerAnswer("StartConnecting",{text = "Let's get started!",chosenFunction = function() Routine.run(NotFinished) end})

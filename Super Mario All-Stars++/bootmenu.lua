@@ -1282,6 +1282,10 @@ function bootmenu.onTick()
 			GameData.musreset = false
 		end
 		Graphics.activateHud(false)
+		if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+			ultimateRinka = require("characters/ultimaterinka")
+			ultimateRinka.hud = false
+		end
 		player:setFrame(50) --Prevent the player from showing up on the boot menu
 		player:mem(0x140, FIELD_BOOL, 150)
 		if player:mem(0x140, FIELD_BOOL) == 0 then
@@ -2057,13 +2061,27 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Klonoa (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
-	littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
+	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
+	elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Ninja Bomberman (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
+	end
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
-	littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
+	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
+	elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Ultimate Rinka (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
+	end
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
+	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 17)",chosenFunction = function() player:transform(17, true) Routine.run(ChangedCharacter) end})
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Juni (Slot 18)",chosenFunction = function() player:transform(18, true) Routine.run(ChangedCharacter) end})
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 19)",chosenFunction = function() player:transform(19, true) Routine.run(ChangedCharacter) end})
+		littleDialogue.registerAnswer("CharacterListX2",{text = "Princess Rinka (Slot 20)",chosenFunction = function() player:transform(20, true) Routine.run(ChangedCharacter) end})
+	end
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 end
 

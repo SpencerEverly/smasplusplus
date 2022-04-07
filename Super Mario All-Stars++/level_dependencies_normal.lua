@@ -19,7 +19,10 @@ local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
 local earlyDeathCheck = 3;
 local cooldown = 0
-GameData.friendlyArea = false
+if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	princessRinka = require("characters/princessrinka")
+	princessRinka.friendlyArea = false
+end
 local timer_deathTimer;
 local deltaTime = Routine.deltaTime
 local deathDelay = lunatime.toTicks(1.2)
