@@ -5,6 +5,16 @@ local textplus = require("textplus")
 local smallScreen = require("smallScreen")
 local pausemenu = require("pausemenu")
 
+if SaveData.resolution == nil then
+	SaveData.resolution = "fullscreen"
+end
+if SaveData.letterbox == nil then
+	SaveData.letterbox = true
+end
+if SaveData.borderEnabled == nil then
+	SaveData.borderEnabled = true
+end
+
 wandR.speed = 7
 travL.showArrows = false
 
@@ -144,24 +154,7 @@ local yoshiAnimationFrames = {
 	
 local bootBounceData = {}
 
-function onTick()
-	if SaveData.resolution == "widescreen" then
-		map3d.CameraSettings.fov = 107.7 - 0.00872665
-		map3d.CameraSettings.distance = 32
-		map3d.CameraSettings.height = 320
-		map3d.CameraSettings.angle = 90
-		map3d.CameraSettings.heightAdjust = false
-	end
-	if SaveData.resolution == "fullscreen" or SaveData.resolution == "ultrawide" or SaveData.resolution == "nes" or SaveData.resolution == "gameboy" or SaveData.resolution == "gba" then
-		map3d.CameraSettings.fov = 92.7
-		map3d.CameraSettings.distance = 32
-		map3d.CameraSettings.height = 320
-		map3d.CameraSettings.angle = 90
-		map3d.CameraSettings.heightAdjust = false
-	end
-end
-
-function onDraw()
+function onDraw()	
 	for idx,p in ipairs(Player.get()) do
 		local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
 
@@ -304,7 +297,40 @@ function onDraw()
 			end
 		end
 	end
+	if SaveData.resolution == "fullscreen" then
+		map3d.CameraSettings.fov = 92.7 - 0.00872665
+		map3d.CameraSettings.distance = 32
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
+		Graphics.drawImageWP(hudborder, 0, 0, 1)
+		Graphics.drawImageWP(oneupicon, 70, 558, 2)
+		Graphics.drawImageWP(times, 105, 560, 2)
+		textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 160, 558, 2)
+		Graphics.drawImageWP(times, 178, 560, 2)
+		textplus.print{x=197, y=558, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 236, 558, 2)
+		Graphics.drawImageWP(times, 254, 560, 2)
+		textplus.print{x=272, y=558, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		textplus.print{x=64, y=70, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
+		if world.levelTitle then
+			textplus.print{x=64, y=111, text = world.levelTitle, priority=2, color=Color.yellow, font=font1} --Level title
+		end
+		if world.levelObj then
+			textplus.print{x=64, y=92, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2} --Filename
+			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
+		end
+		if world.levelObj == nil then
+			textplus.print{x=64, y=92, text = "N/A", priority=2, color=Color.yellow, font=font2}
+		end
+	end
 	if SaveData.resolution == "widescreen" then
+		map3d.CameraSettings.fov = 107.7 - 0.00872665
+		map3d.CameraSettings.distance = 32
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
 		Graphics.drawImageWP(hudborderwide, 0, 0, 1)
 		if SaveData.letterbox == false then
 			smallScreen.scaleY = 1.33
@@ -332,48 +358,24 @@ function onDraw()
 			textplus.print{x=150, y=145, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.8, yscale=0.8}
 		end
 	end
-	if SaveData.resolution == "fullscreen" then
-		Graphics.drawImageWP(hudborder, 0, 0, 1)
-		Graphics.drawImageWP(oneupicon, 70, 558, 2)
-		Graphics.drawImageWP(times, 105, 560, 2)
-		textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 160, 558, 2)
-		Graphics.drawImageWP(times, 178, 560, 2)
-		textplus.print{x=197, y=558, text = tostring(mem(0x00B2C5A8, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(staricon, 236, 558, 2)
-		Graphics.drawImageWP(times, 254, 560, 2)
-		textplus.print{x=272, y=558, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		textplus.print{x=64, y=70, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
-		if world.levelTitle then
-			textplus.print{x=64, y=111, text = world.levelTitle, priority=2, color=Color.yellow, font=font1} --Level title
-		end
-		if world.levelObj then
-			textplus.print{x=64, y=92, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2} --Filename
-			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=5, color=Color.yellow, font=font2}
-		end
-		if world.levelObj == nil then
-			textplus.print{x=64, y=92, text = "N/A", priority=2, color=Color.yellow, font=font2}
-		end
-	end
 	if SaveData.resolution == "ultrawide" then
+		map3d.CameraSettings.fov = 122.7 - 0.00872665
+		map3d.CameraSettings.distance = 32
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
 		Graphics.drawImageWP(hudborderultrawide, 0, 0, 1)
 		Graphics.drawImageWP(ultrawideborder, 0, 0, 6)
 		
-		if SaveData.disableX2char == true then
-			Graphics.drawImageWP(oneupicon, 70, 440, 2)
-			Graphics.drawImageWP(times, 105, 442, 2)
-			textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		end
+		Graphics.drawImageWP(oneupicon, 70, 440, 2)
+		Graphics.drawImageWP(times, 105, 442, 2)
+		textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(coinicon, 160, 440, 2)
 		Graphics.drawImageWP(times, 178, 442, 2)
 		textplus.print{x=197, y=440, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(staricon, 236, 440, 2)
 		Graphics.drawImageWP(times, 254, 442, 2)
 		textplus.print{x=272, y=440, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 326, 436, 3)
-		Graphics.drawImageWP(coinicon, 330, 440, 2)
-		Graphics.drawImageWP(times, 348, 442, 2)
-		textplus.print{x=367, y=440, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		textplus.print{x=212, y=164, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1, yscale=1}
 		if world.levelTitle then
 			textplus.print{x=212, y=189, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.6, yscale=0.6} --Level title
@@ -397,26 +399,25 @@ function onDraw()
 		textplus.print{x=780, y=450, text = os.date("%p"), priority=3, color=Color.white}
 	end
 	if SaveData.resolution == "nes" then
+		map3d.CameraSettings.fov = 107.7 - 0.00872665
+		map3d.CameraSettings.distance = 32
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
 		Graphics.drawImageWP(hudbordernes, 0, 0, 1)
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(nesborder, 0, 0, 6)
 		end
 		
-		if SaveData.disableX2char == true then
-			Graphics.drawImageWP(oneupicon, 155, 500, 2)
-			Graphics.drawImageWP(times, 190, 502, 2)
-			textplus.print{x=209, y=500, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		end
+		Graphics.drawImageWP(oneupicon, 155, 500, 2)
+		Graphics.drawImageWP(times, 190, 502, 2)
+		textplus.print{x=209, y=500, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(coinicon, 245, 500, 2)
 		Graphics.drawImageWP(times, 263, 502, 2)
 		textplus.print{x=282, y=500, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		Graphics.drawImageWP(staricon, 321, 500, 2)
 		Graphics.drawImageWP(times, 339, 502, 2)
 		textplus.print{x=357, y=500, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 411, 496, 3)
-		Graphics.drawImageWP(coinicon, 415, 500, 2)
-		Graphics.drawImageWP(times, 433, 502, 2)
-		textplus.print{x=452, y=500, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
 		
 		
 		textplus.print{x=185, y=140, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
@@ -450,26 +451,25 @@ function onDraw()
 	end
 	
 	if SaveData.resolution == "gameboy" then
+		map3d.CameraSettings.fov = 142.7 - 0.00872665
+		map3d.CameraSettings.distance = 52
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
 		Graphics.drawImageWP(hudbordergb, 0, 0, 1)
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(gbborder, 0, 0, 6)
 		end
 		
-		if SaveData.disableX2char == true then
-			Graphics.drawImageWP(oneupicon, 250, 400, 0, 0, 16, 8, 2)
-			Graphics.drawImageWP(times, 270, 401, 0, 0, 6, 6, 2)
-			textplus.print{x=279, y=403, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
-		end
+		Graphics.drawImageWP(oneupicon, 250, 400, 0, 0, 16, 8, 2)
+		Graphics.drawImageWP(times, 270, 401, 0, 0, 6, 6, 2)
+		textplus.print{x=279, y=403, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
 		Graphics.drawImageWP(coinicon, 292, 400, 0, 0, 7, 7, 2)
 		Graphics.drawImageWP(times, 303, 401, 0, 0, 6, 6, 2)
 		textplus.print{x=313, y=403, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
 		Graphics.drawImageWP(staricon, 323, 400, 0, 0, 7, 7, 2)
 		Graphics.drawImageWP(times, 334, 401, 0, 0, 6, 6, 2)
 		textplus.print{x=344, y=403, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
-		Graphics.drawImageWP(coinicon, 364, 396, 0, 0, 6, 6, 3)
-		Graphics.drawImageWP(coinicon, 368, 400, 0, 0, 6, 6, 2)
-		Graphics.drawImageWP(times, 379, 401, 0, 0, 6, 6, 2)
-		textplus.print{x=389, y=403, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
 		
 		
 		
@@ -504,26 +504,26 @@ function onDraw()
 	end
 	
 	if SaveData.resolution == "gba" then
+		map3d.CameraSettings.fov = 117.7 - 0.00872665
+		map3d.CameraSettings.distance = 46
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
 		Graphics.drawImageWP(hudbordergba, 0, 0, 1)
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(gbaborder, 0, 0, 6)
 		end
 		
-		if SaveData.disableX2char == true then
-			Graphics.drawImageWP(oneupicon, 165, 440, 2)
-			Graphics.drawImageWP(times, 200, 442, 2)
-			textplus.print{x=220, y=445, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
-		end
+		
+		Graphics.drawImageWP(oneupicon, 165, 440, 2)
+		Graphics.drawImageWP(times, 200, 442, 2)
+		textplus.print{x=220, y=445, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
 		Graphics.drawImageWP(coinicon, 245, 440, 2)
 		Graphics.drawImageWP(times, 264, 442, 2)
 		textplus.print{x=284, y=445, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
 		Graphics.drawImageWP(staricon, 310, 440, 2)
 		Graphics.drawImageWP(times, 334, 442, 2)
 		textplus.print{x=354, y=445, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
-		Graphics.drawImageWP(coinicon, 388, 436, 3)
-		Graphics.drawImageWP(coinicon, 392, 440, 2)
-		Graphics.drawImageWP(times, 410, 442, 2)
-		textplus.print{x=430, y=445, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
 		
 		
 		
@@ -559,36 +559,36 @@ function onDraw()
 		textplus.print{x=624, y=447, text = os.date("%p"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
 	end
 	if SaveData.resolution == "iphone1st" then
+		map3d.CameraSettings.fov = 137.7 - 0.00872665
+		map3d.CameraSettings.distance = 46
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
 		Graphics.drawImageWP(hudborderiphoneone, 0, 0, 1)
 		if SaveData.borderEnabled == true then
 			Graphics.drawImageWP(iphoneoneborder, 0, 0, 6)
 		end
 		
-		if SaveData.disableX2char == true then
-			Graphics.drawImageWP(oneupicon, 70, 440, 2)
-			Graphics.drawImageWP(times, 105, 442, 2)
-			textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		end
-		Graphics.drawImageWP(coinicon, 160, 440, 2)
-		Graphics.drawImageWP(times, 178, 442, 2)
-		textplus.print{x=197, y=440, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(staricon, 236, 440, 2)
-		Graphics.drawImageWP(times, 254, 442, 2)
-		textplus.print{x=272, y=440, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		Graphics.drawImageWP(coinicon, 326, 436, 3)
-		Graphics.drawImageWP(coinicon, 330, 440, 2)
-		Graphics.drawImageWP(times, 348, 442, 2)
-		textplus.print{x=367, y=440, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
-		textplus.print{x=212, y=164, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(oneupicon, 360, 430, 2)
+		Graphics.drawImageWP(times, 395, 432, 2)
+		textplus.print{x=414, y=430, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(coinicon, 280, 460, 2)
+		Graphics.drawImageWP(times, 298, 462, 2)
+		textplus.print{x=317, y=460, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		Graphics.drawImageWP(staricon, 346, 460, 2)
+		Graphics.drawImageWP(times, 364, 462, 2)
+		textplus.print{x=382, y=460, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+		
+		textplus.print{x=295, y=222, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1, yscale=1}
 		if world.levelTitle then
 			textplus.print{x=295, y=245, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.35, yscale=0.35} --Level title
 		end
 		if world.levelObj then
-			textplus.print{x=212, y=178, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6} --Filename
+			textplus.print{x=295, y=235, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6} --Filename
 			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
 		end
 		if world.levelObj == nil then
-			textplus.print{x=212, y=178, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6}
+			textplus.print{x=295, y=235, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.6, yscale=0.6}
 		end
 		Graphics.drawBox{x=10, y=552, width=100, height=20, color=Color.black..0.2, priority=3} --What's the day, sir?!
 		textplus.print{x=15, y=557, text = "Date - ", priority=3, color=Color.white}
@@ -605,59 +605,58 @@ function onDraw()
 	end
 	
 	if SaveData.resolution == "3ds" then
-		Graphics.drawImageWP(hudbordergba, 0, 0, 1)
+		map3d.CameraSettings.fov = 123.7 - 0.00872665
+		map3d.CameraSettings.distance = -69
+		map3d.CameraSettings.height = 320
+		map3d.CameraSettings.angle = 90
+		map3d.CameraSettings.heightAdjust = false
+		Graphics.drawImageWP(hudborderthreeds, 0, 0, 1)
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(gbaborder, 0, 0, 6)
+			Graphics.drawImageWP(threedsborder, 0, 0, 6)
 		end
 		
-		if SaveData.disableX2char == true then
-			Graphics.drawImageWP(oneupicon, 165, 440, 2)
-			Graphics.drawImageWP(times, 200, 442, 2)
-			textplus.print{x=220, y=445, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
-		end
-		Graphics.drawImageWP(coinicon, 245, 440, 2)
-		Graphics.drawImageWP(times, 264, 442, 2)
-		textplus.print{x=284, y=445, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
-		Graphics.drawImageWP(staricon, 310, 440, 2)
-		Graphics.drawImageWP(times, 334, 442, 2)
-		textplus.print{x=354, y=445, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
-		Graphics.drawImageWP(coinicon, 388, 436, 3)
-		Graphics.drawImageWP(coinicon, 392, 440, 2)
-		Graphics.drawImageWP(times, 410, 442, 2)
-		textplus.print{x=430, y=445, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(oneupicon, 165, 510, 2)
+		Graphics.drawImageWP(times, 200, 512, 2)
+		textplus.print{x=220, y=515, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(coinicon, 245, 510, 2)
+		Graphics.drawImageWP(times, 264, 512, 2)
+		textplus.print{x=284, y=515, text = tostring(mem(0x00B2C5A8,FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+		Graphics.drawImageWP(staricon, 310, 510, 2)
+		Graphics.drawImageWP(times, 334, 512, 2)
+		textplus.print{x=354, y=515, text = tostring(mem(0x00B251E0, FIELD_WORD)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
 		
 		
 		
-		textplus.print{x=224, y=175, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
+		textplus.print{x=208, y=235, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
 		
 		
 		
 		if world.levelObj then
-			textplus.print{x=224, y=187, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.65, yscale=0.65} --Filename
+			textplus.print{x=208, y=247, text = world.levelObj.filename, priority=2, color=Color.yellow, font=font2, xscale=0.65, yscale=0.65} --Filename
 			--textplus.print{x=260, y=75, text = "(Starting at warp "..world.levelObj.levelWarpNumber..")", priority=2, color=Color.yellow, font=font2}
 		end
 		if world.levelObj == nil then
-			textplus.print{x=224, y=187, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
+			textplus.print{x=208, y=247, text = "N/A", priority=2, color=Color.yellow, font=font2, xscale=0.7, yscale=0.7}
 		end
 		
 		
 		
 		if world.levelTitle then
-			textplus.print{x=224, y=200, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.5, yscale=0.5} --Level title
+			textplus.print{x=208, y=260, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.5, yscale=0.5} --Level title
 		end
 		
 		
 		
-		Graphics.drawBox{x=555, y=425, width=80, height=15, color=Color.black..0.2, priority=3} --What's the day, sir?!
-		textplus.print{x=560, y=429, text = "Date - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
-		textplus.print{x=585, y=429, text = os.date("%a"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
-		textplus.print{x=600, y=429, text = os.date("%x"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
-		Graphics.drawBox{x=570, y=442, width=65, height=15, color=Color.black..0.2, priority=3} --What time is it...!?
-		textplus.print{x=575, y=447, text = "Time - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
-		textplus.print{x=600, y=447, text = os.date("%I"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
-		textplus.print{x=606, y=447, text = ":", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
-		textplus.print{x=613, y=447, text = os.date("%M"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
-		textplus.print{x=624, y=447, text = os.date("%p"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		Graphics.drawBox{x=595, y=505, width=80, height=15, color=Color.black..0.2, priority=3} --What's the day, sir?!
+		textplus.print{x=600, y=509, text = "Date - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=625, y=509, text = os.date("%a"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=640, y=509, text = os.date("%x"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		Graphics.drawBox{x=610, y=522, width=65, height=15, color=Color.black..0.2, priority=3} --What time is it...!?
+		textplus.print{x=615, y=527, text = "Time - ", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=640, y=527, text = os.date("%I"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=646, y=527, text = ":", priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=653, y=527, text = os.date("%M"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
+		textplus.print{x=664, y=527, text = os.date("%p"), priority=3, color=Color.white, xscale=0.8, yscale=0.8}
 	end
 	
 	if loadlevelanimation then

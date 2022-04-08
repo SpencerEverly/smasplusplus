@@ -10,6 +10,8 @@
 
 local extrasounds = {}
 
+if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then return end
+
 local spinballcounter = 1
 local combo = 0
 local time = 0
@@ -188,6 +190,22 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 				end
 			end
 		end
+		if not isOverworld then
+			for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+				if scoreboard.animationFrame == 9 then --1UP
+					SFX.play(extrasounds.id15, 1, 1, 70)
+				end
+				if scoreboard.animationFrame == 10 then --2UP
+					SFX.play(extrasounds.id96, 1, 1, 70)
+				end
+				if scoreboard.animationFrame == 11 then --3UP
+					SFX.play(extrasounds.id97, 1, 1, 70)
+				end
+				if scoreboard.animationFrame == 12 then --5UP
+					SFX.play(extrasounds.id98, 1, 1, 70)
+				end
+			end
+		end
 	end
 	if extrasounds.active == false then --Unmute when not active
 		Audio.sounds[4].muted = false
@@ -197,23 +215,6 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[18].muted = false
 		Audio.sounds[43].muted = false
 		Audio.sounds[59].muted = false
-	end
-end
-
-function extrasounds.onTickEnd()
-	for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-		if scoreboard.animationFrame == 9 then --1UP
-			SFX.play(extrasounds.id15, 1, 1, 70)
-		end
-		if scoreboard.animationFrame == 10 then --2UP
-			SFX.play(extrasounds.id96, 1, 1, 70)
-		end
-		if scoreboard.animationFrame == 11 then --3UP
-			SFX.play(extrasounds.id97, 1, 1, 70)
-		end
-		if scoreboard.animationFrame == 12 then --5UP
-			SFX.play(extrasounds.id98, 1, 1, 70)
-		end
 	end
 end
 
@@ -263,11 +264,13 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 end
 
 function extrasounds.onPostExplosion(effect)
-	if effect.id == 69 then
-		SFX.play(extrasounds.id104)
-	end
-	if effect.id == 71 then
-		SFX.play(extrasounds.id43)
+	if extrasounds.active == true then
+		if effect.id == 69 then
+			SFX.play(extrasounds.id104)
+		end
+		if effect.id == 71 then
+			SFX.play(extrasounds.id43)
+		end
 	end
 end
 
@@ -286,7 +289,7 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 						SFX.play(extrasounds.id93)
 					end
 				end
-				if player.rawKeys.altRun == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than or equal to 0 before playing
+				if player.rawKeys.altRun == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false and not player:getCostume() == ("SEE-TANGENT") then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than or equal to 0 before playing
 					if player.powerup == 3 then --Fireball sound
 						SFX.play(extrasounds.id18)
 					end
@@ -296,6 +299,9 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 					if player.powerup == 7 then --Iceball sound
 						SFX.play(extrasounds.id93)
 					end
+				end
+				if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
+					SFX.play(extrasounds.id14)
 				end
 			end
 		end
@@ -330,9 +336,6 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 						SFX.play(extrasounds.id102)
 					end
 				end
-			end
-			if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
-				SFX.play(extrasounds.id14)
 			end
 		end
 	end
