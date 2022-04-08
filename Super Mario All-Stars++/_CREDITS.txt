@@ -298,7 +298,7 @@ Remake released on February 19th, 2020 (v1.0)
 
 LunaLua code made by:
 - Spencer Everly
-- MrDoubeA
+- MrDoubleA
 - KBM-Quine
 - Enjl
 
