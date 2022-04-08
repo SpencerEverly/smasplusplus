@@ -83,11 +83,11 @@ function costume.throwSnowball()
 			snowballNpc.speedY = 1
 		else
 			snowballNpc.speedX = -8.5
-			snowballNpc.speedY = -1
+			snowballNpc.speedY = 1
 		end
 		SFX.play("costumes/mario/SP-1-EricCartman/snowball_throw.ogg")
 		costume.usesnowball = false
-		cooldown = 25
+		cooldown = 35
 		if cooldown <= 0 then
 			plr:mem(0x120, FIELD_BOOL, true)
 			plr:mem(0x172, FIELD_BOOL, true)
