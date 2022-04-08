@@ -496,7 +496,7 @@ local function mapExit()
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
 	GameData.startedmenu = 0
-	Level.exit()
+	Level.load("map.lvlx", nil, nil)
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
@@ -1031,7 +1031,6 @@ local function ExitToIntro() --This command will auto load the intro
 end
 
 local function ExitToMap() --This command will exit to the main map
-	--Level.exit()
 	Level.load("map.lvlx", nil, nil)
 end
 
