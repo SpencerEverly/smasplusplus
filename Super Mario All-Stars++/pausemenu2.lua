@@ -1064,7 +1064,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Graphics.activateHud(false) Cheats.trigger("1player") player:transform(1, false) Misc.unpause() Level.load(Level.filename()) end}})
 	end
 	if not isOverworld then
-		pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("SMAS - Map.lvlx", nil, nil) end}})
+		pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("map.lvlx", nil, nil) end}})
 	end
 	if not isOverworld then
 		pauseplus.createOption("settings",{text = "Teleport to the Hub",description = "Teleport to the Me and Larry City Hub. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("MALC - HUB.lvlx", nil, nil) end}})

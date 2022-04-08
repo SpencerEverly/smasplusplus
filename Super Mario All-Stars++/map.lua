@@ -191,7 +191,7 @@ function onStart()
 		Misc.showRichDialog("EXE Extraction installination detected!", "Hello!\n\nAre you are trying to play the game on a public computer from a EXE Extraction install?\n\nIf so, things may be unstable with the episode running everything this\nway. Please use the official installination on your own\ncomputer to make the game work as intended.\n\nThank you!", true)
 	end
 	Audio.MusicVolume(nil)
-	mem(0xB25728, FIELD_BOOL, false) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
+	--mem(0xB25728, FIELD_BOOL, true) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
 	if SaveData.disableX2char == false then
 		inventory = require("customInventory")
 	end

@@ -19,7 +19,7 @@ local smwMap = {}
 
 
 -- Name of the level file that the map is on.
-smwMap.levelFilename = "map.lvlx"
+smwMap.levelFilename = "SMAS - Map.lvlx"
 
 
 
@@ -46,11 +46,12 @@ if Level.filename() ~= smwMap.levelFilename then
     function smwMap.onInitAPI()
         registerEvent(smwMap,"onStart")
         registerEvent(smwMap,"onCheckpoint")
-        registerEvent(smwMap,"onExitLevel")
+        registerEvent(smwMap,"onExit")
     end
 
     function smwMap.onStart()
         Audio.MusicVolume(64)
+		
     end
 
     function smwMap.onCheckpoint(c,_)
@@ -58,7 +59,7 @@ if Level.filename() ~= smwMap.levelFilename then
         saveData.unlockedCheckpoints[Level.filename()][c.idx] = true
     end
 
-    function smwMap.onExitLevel(winType)
+    function smwMap.onExit(winType)
         gameData.winType = winType
     end
 
@@ -409,7 +410,7 @@ do
         smwMap.transitionWaitTime = args.waitTime or 8
         smwMap.transitionEndTime = args.endTime or args.progressTime or 28
 
-        smwMap.transitionPriority = args.priority or 3
+        smwMap.transitionPriority = args.priority or 6
 
         smwMap.transitionPauses = args.pauses
         if smwMap.transitionPauses == nil then
@@ -455,6 +456,9 @@ do
 
 
     function smwMap.onDrawTransition()
+		if lunatime.tick() <= 3 then
+			Graphics.drawScreen{color = Color.black..1,priority = 6}
+		end
         if smwMap.transitionDrawFunction ~= nil then
             if smwMap.transitionPauses then
                 updateTransition()
@@ -973,6 +977,7 @@ end
 
 
 function smwMap.onInitAPI()
+	registerEvent(smwMap,"onLoad")
     registerEvent(smwMap,"onStart")
 
     registerEvent(smwMap,"onCameraUpdate")
@@ -996,8 +1001,10 @@ function smwMap.onInitAPI()
 	registerEvent(smwMap,"onExit")
 end
 
-
 function smwMap.onStart()
+	if not GameData.menucomplete then
+		Level.load("SMAS - Start.lvlx")
+	end
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
         p.forcedTimer = 0
@@ -1007,7 +1014,7 @@ function smwMap.onStart()
     smwMap.camera.height = SCREEN_HEIGHT - smwMap.hudSettings.borderTopHeight - smwMap.hudSettings.borderBottomHeight
     smwMap.camera.renderX = smwMap.hudSettings.borderLeftWidth
     smwMap.camera.renderY = smwMap.hudSettings.borderTopHeight
-
+	
     if warpTransition ~= nil then
         if warpTransition.currentTransitionType ~= nil then
             warpTransition.currentTransitionType = nil
@@ -1037,9 +1044,16 @@ end
 
 
 function smwMap.onTickEnd()
-    if lunatime.tick() == 1 then
-        smwMap.startTransition(nil,nil,smwMap.transitionSettings.enterMapSettings)
+	if GameData.menucomplete then
+		if lunatime.tick() == 3 then
+			smwMap.startTransition(nil,nil,smwMap.transitionSettings.enterMapSettings)
+		end
     end
+end
+
+function smwMap.onExit()
+	Audio.SeizeStream(-1)
+    Audio.MusicStop()
 end
 
 
@@ -1218,7 +1232,7 @@ do
         smwMap.startSelectLayouts = {}
 
         for _,option in ipairs(smwMap.startPointSelectOptions) do
-            local layout = textplus.layout(option[1],nil,{font = -1,xscale = settings.textScale,yscale = settings.textScale})
+            local layout = textplus.layout(option[1],nil,{font = settings.textFont,xscale = settings.textScale,yscale = settings.textScale})
 
             table.insert(smwMap.startSelectLayouts,layout)
         end
@@ -1286,7 +1300,7 @@ do
             end
 
             textplus.render{
-                layout = layout,target = smwMap.mainBuffer,priority = -1,color = textColor * progress,
+                layout = layout,target = smwMap.mainBuffer,priority = settings.priority,color = textColor * progress,
                 x = x + fullWidth*0.5 - layout.width*0.5 - smwMap.camera.x,y = textY,
             }
 
@@ -3679,6 +3693,13 @@ do
 
 
     smwMap.hudCounters = {
+        -- Lives
+        {
+            icon = Graphics.loadImageResolved("smwMap/hud_lives.png"),
+            getValue = (function()
+                return mem(0x00B2C5AC,FIELD_FLOAT)
+            end),
+        },
         -- Coins
         {
             icon = Graphics.sprites.hardcoded["33-2"],
@@ -3909,7 +3930,7 @@ do
                     local x = startX + ((i - 1) % hudSettings.starcoinsMaxPerLine)*width
                     local y = startY + math.floor((i - 1) / hudSettings.starcoinsMaxPerLine)*height
 
-                    Graphics.drawImageWP(image,x,y,priority)
+                    Graphics.drawImageWP(image,x,y,3)
                 end
             end
         end
@@ -4255,10 +4276,6 @@ do
     })
 end
 
-function smwMap.onExit()
-	Audio.SeizeStream(-1)
-    Audio.MusicStop()
-end
 
 
 
@@ -4309,7 +4326,7 @@ smwMap.playerSettings = {
 smwMap.pathSettings = {
     lockedColor = Color.fromHexRGBA(0x0000004E),
 
-    unlockAnimationFrequency = 12,
+    unlockAnimationFrequency = 8,
     unlockAnimationDistance = 32,
 
     unlockLoopSound = SFX.open(Misc.resolveSoundFile("smwMap/unlock_loop")),
@@ -4326,7 +4343,7 @@ smwMap.pathSettings = {
 smwMap.encounterSettings = {
     idleWanderDistance = 12,
 
-    walkSpeed = 4,
+    walkSpeed = 7,
 
     maxMovements = 6,
     keepWalkingChance = 3,
@@ -4349,8 +4366,8 @@ smwMap.hudSettings = {
 
 
 
-    playerOffsetX = 40,
-    playerOffsetY = -16,
+    playerOffsetX = 500,
+    playerOffsetY = -50,
 
     playerGap = 64,
 
@@ -4359,8 +4376,8 @@ smwMap.hudSettings = {
     
     counterFont = textplus.loadFont("smwMap/counterFont.ini"),
     counterColor = Color.white,
-    counterOffsetX = 64,
-    counterOffsetY = -16,
+    counterOffsetX = -502,
+    counterOffsetY = 450,
     counterText = "x %s",
     counterScale = 2,
     counterGap = 4,
@@ -4368,9 +4385,9 @@ smwMap.hudSettings = {
     countersEnabled = true,
 
 
-    levelTitleFont = textplus.loadFont("littleDialogue/font/10.ini"),
+    levelTitleFont = textplus.loadFont("smwMap/10.ini"),
     levelTitleColor = Color.yellow,
-    levelTitleOffsetX = 50,
+    levelTitleOffsetX = -78,
     levelTitleOffsetY = -4,
     levelTitleScale = 1,
 
@@ -4387,7 +4404,7 @@ smwMap.hudSettings = {
     starcoinsEnabled = true,
 
 
-    priority = 5,
+    priority = -2,
 }
 
 
@@ -4427,15 +4444,13 @@ smwMap.transitionSettings = {
         progressTime = 28,
         priority = 6,
     },
-
-    enterMapSettings = {
-        drawFunction = smwMap.TRANSITION_FADE,
-        progressTime = 28,
-        priority = 6,
-        
-        waitTime = 0,startTime = 0, -- these are important! you probably shouldn't touch them
-    },
-
+	enterMapSettings = {
+		drawFunction = smwMap.TRANSITION_FADE,
+		progressTime = 28,
+		priority = 6,
+		
+		waitTime = 0,startTime = 0, -- these are important! you probably shouldn't touch them
+	},
     warpToWarpSettings = {
         drawFunction = smwMap.TRANSITION_FADE,
         progressTime = 20,
@@ -4443,7 +4458,7 @@ smwMap.transitionSettings = {
         priority = -4,
     },
     warpToPathSettings = {
-        drawFunction = smwMap.TRANSITION_FADE,
+        drawFunction = smwMap.TRANSITION_WINDOW,
         progressTime = 20,
         waitTime = 8,
         priority = -6,

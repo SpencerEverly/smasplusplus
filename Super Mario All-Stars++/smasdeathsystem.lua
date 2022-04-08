@@ -58,7 +58,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 						if smasdeathsystem.extramapexit == false then
 							Level.load(Level.filename())
 						elseif smasdeathsystem.extramapexit == true then
-							Level.load("SMAS - Map.lvlx", nil, nil)
+							Level.load("map.lvlx", nil, nil)
 						end
 					end
 				end
@@ -79,7 +79,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 							if smasdeathsystem.extramapexit == false then
 								Level.load(Level.filename())
 							elseif smasdeathsystem.extramapexit == true then
-								Level.load("SMAS - Map.lvlx", nil, nil)
+								Level.load("map.lvlx", nil, nil)
 							end
 						end
 					end
@@ -103,7 +103,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 							if smasdeathsystem.extramapexit == false then
 								Level.load(Level.filename())
 							elseif smasdeathsystem.extramapexit == true then
-								Level.load("SMAS - Map.lvlx", nil, nil)
+								Level.load("map.lvlx", nil, nil)
 							end
 						end
 					end
@@ -123,7 +123,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 							if smasdeathsystem.extramapexit == false then
 								Level.load(Level.filename())
 							elseif smasdeathsystem.extramapexit == true then
-								Level.load("SMAS - Map.lvlx", nil, nil)
+								Level.load("map.lvlx", nil, nil)
 							end
 						end
 					end
@@ -200,7 +200,7 @@ function smasdeathsystem.onExit()
 	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == false then
 		Level.exit()
 	elseif smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == true then
-		Level.load("SMAS - Map.lvlx", nil, nil)
+		Level.load("map.lvlx", nil, nil)
 	end
 end
 

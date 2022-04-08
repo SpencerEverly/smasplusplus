@@ -972,7 +972,7 @@ local function dlcmapload()
 	pausemenu.paused = false
 	pausemenu.paused_other = false
 	Misc.unpause()
-	Level.load("SMAS - Map.lvlx", nil, nil)
+	Level.load("map.lvlx", nil, nil)
 end
 
 local function cycle(dir)

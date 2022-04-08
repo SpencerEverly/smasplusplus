@@ -1,3 +1,4 @@
+local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
@@ -47,7 +48,6 @@ local function loadSaveSlot(slot)
 end
 
 Misc.saveGame()
-
 local globalgenerals = require("globalgenerals")
 local repll = require("repll")
 local rng = require("base/rng")
