@@ -4,14 +4,20 @@ local rng = require("base/rng")
 
 local costume = {}
 
+local cooldown = 0
+local snowballymove = 0
 local killed = false
+
+local snowballImg = Graphics.loadImageResolved("costumes/mario/SP-1-EricCartman/snowball.png")
 
 function costume.onInit(p)
 	plr = p
-	registerEvent(costume,"onStart")
+	registerEvent(costume,"onDraw")
+	registerEvent(costume,"onTick")
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onPlayerHarm")
 	registerEvent(costume,"onPostNPCKill")
+	registerEvent(costume,"onInputUpdate")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/player-shrink.ogg")
 	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/key.ogg")
 	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/SP-1-EricCartman/yoshi-hurt.ogg")
@@ -20,32 +26,99 @@ function costume.onInit(p)
 	Defines.player_runspeed = 5
 	Defines.jumpheight = 17
 	Defines.jumpheight_bounce = 22
+	
+	Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/mario/SP-1-EricCartman/snowball.png")
+	
+	costume.abilitesenabled = true
+	costume.usesnowball = false
 end
 
-function costume.onStart()
-	if (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false or (Level.filename() == "SMAS - Game Over.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false then
-		SFX.play("costumes/mario/SP-1-EricCartman/voices/0005.ogg")
+local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
+    local oldKilled     = npc:mem(0x122,FIELD_WORD)
+    local oldProjectile = npc:mem(0x136,FIELD_BOOL)
+    local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
+    local oldImmune     = npc:mem(0x156,FIELD_WORD)
+    local oldID         = npc.id
+    local oldSpeedX     = npc.speedX
+    local oldSpeedY     = npc.speedY
+
+    npc:harm(...)
+
+    return (
+           oldKilled     ~= npc:mem(0x122,FIELD_WORD)
+        or oldProjectile ~= npc:mem(0x136,FIELD_BOOL)
+        or oldHitCount   ~= npc:mem(0x148,FIELD_FLOAT)
+        or oldImmune     ~= npc:mem(0x156,FIELD_WORD)
+        or oldID         ~= npc.id
+        or oldSpeedX     ~= npc.speedX
+        or oldSpeedY     ~= npc.speedY
+    )
+end
+
+function costume.onInputUpdate()
+	if not Misc.isPaused() then
+		if costume.abilitesenabled then
+			if player.keys.altRun == KEYS_PRESSED then
+				costume.throwSnowball()
+			end
+		end
+	end
+end
+
+function costume.throwSnowball()
+	if (plr.powerup == 5) == false then
+		plr:mem(0x120, FIELD_BOOL, false) --Making sure Alt Jump isn't pressed until after the attack
+		plr:mem(0x172, FIELD_BOOL, false) --No run either, in case
+		local x = plr.x
+		local y = plr.y + plr.height/2 - 5
+		if (plr.direction == 1) then
+			x = x + plr.width
+		end
+		local snowballid = 266
+		local snowballNpc = NPC.spawn(snowballid, x, y, player.section, false, true)
+		costume.usesnowball = true
+		snowballNpc.frames = 1
+		if (plr.direction == 1) then
+			snowballNpc.speedX = 8.5
+			snowballNpc.speedY = 1
+		else
+			snowballNpc.speedX = -8.5
+			snowballNpc.speedY = -1
+		end
+		SFX.play("costumes/mario/SP-1-EricCartman/snowball_throw.ogg")
+		costume.usesnowball = false
+		cooldown = 25
+		if cooldown <= 0 then
+			plr:mem(0x120, FIELD_BOOL, true)
+			plr:mem(0x172, FIELD_BOOL, true)
+		end
 	end
 end
 
 function costume.onPostNPCKill(npc, harmType)
 	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
 	local itemgetrng = rng.randomInt(1,7)
-	if items[npc.id] and Colliders.collide(plr, npc) then
-		SFX.play("costumes/mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
-    end
+	if costume.abilitesenabled then
+		if items[npc.id] and Colliders.collide(plr, npc) then
+			SFX.play("costumes/mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
+		end
+	end
 end
 
 function costume.onPlayerHarm()
-	if not plr.hasStarman or plr.isMega then
-		local hurtvoicerng = rng.randomInt(1,10)
-		SFX.play("costumes/mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
+	if costume.abilitesenabled then
+		if not plr.hasStarman or plr.isMega then
+			local hurtvoicerng = rng.randomInt(1,10)
+			SFX.play("costumes/mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
+		end
 	end
 end
 
 function costume.onPlayerKill()
 	local dyingvoicerng = rng.randomInt(1,10)
-	SFX.play("costumes/mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
+	if costume.abilitesenabled then
+		SFX.play("costumes/mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
+	end
 end
 
 function costume.onCleanup(p)
@@ -133,6 +206,10 @@ function costume.onCleanup(p)
 	Defines.player_runspeed = 6
 	Defines.jumpheight_bounce = 32
 	Defines.player_grav = 0.4
+	
+	Graphics.sprites.npc[266].img = nil
+	
+	costume.abilitesenabled = false
 end
 
 return costume
