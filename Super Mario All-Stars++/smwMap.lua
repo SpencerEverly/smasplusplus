@@ -1874,7 +1874,8 @@ do
     -- Has selected a level
     stateFunctions[PLAYER_STATE.SELECTED] = (function(v)
         v.timer = v.timer + 1
-
+		Audio.SeizeStream(-1)
+		Audio.MusicStop()
         smwMap.startPointOpenProgress = math.max(0,smwMap.startPointOpenProgress - v.timer*0.005)
 
         if v.timer == 48 and v.isMainPlayer then
