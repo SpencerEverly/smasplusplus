@@ -3,6 +3,7 @@ TL:"Super Mario All-Stars++\: World Map";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-191424;T:-200600;B:-195168;MZ:0;MF:"";BG:0;
+SC:18;L:160000;R:160800;T:159400;B:160000;MZ:0;MF:"";BG:0;
 SECTION_END
 BLOCK
 ID:815;X:-198832;Y:-200096;W:64;H:16;
@@ -319,6 +320,47 @@ ID:843;X:-193344;Y:-197936;W:32;H:32;
 ID:844;X:-193376;Y:-197936;W:32;H:32;
 ID:843;X:-193408;Y:-197936;W:32;H:32;
 ID:843;X:-193376;Y:-197968;W:32;H:32;
+ID:829;X:-197056;Y:-199296;W:32;H:32;
+ID:828;X:-197344;Y:-198944;W:32;H:32;
+ID:828;X:-197312;Y:-198944;W:32;H:32;
+ID:828;X:-197280;Y:-198944;W:32;H:32;
+ID:828;X:-197344;Y:-198880;W:32;H:32;
+ID:828;X:-197280;Y:-198880;W:32;H:32;
+ID:829;X:-197312;Y:-198880;W:32;H:32;
+ID:843;X:-196480;Y:-199296;W:32;H:32;LR:"Sceneries";
+ID:843;X:-196448;Y:-199296;W:32;H:32;LR:"Sceneries";
+ID:843;X:-196416;Y:-199296;W:32;H:32;LR:"Sceneries";
+ID:843;X:-196384;Y:-199296;W:32;H:32;LR:"Sceneries";
+ID:843;X:-196352;Y:-199296;W:32;H:32;LR:"Sceneries";
+ID:843;X:-196320;Y:-199296;W:32;H:32;LR:"Sceneries";
+ID:843;X:-196320;Y:-199168;W:32;H:32;
+ID:843;X:-196352;Y:-199168;W:32;H:32;
+ID:843;X:-196384;Y:-199168;W:32;H:32;
+ID:843;X:-196448;Y:-199168;W:32;H:32;
+ID:843;X:-196480;Y:-199168;W:32;H:32;
+ID:843;X:-196512;Y:-199168;W:32;H:32;
+ID:843;X:-196320;Y:-198976;W:32;H:32;
+ID:843;X:-196352;Y:-198976;W:32;H:32;
+ID:843;X:-196384;Y:-198976;W:32;H:32;
+ID:843;X:-196384;Y:-198944;W:32;H:32;
+ID:843;X:-196352;Y:-198944;W:32;H:32;
+ID:843;X:-196320;Y:-198944;W:32;H:32;
+ID:843;X:-196448;Y:-198976;W:32;H:32;
+ID:843;X:-196480;Y:-198976;W:32;H:32;
+ID:843;X:-196512;Y:-198976;W:32;H:32;
+ID:843;X:-196512;Y:-198944;W:32;H:32;
+ID:843;X:-196480;Y:-198944;W:32;H:32;
+ID:843;X:-196448;Y:-198944;W:32;H:32;
+ID:843;X:-196320;Y:-198880;W:32;H:32;
+ID:843;X:-196352;Y:-198880;W:32;H:32;
+ID:843;X:-196384;Y:-198880;W:32;H:32;
+ID:843;X:-196416;Y:-198880;W:32;H:32;
+ID:843;X:-196448;Y:-198880;W:32;H:32;
+ID:843;X:-196480;Y:-198880;W:32;H:32;
+ID:843;X:-196512;Y:-198880;W:32;H:32;
+ID:843;X:-196512;Y:-198912;W:32;H:32;
+ID:843;X:-196480;Y:-198912;W:32;H:32;
+ID:843;X:-196448;Y:-198912;W:32;H:32;
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -344,6 +386,8 @@ ID:755;X:-197472;Y:-199328;
 ID:752;X:-197440;Y:-199264;
 ID:752;X:-197088;Y:-199264;
 ID:752;X:-196992;Y:-199264;
+ID:756;X:-196576;Y:-199360;
+ID:752;X:-196480;Y:-199328;
 BGO_END
 NPC
 ID:753;X:-199360;Y:-200224;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -397,7 +441,7 @@ ID:846;X:-193088;Y:-197760;D:-1;XTRA:"{\n    \"path_left\"\: \"toGameSelect7\"\,
 ID:752;X:-193088;Y:-197792;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
 ID:752;X:-193344;Y:-197760;D:-1;XTRA:"{\n    \"name\"\: \"toGameSelect7\"\,\n    \"points\"\: \"-32\, 0\, 258\, 0\"\n}\n";
 ID:848;X:-193088;Y:-197856;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"WarpToWSMBA\"\,\n    \"levelFilename\"\: \"_warp_to_wheresmbattacks.lvlx\"\,\n    \"levelTitle\"\: \"Where SMB Attacks\"\,\n    \"path_down\"\: \"toWSMBA\"\,\n    \"unlock_down\"\: 1\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 1\,\n    \"warpName\"\: \"WSMBABeginWarp\"\n}\n";
-ID:753;X:-197600;Y:-199392;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/World 1.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:753;X:-197600;Y:-199392;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/World 1.ogg\"\,\n    \"height\"\: 320\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
 ID:821;X:-197440;Y:-199264;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMB1BeginWarp\"\,\n    \"levelTitle\"\: \"Game Selection\"\,\n    \"path_right\"\: \"toSMB11-1\"\,\n    \"warpName\"\: \"WarpToGameSelectSMB1\"\n}\n";
 ID:752;X:-197408;Y:-199264;D:-1;XTRA:"{\n    \"name\"\: \"toSMB11-1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
 ID:802;X:-197376;Y:-199264;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-1\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"1-1\: The Very Beginning\"\,\n    \"path_left\"\: \"toSMB11-1\"\,\n    \"path_right\"\: \"toSMB11-2\"\,\n    \"unlock_right\"\: 9\n}\n";
@@ -409,12 +453,24 @@ ID:752;X:-197184;Y:-199264;D:-1;XTRA:"{\n    \"name\"\: \"toSMB11-4\"\,\n    \"p
 ID:849;X:-197088;Y:-199264;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-1\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"1-4\: Castle #1\"\,\n    \"path_left\"\: \"toSMB11-4\"\,\n    \"path_right\"\: \"toSMB1W-2\"\,\n    \"unlock_down\"\: 6\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-197056;Y:-199264;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-2\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:821;X:-196992;Y:-199264;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMB1World2BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 2\"\,\n    \"path_left\"\: \"toSMB1W-2\"\,\n    \"warpName\"\: \"WarpToWorld2SMB1\"\n}\n";
+ID:753;X:-197600;Y:-199072;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/Super Players.spc\"\,\n    \"height\"\: 288\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:753;X:-196800;Y:-199392;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/World 2.ogg\"\,\n    \"height\"\: 320\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-196480;Y:-199328;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"WarpToWorld2SMB1\"\,\n    \"levelTitle\"\: \"Warp to World 1\"\,\n    \"path_down\"\: \"toSMB1W-1FromW2\"\,\n    \"warpName\"\: \"SMB1World2BeginWarp\"\n}\n";
+ID:752;X:-196480;Y:-199296;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-1FromW2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:802;X:-196480;Y:-199264;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-2\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"2-1\: In the Desert\"\,\n    \"path_right\"\: \"toSMB1W-2Path1\"\,\n    \"path_up\"\: \"toSMB1W-1FromW2\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:845;X:-196416;Y:-199264;D:-1;XTRA:"{\n    \"path_down\"\: \"toSMB12-2\"\,\n    \"path_left\"\: \"toSMB1W-2Path1\"\,\n    \"unlock_down\"\: 2\n}\n";
+ID:752;X:-196448;Y:-199264;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-2Path1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:802;X:-196416;Y:-199136;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-2\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"2-2\: Salty Waters\"\,\n    \"path_down\"\: \"toSMB12-3\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB1W-2Path2\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
+ID:752;X:-196416;Y:-199232;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-2Path2\"\,\n    \"points\"\: \"0\, 128\,0\,  -32\"\n}\n";
+ID:802;X:-196416;Y:-199072;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-2\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"2-3\: Fishy Bridges\"\,\n    \"path_down\"\: \"toSMB12-3\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB1W-2Path2\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
+ID:752;X:-196416;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB12-3\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
 LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
-LR:"PlayerMap";
+LR:"PlayerMap";HD:1;
+LR:"Sceneries";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
