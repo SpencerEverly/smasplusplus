@@ -405,7 +405,7 @@ do
 		if not isOverworld then
 			local textLayout = textplus.layout(str, nil, doprint)
 			y = y - textLayout.height
-			textplus.render{x = x, y = y, layout = textLayout, priority = -1}
+			textplus.render{x = x, y = y, layout = textLayout, priority = 0}
 		elseif isOverworld then
 			local textLayout = textplus.layout(str, nil, doprint)
 			y = y - textLayout.height
@@ -425,7 +425,7 @@ do
 			return
 		end
 		if not isOverworld then
-			Graphics.drawScreen({color = repll.background, priority = -2})
+			Graphics.drawScreen({color = repll.background, priority = -1})
 		elseif isOverworld then
 			Graphics.drawScreen({color = repll.background, priority = 9})
 		end

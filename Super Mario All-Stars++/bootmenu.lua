@@ -1609,9 +1609,8 @@ function bootmenu.onDraw()
 			end
 		end
 		if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-			textplus.print{x=308, y=20, text = "SMBX Version: Original LunaLua", priority=-7, color=Color.lightred, font=statusFont}
-		end
-		if SMBX_VERSION <= VER_SEE_SMASPLUSPLUS then
+			textplus.print{x=285, y=30, text = "SMBX Version: Original LunaLua", priority=-7, color=Color.red, font=statusFont}
+		elseif SMBX_VERSION <= VER_SEE_SMASPLUSPLUS then
 			textplus.print{x=318, y=30, text = "SMBX Version: SEE Mod", priority=-7, color=Color.lightgreen, font=statusFont}
 		end
 		if versionactive then

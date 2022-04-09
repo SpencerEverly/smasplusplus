@@ -62,6 +62,7 @@ if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
 	Misc.setWindowTitle("Super Mario All-Stars++")
 	Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+	loadactivate = true
 	steve = require("steve")
 	playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 	yoshi = require("yiYoshi/yiYoshi")
@@ -170,7 +171,7 @@ local friendlyplaces = {
 }
 
 function onLoad()
-	if not Misc.inEditor() then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated --or (noloadingsounds[Level.filename()]) == true then
+	if not Misc.inEditor() and loadactivate == true then --If luna errors during testing, this will be useful to not load the audio to prevent the audio from still being played until terminated --or (noloadingsounds[Level.filename()]) == true then
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
@@ -214,7 +215,10 @@ function onStart()
 	end
 	if not Misc.inEditor() or (Level.filename() == noloadingsounds[Level.filename()]) == true then
 		fadetolevel = false
-		loadingSoundObject:FadeOut(800)
+		if loadactivate == true then
+			loadingSoundObject:FadeOut(800)
+			loadactivate = false
+		end
 	end
 	SaveData.dateplayedday = os.date("%d")
 	SaveData.dateplayedmonth = os.date("%m")

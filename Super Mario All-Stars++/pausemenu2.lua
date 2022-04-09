@@ -962,8 +962,8 @@ local function startteleport()
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
 	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	world.playerX = -2880
-	world.playerY = -1664
+	SaveData.smwMap.playerX = -195072
+	SaveData.smwMap.playerY = -197760
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
@@ -988,8 +988,8 @@ local function hubmapteleport()
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
 	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	world.playerX = -3040
-	world.playerY = -1760
+	SaveData.smwMap.playerX = -195232
+	SaveData.smwMap.playerY = -197856
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
@@ -1001,8 +1001,8 @@ local function dlcteleport()
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
 	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	world.playerX = -1760
-	world.playerY = -1568
+	SaveData.smwMap.playerX = -199040
+	SaveData.smwMap.playerY = -199936
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
 end
 
@@ -1026,21 +1026,21 @@ if GameData.battlemodeactive == true then
 	end
 end
 if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-	if not isOverworld then
+	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
 	end
-	if not isOverworld then
+	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("main",{text = "Return to the Main Map",closeMenu = true,description = "Returns to the main map of the game.",action = function() Routine.run(exitlevel2) end})
 	end
 	pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
 	pauseplus.createSubmenu("charactermenu",{headerText = "<size 1.5>Character Options</size>"})
 	pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
-	if not isOverworld then
+	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("main",{text = "Return to the Previous Level",closeMenu = true,description = "Returns to the previously played level. Useful while you're in the Hub or the other map.",action = function() Routine.run(returntolastlevel) end})
 	end
 	pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
 	pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
-	if isOverworld then
+	if (Level.filename() == "map.lvlx") == true then
 		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
 	elseif (Level.filename() == "MALC - HUB.lvlx") == true then
 		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
@@ -1060,12 +1060,12 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	end
 	pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
 	pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
-	if not isOverworld then
+	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Graphics.activateHud(false) Cheats.trigger("1player") player:transform(1, false) Misc.unpause() Level.load(Level.filename()) end}})
 	end
-	if not isOverworld then
-		pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("map.lvlx", nil, nil) end}})
-	end
+	--if not isOverworld then
+		--pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("map.lvlx", nil, nil) end}})
+	--end
 	if not isOverworld then
 		pauseplus.createOption("settings",{text = "Teleport to the Hub",description = "Teleport to the Me and Larry City Hub. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("MALC - HUB.lvlx", nil, nil) end}})
 	end
@@ -1097,10 +1097,10 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			pauseplus.createOption("teleportmenu",{text = "Teleport Back to the Start",closeMenu = true, action =  function() Routine.run(shophub) end})
 		end
 	end
-	if isOverworld then
+	if (Level.filename() == "map.lvlx") == true then
 		pauseplus.createOption("teleportmenu",{text = "Teleport back to the Start",closeMenu = true, action =  function() Routine.run(startteleport) end})
 		pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",closeMenu = true, action =  function() Routine.run(hubmapteleport) end})
-		pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true, action =  function() Routine.run(sideteleport) end})
+		--pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true, action =  function() Routine.run(sideteleport) end})
 		pauseplus.createOption("teleportmenu",{text = "Teleport to the DLC World",closeMenu = true, action =  function() Routine.run(dlcteleport) end})
 	end
 end

@@ -76,7 +76,7 @@ local pause_music = require("map_music")
 local Routine = require("routine")
 local smoothWorld = require("smoothWorld")
 local repl = require("repll")
-local pausemenu = require("pausemenu2")
+--local pausemenu = require("pausemenu2")
 local pauseplus = require("pauseplus")
 
 pauseplus.priority = 8
