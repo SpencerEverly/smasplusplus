@@ -367,6 +367,16 @@ function globalgenerals.onTick()
 		HUDOverride.visible.lives = false
 		HUDOverride.visible.score = false
 	end
+	if player.character == CHARACTER_ULTIMATERINKA then
+		HUDOverride.visible.keys = true
+		HUDOverride.visible.itembox = true
+		HUDOverride.visible.bombs = true
+		HUDOverride.visible.coins = true
+		HUDOverride.visible.stars = true
+		HUDOverride.visible.timer = true
+		HUDOverride.visible.levelname = true
+		HUDOverride.visible.overworldPlayer = true
+	end
 	if SaveData.disableX2char == true then
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
 	end

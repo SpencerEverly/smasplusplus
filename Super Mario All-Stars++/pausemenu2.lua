@@ -163,7 +163,7 @@ local function quickdeathoption()
 			SFX.play("_OST/_Sound Effects/quickdeath_enabled.ogg")
 		end
 	else
-		SaveData.deathquickoption  = false
+		SaveData.deathquickoption = false
 		SFX.play("_OST/_Sound Effects/quickdeath_disabled.ogg")
 	end
 end

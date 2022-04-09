@@ -1608,7 +1608,12 @@ function bootmenu.onDraw()
 				
 			end
 		end
-		
+		if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+			textplus.print{x=308, y=20, text = "SMBX Version: Original LunaLua", priority=-7, color=Color.lightred, font=statusFont}
+		end
+		if SMBX_VERSION <= VER_SEE_SMASPLUSPLUS then
+			textplus.print{x=318, y=30, text = "SMBX Version: SEE Mod", priority=-7, color=Color.lightgreen, font=statusFont}
+		end
 		if versionactive then
 			Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
 			textplus.print{x=667, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode

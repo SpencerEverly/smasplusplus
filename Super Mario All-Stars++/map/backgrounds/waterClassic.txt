@@ -1,2 +1,2 @@
 frames = 4
-framespeed = 8
+framespeed = 10
