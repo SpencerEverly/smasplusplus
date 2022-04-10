@@ -542,8 +542,8 @@ ID:752;X:-195808;Y:-199072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB13-1\"\,\n    \"p
 ID:802;X:-195776;Y:-199072;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"3-1\: Snow\, Everywhere!\"\,\n    \"path_left\"\: \"toSMB13-1\"\,\n    \"path_right\"\: \"toSMB13-2\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-195744;Y:-199072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB13-2\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:802;X:-195680;Y:-199072;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-3\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"3-2\: Snow Enemy Territory\"\,\n    \"path_left\"\: \"toSMB13-2\"\,\n    \"path_right\"\: \"toSMB1W-3Path1\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_right\"\: 9\n}\n";
-ID:821;X:-195744;Y:-199648;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"ToSMB1SecretHouse3\"\,\n    \"levelTitle\"\: \"Warp to World 3\"\,\n    \"path_right\"\: \"SMB1MushroomHouse2\"\,\n    \"warpName\"\: \"SMB1SecretHouse3\"\n}\n";
-ID:752;X:-195712;Y:-199648;D:-1;XTRA:"{\n    \"name\"\: \"SMB1MushroomHouse2\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:821;X:-195744;Y:-199648;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"ToSMB1SecretHouse3\"\,\n    \"levelTitle\"\: \"Warp to World 3\"\,\n    \"path_right\"\: \"SMB1MushroomHouse3\"\,\n    \"warpName\"\: \"SMB1SecretHouse3\"\n}\n";
+ID:752;X:-195712;Y:-199648;D:-1;XTRA:"{\n    \"name\"\: \"SMB1MushroomHouse3\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
 ID:850;X:-195680;Y:-199648;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"SMB1 - W-3\, L-Mushroom.lvlx\"\,\n    \"levelTitle\"\: \"Mushroom House 3\"\,\n    \"path_left\"\: \"SMB1MushroomHouse3\"\n}\n";
 ID:802;X:-195552;Y:-199104;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-3\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"3-3\: Nightly Mushrooms\"\,\n    \"path_left\"\: \"toSMB1W-3Path1\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB13-4\"\,\n    \"unlock_right\"\: 0\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-195648;Y:-199072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-3Path1\"\,\n    \"points\"\: \"-36\, 0\, 50\, 0\, 106\, -42\"\n}\n";
