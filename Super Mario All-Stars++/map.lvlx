@@ -589,6 +589,8 @@ ID:753;X:-194240;Y:-199904;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic
 ID:752;X:-194048;Y:-199744;D:-1;XTRA:"{\n    \"name\"\: \"SMB1SecretWarpPath1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
 ID:851;X:-194016;Y:-199744;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"MALC - L-Me City Underwater.lvlx\"\,\n    \"levelTitle\"\: \"The Me City in Underwater\"\,\n    \"path_left\"\: \"SMB1SecretWarpPath1\"\n}\n";
 ID:821;X:-194080;Y:-199744;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"ToSMB1SecretWarp2\"\,\n    \"levelTitle\"\: \"Warp to World 5\"\,\n    \"path_right\"\: \"SMB1SecretWarpPath1\"\,\n    \"warpName\"\: \"SMB1SecretWarp2\"\n}\n";
+ID:752;X:-194016;Y:-198976;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-5Path1\"\,\n    \"points\"\: \"0\, -24\, 0\, 42\, 64\, 32\"\,\n    \"smoothness\"\: 0.7999999999999999\n}\n";
+ID:821;X:-193952;Y:-198944;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-5EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_left\"\: \"toSMB1W-5Path1\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"SMB1W-6BeginWarp\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";

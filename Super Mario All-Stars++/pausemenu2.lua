@@ -965,6 +965,13 @@ local function startteleport()
 	SaveData.smwMap.playerX = -195072
 	SaveData.smwMap.playerY = -197760
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	pauseplus.canControlMenu = false
+	startFadeOut()
+	Routine.wait(1.0, true)
+	Misc.unpause()
+	exitFadeActive = false
+	exitFadeActiveDone = true
+	Level.load(Level.filename())
 end
 
 local function sideteleport()
@@ -978,6 +985,13 @@ local function sideteleport()
 	world.playerX = -3168
 	world.playerY = -1536
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	pauseplus.canControlMenu = false
+	startFadeOut()
+	Routine.wait(1.0, true)
+	Misc.unpause()
+	exitFadeActive = false
+	exitFadeActiveDone = true
+	Level.load(Level.filename())
 end
 
 local function hubmapteleport()
@@ -991,6 +1005,13 @@ local function hubmapteleport()
 	SaveData.smwMap.playerX = -195232
 	SaveData.smwMap.playerY = -197856
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	pauseplus.canControlMenu = false
+	startFadeOut()
+	Routine.wait(1.0, true)
+	Misc.unpause()
+	exitFadeActive = false
+	exitFadeActiveDone = true
+	Level.load(Level.filename())
 end
 
 local function dlcteleport()
@@ -1004,6 +1025,13 @@ local function dlcteleport()
 	SaveData.smwMap.playerX = -199040
 	SaveData.smwMap.playerY = -199936
 	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	pauseplus.canControlMenu = false
+	startFadeOut()
+	Routine.wait(1.0, true)
+	Misc.unpause()
+	exitFadeActive = false
+	exitFadeActiveDone = true
+	Level.load(Level.filename(), nil, nil)
 end
 
 --Main Menu
