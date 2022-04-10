@@ -40,6 +40,10 @@ local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png
 local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
 local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
 
+if SMBX_VERSION == VER_SEE_MOD then
+	__customPauseMenuActive = true
+end
+
 littleDialogue.defaultStyleName = "smbx13"
 
 customCamera.transitionSpeed = 5

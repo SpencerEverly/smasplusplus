@@ -60,6 +60,7 @@ if SMBX_VERSION == VER_SEE_MOD then
 	Graphics.sprites.block[656].img = Graphics.loadImageResolved("graphics/seemod/block/block-656.png")
 	princessRinka = require("characters/princessrinka")
 	Misc.setWindowTitle("Super Mario All-Stars++")
+	__customPauseMenuActive = true
 	Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	loadactivate = true

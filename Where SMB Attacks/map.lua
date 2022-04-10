@@ -5,6 +5,10 @@ local textplus = require("textplus")
 local smallScreen = require("smallScreen")
 local pausemenu = require("pausemenu")
 
+if SMBX_VERSION == VER_SEE_MOD then
+	__customPauseMenuActive = true
+end
+
 if SaveData.resolution == nil then
 	SaveData.resolution = "fullscreen"
 end

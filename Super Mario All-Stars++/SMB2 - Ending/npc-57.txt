@@ -1,0 +1,5 @@
+width=288
+height=2122
+gfxwidth=288
+gfxheight=2122
+frames=1
