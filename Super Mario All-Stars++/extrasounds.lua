@@ -10,7 +10,7 @@
 
 local extrasounds = {}
 
-if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then return end
+if SMBX_VERSION == VER_SEE_MOD then return end
 
 local spinballcounter = 1
 local combo = 0

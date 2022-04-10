@@ -267,7 +267,7 @@ local function characterchange()
 			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
-	elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	elseif SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_SAMUS) then
 			player:transform(17, false)
 			SFX.play(32)
@@ -275,7 +275,7 @@ local function characterchange()
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_YIYOSHI) then
 			player:transform(18, false)
 			SFX.play(32)
@@ -283,7 +283,7 @@ local function characterchange()
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_JUNI) then
 			player:transform(19, false)
 			SFX.play(32)
@@ -291,7 +291,7 @@ local function characterchange()
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_MCSTEVE) then
 			player:transform(20, false)
 			SFX.play(32)
@@ -299,7 +299,7 @@ local function characterchange()
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_PRINCESSRINKA) then
 			player:transform(1, false)
 			SFX.play(32)
@@ -386,7 +386,7 @@ local function characterchangeleft()
 			SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
-	elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	elseif SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_MARIO) then
 			player:transform(20, false)
 			SFX.play(32)
@@ -484,7 +484,7 @@ local function characterchangeleft()
 		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
 		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_YIYOSHI) then
 			player:transform(16, false)
 			SFX.play(32)
@@ -492,7 +492,7 @@ local function characterchangeleft()
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_JUNI) then
 			player:transform(17, false)
 			SFX.play(32)
@@ -500,7 +500,7 @@ local function characterchangeleft()
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_MCSTEVE) then
 			player:transform(18, false)
 			SFX.play(32)
@@ -508,7 +508,7 @@ local function characterchangeleft()
 			SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
 		end
 	end
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		if (character == CHARACTER_PRINCESSRINKA) then
 			player:transform(19, false)
 			SFX.play(32)
@@ -955,6 +955,23 @@ local function shophub()
 	player:teleport(80144, 79868, bottomCenterAligned)
 end
 
+local function hubteleportlevel()
+	cooldown = 5
+	player:mem(0x17A,FIELD_BOOL,false)
+	if cooldown <= 0 then
+		player:mem(0x17A,FIELD_BOOL,true)
+	end
+	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	pauseplus.canControlMenu = false
+	startFadeOut()
+	Routine.wait(1.0, true)
+	Misc.unpause()
+	exitFadeActive = false
+	exitFadeActiveDone = true
+	Level.load("MALC - HUB.lvlx", nil, nil)
+end
+
 local function startteleport()
 	cooldown = 5
 	player:mem(0x17A,FIELD_BOOL,false)
@@ -1058,19 +1075,18 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 		pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
 	end
 	if (Level.filename() == "map.lvlx") == false then
-		pauseplus.createOption("main",{text = "Return to the Main Map",closeMenu = true,description = "Returns to the main map of the game.",action = function() Routine.run(exitlevel2) end})
+		pauseplus.createOption("main",{text = "Return to the Map",closeMenu = true,description = "Returns to the map of the game.",action = function() Routine.run(exitlevel2) end})
 	end
 	pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
 	pauseplus.createSubmenu("charactermenu",{headerText = "<size 1.5>Character Options</size>"})
 	pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
-	if (Level.filename() == "map.lvlx") == false then
-		pauseplus.createOption("main",{text = "Return to the Previous Level",closeMenu = true,description = "Returns to the previously played level. Useful while you're in the Hub or the other map.",action = function() Routine.run(returntolastlevel) end})
-	end
 	pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
 	pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
 	if (Level.filename() == "map.lvlx") == true then
 		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
 	elseif (Level.filename() == "MALC - HUB.lvlx") == true then
+		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
+	elseif (Level.filename() == "MALC - HUB.lvlx") == false then
 		pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
 	end
 	pauseplus.createOption("main",{text = "Save and Continue",description = "Save and continue your game.",pauseplus.save,closeMenu = true,action = function() SFX.play("_OST/_Sound Effects/save_dismiss.ogg") end})
@@ -1090,12 +1106,6 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
 	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Graphics.activateHud(false) Cheats.trigger("1player") player:transform(1, false) Misc.unpause() Level.load(Level.filename()) end}})
-	end
-	--if not isOverworld then
-		--pauseplus.createOption("settings",{text = "Go to the Extra Game/DLC Map",description = "Teleport to the Extra Game/DLC Map. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("map.lvlx", nil, nil) end}})
-	--end
-	if not isOverworld then
-		pauseplus.createOption("settings",{text = "Teleport to the Hub",description = "Teleport to the Me and Larry City Hub. Useful for fast traveling!",closeMenu = true, actions = {function() Misc.unpause() Level.load("MALC - HUB.lvlx", nil, nil) end}})
 	end
 	pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = {function() Routine.run(quitonly) end}})
 
@@ -1117,19 +1127,23 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 
 	--Teleportation Menu
 	if not isOverworld then
+		pauseplus.createOption("teleportmenu",{text = "Teleport to the Previous Level",closeMenu = true,description = "Returns to the previously played level. Useful while you're in the Hub.",action = function() Routine.run(returntolastlevel) end})
 		if (Level.filename() == "MALC - HUB.lvlx") == true then
-			pauseplus.createOption("teleportmenu",{text = "Teleport to the Tourist Center",closeMenu = true, action =  function() Routine.run(touristhub) end})
-			pauseplus.createOption("teleportmenu",{text = "Teleport to the Warp Zone",closeMenu = true, action =  function() Routine.run(warpzonehub) end})
-			pauseplus.createOption("teleportmenu",{text = "Teleport to the Character Switch Menu",closeMenu = true, action =  function() Routine.run(switchhub) end})
-			pauseplus.createOption("teleportmenu",{text = "Teleport to the Shop",closeMenu = true, action =  function() Routine.run(shophub) end})
-			pauseplus.createOption("teleportmenu",{text = "Teleport Back to the Start",closeMenu = true, action =  function() Routine.run(shophub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Tourist Center",closeMenu = true,description = "Teleports to inside of the 1st building in Me and Larry City. Useful for fast traveling!", action =  function() Routine.run(touristhub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Warp Zone",closeMenu = true,description = "Teleports to the skies, in the Hub Warp Zone. Useful for fast traveling!", action =  function() Routine.run(warpzonehub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Character Switch Menu",closeMenu = true,description = "Teleports to the Tourist Center's Character Switch Room. Useful for fast traveling!", action =  function() Routine.run(switchhub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Shop",closeMenu = true,description = "Teleports to inside of the 6th building located in Me and Larry City. Useful for fast traveling!", action =  function() Routine.run(shophub) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport Back to the Start",closeMenu = true,description = "Teleports back to the starting point of the Hub. Useful for fast traveling!", action =  function() Routine.run(shophub) end})
 		end
 	end
 	if (Level.filename() == "map.lvlx") == true then
-		pauseplus.createOption("teleportmenu",{text = "Teleport back to the Start",closeMenu = true, action =  function() Routine.run(startteleport) end})
-		pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",closeMenu = true, action =  function() Routine.run(hubmapteleport) end})
-		--pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true, action =  function() Routine.run(sideteleport) end})
-		pauseplus.createOption("teleportmenu",{text = "Teleport to the DLC World",closeMenu = true, action =  function() Routine.run(dlcteleport) end})
+		pauseplus.createOption("teleportmenu",{text = "Teleport back to the Start",closeMenu = true,description = "Teleports back to the starting point of the map. Useful for fast traveling!", action =  function() Routine.run(startteleport) end})
+		pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",closeMenu = true,description = "Teleports back to the Hub marker on the map. Useful for fast traveling!", action = function() Routine.run(hubmapteleport) end})
+		--pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true,description = "Teleports back to the Side Quest starting point of the map. Useful for fast traveling!", action = function() Routine.run(sideteleport) end})
+		pauseplus.createOption("teleportmenu",{text = "Teleport to the DLC World",closeMenu = true,description = "Teleports back to the DLC World starting point of the map. Useful for fast traveling!", action = function() Routine.run(dlcteleport) end})
+	end
+	if not isOverworld and (Level.filename() == "MALC - HUB.lvlx") == false then
+		pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",description = "Teleport to the Me and Larry City Hub. Useful for fast traveling!",closeMenu = true, actions = {function() Routine.run(hubteleportlevel) end}})
 	end
 end
 

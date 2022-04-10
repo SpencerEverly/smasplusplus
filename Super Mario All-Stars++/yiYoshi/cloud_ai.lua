@@ -12,7 +12,7 @@ local yoshi
 
 if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	pcall(function() yoshi = require("yiYoshi/yiYoshi") end)
-elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+elseif SMBX_VERSION == VER_SEE_MOD then
 	pcall(function() yoshi = require("characters/yiyoshi") end)
 end
 

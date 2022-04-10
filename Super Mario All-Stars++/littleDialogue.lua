@@ -476,7 +476,7 @@ do
     end]]
 
     -- characterName tag
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		littleDialogue.characterNames = {
 			[1]  = "Mario",
 			[2]  = "Luigi",

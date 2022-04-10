@@ -19,7 +19,7 @@ local deathVisibleCount = 198;
 local deathTimer = deathVisibleCount;
 local earlyDeathCheck = 3;
 local cooldown = 0
-if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+if SMBX_VERSION == VER_SEE_MOD then
 	princessRinka = require("characters/princessrinka")
 	princessRinka.friendlyArea = false
 end

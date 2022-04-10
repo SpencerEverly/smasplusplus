@@ -9,7 +9,7 @@ local npcutils = require("npcs/npcutils")
 
 if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	yoshi = require("yiYoshi/yiYoshi")
-elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+elseif SMBX_VERSION == VER_SEE_MOD then
 	yoshi = require("characters/yiyoshi")
 end
 

@@ -84,7 +84,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 						end
 					end
 				end
-			elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+			elseif SMBX_VERSION == VER_SEE_MOD then
 				if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do it the same as the others with the SEE Mod
 					if player.deathTimer == 0 then
 						GameData.cutsceneMusicControl = true

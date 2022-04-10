@@ -788,7 +788,7 @@ local function SaveOptions1()
 end
 
 local function SaveSlot1()
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>To begin switching the save slot, please select Begin to get started (Keyboard only). THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
 	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 or Misc.inEditor() then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You can't do this on this version of SMBX2. Please use the SEE Mod version to switch saves. You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
@@ -1007,7 +1007,7 @@ local function ExitGame1()
 end
 
 local function SaveEraseStart()
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		--Start by flushing any SaveData/GameData that's still available
 		SaveData.clear()
 		GameData.clear()
@@ -1281,7 +1281,7 @@ function bootmenu.onTick()
 			GameData.musreset = false
 		end
 		Graphics.activateHud(false)
-		if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		if SMBX_VERSION == VER_SEE_MOD then
 			ultimateRinka = require("characters/ultimaterinka")
 			ultimateRinka.hud = false
 		end
@@ -1610,7 +1610,7 @@ function bootmenu.onDraw()
 		end
 		if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 			textplus.print{x=285, y=30, text = "SMBX Version: Original LunaLua", priority=-7, color=Color.red, font=statusFont}
-		elseif SMBX_VERSION <= VER_SEE_SMASPLUSPLUS then
+		elseif SMBX_VERSION <= VER_SEE_MOD then
 			textplus.print{x=318, y=30, text = "SMBX Version: SEE Mod", priority=-7, color=Color.lightgreen, font=statusFont}
 		end
 		if versionactive then
@@ -2066,7 +2066,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Klonoa (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 		littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
-	elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	elseif SMBX_VERSION == VER_SEE_MOD then
 		littleDialogue.registerAnswer("CharacterListX2",{text = "Ninja Bomberman (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
 	end
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
@@ -2074,12 +2074,12 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
 	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 		littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
-	elseif SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	elseif SMBX_VERSION == VER_SEE_MOD then
 		littleDialogue.registerAnswer("CharacterListX2",{text = "Ultimate Rinka (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
 	end
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
-	if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 17)",chosenFunction = function() player:transform(17, true) Routine.run(ChangedCharacter) end})
 		littleDialogue.registerAnswer("CharacterListX2",{text = "Juni (Slot 18)",chosenFunction = function() player:transform(18, true) Routine.run(ChangedCharacter) end})
 		littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 19)",chosenFunction = function() player:transform(19, true) Routine.run(ChangedCharacter) end})

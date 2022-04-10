@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario All-Stars++\: World Map";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-191424;T:-200600;B:-195168;MZ:0;MF:"";BG:0;
+SC:0;L:-200000;R:-191200;T:-200600;B:-195168;MZ:0;MF:"";BG:0;
 SC:18;L:160000;R:160800;T:159400;B:160000;MZ:0;MF:"";BG:0;
 SECTION_END
 BLOCK
@@ -451,6 +451,8 @@ ID:760;X:-194880;Y:-199808;
 ID:761;X:-194176;Y:-199328;
 ID:757;X:-194112;Y:-199808;
 ID:762;X:-193408;Y:-199232;
+ID:763;X:-192672;Y:-199264;
+ID:764;X:-191872;Y:-199232;
 BGO_END
 NPC
 ID:753;X:-199360;Y:-200224;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -599,7 +601,7 @@ ID:821;X:-194080;Y:-199744;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"ToSMB1S
 ID:752;X:-194016;Y:-198976;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-5Path1\"\,\n    \"points\"\: \"0\, -24\, 0\, 42\, 64\, 32\"\,\n    \"smoothness\"\: 0.7999999999999999\n}\n";
 ID:821;X:-193952;Y:-198944;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-5EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_left\"\: \"toSMB1W-5Path1\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"SMB1W-6BeginWarp\"\n}\n";
 ID:753;X:-193600;Y:-199392;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/World 6.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
-ID:821;X:-193376;Y:-199104;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-6BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 5\"\,\n    \"path_left\"\: \"toSMB16-1\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"SMB1W-5EndWarp\"\n}\n";
+ID:821;X:-193376;Y:-199104;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-6BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 5\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMB16-1\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"SMB1W-5EndWarp\"\n}\n";
 ID:802;X:-193280;Y:-199104;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-6\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"6-1\: The Lakitu Grounds #2\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB16-1\"\,\n    \"path_right\"\: \"toSMB16-2\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-193344;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB16-1\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:752;X:-193248;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB16-2\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
@@ -607,9 +609,26 @@ ID:802;X:-193184;Y:-199104;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-6\, 
 ID:752;X:-193152;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB16-3\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:802;X:-193088;Y:-199104;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-6\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"6-3\: Midnight Mush-Rush\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB16-3\"\,\n    \"path_right\"\: \"toSMB16-4\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-193056;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB16-4\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
-ID:849;X:-192992;Y:-199104;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-6\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"6-4\: Castle #6\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB16-4\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 2\,\n    \"unlock_up\"\: 2\n}\n";
-ID:821;X:-192992;Y:-199040;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-6EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 7\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB1W-6Path1\"\,\n    \"warpName\"\: \"SMB1W-7BeginWarp\"\n}\n";
+ID:849;X:-192992;Y:-199104;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-6\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"6-4\: Castle #6\"\,\n    \"path_down\"\: \"toSMB1W-6Path1\"\,\n    \"path_left\"\: \"toSMB16-4\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 2\,\n    \"unlock_up\"\: 2\n}\n";
+ID:821;X:-192992;Y:-199040;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-7BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 7\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB1W-6Path1\"\,\n    \"warpName\"\: \"SMB1W-6EndWarp\"\n}\n";
 ID:752;X:-192992;Y:-199072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-6Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:753;X:-192800;Y:-199392;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/World 7.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-192416;Y:-199264;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-6EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"toSMB17-1\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"SMB1W-7BeginWarp\"\n}\n";
+ID:752;X:-192416;Y:-199232;D:-1;XTRA:"{\n    \"name\"\: \"toSMB17-1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:802;X:-192416;Y:-199200;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-7\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"7-1\: Into the Skies\"\,\n    \"path_down\"\: \"toSMB17-2\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB17-1\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
+ID:802;X:-192576;Y:-199136;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-7\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"7-2\: Cloudy Waters\"\,\n    \"path_down\"\: \"toSMB17-3\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMB17-2\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
+ID:752;X:-192416;Y:-199168;D:-1;XTRA:"{\n    \"name\"\: \"toSMB17-2\"\,\n    \"points\"\: \"0\, -32\, 0\, 16\, -160\,  32\"\n}\n";
+ID:752;X:-192576;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB17-3\"\,\n    \"points\"\: \"0\, 102\, 0\, -32\"\n}\n";
+ID:802;X:-192576;Y:-199008;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-7\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"7-3\: The Bridge of Clouds\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMB17-4\"\,\n    \"path_up\"\: \"toSMB17-3\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
+ID:849;X:-192320;Y:-199008;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-7\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"7-4\: Castle #7\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB17-3\"\,\n    \"path_right\"\: \"toSMB1W-7Path1\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 9\,\n    \"unlock_up\"\: 2\n}\n";
+ID:752;X:-192544;Y:-199008;D:-1;XTRA:"{\n    \"name\"\: \"toSMB17-4\"\,\n    \"points\"\: \"224\, 0\, -42\, 0\"\n}\n";
+ID:821;X:-192256;Y:-199008;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-8BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 8\"\,\n    \"path_left\"\: \"toSMB1W-7Path1\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"SMB1W-7EndWarp\"\n}\n";
+ID:752;X:-192320;Y:-199040;D:-1;XTRA:"{\n    \"name\"\: \"toSMB1W-7Secret7\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:821;X:-192320;Y:-199072;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1SecretWarp3\"\,\n    \"levelTitle\"\: \"Secret Warp! #3\"\,\n    \"path_down\"\: \"toSMB1W-7Secret7\"\,\n    \"path_right\"\: \"\"\,\n    \"warpName\"\: \"ToSMB1SecretWarp3\"\n}\n";
+ID:753;X:-192000;Y:-199392;D:-1;XTRA:"{\n    \"backgroundName\"\: \"lavaClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/World 8.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-191712;Y:-199104;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-7EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 7\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB18-1\"\,\n    \"warpName\"\: \"SMB1W-8BeginWarp\"\n}\n";
+ID:752;X:-191712;Y:-199136;D:-1;XTRA:"{\n    \"name\"\: \"toSMB18-1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:802;X:-191712;Y:-199168;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-8\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"8-1\: Welcome to Bowser's Home\"\,\n    \"path_down\"\: \"toSMB17-2\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB17-1\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
 NPC_END
 LAYERS
 LR:"Default";

@@ -53,7 +53,7 @@ local repll = require("repll")
 local rng = require("base/rng")
 local playerManager = require("playermanager")
 
-if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+if SMBX_VERSION == VER_SEE_MOD then
 	Graphics.sprites.block[647].img = Graphics.loadImageResolved("graphics/seemod/block/block-647.png")
 	Graphics.sprites.block[648].img = Graphics.loadImageResolved("graphics/seemod/block/block-648.png")
 	Graphics.sprites.block[655].img = Graphics.loadImageResolved("graphics/seemod/block/block-655.png")
@@ -190,7 +190,7 @@ function onStart()
 		SaveData.dateplayedday = os.date("%d")
 	end
 	if (friendlyplaces[Level.filename()]) == true then
-		if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+		if SMBX_VERSION == VER_SEE_MOD then
 			princessRinka.friendlyArea = true
 		end
 	end

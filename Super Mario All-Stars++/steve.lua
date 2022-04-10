@@ -19,7 +19,7 @@ local lib3d = require("lib3d")
 
 local steve = {}
 
-if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then return end
+if SMBX_VERSION == VER_SEE_MOD then return end
 
 local timer = 0
 

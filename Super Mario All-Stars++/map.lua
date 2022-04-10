@@ -3,7 +3,7 @@ if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	yoshi = require("yiYoshi/yiYoshi")
 	map3d = require("mapp3d")
 end
-if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+if SMBX_VERSION == VER_SEE_MOD then
 	map3d = require("map3d")
 end
 
@@ -248,7 +248,7 @@ walkCycles[CHARACTER_ZELDA]           = walkCycles[CHARACTER_LUIGI]
 walkCycles[CHARACTER_ULTIMATERINKA]   = walkCycles[CHARACTER_TOAD]
 walkCycles[CHARACTER_UNCLEBROADSWORD] = walkCycles[CHARACTER_TOAD]
 walkCycles[CHARACTER_SAMUS]           = walkCycles[CHARACTER_LINK]
-if SMBX_VERSION == VER_SEE_SMASPLUSPLUS then
+if SMBX_VERSION == VER_SEE_MOD then
 	walkCycles[CHARACTER_YIYOSHI]         = walkCycles[CHARACTER_PEACH]
 	walkCycles[CHARACTER_JUNI]            = walkCycles[CHARACTER_TOAD]
 	walkCycles[CHARACTER_MCSTEVE]         = walkCycles[CHARACTER_TOAD]
