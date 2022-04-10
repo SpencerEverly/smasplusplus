@@ -10,5 +10,8 @@ function onExit()
 	elseif player:mem(0x15E, FIELD_WORD) == 3 and player.forcedState == FORCEDSTATE_INVISIBLE then --SMB1 World 3
 		SaveData.smwMap.playerX = -195776
 		SaveData.smwMap.playerY = -199072
+	elseif player:mem(0x15E, FIELD_WORD) == 4 and player.forcedState == FORCEDSTATE_INVISIBLE then --SMB1 World 4
+		SaveData.smwMap.playerX = -194944
+		SaveData.smwMap.playerY = -199136
 	end
 end
