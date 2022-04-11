@@ -168,7 +168,8 @@ function refreshMusic(sectionid) --Refresh the music that's currently playing by
 end
 
 --Now we get to the Hub date detection stuff. First, we start with Easter...
-function easter (year) --"Happy easter! (Foot goes into the toilet with a kick sound)" - Vince
+function div (x, y) return math.floor(x / y) end
+function calculateeaster(year) --"Happy easter! (Foot goes into the toilet with a kick sound)" - Vince
     local G = year % 19
     local C = div(year, 100)
     local H = (C - div(C, 4) - div((8 * C + 13), 25) + 19 * G + 15) % 30
@@ -176,17 +177,8 @@ function easter (year) --"Happy easter! (Foot goes into the toilet with a kick s
     local J = (year + div(year, 4) + I + 2 - C + div(C, 4)) % 7
     local L = I - J
     local month = 3 + div(L + 40, 44)
-    return month, L + 28 - 31 * div(month, 4)
-end
-
-function holidays (year) --Some other misc. Easter stuff
-    local dates = {}
-    dates.easter = Time.date(year, easter(year))
-    dates.ascension = dates.easter + Time.days(39)
-    dates.pentecost = dates.easter + Time.days(49)
-    dates.trinity   = dates.easter + Time.days(56)
-    dates.corpus    = dates.easter + Time.days(60)
-    return dates
+	SaveData.eastermonth = month
+	SaveData.easterday = L + 28 - 31 * div(month, 4)
 end
 
 function isLeapYear(y) --Now for the leap year detection...
@@ -357,6 +349,8 @@ function onStart() --Now do onStart...
 			princessRinka.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
 		end
 	end
+	--Calculate Easter Sunday
+	calculateeaster(os.date("*t").year)
 	if SaveData.dateplayedyesterday == nil then
 		yesterdaynumber = os.date("*t").day - 1
 		yesterdaystring = tostring(yesterdaynumber)
