@@ -70,7 +70,7 @@ end
 function openImage(name) --Opening the graphics as easy as Pie!
 	local file = resolve(name) or resolve(name..".png")
 	if file then
-		Graphics.loadImageResolved(resolve)
+		Graphics.loadImageResolved(file)
 	end
 	return nil
 end
@@ -81,7 +81,7 @@ function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawing grap
 	local ydraw = 0
 	local opacitydraw = 1
 	if file then
-		Graphics.drawImageWP(name, xdraw, ydraw, opacitydraw, prioritydraw)
+		Graphics.drawImageWP(file, xdraw, ydraw, opacitydraw, prioritydraw)
 	end
 	return nil
 end
@@ -103,14 +103,16 @@ function playSFX(name) --Playing SFXs
 	SFX.play(name)
 end
 
-function changeMusic(file, sectionid) --Music changing is now a LOT easier
-	local file = resolve(name)
+function changeMusic(name, sectionid) --Music changing is now a LOT easier
+	local file = resolveSound(name)
 	if sectionid == -1 then
 		for i = 0,20 do
 			sectionid = i
 		end
 	end
-	return Audio.MusicChange(sectionid, file)
+	if file then
+		return Audio.MusicChange(sectionid, file)
+	end
 end
 
 --Now we get to the Hub date detection stuff. First, we start with Easter...
