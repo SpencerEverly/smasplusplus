@@ -102,12 +102,12 @@ function resolveSound(name) --Opening sounds
 		or Misc.resolveSoundFile("___MainUserDirectory/" .. name)
 end
 
-function openSFX(name) --Opening SFXs
+function openSound(name) --Opening SFXs
 	SFX.open(name)
 end
 
-function playSFX(idname) --Playing SFXs
-	if idname >= 92 then
+function playSound(idname) --Playing SFXs
+	if idname >= 92 or idname == 4  or idname == 7 or idname == 8 or idname == 14 or idname == 15 or idname == 18 or idname == 43 or idname == 59 then
 		SFX.play(extrasounds.id[idname])
 	elseif idname <= 91 then
 		SFX.play(idname)

@@ -33,7 +33,7 @@ function costume.onInit(p)
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-shrink.ogg")
 	--Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-grow.ogg")
 	--Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/mushroom.ogg")
-	--Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-died.ogg")
+	--extrasounds.id[8]  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-died.ogg")
 	--Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/shell-hit.ogg")
 	--Audio.sounds[10].sfx = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/player-slide.ogg")
 	extrasounds.id[14] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/coin.ogg"))
@@ -209,7 +209,7 @@ function costume.onCleanup(p)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	extrasounds.id[7]  = Audio.SfxOpen(Misc.resolveSoundFile("mushroom.ogg"))
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil

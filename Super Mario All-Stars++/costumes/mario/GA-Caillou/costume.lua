@@ -8,7 +8,7 @@ function costume.onInit(p)
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/stomped.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-grow.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-died.ogg")
 	Audio.sounds[10].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-slide.ogg")
 	extrasounds.id[14]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/GA-Caillou/coin.ogg"))
 	extrasounds.id[18]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/GA-Caillou/fireball.ogg"))
@@ -37,7 +37,7 @@ function costume.onCleanup(p)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	extrasounds.id[7]  = Audio.SfxOpen(Misc.resolveSoundFile("mushroom.ogg"))
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil

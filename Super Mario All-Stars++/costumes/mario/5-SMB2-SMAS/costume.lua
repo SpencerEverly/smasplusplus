@@ -37,14 +37,14 @@ end
 	
 function costume.onTick() --WIP
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/5-SMB2-SMAS/player-grow.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/5-SMB2-SMAS/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/mario/5-SMB2-SMAS/player-died.ogg")
 end
 
 function costume.onCleanup(p)
 	-- Remove the player from the list
 	if costume.playerData[p] ~= nil then
 		Audio.sounds[6].sfx  = nil
-		Audio.sounds[8].sfx  = nil
+		extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 		costume.playerData[p] = nil
 	end
 end

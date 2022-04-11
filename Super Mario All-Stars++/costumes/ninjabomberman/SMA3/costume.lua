@@ -89,7 +89,7 @@ function costumechange()
 	
 	Audio.sounds[1].sfx  = yoshi.generalSettings.jumpSound
     Audio.sounds[5].sfx  = yoshi.generalSettings.hurtSound
-    Audio.sounds[8].sfx  = yoshi.generalSettings.deathSound
+    extrasounds.id[8]  = yoshi.generalSettings.deathSound
     Audio.sounds[14].sfx = yoshi.generalSettings.coinSound
 	
 	yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/baby_bubbleCreated"))
@@ -271,7 +271,7 @@ function costume.onCleanup(p)
 
     Audio.sounds[1].sfx  = nil
     Audio.sounds[5].sfx  = nil
-    Audio.sounds[8].sfx  = nil
+    extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
     Audio.sounds[14].sfx = nil
     Audio.sounds[19].sfx = nil
     Audio.sounds[60].sfx = nil

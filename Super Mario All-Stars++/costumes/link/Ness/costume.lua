@@ -13,7 +13,7 @@ function costume.onInit(p)
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/link/Ness/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/link/Ness/player-grow.ogg")
 	--Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/link/Ness/mushroom.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/link/Ness/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/link/Ness/player-died.ogg")
 	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/link/Ness/coin.ogg")
 	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/link/Ness/1up.ogg")
 	Audio.sounds[18].sfx = Audio.SfxOpen("costumes/link/Ness/fireball.ogg")
@@ -63,7 +63,7 @@ function costume.onCleanup(p)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil

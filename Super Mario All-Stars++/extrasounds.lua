@@ -1,6 +1,6 @@
 --extrasounds.lua by Spencer Everly
 --
---To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,14,15,18,43,59 from (example):
+--To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,8,14,15,18,43,59 from (example):
 --
 --Audio.sounds[14].sfx = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
 --to
@@ -154,6 +154,7 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onPostPlayerKill")
 	registerEvent(extrasounds, "onPostExplosion")
 	registerEvent(extrasounds, "onPostBlockHit")
+	registerEvent(extrasounds, "onPlayerKill")
 	
 	local Routine = require("routine")
 	
@@ -164,6 +165,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 	if extrasounds.active == true then --Only mute when active
 		Audio.sounds[4].muted = true --block-smash.ogg
 		Audio.sounds[7].muted = true --mushroom.ogg
+		Audio.sounds[8].muted = true --player-dead.ogg
 		Audio.sounds[14].muted = true --coin.ogg
 		Audio.sounds[15].muted = true --1up.ogg
 		Audio.sounds[18].muted = true --fireball.ogg
@@ -207,6 +209,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 	if extrasounds.active == false then --Unmute when not active
 		Audio.sounds[4].muted = false --block-smash.ogg
 		Audio.sounds[7].muted = false --mushroom.ogg
+		Audio.sounds[8].muted = false --player-dead.ogg
 		Audio.sounds[14].muted = false --coin.ogg
 		Audio.sounds[15].muted = false --1up.ogg
 		Audio.sounds[18].muted = false --fireball.ogg
@@ -258,6 +261,10 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 			end
 		end
 	end
+end
+
+function extrasounds.onPlayerKill()
+	SFX.play(extrasounds.id[8])
 end
 
 function extrasounds.onPostExplosion(effect)

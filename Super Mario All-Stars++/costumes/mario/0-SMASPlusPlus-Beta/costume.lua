@@ -1,4 +1,5 @@
 local pm = require("playerManager")
+local extrasounds = require("extrasounds")
 
 local costume = {}
 
@@ -31,13 +32,13 @@ function costume.onInit(p)
 	Graphics.sprites.block[1220].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.block[1221].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.npc[14].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/fireflowerbeta.png")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/got-star.ogg")
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/0-SMASPlusPlus-Beta/player-died2.ogg")
 end
 
 function costume.onCleanup(p)
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8]  = nil
 	Audio.sounds[52].sfx  = nil
 	Audio.sounds[54].sfx = nil
 	Graphics.sprites.bgo[48].img = nil

@@ -9,7 +9,7 @@ function costume.onInit()
 	klonoa.flapAnimSpeed=3;
 	ringbox = colliders.Box(0, 0, 32, 32);
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/klonoa/YS-Green/player-jump.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/klonoa/YS-Green/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/klonoa/YS-Green/player-died.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/klonoa/YS-Green/got-star.ogg")
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/klonoa/YS-Green/player-died2.ogg")
 end
@@ -37,7 +37,7 @@ function costume.onCleanup(playerObject)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil

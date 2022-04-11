@@ -18,15 +18,14 @@ comboSounds.kick6 = extrasounds.id111
 comboSounds.kick7 = extrasounds.id112
 
 comboSounds.sounds = {
-    8,
-	extrasounds.id106, --Combo sounds 1-7, found under extrasounds
-    extrasounds.id107,
-    extrasounds.id108,
-    extrasounds.id109,
-    extrasounds.id110,
-    extrasounds.id111,
-    extrasounds.id112,
-	extrasounds.id112, --And then the same shell sound for rest of the hits
+	extrasounds.id[9],
+	extrasounds.id[106], --Combo sounds 1-7, found under extrasounds
+    extrasounds.id[107],
+    extrasounds.id[108],
+    extrasounds.id[109],
+    extrasounds.id[110],
+    extrasounds.id[111],
+    extrasounds.id[112],
 }
 
 

@@ -16,7 +16,7 @@ function costume.onInit(p)
 	registerEvent(costume,"onInputUpdate")
 	Graphics.registerCharacterHUD(CHARACTER_TOAD, Graphics.HUD_NONE)
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/toad/SEE-Tangent/player-shrink.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/toad/SEE-Tangent/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/toad/SEE-Tangent/player-died.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/toad/SEE-Tangent/got-star.ogg")
 	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/toad/SEE-Tangent/smb2-hit.ogg")
 	
@@ -141,7 +141,7 @@ function costume.onCleanup(p)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil

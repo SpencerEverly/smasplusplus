@@ -8,7 +8,7 @@ function costume.onInit(p)
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/block-hit.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/player-grow.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/player-died.ogg")
 	Audio.sounds[13].sfx = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/camera-change.ogg")
 	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/grab.ogg")
 	extrasounds.id[43] = Audio.SfxOpen("costumes/luigi/LarryTheCucumber/fireworks.ogg")
@@ -32,7 +32,7 @@ function costume.onCleanup(p)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil

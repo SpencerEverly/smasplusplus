@@ -51,7 +51,7 @@ function costume.onTick() --WIP
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/link/A2XT-Sheath/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/link/A2XT-Sheath/player-grow.ogg")
 	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/link/A2XT-Sheath/mushroom.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/link/A2XT-Sheath/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/link/A2XT-Sheath/player-died.ogg")
 	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/link/A2XT-Sheath/shell-hit.ogg")
 	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/player-slide.ogg")
 	Audio.sounds[11].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/item-dropped.ogg")
@@ -127,7 +127,7 @@ function costume.onCleanup(p)
 		Audio.sounds[5].sfx  = nil
 		Audio.sounds[6].sfx  = nil
 		Audio.sounds[7].sfx  = nil
-		Audio.sounds[8].sfx  = nil
+		extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 		Audio.sounds[9].sfx  = nil
 		Audio.sounds[10].sfx = nil
 		Audio.sounds[11].sfx = nil

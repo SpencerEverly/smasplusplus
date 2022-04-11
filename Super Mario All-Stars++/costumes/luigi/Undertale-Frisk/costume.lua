@@ -12,7 +12,7 @@ function costume.onInit(p)
 	--Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/block-hit.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/player-grow.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/player-died.ogg")
 	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/shell-hit.ogg")
 	--Audio.sounds[13].sfx = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/camera-change.ogg")
 	extrasounds.id[14] = Audio.SfxOpen("costumes/luigi/Undertale-Frisk/coin.ogg")
@@ -45,7 +45,7 @@ function costume.onCleanup(p)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil

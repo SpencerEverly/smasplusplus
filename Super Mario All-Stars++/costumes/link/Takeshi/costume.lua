@@ -12,7 +12,7 @@ function costume.onInit(p)
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/link/Takeshi/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/link/Takeshi/player-grow.ogg")
 	Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/link/Takeshi/mushroom.ogg")
-	Audio.sounds[8].sfx  = Audio.SfxOpen("costumes/link/Takeshi/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/link/Takeshi/player-died.ogg")
 	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/link/Takeshi/shell-hit.ogg")
 	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/link/Takeshi/player-slide.ogg")
 	Audio.sounds[11].sfx = Audio.SfxOpen("costumes/link/Takeshi/item-dropped.ogg")
@@ -105,7 +105,7 @@ function costume.onCleanup(p)
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
-	Audio.sounds[8].sfx  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil
