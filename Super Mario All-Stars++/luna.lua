@@ -90,7 +90,7 @@ function openSFX(name) --Opening SFXs
 	SFX.open(name)
 end
 
-function SFX(name) --Playing SFXs
+function playSFX(name) --Playing SFXs
 	SFX.play(name)
 end
 
@@ -101,15 +101,6 @@ function Music(name, sectionid) --Music changing is now a LOT easier
 		end
 	end
 	return Audio.MusicChange(sectionid, name)
-end
-
-function MusicAlt(name, sectionid) --Alternative music changer, for no reason
-	if sectionid == -1 then
-		for i = 0,20 do
-			sectionid = i
-		end
-	end
-	return Section(sectionid).music = name
 end
 
 --Now we get to the Hub date detection stuff. First, we start with Easter...
