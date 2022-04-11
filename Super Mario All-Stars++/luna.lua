@@ -207,7 +207,7 @@ function onCameraUpdate(c, camIdx)
 end
 
 --Now load the loading sound file!
-local loadingsoundFile = resolveSFX("loadscreen.ogg")
+local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
 local noloadingsounds = {
