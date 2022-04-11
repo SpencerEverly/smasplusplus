@@ -10,6 +10,7 @@ end
 
 --Now, before we get started, we require the most important libraries on the top.
 
+GameData.levelMusicTemporary = {temporary}
 local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
