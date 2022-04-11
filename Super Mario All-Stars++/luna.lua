@@ -104,7 +104,7 @@ function playSFX(name) --Playing SFXs
 end
 
 function changeMusic(file, sectionid) --Music changing is now a LOT easier
-	local file = FileOpen(name)
+	local file = resolve(name)
 	if sectionid == -1 then
 		for i = 0,20 do
 			sectionid = i
