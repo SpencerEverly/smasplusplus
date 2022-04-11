@@ -10,11 +10,6 @@
 local playerManager = require("playerManager")
 local pausemenu = require("pauseplus")
 
-local levelfolder = Level.folderPath()
-local levelname = Level.filename()
-local levelformat = Level.format()
-local level = Level.filename()
-
 local ready = false
 
 --This is important so that the code will work
@@ -2123,43 +2118,19 @@ end
 function musicalchairs.switcher()
 	started = false
 	Routine.wait(0.1)
-	local files = GameData.levelMusicOriginal
-	local musicfiles = {}
-	for i = 1,21 do
-		table.insert(musicfiles, files[i])
-	end
-	local musicfiless = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}
-	if musicfiles == 1 then
-		if Section(0) then
-			songname = musicfiles[1]
-		end
-	end
-	if musicfiles == 2 then
-		if Section(1) then
-			songname = musicfiles[2]
-		end
-	end
-	if musicfiles == 3 then
-		if Section(2) then
-			songname = musicfiles[3]
-		end
-	end
-	if musicfiles == 4 then
-		if Section(3) then
-			songname = musicfiles[4]
-		end
-	end
 	for i = 0,20 do
-		local section = Section(i)
-		section.musicPath = songname
+		songname = GameData.levelMusicOriginal[i]
+		Section(i).music = songname
 	end
 	Routine.wait(0.1)
 	started = true
 end
 
 function musicalchairs.onStart()
-	local musiclist = {[Section(0).music] = 1,[Section(1).music] = 2,[Section(2).music] = 3,[Section(3).music] = 4,[Section(4).music] = 5,[Section(5).music] = 6,[Section(6).music] = 7,[Section(7).music] = 8,[Section(8).music] = 9,[Section(9).music] = 10,[Section(10).music] = 11,[Section(11).music] = 12,[Section(12).music] = 13,[Section(13).music] = 14,[Section(14).music] = 15,[Section(15).music] = 16,[Section(16).music] = 17,[Section(17).music] = 18,[Section(18).music] = 19,[Section(19).music] = 20,[Section(20).music] = 21}
-	GameData.levelMusicOriginal = musiclist
+	for i = 0,20 do
+		musiclist = {Section(i).music}
+		GameData.levelMusicOriginal[i] = Section(i).music
+	end
 	Routine.run(musdelay)
 end
 

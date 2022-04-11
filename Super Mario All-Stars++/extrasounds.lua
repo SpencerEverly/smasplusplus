@@ -20,7 +20,7 @@ local ready = false --This library isn't ready until onInit is finished
 
 extrasounds.id = {}
 extrasounds.id[0] = Audio.SfxOpen(Misc.resolveSoundFile("sound/nothing.ogg")) --General sound to mute anything, really
---All SMBX sounds, including additional ones
+--All SMBX sounds (To play the stock sounds regardless of it being muted), including additional ones
 for k,v in ipairs({
 	"player-jump",
 	"stomped",

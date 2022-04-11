@@ -106,30 +106,6 @@ function openSFX(name) --Opening SFXs
 	SFX.open(name)
 end
 
-local extrasoundids = ({
-	extrasounds.id[92],
-	extrasounds.id[93],
-	extrasounds.id[94],
-	extrasounds.id[95],
-	extrasounds.id[96],
-	extrasounds.id[97],
-	extrasounds.id[98],
-	extrasounds.id[99],
-	extrasounds.id[100],
-	extrasounds.id[101],
-	extrasounds.id[102],
-	extrasounds.id[103],
-	extrasounds.id[104],
-	extrasounds.id[105],
-	extrasounds.id[106],
-	extrasounds.id[107],
-	extrasounds.id[108],
-	extrasounds.id[109],
-	extrasounds.id[110],
-	extrasounds.id[111],
-	extrasounds.id[112],
-})
-
 function playSFX(idname) --Playing SFXs
 	if idname >= 92 then
 		SFX.play(extrasounds.id[idname])
@@ -145,6 +121,21 @@ function changeMusic(name, sectionid) --Music changing is now a LOT easier
 		end
 	elseif sectionid >= 0 or sectionid <= 20 then
 		Audio.MusicChange(sectionid, name)
+	end
+end
+
+function muteMusic()
+	for i = 0,20 do
+		musiclist = {Section(i).music}
+		GameData.levelMusicTemporary[i] = Section(i).music
+		Audio.MusicChange(i, 0)
+	end
+end
+
+function restoreMusic()
+	for i = 0,20 do
+		songname = GameData.levelMusicTemporary[i]
+		Section(i).music = songname
 	end
 end
 

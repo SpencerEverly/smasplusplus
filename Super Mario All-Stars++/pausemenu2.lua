@@ -8,6 +8,7 @@ local rng = require("rng")
 local textplus = require("textplus")
 local rooms = require("rooms")
 local smasdeathsystem = require("smasdeathsystem")
+local musicalchairs = require("musicalchairs")
 local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
@@ -598,6 +599,7 @@ local function costumechangeright()
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	Routine.run(musicalchairs.switcher)
 end
 
 local function costumechangeleft()
@@ -612,6 +614,7 @@ local function costumechangeleft()
 	end
 	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
 	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	Routine.run(musicalchairs.switcher)
 end
 
 function pausemenu2.onDraw()
