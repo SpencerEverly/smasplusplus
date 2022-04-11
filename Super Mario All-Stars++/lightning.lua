@@ -32,7 +32,7 @@ function lightning.onTick()
 	end
 	for _,p in ipairs(Player.get()) do
 		if lightning.section[p.section+1] ~= nil and lightningtimer == 0 and lightningcountdown == lightning.speed then
-			SFX.play(extrasounds.id[4]3)
+			SFX.play(extrasounds.id[43])
 		end
 	end
 end
