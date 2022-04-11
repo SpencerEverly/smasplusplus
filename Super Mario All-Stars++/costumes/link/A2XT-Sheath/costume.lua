@@ -78,7 +78,7 @@ function costume.onTick() --WIP
 	Audio.sounds[36].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/smash.ogg")
 	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/thwomp.ogg")
 	Audio.sounds[42].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/npc-fireball.ogg")
-	Audio.sounds[43].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/fireworks.ogg")
+	extrasounds.id[43] = Audio.SfxOpen("costumes/link/A2XT-Sheath/fireworks.ogg")
 	Audio.sounds[44].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/bowser-killed.ogg")
 	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/door.ogg")
 	Audio.sounds[48].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/yoshi.ogg")
