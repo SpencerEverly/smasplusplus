@@ -86,6 +86,10 @@ function GraphicImageDraw(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawi
 	return nil
 end
 
+function resolveSFX(name) --Opening SFXs
+	Misc.resolveSoundFile(name)
+end
+
 function openSFX(name) --Opening SFXs
 	SFX.open(name)
 end
@@ -203,7 +207,7 @@ function onCameraUpdate(c, camIdx)
 end
 
 --Now load the loading sound file!
-local loadingsoundFile = openSFX("loadscreen.ogg")
+local loadingsoundFile = resolveSFX("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
 local noloadingsounds = {
