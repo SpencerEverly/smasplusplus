@@ -927,15 +927,6 @@ function pauseplus.onDraw()
             pauseplus.currentMusicVolume = nil
         end
     end
-	
-	if mapswitchprevention then
-		if player.keys.left == KEYS_PRESSED then
-			player.keys.left = KEYS_UNPRESSED
-		end
-		if player.keys.right == KEYS_PRESSED then
-			player.keys.right = KEYS_UNPRESSED
-		end
-	end
 
     local openerCamera = getPlayerCamera(pauseplus.opener)
 
@@ -959,9 +950,6 @@ function pauseplus.onPause(eventObj,playerObj)
     if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) then
         pauseplus.open(nil,nil,playerObj)
     end
-	if isOverworld then
-		mapswitchprevention = true
-	end
 end
 
 function pauseplus.onKeyboardPressDirect(keycode,repeated,character) -- for shift+P shortcut

@@ -75,7 +75,7 @@ end
 function debugbox.onKeyboardPress(k)
 	if debugbox.bootactive == true then
 		if k == VK_F8 then
-			SFX.play("cheating_victory.ogg")
+			playSound("cheating_victory.ogg")
 			littleDialogue.create({text = "<boxStyle smbx13>NNW SMSK? (What shall you do?)<page><question DEBUG>", updatesInPause = true})
 		end
 	end
@@ -88,7 +88,7 @@ littleDialogue.registerAnswer("DEBUG",{text = "GtZStTI (Goods Edit/Powerup Menu)
 littleDialogue.registerAnswer("DEBUG",{text = "FST PLYR (Toggle 1st Player)", chosenFunction = function() Cheats.trigger("1player") end})
 littleDialogue.registerAnswer("DEBUG",{text = "SND PLYR (Toggle 2nd Player)", chosenFunction = function() Cheats.trigger("2player") end})
 littleDialogue.registerAnswer("DEBUG",{text = "SUND (Sound Menu)",addText = "SUND? (Which sound section?)<question MUSIC>"})
-littleDialogue.registerAnswer("DEBUG",{text = "CODSOD (Add 1000 Coins to Total Coin Count)", chosenFunction = function() SaveData.totalcoins = SaveData.totalcoins + 1000 SFX.play(27) end})
+littleDialogue.registerAnswer("DEBUG",{text = "CODSOD (Add 1000 Coins to Total Coin Count)", chosenFunction = function() SaveData.totalcoins = SaveData.totalcoins + 1000 playSound(27) end})
 littleDialogue.registerAnswer("DEBUG",{text = "EXT (Exit Level)", chosenFunction = function() Level.exit() end})
 littleDialogue.registerAnswer("DEBUG",{text = "RESTT (Restart Level)", chosenFunction = function() Level.load() end})
 littleDialogue.registerAnswer("DEBUG",{text = "KIL (Kill Player)", chosenFunction = function() player:kill() end})
@@ -199,15 +199,15 @@ littleDialogue.registerAnswer("BGM",{text = "Up one",addText = "SUND? (Which sou
 
 
 littleDialogue.registerAnswer("SFX",{text = "Up one",addText = "SND? (Which sound section?)<question MUSIC>"})
-littleDialogue.registerAnswer("SFX",{text = "1 - Jump",chosenFunction = function() SFX.play(1) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "2 - Stomp",chosenFunction = function() SFX.play(2) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "3 - Block Hit",chosenFunction = function() SFX.play(3) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "4 - Block Smashed",chosenFunction = function() SFX.play(4) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "5 - Shrink",chosenFunction = function() SFX.play(5) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "6 - Grow",chosenFunction = function() SFX.play(6) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "7 - Mushroom",chosenFunction = function() SFX.play(7) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "8 - Player Died",chosenFunction = function() SFX.play(8) end, addText = "SND? (Which sound section?)<question SFX>"})
-littleDialogue.registerAnswer("SFX",{text = "9 - Shell Kick",chosenFunction = function() SFX.play(9) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "1 - Jump",chosenFunction = function() playSound(1) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "2 - Stomp",chosenFunction = function() playSound(2) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "3 - Block Hit",chosenFunction = function() playSound(3) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "4 - Block Smashed",chosenFunction = function() playSound(4) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "5 - Shrink",chosenFunction = function() playSound(5) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "6 - Grow",chosenFunction = function() playSound(6) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "7 - Mushroom",chosenFunction = function() playSound(7) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "8 - Player Died",chosenFunction = function() playSound(8) end, addText = "SND? (Which sound section?)<question SFX>"})
+littleDialogue.registerAnswer("SFX",{text = "9 - Shell Kick",chosenFunction = function() playSound(9) end, addText = "SND? (Which sound section?)<question SFX>"})
 
 
 

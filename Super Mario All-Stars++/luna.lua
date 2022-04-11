@@ -71,6 +71,7 @@ function resolve(name) --This will not only check the main SMBX2 folders, but wi
 		or Misc.resolveFile("costumes/" .. name)
 		or Misc.resolveFile("scripts/" .. name)
 		or Misc.resolveFile("graphics/" .. name)
+		or Misc.resolveFile("sound/" .. name)
 		or Misc.resolveFile("___MainUserDirectory/" .. name)
 end
 
@@ -99,6 +100,7 @@ function resolveSound(name) --Opening sounds
 		or Misc.resolveSoundFile("costumes/" .. name)
 		or Misc.resolveSoundFile("scripts/" .. name)
 		or Misc.resolveSoundFile("graphics/" .. name)
+		or Misc.resolveSoundFile("sound/" .. name)
 		or Misc.resolveSoundFile("___MainUserDirectory/" .. name)
 end
 
@@ -106,11 +108,14 @@ function openSound(name) --Opening SFXs
 	SFX.open(name)
 end
 
-function playSound(idname) --Playing SFXs
-	if idname >= 92 or idname == 4  or idname == 7 or idname == 8 or idname == 14 or idname == 15 or idname == 18 or idname == 43 or idname == 59 then
-		SFX.play(extrasounds.id[idname])
-	elseif idname <= 91 then
-		SFX.play(idname)
+function playSound(name) --Playing SFXs
+	if name >= 92 or name == 4  or name == 7 or name == 8 or name == 14 or name == 15 or name == 18 or name == 43 or name == 59 then
+		SFX.play(extrasounds.id[name])
+	elseif name <= 91 then
+		SFX.play(name)
+	elseif name == "" then
+		resolveSound(name)
+		SFX.play(name)
 	end
 end
 
@@ -124,18 +129,29 @@ function changeMusic(name, sectionid) --Music changing is now a LOT easier
 	end
 end
 
-function muteMusic()
-	for i = 0,20 do
-		musiclist = {Section(i).music}
-		GameData.levelMusicTemporary[i] = Section(i).music
-		Audio.MusicChange(i, 0)
+function muteMusic(sectionid) --Mute all section music, or just mute a specific section
+	if sectionid == -1 then --If -1, all section music will be muted
+		for i = 0,20 do
+			musiclist = {Section(i).music}
+			GameData.levelMusicTemporary[i] = Section(i).music
+			Audio.MusicChange(i, 0)
+		end
+	elseif sectionid >= 0 or sectionid <= 20 then
+		musiclist = {Section(sectionid).music}
+		GameData.levelMusicTemporary[i] = Section(sectionid).music
+		Audio.MusicChange(sectionid, 0)
 	end
 end
 
-function restoreMusic()
-	for i = 0,20 do
-		songname = GameData.levelMusicTemporary[i]
-		Section(i).music = songname
+function restoreMusic(sectionid)
+	if sectionid == -1 then
+		for i = 0,20 do
+			songname = GameData.levelMusicTemporary[i]
+			Section(i).music = songname
+		end
+	elseif sectionid >= 0 or sectionid <= 20 then
+		songname = GameData.levelMusicTemporary[sectionid]
+		Section(sectionid).music = songname
 	end
 end
 

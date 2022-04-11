@@ -67,7 +67,7 @@ local function startMusic()
 			end
 			GameData.muteMusic = true
 			Audio.MusicVolume(0)
-			muteMusic()
+			muteMusic(-1)
 		end
 	end
 end
@@ -84,7 +84,7 @@ local function stopMusic(idx)
 		starSoundObject:FadeOut(500)
 		Audio.MusicVolume(musicvolcache);
 		GameData.muteMusic = false
-		restoreMusic()
+		restoreMusic(-1)
 		musicvolcache = nil;
 	end
 end
