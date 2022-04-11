@@ -68,15 +68,15 @@ function resolve(name) --This will not only check the main SMBX2 folders, but wi
 end
 
 function openImage(name) --Opening the graphics as easy as Pie!
-	local file = FileOpen(name) or FileOpen(name..".png")
+	local file = resolve(name) or resolve(name..".png")
 	if file then
-		Graphics.loadImageResolved(FileOpen)
+		Graphics.loadImageResolved(resolve)
 	end
 	return nil
 end
 
 function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawing graphics got a lot better.
-	local file = FileOpen(name) or FileOpen(name..".png")
+	local file = resolve(name) or resolve(name..".png")
 	local xdraw = 0
 	local ydraw = 0
 	local opacitydraw = 1
