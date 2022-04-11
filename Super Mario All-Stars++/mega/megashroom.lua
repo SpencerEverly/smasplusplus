@@ -179,6 +179,7 @@ function mega2.StopMega(pobj, useShrink)
 	
 	if soundObject ~= nil then
 		soundObject:Stop()
+		restoreMusic(-1)
 		soundObject = nil;
 	end
 end
@@ -391,6 +392,8 @@ local function UpdateMegaState()
 						if(Audio.MusicVolume() > 0 and growing[p] >= 0) then
 							musicvolcache = Audio.MusicVolume()
 							Audio.MusicVolume(0);
+							refreshMusic(-1)
+							muteMusic(-1)
 							GameData.megashroomActive = true
 						end
 						

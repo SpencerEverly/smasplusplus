@@ -138,7 +138,7 @@ function muteMusic(sectionid) --Mute all section music, or just mute a specific 
 		end
 	elseif sectionid >= 0 or sectionid <= 20 then
 		musiclist = {Section(sectionid).music}
-		GameData.levelMusicTemporary[i] = Section(sectionid).music
+		GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
 		Audio.MusicChange(sectionid, 0)
 	end
 end
@@ -152,6 +152,18 @@ function restoreMusic(sectionid) --Restore all section music, or just restore a 
 	elseif sectionid >= 0 or sectionid <= 20 then
 		songname = GameData.levelMusicTemporary[sectionid]
 		Section(sectionid).music = songname
+	end
+end
+
+function refreshMusic(sectionid) --Refresh the music that's currently playing by updating the music table
+	if sectionid == -1 then --If -1, all section music will be muted
+		for i = 0,20 do
+			musiclist = {Section(i).music}
+			GameData.levelMusicTemporary[i] = Section(i).music
+		end
+	elseif sectionid >= 0 or sectionid <= 20 then
+		musiclist = {Section(sectionid).music}
+		GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
 	end
 end
 
