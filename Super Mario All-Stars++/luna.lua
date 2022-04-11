@@ -110,7 +110,7 @@ function onCameraUpdate(c, camIdx)
     end
 end
 
-local loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
+local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 local noloadingsounds = {
 	["SMAS - Start.lvlx"] = true,
 	["SMAS - Raca's World (Part 0).lvlx"] = true,
