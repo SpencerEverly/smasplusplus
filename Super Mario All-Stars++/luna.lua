@@ -143,8 +143,8 @@ function muteMusic(sectionid) --Mute all section music, or just mute a specific 
 	end
 end
 
-function restoreMusic(sectionid)
-	if sectionid == -1 then
+function restoreMusic(sectionid) --Restore all section music, or just restore a specific section
+	if sectionid == -1 then --If -1, all section music will be restored
 		for i = 0,20 do
 			songname = GameData.levelMusicTemporary[i]
 			Section(i).music = songname
