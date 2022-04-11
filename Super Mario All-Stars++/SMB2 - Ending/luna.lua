@@ -1,6 +1,5 @@
 local textplus = require("textplus")
 local cutsceneenabled = false
-local cutsceneenablednopause = false
 Graphics.activateHud(false)
 
 local timer1 = 0
@@ -13,28 +12,15 @@ local blackfadein = false
 local blackfadeout = false
 
 function onInputUpdate()
-    if cutsceneenabled then
-		player.upKeyPressing = false
-		player.downKeyPressing = false
-		player.leftKeyPressing = false
-		player.rightKeyPressing = false
-		player.altJumpKeyPressing = false
-		player.runKeyPressing = false
-		player.altRunKeyPressing = false
-		player.dropItemKeyPressing = false
-		player.jumpKeyPressing = false
-	elseif cutsceneenablednopause then
-		player.upKeyPressing = false
-		player.downKeyPressing = false
-		player.leftKeyPressing = false
-		player.rightKeyPressing = false
-		player.altJumpKeyPressing = false
-		player.runKeyPressing = false
-		player.altRunKeyPressing = false
-		player.dropItemKeyPressing = false
-		player.pauseKeyPressing = false
-	end
-	if player.keys.pause == KEYS_PRESSED then
+	player.upKeyPressing = false
+	player.downKeyPressing = false
+	player.leftKeyPressing = false
+	player.rightKeyPressing = false
+	player.altJumpKeyPressing = false
+	player.runKeyPressing = false
+	player.altRunKeyPressing = false
+	player.dropItemKeyPressing = false
+	if player.rawKeys.pause == KEYS_PRESSED then
 		player:teleport(-179648, -180320)
 		if Player(2) and Player(2).isValid then
 			player2:teleport(-179584, -180320)
@@ -57,10 +43,6 @@ function onDraw()
 		time = time + 1
 		Graphics.drawScreen{color = Color.white..math.max(0,time/243),priority = 1}
 	end
-end
-
-function onStart()
-    cutsceneenabled = true
 end
 
 function onTick()
@@ -146,6 +128,9 @@ function onTick()
 end
 
 function onEvent(eventName)
+	if eventName == "Cutscene Stop Pressing 2" then
+		
+	end
 	if eventName == "Cutscene 3" then
 		blackfadein = true
 	end
@@ -178,8 +163,6 @@ function onEvent(eventName)
 	end
 	if eventName == "Cutscene 11" then
 		whiteflashpre1 = true
-		cutsceneenabled = false
-		cutsceneenablednopause = true
 	end
 	if eventName == "Cutscene 12" then
 		whiteflashpre1 = false
@@ -203,8 +186,7 @@ function onEvent(eventName)
 		if Player(2) and Player(2).isValid then
 			player2:teleport(-139616, -140416)
 		end
-		cutsceneenabled = true
-		cutsceneenablednopause = false
+		cutsceneenabled = false
 	end
 	if eventName == "Cutscene 17" then
 		

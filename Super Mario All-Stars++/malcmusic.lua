@@ -75,6 +75,25 @@ function malcmusic.onStart()
 		end
 		
 		
+		if os.date("*t").month == 4 and os.date("*t").day == 17 and os.date("*t").year == 2022 then --Easter Sunday
+			malcmusic.holiday = true
+			if malcmusic.holiday == true then
+				SectionAll.musicPath = "_OST/Animal Crossing - City Folk/event_carnival.ogg"
+				triggerEvent("Easter")
+			end
+		elseif os.date("*t").month == 4 and os.date("*t").day == 9 and os.date("*t").year == 2023 then
+			if malcmusic.holiday == true then
+				SectionAll.musicPath = "_OST/Animal Crossing - City Folk/event_carnival.ogg"
+				triggerEvent("Easter")
+			end
+		elseif os.date("*t").month == 3 and os.date("*t").day == 31 and os.date("*t").year == 2024 then
+			if malcmusic.holiday == true then
+				SectionAll.musicPath = "_OST/Animal Crossing - City Folk/event_carnival.ogg"
+				triggerEvent("Easter")
+			end
+		end
+		
+		
 		if os.date("*t").month == 04 and os.date("*t").day == 20 then
 			malcmusic.holiday = true
 			if malcmusic.holiday == true then

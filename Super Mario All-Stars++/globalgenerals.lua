@@ -18,6 +18,10 @@ if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 	yoshi = require("yiYoshi/yiYoshi")
 end
 
+if SMBX_VERSION == VER_SEE_MOD then
+	__disablePauseMenu = true
+end
+
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 

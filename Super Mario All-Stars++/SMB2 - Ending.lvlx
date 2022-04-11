@@ -964,4 +964,6 @@ ET:"Cutscene 14";TE:"Cutscene 15";TD:70;AS:0;AX:0;AY:0;
 ET:"Cutscene 15";TE:"Cutscene 16";TD:60;AS:0;AX:0;AY:0;
 ET:"Cutscene 16";SD:27;LS:["TheEnd"];TE:"Cutscene 17";TD:30;DS:1;AS:0;AX:0;AY:0;
 ET:"Cutscene 17";LS:["PressExit"];DS:1;AS:0;AX:0;AY:0;
+ET:"Cutscene Stop Pressing";TE:"Cutscene Stop Pressing 2";TD:15;AU:1;AS:0;AX:0;AY:0;
+ET:"Cutscene Stop Pressing 2";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
