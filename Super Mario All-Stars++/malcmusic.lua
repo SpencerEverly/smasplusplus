@@ -130,7 +130,6 @@ function malcmusic.onTick()
 		
 		
 		if os.date("*t").month == SaveData.eastermonth and os.date("*t").day == SaveData.easterday then --Easter Sunday
-			malcmusic.holiday = true
 			if malcmusic.holiday == true then
 				SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
 			end
