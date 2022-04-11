@@ -58,7 +58,7 @@ end
 
 --Next up is some new resolveFile requiring functions, for simplifying the functions:
 
-function FileOpen(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
+function resolve(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
 	return Misc.resolveFile(name)
 		or Misc.resolveFile("_OST/" .. name)
 		or Misc.resolveFile("costumes/" .. name)
@@ -67,7 +67,7 @@ function FileOpen(name) --This will not only check the main SMBX2 folders, but w
 		or Misc.resolveFile("___MainUserDirectory/" .. name)
 end
 
-function GraphicImageOpen(name) --Opening the graphics as easy as Pie!
+function openImage(name) --Opening the graphics as easy as Pie!
 	local file = FileOpen(name) or FileOpen(name..".png")
 	if file then
 		Graphics.loadImageResolved(FileOpen)
@@ -75,7 +75,7 @@ function GraphicImageOpen(name) --Opening the graphics as easy as Pie!
 	return nil
 end
 
-function GraphicImageDraw(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawing graphics got a lot better.
+function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawing graphics got a lot better.
 	local file = FileOpen(name) or FileOpen(name..".png")
 	local xdraw = 0
 	local ydraw = 0
@@ -86,8 +86,13 @@ function GraphicImageDraw(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawi
 	return nil
 end
 
-function resolveSFX(name) --Opening SFXs
-	Misc.resolveSoundFile(name)
+function resolveSound(name) --Opening SFXs
+	return Misc.resolveSoundFile(name)
+		or Misc.resolveSoundFile("_OST/" .. name)
+		or Misc.resolveSoundFile("costumes/" .. name)
+		or Misc.resolveSoundFile("scripts/" .. name)
+		or Misc.resolveSoundFile("graphics/" .. name)
+		or Misc.resolveSoundFile("___MainUserDirectory/" .. name)
 end
 
 function openSFX(name) --Opening SFXs
@@ -98,13 +103,14 @@ function playSFX(name) --Playing SFXs
 	SFX.play(name)
 end
 
-function Music(name, sectionid) --Music changing is now a LOT easier
+function changeMusic(file, sectionid) --Music changing is now a LOT easier
+	local file = FileOpen(name)
 	if sectionid == -1 then
 		for i = 0,20 do
 			sectionid = i
 		end
 	end
-	return Audio.MusicChange(sectionid, name)
+	return Audio.MusicChange(sectionid, file)
 end
 
 --Now we get to the Hub date detection stuff. First, we start with Easter...
