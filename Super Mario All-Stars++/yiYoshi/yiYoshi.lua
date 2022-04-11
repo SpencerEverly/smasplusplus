@@ -4708,7 +4708,7 @@ function yoshi.cleanupCharacter()
 
     Audio.sounds[1].sfx  = nil
     Audio.sounds[5].sfx  = nil
-    extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
+    extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died"))
     Audio.sounds[14].sfx = nil
     Audio.sounds[19].sfx = nil
     Audio.sounds[60].sfx = nil

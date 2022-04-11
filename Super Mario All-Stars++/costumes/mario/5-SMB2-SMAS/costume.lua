@@ -44,7 +44,7 @@ function costume.onCleanup(p)
 	-- Remove the player from the list
 	if costume.playerData[p] ~= nil then
 		Audio.sounds[6].sfx  = nil
-		extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died")
+		extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died"))
 		costume.playerData[p] = nil
 	end
 end
