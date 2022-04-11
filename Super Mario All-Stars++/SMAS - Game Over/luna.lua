@@ -87,7 +87,7 @@ function onEvent(eventName)
 		Level.load("SMAS - Start.lvlx", nil, nil)
 	end
 	if eventName == "EndGame1" then
-		SFX.play(extrasounds.id14)
+		SFX.play(extrasounds.id[14])
 		blackscreen = true
 		Misc.saveGame()
 	end

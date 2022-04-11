@@ -73,8 +73,8 @@ function costume.onInit(playerObj)
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/block-hit.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/player-grow.ogg")
-	extrasounds.id14 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/coin.ogg")
-	extrasounds.id15 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/1up.ogg")
+	extrasounds.id[14] = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/coin.ogg")
+	extrasounds.id[15] = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/1up.ogg")
 	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/warp.ogg")
 	Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/boss-beat.ogg")
 	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/pswitch.ogg")
@@ -85,7 +85,7 @@ function costume.onInit(playerObj)
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/got-star.ogg")
 	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/yoshi-swallow.ogg")
 	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/smw-checkpoint.ogg")
-	extrasounds.id59 = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/dragon-coin.ogg")
+	extrasounds.id[59] = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/dragon-coin.ogg")
 	Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/swim.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Z-SMW2-AdultMario/bubble.ogg")
 	
@@ -278,11 +278,11 @@ function costume.onCleanup(playerObj)
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("coin.ogg"))
-	extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("1up.ogg"))
+	extrasounds.id[14] = Audio.SfxOpen(Misc.resolveSoundFile("coin.ogg"))
+	extrasounds.id[15] = Audio.SfxOpen(Misc.resolveSoundFile("1up.ogg"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("fireball.ogg"))
+	extrasounds.id[18] = Audio.SfxOpen(Misc.resolveSoundFile("fireball.ogg"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil

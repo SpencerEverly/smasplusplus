@@ -135,11 +135,11 @@ function costume.onCleanup(p)
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	extrasounds.id14 = Audio.SfxOpen(Misc.resolveSoundFile("coin.ogg"))
-	extrasounds.id15 = Audio.SfxOpen(Misc.resolveSoundFile("1up.ogg"))
+	extrasounds.id[14] = Audio.SfxOpen(Misc.resolveSoundFile("coin.ogg"))
+	extrasounds.id[15] = Audio.SfxOpen(Misc.resolveSoundFile("1up.ogg"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	extrasounds.id18 = Audio.SfxOpen(Misc.resolveSoundFile("fireball.ogg"))
+	extrasounds.id[18] = Audio.SfxOpen(Misc.resolveSoundFile("fireball.ogg"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil
