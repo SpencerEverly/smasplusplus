@@ -2,11 +2,18 @@
 --By Spencer Everly
 --Here's the starting code that loads it all. How'd I do?
 
---First thing before we get started is that we require the most important libraries on the top.
+--Make sure we aren't running Beta 3 before we actually start...
+if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
+	Misc.dialog("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")
+	Misc.exitEngine()
+end
+
+--Now, before we get started, we require the most important libraries on the top.
 
 local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
+local extrasounds = require("extrasounds")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 
@@ -86,7 +93,7 @@ function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawing grap
 	return nil
 end
 
-function resolveSound(name) --Opening SFXs
+function resolveSound(name) --Opening sounds
 	return Misc.resolveSoundFile(name)
 		or Misc.resolveSoundFile("_OST/" .. name)
 		or Misc.resolveSoundFile("costumes/" .. name)
@@ -99,24 +106,26 @@ function openSFX(name) --Opening SFXs
 	SFX.open(name)
 end
 
-function playSFX(name) --Playing SFXs
-	SFX.play(name)
+function playSFX(idname) --Playing SFXs
+	if idname >= 92 then
+		tostring(idname)
+		SFX.play(extrasounds.id..idname)
+	elseif idname <= 91 then
+		SFX.play(idname)
+	end
 end
 
 function changeMusic(name, sectionid) --Music changing is now a LOT easier
-	local file = resolveSound(name)
-	if sectionid == -1 then
+	if sectionid == -1 then --If -1, all section music will change to the specified song
 		for i = 0,20 do
-			sectionid = i
+			Audio.MusicChange(i, name)
 		end
-	end
-	if file then
-		return Audio.MusicChange(sectionid, file)
+	elseif sectionid >= 0 or sectionid <= 20 then
+		Audio.MusicChange(sectionid, name)
 	end
 end
 
 --Now we get to the Hub date detection stuff. First, we start with Easter...
-
 function easter (year) --"Happy easter! (Foot goes into the toilet with a kick sound)" - Vince
     local G = year % 19
     local C = div(year, 100)

@@ -211,7 +211,6 @@ function costume.onCleanup(p)
 	extrasounds.id110 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo5.ogg")) --Shell hit 6
 	extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
 	extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
-	extrasounds.id113 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo8.ogg")) --Shell hit 9, basically a shell hit and a 1UP together
 		
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 3

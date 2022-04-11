@@ -466,7 +466,6 @@ function dependencies.onStart()
 	extrasounds.id110 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo5.ogg")) --Shell hit 6
 	extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo6.ogg")) --Shell hit 7
 	extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo7.ogg")) --Shell hit 8
-	extrasounds.id113 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo8.ogg")) --Shell hit 9, basically a shell hit and a 1UP together
 	if character == "CHARACTER_LUIGI" then
 		if currentCostume == "UNDERTALE-FRISK" then
 			if SaveData.ut_enabled == 0 then

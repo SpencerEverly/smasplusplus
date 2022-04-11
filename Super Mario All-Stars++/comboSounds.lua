@@ -16,10 +16,9 @@ comboSounds.kick4 = extrasounds.id109
 comboSounds.kick5 = extrasounds.id110
 comboSounds.kick6 = extrasounds.id111
 comboSounds.kick7 = extrasounds.id112
-comboSounds.kick8 = extrasounds.id113
 
 comboSounds.sounds = {
-    9,
+    8,
 	extrasounds.id106, --Combo sounds 1-7, found under extrasounds
     extrasounds.id107,
     extrasounds.id108,
@@ -44,7 +43,6 @@ local comboScores = {
     [2000] = 6,
     [4000] = 7,
     [8000] = 8,
-	[0] = 9, --1UP sound
 }
 
 
