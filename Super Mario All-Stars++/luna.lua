@@ -47,6 +47,36 @@ local function loadSaveSlot(slot)
 	return {}
 end
 
+function FileOpen(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
+	return Misc.resolveFile(name)
+		or Misc.resolveFile("_OST/" .. name)
+		or Misc.resolveFile("costumes/" .. name)
+		or Misc.resolveFile("scripts/" .. name)
+		or Misc.resolveFile("graphics/" .. name)
+		or Misc.resolveFile("___MainUserDirectory/" .. name)
+end
+
+function GraphicImage(name)
+	local file = FileOpen(name) or FileOpen(name..".png")
+	if file then
+		return Graphics.loadImageResolved(FileOpen)
+	end
+	return nil
+end
+
+function SFXPlay(name)
+	return SFX.play(name)
+end
+
+function MusicPlay(name, sectionid)
+	if sectionid == -1 then
+		for i = 0,20 do
+			i = sectionid
+		end
+	end
+	return Section(sectionid).music = name
+end
+
 Misc.saveGame()
 local globalgenerals = require("globalgenerals")
 local repll = require("repll")
