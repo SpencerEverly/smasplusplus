@@ -1,0 +1,4 @@
+speed=0
+noblockcollision=1
+frames=1
+framestyle=0

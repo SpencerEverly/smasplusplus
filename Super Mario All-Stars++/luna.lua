@@ -11,6 +11,7 @@ end
 --Now, before we get started, we require the most important libraries on the top.
 
 GameData.levelMusicTemporary = {temporary}
+GameData.levelMusic = {temporary}
 local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
@@ -110,12 +111,9 @@ function openSound(name) --Opening SFXs
 end
 
 function playSound(name) --Playing SFXs
-	if name >= 92 or name == 4  or name == 7 or name == 8 or name == 14 or name == 15 or name == 18 or name == 43 or name == 59 then
+	if name >= 92 or name == 4  or name == 7 or name == 8 or name == 14 or name == 15 or name == 18 or name == 43 or name == 59 or name == 0 then
 		SFX.play(extrasounds.id[name])
-	elseif name <= 91 then
-		SFX.play(name)
-	elseif name == "" then
-		resolveSound(name)
+	elseif name <= 91 or name == "" then
 		SFX.play(name)
 	end
 end

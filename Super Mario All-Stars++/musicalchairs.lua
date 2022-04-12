@@ -26,8 +26,6 @@ function musicalchairs.onInitAPI()
 	registerEvent(musicalchairs, "onEvent")
 	registerEvent(musicalchairs, "onDraw")
 	
-	GameData.levelMusic = {temporary}
-	
 	ready = true
 end
 

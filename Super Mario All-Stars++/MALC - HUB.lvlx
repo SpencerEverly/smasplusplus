@@ -8964,10 +8964,10 @@ ID:95;X:1888;Y:-64;W:32;H:32;
 ID:98;X:1888;Y:-32;W:32;H:32;
 ID:95;X:1920;Y:-64;W:32;H:32;
 ID:98;X:1920;Y:-32;W:32;H:32;
-ID:661;X:40304;Y:39616;W:32;H:32;LR:"SEEModStuff";EH:"YoshiChar";
-ID:1292;X:40304;Y:39808;W:32;H:32;LR:"SEEModStuff";EH:"JuniChar";
-ID:1294;X:40880;Y:39616;W:32;H:32;LR:"SEEModStuff";EH:"PrincessRinkaChar";
-ID:1296;X:40880;Y:39808;W:32;H:32;LR:"SEEModStuff";EH:"SteveChar";
+ID:996;X:40304;Y:39616;W:32;H:32;LR:"X2Stuff";EH:"YoshiChar";
+ID:990;X:40304;Y:39808;W:32;H:32;LR:"X2Stuff";EH:"JuniChar";
+ID:994;X:40880;Y:39616;W:32;H:32;LR:"X2Stuff";EH:"JuniChar";
+ID:992;X:40880;Y:39808;W:32;H:32;LR:"X2Stuff";EH:"JuniChar";
 BLOCK_END
 BGO
 ID:202;X:-179456;Y:-180160;
@@ -12757,7 +12757,7 @@ LR:"BusinessesOpen";
 LR:"BusinessesClosed";HD:1;
 LR:"X2Stuff";
 LR:"XStuff";HD:1;
-LR:"SEEModStuff";HD:1;
+LR:"SEEModStuff";
 LR:"SideQuestPipe";HD:1;
 LR:"DLCContentPipe";HD:1;
 LR:"Debug Stuff (Enable on full release)";

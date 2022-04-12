@@ -5,7 +5,6 @@
 --Rocky was here too
 --Enjl.
 --Spencer Everly.
-
 local playerManager = {}
 
 -- Local function definitions
@@ -48,7 +47,7 @@ playerManager.overworldCharacters = nil;
 ------ LOCAL FUNCTION DECLERATIONS ------
 -----------------------------------------
 
-function playerManager.playerManagerInit()
+function playerManagerInit()
 	-- Define the characters
 	configCharacter{id= 1, name="mario",           base=1, switchBlock=622, filterBlock=626, deathEffect=3}
 	configCharacter{id= 2, name="luigi",           base=2, switchBlock=623, filterBlock=627, deathEffect=5}
@@ -66,12 +65,14 @@ function playerManager.playerManagerInit()
 	configCharacter{id=14, name="ultimaterinka",   base=4, switchBlock=655, filterBlock=656, deathEffect=157}
 	configCharacter{id=15, name="unclebroadsword", base=1, switchBlock=659, filterBlock=660, deathEffect=159}
 	configCharacter{id=16, name="samus",           base=5, switchBlock=663, filterBlock=664, deathEffect=161}
-	configCharacter{id=17, name="juni",            base=4, switchBlock=661, filterBlock=662, deathEffect=152}
-	configCharacter{id=18, name="princessrinka",   base=4, switchBlock=657, filterBlock=658, deathEffect=157}
+	configCharacter{id=17, name="ultimaterinkatwo",base=4, switchBlock=990, filterBlock=991, deathEffect=160}
+	configCharacter{id=18, name="juni",            base=4, switchBlock=992, filterBlock=993, deathEffect=158}
+	configCharacter{id=19, name="ninjabombermantwo",base=3, switchBlock=994, filterBlock=995, deathEffect=999}
+	configCharacter{id=20, name="princessrinka",   base=4, switchBlock=996, filterBlock=997, deathEffect=158}
 	
 	-- Load Character APIs if this is not the overworld
 	--if not isOverworld then
-	playerManager.loadCharacterAPIs()
+	loadCharacterAPIs()
 	--end
 	
 	-- Update hitboxes early if possible
@@ -79,7 +80,7 @@ function playerManager.playerManagerInit()
 		updateCharacterHitbox(player.character)
 	end
 	
-	playerManager.initOverworldCharacters();
+	initOverworldCharacters();
 end
 
 -- Function to declare a character
@@ -123,8 +124,8 @@ function configCharacter(params)
 end
 
 -- Function to load all character APIs
-function playerManager.loadCharacterAPIs()
-	local p = "characters/";
+function loadCharacterAPIs()
+	local p = "character\\";
 	if(isOverworld) then
 		p = p.."overworld/";
 	end
@@ -143,8 +144,8 @@ function playerManager.loadCharacterAPIs()
 	end
 end
 
-function playerManager.overrideCharacterLib(id, lib)
-	local p = "characters/";
+function playerManager.overrideCharacterLib(params, id, lib)
+	local p = "character\\";
 	if(isOverworld) then
 		p = p.."overworld/";
 	end
@@ -155,7 +156,7 @@ function playerManager.overrideCharacterLib(id, lib)
 	
 	loadedTable[p..params.name] = lib
 	loadedTable[string.lower(p..params.name)] = lib
-	loadedTable[string.lower(p..params.name..".lua")] = lib
+	loadedTable[string.lower(Misc.episodePath()..p..params.name..".lua")] = lib
 	
 	params.api = lib
 	
@@ -167,10 +168,10 @@ function prepareCharacterSwaps(params, path)
 	local swapTypes = {'npc', 'effect', 'sound'}
 	local swapPattern = {npc='^npc%-(%d+)%.png$', effect='^effect%-(%d+)%.png$', sound='^sound%-(%d+)%.ogg$'}
 	local swaps = {}
-	local characterDir = path
-	if(path == nil) then
-		characterDir = Misc.resolveDirectory("graphics\\" .. params.name)
-	end
+	--local characterDir = path
+	--if(path == nil) then
+	local characterDir = Misc.resolveDirectory("graphics/"..params.name)
+	--end
 	local fileList = Misc.listFiles(characterDir)
 	for _,v in ipairs(fileList) do
 		for _,swapType in ipairs(swapTypes) do
@@ -275,7 +276,7 @@ function playerManager.resolveIni(file, path)
 		path = path.."\\";
 	end
 	
-	local iniFilePath = Misc.resolveFile(path..file) or getSMBXPath().."\\config\\character_defaults\\" .. file
+	local iniFilePath = Misc.resolveFile(path..file) or Misc.episodePath().."\\config\\characterinis\\" .. file
 	if (iniFilePath == nil) then
 		Misc.warn("Cannot find: " .. iniFileName)
 	end
@@ -391,7 +392,7 @@ function playerManager.registerGraphic(characterID, key, filename)
 		filename = key;
 		key = getUID(characterAssets.graphics[characterID].__default);
 	end
-	characterAssets.graphics[characterID].__default[key] = {path = filename, file = Graphics.loadImage(Misc.resolveGraphicsFile(characters[characterID].name.."\\"..filename))};
+	characterAssets.graphics[characterID].__default[key] = {path = filename, file = Graphics.loadImageResolved("graphics\\"..characters[characterID].name.."\\"..filename)};
 	return key;
 end
 
@@ -444,7 +445,7 @@ end
 local icontains = table.icontains;
 
 --Load the character roster that is switchable on the world map
-function playerManager.initOverworldCharacters()
+function initOverworldCharacters()
 	if(playerManager.overworldCharacters == nil) then
 		playerManager.overworldCharacters = {}
 		
@@ -508,9 +509,9 @@ function playerManager.initOverworldCharacters()
 		
 		if(#playerManager.overworldCharacters == 0) then
 			for k,v in pairs(characters) do
-				if(k ~= CHARACTER_ULTIMATERINKA --[[and k~= CHARACTER_PRINCESSRINKA]]) then --Exclude certain rinka-based characters
-					table.insert(playerManager.overworldCharacters, k);
-				end
+				--if(k ~= CHARACTER_ULTIMATERINKA and k~= CHARACTER_PRINCESSRINKA) then --Exclude certain rinka-based characters
+				table.insert(playerManager.overworldCharacters, k);
+				--end
 			end
 		end
 	end
@@ -973,7 +974,7 @@ function playerManager.onInitAPI()
 	
 	--vanillaCostumeInit();
 	-- Try to load hitboxes early if we can
-	playerManager.playerManagerInit()
+	playerManagerInit()
 	costumeInit();
 	
 	--newCostumeInit();

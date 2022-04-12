@@ -1,0 +1,6 @@
+gfxwidth=16
+gfxheight=16
+width=16
+height=16
+frames=8
+framespeed=4
