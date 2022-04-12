@@ -67,9 +67,10 @@ end
 
 --Next up is some new resolveFile requiring functions, for simplifying the functions:
 
-function resolve(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
+function loadFile(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
 	return Misc.resolveFile(name)
 		or Misc.resolveFile("_OST/" .. name)
+		or Misc.resolveFile("_OST/_Sound Effects/"..name)
 		or Misc.resolveFile("costumes/" .. name)
 		or Misc.resolveFile("scripts/" .. name)
 		or Misc.resolveFile("graphics/" .. name)
@@ -77,80 +78,57 @@ function resolve(name) --This will not only check the main SMBX2 folders, but wi
 		or Misc.resolveFile("___MainUserDirectory/" .. name)
 end
 
-function resolveImage(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
-	return Graphics.loadImageResolved(name)
-		or Graphics.loadImageResolved("_OST/" .. name)
-		or Graphics.loadImageResolved("costumes/" .. name)
-		or Graphics.loadImageResolved("scripts/" .. name)
-		or Graphics.loadImageResolved("graphics/" .. name)
-		or Graphics.loadImageResolved("sound/" .. name)
-		or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
+function loadImg(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
+	local file = loadFile(name) or loadFile(name..".png")
+	if file then
+		return Graphics.loadImageResolved(name)
+			or Graphics.loadImageResolved("_OST/" .. name)
+			or Graphics.loadImageResolved("costumes/" .. name)
+			or Graphics.loadImageResolved("scripts/" .. name)
+			or Graphics.loadImageResolved("graphics/" .. name)
+			or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
+	end
+	return nil
 end
 
-local drawImageExecuted = false
-
-function getGraphicCoords(args)
-	local sx,sy = args.sourceX or 0, args.sourceY or 0
-	local sw, sh = args.sourceWidth, args.sourceHeight
-	if args.texture then
-		sx,sy = sx/args.texture.width, sy/args.texture.height
-		if sw then
-			sw = sw/args.texture.width
-		else
-			sw = 1
+--drawImg(ImageName, x coordinate, y coordinate, true/false if it's with the priority, true/false if using scene coordinates, priority, opacity)
+function drawImg(name, x, y, withPriority, sceneCoords, arg6, arg7) --Drawing graphics got a lot better.
+	local fileImage = loadImg(name)
+	
+	if priority == nil then
+		local priority = -1
+	end
+	if opacity == nil then
+		local opacity = 1
+	end
+	
+	if x == nil or y == nil then
+		error("You didn't specify the image with any coordinates. Try specifiying coordinates and try again.")
+	end
+	if withPriority == nil or sceneCoords == nil then
+		error("You didn't specify if the image is with a priority, or with scene coordinates. Try setting the booleans and try again.")
+	end
+	
+	if (arg6 ~= nil) and (arg7 ~= nil) then
+		if (withPriority) then
+			priority = arg6
 		end
-		if sh then
-			sh = sh/args.texture.height
-		else
-			sh = 1
-		end
+		opacity = arg7
+	elseif (arg7 ~= nil) and ((not withPriority) or (arg6 ~= nil)) then
+		opacity = arg6
+	elseif (withPriority) then
+		priority = arg6
 	else
-		sw = 1
-		sh = 1
 	end
-	return sx,sy,sw,sh
-end
-
-function drawImg(name, xdraw, ydraw, arg4, arg5, arg6, arg7, arg8, arg9, withPriority, sceneCoords) --Drawing graphics got a lot better.
-	local fileImage = Graphics.loadImageResolved(name)
-	GameData.__LastImageFileDrawn = name
-	local sx = 0
-	local sy = 0
-	local sw = fileImage.width
-	local sh = fileImage.height
-	local xdraw = 0
-	local ydraw = 0
-	local priority = -1
-	if (arg4 ~= nil) and (arg5 ~= nil) and (arg6 ~= nil) and (arg7 ~= nil) and (arg8 ~= nil) and (arg9 ~= nil) then
-		getGraphicCoords(args)
-		priority = arg4
-		opacity = arg5
-		sx = arg6
-		sy = arg7
-		sw = arg8
-		sh = arg9
-		return Graphics.getPixelData(fileImage)
+	if (withPriority) and (sceneCoords) then
+		Graphics.drawImageToSceneWP(fileImage, x, y, true, true, arg7, arg6)
+	elseif (withPriority) and (not sceneCoords) then
+		Graphics.drawImageWP(fileImage, x, y, true, false, arg7, arg6)
+	elseif (not withPriority) and (sceneCoords) then
+		Graphics.drawImageToScene(fileImage, x, y, false, true, arg6)
+	elseif (not withPriority) and (not sceneCoords) then
+		Graphics.drawImage(fileImage, x, y, false, false, arg6)
 	end
-	if withPriority and not sceneCoords then
-		Graphics.drawImageWP(fileImage, xdraw, ydraw, arg4, arg5, arg6, arg7, arg8, arg9)
-	elseif withPriority and sceneCoords then
-		Graphics.drawImageToSceneWP(fileImage, xdraw, ydraw, arg4, arg5, arg6, arg7, arg8, arg9)
-	elseif not withPriority and sceneCoords then
-		Graphics.drawImageToScene(fileImage, xdraw, ydraw, arg5, arg6, arg7, arg8, arg9)
-	elseif not withPriority and not sceneCoords then
-		Graphics.drawImage(fileImage, xdraw, ydraw, arg5, arg6, arg7, arg8, arg9)
-	end
-	drawImageExecuted = true
-end
-
-function resolveSound(name) --Opening sounds
-	return Misc.resolveSoundFile(name)
-		or Misc.resolveSoundFile("_OST/" .. name)
-		or Misc.resolveSoundFile("costumes/" .. name)
-		or Misc.resolveSoundFile("scripts/" .. name)
-		or Misc.resolveSoundFile("graphics/" .. name)
-		or Misc.resolveSoundFile("sound/" .. name)
-		or Misc.resolveSoundFile("___MainUserDirectory/" .. name)
 end
 
 function openSound(name) --Opening SFXs
@@ -158,11 +136,25 @@ function openSound(name) --Opening SFXs
 end
 
 function playSound(name) --Playing SFXs
-	if name >= 92 or name == 4  or name == 7 or name == 8 or name == 14 or name == 15 or name == 18 or name == 43 or name == 59 or name == 0 then
+	if name == nil then
+		error("Sound "..name.." doesn't exist. Play another sound instead.")
+	end
+	
+	if extrasounds.id[name] then
 		SFX.play(extrasounds.id[name])
-	elseif name <= 91 or name == "" then
+	end
+	
+	if name == "string" then
 		SFX.play(name)
 	end
+end
+
+function loadSound(name) --Opening sounds
+	return Misc.resolveSoundFile(name)
+		or Misc.resolveSoundFile("_OST/"..name)
+		or Misc.resolveSoundFile("_OST/_Sound Effects/"..name)
+		or Misc.resolveSoundFile("costumes/"..name)
+		or Misc.resolveSoundFile("___MainUserDirectory/"..name)
 end
 
 function changeMusic(name, sectionid) --Music changing is now a LOT easier
@@ -202,7 +194,7 @@ function restoreMusic(sectionid) --Restore all section music, or just restore a 
 end
 
 function refreshMusic(sectionid) --Refresh the music that's currently playing by updating the music table
-	if sectionid == -1 then --If -1, all section music will be muted
+	if sectionid == -1 then --If -1, all section music will be counted
 		for i = 0,20 do
 			musiclist = {Section(i).music}
 			GameData.levelMusicTemporary[i] = Section(i).music
@@ -225,6 +217,7 @@ function calculateeaster(year) --"Happy easter! (Foot goes into the toilet with 
     local month = 3 + div(L + 40, 44)
 	SaveData.eastermonth = month
 	SaveData.easterday = L + 28 - 31 * div(month, 4)
+	return "Easter Sunday is on: ",month,"/",L + 28 - 31 * div(month, 4),". The data has been saved."
 end
 
 function isLeapYear(y) --Now for the leap year detection...

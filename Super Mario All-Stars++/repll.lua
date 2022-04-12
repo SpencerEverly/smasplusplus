@@ -351,7 +351,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 		SFX.play("_OST/_Sound Effects/console/console_zoomout.ogg")
 	elseif vk == VK_F9 then
 		SFX.play("_OST/_Sound Effects/console/console_resetfont.ogg")
-		repll.clearLog()
+		Routine.run(repll.clearLog)
 	elseif char ~= nil then
 		local left, right = split(repll.buffer, repll.cursorPos)
 		repll.buffer = left .. char .. right
@@ -404,6 +404,8 @@ do
 		repll.log = {"History cleared!"}
 		GameData._repll.log = {"History cleared!"}
 		Misc.cheatBuffer("")
+		Routine.wait(4, true)
+		repll.log = {""}
 	end
 	
 	local gsub = string.gsub
