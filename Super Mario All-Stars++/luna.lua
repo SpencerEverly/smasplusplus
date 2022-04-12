@@ -137,22 +137,21 @@ end
 
 function playSound(name) --Playing SFXs
 	if name == nil then
-		error("Sound "..name.." doesn't exist. Play another sound instead.")
+		error("That sound doesn't exist.")
 	end
+	if unexpected_condition then error("That sound doesn't exist.") end
+	if unfinished_string then error("Either the sound is unfinished, or it doesn't exist.") end
 	
 	if extrasounds.id[name] then
 		SFX.play(extrasounds.id[name])
 	elseif name then
-		SFX.play("name")
+		loadSound(name)
 	end
 end
 
-function loadSound(name) --Opening sounds
-	return Misc.resolveSoundFile(name)
-		or Misc.resolveSoundFile("_OST/"..name)
-		or Misc.resolveSoundFile("_OST/_Sound Effects/"..name)
-		or Misc.resolveSoundFile("costumes/"..name)
-		or Misc.resolveSoundFile("___MainUserDirectory/"..name)
+function loadSound(name) --Opening external sounds and playing them. Also can use playSound alternatively
+	local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+	SFX.play(file) --Play it afterward, since there isn't anywhere else I can do this
 end
 
 function changeMusic(name, sectionid) --Music changing is now a LOT easier
