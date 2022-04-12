@@ -1,4 +1,5 @@
 local pm = require("playerManager")
+local extrasounds = require("extrasounds")
 
 local costume = {}
 
@@ -10,12 +11,12 @@ function costume.onInit(p)
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/link/Takeshi-SNES/player-grow.ogg")
 	extrasounds.id[8]  = Audio.SfxOpen("costumes/link/Takeshi-SNES/player-died.ogg")
 	Audio.sounds[12].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/has-item.ogg")
-	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/coin.ogg")
+	extrasounds.id[14] = Audio.SfxOpen("costumes/link/Takeshi-SNES/coin.ogg")
 	Audio.sounds[29].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/do.ogg")
 	extrasounds.id[43] = Audio.SfxOpen("costumes/link/Takeshi-SNES/fireworks.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/got-star.ogg")
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/player-died2.ogg")
-	Audio.sounds[59].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/dragon-coin.ogg")
+	extrasounds.id[59]  = Audio.SfxOpen("costumes/link/Takeshi-SNES/dragon-coin.ogg")
 	Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-stab.ogg")
 	Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-hurt.ogg")
 	Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-heart.ogg")
@@ -109,10 +110,25 @@ function costume.onCleanup(p)
 	Audio.sounds[76].sfx = nil
 	Audio.sounds[77].sfx = nil
 	Audio.sounds[78].sfx = nil
+	Audio.sounds[71].sfx = nil
+	Audio.sounds[72].sfx = nil
+	Audio.sounds[73].sfx = nil
+	Audio.sounds[75].sfx = nil
+	Audio.sounds[76].sfx = nil
+	Audio.sounds[77].sfx = nil
+	Audio.sounds[78].sfx = nil
 	Audio.sounds[79].sfx = nil
 	Audio.sounds[80].sfx = nil
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
+	Audio.sounds[83].sfx = nil
+	Audio.sounds[84].sfx = nil
+	Audio.sounds[85].sfx = nil
+	Audio.sounds[86].sfx = nil
+	Audio.sounds[87].sfx = nil
+	Audio.sounds[88].sfx = nil
+	Audio.sounds[89].sfx = nil
+	Audio.sounds[90].sfx = nil
 	Audio.sounds[91].sfx = nil
 	
 	Defines.jumpheight = 20

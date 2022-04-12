@@ -1,4 +1,5 @@
 local pm = require("playerManager")
+local extrasounds = require("extrasounds")
 
 local costume = {}
 
@@ -9,14 +10,14 @@ function costume.onInit(p)
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/link/Ness/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/link/Ness/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/link/Ness/block-hit.ogg")
-	--Audio.sounds[4].sfx  = Audio.SfxOpen("costumes/link/Ness/block-smash.ogg")
+	--extrasounds.id[4]  = Audio.SfxOpen("costumes/link/Ness/block-smash.ogg")
 	Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/link/Ness/player-shrink.ogg")
 	Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/link/Ness/player-grow.ogg")
-	--Audio.sounds[7].sfx  = Audio.SfxOpen("costumes/link/Ness/mushroom.ogg")
+	--extrasounds.id[7]  = Audio.SfxOpen("costumes/link/Ness/mushroom.ogg")
 	extrasounds.id[8]  = Audio.SfxOpen("costumes/link/Ness/player-died.ogg")
-	Audio.sounds[14].sfx = Audio.SfxOpen("costumes/link/Ness/coin.ogg")
-	Audio.sounds[15].sfx = Audio.SfxOpen("costumes/link/Ness/1up.ogg")
-	Audio.sounds[18].sfx = Audio.SfxOpen("costumes/link/Ness/fireball.ogg")
+	extrasounds.id[14] = Audio.SfxOpen("costumes/link/Ness/coin.ogg")
+	extrasounds.id[15] = Audio.SfxOpen("costumes/link/Ness/1up.ogg")
+	extrasounds.id[18] = Audio.SfxOpen("costumes/link/Ness/fireball.ogg")
 	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/link/Ness/door.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/link/Ness/got-star.ogg")
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/link/Ness/player-died2.ogg")
@@ -59,21 +60,21 @@ function costume.onCleanup(p)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
-	Audio.sounds[4].sfx  = nil
+	extrasounds.id[4]  = Audio.SfxOpen(Misc.resolveSoundFile("block-smash"))
 	Audio.sounds[5].sfx  = nil
 	Audio.sounds[6].sfx  = nil
-	Audio.sounds[7].sfx  = nil
+	extrasounds.id[7]  = Audio.SfxOpen(Misc.resolveSoundFile("mushroom"))
 	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died"))
 	Audio.sounds[9].sfx  = nil
 	Audio.sounds[10].sfx = nil
 	Audio.sounds[11].sfx = nil
 	Audio.sounds[12].sfx = nil
 	Audio.sounds[13].sfx = nil
-	Audio.sounds[14].sfx = nil
-	Audio.sounds[15].sfx = nil
+	extrasounds.id[14] = Audio.SfxOpen(Misc.resolveSoundFile("coin"))
+	extrasounds.id[15] = Audio.SfxOpen(Misc.resolveSoundFile("1up"))
 	Audio.sounds[16].sfx = nil
 	Audio.sounds[17].sfx = nil
-	Audio.sounds[18].sfx = nil
+	extrasounds.id[18] = Audio.SfxOpen(Misc.resolveSoundFile("fireball"))
 	Audio.sounds[19].sfx = nil
 	Audio.sounds[20].sfx = nil
 	Audio.sounds[21].sfx = nil
@@ -93,7 +94,7 @@ function costume.onCleanup(p)
 	Audio.sounds[39].sfx = nil
 	Audio.sounds[41].sfx = nil
 	Audio.sounds[42].sfx = nil
-	Audio.sounds[43].sfx = nil
+	extrasounds.id[43] = Audio.SfxOpen(Misc.resolveSoundFile("fireworks"))
 	Audio.sounds[44].sfx = nil
 	Audio.sounds[46].sfx = nil
 	Audio.sounds[47].sfx = nil
@@ -107,7 +108,7 @@ function costume.onCleanup(p)
 	Audio.sounds[56].sfx = nil
 	Audio.sounds[57].sfx = nil
 	Audio.sounds[58].sfx = nil
-	Audio.sounds[59].sfx = nil
+	extrasounds.id[59] = Audio.SfxOpen(Misc.resolveSoundFile("dragon-coin"))
 	Audio.sounds[61].sfx = nil
 	Audio.sounds[62].sfx = nil
 	Audio.sounds[63].sfx = nil
@@ -123,6 +124,27 @@ function costume.onCleanup(p)
 	Audio.sounds[81].sfx = nil
 	Audio.sounds[82].sfx = nil
 	Audio.sounds[91].sfx = nil
+	extrasounds.id92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
+	extrasounds.id93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
+	extrasounds.id94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_freeze.ogg"))
+	extrasounds.id95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi_icebreak.ogg"))
+	extrasounds.id96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
+	extrasounds.id97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
+	extrasounds.id98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
+	extrasounds.id99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
+	extrasounds.id100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
+	extrasounds.id101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
+	extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
+	extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
+	extrasounds.id104 = Audio.SfxOpen(Misc.resolveSoundFile("sound/explode.ogg")) --SMB2 Explosion
+	extrasounds.id105 = Audio.SfxOpen(Misc.resolveSoundFile("sound/hammerthrow.ogg")) --Player hammer throw
+	extrasounds.id106 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo1.ogg")) --Shell hit 2
+	extrasounds.id107 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo2.ogg")) --Shell hit 3
+	extrasounds.id108 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo3.ogg")) --Shell hit 4
+	extrasounds.id109 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo4.ogg")) --Shell hit 5
+	extrasounds.id110 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo5.ogg")) --Shell hit 6
+	extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
+	extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
 	
 	
 	Defines.jumpheight = 20

@@ -7,6 +7,7 @@ local darkness = require("darkness")
 local starman = {}
 
 local killed = false
+local scoreHits = 0
 
 starman.ids = {};
 starman.duration = {};
@@ -163,7 +164,6 @@ local function checkStarStatus(p)
 		for _,v in ipairs(colliders.getColliding{a = p, b = NPC.HITTABLE, btype = colliders.NPC, filter = starmanFilter}) do
 			v:harm(HARM_TYPE_EXT_HAMMER);
 		end
-		
 		starTimers[idx] = starTimers[idx] - 1;
 		if(starTimers[idx] == math.min(starman.duration[activeStarIDs[idx]]-1, math.floor(lunatime.toTicks(2.6)))) then
 			SFX.play("starman-running-out.ogg")
@@ -294,7 +294,7 @@ end
 
 function starman.onExitLevel()
 	for _,v in ipairs(Player.get()) do
-			starman.stop(v);
+		starman.stop(v);
 	end
 end
 
