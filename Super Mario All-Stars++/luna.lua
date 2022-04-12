@@ -77,23 +77,56 @@ function resolve(name) --This will not only check the main SMBX2 folders, but wi
 		or Misc.resolveFile("___MainUserDirectory/" .. name)
 end
 
-function openImage(name) --Opening the graphics as easy as Pie!
-	local file = resolve(name) or resolve(name..".png")
-	if file then
-		Graphics.loadImageResolved(file)
-	end
-	return nil
+function resolveImage(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
+	return Graphics.loadImageResolved(name)
+		or Graphics.loadImageResolved("_OST/" .. name)
+		or Graphics.loadImageResolved("costumes/" .. name)
+		or Graphics.loadImageResolved("scripts/" .. name)
+		or Graphics.loadImageResolved("graphics/" .. name)
+		or Graphics.loadImageResolved("sound/" .. name)
+		or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
 end
 
-function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw) --Drawing graphics got a lot better.
-	local file = resolve(name) or resolve(name..".png")
+function getGraphicCoords(args)
+	local sx,sy = args.sourceX or 0, args.sourceY or 0
+	local sw, sh = args.sourceWidth, args.sourceHeight
+	if args.texture then
+		sx,sy = sx/args.texture.width, sy/args.texture.height
+		if sw then
+			sw = sw/args.texture.width
+		else
+			sw = 1
+		end
+		if sh then
+			sh = sh/args.texture.height
+		else
+			sh = 1
+		end
+	else
+		sw = 1
+		sh = 1
+	end
+	return sx,sy,sw,sh
+end
+
+function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw, arg6, arg7, arg8, arg9) --Drawing graphics got a lot better.
+	local fileImage = Graphics.loadImageResolved(name)
+	if (arg6 ~= nil) and (arg7 ~= nil) and (arg8 ~= nil) and (arg9 ~= nil) then
+		getGraphicCoords(args)
+		sx = arg6
+		sy = arg7
+		sw = arg8
+		sh = arg9
+		return Graphics.getPixelData(fileImage)
+	end
+	local sx = 0
+	local sy = 0
+	local sw = fileImage.width
+	local sh = fileImage.height
 	local xdraw = 0
 	local ydraw = 0
 	local opacitydraw = 1
-	if file then
-		Graphics.drawImageWP(file, xdraw, ydraw, opacitydraw, prioritydraw)
-	end
-	return nil
+	Graphics.drawImageWP(fileImage, xdraw, ydraw, opacitydraw, prioritydraw, arg6, arg7, arg8, arg9)
 end
 
 function resolveSound(name) --Opening sounds
@@ -388,6 +421,9 @@ function onStart() --Now do onStart...
 		SaveData.disableX2char = true
 	end
 	Audio.MusicVolume(nil) --Reset the music volume on onStart, just in case
+end
+
+function onDraw()
 end
 
 function tomorrowget()
