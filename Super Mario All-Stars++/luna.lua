@@ -109,10 +109,11 @@ function getGraphicCoords(args)
 	return sx,sy,sw,sh
 end
 
-function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw, arg6, arg7, arg8, arg9) --Drawing graphics got a lot better.
+function drawImage(name, xdraw, ydraw, arg4, prioritydraw, arg6, arg7, arg8, arg9) --Drawing graphics got a lot better.
 	local fileImage = Graphics.loadImageResolved(name)
-	if (arg6 ~= nil) and (arg7 ~= nil) and (arg8 ~= nil) and (arg9 ~= nil) then
+	if (arg4 ~= nil) and (arg6 ~= nil) and (arg7 ~= nil) and (arg8 ~= nil) and (arg9 ~= nil) then
 		getGraphicCoords(args)
+		opacity = arg4
 		sx = arg6
 		sy = arg7
 		sw = arg8
@@ -126,7 +127,7 @@ function drawImage(name, xdraw, ydraw, opacitydraw, prioritydraw, arg6, arg7, ar
 	local xdraw = 0
 	local ydraw = 0
 	local opacitydraw = 1
-	Graphics.drawImageWP(fileImage, xdraw, ydraw, opacitydraw, prioritydraw, arg6, arg7, arg8, arg9)
+	Graphics.drawImageWP(fileImage, xdraw, ydraw, arg4, prioritydraw, arg6, arg7, arg8, arg9)
 end
 
 function resolveSound(name) --Opening sounds
