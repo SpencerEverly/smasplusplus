@@ -87,6 +87,8 @@ function resolveImage(name) --This will not only check the main SMBX2 folders, b
 		or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
 end
 
+local drawImageExecuted = false
+
 function getGraphicCoords(args)
 	local sx,sy = args.sourceX or 0, args.sourceY or 0
 	local sw, sh = args.sourceWidth, args.sourceHeight
@@ -109,25 +111,36 @@ function getGraphicCoords(args)
 	return sx,sy,sw,sh
 end
 
-function drawImage(name, xdraw, ydraw, arg4, prioritydraw, arg6, arg7, arg8, arg9) --Drawing graphics got a lot better.
+function drawImg(name, xdraw, ydraw, arg4, arg5, arg6, arg7, arg8, arg9, withPriority, sceneCoords) --Drawing graphics got a lot better.
 	local fileImage = Graphics.loadImageResolved(name)
-	if (arg4 ~= nil) and (arg6 ~= nil) and (arg7 ~= nil) and (arg8 ~= nil) and (arg9 ~= nil) then
-		getGraphicCoords(args)
-		opacity = arg4
-		sx = arg6
-		sy = arg7
-		sw = arg8
-		sh = arg9
-		return Graphics.getPixelData(fileImage)
-	end
+	GameData.__LastImageFileDrawn = name
 	local sx = 0
 	local sy = 0
 	local sw = fileImage.width
 	local sh = fileImage.height
 	local xdraw = 0
 	local ydraw = 0
-	local opacitydraw = 1
-	Graphics.drawImageWP(fileImage, xdraw, ydraw, arg4, prioritydraw, arg6, arg7, arg8, arg9)
+	local priority = -1
+	if (arg4 ~= nil) and (arg5 ~= nil) and (arg6 ~= nil) and (arg7 ~= nil) and (arg8 ~= nil) and (arg9 ~= nil) then
+		getGraphicCoords(args)
+		priority = arg4
+		opacity = arg5
+		sx = arg6
+		sy = arg7
+		sw = arg8
+		sh = arg9
+		return Graphics.getPixelData(fileImage)
+	end
+	if withPriority and not sceneCoords then
+		Graphics.drawImageWP(fileImage, xdraw, ydraw, arg4, arg5, arg6, arg7, arg8, arg9)
+	elseif withPriority and sceneCoords then
+		Graphics.drawImageToSceneWP(fileImage, xdraw, ydraw, arg4, arg5, arg6, arg7, arg8, arg9)
+	elseif not withPriority and sceneCoords then
+		Graphics.drawImageToScene(fileImage, xdraw, ydraw, arg5, arg6, arg7, arg8, arg9)
+	elseif not withPriority and not sceneCoords then
+		Graphics.drawImage(fileImage, xdraw, ydraw, arg5, arg6, arg7, arg8, arg9)
+	end
+	drawImageExecuted = true
 end
 
 function resolveSound(name) --Opening sounds
@@ -422,9 +435,6 @@ function onStart() --Now do onStart...
 		SaveData.disableX2char = true
 	end
 	Audio.MusicVolume(nil) --Reset the music volume on onStart, just in case
-end
-
-function onDraw()
 end
 
 function tomorrowget()

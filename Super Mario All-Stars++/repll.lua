@@ -349,6 +349,9 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 	elseif vk == VK_NEXT then
 		repll.decreaseFontSize(0.1)
 		SFX.play("_OST/_Sound Effects/console/console_zoomout.ogg")
+	elseif vk == VK_F9 then
+		SFX.play("_OST/_Sound Effects/console/console_resetfont.ogg")
+		repll.clearLog()
 	elseif char ~= nil then
 		local left, right = split(repll.buffer, repll.cursorPos)
 		repll.buffer = left .. char .. right
@@ -395,6 +398,12 @@ do
 		doprint.yscale = doprint.xscale
 		glyphwid = (doprint.font.cellWidth + doprint.font.spacing)*doprint.xscale
 		GameData._repll.fontscale = doprint.xscale
+	end
+	
+	function repll.clearLog()
+		repll.log = {"History cleared!"}
+		GameData._repll.log = {"History cleared!"}
+		Misc.cheatBuffer("")
 	end
 	
 	local gsub = string.gsub
