@@ -142,10 +142,8 @@ function playSound(name) --Playing SFXs
 	
 	if extrasounds.id[name] then
 		SFX.play(extrasounds.id[name])
-	end
-	
-	if name == "string" then
-		SFX.play(name)
+	elseif name then
+		SFX.play("name")
 	end
 end
 
