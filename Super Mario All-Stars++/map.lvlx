@@ -488,6 +488,7 @@ ID:764;X:-191872;Y:-199232;
 ID:757;X:-192544;Y:-199744;
 ID:765;X:-191872;Y:-199840;
 ID:766;X:-199200;Y:-199392;
+ID:767;X:-197472;Y:-199872;
 BGO_END
 NPC
 ID:753;X:-199360;Y:-200224;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -757,6 +758,22 @@ ID:752;X:-198656;Y:-198368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB27-2\"\,\n    \"p
 ID:752;X:-198560;Y:-198368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB2Ending1\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:752;X:-198464;Y:-198368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB2End\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:821;X:-198400;Y:-198368;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMB2BeginWarp\"\,\n    \"levelTitle\"\: \"Game Select\"\,\n    \"path_left\"\: \"toSMB2End\"\,\n    \"path_right\"\: \"\"\,\n    \"warpName\"\: \"SMB2EndingGameSelect\"\n}\n";
+ID:753;X:-197600;Y:-199936;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Grass Land.spc|0\;g=2.5\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-197408;Y:-199776;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to Game Select\"\,\n    \"path_right\"\: \"toSMB31-1\"\,\n    \"warpName\"\: \"WarpToGameSelectSMB3\"\n}\n";
+ID:802;X:-197344;Y:-199840;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"1-1\: Curtain Call!\"\,\n    \"path_down\"\: \"toSMB31-1\"\,\n    \"path_right\"\: \"toSMB31-2\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197376;Y:-199776;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-1\"\,\n    \"points\"\: \"-24\, 0\, 24\, 0\, 30\, -64\"\n}\n";
+ID:802;X:-197216;Y:-199840;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"1-2\: Grassy Fields\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB31-2\"\,\n    \"path_right\"\: \"toSMB31-3\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197312;Y:-199840;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-2\"\,\n    \"points\"\: \"96\, 0\, -36\, 0\"\n}\n";
+ID:802;X:-197152;Y:-199840;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"1-3\: A Top Those Blocks\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB31-3\"\,\n    \"path_right\"\: \"toSMB31-Toad1Path1\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197184;Y:-199840;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-3\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:752;X:-197120;Y:-199840;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-Toad1Path1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, 64\"\n}\n";
+ID:850;X:-197088;Y:-199776;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-TH1.lvlx\"\,\n    \"levelTitle\"\: \"Toad House\"\,\n    \"path_left\"\: \"toSMB31-4\"\,\n    \"path_up\"\: \"toSMB31-Toad1Path1\"\,\n    \"unlock_left\"\: 1\n}\n";
+ID:802;X:-197152;Y:-199776;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"1-4\: Falling Platforms\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB31-Bonus1\"\,\n    \"path_right\"\: \"toSMB31-4\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197120;Y:-199776;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-4\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:852;X:-197216;Y:-199712;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-Bonus1.lvlx\"\,\n    \"levelTitle\"\: \"Bonus Challenge! #1\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB31-Fortress1\"\,\n    \"path_up\"\: \"toSMB31-Bonus1\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_left\"\: 1\n}\n";
+ID:752;X:-197184;Y:-199776;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-Bonus1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -32\, 64\"\n}\n";
+ID:752;X:-197248;Y:-199712;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-Fortress1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:849;X:-197280;Y:-199712;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-Fortress.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #1\: Boom Boom\"\,\n    \"path_left\"\: \"toSMB31-5\"\,\n    \"path_right\"\: \"toSMB31-Fortress1\"\,\n    \"unlock_left\"\: 9\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
