@@ -137,7 +137,7 @@ function classicbattlep1wins()
 	end
 	player1vuln = true
 	Routine.waitFrames(220, true)
-	SFX.play("_OST/_Sound Effects/classicbattle-won.ogg")
+	playSound("classicbattle-won.ogg")
 	player1won = true
 	Routine.wait(4.5, true)
 	littleDialogue.create({text = "<setPos 400 32 0.5 -2.5><question MainSelect>", pauses = true, updatesInPause = true})
@@ -150,7 +150,7 @@ function classicbattlep2wins()
 	end
 	player2vuln = true
 	Routine.waitFrames(220, true)
-	SFX.play("_OST/_Sound Effects/classicbattle-won.ogg")
+	playSound("classicbattle-won.ogg")
 	player2won = true
 	Routine.wait(4.5, true)
 	littleDialogue.create({text = "<setPos 400 32 0.5 -2.5><question MainSelect>", pauses = true, updatesInPause = true})
@@ -160,19 +160,19 @@ function countdownbegin()
 	Routine.wait(0.1)
 	Misc.pause()
 	characteroneimgshow = true
-	SFX.play("_OST/_Sound Effects/battle-countdown.ogg")
+	playSound("battle-countdown.ogg")
 	Routine.wait(1, true)
 	vsimgshow = true
-	SFX.play("_OST/_Sound Effects/battle-countdown.ogg")
+	playSound("battle-countdown.ogg")
 	Routine.wait(1, true)
 	charactertwoimgshow = true
-	SFX.play("_OST/_Sound Effects/battle-countdown.ogg")
+	playSound("battle-countdown.ogg")
 	Routine.wait(1, true)
 	Misc.unpause()
 	characteroneimgshow = false
 	charactertwoimgshow = false
 	vsimgshow = false
-	SFX.play("_OST/_Sound Effects/battle-start.ogg")
+	playSound("battle-start.ogg")
 end
 
 function dependencies.onInitAPI()

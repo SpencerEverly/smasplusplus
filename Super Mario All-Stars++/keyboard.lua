@@ -35,7 +35,7 @@ function keyboard.cmd()
 			SaveData.playerName = keyboard.buffer
 			keyboard.buffer = ""
 			keyboard.cursorPos = 0
-			SFX.play("_OST/_Sound Effects/console/console_success.ogg")
+			playSound("console/console_success.ogg")
 			keyboard.active = false
 			GameData.enablekeyboard = false
 			GameData.reopenmenu = true
@@ -49,7 +49,7 @@ function keyboard.cmd()
 			SaveData.playerName = keyboard.buffer
 			keyboard.buffer = ""
 			keyboard.cursorPos = 0
-			SFX.play("_OST/_Sound Effects/console/console_success.ogg")
+			playSound("console/console_success.ogg")
 			keyboard.active = false
 			GameData.enablekeyboard = false
 			GameData.firstbootfive = true
@@ -81,7 +81,7 @@ function keyboard.cmd()
 				Misc.saveGame()
 				keyboard.buffer = ""
 				keyboard.cursorPos = 0
-				SFX.play("_OST/_Sound Effects/console/console_success.ogg")
+				playSound("console/console_success.ogg")
 				keyboard.active = false
 				GameData.enablekeyboard = false
 				GameData.reopenmenu = true
@@ -91,7 +91,7 @@ function keyboard.cmd()
 			elseif keyboard.buffer ~= "" then
 				keyboard.buffer = ""
 				keyboard.cursorPos = 0
-				SFX.play("_OST/_Sound Effects/console/console_error.ogg")
+				playSound("console/console_error.ogg")
 				keyboard.active = false
 				GameData.enablekeyboard = false
 				GameData.reopenmenu = true
@@ -150,7 +150,7 @@ function keyboard.onKeyboardPressDirect(vk, repeated, char)
 	
 	if (vk == VK_NEXT) then
 		if (not repeated) then
-			SFX.play("_OST/_Sound Effects/console/console_resetfont.ogg")
+			playSound("console/console_resetfont.ogg")
 			GameData.toggleoffinventory = false
 			GameData.toggleoffkeys = false
 			keyboard.active = false
@@ -161,31 +161,31 @@ function keyboard.onKeyboardPressDirect(vk, repeated, char)
 	
 	local rngkey = rng.randomInt(1,7)
 	if (not repeated) then
-		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+		playSound("console/console_keypress"..rngkey..".ogg")
 	end
 	
 	if vk == VK_RETURN then
-		SFX.play("_OST/_Sound Effects/console/console_keypressenter.ogg")
+		playSound("console/console_keypressenter.ogg")
 		keyboard.cmd()
 	elseif vk == VK_BACK then
 		local left, right = split(keyboard.buffer, keyboard.cursorPos)
 		keyboard.buffer = left:sub(1, -2) .. right
 		keyboard.cursorPos = math.max(0, keyboard.cursorPos - 1)
-		SFX.play("_OST/_Sound Effects/console/console_keypressbackspace.ogg")
+		playSound("console/console_keypressbackspace.ogg")
 		blinker = 1
 	elseif vk == VK_DELETE then
 		local left, right = split(keyboard.buffer, keyboard.cursorPos)
 		keyboard.buffer = left .. right:sub(2)
-		SFX.play("_OST/_Sound Effects/console/console_keypress7.ogg")
+		playSound("console/console_keypress7.ogg")
 		blinker = 1
 	elseif vk == VK_LEFT then
 		keyboard.cursorPos = math.max(0, keyboard.cursorPos - 1)
 		blinker = 1
-		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+		playSound("console/console_keypress"..rngkey..".ogg")
 	elseif vk == VK_RIGHT then
 		keyboard.cursorPos = math.min(keyboard.cursorPos + 1, #keyboard.buffer)
 		blinker = 1
-		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+		playSound("console/console_keypress"..rngkey..".ogg")
 	elseif char ~= nil then
 		local left, right = split(keyboard.buffer, keyboard.cursorPos)
 		keyboard.buffer = left .. char .. right
@@ -199,7 +199,7 @@ function keyboard.onPasteText(pastedText)
 	local left, right = split(keyboard.buffer, keyboard.cursorPos)
 	keyboard.buffer = left .. pastedText .. right
 	keyboard.cursorPos = keyboard.cursorPos + #pastedText
-	SFX.play("_OST/_Sound Effects/console/console_paste.ogg")
+	playSound("console/console_paste.ogg")
 	blinker = 1
 end
 

@@ -120,7 +120,7 @@ function costume.onPostNPCKill(npc, harmType)
 	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
 	local rngkey = rng.randomInt(1,6)
 	if items[npc.id] and Colliders.collide(plr, npc) then
-		SFX.play("costumes/mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
+		playSound("mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
     end
 end
 
@@ -140,7 +140,7 @@ function costume.onTick(repeated)
 	if costume.abilitesenabled == true then
 		if p.speedX ~= 0 and not isSlidingOnIce(plr) then
 			if player.frame == 2 or player.frame == 9 then
-				SFX.play("costumes/mario/SpongeBobSquarePants/spongebob-footsteps.ogg", 0.5, 1, 20)
+				playSound("mario/SpongeBobSquarePants/spongebob-footsteps.ogg", 0.5, 1, 20)
 			end
 		end
 		if leafPowerups[p.powerup] then
@@ -164,7 +164,7 @@ function costume.onTick(repeated)
 		if player:isGroundTouching() == false or player:mem(0x36, FIELD_BOOL, true) then
 			if player.keys.jump == KEYS_PRESSED then
 				Audio.sounds[1].muted = true
-				SFX.play("costumes/mario/SpongeBobSquarePants/player-jump-twice.ogg")
+				playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
 				Defines.cheat_ahippinandahoppin = true
 				jumpingactive = true
 			end
@@ -198,7 +198,7 @@ end
 
 function costume.onPlayerKill()
 	local rngkey = rng.randomInt(1,7)
-	SFX.play("costumes/mario/SpongeBobSquarePants/spongebob-dead"..rngkey..".ogg")
+	playSound("mario/SpongeBobSquarePants/spongebob-dead"..rngkey..".ogg")
 end
 
 function costume.onCleanup(p)

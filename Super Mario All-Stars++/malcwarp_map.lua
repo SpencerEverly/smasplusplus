@@ -41,7 +41,7 @@ function malcwarp.onKeyboardPress(k)
 	end
 	if active then
 		if k == VK_F5 then
-		SFX.play("_OST/_Sound Effects/hub_easytravel.ogg")
+		playSound("hub_easytravel.ogg")
 		onePressedState = false
 		twoPressedState = false
 		threePressedState = false
@@ -49,37 +49,37 @@ function malcwarp.onKeyboardPress(k)
 	end
 	if active then
 		if k == VK_1 then
-			SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+			playSound("hub_travelactivated.ogg")
 			world.playerX = -2880
 			world.playerY = -1664
-			SFX.play("_OST/_Sound Effects/world_warp.ogg")
+			playSound("world_warp.ogg")
 			onePressedState = true
 			active = false
 		end
 	end
 	if active then
 		if k == VK_2 then
-			SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+			playSound("hub_travelactivated.ogg")
 			world.playerX = -3168
 			world.playerY = -1536
-			SFX.play("_OST/_Sound Effects/world_warp.ogg")
+			playSound("world_warp.ogg")
 			twoPressedState = true
 			active = false
 		end
 	end
 	if active then
 		if k == VK_3 then
-			SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+			playSound("hub_travelactivated.ogg")
 			world.playerX = -3040
 			world.playerY = -1760
-			SFX.play("_OST/_Sound Effects/world_warp.ogg")
+			playSound("world_warp.ogg")
 			threePressedState = true
 			active = false
 		end
 	end
 	if not active then
 		if k == VK_F5 then
-			SFX.play("_OST/_Sound Effects/hub_quitmenu.ugg")
+			playSound("hub_quitmenu.ugg")
 			player.pauseKeyPressing = true
 			onePressedState = true
 			twoPressedState = true

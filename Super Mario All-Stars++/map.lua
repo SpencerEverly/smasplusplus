@@ -134,7 +134,7 @@ function levelload()
 	end
 	nochangecharmap = true
 	world.playerWalkingFrame = 1
-	SFX.play("_OST/_Sound Effects/levelload.ogg")
+	playSound("levelload.ogg")
 	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(0)
 	Misc.pause()

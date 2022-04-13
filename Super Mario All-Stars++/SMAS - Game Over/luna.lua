@@ -46,7 +46,7 @@ function onStart()
     end
 	SaveData.GameOverCount = SaveData.GameOverCount + 1
 	mem(0x00B2C5AC,FIELD_FLOAT, 3)
-	SFX.play("_OST/_Sound Effects/gameover-sound.ogg")
+	playSound("gameover-sound.ogg")
 end
 
 function onTick()
@@ -69,7 +69,7 @@ end
 
 function onEvent(eventName)
 	if eventName == "Game Over Timing Execution 2" then
-		SFX.play("_OST/_Sound Effects/gameover-announcer.ogg")
+		playSound("gameover-announcer.ogg")
 	end
 	if eventName == "Game Over Timing Execution 3" then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -4.5><boxStyle gameoverdialog><question gameoverselect>", pauses = true, updatesInPause = true})

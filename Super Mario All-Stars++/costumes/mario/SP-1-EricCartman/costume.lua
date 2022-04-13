@@ -85,7 +85,7 @@ function costume.throwSnowball()
 			snowballNpc.speedX = -8.5
 			snowballNpc.speedY = 1
 		end
-		SFX.play("costumes/mario/SP-1-EricCartman/snowball_throw.ogg")
+		playSound("mario/SP-1-EricCartman/snowball_throw.ogg")
 		costume.usesnowball = false
 		cooldown = 35
 		if cooldown <= 0 then
@@ -100,7 +100,7 @@ function costume.onPostNPCKill(npc, harmType)
 	local itemgetrng = rng.randomInt(1,7)
 	if costume.abilitesenabled then
 		if items[npc.id] and Colliders.collide(plr, npc) then
-			SFX.play("costumes/mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
+			playSound("mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
 		end
 	end
 end
@@ -109,7 +109,7 @@ function costume.onPlayerHarm()
 	if costume.abilitesenabled then
 		if not plr.hasStarman or plr.isMega then
 			local hurtvoicerng = rng.randomInt(1,10)
-			SFX.play("costumes/mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
+			playSound("mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
 		end
 	end
 end
@@ -117,7 +117,7 @@ end
 function costume.onPlayerKill()
 	local dyingvoicerng = rng.randomInt(1,10)
 	if costume.abilitesenabled then
-		SFX.play("costumes/mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
+		playSound("mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
 	end
 end
 

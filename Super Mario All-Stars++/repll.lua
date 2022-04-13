@@ -174,13 +174,13 @@ end
 local function cmd(str)
 	if isExpression(str) then
 		eval(str)
-		SFX.play("_OST/_Sound Effects/console/console_info.ogg")
+		playSound("console/console_info.ogg")
 	elseif isValid(str) then
 		exec(str)
-		SFX.play("_OST/_Sound Effects/console/console_success.ogg")
+		playSound("console/console_success.ogg")
 	else
 		printError(select(2, load(str)))
-		SFX.play("_OST/_Sound Effects/console/console_error.ogg")
+		playSound("console/console_error.ogg")
 	end
 end
 
@@ -268,7 +268,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 		if (vk == VK_TAB) and (not repeated) then
 			repl.active = false
 			Misc.pause()
-			SFX.play("_OST/_Sound Effects/console/console_open.ogg")
+			playSound("console/console_open.ogg")
 			GameData.toggleoffinventory = true
 			GameData.toggleoffkeys = true
 			Misc.cheatBuffer("")
@@ -279,19 +279,19 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 	
 	local rngkey = rng.randomInt(1,7)
 	if (not repeated) then
-		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+		playSound("console/console_keypress"..rngkey..".ogg")
 	end
 	
 	if vk == VK_TAB or vk == VK_ESCAPE then
 		if (not repeated) then
 			Misc.unpause()
-			SFX.play("_OST/_Sound Effects/console/console_close.ogg")
+			playSound("console/console_close.ogg")
 			GameData.toggleoffinventory = false
 			GameData.toggleoffkeys = false
 			repll.active = false
 		end
 	elseif vk == VK_RETURN then
-		SFX.play("_OST/_Sound Effects/console/console_keypressenter.ogg")
+		playSound("console/console_keypressenter.ogg")
 		if Misc.GetKeyState(VK_SHIFT) then
 			local left, right = split(repll.buffer, repll.cursorPos)
 			repll.buffer = left .. "\n" .. right
@@ -304,12 +304,12 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 		local left, right = split(repll.buffer, repll.cursorPos)
 		repll.buffer = left:sub(1, -2) .. right
 		repll.cursorPos = math.max(0, repll.cursorPos - 1)
-		SFX.play("_OST/_Sound Effects/console/console_keypressbackspace.ogg")
+		playSound("console/console_keypressbackspace.ogg")
 		blinker = 1
 	elseif vk == VK_DELETE then
 		local left, right = split(repll.buffer, repll.cursorPos)
 		repll.buffer = left .. right:sub(2)
-		SFX.play("_OST/_Sound Effects/console/console_keypress7.ogg")
+		playSound("console/console_keypress7.ogg")
 		blinker = 1
 	elseif vk == VK_UP or vk == VK_DOWN then
 		if vk == VK_UP then
@@ -327,13 +327,13 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 	elseif vk == VK_LEFT then
 		repll.cursorPos = math.max(0, repll.cursorPos - 1)
 		blinker = 1
-		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+		playSound("console/console_keypress"..rngkey..".ogg")
 	elseif vk == VK_RIGHT then
 		repll.cursorPos = math.min(repll.cursorPos + 1, #repll.buffer)
 		blinker = 1
-		SFX.play("_OST/_Sound Effects/console/console_keypress"..rngkey..".ogg")
+		playSound("console/console_keypress"..rngkey..".ogg")
 	elseif vk == VK_HOME then
-		SFX.play("_OST/_Sound Effects/console/console_resetfont.ogg")
+		playSound("console/console_resetfont.ogg")
 		if Misc.GetKeyState(VK_MENU) then
 			repll.resetFontSize()
 		else
@@ -345,12 +345,12 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 		blinker = 1
 	elseif vk == VK_PRIOR then
 		repll.increaseFontSize(0.1)
-		SFX.play("_OST/_Sound Effects/console/console_zoomin.ogg")
+		playSound("console/console_zoomin.ogg")
 	elseif vk == VK_NEXT then
 		repll.decreaseFontSize(0.1)
-		SFX.play("_OST/_Sound Effects/console/console_zoomout.ogg")
+		playSound("console/console_zoomout.ogg")
 	elseif vk == VK_F9 then
-		SFX.play("_OST/_Sound Effects/console/console_resetfont.ogg")
+		playSound("console/console_resetfont.ogg")
 		Routine.run(repll.clearLog)
 	elseif char ~= nil then
 		local left, right = split(repll.buffer, repll.cursorPos)
@@ -365,7 +365,7 @@ function repll.onPasteText(pastedText)
 	local left, right = split(repll.buffer, repll.cursorPos)
 	repll.buffer = left .. pastedText .. right
 	repll.cursorPos = repll.cursorPos + #pastedText
-	SFX.play("_OST/_Sound Effects/console/console_paste.ogg")
+	playSound("console/console_paste.ogg")
 	blinker = 1
 end
 

@@ -1327,7 +1327,7 @@ function boxInstanceFunctions:update()
 						player.keys.jump = false
 						player.keys.run = KEYS_UNPRESSED
 						player.keys.jump = true
-						SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+						playSound("fastscroll.ogg")
 						if not self.typewriterFinished then
 							self.typewriterDelay = self.typewriterDelay or 0
 						end
@@ -1349,7 +1349,7 @@ function boxInstanceFunctions:update()
 							player2.keys.jump = false
 							player2.keys.run = KEYS_UNPRESSED
 							player2.keys.jump = true
-							SFX.play("_OST/_Sound Effects/fastscroll.ogg")
+							playSound("fastscroll.ogg")
 							if not self.typewriterFinished then
 								self.typewriterDelay = self.typewriterDelay or 0
 							end

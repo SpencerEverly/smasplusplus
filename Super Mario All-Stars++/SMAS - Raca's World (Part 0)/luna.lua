@@ -152,33 +152,33 @@ function onEvent(eventName)
 	end
 	if eventName == "6" then
 		Defines.earthquake = 10
-		SFX.play("_OST/_Sound Effects/mus_sfx_gigapunch.ogg")
+		playSound("mus_sfx_gigapunch.ogg")
 	end
 	if eventName == "7" then
 		Defines.earthquake = 15
-		SFX.play("_OST/_Sound Effects/mus_sfx_gigapunch_2.ogg")
+		playSound("mus_sfx_gigapunch_2.ogg")
 	end
 	if eventName == "8" then
 		Defines.earthquake = 25
-		SFX.play("_OST/_Sound Effects/mus_sfx_gigapunch_3.ogg")
+		playSound("mus_sfx_gigapunch_3.ogg")
 	end
 	if eventName == "9" then
 		Defines.earthquake = 35
 		blacklayer = false
-		SFX.play("_OST/_Sound Effects/mus_explosion.ogg")
+		playSound("mus_explosion.ogg")
 	end
 	if eventName == "13" then
 		Audio.MusicChange(0, "_OST/All Stars Secrets/Raca Has Had It.ogg")
 	end
 	if eventName == "14" then
 		Audio.MusicChange(0, 0)
-		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
+		playSound("raca-chant.ogg")
 	end
 	if eventName == "16" then
 		whitelayer = true
 		Defines.earthquake = 35
-		SFX.play("_OST/_Sound Effects/mus_explosion.ogg")
-		SFX.play("_OST/_Sound Effects/mario-screaming1.ogg")
+		playSound("mus_explosion.ogg")
+		playSound("mario-screaming1.ogg")
 	end
 	if eventName == "18" then
 		whitelayer = false

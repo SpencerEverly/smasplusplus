@@ -100,7 +100,7 @@ end
 local function unpause()
 	pausemenu.paused = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
+	playSound("pausemenu-closed.ogg")
 	cooldown = 5
 	player:mem(0x17A,FIELD_BOOL,false)
 	if cooldown <= 0 then
@@ -115,19 +115,19 @@ end
 local function battlemodenewstage()
 	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(0)
-	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
+	playSound("skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(battlelevelsrng[selecter], nil, nil) end)
 end
 
 local function battlemodeexit()
 	GameData.cutsceneMusicControl = true
 	Audio.MusicVolume(0)
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("world_warp.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
 end
 
 local function switchtochar()
-	SFX.play("_OST/_Sound Effects/charcost_open.ogg")
+	playSound("charcost_open.ogg")
 	pause_index_char = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_char = 1 end)
 	cooldown = 1
@@ -136,7 +136,7 @@ local function switchtochar()
 end
 
 local function switchtotele()
-	SFX.play("_OST/_Sound Effects/hub_easytravel.ogg")
+	playSound("hub_easytravel.ogg")
 	pause_index_tele = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_tele = 1 end)
 	cooldown = 1
@@ -145,7 +145,7 @@ local function switchtotele()
 end
 
 local function switchtoothermenu()
-	SFX.play("_OST/_Sound Effects/quitmenu.ogg")
+	playSound("quitmenu.ogg")
 	pause_index_other = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_other = 1 end)
 	cooldown = 1
@@ -154,7 +154,7 @@ local function switchtoothermenu()
 end
 
 local function pausemenureturn()
-	SFX.play("_OST/_Sound Effects/charcost-close.ogg")
+	playSound("charcost-close.ogg")
 	pause_index_char = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_other = 1 end)
 	cooldown = 1
@@ -163,7 +163,7 @@ local function pausemenureturn()
 end
 
 local function pausemenureturnhub()
-	SFX.play("_OST/_Sound Effects/hub_quitmenu.ogg")
+	playSound("hub_quitmenu.ogg")
 	pause_index_tele = 0
 	cooldown = 1
 	pausemenu.paused = true
@@ -171,7 +171,7 @@ local function pausemenureturnhub()
 end
 
 local function pausemenureturnother()
-	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
+	playSound("quitmenu_close.ogg")
 	pause_index_char = 0
 	Routine.run(function() Routine.wait(0.01, true) pause_index_other = 1 end)
 	cooldown = 1
@@ -206,10 +206,10 @@ end
 local function mutemusic()
 	GameData.muteMusic = not GameData.muteMusic
 	if GameData.muteMusic == true then
-		SFX.play("_OST/_Sound Effects/paused_on.ogg")
+		playSound("paused_on.ogg")
 		musicmuted = true
 	elseif GameData.muteMusic == false then
-		SFX.play("_OST/_Sound Effects/paused_off.ogg")
+		playSound("paused_off.ogg")
 		musicmuted = false
 	end
 	--pausemenu.paused = false
@@ -223,7 +223,7 @@ local function quitgame()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	Misc.saveGame()
-	SFX.play("_OST/_Sound Effects/savequit.ogg")
+	playSound("savequit.ogg")
 	GameData.cutsceneMusicControl = true
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
@@ -232,14 +232,14 @@ local function quitonly()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
-	SFX.play("_OST/_Sound Effects/nosave.ogg")
+	playSound("nosave.ogg")
 	GameData.cutsceneMusicControl = true
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false pausemenu.paused_other = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function savegame()
 	pausemenu.paused = false
-	SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
+	playSound("save_dismiss.ogg")
 	Misc.saveGame()
 	Misc.unpause()
 end
@@ -249,12 +249,12 @@ local function quitgamemap()
 	Audio.MusicPause()
 	Misc.saveGame()
 	GameData.cutsceneMusicControl = true
-	SFX.play("_OST/_Sound Effects/savequit.ogg")
+	playSound("savequit.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
 local function changeresolution()
-	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
+	playSound("resolution-set.ogg")
 	if SaveData.resolution == "fullscreen" then
 		SaveData.resolution = "widescreen"
 	elseif SaveData.resolution == "widescreen" then
@@ -276,20 +276,20 @@ end
 
 local function changeresolutionborder()
 	if SaveData.borderEnabled == true then
-		SFX.play("_OST/_Sound Effects/resolutionborder-disable.ogg")
+		playSound("resolutionborder-disable.ogg")
 		SaveData.borderEnabled = false
 	elseif SaveData.borderEnabled == false then
-		SFX.play("_OST/_Sound Effects/resolutionborder-enable.ogg")
+		playSound("resolutionborder-enable.ogg")
 		SaveData.borderEnabled = true
 	end
 end
 
 local function changeletterbox()
 	if SaveData.letterbox == true then
-		SFX.play("_OST/_Sound Effects/letterbox-disable.ogg")
+		playSound("letterbox-disable.ogg")
 		SaveData.letterbox = false
 	elseif SaveData.letterbox == false then
-		SFX.play("_OST/_Sound Effects/letterbox-enable.ogg")
+		playSound("letterbox-enable.ogg")
 		SaveData.letterbox = true
 	end
 end
@@ -298,7 +298,7 @@ local function quitonlymap()
 	Graphics.drawScreen{color = Color.black, priority = 10}
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
-	SFX.play("_OST/_Sound Effects/nosave.ogg")
+	playSound("nosave.ogg")
 	GameData.cutsceneMusicControl = true
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
@@ -312,20 +312,20 @@ local function savegamemap()
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
 	Misc.saveGame();
-	SFX.play("_OST/_Sound Effects/save_dismiss.ogg")
+	playSound("save_dismiss.ogg")
 end
 
 local function returntolastlevel()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
-	SFX.play("_OST/_Sound Effects/lastlevel_warp.ogg")
+	playSound("lastlevel_warp.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.3, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.load(SaveData.lastLevelPlayed, nil, nil) end)
 end
 
 local function exitlevel2()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("world_warp.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.7, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Level.exit() end)
 end
 
@@ -333,7 +333,7 @@ local function exitlevel()
 	Audio.MusicVolume(0)
 	GameData.cutsceneMusicControl = true
 	Audio.MusicPause()
-	SFX.play("_OST/_Sound Effects/quitmenu_close.ogg")
+	playSound("quitmenu_close.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.cutsceneMusicControl = false Level.exit() end)
 end
 
@@ -341,7 +341,7 @@ local function restartlevel()
 	Audio.MusicVolume(0)
 	GameData.cutsceneMusicControl = true
 	Audio.MusicPause()
-	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
+	playSound("skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.cutsceneMusicControl = false Level.load(Level.filename()) end)
 end
 
@@ -349,7 +349,7 @@ local function restartlevelhub()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	GameData.cutsceneMusicControl = true
-	SFX.play("_OST/_Sound Effects/skip-intro.ogg")
+	playSound("skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.cutsceneMusicControl = false Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
@@ -357,8 +357,8 @@ local function warpzonehub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("hub_travelactivated.ogg")
+	playSound("world_warp.ogg")
 	player:teleport(20496, 19520, bottomCenterAligned)
 end
 
@@ -366,8 +366,8 @@ local function touristhub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("hub_travelactivated.ogg")
+	playSound("world_warp.ogg")
 	player:teleport(-119968, -120128, bottomCenterAligned)
 end
 
@@ -375,8 +375,8 @@ local function starthub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("hub_travelactivated.ogg")
+	playSound("world_warp.ogg")
 	player:teleport(-200608, -200128, bottomCenterAligned)
 end
 
@@ -384,8 +384,8 @@ local function switchhub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("hub_travelactivated.ogg")
+	playSound("world_warp.ogg")
 	player:teleport(40176, 39876, bottomCenterAligned)
 end
 
@@ -393,8 +393,8 @@ local function shophub()
 	pausemenu.paused = false
 	pausemenu.paused_tele = false
 	Misc.unpause()
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("hub_travelactivated.ogg")
+	playSound("world_warp.ogg")
 	player:teleport(80144, 79868, bottomCenterAligned)
 end
 
@@ -405,10 +405,10 @@ local function startteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	playSound("hub_travelactivated.ogg")
 	world.playerX = -2880
 	world.playerY = -1664
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("world_warp.ogg")
 end
 
 local function sideteleport()
@@ -419,10 +419,10 @@ local function sideteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	playSound("hub_travelactivated.ogg")
 	world.playerX = -3168
 	world.playerY = -1536
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("world_warp.ogg")
 end
 
 local function hubmapteleport()
@@ -433,10 +433,10 @@ local function hubmapteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	playSound("hub_travelactivated.ogg")
 	world.playerX = -3040
 	world.playerY = -1760
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("world_warp.ogg")
 end
 
 local function dlcteleport()
@@ -447,111 +447,111 @@ local function dlcteleport()
 	if cooldown <= 0 then
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
-	SFX.play("_OST/_Sound Effects/hub_travelactivated.ogg")
+	playSound("hub_travelactivated.ogg")
 	world.playerX = -1760
 	world.playerY = -1568
-	SFX.play("_OST/_Sound Effects/world_warp.ogg")
+	playSound("world_warp.ogg")
 end
 
 local function charmario()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(1, false)
 end
 
 local function charluigi()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(2, false)
 end
 
 local function charpeach()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(3, false)
 end
 
 local function chartoad()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(4, false)
 end
 
 local function charlink()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(5, false)
 end
 
 local function charmegaman()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(6, false)
 end
 
 local function charmegaman()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(6, false)
 end
 
 local function charwario()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(7, false)
 end
 
 local function charbowser()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(8, false)
 end
 
 local function charklonoa()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(9, false)
 end
 
 local function charyoshi()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(10, false)
 end
 
 local function charrosalina()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(11, false)
 end
 
 local function charsnake()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(12, false)
 end
 
 local function charzelda()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(13, false)
 end
 
 local function charsteve()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(14, false)
 end
 
 local function charunclebroadsword()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(15, false)
 end
 
 local function charsamus()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-	SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+	playSound("charcost-selected.ogg")
+	playSound("racoon-changechar.ogg")
 	player:transform(16, false)
 end
 
@@ -560,98 +560,98 @@ local function characterchange()
 	if (character == CHARACTER_MARIO) then
 		player:transform(2, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(3, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(4, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(5, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(6, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_MEGAMAN) then
 		player:transform(7, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_WARIO) then
 		player:transform(8, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_BOWSER) then
 		player:transform(9, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_KLONOA) then
 		player:transform(10, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_NINJABOMBERMAN) then
 		player:transform(11, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ROSALINA) then
 		player:transform(12, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_SNAKE) then
 		player:transform(13, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ZELDA) then
 		player:transform(14, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ULTIMATERINKA) then
 		player:transform(15, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_UNCLEBROADSWORD) then
 		player:transform(16, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_SAMUS) then
 		player:transform(1, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 end
 
@@ -660,32 +660,32 @@ local function characterchange13()
 	if (character == CHARACTER_MARIO) then
 		player:transform(2, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(3, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(4, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(5, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(1, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 end
 
@@ -694,32 +694,32 @@ local function characterchange13_2p()
 	if (character == CHARACTER_MARIO) then
 		player2:transform(2, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player2:transform(3, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player2:transform(4, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player2:transform(5, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player2:transform(1, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 end
 
@@ -728,98 +728,98 @@ local function characterchangeleft()
 	if (character == CHARACTER_MARIO) then
 		player:transform(16, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(1, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(2, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(3, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(4, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_MEGAMAN) then
 		player:transform(5, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_WARIO) then
 		player:transform(6, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_BOWSER) then
 		player:transform(7, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_KLONOA) then
 		player:transform(8, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_NINJABOMBERMAN) then
 		player:transform(9, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ROSALINA) then
 		player:transform(10, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_SNAKE) then
 		player:transform(11, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ZELDA) then
 		player:transform(12, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_ULTIMATERINKA) then
 		player:transform(13, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_UNCLEBROADSWORD) then
 		player:transform(14, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_SAMUS) then
 		player:transform(15, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 end
 
@@ -828,32 +828,32 @@ local function characterchange13left()
 	if (character == CHARACTER_MARIO) then
 		player:transform(5, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(1, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player:transform(2, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player:transform(3, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player:transform(4, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 end
 
@@ -862,32 +862,32 @@ local function characterchange13_2pleft()
 	if (character == CHARACTER_MARIO) then
 		player2:transform(5, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player2:transform(1, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_PEACH) then
 		player2:transform(2, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_TOAD) then
 		player2:transform(3, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LINK) then
 		player2:transform(4, false)
 		SFX.play(32)
-		SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
-		SFX.play("_OST/_Sound Effects/racoon-changechar.ogg")
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 end
 
@@ -902,8 +902,8 @@ local function costumechangeright()
 		player:setCostume(costumes[1])
 	end
 	--pausemenu.costumechanged = true
-	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	playSound("charcost_costume.ogg")
+	playSound("charcost-selected.ogg")
 end
 
 local function costumechangeleftmap()
@@ -916,8 +916,8 @@ local function costumechangeleftmap()
 	else
 		player:setCostume(costumes[1])
 	end
-	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	playSound("charcost_costume.ogg")
+	playSound("charcost-selected.ogg")
 end
 
 local function costumechangeleft()
@@ -931,8 +931,8 @@ local function costumechangeleft()
 		player:setCostume(costumes[1])
 	end
 	--pausemenu.costumechanged = true
-	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	playSound("charcost_costume.ogg")
+	playSound("charcost-selected.ogg")
 end
 
 local function costumechangerightmap()
@@ -945,8 +945,8 @@ local function costumechangerightmap()
 	else
 		player:setCostume(costumes[1])
 	end
-	SFX.play("_OST/_Sound Effects/charcost_costume.ogg")
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	playSound("charcost_costume.ogg")
+	playSound("charcost-selected.ogg")
 end
 
 local function mainmenu()
@@ -954,11 +954,11 @@ local function mainmenu()
 	Misc.unpause()
 	Misc.saveGame()
 	GameData.cutsceneMusicControl = true
-	Routine.run(function() exitscreen = true Audio.MusicVolume(0) SFX.play("_OST/_Sound Effects/shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() GameData.cutsceneMusicControl = false Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
+	Routine.run(function() exitscreen = true Audio.MusicVolume(0) playSound("shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() GameData.cutsceneMusicControl = false Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
 end
 
 local function wrong()
-	SFX.play("_OST/_Sound Effects/wrong.ogg")
+	playSound("wrong.ogg")
 end
 
 local function hubteleport()
@@ -1717,7 +1717,7 @@ function pausemenu.onInputUpdate()
 			pausemenu.paused_tele = false
 			pausemenu.paused_other = false
 			pausemenu.pauseactive = false
-			SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
+			playSound("pausemenu-closed.ogg")
 			cooldown = 5
 			Misc.unpause()
 			player:mem(0x11E,FIELD_BOOL,false)
@@ -1726,7 +1726,7 @@ function pausemenu.onInputUpdate()
 			pausemenu.paused = true
 			pausemenu.pauseactive = true
 			pause_index = 0;
-			SFX.play("_OST/_Sound Effects/pausemenu.ogg")
+			playSound("pausemenu.ogg")
 		elseif Player(2) and Player(2).isValid then
 			if pausemenu.paused then
 				pausemenu.paused = false
@@ -1734,7 +1734,7 @@ function pausemenu.onInputUpdate()
 				pausemenu.paused_tele = false
 				pausemenu.paused_other = false
 				pausemenu.pauseactive = false
-				SFX.play("_OST/_Sound Effects/pausemenu-closed.ogg")
+				playSound("pausemenu-closed.ogg")
 				cooldown = 5
 				Misc.unpause()
 				player2:mem(0x11E,FIELD_BOOL,false)
@@ -1744,7 +1744,7 @@ function pausemenu.onInputUpdate()
 				pausemenu.paused = true
 				pausemenu.pauseactive = true
 				pause_index = 0;
-				SFX.play("_OST/_Sound Effects/pausemenu.ogg")
+				playSound("pausemenu.ogg")
 			end
 		end
 		if cooldown <= 0 then
@@ -1772,12 +1772,12 @@ function pausemenu.onInputUpdate()
 			repeat
 				pause_index = (pause_index+1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index = (pause_index-1)%#pause_options;
 			until(not pause_options[pause_index+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.left == KEYS_PRESSED) then
 			player.keys.left = KEYS_UNPRESSED
 		elseif(player.keys.right == KEYS_PRESSED) then
@@ -1799,12 +1799,12 @@ function pausemenu.onInputUpdate()
 				repeat
 					pause_index = (pause_index+1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index = (pause_index-1)%#pause_options;
 				until(not pause_options[pause_index+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.left == KEYS_PRESSED) then
 				player2.keys.left = KEYS_UNPRESSED
 			elseif(player2.keys.right == KEYS_PRESSED) then
@@ -1820,12 +1820,12 @@ function pausemenu.onInputUpdate()
 			repeat
 				pause_index_char = (pause_index_char+1)%#pause_options_char;
 			until(not pause_options_char[pause_index_char+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index_char = (pause_index_char-1)%#pause_options_char;
 			until(not pause_options_char[pause_index_char+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.left == KEYS_PRESSED) then
 			player.keys.left = KEYS_UNPRESSED
 		elseif(player.keys.right == KEYS_PRESSED) then
@@ -1839,12 +1839,12 @@ function pausemenu.onInputUpdate()
 				repeat
 					pause_index_char = (pause_index_char+1)%#pause_options_char;
 				until(not pause_options_char[pause_index_char+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index_char = (pause_index_char-1)%#pause_options_char;
 				until(not pause_options_char[pause_index_char+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.left == KEYS_PRESSED) then
 				player2.keys.left = KEYS_UNPRESSED
 			elseif(player2.keys.right == KEYS_PRESSED) then
@@ -1860,12 +1860,12 @@ function pausemenu.onInputUpdate()
 			repeat
 				pause_index_tele = (pause_index_tele+1)%#pause_options_tele;
 			until(not pause_options_tele[pause_index_tele+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index_tele = (pause_index_tele-1)%#pause_options_tele;
 			until(not pause_options_tele[pause_index_tele+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.left == KEYS_PRESSED) then
 			player.keys.left = KEYS_UNPRESSED
 		elseif(player.keys.right == KEYS_PRESSED) then
@@ -1879,12 +1879,12 @@ function pausemenu.onInputUpdate()
 				repeat
 					pause_index_tele = (pause_index_tele+1)%#pause_options_tele;
 				until(not pause_options_tele[pause_index_tele+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index_tele = (pause_index_tele-1)%#pause_options_tele;
 				until(not pause_options_tele[pause_index_tele+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.left == KEYS_PRESSED) then
 				player2.keys.left = KEYS_UNPRESSED
 			elseif(player2.keys.right == KEYS_PRESSED) then
@@ -1900,12 +1900,12 @@ function pausemenu.onInputUpdate()
 			repeat
 				pause_index_other = (pause_index_other+1)%#pause_options_other;
 			until(not pause_options_other[pause_index_other+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.up == KEYS_PRESSED) then
 			repeat
 				pause_index_other = (pause_index_other-1)%#pause_options_other;
 			until(not pause_options_other[pause_index_other+1].inactive);
-			SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+			playSound("pausemenu_cursor.ogg")
 		elseif(player.keys.left == KEYS_PRESSED) then
 			player.keys.left = KEYS_UNPRESSED
 		elseif(player.keys.right == KEYS_PRESSED) then
@@ -1919,12 +1919,12 @@ function pausemenu.onInputUpdate()
 				repeat
 					pause_index_other = (pause_index_other+1)%#pause_options_other;
 				until(not pause_options_other[pause_index_other+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.up == KEYS_PRESSED) then
 				repeat
 					pause_index_other = (pause_index_other-1)%#pause_options_other;
 				until(not pause_options_other[pause_index_other+1].inactive);
-				SFX.play("_OST/_Sound Effects/pausemenu_cursor.ogg")
+				playSound("pausemenu_cursor.ogg")
 			elseif(player2.keys.left == KEYS_PRESSED) then
 				player2.keys.left = KEYS_UNPRESSED
 			elseif(player2.keys.right == KEYS_PRESSED) then

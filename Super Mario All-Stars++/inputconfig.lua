@@ -74,7 +74,7 @@ function inputconfigurator.onKeyboardPressDirect(k, repeated)
 	if inputconfigurator.controlConfigOpen then
 		if (k == VK_BACK) then
 			inputconfigurator.backspacePressedState = true
-			SFX.play("_OST/_Sound Effects/inputconfig/input_quit.ogg")
+			playSound("inputconfig/input_quit.ogg")
 			inputconfigurator.controlConfigOpen = false
 			GameData.reopenmenu = true
 		end
@@ -86,7 +86,7 @@ function inputconfigurator.onControllerButtonPress(btn, pnum, controller)
 		if controlConfigCount == 0 then
 			currentController = { controller, pnum }
 			controlConfigCount = 1
-			SFX.play("_OST/_Sound Effects/inputconfig/input_started.ogg")
+			playSound("inputconfig/input_started.ogg")
 			return
 		elseif currentController == nil then
 			currentController = { controller, pnum }
@@ -97,11 +97,11 @@ function inputconfigurator.onControllerButtonPress(btn, pnum, controller)
 			inputconfigurator.nocontroller = false
 			if controlConfigCount < #controlConfigs then
 				currentConfig[controlConfigCount] = btn
-				SFX.play("_OST/_Sound Effects/inputconfig/input_switchpressed.ogg")
+				playSound("inputconfig/input_switchpressed.ogg")
 				controlConfigCount = controlConfigCount + 1
 			else
 				inputconfigurator.controlConfigOpen = false
-				SFX.play("_OST/_Sound Effects/inputconfig/input_success.ogg")
+				playSound("inputconfig/input_success.ogg")
 				writeButtonConfigs()
 				lockSelect = true
 				GameData.reopenmenu = true

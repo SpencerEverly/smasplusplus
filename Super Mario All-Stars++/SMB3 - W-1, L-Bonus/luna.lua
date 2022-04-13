@@ -5,29 +5,29 @@ local inventory = require("customInventory")
 function onEvent(eventName)
 	if eventName == "3" then
 		Audio.MusicChange(0, "_OST/Super Mario Bros 3/Battle Mode.spc|0;g=2.5")
-		SFX.play("_OST/_Sound Effects/battle-countdown.ogg")
+		playSound("battle-countdown.ogg")
 	end
 	if eventName == "2" then
-		SFX.play("_OST/_Sound Effects/battle-countdown.ogg")
+		playSound("battle-countdown.ogg")
 	end
 	if eventName == "1" then
-		SFX.play("_OST/_Sound Effects/battle-countdown.ogg")
+		playSound("battle-countdown.ogg")
 	end
 	if eventName == "GO" then
-		SFX.play("_OST/_Sound Effects/battle-start.ogg")
+		playSound("battle-start.ogg")
 	end
 	if eventName == "START" then
 		Timer.activate(40)
 	end
 	if eventName == "Smash!" then
-		SFX.play("_OST/_Sound Effects/hits1.ogg")
+		playSound("hits1.ogg")
 	end
 	if eventName == "Finish!" then
 		Timer.deactivate()
 	end
     if eventName == "Finish 3" then
         inventory.addPowerUp(6, 1)
-		SFX.play("_OST/_Sound Effects/chest.ogg")
+		playSound("chest.ogg")
 		player.upKeyPressing = false;
 		player.downKeyPressing = false;
 		player.altJumpKeyPressing = false;

@@ -140,7 +140,6 @@ function playSound(name) --Playing SFXs
 		error("That sound doesn't exist.")
 	end
 	if unexpected_condition then error("That sound doesn't exist.") end
-	if unfinished_string then error("Either the sound is unfinished, or it doesn't exist.") end
 	
 	if extrasounds.id[name] then
 		SFX.play(extrasounds.id[name])
