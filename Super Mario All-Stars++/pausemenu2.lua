@@ -895,6 +895,28 @@ function quitonly()
 	Misc.exitEngine()
 end
 
+function onethreemodeactivate()
+	pauseplus.canControlMenu = false
+	if SaveData.disableX2char == false then
+		playSound("1.3Mode/dragon-coin.ogg")
+		playSound("1.3Mode/key.ogg")
+	elseif SaveData.disableX2char == true then
+		playSound("dragon-coin.ogg")
+		playSound("key.ogg")
+	end
+	startFadeOut()
+	Misc.saveGame()
+	Routine.wait(2.3,true)
+	SaveData.disableX2char = not SaveData.disableX2char
+	Misc.unpause()
+	exitFadeActive = false
+	exitFadeActiveDone = true
+	Graphics.activateHud(false)
+	Cheats.trigger("1player")
+	player:transform(1, false)
+	Level.load(Level.filename())
+end
+
 function startFadeOut()
     exitFadeActive = true
 end
@@ -1108,7 +1130,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
 	pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
 	if (Level.filename() == "map.lvlx") == false then
-		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer.",pauseplus.save,closeMenu = true, actions = {function() SaveData.disableX2char = not SaveData.disableX2char Graphics.activateHud(false) Cheats.trigger("1player") player:transform(1, false) Misc.unpause() Level.load(Level.filename()) end}})
+		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer. COSTUMES WILL BE RESET!",pauseplus.save,closeMenu = true, actions = {function() Routine.run(onethreemodeactivate) end}})
 	end
 	pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = {function() Routine.run(quitonly) end}})
 
