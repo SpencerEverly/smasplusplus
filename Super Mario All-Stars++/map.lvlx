@@ -739,7 +739,7 @@ ID:802;X:-198592;Y:-198688;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - W-4\, 
 ID:802;X:-198688;Y:-198688;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - W-4\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"4-3\: Avoid Fryguy and Move Up!\"\,\n    \"path_left\"\: \"toSMB25-1\"\,\n    \"path_right\"\: \"toSMB24-3\"\,\n    \"unlock_left\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
 ID:752;X:-198624;Y:-198688;D:-1;XTRA:"{\n    \"name\"\: \"toSMB24-3\"\,\n    \"points\"\: \"-64\, 0\, 36\, 0\"\n}\n";
 ID:752;X:-198720;Y:-198688;D:-1;XTRA:"{\n    \"name\"\: \"toSMB25-1\"\,\n    \"points\"\: \"22\, 0\, -118\, 0\, 36\, 128\"\n}\n";
-ID:802;X:-198688;Y:-198560;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - W-5\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"5-1\: A Matter of Life and Death\"\,\n    \"path_left\"\: \"toSMB24-1\"\,\n    \"path_right\"\: \"toSMB25-2\"\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
+ID:802;X:-198688;Y:-198560;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - W-5\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"5-1\: A Matter of Life and Death\"\,\n    \"path_left\"\: \"toSMB25-1\"\,\n    \"path_right\"\: \"toSMB25-2\"\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-198656;Y:-198560;D:-1;XTRA:"{\n    \"name\"\: \"toSMB25-2\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:802;X:-198592;Y:-198560;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - W-5\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"5-2\: Attack in the Dark!\"\,\n    \"path_left\"\: \"toSMB25-2\"\,\n    \"path_right\"\: \"toSMB25-3\"\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-198560;Y:-198560;D:-1;XTRA:"{\n    \"name\"\: \"toSMB25-3\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
