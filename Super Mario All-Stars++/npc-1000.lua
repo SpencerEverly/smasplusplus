@@ -5,10 +5,11 @@ local Routine = require("routine")
 
 local dudstar = {}
 
-local npcID = 1000
+local npcID = NPC_ID
+local id = 1000
 
 local dudStarSettings = {
-	id = npcID,
+	id = 1000,
 	
 	gfxwidth = 32,
 	gfxheight = 32,
@@ -97,7 +98,7 @@ function starget()
 end
 
 function dudstar.onPostNPCKill(v,reason)
-	if dudstar.collectableIDMap[v.npcID] and npcManager.collected(npcID,reason) then
+	if dudstar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
 		Routine.run(starget)
 	end
 end
@@ -142,8 +143,8 @@ end
 function dudstar.onInitAPI()
 	npcManager.registerEvent(npcID,dudstar,"onTickNPC")
 	
-	table.insert(dudstar.collectableIDList,npcID)
-	dudstar.collectableIDMap[npcID] = true
+	table.insert(dudstar.collectableIDList,id)
+	dudstar.collectableIDMap[id] = true
 	
 	registerEvent(dudstar,"onPlayerHarm")
 	registerEvent(dudstar,"onInputUpdate")
