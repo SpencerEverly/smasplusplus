@@ -12,7 +12,7 @@ function onEvent(eventName)
 		end
 	end
 	if eventName == ("Pigeon Cutscene 3") then
-		SFX.play("_OST/_Sound Effects/pigeon_attack.ogg")
+		playSound("pigeon_attack.ogg")
 	end
 	if eventName == ("Pigeon Cutscene 5") then
 		if SaveData.disableX2char == false then
@@ -26,7 +26,7 @@ function onEvent(eventName)
 		Timer.activate(150)
 	end
 	if eventName == ("Pigeon Cutscene Sequel 0") then
-		SFX.play("_OST/_Sound Effects/is-the-pool-clean.ogg")
+		playSound("is-the-pool-clean.ogg")
 		if SaveData.disableX2char == false then
 			pauseplus.canPause = false
 			furyinventory.activated = false
@@ -37,7 +37,7 @@ function onEvent(eventName)
 		Timer.deactivate()
 	end
 	if eventName == ("Pigeon Cutscene Sequel 2") then
-		SFX.play("_OST/_Sound Effects/pigeon_attack.ogg")
+		playSound("pigeon_attack.ogg")
 	end
 	if eventName == ("Pigeon Cutscene Sequel 3") then
 		if SaveData.disableX2char == false then

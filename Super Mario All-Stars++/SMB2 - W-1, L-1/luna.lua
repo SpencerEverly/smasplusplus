@@ -37,12 +37,12 @@ function onEvent(eventName)
 	local costumes
 	if currentCostume == "11-SMA1" then
 		if eventName == "Boss Start" then
-			SFX.play("costumes/mario/11-SMA1/birdo-thisisasfarasyougo.wav")
+			playSound("mario/11-SMA1/birdo-thisisasfarasyougo.wav")
 		end
 	end
 	if currentCostume == "11-SMA1" then
 		if eventName == "Boss End" then
-			SFX.play("costumes/mario/11-SMA1/birdo-I'llrememberthis.wav")
+			playSound("mario/11-SMA1/birdo-I'llrememberthis.wav")
 		end
 	end
 end

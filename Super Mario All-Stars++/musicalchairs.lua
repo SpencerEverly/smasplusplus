@@ -425,7 +425,7 @@ function musicalchairs.onEvent(eventName)
 		end
 		if eventName == "Boss End" then
 			if level == "SMB1 - W-1, L-4.lvlx" then
-				SFX.play("costumes/mario/GA-Caillou/got-star-catchsfx.ogg")
+				playSound("mario/GA-Caillou/got-star-catchsfx.ogg")
 			end
 		end
 	end

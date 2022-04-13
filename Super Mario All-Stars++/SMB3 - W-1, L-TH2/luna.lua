@@ -10,7 +10,7 @@ function onEvent(eventName)
 	if eventName == "getmushroom" then
         inventory.addPowerUp(0, 1)
 		Audio.MusicFadeOut(0, 1)
-		SFX.play("_OST/_Sound Effects/chest.ogg")
+		playSound("chest.ogg")
 		player.upKeyPressing = false;
 		player.downKeyPressing = false;
 		player.altJumpKeyPressing = false;
@@ -25,7 +25,7 @@ function onEvent(eventName)
     if eventName == "getfire" then
         inventory.addPowerUp(1, 1)
 		Audio.MusicFadeOut(0, 1)
-		SFX.play("_OST/_Sound Effects/chest.ogg")
+		playSound("chest.ogg")
 		player.upKeyPressing = false;
 		player.downKeyPressing = false;
 		player.altJumpKeyPressing = false;
@@ -40,7 +40,7 @@ function onEvent(eventName)
     if eventName == "getleaf" then
         inventory.addPowerUp(2, 1)
 		Audio.MusicFadeOut(0, 1)
-		SFX.play("_OST/_Sound Effects/chest.ogg")
+		playSound("chest.ogg")
 		player.upKeyPressing = false;
 		player.downKeyPressing = false;
 		player.altJumpKeyPressing = false;

@@ -64,18 +64,18 @@ function onEvent(eventName)
 		player:teleport(-199632, -200544)
 	end
 	if eventName == "5" then
-		SFX.play("_OST/_Sound Effects/is-the-pool-clean-evilmode.ogg")
+		playSound("is-the-pool-clean-evilmode.ogg")
 	end
 	if eventName == "6" then
 		Defines.earthquake = 15
-		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
-		SFX.play("_OST/_Sound Effects/pigeon_attack.ogg")
+		playSound("raca-chant.ogg")
+		playSound("pigeon_attack.ogg")
 	end
 	if eventName == "7" then
 		Audio.MusicChange(0, "_OST/Undertale/mus_f_part1.ogg")
 	end
 	if eventName == "BattlePreCut1" then
-		SFX.play("_OST/_Sound Effects/mus_f_alarm.ogg")
+		playSound("mus_f_alarm.ogg")
 	end
 	if eventName == "BattleDodge1" then
 		blacklayer = true

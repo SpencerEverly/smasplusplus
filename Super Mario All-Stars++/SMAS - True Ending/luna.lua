@@ -76,7 +76,7 @@ function onEvent(eventName)
 		Audio.MusicChange(6, 0)
 		Graphics.activateHud(false)
 		GameData.toggleoffinventory = true
-		SFX.play("_OST/_Sound Effects/mus_explosion.ogg")
+		playSound("mus_explosion.ogg")
 		whiteflash = true
 		player.setCostume(1, nil)
 		player:transform(1, false)
@@ -93,7 +93,7 @@ function onEvent(eventName)
 		Audio.MusicChange(6, "_OST/Deltarune/GALLERY.ogg")
 	end
 	if eventName == "NormalCutscene3" then
-		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
+		playSound("raca-chant.ogg")
 	end
 	if eventName == "NormalCutscene4" then
 		
@@ -112,7 +112,7 @@ function onEvent(eventName)
 		SaveData.letterbox = true
 		Misc.saveGame()
 		Routine.run(WhiteFadeInSlow)
-		SFX.play("_OST/_Sound Effects/raca-chant.ogg")
+		playSound("raca-chant.ogg")
 		SFX.play("_OST/Undertale/mus_cymbal.ogg")
 		Misc.saveGame()
 	end

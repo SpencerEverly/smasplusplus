@@ -115,7 +115,7 @@ function stats.onPlayerHarm() --Handles playerHP
 			end
 
 			if player.forcedState ~= FORCEDSTATE_POWERDOWN_SMALL then
-				SFX.play("costumes/luigi/Undertale-Frisk/player-shrink.ogg")
+				playSound("luigi/Undertale-Frisk/player-shrink.ogg")
 				Player.forcedState = FORCEDSTATE_NONE -- Shamelessly stolen from SmgLifeSystem by Marioman2007. Thanks for solving my problem for me!
 				player:mem(0x140, FIELD_WORD, 150)
 				player.powerup = 2
@@ -135,7 +135,7 @@ function stats.LevelUp(x) -- LevelUp - This grants a level. Input a minus number
 end
 
 function onLevelUp()
-    SFX.play("_OST/_Sound Effects/frisk_levelup.ogg")
+    playSound("frisk_levelup.ogg")
 end
 
 function stats.GainXP(x) -- GainXP - This function grants you experience points.

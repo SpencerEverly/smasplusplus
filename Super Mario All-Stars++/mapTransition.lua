@@ -14,7 +14,7 @@ function loadlevel()
 	elseif player.keys.right == KEYS_PRESSED then
 		player.keys.right = KEYS_UNPRESSED
 	end
-	SFX.play("_OST/_Sound Effects/levelload.ogg")
+	playSound("levelload.ogg")
 	Routine.wait(1.5)
 	Misc.unpause()
 end

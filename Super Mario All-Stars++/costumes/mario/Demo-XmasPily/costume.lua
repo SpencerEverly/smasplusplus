@@ -612,7 +612,7 @@ local inputEvent = function(playerData, p)
 					if  playerData.powerup == 6  then
 						SFX.play("sound/character/ur_claw.ogg")
 					elseif  playerData.powerup == 3  then
-						SFX.play("costumes/mario/Demo-XmasPily/sound/extended/flame-shield-dash.ogg")
+						playSound("mario/Demo-XmasPily/sound/extended/flame-shield-dash.ogg")
 					else
 						SFX.play("sound/boot.ogg")
 					end

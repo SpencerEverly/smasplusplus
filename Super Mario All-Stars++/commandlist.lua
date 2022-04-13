@@ -53,13 +53,13 @@ function commandlist.onKeyboardPress(k)
 	if active then
 		player.pauseKeyPressing = false
 		if k == VK_F9 then
-			SFX.play("_OST/_Sound Effects/commandlist_open.ogg")
+			playSound("commandlist_open.ogg")
 			onePressedState = false
 		end
 	end
 	if not active then
 		if k == VK_F9 then
-			SFX.play("_OST/_Sound Effects/commandlist_close.ogg")
+			playSound("commandlist_close.ogg")
 			onePressedState = true
 		end
 	end

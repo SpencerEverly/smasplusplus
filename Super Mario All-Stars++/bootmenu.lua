@@ -612,16 +612,16 @@ local function ChangeName1()
 end
 
 local function ResolutionChange1()
-	SFX.play("_OST/_Sound Effects/resolution-set.ogg")
+	playSound("resolution-set.ogg")
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
 end
 
 local function ResolutionChangeBorder2()
 	if SaveData.borderEnabled == true then
-		SFX.play("_OST/_Sound Effects/resolutionborder-disable.ogg")
+		playSound("resolutionborder-disable.ogg")
 		SaveData.borderEnabled = false
 	elseif SaveData.borderEnabled == false then
-		SFX.play("_OST/_Sound Effects/resolutionborder-enable.ogg")
+		playSound("resolutionborder-enable.ogg")
 		SaveData.borderEnabled = true
 	end
 	littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>Border toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
@@ -629,10 +629,10 @@ end
 
 local function ResolutionChangeScale3()
 	if SaveData.letterbox == true then
-		SFX.play("_OST/_Sound Effects/letterbox-disable.ogg")
+		playSound("letterbox-disable.ogg")
 		SaveData.letterbox = false
 	elseif SaveData.letterbox == false then
-		SFX.play("_OST/_Sound Effects/letterbox-enable.ogg")
+		playSound("letterbox-enable.ogg")
 		SaveData.letterbox = true
 	end
 	littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Border toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
@@ -644,12 +644,12 @@ end
 
 local function X2Char()
 	if SaveData.disableX2char == false then
-		SFX.play("_OST/_Sound Effects/1.3-mode-enabled.ogg")
+		playSound("1.3-mode-enabled.ogg")
 		SaveData.disableX2char = true
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
 		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == true then
-		SFX.play("_OST/_Sound Effects/x2-mode-enabled.ogg")
+		playSound("x2-mode-enabled.ogg")
 		SaveData.disableX2char = false
 		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
@@ -774,7 +774,7 @@ local function ChangeChar2P()
 end
 
 local function ChangedCharacter()
-	SFX.play("_OST/_Sound Effects/charcost-selected.ogg")
+	playSound("charcost-selected.ogg")
 	if Player.count() == 1 then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
@@ -1035,16 +1035,16 @@ local function ExitToMap() --This command will exit to the main map
 end
 
 local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
-	SFX.play("_OST/_Sound Effects/startsmasboot-executed.ogg")
-	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
+	playSound("startsmasboot-executed.ogg")
+	playSound("startsmasboot-timerbeep.ogg")
 	active3 = true
 	logo = true
 	Routine.wait(1.0) --Each second play a sound
-	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
+	playSound("startsmasboot-timerbeep.ogg")
 	Routine.wait(1.0)
-	SFX.play("_OST/_Sound Effects/startsmasboot-timerbeep.ogg")
+	playSound("startsmasboot-timerbeep.ogg")
 	Routine.wait(1.0)
-	SFX.play("_OST/_Sound Effects/startsmasboot-fullyexecuted.ogg")
+	playSound("startsmasboot-fullyexecuted.ogg")
 	exitscreen = true --Black out everything
 	logo = false
 	active3 = false
@@ -1142,7 +1142,7 @@ local function foolsinapril() --April Fools event for 4/1 of any year
 	GameData.holidayrun = false
 	Misc.pause()
 	Routine.wait(5.5, true)
-	SFX.play("_OST/_Sound Effects/aprilfools.ogg")
+	playSound("aprilfools.ogg")
 	Routine.wait(2, true)
 	Misc.unpause()
 	aprilfools = false
@@ -1473,7 +1473,7 @@ function bootmenu.onInputUpdate()
 					active = true
 					pressjumpwords = false
 					aprilfools = true
-					SFX.play("_OST/_Sound Effects/windows_error.ogg")
+					playSound("windows_error.ogg")
 					GameData.holidayrun = true
 					if GameData.holidayrun == true then
 						GameData.holidayonetime = true

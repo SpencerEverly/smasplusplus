@@ -46,7 +46,7 @@ function onEvent(eventName)
 		Misc.saveGame()
 		if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
 			Misc.saveGame()
-			SFX.play("_OST/_Sound Effects/wrong.ogg")
+			playSound("wrong.ogg")
 			player:teleport(-199632, -200176)
 			triggerEvent("WSMBANotFound")
 			error("Where SMB Attacks does not exist. You apprently have a broken copy of SMAS++. Please reinstall using the SMASUpdater.")

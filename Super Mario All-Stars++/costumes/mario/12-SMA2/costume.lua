@@ -892,7 +892,7 @@ function costume.onTickEnd()
 	--if(player:mem(0x122,FIELD_WORD) == 2) then	--Powering down? Then update HP.
 	--	if(not powerdown) then --This happens if player is hurt when on 1HP, so should die.
 	--		killed = true;
-	--		SFX.play("costumes/mario/12-SMA2/mario-mama-mia.ogg");
+	--		playSound("mario/12-SMA2/mario-mama-mia.ogg");
 	--		player:kill();
 
 	--		powerdown = true;
