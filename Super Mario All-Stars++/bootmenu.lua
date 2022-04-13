@@ -1956,22 +1956,22 @@ if bootmenu.active == true then
 	
 	
 	littleDialogue.registerAnswer("StartNameChange",{text = "Begin",chosenFunction = function() Routine.run(startKeyboard) end})
-	littleDialogue.registerAnswer("StartNameChange",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("StartNameChange",{text = "Exit",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 	
 	
 	littleDialogue.registerAnswer("StartPFPChange",{text = "Begin",chosenFunction = function() Routine.run(startKeyboardPFP) end})
 	littleDialogue.registerAnswer("StartPFPChange",{text = "How do I use this?",chosenFunction = function() Routine.run(PFPinfo1) end})
-	littleDialogue.registerAnswer("StartPFPChange",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("StartPFPChange",{text = "Exit",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 	
 	
 	littleDialogue.registerAnswer("StartInputs",{text = "Begin",chosenFunction = function() Routine.run(startConfigurator) end})
-	littleDialogue.registerAnswer("StartInputs",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("StartInputs",{text = "Exit",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 	
 	littleDialogue.registerAnswer("StartSaveSwitcher",{text = "Begin",chosenFunction = function() Routine.run(startSaveSwitcher1) end})
-	littleDialogue.registerAnswer("StartSaveSwitcher",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	littleDialogue.registerAnswer("StartSaveSwitcher",{text = "Exit",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 
 
