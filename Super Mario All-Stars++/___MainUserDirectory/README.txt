@@ -1,3 +1,3 @@
-This is the main user directory for the player themself, for the profile picture system and other things if coming.
+This is the main user directory for the player themself, for the profile picture system and other things.
 
-To use a profile picture for your episode, place a PNG file that's max sized up to 1000x1000 pixels into the pfp directory in this folder.
+To use a profile picture for your episode, place any PNG file into this folder. Then you can set the PFP up under the boot menu's options tab.

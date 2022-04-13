@@ -803,7 +803,11 @@ function pausemenu2.onDraw()
 	if pauseplus.currentSubmenu then
 		if not isOverworld then
 			textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
-			sprite.draw{texture = loadImg("___MainUserDirectory/pfp/pfp.png"), width = 70, height = 70, x = 40, y = 35}
+			if SaveData.playerPfp == nil then
+				sprite.draw{texture = loadImg("___MainUserDirectory/pfp/pfp.png"), width = 70, height = 70, x = 40, y = 35, priority = -1}
+			else
+				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 40, y = 35, priority = -1}
+			end
 			textplus.print{x = 125, y = 60, text = "<color rainbow>"..SaveData.playerName.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
 		elseif isOverworld then
 			if SaveData.resolution == "fullscreen" then

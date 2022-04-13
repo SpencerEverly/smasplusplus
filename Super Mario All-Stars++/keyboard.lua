@@ -44,6 +44,24 @@ function keyboard.cmd()
 			GameData.playernameenter = false
 		end
 	end
+	if GameData.playerpfpenter == true then
+		if keyboard.buffer ~= "" then
+			if SaveData.playerPfp == nil then
+				SaveData.playerPfp = keyboard.buffer
+			else
+				SaveData.playerPfp = keyboard.buffer
+			end
+			keyboard.buffer = ""
+			keyboard.cursorPos = 0
+			playSound("console/console_success.ogg")
+			keyboard.active = false
+			GameData.enablekeyboard = false
+			GameData.reopenmenu = true
+			GameData.toggleoffkeys = false
+			GameData.toggleoffinventory = false
+			GameData.playernameenter = false
+		end
+	end
 	if GameData.playernameenterfirstboot == true then
 		if keyboard.buffer ~= "" then
 			SaveData.playerName = keyboard.buffer

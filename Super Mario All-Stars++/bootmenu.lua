@@ -13,6 +13,7 @@ local cursor = require("cursor")
 local inputconfigurator = require("inputconfig")
 local keyboard = require("keyboard")
 local hearthover = require("hearthover") --Require hearthover to disable it
+local sprite = require("base/sprite")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
@@ -54,6 +55,8 @@ local keyinput1 = false
 local killed = false
 local active4 = false
 local escquit = true
+local playernamebyImg = false
+local pfpimage = false
 
 local cooldown = 0
 
@@ -574,6 +577,8 @@ local function bootDialogue()
 	active4 = false
 	logo = false
 	pressjumpwords = false
+	playernamebyImg = false
+	pfpimage = false
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
@@ -609,6 +614,10 @@ end
 
 local function ChangeName1()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>To change your name in the game, please select Begin to get started (Keyboard only).<question StartNameChange>", pauses = false, updatesInPause = true})
+end
+
+local function ChangePFP1()
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>To change your profile picture in the game, please select Begin to get started (Keyboard only).<question StartPFPChange>", pauses = false, updatesInPause = true})
 end
 
 local function ResolutionChange1()
@@ -675,10 +684,20 @@ local function startKeyboardFirstBoot()
 	GameData.playernameenterfirstboot = true
 end
 
+local function startKeyboardPFP()
+	keyboard.active = true
+	GameData.enablekeyboard = true
+	GameData.playerpfpenter = true
+end
+
 local function startSaveSwitcher1()
 	keyboard.active = true
 	GameData.enablekeyboard = true
 	GameData.saveslotswitchenter = true
+end
+
+local function PFPinfo1()
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Your profile picture can be used when you launch Online Multiplayer, or to see who is running the game at this session.<page>Your profile picture will also be used during the story, along with your name.<page>To specify the profile picture using the keyboard, please type up the path from '___MainUserDirectory' to the profile picture you are going to use.<page>'___MainUserDirectory' is a user modifiable directory that can be used for files you specify for the episode, such as a profile picture (PNG only).<page>Don't worry if you don't want to specify one, there's already a default profile picture for you already set up.<page>But if you want to go ahead and set one up, please specify to begin anytime on that menu.<page>With that out of the way, that's how you set up a profile picture for the episode!<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 end
 
 local function X2DisableCheck1()
@@ -811,6 +830,8 @@ local function BootDialogueMusicReset()
 	logo = false
 	pressjumpwords = false
 	stpatricksday = false
+	playernamebyImg = false
+	pfpimage = false
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 	if Level.filename() == "intro_8bit.lvlx" then
 		Audio.MusicChange(0, "intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg")
@@ -861,6 +882,8 @@ end
 
 local function ExitDialogueFirstBoot()
 	bootmenu.menuactive = false
+	playernamebyImg = true
+	pfpimage = true
 	active = false
 	logo = true
 	pressjumpwords = true
@@ -879,6 +902,8 @@ local function ExitDialogue()
 	bootmenu.menuactive = false
 	active = false
 	logo = true
+	playernamebyImg = true
+	pfpimage = true
 	pressjumpwords = true
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
@@ -892,6 +917,8 @@ local function ExitDialogueMusicReset()
 	bootmenu.menuactive = false
 	active = false
 	logo = true
+	playernamebyImg = true
+	pfpimage = true
 	pressjumpwords = true
 	if SaveData.firstBootCompleted == 1 then
 		GameData.startedmenu = GameData.startedmenu - 1
@@ -1182,6 +1209,8 @@ function bootmenu.onStart()
 		end
 		if SaveData.firstBootCompleted == 1 then
 			Routine.run(easterEgg, true)
+			playernamebyImg = true
+			pfpimage = true
 		end
 		if month == "12" and day == "25" then --Change the weather on Christmas Day to snow
 			Section(0).effects.weather = WEATHER_SNOW
@@ -1537,6 +1566,20 @@ function bootmenu.onDraw()
 		local stpatricksday = false
 		local hitNPCs = Colliders.getColliding{a = cursor.scenepos, b = hitNPCs, btype = Colliders.NPC}
 		
+		if pfpimage then
+			if SaveData.playerPfp == nil then
+				sprite.draw{texture = loadImg("___MainUserDirectory/pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
+			else
+				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -1}
+			end
+		end
+		if playernamebyImg then
+			if SaveData.playerName == nil then
+				textplus.print{x = 60, y = 569, text = "<color rainbow>Player</color>", font = fontthree, priority = 0, xscale = 1, yscale = 1}
+			else
+				textplus.print{x = 60, y = 569, text = "<color rainbow>"..SaveData.playerName.."</color>", font = fontthree, priority = 0, xscale = 1, yscale = 1}
+			end
+		end
 		if Level.filename() == "intro_8bit.lvlx" then
 			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
 		end
@@ -1829,9 +1872,10 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
 	littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
 	littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
-	littleDialogue.registerAnswer("Options",{text = "Change Player Name",chosenFunction = function() Routine.run(ChangeName1) end})
 	littleDialogue.registerAnswer("Options",{text = "Boot Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
 	littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
+	littleDialogue.registerAnswer("Options",{text = "Change Player Name",chosenFunction = function() Routine.run(ChangeName1) end})
+	littleDialogue.registerAnswer("Options",{text = "Change Profile Picture",chosenFunction = function() Routine.run(ChangePFP1) end})
 	littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionSelect1) end})
 	littleDialogue.registerAnswer("Options",{text = "Toggle Letterbox Scaling",chosenFunction = function() Routine.run(ResolutionChangeScale3) end})
 	littleDialogue.registerAnswer("Options",{text = "Toggle Resolution Border",chosenFunction = function() Routine.run(ResolutionChangeBorder2) end})
@@ -1913,6 +1957,12 @@ if bootmenu.active == true then
 	
 	littleDialogue.registerAnswer("StartNameChange",{text = "Begin",chosenFunction = function() Routine.run(startKeyboard) end})
 	littleDialogue.registerAnswer("StartNameChange",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+	
+	
+	
+	littleDialogue.registerAnswer("StartPFPChange",{text = "Begin",chosenFunction = function() Routine.run(startKeyboardPFP) end})
+	littleDialogue.registerAnswer("StartPFPChange",{text = "How do I use this?",chosenFunction = function() Routine.run(PFPinfo1) end})
+	littleDialogue.registerAnswer("StartPFPChange",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
 	
 	
 	
