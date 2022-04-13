@@ -9,6 +9,7 @@ local textplus = require("textplus")
 local rooms = require("rooms")
 local smasdeathsystem = require("smasdeathsystem")
 local musicalchairs = require("musicalchairs")
+local sprite = require("base/sprite")
 local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
@@ -802,6 +803,8 @@ function pausemenu2.onDraw()
 	if pauseplus.currentSubmenu then
 		if not isOverworld then
 			textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
+			sprite.draw{texture = loadImg("___MainUserDirectory/pfp/pfp.png"), width = 70, height = 70, x = 40, y = 35}
+			textplus.print{x = 125, y = 60, text = "<color rainbow>"..SaveData.playerName.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
 		elseif isOverworld then
 			if SaveData.resolution == "fullscreen" then
 				textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 8, xscale = 1.5, yscale = 1.5}
