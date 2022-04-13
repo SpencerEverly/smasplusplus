@@ -1030,10 +1030,13 @@ local function getTargets()
     end
 
     -- Add player
-	local playerscount = {[Player(1)] = true,[Player(2)] = true}
-    table.insert(targets,playerscount)
-    count = count + Player.count()
-
+	if Player(2) and Player(2).isValid then
+		table.insert(targets,{player = player.idx, player2 = player2.idx})
+	else
+		table.insert(targets,player)
+	end
+    count = count + player.count()
+	
     return targets
 end
 

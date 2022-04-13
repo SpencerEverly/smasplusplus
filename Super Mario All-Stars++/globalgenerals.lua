@@ -339,7 +339,7 @@ end
 	
 function globalgenerals.onTick()
 	if Player(2) and Player(2).isValid then
-		customCamera.targets = {player, Player(2)}
+		customCamera.targets = {player, player2}
 	else
 		customCamera.targets = {player}
 	end
@@ -1172,6 +1172,20 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 end
 
 function globalgenerals.onDraw()
+	if Player(2) and Player(2).isValid then
+		local playerboundaryx = player2.x - player.x
+		local playerboundaryy = player2.y - player.y
+		--Try to push player2 if about to go out of the camera bounds
+		if playerboundaryx >= 400 then
+			player2.x = camera.x + 798 - (player.width / 2)
+		elseif playerboundaryx <= -400 then
+			player2.x = camera.x + 2 - (player.width / 2)
+		elseif playerboundaryy >= 800 then
+			player2.y = camera.y + 598 - (player.height / 2)
+		elseif playerboundaryy <= -800 then
+			player2.y = camera.y + 2 - (player.height / 2)
+		end
+	end
 	if SaveData.resolution == "fullscreen" then
 		customCamera.defaultScreenWidth = 0
 		customCamera.defaultScreenHeight = 0
