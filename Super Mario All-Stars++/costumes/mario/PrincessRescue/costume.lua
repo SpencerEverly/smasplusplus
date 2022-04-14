@@ -46,8 +46,8 @@ function costume.onCleanup(p)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil
-	Audio.sounds[4].sfx  = nil
-	Audio.sounds[5].sfx  = nil
+	extrasounds.id[4]  = Audio.SfxOpen(Misc.resolveSoundFile("block-smash.ogg"))
+	extrasounds.id[7]  = Audio.SfxOpen(Misc.resolveSoundFile("mushroom.ogg"))
 	Audio.sounds[6].sfx  = nil
 	Audio.sounds[7].sfx  = nil
 	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died"))
@@ -80,7 +80,7 @@ function costume.onCleanup(p)
 	Audio.sounds[39].sfx = nil
 	Audio.sounds[41].sfx = nil
 	Audio.sounds[42].sfx = nil
-	Audio.sounds[43].sfx = nil
+	extrasounds.id[43] = Audio.SfxOpen(Misc.resolveSoundFile("fireworks.ogg"))
 	Audio.sounds[44].sfx = nil
 	Audio.sounds[46].sfx = nil
 	Audio.sounds[47].sfx = nil
