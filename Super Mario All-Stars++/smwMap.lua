@@ -1289,7 +1289,7 @@ do
             end
 
             textplus.render{
-                layout = layout,target = smwMap.mainBuffer,priority = -1,color = textColor * progress,
+                layout = layout,target = smwMap.mainBuffer,priority = -2,color = textColor * progress,
                 x = x + fullWidth*0.5 - layout.width*0.5 - smwMap.camera.x,y = textY,
             }
 
@@ -3694,10 +3694,10 @@ do
         {
             icon = Graphics.sprites.hardcoded["33-5"],
             isEnabled = (function()
-                return mem(0x00B251E0,FIELD_WORD) > 0
+                return SaveData.totalStarCount > 0
             end),
             getValue = (function()
-                return mem(0x00B251E0,FIELD_WORD)
+                return SaveData.totalStarCount
             end),
         }
     }
@@ -3732,7 +3732,7 @@ do
 
 
         if hudSettings.borderEnabled and hudSettings.borderImage ~= nil then
-            Graphics.drawImageWP(hudSettings.borderImage,0,0,-2)
+            Graphics.drawImageWP(hudSettings.borderImage,0,0,-3)
 			Graphics.drawImageWP(hudSettings.borderImageBG,-1000,0,-100)
         end
 
@@ -3799,7 +3799,7 @@ do
 
                     p:render{
                         x = x,y = y,
-                        ignorestate = true,sceneCoords = false,priority = -1,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+                        ignorestate = true,sceneCoords = false,priority = -2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
                         frame = frame,
                     }
 
@@ -3840,7 +3840,7 @@ do
 
                     if icon ~= nil then
                         --Graphics.drawBox{texture = icon,priority = priority,x = xPosition,y = counterY - icon.height}
-                        Graphics.drawImageWP(icon,xPosition,counterY - icon.height,-1)
+                        Graphics.drawImageWP(icon,xPosition,counterY - icon.height,-2)
                         totalWidth = totalWidth + icon.width
                         tallestElementHeight = math.max(tallestElementHeight,icon.height)
                     end
@@ -3853,7 +3853,7 @@ do
                         counter.oldText = currentText
                     end
 
-                    textplus.render{layout = counter.textLayout,priority = -1,x = xPosition + widestIconWidth,y = counterY - counter.textLayout.height}
+                    textplus.render{layout = counter.textLayout,priority = -2,x = xPosition + widestIconWidth,y = counterY - counter.textLayout.height}
                     totalWidth = totalWidth + counter.textLayout.width
                     tallestElementHeight = math.max(tallestElementHeight,counter.textLayout.height)
 
@@ -3931,7 +3931,7 @@ do
 
             smwMap.levelTitleLayout = textplus.layout(levelTitle, levelTitleMaxWidth, {font = hudSettings.levelTitleFont,xscale = hudSettings.levelTitleScale,yscale = hudSettings.levelTitleScale})
 
-            textplus.render{layout = smwMap.levelTitleLayout,color = smwMap.hudSettings.levelTitleColor,priority = -1,x = xPosition,y = hudSettings.borderTopHeight + hudSettings.levelTitleOffsetY - smwMap.levelTitleLayout.height}
+            textplus.render{layout = smwMap.levelTitleLayout,color = smwMap.hudSettings.levelTitleColor,priority = -2,x = xPosition,y = hudSettings.borderTopHeight + hudSettings.levelTitleOffsetY - smwMap.levelTitleLayout.height}
         end
     end
 

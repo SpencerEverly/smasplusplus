@@ -2758,7 +2758,7 @@ NPC
 ID:94;X:-194432;Y:-200118;D:-1;MG:"Thank you\, <characterName>! But the princess is in another castle!";FD:1;
 ID:178;X:-194816;Y:-200224;D:-1;LR:"Axe";EE:"Axe";
 ID:31;X:-198080;Y:-200448;D:-1;LR:"Key";
-ID:97;X:-179136;Y:-180224;D:-1;
+ID:999;X:-179136;Y:-180224;D:-1;
 ID:88;X:-195962;Y:-200448;D:-1;
 ID:88;X:-195962;Y:-200480;D:-1;
 ID:88;X:-195962;Y:-200512;D:-1;

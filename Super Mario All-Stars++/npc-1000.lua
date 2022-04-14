@@ -54,10 +54,6 @@ local dudStarSettings = {
 npcManager.setNpcSettings(dudStarSettings)
 npcManager.registerHarmTypes(npcID,
 	{
-		HARM_TYPE_LAVA,
-		HARM_TYPE_OFFSCREEN,
-	},
-	{
 		[HARM_TYPE_JUMP]            = 10,
 		[HARM_TYPE_FROMBELOW]       = 10,
 		[HARM_TYPE_NPC]             = 10,

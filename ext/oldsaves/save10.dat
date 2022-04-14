@@ -1,0 +1,319 @@
+{
+--[1]--
+{
+   ["goombaStomps"]=0,
+   ["koopaStomps"]=0,
+   ["GameOverCount"]=0,
+   ["totalmushrooms"]=0,
+   ["firstBootCompleted"]=1,
+   ["disableX2char"]=0,
+   ["uthealfood"]=1,
+   ["totalcoins"]=0,
+   ["smwMap"]={2},
+   ["useStarman"]=false,
+   ["utxp"]=0,
+   ["__launcher"]={3},
+   ["yiYoshi"]={4},
+   ["__costumes"]={5},
+   ["inventoryTable"]={6},
+   ["usePWing"]=false,
+   ["starmansused"]=0,
+   ["totalfireflowers"]=0,
+   ["utspare"]=0,
+   ["_basegame"]={7},
+   ["megamushroomssused"]=0,
+   ["mandatoryStars"]=0,
+   ["failsafeMessageOne"]=0,
+   ["totaliceflowers"]=0,
+   ["starsgrabbed"]=0,
+   ["totalleafs"]=0,
+   ["totalhammersuits"]=0,
+   ["introselect"]=1,
+   ["utencounter"]=0,
+   ["ut_enabled"]=0,
+   ["utpoiton"]=1,
+   ["hideCoinCounter"]=true,
+   ["steveData"]={8},
+   ["totaltanookis"]=0,
+   ["inventory"]={9}
+},
+--[2]--
+{
+   ["encounterData"]={10},
+   ["unlockedCheckpoints"]={11},
+   ["unlockedPaths"]={12},
+   ["beatenLevels"]={13}
+},
+--[3]--
+{
+
+},
+--[4]--
+{
+   ["currentColour"]=0,
+   ["savedEggs"]={14}
+},
+--[5]--
+{
+
+},
+--[6]--
+{
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   [0]=0
+},
+--[7]--
+{
+   ["bigSwitch"]={15},
+   ["_characterdata"]={16},
+   ["starcoinCounter"]=0,
+   ["hud"]={17},
+   ["starcoin"]={18}
+},
+--[8]--
+{
+   ["items"]={19}
+},
+--[9]--
+{
+   ["ice"]=0,
+   ["tanooki"]=0,
+   ["hammer"]=0,
+   ["fire"]=0,
+   ["shroom"]=0,
+   ["leaf"]=0
+},
+--[10]--
+{
+
+},
+--[11]--
+{
+
+},
+--[12]--
+{
+
+},
+--[13]--
+{
+
+},
+--[14]--
+{
+
+},
+--[15]--
+{
+
+},
+--[16]--
+{
+   ["8"]={20},
+   ["10"]={21},
+   ["9"]={22},
+   ["6"]={23},
+   ["16"]={24},
+   ["11"]={25},
+   ["12"]={26},
+   ["7"]={27},
+   ["15"]={28},
+   ["13"]={29},
+   ["14"]={30}
+},
+--[17]--
+{
+   ["score"]=110
+},
+--[18]--
+{
+   ["SMAS - Credits.lvlx"]={31},
+   ["SMAS - Game Help (Boot Menu).lvlx"]={32},
+   ["SMAS - Intro.lvlx"]={33},
+   ["SMAS - Start.lvlx"]={34},
+   ["_backtosmasplusplus.lvlx"]={35},
+   ["intro_SMAS.lvlx"]={36},
+   ["MALC - L-4.lvlx"]={37},
+   ["MALC - HUB.lvlx"]={38},
+   ["SMAS - Game Help.lvlx"]={39}
+},
+--[19]--
+{
+
+},
+--[20]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[21]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[22]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[23]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[24]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[25]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[26]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[27]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[28]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[29]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[30]--
+{
+   ["reservePowerup"]=0,
+   ["0x10A"]=0,
+   ["powerup"]=1,
+   ["0x16"]=1,
+   ["0x108"]=0
+},
+--[31]--
+{
+   ["maxID"]=0,
+   ["alive"]={40}
+},
+--[32]--
+{
+   ["maxID"]=0,
+   ["alive"]={41}
+},
+--[33]--
+{
+   ["maxID"]=0,
+   ["alive"]={42}
+},
+--[34]--
+{
+   ["maxID"]=0,
+   ["alive"]={43}
+},
+--[35]--
+{
+   ["maxID"]=0,
+   ["alive"]={44}
+},
+--[36]--
+{
+   ["maxID"]=0,
+   ["alive"]={45}
+},
+--[37]--
+{
+   ["maxID"]=0,
+   ["alive"]={46}
+},
+--[38]--
+{
+   ["maxID"]=0,
+   ["alive"]={47}
+},
+--[39]--
+{
+   ["maxID"]=0,
+   ["alive"]={48}
+},
+--[40]--
+{
+
+},
+--[41]--
+{
+
+},
+--[42]--
+{
+
+},
+--[43]--
+{
+
+},
+--[44]--
+{
+
+},
+--[45]--
+{
+
+},
+--[46]--
+{
+
+},
+--[47]--
+{
+
+},
+--[48]--
+{
+
+}
+}

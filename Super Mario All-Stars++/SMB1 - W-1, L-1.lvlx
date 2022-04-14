@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 1\: World 1-1";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 1\: World 1-1";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-193184;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Overworld.spc|0\;g=2.5";BG:10;
@@ -917,7 +917,7 @@ ID:89;X:-196338;Y:-200096;D:-1;
 ID:89;X:-196384;Y:-200096;D:-1;
 ID:89;X:-197376;Y:-200352;D:-1;
 ID:89;X:-197440;Y:-200352;D:-1;
-ID:97;X:-193696;Y:-200224;D:-1;
+ID:999;X:-193696;Y:-200224;D:-1;
 NPC_END
 DOORS
 IX:-198192;IY:-200224;OX:-179824;OY:-180480;DT:1;ID:3;OD:1;WX:0;WY:0;

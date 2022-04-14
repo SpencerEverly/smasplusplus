@@ -11,9 +11,7 @@
 
 local playerManager = require("playermanager")
 local npcManager = require("npcManager")
-if not isOverworld then
-	local extrasounds = require("extrasounds")
-end
+local extrasounds = require("extrasounds")
 
 local textplus = require("textplus")
 
@@ -4672,7 +4670,7 @@ function yoshi.initCharacter()
 
     Audio.sounds[1].sfx  = yoshi.generalSettings.jumpSound
     Audio.sounds[5].sfx  = yoshi.generalSettings.hurtSound
-    extrasounds.id[8]  = yoshi.generalSettings.deathSound
+    Audio.sounds[8].sfx  = yoshi.generalSettings.deathSound
     Audio.sounds[14].sfx = yoshi.generalSettings.coinSound
 
     if yoshi.customExitSettings.passOnEnabled[LEVEL_END_STATE_ROULETTE] then
@@ -4825,7 +4823,7 @@ end
 
 yoshi.generalSettings = {
     -- Can be BABY_MARIO or HEARTS
-    healthSystem = HEALTH_SYSTEM.HEARTS,
+    healthSystem = HEALTH_SYSTEM.BABY_MARIO,
 
     walkSpeed = 6,
     runSpeed = 6,

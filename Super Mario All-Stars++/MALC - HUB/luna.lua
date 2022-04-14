@@ -45,7 +45,7 @@ local month = os.date("%m")
 local exacttime = os.date("%X")
 local minute = os.date("%M")
 local second = os.date("%S")
-local stars = mem(0x00B251E0, FIELD_WORD)
+local stars = SaveData.totalStarCount
 local infobooth1 = textplus.loadFont("littleDialogue/font/smb3-c.ini")
 
 littleDialogue.registerStyle("endingtextone",{

@@ -8,6 +8,17 @@ if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
 	Misc.exitEngine()
 end
 
+--Make sure we warn the user of the dangers of the old star system...
+if mem(0x00B251E0, FIELD_WORD) >= 1 then
+	if GameData.warnUserAboutOldStars == nil then
+		GameData.warnUserAboutOldStars = true
+	end
+	if GameData.warnUserAboutOldStars == true then
+		Misc.dialog("Uh oh... it looks like your save file is using the old star system. Be warned that things related to the old star system may not work with the new system as intended and you should restart your save file due to this. I'm sorry for the inconvenience, and hope to be a better developer next time when it comes to these things.")
+		GameData.warnUserAboutOldStars = false
+	end
+end
+
 --Now, before we get started, we require the most important libraries on the top.
 
 GameData.levelMusicTemporary = {temporary}
@@ -270,6 +281,12 @@ end
 if SaveData.borderEnabled == nil then
 	SaveData.borderEnabled = true
 end
+if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
+	SaveData.totalStarCount = 0
+end
+if SaveData.completeLevels == nil then
+	SaveData.completeLevels = {}
+end
 
 --Camera stuff to prevent player2 from doing split screen...
 --Gets the index of the player that the camera belongs to. A return value of 0 means that it belongs to everybody
@@ -438,8 +455,30 @@ function yesterdayget()
 	SaveData.dateplayedyesterday = yesterdaystring
 end
 
+function onMessageBox(eventObj,message,playerObj,npcObj)
+    if message == "You need 1 star to enter." then
+        eventObj.cancelled = true
+		
+    elseif message:match("You need %d stars to enter.") ~= nil then
+        eventObj.cancelled = true
+    end
+end
+
 function onTick() --This will prevent split screen, again (Just in case)
 	mem(0x00B25130,FIELD_WORD, 2)
+	--Now we'll overhaul the door star required system
+	local numberOfWarps = Warp.count()
+	local warps = Warp.get()
+	for _, warp in ipairs(warps) do
+		if warp.starsRequired <= SaveData.totalStarCount then
+			warp.starsRequired = 0
+		elseif warp.starsRequired > SaveData.totalStarCount then
+			warp.starsRequired = 9999 --Until the system gets better, this'll do for now
+		end
+		if mem(0x00B251E0, FIELD_WORD) >= 1 then
+			--mem(0x00B251E0, FIELD_WORD, 0)
+		end
+	end
 end
 
 --That's the end of this file!

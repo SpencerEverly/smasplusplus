@@ -1128,7 +1128,7 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 	if npc.id == 997 then
 		SaveData.megamushroomssused = SaveData.megamushroomssused + 1
 	end
-	local stars = table.map{97,196}
+	local stars = table.map{97,196,999,1000}
 	if stars[npc.id] then
 		SaveData.starsgrabbed = SaveData.starsgrabbed + 1
 	end

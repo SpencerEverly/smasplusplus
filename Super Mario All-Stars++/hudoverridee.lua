@@ -479,7 +479,7 @@ function HUDOverride.drawBombs(splitOffset, thisCam, thisPlayer, priority)
 end
 
 function HUDOverride.drawStars(splitOffset, thisCam, thisPlayer, priority)
-	local stars = (mem(0x00B251E0,FIELD_WORD))
+	local stars = (SaveData.totalStarCount)
 	if stars > 0 then
 		local sprite = GetSprite("stars", thisPlayer.character);
 		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.stars, sprite, stars, priority);
@@ -499,7 +499,7 @@ function HUDOverride.drawHUDCoins(thisPlayer, priority)
 end
 
 function HUDOverride.drawHUDStars(thisPlayer, priority)
-	local stars = (mem(0x00B251E0,FIELD_WORD))
+	local stars = (SaveData.totalStarCount)
 	if stars > 0 then
 		local sprite = GetSprite("stars", thisPlayer.character);
 		drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.stars, sprite, stars, priority);

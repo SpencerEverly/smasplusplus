@@ -5570,7 +5570,7 @@ ID:272;X:-139520;Y:-144096;D:-1;
 ID:272;X:-139488;Y:-144128;D:-1;
 ID:272;X:-139456;Y:-144160;D:-1;
 ID:755;X:-98688;Y:-100348;D:-1;EA:"Boss Begin (Part 1)";ED:"Boss End (Part 1)";
-ID:97;X:-78720;Y:-80192;D:-1;LR:"Star";
+ID:999;X:-78720;Y:-80192;D:-1;LR:"Star";
 ID:151;X:-79512;Y:-80112;D:-1;MG:"Boss 6\: Croako<page>Not made yet\, will be made with the rest of the last stuff involving code";FD:1;
 ID:91;X:-139840;Y:-140928;D:-1;CN:462;
 ID:91;X:-139360;Y:-140928;D:-1;CN:147;

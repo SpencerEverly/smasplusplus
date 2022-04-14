@@ -3,5 +3,6 @@
 	"title" : "Super Mario All-Stars++",
 	"current-version": [0, 0, 1],
 	"allowTwoPlayer": false,
-	"episodeIcon": "icon.png"
+	"episodeIcon": "icon.png",
+	"stars": "Play the episode to see the count."
 }

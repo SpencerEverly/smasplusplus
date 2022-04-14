@@ -1683,7 +1683,7 @@ ID:88;X:-178714;Y:-180320;D:-1;
 ID:88;X:-177242;Y:-180288;D:-1;
 ID:88;X:-177306;Y:-180288;D:-1;
 ID:151;X:-173896;Y:-180464;D:-1;MG:"Welcome to the warp zone!<page>Left to right\:<page>Pipe 1\: World 4<page>Pipe 2\: World 3<page>Pipe 3\: World 2";FD:1;
-ID:97;X:-159296;Y:-160224;D:-1;
+ID:999;X:-159296;Y:-160224;D:-1;
 ID:27;X:-177600;Y:-180224;D:-1;
 ID:27;X:-176384;Y:-180096;D:-1;
 ID:106;X:-175520;Y:-180016;D:-1;GE:1;GT:1;GD:1;GM:15;
