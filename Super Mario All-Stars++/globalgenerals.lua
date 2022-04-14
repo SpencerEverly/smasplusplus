@@ -721,7 +721,7 @@ function globalgenerals.onTick()
 	if currentCostume == "SMW-MARIO" then
 		littleDialogue.characterNames[1] = "Mario"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
-		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/SMW-Mario/starman")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 		warpTransition.doorclose = ("sound/door-close.ogg")
@@ -741,6 +741,46 @@ function globalgenerals.onTick()
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
 		warpTransition.doorclose = ("costumes/mario/Z-SMW2-AdultMario/door-close.ogg")
+	end
+	if currentCostume == "SMM2-LUIGI" then
+		littleDialogue.characterNames[1] = "Luigi"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw")
+		starman.duration[996] = lunatime.toTicks(10)
+		starman.duration[994] = lunatime.toTicks(10)
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "SMM2-MARIO" then
+		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw")
+		starman.duration[996] = lunatime.toTicks(10)
+		starman.duration[994] = lunatime.toTicks(10)
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "SMM2-TOAD" then
+		littleDialogue.characterNames[1] = "Toad"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw")
+		starman.duration[996] = lunatime.toTicks(10)
+		starman.duration[994] = lunatime.toTicks(10)
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "SMM2-TOADETTE" then
+		littleDialogue.characterNames[1] = "Toadette"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw")
+		starman.duration[996] = lunatime.toTicks(10)
+		starman.duration[994] = lunatime.toTicks(10)
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "SMM2-YELLOWTOAD" then
+		littleDialogue.characterNames[1] = "Toad"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw")
+		starman.duration[996] = lunatime.toTicks(10)
+		starman.duration[994] = lunatime.toTicks(10)
+		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	
 	
