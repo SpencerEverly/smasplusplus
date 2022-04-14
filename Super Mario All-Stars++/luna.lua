@@ -23,6 +23,7 @@ end
 
 GameData.levelMusicTemporary = {temporary}
 GameData.levelMusic = {temporary}
+GameData.warpStarDoorCount = {temporary}
 local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
@@ -288,6 +289,9 @@ if SaveData.completeLevels == nil then
 	SaveData.completeLevels = {}
 end
 
+--Make sure the warp door system doesn't get active until onStart saves the original count first...
+local warpstaractive = false
+
 --Camera stuff to prevent player2 from doing split screen...
 --Gets the index of the player that the camera belongs to. A return value of 0 means that it belongs to everybody
 function onCameraUpdate(c, camIdx)
@@ -384,8 +388,18 @@ function onLoad()
 	end
 end
 
+function warpDoorBegin()
+	local warps = Warp.get()
+	for _, warp in ipairs(warps) do
+		GameData.warpStarDoorCount = warp.starsRequired
+	end
+	Routine.wait(0.1, true)
+	warpstaractive = true
+end
+
 function onStart() --Now do onStart...
 	loadSaveSlot(Misc.saveSlot()) --This will load the save slot twice, to check to make sure it's been properly loaded
+	Routine.run(warpDoorBegin) --This will run the routine to save the original count and to start the system from there
 	--Do the weather SaveData additions
 	if SaveData.dateplayedweather == nil then
 		SaveData.dateplayedweather = weatherControl
@@ -464,19 +478,33 @@ function onMessageBox(eventObj,message,playerObj,npcObj)
     end
 end
 
+local stardoor = Graphics.loadImageResolved("starlock.png")
+
+function onDraw()
+	local warps = Warp.get()
+	for _, v in ipairs(warps) do
+		if v.isValid and (not v.isHidden) and v.starsRequired > SaveData.totalStarCount then
+			Graphics.drawImageToSceneWP(stardoor, v.entranceX + 0.5 * v.entranceWidth - 12, v.entranceY - 20, -40)
+        end
+    end
+end
+
 function onTick() --This will prevent split screen, again (Just in case)
 	mem(0x00B25130,FIELD_WORD, 2)
 	--Now we'll overhaul the door star required system
-	local numberOfWarps = Warp.count()
-	local warps = Warp.get()
-	for _, warp in ipairs(warps) do
-		if warp.starsRequired <= SaveData.totalStarCount then
-			warp.starsRequired = 0
-		elseif warp.starsRequired > SaveData.totalStarCount then
-			--warp.starsRequired = 9999 --This has been uncommented because the original star count is 0 regardless, which means don't bump up the required stars
-		end
-		if mem(0x00B251E0, FIELD_WORD) >= 1 then
-			--mem(0x00B251E0, FIELD_WORD, 0)
+	if warpstaractive == true then
+		local numberOfWarps = Warp.count()
+		local warps = Warp.get()
+		for _, warp in ipairs(warps) do
+			if warp.starsRequired <= SaveData.totalStarCount then
+				warp.starsRequired = 0
+			elseif warp.starsRequired > SaveData.totalStarCount then
+				--warp.starsRequired = 9999 --This has been uncommented because the original star count is 0 regardless, which means don't bump up the required stars
+				
+			end
+			--if mem(0x00B251E0, FIELD_WORD) >= 1 then
+				--mem(0x00B251E0, FIELD_WORD, 0)
+			--end
 		end
 	end
 end

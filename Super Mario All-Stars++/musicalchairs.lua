@@ -2111,7 +2111,6 @@ function musicalchairs.onEvent(eventName)
 end
 
 function musdelay()
-	Routine.wait(0.1, true)
 	for i = 0,20 do
 		GameData.levelMusic[i] = Section(i).music
 	end
@@ -2121,7 +2120,7 @@ end
 
 function musicalchairs.switcher()
 	started = false
-	Routine.wait(0)
+	Routine.wait(0.1, true)
 	for i = 0,20 do
 		songname = GameData.levelMusic[i]
 		Section(i).music = songname
