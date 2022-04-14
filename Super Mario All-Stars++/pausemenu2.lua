@@ -262,52 +262,11 @@ local function characterchange()
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
 	end
-	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		if (character == CHARACTER_SAMUS) then
-			player:transform(1, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	elseif SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_SAMUS) then
-			player:transform(17, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_YIYOSHI) then
-			player:transform(18, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_JUNI) then
-			player:transform(19, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_MCSTEVE) then
-			player:transform(20, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_PRINCESSRINKA) then
-			player:transform(1, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
+	if (character == CHARACTER_SAMUS) then
+		player:transform(1, false)
+		SFX.play(32)
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 end
 
@@ -381,20 +340,11 @@ end
 
 local function characterchangeleft()
 	local character = player.character;
-	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		if (character == CHARACTER_MARIO) then
-			player:transform(16, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	elseif SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_MARIO) then
-			player:transform(20, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
+	if (character == CHARACTER_MARIO) then
+		player:transform(16, false)
+		SFX.play(32)
+		playSound("charcost-selected.ogg")
+		playSound("racoon-changechar.ogg")
 	end
 	if (character == CHARACTER_LUIGI) then
 		player:transform(1, false)
@@ -485,38 +435,6 @@ local function characterchangeleft()
 		SFX.play(32)
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_YIYOSHI) then
-			player:transform(16, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_JUNI) then
-			player:transform(17, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_MCSTEVE) then
-			player:transform(18, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
-	end
-	if SMBX_VERSION == VER_SEE_MOD then
-		if (character == CHARACTER_PRINCESSRINKA) then
-			player:transform(19, false)
-			SFX.play(32)
-			playSound("charcost-selected.ogg")
-			playSound("racoon-changechar.ogg")
-		end
 	end
 end
 

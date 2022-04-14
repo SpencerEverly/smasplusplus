@@ -156,7 +156,7 @@ local function handleJumps()
 		end
 		if  player.keys.jump == KEYS_DOWN or player.keys.altJump == KEYS_DOWN then
 			if player.speedY > 0.2 then 
-				player.speedY = 0.2
+				player.speedY = 2.1
 			end
 			--Sparkle
 			player:mem(0x02, FIELD_WORD, -1)
@@ -176,7 +176,7 @@ local function drawStarPower()
 		if(hasStar) then
 			coins = 100;
 		end
-		local x,y = 576,24;
+		local x,y = 616,24;
 		local p = (coins/100);
 		local c = math.ceil(#lumacolor*0.25);
 		c = math.min(4*math.floor(p*c + 0.5) + 1, #lumacolor-3);
@@ -385,7 +385,7 @@ end
 
 function rosalina.initCharacter()
 	-- CLEANUP NOTE: This is not safe if a level makes it's own use of jumpheight
-	Defines.jumpheight = 7
+	Defines.jumpheight = 15
 	Defines.jumpheight_bounce = 8
 	
 	preRosaCoins = mem(0x00B2C5A8, FIELD_WORD);

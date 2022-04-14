@@ -61,6 +61,7 @@ HUDSprites.stars = Graphics.sprites.hardcoded["33-5"]
 
 HUDSprites.lives = Graphics.sprites.hardcoded["33-3"]
 HUDSprites.lives2 = Graphics.sprites.hardcoded["33-7"]
+HUDSprites.deathcount = Graphics.loadImageResolved("deathCount.png")
 --2nd one exclusive to battle mode?
 
 HUDSprites.heartEmpty = Graphics.sprites.hardcoded["36-2"]
@@ -92,7 +93,8 @@ HUDOverride.visible.itembox = true
 HUDOverride.visible.bombs = true
 HUDOverride.visible.coins = true
 HUDOverride.visible.score = false
-HUDOverride.visible.lives = false
+HUDOverride.visible.lives = true
+HUDOverride.visible.deathcount = true
 HUDOverride.visible.stars = true
 HUDOverride.visible.starcoins = true
 HUDOverride.visible.timer = true
@@ -116,6 +118,7 @@ if SaveData.disableX2char == true then
 	HUDOverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_MID};
 	HUDOverride.offsets.coins = 	{x = 88, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.deathcount = {x = -56, y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = HUDOverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = HUDOverride.ALIGN_LEFT},	align = HUDOverride.ALIGN_LEFT}
 	HUDOverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT}
@@ -138,7 +141,8 @@ if SaveData.disableX2char == false then
 
 	HUDOverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_MID};
 	HUDOverride.offsets.coins = 	{x = -368, 	y = 26, cross = {x = 24, y = 1}, value = {x = 46, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
-	HUDOverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.lives = 	{x = -102, 	y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = HUDOverride.ALIGN_MID}, align = HUDOverride.ALIGN_RIGHT};
+	HUDOverride.offsets.deathcount = {x = 102, y = 40, cross = {x = 25, y = 1}, value = {x = 78, y = 1, align = HUDOverride.ALIGN_MID}, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.stars = 	{x = -368, 	y = 48, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = HUDOverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = HUDOverride.ALIGN_LEFT},	align = HUDOverride.ALIGN_LEFT}
 	HUDOverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT}
@@ -343,6 +347,9 @@ function Graphics.drawVanillaHUD(camIndex, priority, isSplit)
 	if HUDOverride.visible.lives then
 		HUDOverride.drawLives(splitOffset[1], thisCam, thisPlayer, priority)
 	end
+	if HUDOverride.visible.deathcount then
+		HUDOverride.drawDeathCount(splitOffset[1], thisCam, thisPlayer, priority)
+	end
 	if HUDOverride.visible.score then
 		HUDOverride.drawScore(splitOffset[2], thisCam, priority)
 	end
@@ -378,6 +385,9 @@ do
 
 		if(state == WHUD_ALL) then
 			if HUDOverride.visible.lives then
+				HUDOverride.drawDeathCount(player, priority);
+			end
+			if HUDOverride.visible.deathcount then
 				HUDOverride.drawHUDLives(player, priority);
 			end
 
@@ -487,11 +497,15 @@ function HUDOverride.drawStars(splitOffset, thisCam, thisPlayer, priority)
 end
 
 function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
-	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), mem(0x00B2C5AC,FIELD_FLOAT), priority);
+	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+end
+
+function HUDOverride.drawDeathCount(splitOffset, thisCam, thisPlayer, priority)
+	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), SaveData.deathCount, priority);
 end
 
 function HUDOverride.drawHUDLives(thisPlayer, priority)
-	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), mem(0x00B2C5AC,FIELD_FLOAT), priority);
+	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
 end
 
 function HUDOverride.drawHUDCoins(thisPlayer, priority)

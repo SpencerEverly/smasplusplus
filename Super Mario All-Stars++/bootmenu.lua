@@ -807,10 +807,10 @@ local function SaveOptions1()
 end
 
 local function SaveSlot1()
-	if SMBX_VERSION == VER_SEE_MOD then
+	if not Misc.inEditor() then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>To begin switching the save slot, please select Begin to get started (Keyboard only). THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
-	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 or Misc.inEditor() then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You can't do this on this version of SMBX2. Please use the SEE Mod version to switch saves. You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+	elseif Misc.inEditor() then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You can't do this while in the editor mode. Please start an actual game to switch saves. You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -1034,23 +1034,27 @@ local function ExitGame1()
 end
 
 local function SaveEraseStart()
-	if SMBX_VERSION == VER_SEE_MOD then
-		--Start by flushing any SaveData/GameData that's still available
-		SaveData.clear()
-		GameData.clear()
-		SaveData.flush()
-		--Then start removing SMAS++'s save files...
-		os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot()..".sav")
-		os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot().."-ext.dat")
-		--...Along with Where SMB Attacks.
-		os.remove("worlds/Where SMB Attacks/save"..Misc.saveSlot()..".sav")
-		os.remove("worlds/Where SMB Attacks/save"..Misc.saveSlot().."-ext.dat")
-		--Then make the message telling that it's erased.
-		littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
-	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		--If not on my SEE Mod, this message will pop up, and nothing will happen
-		littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Erasing complete (Save data erasing hasn't been added to SMBX2 yet, so your save is still available. Please erase the save by deleting your save slot in the episode folder).<question RestartOption>", pauses = false, updatesInPause = true})
-	end
+	--Start by flushing any SaveData/GameData that's still available
+	SaveData.clear()
+	GameData.clear()
+	SaveData.flush()
+	--Then start opening and overwriting SMAS++'s save files...
+	local savepart1 = io.open("worlds/Super Mario All-Stars++/save"..Misc.saveSlot()..".sav", "w+")
+	local savepart2 = io.open("worlds/Super Mario All-Stars++/save"..Misc.saveSlot().."-ext.dat", "w+")
+	--...Along with Where SMB Attacks.
+	local savepart3 = io.open("worlds/Where SMB Attacks/save"..Misc.saveSlot()..".sav", "w+")
+	local savepart4 = io.open("worlds/Where SMB Attacks/save"..Misc.saveSlot().."-ext.dat", "w+")
+	--From there, write nothing to the files.
+	io.output(savepart1)
+	io.write("")
+	io.output(savepart2)
+	io.write("")
+	io.output(savepart3)
+	io.write("")
+	io.output(savepart4)
+	io.write("")
+	--Then make the message telling that it's erased.
+	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
 end
 
 local function ExitToIntro() --This command will auto load the intro
@@ -1310,10 +1314,6 @@ function bootmenu.onTick()
 			GameData.musreset = false
 		end
 		Graphics.activateHud(false)
-		if SMBX_VERSION == VER_SEE_MOD then
-			ultimateRinka = require("characters/ultimaterinka")
-			ultimateRinka.hud = false
-		end
 		player:setFrame(50) --Prevent the player from showing up on the boot menu
 		player:mem(0x140, FIELD_BOOL, 150)
 		if player:mem(0x140, FIELD_BOOL) == 0 then
@@ -1650,11 +1650,6 @@ function bootmenu.onDraw()
 			if cursor.left == KEYS_UP then
 				
 			end
-		end
-		if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-			textplus.print{x=285, y=30, text = "SMBX Version: Original LunaLua", priority=-7, color=Color.red, font=statusFont}
-		elseif SMBX_VERSION <= VER_SEE_MOD then
-			textplus.print{x=318, y=30, text = "SMBX Version: SEE Mod", priority=-7, color=Color.lightgreen, font=statusFont}
 		end
 		if versionactive then
 			Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
@@ -2114,27 +2109,13 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Klonoa (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
-	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
-	elseif SMBX_VERSION == VER_SEE_MOD then
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Ninja Bomberman (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
-	end
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
-	if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
-	elseif SMBX_VERSION == VER_SEE_MOD then
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Ultimate Rinka (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
-	end
+	littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) Routine.run(ChangedCharacter) end})
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
-	if SMBX_VERSION == VER_SEE_MOD then
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 17)",chosenFunction = function() player:transform(17, true) Routine.run(ChangedCharacter) end})
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Juni (Slot 18)",chosenFunction = function() player:transform(18, true) Routine.run(ChangedCharacter) end})
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 19)",chosenFunction = function() player:transform(19, true) Routine.run(ChangedCharacter) end})
-		littleDialogue.registerAnswer("CharacterListX2",{text = "Princess Rinka (Slot 20)",chosenFunction = function() player:transform(20, true) Routine.run(ChangedCharacter) end})
-	end
 	littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 end
 

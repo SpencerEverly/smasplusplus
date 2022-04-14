@@ -246,31 +246,20 @@ local repll = require("repll") --Custom sound command line, for testing in the e
 local rng = require("base/rng") --Load up rng for etc. things
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi
 
-if SMBX_VERSION == VER_SEE_MOD then --SEE Mod stuff
-	Graphics.sprites.block[647].img = Graphics.loadImageResolved("graphics/seemod/block/block-647.png")
-	Graphics.sprites.block[648].img = Graphics.loadImageResolved("graphics/seemod/block/block-648.png")
-	Graphics.sprites.block[655].img = Graphics.loadImageResolved("graphics/seemod/block/block-655.png")
-	Graphics.sprites.block[656].img = Graphics.loadImageResolved("graphics/seemod/block/block-656.png")
-	princessRinka = require("characters/princessrinka")
-	Misc.setWindowTitle("Super Mario All-Stars++")
-	__disablePauseMenu = true
-	Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
-elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then --This will load things for any other SMB2 version
-	loadactivate = true
-	steve = require("steve")
-	playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
-	yoshi = require("yiYoshi/yiYoshi")
-	playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
-	playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
-	playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
-	playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
-	playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
-	playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
-	playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
-	Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
-	Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
-	Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
-end
+loadactivate = true
+local steve = require("steve")
+playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+local yoshi = require("yiYoshi/yiYoshi")
+playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
+playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
+playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
+playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
+playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
+playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
+playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
+Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
+Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
+Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
 
 --First time SaveData setting, for resolutions and other settings
 if SaveData.resolution == nil then
@@ -324,10 +313,10 @@ local noloadingsounds = {
 	["map.lvlx"] = true
 }
 
---Friendly place table for the SEE Mod's Princess Rinka
+--Friendly place table for Princess Rinka
 local friendlyplaces = {
 	["SMAS - Start.lvlx"] = true,
-	["SMAS - Map.lvlx"] = true,
+	["map.lvlx"] = true,
 	["intro_8bit.lvlx"] = true,
 	["intro_bossedit8.lvlx"] = true,
 	["intro_jakebrito1.lvlx"] = true,
@@ -411,9 +400,7 @@ function onStart() --Now do onStart...
 		SaveData.dateplayedday = os.date("%d")
 	end
 	if (Level.filename()[friendlyplaces]) == true then
-		if SMBX_VERSION == VER_SEE_MOD then
-			princessRinka.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
-		end
+		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end
 	--Calculate Easter Sunday
 	calculateeaster(os.date("*t").year)

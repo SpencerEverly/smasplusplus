@@ -724,7 +724,7 @@ function samus.initCharacter()
 	HUDOverride.visible.bombs = true
 	HUDOverride.visible.coins = true
 	HUDOverride.visible.score = false
-	HUDOverride.visible.lives = false
+	--HUDOverride.visible.lives = false
 	HUDOverride.visible.stars = true
 	HUDOverride.visible.starcoins = false
 	HUDOverride.visible.timer = true
@@ -751,7 +751,7 @@ function samus.cleanupCharacter()
 	HUDOverride.visible.bombs = true
 	HUDOverride.visible.coins = true
 	HUDOverride.visible.score = false
-	HUDOverride.visible.lives = false
+	--HUDOverride.visible.lives = false
 	HUDOverride.visible.stars = true
 	HUDOverride.visible.starcoins = false
 	HUDOverride.visible.timer = true

@@ -19,8 +19,6 @@ local lib3d = require("lib3d")
 
 local steve = {}
 
-if SMBX_VERSION == VER_SEE_MOD then return end
-
 local timer = 0
 
 ready = false
@@ -693,7 +691,7 @@ local initHUD
 local cleanupHUD
 
 do
-    local hudElementsToMove = {"lives",-1, "stars",-1, "coins",1, "score",1}
+    local hudElementsToMove = {"lives",1, "deathcount",1}
     local originalHUDOffsets = {}
 
     function initHUD()
@@ -701,9 +699,9 @@ do
             local name = hudElementsToMove[i]
             local direction = hudElementsToMove[i+1]
 
-            originalHUDOffsets[(i*0.5)+0.5] = {name,HUDOverride.offsets[name].x}
+            originalHUDOffsets[(i*0.5)+0.5] = {name,HUDOverride.offsets[name].y}
 
-            HUDOverride.offsets[name].x = HUDOverride.offsets[name].x + (steve.hudSettings.moveHUDElementsDistance*direction)
+            HUDOverride.offsets[name].y = HUDOverride.offsets[name].y + (steve.hudSettings.moveHUDElementsDistance*direction)
         end
     end
     function cleanupHUD()
@@ -711,7 +709,7 @@ do
             local name = data[1]
             local offset = data[2]
 
-            HUDOverride.offsets[name].x = offset
+            HUDOverride.offsets[name].y = offset
         end
 
         originalHUDOffsets = {}
@@ -2279,7 +2277,7 @@ steve.hudSettings = {
 
 
     -- How much certain HUD elements are moved when using the character.
-    moveHUDElementsDistance = 0,
+    moveHUDElementsDistance = 45,
 
 
     -- The font used in the HUD.

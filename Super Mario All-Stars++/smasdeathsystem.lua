@@ -9,6 +9,9 @@ local smasdeathsystem = {}
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
 	SaveData.deathCount = 0
 end
+if SaveData.totalLives == nil then
+	SaveData.totalLives = 5
+end
 
 if SaveData.thirteenmodelives == nil then
 	if SaveData.disableX2char == false then
@@ -40,13 +43,14 @@ end
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
 	if smasdeathsystem.activated == true then
 		if GameData.multiplayeractive == false or GameData.battlemodeactive == false or GameData.battlemodeactive == nil or SaveData.disableX2char == false then
-			if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true or (player.character == CHARACTER_YIYOSHI) == true or (player.character == CHARACTER_JUNI) == true or (player.character == CHARACTER_PRINCESSRINKA) == true or (player.character == CHARACTER_STEVE) == true or (player.character == CHARACTER_MCSTEVE) == true then
+			if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
 				if player.deathTimer == 0 then
 					GameData.cutsceneMusicControl = true
 					Audio.MusicVolume(0)
 					SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+					SaveData.totalLives = SaveData.totalLives - 1
 					Misc.saveGame() --Save the game to save what we've added/edited
-					Routine.waitFrames(165, true)
+					Routine.waitFrames(165)
 					Misc.pause()
 					fadeoutdeath = true --This starts the fade out animation
 					Routine.waitFrames(110, true)
@@ -63,68 +67,23 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					end
 				end
 			end
-			if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-				if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
-					if player.deathTimer == 0 then
-						GameData.cutsceneMusicControl = true
-						Audio.MusicVolume(0)
-						SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-						Misc.saveGame() --Save the game to save what we've added/edited
-						Routine.waitFrames(360, true)
-						GameData.cutsceneMusicControl = false
-						Misc.unpause()
-						fadeoutcompleted = true --When waited enough time, unpause and reload the level
-						if fadeoutcompleted then --Or else, just exit the level
-							smasdeathsystem.hasDied = true
-							if smasdeathsystem.extramapexit == false then
-								Level.load(Level.filename())
-							elseif smasdeathsystem.extramapexit == true then
-								Level.load("map.lvlx", nil, nil)
-							end
-						end
-					end
-				end
-			elseif SMBX_VERSION == VER_SEE_MOD then
-				if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do it the same as the others with the SEE Mod
-					if player.deathTimer == 0 then
-						GameData.cutsceneMusicControl = true
-						Audio.MusicVolume(0)
-						SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-						Misc.saveGame() --Save the game to save what we've added/edited
-						Routine.waitFrames(165, true)
-						Misc.pause()
-						fadeoutdeath = true --This starts the fade out animation
-						Routine.waitFrames(110, true)
-						GameData.cutsceneMusicControl = false
-						Misc.unpause()
-						fadeoutcompleted = true --When waited enough time, unpause and reload the level
-						if fadeoutcompleted then --Or else, just exit the level
-							smasdeathsystem.hasDied = true
-							if smasdeathsystem.extramapexit == false then
-								Level.load(Level.filename())
-							elseif smasdeathsystem.extramapexit == true then
-								Level.load("map.lvlx", nil, nil)
-							end
-						end
-					end
-				end
-				if (player.character == CHARACTER_YIYOSHI) == true then --Do a different death animation with yiYoshi if active
-					if player.deathTimer == 0 then
-						GameData.cutsceneMusicControl = true
-						Audio.MusicVolume(0)
-						SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-						Misc.saveGame() --Save the game to save what we've added/edited
-						Routine.waitFrames(360, true)
-						GameData.cutsceneMusicControl = false
-						Misc.unpause()
-						fadeoutcompleted = true --When waited enough time, unpause and reload the level
-						if fadeoutcompleted then --Or else, just exit the level
-							smasdeathsystem.hasDied = true
-							if smasdeathsystem.extramapexit == false then
-								Level.load(Level.filename())
-							elseif smasdeathsystem.extramapexit == true then
-								Level.load("map.lvlx", nil, nil)
-							end
+			if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
+				if player.deathTimer == 0 then
+					GameData.cutsceneMusicControl = true
+					Audio.MusicVolume(0)
+					SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+					SaveData.totalLives = SaveData.totalLives - 1
+					Misc.saveGame() --Save the game to save what we've added/edited
+					Routine.waitFrames(360, true)
+					GameData.cutsceneMusicControl = false
+					Misc.unpause()
+					fadeoutcompleted = true --When waited enough time, unpause and reload the level
+					if fadeoutcompleted then --Or else, just exit the level
+						smasdeathsystem.hasDied = true
+						if smasdeathsystem.extramapexit == false then
+							Level.load(Level.filename())
+						elseif smasdeathsystem.extramapexit == true then
+							Level.load("map.lvlx", nil, nil)
 						end
 					end
 				end
@@ -154,30 +113,47 @@ function smasdeathsystem.onTick()
 	if not Player(2) and not Player(2).isValid or SaveData.disableX2char == false then
 		GameData.multiplayeractive = false
 	end
-end
-
-function extrasounds.onTickEnd()
+	if SaveData.totalLives >= 999 then
+		SaveData.totalLives = 999
+	end
 	if GameData.battlemodeactive == true then
 		for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-			if scoreboard.animationFrame == 9 then --1UP
+			if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
 				GameData.p1lives = GameData.p1lives + 1
 				GameData.p1lives = GameData.p2lives + 1
 			end
-			if scoreboard.animationFrame == 10 then --2UP
+			if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
 				GameData.p1lives = GameData.p1lives + 2
 				GameData.p1lives = GameData.p2lives + 2
 			end
-			if scoreboard.animationFrame == 11 then --3UP
+			if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
 				GameData.p1lives = GameData.p1lives + 3
 				GameData.p1lives = GameData.p2lives + 3
 			end
-			if scoreboard.animationFrame == 12 then --5UP
+			if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
 				GameData.p1lives = GameData.p1lives + 5
 				GameData.p1lives = GameData.p2lives + 5
 			end
 		end
+	else
+		for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+			if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
+				SaveData.totalLives = SaveData.totalLives + 1
+			end
+			if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
+				SaveData.totalLives = SaveData.totalLives + 2
+			end
+			if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
+				SaveData.totalLives = SaveData.totalLives + 3
+			end
+			if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
+				SaveData.totalLives = SaveData.totalLives + 5
+			end
+		end
 	end
 end
+
+local oneuptimer = 2
 
 function smasdeathsystem.onDraw()
 	if fadeoutdeath then --Fade out related code

@@ -9,6 +9,7 @@ local datetime = require("datetime")
 local debugbox = require("debugbox")
 
 function onStart()
+	GameData.friendlyArea = true
 	if SaveData.introselect == nil then
         SaveData.introselect = SaveData.introselect or 1
     end

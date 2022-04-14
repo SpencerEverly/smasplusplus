@@ -12,15 +12,8 @@ local repll = require("repll")
 local extrasounds = require("extrasounds")
 local namehover = require("namehover")
 local hearthover = require("hearthover")
-
-if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-	steve = require("steve")
-	yoshi = require("yiYoshi/yiYoshi")
-end
-
-if SMBX_VERSION == VER_SEE_MOD then
-	__disablePauseMenu = true
-end
+local steve = require("steve")
+local yoshi = require("yiYoshi/yiYoshi")
 
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
@@ -364,10 +357,10 @@ function globalgenerals.onTick()
 		HUDOverride.visible.overworldPlayer = true
 	end
 	if player.character == CHARACTER_UNCLEBROADSWORD then
-		HUDOverride.visible.lives = false
+		--HUDOverride.visible.lives = false
 	end
 	if SaveData.disableX2char == false then
-		HUDOverride.visible.lives = false
+		--HUDOverride.visible.lives = false
 		HUDOverride.visible.score = false
 	end
 	if player.character == CHARACTER_ULTIMATERINKA then
@@ -882,6 +875,22 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("costumes/toad/Sonic/starman")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "JUNI" then
+		littleDialogue.characterNames[4] = "Juni"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "PRINCESSRINKA" then
+		littleDialogue.characterNames[4] = "Princess Rinka"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "TOADETTE" then

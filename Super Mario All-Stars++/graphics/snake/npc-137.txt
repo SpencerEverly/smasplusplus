@@ -1,6 +1,0 @@
-gfxoffsetx=0
-gfxoffsety=0
-gfxwidth=32
-gfxheight=32
-frames=1
-framestyle=0

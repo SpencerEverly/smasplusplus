@@ -126,9 +126,6 @@ function onStart()
 	--if stars >= 100 then
 	--	triggerEvent("StageGenoside")
 	--end
-	if SMBX_VERSION == VER_SEE_MOD then
-		triggerEvent("SEEModStuff")
-	end
 end
 
 function onDraw()
