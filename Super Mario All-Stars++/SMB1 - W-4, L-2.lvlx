@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 1\: World 4-2";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 1\: World 4-2";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:10;
@@ -10,7 +10,7 @@ SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:0;MF:"";BG:0;
 SC:5;L:-100000;R:-99200;T:-100600;B:-100000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
-ID:1;X:-199882;Y:-200118;D:1;
+ID:1;X:-199868;Y:-200118;D:1;
 ID:2;X:-199914;Y:-200124;D:1;
 STARTPOINT_END
 BLOCK

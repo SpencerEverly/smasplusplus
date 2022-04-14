@@ -469,15 +469,6 @@ function yesterdayget()
 	SaveData.dateplayedyesterday = yesterdaystring
 end
 
-function onMessageBox(eventObj,message,playerObj,npcObj)
-    if message == "You need 1 star to enter." then
-        eventObj.cancelled = true
-		
-    elseif message:match("You need %d stars to enter.") ~= nil then
-        eventObj.cancelled = true
-    end
-end
-
 local stardoor = Graphics.loadImageResolved("starlock.png")
 
 function onDraw()
