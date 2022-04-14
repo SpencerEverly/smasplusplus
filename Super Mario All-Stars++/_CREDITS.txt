@@ -131,6 +131,7 @@ NPCs are made by:
 
 - MrDoubleA
 - Core
+- GtW
 
 Code for certain parts made by:
 
@@ -156,6 +157,7 @@ Code for certain parts made by:
 - Dragon0307
 - Jumper
 - Blue Stag
+- GtW
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
