@@ -91,7 +91,6 @@ function starget()
 	muteMusic(-1)
 	playervuln = true
 	playerwon = true
-	--Routine.wait(5, true)
 end
 
 function realstar.onPostNPCKill(v,reason)

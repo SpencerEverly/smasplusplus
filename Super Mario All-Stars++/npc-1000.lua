@@ -85,12 +85,11 @@ function muteMusic(sectionid) --Mute all section music, or just mute a specific 
 end
 
 function starget()
+	Level.finish(LEVEL_END_STATE_STAR, true)
 	SFX.play(52)
 	muteMusic(-1)
 	playervuln = true
 	playerwon = true
-	Routine.wait(5, true)
-	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 
 function dudstar.onPostNPCKill(v,reason)
@@ -136,6 +135,12 @@ function dudstar.onPlayerHarm(evt)
 	end
 end
 
+function dudstar.onExit()
+	if Level.endState(LEVEL_END_STATE_STAR) then
+		Level.exit(LEVEL_WIN_TYPE_STAR)
+	end
+end
+
 function dudstar.onInitAPI()
 	npcManager.registerEvent(npcID,dudstar,"onTickNPC")
 	
@@ -145,6 +150,7 @@ function dudstar.onInitAPI()
 	registerEvent(dudstar,"onPlayerHarm")
 	registerEvent(dudstar,"onInputUpdate")
 	registerEvent(dudstar,"onPostNPCKill")
+	registerEvent(dudstar,"onExit")
 end
 
 return dudstar
