@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 3\: World 2-1";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 3\: World 2-1";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-193728;T:-201184;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Desert.spc|0\;g=3.2";BG:14;
@@ -76,8 +76,6 @@ ID:95;X:-198592;Y:-200032;W:32;H:32;
 ID:95;X:-198752;Y:-200032;W:32;H:32;
 ID:95;X:-198656;Y:-200032;W:32;H:32;
 ID:95;X:-198816;Y:-200032;W:32;H:32;
-ID:457;X:-199424;Y:-200128;W:32;H:32;
-ID:457;X:-199200;Y:-200192;W:32;H:32;
 ID:4;X:-199232;Y:-200096;W:32;H:32;
 ID:4;X:-199200;Y:-200096;W:32;H:32;
 ID:4;X:-199168;Y:-200096;W:32;H:32;
@@ -98,16 +96,12 @@ ID:4;X:-199040;Y:-200096;W:32;H:32;
 ID:4;X:-199008;Y:-200096;W:32;H:32;
 ID:4;X:-199008;Y:-200128;W:32;H:32;
 ID:4;X:-199008;Y:-200064;W:32;H:32;
-ID:457;X:-199008;Y:-200160;W:32;H:32;
 ID:4;X:-198848;Y:-200064;W:32;H:32;
 ID:4;X:-198688;Y:-200064;W:32;H:32;
 ID:4;X:-198688;Y:-200096;W:32;H:32;
 ID:4;X:-198528;Y:-200064;W:32;H:32;
 ID:4;X:-198528;Y:-200096;W:32;H:32;
 ID:4;X:-198528;Y:-200128;W:32;H:32;
-ID:457;X:-198848;Y:-200096;W:32;H:32;
-ID:457;X:-198688;Y:-200128;W:32;H:32;
-ID:457;X:-198528;Y:-200160;W:32;H:32;
 ID:5;X:-198464;Y:-200192;W:32;H:32;CN:-1;
 ID:5;X:-198432;Y:-200192;W:32;H:32;CN:996;
 ID:95;X:-198432;Y:-200032;W:32;H:32;
@@ -142,7 +136,6 @@ ID:95;X:-197984;Y:-200032;W:32;H:32;
 ID:95;X:-197696;Y:-200032;W:32;H:32;
 ID:95;X:-197664;Y:-200032;W:32;H:32;
 ID:4;X:-198208;Y:-200064;W:32;H:32;
-ID:457;X:-197952;Y:-200064;W:32;H:32;
 ID:4;X:-197696;Y:-200064;W:32;H:32;CN:34;
 ID:55;X:-197600;Y:-200128;W:32;H:32;
 ID:55;X:-197536;Y:-200192;W:32;H:32;
@@ -384,7 +377,6 @@ ID:4;X:-194880;Y:-200096;W:32;H:32;
 ID:4;X:-194816;Y:-200128;W:32;H:32;
 ID:4;X:-194816;Y:-200096;W:32;H:32;
 ID:4;X:-194784;Y:-200096;W:32;H:32;
-ID:457;X:-194848;Y:-200096;W:32;H:32;
 ID:95;X:-194848;Y:-200032;W:32;H:32;
 ID:95;X:-194912;Y:-200032;W:32;H:32;
 ID:95;X:-194976;Y:-200032;W:32;H:32;
@@ -1327,7 +1319,6 @@ ID:60;X:-193536;Y:-200416;
 ID:60;X:-193536;Y:-200288;
 BGO_END
 NPC
-ID:151;X:-199784;Y:-200080;D:-1;MG:"Unfinished for now\, gray bricks will take the goomba brick spots until then";FD:1;
 ID:6;X:-198336;Y:-200064;D:-1;
 ID:307;X:-197728;Y:-200064;D:-1;S1:4;
 ID:94;X:-197344;Y:-200086;D:-1;MG:"Oh man\, this is a REALLY hot desert... my head is drying with sweat as we speak!<page>If you're here to speak to me\, great! Let me tell you about Warp Whistles.<page>They're the most important way to warp to any world in this part of the game!<page>I had a whistle\, but a thief stole mine...<page>It went East\, so if you keep going from here you'll find more clues on where to look.<page>When you find it I don't need it anymore! It's your responsibility. Good luck!";FD:1;
@@ -1383,6 +1374,14 @@ ID:103;X:-179582;Y:-180288;D:-1;LR:"p-coins";
 ID:103;X:-179550;Y:-180288;D:-1;LR:"p-coins";
 ID:103;X:-179518;Y:-180288;D:-1;LR:"p-coins";
 ID:32;X:-159552;Y:-160226;D:-1;
+ID:751;X:-199424;Y:-200128;D:-1;
+ID:751;X:-199200;Y:-200192;D:-1;
+ID:751;X:-199008;Y:-200160;D:-1;
+ID:751;X:-198528;Y:-200160;D:-1;
+ID:751;X:-198688;Y:-200128;D:-1;
+ID:751;X:-198848;Y:-200096;D:-1;
+ID:751;X:-197952;Y:-200064;D:-1;
+ID:751;X:-194848;Y:-200096;D:-1;
 NPC_END
 DOORS
 IX:-197360;IY:-200960;OX:-179792;OY:-180416;DT:1;ID:3;OD:1;
