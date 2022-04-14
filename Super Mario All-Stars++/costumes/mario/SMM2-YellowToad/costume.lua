@@ -1596,7 +1596,7 @@ function GIANTGATE_IRIS_OUT(p) --Credit to MrDoubleA for this function. It's bas
 			playerY = p.y
 		end
 
-		applyShader(6,irisOutShader,{center = vector(p.x+(p.width/2)-camera.x,playerY+(p.height/2)-camera.y),radius = radius})
+		applyShader(0,irisOutShader,{center = vector(p.x+(p.width/2)-camera.x,playerY+(p.height/2)-camera.y),radius = radius})
 
     end
 
@@ -1658,7 +1658,7 @@ function STATICEND_IRIS_OUT(p)
 		irisOffset = 0
 	end
 	
-	applyShader(6,irisOutShader,{center = vector(p.x+(p.width/2)+irisOffset-camera.x,playerY+(p.height/2)-camera.y),radius = radius})
+	applyShader(0,irisOutShader,{center = vector(p.x+(p.width/2)+irisOffset-camera.x,playerY+(p.height/2)-camera.y),radius = radius})
 
 
 end
