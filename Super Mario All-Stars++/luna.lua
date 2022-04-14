@@ -473,7 +473,7 @@ function onTick() --This will prevent split screen, again (Just in case)
 		if warp.starsRequired <= SaveData.totalStarCount then
 			warp.starsRequired = 0
 		elseif warp.starsRequired > SaveData.totalStarCount then
-			warp.starsRequired = 9999 --Until the system gets better, this'll do for now
+			--warp.starsRequired = 9999 --This has been uncommented because the original star count is 0 regardless, which means don't bump up the required stars
 		end
 		if mem(0x00B251E0, FIELD_WORD) >= 1 then
 			--mem(0x00B251E0, FIELD_WORD, 0)
