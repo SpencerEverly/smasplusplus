@@ -2,6 +2,7 @@ local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
 local extrasounds = require("extrasounds")
 local Routine = require("routine")
+local rng = require("base/rng")
 
 local dudstar = {}
 
@@ -98,8 +99,31 @@ function dudstar.onPostNPCKill(v,reason)
 	end
 end
 
-function dudstar.onTickNPC(v)
-	
+local timer = 80
+local timer2 = 80
+
+function dudstar.onTickNPC()
+	local rngspark = rng.randomInt(1,20)
+	local rngsparkmovement = rng.randomInt(1,1.2)
+	for k,npc in ipairs(NPC.get(999)) do
+		if timer <= 80 then
+			timer = timer - 1
+		elseif timer2 <= 80 then
+			timer2 = timer2 - 1
+		end
+		if timer <= 0 then
+			npc.speedY = 0.25
+			timer2 = 80
+			timer = 81
+			timer2 = timer2 - 1
+		end
+		if timer2 <= 0 then
+			npc.speedY = -0.25
+			timer = 80
+			timer2 = 81
+			timer = timer - 1
+		end
+	end
 end
 
 function dudstar.onInputUpdate()
