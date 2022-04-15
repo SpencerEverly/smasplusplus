@@ -2195,7 +2195,7 @@ function malcmusic.onTick()
 			Section(12).musicPath = "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7"
 			Section(13).musicPath = "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7"
 		end
-		if currentCostume == "PRINCESSRINKA" and malcmusic.holiday == false then
+		if currentCostume == "MOTHERBRAINRINKA" and malcmusic.holiday == false then
 			Section(1).musicPath = "_OST/Me and Larry City/Main Theme.ogg"
 			Section(2).musicPath = "_OST/Me and Larry City/Main Theme.ogg"
 			Section(3).musicPath = "_OST/Me and Larry City/Main Theme.ogg"
