@@ -133,7 +133,7 @@ function costume.onInputUpdate()
 end
 
 function costume.onCleanup(p)
-	Graphics.registerCharacterHUD(CHARACTER_TOAD, Graphics.HUD_ITEMBOX)
+	Graphics.registerCharacterHUD(CHARACTER_TOAD, Graphics.HUD_HEARTS)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
 	Audio.sounds[3].sfx  = nil

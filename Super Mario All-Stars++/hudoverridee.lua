@@ -92,9 +92,17 @@ HUDOverride.visible.keys = true
 HUDOverride.visible.itembox = true
 HUDOverride.visible.bombs = true
 HUDOverride.visible.coins = true
-HUDOverride.visible.score = false
+if SaveData.disableX2char == false then
+	HUDOverride.visible.score = false
+else
+	HUDOverride.visible.score = true
+end
 HUDOverride.visible.lives = true
-HUDOverride.visible.deathcount = true
+if SaveData.disableX2char == false then
+	HUDOverride.visible.deathcount = true
+else
+	HUDOverride.visible.deathcount = false
+end
 HUDOverride.visible.stars = true
 HUDOverride.visible.starcoins = true
 HUDOverride.visible.timer = true
@@ -497,7 +505,11 @@ function HUDOverride.drawStars(splitOffset, thisCam, thisPlayer, priority)
 end
 
 function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
-	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+	if SaveData.disableX2char == true then
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.thirteenmodelives, priority);
+	elseif SaveData.disableX2char == false then
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+	end
 end
 
 function HUDOverride.drawDeathCount(splitOffset, thisCam, thisPlayer, priority)

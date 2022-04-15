@@ -26,6 +26,7 @@ comboSounds.sounds = {
     extrasounds.id[110],
     extrasounds.id[111],
     extrasounds.id[112],
+	extrasounds.id[112],
 }
 
 
@@ -42,6 +43,7 @@ local comboScores = {
     [2000] = 6,
     [4000] = 7,
     [8000] = 8,
+	[0] = 9,
 }
 
 

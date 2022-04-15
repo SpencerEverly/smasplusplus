@@ -307,70 +307,70 @@ local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
 local noloadingsounds = {
-	["SMAS - Start.lvlx"] = true,
-	["SMAS - Raca's World (Part 0).lvlx"] = true,
-	["SMAS - Raca's World (Part 1).lvlx"] = true,
-	["map.lvlx"] = true
+	"SMAS - Start.lvlx",
+	"SMAS - Raca's World (Part 0).lvlx",
+	"SMAS - Raca's World (Part 1).lvlx",
+	"map.lvlx"
 }
 
 --Friendly place table for Princess Rinka
 local friendlyplaces = {
-	["SMAS - Start.lvlx"] = true,
-	["map.lvlx"] = true,
-	["intro_8bit.lvlx"] = true,
-	["intro_bossedit8.lvlx"] = true,
-	["intro_jakebrito1.lvlx"] = true,
-	["intro_marioforever.lvlx"] = true,
-	["intro_S!TS!.lvlx"] = true,
-	["intro_scrollingheights.lvlx"] = true,
-	["intro_SMAS.lvlx"] = true,
-	["intro_SMBX1.0.lvlx"] = true,
-	["intro_SMBX1.1.lvlx"] = true,
-	["intro_SMBX1.2.lvlx"] = true,
-	["intro_SMBX1.3.lvlx"] = true,
-	["intro_SMBX1.3og.lvlx"] = true,
-	["intro_SMBX2.lvlx"] = true,
-	["intro_SMBX2b3.lvlx"] = true,
-	["intro_sunsetbeach.lvlx"] = true,
-	["intro_WSMBA.lvlx"] = true,
-	["MALC - HUB.lvlx"] = true,
-	["SMAS - Credits.lvlx"] = true,
-	["SMAS - DLC Levels.lvlx"] = true,
-	["SMAS - Intro.lvlx"] = true,
-	["SMAS - Online (Menu).lvlx"] = true,
-	["SMAS - Test Level.lvlx"] = true,
-	["SMAS - True Ending.lvlx"] = true,
-	["SMAS - World Map Warp.lvlx"] = true,
-	["SMB1 - Level Backtrack 1.lvlx"] = true,
-	["SMB1 - Level Backtrack 2.lvlx"] = true,
-	["SMB1 - Level Backtrack 3.lvlx"] = true,
-	["SMB1 - Level Backtrack 4.lvlx"] = true,
-	["SMB1 - Level Backtrack 5.lvlx"] = true,
-	["SMB1 - Level Backtrack 6.lvlx"] = true,
-	["SMB1 - Level Backtrack 7.lvlx"] = true,
-	["SMB2 - Ending.lvlx"] = true,
-	["SMB2 - Level Backtrack 1.lvlx"] = true,
-	["SMB2 - Level Backtrack 2.lvlx"] = true,
-	["SMB2 - Level Backtrack 3.lvlx"] = true,
-	["SMB2 - Level Backtrack 4.lvlx"] = true,
-	["SMB2 - Level Backtrack 5.lvlx"] = true,
-	["SMB2 - Level Backtrack 6.lvlx"] = true,
-	["SMBLL - Level Backtrack 1.lvlx"] = true,
-	["SMBLL - Level Backtrack 2.lvlx"] = true,
-	["SMBLL - Level Backtrack 3.lvlx"] = true,
-	["SMBLL - Level Backtrack 4.lvlx"] = true,
-	["SMBLL - Level Backtrack 5.lvlx"] = true,
-	["SMBLL - Level Backtrack 6.lvlx"] = true,
-	["SMBLL - Level Backtrack 7.lvlx"] = true,
-	["SMBS - Opening.lvlx"] = true,
-	["SMW - W-0, L-Green Switch.lvlx"] = true,
-	["SMW - W-0, L-Yellow Switch.lvlx"] = true,
-	["SMW - W-0, L-Blue Switch.lvlx"] = true
+	"SMAS - Start.lvlx",
+	"map.lvlx",
+	"intro_8bit.lvlx",
+	"intro_bossedit8.lvlx",
+	"intro_jakebrito1.lvlx",
+	"intro_marioforever.lvlx",
+	"intro_S!TS!.lvlx",
+	"intro_scrollingheights.lvlx",
+	"intro_SMAS.lvlx",
+	"intro_SMBX1.0.lvlx",
+	"intro_SMBX1.1.lvlx",
+	"intro_SMBX1.2.lvlx",
+	"intro_SMBX1.3.lvlx",
+	"intro_SMBX1.3og.lvlx",
+	"intro_SMBX2.lvlx",
+	"intro_SMBX2b3.lvlx",
+	"intro_sunsetbeach.lvlx",
+	"intro_WSMBA.lvlx",
+	"MALC - HUB.lvlx",
+	"SMAS - Credits.lvlx",
+	"SMAS - DLC Levels.lvlx",
+	"SMAS - Intro.lvlx",
+	"SMAS - Online (Menu).lvlx",
+	"SMAS - Test Level.lvlx",
+	"SMAS - True Ending.lvlx",
+	"SMAS - World Map Warp.lvlx",
+	"SMB1 - Level Backtrack 1.lvlx",
+	"SMB1 - Level Backtrack 2.lvlx",
+	"SMB1 - Level Backtrack 3.lvlx",
+	"SMB1 - Level Backtrack 4.lvlx",
+	"SMB1 - Level Backtrack 5.lvlx",
+	"SMB1 - Level Backtrack 6.lvlx",
+	"SMB1 - Level Backtrack 7.lvlx",
+	"SMB2 - Ending.lvlx",
+	"SMB2 - Level Backtrack 1.lvlx",
+	"SMB2 - Level Backtrack 2.lvlx",
+	"SMB2 - Level Backtrack 3.lvlx",
+	"SMB2 - Level Backtrack 4.lvlx",
+	"SMB2 - Level Backtrack 5.lvlx",
+	"SMB2 - Level Backtrack 6.lvlx",
+	"SMBLL - Level Backtrack 1.lvlx",
+	"SMBLL - Level Backtrack 2.lvlx",
+	"SMBLL - Level Backtrack 3.lvlx",
+	"SMBLL - Level Backtrack 4.lvlx",
+	"SMBLL - Level Backtrack 5.lvlx",
+	"SMBLL - Level Backtrack 6.lvlx",
+	"SMBLL - Level Backtrack 7.lvlx",
+	"SMBS - Opening.lvlx",
+	"SMW - W-0, L-Green Switch.lvlx",
+	"SMW - W-0, L-Yellow Switch.lvlx",
+	"SMW - W-0, L-Blue Switch.lvlx"
 }
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-	if not Misc.inEditor() or (Level.filename()[noloadingsounds]) == true and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+	if not Misc.inEditor() or (noloadingsounds[Level.filename()]) == true and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
@@ -399,7 +399,7 @@ function onStart() --Now do onStart...
 	if SaveData.dateplayedday == nil then
 		SaveData.dateplayedday = os.date("%d")
 	end
-	if (Level.filename()[friendlyplaces]) == true then
+	if (friendlyplaces[Level.filename()]) then
 		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end
 	--Calculate Easter Sunday

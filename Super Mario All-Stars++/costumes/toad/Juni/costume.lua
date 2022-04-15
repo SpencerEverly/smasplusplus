@@ -66,9 +66,9 @@ function costume.onCleanup(p)
 	Defines.player_walkspeed = nil
 	Defines.jumpheight = nil
 	Defines.jumpheight_bounce = nil
-	Audio.sounds[1].sfx = nil
-	Audio.sounds[71].muted = false
 	costume.abilitiesenabled = false
+	Audio.sounds[1].muted = false
+	Audio.sounds[71].muted = false
 end
 
 -------------------

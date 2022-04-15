@@ -45,8 +45,10 @@ function onStart()
         SaveData.GameOverCount = SaveData.GameOverCount or 0
     end
 	SaveData.GameOverCount = SaveData.GameOverCount + 1
-	--mem(0x00B2C5AC,FIELD_FLOAT, 3)
-	SaveData.totalLives = 5
+	if SaveData.disableX2char == true then
+		mem(0x00B2C5AC,FIELD_FLOAT, 3)
+	end
+	--SaveData.totalLives = 5
 	playSound("gameover-sound.ogg")
 end
 
@@ -76,19 +78,19 @@ function onEvent(eventName)
 		littleDialogue.create({text = "<setPos 400 32 0.5 -4.5><boxStyle gameoverdialog><question gameoverselect>", pauses = true, updatesInPause = true})
 	end
 	if eventName == "Continued1" then
-		SFX.play(extrasounds.id27)
+		playSound(27)
 	end
 	if eventName == "Continued2" then
 		Level.load(SaveData.lastLevelPlayed, nil, 0)
 	end
 	if eventName == "Restart1" then
-		SFX.play(extrasounds.id27)
+		playSound(27)
 	end
 	if eventName == "Restart2" then
 		Level.load("SMAS - Start.lvlx", nil, nil)
 	end
 	if eventName == "EndGame1" then
-		SFX.play(extrasounds.id[14])
+		playSound(14)
 		blackscreen = true
 		Misc.saveGame()
 	end

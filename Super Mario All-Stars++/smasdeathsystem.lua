@@ -40,6 +40,9 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 	ready = true
 end
 
+local gameoveractivate = false
+local gameovershow = false
+
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
 	if smasdeathsystem.activated == true then
 		if GameData.multiplayeractive == false or GameData.battlemodeactive == false or GameData.battlemodeactive == nil or SaveData.disableX2char == false then
@@ -49,6 +52,10 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					Audio.MusicVolume(0)
 					SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 					SaveData.totalLives = SaveData.totalLives - 1
+					if SaveData.totalLives < 0 then
+						gameoveractivate = true
+						SaveData.totalLives = 0
+					end
 					Misc.saveGame() --Save the game to save what we've added/edited
 					Routine.waitFrames(165)
 					Misc.pause()
@@ -56,12 +63,29 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					Routine.waitFrames(110, true)
 					GameData.cutsceneMusicControl = false
 					Misc.unpause()
-					fadeoutcompleted = true --When waited enough time, unpause and reload the level
+					if gameoveractivate == false then
+						fadeoutcompleted = true --When waited enough time, unpause and reload the level
+					end
 					if fadeoutcompleted then --Or else, just exit the level
 						smasdeathsystem.hasDied = true
-						if smasdeathsystem.extramapexit == false then
+						if smasdeathsystem.exittomap == false then
 							Level.load(Level.filename())
-						elseif smasdeathsystem.extramapexit == true then
+						elseif smasdeathsystem.exittomap == true then
+							Level.load("map.lvlx", nil, nil)
+						end
+					end
+					if gameoveractivate then
+						Misc.pause()
+						gameovershow = true
+						SaveData.GameOverCount = SaveData.GameOverCount + 1
+						playSound("gameover-announcer.ogg")
+						Routine.wait(4, true)
+						Misc.unpause()
+						SaveData.totalLives = 5
+						smasdeathsystem.hasDied = true
+						if smasdeathsystem.exittomap == false then
+							Level.load(Level.filename())
+						elseif smasdeathsystem.exittomap == true then
 							Level.load("map.lvlx", nil, nil)
 						end
 					end
@@ -73,16 +97,37 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					Audio.MusicVolume(0)
 					SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 					SaveData.totalLives = SaveData.totalLives - 1
+					if SaveData.totalLives < 0 then
+						gameoveractivate = true
+						SaveData.totalLives = 0
+					end
 					Misc.saveGame() --Save the game to save what we've added/edited
 					Routine.waitFrames(360, true)
 					GameData.cutsceneMusicControl = false
 					Misc.unpause()
-					fadeoutcompleted = true --When waited enough time, unpause and reload the level
+					if gameoveractivate == false then
+						fadeoutcompleted = true --When waited enough time, unpause and reload the level
+					end
 					if fadeoutcompleted then --Or else, just exit the level
 						smasdeathsystem.hasDied = true
-						if smasdeathsystem.extramapexit == false then
+						if smasdeathsystem.exittomap == false then
 							Level.load(Level.filename())
-						elseif smasdeathsystem.extramapexit == true then
+						elseif smasdeathsystem.exittomap == true then
+							Level.load("map.lvlx", nil, nil)
+						end
+					end
+					if gameoveractivate then
+						Misc.pause()
+						gameovershow = true
+						SaveData.GameOverCount = SaveData.GameOverCount + 1
+						playSound("gameover-announcer.ogg")
+						Routine.wait(4, true)
+						Misc.unpause()
+						SaveData.totalLives = 5
+						smasdeathsystem.hasDied = true
+						if smasdeathsystem.exittomap == false then
+							Level.load(Level.filename())
+						elseif smasdeathsystem.exittomap == true then
 							Level.load("map.lvlx", nil, nil)
 						end
 					end
@@ -136,29 +181,32 @@ function smasdeathsystem.onTick()
 			end
 		end
 	else
-		for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-			if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
-				SaveData.totalLives = SaveData.totalLives + 1
-			end
-			if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
-				SaveData.totalLives = SaveData.totalLives + 2
-			end
-			if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
-				SaveData.totalLives = SaveData.totalLives + 3
-			end
-			if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
-				SaveData.totalLives = SaveData.totalLives + 5
+		if SaveData.disableX2char == false then
+			for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+				if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
+					SaveData.totalLives = SaveData.totalLives + 1
+				end
+				if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
+					SaveData.totalLives = SaveData.totalLives + 2
+				end
+				if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
+					SaveData.totalLives = SaveData.totalLives + 3
+				end
+				if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
+					SaveData.totalLives = SaveData.totalLives + 5
+				end
 			end
 		end
 	end
 end
 
-local oneuptimer = 2
-
 function smasdeathsystem.onDraw()
 	if fadeoutdeath then --Fade out related code
 		time = time + 1
 		Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 5}
+	end
+	if gameovershow then
+		Text.printWP("GAME OVER", 310, 290, 6)
 	end
 end
 
@@ -173,16 +221,16 @@ function smasdeathsystem.onExit()
 	end
 	GameData.cutsceneMusicControl = false --This is specific for my episode. Remove this if you wanna use this yourself.
 	Audio.MusicVolume(64) --Reset the music exiting the level
-	if smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == false then
+	if smasdeathsystem.hasDied == true and smasdeathsystem.exittomap == false then
 		Level.exit()
-	elseif smasdeathsystem.hasDied == true and smasdeathsystem.extramapexit == true then
+	elseif smasdeathsystem.hasDied == true and smasdeathsystem.exittomap == true then
 		Level.load("map.lvlx", nil, nil)
 	end
 end
 
 --SaveData.gameOverCount = 0 --This is only when the library publically releases for the wild to use
 smasdeathsystem.hasDied = false --If the player died or not
-smasdeathsystem.extramapexit = false --This'll only be true on extra DLC levels/extra games' level luna.lua's in future updates
+smasdeathsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward
 smasdeathsystem.activated = true --Whenever the death animation is activated
 
 return smasdeathsystem
