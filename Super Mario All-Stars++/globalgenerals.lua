@@ -859,6 +859,14 @@ function globalgenerals.onTick()
 		starman.duration[994] = 769
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
+	if currentCostume == "NINJABOMBERMAN" then
+		littleDialogue.characterNames[3] = "Plunder Bomber"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
 	
 	
 	if currentCostume == "SEE-TANGENT" then

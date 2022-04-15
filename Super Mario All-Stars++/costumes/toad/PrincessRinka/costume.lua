@@ -1,12 +1,10 @@
---"costume".lua
---v1.0.0
---Created by Horikawa Otane, 2015
+--Princess Rinka
+--v1.1.0
+--Created by Horikawa Otane, 2015 (Edited by Spencer Everly, 2022)
 --...Shit. What are you doing here. GO AWAY.
---Contact me at https://www.youtube.com/subscription_center?add_user=msotane
 
 local rng = require("rng")
 local colliders = require("colliders")
---local horikawaTools = require("horikawaTools")
 
 local costume = {}
 GameData.friendlyArea = false
@@ -17,21 +15,19 @@ local displayText = true
 local hasBeenActivated
 local nextRinka = 1000
 
-function costume.onInit()
+function costume.onInit(p)
 	registerEvent(costume, "onTick")
 	registerEvent(costume, "onStart")
 	costume.abilitiesenabled = true
 end
 
-function costume.onCleanup()
+function costume.onCleanup(p)
 	costume.abilitiesenabled = false
 end
 
 function costume.onTick()
 	if costume.abilitiesenabled == true then
-		for _, v in pairs(Block.getIntersecting(player.x - 32, player.y + player.height, player.x + player.width + 32, player.y + player.height + 2)) do
-			v.slippery = true
-		end
+		player:mem(0x0A, FIELD_BOOL, true)
 		if GameData.friendlyArea == false then
 			if player.powerup > 1 then
 				player:mem(0x16, FIELD_WORD, 2)
