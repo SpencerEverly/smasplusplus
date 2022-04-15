@@ -22,8 +22,10 @@ local lineguide        = require("lineguide")
 local switch           = require("blocks/ai/synced")
 local megashroom       = require("mega/megashroom")
 local starman          = require("starman/star")
+local smasdeathsystem  = require("smasdeathsystem")
 
 local time = 0
+local lifelost = false
 
 -- Declare constants
 rooms.TRANSITION_TYPE_NONE     = 0
@@ -809,6 +811,13 @@ function rooms.onTick()
             end
         end
     end
+	if lifelost == true then
+		SaveData.totalLives = SaveData.totalLives - 1
+		if SaveData.totalLives < 0 then
+			SaveData.totalLives = 5
+		end
+		lifelost = false
+	end
 end
 
 function rooms.onTickEnd()
@@ -1048,7 +1057,8 @@ function rooms.onDraw()
 
         -- Stop the death timer from progressing further
         if player.deathTimer > 0 then
-            player.deathTimer = 1
+			player.deathTimer = 1
+			lifelost = true
         end
     end
 end

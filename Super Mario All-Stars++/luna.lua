@@ -370,7 +370,7 @@ GameData.friendlyplaces = {
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-	if not Misc.inEditor() or table.icontains(noloadingsounds,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+	if not Misc.inEditor() and not table.icontains(noloadingsounds,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
@@ -417,7 +417,7 @@ function onStart() --Now do onStart...
 		SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
 		GameData.weatherset = false
 	end
-	if not Misc.inEditor() or (Level.filename() == noloadingsounds[Level.filename()]) == true then --Make sure to fade out the loading sound when onStart is active...
+	if not Misc.inEditor() and not table.icontains(noloadingsounds,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
 		fadetolevel = false
 		if loadactivate == true then
 			loadingSoundObject:FadeOut(800)

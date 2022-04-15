@@ -3683,11 +3683,32 @@ do
 
 
     smwMap.hudCounters = {
+		-- Lives
+        {
+            icon = Graphics.loadImageResolved("smwMap/hud_lives.png"),
+            getValue = (function()
+                return SaveData.totalLives
+            end),
+        },
+		-- Death Count
+        {
+            icon = Graphics.loadImageResolved("deathCount.png"),
+            getValue = (function()
+                return SaveData.deathCount
+            end),
+        },
         -- Coins
         {
             icon = Graphics.sprites.hardcoded["33-2"],
             getValue = (function()
                 return mem(0x00B2C5A8,FIELD_WORD)
+            end),
+        },
+		-- Total Coin Count
+        {
+            icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
+            getValue = (function()
+                return SaveData.totalcoins
             end),
         },
         -- Stars
@@ -4367,7 +4388,7 @@ smwMap.hudSettings = {
     counterOffsetY = -16,
     counterText = "x %s",
     counterScale = 2,
-    counterGap = 4,
+    counterGap = 0,
 
     countersEnabled = true,
 
