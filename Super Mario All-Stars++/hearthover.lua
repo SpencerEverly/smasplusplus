@@ -99,10 +99,46 @@ function hearthover.onDraw()
 				Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
 				Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
 			end
-			if player.powerup >= 3 then
+			if player.powerup >= 3 or player:mem(0x16, FIELD_WORD, 3) then
 				Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
 				Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
 				Graphics.drawImageWP(heartfull2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+			end
+		end
+		if currentCostume == "GA-BORIS" then
+			local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
+			if player.deathTimer >= 0 then
+				
+			end
+			if player.powerup == 1 then
+				Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+			end
+			if player.powerup == 2 then
+				Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
+			end
+			if player.powerup >= 3 then
+				Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull3, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+			end
+		end
+		if currentCostume == "GA-CAILLOU" then
+			local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
+			if player.deathTimer >= 0 then
+				
+			end
+			if player.powerup == 1 then
+				Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+			end
+			if player.powerup == 2 then
+				Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
+			end
+			if player.powerup >= 3 then
+				Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
+				Graphics.drawImageWP(heartfull3, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
 			end
 		end
 	end
