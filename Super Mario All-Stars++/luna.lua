@@ -314,7 +314,7 @@ local noloadingsounds = {
 }
 
 --Friendly place table for Princess Rinka
-local friendlyplaces = {
+GameData.friendlyplaces = {
 	"SMAS - Start.lvlx",
 	"map.lvlx",
 	"intro_8bit.lvlx",
@@ -370,7 +370,7 @@ local friendlyplaces = {
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-	if not Misc.inEditor() or (noloadingsounds[Level.filename()]) == true and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+	if not Misc.inEditor() or table.icontains(noloadingsounds,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
@@ -398,9 +398,6 @@ function onStart() --Now do onStart...
 	end
 	if SaveData.dateplayedday == nil then
 		SaveData.dateplayedday = os.date("%d")
-	end
-	if (friendlyplaces[Level.filename()]) then
-		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end
 	--Calculate Easter Sunday
 	calculateeaster(os.date("*t").year)
@@ -469,6 +466,9 @@ end
 
 function onTick() --This will prevent split screen, again (Just in case)
 	mem(0x00B25130,FIELD_WORD, 2)
+	if table.icontains(GameData.friendlyplaces,Level.filename()) == true then
+		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
+	end
 	--Now we'll overhaul the door star required system
 	if warpstaractive == true then
 		local numberOfWarps = Warp.count()
