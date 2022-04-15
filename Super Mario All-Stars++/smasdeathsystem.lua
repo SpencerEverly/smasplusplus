@@ -3,17 +3,18 @@
 
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
+local rng = require("base/rng")
 
 local smasdeathsystem = {}
 
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
 	SaveData.deathCount = 0
 end
-if SaveData.totalLives == nil then
+if SaveData.totalLives == nil then --The total lives used the for the episode.
 	SaveData.totalLives = 5
 end
 
-if SaveData.thirteenmodelives == nil then
+if SaveData.thirteenmodelives == nil then --This is stuff specific for my episode. You can remove it if you want to
 	if SaveData.disableX2char == false then
 		SaveData.thirteenmodelives = 0
 	elseif SaveData.disableX2char == true then
@@ -22,7 +23,7 @@ if SaveData.thirteenmodelives == nil then
 end
 
 if Player(2) and Player(2).isValid then
-	local multiplayeractive = true
+	local multiplayeractive = true --This makes sure the death animation doesn't play when on multiplayer
 end
 
 local killed = false
@@ -51,7 +52,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					GameData.cutsceneMusicControl = true
 					Audio.MusicVolume(0)
 					SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-					SaveData.totalLives = SaveData.totalLives - 1
+					SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
 					if SaveData.totalLives < 0 then
 						gameoveractivate = true
 						SaveData.totalLives = 0
@@ -63,23 +64,113 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					Routine.waitFrames(110, true)
 					GameData.cutsceneMusicControl = false
 					Misc.unpause()
-					if gameoveractivate == false then
-						fadeoutcompleted = true --When waited enough time, unpause and reload the level
+					if gameoveractivate == false then --If not in a gameover state...
+						fadeoutcompleted = true --...when waited enough time, unpause and reload the level
 					end
-					if fadeoutcompleted then --Or else, just exit the level
+					if fadeoutcompleted then
 						smasdeathsystem.hasDied = true
-						if smasdeathsystem.exittomap == false then
+						if smasdeathsystem.exittomap == false then --Reload the level from here
 							Level.load(Level.filename())
-						elseif smasdeathsystem.exittomap == true then
+						elseif smasdeathsystem.exittomap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
 							Level.load("map.lvlx", nil, nil)
+							--Level.exit() --Only if you're using the vanilla map
 						end
 					end
 					if gameoveractivate then
 						Misc.pause()
 						gameovershow = true
 						SaveData.GameOverCount = SaveData.GameOverCount + 1
-						playSound("gameover-announcer.ogg")
-						Routine.wait(4, true)
+						local rngkey = rng.randomInt(1,28)
+						playSound("gameover/gameover-"..rngkey..".ogg")
+						
+						
+						if rngkey == 1 then
+							Routine.wait(3, true)
+							
+						elseif rngkey == 2 then
+							Routine.wait(5, true)
+							
+						elseif rngkey == 3 then
+							Routine.wait(3, true)
+							
+						elseif rngkey == 4 then
+							Routine.wait(3, true)
+							
+						elseif rngkey == 5 then
+							Routine.wait(5, true)
+							
+						elseif rngkey == 6 then
+							Routine.wait(4, true)
+							
+						elseif rngkey == 7 then
+							Routine.wait(2, true)
+							
+						elseif rngkey == 8 then
+							Routine.wait(6, true)
+							
+						elseif rngkey == 9 then
+							Routine.wait(3, true)
+							
+						elseif rngkey == 10 then
+							Routine.wait(14, true)
+							
+						elseif rngkey == 11 then
+							Routine.wait(10, true)
+							
+						elseif rngkey == 12 then
+							Routine.wait(10, true)
+							
+						elseif rngkey == 13 then
+							Routine.wait(5, true)
+							
+						elseif rngkey == 14 then
+							Routine.wait(6, true)
+						
+						elseif rngkey == 15 then
+							Routine.wait(6, true)
+							
+						elseif rngkey == 16 then
+							Routine.wait(7, true)
+							
+						elseif rngkey == 17 then
+							Routine.wait(3, true)
+							
+						elseif rngkey == 18 then
+							Routine.wait(4, true)
+							
+						elseif rngkey == 19 then
+							Routine.wait(7, true)
+							
+						elseif rngkey == 20 then
+							Routine.wait(9, true)
+							
+						elseif rngkey == 21 then
+							Routine.wait(3, true)
+							
+						elseif rngkey == 22 then
+							playSound("gameover/gameover-22-voice.mp3")
+							Routine.wait(18, true)
+							
+						elseif rngkey == 23 then
+							Routine.wait(4, true)
+							
+						elseif rngkey == 24 then
+							Routine.wait(6, true)
+							
+						elseif rngkey == 25 then
+							Routine.wait(6, true)
+							
+						elseif rngkey == 26 then
+							Routine.wait(5, true)
+							
+						elseif rngkey == 27 then
+							Routine.wait(8, true)
+							
+						elseif rngkey == 28 then
+							Routine.wait(8, true)
+							
+							
+						end
 						Misc.unpause()
 						SaveData.totalLives = 5
 						smasdeathsystem.hasDied = true
