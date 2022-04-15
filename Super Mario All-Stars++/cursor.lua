@@ -103,7 +103,7 @@ function cursor.update()
   end
 
   -- Update the scene positions
-  if player2 and camera2 and Colliders.collide(Colliders.Box(camera2.renderX, camera2.renderY, camera2.width, camera2.height), screenpos) then
+  if player2 and player2.isValid and camera2 and Colliders.collide(Colliders.Box(camera2.renderX, camera2.renderY, camera2.width, camera2.height), screenpos) then
     cursor.sceneX = camera2.x + (cursor.x - camera2.renderX)
     cursor.sceneY = camera2.y + (cursor.y - camera2.renderY)
     cursor.onscene = true

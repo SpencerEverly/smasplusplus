@@ -2,6 +2,16 @@
 --By Spencer Everly
 --Here's the starting code that loads it all. How'd I do?
 
+--Total Stars:
+--SMB1 = 43
+--SMB2 = TBD
+--SMB3 = TBD
+--SMBLL = TBD
+--SMW = TBD
+--SMBS = TBD
+--Lava Lands = 5
+--True Ending = 1
+
 --Make sure we aren't running Beta 3 before we actually start...
 if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
 	Misc.dialog("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")

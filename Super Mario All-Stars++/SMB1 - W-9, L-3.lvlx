@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 1\: World 9-3";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 1\: World 9-3";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-191488;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Forest.spc|0\;g=2.5";BG:62;
@@ -763,6 +763,9 @@ ID:174;X:-199744;Y:-200092;D:-1;
 NPC_END
 DOORS
 IX:-197504;IY:-200624;OX:-179904;OY:-180032;DT:0;ID:1;OD:1;
+IX:-177872;IY:-180032;OX:-196448;OY:-200592;DT:0;ID:1;OD:1;
+IX:-177840;IY:-180032;OX:-196448;OY:-200592;DT:0;ID:1;OD:1;
+OX:-179968;OY:-180096;DT:2;ID:1;OD:1;ET:1;
 DOORS_END
 LAYERS
 LR:"Default";
