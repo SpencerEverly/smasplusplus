@@ -82,7 +82,7 @@ function onlineBegin()
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Welcome to the world of online multiplayer.<page>This is the place to host and connect to other 2 player sessions, and experience the game like never before!<page>Please note that this place is under testing, and things won't be done as of yet.<page>When you see an loading icon, it is connecting to the Internet. Please don't close the game during that sequence.<page>With that being said, welcome to Online Multiplayer.<question StartConnecting>", pauses = false, updatesInPause = true})
 	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 		Audio.MusicChange(0, 0)
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Whoops! It looks like you're using the original LunaLua. Please use the SEE Mod to make online multiplayer work.<question QuitToMenuError>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>Whoops! It looks like you're using the original LunaLua. Please use the Online Mod to make online multiplayer work. You can get it here: https://github.com/SpencerEverly/smbx2-onlinemod<question QuitToMenuError>", pauses = false, updatesInPause = true})
 	end
 end
 	
