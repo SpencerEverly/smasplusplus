@@ -1,8 +1,6 @@
---[[
-Things to fix:
-- Prevent CLimbing sound effect.
-- Custom hud that shows power-ups you have.
-]]
+--Things to fix:
+--1. Implement the rest of the Powerups, like ones beyond being Big Juni
+--That's pretty much it, idk what else
 
 --LOCALS
 
@@ -53,7 +51,7 @@ function costume.onInit(p)
 	registerEvent(costume, "onTick")
 	Defines.player_runspeed = 2.2
 	Defines.player_walkspeed = 2
-	Defines.jumpheight = 12
+	Defines.jumpheight = 15
 	Defines.jumpheight_bounce = 13
 	Audio.sounds[1].muted = true
 	Audio.sounds[71].muted = true
@@ -102,12 +100,12 @@ function costume.onTick()
 		end
 		
 		--change player BIG
-		if player.powerup ~= PLAYER_BIG and player:mem(0x122, FIELD_WORD) == 0 then
-			player.powerup = PLAYER_BIG
-		end
-		if player.powerup >= 3 then
-			player:mem(0x16, FIELD_WORD, 3)
-		end
+		--if player.powerup ~= PLAYER_BIG and player:mem(0x122, FIELD_WORD) == 0 then
+			--player.powerup = PLAYER_BIG
+		--end
+		--if player.powerup >= 3 then
+			--player:mem(0x16, FIELD_WORD, 3)
+		--end
 		
 		
 		--VERTICAL MOVEMENT.
@@ -131,7 +129,7 @@ function costume.onTick()
 			Defines.jumpheight = 17
 			Defines.jumpheight_bounce = 18
 		else 
-			Defines.jumpheight = 9.2
+			Defines.jumpheight = 12.2
 			Defines.jumpheight_bounce = 10.2
 		end
 		
