@@ -41,6 +41,7 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 	registerEvent(smasdeathsystem, "onTick")
 	registerEvent(smasdeathsystem, "onPlayerKill")
 	registerEvent(smasdeathsystem, "onPostNPCKill")
+	registerEvent(smasdeathsystem, "onPostBlockHit")
 	
 	ready = true
 end
@@ -48,10 +49,18 @@ end
 local gameoveractivate = false
 local gameovershow = false
 
-function smasdeathsystem.onPostNPCKill()
+function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
+	if block.contentID == 1000 then
+		SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
+	elseif block.contentID <= 99 and block.contentID >= 1 then
+		SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+	end
+end
+
+function smasdeathsystem.onPostNPCKill(npc, harmtype) --This will add coins to the classic counter.
 	local coins = table.map{10,33,88,103,258,528}
 	if coins[npc.id] then
-		SaveData.totalcoins = SaveData.totalcoins + 1
+		SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
 	end
 end
 
@@ -244,8 +253,8 @@ function smasdeathsystem.onTick()
 		if mem(0x00B2C5AC, FIELD_FLOAT) <= 1 then
 			mem(0x00B2C5AC, FIELD_FLOAT, 1)
 		end
-		if SaveData.totalcoins >= 100 then
-			SaveData.totalcoins = 0
+		if SaveData.totalCoinsClassic  > 99 then
+			SaveData.totalCoinsClassic  = 0
 			playSound(15)
 			SaveData.totalLives = SaveData.totalLives + 1
 		end

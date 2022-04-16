@@ -235,4 +235,12 @@ function manageStars(arg1, arg2, clearcount) --arg1 = Number of stars, arg2 = To
 	end
 end
 
+function getEpisodeFilename() --Thanks KBM_Quine!
+	if not Misc.inEditor then
+		return mem(mem(0x00B250FC, FIELD_DWORD)+(mem(0x00B2C628, FIELD_WORD)-1)*0x30+0x08, FIELD_STRING)
+	else
+		return "Editor Mode"
+	end
+end
+
 return smasfunctions

@@ -340,6 +340,9 @@ end
 local stardoor = Graphics.loadImageResolved("starlock.png")
 local cameratimer = 10
 local cameratimer2 = 10
+local startGif = false
+local endGif = true
+local gifIsRecording = false
 
 function onDraw()
 	local warps = Warp.get()
@@ -348,18 +351,46 @@ function onDraw()
 			Graphics.drawImageToSceneWP(stardoor, v.entranceX + 0.5 * v.entranceWidth - 12, v.entranceY - 20, -40)
         end
     end
-	--Text.print(cameratimer, 100, 100)
+	if noItemSound then
+		Audio.sounds[12].muted = true
+		cameratimer = cameratimer - 1
+		startGif = false
+		endGif = true
+		if cameratimer <= 0 then
+			cameratimer = 10
+			Audio.sounds[12].muted = false
+			noItemSound = false
+		end
+	end
+	if noSoundGif then
+		Audio.sounds[12].muted = true
+		Audio.sounds[24].muted = true
+		cameratimer = cameratimer - 1
+		startGif = false
+		endGif = true
+		gifIsRecording = true
+		if cameratimer <= 0 then
+			cameratimer = 10
+			Audio.sounds[12].muted = false
+			Audio.sounds[24].muted = false
+			noItemSoundGif = false
+		end
+	end
+	if gifIsRecording then
+		
+	end
 end
 
 local startGif = false
 
-function onKeyboardPress(k)
+function onKeyboardPressDirect(k)
 	if k == VK_F11 then
+		Audio.sounds[12].muted = true
 		Audio.sounds[24].muted = true
-		noSpringSound = true
-		if startGif then
+		noSoundGif = true
+		if not gifIsRecording then
 			playSound("gif-start.ogg")
-		elseif not startGif then
+		elseif gifIsRecording then
 			playSound("gif-end.ogg")
 		end
 	end
@@ -371,26 +402,6 @@ function onKeyboardPress(k)
 end
 
 function onTick() --This will prevent split screen, again (Just in case)
-	if noItemSound then
-		Audio.sounds[12].muted = true
-		cameratimer = cameratimer - 1
-		startGif = false
-		if cameratimer <= 0 then
-			cameratimer = 10
-			Audio.sounds[12].muted = false
-			noItemSound = false
-		end
-	end
-	if noSpringSound then
-		Audio.sounds[24].muted = true
-		startGif = true
-		cameratimer2 = cameratimer2 - 1
-		if cameratimer2 <= 0 then
-			cameratimer2 = 10
-			Audio.sounds[24].muted = false
-			noSpringSound = false
-		end
-	end
 	mem(0x00B25130,FIELD_WORD, 2)
 	if table.icontains(GameData.friendlyplaces,Level.filename()) == true then
 		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub

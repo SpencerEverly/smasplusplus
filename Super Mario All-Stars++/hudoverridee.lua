@@ -521,7 +521,7 @@ function HUDOverride.drawHUDLives(thisPlayer, priority)
 end
 
 function HUDOverride.drawHUDCoins(thisPlayer, priority)
-	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), mem(0x00B2C5A8,FIELD_WORD), priority);
+	drawCounter(0, {width = 800}, thisPlayer, HUDOverride.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.totalCoinsClassic, priority);
 end
 
 function HUDOverride.drawHUDStars(thisPlayer, priority)
@@ -646,7 +646,11 @@ end
 
 function HUDOverride.drawCoins(splitOffset, thisCam, thisPlayer, priority)
 	local s = GetSprite("coins", thisPlayer.character);
-	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(mem(0x00B2C5A8,FIELD_WORD)), priority);
+	if SaveData.disableX2char == false then
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(SaveData.totalCoinsClassic), priority);
+	elseif SaveData.disableX2char == true then
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(mem(0x00B2C5A8,FIELD_WORD)), priority);
+	end
 end
 
 
