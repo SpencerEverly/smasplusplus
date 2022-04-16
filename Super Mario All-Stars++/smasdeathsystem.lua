@@ -13,6 +13,9 @@ end
 if SaveData.totalLives == nil then --The total lives used the for the episode.
 	SaveData.totalLives = 5
 end
+if SaveData.totalCoinsClassic == nil then
+	SaveData.totalCoinsClassic = 0
+end
 
 if SaveData.thirteenmodelives == nil then --This is stuff specific for my episode. You can remove it if you want to
 	if SaveData.disableX2char == false then
@@ -37,12 +40,20 @@ function smasdeathsystem.onInitAPI() --This requires all the libraries that will
 	registerEvent(smasdeathsystem, "onExit")
 	registerEvent(smasdeathsystem, "onTick")
 	registerEvent(smasdeathsystem, "onPlayerKill")
+	registerEvent(smasdeathsystem, "onPostNPCKill")
 	
 	ready = true
 end
 
 local gameoveractivate = false
 local gameovershow = false
+
+function smasdeathsystem.onPostNPCKill()
+	local coins = table.map{10,33,88,103,258,528}
+	if coins[npc.id] then
+		SaveData.totalcoins = SaveData.totalcoins + 1
+	end
+end
 
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
 	if smasdeathsystem.activated == true then
@@ -232,6 +243,11 @@ function smasdeathsystem.onTick()
 	if SaveData.disableX2char == false then
 		if mem(0x00B2C5AC, FIELD_FLOAT) <= 1 then
 			mem(0x00B2C5AC, FIELD_FLOAT, 1)
+		end
+		if SaveData.totalcoins >= 100 then
+			SaveData.totalcoins = 0
+			playSound(15)
+			SaveData.totalLives = SaveData.totalLives + 1
 		end
 	end
 	if SaveData.disableX2char == true then
