@@ -132,7 +132,7 @@ function costume.onCleanup(p)
 end
 
 function costume.onTick()
-	if costume.abilitiesenabled == true then
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 	
 		-- Check direction faced
 		direction = player:mem(0x106,FIELD_WORD)
@@ -220,7 +220,7 @@ function costume.onTick()
 end
 
 function costume.onNPCKill(eventObj,killedNPC,killReason)
-	if costume.abilitiesenabled == true then
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if killReason ~= 9 and NPC.HITTABLE_MAP[killedNPC.id] then
 			local rinka = NPC.spawn(210,killedNPC.x + 0.5 * killedNPC.width,killedNPC.y + 0.5 * killedNPC.height,player.section, false, true)
 			rinka.friendly = true
@@ -242,7 +242,7 @@ function costume.onNPCKill(eventObj,killedNPC,killReason)
 end
 
 function costume.onInputUpdate()
-	if costume.abilitiesenabled == true then
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if player:mem(0x13E,FIELD_WORD) == 0 then
 			-- Regular rinka attack
 			if player.keys.altRun == KEYS_PRESSED and player:mem(0x26,FIELD_WORD) == 0 then
@@ -365,7 +365,7 @@ function costume.onDraw()
 		end
 	end
 
-	if costume.abilitiesenabled == true then
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		-- Rinka count
 		local rinkaDisplayOffset = 0
 		if numberOfRinkas > 9 then

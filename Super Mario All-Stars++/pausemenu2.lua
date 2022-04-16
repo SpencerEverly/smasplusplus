@@ -17,6 +17,12 @@ local exitFadeOut = 0
 if SaveData.deathquickoption == nil then
 	SaveData.deathquickoption = false
 end
+if SaveData.toggleCostumeAbilities == nil then
+	SaveData.toggleCostumeAbilities = true
+end
+if SaveData.toggleCostumeProfanity == nil then
+	SaveData.toggleCostumeProfanity = true
+end
 
 local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
 
@@ -160,13 +166,33 @@ end
 
 local function quickdeathoption()
 	if pauseplus.getSelectionValue("settings","Enable Quick Death") then
-		if SaveData.disablexchar == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+		if SaveData.disablex2char == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			SaveData.deathquickoption = true
 			playSound("quickdeath_enabled.ogg")
 		end
 	else
 		SaveData.deathquickoption = false
 		playSound("quickdeath_disabled.ogg")
+	end
+end
+
+local function toggleabilitiescost()
+	if pauseplus.getSelectionValue("costumeoptions","Enable/Disable Abilities") then
+		if SaveData.disablex2char == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+			SaveData.toggleCostumeAbilities = true
+		end
+	else
+		SaveData.toggleCostumeAbilities = false
+	end
+end
+
+local function toggleprofanecostume()
+	if pauseplus.getSelectionValue("costumeoptions","Enable/Disable Profanity") then
+		if SaveData.disablex2char == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+			SaveData.toggleCostumeProfanity = true
+		end
+	else
+		SaveData.toggleCostumeProfanity = false
 	end
 end
 
@@ -1065,10 +1091,12 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 
 	--Character Menu
 	if SaveData.disableX2char == false then
+		pauseplus.createSubmenu("costumeoptions",{headerText = "<size 1.5>Costume Specific Options</size>"})
 		pauseplus.createOption("charactermenu",{text = "Change Character (Left)",description = "Switch the player's character to anything of your choice!", action =  function() characterchangeleft() end})
 		pauseplus.createOption("charactermenu",{text = "Change Character (Right)",description = "Switch the player's character to anything of your choice!", action =  function() characterchange() end})
 		pauseplus.createOption("charactermenu",{text = "Change Costumes (Left)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeleft() end})
 		pauseplus.createOption("charactermenu",{text = "Change Costumes (Right)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeright() end})
+		pauseplus.createOption("charactermenu",{text = "Costume Specific Options",goToSubmenu = "costumeoptions",description = "Change settings regarding the costume that is currently being worn."})
 	end
 	if SaveData.disableX2char == true then
 		pauseplus.createOption("charactermenu",{text = "Change Character 1P (Left)", action =  function() characterchange13left() end})
@@ -1078,6 +1106,10 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)", action =  function() characterchange13_2p() end})
 		end
 	end
+	
+	--Costume Menu
+	pauseplus.createOption("costumeoptions",{text = "Enable/Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() toggleabilitiescost() end})
+	pauseplus.createOption("costumeoptions",{text = "Enable/Disable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() toggleprofanecostume() end})
 
 	--Teleportation Menu
 	if not isOverworld then

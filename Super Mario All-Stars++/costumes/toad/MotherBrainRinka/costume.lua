@@ -25,7 +25,7 @@ function costume.onCleanup(p)
 end
 
 function costume.onTick()
-	if costume.abilitiesenabled == true then
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if GameData.friendlyArea == false then
 			for _, v in pairs(NPC.get(player.powerup, player.section)) do
 				if colliders.collide(player, v) then

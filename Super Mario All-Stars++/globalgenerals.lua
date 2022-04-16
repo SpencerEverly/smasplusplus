@@ -722,7 +722,7 @@ function globalgenerals.onTick()
 	if currentCostume == "GA-CAILLOU" then
 		littleDialogue.characterNames[1] = "Caillou"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_goanimate.ogg")
-		starman.sfxFile = Misc.resolveSoundFile("costumes/mario/GA-Caillou/starman")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_goanimate")
 		starman.duration[996] = 1090
 		starman.duration[994] = 1090
 		warpTransition.doorclose = ("sound/door-close.ogg")
@@ -823,6 +823,14 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
+	if currentCostume == "GA-BORIS" then
+		littleDialogue.characterNames[2] = "Boris"
+		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_goanimate.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_goanimate")
+		starman.duration[996] = 1090
+		starman.duration[994] = 1090
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	

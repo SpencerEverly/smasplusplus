@@ -33,7 +33,7 @@ function costume.onInit(p)
 end
 
 function costume.onInputUpdate()
-	if costume.abilitesenabled == true then
+	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if player.keys.run == KEYS_DOWN then
 			plr:mem(0x168, FIELD_FLOAT, 10)
 		else

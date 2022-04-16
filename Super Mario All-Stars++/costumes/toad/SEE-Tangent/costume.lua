@@ -51,7 +51,7 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
 end
 
 function costume.onDraw()
-	if costume.abilitesenabled == true then
+	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if lunging then
 			plr.frame = 3
 		end
@@ -80,7 +80,7 @@ function costume.lungeattack()
 end
 
 function costume.onTick()
-	if costume.abilitesenabled == true then
+	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
 		local hitNPCs = Colliders.getColliding{a = player, b = hitNPCs, btype = Colliders.NPC}
 		if lunging then
 			plr.keys.left = false
@@ -116,7 +116,7 @@ function costume.onTick()
 end
 
 function costume.onPlayerHarm(e, p)
-	if costume.abilitesenabled == true then
+	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if lunging then
 			e.cancelled = true
 			return
@@ -125,7 +125,7 @@ function costume.onPlayerHarm(e, p)
 end
 
 function costume.onInputUpdate()
-	if costume.abilitesenabled == true then
+	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if player.keys.altRun == KEYS_PRESSED then
 			costume.lungeattack()
 		end

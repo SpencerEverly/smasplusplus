@@ -1,52 +1,115 @@
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
 local HUDOverride = require("hudoverridee")
+local rng = require("base/rng")
 
 local costume = {}
 
 local eventsRegistered = false
 local plr
+local borishp
+local hit = false
 
 function costume.onInit(p)
 	plr = p
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onDraw")
+	registerEvent(costume,"onPostPlayerHarm")
 	registerEvent(costume,"onPlayerKill")
-	registerEvent(costume,"onPostNPCHarm")
+	registerEvent(costume,"onPostNPCKill")
 	
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/stomped.ogg")
 	--Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-shrink.ogg")
 	--Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-grow.ogg")
-	--extrasounds.id[8]  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-died.ogg")
 	Audio.sounds[10].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-slide.ogg")
 	extrasounds.id[14]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/luigi/GA-Boris/coin.ogg"))
 	extrasounds.id[18]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/luigi/GA-Boris/fireball.ogg"))
 	Audio.sounds[21].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/dungeon-win.ogg")
-	--Audio.sounds[23].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/grab.ogg")
+	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/grab.ogg")
 	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/tail.ogg")
 	--Audio.sounds[34].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/racoon.ogg")
 	extrasounds.id[43] = Audio.SfxOpen("costumes/luigi/GA-Boris/fireworks.ogg")
-	--Audio.sounds[46].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/door.ogg")
+	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/door.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/got-star.ogg")
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/player-died2.ogg")
-	--Audio.sounds[73].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/grab2.ogg")
-	--Audio.sounds[75].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/smb2-throw.ogg")
+	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/grab2.ogg")
+	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/smb2-throw.ogg")
 	
 	costume.abilitiesenabled = true
 	HUDOverride.visible.itembox = false
+	borishp = 3
+end
+
+function costume.onPostNPCKill(npc, harmType)
+	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
+	if SaveData.toggleCostumeProfanity then
+		local rngkey = rng.randomInt(1,6)
+		if items[npc.id] and Colliders.collide(plr, npc) then
+			playSound("luigi/GA-Boris/voices/items/"..rngkey..".ogg", 1, 1, 80)
+		end
+	else
+		local rngkey = rng.randomInt(3,6)
+		if items[npc.id] and Colliders.collide(plr, npc) then
+			playSound("luigi/GA-Boris/voices/items/"..rngkey..".ogg", 1, 1, 80)
+		end
+	end
+	if items[npc.id] and Colliders.collide(plr, npc) then
+		borishp = borishp + 1
+		if borishp > 3 then
+			borishp = 3
+		end
+	end
 end
 
 function costume.onTick(p)
 	local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
 	local isShooting = (plr:mem(0x118,FIELD_FLOAT) >= 100 and plr:mem(0x118,FIELD_FLOAT) <= 118 and shootingPowerups[player.powerup])
-	if costume.abilitiesenabled == true then
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+		--Health system
 		if plr.powerup <= 1 then
 			plr.powerup = 2
 		end
+		
+		
+		
+		--Switching frames when shooting fireballs as Boris
 		if isShooting then
 			plr:setFrame(27)
+		end
+		
+		
+		
+		--Boris HP Hover System
+		local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
+		if borishp <= 0 then
+			
+		end
+		if borishp == 1 then
+			Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+		end
+		if borishp == 2 then
+			Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+			Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
+		end
+		if borishp >= 3 then
+			Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
+			Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
+			Graphics.drawImageWP(heartfull3, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+		end
+	end
+end
+
+function costume.onPostPlayerHarm()
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+		hit = true
+		if hit then
+			borishp = borishp - 1
+		end
+		if borishp < 1 then
+			player:kill()
 		end
 	end
 end
