@@ -19,14 +19,13 @@ local image = Graphics.loadImage("loadscreen.png")
 local blackscreen = Graphics.loadImage("black-screen.png")
 local loadicon = Graphics.loadImage("loadscreen-logo.png")
 local datetimeunavailable = Graphics.loadImage("datetimenotavailable.png")
-local fullscreenborder = Graphics.loadImage("loadscreen-fullscreen-border.png")
 
 local frame = 0
 local frame2 = 0
 local timer = 0
 local speed = 0
 
-local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png", "didyouknow12.png", "didyouknow13.png", "didyouknow14.png", "didyouknow15.png", "didyouknow16.png", "didyouknow17.png", "didyouknow18.png", "didyouknow19.png", "didyouknow20.png", "didyouknow21.png"}
+local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png", "didyouknow12.png", "didyouknow13.png", "didyouknow14.png", "didyouknow15.png", "didyouknow16.png", "didyouknow17.png", "didyouknow18.png", "didyouknow19.png", "didyouknow20.png", "didyouknow21.png", "didyouknow22.png"}
 local selecter = rng.randomInt(1,#didyouknow)
 local knowledge = Graphics.loadImage(episodePath.."graphics/didyouknow/"..didyouknow[selecter]);
 
@@ -67,14 +66,13 @@ function onDraw()
     local count = #widths
 	
 	speed = speed - 1
-	Graphics.drawImage(loadicon, 672, 460, 1, frame2 * 64, 128, 64, opacity)
+	Graphics.drawImage(loadicon, 672, 535, 1, frame2 * 64, 128, 64, opacity)
 	frame = math.floor(timer/speed)%7
 	timer = timer + 1	
 	frame2 = math.floor(timer/8)%7
 	
-	Graphics.drawImage(knowledge, 0, -75, 1, 0, 800, 600, opacity)
-	Graphics.drawImage(fullscreenborder, 0, 0, 1, 0, 800, 600, opacity)
-	Graphics.drawImage(datetimeunavailable, 0, 73, 1, 0, 800, 600, opacity)
+	Graphics.drawImage(knowledge, 0, 0, 1, 0, 800, 600, opacity)
+	Graphics.drawImage(datetimeunavailable, 0, 0, 1, 0, 800, 600, opacity)
 
     for index,width in ipairs(widths) do
         letterData[index] = letterData[index] or {offset = 0,speed = 0}

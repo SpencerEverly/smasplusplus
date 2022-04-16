@@ -1033,26 +1033,40 @@ local function ExitGame1()
 	Misc.exitEngine()
 end
 
+local function SaveErasePart1(name)
+    name = Misc.resolveFile(name)
+    if name == nil then
+        return
+    end
+
+    local f = io.open(name,"w")
+    if f == nil then
+        return
+    end
+
+    f:write('64\r3\r0\r0\r0\r1\r0\r0\r0\r0\r1\r0\r0\r0\r0\r1\r0\r0\r0\r0\r1\r0\r0\r0\r0\r1\r0\r0\r0\r0\r5\r#FALSE#\r"next"\r"next"\r"next"\r0')
+    f:close()
+end
+
+local function SaveErasePart2(name)
+    name = Misc.resolveFile(name)
+    if name == nil then
+        return
+    end
+
+    local f = io.open(name,"w")
+    if f == nil then
+        return
+    end
+
+    f:write('{ \r--[1]-- \r{ \r   ["__costumes"]={2}, \r   ["__launcher"]={3}, \r   ["_basegame"]={4} \r}, \r--[2]-- \r{ \r \r}, \r--[3]-- \r{ \r \r}, \r--[4]-- \r{ \r   ["bigSwitch"]={5}, \r   ["_characterdata"]={6}, \r   ["starcoin"]={7}, \r   ["hud"]={8}, \r   ["starcoinCounter"]=0 \r}, \r--[5]-- \r{ \r \r}, \r--[6]-- \r{ \r   ["8"]={9}, \r   ["10"]={10}, \r   ["9"]={11}, \r   ["6"]={12}, \r   ["16"]={13}, \r   ["11"]={14}, \r   ["12"]={15}, \r   ["7"]={16}, \r   ["15"]={17}, \r   ["13"]={18}, \r   ["14"]={19} \r}, \r--[7]-- \r{ \r \r}, \r--[8]-- \r{ \r   ["score"]=0 \r}, \r--[9]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[10]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[11]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[12]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[13]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[14]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[15]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[16]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[17]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[18]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[19]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[20]-- \r{ \r   ["maxID"]=0, \r   ["alive"]={21} \r}, \r--[21]-- \r{ \r \r} \r}')
+    f:close()
+end
+
 local function SaveEraseStart()
-	--Start by flushing any SaveData/GameData that's still available
-	SaveData.clear()
-	GameData.clear()
-	SaveData.flush()
-	--Then start opening and overwriting SMAS++'s save files...
-	local savepart1 = io.open("worlds/Super Mario All-Stars++/save"..Misc.saveSlot()..".sav", "w+")
-	local savepart2 = io.open("worlds/Super Mario All-Stars++/save"..Misc.saveSlot().."-ext.dat", "w+")
-	--...Along with Where SMB Attacks.
-	local savepart3 = io.open("worlds/Where SMB Attacks/save"..Misc.saveSlot()..".sav", "w+")
-	local savepart4 = io.open("worlds/Where SMB Attacks/save"..Misc.saveSlot().."-ext.dat", "w+")
-	--From there, write nothing to the files.
-	io.output(savepart1)
-	io.write("")
-	io.output(savepart2)
-	io.write("")
-	io.output(savepart3)
-	io.write("")
-	io.output(savepart4)
-	io.write("")
+	--Start opening SMAS++'s save files. From there, write default data to the files.
+	SaveErasePart1("save"..Misc.saveSlot()..".sav")
+	SaveErasePart2("save"..Misc.saveSlot().."-ext.dat")
 	--Then make the message telling that it's erased.
 	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
 end
