@@ -168,12 +168,22 @@ function keyboard.onKeyboardPressDirect(vk, repeated, char)
 	
 	if (vk == VK_NEXT) then
 		if (not repeated) then
-			playSound("console/console_resetfont.ogg")
-			GameData.toggleoffinventory = false
-			GameData.toggleoffkeys = false
-			keyboard.active = false
-			GameData.enablekeyboard = false
-			GameData.reopenmenu = true
+			if GameData.playernameenterfirstboot == false then
+				playSound("console/console_resetfont.ogg")
+				GameData.toggleoffinventory = false
+				GameData.toggleoffkeys = false
+				keyboard.active = false
+				GameData.enablekeyboard = false
+				GameData.reopenmenu = true
+			elseif GameData.playernameenterfirstboot == true or GameData.playernameenterfirstboot == nil then
+				playSound("console/console_resetfont.ogg")
+				keyboard.active = false
+				GameData.enablekeyboard = false
+				GameData.firstbootfive = true
+				GameData.toggleoffkeys = false
+				GameData.toggleoffinventory = false
+				GameData.playernameenter = false
+			end
 		end
 	end
 	
@@ -224,7 +234,7 @@ end
 do
 	local gtltrepllace = {["<"] = "<lt>", [">"] = "<gt>", ["\n"] = "<br>"}
 	local msgfont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus.ini")
-	local doprint = {font=textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus.ini"), color=Color.red, plaintext=true}
+	local doprint = {font=textplus.loadFont("littleDialogue/font/hardcoded-45-3-textplus.ini"), color=Color.red, plaintext=true}
 	doprint.xscale = 1
 	doprint.yscale = 1
 		
@@ -251,8 +261,11 @@ do
 		if not keyboard.active then
 			return
 		end
-		
-		textplus.print{x = 60, y = 200, text = "To cancel, press the PAGE DOWN key.", priority = -1, font = msgfont}
+		if GameData.playernameenterfirstboot == false or GameData.playernameenterfirstboot == nil then
+			textplus.print{x = 60, y = 200, text = "To cancel, press the PAGE DOWN key.", priority = -1, font = msgfont}
+		elseif GameData.playernameenterfirstboot == true then
+			textplus.print{x = 65, y = 200, text = "To skip, press the PAGE DOWN key.", priority = -1, font = msgfont}
+		end
 		
 		local buffer
 		if find(keyboard.buffer, "\n") then

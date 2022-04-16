@@ -39,6 +39,9 @@ local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
 local extrasounds = require("extrasounds")
 
+--Next up is some new functions, for simplifying the functions:
+local smasfunctions = require("smasfunctions")
+
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
@@ -85,142 +88,6 @@ local function loadSaveSlot(slot)
 		return {}
 	end
 	return {}
-end
-
---Next up is some new resolveFile requiring functions, for simplifying the functions:
-
-function loadFile(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
-	return Misc.resolveFile(name)
-		or Misc.resolveFile("_OST/" .. name)
-		or Misc.resolveFile("_OST/_Sound Effects/"..name)
-		or Misc.resolveFile("costumes/" .. name)
-		or Misc.resolveFile("scripts/" .. name)
-		or Misc.resolveFile("graphics/" .. name)
-		or Misc.resolveFile("sound/" .. name)
-		or Misc.resolveFile("___MainUserDirectory/" .. name)
-end
-
-function loadImg(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
-	local file = loadFile(name) or loadFile(name..".png")
-	if file then
-		return Graphics.loadImageResolved(name)
-			or Graphics.loadImageResolved("_OST/" .. name)
-			or Graphics.loadImageResolved("costumes/" .. name)
-			or Graphics.loadImageResolved("scripts/" .. name)
-			or Graphics.loadImageResolved("graphics/" .. name)
-			or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
-	end
-	return nil
-end
-
---drawImg(ImageName, x coordinate, y coordinate, true/false if it's with the priority, true/false if using scene coordinates, priority, opacity)
-function drawImg(name, x, y, withPriority, sceneCoords, arg6, arg7) --Drawing graphics got a lot better.
-	local fileImage = loadImg(name)
-	
-	if priority == nil then
-		local priority = -1
-	end
-	if opacity == nil then
-		local opacity = 1
-	end
-	
-	if x == nil or y == nil then
-		error("You didn't specify the image with any coordinates. Try specifiying coordinates and try again.")
-	end
-	if withPriority == nil or sceneCoords == nil then
-		error("You didn't specify if the image is with a priority, or with scene coordinates. Try setting the booleans and try again.")
-	end
-	
-	if (arg6 ~= nil) and (arg7 ~= nil) then
-		if (withPriority) then
-			priority = arg6
-		end
-		opacity = arg7
-	elseif (arg7 ~= nil) and ((not withPriority) or (arg6 ~= nil)) then
-		opacity = arg6
-	elseif (withPriority) then
-		priority = arg6
-	else
-	end
-	if (withPriority) and (sceneCoords) then
-		Graphics.drawImageToSceneWP(fileImage, x, y, true, true, arg7, arg6)
-	elseif (withPriority) and (not sceneCoords) then
-		Graphics.drawImageWP(fileImage, x, y, true, false, arg7, arg6)
-	elseif (not withPriority) and (sceneCoords) then
-		Graphics.drawImageToScene(fileImage, x, y, false, true, arg6)
-	elseif (not withPriority) and (not sceneCoords) then
-		Graphics.drawImage(fileImage, x, y, false, false, arg6)
-	end
-end
-
-function openSound(name) --Opening SFXs
-	SFX.open(name)
-end
-
-function playSound(name) --Playing SFXs
-	if name == nil then
-		error("That sound doesn't exist.")
-	end
-	if unexpected_condition then error("That sound doesn't exist.") end
-	
-	if extrasounds.id[name] then
-		SFX.play(extrasounds.id[name])
-	elseif name then
-		loadSound(name)
-	end
-end
-
-function loadSound(name) --Opening external sounds and playing them. Also can use playSound alternatively
-	local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-	SFX.play(file) --Play it afterward, since there isn't anywhere else I can do this
-end
-
-function changeMusic(name, sectionid) --Music changing is now a LOT easier
-	if sectionid == -1 then --If -1, all section music will change to the specified song
-		for i = 0,20 do
-			Audio.MusicChange(i, name)
-		end
-	elseif sectionid >= 0 or sectionid <= 20 then
-		Audio.MusicChange(sectionid, name)
-	end
-end
-
-function muteMusic(sectionid) --Mute all section music, or just mute a specific section
-	if sectionid == -1 then --If -1, all section music will be muted
-		for i = 0,20 do
-			musiclist = {Section(i).music}
-			GameData.levelMusicTemporary[i] = Section(i).music
-			Audio.MusicChange(i, 0)
-		end
-	elseif sectionid >= 0 or sectionid <= 20 then
-		musiclist = {Section(sectionid).music}
-		GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
-		Audio.MusicChange(sectionid, 0)
-	end
-end
-
-function restoreMusic(sectionid) --Restore all section music, or just restore a specific section
-	if sectionid == -1 then --If -1, all section music will be restored
-		for i = 0,20 do
-			songname = GameData.levelMusicTemporary[i]
-			Section(i).music = songname
-		end
-	elseif sectionid >= 0 or sectionid <= 20 then
-		songname = GameData.levelMusicTemporary[sectionid]
-		Section(sectionid).music = songname
-	end
-end
-
-function refreshMusic(sectionid) --Refresh the music that's currently playing by updating the music table
-	if sectionid == -1 then --If -1, all section music will be counted
-		for i = 0,20 do
-			musiclist = {Section(i).music}
-			GameData.levelMusicTemporary[i] = Section(i).music
-		end
-	elseif sectionid >= 0 or sectionid <= 20 then
-		musiclist = {Section(sectionid).music}
-		GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
-	end
 end
 
 --Now we get to the Hub date detection stuff. First, we start with Easter...
@@ -387,6 +254,14 @@ function onLoad()
 	end
 end
 
+function onLoop() --I'm sorry for using depercated crap, this is used specifically for stopping the loading sound when erroring
+	if unexpected_condition then
+		if fadetolevel == true then
+			loadingSoundObject:Stop()
+		end
+	end
+end
+
 function warpDoorBegin()
 	local warps = Warp.get()
 	for _, warp in ipairs(warps) do
@@ -464,6 +339,8 @@ function yesterdayget()
 end
 
 local stardoor = Graphics.loadImageResolved("starlock.png")
+local cameratimer = 10
+local cameratimer2 = 10
 
 function onDraw()
 	local warps = Warp.get()
@@ -472,9 +349,49 @@ function onDraw()
 			Graphics.drawImageToSceneWP(stardoor, v.entranceX + 0.5 * v.entranceWidth - 12, v.entranceY - 20, -40)
         end
     end
+	--Text.print(cameratimer, 100, 100)
+end
+
+local startGif = false
+
+function onKeyboardPress(k)
+	if k == VK_F11 then
+		Audio.sounds[24].muted = true
+		noSpringSound = true
+		if startGif then
+			playSound("gif-start.ogg")
+		elseif not startGif then
+			playSound("gif-end.ogg")
+		end
+	end
+	if k == VK_F12 then
+		Audio.sounds[12].muted = true
+		noItemSound = true
+		playSound("snapshot.ogg")
+	end
 end
 
 function onTick() --This will prevent split screen, again (Just in case)
+	if noItemSound then
+		Audio.sounds[12].muted = true
+		cameratimer = cameratimer - 1
+		startGif = false
+		if cameratimer <= 0 then
+			cameratimer = 10
+			Audio.sounds[12].muted = false
+			noItemSound = false
+		end
+	end
+	if noSpringSound then
+		Audio.sounds[24].muted = true
+		startGif = true
+		cameratimer2 = cameratimer2 - 1
+		if cameratimer2 <= 0 then
+			cameratimer2 = 10
+			Audio.sounds[24].muted = false
+			noSpringSound = false
+		end
+	end
 	mem(0x00B25130,FIELD_WORD, 2)
 	if table.icontains(GameData.friendlyplaces,Level.filename()) == true then
 		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
