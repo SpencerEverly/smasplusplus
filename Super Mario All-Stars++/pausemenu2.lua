@@ -748,9 +748,13 @@ function pausemenu2.onDraw()
 		if not isOverworld then
 			textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
 			if SaveData.playerPfp == nil then
-				sprite.draw{texture = loadImg("___MainUserDirectory/pfp/pfp.png"), width = 70, height = 70, x = 40, y = 35, priority = -1}
+				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 70, height = 70, x = 40, y = 35, priority = -1}
 			else
 				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 40, y = 35, priority = -1}
+				if Misc.resolveGraphicsFile(SaveData.playerPfp) == nil then
+					SaveData.playerPfp = "pfp/pfp.png"
+					sprite.draw{texture = loadImg(SaveData.playerPfp), width = 40, height = 40, x = 10, y = 555, priority = -1}
+				end
 			end
 			if SaveData.playerName == nil then
 				textplus.print{x = 125, y = 60, text = "<color rainbow>Player</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}

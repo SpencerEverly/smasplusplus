@@ -619,7 +619,7 @@ local function ResolutionChangeScale3()
 end
 
 local function credits1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>For information on everything that made this episode possible, it wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder, the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>For information on everything that made this episode possible,<page>It wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder,<page>the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
 local function X2Char()
@@ -1565,9 +1565,13 @@ function bootmenu.onDraw()
 		
 		if pfpimage then
 			if SaveData.playerPfp == nil then
-				sprite.draw{texture = loadImg("___MainUserDirectory/pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
+				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
 			else
 				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -1}
+				if Misc.resolveGraphicsFile(SaveData.playerPfp) == nil then
+					SaveData.playerPfp = "pfp/pfp.png"
+					sprite.draw{texture = loadImg(SaveData.playerPfp), width = 40, height = 40, x = 10, y = 555, priority = -1}
+				end
 			end
 		end
 		if playernamebyImg then
