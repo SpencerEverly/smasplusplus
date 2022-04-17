@@ -168,6 +168,9 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[18].muted = true --fireball.ogg
 		Audio.sounds[43].muted = true --fireworks.ogg
 		Audio.sounds[59].muted = true --dragon-coin.ogg
+		for i = 1,91 do
+			Audio.sounds[i].muted = true
+		end
 		if (player:mem(0x55, FIELD_WORD) == 255) or (player:mem(0x55, FIELD_WORD) == 0) then --This is code related to spinjump fireball/iceball shooting. It's not on the docs, I found this memory address myself
 			if player:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
 				spinballcounter = spinballcounter - 1
@@ -201,6 +204,12 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 					SFX.play(extrasounds.id[98], 1, 1, 70)
 				end
 			end
+			for index,explosion in ipairs(Animation.get(69)) do --Score values!
+				SFX.play(extrasounds.id[104], 1, 1, 70)
+			end
+			for index,explosion in ipairs(Animation.get(71)) do --Score values!
+				SFX.play(extrasounds.id[43], 1, 1, 70)
+			end
 		end
 	end
 	if extrasounds.active == false then --Unmute when not active
@@ -216,10 +225,8 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 end
 
 function extrasounds.onPostExplosion()
-	if effect.id == 71 then
-		playSound(43)
-	elseif effect.id == 69 then
-		playSound(104)
+	if extrasounds.active == true then
+		
 	end
 end
 
@@ -270,17 +277,6 @@ end
 
 function extrasounds.onPlayerKill()
 	playSound(8)
-end
-
-function extrasounds.onPostExplosion(effect)
-	if extrasounds.active == true then
-		if effect.id == 69 then
-			playSound(104)
-		end
-		if effect.id == 71 then
-			playSound(43)
-		end
-	end
 end
 
 function extrasounds.onInputUpdate() --Button pressing for such commands

@@ -250,4 +250,7 @@ function getEpisodeFilename() --Thanks KBM_Quine!
 	end
 end
 
+function isExtraSoundsActive()
+	return extrasounds.active
+end
 return smasfunctions

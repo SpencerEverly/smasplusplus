@@ -80,7 +80,7 @@ function malcmusic.onStart()
 			if malcmusic.holiday == true then
 				SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
 				triggerEvent("Easter")
-				for i = 3,7 do
+				for i = 15,19 do
 					if os.date("*t").hour == i then
 						triggerEvent("EasterHunt")
 					end

@@ -907,6 +907,9 @@ local function warpzonehub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(20496, 19520, bottomCenterAligned)
+	if Player(2) and Player(2).isValid then
+		Player(2):teleport(20454, 19520, bottomCenterAligned)
+	end
 end
 
 local function touristhub()
@@ -914,6 +917,9 @@ local function touristhub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(-119968, -120128, bottomCenterAligned)
+	if Player(2) and Player(2).isValid then
+		Player(2):teleport(-120010, -120128, bottomCenterAligned)
+	end
 end
 
 local function starthub()
@@ -921,6 +927,9 @@ local function starthub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(-200608, -200128, bottomCenterAligned)
+	if Player(2) and Player(2).isValid then
+		Player(2):teleport(-200650, -200128, bottomCenterAligned)
+	end
 end
 
 local function switchhub()
@@ -928,6 +937,9 @@ local function switchhub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(40176, 39876, bottomCenterAligned)
+	if Player(2) and Player(2).isValid then
+		Player(2):teleport(40134, 39876, bottomCenterAligned)
+	end
 end
 
 local function shophub()
@@ -935,6 +947,9 @@ local function shophub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(80144, 79868, bottomCenterAligned)
+	if Player(2) and Player(2).isValid then
+		Player(2):teleport(80102, 79868, bottomCenterAligned)
+	end
 end
 
 local function hubteleportlevel()
