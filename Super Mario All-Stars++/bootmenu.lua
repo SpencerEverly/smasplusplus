@@ -23,6 +23,8 @@ local player2 = Player(2)
 local ready = false
 
 local fontthree = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+local menufont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
+local menufontwebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-website-textplus-1x.ini")
 
 runPressedState = false
 
@@ -47,6 +49,7 @@ local m = RNG.randomInt(1,56-1)
 
 local versionactive = true
 local logo = true
+local website = true
 local pressjumpwords = true
 local active = false
 local active3 = false
@@ -83,37 +86,6 @@ local day = os.date("%d")
 local month = os.date("%m")
 
 local exacttime = os.date("%X")
-
-littleDialogue.registerStyle("smbx13",{
-	textXScale = 1,
-	textYScale = 1,
-	borderSize = 36,
-	textMaxWidth = 500,
-	speakerNameGap = 6,
-	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
-	speakerNameYScale = 1.2,
-	
-	openSpeed = 5,
-	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
-	answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
-	borderSize = 8,
-	
-	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
-	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
-	forcedPosY = 150,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
-	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
-	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
-
-	windowingOpeningEffectEnabled = false,
-
-	typewriterEnabled = false,
-	showTextWhileOpening = true,
-
-	closeSoundEnabled = false,
-	continueArrowEnabled = false,
-	scrollArrowEnabled   = false,
-	selectorImageEnabled = true,
-})
 
 local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl"}
 local selecter = rng.randomInt(1,#battlelevelsrng)
@@ -575,7 +547,6 @@ local function bootDialogue()
 	bootmenu.menuactive = true
 	active = true
 	active4 = false
-	logo = false
 	pressjumpwords = false
 	playernamebyImg = false
 	pfpimage = false
@@ -587,23 +558,23 @@ local function menuDialogue()
 end
 
 local function gamebootDialogue()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.9><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
 end
 
 local function battleModeDialogue()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.2><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
 local function optionsMenu1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
 end
 
 local function themeMenu1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
 end
 
 local function ResolutionSelect1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8><question ResolutionSelect>", speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question ResolutionSelect>", speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
 end
 
 
@@ -613,11 +584,11 @@ local function classicBattleSelect()
 end
 
 local function ChangeName1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>To change your name in the game, please select Begin to get started (Keyboard only).<question StartNameChange>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>To change your name in the game, please select Begin to get started (Keyboard only).<question StartNameChange>", pauses = false, updatesInPause = true})
 end
 
 local function ChangePFP1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>To change your profile picture in the game, please select Begin to get started (Keyboard only).<question StartPFPChange>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>To change your profile picture in the game, please select Begin to get started (Keyboard only).<question StartPFPChange>", pauses = false, updatesInPause = true})
 end
 
 local function ResolutionChange1()
@@ -644,7 +615,7 @@ local function ResolutionChangeScale3()
 		playSound("letterbox-enable.ogg")
 		SaveData.letterbox = true
 	end
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Border toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Scaling toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
 end
 
 local function credits1()
@@ -665,7 +636,7 @@ local function X2Char()
 end
 
 local function InputConfig1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>To begin configuring the inputs of the game, please select Begin to get started (Controller only).<question StartInputs>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>To begin configuring the inputs of the game, please select Begin to get started (Controller only).<question StartInputs>", pauses = false, updatesInPause = true})
 end
 
 local function startConfigurator()
@@ -697,15 +668,15 @@ local function startSaveSwitcher1()
 end
 
 local function PFPinfo1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.5>Your profile picture can be used when you launch Online Multiplayer, or to see who is running the game at this session.<page>Your profile picture will also be used during the story, along with your name.<page>To specify the profile picture using the keyboard, please type up the path from '___MainUserDirectory' to the profile picture you are going to use.<page>'___MainUserDirectory' is a user modifiable directory that can be used for files you specify for the episode, such as a profile picture (PNG only).<page>Don't worry if you don't want to specify one, there's already a default profile picture for you already set up.<page>But if you want to go ahead and set one up, please specify to begin anytime on that menu.<page>With that out of the way, that's how you set up a profile picture for the episode!<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>Your profile picture can be used when you launch Online Multiplayer, or to see who is running the game at this session.<page>Your profile picture will also be used during the story, along with your name.<page>To specify the profile picture using the keyboard, please type up the path from '___MainUserDirectory' to the profile picture you are going to use.<page>'___MainUserDirectory' is a user modifiable directory that can be used for files you specify for the episode, such as a profile picture (PNG only).<page>Don't worry if you don't want to specify one, there's already a default profile picture for you already set up.<page>But if you want to go ahead and set one up, please specify to begin anytime on that menu.<page>With that out of the way, that's how you set up a profile picture for the episode!<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 end
 
 local function X2DisableCheck1()
 	if Player.count() == 1 then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -0.75>Would you like to enable/disable SMBX 1.3 mode? If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored. (Costumes will reset, so be careful!)<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Would you like to enable/disable SMBX 1.3 mode?<page>If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored.<page>Costumes will reset, so be careful enabling this option!<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
 	end
 	if Player.count() == 2 then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -713,7 +684,7 @@ local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == true then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 player mode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -726,14 +697,14 @@ local function BattleModeDisEnable1()
 			littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? You already have 2 player mode enabled for this.<question BattleTwoPlayerCheckTwo>", pauses = false, updatesInPause = true})
 		end
 	elseif SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Unfortunately, you'll need to disable X2 characters to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to disable X2 characters to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function FramerateToggle1()
 	Cheats.trigger("framerate")
 	Defines.player_hasCheated = false
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function TwoPlayerCheck()
@@ -773,23 +744,23 @@ end
 
 local function ChangeChar1()
 	if SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>Who shall you change into? (X2 Characters Enabled)<question CharacterListX2>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change into?<question CharacterListX2>", pauses = false, updatesInPause = true})
 	end
 	if SaveData.disableX2char == true then
 		if Player.count() == 2 then
 			littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
 		elseif Player.count() == 1 then
-			littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
+			littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into?<question CharacterList1>", pauses = false, updatesInPause = true})
 		end
 	end
 end
 
 local function ChangeChar1P()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into? (X2 Characters Disabled)<question CharacterList1>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into?<question CharacterList1>", pauses = false, updatesInPause = true})
 end
 
 local function ChangeChar2P()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 2 into? (X2 Characters Disabled)<question CharacterList2>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 2 into?<question CharacterList2>", pauses = false, updatesInPause = true})
 end
 
 local function ChangedCharacter()
@@ -827,7 +798,6 @@ local function BootDialogueMusicReset()
 	bootmenu.menuactive = true
 	active = true
 	active4 = false
-	logo = false
 	pressjumpwords = false
 	stpatricksday = false
 	playernamebyImg = false
@@ -1347,8 +1317,8 @@ function bootmenu.onTick()
 			player:mem(0x140, FIELD_BOOL, 150) --Make the player invincible, literally
 		end
 		player.x = camera.x + 450 - (player.width / 2) --Force the player somewhere to prevent deaths
-		player.y = camera.y + 599 - (player.height / 2)
-		littleDialogue.defaultStyleName = "smbx13" --Change the text box to the SMBX 1.3 textbox format
+		player.y = camera.y - 1 - (player.height / 2)
+		littleDialogue.defaultStyleName = "bootmenudialog" --Change the text box to the SMBX 1.3 menu textbox format
 		if Player.count() == 1 then
 			twoplayercheck = active
 			twoplayercheckactive = not active
@@ -1687,10 +1657,14 @@ function bootmenu.onDraw()
 			Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-7}
 		end
 		if pressjumpwords then
-			Graphics.drawImageWP(pressstart, 150, 552, -4)
+			textplus.print{x=210, y=390, text = "Press Jump to Start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufont}
+			--Graphics.drawImageWP(pressstart, 150, 552, -4)
+		end
+		if website then
+			textplus.print{x=30, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufontwebsite}
 		end
 		if logo then
-			Graphics.drawImageWP(smaslogo, 176, 136, -4)
+			Graphics.drawImageWP(smaslogo, 176, 16, -4)
 		end
 		if exitscreen then
 			Graphics.drawScreen{color = Color.black, priority = 10}
@@ -1717,16 +1691,16 @@ function bootmenu.onDraw()
 			--nothing
 		end
 		if not active then
-			textplus.print{x=290, y=520, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red}
-			textplus.print{x=286, y=517, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow}
-			textplus.print{x=286, y=530, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red}
-			textplus.print{x=282, y=527, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow}
+			textplus.print{x=290, y=500, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red}
+			textplus.print{x=286, y=497, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow}
+			textplus.print{x=286, y=510, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red}
+			textplus.print{x=282, y=507, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow}
 		end
 		if active then
 			--nothing
 		end
 		if active3 then
-			textplus.print{x=160, y=580, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont}
+			textplus.print{x=160, y=520, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont}
 		end
 		if active4 then
 			textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
