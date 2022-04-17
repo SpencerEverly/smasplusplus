@@ -80,6 +80,11 @@ function malcmusic.onStart()
 			if malcmusic.holiday == true then
 				SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
 				triggerEvent("Easter")
+				for i = 3,7 do
+					if os.date("*t").hour == i then
+						triggerEvent("EasterHunt")
+					end
+				end
 			end
 		end
 		
@@ -2227,6 +2232,16 @@ function malcmusic.onTick()
 		
 		
 		--CHARACTER_LINK
+		if currentCostume == "1-ZELDA1-NES" and malcmusic.holiday == false then
+			Section(1).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=1.5"
+			Section(2).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=1.5"
+			Section(3).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=1.5"
+			Section(7).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=1.5"
+			Section(8).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|3;g=1.5"
+			Section(11).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|1;g=1.5"
+			Section(12).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|2;g=1.5"
+			Section(13).musicPath = "_OST/The Legend of Zelda (NES, VRC6 Remaster by IsabelleChiming) - OST.nsf|2;g=1.5"
+		end
 		if currentCostume == "5-LINKWAKE-SNES" and malcmusic.holiday == false then
 			Section(1).musicPath = "_OST/Legend of Zelda - Link's Awakening (Switch)/15_Shop.ry.48.dspadpcm.ogg"
 			Section(2).musicPath = "_OST/Legend of Zelda - Link's Awakening (Switch)/15_Shop.ry.48.dspadpcm.ogg"

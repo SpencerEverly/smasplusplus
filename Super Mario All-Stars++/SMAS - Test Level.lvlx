@@ -10,6 +10,7 @@ SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Advance 
 SC:5;L:-100000;R:-99200;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros (NES) - OST.nsf|11\;g=1.5";BG:11;
 SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:24;MF:"_OST/Super Mario Galaxy 2/SMG2_galaxy22_multi (channels 0 and 1).ogg";BG:1;
 SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/StudiopolisZoneAct1.ogg";BG:65;
+SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:24;MF:"_OST/The Legend of Zelda (NES\, VRC6 Remaster by IsabelleChiming) - OST.nsf|3\;g=1.5";BG:0;
 SECTION_END
 STARTPOINT
 ID:1;X:-179580;Y:-180086;D:1;

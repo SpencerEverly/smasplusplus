@@ -1112,6 +1112,9 @@ function globalgenerals.onTick()
 	if currentCostume == "MC-ZOMBIE" then
 		littleDialogue.characterNames[14] = "Zombie"
 	end
+	if currentCostume == "MYSTERYMANBRO" then
+		littleDialogue.characterNames[14] = "Mystery Man Bro"
+	end
 	if currentCostume == "QUACKITYYT" then
 		littleDialogue.characterNames[14] = "Quackity"
 	end
