@@ -19,124 +19,121 @@ extrasounds.active = true --Are the extra sounds active? If not, they won't play
 local ready = false --This library isn't ready until onInit is finished
 
 extrasounds.id = {}
-extrasounds.id[0] = Audio.SfxOpen(Misc.resolveSoundFile("sound/nothing.ogg")) --General sound to mute anything, really
---All SMBX sounds (To play the stock sounds regardless of it being muted), including additional ones
-for k,v in ipairs({
-	"player-jump",
-	"stomped",
-	"block-hit",
-	"block-smash",
-	"player-shrink",
-	"player-grow",
-	"mushroom",
-	"player-died",
-	"shell-hit",
-	"player-slide",
-	"item-dropped",
-	"has-item",
-	"camera-change",
-	"coin",
-	"1up",
-	"lava",
-	"warp",
-	"fireball",
-	"level-win",
-	"boss-beat",
-	"dungeon-win",
-	"bullet-bill",
-	"grab",
-	"spring",
-	"hammer",
-	"slide",
-	"newpath",
-	"level-select",
-	"do",
-	"pause",
-	"key",
-	"pswitch",
-	"tail",
-	"racoon",
-	"boot",
-	"smash",
-	"thwomp",
-	"birdo-spit",
-	"birdo-hit",
-	"smb2-exit",
-	"birdo-beat",
-	"npc-fireball",
-	"fireworks",
-	"bowser-killed",
-	"game-beat",
-	"door",
-	"message",
-	"yoshi",
-	"yoshi-hurt",
-	"yoshi-tongue",
-	"yoshi-egg",
-	"got-star",
-	"zelda-kill",
-	"player-died2",
-	"yoshi-swallow",
-	"ring",
-	"dry-bones",
-	"smw-checkpoint",
-	"dragon-coin",
-	"smw-exit",
-	"smw-blaarg",
-	"wart-bubble",
-	"wart-die",
-	"sm-block-hit",
-	"sm-killed",
-	"sm-glass",
-	"sm-hurt",
-	"sm-boss-hit",
-	"sm-cry",
-	"sm-explosion",
-	"climbing",
-	"swim",
-	"grab2",
-	"smw-saw",
-	"smb2-throw",
-	"smb2-hit",
-	"zelda-stab",
-	"zelda-hurt",
-	"zelda-heart",
-	"zelda-died",
-	"zelda-rupee",
-	"zelda-fire",
-	"zelda-item",
-	"zelda-key",
-	"zelda-shield",
-	"zelda-dash",
-	"zelda-fairy",
-	"zelda-grass",
-	"zelda-hit",
-	"zelda-sword-beam",
-	"bubble",
-	"sprout-vine",
-	"iceball",
-	"yi_freeze",
-	"yi_icebreak",
-	"2up",
-	"3up",
-	"5up",
-	"dragon-coin-get2",
-	"dragon-coin-get3",
-	"dragon-coin-get4",
-	"dragon-coin-get5",
-	"cherry",
-	"explode",
-	"hammerthrow",
-	"combo1",
-	"combo2",
-	"combo3",
-	"combo4",
-	"combo5",
-	"combo6",
-	"combo7",
-}) do
-	extrasounds.id[k] = Audio.SfxOpen(Misc.resolveSoundFile(v))
-end
+extrasounds.id[0]   = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really
+
+--Stock SMBX Sounds
+extrasounds.id[1]   = Audio.SfxOpen(Misc.resolveSoundFile("player-jump.ogg"))
+extrasounds.id[2]   = Audio.SfxOpen(Misc.resolveSoundFile("stomped.ogg"))
+extrasounds.id[3]   = Audio.SfxOpen(Misc.resolveSoundFile("block-hit.ogg"))
+extrasounds.id[4]   = Audio.SfxOpen(Misc.resolveSoundFile("block-smash.ogg"))
+extrasounds.id[5]   = Audio.SfxOpen(Misc.resolveSoundFile("player-shrink.ogg"))
+extrasounds.id[6]   = Audio.SfxOpen(Misc.resolveSoundFile("player-grow.ogg"))
+extrasounds.id[7]   = Audio.SfxOpen(Misc.resolveSoundFile("mushroom.ogg"))
+extrasounds.id[8]   = Audio.SfxOpen(Misc.resolveSoundFile("player-died.ogg"))
+extrasounds.id[9]   = Audio.SfxOpen(Misc.resolveSoundFile("shell-hit.ogg"))
+extrasounds.id[10]  = Audio.SfxOpen(Misc.resolveSoundFile("player-slide.ogg"))
+extrasounds.id[11]  = Audio.SfxOpen(Misc.resolveSoundFile("item-dropped.ogg"))
+extrasounds.id[12]  = Audio.SfxOpen(Misc.resolveSoundFile("has-item.ogg"))
+extrasounds.id[13]  = Audio.SfxOpen(Misc.resolveSoundFile("camera-change.ogg"))
+extrasounds.id[14]  = Audio.SfxOpen(Misc.resolveSoundFile("coin.ogg"))
+extrasounds.id[15]  = Audio.SfxOpen(Misc.resolveSoundFile("1up.ogg"))
+extrasounds.id[16]  = Audio.SfxOpen(Misc.resolveSoundFile("lava.ogg"))
+extrasounds.id[17]  = Audio.SfxOpen(Misc.resolveSoundFile("warp.ogg"))
+extrasounds.id[18]  = Audio.SfxOpen(Misc.resolveSoundFile("fireball.ogg"))
+extrasounds.id[19]  = Audio.SfxOpen(Misc.resolveSoundFile("level-win.ogg"))
+extrasounds.id[20]  = Audio.SfxOpen(Misc.resolveSoundFile("boss-beat.ogg"))
+extrasounds.id[21]  = Audio.SfxOpen(Misc.resolveSoundFile("dungeon-win.ogg"))
+extrasounds.id[22]  = Audio.SfxOpen(Misc.resolveSoundFile("bullet-bill.ogg"))
+extrasounds.id[23]  = Audio.SfxOpen(Misc.resolveSoundFile("grab.ogg"))
+extrasounds.id[24]  = Audio.SfxOpen(Misc.resolveSoundFile("spring.ogg"))
+extrasounds.id[25]  = Audio.SfxOpen(Misc.resolveSoundFile("hammer.ogg"))
+extrasounds.id[26]  = Audio.SfxOpen(Misc.resolveSoundFile("slide.ogg"))
+extrasounds.id[27]  = Audio.SfxOpen(Misc.resolveSoundFile("newpath.ogg"))
+extrasounds.id[28]  = Audio.SfxOpen(Misc.resolveSoundFile("level-select.ogg"))
+extrasounds.id[29]  = Audio.SfxOpen(Misc.resolveSoundFile("do.ogg"))
+extrasounds.id[30]  = Audio.SfxOpen(Misc.resolveSoundFile("pause.ogg"))
+extrasounds.id[31]  = Audio.SfxOpen(Misc.resolveSoundFile("key.ogg"))
+extrasounds.id[32]  = Audio.SfxOpen(Misc.resolveSoundFile("pswitch.ogg"))
+extrasounds.id[33]  = Audio.SfxOpen(Misc.resolveSoundFile("tail.ogg"))
+extrasounds.id[34]  = Audio.SfxOpen(Misc.resolveSoundFile("racoon.ogg"))
+extrasounds.id[35]  = Audio.SfxOpen(Misc.resolveSoundFile("boot.ogg"))
+extrasounds.id[36]  = Audio.SfxOpen(Misc.resolveSoundFile("smash.ogg"))
+extrasounds.id[37]  = Audio.SfxOpen(Misc.resolveSoundFile("thwomp.ogg"))
+extrasounds.id[38]  = Audio.SfxOpen(Misc.resolveSoundFile("birdo-spit.ogg"))
+extrasounds.id[39]  = Audio.SfxOpen(Misc.resolveSoundFile("birdo-hit.ogg"))
+extrasounds.id[40]  = Audio.SfxOpen(Misc.resolveSoundFile("smb2-exit.ogg"))
+extrasounds.id[41]  = Audio.SfxOpen(Misc.resolveSoundFile("birdo-beat.ogg"))
+extrasounds.id[42]  = Audio.SfxOpen(Misc.resolveSoundFile("npc-fireball.ogg"))
+extrasounds.id[43]  = Audio.SfxOpen(Misc.resolveSoundFile("fireworks.ogg"))
+extrasounds.id[44]  = Audio.SfxOpen(Misc.resolveSoundFile("bowser-killed.ogg"))
+extrasounds.id[45]  = Audio.SfxOpen(Misc.resolveSoundFile("game-beat.ogg"))
+extrasounds.id[46]  = Audio.SfxOpen(Misc.resolveSoundFile("door.ogg"))
+extrasounds.id[47]  = Audio.SfxOpen(Misc.resolveSoundFile("message.ogg"))
+extrasounds.id[48]  = Audio.SfxOpen(Misc.resolveSoundFile("yoshi.ogg"))
+extrasounds.id[49]  = Audio.SfxOpen(Misc.resolveSoundFile("yoshi-hurt.ogg"))
+extrasounds.id[50]  = Audio.SfxOpen(Misc.resolveSoundFile("yoshi-tongue.ogg"))
+extrasounds.id[51]  = Audio.SfxOpen(Misc.resolveSoundFile("yoshi-egg.ogg"))
+extrasounds.id[52]  = Audio.SfxOpen(Misc.resolveSoundFile("got-star.ogg"))
+extrasounds.id[53]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-kill.ogg"))
+extrasounds.id[54]  = Audio.SfxOpen(Misc.resolveSoundFile("player-died2.ogg"))
+extrasounds.id[55]  = Audio.SfxOpen(Misc.resolveSoundFile("yoshi-swallow.ogg"))
+extrasounds.id[56]  = Audio.SfxOpen(Misc.resolveSoundFile("ring.ogg"))
+extrasounds.id[57]  = Audio.SfxOpen(Misc.resolveSoundFile("dry-bones.ogg"))
+extrasounds.id[58]  = Audio.SfxOpen(Misc.resolveSoundFile("smw-checkpoint.ogg"))
+extrasounds.id[59]  = Audio.SfxOpen(Misc.resolveSoundFile("dragon-coin.ogg"))
+extrasounds.id[60]  = Audio.SfxOpen(Misc.resolveSoundFile("smw-exit.ogg"))
+extrasounds.id[61]  = Audio.SfxOpen(Misc.resolveSoundFile("smw-blaarg.ogg"))
+extrasounds.id[62]  = Audio.SfxOpen(Misc.resolveSoundFile("wart-bubble.ogg"))
+extrasounds.id[63]  = Audio.SfxOpen(Misc.resolveSoundFile("wart-die.ogg"))
+extrasounds.id[64]  = Audio.SfxOpen(Misc.resolveSoundFile("sm-block-hit.ogg"))
+extrasounds.id[65]  = Audio.SfxOpen(Misc.resolveSoundFile("sm-killed.ogg"))
+extrasounds.id[66]  = Audio.SfxOpen(Misc.resolveSoundFile("sm-hurt.ogg"))
+extrasounds.id[67]  = Audio.SfxOpen(Misc.resolveSoundFile("sm-glass.ogg"))
+extrasounds.id[68]  = Audio.SfxOpen(Misc.resolveSoundFile("sm-boss-hit.ogg"))
+extrasounds.id[69]  = Audio.SfxOpen(Misc.resolveSoundFile("sm-cry.ogg"))
+extrasounds.id[70]  = Audio.SfxOpen(Misc.resolveSoundFile("sm-explosion.ogg"))
+extrasounds.id[71]  = Audio.SfxOpen(Misc.resolveSoundFile("climbing.ogg"))
+extrasounds.id[72]  = Audio.SfxOpen(Misc.resolveSoundFile("swim.ogg"))
+extrasounds.id[73]  = Audio.SfxOpen(Misc.resolveSoundFile("grab2.ogg"))
+extrasounds.id[74]  = Audio.SfxOpen(Misc.resolveSoundFile("smw-saw.ogg"))
+extrasounds.id[75]  = Audio.SfxOpen(Misc.resolveSoundFile("smb2-throw.ogg"))
+extrasounds.id[76]  = Audio.SfxOpen(Misc.resolveSoundFile("smb2-hit.ogg"))
+extrasounds.id[77]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-stab.ogg"))
+extrasounds.id[78]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-hurt.ogg"))
+extrasounds.id[79]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-heart.ogg"))
+extrasounds.id[80]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-died.ogg"))
+extrasounds.id[81]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-rupee.ogg"))
+extrasounds.id[82]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-fire.ogg"))
+extrasounds.id[83]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-item.ogg"))
+extrasounds.id[84]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-key.ogg"))
+extrasounds.id[85]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-shield.ogg"))
+extrasounds.id[86]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-dash.ogg"))
+extrasounds.id[87]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-fairy.ogg"))
+extrasounds.id[88]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-grass.ogg"))
+extrasounds.id[89]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-hit.ogg"))
+extrasounds.id[90]  = Audio.SfxOpen(Misc.resolveSoundFile("zelda-sword-beam.ogg"))
+extrasounds.id[91]  = Audio.SfxOpen(Misc.resolveSoundFile("bubble.ogg"))
+
+--Additional SMBX Sounds
+extrasounds.id[92]  = Audio.SfxOpen(Misc.resolveSoundFile("sprout-vine.ogg")) --Vine Sprout
+extrasounds.id[93]  = Audio.SfxOpen(Misc.resolveSoundFile("iceball.ogg")) --Iceball
+extrasounds.id[96]  = Audio.SfxOpen(Misc.resolveSoundFile("2up.ogg")) --2UP
+extrasounds.id[97]  = Audio.SfxOpen(Misc.resolveSoundFile("3up.ogg")) --3UP
+extrasounds.id[98]  = Audio.SfxOpen(Misc.resolveSoundFile("5up.ogg")) --5UP
+extrasounds.id[99]  = Audio.SfxOpen(Misc.resolveSoundFile("dragon-coin-get2.ogg")) --Dragon Coin #2
+extrasounds.id[100] = Audio.SfxOpen(Misc.resolveSoundFile("dragon-coin-get3.ogg")) --Dragon Coin #3
+extrasounds.id[101] = Audio.SfxOpen(Misc.resolveSoundFile("dragon-coin-get4.ogg")) --Dragon Coin #4
+extrasounds.id[102] = Audio.SfxOpen(Misc.resolveSoundFile("dragon-coin-get5.ogg")) --Dragon Coin #5
+extrasounds.id[103] = Audio.SfxOpen(Misc.resolveSoundFile("cherry.ogg")) --Cherry
+extrasounds.id[104] = Audio.SfxOpen(Misc.resolveSoundFile("explode.ogg")) --SMB2 Explosion
+extrasounds.id[105] = Audio.SfxOpen(Misc.resolveSoundFile("hammerthrow.ogg")) --Player Hammer Throw
+extrasounds.id[106] = Audio.SfxOpen(Misc.resolveSoundFile("combo1.ogg")) --Shell Hit 2
+extrasounds.id[107] = Audio.SfxOpen(Misc.resolveSoundFile("combo2.ogg")) --Shell Hit 3
+extrasounds.id[108] = Audio.SfxOpen(Misc.resolveSoundFile("combo3.ogg")) --Shell Hit 4
+extrasounds.id[109] = Audio.SfxOpen(Misc.resolveSoundFile("combo4.ogg")) --Shell Hit 5
+extrasounds.id[110] = Audio.SfxOpen(Misc.resolveSoundFile("combo5.ogg")) --Shell Hit 6
+extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("combo6.ogg")) --Shell Hit 7
+extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("combo7.ogg")) --Shell Hit 8
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
@@ -215,6 +212,14 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[18].muted = false --fireball.ogg
 		Audio.sounds[43].muted = false --fireworks.ogg
 		Audio.sounds[59].muted = false --dragon-coin.ogg
+	end
+end
+
+function extrasounds.onPostExplosion()
+	if effect.id == 71 then
+		playSound(43)
+	elseif effect.id == 69 then
+		playSound(104)
 	end
 end
 

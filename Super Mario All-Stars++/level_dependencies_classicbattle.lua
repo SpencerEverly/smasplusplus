@@ -72,6 +72,7 @@ function rngrunstate()
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	Misc.saveGame()
+	GameData.battlemodeactive = true
 	Level.load(battlelevelsrng[selecter], nil, nil)
 end
 
@@ -80,6 +81,7 @@ function restartmode()
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	Misc.saveGame()
+	GameData.battlemodeactive = true
 	Level.load(Level.filename(), nil, nil)
 end
 
@@ -226,11 +228,9 @@ end
 
 function dependencies.onDraw()
 	if player.deathTimer == 1 then
-		GameData.p1lives = GameData.p1lives - 1
 		Routine.run(classicbattlerevivep1)
 	end
 	if player2.deathTimer == 1 then
-		GameData.p2lives = GameData.p2lives - 1
 		Routine.run(classicbattlerevivep2)
 	end
 	if player.deathTimer == 1 and GameData.p1lives <= 0 then

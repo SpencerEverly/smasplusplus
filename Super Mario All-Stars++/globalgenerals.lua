@@ -58,7 +58,7 @@ end
 local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 
-local player2_alt = Player(2)
+local player2 = Player(2)
 local pipecounter = 0
 local pipecounter2 = 0
 local doorcounter = 0
@@ -1155,17 +1155,17 @@ end
 
 function globalgenerals.onDraw()
 	if Player(2) and Player(2).isValid then
-		local playerboundaryx = player2.x - player.x
-		local playerboundaryy = player2.y - player.y
+		local playerboundaryx = Player(2).x - player.x
+		local playerboundaryy = Player(2).y - player.y
 		--Try to push player2 if about to go out of the camera bounds
 		if playerboundaryx >= 400 then
-			player2.x = camera.x + 798 - (player.width / 2)
+			Player(2).x = camera.x + 798 - (player.width / 2)
 		elseif playerboundaryx <= -400 then
-			player2.x = camera.x + 2 - (player.width / 2)
+			Player(2).x = camera.x + 2 - (player.width / 2)
 		elseif playerboundaryy >= 800 then
-			player2.y = camera.y + 598 - (player.height / 2)
+			Player(2).y = camera.y + 598 - (player.height / 2)
 		elseif playerboundaryy <= -800 then
-			player2.y = camera.y + 2 - (player.height / 2)
+			Player(2).y = camera.y + 2 - (player.height / 2)
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
@@ -1485,7 +1485,7 @@ Cheats.register("sherbertsmiddlenameistoto",{
 		Defines.player_hasCheated = false
 		player:kill()
 		if Player.count() == 2 then
-			player2:kill()
+			Player(2):kill()
 		end
 		return true -- this makes the cheat not toggleable
 	end),

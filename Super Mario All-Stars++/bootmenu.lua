@@ -17,6 +17,8 @@ local sprite = require("base/sprite")
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
 
+littleDialogue.cursorEnabled = true
+
 cursor.create()
 local player2 = Player(2)
 
@@ -580,7 +582,7 @@ end
 
 
 local function classicBattleSelect()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>Select level.<question BattleLevelSelect>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Select level.<question BattleLevelSelect>", pauses = false, updatesInPause = true})
 end
 
 local function ChangeName1()
@@ -624,7 +626,7 @@ end
 
 local function X2Char()
 	if SaveData.disableX2char == false then
-		playSound("1.3-mode-enabled.ogg")
+		playSound("1.3Mode/bowser-killed.ogg")
 		SaveData.disableX2char = true
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
 		littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
@@ -684,7 +686,7 @@ local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == true then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use 2 player mode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Unfortunately, you'll need to turn on 1.3 Mode to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -697,7 +699,7 @@ local function BattleModeDisEnable1()
 			littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? You already have 2 player mode enabled for this.<question BattleTwoPlayerCheckTwo>", pauses = false, updatesInPause = true})
 		end
 	elseif SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Unfortunately, you'll need to disable X2 characters to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to turn on 1.3 Mode to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -1184,7 +1186,7 @@ local function foolsinapril() --April Fools event for 4/1 of any year
 end
 
 function bootmenu.onInitAPI() --This requires some libraries to start
-	registerEvent(bootmenu,"onExitLevel", "onExit")
+	registerEvent(bootmenu,"onExit")
 	registerEvent(bootmenu,"onStart")
 	registerEvent(bootmenu,"onTick")
 	registerEvent(bootmenu,"onInputUpdate")
@@ -1565,18 +1567,18 @@ function bootmenu.onDraw()
 		
 		if pfpimage then
 			if SaveData.playerPfp == nil then
-				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
+				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
 			elseif SaveData.playerPfp then
-				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -1}
+				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -7}
 			elseif unexpected_condition then
-				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
+				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
 			end
 		end
 		if playernamebyImg then
 			if SaveData.playerName == nil then
-				textplus.print{x = 60, y = 569, text = "<color rainbow>Player</color>", font = fontthree, priority = 0, xscale = 1, yscale = 1}
+				textplus.print{x = 60, y = 569, text = "<color rainbow>Player</color>", font = fontthree, priority = -7, xscale = 1, yscale = 1}
 			else
-				textplus.print{x = 60, y = 569, text = "<color rainbow>"..SaveData.playerName.."</color>", font = fontthree, priority = 0, xscale = 1, yscale = 1}
+				textplus.print{x = 60, y = 569, text = "<color rainbow>"..SaveData.playerName.."</color>", font = fontthree, priority = -7, xscale = 1, yscale = 1}
 			end
 		end
 		if Level.filename() == "intro_8bit.lvlx" then
@@ -1659,7 +1661,7 @@ function bootmenu.onDraw()
 			Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-7}
 		end
 		if pressjumpwords then
-			textplus.print{x=210, y=390, text = "Press Jump to Start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufont}
+			textplus.print{x=210, y=390, text = "Press jump to start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufont}
 			--Graphics.drawImageWP(pressstart, 150, 552, -4)
 		end
 		if website then
@@ -1702,10 +1704,10 @@ function bootmenu.onDraw()
 			--nothing
 		end
 		if active3 then
-			textplus.print{x=160, y=520, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont}
+			textplus.print{x=160, y=500, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont}
 		end
 		if active4 then
-			textplus.print{x=150, y=490, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
+			textplus.print{x=150, y=520, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
 		end
 		if keyinput1 then
 			textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=0, color=Color.lightred, font=statusFont}
@@ -1735,6 +1737,7 @@ function bootmenu.onExit()
 		end
 		Defines.cheat_donthurtme = false
 		Defines.cheat_shadowmario = false
+		autoscroll.scrollLeft(5000)
 	end
 end
 

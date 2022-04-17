@@ -1110,8 +1110,10 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	end
 	
 	--Costume Menu
-	pauseplus.createOption("costumeoptions",{text = "Enable/Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() toggleabilitiescost() end})
-	pauseplus.createOption("costumeoptions",{text = "Enable/Disable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() toggleprofanecostume() end})
+	if SaveData.disableX2char == false then
+		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() toggleabilitiescost() end})
+		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() toggleprofanecostume() end})
+	end
 
 	--Teleportation Menu
 	if not isOverworld then

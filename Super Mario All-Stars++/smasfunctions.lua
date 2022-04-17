@@ -237,7 +237,14 @@ end
 
 function getEpisodeFilename() --Thanks KBM_Quine!
 	if not Misc.inEditor then
-		return mem(mem(0x00B250FC, FIELD_DWORD)+(mem(0x00B2C628, FIELD_WORD)-1)*0x30+0x08, FIELD_STRING)
+		local episodeFiles = Misc.listFiles(Misc.episodePath())
+		local worldFile
+		for _,v in ipairs(episodeFiles) do
+			if string.match(v, ".*%.wld") then
+				worldFile = string.match(v, ".*%.wld")
+			end
+		end
+		return worldFile
 	else
 		return "Editor Mode"
 	end

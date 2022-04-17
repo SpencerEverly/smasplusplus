@@ -35,6 +35,9 @@ local time = 0
 local opacity = math.min(1,time/42)
 local fadeoutcompleted = false
 
+local killed1 = false
+local killed2 = false
+
 function smasdeathsystem.onInitAPI() --This requires all the libraries that will be used
 	registerEvent(smasdeathsystem, "onDraw")
 	registerEvent(smasdeathsystem, "onExit")
@@ -245,6 +248,15 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 				end
 			end
 		end
+		if GameData.multiplayeractive == true then
+			if killed1 == true then
+				GameData.p1lives = GameData.p1lives - 1
+				killed1 = false
+			elseif killed2 == true then
+				GameData.p2lives = GameData.p2lives - 1
+				killed2 = false
+			end
+		end
 	end
 end
 
@@ -268,8 +280,16 @@ function smasdeathsystem.onTick()
 			--Nothing
 		end
 	end
+	if(not killed1 and player:mem(0x13E,FIELD_BOOL)) then
+		killed1 = true
+	end
 	if Player(2) and Player(2).isValid or SaveData.disableX2char == true then
 		GameData.multiplayeractive = true
+		if GameData.battlemodeactive == true then
+			if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then
+				killed2 = true
+			end
+		end
 	end
 	if not Player(2) and not Player(2).isValid or SaveData.disableX2char == false then
 		GameData.multiplayeractive = false
@@ -281,19 +301,19 @@ function smasdeathsystem.onTick()
 		for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
 			if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
 				GameData.p1lives = GameData.p1lives + 1
-				GameData.p1lives = GameData.p2lives + 1
+				GameData.p2lives = GameData.p2lives + 1
 			end
 			if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
 				GameData.p1lives = GameData.p1lives + 2
-				GameData.p1lives = GameData.p2lives + 2
+				GameData.p2lives = GameData.p2lives + 2
 			end
 			if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
 				GameData.p1lives = GameData.p1lives + 3
-				GameData.p1lives = GameData.p2lives + 3
+				GameData.p2lives = GameData.p2lives + 3
 			end
 			if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
 				GameData.p1lives = GameData.p1lives + 5
-				GameData.p1lives = GameData.p2lives + 5
+				GameData.p2lives = GameData.p2lives + 5
 			end
 		end
 	else

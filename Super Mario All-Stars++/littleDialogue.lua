@@ -13,7 +13,7 @@
 local configFileReader = require("configFileReader")
 local textplus = require("textplus")
 local tplusUtils = require("textplus/tplusutils")
-
+local cursor = require("cursor")
 local customCamera = require("customCamera")
 
 local player2 = Player(2)
@@ -22,6 +22,7 @@ local littleDialogue = {}
 
 GameData.answersActive = false
 littleDialogue.boxenabled = false
+littleDialogue.cursorEnabled = false
 local cooldown = 0
 
 pcall(function() smallScreen = require("smallScreen") end)
@@ -803,8 +804,7 @@ function boxInstanceFunctions:addQuestion(pageIndex,answer)
         chosenFunction = answer.chosenFunction,
         addText = answer.addText,
     }
-
-
+	
     table.insert(answerPage.answers,answerObj)
     table.insert(page.plainAnswerList,answerObj)
 	
