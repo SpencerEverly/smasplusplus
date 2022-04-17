@@ -302,10 +302,10 @@ end
 
 local function theme5scrolling()
 	autoscroll.scrollRight(6)
-	Routine.wait(17)
+	Routine.wait(17.3)
 	autoscroll.scrollLeft(15)
 	Routine.wait(7.2)
-	Routine.loop(1573, theme5scrolling, true)
+	Routine.loop(1571, theme5scrolling, true)
 end
 
 local function theme6()
@@ -627,11 +627,11 @@ local function X2Char()
 		playSound("1.3-mode-enabled.ogg")
 		SaveData.disableX2char = true
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
-		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == true then
 		playSound("x2-mode-enabled.ogg")
 		SaveData.disableX2char = false
-		littleDialogue.create({text = "<setPos 400 32 0.5 -2.6>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -682,22 +682,22 @@ end
 
 local function TwoPlayerDisEnable1()
 	if SaveData.disableX2char == true then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use 2 player mode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use 2 player mode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
 	elseif SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Unfortunately, you'll need to disable X2 characters to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function BattleModeDisEnable1()
 	if SaveData.disableX2char == true then
 		if Player.count() == 1 then
-			littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? We'll need to enable 2 player mode first.<question BattleTwoPlayerCheckOne>", pauses = false, updatesInPause = true})
+			littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? We'll need to enable 2 player mode first.<question BattleTwoPlayerCheckOne>", pauses = false, updatesInPause = true})
 		end
 		if Player.count() == 2 then
-			littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? You already have 2 player mode enabled for this.<question BattleTwoPlayerCheckTwo>", pauses = false, updatesInPause = true})
+			littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? You already have 2 player mode enabled for this.<question BattleTwoPlayerCheckTwo>", pauses = false, updatesInPause = true})
 		end
 	elseif SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to disable X2 characters to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Unfortunately, you'll need to disable X2 characters to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -766,32 +766,32 @@ end
 local function ChangedCharacter()
 	playSound("charcost-selected.ogg")
 	if Player.count() == 1 then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.5>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
 	if Player.count() == 2 then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -3.2>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.5>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function SaveOptions1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.7><question SavingMenuOne>", speakerName = "Saving Options", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question SavingMenuOne>", speakerName = "Saving Options", pauses = false, updatesInPause = true})
 end
 
 local function SaveSlot1()
 	if not Misc.inEditor() then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>To begin switching the save slot, please select Begin to get started (Keyboard only). THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
 	elseif Misc.inEditor() then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You can't do this while in the editor mode. Please start an actual game to switch saves. You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.5>You can't do this while in the editor mode.<page>Please start an actual game to switch saves.<page>You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
 local function EraseSave1()
 	Audio.MusicChange(0, 0)
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
 end
 
 local function EraseSave2()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.0>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
 end
 
 local function BootDialogueMusicReset()
