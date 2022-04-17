@@ -749,8 +749,10 @@ function pausemenu2.onDraw()
 			textplus.print{x = 20, y = 560, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
 			if SaveData.playerPfp == nil then
 				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 70, height = 70, x = 40, y = 35, priority = -1}
-			else
+			elseif SaveData.playerPfp then
 				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 40, y = 35, priority = -1}
+			elseif unexpected_condition then
+				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 70, height = 70, x = 40, y = 35, priority = -1}
 			end
 			if SaveData.playerName == nil then
 				textplus.print{x = 125, y = 60, text = "<color rainbow>Player</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}

@@ -1566,10 +1566,9 @@ function bootmenu.onDraw()
 		if pfpimage then
 			if SaveData.playerPfp == nil then
 				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
-			elseif not Misc.resolveGraphicsFile(SaveData.playerPfp) == nil then
+			elseif SaveData.playerPfp then
 				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -1}
-			elseif Misc.resolveGraphicsFile(SaveData.playerPfp) == nil then
-				SaveData.playerPfp = "pfp/pfp.png"
+			elseif unexpected_condition then
 				sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
 			end
 		end
