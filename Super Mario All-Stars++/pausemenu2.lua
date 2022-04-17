@@ -752,6 +752,7 @@ function pausemenu2.onDraw()
 			else
 				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 40, y = 35, priority = -1}
 				if Misc.resolveGraphicsFile(SaveData.playerPfp) == nil then
+					SaveData.playerPfp = "pfp/pfp.png"
 					sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
 				end
 			end

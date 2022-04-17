@@ -1569,6 +1569,7 @@ function bootmenu.onDraw()
 			else
 				sprite.draw{texture = loadImg("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -1}
 				if Misc.resolveGraphicsFile(SaveData.playerPfp) == nil then
+					SaveData.playerPfp = "pfp/pfp.png"
 					sprite.draw{texture = loadImg("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -1}
 				end
 			end

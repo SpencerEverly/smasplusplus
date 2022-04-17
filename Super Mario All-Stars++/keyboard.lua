@@ -262,9 +262,9 @@ do
 			return
 		end
 		if GameData.playernameenterfirstboot == false or GameData.playernameenterfirstboot == nil then
-			textplus.print{x = 60, y = 290, text = "To cancel, press the PAGE DOWN key.", priority = -1, font = msgfont}
+			textplus.print{x = 60, y = 310, text = "To cancel, press the PAGE DOWN key.", priority = -1, font = msgfont}
 		elseif GameData.playernameenterfirstboot == true then
-			textplus.print{x = 65, y = 290, text = "To skip, press the PAGE DOWN key.", priority = -1, font = msgfont}
+			textplus.print{x = 65, y = 310, text = "To skip, press the PAGE DOWN key.", priority = -1, font = msgfont}
 		end
 		
 		local buffer
