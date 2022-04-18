@@ -19,6 +19,7 @@ comboSounds.kick7 = extrasounds.id112
 
 comboSounds.sounds = {
 	extrasounds.id[9],
+	extrasounds.id[9],
 	extrasounds.id[106], --Combo sounds 1-7, found under extrasounds
     extrasounds.id[107],
     extrasounds.id[108],
@@ -35,15 +36,16 @@ comboSounds.exclusionNPCs = table.map{13,263,265}
 
 
 local comboScores = {
-    [100] = 1,
-    [200] = 2,
-    [400] = 3,
-    [800] = 4,
-    [1000] = 5,
-    [2000] = 6,
-    [4000] = 7,
-    [8000] = 8,
-	[0] = 9,
+	[10] = 1,
+    [100] = 2,
+    [200] = 3,
+    [400] = 4,
+    [800] = 5,
+    [1000] = 6,
+    [2000] = 7,
+    [4000] = 8,
+    [8000] = 9,
+	[0] = 10,
 }
 
 

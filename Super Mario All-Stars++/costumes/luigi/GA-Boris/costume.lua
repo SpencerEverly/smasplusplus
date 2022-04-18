@@ -13,6 +13,7 @@ local cooldown = 0
 
 function costume.onInit(p)
 	plr = p
+	registerEvent(costume,"onStart")
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onDraw")
@@ -95,13 +96,12 @@ function costume.shootGun1()
 end
 
 function costume.shootGrenade2()
-	--plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
+	plr:mem(0x172, FIELD_BOOL, false)
 	local x = plr.x
 	local y = plr.y + plr.height/2 - 5
 	if (plr.direction == 1) then
 		x = x + plr.width
 	end
-	Audio.sounds[25].muted = true
 	local grenadeid = 291
 	local grenadeNpc = NPC.spawn(grenadeid, x, y, player.section, false, true)
 	costume.useGrenade2 = true
@@ -113,12 +113,35 @@ function costume.shootGrenade2()
 		grenadeNpc.speedX = -7.5
 		grenadeNpc.speedY = -0.2
 	end
-	playSound("luigi/GA-Boris/grenade-launch.ogg")
 	costume.useGrenade2 = false
 	cooldown = 10
 	if cooldown <= 0 then
-		Audio.sounds[25].muted = false
-		--plr:mem(0x172, FIELD_BOOL, true)
+		plr:mem(0x172, FIELD_BOOL, true)
+	end
+end
+
+function costume.shootGrenade2Upwards()
+	plr:mem(0x172, FIELD_BOOL, false)
+	local x = plr.x
+	local y = plr.y + plr.height/2 - 5
+	if (plr.direction == 1) then
+		x = x + plr.width
+	end
+	local grenadeid = 291
+	local grenadeNpc = NPC.spawn(grenadeid, x, y, player.section, false, true)
+	costume.useGrenade2 = true
+	grenadeNpc.frames = 1
+	if (plr.direction == 1) then
+		grenadeNpc.speedX = 0
+		grenadeNpc.speedY = -7.5
+	else
+		grenadeNpc.speedX = -0
+		grenadeNpc.speedY = -7.5
+	end
+	costume.useGrenade2 = false
+	cooldown = 10
+	if cooldown <= 0 then
+		plr:mem(0x172, FIELD_BOOL, true)
 	end
 end
 
@@ -204,7 +227,7 @@ function costume.onInputUpdate()
 	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if not Misc.isPaused() then
 			if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
-				if player.keys.run == KEYS_PRESSED then
+				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
 					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
 						playSound("costumes/luigi/GA-Boris/gunshot-1.ogg", 1, 1, 35)
 						costume.shootGun1()
@@ -212,7 +235,7 @@ function costume.onInputUpdate()
 				end
 			end
 			if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
-				if player.keys.run == KEYS_PRESSED then
+				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
 					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
 						playSound("costumes/luigi/GA-Boris/gunshot-2.ogg", 1, 1, 35)
 						costume.shootGun1()
@@ -220,7 +243,7 @@ function costume.onInputUpdate()
 				end
 			end
 			if borishp == 3 and player.powerup == 4 then
-				if player.keys.run == KEYS_PRESSED then
+				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
 					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
 						playSound("costumes/luigi/GA-Boris/gunshot-3.ogg", 1, 1, 35)
 						costume.shootGun1()
@@ -228,7 +251,7 @@ function costume.onInputUpdate()
 				end
 			end
 			if borishp == 3 and player.powerup == 5 then
-				if player.keys.run == KEYS_PRESSED then
+				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
 					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
 						playSound("costumes/luigi/GA-Boris/gunshot-4.ogg", 1, 1, 35)
 						costume.shootGun1()
@@ -236,15 +259,27 @@ function costume.onInputUpdate()
 				end
 			end
 			if borishp == 3 and player.powerup == 6 then
-				if player.keys.run == KEYS_PRESSED then
-					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
-						playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
-						costume.shootGrenade2()
-					end
+				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false and (player.keys.up == KEYS_PRESSED) == false then
+					playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
+					costume.shootGrenade2()
+				elseif player.keys.run == KEYS_PRESSED and (player.keys.up == KEYS_PRESSED) == true then
+					playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
+					costume.shootGrenade2Upwards()
 				end
 			end
 		end
 	end
+end
+
+function costume.unmutebill()
+	Routine.wait(0.1)
+	Audio.sounds[22].muted = false
+end
+
+function costume.unmutehammer()
+	Routine.wait(0.1)
+	extrasounds.id[105].muted = false
+	Audio.sounds[25].muted = false
 end
 
 function costume.onTick(p)
@@ -284,6 +319,18 @@ function costume.onTick(p)
 			Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
 			Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
 			Graphics.drawImageWP(heartfull3, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+		end
+		
+		for index,explosion in ipairs(Animation.get(148)) do --Explosion SFX
+			Audio.sounds[22].muted = true
+			SFX.play("costumes/luigi/GA-Boris/grenade-explode.ogg", 1, 1, 25)
+			Routine.run(costume.unmutebill)
+		end
+		for index,explosion in ipairs(NPC.get(291)) do --Throw SFX
+			Audio.sounds[25].muted = true
+			extrasounds.id[105].muted = true
+			SFX.play("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 500)
+			Routine.run(costume.unmutehammer)
 		end
 	end
 end

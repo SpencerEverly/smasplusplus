@@ -217,7 +217,32 @@ function globalgenerals.onStart()
 	end
 end
 
+function CheckStarAvailability()
+	GameData.activateAbilityMessage = false
+end
+
+function ExitFeature()
+	GameData.activateAbilityMessage = false
+end
+
+littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "Yes",chosenFunction = function() Routine.run(CheckStarAvailability) end})
+littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "No",chosenFunction = function() Routine.run(ExitFeature) end})
+
 function globalgenerals.onInputUpdate()
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	
+	if currentCostume == "GA-BORIS" then
+		if player.keys.altRun == KEYS_PRESSED and GameData.activateAbilityMessage == false or GameData.activateAbilityMessage == nil then
+			player:mem(0x172, FIELD_BOOL, false)
+			cooldown = 5
+			GameData.activateAbilityMessage = true
+			littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Would you like to use The Wall of Weapons? You can only use this every 5 stars you collect.<question WallOfWeaponsDialog>", pauses = true, updatesInPause = true})
+			if cooldown <= 0 then
+				player:mem(0x172, FIELD_BOOL, true)
+			end
+		end
+	end
 	if Player(2) and Player(2).isValid then
 		if Player(1).keys.altRun == KEYS_PRESSED and Player(1).keys.up == KEYS_PRESSED then
 			if Misc.isPaused() == false then
