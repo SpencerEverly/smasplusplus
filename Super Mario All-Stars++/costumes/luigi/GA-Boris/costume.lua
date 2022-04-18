@@ -16,6 +16,7 @@ function costume.onInit(p)
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onDraw")
 	registerEvent(costume,"onPostPlayerHarm")
+	registerEvent(costume,"onInputUpdate")
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onPostNPCKill")
 	
@@ -39,8 +40,57 @@ function costume.onInit(p)
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/smb2-throw.ogg")
 	
 	costume.abilitiesenabled = true
+	costume.useGun1 = false
 	HUDOverride.visible.itembox = false
 	borishp = 3
+end
+
+local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
+    local oldKilled     = npc:mem(0x122,FIELD_WORD)
+    local oldProjectile = npc:mem(0x136,FIELD_BOOL)
+    local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
+    local oldImmune     = npc:mem(0x156,FIELD_WORD)
+    local oldID         = npc.id
+    local oldSpeedX     = npc.speedX
+    local oldSpeedY     = npc.speedY
+
+    npc:harm(...)
+
+    return (
+           oldKilled     ~= npc:mem(0x122,FIELD_WORD)
+        or oldProjectile ~= npc:mem(0x136,FIELD_BOOL)
+        or oldHitCount   ~= npc:mem(0x148,FIELD_FLOAT)
+        or oldImmune     ~= npc:mem(0x156,FIELD_WORD)
+        or oldID         ~= npc.id
+        or oldSpeedX     ~= npc.speedX
+        or oldSpeedY     ~= npc.speedY
+    )
+end
+
+function costume.shootGun1()
+	plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
+	local x = plr.x
+	local y = plr.y + plr.height/2 - 5
+	if (plr.direction == 1) then
+		x = x + plr.width
+	end
+	local gunid = 266
+	local gunNpc = NPC.spawn(gunid, x, y, player.section, false, true)
+	costume.useGun1 = true
+	gunNpc.frames = 1
+	if (plr.direction == 1) then
+		gunNpc.speedX = 18.5
+		gunNpc.speedY = 0
+	else
+		gunNpc.speedX = -18.5
+		gunNpc.speedY = 0
+	end
+	playSound("mario/SP-1-EricCartman/snowball_throw.ogg")
+	costume.useGun1 = false
+	cooldown = 10
+	if cooldown <= 0 then
+		plr:mem(0x172, FIELD_BOOL, true)
+	end
 end
 
 function costume.onPostNPCKill(npc, harmType)
@@ -66,13 +116,43 @@ end
 
 function costume.onDraw(p)
 	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+		--Gun states
 		local gun1 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-1.png")
 		if borishp == 1 or borishp == 2 then
+			Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
 			if player.direction == -1 then
-				Graphics.drawImageWP(gun1, player.x - camera.x - 12,  player.y - camera.y + 10, 0, 0, 35, 28, -24)
+				Graphics.drawImageWP(gun1, player.x - camera.x - 14,  player.y - camera.y + 10, 0, 0, 35, 28, -24)
 			end
 			if player.direction == 1 then
 				Graphics.drawImageWP(gun1, player.x - camera.x + 4,  player.y - camera.y + 10, 0, 28, 35, 28, -24)
+			end
+		end
+		if borishp == 3 then
+			Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
+			if player.direction == -1 then
+				Graphics.drawImageWP(gun1, player.x - camera.x - 14,  player.y - camera.y + 10, 0, 0, 35, 28, -24)
+			end
+			if player.direction == 1 then
+				Graphics.drawImageWP(gun1, player.x - camera.x + 4,  player.y - camera.y + 10, 0, 28, 35, 28, -24)
+			end
+		end
+	end
+end
+
+function costume.onInputUpdate()
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+		if not Misc.isPaused() then
+			if borishp == 1 or borishp == 2 then
+				if player.keys.run == KEYS_PRESSED then
+					playSound("costumes/luigi/GA-Boris/gunshot-1.ogg", 1, 1, 35)
+					costume.shootGun1()
+				end
+			end
+			if borishp == 3 then
+				if player.keys.run == KEYS_PRESSED then
+					playSound("costumes/luigi/GA-Boris/gunshot-2.ogg", 1, 1, 35)
+					costume.shootGun1()
+				end
 			end
 		end
 	end
@@ -96,7 +176,7 @@ function costume.onTick(p)
 		
 		
 		
-		--Boris HP Hover System/Gun States
+		--Boris HP Hover System
 		local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
 		if borishp <= 0 then
 			
