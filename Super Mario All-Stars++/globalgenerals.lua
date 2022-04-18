@@ -273,10 +273,6 @@ function globalgenerals.onTick()
 	if player.character == CHARACTER_UNCLEBROADSWORD then
 		--HUDOverride.visible.lives = false
 	end
-	if SaveData.disableX2char == false then
-		--HUDOverride.visible.lives = false
-		HUDOverride.visible.score = false
-	end
 	if player.character == CHARACTER_ULTIMATERINKA then
 		HUDOverride.visible.keys = true
 		HUDOverride.visible.itembox = true

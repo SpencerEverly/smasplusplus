@@ -70,7 +70,7 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
 end
 
 function costume.shootGun1()
-	plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
+	--plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
 	local x = plr.x
 	local y = plr.y + plr.height/2 - 5
 	if (plr.direction == 1) then
@@ -90,12 +90,12 @@ function costume.shootGun1()
 	costume.useGun1 = false
 	cooldown = 10
 	if cooldown <= 0 then
-		plr:mem(0x172, FIELD_BOOL, true)
+		--plr:mem(0x172, FIELD_BOOL, true)
 	end
 end
 
 function costume.shootGrenade2()
-	plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
+	--plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
 	local x = plr.x
 	local y = plr.y + plr.height/2 - 5
 	if (plr.direction == 1) then
@@ -118,7 +118,7 @@ function costume.shootGrenade2()
 	cooldown = 10
 	if cooldown <= 0 then
 		Audio.sounds[25].muted = false
-		plr:mem(0x172, FIELD_BOOL, true)
+		--plr:mem(0x172, FIELD_BOOL, true)
 	end
 end
 
@@ -205,32 +205,42 @@ function costume.onInputUpdate()
 		if not Misc.isPaused() then
 			if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
 				if player.keys.run == KEYS_PRESSED then
-					playSound("costumes/luigi/GA-Boris/gunshot-1.ogg", 1, 1, 35)
-					costume.shootGun1()
+					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
+						playSound("costumes/luigi/GA-Boris/gunshot-1.ogg", 1, 1, 35)
+						costume.shootGun1()
+					end
 				end
 			end
 			if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
 				if player.keys.run == KEYS_PRESSED then
-					playSound("costumes/luigi/GA-Boris/gunshot-2.ogg", 1, 1, 35)
-					costume.shootGun1()
+					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
+						playSound("costumes/luigi/GA-Boris/gunshot-2.ogg", 1, 1, 35)
+						costume.shootGun1()
+					end
 				end
 			end
 			if borishp == 3 and player.powerup == 4 then
 				if player.keys.run == KEYS_PRESSED then
-					playSound("costumes/luigi/GA-Boris/gunshot-3.ogg", 1, 1, 35)
-					costume.shootGun1()
+					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
+						playSound("costumes/luigi/GA-Boris/gunshot-3.ogg", 1, 1, 35)
+						costume.shootGun1()
+					end
 				end
 			end
 			if borishp == 3 and player.powerup == 5 then
 				if player.keys.run == KEYS_PRESSED then
-					playSound("costumes/luigi/GA-Boris/gunshot-4.ogg", 1, 1, 35)
-					costume.shootGun1()
+					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
+						playSound("costumes/luigi/GA-Boris/gunshot-4.ogg", 1, 1, 35)
+						costume.shootGun1()
+					end
 				end
 			end
 			if borishp == 3 and player.powerup == 6 then
 				if player.keys.run == KEYS_PRESSED then
-					playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
-					costume.shootGrenade2()
+					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
+						playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
+						costume.shootGrenade2()
+					end
 				end
 			end
 		end

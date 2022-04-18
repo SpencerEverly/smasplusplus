@@ -89,6 +89,7 @@ function starget()
 	Level.finish(LEVEL_END_STATE_STAR, true)
 	SFX.play(52)
 	muteMusic(-1)
+	GameData.muteMusic = true
 	playervuln = true
 	playerwon = true
 end
@@ -166,6 +167,7 @@ function realstar.onPlayerHarm(evt)
 end
 
 function realstar.onExit()
+	GameData.muteMusic = false
 	if Level.endState(LEVEL_END_STATE_STAR) then
 		Level.exit(LEVEL_WIN_TYPE_STAR)
 	end
