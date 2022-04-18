@@ -1,259 +1,188 @@
 local npcManager = require("npcManager")
-local megaMush = require("mega/megashroom")
-local starman = require("starman/star")
+local colliders = require("colliders")
+local extrasounds = require("extrasounds")
 
-local flagpoleNPC = {}
-flagpoleNPC.touched = false
-flagpoleNPC.playerAlpha = {}
-flagpoleNPC.exitType = 6
-flagpoleNPC.stopPlayer = false
-
-flagpoleNPC.castleBGOs = {}
-for i = 1, 16000 do
-	flagpoleNPC.castleBGOs[i] = false
-end
-flagpoleNPC.castleBGOs[16] = true
-flagpoleNPC.castleBGOs[17] = true
-
+local customNPC = {}
 local npcID = NPC_ID
 
-local flagpoleNPCSettings = {
-	id = npcID,
-	frames = 3,
-	framestyle = 0,
-	nogravity = true,
-	noblockcollision = true,
-	nohurt = true,
-	jumphurt = true,
-	notcointransformable = true
+local exiting = false
+
+local drawCastlePlayer = false
+local castlePlayerTicks = 65
+local castlePlayerX = 0
+local castlePlayerY = 0
+
+local customNPCSettings = {
+    id = npcID,
+    gfxheight = 32,
+    gfxwidth = 32,
+    width = 32,
+    height = 32,
+    gfxoffsetx = 16,
+    gfxoffsety = 0,
+    frames = 3,
+    framestyle = 0,
+    framespeed = 8,
+    nohurt = true,
+    nogravity = true,
+    jumphurt = true,
 }
 
-npcManager.setNpcSettings(flagpoleNPCSettings)
+local castles = {16, 17}
 
-function flagpoleNPC.onInitAPI()
-	npcManager.registerEvent(npcID, flagpoleNPC, "onTickEndNPC")
+npcManager.setNpcSettings(customNPCSettings)
+
+function customNPC.onInitAPI()
+    npcManager.registerEvent(npcID, customNPC, "onTickNPC")
+    registerEvent(customNPC, "onPlayerHarm")
+	registerEvent(customNPC, "onPlayerKill")
+    registerEvent(customNPC, "onDraw")
 end
 
-local toWinType = {
-	[LEVEL_END_STATE_STAR]     = LEVEL_WIN_TYPE_STAR,
-	}
+function customNPC.onTickNPC(v)
+    if Defines.levelFreeze then return end
 
-local function stop_player(v)
-	local data = v.data
+    local data = v.data
 
-	if data.collider == nil or flagpoleNPC.touched == true then return end
-	
-	local c = data.collider
-	
-	for i,p in ipairs(Player.get()) do
-		if (p.x + (p.width / 1.5)) > c.x then
-			p.speedX = 0
-		end
-	end
-end
+    if v.despawnTimer <= 0 then
+        data.initialized = false
+        return
+    end
 
-local function stick(p_id, v)
-	local p = Player(p_id)
-	
-	p.x = v.x + ((p.width / 2.0) * -1)
-	
-	if p.mount == 0 and p.character < 3 then 
-		p.frame = 30
-	end
-	
-	p.speedX = v.speedX
-	p.direction = 1
-	
-	local tempLocationY = p.y + (p.height / 2)
-	
-	for k,b in ipairs(Block.getIntersecting(p.x, tempLocationY,
-	p.x + p.width, tempLocationY + p.height)) do
-		if p.character >= 3 or p.powerup ~= 1 or p.mount ~= 0 then break end
-		p.y = b.y - (p.height * 1.5)
-	end
-	
-	if #Block.getIntersecting(p.x, tempLocationY,
-	p.x + p.width, tempLocationY + p.height) <= 0 then
-		if p.mount == 0 and p.character < 3 then
-			p.speedY = v.speedY
-		end
-	end
-end
+    if not data.initialized then
+        data.state = 0
+        data.tick = 0
+        data.countTime = false
+        data.castleX = math.huge
+        data.castleWidth = 0
+        data.initialized = true
+    end
 
-local function score(p_id, v)
-	local p = Player(p_id)
-	local c = v.data.collider
-	local distance = math.abs(p.y - (c.y + c.height))
+    if player.y >= v.y
+    and player.x >= v.x
+    and player.x <= v.x + v.width
+    and player.section == v.section
+    and data.state == 0 then
+        data.state = 1
+		GameData.muteMusic = true
+        SFX.play(Misc.resolveSoundFile("smb-flagslide.wav"))
+        Audio.MusicFadeOut(v.section, 1000)
+        exiting = true
+        data.countTime = Timer.isActive()
+		--Timer.toggle()
+        Timer.isVisible = true
 
-	Misc.givePoints(math.floor(distance / 32), vector(p.x, p.y), false)
-end
+        local score = 10 - math.floor((player.y - v.y) / 32)
+        Misc.givePoints(score, vector(player.x, player.y))
+    end
 
-local function enter_castle(p_id)
-	local v = Player(p_id)
-	
-	if v.mount == 1 or v.mount == 2 then return end
-	
-	if v.alpha == nil then v.alpha = 2 end
-	
-	if vframe == nil then
-		if v.mount == 0 and v.character ~= 5 and v.character ~= 16 then vframe = 15 else vframe = 30 end
-	end
-	
-	if v.alpha <= 0 then
-		v.forcedState = 8
-	end
-	
-	v.frame = -50 * v.direction
-	v.alpha = v.alpha - 0.05
-	
-	v:render{
-	ignoreState = true,
-	color = Color.white..v.alpha,
-	frame = vframe
-	}
-	
-	v:mem(0x142,FIELD_BOOL, true)
-end
+    if data.state ~= 0 then
+        player.keys.up = false
+        player.keys.down = false
+        player.keys.left = false
+        player.keys.right = false
+        player.keys.jump = false
+        player.keys.altJump = false
+        player.keys.run = false
+        player.keys.altRun = false
+        player.keys.pause = false
+        player.keys.dropItem = false
+    end
 
-local function player_collided(v)
-	local data = v.data
+    if data.state == 1 then
+        data.tick = data.tick + 1
+        player.x = v.x - player.width + 16
+        player.speedX = 0
+        player.speedY = 3 - Defines.player_grav
+        player.direction = 1
+        player:setFrame(3)
+        v.speedY = 3
 
-	if data.collider == nil or flagpoleNPC.touched == true then return end
-	
-	local c = data.collider
-	
-	for i,p in ipairs(Player.get()) do
-		local vx = 0
-		
-		local px = p.x + (p.width)
-		local py = p.y + (p.height)
-		
-		if p.mount == 2 then
-			vx = (NPC.config[56].width / 2) or 64
-		end
-		
-		if (px >= c.x and py >= c.y and
-			p.x <= c.x + c.width and p.y <= c.y + c.height) then
-			if data.player == nil then 
-				if p.isMega then
-					megaMush.StopMega(p, true)
-				end
-				
-				starman.stop(p)
-				
-				Audio.MusicStop();
-				Audio.SeizeStream(-1);
-				Misc.npcToCoins()
-				score(p.idx, v)
-				SFX.play("smb-exit.ogg")
-				flagpoleNPC.touched = true
-				p.keys.altJump = true
-				data.player = p 
+        if data.tick > 65 * 1.5 then
+            player.x = player.x + player.width
+            player.direction = -1
+        end
+        if data.tick > 65 * 2 then
+            data.tick = 0
+            data.state = 2
+			if not table.icontains(SaveData.completeLevels,Level.filename()) then
+				SaveData.totalStarCount = SaveData.totalStarCount + 1
+				table.insert(SaveData.completeLevels,Level.filename())
+			elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+				SaveData.totalStarCount = SaveData.totalStarCount
 			end
+            SFX.play(Misc.resolveSoundFile("smb-exit.spc"))
+        end
+    elseif data.state == 2 then
+        player.keys.right = true
+
+        for _, castleid in ipairs(castles) do
+            for _, bgo in ipairs(BGO.get(castleid)) do
+                if colliders.collide(player, bgo) then
+                    data.castleX = bgo.x
+                    data.castleWidth = bgo.width
+                end
+            end
+        end
+
+        if player.x >= data.castleX + data.castleWidth / 2 - player.width / 2 then
+            data.state = 3
+            drawCastlePlayer = true
+            castlePlayerX = data.castleX + data.castleWidth / 2 - player.width / 2
+            castlePlayerY = player.y
+            Timer.hurryTime = -1
+        end
+    elseif data.state == 3 then
+        player.x = castlePlayerX
+        player.y = castlePlayerY
+
+        if Timer.getValue() > 0 and data.countTime then
+            SFX.play(extrasounds.id[113])
+            if Timer.getValue() >= 100 then
+                Timer.add(-10)
+                SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
+            else
+                Timer.add(-1)
+                SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
+            end
+        else
+            data.tick = data.tick + 1
+        end
+		
+		if Timer.getValue() == 0 and data.countTime then
+			SFX.play(extrasounds.id[114], 1, 1, 2500)
 		end
-	end
+		
+        if data.tick > 65 * 5 then
+			GameData.muteMusic = false
+            Level.exit(6)
+        end
+    end
 end
 
-function flagpoleNPC.onTickEndNPC(v)
-	if Defines.levelFreeze then return end
-	
-	local data = v.data
-	
-	if v:mem(0x12A, FIELD_WORD) <= 0 then
-		data.initialized = false
-		return
-	end
-
-	if not data.initialized then
-		data.player = nil
-		data.collided = false
-		data.col_y = v.y - (v.height / 2.0)
-		data.col_h = data.col_y + v.height
-		data.collider = Colliders.Box(v.x, v.y - (v.height * 4), v.width, v.height)
-		data.timer = 0
-		data.initialized = true
-	end
-	
-	if data.collider ~= nil and data.timer <= 26 then
-		local c = data.collider
-		c.x = v.x - (v.width / 2)
-		c.y = v.y - (v.height / 1.25)
-		c.height = c.height + 32
-		
-		for k,b in ipairs(Block.getIntersecting(c.x,c.y,
-		c.x+c.width,c.y+c.height)) do
-			if c.y + c.height > b.y then
-				c.height = c.height - 32
-			end
-		end
-	end
-	
-	player_collided(v)
-	
-	if flagpoleNPC.stopPlayer then
-		stop_player(v)
-	end
-	
-	if data.player ~= nil and data.collided == false then
-		data.col_y = v.y + (v.height / 3)
-		data.col_h = data.col_y + v.height
-		
-		stick(data.player.idx, v)
-		
-		v.speedY = 4
-		
-		for k,b in ipairs(Block.getIntersecting(v.x, data.col_y, v.x + v.width, data.col_h)) do
-			if Block.config[b.id].passthrough == false then
-				data.collided = true
-			end
-		end
-		
-		Level.endState(6)
-		mem(0xB2C5A0, FIELD_WORD, 6)
-	elseif data.player ~= nil and data.collided == true then
-		data.timer = data.timer + 1
-		
-		if data.timer ~= 0 then
-			Level.endState(1)
-			mem(0xB2C5A0, FIELD_WORD, 6)
-		end
-		
-		if data.timer < 25 then
-			stick(data.player.idx, v)
-			
-			v.speedY = 0
-		elseif data.timer >= 25 then
-			for i = 1, Player.count() do 
-				local v = Player(i)
-				realwidth, realheight = v.x + v.width, v.y + v.height
-				
-				for k,b in ipairs(BGO.getIntersecting(v.x, v.y, realwidth, realheight)) do
-					if flagpoleNPC.castleBGOs[b.id] == true then
-						local vx, vy, vw, vh = b.x + ((b.width / 2) - 32), b.y + (b.height - 64), 32, 64
-						
-						if v.x >= vx and
-						v.y >= vy and
-						v.x <= vx + vw and
-						v.y <= vy + vh then
-							if v.mount == 1 or v.mount == 2 then break end
-							v.keys.right = false
-							v.speedX = 0
-							v.speedY = 0
-							v.x = vx + (data.player.width / 1.25)
-							enter_castle(i)
-						end
-					end
-				end
-			end
-		end
-		
-		if data.timer >= 480 then
-			mem(0xB2C5D4, FIELD_WORD, 6)
-			Level.exit(flagpoleNPC.exitType)
-	    end
-		
-		v.speedY = 0
-	end
+function customNPC.onPlayerKill(e, p)
+    if exiting then
+        e.cancelled = true
+    end
 end
 
-return flagpoleNPC
+function customNPC.onPlayerHarm(e, p)
+    if exiting then
+        e.cancelled = true
+    end
+end
+
+function customNPC.onDraw()
+    if drawCastlePlayer then
+        castlePlayerTicks = math.max(castlePlayerTicks - 1, 0)
+        player.frame = 50
+        player:render{
+            frame = 15,
+            x = castlePlayerX,
+            y = castlePlayerY,
+            color = Color(1, 1, 1, castlePlayerTicks / 65)
+        }
+    end
+end
+
+return customNPC

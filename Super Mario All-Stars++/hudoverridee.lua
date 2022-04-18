@@ -462,26 +462,26 @@ function HUDOverride.drawKey(splitOffset, thisCam, thisPlayer, priority)
 end
 
 local function drawCounter(splitOffset, thisCam, thisPlayer, obj, sprite, value, priority)
-		local v = tostring(value)
-		local left = math.min(0, obj.cross.x, obj.value.x - (#v * obj.value.align));
-		local cross = GetSprite("cross", thisPlayer.character);
-		local right = math.max(sprite.width, obj.cross.x + cross.width, obj.value.x + (#v * 18 * (HUDOverride.ALIGN_RIGHT-obj.value.align)));
-		local wid = right-left;
-		local x = obj.x - wid*(obj.align);
-		local y = obj.y
-		
-		if player2 and player2.isValid and obj.p2Offset then
-			x = x + obj.p2Offset.x
-			y = y + obj.p2Offset.y
-		end
-		Graphics.drawImageWP(sprite, 	0.5 * thisCam.width + 	x + splitOffset, y, priority)
-		Graphics.drawImageWP(cross, 	0.5 * thisCam.width + 	x + obj.cross.x + splitOffset, y + obj.cross.y, priority)
-						
-		if type(value) == "number" and value >= 0 and math.floor(value) == value then
-			Text.printWP(v, 1, 0.5 * thisCam.width +x + obj.value.x + splitOffset - (#v * obj.value.align * 18), y + obj.value.y, priority)
-		else
-			drawCounterValue(v, 0.5 * thisCam.width +x + obj.value.x + splitOffset - (#v * obj.value.align * 18), y + obj.value.y, priority)
-		end
+	local v = tostring(value)
+	local left = math.min(0, obj.cross.x, obj.value.x - (#v * obj.value.align));
+	local cross = GetSprite("cross", thisPlayer.character);
+	local right = math.max(sprite.width, obj.cross.x + cross.width, obj.value.x + (#v * 18 * (HUDOverride.ALIGN_RIGHT-obj.value.align)));
+	local wid = right-left;
+	local x = obj.x - wid*(obj.align);
+	local y = obj.y
+	
+	if player2 and player2.isValid and obj.p2Offset then
+		x = x + obj.p2Offset.x
+		y = y + obj.p2Offset.y
+	end
+	Graphics.drawImageWP(sprite, 	0.5 * thisCam.width + 	x + splitOffset, y, priority)
+	Graphics.drawImageWP(cross, 	0.5 * thisCam.width + 	x + obj.cross.x + splitOffset, y + obj.cross.y, priority)
+					
+	if type(value) == "number" and value >= 0 and math.floor(value) == value then
+		Text.printWP(v, 1, 0.5 * thisCam.width +x + obj.value.x + splitOffset - (#v * obj.value.align * 18), y + obj.value.y, priority)
+	else
+		drawCounterValue(v, 0.5 * thisCam.width +x + obj.value.x + splitOffset - (#v * obj.value.align * 18), y + obj.value.y, priority)
+	end
 end
 
 function HUDOverride.drawBombs(splitOffset, thisCam, thisPlayer, priority)

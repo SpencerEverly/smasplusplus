@@ -134,6 +134,8 @@ extrasounds.id[109] = Audio.SfxOpen(Misc.resolveSoundFile("combo4.ogg")) --Shell
 extrasounds.id[110] = Audio.SfxOpen(Misc.resolveSoundFile("combo5.ogg")) --Shell Hit 6
 extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("combo6.ogg")) --Shell Hit 7
 extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("combo7.ogg")) --Shell Hit 8
+extrasounds.id[113] = Audio.SfxOpen(Misc.resolveSoundFile("score-tally.ogg")) --SMB1 Flagpole Score Tally
+extrasounds.id[114] = Audio.SfxOpen(Misc.resolveSoundFile("score-tally-end.ogg")) --SMB1 Flagpole Score Tally (End)
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
@@ -168,7 +170,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[18].muted = true --fireball.ogg
 		Audio.sounds[43].muted = true --fireworks.ogg
 		Audio.sounds[59].muted = true --dragon-coin.ogg
-		for i = 0,112 do
+		for i = 0,114 do
 			if extrasounds.id[i].muted == true then
 				extrasounds.id[i].volume = 0
 			elseif extrasounds.id[i].muted == false then

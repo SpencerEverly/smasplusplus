@@ -20,6 +20,7 @@ local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
 HUDOverride.priority = -4.5
 HUDOverride.visible.starcoins = false
+GameData.activateAbilityMessage = false
 
 local eastercrash = false
 local eastercrashdone = false

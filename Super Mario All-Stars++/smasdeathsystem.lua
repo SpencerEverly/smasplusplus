@@ -63,10 +63,12 @@ function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil)
 	end
 end
 
-function smasdeathsystem.onPostNPCKill(npc, harmtype) --This will add coins to the classic counter.
+function smasdeathsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
 	local coins = table.map{10,33,88,103,258,528}
-	if coins[npc.id] then
-		SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+	for _,p in ipairs(Player.get()) do 
+		if coins[npc.id] and Colliders.collide(p, npc) then
+			SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+		end
 	end
 end
 
