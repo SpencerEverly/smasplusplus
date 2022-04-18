@@ -64,6 +64,20 @@ function costume.onPostNPCKill(npc, harmType)
 	end
 end
 
+function costume.onDraw(p)
+	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+		local gun1 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-1.png")
+		if borishp == 1 or borishp == 2 then
+			if player.direction == -1 then
+				Graphics.drawImageWP(gun1, player.x - camera.x - 12,  player.y - camera.y + 10, 0, 0, 35, 28, -24)
+			end
+			if player.direction == 1 then
+				Graphics.drawImageWP(gun1, player.x - camera.x + 4,  player.y - camera.y + 10, 0, 28, 35, 28, -24)
+			end
+		end
+	end
+end
+
 function costume.onTick(p)
 	local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
 	local isShooting = (plr:mem(0x118,FIELD_FLOAT) >= 100 and plr:mem(0x118,FIELD_FLOAT) <= 118 and shootingPowerups[player.powerup])
@@ -82,7 +96,7 @@ function costume.onTick(p)
 		
 		
 		
-		--Boris HP Hover System
+		--Boris HP Hover System/Gun States
 		local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
 		if borishp <= 0 then
 			
