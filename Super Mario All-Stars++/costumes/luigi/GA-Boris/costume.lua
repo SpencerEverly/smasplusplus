@@ -115,11 +115,12 @@ function costume.onPostNPCKill(npc, harmType)
 end
 
 function costume.onDraw(p)
+	Text.print(player:mem(0x160, FIELD_WORD), 100, 100)
 	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		--Gun states
-		local gun1 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-1.png")
-		if borishp == 1 or borishp == 2 then
+		if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
 			Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
+			local gun1 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-1.png")
 			if player.direction == -1 then
 				Graphics.drawImageWP(gun1, player.x - camera.x - 14,  player.y - camera.y + 10, 0, 0, 35, 28, -24)
 			end
@@ -127,13 +128,35 @@ function costume.onDraw(p)
 				Graphics.drawImageWP(gun1, player.x - camera.x + 4,  player.y - camera.y + 10, 0, 28, 35, 28, -24)
 			end
 		end
-		if borishp == 3 then
+		if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
 			Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
+			local gun2 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-2.png")
 			if player.direction == -1 then
-				Graphics.drawImageWP(gun1, player.x - camera.x - 14,  player.y - camera.y + 10, 0, 0, 35, 28, -24)
+				Graphics.drawImageWP(gun2, player.x - camera.x - 20,  player.y - camera.y + 10, 0, 0, 65, 23, -24)
 			end
 			if player.direction == 1 then
-				Graphics.drawImageWP(gun1, player.x - camera.x + 4,  player.y - camera.y + 10, 0, 28, 35, 28, -24)
+				Graphics.drawImageWP(gun2, player.x - camera.x - 14,  player.y - camera.y + 10, 0, 23, 65, 23, -24)
+			end
+		end
+		if player.powerup == 3 or player.powerup == 7 then
+			local gun4 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-4.png")
+			if player:mem(0x160, FIELD_WORD) <= 34 and player:mem(0x160, FIELD_WORD) >= 25 then
+				if player.direction == -1 then
+					Graphics.drawImageWP(gun4, player.x - camera.x - 45,  player.y - camera.y, 0, 0, 45, 38, -24)
+				end
+				if player.direction == 1 then
+					Graphics.drawImageWP(gun4, player.x - camera.x + 25,  player.y - camera.y, 0, 38, 45, 38, -24)
+				end
+			end
+		end
+		if borishp == 3 and player.powerup == 4 then
+			Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
+			local gun3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-3.png")
+			if player.direction == -1 then
+				Graphics.drawImageWP(gun3, player.x - camera.x - 45,  player.y - camera.y + 10, 0, 0, 91, 25, -24)
+			end
+			if player.direction == 1 then
+				Graphics.drawImageWP(gun3, player.x - camera.x - 15,  player.y - camera.y + 10, 0, 25, 91, 25, -24)
 			end
 		end
 	end
@@ -142,13 +165,13 @@ end
 function costume.onInputUpdate()
 	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if not Misc.isPaused() then
-			if borishp == 1 or borishp == 2 then
+			if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false then
 				if player.keys.run == KEYS_PRESSED then
 					playSound("costumes/luigi/GA-Boris/gunshot-1.ogg", 1, 1, 35)
 					costume.shootGun1()
 				end
 			end
-			if borishp == 3 then
+			if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false then
 				if player.keys.run == KEYS_PRESSED then
 					playSound("costumes/luigi/GA-Boris/gunshot-2.ogg", 1, 1, 35)
 					costume.shootGun1()
