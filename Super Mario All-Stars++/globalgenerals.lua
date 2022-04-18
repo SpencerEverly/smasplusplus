@@ -1411,6 +1411,7 @@ function globalgenerals.onExit()
 	if (Level.filename() == "MALC - HUB.lvlx") == false or (Level.filename() == "SMAS - Start.lvlx") == false or (Level.filename() == "SMAS - Map.lvlx") == false or (Level.filename() == "intro_"..smasintros..".lvlx") == false or (Level.filename() == "SMAS - Intro.lvlx") == false then
 		SaveData.lastLevelPlayed = Level.filename()
 	end
+	writeToFile("loadscreeninfo.txt", SaveData.resolution)
 end
 
 

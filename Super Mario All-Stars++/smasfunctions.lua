@@ -69,6 +69,10 @@ function drawImg(name, x, y, withPriority, sceneCoords, arg6, arg7) --Drawing gr
 	end
 end
 
+----------------
+--Music/Sounds
+----------------
+
 function openSound(name) --Opening SFXs
 	SFX.open(name)
 end
@@ -147,6 +151,10 @@ function refreshMusic(sectionid) --Refresh the music that's currently playing by
 	end
 end
 
+------------------------
+--Game/File Management
+------------------------
+
 function writeToFile(name, text) --Write to a file using io. This will overwrite everything with the text specified, so BE CAREFUL!
     name = Misc.resolveFile(name)
     if name == nil then
@@ -165,7 +173,27 @@ function writeToFile(name, text) --Write to a file using io. This will overwrite
     f:close()
 end
 
-function lifeCount()
+function addToFile(name, text) --Add to a file using io. This won't overwrite everything, just adds something to the file, so this one is fine.
+    name = Misc.resolveFile(name)
+    if name == nil then
+        error("You need to specify the name of the file.")
+    end
+	if not "string" then
+		error("That needs to be a string.")
+	end
+
+    local f = io.open(name,"a")
+    if f == nil then
+        return
+    end
+
+    f:write(text)
+    f:close()
+end
+
+--Lives
+
+function lifeCount() --This lists the current life count
 	if SaveData.totalLives == nil then
 		return 0
 	else
@@ -173,28 +201,27 @@ function lifeCount()
 	end
 end
 
-function manageLives(lives, mathcount, maxlives) --arg1 = number of lives, arg2 = to add (true) or subtract them (false), maxout = whenever to max out all the lives to 999..optional
+function manageLives(lives, mathcount) --arg1 = number of lives, arg2 = to add (true) or subtract them (false)
 	if lives == nil then
 		error("You need to specify the number of lives.")
 	end
 	if mathcount == nil then
 		error("You need to specify whenever to add (true) or subtract (false) the life count.")
 	end
-	if maxlives == nil then
-		maxlives = false
-	end
-	if not mathcount and not maxlives then
+	if not mathcount then
 		SaveData.totalLives = SaveData.totalLives - lives
-	elseif mathcount and not maxlives then
+	elseif mathcount then
 		SaveData.totalLives = SaveData.totalLives + lives
-	elseif not mathcount and maxlives then
-		SaveData.totalLives = 999
-	elseif mathcount and maxlives then
-		SaveData.totalLives = 999
 	end
 end
 
-function starCount()
+function maxOutLives() --This maxes out the lives to 999
+	SaveData.totalLives = 999
+end
+
+--Star Count
+
+function starCount() --This lists the count of the stars
 	if SaveData.totalStarCount == nil then
 		return 0
 	else
@@ -202,38 +229,105 @@ function starCount()
 	end
 end
 
-function manageStars(arg1, arg2, clearcount) --arg1 = Number of stars, arg2 = To add or subtract them, arg3 = Whenever to clear everything that holds info regarding where stars were collected or not, and it's star count..optional
+function maxOutStars() --This maxs the star count to 9999
+	SaveData.totalStarCount = 9999
+end
+
+function clearAllStars() --This clears all the stars, and even the level table
+	playSound(67)
+	SaveData.totalStarCount = 0
+	for k in pairs(SaveData.completeLevels) do
+		SaveData.completeLevels[k] = nil
+	end
+	SaveData.completeLevels = {}
+end
+
+function manageStars(arg1, arg2) --arg1 = Number of stars, arg2 = To add or subtract them
 	if arg1 == nil then
 		error("You need to specify the number of stars.")
 	end
 	if arg2 == nil then
 		error("You need to specify whenever to subtract or add the stars.")
 	end
-	if cleartable == nil then
-		cleartable = false
-	end
 	if (arg1 ~= nil) and (arg2 ~= nil) then
 		stars = arg1
 		mathcount = arg2
 	else
 	end
-	if mathcount == subtract and not clearcount then
+	if mathcount == subtract then
 		SaveData.totalStarCount = SaveData.totalStarCount - stars
-	elseif mathcount == add and not clearcount then
+	elseif mathcount == add then
 		SaveData.totalStarCount = SaveData.totalStarCount + stars
-	elseif mathcount == subtract and clearcount then
-		return
-	elseif mathcount == add and clearcount then
-		return
-	end
-	if clearcount then
-		SaveData.totalStarCount = 0
-		for k in pairs(SaveData.completeLevels) do
-			SaveData.completeLevels[k] = nil
-		end
-		SaveData.completeLevels = {}
 	end
 end
+
+-----------------------
+--Date/Time Functions
+-----------------------
+
+--Below are the usual day/month/year counts
+function osDay()
+	return os.date("*t").day
+end
+
+function osMonth()
+	return os.date("*t").month
+end
+
+function osYear()
+	return os.date("*t").year
+end
+
+function osHour()
+	return os.date("*t").hour
+end
+
+function osMinute()
+	return os.date("*t").min
+end
+
+function osSecond()
+	return os.date("*t").sec
+end
+
+function osDayJulian() --Converts Gregorian day to the Julian day.
+	return (os.date("*t").day - 13)
+end
+
+function osJulianNumber() --A number telling the real Julian time
+	return (os.time() / 86400) + 2440587.5
+end
+
+function easterdiv(x, y) --This is used for calculating Easter
+	return math.floor(x / y)
+end
+
+function osEaster(year) --This will calculate Easter Sunday, and show the day and time after saving it to SaveData.
+    local G = year % 19
+    local C = easterdiv(year, 100)
+    local H = (C - easterdiv(C, 4) - easterdiv((8 * C + 13), 25) + 19 * G + 15) % 30
+    local I = H - easterdiv(H, 28) * (1 - easterdiv(29, H + 1)) * (easterdiv(21 - G, 11))
+    local J = (year + easterdiv(year, 4) + I + 2 - C + easterdiv(C, 4)) % 7
+    local L = I - J
+    local month = 3 + easterdiv(L + 40, 44)
+	SaveData.eastermonth = month
+	SaveData.easterday = L + 28 - 31 * easterdiv(month, 4)
+	return "Easter Sunday is on "..SaveData.eastermonth.."/"..SaveData.easterday.."."
+end
+
+function osLeapYear(y) --This detects the Leap Year.
+    return y % 4 == 0 and y % 100 ~= 0 or y % 400 == 0
+end
+
+local years = {}
+local startD, endD = 1, 2020
+for i = startD, endD do
+	if osLeapYear(i) then years[#years + 1] = i end
+end
+
+-------------------
+--Misc. functions
+-------------------
 
 function getEpisodeFilename() --Thanks KBM_Quine!
 	if not Misc.inEditor then
@@ -253,4 +347,5 @@ end
 function isExtraSoundsActive()
 	return extrasounds.active
 end
+
 return smasfunctions

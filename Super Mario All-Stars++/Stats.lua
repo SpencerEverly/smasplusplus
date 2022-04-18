@@ -159,7 +159,7 @@ end
 function stats.onDraw()
 	local uthud = Graphics.loadImageResolved("friskhud.png")
 	if stats.enabled == true then
-		Graphics.drawImageWP(uthud, 0, 0, 0)
+		Graphics.drawImageWP(uthud, 0, 0, -4.5)
 		-- Prints your stats. It has to be global for some reason.
 		if stats.alwaysBig == true then
 			if player.powerup == 1 and player.forcedState ~= FORCEDSTATE_POWERDOWN_SMALL then

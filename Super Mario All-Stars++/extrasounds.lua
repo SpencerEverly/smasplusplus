@@ -272,8 +272,12 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 	end
 end
 
-function extrasounds.onPlayerKill()
-	playSound(8)
+function extrasounds.onPostPlayerKill()
+	if player.character == CHARACTER_LINK then
+		SFX.play(80)
+	else
+		playSound(8)
+	end
 end
 
 function extrasounds.onInputUpdate() --Button pressing for such commands

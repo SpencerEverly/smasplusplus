@@ -926,9 +926,9 @@ local function starthub()
 	Misc.unpause()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
-	player:teleport(-200608, -200128, bottomCenterAligned)
+	player:teleport(-200608, -200126, bottomCenterAligned)
 	if Player(2) and Player(2).isValid then
-		Player(2):teleport(-200650, -200128, bottomCenterAligned)
+		Player(2):teleport(-200650, -200126, bottomCenterAligned)
 	end
 end
 

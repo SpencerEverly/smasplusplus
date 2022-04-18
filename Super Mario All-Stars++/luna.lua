@@ -89,32 +89,6 @@ local function loadSaveSlot(slot)
 	return {}
 end
 
---Now we get to the Hub date detection stuff. First, we start with Easter...
-function div (x, y) return math.floor(x / y) end
-function calculateeaster(year) --"Happy easter! (Foot goes into the toilet with a kick sound)" - Vince
-    local G = year % 19
-    local C = div(year, 100)
-    local H = (C - div(C, 4) - div((8 * C + 13), 25) + 19 * G + 15) % 30
-    local I = H - div(H, 28) * (1 - div(29, H + 1)) * (div(21 - G, 11))
-    local J = (year + div(year, 4) + I + 2 - C + div(C, 4)) % 7
-    local L = I - J
-    local month = 3 + div(L + 40, 44)
-	SaveData.eastermonth = month
-	SaveData.easterday = L + 28 - 31 * div(month, 4)
-	return "Easter Sunday is on: ",month,"/",L + 28 - 31 * div(month, 4),". The data has been saved."
-end
-
-function isLeapYear(y) --Now for the leap year detection...
-    return y % 4 == 0 and y % 100 ~= 0 or y % 400 == 0
-end
-
-local years = {}
-local startD, endD = 1, 2020
-for i = startD, endD do
-  if isLeapYear(i) then years[#years + 1] = i end
-end
---Note: You can just plainly use 'isLeapYear()' if you just want to check if a year is a leap year!
-
 --Now that everything has been loaded, save the game and start loading the medium important stuff
 Misc.saveGame()
 local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
@@ -150,7 +124,7 @@ end
 if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
 	SaveData.totalStarCount = 0
 end
-if SaveData.completeLevels == nil then
+if SaveData.completeLevels == nil then --This will add a table to list completed levels
 	SaveData.completeLevels = {}
 end
 
@@ -253,9 +227,10 @@ function onLoad()
 	end
 end
 
-function onLoop() --I'm sorry for using depercated crap, this is used specifically for stopping the loading sound when erroring
+function onLoop() --I'm sorry for using deprecated crap, this is used specifically for stopping the loading sound when erroring
 	if unexpected_condition then
 		if fadetolevel == true then
+			fadetolevel = false
 			loadingSoundObject:Stop()
 		end
 	end
@@ -284,7 +259,7 @@ function onStart() --Now do onStart...
 		SaveData.dateplayedday = os.date("%d")
 	end
 	--Calculate Easter Sunday
-	calculateeaster(os.date("*t").year)
+	osEaster(os.date("*t").year)
 	if SaveData.dateplayedyesterday == nil then
 		yesterdaynumber = os.date("*t").day - 1
 		yesterdaystring = tostring(yesterdaynumber)
@@ -348,7 +323,7 @@ function onDraw()
 	local warps = Warp.get()
 	for _, v in ipairs(warps) do
 		if v.isValid and (not v.isHidden) and v.starsRequired > SaveData.totalStarCount then
-			Graphics.drawImageToSceneWP(stardoor, v.entranceX + 0.5 * v.entranceWidth - 12, v.entranceY - 20, -40)
+			Graphics.drawImageToSceneWP(stardoor, v.entranceX + 0.5 * v.entranceWidth - 12, v.entranceY - 20, -40) --This will draw the star door locks, since the original image is invisible
         end
     end
 	if noItemSound then
@@ -383,7 +358,7 @@ end
 
 local startGif = false
 
-function onKeyboardPressDirect(k)
+function onKeyboardPressDirect(k) --This will replace the GIF recording/snapshot sounds to some custom ones
 	if k == VK_F11 then
 		Audio.sounds[12].muted = true
 		Audio.sounds[24].muted = true

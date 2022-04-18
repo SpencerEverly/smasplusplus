@@ -1,11 +1,14 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
+local sprite = require("base/sprite")
 
 local costume = {}
 
 function costume.onInit(p)
 	plr = p
 	registerEvent(costume,"onInputUpdate")
+	registerEvent(costume,"onTick")
+	registerEvent(costume,"onPostBlockHit")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/link/1-Zelda1-NES/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/link/1-Zelda1-NES/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/link/1-Zelda1-NES/block-hit.ogg")
@@ -86,6 +89,56 @@ function costume.onInit(p)
 	Defines.player_grav = 0.3
 	
 	costume.abilitesenabled = true
+end
+
+local swimtimer = 11
+local rotationjump = 0
+
+local function isSlidingOnIce()
+	return (player:mem(0x0A,FIELD_BOOL) and (not player.keys.left and not player.keys.right))
+end
+
+function costume.onTick()
+	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+		local isJumping = player:mem(0x11C, FIELD_WORD) and not player:isOnGround() --Jumping detection
+		local isUnderwater = plr:mem(0x36, FIELD_BOOL) --Underwater detection
+		if isJumping and plr:mem(0x14, FIELD_WORD) <= 0 and not isUnderwater and not player:isOnGround() then --Checks to see if the player is jumping...
+			plr:setFrame(12)
+			--local rotationjump = rotationjump % 360
+			--player:render{frame = 12, x = player.x - camera.x, y = player.y - camera.y, priority = -25}
+		end
+		if not isJumping then
+			--rotationjump = 0
+		end
+		local swimframes = {13,14}
+		if isUnderwater and player:mem(0x14, FIELD_WORD) <= 0 and not player:isOnGround() then --Swim frames!
+			plr:playAnim(swimframes, 8, false, -25)
+			Defines.player_walkspeed = 4.5 --This is to make sure the player goes faster underwater
+			Defines.player_runspeed = 4.5
+		end
+		if not isUnderwater then
+			--swimtimer = 11
+			Defines.player_walkspeed = 3.5
+			Defines.player_runspeed = 3.5
+		end
+		local walkframes = {1,2}
+		if plr.speedX ~= 0 and not isSlidingOnIce() then
+			local walkSpeed = math.max(0.35,math.abs(plr.speedX)/Defines.player_walkspeed) --Making sure the walk animation is slower
+			plr:playAnim(walkframes, 8, false, -25)
+		end
+		if Level.endState() >= 1 and not Level.endState() == 3 then --If win state, he poses
+			plr:setFrame(16)
+		end
+	end
+end
+
+function costume.onPostBlockHit(block, fromUpper)
+	local bricks = table.map{4,60,188,226} --These are a list of breakable bricks.
+	if bricks[block.id] then
+		for _,block in Block.iterate({4,60,188,226}) do
+			block:remove(true)
+		end
+	end
 end
 
 function costume.onInputUpdate()
