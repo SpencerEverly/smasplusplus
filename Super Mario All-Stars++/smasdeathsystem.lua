@@ -171,8 +171,8 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 							Routine.wait(3, true)
 							
 						elseif rngkey == 22 then
-							playSound("gameover/gameover-22-voice.mp3")
-							Routine.wait(18, true)
+							playSound("gameover/gameover-22-voice.ogg")
+							Routine.wait(17, true)
 							
 						elseif rngkey == 23 then
 							Routine.wait(4, true)
