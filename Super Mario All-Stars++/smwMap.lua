@@ -3701,7 +3701,7 @@ do
         {
             icon = Graphics.sprites.hardcoded["33-2"],
             getValue = (function()
-                return mem(0x00B2C5A8,FIELD_WORD)
+                return SaveData.totalCoinsClassic
             end),
         },
 		-- Total Coin Count
