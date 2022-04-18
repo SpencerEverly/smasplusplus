@@ -134,11 +134,11 @@ end
 
 function costume.onPostBlockHit(block, fromUpper)
 	local bricks = table.map{4,60,188,226} --These are a list of breakable bricks.
-	if bricks[block.id] then
-		for _,block in Block.iterate({4,60,188,226}) do
-			block:remove(true)
-		end
-	end
+	--if bricks[block.id] then
+		--for _,block in Block.iterate({4,60,188,226}) do
+			--block:remove(true)
+		--end
+	--end
 end
 
 function costume.onInputUpdate()
