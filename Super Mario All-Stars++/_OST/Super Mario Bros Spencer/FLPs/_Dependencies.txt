@@ -1,0 +1,7 @@
+The following plugins will need to be required to have full compability:
+
+- Magical8bitPlug2
+- SOUND Canvas VA
+- SRX ORCHESTRA
+- ZENOLOGY
+- JD-800
