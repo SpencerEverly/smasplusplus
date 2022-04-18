@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. Lost Levels\: World 1-4";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. Lost Levels\: World 1-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-194240;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
@@ -2175,15 +2175,6 @@ ID:127;X:-179520;Y:-180128;
 ID:128;X:-178720;Y:-180160;
 ID:18;X:-178240;Y:-180096;
 ID:16;X:-177824;Y:-180224;
-ID:57;X:-178016;Y:-180352;
-ID:57;X:-178016;Y:-180320;
-ID:57;X:-178016;Y:-180288;
-ID:57;X:-178016;Y:-180256;
-ID:57;X:-178016;Y:-180224;
-ID:57;X:-178016;Y:-180192;
-ID:57;X:-178016;Y:-180160;
-ID:57;X:-178016;Y:-180128;
-ID:48;X:-178048;Y:-180416;
 ID:107;X:-179424;Y:-180128;
 ID:250;X:-199968;Y:-200320;
 ID:201;X:-195552;Y:-200288;
@@ -2297,13 +2288,13 @@ ID:60;X:-200384;Y:-200544;
 ID:60;X:-200384;Y:-200672;
 ID:60;X:-200256;Y:-200672;
 ID:60;X:-200128;Y:-200672;
+ID:999;X:-178016;Y:-180416;
 BGO_END
 NPC
 ID:173;X:-197248;Y:-200224;D:-1;
 ID:178;X:-195136;Y:-200224;D:-1;ED:"Bridge Disappear";
 ID:796;X:-195360;Y:-200232;D:-1;EA:"Bowser Appear";ED:"Bowser Dead";
 ID:94;X:-194656;Y:-200150;D:-1;MG:"Thank you\, <characterName>! But our princess is in another castle!";FD:1;
-ID:1000;X:-178016;Y:-180224;D:-1;
 ID:770;X:-199264;Y:-200320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-198688;Y:-200320;D:-1;XTRA:"{\n    \"angle\"\: 0\,\n    \"speed\"\: 3\n}\n";
 ID:770;X:-198464;Y:-200192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
@@ -2314,6 +2305,7 @@ ID:770;X:-197184;Y:-200320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-196992;Y:-200192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-196608;Y:-200192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:476;X:-195584;Y:-200320;D:-1;
+ID:986;X:-178016;Y:-180384;D:-1;
 NPC_END
 DOORS
 IX:-179424;IY:-180096;OX:-199968;OY:-200288;DT:2;ID:1;OD:1;

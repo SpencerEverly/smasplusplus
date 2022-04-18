@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 1\: World 7-4";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 1\: World 7-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-197664;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Album.spc|0\;g=2.5";BG:62;
@@ -3039,17 +3039,8 @@ ID:79;X:-199392;Y:-200352;
 ID:79;X:-199392;Y:-200288;
 ID:17;X:-200032;Y:-200416;
 ID:16;X:-198016;Y:-200224;
-ID:57;X:-198208;Y:-200352;
-ID:57;X:-198208;Y:-200320;
-ID:57;X:-198208;Y:-200288;
-ID:57;X:-198208;Y:-200256;
-ID:57;X:-198208;Y:-200224;
-ID:57;X:-198208;Y:-200192;
-ID:57;X:-198208;Y:-200160;
-ID:57;X:-198208;Y:-200128;
 ID:35;X:-137216;Y:-139200;
 ID:29;X:-137376;Y:-139200;
-ID:48;X:-198240;Y:-200416;
 ID:107;X:-199456;Y:-200128;
 ID:104;X:-173920;Y:-180256;
 ID:104;X:-173696;Y:-180160;LR:"Door";
@@ -5149,11 +5140,11 @@ ID:79;X:-140224;Y:-139136;
 ID:79;X:-140384;Y:-139136;
 ID:79;X:-140352;Y:-139136;
 ID:79;X:-140320;Y:-139136;
+ID:999;X:-198208;Y:-200416;
 BGO_END
 NPC
 ID:280;X:-159400;Y:-160144;D:-1;ED:"Boss Dead";
 ID:94;X:-173376;Y:-180118;D:-1;MG:"Thank you\, <characterName>!<page>This game is about to get harder and harder.<page>Watch out for World 8! The princess is there\, and I mean it this time!<page>Good luck\, hero!";FD:1;
-ID:999;X:-198208;Y:-200224;D:-1;
 ID:589;X:-179326;Y:-180096;D:-1;
 ID:476;X:-179424;Y:-180224;D:-1;
 ID:476;X:-179264;Y:-180192;D:-1;
@@ -5196,6 +5187,7 @@ ID:91;X:-138336;Y:-139136;D:-1;CN:146;
 ID:91;X:-138304;Y:-139136;D:-1;CN:146;
 ID:770;X:-176864;Y:-180224;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:589;X:-159454;Y:-160064;D:-1;XTRA:"{\n    \"jumpHeight\"\: 100\,\n    \"useFixed\"\: true\n}\n";
+ID:998;X:-198208;Y:-200384;D:-1;
 NPC_END
 DOORS
 IX:-159408;IY:-160128;OX:-173680;OY:-180096;DT:2;ID:1;OD:3;WX:0;WY:0;LR:"Door";
