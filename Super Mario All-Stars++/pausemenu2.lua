@@ -178,19 +178,15 @@ end
 
 local function toggleabilitiescost()
 	if pauseplus.getSelectionValue("costumeoptions","Enable/Disable Abilities") then
-		if SaveData.disablex2char == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			SaveData.toggleCostumeAbilities = true
-		end
+		SaveData.toggleCostumeAbilities = true
 	else
 		SaveData.toggleCostumeAbilities = false
 	end
 end
 
 local function toggleprofanecostume()
-	if pauseplus.getSelectionValue("costumeoptions","Enable/Disable Profanity") then
-		if SaveData.disablex2char == false and GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
-			SaveData.toggleCostumeProfanity = true
-		end
+	if pauseplus.getSelectionValue("costumeoptions","Enable/Disable Profane Voices") then
+		SaveData.toggleCostumeProfanity = true
 	else
 		SaveData.toggleCostumeProfanity = false
 	end
@@ -1126,8 +1122,8 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	
 	--Costume Menu
 	if SaveData.disableX2char == false then
-		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() toggleabilitiescost() end})
-		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() toggleprofanecostume() end})
+		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() Routine.run(toggleabilitiescost) end})
+		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() Routine.run(toggleprofanecostume) end})
 	end
 
 	--Teleportation Menu
