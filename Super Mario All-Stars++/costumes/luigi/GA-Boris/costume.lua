@@ -9,13 +9,14 @@ local eventsRegistered = false
 local plr
 local borishp
 local hit = false
+local cooldown = 0
 
 function costume.onInit(p)
 	plr = p
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onDraw")
-	registerEvent(costume,"onPostPlayerHarm")
+	registerEvent(costume,"onPlayerHarm")
 	registerEvent(costume,"onInputUpdate")
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onPostNPCKill")
@@ -41,6 +42,7 @@ function costume.onInit(p)
 	
 	costume.abilitiesenabled = true
 	costume.useGun1 = false
+	costume.useGrenade2 = false
 	HUDOverride.visible.itembox = false
 	borishp = 3
 end
@@ -85,10 +87,37 @@ function costume.shootGun1()
 		gunNpc.speedX = -18.5
 		gunNpc.speedY = 0
 	end
-	playSound("mario/SP-1-EricCartman/snowball_throw.ogg")
 	costume.useGun1 = false
 	cooldown = 10
 	if cooldown <= 0 then
+		plr:mem(0x172, FIELD_BOOL, true)
+	end
+end
+
+function costume.shootGrenade2()
+	plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
+	local x = plr.x
+	local y = plr.y + plr.height/2 - 5
+	if (plr.direction == 1) then
+		x = x + plr.width
+	end
+	Audio.sounds[25].muted = true
+	local grenadeid = 291
+	local grenadeNpc = NPC.spawn(grenadeid, x, y, player.section, false, true)
+	costume.useGrenade2 = true
+	grenadeNpc.frames = 1
+	if (plr.direction == 1) then
+		grenadeNpc.speedX = 7.5
+		grenadeNpc.speedY = 0.2
+	else
+		grenadeNpc.speedX = -7.5
+		grenadeNpc.speedY = -0.2
+	end
+	playSound("luigi/GA-Boris/grenade-launch.ogg")
+	costume.useGrenade2 = false
+	cooldown = 10
+	if cooldown <= 0 then
+		Audio.sounds[25].muted = false
 		plr:mem(0x172, FIELD_BOOL, true)
 	end
 end
@@ -108,14 +137,10 @@ function costume.onPostNPCKill(npc, harmType)
 	end
 	if items[npc.id] and Colliders.collide(plr, npc) then
 		borishp = borishp + 1
-		if borishp > 3 then
-			borishp = 3
-		end
 	end
 end
 
 function costume.onDraw(p)
-	Text.print(player:mem(0x160, FIELD_WORD), 100, 100)
 	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		--Gun states
 		if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
@@ -159,22 +184,53 @@ function costume.onDraw(p)
 				Graphics.drawImageWP(gun3, player.x - camera.x - 15,  player.y - camera.y + 10, 0, 25, 91, 25, -24)
 			end
 		end
+		if borishp == 3 and player.powerup == 5 and player:mem(0x4A, FIELD_BOOL) == false then
+			Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-2.png")
+			local gun5 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-5.png")
+			if player.direction == -1 then
+				Graphics.drawImageWP(gun5, player.x - camera.x - 45,  player.y - camera.y + 10, 0, 30, 78, 30, -24)
+			end
+			if player.direction == 1 then
+				Graphics.drawImageWP(gun5, player.x - camera.x - 10,  player.y - camera.y + 10, 0, 0, 78, 30, -24)
+			end
+		end
+		if borishp == 3 and player.powerup == 6 then
+			Graphics.sprites.npc[291].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/grenade.png")
+		end
 	end
 end
 
 function costume.onInputUpdate()
 	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
 		if not Misc.isPaused() then
-			if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false then
+			if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
 				if player.keys.run == KEYS_PRESSED then
 					playSound("costumes/luigi/GA-Boris/gunshot-1.ogg", 1, 1, 35)
 					costume.shootGun1()
 				end
 			end
-			if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false then
+			if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
 				if player.keys.run == KEYS_PRESSED then
 					playSound("costumes/luigi/GA-Boris/gunshot-2.ogg", 1, 1, 35)
 					costume.shootGun1()
+				end
+			end
+			if borishp == 3 and player.powerup == 4 then
+				if player.keys.run == KEYS_PRESSED then
+					playSound("costumes/luigi/GA-Boris/gunshot-3.ogg", 1, 1, 35)
+					costume.shootGun1()
+				end
+			end
+			if borishp == 3 and player.powerup == 5 then
+				if player.keys.run == KEYS_PRESSED then
+					playSound("costumes/luigi/GA-Boris/gunshot-4.ogg", 1, 1, 35)
+					costume.shootGun1()
+				end
+			end
+			if borishp == 3 and player.powerup == 6 then
+				if player.keys.run == KEYS_PRESSED then
+					playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
+					costume.shootGrenade2()
 				end
 			end
 		end
@@ -188,6 +244,9 @@ function costume.onTick(p)
 		--Health system
 		if plr.powerup <= 1 then
 			plr.powerup = 2
+		end
+		if borishp > 3 then
+			borishp = 3
 		end
 		
 		
@@ -219,16 +278,22 @@ function costume.onTick(p)
 	end
 end
 
-function costume.onPostPlayerHarm()
+function costume.hphit()
 	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
-		hit = true
-		if hit then
-			borishp = borishp - 1
-		end
-		if borishp < 1 then
-			player:kill()
+		if not player.hasStarman and not player.isMega then
+			hit = true
+			if hit then
+				borishp = borishp - 1
+			end
+			if borishp < 1 then
+				player:kill()
+			end
 		end
 	end
+end
+
+function costume.onPlayerHarm()
+	costume.hphit()
 end
 
 function costume.onCleanup(p)
