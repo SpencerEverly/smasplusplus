@@ -500,24 +500,24 @@ local function FirstBoot1()
 	logo = false
 	pressjumpwords = false
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg")
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.5>Welcome to Super Mario All-Stars++.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Please note that this is an Open Source project.<page>So please understand that BUGS may occur! Don't hesitate to report them on the GitHub page.<page>You can find it at https://github.com/SpencerEverly/smasplusplus/.<page>Other than that, please enjoy the game!<page>But, before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Welcome to Super Mario All-Stars++.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Please note that this is an Open Source project.<page>So please understand that BUGS may occur! Don't hesitate to report them on the GitHub page.<page>You can find it at https://github.com/SpencerEverly/smasplusplus/.<page>Other than that, please enjoy the game!<page>But, before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot3()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.6>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot4()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>And now, we need to know your name. What is your name? Press Begin and type up your name (You'll need to use a keyboard for this).<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.6>And now, we need to know your name. What is your name? Press Begin and type up your name (You'll need to use a keyboard for this).<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot5()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.0>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot6()
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.5>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == 0 then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
 	end
@@ -528,12 +528,12 @@ local function FirstBoot6()
 end
 	
 local function FirstBootGameHelp()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.3>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
 	Misc.saveGame()
 end
 
 local function TimeFixInfo1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.3><setPos 400 32 0.5 -1.2>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.6>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
 end
 
 local function FailsafeMessage1()
