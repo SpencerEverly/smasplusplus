@@ -823,9 +823,16 @@ ID:752;X:-197952;Y:-200320;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL1-3\"\,\n    \"
 ID:802;X:-197888;Y:-200384;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-1\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"1-3\: Flying... Bloopers?!\"\,\n    \"path_down\"\: \"toSMBLL1-3\"\,\n    \"path_up\"\: \"toSMBLL1-4\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-197888;Y:-200416;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL1-4\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 32\, -64\"\,\n    \"smoothness\"\: 0.7999999999999999\n}\n";
 ID:849;X:-197856;Y:-200480;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-1\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"1-4\: Castle #1\"\,\n    \"path_down\"\: \"toSMBLL1-4\"\,\n    \"path_right\"\: \"toSMBLLW-1Path1\"\,\n    \"unlock_right\"\: 9\n}\n";
-ID:855;X:-196800;Y:-200416;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-Quicksand.lvlx\"\,\n    \"levelTitle\"\: \"Quicksand Battle\"\,\n    \"path_left\"\: \"toSMB32-Quicksand\"\n}\n";
+ID:855;X:-196800;Y:-200416;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-Quicksand.lvlx\"\,\n    \"levelTitle\"\: \"Quicksand Battle\"\,\n    \"path_down\"\: \"toSMB32-4\"\,\n    \"path_left\"\: \"toSMB32-Quicksand\"\,\n    \"unlock_down\"\: 9\n}\n";
 ID:821;X:-196928;Y:-200480;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMB3W-2Area1WarpEnd\"\,\n    \"levelTitle\"\: \"Warp to Toad House\"\,\n    \"path_left\"\: \"\"\,\n    \"path_up\"\: \"toSMB3ToadHouseSecret1\"\,\n    \"warpName\"\: \"SMB3W-2Area1WarpBegin\"\n}\n";
 ID:752;X:-196928;Y:-200448;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3ToadHouseSecret1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:752;X:-196800;Y:-200384;D:-1;XTRA:"{\n    \"name\"\: \"toSMB32-4\"\,\n    \"points\"\: \"0\, -32\, 0\, 64\"\n}\n";
+ID:802;X:-196800;Y:-200320;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"2-4\: Two Stories Tall\"\,\n    \"path_down\"\: \"toSMB32-5\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB32-4\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 2\,\n    \"unlock_up\"\: 2\n}\n";
+ID:752;X:-196800;Y:-200288;D:-1;XTRA:"{\n    \"name\"\: \"toSMB32-5\"\,\n    \"points\"\: \"0\, -32\, 0\, 64\, 96\, 64\"\n}\n";
+ID:802;X:-196704;Y:-200224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"2-5\: Heated Blocks\"\,\n    \"path_down\"\: \"toSMB3W-2SecretPath1\"\,\n    \"path_left\"\: \"toSMB32-5\"\,\n    \"path_right\"\: \"toSMB32-Pyramid\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 6\,\n    \"unlock_right\"\: 9\,\n    \"unlock_up\"\: 2\n}\n";
+ID:752;X:-196672;Y:-200224;D:-1;XTRA:"{\n    \"name\"\: \"toSMB32-Pyramid\"\,\n    \"points\"\: \"96\, 0\, -36\, 0\"\n}\n";
+ID:752;X:-196704;Y:-200192;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-2SecretPath1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:821;X:-196704;Y:-200160;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMB3W-2Area2WarpEnd\"\,\n    \"levelTitle\"\: \"Warp to the Thief's House\"\,\n    \"path_left\"\: \"\"\,\n    \"path_up\"\: \"toSMB3W-2SecretPath1\"\,\n    \"warpName\"\: \"SMB3W-2Area2WarpBegin\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";

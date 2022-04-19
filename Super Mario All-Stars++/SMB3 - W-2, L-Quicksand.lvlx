@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 3\: World 2 (Quicksand Boss)";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 200\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 3\: World 2 (Quicksand Boss)";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 200\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-192960;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Sunny Face-Off!.spc|0\;g=2.2";BG:14;
@@ -385,10 +385,6 @@ ID:163;X:-200256;Y:-200032;W:32;H:32;
 ID:163;X:-200288;Y:-200032;W:32;H:32;
 ID:163;X:-200320;Y:-200032;W:32;H:32;
 ID:163;X:-200192;Y:-200032;W:32;H:32;
-ID:1006;X:-192960;Y:-200064;W:32;H:32;
-ID:1006;X:-192960;Y:-200096;W:32;H:32;
-ID:1006;X:-192960;Y:-200128;W:32;H:32;
-ID:1006;X:-192960;Y:-200160;W:32;H:32;
 ID:1006;X:-192960;Y:-200192;W:32;H:32;
 ID:1006;X:-192960;Y:-200224;W:32;H:32;
 ID:1006;X:-192960;Y:-200256;W:32;H:32;
@@ -615,9 +611,9 @@ ID:245;X:-198672;Y:-200128;D:-1;
 ID:245;X:-198576;Y:-200128;D:-1;
 ID:4;X:-198240;Y:-200064;D:-1;
 ID:76;X:-195968;Y:-200160;D:-1;S1:5;
-ID:999;X:-193376;Y:-200192;D:-1;
 ID:76;X:-194944;Y:-200160;D:-1;S1:5;
 ID:151;X:-197376;Y:-200080;D:-1;MG:"Tornado not implemented yet.";FD:1;
+ID:985;X:-193376;Y:-200192;D:-1;
 NPC_END
 PHYSICS
 ET:1;X:-194256;Y:-200096;W:256;H:224;
