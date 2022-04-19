@@ -3681,47 +3681,75 @@ do
     smwMap.walkCycles["ACCURATE-SMW-TOAD"]  = smwMap.walkCycles["SMW-MARIO"]
 
 
-
-    smwMap.hudCounters = {
-		-- Lives
-        {
-            icon = Graphics.loadImageResolved("smwMap/hud_lives.png"),
-            getValue = (function()
-                return SaveData.totalLives
-            end),
-        },
-		-- Death Count
-        {
-            icon = Graphics.loadImageResolved("deathCount.png"),
-            getValue = (function()
-                return SaveData.deathCount
-            end),
-        },
-        -- Coins
-        {
-            icon = Graphics.sprites.hardcoded["33-2"],
-            getValue = (function()
-                return SaveData.totalCoinsClassic
-            end),
-        },
-		-- Total Coin Count
-        {
-            icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
-            getValue = (function()
-                return SaveData.totalcoins
-            end),
-        },
-        -- Stars
-        {
-            icon = Graphics.sprites.hardcoded["33-5"],
-            isEnabled = (function()
-                return SaveData.totalStarCount > 0
-            end),
-            getValue = (function()
-                return SaveData.totalStarCount
-            end),
-        }
-    }
+	if SaveData.disableX2char == false then
+		smwMap.hudCounters = {
+			-- Lives
+			{
+				icon = Graphics.loadImageResolved("smwMap/hud_lives.png"),
+				getValue = (function()
+					return SaveData.totalLives
+				end),
+			},
+			-- Death Count
+			{
+				icon = Graphics.loadImageResolved("deathCount.png"),
+				getValue = (function()
+					return SaveData.deathCount
+				end),
+			},
+			-- Coins
+			{
+				icon = Graphics.sprites.hardcoded["33-2"],
+				getValue = (function()
+					return SaveData.totalCoinsClassic
+				end),
+			},
+			-- Total Coin Count
+			{
+				icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
+				getValue = (function()
+					return SaveData.totalcoins
+				end),
+			},
+			-- Stars
+			{
+				icon = Graphics.sprites.hardcoded["33-5"],
+				isEnabled = (function()
+					return SaveData.totalStarCount > 0
+				end),
+				getValue = (function()
+					return SaveData.totalStarCount
+				end),
+			}
+		}
+	elseif SaveData.disableX2char == true then
+		smwMap.hudCounters = {
+			-- Lives
+			{
+				icon = Graphics.loadImageResolved("smwMap/hud_lives.png"),
+				getValue = (function()
+					return mem(0x00B2C5AC, FIELD_FLOAT)
+				end),
+			},
+			-- Coins
+			{
+				icon = Graphics.sprites.hardcoded["33-2"],
+				getValue = (function()
+					return mem(0x00B2C5A8, FIELD_WORD)
+				end),
+			},
+			-- Stars
+			{
+				icon = Graphics.sprites.hardcoded["33-5"],
+				isEnabled = (function()
+					return SaveData.totalStarCount > 0
+				end),
+				getValue = (function()
+					return SaveData.totalStarCount
+				end),
+			}
+		}
+	end
 
 
     local function getImage(image)
