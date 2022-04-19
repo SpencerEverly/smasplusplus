@@ -1191,7 +1191,6 @@ end
 
 function globalgenerals.onDraw()
 	if Player(2) and Player(2).isValid then
-		Player(2):memdump()
 		local playerboundaryx = Player(2).x - player.x
 		local playerboundaryy = Player(2).y - player.y
 		--Try to push player2 if about to go out of the camera bounds
