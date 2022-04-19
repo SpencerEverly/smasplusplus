@@ -105,6 +105,10 @@ function inventory.onInitAPI()
 		registerEvent(inventory, "onDraw", "onDrawWorld")
 		registerEvent(inventory, "onDrawEnd", "onDrawEndWorld")
 		registerEvent(inventory, "onInputUpdate", "onInputWorld")
+	elseif Level.filename() == "map.lvlx" then
+		registerEvent(inventory, "onDraw", "onDrawWorld")
+		registerEvent(inventory, "onDrawEnd", "onDrawEndWorld")
+		registerEvent(inventory, "onInputUpdate", "onInputWorld")
 	else
 		registerEvent(inventory, "onTick")
 		registerEvent(inventory, "onExitLevel")
@@ -117,7 +121,7 @@ function inventory.onStart()
 
 	if not isOverworld and SaveData.useStarman then
 		NPC.spawn(996, player.x, player.y, player.section)
-		if player.count() == 2 then
+		if Player(2) and Player(2).isValid then
 			NPC.spawn(996, player2.x, player2.y, player2.section)
 		end
 		SaveData.useStarman = false

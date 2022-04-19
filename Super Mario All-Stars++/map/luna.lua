@@ -1,11 +1,8 @@
 local smwMap = require("smwMap")
-
+local inventory = require("customInventory")
 local littleDialogue = require("littleDialogue")
-
 local pausemenu = require("pausemenu2")
-
 local datetime = require("datetime")
-
 local debugbox = require("debugbox")
 
 function onStart()

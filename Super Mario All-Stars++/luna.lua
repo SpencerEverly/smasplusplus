@@ -229,10 +229,7 @@ end
 
 function onLoop() --I'm sorry for using deprecated crap, this is used specifically for stopping the loading sound when erroring
 	if unexpected_condition then
-		if fadetolevel == true then
-			fadetolevel = false
-			loadingSoundObject:Stop()
-		end
+		loadingSoundObject:Stop()
 	end
 end
 
