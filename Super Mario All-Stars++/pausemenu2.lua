@@ -651,6 +651,9 @@ function pausemenu2.onDraw()
 	if currentCostume == "PRINCESSRESCUE" then
 		costtext = "Princess Rescue (Atari 2600)"
 	end
+	if currentCostume == "ROSALINA" then
+		costtext = "Rosalina"
+	end
 	if currentCostume == "SMB0" then
 		costtext = "Super Mario Bros. 0 (SMBX)"
 	end
@@ -723,6 +726,9 @@ function pausemenu2.onDraw()
 	end
 	if currentCostume == "A2XT-IRIS" then
 		costtext = "Iris (A2XT)"
+	end
+	if currentCostume == "GA-BORIS" then
+		costtext = "Boris (GoAnimate, Vyond)"
 	end
 	if currentCostume == "LARRYTHECUCUMBER" then
 		costtext = "Larry (VeggieTales)"

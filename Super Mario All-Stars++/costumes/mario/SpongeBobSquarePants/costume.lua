@@ -112,7 +112,7 @@ end
 
 function costume.onStart()
 	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
-		Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
+		--Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
 	end
 end
 
@@ -164,7 +164,9 @@ function costume.onTick(repeated)
 		if player:isGroundTouching() == false or player:mem(0x36, FIELD_BOOL, true) then
 			if player.keys.jump == KEYS_PRESSED then
 				Audio.sounds[1].muted = true
-				playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
+				if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
+					playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
+				end
 				Defines.cheat_ahippinandahoppin = true
 				jumpingactive = true
 			end

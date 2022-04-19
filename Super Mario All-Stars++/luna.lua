@@ -163,7 +163,7 @@ local noloadingsounds = {
 	"map.lvlx"
 }
 
---Friendly place table for Princess Rinka
+--Friendly place table for Mother Brain Rinka
 GameData.friendlyplaces = {
 	"SMAS - Start.lvlx",
 	"map.lvlx",
@@ -216,6 +216,32 @@ GameData.friendlyplaces = {
 	"SMW - W-0, L-Green Switch.lvlx",
 	"SMW - W-0, L-Yellow Switch.lvlx",
 	"SMW - W-0, L-Blue Switch.lvlx"
+}
+
+--Menu table for any costume with troublesome sounds
+GameData.nolevelplaces = {
+	"SMAS - Start.lvlx",
+	"map.lvlx",
+	"intro_8bit.lvlx",
+	"intro_bossedit8.lvlx",
+	"intro_jakebrito1.lvlx",
+	"intro_marioforever.lvlx",
+	"intro_S!TS!.lvlx",
+	"intro_scrollingheights.lvlx",
+	"intro_SMAS.lvlx",
+	"intro_SMBX1.0.lvlx",
+	"intro_SMBX1.1.lvlx",
+	"intro_SMBX1.2.lvlx",
+	"intro_SMBX1.3.lvlx",
+	"intro_SMBX1.3og.lvlx",
+	"intro_SMBX2.lvlx",
+	"intro_SMBX2b3.lvlx",
+	"intro_sunsetbeach.lvlx",
+	"intro_WSMBA.lvlx",
+	"SMAS - Credits.lvlx",
+	"SMAS - Intro.lvlx",
+	"SMAS - Online (Menu).lvlx",
+	"SMB2 - Ending.lvlx"
 }
 
 --Now use onLoad to play the loading sound...
