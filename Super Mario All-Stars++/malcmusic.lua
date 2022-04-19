@@ -1819,6 +1819,16 @@ function malcmusic.onTick()
 			Section(12).musicPath = "_OST/Super Mario Advance 2/Choose A Game.ogg"
 			Section(13).musicPath = "_OST/Super Mario Advance 2/Choose A Game.ogg"
 		end
+		if currentCostume == "16-SMA4" and malcmusic.holiday == false then
+			Section(1).musicPath = "_OST/Super Mario Advance/Me and Larry City (GBA).ogg"
+			Section(2).musicPath = "_OST/Super Mario Advance/Me and Larry City (GBA).ogg"
+			Section(3).musicPath = "_OST/Super Mario Advance/Me and Larry City (GBA).ogg"
+			Section(7).musicPath = "_OST/Super Mario Advance/Me and Larry City (GBA).ogg"
+			Section(8).musicPath = "_OST/Super Mario Advance/Me and Larry City (GBA).ogg"
+			Section(11).musicPath = "_OST/Super Mario Advance 4/Choose A Game!.ogg"
+			Section(12).musicPath = "_OST/Super Mario Advance 4/Choose A Game!.ogg"
+			Section(13).musicPath = "_OST/Super Mario Advance 4/Choose A Game!.ogg"
+		end
 		if currentCostume == "17-NSMBDS-SMBX" and malcmusic.holiday == false then
 			Section(1).musicPath = "_OST/Me and Larry City/Main Theme.ogg"
 			Section(2).musicPath = "_OST/Me and Larry City/Main Theme.ogg"
@@ -1908,6 +1918,16 @@ function malcmusic.onTick()
 			Section(11).musicPath = "_OST/Me and Larry City/Overworld (New Super Mario Bros.).spc|0;g=2.7"
 			Section(12).musicPath = "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7"
 			Section(13).musicPath = "_OST/Super Mario Bros 3/Bonus Game.spc|0;g=2.7"
+		end
+		if currentCostume == "GA-BORIS" and malcmusic.holiday == false then
+			Section(1).musicPath = "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3"
+			Section(2).musicPath = "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3"
+			Section(3).musicPath = "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3"
+			Section(7).musicPath = "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3"
+			Section(8).musicPath = "_OST/GoAnimate/Old Songs/Ambient - Peaceful.mp3"
+			Section(11).musicPath = "_OST/GoAnimate/Very Old Songs/GoAnimate Jingle by the Anime Master.mp3"
+			Section(12).musicPath = "_OST/GoAnimate/Very Old Songs/GoAnimate Song from YouTube.mp3"
+			Section(13).musicPath = "_OST/GoAnimate/Very Old Songs/GoAnimate Song from YouTube.mp3"
 		end
 		
 		

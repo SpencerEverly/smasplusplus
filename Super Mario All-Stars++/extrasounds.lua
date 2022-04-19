@@ -170,13 +170,6 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[18].muted = true --fireball.ogg
 		Audio.sounds[43].muted = true --fireworks.ogg
 		Audio.sounds[59].muted = true --dragon-coin.ogg
-		for i = 0,114 do
-			if extrasounds.id[i].muted == true then
-				extrasounds.id[i].volume = 0
-			elseif extrasounds.id[i].muted == false then
-				extrasounds.id[i].volume = 1
-			end
-		end
 		if (player:mem(0x55, FIELD_WORD) == 255) or (player:mem(0x55, FIELD_WORD) == 0) then --This is code related to spinjump fireball/iceball shooting. It's not on the docs, I found this memory address myself
 			if player:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
 				spinballcounter = spinballcounter - 1

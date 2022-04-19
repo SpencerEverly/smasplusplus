@@ -155,14 +155,14 @@ function customNPC.onTickNPC(v)
 		
         if data.tick > 65 * 5 then
 			GameData.muteMusic = false
-            Level.exit(6)
+            Level.exit(LEVEL_WIN_TYPE_STAR)
         end
     end
 end
 
-function customNPC.onPlayerKill(e, p)
+function customNPC.onPlayerKill(eventToken, p)
     if exiting then
-        e.cancelled = true
+        eventToken.cancelled = true
     end
 end
 

@@ -278,7 +278,7 @@ end
 
 function costume.unmutehammer()
 	Routine.wait(0.1)
-	extrasounds.id[105].muted = false
+	extrasounds.id[105].volume = 1
 	Audio.sounds[25].muted = false
 end
 
@@ -328,7 +328,7 @@ function costume.onTick(p)
 		end
 		for index,explosion in ipairs(NPC.get(291)) do --Throw SFX
 			Audio.sounds[25].muted = true
-			extrasounds.id[105].muted = true
+			extrasounds.id[105].volume = 0
 			SFX.play("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 500)
 			Routine.run(costume.unmutehammer)
 		end
