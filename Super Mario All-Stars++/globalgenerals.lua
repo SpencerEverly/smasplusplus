@@ -230,6 +230,8 @@ end
 littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "Yes",chosenFunction = function() Routine.run(CheckStarAvailability) end})
 littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "No",chosenFunction = function() Routine.run(ExitFeature) end})
 
+local cooldown = 0
+
 function globalgenerals.onInputUpdate()
 	local costumes = playerManager.getCostumes(player.character)
 	local currentCostume = player:getCostume()
@@ -249,10 +251,10 @@ function globalgenerals.onInputUpdate()
 	end
 	if Player(2) and Player(2).isValid then
 		if Player(1).keys.altRun == KEYS_PRESSED and Player(1).keys.up == KEYS_PRESSED then
-			if Misc.isPaused() == false then
-				Player(1):teleport(Player(2).x + 32, Player(2).y - 32, bottomCenterAligned)
+			if not Misc.isPaused() then
+				player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
 				playSound("player-tp-2player.ogg")
-				cooldown = 5
+				cooldown = 1
 				Player(1):mem(0x172,FIELD_BOOL,false)
 			end
 			if cooldown <= 0 then
@@ -260,10 +262,10 @@ function globalgenerals.onInputUpdate()
 			end
 		end
 		if Player(2).keys.altRun == KEYS_PRESSED and Player(2).keys.up == KEYS_PRESSED then
-			if Misc.isPaused() == false then
-				Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
+			if not Misc.isPaused() then
+				player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 				playSound("player-tp-2player.ogg")
-				cooldown = 5
+				cooldown = 1
 				Player(2):mem(0x172,FIELD_BOOL,false)
 			end
 			if cooldown <= 0 then
@@ -334,9 +336,12 @@ function globalgenerals.onTick()
 			mem(0x00B2C5AC,FIELD_FLOAT, 1)
 		end
 		if Player(2) and Player(2).isValid then
-			if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then
+			if(not killed2 and player2.deathTimer >= 1 and player:mem(0x13C, FIELD_BOOL)) then
 				killed2 = true
 				mem(0x00B2C5AC,FIELD_FLOAT, 1)
+				if player2.deathTimer >= 199 then
+					Level.load("SMAS - Game Over.lvlx")
+				end
 			end
 		end
 	end

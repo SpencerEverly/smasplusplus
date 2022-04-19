@@ -48,7 +48,6 @@ function onStart()
 	if SaveData.disableX2char == true then
 		mem(0x00B2C5AC,FIELD_FLOAT, 3)
 	end
-	--SaveData.totalLives = 5
 	playSound("gameover-sound.ogg")
 end
 
