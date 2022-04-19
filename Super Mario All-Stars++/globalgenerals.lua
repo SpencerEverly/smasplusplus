@@ -58,6 +58,7 @@ end
 
 local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
+local killed2 = false
 
 local player2 = Player(2)
 local pipecounter = 0
@@ -328,10 +329,16 @@ function globalgenerals.onTick()
 	
 	--mem(0x00B25130, FIELD_WORD, 2)
 	if playerlives == 0 then
-        if(not killed and player:mem(0x13E,FIELD_BOOL)) then
-            killed = true
-            mem(0x00B2C5AC,FIELD_FLOAT, 1)
-        end
+		if(not killed and player:mem(0x13E,FIELD_BOOL)) then
+			killed = true
+			mem(0x00B2C5AC,FIELD_FLOAT, 1)
+		end
+		if Player(2) and Player(2).isValid then
+			if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then
+				killed2 = true
+				mem(0x00B2C5AC,FIELD_FLOAT, 1)
+			end
+		end
 	end
 	if SaveData.GameOverCount == nil then
         SaveData.GameOverCount = SaveData.GameOverCount or 0
@@ -1425,7 +1432,7 @@ end
 
 function globalgenerals.onExit()
 	if playerlives == 0 then
-		if killed == true then
+		if killed == true or killed2 == true then
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
 		end
 	end
