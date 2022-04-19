@@ -468,6 +468,24 @@ local function theme16()
 	Level.load("intro_marioforever.lvlx", nil, nil)
 end
 
+local function theme17()
+	SaveData.introselect = 17
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_jakebrito2.lvlx", nil, nil)
+end
+
+local function theme17scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(10.6)
+	autoscroll.scrollLeft(15)
+	Routine.wait(6.7)
+	--Routine.loop(2418, theme17scrolling, true)
+end
+
 local function mapExit()
 	GameData.menucomplete = true
 	autoscroll.scrollLeft(5000)
@@ -1271,6 +1289,9 @@ function bootmenu.onStart()
 		if Level.filename() == "intro_jakebrito1.lvlx" then
 			Routine.run(theme15scrolling)
 		end
+		if Level.filename() == "intro_jakebrito2.lvlx" then
+			Routine.run(theme17scrolling)
+		end
 	end
 end
 
@@ -1903,6 +1924,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() Routine.run(theme14) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() Routine.run(theme17) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 	

@@ -2307,6 +2307,8 @@ littleDialogue.registerStyle("bootmenudialog",{
 	scrollArrowEnabled   = true,
 	selectorImageEnabled = true,
 	
+	answerSelectedColor = Color.white, -- The color of an answer when it is being hovered over.
+	
 })
 
 

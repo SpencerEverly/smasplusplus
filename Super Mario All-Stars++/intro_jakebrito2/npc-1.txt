@@ -1,0 +1,9 @@
+framestyle=1
+frames=2
+nogravity=1
+gfxwidth=48
+gfxheight=60
+width=48
+height=60
+framestyle=0
+frames=2
