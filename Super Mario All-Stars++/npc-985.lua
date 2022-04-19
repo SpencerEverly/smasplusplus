@@ -86,12 +86,13 @@ function muteMusic(sectionid) --Mute all section music, or just mute a specific 
 end
 
 function starget()
-	Level.finish(LEVEL_END_STATE_ROULETTE, true)
+	playervuln = true
+	playerwon = true
 	SFX.play(52)
 	muteMusic(-1)
 	GameData.muteMusic = true
-	playervuln = true
-	playerwon = true
+	Routine.wait(4, true)
+	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 
 function roulettestar.onPostNPCKill(v,reason)
@@ -122,7 +123,7 @@ function roulettestar.onInputUpdate()
 		player.upKeyPressing = false
 		player.downKeyPressing = false
 		player.leftKeyPressing = false
-		player.rightKeyPressing = false
+		player.rightKeyPressing = true
 		player.altJumpKeyPressing = false
 		player.runKeyPressing = false
 		player.altRunKeyPressing = false
@@ -150,9 +151,16 @@ function roulettestar.onPlayerHarm(evt)
 	end
 end
 
+function roulettestar.onPlayerKill(evt)
+	if playervuln == true then
+		evt.cancelled = true
+	end
+end
+
 function roulettestar.onExit()
 	GameData.muteMusic = false
-	if Level.endState(LEVEL_END_STATE_ROULETTE) then
+	if Level.endState() == LEVEL_END_STATE_ROULETTE then
+		GameData.smwMap.winType = 6
 		Level.exit(LEVEL_WIN_TYPE_STAR)
 	end
 end
@@ -165,6 +173,7 @@ function roulettestar.onInitAPI()
 	roulettestar.collectableIDStar[97] = true
 	
 	registerEvent(roulettestar,"onPlayerHarm")
+	registerEvent(roulettestar,"onPlayerKill")
 	registerEvent(roulettestar,"onInputUpdate")
 	registerEvent(roulettestar,"onPostNPCKill")
 	registerEvent(roulettestar,"onExit")

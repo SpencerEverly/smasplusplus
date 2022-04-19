@@ -272,7 +272,7 @@ function starman.onNPCKill(event,npc,reason)
 end
 
 function starman.onPostNPCKill(npc, harmType)
-	local stars = table.map{97,196,998,999,1000}
+	local stars = table.map{97,196,985,998,999,1000}
 	if stars[npc.id] then
 		starman.stop(p)
 	end
