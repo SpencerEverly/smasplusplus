@@ -482,8 +482,8 @@ local function theme17scrolling()
 	autoscroll.scrollRight(6)
 	Routine.wait(10.6)
 	autoscroll.scrollLeft(15)
-	Routine.wait(6.7)
-	--Routine.loop(2418, theme17scrolling, true)
+	Routine.wait(4.6)
+	Routine.loop(lunatime.toTicks(15.2), theme17scrolling, true)
 end
 
 local function mapExit()
