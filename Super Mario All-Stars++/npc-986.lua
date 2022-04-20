@@ -105,7 +105,7 @@ function customNPC.onTickNPC(v)
         if data.tick > 65 * 2 then
             data.tick = 0
             data.state = 2
-            SFX.play(Misc.resolveSoundFile("smb-exit.spc"))
+            SFX.play(52)
         end
     elseif data.state == 2 then
         player.keys.right = true

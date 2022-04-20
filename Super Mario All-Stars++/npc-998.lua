@@ -111,7 +111,7 @@ function customNPC.onTickNPC(v)
 			elseif table.icontains(SaveData.completeLevels,Level.filename()) then
 				SaveData.totalStarCount = SaveData.totalStarCount
 			end
-            SFX.play(Misc.resolveSoundFile("smb-exit.spc"))
+            SFX.play(52)
         end
     elseif data.state == 2 then
         player.keys.right = true
