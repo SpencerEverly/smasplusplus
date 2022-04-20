@@ -1609,6 +1609,16 @@ function malcmusic.onTick()
 			Section(12).musicPath = "_OST/Princess Rescue/Overworld.ogg"
 			Section(13).musicPath = "_OST/Princess Rescue/Overworld.ogg"
 		end
+		if currentCostume == "SMBDDX-MARIO" and malcmusic.holiday == false then
+			Section(1).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+			Section(2).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+			Section(3).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+			Section(7).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+			Section(8).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+			Section(11).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+			Section(12).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+			Section(13).musicPath = "_OST/Super Mario Bros. DDX/Overworld (Remastered).ogg"
+		end
 		if currentCostume == "SMG4" and malcmusic.holiday == false then
 			Section(1).musicPath = "_OST/Me and Larry City/Main Theme.ogg"
 			Section(2).musicPath = "_OST/Me and Larry City/Main Theme.ogg"
