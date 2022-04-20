@@ -686,6 +686,14 @@ function globalgenerals.onTick()
 		starman.duration[994] = 1282
 		warpTransition.doorclose = ("costumes/mario/Z-SMW2-AdultMario/door-close.ogg")
 	end
+	if currentCostume == "SMBDDX-MARIO" then
+		littleDialogue.characterNames[1] = "Mario"
+		mega2.sfxFile = Misc.resolveSoundFile("starman/starmanmegashroom_smbddx")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starmanmegashroom_smbddx")
+		starman.duration[996] = lunatime.toTicks(14)
+		starman.duration[994] = lunatime.toTicks(14)
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
 	if currentCostume == "SMM2-LUIGI" then
 		littleDialogue.characterNames[1] = "Luigi"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_snes.ogg")
