@@ -90,6 +90,7 @@ function customNPC.onTickNPC(v)
     end
 
     if data.state == 1 then
+		GameData.muteMusic = true
         data.tick = data.tick + 1
         player.x = v.x - player.width + 16
         player.speedX = 0
@@ -108,6 +109,7 @@ function customNPC.onTickNPC(v)
             SFX.play(52)
         end
     elseif data.state == 2 then
+		GameData.muteMusic = true
         player.keys.right = true
 
         for _, castleid in ipairs(castles) do
@@ -127,6 +129,7 @@ function customNPC.onTickNPC(v)
             Timer.hurryTime = -1
         end
     elseif data.state == 3 then
+		GameData.muteMusic = true
         player.x = castlePlayerX
         player.y = castlePlayerY
 
