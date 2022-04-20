@@ -5,5 +5,5 @@
 	"allowTwoPlayer": false,
 	"episodeIcon": "icon.png",
 	"stars": "Play the episode to see the count.",
-	"maxProgress": 9999
+	"customProgress": true
 }
