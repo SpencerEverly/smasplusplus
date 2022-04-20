@@ -1,7 +1,10 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
+local textplus = require("textplus")
 
 local costume = {}
+
+local smbddxfont = textplus.loadFont("littleDialogue/font/verdana.ini")
 
 local plr
 
@@ -86,6 +89,10 @@ function costume.onTick()
 			--plr:playAnim({2,32,3}, 6, false, -25)
 		--end
 	end
+end
+
+function costume.onDraw()
+	--textplus.print{x=100, y=390, text = "This is a test text. This will be used for the HUD.", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smbddxfont}
 end
 
 function costume.onCleanup(p)
