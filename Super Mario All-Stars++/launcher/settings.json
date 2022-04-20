@@ -1,8 +1,8 @@
 {
     "game": {
-        "update-check-website": "https://github.com/SpencerEverly/smasplusplus/raw/main/Super%20Mario%20All-Stars%2B%2B/update-check.json",
-		"update-error-website": "https://github.com/SpencerEverly/smasplusplus/tree/main/_smaslauncher/______BuildsAndVersions",
-		"update-error-message": "Could not load info to download SMASLauncher.",
+        "update-check-website": "http://spencereverly.pythonanywhere.com/SpencerEverly/update-check.json",
+		"update-error-website": "http://github.com/SpencerEverly/smasplusplus/tree/main/_smasupdater",
+		"update-error-message": "Could not load info to download SMASUpdater.",
         "version-1": 0,
         "version-2": 0,
         "version-3": 0,

@@ -1,7 +1,7 @@
 {
 	"mainPage": "index.html",
 	"title" : "Super Mario All-Stars++",
-	"current-version": [0, 0, 1],
+	"current-version": [1, 0, 0],
 	"allowTwoPlayer": false,
 	"episodeIcon": "icon.png",
 	"stars": "Play the episode to see the count."
