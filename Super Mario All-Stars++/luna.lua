@@ -127,6 +127,9 @@ end
 if SaveData.completeLevels == nil then --This will add a table to list completed levels
 	SaveData.completeLevels = {}
 end
+if SaveData.deathquickoption == true then
+	SaveData.deathquickoption = false
+end
 
 Progress.value = SaveData.totalStarCount
 if SaveData.playerName == nil then
