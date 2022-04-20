@@ -3023,6 +3023,8 @@ do
             return mountImages[mountType]
         end
     end
+	
+	local currentCostume = player:getCostume()
 
     function smwMap.drawPlayer(v)
         local texture = smwMap.playerSettings.image or smwMap.playerSettings.images[v.basePlayer.character] or smwMap.playerSettings.images[1]
@@ -4312,8 +4314,6 @@ function smwMap.onExit()
 	Audio.SeizeStream(-1)
     Audio.MusicStop()
 end
-
-
 
 smwMap.playerSettings = {
     images = {

@@ -1,10 +1,14 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local textplus = require("textplus")
+local hudoverride = require("hudoverridee")
 
 local costume = {}
 
 local smbddxfont = textplus.loadFont("littleDialogue/font/verdana.ini")
+local coinCounter = Graphics.loadImageResolved("costumes/mario/SMBDDX-Mario/coincounter.png")
+local starCounter = Graphics.loadImageResolved("costumes/mario/SMBDDX-Mario/starcounter.png")
+local marioHead = Graphics.loadImageResolved("costumes/mario/SMBDDX-Mario/mariohead.png")
 
 local plr
 
@@ -74,7 +78,31 @@ function costume.onInit(p)
 	--Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/smb2-hit.ogg")
 	--Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/bubble.ogg")
 	
+	Graphics.overrideHUD(costume.drawHUD)
 	costume.abilitesenabled = true
+end
+
+function costume.drawHUD(camIdx,priority,isSplit)
+	--Lives
+	Graphics.drawImageWP(marioHead, 107, 30, -4.3)
+	textplus.print{text = "x", font = minFont, priority = -4.3, x = 137, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+	textplus.print{text = tostring(SaveData.totalLives), font = minFont, priority = -4.3, x = 152, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+	
+	--Coins
+    Graphics.drawImageWP(coinCounter, 202, 22, -4.3)
+	textplus.print{text = "x", font = minFont, priority = -4.3, x = 225, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.totalCoinsClassic), font = minFont, priority = -4.3, x = 240, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+
+    --Stars
+	Graphics.drawImageWP(starCounter, 305, 26, -4.3)
+	textplus.print{text = "x", font = minFont, priority = -4.3, x = 335, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.totalStarCount), font = minFont, priority = -4.3, x = 350, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+
+    --Score
+    textplus.print{text = tostring(SaveData.totalScoreClassic), font = minFont, priority = -4.3, x = 432, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+
+    --Time
+    textplus.print{text = "Time "..tostring(Timer.getValue()), font = minFont, priority = -4.3, x = 590, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)} 
 end
 
 local function isSlidingOnIce()
@@ -92,7 +120,7 @@ function costume.onTick()
 end
 
 function costume.onDraw()
-	--textplus.print{x=100, y=390, text = "This is a test text. This will be used for the HUD.", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smbddxfont}
+	
 end
 
 function costume.onCleanup(p)
@@ -185,6 +213,7 @@ function costume.onCleanup(p)
 	extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
 	extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
 	
+	Graphics.overrideHUD(Graphics.drawVanillaHUD)
 	costume.abilitesenabled = false
 end
 

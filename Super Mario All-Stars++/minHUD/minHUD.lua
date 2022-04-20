@@ -5,7 +5,7 @@ local minHUD = {}
 -- Code made by Hatsune Blake! Please give credit!
 
 local textplus = require("textplus")
-local hudoverride = require("hudoverride")
+local hudoverride = require("hudoverridee")
 local t = 0
 
 -- Star Coin related stuff
@@ -114,7 +114,7 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
 
     -- Coins
     Graphics.drawImageWP(coinCounter, 20, 4, -4.3)
-    textplus.print{text = tostring(mem(0x00B2C5A8, FIELD_WORD)), font = minFont, priority = -4.3, x = 54, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.totalCoinsClassic), font = minFont, priority = -4.3, x = 54, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Lives or Death Counter
     if livesAltStyle == 2 then
@@ -122,17 +122,17 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
         textplus.print{text = tostring(SaveData.deathCount), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2} 
     else
         Graphics.drawImageWP(lifeCounter, 114, 4, -4.3)
-        textplus.print{text = tostring(mem(0x00B2C5AC, FIELD_FLOAT)), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        textplus.print{text = tostring(SaveData.totalLives), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end
 
     -- Stars
     if starCounterSet == 1 then
         Graphics.drawImageWP(starCounter, 450, 4, -4.3)
-        textplus.print{text = tostring(mem(0x00B251E0, FIELD_WORD)), font = minFont, priority = -4.3, x = 484, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        textplus.print{text = tostring(SaveData.totalStarCount), font = minFont, priority = -4.3, x = 484, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end
 
     -- Score
-    textplus.print{text = tostring(SaveData._basegame.hud.score), font = minFont, priority = -4.3, x = 544, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.totalScoreClassic), font = minFont, priority = -4.3, x = 544, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Time [SMBX Built In]
     if timeCounterSet == 1 then
