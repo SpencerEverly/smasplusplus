@@ -156,7 +156,7 @@ function customNPC.onTickNPC(v)
 			SFX.play(extrasounds.id[114], 1, 1, 2500)
 		end
 		
-        if data.tick > 65 * 5 then
+        if data.tick > 65 * 1.5 then
 			GameData.muteMusic = false
             Level.exit(LEVEL_WIN_TYPE_STAR)
         end
