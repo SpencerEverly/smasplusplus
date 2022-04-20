@@ -65,8 +65,8 @@ function customNPC.onTickNPC(v)
     and data.state == 0 then
         data.state = 1
 		GameData.muteMusic = true
+		Audio.MusicVolume(0)
         SFX.play(Misc.resolveSoundFile("smb-flagslide.wav"))
-        Audio.MusicFadeOut(v.section, 1000)
         exiting = true
         data.countTime = Timer.isActive()
 		--Timer.toggle()
