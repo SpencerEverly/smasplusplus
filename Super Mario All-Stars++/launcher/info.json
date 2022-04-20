@@ -4,5 +4,6 @@
 	"current-version": [1, 0, 0],
 	"allowTwoPlayer": false,
 	"episodeIcon": "icon.png",
-	"stars": "Play the episode to see the count."
+	"stars": "Play the episode to see the count.",
+	"maxProgress": 9999
 }

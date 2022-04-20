@@ -128,6 +128,13 @@ if SaveData.completeLevels == nil then --This will add a table to list completed
 	SaveData.completeLevels = {}
 end
 
+Progress.value = SaveData.totalStarCount
+if SaveData.playerName == nil then
+	Progress.savename = Player
+else
+	Progress.savename = SaveData.playerName
+end
+
 --Make sure the warp door system doesn't get active until onStart saves the original count first...
 local warpstaractive = false
 
