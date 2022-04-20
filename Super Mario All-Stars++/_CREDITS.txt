@@ -58,6 +58,8 @@ Packs/Sprites are by:
 - Bloxxerstudios
 - SuperSledgeBro
 - Mr. Pixelator
+- 4matsy
+- h2643
 
 ----Costume/Character Credits----
 
@@ -118,6 +120,7 @@ Costumes:
 - Wohlstand by Unknown
 - Tux by Grumbel and others, ported by Unknown
 - Utsuho Reiuji by Unknown
+- SMBDDX Mario by Guinea
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
