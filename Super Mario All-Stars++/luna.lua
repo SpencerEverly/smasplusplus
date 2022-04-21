@@ -4,7 +4,7 @@
 
 --Total Stars:
 --SMB1 = 43
---SMB2 = TBD
+--SMB2 = 22
 --SMB3 = TBD
 --SMBLL = TBD
 --SMW = TBD

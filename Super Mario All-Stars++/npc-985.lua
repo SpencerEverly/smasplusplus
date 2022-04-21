@@ -91,7 +91,7 @@ function starget()
 	SFX.play(52)
 	muteMusic(-1)
 	GameData.muteMusic = true
-	Routine.wait(4, true)
+	Routine.wait(5, true)
 	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 
