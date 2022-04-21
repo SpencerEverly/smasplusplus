@@ -16,11 +16,11 @@ function onEvent(eventName)
 	if eventName == "World Clear 1" then
 		nokeys = true
 	end
-	if eventName == "World Clear 6" then
+	if eventName == "World Clear 5" then
 		nokeys = false
 		nokeysexceptjump = true
 	end
-	if eventName == "World Clear 7" then
+	if eventName == "World Clear 6" then
 		nokeysexceptjump = false
 	end
 end
