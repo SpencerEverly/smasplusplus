@@ -12,7 +12,7 @@ function onEvent(eventName)
 	if eventName == "World Clear 1" then
 		nokeys = true
 	end
-	if eventName == "World Clear 5" then
+	if eventName == "World Clear 7" then
 		nokeys = false
 	end
 end
