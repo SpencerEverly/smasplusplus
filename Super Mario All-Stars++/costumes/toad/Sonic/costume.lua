@@ -59,7 +59,7 @@ function costume.onInit(p)
 end
 
 function costume.onTick()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		--plr.powerup = PLAYER_BIG
 		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
 
@@ -87,7 +87,7 @@ function costume.onTick()
 end
 
 function costume.onDraw()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if hit then
 			plr.frame = 16
 		end
@@ -98,7 +98,7 @@ function costume.onPlayerHarm(e, p)
 	if player.hasStarman == true or player.isMega == true then return end
 	
 	if player.hasStarman == false or player.isMega == false then
-		if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+		if SaveData.toggleCostumeAbilities == true then
 			if hit then
 				e.cancelled = true
 				return

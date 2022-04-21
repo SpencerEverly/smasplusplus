@@ -98,11 +98,20 @@ local function isSlidingOnIce()
 	return (player:mem(0x0A,FIELD_BOOL) and (not player.keys.left and not player.keys.right))
 end
 
+-- Detects if the player is on the ground, the redigit way. Sometimes more reliable than just p:isOnGround().
+local function isOnGround(p)
+	return (
+		player.speedY == 0 -- "on a block"
+		or player:mem(0x176,FIELD_WORD) ~= 0 -- on an NPC
+		or player:mem(0x48,FIELD_WORD) ~= 0 -- on a slope
+	)
+end
+
 function costume.onTick()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
-		local isJumping = player:mem(0x11C, FIELD_WORD) and not player:isOnGround() --Jumping detection
+	if SaveData.toggleCostumeAbilities == true then
+		local isJumping = player:mem(0x11C, FIELD_WORD) and not isOnGround(p) --Jumping detection
 		local isUnderwater = plr:mem(0x36, FIELD_BOOL) --Underwater detection
-		if isJumping and plr:mem(0x14, FIELD_WORD) <= 0 and not isUnderwater and not player:isOnGround() then --Checks to see if the player is jumping...
+		if isJumping and plr:mem(0x14, FIELD_WORD) <= 0 and not isUnderwater and not isOnGround(p) then --Checks to see if the player is jumping...
 			plr:setFrame(12)
 			--local rotationjump = rotationjump % 360
 			--player:render{frame = 12, x = player.x - camera.x, y = player.y - camera.y, priority = -25}
@@ -111,7 +120,7 @@ function costume.onTick()
 			--rotationjump = 0
 		end
 		local swimframes = {13,14}
-		if isUnderwater and player:mem(0x14, FIELD_WORD) <= 0 and not player:isOnGround() then --Swim frames!
+		if isUnderwater and player:mem(0x14, FIELD_WORD) <= 0 and not isOnGround(p) then --Swim frames!
 			plr:playAnim(swimframes, 8, false, -25)
 			Defines.player_walkspeed = 4.5 --This is to make sure the player goes faster underwater
 			Defines.player_runspeed = 4.5
@@ -142,7 +151,7 @@ function costume.onPostBlockHit(block, fromUpper)
 end
 
 function costume.onInputUpdate()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if player.keys.run == KEYS_DOWN then
 			plr:mem(0x168, FIELD_FLOAT, 10)
 		else

@@ -79,7 +79,7 @@ function costume.swooshattack()
 end
 
 function costume.onDraw()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if lunging then
 			player:playAnim({13,14,15,16}, 4, false, -25)
 		end
@@ -92,7 +92,7 @@ function costume.onDraw()
 end
 
 function costume.onTick()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		local hitNPCs = Colliders.getColliding{a = player, b = hitNPCs, btype = Colliders.NPC}
 		if lunging then
 			plr.keys.left = false
@@ -128,7 +128,7 @@ function costume.onTick()
 end
 
 function costume.onPlayerHarm(e, p)
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if lunging then
 			e.cancelled = true
 			return
@@ -137,7 +137,7 @@ function costume.onPlayerHarm(e, p)
 end
 
 function costume.onInputUpdate()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if player.keys.run == KEYS_DOWN then
 			plr:mem(0x168, FIELD_FLOAT, 10)
 		else

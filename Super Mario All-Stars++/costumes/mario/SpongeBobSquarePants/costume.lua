@@ -112,7 +112,7 @@ local function canFall(p)
 end
 
 function costume.onStart()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		--Audio.playSFX("costumes/mario/SpongeBobSquarePants/start-level.ogg")
 	end
 end
@@ -138,7 +138,7 @@ local function isSlidingOnIce(plr)
 end
 
 function costume.onTick(repeated)
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		--if p.speedX ~= 0 and not isSlidingOnIce(plr) then
 			--if player.frame == 3 or player.frame == 9 then
 				--playSound("mario/SpongeBobSquarePants/spongebob-footsteps.ogg", 0.4, 1, 35)

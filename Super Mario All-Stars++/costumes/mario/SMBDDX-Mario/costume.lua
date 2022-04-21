@@ -105,17 +105,27 @@ function costume.drawHUD(camIdx,priority,isSplit)
     textplus.print{text = "Time "..tostring(Timer.getValue()), font = minFont, priority = -4.3, x = 590, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)} 
 end
 
-local function isSlidingOnIce()
-	return (player:mem(0x0A,FIELD_BOOL) and (not player.keys.left and not player.keys.right))
+local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKI}
+
+local function isSlowFalling()
+	return (leafPowerups[player.powerup] and player.speedY > 0 and (player.keys.jump or player.keys.altJump))
+end
+
+local function isOnGround()
+	return (
+		player.speedY == 0 -- "on a block"
+		or player:mem(0x176,FIELD_WORD) ~= 0 -- on an NPC
+		or player:mem(0x48,FIELD_WORD) ~= 0 -- on a slope
+	)
 end
 
 function costume.onTick()
-	if costume.abilitesenabled == true and SaveData.toggleCostumeAbilities == true then
-		--local isJumping = player:mem(0x11C, FIELD_WORD) and not player:isOnGround() --Jumping detection
-		--local isUnderwater = plr:mem(0x36, FIELD_BOOL) --Underwater detection
-		--if plr.speedX ~= 0 and not isSlidingOnIce() and not isJumping and not isUnderwater then
-			--plr:playAnim({2,32,3}, 6, false, -25)
-		--end
+	if SaveData.toggleCostumeAbilities == true then
+		if plr.holdingNPC == nil then
+			if isSlowFalling() and not isOnGround() then
+				plr:playAnim({5,37,11,37}, 4, false, -25)
+			end
+		end
 	end
 end
 
