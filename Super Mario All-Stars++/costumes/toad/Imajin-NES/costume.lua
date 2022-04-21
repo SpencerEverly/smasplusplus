@@ -13,6 +13,7 @@ function costume.onInit(p)
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onDraw")
 	registerEvent(costume,"onPlayerHarm")
+	registerEvent(costume,"onPostPlayerHarm")
 	registerEvent(costume,"onPostNPCKill")
 	registerEvent(costume,"onPlayerKill")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/toad/Imajin-NES/player-jump.ogg")
@@ -118,6 +119,10 @@ function costume.onDraw()
 		if imajinhp > 3 then
 			imajinhp = 3
 		end
+		if player.forcedState == FORCEDSTATE_POWERDOWN_SMALL or player.forcedState == FORCEDSTATE_POWERDOWN_FIRE or player.forcedState == FORCEDSTATE_POWERDOWN_ICE then
+			player.forcedState = FORCEDSTATE_NONE
+			player:mem(0x140, FIELD_WORD, 150)
+		end
 		local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
 		local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
 		if imajinhp <= 0 then
@@ -148,7 +153,6 @@ function costume.hphit()
 		if not player.hasStarman and not player.isMega then
 			hit = true
 			if hit then
-				player.forcedState = FORCEDSTATE_NONE
 				imajinhp = imajinhp - 1
 			end
 			if imajinhp < 1 then

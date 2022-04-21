@@ -860,6 +860,14 @@ function globalgenerals.onTick()
 		starman.duration[994] = 1282
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
+	if currentCostume == "IMAJIN-NES" then
+		littleDialogue.characterNames[4] = "Imajin"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_ddp")
+		starman.duration[996] = lunatime.toTicks(8)
+		starman.duration[994] = lunatime.toTicks(8)
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
 	if currentCostume == "JUNI" then
 		littleDialogue.characterNames[4] = "Juni"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
