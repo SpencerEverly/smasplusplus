@@ -55,6 +55,7 @@ local collectactive = false
 local playervuln = false
 local playerwon = false
 local playermovement = 0
+local player2movement = 0
 roulettestar.collectableIDList = {}
 roulettestar.collectableIDMap  = {}
 roulettestar.collectableIDStar = {}
@@ -132,9 +133,16 @@ local yoshiAnimationFrames = {
 	
 local bootBounceData = {}
 
+local player2camerax
+local player2cameray
+
 function roulettestar.onDraw()
 	local playercameray = player.y - camera.y
 	local playercamerax = player.x - camera.x
+	if Player(2) and Player(2).isValid then
+		player2camerax = Player(2).x - camera.x
+		player2cameray = Player(2).y - camera.y
+	end
 	if collectactive then
 		for idx,p in ipairs(Player.get()) do
 			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
@@ -199,6 +207,22 @@ function roulettestar.onDraw()
 						ignorestate = true,sceneCoords = false,priority = -25,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
 						frame = frame,
 					}
+				end
+				if Player(2) and Player(2).isValid then
+					p2 = player2 or Player(2)
+					if p2:isOnGround() then
+						p2:setFrame(-50*player.direction)
+						playerwon = false
+						player2movement = player2movement + Defines.player_walkspeed
+						player2movement2 = player2camerax + player2movement
+						p2.direction = DIR_RIGHT
+
+						p2:render{
+							x = player2movement2,y = player2cameray,
+							ignorestate = true,sceneCoords = false,priority = -25,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+							frame = frame,
+						}
+					end
 				end
 			end
 		end
