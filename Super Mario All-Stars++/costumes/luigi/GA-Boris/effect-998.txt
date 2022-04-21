@@ -1,0 +1,6 @@
+[1]
+import=AI_SINGLE_DOUBLESPEED
+frames=15
+framespeed=2
+width=120
+height=162

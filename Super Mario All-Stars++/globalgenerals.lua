@@ -238,14 +238,22 @@ function globalgenerals.onInputUpdate()
 	local currentCostume = player:getCostume()
 	
 	if currentCostume == "GA-BORIS" then
-		if player.keys.altRun == KEYS_PRESSED and GameData.activateAbilityMessage == false or GameData.activateAbilityMessage == nil then
-			if table.icontains(GameData.friendlyplaces,Level.filename()) == false then
-				player:mem(0x172, FIELD_BOOL, false)
-				cooldown = 5
-				GameData.activateAbilityMessage = true
-				littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Would you like to use The Wall of Weapons? You can only use this every 5 stars you collect.<question WallOfWeaponsDialog>", pauses = true, updatesInPause = true})
-				if cooldown <= 0 then
-					player:mem(0x172, FIELD_BOOL, true)
+		if not Misc.isPaused() then
+			if player.keys.altRun == KEYS_PRESSED and GameData.activateAbilityMessage == false or GameData.activateAbilityMessage == nil then
+				if table.icontains(GameData.friendlyplaces,Level.filename()) == false then
+					player:mem(0x172, FIELD_BOOL, false)
+					cooldown = 5
+					GameData.activateAbilityMessage = true
+					littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Would you like to use The Wall of Weapons? You can only use this every 5 stars you collect.<question WallOfWeaponsDialog>", pauses = true, updatesInPause = true})
+					if cooldown <= 0 then
+						player:mem(0x172, FIELD_BOOL, true)
+					end
+				else
+					player:mem(0x172, FIELD_BOOL, false)
+					cooldown = 10
+					if cooldown <= 0 then
+						player:mem(0x172, FIELD_BOOL, true)
+					end
 				end
 			end
 		end

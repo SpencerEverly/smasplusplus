@@ -7,6 +7,7 @@ local npcutils = require("npcs/npcutils")
 
 local costume = {}
 
+costume.grenade = false
 local eventsRegistered = false
 local plr
 local borishp
@@ -24,6 +25,8 @@ function costume.onInit(p)
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onPostNPCKill")
 	registerEvent(costume,"onNPCHarm")
+	
+	npcManager.registerEvent(291, costume, "onTickEndNPC")
 	
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/stomped.ogg")
@@ -44,12 +47,23 @@ function costume.onInit(p)
 	Audio.sounds[73].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/grab2.ogg")
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/smb2-throw.ogg")
 	
+	Graphics.sprites.effect[998].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/effect-998.png")
+	
 	costume.abilitiesenabled = true
 	costume.useGun1 = false
 	costume.useGrenade2 = false
 	costume.grenade = true
 	HUDOverride.visible.itembox = false
 	borishp = 3
+	if costume.grenade then
+		local grenade = {
+			id = 291,
+			
+			effect = 998,
+			}
+		
+		npcManager.setNpcSettings(grenade)
+	end
 end
 
 local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
@@ -76,21 +90,6 @@ end
 
 costume.grenadeID = 291
 costume.goanimateExplosionID = 998
-
-if costume.grenade then
-	local grenade = {
-		id = 291,
-	
-		gfxwidth=120,
-		gfxheight=162,
-		frames=15,
-		framestyle=1,
-		
-		effect = costume.goanimateExplosionID,
-		}
-	
-	npcManager.setNpcSettings(grenade)
-end
 
 function costume.shootGun1()
 	--plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
@@ -159,12 +158,6 @@ function costume.shootGrenade2Upwards()
 	costume.useGrenade2 = false
 end
 
-function costume.onNPCHarm(v)
-	if v.id == 291 then
-		Effect.spawn(costume.goanimateExplosionID, v.x, v.y)
-	end
-end
-
 function costume.onPostNPCKill(npc, harmType)
 	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
 	if SaveData.toggleCostumeProfanity then
@@ -180,6 +173,11 @@ function costume.onPostNPCKill(npc, harmType)
 	end
 	if items[npc.id] and Colliders.collide(plr, npc) then
 		borishp = borishp + 1
+	end
+	if npc.id == 291 then
+		--for _,v in ipairs(Effect.get(148)) do
+			--local explosion = Effect.spawn(998, v.x, v.y)
+		--end
 	end
 end
 
@@ -262,7 +260,7 @@ function costume.onInputUpdate()
 					end
 				end
 			end
-			if borishp == 3 and player.powerup == 4 then
+			if player.powerup == 4 then
 				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
 					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
 						playSound("costumes/luigi/GA-Boris/gunshot-3.ogg", 1, 1, 35)
@@ -270,7 +268,7 @@ function costume.onInputUpdate()
 					end
 				end
 			end
-			if borishp == 3 and player.powerup == 5 then
+			if player.powerup == 5 then
 				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
 					if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
 						playSound("costumes/luigi/GA-Boris/gunshot-4.ogg", 1, 1, 35)
@@ -278,11 +276,12 @@ function costume.onInputUpdate()
 					end
 				end
 			end
-			if borishp == 3 and player.powerup == 6 then
-				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false and (player.keys.up == KEYS_PRESSED) == false then
+			if player.powerup == 6 then
+				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false and (player.keys.up == KEYS_DOWN) == false then
 					playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
 					costume.shootGrenade2()
-				elseif player.keys.run == KEYS_PRESSED and (player.keys.up == KEYS_PRESSED) == true then
+				end
+				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false and player.keys.up == KEYS_DOWN then
 					playSound("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
 					costume.shootGrenade2Upwards()
 				end
