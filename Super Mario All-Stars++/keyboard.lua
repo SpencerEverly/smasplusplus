@@ -177,6 +177,7 @@ function keyboard.onKeyboardPressDirect(vk, repeated, char)
 				GameData.reopenmenu = true
 			elseif GameData.playernameenterfirstboot == true or GameData.playernameenterfirstboot == nil then
 				playSound("console/console_resetfont.ogg")
+				SaveData.playerName = "Player"
 				keyboard.active = false
 				GameData.enablekeyboard = false
 				GameData.firstbootfive = true
