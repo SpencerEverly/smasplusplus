@@ -76,7 +76,7 @@ end
 function costume.onTick()
 
 	--ONLOOP CONTENTS
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		Audio.sounds[1].muted = true
 		Audio.sounds[71].muted = true
 		--ON LEVEL START
@@ -214,7 +214,7 @@ end
 --------------------
 
 function costume.onInputUpdate()
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		--SAVEPOINTS
 		if player.keys.down == KEYS_PRESSED and colliders.collideNPC(player, 182) then
 			junisave = savestate.save(savestate.STATE_ALL)

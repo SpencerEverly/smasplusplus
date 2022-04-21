@@ -167,6 +167,7 @@ end
 
 function costume.onPostNPCKill(npc, harmType)
 	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
+	local healitems = table.map{9,184,185,249,14,182,183,34,169,170,277,264}
 	if SaveData.toggleCostumeProfanity then
 		local rngkey = rng.randomInt(1,6)
 		if items[npc.id] and Colliders.collide(plr, npc) then
@@ -178,7 +179,7 @@ function costume.onPostNPCKill(npc, harmType)
 			playSound("luigi/GA-Boris/voices/items/"..rngkey..".ogg", 1, 1, 80)
 		end
 	end
-	if items[npc.id] and Colliders.collide(plr, npc) then
+	if healitems[npc.id] and Colliders.collide(plr, npc) then
 		borishp = borishp + 1
 	end
 	if npc.id == 291 then
@@ -189,7 +190,7 @@ function costume.onPostNPCKill(npc, harmType)
 end
 
 function costume.onDraw(p)
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		--Gun states
 		if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
 			Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
@@ -249,7 +250,7 @@ function costume.onDraw(p)
 end
 
 function costume.onInputUpdate()
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if not Misc.isPaused() then
 			if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
 				if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
@@ -311,7 +312,7 @@ end
 function costume.onTick(p)
 	local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
 	local isShooting = (plr:mem(0x118,FIELD_FLOAT) >= 100 and plr:mem(0x118,FIELD_FLOAT) <= 118 and shootingPowerups[player.powerup])
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		--Health system
 		if plr.powerup <= 1 then
 			plr.powerup = 2
@@ -362,7 +363,7 @@ function costume.onTick(p)
 end
 
 function costume.hphit()
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if not player.hasStarman and not player.isMega then
 			hit = true
 			if hit then

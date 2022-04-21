@@ -87,7 +87,7 @@ end
 --OnTick
 
 function costume.onTick()
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		if frameCount < 1 then
 			frameCount = frameCount + 1
 		elseif frameCount == 1 and not firstSave then
@@ -210,7 +210,7 @@ end
 --onInputUpdate
 
 function costume.onInputUpdate()
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		pm.winStateCheck()
 		if player.keys.altRun == KEYS_PRESSED and costume.usesavestate then
 			if not isInStartMenu then
@@ -233,14 +233,14 @@ end
 --onjump
 
 function costume.onJump()
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		canJump = true
 		hasJumped = true
 	end
 end
 
 function costume.onJumpEnd()
-	if costume.abilitiesenabled == true and SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities == true then
 		canJump = false
 		for _, j in pairs(hitBoxArray) do
 			j.hasBeenHit = false
