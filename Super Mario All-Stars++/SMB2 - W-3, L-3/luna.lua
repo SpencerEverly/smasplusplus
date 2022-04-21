@@ -7,6 +7,9 @@ function onEvent(eventName)
 	if eventName == "Boss End 1" then
 		nokeys = true
 	end
+	if eventName == "Boss End 2" then
+		playSound("smb2-world-clear.ogg")
+	end
 	if eventName == "Boss End 3" then
 		nokeys = false
 	end

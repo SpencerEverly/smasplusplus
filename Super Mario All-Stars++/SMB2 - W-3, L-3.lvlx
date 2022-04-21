@@ -10108,7 +10108,7 @@ ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Bombs Away!";SD:25;AS:0;AX:0;AY:0;
 ET:"Boss Start";SSS:["ID\:8\;MI\:15\;"];AS:0;AX:0;AY:0;
 ET:"Boss End 1";SSS:["ID\:8\;MI\:0\;"];TE:"Boss End 2";TD:10;AS:0;AX:0;AY:0;
-ET:"Boss End 2";SD:69;LS:["End Door"];TE:"Boss End 3";TD:50;PC:000010000000;AS:0;AX:0;AY:0;
+ET:"Boss End 2";LS:["End Door"];TE:"Boss End 3";TD:50;PC:000010000000;AS:0;AX:0;AY:0;
 ET:"Boss End 3";AS:0;AX:0;AY:0;
 ET:"World Clear 1";SD:27;LH:["World Clear Switch Block"];SSS:["ID\:9\;MI\:24\;"];TE:"World Clear 2";TD:25;DS:1;PC:000010000000;ML:"World Clear Block Still";MX:0;MY:-0.984615;AS:0;AX:0;AY:0;
 ET:"World Clear 2";LH:["Brick Layer 1"];TE:"World Clear 3";TD:3;DS:1;ML:"World Clear Block Still";MX:0;MY:0;AS:0;AX:0;AY:0;

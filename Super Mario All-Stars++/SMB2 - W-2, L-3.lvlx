@@ -12788,7 +12788,7 @@ ID:91;X:-79872;Y:-80224;D:-1;CN:147;
 ID:91;X:-79424;Y:-80224;D:-1;CN:147;
 ID:165;X:640;Y:-224;D:-1;FD:1;NM:1;
 ID:165;X:0;Y:-448;D:1;FD:1;NM:1;LR:"Subcon #1";
-ID:999;X:512;Y:-192;D:-1;LR:"Orb";
+ID:999;X:352;Y:-192;D:-1;LR:"Orb";
 ID:372;X:-195392;Y:-200224;D:-1;
 NPC_END
 PHYSICS
@@ -12854,14 +12854,14 @@ ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Boss Begin";SSS:["ID\:6\;MI\:15\;"];AS:0;AX:0;AY:0;
 ET:"Boss End 1";SSS:["ID\:6\;MI\:0\;"];TE:"Boss End 2";TD:10;AS:0;AX:0;AY:0;
-ET:"Boss End 2";SD:69;LS:["Subcon Rescue Door"];TE:"Boss End 3";TD:50;AS:0;AX:0;AY:0;
+ET:"Boss End 2";LS:["Subcon Rescue Door"];TE:"Boss End 3";TD:50;AS:0;AX:0;AY:0;
 ET:"Boss End 3";AS:0;AX:0;AY:0;
 ET:"World Clear 1";SD:27;LH:["Subcon #2 Release Switch"];SSS:["ID\:10\;MI\:24\;"];TE:"World Clear 2";DS:1;AS:0;AX:0;AY:0;
 ET:"World Clear 2";TE:"World Clear 3";TD:21;ML:"Subcon #2 Moving Block";MX:0;MY:-0.713297;AS:0;AX:0;AY:0;
 ET:"World Clear 3";LH:["Subcon #2 Moving Block"];TE:"World Clear 4";TD:10;DS:1;AS:0;AX:0;AY:0;
 ET:"World Clear 4";SD:24;LS:["Subcon #1","Subcon #1 Moving Block"];TE:"World Clear 5";TD:10;DS:1;ML:"Subcon #1 Moving Block";MX:4.92308;MY:0;AS:0;AX:0;AY:0;
 ET:"World Clear 5";LH:["Subcon #1 Moving Block"];LS:["Subcon #1 Still Block"];TE:"World Clear 6";TD:7;DS:1;AS:0;AX:0;AY:0;
-ET:"World Clear 6";SD:47;LS:["Subcon #2 Message"];TE:"World Clear 7";TD:17;DS:1;AS:0;AX:0;AY:0;
+ET:"World Clear 6";MG:"<setPos 400 32 0.5 -2.0>I'm so glad you got help\, bretheren! Let the hero take this star to give thanks to my rescue.";TE:"World Clear 7";TD:1;DS:1;AS:0;AX:0;AY:0;
 ET:"World Clear 7";SD:20;LS:["Orb"];TE:"World Clear 8";TD:18;AS:0;AX:0;AY:0;
 ET:"World Clear 8";SSS:["ID\:10\;MI\:0\;"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
