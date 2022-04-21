@@ -14,6 +14,7 @@ SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.s
 SC:9;L:-20000;R:-19200;T:-20600;B:-20000;MZ:24;MF:"_OST/Super Mario Bros 2/Jar.spc|0\;g=2.5";BG:12;
 SC:10;L:0;R:800;T:-600;B:0;MZ:0;MF:"_OST/Super Mario Bros/World Clear.spc|0\;g=2.7";BG:54;
 SC:11;L:20000;R:20800;T:19400;B:20000;MZ:0;MF:"";BG:0;
+SC:12;L:40000;R:40800;T:39400;B:40000;MZ:0;MF:"";BG:0;
 SC:20;L:200000;R:200800;T:199400;B:200000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
@@ -12629,7 +12630,7 @@ ID:155;X:-78944;Y:-80128;D:-1;
 ID:155;X:-78944;Y:-80160;D:-1;
 ID:155;X:-79008;Y:-80160;D:-1;
 ID:155;X:-78976;Y:-80160;D:-1;
-ID:799;X:-78600;Y:-80320;D:-1;EA:"Boss Begin";ED:"Boss End";
+ID:799;X:-78600;Y:-80320;D:-1;EA:"Boss Begin";ED:"Boss End 1";
 ID:206;X:-99552;Y:-100224;D:1;
 ID:31;X:-99616;Y:-100288;D:-1;
 ID:558;X:-119262;Y:-120000;D:-1;
@@ -12852,15 +12853,15 @@ ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Boss Begin";SSS:["ID\:6\;MI\:15\;"];AS:0;AX:0;AY:0;
-ET:"Boss End";SSS:["ID\:6\;MI\:0\;"];TE:"Boss End 2";TD:10;PC:000010000000;AS:0;AX:0;AY:0;
-ET:"Boss End 2";SD:69;LS:["Subcon Rescue Door"];TE:"Boss End 3";TD:50;PC:000010000000;AS:0;AX:0;AY:0;
+ET:"Boss End 1";SSS:["ID\:6\;MI\:0\;"];TE:"Boss End 2";TD:10;AS:0;AX:0;AY:0;
+ET:"Boss End 2";SD:69;LS:["Subcon Rescue Door"];TE:"Boss End 3";TD:50;AS:0;AX:0;AY:0;
 ET:"Boss End 3";AS:0;AX:0;AY:0;
-ET:"World Clear 1";SD:27;LH:["Subcon #2 Release Switch"];SSS:["ID\:10\;MI\:24\;"];TE:"World Clear 2";DS:1;PC:000010000000;AS:0;AX:0;AY:0;
-ET:"World Clear 2";TE:"World Clear 3";TD:21;PC:000010000000;ML:"Subcon #2 Moving Block";MX:0;MY:-0.713297;AS:0;AX:0;AY:0;
-ET:"World Clear 3";LH:["Subcon #2 Moving Block"];TE:"World Clear 4";TD:10;DS:1;PC:000010000000;AS:0;AX:0;AY:0;
-ET:"World Clear 4";SD:24;LS:["Subcon #1","Subcon #1 Moving Block"];TE:"World Clear 5";TD:10;DS:1;PC:000010000000;ML:"Subcon #1 Moving Block";MX:4.92308;MY:0;AS:0;AX:0;AY:0;
-ET:"World Clear 5";LH:["Subcon #1 Moving Block"];LS:["Subcon #1 Still Block"];TE:"World Clear 6";TD:7;DS:1;PC:000010000000;AS:0;AX:0;AY:0;
-ET:"World Clear 6";SD:47;LS:["Subcon #2 Message"];TE:"World Clear 7";TD:17;DS:1;PC:000010000000;AS:0;AX:0;AY:0;
+ET:"World Clear 1";SD:27;LH:["Subcon #2 Release Switch"];SSS:["ID\:10\;MI\:24\;"];TE:"World Clear 2";DS:1;AS:0;AX:0;AY:0;
+ET:"World Clear 2";TE:"World Clear 3";TD:21;ML:"Subcon #2 Moving Block";MX:0;MY:-0.713297;AS:0;AX:0;AY:0;
+ET:"World Clear 3";LH:["Subcon #2 Moving Block"];TE:"World Clear 4";TD:10;DS:1;AS:0;AX:0;AY:0;
+ET:"World Clear 4";SD:24;LS:["Subcon #1","Subcon #1 Moving Block"];TE:"World Clear 5";TD:10;DS:1;ML:"Subcon #1 Moving Block";MX:4.92308;MY:0;AS:0;AX:0;AY:0;
+ET:"World Clear 5";LH:["Subcon #1 Moving Block"];LS:["Subcon #1 Still Block"];TE:"World Clear 6";TD:7;DS:1;AS:0;AX:0;AY:0;
+ET:"World Clear 6";SD:47;LS:["Subcon #2 Message"];TE:"World Clear 7";TD:17;DS:1;AS:0;AX:0;AY:0;
 ET:"World Clear 7";SD:20;LS:["Orb"];TE:"World Clear 8";TD:18;AS:0;AX:0;AY:0;
 ET:"World Clear 8";SSS:["ID\:10\;MI\:0\;"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
