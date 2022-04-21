@@ -24,6 +24,7 @@ function costume.onInit(p)
 	registerEvent(costume,"onInputUpdate")
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onPostNPCKill")
+	registerEvent(costume,"onNPCKill")
 	registerEvent(costume,"onNPCHarm")
 	
 	npcManager.registerEvent(291, costume, "onTickEndNPC")
@@ -158,6 +159,12 @@ function costume.shootGrenade2Upwards()
 	costume.useGrenade2 = false
 end
 
+function costume.onNPCKill(eventToken, npc, harmType)
+	if npc.id == 291 then
+		local hurtNPC = harmNPC(npc,HARM_TYPE_NPC)
+	end
+end
+
 function costume.onPostNPCKill(npc, harmType)
 	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
 	if SaveData.toggleCostumeProfanity then
@@ -175,9 +182,9 @@ function costume.onPostNPCKill(npc, harmType)
 		borishp = borishp + 1
 	end
 	if npc.id == 291 then
-		--for _,v in ipairs(Effect.get(148)) do
-			--local explosion = Effect.spawn(998, v.x, v.y)
-		--end
+		for _,v in ipairs(NPC.get(291)) do
+			local explosion = Effect.spawn(998, v.x, v.y + 35, player.section, false, true)
+		end
 	end
 end
 

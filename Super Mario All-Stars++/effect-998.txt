@@ -1,0 +1,6 @@
+[1]
+framespeed=3
+frames=15
+lifetime=46
+xAlign=MID
+yAlign=BOTTOM

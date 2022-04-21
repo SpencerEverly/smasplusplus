@@ -51,8 +51,10 @@ local roulettestarSettings = {
 	
 }
 
+local collectactive = false
 local playervuln = false
 local playerwon = false
+local playermovement = 0
 roulettestar.collectableIDList = {}
 roulettestar.collectableIDMap  = {}
 roulettestar.collectableIDStar = {}
@@ -95,9 +97,118 @@ function starget()
 	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 
+walkCycles = {}
+
+walkCycles[CHARACTER_MARIO]           = {[PLAYER_SMALL] = {1,2, framespeed = 8},[PLAYER_BIG] = {1,2,3,2, framespeed = 6}}
+walkCycles[CHARACTER_LUIGI]           = walkCycles[CHARACTER_MARIO]
+walkCycles[CHARACTER_PEACH]           = {[PLAYER_BIG] = {1,2,3,2, framespeed = 6}}
+walkCycles[CHARACTER_TOAD]            = walkCycles[CHARACTER_PEACH]
+walkCycles[CHARACTER_LINK]            = {[PLAYER_BIG] = {4,3,2,1, framespeed = 6}}
+walkCycles[CHARACTER_MEGAMAN]         = {[PLAYER_BIG] = {2,3,2,4, framespeed = 12}}
+walkCycles[CHARACTER_WARIO]           = walkCycles[CHARACTER_MARIO]
+walkCycles[CHARACTER_BOWSER]          = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_KLONOA]          = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_NINJABOMBERMAN]  = walkCycles[CHARACTER_PEACH]
+walkCycles[CHARACTER_ROSALINA]        = walkCycles[CHARACTER_PEACH]
+walkCycles[CHARACTER_SNAKE]           = walkCycles[CHARACTER_LINK]
+walkCycles[CHARACTER_ZELDA]           = walkCycles[CHARACTER_LUIGI]
+walkCycles[CHARACTER_ULTIMATERINKA]   = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_UNCLEBROADSWORD] = walkCycles[CHARACTER_TOAD]
+walkCycles[CHARACTER_SAMUS]           = walkCycles[CHARACTER_LINK]
+
+walkCycles["SMW-MARIO"] = {[PLAYER_SMALL] = {1,2, framespeed = 8},[PLAYER_BIG] = {3,2,1, framespeed = 6}}
+walkCycles["SMW-LUIGI"] = walkCycles["SMW-MARIO"]
+
+walkCycles["ACCURATE-SMW-MARIO"] = walkCycles["SMW-MARIO"]
+walkCycles["ACCURATE-SMW-LUIGI"] = walkCycles["SMW-MARIO"]
+walkCycles["ACCURATE-SMW-TOAD"]  = walkCycles["SMW-MARIO"]
+
+local yoshiAnimationFrames = {
+        {bodyFrame = 0,headFrame = 0,headOffsetX = 0 ,headOffsetY = 0,bodyOffsetX = 0,bodyOffsetY = 0,playerOffset = 0},
+        {bodyFrame = 1,headFrame = 0,headOffsetX = -1,headOffsetY = 2,bodyOffsetX = 0,bodyOffsetY = 1,playerOffset = 1},
+        {bodyFrame = 2,headFrame = 0,headOffsetX = -2,headOffsetY = 4,bodyOffsetX = 0,bodyOffsetY = 2,playerOffset = 2},
+        {bodyFrame = 1,headFrame = 0,headOffsetX = -1,headOffsetY = 2,bodyOffsetX = 0,bodyOffsetY = 1,playerOffset = 1},
+	}
+	
+local bootBounceData = {}
+
+function roulettestar.onDraw()
+	local playercameray = player.y - camera.y
+	local playercamerax = player.x - camera.x
+	if collectactive then
+		for idx,p in ipairs(Player.get()) do
+			local animation = walkCycles[p:getCostume()] or walkCycles[p.character]
+
+			if animation ~= nil then
+				local frame
+
+				local x = 500
+				local y = 10 - p.height
+
+				if p.mount == MOUNT_BOOT then -- bouncing along in a boot
+					bootBounceData[idx] = bootBounceData[idx] or {speed = 0,offset = 0}
+					local bounceData = bootBounceData[idx]
+							
+					if not Misc.isPaused() then
+						bounceData.speed = bounceData.speed + Defines.player_grav
+						bounceData.offset = bounceData.offset + bounceData.speed
+
+						if bounceData.offset >= 0 then
+							bounceData.speed = -3.4
+							bounceData.offset = 0
+						end
+					end
+
+					y = y + bounceData.offset
+
+					frame = 1
+				elseif p.mount == MOUNT_CLOWNCAR then -- don't think this is even possible? but eh it's here
+					frame = 1
+				elseif p.mount == MOUNT_YOSHI then -- riding yoshi, yoshi's animation is a complete mess
+					frame = 30
+
+					local yoshiAnimationData = yoshiAnimationFrames[(math.floor(lunatime.tick() / 8) % #yoshiAnimationFrames) + 1]
+
+					local xOffset = 4
+					local yOffset = (72 - p.height)
+
+					p:mem(0x72,FIELD_WORD,yoshiAnimationData.headFrame + 5)
+					p:mem(0x7A,FIELD_WORD,yoshiAnimationData.bodyFrame + 7)
+
+					p:mem(0x6E,FIELD_WORD,20 - xOffset + yoshiAnimationData.headOffsetX)
+					p:mem(0x70,FIELD_WORD,10 - yOffset + yoshiAnimationData.headOffsetY)
+
+					p:mem(0x76,FIELD_WORD,0  - xOffset + yoshiAnimationData.bodyOffsetX)
+					p:mem(0x78,FIELD_WORD,42 - yOffset + yoshiAnimationData.bodyOffsetY)
+
+					p:mem(0x10E,FIELD_WORD,yoshiAnimationData.playerOffset - yOffset)
+				else -- just good ol' walking
+					local walkCycle = animation[p.powerup] or animation[PLAYER_BIG]
+
+					frame = walkCycle[(math.floor(lunatime.tick() / walkCycle.framespeed) % #walkCycle) + 1]
+				end
+			end
+			if player:isOnGround() then
+				p:setFrame(-50*player.direction)
+				playerwon = false
+				playermovement = playermovement + 1
+				playermovement2 = playercamerax + playermovement
+				p:render{
+					x = playermovement2, y = playercameray,
+					ignorestate = true, sceneCoords = false, priority = -10, frame = frame, drawplayer = false,
+				}
+			end
+		end
+	end
+	Text.print(playercamerax, 100, 100)
+	Text.print(playercameray, 100, 120)
+	Text.print(playermovement2, 100, 140)
+end
+
 function roulettestar.onPostNPCKill(v,reason)
 	if roulettestar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
 		Routine.run(starget)
+		collectactive = true
 		if not table.icontains(SaveData.completeLevels,Level.filename()) then
 			SaveData.totalStarCount = SaveData.totalStarCount + 1
 			table.insert(SaveData.completeLevels,Level.filename())
@@ -134,7 +245,7 @@ function roulettestar.onInputUpdate()
 			player2.upKeyPressing = false
 			player2.downKeyPressing = false
 			player2.leftKeyPressing = false
-			player2.rightKeyPressing = false
+			player2.rightKeyPressing = true
 			player2.altJumpKeyPressing = false
 			player2.runKeyPressing = false
 			player2.altRunKeyPressing = false
@@ -176,6 +287,7 @@ function roulettestar.onInitAPI()
 	registerEvent(roulettestar,"onPlayerKill")
 	registerEvent(roulettestar,"onInputUpdate")
 	registerEvent(roulettestar,"onPostNPCKill")
+	registerEvent(roulettestar,"onDraw")
 	registerEvent(roulettestar,"onExit")
 end
 

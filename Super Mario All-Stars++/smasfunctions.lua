@@ -216,6 +216,7 @@ function manageLives(lives, mathcount) --arg1 = number of lives, arg2 = to add (
 end
 
 function maxOutLives() --This maxes out the lives to 999
+	playSound(98)
 	SaveData.totalLives = 999
 end
 
