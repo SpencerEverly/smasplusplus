@@ -187,22 +187,22 @@ function roulettestar.onDraw()
 
 					frame = walkCycle[(math.floor(lunatime.tick() / walkCycle.framespeed) % #walkCycle) + 1]
 				end
-			end
-			if player:isOnGround() then
-				p:setFrame(-50*player.direction)
-				playerwon = false
-				playermovement = playermovement + 1
-				playermovement2 = playercamerax + playermovement
-				p:render{
-					x = playermovement2, y = playercameray,
-					ignorestate = true, sceneCoords = false, priority = -10, frame = frame, drawplayer = false,
-				}
+				if player:isOnGround() then
+					player:setFrame(-50*player.direction)
+					playerwon = false
+					playermovement = playermovement + Defines.player_walkspeed
+					playermovement2 = playercamerax + playermovement
+					p.direction = DIR_RIGHT
+
+					player:render{
+						x = playermovement2,y = playercameray,
+						ignorestate = true,sceneCoords = false,priority = -25,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+						frame = frame,
+					}
+				end
 			end
 		end
 	end
-	Text.print(playercamerax, 100, 100)
-	Text.print(playercameray, 100, 120)
-	Text.print(playermovement2, 100, 140)
 end
 
 function roulettestar.onPostNPCKill(v,reason)
@@ -234,7 +234,7 @@ function roulettestar.onInputUpdate()
 		player.upKeyPressing = false
 		player.downKeyPressing = false
 		player.leftKeyPressing = false
-		player.rightKeyPressing = true
+		player.rightKeyPressing = false
 		player.altJumpKeyPressing = false
 		player.runKeyPressing = false
 		player.altRunKeyPressing = false
@@ -245,7 +245,7 @@ function roulettestar.onInputUpdate()
 			player2.upKeyPressing = false
 			player2.downKeyPressing = false
 			player2.leftKeyPressing = false
-			player2.rightKeyPressing = true
+			player2.rightKeyPressing = false
 			player2.altJumpKeyPressing = false
 			player2.runKeyPressing = false
 			player2.altRunKeyPressing = false
