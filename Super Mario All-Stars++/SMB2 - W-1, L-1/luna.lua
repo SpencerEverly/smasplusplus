@@ -5,20 +5,24 @@ local playerManager = require("playerManager")
 local costumes = {}
 
 function onStart()
-	if currentCostume == nil then
-		Audio.playSFX("_OST/_Sound Effects/smb2-beginning.ogg")
-	end
-	if currentCostume then
-		Audio.playSFX("_OST/_Sound Effects/smb2-beginning.ogg")
-	end
-	if currentCostume == "4-SMB2-RETRO" then
-		Audio.playSFX("_OST/_Sound Effects/smb1-nes-beginning.ogg")
-	end
-	if currentCostume == "11-SMA1" then
-		Audio.playSFX("_OST/_Sound Effects/sma1-beginning.ogg")
-	end
-	if currentCostume == "12-SMA2" then
-		Audio.playSFX("_OST/_Sound Effects/sma1-beginning.ogg")
+	if player:mem(0x15E, FIELD_WORD) == 7 then
+		if currentCostume == nil then
+			playSound("smb2-beginning.ogg")
+		elseif currentCostume == "4-SMB2-RETRO" then
+			playSound("smb1-nes-beginning.ogg")
+		elseif currentCostume == "5-SMB2-RETRO" then
+			playSound("smb1-nes-beginning.ogg")
+		elseif currentCostume == "3-SMB2-RETRO" then
+			playSound("smb1-nes-beginning.ogg")
+		elseif currentCostume == "IMAJIN-NES" then
+			playSound("smb1-nes-beginning.ogg")
+		elseif currentCostume == "11-SMA1" then
+			playSound("sma1-beginning.ogg")
+		elseif currentCostume == "12-SMA2" then
+			playSound("sma1-beginning.ogg")
+		elseif currentCostume then
+			playSound("smb2-beginning.ogg")
+		end
 	end
 end
 
