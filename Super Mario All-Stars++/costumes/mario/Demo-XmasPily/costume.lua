@@ -1214,19 +1214,19 @@ function costume.onDraw()
 	local heartfull2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot.png")
 	local heartempty2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot_empty.png")
 	if onehp then
-		Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
-		Graphics.drawImageWP(heartempty2, player.x - camera.x,  player.y - camera.y - 55, -24)
-		Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartfull2, 357,  16, -4.2)
+		Graphics.drawImageWP(heartempty2, 388,  16, -4.2)
+		Graphics.drawImageWP(heartempty2, 421,  16, -4.2)
 	end
 	if twohp then
-		Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
-		Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
-		Graphics.drawImageWP(heartempty2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartfull2, 357,  16, -4.2)
+		Graphics.drawImageWP(heartfull2,  388,  16, -4.2)
+		Graphics.drawImageWP(heartempty2, 421,  16, -4.2)
 	end
 	if threehp then
-		Graphics.drawImageWP(heartfull2, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
-		Graphics.drawImageWP(heartfull2, player.x - camera.x,  player.y - camera.y - 55, -24)
-		Graphics.drawImageWP(heartfull2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
+		Graphics.drawImageWP(heartfull2, 357,  16, -4.2)
+		Graphics.drawImageWP(heartfull2, 388,  16, -4.2)
+		Graphics.drawImageWP(heartfull2, 421,  16, -4.2)
 	end
 end
 

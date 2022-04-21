@@ -2,6 +2,8 @@ local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
 local HUDOverride = require("hudoverridee")
 local rng = require("base/rng")
+local npcManager = require("npcManager")
+local npcutils = require("npcs/npcutils")
 
 local costume = {}
 
@@ -21,6 +23,7 @@ function costume.onInit(p)
 	registerEvent(costume,"onInputUpdate")
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onPostNPCKill")
+	registerEvent(costume,"onNPCHarm")
 	
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/stomped.ogg")
@@ -44,6 +47,7 @@ function costume.onInit(p)
 	costume.abilitiesenabled = true
 	costume.useGun1 = false
 	costume.useGrenade2 = false
+	costume.grenade = true
 	HUDOverride.visible.itembox = false
 	borishp = 3
 end
@@ -68,6 +72,24 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
         or oldSpeedX     ~= npc.speedX
         or oldSpeedY     ~= npc.speedY
     )
+end
+
+costume.grenadeID = 291
+costume.goanimateExplosionID = 998
+
+if costume.grenade then
+	local grenade = {
+		id = 291,
+	
+		gfxwidth=120,
+		gfxheight=162,
+		frames=15,
+		framestyle=1,
+		
+		effect = costume.goanimateExplosionID,
+		}
+	
+	npcManager.setNpcSettings(grenade)
 end
 
 function costume.shootGun1()
@@ -96,14 +118,14 @@ function costume.shootGun1()
 end
 
 function costume.shootGrenade2()
-	plr:mem(0x172, FIELD_BOOL, false)
+	plr:mem(0x160, FIELD_WORD, 5)
 	local x = plr.x
 	local y = plr.y + plr.height/2 - 5
 	if (plr.direction == 1) then
 		x = x + plr.width
 	end
 	local grenadeid = 291
-	local grenadeNpc = NPC.spawn(grenadeid, x, y, player.section, false, true)
+	local grenadeNpc = NPC.spawn(291, x, y, player.section, false, true)
 	costume.useGrenade2 = true
 	grenadeNpc.frames = 1
 	if (plr.direction == 1) then
@@ -114,21 +136,17 @@ function costume.shootGrenade2()
 		grenadeNpc.speedY = -0.2
 	end
 	costume.useGrenade2 = false
-	cooldown = 10
-	if cooldown <= 0 then
-		plr:mem(0x172, FIELD_BOOL, true)
-	end
 end
 
 function costume.shootGrenade2Upwards()
-	plr:mem(0x172, FIELD_BOOL, false)
+	plr:mem(0x160, FIELD_WORD, 5)
 	local x = plr.x
 	local y = plr.y + plr.height/2 - 5
 	if (plr.direction == 1) then
 		x = x + plr.width
 	end
 	local grenadeid = 291
-	local grenadeNpc = NPC.spawn(grenadeid, x, y, player.section, false, true)
+	local grenadeNpc = NPC.spawn(291, x, y, player.section, false, true)
 	costume.useGrenade2 = true
 	grenadeNpc.frames = 1
 	if (plr.direction == 1) then
@@ -139,9 +157,11 @@ function costume.shootGrenade2Upwards()
 		grenadeNpc.speedY = -7.5
 	end
 	costume.useGrenade2 = false
-	cooldown = 10
-	if cooldown <= 0 then
-		plr:mem(0x172, FIELD_BOOL, true)
+end
+
+function costume.onNPCHarm(v)
+	if v.id == 291 then
+		Effect.spawn(costume.goanimateExplosionID, v.x, v.y)
 	end
 end
 
@@ -443,6 +463,7 @@ function costume.onCleanup(p)
 	extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
 	extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
 	costume.abilitiesenabled = false
+	costume.grenade = false
 	HUDOverride.visible.itembox = true
 end
 
