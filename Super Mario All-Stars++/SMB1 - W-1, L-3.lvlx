@@ -294,8 +294,14 @@ ID:476;X:-197088;Y:-200225;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-196000;Y:-200288;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-198336;Y:-200256;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:998;X:-195328;Y:-200384;D:-1;
-ID:638;X:-199584;Y:-200544;D:-1;LR:"SMB1 Hard Mode";
-ID:638;X:-195392;Y:-200544;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"enabled\"\: false\n}\n";
+ID:17;X:-199296;Y:-200384;D:-1;LR:"SMB1 Hard Mode";
+ID:17;X:-198784;Y:-200448;D:-1;LR:"SMB1 Hard Mode";
+ID:17;X:-198336;Y:-200352;D:-1;LR:"SMB1 Hard Mode";
+ID:17;X:-197904;Y:-200400;D:-1;LR:"SMB1 Hard Mode";
+ID:17;X:-197568;Y:-200256;D:-1;LR:"SMB1 Hard Mode";
+ID:17;X:-197248;Y:-200384;D:-1;LR:"SMB1 Hard Mode";
+ID:17;X:-196896;Y:-200272;D:-1;LR:"SMB1 Hard Mode";
+ID:17;X:-196384;Y:-200352;D:-1;LR:"SMB1 Hard Mode";
 NPC_END
 LAYERS
 LR:"Default";
