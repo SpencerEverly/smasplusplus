@@ -3,9 +3,14 @@ local extrasounds = require("extrasounds")
 
 local costume = {}
 
-local ready = false
+local plr
+local cooldown = 0
 
 function costume.onInit(p)
+	plr = p
+	registerEvent(costume,"onTick")
+	registerEvent(costume,"onDraw")
+	registerEvent(costume,"onInputUpdate")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/block-hit.ogg")
@@ -79,8 +84,23 @@ function costume.onInit(p)
 	extrasounds.id[103] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/cherry.ogg")) --Cherry
 	extrasounds.id[104] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/explode.ogg")) --SMB2 Explosion
 	extrasounds.id[105] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/hammerthrow.ogg")) --Player hammer throw
-	
-	ready = true
+end
+
+local playerveggies = NPC.iterate{144, 141, 92, 139, 140, 142, 91, 145, 143, 146, 147, 154, 155, 156, 157}
+
+function costume.onTick(p)
+	--if not player.holdingNPC == nil then
+		--if player.holdingNPC >= 1 and not player.holdingNPC == 144 or not player.holdingNPC == 141 or not player.holdingNPC == 92 or not player.holdingNPC == 139 or not player.holdingNPC == 140 or not player.holdingNPC == 142 or not player.holdingNPC == 91 or not player.holdingNPC == 145 or not player.holdingNPC == 143 or not player.holdingNPC == 146 or not player.holdingNPC == 147 or not player.holdingNPC == 154 or not player.holdingNPC == 155 or not player.holdingNPC == 156 or not player.holdingNPC == 157 then
+			--holdingnpctrue = true
+		--end
+	--end
+end
+
+function costume.onInputUpdate()
+	--if holdingnpctrue then
+		--player.keys.run = false
+		--player.keys.altRun = false
+	--end
 end
 
 function costume.onCleanup(p)

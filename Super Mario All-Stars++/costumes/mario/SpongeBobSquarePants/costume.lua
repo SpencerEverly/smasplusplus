@@ -118,18 +118,22 @@ function costume.onStart()
 end
 
 function costume.onPostNPCKill(npc, harmType)
-	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
-	local rngkey = rng.randomInt(1,6)
-	if items[npc.id] and Colliders.collide(plr, npc) then
-		playSound("mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
-    end
+	if SaveData.toggleCostumeAbilities == true then
+		local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
+		local rngkey = rng.randomInt(1,6)
+		if items[npc.id] and Colliders.collide(plr, npc) then
+			playSound("mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
+		end
+	end
 end
 
 function costume.onTickEnd()
-	if canFall(p) then
-		costume.useFallingFrame = player.speedY > 0
-	else
-		costume.useFallingFrame = false
+	if SaveData.toggleCostumeAbilities == true then
+		if canFall(p) then
+			costume.useFallingFrame = player.speedY > 0
+		else
+			costume.useFallingFrame = false
+		end
 	end
 end
 
