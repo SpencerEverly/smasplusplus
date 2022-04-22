@@ -152,16 +152,13 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onPostPlayerHarm")
 	registerEvent(extrasounds, "onPostPlayerKill")
 	registerEvent(extrasounds, "onPostExplosion")
+	registerEvent(extrasounds, "onExplosion")
 	registerEvent(extrasounds, "onPostBlockHit")
 	registerEvent(extrasounds, "onPlayerKill")
 	
 	local Routine = require("routine")
 	
 	ready = true --We're ready, so we can begin
-end
-
-function extrasounds.onDraw()
-	Text.print(player:mem(0x160, FIELD_WORD), 100, 100)
 end
 
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
@@ -206,6 +203,9 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 				SFX.play(extrasounds.id[43], 1, 1, 70)
 			end
 		end
+		if mem(0x00A3C87F, FIELD_BYTE) == 14 and Level.endState() > 0 then --This plays a coin sound when NpcToCoin happens
+			SFX.play(extrasounds.id[14], 1, 1, 2500)
+		end
 	end
 	if extrasounds.active == false then --Unmute when not active
 		Audio.sounds[4].muted = false --block-smash.ogg
@@ -216,12 +216,6 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[18].muted = false --fireball.ogg
 		Audio.sounds[43].muted = false --fireworks.ogg
 		Audio.sounds[59].muted = false --dragon-coin.ogg
-	end
-end
-
-function extrasounds.onPostExplosion()
-	if extrasounds.active == true then
-		
 	end
 end
 
@@ -297,9 +291,6 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 					if player.powerup == 7 then --Iceball sound
 						playSound(93)
 					end
-				end
-				if mem(0x00A3C87F, FIELD_BYTE, 14) then --This plays a coin sound when NpcToCoin happens
-					playSound(14)
 				end
 			end
 		end

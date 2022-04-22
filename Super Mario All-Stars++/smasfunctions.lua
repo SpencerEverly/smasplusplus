@@ -220,6 +220,11 @@ function maxOutLives() --This maxes out the lives to 999
 	SaveData.totalLives = 999
 end
 
+function resetLives() --This resets the lives back to 5
+	playSound(67)
+	SaveData.totalLives = 5
+end
+
 --Star Count
 
 function starCount() --This lists the count of the stars

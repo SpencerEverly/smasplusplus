@@ -532,6 +532,11 @@ function pausemenu2.onDraw()
 	sfxVolume = pauseplus.getSelectionValue("settings","SFX Volume")
 	for i = 1, 91 do
 		Audio.sounds[i].sfx.volume = math.floor(sfxVolume * 128 + 0.5)
+		if extrasounds.active == true then
+			if Audio.sounds[43].muted then
+				Audio.sounds[43].sfx.volume = 0
+			end
+		end
 	end
 	SFX.volume.MASTER = sfxVolume
 	if exitFadeActive then
