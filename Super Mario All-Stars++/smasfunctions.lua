@@ -1,7 +1,6 @@
 local smasfunctions = {}
 
 local extrasounds = require("extrasounds")
-local serializer = require("ext/serializer")
 
 function loadFile(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
 	return Misc.resolveFile(name)
@@ -390,25 +389,6 @@ function rngTrueValue(argument) --Thanks Seija!
 	end
 end
 
-function loadSaveSlot(slot)
-	local filename = "save"..slot.."-ext.dat"
-	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
-	if f then
-		local content = f:read("*all")
-		f:close()
-		if content ~= "" then
-			local s,e = pcall(serializer.deserialize, content, filename)
-			if s then
-				return e
-			else
-				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken SMBX launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
-			end
-		end
-		return {}
-	end
-	return {}
-end
-
 function saveSaveSlot(slot)
 	Misc.saveSlot(slot)
 	Misc.saveGame()
@@ -447,17 +427,8 @@ function moveSaveSlot(slot, destination)
 	Misc.saveGame()
 end
 
-function eraseSaveData(slot)
-	name = Misc.resolveFile("save"..slot..".sav")
-	name2 = Misc.resolveFile("save"..slot.."-ext.dat")
-	if name == nil then
-		return
-	end
-	if name2 == nil then
-		return
-	end
-
-	local f = io.open(name,"w")
+function eraseSaveSlot(slot)
+	local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
 	if f == nil then
 		return
 	end
@@ -465,7 +436,7 @@ function eraseSaveData(slot)
 	f:write('64 \n3 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n#FALSE# \n"next" \n"next" \n"next" \n"next" \n0 \n')
 	f:close()
 	
-	local f2 = io.open(name2,"w")
+	local f2 = io.open(Misc.episodePath().."save"..slot.."-ext.dat","w")
 	if f2 == nil then
 		return
 	end

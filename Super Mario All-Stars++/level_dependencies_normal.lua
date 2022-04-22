@@ -53,45 +53,6 @@ end
 
 local smb1buzzyswitch = false
 
-GameData._smb1Levels = {
-	"SMB1 - W-1, L-1.lvlx",
-	"SMB1 - W-1, L-2.lvlx",
-	"SMB1 - W-1, L-3.lvlx",
-	"SMB1 - W-1, L-4.lvlx",
-	"SMB1 - W-2, L-1.lvlx",
-	"SMB1 - W-2, L-2.lvlx",
-	"SMB1 - W-2, L-3.lvlx",
-	"SMB1 - W-2, L-4.lvlx",
-	"SMB1 - W-3, L-1.lvlx",
-	"SMB1 - W-3, L-2.lvlx",
-	"SMB1 - W-3, L-3.lvlx",
-	"SMB1 - W-3, L-4.lvlx",
-	"SMB1 - W-4, L-1.lvlx",
-	"SMB1 - W-4, L-2.lvlx",
-	"SMB1 - W-4, L-3.lvlx",
-	"SMB1 - W-4, L-4.lvlx",
-	"SMB1 - W-5, L-1.lvlx",
-	"SMB1 - W-5, L-2.lvlx",
-	"SMB1 - W-5, L-3.lvlx",
-	"SMB1 - W-5, L-4.lvlx",
-	"SMB1 - W-6, L-1.lvlx",
-	"SMB1 - W-6, L-2.lvlx",
-	"SMB1 - W-6, L-3.lvlx",
-	"SMB1 - W-6, L-4.lvlx",
-	"SMB1 - W-7, L-1.lvlx",
-	"SMB1 - W-7, L-2.lvlx",
-	"SMB1 - W-7, L-3.lvlx",
-	"SMB1 - W-7, L-4.lvlx",
-	"SMB1 - W-8, L-1.lvlx",
-	"SMB1 - W-8, L-2.lvlx",
-	"SMB1 - W-8, L-3.lvlx",
-	"SMB1 - W-8, L-4.lvlx",
-	"SMB1 - W-9, L-1.lvlx",
-	"SMB1 - W-9, L-2.lvlx",
-	"SMB1 - W-9, L-3.lvlx",
-	"SMB1 - W-9, L-4.lvlx"
-}
-
 if SaveData.SMB1HardModeActivated == nil then
 	SaveData.SMB1HardModeActivated = false
 end

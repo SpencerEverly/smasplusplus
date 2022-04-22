@@ -37,6 +37,8 @@ local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
 local extrasounds = require("extrasounds")
+
+--Next up is some new functions, for simplifying the functions:
 local smasfunctions = require("smasfunctions")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
@@ -50,14 +52,6 @@ local function anyValidFields() --This is to prevent any player2 errors while sw
 end
 
 function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport.
-	if not playerGetIsValid(self) then
-		error("Invalid player object!")
-	end
-
-	if (self.idx >= 1000) then
-		error("Cannot teleport template players.")
-	end
-	
 	-- If using bottom center aligned coordinates, handle that sensibly
 	if bottomCenterAligned then
 		x = x - (player.width * 0.5)
@@ -74,85 +68,25 @@ function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player tele
 	end
 end
 
---We will then detect to see if the broken SMBX launcher has launched the game. If so, it'll prevent us from loading the episode and recommend us to launch using the SMBX2 launcher instead.
---Coming soon
-
---Now that everything has been loaded, save the game and start loading the medium important stuff
-Misc.saveGame()
-local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
-local repll = require("repll") --Custom sound command line, for testing in the editor
-local rng = require("base/rng") --Load up rng for etc. things
-local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi
-local smascheats = require("smascheats") --To enable edited cheats and some new ones
-
-loadactivate = true
-local steve = require("steve")
-playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
-local yoshi = require("yiYoshi/yiYoshi")
-playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
-playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
-playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
-playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
-playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
-playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
-Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
-Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
-Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
-
---First time SaveData setting, for resolutions and other settings
-if SaveData.resolution == nil then
-	SaveData.resolution = "fullscreen"
+local serializer = require("ext/serializer") --We will then detect to see if the broken SMBX launcher has launched the game. If so, it'll prevent us from loading the episode and recommend us to launch using the SMBX2 launcher instead.
+local function loadSaveSlot(slot)
+	local filename = "save"..slot.."-ext.dat"
+	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
+	if f then
+		local content = f:read("*all")
+		f:close()
+		if content ~= "" then
+			local s,e = pcall(serializer.deserialize, content, filename)
+			if s then
+				return e
+			else
+				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken SMBX launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
+			end
+		end
+		return {}
+	end
+	return {}
 end
-if SaveData.letterbox == nil then
-	SaveData.letterbox = true
-end
-if SaveData.borderEnabled == nil then
-	SaveData.borderEnabled = true
-end
-if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
-	SaveData.totalStarCount = 0
-end
-if SaveData.completeLevels == nil then --This will add a table to list completed levels
-	SaveData.completeLevels = {}
-end
-if SaveData.deathquickoption == true then
-	SaveData.deathquickoption = false
-end
-
-Progress.value = SaveData.totalStarCount
-if SaveData.playerName == nil then
-	Progress.savename = Player
-else
-	Progress.savename = SaveData.playerName
-end
-
---Make sure the warp door system doesn't get active until onStart saves the original count first...
-local warpstaractive = false
-
---Camera stuff to prevent player2 from doing split screen...
---Gets the index of the player that the camera belongs to. A return value of 0 means that it belongs to everybody
-function onCameraUpdate(c, camIdx)
-    local screenType = mem(0x00B25130,FIELD_WORD)
-    if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
-        return camIdx
-    elseif screenType == 5 then -- dynamic screen
-        if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
-            return 2
-        elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
-            return 1
-        else
-            return 0
-        end
-    elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
-        return 0
-    else
-        return 1
-    end
-end
-
---Now load the loading sound file!
-local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
 local noloadingsounds = {
@@ -307,6 +241,82 @@ GameData.nolevelplaces = {
 	"SMB2 - Ending.lvlx"
 }
 
+--Now that everything has been loaded, start loading the medium important stuff
+local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
+local repll = require("repll") --Custom sound command line, for testing in the editor
+local rng = require("base/rng") --Load up rng for etc. things
+local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi
+local smascheats = require("smascheats") --To enable edited cheats and some new ones
+
+loadactivate = true
+local steve = require("steve")
+playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+local yoshi = require("yiYoshi/yiYoshi")
+playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
+playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
+playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
+playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
+playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
+playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
+playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
+Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
+Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
+Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
+
+--First time SaveData setting, for resolutions and other settings
+if SaveData.resolution == nil then
+	SaveData.resolution = "fullscreen"
+end
+if SaveData.letterbox == nil then
+	SaveData.letterbox = true
+end
+if SaveData.borderEnabled == nil then
+	SaveData.borderEnabled = true
+end
+if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
+	SaveData.totalStarCount = 0
+end
+if SaveData.completeLevels == nil then --This will add a table to list completed levels
+	SaveData.completeLevels = {}
+end
+if SaveData.deathquickoption == true then
+	SaveData.deathquickoption = false
+end
+
+Progress.value = SaveData.totalStarCount
+if SaveData.playerName == nil then
+	Progress.savename = "Player"
+else
+	Progress.savename = SaveData.playerName
+end
+
+--Make sure the warp door system doesn't get active until onStart saves the original count first...
+local warpstaractive = false
+
+--Camera stuff to prevent player2 from doing split screen...
+--Gets the index of the player that the camera belongs to. A return value of 0 means that it belongs to everybody
+function onCameraUpdate(c, camIdx)
+    local screenType = mem(0x00B25130,FIELD_WORD)
+    if camera2.isSplit or screenType == 6 then -- split screen or supermario2 is active
+        return camIdx
+    elseif screenType == 5 then -- dynamic screen
+        if Player(1):mem(0x13C,FIELD_BOOL) then -- player 1 is dead
+            return 2
+        elseif Player(2):mem(0x13C,FIELD_BOOL) then -- player 2 is dead
+            return 1
+        else
+            return 0
+        end
+    elseif screenType == 2 or screenType == 3 or screenType == 7 then -- follows all players
+        return 0
+    else
+        return 1
+    end
+end
+
+--Now load the loading sound file!
+local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
+
 --Now use onLoad to play the loading sound...
 function onLoad()
 	if not Misc.inEditor() and not table.icontains(noloadingsounds,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
@@ -317,9 +327,7 @@ function onLoad()
 end
 
 function onLoop() --I'm sorry for using deprecated crap, this is used specifically for stopping the loading sound when erroring
-	if unexpected_condition then
-		loadingSoundObject:Stop()
-	end
+	if unexpected_condition then loadingSoundObject:Stop() end
 end
 
 function warpDoorBegin()
@@ -332,6 +340,7 @@ function warpDoorBegin()
 end
 
 function onStart() --Now do onStart...
+	loadSaveSlot(Misc.saveSlot()) --This will load the save slot twice, to check to make sure it's been properly loaded
 	Routine.run(warpDoorBegin) --This will run the routine to save the original count and to start the system from there
 	--Do the weather SaveData additions
 	if SaveData.dateplayedweather == nil then
