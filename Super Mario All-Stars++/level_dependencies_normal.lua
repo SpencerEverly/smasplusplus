@@ -295,10 +295,13 @@ function dependencies.onTick()
 			end
 		end
 		local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
+		local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
 		if SaveData.SMB1HardModeActivated == true then
 			SMB1HardModeLayer:show(true)
+			SMB1EasyModeLayer:hide(true)
 		elseif SaveData.SMB1HardModeActivated == false then
 			SMB1HardModeLayer:hide(true)
+			SMB1EasyModeLayer:show(true)
 		end
 	end
 	local character = player.character;

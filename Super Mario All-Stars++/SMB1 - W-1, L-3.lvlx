@@ -293,13 +293,16 @@ ID:476;X:-197376;Y:-200256;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-197088;Y:-200225;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-196000;Y:-200288;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:476;X:-198336;Y:-200256;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
-ID:465;X:-199968;Y:-200576;D:-1;
 ID:998;X:-195328;Y:-200384;D:-1;
+ID:638;X:-199584;Y:-200544;D:-1;LR:"SMB1 Hard Mode";
+ID:638;X:-195392;Y:-200544;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"enabled\"\: false\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
 LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
+LR:"SMB1 Hard Mode";HD:1;
+LR:"SMB1 Easy Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

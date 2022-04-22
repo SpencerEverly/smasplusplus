@@ -2878,7 +2878,7 @@ BGO_END
 NPC
 ID:589;X:-179486;Y:-180096;D:-1;
 ID:589;X:-179166;Y:-180096;D:-1;
-ID:589;X:-177182;Y:-180096;D:-1;
+ID:589;X:-177182;Y:-180096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:94;X:-174816;Y:-180150;D:-1;MG:"Thank you\, <characterName>! But the princess is in another castle!";FD:1;NM:1;
 ID:178;X:-175296;Y:-180224;D:-1;ED:"Axe";
 ID:796;X:-175488;Y:-180232;D:-1;EA:"Bowser Start";ED:"Bowser End";
@@ -2904,6 +2904,12 @@ ID:770;X:-177440;Y:-180128;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-177440;Y:-180320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:476;X:-175680;Y:-180289;D:-1;XTRA:"{\n    \"activeByDefault\"\: 2\n}\n";
 ID:998;X:-198112;Y:-200384;D:-1;
+ID:88;X:-177402;Y:-180288;D:-1;
+ID:88;X:-177370;Y:-180288;D:-1;
+ID:88;X:-177338;Y:-180288;D:-1;
+ID:589;X:-176894;Y:-180096;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"useFixed\"\: true\n}\n";
+ID:589;X:-176702;Y:-180096;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"useFixed\"\: true\n}\n";
+ID:589;X:-176542;Y:-180096;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"useFixed\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-199392;IY:-200096;OX:-179968;OY:-180256;DT:2;ID:1;OD:3;WX:0;WY:0;
@@ -2918,6 +2924,8 @@ LR:"Spawned NPCs";
 LR:"Axe";
 LR:"Key";
 LR:"Key 2";HD:1;
+LR:"SMB1 Hard Mode";HD:1;
+LR:"SMB1 Easy Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

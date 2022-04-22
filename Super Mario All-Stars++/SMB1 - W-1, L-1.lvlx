@@ -924,6 +924,8 @@ LR:"Axe";
 LR:"Invincable";
 LR:"Stuff";
 LR:"Saw";HD:1;
+LR:"SMB1 Hard Mode";HD:1;
+LR:"SMB1 Easy Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

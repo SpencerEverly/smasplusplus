@@ -1259,9 +1259,13 @@ LAYERS
 LR:"Default";
 LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
+LR:"SMB1 Easy Mode";HD:1;
+LR:"SMB1 Hard Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
+ET:"SMB1 Easy Mode";AS:0;AX:0;AY:0;
+ET:"SMB1 Hard Mode";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
