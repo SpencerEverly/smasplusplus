@@ -67,6 +67,7 @@ function customNPC.onTickNPC(v)
 		GameData.muteMusic = true
 		Audio.MusicVolume(0)
         SFX.play(Misc.resolveSoundFile("smb-flagslide.wav"))
+		GameData.stopStarman = true
         exiting = true
         data.countTime = Timer.isActive()
 		--Timer.toggle()

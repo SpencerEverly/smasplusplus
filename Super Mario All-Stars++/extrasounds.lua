@@ -160,6 +160,10 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	ready = true --We're ready, so we can begin
 end
 
+function extrasounds.onDraw()
+	Text.print(player:mem(0x160, FIELD_WORD), 100, 100)
+end
+
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
 	if extrasounds.active == true then --Only mute when active
 		Audio.sounds[4].muted = true --block-smash.ogg
@@ -170,21 +174,13 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[18].muted = true --fireball.ogg
 		Audio.sounds[43].muted = true --fireworks.ogg
 		Audio.sounds[59].muted = true --dragon-coin.ogg
-		if (player:mem(0x55, FIELD_WORD) == 255) or (player:mem(0x55, FIELD_WORD) == 0) then --This is code related to spinjump fireball/iceball shooting. It's not on the docs, I found this memory address myself
-			if player:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
-				spinballcounter = spinballcounter - 1
+		if player:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
+			if player:mem(0x160, FIELD_WORD) == 29 then --Is the fireball cooldown set to the highest number?
 				if player.powerup == 3 then --Fireball sound
-					SFX.play(extrasounds.id[18], 1, 1, 30)
+					playSound(18)
 				end
 				if player.powerup == 7 then --Iceball sound
-					SFX.play(extrasounds.id[93], 1, 1, 30)
-				end
-				if spinballcounter <= 0 then --If it's zero, stop playing
-					if extrasounds.id[18].playing then
-						extrasounds.id[18]:stop()
-					elseif extrasounds.id[93].playing then
-						extrasounds.id[93]:stop()
-					end
+					playSound(93)
 				end
 			end
 		end
@@ -203,10 +199,10 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 					SFX.play(extrasounds.id[98], 1, 1, 70)
 				end
 			end
-			for index,explosion in ipairs(Animation.get(69)) do --Score values!
+			for index,explosion in ipairs(Animation.get(69)) do --Explosions!
 				SFX.play(extrasounds.id[104], 1, 1, 70)
 			end
-			for index,explosion in ipairs(Animation.get(71)) do --Score values!
+			for index,explosion in ipairs(Animation.get(71)) do
 				SFX.play(extrasounds.id[43], 1, 1, 70)
 			end
 		end
@@ -230,11 +226,11 @@ function extrasounds.onPostExplosion()
 end
 
 function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
-	local bricks = table.map{4,60,188,226} --These are a list of breakable bricks.
+	local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
 	if not Misc.isPaused() then --Making sure the sound only plays when not paused...
 		if extrasounds.active == true then --If it's true, play them
 			if block.contentID == nil then --For blocks that are already used
-				playSound(0)
+				
 			end
 			if block.contentID == 1225 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
 				playSound(92)
@@ -243,30 +239,24 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 			elseif block.contentID == 1227 then
 				playSound(92)
 			elseif block.contentID == 0 then --This is to prevent a coin sound from playing when hitting an nonexistant block
-				playSound(0)
+				
 			elseif block.contentID == 1000 then --Same as last
-				playSound(0)
+				
 			elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
-				SFX.play(extrasounds.id[7])
-			elseif block.contentID <= 99 and (player.character == CHARACTER_LINK) == false then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
+				playSound(7)
+			elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
 				playSound(14)
 			end
-			if (player.character == CHARACTER_LINK) == false and (player.character == CHARACTER_MEGAMAN) == false and (player.character == CHARACTER_SNAKE) == false and (player.character == CHARACTER_SAMUS) == false then --Making sure these sounds don't play when using these characters...
-				if player.powerup >= 2 then --Smash bricks only when you are big and up
-					if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
-						if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
-							playSound(0)
-						elseif bricks[block.id] then --Or else play it
-							playSound(4)
-						end
+			if block.id == 186 then --SMB3 Bowser Brick detection, thanks to looking at the source code
+				playSound(43)
+			end
+			if player.powerup >= 2 then --No brick smashing when on powerup state 1
+				if block:collidesWith(player) then --Detecting block hitting
+					if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+						playSound(0)
 					end
-				elseif player.powerup == 1 then
-					if block:mem(0x10, FIELD_STRING) then --Detecting brick smashing
-						if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
-							playSound(0)
-						elseif bricks[block.id] then --Also don't when you are small
-							playSound(0)
-						end
+					if bricks[block.id] == (block.contentID == 0) or bricks[block.id] == (block.contentID == 1000) then --Play when it's destroyed
+						playSound(4)
 					end
 				end
 			end

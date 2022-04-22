@@ -411,7 +411,6 @@ end
 
 function onTick() --This will prevent split screen, again (Just in case)
 	mem(0x00B25130,FIELD_WORD, 2)
-	Audio.sounds[43].muted = true --Idk why, but fireworks isn't muted for extrasounds, so there's this in case
 	if table.icontains(GameData.friendlyplaces,Level.filename()) == true then
 		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end

@@ -289,6 +289,10 @@ function starman.onTick()
 			killed = true
 			starman.stop(p)
 		end
+		if GameData.stopStarman == true then
+			starman.stop(p)
+			GameData.stopStarman = false
+		end
 	end
 end
 
