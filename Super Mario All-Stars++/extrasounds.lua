@@ -221,7 +221,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 			end
 		end
 		--*SMB2 Birdo*
-		for k,v in ipairs(NPC.get(15)) do --Birdo has some sounds that'll need to be reimplemented
+		for k,v in ipairs(NPC.get(39)) do --Birdo has some sounds that'll need to be reimplemented
 			if v.ai1 == -30 then
 				SFX.play(extrasounds.id[39], 1, 1, 30)
 			end
