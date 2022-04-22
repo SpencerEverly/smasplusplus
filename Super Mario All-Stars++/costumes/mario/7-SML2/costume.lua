@@ -37,7 +37,7 @@ function costume.onInit(p)
 	--Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/7-SML2/boot.ogg")
 	--Audio.sounds[36].sfx = Audio.SfxOpen("costumes/mario/7-SML2/smash.ogg")
 	--Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/7-SML2/thwomp.ogg")
-	--Audio.sounds[42].sfx = Audio.SfxOpen("costumes/mario/7-SML2/npc-fireball.ogg")
+	--extrasounds.id[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/7-SML2/npc-fireball.ogg"))
 	--extrasounds.id[43] = Audio.SfxOpen("costumes/mario/7-SML2/fireworks.ogg")
 	--Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/7-SML2/bowser-killed.ogg")
 	--Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/7-SML2/door.ogg")
@@ -98,9 +98,9 @@ function costume.onCleanup(p)
 	Audio.sounds[36].sfx = nil
 	Audio.sounds[37].sfx = nil
 	Audio.sounds[38].sfx = nil
-	Audio.sounds[39].sfx = nil
+	extrasounds.id[39] = Audio.SfxOpen(Misc.resolveSoundFile("birdo-hit.ogg"))
 	Audio.sounds[41].sfx = nil
-	Audio.sounds[42].sfx = nil
+	extrasounds.id[42] = Audio.SfxOpen(Misc.resolveSoundFile("npc-fireball.ogg"))
 	extrasounds.id[43] = Audio.SfxOpen(Misc.resolveSoundFile("fireworks.ogg"))
 	Audio.sounds[44].sfx = nil
 	Audio.sounds[46].sfx = nil

@@ -45,9 +45,9 @@ function costume.onInit(p)
 	Audio.sounds[36].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/smash.ogg")
 	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/thwomp.ogg")
 	Audio.sounds[38].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/birdo-spit.ogg")
-	Audio.sounds[39].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/birdo-hit.ogg")
+	extrasounds.id[39] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/birdo-hit.ogg"))
 	Audio.sounds[41].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/birdo-beat.ogg")
-	Audio.sounds[42].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/npc-fireball.ogg")
+	extrasounds.id[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/npc-fireball.ogg"))
 	extrasounds.id[43] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/fireworks.ogg"))
 	Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/bowser-killed.ogg")
 	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/door.ogg")
@@ -86,23 +86,6 @@ function costume.onInit(p)
 	extrasounds.id[105] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/hammerthrow.ogg")) --Player hammer throw
 end
 
-local playerveggies = NPC.iterate{144, 141, 92, 139, 140, 142, 91, 145, 143, 146, 147, 154, 155, 156, 157}
-
-function costume.onTick(p)
-	--if not player.holdingNPC == nil then
-		--if player.holdingNPC >= 1 and not player.holdingNPC == 144 or not player.holdingNPC == 141 or not player.holdingNPC == 92 or not player.holdingNPC == 139 or not player.holdingNPC == 140 or not player.holdingNPC == 142 or not player.holdingNPC == 91 or not player.holdingNPC == 145 or not player.holdingNPC == 143 or not player.holdingNPC == 146 or not player.holdingNPC == 147 or not player.holdingNPC == 154 or not player.holdingNPC == 155 or not player.holdingNPC == 156 or not player.holdingNPC == 157 then
-			--holdingnpctrue = true
-		--end
-	--end
-end
-
-function costume.onInputUpdate()
-	--if holdingnpctrue then
-		--player.keys.run = false
-		--player.keys.altRun = false
-	--end
-end
-
 function costume.onCleanup(p)
 	Audio.sounds[1].sfx  = nil	
 	Audio.sounds[2].sfx  = nil
@@ -138,9 +121,9 @@ function costume.onCleanup(p)
 	Audio.sounds[36].sfx = nil
 	Audio.sounds[37].sfx = nil
 	Audio.sounds[38].sfx = nil
-	Audio.sounds[39].sfx = nil
+	extrasounds.id[39] = Audio.SfxOpen(Misc.resolveSoundFile("birdo-hit.ogg"))
 	Audio.sounds[41].sfx = nil
-	Audio.sounds[42].sfx = nil
+	extrasounds.id[42] = Audio.SfxOpen(Misc.resolveSoundFile("npc-fireball.ogg"))
 	extrasounds.id[43] = Audio.SfxOpen(Misc.resolveSoundFile("fireworks.ogg"))
 	Audio.sounds[44].sfx = nil
 	Audio.sounds[46].sfx = nil

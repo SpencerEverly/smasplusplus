@@ -12,7 +12,7 @@
 --Lava Lands = 5
 --True Ending = 1
 
---Make sure we aren't running Beta 3 before we actually start...
+--Make sure we aren't running Beta 3 and below before we actually start...
 if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
 	Misc.dialog("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")
 	Misc.exitEngine()
@@ -37,15 +37,12 @@ local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
 local extrasounds = require("extrasounds")
-
---Next up is some new functions, for simplifying the functions:
 local smasfunctions = require("smasfunctions")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
-
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
 	sectionlist[1] = player.section
-	if player2 and player2.isValid then
+	if Player(2) and Player(2).isValid then
 		sectionlist[2] = player2.section
 	else
 		sectionlist[2] = nil
@@ -53,6 +50,14 @@ local function anyValidFields() --This is to prevent any player2 errors while sw
 end
 
 function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport.
+	if not playerGetIsValid(self) then
+		error("Invalid player object!")
+	end
+
+	if (self.idx >= 1000) then
+		error("Cannot teleport template players.")
+	end
+	
 	-- If using bottom center aligned coordinates, handle that sensibly
 	if bottomCenterAligned then
 		x = x - (player.width * 0.5)
@@ -69,25 +74,8 @@ function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player tele
 	end
 end
 
-local serializer = require("ext/serializer") --We will then detect to see if the broken SMBX launcher has launched the game. If so, it'll prevent us from loading the episode and recommend us to launch using the SMBX2 launcher instead.
-local function loadSaveSlot(slot)
-	local filename = "save"..slot.."-ext.dat"
-	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
-	if f then
-		local content = f:read("*all")
-		f:close()
-		if content ~= "" then
-			local s,e = pcall(serializer.deserialize, content, filename)
-			if s then
-				return e
-			else
-				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken SMBX launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
-			end
-		end
-		return {}
-	end
-	return {}
-end
+--We will then detect to see if the broken SMBX launcher has launched the game. If so, it'll prevent us from loading the episode and recommend us to launch using the SMBX2 launcher instead.
+--Coming soon
 
 --Now that everything has been loaded, save the game and start loading the medium important stuff
 Misc.saveGame()
@@ -172,6 +160,70 @@ local noloadingsounds = {
 	"SMAS - Raca's World (Part 0).lvlx",
 	"SMAS - Raca's World (Part 1).lvlx",
 	"map.lvlx"
+}
+
+--All SMB1 levels, for the SMB1 Hard Mode feature
+GameData._smb1Levels = {
+	"SMB1 - W-1, L-1.lvlx",
+	"SMB1 - W-1, L-2.lvlx",
+	"SMB1 - W-1, L-3.lvlx",
+	"SMB1 - W-1, L-4.lvlx",
+	"SMB1 - W-2, L-1.lvlx",
+	"SMB1 - W-2, L-2.lvlx",
+	"SMB1 - W-2, L-3.lvlx",
+	"SMB1 - W-2, L-4.lvlx",
+	"SMB1 - W-3, L-1.lvlx",
+	"SMB1 - W-3, L-2.lvlx",
+	"SMB1 - W-3, L-3.lvlx",
+	"SMB1 - W-3, L-4.lvlx",
+	"SMB1 - W-4, L-1.lvlx",
+	"SMB1 - W-4, L-2.lvlx",
+	"SMB1 - W-4, L-3.lvlx",
+	"SMB1 - W-4, L-4.lvlx",
+	"SMB1 - W-5, L-1.lvlx",
+	"SMB1 - W-5, L-2.lvlx",
+	"SMB1 - W-5, L-3.lvlx",
+	"SMB1 - W-5, L-4.lvlx",
+	"SMB1 - W-6, L-1.lvlx",
+	"SMB1 - W-6, L-2.lvlx",
+	"SMB1 - W-6, L-3.lvlx",
+	"SMB1 - W-6, L-4.lvlx",
+	"SMB1 - W-7, L-1.lvlx",
+	"SMB1 - W-7, L-2.lvlx",
+	"SMB1 - W-7, L-3.lvlx",
+	"SMB1 - W-7, L-4.lvlx",
+	"SMB1 - W-8, L-1.lvlx",
+	"SMB1 - W-8, L-2.lvlx",
+	"SMB1 - W-8, L-3.lvlx",
+	"SMB1 - W-8, L-4.lvlx",
+	"SMB1 - W-9, L-1.lvlx",
+	"SMB1 - W-9, L-2.lvlx",
+	"SMB1 - W-9, L-3.lvlx",
+	"SMB1 - W-9, L-4.lvlx"
+}
+
+--All SMB2 levels, for the ace coin system
+GameData._smb2Levels = {
+	"SMB2 - W-1, L-1.lvlx",
+	"SMB2 - W-1, L-2.lvlx",
+	"SMB2 - W-1, L-3.lvlx",
+	"SMB2 - W-2, L-1.lvlx",
+	"SMB2 - W-2, L-2.lvlx",
+	"SMB2 - W-2, L-3.lvlx",
+	"SMB2 - W-3, L-1.lvlx",
+	"SMB2 - W-3, L-2.lvlx",
+	"SMB2 - W-3, L-3.lvlx",
+	"SMB2 - W-4, L-1.lvlx",
+	"SMB2 - W-4, L-2.lvlx",
+	"SMB2 - W-4, L-3.lvlx",
+	"SMB2 - W-5, L-1.lvlx",
+	"SMB2 - W-5, L-2.lvlx",
+	"SMB2 - W-5, L-3.lvlx",
+	"SMB2 - W-6, L-1.lvlx",
+	"SMB2 - W-6, L-2.lvlx",
+	"SMB2 - W-6, L-3.lvlx",
+	"SMB2 - W-7, L-1.lvlx",
+	"SMB2 - W-7, L-2.lvlx"
 }
 
 --Friendly place table for Mother Brain Rinka
@@ -280,7 +332,6 @@ function warpDoorBegin()
 end
 
 function onStart() --Now do onStart...
-	loadSaveSlot(Misc.saveSlot()) --This will load the save slot twice, to check to make sure it's been properly loaded
 	Routine.run(warpDoorBegin) --This will run the routine to save the original count and to start the system from there
 	--Do the weather SaveData additions
 	if SaveData.dateplayedweather == nil then

@@ -1,6 +1,7 @@
 local smasfunctions = {}
 
 local extrasounds = require("extrasounds")
+local serializer = require("ext/serializer")
 
 function loadFile(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
 	return Misc.resolveFile(name)
@@ -372,6 +373,105 @@ end
 
 function isExtraSoundsActive()
 	return extrasounds.active
+end
+
+function listUserFiles(path)
+	if path == nil then
+		return Misc.listFiles(Misc.episodePath().."___MainUserDirectory/")
+	else
+		return Misc.listFiles(Misc.episodePath().."___MainUserDirectory/"..path)
+	end
+end
+
+function rngTrueValue(argument) --Thanks Seija!
+	math.randomseed(os.time())
+	if argument == "y" then
+		return RNG.randomInt(1,10)
+	end
+end
+
+function loadSaveSlot(slot)
+	local filename = "save"..slot.."-ext.dat"
+	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
+	if f then
+		local content = f:read("*all")
+		f:close()
+		if content ~= "" then
+			local s,e = pcall(serializer.deserialize, content, filename)
+			if s then
+				return e
+			else
+				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken SMBX launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
+			end
+		end
+		return {}
+	end
+	return {}
+end
+
+function saveSaveSlot(slot)
+	Misc.saveSlot(slot)
+	Misc.saveGame()
+end
+
+function moveSaveSlot(slot, destination)
+	if slot == nil then
+		error("You must specify a moving save slot.")
+	end
+	if destination == nil then
+		error("You must specify a target save slot.")
+	end
+	local filename = "save"..slot.."-ext.dat"
+	local filenamesav = "save"..slot..".sav"
+	local filename2 = "save"..destination.."-ext.dat"
+	local filename2sav = "save"..destination..".sav"
+	local f = io.open(Misc.episodePath()..filename, "a+")
+	local f2 = io.open(Misc.episodePath()..filename2, "w")
+	local f3 = io.open(Misc.episodePath()..filenamesav, "a+")
+	local f4 = io.open(Misc.episodePath()..filename2sav, "w")
+	if f then
+		f:read("*all")
+		if f2 then
+			f2:write("*all")
+			f2:close()
+		end
+	end
+	if f3 then
+		f3:read("*all")
+		if f4 then
+			f4:write("*all")
+			f4:close()
+		end
+	end
+	Misc.saveSlot(destination)
+	Misc.saveGame()
+end
+
+function eraseSaveData(slot)
+	name = Misc.resolveFile("save"..slot..".sav")
+	name2 = Misc.resolveFile("save"..slot.."-ext.dat")
+	if name == nil then
+		return
+	end
+	if name2 == nil then
+		return
+	end
+
+	local f = io.open(name,"w")
+	if f == nil then
+		return
+	end
+
+	f:write('64 \n3 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n#FALSE# \n"next" \n"next" \n"next" \n"next" \n0 \n')
+	f:close()
+	
+	local f2 = io.open(name2,"w")
+	if f2 == nil then
+		return
+	end
+
+	f2:write('{ \r--[1]-- \r{ \r   ["__costumes"]={2}, \r   ["__launcher"]={3}, \r   ["_basegame"]={4} \r}, \r--[2]-- \r{ \r \r}, \r--[3]-- \r{ \r \r}, \r--[4]-- \r{ \r   ["bigSwitch"]={5}, \r   ["_characterdata"]={6}, \r   ["starcoin"]={7}, \r   ["hud"]={8}, \r   ["starcoinCounter"]=0 \r}, \r--[5]-- \r{ \r \r}, \r--[6]-- \r{ \r   ["8"]={9}, \r   ["10"]={10}, \r   ["9"]={11}, \r   ["6"]={12}, \r   ["16"]={13}, \r   ["11"]={14}, \r   ["12"]={15}, \r   ["7"]={16}, \r   ["15"]={17}, \r   ["13"]={18}, \r   ["14"]={19} \r}, \r--[7]-- \r{ \r \r}, \r--[8]-- \r{ \r   ["score"]=0 \r}, \r--[9]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[10]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[11]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[12]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[13]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[14]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[15]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[16]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[17]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[18]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[19]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[20]-- \r{ \r   ["maxID"]=0, \r   ["alive"]={21} \r}, \r--[21]-- \r{ \r \r} \r}')
+	f2:close()
 end
 
 return smasfunctions

@@ -7,10 +7,10 @@ local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local smasdeathsystem = require("smasdeathsystem")
 local comboSounds = require("comboSounds")
 local pausemenu2 = require("pausemenu2")
 local rooms = require("rooms")
+local smasdeathsystem = require("smasdeathsystem")
 
 local dying = false;
 local deathVisibleCount = 198;
@@ -111,8 +111,6 @@ function dependencies.onStart()
 	
 	local costumes
 	if SaveData.disableX2char == false then
-		mm = require("megamann");
-		mm.playIntro = false;
 		undertaledepends = require("level_dependencies_undertale")
 		warpTransition = require("warpTransition")
 		anotherPowerDownLibrary = require("anotherPowerDownLibrary")
@@ -146,104 +144,6 @@ function dependencies.onStart()
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
 		littleDialogue.defaultStyleName = "smbx13og"
-	end
-	if character == "CHARACTER_LUIGI" then
-		if currentCostume == "UNDERTALE-FRISK" then
-			if SaveData.ut_enabled == 0 then
-				SaveData.ut_enabled = SaveData.ut_enabled + 1
-			end
-			level_dependencies_undertale = require("level_dependencies_undertale")
-		end
-		if currentCostume == "WALUIGI" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "MODERN" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "LARRYTHECUCUMBER" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "A2XT-IRIS" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "17-NSMBDS-SMBX" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "16-SMA4" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "15-SMA2" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "13-SMBDX" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "10-SMW-ORIGINAL" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "9-SMB3-MARIOCLOTHES" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "7-SMB3-RETRO" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "6-SMB2-SMAS" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "5-SMB2-RETRO" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "4-SMB1-SMAS" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "3-SMB1-RETRO-MODERN" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "2-SMB1-RECOLORED" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "1-SMB1-RETRO" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "0-SPENCEREVERLY" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
 	end
 end
 
@@ -304,119 +204,9 @@ function dependencies.onTick()
 			SMB1EasyModeLayer:show(true)
 		end
 	end
-	local character = player.character;
-	local costumes = playerManager.getCostumes(player.character)
-	local currentCostume = player:getCostume()
-
-	local costumes
-	if Level.filename() == "SMB2 - W-1, L-1.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-1, L-2.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-1, L-3.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-2, L-1.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-2, L-2.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-2, L-3.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-3, L-1.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-3, L-2.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-3, L-3.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-4, L-1.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-4, L-2.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-4, L-3.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-5, L-1.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-5, L-2.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-5, L-3.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-6, L-1.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-6, L-2.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-6, L-3.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-7, L-1.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
-		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
-			NPC.config[274].score = 6
-		end
-	elseif Level.filename() then
-		if NPC.config[274].score == 11 then
-			NPC.config[274].score = 6 --Nothing plays btw, just resets
-		end
-	end
 end
 
-Cheats.register("fcommandssuck",{
+Cheats.register("fcommandssuck",{ --Reenables F Commands from the beginning of development
 	onActivate = (function()
 		Defines.player_hasCheated = false
 		spartaremix = require("spartaremix")
@@ -429,7 +219,7 @@ Cheats.register("fcommandssuck",{
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hits1.ogg",
 })
 
-Cheats.register("fuckyou",{
+Cheats.register("fuckyou",{ --Renables all F Commands, plus debugbox and spartaremix
 	onActivate = (function()
 		Defines.player_hasCheated = false
 		spartaremix = require("spartaremix")

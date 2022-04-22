@@ -15,6 +15,7 @@ local hearthover = require("hearthover")
 local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local inventory = require("customInventory")
+local smasacecoins = require("smasacecoins")
 
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")

@@ -104,7 +104,7 @@ local noMoreMovement = false
 local recordedTime
 local hasPlayedTeleport = false
 local firstRun = true
-megaman.playIntro = true
+megaman.playIntro = false
 
 local isSliding = false
 local slidingTime = 0
