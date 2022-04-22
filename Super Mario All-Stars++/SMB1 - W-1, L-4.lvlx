@@ -2767,6 +2767,10 @@ ID:796;X:-195072;Y:-200232;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:476;X:-195424;Y:-200289;D:-1;XTRA:"{\n    \"activeByDefault\"\: 2\n}\n";
 ID:465;X:-199968;Y:-200288;D:-1;LR:"music";ED:"CostChangeMusic";
 ID:998;X:-179136;Y:-180384;D:-1;
+ID:770;X:-199232;Y:-200288;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"speed\"\: 3\n}\n";
+ID:770;X:-198784;Y:-200288;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"speed\"\: 3\n}\n";
+ID:770;X:-197120;Y:-200352;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"speed\"\: 3\n}\n";
+ID:770;X:-196704;Y:-200192;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"speed\"\: 3\n}\n";
 NPC_END
 DOORS
 IX:-180416;IY:-180096;OX:-199968;OY:-200288;DT:2;ID:1;OD:1;WX:0;WY:0;
@@ -2789,6 +2793,7 @@ LR:"Key";HD:1;
 LR:"Key 2";
 LR:"EventActivator1";
 LR:"music";HD:1;
+LR:"SMB1 Hard Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

@@ -3,6 +3,7 @@
 --SMBX HUD Defaults & Override System Library----
 --------------For Super Mario Bros X-------------
 ----------------------v1.1-----------------------
+-------Edited for SMAS++ by Spencer Everly-------
 local HUDOverride = {}
 local pm
 local starcoin

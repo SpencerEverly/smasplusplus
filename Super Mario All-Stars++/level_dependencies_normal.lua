@@ -294,6 +294,12 @@ function dependencies.onTick()
 				end
 			end
 		end
+		local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
+		if SaveData.SMB1HardModeActivated == true then
+			SMB1HardModeLayer:show(true)
+		elseif SaveData.SMB1HardModeActivated == false then
+			SMB1HardModeLayer:hide(true)
+		end
 	end
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
