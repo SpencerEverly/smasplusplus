@@ -283,13 +283,13 @@ function dependencies.onTick()
 		Graphics.activateHud(true)
 	end
 	if table.icontains(GameData._smb1Levels,Level.filename()) == true then
-		for k,v in NPC.iterate{89,23,24,173,175,176,177,172,174,612} do
+		for k,v in NPC.iterate{89,23,27,24,173,175,176,177,172,174,612} do
 			if SaveData.SMB1HardModeActivated == true then
-				if v.id == 89 then
+				if v.id == 89 or v.id == 27 then
 					v:transform(23, true)
 				end
 			elseif SaveData.SMB1HardModeActivated == false then
-				if v.id == 23 and v.id == 24 then
+				if v.id == 23 or v.id == 24 then
 					v:transform(89, true)
 				end
 			end
