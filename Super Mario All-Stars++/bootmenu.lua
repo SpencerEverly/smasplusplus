@@ -1779,6 +1779,7 @@ if bootmenu.active == true then
 	Cheats.deregister("itsamejcfoster")
 	Cheats.deregister("itsamefrisk")
 	Cheats.deregister("fuckyou")
+	Cheats.deregister("fuckthisshitgimmiethetrueending")
 
 	--The rest will disable most cheats to avoid breaking the boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 

@@ -186,7 +186,8 @@ local shader = Misc.multiResolveFile("starman.frag", "shaders\\npc\\starman.frag
 function starman.onInitAPI()
 	registerEvent(starman, "onStart")
 	registerEvent(starman, "onTick")
-	registerEvent(starman, "onDraw", "onDraw", false)
+	registerEvent(starman, "onEvent")
+	registerEvent(starman, "onDraw")
 	registerEvent(starman, "onExitLevel")
     registerEvent(starman, "onNPCKill")
 	registerEvent(starman, "onPostNPCKill")
@@ -269,6 +270,12 @@ function starman.onNPCKill(event,npc,reason)
 			starman.start(t, npc.id)
 		end
 	end
+end
+
+function starman.onEvent(eventName)
+	--if eventName == "Boss Begin" or eventName == "Boss Start" or eventName == "Boss Start 1" then
+		--refreshMusic(-1)
+	--end
 end
 
 function starman.onPostNPCKill(npc, harmType)

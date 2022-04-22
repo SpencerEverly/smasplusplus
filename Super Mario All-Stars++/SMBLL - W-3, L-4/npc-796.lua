@@ -1,6 +1,7 @@
 local npc = {}
 local npcManager = require("npcManager")
 local id = NPC_ID
+local extrasounds = require("extrasounds")
 
 npcManager.setNpcSettings({
 	id = id,
@@ -94,7 +95,7 @@ function npc.onTickEndNPC(v)
 				fire.speedY = D / C * fire.speedX
 				fire.speedY = math.clamp(fire.speedY, -1, 1)
 				
-				SFX.play(42)
+				SFX.play(extrasounds.id[42])
 			end
 			
 			v.ai1 = 2
@@ -143,7 +144,7 @@ function npc.onNPCHarm(e, v, r, c)
 			
 			if c then
 				if c.id ~= 13 then
-					SFX.play(39)
+					SFX.play(extrasounds.id[39])
 					data.hp = data.hp - 3
 				else
 					SFX.play(9)
@@ -151,7 +152,7 @@ function npc.onNPCHarm(e, v, r, c)
 				end
 			end
 		elseif r == 10 then
-			SFX.play(39)
+			SFX.play(extrasounds.id[39])
 			v.ai5 = 20
 			data.hp = data.hp - 1
 		end

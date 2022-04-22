@@ -1,5 +1,8 @@
 local smascheats = {}
 
+local starman = require("starman/star")
+local megashroom = require("mega/megashroom")
+
 --Some cheats will break playing this game. I will start having these cheats that could break any point of the game disabled. Most things, like the framerate, character stuff, most other cheats that won't break the game in normal cases, and until the release, imtiredofallthiswalking, will be kept in. Map codes are in map.lua (Only illparkwhereiwant is disabled)
 
 --Some cheats that are disabled are also recoded to fit in with compatibility for the episode, such as getdemstars.
@@ -266,6 +269,30 @@ Cheats.register("itsvegas",{ --This needs to be reregistered because it was usin
 		local goal = NPC.spawn(985, player.x, player.y, player.section)
 		goal.x = player.x + (player.width - goal.width)*0.5;
 		goal.y = player.y + (player.height - goal.height)*0.5;
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",
+})
+
+Cheats.register("thestarmen",{ --This needs to be reregistered because it was using the wrong star ID
+	onActivate = (function()
+		if(starman) then
+			starman.start(player)
+		end
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",
+})
+
+Cheats.register("bitemythumb",{ --This needs to be reregistered because it was using the wrong star ID
+	onActivate = (function()
+		if(megashroom) then
+			if(not player.isMega) then
+				megashroom.StartMega(player);
+			else
+				megashroom.StopMega(player, true);
+			end
+		end
 		return true -- this makes the cheat not toggleable
 	end),
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",

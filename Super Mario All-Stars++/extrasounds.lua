@@ -1,6 +1,6 @@
 --extrasounds.lua by Spencer Everly
 --
---To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,8,14,15,18,43,59 from (example):
+--To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,8,14,15,18,39,42,43,59 from (example):
 --
 --Audio.sounds[14].sfx = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
 --to
@@ -136,6 +136,7 @@ extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("combo6.ogg")) --Shell
 extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("combo7.ogg")) --Shell Hit 8
 extrasounds.id[113] = Audio.SfxOpen(Misc.resolveSoundFile("score-tally.ogg")) --SMB1 Flagpole Score Tally
 extrasounds.id[114] = Audio.SfxOpen(Misc.resolveSoundFile("score-tally-end.ogg")) --SMB1 Flagpole Score Tally (End)
+extrasounds.id[115] = Audio.SfxOpen(Misc.resolveSoundFile("bowser-fire.ogg")) --Bowser Fireball
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
@@ -169,8 +170,14 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[14].muted = true --coin.ogg
 		Audio.sounds[15].muted = true --1up.ogg
 		Audio.sounds[18].muted = true --fireball.ogg
+		Audio.sounds[39].muted = true --birdo-hit.ogg
+		Audio.sounds[42].muted = true --npc-fireball.ogg
 		Audio.sounds[43].muted = true --fireworks.ogg
 		Audio.sounds[59].muted = true --dragon-coin.ogg
+		
+		
+		
+		--**SPINJUMPING**
 		if player:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
 			if player:mem(0x160, FIELD_WORD) == 29 then --Is the fireball cooldown set to the highest number?
 				if player.powerup == 3 then --Fireball sound
@@ -181,6 +188,44 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 				end
 			end
 		end
+		
+		
+		
+		
+		
+		--**NPCS**
+		for k,v in ipairs(NPC.get(86)) do --Make sure the seperate Bowser fire sound plays when SMB3 Bowser actually fires up a fireball
+			if v.ai4 == 4 then
+				if v.ai3 == 25 then
+					playSound(115)
+				end
+			end
+		end
+		for k,v in ipairs(NPC.get(200)) do --Make sure the seperate Bowser fire sound plays when SMB1 Bowser actually fires up a fireball
+			if v.ai3 == 40 then
+				playSound(115)
+			end
+		end
+		for k,v in ipairs(NPC.get(280)) do --Make sure the actual fire sound plays when Ludwig Koopa actually fires up a fireball
+			if v.ai1 == 2 then
+				SFX.play(extrasounds.id[42], 1, 1, 35)
+			end
+		end
+		for k,v in ipairs(NPC.get(15)) do --Adding a hurt sound for Boom Boom cause why not lol
+			if v.ai1 == 4 then
+				SFX.play(extrasounds.id[39], 1, 1, 100)
+			end
+		end
+		for k,v in ipairs(NPC.get(15)) do --Birdo has some sounds that'll need to be reimplemented
+			if v.ai1 == -30 then
+				SFX.play(extrasounds.id[39], 1, 1, 30)
+			end
+		end
+		
+		
+		
+		
+		--**SCOREBOARD**
 		if not isOverworld then
 			for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
 				if scoreboard.animationFrame == 9 then --1UP
@@ -203,9 +248,22 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 				SFX.play(extrasounds.id[43], 1, 1, 70)
 			end
 		end
+		
+		
+		
+		
+		
+		
+		--**NPCTOCOIN**
 		if mem(0x00A3C87F, FIELD_BYTE) == 14 and Level.endState() > 0 then --This plays a coin sound when NpcToCoin happens
 			SFX.play(extrasounds.id[14], 1, 1, 2500)
 		end
+		
+		
+		
+		
+		
+		
 	end
 	if extrasounds.active == false then --Unmute when not active
 		Audio.sounds[4].muted = false --block-smash.ogg
@@ -214,6 +272,8 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[14].muted = false --coin.ogg
 		Audio.sounds[15].muted = false --1up.ogg
 		Audio.sounds[18].muted = false --fireball.ogg
+		Audio.sounds[39].muted = false --birdo-hit.ogg
+		Audio.sounds[42].muted = false --npc-fireball.ogg
 		Audio.sounds[43].muted = false --fireworks.ogg
 		Audio.sounds[59].muted = false --dragon-coin.ogg
 	end
@@ -221,8 +281,14 @@ end
 
 function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
 	local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
-	if not Misc.isPaused() then --Making sure the sound only plays when not paused...
-		if extrasounds.active == true then --If it's true, play them
+	if extrasounds.active == true then --If it's true, play them
+		if not Misc.isPaused() then --Making sure the sound only plays when not paused...
+			
+			
+			
+			
+			
+			--**CONTENT ID DETECTION**
 			if block.contentID == nil then --For blocks that are already used
 				
 			end
@@ -241,9 +307,20 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 			elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
 				playSound(14)
 			end
+			
+			
+			
+			
+			--**BOWSER BRICKS**
 			if block.id == 186 then --SMB3 Bowser Brick detection, thanks to looking at the source code
 				playSound(43)
 			end
+			
+			
+			
+			
+			
+			--**BRICK SMASHING**
 			if player.powerup >= 2 then --No brick smashing when on powerup state 1
 				if block:collidesWith(player) then --Detecting block hitting
 					if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
@@ -259,16 +336,34 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 end
 
 function extrasounds.onPostPlayerKill()
-	if player.character == CHARACTER_LINK then
-		SFX.play(80)
-	else
-		playSound(8)
+	if extrasounds.active == true then
+	
+	
+	
+	
+		--**PLAYER DYING**
+		if player.character == CHARACTER_LINK then
+			SFX.play(80)
+		else
+			playSound(8)
+		end
+		
+		
+		
+		
 	end
 end
 
 function extrasounds.onInputUpdate() --Button pressing for such commands
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
+			
+			
+			
+			
+			
+			
+			--**FIREBALLS**
 			if (player.character == CHARACTER_LINK) == false and (player.character == CHARACTER_MEGAMAN) == false and (player.character == CHARACTER_SNAKE) == false and (player.character == CHARACTER_SAMUS) == false then --Making sure these sounds don't play when using these characters...
 				if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than or equal to 0 before playing
 					if player.powerup == 3 then --Fireball sound
@@ -306,12 +401,28 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
 			for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
+				
+				
+				
+				
+				
+				--**COIN COLLECTING**
 				if coins[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
 					playSound(14)
 				end
+				
+				
+				
+				
+				--**CHERRY COLLECTING**
 				if npc.id == 558 and Colliders.collide(p, npc) then --Cherry sound effect
 					playSound(103)
 				end
+				
+				
+				
+				
+				--**DRAGON COINS**
 				if npc.id == 274 and Colliders.collide(p, npc) then --Dragon coin counter sounds
 					if NPC.config[npc.id].score == 7 then
 						playSound(59)
@@ -325,6 +436,11 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 						playSound(102)
 					end
 				end
+				
+				
+				
+				
+				
 			end
 		end
 	end
