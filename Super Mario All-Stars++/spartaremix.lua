@@ -143,9 +143,9 @@ end
 function spartaremix.onDraw(k)
 	if active then
 		
-		Graphics.drawBox{x=0, y=565, width=558, height=46, color=Color.black..0.7, priority=10}
-		textplus.print{x=5, y=572, text = "Sparta Remix now playing. If it's not playing, change out of a costume first. Press F7 to exit and press F7 again to play another.", priority=10, color=Color.white}
-		textplus.print{x=5, y=586, text = "(To reset the music please restart the level, this is due to MusicChange not having a reset command)", priority=10, color=Color.white}
+		Graphics.drawBox{x=0, y=565, width=558, height=46, color=Color.black..0.7, priority=-2}
+		textplus.print{x=5, y=572, text = "Sparta Remix now playing. If it's not playing, change out of a costume first. Press F7 to exit and press F7 again to play another.", priority=-1, color=Color.white}
+		textplus.print{x=5, y=586, text = "(To reset the music please restart the level, this is due to MusicChange not having a reset command)", priority=-1, color=Color.white}
 	end
 end
 

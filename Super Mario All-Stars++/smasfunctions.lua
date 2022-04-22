@@ -225,6 +225,26 @@ function resetLives() --This resets the lives back to 5
 	SaveData.totalLives = 5
 end
 
+--Death Count
+
+function deathCount() --This lists the current life count
+	if SaveData.deathCount == nil then
+		return 0
+	else
+		return SaveData.deathCount
+	end
+end
+
+function maxOutDeathCount() --This maxes out the death count to 999
+	playSound(67)
+	SaveData.deathCount = 999
+end
+
+function resetDeathCount() --This resets the death count back to 0
+	playSound(98)
+	SaveData.deathCount = 0
+end
+
 --Star Count
 
 function starCount() --This lists the count of the stars

@@ -95,6 +95,7 @@ local globalgenerals = require("globalgenerals") --Most important library of all
 local repll = require("repll") --Custom sound command line, for testing in the editor
 local rng = require("base/rng") --Load up rng for etc. things
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi
+local smascheats = require("smascheats") --To enable edited cheats and some new ones
 
 loadactivate = true
 local steve = require("steve")

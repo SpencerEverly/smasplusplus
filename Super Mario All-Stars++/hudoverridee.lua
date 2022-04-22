@@ -12,7 +12,7 @@ local timer
 local hasDied = false
 
 local textplus = require("textplus")
-local tplusnumberfont = textplus.loadFont("textplus/font/1.ini")
+local tplusnumberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
 local textCache = {}
 local textCacheLifetime = 640
@@ -510,7 +510,11 @@ function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
 end
 
 function HUDOverride.drawDeathCount(splitOffset, thisCam, thisPlayer, priority)
-	drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), SaveData.deathCount, priority);
+	if SaveData.deathCount >= 1000 then
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), "999+", priority);
+	else
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), SaveData.deathCount, priority);
+	end
 end
 
 function HUDOverride.drawHUDLives(thisPlayer, priority)
