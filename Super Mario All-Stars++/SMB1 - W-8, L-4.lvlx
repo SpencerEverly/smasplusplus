@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 1\: World 8-4";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 600\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 1\: World 8-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 600\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-195584;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
@@ -6038,9 +6038,9 @@ ID:399;X:60576;Y:59648;W:32;H:32;LR:"Trap";
 ID:398;X:60544;Y:59648;W:32;H:32;LR:"Trap";
 ID:399;X:60448;Y:59648;W:32;H:32;LR:"Trap";
 ID:398;X:60480;Y:59648;W:32;H:32;LR:"Trap";
-ID:397;X:-93216;Y:-100096;W:32;H:32;
-ID:397;X:-93216;Y:-100032;W:32;H:32;
-ID:397;X:-93216;Y:-100064;W:32;H:32;
+ID:397;X:-93216;Y:-100096;W:32;H:32;LR:"SMB1 Easy Mode";
+ID:397;X:-93216;Y:-100032;W:32;H:32;LR:"SMB1 Easy Mode";
+ID:397;X:-93216;Y:-100064;W:32;H:32;LR:"SMB1 Easy Mode";
 ID:387;X:-200032;Y:-200128;W:32;H:32;
 ID:394;X:-200064;Y:-200032;W:32;H:32;
 ID:394;X:-200032;Y:-200096;W:32;H:32;
@@ -8322,6 +8322,8 @@ ID:398;X:79616;Y:79456;W:32;H:32;
 ID:398;X:79616;Y:79392;W:32;H:32;
 ID:399;X:79648;Y:79392;W:32;H:32;
 ID:398;X:79648;Y:79424;W:32;H:32;
+ID:371;X:-93216;Y:-100064;W:32;H:32;LR:"SMB1 Hard Mode";
+ID:405;X:-93216;Y:-100032;W:32;H:32;LR:"SMB1 Hard Mode";
 BLOCK_END
 BGO
 ID:201;X:-197760;Y:-200096;
@@ -8956,6 +8958,15 @@ ID:198;X:-39456;Y:-40192;D:-1;FD:1;
 ID:999;X:-39600;Y:-40288;D:-1;LR:"Hidden";
 ID:465;X:-39936;Y:-40168;D:-1;ED:"Pigeon Cutscene Sequel 0";
 ID:400;X:60224;Y:59712;D:-1;
+ID:29;X:-119280;Y:-120112;D:-1;LR:"SMB1 Hard Mode";
+ID:589;X:-119134;Y:-120096;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"useFixed\"\: true\n}\n";
+ID:29;X:-96000;Y:-100112;D:-1;LR:"SMB1 Hard Mode";
+ID:29;X:-94176;Y:-100112;D:-1;LR:"SMB1 Hard Mode";
+ID:176;X:-92160;Y:-100160;D:-1;S1:2;LR:"SMB1 Hard Mode";
+ID:176;X:-92032;Y:-100192;D:-1;S1:2;LR:"SMB1 Hard Mode";
+ID:29;X:-77248;Y:-80112;D:-1;LR:"SMB1 Hard Mode";
+ID:29;X:-74752;Y:-80240;D:-1;LR:"SMB1 Hard Mode";
+ID:176;X:-58656;Y:-60288;D:-1;S1:1;LR:"SMB1 Hard Mode";
 NPC_END
 PHYSICS
 ET:0;X:-139968;Y:-140400;W:2592;H:496;
@@ -9048,6 +9059,8 @@ LR:"Cage Closed";HD:1;
 LR:"Cage Opened";
 LR:"Bridge Ending";
 LR:"Cutscene Moving Layer";
+LR:"SMB1 Easy Mode";HD:1;
+LR:"SMB1 Hard Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

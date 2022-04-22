@@ -3994,9 +3994,12 @@ ID:177;X:-177472;Y:-180448;D:-1;
 ID:177;X:-176992;Y:-180384;D:-1;
 ID:176;X:-177216;Y:-180224;D:-1;S1:1;
 ID:151;X:-159768;Y:-160432;D:-1;MG:"Welcome to the back door of my castle!<page>Trespassers\, STAY AWAY\, or else my hentchmen will attack!<page>- Bowser";FD:1;
-ID:151;X:-159456;Y:-160272;D:-1;MG:"This level will not count towards the True Ending if you collect the ?-Sphere from here.<page>Please beat the level normally using the original exit.";FD:1;
-ID:16;X:-159328;Y:-160288;D:-1;
+ID:151;X:-159456;Y:-160272;D:-1;MG:"This level will not count towards the True Ending if you collect this star from here.<page>Please beat the level normally using the original exit.";FD:1;
 ID:998;X:-192672;Y:-200384;D:-1;
+ID:610;X:-178992;Y:-180480;D:-1;LR:"SMB1 Hard Mode";
+ID:176;X:-177136;Y:-180224;D:-1;S1:1;LR:"SMB1 Hard Mode";
+ID:176;X:-177056;Y:-180224;D:-1;S1:1;LR:"SMB1 Hard Mode";
+ID:1000;X:-159328;Y:-160320;D:-1;
 NPC_END
 DOORS
 IX:-190816;IY:-200624;OX:-179904;OY:-180048;DT:3;ID:1;OD:1;
@@ -4007,6 +4010,8 @@ LAYERS
 LR:"Default";
 LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
+LR:"SMB1 Easy Mode";
+LR:"SMB1 Hard Mode";
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

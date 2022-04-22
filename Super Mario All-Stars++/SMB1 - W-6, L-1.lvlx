@@ -745,11 +745,14 @@ ID:91;X:-178784;Y:-180192;D:-1;CN:92;
 ID:91;X:-178752;Y:-180256;D:-1;CN:92;
 ID:151;X:-179720;Y:-180272;D:-1;MG:"This is an unused Sky Warp Bonus from 2012. It doesn't fit SMB1\, ik...";FD:1;
 ID:998;X:-193984;Y:-200384;D:-1;
+ID:610;X:-198976;Y:-200480;D:-1;LR:"SMB1 Hard Mode";
 NPC_END
 LAYERS
 LR:"Default";
 LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
+LR:"SMB1 Hard Mode";HD:1;
+LR:"SMB1 Easy Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
