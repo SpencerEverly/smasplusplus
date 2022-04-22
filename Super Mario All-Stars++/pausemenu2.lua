@@ -91,6 +91,14 @@ function pausemenu2.onPlayerKill()
 	end
 end
 
+local function smb1hardmodetoggle()
+	if pauseplus.getSelectionValue("miscsettings","Activate SMB1 Hard Mode") then
+		SaveData.SMB1HardModeActivated = true
+	else
+		SaveData.SMB1HardModeActivated = false
+	end
+end
+
 local function changeresolution()
 	playSound("resolution-set.ogg")
 	screenModes = pauseplus.getSelectionValue("settings","Switch Resolution")
@@ -1021,6 +1029,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
 	pauseplus.createSubmenu("charactermenu",{headerText = "<size 1.5>Character Options</size>"})
 	pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
+	pauseplus.createSubmenu("miscsettings",{headerText = "<size 1.5>Miscellaneous Settings</size>"})
 	pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
 	pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
 	if (Level.filename() == "map.lvlx") == true then
@@ -1045,7 +1054,11 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer. COSTUMES WILL BE RESET!",pauseplus.save,closeMenu = true, actions = {function() Routine.run(onethreemodeactivate) end}})
 	end
+	pauseplus.createOption("settings",{text = "Miscellaneous Settings",goToSubmenu = "miscsettings",description = "Set some other settings to enhance your gameplay."})
 	pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = {function() Routine.run(quitonly) end}})
+	
+	-- Misc. Settings
+	pauseplus.createOption("miscsettings",{text = "Activate SMB1 Hard Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable SMB1 Hard Mode. This will only apply to SMB1 levels.", action = function() smb1hardmodetoggle() end})
 
 	--Character Menu
 	if SaveData.disableX2char == false then

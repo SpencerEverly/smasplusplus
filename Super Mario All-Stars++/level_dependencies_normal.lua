@@ -51,6 +51,51 @@ function dependencies.onInitAPI()
 	registerEvent(dependencies, "onInputUpdate")
 end
 
+local smb1buzzyswitch = false
+
+GameData._smb1Levels = {
+	"SMB1 - W-1, L-1.lvlx",
+	"SMB1 - W-1, L-2.lvlx",
+	"SMB1 - W-1, L-3.lvlx",
+	"SMB1 - W-1, L-4.lvlx",
+	"SMB1 - W-2, L-1.lvlx",
+	"SMB1 - W-2, L-2.lvlx",
+	"SMB1 - W-2, L-3.lvlx",
+	"SMB1 - W-2, L-4.lvlx",
+	"SMB1 - W-3, L-1.lvlx",
+	"SMB1 - W-3, L-2.lvlx",
+	"SMB1 - W-3, L-3.lvlx",
+	"SMB1 - W-3, L-4.lvlx",
+	"SMB1 - W-4, L-1.lvlx",
+	"SMB1 - W-4, L-2.lvlx",
+	"SMB1 - W-4, L-3.lvlx",
+	"SMB1 - W-4, L-4.lvlx",
+	"SMB1 - W-5, L-1.lvlx",
+	"SMB1 - W-5, L-2.lvlx",
+	"SMB1 - W-5, L-3.lvlx",
+	"SMB1 - W-5, L-4.lvlx",
+	"SMB1 - W-6, L-1.lvlx",
+	"SMB1 - W-6, L-2.lvlx",
+	"SMB1 - W-6, L-3.lvlx",
+	"SMB1 - W-6, L-4.lvlx",
+	"SMB1 - W-7, L-1.lvlx",
+	"SMB1 - W-7, L-2.lvlx",
+	"SMB1 - W-7, L-3.lvlx",
+	"SMB1 - W-7, L-4.lvlx",
+	"SMB1 - W-8, L-1.lvlx",
+	"SMB1 - W-8, L-2.lvlx",
+	"SMB1 - W-8, L-3.lvlx",
+	"SMB1 - W-8, L-4.lvlx",
+	"SMB1 - W-9, L-1.lvlx",
+	"SMB1 - W-9, L-2.lvlx",
+	"SMB1 - W-9, L-3.lvlx",
+	"SMB1 - W-9, L-4.lvlx"
+}
+
+if SaveData.SMB1HardModeActivated == nil then
+	SaveData.SMB1HardModeActivated = false
+end
+
 function dependencies.onStart()
 	if SaveData.ut_enabled == nil then
 		SaveData.ut_enabled = SaveData.ut_enabled or 0
@@ -236,6 +281,19 @@ function dependencies.onTick()
 	end
 	if player.character == CHARACTER_NINJABOMBERMAN then
 		Graphics.activateHud(true)
+	end
+	if table.icontains(GameData._smb1Levels,Level.filename()) == true then
+		for k,v in NPC.iterate{89,23,24,173,175,176,177,172,174,612} do
+			if SaveData.SMB1HardModeActivated == true then
+				if v.id == 89 then
+					v:transform(23, true)
+				end
+			elseif SaveData.SMB1HardModeActivated == false then
+				if v.id == 23 and v.id == 24 then
+					v:transform(89, true)
+				end
+			end
+		end
 	end
 	local character = player.character;
 	local costumes = playerManager.getCostumes(player.character)
