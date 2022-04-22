@@ -194,6 +194,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		--**NPCS**
+		--*SMB3 Bowser*
 		for k,v in ipairs(NPC.get(86)) do --Make sure the seperate Bowser fire sound plays when SMB3 Bowser actually fires up a fireball
 			if v.ai4 == 4 then
 				if v.ai3 == 25 then
@@ -201,21 +202,25 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 				end
 			end
 		end
+		--*SMB1 Bowser*
 		for k,v in ipairs(NPC.get(200)) do --Make sure the seperate Bowser fire sound plays when SMB1 Bowser actually fires up a fireball
 			if v.ai3 == 40 then
 				playSound(115)
 			end
 		end
+		--*SMW Ludwig Koopa*
 		for k,v in ipairs(NPC.get(280)) do --Make sure the actual fire sound plays when Ludwig Koopa actually fires up a fireball
 			if v.ai1 == 2 then
 				SFX.play(extrasounds.id[42], 1, 1, 35)
 			end
 		end
+		--*SMB3 Boom Boom*
 		for k,v in ipairs(NPC.get(15)) do --Adding a hurt sound for Boom Boom cause why not lol
 			if v.ai1 == 4 then
 				SFX.play(extrasounds.id[39], 1, 1, 100)
 			end
 		end
+		--*SMB2 Birdo*
 		for k,v in ipairs(NPC.get(15)) do --Birdo has some sounds that'll need to be reimplemented
 			if v.ai1 == -30 then
 				SFX.play(extrasounds.id[39], 1, 1, 30)
