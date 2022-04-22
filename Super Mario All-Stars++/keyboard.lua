@@ -42,6 +42,7 @@ function keyboard.cmd()
 			GameData.toggleoffkeys = false
 			GameData.toggleoffinventory = false
 			GameData.playernameenter = false
+			GameData.firstbootfive = false
 		end
 	end
 	if GameData.playerpfpenter == true then
@@ -60,6 +61,7 @@ function keyboard.cmd()
 			GameData.toggleoffkeys = false
 			GameData.toggleoffinventory = false
 			GameData.playernameenter = false
+			GameData.firstbootfive = false
 		end
 	end
 	if GameData.playernameenterfirstboot == true then
@@ -79,23 +81,7 @@ function keyboard.cmd()
 	if GameData.saveslotswitchenter == true then
 		if keyboard.buffer ~= "" then
 			if keyboard.buffer >= "1" or keyboard.buffer <= "32767" then
-				io.open("worlds/Super Mario All-Stars++s/save"..keyboard.buffer..".sav", "r")
-				io.open("worlds/Super Mario All-Stars++/save"..keyboard.buffer.."-ext.dat", "r")
-				io.open("worlds/Where SMB Attacks/save"..keyboard.buffer..".sav", "r")
-				io.open("worlds/Where SMB Attacks/save"..keyboard.buffer.."-ext.dat", "r")
-				if io.open("worlds/Super Mario All-Stars++/save"..keyboard.buffer..".sav", "r") == true and io.open("worlds/Super Mario All-Stars++/save"..keyboard.buffer.."-ext.dat", "r") == true then
-					os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot())
-					os.remove("worlds/Super Mario All-Stars++/save"..Misc.saveSlot())
-				end
-				if io.open("worlds/Where SMB Attacks/save"..keyboard.buffer..".sav", "r") == true and io.open("worlds/Super Mario All-Stars++/save"..keyboard.buffer.."-ext.dat", "r") == true then
-					os.remove("worlds/Where SMB Attacks/save"..Misc.saveSlot())
-					os.remove("worlds/Where SMB Attacks/save"..Misc.saveSlot())
-				end
-				os.rename("worlds/Super Mario All-Stars++/save"..Misc.saveSlot()..".sav","worlds/Super Mario All-Stars++/save"..keyboard.buffer..".sav")
-				os.rename("worlds/Super Mario All-Stars++/save"..Misc.saveSlot().."-ext.dat","worlds/Super Mario All-Stars++/save"..keyboard.buffer.."-ext.dat")
-				os.rename("worlds/Where SMB Attacks/save"..Misc.saveSlot()..".sav","worlds/Where SMB Attacks/save"..keyboard.buffer..".sav")
-				os.rename("worlds/Where SMB Attacks/save"..Misc.saveSlot().."-ext.dat","worlds/Where SMB Attacks/save"..keyboard.buffer.."-ext.dat")
-				Misc.saveSlot(tonumber(keyboard.buffer))
+				moveSaveSlot(Misc.saveSlot(), tonumber(keyboard.buffer))
 				Misc.saveGame()
 				keyboard.buffer = ""
 				keyboard.cursorPos = 0
@@ -106,6 +92,7 @@ function keyboard.cmd()
 				GameData.toggleoffkeys = false
 				GameData.toggleoffinventory = false
 				GameData.saveslotswitchenter = false
+				GameData.firstbootfive = false
 			elseif keyboard.buffer ~= "" then
 				keyboard.buffer = ""
 				keyboard.cursorPos = 0
@@ -116,6 +103,7 @@ function keyboard.cmd()
 				GameData.toggleoffkeys = false
 				GameData.toggleoffinventory = false
 				GameData.saveslotswitchenter = false
+				GameData.firstbootfive = false
 			end
 		end
 	end

@@ -799,7 +799,7 @@ end
 
 local function SaveSlot1()
 	if not Misc.inEditor() then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>To begin switching the save slot, please select Begin to get started (Keyboard only). THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>To begin switching the save slot, please select Begin to get started (Keyboard only).<page>THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
 	elseif Misc.inEditor() then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.5>You can't do this while in the editor mode.<page>Please start an actual game to switch saves.<page>You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
 	end

@@ -424,6 +424,7 @@ function moveSaveSlot(slot, destination)
 		end
 	end
 	Misc.saveSlot(destination)
+	eraseSaveSlot(slot)
 	Misc.saveGame()
 end
 
@@ -433,7 +434,7 @@ function eraseSaveSlot(slot)
 		return
 	end
 
-	f:write('64 \n3 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n0 \n0 \n0 \n1 \n0 \n#FALSE# \n"next" \n"next" \n"next" \n"next" \n0 \n')
+	f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
 	f:close()
 	
 	local f2 = io.open(Misc.episodePath().."save"..slot.."-ext.dat","w")
