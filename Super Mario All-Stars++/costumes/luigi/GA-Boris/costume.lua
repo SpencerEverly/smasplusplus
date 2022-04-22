@@ -104,10 +104,10 @@ function costume.shootGun1()
 	costume.useGun1 = true
 	gunNpc.frames = 1
 	if (plr.direction == 1) then
-		gunNpc.speedX = 18.5
+		gunNpc.speedX = 14.5
 		gunNpc.speedY = 0
 	else
-		gunNpc.speedX = -18.5
+		gunNpc.speedX = -14.5
 		gunNpc.speedY = 0
 	end
 	costume.useGun1 = false

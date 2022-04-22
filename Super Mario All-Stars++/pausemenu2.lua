@@ -8,6 +8,7 @@ local rng = require("rng")
 local textplus = require("textplus")
 local smasdeathsystem = require("smasdeathsystem")
 local musicalchairs = require("musicalchairs")
+local extrasounds = require("extrasounds")
 local sprite = require("base/sprite")
 local exitFadeActive = false
 local exitFadeActiveDone = false
