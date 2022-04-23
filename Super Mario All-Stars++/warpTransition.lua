@@ -157,7 +157,7 @@ do
             end
         end
 
-        Graphics.drawScreen{color = Color.black.. opacity,priority = 4}
+        Graphics.drawScreen{color = Color.black.. opacity,priority = 3}
 
 
         return middle

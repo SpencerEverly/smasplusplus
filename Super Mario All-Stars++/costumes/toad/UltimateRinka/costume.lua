@@ -138,9 +138,11 @@ function costume.onTick()
 		direction = player:mem(0x106,FIELD_WORD)
 
 		-- Hovering
-		if (player.jumpKeyPressing and floatTimer < 56) then
-			player.speedY = -floatFactor;
-			player:mem(0x44,FIELD_WORD,0)
+		if player.forcedState == 0 then
+			if (player.jumpKeyPressing and floatTimer < 56) then
+				player.speedY = -floatFactor;
+				player:mem(0x44,FIELD_WORD,0)
+			end
 		end
 		if floatTimer < 56 and (not player:isGroundTouching()) and player:mem(0x13E,FIELD_WORD) == 0 and player.jumpKeyPressing and player:mem(0x40, FIELD_WORD) == 0 then
 			local butt = Animation.spawn(12,player.x+rng.randomInt(8,player.width-8) - 16, player.y + player.height - 48)
@@ -169,7 +171,7 @@ function costume.onTick()
 			if player:isGroundTouching() then
 				floatFactor = 1.5;
 				if floatTimer > 0 then
-					floatTimer = floatTimer - 3;
+					floatTimer = floatTimer - 6;
 				elseif floatTimer < 0 then
 					floatTimer = 0
 				end
@@ -181,13 +183,13 @@ function costume.onTick()
 			end
 		end
 	
-		if floatFactor >= 3.5 then
-			floatFactor = 3.5;
+		if floatFactor >= 4.5 then
+			floatFactor = 4.5;
 		end
 	
 		-- Limit rinkas
-		if numberOfRinkas >= 15 then
-			numberOfRinkas = 15;
+		if numberOfRinkas >= 25 then
+			numberOfRinkas = 25;
 		end
 	
 		-- Make all rinkas friendly

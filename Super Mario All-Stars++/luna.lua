@@ -18,6 +18,16 @@ if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
 	Misc.exitEngine()
 end
 
+--Make sure to save the current episode folder and save slot numbers to it's own GameData variables to prevent the broken 1.3 launcher from launching the episode...
+GameData.__EpisodeFolder = Misc.episodePath()
+GameData.__SaveSlot = Misc.saveSlot()
+
+--If it's mismatched, run a dialog and afterward exit the engine
+if GameData.__EpisodeFolder ~= Misc.episodePath() or GameData.__SaveSlot ~= Misc.saveSlot() then
+	Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
+	Misc.exitEngine()
+end
+
 --Make sure we warn the user of the dangers of the old star system...
 if mem(0x00B251E0, FIELD_WORD) >= 1 then
 	if GameData.warnUserAboutOldStars == nil then
@@ -66,26 +76,6 @@ function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player tele
 		self.section = newSection
 		playMusic(newSection)
 	end
-end
-
-local serializer = require("ext/serializer") --We will then detect to see if the broken SMBX launcher has launched the game. If so, it'll prevent us from loading the episode and recommend us to launch using the SMBX2 launcher instead.
-local function loadSaveSlot(slot)
-	local filename = "save"..slot.."-ext.dat"
-	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
-	if f then
-		local content = f:read("*all")
-		f:close()
-		if content ~= "" then
-			local s,e = pcall(serializer.deserialize, content, filename)
-			if s then
-				return e
-			else
-				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken SMBX launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
-			end
-		end
-		return {}
-	end
-	return {}
 end
 
 --Placing in levels onto a table that'll prevent the loading sound from playing

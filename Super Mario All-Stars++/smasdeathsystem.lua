@@ -382,10 +382,10 @@ end
 function smasdeathsystem.onDraw()
 	if fadeoutdeath then --Fade out related code
 		time = time + 1
-		Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 5}
+		Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 2}
 	end
 	if gameovershow then
-		Text.printWP("GAME OVER", 310, 290, 6)
+		Text.printWP("GAME OVER", 310, 290, 3)
 	end
 end
 

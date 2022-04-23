@@ -1,6 +1,7 @@
 local smasfunctions = {}
 
 local extrasounds = require("extrasounds")
+local serializer = require("ext/serializer")
 
 function loadFile(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
 	return Misc.resolveFile(name)
@@ -146,6 +147,20 @@ function refreshMusic(sectionid) --Refresh the music that's currently playing by
 	elseif sectionid >= 0 or sectionid <= 20 then
 		musiclist = {Section(sectionid).music}
 		GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
+	elseif sectionid >= 21 then
+		error("That's higher than SMBX2 can go. Go to a lower section than that.")
+	end
+end
+
+function restoreOriginalMusic(sectionid) --Restore all original section music, or just restore a specific section
+	if sectionid == -1 then --If -1, all section music will be restored
+		for i = 0,20 do
+			songname = GameData.levelMusic[i]
+			Section(i).music = songname
+		end
+	elseif sectionid >= 0 or sectionid <= 20 then
+		songname = GameData.levelMusic[sectionid]
+		Section(sectionid).music = songname
 	elseif sectionid >= 21 then
 		error("That's higher than SMBX2 can go. Go to a lower section than that.")
 	end
@@ -382,11 +397,52 @@ function listUserFiles(path)
 	end
 end
 
+function toggleWindowOnly() --This, when fullscreen, will only toggle a window instead of being in fullscreen. Toggle again to turn off.
+	if mem(0x00B250D8, FIELD_BOOL) == true then
+		return  mem(0x00B250D8, FIELD_BOOL, false)
+	elseif mem(0x00B250D8, FIELD_BOOL) == false then
+		return  mem(0x00B250D8, FIELD_BOOL, true)
+	end
+end
+
+function doPSwitchUntimed(bool)
+	if bool == nil then
+		return
+	end
+	if bool == true then
+		Misc.doPSwitchRaw(true)
+		muteMusic(-1)
+		changeMusic("_OST/P-Switch (v2).ogg", -1)
+	elseif bool == false then
+		Misc.doPSwitchRaw(false)
+		restoreMusic(-1)
+	end
+end
+
 function rngTrueValue(argument) --Thanks Seija!
 	math.randomseed(os.time())
 	if argument == "y" then
 		return RNG.randomInt(1,10)
 	end
+end
+
+function loadSaveSlot(slot) --Loads a save slot on which you specified a slot
+	local filename = "save"..slot.."-ext.dat"
+	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
+	if f then
+		local content = f:read("*all")
+		f:close()
+		if content ~= "" then
+			local s,e = pcall(serializer.deserialize, content, filename)
+			if s then
+				return e
+			else
+				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken SMBX launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
+			end
+		end
+		return {}
+	end
+	return {}
 end
 
 function saveSaveSlot(slot)
