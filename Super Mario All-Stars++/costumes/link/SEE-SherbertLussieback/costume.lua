@@ -83,11 +83,11 @@ function costume.onDraw()
 		if lunging then
 			player:playAnim({13,14,15,16}, 4, false, -25)
 		end
-		local isJumping = player:mem(0x11C, FIELD_WORD) --Jumping detection
+		--local isJumping = player:mem(0x11C, FIELD_WORD) --Jumping detection
 		local isUnderwater = plr:mem(0x36, FIELD_BOOL) --Underwater detection
-		if isJumping and plr:mem(0x14, FIELD_WORD) <= 0 and not isUnderwater and not player:isOnGround() then --Checks to see if the player is jumping...
-			plr:setFrame(12)
-		end
+		--if isJumping and plr:mem(0x14, FIELD_WORD) <= 0 and not isUnderwater and not player:isOnGround() then --Checks to see if the player is jumping...
+			--plr:setFrame(12)
+		--end
 	end
 end
 

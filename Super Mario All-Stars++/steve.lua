@@ -1874,8 +1874,8 @@ function steve.cleanupCharacter()
     steve.destroyMeshes()
     data.initialised = false
 
-    Defines.player_walkspeed = nil
-    Defines.player_runspeed  = nil
+    Defines.player_walkspeed = 3
+    Defines.player_runspeed = 6
     Defines.jumpheight = nil
 
     Audio.sounds[5].muted = false

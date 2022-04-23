@@ -881,7 +881,7 @@ function megaman.onInputUpdate()
 				return
 			end
 			
-			if player.keys.run == KEYS_DOWN and not isDead and introOver and not introDelay and not isSliding and not inPause then
+			if player.keys.run == KEYS_PRESSED and not isDead and introOver and not introDelay and not isSliding and not inPause then
 				if megaman.powerUpStuff[player.powerup].left > 0 or player.powerup <= 2 then
 					local assignSpeedX, xOffset, spawnModifier
 					Audio.playSFX(pm.getSound(CHARACTER_MEGAMAN,sfx_shoot));

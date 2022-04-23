@@ -244,95 +244,97 @@ end
 function costume.onInputUpdate()
 	if SaveData.toggleCostumeAbilities == true then
 		if player:mem(0x13E,FIELD_WORD) == 0 then
-			-- Regular rinka attack
-			if player.keys.altRun == KEYS_PRESSED and player:mem(0x26,FIELD_WORD) == 0 then
-				if numberOfRinkas > 0 then
-					SFX.play(sfx_metalblade)
-					spawnRinka()
-					numberOfRinkas = numberOfRinkas - 1;
+			if player.forcedState == FORCEDSTATE_NONE then
+				-- Regular rinka attack
+				if player.keys.altRun == KEYS_PRESSED and player:mem(0x26,FIELD_WORD) == 0 then
+					if numberOfRinkas > 0 then
+						SFX.play(sfx_metalblade)
+						spawnRinka()
+						numberOfRinkas = numberOfRinkas - 1;
+					end
 				end
-			end
 
-			-- Fire flower
-			if player.keys.altJump == KEYS_PRESSED and player.powerup == 3 and specialCooldown == 0 then
-				SFX.play(sfx_fireflower)
-				specialCooldown = 250;
-				for i=1,10 do
-					butts = NPC.spawn(13,player.x+(player.width/2),player.y,player.section, false, true)
+				-- Fire flower
+				if player.keys.altJump == KEYS_PRESSED and player.powerup == 3 and specialCooldown == 0 then
+					SFX.play(sfx_fireflower)
+					specialCooldown = 250;
+					for i=1,10 do
+						butts = NPC.spawn(13,player.x+(player.width/2),player.y,player.section, false, true)
+						butts.speedX = rng.randomInt(-6,6)
+						butts.speedY = rng.randomInt(-13,-7)
+					end
+				end
+
+				-- Ice flower
+
+				if player.keys.altJump == KEYS_PRESSED and player.powerup == 7 and specialCooldown == 0 then
+					SFX.play(sfx_iceflower)
+					ice = NPC.spawn(237,player.x+(player.width/2),player.y,player.section, false, true)
+					ice.speedX = 6 * direction;
+					specialCooldown = 150;
+				end
+
+				-- Leaf
+				
+				if player.keys.altJump == KEYS_PRESSED and player.powerup == 4 and specialCooldown == 0 then
+					SFX.play(sfx_claw)
+					rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
+					rrr.speedX = 8 * direction;
+					rrr.speedY = 4;
+					rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
+					rrr.speedX = -8 * direction;
+					rrr.speedY = 4;
+					rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
+					rrr.speedX = 8 * direction;
+					rrr.speedY = -4;
+					rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
+					rrr.speedX = -8 * direction;
+					rrr.speedY = -4;
+					specialCooldown = 50;
+				end
+
+				-- Tanooki
+				if player.keys.altJump == KEYS_PRESSED and player.powerup == 5 and specialCooldown == 0 then
+					SFX.play(sfx_claw)
+					for i=-1,1,2 do
+						for q=-1,1,2 do
+						rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
+						rrr.speedX = 8 * direction * i;
+						rrr.speedY = 4 * q;
+						end
+					end
+					rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
+					rrr.speedX = 11 * direction;
+					rrr.speedY = 0;
+					rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
+					rrr.speedX = -11 * direction;
+					rrr.speedY = 0;
+					specialCooldown = 75;
+				end
+
+				if player.keys.run == KEYS_PRESSED and player.powerup == 5 then
+					SFX.play(sfx_invin)
+					butts = NPC.spawn(13,player.x + player.width/2,player.y,player.section, false, true)
 					butts.speedX = rng.randomInt(-6,6)
 					butts.speedY = rng.randomInt(-13,-7)
 				end
-			end
 
-			-- Ice flower
-
-			if player.keys.altJump == KEYS_PRESSED and player.powerup == 7 and specialCooldown == 0 then
-				SFX.play(sfx_iceflower)
-				ice = NPC.spawn(237,player.x+(player.width/2),player.y,player.section, false, true)
-				ice.speedX = 6 * direction;
-				specialCooldown = 150;
-			end
-
-			-- Leaf
-			
-			if player.keys.altJump == KEYS_PRESSED and player.powerup == 4 and specialCooldown == 0 then
-				SFX.play(sfx_claw)
-				rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
-				rrr.speedX = 8 * direction;
-				rrr.speedY = 4;
-				rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
-				rrr.speedX = -8 * direction;
-				rrr.speedY = 4;
-				rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
-				rrr.speedX = 8 * direction;
-				rrr.speedY = -4;
-				rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
-				rrr.speedX = -8 * direction;
-				rrr.speedY = -4;
-				specialCooldown = 50;
-			end
-
-			-- Tanooki
-			if player.keys.altJump == KEYS_PRESSED and player.powerup == 5 and specialCooldown == 0 then
-				SFX.play(sfx_claw)
-				for i=-1,1,2 do
-					for q=-1,1,2 do
-					rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
-					rrr.speedX = 8 * direction * i;
-					rrr.speedY = 4 * q;
-					end
-				end
-				rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
-				rrr.speedX = 11 * direction;
-				rrr.speedY = 0;
-				rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
-				rrr.speedX = -11 * direction;
-				rrr.speedY = 0;
-				specialCooldown = 75;
-			end
-
-			if player.keys.run == KEYS_PRESSED and player.powerup == 5 then
-				SFX.play(sfx_invin)
-				butts = NPC.spawn(13,player.x + player.width/2,player.y,player.section, false, true)
-				butts.speedX = rng.randomInt(-6,6)
-				butts.speedY = rng.randomInt(-13,-7)
-			end
-
-			-- Hammer suit
-			if player.keys.altJump == KEYS_PRESSED and player.powerup == 6 and specialCooldown == 0 then
-				SFX.play(sfx_powerstone)
-				for i = 1, 2 do
-					for j = -1, 1 do
-					local rrr = NPC.spawn(171,player.x+(player.width/2),player.y,player.section, false, true)
-					rrr.speedY = 6 * j;
-						if i == 1 then
-							rrr.speedX = 8;
-						else
-							rrr.speedX = -8
+				-- Hammer suit
+				if player.keys.altJump == KEYS_PRESSED and player.powerup == 6 and specialCooldown == 0 then
+					SFX.play(sfx_powerstone)
+					for i = 1, 2 do
+						for j = -1, 1 do
+						local rrr = NPC.spawn(171,player.x+(player.width/2),player.y,player.section, false, true)
+						rrr.speedY = 6 * j;
+							if i == 1 then
+								rrr.speedX = 8;
+							else
+								rrr.speedX = -8
+							end
 						end
 					end
+					specialCooldown = 200;
 				end
-				specialCooldown = 200;
 			end
 		end
 	end

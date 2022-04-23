@@ -292,6 +292,7 @@ function starman.onTick()
 		end
 	end
 	if starman.active() then
+		GameData.stopStarman = false
 		if(not killed and player:mem(0x13E,FIELD_BOOL)) then
 			killed = true
 			starman.stop(p)

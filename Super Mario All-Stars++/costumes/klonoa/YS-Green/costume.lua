@@ -2,6 +2,7 @@ local costume = {}
 local klonoa = API.load("characters/klonoa");
 local colliders = require("colliders")
 local playerManager = require("playerManager");
+local extrasounds = require("extrasounds")
 
 function costume.onInit()
 	registerEvent(costume, "onDraw");
@@ -9,7 +10,7 @@ function costume.onInit()
 	klonoa.flapAnimSpeed=3;
 	ringbox = colliders.Box(0, 0, 32, 32);
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/klonoa/YS-Green/player-jump.ogg")
-	extrasounds.id[8]  = Audio.SfxOpen("costumes/klonoa/YS-Green/player-died.ogg")
+	extrasounds.id[8]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/klonoa/YS-Green/player-died.ogg"))
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/klonoa/YS-Green/got-star.ogg")
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/klonoa/YS-Green/player-died2.ogg")
 end
