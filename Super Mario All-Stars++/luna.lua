@@ -19,13 +19,13 @@ if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
 end
 
 --Make sure to save the current episode folder and save slot numbers to it's own GameData variables to prevent the broken 1.3 launcher from launching the episode...
-GameData.__EpisodeFolder = Misc.episodePath()
-GameData.__SaveSlot = Misc.saveSlot()
+GameData.__EpisodeFolder = GameData.__EpisodeFolder or Misc.episodePath()
+GameData.__SaveSlot = GameData.__SaveSlot or Misc.saveSlot()
 
 --If it's mismatched, run a dialog and afterward exit the engine
-if GameData.__EpisodeFolder ~= Misc.episodePath() or GameData.__SaveSlot ~= Misc.saveSlot() then
-	Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
-	Misc.exitEngine()
+if GameData.__EpisodeFolder ~= GameData.__EpisodeFolder and GameData.__SaveSlot ~= GameData.__SaveSlot then
+    Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
+    Misc.exitEngine()
 end
 
 --Make sure we warn the user of the dangers of the old star system...
