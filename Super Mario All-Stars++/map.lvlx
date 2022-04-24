@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario All-Stars++\: World Map";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-191200;T:-200600;B:-195168;MZ:0;MF:"";BG:0;
+SC:0;L:-200000;R:-191200;T:-201216;B:-195168;MZ:0;MF:"";BG:0;
 SC:18;L:160000;R:160800;T:159400;B:160000;MZ:0;MF:"";BG:0;
 SECTION_END
 BLOCK
@@ -448,6 +448,10 @@ ID:834;X:-198448;Y:-198464;W:32;H:32;LR:"Signs";
 ID:835;X:-198736;Y:-198336;W:32;H:32;LR:"Signs";
 ID:831;X:-194688;Y:-200288;W:32;H:32;
 ID:830;X:-195392;Y:-200384;W:32;H:32;
+ID:848;X:-193968;Y:-200800;W:32;H:64;
+ID:842;X:-194064;Y:-200960;W:32;H:32;
+ID:842;X:-193968;Y:-200960;W:32;H:32;
+ID:832;X:-194048;Y:-201120;W:32;H:32;
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -496,6 +500,7 @@ ID:768;X:-197344;Y:-200544;
 ID:769;X:-198240;Y:-200576;
 ID:770;X:-195872;Y:-200416;
 ID:771;X:-195040;Y:-200480;
+ID:772;X:-194144;Y:-201184;
 BGO_END
 NPC
 ID:753;X:-199360;Y:-200224;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -865,6 +870,16 @@ ID:752;X:-194784;Y:-200256;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL3-4\"\,\n    \"
 ID:849;X:-194720;Y:-200256;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-3\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"3-4\: Castle #3\"\,\n    \"path_left\"\: \"toSMBLL3-4\"\,\n    \"path_right\"\: \"toSMBLLW-3Path1\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-194688;Y:-200256;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-3Path1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 ID:821;X:-194656;Y:-200256;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-4BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 4\"\,\n    \"path_left\"\: \"toSMBLLW-3Path1\"\,\n    \"warpName\"\: \"SMBLLW-3EndWarp\"\n}\n";
+ID:753;X:-194400;Y:-201216;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/World 4.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-194080;Y:-200768;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-3EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 3\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMBLL4-1\"\,\n    \"warpName\"\: \"SMBLLW-4BeginWarp\"\n}\n";
+ID:752;X:-194048;Y:-200768;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL4-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:802;X:-194016;Y:-200768;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-4\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"4-1\: The Lakitu Grounds (Hard)\"\,\n    \"path_left\"\: \"toSMBLL4-1\"\,\n    \"path_up\"\: \"toSMBLL4-2\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-194016;Y:-200800;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL4-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:802;X:-194016;Y:-200832;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-4\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"4-2\: Vicious Piranhas\"\,\n    \"path_down\"\: \"toSMBLL4-2\"\,\n    \"path_up\"\: \"toSMBLL4-3\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-194016;Y:-200864;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL4-3\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\,\n    \"types\"\: \"bridge\"\n}\n";
+ID:808;X:-194016;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-4\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"4-3\: More Platforms Ahead\"\,\n    \"path_down\"\: \"toSMBLL4-3\"\,\n    \"path_up\"\: \"toSMBLL4-4\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-194016;Y:-200992;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL4-4\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\,\n    \"types\"\: \"bridge\"\n}\n";
+ID:849;X:-194016;Y:-201088;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-4\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"4-4\: Castle #4\"\,\n    \"path_down\"\: \"toSMBLL4-4\"\,\n    \"path_right\"\: \"toSMBLLW-4Path1\"\,\n    \"unlock_right\"\: 9\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
