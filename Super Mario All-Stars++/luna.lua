@@ -23,7 +23,7 @@ GameData.__EpisodeFolder = GameData.__EpisodeFolder or Misc.episodePath()
 GameData.__SaveSlot = GameData.__SaveSlot or Misc.saveSlot()
 
 --If it's mismatched, run a dialog and afterward exit the engine
-if GameData.__EpisodeFolder ~= GameData.__EpisodeFolder and GameData.__SaveSlot ~= GameData.__SaveSlot then
+if GameData.__EpisodeFolder ~= Misc.episodePath() and GameData.__SaveSlot ~= Misc.saveSlot() then
     Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
     Misc.exitEngine()
 end
@@ -40,9 +40,9 @@ if mem(0x00B251E0, FIELD_WORD) >= 1 then
 end
 
 --Now, before we get started, we require the most important libraries on the top.
-GameData.levelMusicTemporary = {temporary}
-GameData.levelMusic = {temporary}
-GameData.warpStarDoorCount = {temporary}
+GameData.levelMusicTemporary = {}
+GameData.levelMusic = {}
+GameData.warpStarDoorCount = {}
 local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
