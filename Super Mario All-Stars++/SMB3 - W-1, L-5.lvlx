@@ -4,7 +4,7 @@ HEAD_END
 SECTION
 SC:0;L:-200000;R:-195552;T:-200600;B:-199552;MZ:24;MF:"_OST/Super Mario Bros/Underground.spc|0\;g=2.5";BG:38;
 SC:1;L:-180000;R:-178752;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:1;
-SC:2;L:-160000;R:-157792;T:-160608;B:-159488;MZ:24;MF:"_OST/Super Mario Bros 3/In The Clouds.spc|0\;g=2.7";BG:4;
+SC:2;L:-160000;R:-157792;T:-160608;B:-159488;MZ:24;MF:"_OST/Super Mario Bros 3/In The Clouds.spc|0\;g=2.5";BG:4;
 SECTION_END
 STARTPOINT
 ID:1;X:-199916;Y:-200198;D:1;

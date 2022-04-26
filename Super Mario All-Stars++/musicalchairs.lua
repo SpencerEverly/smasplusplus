@@ -166,7 +166,30 @@ function musicalchairs.onTick()
 				elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SubconsSavedSMB2.ogg"
 				--Super Mario Bros. 3
-				--TBD
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Land.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Bonus Level.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BonusAreaSMB3.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/In The Clouds.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/WarpZoneSMB3.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Toad's House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/PSwitchSMB3-Remastered.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Fortress.spc|0;g=1.6" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Fort.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SMBDDX - Boss.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/King's Chamber.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/King.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Before Airship.spc|0;g=2.2" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BeforeAirshipSMB3.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship.spc" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Airship.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship Boss.spc|0;g=2.6" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/AirshipBossSMB3.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Desert.spc|0;g=3.2" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Land.ogg"
 				--Super Mario World
 				elseif section.musicPath == "_OST/Super Mario World/Here We Go (Advance).spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SMWOverworld.ogg"
@@ -323,6 +346,8 @@ function musicalchairs.onTick()
 					section.music = "_OST/Super Mario Bros (NES)/Final Battle.ogg"
 				elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|11;g=1.5"
+				--Super Mario Bros. 3
+				--TBD
 				--Super Mario Bros. Spencer
 				elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld.ogg" then
 					section.musicPath = "_OST/Super Mario Bros (NES)/Overworld (SMBS).ogg"

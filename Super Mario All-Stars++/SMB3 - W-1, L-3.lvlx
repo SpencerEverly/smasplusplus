@@ -3,7 +3,7 @@ TL:"Super Mario Bros. 3\: World 1-3";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-194688;T:-201056;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:1;
-SC:1;L:-180000;R:-177792;T:-181120;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/In The Clouds.spc|0\;g=2.7";BG:4;
+SC:1;L:-180000;R:-177792;T:-181120;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/In The Clouds.spc|0\;g=2.5";BG:4;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 3/Toad's House.spc|0\;g=2.5";BG:26;
 SECTION_END
 STARTPOINT
