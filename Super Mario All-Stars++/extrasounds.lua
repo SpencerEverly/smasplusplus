@@ -162,6 +162,9 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	ready = true --We're ready, so we can begin
 end
 
+local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKI}
+local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
+
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
 	if extrasounds.active == true then --Only mute when active
 		Audio.sounds[4].muted = true --block-smash.ogg
@@ -374,29 +377,17 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 			
 			
 			--**FIREBALLS**
-			if (player.character == CHARACTER_LINK) == false and (player.character == CHARACTER_MEGAMAN) == false and (player.character == CHARACTER_SNAKE) == false and (player.character == CHARACTER_SAMUS) == false then --Making sure these sounds don't play when using these characters...
-				if player.rawKeys.run == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than or equal to 0 before playing
-					if player.powerup == 3 then --Fireball sound
-						playSound(18)
-					end
-					if player.powerup == 6 then --Hammer Throw sound
-						playSound(105)
-					end
-					if player.powerup == 7 then --Iceball sound
-						playSound(93)
-					end
-				end
-				if player.rawKeys.altRun == KEYS_PRESSED and player:mem(0x160, FIELD_WORD) <= 0 and (player.mount == MOUNT_YOSHI) == false and player.climbing == false and player:mem(0x12E, FIELD_BOOL) == false and player:mem(0x3C, FIELD_BOOL) == false  and (player.forcedState == FORCEDSTATE_PIPE) == false and (player.forcedState == FORCEDSTATE_DOOR) == false and not player:getCostume() == ("SEE-TANGENT") then --Fireballs! It makes sure the player isn't on a mount, isn't ducking, isn't sliding, isn't warping, isn't going through a door, or the fireball/iceball cooldown is less than or equal to 0 before playing
-					if player.powerup == 3 then --Fireball sound
-						playSound(18)
-					end
-					if player.powerup == 6 then --Hammer Throw sound
-						playSound(105)
-					end
-					if player.powerup == 7 then --Iceball sound
-						playSound(93)
-					end
-				end
+			local isShootingFire = (player:mem(0x118,FIELD_FLOAT) >= 100 and player:mem(0x118,FIELD_FLOAT) <= 118 and player.powerup == 3)
+			local isShootingHammer = (player:mem(0x118,FIELD_FLOAT) >= 100 and player:mem(0x118,FIELD_FLOAT) <= 118 and player.powerup == 6)
+			local isShootingIce = (player:mem(0x118,FIELD_FLOAT) >= 100 and player:mem(0x118,FIELD_FLOAT) <= 118 and player.powerup == 7)
+			if isShootingFire then --Fireball sound
+				SFX.play(extrasounds.id[18], 1, 1, 25)
+			end
+			if isShootingHammer then --Hammer Throw sound
+				SFX.play(extrasounds.id[105], 1, 1, 25)
+			end
+			if isShootingIce then --Iceball sound
+				SFX.play(extrasounds.id[93], 1, 1, 25)
 			end
 		end
 	end
