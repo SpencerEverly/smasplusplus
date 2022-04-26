@@ -499,7 +499,7 @@ function musicalchairs.onTick()
 				elseif section.musicPath == "_OST/Super Mario World/Athletic 3.spc|0;g=2.1" then
 					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Sky.ogg"
 				elseif section.musicPath == "_OST/Super Mario World/Castle.spc|0;g=2.5" then
-					section.musicPath = "__OST/Super Mario Bros 2 (NES)/Castle.ogg"
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Castle.ogg"
 				elseif section.musicPath == "_OST/Super Mario World/Boss Battle.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros 2 (NES) - OST.nsf|6;g=2"
 				elseif section.musicPath == "_OST/Super Mario World/Memory/11 Here We Go.spc|0;g=2.5" then
