@@ -246,6 +246,11 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 					SFX.play(extrasounds.id[98], 1, 1, 70)
 				end
 			end
+			
+			
+			
+			
+		--**EXPLOSIONS**
 			for index,explosion in ipairs(Animation.get(69)) do --Explosions!
 				SFX.play(extrasounds.id[104], 1, 1, 70)
 			end
