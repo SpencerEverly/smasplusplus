@@ -182,7 +182,6 @@ function onKeyboardPress(k, v)
 		sixPressedState = false
 		if k == VK_6 then
 			GameData.menucomplete = true
-			SaveData.playerName = "Speedrun Mode"
 			SaveData.speedrunMode = not SaveData.speedrunMode
 			SaveData.firstBootCompleted = true
 			Level.exit()
