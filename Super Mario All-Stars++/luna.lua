@@ -237,6 +237,9 @@ local repll = require("repll") --Custom sound command line, for testing in the e
 local rng = require("base/rng") --Load up rng for etc. things
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi
 local smascheats = require("smascheats") --To enable edited cheats and some new ones
+if SaveData.speedrunMode == true then
+	speedruntimer = require("speedruntimer") --For speedrunning purposes
+end
 
 loadactivate = true
 local steve = require("steve")
@@ -409,6 +412,14 @@ local startGif = false
 local endGif = true
 local gifIsRecording = false
 
+local inputhudbg = Graphics.loadImage(Misc.resolveFile("inputhud/inputhud.png"))
+local controlkey = Graphics.loadImage(Misc.resolveFile("inputhud/control.png"))
+local jumpkey = Graphics.loadImage(Misc.resolveFile("inputhud/jump.png"))
+local altjumpkey = Graphics.loadImage(Misc.resolveFile("inputhud/altjump.png"))
+local runkey = Graphics.loadImage(Misc.resolveFile("inputhud/run.png"))
+local altrunkey = Graphics.loadImage(Misc.resolveFile("inputhud/altrun.png"))
+local bottomkeys = Graphics.loadImage(Misc.resolveFile("inputhud/bottomkey.png"))
+
 function onDraw()
 	local warps = Warp.get()
 	for _, v in ipairs(warps) do
@@ -443,6 +454,39 @@ function onDraw()
 	end
 	if gifIsRecording then
 		
+	end
+	if SaveData.speedrunMode == true then
+		Graphics.drawImageWP(inputhudbg,4,566,-1.9) -- Released Keys
+		if player.keys.left == KEYS_DOWN then -- Pressed Left Key
+			Graphics.drawImageWP(controlkey,8,578,-1) 
+		end
+		if player.keys.right == KEYS_DOWN then -- Pressed Right Key
+			Graphics.drawImageWP(controlkey,20,578,-1)
+		end
+		if player.keys.up == KEYS_DOWN then -- Pressed Up Key
+			Graphics.drawImageWP(controlkey,14,572,-1)
+		end
+		if player.keys.down == KEYS_DOWN then -- Pressed Down Key
+			Graphics.drawImageWP(controlkey,14,584,-1)
+		end
+		if player.keys.jump == KEYS_DOWN then -- Pressed Jump Key
+			Graphics.drawImageWP(jumpkey,68,584,-1)
+		end
+		if player.keys.run == KEYS_DOWN then -- Pressed Run Key
+			Graphics.drawImageWP(runkey,58,582,-1)
+		end
+		if player.keys.altJump == KEYS_DOWN then -- Pressed Alt Jump Key
+			Graphics.drawImageWP(altjumpkey,70,574,-1)
+		end
+		if player.keys.altRun == KEYS_DOWN then -- Pressed Alt Run Key
+			Graphics.drawImageWP(altrunkey,60,572,-1)
+		end
+		if player.keys.dropItem == KEYS_DOWN then -- Pressed Drop Item Key
+			Graphics.drawImageWP(bottomkeys,30,588,-1)
+		end
+		if player.keys.pause == KEYS_DOWN then -- Pressed Pause Key
+			Graphics.drawImageWP(bottomkeys,44,588,-1)
+		end
 	end
 end
 

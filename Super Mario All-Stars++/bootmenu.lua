@@ -537,12 +537,9 @@ local function FirstBoot6()
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == false then
-		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
+		SaveData.firstBootCompleted = true
 	end
 	Misc.saveGame()
-	if SaveData.firstBootCompleted == 2 then
-		SaveData.firstBootCompleted = SaveData.firstBootCompleted - 2
-	end
 end
 	
 local function FirstBootGameHelp()
