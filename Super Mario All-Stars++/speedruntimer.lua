@@ -40,7 +40,7 @@ local function drawSpeedrunTimer()
 		xscale = 2,
 		font = font,
 		yscale = 2,
-		priority = 0
+		priority = -1
 	} -- Timer placement settings
 	textplus.print{
 		text = t2,
@@ -51,7 +51,7 @@ local function drawSpeedrunTimer()
 		font = font,
 		yscale = 2,
 		color = Color.lightgrey,
-		priority = 0
+		priority = -1
 	}
     local best = SaveData.trackers.levels[Level.filename()].bestTime
 	if best >= 0 then
@@ -66,7 +66,7 @@ local function drawSpeedrunTimer()
 			font = font,
 			yscale = 2,
 			color = Color.lightgreen,
-			priority = 0
+			priority = -1
 		}
 	end
 end
