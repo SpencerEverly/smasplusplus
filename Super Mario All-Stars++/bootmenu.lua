@@ -536,7 +536,7 @@ end
 local function FirstBoot6()
 	Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu (First Boot).ogg")
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
-	if SaveData.firstBootCompleted == 0 then
+	if SaveData.firstBootCompleted == false then
 		SaveData.firstBootCompleted = SaveData.firstBootCompleted + 1
 	end
 	Misc.saveGame()
@@ -696,7 +696,7 @@ local function X2DisableCheck1()
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Would you like to enable/disable SMBX 1.3 mode?<page>If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored.<page>Costumes will reset, so be careful enabling this option!<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
 	end
 	if Player.count() == 2 then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>You can't use 2 player mode on X2 mode. Please enable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>You can't use 2 player mode on X2 mode. Please disable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -877,7 +877,7 @@ local function ExitDialogueFirstBoot()
 	active = false
 	logo = true
 	pressjumpwords = true
-	if SaveData.firstBootCompleted == 1 then
+	if SaveData.firstBootCompleted == true then
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
 	if GameData.startedmenu == nil then
@@ -895,7 +895,7 @@ local function ExitDialogue()
 	playernamebyImg = true
 	pfpimage = true
 	pressjumpwords = true
-	if SaveData.firstBootCompleted == 1 then
+	if SaveData.firstBootCompleted == true then
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
 	if os.date("*t").month == 03 and os.date("*t").day == 17 then
@@ -910,7 +910,7 @@ local function ExitDialogueMusicReset()
 	playernamebyImg = true
 	pfpimage = true
 	pressjumpwords = true
-	if SaveData.firstBootCompleted == 1 then
+	if SaveData.firstBootCompleted == true then
 		GameData.startedmenu = GameData.startedmenu - 1
 	end
 	if os.date("*t").month == 03 and os.date("*t").day == 17 then
@@ -1191,13 +1191,13 @@ function bootmenu.onStart()
 	if bootmenu.active == true then
 		Audio.MusicVolume(nil) --Let the music volume reset
 		if SaveData.firstBootCompleted == nil then
-			SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0 --If starting for the first time, first boot will happen
+			SaveData.firstBootCompleted = false --If starting for the first time, first boot will happen
 		end
-		if SaveData.firstBootCompleted == 0 then
+		if SaveData.firstBootCompleted == false then
 			Routine.run(FirstBoot1)
 			GameData.startedmenu = 1
 		end
-		if SaveData.firstBootCompleted == 1 then
+		if SaveData.firstBootCompleted == true then
 			Routine.run(easterEgg, true)
 			playernamebyImg = true
 			pfpimage = true
@@ -1228,9 +1228,9 @@ function bootmenu.onStart()
 			stpatricksday = true
 		end
 		if Level.filename() == "intro_SMAS.lvlx" then
-			if SaveData.firstBootCompleted == 0 then
+			if SaveData.firstBootCompleted == false then
 				--Nothing
-			elseif SaveData.firstBootCompleted == 1 then
+			elseif SaveData.firstBootCompleted == true then
 				Audio.MusicChange(0, "_OST/All Stars Menu/Boot Menu.ogg")
 			end
 		end
@@ -1275,12 +1275,12 @@ end
 function bootmenu.onTick()
 	if bootmenu.active == true then
 		if SaveData.firstBootCompleted == nil then
-			SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
+			SaveData.firstBootCompleted = false
 		end
-		if SaveData.firstBootCompleted == 0 then
+		if SaveData.firstBootCompleted == false then
 			GameData.startedmenu = 1
 		end
-		if SaveData.firstBootCompleted == 1 then
+		if SaveData.firstBootCompleted == true then
 			
 		end
 		if GameData.startedmenu == nil then
@@ -1719,10 +1719,10 @@ function bootmenu.onExit()
 	if bootmenu.active == true then
 		Audio.MusicVolume(nil)
 		autoscroll.unlockSection(0, 1)
-		if SaveData.firstBootCompleted == 1 then
+		if SaveData.firstBootCompleted == true then
 			GameData.startedmenu = 0
 		end
-		if SaveData.firstBootCompleted == 0 then
+		if SaveData.firstBootCompleted == false then
 			GameData.startedmenu = 1
 		end
 		Defines.cheat_donthurtme = false

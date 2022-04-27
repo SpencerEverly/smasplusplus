@@ -381,6 +381,12 @@ function onStart() --Now do onStart...
 	if SaveData.disableX2char == 1 then
 		SaveData.disableX2char = true
 	end
+	if SaveData.firstBootCompleted == 0 then
+		SaveData.firstBootCompleted = false
+	end
+	if SaveData.firstBootCompleted == 1 then
+		SaveData.firstBootCompleted = true
+	end
 	Audio.MusicVolume(nil) --Reset the music volume on onStart, just in case
 end
 

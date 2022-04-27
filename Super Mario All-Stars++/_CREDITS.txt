@@ -161,6 +161,7 @@ Code for certain parts made by:
 - Jumper
 - Blue Stag
 - GtW
+- MegaDood
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 

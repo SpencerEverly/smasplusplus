@@ -11,7 +11,7 @@ function onStart()
         SaveData.introselect = SaveData.introselect or 1
     end
 	if SaveData.firstBootCompleted == nil then
-        SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
+        SaveData.firstBootCompleted = false
     end
 	if SaveData.utencounter == nil then
 		SaveData.utencounter = 0

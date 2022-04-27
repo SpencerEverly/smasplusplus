@@ -4268,6 +4268,10 @@ function smwMap.onTick()
     if #smwMap.activeEvents > 0 then
         updateEvent(smwMap.activeEvents[1])
     end
+	if SaveData.speedrunMode == true then
+		smwMap.playerSettings.walkSpeed = 8
+		smwMap.playerSettings.climbSpeed = 5.75
+	end
 end
 
 function smwMap.onDraw()

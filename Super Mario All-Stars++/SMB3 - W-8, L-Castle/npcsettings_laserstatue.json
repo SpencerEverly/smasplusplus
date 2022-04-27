@@ -1,0 +1,25 @@
+{
+	"style" : "groupbox",
+	"title" : "Laser Statue Settings",
+	"layout": [	
+{
+			"control": "checkbox",
+			"name": "beam",
+			"title": "Display Laser Pointer?",
+			"tooltip": "Check to make a laser pointer be emitted from the statue.",
+			"text-visible": true,
+			"value-default": true
+		},
+		{
+				"control": "spinBox",
+				"type": "int",
+				"name": "length",
+				"title": "Length of the beam",
+				"tooltip": "The length of which the activation radius extends to.",
+				"value-default": 500,
+				"value-min": 10,
+				"value-max": 10000,
+				"single-step": 1
+			}
+		]
+}

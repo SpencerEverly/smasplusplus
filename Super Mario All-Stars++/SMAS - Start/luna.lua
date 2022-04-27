@@ -173,8 +173,19 @@ function onKeyboardPress(k, v)
 	if active then
 		fivePressedState = false
 		if k == VK_5 then
+			GameData.menucomplete = true
 			Level.exit()
 			fivePressedState = true
+		end
+	end
+	if active then
+		sixPressedState = false
+		if k == VK_6 then
+			GameData.menucomplete = true
+			SaveData.playerName = "Speedrun Mode"
+			
+			Level.exit()
+			sixPressedState = true
 		end
 	end
 	if not active then
@@ -186,7 +197,6 @@ end
 
 function onDraw()
 	local bootimage = Graphics.loadImageResolved("SMAS - Start/bootscreen_final.png")
-	local bootimagewide = Graphics.loadImageResolved("SMAS - Start/bootscreen_final_wide.png")
 	
 	if bootshow then
 		Graphics.drawImageWP(bootimage, 0, 0, -2)
@@ -199,6 +209,7 @@ function onDraw()
 		textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=0, color=Color.white}
 		textplus.print{x=10, y=68, text = "4) Continue booting", priority=0, color=Color.white}
 		textplus.print{x=10, y=80, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=0, color=Color.white}
+		textplus.print{x=10, y=102, text = "6) Enable speedrun mode", priority=0, color=Color.white}
 	end
 end
 
@@ -244,7 +255,7 @@ function onStart()
         SaveData.introselect = SaveData.introselect or 1
     end
 	if SaveData.firstBootCompleted == nil then
-        SaveData.firstBootCompleted = SaveData.firstBootCompleted or 0
+        SaveData.firstBootCompleted = false
     end
 	if SaveData.utencounter == nil then
 		SaveData.utencounter = 0
