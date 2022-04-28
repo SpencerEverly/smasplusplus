@@ -173,7 +173,7 @@ function costume.onTick(repeated)
 		if player:isGroundTouching() == false or player:mem(0x36, FIELD_BOOL, true) then
 			if player.keys.jump == KEYS_PRESSED then
 				Audio.sounds[1].muted = true
-				if table.icontains(GameData.nolevelplaces,Level.filename()) == false and Defines.cheat_ahippinandahoppin == false then
+				if table.icontains(GameData.nolevelplaces,Level.filename()) == false and jumpingactive == false then
 					playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
 				end
 				Defines.cheat_ahippinandahoppin = true
