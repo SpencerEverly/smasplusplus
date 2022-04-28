@@ -135,7 +135,7 @@ function starman.start(p, id)
 	starTimers[idx] = starman.duration[id];		
 	
 	if(starlights[idx] == nil) then
-		starlights[idx] = darkness.addLight(darkness.light(0,0,300,2,Color.white));
+		starlights[idx] = darkness.addLight(darkness.light(0,0,300,-5,Color.white));
 	else
 		starlights[idx].enabled = true;
 	end

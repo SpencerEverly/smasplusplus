@@ -136,6 +136,21 @@ function costume.onDraw()
 			Graphics.drawImageWP(heartfull, 388,  16, -4.2)
 			Graphics.drawImageWP(heartfull, 421,  16, -4.2)
 		end
+		if player.powerup == 3 then
+			Text.printWP("FIRE FLOWER", 310, 60, -4.2)
+		end
+		if player.powerup == 4 then
+			Text.printWP("SUPER LEAF", 310, 60, -4.2)
+		end
+		if player.powerup == 5 then
+			Text.printWP("TANOOKI SUIT", 290, 60, -4.2)
+		end
+		if player.powerup == 6 then
+			Text.printWP("HAMMER SUIT", 302, 60, -4.2)
+		end
+		if player.powerup == 7 then
+			Text.printWP("ICE FLOWER", 316, 60, -4.2)
+		end
 	end
 end
 
