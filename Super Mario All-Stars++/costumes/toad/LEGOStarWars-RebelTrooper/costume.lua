@@ -1,6 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local HUDOverride = require("hudoverridee")
+local rng = require("base/rng")
 
 local costume = {}
 
@@ -168,7 +169,7 @@ function costume.hphit()
 			hit = true
 			if hit then
 				local hurtsoundrng = rng.randomInt(1,9)
-				playSound("toad/LEGOStarWars-RebelTrooper/hurt/"..hurtsoundrng..".ogg")
+				SFX.play("costumes/toad/LEGOStarWars-RebelTrooper/hurt/"..hurtsoundrng..".ogg")
 				characterhp = characterhp - 1
 			end
 			if characterhp < 1 then

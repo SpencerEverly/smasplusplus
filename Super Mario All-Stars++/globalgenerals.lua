@@ -883,7 +883,7 @@ function globalgenerals.onTick()
 		starman.sfxFile = Misc.resolveSoundFile("starman")
 		starman.duration[996] = 769
 		starman.duration[994] = 769
-		warpTransition.doorclose = ("sound/door-close.ogg")
+		warpTransition.doorclose = ("costumes/toad/LEGOStarWars-RebelTrooper/door-close.ogg")
 	end
 	if currentCostume == "MOTHERBRAINRINKA" then
 		littleDialogue.characterNames[4] = "Mother Brain Rinka"
