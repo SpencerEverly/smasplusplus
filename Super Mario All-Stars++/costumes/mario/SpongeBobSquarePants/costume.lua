@@ -175,7 +175,7 @@ function costume.onTick(repeated)
 			hasJumped = false
 		elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not isPlayerUnderwater() then
 			hasJumped = true
-			player:mem(0x11C, FIELD_WORD, 20)
+			player:mem(0x11C, FIELD_WORD, 16)
 			if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
 				playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
 			end
