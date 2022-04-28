@@ -39,6 +39,12 @@ if mem(0x00B251E0, FIELD_WORD) >= 1 then
 	end
 end
 
+--For SEE Mod users, where they have a definite version of LunaLua.
+if SMBX_VERSION == VER_BETA4_PATCH_4_1_SMAS then
+	Misc.setWindowTitle("Super Mario All-Stars++")
+	Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
+end
+
 --Now, before we get started, we require the most important libraries on the top.
 GameData.levelMusicTemporary = {}
 GameData.levelMusic = {}

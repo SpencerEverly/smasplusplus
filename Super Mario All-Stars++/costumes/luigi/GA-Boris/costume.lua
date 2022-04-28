@@ -168,13 +168,14 @@ end
 function costume.onPostNPCKill(npc, harmType)
 	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
 	local healitems = table.map{9,184,185,249,14,182,183,34,169,170,277,264}
+	local rngkey
 	if SaveData.toggleCostumeProfanity then
-		local rngkey = rng.randomInt(1,6)
+		rngkey = rng.randomInt(1,6)
 		if items[npc.id] and Colliders.collide(plr, npc) then
 			playSound("luigi/GA-Boris/voices/items/"..rngkey..".ogg", 1, 1, 80)
 		end
 	else
-		local rngkey = rng.randomInt(3,6)
+		rngkey = rng.randomInt(3,6)
 		if items[npc.id] and Colliders.collide(plr, npc) then
 			playSound("luigi/GA-Boris/voices/items/"..rngkey..".ogg", 1, 1, 80)
 		end

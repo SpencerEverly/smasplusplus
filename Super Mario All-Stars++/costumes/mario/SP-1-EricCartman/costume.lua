@@ -97,10 +97,11 @@ end
 
 function costume.onPostNPCKill(npc, harmType)
 	local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
+	local itemgetrng
 	if SaveData.toggleCostumeProfanity then
-		local itemgetrng = rng.randomInt(1,7)
+		itemgetrng = rng.randomInt(1,7)
 	else
-		local itemgetrng = rng.randomInt(4,7)
+		itemgetrng = rng.randomInt(4,7)
 	end
 	if costume.abilitesenabled then
 		if items[npc.id] and Colliders.collide(plr, npc) then
@@ -112,10 +113,11 @@ end
 function costume.onPlayerHarm()
 	if costume.abilitesenabled then
 		if not plr.hasStarman or plr.isMega then
+			local hurtvoicerng
 			if SaveData.toggleCostumeProfanity then
-				local hurtvoicerng = rng.randomInt(1,10)
+				hurtvoicerng = rng.randomInt(1,10)
 			else
-				local hurtvoicerng = rng.randomInt(7,8)
+				hurtvoicerng = rng.randomInt(7,8)
 			end
 			playSound("mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
 		end
@@ -123,10 +125,11 @@ function costume.onPlayerHarm()
 end
 
 function costume.onPlayerKill()
+	local dyingvoicerng
 	if SaveData.toggleCostumeProfanity then
-		local dyingvoicerng = rng.randomInt(1,10)
+		dyingvoicerng = rng.randomInt(1,10)
 	else
-		local dyingvoicerng = rng.randomInt(3,5)
+		dyingvoicerng = rng.randomInt(3,5)
 	end
 	if costume.abilitesenabled then
 		playSound("mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")

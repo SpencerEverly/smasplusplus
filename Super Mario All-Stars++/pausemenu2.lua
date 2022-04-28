@@ -21,7 +21,7 @@ if SaveData.toggleCostumeAbilities == nil then
 	SaveData.toggleCostumeAbilities = true
 end
 if SaveData.toggleCostumeProfanity == nil then
-	SaveData.toggleCostumeProfanity = true
+	SaveData.toggleCostumeProfanity = false
 end
 
 local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
