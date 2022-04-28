@@ -166,10 +166,10 @@ end
 function costume.hphit()
 	if SaveData.toggleCostumeAbilities == true then
 		if not player.hasStarman and not player.isMega then
+			local hurtsoundrng = rng.randomInt(1,9)
+			playSound("toad/LEGOStarWars-RebelTrooper/hit/"..hurtsoundrng..".ogg")
 			hit = true
 			if hit then
-				local hurtsoundrng = rng.randomInt(1,9)
-				SFX.play("costumes/toad/LEGOStarWars-RebelTrooper/hurt/"..hurtsoundrng..".ogg")
 				characterhp = characterhp - 1
 			end
 			if characterhp < 1 then
