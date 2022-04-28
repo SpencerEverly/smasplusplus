@@ -112,6 +112,20 @@ function costume.onInputUpdate()
 	end
 end
 
+function costume.onTick()
+	if SaveData.toggleCostumeAbilities == true then
+		if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasfunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
+			hasJumped = false
+		elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not isPlayerUnderwater() then
+			hasJumped = true
+			player:mem(0x11C, FIELD_WORD, 10)
+			if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
+				playSound("toad/LEGOStarWars-RebelTrooper/player-doublejump.ogg")
+			end
+		end
+	end
+end
+
 function costume.onDraw()
 	if SaveData.toggleCostumeAbilities == true then
 		--Health system
