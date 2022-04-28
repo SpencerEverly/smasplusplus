@@ -68,6 +68,8 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
     )
 end
 
+local shootingframe = 10
+
 function costume.shootLaser1()
 	plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
 	local x = plr.x
@@ -87,10 +89,10 @@ function costume.shootLaser1()
 		gunNpc.speedX = -14.5
 		gunNpc.speedY = 0
 	end
-	costume.useLaser1 = false
-	cooldown = 10
+	cooldown = 15
 	if cooldown <= 0 then
 		plr:mem(0x172, FIELD_BOOL, true)
+		costume.useLaser1 = false
 	end
 end
 
@@ -159,6 +161,18 @@ function costume.onDraw()
 		end
 		if player.powerup == 7 then
 			Text.printWP("ICE FLOWER", 316, 60, -4.2)
+		end
+		if costume.useLaser1 then
+			cooldown = 15
+			shootingframe = shootingframe - 1
+			if shootingframe <= 9 then
+				plr:setFrame(3)
+			end
+			if shootingframe <= 0 then
+				shootingframe = 5
+				plr:setFrame(nil)
+				costume.useLaser1 = false
+			end
 		end
 	end
 end
