@@ -3,6 +3,8 @@ local smasfunctions = {}
 local extrasounds = require("extrasounds")
 local serializer = require("ext/serializer")
 
+local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD)
+
 function loadFile(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
 	return Misc.resolveFile(name)
 		or Misc.resolveFile("_OST/" .. name)
@@ -369,6 +371,31 @@ end
 -------------------
 --Misc. functions
 -------------------
+
+function betterPlayer(playerid) --Better player/player2 detection, for simplifying mem functions, or detecting either player for any code-related function
+	for _, p in ipairs(Player.get()) do
+		if playerid == nil then
+			playerid = 1
+		end
+		if playerid == 1 then
+			if Player(1) then
+				p = Player(1)
+			end
+		elseif playerid == 2 then
+			if Player(2) and Player(2).isValid then
+				p = Player(2)
+			end
+		elseif playerid == 3 then
+			if Player(3) and Player(3).isValid then --Extra Player functions for an online multiplayer feature... coming whenever it works
+				p = Player(3)
+			end
+		elseif playerid == 4 then
+			if Player(4) and Player(4).isValid then
+				p = Player(4)
+			end
+		end
+	end
+end
 
 function getEpisodeFilename() --Thanks KBM_Quine!
 	if not Misc.inEditor then
