@@ -18,7 +18,9 @@ function costume.onInit(p)
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onInputUpdate")
 	
-	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/player-jump.ogg")
+	Audio.sounds[1].sfx   = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/player-jump.ogg")
+	extrasounds.id[8]     = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/player-died.ogg"))
+	Audio.sounds[52].sfx  = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/got-star.ogg")
 	
 	Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/toad/LEGOStarWars-RebelTrooper/laser.png")
 	
