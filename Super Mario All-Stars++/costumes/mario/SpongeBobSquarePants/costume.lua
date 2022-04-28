@@ -120,7 +120,7 @@ end
 function costume.onPostNPCKill(npc, harmType)
 	if SaveData.toggleCostumeAbilities == true then
 		local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
-		local rngkey = rng.randomInt(1,6)
+		local rngkey = rng.randomInt(1,12)
 		if items[npc.id] and Colliders.collide(plr, npc) then
 			playSound("mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
 		end
