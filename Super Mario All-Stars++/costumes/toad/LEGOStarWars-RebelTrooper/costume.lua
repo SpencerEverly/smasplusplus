@@ -19,8 +19,16 @@ function costume.onInit(p)
 	registerEvent(costume,"onInputUpdate")
 	
 	Audio.sounds[1].sfx   = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/player-jump.ogg")
+	Audio.sounds[6].sfx   = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/player-grow.ogg")
 	extrasounds.id[8]     = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/player-died.ogg"))
+	extrasounds.id[14]    = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/coin.ogg"))
+	Audio.sounds[46].sfx  = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/door.ogg")
 	Audio.sounds[52].sfx  = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/got-star.ogg")
+	extrasounds.id[59]    = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/dragon-coin.ogg"))
+	extrasounds.id[99]    = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/dragon-coin-get2.ogg")) --Dragon Coin #2
+	extrasounds.id[100]   = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/dragon-coin-get3.ogg")) --Dragon Coin #3
+	extrasounds.id[101]   = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/dragon-coin-get4.ogg")) --Dragon Coin #4
+	extrasounds.id[102]   = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/dragon-coin-get5.ogg")) --Dragon Coin #5
 	
 	Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/toad/LEGOStarWars-RebelTrooper/laser.png")
 	
@@ -159,6 +167,8 @@ function costume.hphit()
 		if not player.hasStarman and not player.isMega then
 			hit = true
 			if hit then
+				local hurtsoundrng = rng.randomInt(1,9)
+				playSound("toad/LEGOStarWars-RebelTrooper/hurt/"..hurtsoundrng..".ogg")
 				characterhp = characterhp - 1
 			end
 			if characterhp < 1 then
