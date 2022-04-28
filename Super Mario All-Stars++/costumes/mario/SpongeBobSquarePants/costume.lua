@@ -176,20 +176,28 @@ function costume.onTick(repeated)
 				if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
 					playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
 				end
+				Defines.cheat_ahippinandahoppin = true
 				jumpingactive = true
 			end
 		end
 		if player:isGroundTouching() == true or player:isClimbing() == true then
+			Defines.cheat_ahippinandahoppin = false
 			jumpingactive = false
 			timer = 50
 		end
 		if jumpingactive then
-			player.speedY = -Defines.jumpheight*0.52
 			timer = timer - 5
 			if timer <= 0 then
 				Audio.sounds[1].muted = false
-				jumpingactive = false
-				timer = 50
+				if player.keys.jump == KEYS_PRESSED then
+					Defines.cheat_ahippinandahoppin = false
+					player:mem(0x11E, FIELD_BOOL, false)
+					cooldown = 5
+					timer = 50
+					if cooldown <= 0 then
+						player:mem(0x11E, FIELD_BOOL, true)
+					end
+				end
 			end
 		end
 	end
