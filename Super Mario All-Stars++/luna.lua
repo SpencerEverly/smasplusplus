@@ -237,6 +237,90 @@ GameData.nolevelplaces = {
 	"SMB2 - Ending.lvlx"
 }
 
+GameData.notransitionlevels = {
+	"SMAS - Start.lvlx",
+	"SMAS - Intro.lvlx",
+	"SMAS - Credits.lvlx",
+	"map.lvlx",
+	"SMAS - Raca's World (Part 0).lvlx",
+	"SMAS - Raca's World (Part 1).lvlx",
+	"intro_8bit.lvlx",
+	"intro_bossedit8.lvlx",
+	"intro_jakebrito1.lvlx",
+	"intro_marioforever.lvlx",
+	"intro_S!TS!.lvlx",
+	"intro_scrollingheights.lvlx",
+	"intro_SMAS.lvlx",
+	"intro_SMBX1.0.lvlx",
+	"intro_SMBX1.1.lvlx",
+	"intro_SMBX1.2.lvlx",
+	"intro_SMBX1.3.lvlx",
+	"intro_SMBX1.3og.lvlx",
+	"intro_SMBX2.lvlx",
+	"intro_SMBX2b3.lvlx",
+	"intro_sunsetbeach.lvlx",
+	"intro_WSMBA.lvlx"
+}
+
+GameData.rushlevelsrng = {
+	"SMB1 - W-1, L-1.lvlx",
+	"SMB1 - W-1, L-2.lvlx",
+	"SMB1 - W-1, L-3.lvlx",
+	"SMB1 - W-1, L-4.lvlx",
+	"SMB1 - W-2, L-1.lvlx",
+	"SMB1 - W-2, L-2.lvlx",
+	"SMB1 - W-2, L-3.lvlx",
+	"SMB1 - W-2, L-4.lvlx",
+	"SMB1 - W-3, L-1.lvlx",
+	"SMB1 - W-3, L-2.lvlx",
+	"SMB1 - W-3, L-3.lvlx",
+	"SMB1 - W-3, L-4.lvlx",
+	"SMB1 - W-4, L-1.lvlx",
+	"SMB1 - W-4, L-2.lvlx",
+	"SMB1 - W-4, L-3.lvlx",
+	"SMB1 - W-4, L-4.lvlx",
+	"SMB1 - W-5, L-1.lvlx",
+	"SMB1 - W-5, L-2.lvlx",
+	"SMB1 - W-5, L-3.lvlx",
+	"SMB1 - W-5, L-4.lvlx",
+	"SMB1 - W-6, L-1.lvlx",
+	"SMB1 - W-6, L-2.lvlx",
+	"SMB1 - W-6, L-3.lvlx",
+	"SMB1 - W-6, L-4.lvlx",
+	"SMB1 - W-7, L-1.lvlx",
+	"SMB1 - W-7, L-2.lvlx",
+	"SMB1 - W-7, L-3.lvlx",
+	"SMB1 - W-7, L-4.lvlx",
+	"SMB1 - W-8, L-1.lvlx",
+	"SMB1 - W-8, L-2.lvlx",
+	"SMB1 - W-8, L-3.lvlx",
+	"SMB1 - W-8, L-4.lvlx",
+	"SMB1 - W-9, L-1.lvlx",
+	"SMB1 - W-9, L-2.lvlx",
+	"SMB1 - W-9, L-3.lvlx",
+	"SMB1 - W-9, L-4.lvlx",
+	"SMB2 - W-1, L-1.lvlx",
+	"SMB2 - W-1, L-2.lvlx",
+	"SMB2 - W-1, L-3.lvlx",
+	"SMB2 - W-2, L-1.lvlx",
+	"SMB2 - W-2, L-2.lvlx",
+	"SMB2 - W-2, L-3.lvlx",
+	"SMB2 - W-3, L-1.lvlx",
+	"SMB2 - W-3, L-2.lvlx",
+	"SMB2 - W-3, L-3.lvlx",
+	"SMB2 - W-4, L-1.lvlx",
+	"SMB2 - W-4, L-2.lvlx",
+	"SMB2 - W-4, L-3.lvlx",
+	"SMB2 - W-5, L-1.lvlx",
+	"SMB2 - W-5, L-2.lvlx",
+	"SMB2 - W-5, L-3.lvlx",
+	"SMB2 - W-6, L-1.lvlx",
+	"SMB2 - W-6, L-2.lvlx",
+	"SMB2 - W-6, L-3.lvlx",
+	"SMB2 - W-7, L-1.lvlx",
+	"SMB2 - W-7, L-2.lvlx"
+}
+
 --Now that everything has been loaded, start loading the medium important stuff
 local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 local repll = require("repll") --Custom sound command line, for testing in the editor
@@ -518,6 +602,9 @@ end
 
 function onTick() --This will prevent split screen, again (Just in case)
 	mem(0x00B25130,FIELD_WORD, 2)
+	if SaveData.disableX2char == false then
+		mem(0x00B2C5AC,FIELD_FLOAT,99)
+	end
 	if table.icontains(GameData.friendlyplaces,Level.filename()) == true then
 		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end

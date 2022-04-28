@@ -11,6 +11,7 @@ local cooldown = 0
 local timer = 50
 local timer2 = 5
 local p = player
+local hasJumped = false
 
 local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKI}
 
@@ -170,34 +171,13 @@ function costume.onTick(repeated)
 				timer2 = 5
 			end
 		end
-		if player:isGroundTouching() == false or player:mem(0x36, FIELD_BOOL, true) then
-			if player.keys.jump == KEYS_PRESSED then
-				Audio.sounds[1].muted = true
-				if table.icontains(GameData.nolevelplaces,Level.filename()) == false and jumpingactive == false then
-					playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
-				end
-				Defines.cheat_ahippinandahoppin = true
-				jumpingactive = true
-			end
-		end
-		if player:isGroundTouching() == true or player:isClimbing() == true then
-			Defines.cheat_ahippinandahoppin = false
-			jumpingactive = false
-			timer = 50
-		end
-		if jumpingactive then
-			timer = timer - 5
-			if timer <= 0 then
-				Audio.sounds[1].muted = false
-				if player.keys.jump == KEYS_PRESSED then
-					Defines.cheat_ahippinandahoppin = false
-					player:mem(0x11E, FIELD_BOOL, false)
-					cooldown = 5
-					timer = 50
-					if cooldown <= 0 then
-						player:mem(0x11E, FIELD_BOOL, true)
-					end
-				end
+		if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasfunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
+			hasJumped = false
+		elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not isPlayerUnderwater() then
+			hasJumped = true
+			player:mem(0x11C, FIELD_WORD, 20)
+			if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
+				playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
 			end
 		end
 	end

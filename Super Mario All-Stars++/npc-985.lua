@@ -229,26 +229,34 @@ function roulettestar.onDraw()
 	end
 end
 
+function roulettestar.onNPCKill(eventToken, v)
+	for _,p in ipairs(Player.get()) do
+		if Colliders.collide(p, v) then
+			if v.frame == 1 then
+				SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
+				Misc.givePoints(6, vector(player.x, player.y))
+			elseif v.frame == 2 then
+				SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
+				Misc.givePoints(8, vector(player.x, player.y))
+			elseif v.frame == 3 then
+				Misc.givePoints(10, vector(player.x, player.y))
+				playSound(15)
+			end
+		end
+	end
+end
+
 function roulettestar.onPostNPCKill(v,reason)
 	if roulettestar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
 		Routine.run(starget)
 		collectactive = true
-		if not table.icontains(SaveData.completeLevels,Level.filename()) then
-			SaveData.totalStarCount = SaveData.totalStarCount + 1
-			table.insert(SaveData.completeLevels,Level.filename())
-		elseif table.icontains(SaveData.completeLevels,Level.filename()) then
-			SaveData.totalStarCount = SaveData.totalStarCount
-		end
-		if v.frame == 1 then
-			SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
-			Misc.givePoints(6, vector(player.x, player.y))
-		elseif v.frame == 2 then
-			SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
-			Misc.givePoints(8, vector(player.x, player.y))
-		elseif v.frame == 3 then
-			SaveData.totalLives = SaveData.totalLives + 1
-			Misc.givePoints(10, vector(player.x, player.y))
-			playSound(15)
+		if GameData.rushModeActive == false or GameData.rushModeActive == nil then
+			if not table.icontains(SaveData.completeLevels,Level.filename()) then
+				SaveData.totalStarCount = SaveData.totalStarCount + 1
+				table.insert(SaveData.completeLevels,Level.filename())
+			elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+				SaveData.totalStarCount = SaveData.totalStarCount
+			end
 		end
 	end
 end
@@ -310,6 +318,7 @@ function roulettestar.onInitAPI()
 	registerEvent(roulettestar,"onPlayerHarm")
 	registerEvent(roulettestar,"onPlayerKill")
 	registerEvent(roulettestar,"onInputUpdate")
+	registerEvent(roulettestar,"onNPCKill")
 	registerEvent(roulettestar,"onPostNPCKill")
 	registerEvent(roulettestar,"onDraw")
 	registerEvent(roulettestar,"onExit")

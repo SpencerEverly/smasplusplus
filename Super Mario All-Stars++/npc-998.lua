@@ -107,11 +107,13 @@ function customNPC.onTickNPC(v)
         if data.tick > 65 * 2 then
             data.tick = 0
             data.state = 2
-			if not table.icontains(SaveData.completeLevels,Level.filename()) then
-				SaveData.totalStarCount = SaveData.totalStarCount + 1
-				table.insert(SaveData.completeLevels,Level.filename())
-			elseif table.icontains(SaveData.completeLevels,Level.filename()) then
-				SaveData.totalStarCount = SaveData.totalStarCount
+			if GameData.rushModeActive == false or GameData.rushModeActive == nil then
+				if not table.icontains(SaveData.completeLevels,Level.filename()) then
+					SaveData.totalStarCount = SaveData.totalStarCount + 1
+					table.insert(SaveData.completeLevels,Level.filename())
+				elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+					SaveData.totalStarCount = SaveData.totalStarCount
+				end
 			end
             SFX.play(52)
         end

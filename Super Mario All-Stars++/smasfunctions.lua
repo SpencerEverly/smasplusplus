@@ -67,12 +67,16 @@
 --boot)
 --_ osLeapYear(year): Lists if the year has a leap day during the year.
 --
---MISC THINGS
+--PLAYER FUNCTIONS
 --_ betterPlayer(player ID, function(plr) plr(.:)anything end): A better way to run
 --functions with the player without the fangled 'if Player(2) and Player(2).isValid'
 --mess. Useful for running commands on things like all players (-1), or just one of
 --them.
 --_ isAnyPlayerAlive(): Returns if any player is still alive.
+--_ isPlayerUnderwater(): Returns true if the first player is underwater.
+--_ isPlayerGrabbing(): Returns true if the first player is grabbing something.
+--
+--MISC FUNCTIONS
 --_ getEpisodeFilename(): Gets the episode filename for the episode. If under the
 --editor, it'll return 'Editor Mode' instead.
 --_ isExtraSoundsActive(): Checks to see if extrasounds is turned on.
@@ -481,9 +485,9 @@ for i = startD, endD do
 	if osLeapYear(i) then years[#years + 1] = i end
 end
 
--------------------
---Misc. functions
--------------------
+--------------------
+--Player functions
+--------------------
 
 function betterPlayer(index, func) --Better player/player2 detection, for simplifying mem functions, or detecting either player for any code-related function. Example: betterPlayer(1, function(plr) plr:kill() end)
 	if index == nil then
@@ -518,6 +522,22 @@ function isAnyPlayerAlive() --Returns if any player is still alive.
 		return false
 	end
 end
+
+function isPlayerUnderwater() --Returns true if the first player is underwater.
+	return player:mem(0x36, FIELD_BOOL)
+end
+
+function isPlayerGrabbing() --Returns true if the first player is grabbing something.
+	if player:mem(0x26, FIELD_WORD) >= 1 then
+		return true
+	elseif player:mem(0x26, FIELD_WORD) == 0 then
+		return false
+	end
+end
+
+-------------------
+--Misc. functions
+-------------------
 
 function getEpisodeFilename() --Gets the episode filename. If in editor made, it just returns it's in the Editor. Thanks KBM_Quine!
 	if not Misc.inEditor then

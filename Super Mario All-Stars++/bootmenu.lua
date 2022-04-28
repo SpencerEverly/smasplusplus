@@ -92,6 +92,8 @@ local exacttime = os.date("%X")
 local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl"}
 local selecter = rng.randomInt(1,#battlelevelsrng)
 
+local selecter2 = rng.randomInt(1,#GameData.rushlevelsrng)
+
 local function introExit()
 	GameData.menucomplete = true
 	autoscroll.scrollLeft(5000)
@@ -242,6 +244,19 @@ local function Battle12()
 	Misc.saveGame()
 	Level.load("battle_testlevel.lvlx", nil, nil)
 end
+
+
+
+local function startRushMode()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.rushModeActive = true
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load(GameData.rushlevelsrng[selecter2], nil, nil)
+end
+
 
 
 local function theme1()
@@ -579,7 +594,7 @@ local function gamebootDialogue()
 end
 
 local function battleModeDialogue()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.5><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
 local function optionsMenu1()
@@ -715,6 +730,15 @@ local function BattleModeDisEnable1()
 		end
 	elseif SaveData.disableX2char == false then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to turn on 1.3 Mode to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+	end
+end
+
+local function RushModeMenu1()
+	if Player.count() == 1 then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>It looks like you can use Rush Mode!<page>Would you like to start Rush Mode?<question RushModeSelectionOne>", pauses = false, updatesInPause = true})
+	end
+	if Player.count() == 2 then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You'll need to disable 2 player mode before continuing. To disable 2 player mode, head into Settings and select 2 Player Mode.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -1305,16 +1329,14 @@ function bootmenu.onTick()
 			twoplayercheck = active
 			twoplayercheckactive = not active
 		end
-		player:setFrame(50) --Prevent the player from showing up on the boot menu
-		player:mem(0x140, FIELD_BOOL, 150)
-		if player:mem(0x140, FIELD_BOOL) == 0 then
-			player:mem(0x140, FIELD_BOOL, 150) --Make the player invincible, literally
+		betterPlayer(-1, function(plr) plr:setFrame(50) end) --Prevent any player from showing up on the boot menu
+		betterPlayer(-1, function(plr) plr:mem(0x140, FIELD_BOOL, 150) end)
+		if betterPlayer(-1, function(plr) plr:mem(0x140, FIELD_BOOL) end) == 0 then
+			betterPlayer(-1, function(plr) plr:mem(0x140, FIELD_BOOL, 150) end)
 		end
 		player.x = camera.x + 450 - (player.width / 2) --Force the player somewhere to prevent deaths
 		player.y = camera.y - 1 - (player.height / 2)
-		if Player(2) and Player(2).isValid then --Do these things or Player(2)
-			player2:setFrame(50)
-			player2:mem(0x142, FIELD_BOOL, true)
+		if Player(2) and Player(2).isValid then --Do these things on Player(2)
 			twoplayercheck = not active
 			twoplayercheckactive = active
 			player2.x = camera.x + 432 - (player2.width / 2)
@@ -1855,6 +1877,7 @@ if bootmenu.active == true then
 	
 	littleDialogue.registerAnswer("BattleSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 	littleDialogue.registerAnswer("BattleSelect",{text = "Classic Battle Mode (2P)",chosenFunction = function() Routine.run(BattleModeDisEnable1) end})
+	littleDialogue.registerAnswer("BattleSelect",{text = "Rush Mode (1P)",chosenFunction = function() Routine.run(RushModeMenu1) end})
 
 
 	littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
@@ -2024,12 +2047,21 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("X2CharacterDisableOne",{text = "Yes", chosenFunction = function() Routine.run(X2Char) end})
 
 
+
+
 	littleDialogue.registerAnswer("BattleTwoPlayerCheckOne",{text = "Yes",chosenFunction = function() Routine.run(TwoPlayerCheckBattle) end})
 	littleDialogue.registerAnswer("BattleTwoPlayerCheckOne",{text = "No",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 	
 	
+	
+	
 	littleDialogue.registerAnswer("BattleTwoPlayerCheckTwo",{text = "Yes",chosenFunction = function() Routine.run(classicBattleSelect) end})
 	littleDialogue.registerAnswer("BattleTwoPlayerCheckTwo",{text = "No",chosenFunction = function() Routine.run(ExitClassicBattle) end})
+	
+	
+	
+	littleDialogue.registerAnswer("RushModeSelectionOne",{text = "Yes",chosenFunction = function() Routine.run(startRushMode) end})
+	littleDialogue.registerAnswer("RushModeSelectionOne",{text = "No",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
 

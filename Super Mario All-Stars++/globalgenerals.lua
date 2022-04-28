@@ -17,6 +17,10 @@ local yoshi = require("yiYoshi/yiYoshi")
 local inventory = require("customInventory")
 local smasacecoins = require("smasacecoins")
 
+if GameData.rushModeActive == true then
+	level_dependencies_rushmode = require("level_dependencies_rushmode")
+end
+
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
@@ -42,7 +46,7 @@ customCamera.transitionSpeed = 5
 
 SaveData._anothercurrency = {SaveData.totalcoins}
 
-if (Level.filename() == "SMAS - Start.lvlx") == true or (Level.filename() == "SMAS - Intro.lvlx") == true or (Level.filename() == "SMAS - Game Over.lvlx") == true or (Level.filename() == "SMAS - Map.lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 0).lvlx") == true or (Level.filename() == "SMAS - Raca's World (Part 1).lvlx") == true or (Level.filename() == "intro_8bit.lvlx") == true or (Level.filename() == "intro_bossedit8.lvlx") == true or (Level.filename() == "intro_jakebrito1.lvlx") == true or (Level.filename() == "intro_marioforever.lvlx") == true or (Level.filename() == "intro_S!TS!.lvlx") == true or (Level.filename() == "intro_scrollingheights.lvlx") == true or (Level.filename() == "intro_SMAS.lvlx") == true or (Level.filename() == "intro_SMBX1.0.lvlx") == true or (Level.filename() == "intro_SMBX1.1.lvlx") == true or (Level.filename() == "intro_SMBX1.2.lvlx") == true or (Level.filename() == "intro_SMBX1.3.lvlx") == true or (Level.filename() == "intro_SMBX1.3og.lvlx") == true or (Level.filename() == "intro_SMBX2.lvlx") == true or (Level.filename() == "intro_SMBX2b3.lvlx") == true or (Level.filename() == "intro_sunsetbeach.lvlx") == true or (Level.filename() == "intro_WSMBA.lvlx") == true or (Level.filename() == "intro_jakebrito2.lvlx") == true then
+if table.icontains(GameData.notransitionlevels,Level.filename()) or GameData.rushModeActive == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -1482,6 +1486,9 @@ function globalgenerals.onExit()
 		SaveData.lastLevelPlayed = Level.filename()
 	end
 	writeToFile("loadscreeninfo.txt", SaveData.resolution)
+	if GameData.rushModeActive == true then
+		
+	end
 end
 
 return globalgenerals
