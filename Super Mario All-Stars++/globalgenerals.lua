@@ -877,6 +877,14 @@ function globalgenerals.onTick()
 		starman.duration[994] = 769
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
+	if currentCostume == "LEGOSTARWARS-REBELTROOPER" then
+		littleDialogue.characterNames[4] = "Rebel Trooper"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
+		warpTransition.doorclose = ("sound/door-close.ogg")
+	end
 	if currentCostume == "MOTHERBRAINRINKA" then
 		littleDialogue.characterNames[4] = "Mother Brain Rinka"
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")

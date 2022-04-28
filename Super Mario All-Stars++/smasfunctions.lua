@@ -1,9 +1,114 @@
+--smasfunctions.lua
+--v1.0
+--These are simplified functions useful for doing certain commands that don't rely
+--on so much code. Below are the functions and what they do.
+
+--FILE LOADING/IMAGES
+--_ loadFile('path/to/file.extension'): Loads a file from any of the common directories, plus
+--the common SMAS directories as well.
+--_ loadImg('path/to/file.extension'): Loads an image from any of the common directories, plus
+--the common SMAS directories as well.
+--_ function drawImg('path/to/file.extension', x, y, withPriority, sceneCoords, priority,
+--opacity): Draws an image using a simplified function.
+--
+--MUSIC/SOUNDS
+--_ openSound('path/to/file.extension'): Opens a sound for reading.
+--_ playSound('path/to/file.extension'): Plays a sound. This library is compatible with
+--extrasounds (Enter extrasoundsHelp() for more info).
+--_ loadSound('path/to/file.extension'): Alternative to playSound, except without
+--extrasounds support.
+--_ changeMusic('path/to/file.extension', section ID): Changes the music to a
+--specified path. If using -1 as the section ID, all sections will be counted.
+--_ muteMusic(section ID): Mute the music to a specified section. The music before
+--changing will be temporarily stored. If using -1 as the section ID, all sections
+--will be counted.
+--_ restoreMusic(section ID): Restores the music to a specified section. The music after
+--changing using muteMusic will be restored. If using -1 as the section ID, all sections
+--will be counted. (Don't run this before using muteMusic())
+--_ refreshMusic(section ID): Refreshes the currently changed music by putting the new
+--music into the temporary table. If using -1 as the section ID, all sections
+--will be counted.
+--_ restoreOriginalMusic(section ID): Restores the original music from the unmodifiable
+--level music which gets stored when onStart is called. If using -1 as the section ID,
+--all sections will be counted.
+--
+--GAME/FILE MANAGEMENT
+--_ writeToFile('path/to/file.extension', 'text'): Write to a file using io. This will
+--overwrite everything with the text specified, so BE CAREFUL!
+--_ addToFile('path/to/file.extension', 'text'): Add to a file using io. This won't
+--overwrite everything, just adds something to the file, so this one is fine.
+--_ lifeCount(): Returns the SMAS++ life count.
+--_ manageLives(lives, true/false): Manages the lives. If true, it'll add the lives. If false, it'll
+--subtract the lives.
+--_ maxOutLives(): Maxes out lives to 999.
+--_ resetLives(): Resets the lives back to the default value (5).
+--_ deathCount(): Returns the SMAS++ death count.
+--_ maxOutDeathCount(): Maxes out death count to 999.
+--_ resetDeathCount(): Resets the death count back to the default value (0).
+--_ starCount(): Returns the SMAS++ star count.
+--_ maxOutStars(): Maxes out the star count to 9999
+--_ clearAllStars(): This clears all the stars, and even the level table
+--_ manageStars(number of stars, add/subtract): Manages the star count. 'add' will add,
+--'subtract' will subtract the stars.
+--
+--DATE/TIME
+--_ osDay(): Lists the day.
+--_ osMonth(): Lists the month.
+--_ osYear(): Lists the year.
+--_ osHour(): Lists the hour.
+--_ osMinute(): Lists the minute.
+--_ osSecond(): Lists the second.
+--_ osTomorrow(): Lists the day after today.
+--_ osYesterday(): Lists the day before today.
+--_ osDayJulian(): Converts the Gregorian Day to Julian.
+--_ osJulianNumber(): Lists the number of the real Julian Time.
+--_ osEaster(year): Lists when Easter Sunday is on the specified year. The date will
+--be saved into SaveData (This automatically runs with the real year every level
+--boot)
+--_ osLeapYear(year): Lists if the year has a leap day during the year.
+--
+--MISC THINGS
+--_ betterPlayer(player ID, function(plr) plr(.:)anything end): A better way to run
+--functions with the player without the fangled 'if Player(2) and Player(2).isValid'
+--mess. Useful for running commands on things like all players (-1), or just one of
+--them.
+--_ isAnyPlayerAlive(): Returns if any player is still alive.
+--_ getEpisodeFilename(): Gets the episode filename for the episode. If under the
+--editor, it'll return 'Editor Mode' instead.
+--_ isExtraSoundsActive(): Checks to see if extrasounds is turned on.
+--_ listUserFiles(path): Lists the files in the main modifiable user directory.
+--_ toggleWindowOnly(): This, when fullscreen, will only toggle a window instead of
+--being in fullscreen. Toggle again to turn off.
+--_ doPSwitchUntimed(bool): This will turn on the P-Switch, without a timer.
+--_ rngTrueValue(argument): RNGs a random value, truly.
+--_ loadSaveSlot(slot): Loads any save slot.
+--_ saveSaveSlot(slot): Saves a specified save slot.
+--_ moveSaveSlot(slot, destination): This moves a save slot to another save slot.
+--Highest you can go is 32767.
+--_ eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot tool.
+--This will reset your save data, but without clearing SaveData/GameData.
+
 local smasfunctions = {}
 
 local extrasounds = require("extrasounds")
 local serializer = require("ext/serializer")
 
-local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD)
+--This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.
+_G.Player = Player
+_G.player = Player(1)
+if (_G.player2 ~= nil) or (_G.player3 ~= nil) or (_G.player4 ~= nil) or (_G.player5 ~= nil) or (_G.player6 ~= nil) or (_G.player7 ~= nil) or (_G.player8 ~= nil) or (Player.count() > 1) then
+	_G.player2 = Player(2)
+	_G.player3 = Player(3)
+	_G.player4 = Player(4)
+	_G.player5 = Player(5)
+	_G.player6 = Player(6)
+	_G.player7 = Player(7)
+	_G.player8 = Player(8)
+end
+
+-----------------------
+--File Loading/Images
+-----------------------
 
 function loadFile(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
 	return Misc.resolveFile(name)
@@ -333,6 +438,14 @@ function osSecond()
 	return os.date("*t").sec
 end
 
+function osTomorrow()
+	return SaveData.dateplayedtomorrow
+end
+
+function osYesterday()
+	return SaveData.dateplayedyesterday
+end
+
 function osDayJulian() --Converts Gregorian day to the Julian day.
 	return (os.date("*t").day - 13)
 end
@@ -372,32 +485,41 @@ end
 --Misc. functions
 -------------------
 
-function betterPlayer(playerid) --Better player/player2 detection, for simplifying mem functions, or detecting either player for any code-related function
-	for _, p in ipairs(Player.get()) do
-		if playerid == nil then
-			playerid = 1
+function betterPlayer(index, func) --Better player/player2 detection, for simplifying mem functions, or detecting either player for any code-related function. Example: betterPlayer(1, function(plr) plr:kill() end)
+	if index == nil then
+		index = 1
+	end
+	if index == -1 then
+		for i = 1,8 do
+			if Player(i) and Player(i).isValid then
+				func(Player(i))
+			end
 		end
-		if playerid == 1 then
-			if Player(1) then
-				p = Player(1)
-			end
-		elseif playerid == 2 then
-			if Player(2) and Player(2).isValid then
-				p = Player(2)
-			end
-		elseif playerid == 3 then
-			if Player(3) and Player(3).isValid then --Extra Player functions for an online multiplayer feature... coming whenever it works
-				p = Player(3)
-			end
-		elseif playerid == 4 then
-			if Player(4) and Player(4).isValid then
-				p = Player(4)
-			end
+	else
+		local plr = Player(index)
+		if plr and plr.isValid then
+			func(plr)
 		end
 	end
 end
 
-function getEpisodeFilename() --Thanks KBM_Quine!
+function checkLivingIndex() --Code to check the isAnyPlayerAlive() code.
+	for k,p in ipairs(Player.get()) do
+		if p.deathTimer == 0 and p:mem(0x13C, FIELD_BOOL) == false then
+			return p.idx
+		end
+	end
+end
+
+function isAnyPlayerAlive() --Returns if any player is still alive.
+	if checkLivingIndex() ~= nil then
+		return true
+	else
+		return false
+	end
+end
+
+function getEpisodeFilename() --Gets the episode filename. If in editor made, it just returns it's in the Editor. Thanks KBM_Quine!
 	if not Misc.inEditor then
 		local episodeFiles = Misc.listFiles(Misc.episodePath())
 		local worldFile

@@ -1300,6 +1300,11 @@ function bootmenu.onTick()
 			GameData.musreset = false
 		end
 		Graphics.activateHud(false)
+		littleDialogue.defaultStyleName = "bootmenudialog" --Change the text box to the SMBX 1.3 menu textbox format
+		if Player.count() == 1 then
+			twoplayercheck = active
+			twoplayercheckactive = not active
+		end
 		player:setFrame(50) --Prevent the player from showing up on the boot menu
 		player:mem(0x140, FIELD_BOOL, 150)
 		if player:mem(0x140, FIELD_BOOL) == 0 then
@@ -1307,11 +1312,6 @@ function bootmenu.onTick()
 		end
 		player.x = camera.x + 450 - (player.width / 2) --Force the player somewhere to prevent deaths
 		player.y = camera.y - 1 - (player.height / 2)
-		littleDialogue.defaultStyleName = "bootmenudialog" --Change the text box to the SMBX 1.3 menu textbox format
-		if Player.count() == 1 then
-			twoplayercheck = active
-			twoplayercheckactive = not active
-		end
 		if Player(2) and Player(2).isValid then --Do these things or Player(2)
 			player2:setFrame(50)
 			player2:mem(0x142, FIELD_BOOL, true)

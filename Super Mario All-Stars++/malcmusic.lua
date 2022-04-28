@@ -2150,7 +2150,7 @@ function malcmusic.onTick()
 			Section(12).musicPath = "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg"
 			Section(13).musicPath = "_OST/Hamtaro - Ham Ham Heartbreak/Main Theme.ogg"
 		end
-		if currentCostume == "LEGOSTARWARS" and malcmusic.holiday == false then
+		if currentCostume == "LEGOSTARWARS-REBELTROOPER" and malcmusic.holiday == false then
 			Section(1).musicPath = "_OST/LEGO Star Wars II - The Original Trilogy (GBA)/Mos Cantine.ogg"
 			Section(2).musicPath = "_OST/LEGO Star Wars II - The Original Trilogy (GBA)/Mos Cantine.ogg"
 			Section(3).musicPath = "_OST/LEGO Star Wars II - The Original Trilogy (GBA)/Mos Cantine.ogg"

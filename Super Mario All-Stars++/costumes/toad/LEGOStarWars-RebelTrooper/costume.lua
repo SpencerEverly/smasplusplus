@@ -18,6 +18,10 @@ function costume.onInit(p)
 	registerEvent(costume,"onPlayerKill")
 	registerEvent(costume,"onInputUpdate")
 	
+	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/toad/LEGOStarWars-RebelTrooper/player-jump.ogg")
+	
+	Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/toad/LEGOStarWars-RebelTrooper/laser.png")
+	
 	Defines.jumpheight = 22
 	Defines.player_walkspeed = 3.4
 	Defines.player_runspeed = 4.7
@@ -54,7 +58,7 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
 end
 
 function costume.shootLaser1()
-	--plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
+	plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
 	local x = plr.x
 	local y = plr.y + plr.height/2 - 5
 	if (plr.direction == 1) then
@@ -62,7 +66,7 @@ function costume.shootLaser1()
 	end
 	local gunid = 266
 	local gunNpc = NPC.spawn(gunid, x, y, player.section, false, true)
-	playSound("toad/LEGOStarWars/blaster.ogg")
+	playSound("toad/LEGOStarWars-RebelTrooper/blaster.ogg")
 	costume.useLaser1 = true
 	gunNpc.frames = 1
 	if (plr.direction == 1) then
@@ -75,7 +79,7 @@ function costume.shootLaser1()
 	costume.useLaser1 = false
 	cooldown = 10
 	if cooldown <= 0 then
-		--plr:mem(0x172, FIELD_BOOL, true)
+		plr:mem(0x172, FIELD_BOOL, true)
 	end
 end
 
@@ -240,6 +244,8 @@ function costume.onCleanup(p)
 	extrasounds.id[110] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo5.ogg")) --Shell hit 6
 	extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
 	extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
+	
+	Graphics.sprites.npc[266].img = nil
 	
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 3
