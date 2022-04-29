@@ -13,7 +13,7 @@ end
 local HOME_ADDR = '192.168.0.1'
 local SUBNET_PATTERN = '%d+%.%d+%.%d+%.'
 
-local function get_own_address()
+function get_own_address()
   local s = assert(socket.udp())
   assert(s:setpeername(HOME_ADDR, 80))
   local host = s:getsockname()
