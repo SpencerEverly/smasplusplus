@@ -429,14 +429,13 @@ do
 	
 	function repll.onDraw()
 		if not repll.active then
+			GameData.toggleoffkeys = false
+			GameData.toggleoffinventory = false
 			return
 		end
 		if repll.active then
 			GameData.toggleoffkeys = true
 			GameData.toggleoffinventory = true
-		else
-			GameData.toggleoffkeys = false
-			GameData.toggleoffinventory = false
 		end
 		if not isOverworld then
 			Graphics.drawScreen({color = repll.background, priority = -1})
