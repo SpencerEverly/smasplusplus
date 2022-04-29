@@ -6,7 +6,9 @@ local title = Graphics.loadImage("title-final-2x.png")
 if SMBX_VERSION == VER_BETA4_PATCH_4_1_SMAS then
 	local wifiaccess = require("wifiaccess")
 end
+--require("scripts/ext/wifi/socket")
 
+local exitwordswip = false
 
 mleb.addShaderSection(0, {
         texture = bg_example,
@@ -70,7 +72,7 @@ local function ExitToBootMenu()
 end
 
 local function ExitMenu()
-	
+	exitwordswip = true
 end
 
 function NotFinished()
@@ -82,7 +84,7 @@ function onlineBegin()
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Welcome to the world of online multiplayer.<page>This is the place to host and connect to other 2 player sessions, and experience the game like never before!<page>Please note that this place is under testing, and things won't be done as of yet.<page>When you see an loading icon, it is connecting to the Internet. Please don't close the game during that sequence.<page>With that being said, welcome to Online Multiplayer.<question StartConnecting>", pauses = false, updatesInPause = true})
 	elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
 		Audio.MusicChange(0, 0)
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>Whoops! It looks like you're using the original LunaLua. Please use the Online Mod to make online multiplayer work. You can get it here: https://github.com/SpencerEverly/smbx2-onlinemod<question QuitToMenuError>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>Whoops! It looks like you're using the original LunaLua. Please use the SEE Mod to make online multiplayer work. You can get it here: https://github.com/SpencerEverly/smbx2-seemod<question QuitToMenuError2>", pauses = false, updatesInPause = true})
 	end
 end
 	
@@ -176,6 +178,15 @@ function onDraw()
 	if exitscreen then
 		Graphics.drawScreen{color = Color.black, priority = 10}
 	end
+	if exitwordswip then
+		Text.printWP("To exit, press PAGE DOWN.", 200, 200, -1)
+	end
+end
+
+function onKeyboardPress(k)
+	if k == VK_NEXT then
+		Routine.run(ExitToBootMenu)
+	end
 end
 
 function onExit()
@@ -183,6 +194,8 @@ function onExit()
 	Defines.cheat_shadowmario = false
 end
 
-littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitToBootMenu) end})
+littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitMenu) end})
+
+littleDialogue.registerAnswer("QuitToMenuError2",{text = "Exit",chosenFunction = function() Routine.run(ExitToBootMenu) end})
 
 littleDialogue.registerAnswer("StartConnecting",{text = "Let's get started!",chosenFunction = function() Routine.run(NotFinished) end})
