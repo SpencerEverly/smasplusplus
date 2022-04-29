@@ -4668,8 +4668,8 @@ function yoshi.initCharacter()
 
     Audio.sounds[1].sfx  = yoshi.generalSettings.jumpSound
     Audio.sounds[5].sfx  = yoshi.generalSettings.hurtSound
-    Audio.sounds[8].sfx  = yoshi.generalSettings.deathSound
-    Audio.sounds[14].sfx = yoshi.generalSettings.coinSound
+    extrasounds.id[8]  = yoshi.generalSettings.deathSound
+    extrasounds.id[14] = yoshi.generalSettings.coinSound
 
     if yoshi.customExitSettings.passOnEnabled[LEVEL_END_STATE_ROULETTE] then
         Audio.sounds[19].sfx = yoshi.customExitSettings.passOnMusic
