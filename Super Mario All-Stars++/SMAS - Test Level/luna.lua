@@ -11,6 +11,9 @@ local comboSounds = require("comboSounds")
 littleDialogue.defaultStyleName = "smbx13"
 
 function onStart()
+	if SMBX_VERSION == VER_BETA4_PATCH_4_1_SMAS then
+		
+	end
 	if SaveData.disableX2char == false then
 		undertaledepends = require("level_dependencies_undertale")
 		warpTransition = require("warpTransition")

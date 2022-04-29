@@ -93,7 +93,9 @@ end
 
 -- retrieve the answer and print results
 function wifihoster.onDraw()
-	--Text.print(, 100, 100)
+	--for address, response in pairs(antiphony()) do 
+		--Text.printWP(address..response, 100, 100, -3) 
+	--end
 end
 
 return wifihoster
