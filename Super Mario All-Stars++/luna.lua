@@ -362,6 +362,21 @@ end
 if SaveData.completeLevels == nil then --This will add a table to list completed levels
 	SaveData.completeLevels = {}
 end
+if SaveData.totalcoins == nil then
+	SaveData.totalcoins = 0
+end
+if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
+	SaveData.deathCount = 0
+end
+if SaveData.totalLives == nil then --The total lives used the for the episode.
+	SaveData.totalLives = 5
+end
+if SaveData.totalCoinsClassic == nil then
+	SaveData.totalCoinsClassic = 0
+end
+if SaveData.totalScoreClassic == nil then
+	SaveData.totalScoreClassic = 0
+end
 if SaveData.deathquickoption == true then
 	SaveData.deathquickoption = false
 end
@@ -602,11 +617,13 @@ end
 
 function onTick() --This will prevent split screen, again (Just in case)
 	mem(0x00B25130,FIELD_WORD, 2)
-	if SaveData.disableX2char == false then
-		mem(0x00B2C5AC,FIELD_FLOAT,99)
+	if SaveData.disableX2char == false then --Let's not get game overs/broken launcher kicking during Normal Mode.
+		if mem(0x00B2C5AC,FIELD_FLOAT) < 2 then
+			mem(0x00B2C5AC,FIELD_FLOAT,3)
+		end
 	end
 	if table.icontains(GameData.friendlyplaces,Level.filename()) == true then
-		GameData.friendlyArea = true --Set this to prevent Princess Rinka from getting killed in places such as the boot screen, intro, or the Hub
+		GameData.friendlyArea = true --Set this to prevent Mother Brain Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end
 	--Now we'll overhaul the door star required system
 	if warpstaractive == true then
@@ -617,7 +634,6 @@ function onTick() --This will prevent split screen, again (Just in case)
 				warp.starsRequired = 0
 			elseif warp.starsRequired > SaveData.totalStarCount then
 				--warp.starsRequired = 9999 --This has been uncommented because the original star count is 0 regardless, which means don't bump up the required stars
-				
 			end
 			--if mem(0x00B251E0, FIELD_WORD) >= 1 then
 				--mem(0x00B251E0, FIELD_WORD, 0)

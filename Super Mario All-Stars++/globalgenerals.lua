@@ -377,9 +377,6 @@ function globalgenerals.onTick()
 	if SaveData.starsgrabbed == nil then
         SaveData.starsgrabbed = SaveData.starsgrabbed or 0
     end
-	if SaveData.totalcoins == nil then
-        SaveData.totalcoins = SaveData.totalcoins or 0
-    end
 	if SaveData.totalmushrooms == nil then
         SaveData.totalmushrooms = SaveData.totalmushrooms or 0
     end
