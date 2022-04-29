@@ -3,6 +3,7 @@ TL:"Super Mario All-Stars++\: World Map";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-191200;T:-201216;B:-195168;MZ:0;MF:"";BG:0;
+SC:15;L:100000;R:100800;T:99400;B:100000;MZ:0;MF:"";BG:0;
 SC:18;L:160000;R:160800;T:159400;B:160000;MZ:0;MF:"";BG:0;
 SECTION_END
 BLOCK
@@ -452,6 +453,7 @@ ID:848;X:-193968;Y:-200800;W:32;H:64;
 ID:842;X:-194064;Y:-200960;W:32;H:32;
 ID:842;X:-193968;Y:-200960;W:32;H:32;
 ID:832;X:-194048;Y:-201120;W:32;H:32;
+ID:833;X:-193872;Y:-200416;W:32;H:32;
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -502,6 +504,7 @@ ID:770;X:-195872;Y:-200416;
 ID:771;X:-195040;Y:-200480;
 ID:772;X:-194144;Y:-201184;
 ID:773;X:-194240;Y:-200480;
+ID:774;X:-193344;Y:-200512;
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -891,6 +894,22 @@ ID:802;X:-194048;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-5\,
 ID:752;X:-194016;Y:-200288;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL5-3\"\,\n    \"points\"\: \"-32\, 0\, 96\, 0\"\n}\n";
 ID:802;X:-193920;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"5-3\: Try to Beat this Level\"\,\n    \"path_left\"\: \"toSMBLL5-3\"\,\n    \"path_up\"\: \"toSMBLL5-4\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-194144;Y:-200256;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL5-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, -32\"\n}\n";
+ID:752;X:-193920;Y:-200320;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL5-4\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
+ID:849;X:-193920;Y:-200384;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-5\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"5-4\: Castle #5\"\,\n    \"path_down\"\: \"toSMBLL5-4\"\,\n    \"path_up\"\: \"toSMBLLW-5Path1\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-193920;Y:-200416;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-5Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:821;X:-193920;Y:-200448;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-6BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"toSMBLLW-5Path1\"\,\n    \"warpName\"\: \"SMBLLW-5EndWarp\"\n}\n";
+ID:753;X:-193600;Y:-200608;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/World 6.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-193216;Y:-200160;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-5EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"\"\,\n    \"path_up\"\: \"toSMBLL6-1\"\,\n    \"warpName\"\: \"SMBLLW-6BeginWarp\"\n}\n";
+ID:752;X:-193216;Y:-200192;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL6-1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:802;X:-193216;Y:-200224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-6\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"6-1\: Hard Times Await\"\,\n    \"path_down\"\: \"toSMBLL6-1\"\,\n    \"path_up\"\: \"toSMBLL6-2\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-193216;Y:-200256;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL6-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, -64\, -32\"\n}\n";
+ID:802;X:-193280;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-6\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"6-2\: Mmmm\, Dead Water!\"\,\n    \"path_right\"\: \"toSMBLL6-2\"\,\n    \"path_up\"\: \"toSMBLL6-3\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-193280;Y:-200320;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL6-3\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 64\, -32\"\n}\n";
+ID:802;X:-193216;Y:-200352;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-6\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"6-3\: Flying Bridges\"\,\n    \"path_left\"\: \"toSMBLL6-3\"\,\n    \"path_up\"\: \"toSMBLL6-4\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-193216;Y:-200384;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL6-4\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, -64\, -32\"\n}\n";
+ID:849;X:-193280;Y:-200416;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-6\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"6-4\: Castle #6\"\,\n    \"path_right\"\: \"toSMBLL6-4\"\,\n    \"path_up\"\: \"toSMBLLW-6Path1\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:821;X:-193280;Y:-200480;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-7BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 7\"\,\n    \"path_down\"\: \"toSMBLLW-6Path1\"\,\n    \"warpName\"\: \"SMBLLW-6EndWarp\"\n}\n";
+ID:752;X:-193280;Y:-200448;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-6Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
