@@ -198,7 +198,7 @@ function undertaledepends.onTick(k,v)
 		stats.xpDrop(920, 2) --NPCID, reward
 		stats.registerNPC(921, 2, 3, 2) --NPCid, pow, def, xpdrop
 		stats.xpDrop(921, 2) --NPCID, reward
-		if #NPC.get(89) == 0 and #NPC.get(173) == 0 then
+		if #NPC.get(GameData.allBaseGameKillableEnemyIDs) == 0 then
 			Routine.run(delayedMusicChange, killedNPC)
 		end
 	elseif currentCostume then
@@ -220,21 +220,21 @@ function undertaledepends.onDraw()
 	if stats.enabled == true then
 		textplus.print{
 			x = 450,
-			y = 75,
+			y = 95,
 			xscale = 1,
 			yscale = 1,
 			font = fontB,
 			text = "LV: " .. stat.level,
-			priority = 5
+			priority = -4.2
 		}
 		textplus.print{
 			x = 330,
-			y = 99,
+			y = 119,
 			xscale = 1,
 			yscale = 1,
 			font = fontB,
 			text = "EXP: " .. stat.xp,
-			priority = 5
+			priority = -4.2
 		}
 		--textplus.print{
 		  --  x = 0,
@@ -247,22 +247,22 @@ function undertaledepends.onDraw()
 		if stat.hp >= stats.criticalHP then
 			textplus.print{
 				x = 234,
-				y = 75,
+				y = 95,
 				xscale = 1,
 				yscale = 1,
 				font = fontB,
 				text = "HP: " .. stat.hp .. "/" .. stat.maxhp,
-				priority = 5
+				priority = -4.2
 			}
 		else
 			textplus.print{
 				x = 234,
-				y = 75,
+				y = 95,
 				xscale = 1,
 				yscale = 1,
 				font = fontB,
 				text = "HP: " .. stat.hp .."!/" .. stat.maxhp,
-				priority = 5
+				priority = -4.2
 			}
 		end
 	end

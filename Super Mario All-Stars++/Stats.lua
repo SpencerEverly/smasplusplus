@@ -1,13 +1,14 @@
---Stats.lua - Gainus Levelus! This lets you gain experience and level up. Also includes HP and FP.
+--Stats.lua - Gainus Levelus! This lets you gain execution points and level of violence. Also includes HP and FP.
 --COPPYRIT KMAKEVURSE LAL RITES RIZURVURVD DOO NUT DSITRIBUT
 --Should I upload this?
 --These are commented because 1. I don't mind people raiding my episode files and 2. I like talking to myself.
 
 --Comments, Lua pretends these don't exist.
+--Modded for Frisk by Spencer Everly
 
 local colliders = require("colliders") -- We neeed this later
 
---NOTE TO SELF: "stat" is Levels and Experience, "stats" refers to the library itself.
+--NOTE TO SELF: "stat" is LOVE and EXP, "stats" refers to the library itself.
 
 local stats = {} -- API Table. I don't have a clue what this does.
 
@@ -15,9 +16,9 @@ local stats = {} -- API Table. I don't have a clue what this does.
 
 --HP-related
 stats.criticalHP = 5 -- Point from where your HP is considered critically low. If this is the case, stats.LowHP will equal true.
-stats.HPgrowth = 5 -- The HP increase for each levelup. Defaults to 5.
-stats.POWgrowth = 1 -- The POW increase for each levelup. Defaults to 5.
-stats.DEFgrowth = 0 -- The DEF increase for each levelup.
+stats.HPgrowth = 5 -- The HP increase for each LOVE. Defaults to 5.
+stats.POWgrowth = 1 -- The POW increase for each LOVE. Defaults to 5.
+stats.DEFgrowth = 0 -- The DEF increase for each LOVE.
 stats.baseHP = 15 -- Base HP. Added onto by HP growth
 stats.alwaysBig = true -- Prevents you from entering a small state after taking damage. Is a functional component of the damage system, and is recommended to be left as true.
 
@@ -51,7 +52,7 @@ end --Remember, xpDrop goes below xpDrops.
 
 --local fontB = textplus.loadFont("textplus/font/6.ini") -- Used for text rendering
 
---Set up the levelup function
+--Set up the LOVE function
 
 SaveData["episode"] = SaveData["episode"] or {}
 stat = SaveData["episode"] -- Stat cannot be accessed from outside the game
@@ -126,7 +127,7 @@ end
 
 --stats.levelFormula = stat.level * 5 + stat.level -- The formula used for gainXP's level up functionality. Remember to use BIDMAS!
 
-function stats.LevelUp(x) -- LevelUp - This grants a level. Input a minus number to make the player level down. Included for ease of use.
+function stats.levelup(x) -- LOVE - This grants a level. Input a minus number to make the player level down. Included for ease of use.
 	stat.level = stat.level + x
     stat.maxhp = stat.maxhp + stats.HPgrowth
     stat.pow = stat.pow + stats.POWgrowth
@@ -138,12 +139,12 @@ function onLevelUp()
     playSound("frisk_levelup.ogg")
 end
 
-function stats.GainXP(x) -- GainXP - This function grants you experience points.
+function stats.GainXP(x) -- GainXP - This function grants you execution points.
     stat.xp = stat.xp + x
     if stat.xp > stat.level * 5 + stat.level then
         repeat
             stat.xp = stat.xp - (stat.level * 5 + stat.level)
-            stats.LevelUp(1) --Keep going until you haven't got enough experience points
+            stats.levelup(1) --Keep going until you haven't got enough execution points
         until stat.xp < stat.level * 5 + stat.level
     end
 end
