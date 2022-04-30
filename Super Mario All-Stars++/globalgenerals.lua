@@ -62,7 +62,6 @@ if SaveData.disableX2char == true then
 	warpTransition.activateOnInstantWarps = false
 end
 
-local playerlives = mem(0x00B2C5AC,FIELD_FLOAT)
 local killed = false
 local killed2 = false
 
@@ -344,17 +343,19 @@ function globalgenerals.onTick()
 	end
 	
 	--mem(0x00B25130, FIELD_WORD, 2)
-	if playerlives == 0 then
-		if(not killed and player:mem(0x13E,FIELD_BOOL)) then
-			killed = true
-			mem(0x00B2C5AC,FIELD_FLOAT, 1)
-		end
-		if Player(2) and Player(2).isValid then
-			if(not killed2 and player2.deathTimer >= 1 and player:mem(0x13C, FIELD_BOOL)) then
-				killed2 = true
-				mem(0x00B2C5AC,FIELD_FLOAT, 1)
-				if player2.deathTimer >= 199 then
-					Level.load("SMAS - Game Over.lvlx")
+	for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
+		if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then --If 0, do these things...
+			if(not killed and p:mem(0x13E,FIELD_BOOL)) then --Checks to see if the player actually died...
+				killed = true --If so, this is true.
+				mem(0x00B2C5AC,FIELD_FLOAT, 1) --Increase the life to 1 to prevent being kicked to the broken SMBX launcher after dying
+			end
+			if Player(2) and Player(2).isValid then --Player(2) compability! This one is a bit of a mess, but I tried
+				if(not killed2 and p.deathTimer >= 1 and p:mem(0x13C, FIELD_BOOL)) then --Because 0X13E doesn't check in multiplayer, use the death timer instead.
+					killed2 = true --This one has a different variable set for player2
+					mem(0x00B2C5AC,FIELD_FLOAT, 1) --Also same as above
+					if p.deathTimer >= 199 then --If player2's death timer is almost 200, load the game over level
+						Level.load("SMAS - Game Over.lvlx")
+					end
 				end
 			end
 		end
@@ -1471,7 +1472,7 @@ function globalgenerals.onDraw()
 end
 
 function globalgenerals.onExit()
-	if playerlives == 0 then
+	if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then
 		if killed == true or killed2 == true then
 			Level.load("SMAS - Game Over.lvlx", nil, nil)
 		end

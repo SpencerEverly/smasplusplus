@@ -1,4 +1,5 @@
 local npcManager = require("npcManager")
+local extrasounds = require("extrasounds")
 local npc = {}
 local id = NPC_ID
 
@@ -86,7 +87,7 @@ function npc.onTickEndNPC(v)
 			v.ai4 = UP
 			v.ai3 = 0
 			
-			SFX.play 'whale.ogg'	
+			SFX.play(extrasounds.id[119])
 		end
 	elseif v.ai4 == UP then
 		v.speedY = v.speedY - 0.1

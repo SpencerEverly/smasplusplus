@@ -137,6 +137,25 @@ extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("combo7.ogg")) --Shell
 extrasounds.id[113] = Audio.SfxOpen(Misc.resolveSoundFile("score-tally.ogg")) --SMB1 Flagpole Score Tally
 extrasounds.id[114] = Audio.SfxOpen(Misc.resolveSoundFile("score-tally-end.ogg")) --SMB1 Flagpole Score Tally (End)
 extrasounds.id[115] = Audio.SfxOpen(Misc.resolveSoundFile("bowser-fire.ogg")) --Bowser Fireball
+extrasounds.id[116] = Audio.SfxOpen(Misc.resolveSoundFile("boomerang.ogg")) --Boomerang
+extrasounds.id[117] = Audio.SfxOpen(Misc.resolveSoundFile("smb2-charge.ogg")) --SMB2 High Jump Charge
+extrasounds.id[118] = Audio.SfxOpen(Misc.resolveSoundFile("stopwatch.ogg")) --Stopwatch
+extrasounds.id[119] = Audio.SfxOpen(Misc.resolveSoundFile("whale-spout.ogg")) --SMB2 Whale Water Sprout
+extrasounds.id[120] = Audio.SfxOpen(Misc.resolveSoundFile("door-reveal.ogg")) --SMB3 Door Reveal (Peach)
+extrasounds.id[121] = Audio.SfxOpen(Misc.resolveSoundFile("p-wing.ogg")) --SMB3 P-Wing
+extrasounds.id[122] = Audio.SfxOpen(Misc.resolveSoundFile("wand-moving.ogg")) --SMB3 Wand Moving
+extrasounds.id[123] = Audio.SfxOpen(Misc.resolveSoundFile("wand-whoosh.ogg")) --SMB3 Wand Air Whoosh (Custom)
+extrasounds.id[124] = Audio.SfxOpen(Misc.resolveSoundFile("hop.ogg")) --SMB3 Hop
+extrasounds.id[125] = Audio.SfxOpen(Misc.resolveSoundFile("smash-big.ogg")) --Big Smash (SMB1 Toad Pile)
+extrasounds.id[126] = Audio.SfxOpen(Misc.resolveSoundFile("smb2-hitenemy.ogg")) --SMB2 Enemy Hit
+extrasounds.id[127] = Audio.SfxOpen(Misc.resolveSoundFile("boss-fall.ogg")) --SMW Boss Fall
+extrasounds.id[128] = Audio.SfxOpen(Misc.resolveSoundFile("boss-lava.ogg")) --SMW Boss Lava Hit
+extrasounds.id[129] = Audio.SfxOpen(Misc.resolveSoundFile("boss-shrink.ogg")) --SMW Boss Shrink (Shrinking)
+extrasounds.id[130] = Audio.SfxOpen(Misc.resolveSoundFile("boss-shrink-done.ogg")) --SMW Boss Shrink (Done Shrinking)
+
+--Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
+extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("dialog.ogg")) --Dialog Menu Picker
+extrasounds.id[1001] = Audio.SfxOpen(Misc.resolveSoundFile("dialog-confirm.ogg")) --Dialog Menu Choosing Confirmed
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
@@ -160,6 +179,28 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	local Routine = require("routine")
 	
 	ready = true --We're ready, so we can begin
+end
+
+local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
+    local oldKilled     = npc:mem(0x122,FIELD_WORD)
+    local oldProjectile = npc:mem(0x136,FIELD_BOOL)
+    local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
+    local oldImmune     = npc:mem(0x156,FIELD_WORD)
+    local oldID         = npc.id
+    local oldSpeedX     = npc.speedX
+    local oldSpeedY     = npc.speedY
+
+    npc:harm(...)
+
+    return (
+           oldKilled     ~= npc:mem(0x122,FIELD_WORD)
+        or oldProjectile ~= npc:mem(0x136,FIELD_BOOL)
+        or oldHitCount   ~= npc:mem(0x148,FIELD_FLOAT)
+        or oldImmune     ~= npc:mem(0x156,FIELD_WORD)
+        or oldID         ~= npc.id
+        or oldSpeedX     ~= npc.speedX
+        or oldSpeedY     ~= npc.speedY
+    )
 end
 
 local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKI}
@@ -195,8 +236,31 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		
+		--**PSWITCH TIMER**
+		if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < 750 then
+			SFX.play(extrasounds.id[118], 1, 1, 50)
+		elseif mem(0x00B2C62C, FIELD_WORD) <= 300 and mem(0x00B2C62C, FIELD_WORD) >= 1 then
+			SFX.play(extrasounds.id[118], 1, 1, 15)
+		end
+		
+		
+		
+		--**P-WING**
+		if player:mem(0x16C, FIELD_BOOL) == true then
+			SFX.play(extrasounds.id[121], 1, 1, 7)
+		end
+		if player:mem(0x170, FIELD_WORD) >= 1 then
+			SFX.play(extrasounds.id[121], 1, 1, 7)
+		end
+		
+		
+		
 		
 		--**NPCS**
+		
+		
+		--*BOSSES*
+		--
 		--*SMB3 Bowser*
 		for k,v in ipairs(NPC.get(86)) do --Make sure the seperate Bowser fire sound plays when SMB3 Bowser actually fires up a fireball
 			if v.ai4 == 4 then
@@ -233,7 +297,17 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		
-		--**SCOREBOARD**
+		
+		--*PROJECTILES*
+		--Toad's Boomerang
+		for k,v in ipairs(NPC.get(292)) do --Boomerang sounds!
+			SFX.play(extrasounds.id[116], 1, 1, 12)
+		end
+		
+		
+		
+		
+		--**1UPS**
 		if not isOverworld then
 			for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
 				if scoreboard.animationFrame == 9 then --1UP
@@ -440,8 +514,12 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 				
 				
 				
-				
-				
+				--**SMB2 ENEMY KILLS**
+				for k,v in ipairs(NPC.get({19,20,25,130,131,132,470,471,129,345,346,347,371,372,373,272,350,530,374,247,206})) do --
+					if (v.killFlag ~= 0) and not (v.killFlag == HARM_TYPE_VANISH) then
+						playSound(126)
+					end
+				end
 			end
 		end
 	end
