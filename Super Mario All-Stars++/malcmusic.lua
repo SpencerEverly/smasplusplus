@@ -52,6 +52,16 @@ end
 local animalcrossingrng = {"accf","acnl","acnh"}
 local acmusrng = rng.randomEntry(animalcrossingrng)
 
+local rainSections = {[0] = true,[6] = true,[9] = true,[10] = true,[11] = true}
+local insideSections = {[1] = true,[2] = true,[3] = true,[4] = true,[5] = true,[7] = true,[8] = true,[12] = true,[13] = true,[14] = true}
+
+function rainrefresh()
+	rainState = false
+	prevState = false
+	Routine.wait(0.1, true)
+	rainactivated = true
+end
+
 function malcmusic.onStart()
 	weatherControlDay = SaveData.dateplayedweather
 	--Daily weather, no rng intended anymore unless the day is tomorrow
@@ -624,36 +634,50 @@ function malcmusic.onTick()
 			end
 		end
 		if SaveData.dateplayedweather == "rain" then
-			local rainSections = {[0] = true,[6] = true,[9] = true,[10] = true,[11] = true}
-			local insideSections = {[1] = true,[2] = true,[3] = true,[4] = true,[5] = true,[7] = true,[8] = true,[12] = true,[13] = true,[14] = true}
-			if rainSections[player.section] then
-				rainState = true
-				prevState = false
-			elseif insideSections[player.section] then
-				rainState = false
-				prevState = true
-			end
-			if (rainState ~= prevRainState) or (prevSection ~= player.section) then
-				if rainState then
-					Section(player.section).effects.weather = WEATHER_RAIN
-					currentSfxOutRain = SFX.play(rainoutsidesfx, 1, 0)
-					
-					if currentSfxInRain then
-						currentSfxInRain:fadeout(50)
-						currentSfxInRain = nil
-					end
-				elseif prevState then
-					currentSfxInRain = SFX.play(raininsidesfx, 1, 0)
-					
-					if currentSfxOutRain then
-						currentSfxOutRain:fadeout(50)
-						currentSfxOutRain = nil
-					end
+			Routine.run(rainrefresh)
+			if rainactivated == true then
+				local rainSections = {[0] = true,[6] = true,[9] = true,[10] = true,[11] = true}
+				local insideSections = {[1] = true,[2] = true,[3] = true,[4] = true,[5] = true,[7] = true,[8] = true,[12] = true,[13] = true,[14] = true}
+				if rainSections[player.section] then
+					rainState = true
+					prevState = false
+				elseif insideSections[player.section] then
+					rainState = false
+					prevState = true
 				end
-				prevSection = player.section
-				prevRainState = rainState
-				prevPreviousState = prevState
-				prevInsideState = insideState
+				if (rainState ~= prevRainState) or (prevSection ~= newSection) then
+					if rainState then
+						Section(player.section).effects.weather = WEATHER_RAIN
+						currentSfxOutRain = SFX.play(rainoutsidesfx, 1, 0)
+						
+						if currentSfxInRain then
+							currentSfxInRain:fadeout(50)
+							currentSfxInRain = nil
+						end
+					elseif prevState then
+						currentSfxInRain = SFX.play(raininsidesfx, 1, 0)
+						
+						if currentSfxOutRain then
+							currentSfxOutRain:fadeout(50)
+							currentSfxOutRain = nil
+						end
+					end
+					prevSection = player.section
+					newSection = Section.getIdxFromCoords(player.x, player.y)
+					prevRainState = rainState
+					prevPreviousState = prevState
+					prevInsideState = insideState
+				end
+			end
+			if rainactivated == false then
+				if currentSfxInRain then
+					currentSfxInRain:fadeout(50)
+					currentSfxInRain = nil
+				end
+				if currentSfxOutRain then
+					currentSfxOutRain:fadeout(50)
+					currentSfxOutRain = nil
+				end
 			end
 			if malcmusic.holiday == false then
 				if acmusrng == "accf" then
