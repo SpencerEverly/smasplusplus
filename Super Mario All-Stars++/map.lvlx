@@ -457,6 +457,27 @@ ID:833;X:-193872;Y:-200416;W:32;H:32;
 ID:837;X:-192496;Y:-200944;W:32;H:32;
 ID:836;X:-191664;Y:-200944;W:32;H:32;
 ID:848;X:-192368;Y:-200320;W:32;H:64;
+ID:808;X:-193472;Y:-201104;W:16;H:16;
+ID:808;X:-192928;Y:-200896;W:16;H:16;
+ID:808;X:-193024;Y:-200736;W:16;H:16;
+ID:808;X:-193456;Y:-200800;W:16;H:16;
+ID:808;X:-192976;Y:-201120;W:16;H:16;
+ID:810;X:-193552;Y:-200800;W:14;H:14;
+ID:810;X:-192912;Y:-200672;W:14;H:14;
+ID:810;X:-193264;Y:-200688;W:14;H:14;
+ID:810;X:-192896;Y:-201168;W:14;H:14;
+ID:810;X:-193408;Y:-201072;W:14;H:14;
+ID:810;X:-193056;Y:-200816;W:14;H:14;
+ID:810;X:-193200;Y:-200976;W:14;H:14;
+ID:810;X:-193488;Y:-200944;W:14;H:14;
+ID:810;X:-193264;Y:-201040;W:14;H:14;
+ID:810;X:-193088;Y:-201168;W:14;H:14;
+ID:810;X:-192960;Y:-200944;W:14;H:14;
+ID:808;X:-193552;Y:-201120;W:16;H:16;
+ID:811;X:-192896;Y:-201104;W:14;H:14;
+ID:811;X:-193408;Y:-201168;W:14;H:14;
+ID:811;X:-193520;Y:-200672;W:14;H:14;
+ID:811;X:-192864;Y:-200720;W:14;H:14;
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -953,9 +974,13 @@ ID:856;X:-192544;Y:-200896;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-9\,
 ID:752;X:-192544;Y:-200928;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL9-4\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\, -32\, -96\"\n}\n";
 ID:802;X:-192576;Y:-201024;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-9\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"9-4\: Thank You!\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toSMBLL9-4\"\,\n    \"path_up\"\: \"toSMBLLW-9Path1\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-192512;Y:-200896;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-9Path2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 64\, -96\"\n}\n";
-ID:821;X:-192448;Y:-200992;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Warp to Worlds A-D\"\,\n    \"path_down\"\: \"toSMBLLW-9Path2\"\n}\n";
+ID:821;X:-192448;Y:-200992;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-ADBeginWarp\"\,\n    \"levelTitle\"\: \"Warp to Worlds A-D\"\,\n    \"path_down\"\: \"toSMBLLW-9Path2\"\,\n    \"warpName\"\: \"SMBLLW-9EndWarp2\"\n}\n";
 ID:752;X:-192576;Y:-201056;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-9Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:821;X:-192576;Y:-201088;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLBeginWarp\"\,\n    \"levelTitle\"\: \"Game Select\"\,\n    \"path_down\"\: \"toSMBLLW-9Path1\"\,\n    \"warpName\"\: \"toGameSelectEndSMBLL\"\n}\n";
+ID:753;X:-193600;Y:-201216;D:-1;XTRA:"{\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/Worlds A-D.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-193408;Y:-200832;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-9EndWarp2\"\,\n    \"levelTitle\"\: \"Warp to World 9\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMBLLA-1\"\,\n    \"warpName\"\: \"SMBLLW-ADBeginWarp\"\n}\n";
+ID:802;X:-193312;Y:-200832;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-A\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"A-1\: Aaah\, Extra Lands?!\"\,\n    \"path_left\"\: \"toSMBLLA-1\"\,\n    \"path_right\"\: \"toSMBLLA-2\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-193376;Y:-200832;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLA-1\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
