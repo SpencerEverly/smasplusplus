@@ -341,8 +341,9 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		
+		
 		--**NPCTOCOIN**
-		if mem(0x00A3C87F, FIELD_BYTE) == 14 and Level.endState() > 0 then --This plays a coin sound when NpcToCoin happens
+		if mem(0x00A3C87F, FIELD_BYTE) == 14 and Level.endState() == 2 or Level.endState() == 4 then --This plays a coin sound when NpcToCoin happens
 			SFX.play(extrasounds.id[14], 1, 1, 2500)
 		end
 		
@@ -463,6 +464,11 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 			if isShootingIce then --Iceball sound
 				SFX.play(extrasounds.id[93], 1, 1, 25)
 			end
+			
+			
+			
+			
+			
 		end
 	end
 end

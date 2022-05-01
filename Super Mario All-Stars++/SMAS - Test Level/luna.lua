@@ -155,3 +155,7 @@ end
 function onTick()
 	littleDialogue.defaultStyleName = "smbx13"
 end
+
+function onDraw()
+	
+end
