@@ -105,7 +105,7 @@ function costume.onPlayerHarm(e, p)
 			end
 			
 			
-			if mem(0x00B2C5A8, FIELD_WORD) > 0 then
+			if SaveData.totalCoinsClassic > 0 then
 				e.cancelled = true
 				hit = true
 				hitTicks = 0
@@ -113,7 +113,7 @@ function costume.onPlayerHarm(e, p)
 				plr.speedX = 0
 				Defines.gravity = Defines.gravity / 2
 				SFX.play(5)
-				mem(0x00B2C5A8, FIELD_WORD, 0)
+				SaveData.totalCoinsClassic = 0
 				Effect.spawn(11, p.x, p.y)
 			else
 				p:kill()
