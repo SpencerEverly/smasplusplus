@@ -510,11 +510,15 @@ function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
 		if SaveData.totalLives <= 999 then
 			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
 		elseif SaveData.totalLives => 1000 and SaveData.totalLives <= 1099 then
-			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+			if SaveData.totalLives == 1000 then
+				drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!00", priority);
+			elseif SaveData.totalLives == 1001 then
+				drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!01", priority);
+			end
 		elseif SaveData.totalLives => 1100 and SaveData.totalLives <= 1109 then
-			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!!0", priority);
 		elseif SaveData.totalLives == 1110 then
-			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!!!", priority);
 		end
 	end
 end
