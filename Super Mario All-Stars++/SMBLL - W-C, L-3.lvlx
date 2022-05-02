@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. Lost Levels\: World 7-3";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. Lost Levels\: World C-3";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-188736;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Athletic.spc|0\;g=2.5";BG:8;
@@ -254,7 +254,11 @@ ID:770;X:-190464;Y:-200224;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:177;X:-190048;Y:-200384;D:-1;S1:3;
 ID:770;X:-189600;Y:-200352;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:986;X:-189280;Y:-200384;D:-1;
+ID:610;X:-198112;Y:-200256;D:-1;
+ID:176;X:-197440;Y:-200320;D:-1;S1:3;
 ID:792;X:-192569;Y:-200440;D:-1;S1:160;XTRA:"{\n    \"len\"\: 160\n}\n";
+ID:88;X:-192186;Y:-200384;D:-1;
+ID:88;X:-192218;Y:-200384;D:-1;
 NPC_END
 LAYERS
 LR:"Default";
