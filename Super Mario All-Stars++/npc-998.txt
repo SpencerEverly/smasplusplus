@@ -1,0 +1,2 @@
+noyoshi=1
+notcointransformable=true

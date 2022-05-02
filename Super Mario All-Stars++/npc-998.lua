@@ -1,6 +1,7 @@
 local npcManager = require("npcManager")
 local colliders = require("colliders")
 local extrasounds = require("extrasounds")
+local starman = require("starman/star")
 
 local customNPC = {}
 local npcID = NPC_ID
@@ -67,7 +68,6 @@ function customNPC.onTickNPC(v)
 		GameData.muteMusic = true
 		Audio.MusicVolume(0)
         SFX.play(Misc.resolveSoundFile("smb-flagslide.wav"))
-		GameData.stopStarman = true
         exiting = true
         data.countTime = Timer.isActive()
 		--Timer.toggle()
@@ -91,6 +91,8 @@ function customNPC.onTickNPC(v)
     end
 
     if data.state == 1 then
+		Misc.npcToCoins()
+		starman.stop(p)
 		GameData.muteMusic = true
         data.tick = data.tick + 1
         player.x = v.x - player.width + 16

@@ -87,6 +87,7 @@ end
 
 function starget()
 	Level.finish(LEVEL_END_STATE_STAR, true)
+	Misc.npcToCoins()
 	SFX.play(52)
 	muteMusic(-1)
 	GameData.muteMusic = true

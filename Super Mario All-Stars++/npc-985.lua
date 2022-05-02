@@ -89,6 +89,8 @@ function muteMusic(sectionid) --Mute all section music, or just mute a specific 
 end
 
 function starget()
+	Misc.npcToCoins()
+	SFX.play(extrasounds.id[14])
 	playervuln = true
 	playerwon = true
 	SFX.play(52)
