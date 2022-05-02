@@ -6,7 +6,7 @@ local pauseplus = require("pauseplus")
 local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
-local smasdeathsystem = require("smasdeathsystem")
+local smasdeathsystem = require("smashudsystem")
 local musicalchairs = require("musicalchairs")
 local extrasounds = require("extrasounds")
 local sprite = require("base/sprite")
@@ -525,9 +525,9 @@ local function costumechangeleft()
 end
 
 function pausemenu2.onDraw()
-	if GameData.starActive == true or GameData.megashroomActive == true or GameData.cutsceneMusicControl == true or GameData.muteMusic == true then
+	if GameData.muteMusic == true then
 		Audio.MusicVolume(0)
-	elseif GameData.muteMusic == false or GameData.muteMusic == nil or GameData.starActive == false or GameData.megashroomActive == false or GameData.cutsceneMusicControl == false or GameData.starActive == nil or GameData.megashroomActive == nil or GameData.cutsceneMusicControl == nil then
+	elseif GameData.muteMusic == false or GameData.muteMusic == nil then
 		Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
 	end
 	sfxVolume = pauseplus.getSelectionValue("settings","SFX Volume")

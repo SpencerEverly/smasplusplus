@@ -5,7 +5,7 @@ local pausemenu = require("pausemenu2")
 --local megaluavania = require("megaluavania")
 local debugbox = require("debugbox")
 local extrasounds = require("extrasounds")
-local smasdeathsystem = require("smasdeathsystem")
+local smasdeathsystem = require("smashudsystem")
 local comboSounds = require("comboSounds")
 
 littleDialogue.defaultStyleName = "smbx13"

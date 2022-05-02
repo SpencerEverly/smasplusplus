@@ -23,7 +23,7 @@ function onStart(p)
 	datetime.topright = true
 	datetime.bottomright = false
 	p = p or player;
-	GameData.cutsceneMusicControl = true
+	GameData.muteMusic = true
 	Audio.MusicVolume(80)
 end
 
@@ -234,7 +234,7 @@ Cheats.deregister("needaredshoe")
 Cheats.deregister("needablueshoe")
 
 function onExit()
-	GameData.cutsceneMusicControl = false
+	GameData.muteMusic = false
 	Audio.MusicVolume(65)
 	datetime.topright = false
 	datetime.bottomright = true

@@ -99,11 +99,11 @@ end
 
 function lavashroomeasteregg()
 	eastercrashprevload = true
-	GameData.cutsceneMusicControl = true
+	GameData.muteMusic = true
 	playSound("easteregg_smbx13crash.ogg")
 	eastercrashmsg = true
 	Routine.wait(2, true)
-	GameData.cutsceneMusicControl = false
+	GameData.muteMusic = false
 	Routine.wait(20, true)
 	eastercrashmsg = false
 	eastercrashdone = true
@@ -117,7 +117,7 @@ function globalgenerals.onPause(evt)
 end
 
 function globalgenerals.onStart()
-	GameData.cutsceneMusicControl = false
+	GameData.muteMusic = false
 	if Misc.inEditor() then
 		debugbox = require("debugbox")
 	end

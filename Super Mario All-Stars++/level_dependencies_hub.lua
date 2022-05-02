@@ -8,7 +8,7 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local warpTransition = require("warpTransition")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local smasdeathsystem = require("smasdeathsystem")
+local smasdeathsystem = require("smashudsystem")
 local pausemenu2 = require("pausemenu2")
 --local pauseplus = require("pauseplus")
 

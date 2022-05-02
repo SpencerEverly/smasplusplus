@@ -7,7 +7,7 @@ local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local smasdeathsystem = require("smasdeathsystem")
+local smasdeathsystem = require("smashudsystem")
 local comboSounds = require("comboSounds")
 
 local dying = false;
