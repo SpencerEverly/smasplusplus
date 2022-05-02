@@ -181,7 +181,8 @@ function HUDOverride.onInitAPI()
 	--TODO: Change onHUDDraw to "true" when onHUDUpdate is implemented
 	registerEvent(HUDOverride, "onHUDDraw", "onHUDDraw", false)
 	registerEvent(HUDOverride, "onDraw", "onDraw", false)
-
+	registerEvent(HUDOverride, "onTick", "onTick", false)
+	
 	if(oldActivate) then
 		oldActivate(false)
 	end
@@ -503,22 +504,248 @@ function HUDOverride.drawStars(splitOffset, thisCam, thisPlayer, priority)
 	end
 end
 
+function HUDOverride.lifeCrownCounter()
+	if SaveData.totalLives <= 999 then
+		return SaveData.totalLives
+	elseif SaveData.totalLives == 1000 then --Crown 1 achieved
+		return "!00"
+	elseif SaveData.totalLives == 1001 then
+		return "!01"
+	elseif SaveData.totalLives == 1002 then
+		return "!02"
+	elseif SaveData.totalLives == 1003 then
+		return "!03"
+	elseif SaveData.totalLives == 1004 then
+		return "!04"
+	elseif SaveData.totalLives == 1005 then
+		return "!05"
+	elseif SaveData.totalLives == 1006 then
+		return "!06"
+	elseif SaveData.totalLives == 1007 then
+		return "!07"
+	elseif SaveData.totalLives == 1008 then
+		return "!08"
+	elseif SaveData.totalLives == 1009 then
+		return "!09"
+	elseif SaveData.totalLives == 1010 then
+		return "!10"
+	elseif SaveData.totalLives == 1100 then
+		return "!!0"
+	elseif SaveData.totalLives == 1101 then
+		return "!!1"
+	elseif SaveData.totalLives == 1010 then
+	return "!10"
+	elseif SaveData.totalLives == 1011 then
+		return "!11"
+	elseif SaveData.totalLives == 1012 then
+		return "!12"
+	elseif SaveData.totalLives == 1013 then
+		return "!13"
+	elseif SaveData.totalLives == 1014 then
+		return "!14"
+	elseif SaveData.totalLives == 1015 then
+		return "!15"
+	elseif SaveData.totalLives == 1016 then
+		return "!16"
+	elseif SaveData.totalLives == 1017 then
+		return "!17"
+	elseif SaveData.totalLives == 1018 then
+		return "!18"
+	elseif SaveData.totalLives == 1019 then
+		return "!19"
+	elseif SaveData.totalLives == 1020 then
+		return "!20"
+	elseif SaveData.totalLives == 1021 then
+		return "!21"
+	elseif SaveData.totalLives == 1022 then
+		return "!22"
+	elseif SaveData.totalLives == 1023 then
+		return "!23"
+	elseif SaveData.totalLives == 1024 then
+		return "!24"
+	elseif SaveData.totalLives == 1025 then
+		return "!25"
+	elseif SaveData.totalLives == 1026 then
+		return "!26"
+	elseif SaveData.totalLives == 1027 then
+		return "!27"
+	elseif SaveData.totalLives == 1028 then
+		return "!28"
+	elseif SaveData.totalLives == 1029 then
+		return "!29"
+	elseif SaveData.totalLives == 1030 then
+		return "!30"
+	elseif SaveData.totalLives == 1031 then
+		return "!31"
+	elseif SaveData.totalLives == 1032 then
+		return "!32"
+	elseif SaveData.totalLives == 1033 then
+		return "!33"
+	elseif SaveData.totalLives == 1034 then
+		return "!34"
+	elseif SaveData.totalLives == 1035 then
+		return "!35"
+	elseif SaveData.totalLives == 1036 then
+		return "!36"
+	elseif SaveData.totalLives == 1037 then
+		return "!37"
+	elseif SaveData.totalLives == 1038 then
+		return "!38"
+	elseif SaveData.totalLives == 1039 then
+		return "!39"
+	elseif SaveData.totalLives == 1040 then
+		return "!40"
+	elseif SaveData.totalLives == 1041 then
+		return "!41"
+	elseif SaveData.totalLives == 1042 then
+		return "!42"
+	elseif SaveData.totalLives == 1043 then
+		return "!43"
+	elseif SaveData.totalLives == 1044 then
+		return "!44"
+	elseif SaveData.totalLives == 1045 then
+		return "!45"
+	elseif SaveData.totalLives == 1046 then
+		return "!46"
+	elseif SaveData.totalLives == 1047 then
+		return "!47"
+	elseif SaveData.totalLives == 1048 then
+		return "!48"
+	elseif SaveData.totalLives == 1049 then
+		return "!49"
+	elseif SaveData.totalLives == 1050 then
+		return "!50"
+	elseif SaveData.totalLives == 1051 then
+		return "!51"
+	elseif SaveData.totalLives == 1052 then
+		return "!52"
+	elseif SaveData.totalLives == 1053 then
+		return "!53"
+	elseif SaveData.totalLives == 1054 then
+		return "!54"
+	elseif SaveData.totalLives == 1055 then
+		return "!55"
+	elseif SaveData.totalLives == 1056 then
+		return "!56"
+	elseif SaveData.totalLives == 1057 then
+		return "!57"
+	elseif SaveData.totalLives == 1058 then
+		return "!58"
+	elseif SaveData.totalLives == 1059 then
+		return "!59"
+	elseif SaveData.totalLives == 1060 then
+		return "!60"
+	elseif SaveData.totalLives == 1061 then
+		return "!61"
+	elseif SaveData.totalLives == 1062 then
+		return "!62"
+	elseif SaveData.totalLives == 1063 then
+		return "!63"
+	elseif SaveData.totalLives == 1064 then
+		return "!64"
+	elseif SaveData.totalLives == 1065 then
+		return "!65"
+	elseif SaveData.totalLives == 1066 then
+		return "!66"
+	elseif SaveData.totalLives == 1067 then
+		return "!67"
+	elseif SaveData.totalLives == 1068 then
+		return "!68"
+	elseif SaveData.totalLives == 1069 then
+		return "!69"
+	elseif SaveData.totalLives == 1070 then
+		return "!70"
+	elseif SaveData.totalLives == 1071 then
+		return "!71"
+	elseif SaveData.totalLives == 1072 then
+		return "!72"
+	elseif SaveData.totalLives == 1073 then
+		return "!73"
+	elseif SaveData.totalLives == 1074 then
+		return "!74"
+	elseif SaveData.totalLives == 1075 then
+		return "!75"
+	elseif SaveData.totalLives == 1076 then
+		return "!76"
+	elseif SaveData.totalLives == 1077 then
+		return "!77"
+	elseif SaveData.totalLives == 1078 then
+		return "!78"
+	elseif SaveData.totalLives == 1079 then
+		return "!79"
+	elseif SaveData.totalLives == 1080 then
+		return "!80"
+	elseif SaveData.totalLives == 1081 then
+		return "!81"
+	elseif SaveData.totalLives == 1082 then
+		return "!82"
+	elseif SaveData.totalLives == 1083 then
+		return "!83"
+	elseif SaveData.totalLives == 1084 then
+		return "!84"
+	elseif SaveData.totalLives == 1085 then
+		return "!85"
+	elseif SaveData.totalLives == 1086 then
+		return "!86"
+	elseif SaveData.totalLives == 1087 then
+		return "!87"
+	elseif SaveData.totalLives == 1088 then
+		return "!88"
+	elseif SaveData.totalLives == 1089 then
+		return "!89"
+	elseif SaveData.totalLives == 1090 then
+		return "!90"
+	elseif SaveData.totalLives == 1091 then
+		return "!91"
+	elseif SaveData.totalLives == 1092 then
+		return "!92"
+	elseif SaveData.totalLives == 1093 then
+		return "!93"
+	elseif SaveData.totalLives == 1094 then
+		return "!94"
+	elseif SaveData.totalLives == 1095 then
+		return "!95"
+	elseif SaveData.totalLives == 1096 then
+		return "!96"
+	elseif SaveData.totalLives == 1097 then
+		return "!97"
+	elseif SaveData.totalLives == 1098 then
+		return "!98"
+	elseif SaveData.totalLives == 1099 then
+		return "!99"
+	elseif SaveData.totalLives == 1100 then --Crown 2 achieved
+		return "!!0"
+	elseif SaveData.totalLives == 1101 then
+		return "!!1"
+	elseif SaveData.totalLives == 1102 then
+		return "!!2"
+	elseif SaveData.totalLives == 1103 then
+		return "!!3"
+	elseif SaveData.totalLives == 1104 then
+		return "!!4"
+	elseif SaveData.totalLives == 1105 then
+		return "!!5"
+	elseif SaveData.totalLives == 1106 then
+		return "!!6"
+	elseif SaveData.totalLives == 1107 then
+		return "!!7"
+	elseif SaveData.totalLives == 1108 then
+		return "!!8"
+	elseif SaveData.totalLives == 1109 then
+		return "!!9"
+	elseif SaveData.totalLives == 1110 then --All three crowns are now retrieved!
+		return "!!!"
+	end
+end
+
 function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
 	if SaveData.disableX2char == true then
 		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), mem(0x00B2C5AC, FIELD_FLOAT), priority);
 	elseif SaveData.disableX2char == false then
 		if SaveData.totalLives <= 999 then
 			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
-		elseif SaveData.totalLives => 1000 and SaveData.totalLives <= 1099 then
-			if SaveData.totalLives == 1000 then
-				drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!00", priority);
-			elseif SaveData.totalLives == 1001 then
-				drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!01", priority);
-			end
-		elseif SaveData.totalLives => 1100 and SaveData.totalLives <= 1109 then
-			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!!0", priority);
-		elseif SaveData.totalLives == 1110 then
-			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), "!!!", priority);
+		elseif SaveData.totalLives >= 1000 then
+			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), HUDOverride.lifeCrownCounter(), priority);
 		end
 	end
 end
@@ -795,6 +1022,23 @@ function HUDOverride.onDraw()
 		else
 			i = i+1
 		end
+	end
+end
+
+function HUDOverride.onTick()
+	if SaveData.lifeCrownsComplete == nil then
+		SaveData.lifeCrownsComplete = "false"
+	end
+	if SaveData.totalLives == 1110 then
+		if (SaveData.lifeCrownsComplete == "trulyfalse") == false then
+			SaveData.lifeCrownsComplete = "true"
+		end
+	elseif SaveData.totalLives <= 1109 then
+		SaveData.lifeCrownsComplete = "false"
+	end
+	if SaveData.lifeCrownsComplete == "true" then
+		playSound("all-crowns-achieved.ogg")
+		SaveData.lifeCrownsComplete = "trulyfalse"
 	end
 end
 
