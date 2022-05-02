@@ -2311,6 +2311,40 @@ littleDialogue.registerStyle("bootmenudialog",{
 	
 })
 
+littleDialogue.registerStyle("gameoverdialog",{
+	textXScale = 1,
+	textYScale = 1,
+	borderSize = 36,
+	textMaxWidth = 500,
+	speakerNameGap = 6,
+	speakerNameXScale = 1.2,        -- X scale of the speaker's name.
+	speakerNameYScale = 1.2,
+	
+	openSpeed = 5,
+	pageScrollSpeed = 5, -- How fast it scrolls when switching pages.
+	answerPageScrollSpeed = 5, -- How fast it scrolls when switching answer pages.
+	borderSize = 8,
+	
+	forcedPosEnabled = true,       -- If true, the box will be forced into a certain screen position, rather than floating over the speaker's head.
+	forcedPosX = 400,               -- The X position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosY = 450,                -- The Y position the box will appear at on screen, if forced positioning is enabled.
+	forcedPosHorizontalPivot = 0.5, -- How the box is positioned using its X coordinate. If 0, the X means the left, 1 means right, and 0.5 means the middle.
+	forcedPosVerticalPivot = 0,     -- How the box is positioned using its Y coordinate. If 0, the Y means the top, 1 means bottom, and 0.5 means the middle.
+
+	windowingOpeningEffectEnabled = false,
+
+	typewriterEnabled = false,
+	showTextWhileOpening = true,
+
+	openSoundEnabled = false,
+    closeSoundEnabled = false,
+    scrollSoundEnabled = false,
+    moveSelectionSoundEnabled = true,
+    chooseAnswerSoundEnabled = false,
+
+    continueArrowEnabled = false,
+})
+
 
 
 -- Note that you can setup your own styles from luna.lua files.

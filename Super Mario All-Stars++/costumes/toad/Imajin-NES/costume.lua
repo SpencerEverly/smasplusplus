@@ -123,27 +123,29 @@ function costume.onDraw()
 			player.forcedState = FORCEDSTATE_NONE
 			player:mem(0x140, FIELD_WORD, 150)
 		end
-		local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
-		local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
-		if imajinhp <= 0 then
-			Graphics.drawImageWP(heartempty, 357,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 421,  16, -4.2)
-		end
-		if imajinhp == 1 then
-			Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 421,  16, -4.2)
-		end
-		if imajinhp == 2 then
-			Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-			Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 421,  16, -4.2)
-		end
-		if imajinhp >= 3 then
-			Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-			Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-			Graphics.drawImageWP(heartfull, 421,  16, -4.2)
+		if HUDOverride.visible.customitembox == true then
+			local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
+			local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
+			if imajinhp <= 0 then
+				Graphics.drawImageWP(heartempty, 357,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 388,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+			end
+			if imajinhp == 1 then
+				Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 388,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+			end
+			if imajinhp == 2 then
+				Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+				Graphics.drawImageWP(heartfull, 388,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+			end
+			if imajinhp >= 3 then
+				Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+				Graphics.drawImageWP(heartfull, 388,  16, -4.2)
+				Graphics.drawImageWP(heartfull, 421,  16, -4.2)
+			end
 		end
 	end
 end

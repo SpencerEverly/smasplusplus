@@ -120,7 +120,11 @@ function customNPC.onTickNPC(v)
             SFX.play(52)
         end
     elseif data.state == 2 then
+		GameData.stopStarman = false
 		GameData.muteMusic = true
+		if GameData.rushModeActive == true then
+			GameData.rushModeWon = true
+		end
         player.keys.right = true
 
         for _, castleid in ipairs(castles) do
@@ -163,7 +167,11 @@ function customNPC.onTickNPC(v)
 		
         if data.tick > 65 * 1.5 then
 			GameData.muteMusic = false
-            Level.exit(LEVEL_WIN_TYPE_STAR)
+			if GameData.rushModeActive == false or GameData.rushModeActive == nil then
+				Level.exit(LEVEL_WIN_TYPE_STAR)
+			elseif GameData.rushModeActive == true and GameData.rushModeWon == true then
+				Level.load("SMAS - Rush Mode Results.lvlx")
+			end
         end
     end
 end

@@ -80,7 +80,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 						Audio.MusicVolume(0)
 						SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 						SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
-						if SaveData.totalLives < 0 then
+						if SaveData.totalLives < 0 then --If less than 0, the quick game over screen will activate
 							gameoveractivate = true
 							SaveData.totalLives = 0
 						end
@@ -103,14 +103,14 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 								--Level.exit() --Only if you're using the vanilla map
 							end
 						end
-						if gameoveractivate then
+						if gameoveractivate then --Quick game over screen stuff.
 							Misc.pause()
-							gameovershow = true
-							SaveData.GameOverCount = SaveData.GameOverCount + 1
-							local rngkey = rng.randomInt(1,28)
+							gameovershow = true --Show the GAME OVER text
+							SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
+							local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
 							playSound("gameover/gameover-"..rngkey..".ogg")
 							
-							
+							--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
 							if rngkey == 1 then
 								Routine.wait(3, true)
 								
@@ -174,7 +174,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 							elseif rngkey == 21 then
 								Routine.wait(3, true)
 								
-							elseif rngkey == 22 then
+							elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
 								playSound("gameover/gameover-22-voice.ogg")
 								Routine.wait(17, true)
 								
@@ -198,9 +198,9 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 								
 								
 							end
-							Misc.unpause()
-							SaveData.totalLives = 5
-							smasdeathsystem.hasDied = true
+							Misc.unpause() --Unpause afterward
+							SaveData.totalLives = 5 --Refill the lives back to 5
+							smasdeathsystem.hasDied = true --The player has now died
 							if smasdeathsystem.exittomap == false then
 								Level.load(Level.filename())
 							elseif smasdeathsystem.exittomap == true then
@@ -234,15 +234,104 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 								Level.load("map.lvlx", nil, nil)
 							end
 						end
-						if gameoveractivate then
+						if gameoveractivate then --Quick game over screen stuff.
 							Misc.pause()
-							gameovershow = true
-							SaveData.GameOverCount = SaveData.GameOverCount + 1
-							playSound("gameover-announcer.ogg")
-							Routine.wait(4, true)
-							Misc.unpause()
-							SaveData.totalLives = 5
-							smasdeathsystem.hasDied = true
+							gameovershow = true --Show the GAME OVER text
+							SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
+							local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
+							playSound("gameover/gameover-"..rngkey..".ogg")
+							
+							--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
+							if rngkey == 1 then
+								Routine.wait(3, true)
+								
+							elseif rngkey == 2 then
+								Routine.wait(5, true)
+								
+							elseif rngkey == 3 then
+								Routine.wait(3, true)
+								
+							elseif rngkey == 4 then
+								Routine.wait(3, true)
+								
+							elseif rngkey == 5 then
+								Routine.wait(5, true)
+								
+							elseif rngkey == 6 then
+								Routine.wait(4, true)
+								
+							elseif rngkey == 7 then
+								Routine.wait(2, true)
+								
+							elseif rngkey == 8 then
+								Routine.wait(6, true)
+								
+							elseif rngkey == 9 then
+								Routine.wait(3, true)
+								
+							elseif rngkey == 10 then
+								Routine.wait(14, true)
+								
+							elseif rngkey == 11 then
+								Routine.wait(10, true)
+								
+							elseif rngkey == 12 then
+								Routine.wait(10, true)
+								
+							elseif rngkey == 13 then
+								Routine.wait(5, true)
+								
+							elseif rngkey == 14 then
+								Routine.wait(6, true)
+							
+							elseif rngkey == 15 then
+								Routine.wait(6, true)
+								
+							elseif rngkey == 16 then
+								Routine.wait(7, true)
+								
+							elseif rngkey == 17 then
+								Routine.wait(3, true)
+								
+							elseif rngkey == 18 then
+								Routine.wait(4, true)
+								
+							elseif rngkey == 19 then
+								Routine.wait(7, true)
+								
+							elseif rngkey == 20 then
+								Routine.wait(9, true)
+								
+							elseif rngkey == 21 then
+								Routine.wait(3, true)
+								
+							elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
+								playSound("gameover/gameover-22-voice.ogg")
+								Routine.wait(17, true)
+								
+							elseif rngkey == 23 then
+								Routine.wait(4, true)
+								
+							elseif rngkey == 24 then
+								Routine.wait(6, true)
+								
+							elseif rngkey == 25 then
+								Routine.wait(6, true)
+								
+							elseif rngkey == 26 then
+								Routine.wait(5, true)
+								
+							elseif rngkey == 27 then
+								Routine.wait(8, true)
+								
+							elseif rngkey == 28 then
+								Routine.wait(8, true)
+								
+								
+							end
+							Misc.unpause() --Unpause afterward
+							SaveData.totalLives = 5 --Refill the lives back to 5
+							smasdeathsystem.hasDied = true --The player has now died
 							if smasdeathsystem.exittomap == false then
 								Level.load(Level.filename())
 							elseif smasdeathsystem.exittomap == true then
@@ -253,7 +342,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 				end
 			end
 			if GameData.multiplayeractive == true then
-				if GameData.battlemodeactive == true then
+				if GameData.battlemodeactive == true then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
 					if killed1 == true then
 						GameData.p1lives = GameData.p1lives - 1
 						killed1 = false
@@ -416,7 +505,7 @@ end
 
 --SaveData.gameOverCount = 0 --This is only when the library publically releases for the wild to use
 smasdeathsystem.hasDied = false --If the player died or not
-smasdeathsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward
+smasdeathsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
 smasdeathsystem.activated = true --Whenever the death animation is activated
 
 return smasdeathsystem

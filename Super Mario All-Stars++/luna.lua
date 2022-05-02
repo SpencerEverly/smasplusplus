@@ -208,7 +208,8 @@ GameData.friendlyplaces = {
 	"SMBS - Opening.lvlx",
 	"SMW - W-0, L-Green Switch.lvlx",
 	"SMW - W-0, L-Yellow Switch.lvlx",
-	"SMW - W-0, L-Blue Switch.lvlx"
+	"SMW - W-0, L-Blue Switch.lvlx",
+	"SMAS - Rush Mode Results.lvlx",
 }
 
 --Menu table for any costume with troublesome sounds
@@ -234,7 +235,8 @@ GameData.nolevelplaces = {
 	"SMAS - Credits.lvlx",
 	"SMAS - Intro.lvlx",
 	"SMAS - Online (Menu).lvlx",
-	"SMB2 - Ending.lvlx"
+	"SMB2 - Ending.lvlx",
+	"SMAS - Rush Mode Results.lvlx",
 }
 
 GameData.notransitionlevels = {
@@ -259,7 +261,7 @@ GameData.notransitionlevels = {
 	"intro_SMBX2.lvlx",
 	"intro_SMBX2b3.lvlx",
 	"intro_sunsetbeach.lvlx",
-	"intro_WSMBA.lvlx"
+	"intro_WSMBA.lvlx",
 }
 
 GameData.rushlevelsrng = {

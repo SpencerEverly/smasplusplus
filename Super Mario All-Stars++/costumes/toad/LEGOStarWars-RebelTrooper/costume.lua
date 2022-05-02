@@ -140,42 +140,44 @@ function costume.onDraw()
 			player.forcedState = FORCEDSTATE_NONE
 			player:mem(0x140, FIELD_WORD, 150)
 		end
-		local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
-		local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
-		if characterhp <= 0 then
-			Graphics.drawImageWP(heartempty, 357,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 421,  16, -4.2)
-		end
-		if characterhp == 1 then
-			Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 421,  16, -4.2)
-		end
-		if characterhp == 2 then
-			Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-			Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-			Graphics.drawImageWP(heartempty, 421,  16, -4.2)
-		end
-		if characterhp >= 3 then
-			Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-			Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-			Graphics.drawImageWP(heartfull, 421,  16, -4.2)
-		end
-		if player.powerup == 3 then
-			Text.printWP("FIRE FLOWER", 310, 60, -4.2)
-		end
-		if player.powerup == 4 then
-			Text.printWP("SUPER LEAF", 310, 60, -4.2)
-		end
-		if player.powerup == 5 then
-			Text.printWP("TANOOKI SUIT", 290, 60, -4.2)
-		end
-		if player.powerup == 6 then
-			Text.printWP("HAMMER SUIT", 302, 60, -4.2)
-		end
-		if player.powerup == 7 then
-			Text.printWP("ICE FLOWER", 316, 60, -4.2)
+		if HUDOverride.visible.customitembox == true then
+			local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
+			local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
+			if characterhp <= 0 then
+				Graphics.drawImageWP(heartempty, 357,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 388,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+			end
+			if characterhp == 1 then
+				Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 388,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+			end
+			if characterhp == 2 then
+				Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+				Graphics.drawImageWP(heartfull, 388,  16, -4.2)
+				Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+			end
+			if characterhp >= 3 then
+				Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+				Graphics.drawImageWP(heartfull, 388,  16, -4.2)
+				Graphics.drawImageWP(heartfull, 421,  16, -4.2)
+			end
+			if player.powerup == 3 then
+				Text.printWP("FIRE FLOWER", 310, 60, -4.2)
+			end
+			if player.powerup == 4 then
+				Text.printWP("SUPER LEAF", 310, 60, -4.2)
+			end
+			if player.powerup == 5 then
+				Text.printWP("TANOOKI SUIT", 290, 60, -4.2)
+			end
+			if player.powerup == 6 then
+				Text.printWP("HAMMER SUIT", 302, 60, -4.2)
+			end
+			if player.powerup == 7 then
+				Text.printWP("ICE FLOWER", 316, 60, -4.2)
+			end
 		end
 		if costume.useLaser1 then
 			cooldown = 15

@@ -1,6 +1,6 @@
-local rushmode = {}
+local rng = require("base/rng")
 
-GameData.rushModeActive = true
+local rushmode = {}
 
 local texttimer1 = false
 local gotext = false
@@ -33,28 +33,38 @@ end
 function rushmode.onStart()
 	if table.icontains(GameData._smb1Levels,Level.filename()) then
 		Timer.activate(100)
-	elseif table.icontains(GameData._smb1Levels,"SMB1 - W-8, L-4.lvlx") then
+	elseif Level.filename() == "SMB1 - W-8, L-4.lvlx" then
 		Timer.activate(220)
 	elseif table.icontains(GameData._smb2Levels,Level.filename()) then
 		Timer.activate(400)
+	elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
+		Timer.activate(550)
 	end
-	Routine.run(startCountdown)
+	if table.icontains(GameData._smb1Levels,Level.filename()) or table.icontains(GameData._smb2Levels,Level.filename()) then
+		Routine.run(startCountdown)
+	end
+	GameData.rushModeWon = false
 end
 
 function rushmode.onDraw()
 	if texttimer1 then
-		Text.printWP("Get to the end of the level in", 150, 300, -1)
-		Text.printWP(Timer.getValue().." seconds!", 150, 320, -1)
+		Text.printWP("Get to the end of the level in", 150, 200, -1)
+		Text.printWP(Timer.getValue().." seconds!", 150, 220, -1)
 	end
 	if gotext then
 		Text.printWP("GO!", 350, 400, -1)
 	end
+	if Level.endState() >= 1 then
+		GameData.rushModeWon = true
+	end
+	if GameData.rushModeWon == true then
+		Text.printWP("You won!", 350, 250, -1)
+	end
 end
 
 function rushmode.onExit()
-	GameData.rushModeActive = false
-	if Level.endState() > 0 then
-		Level.load(GameData.rushlevelsrng[selecter2], nil, nil)
+	if GameData.rushModeWon then
+		Level.load("SMAS - Rush Mode Results.lvlx")
 	end
 end
 

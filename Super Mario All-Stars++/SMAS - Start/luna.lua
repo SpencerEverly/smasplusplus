@@ -20,6 +20,7 @@ zeroPressedState = false
 f8PressedState = false
 
 GameData.weatherset = true
+GameData.rushModeActive = false
 
 local cooldown = 0
 

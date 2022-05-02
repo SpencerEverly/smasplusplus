@@ -233,10 +233,12 @@ function dependencies.onDraw()
 	if player2.deathTimer == 1 then
 		Routine.run(classicbattlerevivep2)
 	end
-	if player.deathTimer == 1 and GameData.p1lives <= 0 then
+	if player.deathTimer == 1 and GameData.p1lives < 0 then
+		GameData.p1lives = 0
 		Routine.run(classicbattlep2wins)
 	end
-	if player2.deathTimer == 1 and GameData.p2lives <= 0 then
+	if player2.deathTimer == 1 and GameData.p2lives < 0 then
+		GameData.p2lives = 0
 		Routine.run(classicbattlep1wins)
 	end
 	if exitscreen then

@@ -76,6 +76,8 @@ HUDOverride.visible.starcoins = false
 HUDOverride.visible.timer = false
 HUDOverride.visible.levelname = false
 HUDOverride.visible.overworldPlayer = false
+HUDOverride.visible.deathcount = false
+HUDOverride.visible.customitembox = false
 
 local middle = 0
 

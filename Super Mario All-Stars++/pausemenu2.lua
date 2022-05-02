@@ -768,9 +768,10 @@ function rushmodenewstage()
 	startFadeOut()
 	Routine.wait(1.5, true)
 	Misc.unpause()
+	GameData.rushModeWon = false
 	exitFadeActive = false
 	exitFadeActiveDone = true
-	Level.load(rushlevelsrng[selecter2], nil, nil)
+	Level.load(GameData.rushlevelsrng[rng.randomInt(1,#GameData.rushlevelsrng)], nil, nil)
 end
 
 function returntolastlevel()
@@ -1039,12 +1040,12 @@ if GameData.battlemodeactive == true then
 end
 if GameData.rushModeActive == true then
 	if not isOverworld then
-		pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in Rush Mode. The stage will be picked at random!",action = function() Routine.run(battlemodenewstage) end})
+		pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in Rush Mode. The stage will be picked at random!",action = function() Routine.run(rushmodenewstage) end})
 		pauseplus.createOption("main",{text = "Restart this Stage",closeMenu = true,description = "Restarts the same stage over. Useful if you're stuck somewhere.",action = function() Routine.run(restartlevel) end})
 		pauseplus.createOption("main",{text = "Exit Battle Mode",closeMenu = true,description = "To exit Rush Mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
 	end
 end
-if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
+if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and GameData.rushModeActive == nil or GameData.rushModeActive == false then
 	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
 	end
