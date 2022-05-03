@@ -116,6 +116,7 @@ end
 
 local intromodeactivated = false
 local introtime = 0
+local jumptime = 0
 local activatejump = false
 
 function smasfunctions.onInitAPI()
@@ -137,25 +138,29 @@ function smasfunctions.onInputUpdate()
 		if Player(i):mem(0x11C, FIELD_WORD) >= 1 then --Jump momentum detection
 			Player(i).keys.jump = true
 		end
-		if Player(i):isGroundTouching() then --If touching the ground, rng will happen
-			if activatejump then
-				Player(i).keys.jump = true
-				activatejump = false
-			end
+		if activatejump then
+			local playernumber = rng.randomInt(1,6)
+			Player(playernumber).keys.jump = true
 		end
 	end
 end
 
 function smasfunctions.onDraw()
 	if intromodeactivated then
-		introtime = introtime - 2
+		introtime = introtime - 3
+		jumptime = 29
 		for i = 1,6 do
 			Player(i).direction = 1 --Direction is always right
-			Text.print(intromodeactivated, 100, 100)
-			Text.print(introtime, 100, 120)
 			if introtime <= 0 then
 				introtime = rng.randomInt(1,120)
 				activatejump = true
+			end
+			if activatejump then
+				jumptime = jumptime - 1
+				if jumptime <= 0 then
+					jumptime = 29
+					activatejump = false
+				end
 			end
 		end
 	end
