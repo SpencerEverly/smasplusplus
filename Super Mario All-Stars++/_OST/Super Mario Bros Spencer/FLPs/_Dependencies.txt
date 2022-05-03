@@ -1,6 +1,9 @@
 The following plugins will need to be required to have full compability:
 
+Free Plugins:
 - Magical8bitPlug2
+
+Roland Cloud (You'll need a subscription):
 - SOUND Canvas VA
 - SRX ORCHESTRA
 - ZENOLOGY
