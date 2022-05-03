@@ -96,6 +96,8 @@ local smasfunctions = {}
 
 local extrasounds = require("extrasounds")
 local serializer = require("ext/serializer")
+local rng = require("base/rng")
+local customCamera = require("customCamera")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
@@ -110,6 +112,53 @@ if (_G.player2 ~= nil) or (_G.player3 ~= nil) or (_G.player4 ~= nil) or (_G.play
 	_G.player6 = Player(6)
 	_G.player7 = Player(7)
 	_G.player8 = Player(8)
+end
+
+local intromodeactivated = false
+local introtime = 0
+local activatejump = false
+
+function smasfunctions.onInitAPI()
+	registerEvent(smasfunctions,"onDraw")
+	registerEvent(smasfunctions,"onInputUpdate")
+end
+
+function smasfunctions.onInputUpdate()
+	if intromodeactivated then
+		for i = 1,6 do
+			Player(i).keys.right = true --These keys are force-held like the og intro
+			Player(i).keys.run = true
+		end
+		if Player(i).powerup == 4 or Player(i).powerup == 5 then --If leaf or tanooki, fly down when flying
+			if Player(i):mem(0x16E, FIELD_BOOL, true) then
+				Player(i).keys.jump = true
+			end
+		end
+		if Player(i):mem(0x11C, FIELD_WORD) >= 1 then --Jump momentum detection
+			Player(i).keys.jump = true
+		end
+		if Player(i):isGroundTouching() then --If touching the ground, rng will happen
+			if activatejump then
+				Player(i).keys.jump = true
+				activatejump = false
+			end
+		end
+	end
+end
+
+function smasfunctions.onDraw()
+	if intromodeactivated then
+		introtime = introtime - 2
+		for i = 1,6 do
+			Player(i).direction = 1 --Direction is always right
+			Text.print(intromodeactivated, 100, 100)
+			Text.print(introtime, 100, 120)
+			if introtime <= 0 then
+				introtime = rng.randomInt(1,120)
+				activatejump = true
+			end
+		end
+	end
 end
 
 -----------------------
@@ -509,12 +558,46 @@ function betterPlayer(index, func) --Better player/player2 detection, for simpli
 	end
 end
 
-function activatePlayer1()
-	Cheats.trigger("1player")
+function activate1stPlayer()
+	mem(0x00B2595E, FIELD_WORD, 1)
+	customCamera.getTargets()
 end
 
-function activatePlayer2()
+function activate2ndPlayer()
 	Cheats.trigger("2player")
+	mem(0x00B2595E, FIELD_WORD, 2)
+	customCamera.getTargets()
+end
+
+function activatePlayerIntroMode()
+	Cheats.trigger("supermario8")
+	mem(0x00B2595E, FIELD_WORD, 6)
+	local rngcharacter1 = rng.randomInt(1,5)
+	local rngcharacter2 = rng.randomInt(1,5)
+	local rngcharacter3 = rng.randomInt(1,5)
+	local rngcharacter4 = rng.randomInt(1,5)
+	local rngcharacter5 = rng.randomInt(1,5)
+	local rngcharacter6 = rng.randomInt(1,5)
+	local poweruprng1 = rng.randomInt(1,7)
+	local poweruprng2 = rng.randomInt(1,7)
+	local poweruprng3 = rng.randomInt(1,7)
+	local poweruprng4 = rng.randomInt(1,7)
+	local poweruprng5 = rng.randomInt(1,7)
+	local poweruprng6 = rng.randomInt(1,7)
+	Player(1):transform(rngcharacter1, false)
+	Player(2):transform(rngcharacter2, false)
+	Player(3):transform(rngcharacter3, false)
+	Player(4):transform(rngcharacter4, false)
+	Player(5):transform(rngcharacter5, false)
+	Player(6):transform(rngcharacter6, false)
+	Player(1).powerup = poweruprng1
+	Player(2).powerup = poweruprng2
+	Player(3).powerup = poweruprng3
+	Player(4).powerup = poweruprng4
+	Player(5).powerup = poweruprng5
+	Player(6).powerup = poweruprng6
+	intromodeactivated = true
+	customCamera.getTargets()
 end
 
 function checkLivingIndex() --Code to check the isAnyPlayerAlive() code.
@@ -654,7 +737,7 @@ end
 function rngTrueValue(argument) --Thanks Seija!
 	math.randomseed(os.time())
 	if argument == "y" then
-		return RNG.randomInt(1,10)
+		return rng.randomInt(1,10)
 	end
 end
 

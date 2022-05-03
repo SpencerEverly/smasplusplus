@@ -1242,13 +1242,13 @@ function globalgenerals.onDraw()
 		local playerboundaryx = Player(2).x - player.x
 		local playerboundaryy = Player(2).y - player.y
 		--Kill player2 if far away, out of the camera bounds
-		if playerboundaryx >= 800 then
+		if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
 			Player(2):kill()
-		elseif playerboundaryx <= -800 then
+		elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
 			Player(2):kill()
-		elseif playerboundaryy >= 1200 then
+		elseif playerboundaryy >= 1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
 			Player(2):kill()
-		elseif playerboundaryy <= -1200 then
+		elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
 			Player(2):kill()
 		end
 	end

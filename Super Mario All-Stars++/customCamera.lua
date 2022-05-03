@@ -1003,7 +1003,7 @@ local function targetsAreDifferent(listA,listB)
     return false
 end
 
-local function getTargets()
+function customCamera.getTargets()
     -- Use customCamera.targets if possible
     local targets = {}
     local count = 0
@@ -1030,10 +1030,9 @@ local function getTargets()
     end
 
     -- Add player
-	if Player(2) and Player(2).isValid then
-		table.insert(targets,{player = player.idx, player2 = player2.idx})
-	else
-		table.insert(targets,player)
+	table.insert(targets,player)
+	if player.count() > 1 then
+		table.insert(targets,player.count())
 	end
     count = count + player.count()
 	
@@ -1233,7 +1232,7 @@ function customCamera.resetCameraState()
     customCamera.screenOffsetY = customCamera.currentSettings.screenOffsetY
 
 
-    customCamera.currentTargets = getTargets()
+    customCamera.currentTargets = customCamera.getTargets()
     customCamera.previousTargetsFous = vector.zero2
     customCamera.targetsTransition = 0
 
@@ -1258,7 +1257,7 @@ function customCamera.onDraw()
     end
 
     -- Update targets
-    local newTargets = getTargets()
+    local newTargets = customCamera.getTargets()
 
     if targetsAreDifferent(customCamera.currentTargets,newTargets) then
         customCamera.previousTargetsFous = vector(camera.x + camera.width*0.5,camera.y + camera.height*0.5)
