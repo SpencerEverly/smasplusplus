@@ -109,6 +109,9 @@ local function preboot()
 	if SaveData.introselect == 17 then
 		Level.load("intro_jakebrito2.lvlx", nil, nil)
 	end
+	if SaveData.introselect == 18 then
+		Level.load("intro_circuitcity.lvlx", nil, nil)
+	end
 end
 
 function onKeyboardPress(k, v)

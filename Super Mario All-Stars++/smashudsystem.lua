@@ -51,7 +51,7 @@ local gameovershow = false
 
 function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
 	if SaveData.disableX2char == false then
-		if block.contentID == 1000 then
+		if block.contentID == 1000 or block.contentID == 0 then
 			SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
 		elseif block.contentID <= 99 and block.contentID >= 1 then
 			SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
@@ -60,7 +60,7 @@ function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil)
 end
 
 function smasdeathsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
-	local coins = table.map{10,33,88,103,258,528}
+	local coins = table.map{10,33,88,103,138,251,252,253,258,528}
 	if SaveData.disableX2char == false then
 		for _,p in ipairs(Player.get()) do 
 			if coins[npc.id] and Colliders.collide(p, npc) then

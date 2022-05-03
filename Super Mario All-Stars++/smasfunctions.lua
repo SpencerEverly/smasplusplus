@@ -97,6 +97,8 @@ local smasfunctions = {}
 local extrasounds = require("extrasounds")
 local serializer = require("ext/serializer")
 
+local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
+local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
 --This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.
 _G.Player = Player
 _G.player = Player(1)
@@ -505,6 +507,14 @@ function betterPlayer(index, func) --Better player/player2 detection, for simpli
 			func(plr)
 		end
 	end
+end
+
+function activatePlayer1()
+	Cheats.trigger("1player")
+end
+
+function activatePlayer2()
+	Cheats.trigger("2player")
 end
 
 function checkLivingIndex() --Code to check the isAnyPlayerAlive() code.

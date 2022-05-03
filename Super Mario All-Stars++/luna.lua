@@ -19,14 +19,8 @@ if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
 end
 
 --Make sure to save the current episode folder and save slot numbers to it's own GameData variables to prevent the broken 1.3 launcher from launching the episode...
-GameData.__EpisodeFolder = GameData.__EpisodeFolder or Misc.episodePath()
-GameData.__SaveSlot = GameData.__SaveSlot or Misc.saveSlot()
-
---If it's mismatched, run a dialog and afterward exit the engine
-if GameData.__EpisodeFolder ~= Misc.episodePath() and GameData.__SaveSlot ~= Misc.saveSlot() then
-    Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
-    Misc.exitEngine()
-end
+GameData.__EpisodeFolder = Misc.episodePath()
+GameData.__SaveSlot = Misc.saveSlot()
 
 --Make sure we warn the user of the dangers of the old star system...
 if mem(0x00B251E0, FIELD_WORD) >= 1 then
@@ -248,7 +242,9 @@ GameData.notransitionlevels = {
 	"SMAS - Raca's World (Part 1).lvlx",
 	"intro_8bit.lvlx",
 	"intro_bossedit8.lvlx",
+	"intro_circuitcity.lvlx",
 	"intro_jakebrito1.lvlx",
+	"intro_jakebrito2.lvlx",
 	"intro_marioforever.lvlx",
 	"intro_S!TS!.lvlx",
 	"intro_scrollingheights.lvlx",
@@ -442,6 +438,11 @@ function warpDoorBegin()
 end
 
 function onStart() --Now do onStart...
+	--From earlier, if the GameData info is mismatched, run a dialog and afterward exit the engine
+	if GameData.__EpisodeFolder ~= Misc.episodePath() and GameData.__SaveSlot ~= Misc.saveSlot() then
+		Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
+		Misc.exitEngine()
+	end
 	loadSaveSlot(Misc.saveSlot()) --This will load the save slot twice, to check to make sure it's been properly loaded
 	Routine.run(warpDoorBegin) --This will run the routine to save the original count and to start the system from there
 	--Do the weather SaveData additions

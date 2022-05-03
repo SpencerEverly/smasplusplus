@@ -503,6 +503,24 @@ local function theme17scrolling()
 	Routine.loop(lunatime.toTicks(15.2), theme17scrolling, true)
 end
 
+local function theme18()
+	SaveData.introselect = 18
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_circuitcity.lvlx", nil, nil)
+end
+
+local function theme18scrolling()
+	autoscroll.scrollRight(6)
+	Routine.wait(16.6)
+	autoscroll.scrollLeft(15)
+	Routine.wait(7)
+	Routine.loop(lunatime.toTicks(23.6), theme18scrolling, true)
+end
+
 local function mapExit()
 	GameData.menucomplete = true
 	autoscroll.scrollLeft(5000)
@@ -1284,6 +1302,9 @@ function bootmenu.onStart()
 		if Level.filename() == "intro_jakebrito2.lvlx" then
 			Routine.run(theme17scrolling)
 		end
+		if Level.filename() == "intro_circuitcity.lvlx" then
+			Routine.run(theme18scrolling)
+		end
 	end
 end
 
@@ -1637,6 +1658,12 @@ function bootmenu.onDraw()
 		if Level.filename() == "intro_jakebrito1.lvlx" then
 			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
 		end
+		if Level.filename() == "intro_jakebrito2.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
+		if Level.filename() == "intro_circuitcity.lvlx" then
+			Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+		end
 		
 		local rngspark = rng.randomInt(1,20)
 		local rngsparkmovement = rng.randomInt(1,1.2)
@@ -1917,6 +1944,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() Routine.run(theme17) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Circuit Central (By RvBNut91)",chosenFunction = function() Routine.run(theme18) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 	

@@ -91,6 +91,7 @@ function globalgenerals.onInitAPI()
 	registerEvent(globalgenerals,"onPlayerHarm")
 	registerEvent(globalgenerals,"onPostNPCKill")
 	registerEvent(globalgenerals,"onPause")
+	registerEvent(globalgenerals,"onExplosion")
 	
 	local Routine = require("routine")
 	
@@ -287,13 +288,24 @@ function globalgenerals.onInputUpdate()
 		end
 	end
 end
-	
+
+function globalgenerals.onPostExplosion(event, explosion)
+	if Cheats.trigger("1player") or Cheats.trigger("2player") then
+		if explosion then
+			--event.cancelled = true
+		end
+	end
+end
+
 function globalgenerals.onTick()
 	if Player(2) and Player(2).isValid then
 		customCamera.targets = {player, player2}
 	else
 		customCamera.targets = {player}
 	end
+	--if Cheats.active("supermario2") then
+		
+	--end
 	if player.character == CHARACTER_SNAKE then
 		HUDOverride.visible.keys = true
 		HUDOverride.visible.itembox = true
@@ -1186,7 +1198,7 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 	if stars[npc.id] then
 		SaveData.starsgrabbed = SaveData.starsgrabbed + 1
 	end
-	local coins = table.map{10,33,88,103,258,528}
+	local coins = table.map{10,33,88,103,138,251,252,253,258,528}
 	if coins[npc.id] then
 		SaveData.totalcoins = SaveData.totalcoins + 1
 	end
@@ -1229,15 +1241,15 @@ function globalgenerals.onDraw()
 	if Player(2) and Player(2).isValid then
 		local playerboundaryx = Player(2).x - player.x
 		local playerboundaryy = Player(2).y - player.y
-		--Try to push player2 if about to go out of the camera bounds
-		if playerboundaryx >= 400 then
-			Player(2).x = camera.x + 798 - (player.width / 2)
-		elseif playerboundaryx <= -400 then
-			Player(2).x = camera.x + 2 - (player.width / 2)
-		elseif playerboundaryy >= 800 then
-			Player(2).y = camera.y + 598 - (player.height / 2)
-		elseif playerboundaryy <= -800 then
-			Player(2).y = camera.y + 2 - (player.height / 2)
+		--Kill player2 if far away, out of the camera bounds
+		if playerboundaryx >= 800 then
+			Player(2):kill()
+		elseif playerboundaryx <= -800 then
+			Player(2):kill()
+		elseif playerboundaryy >= 1200 then
+			Player(2):kill()
+		elseif playerboundaryy <= -1200 then
+			Player(2):kill()
 		end
 	end
 	if SaveData.resolution == "fullscreen" then
