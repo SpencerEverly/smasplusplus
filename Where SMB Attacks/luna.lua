@@ -31,6 +31,7 @@ local extrasounds = require("extrasounds")
 local modernReserveItems = require("modernReserveItems")
 local pausemenu = require("pausemenu")
 local smallScreen = require("smallScreen")
+local smasfunctions = require("smasfunctions")
 
 local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
 local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
