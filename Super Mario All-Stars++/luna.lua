@@ -48,8 +48,9 @@ local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
 local extrasounds = require("extrasounds")
 
---Next up is some new functions, for simplifying the functions:
+--These libraries has some new functions, for simplifying the functions, and other things:
 local smasfunctions = require("smasfunctions")
+local smasverbosemode = require("smasverbosemode")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
