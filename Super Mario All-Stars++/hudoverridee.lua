@@ -505,6 +505,28 @@ function HUDOverride.drawStars(splitOffset, thisCam, thisPlayer, priority)
 	end
 end
 
+function HUDOverride.scoreCounterWithZeroes()
+	if SaveData.totalScoreClassic >= 0 then
+		string.format("%08f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 99 then
+		return string.format("%07f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 999 then
+		return string.format("%06f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 9999 then
+		return string.format("%05f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 99999 then
+		return string.format("%04f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 999999 then
+		return string.format("%03f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 9999999 then
+		return string.format("%02f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 99999999 then
+		return string.format("%01f",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 999999999 then
+		return SaveData.totalScoreClassic
+	end
+end
+
 function HUDOverride.lifeCrownCounter()
 	if SaveData.totalLives < 1000 then
 		return SaveData.totalLives
