@@ -3694,7 +3694,7 @@ do
 			},
 			-- Death Count
 			{
-				icon = Graphics.loadImageResolved("deathCount.png"),
+				icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-3.png"),
 				getValue = (function()
 					return SaveData.deathCount
 				end),
