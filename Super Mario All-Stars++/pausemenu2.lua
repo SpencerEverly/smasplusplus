@@ -123,22 +123,22 @@ local function changeresolution()
 end
 
 local function changeletterbox()
-	if pauseplus.getSelectionValue("settings","Toggle Letterbox Scaling") then
-		playSound("letterbox-disable.ogg")
-		SaveData.letterbox = false
-	else
+	if pauseplus.getSelectionValue("settings","Enable Letterbox Scaling") then
 		playSound("letterbox-enable.ogg")
 		SaveData.letterbox = true
+	else
+		playSound("letterbox-disable.ogg")
+		SaveData.letterbox = false
 	end
 end
 
 local function changeresolutionborder()
-	if pauseplus.getSelectionValue("settings","Toggle Resolution Border") then
-		playSound("resolutionborder-enable.ogg")
-		SaveData.borderEnabled = true
-	else
+	if pauseplus.getSelectionValue("settings","Disable Resolution Border") then
 		playSound("resolutionborder-disable.ogg")
 		SaveData.borderEnabled = false
+	else
+		playSound("resolutionborder-enable.ogg")
+		SaveData.borderEnabled = true
 	end
 end
 
@@ -1073,8 +1073,8 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and Ga
 
 	-- Settings
 	pauseplus.createOption("settings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_NES,RESOLUTION_GB,RESOLUTION_GBA,RESOLUTION_IPHONEONE,RESOLUTION_THREEDS}, action = function() changeresolution() end})
-	pauseplus.createOption("settings",{text = "Toggle Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Toggle scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
-	pauseplus.createOption("settings",{text = "Toggle Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable borders when using other additional borders.", action =  function() changeresolutionborder() end})
+	pauseplus.createOption("settings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
+	pauseplus.createOption("settings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() changeresolutionborder() end})
 	pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
 	pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
 	if (Level.filename() == "map.lvlx") == false then
