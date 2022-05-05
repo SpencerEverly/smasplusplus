@@ -1106,8 +1106,8 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and Ga
 	
 	--Costume Menu
 	if SaveData.disableX2char == false then
-		pauseplus.createOption("costumeoptions",{text = "Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() Routine.run(toggleabilitiescost) end})
-		pauseplus.createOption("costumeoptions",{text = "Enable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() Routine.run(toggleprofanecostume) end})
+		pauseplus.createOption("costumeoptions",{text = "Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to disable costume abilities or keep them enabled. Default option is enabled.", action =  function() Routine.run(toggleabilitiescost) end})
+		pauseplus.createOption("costumeoptions",{text = "Enable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not. Default option is disabled.", action =  function() Routine.run(toggleprofanecostume) end})
 	end
 
 	--Teleportation Menu
