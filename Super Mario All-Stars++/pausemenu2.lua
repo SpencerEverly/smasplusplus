@@ -93,7 +93,7 @@ function pausemenu2.onPlayerKill()
 end
 
 local function smb1hardmodetoggle()
-	if pauseplus.getSelectionValue("miscsettings","Activate SMB1 Hard Mode") then
+	if pauseplus.getSelectionValue("miscsettings","Enable SMB1 Hard Mode") then
 		SaveData.SMB1HardModeActivated = true
 	else
 		SaveData.SMB1HardModeActivated = false
@@ -143,15 +143,15 @@ local function changeresolutionborder()
 end
 
 local function toggleabilitiescost()
-	if pauseplus.getSelectionValue("costumeoptions","Enable/Disable Abilities") then
-		SaveData.toggleCostumeAbilities = true
-	else
+	if pauseplus.getSelectionValue("costumeoptions","Disable Abilities") then
 		SaveData.toggleCostumeAbilities = false
+	else
+		SaveData.toggleCostumeAbilities = true
 	end
 end
 
 local function toggleprofanecostume()
-	if pauseplus.getSelectionValue("costumeoptions","Enable/Disable Profane Voices") then
+	if pauseplus.getSelectionValue("costumeoptions","Enable Profane Voices") then
 		SaveData.toggleCostumeProfanity = true
 	else
 		SaveData.toggleCostumeProfanity = false
@@ -1084,7 +1084,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and Ga
 	pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = {function() Routine.run(quitonly) end}})
 	
 	-- Misc. Settings
-	pauseplus.createOption("miscsettings",{text = "Activate SMB1 Hard Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable/disable SMB1 Hard Mode. This will only apply to SMB1 levels.", action = function() smb1hardmodetoggle() end})
+	pauseplus.createOption("miscsettings",{text = "Enable SMB1 Hard Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable SMB1 Hard Mode. This will only apply to SMB1 levels.", action = function() smb1hardmodetoggle() end})
 
 	--Character Menu
 	if SaveData.disableX2char == false then
@@ -1106,8 +1106,8 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and Ga
 	
 	--Costume Menu
 	if SaveData.disableX2char == false then
-		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() Routine.run(toggleabilitiescost) end})
-		pauseplus.createOption("costumeoptions",{text = "Enable/Disable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() Routine.run(toggleprofanecostume) end})
+		pauseplus.createOption("costumeoptions",{text = "Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable abilities or not.", action =  function() Routine.run(toggleabilitiescost) end})
+		pauseplus.createOption("costumeoptions",{text = "Enable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not.", action =  function() Routine.run(toggleprofanecostume) end})
 	end
 
 	--Teleportation Menu
