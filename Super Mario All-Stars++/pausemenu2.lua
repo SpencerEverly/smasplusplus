@@ -124,11 +124,11 @@ end
 
 local function changeletterbox()
 	if pauseplus.getSelectionValue("settings","Enable Letterbox Scaling") then
-		playSound("letterbox-enable.ogg")
-		SaveData.letterbox = true
-	else
 		playSound("letterbox-disable.ogg")
 		SaveData.letterbox = false
+	else
+		playSound("letterbox-enable.ogg")
+		SaveData.letterbox = true
 	end
 end
 
