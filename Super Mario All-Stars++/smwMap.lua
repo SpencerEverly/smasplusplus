@@ -16,7 +16,40 @@
 
 local smwMap = {}
 
-
+--In case if first time boot recieves an weird error message with ipairs, I put every SaveData generation from luna.lua into here.
+if SaveData.resolution == nil then
+	SaveData.resolution = "fullscreen"
+end
+if SaveData.letterbox == nil then
+	SaveData.letterbox = true
+end
+if SaveData.borderEnabled == nil then
+	SaveData.borderEnabled = true
+end
+if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
+	SaveData.totalStarCount = 0
+end
+if SaveData.completeLevels == nil then --This will add a table to list completed levels
+	SaveData.completeLevels = {}
+end
+if SaveData.totalcoins == nil then
+	SaveData.totalcoins = 0
+end
+if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
+	SaveData.deathCount = 0
+end
+if SaveData.totalLives == nil then --The total lives used the for the episode.
+	SaveData.totalLives = 5
+end
+if SaveData.totalCoinsClassic == nil then
+	SaveData.totalCoinsClassic = 0
+end
+if SaveData.totalScoreClassic == nil then
+	SaveData.totalScoreClassic = 0
+end
+if SaveData.deathquickoption == true then
+	SaveData.deathquickoption = false
+end
 
 -- Name of the level file that the map is on.
 smwMap.levelFilename = "map.lvlx"
