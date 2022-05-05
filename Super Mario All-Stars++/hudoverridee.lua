@@ -60,9 +60,10 @@ HUDSprites.cross = Graphics.sprites.hardcoded["33-1"]
 HUDSprites.stars = Graphics.sprites.hardcoded["33-5"]
 
 
-HUDSprites.lives = Graphics.sprites.hardcoded["33-3"]
+HUDSprites.lives = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-2.png")
+HUDSprites.livesClassic = Graphics.sprites.hardcoded["33-3"]
 HUDSprites.lives2 = Graphics.sprites.hardcoded["33-7"]
-HUDSprites.deathcount = Graphics.loadImageResolved("deathCount.png")
+HUDSprites.deathcount = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-3.png")
 --2nd one exclusive to battle mode?
 
 HUDSprites.heartEmpty = Graphics.sprites.hardcoded["36-2"]
@@ -518,7 +519,7 @@ end
 
 function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
 	if SaveData.disableX2char == true then
-		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), mem(0x00B2C5AC, FIELD_FLOAT), priority);
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("livesClassic", thisPlayer.character), mem(0x00B2C5AC, FIELD_FLOAT), priority);
 	elseif SaveData.disableX2char == false then
 		if SaveData.totalLives <= 999 then
 			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
