@@ -2,70 +2,95 @@
 --By Spencer Everly
 
 local textplus = require("textplus")
-local doprint = {font=textplus.loadFont("littleDialogue/font/6.ini"), color=Color.white, plaintext=true}
 
 local smasverbosemode = {}
+
+local gtltrepllace = {["<"] = "<lt>", [">"] = "<gt>", ["\n"] = "<br>"}
+local verbosefont = textplus.loadFont("littleDialogue/font/6.ini")
+
+local doprint = {font=textplus.loadFont("littleDialogue/font/6.ini"), color=Color.white, plaintext=true}
+	
+doprint.xscale = GameData._repll.fontscale or 2
+doprint.yscale = doprint.xscale
 
 smasverbosemode.activated = false
 GameData.verboseLog = {}
 smasverbosemode.verboseLog = GameData.verboseLog
 
-function _verboseprintString(str)
-	if str == nil then
-		str = ""
-	end
-	if str:find("\n") then
-		for k,v in ipairs(str:split("\n")) do
-			table.insert(smasverbosemode.verboseLog, v)
-		end
-	elseif str then
-		table.insert(smasverbosemode.verboseLog, str)
-	end
-end
-
-local function _verboseprintValues(vals)
-	if next(vals, nil) == nil then
-		return
-	end
-	local t = {}
-	local multiline = false
-	local maxIdx = 0
-	for k,v in pairs(vals) do
-		maxIdx = math.max(maxIdx, k)
-		t[k] = inspect(v)
-		if t[k]:find("\n") then
-			multiline = true
-		end
-	end
-	if multiline then
-		for i = 1, maxIdx do
-			_verboseprintString(t[i] or "nil")
-		end
-	else
-		local s = ""
-		for i = 1, maxIdx do
-			if s ~= "" then
-				s = s .. " "
-			end
-			s = s .. (t[i] or "nil")
-		end
-		_verboseprintString(s)
-	end
-end
-
-function _verboseprint(str, x, y)
+local function _print(str, x, y)
 	local textLayout = textplus.layout(str, nil, doprint)
 	y = y - textLayout.height
 	textplus.render{x = x, y = y, layout = textLayout, priority = 0}
 end
 
+local printlist = {}
+local listidx = 1
+local baseX, baseY = 10, 590
+
+local function addprint(v)
+	printlist[listidx] = v
+	listidx = listidx + 1
+end
+
+local function _storeVerboseString(stringvalue)
+	if stringvalue == nil then
+		stringvalue = ""
+	end
+	if stringvalue:find("\n") then
+		for k,v in ipairs(stringvalue:split("\n")) do
+			table.insert(smasverbosemode.verboseLog, v)
+		end
+	elseif stringvalue then
+		table.insert(smasverbosemode.verboseLog, stringvalue)
+	end
+	local y = baseY
+	for i = #smasverbosemode.verboseLog, 1, -1 do
+		y = y + 10
+		addprint("\n")
+		if y < 0 then
+			break
+		end
+		addprint(smasverbosemode.verboseLog[i])
+	end
+end
+
+local function _printVerboseList()
+	_print(table.concat(printlist), baseX, baseY)
+end
+
 function smasverbosemode.onInitAPI()
+	registerEvent(smasverbosemode,"onStart")
+	registerEvent(smasverbosemode,"onEvent")
 	registerEvent(smasverbosemode,"onDraw")
+end
+
+function smasverbosemode.onStart()
+	if smasverbosemode.activated == true then
+		Routine.run(startLevel)
+	end
+end
+
+function smasverbosemode.onEvent(eventName)
+	if smasverbosemode.activated == true then
+		if eventName then
+			_storeVerboseString("Event "..eventName.." has executed.")
+		end
+	end
+end
+
+function startLevel()
+	Routine.wait(0.1, true)
+	_storeVerboseString("Level has officially started.")
 end
 
 function smasverbosemode.onDraw()
 	if smasverbosemode.activated == true then
-		--_verboseprint("I have no idea", 10, 10)
+		_printVerboseList()
+		for _,p in ipairs(Player.get()) do
+			if p:mem(0x11C, FIELD_WORD) == 1 then
+				_storeVerboseString("Player "..p.idx.." has jumped.")
+			end
+		end
 	end
 end
 
