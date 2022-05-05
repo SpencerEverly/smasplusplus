@@ -13,6 +13,7 @@ local sprite = require("base/sprite")
 local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
+local cooldown = 0
 
 if SaveData.deathquickoption == nil then
 	SaveData.deathquickoption = false
@@ -524,6 +525,16 @@ local function costumechangeleft()
 	Routine.run(musicalchairs.switcher)
 end
 
+local function enable2player()
+	playSound(1001)
+	Cheats.trigger("2player")
+end
+
+local function disable2player()
+	playSound(1001)
+	Cheats.trigger("1player")
+end
+
 function pausemenu2.onDraw()
 	if GameData.muteMusic == true then
 		Audio.MusicVolume(0)
@@ -735,6 +746,45 @@ function pausemenu2.onDraw()
 			else
 				textplus.print{x = 105, y = 518, text = "<color rainbow>"..SaveData.playerName.."</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
 			end
+		end
+	end
+end
+
+local function checkingplayerstatus()
+	if player.count() == 1 then
+		playSound(1001)
+	elseif player.count() >= 2 then
+		playSound(1001)
+		Cheats.trigger("1player")
+		player:mem(0x11E,FIELD_BOOL,false)
+		if cooldown <= 0 then
+			player:mem(0x11E,FIELD_BOOL,true)
+		end
+	end
+end
+
+local function checkingplayerstatus13()
+	if player.count() == 1 then
+		playSound(1001)
+		Cheats.trigger("2player")
+		cooldown = 5
+		player:mem(0x11E,FIELD_BOOL,false)
+		if cooldown <= 0 then
+			player:mem(0x11E,FIELD_BOOL,true)
+		end
+	elseif player.count() == 2 then
+		playSound(1001)
+		Cheats.trigger("1player")
+		player:mem(0x11E,FIELD_BOOL,false)
+		if cooldown <= 0 then
+			player:mem(0x11E,FIELD_BOOL,true)
+		end
+	elseif player.count() >= 3 then
+		playSound(1001)
+		Cheats.trigger("1player")
+		player:mem(0x11E,FIELD_BOOL,false)
+		if cooldown <= 0 then
+			player:mem(0x11E,FIELD_BOOL,true)
 		end
 	end
 end
@@ -1094,13 +1144,15 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and Ga
 		pauseplus.createOption("charactermenu",{text = "Change Costumes (Left)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeleft() end})
 		pauseplus.createOption("charactermenu",{text = "Change Costumes (Right)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeright() end})
 		pauseplus.createOption("charactermenu",{text = "Costume Specific Options",goToSubmenu = "costumeoptions",description = "Change settings regarding the costume that is currently being worn."})
+		pauseplus.createOption("charactermenu",{text = "Enable/Disable Multiplayer",closeMenu = true,description = "Toggle the status of multiplayer. This will only work on 1.3 Mode (If in Normal Mode this won't do anything).",action = function() checkingplayerstatus() end})
 	end
 	if SaveData.disableX2char == true then
-		pauseplus.createOption("charactermenu",{text = "Change Character 1P (Left)", action =  function() characterchange13left() end})
-		pauseplus.createOption("charactermenu",{text = "Change Character 1P (Right)", action =  function() characterchange13() end})
-		if Player.count() == 2 then
-			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Left)", action =  function() characterchange13_2pleft() end})
-			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)", action =  function() characterchange13_2p() end})
+		pauseplus.createOption("charactermenu",{text = "Change Character 1P (Left)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13left() end})
+		pauseplus.createOption("charactermenu",{text = "Change Character 1P (Right)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13() end})
+		pauseplus.createOption("charactermenu",{text = "Enable/Disable Multiplayer",closeMenu = true,description = "Toggle the status of multiplayer. This will only work on 1.3 Mode (If in Normal Mode this won't do anything).",action = function() checkingplayerstatus13() end})
+		if Player(2) and Player(2).isValid and Player.count() == 2 then
+			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Left)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2pleft() end})
+			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2p() end})
 		end
 	end
 	

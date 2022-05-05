@@ -219,6 +219,48 @@ do
         
         table.insert(submenuObj.options,insertPosition or #submenuObj.options+1,settings)
     end
+	
+	
+	function pauseplus.removeOption(submenu,option)
+        submenu  = submenu  or "main"
+
+        submenuExistanceCheck(submenu)
+
+        local submenuObj = pauseplus.submenus[submenu]
+
+        if option == nil then -- Search every menu
+            option = submenu
+
+            for _,submenuName in ipairs(pauseplus.submenuNames) do
+                local value = pauseplus.getSelectionValue(submenuName,option)
+
+                if value ~= nil then
+                    return value
+                end
+            end
+
+            return nil
+        end
+        
+
+        if selectionData[submenu] == nil then
+            return
+        end
+
+        local name = getOptionSaveName(option)
+        local value = selectionData[submenu][name]
+
+        if value == nil then
+            return
+        end
+        
+        
+        if selectionNames[submenu] ~= nil and selectionNames[submenu][name] ~= nil then
+            value = selectionNames[submenu][name][value]
+        end
+        
+        table.remove(submenuObj.options,option or #submenuObj.options-1,settings)
+    end
 
 
     function pauseplus.getSelectionValue(submenu,option)

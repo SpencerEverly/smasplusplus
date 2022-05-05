@@ -1030,9 +1030,10 @@ function customCamera.getTargets()
     end
 
     -- Add player
-	table.insert(targets,player)
 	if player.count() > 1 then
 		table.insert(targets,player.count())
+	else
+		table.insert(targets,player)
 	end
     count = count + player.count()
 	

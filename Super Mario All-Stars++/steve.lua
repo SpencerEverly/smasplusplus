@@ -16,6 +16,7 @@ local configFileReader = require("configFileReader")
 local textplus = require("textplus")
 
 local lib3d = require("lib3d")
+local customCamera = require("customCamera")
 
 local steve = {}
 
