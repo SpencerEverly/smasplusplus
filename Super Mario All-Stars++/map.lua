@@ -1,4 +1,3 @@
-local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local map3d = require("mapp3d")
 
