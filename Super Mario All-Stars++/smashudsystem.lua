@@ -13,7 +13,7 @@ end
 if SaveData.totalLives == nil then --The total lives used the for the episode.
 	SaveData.totalLives = 5
 end
-if SaveData.totalCoinsClassic == nil then --The temp coins used during the level, for 1UPs when reaching 100 coins
+if SaveData.totalCoinsClassic == nil then --The temporary coins used during the level, for 1UPs when reaching 100 coins
 	SaveData.totalCoinsClassic = 0
 end
 if SaveData.totalScoreClassic == nil then --The score, since I wanna remake it because why not
