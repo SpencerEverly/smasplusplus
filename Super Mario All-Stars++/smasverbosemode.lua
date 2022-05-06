@@ -10,8 +10,8 @@ local verbosefont = textplus.loadFont("littleDialogue/font/6.ini")
 
 local doprint = {font=textplus.loadFont("littleDialogue/font/6.ini"), color=Color.white, plaintext=true}
 	
-doprint.xscale = GameData._repll.fontscale or 2
-doprint.yscale = doprint.xscale
+doprint.xscale = 1
+doprint.yscale = 1
 
 smasverbosemode.activated = false
 GameData.verboseLog = {}

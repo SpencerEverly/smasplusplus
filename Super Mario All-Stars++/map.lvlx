@@ -534,6 +534,7 @@ ID:776;X:-191840;Y:-201056;
 ID:752;X:-191616;Y:-200896;
 ID:777;X:-192640;Y:-201152;
 ID:752;X:-192544;Y:-200896;
+ID:778;X:-197600;Y:-201120;
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -1013,6 +1014,29 @@ ID:802;X:-195424;Y:-201024;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-D\,
 ID:752;X:-195776;Y:-200832;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLA-1\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
 ID:752;X:-195488;Y:-201024;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLD-2\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
 ID:753;X:-193600;Y:-200608;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/World 6.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:753;X:-197600;Y:-201216;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros Spencer/World 1.spc|0\;g=2.5\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
+ID:821;X:-197536;Y:-200960;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMBSBeginWarp\"\,\n    \"levelTitle\"\: \"Warp to Game Select\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toSMBS1-1\"\,\n    \"warpName\"\: \"WarpToGameSelectSMBS\"\n}\n";
+ID:752;X:-197504;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:802;X:-197472;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"1-1\: The Very Beginning\"\,\n    \"path_left\"\: \"toSMBS1-1\"\,\n    \"path_right\"\: \"toSMBS1-2\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197440;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-2\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
+ID:802;X:-197376;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"1-2\: Mushroomy Heights\"\,\n    \"path_left\"\: \"toSMBS1-2\"\,\n    \"path_right\"\: \"toSMBS1-3\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:802;X:-197280;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"1-3\: Underground Chasms\"\,\n    \"path_left\"\: \"toSMBS1-3\"\,\n    \"path_right\"\: \"toSMBS1-Tower\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197344;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-3\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
+ID:752;X:-197248;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-Tower\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
+ID:849;X:-197184;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-Tower.lvlx\"\,\n    \"levelTitle\"\: \"1-Tower\: Big\, Long Distances\"\,\n    \"path_left\"\: \"toSMBS1-Tower\"\,\n    \"path_right\"\: \"toSMBS1-4\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:802;X:-197088;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"1-4\: Water Your Way to the Exit\"\,\n    \"name\"\: \"toSMBS1-4\"\,\n    \"path_left\"\: \"toSMBS1-4\"\,\n    \"path_right\"\: \"toSMBS1-5\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197152;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-4\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
+ID:752;X:-197056;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-5\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:802;X:-197024;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"1-5\: The Town from Nowhere\"\,\n    \"name\"\: \"toSMBS1-4\"\,\n    \"path_down\"\: \"toSMBSW-1Path1\"\,\n    \"path_left\"\: \"toSMBS1-5\"\,\n    \"path_right\"\: \"toSMBS1-6\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\,\n    \"unlock_down\"\: 6\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-197024;Y:-200928;D:-1;XTRA:"{\n    \"name\"\: \"toSMBSW-1Path1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:802;X:-197024;Y:-200896;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-A.lvlx\"\,\n    \"levelTitle\"\: \"1-A\: Another World\"\,\n    \"path_right\"\: \"toSMBSW-1Path2\"\,\n    \"path_up\"\: \"toSMBSW-1Path1\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-196992;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-6\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:802;X:-196960;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"1-6\: Yoshi Forest Way\"\,\n    \"name\"\: \"toSMBS1-4\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMBS1-6\"\,\n    \"path_right\"\: \"toSMBS1-Castle\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-196928;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS1-Castle\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:854;X:-196896;Y:-200960;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-1\, L-Castle.lvlx\"\,\n    \"levelTitle\"\: \"1-Castle\: Scary and Unexpected\"\,\n    \"path_down\"\: \"toSMBSW-1Path2\"\,\n    \"path_left\"\: \"toSMBS1-Castle\"\,\n    \"path_up\"\: \"toSMBSW-1Path3\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-196896;Y:-200992;D:-1;XTRA:"{\n    \"name\"\: \"toSMBSW-1Path3\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:821;X:-196896;Y:-201024;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBSW2BeginPipe\"\,\n    \"levelTitle\"\: \"Warp to World 2\"\,\n    \"path_down\"\: \"toSMBSW-1Path3\"\,\n    \"warpName\"\: \"SMBSW1EndPipe\"\n}\n";
+ID:752;X:-196992;Y:-200896;D:-1;XTRA:"{\n    \"name\"\: \"toSMBSW-1Path2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, -64\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
