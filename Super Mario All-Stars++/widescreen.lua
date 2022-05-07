@@ -1,6 +1,6 @@
 local widescreen = {}
 
-local hudoverride = require("hudoverride")
+local hudoverride = require("hudoverridee")
 
 function widescreen.onInitAPI()
     --registerEvent(twilightHUD, "onStart", "onStart")

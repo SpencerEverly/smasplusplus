@@ -4,6 +4,7 @@ local inputconfigurator = {}
 
 function inputconfigurator.onInitAPI()
 	registerEvent(inputconfigurator, "onKeyboardPressDirect")
+	registerEvent(inputconfigurator, "onKeyboardPress")
 	registerEvent(inputconfigurator, "onDraw")
 	registerEvent(inputconfigurator, "onControllerButtonPress")
 	registerEvent(inputconfigurator, "onTick")
@@ -17,6 +18,7 @@ end
 local smbx13font = textplus.loadFont("littleDialogue/smbx13/font.ini")
 local lockSelect = false
 inputconfigurator.controlConfigOpen = false
+inputconfigurator.keyConfigOpen = false
 
 local controlConfigCount = 0
 local controlConfigs = { 	[0] = "Press any button to start.",
@@ -37,9 +39,63 @@ local configButtons = 	{
 							{ img = 1, pos = vector.v2(-34, 2) },
 							{ img = 1, pos = vector.v2(-6, 2) }
 						}
-						
+
+local keyConfigCount = 0
+
+local keyConfigs = { 		[0] = "Press ENTER to start.",
+							"Press a key to assign Jump.",
+							"Press a key to assign Run.",
+							"Press a key to assign Alt Jump.",
+							"Press a key to assign Alt Run.",
+							"Press a key to assign Drop Item.",
+							"Press a key to assign Pause.",
+							"Press a key to assign Up.",
+							"Press a key to assign Down.",
+							"Press a key to assign Left.",
+							"Press a key to assign Right.",
+							"Press any key to confirm."
+						}
+
 local currentController = nil
 local currentConfig = {}
+local currentConfig2 = {}
+
+local function writeKeyConfigs()
+	if currentController == nil then
+		inputconfigurator.nocontroller = false
+		return
+	else
+		local t = inputConfig1
+		
+		if t.inputType == 0 then
+			t = inputConfig1
+			if Player(2) and Player(2).isValid then
+				t2 = inputConfig2
+				t2.jump = currentConfig2[1]
+				t2.run = currentConfig2[2]
+				t2.altjump = currentConfig2[3]
+				t2.altrun = currentConfig2[4]
+				t2.dropitem = currentConfig2[5]
+				t2.pause = currentConfig2[6]
+				t2.up = currentConfig2[7]
+				t2.down = currentConfig2[8]
+				t2.left = currentConfig2[9]
+				t2.right = currentConfig2[10]
+			end
+			t.jump = currentConfig2[1]
+			t.run = currentConfig2[2]
+			t.altjump = currentConfig2[3]
+			t.altrun = currentConfig2[4]
+			t.dropitem = currentConfig2[5]
+			t.pause = currentConfig2[6]
+			t.up = currentConfig2[7]
+			t.down = currentConfig2[8]
+			t.left = currentConfig2[9]
+			t.right = currentConfig2[10]
+			currentConfig2 = {}
+		end
+	end
+end
 
 local function writeButtonConfigs()
 	if currentController == nil then
@@ -47,11 +103,14 @@ local function writeButtonConfigs()
 		return
 	else
 		local t = nil
-		
-		if currentController[2] == 2 then
-			t = inputConfig2
-		else
+		if currentController[1] == 1 then
 			t = inputConfig1
+		elseif currentController[2] == 2 then
+			t = inputConfig2
+		elseif currentController[3] == 3 then
+			t = inputConfig3
+		elseif currentController[4] == 4 then
+			t = inputConfig4
 		end
 		
 		if t.inputType == 0 then
@@ -68,9 +127,32 @@ local function writeButtonConfigs()
 	end
 end
 
-function inputconfigurator.onKeyboardPressDirect(k, repeated)
+function inputconfigurator.onKeyboardPress(k, repeated)
 	if repeated then return end
 	
+	for k,p in ipairs(Player.get()) do
+		pnumkey = p.idx
+	end
+	
+	if inputconfigurator.keyConfigOpen then
+		if k == VK_RETURN then
+			currentKeyboard = { k, pnumkey }
+			keyConfigCount = 1
+			playSound("inputconfig/input_started.ogg")
+			return
+		end
+		if keyConfigCount < #keyConfigs then
+			currentConfig2[keyConfigCount] = k
+			playSound("inputconfig/input_switchpressed.ogg")
+			keyConfigCount = keyConfigCount + 1
+		else
+			inputconfigurator.keyConfigOpen = false
+			playSound("inputconfig/input_success.ogg")
+			writeKeyConfigs()
+			lockSelect = true
+			GameData.reopenmenu = true
+		end
+	end
 	if inputconfigurator.controlConfigOpen then
 		if (k == VK_BACK) then
 			inputconfigurator.backspacePressedState = true
@@ -119,6 +201,29 @@ local function textPrintCentered(t, x, y, color)
 end
 
 function inputconfigurator.onDraw()
+	if inputconfigurator.keyConfigOpen then
+		local w = 580
+		local h = 260
+		
+		local xPos = 400 - w*0.5
+		local yPos = 300 - h*0.5
+		
+		Graphics.drawBox{x = xPos, y = yPos - 20, width = w, height = h, color={0,0,0,0.75}, priority = -2}
+		Graphics.drawImageWP(Graphics.sprites.hardcoded["57-0"].img, 400 - 128, 300 - 64 - 40, -2)
+		
+		textPrintCentered("Keyboard Configurator", 400, yPos + -1)
+		
+		textPrintCentered(keyConfigs[keyConfigCount], 400, yPos + 160)
+		
+		--Graphics.drawImageWP(Graphics.sprites.hardcoded["57-1"].img, 400 + v.pos.x, 300-40 + v.pos.y, 0, 20*v.img, 20, 20, -2)
+		
+		textPrintCentered("Press Backspace to cancel", 400, yPos + 210)
+		
+		if escPressedState then
+			inputconfigurator.keyConfigOpen = false
+			GameData.reopenmenu = true
+		end
+	end
 	if inputconfigurator.controlConfigOpen then
 		
 		local w = 580

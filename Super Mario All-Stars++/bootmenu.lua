@@ -688,11 +688,15 @@ local function X2Char()
 end
 
 local function InputConfig1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>To begin configuring the inputs of the game, please select Begin to get started (Controller only).<question StartInputs>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>To begin configuring the inputs of the game,<page>please select an option depending on the controls currently being used.<question StartInputs>", pauses = false, updatesInPause = true})
 end
 
 local function startConfigurator()
 	inputconfigurator.controlConfigOpen = true
+end
+
+local function startConfiguratorKeyboard()
+	inputconfigurator.keyConfigOpen = true
 end
 
 local function startKeyboard()
@@ -2009,7 +2013,8 @@ if bootmenu.active == true then
 	
 	
 	
-	littleDialogue.registerAnswer("StartInputs",{text = "Begin",chosenFunction = function() Routine.run(startConfigurator) end})
+	littleDialogue.registerAnswer("StartInputs",{text = "Keyboard",chosenFunction = function() Routine.run(startConfiguratorKeyboard) end})
+	littleDialogue.registerAnswer("StartInputs",{text = "Controller",chosenFunction = function() Routine.run(startConfigurator) end})
 	littleDialogue.registerAnswer("StartInputs",{text = "Exit",chosenFunction = function() Routine.run(optionsMenu1) end})
 	
 	

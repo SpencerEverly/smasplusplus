@@ -119,6 +119,9 @@ local introtime = 0
 local jumptime = 0
 local activatejump = false
 
+local threeplayermode = false
+local fourplayermode = false
+
 function smasfunctions.onInitAPI()
 	registerEvent(smasfunctions,"onDraw")
 	registerEvent(smasfunctions,"onInputUpdate")
@@ -142,6 +145,16 @@ function smasfunctions.onInputUpdate()
 		end
 		if activatejump then
 			Player(playernumber).keys.jump = true
+		end
+	end
+	if threeplayermode then
+		for k,p in ipairs(Player.get()) do
+			if Player(2) and Player(2).isValid then
+				
+			end
+			if Player(3) and Player(3).isValid then
+				
+			end
 		end
 	end
 end
@@ -573,6 +586,15 @@ function activate2ndPlayer()
 	Cheats.trigger("2player")
 	mem(0x00B2595E, FIELD_WORD, 2)
 	customCamera.getTargets()
+end
+
+function activate3rdPlayer()
+	Cheats.trigger("supermario4")
+	mem(0x00B2595E, FIELD_WORD, 3)
+end
+
+function activate4thPlayer()
+	Cheats.trigger("supermario4")
 end
 
 function activatePlayerIntroMode()
