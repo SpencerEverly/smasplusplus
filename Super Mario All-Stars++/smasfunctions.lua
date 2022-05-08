@@ -68,29 +68,43 @@
 --_ osLeapYear(year): Lists if the year has a leap day during the year.
 --
 --PLAYER FUNCTIONS
---_ betterPlayer(player ID, function(plr) plr(.:)anything end): A better way to run
+--_ betterPlayer(player ID, function(plr) plr.code() end): A better way to run
 --functions with the player without the fangled 'if Player(2) and Player(2).isValid'
 --mess. Useful for running commands on things like all players (-1), or just one of
 --them.
+--_ activate1stPlayer(): If in 2nd Player Mode and greater, this will revert to 1st
+--Player.
+--_ activate2ndPlayer(): This activates 2 player mode.
+--_ activate3rdPlayer(): Wip 3 player mode. Not done yet.
+--_ activate4thPlayer(): Wip 4 player mode. Not done yet.
+--_ activatePlayerIntroMode(): This activates the intro imitaiton mode, where 6
+--players move to the right while jumping around automatically. This is normally
+--used on the main menu of the episode (Certain themes).
 --_ isAnyPlayerAlive(): Returns if any player is still alive.
 --_ isPlayerUnderwater(): Returns true if the first player is underwater.
 --_ isPlayerGrabbing(): Returns true if the first player is grabbing something.
+--
+--NPC FUNCTIONS
+--_ harmAllNPCs(): Harms every single NPC is the entire level.
+--_ harmSpecificNPC(): Harms a specific NPC ID in the entire level.
 --
 --MISC FUNCTIONS
 --_ getEpisodeFilename(): Gets the episode filename for the episode. If under the
 --editor, it'll return 'Editor Mode' instead.
 --_ isExtraSoundsActive(): Checks to see if extrasounds is turned on.
 --_ listUserFiles(path): Lists the files in the main modifiable user directory.
---_ toggleWindowOnly(): This, when fullscreen, will only toggle a window instead of
---being in fullscreen. Toggle again to turn off.
+--_ toggleWindowOnly(): This, when fullscreen, will only toggle a window instead
+--of being in fullscreen. Toggle again to turn off.
 --_ doPSwitchUntimed(bool): This will turn on the P-Switch, without a timer.
 --_ rngTrueValue(argument): RNGs a random value, truly.
 --_ loadSaveSlot(slot): Loads any save slot.
 --_ saveSaveSlot(slot): Saves a specified save slot.
 --_ moveSaveSlot(slot, destination): This moves a save slot to another save slot.
---Highest you can go is 32767.
---_ eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot tool.
---This will reset your save data, but without clearing SaveData/GameData.
+--Highest you can go is 32767 (The original slot will be reset after moving, due to
+--os.remove not existing on LunaLua).
+--_ eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot tool
+--and speedrun save data purge option. This will reset your save data, but
+--without clearing SaveData/GameData.
 
 local smasfunctions = {}
 

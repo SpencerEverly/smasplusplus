@@ -4483,7 +4483,7 @@ smwMap.hudSettings = {
     playerOffsetX = 40,
     playerOffsetY = -16,
 
-    playerGap = 64,
+    playerGap = 42,
 
     playerEnabled = true,
 

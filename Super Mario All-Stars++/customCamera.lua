@@ -1005,46 +1005,46 @@ end
 
 function customCamera.getTargets()
     -- Use customCamera.targets if possible
-    local targets = {}
+	GameData.customCameraTargets = {}
     local count = 0
 
     for _,v in ipairs(customCamera.targets) do
         if v.isValid ~= false and (v[1] ~= nil or v.x ~= nil) and (v[2] ~= nil or v.y ~= nil) then
-            table.insert(targets,v)
+            table.insert(GameData.customCameraTargets,v)
             count = count + 1
         end
     end
 
     if count > 0 then
-        return targets
+        return GameData.customCameraTargets
     end
 
     -- Otherwise, use NPC ID system
     if customCamera.currentSettings.targetNPCID > 0 then
         for _,n in NPC.iterate(customCamera.currentSettings.targetNPCID) do
             if n.despawnTimer > 0 and customCamera.isOnScreen(n) then
-                table.insert(targets,n)
+                table.insert(GameData.customCameraTargets,n)
                 count = count + 1
             end
         end
     end
 
     -- Add player
-	if player.count() > 1 then
-		table.insert(targets,player.count())
-	else
-		table.insert(targets,player)
+	for k,p in ipairs(Player.get()) do
+		table.insert(GameData.customCameraTargets,p)
 	end
     count = count + player.count()
 	
-    return targets
+    return GameData.customCameraTargets
 end
 
-local function getCameraFocusFromTargets(targets)
+local targetss = GameData.customCameraTargets
+
+function getCameraFocusFromTargets(targetss)
     local total = vector.zero2
     local count = 0
 
-    for _,v in ipairs(targets) do
+    for _,v in ipairs(GameData.customCameraTargets) do
         if v.isValid ~= false then
             local x = v[1] or v.x
             local y = v[2] or v.y
@@ -1058,13 +1058,15 @@ local function getCameraFocusFromTargets(targets)
 
             total.x = total.x + x
             total.y = total.y + y
-            count = count + Player.count()
+            count = count + player.count()
         end
     end
 
     if count == 0 then
-        total.x = player.x + player.width*0.5
-        total.y = player.y + player.height
+		for k,p in ipairs(Player.get()) do
+			total.x = p.x + p.width*0.5
+			total.y = p.y + p.height
+		end
     else
         total.x = total.x/count
         total.y = total.y/count

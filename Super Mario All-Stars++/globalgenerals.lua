@@ -1253,7 +1253,9 @@ function globalgenerals.onDraw()
 		end
 	end
 	if SaveData.disableX2char == false then
-		Cheats.deregister("2player") --This is to prevent 2 player mode on Normal Mode. supermario2 though is still kept for all modes.
+		if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+			Cheats.deregister("2player") --This is to prevent 2 player mode on Normal Mode. supermario2 though is still kept for all modes.
+		end
 	end
 	if SaveData.resolution == "fullscreen" then
 		customCamera.defaultScreenWidth = 0

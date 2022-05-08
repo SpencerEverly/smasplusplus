@@ -50,21 +50,25 @@ local gameoveractivate = false
 local gameovershow = false
 
 function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
-	if SaveData.disableX2char == false then
-		if block.contentID == 1000 or block.contentID == 0 then
-			SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
-		elseif block.contentID <= 99 and block.contentID >= 1 then
-			SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+	if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+		if SaveData.disableX2char == false then
+			if block.contentID == 1000 or block.contentID == 0 then
+				SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
+			elseif block.contentID <= 99 and block.contentID >= 1 then
+				SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+			end
 		end
 	end
 end
 
 function smasdeathsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
 	local coins = table.map{10,33,88,103,138,251,252,253,258,528}
-	if SaveData.disableX2char == false then
-		for _,p in ipairs(Player.get()) do 
-			if coins[npc.id] and Colliders.collide(p, npc) then
-				SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+	if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+		if SaveData.disableX2char == false then
+			for _,p in ipairs(Player.get()) do 
+				if coins[npc.id] and Colliders.collide(p, npc) then
+					SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+				end
 			end
 		end
 	end
@@ -72,270 +76,272 @@ end
 
 function diedanimation() --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
 	if smasdeathsystem.activated == true then
-		if SaveData.disableX2char == false then
-			if GameData.battlemodeactive == false or GameData.battlemodeactive == nil then
-				if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
-					if player.deathTimer == 0 then
-						GameData.muteMusic = true
-						Audio.MusicVolume(0)
-						SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-						SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
-						if SaveData.totalLives < 0 then --If less than 0, the quick game over screen will activate
-							gameoveractivate = true
-							SaveData.totalLives = 0
-						end
-						Misc.saveGame() --Save the game to save what we've added/edited
-						Routine.waitFrames(165)
-						Misc.pause()
-						fadeoutdeath = true --This starts the fade out animation
-						Routine.waitFrames(110, true)
-						GameData.muteMusic = false
-						Misc.unpause()
-						if gameoveractivate == false then --If not in a gameover state...
-							fadeoutcompleted = true --...when waited enough time, unpause and reload the level
-						end
-						if fadeoutcompleted then
-							smasdeathsystem.hasDied = true
-							if smasdeathsystem.exittomap == false then --Reload the level from here
-								Level.load(Level.filename())
-							elseif smasdeathsystem.exittomap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
-								Level.load("map.lvlx", nil, nil)
-								--Level.exit() --Only if you're using the vanilla map
+		if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+			if SaveData.disableX2char == false then
+				if GameData.battlemodeactive == false or GameData.battlemodeactive == nil then
+					if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
+						if player.deathTimer == 0 then
+							GameData.muteMusic = true
+							Audio.MusicVolume(0)
+							SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+							SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
+							if SaveData.totalLives < 0 then --If less than 0, the quick game over screen will activate
+								gameoveractivate = true
+								SaveData.totalLives = 0
 							end
-						end
-						if gameoveractivate then --Quick game over screen stuff.
+							Misc.saveGame() --Save the game to save what we've added/edited
+							Routine.waitFrames(165)
 							Misc.pause()
-							gameovershow = true --Show the GAME OVER text
-							SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-							local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
-							playSound("gameover/gameover-"..rngkey..".ogg")
-							
-							--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
-							if rngkey == 1 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 2 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 3 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 4 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 5 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 6 then
-								Routine.wait(4, true)
-								
-							elseif rngkey == 7 then
-								Routine.wait(2, true)
-								
-							elseif rngkey == 8 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 9 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 10 then
-								Routine.wait(14, true)
-								
-							elseif rngkey == 11 then
-								Routine.wait(10, true)
-								
-							elseif rngkey == 12 then
-								Routine.wait(10, true)
-								
-							elseif rngkey == 13 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 14 then
-								Routine.wait(6, true)
-							
-							elseif rngkey == 15 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 16 then
-								Routine.wait(7, true)
-								
-							elseif rngkey == 17 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 18 then
-								Routine.wait(4, true)
-								
-							elseif rngkey == 19 then
-								Routine.wait(7, true)
-								
-							elseif rngkey == 20 then
-								Routine.wait(9, true)
-								
-							elseif rngkey == 21 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
-								playSound("gameover/gameover-22-voice.ogg")
-								Routine.wait(17, true)
-								
-							elseif rngkey == 23 then
-								Routine.wait(4, true)
-								
-							elseif rngkey == 24 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 25 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 26 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 27 then
-								Routine.wait(8, true)
-								
-							elseif rngkey == 28 then
-								Routine.wait(8, true)
-								
-								
+							fadeoutdeath = true --This starts the fade out animation
+							Routine.waitFrames(110, true)
+							GameData.muteMusic = false
+							Misc.unpause()
+							if gameoveractivate == false then --If not in a gameover state...
+								fadeoutcompleted = true --...when waited enough time, unpause and reload the level
 							end
-							Misc.unpause() --Unpause afterward
-							SaveData.totalLives = 5 --Refill the lives back to 5
-							smasdeathsystem.hasDied = true --The player has now died
-							if smasdeathsystem.exittomap == false then
-								Level.load(Level.filename())
-							elseif smasdeathsystem.exittomap == true then
-								Level.load("map.lvlx", nil, nil)
+							if fadeoutcompleted then
+								smasdeathsystem.hasDied = true
+								if smasdeathsystem.exittomap == false then --Reload the level from here
+									Level.load(Level.filename())
+								elseif smasdeathsystem.exittomap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
+									Level.load("map.lvlx", nil, nil)
+									--Level.exit() --Only if you're using the vanilla map
+								end
+							end
+							if gameoveractivate then --Quick game over screen stuff.
+								Misc.pause()
+								gameovershow = true --Show the GAME OVER text
+								SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
+								local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
+								playSound("gameover/gameover-"..rngkey..".ogg")
+								
+								--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
+								if rngkey == 1 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 2 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 3 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 4 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 5 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 6 then
+									Routine.wait(4, true)
+									
+								elseif rngkey == 7 then
+									Routine.wait(2, true)
+									
+								elseif rngkey == 8 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 9 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 10 then
+									Routine.wait(14, true)
+									
+								elseif rngkey == 11 then
+									Routine.wait(10, true)
+									
+								elseif rngkey == 12 then
+									Routine.wait(10, true)
+									
+								elseif rngkey == 13 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 14 then
+									Routine.wait(6, true)
+								
+								elseif rngkey == 15 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 16 then
+									Routine.wait(7, true)
+									
+								elseif rngkey == 17 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 18 then
+									Routine.wait(4, true)
+									
+								elseif rngkey == 19 then
+									Routine.wait(7, true)
+									
+								elseif rngkey == 20 then
+									Routine.wait(9, true)
+									
+								elseif rngkey == 21 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
+									playSound("gameover/gameover-22-voice.ogg")
+									Routine.wait(17, true)
+									
+								elseif rngkey == 23 then
+									Routine.wait(4, true)
+									
+								elseif rngkey == 24 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 25 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 26 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 27 then
+									Routine.wait(8, true)
+									
+								elseif rngkey == 28 then
+									Routine.wait(8, true)
+									
+									
+								end
+								Misc.unpause() --Unpause afterward
+								SaveData.totalLives = 5 --Refill the lives back to 5
+								smasdeathsystem.hasDied = true --The player has now died
+								if smasdeathsystem.exittomap == false then
+									Level.load(Level.filename())
+								elseif smasdeathsystem.exittomap == true then
+									Level.load("map.lvlx", nil, nil)
+								end
 							end
 						end
 					end
-				end
-				if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
-					if player.deathTimer == 0 then
-						GameData.muteMusic = true
-						Audio.MusicVolume(0)
-						SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-						SaveData.totalLives = SaveData.totalLives - 1
-						if SaveData.totalLives < 0 then
-							gameoveractivate = true
-							SaveData.totalLives = 0
-						end
-						Misc.saveGame() --Save the game to save what we've added/edited
-						Routine.waitFrames(360, true)
-						GameData.muteMusic = false
-						Misc.unpause()
-						if gameoveractivate == false then
-							fadeoutcompleted = true --When waited enough time, unpause and reload the level
-						end
-						if fadeoutcompleted then --Or else, just exit the level
-							smasdeathsystem.hasDied = true
-							if smasdeathsystem.exittomap == false then
-								Level.load(Level.filename())
-							elseif smasdeathsystem.exittomap == true then
-								Level.load("map.lvlx", nil, nil)
+					if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
+						if player.deathTimer == 0 then
+							GameData.muteMusic = true
+							Audio.MusicVolume(0)
+							SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+							SaveData.totalLives = SaveData.totalLives - 1
+							if SaveData.totalLives < 0 then
+								gameoveractivate = true
+								SaveData.totalLives = 0
 							end
-						end
-						if gameoveractivate then --Quick game over screen stuff.
-							Misc.pause()
-							gameovershow = true --Show the GAME OVER text
-							SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-							local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
-							playSound("gameover/gameover-"..rngkey..".ogg")
-							
-							--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
-							if rngkey == 1 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 2 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 3 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 4 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 5 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 6 then
-								Routine.wait(4, true)
-								
-							elseif rngkey == 7 then
-								Routine.wait(2, true)
-								
-							elseif rngkey == 8 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 9 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 10 then
-								Routine.wait(14, true)
-								
-							elseif rngkey == 11 then
-								Routine.wait(10, true)
-								
-							elseif rngkey == 12 then
-								Routine.wait(10, true)
-								
-							elseif rngkey == 13 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 14 then
-								Routine.wait(6, true)
-							
-							elseif rngkey == 15 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 16 then
-								Routine.wait(7, true)
-								
-							elseif rngkey == 17 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 18 then
-								Routine.wait(4, true)
-								
-							elseif rngkey == 19 then
-								Routine.wait(7, true)
-								
-							elseif rngkey == 20 then
-								Routine.wait(9, true)
-								
-							elseif rngkey == 21 then
-								Routine.wait(3, true)
-								
-							elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
-								playSound("gameover/gameover-22-voice.ogg")
-								Routine.wait(17, true)
-								
-							elseif rngkey == 23 then
-								Routine.wait(4, true)
-								
-							elseif rngkey == 24 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 25 then
-								Routine.wait(6, true)
-								
-							elseif rngkey == 26 then
-								Routine.wait(5, true)
-								
-							elseif rngkey == 27 then
-								Routine.wait(8, true)
-								
-							elseif rngkey == 28 then
-								Routine.wait(8, true)
-								
-								
+							Misc.saveGame() --Save the game to save what we've added/edited
+							Routine.waitFrames(360, true)
+							GameData.muteMusic = false
+							Misc.unpause()
+							if gameoveractivate == false then
+								fadeoutcompleted = true --When waited enough time, unpause and reload the level
 							end
-							Misc.unpause() --Unpause afterward
-							SaveData.totalLives = 5 --Refill the lives back to 5
-							smasdeathsystem.hasDied = true --The player has now died
-							if smasdeathsystem.exittomap == false then
-								Level.load(Level.filename())
-							elseif smasdeathsystem.exittomap == true then
-								Level.load("map.lvlx", nil, nil)
+							if fadeoutcompleted then --Or else, just exit the level
+								smasdeathsystem.hasDied = true
+								if smasdeathsystem.exittomap == false then
+									Level.load(Level.filename())
+								elseif smasdeathsystem.exittomap == true then
+									Level.load("map.lvlx", nil, nil)
+								end
+							end
+							if gameoveractivate then --Quick game over screen stuff.
+								Misc.pause()
+								gameovershow = true --Show the GAME OVER text
+								SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
+								local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
+								playSound("gameover/gameover-"..rngkey..".ogg")
+								
+								--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
+								if rngkey == 1 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 2 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 3 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 4 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 5 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 6 then
+									Routine.wait(4, true)
+									
+								elseif rngkey == 7 then
+									Routine.wait(2, true)
+									
+								elseif rngkey == 8 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 9 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 10 then
+									Routine.wait(14, true)
+									
+								elseif rngkey == 11 then
+									Routine.wait(10, true)
+									
+								elseif rngkey == 12 then
+									Routine.wait(10, true)
+									
+								elseif rngkey == 13 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 14 then
+									Routine.wait(6, true)
+								
+								elseif rngkey == 15 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 16 then
+									Routine.wait(7, true)
+									
+								elseif rngkey == 17 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 18 then
+									Routine.wait(4, true)
+									
+								elseif rngkey == 19 then
+									Routine.wait(7, true)
+									
+								elseif rngkey == 20 then
+									Routine.wait(9, true)
+									
+								elseif rngkey == 21 then
+									Routine.wait(3, true)
+									
+								elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
+									playSound("gameover/gameover-22-voice.ogg")
+									Routine.wait(17, true)
+									
+								elseif rngkey == 23 then
+									Routine.wait(4, true)
+									
+								elseif rngkey == 24 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 25 then
+									Routine.wait(6, true)
+									
+								elseif rngkey == 26 then
+									Routine.wait(5, true)
+									
+								elseif rngkey == 27 then
+									Routine.wait(8, true)
+									
+								elseif rngkey == 28 then
+									Routine.wait(8, true)
+									
+									
+								end
+								Misc.unpause() --Unpause afterward
+								SaveData.totalLives = 5 --Refill the lives back to 5
+								smasdeathsystem.hasDied = true --The player has now died
+								if smasdeathsystem.exittomap == false then
+									Level.load(Level.filename())
+								elseif smasdeathsystem.exittomap == true then
+									Level.load("map.lvlx", nil, nil)
+								end
 							end
 						end
 					end
@@ -421,54 +427,58 @@ function smasdeathsystem.onTick()
 			end
 		end
 	else
-		if SaveData.disableX2char == false then
-			for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-				if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --Score 10
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
-				end
-				if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --Score 100
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
-				end
-				if scoreboard.animationFrame == 2 and scoreboard.speedY == -1.94 then --Score 200
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 200
-				end
-				if scoreboard.animationFrame == 3 and scoreboard.speedY == -1.94 then --Score 400
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 400
-				end
-				if scoreboard.animationFrame == 4 and scoreboard.speedY == -1.94 then --Score 800
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 800
-				end
-				if scoreboard.animationFrame == 5 and scoreboard.speedY == -1.94 then --Score 1000
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
-				end
-				if scoreboard.animationFrame == 6 and scoreboard.speedY == -1.94 then --Score 2000
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 2000
-				end
-				if scoreboard.animationFrame == 7 and scoreboard.speedY == -1.94 then --Score 4000
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
-				end
-				if scoreboard.animationFrame == 8 and scoreboard.speedY == -1.94 then --Score 8000
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 8000
-				end
-				if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP, Score 10000
-					SaveData.totalLives = SaveData.totalLives + 1
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10000
-					Misc.score(10000) --Just in case if 1.3 Mode is active
-				end
-				if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP, Score 20000
-					SaveData.totalLives = SaveData.totalLives + 2
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 20000
-					Misc.score(20000)
-				end
-				if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP, Score 30000
-					SaveData.totalLives = SaveData.totalLives + 3
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 30000
-					Misc.score(30000)
-				end
-				if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP, Score 50000
-					SaveData.totalLives = SaveData.totalLives + 5
-					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50000
-					Misc.score(50000)
+		if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+			if SaveData.disableX2char == false then
+				if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+					for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+						if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --Score 10
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
+						end
+						if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --Score 100
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
+						end
+						if scoreboard.animationFrame == 2 and scoreboard.speedY == -1.94 then --Score 200
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 200
+						end
+						if scoreboard.animationFrame == 3 and scoreboard.speedY == -1.94 then --Score 400
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 400
+						end
+						if scoreboard.animationFrame == 4 and scoreboard.speedY == -1.94 then --Score 800
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 800
+						end
+						if scoreboard.animationFrame == 5 and scoreboard.speedY == -1.94 then --Score 1000
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
+						end
+						if scoreboard.animationFrame == 6 and scoreboard.speedY == -1.94 then --Score 2000
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 2000
+						end
+						if scoreboard.animationFrame == 7 and scoreboard.speedY == -1.94 then --Score 4000
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
+						end
+						if scoreboard.animationFrame == 8 and scoreboard.speedY == -1.94 then --Score 8000
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 8000
+						end
+						if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP, Score 10000
+							SaveData.totalLives = SaveData.totalLives + 1
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10000
+							Misc.score(10000) --Just in case if 1.3 Mode is active
+						end
+						if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP, Score 20000
+							SaveData.totalLives = SaveData.totalLives + 2
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 20000
+							Misc.score(20000)
+						end
+						if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP, Score 30000
+							SaveData.totalLives = SaveData.totalLives + 3
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 30000
+							Misc.score(30000)
+						end
+						if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP, Score 50000
+							SaveData.totalLives = SaveData.totalLives + 5
+							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50000
+							Misc.score(50000)
+						end
+					end
 				end
 			end
 		end
