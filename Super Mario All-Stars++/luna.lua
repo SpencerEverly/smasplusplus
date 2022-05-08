@@ -350,22 +350,22 @@ Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/
 Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
 
 --First time SaveData setting, for resolutions and other settings
-if SaveData.resolution == nil then
+if SaveData.resolution == nil then --By default, the resolution will be set as fullscreen.
 	SaveData.resolution = "fullscreen"
 end
-if SaveData.letterbox == nil then
+if SaveData.letterbox == nil then --Letterbox default is true
 	SaveData.letterbox = true
 end
-if SaveData.borderEnabled == nil then
+if SaveData.borderEnabled == nil then --Border default is true
 	SaveData.borderEnabled = true
 end
 if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
 	SaveData.totalStarCount = 0
 end
-if SaveData.completeLevels == nil then --This will add a table to list completed levels
+if SaveData.completeLevels == nil then --This will add a table to list completed levels when collecting win states
 	SaveData.completeLevels = {}
 end
-if SaveData.totalcoins == nil then
+if SaveData.totalcoins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
 	SaveData.totalcoins = 0
 end
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
@@ -374,21 +374,24 @@ end
 if SaveData.totalLives == nil then --The total lives used the for the episode.
 	SaveData.totalLives = 5
 end
-if SaveData.totalCoinsClassic == nil then
+if SaveData.totalCoinsClassic == nil then --This will display a classic coin count for the episode
 	SaveData.totalCoinsClassic = 0
 end
-if SaveData.totalScoreClassic == nil then
+if SaveData.totalScoreClassic == nil then --This will add a score counter, cause why not
 	SaveData.totalScoreClassic = 0
 end
-if SaveData.deathquickoption == true then
+if SaveData.deathquickoption == true then --deathquickoption is unstable, so don't enable it if used before April
 	SaveData.deathquickoption = false
 end
+if SaveData.disableX2char == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
+	SaveData.disableX2char = false
+end
 
-Progress.value = SaveData.totalStarCount
+Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 if SaveData.playerName == nil then
-	Progress.savename = "Player"
+	Progress.savename = "Player" --If the player name is nil, use "Player" instead
 else
-	Progress.savename = SaveData.playerName
+	Progress.savename = SaveData.playerName --Or else just use the SaveData variable if it exists
 end
 
 --Make sure the warp door system doesn't get active until onStart saves the original count first...

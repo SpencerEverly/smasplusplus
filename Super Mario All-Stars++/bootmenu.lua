@@ -1153,7 +1153,7 @@ local function RestartSMASPlusPlusResetSave() --This restarts SMAS++ entirely, w
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	Routine.wait(0.5)
-	Misc.dialog("There WILL be a few errors before restarting. This is normal. Just click okay three times and the episode will restart.")
+	Misc.dialog("There WILL be a few errors before restarting. This is normal. Just click okay (Or press ENTER) on all dialog boxes that pop up, and the episode will restart.")
 	SaveData.clear()
 	GameData.clear()
 	SaveData.flush()

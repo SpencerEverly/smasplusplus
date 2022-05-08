@@ -750,6 +750,25 @@ function pausemenu2.onDraw()
 	end
 end
 
+local function purgesavedata()
+	pauseplus.canControlMenu = false
+	playSound(67)
+	startFadeOut()
+	Routine.wait(2, true)
+	Misc.unpause()
+	exitFadeActive = false
+	exitFadeActiveDone = true
+	eraseSaveSlot(Misc.saveSlot())
+	Misc.dialog("There WILL be a few errors before restarting. This is normal. Just click okay (Or press ENTER) on all dialog boxes that pop up, and the episode will restart.")
+	SaveData.clear()
+	GameData.clear()
+	SaveData.flush()
+	if Misc.loadEpisode("Super Mario All-Stars++") == false then
+		SFX.play("wrong.ogg")
+		error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
+	end
+end
+
 local function checkingplayerstatus()
 	if player.count() == 1 then
 		playSound(1001)
@@ -1131,6 +1150,9 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and Ga
 		pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer. COSTUMES WILL BE RESET!",pauseplus.save,closeMenu = true, actions = {function() Routine.run(onethreemodeactivate) end}})
 	end
 	pauseplus.createOption("settings",{text = "Miscellaneous Settings",goToSubmenu = "miscsettings",description = "Set some other settings to enhance your gameplay."})
+	if SaveData.speedrunMode == true then
+		pauseplus.createOption("settings",{text = "Purge Save Data",description = "In speedrun mode, you can use this option to erase your save and start over your speedrun. YOU WILL LOSE YOUR SAVE DATA IF YOU SELECT THIS OPTION!",actions = {function() Routine.run(purgesavedata) end}})
+	end
 	pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = {function() Routine.run(quitonly) end}})
 	
 	-- Misc. Settings

@@ -188,6 +188,7 @@ function onKeyboardPress(k, v)
 			GameData.menucomplete = true
 			SaveData.speedrunMode = not SaveData.speedrunMode
 			SaveData.firstBootCompleted = true
+			Misc.saveGame()
 			Level.exit()
 			sixPressedState = true
 		end
