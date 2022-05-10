@@ -1005,46 +1005,42 @@ end
 
 function customCamera.getTargets()
     -- Use customCamera.targets if possible
-	GameData.customCameraTargets = {}
+    targets = {}
     local count = 0
 
     for _,v in ipairs(customCamera.targets) do
         if v.isValid ~= false and (v[1] ~= nil or v.x ~= nil) and (v[2] ~= nil or v.y ~= nil) then
-            table.insert(GameData.customCameraTargets,v)
+            table.insert(targets,v)
             count = count + 1
         end
     end
 
     if count > 0 then
-        return GameData.customCameraTargets
+        return targets
     end
 
     -- Otherwise, use NPC ID system
     if customCamera.currentSettings.targetNPCID > 0 then
         for _,n in NPC.iterate(customCamera.currentSettings.targetNPCID) do
             if n.despawnTimer > 0 and customCamera.isOnScreen(n) then
-                table.insert(GameData.customCameraTargets,n)
+                table.insert(targets,n)
                 count = count + 1
             end
         end
     end
 
     -- Add player
-	for k,p in ipairs(Player.get()) do
-		table.insert(GameData.customCameraTargets,p)
-	end
-    count = count + player.count()
-	
-    return GameData.customCameraTargets
+    table.insert(targets,player)
+    count = count + 1
+
+    return targets
 end
 
-local targetss = GameData.customCameraTargets
-
-function getCameraFocusFromTargets(targetss)
+function getCameraFocusFromTargets(targets)
     local total = vector.zero2
     local count = 0
 
-    for _,v in ipairs(GameData.customCameraTargets) do
+    for _,v in ipairs(targets) do
         if v.isValid ~= false then
             local x = v[1] or v.x
             local y = v[2] or v.y

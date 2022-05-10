@@ -109,7 +109,6 @@
 local smasfunctions = {}
 
 local extrasounds = require("extrasounds")
-local serializer = require("ext/serializer")
 local rng = require("base/rng")
 local customCamera = require("customCamera")
 
@@ -781,25 +780,6 @@ function rngTrueValue(argument) --Thanks Seija!
 	if argument == "y" then
 		return rng.randomInt(1,10)
 	end
-end
-
-function loadSaveSlot(slot) --Loads a save slot on which you specified a slot
-	local filename = "save"..slot.."-ext.dat"
-	local f = io.open(Misc.episodePath():gsub([[[\/]+]], [[/]])..filename, "r")
-	if f then
-		local content = f:read("*all")
-		f:close()
-		if content ~= "" then
-			local s,e = pcall(serializer.deserialize, content, filename)
-			if s then
-				return e
-			else
-				pcall(Misc.dialog, "Error loading SaveData information. Your save file may be corrupted, or you launched the broken SMBX launcher. Please seek assistance on the Codehaus Discord server (https://discord.gg/usMKuKF7SN), repairing your save data if you know how, or start a new game.\n\n=============\n"..e)
-			end
-		end
-		return {}
-	end
-	return {}
 end
 
 function saveSaveSlot(slot)

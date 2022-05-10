@@ -449,7 +449,7 @@ function onStart() --Now do onStart...
 		Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
 		Misc.exitEngine()
 	end
-	loadSaveSlot(Misc.saveSlot()) --This will load the save slot twice, to check to make sure it's been properly loaded
+	--loadSaveSlot(Misc.saveSlot()) --This will load the save slot twice, to check to make sure it's been properly loaded
 	Routine.run(warpDoorBegin) --This will run the routine to save the original count and to start the system from there
 	--Do the weather SaveData additions
 	if SaveData.dateplayedweather == nil then

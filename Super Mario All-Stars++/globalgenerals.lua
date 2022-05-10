@@ -298,11 +298,6 @@ function globalgenerals.onPostExplosion(event, explosion)
 end
 
 function globalgenerals.onTick()
-	if Player(2) and Player(2).isValid then
-		customCamera.targets = {player, player2}
-	else
-		customCamera.targets = {player}
-	end
 	--if Cheats.active("supermario2") then
 		
 	--end
