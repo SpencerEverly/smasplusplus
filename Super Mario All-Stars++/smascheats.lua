@@ -3,42 +3,33 @@ local smascheats = {}
 local starman = require("starman/star")
 local megashroom = require("mega/megashroom")
 
---Some cheats will break playing this game. I will start having these cheats that could break any point of the game disabled. Most things, like the framerate, character stuff, most other cheats that won't break the game in normal cases, and until the release, imtiredofallthiswalking, will be kept in. Map codes are in map.lua (Only illparkwhereiwant is disabled)
+--Some cheats will be disabled until I rework them to make them compatible with my episode. All win NPCs will be remade entirely to be compatible with the episode-specific star system, this is why.
 
---Some cheats that are disabled are also recoded to fit in with compatibility for the episode, such as getdemstars.
-
---First off, the obvious move-to-the-next-level-without-doing-anything stuff:
-Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit
-Cheats.deregister("mylifegoal") --This gives a a SMW goal exit
-Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb
-Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit
-Cheats.deregister("getdemstars") --This would ruin spoilers, though I recoded this to be compatible with the episode (See below)
+--First off, the move-to-the-next-level-without-doing-anything stuff:
+Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit on the wrong ID
+Cheats.deregister("mylifegoal") --This gives a a SMW goal exit on the wrong ID
+Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
+Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit on the wrong ID
 
 
 --All of these would break the game, I think. It's there just in case if something happens:
-Cheats.deregister("noclip") --Moves the player like a cursor
 Cheats.deregister("speeddemon") --This uncaps the framerate... would rather disable it
-Cheats.deregister("shadowstar") --Anything involving shadowstar is disabled, to prevent clipping through blocks and breaking the game
-Cheats.deregister("holytrinity") --Activates shadowstar, donthurtme, jumpman. This has shadowstar.
-Cheats.deregister("theessentials") --Activates sonicstooslow, shadowstar, donthurtme, jumpman. This has shadowstar.
-Cheats.deregister("theessenjls") --Activates sonicstooslow, shadowstar, donthurtme, jumpman. Enjl is gonna get mad when he finds out his code is deactivated lmao
 Cheats.deregister("fromthedepths") --Jump high when falling into a pit instead of dying. Dying is crucial for certain events, such as the Boot Level.
+
+
+--These cheats are disabled but reenabled below to switch IDs on the respective cheats.
 Cheats.deregister("waitinginthesky") --Changes the starman music and duration. Starman is on the wrong ID for this cheat (This episode uses a different lua script for the starman)
 Cheats.deregister("thestarmen") --Grants the starman effect on the wrong ID.
 Cheats.deregister("bitemythumb") --Grants a mega mushroom on the wrong ID.
+Cheats.deregister("getdemstars") --This would give the wrong star on the wrong ID.
 
 
---Here's some cheats specific for the episode:
+--Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
 
-Cheats.register("fourthwall",{ --Opens up the repl console, used using TAB. This one needs to be reregistered though because I'm using a fork of the console, with sounds(TM) and extra features
-	onActivate = (function()
-		Defines.player_hasCheated = false
-		local repll = require("repll")
-		repll.activeInEpisode = true
-		return true -- this makes the cheat not toggleable
-	end),
-	flashPlayer = true,activateSFX = 67,
-})
+
+
+
+--**Episode-specific cheats**
 
 Cheats.register("iwannabootbackhome",{ --Restarts the game
 	onActivate = (function()
@@ -67,13 +58,10 @@ Cheats.register("bootgamehelp",{ --Boots the Game Help level
 	flashPlayer = true,activateSFX = 12,
 })
 
-Cheats.register("sherbertsmiddlenameistoto",{ --Kills the player (And player2 if existing) after typing. Bad luck amok!
+Cheats.register("sherbertsmiddlenameistoto",{ --Kills all/any player(s) after typing. Bad luck amok!
 	onActivate = (function()
 		Defines.player_hasCheated = false
-		player:kill()
-		if Player(2) and Player(2).isValid then
-			Player(2):kill()
-		end
+		betterPlayer(-1, function(plr) plr:kill() end)
 		return true -- this makes the cheat not toggleable
 	end),
 	flashPlayer = true,
@@ -175,7 +163,31 @@ if SaveData.disableX2char == false then
 	})
 end
 
-Cheats.register("jario",{ --Requires the spartaremix library
+if SaveData.disableX2char == false then
+	Cheats.register("itsamerebeltrooper",{ --Turns the player into the LEGO Star Wars II GBA Rebel Trooper
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(4, false)
+			playerManager.setCostume(CHARACTER_TOAD, "LEGOStarWars-RebelTrooper")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+if SaveData.disableX2char == false then
+	Cheats.register("hardmode",{ --Turns the player into Mother Brain Rinka (This is actually a Beta 3 Cheat, which was brought back for this one)
+		onActivate = (function()
+			Defines.player_hasCheated = false
+			player:transform(4, false)
+			playerManager.setCostume(CHARACTER_TOAD, "MotherBrainRinka")
+			return true -- this makes the cheat not toggleable
+		end),
+		flashPlayer = true,activateSFX = 12,
+	})
+end
+
+Cheats.register("jario",{ --Loads/requires the spartaremix library
 	onActivate = (function()
 		Defines.player_hasCheated = false
 		spartaremix = require("spartaremix")
@@ -213,8 +225,26 @@ Cheats.register("fuckthisshitgimmiethetrueending",{ --Teleports to the inside of
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",
 })
 
+
+
+
+
+
+
+--**Reregisted Cheats**
+Cheats.register("fourthwall",{ --Opens up the new repll console, used using TAB. This one needs to be reregistered though because I'm using a fork of the console, with sounds(TM) and extra features such as log clearing
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		local repll = require("repll")
+		repll.activeInEpisode = true
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = 67,
+})
+
 Cheats.register("getdemstars",{ --This needs to be reregistered because it was using the wrong star ID
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		if(isOverworld) then
 			return;
 		end
@@ -262,6 +292,7 @@ Cheats.register("getdemstars",{ --This needs to be reregistered because it was u
 
 Cheats.register("itsvegas",{ --This needs to be reregistered because it was using the wrong roulette ID
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		if(isOverworld) then
 			return true;
 		end
@@ -276,6 +307,7 @@ Cheats.register("itsvegas",{ --This needs to be reregistered because it was usin
 
 Cheats.register("thestarmen",{ --This needs to be reregistered because it was using the wrong star ID
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		if(starman) then
 			starman.start(player)
 		end
@@ -286,6 +318,7 @@ Cheats.register("thestarmen",{ --This needs to be reregistered because it was us
 
 Cheats.register("bitemythumb",{ --This needs to be reregistered because it was using the wrong star ID
 	onActivate = (function()
+		Defines.player_hasCheated = false
 		if(megashroom) then
 			if(not player.isMega) then
 				megashroom.StartMega(player);
@@ -296,6 +329,24 @@ Cheats.register("bitemythumb",{ --This needs to be reregistered because it was u
 		return true -- this makes the cheat not toggleable
 	end),
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",
+})
+
+Cheats.register("waitinginthesky",{ --This needs to be reregistered because it was using the wrong star ID
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		if(starman) then
+			playSound("cheats/waitinginthesky_activated.ogg")
+			starman.sfxFile = Misc.resolveSoundFile("waitinginthesky")
+			starman.duration[994] = lunatime.toTicks(30.5);
+			starman.duration[996] = lunatime.toTicks(30.5);
+		else
+			playSound("cheats/waitinginthesky_deactivated.ogg")
+			starman.sfxFile = Misc.resolveSoundFile("starman.ogg")
+			starman.duration[994] = lunatime.toTicks(NPC.config[id].duration)
+			starman.duration[996] = lunatime.toTicks(NPC.config[id].duration)
+		end
+	end),
+	flashPlayer = true,activateSFX = nil,
 })
 
 return smascheats

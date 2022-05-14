@@ -17,11 +17,15 @@
 --extrasounds (Enter extrasoundsHelp() for more info).
 --_ loadSound('path/to/file.extension'): Alternative to playSound, except without
 --extrasounds support.
+--_ loadSoundOnly('path/to/file.extension'): Loads a sound only, and doesn't play
+--it back.
 --_ changeMusic('path/to/file.extension', section ID): Changes the music to a
 --specified path. If using -1 as the section ID, all sections will be counted.
 --_ muteMusic(section ID): Mute the music to a specified section. The music before
 --changing will be temporarily stored. If using -1 as the section ID, all sections
---will be counted.
+--will be counted. Be sure not to activate this twice, or else the muted music will
+--be perma-stored in the temporary table. Use restoreOriginalMusic(-1) if you
+--accidentally activate it twice.
 --_ restoreMusic(section ID): Restores the music to a specified section. The music after
 --changing using muteMusic will be restored. If using -1 as the section ID, all sections
 --will be counted. (Don't run this before using muteMusic())
@@ -83,6 +87,8 @@
 --_ isAnyPlayerAlive(): Returns if any player is still alive.
 --_ isPlayerUnderwater(): Returns true if the first player is underwater.
 --_ isPlayerGrabbing(): Returns true if the first player is grabbing something.
+--_ toggleStarman(): Activates or deactivates the starman.
+--_ toggleMegashroom(): Activates or deactivates the megashroom.
 --
 --NPC FUNCTIONS
 --_ harmAllNPCs(): Harms every single NPC is the entire level.
@@ -111,6 +117,8 @@ local smasfunctions = {}
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local customCamera = require("customCamera")
+local starman = require("starman/star")
+local megashroom = require("mega/megashroom")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
@@ -288,6 +296,10 @@ end
 function loadSound(name) --Opening external sounds and playing them. Also can use playSound alternatively
 	local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
 	SFX.play(file) --Play it afterward, since there isn't anywhere else I can do this
+end
+
+function loadSoundOnly(name) --Opening external sounds, but doesn't play them.
+	local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
 end
 
 function changeMusic(name, sectionid) --Music changing is now a LOT easier
@@ -592,13 +604,11 @@ end
 
 function activate1stPlayer()
 	mem(0x00B2595E, FIELD_WORD, 1)
-	customCamera.getTargets()
 end
 
 function activate2ndPlayer()
 	Cheats.trigger("2player")
 	mem(0x00B2595E, FIELD_WORD, 2)
-	customCamera.getTargets()
 end
 
 function activate3rdPlayer()
@@ -638,7 +648,6 @@ function activatePlayerIntroMode()
 	Player(5).powerup = poweruprng5
 	Player(6).powerup = poweruprng6
 	intromodeactivated = true
-	customCamera.getTargets()
 end
 
 function checkLivingIndex() --Code to check the isAnyPlayerAlive() code.
@@ -666,6 +675,26 @@ function isPlayerGrabbing() --Returns true if the first player is grabbing somet
 		return true
 	elseif player:mem(0x26, FIELD_WORD) == 0 then
 		return false
+	end
+end
+
+function activateStarman()
+	if(starman) then
+		for k,p in ipairs(Player.get()) do
+			starman.start(p)
+		end
+	end
+end
+
+function activateMegashroom()
+	for k,p in ipairs(Player.get()) do
+		if(megashroom) then
+			if(not player.isMega) then
+				megashroom.StartMega(p, 996)
+			else
+				megashroom.StopMega(p)
+			end
+		end
 	end
 end
 

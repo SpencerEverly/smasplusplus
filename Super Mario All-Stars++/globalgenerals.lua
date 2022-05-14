@@ -121,6 +121,7 @@ function globalgenerals.onStart()
 	GameData.muteMusic = false
 	if Misc.inEditor() then
 		debugbox = require("debugbox")
+		debugbox.bootactive = true
 	end
 	if SaveData.lastLevelPlayed == nil then
 		SaveData.lastLevelPlayed = SaveData.lastLevelPlayed or Level.filename()
@@ -1163,13 +1164,13 @@ function globalgenerals.onTick()
 		littleDialogue.characterNames[5] = "Link"
 		littleDialogue.characterNames[9] = "Klonoa"
 		littleDialogue.characterNames[14] = "Steve"
-		if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-			steve.skinSettings.name = "steve"
+		steve.skinSettings.name = "steve"
+		if Cheats.get("waitinginthesky").active == false then
+			mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+			starman.sfxFile = Misc.resolveSoundFile("starman")
+			starman.duration[996] = 769
+			starman.duration[994] = 769
 		end
-		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
-		starman.sfxFile = Misc.resolveSoundFile("starman")
-		starman.duration[996] = 769
-		starman.duration[994] = 769
 	end
 end
 
