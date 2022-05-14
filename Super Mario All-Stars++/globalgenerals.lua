@@ -16,6 +16,7 @@ local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local inventory = require("customInventory")
 local smasacecoins = require("smasacecoins")
+local anotherpowerup = require("anotherpowerup")
 
 if GameData.rushModeActive == true then
 	level_dependencies_rushmode = require("level_dependencies_rushmode")

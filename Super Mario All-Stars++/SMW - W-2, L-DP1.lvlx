@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario World\: Donut Plains 1";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario World\: Donut Plains 1";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-189408;T:-201088;B:-200000;MZ:24;MF:"_OST/Super Mario World/Memory/11 Here We Go.spc|0\;g=2.5";BG:32;
@@ -1829,7 +1829,6 @@ ID:120;X:-194400;Y:-200128;D:-1;
 ID:120;X:-197536;Y:-200224;D:-1;
 ID:120;X:-198816;Y:-200256;D:-1;
 ID:120;X:-198944;Y:-200192;D:-1;
-ID:34;X:-199136;Y:-200128;D:1;NM:1;
 ID:275;X:-193358;Y:-200216;D:-1;
 ID:313;X:-192896;Y:-200144;D:1;
 ID:313;X:-192416;Y:-200144;D:-1;
@@ -1910,6 +1909,7 @@ ID:33;X:-191484;Y:-200704;D:-1;
 ID:33;X:-191452;Y:-200704;D:-1;
 ID:33;X:-191420;Y:-200704;D:-1;
 ID:412;X:-198592;Y:-200128;D:-1;CN:185;
+ID:984;X:-199136;Y:-200128;D:-1;NM:1;
 NPC_END
 DOORS
 IX:-196144;IY:-200192;OX:-179776;OY:-180096;DT:1;ID:1;OD:2;

@@ -154,6 +154,8 @@ extrasounds.id[129] = Audio.SfxOpen(Misc.resolveSoundFile("boss-shrink.ogg")) --
 extrasounds.id[130] = Audio.SfxOpen(Misc.resolveSoundFile("boss-shrink-done.ogg")) --SMW Boss Shrink (Done Shrinking)
 extrasounds.id[131] = Audio.SfxOpen(Misc.resolveSoundFile("hp-get.ogg")) --Recieve HP (Mario Multiverse)
 extrasounds.id[132] = Audio.SfxOpen(Misc.resolveSoundFile("hp-max.ogg")) --HP is maxed out (Mario Multiverse)
+extrasounds.id[133] = Audio.SfxOpen(Misc.resolveSoundFile("cape-feather.ogg")) --Cape Feather (SMW)
+extrasounds.id[134] = Audio.SfxOpen(Misc.resolveSoundFile("cape-fly.ogg")) --Cape Flying (SMW)
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("dialog.ogg")) --Dialog Menu Picker
