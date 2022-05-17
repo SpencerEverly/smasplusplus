@@ -10,7 +10,6 @@
 --- Will be applicable to all SMBX characters in the near future.
 
 local playerManager = require("playerManager")
-local testModeMenu = require("engine/testmodemenu")
 local npcManager = require("npcManager")
 
 local ap = {}
@@ -182,11 +181,9 @@ function ap.onDraw()
     end
     
     -- Handle test mode menu, and reload hitboxes after a bit
-    if (not testModeMenu.active and testMenuWasActive) or lunatime.tick() == 1 then
+    if not Misc.inEditor() or lunatime.tick() == 1 then
         loadPowerupAssets(player,player.powerup)
     end
-
-    testMenuWasActive = testModeMenu.active
 end
 
 function ap.onTickEnd()
