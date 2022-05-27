@@ -76,6 +76,8 @@
 --functions with the player without the fangled 'if Player(2) and Player(2).isValid'
 --mess. Useful for running commands on things like all players (-1), or just one of
 --them.
+--_ resolveCostumeSound(sound): Used for switching costume sounds throughout when
+--wearing a costume.
 --_ activate1stPlayer(): If in 2nd Player Mode and greater, this will revert to 1st
 --Player.
 --_ activate2ndPlayer(): This activates 2 player mode.
@@ -92,7 +94,7 @@
 --
 --NPC FUNCTIONS
 --_ harmAllNPCs(): Harms every single NPC is the entire level.
---_ harmSpecificNPC(): Harms a specific NPC ID in the entire level.
+--_ harmSpecificNPC(id): Harms a specific NPC ID in the entire level.
 --
 --MISC FUNCTIONS
 --_ getEpisodeFilename(): Gets the episode filename for the episode. If under the
@@ -119,6 +121,7 @@ local rng = require("base/rng")
 local customCamera = require("customCamera")
 local starman = require("starman/star")
 local megashroom = require("mega/megashroom")
+local playerManager = require("playermanager")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
@@ -598,6 +601,30 @@ function betterPlayer(index, func) --Better player/player2 detection, for simpli
 		local plr = Player(index)
 		if plr and plr.isValid then
 			func(plr)
+		end
+	end
+end
+
+function resolveCostumeSound(name) --This will resolve a costume sound, for a MUCH easier way to replace costume sounds.
+	local costumes = playerManager.getCostumes(player.character)
+	local currentCostume = player:getCostume()
+	local sound = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. currentCostume .. "/" .. name)
+	if sound == nil then
+		-- sound could not be found
+		return nil
+	end
+	return Audio.SfxOpen(sound)
+end
+
+function loadCostumeSounds() --Sound setting for costumes, used for an wayyyyy easier access for replacing sounds
+	local useExtraSounds = table.map{4,7,8,14,15,18,39,42,43,59,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138}
+
+	--Setting the sounds
+	for k,v in ipairs(GameData.soundNamesInOrder) do
+		if useExtraSounds[k] then
+			extrasounds.id[k] = resolveCostumeSound(v)
+		else
+			Audio.sounds[k].sfx = resolveCostumeSound(v)
 		end
 	end
 end

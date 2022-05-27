@@ -298,6 +298,11 @@ function globalgenerals.onPostExplosion(event, explosion)
 	end
 end
 
+function globalgenerals.onTickEnd()
+    -- Fix blinking when starting the level/changing sections (Thanks MDA!)
+    mem(0x00B250D4,FIELD_BOOL,false)
+end
+
 function globalgenerals.onTick()
 	--if Cheats.active("supermario2") then
 		
