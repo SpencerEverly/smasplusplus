@@ -11,7 +11,6 @@ function costume.onInit(p)
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onDraw")
 	registerEvent(costume,"onInputUpdate")
-	loadCostumeSounds()
 end
 
 function costume.onCleanup(p)

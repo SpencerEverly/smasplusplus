@@ -32,7 +32,6 @@ function costume.onInit(p)
 	Graphics.sprites.block[1220].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.block[1221].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/smb2underbeta.png")
 	Graphics.sprites.npc[14].img = Graphics.loadImageResolved("costumes/mario/0-SMASPlusPlus-Beta/fireflowerbeta.png")
-	loadCostumeSounds()
 end
 
 function costume.onCleanup(p)

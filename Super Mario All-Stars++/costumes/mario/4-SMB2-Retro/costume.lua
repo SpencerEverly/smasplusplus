@@ -65,7 +65,6 @@ function costume.onInit(p)
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/smb2-throw.ogg")
 	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/smb2-hit.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/4-SMB2-Retro/bubble.ogg")
-
 end
 
 function costume.onCleanup(p)

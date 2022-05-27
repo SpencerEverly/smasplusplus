@@ -67,8 +67,7 @@ function costume.onInit(p)
 	Audio.sounds[75].sfx = Audio.SfxOpen("costumes/luigi/1-SMB1-Retro/smb2-throw.ogg")
 	Audio.sounds[76].sfx = Audio.SfxOpen("costumes/luigi/1-SMB1-Retro/smb2-hit.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("costumes/luigi/1-SMB1-Retro/bubble.ogg")
-	extrasounds.id93 = Audio.SfxOpen("costumes/luigi/1-SMB1-Retro/fireball.ogg")
-	
+	extrasounds.id[93] = Audio.SfxOpen("costumes/luigi/1-SMB1-Retro/fireball.ogg")
 	eventsRegistered = true
 end
 
