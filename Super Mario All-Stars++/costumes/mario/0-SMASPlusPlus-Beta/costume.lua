@@ -38,7 +38,7 @@ function costume.onInit(p)
 end
 
 function costume.onCleanup(p)
-	extrasounds.id[8]  = nil
+	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("player-died"))
 	Audio.sounds[52].sfx  = nil
 	Audio.sounds[54].sfx = nil
 	Graphics.sprites.bgo[48].img = nil
