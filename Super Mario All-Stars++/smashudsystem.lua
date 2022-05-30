@@ -90,10 +90,6 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 								SaveData.totalLives = 0
 							end
 							Misc.saveGame() --Save the game to save what we've added/edited
-							Routine.waitFrames(1)
-							Misc.pause()
-							Routine.waitFrames(17, true)
-							Misc.unpause()
 							Routine.waitFrames(165)
 							Misc.pause()
 							fadeoutdeath = true --This starts the fade out animation
