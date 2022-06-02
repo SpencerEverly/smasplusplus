@@ -137,6 +137,7 @@ local bootBounceData = {}
 
 local player2camerax
 local player2cameray
+local inactivekeysonly = false
 
 function roulettestar.onDraw()
 	local playercameray = player.y - camera.y
@@ -200,6 +201,7 @@ function roulettestar.onDraw()
 				if player:isOnGround() then
 					player:setFrame(-50*player.direction)
 					playerwon = false
+					inactivekeysonly = true
 					playermovement = playermovement + Defines.player_walkspeed
 					playermovement2 = playercamerax + playermovement
 					p.direction = DIR_RIGHT
@@ -215,6 +217,7 @@ function roulettestar.onDraw()
 					if p2:isOnGround() then
 						p2:setFrame(-50*player.direction)
 						playerwon = false
+						inactivekeysonly = true
 						player2movement = player2movement + Defines.player_walkspeed
 						player2movement2 = player2camerax + player2movement
 						p2.direction = DIR_RIGHT
@@ -265,6 +268,30 @@ end
 
 function roulettestar.onInputUpdate()
 	if playerwon then
+		player.upKeyPressing = false
+		player.downKeyPressing = false
+		player.leftKeyPressing = false
+		player.rightKeyPressing = false
+		player.altJumpKeyPressing = false
+		player.runKeyPressing = false
+		player.altRunKeyPressing = false
+		player.dropItemKeyPressing = false
+		player.jumpKeyPressing = false
+		player.pauseKeyPressing = false
+		if Player(2) and Player(2).isValid then
+			player2.upKeyPressing = false
+			player2.downKeyPressing = false
+			player2.leftKeyPressing = false
+			player2.rightKeyPressing = false
+			player2.altJumpKeyPressing = false
+			player2.runKeyPressing = false
+			player2.altRunKeyPressing = false
+			player2.dropItemKeyPressing = false
+			player2.jumpKeyPressing = false
+			player2.pauseKeyPressing = false
+		end
+	end
+	if inactivekeysonly then
 		player.upKeyPressing = false
 		player.downKeyPressing = false
 		player.leftKeyPressing = false
