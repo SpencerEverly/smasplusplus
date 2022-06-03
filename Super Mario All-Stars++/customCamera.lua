@@ -1003,6 +1003,10 @@ local function targetsAreDifferent(listA,listB)
     return false
 end
 
+function customCamera.listTargets()
+	return targets
+end
+
 function customCamera.getTargets()
     -- Use customCamera.targets if possible
     targets = {}

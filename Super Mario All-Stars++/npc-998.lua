@@ -67,6 +67,7 @@ function customNPC.onTickNPC(v)
         data.state = 1
 		GameData.muteMusic = true
 		Audio.MusicVolume(0)
+		GameData.winStateActive = true
         SFX.play(Misc.resolveSoundFile("smb-flagslide.wav"))
         exiting = true
         data.countTime = Timer.isActive()
@@ -167,6 +168,7 @@ function customNPC.onTickNPC(v)
 		
         if data.tick > 65 * 1.5 then
 			GameData.muteMusic = false
+			GameData.winStateActive = false
 			if GameData.rushModeActive == false or GameData.rushModeActive == nil then
 				Level.exit(LEVEL_WIN_TYPE_STAR)
 			elseif GameData.rushModeActive == true and GameData.rushModeWon == true then

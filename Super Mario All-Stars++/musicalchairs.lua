@@ -321,7 +321,7 @@ function musicalchairs.onTick()
 				elseif section.musicPath == "_OST/Super Mario Bros 2/Underground (Beta).spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|1;g=1.5"
 				elseif section.musicPath == "_OST/Super Mario Bros 2/The Tree Skies.ogg" then
-					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/The Tree Skies.ogg"
+					section.musicPath = "_OST/Super Mario Bros 2/The Tree Skies.ogg"
 				elseif section.musicPath == "_OST/Super Mario Bros 2/Desert.ogg" then
 					section.musicPath = "_OST/Super Mario Bros (NES)/Desert.ogg"
 				elseif section.musicPath == "_OST/Super Mario Bros 2/Albatrosses.ogg" then
@@ -347,7 +347,30 @@ function musicalchairs.onTick()
 				elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|11;g=1.5"
 				--Super Mario Bros. 3
-				--TBD
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|0;g=1.5"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Bonus Level.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES)/Bonus.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/In The Clouds.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|4;g=1.5"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Toad's House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|4;g=1.5"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Fortress.spc|0;g=1.6" then
+					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|3;g=1.5"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES)/Bowser Battle.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/King's Chamber.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|1;g=1.5"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Before Airship.spc|0;g=2.2" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BeforeAirshipSMB3.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship.spc" then
+					section.musicPath = "_OST/Super Mario Bros (NES) - OST.nsf|3;g=1.5"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship Boss.spc|0;g=2.6" then
+					section.musicPath = "_OST/Super Mario Bros (NES)/Bowser Battle.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Desert.spc|0;g=3.2" then
+					section.musicPath = "_OST/Super Mario Bros (NES)/Desert.ogg"
 				--Super Mario Bros. Spencer
 				elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld.ogg" then
 					section.musicPath = "_OST/Super Mario Bros (NES)/Overworld (SMBS).ogg"
@@ -484,7 +507,30 @@ function musicalchairs.onTick()
 				elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SubconsSavedSMB2.ogg"
 				--Super Mario Bros. 3
-				--TBD
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Bonus Level.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES) - OST.nsf|3;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Sky.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/In The Clouds.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Sky Land.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Toad's House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/City.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Fortress.spc|0;g=1.6" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Castle.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Boss.spc|0;g=2.5" then
+					section.music = "_OST/Super Mario Bros 2 (NES) - OST.nsf|6;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/King's Chamber.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/City.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Before Airship.spc|0;g=2.2" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Volcano Cave.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship.spc" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Airship.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship Boss.spc|0;g=2.6" then
+					section.music = "_OST/Super Mario Bros 2 (NES) - OST.nsf|6;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Desert.spc|0;g=3.2" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Desert.ogg"
 				--Super Mario World
 				elseif section.musicPath == "_OST/Super Mario World/Here We Go (Advance).spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros 2 (NES) - OST.nsf|2;g=2"
@@ -605,7 +651,30 @@ function musicalchairs.onTick()
 				elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SubconsSavedSMB2.ogg"
 				--Super Mario Bros. 3
-				--TBD
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|8;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Bonus Level.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|11;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|9;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/In The Clouds.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|12;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Toad's House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|17;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Fortress.spc|0;g=1.6" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|22;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/King's Chamber.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|19;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Before Airship.spc|0;g=2.2" then
+					section.musicPath = "_OST/Super Mario Bros 3 (NES)/Volcano.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship.spc" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|20;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship Boss.spc|0;g=2.6" then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Desert.spc|0;g=3.2" then
+					section.musicPath = "_OST/Super Mario Bros 3 (NES)/Desert.ogg"
 				--Super Mario World
 				elseif section.musicPath == "_OST/Super Mario World/Here We Go (Advance).spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|8;g=2"
@@ -632,119 +701,282 @@ function musicalchairs.onTick()
 				end
 			end
 			if currentCostume == "9-SMW-PIRATE" then
-				if level == "SMB1 - W-1, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
-					Section(1).music = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
-				end
-				if level == "SMB1 - W-1, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
-					Section(2).music = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
-					Section(3).music = "_OST/Super Mario World (Pirate)/Bonus.ogg"
-				end
-				if level == "SMB1 - W-1, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario World (Pirate)/Athletic.ogg"
-				end
-				if level == "SMB1 - W-1, L-4.lvlx" then
-					Section(1).music = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
-				end
-				if level == "SMB1 - W-2, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario World (Pirate)/Desert.ogg"
-					Section(1).music = "_OST/Super Mario World (Pirate)/Bonus.ogg"
-					Section(2).music = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
-				end
-				if level == "SMB1 - W-2, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario World (NES, Pirate) - OST.nsf|13;g=2.2"
-					Section(2).music = "_OST/Super Mario World (Pirate)/Desert.ogg"
-				end
-				if level == "SMB1 - W-2, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				--MALC HUB
+				if section.musicPath == "_OST/Me and Larry City/Character Switch Room.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				--Super Mario Bros. 1
+				elseif section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Album.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros/Castle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.music == 19 then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.music == 21 then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.music == "_OST/Super Mario Bros/Bowser.spc|0;g=2.5" then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Desert.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Invincibility.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Swimming.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|13;g=2.2"
+				elseif section.musicPath == "_OST/All Stars Secrets/Lineland.ogg" then
+					section.musicPath = "_OST/All Stars Secrets/Lineland.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Snow.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 3 (NES)/Snow.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Race.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES)/Lakitu.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Snow (Alternative).ogg" then
+					section.musicPath = "_OST/Super Mario Bros 3 (NES)/Snow.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Forest.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Forest.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Ghost House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros/Last Battle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario World/Bowser (Advance).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|23;g=2"
+				--Super Mario Bros. Lost Levels
+				elseif section.musicPath == "_OST/Super Mario Bros/Airship.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				--Super Mario Bros. 2
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.music == "subspace_music.spc|0;g=2.7;" then
+					section.music = "_OST/Super Mario Bros 2 (NES)/Subspace.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Jar.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Before Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Before Boss.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.music == 15 then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Underground (Beta).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/The Tree Skies.ogg" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/The Tree Skies.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Desert.ogg" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Desert.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Albatrosses.ogg" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Albatosses.ogg"
+				elseif section.musicPath == "__OST/Mario Forever/Human Lab.spc" then
+					section.musicPath = "_OST/Mario Forever/Human Lab.spc"
+				elseif section.musicPath == "_OST/Super Metroid/97 Continue.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Dark Zone.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle.ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle (Item Room).ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle (Phase 2).ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle (Phase 3).ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/King Wart.ogg" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|23;g=2"
+				elseif section.music == 43 then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|23;g=2"
+				elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SubconsSavedSMB2.ogg"
+				--Super Mario Bros. 3
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Bonus Level.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/In The Clouds.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|12;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Toad's House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|17;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Fortress.spc|0;g=1.6" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/King's Chamber.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|19;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Before Airship.spc|0;g=2.2" then
+					section.musicPath = "_OST/Super Mario Bros 3 (NES)/Volcano.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship.spc" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship Boss.spc|0;g=2.6" then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Desert.spc|0;g=3.2" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Desert.ogg"
+				--Super Mario World
+				elseif section.musicPath == "_OST/Super Mario World/Here We Go (Advance).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Bonus (Yoshi).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Forest.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Forest.ogg"
+				elseif section.musicPath == "_OST/Super Mario World/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario World/Athletic 3.spc|0;g=2.1" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario World/Castle.spc|0;g=2.5" then
+					section.musicPath = "__OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Boss Battle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario World/Memory/11 Here We Go.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Swimming.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|13;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Underground 2.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
 				end
 			end
-			if currentCostume == "11-SMA1" then
-				if level == "SMB1 - W-1, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(1).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(3).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-4.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(1).music = "_OST/Super Mario Advance 4/The Tree Skies.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Super Mario Brothers Water Level.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-			end
-			if currentCostume == "12-SMA2" then
-				if level == "SMB1 - W-1, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(1).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(3).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-4.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(1).music = "_OST/Super Mario Advance 4/The Tree Skies.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Super Mario Brothers Water Level.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-			end
-			if currentCostume == "13-SMA4" then
-				if level == "SMB1 - W-1, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(1).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(3).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-1, L-4.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-					Section(1).music = "_OST/Super Mario Advance 4/The Tree Skies.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Underground Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-2.lvlx" then
-					Section(1).music = "_OST/Super Mario Advance 4/Super Mario Brothers Water Level.ogg"
-					Section(2).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
-				end
-				if level == "SMB1 - W-2, L-3.lvlx" then
-					Section(0).music = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
+			if currentCostume == "11-SMA1" or currentCostume == "12-SMA2" or currentCostume == "13-SMA4" then
+				--Super Mario Bros. 1
+				elseif section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Bonus Level.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Underground Level.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Normal Level 2.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Album.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Music Box.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Castle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Super Mario Brothers Castle.ogg"
+				elseif section.music == 19 then
+					section.music = "_OST/Super Mario Advance 4/Bowser Battle.ogg"
+				elseif section.music == 21 then
+					section.music = "_OST/Super Mario Advance 4/Bowser Battle.ogg"
+				elseif section.music == "_OST/Super Mario Bros/Bowser.spc|0;g=2.5" then
+					section.music = "_OST/Super Mario Advance 4/Bowser Battle.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Desert.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Coin Heaven.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Swimming.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Super Mario Brothers Water Level.ogg"
+				elseif section.musicPath == "_OST/All Stars Secrets/Lineland.ogg" then
+					section.musicPath = "_OST/All Stars Secrets/Lineland.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Snow.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Advance 4/Snow.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Race.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros (NES)/Lakitu.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Snow (Alternative).ogg" then
+					section.musicPath = "_OST/Super Mario Advance 4/Snow.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Forest.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Forest.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Ghost House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros/Last Battle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario World/Bowser (Advance).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|23;g=2"
+				--Super Mario Bros. Lost Levels
+				elseif section.musicPath == "_OST/Super Mario Bros/Airship.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				--Super Mario Bros. 2
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.music == "subspace_music.spc|0;g=2.7;" then
+					section.music = "_OST/Super Mario Bros 2 (NES)/Subspace.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Jar.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Before Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros 2 (NES)/Before Boss.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.music == 15 then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Underground (Beta).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/The Tree Skies.ogg" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/The Tree Skies.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Desert.ogg" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Desert.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Albatrosses.ogg" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/Albatosses.ogg"
+				elseif section.musicPath == "__OST/Mario Forever/Human Lab.spc" then
+					section.musicPath = "_OST/Mario Forever/Human Lab.spc"
+				elseif section.musicPath == "_OST/Super Metroid/97 Continue.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Dark Zone.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle.ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle (Item Room).ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle (Phase 2).ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/Castle (Phase 3).ogg" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 2/King Wart.ogg" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|23;g=2"
+				elseif section.music == 43 then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|23;g=2"
+				elseif section.musicPath == "_OST/Doki Doki Panic/File Clear.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/SubconsSavedSMB2.ogg"
+				--Super Mario Bros. 3
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Bonus Level.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/In The Clouds.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|12;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Toad's House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|17;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Fortress.spc|0;g=1.6" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Boss.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/King's Chamber.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|19;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Before Airship.spc|0;g=2.2" then
+					section.musicPath = "_OST/Super Mario Bros 3 (NES)/Volcano.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship.spc" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|11;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Airship Boss.spc|0;g=2.6" then
+					section.music = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario Bros 3/Desert.spc|0;g=3.2" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Desert.ogg"
+				--Super Mario World
+				elseif section.musicPath == "_OST/Super Mario World/Here We Go (Advance).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Bonus (Yoshi).spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Forest.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Forest.ogg"
+				elseif section.musicPath == "_OST/Super Mario World/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario World/Athletic 3.spc|0;g=2.1" then
+					section.musicPath = "_OST/Super Mario World (Pirate)/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario World/Castle.spc|0;g=2.5" then
+					section.musicPath = "__OST/Super Mario World (NES, Pirate) - OST.nsf|12;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Boss Battle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario Bros. 3 (NES) - OST.nsf|21;g=2"
+				elseif section.musicPath == "_OST/Super Mario World/Memory/11 Here We Go.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|9;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Swimming.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|13;g=2.2"
+				elseif section.musicPath == "_OST/Super Mario World/Underground 2.spc|0;g=2.5" then
+					section.musicPath = "_OST/Super Mario World (NES, Pirate) - OST.nsf|10;g=2.2"
 				end
 			end
 			if currentCostume == "14-NSMBDS-SMBX" then

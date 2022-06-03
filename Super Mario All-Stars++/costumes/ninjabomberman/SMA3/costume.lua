@@ -90,7 +90,7 @@ function costumechange()
 	Audio.sounds[1].sfx  = yoshi.generalSettings.jumpSound
     Audio.sounds[5].sfx  = yoshi.generalSettings.hurtSound
     extrasounds.id[8]  = yoshi.generalSettings.deathSound
-    Audio.sounds[14].sfx = yoshi.generalSettings.coinSound
+    extrasounds.id[14] = yoshi.generalSettings.coinSound
 	
 	yoshi.generalSettings.babyCreateBubbleSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/baby_bubbleCreated"))
     yoshi.generalSettings.babyPopBubbleSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/pop"))

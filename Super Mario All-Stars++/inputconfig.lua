@@ -69,19 +69,6 @@ local function writeKeyConfigs()
 		
 		if t.inputType == 0 then
 			t = inputConfig1
-			if Player(2) and Player(2).isValid then
-				t2 = inputConfig2
-				t2.jump = currentConfig2[1]
-				t2.run = currentConfig2[2]
-				t2.altjump = currentConfig2[3]
-				t2.altrun = currentConfig2[4]
-				t2.dropitem = currentConfig2[5]
-				t2.pause = currentConfig2[6]
-				t2.up = currentConfig2[7]
-				t2.down = currentConfig2[8]
-				t2.left = currentConfig2[9]
-				t2.right = currentConfig2[10]
-			end
 			t.jump = currentConfig2[1]
 			t.run = currentConfig2[2]
 			t.altjump = currentConfig2[3]

@@ -160,6 +160,7 @@ extrasounds.id[135] = Audio.SfxOpen(Misc.resolveSoundFile("flag-slide.ogg")) --F
 extrasounds.id[136] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-clear.ogg")) --Flagpole Fanfare (SMB1)
 extrasounds.id[137] = Audio.SfxOpen(Misc.resolveSoundFile("smb2-clear.ogg")) --World Clear Fanfare (SMB2)
 extrasounds.id[138] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-world-clear.ogg")) --World Clear Fanfare (SMB1)
+extrasounds.id[139] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-overworld.ogg")) --Going Underground, Overworld (SMB1)
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("dialog.ogg")) --Dialog Menu Picker

@@ -254,6 +254,7 @@ end
 function roulettestar.onPostNPCKill(v,reason)
 	if roulettestar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
 		Routine.run(starget)
+		GameData.winStateActive = true
 		collectactive = true
 		if GameData.rushModeActive == false or GameData.rushModeActive == nil then
 			if not table.icontains(SaveData.completeLevels,Level.filename()) then
@@ -331,6 +332,7 @@ end
 
 function roulettestar.onExit()
 	GameData.muteMusic = false
+	GameData.winStateActive = false
 	if Level.endState() == LEVEL_END_STATE_ROULETTE then
 		GameData.smwMap.winType = 6
 		Level.exit(LEVEL_WIN_TYPE_STAR)

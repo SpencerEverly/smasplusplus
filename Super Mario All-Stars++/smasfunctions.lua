@@ -122,6 +122,7 @@ local customCamera = require("customCamera")
 local starman = require("starman/star")
 local megashroom = require("mega/megashroom")
 local playerManager = require("playermanager")
+local smasverbosemode = require("smasverbosemode")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
@@ -758,6 +759,10 @@ end
 --Misc. functions
 -------------------
 
+function listCustomCameraTargets() --Lists the targets currently being used for customCamera.
+	return customCamera.listTargets()
+end
+
 function getEpisodeFilename() --Gets the episode filename. If in editor made, it just returns it's in the Editor. Thanks KBM_Quine!
 	if not Misc.inEditor then
 		local episodeFiles = Misc.listFiles(Misc.episodePath())
@@ -785,11 +790,19 @@ function listUserFiles(path)
 	end
 end
 
+function toggleVerboseMode() --This, when activated, will spit out a verbose list of things you have done/executed. Toggle again to turn off.
+	if smasverbosemode.activated == true then
+		smasverbosemode.activated = false
+	elseif smasverbosemode.activated == false then
+		smasverbosemode.activated = true
+	end
+end
+
 function toggleWindowOnly() --This, when fullscreen, will only toggle a window instead of being in fullscreen. Toggle again to turn off.
 	if mem(0x00B250D8, FIELD_BOOL) == true then
-		return  mem(0x00B250D8, FIELD_BOOL, false)
+		return mem(0x00B250D8, FIELD_BOOL, false)
 	elseif mem(0x00B250D8, FIELD_BOOL) == false then
-		return  mem(0x00B250D8, FIELD_BOOL, true)
+		return mem(0x00B250D8, FIELD_BOOL, true)
 	end
 end
 
