@@ -83,6 +83,7 @@ function globalgenerals.onInitAPI()
 	registerEvent(globalgenerals,"onExitLevel", "onExit")
 	registerEvent(globalgenerals,"onStart")
 	registerEvent(globalgenerals,"onTick")
+	registerEvent(globalgenerals,"onTickEnd")
 	registerEvent(globalgenerals,"onCameraUpdate")
 	registerEvent(globalgenerals,"onInputUpdate")
 	registerEvent(globalgenerals,"onEvent")
@@ -290,21 +291,13 @@ function globalgenerals.onInputUpdate()
 	end
 end
 
-function globalgenerals.onPostExplosion(event, explosion)
-	if Cheats.trigger("1player") or Cheats.trigger("2player") then
-		if explosion then
-			--event.cancelled = true
-		end
-	end
-end
-
 function globalgenerals.onTickEnd()
     -- Fix blinking when starting the level/changing sections (Thanks MDA!)
     mem(0x00B250D4,FIELD_BOOL,false)
 end
 
 function globalgenerals.onTick()
-	--if Cheats.active("supermario2") then
+	--if Cheats.get("supermario2").active == true then
 		
 	--end
 	if player.character == CHARACTER_SNAKE then
@@ -435,45 +428,7 @@ function globalgenerals.onTick()
 	end
 	
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
-		if Level.filename() == "SMB2 - W-1, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-1, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-1, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-2, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-2, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-2, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-3, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-3, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-3, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-4, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-4, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-4, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-5, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-5, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-5, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-6, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-6, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-6, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-7, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
+		if table.icontains(GameData._smb2Levels,Level.filename()) == true then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
 		elseif Level.filename() then
 			starman.sfxFile = Misc.resolveSoundFile("costumes/mario/0-SMASPlusPlus-Beta/starman")
@@ -485,45 +440,7 @@ function globalgenerals.onTick()
 		warpTransition.doorclose = ("sound/door-close.ogg")
 	end
 	if currentCostume == "1-SMB1-RETRO" then
-		if Level.filename() == "SMB2 - W-1, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-1, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-1, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-2, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-2, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-2, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-3, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-3, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-3, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-4, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-4, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-4, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-5, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-5, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-5, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-6, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-6, L-2.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-6, L-3.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-7, L-1.lvlx" then
-			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
-		elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
+		if table.icontains(GameData._smb2Levels,Level.filename()) == true then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
 		elseif Level.filename() then
 			starman.sfxFile = Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/starman")

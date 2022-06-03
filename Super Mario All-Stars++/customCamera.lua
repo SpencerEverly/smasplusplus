@@ -1034,8 +1034,10 @@ function customCamera.getTargets()
     end
 
     -- Add player
-    table.insert(targets,player)
-    count = count + 1
+	for k,p in ipairs(Player.get()) do
+		table.insert(targets,p)
+		count = count + 1
+	end
 
     return targets
 end
@@ -1058,19 +1060,14 @@ function getCameraFocusFromTargets(targets)
 
             total.x = total.x + x
             total.y = total.y + y
-            count = count + player.count()
+            count = count + 1
         end
     end
 
-    if count == 0 then
-		for k,p in ipairs(Player.get()) do
-			total.x = p.x + p.width*0.5
-			total.y = p.y + p.height
-		end
-    else
-        total.x = total.x/count
-        total.y = total.y/count
-    end
+	for k,p in ipairs(Player.get()) do
+		total.x = p.x + p.width*0.5
+		total.y = p.y + p.height
+	end
 
     return total
 end
@@ -1247,7 +1244,7 @@ end
 function customCamera.onDraw()
     -- Update settings
     local newSettings = getCurrentSettings()
-
+	
     if settingsAreDifferent(customCamera.currentSettings,newSettings) then
         if customCamera.settingsTransition > 0 and not settingsAreDifferent(customCamera.previousSettings,newSettings) then
             customCamera.settingsTransition = 1 - customCamera.settingsTransition

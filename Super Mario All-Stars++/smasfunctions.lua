@@ -682,6 +682,14 @@ function isPlayerGrabbing() --Returns true if the first player is grabbing somet
 	end
 end
 
+function player2Active()
+	if Player(2) and Player(2).isValid then
+		return true
+	else
+		return false
+	end
+end
+
 function activateStarman()
 	if(starman) then
 		for k,p in ipairs(Player.get()) do

@@ -533,7 +533,7 @@ end
 
 local function disable2player()
 	playSound(1001)
-	Cheats.trigger("1player")
+	mem(0x00B2595E, FIELD_WORD, 1)
 end
 
 function pausemenu2.onDraw()
@@ -794,14 +794,14 @@ local function checkingplayerstatus13()
 		end
 	elseif player.count() == 2 then
 		playSound(1001)
-		Cheats.trigger("1player")
+		mem(0x00B2595E, FIELD_WORD, 1)
 		player:mem(0x11E,FIELD_BOOL,false)
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
 		end
 	elseif player.count() >= 3 then
 		playSound(1001)
-		Cheats.trigger("1player")
+		mem(0x00B2595E, FIELD_WORD, 1)
 		player:mem(0x11E,FIELD_BOOL,false)
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)

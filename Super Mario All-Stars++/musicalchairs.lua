@@ -843,7 +843,7 @@ function musicalchairs.onTick()
 			end
 			if currentCostume == "11-SMA1" or currentCostume == "12-SMA2" or currentCostume == "13-SMA4" then
 				--Super Mario Bros. 1
-				elseif section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
+				if section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Advance 4/Super Mario Brothers Normal Level.ogg"
 				elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Advance 4/Bonus Level.ogg"
