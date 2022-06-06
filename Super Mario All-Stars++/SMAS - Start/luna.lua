@@ -277,6 +277,8 @@ function onStart()
 	if mem(0x00B2C5AC,FIELD_FLOAT,0) then
 		mem(0x00B2C5AC,FIELD_FLOAT,3)
 	end
+	GameData.battlemodeactive = false
+	GameData.rushModeActive = false
 	Misc.saveGame()
 end
 

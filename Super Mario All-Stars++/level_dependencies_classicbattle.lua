@@ -92,6 +92,7 @@ function exitbattlemode()
 	exitscreen = true
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
+	GameData.battlemodeactive = false
 	Misc.saveGame()
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end
@@ -732,7 +733,6 @@ function dependencies.onExit()
 	if killed == true then
 		Level.load(Level.filename(), nil, nil)
 	end
-	GameData.battlemodeactive = false
 end
 
 littleDialogue.registerAnswer("MainSelect",{text = "Start a New Stage",chosenFunction = function() Routine.run(rngrunstate) end})

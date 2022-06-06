@@ -827,6 +827,7 @@ function battlemodeexit()
 	Routine.wait(0.4, true)
 	Misc.unpause()
 	GameData.rushModeActive = false
+	GameData.battlemodeactive = false
 	exitFadeActive = false
 	exitFadeActiveDone = true
 	Level.load("SMAS - Start.lvlx", nil, nil)
