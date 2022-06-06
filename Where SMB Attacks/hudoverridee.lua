@@ -299,11 +299,13 @@ function Graphics.drawVanillaHUD(camIndex, priority, isSplit)
 
 	if #activePlayers > 1 and not isSplit then
 		splitOffset[1] = -HUDOverride.multiplayerOffsets[Graphics.getHUDType(activePlayers[1].character)]
-		splitOffset[2] = HUDOverride.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
-		for i=1, 2 do
-			local acts = Graphics.getHUDActions(activePlayers[i].character)
-			if(acts) then
-				acts(i, thisCam, activePlayers[i], priority, isSplit, #activePlayers);
+		if Player(2) and Player(2).isValid then
+			splitOffset[2] = HUDOverride.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
+			for i=1, 2 do
+				local acts = Graphics.getHUDActions(activePlayers[i].character)
+				if(acts) then
+					acts(i, thisCam, activePlayers[i], priority, isSplit, #activePlayers);
+				end
 			end
 		end
 	else
@@ -509,9 +511,11 @@ end
 function HUDOverride.countItemboxes(splitOffset, camIndex, isMultiplayer, isSplit, priority)
 	thisCam = activeCameras[camIndex]
 	if isMultiplayer and not isSplit then
-		for i=1, 2 do
-			thisPlayer = activePlayers[i]
-			HUDOverride.drawItembox(splitOffset[i], thisCam, camIndex, thisPlayer, isMultiplayer, priority)
+		if Player(2) and Player(2).isValid then
+			for i=1, 2 do
+				thisPlayer = activePlayers[i]
+				HUDOverride.drawItembox(splitOffset[i], thisCam, camIndex, thisPlayer, isMultiplayer, priority)
+			end
 		end
 	else
 		thisPlayer = activePlayers[camIndex]
@@ -520,7 +524,6 @@ function HUDOverride.countItemboxes(splitOffset, camIndex, isMultiplayer, isSpli
 end
 
 function HUDOverride.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMultiplayer, priority)
-
 	local reserve2p = ConvertSprite(GetImageFromID(reserveBox2P[thisPlayer.character], thisPlayer.character))
 
 	if Graphics.getHUDType(thisPlayer.character) == Graphics.HUD_ITEMBOX then

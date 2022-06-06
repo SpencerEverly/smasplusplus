@@ -3,7 +3,7 @@ local wandR = require("wandR")
 local Routine = require("routine")
 local textplus = require("textplus")
 local smallScreen = require("smallScreen")
-local pausemenu = require("pausemenu")
+local pausemenu = require("pausemenu2")
 
 if SMBX_VERSION == VER_SEE_MOD then
 	__customPauseMenuActive = true

@@ -29,7 +29,7 @@ local hudoverride = require("hudoverridee")
 local customCamera = require("customCamera")
 local extrasounds = require("extrasounds")
 local modernReserveItems = require("modernReserveItems")
-local pausemenu = require("pausemenu")
+local pausemenu = require("pausemenu2")
 local smallScreen = require("smallScreen")
 local smasfunctions = require("smasfunctions")
 
@@ -41,10 +41,6 @@ local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png
 local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
 local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
 
-if SMBX_VERSION == VER_SEE_MOD then
-	__customPauseMenuActive = true
-end
-
 littleDialogue.defaultStyleName = "smbx13"
 
 customCamera.transitionSpeed = 5
@@ -55,14 +51,14 @@ local killed = false
 function p1teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-	player2:mem(0x140,FIELD_WORD,100)
+	Player(2):mem(0x140,FIELD_WORD,100)
 	Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
 end
 
 function p2teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-	player2:mem(0x140,FIELD_WORD,100)
+	Player(2):mem(0x140,FIELD_WORD,100)
 	Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
 end
 
@@ -83,7 +79,7 @@ function onStart()
 end
 
 function onCameraUpdate(c, camIdx)
-	if player.count(2) then
+	if Player(2) and Player(2).isValid then
 		if c == 1 then
 			camera.renderX, camera.rendery = 0, 0
 			camera.width, camera.height = 800, 600
@@ -138,6 +134,7 @@ function onInputUpdate()
 end
 
 function onTick()
+	mem(0x00B25130,FIELD_WORD, 2)
 	littleDialogue.defaultStyleName = "smbx13"
 	if Player(2) and Player(2).isValid then
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
@@ -167,15 +164,64 @@ function onTick()
 			end
 		end
 	end
-	if playerlives == 0 then
-        if(not killed and player:mem(0x13E,FIELD_BOOL)) then
-            killed = true
-            mem(0x00B2C5AC,FIELD_FLOAT, 1)
-        end
+	for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
+		if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then --If 0, do these things...
+			if(not killed and p:mem(0x13E,FIELD_BOOL)) then --Checks to see if the player actually died...
+				killed = true --If so, this is true.
+				mem(0x00B2C5AC,FIELD_FLOAT, 1) --Increase the life to 1 to prevent being kicked to the broken SMBX launcher after dying
+			end
+			if Player(2) and Player(2).isValid then --Player(2) compability! This one is a bit of a mess, but I tried
+				if(not killed2 and p.deathTimer >= 1 and p:mem(0x13C, FIELD_BOOL)) then --Because 0X13E doesn't check in multiplayer, use the death timer instead.
+					killed2 = true --This one has a different variable set for player2
+					mem(0x00B2C5AC,FIELD_FLOAT, 1) --Also same as above
+					if p.deathTimer >= 199 then --If player2's death timer is almost 200, load the game over level
+						Level.load("Game Over.lvlx")
+					end
+				end
+			end
+		end
 	end
 end
 
 function onDraw()
+	if Player(2) and Player(2).isValid then
+		local playerboundaryx = Player(2).x - player.x
+		local playerboundaryy = Player(2).y - player.y
+		--Kill player2 if far away, out of the camera bounds
+		if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+			Player(2):kill()
+		elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+			Player(2):kill()
+		elseif playerboundaryy >= 1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+			Player(2):kill()
+		elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+			Player(2):kill()
+		end
+		if Player(1).forcedState == FORCEDSTATE_PIPE then
+			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
+				player:mem(0x140,FIELD_WORD,100)
+				player2:mem(0x140,FIELD_WORD,100)
+				Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+			end
+		end
+		if Player(2).forcedState == FORCEDSTATE_PIPE then
+			if Player(2).forcedTimer >= 70 and not Misc.isPaused() then
+				player:mem(0x140,FIELD_WORD,100)
+				player2:mem(0x140,FIELD_WORD,100)
+				Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
+			end
+		end
+		if Player(1).forcedState == FORCEDSTATE_DOOR then
+			if Player(1).forcedTimer == 1 then
+				Routine.run(p1teleportdoor)
+			end
+		end
+		if Player(2).forcedState == FORCEDSTATE_DOOR then
+			if Player(2).forcedTimer == 1 then
+				Routine.run(p2teleportdoor)
+			end
+		end
+	end
 	if SaveData.resolution == "fullscreen" then
 		customCamera.defaultScreenWidth = 800
 		customCamera.defaultScreenHeight = 600
@@ -400,6 +446,11 @@ function onDraw()
 			Graphics.drawImageWP(threedsborder, 0, 0, 5)
 		end
 	end
+end
+
+function onTickEnd()
+    -- Fix blinking when starting the level/changing sections (Thanks MDA!)
+    mem(0x00B250D4,FIELD_BOOL,false)
 end
 
 function onExit()
