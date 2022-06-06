@@ -556,6 +556,38 @@ local function FirstBoot1()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Welcome to Super Mario All-Stars++.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Please note that this is an Open Source project.<page>So please understand that BUGS may occur! Don't hesitate to report them on the GitHub page.<page>You can find it at https://github.com/SpencerEverly/smasplusplus/.<page>Other than that, please enjoy the game!<page>But, before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
 
+local function MigrateOldSave1()
+	Audio.MusicChange(0, "_OST/_Sound Effects/nothing.ogg")
+	Routine.wait(1.5)
+	active = true
+	logo = false
+	pressjumpwords = false
+	Audio.MusicChange(0, "_OST/Photo Channel (Wii)/Slideshow (Scenic).ogg")
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>It looks like you have an old save you'll need to migrate immediately.<page>The reason why you'll need to migrate your save is because<page>your current save is outdated and needs to be refreshed for this Demo,<page>and beyond for future releases. Please note that, once you<page>migrate your data, it will be imcompatible with old releases.<page>So please do this if you are actually willing to upgrade<page>to Demo 3 and beyond.<question MigrateSaveMenuOne>", pauses = false, updatesInPause = true})
+end
+
+local function MigrateOldSave2()
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Please note that before you do this, a final reminder that<page>this save data will be upgraded, and the data will not be<page>compatible with older releases. Be sure you want to<page>proceed before doing so.<question MigrateSaveMenuTwo>", pauses = false, updatesInPause = true})
+end
+
+local function MigrateOldSave3()
+	SaveData.totalStarCount = tonumber(mem(0x00B251E0, FIELD_WORD))
+	SaveData.totalCoinsClassic = tonumber(mem(0x00B2C5A8, FIELD_WORD))
+	SaveData.totalLives = tonumber(mem(0x00B2C5AC, FIELD_FLOAT))
+	SaveData.totalScoreClassic = tonumber(Misc.score())
+	local savefile = io.open(Misc.episodePath().."save"..Misc.saveSlot()..".sav","r")
+	local savefilecontents = savefile:read("*all")
+	--local savefilelvlx = string.find(savefilecontents, ".lvlx")
+	savefile:close()
+	eraseMainSaveSlot(Misc.saveSlot())
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Save has been officially migrated! Please note that you'll need to reunlock paths,<page>but other than that you should be good to go!<page>Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
+end
+
+local function MigrateOldSaveCancelled()
+	Audio.MusicChange(0, "_OST/_Sound Effects/nothing.ogg")
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Please note that you need to upgrade your save data<page>to use Demo 3. Try again next time when you are<page>ready to do so.<question MigrateSaveMenuCancel>", pauses = false, updatesInPause = true})
+end
+
 local function FirstBoot3()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -0.6>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
 end
@@ -1068,6 +1100,13 @@ local function ExitGame1()
 	Misc.exitEngine()
 end
 
+local function ExitGameNoSave()
+	exitscreen = true
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.exitEngine()
+end
+
 local function SaveEraseStart()
 	--Start opening SMAS++'s save files. From there, write default data to the files.
 	eraseSaveSlot(Misc.saveSlot())
@@ -1235,14 +1274,24 @@ end
 function bootmenu.onStart()
 	if bootmenu.active == true then
 		Audio.MusicVolume(nil) --Let the music volume reset
+		if mem(0x00B251E0, FIELD_WORD) >= 1 then
+			GameData.saveDataMigrated = false
+		end
+		if mem(0x00B251E0, FIELD_WORD) == 0 then
+			GameData.saveDataMigrated = true
+		end
+		if GameData.saveDataMigrated == false then
+			Routine.run(MigrateOldSave1)
+			GameData.startedmenu = 1
+		end
 		if SaveData.firstBootCompleted == nil then
 			SaveData.firstBootCompleted = false --If starting for the first time, first boot will happen
 		end
-		if SaveData.firstBootCompleted == false then
+		if SaveData.firstBootCompleted == false and GameData.saveDataMigrated == false then
 			Routine.run(FirstBoot1)
 			GameData.startedmenu = 1
 		end
-		if SaveData.firstBootCompleted == true then
+		if SaveData.firstBootCompleted == true and GameData.saveDataMigrated == false then
 			Routine.run(easterEgg, true)
 			playernamebyImg = true
 			pfpimage = true
@@ -2029,12 +2078,27 @@ if bootmenu.active == true then
 
 	littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlusResetSave) end})
 
-
+	
+	
+	littleDialogue.registerAnswer("RestartOptionNoSaveErase",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlus) end})
+	
+	
 
 	littleDialogue.registerAnswer("FirstBootMenuOne",{text = "Begin",chosenFunction = function() Routine.run(FirstBoot3) end})
 
-
-
+	
+	
+	littleDialogue.registerAnswer("MigrateSaveMenuOne",{text = "Upgrade now",chosenFunction = function() Routine.run(MigrateOldSave2) end})
+	littleDialogue.registerAnswer("MigrateSaveMenuOne",{text = "No thanks",chosenFunction = function() Routine.run(MigrateOldSaveCancelled) end})
+	
+	
+	littleDialogue.registerAnswer("MigrateSaveMenuCancel",{text = "Quit Game",chosenFunction = function() Routine.run(ExitGameNoSave) end})
+	
+	
+	
+	littleDialogue.registerAnswer("MigrateSaveMenuTwo",{text = "Start the upgrade now",chosenFunction = function() Routine.run(MigrateOldSave3) end})
+	littleDialogue.registerAnswer("MigrateSaveMenuTwo",{text = "No thanks",chosenFunction = function() Routine.run(MigrateOldSaveCancelled) end})
+	
 
 	littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "Yes",chosenFunction = function() Routine.run(FirstBoot4) end})
 	littleDialogue.registerAnswer("FirstBootMenuTwo",{text = "No",chosenFunction = function() Routine.run(TimeFixInfo1) end})

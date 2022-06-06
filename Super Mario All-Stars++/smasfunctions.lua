@@ -874,7 +874,17 @@ function moveSaveSlot(slot, destination)
 	Misc.saveGame()
 end
 
-function eraseSaveSlot(slot)
+function eraseMainSaveSlot(slot) --This only erases the main save in the save slot.
+	local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
+	if f == nil then
+		return
+	end
+
+	f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
+	f:close()
+end
+
+function eraseSaveSlot(slot) --This erases all the save data in a specific slot.
 	local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
 	if f == nil then
 		return
