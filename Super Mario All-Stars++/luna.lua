@@ -47,6 +47,7 @@ local smwMap = require("smwMap")
 local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
 local extrasounds = require("extrasounds")
+local extraNPCProperties = require("extraNPCProperties")
 
 --These libraries has some new functions, for simplifying the functions, and other things:
 local smasfunctions = require("smasfunctions")
