@@ -732,7 +732,7 @@ local function X2DisableCheck1()
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Would you like to enable/disable SMBX 1.3 mode?<page>If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored.<page>Costumes will reset, so be careful enabling this option!<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
 	end
 	if Player.count() == 2 then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>You can't use 2 player mode on X2 mode. Please disable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>You can't use 2 player mode on X2 mode. Please disable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 

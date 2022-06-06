@@ -23,8 +23,8 @@ local started = false
 function musicalchairs.onInitAPI()
 	registerEvent(musicalchairs, "onStart")
 	registerEvent(musicalchairs, "onTick")
-	registerEvent(musicalchairs, "onEvent")
 	registerEvent(musicalchairs, "onDraw")
+	registerEvent(musicalchairs, "onEvent")
 	
 	ready = true
 end
@@ -52,7 +52,7 @@ function musicalchairs.onStart()
 end
 
 --onTick is for sections that don't change the section music.
-function musicalchairs.onTick()
+function musicalchairs.onDraw()
 	--section.musicPath is the command that changes sections. You can specify the original music path, and it'll replace it with the new path/to/file.extension.
 	
 	--If section.musicPath is called to change music on one big lua script. That way, more than a hundred scripts wouldn't be scripted seperately. They are placed on the "currentCostume if" part.
