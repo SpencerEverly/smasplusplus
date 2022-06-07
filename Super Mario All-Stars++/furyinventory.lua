@@ -22,7 +22,7 @@ local warpTransition = require("warpTransition")
 local pausemenu = require("pauseplus")
 local littleDialogue = require("littleDialogue")
 local modernReserveItems = require("modernReserveItems")
-local hudoverride = require("hudoverride")
+local hudoverride = require("hudoverridee")
 
 furyinventory.furyinventoryopened = false
 GameData.toggleoffinventory = false
@@ -389,31 +389,33 @@ end
 
 
 function furyinventory.onPostNPCKill(v,reason)
-    if v.id == 14 or v.id == 183 or v.id == 182 then -- collecting fire flower
-        if  player.isMega == true then
-            SaveData.furyinventory.fire = SaveData.furyinventory.fire + 1
-        end
-    elseif v.id == 9 or v.id == 184 or v.id == 185 or v.id == 249 then -- collecting mushroom
-        if player.powerup >= 2 or player.isMega == true then
-            SaveData.furyinventory.shroom = SaveData.furyinventory.shroom + 1
-        end
-    elseif v.id == 264 or v.id == 277 then -- collecting ice flower
-        if player.isMega == true then
-            SaveData.furyinventory.ice = SaveData.furyinventory.ice + 1
-        end
-    elseif v.id == 34 then -- collecting super leaf
-        if player.isMega == true then
-            SaveData.furyinventory.leaf = SaveData.furyinventory.leaf + 1
-        end
-    elseif v.id == 169 then -- collecting tanooki suit
-        if player.isMega == true then
-            SaveData.furyinventory.tanooki = SaveData.furyinventory.tanooki + 1
-        end
-    elseif v.id == 170 then -- collecting hammer suit
-        if player.isMega == true then
-            SaveData.furyinventory.hammer = SaveData.furyinventory.hammer + 1
-        end
-    end
+	for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
+		if v.id == 14 or v.id == 183 or v.id == 182 and Colliders.collide(p, v) then -- collecting fire flower
+			if  player.isMega == true then
+				SaveData.furyinventory.fire = SaveData.furyinventory.fire + 1
+			end
+		elseif v.id == 9 or v.id == 184 or v.id == 185 or v.id == 249 and Colliders.collide(p, v) then -- collecting mushroom
+			if player.powerup >= 2 or player.isMega == true then
+				SaveData.furyinventory.shroom = SaveData.furyinventory.shroom + 1
+			end
+		elseif v.id == 264 or v.id == 277 and Colliders.collide(p, v) then -- collecting ice flower
+			if player.isMega == true then
+				SaveData.furyinventory.ice = SaveData.furyinventory.ice + 1
+			end
+		elseif v.id == 34 and Colliders.collide(p, v) then -- collecting super leaf
+			if player.isMega == true then
+				SaveData.furyinventory.leaf = SaveData.furyinventory.leaf + 1
+			end
+		elseif v.id == 169 and Colliders.collide(p, v) then -- collecting tanooki suit
+			if player.isMega == true then
+				SaveData.furyinventory.tanooki = SaveData.furyinventory.tanooki + 1
+			end
+		elseif v.id == 170 and Colliders.collide(p, v) then -- collecting hammer suit
+			if player.isMega == true then
+				SaveData.furyinventory.hammer = SaveData.furyinventory.hammer + 1
+			end
+		end
+	end
 
 
     if player.powerup == PLAYER_BIG then
