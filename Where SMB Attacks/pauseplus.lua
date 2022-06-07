@@ -1026,7 +1026,7 @@ pauseplus.backgroundDarkness = 0
 
 
 -- The priority that the menu is drawn at.
-pauseplus.priority = 6
+pauseplus.priority = 9
 
 -- The sound effects used when opening the menu, moving around it, changing submenus, or toggling a checkbox.
 pauseplus.openSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu.ogg"))

@@ -262,6 +262,22 @@ GameData.notransitionlevels = { --This one will prevent transitions from happeni
 	"intro_WSMBA.lvlx",
 }
 
+GameData.classicBattleModeLevels = {
+	"battle_battleshrooms.lvl",
+	"battle_battle-zone.lvl",
+	"battle_classic-castle-battle.lvl",
+	"battle_dry-dry-desert.lvl",
+	"battle_hyrule-temple.lvl",
+	"battle_invasion-battlehammer.lvl",
+	"battle_lakitu-mechazone.lvl",
+	"battle_lethal-lava-level.lvl",
+	"battle_slippy-slap-snowland.lvl",
+	"battle_woody-warzone.lvl",
+	"battle_retroville-underground.lvl",
+	"battle_testlevel.lvlx",
+	"battle_nsmbds1.lvlx",
+}
+
 GameData.rushlevelsrng = { --All Rush Mode levels.
 	"SMB1 - W-1, L-1.lvlx",
 	"SMB1 - W-1, L-2.lvlx",

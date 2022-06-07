@@ -91,9 +91,7 @@ local month = os.date("%m")
 
 local exacttime = os.date("%X")
 
-local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl"}
-local selecter = rng.randomInt(1,#battlelevelsrng)
-
+local selecter = rng.randomInt(1,#GameData.classicBattleModeLevels)
 local selecter2 = rng.randomInt(1,#GameData.rushlevelsrng)
 
 local function introExit()
@@ -112,7 +110,7 @@ local function BattleRandomLevelSelect()
 	GameData.battlemoderngactive = true
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load(battlelevelsrng[selecter], nil, nil)
+	Level.load(GameData.classicBattleModeLevels[selecter], nil, nil)
 end
 
 local function Battle1()
@@ -245,6 +243,17 @@ local function Battle12()
 	Routine.wait(0.4)
 	Misc.saveGame()
 	Level.load("battle_testlevel.lvlx", nil, nil)
+end
+
+local function Battle13()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_nsmbds1.lvlx", nil, nil)
 end
 
 
@@ -817,7 +826,7 @@ local function TwoPlayerCheckBattle()
 end
 
 local function ExitClassicBattle()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Exiting battle mode activated. You'll need to manually turn off 2 player mode in the settings tab.<question OkayToMenu>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Exiting battle mode activated. You'll need to manually turn off 2 player mode in the settings tab.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function OnePlayerCheckWarning()
@@ -1163,7 +1172,7 @@ local function BootWSMBAPreExecute() --This will execute WSMBA, the other preinc
 	redcurtains = false
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
-	if (Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)")) == false then --Make this launch as specific for the episode, else if not found... an error will occur
+	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then --Make this launch as specific for the episode, else if not found... an error will occur
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
 		exitscreen = false
@@ -2016,6 +2025,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Slippy Slap Snowland (SMBX 1.3)",chosenFunction = function() Routine.run(Battle10) end})
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Woody Warzone (SMBX 1.3)",chosenFunction = function() Routine.run(Battle11) end})
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Sky High Into the Skies",chosenFunction = function() Routine.run(Battle12) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 1 (By hrthrdh)",chosenFunction = function() Routine.run(Battle13) end})
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 
 	

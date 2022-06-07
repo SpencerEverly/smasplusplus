@@ -1034,10 +1034,8 @@ function customCamera.getTargets()
     end
 
     -- Add player
-	for k,p in ipairs(Player.get()) do
-		table.insert(targets,p)
-		count = count + 1
-	end
+	table.insert(targets,player)
+	count = count + 1
 
     return targets
 end
@@ -1064,10 +1062,13 @@ function getCameraFocusFromTargets(targets)
         end
     end
 
-	for k,p in ipairs(Player.get()) do
-		total.x = p.x + p.width*0.5
-		total.y = p.y + p.height
-	end
+	if count == 0 then
+        total.x = player.x + player.width*0.5
+        total.y = player.y + player.height
+    else
+        total.x = total.x/count
+        total.y = total.y/count
+    end
 
     return total
 end

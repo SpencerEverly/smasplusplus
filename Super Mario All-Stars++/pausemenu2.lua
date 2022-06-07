@@ -28,9 +28,6 @@ end
 
 local pausefont3 = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
 
-local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
-local selecter = rng.randomInt(1,#battlelevelsrng)
-
 function pausemenu2.onInitAPI()
 	registerEvent(pausemenu2, "onKeyboardPress")
 	registerEvent(pausemenu2, "onDraw")
@@ -817,7 +814,7 @@ function battlemodenewstage()
 	Misc.unpause()
 	exitFadeActive = false
 	exitFadeActiveDone = true
-	Level.load(battlelevelsrng[selecter], nil, nil)
+	Level.load(GameData.classicBattleModeLevels[rng.randomInt(1,#GameData.classicBattleModeLevels)], nil, nil)
 end
 
 function battlemodeexit()
@@ -1078,8 +1075,8 @@ local function dlcteleport()
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
 	playSound("hub_travelactivated.ogg")
-	SaveData.smwMap.playerX = -199040
-	SaveData.smwMap.playerY = -199936
+	SaveData.smwMap.playerX = -199584
+	SaveData.smwMap.playerY = -196768
 	playSound("world_warp.ogg")
 	pauseplus.canControlMenu = false
 	startFadeOut()
@@ -1116,7 +1113,7 @@ if GameData.rushModeActive == true then
 		pauseplus.createOption("main",{text = "Exit Battle Mode",closeMenu = true,description = "To exit Rush Mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
 	end
 end
-if GameData.battlemodeactive == nil or GameData.battlemodeactive == false and GameData.rushModeActive == nil or GameData.rushModeActive == false then
+if GameData.battlemodeactive == nil or GameData.battlemodeactive == false or GameData.rushModeActive == nil or GameData.rushModeActive == false then
 	if (Level.filename() == "map.lvlx") == false then
 		pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
 	end

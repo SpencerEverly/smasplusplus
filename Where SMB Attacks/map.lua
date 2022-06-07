@@ -4,9 +4,66 @@ local Routine = require("routine")
 local textplus = require("textplus")
 local smallScreen = require("smallScreen")
 local pausemenu = require("pausemenu2")
+local playerManager = require("playermanager")
 
-if SMBX_VERSION == VER_SEE_MOD then
-	__customPauseMenuActive = true
+local pressedKeys = {};
+function playerManager.onInputUpdate()
+	--Set up the world map to support changing to all characters via the pause menu
+	if(isOverworld) then
+		if Misc.isPaused() then
+			if(not player.rightKeyPressing) then
+				pressedKeys.right = false;
+			end
+			if(not player.leftKeyPressing) then
+				pressedKeys.left = false;
+			end
+		end
+			
+		--Adjust character if necessary
+		if(charoffset ~= nil) then
+			if characterindex == 0 or playerManager.overworldCharacters[characterindex] ~= player.character then
+				characterindex = 0
+				for k,v in ipairs(playerManager.overworldCharacters) do
+					if v == player.character then
+						characterindex = k
+						break
+					end
+				end
+			end
+		
+			local index
+
+			if characterindex > 0 then
+				characterindex = ((characterindex-1+charoffset)%#playerManager.overworldCharacters) + 1
+			else
+				characterindex = 1
+			end
+			index = playerManager.overworldCharacters[characterindex]
+			
+			if index == nil then
+				index = 1
+				characterindex = 0
+			end
+			
+			player:transform(index)
+			updateCharacterHitbox(player.character)
+			local ps = PlayerSettings.get(characters[player.character].base, player.powerup)
+			if player:mem(0x108,FIELD_WORD) == 1 then
+				player.height = 54
+			else
+				player.height = ps.hitboxHeight
+			end
+			player.width = ps.hitboxWidth
+			Audio.playSFX(26)
+		end
+			
+		--world:mem(0x112,FIELD_WORD,player.character)
+		--Disable vanilla character switch (can we do this better?)
+		if Misc.isPaused() then
+			player.rightKeyPressing = false;
+			player.leftKeyPressing = false;
+		end
+	end
 end
 
 if SaveData.resolution == nil then
@@ -77,18 +134,18 @@ function levelload()
 	nochangecharmap = true
 	world.playerWalkingFrame = 1
 	SFX.play("level-select2.ogg")
-	Audio.MusicVolume(0)
+	GameData.musicMuted = true
 	Misc.pause()
 	player:mem(0x17A, FIELD_BOOL, true)
 	Routine.waitFrames(20, true)
 	loadlevelanimation = true
 	Routine.waitFrames(58, true)
 	Misc.unpause()
+	GameData.musicMuted = false
 	player:mem(0xFA, FIELD_BOOL, true)
 	Routine.waitFrames(1, true)
 	loadlevelanimation = nil
 	loadlevelanimationin = true
-	Audio.MusicVolume(56)
 	nochangecharmap = false
 	Routine.waitFrames(78, true)
 	loadlevelanimationin = nil

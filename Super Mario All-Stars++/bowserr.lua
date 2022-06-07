@@ -20,7 +20,7 @@ local prevkeys = {run=false,down=false,sel=false,tanooki=false}
 local pressedTanooki = false;
 
 local punchTimer = 0;
-local punchDur = 24;
+local punchDur = 12;
 local punchingActive = false;
 local punchStarted = false;
 

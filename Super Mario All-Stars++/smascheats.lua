@@ -316,7 +316,7 @@ Cheats.register("thestarmen",{ --This needs to be reregistered because it was us
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",
 })
 
-Cheats.register("bitemythumb",{ --This needs to be reregistered because it was using the wrong star ID
+Cheats.register("bitemythumb",{ --This needs to be reregistered because it was using the wrong megashroom ID
 	onActivate = (function()
 		Defines.player_hasCheated = false
 		if(megashroom) then
