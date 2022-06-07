@@ -611,8 +611,12 @@ function activate1stPlayer()
 end
 
 function activate2ndPlayer()
-	Cheats.trigger("2player")
 	mem(0x00B2595E, FIELD_WORD, 2)
+	if Player(2) and Player(2).isValid then
+		Player(2).x = player.x + 36
+		Player(2).y = player.y - 72
+		player.character = 2
+	end
 end
 
 function activate3rdPlayer()

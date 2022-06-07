@@ -83,7 +83,7 @@ end
 
 function exitbattlemode()
 	Graphics.activateHud(false)
-	--Cheats.trigger("1player")
+	activate1stPlayer()
 	Defines.player_hasCheated = false
 	exitscreen = true
 	Audio.MusicChange(0, 0)

@@ -112,7 +112,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 								Misc.pause()
 								gameovershow = true --Show the GAME OVER text
 								SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-								local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
+								local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
 								playSound("gameover/gameover-"..rngkey..".ogg")
 								
 								--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
@@ -200,6 +200,9 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 									
 								elseif rngkey == 28 then
 									Routine.wait(8, true)
+								
+								elseif rngkey == 29 then
+									Routine.wait(6, true)
 									
 									
 								end
@@ -243,7 +246,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 								Misc.pause()
 								gameovershow = true --Show the GAME OVER text
 								SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-								local rngkey = rng.randomInt(1,28) --This will randomly sort an rng where it picks a random game over track to play.
+								local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
 								playSound("gameover/gameover-"..rngkey..".ogg")
 								
 								--If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
@@ -332,6 +335,9 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 								elseif rngkey == 28 then
 									Routine.wait(8, true)
 									
+								elseif rngkey == 29 then
+									Routine.wait(6, true)
+								
 									
 								end
 								Misc.unpause() --Unpause afterward

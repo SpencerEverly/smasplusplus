@@ -814,13 +814,13 @@ local function FramerateToggle1()
 end
 
 local function TwoPlayerCheck()
-	Cheats.trigger("2player")
+	activate2ndPlayer()
 	Defines.player_hasCheated = false
 	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function TwoPlayerCheckBattle()
-	Cheats.trigger("2player")
+	activate2ndPlayer()
 	Defines.player_hasCheated = false
 	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToBattle>", pauses = false, updatesInPause = true})
 end
@@ -834,7 +834,7 @@ local function OnePlayerCheckWarning()
 end
 
 local function OnePlayerCheck()
-	Cheats.trigger("1player")
+	activate1stPlayer()
 	Defines.player_hasCheated = false
 	littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>1 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
