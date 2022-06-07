@@ -31,14 +31,14 @@ GameData.battlemodeactive = false
 function p1teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-	player2:mem(0x140,FIELD_WORD,100)
+	Player(2):mem(0x140,FIELD_WORD,100)
 	Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
 end
 
 function p2teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-	player2:mem(0x140,FIELD_WORD,100)
+	Player(2):mem(0x140,FIELD_WORD,100)
 	Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
 end
 
@@ -113,14 +113,14 @@ function dependencies.onTick()
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
 			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
 				player:mem(0x140,FIELD_WORD,100)
-				player2:mem(0x140,FIELD_WORD,100)
+				Player(2):mem(0x140,FIELD_WORD,100)
 				Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 			end
 		end
 		if Player(2).forcedState == FORCEDSTATE_PIPE then
 			if Player(2).forcedTimer >= 70 and not Misc.isPaused() then
 				player:mem(0x140,FIELD_WORD,100)
-				player2:mem(0x140,FIELD_WORD,100)
+				Player(2):mem(0x140,FIELD_WORD,100)
 				Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
 			end
 		end

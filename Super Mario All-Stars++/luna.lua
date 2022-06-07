@@ -85,7 +85,7 @@ function classicEvents.doEvents() --To prevent the plObject a nil value error, t
     for plIndex, plData in ipairs(playerData) do
         local plObject = players[plIndex]
 		if plObject == nil then --Let's prevent the plObject a nil value error
-			player2.isValid = false
+			Player(2).isValid = false
 		end
         for _,keymapEnumValue in ipairs(playerKeymapKeys) do
             local keymapPropertyName = playerKeymapProperties[keymapEnumValue]

@@ -616,6 +616,9 @@ function activate2ndPlayer()
 		Player(2).x = player.x + 36
 		Player(2).y = player.y - 72
 		Player(2).character = 2
+		if Player(2).powerup == 0 then
+			Player(2).powerup = 2
+		end
 	end
 end
 

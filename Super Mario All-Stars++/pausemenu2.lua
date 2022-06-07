@@ -292,36 +292,40 @@ local function characterchange13()
 end
 
 local function characterchange13_2p()
-	local character = player2.character;
-	if (character == CHARACTER_MARIO) then
-		player2:transform(2, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_LUIGI) then
-		player2:transform(3, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_PEACH) then
-		player2:transform(4, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_TOAD) then
-		player2:transform(5, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_LINK) then
-		player2:transform(1, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
+	if Player(2) and Player(2).isValid then
+		local character = Player(2).character;
+		if (character == CHARACTER_MARIO) then
+			Player(2):transform(2, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_LUIGI) then
+			Player(2):transform(3, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_PEACH) then
+			Player(2):transform(4, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_TOAD) then
+			Player(2):transform(5, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_LINK) then
+			Player(2):transform(1, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+	else
+		playSound("wrong.ogg")
 	end
 end
 
@@ -460,36 +464,40 @@ local function characterchange13left()
 end
 
 local function characterchange13_2pleft()
-	local character = player2.character;
-	if (character == CHARACTER_MARIO) then
-		player2:transform(5, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_LUIGI) then
-		player2:transform(1, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_PEACH) then
-		player2:transform(2, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_TOAD) then
-		player2:transform(3, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
-	end
-	if (character == CHARACTER_LINK) then
-		player2:transform(4, false)
-		SFX.play(32)
-		playSound("charcost-selected.ogg")
-		playSound("racoon-changechar.ogg")
+	if Player(2) and Player(2).isValid then
+		local character = Player(2).character
+		if (character == CHARACTER_MARIO) then
+			Player(2):transform(5, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_LUIGI) then
+			Player(2):transform(1, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_PEACH) then
+			Player(2):transform(2, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_TOAD) then
+			Player(2):transform(3, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+		if (character == CHARACTER_LINK) then
+			Player(2):transform(4, false)
+			SFX.play(32)
+			playSound("charcost-selected.ogg")
+			playSound("racoon-changechar.ogg")
+		end
+	else
+		playSound("wrong.ogg")
 	end
 end
 
@@ -1171,10 +1179,8 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 		if SaveData.disableX2char == true then
 			pauseplus.createOption("charactermenu",{text = "Change Character 1P (Left)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13left() end})
 			pauseplus.createOption("charactermenu",{text = "Change Character 1P (Right)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13() end})
-			if Player(2) and Player(2).isValid and Player.count() == 2 then
-				pauseplus.createOption("charactermenu",{text = "Change Character 2P (Left)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2pleft() end})
-				pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2p() end})
-			end
+			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Left)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2pleft() end})
+			pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2p() end})
 			pauseplus.createOption("charactermenu",{text = "Enable/Disable Multiplayer",closeMenu = true,description = "Toggle the status of multiplayer. This will only work on 1.3 Mode (If in Normal Mode this won't do anything).",action = function() checkingplayerstatus13() end})
 		end
 		

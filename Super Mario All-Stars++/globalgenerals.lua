@@ -27,6 +27,7 @@ local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 HUDOverride.priority = -4.5
 HUDOverride.visible.starcoins = false
 GameData.activateAbilityMessage = false
+GameData.forcedStateActive = false
 
 local eastercrash = false
 local eastercrashdone = false
@@ -1159,17 +1160,17 @@ function globalgenerals.onDraw()
 		local playerboundaryx = Player(2).x - player.x
 		local playerboundaryy = Player(2).y - player.y
 		--Kill player2 if far away, out of the camera bounds
-		if (player.forcedState == FORCEDSTATE_PIPE) == false or (player.forcedState == FORCEDSTATE_DOOR) == false then
-			if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-				Player(2):kill()
-			elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-				Player(2):kill()
-			elseif playerboundaryy >= 1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-				Player(2):kill()
-			elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-				Player(2):kill()
-			end
-		end
+		--if (player.forcedState == FORCEDSTATE_PIPE) == false or (player.forcedState == FORCEDSTATE_DOOR) == false or GameData.forcedStateActive == false then
+			--if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				--Player(2):kill()
+			--elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				--Player(2):kill()
+			--elseif playerboundaryy >= 1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				--Player(2):kill()
+			--elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				--Player(2):kill()
+			--end
+		--end
 	end
 	if SaveData.resolution == "fullscreen" then
 		customCamera.defaultScreenWidth = 0
