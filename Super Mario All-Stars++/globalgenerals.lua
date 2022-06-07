@@ -267,7 +267,7 @@ function globalgenerals.onInputUpdate()
 		end
 	end
 	if Player(2) and Player(2).isValid then
-		if Player(1).keys.altRun == KEYS_PRESSED and Player(1).keys.up == KEYS_PRESSED then
+		if Player(1).keys.altRun == KEYS_DOWN and Player(1).keys.up == KEYS_PRESSED then
 			if not Misc.isPaused() then
 				player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
 				playSound("player-tp-2player.ogg")
@@ -278,7 +278,7 @@ function globalgenerals.onInputUpdate()
 				Player(1):mem(0x172,FIELD_BOOL,true)
 			end
 		end
-		if Player(2).keys.altRun == KEYS_PRESSED and Player(2).keys.up == KEYS_PRESSED then
+		if Player(2).keys.altRun == KEYS_DOWN and Player(2).keys.up == KEYS_PRESSED then
 			if not Misc.isPaused() then
 				player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 				playSound("player-tp-2player.ogg")
