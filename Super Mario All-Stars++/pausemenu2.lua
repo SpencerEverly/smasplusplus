@@ -783,7 +783,7 @@ end
 local function checkingplayerstatus13()
 	if player.count() == 1 then
 		playSound(1001)
-		Cheats.trigger("2player")
+		activate2ndPlayer()
 		cooldown = 5
 		player:mem(0x11E,FIELD_BOOL,false)
 		if cooldown <= 0 then
@@ -791,14 +791,14 @@ local function checkingplayerstatus13()
 		end
 	elseif player.count() == 2 then
 		playSound(1001)
-		mem(0x00B2595E, FIELD_WORD, 1)
+		activate1stPlayer()
 		player:mem(0x11E,FIELD_BOOL,false)
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
 		end
 	elseif player.count() >= 3 then
 		playSound(1001)
-		mem(0x00B2595E, FIELD_WORD, 1)
+		activate1stPlayer()
 		player:mem(0x11E,FIELD_BOOL,false)
 		if cooldown <= 0 then
 			player:mem(0x11E,FIELD_BOOL,true)
