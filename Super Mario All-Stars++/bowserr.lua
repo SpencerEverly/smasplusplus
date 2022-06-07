@@ -732,7 +732,7 @@ function bowser.onTick()
 							end
 							n.speedX = n.direction * 3;
 							n.friendly = true;
-							playSFX(42);
+							playSound(42);
 							table.insert(fireballs,n);
 						elseif(player.powerup == PLAYER_ICE) then			--SPAWN ICEBALL
 							local n = NPC.spawn(237,player.x+(1+player:mem(0x106,FIELD_WORD))*player.width*0.5,player.y + 16, player.section);
