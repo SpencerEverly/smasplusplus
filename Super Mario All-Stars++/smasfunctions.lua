@@ -615,7 +615,7 @@ function activate2ndPlayer()
 	if Player(2) and Player(2).isValid then
 		Player(2).x = player.x + 36
 		Player(2).y = player.y - 72
-		player.character = 2
+		Player(2).character = 2
 	end
 end
 
