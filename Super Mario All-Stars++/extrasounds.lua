@@ -165,8 +165,8 @@ extrasounds.id[140] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-dese
 extrasounds.id[141] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-sky.ogg")) --Going Underground, Sky (SMB1)
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
-extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("dialog.ogg")) --Dialog Menu Picker
-extrasounds.id[1001] = Audio.SfxOpen(Misc.resolveSoundFile("dialog-confirm.ogg")) --Dialog Menu Choosing Confirmed
+extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
+extrasounds.id[1001] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog-confirm.ogg")) --Dialog Menu Choosing Confirmed
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
