@@ -2008,7 +2008,7 @@ ID:88;X:-159258;Y:-160352;D:-1;
 ID:88;X:-159482;Y:-160352;D:-1;
 ID:88;X:-159290;Y:-160352;D:-1;
 ID:88;X:-159418;Y:-160352;D:-1;
-ID:151;X:-158248;Y:-160368;D:-1;MG:"Welcome to the warp zone!<page>Left to right\:<page>\nPipe 1\: World 8<page>Pipe 2\: World 7<page>Pipe 3\: World 6";FD:1;NM:1;
+ID:151;X:-158248;Y:-160368;D:-1;MG:"Welcome to the warp zone!<page>Left to right\:<page>Pipe 1\: World 8<page>Pipe 2\: World 7<page>Pipe 3\: World 6";FD:1;NM:1;
 ID:88;X:-159002;Y:-160384;D:-1;
 ID:88;X:-158906;Y:-160384;D:-1;
 ID:88;X:-158970;Y:-160384;D:-1;
@@ -2068,7 +2068,7 @@ LR:"SMB1 Hard Mode";HD:1;
 LR:"SMB1 Easy Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
-ET:"Level - Start";SD:60;PC:000000000011;AS:0;AX:0;AY:0;
+ET:"Level - Start";PC:000000000011;AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Done Walk";AS:0;AX:0;AY:0;
