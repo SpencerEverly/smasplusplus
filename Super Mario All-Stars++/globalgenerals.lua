@@ -348,7 +348,6 @@ function globalgenerals.onTick()
 		Player.setCostume(10, nil)
 	end
 	
-	--mem(0x00B25130, FIELD_WORD, 2)
 	for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
 		if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then --If 0, do these things...
 			if(not killed and p:mem(0x13E,FIELD_BOOL)) then --Checks to see if the player actually died...
@@ -1160,14 +1159,16 @@ function globalgenerals.onDraw()
 		local playerboundaryx = Player(2).x - player.x
 		local playerboundaryy = Player(2).y - player.y
 		--Kill player2 if far away, out of the camera bounds
-		if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-			Player(2):kill()
-		elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-			Player(2):kill()
-		elseif playerboundaryy >= 1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-			Player(2):kill()
-		elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-			Player(2):kill()
+		if (player.forcedState == FORCEDSTATE_PIPE) == false or (player.forcedState == FORCEDSTATE_DOOR) == false then
+			if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				Player(2):kill()
+			elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				Player(2):kill()
+			elseif playerboundaryy >= 1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				Player(2):kill()
+			elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
+				Player(2):kill()
+			end
 		end
 	end
 	if SaveData.resolution == "fullscreen" then

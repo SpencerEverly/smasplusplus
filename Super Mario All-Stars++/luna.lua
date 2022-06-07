@@ -80,6 +80,44 @@ function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player tele
 	end
 end
 
+function classicEvents.doEvents() --To prevent the plObject a nil value error, this needs to be redone here
+    local players = Player.get()
+    for plIndex, plData in ipairs(playerData) do
+        local plObject = players[plIndex]
+		if plObject == nil then --Let's prevent the plObject a nil value error
+			player2.isValid = false
+		end
+        for _,keymapEnumValue in ipairs(playerKeymapKeys) do
+            local keymapPropertyName = playerKeymapProperties[keymapEnumValue]
+            checkKeyboardEvent(plObject, plIndex, plData, keymapPropertyName, keymapEnumValue)
+        end
+        
+        if(plObject:mem(0x60, FIELD_WORD) == -1 and plData.playerJumping == false)then
+            EventManager.callEventInternal("onJump", {plIndex})
+        elseif(plObject:mem(0x60, FIELD_WORD) == 0 and plData.playerJumping == true)then
+            EventManager.callEventInternal("onJumpEnd", {plIndex})
+        end
+        
+        local section = plObject.section
+        if(section ~= plData.currentSection)then
+            local evLoadSecitionName = "onLoadSection"
+            EventManager.callEventInternal(evLoadSecitionName, {plIndex})
+            EventManager.callEventInternal(evLoadSecitionName .. section, {plIndex})
+        end
+        EventManager.callEventInternal("onLoopSection" .. section, {plIndex})
+        
+        -- Copy new data here to plData
+        for _,keymapEnumValue in ipairs(playerKeymapKeys) do
+            local keymapPropertyName = playerKeymapProperties[keymapEnumValue]
+            plData[keymapPropertyName] = plObject[keymapPropertyName]
+        end
+        
+        plData.playerJumping = plObject:mem(0x60, FIELD_WORD) == -1
+        
+        plData.currentSection = section
+    end
+end
+
 --Placing in levels onto a table that'll prevent the loading sound from playing
 local noloadingsounds = {
 	"SMAS - Start.lvlx",
@@ -262,7 +300,7 @@ GameData.notransitionlevels = { --This one will prevent transitions from happeni
 	"intro_WSMBA.lvlx",
 }
 
-GameData.classicBattleModeLevels = {
+GameData.classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.
 	"battle_battleshrooms.lvl",
 	"battle_battle-zone.lvl",
 	"battle_classic-castle-battle.lvl",
