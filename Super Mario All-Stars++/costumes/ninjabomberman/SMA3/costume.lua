@@ -36,7 +36,7 @@ function costume.onInit(p)
 	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/tail.ogg")
 	Audio.sounds[34].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/racoon.ogg")
 	Audio.sounds[35].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/boot.ogg")
-	Audio.sounds[36].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smash.ogg")
+	extrasounds.id[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/smash.ogg"))
 	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/thwomp.ogg")
 	Audio.sounds[38].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-spit.ogg")
 	extrasounds.id[39] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/birdo-hit.ogg"))
@@ -165,7 +165,7 @@ function costume.onCleanup(p)
 	Audio.sounds[33].sfx = nil
 	Audio.sounds[34].sfx = nil
 	Audio.sounds[35].sfx = nil
-	Audio.sounds[36].sfx = nil
+	extrasounds.id[36]  = Audio.SfxOpen(Misc.resolveSoundFile("smash.ogg"))
 	Audio.sounds[37].sfx = nil
 	Audio.sounds[38].sfx = nil
 	extrasounds.id[39] = Audio.SfxOpen(Misc.resolveSoundFile("birdo-hit.ogg"))

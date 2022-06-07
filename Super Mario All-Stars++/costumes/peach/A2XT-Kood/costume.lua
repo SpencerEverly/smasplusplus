@@ -38,7 +38,7 @@ function costume.onInit(p)
 	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/peach/A2XT-Kood/tail.ogg")
 	Audio.sounds[34].sfx = Audio.SfxOpen("costumes/peach/A2XT-Kood/racoon.ogg")
 	Audio.sounds[35].sfx = Audio.SfxOpen("costumes/peach/A2XT-Kood/boot.ogg")
-	Audio.sounds[36].sfx = Audio.SfxOpen("costumes/peach/A2XT-Kood/smash.ogg")
+	extrasounds.id[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/peach/A2XT-Kood/smash.ogg"))
 	Audio.sounds[37].sfx = Audio.SfxOpen("costumes/peach/A2XT-Kood/thwomp.ogg")
 	extrasounds.id[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/peach/A2XT-Kood/npc-fireball.ogg"))
 	extrasounds.id[43] = Audio.SfxOpen("costumes/peach/A2XT-Kood/fireworks.ogg")
@@ -107,7 +107,7 @@ function costume.onCleanup(p)
 	Audio.sounds[33].sfx = nil
 	Audio.sounds[34].sfx = nil
 	Audio.sounds[35].sfx = nil
-	Audio.sounds[36].sfx = nil
+	extrasounds.id[36]  = Audio.SfxOpen(Misc.resolveSoundFile("smash.ogg"))
 	Audio.sounds[37].sfx = nil
 	Audio.sounds[38].sfx = nil
 	extrasounds.id[39] = Audio.SfxOpen(Misc.resolveSoundFile("birdo-hit.ogg"))

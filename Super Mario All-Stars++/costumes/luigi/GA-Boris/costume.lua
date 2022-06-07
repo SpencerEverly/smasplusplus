@@ -413,7 +413,7 @@ function costume.onCleanup(p)
 	Audio.sounds[33].sfx = nil
 	Audio.sounds[34].sfx = nil
 	Audio.sounds[35].sfx = nil
-	Audio.sounds[36].sfx = nil
+	extrasounds.id[36]  = Audio.SfxOpen(Misc.resolveSoundFile("smash.ogg"))
 	Audio.sounds[37].sfx = nil
 	Audio.sounds[38].sfx = nil
 	extrasounds.id[39] = Audio.SfxOpen(Misc.resolveSoundFile("birdo-hit.ogg"))
