@@ -873,7 +873,7 @@ local function exitlevel2()
 	Misc.unpause()
 	exitFadeActive = false
 	exitFadeActiveDone = true
-	Level.exit()
+	Level.load("map.lvlx")
 end
 
 function saveAndQuitRoutine()

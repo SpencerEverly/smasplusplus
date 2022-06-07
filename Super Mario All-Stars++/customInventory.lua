@@ -13,7 +13,7 @@ local inventory = {}
 inventory.startingItems = 0
 
 local particles = require("particles")
-local hOverride = require("hudoverride")
+local hOverride = require("hudoverridee")
 local shader = Misc.multiResolveFile("starman.frag", "shaders\\npc\\starman.frag")
 
 -- Variables --
@@ -38,41 +38,13 @@ local backSprite = Sprite{
     image = invBack,
     x = 70,
 	y = 530,
-	align = Sprite.align.BOTTOMLEFT
+	align = Sprite.align.BOTTOMLEFT,
 }
 
 local chooseSprite = Sprite{
     image = invChoose,
     x = 400,
 	y = 382,
-	align = Sprite.align.CENTER,
-}
-
-local backSpriteWide = Sprite{
-    image = invBack,
-    x = 70,
-	y = 470,
-	align = Sprite.align.BOTTOMLEFT
-}
-
-local chooseSpriteWide = Sprite{
-    image = invChoose,
-    x = 400,
-	y = 242,
-	align = Sprite.align.CENTER,
-}
-
-local backSpriteUltrawide = Sprite{
-    image = invBack,
-    x = 70,
-	y = 420,
-	align = Sprite.align.BOTTOMLEFT
-}
-
-local chooseSpriteUltrawide = Sprite{
-    image = invChoose,
-    x = 400,
-	y = 192,
 	align = Sprite.align.CENTER,
 }
 
@@ -101,12 +73,8 @@ end
 
 function inventory.onInitAPI()
 	registerEvent(inventory, "onStart")
-	if isOverworld then
-		registerEvent(inventory, "onDraw", "onDrawWorld")
-		registerEvent(inventory, "onDrawEnd", "onDrawEndWorld")
-		registerEvent(inventory, "onInputUpdate", "onInputWorld")
-	elseif Level.filename() == "map.lvlx" then
-		registerEvent(inventory, "onDraw", "onDrawWorld")
+	if Level.filename() == "map.lvlx" then
+		registerEvent(inventory, "onDraw")
 		registerEvent(inventory, "onDrawEnd", "onDrawEndWorld")
 		registerEvent(inventory, "onInputUpdate", "onInputWorld")
 	else
@@ -147,251 +115,88 @@ function inventory.onDrawEndWorld()
 end
 
 
-function inventory.onDrawWorld()
-	if SaveData.resolution == "fullscreen" then
-		-- Animation --
-		if invIsOpen then
-			if bScale < 1 then bScale = bScale + 0.1 end
-		else
-			if bScale > 0 then bScale = bScale - 0.1 end
-		end
-
-		if chooseIsOpen then
-			if cScale < 1 then cScale = cScale + 0.1 end
-		else
-			if cScale > 0 then cScale = cScale - 0.1 end
-		end
-
-		-- Lets cap the scale --
-		if bScale < 0 then bScale = 0 end
-		if bScale > 1 then bScale = 1 end
-
-		if cScale < 0 then cScale = 0 end
-		if cScale > 1 then cScale = 1 end
-
-		-- Scaling the sprites --
-		if bScale > 0 then
-			backSprite:draw{}
-			backSprite.transform.scale = vector(1, bScale)
-		end
-
-		if cScale > 0 then
-			chooseSprite:draw{priority = 6}
-			chooseSprite.transform.scale = vector(cScale, cScale)
-		end
+function inventory.onDraw()
+	-- Animation --
+	if invIsOpen then
+		if bScale < 1 then bScale = bScale + 0.1 end
+	else
+		if bScale > 0 then bScale = bScale - 0.1 end
 	end
-	if SaveData.resolution == "widescreen" then
-		-- Animation --
-		if invIsOpen then
-			if bScale < 1 then bScale = bScale + 0.1 end
-		else
-			if bScale > 0 then bScale = bScale - 0.1 end
-		end
 
-		if chooseIsOpen then
-			if cScale < 1 then cScale = cScale + 0.1 end
-		else
-			if cScale > 0 then cScale = cScale - 0.1 end
-		end
-
-		-- Lets cap the scale --
-		if bScale < 0 then bScale = 0 end
-		if bScale > 1 then bScale = 1 end
-
-		if cScale < 0 then cScale = 0 end
-		if cScale > 1 then cScale = 1 end
-
-		-- Scaling the sprites --
-		if bScale > 0 then
-			backSpriteWide:draw{priority = 5.9}
-			backSpriteWide.transform.scale = vector(1, bScale)
-		end
-
-		if cScale > 0 then
-			chooseSpriteWide:draw{priority = 6}
-			chooseSpriteWide.transform.scale = vector(cScale, cScale)
-		end
+	if chooseIsOpen then
+		if cScale < 1 then cScale = cScale + 0.1 end
+	else
+		if cScale > 0 then cScale = cScale - 0.1 end
 	end
-	if SaveData.resolution == "ultrawide" then
-		-- Animation --
-		if invIsOpen then
-			if bScale < 1 then bScale = bScale + 0.1 end
-		else
-			if bScale > 0 then bScale = bScale - 0.1 end
-		end
 
-		if chooseIsOpen then
-			if cScale < 1 then cScale = cScale + 0.1 end
-		else
-			if cScale > 0 then cScale = cScale - 0.1 end
-		end
+	-- Lets cap the scale --
+	if bScale < 0 then bScale = 0 end
+	if bScale > 1 then bScale = 1 end
 
-		-- Lets cap the scale --
-		if bScale < 0 then bScale = 0 end
-		if bScale > 1 then bScale = 1 end
+	if cScale < 0 then cScale = 0 end
+	if cScale > 1 then cScale = 1 end
 
-		if cScale < 0 then cScale = 0 end
-		if cScale > 1 then cScale = 1 end
+	-- Scaling the sprites --
+	if bScale > 0 then
+		backSprite:draw{priority = -1.7}
+		backSprite.transform.scale = vector(1, bScale)
+	end
 
-		-- Scaling the sprites --
-		if bScale > 0 then
-			backSpriteUltrawide:draw{priority = 5.9}
-			backSpriteUltrawide.transform.scale = vector(1, bScale)
-		end
-
-		if cScale > 0 then
-			chooseSpriteUltrawide:draw{priority = 6}
-			chooseSpriteUltrawide.transform.scale = vector(cScale, cScale)
-		end
+	if cScale > 0 then
+		chooseSprite:draw{priority = -1.4}
+		chooseSprite.transform.scale = vector(cScale, cScale)
 	end
 
 	-- Drawing the Item Icons --
 	if bScale >= 1 then
 		for i = 0, 7, 1 do
 			if selectedOffset == i then isSelected = 1 else isSelected = 0 end
-			if SaveData.resolution == "fullscreen" then
-				textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=452, font=font, plaintext=true}
-				Graphics.draw{
-					type = RTYPE_IMAGE,
-					image = invIcons,
-					x = i * 82 + 94,
-					y = 478,
-					sourceY = i * 36,
-					sourceHeight = 36,
-					sourceX = isSelected * 36,
-					sourceWidth = 36
-				}
-			end
-			if SaveData.resolution == "widescreen" then
-				textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=392, font=font, plaintext=true, priority=6}
-				Graphics.draw{
-					type = RTYPE_IMAGE,
-					image = invIcons,
-					x = i * 82 + 94,
-					y = 418,
-					sourceY = i * 36,
-					sourceHeight = 36,
-					sourceX = isSelected * 36,
-					sourceWidth = 36,
-					priority = 6
-				}
-			end
-			if SaveData.resolution == "ultrawide" then
-				textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=342, font=font, plaintext=true, priority=6}
-				Graphics.draw{
-					type = RTYPE_IMAGE,
-					image = invIcons,
-					x = i * 82 + 94,
-					y = 418,
-					sourceY = i * 36,
-					sourceHeight = 36,
-					sourceX = isSelected * 36,
-					sourceWidth = 36,
-					priority = 6
-				}
-			end
+			textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=452, font=font, plaintext=true, priority=-1.6}
+			Graphics.draw{
+				type = RTYPE_IMAGE,
+				image = invIcons,
+				x = i * 82 + 94,
+				y = 478,
+				sourceY = i * 36,
+				sourceHeight = 36,
+				sourceX = isSelected * 36,
+				sourceWidth = 36,
+				priority = -1.4
+			}
 		end
 	end
 
 	if cScale == 1 then
-		if SaveData.resolution == "fullscreen" then
+		Graphics.draw{
+			type = RTYPE_IMAGE,
+			image = invChar,
+			x = 330,
+			y = 320,
+			sourceX = tonumber(player.character - 1) * 40,
+			sourceWidth = 40,
+			priority = -1.5
+		}
+		if player.count() == 2 then
 			Graphics.draw{
 				type = RTYPE_IMAGE,
 				image = invChar,
-				x = 330,
+				x = 430,
 				y = 320,
-				sourceX = tonumber(player.character - 1) * 40,
+				sourceX = tonumber(player2.character - 1) * 40,
 				sourceWidth = 40,
-				priority = 5.1
-			}
-			if player.count() == 2 then
-				Graphics.draw{
-					type = RTYPE_IMAGE,
-					image = invChar,
-					x = 430,
-					y = 320,
-					sourceX = tonumber(player2.character - 1) * 40,
-					sourceWidth = 40,
-					priority = 5.1
-				}
-			end
-			Text.printWP("Choose a", 330, 278, 5.3)
-			Text.printWP("Player", 346, 298, 5.3)
-
-			Graphics.draw{
-				type = RTYPE_IMAGE,
-				image = selector,
-				x = 100 * (selectedPlayer - 1) + 316,
-				y = 350,
-				priority = 5.2
+				priority = -1.5
 			}
 		end
-		
-		
-		if SaveData.resolution == "widescreen" then
-			Graphics.draw{
-				type = RTYPE_IMAGE,
-				image = invChar,
-				x = 330,
-				y = 260,
-				sourceX = tonumber(player.character - 1) * 40,
-				sourceWidth = 40,
-				priority = 6.1
-			}
-			if player.count() == 2 then
-				Graphics.draw{
-					type = RTYPE_IMAGE,
-					image = invChar,
-					x = 430,
-					y = 260,
-					sourceX = tonumber(player2.character - 1) * 40,
-					sourceWidth = 40,
-					priority = 6.1
-				}
-			end
-			Text.printWP("Choose a", 330, 378, 5.3)
-			Text.printWP("Player", 346, 398, 5.3)
+		Text.printWP("Choose a", 330, 278, 5.3)
+		Text.printWP("Player", 346, 298, 5.3)
 
-			Graphics.draw{
-				type = RTYPE_IMAGE,
-				image = selector,
-				x = 100 * (selectedPlayer - 1) + 316,
-				y = 450,
-				priority = 6.2
-			}
-		end
-		if SaveData.resolution == "ultrawide" then
-			Graphics.draw{
-				type = RTYPE_IMAGE,
-				image = invChar,
-				x = 330,
-				y = 210,
-				sourceX = tonumber(player.character - 1) * 40,
-				sourceWidth = 40,
-				priority = 6.1
-			}
-			if player.count() == 2 then
-				Graphics.draw{
-					type = RTYPE_IMAGE,
-					image = invChar,
-					x = 430,
-					y = 210,
-					sourceX = tonumber(player2.character - 1) * 40,
-					sourceWidth = 40,
-					priority = 6.1
-				}
-			end
-			Text.printWP("Choose a", 330, 328, 5.3)
-			Text.printWP("Player", 346, 348, 5.3)
-
-			Graphics.draw{
-				type = RTYPE_IMAGE,
-				image = selector,
-				x = 100 * (selectedPlayer - 1) + 316,
-				y = 400,
-				priority = 6.2
-			}
-		end
+		Graphics.draw{
+			type = RTYPE_IMAGE,
+			image = selector,
+			x = 100 * (selectedPlayer - 1) + 316,
+			y = 350,
+			priority = -1.6
+		}
 	end
 
 	if(type(shader) == "string") then
@@ -402,11 +207,11 @@ function inventory.onDrawWorld()
 
 	if SaveData.useStarman then
 		local x,y = 400+hOverride.overworld.offsets.player.x-(player.width*0.5), hOverride.overworld.offsets.player.y-player.height;
-		player:render{x = x, y = y, ignorestate = true, sceneCoords = false, priority = 6, color = Color.white, mountcolor = Color.white, shader = shader, uniforms = {time = lunatime.tick()*2},}
+		player:render{x = x, y = y, ignorestate = true, sceneCoords = false, priority = -1.2, color = Color.white, mountcolor = Color.white, shader = shader, uniforms = {time = lunatime.tick()*2},}
 	end
 
 	if SaveData.usePWing then
-		Graphics.draw{type=RTYPE_IMAGE, image=pIcon, x=84, y=96, priority = 6.1}
+		Graphics.draw{type=RTYPE_IMAGE, image=pIcon, x=84, y=96, priority = -1.2}
 	end
 end
 
