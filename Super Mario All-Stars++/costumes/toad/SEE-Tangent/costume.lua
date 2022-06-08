@@ -64,7 +64,9 @@ function costume.lungeattack()
 		plr:mem(0x140, FIELD_WORD, 0) --Blinker is 0
 		player:mem(0x120, FIELD_BOOL, false) --Making sure Alt Jump isn't pressed until after the attack
 		plr:mem(0x172, FIELD_BOOL, false) --No run either, in case
-		playSound("toad/SEE-Tangent/tangent-lunge.ogg")
+		if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
+			playSound("toad/SEE-Tangent/tangent-lunge.ogg")
+		end
 		if plr.direction == 1 then
 			plr.speedX = 5
 			plr.speedY = -3
