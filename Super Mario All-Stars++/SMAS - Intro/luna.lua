@@ -116,10 +116,10 @@ function onEvent(eventName)
 		player.downKeyPressing = false
 	end
 	if eventName == "WorldMapWarp" then
-		Level.exit()
+		Level.load("map.lvlx")
 	end
 	if eventName == "Skip Intro Execution" then
-		Level.exit()
+		Level.load("map.lvlx")
 	end
 end
 
