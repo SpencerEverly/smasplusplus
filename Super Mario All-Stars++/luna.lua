@@ -34,7 +34,7 @@ if mem(0x00B251E0, FIELD_WORD) >= 1 then
 end
 
 --For SEE Mod users, where they have a definite version of LunaLua.
-if SMBX_VERSION == VER_BETA4_PATCH_4_1_SMAS then
+if SMBX_VERSION == VER_SEE_MOD then
 	Misc.setWindowTitle("Super Mario All-Stars++")
 	Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 end

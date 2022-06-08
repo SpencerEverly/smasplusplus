@@ -11,7 +11,7 @@ local comboSounds = require("comboSounds")
 littleDialogue.defaultStyleName = "smbx13"
 
 function onStart()
-	if SMBX_VERSION == VER_BETA4_PATCH_4_1_SMAS then
+	if SMBX_VERSION == VER_SEE_MOD then
 		
 	end
 	if SaveData.disableX2char == false then
