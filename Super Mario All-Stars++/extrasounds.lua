@@ -507,7 +507,7 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 				--**HP COLLECTING**
 				if healitems[npc.id] and Colliders.collide(p, npc) then
 					if p.character == CHARACTER_PEACH or p.character == CHARACTER_TOAD or p.character == CHARACTER_LINK or p.character == CHARACTER_KLONOA or p.character == CHARACTER_ROSALINA or p.character == CHARACTER_ULTIMATERINKA or p.character == CHARACTER_STEVE then
-						if p:mem(0x16, FIELD_WORD) < 2 then
+						if p:mem(0x16, FIELD_WORD) <= 2 then
 							playSound(131)
 						elseif p:mem(0x16, FIELD_WORD) == 3 then
 							playSound(132)
