@@ -623,17 +623,95 @@ function activate2ndPlayer()
 end
 
 function activate3rdPlayer()
-	Cheats.trigger("supermario4")
 	mem(0x00B2595E, FIELD_WORD, 3)
+	if Player(2) and Player(2).isValid then
+		Player(2).x = player.x + 36
+		Player(2).y = player.y - 72
+		Player(2).character = 2
+		if Player(2).powerup == 0 then
+			Player(2).powerup = 2
+		end
+	end
+	if Player(3) and Player(3).isValid then
+		Player(3).x = player.x + 94
+		Player(3).y = player.y - 72
+		Player(3).character = 3
+		if Player(3).powerup == 0 then
+			Player(3).powerup = 2
+		end
+	end
 end
 
 function activate4thPlayer()
-	Cheats.trigger("supermario4")
+	mem(0x00B2595E, FIELD_WORD, 4)
+	if Player(2) and Player(2).isValid then
+		Player(2).x = player.x + 36
+		Player(2).y = player.y - 72
+		Player(2).character = 2
+		if Player(2).powerup == 0 then
+			Player(2).powerup = 2
+		end
+	end
+	if Player(3) and Player(3).isValid then
+		Player(3).x = player.x + 94
+		Player(3).y = player.y - 72
+		Player(3).character = 3
+		if Player(3).powerup == 0 then
+			Player(3).powerup = 2
+		end
+	end
+	if Player(4) and Player(4).isValid then
+		Player(4).x = player.x + 130
+		Player(4).y = player.y - 72
+		Player(4).character = 4
+		if Player(4).powerup == 0 then
+			Player(4).powerup = 2
+		end
+	end
 end
 
 function activatePlayerIntroMode()
-	Cheats.trigger("supermario8")
 	mem(0x00B2595E, FIELD_WORD, 6)
+	if Player(2) and Player(2).isValid then
+		Player(2).x = player.x
+		Player(2).y = player.y
+		Player(2).character = 2
+		if Player(2).powerup == 0 then
+			Player(2).powerup = 2
+		end
+	end
+	if Player(3) and Player(3).isValid then
+		Player(3).x = player.x
+		Player(3).y = player.y
+		Player(3).character = 3
+		if Player(3).powerup == 0 then
+			Player(3).powerup = 2
+		end
+	end
+	if Player(4) and Player(4).isValid then
+		Player(4).x = player.x
+		Player(4).y = player.y
+		Player(4).character = 4
+		if Player(4).powerup == 0 then
+			Player(4).powerup = 2
+		end
+	end
+	if Player(5) and Player(5).isValid then
+		Player(5).x = player.x
+		Player(5).y = player.y
+		Player(5).character = 4
+		if Player(5).powerup == 0 then
+			Player(5).powerup = 2
+		end
+	end
+	if Player(6) and Player(6).isValid then
+		Player(6).x = player.x
+		Player(6).y = player.y
+		Player(6).character = 4
+		if Player(6).powerup == 0 then
+			Player(6).powerup = 2
+		end
+	end
 	local rngcharacter1 = rng.randomInt(1,5)
 	local rngcharacter2 = rng.randomInt(1,5)
 	local rngcharacter3 = rng.randomInt(1,5)
