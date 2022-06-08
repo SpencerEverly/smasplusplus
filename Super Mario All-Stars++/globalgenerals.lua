@@ -297,9 +297,15 @@ function globalgenerals.onTickEnd()
     mem(0x00B250D4,FIELD_BOOL,false)
 end
 
+--if SMBX_VERSION == VER_BETA4_PATCH_4_1_SMAS then
+	--Misc.setWindowPosition(0,400)
+--end
+
 function globalgenerals.onTick()
-	--if Cheats.get("supermario2").active == true then
-		
+	--if SMBX_VERSION == VER_BETA4_PATCH_4_1_SMAS then
+		--local epicx = player.x - camera.x
+		--local epicy = player.y - camera.y - 100
+		--Misc.setWindowPosition(epicx,epicy)
 	--end
 	if player.character == CHARACTER_SNAKE then
 		HUDOverride.visible.keys = true
