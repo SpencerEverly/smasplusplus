@@ -112,6 +112,9 @@ local function preboot()
 	if SaveData.introselect == 18 then
 		Level.load("intro_circuitcity.lvlx", nil, nil)
 	end
+	if SaveData.introselect == 19 then
+		Level.load("intro_metroidprime2.lvlx", nil, nil)
+	end
 end
 
 function onKeyboardPress(k, v)
@@ -262,6 +265,7 @@ function onStart()
 	if SaveData.firstBootCompleted == nil then
         SaveData.firstBootCompleted = false
     end
+	GameData.toggleoffkeys = false
 	if SaveData.utencounter == nil then
 		SaveData.utencounter = 0
 	end

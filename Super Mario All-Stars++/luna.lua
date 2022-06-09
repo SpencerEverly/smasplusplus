@@ -266,6 +266,7 @@ GameData.nolevelplaces = {
 	"intro_SMBX2b3.lvlx",
 	"intro_sunsetbeach.lvlx",
 	"intro_WSMBA.lvlx",
+	"intro_metroidprime2.lvlx",
 	"SMAS - Credits.lvlx",
 	"SMAS - Intro.lvlx",
 	"SMAS - Online (Menu).lvlx",
@@ -298,6 +299,7 @@ GameData.notransitionlevels = { --This one will prevent transitions from happeni
 	"intro_SMBX2b3.lvlx",
 	"intro_sunsetbeach.lvlx",
 	"intro_WSMBA.lvlx",
+	"intro_metroidprime2.lvlx",
 }
 
 GameData.classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.

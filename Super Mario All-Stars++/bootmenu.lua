@@ -530,6 +530,16 @@ local function theme18scrolling()
 	Routine.loop(lunatime.toTicks(23.6), theme18scrolling, true)
 end
 
+local function theme19()
+	SaveData.introselect = 19
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("intro_metroidprime2.lvlx", nil, nil)
+end
+
 local function mapExit()
 	GameData.menucomplete = true
 	autoscroll.scrollLeft(5000)
@@ -2007,6 +2017,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() Routine.run(theme17) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Circuit Central (By RvBNut91)",chosenFunction = function() Routine.run(theme18) end})
+	littleDialogue.registerAnswer("IntroTheme",{text = "Metroid Prime 2 (By SilverDeoxys)",chosenFunction = function() Routine.run(theme19) end})
 	littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 	
 	

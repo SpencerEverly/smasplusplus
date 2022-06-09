@@ -1,0 +1,7 @@
+width=64
+height=64
+gfxwidth=64
+gfxheight=64
+nogravity=1
+speed=1
+foreground=0
