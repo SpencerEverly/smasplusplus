@@ -83,12 +83,12 @@ end
 
 function exitbattlemode()
 	Graphics.activateHud(false)
-	activate1stPlayer()
 	Defines.player_hasCheated = false
 	exitscreen = true
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	GameData.battlemodeactive = false
+	activate1stPlayer()
 	Misc.saveGame()
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end

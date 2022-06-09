@@ -316,6 +316,7 @@ GameData.classicBattleModeLevels = { --All Classic Battle Mode levels, used for 
 	"battle_retroville-underground.lvl",
 	"battle_testlevel.lvlx",
 	"battle_nsmbds1.lvlx",
+	"battle_nsmbds2.lvlx",
 }
 
 GameData.rushlevelsrng = { --All Rush Mode levels.
