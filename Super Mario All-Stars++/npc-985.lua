@@ -235,23 +235,21 @@ function roulettestar.onDraw()
 end
 
 function roulettestar.onNPCKill(eventToken, v)
-	for _,p in ipairs(Player.get()) do
-		if Colliders.collide(p, v) then
-			if v.frame == 1 then
-				SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
-				Misc.givePoints(6, vector(player.x, player.y))
-			elseif v.frame == 2 then
-				SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
-				Misc.givePoints(8, vector(player.x, player.y))
-			elseif v.frame == 3 then
-				Misc.givePoints(10, vector(player.x, player.y))
-				playSound(15)
-			end
-		end
-	end
+	
 end
 
 function roulettestar.onPostNPCKill(v,reason)
+	for _,p in ipairs(Player.get()) do
+		if v.id == 985 and Colliders.collide(p, v) then
+			if v.animationFrame == 0 then
+				Misc.givePoints(6, vector(v.x + 26, v.y))
+			elseif v.animationFrame == 1 then
+				Misc.givePoints(8, vector(v.x + 26, v.y))
+			elseif v.animationFrame == 2 then
+				Misc.givePoints(10, vector(v.x + 26, v.y))
+			end
+		end
+	end
 	if roulettestar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
 		Routine.run(starget)
 		GameData.winStateActive = true
