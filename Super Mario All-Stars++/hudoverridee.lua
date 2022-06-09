@@ -532,7 +532,9 @@ end
 function HUDOverride.lifeCrownCounter()
 	if SaveData.totalLives < 1000 then
 		return SaveData.totalLives
-	elseif SaveData.totalLives >= 1000 and SaveData.totalLives < 1100 then
+	elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
+		return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
+	elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
 		return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
 	elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
 		return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
