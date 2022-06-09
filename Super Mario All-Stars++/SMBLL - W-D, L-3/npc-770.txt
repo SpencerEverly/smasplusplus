@@ -1,0 +1,1 @@
+noblockcollision=1
