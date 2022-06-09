@@ -332,17 +332,17 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		--**1UPS**
 		if not isOverworld then
 			for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-				if scoreboard.animationFrame == 9 then --1UP
-					SFX.play(extrasounds.id[15], 1, 1, 70)
+				if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
+					playSound(15)
 				end
-				if scoreboard.animationFrame == 10 then --2UP
-					SFX.play(extrasounds.id[96], 1, 1, 70)
+				if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
+					playSound(96)
 				end
-				if scoreboard.animationFrame == 11 then --3UP
-					SFX.play(extrasounds.id[97], 1, 1, 70)
+				if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
+					playSound(97)
 				end
-				if scoreboard.animationFrame == 12 then --5UP
-					SFX.play(extrasounds.id[98], 1, 1, 70)
+				if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
+					playSound(98)
 				end
 			end
 			
