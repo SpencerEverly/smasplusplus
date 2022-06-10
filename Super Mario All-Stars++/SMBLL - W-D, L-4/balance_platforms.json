@@ -1,0 +1,15 @@
+{
+	"style" : "tree",
+	"title" : "Sample setup",
+	"layout": [{
+			"control": "spinBox",
+			"type": "int",
+			"name": "len",
+			"title": "Hor. Length",
+			"value-default": 0,
+			"value-min": 0,
+			"value-max": 999,
+			"single-step": 1
+		}
+	]
+}
