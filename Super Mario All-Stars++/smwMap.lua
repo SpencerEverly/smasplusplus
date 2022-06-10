@@ -3722,7 +3722,7 @@ do
 			{
 				icon = Graphics.loadImageResolved("map/smwMap/hud_lives.png"),
 				getValue = (function()
-					return SaveData.totalLives
+					return smwMap.lifeCrownCounter()
 				end),
 			},
 			-- Death Count
@@ -3790,7 +3790,7 @@ do
 			{
 				icon = Graphics.loadImageResolved("map/smwMap/hud_lives.png"),
 				getValue = (function()
-					return SaveData.totalLives
+					return smwMap.lifeCrownCounter()
 				end),
 			},
 			-- Death Count
@@ -4393,6 +4393,20 @@ function smwMap.onExit()
     Audio.MusicStop()
 end
 
+function smwMap.lifeCrownCounter()
+	if SaveData.totalLives < 1000 then
+		return SaveData.totalLives
+	elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
+		return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
+	elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
+		return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
+	elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
+		return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
+	elseif SaveData.totalLives == 1110 then
+		return "!!!"
+	end
+end
+
 smwMap.playerSettings = {
     images = {
         [CHARACTER_MARIO] = Graphics.loadImageResolved("smwMap/player-mario.png"),
@@ -4488,12 +4502,12 @@ smwMap.hudSettings = {
     playerEnabled = true,
 
     
-    counterFont = textplus.loadFont("smwMap/counterFont.ini"),
+    counterFont = textplus.loadFont("littleDialogue/font/1.ini"),
     counterColor = Color.white,
     counterOffsetX = 64,
     counterOffsetY = -16,
     counterText = "x %s",
-    counterScale = 2,
+    counterScale = 1,
     counterGap = 0,
 
     countersEnabled = true,
