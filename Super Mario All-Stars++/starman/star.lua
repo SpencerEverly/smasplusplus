@@ -164,16 +164,16 @@ local function checkStarStatus(p)
 		p:mem(0x142, FIELD_WORD, 0);
 		
 		for _,v in ipairs(colliders.getColliding{a = p, b = NPC.HITTABLE, btype = colliders.NPC, filter = starmanFilter}) do
-			if starman.active() then
-				NPC.config[v.id].score = 0
-				v:harm(HARM_TYPE_NPC);
-				Misc.givePoints(scorecounter,{x = v.x+v.width*0.5,y = v.y+v.height*0.5},true)
-				scorecounter = math.min(11,scorecounter + 1)
+			--if starman.active() then
+				--NPC.config[v.id].score = 0
+				--Misc.givePoints(scorecounter,{x = v.x+v.width*0.5,y = v.y+v.height*0.5},true)
+				--scorecounter = math.min(11,scorecounter + 1)
 
-				if scorecounter >= 11 then
-					scorecounter = 10
-				end
-			end
+				--if scorecounter >= 11 then
+					--scorecounter = 10
+				--end
+			--end
+			v:harm(HARM_TYPE_NPC);
 		end
 		starTimers[idx] = starTimers[idx] - 1;
 		if(starTimers[idx] == math.min(starman.duration[activeStarIDs[idx]]-1, math.floor(lunatime.toTicks(2.6)))) then
