@@ -179,7 +179,7 @@ function costume.onInputUpdate()
 	if SaveData.toggleCostumeAbilities then
 		if player.speedX ~= 0 and player.keys.down == KEYS_DOWN then
 			spinballed = true
-		elseif player.speedX == 0 and player.keys.down == KEYS_UNPRESSED then
+		elseif player.speedX == 0 and player.keys.down == KEYS_UP then
 			spinballed = false
 		end
 		if player.speedX ~= 0 and player.keys.down == KEYS_PRESSED then
