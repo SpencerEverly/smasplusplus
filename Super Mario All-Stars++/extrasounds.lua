@@ -568,7 +568,7 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 				
 				
 				--**SMB2 ENEMY KILLS**
-				for k,v in ipairs(NPC.get({19,20,25,130,131,132,470,471,129,345,346,347,371,372,373,272,350,530,374,247,206})) do --
+				for k,v in ipairs(NPC.get({19,20,25,130,131,132,470,471,129,345,346,347,371,372,373,272,350,530,374,247,206})) do --SMB2 Enemies
 					if (v.killFlag ~= 0) and not (v.killFlag == HARM_TYPE_VANISH) then
 						playSound(126)
 					end

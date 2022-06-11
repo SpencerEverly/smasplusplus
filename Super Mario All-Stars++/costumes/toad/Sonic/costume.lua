@@ -6,12 +6,14 @@ local costume = {}
 
 local eventsRegistered = false
 local plr
+local balled
 
 function costume.onInit(p)
     plr = p
 	registerEvent(costume,"onStart")
 	registerEvent(costume,"onDraw")
 	registerEvent(costume,"onPlayerHarm")
+	registerEvent(costume,"onPostPlayerHarm")
 	registerEvent(costume,"onTick")
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onCleanup")
@@ -41,6 +43,7 @@ function costume.onInit(p)
 	Audio.sounds[50].sfx = Audio.SfxOpen("costumes/toad/Sonic/yoshi-tongue.ogg")
 	Audio.sounds[51].sfx = Audio.SfxOpen("costumes/toad/Sonic/yoshi-egg.ogg")
 	Audio.sounds[52].sfx = Audio.SfxOpen("costumes/toad/Sonic/got-star.ogg")
+	Audio.sounds[53].sfx = Audio.SfxOpen("costumes/toad/Sonic/zelda-kill.ogg")
 	Audio.sounds[54].sfx = Audio.SfxOpen("costumes/toad/Sonic/player-died2.ogg")
 	Audio.sounds[55].sfx = Audio.SfxOpen("costumes/toad/Sonic/yoshi-swallow.ogg")
 	Audio.sounds[58].sfx = Audio.SfxOpen("costumes/toad/Sonic/smw-checkpoint.ogg")
@@ -63,11 +66,85 @@ function costume.onInit(p)
 	HUDOverride.visible.itembox = false
 end
 
+local function isSlidingOnIce()
+	return (player:mem(0x0A,FIELD_BOOL) and (not player.keys.left and not player.keys.right))
+end
+
+-- Detects if the player is on the ground, the redigit way. Sometimes more reliable than just p:isOnGround().
+local function isOnGround(p)
+	return (
+		player.speedY == 0 -- "on a block"
+		or player:mem(0x176,FIELD_WORD) ~= 0 -- on an NPC
+		or player:mem(0x48,FIELD_WORD) ~= 0 -- on a slope
+	)
+end
+
+local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
+    local oldKilled     = npc:mem(0x122,FIELD_WORD)
+    local oldProjectile = npc:mem(0x136,FIELD_BOOL)
+    local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
+    local oldImmune     = npc:mem(0x156,FIELD_WORD)
+    local oldID         = npc.id
+    local oldSpeedX     = npc.speedX
+    local oldSpeedY     = npc.speedY
+
+    npc:harm(...)
+
+    return (
+           oldKilled     ~= npc:mem(0x122,FIELD_WORD)
+        or oldProjectile ~= npc:mem(0x136,FIELD_BOOL)
+        or oldHitCount   ~= npc:mem(0x148,FIELD_FLOAT)
+        or oldImmune     ~= npc:mem(0x156,FIELD_WORD)
+        or oldID         ~= npc.id
+        or oldSpeedX     ~= npc.speedX
+        or oldSpeedY     ~= npc.speedY
+    )
+end
+
 function costume.onTick()
 	if SaveData.toggleCostumeAbilities == true then
+		local isJumping = player:mem(0x11C, FIELD_WORD) and not isOnGround(p) and not player:mem(0x50,FIELD_BOOL) --Jumping detection
+		if isJumping then
+			balled = true
+		elseif not isJumping then
+			balled = false
+		end
 		--plr.powerup = PLAYER_BIG
 		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
-
+		local hitNPCs = Colliders.getColliding{a = player, b = GameData.allBaseGameKillableEnemyIDs, btype = Colliders.NPC}
+		
+		if balled then
+			for _,npc in ipairs(hitNPCs) do
+				if npc ~= v and npc.id > 0 then
+					-- Hurt the NPC, and make sure to not give the automatic score
+					local oldScore = NPC.config[npc.id].score
+					NPC.config[npc.id].score = 0
+					NPC.config[npc.id].score = oldScore
+					
+					local hurtNPC = harmNPC(npc,HARM_TYPE_SWORD)
+					if hurtNPC then
+						Misc.givePoints(0,{x = npc.x+npc.width*1.5,y = npc.y+npc.height*0.5},true)
+					end
+				end
+			end
+		end
+		
+		if spinballed and player.speedX ~= 0 then
+			for _,npc in ipairs(hitNPCs) do
+				if npc ~= v and npc.id > 0 then
+					-- Hurt the NPC, and make sure to not give the automatic score
+					local oldScore = NPC.config[npc.id].score
+					NPC.config[npc.id].score = 0
+					NPC.config[npc.id].score = oldScore
+					
+					local hurtNPC = harmNPC(npc,HARM_TYPE_SWORD)
+					if hurtNPC then
+						Misc.givePoints(0,{x = npc.x+npc.width*1.5,y = npc.y+npc.height*0.5},true)
+					end
+				end
+			end
+		end
+		
 		if hit then
 			hitTicks = hitTicks + 1
 
@@ -91,10 +168,29 @@ function costume.onTick()
 	end
 end
 
+function costume.onInputUpdate()
+	if SaveData.toggleCostumeAbilities then
+		if player.speedX ~= 0 and player.keys.down == KEYS_DOWN then
+			spinballed = true
+		elseif player.speedX == 0 and player.keys.down == KEYS_UNPRESSED then
+			spinballed = false
+		end
+		if player.speedX ~= 0 and player.keys.down == KEYS_PRESSED then
+			SFX.play("costumes/toad/Sonic/sonic-charge.ogg")
+		end
+	end
+end
+
 function costume.onDraw()
-	if SaveData.toggleCostumeAbilities == true then
+	if SaveData.toggleCostumeAbilities then
 		if hit then
 			plr.frame = 16
+		end
+		if balled then
+			plr.frame = 4
+		end
+		if spinballed and player.speedX ~= 0 and player.keys.down == KEYS_DOWN then
+			plr.frame = 4
 		end
 	end
 end
@@ -104,25 +200,34 @@ function costume.onPlayerHarm(e, p)
 	
 	if player.hasStarman == false or player.isMega == false then
 		if SaveData.toggleCostumeAbilities == true then
-			if hit then
+			if hit or balled then
 				e.cancelled = true
 				return
 			end
-			
-			
+			if spinballed and player.speedX ~= 0 then
+				e.cancelled = true
+				return
+			end
 			if SaveData.totalCoinsClassic > 0 then
 				e.cancelled = true
-				hit = true
-				hitTicks = 0
-				plr.speedY = -8
-				plr.speedX = 0
-				Defines.gravity = Defines.gravity / 2
-				SFX.play(5)
-				SaveData.totalCoinsClassic = 0
-				Effect.spawn(11, p.x, p.y)
-			else
-				p:kill()
 			end
+		end
+	end
+end
+
+function costume.onPostPlayerHarm(p)
+	if SaveData.toggleCostumeAbilities == true then
+		if SaveData.totalCoinsClassic > 0 then
+			hit = true
+			hitTicks = 0
+			plr.speedY = -8
+			plr.speedX = 0
+			Defines.gravity = Defines.gravity / 2
+			SFX.play(5)
+			SaveData.totalCoinsClassic = 0
+			Effect.spawn(11, p.x, p.y)
+		else
+			p:kill()
 		end
 	end
 end
