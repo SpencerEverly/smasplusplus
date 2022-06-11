@@ -212,6 +212,10 @@ function costume.onPlayerHarm(e, p)
 			e.cancelled = true
 			return
 		end
+		if p.hasStarman or p.isMega then
+			e.cancelled = true
+			return
+		end
 	end
 end
 
