@@ -121,7 +121,7 @@ do
         pauseplus.currentOption  = option  or 1
 		currentOption = option  or 1
 
-        pauseplus.opener = opener or pauseplus.opener or player
+        pauseplus.opener = opener or pauseplus.opener or Player(1)
 
 
         pauseplus.refreshAssets()
@@ -142,8 +142,10 @@ do
         end
 		
         if not isOverworld then
-            pauseplus.opener:mem(0x11E,FIELD_BOOL,false) -- stop the player jumping
-            pauseplus.opener:mem(0x172,FIELD_BOOL,false) -- stop the player using fire flower
+			for k,p in ipairs(Player.get()) do
+				p:mem(0x11E,FIELD_BOOL,false) -- stop the player jumping
+				p:mem(0x172,FIELD_BOOL,false) -- stop the player using fire flower
+			end
         else
             pauseplus.opener:mem(0x17A,FIELD_BOOL,false) -- stop the player starting a level
         end
