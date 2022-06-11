@@ -315,6 +315,12 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 				SFX.play(extrasounds.id[39], 1, 1, 30)
 			end
 		end
+		--*SMB2 Wart*
+		for k,v in ipairs(NPC.get(201)) do --Wart has some sounds that'll need to be reimplemented
+			if v.ai1 == 2 then
+				SFX.play(extrasounds.id[39], 1, 1, 150)
+			end
+		end
 		
 		
 		
