@@ -1708,6 +1708,10 @@ do
         p:mem(0x12,FIELD_BOOL,false)
 
         SFX.play(yoshi.tongueSettings.spitSound)
+		local currentCostume = player:getCostume()
+		if (currentCostume == "SMA3") then
+			playSound("ninjabomberman/SMA3/SFX/spit-out.ogg")
+		end
     end
 
 

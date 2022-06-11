@@ -593,7 +593,7 @@ function betterPlayer(index, func) --Better player/player2 detection, for simpli
 		index = 1
 	end
 	if index == -1 then
-		for i = 1,8 do
+		for i = 1,128 do
 			if Player(i) and Player(i).isValid then
 				func(Player(i))
 			end

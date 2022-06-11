@@ -51,12 +51,10 @@ local gameovershow = false
 
 function smasdeathsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
 	if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
-		if SaveData.disableX2char == false then
-			if block.contentID == 1000 or block.contentID == 0 then
-				SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
-			elseif block.contentID <= 99 and block.contentID >= 1 then
-				SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
-			end
+		if block.contentID == 1000 or block.contentID == 0 then
+			SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
+		elseif block.contentID <= 99 and block.contentID >= 1 then
+			SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
 		end
 	end
 end
@@ -64,13 +62,24 @@ end
 function smasdeathsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
 	local coins = table.map{10,33,88,103,138,251,252,253,258,528}
 	if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
-		if SaveData.disableX2char == false then
-			for _,p in ipairs(Player.get()) do 
-				if coins[npc.id] and Colliders.collide(p, npc) then
-					SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
-				end
+		for _,p in ipairs(Player.get()) do 
+			if coins[npc.id] and Colliders.collide(p, npc) then
+				SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
 			end
 		end
+	end
+end
+
+function thirteenmodedeath()
+	GameData.muteMusic = true
+	Audio.MusicVolume(0)
+	Routine.waitFrames(196)
+	GameData.muteMusic = false
+	smasdeathsystem.hasDied = true --The player has now died
+	if smasdeathsystem.exittomap == false then
+		Level.load(Level.filename())
+	elseif smasdeathsystem.exittomap == true then
+		Level.load("map.lvlx", nil, nil)
 	end
 end
 
@@ -353,6 +362,10 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					end
 				end
 			end
+			if SaveData.disableX2char == true then
+				SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+				SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
+			end
 			if GameData.multiplayeractive == true then
 				if GameData.battlemodeactive == true then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
 					if killed1 == true then
@@ -386,6 +399,9 @@ function smasdeathsystem.onTick()
 			end
 		elseif GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			--Nothing
+		end
+		if checkLivingIndex() == nil then
+			Routine.run(thirteenmodedeath)
 		end
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT) --When false, the lives won't be stored in it's own SaveData variable. If true, the lives will update.
 	end
@@ -434,56 +450,54 @@ function smasdeathsystem.onTick()
 		end
 	else
 		if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
-			if SaveData.disableX2char == false then
-				if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
-					for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-						if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --Score 10
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
-						end
-						if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --Score 100
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
-						end
-						if scoreboard.animationFrame == 2 and scoreboard.speedY == -1.94 then --Score 200
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 200
-						end
-						if scoreboard.animationFrame == 3 and scoreboard.speedY == -1.94 then --Score 400
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 400
-						end
-						if scoreboard.animationFrame == 4 and scoreboard.speedY == -1.94 then --Score 800
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 800
-						end
-						if scoreboard.animationFrame == 5 and scoreboard.speedY == -1.94 then --Score 1000
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
-						end
-						if scoreboard.animationFrame == 6 and scoreboard.speedY == -1.94 then --Score 2000
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 2000
-						end
-						if scoreboard.animationFrame == 7 and scoreboard.speedY == -1.94 then --Score 4000
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
-						end
-						if scoreboard.animationFrame == 8 and scoreboard.speedY == -1.94 then --Score 8000
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 8000
-						end
-						if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP, Score 10000
-							SaveData.totalLives = SaveData.totalLives + 1
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10000
-							Misc.score(10000) --Just in case if 1.3 Mode is active
-						end
-						if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP, Score 20000
-							SaveData.totalLives = SaveData.totalLives + 2
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 20000
-							Misc.score(20000)
-						end
-						if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP, Score 30000
-							SaveData.totalLives = SaveData.totalLives + 3
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 30000
-							Misc.score(30000)
-						end
-						if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP, Score 50000
-							SaveData.totalLives = SaveData.totalLives + 5
-							SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50000
-							Misc.score(50000)
-						end
+			if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+				for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+					if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --Score 10
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
+					end
+					if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --Score 100
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
+					end
+					if scoreboard.animationFrame == 2 and scoreboard.speedY == -1.94 then --Score 200
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 200
+					end
+					if scoreboard.animationFrame == 3 and scoreboard.speedY == -1.94 then --Score 400
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 400
+					end
+					if scoreboard.animationFrame == 4 and scoreboard.speedY == -1.94 then --Score 800
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 800
+					end
+					if scoreboard.animationFrame == 5 and scoreboard.speedY == -1.94 then --Score 1000
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
+					end
+					if scoreboard.animationFrame == 6 and scoreboard.speedY == -1.94 then --Score 2000
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 2000
+					end
+					if scoreboard.animationFrame == 7 and scoreboard.speedY == -1.94 then --Score 4000
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
+					end
+					if scoreboard.animationFrame == 8 and scoreboard.speedY == -1.94 then --Score 8000
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 8000
+					end
+					if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP, Score 10000
+						SaveData.totalLives = SaveData.totalLives + 1
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10000
+						Misc.score(10000) --Just in case if 1.3 Mode is active
+					end
+					if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP, Score 20000
+						SaveData.totalLives = SaveData.totalLives + 2
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 20000
+						Misc.score(20000)
+					end
+					if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP, Score 30000
+						SaveData.totalLives = SaveData.totalLives + 3
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 30000
+						Misc.score(30000)
+					end
+					if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP, Score 50000
+						SaveData.totalLives = SaveData.totalLives + 5
+						SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50000
+						Misc.score(50000)
 					end
 				end
 			end

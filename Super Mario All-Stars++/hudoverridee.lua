@@ -509,21 +509,21 @@ end
 
 function HUDOverride.scoreCounterWithZeroes()
 	if SaveData.totalScoreClassic >= 0 then
-		string.format("%08f",tostring(SaveData.totalScoreClassic))
+		string.format("00000000%1d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 99 then
-		return string.format("%07f",tostring(SaveData.totalScoreClassic))
+		return string.format("0000000%2d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 999 then
-		return string.format("%06f",tostring(SaveData.totalScoreClassic))
+		return string.format("000000%3d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 9999 then
-		return string.format("%05f",tostring(SaveData.totalScoreClassic))
+		return string.format("00000%4d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 99999 then
-		return string.format("%04f",tostring(SaveData.totalScoreClassic))
+		return string.format("0000%5d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 999999 then
-		return string.format("%03f",tostring(SaveData.totalScoreClassic))
+		return string.format("000%6d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 9999999 then
-		return string.format("%02f",tostring(SaveData.totalScoreClassic))
+		return string.format("00%7d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 99999999 then
-		return string.format("%01f",tostring(SaveData.totalScoreClassic))
+		return string.format("0%8d",tostring(SaveData.totalScoreClassic))
 	elseif SaveData.totalScoreClassic >= 999999999 then
 		return SaveData.totalScoreClassic
 	end
@@ -545,7 +545,11 @@ end
 
 function HUDOverride.drawLives(splitOffset, thisCam, thisPlayer, priority)
 	if SaveData.disableX2char == true then
-		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("livesClassic", thisPlayer.character), mem(0x00B2C5AC, FIELD_FLOAT), priority);
+		if SaveData.totalLives <= 999 then
+			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SaveData.totalLives, priority);
+		elseif SaveData.totalLives >= 1000 then
+			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("livesClassic", thisPlayer.character), HUDOverride.lifeCrownCounter(), priority);
+		end
 	elseif SaveData.disableX2char == false then
 		if SaveData.totalLives <= 999 then
 			drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
@@ -689,7 +693,7 @@ end
 
 function HUDOverride.drawScore(splitOffset, thisCam, priority)
 	if SaveData.disableX2char == true then
-		local scoreDisplay = tostring(SaveData._basegame.hud.score)
+		local scoreDisplay = tostring(SaveData.totalScoreClassic)
 		Text.printWP(scoreDisplay, 1, 0.5 * thisCam.width + HUDOverride.offsets.score.x + splitOffset - #scoreDisplay * 18 * HUDOverride.offsets.score.align, HUDOverride.offsets.score.y, priority)
 	elseif SaveData.disableX2char == false then
 		local scoreDisplay = tostring(SaveData.totalScoreClassic)
@@ -702,7 +706,7 @@ function HUDOverride.drawCoins(splitOffset, thisCam, thisPlayer, priority)
 	if SaveData.disableX2char == false then
 		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(SaveData.totalCoinsClassic), priority);
 	elseif SaveData.disableX2char == true then
-		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(mem(0x00B2C5A8,FIELD_WORD)), priority);
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(SaveData.totalCoinsClassic), priority);
 	end
 end
 
