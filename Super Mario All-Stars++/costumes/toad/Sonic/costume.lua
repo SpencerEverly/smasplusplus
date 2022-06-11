@@ -28,16 +28,23 @@ function costume.onInit(p)
 	extrasounds.id[8]  = Audio.SfxOpen("costumes/toad/Sonic/player-died.ogg")
 	Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/toad/Sonic/shell-hit.ogg")
 	Audio.sounds[10].sfx = Audio.SfxOpen("costumes/toad/Sonic/player-slide.ogg")
+	Audio.sounds[12].sfx = Audio.SfxOpen("costumes/toad/Sonic/has-item.ogg")
 	extrasounds.id[14] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/coin.ogg"))
 	extrasounds.id[15] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/1up.ogg"))
+	Audio.sounds[16].sfx = Audio.SfxOpen("costumes/toad/Sonic/lava.ogg")
 	Audio.sounds[17].sfx = Audio.SfxOpen("costumes/toad/Sonic/warp.ogg")
 	extrasounds.id[18] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/fireball.ogg"))
+	Audio.sounds[22].sfx = Audio.SfxOpen("costumes/toad/Sonic/bullet-bill.ogg")
 	Audio.sounds[23].sfx = Audio.SfxOpen("costumes/toad/Sonic/grab.ogg")
 	Audio.sounds[24].sfx = Audio.SfxOpen("costumes/toad/Sonic/spring.ogg")
+	Audio.sounds[25].sfx = Audio.SfxOpen("costumes/toad/Sonic/hammer.ogg")
 	Audio.sounds[29].sfx = Audio.SfxOpen("costumes/toad/Sonic/do.ogg")
 	Audio.sounds[31].sfx = Audio.SfxOpen("costumes/toad/Sonic/key.ogg")
 	Audio.sounds[32].sfx = Audio.SfxOpen("costumes/toad/Sonic/pswitch.ogg")
 	Audio.sounds[33].sfx = Audio.SfxOpen("costumes/toad/Sonic/tail.ogg")
+	Audio.sounds[34].sfx = Audio.SfxOpen("costumes/toad/Sonic/racoon.ogg")
+	extrasounds.id[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/Sonic/smash.ogg"))
+	Audio.sounds[46].sfx = Audio.SfxOpen("costumes/toad/Sonic/door.ogg")
 	Audio.sounds[48].sfx = Audio.SfxOpen("costumes/toad/Sonic/yoshi.ogg")
 	Audio.sounds[49].sfx = Audio.SfxOpen("costumes/toad/Sonic/yoshi-hurt.ogg")
 	Audio.sounds[50].sfx = Audio.SfxOpen("costumes/toad/Sonic/yoshi-tongue.ogg")
@@ -196,38 +203,33 @@ function costume.onDraw()
 end
 
 function costume.onPlayerHarm(e, p)
-	if player.hasStarman == true or player.isMega == true then return end
-	
-	if player.hasStarman == false or player.isMega == false then
-		if SaveData.toggleCostumeAbilities == true then
-			if hit or balled then
-				e.cancelled = true
-				return
-			end
-			if spinballed and player.speedX ~= 0 then
-				e.cancelled = true
-				return
-			end
-			if SaveData.totalCoinsClassic > 0 then
-				e.cancelled = true
-			end
+	if SaveData.toggleCostumeAbilities == true then
+		if hit or balled then
+			e.cancelled = true
+			return
+		end
+		if spinballed and p.speedX ~= 0 then
+			e.cancelled = true
+			return
 		end
 	end
 end
 
 function costume.onPostPlayerHarm(p)
-	if SaveData.toggleCostumeAbilities == true then
-		if SaveData.totalCoinsClassic > 0 then
-			hit = true
-			hitTicks = 0
-			plr.speedY = -8
-			plr.speedX = 0
-			Defines.gravity = Defines.gravity / 2
-			SFX.play(5)
-			SaveData.totalCoinsClassic = 0
-			Effect.spawn(11, p.x, p.y)
-		else
-			p:kill()
+	if not p.hasStarman or not p.isMega then
+		if SaveData.toggleCostumeAbilities then
+			if SaveData.totalCoinsClassic > 0 then
+				hit = true
+				hitTicks = 0
+				plr.speedY = -8
+				plr.speedX = 0
+				Defines.gravity = Defines.gravity / 2
+				SFX.play(5)
+				SaveData.totalCoinsClassic = 0
+				Effect.spawn(11, p.x, p.y)
+			else
+				p:kill()
+			end
 		end
 	end
 end
