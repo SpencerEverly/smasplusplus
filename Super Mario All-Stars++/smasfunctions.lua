@@ -13,7 +13,7 @@
 --
 --MUSIC/SOUNDS
 --_ openSound('path/to/file.extension'): Opens a sound for reading.
---_ playSound('path/to/file.extension'): Plays a sound. This library is compatible with
+--_ playSound('path/to/file.extension'/number): Plays a sound. This library is compatible with
 --extrasounds (Enter extrasoundsHelp() for more info).
 --_ loadSound('path/to/file.extension'): Alternative to playSound, except without
 --extrasounds support.
@@ -42,9 +42,12 @@
 --_ addToFile('path/to/file.extension', 'text'): Add to a file using io. This won't
 --overwrite everything, just adds something to the file, so this one is fine.
 --_ lifeCount(): Returns the SMAS++ life count.
+--_ lifeCountWithCrowns(): Returns the SMAs++ life count with the crowns. Every
+--crown will be with a "!" since that's the symbol being used for displaying the
+--crown.
 --_ manageLives(lives, true/false): Manages the lives. If true, it'll add the lives. If false, it'll
 --subtract the lives.
---_ maxOutLives(): Maxes out lives to 999.
+--_ maxOutLives(): Maxes out lives to 1110.
 --_ resetLives(): Resets the lives back to the default value (5).
 --_ deathCount(): Returns the SMAS++ death count.
 --_ maxOutDeathCount(): Maxes out death count to 999.
@@ -113,6 +116,11 @@
 --_ eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot tool
 --and speedrun save data purge option. This will reset your save data, but
 --without clearing SaveData/GameData.
+--_ getLegacyStarsCollected(): This is for the Demo 3 save migration tool which
+--runs when stars were collected from Demo 2 and below. This will be unused
+--by the time Demo 4 releases (And/or the full release happens).
+--_ getLegacyStarsCollectedNameOnly(): Same as last, except it only lists
+--the names via a table.
 
 local smasfunctions = {}
 
@@ -428,6 +436,22 @@ function lifeCount() --This lists the current life count
 	end
 end
 
+function lifeCountWithCrowns() --This lists the current life count, with the crown system. Crowns will be with "!" instead of an actual crown symbol.
+	if SaveData.totalLives == nil then
+		return 0
+	elseif SaveData.totalLives < 1000 then
+		return SaveData.totalLives
+	elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
+		return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
+	elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
+		return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
+	elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
+		return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
+	elseif SaveData.totalLives == 1110 then
+		return "!!!"
+	end
+end
+
 function manageLives(lives, mathcount) --arg1 = number of lives, arg2 = to add (true) or subtract them (false)
 	if lives == nil then
 		error("You need to specify the number of lives.")
@@ -442,9 +466,9 @@ function manageLives(lives, mathcount) --arg1 = number of lives, arg2 = to add (
 	end
 end
 
-function maxOutLives() --This maxes out the lives to 999
+function maxOutLives() --This maxes out the lives to 1110 (All three crowns).
 	playSound(98)
-	SaveData.totalLives = 999
+	SaveData.totalLives = 1110
 end
 
 function resetLives() --This resets the lives back to 5

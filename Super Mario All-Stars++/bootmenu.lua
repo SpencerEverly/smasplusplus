@@ -267,6 +267,17 @@ local function Battle14()
 	Level.load("battle_nsmbds2.lvlx", nil, nil)
 end
 
+local function Battle15()
+	exitscreen = true
+	autoscroll.scrollLeft(5000)
+	Audio.MusicChange(0, 0)
+	GameData.battlemodeactive = true
+	GameData.battlemoderngactive = false
+	Routine.wait(0.4)
+	Misc.saveGame()
+	Level.load("battle_nsmbds3.lvlx", nil, nil)
+end
+
 
 
 local function startRushMode()
@@ -2046,6 +2057,7 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Sky High Into the Skies",chosenFunction = function() Routine.run(Battle12) end})
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 1 (By hrthrdh)",chosenFunction = function() Routine.run(Battle13) end})
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 2 (By hrthrdh)",chosenFunction = function() Routine.run(Battle14) end})
+	littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 3 (By hrthrdh)",chosenFunction = function() Routine.run(Battle15) end})
 	littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 
 	

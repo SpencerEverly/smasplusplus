@@ -3,14 +3,15 @@
 --Here's the starting code that loads it all. How'd I do?
 
 --Total Stars:
---SMB1 = 43
---SMB2 = 22
---SMB3 = TBD
---SMBLL = TBD
---SMW = TBD
---SMBS = TBD
---Lava Lands = 5
---True Ending = 1
+--SMB1 = 43 (Done!)
+--SMB2 = 22 (Done! Still need code for several things though)
+--SMB3 = TBD (WIP)
+--SMBLL (Optional) = 52 (Done! Still need code for several things though)
+--SMW = TBD (WIP)
+--SMBS = TBD (WIP)
+--Lava Lands = 5 (WIP)
+--Side Quest (Optional) = TBD (WIP)
+--True Ending = 1 (WIP)
 
 --Make sure we aren't running Beta 3 and below before we actually start...
 if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
@@ -22,7 +23,7 @@ end
 GameData.__EpisodeFolder = Misc.episodePath()
 GameData.__SaveSlot = Misc.saveSlot()
 
---Make sure we warn the user of the dangers of the old star system...
+--Make sure we warn the user to upgrade the legacy save data while we can...
 if mem(0x00B251E0, FIELD_WORD) >= 1 then
 	if GameData.warnUserAboutOldStars == nil then
 		GameData.warnUserAboutOldStars = true
@@ -66,8 +67,8 @@ end
 function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport.
 	-- If using bottom center aligned coordinates, handle that sensibly
 	if bottomCenterAligned then
-		x = x - (player.width * 0.5)
-		y = y - player.height
+		x = x - (self.width * 0.5)
+		y = y - self.height
 	end
 
 	-- Move the player and update section, including music
@@ -274,7 +275,7 @@ GameData.nolevelplaces = {
 	"SMAS - Rush Mode Results.lvlx",
 }
 
-GameData.notransitionlevels = { --This one will prevent transitions from happening via warpTransitions
+GameData.notransitionlevels = { --This one will prevent transitions from happening via warpTransition
 	"SMAS - Start.lvlx",
 	"SMAS - Intro.lvlx",
 	"SMAS - Credits.lvlx",
@@ -317,6 +318,7 @@ GameData.classicBattleModeLevels = { --All Classic Battle Mode levels, used for 
 	"battle_testlevel.lvlx",
 	"battle_nsmbds1.lvlx",
 	"battle_nsmbds2.lvlx",
+	"battle_nsmbds3.lvlx",
 }
 
 GameData.rushlevelsrng = { --All Rush Mode levels.

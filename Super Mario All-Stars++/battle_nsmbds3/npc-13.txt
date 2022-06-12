@@ -1,0 +1,4 @@
+gfxwidth=23
+gfxheight=23
+height=23
+width=23

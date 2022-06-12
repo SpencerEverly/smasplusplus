@@ -91,12 +91,14 @@ end
 function starget()
 	Misc.npcToCoins()
 	SFX.play(extrasounds.id[14])
+	GameData.winStateActive = true
 	playervuln = true
 	playerwon = true
 	SFX.play(52)
 	muteMusic(-1)
 	GameData.muteMusic = true
 	Routine.wait(5, true)
+	GameData.winStateActive = false
 	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 

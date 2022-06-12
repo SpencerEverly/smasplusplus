@@ -459,7 +459,6 @@ function globalgenerals.onTick()
 		Player.setCostume(3, nil)
 		Player.setCostume(4, nil)
 		Player.setCostume(5, nil)
-		HUDOverride.visible.lives = true
 	end
 	
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then

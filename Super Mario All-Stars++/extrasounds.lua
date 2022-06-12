@@ -260,9 +260,13 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		--**PSWITCH TIMER**
 		if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < 750 then
-			SFX.play(extrasounds.id[118], 1, 1, 50)
+			if Level.endState() == 0 or not GameData.winStateActive then
+				SFX.play(extrasounds.id[118], 1, 1, 50)
+			end
 		elseif mem(0x00B2C62C, FIELD_WORD) <= 300 and mem(0x00B2C62C, FIELD_WORD) >= 1 then
-			SFX.play(extrasounds.id[118], 1, 1, 15)
+			if Level.endState() == 0 or not GameData.winStateActive then
+				SFX.play(extrasounds.id[118], 1, 1, 15)
+			end
 		end
 		
 		
@@ -400,51 +404,52 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 	local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
 	if extrasounds.active == true then --If it's true, play them
 		if not Misc.isPaused() then --Making sure the sound only plays when not paused...
+			for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
 			
 			
 			
 			
-			
-			--**CONTENT ID DETECTION**
-			if block.contentID == nil then --For blocks that are already used
+				--**CONTENT ID DETECTION**
+				if block.contentID == nil then --For blocks that are already used
+					
+				end
+				if block.contentID == 1225 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
+					playSound(92)
+				elseif block.contentID == 1226 then
+					playSound(92)
+				elseif block.contentID == 1227 then
+					playSound(92)
+				elseif block.contentID == 0 then --This is to prevent a coin sound from playing when hitting an nonexistant block
+					
+				elseif block.contentID == 1000 then --Same as last
+					
+				elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
+					playSound(7)
+				elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
+					playSound(14)
+				end
 				
-			end
-			if block.contentID == 1225 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
-				playSound(92)
-			elseif block.contentID == 1226 then
-				playSound(92)
-			elseif block.contentID == 1227 then
-				playSound(92)
-			elseif block.contentID == 0 then --This is to prevent a coin sound from playing when hitting an nonexistant block
 				
-			elseif block.contentID == 1000 then --Same as last
 				
-			elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
-				playSound(7)
-			elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
-				playSound(14)
-			end
-			
-			
-			
-			
-			--**BOWSER BRICKS**
-			if block.id == 186 then --SMB3 Bowser Brick detection, thanks to looking at the source code
-				playSound(43)
-			end
-			
-			
-			
-			
-			
-			--**BRICK SMASHING**
-			if player.powerup >= 2 then --No brick smashing when on powerup state 1
-				if block:collidesWith(player) then --Detecting block hitting
-					if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
-						playSound(0)
-					end
-					if bricks[block.id] == (block.contentID == 0) or bricks[block.id] == (block.contentID == 1000) then --Play when it's destroyed
-						playSound(4)
+				
+				--**BOWSER BRICKS**
+				if block.id == 186 then --SMB3 Bowser Brick detection, thanks to looking at the source code
+					playSound(43)
+				end
+				
+				
+				
+				
+				
+				--**BRICK SMASHING**
+				if p.powerup >= 2 then --No brick smashing when on powerup state 1
+					if block:collidesWith(p) then --Detecting block hitting
+						if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
+							playSound(0)
+						end
+						if bricks[block.id] == (block.contentID == 0) or bricks[block.id] == (block.contentID == 1000) then --Play when it's destroyed
+							playSound(4)
+						end
 					end
 				end
 			end
@@ -454,20 +459,21 @@ end
 
 function extrasounds.onPostPlayerKill()
 	if extrasounds.active == true then
+		for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
 	
 	
 	
 	
-		--**PLAYER DYING**
-		if player.character == CHARACTER_LINK then
-			SFX.play(80)
-		else
-			playSound(8)
+			--**PLAYER DYING**
+			if p.character == CHARACTER_LINK then
+				SFX.play(80)
+			else
+				playSound(8)
+			end
+		
+		
+		
 		end
-		
-		
-		
-		
 	end
 end
 
