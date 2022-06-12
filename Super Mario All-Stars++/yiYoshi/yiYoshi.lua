@@ -1800,6 +1800,10 @@ do
             if behaviour == NPC_TONGUE_BEHAVIOUR.EDIBLE or behaviour == NPC_TONGUE_BEHAVIOUR.BIG_EGG then
                 data.tongueState = TONGUE_STATE.CREATING_EGG
                 data.tongueTimer = 0
+				local currentCostume = player:getCostume()
+				if (currentCostume == "SMA3") then
+					playSound("ninjabomberman/SMA3/SFX/swallow-sfx.ogg")
+				end
 
                 return
             end

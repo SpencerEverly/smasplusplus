@@ -79,6 +79,12 @@ function thirteenmodedeath()
 		SaveData.totalLives = 0
 	end
 	Routine.waitFrames(196)
+	if not gameoveractivate then
+		blackscreenonly = true
+		Misc.pause()
+		Routine.waitFrames(45, true)
+		Misc.unpause() --Unpause afterward
+	end
 	if gameoveractivate then --Quick game over screen stuff.
 		blackscreenonly = true
 		Misc.pause()

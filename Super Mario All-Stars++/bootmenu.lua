@@ -593,11 +593,11 @@ local function MigrateOldSave1()
 	logo = false
 	pressjumpwords = false
 	Audio.MusicChange(0, "_OST/Photo Channel (Wii)/Slideshow (Scenic).ogg")
-	littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>It looks like you have an old save you'll need to migrate immediately.<page>The reason why you'll need to migrate your save is because<page>your current save is outdated and needs to be refreshed for this Demo,<page>and beyond for future releases. Please note that, once you<page>migrate your data, it will be imcompatible with old releases.<page>So please do this if you are actually willing to upgrade<page>to Demo 3 and beyond.<question MigrateSaveMenuOne>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>It looks like you have an old save you'll need to migrate immediately.<page>The reason why you'll need to migrate your save is because<page>your current save is outdated and needs to be refreshed for this Demo,<page>and beyond for future releases. Please note that, once you<page>migrate your data, it will be imcompatible with old releases.<page>So please do this if you are actually willing to upgrade<page>to Demo 3 and beyond.<question MigrateSaveMenuOne>", pauses = false, updatesInPause = true})
 end
 
 local function MigrateOldSave2()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Please note that before you do this, a final reminder that<page>this save data will be upgraded, and the data will not be<page>compatible with older releases. Be sure you want to<page>proceed before doing so.<question MigrateSaveMenuTwo>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Please note that before you do this, a final reminder that<page>this save data will be upgraded, and the data will not be<page>compatible with older releases. Be sure you want to<page>proceed before doing so.<question MigrateSaveMenuTwo>", pauses = false, updatesInPause = true})
 end
 
 local function MigrateOldSave3()
@@ -605,17 +605,14 @@ local function MigrateOldSave3()
 	SaveData.totalCoinsClassic = tonumber(mem(0x00B2C5A8, FIELD_WORD))
 	SaveData.totalLives = tonumber(mem(0x00B2C5AC, FIELD_FLOAT))
 	SaveData.totalScoreClassic = tonumber(Misc.score())
-	local savefile = io.open(Misc.episodePath().."save"..Misc.saveSlot()..".sav","r")
-	local savefilecontents = savefile:read("*all")
-	--local savefilelvlx = string.find(savefilecontents, ".lvlx")
-	savefile:close()
+	SaveData.completeLevels = getLegacyStarsCollectedNameOnly()
 	eraseMainSaveSlot(Misc.saveSlot())
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Save has been officially migrated! Please note that you'll need to reunlock paths,<page>but other than that you should be good to go!<page>Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Save has been officially migrated! Please note that you'll need to reunlock paths,<page>but other than that you should be good to go!<page>Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
 end
 
 local function MigrateOldSaveCancelled()
 	Audio.MusicChange(0, "_OST/_Sound Effects/nothing.ogg")
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Please note that you need to upgrade your save data<page>to use Demo 3. Try again next time when you are<page>ready to do so.<question MigrateSaveMenuCancel>", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Please note that you need to upgrade your save data<page>to use Demo 3. Try again next time when you are<page>ready to do so.<question MigrateSaveMenuCancel>", pauses = false, updatesInPause = true})
 end
 
 local function FirstBoot3()
@@ -2198,7 +2195,7 @@ if bootmenu.active == true then
 
 
 	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (2 Player Mode)",chosenFunction = function() Routine.run(TwoPlayerCheck) end})
-	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheckWarning) end})
+	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)",chosenFunction = function() Routine.run(OnePlayerCheck) end})
 	littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 

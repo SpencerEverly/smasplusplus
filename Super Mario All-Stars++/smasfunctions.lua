@@ -126,6 +126,8 @@ local smasverbosemode = require("smasverbosemode")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
+local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
+
 --This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.
 _G.Player = Player
 _G.player = Player(1)
@@ -985,6 +987,22 @@ function eraseSaveSlot(slot) --This erases all the save data in a specific slot.
 
 	f2:write('{ \r--[1]-- \r{ \r   ["__costumes"]={2}, \r   ["__launcher"]={3}, \r   ["_basegame"]={4} \r}, \r--[2]-- \r{ \r \r}, \r--[3]-- \r{ \r \r}, \r--[4]-- \r{ \r   ["bigSwitch"]={5}, \r   ["_characterdata"]={6}, \r   ["starcoin"]={7}, \r   ["hud"]={8}, \r   ["starcoinCounter"]=0 \r}, \r--[5]-- \r{ \r \r}, \r--[6]-- \r{ \r   ["8"]={9}, \r   ["10"]={10}, \r   ["9"]={11}, \r   ["6"]={12}, \r   ["16"]={13}, \r   ["11"]={14}, \r   ["12"]={15}, \r   ["7"]={16}, \r   ["15"]={17}, \r   ["13"]={18}, \r   ["14"]={19} \r}, \r--[7]-- \r{ \r \r}, \r--[8]-- \r{ \r   ["score"]=0 \r}, \r--[9]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[10]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[11]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[12]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[13]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[14]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[15]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[16]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[17]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[18]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[19]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[20]-- \r{ \r   ["maxID"]=0, \r   ["alive"]={21} \r}, \r--[21]-- \r{ \r \r} \r}')
 	f2:close()
+end
+
+function getLegacyStarsCollected() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
+    local t = {}
+    for i=1, mem(0x00B251E0, FIELD_WORD) do
+        t[i] = {filename = mem(GM_STAR_ADDR+(i - 1)*0x08+0x00, FIELD_STRING), index = mem(GM_STAR_ADDR+(i - 1)*0x08+0x04, FIELD_WORD)}
+    end
+    return t
+end
+
+function getLegacyStarsCollectedNameOnly() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
+    local t = {}
+    for i=1, mem(0x00B251E0, FIELD_WORD) do
+        t[i] = mem(GM_STAR_ADDR+(i - 1)*0x08+0x00, FIELD_STRING)
+    end
+    return t
 end
 
 return smasfunctions
