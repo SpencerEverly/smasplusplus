@@ -1,5 +1,5 @@
 HEAD
-TL:"Lava Lands (Level 4)";SZ:1;CPID:"SMBX2";
+TL:"Lava Lands 4";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-197504;T:-200864;B:-200000;MZ:24;MF:"_OST/All Stars Secrets/Lava Flow (SFX).ogg";BG:23;
