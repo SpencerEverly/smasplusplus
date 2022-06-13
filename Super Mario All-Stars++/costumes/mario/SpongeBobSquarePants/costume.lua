@@ -144,11 +144,11 @@ end
 
 function costume.onTick(repeated)
 	if SaveData.toggleCostumeAbilities == true then
-		--if p.speedX ~= 0 and not isSlidingOnIce(plr) then
+		if player.speedX ~= 0 and not isSlidingOnIce(plr) then
 			--if player.frame == 3 or player.frame == 9 then
-				--playSound("mario/SpongeBobSquarePants/spongebob-footsteps.ogg", 0.4, 1, 35)
+				--playSound("mario/SpongeBobSquarePants/spongebob-footsteps.ogg", 0.4, 1, 40)
 			--end
-		--end
+		end
 		if leafPowerups[p.powerup] then
 			if p.holdingNPC == nil then
 				if isSlowFalling(p) then

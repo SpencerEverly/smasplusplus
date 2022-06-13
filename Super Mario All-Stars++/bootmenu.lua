@@ -1325,11 +1325,11 @@ function bootmenu.onStart()
 		if SaveData.firstBootCompleted == nil then
 			SaveData.firstBootCompleted = false --If starting for the first time, first boot will happen
 		end
-		if SaveData.firstBootCompleted == false and GameData.saveDataMigrated == false then
+		if SaveData.firstBootCompleted == false and GameData.saveDataMigrated == true then
 			Routine.run(FirstBoot1)
 			GameData.startedmenu = 1
 		end
-		if SaveData.firstBootCompleted == true and GameData.saveDataMigrated == false then
+		if SaveData.firstBootCompleted == true and GameData.saveDataMigrated == true then
 			Routine.run(easterEgg, true)
 			playernamebyImg = true
 			pfpimage = true

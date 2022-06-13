@@ -7,6 +7,7 @@ local costume = {}
 local eventsRegistered = false
 local plr
 local balled
+local ballboost = 0
 
 function costume.onInit(p)
     plr = p

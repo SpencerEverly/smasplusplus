@@ -121,13 +121,13 @@ if SaveData.disableX2char == true then
 	HUDOverride.offsets.keys = 		{x = 64, 	y = 26, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = HUDOverride.ALIGN_MID}, align = HUDOverride.ALIGN_MID};
 	HUDOverride.offsets.hearts = 	{x = 5, 	y = 16, align = HUDOverride.ALIGN_MID};
-	HUDOverride.offsets.score = 	{x = 170, 	y = 47, align = HUDOverride.ALIGN_RIGHT};
+	HUDOverride.offsets.score = 	{x = 220, 	y = 47, align = HUDOverride.ALIGN_RIGHT};
 
 	HUDOverride.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_MID};
-	HUDOverride.offsets.coins = 	{x = 88, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT};
-	HUDOverride.offsets.lives = 	{x = -166, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.coins = 	{x = 138, 	y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.lives = 	{x = -216, 	y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.deathcount = {x = -56, y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
-	HUDOverride.offsets.stars = 	{x = -150, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
+	HUDOverride.offsets.stars = 	{x = -200, 	y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = HUDOverride.ALIGN_LEFT}, align = HUDOverride.ALIGN_LEFT};
 	HUDOverride.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = HUDOverride.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = HUDOverride.ALIGN_LEFT},	align = HUDOverride.ALIGN_LEFT}
 	HUDOverride.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = HUDOverride.ALIGN_RIGHT}, align = HUDOverride.ALIGN_LEFT}
 
@@ -693,10 +693,10 @@ end
 
 function HUDOverride.drawScore(splitOffset, thisCam, priority)
 	if SaveData.disableX2char == true then
-		local scoreDisplay = tostring(SaveData.totalScoreClassic)
+		local scoreDisplay = scoreCountWithZeroes()
 		Text.printWP(scoreDisplay, 1, 0.5 * thisCam.width + HUDOverride.offsets.score.x + splitOffset - #scoreDisplay * 18 * HUDOverride.offsets.score.align, HUDOverride.offsets.score.y, priority)
 	elseif SaveData.disableX2char == false then
-		local scoreDisplay = tostring(SaveData.totalScoreClassic)
+		local scoreDisplay = scoreCountWithZeroes()
 		Text.printWP(scoreDisplay, 1, 0.5 * thisCam.width + HUDOverride.offsets.score.x + splitOffset - #scoreDisplay * 18 * HUDOverride.offsets.score.align, HUDOverride.offsets.score.y, priority)
 	end
 end

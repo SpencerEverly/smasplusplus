@@ -538,6 +538,34 @@ function manageStars(arg1, arg2) --arg1 = Number of stars, arg2 = To add or subt
 	end
 end
 
+function scoreCount() --Returns the score count.
+	return SaveData.totalScoreClassic
+end
+
+function scoreCountWithZeroes() --Returns the score count with zeroes.
+	if SaveData.totalScoreClassic >= 0 then
+		return string.format("%000000009d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 9 then
+		return string.format("%00000008d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 99 then
+		return string.format("%0000007d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 999 then
+		return string.format("%000006d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 9999 then
+		return string.format("%00005d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 99999 then
+		return string.format("%0004d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 999999 then
+		return string.format("%003d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 9999999 then
+		return string.format("%02d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 99999999 then
+		return string.format("%1d",tostring(SaveData.totalScoreClassic))
+	elseif SaveData.totalScoreClassic >= 999999999 then
+		return SaveData.totalScoreClassic
+	end
+end
+
 -----------------------
 --Date/Time Functions
 -----------------------
