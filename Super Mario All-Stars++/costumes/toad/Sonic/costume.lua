@@ -121,7 +121,7 @@ function costume.onTick()
 		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
 		local hitNPCs = Colliders.getColliding{a = player, b = GameData.allBaseGameKillableEnemyIDs, btype = Colliders.NPC}
 		
-		if balled then
+		if balled and player:mem(0x26, FIELD_WORD) == 0 then
 			for _,npc in ipairs(hitNPCs) do
 				if npc ~= v and npc.id > 0 then
 					-- Hurt the NPC, and make sure to not give the automatic score
@@ -137,7 +137,7 @@ function costume.onTick()
 			end
 		end
 		
-		if spinballed and player.speedX ~= 0 then
+		if spinballed and player.speedX ~= 0 and player:mem(0x26, FIELD_WORD) == 0 then
 			for _,npc in ipairs(hitNPCs) do
 				if npc ~= v and npc.id > 0 then
 					-- Hurt the NPC, and make sure to not give the automatic score

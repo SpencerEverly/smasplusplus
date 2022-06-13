@@ -4588,7 +4588,7 @@ smwMap.transitionSettings = {
         drawFunction = smwMap.TRANSITION_FADE,
         progressTime = 20,
         waitTime = 8,
-        priority = -6,
+        priority = -4,
         pauses = false,
     },
 }
