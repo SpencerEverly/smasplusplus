@@ -220,6 +220,14 @@ end
 --Now load the loading sound file!
 local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
+--Placing in levels onto a table that'll prevent the loading sound from playing
+local noloadingsounds = {
+	"SMAS - Start.lvlx",
+	"SMAS - Raca's World (Part 0).lvlx",
+	"SMAS - Raca's World (Part 1).lvlx",
+	"map.lvlx"
+}
+
 --Now use onLoad to play the loading sound...
 function onLoad()
 	if not Misc.inEditor() and not table.icontains(noloadingsounds,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
