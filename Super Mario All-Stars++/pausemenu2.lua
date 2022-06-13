@@ -1035,8 +1035,8 @@ local function sideteleport()
 		player:mem(0x17A,FIELD_BOOL,true)
 	end
 	playSound("hub_travelactivated.ogg")
-	world.playerX = -3168
-	world.playerY = -1536
+	SaveData.smwMap.playerX = -195616
+	SaveData.smwMap.playerY = -196800
 	playSound("world_warp.ogg")
 	pauseplus.canControlMenu = false
 	startFadeOut()
@@ -1198,7 +1198,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 		if (Level.filename() == "map.lvlx") == true then
 			pauseplus.createOption("teleportmenu",{text = "Teleport back to the Start",closeMenu = true,description = "Teleports back to the starting point of the map. Useful for fast traveling!", action =  function() Routine.run(startteleport) end})
 			pauseplus.createOption("teleportmenu",{text = "Teleport to the Hub",closeMenu = true,description = "Teleports back to the Hub marker on the map. Useful for fast traveling!", action = function() Routine.run(hubmapteleport) end})
-			--pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true,description = "Teleports back to the Side Quest starting point of the map. Useful for fast traveling!", action = function() Routine.run(sideteleport) end})
+			pauseplus.createOption("teleportmenu",{text = "Teleport to the Side Quest",closeMenu = true,description = "Teleports back to the Side Quest starting point of the map. Useful for fast traveling!", action = function() Routine.run(sideteleport) end})
 			pauseplus.createOption("teleportmenu",{text = "Teleport to the DLC World",closeMenu = true,description = "Teleports back to the DLC World starting point of the map. Useful for fast traveling!", action = function() Routine.run(dlcteleport) end})
 		end
 		if not isOverworld and (Level.filename() == "MALC - HUB.lvlx") == false and (Level.filename() == "map.lvlx") == false then
