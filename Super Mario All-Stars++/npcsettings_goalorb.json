@@ -1,0 +1,21 @@
+{
+	"style" : "groupbox",
+	"title" : "Goal Tape Settings",
+	"layout": [
+		{
+			"control": "combobox",
+			"name": "exitType",
+			"title": "Exit Type",
+			"tooltip": "The type of exit used when clearing the level via this NPC.",
+			"elements": ["None","Card Roulette","Boss Orb","Offscreen Exit","Keyhole","Crystal Ball","Via Warp","Star","Goal Tape"],
+			"value-default": 2
+		},
+		{
+			"control": "checkBox",
+			"name": "noGravity",
+			"title": "No Gravity",
+			"tooltip": "If checked, the NPC will have no gravity and ignore collision.",
+			"value-default": false
+		}
+	]
+}

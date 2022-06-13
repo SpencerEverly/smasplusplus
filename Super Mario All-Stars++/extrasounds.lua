@@ -163,6 +163,11 @@ extrasounds.id[138] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-world-clear.ogg"
 extrasounds.id[139] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-overworld.ogg")) --Going Underground, Overworld (SMB1)
 extrasounds.id[140] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-desert.ogg")) --Going Underground, Desert (SMB1)
 extrasounds.id[141] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-sky.ogg")) --Going Underground, Sky (SMB1)
+extrasounds.id[142] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-countdown-start.ogg")) --Goaltape, Start (SMW)
+extrasounds.id[143] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-countdown-loop.ogg")) --Goaltape, Loop (SMW)
+extrasounds.id[144] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-countdown-end.ogg")) --Goaltape, End (SMW)
+extrasounds.id[145] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-irisout.ogg")) --Goaltape, Iris Out (SMW)
+extrasounds.id[146] = Audio.SfxOpen(Misc.resolveSoundFile("smw-exit-orb.ogg")) --SMW Orb Exit
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
