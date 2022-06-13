@@ -164,6 +164,9 @@ end
 if SaveData.completeLevels == nil then --This will add a table to list completed levels when collecting win states
 	SaveData.completeLevels = {}
 end
+if SaveData.completeLevelsOptional == nil then --This will add a table to list completed levels when collecting win states in optional levels
+	SaveData.completeLevelsOptional = {}
+end
 if SaveData.totalcoins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
 	SaveData.totalcoins = 0
 end

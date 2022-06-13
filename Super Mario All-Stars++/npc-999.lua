@@ -27,6 +27,11 @@ local realStarSettings = {
 	
 	speed = 1,
 	
+	ai1 = 0,
+	ai2 = 0,
+	ai3 = 0,
+	ai4 = 0,
+	
 	npcblock = false,
 	npcblocktop = false, --Misnomer, affects whether thrown NPCs bounce off the NPC.
 	playerblock = false,
@@ -48,6 +53,8 @@ local realStarSettings = {
 	ignorethrownnpcs = true,
 
 	isinteractable = true,
+	sparkles = true,
+	floats = true,
 	
 }
 
@@ -94,6 +101,83 @@ function starget()
 	GameData.winStateActive = true
 	playervuln = true
 	playerwon = true
+end
+
+function realstar.animateNPC(v)
+    v.data.animationTimer = v.data.animationTimer + 1
+    if v.data.animationTimer%NPC.config[v.id].framespeed == 0 then
+        v.data.frame = v.data.frame + 1 
+        if v.data.frame > ((NPC.config[v.id].frames*v.data.frameMulti)-1) then
+            v.data.frame = ((NPC.config[v.id].frames*v.data.frameMulti)-1)
+        end
+        v.data.animationTimer = 0
+    end
+    v.animationFrame = npcutils.getFrameByFramestyle(v, {frame=v.data.frame})
+end
+
+function realstar.isStarCollected(npc, filename)
+    local collected = false
+	if table.icontains(SaveData.completeLevels,Level.filename()) then
+		collected = true
+	end
+    return collected
+end
+
+function realstar.onTickEndNPC(v)
+    local data = v.data
+ 
+    if not data.initialized then
+        data._settings.starIndex = data._settings.starIndex or 1
+        
+        data.collected = realstar.isStarCollected(v, Level.filename())
+        if data.collected then
+            data.frameMulti = 1
+        else
+            data.frameMulti = 0.5
+        end
+        data.frame = ((NPC.config[v.id].frames*data.frameMulti)-1)
+        data.animationTimer = 0
+        data.initialized = true
+    end
+ 
+    if Defines.levelFreeze then return end
+ 
+    realstar.animateNPC(v)
+ 
+    if NPC.config[v.id].sparkles then
+        v.ai4 = v.ai4 + 1
+        if v.ai4 >= 10*data.frameMulti then
+            v.ai4 = 0
+            local e = Effect.spawn(80, v.x + RNG.random()*v.width - 2, v.y + RNG.random()*v.height)
+            e.speedX = RNG.random()*1 - 0.5
+            e.speedY = RNG.random()*1 - 0.5
+            if data.frameMulti == 1 then -- set frame of effects only for collected stars
+                e.animationFrame = 1
+            end
+        end
+    end
+ 
+    if NPC.config[v.id].floats and not v:mem(0x136, FIELD_BOOL) then
+        if v.ai2 == 0 then
+            v.speedY = v.speedY - 0.04
+            if v.speedY <= -1.4 then v.ai2 = 1 end
+        else
+            v.speedY = v.speedY + 0.04
+            if v.speedY >= 1.4 then v.ai2 = 0 end
+        end
+        -- if v.ai3 == 0 then -- idk what this for but it's in source?
+        --     v.speedX = v.speedX - 0.03
+        --     if v.speedX <= -0.6 then v.ai3 = 1 end
+        -- else
+        --     v.speedX = v.speedX + 0.03
+        --     if v.speedX >= 0.6 then v.ai3 = 0 end
+        -- end
+    end
+ 
+    if NPC.config[v.id].uselayerspeed then -- can't be used in conjunction with floats
+        v.speedX, v.speedY = npcutils.getLayerSpeed(v)
+    end
+ 
 end
 
 function realstar.onPostNPCKill(v,reason)
@@ -153,6 +237,8 @@ end
 
 function realstar.onInitAPI()
 	npcManager.registerEvent(npcID,realstar,"onTickNPC")
+	npcManager.registerEvent(npcID,realstar,"onTickEndNPC")
+	npcManager.registerEvent(npcID,realstar,"onDrawNPC")
 	
 	table.insert(realstar.collectableIDList,id)
 	realstar.collectableIDMap[id] = true
