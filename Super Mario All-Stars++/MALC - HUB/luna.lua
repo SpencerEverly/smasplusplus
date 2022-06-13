@@ -309,7 +309,7 @@ littleDialogue.registerAnswer("othercountinfo",{text = "No thanks",addText = "PR
 
 
 littleDialogue.registerAnswer("malcbeginmsg",{text = "Warp me to the Side Quest Levels",addText = "PROCESS ACCEPTED. ENTER THE PIPE TO MEET YOUR SATISFACTION.",chosenFunction = function() triggerEvent("SideQuestWarpOpen") end})
-littleDialogue.registerAnswer("malcbeginmsg",{text = "Warp me to the DLC World",addText = "PROCESS ACCEPTED. ENTER THE PIPE TO MEET YOUR SATISFACTION.",chosenFunction = function() triggerEvent("DLCWarpOpen") end})
+littleDialogue.registerAnswer("malcbeginmsg",{text = "Warp me to the DLC/Extra Game World",addText = "PROCESS ACCEPTED. ENTER THE PIPE TO MEET YOUR SATISFACTION.",chosenFunction = function() triggerEvent("DLCWarpOpen") end})
 littleDialogue.registerAnswer("malcbeginmsg",{text = "Nevermind",addText = "PROCESS ACCEPTED. COME BACK ANYTIME."})
 
 
