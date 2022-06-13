@@ -223,7 +223,6 @@ end
 Graphics.registerCharacterHUD(CHARACTER_WARIO, Graphics.HUD_ITEMBOX, drawHudElements, 
 { 	
 	reserveBox2P = itembox,
-	lives = HUD.lives,
 	stars = HUD.stars,
 })
 

@@ -926,7 +926,9 @@ end
 
 function bowser.onDraw()
 	if(player.character == CHARACTER_BOWSER) then
-		drawHUD();
+		if Graphics.isHudActivated() then
+			drawHUD();
+		end
 		
 		--Update rotating shield positions before drawing them to avoid visual glitchiness when they're inside walls.
 		for k,v in ipairs(shield) do

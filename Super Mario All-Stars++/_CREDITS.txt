@@ -163,6 +163,7 @@ Code for certain parts made by:
 - Blue Stag
 - GtW
 - MegaDood
+- Murphmario
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
