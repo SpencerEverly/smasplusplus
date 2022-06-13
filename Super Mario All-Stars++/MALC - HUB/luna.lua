@@ -204,7 +204,7 @@ function onExit()
 	end
 	if player:mem(0x15E, FIELD_WORD) == 38 and player.forcedState == FORCEDSTATE_INVISIBLE then --Side Quest
 		SaveData.smwMap.playerX = -195616
-		SaveData.smwMap.playerY = -196800
+		SaveData.smwMap.playerY = -196736
 	end
 end
 

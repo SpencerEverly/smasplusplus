@@ -1036,7 +1036,7 @@ local function sideteleport()
 	end
 	playSound("hub_travelactivated.ogg")
 	SaveData.smwMap.playerX = -195616
-	SaveData.smwMap.playerY = -196800
+	SaveData.smwMap.playerY = -196736
 	playSound("world_warp.ogg")
 	pauseplus.canControlMenu = false
 	startFadeOut()
