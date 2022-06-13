@@ -53,6 +53,7 @@ local extraNPCProperties = require("extraNPCProperties")
 --These libraries has some new functions, for simplifying the functions, and other things:
 local smasfunctions = require("smasfunctions")
 local smasverbosemode = require("smasverbosemode")
+local smastables = require("smastables")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
@@ -119,410 +120,6 @@ function classicEvents.doEvents() --To prevent the plObject a nil value error, t
     end
 end
 
---Placing in levels onto a table that'll prevent the loading sound from playing
-local noloadingsounds = {
-	"SMAS - Start.lvlx",
-	"SMAS - Raca's World (Part 0).lvlx",
-	"SMAS - Raca's World (Part 1).lvlx",
-	"map.lvlx"
-}
-
---All SMB1 levels, listed here for many reasons
-GameData._smb1Levels = {
-	"SMB1 - W-1, L-1.lvlx",
-	"SMB1 - W-1, L-2.lvlx",
-	"SMB1 - W-1, L-3.lvlx",
-	"SMB1 - W-1, L-4.lvlx",
-	"SMB1 - W-2, L-1.lvlx",
-	"SMB1 - W-2, L-2.lvlx",
-	"SMB1 - W-2, L-3.lvlx",
-	"SMB1 - W-2, L-4.lvlx",
-	"SMB1 - W-3, L-1.lvlx",
-	"SMB1 - W-3, L-2.lvlx",
-	"SMB1 - W-3, L-3.lvlx",
-	"SMB1 - W-3, L-4.lvlx",
-	"SMB1 - W-4, L-1.lvlx",
-	"SMB1 - W-4, L-2.lvlx",
-	"SMB1 - W-4, L-3.lvlx",
-	"SMB1 - W-4, L-4.lvlx",
-	"SMB1 - W-5, L-1.lvlx",
-	"SMB1 - W-5, L-2.lvlx",
-	"SMB1 - W-5, L-3.lvlx",
-	"SMB1 - W-5, L-4.lvlx",
-	"SMB1 - W-6, L-1.lvlx",
-	"SMB1 - W-6, L-2.lvlx",
-	"SMB1 - W-6, L-3.lvlx",
-	"SMB1 - W-6, L-4.lvlx",
-	"SMB1 - W-7, L-1.lvlx",
-	"SMB1 - W-7, L-2.lvlx",
-	"SMB1 - W-7, L-3.lvlx",
-	"SMB1 - W-7, L-4.lvlx",
-	"SMB1 - W-8, L-1.lvlx",
-	"SMB1 - W-8, L-2.lvlx",
-	"SMB1 - W-8, L-3.lvlx",
-	"SMB1 - W-8, L-4.lvlx",
-	"SMB1 - W-9, L-1.lvlx",
-	"SMB1 - W-9, L-2.lvlx",
-	"SMB1 - W-9, L-3.lvlx",
-	"SMB1 - W-9, L-4.lvlx"
-}
-
---All SMB2 levels, listed here for many reasons
-GameData._smb2Levels = {
-	"SMB2 - W-1, L-1.lvlx",
-	"SMB2 - W-1, L-2.lvlx",
-	"SMB2 - W-1, L-3.lvlx",
-	"SMB2 - W-2, L-1.lvlx",
-	"SMB2 - W-2, L-2.lvlx",
-	"SMB2 - W-2, L-3.lvlx",
-	"SMB2 - W-3, L-1.lvlx",
-	"SMB2 - W-3, L-2.lvlx",
-	"SMB2 - W-3, L-3.lvlx",
-	"SMB2 - W-4, L-1.lvlx",
-	"SMB2 - W-4, L-2.lvlx",
-	"SMB2 - W-4, L-3.lvlx",
-	"SMB2 - W-5, L-1.lvlx",
-	"SMB2 - W-5, L-2.lvlx",
-	"SMB2 - W-5, L-3.lvlx",
-	"SMB2 - W-6, L-1.lvlx",
-	"SMB2 - W-6, L-2.lvlx",
-	"SMB2 - W-6, L-3.lvlx",
-	"SMB2 - W-7, L-1.lvlx",
-	"SMB2 - W-7, L-2.lvlx"
-}
-
---Friendly place table for Mother Brain Rinka
-GameData.friendlyplaces = {
-	"SMAS - Start.lvlx",
-	"map.lvlx",
-	"intro_8bit.lvlx",
-	"intro_bossedit8.lvlx",
-	"intro_jakebrito1.lvlx",
-	"intro_marioforever.lvlx",
-	"intro_S!TS!.lvlx",
-	"intro_scrollingheights.lvlx",
-	"intro_SMAS.lvlx",
-	"intro_SMBX1.0.lvlx",
-	"intro_SMBX1.1.lvlx",
-	"intro_SMBX1.2.lvlx",
-	"intro_SMBX1.3.lvlx",
-	"intro_SMBX1.3og.lvlx",
-	"intro_SMBX2.lvlx",
-	"intro_SMBX2b3.lvlx",
-	"intro_sunsetbeach.lvlx",
-	"intro_WSMBA.lvlx",
-	"MALC - HUB.lvlx",
-	"SMAS - Credits.lvlx",
-	"SMAS - DLC Levels.lvlx",
-	"SMAS - Intro.lvlx",
-	"SMAS - Online (Menu).lvlx",
-	"SMAS - Test Level.lvlx",
-	"SMAS - True Ending.lvlx",
-	"SMAS - World Map Warp.lvlx",
-	"SMB1 - Level Backtrack 1.lvlx",
-	"SMB1 - Level Backtrack 2.lvlx",
-	"SMB1 - Level Backtrack 3.lvlx",
-	"SMB1 - Level Backtrack 4.lvlx",
-	"SMB1 - Level Backtrack 5.lvlx",
-	"SMB1 - Level Backtrack 6.lvlx",
-	"SMB1 - Level Backtrack 7.lvlx",
-	"SMB2 - Ending.lvlx",
-	"SMB2 - Level Backtrack 1.lvlx",
-	"SMB2 - Level Backtrack 2.lvlx",
-	"SMB2 - Level Backtrack 3.lvlx",
-	"SMB2 - Level Backtrack 4.lvlx",
-	"SMB2 - Level Backtrack 5.lvlx",
-	"SMB2 - Level Backtrack 6.lvlx",
-	"SMBLL - Level Backtrack 1.lvlx",
-	"SMBLL - Level Backtrack 2.lvlx",
-	"SMBLL - Level Backtrack 3.lvlx",
-	"SMBLL - Level Backtrack 4.lvlx",
-	"SMBLL - Level Backtrack 5.lvlx",
-	"SMBLL - Level Backtrack 6.lvlx",
-	"SMBLL - Level Backtrack 7.lvlx",
-	"SMBS - Opening.lvlx",
-	"SMW - W-0, L-Green Switch.lvlx",
-	"SMW - W-0, L-Yellow Switch.lvlx",
-	"SMW - W-0, L-Blue Switch.lvlx",
-	"SMAS - Rush Mode Results.lvlx",
-}
-
---Menu table for any costume with troublesome sounds
-GameData.nolevelplaces = {
-	"SMAS - Start.lvlx",
-	"map.lvlx",
-	"intro_8bit.lvlx",
-	"intro_bossedit8.lvlx",
-	"intro_jakebrito1.lvlx",
-	"intro_marioforever.lvlx",
-	"intro_S!TS!.lvlx",
-	"intro_scrollingheights.lvlx",
-	"intro_SMAS.lvlx",
-	"intro_SMBX1.0.lvlx",
-	"intro_SMBX1.1.lvlx",
-	"intro_SMBX1.2.lvlx",
-	"intro_SMBX1.3.lvlx",
-	"intro_SMBX1.3og.lvlx",
-	"intro_SMBX2.lvlx",
-	"intro_SMBX2b3.lvlx",
-	"intro_sunsetbeach.lvlx",
-	"intro_WSMBA.lvlx",
-	"intro_metroidprime2.lvlx",
-	"SMAS - Credits.lvlx",
-	"SMAS - Intro.lvlx",
-	"SMAS - Online (Menu).lvlx",
-	"SMB2 - Ending.lvlx",
-	"SMAS - Rush Mode Results.lvlx",
-}
-
-GameData.notransitionlevels = { --This one will prevent transitions from happening via warpTransition
-	"SMAS - Start.lvlx",
-	"SMAS - Intro.lvlx",
-	"SMAS - Credits.lvlx",
-	"map.lvlx",
-	"SMAS - Raca's World (Part 0).lvlx",
-	"SMAS - Raca's World (Part 1).lvlx",
-	"intro_8bit.lvlx",
-	"intro_bossedit8.lvlx",
-	"intro_circuitcity.lvlx",
-	"intro_jakebrito1.lvlx",
-	"intro_jakebrito2.lvlx",
-	"intro_marioforever.lvlx",
-	"intro_S!TS!.lvlx",
-	"intro_scrollingheights.lvlx",
-	"intro_SMAS.lvlx",
-	"intro_SMBX1.0.lvlx",
-	"intro_SMBX1.1.lvlx",
-	"intro_SMBX1.2.lvlx",
-	"intro_SMBX1.3.lvlx",
-	"intro_SMBX1.3og.lvlx",
-	"intro_SMBX2.lvlx",
-	"intro_SMBX2b3.lvlx",
-	"intro_sunsetbeach.lvlx",
-	"intro_WSMBA.lvlx",
-	"intro_metroidprime2.lvlx",
-}
-
-GameData.classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.
-	"battle_battleshrooms.lvl",
-	"battle_battle-zone.lvl",
-	"battle_classic-castle-battle.lvl",
-	"battle_dry-dry-desert.lvl",
-	"battle_hyrule-temple.lvl",
-	"battle_invasion-battlehammer.lvl",
-	"battle_lakitu-mechazone.lvl",
-	"battle_lethal-lava-level.lvl",
-	"battle_slippy-slap-snowland.lvl",
-	"battle_woody-warzone.lvl",
-	"battle_retroville-underground.lvl",
-	"battle_testlevel.lvlx",
-	"battle_nsmbds1.lvlx",
-	"battle_nsmbds2.lvlx",
-	"battle_nsmbds3.lvlx",
-}
-
-GameData.rushlevelsrng = { --All Rush Mode levels.
-	"SMB1 - W-1, L-1.lvlx",
-	"SMB1 - W-1, L-2.lvlx",
-	"SMB1 - W-1, L-3.lvlx",
-	"SMB1 - W-1, L-4.lvlx",
-	"SMB1 - W-2, L-1.lvlx",
-	"SMB1 - W-2, L-2.lvlx",
-	"SMB1 - W-2, L-3.lvlx",
-	"SMB1 - W-2, L-4.lvlx",
-	"SMB1 - W-3, L-1.lvlx",
-	"SMB1 - W-3, L-2.lvlx",
-	"SMB1 - W-3, L-3.lvlx",
-	"SMB1 - W-3, L-4.lvlx",
-	"SMB1 - W-4, L-1.lvlx",
-	"SMB1 - W-4, L-2.lvlx",
-	"SMB1 - W-4, L-3.lvlx",
-	"SMB1 - W-4, L-4.lvlx",
-	"SMB1 - W-5, L-1.lvlx",
-	"SMB1 - W-5, L-2.lvlx",
-	"SMB1 - W-5, L-3.lvlx",
-	"SMB1 - W-5, L-4.lvlx",
-	"SMB1 - W-6, L-1.lvlx",
-	"SMB1 - W-6, L-2.lvlx",
-	"SMB1 - W-6, L-3.lvlx",
-	"SMB1 - W-6, L-4.lvlx",
-	"SMB1 - W-7, L-1.lvlx",
-	"SMB1 - W-7, L-2.lvlx",
-	"SMB1 - W-7, L-3.lvlx",
-	"SMB1 - W-7, L-4.lvlx",
-	"SMB1 - W-8, L-1.lvlx",
-	"SMB1 - W-8, L-2.lvlx",
-	"SMB1 - W-8, L-3.lvlx",
-	"SMB1 - W-8, L-4.lvlx",
-	"SMB1 - W-9, L-1.lvlx",
-	"SMB1 - W-9, L-2.lvlx",
-	"SMB1 - W-9, L-3.lvlx",
-	"SMB1 - W-9, L-4.lvlx",
-	"SMB2 - W-1, L-1.lvlx",
-	"SMB2 - W-1, L-2.lvlx",
-	"SMB2 - W-1, L-3.lvlx",
-	"SMB2 - W-2, L-1.lvlx",
-	"SMB2 - W-2, L-2.lvlx",
-	"SMB2 - W-2, L-3.lvlx",
-	"SMB2 - W-3, L-1.lvlx",
-	"SMB2 - W-3, L-2.lvlx",
-	"SMB2 - W-3, L-3.lvlx",
-	"SMB2 - W-4, L-1.lvlx",
-	"SMB2 - W-4, L-2.lvlx",
-	"SMB2 - W-4, L-3.lvlx",
-	"SMB2 - W-5, L-1.lvlx",
-	"SMB2 - W-5, L-2.lvlx",
-	"SMB2 - W-5, L-3.lvlx",
-	"SMB2 - W-6, L-1.lvlx",
-	"SMB2 - W-6, L-2.lvlx",
-	"SMB2 - W-6, L-3.lvlx",
-	"SMB2 - W-7, L-1.lvlx",
-	"SMB2 - W-7, L-2.lvlx"
-}
-
-GameData.allBaseGameKillableEnemyIDs = {1,2,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,43,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,86,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,136,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,179,180,189,194,195,199,200,201,203,204,205,206,207,210,229,230,231,232,233,234,235,236,242,243,244,245,247,256,257,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,297,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,323,324,333,334,345,346,347,350,351,352,357,366,368,369,371,372,373,374,375,376,377,379,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,417,431,432,435,437,444,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,518,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,617,618,623,624,667,920,921} --This is a list of all killable enemies for Frisk, and some etc. stuff
-
-GameData.soundNamesInOrder = {
-	"player-jump",
-	"stomped",
-	"block-hit",
-	"block-smash",
-	"player-shrink",
-	"player-grow",
-	"mushroom",
-	"player-died",
-	"shell-hit",
-	"player-slide",
-	"item-dropped",
-	"has-item",
-	"camera-change",
-	"coin",
-	"1up",
-	"lava",
-	"warp",
-	"fireball",
-	"level-win",
-	"boss-beat",
-	"dungeon-win",
-	"bullet-bill",
-	"grab",
-	"spring",
-	"hammer",
-	"slide",
-	"newpath",
-	"level-select",
-	"do",
-	"pause",
-	"key",
-	"pswitch",
-	"tail",
-	"racoon",
-	"boot",
-	"smash",
-	"thwomp",
-	"birdo-spit",
-	"birdo-hit",
-	"smb2-exit",
-	"birdo-beat",
-	"npc-fireball",
-	"fireworks",
-	"bowser-killed",
-	"game-beat",
-	"door",
-	"message",
-	"yoshi",
-	"yoshi-hurt",
-	"yoshi-tongue",
-	"yoshi-egg",
-	"got-star",
-	"zelda-kill",
-	"player-died2",
-	"yoshi-swallow",
-	"ring",
-	"dry-bones",
-	"smw-checkpoint",
-	"dragon-coin",
-	"smw-exit",
-	"smw-blaarg",
-	"wart-bubble",
-	"wart-die",
-	"sm-block-hit",
-	"sm-killed",
-	"sm-glass",
-	"sm-hurt",
-	"sm-boss-hit",
-	"sm-cry",
-	"sm-explosion",
-	"climbing",
-	"swim",
-	"grab2",
-	"smw-saw",
-	"smb2-throw",
-	"smb2-hit",
-	"zelda-stab",
-	"zelda-hurt",
-	"zelda-heart",
-	"zelda-died",
-	"zelda-rupee",
-	"zelda-fire",
-	"zelda-item",
-	"zelda-key",
-	"zelda-shield",
-	"zelda-dash",
-	"zelda-fairy",
-	"zelda-grass",
-	"zelda-hit",
-	"zelda-sword-beam",
-	"bubble",
-	"sprout-vine",
-	"iceball",
-	"yi_freeze",
-	"yi_icebreak",
-	"2up",
-	"3up",
-	"5up",
-	"dragon-coin-get2",
-	"dragon-coin-get3",
-	"dragon-coin-get4",
-	"dragon-coin-get5",
-	"cherry",
-	"explode",
-	"hammerthrow",
-	"combo1",
-	"combo2",
-	"combo3",
-	"combo4",
-	"combo5", --110
-	"combo6", --111
-	"combo7", --112
-	"score-tally",
-	"score-tally-end",
-	"bowser-fire",
-	"boomerang",
-	"smb2-charge",
-	"stopwatch",
-	"whale-spout",
-	"door-reveal",
-	"p-wing",
-	"wand-moving",
-	"wand-whoosh",
-	"hop",
-	"smash-big",
-	"smb2-hitenemy",
-	"boss-fall",
-	"boss-lava",
-	"boss-shrink",
-	"boss-shrink-done",
-	"hp-get",
-	"hp-max",
-	"cape-feather",
-	"cape-fly",
-	"flag-slide",
-	"smb1-clear",
-	"smb2-clear",
-	"smb1-world-clear",
-}
-
 --Now that everything has been loaded, start loading the medium important stuff
 local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 local repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
@@ -582,8 +179,8 @@ end
 if SaveData.totalScoreClassic == nil then --This will add a score counter, cause why not
 	SaveData.totalScoreClassic = 0
 end
-if SaveData.deathquickoption == true then --deathquickoption is unstable, so don't enable it if used before April
-	SaveData.deathquickoption = false
+if SaveData.deathquickoption == true or SaveData.deathquickoption == false then --deathquickoption is unstable, so don't enable it if used before April
+	SaveData.deathquickoption = nil
 end
 if SaveData.disableX2char == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
 	SaveData.disableX2char = false
@@ -657,23 +254,15 @@ function onStart() --Now do onStart...
 	if SaveData.dateplayedweather == nil then
 		SaveData.dateplayedweather = weatherControl
 	end
-	if SaveData.dateplayedmonth == nil then
-		SaveData.dateplayedmonth = os.date("%m")
-	end
-	if SaveData.dateplayedday == nil then
-		SaveData.dateplayedday = os.date("%d")
-	end
 	--Calculate Easter Sunday
 	osEaster(os.date("*t").year)
 	if SaveData.dateplayedyesterday == nil then
 		yesterdaynumber = os.date("*t").day - 1
-		yesterdaystring = tostring(yesterdaynumber)
-		SaveData.dateplayedyesterday = yesterdaystring
+		SaveData.dateplayedyesterday = yesterdaynumber
 	end
 	if SaveData.dateplayedtomorrow == nil then
 		tomorrownumber = os.date("*t").day + 1
-		tomorrowstring = tostring(tomorrownumber)
-		SaveData.dateplayedtomorrow = tomorrowstring
+		SaveData.dateplayedtomorrow = tomorrownumber
 	end
 	if GameData.weatherset == true then --This'll be better in the future. For now, it just loads the weather when restarting the game to the start preboot screen, or starting it up every time
 		possibleWeather = {"sunny","rain","snow"}
@@ -688,13 +277,19 @@ function onStart() --Now do onStart...
 			loadactivate = false
 		end
 	end
+	if SaveData.dateplayedmonth == nil then
+		SaveData.dateplayedmonth = os.date("%m")
+	end
+	if SaveData.dateplayedday == nil then
+		SaveData.dateplayedday = os.date("%d")
+	end
+	if SaveData.dateplayedyear == nil then
+		SaveData.dateplayedyear = os.date("%Y")
+	end
 	SaveData.dateplayedday = os.date("%d")
 	SaveData.dateplayedmonth = os.date("%m")
 	tomorrowget()
 	yesterdayget()
-	if SaveData.dateplayedyear == nil then
-		SaveData.dateplayedyear = os.date("%Y")
-	end
 	SaveData.dateplayedyear = os.date("%Y")
 	if SaveData.disableX2char == 0 then --Migrate old saves from pre-March 2022 if there are any.
 		SaveData.disableX2char = false
@@ -713,14 +308,12 @@ end
 
 function tomorrowget()
 	tomorrownumber = os.date("*t").day + 1
-	tomorrowstring = tostring(tomorrownumber)
-	SaveData.dateplayedtomorrow = tomorrowstring
+	SaveData.dateplayedtomorrow = tomorrownumber
 end
 
 function yesterdayget()
 	yesterdaynumber = os.date("*t").day - 1
-	yesterdaystring = tostring(yesterdaynumber)
-	SaveData.dateplayedyesterday = yesterdaystring
+	SaveData.dateplayedyesterday = yesterdaynumber
 end
 
 local stardoor = Graphics.loadImageResolved("starlock.png")

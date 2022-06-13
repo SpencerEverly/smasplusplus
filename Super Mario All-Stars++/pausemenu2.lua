@@ -16,9 +16,6 @@ local exitFadeActiveDone = false
 local exitFadeOut = 0
 local cooldown = 0
 
-if SaveData.deathquickoption == nil then
-	SaveData.deathquickoption = false
-end
 if SaveData.toggleCostumeAbilities == nil then
 	SaveData.toggleCostumeAbilities = true
 end
@@ -83,12 +80,6 @@ local costumenames = {
 
 function pausemenu2.onTick()
 	
-end
-
-function pausemenu2.onPlayerKill()
-	if SaveData.deathquickoption == true then
-		SFX.play(rooms.deathSoundEffect)
-	end
 end
 
 local function smb1hardmodetoggle()

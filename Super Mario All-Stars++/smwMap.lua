@@ -47,9 +47,6 @@ end
 if SaveData.totalScoreClassic == nil then
 	SaveData.totalScoreClassic = 0
 end
-if SaveData.deathquickoption == true then
-	SaveData.deathquickoption = false
-end
 
 -- Name of the level file that the map is on.
 smwMap.levelFilename = "map.lvlx"

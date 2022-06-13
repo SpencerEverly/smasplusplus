@@ -172,9 +172,7 @@ function costume.onTick()
 		if(not killed and player:mem(0x13E,FIELD_BOOL)) then
             killed = true
 			Audio.SfxStop(-1)
-			if SaveData.deathquickoption == nil or SaveData.deathquickoption == false then
-				Routine.run(dyinganimation)
-			end
+			Routine.run(dyinganimation)
 		end
 		
 		--Jumps
