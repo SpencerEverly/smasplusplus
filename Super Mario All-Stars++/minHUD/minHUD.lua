@@ -196,7 +196,9 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
     end
 end
 
-Graphics.overrideHUD(minHUD.drawHUD)
+if Graphics.isHudActivated() then
+	Graphics.overrideHUD(minHUD.drawHUD)
+end
 
 -- Track if the player is dying during a level exit
 function minHUD.onExitLevel() 

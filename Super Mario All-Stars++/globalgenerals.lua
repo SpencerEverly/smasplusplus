@@ -821,8 +821,8 @@ function globalgenerals.onTick()
 	end
 	if currentCostume == "SONIC" then
 		littleDialogue.characterNames[4] = "Sonic"
-		mega2.sfxFile = Misc.resolveSoundFile("costumes/toad/Sonic/starman")
-		starman.sfxFile = Misc.resolveSoundFile("costumes/toad/Sonic/starman")
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom.ogg")
+		starman.sfxFile = Misc.resolveSoundFile("starman/starman_sonic")
 		starman.duration[996] = 1282
 		starman.duration[994] = 1282
 		warpTransition.doorclose = ("sound/door-close.ogg")

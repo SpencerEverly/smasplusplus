@@ -65,6 +65,7 @@ local pfpimage = false
 
 local cooldown = 0
 
+Graphics.activateHud(false)
 HUDOverride.visible.keys = false
 HUDOverride.visible.itembox = false
 HUDOverride.visible.bombs = false
