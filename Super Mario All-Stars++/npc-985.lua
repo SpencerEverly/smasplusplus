@@ -90,7 +90,6 @@ end
 
 function starget()
 	Misc.npcToCoins()
-	SFX.play(extrasounds.id[14])
 	GameData.winStateActive = true
 	playervuln = true
 	playerwon = true
