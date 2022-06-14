@@ -566,6 +566,14 @@ function scoreCountWithZeroes() --Returns the score count with zeroes.
 	end
 end
 
+function scoreCount13() --Returns the score count limited within 1.3 Mode's digit numbers.
+	if SaveData.totalScoreClassic <= 9999999 then
+		return SaveData.totalScoreClassic
+	elseif SaveData.totalScoreClassic >= 9999999 then
+		return 9999999
+	end
+end
+
 -----------------------
 --Date/Time Functions
 -----------------------
