@@ -1,7 +1,7 @@
 local smastables = {}
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
-local noloadingsounds = {
+GameData.noloadingsoundlevels = {
 	"SMAS - Start.lvlx",
 	"SMAS - Raca's World (Part 0).lvlx",
 	"SMAS - Raca's World (Part 1).lvlx",

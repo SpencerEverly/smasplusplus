@@ -8,8 +8,8 @@ local blockManager = require("blockManager")
 local blockutils = require("blocks/blockutils")
 
 --Locals for the Bonus Block
-local oldCoins = mem(0x00B2C5A8,FIELD_WORD)
-local oldLives = mem(0x00B2C5AC,FIELD_FLOAT)
+local oldCoins = SaveData.totalCoinsClassic
+local oldLives = SaveData.totalLives
 local levelCoins = 0
 
 --Create the library table
@@ -43,14 +43,14 @@ function bonusBlock.onTickBlock(v)
 	data.bonusNPC = data._settings.bonusNPC or 0
 	data.coinGoal = data._settings.coinGoal or 0
 
-    if mem(0x00B2C5A8,FIELD_WORD) > oldCoins then
-        levelCoins = levelCoins + (mem(0x00B2C5A8,FIELD_WORD) - oldCoins)
-    elseif mem(0x00B2C5AC,FIELD_FLOAT) > oldLives then
-       levelCoins = levelCoins + mem(0x00B2C5A8,FIELD_WORD) + 1
+    if SaveData.totalCoinsClassic > oldCoins then
+        levelCoins = levelCoins + (SaveData.totalCoinsClassic - oldCoins)
+    elseif SaveData.totalLives > oldLives then
+       levelCoins = levelCoins + SaveData.totalCoinsClassic + 1
     end
 
-    oldCoins = mem(0x00B2C5A8,FIELD_WORD)
-    oldLives = mem(0x00B2C5AC,FIELD_FLOAT)
+    oldCoins = SaveData.totalCoinsClassic
+    oldLives = SaveData.totalLives
 end
 
 -- Defines what happens right after the block is hit.

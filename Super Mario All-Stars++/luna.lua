@@ -6,7 +6,7 @@
 --SMB1 = 43 (Done!)
 --SMB2 = 22 (Done! Still need code for several things though)
 --SMB3 = TBD (WIP)
---SMBLL (Optional) = 52 (Done! Still need code for several things though)
+--SMBLL (Optional) = 52 (Done!)
 --SMW = TBD (WIP)
 --SMBS = TBD (WIP)
 --Lava Lands = 5 (WIP)
@@ -49,11 +49,11 @@ local classicEvents = require("classiceventsmod")
 local EventManager = require("main_events_mod")
 local extrasounds = require("extrasounds")
 local extraNPCProperties = require("extraNPCProperties")
+local smastables = require("smastables")
 
 --These libraries has some new functions, for simplifying the functions, and other things:
 local smasfunctions = require("smasfunctions")
 local smasverbosemode = require("smasverbosemode")
-local smastables = require("smastables")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
@@ -124,17 +124,18 @@ end
 local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 local repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
 local rng = require("base/rng") --Load up rng for etc. things
-local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi
+local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
 local smascheats = require("smascheats") --To enable edited cheats and some new ones
 if SaveData.speedrunMode == true then
 	speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
-	require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
+	inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
 end
 
 local loadactivate = true
 local steve = require("steve")
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 local yoshi = require("yiYoshi/yiYoshi")
+--These will need to be overwritten over the original libraries, because we're fixing graphics/bugs from these characters.
 playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
 playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
 playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
@@ -179,7 +180,7 @@ end
 if SaveData.totalCoinsClassic == nil then --This will display a classic coin count for the episode
 	SaveData.totalCoinsClassic = 0
 end
-if SaveData.totalScoreClassic == nil then --This will add a score counter, cause why not
+if SaveData.totalScoreClassic == nil then --This will add a score counter which goes up to a billion, cause why not
 	SaveData.totalScoreClassic = 0
 end
 if SaveData.deathquickoption == true or SaveData.deathquickoption == false then --deathquickoption is unstable, so don't enable it if used before April
@@ -188,6 +189,15 @@ end
 if SaveData.disableX2char == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
 	SaveData.disableX2char = false
 end
+if SaveData.dateplayedmonth == nil then
+	SaveData.dateplayedmonth = os.date("%m")
+end
+if SaveData.dateplayedday == nil then
+	SaveData.dateplayedday = os.date("%d")
+end
+if SaveData.dateplayedyear == nil then
+	SaveData.dateplayedyear = os.date("%Y")
+end
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 if SaveData.playerName == nil then
@@ -195,6 +205,11 @@ if SaveData.playerName == nil then
 else
 	Progress.savename = SaveData.playerName --Or else just use the SaveData variable if it exists
 end
+
+--Get some day/month/year stuff for the weather changing...
+SaveData.dateplayedday = os.date("%d")
+SaveData.dateplayedmonth = os.date("%m")
+SaveData.dateplayedyear = os.date("%Y")
 
 --Make sure the warp door system doesn't get active until onStart saves the original count first...
 local warpstaractive = false
@@ -224,7 +239,7 @@ end
 local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
-local noloadingsounds = {
+GameData.noloadingsoundlevels = {
 	"SMAS - Start.lvlx",
 	"SMAS - Raca's World (Part 0).lvlx",
 	"SMAS - Raca's World (Part 1).lvlx",
@@ -233,7 +248,7 @@ local noloadingsounds = {
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-	if not Misc.inEditor() and not table.icontains(noloadingsounds,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+	if not Misc.inEditor() and not table.icontains(GameData.noloadingsoundlevels,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
@@ -259,7 +274,6 @@ function onStart() --Now do onStart...
 		Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
 		Misc.exitEngine()
 	end
-	--loadSaveSlot(Misc.saveSlot()) --This will load the save slot twice, to check to make sure it's been properly loaded
 	Routine.run(warpDoorBegin) --This will run the routine to save the original count and to start the system from there
 	--Do the weather SaveData additions
 	if SaveData.dateplayedweather == nil then
@@ -281,27 +295,15 @@ function onStart() --Now do onStart...
 		SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
 		GameData.weatherset = false
 	end
-	if not Misc.inEditor() and not table.icontains(noloadingsounds,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
+	if not Misc.inEditor() and not table.icontains(GameData.noloadingsoundlevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
 		fadetolevel = false
 		if loadactivate == true then
 			loadingSoundObject:FadeOut(800)
 			loadactivate = false
 		end
 	end
-	if SaveData.dateplayedmonth == nil then
-		SaveData.dateplayedmonth = os.date("%m")
-	end
-	if SaveData.dateplayedday == nil then
-		SaveData.dateplayedday = os.date("%d")
-	end
-	if SaveData.dateplayedyear == nil then
-		SaveData.dateplayedyear = os.date("%Y")
-	end
-	SaveData.dateplayedday = os.date("%d")
-	SaveData.dateplayedmonth = os.date("%m")
 	tomorrowget()
 	yesterdayget()
-	SaveData.dateplayedyear = os.date("%Y")
 	if SaveData.disableX2char == 0 then --Migrate old saves from pre-March 2022 if there are any.
 		SaveData.disableX2char = false
 	end
@@ -330,9 +332,9 @@ end
 local stardoor = Graphics.loadImageResolved("starlock.png")
 local cameratimer = 10
 local cameratimer2 = 10
-local startGif = false
-local endGif = true
-local gifIsRecording = false
+GameData.__startGif = false
+GameData.__endGif = true
+GameData.__gifIsRecording = false
 
 local inputhudbg = Graphics.loadImage(Misc.resolveFile("inputhud/inputhud.png"))
 local controlkey = Graphics.loadImage(Misc.resolveFile("inputhud/control.png"))
@@ -352,8 +354,8 @@ function onDraw()
 	if noItemSound then
 		Audio.sounds[12].muted = true
 		cameratimer = cameratimer - 1
-		startGif = false
-		endGif = true
+		GameData.__startGif = false
+		GameData.__endGif = true
 		if cameratimer <= 0 then
 			cameratimer = 10
 			Audio.sounds[12].muted = false
@@ -364,9 +366,9 @@ function onDraw()
 		Audio.sounds[12].muted = true
 		Audio.sounds[24].muted = true
 		cameratimer = cameratimer - 1
-		startGif = false
-		endGif = true
-		gifIsRecording = true
+		GameData.__startGif = false
+		GameData.__endGif = true
+		GameData.__gifIsRecording = true
 		if cameratimer <= 0 then
 			cameratimer = 10
 			Audio.sounds[12].muted = false
@@ -374,7 +376,7 @@ function onDraw()
 			noItemSoundGif = false
 		end
 	end
-	if gifIsRecording then
+	if GameData.__gifIsRecording then
 		
 	end
 	if SaveData.speedrunMode == true then
@@ -412,16 +414,16 @@ function onDraw()
 	end
 end
 
-local startGif = false
+GameData.__startGif = false
 
 function onKeyboardPressDirect(k) --This will replace the GIF recording/snapshot sounds to some custom ones
 	if k == VK_F11 then
 		Audio.sounds[12].muted = true
 		Audio.sounds[24].muted = true
 		noSoundGif = true
-		if not gifIsRecording then
+		if not GameData.__gifIsRecording then
 			playSound("gif-start.ogg")
-		elseif gifIsRecording then
+		elseif GameData.__gifIsRecording then
 			playSound("gif-end.ogg")
 		end
 	end

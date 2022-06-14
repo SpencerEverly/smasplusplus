@@ -3,6 +3,7 @@ local bigSwitch = {}
 local npcManager = require("npcManager")
 local particles = require("particles")
 local switchcolors = require("switchcolors")
+local extrasounds = require("extrasounds")
 
 local pSwitched = false
 
@@ -237,10 +238,10 @@ function bigSwitch.onTick()
 			Defines.earthquake = 25
 			if settings.exitlevel then
 				Level.winState(7)
-				GameData.muteMusic = true
 				Defines.player_walkspeed = 0
 				Defines.player_runspeed = 0 --link
 				player.speedX = 0
+				SFX.play(22)
 				SFX.play(60)
 				if settings.save then
 					PressData[settings.color] = true
@@ -248,6 +249,9 @@ function bigSwitch.onTick()
 			else
 				SFX.play(32)
 			end
+		end
+		if pressed then
+			GameData.muteMusic = true
 		end
 	end
 end
