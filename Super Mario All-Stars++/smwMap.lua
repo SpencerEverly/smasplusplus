@@ -1028,9 +1028,9 @@ end
 
 
 function smwMap.onStart()
-	if not GameData.menucomplete then
-		Level.load("SMAS - Start.lvlx")
-	end
+	--if not GameData.menucomplete then
+		--Level.load("SMAS - Start.lvlx")
+	--end
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
         p.forcedTimer = 0

@@ -91,11 +91,6 @@ function dependencies.onStart()
 		warpTransition.TRANSITION_IRIS_OUT = 1
 		warpTransition.TRANSITION_PAN = 6
 		littleDialogue.defaultStyleName = "smw"
-		if currentCostume == nil then
-			if SaveData.disableX2char == false then
-				warpTransition.doorclose = ("_OST/_Sound Effects/door-close.ogg")
-			end
-		end
 	end
 	if SaveData.disableX2char == true then
 		Cheats.deregister("dressmeup")

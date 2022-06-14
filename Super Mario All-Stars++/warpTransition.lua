@@ -8,10 +8,11 @@
 ]]
 
 local playerManager = require("playerManager")
+local extrasounds = require("extrasounds")
 
 local warpTransition = {}
 
-warpTransition.doorclose = ("sound/door-close.ogg")
+warpTransition.doorclose = extrasounds.id[148]
 
 warpTransition.currentTransitionType = nil
 warpTransition.transitionTimer = 0
@@ -64,7 +65,7 @@ do
     local function doorTransitionEffects()
         if warpTransition.currentWarp.isValid and warpTransition.currentWarp.warpType == 2 then
             player.frame = 1
-			SFX.play(warpTransition.doorclose)
+			playSound(148)
         end
     end
     function warpTransition.stopTransition()
