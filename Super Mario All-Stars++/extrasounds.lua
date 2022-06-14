@@ -168,6 +168,7 @@ extrasounds.id[143] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-countdown-lo
 extrasounds.id[144] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-countdown-end.ogg")) --Goaltape, End (SMW)
 extrasounds.id[145] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-irisout.ogg")) --Goaltape, Iris Out (SMW)
 extrasounds.id[146] = Audio.SfxOpen(Misc.resolveSoundFile("smw-exit-orb.ogg")) --SMW Orb Exit
+extrasounds.id[147] = Audio.SfxOpen(Misc.resolveSoundFile("ace-coins-5.ogg")) --SMA All Ace Coins Collected
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker

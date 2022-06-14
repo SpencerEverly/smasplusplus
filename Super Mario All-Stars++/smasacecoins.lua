@@ -7,17 +7,9 @@ function smasacecoins.onInitAPI()
 end
 
 function smasacecoins.onTick()
-	local characters = {}
-	
-	local character = player.character;
-	local costumes = playerManager.getCostumes(player.character)
-	local currentCostume = player:getCostume()
-
-	local costumes
-	
 	if table.icontains(GameData._smb2Levels,Level.filename()) == true then
 		if NPC.config[274].score == 11 then
-			SFX.play("ace-coins-5.ogg")
+			playSound(147)
 			NPC.config[274].score = 6
 		end
 	elseif Level.filename() then
