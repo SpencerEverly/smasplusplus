@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario World\: Iggy's Castle (World 1)";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario World\: Iggy's Castle (World 1)";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-195680;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Castle.spc|0\;g=2.5";BG:42;
@@ -3900,7 +3900,6 @@ ID:6;X:-159584;Y:-160128;
 ID:32;X:-159776;Y:-160128;
 BGO_END
 NPC
-ID:168;X:-159497;Y:-160160;D:-1;ED:"Boss Dead";
 ID:33;X:-199292;Y:-200192;D:-1;
 ID:33;X:-199260;Y:-200192;D:-1;
 ID:33;X:-199228;Y:-200192;D:-1;
@@ -3960,6 +3959,7 @@ ID:799;X:-178176;Y:-180096;D:1;XTRA:"{\n    \"Xspeed\"\: 2\n}\n";
 ID:799;X:-178176;Y:-180096;D:1;
 ID:799;X:-178176;Y:-180096;D:-1;
 ID:784;X:-179632;Y:-180656;D:-1;
+ID:810;X:-159488;Y:-160160;D:-1;ED:"Boss Dead";
 NPC_END
 DOORS
 IX:-195840;IY:-200160;OX:-179904;OY:-180128;DT:2;ID:1;OD:1;

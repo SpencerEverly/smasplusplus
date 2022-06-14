@@ -1,5 +1,5 @@
 local blockmanager = require("blockmanager")
-local costumeblock = require("ai/costumeblock")
+local costumeblock = require("ai_smas/costumeblock")
 
 local blockID = BLOCK_ID
 
