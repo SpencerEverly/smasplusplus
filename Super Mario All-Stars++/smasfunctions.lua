@@ -19,6 +19,9 @@
 --extrasounds support.
 --_ loadSoundOnly('path/to/file.extension'): Loads a sound only, and doesn't play
 --it back.
+--_ resolveCostumeSound(sound): Used for switching costume sounds throughout when
+--wearing a costume.
+--_ loadCostumeSounds(): Used to load up the sounds for the costume.
 --_ changeMusic('path/to/file.extension', section ID): Changes the music to a
 --specified path. If using -1 as the section ID, all sections will be counted.
 --_ muteMusic(section ID): Mute the music to a specified section. The music before
@@ -79,8 +82,6 @@
 --functions with the player without the fangled 'if Player(2) and Player(2).isValid'
 --mess. Useful for running commands on things like all players (-1), or just one of
 --them.
---_ resolveCostumeSound(sound): Used for switching costume sounds throughout when
---wearing a costume.
 --_ activate1stPlayer(): If in 2nd Player Mode and greater, this will revert to 1st
 --Player.
 --_ activate2ndPlayer(): This activates 2 player mode.
@@ -136,6 +137,9 @@ local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 
+local costumes = playerManager.getCostumes(player.character)
+local currentCostume = player:getCostume()
+
 --This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.
 _G.Player = Player
 _G.player = Player(1)
@@ -157,9 +161,165 @@ local activatejump = false
 local threeplayermode = false
 local fourplayermode = false
 
+local extrasoundsNumbersInOrder = table.map{4,7,8,14,15,18,39,42,43,59,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146}
+
+local soundNamesInOrder = {
+	"player-jump",
+	"stomped",
+	"block-hit",
+	"block-smash",
+	"player-shrink",
+	"player-grow",
+	"mushroom",
+	"player-died",
+	"shell-hit",
+	"player-slide",
+	"item-dropped",
+	"has-item",
+	"camera-change",
+	"coin",
+	"1up",
+	"lava",
+	"warp",
+	"fireball",
+	"level-win",
+	"boss-beat",
+	"dungeon-win",
+	"bullet-bill",
+	"grab",
+	"spring",
+	"hammer",
+	"slide",
+	"newpath",
+	"level-select",
+	"do",
+	"pause",
+	"key",
+	"pswitch",
+	"tail",
+	"racoon",
+	"boot",
+	"smash",
+	"thwomp",
+	"birdo-spit",
+	"birdo-hit",
+	"smb2-exit",
+	"birdo-beat",
+	"npc-fireball",
+	"fireworks",
+	"bowser-killed",
+	"game-beat",
+	"door",
+	"message",
+	"yoshi",
+	"yoshi-hurt",
+	"yoshi-tongue",
+	"yoshi-egg",
+	"got-star",
+	"zelda-kill",
+	"player-died2",
+	"yoshi-swallow",
+	"ring",
+	"dry-bones",
+	"smw-checkpoint",
+	"dragon-coin",
+	"smw-exit",
+	"smw-blaarg",
+	"wart-bubble",
+	"wart-die",
+	"sm-block-hit",
+	"sm-killed",
+	"sm-glass",
+	"sm-hurt",
+	"sm-boss-hit",
+	"sm-cry",
+	"sm-explosion",
+	"climbing",
+	"swim",
+	"grab2",
+	"smw-saw",
+	"smb2-throw",
+	"smb2-hit",
+	"zelda-stab",
+	"zelda-hurt",
+	"zelda-heart",
+	"zelda-died",
+	"zelda-rupee",
+	"zelda-fire",
+	"zelda-item",
+	"zelda-key",
+	"zelda-shield",
+	"zelda-dash",
+	"zelda-fairy",
+	"zelda-grass",
+	"zelda-hit",
+	"zelda-sword-beam",
+	"bubble",
+	"sprout-vine",
+	"iceball",
+	"yi_freeze",
+	"yi_icebreak",
+	"2up",
+	"3up",
+	"5up",
+	"dragon-coin-get2",
+	"dragon-coin-get3",
+	"dragon-coin-get4",
+	"dragon-coin-get5",
+	"cherry",
+	"explode",
+	"hammerthrow",
+	"combo1",
+	"combo2",
+	"combo3",
+	"combo4",
+	"combo5", --110
+	"combo6", --111
+	"combo7", --112
+	"score-tally",
+	"score-tally-end",
+	"bowser-fire",
+	"boomerang",
+	"smb2-charge",
+	"stopwatch",
+	"whale-spout",
+	"door-reveal",
+	"p-wing",
+	"wand-moving",
+	"wand-whoosh",
+	"hop",
+	"smash-big",
+	"smb2-hitenemy",
+	"boss-fall",
+	"boss-lava",
+	"boss-shrink",
+	"boss-shrink-done",
+	"hp-get",
+	"hp-max",
+	"cape-feather",
+	"cape-fly",
+	"flag-slide",
+	"smb1-clear",
+	"smb2-clear",
+	"smb1-world-clear",
+	"smb1-underground-overworld",
+	"smb1-underground-desert",
+	"smb1-underground-sky",
+	"goaltape-countdown-start",
+	"goaltape-countdown-loop",
+	"goaltape-countdown-end",
+	"goaltape-irisout",
+	"smw-exit-orb",
+}
+
 function smasfunctions.onInitAPI()
 	registerEvent(smasfunctions,"onDraw")
 	registerEvent(smasfunctions,"onInputUpdate")
+	registerEvent(smasfunctions,"onStart")
+end
+
+function smasfunctions.onStart()
+	loadCostumeSounds()
 end
 
 function smasfunctions.onInputUpdate()
@@ -314,6 +474,31 @@ end
 
 function loadSoundOnly(name) --Opening external sounds, but doesn't play them.
 	local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+end
+
+function resolveCostumeSound(name) --Resolve a sound for a costume being worn.
+	local currentCostume = player:getCostume()
+	if currentCostume == nil then
+		local sound = Misc.resolveSoundFile(name)
+	else
+		local sound = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. currentCostume .. "/" .. name)
+	end
+	if sound == nil then
+		-- sound could not be found
+		return nil
+	end
+	return Audio.SfxOpen(sound)
+end
+
+function loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
+	local currentCostume = player:getCostume()
+	for k,v in ipairs(GameData.soundNamesInOrder) do
+		if GameData.extrasoundsNumbersInOrder[k] then
+			extrasounds.id[k] = resolveCostumeSound(v)
+		else
+			Audio.sounds[k].sfx = resolveCostumeSound(v)
+		end
+	end
 end
 
 function changeMusic(name, sectionid) --Music changing is now a LOT easier
@@ -510,13 +695,17 @@ function maxOutStars() --This maxs the star count to 9999
 	SaveData.totalStarCount = 9999
 end
 
-function clearAllStars() --This clears all the stars, and even the level table
+function clearAllStars() --This clears all the stars, and even all the level tables
 	playSound(67)
 	SaveData.totalStarCount = 0
 	for k in pairs(SaveData.completeLevels) do
 		SaveData.completeLevels[k] = nil
 	end
+	for k in pairs(SaveData.completeLevelsOptional) do
+		SaveData.completeLevelsOptional[k] = nil
+	end
 	SaveData.completeLevels = {}
+	SaveData.completeLevelsOptional = {}
 end
 
 function manageStars(arg1, arg2) --arg1 = Number of stars, arg2 = To add or subtract them

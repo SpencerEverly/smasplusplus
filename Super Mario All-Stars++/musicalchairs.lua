@@ -39,7 +39,7 @@ end
 
 function musicalchairs.switcher()
 	started = false
-	Routine.wait(0.1, true)
+	Routine.wait(0, true)
 	for i = 0,20 do
 		songname = GameData.levelMusic[i]
 		Section(i).music = songname
@@ -129,7 +129,7 @@ function musicalchairs.onDraw()
 				elseif section.musicPath == "_OST/Super Mario Bros 2/Jar.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros. X (1.3)/smb2-jar.mp3"
 				elseif section.musicPath == "_OST/Super Mario Bros 2/Before Boss.spc|0;g=2.5" then
-					section.musicPath = "_OST/Super Mario All-Stars++ (Beta)/BeforeBossSMB2.ogg"
+					section.musicPath = "_OST/Super Mario Bros. X (1.3)/smb2-beforeboss.mp3"
 				elseif section.musicPath == "_OST/Super Mario Bros 2/Boss.spc|0;g=2.5" then
 					section.musicPath = "_OST/Super Mario Bros. X (1.3)/smb2-boss.mp3"
 				elseif section.music == 15 then
