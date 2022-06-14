@@ -198,7 +198,7 @@ function undertaledepends.onTick(k,v)
 		stats.xpDrop(920, 2) --NPCID, reward
 		stats.registerNPC(921, 2, 3, 2) --NPCid, pow, def, xpdrop
 		stats.xpDrop(921, 2) --NPCID, reward
-		if #NPC.get(GameData.allBaseGameKillableEnemyIDs) == 0 and table.icontains(GameData._friendlyPlaces,Level.filename()) == false then
+		if #NPC.get(smastables.allBaseGameKillableEnemyIDs) == 0 and table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
 			Routine.run(delayedMusicChange, killedNPC)
 		end
 	elseif currentCostume then

@@ -44,16 +44,16 @@ end
 GameData.levelMusicTemporary = {}
 GameData.levelMusic = {}
 GameData.warpStarDoorCount = {}
-local smwMap = require("smwMap")
-local classicEvents = require("classiceventsmod")
-local EventManager = require("main_events_mod")
-local extrasounds = require("extrasounds")
-local extraNPCProperties = require("extraNPCProperties")
-local smastables = require("smastables")
+_G.smwMap = require("smwMap")
+_G.extrasounds = require("extrasounds")
+_G.smastables = require("smastables")
+_G.classicEvents = require("classiceventsmod")
+_G.EventManager = require("main_events_mod")
+_G.extraNPCProperties = require("extraNPCProperties")
 
 --These libraries has some new functions, for simplifying the functions, and other things:
-local smasfunctions = require("smasfunctions")
-local smasverbosemode = require("smasverbosemode")
+_G.smasfunctions = require("smasfunctions")
+_G.smasverbosemode = require("smasverbosemode")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
@@ -239,7 +239,7 @@ end
 local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
-GameData._noLoadingSoundLevels = {
+smastables._noLoadingSoundLevels = {
 	"SMAS - Start.lvlx",
 	"SMAS - Raca's World (Part 0).lvlx",
 	"SMAS - Raca's World (Part 1).lvlx",
@@ -248,7 +248,7 @@ GameData._noLoadingSoundLevels = {
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-	if not Misc.inEditor() and not table.icontains(GameData._noLoadingSoundLevels,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+	if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
@@ -295,7 +295,7 @@ function onStart() --Now do onStart...
 		SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
 		GameData.weatherset = false
 	end
-	if not Misc.inEditor() and not table.icontains(GameData._noLoadingSoundLevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
+	if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
 		fadetolevel = false
 		if loadactivate == true then
 			loadingSoundObject:FadeOut(800)
@@ -441,7 +441,7 @@ function onTick() --This will prevent split screen, again (Just in case)
 			mem(0x00B2C5AC,FIELD_FLOAT,3)
 		end
 	end
-	if table.icontains(GameData._friendlyPlaces,Level.filename()) == true then
+	if table.icontains(smastables._friendlyPlaces,Level.filename()) == true then
 		GameData.friendlyArea = true --Set this to prevent Mother Brain Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end
 	--Now we'll overhaul the door star required system

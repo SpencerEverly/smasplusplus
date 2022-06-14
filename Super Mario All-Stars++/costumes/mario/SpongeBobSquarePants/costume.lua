@@ -155,11 +155,11 @@ function costume.onTick(repeated)
 					plr:setFrame(27)
 					timer2 = timer2 - 1
 					if timer2 == 4 then
-						if table.icontains(GameData._noLevelPlaces,Level.filename()) == false then
+						if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
 							SFX.play(flybeginsound, 1, 1, 10)
 						end
 					elseif timer2 <= 3 then
-						if table.icontains(GameData._noLevelPlaces,Level.filename()) == false then
+						if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
 							if flybeginsound.playing then
 								flybeginsound:stop()
 							end
@@ -176,7 +176,7 @@ function costume.onTick(repeated)
 		elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not isPlayerUnderwater() then
 			hasJumped = true
 			player:mem(0x11C, FIELD_WORD, 16)
-			if table.icontains(GameData._noLevelPlaces,Level.filename()) == false then
+			if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
 				playSound("mario/SpongeBobSquarePants/player-jump-twice.ogg")
 			end
 		end

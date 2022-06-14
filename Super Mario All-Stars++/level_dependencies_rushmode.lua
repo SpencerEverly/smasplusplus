@@ -4,7 +4,7 @@ local rushmode = {}
 
 local texttimer1 = false
 local gotext = false
-local selecter2 = rng.randomInt(1,#GameData.__allMandatoryLevels)
+local selecter2 = rng.randomInt(1,#smastables.__allMandatoryLevels)
 
 function rushmode.onInitAPI()
 	registerEvent(rushmode,"onStart")
@@ -31,16 +31,16 @@ function startCountdown()
 end
 
 function rushmode.onStart()
-	if table.icontains(GameData.__smb1Levels,Level.filename()) then
+	if table.icontains(smastables.__smb1Levels,Level.filename()) then
 		Timer.activate(100)
 	elseif Level.filename() == "SMB1 - W-8, L-4.lvlx" then
 		Timer.activate(220)
-	elseif table.icontains(GameData.__smb2Levels,Level.filename()) then
+	elseif table.icontains(smastables.__smb2Levels,Level.filename()) then
 		Timer.activate(400)
 	elseif Level.filename() == "SMB2 - W-7, L-2.lvlx" then
 		Timer.activate(550)
 	end
-	if table.icontains(GameData.__smb1Levels,Level.filename()) or table.icontains(GameData.__smb2Levels,Level.filename()) then
+	if table.icontains(smastables.__smb1Levels,Level.filename()) or table.icontains(smastables.__smb2Levels,Level.filename()) then
 		Routine.run(startCountdown)
 	end
 	GameData.rushModeWon = false

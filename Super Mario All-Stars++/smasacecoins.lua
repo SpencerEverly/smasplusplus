@@ -7,7 +7,7 @@ function smasacecoins.onInitAPI()
 end
 
 function smasacecoins.onTick()
-	if table.icontains(GameData.__smb2Levels,Level.filename()) == true then
+	if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
 		if NPC.config[274].score == 11 then
 			playSound(147)
 			NPC.config[274].score = 6

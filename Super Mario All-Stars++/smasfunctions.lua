@@ -132,6 +132,7 @@ local starman = require("starman/star")
 local megashroom = require("mega/megashroom")
 local playerManager = require("playermanager")
 local smasverbosemode = require("smasverbosemode")
+local smastables = require("smastables")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
@@ -322,18 +323,22 @@ function loadSoundOnly(name) --Opening external sounds, but doesn't play them.
 end
 
 function resolveCostumeSound(name) --Resolve a sound for a costume being worn.
-	local sound = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. player:getCostume() .. "/" .. name)
-	if sound == nil then
-		--Sound could not be found, look under the default sound list instead
-		sound = Misc.resolveSoundFile(name)
+	local costumesounddir
+	if player:getCostume() == nil then
+		costumesounddir = Misc.resolveSoundFile(name)
+	else
+		costumesounddir = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. player:getCostume() .. "/" .. name)
 	end
-	return Audio.SfxOpen(sound)
+	if costumesounddir == nil then
+		--Sound could not be found
+		return nil
+	end
+	return SFX.open(costumesounddir)
 end
 
 function loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
-	local currentCostume = player:getCostume()
-	for k,v in ipairs(GameData.soundNamesInOrder) do
-		if GameData.extrasoundsNumbersInOrder[k] then
+	for k,v in ipairs(smastables.soundNamesInOrder) do
+		if smastables.extrasoundsNumbersInOrder[k] then
 			extrasounds.id[k] = resolveCostumeSound(v)
 		else
 			Audio.sounds[k].sfx = resolveCostumeSound(v)

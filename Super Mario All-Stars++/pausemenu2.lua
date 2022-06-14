@@ -821,7 +821,7 @@ function battlemodenewstage()
 	Misc.unpause()
 	exitFadeActive = false
 	exitFadeActiveDone = true
-	Level.load(GameData.__classicBattleModeLevels[rng.randomInt(1,#GameData.__classicBattleModeLevels)], nil, nil)
+	Level.load(smastables.__classicBattleModeLevels[rng.randomInt(1,#smastables.__classicBattleModeLevels)], nil, nil)
 end
 
 function battlemodeexit()
@@ -847,7 +847,7 @@ function rushmodenewstage()
 	GameData.rushModeWon = false
 	exitFadeActive = false
 	exitFadeActiveDone = true
-	Level.load(GameData.__allMandatoryLevels[rng.randomInt(1,#GameData.__allMandatoryLevels)], nil, nil)
+	Level.load(smastables.__allMandatoryLevels[rng.randomInt(1,#smastables.__allMandatoryLevels)], nil, nil)
 end
 
 function returntolastlevel()

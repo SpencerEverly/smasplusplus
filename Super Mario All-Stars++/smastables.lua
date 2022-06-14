@@ -1,7 +1,7 @@
 local smastables = {}
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
-GameData._noLoadingSoundLevels = {
+smastables._noLoadingSoundLevels = {
 	"SMAS - Start.lvlx",
 	"SMAS - Raca's World (Part 0).lvlx",
 	"SMAS - Raca's World (Part 1).lvlx",
@@ -9,7 +9,7 @@ GameData._noLoadingSoundLevels = {
 }
 
 --All SMB1 levels, listed here for many reasons
-GameData.__smb1Levels = {
+smastables.__smb1Levels = {
 	"SMB1 - W-1, L-1.lvlx",
 	"SMB1 - W-1, L-2.lvlx",
 	"SMB1 - W-1, L-3.lvlx",
@@ -49,7 +49,7 @@ GameData.__smb1Levels = {
 }
 
 --All SMB2 levels, listed here for many reasons
-GameData.__smb2Levels = {
+smastables.__smb2Levels = {
 	"SMB2 - W-1, L-1.lvlx",
 	"SMB2 - W-1, L-2.lvlx",
 	"SMB2 - W-1, L-3.lvlx",
@@ -73,7 +73,7 @@ GameData.__smb2Levels = {
 }
 
 --All SMBLL levels, listed here for many reasons
-GameData.__smbllLevels = {
+smastables.__smbllLevels = {
 	"SMBLL - W-1, L-1.lvlx",
 	"SMBLL - W-1, L-2.lvlx",
 	"SMBLL - W-1, L-3.lvlx",
@@ -129,7 +129,7 @@ GameData.__smbllLevels = {
 }
 
 --Friendly place table for Mother Brain Rinka
-GameData._friendlyPlaces = {
+smastables._friendlyPlaces = {
 	"SMAS - Start.lvlx",
 	"map.lvlx",
 	"intro_8bit.lvlx",
@@ -185,7 +185,7 @@ GameData._friendlyPlaces = {
 }
 
 --Menu table for any costume with troublesome sounds
-GameData._noLevelPlaces = {
+smastables._noLevelPlaces = {
 	"SMAS - Start.lvlx",
 	"map.lvlx",
 	"intro_8bit.lvlx",
@@ -212,7 +212,7 @@ GameData._noLevelPlaces = {
 	"SMAS - Rush Mode Results.lvlx",
 }
 
-GameData._noTransitionLevels = { --This one will prevent transitions from happening via warpTransition
+smastables._noTransitionLevels = { --This one will prevent transitions from happening via warpTransition
 	"SMAS - Start.lvlx",
 	"SMAS - Intro.lvlx",
 	"SMAS - Credits.lvlx",
@@ -240,7 +240,7 @@ GameData._noTransitionLevels = { --This one will prevent transitions from happen
 	"intro_metroidprime2.lvlx",
 }
 
-GameData.__classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.
+smastables.__classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.
 	"battle_battleshrooms.lvl",
 	"battle_battle-zone.lvl",
 	"battle_classic-castle-battle.lvl",
@@ -258,7 +258,7 @@ GameData.__classicBattleModeLevels = { --All Classic Battle Mode levels, used fo
 	"battle_nsmbds3.lvlx",
 }
 
-GameData.__allMandatoryLevels = { --All Rush Mode levels.
+smastables.__allMandatoryLevels = { --All Rush Mode levels.
 	"SMB1 - W-1, L-1.lvlx",
 	"SMB1 - W-1, L-2.lvlx",
 	"SMB1 - W-1, L-3.lvlx",
@@ -317,11 +317,11 @@ GameData.__allMandatoryLevels = { --All Rush Mode levels.
 	"SMB2 - W-7, L-2.lvlx"
 }
 
-GameData.allBaseGameKillableEnemyIDs = {1,2,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,43,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,86,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,136,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,179,180,189,194,195,199,200,201,203,204,205,206,207,210,229,230,231,232,233,234,235,236,242,243,244,245,247,256,257,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,297,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,323,324,333,334,345,346,347,350,351,352,357,366,368,369,371,372,373,374,375,376,377,379,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,417,431,432,435,437,444,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,518,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,617,618,623,624,667,920,921} --This is a list of all killable enemies for Frisk, and some etc. stuff
+smastables.allBaseGameKillableEnemyIDs = {1,2,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,43,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,86,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,136,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,179,180,189,194,195,199,200,201,203,204,205,206,207,210,229,230,231,232,233,234,235,236,242,243,244,245,247,256,257,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,297,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,323,324,333,334,345,346,347,350,351,352,357,366,368,369,371,372,373,374,375,376,377,379,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,417,431,432,435,437,444,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,518,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,617,618,623,624,667,920,921} --This is a list of all killable enemies for Frisk, and some etc. stuff
 
-GameData.extrasoundsNumbersInOrder = table.map{4,7,8,14,15,18,39,42,43,59,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148}
+smastables.extrasoundsNumbersInOrder = table.map{4,7,8,14,15,18,39,42,43,59,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148}
 
-GameData.soundNamesInOrder = {
+smastables.soundNamesInOrder = {
 	"player-jump",
 	"stomped",
 	"block-hit",

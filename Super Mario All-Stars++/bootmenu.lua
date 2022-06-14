@@ -92,8 +92,8 @@ local month = os.date("%m")
 
 local exacttime = os.date("%X")
 
-local selecter = rng.randomInt(1,#GameData.__classicBattleModeLevels)
-local selecter2 = rng.randomInt(1,#GameData.__allMandatoryLevels)
+local selecter = rng.randomInt(1,#smastables.__classicBattleModeLevels)
+local selecter2 = rng.randomInt(1,#smastables.__allMandatoryLevels)
 
 local function introExit()
 	GameData.____mainMenuComplete = true
@@ -111,7 +111,7 @@ local function BattleRandomLevelSelect()
 	GameData.battlemoderngactive = true
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load(GameData.__classicBattleModeLevels[selecter], nil, nil)
+	Level.load(smastables.__classicBattleModeLevels[selecter], nil, nil)
 end
 
 local function Battle1()
@@ -288,7 +288,7 @@ local function startRushMode()
 	GameData.rushModeActive = true
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load(GameData.__allMandatoryLevels[selecter2], nil, nil)
+	Level.load(smastables.__allMandatoryLevels[selecter2], nil, nil)
 end
 
 

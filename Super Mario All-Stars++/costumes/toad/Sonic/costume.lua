@@ -119,7 +119,7 @@ function costume.onTick()
 		end
 		--plr.powerup = PLAYER_BIG
 		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
-		local hitNPCs = Colliders.getColliding{a = player, b = GameData.allBaseGameKillableEnemyIDs, btype = Colliders.NPC}
+		local hitNPCs = Colliders.getColliding{a = player, b = smastables.allBaseGameKillableEnemyIDs, btype = Colliders.NPC}
 		
 		if balled and player:mem(0x26, FIELD_WORD) == 0 then
 			for _,npc in ipairs(hitNPCs) do
