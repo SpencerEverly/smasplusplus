@@ -4425,7 +4425,7 @@ smwMap.playerSettings = {
 
 
     walkSpeed = 5,
-    climbSpeed = 2.75,
+    climbSpeed = 1.85,
 
 
     lookAroundArrowImage = Graphics.loadImageResolved("smwMap/lookAroundArrow.png"),
