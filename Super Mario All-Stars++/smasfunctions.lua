@@ -161,165 +161,10 @@ local activatejump = false
 local threeplayermode = false
 local fourplayermode = false
 
-local extrasoundsNumbersInOrder = table.map{4,7,8,14,15,18,39,42,43,59,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146}
-
-local soundNamesInOrder = {
-	"player-jump",
-	"stomped",
-	"block-hit",
-	"block-smash",
-	"player-shrink",
-	"player-grow",
-	"mushroom",
-	"player-died",
-	"shell-hit",
-	"player-slide",
-	"item-dropped",
-	"has-item",
-	"camera-change",
-	"coin",
-	"1up",
-	"lava",
-	"warp",
-	"fireball",
-	"level-win",
-	"boss-beat",
-	"dungeon-win",
-	"bullet-bill",
-	"grab",
-	"spring",
-	"hammer",
-	"slide",
-	"newpath",
-	"level-select",
-	"do",
-	"pause",
-	"key",
-	"pswitch",
-	"tail",
-	"racoon",
-	"boot",
-	"smash",
-	"thwomp",
-	"birdo-spit",
-	"birdo-hit",
-	"smb2-exit",
-	"birdo-beat",
-	"npc-fireball",
-	"fireworks",
-	"bowser-killed",
-	"game-beat",
-	"door",
-	"message",
-	"yoshi",
-	"yoshi-hurt",
-	"yoshi-tongue",
-	"yoshi-egg",
-	"got-star",
-	"zelda-kill",
-	"player-died2",
-	"yoshi-swallow",
-	"ring",
-	"dry-bones",
-	"smw-checkpoint",
-	"dragon-coin",
-	"smw-exit",
-	"smw-blaarg",
-	"wart-bubble",
-	"wart-die",
-	"sm-block-hit",
-	"sm-killed",
-	"sm-glass",
-	"sm-hurt",
-	"sm-boss-hit",
-	"sm-cry",
-	"sm-explosion",
-	"climbing",
-	"swim",
-	"grab2",
-	"smw-saw",
-	"smb2-throw",
-	"smb2-hit",
-	"zelda-stab",
-	"zelda-hurt",
-	"zelda-heart",
-	"zelda-died",
-	"zelda-rupee",
-	"zelda-fire",
-	"zelda-item",
-	"zelda-key",
-	"zelda-shield",
-	"zelda-dash",
-	"zelda-fairy",
-	"zelda-grass",
-	"zelda-hit",
-	"zelda-sword-beam",
-	"bubble",
-	"sprout-vine",
-	"iceball",
-	"yi_freeze",
-	"yi_icebreak",
-	"2up",
-	"3up",
-	"5up",
-	"dragon-coin-get2",
-	"dragon-coin-get3",
-	"dragon-coin-get4",
-	"dragon-coin-get5",
-	"cherry",
-	"explode",
-	"hammerthrow",
-	"combo1",
-	"combo2",
-	"combo3",
-	"combo4",
-	"combo5", --110
-	"combo6", --111
-	"combo7", --112
-	"score-tally",
-	"score-tally-end",
-	"bowser-fire",
-	"boomerang",
-	"smb2-charge",
-	"stopwatch",
-	"whale-spout",
-	"door-reveal",
-	"p-wing",
-	"wand-moving",
-	"wand-whoosh",
-	"hop",
-	"smash-big",
-	"smb2-hitenemy",
-	"boss-fall",
-	"boss-lava",
-	"boss-shrink",
-	"boss-shrink-done",
-	"hp-get",
-	"hp-max",
-	"cape-feather",
-	"cape-fly",
-	"flag-slide",
-	"smb1-clear",
-	"smb2-clear",
-	"smb1-world-clear",
-	"smb1-underground-overworld",
-	"smb1-underground-desert",
-	"smb1-underground-sky",
-	"goaltape-countdown-start",
-	"goaltape-countdown-loop",
-	"goaltape-countdown-end",
-	"goaltape-irisout",
-	"smw-exit-orb",
-}
-
 function smasfunctions.onInitAPI()
 	registerEvent(smasfunctions,"onDraw")
 	registerEvent(smasfunctions,"onInputUpdate")
 	registerEvent(smasfunctions,"onStart")
-end
-
-function smasfunctions.onStart()
-	loadCostumeSounds()
 end
 
 function smasfunctions.onInputUpdate()
@@ -477,11 +322,10 @@ function loadSoundOnly(name) --Opening external sounds, but doesn't play them.
 end
 
 function resolveCostumeSound(name) --Resolve a sound for a costume being worn.
-	local currentCostume = player:getCostume()
-	if currentCostume == nil then
+	if player:getCostume() == nil then
 		local sound = Misc.resolveSoundFile(name)
 	else
-		local sound = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. currentCostume .. "/" .. name)
+		local sound = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. player:getCostume() .. "/" .. name)
 	end
 	if sound == nil then
 		-- sound could not be found

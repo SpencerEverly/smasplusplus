@@ -5600,7 +5600,7 @@ ID:79;X:-140320;Y:-139136;
 ID:999;X:-198208;Y:-200416;
 BGO_END
 NPC
-ID:280;X:-159400;Y:-160144;D:-1;ED:"Boss Dead";
+ID:280;X:-159400;Y:-160144;D:-1;ED:"Boss End";
 ID:94;X:-173376;Y:-180118;D:-1;MG:"Thank you\, <characterName>!<page>This game is about to get harder and harder.<page>Watch out for World 8! The princess is there\, and I mean it this time!<page>Good luck\, hero!";FD:1;
 ID:589;X:-179326;Y:-180096;D:-1;
 ID:476;X:-179424;Y:-180224;D:-1;
@@ -5667,6 +5667,6 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Dead";SD:69;LS:["Door"];SSS:["ID\:1\;MI\:0\;","ID\:2\;MI\:0\;"];TE:"Boss Dead 2";AS:0;AX:0;AY:0;
-ET:"Boss Dead 2";AS:0;AX:0;AY:0;
+ET:"Boss End";LS:["Door"];SSS:["ID\:1\;MI\:0\;","ID\:2\;MI\:0\;"];TE:"Boss End 2";AS:0;AX:0;AY:0;
+ET:"Boss End 2";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

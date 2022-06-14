@@ -35,7 +35,6 @@ function costumeblock.onPostBlockHit(v, fromUpper, playerOrNil)
 
 	Animation.spawn(10,playerOrNil.x+playerOrNil.width*0.5-16,playerOrNil.y+playerOrNil.height*0.5);
 	SFX.play(32)
-	loadCostumeSounds()
 end
 
 function costumeblock.register(id)

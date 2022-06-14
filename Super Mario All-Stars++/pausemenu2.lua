@@ -246,7 +246,6 @@ local function characterchange()
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
 	end
-	loadCostumeSounds()
 end
 
 local function characterchange13()
@@ -419,7 +418,6 @@ local function characterchangeleft()
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
 	end
-	loadCostumeSounds()
 end
 
 local function characterchange13left()
@@ -507,7 +505,6 @@ local function costumechangeright()
 	playSound("charcost_costume.ogg")
 	playSound("charcost-selected.ogg")
 	Routine.run(musicalchairs.switcher)
-	loadCostumeSounds()
 end
 
 local function costumechangeleft()
@@ -523,7 +520,6 @@ local function costumechangeleft()
 	playSound("charcost_costume.ogg")
 	playSound("charcost-selected.ogg")
 	Routine.run(musicalchairs.switcher)
-	loadCostumeSounds()
 end
 
 local function enable2player()

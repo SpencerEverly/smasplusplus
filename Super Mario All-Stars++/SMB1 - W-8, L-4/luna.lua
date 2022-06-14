@@ -2,6 +2,12 @@ local level_dependencies_normal = require("level_dependencies_normal")
 local pauseplus = require("pauseplus")
 
 function onEvent(eventName)
+	if eventName == ("Fake Bowser Dead") then
+		playSound(138)
+	end
+	if eventName == ("Real Bowser Dead") then
+		playSound(138)
+	end
 	if eventName == ("Pigeon Cutscene") then
 		if SaveData.disableX2char == false then
 			pauseplus.canPause = false

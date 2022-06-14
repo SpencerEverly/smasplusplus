@@ -9072,9 +9072,9 @@ ET:"Ludwig Dead";LH:["Ludwig Door"];LS:["Exit Door 3","Boom Boom Door"];AS:0;AX:
 ET:"Boom Boom Dead";LH:["Boom Boom Door"];LS:["Exit Door 4","Koopaline Door"];AS:0;AX:0;AY:0;
 ET:"Koopaline Dead";LH:["Koopaline Door"];LS:["Exit Door 5","Mouser Door"];AS:0;AX:0;AY:0;
 ET:"Mouser Dead";LH:["Mouser Door"];LS:["Exit Door 6","Fake Bowser Door"];TE:"All Bosses Defeat";AS:0;AX:0;AY:0;
-ET:"Fake Bowser Dead";MG:"You beat Bowser...!<page>If you want to see your princess\, go through the door...<page>Your lover awaits you...!";SD:69;LH:["Fake Bowser Door"];LS:["Exit Door 7"];SSS:["ID\:12\;MI\:0\;"];DS:1;AS:0;AX:0;AY:0;
+ET:"Fake Bowser Dead";MG:"You beat Bowser...!<page>If you want to see your princess\, go through the door...<page>Your lover awaits you...!";LH:["Fake Bowser Door"];LS:["Exit Door 7"];SSS:["ID\:12\;MI\:0\;"];DS:1;AS:0;AX:0;AY:0;
 ET:"Real Bowser Start";MG:"You think THAT was how it ends?!<page>Yeah\, right! Now to show off my true POWER!<page>Prepare to SUFFER! BUHAHAHAHAHA!!!";LS:["Trap"];SSS:["ID\:12\;MI\:24\;","ID\:13\;MI\:24\;"];DS:1;AS:0;AX:0;AY:0;
-ET:"Real Bowser Dead";MG:"NOOOOOOO! I thought I was going to kill you!!!<page>We'll meet again\, hero! Curse you...";SD:69;LS:["End Door"];SSS:["ID\:12\;MI\:0\;","ID\:13\;SL\:60000\;ST\:59400\;SB\:60000\;SR\:62112\;MI\:0\;"];AS:0;AX:0;AY:0;
+ET:"Real Bowser Dead";MG:"NOOOOOOO! I thought I was going to kill you!!!<page>We'll meet again\, hero! Curse you...";LS:["End Door"];SSS:["ID\:12\;MI\:0\;","ID\:13\;SL\:60000\;ST\:59400\;SB\:60000\;SR\:62112\;MI\:0\;"];AS:0;AX:0;AY:0;
 ET:"SMB End Sequence Walk";TE:"SMB End Sequence Happy";TD:27;PC:000000000011;AS:0;AX:0;AY:0;
 ET:"SMB End Sequence Happy";TE:"SMB End Sequence Wait FINAL";TD:10;PC:100000000011;AS:0;AX:0;AY:0;
 ET:"SMB End Sequence Wait";AS:0;AX:0;AY:0;

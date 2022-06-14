@@ -2578,7 +2578,7 @@ ID:89;X:-175584;Y:-180096;D:-1;
 ID:476;X:-174560;Y:-180080;D:-1;
 ID:589;X:-174014;Y:-180096;D:-1;XTRA:"{\n    \"jumpHeight\"\: 200\,\n    \"useFixed\"\: true\n}\n";
 ID:178;X:-173152;Y:-180224;D:-1;ED:"Axe";
-ID:796;X:-173344;Y:-180232;D:-1;EA:"Bowser Appear";ED:"Bowser Dead";
+ID:796;X:-173344;Y:-180232;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:94;X:-172704;Y:-180118;D:-1;MG:"Thank you\, <characterName>! But our princess is in another castle!";FD:1;
 ID:184;X:-174304;Y:-180224;D:-1;NM:1;
 ID:770;X:-179328;Y:-180192;D:-1;XTRA:"{\n    \"length\"\: 12\,\n    \"speed\"\: 3\n}\n";
@@ -2606,7 +2606,7 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Bowser Appear";SSS:["ID\:1\;SL\:-173952\;ST\:-180600\;SB\:-180000\;SR\:-173056\;MI\:21\;"];AS:0;AX:0;AY:0;
-ET:"Bowser Dead";SD:69;SSS:["ID\:1\;SL\:-173120\;ST\:-180600\;SB\:-180000\;SR\:-172224\;MI\:0\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";SSS:["ID\:1\;SL\:-173952\;ST\:-180600\;SB\:-180000\;SR\:-173056\;MI\:21\;"];AS:0;AX:0;AY:0;
+ET:"Boss End";SSS:["ID\:1\;SL\:-173120\;ST\:-180600\;SB\:-180000\;SR\:-172224\;MI\:0\;"];AS:0;AX:0;AY:0;
 ET:"Axe";LH:["Axe"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
