@@ -141,19 +141,6 @@ local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 local costumes = playerManager.getCostumes(player.character)
 local currentCostume = player:getCostume()
 
---This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.
-_G.Player = Player
-_G.player = Player(1)
-if (_G.player2 ~= nil) or (_G.player3 ~= nil) or (_G.player4 ~= nil) or (_G.player5 ~= nil) or (_G.player6 ~= nil) or (_G.player7 ~= nil) or (_G.player8 ~= nil) or (Player.count() > 1) then
-	_G.player2 = Player(2)
-	_G.player3 = Player(3)
-	_G.player4 = Player(4)
-	_G.player5 = Player(5)
-	_G.player6 = Player(6)
-	_G.player7 = Player(7)
-	_G.player8 = Player(8)
-end
-
 local intromodeactivated = false
 local introtime = 0
 local jumptime = 0
