@@ -247,6 +247,9 @@ function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
 		if killReason == HARM_TYPE_JUMP or killReason == HARM_TYPE_SPINJUMP then
 			SFX.play(2)
 		end
+		SFX.play(extrasounds.id[39])
+	end
+	if killReason == HARM_TYPE_LAVA then
 		SFX.play(extrasounds.id[128])
 	end
 end
