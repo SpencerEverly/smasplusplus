@@ -2498,7 +2498,7 @@ ID:476;X:-118880;Y:-120193;D:-1;
 ID:88;X:-119258;Y:-120320;D:-1;
 ID:88;X:-119226;Y:-120320;D:-1;
 ID:88;X:-119194;Y:-120320;D:-1;
-ID:151;X:-117032;Y:-120464;D:-1;MG:"Welcome to the the warp zone!<page>This pipe will lead you to World 4.";FD:1;NM:1;
+ID:151;X:-117032;Y:-120464;D:-1;MG:"Welcome to the warp zone!<page>This pipe will lead you to World 4.";FD:1;NM:1;
 ID:93;X:-119312;Y:-120240;D:-1;
 ID:93;X:-119120;Y:-120240;D:-1;
 ID:93;X:-118640;Y:-120208;D:-1;
