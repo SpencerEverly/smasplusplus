@@ -1463,7 +1463,7 @@ ID:752;X:-192768;Y:-195776;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"na
 ID:752;X:-192928;Y:-195680;D:-1;XTRA:"{\n    \"name\"\: \"toSMWDonutPlains2\"\,\n    \"points\"\: \"32\,0\, 0\,0\, -32\,-32\, -32\,-128\"\n}\n";
 ID:752;X:-192864;Y:-195904;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutPlains3\"\,\n    \"points\"\: \"-32\,0\, 16\,0\, 72\,0\, 96\,0\"\,\n    \"types\"\: \"normal\, logBridge\, normal\"\n}\n";
 ID:814;X:-192960;Y:-195424;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\n}\n";
-ID:801;X:-192768;Y:-195904;D:-1;XTRA:"{\n    \"levelTitle\"\: \"DONUT PLAINS 3\"\,\n    \"path_down\"\: \"toSMWDonutPlains3FromPipe\"\,\n    \"path_left\"\: \"toSMWDonutPlains3\"\,\n    \"path_right\"\: \"toSMWDonutPlains4\"\n}\n";
+ID:801;X:-192768;Y:-195904;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Donut Plains 3\"\,\n    \"path_down\"\: \"toSMWDonutPlains3FromPipe\"\,\n    \"path_left\"\: \"toSMWDonutPlains3\"\,\n    \"path_right\"\: \"toSMWDonutPlains4\"\n}\n";
 ID:752;X:-192864;Y:-195968;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWSuperSecretArea\"\,\n    \"points\"\: \"-32\,0\, 0\,-16\, 0\,-160\"\,\n    \"types\"\: \"trail\"\n}\n";
 ID:801;X:-192704;Y:-195840;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Donut Plains 4\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMWDonutPlainsCastle\"\,\n    \"path_up\"\: \"toSMWDonutPlains4\"\n}\n";
 ID:752;X:-192896;Y:-195936;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWTopSecretArea\"\,\n    \"points\"\: \"0\,32\, 0\,-32\"\n}\n";
