@@ -803,6 +803,8 @@ ID:772;X:-192320;Y:-195376;W:32;H:32;
 ID:760;X:-192720;Y:-195936;W:16;H:16;
 ID:806;X:-192608;Y:-195488;W:32;H:32;
 ID:772;X:-192432;Y:-195408;W:32;H:32;
+ID:834;X:-193312;Y:-200416;W:32;H:32;LR:"Signs";
+ID:835;X:-192560;Y:-200304;W:32;H:32;LR:"Signs";
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -1217,7 +1219,7 @@ ID:821;X:-195424;Y:-200288;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-
 ID:753;X:-195200;Y:-200608;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/World 3.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
 ID:821;X:-194976;Y:-200448;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-2EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 2\"\,\n    \"path_down\"\: \"toSMBLL3-1\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"SMBLLW-3BeginWarp\"\n}\n";
 ID:752;X:-194976;Y:-200416;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL3-1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
-ID:802;X:-194976;Y:-200384;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"3-1\: Hey Look\, Piranhas\"\,\n    \"path_down\"\: \"toSMBLL3-2\"\,\n    \"path_up\"\: \"toSMBLL3-1\"\,\n    \"unlock_down\"\: 9\n}\n";
+ID:802;X:-194976;Y:-200384;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"3-1\: Hey Look\, Piranhas\"\,\n    \"path_down\"\: \"toSMBLL3-2\"\,\n    \"path_right\"\: \"toSMBLLW-3WarpCentral\"\,\n    \"path_up\"\: \"toSMBLL3-1\"\,\n    \"unlock_down\"\: 9\n}\n";
 ID:802;X:-194944;Y:-200256;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-3\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"3-2\: Bloopo-Water\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMBLL3-3\"\,\n    \"path_up\"\: \"toSMBLL3-2\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-194976;Y:-200352;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL3-2\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, 32\, 96\"\n}\n";
 ID:752;X:-194912;Y:-200256;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL3-3\"\,\n    \"points\"\: \"-32\, 0\, 96\, 0\"\n}\n";
@@ -1229,7 +1231,7 @@ ID:821;X:-194656;Y:-200256;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-
 ID:753;X:-194400;Y:-201216;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/World 4.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
 ID:821;X:-194080;Y:-200768;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-3EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 3\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMBLL4-1\"\,\n    \"warpName\"\: \"SMBLLW-4BeginWarp\"\n}\n";
 ID:752;X:-194048;Y:-200768;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL4-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
-ID:802;X:-194016;Y:-200768;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-4\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"4-1\: The Lakitu Grounds (Hard)\"\,\n    \"path_left\"\: \"toSMBLL4-1\"\,\n    \"path_up\"\: \"toSMBLL4-2\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:802;X:-194016;Y:-200768;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-4\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"4-1\: The Lakitu Grounds (Hard)\"\,\n    \"path_down\"\: \"toSMBLLW-4WarpCentral\"\,\n    \"path_left\"\: \"toSMBLL4-1\"\,\n    \"path_up\"\: \"toSMBLL4-2\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-194016;Y:-200800;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL4-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:802;X:-194016;Y:-200832;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-4\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"4-2\: Vicious Piranhas\"\,\n    \"path_down\"\: \"toSMBLL4-2\"\,\n    \"path_up\"\: \"toSMBLL4-3\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-194016;Y:-200864;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL4-3\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\,\n    \"types\"\: \"bridge\"\n}\n";
@@ -1241,7 +1243,7 @@ ID:752;X:-194016;Y:-201120;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-4Path1\"\,\n 
 ID:821;X:-194016;Y:-201152;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-5BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 5\"\,\n    \"path_down\"\: \"toSMBLLW-4Path1\"\,\n    \"path_left\"\: \"\"\,\n    \"warpName\"\: \"SMBLLW-4EndWarp\"\n}\n";
 ID:821;X:-194240;Y:-200256;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-4EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 4\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMBLL5-1\"\,\n    \"warpName\"\: \"SMBLLW-5BeginWarp\"\n}\n";
 ID:752;X:-194208;Y:-200256;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL5-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
-ID:802;X:-194176;Y:-200256;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-5\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"5-1\: Upside Down Piranhas\"\,\n    \"path_left\"\: \"toSMBLL5-1\"\,\n    \"path_right\"\: \"toSMBLL5-2\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:802;X:-194176;Y:-200256;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-5\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"5-1\: Upside Down Piranhas\"\,\n    \"path_left\"\: \"toSMBLL5-1\"\,\n    \"path_right\"\: \"toSMBLL5-2\"\,\n    \"path_up\"\: \"toSMBLLW-5WarpCentral\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:802;X:-194048;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-5\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"5-2\: Underground Chaos\"\,\n    \"path_left\"\: \"toSMBLL5-2\"\,\n    \"path_right\"\: \"toSMBLL5-3\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-194016;Y:-200288;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL5-3\"\,\n    \"points\"\: \"-32\, 0\, 96\, 0\"\n}\n";
 ID:802;X:-193920;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"5-3\: Try to Beat this Level\"\,\n    \"path_left\"\: \"toSMBLL5-3\"\,\n    \"path_up\"\: \"toSMBLL5-4\"\,\n    \"unlock_up\"\: 9\n}\n";
@@ -1252,7 +1254,7 @@ ID:752;X:-193920;Y:-200416;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-5Path1\"\,\n 
 ID:821;X:-193920;Y:-200448;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-6BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"toSMBLLW-5Path1\"\,\n    \"warpName\"\: \"SMBLLW-5EndWarp\"\n}\n";
 ID:821;X:-193216;Y:-200160;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-5EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"\"\,\n    \"path_up\"\: \"toSMBLL6-1\"\,\n    \"warpName\"\: \"SMBLLW-6BeginWarp\"\n}\n";
 ID:752;X:-193216;Y:-200192;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL6-1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
-ID:802;X:-193216;Y:-200224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-6\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"6-1\: Hard Times Await\"\,\n    \"path_down\"\: \"toSMBLL6-1\"\,\n    \"path_up\"\: \"toSMBLL6-2\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:802;X:-193216;Y:-200224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-6\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"6-1\: Hard Times Await\"\,\n    \"path_down\"\: \"toSMBLL6-1\"\,\n    \"path_left\"\: \"toSMBLLW-6WarpCentral\"\,\n    \"path_up\"\: \"toSMBLL6-2\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-193216;Y:-200256;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL6-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, -64\, -32\"\n}\n";
 ID:802;X:-193280;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-6\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"6-2\: Mmmm\, Dead Water!\"\,\n    \"path_right\"\: \"toSMBLL6-2\"\,\n    \"path_up\"\: \"toSMBLL6-3\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-193280;Y:-200320;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL6-3\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 64\, -32\"\n}\n";
@@ -1264,7 +1266,7 @@ ID:752;X:-193280;Y:-200448;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-6Path1\"\,\n 
 ID:753;X:-192800;Y:-200608;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/World 7.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
 ID:821;X:-192256;Y:-200352;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-6EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMBLL7-1\"\,\n    \"warpName\"\: \"SMBLLW-7BeginWarp\"\n}\n";
 ID:752;X:-192288;Y:-200352;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL7-1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
-ID:802;X:-192320;Y:-200352;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-7\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"7-1\: Reddish Nights\"\,\n    \"path_left\"\: \"toSMBLL7-2\"\,\n    \"path_right\"\: \"toSMBLL7-1\"\,\n    \"unlock_left\"\: 9\n}\n";
+ID:802;X:-192320;Y:-200352;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-7\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"7-1\: Reddish Nights\"\,\n    \"path_down\"\: \"toSMBLLW-7WarpCentral\"\,\n    \"path_left\"\: \"toSMBLL7-2\"\,\n    \"path_right\"\: \"toSMBLL7-1\"\,\n    \"unlock_left\"\: 9\n}\n";
 ID:752;X:-192352;Y:-200352;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL7-2\"\,\n    \"points\"\: \"32\, 0\, -64\, 0\"\n}\n";
 ID:802;X:-192416;Y:-200352;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-7\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"7-2\: The Lakitu Grounds #2\"\,\n    \"path_left\"\: \"toSMBLL7-3\"\,\n    \"path_right\"\: \"toSMBLL7-2\"\,\n    \"unlock_left\"\: 9\n}\n";
 ID:752;X:-192448;Y:-200352;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL7-3\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -32\, 32\"\n}\n";
@@ -1276,7 +1278,7 @@ ID:821;X:-192608;Y:-200352;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-
 ID:753;X:-192000;Y:-201216;D:-1;XTRA:"{\n    \"backgroundName\"\: \"lavaClassic\"\,\n    \"customMusicPath\"\: \"_OST/The Lost Levels/World 8.ogg\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
 ID:821;X:-191424;Y:-201024;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMBLLW-7EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 7\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMBLL8-1\"\,\n    \"path_right\"\: \"\"\,\n    \"warpName\"\: \"SMBLLW-8BeginWarp\"\n}\n";
 ID:752;X:-191456;Y:-201024;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL8-1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -32\, 32\"\n}\n";
-ID:802;X:-191488;Y:-200992;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-8\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"8-1\: Miles to Bowser's Castle\"\,\n    \"path_down\"\: \"toSMBLL8-2\"\,\n    \"path_up\"\: \"toSMBLL8-1\"\,\n    \"unlock_down\"\: 9\n}\n";
+ID:802;X:-191488;Y:-200992;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-8\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"8-1\: Miles to Bowser's Castle\"\,\n    \"path_down\"\: \"toSMBLL8-2\"\,\n    \"path_left\"\: \"toSMBLLW-8WarpCentral\"\,\n    \"path_up\"\: \"toSMBLL8-1\"\,\n    \"unlock_down\"\: 9\n}\n";
 ID:752;X:-191488;Y:-200960;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL8-2\"\,\n    \"points\"\: \"0\, -32\, 0\, 64\"\n}\n";
 ID:802;X:-191488;Y:-200896;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - W-8\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"8-2\: Skies of Advancement\"\,\n    \"path_left\"\: \"toSMBLL8-3\"\,\n    \"path_up\"\: \"toSMBLL8-2\"\,\n    \"unlock_left\"\: 9\n}\n";
 ID:752;X:-191520;Y:-200896;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL8-3\"\,\n    \"points\"\: \"32\, 0\, -96\, 0\"\n}\n";
@@ -1492,6 +1494,18 @@ ID:753;X:-193056;Y:-196224;D:-1;XTRA:"{\n    \"customMusicPath\"\: \"_OST/Super 
 ID:752;X:-192896;Y:-195712;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutSecret1\"\,\n    \"points\"\: \"0\,32\, 0\,-16\, 0\,-64\"\,\n    \"types\"\: \"normal\, waterTrail\"\n}\n";
 ID:752;X:-192992;Y:-195584;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWYellowSwitchMain\"\,\n    \"points\"\: \"0\,0\, 0\,-48\, 0\,-96\"\,\n    \"types\"\: \"invisibleLadder\, invisible\"\n}\n";
 ID:752;X:-192896;Y:-195552;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutPlainsMain\"\,\n    \"points\"\: \"0\,16\, 0\,-80\, 0\,-128\"\,\n    \"types\"\: \"bridge\, normal\"\n}\n";
+ID:752;X:-194944;Y:-200384;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-3WarpCentral\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:848;X:-194912;Y:-200384;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - Level Backtrack 2.lvlx\"\,\n    \"levelTitle\"\: \"Warp Central\"\,\n    \"path_left\"\: \"toSMBLLW-3WarpCentral\"\n}\n";
+ID:752;X:-194016;Y:-200736;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-4WarpCentral\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:848;X:-194016;Y:-200704;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - Level Backtrack 3.lvlx\"\,\n    \"levelTitle\"\: \"Warp Central\"\,\n    \"path_up\"\: \"toSMBLLW-4WarpCentral\"\n}\n";
+ID:752;X:-194176;Y:-200288;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-5WarpCentral\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:848;X:-194176;Y:-200320;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - Level Backtrack 4.lvlx\"\,\n    \"levelTitle\"\: \"Warp Central\"\,\n    \"path_down\"\: \"toSMBLLW-5WarpCentral\"\n}\n";
+ID:752;X:-193248;Y:-200224;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-6WarpCentral\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:848;X:-193280;Y:-200224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - Level Backtrack 5.lvlx\"\,\n    \"levelTitle\"\: \"Warp Central\"\,\n    \"path_right\"\: \"toSMBLLW-6WarpCentral\"\n}\n";
+ID:752;X:-192320;Y:-200320;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-7WarpCentral\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:848;X:-192320;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - Level Backtrack 6.lvlx\"\,\n    \"levelTitle\"\: \"Warp Central\"\,\n    \"path_up\"\: \"toSMBLLW-7WarpCentral\"\n}\n";
+ID:752;X:-191520;Y:-200992;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-8WarpCentral\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:848;X:-191552;Y:-200992;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - Level Backtrack 7.lvlx\"\,\n    \"levelTitle\"\: \"Warp Central\"\,\n    \"path_right\"\: \"toSMBLLW-8WarpCentral\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
