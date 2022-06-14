@@ -1,0 +1,5 @@
+local smasbooleans = {}
+
+
+
+return smasbooleans

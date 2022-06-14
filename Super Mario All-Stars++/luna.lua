@@ -46,14 +46,15 @@ GameData.levelMusic = {}
 GameData.warpStarDoorCount = {}
 _G.smwMap = require("smwMap")
 _G.extrasounds = require("extrasounds")
-_G.smastables = require("smastables")
 _G.classicEvents = require("classiceventsmod")
 _G.EventManager = require("main_events_mod")
 _G.extraNPCProperties = require("extraNPCProperties")
 
---These libraries has some new functions, for simplifying the functions, and other things:
+--SMAS specific functions need to be required as well:
 _G.smasfunctions = require("smasfunctions")
 _G.smasverbosemode = require("smasverbosemode")
+_G.smasbooleans = require("smasbooleans")
+_G.smastables = require("smastables")
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
