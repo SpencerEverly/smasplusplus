@@ -81,7 +81,7 @@ function startNextLevel()
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load(GameData.rushlevelsrng[rng.randomInt(1,#GameData.rushlevelsrng)], nil, nil)
+	Level.load(GameData.__allMandatoryLevels[rng.randomInt(1,#GameData.__allMandatoryLevels)], nil, nil)
 end
 
 function restartLastLevel()

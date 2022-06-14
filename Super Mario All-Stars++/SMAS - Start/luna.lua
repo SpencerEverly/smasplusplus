@@ -53,8 +53,8 @@ local exacttime = os.date("%X")
 
 local runPressedState = false
 
-if GameData.menucomplete == nil then
-	GameData.menucomplete = false
+if GameData.____mainMenuComplete == nil then
+	GameData.____mainMenuComplete = false
 end
 
 local function preboot()
@@ -180,7 +180,7 @@ function onKeyboardPress(k, v)
 	if active then
 		fivePressedState = false
 		if k == VK_5 then
-			GameData.menucomplete = true
+			GameData.____mainMenuComplete = true
 			Level.exit()
 			fivePressedState = true
 		end
@@ -188,7 +188,7 @@ function onKeyboardPress(k, v)
 	if active then
 		sixPressedState = false
 		if k == VK_6 then
-			GameData.menucomplete = true
+			GameData.____mainMenuComplete = true
 			SaveData.speedrunMode = not SaveData.speedrunMode
 			SaveData.firstBootCompleted = true
 			Misc.saveGame()

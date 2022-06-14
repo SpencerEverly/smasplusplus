@@ -95,7 +95,7 @@ function starget()
 	playerwon = true
 	SFX.play(52)
 	muteMusic(-1)
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Routine.wait(5, true)
 	GameData.winStateActive = false
 	Level.exit(LEVEL_WIN_TYPE_STAR)
@@ -330,7 +330,7 @@ function roulettestar.onPlayerKill(evt)
 end
 
 function roulettestar.onExit()
-	GameData.muteMusic = false
+	GameData.____muteMusic = false
 	GameData.winStateActive = false
 	if Level.endState() == LEVEL_END_STATE_ROULETTE then
 		GameData.smwMap.winType = 6

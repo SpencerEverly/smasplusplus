@@ -25,7 +25,7 @@ function costume.onTick()
 		elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not isPlayerUnderwater() then
 			hasJumped = true
 			player:mem(0x11C, FIELD_WORD, 14)
-			if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
+			if table.icontains(GameData._noLevelPlaces,Level.filename()) == false then
 				playSound("toad/Jasmine/player-doublejump.ogg")
 			end
 		end

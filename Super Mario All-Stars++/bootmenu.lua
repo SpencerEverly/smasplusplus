@@ -92,11 +92,11 @@ local month = os.date("%m")
 
 local exacttime = os.date("%X")
 
-local selecter = rng.randomInt(1,#GameData.classicBattleModeLevels)
-local selecter2 = rng.randomInt(1,#GameData.rushlevelsrng)
+local selecter = rng.randomInt(1,#GameData.__classicBattleModeLevels)
+local selecter2 = rng.randomInt(1,#GameData.__allMandatoryLevels)
 
 local function introExit()
-	GameData.menucomplete = true
+	GameData.____mainMenuComplete = true
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
 	GameData.startedmenu = 0
@@ -111,7 +111,7 @@ local function BattleRandomLevelSelect()
 	GameData.battlemoderngactive = true
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load(GameData.classicBattleModeLevels[selecter], nil, nil)
+	Level.load(GameData.__classicBattleModeLevels[selecter], nil, nil)
 end
 
 local function Battle1()
@@ -288,7 +288,7 @@ local function startRushMode()
 	GameData.rushModeActive = true
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load(GameData.rushlevelsrng[selecter2], nil, nil)
+	Level.load(GameData.__allMandatoryLevels[selecter2], nil, nil)
 end
 
 
@@ -564,7 +564,7 @@ local function theme19()
 end
 
 local function mapExit()
-	GameData.menucomplete = true
+	GameData.____mainMenuComplete = true
 	autoscroll.scrollLeft(5000)
 	Routine.waitFrames(38)
 	GameData.startedmenu = 0
@@ -1202,6 +1202,7 @@ local function BootWSMBAPreExecute() --This will execute WSMBA, the other preinc
 	redcurtains = false
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
+	GameData.____mainMenuComplete = false
 	if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then --Make this launch as specific for the episode, else if not found... an error will occur
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1
@@ -1215,6 +1216,7 @@ local function BootWSMBAOGPreExecute() --This will be there whenever I find the 
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
 	Routine.wait(0.5)
+	GameData.____mainMenuComplete = false
 	if (Misc.loadEpisode("Where SMB Attacks (Original)")) == false then
 		SFX.play("wrong.ogg")
 		GameData.startedmenu = 1

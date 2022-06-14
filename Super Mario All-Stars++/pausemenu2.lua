@@ -541,9 +541,9 @@ local function disable2player()
 end
 
 function pausemenu2.onDraw()
-	if GameData.muteMusic == true then
+	if GameData.____muteMusic == true then
 		Audio.MusicVolume(0)
-	elseif GameData.muteMusic == false or GameData.muteMusic == nil then
+	elseif GameData.____muteMusic == false or GameData.____muteMusic == nil then
 		Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
 	end
 	sfxVolume = pauseplus.getSelectionValue("settings","SFX Volume")
@@ -821,7 +821,7 @@ function battlemodenewstage()
 	Misc.unpause()
 	exitFadeActive = false
 	exitFadeActiveDone = true
-	Level.load(GameData.classicBattleModeLevels[rng.randomInt(1,#GameData.classicBattleModeLevels)], nil, nil)
+	Level.load(GameData.__classicBattleModeLevels[rng.randomInt(1,#GameData.__classicBattleModeLevels)], nil, nil)
 end
 
 function battlemodeexit()
@@ -847,7 +847,7 @@ function rushmodenewstage()
 	GameData.rushModeWon = false
 	exitFadeActive = false
 	exitFadeActiveDone = true
-	Level.load(GameData.rushlevelsrng[rng.randomInt(1,#GameData.rushlevelsrng)], nil, nil)
+	Level.load(GameData.__allMandatoryLevels[rng.randomInt(1,#GameData.__allMandatoryLevels)], nil, nil)
 end
 
 function returntolastlevel()

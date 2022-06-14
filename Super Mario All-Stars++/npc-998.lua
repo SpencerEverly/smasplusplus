@@ -65,7 +65,7 @@ function customNPC.onTickNPC(v)
     and player.section == v.section
     and data.state == 0 then
         data.state = 1
-		GameData.muteMusic = true
+		GameData.____muteMusic = true
 		Audio.MusicVolume(0)
 		GameData.winStateActive = true
         SFX.play(extrasounds.id[135])
@@ -94,7 +94,7 @@ function customNPC.onTickNPC(v)
     if data.state == 1 then
 		Misc.npcToCoins()
 		starman.stop(p)
-		GameData.muteMusic = true
+		GameData.____muteMusic = true
         data.tick = data.tick + 1
         player.x = v.x - player.width + 16
         player.speedX = 0
@@ -122,7 +122,7 @@ function customNPC.onTickNPC(v)
         end
     elseif data.state == 2 then
 		GameData.stopStarman = false
-		GameData.muteMusic = true
+		GameData.____muteMusic = true
 		if GameData.rushModeActive == true then
 			GameData.rushModeWon = true
 		end
@@ -145,7 +145,7 @@ function customNPC.onTickNPC(v)
             Timer.hurryTime = -1
         end
     elseif data.state == 3 then
-		GameData.muteMusic = true
+		GameData.____muteMusic = true
         player.x = castlePlayerX
         player.y = castlePlayerY
 
@@ -167,7 +167,7 @@ function customNPC.onTickNPC(v)
 		end
 		
         if data.tick > 65 * 1.5 then
-			GameData.muteMusic = false
+			GameData.____muteMusic = false
 			GameData.winStateActive = false
 			if GameData.rushModeActive == false or GameData.rushModeActive == nil then
 				Level.exit(LEVEL_WIN_TYPE_STAR)

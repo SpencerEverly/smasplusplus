@@ -64,10 +64,10 @@ local function startMusic()
 	starSoundObject = SFX.play(starman.sfxFile, 1, 0)
 		if(musicvolcache == nil) then
 			musicvolcache = Audio.MusicVolume();
-			if GameData.muteMusic == true then
+			if GameData.____muteMusic == true then
 				Audio.MusicVolume(0)
 			end
-			GameData.muteMusic = true
+			GameData.____muteMusic = true
 			refreshMusic(-1)
 			Audio.MusicVolume(0)
 			muteMusic(-1)
@@ -87,7 +87,7 @@ local function stopMusic(idx)
 		--starSoundObject:Stop()
 		starSoundObject:FadeOut(200)
 		Audio.MusicVolume(musicvolcache);
-		GameData.muteMusic = false
+		GameData.____muteMusic = false
 		restoreMusic(-1)
 		musicvolcache = nil;
 		scorecounter = 1
@@ -131,7 +131,6 @@ function starman.start(p, id)
 		return;
 	end
 	startMusic();
-	SFX.play(6);
 	local idx = p.idx;
 	activeStarIDs[idx] = id
 	starTimers[idx] = starman.duration[id];		
@@ -278,6 +277,7 @@ function starman.onNPCKill(event,npc,reason)
 	if(idMap[npc.id]) then
 		local t = npcManager.collected(npc, reason);
 		if(t) then
+			SFX.play(6)
 			starman.start(t, npc.id)
 		end
 	end

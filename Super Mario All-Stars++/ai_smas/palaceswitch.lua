@@ -251,7 +251,7 @@ function bigSwitch.onTick()
 			end
 		end
 		if pressed then
-			GameData.muteMusic = true
+			GameData.____muteMusic = true
 		end
 	end
 end
@@ -315,7 +315,7 @@ function bigSwitch.onEvent(event)
 end
 
 function bigSwitch.onExit()
-	GameData.muteMusic = false
+	GameData.____muteMusic = false
 end
 
 return bigSwitch

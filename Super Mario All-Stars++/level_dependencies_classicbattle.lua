@@ -69,7 +69,7 @@ function rngrunstate()
 	Routine.wait(0.4)
 	Misc.saveGame()
 	GameData.battlemodeactive = true
-	Level.load(GameData.classicBattleModeLevels[rng.randomInt(1,#GameData.classicBattleModeLevels)], nil, nil)
+	Level.load(GameData.__classicBattleModeLevels[rng.randomInt(1,#GameData.__classicBattleModeLevels)], nil, nil)
 end
 
 function restartmode()
@@ -618,7 +618,7 @@ function dependencies.onTick()
 	local currentCostume = player:getCostume()
 
 	local costumes
-	if table.icontains(GameData._smb2Levels,Level.filename()) == true then
+	if table.icontains(GameData.__smb2Levels,Level.filename()) == true then
 		if NPC.config[274].score == 11 then
 			playSound(147)
 			NPC.config[274].score = 6

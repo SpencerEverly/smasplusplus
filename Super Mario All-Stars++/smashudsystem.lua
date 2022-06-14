@@ -72,7 +72,7 @@ function smasdeathsystem.onPostNPCKill(npc, harmtype, player) --This will add co
 end
 
 function thirteenmodedeath()
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Audio.MusicVolume(0)
 	if SaveData.totalLives < 0 then
 		gameoveractivate = true
@@ -188,7 +188,7 @@ function thirteenmodedeath()
 		Misc.unpause() --Unpause afterward
 		SaveData.totalLives = 5 --Refill the lives back to 5
 	end
-	GameData.muteMusic = false
+	GameData.____muteMusic = false
 	smasdeathsystem.hasDied = true --The player has now died
 	if smasdeathsystem.exittomap == false then
 		Level.load(Level.filename())
@@ -204,7 +204,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 				if GameData.battlemodeactive == false or GameData.battlemodeactive == nil then
 					if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
 						if player.deathTimer == 0 then
-							GameData.muteMusic = true
+							GameData.____muteMusic = true
 							Audio.MusicVolume(0)
 							SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 							SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
@@ -217,7 +217,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 							Misc.pause()
 							fadeoutdeath = true --This starts the fade out animation
 							Routine.waitFrames(110, true)
-							GameData.muteMusic = false
+							GameData.____muteMusic = false
 							Misc.unpause()
 							if gameoveractivate == false then --If not in a gameover state...
 								fadeoutcompleted = true --...when waited enough time, unpause and reload the level
@@ -342,7 +342,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					end
 					if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
 						if player.deathTimer == 0 then
-							GameData.muteMusic = true
+							GameData.____muteMusic = true
 							Audio.MusicVolume(0)
 							SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 							SaveData.totalLives = SaveData.totalLives - 1
@@ -352,7 +352,7 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 							end
 							Misc.saveGame() --Save the game to save what we've added/edited
 							Routine.waitFrames(360, true)
-							GameData.muteMusic = false
+							GameData.____muteMusic = false
 							Misc.unpause()
 							if gameoveractivate == false then
 								fadeoutcompleted = true --When waited enough time, unpause and reload the level
@@ -641,7 +641,7 @@ function smasdeathsystem.onExit()
 		GameData.p1lives = 5
 		GameData.p2lives = 5
 	end
-	GameData.muteMusic = false --This is specific for my episode. Remove this if you wanna use this yourself.
+	GameData.____muteMusic = false --This is specific for my episode. Remove this if you wanna use this yourself.
 	Audio.MusicVolume(64) --Reset the music exiting the level
 	if smasdeathsystem.hasDied == true and smasdeathsystem.exittomap == false then
 		Level.exit()

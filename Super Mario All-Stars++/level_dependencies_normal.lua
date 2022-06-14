@@ -141,7 +141,7 @@ function dependencies.onTick()
 	if player.character == CHARACTER_NINJABOMBERMAN then
 		Graphics.activateHud(true)
 	end
-	if table.icontains(GameData._smb1Levels,Level.filename()) == true then
+	if table.icontains(GameData.__smb1Levels,Level.filename()) == true then
 		for k,v in NPC.iterate{89,23,27,24,173,175,176,177,172,174,612} do
 			if SaveData.SMB1HardModeActivated == true then
 				if v.id == 89 or v.id == 27 then
@@ -164,7 +164,7 @@ function dependencies.onTick()
 		end
 	end
 	if SaveData.SMB1LLAllNightNipponActivated == true then
-		if table.icontains(GameData._smb1Levels,Level.filename()) == true or table.icontains(GameData._smbllLevels,Level.filename()) == true then
+		if table.icontains(GameData.__smb1Levels,Level.filename()) == true or table.icontains(GameData.__smbllLevels,Level.filename()) == true then
 			Graphics.sprites.background[21].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/background-21.png")
 			Graphics.sprites.background[22].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/background-22.png")
 			Graphics.sprites.effect[22].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/effect-22.png")
@@ -177,7 +177,7 @@ function dependencies.onTick()
 			Graphics.sprites.npc[97].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/npc-97.png")
 			Graphics.sprites.npc[996].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/npc-996.png")
 		end
-		if table.icontains(GameData._smb1Levels,"SMB1 - W-1, L-4.lvlx") == true or table.icontains(GameData._smbllLevels,"SMBLL - W-1, L-4.lvlx") == true then
+		if table.icontains(GameData.__smb1Levels,"SMB1 - W-1, L-4.lvlx") == true or table.icontains(GameData.__smbllLevels,"SMBLL - W-1, L-4.lvlx") == true then
 			Graphics.sprites.npc[94].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/toads/world1.png")
 		end
 	elseif SaveData.SMB1LLAllNightNipponActivated == false then

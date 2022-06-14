@@ -1028,7 +1028,7 @@ end
 
 
 function smwMap.onStart()
-	--if not GameData.menucomplete then
+	--if not GameData.____mainMenuComplete then
 		--Level.load("SMAS - Start.lvlx")
 	--end
     for _,p in ipairs(Player.get()) do

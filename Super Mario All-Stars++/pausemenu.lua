@@ -4,7 +4,7 @@ local rng = require("rng")
 local playerManager = require("playerManager")
 local Routine = require("routine")
 
-GameData.muteMusic = false
+GameData.____muteMusic = false
 local musicmuted = false
 local blackscreen = Graphics.loadImage("blackscreen.png")
 
@@ -113,14 +113,14 @@ function pausemenu.onStart()
 end
 
 local function battlemodenewstage()
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Audio.MusicVolume(0)
 	playSound("skip-intro.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(battlelevelsrng[selecter], nil, nil) end)
 end
 
 local function battlemodeexit()
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Audio.MusicVolume(0)
 	playSound("world_warp.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
@@ -204,11 +204,11 @@ local function x2modeenable()
 end
 
 local function mutemusic()
-	GameData.muteMusic = not GameData.muteMusic
-	if GameData.muteMusic == true then
+	GameData.____muteMusic = not GameData.____muteMusic
+	if GameData.____muteMusic == true then
 		playSound("paused_on.ogg")
 		musicmuted = true
-	elseif GameData.muteMusic == false then
+	elseif GameData.____muteMusic == false then
 		playSound("paused_off.ogg")
 		musicmuted = false
 	end
@@ -224,7 +224,7 @@ local function quitgame()
 	Audio.MusicPause()
 	Misc.saveGame()
 	playSound("savequit.ogg")
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -233,7 +233,7 @@ local function quitonly()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	playSound("nosave.ogg")
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false pausemenu.paused_other = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -248,7 +248,7 @@ local function quitgamemap()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	Misc.saveGame()
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	playSound("savequit.ogg")
 	Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
@@ -299,7 +299,7 @@ local function quitonlymap()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
 	playSound("nosave.ogg")
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -331,26 +331,26 @@ end
 
 local function exitlevel()
 	Audio.MusicVolume(0)
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Audio.MusicPause()
 	playSound("quitmenu_close.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.muteMusic = false Level.exit() end)
+	Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.____muteMusic = false Level.exit() end)
 end
 
 local function restartlevel()
 	Audio.MusicVolume(0)
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Audio.MusicPause()
 	playSound("skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.muteMusic = false Level.load(Level.filename()) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.____muteMusic = false Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
 	Audio.MusicVolume(0)
 	Audio.MusicPause()
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	playSound("skip-intro.ogg")
-	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.muteMusic = false Level.load("MALC - HUB.lvlx", nil, nil) end)
+	Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) GameData.____muteMusic = false Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
 local function warpzonehub()
@@ -968,8 +968,8 @@ local function mainmenu()
 	pausemenu.paused = false
 	Misc.unpause()
 	Misc.saveGame()
-	GameData.muteMusic = true
-	Routine.run(function() exitscreen = true Audio.MusicVolume(0) playSound("shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() GameData.muteMusic = false Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
+	GameData.____muteMusic = true
+	Routine.run(function() exitscreen = true Audio.MusicVolume(0) playSound("shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() GameData.____muteMusic = false Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
 end
 
 local function wrong()
@@ -1957,7 +1957,7 @@ function pausemenu.onTick()
 		Audio.MusicVolume(0)
 	end
 	if musicmuted == false then
-		if GameData.muteMusic == true or GameData.muteMusic == true or GameData.muteMusic == true then
+		if GameData.____muteMusic == true or GameData.____muteMusic == true or GameData.____muteMusic == true then
 			Audio.MusicVolume(0)
 		else
 			Audio.MusicVolume(65)

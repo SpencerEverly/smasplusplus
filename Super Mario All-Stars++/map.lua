@@ -127,7 +127,7 @@ function levelload()
 	nochangecharmap = true
 	world.playerWalkingFrame = 1
 	playSound("levelload.ogg")
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	Audio.MusicVolume(0)
 	Misc.pause()
 	player:mem(0x17A, FIELD_BOOL, true)
@@ -137,7 +137,7 @@ function levelload()
 	Misc.unpause()
 	player:mem(0xFA, FIELD_BOOL, true)
 	Routine.waitFrames(1, true)
-	GameData.muteMusic = false
+	GameData.____muteMusic = false
 	loadlevelanimation = nil
 	loadlevelanimationin = true
 	Audio.MusicVolume(65)
@@ -169,10 +169,10 @@ function onInputUpdate()
 end
 
 function onStart()
-	if GameData.muteMusic == false then
+	if GameData.____muteMusic == false then
 		Audio.MusicVolume(65)
 	end
-	if GameData.muteMusic == true then
+	if GameData.____muteMusic == true then
 		Audio.MusicVolume(0)
 	end
 	Graphics.activateHud(false)

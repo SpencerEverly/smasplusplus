@@ -239,7 +239,7 @@ end
 local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
-GameData.noloadingsoundlevels = {
+GameData._noLoadingSoundLevels = {
 	"SMAS - Start.lvlx",
 	"SMAS - Raca's World (Part 0).lvlx",
 	"SMAS - Raca's World (Part 1).lvlx",
@@ -248,7 +248,7 @@ GameData.noloadingsoundlevels = {
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-	if not Misc.inEditor() and not table.icontains(GameData.noloadingsoundlevels,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+	if not Misc.inEditor() and not table.icontains(GameData._noLoadingSoundLevels,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
@@ -295,7 +295,7 @@ function onStart() --Now do onStart...
 		SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
 		GameData.weatherset = false
 	end
-	if not Misc.inEditor() and not table.icontains(GameData.noloadingsoundlevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
+	if not Misc.inEditor() and not table.icontains(GameData._noLoadingSoundLevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
 		fadetolevel = false
 		if loadactivate == true then
 			loadingSoundObject:FadeOut(800)
@@ -441,7 +441,7 @@ function onTick() --This will prevent split screen, again (Just in case)
 			mem(0x00B2C5AC,FIELD_FLOAT,3)
 		end
 	end
-	if table.icontains(GameData.friendlyplaces,Level.filename()) == true then
+	if table.icontains(GameData._friendlyPlaces,Level.filename()) == true then
 		GameData.friendlyArea = true --Set this to prevent Mother Brain Rinka from getting killed in places such as the boot screen, intro, or the Hub
 	end
 	--Now we'll overhaul the door star required system

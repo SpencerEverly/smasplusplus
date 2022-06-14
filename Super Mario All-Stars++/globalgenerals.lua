@@ -47,7 +47,7 @@ customCamera.transitionSpeed = 5
 
 SaveData._anothercurrency = {SaveData.totalcoins}
 
-if table.icontains(GameData.notransitionlevels,Level.filename()) or GameData.rushModeActive == true then
+if table.icontains(GameData._noTransitionLevels,Level.filename()) or GameData.rushModeActive == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -102,11 +102,11 @@ end
 
 function lavashroomeasteregg()
 	eastercrashprevload = true
-	GameData.muteMusic = true
+	GameData.____muteMusic = true
 	playSound("easteregg_smbx13crash.ogg")
 	eastercrashmsg = true
 	Routine.wait(2, true)
-	GameData.muteMusic = false
+	GameData.____muteMusic = false
 	Routine.wait(20, true)
 	eastercrashmsg = false
 	eastercrashdone = true
@@ -120,12 +120,12 @@ function globalgenerals.onPause(evt)
 end
 
 function globalgenerals.onStart()
-	GameData.muteMusic = false
+	GameData.____muteMusic = false
 	if Misc.inEditor() then
 		debugbox = require("debugbox")
 		debugbox.bootactive = true
 	end
-	if GameData.menucomplete == true then
+	if GameData.____mainMenuComplete == true then
 		if (mem(0xB25724, FIELD_STRING) == "SMAS - Start.lvlx") then
 			mem(0xB25724, FIELD_STRING, "map.lvlx")
 		end
@@ -282,7 +282,7 @@ function globalgenerals.onInputUpdate()
 	if currentCostume == "GA-BORIS" then
 		if not Misc.isPaused() then
 			if player.keys.altRun == KEYS_PRESSED and GameData.activateAbilityMessage == false or GameData.activateAbilityMessage == nil then
-				if table.icontains(GameData.friendlyplaces,Level.filename()) == false then
+				if table.icontains(GameData._friendlyPlaces,Level.filename()) == false then
 					player:mem(0x172, FIELD_BOOL, false)
 					cooldown = 5
 					GameData.activateAbilityMessage = true
@@ -472,7 +472,7 @@ function globalgenerals.onTick()
 		end
 	end
 	if currentCostume == "0-SMASPLUSPLUS-BETA" then
-		if table.icontains(GameData._smb2Levels,Level.filename()) == true then
+		if table.icontains(GameData.__smb2Levels,Level.filename()) == true then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
 		elseif Level.filename() then
 			starman.sfxFile = Misc.resolveSoundFile("costumes/mario/0-SMASPlusPlus-Beta/starman")
@@ -484,7 +484,7 @@ function globalgenerals.onTick()
 		extrasounds.id[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
 	end
 	if currentCostume == "1-SMB1-RETRO" then
-		if table.icontains(GameData._smb2Levels,Level.filename()) == true then
+		if table.icontains(GameData.__smb2Levels,Level.filename()) == true then
 			starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
 		elseif Level.filename() then
 			starman.sfxFile = Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/starman")
@@ -1456,7 +1456,7 @@ function globalgenerals.onExit()
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
-	if table.icontains(GameData.friendlyplaces,Level.filename()) == false then
+	if table.icontains(GameData._friendlyPlaces,Level.filename()) == false then
 		SaveData.lastLevelPlayed = Level.filename()
 	end
 	writeToFile("loadscreeninfo.txt", SaveData.resolution)

@@ -85,7 +85,7 @@ function costume.throwSnowball()
 			snowballNpc.speedX = -8.5
 			snowballNpc.speedY = 1
 		end
-		if table.icontains(GameData.nolevelplaces,Level.filename()) == false then
+		if table.icontains(GameData._noLevelPlaces,Level.filename()) == false then
 			playSound("mario/SP-1-EricCartman/snowball_throw.ogg")
 		end
 		costume.usesnowball = false

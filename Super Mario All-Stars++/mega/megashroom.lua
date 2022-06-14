@@ -175,7 +175,7 @@ function mega2.StopMega(pobj, useShrink)
 	end
 	
 	Audio.MusicVolume(musicvolcache);
-	GameData.muteMusic = false
+	GameData.____muteMusic = false
 	
 	if soundObject ~= nil then
 		soundObject:Stop()
@@ -394,7 +394,7 @@ local function UpdateMegaState()
 							Audio.MusicVolume(0);
 							refreshMusic(-1)
 							muteMusic(-1)
-							GameData.muteMusic = true
+							GameData.____muteMusic = true
 						end
 						
 						if(p:mem(0x13E, FIELD_WORD) > 0) then

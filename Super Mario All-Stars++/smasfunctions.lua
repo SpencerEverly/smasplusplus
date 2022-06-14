@@ -322,14 +322,10 @@ function loadSoundOnly(name) --Opening external sounds, but doesn't play them.
 end
 
 function resolveCostumeSound(name) --Resolve a sound for a costume being worn.
-	if player:getCostume() == nil then
-		local sound = Misc.resolveSoundFile(name)
-	else
-		local sound = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. player:getCostume() .. "/" .. name)
-	end
+	local sound = Misc.resolveSoundFile("costumes/" .. playerManager.getName(player.character) .. "/" .. player:getCostume() .. "/" .. name)
 	if sound == nil then
-		-- sound could not be found
-		return nil
+		--Sound could not be found, look under the default sound list instead
+		sound = Misc.resolveSoundFile(name)
 	end
 	return Audio.SfxOpen(sound)
 end

@@ -43,6 +43,7 @@ end
 
 function onEvent(eventName)
 	if eventName == "LoadWSMBA" then
+		GameData.____mainMenuComplete = false
 		Misc.saveGame()
 		if Misc.loadEpisode("Where SMB Attacks (Remake, SMAS++ Version)") == false then
 			Misc.saveGame()
