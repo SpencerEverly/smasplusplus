@@ -46,7 +46,7 @@ customCamera.transitionSpeed = 5
 
 SaveData._anothercurrency = {SaveData.totalcoins}
 
-if table.icontains(smastables._noTransitionLevels,Level.filename()) or GameData.rushModeActive == true then
+if table.icontains(smastables._noTransitionLevels,Level.filename()) or table.icontains(smastables.__wsmbaLevels,Level.filename()) or GameData.rushModeActive == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -340,6 +340,14 @@ function globalgenerals.onTick()
 		--local epicy = player.y - camera.y - 100
 		--Misc.setWindowPosition(epicx,epicy)
 	--end
+	if table.icontains(smastables.__wsmbaLevels,Level.filename()) then
+		littleDialogue.defaultStyleName = "smbx13"
+		warpTransition.musicFadeOut = false
+		warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
+		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
+		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
+		warpTransition.activateOnInstantWarps = false
+	end
 	if player.character == CHARACTER_SNAKE then
 		HUDOverride.visible.keys = true
 		HUDOverride.visible.itembox = true

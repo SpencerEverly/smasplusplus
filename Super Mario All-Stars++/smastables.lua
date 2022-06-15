@@ -128,6 +128,46 @@ smastables.__smbllLevels = {
 	"SMBLL - W-D, L-4.lvlx"
 }
 
+--All WSMBA levels, listed here for many reasons
+smastables.__wsmbaLevels = {
+	"WSMBA - W-0, L-Bonus.lvlx",
+	"WSMBA - W-0, L-MALC.lvlx",
+	"WSMBA - W-0, L-Mario City.lvlx",
+	"WSMBA - W-1, L-1.lvlx",
+	"WSMBA - W-1, L-2.lvlx",
+	"WSMBA - W-1, L-3.lvlx",
+	"WSMBA - W-2, L-1.lvlx",
+	"WSMBA - W-2, L-2.lvlx",
+	"WSMBA - W-2, L-3.lvlx",
+	"WSMBA - W-2, L-4.lvlx",
+	"WSMBA - W-2, L-5.lvlx",
+	"WSMBA - W-2, L-Boss.lvlx",
+	"WSMBA - W-2, L-Castle.lvlx",
+	"WSMBA - W-2, L-Hammer Bros 1.lvlx",
+	"WSMBA - W-2, L-Hammer Bros 2.lvlx",
+	"WSMBA - W-3, L-1.lvlx",
+	"WSMBA - W-3, L-2.lvlx",
+	"WSMBA - W-4, L-1.lvlx",
+	"WSMBA - W-4, L-2.lvlx",
+	"WSMBA - W-4, L-3.lvlx",
+	"WSMBA - W-4, L-4.lvlx",
+	"WSMBA - W-5, L-1.lvlx",
+	"WSMBA - W-5, L-2.lvlx",
+	"WSMBA - W-5, L-3.lvlx",
+	"WSMBA - W-6, L-1.lvlx",
+	"WSMBA - W-6, L-2.lvlx",
+	"WSMBA - W-6, L-3.lvlx",
+	"WSMBA - W-7, L-1.lvlx",
+	"WSMBA - W-7, L-2.lvlx",
+	"WSMBA - W-7, L-3.lvlx",
+	"WSMBA - W-7, L-4.lvlx",
+	"WSMBA - W-S, L-1.lvlx",
+	"WSMBA - W-S, L-2.lvlx",
+	"WSMBA - W-S, L-3.lvlx",
+	"WSMBA - W-S, L-4.lvlx",
+	"WSMBA - W-S, L-5.lvlx",
+}
+
 --Friendly place table for Mother Brain Rinka
 smastables._friendlyPlaces = {
 	"SMAS - Start.lvlx",
