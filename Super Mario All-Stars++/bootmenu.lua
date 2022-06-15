@@ -848,7 +848,11 @@ local function RushModeMenu1()
 end
 
 local function MarioChallengeMenu1()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Would you like to start the Mario Challenge?<page>The challenge will only mark levels within<page>this episode only.<question MarioChallengeSelectionOne>", pauses = false, updatesInPause = true})
+	if SaveData.disableX2char == false then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Would you like to start the Mario Challenge?<page>The challenge will only mark levels within<page>this episode only.<question MarioChallengeSelectionOne>", pauses = false, updatesInPause = true})
+	elseif SaveData.disableX2char == true then
+		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You'll need to disable 1.3 Mode before continuing. To disable 1.3 Mode, head into Settings and select SMBX 1.3 Mode.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+	end
 end
 
 local function FramerateToggle1()
