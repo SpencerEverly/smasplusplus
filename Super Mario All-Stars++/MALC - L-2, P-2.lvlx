@@ -1,5 +1,5 @@
 HEAD
-TL:"Me and Larry City - Mars' Core (Shaft)";CPID:"SMBX2";
+TL:"Me and Larry City - Mars' Core (Shaft)";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-193600;T:-200600;B:-199520;MZ:24;MF:"_OST/Super Smash Bros. Ultimate/Mario/a76_smo_finaldungeon.ogg";BG:4;

@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario All-Stars++\: Me and Larry City";CPID:"SMBX2";
+TL:"Super Mario All-Stars++\: Me and Larry City";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-201024;R:-193376;T:-201632;B:-200000;MZ:24;MF:"_OST/Me and Larry City/Main Theme.ogg";BG:29;OE:1;

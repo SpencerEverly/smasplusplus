@@ -1,5 +1,5 @@
 HEAD
-TL:"Me and Larry City - Mars' Core (Core)";CPID:"SMBX2";
+TL:"Me and Larry City - Mars' Core (Core)";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-197792;T:-200600;B:-199680;MZ:24;MF:"_OST/Me and Larry City/Ominous Wind (Kirby's Dream Land 3).spc|0\;g=2.7";BG:25;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 2\,\n        \"weather\"\: 3\n    }\n}\n";

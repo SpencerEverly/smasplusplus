@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: SMBX 1.1";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: SMBX 1.1";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario 64/Title Theme.ogg";BG:29;

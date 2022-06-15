@@ -1,5 +1,5 @@
 HEAD
-CPID:"SMBX2";
+XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-195200;T:-200600;B:-200000;MZ:24;MF:"_OST/Shovel Knight - OST.nsf|1\;g=2.7";BG:46;

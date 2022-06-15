@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: Jake Brito's Castle";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: Jake Brito's Castle";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-189312;T:-200600;B:-200000;MZ:24;MF:"_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg";BG:42;

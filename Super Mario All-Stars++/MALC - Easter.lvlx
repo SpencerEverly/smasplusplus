@@ -1,5 +1,5 @@
 HEAD
-TL:"Me and Larry City\: Easter Egg Hunt";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"result\"\: 1\,\n        \"time\"\: 120\n    }\n}\n";CPID:"SMBX2";
+TL:"Me and Larry City\: Easter Egg Hunt";XTRA:"{\n    \"showInMarioChallenge\"\: false\,\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"result\"\: 1\,\n        \"time\"\: 120\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-196800;T:-201216;B:-200000;MZ:24;MF:"_OST/Animal Crossing - New Leaf/STRM_BGM_ISL_GAME_DAY.ogg";BG:58;

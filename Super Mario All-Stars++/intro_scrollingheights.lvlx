@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: Scrolling Heights";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: Scrolling Heights";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200032;R:-199200;T:-205728;B:-200000;MZ:24;MF:"_OST/Nintendo Land/J_Blf_night.w.48.dspadpcm.ogg";BG:1;

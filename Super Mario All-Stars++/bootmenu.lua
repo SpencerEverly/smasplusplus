@@ -123,7 +123,7 @@ local function Battle1()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_battleshrooms.lvl", nil, nil)
+	Level.load("battle_battleshrooms.lvlx", nil, nil)
 end
 
 local function Battle2()
@@ -134,7 +134,7 @@ local function Battle2()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_battle-zone.lvl", nil, nil)
+	Level.load("battle_battle-zone.lvlx", nil, nil)
 end
 
 local function Battle3()
@@ -145,7 +145,7 @@ local function Battle3()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_classic-castle-battle.lvl", nil, nil)
+	Level.load("battle_classic-castle-battle.lvlx", nil, nil)
 end
 
 local function Battle4()
@@ -156,7 +156,7 @@ local function Battle4()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_dry-dry-desert.lvl", nil, nil)
+	Level.load("battle_dry-dry-desert.lvlx", nil, nil)
 end
 
 local function Battle5()
@@ -167,7 +167,7 @@ local function Battle5()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_hyrule-temple.lvl", nil, nil)
+	Level.load("battle_hyrule-temple.lvlx", nil, nil)
 end
 
 local function Battle6()
@@ -178,7 +178,7 @@ local function Battle6()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_invasion-battlehammer.lvl", nil, nil)
+	Level.load("battle_invasion-battlehammer.lvlx", nil, nil)
 end
 
 local function Battle7()
@@ -189,7 +189,7 @@ local function Battle7()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_lakitu-mechazone.lvl", nil, nil)
+	Level.load("battle_lakitu-mechazone.lvlx", nil, nil)
 end
 
 local function Battle8()
@@ -200,7 +200,7 @@ local function Battle8()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_lethal-lava-level.lvl", nil, nil)
+	Level.load("battle_lethal-lava-level.lvlx", nil, nil)
 end
 
 local function Battle9()
@@ -211,7 +211,7 @@ local function Battle9()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_retroville-underground.lvl", nil, nil)
+	Level.load("battle_retroville-underground.lvlx", nil, nil)
 end
 
 local function Battle10()
@@ -222,7 +222,7 @@ local function Battle10()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_slippy-slap-snowland.lvl", nil, nil)
+	Level.load("battle_slippy-slap-snowland.lvlx", nil, nil)
 end
 
 local function Battle11()
@@ -233,7 +233,7 @@ local function Battle11()
 	GameData.battlemoderngactive = false
 	Routine.wait(0.4)
 	Misc.saveGame()
-	Level.load("battle_woody-warzone.lvl", nil, nil)
+	Level.load("battle_woody-warzone.lvlx", nil, nil)
 end
 
 local function Battle12()

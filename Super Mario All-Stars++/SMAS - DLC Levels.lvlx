@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario All-Stars++\: DLC Additional Content";CPID:"SMBX2";
+TL:"Super Mario All-Stars++\: DLC Additional Content";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-198624;T:-200600;B:-200000;MZ:24;MF:"_OST/Satellaview BS-X/05 Town.spc|0\;g=2.3";BG:34;OE:1;

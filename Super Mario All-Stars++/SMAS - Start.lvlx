@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Boot Screen (DO NOT REMOVE)";CPID:"SMBX2";
+TL:"SMAS++ Boot Screen (DO NOT REMOVE)";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:0;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 0\n    }\n}\n";

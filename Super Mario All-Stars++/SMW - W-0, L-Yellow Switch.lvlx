@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario World\: Yellow Switch Palace";CPID:"SMBX2";
+TL:"Super Mario World\: Yellow Switch Palace";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-198208;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Bonus (Yoshi).spc|0\;g=2.7";BG:28;

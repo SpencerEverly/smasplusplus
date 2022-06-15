@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: Where SMB Attacks";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: Where SMB Attacks";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-191840;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros. 3 (NES\, VRC6 by skydev) - OST.nsf|0\;g=2.2";BG:10;

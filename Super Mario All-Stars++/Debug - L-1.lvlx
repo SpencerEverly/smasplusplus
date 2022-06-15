@@ -1,5 +1,5 @@
 HEAD
-CPID:"SMBX2";
+XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-197888;T:-200600;B:-200000;MZ:24;MF:"_OST/New Super Mario Bros. DS/Walking the Plains.ogg";BG:26;

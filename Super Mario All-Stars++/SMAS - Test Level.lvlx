@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario All-Stars++\: Debug Level 2";CPID:"SMBX2";
+TL:"Super Mario All-Stars++\: Debug Level 2";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Mario Paint/13 Data Robot.spc|0\;g=1.8";BG:10;

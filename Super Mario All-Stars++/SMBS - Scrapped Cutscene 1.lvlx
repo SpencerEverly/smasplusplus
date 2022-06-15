@@ -1,5 +1,5 @@
 HEAD
-TL:"CutsceneP1";CPID:"SMBX2";
+TL:"CutsceneP1";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-198592;T:-200832;B:-200000;MZ:16;MF:"";BG:23;LT:-1;

@@ -1,5 +1,5 @@
 HEAD
-TL:"DLC Level 1";CPID:"SMBX2";
+TL:"DLC Level 1";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-198464;T:-200600;B:-200000;MZ:24;MF:"_OST/Undertale - Last Breath/Not a Slacker Anymore (0.90 Speed).ogg";BG:1;

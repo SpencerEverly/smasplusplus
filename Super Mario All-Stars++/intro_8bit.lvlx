@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: 8-Bit (By TepigFan101)";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: 8-Bit (By TepigFan101)";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-193344;T:-200600;B:-200000;MZ:24;MF:"intro_8bit/8-Bit File Select Theme (Super Mario 64).ogg";BG:10;LT:-1;

@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: SMBX2b3";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: SMBX2b3";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"intro_SMBX2b3/trials1.ogg";BG:2;

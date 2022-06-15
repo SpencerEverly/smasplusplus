@@ -1,5 +1,5 @@
 HEAD
-TL:"MarioCity";CPID:"SMBX2";
+TL:"MarioCity";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-201632;R:-198272;T:-201440;B:-200000;MZ:24;MF:"_OST/Super Mario RPG/107 Super Pipe House.spc|0\;g=2.5";BG:48;

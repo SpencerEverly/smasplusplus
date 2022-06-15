@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: Classic";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: Classic";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/All Stars Menu/Boot Menu.ogg";BG:5;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\,\n        \"weather\"\: 6\n    }\n}\n";

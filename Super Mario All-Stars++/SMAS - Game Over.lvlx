@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario All-Stars++\: Game Over Screen";CPID:"SMBX2";
+TL:"Super Mario All-Stars++\: Game Over Screen";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:0;

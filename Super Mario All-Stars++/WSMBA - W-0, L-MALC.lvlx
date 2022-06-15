@@ -1,5 +1,5 @@
 HEAD
-TL:"Me and Larry City";CPID:"SMBX2";
+TL:"Me and Larry City";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-194976;T:-201632;B:-200000;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/ac_1700.ogg";BG:29;

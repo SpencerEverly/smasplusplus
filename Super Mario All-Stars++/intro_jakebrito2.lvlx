@@ -1,5 +1,5 @@
 HEAD
-TL:"SMAS++ Title Theme\: Jake Brito's Airship";CPID:"SMBX2";
+TL:"SMAS++ Title Theme\: Jake Brito's Airship";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-195328;T:-200600;B:-200000;MZ:24;MF:"_OST/Donkey Kong Country/20 Gang-Plank Galleon.spc|0\;g=2.5";BG:22;

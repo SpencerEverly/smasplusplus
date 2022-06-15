@@ -1,5 +1,5 @@
 HEAD
-CPID:"SMBX2";
+XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-201760;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/The Lost Levels/Title.spc|0\;g=2.7";BG:10;

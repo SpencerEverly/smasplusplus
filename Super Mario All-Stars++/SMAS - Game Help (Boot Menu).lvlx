@@ -1,5 +1,5 @@
 HEAD
-TL:"Game Help";CPID:"SMBX2";
+TL:"Game Help";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-193760;T:-200600;B:-200000;MZ:24;MF:"_OST/All Stars Menu/Game Help.ogg";BG:11;

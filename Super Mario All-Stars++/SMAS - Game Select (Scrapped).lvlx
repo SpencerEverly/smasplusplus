@@ -1,5 +1,5 @@
 HEAD
-TL:"Game Select 1";CPID:"SMBX2";
+TL:"Game Select 1";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-197600;T:-201152;B:-200000;MZ:24;MF:"_OST/smasselect.ogg";BG:6;

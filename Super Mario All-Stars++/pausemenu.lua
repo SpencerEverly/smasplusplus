@@ -42,7 +42,7 @@ pausemenu.pauseactivated = true
 
 local soundObject
 
-local battlelevelsrng = {"battle_battleshrooms.lvl", "battle_battle-zone.lvl", "battle_classic-castle-battle.lvl", "battle_dry-dry-desert.lvl", "battle_hyrule-temple.lvl", "battle_invasion-battlehammer.lvl", "battle_lakitu-mechazone.lvl", "battle_lethal-lava-level.lvl", "battle_slippy-slap-snowland.lvl", "battle_woody-warzone.lvl","battle_retroville-underground.lvl","battle_testlevel.lvlx"}
+local battlelevelsrng = {"battle_battleshrooms.lvlx", "battle_battle-zone.lvlx", "battle_classic-castle-battle.lvlx", "battle_dry-dry-desert.lvlx", "battle_hyrule-temple.lvlx", "battle_invasion-battlehammer.lvlx", "battle_lakitu-mechazone.lvlx", "battle_lethal-lava-level.lvlx", "battle_slippy-slap-snowland.lvlx", "battle_woody-warzone.lvlx","battle_retroville-underground.lvlx","battle_testlevel.lvlx"}
 local selecter = rng.randomInt(1,#battlelevelsrng)
 local randombattlelevel = battlelevelsrng[selecter]
 

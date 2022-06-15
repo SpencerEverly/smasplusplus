@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 3\: World 2 (Toad House 1)";CPID:"SMBX2";
+TL:"Super Mario Bros. 3\: World 2 (Toad House 1)";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Toad's House.spc|0\;g=2.5";BG:26;

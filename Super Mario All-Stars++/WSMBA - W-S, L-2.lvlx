@@ -1,5 +1,5 @@
 HEAD
-SZ:1;CPID:"SMBX2";
+SZ:1;XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-199680;MZ:24;MF:"_OST/Where SMB Attacks/ssbb-airship.ogg";BG:17;

@@ -1,5 +1,5 @@
 HEAD
-TL:"Raca's World (Pre-Battle)";CPID:"SMBX2";
+TL:"Raca's World (Pre-Battle)";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-196800;T:-200600;B:-200000;MZ:24;MF:"_OST/All Stars Secrets/Eerie Wind.ogg";BG:0;OE:1;
