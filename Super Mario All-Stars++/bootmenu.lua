@@ -103,16 +103,6 @@ local function introExit()
 	Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 
-local function LoadMarioChallenge()
-	exitscreen = true
-	autoscroll.scrollLeft(5000)
-	Audio.MusicChange(0, 0)
-	GameData.marioChallengeActivated = true
-	Routine.wait(0.4)
-	Misc.saveGame()
-	Level.load("mariochallenge_hub.lvlx", nil, 4)
-end
-
 local function BattleRandomLevelSelect()
 	exitscreen = true
 	autoscroll.scrollLeft(5000)
@@ -846,14 +836,6 @@ local function RushModeMenu1()
 	end
 	if Player.count() == 2 then
 		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You'll need to disable 2 player mode before continuing. To disable 2 player mode, head into Settings and select 2 Player Mode.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
-	end
-end
-
-local function MarioChallengeMenu1()
-	if SaveData.disableX2char == false then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Would you like to start the Mario Challenge?<page>The challenge will only mark levels within<page>this episode only.<question MarioChallengeSelectionOne>", pauses = false, updatesInPause = true})
-	elseif SaveData.disableX2char == true then
-		littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You'll need to disable 1.3 Mode before continuing. To disable 1.3 Mode, head into Settings and select SMBX 1.3 Mode.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
 	end
 end
 
@@ -2023,7 +2005,6 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("BattleSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 	littleDialogue.registerAnswer("BattleSelect",{text = "Classic Battle Mode (2P)",chosenFunction = function() Routine.run(BattleModeDisEnable1) end})
 	littleDialogue.registerAnswer("BattleSelect",{text = "Rush Mode (1P)",chosenFunction = function() Routine.run(RushModeMenu1) end})
-	littleDialogue.registerAnswer("BattleSelect",{text = "Mario Challenge (1P-2P)",chosenFunction = function() Routine.run(MarioChallengeMenu1) end})
 
 
 	littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
@@ -2228,11 +2209,6 @@ if bootmenu.active == true then
 	
 	littleDialogue.registerAnswer("RushModeSelectionOne",{text = "Yes",chosenFunction = function() Routine.run(startRushMode) end})
 	littleDialogue.registerAnswer("RushModeSelectionOne",{text = "No",chosenFunction = function() Routine.run(bootDialogue) end})
-	
-	
-	
-	littleDialogue.registerAnswer("MarioChallengeSelectionOne",{text = "Yes",chosenFunction = function() Routine.run(LoadMarioChallenge) end})
-	littleDialogue.registerAnswer("MarioChallengeSelectionOne",{text = "No",chosenFunction = function() Routine.run(bootDialogue) end})
 	
 
 

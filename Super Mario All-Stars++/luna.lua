@@ -72,10 +72,6 @@ if (_G.player2 ~= nil) or (_G.player3 ~= nil) or (_G.player4 ~= nil) or (_G.play
 	_G.player10 = Player(10)
 end
 
-if GameData.marioChallengeActivated == true then
-	local smasmariochallenge = require("smasmariochallenge")
-end
-
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
 	sectionlist[1] = player.section
@@ -108,7 +104,7 @@ function classicEvents.doEvents() --To prevent the plObject a nil value error, t
     for plIndex, plData in ipairs(playerData) do
         local plObject = players[plIndex]
 		if plObject == nil then --Let's prevent the plObject a nil value error
-			Player(2).isValid = false
+			--Player(2).isValid = false
 		end
         for _,keymapEnumValue in ipairs(playerKeymapKeys) do
             local keymapPropertyName = playerKeymapProperties[keymapEnumValue]

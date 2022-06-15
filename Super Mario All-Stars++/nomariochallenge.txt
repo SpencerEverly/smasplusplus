@@ -1,3 +1,0 @@
-This is to make sure the original Mario Challenge doesn't run in this episode, due to compatibility with the save system.
-
-Eventually there will be a way to play the Mario Challenge for this episode. For now, the og Mario Challenge should be disabled here.

@@ -3,7 +3,6 @@ local debugbox = require("debugbox")
 debugbox.bootactive = false
 GameData.battlemodeactive = false
 GameData.rushModeActive = false
-GameData.marioChallengeActivated = false
 
 local player2_alt = Player(2)
 

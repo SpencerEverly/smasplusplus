@@ -1,5 +1,7 @@
 local pausemenu2 = {}
 
+if GameData.marioChallengeActivated then return end
+
 local ready = false
 
 local pauseplus = require("pauseplus")
@@ -832,7 +834,6 @@ function battlemodeexit()
 	Misc.unpause()
 	GameData.rushModeActive = false
 	GameData.battlemodeactive = false
-	GameData.marioChallengeActivated = false
 	exitFadeActive = false
 	exitFadeActiveDone = true
 	activate1stPlayer()
@@ -1138,13 +1139,6 @@ if GameData.rushModeActive == true then
 		pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
 		pauseplus.createOption("main",{text = "Exit Rush Mode",closeMenu = true,description = "To exit Rush Mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
 	end
-end
-if GameData.marioChallengeActivated == true then
-	pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in the Mario Challenge. The stage will be picked at random!",action = function() Routine.run(mariochallengenewstage) end})
-	pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
-	pauseplus.createOption("settings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
-	pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
-	pauseplus.createOption("main",{text = "Exit Mario Challenge",closeMenu = true,description = "To exit the Mario Challenge, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
 end
 if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	if GameData.rushModeActive == nil or GameData.rushModeActive == false then

@@ -1,7 +1,7 @@
 local smasbooleans = {}
 
-if GameData.marioChallengeActivated == nil then
-	GameData.marioChallengeActivated = false
+if Misc.inMarioChallenge() then
+	GameData.marioChallengeActivated = true
 end
 
 return smasbooleans
