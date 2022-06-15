@@ -1519,19 +1519,25 @@ ID:752;X:-197888;Y:-195712;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAMarioCity\"\,\n
 ID:814;X:-197952;Y:-195648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-0\, L-Mario City.lvlx\"\,\n    \"levelTitle\"\: \"Mario's City\"\,\n    \"path_down\"\: \"toWSMBAW-1Path1\"\,\n    \"path_up\"\: \"toWSMBAMarioCity\"\,\n    \"unlock_down\"\: 1\,\n    \"warpIndex\"\: 30\n}\n";
 ID:752;X:-197952;Y:-195616;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-1Path1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -224\, 64\"\n}\n";
 ID:821;X:-198176;Y:-195552;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-2PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to the Snow Hills\"\,\n    \"path_right\"\: \"toWSMBAW-1Path1\"\,\n    \"warpName\"\: \"WSMBAW-1PipeEnd\"\n}\n";
-ID:753;X:-198272;Y:-195264;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 1216\,\n    \"music\"\: 6\,\n    \"width\"\: 576\n}\n";
-ID:753;X:-197056;Y:-195168;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 1120\,\n    \"music\"\: 4\,\n    \"width\"\: 1376\n}\n";
-ID:753;X:-196992;Y:-195872;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 1440\,\n    \"music\"\: 14\,\n    \"width\"\: 704\n}\n";
-ID:753;X:-194816;Y:-196288;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 704\,\n    \"music\"\: 5\,\n    \"width\"\: 480\n}\n";
-ID:753;X:-194528;Y:-195200;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 928\,\n    \"music\"\: 14\,\n    \"width\"\: 352\n}\n";
-ID:753;X:-198208;Y:-194496;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 832\,\n    \"music\"\: 7\,\n    \"width\"\: 704\n}\n";
+ID:753;X:-198272;Y:-195264;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 576\,\n    \"music\"\: 6\,\n    \"width\"\: 1216\n}\n";
+ID:753;X:-197056;Y:-195168;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 1376\,\n    \"music\"\: 4\,\n    \"width\"\: 1120\n}\n";
+ID:753;X:-196992;Y:-195872;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 704\,\n    \"music\"\: 14\,\n    \"width\"\: 1440\n}\n";
+ID:753;X:-194816;Y:-196288;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 408\,\n    \"music\"\: 5\,\n    \"width\"\: 704\n}\n";
+ID:753;X:-194528;Y:-195200;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 352\,\n    \"music\"\: 14\,\n    \"width\"\: 928\n}\n";
+ID:753;X:-198208;Y:-194496;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"global\"\: {\n        \"spawningBehaviour\"\: 1\n    }\,\n    \"height\"\: 704\,\n    \"music\"\: 7\,\n    \"width\"\: 832\n}\n";
 ID:821;X:-197568;Y:-194912;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-1PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to World 1\"\,\n    \"path_right\"\: \"toWSMBA2-1\"\,\n    \"warpName\"\: \"WSMBAW-2PipeBegin\"\n}\n";
 ID:752;X:-197536;Y:-194912;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 64\, -64\"\n}\n";
 ID:802;X:-197472;Y:-194976;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"Snow Mountain\"\,\n    \"path_down\"\: \"toWSMBA2-1\"\,\n    \"path_up\"\: \"toWSMBAW-2Bonus\"\n}\n";
 ID:859;X:-197472;Y:-195040;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-0\, L-Bonus.lvlx\"\,\n    \"levelTitle\"\: \"Bonus!\"\,\n    \"path_down\"\: \"toWSMBAW-2Bonus\"\,\n    \"path_up\"\: \"toWSMBA2-2\"\n}\n";
 ID:752;X:-197472;Y:-195008;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-2Bonus\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:752;X:-197472;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 128\, -32\, 128\, 118\"\n}\n";
-ID:802;X:-197344;Y:-194976;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"The Snow Lands\"\,\n    \"path_down\"\: \"toWSMBA2-3\"\,\n    \"path_up\"\: \"toWSMBA2-2\"\n}\n";
+ID:802;X:-197344;Y:-194976;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"The Snow Lands\"\,\n    \"path_down\"\: \"toWSMBA2-Castle\"\,\n    \"path_up\"\: \"toWSMBA2-2\"\n}\n";
+ID:854;X:-197472;Y:-194816;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Castle.lvlx\"\,\n    \"levelTitle\"\: \"The Castle of Koopas\"\,\n    \"path_down\"\: \"toWSMBA2-Hammer1\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toWSMBA2-Castle\"\n}\n";
+ID:752;X:-197344;Y:-194944;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Castle\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -128\, 128\"\n}\n";
+ID:802;X:-197568;Y:-194784;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Hammer Bros 1.lvlx\"\,\n    \"levelTitle\"\: \"Hammer Bros. 1\"\,\n    \"path_right\"\: \"toWSMBA2-Hammer1\"\n}\n";
+ID:752;X:-197472;Y:-194784;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Hammer1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -96\, 0\"\n}\n";
+ID:802;X:-197696;Y:-194752;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Level 4\"\,\n    \"path_right\"\: \"toWSMBA2-3\"\n}\n";
+ID:752;X:-197568;Y:-194752;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-3\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -128\, 0\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
