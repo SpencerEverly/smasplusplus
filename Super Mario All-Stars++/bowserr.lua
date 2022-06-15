@@ -11,6 +11,7 @@ local panim = require("playeranim")
 local followa = require("followa")
 local vectr = require("vectr")
 local defs = require("expandedDefines")
+local HUDOverride = require("hudoverridee")
 
 local bowser = {}
 
@@ -926,7 +927,7 @@ end
 
 function bowser.onDraw()
 	if(player.character == CHARACTER_BOWSER) then
-		if Graphics.isHudActivated() then
+		if HUDOverride.visible.customitembox == true then
 			drawHUD();
 		end
 		

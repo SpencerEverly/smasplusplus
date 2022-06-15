@@ -595,6 +595,18 @@ function scoreCount13() --Returns the score count limited within 1.3 Mode's digi
 	end
 end
 
+function coinCountClassic() --Returns the classic coin count.
+	return SaveData.totalCoinsClassic
+end
+
+function coinCountClassicWith99Limit() --Returns the classic coin count, but with a 99 coin limiter when above 100.
+	if SaveData.totalCoinsClassic < 100 then
+		return SaveData.totalCoinsClassic
+	elseif SaveData.totalCoinsClassic >= 100 then
+		return 99
+	end
+end
+
 -----------------------
 --Date/Time Functions
 -----------------------

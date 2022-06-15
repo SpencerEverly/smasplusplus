@@ -170,6 +170,7 @@ extrasounds.id[145] = Audio.SfxOpen(Misc.resolveSoundFile("goaltape-irisout.ogg"
 extrasounds.id[146] = Audio.SfxOpen(Misc.resolveSoundFile("smw-exit-orb.ogg")) --SMW Orb Exit
 extrasounds.id[147] = Audio.SfxOpen(Misc.resolveSoundFile("ace-coins-5.ogg")) --SMA All Ace Coins Collected
 extrasounds.id[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg")) --SMB3 Door Close
+extrasounds.id[149] = Audio.SfxOpen(Misc.resolveSoundFile("sprout-megashroom.ogg")) --Mega Mushroom Block Sprout (Custom)
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
@@ -426,6 +427,8 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 					playSound(92)
 				elseif block.contentID == 1227 then
 					playSound(92)
+				elseif block.contentID == 1997 then
+					playSound(149)
 				elseif block.contentID == 0 then --This is to prevent a coin sound from playing when hitting an nonexistant block
 					
 				elseif block.contentID == 1000 then --Same as last

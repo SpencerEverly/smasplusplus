@@ -120,7 +120,6 @@ end
 
 function globalgenerals.onStart()
 	GameData.____muteMusic = false
-	loadCostumeSounds()
 	if Misc.inEditor() then
 		debugbox = require("debugbox")
 		debugbox.bootactive = true

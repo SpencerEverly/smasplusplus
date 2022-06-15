@@ -704,9 +704,9 @@ end
 function HUDOverride.drawCoins(splitOffset, thisCam, thisPlayer, priority)
 	local s = GetSprite("coins", thisPlayer.character);
 	if SaveData.disableX2char == false then
-		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(SaveData.totalCoinsClassic), priority);
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(coinCountClassicWith99Limit()), priority);
 	elseif SaveData.disableX2char == true then
-		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(SaveData.totalCoinsClassic), priority);
+		drawCounter(splitOffset, thisCam, thisPlayer, HUDOverride.offsets.coins, s, tostring(coinCountClassicWith99Limit()), priority);
 	end
 end
 

@@ -9,6 +9,7 @@
 --SMBLL (Optional) = 52 (Done!)
 --SMW = TBD (WIP)
 --SMBS = TBD (WIP)
+--WSMBA = 24 (Done!)
 --Lava Lands = 5 (WIP)
 --Side Quest (Optional) = TBD (WIP)
 --True Ending = 1 (WIP)
