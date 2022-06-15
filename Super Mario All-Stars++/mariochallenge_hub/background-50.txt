@@ -1,2 +1,0 @@
-frames=15
-priority=-4

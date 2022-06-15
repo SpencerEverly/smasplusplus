@@ -1,5 +1,0 @@
-width=32
-height=32
-framestyle=0
-frames=1
-nogravity=1
