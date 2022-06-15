@@ -913,7 +913,6 @@ ID:821;X:-193376;Y:-197856;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"d
 ID:846;X:-193088;Y:-197760;D:-1;XTRA:"{\n    \"path_left\"\: \"toGameSelect7\"\,\n    \"path_up\"\: \"toWSMBA\"\,\n    \"unlock_down\"\: 1\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 1\n}\n";
 ID:752;X:-193088;Y:-197792;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
 ID:752;X:-193344;Y:-197760;D:-1;XTRA:"{\n    \"name\"\: \"toGameSelect7\"\,\n    \"points\"\: \"-32\, 0\, 258\, 0\"\n}\n";
-ID:848;X:-193184;Y:-197856;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"WarpToWSMBA\"\,\n    \"levelFilename\"\: \"_warp_to_wheresmbattacks.lvlx\"\,\n    \"levelTitle\"\: \"Where SMB Attacks\"\,\n    \"path_down\"\: \"toWSMBA\"\,\n    \"unlock_down\"\: 1\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 1\,\n    \"warpName\"\: \"WSMBABeginWarp\"\n}\n";
 ID:753;X:-197600;Y:-199392;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros/World 1.ogg\"\,\n    \"height\"\: 320\,\n    \"music\"\: 2\,\n    \"width\"\: 800\n}\n";
 ID:821;X:-197440;Y:-199264;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMB1BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to Game Select\"\,\n    \"path_right\"\: \"toSMB11-1\"\,\n    \"warpName\"\: \"WarpToGameSelectSMB1\"\n}\n";
 ID:752;X:-197408;Y:-199264;D:-1;XTRA:"{\n    \"name\"\: \"toSMB11-1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
