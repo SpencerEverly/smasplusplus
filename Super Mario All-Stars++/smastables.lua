@@ -140,7 +140,6 @@ smastables.__wsmbaLevels = {
 	"WSMBA - W-2, L-2.lvlx",
 	"WSMBA - W-2, L-3.lvlx",
 	"WSMBA - W-2, L-4.lvlx",
-	"WSMBA - W-2, L-5.lvlx",
 	"WSMBA - W-2, L-Boss.lvlx",
 	"WSMBA - W-2, L-Castle.lvlx",
 	"WSMBA - W-2, L-Hammer Bros 1.lvlx",

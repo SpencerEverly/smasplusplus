@@ -1530,14 +1530,22 @@ ID:752;X:-197536;Y:-194912;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-1\"\,\n    \"
 ID:802;X:-197472;Y:-194976;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"Snow Mountain\"\,\n    \"path_down\"\: \"toWSMBA2-1\"\,\n    \"path_up\"\: \"toWSMBAW-2Bonus\"\n}\n";
 ID:859;X:-197472;Y:-195040;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-0\, L-Bonus.lvlx\"\,\n    \"levelTitle\"\: \"Bonus!\"\,\n    \"path_down\"\: \"toWSMBAW-2Bonus\"\,\n    \"path_up\"\: \"toWSMBA2-2\"\n}\n";
 ID:752;X:-197472;Y:-195008;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-2Bonus\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
-ID:752;X:-197472;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 128\, -32\, 128\, 118\"\n}\n";
+ID:752;X:-197472;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 128\, -32\, 128\, 96\"\n}\n";
 ID:802;X:-197344;Y:-194976;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"The Snow Lands\"\,\n    \"path_down\"\: \"toWSMBA2-Castle\"\,\n    \"path_up\"\: \"toWSMBA2-2\"\n}\n";
 ID:854;X:-197472;Y:-194816;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Castle.lvlx\"\,\n    \"levelTitle\"\: \"The Castle of Koopas\"\,\n    \"path_down\"\: \"toWSMBA2-Hammer1\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toWSMBA2-Castle\"\n}\n";
 ID:752;X:-197344;Y:-194944;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Castle\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -128\, 128\"\n}\n";
-ID:802;X:-197568;Y:-194784;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Hammer Bros 1.lvlx\"\,\n    \"levelTitle\"\: \"Hammer Bros. 1\"\,\n    \"path_right\"\: \"toWSMBA2-Hammer1\"\n}\n";
+ID:802;X:-197568;Y:-194784;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Hammer Bros 1.lvlx\"\,\n    \"levelTitle\"\: \"Hammer Bros. 1\"\,\n    \"path_down\"\: \"toWSMBA2-3\"\,\n    \"path_right\"\: \"toWSMBA2-Hammer1\"\n}\n";
 ID:752;X:-197472;Y:-194784;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Hammer1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -96\, 0\"\n}\n";
-ID:802;X:-197696;Y:-194752;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Level 4\"\,\n    \"path_right\"\: \"toWSMBA2-3\"\n}\n";
+ID:802;X:-197696;Y:-194752;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Level 4\"\,\n    \"path_left\"\: \"toWSMBA2-Hammer2\"\,\n    \"path_right\"\: \"toWSMBA2-3\"\n}\n";
 ID:752;X:-197568;Y:-194752;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-3\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -128\, 0\"\n}\n";
+ID:802;X:-197760;Y:-194880;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Hammer Bros 2.lvlx\"\,\n    \"levelTitle\"\: \"Hammer 2...?\"\,\n    \"path_down\"\: \"toWSMBA2-Hammer2\"\,\n    \"path_up\"\: \"toWSMBA2-4\"\n}\n";
+ID:752;X:-197728;Y:-194752;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Hammer2\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -32\, -128\"\n}\n";
+ID:802;X:-197952;Y:-194944;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"Level 5\"\,\n    \"path_right\"\: \"toWSMBA2-4\"\,\n    \"path_up\"\: \"toWSMBA2-5\"\n}\n";
+ID:752;X:-197760;Y:-194912;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-4\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, -192\, -32\"\n}\n";
+ID:752;X:-197952;Y:-194976;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-5\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\,\n    \"types\"\: \"bridge\"\n}\n";
+ID:855;X:-197952;Y:-195040;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Boss.lvlx\"\,\n    \"levelTitle\"\: \"Quicksand Boss\"\,\n    \"path_down\"\: \"toWSMBA2-5\"\,\n    \"path_up\"\: \"toWSMBAW-2Path1\"\n}\n";
+ID:752;X:-197952;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-2Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
+ID:821;X:-197952;Y:-195168;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-3PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"toWSMBAW-2Path1\"\,\n    \"warpName\"\: \"WSMBAW-2PipeEnd\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
