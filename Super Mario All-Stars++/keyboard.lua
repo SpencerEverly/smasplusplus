@@ -111,6 +111,7 @@ end
 
 function keyboard.onInitAPI()
 	registerEvent(keyboard, "onKeyboardPressDirect")
+	registerEvent(keyboard, "onControllerButtonPress")
 	registerEvent(keyboard, "onDraw")
 	registerEvent(keyboard, "onPasteText")
 	registerEvent(keyboard, "onInputUpdate")
@@ -146,6 +147,32 @@ function keyboard.onInputUpdate()
 	end
 	if GameData.toggleoffkeys == false or GameData.toggleoffkeys == nil then
 		
+	end
+end
+
+function keyboard.onControllerButtonPress(button)
+	if not keyboard.active then
+		return
+	end
+	
+	if (button == inputConfig1.jump) then
+		if GameData.playernameenterfirstboot == false then
+			playSound("console/console_resetfont.ogg")
+			GameData.toggleoffinventory = false
+			GameData.toggleoffkeys = false
+			keyboard.active = false
+			GameData.enablekeyboard = false
+			GameData.reopenmenu = true
+		elseif GameData.playernameenterfirstboot == true or GameData.playernameenterfirstboot == nil then
+			playSound("console/console_resetfont.ogg")
+			SaveData.playerName = "Player"
+			keyboard.active = false
+			GameData.enablekeyboard = false
+			GameData.firstbootfive = true
+			GameData.toggleoffkeys = false
+			GameData.toggleoffinventory = false
+			GameData.playernameenter = false
+		end
 	end
 end
 
@@ -251,9 +278,11 @@ do
 			return
 		end
 		if GameData.playernameenterfirstboot == false or GameData.playernameenterfirstboot == nil then
-			textplus.print{x = 60, y = 310, text = "To cancel, press the PAGE DOWN key.", priority = -1, font = msgfont}
+			textplus.print{x = 60, y = 310, text = "To cancel, press the PAGE DOWN key,", priority = -1, font = msgfont}
+			textplus.print{x = 15, y = 330, text = "or use the JUMP key on your controller.", priority = -1, font = msgfont}
 		elseif GameData.playernameenterfirstboot == true then
-			textplus.print{x = 65, y = 310, text = "To skip, press the PAGE DOWN key.", priority = -1, font = msgfont}
+			textplus.print{x = 65, y = 310, text = "To skip, press the PAGE DOWN key,", priority = -1, font = msgfont}
+			textplus.print{x = 15, y = 330, text = "or use the JUMP key on your controller.", priority = -1, font = msgfont}
 		end
 		
 		local buffer

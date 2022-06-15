@@ -654,7 +654,9 @@ local function FirstBoot6()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
 	if SaveData.firstBootCompleted == false then
 		SaveData.firstBootCompleted = true
+		GameData.playernameenterfirstboot = false
 	end
+	GameData.playernameenterfirstboot = false
 	Misc.saveGame()
 end
 	
@@ -1351,6 +1353,7 @@ function bootmenu.onStart()
 			GameData.startedmenu = 1
 		end
 		if SaveData.firstBootCompleted == true and GameData.saveDataMigrated == true then
+			GameData.playernameenterfirstboot = false
 			Routine.run(easterEgg, true)
 			playernamebyImg = true
 			pfpimage = true
