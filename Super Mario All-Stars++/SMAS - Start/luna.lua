@@ -1,5 +1,9 @@
 local debugbox = require("debugbox")
+
 debugbox.bootactive = false
+GameData.battlemodeactive = false
+GameData.rushModeActive = false
+GameData.marioChallengeActivated = false
 
 local player2_alt = Player(2)
 
@@ -281,8 +285,6 @@ function onStart()
 	if mem(0x00B2C5AC,FIELD_FLOAT,0) then
 		mem(0x00B2C5AC,FIELD_FLOAT,3)
 	end
-	GameData.battlemodeactive = false
-	GameData.rushModeActive = false
 	Misc.saveGame()
 end
 

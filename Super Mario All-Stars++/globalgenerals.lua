@@ -46,7 +46,7 @@ customCamera.transitionSpeed = 5
 
 SaveData._anothercurrency = {SaveData.totalcoins}
 
-if table.icontains(smastables._noTransitionLevels,Level.filename()) or table.icontains(smastables.__wsmbaLevels,Level.filename()) or GameData.rushModeActive == true then
+if table.icontains(smastables._noTransitionLevels,Level.filename()) or GameData.rushModeActive == true then
 	warpTransition.musicFadeOut = false
 	warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 	warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -342,6 +342,13 @@ function globalgenerals.onTick()
 	--end
 	if table.icontains(smastables.__wsmbaLevels,Level.filename()) then
 		littleDialogue.defaultStyleName = "smbx13"
+		warpTransition.musicFadeOut = false
+		warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
+		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
+		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
+		warpTransition.activateOnInstantWarps = false
+	end
+	if table.icontains(smastables.__marioChallengeLevels,Level.filename()) then
 		warpTransition.musicFadeOut = false
 		warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE

@@ -119,11 +119,13 @@ function customNPC.onTickNPC(v)
 			GameData.rushModeWon = true
 		end
 		if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-			if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-				table.insert(SaveData.completeLevelsOptional,Level.filename())
-				SaveData.totalStarCount = SaveData.totalStarCount
-			elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-				SaveData.totalStarCount = SaveData.totalStarCount
+			if GameData.marioChallengeActivated == false then
+				if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+					table.insert(SaveData.completeLevelsOptional,Level.filename())
+					SaveData.totalStarCount = SaveData.totalStarCount
+				elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+					SaveData.totalStarCount = SaveData.totalStarCount
+				end
 			end
 		end
         player.keys.right = true
@@ -173,6 +175,8 @@ function customNPC.onTickNPC(v)
 				Level.exit(LEVEL_WIN_TYPE_STAR)
 			elseif GameData.rushModeActive == true and GameData.rushModeWon == true then
 				Level.load("SMAS - Rush Mode Results.lvlx")
+			elseif GameData.marioChallengeActivated == true then
+				
 			end
         end
     end

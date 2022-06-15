@@ -256,11 +256,13 @@ function roulettestar.onPostNPCKill(v,reason)
 		GameData.winStateActive = true
 		collectactive = true
 		if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-			if not table.icontains(SaveData.completeLevels,Level.filename()) then
-				SaveData.totalStarCount = SaveData.totalStarCount + 1
-				table.insert(SaveData.completeLevels,Level.filename())
-			elseif table.icontains(SaveData.completeLevels,Level.filename()) then
-				SaveData.totalStarCount = SaveData.totalStarCount
+			if GameData.marioChallengeActivated == false then
+				if not table.icontains(SaveData.completeLevels,Level.filename()) then
+					SaveData.totalStarCount = SaveData.totalStarCount + 1
+					table.insert(SaveData.completeLevels,Level.filename())
+				elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+					SaveData.totalStarCount = SaveData.totalStarCount
+				end
 			end
 		end
 	end

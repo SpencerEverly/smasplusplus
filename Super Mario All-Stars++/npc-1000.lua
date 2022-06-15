@@ -226,11 +226,13 @@ function dudstar.onPostNPCKill(v,reason)
 	if dudstar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
 		Routine.run(starget)
 		if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-			if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-				table.insert(SaveData.completeLevelsOptional,Level.filename())
-				SaveData.totalStarCount = SaveData.totalStarCount
-			elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-				SaveData.totalStarCount = SaveData.totalStarCount
+			if GameData.marioChallengeActivated == false then
+				if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+					table.insert(SaveData.completeLevelsOptional,Level.filename())
+					SaveData.totalStarCount = SaveData.totalStarCount
+				elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+					SaveData.totalStarCount = SaveData.totalStarCount
+				end
 			end
 		end
 	end
