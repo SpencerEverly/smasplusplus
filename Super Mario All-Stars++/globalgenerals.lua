@@ -341,7 +341,9 @@ function globalgenerals.onTick()
 		--Misc.setWindowPosition(epicx,epicy)
 	--end
 	if table.icontains(smastables.__wsmbaLevels,Level.filename()) then
-		littleDialogue.defaultStyleName = "smbx13"
+		if SaveData.disableX2char == false then
+			littleDialogue.defaultStyleName = "smbx13"
+		end
 		warpTransition.musicFadeOut = false
 		warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
 		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
