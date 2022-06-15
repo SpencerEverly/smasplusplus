@@ -35,15 +35,6 @@ if mem(0x00B251E0, FIELD_WORD) >= 1 then
 	end
 end
 
---Making sure we're in the Mario Challenge... if so, reload the level if its in the noLevel table.
-local rng = require("base/rng") --Load up rng for etc. things
-if Misc.inMarioChallenge() then
-	SaveData.disableX2char = false
-	if table.icontains(smastables.smastables._noLevelMarioChallengePlaces,Level.filename()) then
-		Level.load(smastables.__allLevels[rng.randomInt(1,#smastables.__allLevels)])
-	end
-end
-
 --For SEE Mod users, where they have a definite version of LunaLua.
 if SMBX_VERSION == VER_SEE_MOD then
 	Misc.setWindowTitle("Super Mario All-Stars++")
@@ -61,8 +52,6 @@ _G.EventManager = require("main_events_mod")
 _G.extraNPCProperties = require("extraNPCProperties")
 if not Misc.inMarioChallenge() then
 	_G.HUDOverride = require("hudoverridee")
-elseif Misc.inMarioChallenge() then
-	_G.HUDOverride = require("hudoverride")
 end
 
 --SMAS specific functions need to be required as well:
@@ -70,6 +59,16 @@ _G.smasfunctions = require("smasfunctions")
 _G.smasverbosemode = require("smasverbosemode")
 _G.smasbooleans = require("smasbooleans")
 _G.smastables = require("smastables")
+
+--Making sure we're in the Mario Challenge... if so, reload the level if its in the noLevel table.
+local rng = require("base/rng") --Load up rng for etc. things
+if Misc.inMarioChallenge() then
+	_G.HUDOverride = require("hudoverride")
+	SaveData.disableX2char = false
+	if table.icontains(smastables.smastables._noLevelMarioChallengePlaces,Level.filename()) then
+		Level.load(smastables.__allLevels[rng.randomInt(1,#smastables.__allLevels)])
+	end
+end
 
 --This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.
 _G.Player = Player
