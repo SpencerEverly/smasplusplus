@@ -688,7 +688,7 @@ local function gamebootDialogue()
 end
 
 local function battleModeDialogue()
-	littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
+	littleDialogue.create({text = "<setPos 400 32 0.5 -1.5><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
 local function optionsMenu1()
