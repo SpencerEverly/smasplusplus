@@ -9,7 +9,11 @@
 ]]
 
 local playerManager = require("playerManager")
-local HUDOverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverride")
+end
 local blockutils = require("blocks/blockutils")
 
 local configFileReader = require("configFileReader")

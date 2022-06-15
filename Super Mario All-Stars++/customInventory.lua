@@ -13,7 +13,11 @@ local inventory = {}
 inventory.startingItems = 0
 
 local particles = require("particles")
-local hOverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	hOverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	hOverride = require("hudoverride")
+end
 local shader = Misc.multiResolveFile("starman.frag", "shaders\\npc\\starman.frag")
 
 -- Variables --

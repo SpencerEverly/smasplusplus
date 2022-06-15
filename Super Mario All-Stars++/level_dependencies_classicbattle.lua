@@ -8,7 +8,11 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local smasdeathsystem = require("smashudsystem")
-local HUDOverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverride")
+end
 local rng = require("base/rng")
 local warpTransition = require("warpTransition")
 local pausemenu = require("pausemenu2")

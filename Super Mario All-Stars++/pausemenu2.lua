@@ -1,6 +1,6 @@
 local pausemenu2 = {}
 
-if GameData.marioChallengeActivated then return end
+if Misc.inMarioChallenge() then return end
 
 local ready = false
 
@@ -1142,7 +1142,7 @@ if GameData.rushModeActive == true then
 end
 if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	if GameData.rushModeActive == nil or GameData.rushModeActive == false then
-		if GameData.marioChallengeActivated == false then
+		if Misc.inMarioChallenge() == false then
 			if (Level.filename() == "map.lvlx") == false then
 				pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
 			end

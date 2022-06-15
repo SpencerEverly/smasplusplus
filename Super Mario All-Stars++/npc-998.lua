@@ -111,7 +111,7 @@ function customNPC.onTickNPC(v)
             data.tick = 0
             data.state = 2
 			if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-				if GameData.marioChallengeActivated == false then
+				if Misc.inMarioChallenge() == false then
 					if not table.icontains(SaveData.completeLevels,Level.filename()) then
 						SaveData.totalStarCount = SaveData.totalStarCount + 1
 						table.insert(SaveData.completeLevels,Level.filename())

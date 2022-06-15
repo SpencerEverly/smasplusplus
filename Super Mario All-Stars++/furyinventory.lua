@@ -22,7 +22,11 @@ local warpTransition = require("warpTransition")
 local pausemenu = require("pauseplus")
 local littleDialogue = require("littleDialogue")
 local modernReserveItems = require("modernReserveItems")
-local hudoverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	hudoverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	hudoverride = require("hudoverride")
+end
 
 furyinventory.furyinventoryopened = false
 GameData.toggleoffinventory = false

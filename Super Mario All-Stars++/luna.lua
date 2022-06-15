@@ -35,6 +35,15 @@ if mem(0x00B251E0, FIELD_WORD) >= 1 then
 	end
 end
 
+--Making sure we're in the Mario Challenge... if so, reload the level if its in the noLevel table.
+local rng = require("base/rng") --Load up rng for etc. things
+if Misc.inMarioChallenge() then
+	SaveData.disableX2char = false
+	if table.icontains(smastables.smastables._noLevelMarioChallengePlaces,Level.filename()) then
+		Level.load(smastables.__allLevels[rng.randomInt(1,#smastables.__allLevels)])
+	end
+end
+
 --For SEE Mod users, where they have a definite version of LunaLua.
 if SMBX_VERSION == VER_SEE_MOD then
 	Misc.setWindowTitle("Super Mario All-Stars++")
@@ -50,6 +59,11 @@ _G.extrasounds = require("extrasounds")
 _G.classicEvents = require("classiceventsmod")
 _G.EventManager = require("main_events_mod")
 _G.extraNPCProperties = require("extraNPCProperties")
+if not Misc.inMarioChallenge() then
+	_G.HUDOverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	_G.HUDOverride = require("hudoverride")
+end
 
 --SMAS specific functions need to be required as well:
 _G.smasfunctions = require("smasfunctions")
@@ -140,7 +154,6 @@ end
 --Now that everything has been loaded, start loading the medium important stuff
 local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 local repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
-local rng = require("base/rng") --Load up rng for etc. things
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
 local smascheats = require("smascheats") --To enable edited cheats and some new ones
 if SaveData.speedrunMode == true then

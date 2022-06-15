@@ -1,6 +1,10 @@
 local littleDialogue = require("littleDialogue")
 local rng = require("base/rng")
-local HUDOverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverride")
+end
 local level_dependencies_rushmode = require("level_dependencies_rushmode")
 local mleb = require("multilayeredearthboundbg")
 local title = Graphics.loadImage("title-final-2x.png")
@@ -20,7 +24,9 @@ HUDOverride.visible.timer = false
 HUDOverride.visible.levelname = false
 HUDOverride.visible.overworldPlayer = false
 HUDOverride.visible.deathcount = false
-HUDOverride.visible.customitembox = false
+if not Misc.inMarioChallenge() then
+	HUDOverride.visible.customitembox = false
+end
 
 local exitscreen = false
 

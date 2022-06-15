@@ -1,6 +1,10 @@
 local widescreen = {}
 
-local hudoverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	hudoverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	hudoverride = require("hudoverride")
+end
 
 function widescreen.onInitAPI()
     --registerEvent(twilightHUD, "onStart", "onStart")

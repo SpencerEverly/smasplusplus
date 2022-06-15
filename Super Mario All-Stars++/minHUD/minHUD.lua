@@ -5,7 +5,11 @@ local minHUD = {}
 -- Code made by Hatsune Blake! Please give credit!
 
 local textplus = require("textplus")
-local hudoverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	hudoverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	hudoverride = require("hudoverride")
+end
 local t = 0
 
 -- Star Coin related stuff

@@ -18,7 +18,11 @@ local rng = require("rng")
 local pm = require("playerManager")
 local imagic = require("imagic")
 local defs = require("expandedDefines")
-local HUDOverride = require("hudoverridee")
+if not Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverridee")
+elseif Misc.inMarioChallenge() then
+	HUDOverride = require("hudoverride")
+end
 
 local megashroom = require("NPCs/AI/megashroom")
 
@@ -724,7 +728,7 @@ function samus.initCharacter()
 	HUDOverride.visible.bombs = true
 	HUDOverride.visible.coins = true
 	HUDOverride.visible.score = true
-	--HUDOverride.visible.lives = false
+	HUDOverride.visible.lives = true
 	HUDOverride.visible.stars = true
 	HUDOverride.visible.starcoins = false
 	HUDOverride.visible.timer = true
