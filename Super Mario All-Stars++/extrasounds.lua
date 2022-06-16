@@ -252,13 +252,15 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		--**SPINJUMPING**
-		if player:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
-			if player:mem(0x160, FIELD_WORD) == 29 then --Is the fireball cooldown set to the highest number?
-				if player.powerup == 3 then --Fireball sound
-					playSound(18)
-				end
-				if player.powerup == 7 then --Iceball sound
-					playSound(93)
+		for k,p in ipairs(Player.get()) do
+			if p:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
+				if p:mem(0x160, FIELD_WORD) == 29 then --Is the fireball cooldown set to the highest number?
+					if p.powerup == 3 then --Fireball sound
+						playSound(18)
+					end
+					if p.powerup == 7 then --Iceball sound
+						playSound(93)
+					end
 				end
 			end
 		end
@@ -280,11 +282,13 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		--**P-WING**
-		if player:mem(0x16C, FIELD_BOOL) == true then
-			SFX.play(extrasounds.id[121], 1, 1, 7)
-		end
-		if player:mem(0x170, FIELD_WORD) >= 1 then
-			SFX.play(extrasounds.id[121], 1, 1, 7)
+		for k,p in ipairs(Player.get()) do
+			if p:mem(0x16C, FIELD_BOOL) == true then
+				SFX.play(extrasounds.id[121], 1, 1, 7)
+			end
+			if p:mem(0x170, FIELD_WORD) >= 1 then
+				SFX.play(extrasounds.id[121], 1, 1, 7)
+			end
 		end
 		
 		
@@ -497,17 +501,19 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 			
 			
 			--**FIREBALLS**
-			local isShootingFire = (player:mem(0x118,FIELD_FLOAT) >= 100 and player:mem(0x118,FIELD_FLOAT) <= 118 and player.powerup == 3)
-			local isShootingHammer = (player:mem(0x118,FIELD_FLOAT) >= 100 and player:mem(0x118,FIELD_FLOAT) <= 118 and player.powerup == 6)
-			local isShootingIce = (player:mem(0x118,FIELD_FLOAT) >= 100 and player:mem(0x118,FIELD_FLOAT) <= 118 and player.powerup == 7)
-			if isShootingFire then --Fireball sound
-				SFX.play(extrasounds.id[18], 1, 1, 25)
-			end
-			if isShootingHammer then --Hammer Throw sound
-				SFX.play(extrasounds.id[105], 1, 1, 25)
-			end
-			if isShootingIce then --Iceball sound
-				SFX.play(extrasounds.id[93], 1, 1, 25)
+			for k,p in ipairs(Player.get()) do
+				local isShootingFire = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and p.powerup == 3)
+				local isShootingHammer = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and p.powerup == 6)
+				local isShootingIce = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and p.powerup == 7)
+				if isShootingFire then --Fireball sound
+					SFX.play(extrasounds.id[18], 1, 1, 25)
+				end
+				if isShootingHammer then --Hammer Throw sound
+					SFX.play(extrasounds.id[105], 1, 1, 25)
+				end
+				if isShootingIce then --Iceball sound
+					SFX.play(extrasounds.id[93], 1, 1, 25)
+				end
 			end
 			
 			
