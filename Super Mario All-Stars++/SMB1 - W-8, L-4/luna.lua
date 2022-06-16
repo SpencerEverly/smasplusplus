@@ -10,24 +10,18 @@ function onEvent(eventName)
 	end
 	if eventName == ("Pigeon Cutscene") then
 		if SaveData.disableX2char == false then
-			pauseplus.canPause = false
 			furyinventory.activated = false
 		end
-		if SaveData.disableX2char == true then
-			pausemenu.pauseactivated = false
-		end
+		pauseplus.canPause = false
 	end
 	if eventName == ("Pigeon Cutscene 3") then
 		playSound("pigeon_attack.ogg")
 	end
 	if eventName == ("Pigeon Cutscene 5") then
 		if SaveData.disableX2char == false then
-			pauseplus.canPause = true
 			furyinventory.activated = true
 		end
-		if SaveData.disableX2char == true then
-			pausemenu.pauseactivated = true
-		end
+		pauseplus.canPause = true
 		for k,p in ipairs(Player.get()) do
 			p:teleport(-99936, -100144)
 		end
@@ -36,12 +30,9 @@ function onEvent(eventName)
 	if eventName == ("Pigeon Cutscene Sequel 0") then
 		playSound("is-the-pool-clean.ogg")
 		if SaveData.disableX2char == false then
-			pauseplus.canPause = false
 			furyinventory.activated = false
 		end
-		if SaveData.disableX2char == true then
-			pauseplus.canPause = false
-		end
+		pauseplus.canPause = false
 		Timer.deactivate()
 	end
 	if eventName == ("Pigeon Cutscene Sequel 2") then
@@ -49,11 +40,8 @@ function onEvent(eventName)
 	end
 	if eventName == ("Pigeon Cutscene Sequel 3") then
 		if SaveData.disableX2char == false then
-			pauseplus.canPause = true
 			furyinventory.activated = true
 		end
-		if SaveData.disableX2char == true then
-			pauseplus.canPause = true
-		end
+		pauseplus.canPause = true
 	end
 end
