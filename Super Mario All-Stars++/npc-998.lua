@@ -40,6 +40,8 @@ function customNPC.onInitAPI()
     registerEvent(customNPC, "onDraw")
 end
 
+local plr
+
 function customNPC.onTickNPC(v)
     if Defines.levelFreeze then return end
 
@@ -58,49 +60,66 @@ function customNPC.onTickNPC(v)
         data.castleWidth = 0
         data.initialized = true
     end
+	for _,p in ipairs(Player.get()) do
+		if p.y >= v.y
+		and p.x >= v.x
+		and p.x <= v.x + v.width
+		and p.section == v.section
+		and data.state == 0 then
+			data.state = 1
+			GameData.____muteMusic = true
+			Audio.MusicVolume(0)
+			GameData.winStateActive = true
+			SFX.play(extrasounds.id[135])
+			exiting = true
+			data.countTime = Timer.isActive()
+			--Timer.toggle()
+			Timer.isVisible = true
 
-    if player.y >= v.y
-    and player.x >= v.x
-    and player.x <= v.x + v.width
-    and player.section == v.section
-    and data.state == 0 then
-        data.state = 1
-		GameData.____muteMusic = true
-		Audio.MusicVolume(0)
-		GameData.winStateActive = true
-        SFX.play(extrasounds.id[135])
-        exiting = true
-        data.countTime = Timer.isActive()
-		--Timer.toggle()
-        Timer.isVisible = true
-
-        local score = 10 - math.floor((player.y - v.y) / 32)
-        Misc.givePoints(score, vector(player.x, player.y))
-    end
+			local score = 10 - math.floor((p.y - v.y) / 32)
+			Misc.givePoints(score, vector(p.x, p.y))
+		end
+	end
 
     if data.state ~= 0 then
-        player.keys.up = false
-        player.keys.down = false
-        player.keys.left = false
-        player.keys.right = false
-        player.keys.jump = false
-        player.keys.altJump = false
-        player.keys.run = false
-        player.keys.altRun = false
-        player.keys.pause = false
-        player.keys.dropItem = false
+		for _,p in ipairs(Player.get()) do
+			p.keys.up = false
+			p.keys.down = false
+			p.keys.left = false
+			p.keys.right = false
+			p.keys.jump = false
+			p.keys.altJump = false
+			p.keys.run = false
+			p.keys.altRun = false
+			p.keys.pause = false
+			p.keys.dropItem = false
+		end
     end
 
     if data.state == 1 then
+		--if Colliders.collide(p, v) then
+			--plr = p
+		--end
 		Misc.npcToCoins()
 		starman.stop(p)
 		GameData.____muteMusic = true
         data.tick = data.tick + 1
-        player.x = v.x - player.width + 16
-        player.speedX = 0
-        player.speedY = 3 - Defines.player_grav
-        player.direction = 1
-        player:setFrame(3)
+		for _,p in ipairs(Player.get()) do
+			p.x = v.x - p.width + 16
+			p.speedX = 0
+			p.speedY = 3 - Defines.player_grav
+			p.direction = 1
+			p:setFrame(3)
+		end
+		for _,o in ipairs(Player.get()) do
+			if o.idx ~= player.idx then
+				o.section = player.section
+				o.x = (player.x+(player.width/2)-(o.width/2))
+				o.y = (player.y+player.height-o.height)
+				o.speedX,o.speedY = 0,0
+				o.forcedState,o.forcedTimer = 8,-player.idx
+			end
+		end
         v.speedY = 3
 
         if data.tick > 65 * 1.5 then
@@ -128,7 +147,9 @@ function customNPC.onTickNPC(v)
 		if GameData.rushModeActive == true then
 			GameData.rushModeWon = true
 		end
-        player.keys.right = true
+		for _,p in ipairs(Player.get()) do
+			p.keys.right = true
+		end
 
         for _, castleid in ipairs(castles) do
             for _, bgo in ipairs(BGO.get(castleid)) do
@@ -138,18 +159,22 @@ function customNPC.onTickNPC(v)
                 end
             end
         end
-
-        if player.x >= data.castleX + data.castleWidth / 2 - player.width / 2 then
-            data.state = 3
-            drawCastlePlayer = true
-            castlePlayerX = data.castleX + data.castleWidth / 2 - player.width / 2
-            castlePlayerY = player.y
-            Timer.hurryTime = -1
-        end
+		
+		for _,p in ipairs(Player.get()) do
+			if p.x >= data.castleX + data.castleWidth / 2 - p.width / 2 then
+				data.state = 3
+				drawCastlePlayer = true
+				castlePlayerX = data.castleX + data.castleWidth / 2 - p.width / 2
+				castlePlayerY = p.y
+				Timer.hurryTime = -1
+			end
+		end
     elseif data.state == 3 then
 		GameData.____muteMusic = true
-        player.x = castlePlayerX
-        player.y = castlePlayerY
+		for _,p in ipairs(Player.get()) do
+			p.x = castlePlayerX
+			p.y = castlePlayerY
+		end
 
         if Timer.getValue() > 0 and data.countTime then
             SFX.play(extrasounds.id[113])
@@ -195,13 +220,15 @@ end
 function customNPC.onDraw()
     if drawCastlePlayer then
         castlePlayerTicks = math.max(castlePlayerTicks - 1, 0)
-        player.frame = 50
-        player:render{
-            frame = 15,
-            x = castlePlayerX,
-            y = castlePlayerY,
-            color = Color(1, 1, 1, castlePlayerTicks / 65)
-        }
+		for _,p in ipairs(Player.get()) do
+			p.frame = 50
+			p:render{
+				frame = 15,
+				x = castlePlayerX,
+				y = castlePlayerY,
+				color = Color(1, 1, 1, castlePlayerTicks / 65)
+			}
+		end
     end
 end
 

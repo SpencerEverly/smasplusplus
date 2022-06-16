@@ -7,8 +7,10 @@ function onEvent(eventName)
 end
 
 function onExit()
-	if player:mem(0x15E, FIELD_WORD) == 6 and player.forcedState == FORCEDSTATE_INVISIBLE then --SMBLL World D
-		SaveData.smwMap.playerX = -195424
-		SaveData.smwMap.playerY = -201024
+	for _,p in ipairs(Player.get()) do
+		if p:mem(0x15E, FIELD_WORD) == 6 and p.forcedState == FORCEDSTATE_INVISIBLE then --SMBLL World D
+			SaveData.smwMap.playerX = -195424
+			SaveData.smwMap.playerY = -201024
+		end
 	end
 end

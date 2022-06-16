@@ -87,9 +87,20 @@ function muteMusic(sectionid) --Mute all section music, or just mute a specific 
 	end
 end
 
+local plr
+
 function starget()
 	Level.finish(LEVEL_END_STATE_STAR, true)
 	Misc.npcToCoins()
+	for _,o in ipairs(Player.get()) do
+        if o.idx ~= plr.idx then
+            o.section = plr.section
+            o.x = (plr.x+(plr.width/2)-(o.width/2))
+            o.y = (plr.y+plr.height-o.height)
+            o.speedX,o.speedY = 0,0
+            o.forcedState,o.forcedTimer = 8,-plr.idx
+        end
+    end
 	SFX.play(52)
 	muteMusic(-1)
 	GameData.____muteMusic = true
@@ -224,6 +235,11 @@ end
 
 function dudstar.onPostNPCKill(v,reason)
 	if dudstar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
+		for _,p in ipairs(Player.get()) do
+			if Colliders.collide(p, v) then
+				plr = p
+			end
+		end
 		Routine.run(starget)
 		if GameData.rushModeActive == false or GameData.rushModeActive == nil then
 			if Misc.inMarioChallenge() == false then
