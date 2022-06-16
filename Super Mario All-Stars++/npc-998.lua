@@ -79,10 +79,8 @@ function customNPC.onTickNPC(v)
 			local score = 10 - math.floor((p.y - v.y) / 32)
 			Misc.givePoints(score, vector(p.x, p.y))
 		end
-	end
 
-    if data.state ~= 0 then
-		for _,p in ipairs(Player.get()) do
+		if data.state ~= 0 then
 			p.keys.up = false
 			p.keys.down = false
 			p.keys.left = false
@@ -94,73 +92,68 @@ function customNPC.onTickNPC(v)
 			p.keys.pause = false
 			p.keys.dropItem = false
 		end
-    end
 
-    if data.state == 1 then
-		--if Colliders.collide(p, v) then
-			--plr = p
-		--end
-		Misc.npcToCoins()
-		starman.stop(p)
-		GameData.____muteMusic = true
-        data.tick = data.tick + 1
-		for _,p in ipairs(Player.get()) do
+		if data.state == 1 then
+			Misc.npcToCoins()
+			starman.stop(p)
+			GameData.____muteMusic = true
+			--if Colliders.collide(p, v) then
+				--plr = p
+			--end
+			data.tick = data.tick + 1
+			if Player(2) and Player(2).isValid then
+				data.tick = data.tick - 0.5
+			end
 			p.x = v.x - p.width + 16
 			p.speedX = 0
 			p.speedY = 3 - Defines.player_grav
 			p.direction = 1
 			p:setFrame(3)
-		end
-		for _,o in ipairs(Player.get()) do
-			if o.idx ~= player.idx then
-				o.section = player.section
-				o.x = (player.x+(player.width/2)-(o.width/2))
-				o.y = (player.y+player.height-o.height)
-				o.speedX,o.speedY = 0,0
-				o.forcedState,o.forcedTimer = 8,-player.idx
+			if p.idx ~= player.idx then
+				p.section = player.section
+				p.x = (player.x+(player.width/2)-(p.width/2))
+				p.y = (player.y+player.height-p.height)
+				p.speedX,p.speedY = 0,0
+				p.forcedState,p.forcedTimer = 8,-player.idx
 			end
-		end
-        v.speedY = 3
+			v.speedY = 3
 
-        if data.tick > 65 * 1.5 then
-            player.x = player.x + player.width
-            player.direction = -1
-        end
-        if data.tick > 65 * 2 then
-            data.tick = 0
-            data.state = 2
-			if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-				if Misc.inMarioChallenge() == false then
-					if not table.icontains(SaveData.completeLevels,Level.filename()) then
-						SaveData.totalStarCount = SaveData.totalStarCount + 1
-						table.insert(SaveData.completeLevels,Level.filename())
-					elseif table.icontains(SaveData.completeLevels,Level.filename()) then
-						SaveData.totalStarCount = SaveData.totalStarCount
+			if data.tick > 65 * 1.5 then
+				p.x = p.x + p.width
+				p.direction = -1
+			end
+			if data.tick > 65 * 2 then
+				data.tick = 0
+				data.state = 2
+				if GameData.rushModeActive == false or GameData.rushModeActive == nil then
+					if Misc.inMarioChallenge() == false then
+						if not table.icontains(SaveData.completeLevels,Level.filename()) then
+							SaveData.totalStarCount = SaveData.totalStarCount + 1
+							table.insert(SaveData.completeLevels,Level.filename())
+						elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+							SaveData.totalStarCount = SaveData.totalStarCount
+						end
+					end
+				end
+				SFX.play(52)
+			end
+		elseif data.state == 2 then
+			GameData.stopStarman = false
+			GameData.____muteMusic = true
+			if GameData.rushModeActive == true then
+				GameData.rushModeWon = true
+			end
+			p.keys.right = true
+
+			for _, castleid in ipairs(castles) do
+				for _, bgo in ipairs(BGO.get(castleid)) do
+					if colliders.collide(p, bgo) then
+						data.castleX = bgo.x
+						data.castleWidth = bgo.width
 					end
 				end
 			end
-            SFX.play(52)
-        end
-    elseif data.state == 2 then
-		GameData.stopStarman = false
-		GameData.____muteMusic = true
-		if GameData.rushModeActive == true then
-			GameData.rushModeWon = true
-		end
-		for _,p in ipairs(Player.get()) do
-			p.keys.right = true
-		end
-
-        for _, castleid in ipairs(castles) do
-            for _, bgo in ipairs(BGO.get(castleid)) do
-                if colliders.collide(player, bgo) then
-                    data.castleX = bgo.x
-                    data.castleWidth = bgo.width
-                end
-            end
-        end
-		
-		for _,p in ipairs(Player.get()) do
+			
 			if p.x >= data.castleX + data.castleWidth / 2 - p.width / 2 then
 				data.state = 3
 				drawCastlePlayer = true
@@ -168,40 +161,38 @@ function customNPC.onTickNPC(v)
 				castlePlayerY = p.y
 				Timer.hurryTime = -1
 			end
-		end
-    elseif data.state == 3 then
-		GameData.____muteMusic = true
-		for _,p in ipairs(Player.get()) do
+		elseif data.state == 3 then
+			GameData.____muteMusic = true
 			p.x = castlePlayerX
 			p.y = castlePlayerY
-		end
 
-        if Timer.getValue() > 0 and data.countTime then
-            SFX.play(extrasounds.id[113])
-            if Timer.getValue() >= 100 then
-                Timer.add(-10)
-                SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
-            else
-                Timer.add(-1)
-                SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
-            end
-        else
-            data.tick = data.tick + 1
-        end
-		
-		if Timer.getValue() == 0 and data.countTime then
-			SFX.play(extrasounds.id[114], 1, 1, 2500)
-		end
-		
-        if data.tick > 65 * 1.5 then
-			GameData.____muteMusic = false
-			GameData.winStateActive = false
-			if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-				Level.exit(LEVEL_WIN_TYPE_STAR)
-			elseif GameData.rushModeActive == true and GameData.rushModeWon == true then
-				Level.load("SMAS - Rush Mode Results.lvlx")
+			if Timer.getValue() > 0 and data.countTime then
+				SFX.play(extrasounds.id[113])
+				if Timer.getValue() >= 100 then
+					Timer.add(-10)
+					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
+				else
+					Timer.add(-1)
+					SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
+				end
+			else
+				data.tick = data.tick + 1
 			end
-        end
+			
+			if Timer.getValue() == 0 and data.countTime then
+				SFX.play(extrasounds.id[114], 1, 1, 2500)
+			end
+			
+			if data.tick > 65 * 1.5 then
+				GameData.____muteMusic = false
+				GameData.winStateActive = false
+				if GameData.rushModeActive == false or GameData.rushModeActive == nil then
+					Level.exit(LEVEL_WIN_TYPE_STAR)
+				elseif GameData.rushModeActive == true and GameData.rushModeWon == true then
+					Level.load("SMAS - Rush Mode Results.lvlx")
+				end
+			end
+		end
     end
 end
 
