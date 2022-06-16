@@ -10,7 +10,9 @@ local playerAnim = API.load("playerAnim")
 local textblox = API.load("textblox")
 local particles = API.load("particles")
 local pausemenu = require("pauseplus")
-local datetime = require("datetime")
+if not Misc.inMarioChallenge() then
+	datetime = require("datetime")
+end
 local inventory = require("furyinventory")
 
 local cooldown = 0
@@ -706,8 +708,10 @@ function megaluavania.onInputUpdate()
 			pausemenu.canPause = false
 			inventory.activated = false
 			mainblackscreenshow = false
-			datetime.topright = true
-			datetime.bottomright = false
+			if not Misc.inMarioChallenge() then
+				datetime.topright = true
+				datetime.bottomright = false
+			end
 			textblox.active = true
 			hudshow = false
 		elseif v.initiated == megaluavania.BATTLE_LOST then
@@ -721,8 +725,10 @@ function megaluavania.onInputUpdate()
 			pausemenu.canPause = true
 			inventory.activated = true
 			textblox.active = false
-			datetime.topright = false
-			datetime.bottomright = true
+			if not Misc.inMarioChallenge() then
+				datetime.topright = false
+				datetime.bottomright = true
+			end
 			hudshow = true
 			player:mem(0x122,FIELD_WORD,0)
 			Audio.ReleaseStream(-1)

@@ -2,7 +2,9 @@ local littleDialogue = require("littleDialogue")
 local playerManager = require("playerManager")
 local inventory = require("customInventory")
 local textplus = require("textplus")
-local datetime = require("datetime")
+if not Misc.inMarioChallenge() then
+	datetime = require("datetime")
+end
 local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")

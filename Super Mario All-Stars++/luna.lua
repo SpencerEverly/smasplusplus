@@ -65,9 +65,6 @@ local rng = require("base/rng") --Load up rng for etc. things
 if Misc.inMarioChallenge() then
 	_G.HUDOverride = require("hudoverride")
 	SaveData.disableX2char = false
-	if table.icontains(smastables._noLevelMarioChallengePlaces,Level.filename()) then
-		Level.load(smastables.__allLevels[rng.randomInt(1,#smastables.__allLevels)])
-	end
 end
 
 --This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.

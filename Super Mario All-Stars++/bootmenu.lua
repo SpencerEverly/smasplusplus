@@ -1,9 +1,7 @@
 local versionnumber = "Open Source Edition" --This is the version number of this episode. It can be changed to any version we're on.
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
-if not Misc.inMarioChallenge() then
-	datetime = require("datetime")
-end
+local datetime = require("datetime")
 --if Misc.inEditor() then
 	--Misc.showRichDialog("SMAS++ Boot Menu Level", "Hello!\n\nYou are trying to access the boot level through the editor. What are YOU doing here?\nI bet you just wanna snoop around and mess with the episode, eh?\n\nOh well, I don't blame you. Everything is open, so go right ahead!", true)
 --end

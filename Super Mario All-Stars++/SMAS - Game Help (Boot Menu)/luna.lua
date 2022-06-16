@@ -17,7 +17,9 @@ warpTransition.TRANSITION_PAN = 6
 local playerManager = require("playerManager")
 local textplus = require("textplus")
 local autoscroll = require("autoscroll")
-local datetime = require("datetime")
+if not Misc.inMarioChallenge() then
+	datetime = require("datetime")
+end
 local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")

@@ -2,7 +2,9 @@ local smwMap = require("smwMap")
 local inventory = require("customInventory")
 local littleDialogue = require("littleDialogue")
 local pausemenu = require("pausemenu2")
-local datetime = require("datetime")
+if not Misc.inMarioChallenge() then
+	datetime = require("datetime")
+end
 local debugbox = require("debugbox")
 
 function onStart()

@@ -1,9 +1,10 @@
 HEAD
-TL:"Super Mario All-Stars++\: World Map";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
+TL:"Super Mario All-Stars++\: World Map";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-191200;T:-201216;B:-193312;MZ:0;MF:"";BG:0;
 SC:15;L:100000;R:100800;T:99400;B:100000;MZ:0;MF:"";BG:0;
+SC:17;L:140000;R:140800;T:139400;B:140000;MZ:0;MF:"";BG:0;
 SC:18;L:160000;R:160800;T:159400;B:160000;MZ:0;MF:"";BG:0;
 SECTION_END
 BLOCK
@@ -1546,6 +1547,41 @@ ID:752;X:-197952;Y:-194976;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-5\"\,\n    \"
 ID:855;X:-197952;Y:-195040;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Boss.lvlx\"\,\n    \"levelTitle\"\: \"Quicksand Boss\"\,\n    \"path_down\"\: \"toWSMBA2-5\"\,\n    \"path_up\"\: \"toWSMBAW-2Path1\"\n}\n";
 ID:752;X:-197952;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-2Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
 ID:821;X:-197952;Y:-195168;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-3PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"toWSMBAW-2Path1\"\,\n    \"warpName\"\: \"WSMBAW-2PipeEnd\"\n}\n";
+ID:821;X:-196928;Y:-194944;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-2PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to Snow World\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toWSMBA3-1\"\,\n    \"warpName\"\: \"WSMBAW-3PipeBegin\"\n}\n";
+ID:752;X:-196896;Y:-194944;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA3-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 288\, -64\"\n}\n";
+ID:860;X:-196608;Y:-195008;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"The Girls Fight\"\,\n    \"path_left\"\: \"toWSMBA3-1\"\,\n    \"path_right\"\: \"toWSMBA3-2\"\,\n    \"path_up\"\: \"toWSMBAW-3Path1\"\n}\n";
+ID:752;X:-196576;Y:-195008;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA3-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, 800\"\n}\n";
+ID:752;X:-196608;Y:-195040;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-3Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
+ID:821;X:-196608;Y:-195136;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-4PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"toWSMBAW-3Path1\"\,\n    \"warpName\"\: \"WSMBAW-3Pipe1End\"\n}\n";
+ID:821;X:-196608;Y:-195232;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-3Pipe1End\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"\"\,\n    \"path_up\"\: \"toWSMBA4-1\"\,\n    \"warpName\"\: \"WSMBAW-4PipeBegin\"\n}\n";
+ID:752;X:-196608;Y:-195264;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA4-1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:802;X:-196608;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-4\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"SMB The World\"\,\n    \"path_down\"\: \"toWSMBA4-1\"\,\n    \"path_right\"\: \"toWSMBASpecial-1\"\,\n    \"path_up\"\: \"toWSMBA4-2\"\,\n    \"unlock_right\"\: 6\,\n    \"unlock_up\"\: 9\n}\n";
+ID:802;X:-196544;Y:-194208;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-3\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"The SMB3 Tribute\"\,\n    \"path_right\"\: \"toWSMBAW-3Bonus\"\,\n    \"path_up\"\: \"toWSMBA3-2\"\,\n    \"unlock_right\"\: 1\n}\n";
+ID:752;X:-196512;Y:-194208;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-3Bonus\"\,\n    \"points\"\: \"-32\, 0\, 96\, 0\"\n}\n";
+ID:859;X:-196416;Y:-194208;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-0\, L-Bonus.lvlx\"\,\n    \"levelTitle\"\: \"Bonus!\"\,\n    \"path_left\"\: \"toWSMBAW-3Bonus\"\,\n    \"path_right\"\: \"toWSMBAW-3Path2\"\n}\n";
+ID:752;X:-196384;Y:-194208;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-3Path2\"\,\n    \"points\"\: \"-32\, 0\, 160\, 0\"\n}\n";
+ID:821;X:-196224;Y:-194208;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-5Pipe2Begin\"\,\n    \"levelTitle\"\: \"Warp to Underground Land\"\,\n    \"path_left\"\: \"toWSMBAW-3Path2\"\,\n    \"warpName\"\: \"WSMBAW-3Pipe2End\"\n}\n";
+ID:752;X:-196608;Y:-195328;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA4-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 192\, -320\"\n}\n";
+ID:752;X:-196576;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-1\"\,\n    \"points\"\: \"-32\, 0\, 160\, 0\"\n}\n";
+ID:802;X:-196416;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"Scrapped Cutscene 1\"\,\n    \"path_left\"\: \"toWSMBASpecial-1\"\,\n    \"path_right\"\: \"toWSMBASpecial-2\"\n}\n";
+ID:752;X:-196384;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-2\"\,\n    \"points\"\: \"-32\, 0\, 128\, 0\"\n}\n";
+ID:802;X:-196256;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"Scrapped Cutscene 2\"\,\n    \"path_left\"\: \"toWSMBASpecial-2\"\,\n    \"path_right\"\: \"toWSMBASpecial-3\"\n}\n";
+ID:752;X:-196224;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-3\"\,\n    \"points\"\: \"-32\, 0\, 96\, 0\"\n}\n";
+ID:802;X:-196128;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Scrapped Cutscene 3\"\,\n    \"path_left\"\: \"toWSMBASpecial-3\"\,\n    \"path_right\"\: \"toWSMBASpecial-4\"\n}\n";
+ID:752;X:-196096;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-4\"\,\n    \"points\"\: \"-32\, 0\, 192\, 0\"\n}\n";
+ID:802;X:-195904;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"Japan Level 1\"\,\n    \"path_left\"\: \"toWSMBASpecial-4\"\,\n    \"path_right\"\: \"toWSMBASpecial-5\"\n}\n";
+ID:752;X:-195872;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-5\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\, 64\, -160\"\n}\n";
+ID:802;X:-195808;Y:-195456;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"Japan Level 2\"\,\n    \"path_down\"\: \"toWSMBASpecial-5\"\,\n    \"path_up\"\: \"toWSMBAW-4Path1\"\n}\n";
+ID:752;X:-195808;Y:-195488;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-4Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -160\"\n}\n";
+ID:821;X:-195808;Y:-195648;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Warp to Underground Land\"\,\n    \"path_down\"\: \"toWSMBAW-4Path1\"\,\n    \"path_left\"\: \"toWSMBAW-4Path2\"\n}\n";
+ID:802;X:-196416;Y:-195648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-4\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"SMB2 Japan Style\"\,\n    \"path_down\"\: \"toWSMBA4-2\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toWSMBA4-3\"\n}\n";
+ID:752;X:-196384;Y:-195648;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA4-3\"\,\n    \"points\"\: \"-32\, 0\, 224\, 0\"\n}\n";
+ID:802;X:-196160;Y:-195648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-4\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"SMB Underground\"\,\n    \"path_left\"\: \"toWSMBA4-3\"\,\n    \"path_right\"\: \"toWSMBA4-4\"\n}\n";
+ID:752;X:-196128;Y:-195648;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA4-4\"\,\n    \"points\"\: \"-32\, 0\, 160\, 0\"\n}\n";
+ID:859;X:-195872;Y:-195648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-0\, L-Bonus.lvlx\"\,\n    \"levelTitle\"\: \"Bonus!\"\,\n    \"path_left\"\: \"toWSMBAW-4Bonus\"\,\n    \"path_right\"\: \"toWSMBAW-4Path2\"\n}\n";
+ID:853;X:-195968;Y:-195648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-4\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"Bowser on SMB!\"\,\n    \"path_left\"\: \"toWSMBA4-4\"\,\n    \"path_right\"\: \"toWSMBAW-4Bonus\"\n}\n";
+ID:752;X:-195936;Y:-195648;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-4Bonus\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
+ID:752;X:-195840;Y:-195648;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-4Path2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
