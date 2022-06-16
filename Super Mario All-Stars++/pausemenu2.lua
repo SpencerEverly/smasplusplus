@@ -256,6 +256,7 @@ local function characterchange()
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
 	end
+	Routine.run(musicalchairs.switcher)
 end
 
 local function characterchange13()
@@ -428,6 +429,7 @@ local function characterchangeleft()
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
 	end
+	Routine.run(musicalchairs.switcher)
 end
 
 local function characterchange13left()

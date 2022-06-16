@@ -469,6 +469,24 @@ function lifeCountWithCrowns() --This lists the current life count, with the cro
 	end
 end
 
+function lifeCountWithCrownsAndZeroFailsafe() --This lists the current life count, with the crown system. Crowns will be with "!" instead of an actual crown symbol.
+	if SaveData.totalLives == nil then
+		return 0
+	elseif SaveData.totalLives < 0 then
+		return 0
+	elseif SaveData.totalLives < 1000 then
+		return SaveData.totalLives
+	elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
+		return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
+	elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
+		return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
+	elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
+		return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
+	elseif SaveData.totalLives == 1110 then
+		return "!!!"
+	end
+end
+
 function manageLives(lives, mathcount) --arg1 = number of lives, arg2 = to add (true) or subtract them (false)
 	if lives == nil then
 		error("You need to specify the number of lives.")

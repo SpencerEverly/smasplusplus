@@ -25,13 +25,15 @@ GameData.__EpisodeFolder = Misc.episodePath()
 GameData.__SaveSlot = Misc.saveSlot()
 
 --Make sure we warn the user to upgrade the legacy save data while we can...
-if mem(0x00B251E0, FIELD_WORD) >= 1 then
-	if GameData.warnUserAboutOldStars == nil then
-		GameData.warnUserAboutOldStars = true
-	end
-	if GameData.warnUserAboutOldStars == true then
-		Misc.dialog("It looks like your using a legacy save file from before Demo 3 (Or before April 10th, 2022). You'll need to migrate your save data as soon as you boot the game! That way your data can still be used in the future. Please migrate your save while you can!")
-		GameData.warnUserAboutOldStars = false
+if not Misc.inMarioChallenge() then
+	if mem(0x00B251E0, FIELD_WORD) >= 1 then
+		if GameData.warnUserAboutOldStars == nil then
+			GameData.warnUserAboutOldStars = true
+		end
+		if GameData.warnUserAboutOldStars == true then
+			Misc.dialog("It looks like your using a legacy save file from before Demo 3 (Or before April 10th, 2022). You'll need to migrate your save data as soon as you boot the game! That way your data can still be used in the future. Please migrate your save while you can!")
+			GameData.warnUserAboutOldStars = false
+		end
 	end
 end
 

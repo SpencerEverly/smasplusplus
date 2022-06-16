@@ -28,7 +28,9 @@ function onEvent(eventName)
 		if SaveData.disableX2char == true then
 			pausemenu.pauseactivated = true
 		end
-		player:teleport(-99936, -100144)
+		for k,p in ipairs(Player.get()) do
+			p:teleport(-99936, -100144)
+		end
 		Timer.activate(150)
 	end
 	if eventName == ("Pigeon Cutscene Sequel 0") then
