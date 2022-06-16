@@ -214,7 +214,7 @@ function costume.onTick()
 			end
 		end
 
-		if (flipstate) or balled and not hit then
+		if (flipstate) or balled and not hit and not GameData.winStateActive then
 			--Rotate Toad
 			player:setFrame(-50) -- Make player invisible
 			rotation = rotation + 36
