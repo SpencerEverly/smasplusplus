@@ -165,6 +165,7 @@ Code for certain parts made by:
 - GtW
 - MegaDood
 - Murphmario
+- Master of Disaster
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 

@@ -2294,62 +2294,74 @@ function musicalchairs.onDraw()
 				end
 			end
 			if currentCostume == "SEE-TANGENT" then
-				if level == "SMB1 - W-1, L-1.lvlx" then
-					Section(0).music = "_OST/Nintendogs/Overworld.ogg"
-					Section(1).music = "_OST/Nintendogs/Underground.ogg"
+				if section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Nintendogs/Overworld.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.5" then
+					section.musicPath = "_OST/Nintendogs/Underground.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Nintendogs/Underground.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Nintendogs/Athletic.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Album.spc|0;g=2.5" then
+					section.musicPath = "_OST/Nintendogs/Overworld.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Castle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Nintendogs/Castle.ogg"
+				elseif section.music == 19 then
+					section.music = "_OST/Nintendogs/Boss Battle.ogg"
+				elseif section.music == 21 then
+					section.music = "_OST/Nintendogs/Boss Battle.ogg"
+				elseif section.music == "_OST/Super Mario Bros/Bowser.spc|0;g=2.5" then
+					section.music = "_OST/Nintendogs/Boss Battle.ogg"
 				end
-				if level == "SMB1 - W-1, L-2.lvlx" then
-					Section(1).music = "_OST/Nintendogs/Underground.ogg"
-					Section(2).music = "_OST/Nintendogs/Overworld.ogg"
-					Section(3).music = "_OST/Nintendogs/Underground.ogg"
-				end
-				if level == "SMB1 - W-1, L-3.lvlx" then
-					Section(0).music = "_OST/Nintendogs/Athletic.ogg"
-				end
-				if level == "SMB1 - W-1, L-4.lvlx" then
-					Section(1).music = "_OST/Nintendogs/Overworld.ogg"
-				end
-				if level == "SMB1 - W-2, L-1.lvlx" then
-					Section(0).music = "_OST/Super Mario Bros/Desert.spc|0;g=2.2"
-					Section(1).music = "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.7"
-					Section(2).music = "_OST/Super Mario Bros/Bonus.spc|0;g=2.7"
-				end
-				if level == "SMB1 - W-2, L-2.lvlx" then
-					Section(1).music = "_OST/Nintendogs/Underwater.ogg"
-					Section(2).music = "_OST/Super Mario Bros/Desert.spc|0;g=2.5"
-				end
-				if level == "SMB1 - W-2, L-3.lvlx" then
-					Section(0).music = "_OST/Nintendogs/Athletic.ogg"
-				end
+				--TBD
 			end
 			if currentCostume == "SONIC" then
-				if level == "SMB1 - W-1, L-1.lvlx" then
-					Section(0).music = "_OST/Sonic Mania/GreenHill1.ogg"
-					Section(1).music = "_OST/Sonic Mania/FlyingBattery1.ogg"
+				--Super Mario Bros. 1
+				if section.musicPath == "_OST/Super Mario Bros/Overworld.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/GreenHill1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Bonus.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/FlyingBattery1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Underground.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/FlyingBattery1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Athletic.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/GreenHill2.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Album.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/GreenHill2.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Castle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/FlyingBattery2.ogg"
+				elseif section.music == 19 then
+					section.music = "_OST/Sonic Mania/BossEggman1.ogg"
+				elseif section.music == 21 then
+					section.music = "_OST/Sonic Mania/BossEggman1.ogg"
+				elseif section.music == "_OST/Super Mario Bros/Bowser.spc|0;g=2.5" then
+					section.music = "_OST/Sonic Mania/BossEggman1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Desert.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/Hydrocity1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Staff Roll.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/BlueSpheres.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Swimming.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/OilOcean1.ogg"
+				elseif section.musicPath == "_OST/All Stars Secrets/Lineland.ogg" then
+					section.musicPath = "_OST/Sonic Mania/BlueSpheres.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Snow.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/PulpSolstice1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Race.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/BossMini.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Snow (Alternative).ogg" then
+					section.musicPath = "_OST/Sonic Mania/PulpSolstice2.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Forest.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/MirageSaloon1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Ghost House.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/TitanicMonarch1.ogg"
+				elseif section.musicPath == "_OST/Super Mario Bros/Last Battle.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/BossEggman2.ogg"
+				elseif section.musicPath == "_OST/Super Mario World/Bowser (Advance).spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/BossFinal.ogg"
+				--Super Mario Bros. Lost Levels
+				elseif section.musicPath == "_OST/Super Mario Bros/Airship.spc|0;g=2.5" then
+					section.musicPath = "_OST/Sonic Mania/TitanicMonarch2.ogg"
 				end
-				if level == "SMB1 - W-1, L-2.lvlx" then
-					Section(1).music = "_OST/Sonic Mania/FlyingBattery1.ogg"
-					Section(2).music = "_OST/Sonic Mania/GreenHill1.ogg"
-					Section(3).music = "_OST/Sonic Mania/FlyingBattery1.ogg"
-				end
-				if level == "SMB1 - W-1, L-3.lvlx" then
-					Section(0).music = "_OST/Sonic Mania/GreenHill2.ogg"
-				end
-				if level == "SMB1 - W-1, L-4.lvlx" then
-					Section(1).music = "_OST/Sonic Mania/GreenHill2.ogg"
-				end
-				if level == "SMB1 - W-2, L-1.lvlx" then
-					Section(0).music = "_OST/Sonic Mania/Hydrocity1.ogg"
-					Section(1).music = "_OST/Sonic Mania/BlueSpheres.ogg"
-					Section(2).music = "_OST/Sonic Mania/FlyingBattery1.ogg"
-				end
-				if level == "SMB1 - W-2, L-2.lvlx" then
-					Section(1).music = "_OST/Sonic Mania/OilOcean1.ogg"
-					Section(2).music = "_OST/Sonic Mania/Hydrocity1.ogg"
-				end
-				if level == "SMB1 - W-2, L-3.lvlx" then
-					Section(0).music = "_OST/Sonic Mania/Hydrocity2.ogg"
-				end
+				--TBD
 			end
 			if currentCostume == "TOADETTE" then
 				if level == "SMB1 - W-1, L-1.lvlx" then
