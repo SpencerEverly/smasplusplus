@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario All-Stars++\: World Map";CPID:"SMBX2";
+TL:"Super Mario All-Stars++\: World Map";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-191200;T:-201216;B:-193312;MZ:0;MF:"";BG:0;
