@@ -1188,7 +1188,7 @@ local function BootSMASPlusPlusPreExecute() --This is the routine animation to e
 	end
 end
 
-local function BootCredits() --The credits lvl will proabbly be scrapped or not, depends
+local function BootCredits() --The credits lvl will probably be scrapped or not, depends
 	Audio.MusicChange(0, 0)
 	exitscreen = true
 	SFX.play(14)
