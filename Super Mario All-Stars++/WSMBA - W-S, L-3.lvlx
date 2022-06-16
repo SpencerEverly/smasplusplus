@@ -785,7 +785,7 @@ LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
 LAYERS_END
 EVENTS_CLASSIC
-ET:"Level - Start";MG:"Mario was killed by the repitle Bowser... but there's a chance he will revive!";TE:"Storyline 1";TD:1;AS:0;AX:0;AY:0;
+ET:"Level - Start";TE:"Storyline 0";TD:1;AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Hero Talk 0.5";TE:"Hero Talk 1";TD:1;AS:0;AX:0;AY:0;
@@ -794,6 +794,7 @@ ET:"Hero Talk 1.5";TE:"Hero Talk 2";TD:1;AS:0;AX:0;AY:0;
 ET:"Hero Talk 2";MG:"Mario\: Can you at least tell me what your friggin saying?!";TE:"Japan Talk 1";TD:1;AS:0;AX:0;AY:0;
 ET:"Japan Talk 1";MG:"Green Guy\: A. Moshiwakearimasenga\, ... Watashi wa eigo o hanasu koto ga dekimasen.";TE:"Hero Talk 3";TD:1;AS:0;AX:0;AY:0;
 ET:"Hero Talk 3";MG:"Mario\: I'M GOING!!!";AS:0;AX:0;AY:0;
+ET:"Storyline 0";MG:"Mario was killed by the repitle Bowser... but there's a chance he will revive!";TE:"Storyline 1";TD:1;AS:0;AX:0;AY:0;
 ET:"Storyline 1";MG:"But while he was at the hospital\, a flashing glow emerged\, causing Mario to fall a deep hole.";TE:"Storyline 2";TD:1;AS:0;AX:0;AY:0;
 ET:"Storyline 2";MG:"Mario woke up while falling. After three hours he reached the ground\, finding out this.";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
