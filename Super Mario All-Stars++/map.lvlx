@@ -806,6 +806,7 @@ ID:806;X:-192608;Y:-195488;W:32;H:32;
 ID:772;X:-192432;Y:-195408;W:32;H:32;
 ID:834;X:-193312;Y:-200416;W:32;H:32;LR:"Signs";
 ID:835;X:-192560;Y:-200304;W:32;H:32;LR:"Signs";
+ID:859;X:-197696;Y:-194128;W:62;H:32;
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -1582,6 +1583,37 @@ ID:859;X:-195872;Y:-195648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-0\,
 ID:853;X:-195968;Y:-195648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-4\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"Bowser on SMB!\"\,\n    \"path_left\"\: \"toWSMBA4-4\"\,\n    \"path_right\"\: \"toWSMBAW-4Bonus\"\n}\n";
 ID:752;X:-195936;Y:-195648;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-4Bonus\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
 ID:752;X:-195840;Y:-195648;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-4Path2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:821;X:-194752;Y:-196160;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-4PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to SMB Land (Top)\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toWSMBAW-5Path1\"\,\n    \"warpName\"\: \"WSMBAW-5Pipe1Begin\"\n}\n";
+ID:821;X:-194688;Y:-196224;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-3Pipe2End\"\,\n    \"levelTitle\"\: \"Warp to SMB Land (Bottom)\"\,\n    \"path_down\"\: \"toWSMBAW-5Path2\"\,\n    \"path_left\"\: \"\"\,\n    \"warpName\"\: \"WSMBAW-5Pipe2Begin\"\n}\n";
+ID:802;X:-194688;Y:-196160;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"Underground Level 1\"\,\n    \"path_left\"\: \"toWSMBAW-5Path1\"\,\n    \"path_right\"\: \"toWSMBA5-2\"\,\n    \"path_up\"\: \"toWSMBAW-5Path2\"\n}\n";
+ID:752;X:-194688;Y:-196192;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path2\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:752;X:-194720;Y:-196160;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:802;X:-194432;Y:-196224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"Underground House Heist\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toWSMBA5-2\"\,\n    \"path_right\"\: \"toWSMBA5-3\"\n}\n";
+ID:752;X:-194656;Y:-196160;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA5-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 224\, -64\"\n}\n";
+ID:860;X:-194304;Y:-196064;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Underground Boss Battle!\"\,\n    \"path_right\"\: \"toWSMBAW-5Path3\"\,\n    \"path_up\"\: \"toWSMBA5-3\"\n}\n";
+ID:752;X:-194400;Y:-196224;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA5-3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, 160\"\n}\n";
+ID:752;X:-194272;Y:-196064;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, 192\"\n}\n";
+ID:821;X:-194176;Y:-195872;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-6PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to Hollywood\"\,\n    \"path_up\"\: \"toWSMBAW-5Path3\"\,\n    \"warpName\"\: \"WSMBAW-5PipeEnd\"\n}\n";
+ID:821;X:-194496;Y:-195104;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-5PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to Underground Valley\"\,\n    \"path_down\"\: \"toWSMBA6-1\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"WSMBAW-6PipeBegin\"\n}\n";
+ID:752;X:-194496;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA6-1\"\,\n    \"points\"\: \"0\, -32\, 64\, 0\, 448\, 0\"\n}\n";
+ID:802;X:-194048;Y:-195072;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-6\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"Welcome to Hollywood!\"\,\n    \"path_left\"\: \"toWSMBA6-1\"\,\n    \"path_right\"\: \"toWSMBA6-2\"\n}\n";
+ID:802;X:-193888;Y:-195072;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-6\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"Your VERY own Air Tank!\"\,\n    \"path_left\"\: \"toWSMBA6-2\"\,\n    \"path_right\"\: \"toWSMBA6-3\"\n}\n";
+ID:752;X:-194016;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA6-2\"\,\n    \"points\"\: \"-32\, 0\, 128\, 0\"\n}\n";
+ID:752;X:-193856;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA6-3\"\,\n    \"points\"\: \"-32\, 0\, 96\, -32\"\n}\n";
+ID:861;X:-193760;Y:-195104;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-6\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"20th Century Boss\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toWSMBA6-3\"\,\n    \"path_up\"\: \"toWSMBAW-6Path1\"\n}\n";
+ID:821;X:-193664;Y:-195168;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-7PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to Bowser's Land\"\,\n    \"path_left\"\: \"toWSMBAW-6Path1\"\,\n    \"warpName\"\: \"WSMBAW-6PipeEnd\"\n}\n";
+ID:752;X:-193760;Y:-195136;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-6Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 96\, -32\"\n}\n";
+ID:821;X:-197696;Y:-194304;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-6PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to Hollywood\"\,\n    \"path_down\"\: \"toWSMBA7-1\"\,\n    \"path_left\"\: \"\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"WSMBAW-7PipeBegin\"\n}\n";
+ID:752;X:-197696;Y:-194272;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA7-1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:802;X:-197696;Y:-194240;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-7\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"The Stones\"\,\n    \"path_right\"\: \"toWSMBA7-2\"\,\n    \"path_up\"\: \"toWSMBA7-1\"\n}\n";
+ID:804;X:-197664;Y:-194176;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-7\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"The Lost Ship\"\,\n    \"path_left\"\: \"toWSMBA7-3\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toWSMBA7-2\"\n}\n";
+ID:752;X:-197664;Y:-194240;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA7-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 0\, 64\"\n}\n";
+ID:752;X:-197696;Y:-194176;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA7-3\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -128\, -64\"\n}\n";
+ID:802;X:-197824;Y:-194240;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-7\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"The Final Stretch\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toWSMBA7-4\"\,\n    \"path_right\"\: \"toWSMBA7-3\"\n}\n";
+ID:862;X:-197952;Y:-194240;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-7\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"Bowser's Last Step\"\,\n    \"path_right\"\: \"toWSMBA7-4\"\,\n    \"path_up\"\: \"toWSMBAW-7Path1\"\n}\n";
+ID:752;X:-197856;Y:-194240;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA7-4\"\,\n    \"points\"\: \"32\, 0\, -96\, 0\"\n}\n";
+ID:821;X:-197952;Y:-194336;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBABeginWarp\"\,\n    \"levelTitle\"\: \"Warp to Game Select\"\,\n    \"path_down\"\: \"toWSMBAW-7Path1\"\,\n    \"warpName\"\: \"WSMBAEndingPipeFinale\"\n}\n";
+ID:752;X:-197952;Y:-194272;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-7Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
