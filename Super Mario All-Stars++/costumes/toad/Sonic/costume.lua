@@ -46,6 +46,7 @@ function costume.onInit(p)
 	registerEvent(costume,"onTickEnd")
 	registerEvent(costume,"onCleanup")
 	registerEvent(costume,"onInputUpdate")
+	registerEvent(costume,"onPostBlockHit")
 	local icantswim = require("icantswim")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/toad/Sonic/player-jump.ogg")
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/toad/Sonic/stomped.ogg")
@@ -152,6 +153,16 @@ function costume.onTick()
 		elseif not isJumping then
 			balled = false
 		end
+		for k,block in ipairs(Block.get()) do
+			if block:collidesWith(player) then
+				if block.contentID <= 99 then
+					for k,v in ipairs(NPC.get(138)) do
+						v.x = player.x
+						v.y = player.y
+					end
+				end
+			end
+		end
 		--plr.powerup = PLAYER_BIG
 		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
 		local hitNPCs = Colliders.getColliding{a = player, b = smastables.allBaseGameKillableEnemyIDs, btype = Colliders.NPC}
@@ -172,7 +183,7 @@ function costume.onTick()
 			end
 		end
 		
-		if spinballed and player.speedX ~= 0 and player:mem(0x26, FIELD_WORD) == 0 then
+		if spinballed and player.speedX ~= 0 and player:mem(0x26, FIELD_WORD) == 0 and isOnGround(p) then
 			for _,npc in ipairs(hitNPCs) do
 				if npc ~= v and npc.id > 0 then
 					-- Hurt the NPC, and make sure to not give the automatic score
@@ -209,7 +220,7 @@ function costume.onTick()
 			end
 		end
 		if (player.powerup == 5) == false then
-			if not (player:isOnGround()) and (player.keys.altRun == KEYS_PRESSED) and not homing then
+			if not (isOnGround(p)) and (player.keys.altRun == KEYS_PRESSED) and not homing then
 				homing = true
 			end
 		end
@@ -253,14 +264,14 @@ end
 
 function costume.onInputUpdate()
 	if SaveData.toggleCostumeAbilities then
-		if player.speedX ~= 0 and player.keys.down == KEYS_DOWN then
+		if player.speedX ~= 0 and player.keys.down == KEYS_DOWN and isOnGround(p) then
 			spinballed = true
 			flipstate = true
-		elseif player.speedX == 0 and player.keys.down == KEYS_UP then
+		elseif player.speedX == 0 and player.keys.down == KEYS_UP or not isOnGround(p) then
 			spinballed = false
 			flipstate = false
 		end
-		if player.speedX ~= 0 and player.keys.down == KEYS_PRESSED then
+		if player.speedX ~= 0 and player.keys.down == KEYS_PRESSED and isOnGround(p) then
 			SFX.play("costumes/toad/Sonic/sonic-charge.ogg")
 		end
 		if player.keys.altRun == KEYS_PRESSED then
@@ -309,7 +320,7 @@ function costume.onInputUpdate()
 					end
 			end
 
-		if (player.character == CHARACTER_TOAD and player:isOnGround()) then
+		if (player.character == CHARACTER_TOAD and isOnGround(p)) then
 			homing = false
 			connected = false
 			collidersize = 0
@@ -361,13 +372,15 @@ end
 
 function costume.onPlayerHarm(e, p)
 	if SaveData.toggleCostumeAbilities == true then
-		if hit or balled then
+		if hit then
+			p.forcedState = FORCEDSTATE_NONE
 			e.cancelled = true
-			return
+		end
+		if balled then
+			e.cancelled = true
 		end
 		if spinballed and p.speedX ~= 0 then
 			e.cancelled = true
-			return
 		end
 		if p.hasStarman or p.isMega then
 			e.cancelled = true

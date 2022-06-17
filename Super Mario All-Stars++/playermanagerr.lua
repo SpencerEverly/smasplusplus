@@ -541,7 +541,7 @@ end
 --TODO: Fix this so it hot-loads and unloads correctly
 local function loadCostumeLua(path, plr)
 	local luafile = nil;
-	local func, err = loadfile(path)
+	local func, err = loadFile(path)
     if(func)then
         luafile = func()
 		if(type(luafile) ~= "table")then

@@ -73,7 +73,7 @@ Characters:
 Costumes:
 
 - NES Toad, NES Mario & Luigi, Toadette, Daisy, Pauline, Luigi with Mario's clothes, and some Toad Colors by IsaacP2003
-- Sonic sprites by megamario1500, rodrig0 (Also costume code modified by Spencer Everly)
+- Sonic sprites by megamario1500, rodrig0, and Inferno (Also costume code modified by Spencer Everly)
 - Daisy idle sprite by magibowser
 - Wario and Waluigi by couch tomato, ported by Inferno
 - Bass sprite by megaconnerx5, ported by Inferno
