@@ -61,6 +61,7 @@ _G.smasfunctions = require("smasfunctions")
 _G.smasverbosemode = require("smasverbosemode")
 _G.smasbooleans = require("smasbooleans")
 _G.smastables = require("smastables")
+_G.smascheats = require("smascheats")
 
 --Making sure we're in the Mario Challenge... if so, reload the level if its in the noLevel table.
 local rng = require("base/rng") --Load up rng for etc. things
@@ -153,7 +154,6 @@ end
 local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 local repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
-local smascheats = require("smascheats") --To enable edited cheats and some new ones
 if SaveData.speedrunMode == true then
 	speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
 	inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)

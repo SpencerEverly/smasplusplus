@@ -296,13 +296,9 @@ function playSound(name) --Playing SFXs
 	if extrasounds.id[name] then
 		SFX.play(extrasounds.id[name])
 	elseif name then
-		loadSound(name)
+		local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+		SFX.play(file) --Then play it afterward
 	end
-end
-
-function loadSound(name) --Opening external sounds and playing them. Also can use playSound alternatively
-	local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-	SFX.play(file) --Play it afterward, since there isn't anywhere else I can do this
 end
 
 function loadSoundOnly(name) --Opening external sounds, but doesn't play them.
