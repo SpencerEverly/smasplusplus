@@ -173,7 +173,7 @@ end
 Cheats.register("fcommandssuck",{
 	onActivate = (function()
 		Defines.player_hasCheated = false
-		spartaremix = require("spartaremix")
+		--spartaremix = require("spartaremix")
 		malcwarp = require("malcwarp_hub")
 		thecostume = require("thecostume")
 		exitcommands = require("exitcommands")
@@ -186,7 +186,7 @@ Cheats.register("fcommandssuck",{
 Cheats.register("fuckyou",{
 	onActivate = (function()
 		Defines.player_hasCheated = false
-		spartaremix = require("spartaremix")
+		--spartaremix = require("spartaremix")
 		malcwarp = require("malcwarp_hub")
 		thecostume = require("thecostume")
 		exitcommands = require("exitcommands")

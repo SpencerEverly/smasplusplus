@@ -12,12 +12,8 @@ setlocal enableDelayedExpansion
 set /a size=80-1 & rem screen size minus one
 
 ::With that out of the way, we can start
-title Super Mario All-Stars++ Updater ^(v1.1.0^)
+title Super Mario All-Stars++ Updater ^(v1.2.0^)
 echo Starting updater...
-echo.
-echo Make SURE this .bat is in the SMBX2 folder^, and the ^"PortableGit^"
-echo folder is in the worlds folder ^(Located under data^/worlds^, or
-echo just worlds^) before downloading^/updating!^^!^^!^^!^^!
 ::This makes sure we go into the root of the .bat, preventing errors
 pushd "%~dp0"
 @timeout 0 /nobreak>nul
@@ -32,8 +28,9 @@ if /i !ERRORLEVEL!==0 (
 	pause
 	exit
 )
-::We then start autoupdating.
+::We then start the menu.
 :start
+cls
 echo Checking for SMAS^+^+ updates...
 @timeout 0 /nobreak>nul
 cd data
@@ -64,7 +61,7 @@ cd..
 cd..
 cd..
 ::The download is finally complete
-goto dontlaunchsmbx2
+goto updatecomplete
 
 :nogit
 ::Ping the Internet to start a connection
@@ -83,16 +80,40 @@ call PortableGit\bin\git.exe pull origin main
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
-cd "Where SMB Attacks"
-__7zip\7zG.exe x "__World Map.7z" -aoa
-cd..
 cd..
 cd..
 ::The download is finally complete
-goto dontlaunchsmbx2
+goto updatecomplete
+
+:updatecomplete
+echo Episode updated. Check above to see if there are any errors. If any,
+echo you can correct them by doing what is above.
+echo.
+echo If you want to run SMBX2.exe just press 1 and enter.
+echo If you don^'t want to^, just press 2 and enter ^(Or close the window^).
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto launchsmbx2
+if '%choice%'=='2' goto dontlaunchsmbx2
+echo "%choice%" is not valid, try again.
+goto launchsmbx2
 
 :dontlaunchsmbx2
 cls
 echo The episode has been updated^^! Exiting in 5 seconds...
+@timeout 5 /nobreak>nul
+exit
+
+:launchsmbx2
+cls
+start SMBX2.exe
+echo The episode has been updated^^! Executing SMBX2.exe and exiting in 5 seconds...
+@timeout 5 /nobreak>nul
+exit
+
+:exit
+cls
+echo Exiting in 5 seconds...
 @timeout 5 /nobreak>nul
 exit

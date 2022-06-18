@@ -20,7 +20,6 @@ local autoscroll = require("autoscroll")
 if not Misc.inMarioChallenge() then
 	datetime = require("datetime")
 end
-local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")

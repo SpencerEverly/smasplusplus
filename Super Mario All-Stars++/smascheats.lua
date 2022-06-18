@@ -187,14 +187,14 @@ if SaveData.disableX2char == false then
 	})
 end
 
-Cheats.register("jario",{ --Loads/requires the spartaremix library
-	onActivate = (function()
-		Defines.player_hasCheated = false
-		spartaremix = require("spartaremix")
-		return true -- this makes the cheat not toggleable
-	end),
-	flashPlayer = true,activateSFX = "_OST/_Sound Effects/HIT_4.ogg",
-})
+--Cheats.register("jario",{ --Loads/requires the spartaremix library
+	--onActivate = (function()
+		--Defines.player_hasCheated = false
+		--spartaremix = require("spartaremix")
+		--return true -- this makes the cheat not toggleable
+	--end),
+	--flashPlayer = true,activateSFX = "_OST/_Sound Effects/HIT_4.ogg",
+--})
 
 Cheats.register("fourwallsmas",{ --Unlocks the debugbox, useful for the editor
 	onActivate = (function()

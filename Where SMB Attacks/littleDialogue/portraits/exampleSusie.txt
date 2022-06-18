@@ -1,3 +1,0 @@
-idleFrames=1
-variations=4
-voice="exampleSusie"

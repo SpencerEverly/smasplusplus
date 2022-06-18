@@ -1,5 +1,5 @@
 HEAD
-TL:"Hyrule Temple";CPID:XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";"SMBX2";
+TL:"Hyrule Temple";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-197280;T:-201600;B:-200000;MZ:24;MF:"_OST/Super Smash Bros. Brawl/W24 - Temple - Super Smash Bros. Melee.ogg";BG:31;

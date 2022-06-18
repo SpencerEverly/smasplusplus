@@ -1,3 +1,0 @@
-priority=5
-frames=2
-framespeed=45

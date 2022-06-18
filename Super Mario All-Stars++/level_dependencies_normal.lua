@@ -5,7 +5,7 @@ local textplus = require("textplus")
 if not Misc.inMarioChallenge() then
 	datetime = require("datetime")
 end
-local musicalchairs = require("musicalchairs")
+--local musicalchairs = require("musicalchairs")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
@@ -201,7 +201,7 @@ end
 Cheats.register("fcommandssuck",{ --Reenables F Commands from the beginning of development
 	onActivate = (function()
 		Defines.player_hasCheated = false
-		spartaremix = require("spartaremix")
+		--spartaremix = require("spartaremix")
 		malcwarp = require("malcwarp")
 		thecostume = require("thecostume")
 		exitcommands = require("exitcommands")
@@ -211,10 +211,10 @@ Cheats.register("fcommandssuck",{ --Reenables F Commands from the beginning of d
 	flashPlayer = true,activateSFX = "_OST/_Sound Effects/hits1.ogg",
 })
 
-Cheats.register("fuckyou",{ --Renables all F Commands, plus debugbox and spartaremix
+Cheats.register("fuckyou",{ --Renables all F Commands, plus debugbox
 	onActivate = (function()
 		Defines.player_hasCheated = false
-		spartaremix = require("spartaremix")
+		--spartaremix = require("spartaremix")
 		malcwarp = require("malcwarp")
 		thecostume = require("thecostume")
 		exitcommands = require("exitcommands")

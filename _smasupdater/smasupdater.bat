@@ -12,7 +12,7 @@ setlocal enableDelayedExpansion
 set /a size=80-1 & rem screen size minus one
 
 ::With that out of the way, we can start
-title Super Mario All-Stars++ Updater ^(v1.1.0^)
+title Super Mario All-Stars++ Updater ^(v1.2.0^)
 echo Starting updater...
 ::This makes sure we go into the root of the .bat, preventing errors
 pushd "%~dp0"
@@ -32,7 +32,7 @@ if /i !ERRORLEVEL!==0 (
 :start
 cls
 echo Super Mario All-Stars^+^+ Updater
-echo v1.1.0
+echo v1.2.0
 echo.
 echo Make SURE this .bat is in the SMBX2 folder^, and the ^"PortableGit^"
 echo folder is in the worlds folder ^(Located under data^/worlds^, or
@@ -99,9 +99,6 @@ set GIT_CURL_VERBOSE=1
 call PortableGit\bin\git.exe pull origin main
 ::After downloading, there's a weird world map corruption issue when downloading from GitHub. Make sure to extract the .7z automatically from both worlds to prevent crashes and errors.
 cd "Super Mario All-Stars++"
-__7zip\7zG.exe x "__World Map.7z" -aoa
-cd..
-cd "Where SMB Attacks"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
 cd..

@@ -9,7 +9,7 @@ local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
 local smasdeathsystem = require("smashudsystem")
-local musicalchairs = require("musicalchairs")
+--local musicalchairs = require("musicalchairs")
 local extrasounds = require("extrasounds")
 local sprite = require("base/sprite")
 local customCamera = require("customCamera")
@@ -256,7 +256,7 @@ local function characterchange()
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
 	end
-	Routine.run(musicalchairs.switcher)
+	--Routine.run(musicalchairs.switcher)
 end
 
 local function characterchange13()
@@ -429,7 +429,7 @@ local function characterchangeleft()
 		playSound("charcost-selected.ogg")
 		playSound("racoon-changechar.ogg")
 	end
-	Routine.run(musicalchairs.switcher)
+	--Routine.run(musicalchairs.switcher)
 end
 
 local function characterchange13left()
@@ -516,7 +516,7 @@ local function costumechangeright()
 	end
 	playSound("charcost_costume.ogg")
 	playSound("charcost-selected.ogg")
-	Routine.run(musicalchairs.switcher)
+	--Routine.run(musicalchairs.switcher)
 end
 
 local function costumechangeleft()
@@ -531,7 +531,7 @@ local function costumechangeleft()
 	end
 	playSound("charcost_costume.ogg")
 	playSound("charcost-selected.ogg")
-	Routine.run(musicalchairs.switcher)
+	--Routine.run(musicalchairs.switcher)
 end
 
 local function enable2player()
