@@ -55,9 +55,6 @@ call PortableGit\bin\git.exe pull origin main
 cd "Super Mario All-Stars++"
 __7zip\7zG.exe x "__World Map.7z" -aoa
 cd..
-cd "Where SMB Attacks"
-__7zip\7zG.exe x "__World Map.7z" -aoa
-cd..
 cd..
 cd..
 ::The download is finally complete
