@@ -164,6 +164,29 @@ if SaveData.disableX2char == false then
 	smashud.overworld.offsets.player2 =		{x = -308+48, y = 124}
 end
 
+if SaveData.disableX2char == nil then
+	smashud.offsets.keys = 		{x = -268, 	y = 26, align = smashud.ALIGN_LEFT};
+	smashud.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
+	smashud.offsets.hearts = 	{x = 5, 	y = 16, align = smashud.ALIGN_MID};
+	smashud.offsets.score = 	{x = 370, 	y = 27, align = smashud.ALIGN_RIGHT};
+
+	smashud.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_MID};
+	smashud.offsets.coins = 	{x = -368, 	y = 26, cross = {x = 24, y = 1}, value = {x = 46, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
+	smashud.offsets.lives = 	{x = -102, 	y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_RIGHT};
+	smashud.offsets.deathcount = {x = 102, y = 40, cross = {x = 25, y = 1}, value = {x = 78, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_LEFT};
+	smashud.offsets.stars = 	{x = -368, 	y = 48, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
+	smashud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = smashud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smashud.ALIGN_LEFT},	align = smashud.ALIGN_LEFT}
+	smashud.offsets.timer = {x = 264, y = 47, cross = {x = 24, y = 2},	value = {x = 106, y = 2, align = smashud.ALIGN_RIGHT}, align = smashud.ALIGN_LEFT}
+
+	smashud.overworld = {offsets = {}};
+	smashud.overworld.offsets.lives = 		{x = -272, 	y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
+	smashud.overworld.offsets.coins = 		{x = -256, 	y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
+	smashud.overworld.offsets.stars = 		{x = -256, 	y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
+	smashud.overworld.offsets.levelname = 	{x = -156, 	y = 109, p2Offset = {x = 48, y = 0}, align = smashud.ALIGN_LEFT};
+	smashud.overworld.offsets.player =		{x = -308, y = 124}
+	smashud.overworld.offsets.player2 =		{x = -308+48, y = 124}
+end
+
 Graphics.HUD_NONE = 0;
 Graphics.HUD_HEARTS = 1;
 Graphics.HUD_ITEMBOX = 2;
