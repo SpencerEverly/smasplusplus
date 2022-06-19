@@ -508,5 +508,3 @@ function onExit()
 end
 
 --That's the end of this file!
-
---This is a test comment.
