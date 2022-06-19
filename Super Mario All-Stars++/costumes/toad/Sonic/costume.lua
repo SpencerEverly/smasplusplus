@@ -166,7 +166,7 @@ function costume.onTick()
 		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
 		local hitNPCs = Colliders.getColliding{a = player, b = hitNPCs, btype = Colliders.NPC}
 		
-		if balled and player.holdingNPC == nil and player.standingNPC == nil then
+		if balled and player.holdingNPC == nil and player.standingNPC == nil and not hit then
 			for _,npc in ipairs(hitNPCs) do
 				if exclusionNPCs[npc.id] then
 					return
@@ -184,7 +184,7 @@ function costume.onTick()
 			end
 		end
 		
-		if spinballed and player.speedX ~= 0 and player:mem(0x26, FIELD_WORD) == 0 and isOnGround(p) then
+		if spinballed and player.speedX ~= 0 and player:mem(0x26, FIELD_WORD) == 0 and isOnGround(p) and not hit then
 			for _,npc in ipairs(hitNPCs) do
 				if npc ~= v and npc.id > 0 then
 					-- Hurt the NPC, and make sure to not give the automatic score
@@ -201,6 +201,8 @@ function costume.onTick()
 		end
 		
 		if hit then
+			plr.forcedState = FORCEDSTATE_NONE
+			plr:mem(0x140, FIELD_WORD, 100)
 			hitTicks = hitTicks + 1
 
 			plr.keys.left = false
@@ -374,7 +376,6 @@ end
 function costume.onPlayerHarm(e, p)
 	if SaveData.toggleCostumeAbilities == true then
 		if hit then
-			p.forcedState = FORCEDSTATE_NONE
 			e.cancelled = true
 		end
 		if balled then
