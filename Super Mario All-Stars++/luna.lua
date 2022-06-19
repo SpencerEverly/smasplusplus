@@ -300,6 +300,12 @@ function onStart() --Now do onStart...
 		Misc.exitEngine()
 	end
 	Routine.run(warpDoorBegin) --This will run the routine to save the original count and to start the system from there
+	if Misc.inMarioChallenge() then
+		SaveData.totalCoinsClassic = tonumber(mem(0x00B2C5A8, FIELD_WORD))
+		SaveData.totalScoreClassic = tonumber(Misc.score())
+		SaveData.totalLives = tonumber(mem(0x00B2C5AC, FIELD_FLOAT))
+		SaveData.totalStarCount = tonumber(mem(0x00B251E0, FIELD_WORD))
+	end
 	--Do the weather SaveData additions
 	if SaveData.dateplayedweather == nil then
 		SaveData.dateplayedweather = weatherControl
@@ -461,14 +467,6 @@ end
 
 function onTick() --This will prevent split screen, again (Just in case)
 	mem(0x00B25130,FIELD_WORD, 2)
-	if lunatime.tick() == 1 then
-		if Misc.inMarioChallenge() then
-			SaveData.totalCoinsClassic = tonumber(mem(0x00B2C5A8, FIELD_WORD))
-			SaveData.totalScoreClassic = tonumber(Misc.score())
-			SaveData.totalLives = tonumber(mem(0x00B2C5AC, FIELD_FLOAT))
-			SaveData.totalStarCount = tonumber(mem(0x00B251E0, FIELD_WORD))
-		end
-	end
 	if SaveData.disableX2char == false then --Let's not get game overs/broken launcher kicking during Normal Mode.
 		if mem(0x00B2C5AC,FIELD_FLOAT) < 2 then
 			mem(0x00B2C5AC,FIELD_FLOAT,3)
