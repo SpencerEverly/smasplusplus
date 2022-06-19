@@ -172,6 +172,8 @@ extrasounds.id[147] = Audio.SfxOpen(Misc.resolveSoundFile("ace-coins-5.ogg")) --
 extrasounds.id[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg")) --SMB3 Door Close
 extrasounds.id[149] = Audio.SfxOpen(Misc.resolveSoundFile("sprout-megashroom.ogg")) --Mega Mushroom Block Sprout (Custom)
 extrasounds.id[150] = Audio.SfxOpen(Misc.resolveSoundFile("0up.ogg")) --0up (Super Mario Maker 2)
+extrasounds.id[151] = Audio.SfxOpen(Misc.resolveSoundFile("correct.ogg")) --Correct (SMAS)
+extrasounds.id[152] = Audio.SfxOpen(Misc.resolveSoundFile("wrong.ogg")) --Wrong (SMAS)
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
