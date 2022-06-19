@@ -109,7 +109,7 @@ smashud.visible.overworldPlayer = true
 
 smashud.visible.customitembox = true
 
-smashud.priority = -4.5;
+smashud.priority = -4.2;
 
 smashud.ALIGN_LEFT = 0;
 smashud.ALIGN_RIGHT = 1;

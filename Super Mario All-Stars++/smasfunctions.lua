@@ -852,6 +852,12 @@ function activatePlayerIntroMode()
 	intromodeactivated = true
 end
 
+function countEveryPlayer()
+	for k,plr in ipairs(Player.get()) do
+		return plr
+	end
+end
+
 function checkLivingIndex() --Code to check the isAnyPlayerAlive() code.
 	for k,p in ipairs(Player.get()) do
 		if p.deathTimer == 0 and p:mem(0x13C, FIELD_BOOL) == false then

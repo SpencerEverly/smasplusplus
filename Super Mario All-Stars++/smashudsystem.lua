@@ -638,13 +638,13 @@ end
 function smashudsystem.onDraw()
 	if fadeoutdeath then --Fade out related code
 		time = time + 1
-		Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 2}
+		Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 6}
 	end
 	if gameovershow then --Drawing for the quick game over screen
-		Text.printWP("GAME OVER", 310, 290, 3)
+		Text.printWP("GAME OVER", 310, 290, 7)
 	end
 	if blackscreenonly then --Black screen related code
-		Graphics.drawScreen{color = Color.black..1,priority = 2}
+		Graphics.drawScreen{color = Color.black..1,priority = 6}
 	end
 end
 

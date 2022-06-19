@@ -581,11 +581,6 @@ function globalgenerals.onDraw()
 			smallScreen.offsetX = 0
 			smallScreen.offsetY = 0
 		end
-		if SaveData.borderEnabled == true then
-			if SaveData.letterbox == true then
-				Graphics.drawImageWP(wideborder, 0, 0, 5)
-			end
-		end
 	end
 	if SaveData.resolution == "ultrawide" then
 		customCamera.defaultScreenWidth = 800
@@ -612,11 +607,6 @@ function globalgenerals.onDraw()
 			smallScreen.offsetX = 0
 			smallScreen.offsetY = 0
 		end
-		if SaveData.borderEnabled == true then
-			if SaveData.letterbox == true then
-				Graphics.drawImageWP(ultrawideborder, 0, 0, 5)
-			end
-		end
 	end
 	if SaveData.resolution == "nes" then
 		customCamera.defaultScreenWidth = 512
@@ -642,7 +632,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(nesborder, 0, 0, 5)
+			Graphics.drawImageWP(nesborder, 0, 0, 6)
 		end
 	end
 	if SaveData.resolution == "gameboy" then
@@ -671,7 +661,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(gbborder, 0, 0, 5)
+			Graphics.drawImageWP(gbborder, 0, 0, 6)
 		end
 	end
 	if SaveData.resolution == "gba" then
@@ -698,7 +688,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(gbaborder, 0, 0, 5)
+			Graphics.drawImageWP(gbaborder, 0, 0, 6)
 		end
 	end
 	if SaveData.resolution == "iphone1st" then
@@ -727,7 +717,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(iphoneoneborder, 0, 0, 5)
+			Graphics.drawImageWP(iphoneoneborder, 0, 0, 6)
 		end
 	end
 	if SaveData.resolution == "3ds" then
@@ -756,7 +746,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(threedsborder, 0, 0, 5)
+			Graphics.drawImageWP(threedsborder, 0, 0, 6)
 		end
 	end
 	if eastercrashmsg then
@@ -778,7 +768,11 @@ function globalgenerals.onExit()
 	if table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
 		SaveData.lastLevelPlayed = Level.filename()
 	end
-	writeToFile("loadscreeninfo.txt", SaveData.resolution)
+	if not Misc.inMarioChallenge() then
+		writeToFile("loadscreeninfo.txt", SaveData.resolution)
+	elseif Misc.inMarioChallenge() then
+		writeToFile("loadscreeninfo.txt", "mariochallenge")
+	end
 end
 
 return globalgenerals

@@ -9,6 +9,7 @@
 
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
+local customCamera = require("customCamera")
 
 local warpTransition = {}
 
@@ -158,7 +159,7 @@ do
             end
         end
 
-        Graphics.drawScreen{color = Color.black.. opacity,priority = 3}
+        Graphics.drawScreen{color = Color.black..opacity, priority = 6}
 
 
         return middle

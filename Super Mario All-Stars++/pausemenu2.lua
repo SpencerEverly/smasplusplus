@@ -564,10 +564,10 @@ function pausemenu2.onDraw()
 		Audio.MusicVolume(0)
 		Misc.pause(true)
 		exitFadeOut = math.min(1, exitFadeOut + 0.05)
-		Graphics.drawScreen{color = Color.black.. exitFadeOut,priority = 4}
+		Graphics.drawScreen{color = Color.black.. exitFadeOut,priority = 6}
 	end
 	if exitFadeActiveDone then
-		Graphics.drawScreen{color = Color.black,priority = 4}
+		Graphics.drawScreen{color = Color.black,priority = 6}
 	end
 	local currentCostume = player:getCostume()
 	if currentCostume then
