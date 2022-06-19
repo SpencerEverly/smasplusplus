@@ -5,6 +5,7 @@ local rng = require("base/rng")
 local colliders = require("colliders")
 local timer = require("timer")
 local handycam = require("handycam")
+local extrasounds = require("extrasounds")
 
 --Create the library table
 local sampleNPC = {}
@@ -252,9 +253,7 @@ local function setFrame(v)
 				spawnFire(v)
 				data.alreadySpawned = true
 
-				SFX.play{
-					sound = "BowserSounds/BowserFlame.ogg"
-				}
+				SFX.play(extrasounds.id[115])
 			end
 		end
 
@@ -462,15 +461,11 @@ function sampleNPC.onTickNPC(v)
 				data.invulTimer = settings.invulTime
 				data.alphaTimer = 8
 
-				SFX.play{
-					sound = "BowserSounds/BowserStun.ogg"
-				}
+				SFX.play(extrasounds.id[39])
 			else
 				data.invulState = AI_DEAD
 
-				SFX.play{
-					sound = "BowserSounds/BowserDefeatStun.wav"
-				}
+				SFX.play(41)
 
 				Audio.MusicChange(v:mem(0x146, FIELD_WORD), 0, -1)
 			end
@@ -707,9 +702,7 @@ function sampleNPC.onNPCHarm(eventToken, v, harmType, culpritOrNil)
 			data.invulTimer = settings.invulTime
 			data.alphaTimer = 8
 
-			SFX.play{
-				sound = "BowserSounds/BowserStun.ogg"
-			}
+			SFX.play(extrasounds.id[39])
 		else
 			data.invulState = AI_DEAD
 
