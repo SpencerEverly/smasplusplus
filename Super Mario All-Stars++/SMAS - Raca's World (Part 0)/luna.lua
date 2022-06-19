@@ -3,6 +3,11 @@ local Routine = require("routine")
 local pausemenu = require("pausemenu")
 local littleDialogue = require("littleDialogue")
 
+SaveData.resolution = "fullscreen"
+SaveData.letterbox = true
+SaveData.borderEnabled = true
+SaveData.disableX2char = false
+
 local blacklayer = true
 local whitelayer = false
 

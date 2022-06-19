@@ -4,6 +4,7 @@ local littleDialogue = require("littleDialogue")
 local starman = require("starman/star")
 local mega2 = require("mega/megashroom")
 local extrasounds = require("extrasounds")
+local playerManager = require("playermanager")
 
 function smascharacterinfo.onInitAPI()
 	registerEvent(smascharacterinfo,"onTick")
