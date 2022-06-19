@@ -495,7 +495,7 @@ end
 function onExit()
 	if Misc.inMarioChallenge() then
 		mem(0x00B2C5A8, FIELD_WORD, SaveData.totalCoinsClassic)
-		Misc.score() = SaveData.totalScoreClassic
+		Misc.score(SaveData.totalScoreClassic)
 		mem(0x00B2C5AC, FIELD_FLOAT, SaveData.totalLives) 
 	end
 end
