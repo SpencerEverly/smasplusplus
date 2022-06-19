@@ -271,6 +271,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 			playSound("console/console_open.ogg")
 			Misc.cheatBuffer("")
 			repll.active = true
+			GameData.toggleoffinventory = true
 		end
 		return
 	end
@@ -285,6 +286,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
 			Misc.unpause()
 			playSound("console/console_close.ogg")
 			repll.active = false
+			GameData.toggleoffinventory = false
 		end
 	elseif vk == VK_RETURN then
 		playSound("console/console_keypressenter.ogg")
@@ -430,12 +432,10 @@ do
 	function repll.onDraw()
 		if not repll.active then
 			GameData.toggleoffkeys = false
-			GameData.toggleoffinventory = false
 			return
 		end
 		if repll.active then
 			GameData.toggleoffkeys = true
-			GameData.toggleoffinventory = true
 		end
 		if not isOverworld then
 			Graphics.drawScreen({color = repll.background, priority = -1})

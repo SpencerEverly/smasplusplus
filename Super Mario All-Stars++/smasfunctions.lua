@@ -133,7 +133,7 @@ local megashroom = require("mega/megashroom")
 local playerManager = require("playermanager")
 local smasverbosemode = require("smasverbosemode")
 local smastables = require("smastables")
---_G.File = require("scripts/smas/ffi_file")
+--_G.File = require("scripts/smas/functions-file")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
@@ -294,7 +294,9 @@ function playSound(name) --Playing SFXs
 	end
 	if unexpected_condition then error("That sound doesn't exist. Play something else.") end
 	
-	if extrasounds.id[name] then
+	if smastables.extrasoundsNumbersInOrder[name] then
+		SFX.play(name)
+	elseif extrasounds.id[name] then
 		SFX.play(extrasounds.id[name])
 	elseif name then
 		local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list

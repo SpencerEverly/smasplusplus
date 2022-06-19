@@ -112,6 +112,7 @@ do
     function pauseplus.open(submenu,option,opener,isSilent)
         if pauseplus.currentSubmenu == nil and not isSilent then
             playSFX(pauseplus.openSFX)
+			GameData.toggleoffinventory = true
         end
 
         submenuExistanceCheck(submenu or "main")
@@ -139,6 +140,7 @@ do
     function pauseplus.close(isSilent)
         if pauseplus.currentSubmenu ~= nil and not isSilent then
             playSFX(pauseplus.closeSFX)
+			GameData.toggleoffinventory = false
         end
 		
         if not isOverworld then
@@ -808,6 +810,7 @@ do
 			
             if count == 0 then
                 pauseplus.close()
+				GameData.toggleoffinventory = false
             else
                 local entry = pauseplus.history[count]
 
@@ -894,6 +897,7 @@ do
 
             if optionObj.closeMenu then
 				pauseplus.close(true)
+				GameData.toggleoffinventory = false
             end
 
 

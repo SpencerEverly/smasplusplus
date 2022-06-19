@@ -689,12 +689,12 @@ function furyinventory.onInputUpdate()
 			furyinventory.activatefuryinventory = false
 		end
 	end
-	if GameData.toggleoffinventory == true then
+	if GameData.toggleoffinventory then
 		furyinventory.activatefuryinventory = false
 		furyinventory.activated = false
 		furyinventory.hidden = true
 	end
-	if GameData.toggleoffinventory == false or GameData.toggleoffinventory == nil then
+	if not GameData.toggleoffinventory or GameData.toggleoffinventory == nil then
 		furyinventory.activated = true
 		furyinventory.hidden = false
 	end
