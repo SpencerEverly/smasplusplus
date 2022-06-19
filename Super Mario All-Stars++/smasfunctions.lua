@@ -726,8 +726,8 @@ end
 function activate2ndPlayer()
 	mem(0x00B2595E, FIELD_WORD, 2)
 	if Player.count() >= 2 and Player(2).isValid then
-		Player(2).x = player.x + 36
-		Player(2).y = player.y - 72
+		Player(2).x = player.x - player.width * 0.5
+		Player(2).y = player.y - 10
 		Player(2).character = 2
 		if Player(2).powerup == 0 then
 			Player(2).powerup = 2
@@ -738,16 +738,16 @@ end
 function activate3rdPlayer()
 	mem(0x00B2595E, FIELD_WORD, 3)
 	if Player.count() >= 2 and Player(2).isValid then
-		Player(2).x = player.x + 36
-		Player(2).y = player.y - 72
+		Player(2).x = player.x - player.width * 0.5
+		Player(2).y = player.y - 10
 		Player(2).character = 2
 		if Player(2).powerup == 0 then
 			Player(2).powerup = 2
 		end
 	end
 	if Player(3) and Player(3).isValid then
-		Player(3).x = player.x + 94
-		Player(3).y = player.y - 72
+		Player(3).x = player.x - player.width * 0.5
+		Player(3).y = player.y - 10
 		Player(3).character = 3
 		if Player(3).powerup == 0 then
 			Player(3).powerup = 2
@@ -758,24 +758,24 @@ end
 function activate4thPlayer()
 	mem(0x00B2595E, FIELD_WORD, 4)
 	if Player.count() >= 2 and Player(2).isValid then
-		Player(2).x = player.x + 36
-		Player(2).y = player.y - 72
+		Player(2).x = player.x - player.width * 0.5
+		Player(2).y = player.y - 10
 		Player(2).character = 2
 		if Player(2).powerup == 0 then
 			Player(2).powerup = 2
 		end
 	end
 	if Player(3) and Player(3).isValid then
-		Player(3).x = player.x + 94
-		Player(3).y = player.y - 72
+		Player(3).x = player.x - player.width * 0.5
+		Player(3).y = player.y - 10
 		Player(3).character = 3
 		if Player(3).powerup == 0 then
 			Player(3).powerup = 2
 		end
 	end
 	if Player(4) and Player(4).isValid then
-		Player(4).x = player.x + 130
-		Player(4).y = player.y - 72
+		Player(4).x = player.x - player.width * 0.5
+		Player(4).y = player.y - 10
 		Player(4).character = 4
 		if Player(4).powerup == 0 then
 			Player(4).powerup = 2

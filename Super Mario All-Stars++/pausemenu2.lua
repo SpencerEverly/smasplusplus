@@ -781,6 +781,7 @@ end
 local function checkingplayerstatus()
 	if player.count() == 1 then
 		playSound(1001)
+		playSound(152)
 	elseif player.count() >= 2 then
 		playSound(1001)
 		activate1stPlayer()
@@ -852,17 +853,6 @@ function rushmodenewstage()
 	exitFadeActive = false
 	exitFadeActiveDone = true
 	Level.load(smastables.__allMandatoryLevels[rng.randomInt(1,#smastables.__allMandatoryLevels)], nil, nil)
-end
-
-function mariochallengenewstage()
-	pauseplus.canControlMenu = false
-	playSound("skip-intro.ogg")
-	startFadeOut()
-	Routine.wait(1.5, true)
-	Misc.unpause()
-	exitFadeActive = false
-	exitFadeActiveDone = true
-	Level.load(smastables.__allLevels[rng.randomInt(1,#smastables.__allLevels)], nil, nil)
 end
 
 function returntolastlevel()
