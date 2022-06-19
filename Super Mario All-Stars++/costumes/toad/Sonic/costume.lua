@@ -296,6 +296,7 @@ function costume.onInputUpdate()
 		}) do
 					if ((n.x > player.x) and player.direction > 0) or ((n.x < player.x) and player.direction < 0) then
 						connected = true					-- Toad connects a Homing Attack
+						playSound("toad/Sonic/homing.ogg")
 						n.speedY = 0
 						n.speedX = 0						-- you should hit the target, so it stops just for you!
 						player:mem(0x3A,FIELD_WORD,40)		-- you don't need things like... GRAVITY
