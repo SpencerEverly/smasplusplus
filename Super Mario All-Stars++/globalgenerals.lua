@@ -349,13 +349,6 @@ function globalgenerals.onTick()
 		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
 		warpTransition.activateOnInstantWarps = false
 	end
-	if table.icontains(smastables.__marioChallengeLevels,Level.filename()) then
-		warpTransition.musicFadeOut = false
-		warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
-		warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
-		warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
-		warpTransition.activateOnInstantWarps = false
-	end
 	if player.character == CHARACTER_SNAKE then
 		smashud.visible.keys = true
 		smashud.visible.itembox = true

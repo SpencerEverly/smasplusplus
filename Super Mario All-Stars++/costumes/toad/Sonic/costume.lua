@@ -97,9 +97,6 @@ function costume.onInit(p)
 	Defines.jumpheight_bounce = 31
 	Defines.projectilespeedx = 10
 	Defines.player_grav = 0.5
-	Defines.player_grabShellEnabled = false
-	Defines.player_grabTopEnabled = false
-	Defines.player_grabSideEnabled = false
 	
 	costume.abilitesenabled = true
 	smashud.visible.itembox = false
@@ -145,6 +142,8 @@ function costume.onStart()
 	righthomingtrail:attach(player)
 end
 
+local exclusionNPCs = table.map{13,263,265}
+
 function costume.onTick()
 	if SaveData.toggleCostumeAbilities == true then
 		local isJumping = player:mem(0x11C, FIELD_WORD) and not isOnGround(p) and not player:mem(0x50,FIELD_BOOL) --Jumping detection
@@ -165,11 +164,13 @@ function costume.onTick()
 		end
 		--plr.powerup = PLAYER_BIG
 		player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
-		local hitNPCs = Colliders.getColliding{a = player, b = smastables.allBaseGameKillableEnemyIDs, btype = Colliders.NPC}
+		local hitNPCs = Colliders.getColliding{a = player, b = hitNPCs, btype = Colliders.NPC}
 		
-		if balled and player:mem(0x26, FIELD_WORD) == 0 and player.holdingNPC ~= nil then
+		if balled and player.holdingNPC == nil and player.standingNPC == nil then
 			for _,npc in ipairs(hitNPCs) do
-				if npc ~= v and npc.id > 0 then
+				if exclusionNPCs[npc.id] then
+					return
+				elseif npc ~= v and npc.id > 0 then
 					-- Hurt the NPC, and make sure to not give the automatic score
 					local oldScore = NPC.config[npc.id].score
 					NPC.config[npc.id].score = 0
@@ -510,9 +511,6 @@ function costume.onCleanup(p)
 	Defines.jumpheight_bounce = 32
 	Defines.projectilespeedx = 7.1
 	Defines.player_grav = 0.4
-	Defines.player_grabShellEnabled = true
-	Defines.player_grabTopEnabled = true
-	Defines.player_grabSideEnabled = true
 	
 	costume.abilitesenabled = false
 	smashud.visible.itembox = true
