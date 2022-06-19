@@ -283,11 +283,13 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		--**P-WING**
 		for k,p in ipairs(Player.get()) do
-			if p:mem(0x16C, FIELD_BOOL) == true then
-				SFX.play(extrasounds.id[121], 1, 1, 7)
-			end
-			if p:mem(0x170, FIELD_WORD) >= 1 then
-				SFX.play(extrasounds.id[121], 1, 1, 7)
+			if p.mount ~= MOUNT_YOSHI then
+				if p:mem(0x16C, FIELD_BOOL) == true then
+					SFX.play(extrasounds.id[121], 1, 1, 7)
+				end
+				if p:mem(0x170, FIELD_WORD) >= 1 then
+					SFX.play(extrasounds.id[121], 1, 1, 7)
+				end
 			end
 		end
 		
