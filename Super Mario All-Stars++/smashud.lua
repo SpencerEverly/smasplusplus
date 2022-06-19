@@ -115,9 +115,10 @@ smashud.ALIGN_LEFT = 0;
 smashud.ALIGN_RIGHT = 1;
 smashud.ALIGN_MID = 0.5;
 
+smashud.offsets = {}
+
 --TODO: Replace this with object-level offsets with named fields and alignments
 if SaveData.disableX2char == true then
-	smashud.offsets = {}
 	smashud.offsets.keys = 		{x = 64, 	y = 26, align = smashud.ALIGN_LEFT};
 	smashud.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
 	smashud.offsets.hearts = 	{x = 5, 	y = 16, align = smashud.ALIGN_MID};
@@ -141,7 +142,6 @@ if SaveData.disableX2char == true then
 end
 
 if SaveData.disableX2char == false then
-	smashud.offsets = {}
 	smashud.offsets.keys = 		{x = -268, 	y = 26, align = smashud.ALIGN_LEFT};
 	smashud.offsets.itembox = 	{x = 0, 	y = 16, item = {x = 28, y = 28, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
 	smashud.offsets.hearts = 	{x = 5, 	y = 16, align = smashud.ALIGN_MID};
