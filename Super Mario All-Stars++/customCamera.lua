@@ -1039,45 +1039,50 @@ function customCamera.getTargets()
 	end
 
 	-- Add player
-	table.insert(targets,countEveryPlayer())
+	table.insert(targets,player)
+	for i = 2,128 do
+		if Player(i).isValid then
+			table.insert(targets,Player(i))
+		end
+	end
 	count = count + Player.count()
 	
 	return targets
 end
 
 function getCameraFocusFromTargets(targets)
-	for k,plr in ipairs(Player.get()) do
-		local total = vector.zero2
-		local count = 0
+	local total = vector.zero2
+	local count = 0
 
-		for _,v in ipairs(targets) do
-			if v.isValid ~= false then
-				local x = v[1] or v.x
-				local y = v[2] or v.y
-				local width = v.width
-				local height = v.height
+	for _,v in ipairs(targets) do
+		if v.isValid ~= false then
+			local x = v[1] or v.x
+			local y = v[2] or v.y
+			local width = v.width
+			local height = v.height
 
-				if width ~= nil and height ~= nil then
-					x = x + width*0.5
-					y = y + height
-				end
-
-				total.x = total.x + x
-				total.y = total.y + y
-				count = count + Player.count()
+			if width ~= nil and height ~= nil then
+				x = x + width*0.5
+				y = y + height
 			end
-		end
 
-		if count == 0 then
-			total.x = plr.x + plr.width*0.5
-			total.y = plr.y + plr.height
-		else
-			total.x = total.x/count
-			total.y = total.y/count
+			total.x = total.x + x
+			total.y = total.y + y
+			count = count + Player.count()
 		end
-
-		return total
 	end
+
+	if count == 0 then
+		for k,p in ipairs(Player.get()) do
+			total.x = p.x + p.width*0.5
+			total.y = p.y + p.height
+		end
+	else
+		total.x = total.x/count
+		total.y = total.y/count
+	end
+
+	return total
 end
 
 
@@ -1085,63 +1090,61 @@ local function getCurrentSettings()
     local settings = makeDefaultSettings()
 
     if customCamera.controllerID > 0 and EventManager.onStartRan then
-		for k,plr in ipairs(Player.get()) do
-			-- Collect active controllers, then sort
-			local controllers = {}
+		-- Collect active controllers, then sort
+		local controllers = {}
 
-			for _,b in Block.iterateIntersecting(plr.x,plr.y,plr.x+plr.width,plr.y+plr.height) do
-				if b.id == customCamera.controllerID and not b.isHidden and not b:mem(0x5A,FIELD_BOOL) then
-					table.insert(controllers,b)
-				end
+		for _,b in Block.iterateIntersecting(targets.x,targets.y,targets.x+targets.width,targets.y+targets.height) do
+			if b.id == customCamera.controllerID and not b.isHidden and not b:mem(0x5A,FIELD_BOOL) then
+				table.insert(controllers,b)
+			end
+		end
+
+		if #controllers > 1 then
+			table.sort(controllers,sortControllers)
+		end
+
+		-- Consider its effects, now in order of priority
+		for _,b in ipairs(controllers) do
+			local blockSettings = b.data._settings
+
+			if blockSettings.zoom > 0 then
+				settings.zoom = blockSettings.zoom
+			end
+			if blockSettings.rotation ~= 0 then
+				settings.rotation = blockSettings.rotation
+			end
+			if blockSettings.targetNPCID > 0 then
+				settings.targetNPCID = blockSettings.targetNPCID
 			end
 
-			if #controllers > 1 then
-				table.sort(controllers,sortControllers)
+			if blockSettings.screenWidth > 0 then
+				settings.screenWidth = blockSettings.screenWidth
+			end
+			if blockSettings.screenHeight > 0 then
+				settings.screenHeight = blockSettings.screenHeight
 			end
 
-			-- Consider its effects, now in order of priority
-			for _,b in ipairs(controllers) do
-				local blockSettings = b.data._settings
-
-				if blockSettings.zoom > 0 then
-					settings.zoom = blockSettings.zoom
-				end
-				if blockSettings.rotation ~= 0 then
-					settings.rotation = blockSettings.rotation
-				end
-				if blockSettings.targetNPCID > 0 then
-					settings.targetNPCID = blockSettings.targetNPCID
-				end
-
-				if blockSettings.screenWidth > 0 then
-					settings.screenWidth = blockSettings.screenWidth
-				end
-				if blockSettings.screenHeight > 0 then
-					settings.screenHeight = blockSettings.screenHeight
-				end
-
-				settings.screenOffsetX = settings.screenOffsetX + blockSettings.screenOffsetX
-				settings.screenOffsetY = settings.screenOffsetY + blockSettings.screenOffsetY
+			settings.screenOffsetX = settings.screenOffsetX + blockSettings.screenOffsetX
+			settings.screenOffsetY = settings.screenOffsetY + blockSettings.screenOffsetY
 
 
-				if blockSettings.boundOnLeft then
-					settings.bounds[1] = math.max(settings.bounds[1] or -math.huge,b.x)
-				end
-				if blockSettings.boundOnRight then
-					settings.bounds[2] = math.min(settings.bounds[2] or math.huge,b.x + b.width)
-				end
-				if blockSettings.boundOnTop then
-					settings.bounds[3] = math.max(settings.bounds[3] or -math.huge,b.y)
-				end
-				if blockSettings.boundOnBottom then
-					settings.bounds[4] = math.min(settings.bounds[4] or math.huge,b.y + b.height)
-				end
-
-				settings.treatCameraBoundsAsPhysical = settings.treatCameraBoundsAsPhysical or blockSettings.treatCameraBoundsAsPhysical -- verbose...
-
-				settings.offsetX = settings.offsetX + blockSettings.offsetX
-				settings.offsetY = settings.offsetY + blockSettings.offsetY
+			if blockSettings.boundOnLeft then
+				settings.bounds[1] = math.max(settings.bounds[1] or -math.huge,b.x)
 			end
+			if blockSettings.boundOnRight then
+				settings.bounds[2] = math.min(settings.bounds[2] or math.huge,b.x + b.width)
+			end
+			if blockSettings.boundOnTop then
+				settings.bounds[3] = math.max(settings.bounds[3] or -math.huge,b.y)
+			end
+			if blockSettings.boundOnBottom then
+				settings.bounds[4] = math.min(settings.bounds[4] or math.huge,b.y + b.height)
+			end
+
+			settings.treatCameraBoundsAsPhysical = settings.treatCameraBoundsAsPhysical or blockSettings.treatCameraBoundsAsPhysical -- verbose...
+
+			settings.offsetX = settings.offsetX + blockSettings.offsetX
+			settings.offsetY = settings.offsetY + blockSettings.offsetY
 		end
     end
 
@@ -1273,7 +1276,7 @@ function customCamera.onDraw()
         customCamera.previousTargetsFous = vector(camera.x + camera.width*0.5,camera.y + camera.height*0.5)
         customCamera.currentTargets = newTargets
 
-        customCamera.targetsTransition = 1
+        customCamera.targetsTransition = 5
     end
 
 

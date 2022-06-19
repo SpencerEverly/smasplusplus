@@ -707,13 +707,13 @@ function betterPlayer(index, func) --Better player/player2 detection, for simpli
 	end
 	if index == -1 then
 		for i = 1,128 do
-			if Player(i) and Player(i).isValid then
+			if Player(i).isValid then
 				func(Player(i))
 			end
 		end
 	else
 		local plr = Player(index)
-		if plr and plr.isValid then
+		if plr.isValid then
 			func(plr)
 		end
 	end
@@ -733,6 +733,7 @@ function activate2ndPlayer()
 			Player(2).powerup = 2
 		end
 	end
+	customCamera.getTargets()
 end
 
 function activate3rdPlayer()
@@ -753,6 +754,7 @@ function activate3rdPlayer()
 			Player(3).powerup = 2
 		end
 	end
+	customCamera.getTargets()
 end
 
 function activate4thPlayer()
@@ -781,6 +783,7 @@ function activate4thPlayer()
 			Player(4).powerup = 2
 		end
 	end
+	customCamera.getTargets()
 end
 
 function activatePlayerIntroMode()
@@ -850,6 +853,7 @@ function activatePlayerIntroMode()
 	Player(5).powerup = poweruprng5
 	Player(6).powerup = poweruprng6
 	intromodeactivated = true
+	customCamera.getTargets()
 end
 
 function countEveryPlayer()
@@ -905,7 +909,7 @@ end
 function activateMegashroom()
 	for k,p in ipairs(Player.get()) do
 		if(megashroom) then
-			if(not player.isMega) then
+			if(not p.isMega) then
 				megashroom.StartMega(p, 996)
 			else
 				megashroom.StopMega(p)
