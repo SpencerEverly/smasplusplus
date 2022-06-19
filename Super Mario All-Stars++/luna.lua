@@ -273,7 +273,7 @@ smastables._noLoadingSoundLevels = {
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-	if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+	if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and not Misc.inMarioChallenge() and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
 		loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
 		loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
 		fadetolevel = true
