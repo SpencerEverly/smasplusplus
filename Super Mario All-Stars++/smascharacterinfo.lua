@@ -5,6 +5,8 @@ local starman = require("starman/star")
 local mega2 = require("mega/megashroom")
 local extrasounds = require("extrasounds")
 local playerManager = require("playermanager")
+local steve = require("steve")
+local yoshi = require("yiYoshi/yiYoshi")
 
 function smascharacterinfo.onInitAPI()
 	registerEvent(smascharacterinfo,"onTick")
