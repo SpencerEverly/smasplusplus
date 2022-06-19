@@ -294,10 +294,11 @@ function playSound(name) --Playing SFXs
 	end
 	if unexpected_condition then error("That sound doesn't exist. Play something else.") end
 	
-	if smastables.extrasoundsNumbersInOrder[name] then
-		SFX.play(name)
-	elseif extrasounds.id[name] then
+	
+	if extrasounds.id[name] and not smastables.stockSoundNumbersInOrder[name] then
 		SFX.play(extrasounds.id[name])
+	elseif smastables.stockSoundNumbersInOrder[name] then
+		SFX.play(name)
 	elseif name then
 		local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
 		SFX.play(file) --Then play it afterward
