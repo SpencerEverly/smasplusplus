@@ -65,19 +65,19 @@ local pfpimage = false
 local cooldown = 0
 
 Graphics.activateHud(false)
-HUDOverride.visible.keys = false
-HUDOverride.visible.itembox = false
-HUDOverride.visible.bombs = false
-HUDOverride.visible.coins = false
-HUDOverride.visible.score = false
-HUDOverride.visible.lives = false
-HUDOverride.visible.stars = false
-HUDOverride.visible.starcoins = false
-HUDOverride.visible.timer = false
-HUDOverride.visible.levelname = false
-HUDOverride.visible.overworldPlayer = false
-HUDOverride.visible.deathcount = false
-HUDOverride.visible.customitembox = false
+smashud.visible.keys = false
+smashud.visible.itembox = false
+smashud.visible.bombs = false
+smashud.visible.coins = false
+smashud.visible.score = false
+smashud.visible.lives = false
+smashud.visible.stars = false
+smashud.visible.starcoins = false
+smashud.visible.timer = false
+smashud.visible.levelname = false
+smashud.visible.overworldPlayer = false
+smashud.visible.deathcount = false
+smashud.visible.customitembox = false
 
 local middle = 0
 
@@ -1470,10 +1470,10 @@ function bootmenu.onTick()
 		if SaveData.disableX2char == false then
 			x2noticecheck = active
 			x2noticecheckactive = not active
-			HUDOverride.visible.lives = false
+			smashud.visible.lives = false
 		end
 		if SaveData.disableX2char == true then
-			HUDOverride.visible.lives = false
+			smashud.visible.lives = false
 			x2noticecheck = not active
 			x2noticecheckactive = active
 			Player.setCostume(1, nil)

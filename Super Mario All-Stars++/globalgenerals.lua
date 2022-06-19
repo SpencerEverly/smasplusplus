@@ -22,8 +22,8 @@ end
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
-HUDOverride.priority = -4.5
-HUDOverride.visible.starcoins = false
+smashud.priority = -4.5
+smashud.visible.starcoins = false
 GameData.activateAbilityMessage = false
 GameData.forcedStateActive = false
 
@@ -357,37 +357,37 @@ function globalgenerals.onTick()
 		warpTransition.activateOnInstantWarps = false
 	end
 	if player.character == CHARACTER_SNAKE then
-		HUDOverride.visible.keys = true
-		HUDOverride.visible.itembox = true
-		HUDOverride.visible.bombs = true
-		HUDOverride.visible.coins = true
-		HUDOverride.visible.stars = true
-		HUDOverride.visible.timer = true
-		HUDOverride.visible.levelname = true
-		HUDOverride.visible.overworldPlayer = true
+		smashud.visible.keys = true
+		smashud.visible.itembox = true
+		smashud.visible.bombs = true
+		smashud.visible.coins = true
+		smashud.visible.stars = true
+		smashud.visible.timer = true
+		smashud.visible.levelname = true
+		smashud.visible.overworldPlayer = true
 	end
 	if player.character == CHARACTER_NINJABOMBERMAN then
-		HUDOverride.visible.keys = true
-		HUDOverride.visible.itembox = true
-		HUDOverride.visible.bombs = true
-		HUDOverride.visible.coins = true
-		HUDOverride.visible.stars = true
-		HUDOverride.visible.timer = true
-		HUDOverride.visible.levelname = true
-		HUDOverride.visible.overworldPlayer = true
+		smashud.visible.keys = true
+		smashud.visible.itembox = true
+		smashud.visible.bombs = true
+		smashud.visible.coins = true
+		smashud.visible.stars = true
+		smashud.visible.timer = true
+		smashud.visible.levelname = true
+		smashud.visible.overworldPlayer = true
 	end
 	if player.character == CHARACTER_UNCLEBROADSWORD then
-		--HUDOverride.visible.lives = false
+		--smashud.visible.lives = false
 	end
 	if player.character == CHARACTER_ULTIMATERINKA then
-		HUDOverride.visible.keys = true
-		HUDOverride.visible.itembox = true
-		HUDOverride.visible.bombs = true
-		HUDOverride.visible.coins = true
-		HUDOverride.visible.stars = true
-		HUDOverride.visible.timer = true
-		HUDOverride.visible.levelname = true
-		HUDOverride.visible.overworldPlayer = true
+		smashud.visible.keys = true
+		smashud.visible.itembox = true
+		smashud.visible.bombs = true
+		smashud.visible.coins = true
+		smashud.visible.stars = true
+		smashud.visible.timer = true
+		smashud.visible.levelname = true
+		smashud.visible.overworldPlayer = true
 	end
 	if SaveData.disableX2char == true then
 		SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)

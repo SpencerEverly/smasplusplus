@@ -1,7 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local textplus = require("textplus")
-local hudoverride = require("hudoverridee")
+local smashud = require("smashud")
 
 local costume = {}
 

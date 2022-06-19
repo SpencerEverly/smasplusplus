@@ -1,6 +1,6 @@
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
-local HUDOverride = require("hudoverridee")
+local smashud = require("smashud")
 local rng = require("base/rng")
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
@@ -54,7 +54,7 @@ function costume.onInit(p)
 	costume.useGun1 = false
 	costume.useGrenade2 = false
 	costume.grenade = true
-	--HUDOverride.visible.itembox = false
+	--smashud.visible.itembox = false
 	borishp = 3
 	if costume.grenade then
 		local grenade = {
@@ -472,7 +472,7 @@ function costume.onCleanup(p)
 	extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
 	costume.abilitiesenabled = false
 	costume.grenade = false
-	--HUDOverride.visible.itembox = true
+	--smashud.visible.itembox = true
 end
 
 return costume

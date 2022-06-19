@@ -1,10 +1,6 @@
 local littleDialogue = require("littleDialogue")
 local rng = require("base/rng")
-if not Misc.inMarioChallenge() then
-	HUDOverride = require("hudoverridee")
-elseif Misc.inMarioChallenge() then
-	HUDOverride = require("hudoverride")
-end
+local smashud = require("smashud")
 local level_dependencies_rushmode = require("level_dependencies_rushmode")
 local mleb = require("multilayeredearthboundbg")
 local title = Graphics.loadImage("title-final-2x.png")
@@ -12,20 +8,20 @@ local title = Graphics.loadImage("title-final-2x.png")
 GameData.rushModeResultsActive = true
 GameData.rushModeWon = false
 
-HUDOverride.visible.keys = false
-HUDOverride.visible.itembox = false
-HUDOverride.visible.bombs = false
-HUDOverride.visible.coins = false
-HUDOverride.visible.score = false
-HUDOverride.visible.lives = false
-HUDOverride.visible.stars = false
-HUDOverride.visible.starcoins = false
-HUDOverride.visible.timer = false
-HUDOverride.visible.levelname = false
-HUDOverride.visible.overworldPlayer = false
-HUDOverride.visible.deathcount = false
+smashud.visible.keys = false
+smashud.visible.itembox = false
+smashud.visible.bombs = false
+smashud.visible.coins = false
+smashud.visible.score = false
+smashud.visible.lives = false
+smashud.visible.stars = false
+smashud.visible.starcoins = false
+smashud.visible.timer = false
+smashud.visible.levelname = false
+smashud.visible.overworldPlayer = false
+smashud.visible.deathcount = false
 if not Misc.inMarioChallenge() then
-	HUDOverride.visible.customitembox = false
+	smashud.visible.customitembox = false
 end
 
 local exitscreen = false

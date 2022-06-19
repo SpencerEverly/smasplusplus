@@ -9,11 +9,7 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local smashudsystem = require("smashudsystem")
-if not Misc.inMarioChallenge() then
-	HUDOverride = require("hudoverridee")
-elseif Misc.inMarioChallenge() then
-	HUDOverride = require("hudoverride")
-end
+local smashud = require("smashud")
 local rng = require("base/rng")
 local warpTransition = require("warpTransition")
 local pausemenu = require("pausemenu2")
@@ -575,15 +571,15 @@ function dependencies.onTick()
 		killed = true
 		mem(0x00B2C5AC,FIELD_FLOAT, 1)
 	end
-	HUDOverride.visible.keys = false
-	HUDOverride.visible.itembox = true
-	HUDOverride.visible.bombs = true
-	HUDOverride.visible.coins = false
-	HUDOverride.visible.score = false
-	HUDOverride.visible.lives = false
-	HUDOverride.visible.stars = false
-	HUDOverride.visible.starcoins = false
-	HUDOverride.visible.timer = false
+	smashud.visible.keys = false
+	smashud.visible.itembox = true
+	smashud.visible.bombs = true
+	smashud.visible.coins = false
+	smashud.visible.score = false
+	smashud.visible.lives = false
+	smashud.visible.stars = false
+	smashud.visible.starcoins = false
+	smashud.visible.timer = false
 	if Player.count() >= 2 and Player(2).isValid then
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
 			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then

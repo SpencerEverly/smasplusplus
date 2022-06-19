@@ -52,9 +52,6 @@ _G.extrasounds = require("extrasounds")
 _G.classicEvents = require("classiceventsmod")
 _G.EventManager = require("main_events_mod")
 _G.extraNPCProperties = require("extraNPCProperties")
-if not Misc.inMarioChallenge() then
-	_G.HUDOverride = require("hudoverridee")
-end
 
 --SMAS specific functions need to be required as well:
 _G.smasfunctions = require("smasfunctions")
@@ -62,11 +59,11 @@ _G.smasverbosemode = require("smasverbosemode")
 _G.smasbooleans = require("smasbooleans")
 _G.smastables = require("smastables")
 _G.smascheats = require("smascheats")
+_G.smashud = require("smashud")
 
 --Making sure we're in the Mario Challenge... if so, reload the level if its in the noLevel table.
 local rng = require("base/rng") --Load up rng for etc. things
 if Misc.inMarioChallenge() then
-	_G.HUDOverride = require("hudoverride")
 	SaveData.disableX2char = false
 end
 

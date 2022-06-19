@@ -7,11 +7,7 @@ local areaNames = require("areaNames")
 local textplus = require("textplus")
 local ShopSystem = require("ShopSystem/ShopSystem")
 local anothercurrency = require("ShopSystem/anothercurrency")
-if not Misc.inMarioChallenge() then
-	hudoverride = require("hudoverridee")
-elseif Misc.inMarioChallenge() then
-	hudoverride = require("hudoverride")
-end
+local smashud = require("smashud")
 
 -- Images --
 local shopItems = Graphics.loadImageResolved("ShopSystem/ShopSystem/shopItems.png")

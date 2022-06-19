@@ -286,9 +286,9 @@ function SmgLifeSystem.onDraw()
 
         -- Remove heart display
         if (Graphics.getHUDType(player.character) == Graphics.HUD_HEARTS) then
-                Hudoverride.visible.itembox = false
+                smashud.visible.itembox = false
         else
-                Hudoverride.visible.itembox = true
+                smashud.visible.itembox = true
         end
 
         -- hurt animation stuff

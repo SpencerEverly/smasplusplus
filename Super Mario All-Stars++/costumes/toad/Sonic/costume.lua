@@ -1,6 +1,6 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local HUDOverride = require("hudoverridee")
+local smashud = require("smashud")
 local customCamera = require("customCamera")
 local particles = require('particles')
 
@@ -102,7 +102,7 @@ function costume.onInit(p)
 	Defines.player_grabSideEnabled = false
 	
 	costume.abilitesenabled = true
-	HUDOverride.visible.itembox = false
+	smashud.visible.itembox = false
 end
 
 local function isSlidingOnIce()
@@ -515,7 +515,7 @@ function costume.onCleanup(p)
 	Defines.player_grabSideEnabled = true
 	
 	costume.abilitesenabled = false
-	HUDOverride.visible.itembox = true
+	smashud.visible.itembox = true
 end
 
 return costume

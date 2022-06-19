@@ -58,48 +58,6 @@ smashudsystem.hasDied = false --If the player died or not
 smashudsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
 smashudsystem.activated = true --Whenever the death animation is activated
 
-smashudsystem.visible = {}
-smashudsystem.visible.coins = false
-smashudsystem.visible.score = true
-smashudsystem.visible.stars = true
-smashudsystem.visible.lives = true
-smashudsystem.visible.deathcount = true
-smashudsystem.visible.timer = true
-
-smashudsystem.priority = -4.2
-
-smashudsystem.sprites = {}
-
-smashudsystem.sprites.reserveBox1P = Graphics.loadImageResolved("hardcoded/hardcoded-48-1.png")
-smashudsystem.sprites.reserveBox2P = Graphics.loadImageResolved("hardcoded/hardcoded-48-2.png")
-
-smashudsystem.sprites.reserveBox = Graphics.loadImageResolved("hardcoded/hardcoded-48-0.png")
-smashudsystem.sprites.coins = Graphics.loadImageResolved("hardcoded/hardcoded-33-2.png")
-smashudsystem.sprites.cross = Graphics.loadImageResolved("hardcoded/hardcoded-33-1.png")
-smashudsystem.sprites.stars = Graphics.loadImageResolved("hardcoded/hardcoded-33-5.png")
-
-smashudsystem.sprites.lives = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-2.png")
-smashudsystem.sprites.livesClassic = Graphics.loadImageResolved("hardcoded/hardcoded-33-3.png")
-smashudsystem.sprites.lives2 = Graphics.loadImageResolved("hardcoded/hardcoded-33-7.png")
-smashudsystem.sprites.deathcount = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-3.png")
-
-smashudsystem.sprites.heartEmpty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
-smashudsystem.sprites.heartFull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
-smashudsystem.sprites.keys = Graphics.loadImageResolved("hardcoded/hardcoded-33-0.png")
-smashudsystem.sprites.bombs = Graphics.loadImageResolved("hardcoded/hardcoded-33-8.png")
-
-smashudsystem.sprites.arrowUp = Graphics.loadImageResolved("hardcoded/hardcoded-34-1.png")
-smashudsystem.sprites.arrowDown = Graphics.loadImageResolved("hardcoded/hardcoded-34-2.png")
-smashudsystem.sprites.timer = Graphics.loadImageResolved("hardcoded/hardcoded-52.png")
-
-function smashudsystem.coinhud()
-	if smashudsystem.visible.coins then
-		Graphics.drawImageWP(smashudsystem.sprites.coins, 32, 27, smashudsystem.priority)
-		Graphics.drawImageWP(smashudsystem.sprites.cross, 56, 27, smashudsystem.priority)
-		textplus.print{x = 78, y = 27, text = tostring(coinCountClassicWith99Limit()), font = hudfont, priority = smashudsystem.priority}
-	end
-end
-
 function smashudsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
 	if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
 		for _,p in ipairs(Player.get()) do
@@ -674,9 +632,6 @@ function smashudsystem.onTick()
 end
 
 function smashudsystem.onDraw()
-	if smashudsystem.visible.coins then
-		Graphics.addHUDElement(smashudsystem.coinhud())
-	end
 	if fadeoutdeath then --Fade out related code
 		time = time + 1
 		Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 2}

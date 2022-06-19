@@ -1,6 +1,6 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local HUDOverride = require("hudoverridee")
+local smashud = require("smashud")
 local rng = require("base/rng")
 
 local costume = {}
@@ -41,7 +41,7 @@ function costume.onInit(p)
 	Defines.projectilespeedx = 7
 	Defines.player_grav = 0.38
 	
-	HUDOverride.visible.itembox = false
+	smashud.visible.itembox = false
 	characterhp = 3
 	costume.useLaser1 = false
 	costume.abilitesenabled = true
@@ -140,7 +140,7 @@ function costume.onDraw()
 			player.forcedState = FORCEDSTATE_NONE
 			player:mem(0x140, FIELD_WORD, 150)
 		end
-		if HUDOverride.visible.customitembox == true then
+		if smashud.visible.customitembox == true then
 			local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
 			local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
 			if characterhp <= 0 then
@@ -313,7 +313,7 @@ function costume.onCleanup(p)
 	Defines.projectilespeedx = 7.1
 	Defines.player_grav = 0.4
 	
-	HUDOverride.visible.itembox = true
+	smashud.visible.itembox = true
 	costume.abilitesenabled = false
 end
 

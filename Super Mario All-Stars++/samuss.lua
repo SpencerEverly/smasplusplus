@@ -18,11 +18,7 @@ local rng = require("rng")
 local pm = require("playerManager")
 local imagic = require("imagic")
 local defs = require("expandedDefines")
-if not Misc.inMarioChallenge() then
-	HUDOverride = require("hudoverridee")
-elseif Misc.inMarioChallenge() then
-	HUDOverride = require("hudoverride")
-end
+local smashud = require("smashud")
 
 local megashroom = require("NPCs/AI/megashroom")
 
@@ -724,16 +720,16 @@ function samus.initCharacter()
 	initDataStorage()
 	
 	-- CLEANUP NOTE: This is not safe if a level makes it's own use of activateHud
-	HUDOverride.visible.keys = true
-	HUDOverride.visible.bombs = true
-	HUDOverride.visible.coins = true
-	HUDOverride.visible.score = true
-	HUDOverride.visible.lives = true
-	HUDOverride.visible.stars = true
-	HUDOverride.visible.starcoins = false
-	HUDOverride.visible.timer = true
-	HUDOverride.visible.levelname = true
-	HUDOverride.visible.overworldPlayer = true
+	smashud.visible.keys = true
+	smashud.visible.bombs = true
+	smashud.visible.coins = true
+	smashud.visible.score = true
+	smashud.visible.lives = true
+	smashud.visible.stars = true
+	smashud.visible.starcoins = false
+	smashud.visible.timer = true
+	smashud.visible.levelname = true
+	smashud.visible.overworldPlayer = true
 	
 	-- CLEANUP NOTE: This is not quite safe in various cases
 	Defines.player_link_shieldEnabled = false
@@ -751,16 +747,16 @@ end
 function samus.cleanupCharacter()
 	initDataStorage()
 	
-	HUDOverride.visible.keys = true
-	HUDOverride.visible.bombs = true
-	HUDOverride.visible.coins = true
-	HUDOverride.visible.score = true
-	--HUDOverride.visible.lives = false
-	HUDOverride.visible.stars = true
-	HUDOverride.visible.starcoins = false
-	HUDOverride.visible.timer = true
-	HUDOverride.visible.levelname = true
-	HUDOverride.visible.overworldPlayer = true
+	smashud.visible.keys = true
+	smashud.visible.bombs = true
+	smashud.visible.coins = true
+	smashud.visible.score = true
+	--smashud.visible.lives = false
+	smashud.visible.stars = true
+	smashud.visible.starcoins = false
+	smashud.visible.timer = true
+	smashud.visible.levelname = true
+	smashud.visible.overworldPlayer = true
 	
 	-- CLEANUP NOTE: This is not quite safe in various cases
 	Defines.player_link_shieldEnabled = true
