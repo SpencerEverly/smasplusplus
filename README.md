@@ -21,6 +21,8 @@
     <a href="https://github.com/SpencerEverly/smasplusplus/issues">Report Bugs</a>
     ·
     <a href="https://github.com/SpencerEverly/smasplusplus/wiki">How to install</a>
+    ·
+    <a href="https://docs.google.com/document/d/14Kp4R4OLBnHNhJ2qiaNnti5kPcmsRrcxQswF9GOVCi0/edit">Development Log</a>
   </p>
 </div>
 
