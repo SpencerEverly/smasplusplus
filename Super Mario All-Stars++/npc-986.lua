@@ -101,7 +101,7 @@ function customNPC.onTickNPC(v)
 				plr = p
 			end
 			data.tick = data.tick + 1
-			if Player(2) and Player(2).isValid then
+			if Player.count() >= 2 and Player(2).isValid then
 				data.tick = data.tick - 0.5
 			end
 			p.x = v.x - p.width + 16

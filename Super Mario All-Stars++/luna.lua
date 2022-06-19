@@ -88,7 +88,7 @@ end
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
 local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
 	sectionlist[1] = player.section
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		sectionlist[2] = player2.section
 	else
 		sectionlist[2] = nil

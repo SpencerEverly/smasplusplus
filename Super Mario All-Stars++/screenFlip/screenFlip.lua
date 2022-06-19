@@ -191,7 +191,7 @@ function screenFlip.onInputUpdate()
         player.keys.down = oldLeft
 		player.keys.left = oldUp
 		player.keys.right = oldDown
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			local oldLeft2 = player2.keys.left
 			local oldRight2 = player2.keys.right
 			local oldUp2 = player2.keys.up
@@ -211,7 +211,7 @@ function screenFlip.onInputUpdate()
         player.keys.right = oldLeft
 		player.keys.up = player.keys.down
 		player.keys.down = oldUp
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			local oldLeft2 = player2.keys.left
 			local oldUp2 = player2.keys.up
 
@@ -231,7 +231,7 @@ function screenFlip.onInputUpdate()
         player.keys.down = oldLeft
 		player.keys.left = oldUp
 		player.keys.right = oldDown
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			local oldLeft = player2.keys.left
 			local oldRight = player2.keys.right
 			local oldUp = player2.keys.up

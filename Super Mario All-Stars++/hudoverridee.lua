@@ -336,7 +336,7 @@ function Graphics.drawVanillaHUD(camIndex, priority, isSplit)
 
 	if #activePlayers > 1 and not isSplit then
 		splitOffset[1] = -HUDOverride.multiplayerOffsets[Graphics.getHUDType(activePlayers[1].character)]
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			splitOffset[2] = HUDOverride.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
 			for i=1, 2 do
 				local acts = Graphics.getHUDActions(activePlayers[i].character)
@@ -610,7 +610,7 @@ end
 function HUDOverride.countItemboxes(splitOffset, camIndex, isMultiplayer, isSplit, priority)
 	thisCam = activeCameras[camIndex]
 	if isMultiplayer and not isSplit then
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			for i=1, 2 do
 				thisPlayer = activePlayers[i]
 				HUDOverride.drawItembox(splitOffset[i], thisCam, camIndex, thisPlayer, isMultiplayer, priority)

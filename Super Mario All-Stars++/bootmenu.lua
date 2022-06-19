@@ -1455,7 +1455,7 @@ function bootmenu.onTick()
 		end
 		player.x = camera.x + 450 - (player.width / 2) --Force the player somewhere to prevent deaths
 		player.y = camera.y - 1 - (player.height / 2)
-		if Player(2) and Player(2).isValid then --Do these things on Player(2)
+		if Player.count() >= 2 and Player(2).isValid then --Do these things on Player(2)
 			twoplayercheck = not active
 			twoplayercheckactive = active
 			player2.x = camera.x + 432 - (player2.width / 2)

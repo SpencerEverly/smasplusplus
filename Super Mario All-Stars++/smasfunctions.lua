@@ -178,7 +178,7 @@ function smasfunctions.onInputUpdate()
 	end
 	if threeplayermode then
 		for k,p in ipairs(Player.get()) do
-			if Player(2) and Player(2).isValid then
+			if Player.count() >= 2 and Player(2).isValid then
 				
 			end
 			if Player(3) and Player(3).isValid then
@@ -722,7 +722,7 @@ end
 
 function activate2ndPlayer()
 	mem(0x00B2595E, FIELD_WORD, 2)
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		Player(2).x = player.x + 36
 		Player(2).y = player.y - 72
 		Player(2).character = 2
@@ -734,7 +734,7 @@ end
 
 function activate3rdPlayer()
 	mem(0x00B2595E, FIELD_WORD, 3)
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		Player(2).x = player.x + 36
 		Player(2).y = player.y - 72
 		Player(2).character = 2
@@ -754,7 +754,7 @@ end
 
 function activate4thPlayer()
 	mem(0x00B2595E, FIELD_WORD, 4)
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		Player(2).x = player.x + 36
 		Player(2).y = player.y - 72
 		Player(2).character = 2
@@ -782,7 +782,7 @@ end
 
 function activatePlayerIntroMode()
 	mem(0x00B2595E, FIELD_WORD, 6)
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		Player(2).x = player.x
 		Player(2).y = player.y
 		Player(2).character = 2
@@ -878,7 +878,7 @@ function isPlayerGrabbing() --Returns true if the first player is grabbing somet
 end
 
 function player2Active()
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		return true
 	else
 		return false

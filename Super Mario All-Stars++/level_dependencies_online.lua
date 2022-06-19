@@ -8,7 +8,7 @@ end
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local smasdeathsystem = require("smashudsystem")
+local smashudsystem = require("smashudsystem")
 local comboSounds = require("comboSounds")
 
 local dying = false;
@@ -199,7 +199,7 @@ function dependencies.onStart()
 end
 
 function dependencies.onTick()
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
 			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
 				player:mem(0x140,FIELD_WORD,100)
@@ -215,7 +215,7 @@ function dependencies.onTick()
 			end
 		end
 	end
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		if Player(1).forcedState == FORCEDSTATE_DOOR then
 			if Player(1).forcedTimer == 1 then
 				Routine.run(p1teleportdoor)

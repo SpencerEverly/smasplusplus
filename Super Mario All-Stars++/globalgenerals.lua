@@ -298,7 +298,7 @@ function globalgenerals.onInputUpdate()
 			end
 		end
 	end
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		if Player(1).keys.altRun == KEYS_DOWN and Player(1).keys.up == KEYS_PRESSED then
 			if not Misc.isPaused() then
 				player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
@@ -410,7 +410,7 @@ function globalgenerals.onTick()
 				killed = true --If so, this is true.
 				mem(0x00B2C5AC,FIELD_FLOAT, 1) --Increase the life to 1 to prevent being kicked to the broken SMBX launcher after dying
 			end
-			if Player(2) and Player(2).isValid then --Player(2) compability! This one is a bit of a mess, but I tried
+			if Player.count() >= 2 and Player(2).isValid then --Player(2) compability! This one is a bit of a mess, but I tried
 				if(not killed2 and p.deathTimer >= 1 and p:mem(0x13C, FIELD_BOOL)) then --Because 0X13E doesn't check in multiplayer, use the death timer instead.
 					killed2 = true --This one has a different variable set for player2
 					mem(0x00B2C5AC,FIELD_FLOAT, 1) --Also same as above
@@ -1215,7 +1215,7 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 end
 
 function globalgenerals.onDraw()
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		local playerboundaryx = Player(2).x - player.x
 		local playerboundaryy = Player(2).y - player.y
 		--Kill player2 if far away, out of the camera bounds

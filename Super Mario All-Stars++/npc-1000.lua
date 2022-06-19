@@ -127,7 +127,7 @@ function dudstar.onInputUpdate()
 		player.dropItemKeyPressing = false
 		player.jumpKeyPressing = false
 		player.pauseKeyPressing = false
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2.upKeyPressing = false
 			player2.downKeyPressing = false
 			player2.leftKeyPressing = false

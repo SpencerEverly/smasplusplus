@@ -22,7 +22,7 @@ function onInputUpdate()
 	player.dropItemKeyPressing = false
 	if player.rawKeys.pause == KEYS_PRESSED then
 		player:teleport(-179648, -180320)
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2:teleport(-179584, -180320)
 		end
 	end
@@ -118,7 +118,7 @@ function onTick()
 	Audio.sounds[91].muted = true
 	player:setFrame(50) --Prevent the player from showing up on the boot menu
 	player:mem(0x140, FIELD_BOOL, 150)
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		player2:setFrame(50)
 		player2:mem(0x142, FIELD_BOOL, true)
 	end
@@ -136,7 +136,7 @@ function onEvent(eventName)
 	end
 	if eventName == "Cutscene 4" then
 		player:teleport(-159488, -160224)
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2:teleport(-159328, -160224)
 		end
 		blackfadein = false
@@ -151,13 +151,13 @@ function onEvent(eventName)
 		blackfadein = nil
 		time = 0
 		player:teleport(-119808, -120384)
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2:teleport(-119712, -120384)
 		end
 	end
 	if eventName == "Cutscene 10" then
 		player:teleport(-139712, -140416)
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2:teleport(-139616, -140416)
 		end
 	end
@@ -169,7 +169,7 @@ function onEvent(eventName)
 		whiteflashpre1 = nil
 		time = 0
 		player:teleport(-99648, -100160)
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2:teleport(-99584, -100160)
 		end
 	end
@@ -183,7 +183,7 @@ function onEvent(eventName)
 		whiteflashpre2 = nil
 		time = 0
 		player:teleport(-139712, -140416)
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2:teleport(-139616, -140416)
 		end
 		cutsceneenabled = false

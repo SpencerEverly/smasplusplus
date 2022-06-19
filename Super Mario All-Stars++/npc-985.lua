@@ -143,7 +143,7 @@ local inactivekeysonly = false
 function roulettestar.onDraw()
 	local playercameray = player.y - camera.y
 	local playercamerax = player.x - camera.x
-	if Player(2) and Player(2).isValid then
+	if Player.count() >= 2 and Player(2).isValid then
 		player2camerax = Player(2).x - camera.x
 		player2cameray = Player(2).y - camera.y
 	end
@@ -213,7 +213,7 @@ function roulettestar.onDraw()
 						frame = frame,
 					}
 				end
-				if Player(2) and Player(2).isValid then
+				if Player.count() >= 2 and Player(2).isValid then
 					p2 = player2 or Player(2)
 					if p2:isOnGround() then
 						p2:setFrame(-50*player.direction)
@@ -280,7 +280,7 @@ function roulettestar.onInputUpdate()
 		player.dropItemKeyPressing = false
 		player.jumpKeyPressing = false
 		player.pauseKeyPressing = false
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2.upKeyPressing = false
 			player2.downKeyPressing = false
 			player2.leftKeyPressing = false
@@ -304,7 +304,7 @@ function roulettestar.onInputUpdate()
 		player.dropItemKeyPressing = false
 		player.jumpKeyPressing = false
 		player.pauseKeyPressing = false
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			player2.upKeyPressing = false
 			player2.downKeyPressing = false
 			player2.leftKeyPressing = false

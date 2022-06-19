@@ -261,7 +261,7 @@ function pausemenu13.onInputUpdate()
 			pause_options[pause_index+1].action();
 			Misc.unpause();
 		end
-		if Player(2) and Player(2).isValid then
+		if Player.count() >= 2 and Player(2).isValid then
 			if(Player(2).keys.down == KEYS_PRESSED) then
 				repeat
 					pause_index = (pause_index+1)%#pause_options;

@@ -22,7 +22,7 @@ local lineguide        = require("lineguide")
 local switch           = require("blocks/ai/synced")
 local megashroom       = require("mega/megashroom")
 local starman          = require("starman/star")
-local smasdeathsystem  = require("smashudsystem")
+local smashudsystem  = require("smashudsystem")
 
 local time = 0
 local lifelost = false
