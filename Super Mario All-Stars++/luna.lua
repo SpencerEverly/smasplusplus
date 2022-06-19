@@ -184,6 +184,9 @@ end
 if SaveData.borderEnabled == nil then --Border default is true
 	SaveData.borderEnabled = true
 end
+if SaveData.clockTheme == nil then
+	SaveData.clockTheme = "normal"
+end
 if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
 	SaveData.totalStarCount = 0
 end
