@@ -8,7 +8,6 @@ local megashroom = require("mega/megashroom")
 --First off, the move-to-the-next-level-without-doing-anything stuff:
 Cheats.deregister("mylifegoals") --This gives a a SMW goal exit on the wrong ID
 Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
-Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit on the wrong ID
 
 
 --These cheats are disabled but reenabled below to switch IDs on the respective cheats.
@@ -17,6 +16,7 @@ Cheats.deregister("thestarmen") --Grants the starman effect on the wrong ID.
 Cheats.deregister("bitemythumb") --Grants a mega mushroom on the wrong ID.
 Cheats.deregister("getdemstars") --This would give the wrong star on the wrong ID.
 Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit. Wanted to put SFXs on it for no reason at all
+Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit on the wrong ID
 
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
@@ -375,6 +375,20 @@ Cheats.register("foundmycarkeys",{ --This needs to be reregistered because I wan
 			npc:mem(0x12C, FIELD_WORD, 1)
 			player:mem(0x15A, FIELD_WORD, toTeleportData.section)
 		end
+		
+		return true;
+	end),
+	flashPlayer = true,activateSFX = nil,
+})
+
+Cheats.register("itsvegas",{ --This needs to be reregistered because it was using the wrong roulette ID
+	onActivate = (function()
+		if(isOverworld) then
+			return true;
+		end
+		local goal = NPC.spawn(985, player.x, player.y, player.section)
+		goal.x = player.x + (player.width - goal.width)*0.5;
+		goal.y = player.y + (player.height - goal.height)*0.5;
 		
 		return true;
 	end),
