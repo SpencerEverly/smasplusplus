@@ -6,15 +6,9 @@ local megashroom = require("mega/megashroom")
 --Some cheats will be disabled until I rework them to make them compatible with my episode. All win NPCs will be remade entirely to be compatible with the episode-specific star system, this is why.
 
 --First off, the move-to-the-next-level-without-doing-anything stuff:
-Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit on the wrong ID
-Cheats.deregister("mylifegoal") --This gives a a SMW goal exit on the wrong ID
+Cheats.deregister("mylifegoals") --This gives a a SMW goal exit on the wrong ID
 Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
 Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit on the wrong ID
-
-
---All of these would break the game, I think. It's there just in case if something happens:
-Cheats.deregister("speeddemon") --This uncaps the framerate... would rather disable it
-Cheats.deregister("fromthedepths") --Jump high when falling into a pit instead of dying. Dying is crucial for certain events, such as the Boot Level.
 
 
 --These cheats are disabled but reenabled below to switch IDs on the respective cheats.
@@ -22,6 +16,7 @@ Cheats.deregister("waitinginthesky") --Changes the starman music and duration. S
 Cheats.deregister("thestarmen") --Grants the starman effect on the wrong ID.
 Cheats.deregister("bitemythumb") --Grants a mega mushroom on the wrong ID.
 Cheats.deregister("getdemstars") --This would give the wrong star on the wrong ID.
+Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit. Wanted to put SFXs on it for no reason at all
 
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
@@ -335,16 +330,53 @@ Cheats.register("waitinginthesky",{ --This needs to be reregistered because it w
 	onActivate = (function()
 		Defines.player_hasCheated = false
 		if(starman) then
-			playSound("cheats/waitinginthesky_activated.ogg")
+			playSound("cheats/waitinginthesky_activated")
 			starman.sfxFile = Misc.resolveSoundFile("waitinginthesky")
 			starman.duration[994] = lunatime.toTicks(30.5);
 			starman.duration[996] = lunatime.toTicks(30.5);
 		else
-			playSound("cheats/waitinginthesky_deactivated.ogg")
+			playSound("cheats/waitinginthesky_deactivated")
 			starman.sfxFile = Misc.resolveSoundFile("starman.ogg")
 			starman.duration[994] = lunatime.toTicks(NPC.config[id].duration)
 			starman.duration[996] = lunatime.toTicks(NPC.config[id].duration)
 		end
+	end),
+	flashPlayer = true,activateSFX = nil,
+})
+
+Cheats.register("foundmycarkeys",{ --This needs to be reregistered because I wanted to add SFXs to it
+	onActivate = (function()
+		if(isOverworld) then
+			return true;
+		end
+		local toTeleportData = {}
+		for k, v in ipairs(Section.get()) do
+			if (not toTeleportData.section) then
+				for _,bgo in ipairs(BGO.getIntersecting(v.boundary.left, v.boundary.top, v.boundary.right, v.boundary.bottom)) do
+					if (bgo.id == 35) then
+						toTeleportData.section = k - 1;
+						toTeleportData.x = bgo.x;
+						toTeleportData.y = bgo.y;
+						break;
+					end
+				end
+			else
+				playSound("cheats/foundmycarkeys_keyholenotfound")
+				break;
+			end
+		end
+		
+		if toTeleportData.section then
+			playSound("cheats/foundmycarkeys_activate")
+			local npc = NPC.spawn(31, toTeleportData.x, toTeleportData.y, toTeleportData.section)
+			player.HeldNPCIndex = npc.idx + 1
+			player.x = toTeleportData.x
+			player.y = toTeleportData.y
+			npc:mem(0x12C, FIELD_WORD, 1)
+			player:mem(0x15A, FIELD_WORD, toTeleportData.section)
+		end
+		
+		return true;
 	end),
 	flashPlayer = true,activateSFX = nil,
 })
