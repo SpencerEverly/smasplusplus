@@ -638,7 +638,7 @@ do
 
     function customCamera.drawScene(args)
         args.minPriority = args.minPriority or -100
-        args.maxPriority = args.maxPriority or 5
+        args.maxPriority = args.maxPriority or 0
 
         args.rotation = args.rotation or 0
         args.scale = args.scale or 1
@@ -1414,7 +1414,7 @@ function customCamera.onCameraDraw()
         }
 
         --Graphics.drawScreen{color = Color.black,priority = 0}
-        Graphics.drawScreen{texture = zoomedBuffer,priority = 5}
+        Graphics.drawScreen{texture = zoomedBuffer,priority = 0.001}
     end
 
     if settingsNeedCrop then
@@ -1429,12 +1429,12 @@ function customCamera.onCameraDraw()
             sourceY = borderVer*0.5
         end
 
-        zoomedBuffer:captureAt(5)
+        zoomedBuffer:captureAt(0.001)
 
-        Graphics.drawScreen{color = Color.black,priority = 5}
+        Graphics.drawScreen{color = Color.black,priority = 0.001}
 
         Graphics.drawBox{
-            texture = zoomedBuffer,priority = 5,
+            texture = zoomedBuffer,priority = 0.001,
             x = borderHor*0.5 + customCamera.screenOffsetX,
             y = borderVer*0.5 + customCamera.screenOffsetY,
             sourceX = sourceX,
