@@ -34,8 +34,6 @@ local eastercrashmsg = false
 local eastercrashprevload = false
 local blockidx5000check = false
 
-local wideborder = Graphics.loadImageResolved("graphics/resolutionborders/widescreen.png")
-local ultrawideborder = Graphics.loadImageResolved("graphics/resolutionborders/ultrawide.png")
 local nesborder = Graphics.loadImageResolved("graphics/resolutionborders/nes.png")
 local gbborder = Graphics.loadImageResolved("graphics/resolutionborders/gb.png")
 local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png")
@@ -632,7 +630,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(nesborder, 0, 0, 6)
+			Graphics.drawImageWP(nesborder, 0, 0, 8)
 		end
 	end
 	if SaveData.resolution == "gameboy" then
@@ -661,7 +659,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(gbborder, 0, 0, 6)
+			Graphics.drawImageWP(gbborder, 0, 0, 8)
 		end
 	end
 	if SaveData.resolution == "gba" then
@@ -688,7 +686,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(gbaborder, 0, 0, 6)
+			Graphics.drawImageWP(gbaborder, 0, 0, 8)
 		end
 	end
 	if SaveData.resolution == "iphone1st" then
@@ -717,7 +715,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(iphoneoneborder, 0, 0, 6)
+			Graphics.drawImageWP(iphoneoneborder, 0, 0, 8)
 		end
 	end
 	if SaveData.resolution == "3ds" then
@@ -746,7 +744,7 @@ function globalgenerals.onDraw()
 			smallScreen.offsetY = 0
 		end
 		if SaveData.borderEnabled == true then
-			Graphics.drawImageWP(threedsborder, 0, 0, 6)
+			Graphics.drawImageWP(threedsborder, 0, 0, 8)
 		end
 	end
 	if eastercrashmsg then
