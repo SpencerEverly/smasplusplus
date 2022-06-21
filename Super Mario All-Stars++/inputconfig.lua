@@ -136,6 +136,7 @@ function inputconfigurator.onKeyboardPress(k, repeated)
 			writeKeyConfigs()
 			dontRunReturn = false
 			lockSelect = true
+			keyConfigCount = 0
 			GameData.reopenmenu = true
 		end
 	end
