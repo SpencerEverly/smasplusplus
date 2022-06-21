@@ -61,27 +61,21 @@ local currentConfig = {}
 local currentConfig2 = {}
 
 local function writeKeyConfigs()
-	if currentController == nil then
-		inputconfigurator.nocontroller = false
-		return
-	else
-		local t = inputConfig1
-		t.inputType = 0
-		
-		if t.inputType == 0 then
-			t = inputConfig1
-			t.jump = currentConfig2[1]
-			t.run = currentConfig2[2]
-			t.altjump = currentConfig2[3]
-			t.altrun = currentConfig2[4]
-			t.dropitem = currentConfig2[5]
-			t.pause = currentConfig2[6]
-			t.up = currentConfig2[7]
-			t.down = currentConfig2[8]
-			t.left = currentConfig2[9]
-			t.right = currentConfig2[10]
-			currentConfig2 = {}
-		end
+	local t = inputConfig1
+	
+	if t.inputType == 0 then
+		t = inputConfig1
+		t.jump = currentConfig2[1]
+		t.run = currentConfig2[2]
+		t.altjump = currentConfig2[3]
+		t.altrun = currentConfig2[4]
+		t.dropitem = currentConfig2[5]
+		t.pause = currentConfig2[6]
+		t.up = currentConfig2[7]
+		t.down = currentConfig2[8]
+		t.left = currentConfig2[9]
+		t.right = currentConfig2[10]
+		currentConfig2 = {}
 	end
 end
 
@@ -115,6 +109,8 @@ local function writeButtonConfigs()
 	end
 end
 
+local dontRunReturn = false
+
 function inputconfigurator.onKeyboardPress(k, repeated)
 	if repeated then return end
 	
@@ -123,13 +119,14 @@ function inputconfigurator.onKeyboardPress(k, repeated)
 	end
 	
 	if inputconfigurator.keyConfigOpen then
-		if k == VK_RETURN then
+		if k == VK_RETURN and not dontRunReturn then
 			currentKeyboard = { k, pnumkey }
 			keyConfigCount = 1
+			dontRunReturn = true
 			playSound("inputconfig/input_started.ogg")
 			return
 		end
-		if keyConfigCount < #keyConfigs then
+		if keyConfigCount < #keyConfigs and dontRunReturn then
 			currentConfig2[keyConfigCount] = k
 			playSound("inputconfig/input_switchpressed.ogg")
 			keyConfigCount = keyConfigCount + 1
@@ -137,13 +134,8 @@ function inputconfigurator.onKeyboardPress(k, repeated)
 			inputconfigurator.keyConfigOpen = false
 			playSound("inputconfig/input_success.ogg")
 			writeKeyConfigs()
+			dontRunReturn = false
 			lockSelect = true
-			GameData.reopenmenu = true
-		end
-		if (k == VK_BACK) then
-			inputconfigurator.backspacePressedState = true
-			playSound("inputconfig/input_quit.ogg")
-			inputconfigurator.keyConfigOpen = false
 			GameData.reopenmenu = true
 		end
 	end
