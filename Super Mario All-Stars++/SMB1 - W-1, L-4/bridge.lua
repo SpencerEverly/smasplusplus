@@ -23,6 +23,7 @@ bridge.collapseHitboxDirection = -1
 bridge.cameraX = 0
 bridge.cameraY = 0
 bridge.collapseBox = Colliders.Box(-1, -1, -1, -1)
+bridge.bridgetick = 0
 
 local cameradirection = -bridge.collapseHitboxDirection
 
@@ -101,18 +102,18 @@ end
 
 function bridge.onTick()
 	if bridge.bridgetick >= 30 then
-		--Text.print("Testing", 100, 100)
-	
-		player.keys.jump = false
-		player.keys.altJump = false
-		player.keys.run = false
-		player.keys.altRun = false
-		player.keys.left = false
-		player.keys.right = false
-		player.keys.up = false
-		player.keys.down = false
-		player.keys.pause = true
-		player.keys.dropItem = false
+		for _,p in ipairs(Player.get()) do
+			p.keys.jump = false
+			p.keys.altJump = false
+			p.keys.run = false
+			p.keys.altRun = false
+			p.keys.left = false
+			p.keys.right = false
+			p.keys.up = false
+			p.keys.down = false
+			p.keys.pause = false
+			p.keys.dropItem = false
+		end
 	end
 end
 

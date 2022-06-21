@@ -5,18 +5,19 @@ local megashroom = require("mega/megashroom")
 
 --Some cheats will be disabled until I rework them to make them compatible with my episode. All win NPCs will be remade entirely to be compatible with the episode-specific star system, this is why.
 
---First off, the move-to-the-next-level-without-doing-anything stuff:
-Cheats.deregister("mylifegoals") --This gives a a SMW goal exit on the wrong ID
+--Here's what's unfinished so far:
 Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
 
 
 --These cheats are disabled but reenabled below to switch IDs on the respective cheats.
+Cheats.deregister("fourthwall") --This uses the wrong repl console, we're using repll, with extra sounds!
 Cheats.deregister("waitinginthesky") --Changes the starman music and duration. Starman is on the wrong ID for this cheat (This episode uses a different lua script for the starman)
 Cheats.deregister("thestarmen") --Grants the starman effect on the wrong ID.
 Cheats.deregister("bitemythumb") --Grants a mega mushroom on the wrong ID.
 Cheats.deregister("getdemstars") --This would give the wrong star on the wrong ID.
 Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit. Wanted to put SFXs on it for no reason at all
 Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit on the wrong ID
+Cheats.deregister("mylifegoals") --This gives a a SMW goal exit on the wrong ID
 
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
@@ -390,6 +391,34 @@ Cheats.register("itsvegas",{ --This needs to be reregistered because it was usin
 		goal.x = player.x + (player.width - goal.width)*0.5;
 		goal.y = player.y + (player.height - goal.height)*0.5;
 		
+		return true;
+	end),
+	flashPlayer = true,activateSFX = nil,
+})
+
+Cheats.register("mylifegoals",{ --This needs to be reregistered because it was using the wrong goal tape ID
+	onActivate = (function()
+		if(isOverworld) then
+			return true;
+		end
+		local goal = NPC.spawn(984, player.x, player.y, player.section)
+		goal.x = player.x + (player.width - goal.width)*0.5;
+		goal.y = player.y + (player.height - goal.height)*0.5;
+			
+		return true;
+	end),
+	flashPlayer = true,activateSFX = nil,
+})
+
+Cheats.register("mylifeorbs",{ --This one uses the SMW goal orb, instead of the goal tape!
+	onActivate = (function()
+		if(isOverworld) then
+			return true;
+		end
+		local goal = NPC.spawn(983, player.x, player.y, player.section)
+		goal.x = player.x + (player.width - goal.width)*0.5;
+		goal.y = player.y + (player.height - goal.height)*0.5;
+			
 		return true;
 	end),
 	flashPlayer = true,activateSFX = nil,

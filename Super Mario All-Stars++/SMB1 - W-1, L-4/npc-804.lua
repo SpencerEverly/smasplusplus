@@ -120,6 +120,7 @@ end
 function sampleNPC.onTickNPC(v)
 	--Don't act during time freeze
 	if Defines.levelFreeze then return end
+	if mem(0x00B2B9E4, FIELD_BOOL) == true then return end
 	
 	local data = v.data
 	
@@ -149,39 +150,41 @@ function sampleNPC.onTickNPC(v)
 	--Execute main AI. This template just jumps when it touches the ground.
 	v.friendly = true
 	
-	if Colliders.collide(player, v) then
-		player.speedX = 0
-		player.x = player.x - v.direction
-		SFX.play(bridgecollapse)
-		bridge.active = true
-		bridge.cameraX = camera.x
-		bridge.cameraY = camera.y
-		bridge.collapseHitboxX = v.x
-		bridge.collapseHitboxY = v.y
-		bridge.collapseHitboxWidth = 32
-		bridge.collapseHitboxHeight = 96
-		bridge.collapseHitboxDirection = v.direction
-		v:kill(HARM_TYPE_OFFSCREEN)
-		cameralock = nil
+	for _,p in ipairs(Player.get()) do
+		if Colliders.collide(p, v) then
+			p.speedX = 0
+			p.x = p.x - v.direction
+			SFX.play(bridgecollapse)
+			bridge.active = true
+			bridge.cameraX = camera.x
+			bridge.cameraY = camera.y
+			bridge.collapseHitboxX = v.x
+			bridge.collapseHitboxY = v.y
+			bridge.collapseHitboxWidth = 32
+			bridge.collapseHitboxHeight = 96
+			bridge.collapseHitboxDirection = v.direction
+			v:kill(HARM_TYPE_OFFSCREEN)
+			cameralock = nil
+		end
 	end
 end
 
 function sampleNPC.onCameraUpdate()
 	if cameralock ~= nil then
 		if direction == -1 then
-			if camera.x + 800 > cameralock then
-				camera.x = cameralock - 800
-			end
-			if player.x > camera.x + 775 then
-				player.x = camera.x + 775
-			end
+			--if camera.x + 800 > cameralock then
+			--	camera.x = cameralock - 800
+			--end
+			--if player.x > camera.x + 775 then
+			--	player.x = camera.x + 775
+			--end
 		elseif direction == 1 then
-			if camera.x < cameralock - 160 then
-				camera.x = cameralock - 160
-			end
-			if player.x < camera.x then
-				player.x = camera.x
-			end
+			--if camera.x < cameralock - 160 then
+			--	camera.x = cameralock - 160
+			--end
+			--if player.x < camera.x then
+				--player.x = camera.x
+			--end
 		end
 	end
 end

@@ -45,7 +45,7 @@
 --_ addToFile('path/to/file.extension', 'text'): Add to a file using io. This won't
 --overwrite everything, just adds something to the file, so this one is fine.
 --_ lifeCount(): Returns the SMAS++ life count.
---_ lifeCountWithCrowns(): Returns the SMAs++ life count with the crowns. Every
+--_ lifeCountWithCrowns(): Returns the SMAS++ life count with the crowns. Every
 --crown will be with a "!" since that's the symbol being used for displaying the
 --crown.
 --_ manageLives(lives, true/false): Manages the lives. If true, it'll add the lives. If false, it'll
@@ -60,6 +60,13 @@
 --_ clearAllStars(): This clears all the stars, and even the level table
 --_ manageStars(number of stars, add/subtract): Manages the star count. 'add' will add,
 --'subtract' will subtract the stars.
+--_ scoreCount(): Returns the score count specific for the episode.
+--_ scoreCountWithZeroes(): Returns the score count, but with the maximum zeroes.
+--_ scoreCount13(): Returns the score count, but with the max zeroes the original
+--SMBX can go.
+--_ coinCountClassic(): Returns the classic coin count specific for the episode.
+--_ coinCountClassicWith99Limit(): Returns the classic coin count, but it limits
+--the coins that go higher from 99 up to 99 (Used for the HUD).
 --
 --DATE/TIME
 --_ osDay(): Lists the day.
@@ -90,6 +97,8 @@
 --_ activatePlayerIntroMode(): This activates the intro imitaiton mode, where 6
 --players move to the right while jumping around automatically. This is normally
 --used on the main menu of the episode (Certain themes).
+--_ countEveryPlayer(): This counts every single player that is active on
+--the current level.
 --_ isAnyPlayerAlive(): Returns if any player is still alive.
 --_ isPlayerUnderwater(): Returns true if the first player is underwater.
 --_ isPlayerGrabbing(): Returns true if the first player is grabbing something.
@@ -99,6 +108,8 @@
 --NPC FUNCTIONS
 --_ harmAllNPCs(): Harms every single NPC is the entire level.
 --_ harmSpecificNPC(id): Harms a specific NPC ID in the entire level.
+--_ checkCameraTransitionStatus(): Checks if the camera transition (Used for
+--defining size/position) is transitioning or not.
 --
 --MISC FUNCTIONS
 --_ getEpisodeFilename(): Gets the episode filename for the episode. If under the
@@ -107,7 +118,7 @@
 --_ listUserFiles(path): Lists the files in the main modifiable user directory.
 --_ toggleWindowOnly(): This, when fullscreen, will only toggle a window instead
 --of being in fullscreen. Toggle again to turn off.
---_ doPSwitchUntimed(bool): This will turn on the P-Switch, without a timer.
+--_ doPSwitchUntimed(): This will turn on the P-Switch, without a timer.
 --_ rngTrueValue(argument): RNGs a random value, truly.
 --_ loadSaveSlot(slot): Loads any save slot.
 --_ saveSaveSlot(slot): Saves a specified save slot.
@@ -117,6 +128,9 @@
 --_ eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot tool
 --and speedrun save data purge option. This will reset your save data, but
 --without clearing SaveData/GameData.
+--_ eraseMainSaveSlot(slot): This is only used for the SMAS++ Demo 3 save
+--migration tool. This will only clear off the .sav file data, but won't erase
+--anything else.
 --_ getLegacyStarsCollected(): This is for the Demo 3 save migration tool which
 --runs when stars were collected from Demo 2 and below. This will be unused
 --by the time Demo 4 releases (And/or the full release happens).
@@ -294,14 +308,22 @@ function playSound(name) --Playing SFXs
 	end
 	if unexpected_condition then error("That sound doesn't exist. Play something else.") end
 	
-	
-	if extrasounds.id[name] and not smastables.stockSoundNumbersInOrder[name] then
-		SFX.play(extrasounds.id[name])
-	elseif smastables.stockSoundNumbersInOrder[name] then
-		SFX.play(name)
-	elseif name then
-		local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-		SFX.play(file) --Then play it afterward
+	if isExtraSoundsActive() then
+		if extrasounds.id[name] and not smastables.stockSoundNumbersInOrder[name] then
+			SFX.play(extrasounds.id[name])
+		elseif smastables.stockSoundNumbersInOrder[name] then
+			SFX.play(name)
+		elseif name then
+			local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+			SFX.play(file) --Then play it afterward
+		end
+	elseif not isExtraSoundsActive() then
+		if extrasounds.allVanillaSoundNumbersInOrder[name] then
+			SFX.play(name)
+		elseif name then
+			local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+			SFX.play(file) --Then play it afterward
+		end
 	end
 end
 
@@ -320,7 +342,7 @@ function resolveCostumeSound(name) --Resolve a sound for a costume being worn.
 		--Sound could not be found
 		return nil
 	end
-	return SFX.open(costumesounddir)
+	return Audio.SfxOpem(costumesounddir)
 end
 
 function loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
@@ -971,6 +993,14 @@ function harmSpecificNPC(npcid,...) -- npc:harm but it harms all of a specific N
 	end
 end
 
+function checkCameraTransitionStatus() --Checks to see if the legacy camera transition is on.
+	if mem(0x00B2B9E4, FIELD_BOOL) == true then
+		return true
+	elseif mem(0x00B2B9E4, FIELD_BOOL) == false then
+		return false
+	end
+end
+
 -------------------
 --Misc. functions
 -------------------
@@ -1022,7 +1052,7 @@ function toggleWindowOnly() --This, when fullscreen, will only toggle a window i
 	end
 end
 
-function doPSwitchUntimed(bool)
+function doPSwitchUntimed()
 	if bool == nil then
 		return
 	end

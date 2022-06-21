@@ -117,6 +117,7 @@ end
 function sampleNPC.onDrawNPC(v)
 	--Don't act during time freeze
 	if Defines.levelFreeze then return end
+	if mem(0x00B2B9E4, FIELD_BOOL) == true then return end
 	
 	local data = v.data
 	
