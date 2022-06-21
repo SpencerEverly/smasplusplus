@@ -66,6 +66,7 @@ local function writeKeyConfigs()
 		return
 	else
 		local t = inputConfig1
+		t.inputType = 0
 		
 		if t.inputType == 0 then
 			t = inputConfig1
@@ -137,6 +138,12 @@ function inputconfigurator.onKeyboardPress(k, repeated)
 			playSound("inputconfig/input_success.ogg")
 			writeKeyConfigs()
 			lockSelect = true
+			GameData.reopenmenu = true
+		end
+		if (k == VK_BACK) then
+			inputconfigurator.backspacePressedState = true
+			playSound("inputconfig/input_quit.ogg")
+			inputconfigurator.keyConfigOpen = false
 			GameData.reopenmenu = true
 		end
 	end
