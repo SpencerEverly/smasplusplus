@@ -571,12 +571,11 @@ local function mapExit()
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
-	Routine.wait(900)
+	Routine.wait(900, true)
 	Audio.MusicFadeOut(player.section, 4000)
-	Routine.waitFrames(4000)
-	Routine.wait(300)
-	Audio.MusicChange(0, "_OST/All Stars Secrets/ZZZ_Easter Egg.ogg")
-	Routine.wait(4.2)
+	Routine.wait(10, true)
+	changeMusic("_OST/All Stars Secrets/ZZZ_Easter Egg.ogg", 0)
+	Routine.wait(4.2, true)
 	active4 = true
 end
 
@@ -1841,7 +1840,7 @@ function bootmenu.onDraw()
 			textplus.print{x=160, y=500, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont}
 		end
 		if active4 then
-			textplus.print{x=150, y=520, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
+			textplus.print{x=150, y=550, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
 		end
 		if keyinput1 then
 			textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=0, color=Color.lightred, font=statusFont}

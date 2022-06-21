@@ -95,7 +95,6 @@ end
 local plr
 
 function starget()
-	Level.finish(LEVEL_END_STATE_STAR, true)
 	Misc.npcToCoins()
 	for _,o in ipairs(Player.get()) do
         if o.idx ~= plr.idx then
@@ -112,6 +111,10 @@ function starget()
 	GameData.winStateActive = true
 	playervuln = true
 	playerwon = true
+	Routine.wait(5, true)
+	GameData.____muteMusic = false
+	GameData.winStateActive = false
+	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 
 function realstar.animateNPC(v)
@@ -214,27 +217,17 @@ end
 
 function realstar.onInputUpdate()
 	if playerwon then
-		player.upKeyPressing = false
-		player.downKeyPressing = false
-		player.leftKeyPressing = false
-		player.rightKeyPressing = false
-		player.altJumpKeyPressing = false
-		player.runKeyPressing = false
-		player.altRunKeyPressing = false
-		player.dropItemKeyPressing = false
-		player.jumpKeyPressing = false
-		player.pauseKeyPressing = false
-		if Player.count() >= 2 and Player(2).isValid then
-			player2.upKeyPressing = false
-			player2.downKeyPressing = false
-			player2.leftKeyPressing = false
-			player2.rightKeyPressing = false
-			player2.altJumpKeyPressing = false
-			player2.runKeyPressing = false
-			player2.altRunKeyPressing = false
-			player2.dropItemKeyPressing = false
-			player2.jumpKeyPressing = false
-			player2.pauseKeyPressing = false
+		for k,p in ipairs(Player.get()) do
+			p.upKeyPressing = false
+			p.downKeyPressing = false
+			p.leftKeyPressing = false
+			p.rightKeyPressing = false
+			p.altJumpKeyPressing = false
+			p.runKeyPressing = false
+			p.altRunKeyPressing = false
+			p.dropItemKeyPressing = false
+			p.jumpKeyPressing = false
+			p.pauseKeyPressing = false
 		end
 	end
 end
@@ -245,11 +238,9 @@ function realstar.onPlayerHarm(evt)
 	end
 end
 
-function realstar.onExit()
-	GameData.____muteMusic = false
-	GameData.winStateActive = false
-	if Level.endState(LEVEL_END_STATE_STAR) then
-		Level.exit(LEVEL_WIN_TYPE_STAR)
+function realstar.onPlayerKill(evt)
+	if playervuln == true then
+		evt.cancelled = true
 	end
 end
 
@@ -263,6 +254,7 @@ function realstar.onInitAPI()
 	realstar.collectableIDStar[97] = true
 	
 	registerEvent(realstar,"onPlayerHarm")
+	registerEvent(realstar,"onPlayerKill")
 	registerEvent(realstar,"onInputUpdate")
 	registerEvent(realstar,"onPostNPCKill")
 	registerEvent(realstar,"onExit")

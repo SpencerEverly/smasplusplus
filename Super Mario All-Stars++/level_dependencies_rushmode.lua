@@ -5,6 +5,7 @@ local rushmode = {}
 local texttimer1 = false
 local gotext = false
 local selecter2 = rng.randomInt(1,#smastables.__allMandatoryLevels)
+local timeractive = false
 
 function rushmode.onInitAPI()
 	registerEvent(rushmode,"onStart")
@@ -28,6 +29,13 @@ function startCountdown()
 	texttimer1 = false
 	gotext = false
 	restoreMusic(-1)
+	timeractive = true
+end
+
+local timerexact
+
+function winner()
+	timerexact = string.format("%.1d:%.2d:%.2d.%.3d", lunatime.tick()/(60 * 60 * 65), (lunatime.tick()/(60*65))%60, (lunatime.tick()/65)%60, ((lunatime.tick()%65)/65) * 1000)
 end
 
 function rushmode.onStart()
@@ -57,8 +65,22 @@ function rushmode.onDraw()
 	if Level.endState() >= 1 then
 		GameData.rushModeWon = true
 	end
+	if GameData.winStateActive == true then
+		GameData.rushModeWon = true
+	end
 	if GameData.rushModeWon == true then
+		Routine.run(winner)
+		timeractive = false
 		Text.printWP("You won!", 350, 250, -1)
+		Text.printWP(timerexact, 100, 100, -1)
+		if SaveData.rushModeHighscore == nil then
+			SaveData.rushModeHighscore = timerexact
+		else
+			SaveData.rushModeHighscore = timerexact
+		end
+	end
+	if timeractive then
+		Text.printWP(string.format("%.1d:%.2d:%.2d.%.3d", lunatime.tick()/(60 * 60 * 65), (lunatime.tick()/(60*65))%60, (lunatime.tick()/65)%60, ((lunatime.tick()%65)/65) * 1000), 100, 100, -1)
 	end
 end
 

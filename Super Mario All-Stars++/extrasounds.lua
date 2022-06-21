@@ -1,4 +1,4 @@
---extrasounds.lua by Spencer Everly (v0.1)
+--extrasounds.lua by Spencer Everly (v0.2)
 --
 --To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,8,14,15,18,39,42,43,59 from (example):
 --
@@ -410,21 +410,24 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 	end
 end
 
-function normalbricksmash(block)
+local blockSmashTable = {
+	[4] = 4,
+	[60] = 4,
+	[90] = 4,
+	[186] = 43,
+	[188] = 4,
+	[226] = 4,
+	[293] = 4,
+}
+
+function bricksmashsound(block, fromUpper, playerornil) --This will smash bricks, as said from the source code.
 	Routine.waitFrames(2, true)
 	if block.isHidden and block.layerName == "Destroyed Blocks" then
-		playSound(4)
+		playSound(blockSmashTable[block.id])
 	end
 end
 
-function bowserbricksmash(block)
-	Routine.waitFrames(2, true)
-	if block.isHidden and block.layerName == "Destroyed Blocks" then
-		playSound(43)
-	end
-end
-
-function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
+function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
 	local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
 	local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
 	if extrasounds.active == true then --If it's true, play them
@@ -468,11 +471,8 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 				
 				
 				--**BRICK SMASHING**
-				if bricksnormal[block.id] then
-					Routine.run(normalbricksmash, block)
-				end
-				if block.id == 186 then
-					Routine.run(bowserbricksmash, block)
+				if bricksnormal[block.id] or block.id == 186 then
+					Routine.run(bricksmashsound, block, fromUpper, playerornil)
 				end
 				
 				

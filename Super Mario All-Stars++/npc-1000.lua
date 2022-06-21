@@ -90,7 +90,6 @@ end
 local plr
 
 function starget()
-	Level.finish(LEVEL_END_STATE_STAR, true)
 	Misc.npcToCoins()
 	for _,o in ipairs(Player.get()) do
         if o.idx ~= plr.idx then
@@ -107,6 +106,10 @@ function starget()
 	GameData.winStateActive = true
 	playervuln = true
 	playerwon = true
+	Routine.wait(5, true)
+	GameData.____muteMusic = false
+	GameData.winStateActive = false
+	Level.exit(LEVEL_WIN_TYPE_STAR)
 end
 
 function dudstar.onPostNPCKill(v,reason)
@@ -117,27 +120,17 @@ end
 
 function dudstar.onInputUpdate()
 	if playerwon then
-		player.upKeyPressing = false
-		player.downKeyPressing = false
-		player.leftKeyPressing = false
-		player.rightKeyPressing = false
-		player.altJumpKeyPressing = false
-		player.runKeyPressing = false
-		player.altRunKeyPressing = false
-		player.dropItemKeyPressing = false
-		player.jumpKeyPressing = false
-		player.pauseKeyPressing = false
-		if Player.count() >= 2 and Player(2).isValid then
-			player2.upKeyPressing = false
-			player2.downKeyPressing = false
-			player2.leftKeyPressing = false
-			player2.rightKeyPressing = false
-			player2.altJumpKeyPressing = false
-			player2.runKeyPressing = false
-			player2.altRunKeyPressing = false
-			player2.dropItemKeyPressing = false
-			player2.jumpKeyPressing = false
-			player2.pauseKeyPressing = false
+		for k,p in ipairs(Player.get()) do
+			p.upKeyPressing = false
+			p.downKeyPressing = false
+			p.leftKeyPressing = false
+			p.rightKeyPressing = false
+			p.altJumpKeyPressing = false
+			p.runKeyPressing = false
+			p.altRunKeyPressing = false
+			p.dropItemKeyPressing = false
+			p.jumpKeyPressing = false
+			p.pauseKeyPressing = false
 		end
 	end
 end
@@ -225,11 +218,9 @@ function dudstar.onPlayerHarm(evt)
 	end
 end
 
-function dudstar.onExit()
-	GameData.____muteMusic = false
-	GameData.winStateActive = false
-	if Level.endState(LEVEL_END_STATE_STAR) then
-		Level.exit(LEVEL_WIN_TYPE_STAR)
+function dudstar.onPlayerKill(evt)
+	if playervuln == true then
+		evt.cancelled = true
 	end
 end
 
@@ -263,6 +254,7 @@ function dudstar.onInitAPI()
 	dudstar.collectableIDMap[id] = true
 	
 	registerEvent(dudstar,"onPlayerHarm")
+	registerEvent(dudstar,"onPlayerKill")
 	registerEvent(dudstar,"onInputUpdate")
 	registerEvent(dudstar,"onPostNPCKill")
 	registerEvent(dudstar,"onExit")
