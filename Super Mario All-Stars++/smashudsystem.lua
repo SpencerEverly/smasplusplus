@@ -58,7 +58,7 @@ smashudsystem.hasDied = false --If the player died or not
 smashudsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
 smashudsystem.activated = true --Whenever the death animation is activated
 
-function smashudsystem.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
+function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
 	if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
 		for _,p in ipairs(Player.get()) do
 			if block.contentID == 1000 or block.contentID == 0 or p.character == CHARACTER_TOAD or p.character == CHARACTER_KLONOA then

@@ -257,6 +257,8 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		
+		
+		
 		--**SPINJUMPING**
 		for k,p in ipairs(Player.get()) do
 			if p:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
@@ -331,18 +333,6 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		for k,v in ipairs(NPC.get(15)) do --Adding a hurt sound for Boom Boom cause why not lol
 			if v.ai1 == 4 then
 				SFX.play(extrasounds.id[39], 1, 1, 100)
-			end
-		end
-		--*SMB2 Birdo*
-		for k,v in ipairs(NPC.get(39)) do --Birdo has some sounds that'll need to be reimplemented
-			if v.ai1 == -30 then
-				SFX.play(extrasounds.id[39], 1, 1, 30)
-			end
-		end
-		--*SMB2 Wart*
-		for k,v in ipairs(NPC.get(201)) do --Wart has some sounds that'll need to be reimplemented
-			if v.ai1 == 2 then
-				SFX.play(extrasounds.id[39], 1, 1, 150)
 			end
 		end
 		
@@ -420,11 +410,26 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 	end
 end
 
+function normalbricksmash(block)
+	Routine.waitFrames(2, true)
+	if block.isHidden and block.layerName == "Destroyed Blocks" then
+		playSound(4)
+	end
+end
+
+function bowserbricksmash(block)
+	Routine.waitFrames(2, true)
+	if block.isHidden and block.layerName == "Destroyed Blocks" then
+		playSound(43)
+	end
+end
+
 function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --Let's start off with block hitting.
 	local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
+	local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
 	if extrasounds.active == true then --If it's true, play them
 		if not Misc.isPaused() then --Making sure the sound only plays when not paused...
-			for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
+			for _,p in ipairs(Player.get()) do --This will get actions regarding all players
 			
 			
 			
@@ -462,18 +467,18 @@ function extrasounds.onPostBlockHit(block, hitBlock, fromUpper, playerornil) --L
 				
 				
 				
-				
 				--**BRICK SMASHING**
-				if p.powerup >= 2 then --No brick smashing when on powerup state 1
-					if block:collidesWith(p) then --Detecting block hitting
-						if bricks[block.id] == (block.contentID >= 1) then --If it has a content ID, don't play a smash sound
-							playSound(0)
-						end
-						if bricks[block.id] == (block.contentID == 0) or bricks[block.id] == (block.contentID == 1000) then --Play when it's destroyed
-							playSound(4)
-						end
-					end
+				if bricksnormal[block.id] then
+					Routine.run(normalbricksmash, block)
 				end
+				if block.id == 186 then
+					Routine.run(bowserbricksmash, block)
+				end
+				
+				
+				
+				
+				
 			end
 		end
 	end
@@ -532,7 +537,55 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 	end
 end
 
-function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, for custom coin sounds and etc.
+function extrasounds.onPostNPCHarm(npc, harmtype, player)
+	if not Misc.isPaused() then
+		if extrasounds.active == true then
+			for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
+				
+				
+				
+				--*BOSSES*
+				--
+				--*SMB1 Bowser*
+				if harmtype ~= HARM_TYPE_VANISH then
+					if npc.id == 200 then --Play the hurt sound when hurting SMB1 Bowser
+						playSound(39)
+					end
+					--*SMB3 Bowser*
+					if npc.id == 86 then --Play the hurt sound when hurting SMB3 Bowser
+						playSound(39)
+					end
+					--*SMB3 Boom Boom*
+					if npc.id == 15 then --Play the hurt sound when hurting SMB3 Boom Boom
+						playSound(39)
+					end
+					--*SMB3 Larry Koopa*
+					if npc.id == 267 or npc.id == 268 then --Play the hurt sound when hurting SMB3 Larry Koopa
+						playSound(39)
+					end
+					--*SMB2 Birdo*
+					if npc.id == 39 then --Play the hurt sound when hurting SMB2 Birdo
+						playSound(39)
+					end
+					--*SMB2 Mouser*
+					if npc.id == 262 then --Play the hurt sound when hurting SMB2 Mouser
+						playSound(39)
+					end
+					--*SMB2 Wart*
+					if npc.id == 201 then --Play the hurt sound when hurting SMB2 Wart
+						playSound(39)
+					end
+				end
+				
+				
+				
+				
+			end
+		end
+	end
+end
+
+function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom coin sounds and etc.
 	if not Misc.isPaused() then
 		if extrasounds.active == true then
 			for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
@@ -554,7 +607,10 @@ function extrasounds.onPostNPCKill(npc, harmtype, player, v) --NPC Kill stuff, f
 				
 				
 				--**PLAYER SMASHING**
-				if allsmallenemies[npc.id] or npc.id >= 751 and harmtype == HARM_TYPE_SPINJUMP then
+				if allsmallenemies[npc.id] and harmtype == HARM_TYPE_SPINJUMP then
+					playSound(36)
+				end
+				if npc.id >= 751 and harmtype == HARM_TYPE_SPINJUMP then
 					playSound(36)
 				end
 				if allbigenemies[npc.id] and harmtype == HARM_TYPE_SPINJUMP then
