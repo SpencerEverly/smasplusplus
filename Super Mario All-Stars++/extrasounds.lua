@@ -1,6 +1,9 @@
 --extrasounds.lua by Spencer Everly (v0.2)
 --
---To have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,8,14,15,18,39,42,43,59 from (example):
+--To use this everywhere, you can simply put this under luna.lua:
+--_G.extrasounds = require("extrasounds")
+--
+--And to have costume compability, require this library with playermanager on any/all costumes you're using, then replace sound slot IDs 4,7,8,14,15,18,39,42,43,59 from (example):
 --
 --Audio.sounds[14].sfx = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
 --to
@@ -117,6 +120,8 @@ extrasounds.id[91]  = Audio.SfxOpen(Misc.resolveSoundFile("bubble.ogg"))
 --Additional SMBX Sounds
 extrasounds.id[92]  = Audio.SfxOpen(Misc.resolveSoundFile("sprout-vine.ogg")) --Vine Sprout
 extrasounds.id[93]  = Audio.SfxOpen(Misc.resolveSoundFile("iceball.ogg")) --Iceball
+extrasounds.id[94]  = Audio.SfxOpen(Misc.resolveSoundFile("yi-freeze.ogg")) --Freeze (Yoshi's Island)
+extrasounds.id[95]  = Audio.SfxOpen(Misc.resolveSoundFile("yi-icebreak.ogg")) --Ice Break (Yoshi's Island)
 extrasounds.id[96]  = Audio.SfxOpen(Misc.resolveSoundFile("2up.ogg")) --2UP
 extrasounds.id[97]  = Audio.SfxOpen(Misc.resolveSoundFile("3up.ogg")) --3UP
 extrasounds.id[98]  = Audio.SfxOpen(Misc.resolveSoundFile("5up.ogg")) --5UP
