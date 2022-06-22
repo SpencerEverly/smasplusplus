@@ -225,15 +225,19 @@ function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
 		if killReason ~= HARM_TYPE_VANISH then
 			eventObj.cancelled = true
 			SFX.play(extrasounds.id[39])
-			SFX.play(Misc.resolveSoundFile("robot-hurt"))
 			data.hp = data.hp - 1
+			if data.hp >= 1 then
+				SFX.play(Misc.resolveSoundFile("robot-hurt"))
+			end
 			data.hurtstate2 = true
 			data.hurtstate = true
 		elseif killReason == HARM_TYPE_SWORD then
 			eventObj.cancelled = true
 			SFX.play(extrasounds.id[39])
-			SFX.play(Misc.resolveSoundFile("robot-hurt"))
 			data.hp = data.hp - 2
+			if data.hp >= 1 then
+				SFX.play(Misc.resolveSoundFile("robot-hurt"))
+			end
 			data.hurtstate2 = true
 			data.hurtstate = true
 		end
