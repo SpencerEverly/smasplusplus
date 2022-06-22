@@ -278,12 +278,16 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		--**PSWITCH TIMER**
 		if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < 750 then
-			if Level.endState() == 0 or not GameData.winStateActive then
-				SFX.play(extrasounds.id[118], 1, 1, 50)
+			if Level.endState() <= 0 then
+				if not GameData.winStateActive then
+					SFX.play(extrasounds.id[118], 1, 1, 50)
+				end
 			end
 		elseif mem(0x00B2C62C, FIELD_WORD) <= 300 and mem(0x00B2C62C, FIELD_WORD) >= 1 then
-			if Level.endState() == 0 or not GameData.winStateActive then
-				SFX.play(extrasounds.id[118], 1, 1, 15)
+			if Level.endState() <= 0 then
+				if not GameData.winStateActive then
+					SFX.play(extrasounds.id[118], 1, 1, 15)
+				end
 			end
 		end
 		
@@ -291,7 +295,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		--**P-WING**
 		for k,p in ipairs(Player.get()) do
-			if p.mount ~= MOUNT_YOSHI and p.deathTimer <= 0 and p.forcedState == FORCEDSTATE_NONE then
+			if p.mount ~= MOUNT_YOSHI and p.deathTimer <= 0 and p.forcedState == FORCEDSTATE_NONE and Level.endState() <= 0 then
 				if p:mem(0x16C, FIELD_BOOL) == true then
 					SFX.play(extrasounds.id[121], 1, 1, 7)
 				end

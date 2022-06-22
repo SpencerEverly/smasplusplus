@@ -58,7 +58,15 @@ smashudsystem.hasDied = false --If the player died or not
 smashudsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
 smashudsystem.activated = true --Whenever the death animation is activated
 
+function addsmashpoints(block, fromUpper, playerornil) --This will add 50 points from smashing bricks, as said from the source code.
+	Routine.waitFrames(2, true)
+	if block.isHidden and block.layerName == "Destroyed Blocks" then
+		SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50
+	end
+end
+
 function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
+	local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
 	if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
 		for _,p in ipairs(Player.get()) do
 			if block.contentID == 1000 or block.contentID == 0 or p.character == CHARACTER_TOAD or p.character == CHARACTER_KLONOA then
@@ -66,6 +74,10 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
 			elseif block.contentID <= 99 and block.contentID >= 1 then
 				SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
 			end
+		end
+		--**BRICK SMASHING**
+		if bricksnormal[block.id] then
+			Routine.run(addsmashpoints, block, fromUpper, playerornil)
 		end
 	end
 end
