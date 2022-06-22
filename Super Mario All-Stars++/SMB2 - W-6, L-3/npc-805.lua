@@ -1,7 +1,6 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
 local rng = require("base/rng")
-local extrasounds = require("extrasounds")
 
 --Create the library table
 local sampleNPC = {}
@@ -11,38 +10,37 @@ local npcID = NPC_ID
 --Defines NPC config for our NPC. You can remove superfluous definitions.
 local sampleNPCSettings = {
 	id = npcID,
-	effect = 998,
 	--Sprite size
 	gfxheight = 64,
-	gfxwidth = 64,
+	gfxwidth = 128,
 	--Hitbox size. Bottom-center-bound to sprite size.
-	width = 64,
-	height = 64,
+	width = 128,
+	height = 32,
 	--Sprite offset from hitbox for adjusting hitbox anchor on sprite.
 	gfxoffsetx = 0,
 	gfxoffsety = 0,
 	--Frameloop-related
-	frames = 4,
+	frames = 10,
 	framestyle = 0,
 	framespeed = 8, --# frames between frame change
 	--Movement speed. Only affects speedX by default.
 	speed = 1,
 	--Collision-related
 	npcblock = false,
-	npcblocktop = false, --Misnomer, affects whether thrown NPCs bounce off the NPC.
+	npcblocktop = true, --Misnomer, affects whether thrown NPCs bounce off the NPC.
 	playerblock = false,
-	playerblocktop = false, --Also handles other NPCs walking atop this NPC.
+	playerblocktop = true, --Also handles other NPCs walking atop this NPC.
 
 	nohurt=false,
 	nogravity = false,
 	noblockcollision = false,
-	nofireball = true,
-	noiceball = true,
-	noyoshi= true,
+	nofireball = false,
+	noiceball = false,
+	noyoshi= false,
 	nowaterphysics = false,
 	--Various interactions
 	jumphurt = false, --If true, spiny-like
-	spinjumpsafe = true, --If true, prevents player hurt when spinjumping
+	spinjumpsafe = false, --If true, prevents player hurt when spinjumping
 	harmlessgrab = false, --Held NPC hurts other NPCs if false
 	harmlessthrown = false, --Thrown NPC hurts other NPCs if false
 
@@ -79,16 +77,16 @@ npcManager.setNpcSettings(sampleNPCSettings)
 --Register the vulnerable harm types for this NPC. The first table defines the harm types the NPC should be affected by, while the second maps an effect to each, if desired.
 npcManager.registerHarmTypes(npcID,
 	{
-		HARM_TYPE_JUMP,
+		--HARM_TYPE_JUMP,
 		--HARM_TYPE_FROMBELOW,
 		HARM_TYPE_NPC,
 		--HARM_TYPE_PROJECTILE_USED,
-		HARM_TYPE_LAVA,
+		--HARM_TYPE_LAVA,
 		--HARM_TYPE_HELD,
 		--HARM_TYPE_TAIL,
 		--HARM_TYPE_SPINJUMP,
 		--HARM_TYPE_OFFSCREEN,
-		HARM_TYPE_SWORD
+		--HARM_TYPE_SWORD
 	}, 
 	{
 		--[HARM_TYPE_JUMP]=10,
@@ -112,8 +110,8 @@ function sampleNPC.onInitAPI()
 	npcManager.registerEvent(npcID, sampleNPC, "onTickNPC")
 	npcManager.registerEvent(npcID, sampleNPC, "onTickEndNPC")
 	npcManager.registerEvent(npcID, sampleNPC, "onDrawNPC")
-	registerEvent(sampleNPC, "onNPCHarm")
 	registerEvent(sampleNPC, "onNPCKill")
+	registerEvent(sampleNPC, "onNPCHarm")
 end
 
 function sampleNPC.onTickEndNPC(v)
@@ -134,19 +132,20 @@ function sampleNPC.onTickEndNPC(v)
 		--Initialize necessary data.
 		data.initialized = true
 		
-		data.moving = true
-		data.jump = false
-		data.jumpactive = true
+		data.still = true
+		data.jumping = false
+		
+		data.haltjump = false
+		data.tonguelick = false
 		data.hurtstate = false
-		
-		data.jumpmovement = 0
-		
 		data.hurtstate2 = false
 		
-		v.ai1 = 0
-		v.ai2 = 70
+		v.ai1 = 0 --Jump timer
+		v.ai2 = 0 --Timer till the tongue thing
+		v.ai3 = 0 --AI to know when to start the tongue animation
+		v.ai4 = 0 --For when you hurt Croako
 		
-		data.hp = 4
+		data.hp = 5
 	end
 
 	--Depending on the NPC, these checks must be handled differently
@@ -157,63 +156,115 @@ function sampleNPC.onTickEndNPC(v)
 		--Handling
 	end
 	
-	--Execute main AI. This template just jumps when it touches the ground.
-	if data.moving then
-		v.ai1 = v.ai1 + 1
-		if data.hp >= 4 then
-			v.speedX = 2 * v.direction
-		elseif data.hp >= 2 then
-			v.speedX = 3 * v.direction
-		elseif data.hp >= 1 then
-			v.speedX = 4 * v.direction
-		end
-	end
-	if not data.moving then
-		v.speedX = 0
-	end
-	if data.jumpactive then
-		if v.ai1 >= RNG.randomInt(1,50) then
-			v.ai1 = -180
-			data.jump = true
-		end
-		if data.jump then
-			v.speedY = -7
-			data.jumpmovement = data.jumpmovement + 1
-			if data.jumpmovement == 1 then
-				SFX.play(Misc.resolveSoundFile("robot-jump"))
-			end
-			if data.jumpmovement >= 5 then
-				data.jumpmovement = 0
-				data.jump = false
-			end
-		end
-	end
-	if not data.jumpactive then
-		v.speedY = 6
+	if data.initialized then
+		v.ai1 = v.ai1 - 1
+		v.ai2 = v.ai2 + 1
 	end
 	
-	if data.hp <= 0 then
-		v:kill(HARM_TYPE_OFFSCREEN)
-		local e =  Effect.spawn(998, v.x + 15, v.y + 85)
-		SFX.play(Misc.resolveSoundFile("robot-dead"))
-	end
-	
-	if data.hurtstate then
+	if data.still then
 		if v.direction == -1 then
-			v.animationFrame = 1
+			v.animationFrame = 0
 		elseif v.direction == 1 then
 			v.animationFrame = 5
 		end
-		data.moving = false
-		data.jumpactive = false
-		v.ai2 = v.ai2 - 1
-		if v.ai2 <= 0 then
-			v.ai2 = 70
-			data.moving = true
-			data.jumpactive = true
-			data.hurtstate = false
-			data.hurtstate2 = false
+		v.speedX = 0
+		v.speedY = 6
+	end
+	
+	if v.ai1 <= -10 and not data.haltjump and not data.hurtstate2 then
+		data.jumping = true
+		data.still = false
+	end
+	if v.ai1 == -11 and not data.haltjump and not data.hurtstate2 then
+		SFX.play(24)
+	end
+	if v.ai1 <= -35 and not data.haltjump and not data.hurtstate2 then
+		data.jumping = false
+		data.still = true
+		v.ai1 = 105
+	end
+	if data.jumping then
+		if v.direction == -1 then
+			v.animationFrame = 1
+			v.speedX = -1.8
+			v.speedY = -7
+		elseif v.direction == 1 then
+			v.animationFrame = 6
+			v.speedX = 1.8
+			v.speedY = -7
 		end
+	end
+	if data.haltjump == true then
+		v.ai3 = v.ai3 - 1
+	end
+	if v.ai2 == 100 then
+		v.direction = 1
+	end
+	if v.ai2 == 200 then
+		v.direction = -1
+	end
+	if v.ai2 == 300 then
+		v.direction = 1
+	end
+	if v.ai2 == 400 then
+		v.direction = -1
+	end
+	if v.ai2 == 500 then
+		data.haltjump = true
+	end
+	if v.ai3 <= -25 then
+		data.tonguelick = true
+	end
+	if v.ai3 == -26 then
+		SFX.play(50)
+	end
+	if data.tonguelick and not data.hurtstate2 then
+		if v.direction == -1 then
+			v.animationFrame = 2
+		elseif v.direction == 1 then
+			v.animationFrame = 7
+		end
+		v.speedX = 0
+		v.speedY = 6
+	end
+	if v.ai3 <= -60 then
+		v.animationFrame = 0
+		data.tonguelick = false
+	end
+	if v.ai3 <= -100 then
+		data.haltjump = false
+		v.ai1 = 0
+		v.ai2 = 0
+		v.ai3 = 0
+	end
+	if data.hurtstate2 then
+		v.ai1 = 0
+		v.ai2 = 0
+		v.ai3 = 0
+		v.speedX = 0
+		v.speedY = 6
+		data.haltjump = true
+		data.jumping = false
+		v.ai4 = v.ai4 - 1
+		if v.direction == -1 then
+			v.animationFrame = 4
+		elseif v.direction == 1 then
+			v.animationFrame = 9
+		end
+	end
+	if v.ai4 <= -120 then
+		data.hurtstate2 = false
+		data.haltjump = false
+		v.ai1 = 0
+		v.ai2 = 0
+		v.ai3 = 0
+		v.ai4 = 0
+		v.ai2 = v.ai2 + 1
+	end
+	if data.hp <= 0 then
+		v:kill(HARM_TYPE_OFFSCREEN)
+		local e =  Effect.spawn(779, v.x + 15, v.y + 85)
+		SFX.play(63)
 	end
 end
 
@@ -222,24 +273,18 @@ function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
 	local data = v.data
 	
 	if not data.hurtstate2 then
-		if killReason ~= HARM_TYPE_VANISH then
+		if killReason == HARM_TYPE_NPC then
 			eventObj.cancelled = true
 			SFX.play(extrasounds.id[39])
 			data.hp = data.hp - 1
-			if data.hp >= 1 then
-				SFX.play(Misc.resolveSoundFile("robot-hurt"))
-			end
-			data.hurtstate2 = true
 			data.hurtstate = true
+			data.hurtstate2 = true
 		elseif killReason == HARM_TYPE_SWORD then
 			eventObj.cancelled = true
 			SFX.play(extrasounds.id[39])
 			data.hp = data.hp - 2
-			if data.hp >= 1 then
-				SFX.play(Misc.resolveSoundFile("robot-hurt"))
-			end
-			data.hurtstate2 = true
 			data.hurtstate = true
+			data.hurtstate2 = true
 		end
 	end
 	if data.hurtstate2 then

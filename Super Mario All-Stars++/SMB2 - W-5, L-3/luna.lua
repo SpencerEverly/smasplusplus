@@ -44,45 +44,28 @@ end
 
 function onInputUpdate()
 	if nokeys then
-		player.upKeyPressing = false;
-		player.downKeyPressing = false;
-		player.leftKeyPressing = false;
-		player.rightKeyPressing = false;
-		player.altJumpKeyPressing = false;
-		player.runKeyPressing = false;
-		player.altRunKeyPressing = false;
-		player.dropItemKeyPressing = false;
-		player.jumpKeyPressing = false;
-		if Player.count() >= 2 and Player(2).isValid then
-			player2.upKeyPressing = false;
-			player2.downKeyPressing = false;
-			player2.leftKeyPressing = false;
-			player2.rightKeyPressing = false;
-			player2.altJumpKeyPressing = false;
-			player2.runKeyPressing = false;
-			player2.altRunKeyPressing = false;
-			player2.dropItemKeyPressing = false;
-			player2.jumpKeyPressing = false;
+		for _,p in ipairs(Player.get()) do
+			p.upKeyPressing = false;
+			p.downKeyPressing = false;
+			p.leftKeyPressing = false;
+			p.rightKeyPressing = false;
+			p.altJumpKeyPressing = false;
+			p.runKeyPressing = false;
+			p.altRunKeyPressing = false;
+			p.dropItemKeyPressing = false;
+			p.jumpKeyPressing = false;
 		end
 	end
 	if nokeysexceptjump then
-		player.upKeyPressing = false;
-		player.downKeyPressing = false;
-		player.leftKeyPressing = false;
-		player.rightKeyPressing = false;
-		player.altJumpKeyPressing = false;
-		player.runKeyPressing = false;
-		player.altRunKeyPressing = false;
-		player.dropItemKeyPressing = false;
-		if Player.count() >= 2 and Player(2).isValid then
-			player2.upKeyPressing = false;
-			player2.downKeyPressing = false;
-			player2.leftKeyPressing = false;
-			player2.rightKeyPressing = false;
-			player2.altJumpKeyPressing = false;
-			player2.runKeyPressing = false;
-			player2.altRunKeyPressing = false;
-			player2.dropItemKeyPressing = false;
+		for _,p in ipairs(Player.get()) do
+			p.upKeyPressing = false;
+			p.downKeyPressing = false;
+			p.leftKeyPressing = false;
+			p.rightKeyPressing = false;
+			p.altJumpKeyPressing = false;
+			p.runKeyPressing = false;
+			p.altRunKeyPressing = false;
+			p.dropItemKeyPressing = false;
 		end
 	end
 end
