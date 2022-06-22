@@ -1,191 +1,247 @@
+--NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
+local rng = require("base/rng")
+local extrasounds = require("extrasounds")
 
-local rossbot = {}
-
-local canHarm = {}
-
+--Create the library table
+local sampleNPC = {}
+--NPC_ID is dynamic based on the name of the library file
 local npcID = NPC_ID
---local effectID = 778 --By default shares effectID with npcID. You can change it here.
 
---***************************************************************************************************
---                                                                                                  *
---              DEFAULTS AND NPC CONFIGURATION                                                      *
---                                                                                                  *
---***************************************************************************************************
-local rossbotSettings = {
+--Defines NPC config for our NPC. You can remove superfluous definitions.
+local sampleNPCSettings = {
 	id = npcID,
+	effect = 998,
+	--Sprite size
 	gfxheight = 64,
 	gfxwidth = 64,
+	--Hitbox size. Bottom-center-bound to sprite size.
 	width = 64,
 	height = 64,
+	--Sprite offset from hitbox for adjusting hitbox anchor on sprite.
 	gfxoffsetx = 0,
+	gfxoffsety = 0,
+	--Frameloop-related
 	frames = 4,
-	framestyle = 1,
+	framestyle = 0,
+	framespeed = 8, --# frames between frame change
+	--Movement speed. Only affects speedX by default.
 	speed = 1,
-	--playerblocktop = true,
-	--npcblocktop = true,
-	--npcblock = true,
-	--playerblock = true,
-	
-	jumphurt = false,
-	
-	nohurt = true,
-	nogravity = true,
-	noblockcollision = true,
-	noiceball = true,
-	noyoshi = true,
-	
-	maxLen = 22,
-	notcointransformable = true,
-	
-	boss = false,
-	hp = 3,
+	--Collision-related
+	npcblock = false,
+	npcblocktop = false, --Misnomer, affects whether thrown NPCs bounce off the NPC.
+	playerblock = false,
+	playerblocktop = false, --Also handles other NPCs walking atop this NPC.
 
-	--Custom
-  dropdistance = 180, --Distance from the player that the rossbot drops its object
-  objectoffsetx = -2, --Anchor point for contained NPC. Top center of anchored NPC is here
-  objectoffsety = -6,  
+	nohurt=false,
+	nogravity = false,
+	noblockcollision = false,
+	nofireball = true,
+	noiceball = true,
+	noyoshi= true,
+	nowaterphysics = false,
+	--Various interactions
+	jumphurt = false, --If true, spiny-like
+	spinjumpsafe = true, --If true, prevents player hurt when spinjumping
+	harmlessgrab = false, --Held NPC hurts other NPCs if false
+	harmlessthrown = false, --Thrown NPC hurts other NPCs if false
+
+	grabside=false,
+	grabtop=false,
+
+	--Identity-related flags. Apply various vanilla AI based on the flag:
+	--iswalker = false,
+	--isbot = false,
+	--isvegetable = false,
+	--isshoe = false,
+	--isyoshi = false,
+	--isinteractable = false,
+	--iscoin = false,
+	--isvine = false,
+	--iscollectablegoal = false,
+	--isflying = false,
+	--iswaternpc = false,
+	--isshell = false,
+
+	--Emits light if the Darkness feature is active:
+	--lightradius = 100,
+	--lightbrightness = 1,
+	--lightoffsetx = 0,
+	--lightoffsety = 0,
+	--lightcolor = Color.white,
+
+	--Define custom properties below
 }
 
 --Applies NPC settings
-local configFile = npcManager.setNpcSettings(rossbotSettings)
+npcManager.setNpcSettings(sampleNPCSettings)
 
-npcManager.registerDefines(npcID, {NPC.HITTABLE})
-
+--Register the vulnerable harm types for this NPC. The first table defines the harm types the NPC should be affected by, while the second maps an effect to each, if desired.
 npcManager.registerHarmTypes(npcID,
 	{
 		HARM_TYPE_JUMP,
+		--HARM_TYPE_FROMBELOW,
 		HARM_TYPE_NPC,
-		HARM_TYPE_PROJECTILE_USED,
+		--HARM_TYPE_PROJECTILE_USED,
 		HARM_TYPE_LAVA,
-		HARM_TYPE_HELD,
-		HARM_TYPE_TAIL,
+		--HARM_TYPE_HELD,
+		--HARM_TYPE_TAIL,
+		--HARM_TYPE_SPINJUMP,
+		--HARM_TYPE_OFFSCREEN,
+		HARM_TYPE_SWORD
 	}, 
 	{
-		[HARM_TYPE_JUMP]=effectID,
-		[HARM_TYPE_NPC]=effectID,
-		[HARM_TYPE_PROJECTILE_USED]=effectID,
-		[HARM_TYPE_LAVA]={id=13, xoffset=0.5, xoffsetBack = 0, yoffset=1, yoffsetBack = 1.5},
-		[HARM_TYPE_HELD]=effectID,
-		[HARM_TYPE_TAIL]=effectID,
+		--[HARM_TYPE_JUMP]=10,
+		--[HARM_TYPE_FROMBELOW]=10,
+		--[HARM_TYPE_NPC]=10,
+		--[HARM_TYPE_PROJECTILE_USED]=10,
+		--[HARM_TYPE_LAVA]={id=13, xoffset=0.5, xoffsetBack = 0, yoffset=1, yoffsetBack = 1.5},
+		--[HARM_TYPE_HELD]=10,
+		--[HARM_TYPE_TAIL]=10,
+		--[HARM_TYPE_SPINJUMP]=10,
+		--[HARM_TYPE_OFFSCREEN]=10,
+		--[HARM_TYPE_SWORD]=10,
 	}
 );
 
---Spawn contained NPC function
-local function dropNPC(npcID, x, y, section, direction, friendly)
-  local spawnedNPC
-  if npcID > 0 then
-    --Get the spawned NPC's graphics config
-    local cfg = NPC.config[npcID];
-    --Offset the spawn location appropriately
-    x = x + (configFile.objectoffsetx * direction) + (configFile.width * 0.5) + (cfg.width * -0.5);
-    y = y + configFile.objectoffsety + configFile.height;
-    
-    --Spawn it
-    spawnedNPC = NPC.spawn(npcID, x, y, section)
-    spawnedNPC.direction = direction;
-		spawnedNPC.friendly = friendly;
-		spawnedNPC.layerName = "Spawned NPCs"
-  end
-end
+--Custom local definitions below
+
 
 --Register events
-function rossbot.onInitAPI()
-	npcManager.registerEvent(npcID, rossbot, "onTickNPC")
-	npcManager.registerEvent(npcID, rossbot, "onDrawNPC")
-	registerEvent(rossbot, "onNPCKill")
+function sampleNPC.onInitAPI()
+	npcManager.registerEvent(npcID, sampleNPC, "onTickNPC")
+	npcManager.registerEvent(npcID, sampleNPC, "onTickEndNPC")
+	npcManager.registerEvent(npcID, sampleNPC, "onDrawNPC")
+	registerEvent(sampleNPC, "onNPCHarm")
+	registerEvent(sampleNPC, "onNPCKill")
 end
 
---*********************************************
---                                            *
---                 rossbot                   *
---                                            *
---*********************************************
-
-function rossbot.onTickNPC(v)
+function sampleNPC.onTickEndNPC(v)
 	--Don't act during time freeze
 	if Defines.levelFreeze then return end
 	
 	local data = v.data
+	
+	--If despawned
+	if v.despawnTimer <= 0 then
+		--Reset our properties, if necessary
+		data.initialized = false
+		return
+	end
 
 	--Initialize
 	if not data.initialized then
+		--Initialize necessary data.
 		data.initialized = true
-    data.dropped = false
+		
+		data.moving = true
+		data.jump = false
+		data.jumpactive = true
+		data.hurtstate = false
+		
+		data.jumpmovement = 0
+		
+		data.hurtstate2 = false
+		
+		v.ai1 = 0
+		v.ai2 = 70
+		
+		data.hp = 4
 	end
-  
-  --If the NPC has already been dropped, then prevent respawning with it
-  if data.dropped then
-    v.ai1 = 0
-  end    
+
+	--Depending on the NPC, these checks must be handled differently
+	if v:mem(0x12C, FIELD_WORD) > 0    --Grabbed
+	or v:mem(0x136, FIELD_BOOL)        --Thrown
+	or v:mem(0x138, FIELD_WORD) > 0    --Contained within
+	then
+		--Handling
+	end
 	
-	--If carrying an NPC, and spawn timer is over
-  if (v.ai1 > 0 and v.speedY == 0) then
-    for _, p in ipairs(Player.get()) do
-      --Get the distance from each player 
-      local dist = (p.x + p.width/2) - (v.x + v.width/2)
-      
-      dist = dist * v.direction --This causes positive values to be in front of rossbot
-      
-      --If a player is within range, spawn the NPC and stop carrying it
-      if (dist > 0 and dist <= configFile.dropdistance) then
-        dropNPC(v.ai1, v.x, v.y, v:mem(0x146,FIELD_WORD), v.direction, v.friendly)
-        v.ai1 = 0
-        data.dropped = true
-      end
-    end
-  end
-  
-end
-
-function rossbot.onDrawNPC(v)
-  
-  --Don't draw if despawned
-  if v:mem(0x12A, FIELD_WORD) <= 0 then return end
-  
-  --If empty container, don't draw anything
-  if v.ai1 <= 0 then return end
-  
-  --Draw the sprite of the contained NPC
-  local id = v.ai1;
-	if(id > 0) then
-		local i = Graphics.sprites.npc[id].img;
-		local cfg = NPC.config[id];
-		local h = cfg.gfxheight;
-		local w = cfg.gfxwidth;
-		if(h == 0) then
-			h = cfg.height;
+	--Execute main AI. This template just jumps when it touches the ground.
+	if data.moving then
+		v.ai1 = v.ai1 + 1
+		if data.hp >= 4 then
+			v.speedX = 2 * v.direction
+		elseif data.hp >= 2 then
+			v.speedX = 2.4 * v.direction
+		elseif data.hp >= 1 then
+			v.speedX = 2.8 * v.direction
 		end
-		if(w == 0) then
-			w = cfg.width;
-		end
-    
-    --If we're facing right, flip the texture
-    if v.direction == 1 then
-      w = -w;
-    end
-		
-		local x,y = v.x + configFile.objectoffsetx * v.direction + v.width * 0.5, v.y + configFile.objectoffsety + v.height;
-    
-		x = x - w*0.5;
-		y = y;
-		
-		Graphics.drawBox{
-							x = x, y = y, 
-							textureCoords = {0,0,1,0,1,h/i.height,0,h/i.height}, 
-							width = w, height = h, 
-							texture = i, 
-							priority=-45, sceneCoords=true
-						}
 	end
-  
-end
-
-function rossbot.onNPCKill(eventObj,npc,killReason) 
-	if npc.id == npcID then
-    --If the rossbot dies, spawn its NPC
-    dropNPC(npc.ai1, npc.x, npc.y, npc:mem(0x146,FIELD_WORD), npc.direction, npc.friendly)
+	if not data.moving then
+		v.speedX = 0
+	end
+	if data.jumpactive then
+		if v.ai1 >= RNG.randomInt(1,50) then
+			v.ai1 = -180
+			data.jump = true
+		end
+		if data.jump then
+			v.speedY = -7
+			data.jumpmovement = data.jumpmovement + 1
+			if data.jumpmovement == 1 then
+				SFX.play(Misc.resolveSoundFile("robot-jump"))
+			end
+			if data.jumpmovement >= 5 then
+				data.jumpmovement = 0
+				data.jump = false
+			end
+		end
+	end
+	if not data.jumpactive then
+		v.speedY = 6
+	end
+	
+	if data.hp <= 0 then
+		v:kill(HARM_TYPE_OFFSCREEN)
+		local e =  Effect.spawn(998, v.x + 15, v.y + 85)
+		SFX.play(Misc.resolveSoundFile("robot-dead"))
+	end
+	
+	if data.hurtstate then
+		if v.direction == -1 then
+			v.animationFrame = 1
+		elseif v.direction == 1 then
+			v.animationFrame = 5
+		end
+		data.moving = false
+		data.jumpactive = false
+		v.ai2 = v.ai2 - 1
+		if v.ai2 <= 0 then
+			v.ai2 = 70
+			data.moving = true
+			data.jumpactive = true
+			data.hurtstate = false
+			data.hurtstate2 = false
+		end
 	end
 end
 
-return rossbot
+function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
+	if npcID ~= v.id or v.isGenerator then return end
+	local data = v.data
+	
+	if not data.hurtstate2 then
+		if killReason ~= HARM_TYPE_VANISH then
+			eventObj.cancelled = true
+			SFX.play(extrasounds.id[39])
+			SFX.play(Misc.resolveSoundFile("robot-hurt"))
+			data.hp = data.hp - 1
+			data.hurtstate2 = true
+			data.hurtstate = true
+		elseif killReason == HARM_TYPE_SWORD then
+			eventObj.cancelled = true
+			SFX.play(extrasounds.id[39])
+			SFX.play(Misc.resolveSoundFile("robot-hurt"))
+			data.hp = data.hp - 2
+			data.hurtstate2 = true
+			data.hurtstate = true
+		end
+	end
+	if data.hurtstate2 then
+		eventObj.cancelled = true
+	end
+end
+
+--Gotta return the library table!
+return sampleNPC

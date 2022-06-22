@@ -185,7 +185,35 @@ extrasounds.id[153] = Audio.SfxOpen(Misc.resolveSoundFile("castle-destroy.ogg"))
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
 extrasounds.id[1001] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog-confirm.ogg")) --Dialog Menu Choosing Confirmed
 
+--extrasounds.stockSoundNumbersInOrder = table.map{1,2,3,5,6,9,10,11,12,13,14,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,40,41,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91}
+
 extrasounds.allVanillaSoundNumbersInOrder = table.map{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91}
+
+--Uncomment below for each official SMBX2 library release.
+--function playSound(name) --If you want to play any of these sounds simply, you can use playSound(id), or you can use a string. This is similar to SFX.play, but with extrasounds support!
+	--if name == nil then
+		--error("That sound doesn't exist. Play something else.")
+	--end
+	--if unexpected_condition then error("That sound doesn't exist. Play something else.") end
+	
+	--if extrasounds.active then
+		--if extrasounds.id[name] and not extrasounds.stockSoundNumbersInOrder[name] then
+			--SFX.play(extrasounds.id[name])
+		--elseif extrasounds.stockSoundNumbersInOrder[name] then
+			--SFX.play(name)
+		--elseif name then
+			--local file = Misc.resolveSoundFile(name)
+			--SFX.play(file) --Then play it afterward
+		--end
+	--elseif not extrasounds.active then
+		--if extrasounds.allVanillaSoundNumbersInOrder[name] then
+			--SFX.play(name)
+		--elseif name then
+			--local file = Misc.resolveSoundFile(name)
+			--SFX.play(file) --Then play it afterward
+		--end
+	--end
+--end
 
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
