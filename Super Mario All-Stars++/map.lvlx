@@ -1554,9 +1554,9 @@ ID:802;X:-197344;Y:-194976;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\,
 ID:854;X:-197472;Y:-194816;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Castle.lvlx\"\,\n    \"levelTitle\"\: \"The Castle of Koopas\"\,\n    \"path_down\"\: \"toWSMBA2-Hammer1\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toWSMBA2-Castle\"\n}\n";
 ID:752;X:-197344;Y:-194944;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Castle\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -128\, 128\"\n}\n";
 ID:802;X:-197568;Y:-194784;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Hammer Bros 1.lvlx\"\,\n    \"levelTitle\"\: \"Hammer Bros. 1\"\,\n    \"path_down\"\: \"toWSMBA2-3\"\,\n    \"path_right\"\: \"toWSMBA2-Hammer1\"\n}\n";
-ID:752;X:-197472;Y:-194784;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Hammer1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -96\, 0\"\n}\n";
+ID:752;X:-197472;Y:-194784;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Hammer1\"\,\n    \"points\"\: \"0\, -32\, 0\, 0\, -96\, 0\"\n}\n";
 ID:802;X:-197696;Y:-194752;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Level 4\"\,\n    \"path_left\"\: \"toWSMBA2-Hammer2\"\,\n    \"path_right\"\: \"toWSMBA2-3\"\n}\n";
-ID:752;X:-197568;Y:-194752;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-3\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -128\, 0\"\n}\n";
+ID:752;X:-197568;Y:-194752;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-3\"\,\n    \"points\"\: \"0\, -32\, 0\, 0\, -128\, 0\"\n}\n";
 ID:802;X:-197760;Y:-194880;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-Hammer Bros 2.lvlx\"\,\n    \"levelTitle\"\: \"Hammer 2...?\"\,\n    \"path_down\"\: \"toWSMBA2-Hammer2\"\,\n    \"path_up\"\: \"toWSMBA2-4\"\n}\n";
 ID:752;X:-197728;Y:-194752;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA2-Hammer2\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -32\, -128\"\n}\n";
 ID:802;X:-197952;Y:-194944;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-2\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"Level 5\"\,\n    \"path_right\"\: \"toWSMBA2-4\"\,\n    \"path_up\"\: \"toWSMBA2-5\"\n}\n";
@@ -1568,7 +1568,7 @@ ID:821;X:-197952;Y:-195168;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-
 ID:821;X:-196928;Y:-194944;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-2PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to Snow World\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toWSMBA3-1\"\,\n    \"warpName\"\: \"WSMBAW-3PipeBegin\"\n}\n";
 ID:752;X:-196896;Y:-194944;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA3-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 288\, -64\"\n}\n";
 ID:860;X:-196608;Y:-195008;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"The Girls Fight\"\,\n    \"path_left\"\: \"toWSMBA3-1\"\,\n    \"path_right\"\: \"toWSMBA3-2\"\,\n    \"path_up\"\: \"toWSMBAW-3Path1\"\n}\n";
-ID:752;X:-196576;Y:-195008;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA3-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, 800\"\n}\n";
+ID:752;X:-196576;Y:-195008;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA3-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 96\, 32\, 800\"\n}\n";
 ID:752;X:-196608;Y:-195040;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-3Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
 ID:821;X:-196608;Y:-195136;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-4PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"toWSMBAW-3Path1\"\,\n    \"warpName\"\: \"WSMBAW-3Pipe1End\"\n}\n";
 ID:821;X:-196608;Y:-195232;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-3Pipe1End\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"\"\,\n    \"path_up\"\: \"toWSMBA4-1\"\,\n    \"warpName\"\: \"WSMBAW-4PipeBegin\"\n}\n";
@@ -1579,7 +1579,7 @@ ID:752;X:-196512;Y:-194208;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-3Bonus\"\,\n 
 ID:859;X:-196416;Y:-194208;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-0\, L-Bonus.lvlx\"\,\n    \"levelTitle\"\: \"Bonus!\"\,\n    \"path_left\"\: \"toWSMBAW-3Bonus\"\,\n    \"path_right\"\: \"toWSMBAW-3Path2\"\n}\n";
 ID:752;X:-196384;Y:-194208;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-3Path2\"\,\n    \"points\"\: \"-32\, 0\, 160\, 0\"\n}\n";
 ID:821;X:-196224;Y:-194208;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-5Pipe2Begin\"\,\n    \"levelTitle\"\: \"Warp to Underground Land\"\,\n    \"path_left\"\: \"toWSMBAW-3Path2\"\,\n    \"warpName\"\: \"WSMBAW-3Pipe2End\"\n}\n";
-ID:752;X:-196608;Y:-195328;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA4-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 192\, -320\"\n}\n";
+ID:752;X:-196608;Y:-195328;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA4-2\"\,\n    \"points\"\: \"0\, 32\, 32\, -32\, 192\, -320\"\n}\n";
 ID:752;X:-196576;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-1\"\,\n    \"points\"\: \"-32\, 0\, 160\, 0\"\n}\n";
 ID:802;X:-196416;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"Scrapped Cutscene 1\"\,\n    \"path_left\"\: \"toWSMBASpecial-1\"\,\n    \"path_right\"\: \"toWSMBASpecial-2\"\n}\n";
 ID:752;X:-196384;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-2\"\,\n    \"points\"\: \"-32\, 0\, 128\, 0\"\n}\n";
@@ -1588,7 +1588,7 @@ ID:752;X:-196224;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-3\"\,\n
 ID:802;X:-196128;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Scrapped Cutscene 3\"\,\n    \"path_left\"\: \"toWSMBASpecial-3\"\,\n    \"path_right\"\: \"toWSMBASpecial-4\"\n}\n";
 ID:752;X:-196096;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-4\"\,\n    \"points\"\: \"-32\, 0\, 192\, 0\"\n}\n";
 ID:802;X:-195904;Y:-195296;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"Japan Level 1\"\,\n    \"path_left\"\: \"toWSMBASpecial-4\"\,\n    \"path_right\"\: \"toWSMBASpecial-5\"\n}\n";
-ID:752;X:-195872;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-5\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\, 64\, -160\"\n}\n";
+ID:752;X:-195872;Y:-195296;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBASpecial-5\"\,\n    \"points\"\: \"-32\, 0\, 64\, -32\, 64\, -160\"\n}\n";
 ID:802;X:-195808;Y:-195456;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-S\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"Japan Level 2\"\,\n    \"path_down\"\: \"toWSMBASpecial-5\"\,\n    \"path_up\"\: \"toWSMBAW-4Path1\"\n}\n";
 ID:752;X:-195808;Y:-195488;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-4Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -160\"\n}\n";
 ID:821;X:-195808;Y:-195648;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-5Pipe1Begin\"\,\n    \"levelTitle\"\: \"Warp to Underground Land\"\,\n    \"path_down\"\: \"toWSMBAW-4Path1\"\,\n    \"path_left\"\: \"toWSMBAW-4Path2\"\,\n    \"warpName\"\: \"WSMBAW-4PipeEnd\"\n}\n";
@@ -1609,7 +1609,7 @@ ID:802;X:-194432;Y:-196224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\,
 ID:752;X:-194656;Y:-196160;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA5-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 224\, -64\"\n}\n";
 ID:860;X:-194304;Y:-196064;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Underground Boss Battle!\"\,\n    \"path_right\"\: \"toWSMBAW-5Path3\"\,\n    \"path_up\"\: \"toWSMBA5-3\"\n}\n";
 ID:752;X:-194400;Y:-196224;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA5-3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, 160\"\n}\n";
-ID:752;X:-194272;Y:-196064;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, 192\"\n}\n";
+ID:752;X:-194272;Y:-196064;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 32\, 96\, 192\"\n}\n";
 ID:821;X:-194176;Y:-195872;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-6PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to Hollywood\"\,\n    \"path_up\"\: \"toWSMBAW-5Path3\"\,\n    \"warpName\"\: \"WSMBAW-5PipeEnd\"\n}\n";
 ID:821;X:-194496;Y:-195104;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-5PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to Underground Valley\"\,\n    \"path_down\"\: \"toWSMBA6-1\"\,\n    \"path_up\"\: \"\"\,\n    \"warpName\"\: \"WSMBAW-6PipeBegin\"\n}\n";
 ID:752;X:-194496;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA6-1\"\,\n    \"points\"\: \"0\, -32\, 64\, 0\, 448\, 0\"\n}\n";

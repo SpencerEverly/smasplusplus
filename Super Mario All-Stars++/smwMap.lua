@@ -48,6 +48,10 @@ if SaveData.totalScoreClassic == nil then
 	SaveData.totalScoreClassic = 0
 end
 
+if GameData.____currentpathunlocking == nil then
+	GameData.____currentpathunlocking = "false"
+end
+
 -- Name of the level file that the map is on.
 smwMap.levelFilename = "map.lvlx"
 
@@ -275,6 +279,7 @@ local function unlockConnectedLevels(pathObj)
                 local sparkle = smwMap.createObject(smwMap.unlockLevelEffectID,levelObj.x,levelObj.y)
 
                 sparkle.data.affectingLevel = levelObj
+				GameData.____currentpathunlocking = "false"
             else
                 levelObj.lockedFade = 0
             end
@@ -1024,6 +1029,7 @@ function smwMap.onInitAPI()
 
     registerEvent(smwMap,"onTickEnd")
 	registerEvent(smwMap,"onExit")
+	registerEvent(smwMap,"onInputUpdate")
 end
 
 
@@ -1437,7 +1443,9 @@ do
         if name == nil or name == "" or smwMap.pathIsUnlocked(name) then
             return
         end
-
+		
+		GameData.____currentpathunlocking = name
+		
         saveData.unlockedPaths[name] = true
 
         local pathObj = smwMap.pathsMap[name]
@@ -1560,7 +1568,7 @@ do
             return true
         end
     end
-
+	
 
     local function unlockLevelPaths(levelObj,winType)
         local noPathsUnlocked = true
@@ -1571,7 +1579,7 @@ do
 
             if (type(unlockType) == "number" and (unlockType == 2 or unlockType-2 == winType)) or unlockType == true or winType < 0 then
                 local eventObj = smwMap.unlockPath(levelObj.settings["path_".. directionName],levelObj)
-
+				
                 if eventObj ~= nil then
                     -- The player will only be forced to walk if exactly 1 path was unlocked
                     if noPathsUnlocked then
@@ -1598,7 +1606,16 @@ do
         end
     end
 
-
+	
+	function smwMap.isUnlockingPath()
+		if GameData.____currentpathunlocking ~= "false" then
+			return true
+		else
+			return false
+		end
+	end
+	
+	
     local function enterEncounter(v,encounterObj)
         local middleFunction = (function()
             Level.load(encounterObj.settings.levelFilename,nil,encounterObj.settings.warpIndex)
@@ -1927,8 +1944,7 @@ do
             
             gameData.winType = LEVEL_WIN_TYPE_NONE
         end
-
-
+		
         v.timer = v.timer + 1
 
         if v.timer < 24 then
@@ -1956,7 +1972,7 @@ do
             v.state = PLAYER_STATE.NORMAL
             v.timer = 0
             v.timer2 = 0
-
+			
             Misc.saveGame()
 
             return
@@ -2011,7 +2027,7 @@ do
         v.state = PLAYER_STATE.NORMAL
         v.timer = 0
         v.timer2 = 0
-
+		
         Misc.saveGame()
     end)
 
@@ -4340,7 +4356,7 @@ function smwMap.onTick()
         updateEvent(smwMap.activeEvents[1])
     end
 	if SaveData.speedrunMode == true then
-		smwMap.playerSettings.walkSpeed = 8
+		smwMap.playerSettings.walkSpeed = 10
 		smwMap.playerSettings.climbSpeed = 5.75
 	end
 end
@@ -4349,6 +4365,13 @@ function smwMap.onDraw()
     if Misc.isPaused() and unlockLoopObj ~= nil and unlockLoopObj:isPlaying() then
         unlockLoopObj:pause()
     end
+	--Text.printWP(GameData.____currentpathunlocking, 100, 100, 8)
+end
+
+function smwMap.onInputUpdate()
+	for _,p in ipairs(Player.get()) do
+		p.keys.dropItem = false
+	end
 end
 
 
