@@ -149,7 +149,7 @@ if SaveData.disableX2char == false then
 
 	smashud.offsets.bombs = 	{x = 0, 	y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_MID};
 	smashud.offsets.coins = 	{x = -368, 	y = 26, cross = {x = 24, y = 1}, value = {x = 46, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-	smashud.offsets.lives = 	{x = -102, 	y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_RIGHT};
+	smashud.offsets.lives = 	{x = -152, 	y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
 	smashud.offsets.deathcount = {x = 102, y = 40, cross = {x = 25, y = 1}, value = {x = 78, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_LEFT};
 	smashud.offsets.stars = 	{x = -368, 	y = 48, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
 	smashud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},	value = {x = 45, y = 0, align = smashud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smashud.ALIGN_LEFT},	align = smashud.ALIGN_LEFT}
