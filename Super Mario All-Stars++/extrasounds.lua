@@ -239,8 +239,8 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onPostBlockHit")
 	registerEvent(extrasounds, "onPlayerKill")
 	
-	blockManager.registerEvent(extrasounds,90,"onCollideBlock")
-	blockManager.registerEvent(extrasounds,526,"onCollideBlock")
+	blockManager.registerEvent(90, extrasounds, "onCollideBlock")
+	--blockManager.registerEvent(526, extrasounds, "onCollideBlock")
 	
 	local Routine = require("routine")
 	
@@ -484,21 +484,18 @@ function bricksmashsound(block, fromUpper, playerornil) --This will smash bricks
 	end
 end
 
-function brickkillsound() --Alternative way to play the sound. Used with the SMW block and the Brinstar Block.
+function brickkillsound(block, hitter) --Alternative way to play the sound. Used with the SMW block and the Brinstar Block.
 	Routine.waitFrames(2, true)
-	Misc.dialog("The test has passed")
-	for k,v in ipairs(Block.get(90)) do
-		if v.isHidden and v.layerName == "Destroyed Blocks" then
-			playSound(blockSmashTable[v.id])
-		end
+	if block.isHidden and block.layerName == "Destroyed Blocks" then
+		playSound(blockSmashTable[block.id])
 	end
 end
 
-function extrasounds.onCollideBlock(v,p)
-	if type(p) == "Player" then
-		if p.y+p.height <= v.y+4 then
-			if p:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
-				Routine.run(brickkillsound)
+function extrasounds.onCollideBlock(block, hitter)
+	if type(hitter) == "Player" then
+		if (hitter.y+hitter.height) <= (block.y+4) then
+			if (hitter:mem(0x50, FIELD_BOOL)) then --Is the player spinjumping?
+				Routine.run(brickkillsound,block,hitter)
 			end
 		end
 	end
