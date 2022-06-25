@@ -878,6 +878,18 @@ function activatePlayerIntroMode()
 	customCamera.getTargets()
 end
 
+function isJumping()
+	for k,p in ipairs(Player.get()) do
+		if p.character == CHARACTER_MARIO or p.character == CHARACTER_LUIGI or p.character == CHARACTER_PEACH or p.character == CHARACTER_TOAD or p.character == CHARACTER_MEGAMAN or p.character == CHARACTER_WARIO or p.character == CHARACTER_BOWSER or p.character == CHARACTER_NINJABOMBERMAN or p.character == CHARACTER_YOSHI or p.character == CHARACTER_ROSALINA or p.character == CHARACTER_ZELDA or p.character == CHARACTER_UNTIMATERINKA or p.character == CHARACTER_UNCLEBROADSWORD or p.character == CHARACTER_SAMUS or p.character == CHARACTER_STEVE then
+			return not p:isGroundTouching() and not p:isClimbing() and (p:mem(0x114, FIELD_WORD) == 4 or p:mem(0x114, FIELD_WORD) == 5 or p:mem(0x114, FIELD_WORD) == 9  or p:mem(0x114, FIELD_WORD) == 10) and p:mem(0x34, FIELD_WORD) ~= 2;
+		elseif p.character == CHARACTER_LINK or p.character == CHARACTER_SNAKE then
+			return not p:isGroundTouching() and not p:isClimbing() and (p:mem(0x114, FIELD_WORD) == 5 or p:mem(0x114, FIELD_WORD) == 10) and p:mem(0x34, FIELD_WORD) ~= 2;
+		elseif p.character == CHARACTER_KLONOA then
+			return not player:isGroundTouching() and not p:isClimbing() and (player:mem(0x114, FIELD_WORD) == 4 or player:mem(0x114, FIELD_WORD) == 5 or player:mem(0x114, FIELD_WORD) == 9  or player:mem(0x114, FIELD_WORD) == 10) and player:mem(0x34, FIELD_WORD) ~= 2;
+		end
+	end
+end
+
 function countEveryPlayer()
 	for k,plr in ipairs(Player.get()) do
 		return plr

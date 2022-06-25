@@ -17,7 +17,7 @@ local runspeed = 6;
 
 function klonoa.onInitAPI()
 	registerEvent(klonoa, "onInputUpdate", "onInputUpdate", false)
-	registerEvent(klonoa, "onLoop", "onLoop", true)
+	registerEvent(klonoa, "onTick", "onTick", true)
 	registerEvent(klonoa, "onNPCKill", "onNPCKill", true)
 	registerEvent(klonoa, "onLevelExit", "onLevelExit", true)
 	registerEvent(klonoa, "onDraw", "onDraw", true)
@@ -517,7 +517,7 @@ end
 
 local hp = 1;
 
-function klonoa.onLoop()
+function klonoa.onTick()
 	if(player.character == CHARACTER_KLONOA) then
 		
 		--Drop NPC on death

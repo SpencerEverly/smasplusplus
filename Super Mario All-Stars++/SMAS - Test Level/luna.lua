@@ -2,7 +2,7 @@ local warpTransition = require("warpTransition")
 local textplus = require("textplus")
 local littleDialogue = require("littleDialogue")
 local pausemenu = require("pausemenu2")
---local megaluavania = require("megaluavania")
+local pauseplus = require("pauseplus")
 local debugbox = require("debugbox")
 local extrasounds = require("extrasounds")
 local smashudsystem = require("smashudsystem")
@@ -18,10 +18,10 @@ end
 
 function onEvent(eventName)
 	if eventName == "pauseenable" then
-		pausemenu.pauseactivated = true
+		pauseplus.canPause = true
 	end
 	if eventName == "pausedisable" then
-		pausemenu.pauseactivated = false
+		pauseplus.canPause = false
 	end
 end
 

@@ -19,6 +19,7 @@ local spinballcounter = 1
 local combo = 0
 local time = 0
 local yoshimouthindex = 0
+local jumptimer = 0
 
 extrasounds.active = true --Are the extra sounds active? If not, they won't play. If false the library won't be used and will revert to the stock sound system. Useful for muting all sounds for a boot menu, cutscene, or something like that by using Audio.sounds[id].muted = true instead.
 
@@ -282,12 +283,25 @@ local allenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29
 local allsmallenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,42,43,44,47,48,51,52,53,54,55,59,61,63,65,73,74,76,77,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,180,189,199,200,201,203,204,205,206,207,209,210,229,230,231,232,233,234,235,236,242,243,244,245,247,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,321,323,324,333,345,346,347,350,351,352,357,360,365,368,369,371,372,373,374,375,377,379,380,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,431,437,446,447,448,449,459,460,461,463,464,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,418,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,619,624,666} --Every single small X2 enemy.
 local allbigenemies = table.map{71,72,466,467,618} --Every single big X2 enemy.
 
+function isJumping()
+	for k,p in ipairs(Player.get()) do
+		if p.character == CHARACTER_MARIO or p.character == CHARACTER_LUIGI or p.character == CHARACTER_PEACH or p.character == CHARACTER_TOAD or p.character == CHARACTER_MEGAMAN or p.character == CHARACTER_WARIO or p.character == CHARACTER_BOWSER or p.character == CHARACTER_NINJABOMBERMAN or p.character == CHARACTER_YOSHI or p.character == CHARACTER_ROSALINA or p.character == CHARACTER_ZELDA or p.character == CHARACTER_UNTIMATERINKA or p.character == CHARACTER_UNCLEBROADSWORD or p.character == CHARACTER_SAMUS or p.character == CHARACTER_STEVE then
+			return not p:isGroundTouching() and not p:isClimbing() and (p:mem(0x114, FIELD_WORD) == 4 or p:mem(0x114, FIELD_WORD) == 5 or p:mem(0x114, FIELD_WORD) == 9  or p:mem(0x114, FIELD_WORD) == 10) and p:mem(0x34, FIELD_WORD) ~= 2;
+		elseif p.character == CHARACTER_LINK or p.character == CHARACTER_SNAKE then
+			return not p:isGroundTouching() and not p:isClimbing() and (p:mem(0x114, FIELD_WORD) == 5 or p:mem(0x114, FIELD_WORD) == 10) and p:mem(0x34, FIELD_WORD) ~= 2;
+		elseif p.character == CHARACTER_KLONOA then
+			return not player:isGroundTouching() and not p:isClimbing() and (player:mem(0x114, FIELD_WORD) == 4 or player:mem(0x114, FIELD_WORD) == 5 or player:mem(0x114, FIELD_WORD) == 9  or player:mem(0x114, FIELD_WORD) == 10) and player:mem(0x34, FIELD_WORD) ~= 2;
+		end
+	end
+end
+
 function extrasounds.onDraw()
-	
+	--Text.print(player.speedY, 100, 100)
 end
 
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
 	if extrasounds.active == true then --Only mute when active
+		--Audio.sounds[1].muted = true --player-jump.ogg
 		Audio.sounds[4].muted = true --block-smash.ogg
 		Audio.sounds[7].muted = true --mushroom.ogg
 		Audio.sounds[8].muted = true --player-dead.ogg
@@ -299,7 +313,6 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		Audio.sounds[42].muted = true --npc-fireball.ogg
 		Audio.sounds[43].muted = true --fireworks.ogg
 		Audio.sounds[59].muted = true --dragon-coin.ogg
-		
 		
 		
 		
@@ -453,6 +466,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 	end
 	if extrasounds.active == false then --Unmute when not active
+		--Audio.sounds[1].muted = false --player-jump.ogg
 		Audio.sounds[4].muted = false --block-smash.ogg
 		Audio.sounds[7].muted = false --mushroom.ogg
 		Audio.sounds[8].muted = false --player-dead.ogg
@@ -612,6 +626,22 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 				end
 			end
 			
+			
+			
+			--**JUMPING**
+			--for k,p in ipairs(Player.get()) do
+				--if p.keys.jump == KEYS_DOWN then
+					--jumptimer = jumptimer + 1
+					--if jumptimer == 1 and isJumping() then
+						--playSound(1)
+					--elseif p:mem(0x174, FIELD_BOOL) then
+						--playSound(1)
+					--end
+				--end
+				--if p:isGroundTouching() then
+					--jumptimer = 0
+				--end
+			--end
 			
 			
 			
