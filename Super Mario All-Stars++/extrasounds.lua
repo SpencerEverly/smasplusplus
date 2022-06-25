@@ -13,9 +13,12 @@
 
 local extrasounds = {}
 
+local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
+
 local spinballcounter = 1
 local combo = 0
 local time = 0
+local yoshimouthindex = 0
 
 extrasounds.active = true --Are the extra sounds active? If not, they won't play. If false the library won't be used and will revert to the stock sound system. Useful for muting all sounds for a boot menu, cutscene, or something like that by using Audio.sounds[id].muted = true instead.
 
@@ -215,6 +218,8 @@ extrasounds.allVanillaSoundNumbersInOrder = table.map{1,2,3,4,5,6,7,8,9,10,11,12
 	--end
 --end
 
+local spinjumpablebricks = table.map{90,526}
+
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
 	registerEvent(extrasounds, "onDraw")
@@ -233,6 +238,9 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onExplosion")
 	registerEvent(extrasounds, "onPostBlockHit")
 	registerEvent(extrasounds, "onPlayerKill")
+	
+	blockManager.registerEvent(extrasounds,90,"onCollideBlock")
+	blockManager.registerEvent(extrasounds,526,"onCollideBlock")
 	
 	local Routine = require("routine")
 	
@@ -273,6 +281,10 @@ local healitems = table.map{9,184,185,249,14,182,183,34,169,170,277,264}
 local allenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,42,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,180,189,199,200,201,203,204,205,206,207,209,210,229,230,231,232,233,234,235,236,242,243,244,245,247,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,321,323,324,333,345,346,347,350,351,352,357,360,365,368,369,371,372,373,374,375,377,379,380,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,431,437,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,418,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,618,619,624,666} --Every single X2 enemy.
 local allsmallenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,42,43,44,47,48,51,52,53,54,55,59,61,63,65,73,74,76,77,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,180,189,199,200,201,203,204,205,206,207,209,210,229,230,231,232,233,234,235,236,242,243,244,245,247,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,321,323,324,333,345,346,347,350,351,352,357,360,365,368,369,371,372,373,374,375,377,379,380,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,431,437,446,447,448,449,459,460,461,463,464,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,418,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,619,624,666} --Every single small X2 enemy.
 local allbigenemies = table.map{71,72,466,467,618} --Every single big X2 enemy.
+
+function extrasounds.onDraw()
+	
+end
 
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
 	if extrasounds.active == true then --Only mute when active
@@ -328,7 +340,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		--**P-WING**
 		for k,p in ipairs(Player.get()) do
-			if p.mount ~= MOUNT_YOSHI and p.deathTimer <= 0 and p.forcedState == FORCEDSTATE_NONE and Level.endState() <= 0 then
+			if p:mem(0x66, FIELD_BOOL) == false and p.deathTimer <= 0 and p.forcedState == FORCEDSTATE_NONE and Level.endState() <= 0 then
 				if p:mem(0x16C, FIELD_BOOL) == true then
 					SFX.play(extrasounds.id[121], 1, 1, 7)
 				end
@@ -377,12 +389,20 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		
-		--*PROJECTILES*
-		--Toad's Boomerang
-		for k,v in ipairs(NPC.get(292)) do --Boomerang sounds!
+		--**PROJECTILES**
+		--*Toad's Boomerang*
+		for k,v in ipairs(NPC.get(292)) do --Boomerang sounds! (Toad's Boomerang)
 			SFX.play(extrasounds.id[116], 1, 1, 12)
 		end
-		
+		--*Boomerang Bro. Projectile*
+		for k,v in ipairs(NPC.get(615)) do --Boomerang sounds! (Boomerang Bros.)
+			local boomerangbrox = v.x - camera.x
+			local boomerangbroy = v.y + camera.y
+			if boomerangbrox <= -800 or boomerangbrox >= 800 or boomerangbroy <= -600 or boomerangbroy >= 600 then
+				Text.print(boomerangbrox, 100, 100)
+				SFX.play(extrasounds.id[116], 1, 1, 12)
+			end
+		end
 		
 		
 		
@@ -464,6 +484,26 @@ function bricksmashsound(block, fromUpper, playerornil) --This will smash bricks
 	end
 end
 
+function brickkillsound() --Alternative way to play the sound. Used with the SMW block and the Brinstar Block.
+	Routine.waitFrames(2, true)
+	Misc.dialog("The test has passed")
+	for k,v in ipairs(Block.get(90)) do
+		if v.isHidden and v.layerName == "Destroyed Blocks" then
+			playSound(blockSmashTable[v.id])
+		end
+	end
+end
+
+function extrasounds.onCollideBlock(v,p)
+	if type(p) == "Player" then
+		if p.y+p.height <= v.y+4 then
+			if p:mem(0x50, FIELD_BOOL) == true then --Is the player spinjumping?
+				Routine.run(brickkillsound)
+			end
+		end
+	end
+end
+
 function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
 	local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
 	local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
@@ -514,8 +554,6 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
 				
 				
 				
-				
-				
 			end
 		end
 	end
@@ -563,6 +601,17 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
 				end
 				if isShootingIce then --Iceball sound
 					SFX.play(extrasounds.id[93], 1, 1, 25)
+				end
+			end
+			
+			
+			
+			--*YOSHI FIRE SPITTING*
+			for k,p in ipairs(Player.get()) do
+				if p:mem(0x68, FIELD_BOOL) == true then --If it's detected that Yoshi has the fire ability...
+					if p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED then --Then if it's spit out...
+						playSound(42) --Play the sound
+					end
 				end
 			end
 			

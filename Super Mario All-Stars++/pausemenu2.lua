@@ -1141,10 +1141,14 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			if (Level.filename() == "map.lvlx") == false then
 				pauseplus.createOption("main",{text = "Return to the Map",closeMenu = true,description = "Returns to the map of the game.",action = function() Routine.run(exitlevel2) end})
 			end
+			pauseplus.createSubmenu("editormenu",{headerText = "<size 1.5>Editor Menu</size>"})
 			pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
 			pauseplus.createSubmenu("charactermenu",{headerText = "<size 1.5>Character Options</size>"})
 			pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
 			pauseplus.createSubmenu("miscsettings",{headerText = "<size 1.5>Miscellaneous Settings</size>"})
+			if Misc.inEditor() then
+				pauseplus.createOption("main",{text = "Editor Menu",goToSubmenu = "editormenu",description = "Testing 1-2-3! If testing the game, this menu is for you!"})
+			end
 			pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
 			pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
 			if (Level.filename() == "map.lvlx") == true then
@@ -1159,7 +1163,20 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 				pauseplus.createOption("main",{text = "Save and Reset Game",description = "Saves and resets the game back to the preboot menu. Useful for setting options you can't set in the pause menu.",pauseplus.save,closeMenu = true,action = function() Routine.run(mainmenu) end})
 			end
 			pauseplus.createOption("main",{text = "Save and Quit",description = "Save and exit. You can continue later at any point. Remember to take breaks!",action = function() Routine.run(saveAndQuitRoutine) end})
-
+			
+			--Editor Menu
+			if Misc.inEditor() then
+				pauseplus.createSubmenu("editormenuhud",{headerText = "<size 1.5>Editor Menu (Hud Options)</size>"})
+				pauseplus.createOption("editormenu",{text = "Instantly Restart Level",description = "Instantly restart the level, at the last located starting/checkpoint area.",pauseplus.save,closeMenu = true, actions = {function() Level.load(Level.filename()) end}})
+				pauseplus.createOption("editormenu",{text = "Hud Options",goToSubmenu = "editormenuhud",description = "Options specific for the Hud."})
+				
+				--Editor Menu (Hud Options)
+				pauseplus.createOption("editormenuhud",{text = "Max Lives to Three Crowns",description = "Fill all the lives to the maximum life count (All three crowns).",pauseplus.save,closeMenu = true, actions = {function() maxOutLives() end}})
+				pauseplus.createOption("editormenuhud",{text = "Reset Lives Back to 5",description = "Reset all the lives back to 5.",pauseplus.save,closeMenu = true, actions = {function() resetLives() end}})
+				pauseplus.createOption("editormenuhud",{text = "Max the Death Count",description = "Max the death count to 999. Any higher will show 999+ on the Hud.",pauseplus.save,closeMenu = true, actions = {function() maxOutDeathCount() end}})
+				pauseplus.createOption("editormenuhud",{text = "Reset Death Count",description = "Reset the death count back to 0.",pauseplus.save,closeMenu = true, actions = {function() resetDeathCount() end}})
+			end
+			
 			-- Settings
 			pauseplus.createOption("settings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_NES,RESOLUTION_GB,RESOLUTION_GBA,RESOLUTION_IPHONEONE,RESOLUTION_THREEDS}, action = function() changeresolution() end})
 			pauseplus.createOption("settings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})

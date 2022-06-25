@@ -29,3 +29,9 @@ function onStart()
 	end
 	Misc.saveGame()
 end
+
+function onTick()
+	if GameData.____currentpathunlocking == "toSMB31-Toad1Path1" then
+		smwMap.unlockPath("toSMB31-4")
+	end
+end
