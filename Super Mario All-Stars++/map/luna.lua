@@ -34,4 +34,7 @@ function onTick()
 	if GameData.____currentpathunlocking == "toSMB31-Toad1Path1" then
 		smwMap.unlockPath("toSMB31-4")
 	end
+	if GameData.____currentpathunlocking == "toSMB31-Bonus1" then
+		smwMap.unlockPath("toSMB31-Fortress1")
+	end
 end
