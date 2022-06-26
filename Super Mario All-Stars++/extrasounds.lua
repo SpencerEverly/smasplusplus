@@ -61,6 +61,10 @@ extrasounds.enableBlockCoinCollecting = true
 --Whenever to use the original sprout sound instead of using the other custom sounds.
 extrasounds.useOriginalBlockSproutInstead = false
 
+--**NPC SETTINGS**
+--Whenever to use the original NPC fireball sound instead of using the other custom sounds.
+extrasounds.useOriginalBowserFireballInstead = false
+
 --**COIN SETTINGS**
 --Whenever to enable the coin collecting SFX.
 extrasounds.enableCoinCollecting = true
@@ -80,6 +84,8 @@ extrasounds.useOriginalSpinJumpForBigEnemies = false
 extrasounds.enableSMB2EnemyKillSounds = true
 --Whenever to enable star collecting sounds.
 extrasounds.enableStarCollecting = true
+--Whenever to play the P-Switch timer when a P-Switch is active.
+extrasounds.playPSwitchTimerSFX = true
 
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 
@@ -414,14 +420,18 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		--**PSWITCH TIMER**
 		if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < 750 then
 			if Level.endState() <= 0 then
-				if not GameData.winStateActive then
-					SFX.play(extrasounds.id[118], 1, 1, extrasounds.pSwitchTimerDelay)
+				if not GameData.winStateActive or GameData.winStateActive == nil then
+					if extrasounds.playPSwitchTimerSFX then
+						SFX.play(extrasounds.id[118], 1, 1, extrasounds.pSwitchTimerDelay)
+					end
 				end
 			end
 		elseif mem(0x00B2C62C, FIELD_WORD) <= 300 and mem(0x00B2C62C, FIELD_WORD) >= 1 then
 			if Level.endState() <= 0 then
-				if not GameData.winStateActive then
-					SFX.play(extrasounds.id[118], 1, 1, extrasounds.pSwitchTimerDelayFast)
+				if not GameData.winStateActive or GameData.winStateActive == nil then
+					if extrasounds.playPSwitchTimerSFX then
+						SFX.play(extrasounds.id[118], 1, 1, extrasounds.pSwitchTimerDelayFast)
+					end
 				end
 			end
 		end
@@ -452,14 +462,22 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		for k,v in ipairs(NPC.get(86)) do --Make sure the seperate Bowser fire sound plays when SMB3 Bowser actually fires up a fireball
 			if v.ai4 == 4 then
 				if v.ai3 == 25 then
-					playSound(115)
+					if not extrasounds.useOriginalBowserFireballInstead then
+						playSound(115)
+					elseif extrasounds.useOriginalBowserFireballInstead then
+						playSound(42)
+					end
 				end
 			end
 		end
 		--*SMB1 Bowser*
 		for k,v in ipairs(NPC.get(200)) do --Make sure the seperate Bowser fire sound plays when SMB1 Bowser actually fires up a fireball
 			if v.ai3 == 40 then
-				playSound(115)
+				if not extrasounds.useOriginalBowserFireballInstead then
+					playSound(115)
+				elseif extrasounds.useOriginalBowserFireballInstead then
+					playSound(42)
+				end
 			end
 		end
 		--*SMW Ludwig Koopa*
