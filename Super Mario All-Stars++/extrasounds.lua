@@ -1,4 +1,4 @@
---extrasounds.lua by Spencer Everly (v0.2.1)
+--extrasounds.lua by Spencer Everly (v0.2.2)
 --
 --To use this everywhere, you can simply put this under luna.lua:
 --_G.extrasounds = require("extrasounds")
@@ -285,6 +285,9 @@ extrasounds.allVanillaSoundNumbersInOrder = table.map{1,2,3,4,5,6,7,8,9,10,11,12
 
 local spinjumpablebricks = table.map{90,526}
 
+local extrasoundsblock90 = {}
+local extrasoundsblock668 = {}
+
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onKeyboardPress")
 	registerEvent(extrasounds, "onDraw")
@@ -304,8 +307,8 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
 	registerEvent(extrasounds, "onPostBlockHit")
 	registerEvent(extrasounds, "onPlayerKill")
 	
-	blockManager.registerEvent(90, extrasounds, "onCollideBlock")
-	--blockManager.registerEvent(526, extrasounds, "onCollideBlock")
+	blockManager.registerEvent(90, extrasoundsblock90, "onCollideBlock")
+	blockManager.registerEvent(668, extrasoundsblock668, "onCollideBlock")
 	
 	local Routine = require("routine")
 	
@@ -587,6 +590,7 @@ local blockSmashTable = {
 	[188] = 4,
 	[226] = 4,
 	[293] = 4,
+	[668] = 4,
 }
 
 function bricksmashsound(block, fromUpper, playerornil) --This will smash bricks, as said from the source code.
@@ -598,7 +602,7 @@ function bricksmashsound(block, fromUpper, playerornil) --This will smash bricks
 	end
 end
 
-function brickkillsound(block, hitter) --Alternative way to play the sound. Used with the SMW block and the Brinstar Block.
+function brickkillsound(block, hitter) --Alternative way to play the sound. Used with the SMW block, the Brinstar Block, and the Unstable Turn Block.
 	Routine.waitFrames(2, true)
 	if block.isHidden and block.layerName == "Destroyed Blocks" then
 		if extrasounds.enableBrickSmashing then
@@ -607,13 +611,19 @@ function brickkillsound(block, hitter) --Alternative way to play the sound. Used
 	end
 end
 
-function extrasounds.onCollideBlock(block, hitter)
+function extrasoundsblock90.onCollideBlock(block, hitter) --SMW BLock
 	if type(hitter) == "Player" then
 		if (hitter.y+hitter.height) <= (block.y+4) then
 			if (hitter:mem(0x50, FIELD_BOOL)) then --Is the player spinjumping?
 				Routine.run(brickkillsound,block,hitter)
 			end
 		end
+	end
+end
+
+function extrasoundsblock668.onCollideBlock(block, hitter) --Unstable Turn Block
+	if type(hitter) == "Player" then
+		Routine.run(brickkillsound,block,hitter)
 	end
 end
 
@@ -624,9 +634,10 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
 		if not Misc.isPaused() then --Making sure the sound only plays when not paused...
 			for _,p in ipairs(Player.get()) do --This will get actions regarding all players
 			
-			
-			
-			
+				
+				
+				
+				
 				--**CONTENT ID DETECTION**
 				if block.contentID == nil then --For blocks that are already used
 					
@@ -889,6 +900,16 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
 				if npc.id == 558 and Colliders.collide(p, npc) then --Cherry sound effect
 					if extrasounds.enableCherryCollecting then
 						playSound(103)
+					end
+				end
+				
+				
+				
+				
+				--**ICE BLOCKS**
+				if npc.id == 45 then
+					if extrasounds.enableBrickSmashing then
+						playSound(4)
 					end
 				end
 				
