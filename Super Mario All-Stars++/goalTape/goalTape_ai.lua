@@ -297,6 +297,8 @@ function goalTape.startExit(args)
 		end
 	end
 	
+	GameData.____muteMusic = true
+	
     Level.winState(4096)
 
     if info.pausesGame then
@@ -366,6 +368,7 @@ local function updatePlayerStuff(p,fromOnDraw)
 
             if info.fadeOut >= 1 or (info.doIrisOut and info.irisOutRadius < 2) then
                 -- Exit level
+				GameData.____muteMusic = false
                 Level.exit(info.exitType)
                 Misc.unpause()
 
