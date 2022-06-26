@@ -411,9 +411,11 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		for k,v in ipairs(NPC.get(615)) do --Boomerang sounds! (Boomerang Bros.)
 			local boomerangbrox = v.x - camera.x
 			local boomerangbroy = v.y + camera.y
-			if boomerangbrox <= -800 or boomerangbrox >= 800 or boomerangbroy <= -600 or boomerangbroy >= 600 then
-				Text.print(boomerangbrox, 100, 100)
-				SFX.play(extrasounds.id[116], 1, 1, 12)
+			if boomerangbrox <= -800 or boomerangbrox <= 800 then
+				if boomerangbroy <= -600 or boomerangbroy <= 600 then
+					--Text.print(boomerangbrox, 100, 100)
+					SFX.play(extrasounds.id[116], 1, 1, 12)
+				end
 			end
 		end
 		
