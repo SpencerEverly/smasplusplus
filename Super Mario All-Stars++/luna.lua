@@ -83,16 +83,7 @@ if (_G.player2 ~= nil) or (_G.player3 ~= nil) or (_G.player4 ~= nil) or (_G.play
 end
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
-local function anyValidFields() --This is to prevent any player2 errors while switching between 1/2 player modes. If it's still not working (Hopefully that's not the case) then paste what's below into data/scripts/base/darkness.lua at line 854 and save. Hopefully this'll be fixed in the next patch, along with the teleporting issue
-	sectionlist[1] = player.section
-	if Player.count() >= 2 and Player(2).isValid then
-		sectionlist[2] = player2.section
-	else
-		sectionlist[2] = nil
-	end
-end
-
-function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport.
+function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport. This will be removed after a few months when the next SMBX2 patch releases (The next patch will fix this), to make sure people upgrade on time.
 	-- If using bottom center aligned coordinates, handle that sensibly
 	if bottomCenterAligned then
 		x = x - (self.width * 0.5)
