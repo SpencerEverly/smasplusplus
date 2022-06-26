@@ -56,7 +56,7 @@ extrasounds.useFireworksInsteadOfOtherExplosions = false
 --**BLOCK SETTINGS**
 --Whenever to enable all normal brick smashing SFXs.
 extrasounds.enableBrickSmashing = true
---Whenever to enable coin SFXs then hitting blocks.
+--Whenever to enable coin SFXs when hitting blocks.
 extrasounds.enableBlockCoinCollecting = true
 --Whenever to use the original sprout sound instead of using the other custom sounds.
 extrasounds.useOriginalBlockSproutInstead = false
