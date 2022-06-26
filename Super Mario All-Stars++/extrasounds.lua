@@ -78,6 +78,8 @@ extrasounds.enableHPCollecting = true
 extrasounds.useOriginalSpinJumpForBigEnemies = false
 --Whenever to enable the SMB2 enemy kill sounds.
 extrasounds.enableSMB2EnemyKillSounds = true
+--Whenever to enable star collecting sounds.
+extrasounds.enableStarCollecting = true
 
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 
@@ -910,6 +912,15 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
 				if npc.id == 45 then
 					if extrasounds.enableBrickSmashing then
 						playSound(4)
+					end
+				end
+				
+				
+				
+				--**SMW POWER STARS**
+				if npc.id == 196 then
+					if extrasounds.enableStarCollecting then
+						playSound(59)
 					end
 				end
 				
