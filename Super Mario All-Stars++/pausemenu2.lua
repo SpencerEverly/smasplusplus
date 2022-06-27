@@ -100,6 +100,14 @@ local function smb1allnightnipponoggle()
 	end
 end
 
+local function wsmbaoriginalgraphicsoggle()
+	if pauseplus.getSelectionValue("miscsettings","Enable Original WSMBA Mode") then
+		SaveData.WSMBAOriginalGraphicsActivated = true
+	else
+		SaveData.WSMBAOriginalGraphicsActivated = false
+	end
+end
+
 local function changeresolution()
 	playSound("resolution-set.ogg")
 	screenModes = pauseplus.getSelectionValue("settings","Switch Resolution")
@@ -1195,6 +1203,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			-- Misc. Settings
 			pauseplus.createOption("miscsettings",{text = "Enable SMB1 Hard Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable SMB1 Hard Mode. This will only apply to SMB1 levels.", action = function() smb1hardmodetoggle() end})
 			pauseplus.createOption("miscsettings",{text = "Enable All Night Nippon Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable the All Night Nippon Mode. This will only apply to SMB1 and SMBLL levels.", action = function() smb1allnightnipponoggle() end})
+			pauseplus.createOption("miscsettings",{text = "Enable Original WSMBA Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable the original Where SMB Attacks mode. This will only apply to WSMBA levels.", action = function() wsmbaoriginalgraphicsoggle() end})
 
 			--Character Menu
 			if SaveData.disableX2char == false then

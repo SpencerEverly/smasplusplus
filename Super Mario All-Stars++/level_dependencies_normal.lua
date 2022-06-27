@@ -55,13 +55,6 @@ end
 
 local smb1buzzyswitch = false
 
-if SaveData.SMB1HardModeActivated == nil then
-	SaveData.SMB1HardModeActivated = false
-end
-if SaveData.SMB1LLAllNightNipponActivated == nil then
-	SaveData.SMB1LLAllNightNipponActivated = false
-end
-
 function dependencies.onStart()
 	if SaveData.ut_enabled == nil then
 		SaveData.ut_enabled = SaveData.ut_enabled or 0

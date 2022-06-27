@@ -20,6 +20,16 @@ if GameData.rushModeActive == true then
 	level_dependencies_rushmode = require("level_dependencies_rushmode")
 end
 
+if SaveData.SMB1HardModeActivated == nil then
+	SaveData.SMB1HardModeActivated = false
+end
+if SaveData.SMB1LLAllNightNipponActivated == nil then
+	SaveData.SMB1LLAllNightNipponActivated = false
+end
+if SaveData.WSMBAOriginalGraphicsActivated == nil then
+	SaveData.WSMBAOriginalGraphicsActivated = false
+end
+
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
