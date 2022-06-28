@@ -76,9 +76,12 @@ customCamera.blockerID = 0
 customCamera.lastSection = nil
 customCamera.lastWarpCooldown = 0
 
+customCamera.maxDrawingPriority = 0
+customCamera.maxDrawingPriorityDraw = 0.001
 
 customCamera.debug = false
 
+local cam1 = handycam[1]
 
 -- drawScene function
 do
@@ -638,7 +641,7 @@ do
 
     function customCamera.drawScene(args)
         args.minPriority = args.minPriority or -100
-        args.maxPriority = args.maxPriority or 0
+        args.maxPriority = args.maxPriority or customCamera.maxDrawingPriority
 
         args.rotation = args.rotation or 0
         args.scale = args.scale or 1
@@ -819,7 +822,7 @@ do
     end
 end
 
-
+local handycamObj = rawget(handycam,1)
 
 function customCamera.getFullCameraPos()
     local b = player.sectionObj.boundary
@@ -837,6 +840,36 @@ function customCamera.getFullCameraPos()
     local fullY = camera.y + (camera.height - fullHeight)*0.5
 
     return fullX,fullY,fullWidth,fullHeight
+end
+
+function customCamera.getCameraWidth()
+    local b = player.sectionObj.boundary
+
+    local zoom = customCamera.currentZoom
+    local handycamObj = rawget(handycam,1)
+
+    if handycamObj ~= nil and zoom == 1 then
+        zoom = handycamObj.zoom
+    end
+
+    local fullWidth = customCamera.screenWidth/zoom
+
+    return fullWidth
+end
+
+function customCamera.getCameraHeight()
+    local b = player.sectionObj.boundary
+
+    local zoom = customCamera.currentZoom
+    local handycamObj = rawget(handycam,1)
+
+    if handycamObj ~= nil and zoom == 1 then
+        zoom = handycamObj.zoom
+    end
+
+    local fullHeight = customCamera.screenHeight/zoom
+
+    return fullHeight
 end
 
 function customCamera.clampFocusToBounds(focus)
@@ -1046,7 +1079,7 @@ function customCamera.getTargets()
 		end
 	end
 	count = count + Player.count()
-	
+    
 	return targets
 end
 
@@ -1255,6 +1288,8 @@ function customCamera.resetCameraState()
 end
 
 function customCamera.onDraw()
+    handycamObj.targets = {player,player2}
+    
     -- Update settings
     local newSettings = getCurrentSettings()
 	
@@ -1414,7 +1449,7 @@ function customCamera.onCameraDraw()
         }
 
         --Graphics.drawScreen{color = Color.black,priority = 0}
-        Graphics.drawScreen{texture = zoomedBuffer,priority = 0.001}
+        Graphics.drawScreen{texture = zoomedBuffer,priority = customCamera.maxDrawingPriorityDraw}
     end
 
     if settingsNeedCrop then
@@ -1429,12 +1464,12 @@ function customCamera.onCameraDraw()
             sourceY = borderVer*0.5
         end
 
-        zoomedBuffer:captureAt(0.001)
+        zoomedBuffer:captureAt(customCamera.maxDrawingPriorityDraw)
 
-        Graphics.drawScreen{color = Color.black,priority = 0.001}
+        Graphics.drawScreen{color = Color.black,priority = customCamera.maxDrawingPriorityDraw}
 
         Graphics.drawBox{
-            texture = zoomedBuffer,priority = 0.001,
+            texture = zoomedBuffer,priority = customCamera.maxDrawingPriorityDraw,
             x = borderHor*0.5 + customCamera.screenOffsetX,
             y = borderVer*0.5 + customCamera.screenOffsetY,
             sourceX = sourceX,
