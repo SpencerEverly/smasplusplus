@@ -1,4 +1,4 @@
-SMASUpdater (v1.1.0)
+SMASUpdater (v1.2.0)
 
 The SMASUpdater is a tool to update the episode before launching SMBX2.
 
