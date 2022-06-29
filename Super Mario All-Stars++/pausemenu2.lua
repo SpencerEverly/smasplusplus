@@ -1166,7 +1166,7 @@ end
 pauseplus.font = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
 pauseplus.scale = 1.5
 pauseplus.priority = -1
-pauseplus.doResizing = false
+pauseplus.doResizing = true
 pauseplus.optionGap = 4
 pauseplus.offset = vector(0,0)
 pauseplus.horizontalSpace = 59

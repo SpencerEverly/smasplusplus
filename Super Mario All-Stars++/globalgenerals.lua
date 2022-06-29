@@ -34,7 +34,7 @@ end
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
-smashud.priority = -4.5
+smashud.priority = -4.2
 smashud.visible.starcoins = false
 GameData.activateAbilityMessage = false
 GameData.forcedStateActive = false
@@ -51,7 +51,7 @@ local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png
 local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
 local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
 
-customCamera.transitionSpeed = 5
+customCamera.transitionSpeed = 0.25
 
 SaveData._anothercurrency = {SaveData.totalcoins}
 
@@ -767,7 +767,7 @@ function globalgenerals.onDraw()
 end
 
 function globalgenerals.onExitLevel(winType)
-    if Misc.inEditor() then
+    if not Misc.inMarioChallenge() then
         if winType >= 1 then
             Level.load("map.lvlx")
         end

@@ -782,7 +782,7 @@ do
         if pauseplus.inResizingTransition then
             local difference = (pauseplus.boxTotalSize - pauseplus.boxDisplaySize)
 
-            pauseplus.boxDisplaySize = pauseplus.boxDisplaySize + difference:normalise() * math.min(34,difference.length)
+            pauseplus.boxDisplaySize = pauseplus.boxDisplaySize + difference:normalise() * math.min(75,difference.length)
 
             if math.abs(pauseplus.boxTotalSize.x-pauseplus.boxDisplaySize.x) <= 1 and math.abs(pauseplus.boxTotalSize.y-pauseplus.boxDisplaySize.y) <= 1 then
                 pauseplus.boxDisplaySize = vector(pauseplus.boxTotalSize.x,pauseplus.boxTotalSize.y)
