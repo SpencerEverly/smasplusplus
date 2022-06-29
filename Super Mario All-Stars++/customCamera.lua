@@ -79,6 +79,8 @@ customCamera.lastWarpCooldown = 0
 customCamera.maxDrawingPriority = 0
 customCamera.maxDrawingPriorityDraw = 0.001
 
+customCamera.showAllPlayers = true
+
 customCamera.debug = false
 
 local cam1 = handycam[1]
@@ -822,8 +824,6 @@ do
     end
 end
 
-local handycamObj = rawget(handycam,1)
-
 function customCamera.getFullCameraPos()
     local b = player.sectionObj.boundary
 
@@ -1036,7 +1036,7 @@ local function targetsAreDifferent(listA,listB)
 end
 
 function customCamera.listTargets()
-	return targets
+	return customCamera.actualTargets
 end
 
 function countEveryPlayer()
@@ -1047,47 +1047,59 @@ end
 
 function customCamera.getTargets()
 	-- Use customCamera.targets if possible
-	targets = {}
+	customCamera.actualTargets = {}
 	local count = 0
 
 	for _,v in ipairs(customCamera.targets) do
 		if v.isValid ~= false and (v[1] ~= nil or v.x ~= nil) and (v[2] ~= nil or v.y ~= nil) then
-			table.insert(targets,v)
+			table.insert(customCamera.actualTargets,v)
 			count = count + 1
 		end
 	end
 
 	if count > 0 then
-		return targets
+		return customCamera.actualTargets
 	end
 
 	-- Otherwise, use NPC ID system
 	if customCamera.currentSettings.targetNPCID > 0 then
 		for _,n in NPC.iterate(customCamera.currentSettings.targetNPCID) do
 			if n.despawnTimer > 0 and customCamera.isOnScreen(n) then
-				table.insert(targets,n)
+				table.insert(customCamera.actualTargets,n)
+				count = count + 1
+			end
+		end
+	end
+    
+    if customCamera.showAllPlayers then
+		for _,p in ipairs(Player.get()) do
+			if p.isValid and customCamera.isOnScreen(p) then
+				table.insert(customCamera.actualTargets,p)
 				count = count + 1
 			end
 		end
 	end
 
 	-- Add player
-	table.insert(targets,player)
+	table.insert(customCamera.actualTargets,player)
 	for i = 2,128 do
 		if Player(i).isValid then
-			table.insert(targets,Player(i))
+			table.insert(customCamera.actualTargets,Player(i))
 		end
 	end
 	count = count + Player.count()
     
-	return targets
+	return customCamera.actualTargets
 end
 
-function getCameraFocusFromTargets(targets)
+function getCameraFocusFromTargets(target)
+    if target == nil then
+        target = customCamera.actualTargets
+    end
 	local total = vector.zero2
 	local count = 0
 
-	for _,v in ipairs(targets) do
+	for _,v in ipairs(customCamera.actualTargets) do
 		if v.isValid ~= false then
 			local x = v[1] or v.x
 			local y = v[2] or v.y
@@ -1118,7 +1130,6 @@ function getCameraFocusFromTargets(targets)
 	return total
 end
 
-
 local function getCurrentSettings()
     local settings = makeDefaultSettings()
 
@@ -1126,7 +1137,7 @@ local function getCurrentSettings()
 		-- Collect active controllers, then sort
 		local controllers = {}
 
-		for _,b in Block.iterateIntersecting(targets.x,targets.y,targets.x+targets.width,targets.y+targets.height) do
+		for _,b in Block.iterateIntersecting(customCamera.actualTargets.x,customCamera.actualTargets.y,customCamera.actualTargets.x+customCamera.actualTargets.width,customCamera.actualTargets.y+customCamera.actualTargets.height) do
 			if b.id == customCamera.controllerID and not b.isHidden and not b:mem(0x5A,FIELD_BOOL) then
 				table.insert(controllers,b)
 			end
@@ -1276,7 +1287,8 @@ function customCamera.resetCameraState()
     customCamera.screenHeight = customCamera.currentSettings.screenHeight
     customCamera.screenOffsetX = customCamera.currentSettings.screenOffsetX
     customCamera.screenOffsetY = customCamera.currentSettings.screenOffsetY
-
+    
+    customCamera.targetedPlayers = customCamera.currentSettings.playersVisible
 
     customCamera.currentTargets = customCamera.getTargets()
     customCamera.previousTargetsFous = vector.zero2
@@ -1288,8 +1300,6 @@ function customCamera.resetCameraState()
 end
 
 function customCamera.onDraw()
-    handycamObj.targets = {player,player2}
-    
     -- Update settings
     local newSettings = getCurrentSettings()
 	
@@ -1311,7 +1321,7 @@ function customCamera.onDraw()
         customCamera.previousTargetsFous = vector(camera.x + camera.width*0.5,camera.y + camera.height*0.5)
         customCamera.currentTargets = newTargets
 
-        customCamera.targetsTransition = 5
+        customCamera.targetsTransition = 2
     end
 
 

@@ -929,6 +929,7 @@ function pauseplus.onInitAPI()
     registerEvent(pauseplus,"onPause")
     registerEvent(pauseplus,"onKeyboardPressDirect")
 	registerEvent(pauseplus,"onTick")
+    registerEvent(pauseplus,"onInputUpdate")
 end
 
 
@@ -1008,6 +1009,17 @@ function pauseplus.onKeyboardPressDirect(keycode,repeated,character) -- for shif
     end
 end
 
+function pauseplus.onInputUpdate()
+    if Misc.inEditor() then
+        if player.rawKeys.pause == KEYS_PRESSED then
+            for k,p in ipairs(Player.get()) do
+                if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and p.deathTimer == 0 and not p:mem(0x13C,FIELD_BOOL))) then
+                    pauseplus.open(nil,nil,p)
+                end
+            end
+        end
+    end
+end
 
 
 

@@ -17,6 +17,7 @@ local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
 local cooldown = 0
+GameData.editorAreaStartingPoint = 0
 
 if SaveData.toggleCostumeAbilities == nil then
 	SaveData.toggleCostumeAbilities = true
@@ -53,12 +54,21 @@ local RESOLUTION_THREEDS = "Nintendo 3DS (Top Screen)"
 
 local COSTUME_NAME = player:getCostume() or "N/A"
 
+local POWERUP_SMALL = "Small"
+local POWERUP_BIG = "Big"
+local POWERUP_FIRE = "Fire Flower"
+local POWERUP_LEAF = "Super Leaf"
+local POWERUP_TANOOKI = "Tanooki Suit"
+local POWERUP_HAMMER = "Hammer Suit"
+local POWERUP_ICE = "Ice Flower"
+
 local LETTERBOXYES = true
 local LETTERBOXNO = false
 
 resolutions = SaveData.resolution
 letterboxes = SaveData.letterbox
 costumenaming = player:getCostume()
+powerupstate = player.powerup
 
 local screenModes = {
 	[RESOLUTION_FULL] = {resolutions = "fullscreen"},
@@ -69,6 +79,16 @@ local screenModes = {
 	[RESOLUTION_GBA] = {resolutions = "gba"},
 	[RESOLUTION_IPHONEONE] = {resolutions = "iphone1st"},
 	[RESOLUTION_THREEDS] = {resolutions = "3ds"},
+}
+
+local powerupStates = {
+	[POWERUP_SMALL] = {powerupstate = 1},
+    [POWERUP_BIG] = {powerupstate = 2},
+    [POWERUP_FIRE] = {powerupstate = 3},
+    [POWERUP_LEAF] = {powerupstate = 4},
+    [POWERUP_TANOOKI] = {powerupstate = 5},
+    [POWERUP_HAMMER] = {powerupstate = 6},
+    [POWERUP_ICE] = {powerupstate = 7},
 }
 
 local letterboxModes = {
@@ -128,6 +148,30 @@ local function changeresolution()
 	elseif screenModes == RESOLUTION_THREEDS then
 		SaveData.resolution = "3ds"
 	end
+end
+
+local sectionNumberArea
+
+local function debugpowerup()
+	playSound("console/console_info.ogg")
+	powerupStates = pauseplus.getSelectionValue("editormenu","Choose Powerup")
+    for k,p in ipairs(Player.get()) do
+        if powerupStates == POWERUP_SMALL then
+            p.powerup = 1
+        elseif powerupStates == POWERUP_BIG then
+            p.powerup = 2
+        elseif powerupStates == POWERUP_FIRE then
+            p.powerup = 3
+        elseif powerupStates == POWERUP_LEAF then
+            p.powerup = 4
+        elseif powerupStates == POWERUP_TANOOKI then
+            p.powerup = 5
+        elseif powerupStates == POWERUP_HAMMER then
+            p.powerup = 6
+        elseif powerupStates == POWERUP_ICE then
+            p.powerup = 7
+        end
+    end
 end
 
 local function changeletterbox()
@@ -568,6 +612,16 @@ function pausemenu2.onDraw()
 		end
 	end
 	SFX.volume.MASTER = sfxVolume
+    sectionNumberArea = pauseplus.getSelectionValue("editormenu","Select Area")
+    if sectionNumberArea == 0 then
+        GameData.editorAreaStartingPoint = 0
+    else
+        for i = 1,99 do
+            if sectionNumberArea == i then
+                GameData.editorAreaStartingPoint = i
+            end
+        end
+    end
 	if exitFadeActive then
 		Audio.MusicVolume(0)
 		Misc.pause(true)
@@ -1175,7 +1229,9 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			--Editor Menu
 			if Misc.inEditor() then
 				pauseplus.createSubmenu("editormenuhud",{headerText = "<size 1.5>Editor Menu (Hud Options)</size>"})
-				pauseplus.createOption("editormenu",{text = "Instantly Restart Level",description = "Instantly restart the level, at the last located starting/checkpoint area.",pauseplus.save,closeMenu = true, actions = {function() Level.load(Level.filename()) end}})
+				pauseplus.createOption("editormenu",{text = "Instantly Restart Level",description = "Instantly restart the level, at the selected area on this menu.",pauseplus.save,closeMenu = true, actions = {function() Level.load(Level.filename(), nil, GameData.editorAreaStartingPoint) end}})
+                pauseplus.createOption("editormenu",{text = "Choose Powerup",selectionType = pauseplus.SELECTION_NAMES,description = "Choose the powerup of every player. This will affect all players.",selectionNames = {POWERUP_SMALL, POWERUP_BIG, POWERUP_FIRE, POWERUP_LEAF, POWERUP_TANOOKI, POWERUP_HAMMER, POWERUP_ICE}, action = function() debugpowerup() end})
+                pauseplus.createOption("editormenu",{text = "Select Area",description = "Select the area you want to load. This will be affected by the next restart.",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 0,selectionMin = 0,selectionMax = 99,selectionStep = 1,selectionFormat = "%d%%"})
 				pauseplus.createOption("editormenu",{text = "Hud Options",goToSubmenu = "editormenuhud",description = "Options specific for the Hud."})
 				
 				--Editor Menu (Hud Options)

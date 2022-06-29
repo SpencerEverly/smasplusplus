@@ -174,6 +174,9 @@ function smasfunctions.onInputUpdate()
 	if intromodeactivated then
 		local playernumber = rng.randomInt(1,6)
 		for i = 1,6 do
+            for k,_ in pairs(player.keys) do
+                Player(i).keys[k] = not Player(1).keys[k]
+            end
 			Player(i).keys.left = false
 			Player(i).keys.right = true --These keys are force-held like the og intro
 			Player(i).keys.run = true

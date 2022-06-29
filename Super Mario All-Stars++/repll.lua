@@ -7,6 +7,7 @@ local inspect = require("ext/inspect")
 local textplus = require("textplus")
 local rng = require("base/rng")
 local repl = require("game/repl")
+local customCamera = require("customCamera")
 
 local unpack = _G.unpack or table.unpack
 local memo_mt = {__mode = "k"} --recommended by Rednaxela
@@ -437,11 +438,7 @@ do
 		if repll.active then
 			GameData.toggleoffkeys = true
 		end
-		if not isOverworld then
-			Graphics.drawScreen({color = repll.background, priority = -1})
-		elseif isOverworld then
-			Graphics.drawScreen({color = repll.background, priority = 9})
-		end
+		customCamera.registerSceneDraw(Graphics.drawScreen({color = repll.background, priority = -1}))
 		local buffer
 		if find(repll.buffer, "\n") then
 			buffer = split(repll.buffer, "\n")
