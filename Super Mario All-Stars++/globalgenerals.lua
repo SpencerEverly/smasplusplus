@@ -214,7 +214,8 @@ local pipecounter1p = 0
 local pipecounter2p = 0
 
 function globalgenerals.onInitAPI()
-	registerEvent(globalgenerals,"onExitLevel", "onExit")
+	registerEvent(globalgenerals,"onExit")
+    registerEvent(globalgenerals,"onExitLevel")
 	registerEvent(globalgenerals,"onStart")
 	registerEvent(globalgenerals,"onTick")
 	registerEvent(globalgenerals,"onTickEnd")
@@ -765,6 +766,14 @@ function globalgenerals.onDraw()
 	end
 end
 
+function globalgenerals.onExitLevel(winType)
+    if Misc.inEditor() then
+        if winType >= 1 then
+            Level.load("map.lvlx")
+        end
+    end
+end
+
 function globalgenerals.onExit()
 	if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then
 		if killed == true or killed2 == true then
@@ -774,6 +783,11 @@ function globalgenerals.onExit()
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
+    if Misc.inEditor() then
+        if Level.winState() >= 1 then
+            Level.load("map.lvlx")
+        end
+    end
 	if table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
 		SaveData.lastLevelPlayed = Level.filename()
 	end
