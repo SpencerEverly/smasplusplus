@@ -700,9 +700,9 @@ do
             local name = hudElementsToMove[i]
             local direction = hudElementsToMove[i+1]
 
-            originalHUDOffsets[(i*0.5)+0.5] = {name,HUDOverride.offsets[name].y}
+            originalHUDOffsets[(i*0.5)+0.5] = {name,smashud.offsets[name].y}
 
-            HUDOverride.offsets[name].y = HUDOverride.offsets[name].y + (steve.hudSettings.moveHUDElementsDistance*direction)
+            smashud.offsets[name].y = smashud.offsets[name].y + (steve.hudSettings.moveHUDElementsDistance*direction)
         end
     end
     function cleanupHUD()
@@ -710,7 +710,7 @@ do
             local name = data[1]
             local offset = data[2]
 
-            HUDOverride.offsets[name].y = offset
+            smashud.offsets[name].y = offset
         end
 
         originalHUDOffsets = {}

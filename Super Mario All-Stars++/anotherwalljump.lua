@@ -87,6 +87,12 @@ function aw.registerAllPlayersDefault()
     aw.registerCharacter(CHARACTER_BOWSER, aw.createFrameTable(-4, -6, -6, -6, -6, -6, -6), {allowSpinjump = false})
     aw.registerCharacter(CHARACTER_KLONOA, aw.createFrameTable(-6, -6, -6, -6, -6, -6, -6), {canDoubleJump = false})
     aw.registerCharacter(CHARACTER_NINJABOMBERMAN, aw.createFrameTable(-6, -6, -6, -6, -6, -6, -6), {allowSpinjump = false, preventLastDirection = true})
+    aw.registerCharacter(CHARACTER_ROSALINA, aw.createFrameTable(-6, -6, -6, -6, -6, -6, -6), {canDoubleJump = false})
+    aw.registerCharacter(CHARACTER_SNAKE, aw.createFrameTable(-5, -5, -5, -5, -5, -5, -5), {allowSpinjump = false}) -- Looks kinda rad.
+    aw.registerCharacter(CHARACTER_ZELDA, aw.createFrameTable(-6, -6, -6, -6, -6, -6, -6), {canDoubleJump = false})
+    aw.registerCharacter(CHARACTER_ULTIMATERINKA, aw.createFrameTable(-6, -6, -6, -6, -6, -6, -6), {canDoubleJump = false})
+    aw.registerCharacter(CHARACTER_UNCLEBROADSWORD, aw.createFrameTable(-6, -6, -6, -6, -6, -6, -6), {canDoubleJump = false})
+    aw.registerCharacter(CHARACTER_SAMUS, aw.createFrameTable(-3, -3, -3, -3, -3, -3, -3), {canDoubleJump = false})
 end
 
 local atWall = {0, 0}
