@@ -68,18 +68,8 @@ if Misc.inMarioChallenge() then
 end
 
 --This will add multiple player arguments for a future feature (Online). Coming in the near end of development, is when it's planned.
-_G.Player = Player
-_G.player = Player(1)
-if (_G.player2 ~= nil) or (_G.player3 ~= nil) or (_G.player4 ~= nil) or (_G.player5 ~= nil) or (_G.player6 ~= nil) or (_G.player7 ~= nil) or (_G.player8 ~= nil) or (_G.player9 ~= nil) or (_G.player10 ~= nil) or (Player.count() > 1) then
-	_G.player2 = Player(2)
-	_G.player3 = Player(3)
-	_G.player4 = Player(4)
-	_G.player5 = Player(5)
-	_G.player6 = Player(6)
-	_G.player7 = Player(7)
-	_G.player8 = Player(8)
-	_G.player9 = Player(9)
-	_G.player10 = Player(10)
+for _,p in ipairs(Player.get()) do
+    _G["player".. p.idx] = p
 end
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
