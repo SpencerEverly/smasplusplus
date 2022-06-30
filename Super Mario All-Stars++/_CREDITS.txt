@@ -166,6 +166,8 @@ Code for certain parts made by:
 - MegaDood
 - Murphmario
 - Master of Disaster
+- IAmPlayer
+- MegoZ_
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 

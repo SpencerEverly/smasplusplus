@@ -524,7 +524,7 @@ function globalgenerals.onPostNPCKill(npc, harmType)
 end
 
 function globalgenerals.onDraw()
-    if Misc.inEditor() and not inputconfigurator.keyConfigOpen then
+    if Misc.inEditor() then
         for k,p in ipairs(Player.get()) do
             p.keys.pause = false
         end
@@ -769,7 +769,11 @@ end
 function globalgenerals.onExitLevel(winType)
     if not Misc.inMarioChallenge() then
         if winType >= 1 then
-            Level.load("map.lvlx")
+            if not Misc.inEditor() then
+                Level.load("map.lvlx")
+            elseif Misc.inEditor() then
+                Level.load(SaveData.editorWinnerLevelReload)
+            end
         end
     end
 end

@@ -174,6 +174,27 @@ local function debugpowerup()
     end
 end
 
+local reloadChooser
+
+if SaveData.editorWinnerLevelReload == nil then
+    SaveData.editorWinnerLevelReload = "map.lvlx"
+end
+
+local function editorreloadchooser()
+	playSound("console/console_info.ogg")
+    reloadChooser = pauseplus.getSelectionValue("editormenu","Reload on Level Win Exit to")
+    if reloadChooser == "World Map" then
+        GameData.reloadLevelFilename = false
+        SaveData.editorWinnerLevelReload = "map.lvlx"
+    elseif reloadChooser == "Restart Level" then
+        GameData.reloadLevelFilename = true
+        SaveData.editorWinnerLevelReload = Level.filename()
+    elseif reloadChooser == "Boot Menu" then
+        GameData.reloadLevelFilename = false
+        SaveData.editorWinnerLevelReload = "SMAS - Start.lvlx"
+    end
+end
+
 local function changeletterbox()
 	if pauseplus.getSelectionValue("settings","Enable Letterbox Scaling") then
 		playSound("letterbox-disable.ogg")
@@ -621,6 +642,9 @@ function pausemenu2.onDraw()
                 GameData.editorAreaStartingPoint = i
             end
         end
+    end
+    if GameData.reloadLevelFilename then
+        SaveData.editorWinnerLevelReload = Level.filename()
     end
 	if exitFadeActive then
 		Audio.MusicVolume(0)
@@ -1230,6 +1254,7 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			if Misc.inEditor() then
 				pauseplus.createSubmenu("editormenuhud",{headerText = "<size 1.5>Editor Menu (Hud Options)</size>"})
 				pauseplus.createOption("editormenu",{text = "Instantly Restart Level",description = "Instantly restart the level, at the selected area on this menu.",pauseplus.save,closeMenu = true, actions = {function() Level.load(Level.filename(), nil, GameData.editorAreaStartingPoint) end}})
+                pauseplus.createOption("editormenu",{text = "Reload on Level Win Exit to",selectionType = pauseplus.SELECTION_NAMES,description = "Whenever winning the level, reload to this specific area.",selectionNames = {"World Map","Restart Level","Boot Menu"}, action = function() editorreloadchooser() end})
                 pauseplus.createOption("editormenu",{text = "Choose Powerup",selectionType = pauseplus.SELECTION_NAMES,description = "Choose the powerup of every player. This will affect all players.",selectionNames = {POWERUP_SMALL, POWERUP_BIG, POWERUP_FIRE, POWERUP_LEAF, POWERUP_TANOOKI, POWERUP_HAMMER, POWERUP_ICE}, action = function() debugpowerup() end})
                 pauseplus.createOption("editormenu",{text = "Select Area",description = "Select the area you want to load. This will be affected by the next restart.",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 0,selectionMin = 0,selectionMax = 99,selectionStep = 1,selectionFormat = "%d%%"})
 				pauseplus.createOption("editormenu",{text = "Hud Options",goToSubmenu = "editormenuhud",description = "Options specific for the Hud."})
