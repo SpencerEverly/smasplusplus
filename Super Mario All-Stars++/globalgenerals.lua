@@ -16,6 +16,7 @@ local inventory = require("customInventory")
 local smasacecoins = require("smasacecoins")
 local smascharacterinfo = require("smascharacterinfo")
 local inputconfigurator = require("inputconfig")
+local twirl = require("Twirl")
 
 if GameData.rushModeActive == true then
 	level_dependencies_rushmode = require("level_dependencies_rushmode")

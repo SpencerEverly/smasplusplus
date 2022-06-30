@@ -256,6 +256,7 @@ extrasounds.id[150] = Audio.SfxOpen(Misc.resolveSoundFile("0up.ogg")) --0up (Sup
 extrasounds.id[151] = Audio.SfxOpen(Misc.resolveSoundFile("correct.ogg")) --Correct (SMAS)
 extrasounds.id[152] = Audio.SfxOpen(Misc.resolveSoundFile("wrong.ogg")) --Wrong (SMAS)
 extrasounds.id[153] = Audio.SfxOpen(Misc.resolveSoundFile("castle-destroy.ogg")) --Destroy Castle (SMW)
+extrasounds.id[154] = Audio.SfxOpen(Misc.resolveSoundFile("twirl.ogg")) --Twirl (Custom)
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
 extrasounds.id[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
