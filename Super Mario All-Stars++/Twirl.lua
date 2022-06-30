@@ -198,7 +198,7 @@ function twirl.onTick()
 			v:mem(0x04, FIELD_WORD, 1)
 			if onPressTimer[k] == 1 then
 				twirlAnim:play(v) --animation
-				Audio.playSFX(twirlSfx) --sound
+				SFX.play(twirlSfx) --sound
 				if v.speedY > 0 then
 					v.speedY = twirl.descent
 				end
