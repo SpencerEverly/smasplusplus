@@ -13,8 +13,13 @@ local inputconfigurator = require("inputconfig")
 local keyboard = require("keyboard")
 local hearthover = require("hearthover") --Require hearthover to disable it
 local sprite = require("base/sprite")
+local twirl = require("Twirl")
+local aw = require("anotherwalljump")
+aw.enabled = false
+
 local backgroundTarget = Graphics.CaptureBuffer(800,600)
 local sec = Section(0)
+
 
 littleDialogue.cursorEnabled = true
 
