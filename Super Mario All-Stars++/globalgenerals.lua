@@ -794,7 +794,7 @@ function globalgenerals.onExit()
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
     if Misc.inEditor() then
-        if Level.winState() >= 1 then
+        if Level.winState() >= 1 and GameData.rushModeActive == false or GameData.rushModeActive == nil then
             Level.load("map.lvlx")
         end
     end
