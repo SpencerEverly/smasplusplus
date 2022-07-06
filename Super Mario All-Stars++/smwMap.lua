@@ -4344,7 +4344,7 @@ do
                 Audio.MusicPause()
             end
         else
-            Audio.MusicVolume(64)
+            Audio.MusicVolume(GameData.____currentMusicVolume)
         end
     end
 end

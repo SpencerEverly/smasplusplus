@@ -1,5 +1,5 @@
 local costume = {}
-local klonoa = API.load("characters/klonoa");
+local klonoa = API.load("klonoaa");
 
 function costume.onInit()
 	registerEvent(costume, "onDraw");

@@ -623,6 +623,7 @@ function pausemenu2.onDraw()
 	elseif GameData.____muteMusic == false or GameData.____muteMusic == nil then
 		Audio.MusicVolume(pauseplus.getSelectionValue("settings","Music Volume"))
 	end
+    GameData.____currentMusicVolume = pauseplus.getSelectionValue("settings","Music Volume")
 	sfxVolume = pauseplus.getSelectionValue("settings","SFX Volume")
 	for i = 1, 91 do
 		Audio.sounds[i].sfx.volume = math.floor(sfxVolume * 128 + 0.5)

@@ -1,5 +1,5 @@
 local costume = {}
-local klonoa = API.load("characters/klonoa");
+local klonoa = API.load("klonoaa");
 local colliders = require("colliders")
 local playerManager = require("playerManager");
 local extrasounds = require("extrasounds")

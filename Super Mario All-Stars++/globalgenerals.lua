@@ -793,11 +793,6 @@ function globalgenerals.onExit()
 	if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
 		Level.load("SMAS - Credits.lvlx", nil, nil)
 	end
-    if Misc.inEditor() then
-        if Level.winState() >= 1 and GameData.rushModeActive == false or GameData.rushModeActive == nil then
-            Level.load("map.lvlx")
-        end
-    end
 	if table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
 		SaveData.lastLevelPlayed = Level.filename()
 	end
