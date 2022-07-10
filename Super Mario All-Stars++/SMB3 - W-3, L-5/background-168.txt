@@ -1,4 +1,4 @@
 frames = 8
 framespeed = 7
 noshadows = false
-priority = 5
+priority = -5
