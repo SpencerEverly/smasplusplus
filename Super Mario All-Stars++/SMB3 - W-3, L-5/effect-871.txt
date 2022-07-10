@@ -1,0 +1,4 @@
+[1]
+import=AI_ARC
+framestyle=1
+frames=2

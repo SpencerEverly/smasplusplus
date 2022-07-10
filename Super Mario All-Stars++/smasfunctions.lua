@@ -256,7 +256,7 @@ end
 
 --drawImg(ImageName, x coordinate, y coordinate, true/false if it's with the priority, true/false if using scene coordinates, priority, opacity)
 function drawImg(name, x, y, withPriority, sceneCoords, arg6, arg7) --Drawing graphics got a lot better.
-	local fileImage = Misc.resolveGraphicsFile(name)
+	local fileImage = Graphics.loadImageResolved(name)
 	if fileImage == nil then
 		fileImage = Graphics.loadImageResolved("noimage.png")
 	end

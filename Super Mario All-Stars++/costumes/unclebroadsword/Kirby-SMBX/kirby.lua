@@ -13,13 +13,9 @@ local rng = require("rng")
 local pm = require("playerManager")
 local blockutils = require("blocks/blockutils")
 
-local unclebroadsword = {}
+local kirby = {}
 
-local currentCostume = player:getCostume()
-
-if currentCostume then return end
-
-unclebroadsword.debugMode = false
+kirby.debugMode = false
 
 local inputBlockingForcedStates = table.map{
 	FORCEDSTATE_POWERUP_BIG,
@@ -38,7 +34,7 @@ local inputBlockingForcedStates = table.map{
 	FORCEDSTATE_POWERDOWN_FIRE,
 	FORCEDSTATE_POWERDOWN_ICE,
 	FORCEDSTATE_MEGASHROOM,
-	FORCEDSTATE_TANOOKI_POOF,
+	
 }
 
 
@@ -52,9 +48,9 @@ local sfx = {
 }
 local deathFX_left	= pm.registerGraphic(CHARACTER_UNCLEBROADSWORD, "dead_left.png")
 local deathFX_right = pm.registerGraphic(CHARACTER_UNCLEBROADSWORD, "dead_right.png")
-local afterimage	= pm.registerGraphic(CHARACTER_UNCLEBROADSWORD, "afterimage.png")
-local statue_img	= pm.registerGraphic(CHARACTER_UNCLEBROADSWORD, "statue_img.png")
-local itembox		= pm.registerGraphic(CHARACTER_UNCLEBROADSWORD, "itembox.png")
+local afterimage	= Graphics.loadImage(Misc.resolveFile("costumes/unclebroadsword/Kirby-SMBX/afterimage.png"))
+local statue_img	= Graphics.loadImage(Misc.resolveFile("costumes/unclebroadsword/Kirby-SMBX/statue_img.png"))
+local itembox		= Graphics.loadImage(Misc.resolveFile("costumes/unclebroadsword/Kirby-SMBX/itembox.png"))
 local afterimagepos = {}			-- Positions for stall-and-fall afterimages	
 local charge_sfxobj	= nil			-- SFX channel for charging sound effect
 
@@ -65,7 +61,7 @@ Graphics.registerCharacterHUD(CHARACTER_UNCLEBROADSWORD, Graphics.HUD_ITEMBOX, n
 	})
 
 -- Attack logic ------------------------------------------------------------------------------
-unclebroadsword.swordCollider = nil	-- Sword hitbox
+kirby.swordCollider = nil	-- Sword hitbox
 
 local ATKSTATE = {					-- Possible sword swipe states
 	COOLDOWN = -6,					-- Recovery period, cannot swing sword
@@ -84,7 +80,7 @@ local ATKSTATE = {					-- Possible sword swipe states
 	STATUEFALL = 7					-- Falling as statue
 }
 
-unclebroadsword.attackState = ATKSTATE.NONE	        -- Current attack state
+kirby.attackState = ATKSTATE.NONE	        -- Current attack state
 local queue_state = ATKSTATE.NONE	                -- Next attack state to assign if already in the middle of one
 local attack_timer = 0				                -- Timer for managing attack state
 local can_aerial = true				                -- Can an aerial swipe be performed?
@@ -249,53 +245,50 @@ local function RemoveInputBuffer()
 	end
 end
 
-function unclebroadsword.getAttackState()
-	return unclebroadsword.attackState
+function kirby.getAttackState()
+	return kirby.attackState
 end
 
 local function SetCooldown() ---------------------------------------------------------------------- Sets cooldown state
-	unclebroadsword.attackState = ATKSTATE.COOLDOWN
+	kirby.attackState = ATKSTATE.COOLDOWN
 	attack_timer = DURATION[ATKSTATE.COOLDOWN]
 end
-function unclebroadsword.onKeyDown(keycode, playerIndex)
+function kirby.onKeyDown(keycode, playerIndex)
 	if player.character == CHARACTER_UNCLEBROADSWORD and not is_hurt and not inforcedanim() then
 		-- If pressing the attack key
 		if keycode == KEY_X and not (is_hurt or statued()) then
 			-- Prevent attacking when submerged, sliding, climbing, spinjumping, mounted, holding, or picking up something
-			if inforcedanim() or submerged() or sliding() or climbing() or spinjumping() or mounted() or holding() or pickingup() then return end
+			if inforcedanim() or submerged() or sliding() or climbing() or spinjumping() or mounted() or holding() or pickingup() or (player.powerup == PLAYER_ICE) or (player.powerup == 3) or (player.powerup == PLAYER_HAMMER) or (player.powerup == PLAYER_TANOOKIE) then return end
 			-- Prevent attacking in air if you already have
 			if airborne() and not can_aerial then return end
 			-- Alter attack combo state
-			if		unclebroadsword.attackState == ATKSTATE.NONE	then
-				unclebroadsword.attackState = ATKSTATE.SWIPE1				-- Swipe upward
+			if		kirby.attackState == ATKSTATE.NONE	then
+				kirby.attackState = ATKSTATE.SWIPE1				-- Swipe upward
 				attack_timer = DURATION[ATKSTATE.SWIPE1]*3
 				Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.swipe)), 0)
-			elseif	unclebroadsword.attackState == ATKSTATE.SWIPE1 and attack_timer <= DURATION[ATKSTATE.SWIPE1]*3/2 then
+			elseif	kirby.attackState == ATKSTATE.SWIPE1 and attack_timer <= DURATION[ATKSTATE.SWIPE1]*3/2 then
 				queue_state = ATKSTATE.SWIPE2				-- Queue up second swipe if during first swipe
-			elseif	unclebroadsword.attackState == ATKSTATE.PAUSE1	then
-				unclebroadsword.attackState = ATKSTATE.SWIPE2				-- Swipe downward
+			elseif	kirby.attackState == ATKSTATE.PAUSE1	then
+				kirby.attackState = ATKSTATE.SWIPE2				-- Swipe downward
 				attack_timer = DURATION[ATKSTATE.SWIPE2]*3
 				Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.swipe)), 0)
-			elseif	unclebroadsword.attackState == ATKSTATE.SWIPE2 and attack_timer <= DURATION[ATKSTATE.SWIPE2]*3/2 and not ducking() and player.powerup > PLAYER_SMALL then
+			elseif	kirby.attackState == ATKSTATE.SWIPE2 and attack_timer <= DURATION[ATKSTATE.SWIPE2]*3/2 and not ducking() and player.powerup > PLAYER_SMALL then
 				queue_state = ATKSTATE.LUNGE_COMBO			-- Queue up combo lunge if during second swipe
-			elseif	unclebroadsword.attackState == ATKSTATE.PAUSE2 and not ducking() and player.powerup > PLAYER_SMALL then
-				unclebroadsword.attackState = ATKSTATE.LUNGE_COMBO			-- Combo lunge forward
+			elseif	kirby.attackState == ATKSTATE.PAUSE2 and not ducking() and player.powerup > PLAYER_BIG then
+				kirby.attackState = ATKSTATE.LUNGE_COMBO			-- Combo lunge forward
 				attack_timer = DURATION[ATKSTATE.LUNGE_COMBO] + LUNGELAG_COMBO
 				Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.lunge)), 0)
 			end
 		-- Stall-and-fall
 		elseif keycode == KEY_DOWN and player.powerup > PLAYER_SMALL and airborne() and can_stallnfall then
-			unclebroadsword.attackState = ATKSTATE.STALLANDFALL
+			kirby.attackState = ATKSTATE.STALLANDFALL
 			can_stallnfall = false
 		-- Cancel charge when moving
-		elseif (keycode == KEY_LEFT or keycode == KEY_RIGHT) and (unclebroadsword.attackState == ATKSTATE.CHARGING or unclebroadsword.attackState == ATKSTATE.CHARGED) then
+		elseif (keycode == KEY_LEFT or keycode == KEY_RIGHT) and (kirby.attackState == ATKSTATE.CHARGING or kirby.attackState == ATKSTATE.CHARGED) then
 			SetCooldown()
-		-- Falling statue
-		elseif player.powerup == PLAYER_TANOOKIE and keycode == KEY_RUN and not grounded() and not mounted() then
-			unclebroadsword.attackState = ATKSTATE.STATUEFALL
-			can_stallnfall = false
+		
 		-- Double jump
-		elseif (player.powerup == PLAYER_LEAF or player.powerup == PLAYER_TANOOKIE) and (keycode == KEY_JUMP or keycode == KEY_SPINJUMP) and doublejump_ready and player:mem(0x60, FIELD_WORD) == -1 then
+		elseif (player.powerup == PLAYER_LEAF) and (keycode == KEY_JUMP or keycode == KEY_SPINJUMP) and doublejump_ready and player:mem(0x60, FIELD_WORD) == -1 then
 			colliders.bounceResponse(player, nil, false)
 			doublejump_ready = false
 			if keycode == KEY_JUMP then
@@ -315,23 +308,21 @@ function unclebroadsword.onKeyDown(keycode, playerIndex)
 		end
 	end
 end
-function unclebroadsword.onInputUpdate()
+function kirby.onInputUpdate()
 	if player.character == CHARACTER_UNCLEBROADSWORD then
 		pm.winStateCheck()
 	
 		-- Block movement if attacking or hurt
-		if is_hurt or (unclebroadsword.attackState >= ATKSTATE.STALLED
-		and	unclebroadsword.attackState <= ATKSTATE.LUNGE_CHARGE
-		and	unclebroadsword.attackState ~= ATKSTATE.NONE)
-		or unclebroadsword.attackState == ATKSTATE.STALLANDFALL or inputBlockingForcedStates[player.forcedState] then 
+		if is_hurt or (kirby.attackState >= ATKSTATE.STALLED
+		and	kirby.attackState <= ATKSTATE.LUNGE_CHARGE
+		and	kirby.attackState ~= ATKSTATE.NONE)
+		or kirby.attackState == ATKSTATE.STALLANDFALL or inputBlockingForcedStates[player.forcedState] then 
 			BlockMovement()
 		else
 			RemoveInputBuffer()
 		end
-		if unclebroadsword.attackState == ATKSTATE.STALLED then player.downKeyPressing = true end
+		if kirby.attackState == ATKSTATE.STALLED then player.downKeyPressing = true end
 		
-		-- Prevent fire/ice projectiles from firing
-		if player.powerup > PLAYER_BIG then player:mem(0x160, FIELD_WORD,1) end
 		
 		-- Disable tail swipe/flying
 		if player.powerup == PLAYER_LEAF or player.powerup == PLAYER_TANOOKIE then
@@ -345,7 +336,7 @@ function unclebroadsword.onInputUpdate()
 		player:mem(0x174, FIELD_WORD, 0)
 		
 		-- Force statue form
-		if unclebroadsword.attackState == ATKSTATE.STATUEFALL then player.altRunKeyPressing = true end
+		if kirby.attackState == ATKSTATE.STATUEFALL then player.altRunKeyPressing = true end
 		
 		-- Prevent movement while ducking
 		if player.powerup == PLAYER_SMALL then
@@ -354,11 +345,11 @@ function unclebroadsword.onInputUpdate()
 				player.rightKeyPressing = false
 				-- Alter hitbox
 				player.character = CHARACTER_MARIO
-				player:getCurrentPlayerSetting().hitboxHeight = 44
+				player:getCurrentPlayerSetting().hitboxHeight = 32
 				player.character = CHARACTER_UNCLEBROADSWORD
 			else
 				player.character = CHARACTER_MARIO
-				player:getCurrentPlayerSetting().hitboxHeight = 54
+				player:getCurrentPlayerSetting().hitboxHeight = 32
 				player.character = CHARACTER_UNCLEBROADSWORD
 			end
 		end
@@ -382,7 +373,7 @@ local function CheckHurtState() ------------------------------------------------
 			player:mem(0x40, FIELD_WORD, 0)
 			-- Set knockback
 			if knockback then
-				unclebroadsword.attackState = ATKSTATE.NONE
+				kirby.attackState = ATKSTATE.NONE
 				attack_timer = 0
 				player.speedX = -player:mem(0x106, FIELD_WORD)*3
 				player.speedY = -7
@@ -410,53 +401,53 @@ local function UpdateAttackState() ---------------------------------------------
 	-- Should the state be changed?
 	if attack_timer <= 0 then
 		-- Pause after swiping
-		if		unclebroadsword.attackState == ATKSTATE.SWIPE1	then
+		if		kirby.attackState == ATKSTATE.SWIPE1	then
 			-- Check if the next attack has been queued
 			if queue_state == ATKSTATE.SWIPE2 then
-				unclebroadsword.attackState = ATKSTATE.SWIPE2				-- Swipe downward
+				kirby.attackState = ATKSTATE.SWIPE2				-- Swipe downward
 				attack_timer = DURATION[ATKSTATE.SWIPE2]*3 - 1
 				Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.swipe)), 0)
 				queue_state = ATKSTATE.NONE
 			else
-				unclebroadsword.attackState = ATKSTATE.PAUSE1
+				kirby.attackState = ATKSTATE.PAUSE1
 				attack_timer = DURATION[ATKSTATE.PAUSE1]
 			end
-		elseif	unclebroadsword.attackState == ATKSTATE.SWIPE2	then
+		elseif	kirby.attackState == ATKSTATE.SWIPE2	then
 			-- Check if the next attack has been queued
 			if queue_state == ATKSTATE.LUNGE_COMBO then
-				unclebroadsword.attackState = ATKSTATE.LUNGE_COMBO			-- Combo lunge forward
+				kirby.attackState = ATKSTATE.LUNGE_COMBO			-- Combo lunge forward
 				attack_timer = DURATION[ATKSTATE.LUNGE_COMBO] - 1 + LUNGELAG_COMBO
 				Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.lunge)), 0)
 				queue_state = ATKSTATE.NONE
 			else
-				unclebroadsword.attackState = ATKSTATE.PAUSE2
+				kirby.attackState = ATKSTATE.PAUSE2
 				attack_timer = DURATION[ATKSTATE.PAUSE2]
 			end
 			
 		-- Cooldown after pausing
-		elseif	unclebroadsword.attackState == ATKSTATE.PAUSE1
-			or  unclebroadsword.attackState == ATKSTATE.PAUSE2
-			or  unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO
-			or  unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE
-			or 	unclebroadsword.attackState == ATKSTATE.STALLED then
-			unclebroadsword.attackState = ATKSTATE.COOLDOWN
+		elseif	kirby.attackState == ATKSTATE.PAUSE1
+			or  kirby.attackState == ATKSTATE.PAUSE2
+			or  kirby.attackState == ATKSTATE.LUNGE_COMBO
+			or  kirby.attackState == ATKSTATE.LUNGE_CHARGE
+			or 	kirby.attackState == ATKSTATE.STALLED then
+			kirby.attackState = ATKSTATE.COOLDOWN
 			-- Skip cooldown if ducking
 			if not ducking() then attack_timer = DURATION[ATKSTATE.COOLDOWN] end
 			-- Prevent further aerials
 			can_aerial = false
-		elseif	unclebroadsword.attackState == ATKSTATE.COOLDOWN then
-			unclebroadsword.attackState = ATKSTATE.NONE
+		elseif	kirby.attackState == ATKSTATE.COOLDOWN then
+			kirby.attackState = ATKSTATE.NONE
 		end
 		
 		-- Check if charging
-		if player.powerup > PLAYER_SMALL and standing() then
+		if player.powerup == PLAYER_BIG and standing() then
 			-- Holding charge button and don't move
 			if player.runKeyPressing then
-				if unclebroadsword.attackState == ATKSTATE.COOLDOWN then unclebroadsword.attackState = ATKSTATE.CHARGING
-				elseif unclebroadsword.attackState == ATKSTATE.CHARGING then
+				if kirby.attackState == ATKSTATE.COOLDOWN then kirby.attackState = ATKSTATE.CHARGING
+				elseif kirby.attackState == ATKSTATE.CHARGING then
 					charge_timer = charge_timer + 1
 					if charge_timer >= DURATION[ATKSTATE.CHARGING] then
-						unclebroadsword.attackState = ATKSTATE.CHARGED
+						kirby.attackState = ATKSTATE.CHARGED
 						Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.knife)), 0)
 					elseif charge_timer == DURATION[ATKSTATE.CHARGING] - CHARGING_SOUND_DURATION then
 						charge_sfxobj = Audio.SfxPlayObj(Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.charging)), 0)
@@ -465,12 +456,12 @@ local function UpdateAttackState() ---------------------------------------------
 			else
 				-- Lunge forward
 				if charge_timer >= DURATION[ATKSTATE.CHARGING] - CHARGING_SOUND_DURATION then
-					unclebroadsword.attackState = ATKSTATE.LUNGE_CHARGE
+					kirby.attackState = ATKSTATE.LUNGE_CHARGE
 					attack_timer = DURATION[ATKSTATE.LUNGE_CHARGE] + LUNGELAG_CHARGE
 					Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.lunge)), 0)
 					charge_fraction = charge_timer/DURATION[ATKSTATE.CHARGING]
 				-- Cancel the charge
-				elseif unclebroadsword.attackState == ATKSTATE.CHARGING then SetCooldown() end
+				elseif kirby.attackState == ATKSTATE.CHARGING then SetCooldown() end
 				
 				-- Stop playing the charging sound
 				if charge_sfxobj and charge_sfxobj:IsPlaying() then charge_sfxobj:Stop() end
@@ -478,7 +469,7 @@ local function UpdateAttackState() ---------------------------------------------
 				charge_timer = 0
 			end
 		end
-		if (unclebroadsword.attackState == ATKSTATE.CHARGING or unclebroadsword.attackState == ATKSTATE.CHARGED)
+		if (kirby.attackState == ATKSTATE.CHARGING or kirby.attackState == ATKSTATE.CHARGED)
 		and (not standing() or statued() or player.leftKeyPressing or player.rightKeyPressing) then
 			-- Cancel the charge if not standing on the ground
 			SetCooldown()
@@ -490,9 +481,10 @@ local function UpdateAttackState() ---------------------------------------------
 	
 	-- Check for upward stabbing
 	if airborne() then
-		if unclebroadsword.attackState == ATKSTATE.NONE or unclebroadsword.attackState == ATKSTATE.UPWARDSTAB then
-			if player.upKeyPressing then unclebroadsword.attackState = ATKSTATE.UPWARDSTAB
-			else unclebroadsword.attackState = ATKSTATE.NONE end
+		if kirby.attackState == ATKSTATE.NONE or kirby.attackState == ATKSTATE.UPWARDSTAB then
+			if player.upKeyPressing and player.powerup == PLAYER_LEAF then 
+kirby.attackState = ATKSTATE.UPWARDSTAB
+			else kirby.attackState = ATKSTATE.NONE end
 		end
 	end
 	
@@ -503,9 +495,9 @@ local function UpdateAttackState() ---------------------------------------------
 		can_stallnfall = true
 		doublejump_ready = true
 		
-		if unclebroadsword.attackState == ATKSTATE.UPWARDSTAB then
-			unclebroadsword.attackState = ATKSTATE.NONE
-		elseif unclebroadsword.attackState == ATKSTATE.STALLANDFALL or unclebroadsword.attackState == ATKSTATE.STATUEFALL then
+		if kirby.attackState == ATKSTATE.UPWARDSTAB then
+			kirby.attackState = ATKSTATE.NONE
+		elseif kirby.attackState == ATKSTATE.STALLANDFALL or kirby.attackState == ATKSTATE.STATUEFALL then
 			-- Kick up some dust
 			local smoke = Animation.spawn(10, player.x - 24, player.y + player.height - 16)
 			smoke.speedX = -1
@@ -513,24 +505,24 @@ local function UpdateAttackState() ---------------------------------------------
 			smoke.speedX = 1
 			-- Shake the screen a bit
 			Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.drop)), 0)
-			if unclebroadsword.attackState == ATKSTATE.STATUEFALL then Defines.earthquake = 15
+			if kirby.attackState == ATKSTATE.STATUEFALL then Defines.earthquake = 15
 			else Defines.earthquake = 3 end
 			-- Stall player after hitting ground
-			unclebroadsword.attackState = ATKSTATE.STALLED
+			kirby.attackState = ATKSTATE.STALLED
 			attack_timer = DURATION[ATKSTATE.STALLED]
 		end
 	end
 	
 	-- Reset if downstabbing onto a note block
-	if unclebroadsword.attackState == ATKSTATE.STALLANDFALL and player.speedY < 0 then
+	if kirby.attackState == ATKSTATE.STALLANDFALL and player.speedY < 0 then
 		check = colliders.Box(player.x, player.y + player.height, player.width, UDSTAB_HEIGHT)
-		if colliders.collideBlock(check, 55) then unclebroadsword.attackState = ATKSTATE.NONE end
+		if colliders.collideBlock(check, 55) then kirby.attackState = ATKSTATE.NONE end
 	end
 	
 	
 	-- Cancel state if necessary
 	if submerged() or sliding() or climbing() or (statued() and mounted())--[[or mounted() or holding() or pickingup() or warping()--]] then
-		unclebroadsword.attackState = ATKSTATE.NONE
+		kirby.attackState = ATKSTATE.NONE
 		if(statued() and mounted()) then
 			player:mem(0x4a, FIELD_WORD, 0)
 		end
@@ -542,40 +534,40 @@ end
 local function AttackPhysics() -------------------------------------------------------------------- Set player speed and sword hitbox
 	-- If in air while attacking, don't fall
 	if player.forcedState ~= 0 then return end
-	if aerial_atk_stall or unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE then
+	if aerial_atk_stall or kirby.attackState == ATKSTATE.LUNGE_CHARGE then
 		player.speedY = 0
 		player.y = player.y - Defines.player_grav
 	end
-	if unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE and player:mem(0x48, FIELD_WORD) ~= 0 then player.y = player.y - 1 end
-	if unclebroadsword.attackState < ATKSTATE.PAUSE2 or unclebroadsword.attackState > ATKSTATE.LUNGE_CHARGE or unclebroadsword.attackState == ATKSTATE.NONE then
+	if kirby.attackState == ATKSTATE.LUNGE_CHARGE and player:mem(0x48, FIELD_WORD) ~= 0 then player.y = player.y - 1 end
+	if kirby.attackState < ATKSTATE.PAUSE2 or kirby.attackState > ATKSTATE.LUNGE_CHARGE or kirby.attackState == ATKSTATE.NONE then
 		aerial_atk_stall = false;
 	end
 	
 	-- Boost player forward slightly when swiping in the air
 	if airborne() then
-		if unclebroadsword.attackState == ATKSTATE.SWIPE1 or unclebroadsword.attackState == ATKSTATE.SWIPE2 then
+		if kirby.attackState == ATKSTATE.SWIPE1 or kirby.attackState == ATKSTATE.SWIPE2 then
 			--player.speedX = player:mem(0x106, FIELD_WORD)*1
 			player.speedY = math.min(player.speedY, 1)
-		elseif unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO then
+		elseif kirby.attackState == ATKSTATE.LUNGE_COMBO then
 			aerial_atk_stall = true
 		end
 	end
 	
 	-- Lunging speeds
-	if unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO or unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE then
+	if kirby.attackState == ATKSTATE.LUNGE_COMBO or kirby.attackState == ATKSTATE.LUNGE_CHARGE then
 		-- Maximum time duration
-		local tmax = DURATION[unclebroadsword.attackState]
+		local tmax = DURATION[kirby.attackState]
 		-- Time parameter; Maximum distance traveled
 		local t = 0; local xmax = 0;
 		
 		-- Set parameters
-		if unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO then
+		if kirby.attackState == ATKSTATE.LUNGE_COMBO then
 			t = attack_timer - LUNGELAG_COMBO
 			if(attack_timer > tmax) then
 				player.speedY = 0
 			end
 			xmax = LUNGEDIST_COMBO
-		elseif unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE then
+		elseif kirby.attackState == ATKSTATE.LUNGE_CHARGE then
 			t = attack_timer - LUNGELAG_CHARGE
 			xmax = LUNGEDIST_CHARGE*charge_fraction*charge_fraction
 		end
@@ -595,7 +587,7 @@ local function AttackPhysics() -------------------------------------------------
 	
 	-- Lose momentum when swiping
 	if grounded() then
-		if unclebroadsword.attackState == ATKSTATE.SWIPE1 or unclebroadsword.attackState == ATKSTATE.SWIPE2 then
+		if kirby.attackState == ATKSTATE.SWIPE1 or kirby.attackState == ATKSTATE.SWIPE2 then
 			if math.abs(player.speedX) < 0.02 then player.speedX = 0
 			else player.speedX = player.speedX - player:mem(0x106, FIELD_WORD)*0.02 end
 		end
@@ -603,8 +595,8 @@ local function AttackPhysics() -------------------------------------------------
 	
 	-- Toss boomerang
 	if player.powerup == PLAYER_HAMMER then
-		if (unclebroadsword.attackState == ATKSTATE.SWIPE2 and attack_timer == DURATION[ATKSTATE.SWIPE2]*2) then
-			local n = NPC.spawn(436, unclebroadsword.swordCollider.x + unclebroadsword.swordCollider.width/2, unclebroadsword.swordCollider.y + unclebroadsword.swordCollider.height/2, player.section, false, true)
+		if (kirby.attackState == ATKSTATE.SWIPE2 and attack_timer == DURATION[ATKSTATE.SWIPE2]*2) then
+			local n = NPC.spawn(436, kirby.swordCollider.x + kirby.swordCollider.width/2, kirby.swordCollider.y + kirby.swordCollider.height/2, player.section, false, true)
 			n:mem(0x12E, FIELD_WORD, 1)
 			n:mem(0x13A, FIELD_WORD, player.idx)
 			n.direction = player.direction
@@ -612,20 +604,20 @@ local function AttackPhysics() -------------------------------------------------
 	end
 	
 	-- Stall-and-fall
-	if (unclebroadsword.attackState == ATKSTATE.STALLANDFALL or unclebroadsword.attackState == ATKSTATE.STATUEFALL) and player.speedY > 0 then
+	if (kirby.attackState == ATKSTATE.STALLANDFALL or kirby.attackState == ATKSTATE.STATUEFALL) and  player.powerup > PLAYER_BIG and player.speedY > 0 then
 		-- Set physics
 		Defines.gravity = FALLSPEED
 		player.speedY = player.speedY + 1.5
 		player.speedX = 0
 		player.downKeyPressing = false
-		if unclebroadsword.attackState == ATKSTATE.STATUEFALL then player:mem(0x4a, FIELD_WORD, -1) end
+		if kirby.attackState == ATKSTATE.STATUEFALL then player:mem(0x4a, FIELD_WORD, -1) end
 		
 		-- Remember positions
 		if #afterimagepos < AFTERIMAGE_COUNT then
-			afterimagepos[#afterimagepos + 1] = {x = player.x, y = player.y, state = unclebroadsword.attackState}
+			afterimagepos[#afterimagepos + 1] = {x = player.x, y = player.y, state = kirby.attackState}
 		else
 			for i = 1, #afterimagepos-1 do afterimagepos[i] = afterimagepos[i+1] end
-			afterimagepos[#afterimagepos] = {x = player.x, y = player.y, state = unclebroadsword.attackState}
+			afterimagepos[#afterimagepos] = {x = player.x, y = player.y, state = kirby.attackState}
 		end
 	else
 		Defines.gravity = nil
@@ -633,51 +625,51 @@ local function AttackPhysics() -------------------------------------------------
 	end
 	
 	-- Set sword hitbox
-	if unclebroadsword.attackState > ATKSTATE.NONE then
-		if unclebroadsword.swordCollider == nil then unclebroadsword.swordCollider = colliders.Box(0,0,0,0) end
-		if unclebroadsword.attackState == ATKSTATE.SWIPE1 or unclebroadsword.attackState == ATKSTATE.SWIPE2 then
-			unclebroadsword.swordCollider.x = 		player.x - SWIPE_WIDTH + ( player:mem(0x106, FIELD_WORD) + 1 )*( player.width + SWIPE_WIDTH )/2 + player.speedX
-			unclebroadsword.swordCollider.y = 		player.y + player.height/2 - SWIPE_HEIGHT/2
-			unclebroadsword.swordCollider.width = 	SWIPE_WIDTH
-			unclebroadsword.swordCollider.height = SWIPE_HEIGHT
-		elseif unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO or unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE then
-			unclebroadsword.swordCollider.x = 		player.x - LUNGE_WIDTH + ( player:mem(0x106, FIELD_WORD) + 1 )*( player.width + LUNGE_WIDTH )/2 + player.speedX
-			unclebroadsword.swordCollider.y = 		player.y + player.height/2 - LUNGE_HEIGHT/2 + 6
-			unclebroadsword.swordCollider.width = 	LUNGE_WIDTH
-			unclebroadsword.swordCollider.height = LUNGE_HEIGHT
-		elseif unclebroadsword.attackState == ATKSTATE.UPWARDSTAB then
-			unclebroadsword.swordCollider.x = 		player.x + player.width/2 - UDSTAB_WIDTH/2 + player.speedX
-			unclebroadsword.swordCollider.y = 		player.y - UDSTAB_HEIGHT + player.speedY
-			unclebroadsword.swordCollider.width = 	UDSTAB_WIDTH
-			unclebroadsword.swordCollider.height = UDSTAB_HEIGHT
-		elseif unclebroadsword.attackState == ATKSTATE.STALLANDFALL then
-			unclebroadsword.swordCollider.x = 		player.x + player.width/2 - UDSTAB_WIDTH/2 + player.speedX
-			unclebroadsword.swordCollider.y = 		player.y + player.height + player.speedY
-			unclebroadsword.swordCollider.width = 	UDSTAB_WIDTH
-			unclebroadsword.swordCollider.height = UDSTAB_HEIGHT
-		elseif unclebroadsword.attackState == ATKSTATE.STATUEFALL then
-			unclebroadsword.swordCollider.x = 		player.x + player.speedX
-			unclebroadsword.swordCollider.y = 		player.y + player.height + player.speedY
-			unclebroadsword.swordCollider.width = 	player.width
-			unclebroadsword.swordCollider.height = player.speedY
+	if kirby.attackState > ATKSTATE.NONE then
+		if kirby.swordCollider == nil then kirby.swordCollider = colliders.Box(0,0,0,0) end
+		if kirby.attackState == ATKSTATE.SWIPE1 or kirby.attackState == ATKSTATE.SWIPE2 then
+			kirby.swordCollider.x = 		player.x - SWIPE_WIDTH + ( player:mem(0x106, FIELD_WORD) + 1 )*( player.width + SWIPE_WIDTH )/2 + player.speedX
+			kirby.swordCollider.y = 		player.y + player.height/2 - SWIPE_HEIGHT/2
+			kirby.swordCollider.width = 	SWIPE_WIDTH
+			kirby.swordCollider.height = SWIPE_HEIGHT
+		elseif kirby.attackState == ATKSTATE.LUNGE_COMBO or kirby.attackState == ATKSTATE.LUNGE_CHARGE then
+			kirby.swordCollider.x = 		player.x - LUNGE_WIDTH + ( player:mem(0x106, FIELD_WORD) + 1 )*( player.width + LUNGE_WIDTH )/2 + player.speedX
+			kirby.swordCollider.y = 		player.y + player.height/2 - LUNGE_HEIGHT/2 + 6
+			kirby.swordCollider.width = 	LUNGE_WIDTH
+			kirby.swordCollider.height = LUNGE_HEIGHT
+		elseif kirby.attackState == ATKSTATE.UPWARDSTAB then
+			kirby.swordCollider.x = 		player.x + player.width/2 - UDSTAB_WIDTH/2 + player.speedX
+			kirby.swordCollider.y = 		player.y - UDSTAB_HEIGHT + player.speedY
+			kirby.swordCollider.width = 	UDSTAB_WIDTH
+			kirby.swordCollider.height = UDSTAB_HEIGHT
+		elseif kirby.attackState == ATKSTATE.STALLANDFALL then
+			kirby.swordCollider.x = 		player.x + player.width/2 - UDSTAB_WIDTH/2 + player.speedX
+			kirby.swordCollider.y = 		player.y + player.height + player.speedY
+			kirby.swordCollider.width = 	UDSTAB_WIDTH
+			kirby.swordCollider.height = UDSTAB_HEIGHT
+		elseif kirby.attackState == ATKSTATE.STATUEFALL then
+			kirby.swordCollider.x = 		player.x + player.speedX
+			kirby.swordCollider.y = 		player.y + player.height + player.speedY
+			kirby.swordCollider.width = 	player.width
+			kirby.swordCollider.height = player.speedY
 		end
 	else
-		unclebroadsword.swordCollider = nil
+		kirby.swordCollider = nil
 	end
 end
 local function PerformSwordBlockCollisions() ------------------------------------------------------ Detect interactions of sword/tanooki statue with blocks
 	-- Block collisions
-	for _,block in pairs(Block.getIntersecting(unclebroadsword.swordCollider.x, unclebroadsword.swordCollider.y, unclebroadsword.swordCollider.x + unclebroadsword.swordCollider.width, unclebroadsword.swordCollider.y + unclebroadsword.swordCollider.height)) do
+	for _,block in pairs(Block.getIntersecting(kirby.swordCollider.x, kirby.swordCollider.y, kirby.swordCollider.x + kirby.swordCollider.width, kirby.swordCollider.y + kirby.swordCollider.height)) do
 		-- If block is visible
 		if block:mem(0x1c, FIELD_WORD) == 0 and block:mem(0x5a, FIELD_WORD) == 0 then
 			-- Not bouncing from noteblocks (can get stuck)
 			if isType(block.id, BLOCK_BOUNCY) and block.contentID == 0 then
-				if unclebroadsword.attackState == ATKSTATE.STALLANDFALL then unclebroadsword.attackState = ATKSTATE.NONE end
+				if kirby.attackState == ATKSTATE.STALLANDFALL then kirby.attackState = ATKSTATE.NONE end
 			end
 			-- Destroy bricks
 			if isType(block.id, BLOCK_BRICK) and block.contentID == 0 then
 				block:remove(true)
-				if unclebroadsword.attackState == ATKSTATE.STALLANDFALL then colliders.bounceResponse(player) end
+				if kirby.attackState == ATKSTATE.STALLANDFALL then colliders.bounceResponse(player) end
 			-- Melting ice blocks with fire sword
 			elseif block.id == 1151 then
 				if player.powerup == PLAYER_ICE then
@@ -704,17 +696,17 @@ local function PerformSwordBlockCollisions() -----------------------------------
 				end
 			-- Ignore player blocks
 			elseif not isType(block.id, BLOCK_PLAYERSWITCH) then
-				if unclebroadsword.attackState >= ATKSTATE.STALLANDFALL then
+				if kirby.attackState >= ATKSTATE.STALLANDFALL then
 					block:hit(true, player)
 					-- Bounce if it's a SMW turn block or it had something inside
-					if (block.id == 90 or block.contentID ~= 0) and unclebroadsword.attackState == ATKSTATE.STALLANDFALL then
+					if (block.id == 90 or block.contentID ~= 0) and kirby.attackState == ATKSTATE.STALLANDFALL then
 						colliders.bounceResponse(player)
-						unclebroadsword.attackState = ATKSTATE.STALLED
+						kirby.attackState = ATKSTATE.STALLED
 						attack_timer = DURATION[ATKSTATE.STALLED]
 					end
 				else
 					-- When lunging, only hit the block on the first frames
-					if not ((unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO or unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE) and attack_timer < DURATION[unclebroadsword.attackState]) then
+					if not ((kirby.attackState == ATKSTATE.LUNGE_COMBO or kirby.attackState == ATKSTATE.LUNGE_CHARGE) and attack_timer < DURATION[kirby.attackState]) then
 						block:hit()
 					end
 				end
@@ -725,27 +717,27 @@ end
 local function PerformSwordNPCCollisions() -------------------------------------------------------- Detect interactions of sword with NPCs
 	-- NPC collisions
 	if player.forcedState ~= 0 then return end 
-	for _,npc in ipairs(NPC.getIntersecting(unclebroadsword.swordCollider.x, unclebroadsword.swordCollider.y, unclebroadsword.swordCollider.x + unclebroadsword.swordCollider.width, unclebroadsword.swordCollider.y + unclebroadsword.swordCollider.height)) do
+	for _,npc in ipairs(NPC.getIntersecting(kirby.swordCollider.x, kirby.swordCollider.y, kirby.swordCollider.x + kirby.swordCollider.width, kirby.swordCollider.y + kirby.swordCollider.height)) do
 		-- Check if hittable and not a generator
 		if not (npc.invincibleToSword or npc.friendly or npc.isHidden) and npc:mem(0x64, FIELD_WORD) == 0 then
 			-- Prevent infinite bounce on springboards on stall-and-fall
 			if isType(npc.id, NPC_BOUNCY) then
-				if unclebroadsword.attackState == ATKSTATE.STALLANDFALL then unclebroadsword.attackState = ATKSTATE.NONE end
+				if kirby.attackState == ATKSTATE.STALLANDFALL then kirby.attackState = ATKSTATE.NONE end
 			end
 			-- Catch powerups
 			if isType(npc.id, NPC_POWERUP) or isType(npc.id, NPC_BONUS) then
-				if unclebroadsword.attackState < ATKSTATE.UPWARDSTAB then
+				if kirby.attackState < ATKSTATE.UPWARDSTAB then
 					npc.x = player.x + player.width/2 - npc.width/2
 					npc.y = player.y + player.height/2 - npc.height/2
 				end
 			-- Frozen enemy
 			elseif npc.id == 263 then
 				-- If swiping, only destroy on the first attack frame
-				if (unclebroadsword.attackState == ATKSTATE.SWIPE1 or unclebroadsword.attackState == ATKSTATE.SWIPE2)
-				and attack_timer == 3*DURATION[unclebroadsword.attackState] - 1 then npc:harm(HARM_TYPE_SWORD)
-				elseif unclebroadsword.attackState >= ATKSTATE.LUNGE_COMBO then
+				if (kirby.attackState == ATKSTATE.SWIPE1 or kirby.attackState == ATKSTATE.SWIPE2)
+				and attack_timer == 3*DURATION[kirby.attackState] - 1 then npc:harm(HARM_TYPE_SWORD)
+				elseif kirby.attackState >= ATKSTATE.LUNGE_COMBO then
 					npc:harm(HARM_TYPE_SWORD)
-					if unclebroadsword.attackState == ATKSTATE.STALLANDFALL then colliders.bounceResponse(player) end
+					if kirby.attackState == ATKSTATE.STALLANDFALL then colliders.bounceResponse(player) end
 				end
 			else
 				-- Freeze enemy if you have the ice flower and it can be frozen
@@ -756,16 +748,16 @@ local function PerformSwordNPCCollisions() -------------------------------------
 					npc:harm(HARM_TYPE_SWORD)
 				end
 				-- Bounce if a boss character and stall-and-fall
-				if unclebroadsword.attackState >= ATKSTATE.STALLANDFALL and npc:mem(0x148, FIELD_FLOAT) ~= 0 then
+				if kirby.attackState >= ATKSTATE.STALLANDFALL and npc:mem(0x148, FIELD_FLOAT) ~= 0 then
 					colliders.bounceResponse(player)
-					if unclebroadsword.attackState == ATKSTATE.STATUEFALL then player.forcedState = 500 end
+					if kirby.attackState == ATKSTATE.STATUEFALL then player.forcedState = 500 end
 					SetCooldown()
 				end
 			end
 			
 			-- Stall if swiping in the air
 			if airborne() and not inforcedanim()
-			and (unclebroadsword.attackState == ATKSTATE.SWIPE1 or unclebroadsword.attackState == ATKSTATE.SWIPE2) then
+			and (kirby.attackState == ATKSTATE.SWIPE1 or kirby.attackState == ATKSTATE.SWIPE2) then
 				aerial_atk_stall = true;
 			end
 		end
@@ -773,25 +765,25 @@ local function PerformSwordNPCCollisions() -------------------------------------
 end
 local function SpawnAttackGFX() ------------------------------------------------------------------- Display visual effects for fire/ice sword
 	-- Generate smoke puffs
-	if (unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE or unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO) and grounded() then
+	if (kirby.attackState == ATKSTATE.LUNGE_CHARGE or kirby.attackState == ATKSTATE.LUNGE_COMBO) and grounded() then
 		local x = math.random(player.x + player.width/2, player.x + player.width/2*(1 - player:mem(0x106, FIELD_WORD)))
 		local y = player.y + player.height + rng.random(-2,2) - 4
 		Animation.spawn(74, x, y)
 	end
 	
 	-- Show effect for fire/ice powerups
-	if unclebroadsword.swordCollider and ((unclebroadsword.attackState >= ATKSTATE.SWIPE1 and unclebroadsword.attackState <= ATKSTATE.LUNGE_CHARGE) or unclebroadsword.attackState == ATKSTATE.STALLANDFALL) then
+	if kirby.swordCollider and ((kirby.attackState >= ATKSTATE.SWIPE1 and kirby.attackState <= ATKSTATE.LUNGE_CHARGE) or kirby.attackState == ATKSTATE.STALLANDFALL) then
 		if player.powerup == PLAYER_FIREFLOWER then
 			local fire = Animation.spawn( 12,
-				rng.random(unclebroadsword.swordCollider.x, unclebroadsword.swordCollider.x + unclebroadsword.swordCollider.width) - 14,
-				rng.random(unclebroadsword.swordCollider.y, unclebroadsword.swordCollider.y + unclebroadsword.swordCollider.height) - 44
+				rng.random(kirby.swordCollider.x, kirby.swordCollider.x + kirby.swordCollider.width) - 14,
+				rng.random(kirby.swordCollider.y, kirby.swordCollider.y + kirby.swordCollider.height) - 44
 			)
 			fire.speedX = 0; fire.speedY = 0
 		elseif player.powerup == PLAYER_ICE then
-			if not (unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE or unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO) or attack_timer%3 == 0 then
+			if not (kirby.attackState == ATKSTATE.LUNGE_CHARGE or kirby.attackState == ATKSTATE.LUNGE_COMBO) or attack_timer%3 == 0 then
 				local star = Animation.spawn( 80,
-					rng.random(unclebroadsword.swordCollider.x, unclebroadsword.swordCollider.x + unclebroadsword.swordCollider.width) - 8,
-					rng.random(unclebroadsword.swordCollider.y, unclebroadsword.swordCollider.y + unclebroadsword.swordCollider.height) - 8
+					rng.random(kirby.swordCollider.x, kirby.swordCollider.x + kirby.swordCollider.width) - 8,
+					rng.random(kirby.swordCollider.y, kirby.swordCollider.y + kirby.swordCollider.height) - 8
 				)
 				star.speedX = 0; star.speedY = 0
 			end
@@ -800,25 +792,25 @@ local function SpawnAttackGFX() ------------------------------------------------
 end
 local function PrintAttackState(x, y) ------------------------------------------------------------- Print name of current attack state and charge meter reading
 	local msg = ""
-	if		unclebroadsword.attackState == ATKSTATE.COOLDOWN		then msg = "cooldown"
-	elseif	unclebroadsword.attackState == ATKSTATE.NONE			then msg = "none"
-	elseif	unclebroadsword.attackState == ATKSTATE.SWIPE1			then msg = "swipe1"
-	elseif	unclebroadsword.attackState == ATKSTATE.PAUSE1			then msg = "pause1"
-	elseif	unclebroadsword.attackState == ATKSTATE.SWIPE2			then msg = "swipe2"
-	elseif	unclebroadsword.attackState == ATKSTATE.PAUSE2 		then msg = "pause2"
-	elseif	unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO	then msg = "lunge combo"
-	elseif	unclebroadsword.attackState == ATKSTATE.CHARGING		then msg = "charging"
-	elseif	unclebroadsword.attackState == ATKSTATE.CHARGED		then msg = "charged"
-	elseif	unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE	then msg = "lunge charge"
-	elseif	unclebroadsword.attackState == ATKSTATE.UPWARDSTAB		then msg = "upward stab"
-	elseif	unclebroadsword.attackState == ATKSTATE.STALLANDFALL	then msg = "stall-and-fall"
-	elseif	unclebroadsword.attackState == ATKSTATE.STATUEFALL		then msg = "falling statue"	
-	elseif	unclebroadsword.attackState == ATKSTATE.STALLED		then msg = "stalled" end
+	if		kirby.attackState == ATKSTATE.COOLDOWN		then msg = "cooldown"
+	elseif	kirby.attackState == ATKSTATE.NONE			then msg = "none"
+	elseif	kirby.attackState == ATKSTATE.SWIPE1			then msg = "swipe1"
+	elseif	kirby.attackState == ATKSTATE.PAUSE1			then msg = "pause1"
+	elseif	kirby.attackState == ATKSTATE.SWIPE2			then msg = "swipe2"
+	elseif	kirby.attackState == ATKSTATE.PAUSE2 		then msg = "pause2"
+	elseif	kirby.attackState == ATKSTATE.LUNGE_COMBO	then msg = "lunge combo"
+	elseif	kirby.attackState == ATKSTATE.CHARGING		then msg = "charging"
+	elseif	kirby.attackState == ATKSTATE.CHARGED		then msg = "charged"
+	elseif	kirby.attackState == ATKSTATE.LUNGE_CHARGE	then msg = "lunge charge"
+	elseif	kirby.attackState == ATKSTATE.UPWARDSTAB		then msg = "upward stab"
+	elseif	kirby.attackState == ATKSTATE.STALLANDFALL	then msg = "stall-and-fall"
+	elseif	kirby.attackState == ATKSTATE.STATUEFALL		then msg = "falling statue"	
+	elseif	kirby.attackState == ATKSTATE.STALLED		then msg = "stalled" end
 	Text.print(msg, x, y)
 	Text.print("Charge: "..tostring(charge_timer), x, y + 20)
 	Text.print("Aerial: "..tostring(can_aerial), x, y + 40)
 end
-function unclebroadsword.onTick()
+function kirby.onTick()
 	if player.character == CHARACTER_UNCLEBROADSWORD and player:mem(0x13E,FIELD_WORD) == 0 then
 		-- Check for hurt state
 		CheckHurtState()
@@ -828,14 +820,14 @@ function unclebroadsword.onTick()
 		-- Change player speed when attacking
 		AttackPhysics()
 		-- Perform hit detection for sword
-		if unclebroadsword.swordCollider then
+		if kirby.swordCollider then
 			PerformSwordBlockCollisions()
 			PerformSwordNPCCollisions()
 		end
 		-- Draw visual effects
 		SpawnAttackGFX()
 		
-		if unclebroadsword.debugMode then PrintAttackState(20, 500) end
+		if kirby.debugMode then PrintAttackState(20, 500) end
 	end
 end
 
@@ -924,39 +916,39 @@ local function ShowSmallFrames() -----------------------------------------------
 end
 local function ShowAttackFrames() ----------------------------------------------------------------- Render frames when attacking
 	-- Sword swipe/lunge/stab frames frames
-	if 	   unclebroadsword.attackState == ATKSTATE.SWIPE1 then
+	if 	   kirby.attackState == ATKSTATE.SWIPE1 then
 		local offset = math.floor(attack_timer / DURATION[ATKSTATE.SWIPE1])
 		if ducking() then		SetFrame(29 - offset)
 		elseif grounded() then	SetFrame(20 - offset)
 		else					SetFrame(35 - offset) end
-	elseif unclebroadsword.attackState == ATKSTATE.PAUSE1 then
+	elseif kirby.attackState == ATKSTATE.PAUSE1 then
 		if ducking() then		SetFrame(7)
 		elseif grounded() then	SetFrame(21)
 		else					SetFrame(36) end
-	elseif unclebroadsword.attackState == ATKSTATE.SWIPE2 then
+	elseif kirby.attackState == ATKSTATE.SWIPE2 then
 		local offset = math.floor(attack_timer / DURATION[ATKSTATE.SWIPE2])
 		if ducking() then		SetFrame(27 + offset)
 		elseif grounded() then	SetFrame(19 + offset)
 		else					SetFrame(33 + offset) end
-	elseif unclebroadsword.attackState == ATKSTATE.PAUSE2 then
+	elseif kirby.attackState == ATKSTATE.PAUSE2 then
 		if ducking() then		SetFrame(7)
 		elseif grounded() then	SetFrame(17)
 		else					SetFrame(32) end
-	elseif unclebroadsword.attackState == ATKSTATE.LUNGE_COMBO then
+	elseif kirby.attackState == ATKSTATE.LUNGE_COMBO then
 		SetFrame(39)
-	elseif unclebroadsword.attackState == ATKSTATE.CHARGING then
+	elseif kirby.attackState == ATKSTATE.CHARGING then
 		SetFrame(45)
-	elseif unclebroadsword.attackState == ATKSTATE.CHARGED then
+	elseif kirby.attackState == ATKSTATE.CHARGED then
 		if math.floor(os.clock()*12)%2 == 0 then SetFrame(46)
 		else SetFrame(45) end
-	elseif unclebroadsword.attackState == ATKSTATE.LUNGE_CHARGE then
+	elseif kirby.attackState == ATKSTATE.LUNGE_CHARGE then
 		local max_speed = 2*LUNGEDIST_CHARGE/DURATION[ATKSTATE.LUNGE_CHARGE]
 		if math.abs(player.speedX) < max_speed/6 then SetFrame(39)
 		elseif math.abs(player.speedX) < max_speed/3 then SetFrame(38)
 		else SetFrame(37) end
-	elseif unclebroadsword.attackState == ATKSTATE.STALLANDFALL then
+	elseif kirby.attackState == ATKSTATE.STALLANDFALL then
 		SetFrame(47)
-	elseif unclebroadsword.attackState == ATKSTATE.UPWARDSTAB then
+	elseif kirby.attackState == ATKSTATE.UPWARDSTAB then
 		if spinjumping() then
 			if player:mem(0x114, FIELD_WORD) == 13 then SetFrame(14)
 			elseif player:mem(0x114, FIELD_WORD) == 15 then SetFrame(16)
@@ -964,18 +956,18 @@ local function ShowAttackFrames() ----------------------------------------------
 		else SetFrame(48) end
 	end
 end
-function unclebroadsword.onDraw()
+function kirby.onDraw()
 	if player.character == CHARACTER_UNCLEBROADSWORD then
 		-- Render afterimages for stall-and-fall
 		if(player:mem(0x13E,FIELD_WORD) == 0) then
 			for i,pos in ipairs(afterimagepos) do
 				if pos.state == ATKSTATE.STALLANDFALL then
-					Graphics.draw {x = pos.x - 12, y = pos.y - 20, type = RTYPE_IMAGE, image = pm.getGraphic(CHARACTER_UNCLEBROADSWORD, afterimage),
+					Graphics.draw {x = pos.x - 12, y = pos.y - 20, type = RTYPE_IMAGE, image = Graphics.loadImage(Misc.resolveFile("afterimage.png")),
 									isSceneCoordinates = true, opacity = 0.7*i/(#afterimagepos + 1), priority = -26,
 									sourceX = ( player:mem(0x106, FIELD_WORD) + 1 )/2*100, sourceY = player.powerup*100 - 100,
 									sourceWidth = 100, sourceHeight = 100}
 				elseif pos.state == ATKSTATE.STATUEFALL then
-					Graphics.draw {x = pos.x - 8, y = pos.y - 26, type = RTYPE_IMAGE, image = pm.getGraphic(CHARACTER_UNCLEBROADSWORD, statue_img),
+					Graphics.draw {x = pos.x - 8, y = pos.y - 26, type = RTYPE_IMAGE, image = Graphics.loadImage(Misc.resolveFile("afterimage.png")),
 									isSceneCoordinates = true, opacity = 0.7*i/(#afterimagepos + 1), priority = -26}
 				end
 			end
@@ -984,7 +976,7 @@ function unclebroadsword.onDraw()
 		if(player:mem(0x13E,FIELD_WORD) == 0) then
 			if player.powerup == PLAYER_SMALL then ShowSmallFrames() end
 			
-			if unclebroadsword.attackState ~= ATKSTATE.NONE and unclebroadsword.attackState ~= ATKSTATE.COOLDOWN then ShowAttackFrames()
+			if kirby.attackState ~= ATKSTATE.NONE and kirby.attackState ~= ATKSTATE.COOLDOWN then ShowAttackFrames()
 			elseif is_hurt then SetFrame(49) end
 		end
 	end
@@ -993,20 +985,15 @@ end
 
 
 ---------------------------------------------------------------------------------------------- CHARACTER MANAGEMENT ----------------------------
-function unclebroadsword.onInitAPI()
-	registerEvent(unclebroadsword, "onKeyDown", "onKeyDown")
-	registerEvent(unclebroadsword, "onInputUpdate", "onInputUpdate")
-	registerEvent(unclebroadsword, "onNPCKill", "onNPCKill")
-	registerEvent(unclebroadsword, "onTick", "onTick")
-	registerEvent(unclebroadsword, "onDraw", "onDraw")
-	if unclebroadsword.debugMode then registerEvent(unclebroadsword, "onDraw", "DebugDraw") end
-	Graphics.registerCharacterHUD(CHARACTER_UNCLEBROADSWORD, Graphics.HUD_ITEMBOX, nil, 
-	{ 
-		reserveBox = itembox, 
-		reserveBox2P = itembox
-	})
+function kirby.onInitAPI()
+	registerEvent(kirby, "onKeyDown", "onKeyDown")
+	registerEvent(kirby, "onInputUpdate", "onInputUpdate")
+	registerEvent(kirby, "onNPCKill", "onNPCKill")
+	registerEvent(kirby, "onTick", "onTick")
+	registerEvent(kirby, "onDraw", "onDraw")
+	if kirby.debugMode then registerEvent(kirby, "onDraw", "DebugDraw") end
 end
-function unclebroadsword.initCharacter()
+function kirby.initCharacter()
 	-- Prevent from dropping rupees
 	Defines.kill_drop_link_rupeeID1 = 0
 	Defines.kill_drop_link_rupeeID2 = 0
@@ -1014,7 +1001,7 @@ function unclebroadsword.initCharacter()
 	-- Slightly nerf speed
 	Defines.player_runspeed = 5
 end
-function unclebroadsword.cleanupCharacter()
+function kirby.cleanupCharacter()
 	-- Reset death effect
 	Graphics.sprites.effect[3].img = nil
 	-- Reset maximum player fall/run speed
@@ -1032,17 +1019,17 @@ end
 function DrawRect(x1, y1, x2, y2, clr) ------------------------------------------------------------ OpenGL box drawing
 	Graphics.glDraw {vertexCoords = {x1,y1,x2,y1,x2,y1,x2,y2,x2,y2,x1,y2,x1,y2,x1,y1}, sceneCoords=true, color = clr, primitive = Graphics.GL_LINES}
 end
-function unclebroadsword.DebugDraw() -------------------------------------------------------------- Render hitboxes
+function kirby.DebugDraw() -------------------------------------------------------------- Render hitboxes
 	if player.character == CHARACTER_UNCLEBROADSWORD then
 		local playerbox = colliders.getHitbox(player)
 		DrawRect(playerbox.x, playerbox.y, playerbox.x + playerbox.width, playerbox.y + playerbox.height, {0,1,0})
-		if unclebroadsword.swordCollider ~= nil then
-			DrawRect(unclebroadsword.swordCollider.x, unclebroadsword.swordCollider.y, unclebroadsword.swordCollider.x + unclebroadsword.swordCollider.width, unclebroadsword.swordCollider.y + unclebroadsword.swordCollider.height, {1,0,0})
+		if kirby.swordCollider ~= nil then
+			DrawRect(kirby.swordCollider.x, kirby.swordCollider.y, kirby.swordCollider.x + kirby.swordCollider.width, kirby.swordCollider.y + kirby.swordCollider.height, {1,0,0})
 		end
 	end
 end
 
-return unclebroadsword
+return kirby
 
 
 

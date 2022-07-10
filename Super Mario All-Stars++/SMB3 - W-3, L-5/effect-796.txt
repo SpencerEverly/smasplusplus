@@ -1,0 +1,3 @@
+[1]
+import=AI_ARC
+frames=1

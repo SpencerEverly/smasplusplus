@@ -168,6 +168,7 @@ Code for certain parts made by:
 - Master of Disaster
 - IAmPlayer
 - MegoZ_
+- CodeX
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
@@ -285,6 +286,7 @@ Levels made by:
 
 - Spencer Everly
 - barkers
+- FireSeraphim
 
 ----Boot Menu Theming Credits----
 
