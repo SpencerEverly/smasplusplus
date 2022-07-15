@@ -345,7 +345,7 @@ function resolveCostumeSound(name) --Resolve a sound for a costume being worn.
 		--Sound could not be found
 		return nil
 	end
-	return Audio.SfxOpem(costumesounddir)
+	return Audio.SfxOpen(costumesounddir)
 end
 
 function loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
