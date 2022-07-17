@@ -711,6 +711,9 @@ function pausemenu2.onDraw()
 	if currentCostume == "GA-CAILLOU" then
 		costtext = "Caillou (GoAnimate, Vyond)"
 	end
+    if currentCostume == "GO-10SECONDRUN" then
+		costtext = "10 Second Run (GO Series)"
+	end
 	if currentCostume == "GOLDENMARIO" then
 		costtext = "Golden Mario (SMBX)"
 	end
@@ -769,6 +772,8 @@ function pausemenu2.onDraw()
 		costtext = "Super Mario World 2 (SNES)"
 	end
 	
+    
+    
 	if currentCostume == "0-SPENCEREVERLY" then
 		costtext = "Spencer Everly (SMBS)"
 	end

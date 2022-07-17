@@ -28,7 +28,7 @@ function startCountdown()
 	Misc.unpause()
 	texttimer1 = false
 	gotext = false
-	restoreMusic(-1)
+	changeMusic("_OST/GO Series - 10 Second Run/Marathon - Training.ogg", -1)
 	timeractive = true
 end
 
