@@ -6,6 +6,7 @@
 --Blockmanager is required for setting basic Block properties
 local blockManager = require("blockManager")
 local blockutils = require("blocks/blockutils")
+local extrasounds = require("extrasounds")
 
 --Locals for the Bonus Block
 local oldCoins = SaveData.totalCoinsClassic
@@ -68,7 +69,7 @@ function bonusBlock.onPostBlockHit(v,fromTop,playerObj)
     else
         -- Contains a single coin.
         v.contentID = 1
-		SFX.play("wrong.ogg")
+		SFX.play(extrasounds.id[152])
     end
 end
 

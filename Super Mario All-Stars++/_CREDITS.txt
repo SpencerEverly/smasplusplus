@@ -72,7 +72,7 @@ Characters:
 
 Costumes:
 
-- NES Toad, NES Mario & Luigi, Toadette, Daisy, Pauline, Luigi with Mario's clothes, and some Toad Colors by IsaacP2003
+- NES Toad, NES Mario & Luigi, Toadette, Daisy, Pauline, Luigi with Mario's clothes, and some Toad Colors by IsaacP2003 (SMB1 Mario by Murphmario, Awesomezack & MrDoubleA)
 - Sonic sprites by megamario1500, rodrig0, and Inferno (Also costume code modified by Spencer Everly)
 - Daisy idle sprite by magibowser
 - Wario and Waluigi by couch tomato, ported by Inferno
@@ -123,6 +123,7 @@ Costumes:
 - Tux by Grumbel and others, ported by Unknown
 - Utsuho Reiuji by Unknown
 - SMBDDX Mario by Guinea
+- 10 Second Run Red Stickfigure by G-LOCO
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
