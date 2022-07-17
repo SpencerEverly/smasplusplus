@@ -184,7 +184,7 @@ function onKeyboardPress(k, v)
 		fivePressedState = false
 		if k == VK_5 then
 			GameData.____mainMenuComplete = true
-			Level.exit()
+			Level.load("map.lvlx")
 			fivePressedState = true
 		end
 	end
@@ -219,7 +219,7 @@ function onDraw()
 		textplus.print{x=10, y=44, text = "2) Reset the main menu theme", priority=0, color=Color.white}
 		textplus.print{x=10, y=56, text = "3) Clear/Flush SaveData", priority=0, color=Color.white}
 		textplus.print{x=10, y=68, text = "4) Continue booting", priority=0, color=Color.white}
-		textplus.print{x=10, y=80, text = "5) Load world map instantly (NOT RECOMMENDED)", priority=0, color=Color.white}
+		textplus.print{x=10, y=80, text = "5) Load world map instantly (With default settings on first-boot)", priority=0, color=Color.white}
 		textplus.print{x=10, y=92, text = "6) Enable speedrun mode", priority=0, color=Color.white}
 	end
 end

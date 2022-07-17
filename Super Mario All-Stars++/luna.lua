@@ -47,8 +47,6 @@ end
 GameData.levelMusicTemporary = {}
 GameData.levelMusic = {}
 GameData.warpStarDoorCount = {}
---customPackage.loaded["socket.core"] = require("socket.core")
---customPackage.loaded["mime.core"] = require("mime.core")
 _G.smwMap = require("smwMap")
 _G.extrasounds = require("extrasounds")
 _G.classicEvents = require("classiceventsmod")

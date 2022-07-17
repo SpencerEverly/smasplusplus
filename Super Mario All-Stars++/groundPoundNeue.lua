@@ -154,14 +154,14 @@ local function hitBlocks(o)
 				if v.contentID == 0 then
 					v:hit(true, players[o]);
 					isPounding[o] = false;
-					Audio.playSFX(getSMBXPath().."\\sound\\smb2-hit.ogg");
+					playSound("sound/smb2-hit.ogg");
 					Effect.spawn(10, players[o].x, players[o].height + players[o].y)
 					Defines.earthquake = 10;
 				else
 					v:hit(true, players[o]);
 					players[o].y = players[o].y -5
 					if timer % 2 == 0 then
-						Audio.playSFX(getSMBXPath().."\\sound\\stomped.ogg");
+						playSound("sound/stomped.ogg");
 					end
 				end
 			else
@@ -176,12 +176,12 @@ local function hitBlocks(o)
 					players[o].speedY = 5;
 					players[o].y = players[o].y - 15;
 					if timer % 2 == 0 then
-						Audio.playSFX(getSMBXPath().."\\sound\\stomped.ogg");
+						playSound("sound/stomped.ogg");
 					end
 					isPounding[o] = true;
 				elseif v.contentID == 0 then
 					isPounding[o] = false;
-					Audio.playSFX(getSMBXPath().."\\sound\\smb2-hit.ogg");
+					playSound("sound/smb2-hit.ogg");
 					Effect.spawn(10, players[o].x, players[o].height + players[o].y)
 					Defines.earthquake = 10;
 				end
@@ -206,7 +206,7 @@ end
 local function thePound(i)
 	if not isPounding[i]  and timeSinceLastPound[i] >= groundPoundNeue.preventPoundForTime then
 	registeredCharacters[players[i].character].prepareAnim:play(players[i]);
-	Audio.playSFX(getSMBXPath().."\\sound\\zelda-stab.ogg");
+	playSound("sound/zelda-stab.ogg");
 	isPounding[i] = true;
 	alreadyTriedToPound[i] = true;
 	timeSinceLastPound[i] = 0;
@@ -229,7 +229,7 @@ local function inputUpdateRun(o)
 		(inputs.state[o].up == inputs.PRESS) then
 			isPounding[o] = false;
 			alreadyTriedToPound[o] = false;
-			Audio.playSFX(getSMBXPath().."\\sound\\hammer.ogg");
+			playSound("sound/hammer.ogg");
 		end
 	end
 end

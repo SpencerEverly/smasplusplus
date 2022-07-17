@@ -615,12 +615,24 @@ local function MigrateOldSave2()
 	littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Please note that before you do this, a final reminder that<page>this save data will be upgraded, and the data will not be<page>compatible with older releases. Be sure you want to<page>proceed before doing so.<question MigrateSaveMenuTwo>", pauses = false, updatesInPause = true})
 end
 
+local starList
+local starListOptional
+
 local function MigrateOldSave3()
 	SaveData.totalStarCount = tonumber(mem(0x00B251E0, FIELD_WORD))
 	SaveData.totalCoinsClassic = tonumber(mem(0x00B2C5A8, FIELD_WORD))
 	SaveData.totalLives = tonumber(mem(0x00B2C5AC, FIELD_FLOAT))
 	SaveData.totalScoreClassic = tonumber(Misc.score())
-	SaveData.completeLevels = getLegacyStarsCollectedNameOnly()
+    SaveData.completeLevels = getLegacyStarsCollectedNameOnly()
+    --Unfinished wip
+    --starList = table.ifindall(getLegacyStarsCollectedNameOnly(),smastables.__allLevels)
+    --for i = 1,#starList do
+        --table.insert(SaveData.completeLevels, i)
+    --end
+    --starListOptional = table.ifind(getLegacyStarsCollectedNameOnly(),smastables.__allLevelsOptional)
+    --for i = 1,#starList do
+        --table.insert(SaveData.completeLevels, i)
+    --end
 	eraseMainSaveSlot(Misc.saveSlot())
 	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Save has been officially migrated! Please note that you'll need to reunlock paths,<page>but other than that you should be good to go!<page>Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
 end
@@ -1991,7 +2003,9 @@ if bootmenu.active == true then
 	littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Minigames",chosenFunction = function() Routine.run(battleModeDialogue) end})
-	--littleDialogue.registerAnswer("MainMenu",{text = "Online Multiplayer",chosenFunction = function() Routine.run(BootOnlinePreExecute) end})
+    if SMBX_VERSION == VER_SEE_MOD then
+        littleDialogue.registerAnswer("MainMenu",{text = "Online Multiplayer",chosenFunction = function() Routine.run(BootOnlinePreExecute) end})
+    end
 	littleDialogue.registerAnswer("MainMenu",{text = "Main Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
 	littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})

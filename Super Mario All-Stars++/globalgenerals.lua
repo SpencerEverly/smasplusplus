@@ -21,6 +21,8 @@ if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
     local twirl = require("Twirl")
     local aw = require("anotherwalljump")
     aw.registerAllPlayersDefault()
+    local groundPoundNeue = require("groundPoundNeue")
+    groundPoundNeue.registerAllPlayersDefault()
 end
 
 if GameData.rushModeActive == true then
