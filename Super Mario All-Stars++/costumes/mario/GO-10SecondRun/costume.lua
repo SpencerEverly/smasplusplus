@@ -17,6 +17,7 @@ function costume.onInit(p)
 	registerEvent(costume,"onPostPlayerHarm")
 	registerEvent(costume,"onPostNPCKill")
 	registerEvent(costume,"onPlayerKill")
+    registerEvent(costume,"onPostPlayerKill")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/10secondrun/go-jump.ogg")
 	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/10secondrun/dead.ogg"))
 	
@@ -93,7 +94,6 @@ function costume.hphit()
 			end
 			if tensecondhp < 1 then
 				player:kill()
-                playSound("10secondrun/go-game-over.ogg")
 			end
 		end
 	end
@@ -101,6 +101,10 @@ end
 
 function costume.onPlayerHarm()
 	costume.hphit()
+end
+
+function costume.onPostPlayerKill()
+    playSound("10secondrun/go-game-over.ogg")
 end
 
 function costume.onCleanup(p)
