@@ -123,7 +123,7 @@ Costumes:
 - Tux by Grumbel and others, ported by Unknown
 - Utsuho Reiuji by Unknown
 - SMBDDX Mario by Guinea
-- 10 Second Run Red Stickfigure by G-LOCO
+- 10 Second Run Red Stickfigure by G-MODE
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
