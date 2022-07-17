@@ -837,7 +837,7 @@ function costume.onTickEnd()
 		elseif player.speedY <= 0 and not player:isClimbing() and updateFallingFrame == 1 then
 			updateFallingFrame = updateFallingFrame - 1
 			fallingFrame = player:getFrame()
-		else
+		elseif airdirection ~= nil then
 			updateFallingFrame = 0
 		end
 		

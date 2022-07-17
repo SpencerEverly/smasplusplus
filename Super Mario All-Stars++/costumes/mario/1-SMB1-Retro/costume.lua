@@ -844,7 +844,7 @@ function costume.onTickEnd()
 		if player:isGroundTouching() or player.mount ~= 0 or player:mem(0x170, FIELD_WORD) > 0 or player:isClimbing() or 
 		player:mem(0x34, FIELD_WORD) == 2 or player:mem(0x50, FIELD_BOOL) == true and player.forcedState ~= 3 then
 			airdirection = player.direction
-		else
+		elseif airdirection ~= nil then
 			player.direction = airdirection
 		end
 
