@@ -1037,7 +1037,10 @@ function smwMap.onStart()
 	--if not GameData.____mainMenuComplete then
 		--Level.load("SMAS - Start.lvlx")
 	--end
-    unlockAnyBrokenPaths()
+    if SaveData.firstBootMapPathFixed == false then
+        unlockAnyBrokenPaths()
+        SaveData.firstBootMapPathFixed = true
+    end
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
         p.forcedTimer = 0

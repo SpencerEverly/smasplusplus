@@ -207,6 +207,9 @@ end
 if SaveData.dateplayedyear == nil then
 	SaveData.dateplayedyear = os.date("%Y")
 end
+if SaveData.firstBootMapPathFixed == nil then
+    SaveData.firstBootMapPathFixed = false
+end
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 if SaveData.playerName == nil then
