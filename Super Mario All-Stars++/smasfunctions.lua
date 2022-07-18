@@ -136,6 +136,8 @@
 --by the time Demo 4 releases (And/or the full release happens).
 --_ getLegacyStarsCollectedNameOnly(): Same as last, except it only lists
 --the names via a table.
+--_ unlockAnyBrokenPaths(): Unlocks any paths that had stars already collected
+--in prior.
 
 local smasfunctions = {}
 
@@ -391,11 +393,11 @@ function restoreMusic(sectionid) --Restore all section music, or just restore a 
 	if sectionid == -1 then --If -1, all section music will be restored
 		for i = 0,20 do
 			songname = GameData.levelMusicTemporary[i]
-			Audio.MusicChange(i, songname)
+			Section(i).music = songname
 		end
 	elseif sectionid >= 0 or sectionid <= 20 then
 		songname = GameData.levelMusicTemporary[sectionid]
-		Audio.MusicChange(sectionid, songname)
+		Section(sectionid).music = songname
 	elseif sectionid >= 21 then
 		error("That's higher than SMBX2 can go. Go to a lower section than that.")
 	end
@@ -1090,6 +1092,10 @@ function rngTrueValue(argument) --Thanks Seija!
 end
 
 function saveSaveSlot(slot)
+    if slot > 32767 then
+        error("You can't save to a save slot greater than 32767.")
+        return
+    end
 	Misc.saveSlot(slot)
 	Misc.saveGame()
 end
@@ -1097,10 +1103,16 @@ end
 function moveSaveSlot(slot, destination)
 	if slot == nil then
 		error("You must specify a moving save slot.")
+        return
 	end
 	if destination == nil then
 		error("You must specify a target save slot.")
+        return
 	end
+    if destination > 32767 then
+        error("You can't move to a save slot greater than 32767.")
+        return
+    end
 	local filename = "save"..slot.."-ext.dat"
 	local filenamesav = "save"..slot..".sav"
 	local filename2 = "save"..destination.."-ext.dat"
@@ -1129,6 +1141,10 @@ function moveSaveSlot(slot, destination)
 end
 
 function eraseMainSaveSlot(slot) --This only erases the main save in the save slot.
+    if slot > 32767 then
+        error("You can't erase a save slot greater than 32767.")
+        return
+    end
 	local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
 	if f == nil then
 		return
@@ -1139,6 +1155,10 @@ function eraseMainSaveSlot(slot) --This only erases the main save in the save sl
 end
 
 function eraseSaveSlot(slot) --This erases all the save data in a specific slot.
+    if slot > 32767 then
+        error("You can't erase a save slot greater than 32767.")
+        return
+    end
 	local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
 	if f == nil then
 		return

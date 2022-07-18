@@ -284,6 +284,10 @@ function onStart()
 	if mem(0x00B2C5AC,FIELD_FLOAT,0) then
 		mem(0x00B2C5AC,FIELD_FLOAT,3)
 	end
+    if GameData.temporaryPowerupStored ~= nil then
+        player.powerup = GameData.temporaryPowerupStored
+        GameData.temporaryPowerupStored = nil
+    end
 	Misc.saveGame()
 end
 

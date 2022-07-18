@@ -619,10 +619,10 @@ local starList
 local starListOptional
 
 local function MigrateOldSave3()
-	SaveData.totalStarCount = tonumber(mem(0x00B251E0, FIELD_WORD))
 	SaveData.totalCoinsClassic = tonumber(mem(0x00B2C5A8, FIELD_WORD))
 	SaveData.totalLives = tonumber(mem(0x00B2C5AC, FIELD_FLOAT))
 	SaveData.totalScoreClassic = tonumber(Misc.score())
+    GameData.temporaryPowerupStored = player.powerup
     for k,v in ipairs(smastables.__allLevels) do
         if table.icontains(getLegacyStarsCollectedNameOnly(),v) == true then
             table.insert(SaveData.completeLevels, v)
@@ -633,6 +633,7 @@ local function MigrateOldSave3()
             table.insert(SaveData.completeLevelsOptional, v)
         end
     end
+    SaveData.totalStarCount = #SaveData.completeLevels
 	eraseMainSaveSlot(Misc.saveSlot())
 	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Save has been officially migrated! Please note that you'll need to reunlock paths,<page>but other than that you should be good to go!<page>Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
 end

@@ -970,6 +970,7 @@ local function exitlevel2()
 	Misc.unpause()
 	exitFadeActive = false
 	exitFadeActiveDone = true
+    GameData.____muteMusic = false
 	Level.load("map.lvlx")
 end
 
@@ -1031,6 +1032,7 @@ function restartlevel()
 	Misc.unpause()
 	exitFadeActive = false
 	exitFadeActiveDone = true
+    GameData.____muteMusic = false
 	Level.load(Level.filename())
 end
 
