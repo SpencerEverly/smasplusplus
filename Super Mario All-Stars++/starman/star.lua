@@ -247,10 +247,11 @@ local function drawStar(p)
 								{
 									time = lunatime.tick()*2;
 								},
-						drawmounts = (player:mem(0x108, FIELD_WORD) ~= 3)
+						drawmounts = (player:mem(0x108, FIELD_WORD) ~= 3),
+                        priority = -23.8
 					};
 					
-			local priority = -25;
+			local priority = -23;
 			if(p.forcedState == 3) then
 				priority = -70;
 			end
