@@ -391,11 +391,11 @@ function restoreMusic(sectionid) --Restore all section music, or just restore a 
 	if sectionid == -1 then --If -1, all section music will be restored
 		for i = 0,20 do
 			songname = GameData.levelMusicTemporary[i]
-			Section(i).music = songname
+			Audio.MusicChange(i, songname)
 		end
 	elseif sectionid >= 0 or sectionid <= 20 then
 		songname = GameData.levelMusicTemporary[sectionid]
-		Section(sectionid).music = songname
+		Audio.MusicChange(sectionid, songname)
 	elseif sectionid >= 21 then
 		error("That's higher than SMBX2 can go. Go to a lower section than that.")
 	end

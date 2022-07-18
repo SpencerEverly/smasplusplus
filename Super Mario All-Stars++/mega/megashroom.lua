@@ -392,11 +392,12 @@ local function UpdateMegaState()
 						if(Audio.MusicVolume() > 0 and growing[p] >= 0) then
 							musicvolcache = Audio.MusicVolume()
 							Audio.MusicVolume(0);
-							refreshMusic(-1)
-							muteMusic(-1)
-							GameData.____muteMusic = true
 						end
-						
+                        
+                        if growing[p] >= 0 and mega2.duration >= lunatime.toTicks(13.8) then
+                            
+                        end
+                        
 						if(p:mem(0x13E, FIELD_WORD) > 0) then
 							mega2.StopMega(p,false)
 						end
@@ -466,6 +467,9 @@ local function UpdateMegaState()
 						mega2.StopMega(p,true)
 					end
 				elseif(growing[p] == 0) then
+                    refreshMusic(-1)
+                    muteMusic(-1)
+                    GameData.____muteMusic = true
 					soundObject = SFX.play(mega2.sfxFile, 1, 0)
 				end
 		end
