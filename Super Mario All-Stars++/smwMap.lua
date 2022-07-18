@@ -1037,10 +1037,6 @@ function smwMap.onStart()
 	--if not GameData.____mainMenuComplete then
 		--Level.load("SMAS - Start.lvlx")
 	--end
-    if SaveData.firstBootMapPathFixed == false then
-        unlockAnyBrokenPaths()
-        SaveData.firstBootMapPathFixed = true
-    end
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
         p.forcedTimer = 0
@@ -4368,6 +4364,10 @@ end
 function smwMap.onDraw()
     if Misc.isPaused() and unlockLoopObj ~= nil and unlockLoopObj:isPlaying() then
         unlockLoopObj:pause()
+    end
+    if SaveData.firstBootMapPathFixed == false then
+        unlockAnyBrokenPaths()
+        SaveData.firstBootMapPathFixed = true
     end
 	--Text.printWP(GameData.____currentpathunlocking, 100, 100, 8)
 end
