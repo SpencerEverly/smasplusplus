@@ -1,0 +1,4 @@
+gfxwidth=36
+gfxheight=38
+frames=8
+framestyle=1

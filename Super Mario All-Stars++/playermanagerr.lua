@@ -1,11 +1,11 @@
---playerManager.lua
+--playerManagerSMAS.lua
 --v1.0.2
 --Created by Horikawa Otane, 2016
 --Edited by Rednaxela, because why not
 --Rocky was here too
 --Enjl.
 --Spencer Everly.
-local playerManager = {}
+local playerManagerSMAS = {}
 
 -- Local function definitions
 local playerManagerInit
@@ -33,6 +33,7 @@ characterAssets.sounds = {};
 --local costumeData = Data(Data.DATA_WORLD, "Costumes", true);
 SaveData.__costumes = SaveData.__costumes or {}
 
+
 local blockmanager
 
 if not isOverworld then
@@ -41,7 +42,7 @@ end
 
 local characterColliders = {}
 					 
-playerManager.overworldCharacters = nil;
+playerManagerSMAS.overworldCharacters = nil;
 					 
 -----------------------------------------
 ------ LOCAL FUNCTION DECLERATIONS ------
@@ -65,10 +66,6 @@ function playerManagerInit()
 	configCharacter{id=14, name="ultimaterinka",   base=4, switchBlock=655, filterBlock=656, deathEffect=157}
 	configCharacter{id=15, name="unclebroadsword", base=1, switchBlock=659, filterBlock=660, deathEffect=159}
 	configCharacter{id=16, name="samus",           base=5, switchBlock=663, filterBlock=664, deathEffect=161}
-	configCharacter{id=17, name="ultimaterinkatwo",base=4, switchBlock=990, filterBlock=991, deathEffect=160}
-	configCharacter{id=18, name="juni",            base=4, switchBlock=992, filterBlock=993, deathEffect=158}
-	configCharacter{id=19, name="ninjabombermantwo",base=3, switchBlock=994, filterBlock=995, deathEffect=999}
-	configCharacter{id=20, name="princessrinka",   base=4, switchBlock=996, filterBlock=997, deathEffect=158}
 	
 	-- Load Character APIs if this is not the overworld
 	--if not isOverworld then
@@ -125,7 +122,7 @@ end
 
 -- Function to load all character APIs
 function loadCharacterAPIs()
-	local p = "character\\";
+	local p = "characters/";
 	if(isOverworld) then
 		p = p.."overworld/";
 	end
@@ -144,8 +141,8 @@ function loadCharacterAPIs()
 	end
 end
 
-function playerManager.overrideCharacterLib(params, id, lib)
-	local p = "character\\";
+function playerManagerSMAS.overrideCharacterLib(id, lib)
+	local p = "characters/";
 	if(isOverworld) then
 		p = p.."overworld/";
 	end
@@ -156,7 +153,7 @@ function playerManager.overrideCharacterLib(params, id, lib)
 	
 	loadedTable[p..params.name] = lib
 	loadedTable[string.lower(p..params.name)] = lib
-	loadedTable[string.lower(Misc.episodePath()..p..params.name..".lua")] = lib
+	loadedTable[string.lower("scripts/"..p..params.name..".lua")] = lib
 	
 	params.api = lib
 	
@@ -168,10 +165,7 @@ function prepareCharacterSwaps(params, path)
 	local swapTypes = {'npc', 'effect', 'sound'}
 	local swapPattern = {npc='^npc%-(%d+)%.png$', effect='^effect%-(%d+)%.png$', sound='^sound%-(%d+)%.ogg$'}
 	local swaps = {}
-	--local characterDir = path
-	--if(path == nil) then
-	local characterDir = Misc.resolveDirectory("graphics/"..params.name)
-	--end
+	local characterDir = Misc.resolveDirectory("graphics/characters/" .. params.name)
 	local fileList = Misc.listFiles(characterDir)
 	for _,v in ipairs(fileList) do
 		for _,swapType in ipairs(swapTypes) do
@@ -269,14 +263,14 @@ local function initCharacter(characterId, player)
 	end
 end
 
-function playerManager.resolveIni(file, path)
+function playerManagerSMAS.resolveIni(file, path)
 	if(path == nil) then
 		path = "";
 	else
 		path = path.."\\";
 	end
 	
-	local iniFilePath = Misc.resolveFile(path..file) or Misc.episodePath().."\\config\\characterinis\\" .. file
+	local iniFilePath = Misc.resolveFile(path..file) or getSMBXPath().."\\config\\character_defaults\\" .. file
 	if (iniFilePath == nil) then
 		Misc.warn("Cannot find: " .. iniFileName)
 	end
@@ -293,7 +287,7 @@ function updateCharacterHitbox(characterId, path)
 	local baseId = characters[characterId].base;
 	for i = 1, 7, 1 do
 	
-		local iniFilePath = playerManager.getHitboxPath(characterId, i);
+		local iniFilePath = playerManagerSMAS.getHitboxPath(characterId, i);
 		if (iniFilePath == nil) then
 			Misc.warn("Cannot find: " .. iniFileName)
 		else
@@ -318,16 +312,16 @@ function updateCharacterHitbox(characterId, path)
 	end
 end
 
-function playerManager.getHitboxPath(characterId, power)
+function playerManagerSMAS.getHitboxPath(characterId, power)
 		local path = nil;
 		if(costumes[characterId] ~= nil) then
 			path = "costumes\\"..characters[characterId].name.."\\"..costumes[characterId];
 		end
 		
-		return playerManager.resolveIni(characters[characterId].name .. "-" .. power .. ".ini", path);
+		return playerManagerSMAS.resolveIni("characters/"..characters[characterId].name .. "-" .. power .. ".ini", path);
 end
 
-function playerManager.winStateCheck()
+function playerManagerSMAS.winStateCheck()
 	if Level.winState() ~= 0 or player:mem(0x13E,FIELD_WORD) > 0 then
 		player.leftKeyPressing = false
 		player.rightKeyPressing = false
@@ -384,7 +378,7 @@ local function getUID(assetlist)
 end
 
 --Register a graphic as being replaceable by costumes
-function playerManager.registerGraphic(characterID, key, filename)
+function playerManagerSMAS.registerGraphic(characterID, key, filename)
 	if(characterAssets.graphics[characterID] == nil) then
 		characterAssets.graphics[characterID] = {__default = {}}
 	end
@@ -392,12 +386,12 @@ function playerManager.registerGraphic(characterID, key, filename)
 		filename = key;
 		key = getUID(characterAssets.graphics[characterID].__default);
 	end
-	characterAssets.graphics[characterID].__default[key] = {path = filename, file = Graphics.loadImageResolved("graphics\\"..characters[characterID].name.."\\"..filename)};
+	characterAssets.graphics[characterID].__default[key] = {path = filename, file = Graphics.loadImageResolved("characters/"..characters[characterID].name.."/"..filename)};
 	return key;
 end
 
 --Register a sound as being replaceable by costumes
-function playerManager.registerSound(characterID, key, filename)
+function playerManagerSMAS.registerSound(characterID, key, filename)
 	if(characterAssets.sounds[characterID] == nil) then
 		characterAssets.sounds[characterID] = {__default = {}}
 	end	
@@ -426,12 +420,12 @@ local function getAsset(assetlist,characterID,key)
 end
 
 --Get a costume replaceable graphic
-function playerManager.getGraphic(characterID, key)
+function playerManagerSMAS.getGraphic(characterID, key)
 	return getAsset(characterAssets.graphics,characterID,key)
 end
 
 --Get a costume replaceable sound
-function playerManager.getSound(characterID, key)	
+function playerManagerSMAS.getSound(characterID, key)	
 	return getAsset(characterAssets.sounds,characterID,key)
 end
 
@@ -446,8 +440,8 @@ local icontains = table.icontains;
 
 --Load the character roster that is switchable on the world map
 function initOverworldCharacters()
-	if(playerManager.overworldCharacters == nil) then
-		playerManager.overworldCharacters = {}
+	if(playerManagerSMAS.overworldCharacters == nil) then
+		playerManagerSMAS.overworldCharacters = {}
 		
 		--Read from world file to fill in vanilla character filters.
 		if(isOverworld) then
@@ -468,12 +462,12 @@ function initOverworldCharacters()
 					if #headerData.disableCharacters > 0 then
 						for i=1,5 do
 							if not headerData.disableCharacters[i] then
-								table.insert(playerManager.overworldCharacters, i);
+								table.insert(playerManagerSMAS.overworldCharacters, i);
 							end
 						end
 						
-						if #playerManager.overworldCharacters == 5 then
-							playerManager.overworldCharacters = {}
+						if #playerManagerSMAS.overworldCharacters == 5 then
+							playerManagerSMAS.overworldCharacters = {}
 						end
 					end
 				--[[ --old wld only system
@@ -498,7 +492,7 @@ function initOverworldCharacters()
 					if(count < 5) then
 						for k,v in ipairs(mainFive) do
 							if(v) then
-								table.insert(playerManager.overworldCharacters, k);
+								table.insert(playerManagerSMAS.overworldCharacters, k);
 							end
 						end
 					end
@@ -507,11 +501,11 @@ function initOverworldCharacters()
 			end
 		end
 		
-		if(#playerManager.overworldCharacters == 0) then
+		if(#playerManagerSMAS.overworldCharacters == 0) then
 			for k,v in pairs(characters) do
-				--if(k ~= CHARACTER_ULTIMATERINKA and k~= CHARACTER_PRINCESSRINKA) then --Exclude certain rinka-based characters
-				table.insert(playerManager.overworldCharacters, k);
-				--end
+				if(k ~= CHARACTER_ULTIMATERINKA --[[and k~= CHARACTER_PRINCESSRINKA]]) then --Exclude certain rinka-based characters
+					table.insert(playerManagerSMAS.overworldCharacters, k);
+				end
 			end
 		end
 	end
@@ -541,7 +535,7 @@ end
 --TODO: Fix this so it hot-loads and unloads correctly
 local function loadCostumeLua(path, plr)
 	local luafile = nil;
-	local func, err = loadFile(path)
+	local func, err = loadfile(path)
     if(func)then
         luafile = func()
 		if(type(luafile) ~= "table")then
@@ -624,7 +618,7 @@ local function updateCostumeSwaps(plr)
 end
 
 --Warning: could mess up things if used on characters that are not currently in use. Use with caution.
-function playerManager.refreshHitbox(characterID)
+function playerManagerSMAS.refreshHitbox(characterID)
 	updateCharacterHitbox(characterID);
 end
 
@@ -638,7 +632,7 @@ do
 	
 	local assetTypes = {"graphics", "sounds"}
 		  
-	function playerManager.setCostume(characterID, costumeName, volatile)
+	function playerManagerSMAS.setCostume(characterID, costumeName, volatile)
 		
 		local savedata = volatile ~= true;
 		--Quick exit if the costume we're changing to is the current costume.
@@ -660,7 +654,7 @@ do
 		cleanupCostumeResidue(characterID);
 		
 		--We're reverting to default costume
-		if(costumeName == nil or costumeName == "" or not icontains(playerManager.getCostumes(characterID), costumeName:upper())) then 
+		if(costumeName == nil or costumeName == "" or not icontains(playerManagerSMAS.getCostumes(characterID), costumeName:upper())) then 
 		
 			--If we want to save costume data, write it now
 			if(savedata) then
@@ -796,14 +790,14 @@ do
 				end
 			end
 			
-			playerManager.onCostumeChange(characterID, costumes[characterID]);
+			playerManagerSMAS.onCostumeChange(characterID, costumes[characterID]);
 		end
 	end
 end
 
-function playerManager.getCostumeImage(pl,power)
+function playerManagerSMAS.getCostumeImage(pl,power)
 	local filename = characters[pl].name.."-"..power..".png";
-	local costume = playerManager.getCostume(pl);
+	local costume = playerManagerSMAS.getCostume(pl);
 	local path = resolveCostumeFile(pl, costume or "", filename);
 	if(path ~= nil) then
 		return Graphics.loadImage(path);
@@ -812,7 +806,7 @@ function playerManager.getCostumeImage(pl,power)
 	end
 end
 
-function playerManager.getCharacters()
+function playerManagerSMAS.getCharacters()
 	local charTbl = {}
 	
 	for  k,v in pairs(characters)  do
@@ -827,15 +821,15 @@ function playerManager.getCharacters()
 	return charTbl
 end
 
-function playerManager.getName(characterID)
+function playerManagerSMAS.getName(characterID)
 	return characters[characterID].name
 end
 
-function playerManager.getBaseID(characterID)
+function playerManagerSMAS.getBaseID(characterID)
 	return characters[characterID].base
 end
 
-function playerManager.getCostumes(characterID)
+function playerManagerSMAS.getCostumes(characterID)
 	local lists = {listDirs(Misc.resolveDirectory("costumes\\"..characters[characterID].name)), listDirs(getSMBXPath().."\\costumes\\"..characters[characterID].name)}
 	local t = {}
 	for _,list in ipairs(lists) do
@@ -849,7 +843,7 @@ function playerManager.getCostumes(characterID)
 	return t;
 end
 
-function playerManager.getCostumeFromData(characterID)
+function playerManagerSMAS.getCostumeFromData(characterID)
 	local c = SaveData.__costumes[tostring(characterID)];
 	if (c == "") then
 		c = nil;
@@ -857,7 +851,7 @@ function playerManager.getCostumeFromData(characterID)
 	return c;
 end
 
-function playerManager.getCostume(characterID)
+function playerManagerSMAS.getCostume(characterID)
 	return costumes[characterID];
 end
 
@@ -866,7 +860,7 @@ local function vanillaCostumeInit()
 
 	for k,v in pairs(SaveData.__costumes) do
 		if(tonumber(k) ~= nil and tonumber(k) < 6 and characters[tonumber(k)] ~= nil) then
-			playerManager.setCostume(tonumber(k),(v:match'^()%s*$' and '' or v:match'^%s*(.*%S)'))
+			playerManagerSMAS.setCostume(tonumber(k),(v:match'^()%s*$' and '' or v:match'^%s*(.*%S)'))
 		end
 	end
 end
@@ -875,7 +869,7 @@ local function newCostumeInit()
 
 	for k,v in pairs(SaveData.__costumes) do
 		if(tonumber(k) ~= nil and tonumber(k) >= 6 and characters[tonumber(k)] ~= nil) then
-			playerManager.setCostume(tonumber(k),(v:match'^()%s*$' and '' or v:match'^%s*(.*%S)'))
+			playerManagerSMAS.setCostume(tonumber(k),(v:match'^()%s*$' and '' or v:match'^%s*(.*%S)'))
 		end
 	end
 end
@@ -885,7 +879,7 @@ local function costumeInit()
 	for k,v in pairs(SaveData.__costumes) do
 		k = tonumber(k);
 		if(k ~= nil and characters[k] ~= nil) then
-			playerManager.setCostume(k,(v:match'^()%s*$' and '' or v:match'^%s*(.*%S)'))
+			playerManagerSMAS.setCostume(k,(v:match'^()%s*$' and '' or v:match'^%s*(.*%S)'))
 		end
 	end
 end
@@ -906,7 +900,7 @@ function colliderMT.__newindex(tbl, k, v)
 	end
 end
 
-function playerManager.registerCollider(character, index, name, collider)
+function playerManagerSMAS.registerCollider(character, index, name, collider)
 	if(collider == nil) then return nil end;
 	if(characterColliders[character] == nil) then
 		characterColliders[character] = {};
@@ -919,7 +913,7 @@ function playerManager.registerCollider(character, index, name, collider)
 	return characterColliders[character][index][name];
 end
 
-function playerManager.getCollider(character, index, name)
+function playerManagerSMAS.getCollider(character, index, name)
 	if(characterColliders[character] and characterColliders[character][index] and characterColliders[character][index][name] and characterColliders[character][index][name].active) then
 		return characterColliders[character][index][name].collider;
 	else
@@ -934,7 +928,7 @@ end
 function Player:getCollider(name)
 	for k,v in ipairs(Player.get()) do
 		if(self == v) then
-			return playerManager.getCollider(self.character,k,name);
+			return playerManagerSMAS.getCollider(self.character,k,name);
 		end
 	end
 	return nil;
@@ -944,33 +938,33 @@ function Player.getCostume(character)
 	if(type(character) ~= "number" and character.__type == "Player") then
 		character = character.character;
 	end
-	return playerManager.getCostume(character);
+	return playerManagerSMAS.getCostume(character);
 end
 
 function Player.setCostume(character, costumeName, volatile)
 	if(type(character) ~= "number" and character.__type == "Player") then
 		character = character.character;
 	end
-	playerManager.setCostume(character, costumeName, volatile)
+	playerManagerSMAS.setCostume(character, costumeName, volatile)
 end
 
 ---------------------------
 ------ API CALLBACKS ------
 ---------------------------
-function playerManager.onInitAPI()
-	registerEvent(playerManager, "onStart", "onStart", false)
-	registerEvent(playerManager, "onLoop", "onLoop", false)
-	registerEvent(playerManager, "onTick", "onTick", false)
+function playerManagerSMAS.onInitAPI()
+	registerEvent(playerManagerSMAS, "onStart", "onStart", false)
+	registerEvent(playerManagerSMAS, "onLoop", "onLoop", false)
+	registerEvent(playerManagerSMAS, "onTick", "onTick", false)
 	
 	if not isOverworld then
-		registerEvent(playerManager, "onTickEnd", "onTickEnd", false)
+		registerEvent(playerManagerSMAS, "onTickEnd", "onTickEnd", false)
 	end
-	registerEvent(playerManager, "onDraw", "onDraw", false)
-	registerEvent(playerManager, "onInputUpdate", "onInputUpdate", false)
-	registerEvent(playerManager, "onExit", "onExit", true)
-	registerEvent(playerManager, "onSaveGame")
+	registerEvent(playerManagerSMAS, "onDraw", "onDraw", false)
+	registerEvent(playerManagerSMAS, "onInputUpdate", "onInputUpdate", false)
+	registerEvent(playerManagerSMAS, "onExit", "onExit", true)
+	registerEvent(playerManagerSMAS, "onSaveGame")
 	
-	registerCustomEvent(playerManager, "onCostumeChange");
+	registerCustomEvent(playerManagerSMAS, "onCostumeChange");
 	
 	--vanillaCostumeInit();
 	-- Try to load hitboxes early if we can
@@ -983,7 +977,7 @@ function playerManager.onInitAPI()
 	costumes = {};
 end
 
-function playerManager.onStart()
+function playerManagerSMAS.onStart()
 	-- Also load hitboxes in onStart
 	updateCurrentCharacter()
 	
@@ -994,7 +988,7 @@ function playerManager.onStart()
 	costumeInit();
 end
 
-function playerManager.onTick()
+function playerManagerSMAS.onTick()
 	-- Also load hitboxes in onStart
 	updateCurrentCharacter()
 	
@@ -1009,7 +1003,7 @@ function playerManager.onTick()
 	end
 end
 
-function playerManager.onTickEnd()
+function playerManagerSMAS.onTickEnd()
 	for _,p in ipairs(Player.get()) do
 		for k,v in Block.iterateIntersecting(p.x - 2, p.y - 2, p.x + p.width + 2, p.y + p.height + 2) do
 			if(v.isValid and v:collidesWith(p) ~= 0) then
@@ -1024,7 +1018,7 @@ end
 local pressedKeys = {};
 local characterindex = 0
 
-function playerManager.onInputUpdate()
+function playerManagerSMAS.onInputUpdate()
 	--Set up the world map to support changing to all characters via the pause menu
 	if(isOverworld) then
 		if(not player.rightKeyPressing) then
@@ -1049,9 +1043,9 @@ function playerManager.onInputUpdate()
 			
 			--Adjust character if necessary
 			if(charoffset ~= nil) then
-				if characterindex == 0 or playerManager.overworldCharacters[characterindex] ~= player.character then
+				if characterindex == 0 or playerManagerSMAS.overworldCharacters[characterindex] ~= player.character then
 					characterindex = 0
-					for k,v in ipairs(playerManager.overworldCharacters) do
+					for k,v in ipairs(playerManagerSMAS.overworldCharacters) do
 						if v == player.character then
 							characterindex = k
 							break
@@ -1062,11 +1056,11 @@ function playerManager.onInputUpdate()
 				local index
 
 				if characterindex > 0 then
-					characterindex = ((characterindex-1+charoffset)%#playerManager.overworldCharacters) + 1
+					characterindex = ((characterindex-1+charoffset)%#playerManagerSMAS.overworldCharacters) + 1
 				else
 					characterindex = 1
 				end
-				index = playerManager.overworldCharacters[characterindex]
+				index = playerManagerSMAS.overworldCharacters[characterindex]
 				
 				if index == nil then
 					index = 1
@@ -1093,12 +1087,12 @@ function playerManager.onInputUpdate()
 	end
 end
 
-function playerManager.onLoop()
+function playerManagerSMAS.onLoop()
 	-- Also at this point too just in case
 	updateCurrentCharacter()
 end
 
-function playerManager.onDraw()
+function playerManagerSMAS.onDraw()
 	-- Just in case to avoid a rendering glitch
 	updateCurrentCharacter()
 end
@@ -1140,7 +1134,7 @@ local function saveCharData(pids)
 end
 
 --Just ensure we save the powerup states and such of new characters
-function playerManager.onSaveGame()
+function playerManagerSMAS.onSaveGame()
 	local pids = {};
 	for _,v in ipairs(Player.get()) do	
 		if(pids[v.character] == nil) then
@@ -1151,7 +1145,7 @@ function playerManager.onSaveGame()
 	saveCharData(pids);
 end
 
-function playerManager.onExit()
+function playerManagerSMAS.onExit()
 	local pids = {};
 	for _,v in ipairs(Player.get()) do
 		cleanupCharacter(currentCharacterId[v], v)
@@ -1163,4 +1157,4 @@ function playerManager.onExit()
 	saveCharData(pids);
 end
 
-return playerManager
+return playerManagerSMAS

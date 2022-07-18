@@ -886,6 +886,7 @@ ID:752;X:-196064;Y:-196576;
 ID:782;X:-191824;Y:-195712;
 ID:781;X:-193056;Y:-196224;
 ID:785;X:-198304;Y:-196320;
+ID:786;X:-197440;Y:-198144;
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -1399,7 +1400,7 @@ ID:850;X:-199008;Y:-200800;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-2\, 
 ID:752;X:-198784;Y:-200736;D:-1;XTRA:"{\n    \"name\"\: \"toSMBS2-4\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
 ID:802;X:-198720;Y:-200736;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBS - W-2\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"2-4\: Pyramid Snow Ahead!\"\,\n    \"path_left\"\: \"toSMBS2-4\"\,\n    \"path_right\"\: \"toSMBS2-5\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:857;X:-196608;Y:-200288;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-Pyramid.lvlx\"\,\n    \"levelTitle\"\: \"Pyramid Caves\"\,\n    \"path_down\"\: \"toSMB32-Pyramid\"\,\n    \"path_left\"\: \"toSMB32-Castle\"\,\n    \"unlock_left\"\: 9\n}\n";
-ID:854;X:-196704;Y:-200352;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-Castle\"\,\n    \"levelTitle\"\: \"Airship #2\: Morton\"\,\n    \"path_down\"\: \"toSMB32-Castle\"\,\n    \"path_up\"\: \"toSMB3W-2Path1\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:854;X:-196704;Y:-200352;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-2\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #2\: Morton\"\,\n    \"path_down\"\: \"toSMB32-Castle\"\,\n    \"path_up\"\: \"toSMB3W-2Path1\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-196640;Y:-200288;D:-1;XTRA:"{\n    \"name\"\: \"toSMB32-Castle\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -64\, -64\"\n}\n";
 ID:752;X:-196704;Y:-200384;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-2Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:821;X:-196704;Y:-200416;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-3BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 3\"\,\n    \"path_down\"\: \"toSMB3W-2Path1\"\,\n    \"warpName\"\: \"SMB3W-2EndWarp\"\n}\n";
@@ -1631,6 +1632,12 @@ ID:862;X:-197952;Y:-194240;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-7\,
 ID:752;X:-197856;Y:-194240;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA7-4\"\,\n    \"points\"\: \"32\, 0\, -96\, 0\"\n}\n";
 ID:821;X:-197952;Y:-194336;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBABeginWarp\"\,\n    \"levelTitle\"\: \"Warp to Game Select\"\,\n    \"path_down\"\: \"toWSMBAW-7Path1\"\,\n    \"warpName\"\: \"WSMBAEndingPipeFinale\"\n}\n";
 ID:752;X:-197952;Y:-194272;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-7Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
+ID:753;X:-197600;Y:-198176;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Ocean Land.spc|0\;g=2.5\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 1600\n}\n";
+ID:821;X:-197344;Y:-197728;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-2EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 2\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toSMB33-1\"\,\n    \"warpName\"\: \"SMB3W-3BeginWarp\"\n}\n";
+ID:752;X:-197312;Y:-197728;D:-1;XTRA:"{\n    \"name\"\: \"toSMB33-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, -160\"\n}\n";
+ID:802;X:-197280;Y:-197888;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"3-1\: Entering the Waters\"\,\n    \"path_down\"\: \"toSMB33-1\"\,\n    \"path_up\"\: \"toSMB33-2\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-197280;Y:-197920;D:-1;XTRA:"{\n    \"name\"\: \"toSMB33-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
+ID:802;X:-197280;Y:-198016;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-3\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"3-2\: Platforms Above\"\,\n    \"path_down\"\: \"toSMB33-2\"\,\n    \"unlock_up\"\: 9\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
