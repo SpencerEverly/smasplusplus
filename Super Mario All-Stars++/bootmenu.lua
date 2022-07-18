@@ -623,16 +623,16 @@ local function MigrateOldSave3()
 	SaveData.totalCoinsClassic = tonumber(mem(0x00B2C5A8, FIELD_WORD))
 	SaveData.totalLives = tonumber(mem(0x00B2C5AC, FIELD_FLOAT))
 	SaveData.totalScoreClassic = tonumber(Misc.score())
-    SaveData.completeLevels = getLegacyStarsCollectedNameOnly()
-    --Unfinished wip
-    --starList = table.ifindall(getLegacyStarsCollectedNameOnly(),smastables.__allLevels)
-    --for i = 1,#starList do
-        --table.insert(SaveData.completeLevels, i)
-    --end
-    --starListOptional = table.ifind(getLegacyStarsCollectedNameOnly(),smastables.__allLevelsOptional)
-    --for i = 1,#starList do
-        --table.insert(SaveData.completeLevels, i)
-    --end
+    for k,v in ipairs(smastables.__allLevels) do
+        if table.icontains(getLegacyStarsCollectedNameOnly(),v) == true then
+            table.insert(SaveData.completeLevels, v)
+        end
+    end
+    for k,v in ipairs(smastables.__allLevelsOptional) do
+        if table.icontains(getLegacyStarsCollectedNameOnly(),v) == true then
+            table.insert(SaveData.completeLevelsOptional, v)
+        end
+    end
 	eraseMainSaveSlot(Misc.saveSlot())
 	littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Save has been officially migrated! Please note that you'll need to reunlock paths,<page>but other than that you should be good to go!<page>Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
 end
