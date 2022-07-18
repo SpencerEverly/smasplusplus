@@ -147,6 +147,7 @@ local megashroom = require("mega/megashroom")
 local playerManager = require("playermanager")
 local smasverbosemode = require("smasverbosemode")
 local smastables = require("smastables")
+local smwMap = require("smwMap")
 --_G.File = require("scripts/smas/functions-file")
 
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
@@ -1169,6 +1170,61 @@ function getLegacyStarsCollectedNameOnly() --This is for the Demo 3 save migrati
         t[i] = mem(GM_STAR_ADDR+(i - 1)*0x08+0x00, FIELD_STRING)
     end
     return t
+end
+
+function unlockAnyBrokenPaths() --WIP function that will unlock any path if any star has been collected prior.
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-1.lvlx") == true then
+        smwMap.unlockPath("toSMB11-2")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-2.lvlx") == true then
+        smwMap.unlockPath("toSMB11-3")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-3.lvlx") == true then
+        smwMap.unlockPath("toSMB11-4")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-4.lvlx") == true then
+        smwMap.unlockPath("toSMB1W-2")
+        smwMap.unlockPath("toSMB1W-1FromW2")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-1.lvlx") == true then
+        smwMap.unlockPath("toSMB1W-2Path1")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-2.lvlx") == true then
+        smwMap.unlockPath("toSMB12-3")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-3.lvlx") == true then
+        smwMap.unlockPath("toSMB12-4")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-4.lvlx") == true then
+        smwMap.unlockPath("toSMB1W-2Path3")
+        smwMap.unlockPath("toSMB13-1")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-1.lvlx") == true then
+        smwMap.unlockPath("toSMB13-2")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-2.lvlx") == true then
+        smwMap.unlockPath("toSMB13-3")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-3.lvlx") == true then
+        smwMap.unlockPath("toSMB13-4")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-4.lvlx") == true then
+        smwMap.unlockPath("toSMB1W-3Path2")
+        smwMap.unlockPath("toSMB14-1")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-1.lvlx") == true then
+        smwMap.unlockPath("toSMB14-2")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-2.lvlx") == true then
+        smwMap.unlockPath("toSMB14-3")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-3.lvlx") == true then
+        smwMap.unlockPath("toSMB14-4")
+    end
+    if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-4.lvlx") == true then
+        smwMap.unlockPath("toSMB1W-4Path1")
+        smwMap.unlockPath("toSMB15-1")
+    end
 end
 
 return smasfunctions
