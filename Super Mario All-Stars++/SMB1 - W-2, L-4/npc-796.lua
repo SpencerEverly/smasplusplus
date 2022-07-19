@@ -50,6 +50,10 @@ local function animation(v)
 end
 
 function npc.onTickEndNPC(v)
+    --Don't act during time freeze, or when camera is moving when changing area
+	if Defines.levelFreeze then return end
+	if mem(0x00B2B9E4, FIELD_BOOL) == true then return end
+    
 	local config = NPC.config[id]
 	local data = v.data._basegame
 	
