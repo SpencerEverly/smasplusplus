@@ -131,14 +131,18 @@ end
 function p1teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-	player2:mem(0x140,FIELD_WORD,100)
-	Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
+    if Player.count() >= 2 and Player(2).isValid then
+        player2:mem(0x140,FIELD_WORD,100)
+        Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
+    end
 end
 
 function p2teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-	player2:mem(0x140,FIELD_WORD,100)
+    if Player.count() >= 2 and Player(2).isValid then
+        player2:mem(0x140,FIELD_WORD,100)
+    end
 	Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
 end
 
@@ -154,14 +158,16 @@ function classicbattlerevivep1()
 end
 
 function classicbattlerevivep2()
-	diedp2 = true
-	Routine.waitFrames(300, true)
-	revivep2 = true
-	Routine.wait(0.3, true)
-	revivep2 = false
-	diedp2 = false
-	Player(2):teleport(Player(1).x + 32, Player(1).y + 32, bottomCenterAligned)
-	SFX.play(34)
+    if Player.count() >= 2 and Player(2).isValid then
+        diedp2 = true
+        Routine.waitFrames(300, true)
+        revivep2 = true
+        Routine.wait(0.3, true)
+        revivep2 = false
+        diedp2 = false
+        Player(2):teleport(Player(1).x + 32, Player(1).y + 32, bottomCenterAligned)
+        SFX.play(34)
+    end
 end
 
 function classicbattlep1wins()
@@ -178,16 +184,18 @@ function classicbattlep1wins()
 end
 
 function classicbattlep2wins()
-	for i = 0,20 do
-		local section = Section(i)
-		section.music = 0
-	end
-	player2vuln = true
-	Routine.waitFrames(220, true)
-	playSound("classicbattle-won.ogg")
-	player2won = true
-	Routine.wait(4.5, true)
-	littleDialogue.create({text = "<setPos 400 32 0.5 -2.5><question MainSelect>", pauses = true, updatesInPause = true})
+    if Player.count() >= 2 and Player(2).isValid then
+        for i = 0,20 do
+            local section = Section(i)
+            section.music = 0
+        end
+        player2vuln = true
+        Routine.waitFrames(220, true)
+        playSound("classicbattle-won.ogg")
+        player2won = true
+        Routine.wait(4.5, true)
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.5><question MainSelect>", pauses = true, updatesInPause = true})
+    end
 end
 
 function countdownbegin()
@@ -223,22 +231,26 @@ function dependencies.onInputUpdate()
 		player.pauseKeyPressing = false
 	end
 	if diedp2 then
-		player2.upKeyPressing = false
-		player2.downKeyPressing = false
-		player2.leftKeyPressing = false
-		player2.rightKeyPressing = false
-		player2.altJumpKeyPressing = false
-		player2.runKeyPressing = false
-		player2.altRunKeyPressing = false
-		player2.dropItemKeyPressing = false
-		player2.jumpKeyPressing = false
-		player2.pauseKeyPressing = false
+        if Player.count() >= 2 and Player(2).isValid then
+            player2.upKeyPressing = false
+            player2.downKeyPressing = false
+            player2.leftKeyPressing = false
+            player2.rightKeyPressing = false
+            player2.altJumpKeyPressing = false
+            player2.runKeyPressing = false
+            player2.altRunKeyPressing = false
+            player2.dropItemKeyPressing = false
+            player2.jumpKeyPressing = false
+            player2.pauseKeyPressing = false
+        end
 	end
 	if revivep1 and player2vuln == false then
 		player.keys.jump = KEYS_PRESSED
 	end
 	if revivep2 and player1vuln == false then
-		player2.keys.jump = KEYS_PRESSED
+        if Player.count() >= 2 and Player(2).isValid then
+            player2.keys.jump = KEYS_PRESSED
+        end
 	end
 end
 
@@ -250,17 +262,19 @@ function dependencies.onDraw()
 	if player.deathTimer == 1 then
 		Routine.run(classicbattlerevivep1)
 	end
-	if player2.deathTimer == 1 then
-		Routine.run(classicbattlerevivep2)
-	end
 	if player.deathTimer == 1 and dependencies.p1lives < 0 then
 		dependencies.p1lives = 0
 		Routine.run(classicbattlep2wins)
 	end
-	if player2.deathTimer == 1 and dependencies.p2lives < 0 then
-		dependencies.p2lives = 0
-		Routine.run(classicbattlep1wins)
-	end
+    if Player.count() >= 2 and Player(2).isValid then
+        if player2.deathTimer == 1 then
+            Routine.run(classicbattlerevivep2)
+        end
+        if player2.deathTimer == 1 and dependencies.p2lives < 0 then
+            dependencies.p2lives = 0
+            Routine.run(classicbattlep1wins)
+        end
+    end
 	if exitscreen then
 		Graphics.drawScreen{color = Color.black, priority = 10}
 	end
@@ -379,6 +393,10 @@ end
 
 function dependencies.onStart()
 	GameData.battlemodeactive = true
+    player.powerup = 2
+    if Player.count() >= 2 and Player(2).isValid then
+        player2.powerup = 2
+    end
     --mem(0x00B2D740, FIELD_BOOL, true) --This enables Battle Mode physics and projectiles
 	Routine.run(countdownbegin)
 	if SaveData.ut_enabled == nil then
