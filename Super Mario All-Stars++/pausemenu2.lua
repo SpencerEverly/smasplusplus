@@ -1430,18 +1430,18 @@ if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 			--Character Menu
 			if SaveData.disableX2char == false then
 				pauseplus.createSubmenu("costumeoptions",{headerText = "<size 1.5>Costume Specific Options</size>"})
-				pauseplus.createOption("charactermenu",{text = "Change Character (Left)",description = "Switch the player's character to anything of your choice!", action =  function() characterchangeleft() end})
-				pauseplus.createOption("charactermenu",{text = "Change Character (Right)",description = "Switch the player's character to anything of your choice!", action =  function() characterchange() end})
-				pauseplus.createOption("charactermenu",{text = "Change Costumes (Left)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeleft() end})
-				pauseplus.createOption("charactermenu",{text = "Change Costumes (Right)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeright() end})
+				pauseplus.createOption("charactermenu",{text = "Change Character (Previous)",description = "Switch the player's character to anything of your choice!", action =  function() characterchangeleft() end})
+				pauseplus.createOption("charactermenu",{text = "Change Character (Next)",description = "Switch the player's character to anything of your choice!", action =  function() characterchange() end})
+				pauseplus.createOption("charactermenu",{text = "Change Costumes (Previous)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeleft() end})
+				pauseplus.createOption("charactermenu",{text = "Change Costumes (Next)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeright() end})
 				pauseplus.createOption("charactermenu",{text = "Costume Specific Options",goToSubmenu = "costumeoptions",description = "Change settings regarding the costume that is currently being worn."})
 				pauseplus.createOption("charactermenu",{text = "Enable/Disable Multiplayer",closeMenu = true,description = "Toggle the status of multiplayer. This will only work on 1.3 Mode (If in Normal Mode this won't do anything).",action = function() checkingplayerstatus() end})
 			end
 			if SaveData.disableX2char == true then
-				pauseplus.createOption("charactermenu",{text = "Change Character 1P (Left)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13left() end})
-				pauseplus.createOption("charactermenu",{text = "Change Character 1P (Right)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13() end})
-				pauseplus.createOption("charactermenu",{text = "Change Character 2P (Left)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2pleft() end})
-				pauseplus.createOption("charactermenu",{text = "Change Character 2P (Right)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2p() end})
+				pauseplus.createOption("charactermenu",{text = "Change Character 1P (Previous)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13left() end})
+				pauseplus.createOption("charactermenu",{text = "Change Character 1P (Next)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13() end})
+				pauseplus.createOption("charactermenu",{text = "Change Character 2P (Previous)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2pleft() end})
+				pauseplus.createOption("charactermenu",{text = "Change Character 2P (Next)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2p() end})
 				pauseplus.createOption("charactermenu",{text = "Enable/Disable Multiplayer",closeMenu = true,description = "Toggle the status of multiplayer. This will only work on 1.3 Mode (If in Normal Mode this won't do anything).",action = function() checkingplayerstatus13() end})
 			end
 			

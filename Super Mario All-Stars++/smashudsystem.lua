@@ -503,17 +503,6 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
 					SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
 				end
-				if GameData.multiplayeractive == true then
-					if GameData.battlemodeactive == true then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
-						if killed1 == true then
-							GameData.p1lives = GameData.p1lives - 1
-							killed1 = false
-						elseif killed2 == true then
-							GameData.p2lives = GameData.p2lives - 1
-							killed2 = false
-						end
-					end
-				end
 			end
 			if Misc.inMarioChallenge() then
 				SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
@@ -567,30 +556,7 @@ function smashudsystem.onTick()
 	if SaveData.totalScoreClassic >= 999999999 then --The max score is NSMBU's score tally, which is 999 trillion.
 		SaveData.totalScoreClassic = 999999999
 	end
-	if GameData.battlemodeactive == true then --If Classic Battle Mode is active, 1UP scoring will be different.
-		for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-			if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
-				GameData.p1lives = GameData.p1lives + 1
-				GameData.p2lives = GameData.p2lives + 1
-				Misc.score(10000) --Score values from SMAS++ normal mode will still be applied here.
-			end
-			if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
-				GameData.p1lives = GameData.p1lives + 2
-				GameData.p2lives = GameData.p2lives + 2
-				Misc.score(20000)
-			end
-			if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
-				GameData.p1lives = GameData.p1lives + 3
-				GameData.p2lives = GameData.p2lives + 3
-				Misc.score(30000)
-			end
-			if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
-				GameData.p1lives = GameData.p1lives + 5
-				GameData.p2lives = GameData.p2lives + 5
-				Misc.score(50000)
-			end
-		end
-	else
+	if GameData.battlemodeactive == false then
 		if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
 			if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
 				for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
@@ -665,10 +631,6 @@ function smashudsystem.onPostPlayerKill() --onPost is used in case if onPlayerKi
 end
 
 function smashudsystem.onExit()
-	if GameData.battlemodeactive == true then --Reset the lives on Classic Battle Mode back to 5 when exiting...
-		GameData.p1lives = 5
-		GameData.p2lives = 5
-	end
 	GameData.____muteMusic = false --This is specific for my episode. Remove this if you wanna use this yourself.
 	Audio.MusicVolume(64) --Reset the music exiting the level
 	if smashudsystem.hasDied == true and smashudsystem.exittomap == false then

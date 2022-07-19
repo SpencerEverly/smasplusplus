@@ -418,8 +418,8 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 		
 		
 		
-		--**PSWITCH TIMER**
-		if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < 750 then
+		--**PSWITCH/STOPWATCH TIMER**
+		if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < 750 or mem(0x00B2C62E, FIELD_WORD) >= 150 and mem(0x00B2C62E, FIELD_WORD) < 750 then
 			if Level.endState() <= 0 then
 				if not GameData.winStateActive or GameData.winStateActive == nil then
 					if extrasounds.playPSwitchTimerSFX then
@@ -427,7 +427,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
 					end
 				end
 			end
-		elseif mem(0x00B2C62C, FIELD_WORD) <= 300 and mem(0x00B2C62C, FIELD_WORD) >= 1 then
+		elseif mem(0x00B2C62C, FIELD_WORD) <= 300 and mem(0x00B2C62C, FIELD_WORD) >= 1 or mem(0x00B2C62E, FIELD_WORD) <= 300 and mem(0x00B2C62E, FIELD_WORD) >= 1 then
 			if Level.endState() <= 0 then
 				if not GameData.winStateActive or GameData.winStateActive == nil then
 					if extrasounds.playPSwitchTimerSFX then

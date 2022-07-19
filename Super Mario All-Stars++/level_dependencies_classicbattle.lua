@@ -35,13 +35,14 @@ local costumes = {}
 
 local dependencies = {}
 
-local killed = false
+local killed1 = false
+local killed2 = false
 
 GameData.battlemodeactive = true
 
 if GameData.battlemodeactive == true then
-	GameData.p1lives = 5
-	GameData.p2lives = 5
+	dependencies.p1lives = 5
+	dependencies.p2lives = 5
 end
 
 local player1vuln = false
@@ -92,6 +93,26 @@ function exitbattlemode()
 	activate1stPlayer()
 	Misc.saveGame()
 	Level.load("SMAS - Start.lvlx", nil, nil)
+end
+
+function battlediedanimation()
+    if smashudsystem.activated == true then
+		if GameData.bootmenuactive == false or GameData.bootmenuactive == nil then
+			if not Misc.inMarioChallenge() then
+                if GameData.multiplayeractive == true then
+                    if GameData.battlemodeactive == true then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
+                        if killed1 == true then
+                            dependencies.p1lives = dependencies.p1lives - 1
+                            killed1 = false
+                        elseif killed2 == true then
+                            dependencies.p2lives = dependencies.p2lives - 1
+                            killed2 = false
+                        end
+                    end
+                end
+            end
+        end
+    end
 end
 
 function p1teleportdoor()
@@ -184,7 +205,7 @@ function dependencies.onInitAPI()
 	registerEvent(dependencies, "onCameraUpdate")
 	registerEvent(dependencies, "onInputUpdate")
 	registerEvent(dependencies, "onPlayerHarm")
-	registerEvent(dependencies, "onPlayerKill")
+	registerEvent(dependencies, "onPostPlayerKill")
 end
 
 function dependencies.onInputUpdate()
@@ -220,8 +241,8 @@ function dependencies.onInputUpdate()
 	end
 end
 
-function dependencies.onPlayerKill()
-	
+function dependencies.onPostPlayerKill() --onPost is used in case if onPlayerKill wasn't cancelled, to prevent things such as dying on the flagpole animation
+	Routine.run(battlediedanimation) --This will run the animation. Without it, the player would just die
 end
 
 function dependencies.onDraw()
@@ -231,12 +252,12 @@ function dependencies.onDraw()
 	if player2.deathTimer == 1 then
 		Routine.run(classicbattlerevivep2)
 	end
-	if player.deathTimer == 1 and GameData.p1lives < 0 then
-		GameData.p1lives = 0
+	if player.deathTimer == 1 and dependencies.p1lives < 0 then
+		dependencies.p1lives = 0
 		Routine.run(classicbattlep2wins)
 	end
-	if player2.deathTimer == 1 and GameData.p2lives < 0 then
-		GameData.p2lives = 0
+	if player2.deathTimer == 1 and dependencies.p2lives < 0 then
+		dependencies.p2lives = 0
 		Routine.run(classicbattlep1wins)
 	end
 	if exitscreen then
@@ -303,11 +324,11 @@ function dependencies.onDraw()
 	end
 	Graphics.drawImageWP(twoupimg, 512, 26, -4.5)
 	Graphics.drawImageWP(timesimg, 552, 27, -4.5)
-	textplus.print{x=574, y=27, text = tostring(GameData.p2lives), priority=-4.5, color=Color.white, font=numberfont}
+	textplus.print{x=574, y=27, text = tostring(dependencies.p2lives), priority=-4.5, color=Color.white, font=numberfont}
 	
 	Graphics.drawImageWP(oneupimg, 194, 26, -4.5)
 	Graphics.drawImageWP(timesimg, 234, 27, -4.5)
-	textplus.print{x=256, y=27, text = tostring(GameData.p1lives), priority=-4.5, color=Color.white, font=numberfont}
+	textplus.print{x=256, y=27, text = tostring(dependencies.p1lives), priority=-4.5, color=Color.white, font=numberfont}
 	if player1won then
 		if player.character == CHARACTER_MARIO then
 			Graphics.drawImageWP(marioimg, 312, 193, -3)
@@ -357,6 +378,7 @@ end
 
 function dependencies.onStart()
 	GameData.battlemodeactive = true
+    --mem(0x00B2D740, FIELD_BOOL, true)
 	Routine.run(countdownbegin)
 	if SaveData.ut_enabled == nil then
 		SaveData.ut_enabled = SaveData.ut_enabled or 0
@@ -567,10 +589,39 @@ function dependencies.onStart()
 end
 
 function dependencies.onTick()
-	if(not killed and player:mem(0x13E,FIELD_BOOL)) then
-		killed = true
-		mem(0x00B2C5AC,FIELD_FLOAT, 1)
+	if(not killed1 and player:mem(0x13E,FIELD_BOOL)) then
+		killed1 = true --killed1 detects to see if the 1st player is dead.
 	end
+	if Player.count() >= 2 and Player(2).isValid then --2nd player compability
+		GameData.multiplayeractive = true --This makes sure the death animation doesn't play when on multiplayer
+		if GameData.battlemodeactive == true then
+			if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then
+				killed2 = true --killed2 detects to see if the 2nd player is dead.
+			end
+		end
+	end
+    for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+        if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
+            dependencies.p1lives = dependencies.p1lives + 1
+            dependencies.p2lives = dependencies.p2lives + 1
+            Misc.score(10000) --Score values from SMAS++ normal mode will still be applied here.
+        end
+        if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
+            dependencies.p1lives = dependencies.p1lives + 2
+            dependencies.p2lives = dependencies.p2lives + 2
+            Misc.score(20000)
+        end
+        if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
+            dependencies.p1lives = dependencies.p1lives + 3
+            dependencies.p2lives = dependencies.p2lives + 3
+            Misc.score(30000)
+        end
+        if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
+            dependencies.p1lives = dependencies.p1lives + 5
+            dependencies.p2lives = dependencies.p2lives + 5
+            Misc.score(50000)
+        end
+    end
 	smashud.visible.keys = false
 	smashud.visible.itembox = true
 	smashud.visible.bombs = true
@@ -632,6 +683,11 @@ function dependencies.onTick()
 end
 
 function dependencies.onExit()
+    if GameData.battlemodeactive == true then --Reset the lives on Classic Battle Mode back to 5 when exiting...
+		dependencies.p1lives = 5
+		dependencies.p2lives = 5
+	end
+    --mem(0x00B2D740, FIELD_BOOL, false)
 	if killed == true then
 		Level.load(Level.filename(), nil, nil)
 	end
