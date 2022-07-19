@@ -41,8 +41,8 @@ local killed2 = false
 GameData.battlemodeactive = true
 
 if GameData.battlemodeactive == true then
-	dependencies.p1lives = 5
-	dependencies.p2lives = 5
+	dependencies.p1lives = 3
+	dependencies.p2lives = 3
 end
 
 local player1vuln = false
@@ -379,7 +379,7 @@ end
 
 function dependencies.onStart()
 	GameData.battlemodeactive = true
-    --mem(0x00B2D740, FIELD_BOOL, true)
+    --mem(0x00B2D740, FIELD_BOOL, true) --This enables Battle Mode physics and projectiles
 	Routine.run(countdownbegin)
 	if SaveData.ut_enabled == nil then
 		SaveData.ut_enabled = SaveData.ut_enabled or 0
@@ -468,125 +468,27 @@ function dependencies.onStart()
 	Audio.sounds[89].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/zelda-hit.ogg")
 	Audio.sounds[90].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/zelda-sword-beam.ogg")
 	Audio.sounds[91].sfx = Audio.SfxOpen("_OST/_Sound Effects/1.3Mode/bubble.ogg")
-	extrasounds.id92 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/sprout-vine.ogg")) --Vine sprout
-	extrasounds.id93 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/iceball.ogg")) --Iceball
-	extrasounds.id94 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/yi_freeze.ogg")) --Freeze enemies
-	extrasounds.id95 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/yi_icebreak.ogg")) --Enemy ice breaker
-	extrasounds.id96 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/2up.ogg")) --2UP
-	extrasounds.id97 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/3up.ogg")) --3UP
-	extrasounds.id98 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/5up.ogg")) --5UP
-	extrasounds.id99 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #2
-	extrasounds.id100 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #3
-	extrasounds.id101 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #4
-	extrasounds.id102 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #5
-	extrasounds.id103 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/cherry.ogg")) --Cherry
-	extrasounds.id104 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/explode.ogg")) --SMB2 Explosion
-	extrasounds.id105 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/hammerthrow.ogg")) --Player hammer throw
-	extrasounds.id106 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo1.ogg")) --Shell hit 2
-	extrasounds.id107 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo2.ogg")) --Shell hit 3
-	extrasounds.id108 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo3.ogg")) --Shell hit 4
-	extrasounds.id109 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo4.ogg")) --Shell hit 5
-	extrasounds.id110 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo5.ogg")) --Shell hit 6
-	extrasounds.id111 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo6.ogg")) --Shell hit 7
-	extrasounds.id112 = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo7.ogg")) --Shell hit 8
-	if character == "CHARACTER_LUIGI" then
-		if currentCostume == "UNDERTALE-FRISK" then
-			if SaveData.ut_enabled == 0 then
-				SaveData.ut_enabled = SaveData.ut_enabled + 1
-			end
-			level_dependencies_undertale = require("level_dependencies_undertale")
-		end
-		if currentCostume == "WALUIGI" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "MODERN" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "LARRYTHECUCUMBER" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "A2XT-IRIS" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "17-NSMBDS-SMBX" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "16-SMA4" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "15-SMA2" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "13-SMBDX" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "10-SMW-ORIGINAL" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "9-SMB3-MARIOCLOTHES" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "7-SMB3-RETRO" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "6-SMB2-SMAS" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "5-SMB2-RETRO" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "4-SMB1-SMAS" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "3-SMB1-RETRO-MODERN" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "2-SMB1-RECOLORED" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "1-SMB1-RETRO" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-		if currentCostume == "0-SPENCEREVERLY" then
-			if SaveData.ut_enabled == 1 then
-				SaveData.ut_enabled = SaveData.ut_enabled - 1
-			end
-		end
-	end
+	extrasounds.id[92] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/sprout-vine.ogg")) --Vine sprout
+	extrasounds.id[93] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/iceball.ogg")) --Iceball
+	extrasounds.id[94] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/yi_freeze.ogg")) --Freeze enemies
+	extrasounds.id[95] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/yi_icebreak.ogg")) --Enemy ice breaker
+	extrasounds.id[96] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/2up.ogg")) --2UP
+	extrasounds.id[97] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/3up.ogg")) --3UP
+	extrasounds.id[98] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/5up.ogg")) --5UP
+	extrasounds.id[99] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #2
+	extrasounds.id[100] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #3
+	extrasounds.id[101] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #4
+	extrasounds.id[102] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/dragon-coin.ogg")) --Dragon Coin #5
+	extrasounds.id[103] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/cherry.ogg")) --Cherry
+	extrasounds.id[104] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/explode.ogg")) --SMB2 Explosion
+	extrasounds.id[105] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/hammerthrow.ogg")) --Player hammer throw
+	extrasounds.id[106] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo1.ogg")) --Shell hit 2
+	extrasounds.id[107] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo2.ogg")) --Shell hit 3
+	extrasounds.id[108] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo3.ogg")) --Shell hit 4
+	extrasounds.id[109] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo4.ogg")) --Shell hit 5
+	extrasounds.id[110] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo5.ogg")) --Shell hit 6
+	extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo6.ogg")) --Shell hit 7
+	extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/combo7.ogg")) --Shell hit 8
 end
 
 function dependencies.onTick()
@@ -601,6 +503,10 @@ function dependencies.onTick()
 			end
 		end
 	end
+    --mem(0x060FD7A0, FIELD_WORD, 99) --Player 1 Battle Mode Lives (Set to 99 to prevent winning counts)
+    --mem(0x060FD7A2, FIELD_WORD, 99) --Player 2 Battle Mode Lives (Set to 99 to prevent winning counts)
+    --mem(0x00B2D760, FIELD_WORD, -1) --"Mario VS Luigi" Text
+    --mem(0x00B2D762, FIELD_WORD, -1) --"Wins!" Text
     for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
         if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
             dependencies.p1lives = dependencies.p1lives + 1
@@ -685,8 +591,8 @@ end
 
 function dependencies.onExit()
     if GameData.battlemodeactive == true then --Reset the lives on Classic Battle Mode back to 5 when exiting...
-		dependencies.p1lives = 5
-		dependencies.p2lives = 5
+		dependencies.p1lives = 3
+		dependencies.p2lives = 3
 	end
     --mem(0x00B2D740, FIELD_BOOL, false)
 	if killed == true then
