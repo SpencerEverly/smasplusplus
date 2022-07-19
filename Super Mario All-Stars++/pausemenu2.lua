@@ -774,6 +774,9 @@ function pausemenu2.onDraw()
 	
     
     
+    
+    
+    
 	if currentCostume == "0-SPENCEREVERLY" then
 		costtext = "Spencer Everly (SMBS)"
 	end
@@ -828,7 +831,137 @@ function pausemenu2.onDraw()
 	if currentCostume == "SMW-LUIGI" then
 		costtext = "Super Mario World (SMAS)"
 	end
-	
+    
+    
+    
+    
+    
+    
+    if currentCostume == "2-SMB1-SMAS" then
+		costtext = "Super Mario Bros. (SNES)"
+	end
+    if currentCostume == "A2XT-KOOD" then
+		costtext = "Kood (A2XT)"
+	end
+    if currentCostume == "DAISY" then
+		costtext = "Daisy"
+	end
+    if currentCostume == "KIRBY-SMB3" then
+		costtext = "Kirby (SMB3)"
+	end
+    if currentCostume == "NINJABOMBERMAN" then
+		costtext = "Plunder Bomber"
+	end
+    if currentCostume == "PAULINE" then
+		costtext = "Pauline"
+	end
+    if currentCostume == "SMA4" then
+		costtext = "Super Mario Advance 4 (GBA)"
+	end
+    if currentCostume == "SMB3-WALUIGI" then
+		costtext = "Waluigi (SMB3)"
+	end
+    if currentCostume == "SMW-PEACH" then
+		costtext = "Super Mario World (SNES)"
+	end
+    
+    
+    
+    
+    
+    if currentCostume == "3-SMB2-RETRO" then
+		costtext = "Super Mario Bros. 2 (NES)"
+	end
+    if currentCostume == "4-SMB2-RETRO-YELLOW" then
+		costtext = "Super Mario Bros. 2 (NES)"
+	end
+    if currentCostume == "5-SMB2-RETRO-RED" then
+		costtext = "Super Mario Bros. 2 (NES)"
+	end
+    if currentCostume == "6-SMB3-BLUE" then
+		costtext = "Super Mario Bros. 3 (SNES)"
+	end
+    if currentCostume == "7-SMB3-YELLOW" then
+		costtext = "Super Mario Bros. 3 (SNES)"
+	end
+    if currentCostume == "A2XT-RAOCOW" then
+		costtext = "Raocow (A2XT)"
+	end
+    if currentCostume == "CAPTAINTOAD" then
+		costtext = "Captain Toad (SNES)"
+	end
+    if currentCostume == "HAMTARO" then
+		costtext = "Hamtaro"
+	end
+    if currentCostume == "IMAJIN-NES" then
+		costtext = "Imajin (DDP)"
+	end
+    if currentCostume == "JASMINE" then
+		costtext = "Jasmine (SEE)"
+	end
+    if currentCostume == "LEGOSTARWARS-REBELTROOPER" then
+		costtext = "Rebel Trooper (LEGO Star Wars)"
+	end
+    if currentCostume == "MOTHERBRAINRINKA" then
+		costtext = "Mother Brain Rinka"
+	end
+    if currentCostume == "SEE-TANGENT" then
+		costtext = "Tangent Everly (SEE)"
+	end
+    if currentCostume == "SONIC" then
+		costtext = "Sonic the Hedgehog"
+	end
+    if currentCostume == "TOADETTE" then
+		costtext = "Toadette"
+	end
+    if currentCostume == "ULTIMATERINKA" then
+		costtext = "Ultimate Rinka (SMBX2)"
+	end
+    if currentCostume == "YOSHI-SMB3" then
+		costtext = "Yoshi (SMB3)"
+	end
+    
+    
+    
+    
+	if currentCostume == "1-ZELDA1-NES" then
+		costtext = "The Legend of Zelda (NES)"
+	end
+    if currentCostume == "5-LINKWAKE-SNES" then
+		costtext = "Link's Awakening (SNES)"
+	end
+    if currentCostume == "A2XT-SHEATH" then
+		costtext = "Sheath (A2XT)"
+	end
+    if currentCostume == "MOTHER3-LUCAS" then
+		costtext = "Lucas (MOTHER 3)"
+	end
+    if currentCostume == "NESS" then
+		costtext = "Ness (EarthBound)"
+	end
+    if currentCostume == "SEE-SHERBERTLUSSIEBACK" then
+		costtext = "Sherbert Lussieback (S!TS! REBOOT)"
+	end
+    if currentCostume == "SMB1-SNES" then
+		costtext = "Super Mario Bros. (SNES)"
+	end
+    if currentCostume == "SMB2-SNES" then
+		costtext = "Super Mario Bros. 2 (SNES)"
+	end
+    if currentCostume == "SMB3-BANDANA-DEE" then
+		costtext = "Bandana Dee (SMB3)"
+	end
+    if currentCostume == "TAKESHI" then
+		costtext = "Takeshi's Challenge (NES)"
+	end
+    if currentCostume == "TAKESHI-SNES" then
+		costtext = "Takeshi's Challenge (SNES)"
+	end
+    
+    
+    
+    
+    
 	if currentCostume == nil then
 		costtext = "N/A"
 	end

@@ -283,7 +283,17 @@ function smascharacterinfo.onTick()
 		starman.duration[994] = lunatime.toTicks(10)
 		extrasounds.id[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
 	end
-	
+	if currentCostume == "GO-10SECONDRUN" then
+		littleDialogue.characterNames[1] = "Runner Red"
+		mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+		starman.sfxFile = Misc.resolveSoundFile("starman")
+		starman.duration[996] = 769
+		starman.duration[994] = 769
+		extrasounds.id[148] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
+	end
+    
+    
+    
 	
 	if currentCostume == "0-SPENCEREVERLY" then
 		littleDialogue.characterNames[2] = "Spencer"
@@ -343,6 +353,13 @@ function smascharacterinfo.onTick()
 	end
 	
 	
+    
+    
+    
+    
+    
+    
+    
 	if currentCostume == "A2XT-KOOD" then
 		littleDialogue.characterNames[3] = "Kood"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
@@ -384,6 +401,12 @@ function smascharacterinfo.onTick()
 		extrasounds.id[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
 	end
 	
+    
+    
+    
+    
+    
+    
 	
 	if currentCostume == "SEE-TANGENT" then
 		littleDialogue.characterNames[4] = "Tangent"
@@ -459,6 +482,12 @@ function smascharacterinfo.onTick()
 	end
 	
 	
+    
+    
+    
+    
+    
+    
 	
 	if currentCostume == "A2XT-SHEATH" then
 		littleDialogue.characterNames[5] = "Sheath"
@@ -510,6 +539,12 @@ function smascharacterinfo.onTick()
 	end
 	
 	
+    
+    
+    
+    
+    
+    
 	if currentCostume == "SMA3" then
 		littleDialogue.characterNames[10] = "Yoshi"
 		mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_gba.ogg")
@@ -521,6 +556,13 @@ function smascharacterinfo.onTick()
 	
 	
 	
+    
+    
+    
+    
+    
+    
+    
 	if currentCostume == "SMW2-YOSHI" then
 		littleDialogue.characterNames[9] = "Yoshi"
 	end
@@ -529,6 +571,12 @@ function smascharacterinfo.onTick()
 	end
 	
 	
+    
+    
+    
+    
+    
+    
 	if (character == CHARACTER_STEVE) == true then
 		mega2.sfxFile = Misc.resolveSoundFile("megashroom")
 		starman.sfxFile = Misc.resolveSoundFile("starman")
@@ -537,6 +585,13 @@ function smascharacterinfo.onTick()
 		extrasounds.id[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
 	end
 	
+    
+    
+    
+    
+    
+    
+    
 	if currentCostume == "DJCTRE-CUBIXTRON" then
 		littleDialogue.characterNames[14] = "Cubix Tron"
 	end
@@ -686,6 +741,11 @@ function smascharacterinfo.onTick()
 	end
 	
 	
+    
+    
+    
+    
+    
 	if currentCostume == nil and SaveData.disableX2char == false then
 		littleDialogue.characterNames[1] = "Mario"
 		littleDialogue.characterNames[2] = "Luigi"
