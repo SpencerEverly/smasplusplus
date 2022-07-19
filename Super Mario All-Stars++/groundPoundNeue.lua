@@ -19,6 +19,7 @@ _ _  ___ _  _ ___
 local inputs = API.load("inputs2");
 local playeranim = API.load("playerAnim");
 local groundPoundNeue = {}
+
 groundPoundNeue.delayUntilPound = 20;
 groundPoundNeue.fancyAnim = false;
 local registeredCharacters = {};
@@ -127,8 +128,8 @@ function groundPoundNeue.registerAllPlayersFancyAnim()
 
 end
 function groundPoundNeue.onInitAPI()
-	registerEvent(groundPoundNeue, "onTick", "onTick");
-	registerEvent(groundPoundNeue, "onStart", "onStart");
+	registerEvent(groundPoundNeue, "onTick");
+	registerEvent(groundPoundNeue, "onDraw");
 	registerEvent(groundPoundNeue, "onInputUpdate");
   groundPoundNeue.registerAsDummies();
 	--for _, v in pairs (Player.get()) do
@@ -220,8 +221,7 @@ local function thePound(i)
 end
 end
 local function inputUpdateRun(o)
-	if not isDoingBannedStuff[o] and
-	registeredCharacters[players[o].character].enabled then
+	if not isDoingBannedStuff[o] and registeredCharacters[players[o].character].enabled and Player.count() == 1 or SaveData.disableX2char == false then
 		if inputs.state[o].down == inputs.PRESS then
 			thePound(o);
 		end
@@ -323,26 +323,28 @@ local function tests(o)
 		end
 	end
 end
+
 function groundPoundNeue.onTick()
-	tests(1);
-	if Player.count() == 2 then
-		tests(2);
-	end
-	timer = timer + 1;
-	if timer % 1 == 0 then
-		preventFast(1);
-		if Player.count() == 2 then
-			preventFast(2);
-		end
-	end
-	delayTimer[1] = delayTimer[1] + 1;
-	timeSinceLastPound[1] = timeSinceLastPound[1] + 1;
+    if not Misc.isPaused() then
+        tests(1);
+        if Player.count() == 2 then
+            tests(2);
+        end
+        timer = timer + 1;
+        if timer % 1 == 0 then
+            preventFast(1);
+            if Player.count() == 2 then
+                preventFast(2);
+            end
+        end
+        delayTimer[1] = delayTimer[1] + 1;
+        timeSinceLastPound[1] = timeSinceLastPound[1] + 1;
 
-	if Player.count() == 2 then
-	delayTimer[2] = delayTimer[2] + 1;
-	timeSinceLastPound[2] = timeSinceLastPound[2] + 1;
-	end
-
+        if Player.count() == 2 then
+            delayTimer[2] = delayTimer[2] + 1;
+            timeSinceLastPound[2] = timeSinceLastPound[2] + 1;
+        end
+    end
 end
 
 

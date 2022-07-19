@@ -65,6 +65,19 @@ local twoupimg = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-7.p
 local timesimg = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-1.png")
 local numberfont = textplus.loadFont("textplus/font/1.ini")
 
+function dependencies.onInitAPI()
+	registerEvent(dependencies, "onStart")
+	registerEvent(dependencies, "onLoad")
+	registerEvent(dependencies, "onTick")
+	registerEvent(dependencies, "onDraw")
+	registerEvent(dependencies, "onExit")
+	registerEvent(dependencies, "onCameraUpdate")
+	registerEvent(dependencies, "onInputUpdate")
+	registerEvent(dependencies, "onPlayerHarm")
+	registerEvent(dependencies, "onPostPlayerKill")
+    registerEvent(dependencies, "onPlayerKill")
+end
+
 function rngrunstate()
 	exitscreen = true
 	Audio.MusicChange(0, 0)
@@ -194,18 +207,6 @@ function countdownbegin()
 	charactertwoimgshow = false
 	vsimgshow = false
 	playSound("battle-start.ogg")
-end
-
-function dependencies.onInitAPI()
-	registerEvent(dependencies, "onStart")
-	registerEvent(dependencies, "onLoad")
-	registerEvent(dependencies, "onTick")
-	registerEvent(dependencies, "onDraw")
-	registerEvent(dependencies, "onExit")
-	registerEvent(dependencies, "onCameraUpdate")
-	registerEvent(dependencies, "onInputUpdate")
-	registerEvent(dependencies, "onPlayerHarm")
-	registerEvent(dependencies, "onPostPlayerKill")
 end
 
 function dependencies.onInputUpdate()

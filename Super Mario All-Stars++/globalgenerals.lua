@@ -18,11 +18,11 @@ local smascharacterinfo = require("smascharacterinfo")
 local inputconfigurator = require("inputconfig")
 
 if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-    local twirl = require("Twirl")
-    local aw = require("anotherwalljump")
-    aw.registerAllPlayersDefault()
-    local groundPoundNeue = require("groundPoundNeue")
-    groundPoundNeue.registerAllPlayersDefault()
+    if SaveData.disableX2char == false then
+        local twirl = require("Twirl")
+        local aw = require("anotherwalljump")
+        aw.registerAllPlayersDefault()
+    end
 end
 
 if GameData.rushModeActive == true then
