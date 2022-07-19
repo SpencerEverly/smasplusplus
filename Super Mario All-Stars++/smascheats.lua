@@ -9,7 +9,7 @@ local megashroom = require("mega/megashroom")
 Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
 
 
---These cheats are disabled but reenabled below to switch IDs on the respective cheats.
+--These cheats are disabled but reedone below to either switch IDs on respective cheats, or just to remake them for some other reason.
 Cheats.deregister("fourthwall") --This uses the wrong repl console, we're using repll, with extra sounds!
 Cheats.deregister("waitinginthesky") --Changes the starman music and duration. Starman is on the wrong ID for this cheat (This episode uses a different lua script for the starman)
 Cheats.deregister("thestarmen") --Grants the starman effect on the wrong ID.
@@ -18,6 +18,7 @@ Cheats.deregister("getdemstars") --This would give the wrong star on the wrong I
 Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit. Wanted to put SFXs on it for no reason at all
 Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit on the wrong ID
 Cheats.deregister("mylifegoals") --This gives a a SMW goal exit on the wrong ID
+Cheats.deregister("redigitiscool") --This will be deregistered because I'm going to use this for an misc easter egg.
 
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
@@ -422,6 +423,24 @@ Cheats.register("mylifeorbs",{ --This one uses the SMW goal orb, instead of the 
 		return true;
 	end),
 	flashPlayer = true,activateSFX = nil,
+})
+
+Cheats.register("redigitiscool",{ --A message box pops up, referencing 38A's password screen, but will have a hint on guessing the password below it. When guessed correctly, you will enter to the very first SpencerlyEverly video of the level that was shown on Levels of NSMBDS, Level Editor! After clearing, you'll be taken back to where you were before.
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		--WIP, will be implemented later
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = 69,
+})
+
+Cheats.register("spencereverlyiscool",{ --The cheat will be the same as above
+	onActivate = (function()
+		Defines.player_hasCheated = false
+		--WIP, will be implemented later
+		return true -- this makes the cheat not toggleable
+	end),
+	flashPlayer = true,activateSFX = 69,
 })
 
 return smascheats

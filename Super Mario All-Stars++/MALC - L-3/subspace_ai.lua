@@ -26,7 +26,7 @@ subspace.endingBlinkTime = 64
 
 subspace.subspaceColor = Color.fromHexRGB(0x294A7B)
 
-subspace.subspaceMusic = "subspace_8-bit.wav"
+subspace.subspaceMusic = "subspace_8-bit.ogg"
 
 subspace.gridSize = 32
 
@@ -881,10 +881,10 @@ function subspace.onCameraDraw(camIdx)
 
     -- Flip screen
     if subspace.subspaceIsFlipped then
-        screenBuffer:captureAt(0.01)
+        screenBuffer:captureAt(-5)
 
         Graphics.drawBox{
-            texture = screenBuffer,priority = 0.01,
+            texture = screenBuffer,priority = -5,
             x = c.width,y = 0,width = -c.width,height = c.height,
             sourceWidth = c.width,sourceHeight = c.height,
         }
