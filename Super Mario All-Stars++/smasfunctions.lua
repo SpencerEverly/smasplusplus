@@ -945,9 +945,9 @@ function getBattleLives(playerIdx) --This will get the lives for the Battle Mode
     return mem(mem(0xB2D754, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD)
 end
 
-function setDefaultBattleLives() --This will set lives for the Battle Mode system to 99.
-    mem(mem(0xB2D754, FIELD_DWORD) + (1-1)*2, FIELD_WORD, 99)
-    mem(mem(0xB2D754, FIELD_DWORD) + (2-1)*2, FIELD_WORD, 99)
+function setBattleLives(value) --This will set lives for the Battle Mode system to any value specified.
+    mem(mem(0xB2D754, FIELD_DWORD) + (1-1)*2, FIELD_WORD, value)
+    mem(mem(0xB2D754, FIELD_DWORD) + (2-1)*2, FIELD_WORD, value)
 end
 
 function activateStarman()

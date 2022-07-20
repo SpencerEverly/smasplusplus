@@ -103,6 +103,7 @@ function exitbattlemode()
 	Audio.MusicChange(0, 0)
 	Routine.wait(0.4)
 	GameData.battlemodeactive = false
+    setBattleLives(0)
 	activate1stPlayer()
 	Misc.saveGame()
 	Level.load("SMAS - Start.lvlx", nil, nil)
@@ -398,7 +399,7 @@ function dependencies.onStart()
         player2.powerup = 2
     end
     mem(0x00B2D740, FIELD_BOOL, true) --This enables Battle Mode physics and projectiles
-    setDefaultBattleLives()
+    setBattleLives(99) --To prevent dying and quitting out of the level
 	Routine.run(countdownbegin)
 	if SaveData.ut_enabled == nil then
 		SaveData.ut_enabled = SaveData.ut_enabled or 0

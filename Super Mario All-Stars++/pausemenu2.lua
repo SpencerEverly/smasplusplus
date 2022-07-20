@@ -1064,6 +1064,7 @@ function battlemodeexit()
 	GameData.battlemodeactive = false
 	exitFadeActive = false
 	exitFadeActiveDone = true
+    setBattleLives(0)
 	activate1stPlayer()
 	Level.load("SMAS - Start.lvlx", nil, nil)
 end
