@@ -487,7 +487,11 @@ function onExit()
 		end
 		mem(0x00B2C5A8, FIELD_WORD, SaveData.totalCoinsClassic)
 		Misc.score(oldpoints - SaveData.totalScoreClassic)
-		mem(0x00B2C5AC, FIELD_FLOAT, SaveData.totalLives) 
+        if SaveData.totalLives > 99 then
+            mem(0x00B2C5AC, FIELD_FLOAT, 99)
+        else
+            mem(0x00B2C5AC, FIELD_FLOAT, SaveData.totalLives)
+        end
 	end
 end
 
