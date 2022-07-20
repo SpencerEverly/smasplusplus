@@ -2,7 +2,7 @@ HEAD
 TL:"Woody Warzone";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-201280;R:-195360;T:-201120;B:-199968;MZ:27;MF:"";BG:2;
+SC:0;L:-201280;R:-195360;T:-201120;B:-199968;MZ:24;MF:"_OST/Super Mario 64/Overworld.ogg";BG:2;
 SECTION_END
 STARTPOINT
 ID:1;X:-198362;Y:-200246;D:1;

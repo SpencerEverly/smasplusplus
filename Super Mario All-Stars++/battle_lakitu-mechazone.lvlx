@@ -2,7 +2,7 @@ HEAD
 TL:"Lakitu Mechazone";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-204896;R:-194464;T:-200632;B:-200032;MZ:27;MF:"";BG:32;
+SC:0;L:-204896;R:-194464;T:-200632;B:-200032;MZ:24;MF:"_OST/Super Mario 64/Overworld.ogg";BG:32;
 SECTION_END
 STARTPOINT
 ID:1;X:-199706;Y:-200374;D:1;

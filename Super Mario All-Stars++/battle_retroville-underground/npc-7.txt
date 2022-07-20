@@ -1,0 +1,20 @@
+width = 32
+height = 32
+gfxwidth = 32
+gfxheight = 32
+gfxoffsetx = 0
+gfxoffsety = 2
+frames = 8
+framestyle = 0
+framespeed = 4
+
+wakeUpTime = 512
+shakeTime = 48
+
+facePlayerAfterWakingUp = true
+
+spinFramesUpsideDown = 4
+eyeFramesNormal = 0
+eyeFramesUpsideDown = 0
+
+hoppedInsideID = 6
