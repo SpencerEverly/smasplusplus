@@ -20,6 +20,7 @@ function costume.onInit(p)
     registerEvent(costume,"onPostPlayerKill")
 	Audio.sounds[1].sfx  = Audio.SfxOpen("_OST/_Sound Effects/10secondrun/go-jump.ogg")
 	extrasounds.id[8] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/10secondrun/dead.ogg"))
+    Audio.sounds[52].sfx  = Audio.SfxOpen("costumes/mario/GO-10SecondRun/got-star.ogg")
 	
 	Defines.jumpheight = 20
 	Defines.player_walkspeed = 5
@@ -206,8 +207,6 @@ function costume.onCleanup(p)
 	
 	smashud.visible.itembox = true
 	costume.abilitesenabled = false
-    
-    musicchangeractivate = false
 end
 
 return costume
