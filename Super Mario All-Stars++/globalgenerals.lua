@@ -541,7 +541,7 @@ function globalgenerals.onDraw()
 		local playerboundaryx = Player(2).x - player.x
 		local playerboundaryy = Player(2).y - player.y
 		--Kill player2 if far away, out of the camera bounds
-		--if (player.forcedState == FORCEDSTATE_PIPE) == false or (player.forcedState == FORCEDSTATE_DOOR) == false or GameData.forcedStateActive == false then
+		--if (player.forcedState == FORCEDSTATE_PIPE) == false or (player.forcedState == FORCEDSTATE_DOOR) == false then
 			--if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
 				--Player(2):kill()
 			--elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
@@ -712,7 +712,7 @@ function globalgenerals.onDraw()
 	if SaveData.resolution == "iphone1st" then
 		customCamera.defaultScreenWidth = 400
 		customCamera.defaultScreenHeight = 600
-		customCamera.defaultZoom = 0.62
+		customCamera.defaultZoom = 0.32
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0

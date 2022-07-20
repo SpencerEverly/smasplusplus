@@ -746,6 +746,11 @@ function costume.onCleanup(p)
 	extrasounds.id[110] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo5.ogg")) --Shell hit 6
 	extrasounds.id[111] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo6.ogg")) --Shell hit 7
 	extrasounds.id[112] = Audio.SfxOpen(Misc.resolveSoundFile("sound/combo7.ogg")) --Shell hit 8
+    Defines.jumpheight = 20
+	Defines.player_walkspeed = 3
+	Defines.player_runspeed = 6
+	Defines.jumpheight_bounce = 32
+	Defines.player_grav = 0.4
 	-- Remove the player from the list
 	if costume.playerData[p] ~= nil then
 		costume.playerData[p] = nil
