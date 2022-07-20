@@ -712,7 +712,7 @@ function globalgenerals.onDraw()
 	if SaveData.resolution == "iphone1st" then
 		customCamera.defaultScreenWidth = 400
 		customCamera.defaultScreenHeight = 600
-		customCamera.defaultZoom = 0.32
+		customCamera.defaultZoom = 0.62
 		customCamera.defaultScreenOffsetX = 0
 		customCamera.defaultScreenOffsetY = 0
 		customCamera.defaultOffsetX = 0
