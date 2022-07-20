@@ -938,11 +938,16 @@ function player2Active()
 	end
 end
 
-function getBattleLives(playerIdx) --This will get the lives for the Battle Mode system. (This currently crashes, do not use)
+function getBattleLives(playerIdx) --This will get the lives for the Battle Mode system.
     if (playerIdx < 1) or (playerIdx > 200) then
         error("Invalid player index")
     end
-    return readmem(readmem(0xB2D774, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD)
+    return mem(mem(0xB2D754, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD)
+end
+
+function setDefaultBattleLives() --This will set lives for the Battle Mode system to 99.
+    mem(mem(0xB2D754, FIELD_DWORD) + (1-1)*2, FIELD_WORD, 99)
+    mem(mem(0xB2D754, FIELD_DWORD) + (2-1)*2, FIELD_WORD, 99)
 end
 
 function activateStarman()

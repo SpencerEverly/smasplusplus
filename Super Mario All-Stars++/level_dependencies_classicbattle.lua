@@ -260,7 +260,7 @@ end
 
 function dependencies.onDraw()
 	if player.deathTimer == 1 then
-		Routine.run(classicbattlerevivep1)
+		--Routine.run(classicbattlerevivep1)
 	end
 	if player.deathTimer == 1 and dependencies.p1lives < 0 then
 		dependencies.p1lives = 0
@@ -268,7 +268,7 @@ function dependencies.onDraw()
 	end
     if Player.count() >= 2 and Player(2).isValid then
         if player2.deathTimer == 1 then
-            Routine.run(classicbattlerevivep2)
+            --Routine.run(classicbattlerevivep2)
         end
         if player2.deathTimer == 1 and dependencies.p2lives < 0 then
             dependencies.p2lives = 0
@@ -397,7 +397,8 @@ function dependencies.onStart()
     if Player.count() >= 2 and Player(2).isValid then
         player2.powerup = 2
     end
-    --mem(0x00B2D740, FIELD_BOOL, true) --This enables Battle Mode physics and projectiles
+    mem(0x00B2D740, FIELD_BOOL, true) --This enables Battle Mode physics and projectiles
+    setDefaultBattleLives()
 	Routine.run(countdownbegin)
 	if SaveData.ut_enabled == nil then
 		SaveData.ut_enabled = SaveData.ut_enabled or 0
@@ -521,10 +522,8 @@ function dependencies.onTick()
 			end
 		end
 	end
-    --mem(0x060FD7A0, FIELD_WORD, 99) --Player 1 Battle Mode Lives (Set to 99 to prevent winning counts)
-    --mem(0x060FD7A2, FIELD_WORD, 99) --Player 2 Battle Mode Lives (Set to 99 to prevent winning counts)
-    --mem(0x00B2D760, FIELD_WORD, -1) --"Mario VS Luigi" Text
-    --mem(0x00B2D762, FIELD_WORD, -1) --"Wins!" Text
+    mem(0x00B2D760, FIELD_WORD, -1) --"Mario VS Luigi" Text
+    mem(0x00B2D762, FIELD_WORD, -1) --"Wins!" Text
     for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
         if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
             dependencies.p1lives = dependencies.p1lives + 1
@@ -612,7 +611,7 @@ function dependencies.onExit()
 		dependencies.p1lives = 3
 		dependencies.p2lives = 3
 	end
-    --mem(0x00B2D740, FIELD_BOOL, false)
+    mem(0x00B2D740, FIELD_BOOL, false)
 	if killed == true then
 		Level.load(Level.filename(), nil, nil)
 	end
