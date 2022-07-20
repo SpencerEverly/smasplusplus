@@ -500,8 +500,10 @@ function diedanimation() --The entire animation when dying. The pause and sound 
 					end
 				end
 				if SaveData.disableX2char == true then
-					SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
-					SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
+                    if GameData.battlemodeactive == false or GameData.battlemodeactive == nil then
+                        SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
+                        SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
+                    end
 				end
 			end
 			if Misc.inMarioChallenge() then

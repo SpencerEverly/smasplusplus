@@ -1362,20 +1362,20 @@ end
 if GameData.battlemodeactive == nil or GameData.battlemodeactive == false then
 	if GameData.rushModeActive == nil or GameData.rushModeActive == false then
 		if Misc.inMarioChallenge() == false then
+            pauseplus.createSubmenu("editormenu",{headerText = "<size 1.5>Editor Menu</size>"})
+            if Misc.inEditor() then
+				pauseplus.createOption("main",{text = "Editor Menu",goToSubmenu = "editormenu",description = "Testing 1-2-3! If testing the game, this menu is for you!"})
+			end
 			if (Level.filename() == "map.lvlx") == false then
 				pauseplus.createOption("main",{text = "Restart",closeMenu = true,description = "Restart the area you're currently in. You'll warp back to the last checkpoint if crossed one.", action = function() Routine.run(restartlevel) end})
 			end
 			if (Level.filename() == "map.lvlx") == false then
 				pauseplus.createOption("main",{text = "Return to the Map",closeMenu = true,description = "Returns to the map of the game.",action = function() Routine.run(exitlevel2) end})
 			end
-			pauseplus.createSubmenu("editormenu",{headerText = "<size 1.5>Editor Menu</size>"})
 			pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
 			pauseplus.createSubmenu("charactermenu",{headerText = "<size 1.5>Character Options</size>"})
 			pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
 			pauseplus.createSubmenu("miscsettings",{headerText = "<size 1.5>Miscellaneous Settings</size>"})
-			if Misc.inEditor() then
-				pauseplus.createOption("main",{text = "Editor Menu",goToSubmenu = "editormenu",description = "Testing 1-2-3! If testing the game, this menu is for you!"})
-			end
 			pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
 			pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
 			if (Level.filename() == "map.lvlx") == true then
