@@ -5,10 +5,6 @@ local megashroom = require("mega/megashroom")
 
 --Some cheats will be disabled until I rework them to make them compatible with my episode. All win NPCs will be remade entirely to be compatible with the episode-specific star system, this is why.
 
---Here's what's unfinished so far:
-Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
-
-
 --These cheats are disabled but reedone below to either switch IDs on respective cheats, or just to remake them for some other reason.
 Cheats.deregister("fourthwall") --This uses the wrong repl console, we're using repll, with extra sounds!
 Cheats.deregister("waitinginthesky") --Changes the starman music and duration. Starman is on the wrong ID for this cheat (This episode uses a different lua script for the starman)
@@ -18,6 +14,7 @@ Cheats.deregister("getdemstars") --This would give the wrong star on the wrong I
 Cheats.deregister("foundmycarkeys") --Instantly grants a keyhole exit. Wanted to put SFXs on it for no reason at all
 Cheats.deregister("itsvegas") --This gives a a SMB3 roulette exit on the wrong ID
 Cheats.deregister("mylifegoals") --This gives a a SMW goal exit on the wrong ID
+Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
 Cheats.deregister("redigitiscool") --This will be deregistered because I'm going to use this for an misc easter egg.
 
 
@@ -407,6 +404,20 @@ Cheats.register("mylifegoals",{ --This needs to be reregistered because it was u
 		goal.y = player.y + (player.height - goal.height)*0.5;
 			
 		return true;
+	end),
+	flashPlayer = true,activateSFX = nil,
+})
+
+Cheats.register("mysteryball",{ --This needs to be reregistered because it was using the wrong ?-Sphere ID
+	onActivate = (function()
+		if(isOverworld) then
+            return true;
+        end
+        local goal = NPC.spawn(982, player.x, player.y, player.section)
+        goal.x = player.x + (player.width - goal.width)*0.5;
+        goal.y = player.y + (player.height - goal.height)*0.5;
+        
+        return true;
 	end),
 	flashPlayer = true,activateSFX = nil,
 })

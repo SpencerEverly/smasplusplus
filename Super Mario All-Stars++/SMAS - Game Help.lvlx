@@ -1225,7 +1225,6 @@ BGO_END
 NPC
 ID:151;X:-179432;Y:-180080;D:-1;MG:"It's looks like a pipe...<page>That's because it is! Pipes are useful for going to other areas\, and even secret areas as well!<page>Use your jumping\, and when you get to the top of the pipe press up.<page>Other pipes can also be in other directions.<page>If the pipe is enterable at the bottom\, press down.<page>If the pipe is enterable at the left\, press left.<page>If the pipe is enterable at the right\, press right.<page>It may be confusing at first\, but you'll get the gist of it later on.";FD:1;
 ID:75;X:-179523;Y:-180086;D:-1;MG:"Oh it's terrible! The world has random characters popping up from portals and it made a paradox where you have to rescue Princess Peach 6 times!<page>Why? I have no idea! You need to stop this threat and save her!<page>You're our only hope!<page>(I think Bowser is causing this\, I assume)";FD:1;
-ID:16;X:-179904;Y:-180416;D:-1;
 ID:151;X:-179624;Y:-180400;D:-1;MG:"Thank you for following the tutorial on how to play Super Mario All-Stars Plus Plus.<page>Before we end the tutorial\, let's talk about some important features.<page>First\, in this game you need to collect stars.<page>The stars can not only be used to unlock new levels\, but it can also be used for other secrets and Hub progression!<page>Collecting all of the required stars unlocks the end of the game (The Lost Levels\, Side Quest\, and DLC Levels/Other Games are optional to collect stars).<page>It'll be a surprise\, so you'll have to get the stars in this game first to experience it!<page>Second thing\, there is a Hub located at the left of the map\, Me and Larry City.<page>There\, you can change your character to anything you want\, use free powerups\, and shop for rare things as you collect stars!<page>And you can meet up with the locals and talk to them as you collect stars.<page>Everything changes as you collect stars\, so come back to the Hub often to see what they're up to!<page>And ONE LAST THING! Sorry to annoy you so much.<page>Over at the left is a ?-Sphere.<page>These are only used for levels that don't have specific stars to complete the level\, like this one.<page>To end the tutorial\, just walk into the ?-Sphere.<page>Thank you for playing the tutorial\, and I hope to see you again at the end of the game!<page>- Spencer Everly";FD:1;LR:"Sign";ET:"Ending Appear Seperate Wait";
 ID:221;X:-198744;Y:-200096;D:-1;
 ID:89;X:-199104;Y:-200096;D:-1;NM:1;LR:"Goomba 1";
@@ -1279,6 +1278,7 @@ ID:19;X:-195232;Y:-200096;D:-1;NM:1;
 ID:151;X:-195552;Y:-200112;D:-1;MG:"Enemies like these can be picked up and thrown.<page>This only can happen with rare types of enemies outside of Super Mario Bros. 2 though!<page>Try picking them up and throwing them by using down and run.";FD:1;
 ID:86;X:-194863;Y:-200144;D:-1;FD:1;NM:1;
 ID:151;X:-195008;Y:-200112;D:-1;MG:"That's Bowser\, a villian who kidnaps Princesses for fun.<page>You'll get to verse him later in the game. Be weary of his actions though!";FD:1;
+ID:982;X:-179904;Y:-180416;D:-1;
 NPC_END
 PHYSICS
 ET:0;X:-179904;Y:-180256;W:32;H:208;
