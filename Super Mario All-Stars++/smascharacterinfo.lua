@@ -736,6 +736,9 @@ function smascharacterinfo.onTick()
 	if currentCostume == "TOMMYINNITYT" then
 		littleDialogue.characterNames[14] = "TommyInnit"
 	end
+    if currentCostume == "TECHNOBLADE" then
+		littleDialogue.characterNames[14] = "Technoblade"
+	end
 	if currentCostume == "UNOFFICIALSTUDIOSYT" then
 		littleDialogue.characterNames[14] = "Riley"
 	end
