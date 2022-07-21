@@ -15,11 +15,8 @@ local blockutils = require("blocks/blockutils")
 
 local unclebroadsword = {}
 
-local currentCostume = player:getCostume()
-
-if currentCostume then return end
-
 unclebroadsword.debugMode = false
+unclebroadsword.costumeActive = false
 
 local inputBlockingForcedStates = table.map{
 	FORCEDSTATE_POWERUP_BIG,
@@ -258,7 +255,7 @@ local function SetCooldown() ---------------------------------------------------
 	attack_timer = DURATION[ATKSTATE.COOLDOWN]
 end
 function unclebroadsword.onKeyDown(keycode, playerIndex)
-	if player.character == CHARACTER_UNCLEBROADSWORD and not is_hurt and not inforcedanim() then
+	if player.character == CHARACTER_UNCLEBROADSWORD and not is_hurt and not inforcedanim() and not unclebroadsword.costumeActive then
 		-- If pressing the attack key
 		if keycode == KEY_X and not (is_hurt or statued()) then
 			-- Prevent attacking when submerged, sliding, climbing, spinjumping, mounted, holding, or picking up something
@@ -316,7 +313,7 @@ function unclebroadsword.onKeyDown(keycode, playerIndex)
 	end
 end
 function unclebroadsword.onInputUpdate()
-	if player.character == CHARACTER_UNCLEBROADSWORD then
+	if player.character == CHARACTER_UNCLEBROADSWORD and not unclebroadsword.costumeActive then
 		pm.winStateCheck()
 	
 		-- Block movement if attacking or hurt
@@ -819,7 +816,7 @@ local function PrintAttackState(x, y) ------------------------------------------
 	Text.print("Aerial: "..tostring(can_aerial), x, y + 40)
 end
 function unclebroadsword.onTick()
-	if player.character == CHARACTER_UNCLEBROADSWORD and player:mem(0x13E,FIELD_WORD) == 0 then
+	if player.character == CHARACTER_UNCLEBROADSWORD and player:mem(0x13E,FIELD_WORD) == 0 and not unclebroadsword.costumeActive then
 		-- Check for hurt state
 		CheckHurtState()
 		
@@ -965,7 +962,7 @@ local function ShowAttackFrames() ----------------------------------------------
 	end
 end
 function unclebroadsword.onDraw()
-	if player.character == CHARACTER_UNCLEBROADSWORD then
+	if player.character == CHARACTER_UNCLEBROADSWORD and not unclebroadsword.costumeActive then
 		-- Render afterimages for stall-and-fall
 		if(player:mem(0x13E,FIELD_WORD) == 0) then
 			for i,pos in ipairs(afterimagepos) do

@@ -7,12 +7,18 @@ local kirby = require("costumes/unclebroadsword/Kirby-SMBX/kirby")
 local BoomerangLock = 0
 local BombLock = 0
 
-function onStart()
-
+function costume.onInit(p)
+    unclebroadsword = require("unclebroadswordd")
+    unclebroadsword.costumeActive = true
+    registerEvent(costume,"onTick")
 end
 
+function costume.onCleanup(p)
+    unclebroadsword = require("unclebroadswordd")
+    unclebroadsword.costumeActive = false
+end
 
-function onTick()
+function costume.onTick()
     if player.character == CHARACTER_UNCLEBROADSWORD then
         for k,v in ipairs(NPC.get(13, -1)) do
             v.speedY = 0
@@ -143,11 +149,6 @@ function onTick()
 			end
 		end
 	end
-end
-
-
-function onEvent()
-
 end
 
 return costume
