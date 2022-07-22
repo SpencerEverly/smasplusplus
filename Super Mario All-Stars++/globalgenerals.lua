@@ -16,6 +16,9 @@ local inventory = require("customInventory")
 local smasacecoins = require("smasacecoins")
 local smascharacterinfo = require("smascharacterinfo")
 local inputconfigurator = require("inputconfig")
+if SMBX_VERSION == VER_SEE_MOD then
+    smasonlineplay = require("smasonlineplay")
+end
 
 if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
     if SaveData.disableX2char == false then
