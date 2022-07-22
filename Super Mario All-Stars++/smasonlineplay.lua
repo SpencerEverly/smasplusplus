@@ -42,6 +42,7 @@ function smasonlineplay.onDraw()
             p1coordinatefinal = "Not connected."
             p2coordinates = "Not connected."
             p2coordinatefinal = "Not connected."
+        end
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
             --Player 2 (Sending)
             p2coordinates = player2.x, player2.y
