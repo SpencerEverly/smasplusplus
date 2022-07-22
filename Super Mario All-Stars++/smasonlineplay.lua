@@ -5,21 +5,22 @@ local smasonlineplay = {}
 local inspect = require("ext/inspect")
 
 local udp = assert(socket.udp())
-local data
-
 udp:settimeout(0)
+
+local udp2 = assert(socket.udp())
+udp2:settimeout(0)
 
 if socket.dns.gethostname() == "SPENCERPC2022" then
     assert(udp:setsockname("*",12345))
     assert(udp:setpeername("25.3.160.51",12345))
-    assert(udp:setsockname("*",12344))
-    assert(udp:setpeername("25.3.160.51",12344))
+    assert(udp2:setsockname("*",12344))
+    assert(udp2:setpeername("25.3.160.51",12344))
 end
 if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
     assert(udp:setsockname("*",12345))
     assert(udp:setpeername("25.3.161.35",12345))
-    assert(udp:setsockname("*",12344))
-    assert(udp:setpeername("25.3.161.35",12344))
+    assert(udp2:setsockname("*",12344))
+    assert(udp2:setpeername("25.3.161.35",12344))
 end
 
 function smasonlineplay.onInitAPI()
