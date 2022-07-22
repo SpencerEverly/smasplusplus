@@ -36,38 +36,47 @@ local p2coordinates
 local p2coordinatefinal
 
 function smasonlineplay.onDraw()
-    if timeout then
-        p1coordinates = nil
-        p1coordinatefinal = nil
-        p2coordinates = nil
-        p2coordinatefinal = nil
-    else
-        if player2Active() then
-            if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-                --Player 2 (Sending)
-                p2coordinates = player2.x, player2.y
+    if player2Active() then
+        if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
+            --Player 2 (Sending)
+            p2coordinates = player2.x, player2.y
+            if timeout then
+                p2coordinates = "Not connected."
+            else
                 assert(udp:send(p2coordinates))
-                Text.print(p2coordinates, 100, 100)
-                --Player 1 (Recieving)
-                p1coordinatesfinal = assert(udp2:receive())
-                if p2coordinatesfinal == nil then
-                    Text.print("Not connected.", 100, 120)
-                else
-                    Text.print(p2coordinatesfinal, 100, 120)
-                end
             end
-            if socket.dns.gethostname() == "SPENCERPC2022" then
-                --Player 1 (Sending)
-                p1coordinates = tostring(player.x, player.y)
+            Text.print(p2coordinates, 100, 100)
+            --Player 1 (Recieving)
+            if timeout then
+                p1coordinatesfinal = "Not connected."
+            else
+                p1coordinatesfinal = assert(udp2:receive())
+            end
+            if p2coordinatesfinal == nil then
+                Text.print("Not connected.", 100, 120)
+            else
+                Text.print(p2coordinatesfinal, 100, 120)
+            end
+        end
+        if socket.dns.gethostname() == "SPENCERPC2022" then
+            --Player 1 (Sending)
+            p1coordinates = tostring(player.x, player.y)
+            if timeout then
+                p1coordinates = "Not connected."
+            else
                 assert(udp2:send(p1coordinates))
-                Text.print(p1coordinates, 100, 100)
-                --Player 2 (Recieving)
+            end
+            Text.print(p1coordinates, 100, 100)
+            --Player 2 (Recieving)
+            if timeout then
+                p2coordinatesfinal = "Not connected."
+            else
                 p2coordinatesfinal = assert(udp:receive())
-                if p2coordinatesfinal == nil then
-                    Text.print("Not connected.", 100, 120)
-                else
-                    Text.print(p2coordinatesfinal, 100, 120)
-                end
+            end
+            if p2coordinatesfinal == nil then
+                Text.print("Not connected.", 100, 120)
+            else
+                Text.print(p2coordinatesfinal, 100, 120)
             end
         end
     end
