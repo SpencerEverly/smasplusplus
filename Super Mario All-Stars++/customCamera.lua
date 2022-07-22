@@ -77,7 +77,6 @@ customCamera.lastSection = nil
 customCamera.lastWarpCooldown = 0
 
 customCamera.maxDrawingPriority = 0
-customCamera.maxDrawingPriorityDraw = 0.001
 
 customCamera.showAllPlayers = true
 
@@ -1459,7 +1458,7 @@ function customCamera.onCameraDraw()
         }
 
         --Graphics.drawScreen{color = Color.black,priority = 0}
-        Graphics.drawScreen{texture = zoomedBuffer,priority = customCamera.maxDrawingPriorityDraw}
+        Graphics.drawScreen{texture = zoomedBuffer,priority = customCamera.maxDrawingPriority + .001}
     end
 
     if settingsNeedCrop then
@@ -1474,12 +1473,12 @@ function customCamera.onCameraDraw()
             sourceY = borderVer*0.5
         end
 
-        zoomedBuffer:captureAt(customCamera.maxDrawingPriorityDraw)
+        zoomedBuffer:captureAt(customCamera.maxDrawingPriority + .001)
 
-        Graphics.drawScreen{color = Color.black,priority = customCamera.maxDrawingPriorityDraw}
+        Graphics.drawScreen{color = Color.black,priority = customCamera.maxDrawingPriority + .001}
 
         Graphics.drawBox{
-            texture = zoomedBuffer,priority = customCamera.maxDrawingPriorityDraw,
+            texture = zoomedBuffer,priority = customCamera.maxDrawingPriority + .001,
             x = borderHor*0.5 + customCamera.screenOffsetX,
             y = borderVer*0.5 + customCamera.screenOffsetY,
             sourceX = sourceX,
