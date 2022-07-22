@@ -1105,14 +1105,30 @@ function customCamera.getTargets()
     end
 
 	-- Add player
-    if 
-	table.insert(customCamera.actualTargets,player)
-	for i = 1,128 do
-		if Player(i).isValid then
-			table.insert(customCamera.actualTargets,Player(i))
-		end
-	end
-	count = count + Player.count()
+    if SMBX_VERSION == VER_SEE_MOD then
+        if not smasonlineplay.onlineactivated then
+            table.insert(customCamera.actualTargets,player)
+            for i = 1,128 do
+                if Player(i).isValid then
+                    table.insert(customCamera.actualTargets,Player(i))
+                end
+            end
+            count = count + Player.count()
+        elseif smasonlineplay.onlineactivated then
+            if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
+                customCamera.actualTargets = {player2}
+                count = count + Player.count()
+            end
+        end
+    else
+        table.insert(customCamera.actualTargets,player)
+        for i = 1,128 do
+            if Player(i).isValid then
+                table.insert(customCamera.actualTargets,Player(i))
+            end
+        end
+        count = count + Player.count()
+    end
     
 	return customCamera.actualTargets
 end
