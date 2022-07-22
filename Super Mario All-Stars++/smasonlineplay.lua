@@ -31,18 +31,11 @@ end
 local p2coordinatex
 local p2coordinatey
 
-function smasonlineplay.onInputUpdate()
+function smasonlineplay.onDraw()
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
             p2coordinatex = tostring(player2.x)
             p2coordinatey = tostring(player2.y)
-        end
-    end
-end
-
-function smasonlineplay.onDraw()
-    if player2Active() then
-        if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
             udp:send(p2coordinatex)
             udp:send(p2coordinatey)
         end
