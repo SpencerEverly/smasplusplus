@@ -31,21 +31,20 @@ end
 local p2coordinatex
 local p2coordinatey
 
-local data2
+local p2coordinatefinalx
+local p2coordinatefinaly
 
 function smasonlineplay.onDraw()
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
             p2coordinatex = tostring(player2.x)
             p2coordinatey = tostring(player2.y)
-            udp:send(p2coordinatex)
-            udp:send(p2coordinatey)
+            assert(udp:send(p2coordinatex))
+            assert(udp:send(p2coordinatey))
         end
         if socket.dns.gethostname() == "SPENCERPC2022" then
-            data2 = udp:receive()
-            if data2 then
-                Text.print(data2, 100, 160)
-            end
+            p2coordinatefinalx = udp:receive(p2coordinatex)
+            p2coordinatefinaly = udp:receive(p2coordinatey)
         end
     end
     if data == nil then
@@ -53,8 +52,8 @@ function smasonlineplay.onDraw()
     else
         Text.print(data, 100, 100)
     end
-    Text.print(p2coordinatex, 100, 120)
-    Text.print(p2coordinatey, 100, 140)
+    Text.print(p2coordinatefinalx, 100, 120)
+    Text.print(p2coordinatefinaly, 100, 140)
 end
 
 return smasonlineplay
