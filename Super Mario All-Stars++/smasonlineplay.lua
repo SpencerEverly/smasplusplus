@@ -2,6 +2,11 @@ if (SMBX_VERSION == VER_SEE_MOD) == false then return end
 
 local smasonlineplay = {}
 
+local udp = assert(socket.udp())
+local data
+
+udp:settimeout(0)
+
 if socket.dns.gethostname() == "SPENCERPC2022" then
     assert(udp:setsockname("*",12345))
     assert(udp:setpeername("25.3.161.35",12345))
@@ -23,11 +28,6 @@ local p2coordinatefinalx
 local p2coordinatefinaly
 
 function smasonlineplay.onDraw()
-    local udp = assert(socket.udp())
-    local data
-
-    udp:settimeout(0)
-
     for i = 0, 2, 1 do
         assert(udp:send("Connected"))
         data = udp:receive()
