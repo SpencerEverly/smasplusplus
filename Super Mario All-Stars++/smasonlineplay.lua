@@ -9,11 +9,11 @@ udp:settimeout(0)
 
 if socket.dns.gethostname() == "SPENCERPC2022" then
     assert(udp:setsockname("*",12345))
-    assert(udp:setpeername("25.3.161.35",12345))
+    assert(udp:setpeername("25.3.160.51",12345))
 end
 if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
     assert(udp:setsockname("*",12345))
-    assert(udp:setpeername("25.3.160.51",12345))
+    assert(udp:setpeername("25.3.161.35",12345))
 end
 
 function smasonlineplay.onInitAPI()
