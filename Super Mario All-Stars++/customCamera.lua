@@ -42,6 +42,9 @@ local handycam = require("handycam")
 
 local customCamera = {}
 
+if SMBX_VERSION == VER_SEE_MOD then
+    smasonlineplay = require("smasonlineplay")
+end
 
 local zoomedBuffer = Graphics.CaptureBuffer(800,600)
 
@@ -79,6 +82,7 @@ customCamera.lastWarpCooldown = 0
 customCamera.maxDrawingPriority = 0
 
 customCamera.showAllPlayers = true
+customCamera.actualTargets = {}
 
 customCamera.debug = false
 
@@ -1069,19 +1073,41 @@ function customCamera.getTargets()
 			end
 		end
 	end
-    
-    if customCamera.showAllPlayers then
-		for _,p in ipairs(Player.get()) do
-			if p.isValid and customCamera.isOnScreen(p) then
-				table.insert(customCamera.actualTargets,p)
-				count = count + 1
-			end
-		end
-	end
+    if SMBX_VERSION == VER_SEE_MOD then
+        if not smasonlineplay.onlineactivated then
+            if customCamera.showAllPlayers then
+                for _,p in ipairs(Player.get()) do
+                    if p.isValid and customCamera.isOnScreen(p) then
+                        table.insert(customCamera.actualTargets,p)
+                        count = count + 1
+                    end
+                end
+            end
+        elseif smasonlineplay.onlineactivated then
+            if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
+                customCamera.actualTargets = {player2}
+                for _,p in ipairs(customCamera.actualTargets) do
+                    if p.isValid and customCamera.isOnScreen(p) then
+                        count = count + 1
+                    end
+                end
+            end
+        end
+    else
+        if customCamera.showAllPlayers then
+            for _,p in ipairs(Player.get()) do
+                if p.isValid and customCamera.isOnScreen(p) then
+                    table.insert(customCamera.actualTargets,p)
+                    count = count + 1
+                end
+            end
+        end
+    end
 
 	-- Add player
+    if 
 	table.insert(customCamera.actualTargets,player)
-	for i = 2,128 do
+	for i = 1,128 do
 		if Player(i).isValid then
 			table.insert(customCamera.actualTargets,Player(i))
 		end
