@@ -62,9 +62,7 @@ end
 function smasonlineplay.onDraw()
     if smasonlineplay.onlineactivated then
         if player2Active() then
-            if "timeout" then
-                Text.print("Not connected.", 100, 100)
-            elseif assert(udp:receive()) then
+            if not "timeout" then
                 if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
                     p2coordinatex = player2.x
                     p2coordinatey = player2.y
@@ -98,6 +96,8 @@ function smasonlineplay.onDraw()
                         player2.frame = tonumber(p2finalframe)
                     end
                 end
+            else
+                Text.print("Not connected.", 100, 100)
             end
         end
     end
