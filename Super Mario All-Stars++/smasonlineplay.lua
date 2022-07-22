@@ -36,6 +36,12 @@ local p2coordinates
 local p2coordinatefinal
 
 function smasonlineplay.onDraw()
+    if timeout then
+        p1coordinates = nil
+        p1coordinatefinal = nil
+        p2coordinates = nil
+        p2coordinatefinal = nil
+    end
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
             --Player 2 (Sending)
