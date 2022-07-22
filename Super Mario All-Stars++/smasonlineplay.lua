@@ -25,6 +25,7 @@ if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
 end
 
 function smasonlineplay.onInitAPI()
+    registerEvent(smasonlineplay,"onStart")
     registerEvent(smasonlineplay,"onTick")
     registerEvent(smasonlineplay,"onDraw")
 end
@@ -40,19 +41,19 @@ local p2coordinatessending
 
 local onlineactivated = false
 
-function smasonlineplay.onStart()
+function activateonlinetimer()
+    Routine.wait(3, true)
+    playSound("easteregg_smbx13crash.ogg")
     onlineactivated = true
+end
+
+function smasonlineplay.onStart()
+    Routine.run(activateonlinetimer)
 end
 
 function smasonlineplay.onDraw()
     if onlineactivated then
         if player2Active() then
-            if unexpected_condition then
-                p1coordinates = "Not connected."
-                p1coordinatefinal = "Not connected."
-                p2coordinates = "Not connected."
-                p2coordinatefinal = "Not connected."
-            end
             if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
                 --Player 1 (Recieving)
                 p1coordinatesfinal = assert(udp2:receive())
