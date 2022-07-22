@@ -24,8 +24,7 @@ end
 local p2coordinatex
 local p2coordinatey
 
-local p2coordinatefinalx
-local p2coordinatefinaly
+local p2coordinatefinal
 
 function smasonlineplay.onDraw()
     if player2Active() then
