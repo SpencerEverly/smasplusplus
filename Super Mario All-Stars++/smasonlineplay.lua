@@ -28,16 +28,8 @@ function smasonlineplay.onInitAPI()
     registerEvent(smasonlineplay,"onDraw")
 end
 
-local p2upkey
-local p2downkey
-local p2leftkey
-local p2rightkey
-local p2runkey
-local p2jumpkey
-local p2altrunkey
-local p2altjumpkey
-local p2reservekey
-local p2pausekey
+local p2coordinatex
+local p2coordinatey
 
 function smasonlineplay.onInputUpdate()
     if player2Active() then
