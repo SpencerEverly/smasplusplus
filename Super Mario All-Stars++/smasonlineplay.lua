@@ -88,24 +88,30 @@ function smasonlineplay.onDraw()
                 p2direction = player2.direction
                 p2character = player2.character
                 
-                assert(udp:send(p2coordinatex))
-                assert(udp2:send(p2coordinatey))
-                assert(udp3:send(p2powerup))
-                assert(udp4:send(p2frame))
-                assert(udp5:send(p2direction))
-                assert(udp6:send(p2character))
+                while not "timeout" do
+                    assert(udp:send(p2coordinatex))
+                    assert(udp2:send(p2coordinatey))
+                    assert(udp3:send(p2powerup))
+                    assert(udp4:send(p2frame))
+                    assert(udp5:send(p2direction))
+                    assert(udp6:send(p2character))
+                end
                 Text.print(p2coordinatesx, 100, 100)
                 Text.print(p2coordinatesy, 100, 120)
                 Text.print(p2powerup, 100, 140)
                 Text.print(p2frame, 100, 160)
+                Text.print(p2direction, 100, 180)
+                Text.print(p2character, 100, 200)
             end
             if socket.dns.gethostname() == "SPENCERPC2022" then
-                p2coordinatesfinalx = assert(udp:receive())
-                p2coordinatesfinaly = assert(udp2:receive())
-                p2finalpowerup = assert(udp3:receive())
-                p2finalframe = assert(udp4:receive())
-                p2finaldirection = assert(udp5:receive())
-                p2finalcharacter = assert(udp6:receive())
+                while not "timeout" do
+                    p2coordinatesfinalx = assert(udp:receive())
+                    p2coordinatesfinaly = assert(udp2:receive())
+                    p2finalpowerup = assert(udp3:receive())
+                    p2finalframe = assert(udp4:receive())
+                    p2finaldirection = assert(udp5:receive())
+                    p2finalcharacter = assert(udp6:receive())
+                end
                 if p2coordinatesfinalx == nil or p2coordinatesfinaly == nil or p2finalpowerup == nil or p2finalframe == nil then
                     Text.print("Not connected.", 100, 80)
                 else
