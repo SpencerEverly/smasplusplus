@@ -80,9 +80,6 @@ end
 function smasonlineplay.onDraw()
     if smasonlineplay.onlineactivated then
         if player2Active() then
-            if "timeout" then
-                socket.sleep(0.1)
-            end
             if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
                 p2coordinatex = player2.x
                 p2coordinatey = player2.y
