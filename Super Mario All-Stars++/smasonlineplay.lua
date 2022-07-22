@@ -2,6 +2,8 @@ if (SMBX_VERSION == VER_SEE_MOD) == false then return end
 
 local smasonlineplay = {}
 
+local inspect = require("ext/inspect")
+
 local udp = assert(socket.udp())
 local data
 
@@ -21,17 +23,14 @@ function smasonlineplay.onInitAPI()
     registerEvent(smasonlineplay,"onDraw")
 end
 
-local p2coordinatex
-local p2coordinatey
-
+local p2coordinates
 local p2coordinatefinal
 
 function smasonlineplay.onDraw()
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-            p2coordinatex = player2.x
-            p2coordinatey = player2.y
-            assert(udp:send(tostring(p2coordinatex p2coordinatey)))
+            p2coordinates = {player2.x, player2.y}
+            assert(udp:send(inspect(p2coordinates)))
             Text.print(p2coordinatex, 100, 120)
             Text.print(p2coordinatey, 100, 140)
         end
