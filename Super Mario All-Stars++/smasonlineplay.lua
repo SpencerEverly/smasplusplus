@@ -41,7 +41,7 @@ local p2coordinatessending
 
 local data, msg_or_ip, port_or_nil
 
-local smasonlineplay.onlineactivated = false
+smasonlineplay.onlineactivated = false
 
 function smasonlineplay.onStart()
     smasonlineplay.onlineactivated = true
