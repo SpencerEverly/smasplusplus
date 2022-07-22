@@ -5,7 +5,7 @@ local smasonlineplay = {}
 local udp = assert(socket.udp())
 local data
 
-udp:settimeout(1)
+udp:settimeout(0)
 if socket.dns.gethostname() == "SPENCERPC2022" then
     assert(udp:setsockname("*",12345))
     assert(udp:setpeername("25.3.161.35",12345))
@@ -44,7 +44,7 @@ function smasonlineplay.onDraw()
             Text.print(p2coordinatey, 100, 140)
         end
         if socket.dns.gethostname() == "SPENCERPC2022" then
-            p2coordinatesfinal = udp:receive()
+            p2coordinatesfinal = assert(udp:receive())
             if p2coordinatesfinal == nil then
                 Text.print("Coordinates not found.", 100, 120)
             else
