@@ -62,42 +62,38 @@ end
 function smasonlineplay.onDraw()
     if smasonlineplay.onlineactivated then
         if player2Active() then
-            if not "timeout" then
-                if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-                    p2coordinatex = player2.x
-                    p2coordinatey = player2.y
-                    p2powerup = player2.powerup
-                    p2frame = player2.frame
-                    
-                    assert(udp:send(p2coordinatex))
-                    assert(udp2:send(p2coordinatey))
-                    assert(udp3:send(p2powerup))
-                    assert(udp4:send(p2frame))
-                    Text.print(p2coordinatesx, 100, 100)
-                    Text.print(p2coordinatesy, 100, 120)
-                    Text.print(p2powerup, 100, 140)
-                    Text.print(p2frame, 100, 160)
+            if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
+                p2coordinatex = player2.x
+                p2coordinatey = player2.y
+                p2powerup = player2.powerup
+                p2frame = player2.frame
+                
+                assert(udp:send(p2coordinatex))
+                assert(udp2:send(p2coordinatey))
+                assert(udp3:send(p2powerup))
+                assert(udp4:send(p2frame))
+                Text.print(p2coordinatesx, 100, 100)
+                Text.print(p2coordinatesy, 100, 120)
+                Text.print(p2powerup, 100, 140)
+                Text.print(p2frame, 100, 160)
+            end
+            if socket.dns.gethostname() == "SPENCERPC2022" then
+                p2coordinatesfinalx = assert(udp:receive())
+                p2coordinatesfinaly = assert(udp2:receive())
+                p2finalpowerup = assert(udp3:receive())
+                p2finalframe = assert(udp4:receive())
+                if p2coordinatesfinalx == nil or p2coordinatesfinaly == nil or p2finalpowerup == nil or p2finalframe == nil then
+                    Text.print("Not connected.", 100, 80)
+                else
+                    Text.print(p2coordinatesfinalx, 100, 100)
+                    Text.print(p2coordinatesfinaly, 100, 120)
+                    Text.print(p2finalpowerup, 100, 140)
+                    Text.print(p2finalframe, 100, 160)
+                    player2.x = tonumber(p2coordinatesfinalx)
+                    player2.y = tonumber(p2coordinatesfinaly)
+                    player2.powerup = tonumber(p2finalpowerup)
+                    player2.frame = tonumber(p2finalframe)
                 end
-                if socket.dns.gethostname() == "SPENCERPC2022" then
-                    p2coordinatesfinalx = assert(udp:receive())
-                    p2coordinatesfinaly = assert(udp2:receive())
-                    p2finalpowerup = assert(udp3:receive())
-                    p2finalframe = assert(udp4:receive())
-                    if p2coordinatesfinalx == nil or p2coordinatesfinaly == nil or p2finalpowerup == nil or p2finalframe == nil then
-                        Text.print("Not connected.", 100, 80)
-                    else
-                        Text.print(p2coordinatesfinalx, 100, 100)
-                        Text.print(p2coordinatesfinaly, 100, 120)
-                        Text.print(p2finalpowerup, 100, 140)
-                        Text.print(p2finalframe, 100, 160)
-                        player2.x = tonumber(p2coordinatesfinalx)
-                        player2.y = tonumber(p2coordinatesfinaly)
-                        player2.powerup = tonumber(p2finalpowerup)
-                        player2.frame = tonumber(p2finalframe)
-                    end
-                end
-            else
-                Text.print("Not connected.", 100, 100)
             end
         end
     end
