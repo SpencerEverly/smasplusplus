@@ -8,8 +8,8 @@ local udp = assert(socket.udp())
 local udp2 = assert(socket.udp())
 local data
 
-assert(udp:settimeout(5))
-assert(udp2:settimeout(5))
+assert(udp:settimeout(0))
+assert(udp2:settimeout(0))
 
 if socket.dns.gethostname() == "SPENCERPC2022" then
     assert(udp:setsockname("*",12345))
