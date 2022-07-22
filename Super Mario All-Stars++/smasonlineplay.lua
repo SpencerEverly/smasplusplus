@@ -39,7 +39,7 @@ function smasonlineplay.onDraw()
             if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
                 p2coordinates = {player2.x, player2.y}
                 assert(udp:send(inspect(p2coordinates)))
-                Text.print(p2coordinates, 100, 120)
+                Text.print(inspect(p2coordinates), 100, 120)
             end
             if socket.dns.gethostname() == "SPENCERPC2022" then
                 p2coordinatesfinal = assert(udp:receive())
