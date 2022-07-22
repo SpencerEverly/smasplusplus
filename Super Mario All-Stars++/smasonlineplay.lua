@@ -49,7 +49,6 @@ function smasonlineplay.onDraw()
                     Text.print(p2coordinatesfinal, 100, 120)
                 end
             end
-            socket.sleep(0.01)
         end
     end
 end
