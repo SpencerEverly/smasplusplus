@@ -40,8 +40,8 @@ function smasonlineplay.onDraw()
             udp:send(p2coordinatey)
         end
         if socket.dns.gethostname() == "SPENCERPC2022" then
-            player2.x = p2coordinatex
-            player2.y = p2coordinatey
+            --player2.x = p2coordinatex
+            --player2.y = p2coordinatey
         end
     end
     if data == nil then
