@@ -89,7 +89,8 @@ function smasonlineplay.onDraw()
                 end
             end
             if msg_or_ip == 'timeout' then
-                error("Unknown network error: "..tostring(msg))
+                p1coordinatefinal = "Not connected."
+                p2coordinatefinal = "Not connected."
             end
             socket.sleep(0.01)
         end
