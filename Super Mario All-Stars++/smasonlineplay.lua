@@ -56,7 +56,7 @@ local p2finalframe
 smasonlineplay.onlineactivated = false
 
 function smasonlineplay.onStart()
-    smasonlineplay.onlineactivated = true
+    smasonlineplay.onlineactivated = false
 end
 
 function smasonlineplay.onDraw()
