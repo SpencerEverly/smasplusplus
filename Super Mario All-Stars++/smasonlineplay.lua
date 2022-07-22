@@ -18,10 +18,10 @@ if socket.dns.gethostname() == "SPENCERPC2022" then
     assert(udp2:setpeername("25.3.160.51",12344))
 end
 if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-    assert(udp:setsockname("*",12345))
-    assert(udp:setpeername("25.3.161.35",12345))
-    assert(udp2:setsockname("*",12344))
-    assert(udp2:setpeername("25.3.161.35",12344))
+    assert(udp:setsockname("*",12343))
+    assert(udp:setpeername("25.3.161.35",12343))
+    assert(udp2:setsockname("*",12342))
+    assert(udp2:setpeername("25.3.161.35",12342))
 end
 
 function smasonlineplay.onInitAPI()
@@ -63,8 +63,8 @@ function smasonlineplay.onDraw()
                     Text.print(p2coordinatesfinal, 100, 120)
                 end
                 --Player 2 (Sending)
-                p2coordinates = player2.x, player2.y
-                p2coordinatessending = assert(udp:send(p2coordinates))
+                p2coordinates = {player2.x, player2.y}
+                p2coordinatessending = assert(udp:send(inspect(p2coordinates)))
                 if p2coordinatessending == nil then
                     Text.print("Not connected.", 100, 100)
                 else
@@ -73,8 +73,8 @@ function smasonlineplay.onDraw()
             end
             if socket.dns.gethostname() == "SPENCERPC2022" then
                 --Player 1 (Sending)
-                p1coordinates = tostring(player.x, player.y)
-                p1coordinatessending = assert(udp2:send(p1coordinates))
+                p1coordinates = {player.x, player.y}
+                p1coordinatessending = assert(udp2:send(inspect(p1coordinates)))
                 if p1coordinatessending == nil then
                     Text.print("Not connected.", 100, 100)
                 else
