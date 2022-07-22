@@ -42,16 +42,8 @@ local p2pausekey
 function smasonlineplay.onInputUpdate()
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-            p2upkey = player2.keys.up
-            p2downkey = player2.keys.down
-            p2leftkey = player2.keys.left
-            p2rightkey = player2.keys.right
-            p2runkey = player2.keys.run
-            p2jumpkey = player2.keys.jump
-            p2altrunkey = player2.keys.altRun
-            p2altjumpkey = player2.keys.altJump
-            p2reservekey = player2.keys.dropItem
-            p2pausekey = player2.keys.pause
+            p2coordinatex = tostring(player2.x)
+            p2coordinatey = tostring(player2.y)
         end
     end
 end
@@ -59,16 +51,12 @@ end
 function smasonlineplay.onDraw()
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-            udp:send(p2upkey)
-            udp:send(p2downkey)
-            udp:send(p2leftkey)
-            udp:send(p2rightkey)
-            udp:send(p2jumpkey)
-            udp:send(p2runkey)
-            udp:send(p2altjumpkey)
-            udp:send(p2altrunkey)
-            udp:send(p2reservekey)
-            udp:send(p2pausekey)
+            udp:send(p2coordinatex)
+            udp:send(p2coordinatey)
+        end
+        if socket.dns.gethostname() == "SPENCERPC2022" then
+            player2.x = tonumber(p2coordinatex)
+            player2.y = tonumber(p2coordinatey)
         end
     end
     if data == nil then
