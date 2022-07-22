@@ -37,21 +37,18 @@ local p2coordinatefinal
 
 function smasonlineplay.onDraw()
     if player2Active() then
+        if unexpected_condition then
+            p1coordinates = "Not connected."
+            p1coordinatefinal = "Not connected."
+            p2coordinates = "Not connected."
+            p2coordinatefinal = "Not connected."
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
             --Player 2 (Sending)
             p2coordinates = player2.x, player2.y
-            if timeout then
-                p2coordinates = "Not connected."
-            else
-                assert(udp:send(p2coordinates))
-            end
+            assert(udp:send(p2coordinates))
             Text.print(p2coordinates, 100, 100)
             --Player 1 (Recieving)
-            if timeout then
-                p1coordinatesfinal = "Not connected."
-            else
-                p1coordinatesfinal = assert(udp2:receive())
-            end
+            p1coordinatesfinal = assert(udp2:receive())
             if p2coordinatesfinal == nil then
                 Text.print("Not connected.", 100, 120)
             else
@@ -61,18 +58,10 @@ function smasonlineplay.onDraw()
         if socket.dns.gethostname() == "SPENCERPC2022" then
             --Player 1 (Sending)
             p1coordinates = tostring(player.x, player.y)
-            if timeout then
-                p1coordinates = "Not connected."
-            else
-                assert(udp2:send(p1coordinates))
-            end
+            assert(udp2:send(p1coordinates))
             Text.print(p1coordinates, 100, 100)
             --Player 2 (Recieving)
-            if timeout then
-                p2coordinatesfinal = "Not connected."
-            else
-                p2coordinatesfinal = assert(udp:receive())
-            end
+            p2coordinatesfinal = assert(udp:receive())
             if p2coordinatesfinal == nil then
                 Text.print("Not connected.", 100, 120)
             else
