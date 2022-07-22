@@ -39,28 +39,26 @@ local p2coordinatefinal
 local p1coordinatessending
 local p2coordinatessending
 
-local onlineactivated = false
+local data, msg_or_ip, port_or_nil
 
-function activateonlinetimer()
-    Routine.wait(3, true)
-    playSound("easteregg_smbx13crash.ogg")
-    onlineactivated = true
-end
+local smasonlineplay.onlineactivated = false
 
 function smasonlineplay.onStart()
-    Routine.run(activateonlinetimer)
+    smasonlineplay.onlineactivated = true
 end
 
 function smasonlineplay.onDraw()
-    if onlineactivated then
+    while smasonlineplay.onlineactivated do
         if player2Active() then
             if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
+                data, msg_or_ip, port_or_nil = udp2:receivefrom()
                 --Player 1 (Recieving)
-                p1coordinatesfinal = assert(udp2:receive())
-                if p2coordinatesfinal == nil then
-                    Text.print("Not connected.", 100, 120)
-                else
-                    Text.print(p2coordinatesfinal, 100, 120)
+                if data then
+                    if data == nil then
+                        Text.print("Not connected.", 100, 120)
+                    else
+                        Text.print(p2coordinatesfinal, 100, 120)
+                    end
                 end
                 --Player 2 (Sending)
                 p2coordinates = {player2.x, player2.y}
@@ -81,13 +79,19 @@ function smasonlineplay.onDraw()
                     Text.print(p1coordinates, 100, 100)
                 end
                 --Player 2 (Recieving)
-                p2coordinatesfinal = assert(udp:receive())
-                if p2coordinatesfinal == nil then
-                    Text.print("Not connected.", 100, 120)
-                else
-                    Text.print(p2coordinatesfinal, 100, 120)
+                data, msg_or_ip, port_or_nil = assert(udp:receivefrom())
+                if data then
+                    if data == nil then
+                        Text.print("Not connected.", 100, 120)
+                    else
+                        Text.print(p2coordinatesfinal, 100, 120)
+                    end
                 end
             end
+            if msg_or_ip == 'timeout' then
+                error("Unknown network error: "..tostring(msg))
+            end
+            socket.sleep(0.01)
         end
     end
 end
