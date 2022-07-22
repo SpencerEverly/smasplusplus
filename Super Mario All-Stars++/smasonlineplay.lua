@@ -51,7 +51,7 @@ function smasonlineplay.onDraw()
     while smasonlineplay.onlineactivated do
         if player2Active() then
             if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-                data, msg_or_ip, port_or_nil = udp2:receivefrom()
+                data, msg_or_ip, port_or_nil = udp2:receive()
                 --Player 1 (Recieving)
                 if data then
                     if data == nil then
@@ -79,7 +79,7 @@ function smasonlineplay.onDraw()
                     Text.print(p1coordinates, 100, 100)
                 end
                 --Player 2 (Recieving)
-                data, msg_or_ip, port_or_nil = assert(udp:receivefrom())
+                data, msg_or_ip, port_or_nil = assert(udp:receive())
                 if data then
                     if data == nil then
                         Text.print("Not connected.", 100, 120)
