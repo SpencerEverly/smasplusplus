@@ -2,27 +2,6 @@ if (SMBX_VERSION == VER_SEE_MOD) == false then return end
 
 local smasonlineplay = {}
 
-local udp = assert(socket.udp())
-local data
-
-udp:settimeout(0)
-if socket.dns.gethostname() == "SPENCERPC2022" then
-    assert(udp:setsockname("*",12345))
-    assert(udp:setpeername("25.3.161.35",12345))
-end
-if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-    assert(udp:setsockname("*",12345))
-    assert(udp:setpeername("25.3.160.51",12345))
-end
-
-for i = 0, 2, 1 do
-    assert(udp:send("Connected"))
-    data = udp:receive()
-    if data then
-        break
-    end
-end
-
 function smasonlineplay.onInitAPI()
     registerEvent(smasonlineplay,"onTick")
     registerEvent(smasonlineplay,"onDraw")
@@ -35,6 +14,26 @@ local p2coordinatefinalx
 local p2coordinatefinaly
 
 function smasonlineplay.onDraw()
+    local udp = assert(socket.udp())
+    local data
+
+    udp:settimeout(0)
+    if socket.dns.gethostname() == "SPENCERPC2022" then
+        assert(udp:setsockname("*",12345))
+        assert(udp:setpeername("25.3.161.35",12345))
+    end
+    if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
+        assert(udp:setsockname("*",12345))
+        assert(udp:setpeername("25.3.160.51",12345))
+    end
+
+    for i = 0, 2, 1 do
+        assert(udp:send("Connected"))
+        data = udp:receive()
+        if data then
+            break
+        end
+    end
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
             p2coordinatex = player2.x
