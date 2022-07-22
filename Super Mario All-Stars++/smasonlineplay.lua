@@ -47,7 +47,11 @@ function smasonlineplay.onDraw()
             --Player 2 (Sending)
             p2coordinates = player2.x, player2.y
             assert(udp:send(p2coordinates))
-            Text.print(p2coordinates, 100, 100)
+            if p2coordinates == nil then
+                Text.print("Not connected.", 100, 100)
+            else
+                Text.print(p2coordinates, 100, 100)
+            end
             --Player 1 (Recieving)
             p1coordinatesfinal = assert(udp2:receive())
             if p2coordinatesfinal == nil then
@@ -60,7 +64,11 @@ function smasonlineplay.onDraw()
             --Player 1 (Sending)
             p1coordinates = tostring(player.x, player.y)
             assert(udp2:send(p1coordinates))
-            Text.print(p1coordinates, 100, 100)
+            if p1coordinates == nil then
+                Text.print("Not connected.", 100, 100)
+            else
+                Text.print(p1coordinates, 100, 100)
+            end
             --Player 2 (Recieving)
             p2coordinatesfinal = assert(udp:receive())
             if p2coordinatesfinal == nil then
