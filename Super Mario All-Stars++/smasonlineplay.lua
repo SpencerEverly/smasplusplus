@@ -37,14 +37,14 @@ local p2coordinatefinaly
 function smasonlineplay.onDraw()
     if player2Active() then
         if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
-            p2coordinatex = tostring(player2.x)
-            p2coordinatey = tostring(player2.y)
-            assert(udp:send(p2coordinatex, p2coordinatey))
+            p2coordinatex = player2.x
+            p2coordinatey = player2.y
+            assert(udp:send(tostring(p2coordinatex, p2coordinatey)))
             Text.print(p2coordinatex, 100, 120)
             Text.print(p2coordinatey, 100, 140)
         end
         if socket.dns.gethostname() == "SPENCERPC2022" then
-            p2coordinatesfinal = udp:receive(p2coordinatex, p2coordinatey)
+            p2coordinatesfinal = udp:receive()
             if p2coordinatesfinal == nil then
                 Text.print("Coordinates not found.", 100, 120)
             else
