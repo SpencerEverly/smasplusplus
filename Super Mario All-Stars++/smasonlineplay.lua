@@ -31,8 +31,7 @@ end
 local p2coordinatex
 local p2coordinatey
 
-local p2finalizedx
-local p2finalizedy
+local data2
 
 function smasonlineplay.onDraw()
     if player2Active() then
@@ -43,8 +42,8 @@ function smasonlineplay.onDraw()
             udp:send(p2coordinatey)
         end
         if socket.dns.gethostname() == "SPENCERPC2022" then
-            data = udp:receive()
-            if data then
+            data2 = udp:receive()
+            if data2 then
                 player2.x = tonumber(p2coordinatex)
                 player2.y = tonumber(p2coordinatey)
             end
