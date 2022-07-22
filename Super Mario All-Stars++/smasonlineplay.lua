@@ -7,7 +7,7 @@ local inspect = require("ext/inspect")
 local udp = assert(socket.udp())
 local data
 
-assert(udp:settimeout(0))
+udp:settimeout(0)
 
 if socket.dns.gethostname() == "SPENCERPC2022" then
     assert(udp:setsockname("*",12345))
