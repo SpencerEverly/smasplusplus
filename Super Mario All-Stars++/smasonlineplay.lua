@@ -3,7 +3,6 @@ if (SMBX_VERSION == VER_SEE_MOD) == false then return end
 local smasonlineplay = {}
 
 local inspect = require("ext/inspect")
-local customCamera = require("customCamera")
 
 local udp = assert(socket.udp())
 udp:settimeout(0)
@@ -75,12 +74,15 @@ local p2finalcharacter
 smasonlineplay.onlineactivated = false
 
 function smasonlineplay.onStart()
-    smasonlineplay.onlineactivated = false
+    smasonlineplay.onlineactivated = true
 end
 
 function smasonlineplay.onDraw()
     if smasonlineplay.onlineactivated then
         if player2Active() then
+            if "timeout" then
+                socket.sleep(0.1)
+            end
             if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
                 p2coordinatex = player2.x
                 p2coordinatey = player2.y
