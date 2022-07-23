@@ -77,7 +77,7 @@ end
 function flipperino.onCameraUpdate(camIdx)
     --Horizontal splitscreen fix
     if (flipperino.flipped and flipperino.showMirrored and camera2 ~= nil and camera2.isSplit and camera.height == 300) then
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			if (Player(1).y > Player(2).y) then
 				camera.renderY = -0.5;
 				camera2.renderY = 301;

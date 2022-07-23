@@ -132,7 +132,7 @@ end
 function p1teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-    if Player.count() >= 2 and Player(2).isValid then
+    if player2OrMoreActive() then
         player2:mem(0x140,FIELD_WORD,100)
         Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
     end
@@ -141,7 +141,7 @@ end
 function p2teleportdoor()
 	Routine.waitFrames(30)
 	player:mem(0x140,FIELD_WORD,100)
-    if Player.count() >= 2 and Player(2).isValid then
+    if player2OrMoreActive() then
         player2:mem(0x140,FIELD_WORD,100)
     end
 	Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
@@ -159,7 +159,7 @@ function classicbattlerevivep1()
 end
 
 function classicbattlerevivep2()
-    if Player.count() >= 2 and Player(2).isValid then
+    if player2OrMoreActive() then
         diedp2 = true
         Routine.waitFrames(300, true)
         revivep2 = true
@@ -185,7 +185,7 @@ function classicbattlep1wins()
 end
 
 function classicbattlep2wins()
-    if Player.count() >= 2 and Player(2).isValid then
+    if player2OrMoreActive() then
         for i = 0,20 do
             local section = Section(i)
             section.music = 0
@@ -232,7 +232,7 @@ function dependencies.onInputUpdate()
 		player.pauseKeyPressing = false
 	end
 	if diedp2 then
-        if Player.count() >= 2 and Player(2).isValid then
+        if player2OrMoreActive() then
             player2.upKeyPressing = false
             player2.downKeyPressing = false
             player2.leftKeyPressing = false
@@ -249,7 +249,7 @@ function dependencies.onInputUpdate()
 		player.keys.jump = KEYS_PRESSED
 	end
 	if revivep2 and player1vuln == false then
-        if Player.count() >= 2 and Player(2).isValid then
+        if player2OrMoreActive() then
             player2.keys.jump = KEYS_PRESSED
         end
 	end
@@ -267,7 +267,7 @@ function dependencies.onDraw()
 		dependencies.p1lives = 0
 		Routine.run(classicbattlep2wins)
 	end
-    if Player.count() >= 2 and Player(2).isValid then
+    if player2OrMoreActive() then
         if player2.deathTimer == 1 then
             --Routine.run(classicbattlerevivep2)
         end
@@ -300,7 +300,7 @@ function dependencies.onDraw()
 		Graphics.drawImageWP(vsimg, 383, 196, -3)
 	end
 	if charactertwoimgshow then
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			if Player(2).character == CHARACTER_MARIO then
 				Graphics.drawImageWP(marioimg, 450, 193, -3)
 			end
@@ -395,7 +395,7 @@ end
 function dependencies.onStart()
 	GameData.battlemodeactive = true
     player.powerup = 2
-    if Player.count() >= 2 and Player(2).isValid then
+    if player2OrMoreActive() then
         player2.powerup = 2
     end
     mem(0x00B2D740, FIELD_BOOL, true) --This enables Battle Mode physics and projectiles
@@ -515,7 +515,7 @@ function dependencies.onTick()
 	if(not killed1 and player:mem(0x13E,FIELD_BOOL)) then
 		killed1 = true --killed1 detects to see if the 1st player is dead.
 	end
-	if Player.count() >= 2 and Player(2).isValid then --2nd player compability
+	if player2OrMoreActive() then --2nd player compability
 		GameData.multiplayeractive = true --This makes sure the death animation doesn't play when on multiplayer
 		if GameData.battlemodeactive == true then
 			if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then
@@ -556,7 +556,7 @@ function dependencies.onTick()
 	smashud.visible.stars = false
 	smashud.visible.starcoins = false
 	smashud.visible.timer = false
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
 			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
 				player:mem(0x140,FIELD_WORD,100)
@@ -572,7 +572,7 @@ function dependencies.onTick()
 			end
 		end
 	end
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		if Player(1).forcedState == FORCEDSTATE_DOOR then
 			if Player(1).forcedTimer == 1 then
 				Routine.run(p1teleportdoor)

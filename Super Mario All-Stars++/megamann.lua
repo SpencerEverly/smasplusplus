@@ -4,7 +4,7 @@
 --Continued by Enjl, 2016
 --Contact me at https://www.youtube.com/subscription_center?add_user=msotane
 
-if Player.count() >= 2 and Player(2).isValid then return end
+if player2OrMoreActive() then return end
 
 local colliders = require("colliders")
 local imagic = require("imagic")

@@ -541,7 +541,7 @@ function smashudsystem.onTick()
 	if(not killed1 and player:mem(0x13E,FIELD_BOOL)) then
 		killed1 = true --killed1 detects to see if the 1st player is dead.
 	end
-	if Player.count() >= 2 and Player(2).isValid then --2nd player compability
+	if player2OrMoreActive() then --2nd player compability
 		GameData.multiplayeractive = true --This makes sure the death animation doesn't play when on multiplayer
 		if GameData.battlemodeactive == true then
 			if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then

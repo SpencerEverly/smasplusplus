@@ -89,7 +89,7 @@ function inventory.onStart()
 
 	if not isOverworld and SaveData.useStarman then
 		NPC.spawn(996, player.x, player.y, player.section)
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			NPC.spawn(996, player2.x, player2.y, player2.section)
 		end
 		SaveData.useStarman = false

@@ -359,7 +359,7 @@ function Graphics.drawVanillaHUD(camIndex, priority, isSplit)
 
 	if #activePlayers > 1 and not isSplit then
 		splitOffset[1] = -smashud.multiplayerOffsets[Graphics.getHUDType(activePlayers[1].character)]
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			splitOffset[2] = smashud.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
 			for i=1, 2 do
 				local acts = Graphics.getHUDActions(activePlayers[i].character)
@@ -633,7 +633,7 @@ end
 function smashud.countItemboxes(splitOffset, camIndex, isMultiplayer, isSplit, priority)
 	thisCam = activeCameras[camIndex]
 	if isMultiplayer and not isSplit then
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			for i=1, 2 do
 				thisPlayer = activePlayers[i]
 				smashud.drawItembox(splitOffset[i], thisCam, camIndex, thisPlayer, isMultiplayer, priority)

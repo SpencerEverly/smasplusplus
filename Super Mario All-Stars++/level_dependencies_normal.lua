@@ -102,7 +102,7 @@ function dependencies.onStart()
 end
 
 function dependencies.onTick()
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		if Player(1).forcedState == FORCEDSTATE_PIPE then
 			if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
 				player:mem(0x140,FIELD_WORD,100)
@@ -118,7 +118,7 @@ function dependencies.onTick()
 			end
 		end
 	end
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		if Player(1).forcedState == FORCEDSTATE_DOOR then
 			if Player(1).forcedTimer == 1 then
 				Routine.run(p1teleportdoor)

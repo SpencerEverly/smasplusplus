@@ -360,7 +360,7 @@ function playersounds.onTick(playerOrNil)
 				end
 			end
 		end
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			if not Misc.isPaused() then
 				if Player(2).forcedState == FORCEDSTATE_POWERUP_BIG or Player(2).forcedState == FORCEDSTATE_POWERUP_FIRE or Player(2).forcedState == FFORCEDSTATE_POWERUP_HAMMER or Player(2).forcedState == FORCEDSTATE_POWERUP_ICE then
 					if Player(2).forcedTimer == 0 then
@@ -473,7 +473,7 @@ function playersounds.onPostBlockHit(block, fromUpper, playerOrNil)
 				end
 			end
 		end
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			if not Misc.isPaused() then
 				SFX.play(playersounds.playertwosound3)
 				if block.contentID == nil then --Question Blocks, Special Blocks, etc.
@@ -518,7 +518,7 @@ function playersounds.onPostPlayerHarm()
 			end
 		end
 	end
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		if not Misc.isPaused() then
 			if not Player(2).hasStarman or (Player(2).mount == MOUNT_YOSHI) == false or (Player(2).mount == MOUNT_BOOT) == false or (Player(2).mount == MOUNT_CLOWNCAR) == false then
 				SFX.play(playersounds.playertwosound5)
@@ -559,7 +559,7 @@ function playersounds.onInputUpdate()
 			end
 		end
 	end
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		if not Misc.isPaused() then
 			if Player(2).rawKeys.jump == KEYS_PRESSED and Player(2):isGroundTouching() then
 				SFX.play(playersounds.playertwosound1)
@@ -683,7 +683,7 @@ function playersounds.onPostNPCKill(npc, harmtype)
 			end
 		end
 	end
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		if not Misc.isPaused() then
 			if harmtype == HARM_TYPE_JUMP then
 				SFX.play(playersounds.playertwosound2)

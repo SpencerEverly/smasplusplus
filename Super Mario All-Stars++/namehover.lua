@@ -21,7 +21,7 @@ function namehover.onDraw()
 		local name1 = textplus.layout(textplus.parse(namep1, {xscale=1, yscale=1, align="center", color=Color.white..1.0, font=smbxdefault, maxWidth=450}), player.x - camera.x + 16)
 		local w = name1.width
 		textplus.render{x = player.x - camera.x + 8 - name1.width*0.5, y = player.y - camera.y, layout = name1, priority = -24}
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			local namep2 = "<color white>Guest</color>"
 			local name2 = textplus.layout(textplus.parse(namep2, {xscale=1, yscale=1, align="center", color=Color.white..1.0, font=smbxdefault, maxWidth=450}), Player(2).x - camera.x + 16)
 			local w2 = name2.width

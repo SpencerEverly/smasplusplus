@@ -48,7 +48,7 @@ function onInputUpdate()
 		player.altRunKeyPressing = false;
 		player.dropItemKeyPressing = false;
 		player.jumpKeyPressing = false;
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			player2.upKeyPressing = false;
 			player2.downKeyPressing = false;
 			player2.leftKeyPressing = false;
@@ -69,7 +69,7 @@ function onInputUpdate()
 		player.runKeyPressing = false;
 		player.altRunKeyPressing = false;
 		player.dropItemKeyPressing = false;
-		if Player.count() >= 2 and Player(2).isValid then
+		if player2OrMoreActive() then
 			player2.upKeyPressing = false;
 			player2.downKeyPressing = false;
 			player2.leftKeyPressing = false;

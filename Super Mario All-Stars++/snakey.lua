@@ -8,7 +8,7 @@ Things to fix:
 - The camera vision cones on level seem to crach the game.
 ]]
 
-if Player.count() >= 2 and Player(2).isValid then return end
+if player2OrMoreActive() then return end
 
 local colliders = require("colliders")
 local rng = require("rng");

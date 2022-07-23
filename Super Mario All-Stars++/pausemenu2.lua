@@ -367,7 +367,7 @@ local function characterchange13()
 end
 
 local function characterchange13_2p()
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		local character = Player(2).character;
 		if (character == CHARACTER_MARIO) then
 			Player(2):transform(2, false)
@@ -540,7 +540,7 @@ local function characterchange13left()
 end
 
 local function characterchange13_2pleft()
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		local character = Player(2).character
 		if (character == CHARACTER_MARIO) then
 			Player(2):transform(5, false)
@@ -1187,7 +1187,7 @@ local function warpzonehub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(20496, 19520, bottomCenterAligned)
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		Player(2):teleport(20454, 19520, bottomCenterAligned)
 	end
 end
@@ -1197,7 +1197,7 @@ local function touristhub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(-119968, -120128, bottomCenterAligned)
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		Player(2):teleport(-120010, -120128, bottomCenterAligned)
 	end
 end
@@ -1207,7 +1207,7 @@ local function starthub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(-200608, -200126, bottomCenterAligned)
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		Player(2):teleport(-200650, -200126, bottomCenterAligned)
 	end
 end
@@ -1217,7 +1217,7 @@ local function switchhub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(40176, 39876, bottomCenterAligned)
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		Player(2):teleport(40134, 39876, bottomCenterAligned)
 	end
 end
@@ -1227,7 +1227,7 @@ local function shophub()
 	playSound("hub_travelactivated.ogg")
 	playSound("world_warp.ogg")
 	player:teleport(80144, 79868, bottomCenterAligned)
-	if Player.count() >= 2 and Player(2).isValid then
+	if player2OrMoreActive() then
 		Player(2):teleport(80102, 79868, bottomCenterAligned)
 	end
 end
