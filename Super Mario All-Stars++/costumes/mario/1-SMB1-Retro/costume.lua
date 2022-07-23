@@ -541,7 +541,11 @@ end
 
 
 function costume.onInit(p)
-    Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/player-jump.ogg")
+    if p.powerup == 1 then
+        Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/player-jump-small.ogg")
+    elseif p.powerup >= 2 then
+        Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/player-jump.ogg")
+    end
 	Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/stomped.ogg")
 	Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/block-hit.ogg")
 	extrasounds.id[4]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/1-SMB1-Retro/block-smash.ogg"))
@@ -810,6 +814,11 @@ function costume.onTick()
 end
 
 function costume.onTickEnd()
+    if player.powerup == 1 then
+        Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/player-jump-small.ogg")
+    elseif player.powerup >= 2 then
+        Audio.sounds[1].sfx  = Audio.SfxOpen("costumes/mario/1-SMB1-Retro/player-jump.ogg")
+    end
 	for _,p in ipairs(costume.playersList) do
 		local data = costume.playerData[p]
 
