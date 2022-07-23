@@ -14,7 +14,7 @@ dropShadows.opacity = 0.4
 dropShadows.distance = 4
 
 -- The maximum priority that is affected by the drop shadows.
-dropShadows.frontPriority = -0.1
+dropShadows.frontPriority = -4.9999
 -- The priority that separates the background from the foreground.
 dropShadows.backPriority = -96
 

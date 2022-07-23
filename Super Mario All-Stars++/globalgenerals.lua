@@ -319,7 +319,7 @@ function globalgenerals.onInputUpdate()
 		end
 	end
 	if player2Active() then
-		if Player(1).keys.altRun == KEYS_DOWN and Player(1).keys.up == KEYS_PRESSED then
+		if Player(1).keys.altRun == KEYS_PRESSED and Player(1).keys.up == KEYS_DOWN then
 			if not Misc.isPaused() then
 				player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
 				playSound("player-tp-2player.ogg")
@@ -330,7 +330,7 @@ function globalgenerals.onInputUpdate()
 				Player(1):mem(0x172,FIELD_BOOL,true)
 			end
 		end
-		if Player(2).keys.altRun == KEYS_DOWN and Player(2).keys.up == KEYS_PRESSED then
+		if Player(2).keys.altRun == KEYS_PRESSED and Player(2).keys.up == KEYS_DOWN then
 			if not Misc.isPaused() then
 				player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
 				playSound("player-tp-2player.ogg")
@@ -420,7 +420,7 @@ function globalgenerals.onTick()
 				killed = true --If so, this is true.
 				mem(0x00B2C5AC,FIELD_FLOAT, 1) --Increase the life to 1 to prevent being kicked to the broken SMBX launcher after dying
 			end
-			if player2Active() then --Player(2) compability! This one is a bit of a mess, but I tried
+			if player2OrMoreActive() then --Player(2) compability! This one is a bit of a mess, but I tried
 				if(not killed2 and p.deathTimer >= 1 and p:mem(0x13C, FIELD_BOOL)) then --Because 0X13E doesn't check in multiplayer, use the death timer instead.
 					killed2 = true --This one has a different variable set for player2
 					mem(0x00B2C5AC,FIELD_FLOAT, 1) --Also same as above
