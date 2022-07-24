@@ -3729,6 +3729,7 @@ do
     smwMap.walkCycles["ACCURATE-SMW-TOAD"]  = smwMap.walkCycles["SMW-MARIO"]
     
     smwMap.walkCycles["1-SMB1-RETRO"] = {[PLAYER_SMALL] = {2,9,10, framespeed = 8},[PLAYER_BIG] = {2,3,36, framespeed = 6}}
+    smwMap.walkCycles["8-SMBSPECIAL"] = smwMap.walkCycles["1-SMB1-RETRO"]
 
 
 	if SaveData.disableX2char == false then
