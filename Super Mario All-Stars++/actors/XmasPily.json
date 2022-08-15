@@ -1,0 +1,69 @@
+{
+	"general" : {
+		"npc" : 857,
+		"xScale" : -1,
+		"height" : 64
+	},
+
+	"gfx" : {
+		"sheet" : "costumes/mario/Demo-XmasPily/sheet.png",
+		"columns" : 11,
+		"rows" : 8
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "5",
+			"fidget" : "5p12,4,5p1,4,5p20,1p12,5,2,3p12,2,5p8",
+			"teeter" : "66,67ls,68,69,70",
+			"duck" : "13",
+			"slide" : "14",
+			"stowgift" : "73",
+			"front" : "12",
+			"back" : "8",
+			"turnback" : "6,7,8ls",
+			"walk" : "15,16,17,16,15,18,19,20,19,18",
+			"run" : "21,22,23,24",
+			"ride" : "29",
+			"ride2" : "30",
+			"jump" : "31",
+			"fall" : "32,33,34ls",
+			"glidestart" : "38,37,36,35ls",
+			"glidedrop" : "36,37,38,39,34ls",
+			"skid" : "25,26,27,28",
+			"climb" : "45,46,47,48",
+			"swim" : "49,50,51",
+			"swim2" : "49",
+			"chargespinjump" : "40",
+			"spinjump" : "41,42,43,44",
+			"twirl" : "5,6,7,8,9,10,11,12",
+			"hurt" : "52,53,54ls,55",
+			"pluck" : "56,57,58ls,59le",
+			"stomp" : "60s2,61,62p1,60,63s1ls,64,65",
+			"angry" : "63,64,65",
+			"mega" : "63,64,65",
+			"startled" : "52,75,54ls",
+			"mildstartled" : "52",
+			"suspicious" : "71",
+			"eyeclosed" : "4",
+			"happy" : "72",
+			"lookup" : "73",
+			"lookupangry" : "74",
+			"annoyed" : "78",
+			"quizzical" : "79",
+			"sad" : "80",
+			"dejected" : "81",
+			"statue" : "76",
+			"rocket-0" : "77",
+			"rocket-45" : "77",
+			"rocket-90" : "77",
+			"rocket-135" : "77",
+			"rocket-180" : "77",
+			"rocket-225" : "77",
+			"rocket-270" : "77",
+			"rocket-315" : "77",
+			"rocket-360" : "77"
+		}
+	}
+}

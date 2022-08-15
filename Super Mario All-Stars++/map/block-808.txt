@@ -1,0 +1,3 @@
+frames=8
+framespeed=8
+priority=-9

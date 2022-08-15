@@ -1,0 +1,38 @@
+The following plugins will need to be required to have full compability with all FLPs:
+
+Free Plugins/Samples:
+- Magical8bitPlug2 (Free plugin, see here to download it: https://www.ymck.net/app/magical-8bit-plug-en/)
+- DSK Overture (Free plugin, see here to download it: https://www.dskmusic.com/dsk-overture/)
+
+Super Mario Bros. Spencer (Dependencies):
+- Super Mario World SF2 (Included in the FLP folder)
+- Noragami BRA_Shaku.wav (Included in the FLP folder)
+- Christmas Sleigh Bells 140 BPM.wav (Included in the FLP folder)
+- Ins_Piano.wav by John Quacks (Included in the FLP folder)
+- leaf_drums 1-3.wav (Included in the FLP folder)
+- NSMBDS-Bah.ogg (Included in the FLP folder)
+- Wii News Channel sound samples 43, 44 and 48 (Included in the FLP folder)
+- SMB1 Percussion (Included in the FLP folder)
+- SYN_Modernesq2.wav (Included in the FLP folder)
+
+Paid Plugins/Samples:
+
+(Roland Cloud)
+- SOUND Canvas VA
+- SRX ORCHESTRA
+- ZENOLOGY
+- JD-800
+- SRX PIANO 1
+- SRX PIANO 2
+- SRX STRINGS
+- SRX STUDIO
+- D-50
+- TR-909
+- SRX BRASS
+- PROMARS
+- JUPITER-8
+- JUNO-106
+- SYSTEM-100
+
+(EastWest Composer Cloud)
+- EW Symphonic Orchestra Strings Platinum

@@ -1,0 +1,2 @@
+nogravity=1
+frames=2

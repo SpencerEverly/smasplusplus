@@ -1,0 +1,6 @@
+width=32
+height=52
+gfxwidth=32
+gfxheight=52
+frames=2
+framestyle=1

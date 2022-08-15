@@ -1,0 +1,13 @@
+gfxwidth=600
+gfxheight=389
+width=600
+height=389
+nohurt=1
+noblockcollision=1
+noyoshi=1
+nofireball=1
+nogravity=1
+noiceball=1
+nohammer=1
+noshell=1
+grid=32

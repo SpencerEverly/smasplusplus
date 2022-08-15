@@ -1,0 +1,30 @@
+{
+	"general" : {
+		"npc" : 963,
+		"xScale" : -1
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_mishi.png",
+		"rows" : 4,
+		"columns" : 5
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"jump" : "2",
+			"fall" : "2",
+			"teleportout" : "3,4,5ls",
+			"teleportin" : "5,4,3,2ls",
+			"unamused" : "6",
+			"sigh" : "7",
+			"lookback" : "8",
+			"lookbackunamused" : "9",
+			"walk" : "1,10,11,10",
+			"flip" : "1,12,13,14,15,16ls",
+			"unflip" : "15,17,18,19,20,12,1ls"
+		}
+	}
+}

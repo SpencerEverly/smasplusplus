@@ -1,0 +1,2 @@
+isLadder=true
+autoStraighten=true

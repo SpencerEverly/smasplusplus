@@ -1,0 +1,3 @@
+[1]
+framespeed = 10
+frames=2

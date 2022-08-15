@@ -1,0 +1,27 @@
+{
+	"style" : "groupbox",
+	"title" : "Bonus Block Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"type": "int",
+			"name": "bonusNPC",
+			"title": "Reward NPC",
+			"tooltip": "The NPC that comes out when the player has hit the correct amount of coins.",
+			"value-default": 187,
+			"value-min": 1,
+			"value-max": 1000,
+			"single-step": 1
+		},
+		{
+			"control": "spinBox",
+			"type": "int",
+			"name": "coinGoal",
+			"title": "Required Coins",
+			"tooltip": "How many coins the player needs to get before the Bonus Block gives out the reward NPC instead of just a single coin.",
+			"value-default": 30,
+			"value-min": 1,
+			"single-step": 1
+		}
+	]
+}

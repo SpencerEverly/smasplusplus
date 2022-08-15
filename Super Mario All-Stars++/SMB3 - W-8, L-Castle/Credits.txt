@@ -1,0 +1,2 @@
+Bulk of the code was a modification of an NPC made by Waddle for a contest.
+Please credit Waddle as well.

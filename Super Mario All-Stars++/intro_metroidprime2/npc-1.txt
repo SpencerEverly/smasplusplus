@@ -1,0 +1,3 @@
+frames=13
+nogravity=1
+foreground=1

@@ -1,0 +1,5 @@
+width=32
+height=34
+grabside=0
+frames=4
+framespeed=8

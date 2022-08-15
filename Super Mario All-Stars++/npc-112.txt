@@ -1,0 +1,20 @@
+width = 32
+height = 32
+gfxwidth = 32
+gfxheight = 64
+gfxoffsetx = 0
+gfxoffsety = 2
+frames = 3
+framestyle = 1
+framespeed = 8
+
+turnFrames = 1
+turnTime = 8
+
+speed = 1.5
+cliffturn = false
+facePlayerTime = 140
+droppedCoinID = 33
+
+shellID = 116
+beachKoopaID = 120

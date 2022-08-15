@@ -1,0 +1,40 @@
+{
+	"general" : {
+		"npc" : 935,
+		"xScale" : -1,
+		"talkOffsetY" : -32
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_ultpanda.png",
+		"columns" : 5,
+		"rows" : 5
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1,2,3,4",
+			"jump" : "5",
+			"fall" : "6",
+			"magic1" : "7,8",
+			"duck" : "9",
+			"airangry" : "10",
+			"angry" : "11",
+			"airhappy" : "12",
+			"happy" : "13",
+			"airsad" : "14",
+			"sad" : "15",
+			"examine" : "16",
+			"laugh" : "17",
+			"hurt" : "18",
+			"hurt1" : "18",
+			"hurt2" : "19",
+			"hurt3" : "20",
+			"normal1" : "21",
+			"normal2" : "22",
+			"normal3" : "23",
+			"boxed" : "24"
+		}
+	}
+}

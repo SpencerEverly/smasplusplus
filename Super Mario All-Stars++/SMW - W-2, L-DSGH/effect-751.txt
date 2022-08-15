@@ -1,0 +1,7 @@
+[1]
+lifetime=500
+frames=1
+framestyle=1
+speedY=-6
+gravity=0.3
+maxSpeedY=10

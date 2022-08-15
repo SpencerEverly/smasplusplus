@@ -1,0 +1,47 @@
+{
+	"style" : "groupbox",
+	"title" : "New Firebar Settings",
+	"layout": [
+		{
+			"control": "spinbox",
+			"name": "length",
+			"title": "Length",
+			"tooltip": "The amount of fireballs used for a firebar.",
+			"type": "int",
+			"value-default": 6,
+			"value-min": 1,
+			"value-max": 18
+		},
+		{
+			"control": "spinbox",
+			"name": "angle",
+			"title": "Start Angle",
+			"tooltip": "Initial angle of the firebar.",
+			"type": "int",
+			"value-default": 0,
+			"value-min": 0,
+			"value-max": 360
+		},
+		{
+			"control": "spinbox",
+			"name": "number",
+			"title": "Orbit Amount",
+			"tooltip": "Amount of firebars orbiting the block.",
+			"type": "int",
+			"value-default": 1,
+			"value-min": 1,
+			"value-max": 16
+		},
+		{
+			"control": "spinbox",
+			"name": "speed",
+			"title": "Rotation Speed",
+			"tooltip": "Speed of firebar rotation.",
+			"type": "int",
+			"value-default": 5,
+			"value-min": 0,
+			"value-max": 10
+		}
+	]
+}
+

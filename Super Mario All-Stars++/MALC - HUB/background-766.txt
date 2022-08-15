@@ -1,0 +1,4 @@
+frames=4
+framespeed=80
+name="Me and Larry City (TV Guide)"
+grid=16

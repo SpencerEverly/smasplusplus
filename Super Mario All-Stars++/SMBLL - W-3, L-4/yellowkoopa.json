@@ -1,0 +1,26 @@
+{
+	"style" : "tree",
+	"title" : "Yellow Koopa Para-Troopa Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"type": "int",
+			"name": "rad",
+			"title": "Radius",
+			"value-default": 96,
+			"value-min": 8,
+			"value-max": 360,
+			"single-step": 1
+		},
+		{
+			"control": "spinBox",
+			"type": "int",
+			"name": "num",
+			"title": "Amount",
+			"value-default": 4,
+			"value-min": 1,
+			"value-max": 32,
+			"single-step": 1
+		}
+	]
+}

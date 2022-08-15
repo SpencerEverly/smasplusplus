@@ -1,0 +1,99 @@
+{
+	"style" : "groupbox",
+	"title" : "Warp Settings",
+	"layout": [
+		{
+			"control": "lineEdit",
+			"name": "levelTitle",
+			"title": "Level Title",
+			"tooltip": "Title shown when standing on this tile.",
+			"value-default": ""
+		},
+		{
+			"control": "checkBox",
+			"name": "alwaysVisible",
+			"title": "Always Visible",
+			"tooltip": "If checked, the level will always be visible, even when locked.",
+			"value-default": false
+		},
+
+		{
+			"control": "lineEdit",
+			"name": "warpName",
+			"title": "Warp Name",
+			"tooltip": "The internal name of the warp (not shown to the player)."
+		},
+		{
+			"control": "lineEdit",
+			"name": "destinationWarpName",
+			"title": "Destination Warp's Name",
+			"tooltip": "The internal name of the warp that this one leads to (not shown to the player)."
+		},
+
+		{
+			"control": "group",
+			"name": "..",
+			"title": "Unlock Settings",
+			"children": [
+				{
+					"control": "checkBox",
+					"name": "unlock_up",
+					"title": "Top Unlock",
+					"tooltip": "If checked, the warp's top path will be unlocked after the warp gets used.",
+					"value-default": true
+				},
+				{
+					"control": "checkBox",
+					"name": "unlock_right",
+					"title": "Right Unlock",
+					"tooltip": "If checked, the warp's right path will be unlocked after the warp gets used.",
+					"value-default": true
+				},
+				{
+					"control": "checkBox",
+					"name": "unlock_down",
+					"title": "Down Unlock",
+					"tooltip": "If checked, the warp's bottom path will be unlocked after the warp gets used.",
+					"value-default": true
+				},
+				{
+					"control": "checkBox",
+					"name": "unlock_left",
+					"title": "Left Unlock",
+					"tooltip": "If checked, the warp's left path will be unlocked after the warp gets used.",
+					"value-default": true
+				},
+		
+				{
+					"control": "lineEdit",
+					"name": "path_up",
+					"title": "Top Path",
+					"tooltip": "Name of the path that is on the level's top.",
+					"value-default": ""
+				},
+				{
+					"control": "lineEdit",
+					"name": "path_right",
+					"title": "Right Path",
+					"tooltip": "Name of the path that is on the level's right.",
+					"value-default": ""
+				},
+				{
+					"control": "lineEdit",
+					"name": "path_down",
+					"title": "Bottom Path",
+					"tooltip": "Name of the path that is on the level's bottom.",
+					"value-default": ""
+				},
+				{
+					"control": "lineEdit",
+					"name": "path_left",
+					"title": "Left Path",
+					"tooltip": "Name of the path that is on the level's left.",
+					"value-default": ""
+				}
+			]
+		}
+	]
+}
+

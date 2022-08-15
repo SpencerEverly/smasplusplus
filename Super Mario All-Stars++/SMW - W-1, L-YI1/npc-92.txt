@@ -1,0 +1,12 @@
+nogravity=1
+noblockcollision=1
+grabside=0
+grabtop=0
+playerblock=0
+playerblocktop=1
+foreground=0
+npcblock=1
+npcblocktop=1
+noyoshi=1
+height=2
+width=2

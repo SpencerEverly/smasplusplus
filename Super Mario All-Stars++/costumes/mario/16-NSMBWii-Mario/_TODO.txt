@@ -1,0 +1,27 @@
+FRAME LIST:
+
+Name: Description (Powerup states done)
+
+mario-1: Standing poses (1, 2, 3)
+mario-1-climb: Climbing (1, 2, 3)
+mario-1-climbstill: Climb Stance (1, 2, 3)
+mario-1-duck: Ducking (1, 2, 3)
+mario-1-duckgrab: Duck Grab (1, 2, 3)
+mario-1-grab: Grabbing (1, 2, 3)
+mario-1-halfrun: Half run (Mid-run) (1, 2, 3)
+mario-1-hold: Holding stance (1, 2, 3)
+mario-1-holdjump: Hold jump (1, 2, 3)
+mario-1-holdwalk: Hold walk (1, 2, 3)
+mario-1-jump: Jumping (1, 2, 3)
+mario-1-pipe: Pipe entrance (1, 2, 3)
+mario-1-run: Running (1, 2, 3)
+mario-1-skid: Skidding (1, 2, 3)
+mario-1-spinjump: Spinjumping (1, 2, 3)
+mario-1-swim: Swimming (1, 2, 3)
+mario-1-swimjump: Swim jump (1, 2, 3)
+mario-1-throw: Throwing (1, 2, 3)
+mario-1-walk: Walking (1, 2, 3)
+mario-1-yoshi: Yoshi mount (1, 2, 3)
+mario-1-yoshihit: Hitting a Yoshi (1, 2, 3)
+
+mario-3/6/7-shoot: Fireball/Hammer throw/Iceball (3)

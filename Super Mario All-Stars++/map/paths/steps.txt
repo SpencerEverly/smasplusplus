@@ -1,0 +1,3 @@
+isLadder=true
+textureType=continuous
+autoStraighten=true

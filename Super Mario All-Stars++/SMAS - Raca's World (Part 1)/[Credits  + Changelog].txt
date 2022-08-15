@@ -1,0 +1,37 @@
+-------- Changelog --------
+1.0  - Released the library
+1.01 - Removed particles as they were causing some errors
+1.1  - icantswim.lua support + fixed a bug related to starman invincibility
+1.2  - Fixed a few more bugs + made the health and air variables global
+
+
+-------- Credits --------
+---- SmgLifeSystem.lua ----
+Marioman2007     - Creating the library + custom NPCs for it
+PixelPest        - Heavy inspiration + original snippets code
+MrDoubleA        - Some snippets of code
+cold soup        - codes from icantswim.lua
+LxXzit           - GFX of the health meter
+
+
+---- Lumas and Starbits ----
+Luma sprites by Kazzoo
+Reshaded and Recolored by Marioman2007, using the color palettes by Q-Nova
+
+Starbits obtained from LxXzit's YouTube video
+Recoloured by Marioman2007, with color palettes inspired by Q-Nova's
+
+Made into Custom NPCs by Marioman2007
+
+
+---- Other ----
+Life-Up Mushroom sprite by RedBallBomb
+Air Mushroom sprite by RedBallBomb
+Full heal shroom sprite by RedBallBomb and Marioman2007
+Life-Up heart and Normal heart sprites by Marioman2007
+
+LxXzit for the SMG Big Font
+Marioman2007 for converting the font to textplus font
+
+Unknown source for SMW harmed sprites
+Mario's harmed sprites by HartFlip0218 (8-bit version), ElectroWelly (Conversion to 16-bit) and Greorge Sprout (Better eyes and gloves)

@@ -1,0 +1,40 @@
+{
+	"general" : {
+		"npc" : 952,
+		"scale" : 2,
+		"xScale" : -1,
+		"talkOffsetY" : -24
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_pump_shell.png",
+		"columns" : 5,
+		"rows" : 4
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"turn" : "1",
+			"turn1" : "1",
+			"turn2" : "10",
+			"idle" : "2",
+			"idle1" : "2",
+			"idle2" : "11",
+			"walk" : "2,3,2,4",
+			"walk1" : "2,3,2,4",
+			"walk2" : "11,12,11,13",
+			"close" : "5,6,7ls",
+			"close1" : "5,6,7ls",
+			"close2" : "14,5,7ls",
+			"closed" : "7",
+			"open" : "6,5,2ls",
+			"open1" : "6,5,2ls",
+			"open2" : "5,14,11ls",
+			"suspicious" : "6",
+			"angry" : "8",
+			"happy" : "9",
+			"laugh" : "15,16ls,17"
+		}
+	}
+}

@@ -1,0 +1,38 @@
+{
+	"general" : {
+		"npc" : 958,
+		"xScale" : -1,
+		"height" : 84
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_brisket.png",
+		"columns" : 5,
+		"rows" : 4
+	},
+
+	"sequences" :  {
+		"default" : {
+			"idle" : "1",
+			"idleDef" : "1",
+			"blink" : "2,3,2,1ls",
+			"squint" : "2",
+			"closedNeutral" : "3",
+			"closedSad" : "4",
+			"closedHappy" : "5",
+			"happy" : "6",
+			"angry" : "7",
+			"shocked" : "8",
+			"jump" : "9",
+			"jumpHappy" : "10",
+			"jumpDef" : "9",
+			"walk" : "11,1,14,1",
+			"squish" : "14,17ls",
+			"squishAngry" : "12,15ls",
+			"squishHappy" : "13,16ls",
+			"squishDef" : "14,17ls",
+			"turnIn" : "13s2,18ls",
+			"turnOut" : "18s2,13,11,1ls"
+		}
+	}
+}

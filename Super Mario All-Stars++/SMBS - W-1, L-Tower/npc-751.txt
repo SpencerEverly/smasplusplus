@@ -1,0 +1,12 @@
+gfxwidth=64
+gfxheight=64
+width=64
+height=64
+score=6
+noyoshi=1
+nofireball=0
+frames=4
+framespeed=8
+framestyle=1
+name="SMBS Boss #1 - Rasbot"
+grid=16

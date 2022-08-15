@@ -1,0 +1,40 @@
+---         P-Balloon         ---
+--- from MrDoubleA's NPC Pack ---
+---       (Give credit!)      ---
+
+
+
+To create a set of P-Balloon sprites for a character, create an image called "pballoon_player_<character name>.png" which contains all of the sprites for each powerup state.
+
+
+The P-Balloon have the following properties for NPC configs and npc-n.txt files:
+
+
+- duration (Default: 772)
+How long the P-Balloon's effect lasts for.
+- warnTime (Default: 160)
+How long the player flashes before the P-Balloon's effect wears off.
+
+- horizontalSpeed (Default: 2)
+The maximum speed that the player can move at horizontally.
+- horizontalAcceleration (Default: 0.075)
+How fast the player accelerates horizontally.
+- horizontalDeacceleration (Default: 0.05)
+How fast the player deaccelerates horizontally.
+
+- neutralSpeed (Default: -0.75)
+The speed that the player moves at vertically when not holding up or down.
+
+- upwardsSpeed (Default: -1.25)
+The speed that the player moves at vertically when holding the up button.
+- upwardsAcceleration (Default: 0.05)
+How fast the player accelerates upwards.
+
+- downwardsSpeed (Default: 0.5)
+The speed that the player moves at vertically when holding the down button.
+- downwardsAcceleration (Default: 0.025)
+How fast the player accelerates downwards.
+
+
+- collectSFX (Default: "pballoon_collect.wav")
+The sound effect played upon collecting the P-Balloon. Can be nil for no sound effect, a number for a vanilla sound effect, or a sound object/string for a custom sound effect.

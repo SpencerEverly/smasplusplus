@@ -1,0 +1,49 @@
+{
+	"style" : "groupbox",
+	"title" : "Path Settings",
+	"layout": [
+		{
+			"control": "lineEdit",
+			"name": "name",
+			"title": "Name",
+			"tooltip": "Name of the path, to identify it.",
+			"value-default": ""
+		},
+		{
+			"control": "lineEdit",
+			"name": "points",
+			"title": "Points",
+			"tooltip": "The points of the spline, in order, separated by a comma.",
+			"value-default": "",
+			"placeholder": "0,0, 96,0, 128,32, etc"
+		},
+		{
+			"control": "lineEdit",
+			"name": "types",
+			"title": "Types",
+			"tooltip": "The types of path used for each point, in order, separated by a comma.",
+			"value-default": "",
+			"placeholder": "normal, normal, trail, etc"
+		},
+		{
+			"control": "spinbox",
+			"name": "smoothness",
+			"title": "Smoothness",
+			"type": "double",
+			"tooltip": "How smooth the path is.",
+			"value-default": 0.5,
+			"value-min": 0,
+			"value-max": 1,
+			"single-step": 0.1,
+			"decimals": 2
+		},
+		{
+			"control": "checkBox",
+			"name": "hideIfLocked",
+			"title": "Hide if Locked",
+			"tooltip": "If ticked, the path will be invisible when locked.",
+			"value-default": false
+		}
+	]
+}
+

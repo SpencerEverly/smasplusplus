@@ -1,0 +1,8 @@
+width=32
+height=32
+playerblocktop=0
+jumphurt=1
+grabtop=0
+npcblocktop=1
+npcblock=0
+nofireball=1

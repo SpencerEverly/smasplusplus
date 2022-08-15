@@ -1,0 +1,34 @@
+{
+	"general" : {
+		"npc" : 985
+	},
+
+	"gfx" : {
+		"type" : "npc",
+		"npcStartLeft" : 1,
+		"npcStartRight" : 23
+	},
+
+	"sequences" : 
+	{
+		"npc" : {
+			"idle" : "1",
+			"idle-bark" : "2",
+			"jump" : "3",
+			"jump-bark" : "4",
+			"fall" : "5",
+			"fall-bark" : "6",
+			"walk" : "1,3,5",
+			"run" : "1,3,5",
+			"walk-bark" : "2,4,6",
+			"sleep" : "7,8",
+			"sniff" : "9,10",
+			"happy" : "11,12",
+			"dig" : "13,14,15,16",
+			"scared" : "17",
+			"angry" : "18",
+			"shocked" : "19",
+			"look" : "1p4,21,22p2,21,1,20p2"
+		}
+	}
+}

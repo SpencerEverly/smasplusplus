@@ -1,0 +1,7 @@
+gfxoffsety=4
+gfxwidth=80
+gfxheight=52
+width=48
+height=44
+frames=4
+framestyle=1

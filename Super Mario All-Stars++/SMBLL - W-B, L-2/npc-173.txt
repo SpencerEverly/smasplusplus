@@ -1,0 +1,16 @@
+width = 32
+height = 32
+gfxwidth = 32
+gfxheight = 64
+gfxoffsetx = 0
+gfxoffsety = 2
+frames = 2
+framestyle = 1
+framespeed = 8
+grid=16
+speed=1.5
+
+speed = 1.2
+cliffturn = false
+
+shellID = 172

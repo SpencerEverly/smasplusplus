@@ -1,0 +1,15 @@
+width = 32
+height = 32
+gfxwidth = 32
+gfxheight = 32
+gfxoffsetx = 0
+gfxoffsety = 2
+frames = 5
+framestyle = 1
+framespeed = 8
+
+kickFrames = 1
+slidingFrames = 2
+
+speed = 1.2
+cliffturn = true

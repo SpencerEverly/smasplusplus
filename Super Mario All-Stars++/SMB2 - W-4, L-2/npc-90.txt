@@ -1,0 +1,2 @@
+speed=0
+grid=16

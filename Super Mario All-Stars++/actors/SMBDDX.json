@@ -1,0 +1,40 @@
+{
+	"general" : {
+		"player" : "mario",
+		"npc" : 980,
+		"yScale" : -2,
+		"width" : 32,
+		"height" : 32
+	},
+
+	"gfx" : {
+		"type" : "playable",
+		"columns" : 10,
+		"rows" : 10
+	},
+	
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"lookup" : "-1",
+			"turnback" : "13ls",
+			"walk" : "2,11,3,2,11,3",
+			"run" : "-2,-11,-3",
+			"twirl" : "6,-6",
+			"jump" : "4",
+			"fall" : "5",
+			"skid" : "-6",
+			"duck" : "7",
+			"front" : "15",
+			"back" : "13",
+			"slide" : "24",
+			"ride" : "-31",
+			"ride2" : "-30",
+			"climb" : "25,26",
+			"swim" : "43,44",
+			"swim2" : "40,41,42",
+			"spinjump" : "1,15,-1,13"
+		}
+	}
+}

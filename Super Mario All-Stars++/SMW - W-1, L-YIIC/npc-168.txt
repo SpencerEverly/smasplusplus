@@ -1,0 +1,11 @@
+width=50
+height=32
+gfxwidth=50
+gfxheight=60
+frames=3
+framestyle=1
+framespeed=3
+noiceball=1
+noyoshi=1
+cliffturn=1
+npcblock=0

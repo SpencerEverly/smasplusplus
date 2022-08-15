@@ -1,0 +1,13 @@
+gfxoffsetx=0
+gfxwidth=328
+gfxheight=184
+width=328
+height=328
+nohurt=1
+noblockcollision=1
+noyoshi=1
+nogravity=1
+frames=9
+framespeed=8
+name="Super Mario All-Stars: Intro (Logo, Shine Animation)"
+foreground=-3

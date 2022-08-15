@@ -1,0 +1,10 @@
+{
+	"general" : {
+		"player" : "toad",
+		"npc" : 983
+	},
+
+	"gfx" : {
+		"type" : "playable"
+	}
+}

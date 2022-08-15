@@ -1,0 +1,6 @@
+[1]
+import=AI_ARC
+frames=2
+gravity=0
+speedY = 0
+speedX = 48

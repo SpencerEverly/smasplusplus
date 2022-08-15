@@ -1,0 +1,35 @@
+{
+	"general" : {
+		"npc" : 961,
+		"xScale" : -1,
+		"talkOffsetY" : -16
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_noctel.png",
+		"columns" : 5,
+		"rows" : 4
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idleCape" : "1",
+			"walkCape" : "1,2",
+			"nodCape" : "3",
+			"idle" : "5s1,6",
+			"walk" : "5,6",
+			"idleDef" : "5,6",
+			"walkDef" : "5,6",
+			"teleportOut" : "7,8,4ls",
+			"teleportIn" : "4,8,7,5ls",
+			"jump" : "9",
+			"fall" : "10",
+			"duck" : "11",
+			"kneel" : "12",
+			"spin" : "13,14,15,16",
+			"hold" : "17",
+			"throw" : "17,18,19,10,6,5ls"
+		}
+	}
+}

@@ -1,0 +1,109 @@
+{
+	"style" : "groupbox",
+	"title" : "Big Boo Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"name": "health",
+			"title": "Health",
+			"type": "int",
+			"tooltip": "How many hits it takes the NPC to die.",
+			"value-default": 3,
+			"value-min": 1,
+			"value-max": 100
+		},
+
+		{
+			"control": "description",
+			"text": ""
+		},
+
+		{
+			"control": "spinBox",
+			"name": "flyAroundHorizontalTime",
+			"title": "Fly Around Horizontal Time",
+			"type": "int",
+			"tooltip": "How many frames it takes the NPC to complete a full horizontal movement cycle.",
+			"value-default": 640,
+			"value-min": 1,
+			"value-max": 4096
+		},
+		{
+			"control": "spinBox",
+			"name": "flyAroundHorizontalDistance",
+			"title": "Fly Around Horizontal Distance",
+			"type": "int",
+			"tooltip": "How many pixels the NPC moves in each horizontal movement cycle.",
+			"value-default": 352,
+			"value-min": -4096,
+			"value-max": 4096
+		},
+		{
+			"control": "spinBox",
+			"name": "flyAroundVerticalTime",
+			"title": "Fly Around Vertical Time",
+			"type": "int",
+			"tooltip": "How many frames it takes the NPC to complete a full vertical movement cycle.",
+			"value-default": 512,
+			"value-min": 1,
+			"value-max": 4096
+		},
+		{
+			"control": "spinBox",
+			"name": "flyAroundVerticalDistance",
+			"title": "Fly Around Vertical Distance",
+			"type": "int",
+			"tooltip": "How many pixels the NPC moves in each vertical movement cycle.",
+			"value-default": 112,
+			"value-min": -4096,
+			"value-max": 4096
+		},
+
+		{
+			"control": "description",
+			"text": ""
+		},
+
+		{
+			"control": "itemSelect",
+			"name": "throwProjectileID",
+			"title": "Throw Projectile ID",
+			"type": "npcorcoins",
+			"tooltip": "Which NPC is thrown out after the NPC fades in. Defaults to nothing.",
+			"value-default": 0
+		},
+		{
+			"control": "spinBox",
+			"name": "throwProjectileCount",
+			"title": "Throw Projectile Count",
+			"type": "int",
+			"tooltip": "How many projectiles are thrown out after the NPC fades in.",
+			"value-default": 1,
+			"value-min": 0,
+			"value-max": 128
+		},
+		{
+			"control": "spinBox",
+			"name": "throwProjectileSpeed",
+			"title": "Throw Projectile Speed",
+			"type": "double",
+			"tooltip": "The speed at which the NPC are thrown out at (in pixels per frame).",
+			"value-default": 4,
+			"value-min": 0,
+			"value-max": 128,
+			"decimals": 2
+		},
+		{
+			"control": "spinBox",
+			"name": "throwProjectileAngle",
+			"title": "Throw Projectile Max Angle",
+			"type": "double",
+			"tooltip": "The maximum angle of the thrown NPC's (in degrees). Has no effect if the throw count is 0.",
+			"value-default": 45,
+			"value-min": 0,
+			"value-max": 360,
+			"decimals": 2
+		}
+	]
+}
+

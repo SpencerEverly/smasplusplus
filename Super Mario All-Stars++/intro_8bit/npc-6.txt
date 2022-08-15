@@ -1,0 +1,8 @@
+frames = 2
+framestyle = 1
+framespeed = 8
+
+speed = 1.2
+cliffturn = true
+
+shellID = 7

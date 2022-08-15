@@ -1,0 +1,11 @@
+gfxwidth=32
+gfxheight=32
+width=32
+height=32
+grabtop=1
+noyoshi=0
+frames=2
+framespeed=8
+framestyle=2
+name="Beezo"
+grid=16

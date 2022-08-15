@@ -1,0 +1,6 @@
+width=32
+height=32
+gfxwidth=160
+gfxheight=160
+nogravity=1
+noblockcollision=1

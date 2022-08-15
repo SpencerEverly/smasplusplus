@@ -1,0 +1,418 @@
+Episode made by Spencer Everly
+
+----
+Project started on March 9th, 2012 (On the original SMBX 1.3.0)
+v1.0.0.0 finished on :releasedate: (On SMBX2 Beta 4, though subject to change if the stable releases during production)
+
+Other version completion dates:
+
+- v1.1.0.0 finished on TBD
+
+More updates with new characters and new additional levels coming soon!
+
+----
+
+-----Graphic Pack Credits-----
+
+Packs/Sprites are by:
+
+- Murphmario
+- Valtteri
+- LeanneTM
+- Kojimkj
+- thesmbxgamer1
+- Squishy Rex
+- Katrina
+- Eevee
+- Citrusponge
+- Q-Nova
+- Spade
+- bEEtle
+- SupahLuigi
+- Awesomezack
+- TSPRR
+- MARIOBONNIE
+- CrystallicAshley
+- redigit
+- IsaacP2003
+- LinkstormZ
+- MegaDood
+- AwesomeZack
+- MarioFan5000
+- Sednaiur
+- BackwardsPigeon1985
+- SilverDeoxys563
+- MarioWizzerd
+- FlatKiwi
+- Spriters Resource
+- MFGG
+- Hat Loving Gamer
+- Sapphire Bullet Bill
+- Phil
+- Ludwig Koopa Is Awesome
+- braineat
+- WH1507
+- SilentDream
+- Cloth pocket
+- h2643
+- Bloxxerstudios
+- SuperSledgeBro
+- Mr. Pixelator
+- 4matsy
+- h2643
+- Exploding Rabbit
+- litchh (SKL)
+- Turca
+
+----Costume/Character Credits----
+
+Characters:
+
+- SMW2: YI Yoshi, and Minecraft Steve made by MrDoubleA (Deltarune's Kris might be added if it's possible to do so)
+- A2XT Gaiden 2's Pily made by raocow, and the A2XT Gaiden 2 Team
+
+Costumes:
+
+- NES Toad, NES Mario & Luigi, Toadette, Daisy, Pauline, Luigi with Mario's clothes, and some Toad Colors by IsaacP2003 (SMB1 Mario by Murphmario, Awesomezack & MrDoubleA)
+- Sonic sprites by megamario1500, rodrig0, and Inferno (Also costume code modified by Spencer Everly)
+- Daisy idle sprite by magibowser
+- Wario and Waluigi by couch tomato, ported by Inferno
+- Bass sprite by megaconnerx5, ported by Inferno
+- Proto Man sprite by KaratGaming, ported by Inferno
+- Kirby powerup hats by Kabi-Ribi
+- Yoshi sprite base from Joshr_691 and Supernova Bandana Dee
+- SMB2 Mario (Big) by Johnny Webb
+- South Park characters (Eric, Kyle, Stan, Kenny) by Lolwutburger/Matt Parker and Trey Stone
+- NSMBDS SMBX Styled Mario and Luigi by Bowl_of_Oatmeal
+- SMB3 8-Bit SMAS++ Beta Sprites by ??? (From the old SMBX Forums from 2009-2013. If you know the creator who made the variants for Small, Big, Fire, and Ice Mario... Leaf, Tanooki and Hammer Suits were made by me... please contact spencer.everly@gmail.com)
+- Super Mario Bros. 8-Bit and Retro DX Episode sprites by CrystallicAshley
+- Modern Mario Bros. sprites by Linkstormz (Front, back, Luigi projectile throw), Anonymous (Luigi's skid, jump, and falling), and JRMaster (Tanooki statues and Fox Luigi)
+- SMW2 Mario by Mit, ported by Murphmario
+- SMA4 Mario and Luigi by TheNintendoBros and jdaster64
+- SMG4 by Mosaic, Hunter2258, Zeus Guy, and Cosmic
+- JC Foster Takes it to the Moon by JC Foster Takes it to the Moon (Duh)
+- Larry the Cucumber by Cmanflip/Big Idea/Phil Vischer
+- GoAnimate Caillou/Boris by GoAnimate/Vyond, and Cookie Jar Entertainment
+- Marink character (SSBM Alternate Costume 5) by Ancel3 and Phil (The Legend of Mario)
+- Super Mario Bros. 0 characters by BrokenAce
+- Minecraft Skins by Spencer Everly, uxiee36, breadconjurer0, HyperSanic666, SuperSaiyanT07, sadlove, overcasterz, Ledkalnis, Joa11, Legendboy1313, djgirlx, monsterboy772, raptyblocks, anniemichelle, M4PL3, GorillaMask, DoctorSkins, Valkorion, tayblecloth (UnofficialStudios/Riley), Master of Disaster, Mystery Man Bro, MonkeyGamerz, GeorgeNotFound, Tommyinnit, Karl, Technoblade, Quackity, ExplodingTNT, ItsJerryAndHarry, Notch, and the Mojang Staff
+- Golden Mario by It's-A-Me
+- Playable Goomba by Turret 3471
+- Frisk Costume Block Sprites by Frisky
+- SMM2 SMW costumes by CaptainMonochrome
+- Some SMB1 SMAS Stuff by ItsIggy
+- SMW Peach by LinkstormZ
+- Bandana Dee by Inferno
+- Roll by Exploding Rabbit (ported by Tiger Festival)
+- Yoshi (Luigi) by KooperKoopa
+- Rosalina (Mario) by CrystallicAshley
+- SMM2 Toad (Toad) by GlacialSiren484, MauricioN64, Jamestendo64, and LinkStormZ, ported by MrDoubleA
+- Captain Toad by GlacialSiren484, MauricioN64, Jamestendo64, LinkStormZ, and FutureNyanCat2002, ported by MrDoubleA and FutureNyanCat2002
+- Bill Rizer by Unknown
+- King Boo by neweegee, ported by Unknown
+- Hamtaro by Unknown
+- E. Gadd by Unknown
+- NES Mega Man by Unknown
+- Bad Box Art Mega Man by Unknown
+- Dr. Wily by Unknown
+- Marisa Kirisame (Player sprites from Megamari and map sprites from Touhou: The Book of the Grimoire) by Unknown
+- Marina Liteyears by Unknown
+- Metroid 1 Samus by Unknown
+- SMB2 Rosalina by Unknown
+- SMA4 Peach by Unknown
+- Wohlstand by Unknown
+- Tux by Grumbel and others, ported by Unknown
+- Utsuho Reiuji by Unknown
+- SMBDDX Mario by Guinea
+- 10 Second Run Red Stickfigure by G-MODE
+- Super Mario Bros. Special by Hudson and Nintendo
+- PAC-MAN by BANDAI NAMCO
+- Modern Mario #2 by DarSonic55
+
+(Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
+
+----Asset/Other Character Credits----
+
+- Pigeon Raca made by studsX
+
+----LunaLua Credits----
+
+Codes for certain parts made by:
+
+- KBM-Quine
+- Enjl
+- MrDoubleA
+- Chipss
+- Bulby_VR
+- Enjl
+- 9thCore
+- Hatsune Blake/Blake Hatsune
+- CJ_RLushi
+- Yingchun Soul
+- Zeus guy
+- Lukinsky Play
+- JustOneMGuy
+- Yoshi021
+- SetaYoshi
+- Marioman2007
+- cold soup
+- Coldcolor900
+- deice
+- Dragon0307
+- Jumper
+- Blue Stag
+- GtW
+- MegaDood
+- Murphmario
+- Master of Disaster
+- IAmPlayer
+- MegoZ_
+- CodeX
+- Core
+- FutureNyanCat2002
+
+Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
+
+----Music Credits----
+
+- Some SMB1, SMB2, SMB3, LL, SMW music by LadiesMan217 and Nintendo
+- Some other SMB1, SMB2, SMB3, LL, SMW music by The Mario Multiverse Team, with one song recreated by me in All-Stars 16 bit format (EmmaNerd), with other SMAS music by TheLegendofRenegade, Nimbus Cumulus, and some other people (See other music section)
+- Some music by me:
+     - SMB1, LL, SMBS Map Music
+     - True Ending Music (Heaven Music 1)
+     - Dancing Mushrooms (By Blue Warrior, FL instrument remaster by me)
+
+Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research needed):
+
+- Jordan Bortner (ac_1700)
+- TheUltimateKoopa (Airship)
+- unknown (Athletic)
+- Blue Warrior (AthleticSMB4, Battle Plains)
+- NICKtendo DS (Birdo)
+- Pongball (Bonus)
+- Daniel Witt (Bowser)
+- Andrew Shand (Tower)
+
+Extra MIDIs (For theming) are by:
+
+- Spencer Everly (Various mods, original music, and other things)
+- m9blayke (AirshipSMB1)
+- StoopidGelatin (AthleticSMB1)
+- LucasGTGamer123 (BeforeBossSMB2)
+- JexuBandicoot527 (BirdoAlt)
+- Name Witheld (JarSMB2)
+- Lu9
+
+Other music played on the episode are made by:
+
+- Maxodex
+- Gamma V
+- Jimmy
+- qantuum
+- Kusamochi
+- Roberto zampari
+- Ultima
+- Joy Sticks
+- TrojanHorse711
+- Ryan Landry
+- skydev
+- Bramble
+- Xane
+- Mr. Wes
+- Dark Magician S62
+- xyz600sp
+- Fullcannon
+- EDIT3333
+- HaruMKT
+- SMB64 Beta Archive (Zodiaku)
+- Nintendo
+- HAL Labratories
+- Darren Mitchell (Acclaim Entertainment)
+- Wohlstand
+- GLuigiX
+- Talkhaus
+- Herbert Richers/Audio News (VeggieTales)
+- drmr (Homebrew Channel, NOT drmr. on YouTube, it's a different user)
+- GoAnimate/Vyond (Some from Kevin MacLeod, PremiumBeat, other anonymous sources)
+- Holy Order Sol
+- Hooded Edge
+- FYRE150
+- Wakana
+- com_poser
+- HarvettFox96
+- mario90
+- MiracleWater
+- Kevin
+- Lazy
+- Lui
+- Kevin
+- DAA234
+- sincx
+- mindmatchingmoment
+- Toby Fox
+- The Undertoad Team
+- ZerJox, Jedo, BenLab (Undertale: Last Breath)
+- IsabelleChiming
+- skydev
+- Master Jonald
+- Estlib
+- Tater-Tot Tunes
+- Lu9
+- Milon Luxy
+- Mr. MS
+- Lood
+- Mad Nyle
+- Captain 3
+- Lion Free Music
+- Dublincalif
+- ValtteriValtteri24
+- SiivaGunner
+- Timthehuman
+- Dani Fekete
+
+----Sound Credits----
+
+- SMB2 sounds by antonioflowers056
+- 8-Bit Sounds by Valtteri
+- "Is the pool clean?" SFX by sullyrox
+- Redone SMAS Sounds by Dooki51
+- Boris gun sounds by SoundBible and the Family Guy team
+- repll sounds by Nintendo, SoundBible, and Family Guy
+
+Some sounds ripped from the original sources/ROMs by me
+
+----Level Credits----
+
+Levels made by:
+
+- Spencer Everly
+- barkers
+- FireSeraphim
+
+----Boot Menu Theming Credits----
+
+Themes made by:
+
+- redigit
+- Spencer Everly
+- bossedit8
+- TepigFan101
+- SMBX2 Staff
+- IkOshi1
+- Jake Brito
+- Softendo
+- RvBNut91
+- SilverDeoxys
+
+----Battle Level Credits----
+
+Classic Battle Mode levels made by:
+- Blue
+- Red_Yoshi
+- Knuckles96
+- Valtteri
+- redigit
+- Spencer Everly
+- hrthrdh
+
+----Resolution Credits----
+
+Resolution sizes deciphered from sources such as Wikipedia and https://www.wearethefirehouse.com/aspect-ratio-cheat-sheet
+
+- Nintendo 3DS front screen layout by BloodyYoshi
+- HD GBA logo by Dr Ocelot
+
+-----Where SMB Attacks-----
+
+Created by Spencer Everly
+Episode developed as early as July 14th, 2010
+Remake released on February 19th, 2020 (v1.0)
+
+LunaLua code made by:
+- Spencer Everly
+- MrDoubleA
+- KBM-Quine
+- Enjl
+
+Hotel Mario remix music by Keaton
+
+-----Adventures of Demo-----
+
+Adventures of Demo by Wohlstand
+
+Stuff by raocow and his fan community:
+talkhaus.raocow.com
+
+Characters By:
+Cadwyn
+Chaoxys
+darkychao
+Jolpengammler
+Mata Hari
+MrWeirdGuy
+raocow
+Roo
+Tsurugi
+
+Graphics By:
+Cadwyn
+Chaoxys
+darkychao
+Enjl
+Feenicks
+Frozelar
+Hoeloe
+Mata Hari
+MrWeirdGuy
+Paralars
+Quine
+raocow
+RedYoshi
+rixithechao
+SAJewers
+SilverDeoxys563
+supermarioman
+Terry Von Feleday
+Various members of Talkhaus
+Wohlstand
+
+Music By:
+A13XIS
+Amber Vasami
+Aristo
+BaDLiZ
+Chrom1um
+d.r.m of disknet
+Dr.Tapeworm
+Izuna
+Kil
+Lui37
+Mandew
+Michail Oberuechtin
+necros/fm
+Prsynth1111
+Razmatan_iki
+RednGreen
+Robert A. Allen
+Roberto Ricioppo
+Rondo
+SharkNurse
+Sinc-X
+S.N.N.
+ThinkOneMoreTime
+Torchkas
+Various authors at modarchive.org
+WhiteYoshiEgg
+Wohlstand
+Woolters
+
+Extra Music provided by Spencer Everly:
+Acumen
+Cynmusic
+Awesome
+
+SFX By:
+Hoeloe
+rixithechao
+Wohlstand
+or from public domain

@@ -1,0 +1,5 @@
+[1]
+frames=2
+framespeed=6
+lifetime=500
+speedY=-2

@@ -1,0 +1,47 @@
+{
+	"general" : {
+		"npc" : 959,
+		"xScale" : -1
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_alabasta.png",
+		"columns" : 5,
+		"rows" : 8
+	},
+
+	"sequences" : {
+		"default" : {
+			"idle" : "1",
+			"idle1" : "1",
+			"idle2" : "8",
+			"surprised" : "2",
+			"happy" : "3",
+			"confused" : "4",
+			"suspicious" : "5",
+			"shocked" : "6,7",
+			"laugh" : "25,26",
+			"hurt" : "9,10",
+			"hurt1" : "9,10",
+			"hurt2" : "11,12",
+			"jump" : "13,14ls",
+			"jump1" : "13,14ls",
+			"jump2" : "18,19ls",
+			"fall" : "15",
+			"fall1" : "15",
+			"fall2" : "20",
+			"swingup" : "16",
+			"swingdown" : "17",
+			"walk" : "21,22",
+			"walk1" : "21,22",
+			"walk2" : "23,24",
+			"dash" : "28,29,30",
+			"prepattack" : "27",
+			"attack" : "27,31,32",
+			"weak" : "33",
+			"dead" : "34",
+			"kneel" : "35",
+			"shrug" : "36"
+		}
+	}
+}

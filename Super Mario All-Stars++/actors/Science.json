@@ -1,0 +1,27 @@
+{
+	"general" : {
+		"npc" : 966,
+		"nogravity" : "true",
+		"xScale" : -1
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_science.png",
+		"rows" : 5,
+		"columns" : 2
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"sad" : "2",
+			"quizzical" : "3",
+			"angry" : "4",
+			"happy" : "5",
+			"rolleye" : "6,7,8ls",
+			"closed" : "9",
+			"lookaway" : "10"
+		}
+	}
+}

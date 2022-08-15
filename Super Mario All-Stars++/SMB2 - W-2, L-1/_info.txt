@@ -1,0 +1,16 @@
+---       One-Way Walls       ---
+--- from MrDoubleA's NPC Pack ---
+---       (Give credit!)      ---
+
+
+
+The one-way walls have the following properties for block configs and block-n.txt files:
+
+
+- direction (Defaults: oneWayWall.DIRECTION_UP, oneWayWall.DIRECTION_RIGHT, oneWayWall.DIRECTION_DOWN, oneWayWall.DIRECTION_LEFT)
+The direction that the block faces.
+
+- interactSFX (Default: "oneWayWall_interact.wav")
+The sound effect played when interacting with the block. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
+- shakeOnInteraction (Default: true)
+Whether or not the block will shake when interacting with an object.

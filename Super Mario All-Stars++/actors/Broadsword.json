@@ -1,0 +1,55 @@
+{
+	"general" : {
+		"player" : "unclebroadsword",
+		"npc" : 948,
+		"xScale" : -1,
+		"talkOffsetY" : -16
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_broadsword.png",
+		"columns" : 11,
+		"rows" : 5
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"walk" : "8,9,33,9",
+			"run" : "8,9,33,9",
+			"jump" : "17",
+			"fall" : "19",
+			"jump-sword" : "18",
+			"fall-sword" : "20",
+			"spin" : "26,27,28,29",
+			"shocked" : "6",
+			"happy" : "2",
+			"angry" : "30",
+			"upset" : "3",
+			"duck" : "4",
+			"duck-sad" : "53",
+			"onward" : "5",
+			"dead" : "7",
+			"fightstance" : "10",
+			"raisedshake" : "10,11",
+			"stabspam" : "12,13,14",
+			"bigslash" : "15,16ls",
+			"bigslashend" : "16",
+			"diagstab" : "20",
+			"downstab" : "23",
+			"diagenergy" : "21,22",
+			"downenergy" : "24,25",
+			"door" : "31",
+			"worried" : "32",
+			"charging" : "35",
+			"charged" : "34,35",
+			"dashattack" : "38,37,36ls",
+			"downslash" : "40,41,42ls",
+			"upslash" : "43,41,39ls",
+			"air-downslash" : "45,46,47ls",
+			"air-upslash" : "48,46,44ls",
+			"spinslash" : "49,50,51,52"
+		}
+	}
+}

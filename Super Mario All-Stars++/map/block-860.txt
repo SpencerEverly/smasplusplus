@@ -1,0 +1,3 @@
+frames=1
+framespeed=12
+priority=-86

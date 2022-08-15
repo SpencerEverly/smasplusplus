@@ -1,0 +1,8 @@
+playerblock=1
+jumphurt=0
+nohurt=1
+speed=1.2
+noyoshi=1
+noiceball=1
+nohammer=1
+noshell=1

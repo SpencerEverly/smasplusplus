@@ -1,0 +1,2 @@
+textureType=continuous
+autoStraighten=true

@@ -1,0 +1,3 @@
+- Add SFXs!!!
+- check if any part of the script can be optimized
+- complete the documentation

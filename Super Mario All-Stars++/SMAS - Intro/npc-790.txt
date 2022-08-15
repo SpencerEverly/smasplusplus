@@ -1,0 +1,12 @@
+gfxwidth=96
+gfxheight=96
+width=96
+height=96
+nohurt=1
+noblockcollision=1
+noyoshi=1
+nogravity=1
+frames=7
+framespeed=8
+name="Super Mario All-Stars: Intro (Pidget, With Blackness)"
+foreground=-3

@@ -1,0 +1,6 @@
+gfxwidth=96
+gfxheight=64
+width=96
+height=64
+speed=1.5
+frames=1

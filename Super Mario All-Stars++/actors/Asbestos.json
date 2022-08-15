@@ -1,0 +1,35 @@
+{
+	"general" : {
+		"npc" : 949,
+		"xScale" : -1,
+		"talkOffsetY" : -16
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_atsy.png",
+		"columns" : 6,
+		"rows" : 4
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"walk" : "8,9,8,10",
+			"run" : "8,9",
+			"jump" : "11",
+			"fall" : "12",
+			"inflate" : "13,14,15ls,16",
+			"deflate" : "16,15,14,13,1ls",
+			"saddeflate" : "17,18,19,2ls",
+			"popped" : "20",
+			"dead" : "20",
+			"sad" : "2",
+			"happy" : "3",
+			"angry" : "4",
+			"eyeclosed" : "5",
+			"unamused" : "6",
+			"startled" : "7"
+		}
+	}
+}

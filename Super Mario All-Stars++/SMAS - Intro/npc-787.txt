@@ -1,0 +1,10 @@
+gfxwidth=512
+gfxheight=288
+width=512
+height=288
+nohurt=1
+noblockcollision=1
+nogravity=1
+frames=8
+framespeed=2
+name="Super Mario All-Stars: Intro (People, No Blackness)"

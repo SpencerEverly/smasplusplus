@@ -1,0 +1,66 @@
+{
+	"style" : "groupbox",
+	"title" : "Water Current Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"name": "power",
+			"type" : "double",
+			"title": "Current Power",
+			"tooltip": "Power of the water current.",
+			"value-default": 0.3,
+			"single-step": 0.05,
+			"decimals": 2
+		},
+		{
+			"control": "spinBox",
+			"name": "limit",
+			"type" : "double",
+			"title": "Current Limit",
+			"tooltip": "How many tiles it should extend.\n1 tile is 32 pixels A.K.A. a normal sized block.",
+			"value-default": 5
+		},
+		{
+			"control": "spinBox",
+			"name": "angle",
+			"type" : "int",
+			"title": "Water Current Angle",
+			"tooltip": "The angle of the water current.\n0 - up\n90 - right\n180 - down\n270 - left",
+			"value-default": 0,
+			"value-max": 359
+		},
+		{
+			"control": "spinBox",
+			"name": "width",
+			"type" : "int",
+			"title": "Water Current Width",
+			"tooltip": "The width of the water current, in pixels.\nDefault to 32.",
+			"value-default": 32,
+			"value-max": 3200
+		},
+		{
+			"control": "checkBox",
+			"name": "createBubbles",
+			"title": "Create Bubbles",
+			"tooltip": "Should it create bubbles? A user suggested this so I added it I suppose.",
+			"value-default": true
+		},
+		{
+			"control": "checkBox",
+			"name": "xMomentum",
+			"title": "Use Momentum For Horizontal Movement",
+			"tooltip": "If true, the water current will use momentum instead of simply pushing the player horizontally.\nThis has the effect of the player being thrown out of the water current.\nAlso, if the power is under 1, the player will not be moved. I didn't code this, it's simply SMBX being SMBX.\nThis also somehow breaks if the player runs????? I have no idea but it happens",
+			"value-default": false
+		},
+		{
+			"control": "spinBox",
+			"name": "bubbleSpeed",
+			"type" : "double",
+			"title": "Bubble Speed",
+			"tooltip": "If this is different than 0, it uses this as the speed of the bubbles instead of the power.\nIntended to be used alongside the option above if you want the current to be momentum-based but it can also be used without it.",
+			"value-default": 0,
+			"single-step": 0.05,
+			"decimals": 2
+		}
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"general" : {
+		"npc" : 967,
+		"xScale" : -1
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_pily.png",
+		"rows" : 3,
+		"columns" : 3
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"walk" : "1,2,3,2",
+			"jump" : "4",
+			"fall" : "4",
+			"angry" : "5",
+			"happy" : "6",
+			"sad" : "7",
+			"scared" : "8"
+		}
+	}
+}

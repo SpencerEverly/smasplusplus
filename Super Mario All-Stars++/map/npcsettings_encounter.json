@@ -1,0 +1,32 @@
+{
+	"style" : "groupbox",
+	"title" : "Encounter Settings",
+	"layout": [
+		{
+			"control": "levelFile",
+			"name": "levelFilename",
+			"title": "Level Filename",
+			"tooltip": "Filename of the level that this tile leads to.",
+			"value-default": ""
+		},
+		{
+			"control": "spinBox",
+			"name": "warpIndex",
+			"title": "Entrance\nWarp Index",
+			"tooltip": "The warp that the player starts at when entering the level. 0 means no warp and starting from the usual start point.",
+			"type": "int",
+			"value-default": 0,
+			"value-min": 0,
+			"value-max": 200
+		},
+		{
+			"control": "comboBox",
+			"name": "canWalkOn",
+			"title": "Can walk on...",
+			"tooltip": "Controls what types of paths it can walk on.",
+			"elements": ["Any non-hidden paths","Any paths","Any unlocked paths","None"],
+			"value-default": 0
+		}
+	]
+}
+

@@ -1,0 +1,4 @@
+frames=1
+framestyle=1
+name="Mearian"
+grid=16

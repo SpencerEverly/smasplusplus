@@ -1,0 +1,14 @@
+{
+	"style" : "groupbox",
+	"title" : "Platform Settings",
+	"layout": [
+		{
+			"control": "combobox",
+			"name": "direction",
+			"title": "Direction",
+			"tooltip": "Direction of the Checkboard or Flying Rock Platform.",
+			"elements": ["Horizontal", "Vertical"],
+			"value-default": 0
+		}
+	]
+}

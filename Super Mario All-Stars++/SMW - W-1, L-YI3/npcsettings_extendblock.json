@@ -1,0 +1,25 @@
+{
+	"style" : "groupbox",
+	"title" : "Extending Block Settings",
+	"layout": [
+		{
+			"control": "spinBox",
+			"name": "Xspeed",
+			"title": "Horizontal Speed",
+			"type": "int",
+			"tooltip": "How fast should the blocks travel?",
+			"value-default": 1,
+			"value-min": 0,
+			"value-max": 15
+		},
+		{
+			"control": "comboBox",
+			"name": "movedir",
+			"title": "Direction",
+			"type": "int",
+			"tooltip": "Direction the block should move in.",
+			"value-default": 0,
+			"elements": ["Horizontal", "Vertical", "Alternating"]
+		}
+	]
+}

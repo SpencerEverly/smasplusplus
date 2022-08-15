@@ -1,0 +1,5 @@
+frames=3
+framespeed=8
+grid=8
+foreground=true
+notcointransformable=true

@@ -1,0 +1,13 @@
+gfxoffsety=8
+gfxwidth=512
+gfxheight=288
+width=512
+height=280
+nohurt=1
+noblockcollision=1
+noyoshi=1
+nogravity=1
+frames=8
+framespeed=7
+name="Super Mario All-Stars: Intro (People, With Blackness)"
+foreground=-3

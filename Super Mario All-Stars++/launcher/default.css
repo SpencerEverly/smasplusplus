@@ -1,0 +1,45 @@
+body {
+	background-color: #04346A;
+	background-image: url('background.png');
+	background-size: cover;
+	background-position: center top;
+	background-repeat: repeat-x;
+	background-size: 100% auto;
+	text-align: center;
+	font-family: Calibri;
+}
+h2 {
+margin: 0;
+padding: 0;
+}
+p {
+	font-size: 24px;
+	font-weight: bold;
+	font-family: Calibri;
+	display: inline-block;
+	vertical-align: middle;
+}
+p img {
+	max-width: 100%;
+}
+
+.bodydiv{
+	
+}
+
+.content {
+	background-color: rgba(255,255,255,0.75);
+	position: absolute;
+	margin: auto;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	left: 10px;
+	text-align: center;
+	max-width: 800px;
+	max-height: 500px;
+	padding:50px;
+}
+.marioContainer {
+	padding-top: 0px;
+}

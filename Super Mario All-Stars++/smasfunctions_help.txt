@@ -1,0 +1,196 @@
+smasfunctions.lua
+v1.0
+These are simplified functions useful for doing certain commands that don't
+rely on so much code. Below are the functions and what they do.
+
+FILE MANAGEMENT
+- File.load('path/to/file.extension'): Loads a file from any of the
+common directories, plus the common SMAS directories as well.
+- File.loadImg('path/to/file.extension'): Loads an image from any of the
+common directories, plus the common SMAS directories as well.
+- File.drawImg('path/to/file.extension', x, y, withPriority, sceneCoords,
+priority, opacity): Draws an image in an all-in-one function, using a
+simplified function.
+- File.writeToFile('path/to/file.extension', 'text'): Write to a file using
+io. This will overwrite everything with the text specified, so BE CAREFUL!
+- File.addToFile('path/to/file.extension', 'text'): Add to a file using io.
+This won't overwrite everything, just adds something to the file, so this
+one is fine.
+- File.readFile('path/to/file.extension'): Reads a file using io. This will
+return the entire file in text format (Newlines will be with a
+'backslash-n').
+
+MUSIC/SOUNDS
+- Sound.openSFX('path/to/file.extension'): Opens a sound for reading.
+- Sound.playSFX('path/to/file.extension'/number): Plays a sound. This
+library is compatible with extrasounds (Enter extrasounds.help() for
+more info).
+- Sound.resolveCostumeSound(sound): Used for switching costume sounds throughout
+when wearing a costume.
+- Sound.loadCostumeSounds(): Used to load up the sounds for the costume.
+- Sound.changeMusic('path/to/file.extension', section ID): Changes the music
+to a specified path. If using -1 as the section ID, all sections will be
+counted.
+- Sound.muteMusic(section ID): Mute the music to a specified section. The
+music before changing will be temporarily stored. If using -1 as the section
+ID, all sections will be counted. Be sure not to activate this twice, or
+else the muted music will be perma-stored in the temporary table. Use
+Sound.restoreOriginalMusic(-1) if you accidentally activate it twice.
+- Sound.restoreMusic(section ID): Restores the music to a specified section.
+The music after changing using muteMusic will be restored. If using -1 as
+the section ID, all sections will be counted. (Don't run this before using
+Sound.muteMusic)
+- Sound.refreshMusic(section ID): Refreshes the currently changed music by
+putting the new music into the temporary table. If using -1 as the section
+ID, all sections will be counted.
+- Sound.restoreOriginalMusic(section ID): Restores the original music from
+the unmodifiable level music which gets stored when onStart is called. If
+using -1 as the section ID, all sections will be counted.
+
+GAME MANAGEMENT
+- SysManager.lifeCount(): Returns the SMAS++ life count.
+- SysManager.lifeCountWithCrowns(): Returns the SMAS++ life count with the
+crowns. Every crown will be with a '!' since that's the symbol being used for
+displaying the crown.
+- SysManager.manageLives(lives, true/false): Manages the lives. If true,
+it'll add the lives. If false, it'll subtract the lives.
+- SysManager.maxOutLives(): Maxes out lives to 1110.
+- SysManager.resetLives(): Resets the lives back to the default value (5).
+- SysManager.deathCount(): Returns the SMAS++ death count.
+- SysManager.maxOutDeathCount(): Maxes out death count to 999.
+- SysManager.resetDeathCount(): Resets the death count back to the default
+value (0).
+- SysManager.starCount(): Returns the SMAS++ star count.
+- SysManager.maxOutStars(): Maxes out the star count to 9999
+- SysManager.clearAllStars(): This clears all the stars, and even the level
+table.
+- SysManager.manageStars(number of stars, add/subtract): Manages the star
+count. 'add' will add, 'subtract' will subtract the stars.
+- SysManager.scoreCount(): Returns the score count specific for the episode.
+- SysManager.scoreCountWithZeroes(): Returns the score count, but with the
+maximum zeroes.
+- SysManager.scoreCount13(): Returns the score count, but with the max zeroes
+the original SMBX can go.
+- SysManager.coinCountClassic(): Returns the classic coin count specific
+for the episode.
+- SysManager.coinCountClassicWith99Limit(): Returns the classic coin count,
+but it limits the coins that go higher from 99 up to 99 (Used for the HUD).
+
+DATE/TIME
+- Time.day(): Lists the day.
+- Time.month(): Lists the month.
+- Time.year(): Lists the year.
+- Time.hour(): Lists the hour.
+- Time.minute(): Lists the minute.
+- Time.second(): Lists the second.
+- Time.tomorrow(): Lists the day after today.
+- Time.yesterday(): Lists the day before today.
+- Time.weekend(): List the day of the weekend as a string.
+- Time.dayJulian(): Converts the Gregorian Day to Julian.
+- Time.julianNumber(): Lists the number of the real Julian Time.
+- Time.easterYear(year): Lists when Easter Sunday is on the specified year.
+The date will be saved into SaveData (This automatically runs with the
+real year every level boot)
+- Time.easterMonth(year): This will only list the month of Easter, and
+not save anything.
+- Time.easterDay(year): This will only list Easter day, and not save
+anything.
+- Time.leapYear(year): Lists if the year has a leap day during the year.
+- Time.dayOfWeek(month, day, year): Lists the day of the week of this
+specified date.
+- Time.lastWeekday(weekday, month, year): Returns the last weekday
+of the month.
+- Time.findFiveWeekendsOfMonth(year): Returns all the months that
+have a five weekend month of the year.
+
+PLAYER FUNCTIONS
+- Playur.execute(player ID, function(plr) plr.code() end): A better way to
+run functions with the player without the fangled
+'if Player(2) and Player(2).isValid' mess. Useful for running commands on
+things like all players (-1), or just one of them.
+- Playur.setCount(count): Sets the player count to the specified number.
+Highest you can go is 200.
+- Playur.activate1stPlayer(bool): If in 2nd Player Mode and greater, this
+will revert to the 1st Player. If true, there will be an RNG explosion
+effect that happens as you spawn the 2nd player/toggle again to turn off.
+- Playur.toggleSingleCoOp(bool): Toggles single Co-Op on the
+episode. If true, there will be an RNG explosion effect that happens
+as you spawn the 2nd player/toggle again to turn off.
+- Playur.activate2ndPlayer(bool): This activates 2 player mode. If true, there
+will be an RNG explosion effect that happens as you spawn the 2nd
+player/toggle again to turn off.
+- Playur.activate3rdPlayer(): Wip 3 player mode. Not done yet.
+- Playur.activate4thPlayer(): Wip 4 player mode. Not done yet.
+- Playur.activatePlayerIntroMode(): This activates the intro imitaiton mode,
+where 6 players move to the right while jumping around automatically. This is
+normally used on the main menu of the episode (Certain themes).
+- Playur.isJumping(player): Returns true if the specified player is jumping
+on the first frame the jump is active.
+- Playur.countEveryPlayer(): This counts every single player that is active
+on the current level.
+- Playur.isAnyPlayerAlive(): Returns if any player is still alive.
+- Playur.underwater(player): Returns true if the specified player is
+underwater.
+- Playur.grabbing(player): Returns true if the specified player is grabbing
+something.
+- Playur.ducking(player): Returns true if the specified player is ducking
+(Includes small player ducking as well).
+- Playur.player2Active(): Returns true if the 2nd player is active.
+- Playur.player2OrMoreActive(): Returns true if the 2nd player or more are
+active.
+- Playur.getBattleLives(playerIdx): Returns the lives used on the battle mode,
+at the specified player index. Either player (1) or player2 (2) can be used.
+- Playur.setBattleLives(playerIdx, value): Sets the lives on the specified
+player index to the lives set as the value. Used for the Classic Battle Mode
+minigame feature to prevent dying to the broken launcher menu.
+- Playur.activateStarman(player): Activates or deactivates the starman from
+the specified player.
+- Playur.activateMegashroom(player): Activates or deactivates the megashroom
+from the specified player.
+- Playur.jumpPose(player): Gets the jump pose for the character.
+- Playur.hasCharacter(player, Character ID): Gets if this player is the
+active character.
+- Playur.characterList(): Returns a table of all players that have a specified
+character. true if the character is the specified character, false if not.
+- Playur.startPointCoordinateX(index): Returns the X position of the starting
+coordinate of the player from that level.
+- Playur.startPointCoordinateY(index): Returns the Y position of the starting
+coordinate of the player from that level.
+
+NPC FUNCTIONS
+- Npc.harmAll(): Harms every single NPC is the entire level.
+- Npc.harmSpecified(id): Harms a specific NPC ID in the entire level.
+
+MISC FUNCTIONS
+- Misk.episodeFilename(): Gets the episode filename for the episode. If under
+the editor, it'll return 'Editor Mode' instead.
+- Misk.isExtraSoundsActive(): Checks to see if extrasounds is turned on.
+- Misk.listUserFiles(path): Lists the files in the main modifiable user
+directory.
+- Misk.toggleWindowOnly(): This, when fullscreen, will only toggle a window
+instead of being in fullscreen. Toggle again to turn off.
+- Misk.doPSwitchUntimed(): This will turn on the P-Switch, without a timer.
+- Misk.rngTrueValue(argument): RNGs a random value, truly.
+- Misk.checkCameraTransitionStatus(): Checks if the camera transition (Used
+for defining size/position) is transitioning or not.
+- Misk.loadSaveSlot(slot): Loads any save slot.
+- Misk.saveSaveSlot(slot): Saves a specified save slot.
+- Misk.moveSaveSlot(slot, destination): This moves a save slot to another
+save slot. Highest you can go is 32767 (The original slot will be reset after
+moving, due to os.remove not existing on LunaLua).
+- Misk.eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot
+tool and speedrun save data purge option. This will reset your save data, but
+without clearing SaveData/GameData.
+- Misk.eraseMainSaveSlot(slot): This is only used for the SMAS++ Demo 3 save
+migration tool. This will only clear off the .sav file data, but won't erase
+anything else.
+- Misk.getLegacyStarsCollected(): This is for the Demo 3 save migration tool
+which runs when stars were collected from Demo 2 and below. This will be
+unused by the time Demo 4 releases (And/or the full release happens).
+- Misk.getLegacyStarsCollectedNameOnly(): Same as last, except it only lists
+the names via a table (Actually used when migrating save data).
+- Misk.unlockAnyBrokenPaths(): Unlocks any paths that had stars already
+collected in prior.
+- Misk.overrideLibrary(inlib, outlib): Overrides a library to a new one.
+- Misk.use13Editor(bool): ONLY FOR THE SEE MOD! This is used to open the
+legacy 1.3 Editor after dying.

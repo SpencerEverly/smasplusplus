@@ -1,0 +1,8 @@
+gfxwidth=1
+gfxheight=1
+width=192
+height=160
+speed=0
+noblockcollision=0
+nogravity=0
+grid=8

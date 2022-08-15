@@ -1,0 +1,6 @@
+width=32
+height=32
+gfxwidth=320
+gfxheight=320
+nogravity=1
+foreground=1

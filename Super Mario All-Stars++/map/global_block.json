@@ -1,0 +1,45 @@
+{
+	"style" : "groupbox",
+	"title" : "Scenery Settings",
+	"layout": [
+		{
+			"control": "lineEdit",
+			"name": "showPathName",
+			"title": "Show Path Name",
+			"tooltip": "The name of the path that, when it is unlocked, shows this scenery.",
+			"value-default": ""
+		},
+		{
+			"control": "spinBox",
+			"name": "showDelay",
+			"title": "Show Delay",
+			"tooltip": "Controls when the path appears. For example, if it's 1, it'll appear instantly when the path is unlocked, if it's 2 it'll happen a bit later, etc.",
+			"type": "int",
+			"value-default": 1,
+			"value-min": 1,
+			"value-max": 2048
+		},
+		{
+			"control": "lineEdit",
+			"name": "hidePathName",
+			"title": "Hide Path Name",
+			"tooltip": "The name of the path that, when it is unlocked, hides this scenery.",
+			"value-default": ""
+		},
+		{
+			"control": "spinBox",
+			"name": "hideDelay",
+			"title": "Hide Delay",
+			"tooltip": "Controls when the path disappears. For example, if it's 1, it'll disappear instantly when the path is unlocked, if it's 2 it'll happen a bit later, etc.",
+			"type": "int",
+			"value-default": 1,
+			"value-min": 1,
+			"value-max": 2048
+		},
+		{
+			"control": "description",
+			"text": "\n<b>What are these?</b>\nThese control when this scenery appears or disappears. For example, if you put 'myCoolPath' into the show path name, the path will be invisible until a path with the name of 'myCoolPath' is unlocked. The higher the delay, the later it actually happens. The hide options are similar, except they hide it instead of showing it."
+		}
+	]
+}
+

@@ -1,0 +1,7 @@
+frames=4
+framespeed=10
+gfxoffsety=10
+gfxwidth=32
+gfxheight=32
+width=32
+height=22

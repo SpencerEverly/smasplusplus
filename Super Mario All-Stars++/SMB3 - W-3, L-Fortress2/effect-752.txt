@@ -1,0 +1,6 @@
+[1]
+onTick=TICK_CUSTOMBOOMBOOM
+lifetime=500
+frames=2
+framespeed=4
+framestyle=1

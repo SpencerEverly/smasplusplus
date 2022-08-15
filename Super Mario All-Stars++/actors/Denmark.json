@@ -1,0 +1,39 @@
+{
+	"general" : {
+		"npc" : 950,
+		"xScale" : -1,
+		"talkOffsetY" : -20
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_denmark.png",
+		"columns" : 6,
+		"rows" : 5
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"talk" : "1,14",
+			"happy" : "2",
+			"happyopen" : "3",
+			"happytalk" : "2,3",
+			"suspicious" : "4",
+			"nervous" : "5,6",
+			"unamused" : "7",
+			"unamusedopen" : "8",
+			"unamusedtalk" : "7,8",
+			"startled" : "9,10",
+			"walk" : "1,11,12",
+			"walktalk" : "1,13,14",
+			"squash" : "15,15,17,18ls",
+			"spit" : "19,18ls",
+			"stretch" : "17,20ls",
+			"unstretch" : "21,1ls",
+			"startspin" : "21,22ls",
+			"spin" : "23,24,25,26",
+			"dead" : "27"
+		}
+	}
+}

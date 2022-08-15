@@ -1,0 +1,8 @@
+width=32
+height=32
+gfxwidth=96
+gfxheight=96
+foreground=1
+frames=1
+nogravity=1
+gfxoffsetx=-32

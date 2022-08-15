@@ -1,0 +1,33 @@
+{
+	"general" : {
+		"npc" : 951,
+		"xScale" : -1,
+		"talkOffsetY" : -16
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_rewind.png",
+		"columns" : 7,
+		"rows" : 5
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"walk" : "1,2,3,4",
+			"talk" : "5,6,7,8",
+			"sad" : "9",
+			"happy" : "10",
+			"laugh" : "10,11",
+			"radar" : "12,13,14,15,16,17,18",
+			"squash" : "19,20,21,22ls",
+			"pop" : "23,24,25,26,27",
+			"startled" : "28",
+			"hurt" : "29",
+			"dead" : "30",
+			"disappear" : "31,32,33,34ls",
+			"appear" : "34,33,32,31,1ls"
+		}
+	}
+}

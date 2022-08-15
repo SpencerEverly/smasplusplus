@@ -1,0 +1,4 @@
+gfxheight=32
+height=32
+framestyle=1
+grid=16

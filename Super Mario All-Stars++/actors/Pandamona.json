@@ -1,0 +1,70 @@
+{
+	"general" : {
+		"npc" : 964,
+		"xScale" : -1,
+		"talkOffsetY" : -32
+	},
+
+	"gfx" : {
+		"sheet" : "graphics/actors/anmx_pandamona.png",
+		"columns" : 8,
+		"rows" : 6
+	},
+
+	"sequences" : 
+	{
+		"default" : {
+			"idle" : "1",
+			"alas" : "2",
+			"walk" : "3,4,5",
+			"lookback" : "6",
+			"unamused" : "7",
+			"happy" : "8",
+			"giddy" : "9",
+			"intense" : "10",
+			"panic" : "11,12",
+			"duck" : "13",
+			"jump" : "16",
+			"fall" : "17,18,19ls",
+
+			"box-idle" : "1",
+			"box-alas" : "2",
+			"box-walk" : "3,4,5",
+			"box-lookback" : "6",
+			"box-unamused" : "7",
+			"box-happy" : "8",
+			"box-giddy" : "9",
+			"box-intense" : "10",
+			"box-panic" : "11,12",
+			"box-duck" : "13",
+			"box-jump" : "16",
+			"box-fall" : "17,18,19ls",
+
+			"boxless-idle" : "22",
+			"boxless-alas" : "23",
+			"boxless-walk" : "22,24,25,24",
+			"boxless-lookback" : "26",
+			"boxless-unamused" : "27",
+			"boxless-happy" : "28",
+			"boxless-giddy" : "28",
+			"boxless-intense" : "29",
+			"boxless-panic" : "39,40",
+			"boxless-duck" : "42",
+			"boxless-jump" : "43",
+			"boxless-fall" : "44",
+
+			"box-hide" : "13,14,15ls",
+			"box-unhide" : "15,14,13,1ls",
+			"box-slowturn1" : "1,20,21ls",
+			"box-slowturn2" : "21,20,1",
+
+			"boxless-hold" : "30",
+			"boxless-throw" : "31,32ls",
+			"boxless-charge" : "33",
+			"boxless-laser" : "34,35",
+			"boxless-laserdone" : "36",
+			"boxless-tumble" : "37,38",
+			"boxless-kneel" : "41"
+		}
+	}
+}

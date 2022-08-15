@@ -1,0 +1,35 @@
+{
+	"style" : "groupbox",
+	"title" : "Camera Blocker Settings",
+	"layout": [
+		{
+			"control": "checkBox",
+			"name": "canBlockLeft",
+			"title": "Can Block from Left",
+			"tooltip": "If ticked, it can block the camera if it appears from its left side.",
+			"value-default": true
+		},
+		{
+			"control": "checkBox",
+			"name": "canBlockRight",
+			"title": "Can Block from Right",
+			"tooltip": "If ticked, it can block the camera if it appears from its right side.",
+			"value-default": true
+		},
+		{
+			"control": "checkBox",
+			"name": "canBlockTop",
+			"title": "Can Block from Top",
+			"tooltip": "If ticked, it can block the camera if it appears from its top side.",
+			"value-default": true
+		},
+		{
+			"control": "checkBox",
+			"name": "canBlockBottom",
+			"title": "Can Block from Bottom",
+			"tooltip": "If ticked, it can block the camera if it appears from its bottom side.",
+			"value-default": true
+		}
+	]
+}
+

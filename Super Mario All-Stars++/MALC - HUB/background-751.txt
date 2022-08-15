@@ -1,0 +1,4 @@
+frames=4
+framespeed=80
+name="Tourist Center (Information Booth: Main Sign)"
+grid=16
