@@ -1,0 +1,11 @@
+frames=2
+framestyle = 1
+gfxwidth=48
+gfxheight=62
+width=40
+height=48
+
+speed = 1.2
+cliffturn = false
+
+shellID = 172
