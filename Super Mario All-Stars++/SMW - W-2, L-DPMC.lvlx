@@ -4568,6 +4568,7 @@ ID:410;X:-139872;Y:-141312;W:32;H:32;LR:"Non-Moving Platforms";
 ID:410;X:-139904;Y:-141312;W:32;H:32;LR:"Non-Moving Platforms";
 ID:410;X:-139936;Y:-141312;W:32;H:32;LR:"Non-Moving Platforms";
 ID:410;X:-139968;Y:-141312;W:32;H:32;LR:"Non-Moving Platforms";
+ID:434;X:-139296;Y:-141472;W:32;H:32;LR:"Non-Moving Platforms";
 BLOCK_END
 BGO
 ID:92;X:-198560;Y:-200736;
