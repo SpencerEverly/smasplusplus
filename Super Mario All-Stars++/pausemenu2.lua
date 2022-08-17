@@ -255,7 +255,6 @@ local function smbxdefaultsoundsystem()
     if pauseplus.getSelectionValue("soundsettings","Use the Original SMBX Sound System") then
         SaveData.SMBXSoundSystem = true
         extrasounds.enableGrabShellSFX = false
-        extrasounds.enableFireFlowerHitting = false
         extrasounds.playPSwitchTimerSFX = false
         extrasounds.enableSMB2EnemyKillSounds = false
         extrasounds.useOriginalSpinJumpForBigEnemies = true
@@ -275,7 +274,6 @@ local function smbxdefaultsoundsystem()
     else
         SaveData.SMBXSoundSystem = false
         extrasounds.enableGrabShellSFX = true
-        extrasounds.enableFireFlowerHitting = true
         extrasounds.playPSwitchTimerSFX = true
         extrasounds.enableSMB2EnemyKillSounds = true
         extrasounds.useOriginalSpinJumpForBigEnemies = false

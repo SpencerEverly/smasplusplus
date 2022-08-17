@@ -118,7 +118,7 @@ extrasounds.enableStarCollecting = true
 --Whenever to play the P-Switch/Stopwatch timer when a P-Switch/Stopwatch is active.
 extrasounds.playPSwitchTimerSFX = true
 --Whenever to enable fire flower block sound hitting.
-extrasounds.enableFireFlowerHitting = true
+extrasounds.enableFireFlowerHitting = false --Let's only use this for characters that really need it
 --Whenever to enable the shell grabbing SFX.
 extrasounds.enableGrabShellSFX = true
 --Whenever to enable the P-Wing SFX.

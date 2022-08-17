@@ -342,7 +342,6 @@ function globalgenerals.onStart()
     end
     if SaveData.SMBXSoundSystem then
         extrasounds.enableGrabShellSFX = false
-        extrasounds.enableFireFlowerHitting = false
         extrasounds.playPSwitchTimerSFX = false
         extrasounds.enableSMB2EnemyKillSounds = false
         extrasounds.useOriginalSpinJumpForBigEnemies = true
@@ -360,7 +359,6 @@ function globalgenerals.onStart()
         extrasounds.useFireSoundForIce = true
     elseif not SaveData.SMBXSoundSystem then
         extrasounds.enableGrabShellSFX = true
-        extrasounds.enableFireFlowerHitting = true
         extrasounds.playPSwitchTimerSFX = true
         extrasounds.enableSMB2EnemyKillSounds = true
         extrasounds.useOriginalSpinJumpForBigEnemies = false
