@@ -63,6 +63,7 @@ Packs/Sprites are by:
 - Exploding Rabbit
 - litchh (SKL)
 - Turca
+- larsenv
 
 ----Costume/Character Credits----
 
