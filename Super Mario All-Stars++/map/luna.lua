@@ -60,4 +60,8 @@ function onDraw()
     if smwMap.unlockingCurrentPath == "toSMB33-Bonus1" then
         smwMap.unlockPath("toSMB33-8")
     end
+    if smwMap.unlockingCurrentPath == "toSMB3W-4Path1" then
+        smwMap.unlockPath("toSMB3W-4ToadHouse1")
+        smwMap.unlockPath("toSMB34-3")
+    end
 end

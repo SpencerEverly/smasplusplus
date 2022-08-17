@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario All-Stars++\: World Map";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200800;R:-191200;T:-201216;B:-193312;MZ:0;MF:"";BG:0;
+SC:0;L:-201600;R:-191200;T:-201216;B:-193312;MZ:0;MF:"";BG:0;
 SC:15;L:100000;R:100800;T:99400;B:100000;MZ:0;MF:"";BG:0;
 SC:17;L:140000;R:140800;T:139400;B:140000;MZ:0;MF:"";BG:0;
 SC:18;L:160000;R:160800;T:159400;B:160000;MZ:0;MF:"";BG:0;
@@ -933,6 +933,7 @@ ID:785;X:-198304;Y:-196320;
 ID:786;X:-197440;Y:-198144;
 ID:780;X:-200768;Y:-201120;
 ID:784;X:-192736;Y:-195040;
+ID:787;X:-201600;Y:-200000;
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -1748,6 +1749,24 @@ ID:822;X:-192560;Y:-194752;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"d
 ID:752;X:-192560;Y:-194784;D:-1;XTRA:"{\n    \"name\"\: \"toSMWStarRoad1\"\,\n    \"points\"\: \"0\,32\, 64\,-32\, 64\,-64\"\,\n    \"smoothness\"\: 0.10000000000000003\n}\n";
 ID:753;X:-192736;Y:-195040;D:-1;XTRA:"{\n    \"backgroundColor\"\: \"#383058ff\"\,\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario World/Star Road.spc|0\;g=2.5\"\,\n    \"height\"\: 404\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 668\n}\n";
 ID:753;X:-195328;Y:-198304;D:-1;XTRA:"{\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/Lava Lands/World Music/Escape!!!.ogg\"\,\n    \"height\"\: 192\,\n    \"music\"\: 2\,\n    \"width\"\: 192\n}\n";
+ID:752;X:-196288;Y:-197984;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-3Path3\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:821;X:-196288;Y:-198016;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-4BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 4\"\,\n    \"path_down\"\: \"toSMB3W-3Path3\"\,\n    \"warpName\"\: \"SMB3W-3EndWarp\"\n}\n";
+ID:753;X:-201600;Y:-200000;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Giant Land.spc|0\;g=2.5\"\,\n    \"height\"\: 864\,\n    \"music\"\: 2\,\n    \"width\"\: 1824\n}\n";
+ID:821;X:-200416;Y:-199744;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-3EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 3\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toSMB34-1\"\,\n    \"warpName\"\: \"SMB3W-4BeginWarp\"\n}\n";
+ID:752;X:-200384;Y:-199744;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:802;X:-200352;Y:-199744;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"4-1\: Welcome to Giant Hills\"\,\n    \"path_left\"\: \"toSMB34-1\"\,\n    \"path_up\"\: \"toSMB34-2\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-200352;Y:-199776;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
+ID:802;X:-200352;Y:-199872;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"4-2\: Big Waters Ahead\"\,\n    \"path_down\"\: \"toSMB34-2\"\,\n    \"path_left\"\: \"toSMB3W-4Path1\"\,\n    \"unlock_left\"\: 9\n}\n";
+ID:842;X:-200416;Y:-199872;D:-1;XTRA:"{\n    \"path_down\"\: \"toSMB3W-4ToadHouse1\"\,\n    \"path_left\"\: \"toSMB34-3\"\,\n    \"path_right\"\: \"toSMB3W-4Path1\"\n}\n";
+ID:752;X:-200384;Y:-199872;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-4Path1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:752;X:-200416;Y:-199840;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-4ToadHouse1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:850;X:-200416;Y:-199808;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Toad House\"\,\n    \"path_up\"\: \"toSMB3W-4ToadHouse1\"\n}\n";
+ID:752;X:-200448;Y:-199872;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-3\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:802;X:-200480;Y:-199872;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"4-3\: Under the Giant Horizions\"\,\n    \"path_left\"\: \"toSMB34-Fortress1\"\,\n    \"path_right\"\: \"toSMB34-3\"\,\n    \"unlock_left\"\: 9\n}\n";
+ID:752;X:-200512;Y:-199872;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-Fortress1\"\,\n    \"points\"\: \"32\, 0\, -64\, 0\"\n}\n";
+ID:849;X:-200576;Y:-199872;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-Fortress1.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #5\: Boom Boom\"\,\n    \"path_right\"\: \"toSMB34-Fortress1\"\n}\n";
+ID:802;X:-200576;Y:-199680;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"4-5\: Missile Bills\, Oh No!\"\,\n    \"path_up\"\: \"toSMB34-5\"\n}\n";
+ID:752;X:-200576;Y:-199840;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-5\"\,\n    \"points\"\: \"0\, 32\, 0\, -160\, 0\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
