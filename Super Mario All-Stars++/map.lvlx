@@ -1747,6 +1747,7 @@ ID:802;X:-192496;Y:-194848;D:-1;XTRA:"{\n    \"levelFilename\"\: \"\"\,\n    \"l
 ID:822;X:-192560;Y:-194752;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"SMWDonutPlainsStarMain\"\,\n    \"levelTitle\"\: \"Star Road\"\,\n    \"path_up\"\: \"toSMWStarRoad1\"\,\n    \"warpName\"\: \"SMWDonutPlainsStarRoad\"\n}\n";
 ID:752;X:-192560;Y:-194784;D:-1;XTRA:"{\n    \"name\"\: \"toSMWStarRoad1\"\,\n    \"points\"\: \"0\,32\, 64\,-32\, 64\,-64\"\,\n    \"smoothness\"\: 0.10000000000000003\n}\n";
 ID:753;X:-192736;Y:-195040;D:-1;XTRA:"{\n    \"backgroundColor\"\: \"#383058ff\"\,\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario World/Star Road.spc|0\;g=2.5\"\,\n    \"height\"\: 404\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 668\n}\n";
+ID:753;X:-195328;Y:-198304;D:-1;XTRA:"{\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/Lava Lands/World Music/Escape!!!.ogg\"\,\n    \"height\"\: 192\,\n    \"music\"\: 2\,\n    \"width\"\: 192\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
