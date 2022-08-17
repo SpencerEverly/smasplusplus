@@ -122,6 +122,9 @@ function makereservefalse()
 end
 
 function furyinventory.onDraw()
+    if player.deathTimer > 0 or player.forcedState ~= 0 then
+        smasbooleans.toggleoffinventory = true
+    end
     if furyinventory.hidden == false then
         --player.reservePowerup = 0 -- disables the item box
         if furyinventory.activatefuryinventory == true then
