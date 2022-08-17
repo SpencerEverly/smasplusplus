@@ -6,11 +6,6 @@ rely on so much code. Below are the functions and what they do.
 FILE MANAGEMENT
 - File.load('path/to/file.extension'): Loads a file from any of the
 common directories, plus the common SMAS directories as well.
-- File.loadImg('path/to/file.extension'): Loads an image from any of the
-common directories, plus the common SMAS directories as well.
-- File.drawImg('path/to/file.extension', x, y, withPriority, sceneCoords,
-priority, opacity): Draws an image in an all-in-one function, using a
-simplified function.
 - File.writeToFile('path/to/file.extension', 'text'): Write to a file using
 io. This will overwrite everything with the text specified, so BE CAREFUL!
 - File.addToFile('path/to/file.extension', 'text'): Add to a file using io.
@@ -19,6 +14,15 @@ one is fine.
 - File.readFile('path/to/file.extension'): Reads a file using io. This will
 return the entire file in text format (Newlines will be with a
 'backslash-n').
+
+IMAGES
+- Img.load('path/to/file.extension'): Loads an image from any of the
+common directories, plus the common SMAS directories as well.
+- Img.draw('path/to/file.extension', x, y, withPriority, sceneCoords,
+priority, opacity): Draws an image in an all-in-one function, using one
+line of code instead of two (Graphics.loadImageResolved and
+Graphics.drawImage). It also has a failsafe if no image was found,
+preventing errors.
 
 MUSIC/SOUNDS
 - Sound.openSFX('path/to/file.extension'): Opens a sound for reading.

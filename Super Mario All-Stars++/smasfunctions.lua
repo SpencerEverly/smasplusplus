@@ -6,6 +6,7 @@
 local smasfunctions = {}
 
 _G.File = require("scripts/functions/file")
+_G.Img = require("scripts/functions/img")
 _G.Sound = require("scripts/functions/sound")
 _G.SysManager = require("scripts/functions/sysmanager")
 _G.Time = require("scripts/functions/time")
