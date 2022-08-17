@@ -939,7 +939,7 @@ NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
 ID:753;X:-196000;Y:-198784;D:-1;XTRA:"{\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/All Stars Menu/World Music/Game Select.ogg\"\,\n    \"height\"\: 2400\,\n    \"music\"\: 2\,\n    \"width\"\: 4000\n}\n";
 ID:833;X:-195072;Y:-197760;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"SMAS - Game Help.lvlx\"\,\n    \"levelTitle\"\: \"Game Help\"\,\n    \"path_left\"\: \"toHUB1\"\,\n    \"path_right\"\: \"toGameSelect1\"\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\n}\n";
-ID:752;X:-195104;Y:-197760;D:-1;XTRA:"{\n    \"name\"\: \"toHUB1\"\,\n    \"points\"\: \"32\, 0\, -128\, 0\, -128\, -88\, -128\, -88\"\n}\n";
+ID:752;X:-195104;Y:-197760;D:-1;XTRA:"{\n    \"name\"\: \"toHUB1\"\,\n    \"points\"\: \"32\, 0\, -96\, -8\, -128\, -96\"\n}\n";
 ID:802;X:-195232;Y:-197856;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"MALC - HUB.lvlx\"\,\n    \"levelTitle\"\: \"Me and Larry City (Hub)\"\,\n    \"path_down\"\: \"toHUB1\"\,\n    \"path_left\"\: \"toMALCSQBeginPipe\"\,\n    \"path_up\"\: \"toLavaLands2\"\,\n    \"unlock_down\"\: 1\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 6\n}\n";
 ID:837;X:-194816;Y:-197760;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"path_left\"\: \"toGameSelect1\"\,\n    \"path_right\"\: \"toGameSelect2\"\,\n    \"path_up\"\: \"toSMB1\"\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 1\n}\n";
 ID:752;X:-195040;Y:-197760;D:-1;XTRA:"{\n    \"name\"\: \"toGameSelect1\"\,\n    \"points\"\: \"-32\, 0\, 230\, 0\"\n}\n";
@@ -957,7 +957,7 @@ ID:821;X:-193952;Y:-197856;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"d
 ID:838;X:-193952;Y:-197760;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"path_down\"\: \"toDLCMap\"\,\n    \"path_left\"\: \"toGameSelect4\"\,\n    \"path_right\"\: \"toGameSelect5\"\,\n    \"path_up\"\: \"toSMBLL\"\,\n    \"unlock_down\"\: 1\,\n    \"unlock_left\"\: 1\,\n    \"unlock_right\"\: 1\,\n    \"unlock_up\"\: 1\n}\n";
 ID:752;X:-194208;Y:-197760;D:-1;XTRA:"{\n    \"name\"\: \"toGameSelect4\"\,\n    \"points\"\: \"-32\, 0\, 258\, 0\"\n}\n";
 ID:752;X:-193952;Y:-197792;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLL\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
-ID:752;X:-195232;Y:-197888;D:-1;XTRA:"{\n    \"name\"\: \"toLavaLands2\"\,\n    \"points\"\: \"0\, 32\, 0\, -328\"\n}\n";
+ID:752;X:-195232;Y:-197888;D:-1;XTRA:"{\n    \"name\"\: \"toLavaLands2\"\,\n    \"points\"\: \"0\, 32\, 0\, -320\"\n}\n";
 ID:804;X:-195232;Y:-198208;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"Lava Lands - L-2.lvlx\"\,\n    \"levelTitle\"\: \"Lava Lands 2\"\,\n    \"path_down\"\: \"toLavaLands2\"\,\n    \"unlock_down\"\: 2\n}\n";
 ID:821;X:-193952;Y:-197664;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"ToGameSelectDLC\"\,\n    \"levelTitle\"\: \"More Games / DLC World\"\,\n    \"path_down\"\: \"\"\,\n    \"path_up\"\: \"toDLCMap\"\,\n    \"warpName\"\: \"GameSelectBeginWarp\"\n}\n";
 ID:752;X:-193952;Y:-197696;D:-1;XTRA:"{\n    \"name\"\: \"toDLCMap\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
