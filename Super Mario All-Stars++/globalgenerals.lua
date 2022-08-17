@@ -14,6 +14,7 @@ local inventory = require("customInventory")
 local inputconfigurator = require("inputconfig")
 local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
+local musicalchairs = require("musicalchairs")
 
 local smasacecoins = require("smasacecoins")
 local smascharacterinfo = require("smascharacterinfo")
