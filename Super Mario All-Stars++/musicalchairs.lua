@@ -116,6 +116,8 @@ function musicalchairs.onDraw()
                         section.musicPath = "_OST/Super Mario World/Swimming (Yoshi).spc|0;g=2.5"
                     elseif section.musicPath == "_OST/Super Mario World/Underground 2.spc|0;g=2.5" then
                         section.musicPath = "_OST/Super Mario World/Underground 2.spc|0;g=2.5"
+                    elseif section.musicPath == "_OST/Super Mario World/Ghost House.spc|0;g=2.5" then
+                        section.musicPath = "_OST/Super Mario World/Ghost House (Yoshi).spc|0;g=2.5"
                     --Super Mario Bros. Spencer
                     elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld.ogg" then
                         section.musicPath = "_OST/Super Mario Bros Spencer/Overworld (Yoshi).ogg"
@@ -149,6 +151,8 @@ function musicalchairs.onDraw()
                         section.musicPath = "_OST/Super Mario World/Swimming.spc|0;g=2.5"
                     elseif section.musicPath == "_OST/Super Mario World/Underground 2.spc|0;g=2.5" then
                         section.musicPath = "_OST/Super Mario World/Underground 2.spc|0;g=2.5"
+                    elseif section.musicPath == "_OST/Super Mario World/Ghost House (Yoshi).spc|0;g=2.5" then
+                        section.musicPath = "_OST/Super Mario World/Ghost House.spc|0;g=2.5"
                     --Super Mario Bros. Spencer
                     elseif section.musicPath == "_OST/Super Mario Bros Spencer/Overworld (Yoshi).ogg" then
                         section.musicPath = "_OST/Super Mario Bros Spencer/Overworld.ogg"
