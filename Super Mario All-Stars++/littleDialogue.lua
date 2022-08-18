@@ -2401,6 +2401,48 @@ littleDialogue.registerStyle("gameoverdialog",{
     continueArrowEnabled = false,
 })
 
+littleDialogue.registerStyle("ut",{
+	textXScale = 2,
+	textYScale = 2,
+	textMaxWidth = 600,
+	textColor = Color.white,
+	
+	speakerNameXScale = 1,
+	speakerNameYScale = 1,
+	speakerNameOffsetX = 0,
+	speakerNameColor = Color.yellow,
+	
+	borderSize = 32,
+	
+	openSpeed = 1,
+	pageScrollSpeed = 1,
+	
+	portraitGap = 32,
+	portraitVerticalPivot = 0.5,
+	
+	useMaxWidthAsBoxWidth = true,
+	minBoxMainHeight = 104,
+	
+	forcedPosEnabled = true,
+	forcedPosX = 400,
+	forcedPosY = 32,
+	forcedPosHorizontalPivot = 0.5,
+	forcedPosVerticalPivot = 0,
+	
+	answerSelectedColor = Color.yellow,
+	
+	typewriterEnabled = true,
+	typewriterSoundDelay = 2,
+	
+	openSoundEnabled = false,
+	closeSoundEnabled = false,
+	scrollSoundEnabled = false,
+	moveSelectionSoundEnabled = false,
+	chooseAnswerSoundEnabled = false,
+	
+	continueArrowEnabled = false,
+})
+
 
 
 -- Note that you can setup your own styles from luna.lua files.

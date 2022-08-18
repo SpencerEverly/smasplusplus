@@ -1510,6 +1510,7 @@ do
             end
 
             unlockConnectedLevels(pathObj)
+            Misc.saveGame()
         end
     end
 

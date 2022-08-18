@@ -1615,7 +1615,7 @@ ID:752;X:-197952;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-2Path1\"\,\n 
 ID:821;X:-197952;Y:-195168;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-3PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"toWSMBAW-2Path1\"\,\n    \"warpName\"\: \"WSMBAW-2PipeEnd\"\n}\n";
 ID:821;X:-196928;Y:-194944;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-2PipeEnd\"\,\n    \"levelTitle\"\: \"Warp to Snow World\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toWSMBA3-1\"\,\n    \"warpName\"\: \"WSMBAW-3PipeBegin\"\n}\n";
 ID:752;X:-196896;Y:-194944;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA3-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 288\, -64\"\n}\n";
-ID:860;X:-196608;Y:-195008;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"The Girls Fight\"\,\n    \"path_left\"\: \"toWSMBA3-1\"\,\n    \"path_right\"\: \"toWSMBA3-2\"\,\n    \"path_up\"\: \"toWSMBAW-3Path1\"\n}\n";
+ID:813;X:-196608;Y:-195008;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"The Girls Fight\"\,\n    \"path_left\"\: \"toWSMBA3-1\"\,\n    \"path_right\"\: \"toWSMBA3-2\"\,\n    \"path_up\"\: \"toWSMBAW-3Path1\"\n}\n";
 ID:752;X:-196576;Y:-195008;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA3-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 96\, 32\, 800\"\n}\n";
 ID:752;X:-196608;Y:-195040;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-3Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
 ID:821;X:-196608;Y:-195136;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-4PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to SMB Land\"\,\n    \"path_down\"\: \"toWSMBAW-3Path1\"\,\n    \"warpName\"\: \"WSMBAW-3Pipe1End\"\n}\n";
@@ -1655,7 +1655,7 @@ ID:752;X:-194688;Y:-196192;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path2\"\,\n 
 ID:752;X:-194720;Y:-196160;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 ID:802;X:-194432;Y:-196224;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"Underground House Heist\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toWSMBA5-2\"\,\n    \"path_right\"\: \"toWSMBA5-3\"\n}\n";
 ID:752;X:-194656;Y:-196160;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA5-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 224\, -64\"\n}\n";
-ID:860;X:-194304;Y:-196064;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Underground Boss Battle!\"\,\n    \"path_right\"\: \"toWSMBAW-5Path3\"\,\n    \"path_up\"\: \"toWSMBA5-3\"\n}\n";
+ID:813;X:-194304;Y:-196064;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"Underground Boss Battle!\"\,\n    \"path_right\"\: \"toWSMBAW-5Path3\"\,\n    \"path_up\"\: \"toWSMBA5-3\"\n}\n";
 ID:752;X:-194400;Y:-196224;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA5-3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, 160\"\n}\n";
 ID:752;X:-194272;Y:-196064;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-5Path3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 32\, 96\, 192\"\n}\n";
 ID:821;X:-194176;Y:-195872;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBAW-6PipeBegin\"\,\n    \"levelTitle\"\: \"Warp to Hollywood\"\,\n    \"path_up\"\: \"toWSMBAW-5Path3\"\,\n    \"warpName\"\: \"WSMBAW-5PipeEnd\"\n}\n";
@@ -1776,7 +1776,7 @@ LR:"PlayerMap";HD:1;
 LR:"Sceneries";
 LR:"Signs";
 LR:"Paths";
-LR:"donut plains 3 thing";
+LR:"donut plains 3 thing";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
