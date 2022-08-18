@@ -53,7 +53,6 @@ end
 bootmenu.active = false
 bootmenu.menuactive = false
 bootmenu.intromodeactive = false
-bootmenu.hasSavedClasses = false
 
 GameData.____holidayMenuEventEnded = false
 
@@ -90,300 +89,6 @@ local day = os.date("%d")
 local month = os.date("%m")
 
 local exacttime = os.date("%X")
-
-bootmenu.npcResetProperties = {
-    -- Monty moles
-    [309] = {
-        onStart = (function(v)
-            local bootmenuData = v.data._bootmenu
-
-            bootmenuData.startedFriendly = v.friendly
-        end),
-        extraSave = (function(v,fields)
-            local bootmenuData = v.data._rooms
-
-            fields.friendly = (bootmenuData and bootmenuData.startedFriendly)
-        end),
-        extraRestore = (function(v,fields)
-            -- Basically just a copy of the normal onStartNPC
-
-            local data = v.data._basegame
-
-            data.wasBuried = 1
-            if v.data._settings.startHidden == false then
-                data.wasBuried = 0
-            else
-                data.vanillaFriendly = fields.friendly
-                v.friendly = true
-                v.noblockcollision = true
-            end
-            data.timer = 0
-            data.direction = v.direction
-            data.state = data.wasBuried
-        end),
-    },
-
-    [469] = {respawn = false}, -- Boo circle boos are set to respawn? for some reason?
-
-    -- Checkpoints
-    [192] = {despawn = false,respawn = false},
-    [400] = {despawn = false,respawn = false},
-    [430] = {despawn = false,respawn = false},
-}
-
-bootmenu.classesToSave = {
-    -- Classes that tend to shift around a lot (so therefore deletes everything and spawns new ones when resetting)
-    {
-        name = "Block",get = Block.get,getByIndex = Block,startFromZero = true,
-        saveFields = {
-            "layerName","contentID","isHidden","slippery","width","height","id","speedX","speedY","x","y",{0x5A,FIELD_BOOL},{0x5C,FIELD_BOOL},
-            {0x0C,FIELD_STRING},{0x10,FIELD_STRING},{0x14,FIELD_STRING}, -- Event names
-        },
-        extraSave    = (function(v,fields) fields.data = table.deepclone(v.data) end),
-        extraRestore = (function(v,fields)
-            v:translate(0,0) -- Make sure the block array is sorted correctly
-            v.data = table.deepclone(fields.data)
-        end),
-
-        remove = (function(v) v:delete() end),
-        create = (function(fields) return blockSpawnWithSizeableOrdering(fields.id,fields.x,fields.y) end),
-    },
-    {
-        name = "NPC",get = NPC.get,getByIndex = NPC,startFromZero = false,
-        saveFields = {
-            --[["x","y",]]"spawnX","spawnY","width","height","spawnWidth","spawnHeight","speedX","speedY","spawnSpeedX","spawnSpeedY",
-            "direction","spawnDirection","layerName","id","spawnId","ai1","ai2","ai3","ai4","ai5","spawnAi1","spawnAi2","isHidden","section",
-            "msg","attachedLayerName","activateEventName","deathEventName","noMoreObjInLayer","talkEventName","legacyBoss","friendly","dontMove",
-            "isGenerator","generatorInterval","generatorTimer","generatorDirection","generatorType", -- Generator related stuff
-            "despawnTimer",{0x124,FIELD_BOOL},{0x126,FIELD_BOOL},{0x128,FIELD_BOOL}, -- Despawning related stuff
-        },
-        --[[extraSave    = (function(v,fields) fields.extraSettings = v.data._settings end),
-        extraRestore = (function(v,fields) v.data._settings = fields.extraSettings end),]]
-        extraSave    = (function(v,fields)
-            fields.extraSettings = table.deepclone(v.data._settings)
-            fields.isOrbitingNPC = (v.data._orbits ~= nil and v.data._orbits.orbitCenter == nil)
-
-            local properties = bootmenu.npcResetProperties[v.id]
-
-            if properties ~= nil and properties.extraSave ~= nil then
-                properties.extraSave(v,fields)
-            end
-
-            --if v.id == 119 then Misc.dialog(v.despawnTimer,v:mem(0x124,FIELD_BOOL)) end
-        end),
-        extraRestore = (function(v,fields)
-            v.despawnTimer = 5
-            v:mem(0x124,FIELD_BOOL,true)
-            
-            v:mem(0x14C,FIELD_WORD,1)
-
-
-            --if v.id == 119 then Misc.dialog(v.despawnTimer,v:mem(0x124,FIELD_BOOL),fields.despawnTimer,fields[0x124]) end
-
-
-            -- Failsafe because the SMW switch platforms use lineguide data, but don't actually check if it exists
-            if lineguide.registeredNPCMap[v.id] and not v.data._basegame.lineguide then
-                lineguide.onStartNPC(v)
-            end
-
-            -- Without these, hammer bros cause errors
-            v.ai1,v.ai2 = fields.spawnAi1,fields.spawnAi2
-            v.ai3,v.ai4,v.ai5 = 0,0,0
-
-            v.data._settings = table.deepclone(fields.extraSettings)
-
-
-            local properties = bootmenu.npcResetProperties[v.id]
-
-            if properties ~= nil and properties.extraRestore ~= nil then
-                properties.extraRestore(v,fields)
-            end
-        end),
-        
-        remove = (function(v)
-            if (NPC.COLLECTIBLE_MAP[v.id] and not bootmenu.collectiblesRespawn) then return end -- Don't do this for collectibles, if set
-
-            local properties = bootmenu.npcResetProperties[v.id]
-
-            if properties ~= nil then
-                if properties.despawn == false then
-                    return
-                elseif properties.remove ~= nil then
-                    properties.remove(v)
-                end
-            end
-
-            -- Rather complicated setup to destroy NPCs
-            local data = v.data
-
-            if not v.isGenerator then
-                -- Trigger some events, just to make sure that everything gets cleaned up properly
-                local eventObj = {cancelled = false}
-                EventManager.callEvent("onNPCKill",eventObj,v.idx+1,HARM_TYPE_OFFSCREEN)
-                
-                if eventObj.cancelled then -- Make sure onPostNPCKill always runs
-                    EventManager.callEvent("onPostNPCKill",v,HARM_TYPE_OFFSCREEN)
-                end
-            end
-
-            v.deathEventName = ""
-            v.animationFrame = -1000
-            v.isGenerator = false
-
-            v.id = 0
-
-            v:kill(HARM_TYPE_OFFSCREEN)
-        end),
-        create = (function(fields)
-            if (NPC.COLLECTIBLE_MAP[fields.id] and not bootmenu.collectiblesRespawn) then return end -- Don't do this for collectibles, if set
-            if fields.spawnId == 0 or fields.layerName == "Spawned NPCs" or fields.isOrbitingNPC then return end -- If set not to respawn or on the spawned NPCs layer, stop
-            
-            local properties = bootmenu.npcResetProperties[fields.spawnId]
-
-            if properties ~= nil and properties.respawn == false then return end
-
-
-            return NPC.spawn(fields.spawnId,fields.spawnX,fields.spawnY,fields.section,true,false)
-        end),
-    },
-
-    -- Classes that tend to be static (so therefore the old properties are just put back when resetting)
-    {
-        name = "BGO",get = BGO.get,getByIndex = BGO,startFromZero = true,
-        saveFields = {"layerName","isHidden","id","x","y","width","height","speedX","speedY"},
-    },
-    {
-        name = "Liquid",get = Liquid.get,getByIndex = Liquid,startFromZero = false,
-        saveFields = {"layerName","isHidden","isQuicksand","x","y","width","height","speedX","speedY"},
-    },
-    {
-        name = "Warp",get = Warp.get,getByIndex = Warp,startFromZero = true,
-        saveFields = {
-            "layerName","isHidden","locked","allowItems","noYoshi","starsRequired",
-            "warpType","levelFilename","warpNumber","toOtherLevel","fromOtherLevel","worldMapX","worldMapY",
-            "entranceX","entranceY","entranceWidth","entranceHeight","entranceSpeedX","entranceSpeedY","entranceDirection",
-            "exitX","exitY","exitWidth","exitHeight","exitSpeedX","exitSpeedY","exitDirection",
-        },
-    },
-
-    {
-        name = "Layer",get = Layer.get,getByIndex = Layer,startFromZero = false,
-        saveFields = {"name","isHidden","speedX","speedY"},
-    },
-    {
-        name = "Section",get = Section.get,getByIndex = Section,startFromZero = true,
-        saveFields = {
-            "boundary","origBoundary","musicID","musicPath","wrapH","wrapV","hasOffscreenExit","backgroundID","origBackgroundID",
-            "noTurnBack","isUnderwater","settings",
-        },
-    },
-}
-
-bootmenu.savedClasses = {}
-
-function bootmenu.saveClass(class)
-    -- If no class is provided, save all classes
-    if class == nil then
-        for _,c in ipairs(bootmenu.classesToSave) do
-            bootmenu.saveClass(c.name)
-        end
-        return
-    end
-
-    -- Convert name to the actual class
-    if type(class) ~= "table" then
-        for _,c in ipairs(bootmenu.classesToSave) do
-            if c.name == class then
-                class = c
-                break
-            end
-        end
-    end
-
-    -- Create a table for this class
-    bootmenu.savedClasses[class.name] = {}
-
-    -- Go through all objects in this class
-    for _,v in ipairs(class.get()) do
-        local fields = {}
-
-        if class.saveFields then
-            -- Save fields, if they exist
-            for _,w in ipairs(class.saveFields) do
-                if type(w) == "table" then -- For memory offsets
-                    fields[w[1]] = v:mem(w[1],w[2])
-                else
-                    fields[w] = v[w]
-                end
-            end
-        end
-
-        if class.extraSave then
-            class.extraSave(v,fields)
-        end
-
-        table.insert(bootmenu.savedClasses[class.name],fields)
-    end
-end
-
-function bootmenu.restoreClass(class)
-    -- If no class is provided, restore all classes
-    if class == nil then
-        for _,c in ipairs(bootmenu.classesToSave) do
-            bootmenu.restoreClass(c.name)
-        end
-        return
-    end
-
-    if not bootmenu.savedClasses[class] then return end -- Don't attempt to restore it if it hasn't been saved yet
-
-    -- Convert name to the actual class
-    if type(class) ~= "table" then
-        for _,c in ipairs(bootmenu.classesToSave) do
-            if c.name == class then
-                class = c
-                break
-            end
-        end
-    end
-
-    -- Remove all
-    if class.remove then
-        for _,v in ipairs(class.get()) do
-            class.remove(v)
-        end
-    end
-
-    -- Restore all
-    if class.create and class.saveFields or not class.remove and not class.create and class.getByIndex then
-        for index,fields in ipairs(bootmenu.savedClasses[class.name]) do
-            local v
-            if class.create then
-                v = class.create(fields)
-            elseif class.getByIndex then
-                local idx = index
-                if class.startFromZero then
-                    idx = idx-1
-                end
-
-                v = class.getByIndex(idx)
-            end
-
-            if v and (v.isValid ~= false) then
-                for _,w in ipairs(class.saveFields) do
-                    if type(w) == "table" then -- For memory offsets
-                        v:mem(w[1],w[2],fields[w[1]])
-                    else
-                        v[w] = fields[w]
-                    end
-                end
-                if class.extraRestore then
-                    class.extraRestore(v,fields)
-                end
-            end
-        end
-    end
-end
 
 local function introExit()
     GameData.____mainMenuComplete = true
@@ -608,7 +313,7 @@ local function theme4()
 end
 
 local function theme4scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(19)
     autoscroll.scrollLeft(15)
@@ -627,7 +332,7 @@ local function theme5()
 end
 
 local function theme5scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(17.3)
     autoscroll.scrollLeft(15)
@@ -646,7 +351,7 @@ local function theme6()
 end
 
 local function theme6scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(19.5)
     autoscroll.scrollLeft(15)
@@ -675,7 +380,7 @@ local function theme8()
 end
 
 local function theme8scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(17.5)
     autoscroll.scrollLeft(15)
@@ -694,7 +399,7 @@ local function theme9()
 end
 
 local function theme9scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(13.8)
     autoscroll.scrollLeft(15)
@@ -723,7 +428,7 @@ local function theme11()
 end
 
 local function theme11scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(16.2)
     autoscroll.scrollLeft(15)
@@ -762,7 +467,7 @@ local function theme14()
 end
 
 local function theme14scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollUp(6)
     Routine.wait(13.6)
     autoscroll.scrollDown(15)
@@ -781,7 +486,7 @@ local function theme15()
 end
 
 local function theme15scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(26.2)
     autoscroll.scrollLeft(15)
@@ -810,7 +515,7 @@ local function theme17()
 end
 
 local function theme17scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(10.6)
     autoscroll.scrollLeft(15)
@@ -829,7 +534,7 @@ local function theme18()
 end
 
 local function theme18scrolling()
-    bootmenu.restoreClass("NPC")
+    Npc.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(16.6)
     autoscroll.scrollLeft(15)
@@ -1465,14 +1170,6 @@ function bootmenu.onInitAPI() --This requires some libraries to start
     local Routine = require("routine")
     
     ready = true --We're ready, so we can begin
-end
-
-function bootmenu.onTickEnd()
-    -- Save classes (this is done after onStart so custom stuff has already been initiated)
-    if not bootmenu.hasSavedClasses then
-        bootmenu.saveClass()
-        bootmenu.hasSavedClasses = true
-    end
 end
 
 function bootmenu.onStart()

@@ -16,11 +16,18 @@ end
 function Sound.playSFX(name, volume, loops, delay) --If you want to play any sound, you can use Sound.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
     if unexpected_condition then error("That sound doesn't exist. Play something else.") end
     
-    local eventObj = {cancelled = false}
-    
     if name == nil then
         error("That sound doesn't exist. Play something else.")
+        return
     end
+    
+    local eventObj = {cancelled = false}
+    EventManager.callEvent("onPlaySFX", eventObj, name, volume, loops, delay)
+    
+    if eventObj.cancelled then
+        return
+    end
+    
     if volume == nil then
         volume = extrasounds.volume
     end
@@ -33,9 +40,6 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
     if delay == nil then
         delay = 4
     end
-    
-    EventManager.callEvent("onPlaySFX", eventObj, name)
-    if eventObj.cancelled then return end
     
     if Sound.isExtraSoundsActive() then
         if extrasounds.sound.sfx[name] and not smastables.stockSoundNumbersInOrder[name] then
@@ -55,7 +59,7 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
         end
     end
     
-    EventManager.callEvent("onPostPlaySFX", name)
+    EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
 end
 
 function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being worn.

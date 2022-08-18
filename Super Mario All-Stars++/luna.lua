@@ -63,6 +63,12 @@ _G.smastables = require("smastables")
 _G.smascheats = require("smascheats")
 _G.smashud = require("smashud")
 
+--Register some custom global event handlers...
+Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostPlaySFX"] = true
+Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
+
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then
     SaveData.disableX2char = false
@@ -376,6 +382,12 @@ local altjumpkey = Graphics.loadImage(Misc.resolveFile("inputhud/altjump.png"))
 local runkey = Graphics.loadImage(Misc.resolveFile("inputhud/run.png"))
 local altrunkey = Graphics.loadImage(Misc.resolveFile("inputhud/altrun.png"))
 local bottomkeys = Graphics.loadImage(Misc.resolveFile("inputhud/bottomkey.png"))
+
+function onPlaySFX(eventToken, sfx)
+    if sfx == 1 then
+        eventToken.cancelled = true
+    end
+end
 
 function onDraw()
     if Misc.inEditor() then
