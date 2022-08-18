@@ -129,7 +129,7 @@ function plObjectErrorWorkaround() --To prevent the plObject a nil value error, 
 end
 
 function classicEvents.doEvents() --To prevent the plObject a nil value error, this needs to be moved to a pcall function
-    pcall (function() classicEvents.plObjectErrorWorkaround() end)
+    pcall (function() plObjectErrorWorkaround() end)
 end
 
 --Now that everything has been loaded, start loading the medium important stuff
