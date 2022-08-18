@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. Special (World 1-1)";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-191200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Overworld.spc|0\;g=2.5";BG:10;
+SC:0;L:-200000;R:-191200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Overworld.ogg";BG:10;
 SC:1;L:-180000;R:-178848;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;
 SECTION_END
 STARTPOINT

@@ -123,7 +123,10 @@ local function setDir(dir, v)
 end
 
 local function chasePlayers(v)
-	if Player.count() == 2 then --Change to Player.count() as it's more reliable and prevents errors
+    if Player.count() == 1 then
+		local p1, dir1 = getDistance(v, player)
+		setDir(dir1, v)
+	elseif Player.count() == 2 then --Change to Player.count() as it's more reliable and prevents errors
 		local p1, dir1 = getDistance(v, player)
 		local p2, dir2 = getDistance(v, player2)
 		if p1 > p2 then
@@ -133,9 +136,6 @@ local function chasePlayers(v)
 		end
     elseif Player.count() >= 3 then --Just get the first player if more than 2 players, don't wanna give spam spagetti everywhere
         local p1, dir1 = getDistance(v, player)
-		setDir(dir1, v)
-	else
-		local p1, dir1 = getDistance(v, player)
 		setDir(dir1, v)
 	end
 end

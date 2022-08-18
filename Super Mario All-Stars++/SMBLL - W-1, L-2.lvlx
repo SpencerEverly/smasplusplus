@@ -3,11 +3,11 @@ TL:"Super Mario Bros. Lost Levels\: World 1-2";XTRA:"{\n    \"timer\"\: {\n     
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:10;
-SC:1;L:-180000;R:-173056;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Underground.spc|0\;g=2.5";BG:7;
+SC:1;L:-180000;R:-173056;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Underground.ogg";BG:7;
 SC:2;L:-160000;R:-157952;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Athletic.spc|0\;g=2.5";BG:10;
-SC:3;L:-140000;R:-138432;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Overworld.spc|0\;g=2.5";BG:10;
-SC:4;L:-120000;R:-116704;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Underground.spc|0\;g=2.5";BG:7;
-SC:5;L:-100000;R:-98944;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros/Underground.spc|0\;g=2.5";BG:7;
+SC:3;L:-140000;R:-138432;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Overworld.ogg";BG:10;
+SC:4;L:-120000;R:-116704;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Underground.ogg";BG:7;
+SC:5;L:-100000;R:-98944;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros/Underground.ogg";BG:7;
 SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT

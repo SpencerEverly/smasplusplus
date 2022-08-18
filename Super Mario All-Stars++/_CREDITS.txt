@@ -176,7 +176,7 @@ Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
 ----Music Credits----
 
-- Some SMB1, SMB2, SMB3, LL, SMW music by LadiesMan217 and Nintendo
+- Some SMB1, SMB2, SMB3, LL, SMW music by LadiesMan217, Lu9, and Nintendo
 - Some other SMB1, SMB2, SMB3, LL, SMW music by The Mario Multiverse Team, with one song recreated by me in All-Stars 16 bit format (EmmaNerd), with other SMAS music by TheLegendofRenegade, Nimbus Cumulus, and some other people (See other music section)
 - Some music by me:
      - SMB1, LL, SMBS Map Music
