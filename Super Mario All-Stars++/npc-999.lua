@@ -7,6 +7,8 @@ local smasbooleans = require("smasbooleans")
 
 local realstar = {}
 
+realstar.fadeIn = false
+
 local npcID = NPC_ID
 local id = 999
 
@@ -114,10 +116,21 @@ function starget()
     GameData.winStateActive = true
     playervuln = true
     playerwon = true
-    Routine.wait(5, true)
+    Routine.wait(3, true)
+    realstar.fadeIn = true
+    Routine.wait(2, true)
     smasbooleans.musicMuted = false
     GameData.winStateActive = false
     Level.exit(LEVEL_WIN_TYPE_STAR)
+end
+
+local opacity = 0
+
+function realstar.onDraw()
+    if realstar.fadeIn then
+        opacity = opacity + 0.01
+        Graphics.drawScreen{color = Color.black .. opacity, priority = 6}
+    end
 end
 
 function realstar.animateNPC(v)
@@ -261,6 +274,7 @@ function realstar.onInitAPI()
     registerEvent(realstar,"onInputUpdate")
     registerEvent(realstar,"onPostNPCKill")
     registerEvent(realstar,"onExit")
+    registerEvent(realstar,"onDraw")
 end
 
 return realstar

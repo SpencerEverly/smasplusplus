@@ -7,6 +7,8 @@ local smasbooleans = require("smasbooleans")
 
 local dudstar = {}
 
+dudstar.fadeIn = false
+
 local npcID = NPC_ID
 local id = 1000
 
@@ -109,10 +111,21 @@ function starget()
     GameData.winStateActive = true
     playervuln = true
     playerwon = true
-    Routine.wait(5, true)
+    Routine.wait(3, true)
+    dudstar.fadeIn = true
+    Routine.wait(2, true)
     smasbooleans.musicMuted = false
     GameData.winStateActive = false
     Level.exit(LEVEL_WIN_TYPE_STAR)
+end
+
+local opacity = 0
+
+function dudstar.onDraw()
+    if dudstar.fadeIn then
+        opacity = opacity + 0.01
+        Graphics.drawScreen{color = Color.black .. opacity, priority = 6}
+    end
 end
 
 function dudstar.onPostNPCKill(v,reason)
@@ -261,6 +274,7 @@ function dudstar.onInitAPI()
     registerEvent(dudstar,"onInputUpdate")
     registerEvent(dudstar,"onPostNPCKill")
     registerEvent(dudstar,"onExit")
+    registerEvent(dudstar,"onDraw")
 end
 
 return dudstar

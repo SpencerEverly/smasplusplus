@@ -4609,7 +4609,7 @@ smwMap.transitionSettings = {
 
     enterMapSettings = {
         drawFunction = smwMap.TRANSITION_FADE,
-        progressTime = 0,
+        progressTime = 14,
         priority = 6,
         
         waitTime = 0,startTime = 0, -- these are important! you probably shouldn't touch them
