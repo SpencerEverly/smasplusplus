@@ -27,6 +27,7 @@ Misc.LUNALUA_EVENTS = {
     "onPlayerKill", "onPlayerHarm", "onPostPlayerKill", "onPostPlayerHarm",
     -- CUSTOM events below
     "onCollide", -- Defined for block collisions
+    "onPlaySFX","onPostPlaySFX","onChangeMusic","onPostChangeMusic",
 }
 
 local postCancellableMap = {

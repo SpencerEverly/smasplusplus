@@ -15,6 +15,9 @@ end
 
 function Sound.playSFX(name, volume, loops, delay) --If you want to play any sound, you can use Sound.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
     if unexpected_condition then error("That sound doesn't exist. Play something else.") end
+    
+    local eventObj = {cancelled = false}
+    
     if name == nil then
         error("That sound doesn't exist. Play something else.")
     end
@@ -30,6 +33,9 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
     if delay == nil then
         delay = 4
     end
+    
+    EventManager.callEvent("onPlaySFX", eventObj, name)
+    if eventObj.cancelled then return end
     
     if Sound.isExtraSoundsActive() then
         if extrasounds.sound.sfx[name] and not smastables.stockSoundNumbersInOrder[name] then
@@ -48,6 +54,8 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
             SFX.play(file, volume, loops, delay) --Then play it afterward
         end
     end
+    
+    EventManager.callEvent("onPostPlaySFX", name)
 end
 
 function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being worn.
@@ -79,6 +87,11 @@ function Sound.isExtraSoundsActive()
 end
 
 function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
+    local eventObj = {cancelled = false}
+    
+    EventManager.callEvent("onChangeMusic", eventObj, name, sectionid)
+    if eventObj.cancelled then return end
+    
     if sectionid == -1 then --If -1, all section music will change to the specified song
         for i = 0,20 do
             Section(i).music = name
@@ -96,6 +109,7 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
     end
+    EventManager.callEvent("onPostChangeMusic", name, sectionid)
 end
 
 function Sound.muteMusic(sectionid) --Mute all section music, or just mute a specific section
