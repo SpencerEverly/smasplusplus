@@ -10,6 +10,11 @@ function events.onInitAPI()
     registerEvent(events, "onTick")
     registerEvent(events, "onLoadSection")
     
+    unregisterEvent(oldevents, "onStart")
+    unregisterEvent(oldevents, "onCameraDraw")
+    unregisterEvent(oldevents, "onTick")
+    unregisterEvent(oldevents, "onLoadSection")
+    
     local oldevents = nil
 end
 
