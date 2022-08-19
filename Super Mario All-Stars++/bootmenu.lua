@@ -16,7 +16,6 @@ local keyboard = require("keyboard")
 local hearthover = require("hearthover") --Require hearthover to disable it
 local sprite = require("base/sprite")
 local aw = require("anotherwalljump")
-local lineguide = require("lineguide")
 
 local ready = false
 

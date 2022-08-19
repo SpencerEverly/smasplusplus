@@ -43,9 +43,6 @@ function onDraw()
     --Text.print(smwMap.unlockingCurrentPath, 100, 100)
     
     --Path unlockers
-    if smwMap.unlockingCurrentPath ~= "false" then
-        Misc.saveGame()
-    end
     if smwMap.unlockingCurrentPath == "toSMB31-Toad1Path1" then
         smwMap.unlockPath("toSMB31-4")
     end

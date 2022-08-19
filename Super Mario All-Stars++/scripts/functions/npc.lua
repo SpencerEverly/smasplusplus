@@ -1,5 +1,7 @@
 local Npc = {}
 
+local lineguide = require("lineguide")
+
 Npc.hasSavedClasses = false
 
 Npc.npcResetProperties = {
