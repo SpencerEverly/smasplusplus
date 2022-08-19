@@ -73,6 +73,9 @@ function onEvent(eventName)
         Graphics.activateHud(false)
         smasbooleans.toggleoffinventory = true
         Sound.playSFX("mus_explosion.ogg")
+        if SMBX_VERSION == VER_SEE_MOD then
+            Misc.shakeWindow(35, true, false)
+        end
         whiteflash = true
         player.setCostume(1, nil)
         player:transform(1, false)

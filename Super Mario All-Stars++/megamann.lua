@@ -11,6 +11,8 @@ local rng = require("rng")
 local panim = require("playeranim")
 local pm = require("playerManager")
 local smasfunctions = require("smasfunctions")
+local barrelAI = require("npcs/ai/launchBarrel")
+local smasbooleans = require("smasbooleans")
 
 --[[
 Things to fix:
@@ -486,7 +488,7 @@ local function handleSlide()
                     end
                 end
                 
-                if isSliding and (slidingTime > 40 or collidedSideways or fallingOff or p.jumpKeyPressing) then
+                if isSliding and (slidingTime > 40 or collidedSideways or fallingOff or p.keys.jump) then
                     -- If nothing collides above us, end the slide
                     if not collisionAbove then
                         hasCollided = false
@@ -499,7 +501,7 @@ local function handleSlide()
                             p.speedX = 0
                         end
                         -- We can start falling right away
-                        if not (p.jumpKeyPressing) then
+                        if not (p.keys.jump) then
                             p.speedY = 0
                             p:mem(0x11E, FIELD_WORD, 1)
                         end
@@ -508,10 +510,10 @@ local function handleSlide()
                 if isSliding then
                     -- Mark as having used our jump already
                     p:mem(0x60, FIELD_WORD, -1)
-                    p.runKeyPressing = false
+                    p.keys.run = false
                     -- Get some horizontal speed, and set just the right amount of upward momentum so we say perfectly level
                     p.speedX = slidingOffset
-                    if p.runKeyPressing then
+                    if p.keys.run then
                         p.speedX = slidingOffset
                     end
                     p.speedY = -0.4 - 5.9662852436304e-09
@@ -546,7 +548,7 @@ local function handleCharge()
                 chargeSfxObject = Audio.SfxPlayObj(Audio.SfxOpen(pm.getSound(CHARACTER_MEGAMAN,chargeFullSfx)), -1)
             end
             if not isDead and introOver and not isSliding and not inPause and p.powerup <= 2 then
-                if p.runKeyPressing then
+                if p.keys.run then
                     chargeTime = chargeTime + 1
                 else
                     if chargeTime > 80 and chargeSfxObject ~= nil then
@@ -614,9 +616,11 @@ local hurtSpeedX = 0
 local function handlePowerupLogic()
     for _,p in ipairs(Player.get()) do
         if p.character == CHARACTER_MEGAMAN then
-            p:mem(0x172,FIELD_WORD, 0)
+            if p.BlinkTimer == 0 and not p.BlinkState and barrelcannontimer == 0 then
+                p:mem(0x172,FIELD_BOOL,false)
+            end
             if p:mem(0x108, FIELD_WORD) == 0 and p:mem(0x108, FIELD_WORD) == 0 then
-                p:mem(0x120,FIELD_WORD, 0)
+                p:mem(0x120,FIELD_BOOL,false)
             end
             
             if (manualChange) then
@@ -677,20 +681,20 @@ local function handleMovementPhysics()
             if hurtFrames <= 95 then
                 if p:mem(0x0C,FIELD_WORD) == 0 then
                     if p.forcedState == 0 then
-                        if hasBeenRunning > 8 or not p:isGroundTouching() then
-                            if p.rightKeyPressing then
+                        if hasBeenRunning > 4 or not p:isGroundTouching() then
+                            if p.keys.right then
                                 p.speedX = 3.2
-                            elseif p.leftKeyPressing then
+                            elseif p.keys.left then
                                 p.speedX = -3.2
                             end
                         else
-                            if p.rightKeyPressing then
+                            if p.keys.right then
                                 p.speedX = 0.01
-                            elseif p.leftKeyPressing then
+                            elseif p.keys.left then
                                 p.speedX = -0.01
                             end
                         end
-                        if not (p.leftKeyPressing or p.rightKeyPressing) then
+                        if not (p.keys.left or p.keys.right) then
                             p.speedX = 0
                         end
                     end
@@ -798,9 +802,30 @@ function megaman.onStart()
     end
 end
 
+local barrelcannontimer = 0
+
 function megaman.onTick()
     for _,p in ipairs(Player.get()) do
         if p.character == CHARACTER_MEGAMAN then
+            local slopeIdx = player:mem(0x48,FIELD_WORD)
+
+            if slopeIdx > 0 then
+                local slopeBlock = Block(slopeIdx)
+                local slopeValue = slopeBlock.height/slopeBlock.width
+
+                player.speedY = math.abs(player.speedX)*slopeValue*4
+            end
+            
+            if p.BlinkTimer == 1 and p.BlinkState then
+                if p.keys.jump then
+                    barrelcannontimer = 1
+                end
+            end
+            
+            if p:isOnGround() then
+                barrelcannontimer = 0
+            end
+            
             if isSliding then
                 for _, v in pairs(NPC.getIntersecting(p.x - 8, p.y - 8, p.x + p.width + 8, p.y + p.height + 8)) do
                     if v.id == 91 and (not v.isHidden) and (not v.friendly) then
@@ -820,7 +845,7 @@ function megaman.onTick()
             if(p:mem(0x13E,FIELD_WORD) > 0) then
                 health = 0;
             else
-                if p.leftKeyPressing or p.rightKeyPressing then
+                if p.keys.left or p.keys.right then
                     hasBeenRunning = hasBeenRunning + 1
                 else
                     hasBeenRunning = 0
@@ -991,40 +1016,40 @@ function megaman.onInputUpdate()
             end
             if not isExternallyPaused then
                 if (p:mem(0x140, FIELD_WORD) > 95 and not inPause) or Level.winState() > 0 then
-                    p.jumpKeyPressing = false
-                    p.runKeyPressing = false
-                    p.altRunKeyPressing = false
-                    p.leftKeyPressing = false
-                    p.rightKeyPressing = false
+                    p.keys.jump = false
+                    p.keys.run = false
+                    p.keys.altRun = false
+                    p.keys.left = false
+                    p.keys.right = false
                     if Level.winState() > 0 then
                         if Level.winState() == 1 or Level.winState() == 7 then
-                            p.rightKeyPressing = true
+                            p.keys.right = true
                         end
                         isSliding = false
-                        p.downKeyPressing = false
+                        p.keys.down = false
                         inPause = false
-                        p.upKeyPressing = false
+                        p.keys.up = false
                     end
                 end
                 if itemSfxObject ~= nil then --lock p during powerup
                     if itemSfxObject:IsPlaying() then
                         cancelCharge()
-                        p.runKeyPressing = false
-                        p.altRunKeyPressing = false
+                        p.keys.run = false
+                        p.keys.altRun = false
                     end
                 end
                 if inPause then
-                    p.leftKeyPressing = false
-                    p.rightKeyPressing = false
+                    p.keys.left = false
+                    p.keys.right = false
                 end
             
                 -- But if we're sliding, hold the down key
                 if isSliding and not inPause then
-                    p.downKeyPressing = true
+                    p.keys.down = true
                 end
                 
-                -- And if we're pressing the down key plus a jump key, that's the key combo
-                local keyComboPressed = (p.downKeyPressing and (p.altJumpKeyPressing or p.jumpKeyPressing))
+                -- And if we're pressing the down key plus the jump key, that's the key combo
+                local keyComboPressed = (p.keys.down and p.keys.jump)
                 
                 
                 -- Consider the key combo invalid if we're not on the ground
@@ -1041,36 +1066,35 @@ function megaman.onInputUpdate()
                 -- If we're sliding, ignore the non-movement buttons (even on the very tick where we used the jump key to initiate slide)
                 if isSliding then
                     if initiatedSlide then
-                        if not p.jumpKeyPressing then
+                        if not p.keys.jump then
                             initiatedSlide = false
                         end
-                        p.jumpKeyPressing = false
+                        p.keys.jump = false
                     end
                 else
                 
                     if startSlide then
                         isSliding = true
-                        p.jumpKeyPressing = false
-                        p.altJumpKeyPressing = false
+                        p.keys.jump = false
                         initiatedSlide = true
                         p:mem(0x164, FIELD_WORD, 0)
                     else
                         p:mem(0x164, FIELD_WORD, -1)
                     end
                     -- EDIT: Don't do this as it breaks pipes and pulling up things
-                    -- p.downKeyPressing = false
+                    -- p.keys.down = false
                 end
                 
                 --old
                 --if p:mem(0x40,FIELD_WORD) ~= 3 and (not downwarp) and (not keyComboPressed) and (not isSliding) and (not inPause) and (p:mem(0x0C, FIELD_WORD) == 0) then
-                    --p.downKeyPressing = false;
+                    --p.keys.down = false;
                 --end
                 --disable ducking
                 if p:mem(0x12E, FIELD_WORD) == -1 and p:mem(0x164, FIELD_WORD) == -1 then
-                    p.downKeyPressing = false
+                    p.keys.down = false
                 end
                 
-                if (p.downKeyPressing and inPause) and (not wasDownPressed) and (not isDead) then
+                if (p.keys.down and inPause) and (not wasDownPressed) and (not isDead) then
                     menuPosition = menuPosition + 1
                     Audio.playSFX(pm.getSound(CHARACTER_MEGAMAN,sfx_cursor))
                     if menuPosition > #currentMenu then
@@ -1079,7 +1103,7 @@ function megaman.onInputUpdate()
                     manualChange = true
                     setPlayerPowerup()
                 end
-                if (p.upKeyPressing and inPause) and (not isDead) and (not wasUpPressed) then
+                if (p.keys.up and inPause) and (not isDead) and (not wasUpPressed) then
                     menuPosition = menuPosition - 1
                     Audio.playSFX(pm.getSound(CHARACTER_MEGAMAN,sfx_cursor))
                     if menuPosition < 0 then
@@ -1088,12 +1112,13 @@ function megaman.onInputUpdate()
                     manualChange = true
                     setPlayerPowerup()
                 end
-                if p.dropItemKeyPressing and (not wasSelectPressed) and (not isDead) and Level.winState() == 0 then
+                if p.keys.altJump == KEYS_PRESSED and (not wasSelectPressed) and (not isDead) and Level.winState() == 0 then
                     Audio.playSFX(pm.getSound(CHARACTER_MEGAMAN,sfx_pause))
                     if not inPause then
                         p.powerup = 2;
                         menuPosition = 1;
                     end
+                    smasbooleans.toggleoffinventory = not smasbooleans.toggleoffinventory
                     inPause = not inPause
                 end
                 
@@ -1102,9 +1127,9 @@ function megaman.onInputUpdate()
             end
                 
             wasKeyComboPressed = keyComboPressed
-            wasDownPressed = p.downKeyPressing
-            wasUpPressed = p.upKeyPressing
-            wasSelectPressed = p.dropItemKeyPressing
+            wasDownPressed = p.keys.down
+            wasUpPressed = p.keys.up
+            wasSelectPressed = p.keys.altJump
         end
     end
 end
@@ -1147,7 +1172,7 @@ function megaman.initCharacter()
     -- CLEANUP NOTE: This is not safe if a level makes it's own use of defines
     Defines.player_runspeed = 4 / 1.07 -- Correction for 7% toad speed boost
     Defines.player_walkspeed = 3 / 1.07 -- Correction for 7% toad speed boost
-    Defines.jumpheight = 18
+    Defines.jumpheight = 21
     Defines.jumpheight_bounce = 18
     Defines.gravity = 16
     Defines.player_grav = 0.45

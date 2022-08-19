@@ -198,3 +198,7 @@ collected in prior.
 - Misc.overrideLibrary(inlib, outlib): Overrides a library to a new one.
 - Misc.use13Editor(bool): This is used to open the legacy 1.3 Editor after
 dying.
+- Misc.shakeWindow(shakenumber, isCentered, withSFX): ONLY FOR THE SEE
+MOD! This shakes the window with the specified shakenumber. If isCentered,
+the window will be centered after the shake. If withSFX, the Undertale
+explosion SFX will play as well.

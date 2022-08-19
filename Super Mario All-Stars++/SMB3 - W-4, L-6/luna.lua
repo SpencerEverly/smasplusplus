@@ -1,7 +1,7 @@
 local level_dependencies_normal= require("level_dependencies_normal")
 
 function doorRegeneration()
-    Routine.waitFrames(31)
+    Routine.waitFrames(30)
     Npc.restoreClass("NPC")
 end
 
