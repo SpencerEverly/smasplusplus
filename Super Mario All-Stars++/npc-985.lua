@@ -91,6 +91,8 @@ function muteMusic(sectionid) --Mute all section music, or just mute a specific 
 end
 
 local plr
+local newboundary
+local oldboundary
 
 function starget()
     Misc.npcToCoins()
@@ -103,6 +105,7 @@ function starget()
             o.forcedState,o.forcedTimer = 8,-plr.idx
         end
     end
+    oldboundary = plr.sectionObj.origBoundary
     GameData.winStateActive = true
     inactivekeysonly = true
     playervuln = true
@@ -114,16 +117,21 @@ function starget()
     smasbooleans.musicMuted = true
     smasbooleans.targetPlayers = false
     smasbooleans.overrideTargets = true
-    for k,v in ipairs(BGO.get(13)) do
-        customCamera.targets = {v}
-    end
     local currentSection = Section(plr.section)
-    local b = plr.sectionObj.boundary
-    b.right = b.right + 350
-    plr.sectionObj.boundary = b
+    newboundary = plr.sectionObj.boundary
+    newboundary.right = newboundary.right + 350
+    plr.sectionObj.boundary = newboundary
     Routine.wait(5, true)
     GameData.winStateActive = false
     Level.exit(LEVEL_WIN_TYPE_STAR)
+end
+
+function roulettestar.onCameraUpdate()
+    if collectactive then
+        if newboundary.right > oldboundary.right then
+            camera.x = oldboundary.right - camera.width
+        end
+    end
 end
 
 local player2camerax
@@ -147,10 +155,6 @@ function roulettestar.onDraw()
             end
         end
     end
-end
-
-function roulettestar.onNPCKill(eventToken, v)
-    
 end
 
 function roulettestar.onPostNPCKill(v,reason)
@@ -273,6 +277,7 @@ function roulettestar.onInitAPI()
     registerEvent(roulettestar,"onPostNPCKill")
     registerEvent(roulettestar,"onDraw")
     registerEvent(roulettestar,"onExit")
+    registerEvent(roulettestar,"onCameraUpdate")
 end
 
 return roulettestar
