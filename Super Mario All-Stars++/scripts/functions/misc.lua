@@ -784,10 +784,14 @@ function Misc.shakeWindow(shakenumber)
         error("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
         return
     else
-        oldx = Misc.getWindowXPosition()
-        oldy = Misc.getWindowYPosition()
-        
-        shaketally = shakenumber
+        if Misc.isFullscreen() then
+            return
+        else
+            oldx = Misc.getWindowXPosition()
+            oldy = Misc.getWindowYPosition()
+            
+            shaketally = shakenumber
+        end
     end
 end
 
