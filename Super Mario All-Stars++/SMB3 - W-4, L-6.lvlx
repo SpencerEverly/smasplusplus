@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. 3\: World 4-6";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-194016;T:-201056;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:1;
+SC:0;L:-200000;R:-194048;T:-201056;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:1;
 SC:1;L:-180000;R:-174016;T:-180608;B:-179552;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:1;
 SECTION_END
 STARTPOINT
