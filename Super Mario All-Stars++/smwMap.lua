@@ -4377,7 +4377,7 @@ function smwMap.onDraw()
         unlockLoopObj:pause()
     end
     if SaveData.firstBootMapPathFixed == false then
-        Misk.unlockAnyBrokenPaths()
+        Misc.unlockAnyBrokenPaths()
         SaveData.firstBootMapPathFixed = true
     end
     --Text.printWP(smwMap.unlockingCurrentPath, 100, 100, 8)

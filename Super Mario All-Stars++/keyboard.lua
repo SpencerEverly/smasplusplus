@@ -81,7 +81,7 @@ function keyboard.cmd()
     if GameData.saveslotswitchenter == true then
         if keyboard.buffer ~= "" then
             if keyboard.buffer >= "1" or keyboard.buffer <= "32767" then
-                Misk.moveSaveSlot(Misc.saveSlot(), tonumber(keyboard.buffer))
+                Misc.moveSaveSlot(Misc.saveSlot(), tonumber(keyboard.buffer))
                 Misc.saveGame()
                 keyboard.buffer = ""
                 keyboard.cursorPos = 0

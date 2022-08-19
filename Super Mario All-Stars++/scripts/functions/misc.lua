@@ -8,7 +8,7 @@ local smascharacterinfo = require("smascharacterinfo")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 
-function Misk.episodeFilename() --Gets the episode filename. If in editor made, it just returns it's in the Editor. Thanks KBM_Quine!
+function Misc.episodeFilename() --Gets the episode filename. If in editor made, it just returns it's in the Editor. Thanks KBM_Quine!
     if not Misc.inEditor then
         local episodeFiles = Misc.listFiles(Misc.episodePath())
         local worldFile
@@ -23,7 +23,7 @@ function Misk.episodeFilename() --Gets the episode filename. If in editor made, 
     end
 end
 
-function Misk.listUserFiles(path)
+function Misc.listUserFiles(path)
     if path == nil then
         return Misc.listFiles(Misc.episodePath().."___MainUserDirectory/")
     else
@@ -31,7 +31,7 @@ function Misk.listUserFiles(path)
     end
 end
 
-function Misk.toggleVerboseMode() --This, when activated, will spit out a verbose list of things you have done/executed. Toggle again to turn off.
+function Misc.toggleVerboseMode() --This, when activated, will spit out a verbose list of things you have done/executed. Toggle again to turn off.
     if smasverbosemode.activated == true then
         smasverbosemode.activated = false
     elseif smasverbosemode.activated == false then
@@ -39,7 +39,7 @@ function Misk.toggleVerboseMode() --This, when activated, will spit out a verbos
     end
 end
 
-function Misk.toggleWindowOnly() --This, when fullscreen, will only toggle a window instead of being in fullscreen. Toggle again to turn off.
+function Misc.toggleWindowOnly() --This, when fullscreen, will only toggle a window instead of being in fullscreen. Toggle again to turn off.
     if mem(0x00B250D8, FIELD_BOOL) then
         return mem(0x00B250D8, FIELD_BOOL, false)
     elseif not mem(0x00B250D8, FIELD_BOOL) then
@@ -49,7 +49,7 @@ end
 
 local pSwitchMusic
 
-function Misk.doPSwitchUntimed(bool)
+function Misc.doPSwitchUntimed(bool)
     if bool == nil then
         return
     end
@@ -66,11 +66,11 @@ function Misk.doPSwitchUntimed(bool)
     end
 end
 
-function Misk.rngTrueValue()
+function Misc.rngTrueValue()
     return rng.randomInt(1,10)
 end
 
-function Misk.checkCameraTransitionStatus() --Checks to see if the legacy camera transition is on.
+function Misc.checkCameraTransitionStatus() --Checks to see if the legacy camera transition is on.
     if mem(0x00B2B9E4, FIELD_BOOL) then
         return true
     elseif not mem(0x00B2B9E4, FIELD_BOOL) then
@@ -78,11 +78,11 @@ function Misk.checkCameraTransitionStatus() --Checks to see if the legacy camera
     end
 end
 
-function Misk.checkTargetStatus() --Checks to see if the legacy camera transition is on.
+function Misc.checkTargetStatus() --Checks to see if the legacy camera transition is on.
     return customCamera.targets
 end
 
-function Misk.saveSaveSlot(slot)
+function Misc.saveSaveSlot(slot)
     if slot > 32767 then
         error("You can't save to a save slot greater than 32767.")
         return
@@ -95,7 +95,7 @@ function Misk.saveSaveSlot(slot)
     Misc.saveGame()
 end
 
-function Misk.moveSaveSlot(slot, destination)
+function Misc.moveSaveSlot(slot, destination)
     if slot == nil then
         error("You must specify a moving save slot.")
         return
@@ -131,11 +131,11 @@ function Misk.moveSaveSlot(slot, destination)
         end
     end
     Misc.saveSlot(destination)
-    Misk.eraseSaveSlot(slot)
+    Misc.eraseSaveSlot(slot)
     Misc.saveGame()
 end
 
-function Misk.eraseMainSaveSlot(slot) --This only erases the main save in the save slot.
+function Misc.eraseMainSaveSlot(slot) --This only erases the main save in the save slot.
     if slot > 32767 then
         error("You can't erase a save slot greater than 32767.")
         return
@@ -149,7 +149,7 @@ function Misk.eraseMainSaveSlot(slot) --This only erases the main save in the sa
     f:close()
 end
 
-function Misk.eraseSaveSlot(slot) --This erases all the save data in a specific slot.
+function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific slot.
     if slot > 32767 then
         error("You can't erase a save slot greater than 32767.")
         return
@@ -171,7 +171,7 @@ function Misk.eraseSaveSlot(slot) --This erases all the save data in a specific 
     f2:close()
 end
 
-function Misk.getLegacyStarsCollected() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
+function Misc.getLegacyStarsCollected() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
     local t = {}
     for i=1, mem(0x00B251E0, FIELD_WORD) do
         t[i] = {filename = mem(GM_STAR_ADDR+(i - 1)*0x08+0x00, FIELD_STRING), index = mem(GM_STAR_ADDR+(i - 1)*0x08+0x04, FIELD_WORD)}
@@ -179,7 +179,7 @@ function Misk.getLegacyStarsCollected() --This is for the Demo 3 save migration 
     return t
 end
 
-function Misk.getLegacyStarsCollectedNameOnly() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
+function Misc.getLegacyStarsCollectedNameOnly() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
     local t = {}
     for i=1, mem(0x00B251E0, FIELD_WORD) do
         t[i] = mem(GM_STAR_ADDR+(i - 1)*0x08+0x00, FIELD_STRING)
@@ -187,7 +187,7 @@ function Misk.getLegacyStarsCollectedNameOnly() --This is for the Demo 3 save mi
     return t
 end
 
-function Misk.unlockAnyBrokenPaths() --WIP function that will unlock any path if any star has been collected prior.
+function Misc.unlockAnyBrokenPaths() --WIP function that will unlock any path if any star has been collected prior.
     --**Super Mario Bros. 1**
     --World 1
     if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-1.lvlx") == true then
@@ -740,7 +740,7 @@ function Misk.unlockAnyBrokenPaths() --WIP function that will unlock any path if
     --TBD
 end
 
-function Misk.overrideLibrary(inlib, outlib)
+function Misc.overrideLibrary(inlib, outlib)
     local loadedTable = package.loaded
     
     clearEvents(inlib)
@@ -754,7 +754,7 @@ function Misk.overrideLibrary(inlib, outlib)
     return outlib
 end
 
-function Misk.use13Editor(bool)
+function Misc.use13Editor(bool)
     if Misc.inEditor() then
         if bool == nil then
             return

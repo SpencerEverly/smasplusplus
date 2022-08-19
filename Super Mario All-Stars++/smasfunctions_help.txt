@@ -166,35 +166,35 @@ NPC FUNCTIONS
 - Npc.harmSpecified(id): Harms a specific NPC ID in the entire level.
 
 MISC FUNCTIONS
-- Misk.episodeFilename(): Gets the episode filename for the episode. If under
+- Misc.episodeFilename(): Gets the episode filename for the episode. If under
 the editor, it'll return 'Editor Mode' instead.
-- Misk.isExtraSoundsActive(): Checks to see if extrasounds is turned on.
-- Misk.listUserFiles(path): Lists the files in the main modifiable user
+- Misc.isExtraSoundsActive(): Checks to see if extrasounds is turned on.
+- Misc.listUserFiles(path): Lists the files in the main modifiable user
 directory.
-- Misk.toggleWindowOnly(): This, when fullscreen, will only toggle a window
+- Misc.toggleWindowOnly(): This, when fullscreen, will only toggle a window
 instead of being in fullscreen. Toggle again to turn off.
-- Misk.doPSwitchUntimed(): This will turn on the P-Switch, without a timer.
-- Misk.rngTrueValue(argument): RNGs a random value, truly.
-- Misk.checkCameraTransitionStatus(): Checks if the camera transition (Used
+- Misc.doPSwitchUntimed(): This will turn on the P-Switch, without a timer.
+- Misc.rngTrueValue(argument): RNGs a random value, truly.
+- Misc.checkCameraTransitionStatus(): Checks if the camera transition (Used
 for defining size/position) is transitioning or not.
-- Misk.loadSaveSlot(slot): Loads any save slot.
-- Misk.saveSaveSlot(slot): Saves a specified save slot.
-- Misk.moveSaveSlot(slot, destination): This moves a save slot to another
+- Misc.loadSaveSlot(slot): Loads any save slot.
+- Misc.saveSaveSlot(slot): Saves a specified save slot.
+- Misc.moveSaveSlot(slot, destination): This moves a save slot to another
 save slot. Highest you can go is 32767 (The original slot will be reset after
 moving, due to os.remove not existing on LunaLua).
-- Misk.eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot
+- Misc.eraseSaveSlot(slot): This is only used for the SMAS++ erase save slot
 tool and speedrun save data purge option. This will reset your save data, but
 without clearing SaveData/GameData.
-- Misk.eraseMainSaveSlot(slot): This is only used for the SMAS++ Demo 3 save
+- Misc.eraseMainSaveSlot(slot): This is only used for the SMAS++ Demo 3 save
 migration tool. This will only clear off the .sav file data, but won't erase
 anything else.
-- Misk.getLegacyStarsCollected(): This is for the Demo 3 save migration tool
+- Misc.getLegacyStarsCollected(): This is for the Demo 3 save migration tool
 which runs when stars were collected from Demo 2 and below. This will be
 unused by the time Demo 4 releases (And/or the full release happens).
-- Misk.getLegacyStarsCollectedNameOnly(): Same as last, except it only lists
+- Misc.getLegacyStarsCollectedNameOnly(): Same as last, except it only lists
 the names via a table (Actually used when migrating save data).
-- Misk.unlockAnyBrokenPaths(): Unlocks any paths that had stars already
+- Misc.unlockAnyBrokenPaths(): Unlocks any paths that had stars already
 collected in prior.
-- Misk.overrideLibrary(inlib, outlib): Overrides a library to a new one.
-- Misk.use13Editor(bool): ONLY FOR THE SEE MOD! This is used to open the
+- Misc.overrideLibrary(inlib, outlib): Overrides a library to a new one.
+- Misc.use13Editor(bool): ONLY FOR THE SEE MOD! This is used to open the
 legacy 1.3 Editor after dying.

@@ -320,7 +320,7 @@ end
 
 local function unlockbrokenpaths()
     Sound.playSFX(27)
-    Misk.unlockAnyBrokenPaths()
+    Misc.unlockAnyBrokenPaths()
 end
 
 local function characterchange()
@@ -1118,7 +1118,7 @@ local function purgesavedata()
     Misc.unpause()
     exitFadeActive = false
     exitFadeActiveDone = true
-    Misk.eraseSaveSlot(Misc.saveSlot())
+    Misc.eraseSaveSlot(Misc.saveSlot())
     Misc.dialog("There WILL be a few errors before restarting. This is normal. Just click okay (Or press ENTER) on all dialog boxes that pop up, and the episode will restart.")
     SaveData.clear()
     GameData.clear()

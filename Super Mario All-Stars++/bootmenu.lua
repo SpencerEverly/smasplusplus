@@ -610,17 +610,17 @@ local function MigrateOldSave3()
     SaveData.totalScoreClassic = Misc.score()
     GameData.temporaryPowerupStored = player.powerup
     for k,v in ipairs(smastables.__allLevels) do
-        if table.icontains(Misk.getLegacyStarsCollectedNameOnly(),v) == true then
+        if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) == true then
             table.insert(SaveData.completeLevels, v)
         end
     end
     for k,v in ipairs(smastables.__allLevelsOptional) do
-        if table.icontains(Misk.getLegacyStarsCollectedNameOnly(),v) == true then
+        if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) == true then
             table.insert(SaveData.completeLevelsOptional, v)
         end
     end
     SaveData.totalStarCount = #SaveData.completeLevels
-    Misk.eraseMainSaveSlot(Misc.saveSlot())
+    Misc.eraseMainSaveSlot(Misc.saveSlot())
     littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Save has been officially migrated! Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
 end
 
@@ -1041,7 +1041,7 @@ end
 
 local function SaveEraseStart()
     --Start opening SMAS++'s save files. From there, write default data to the files.
-    Misk.eraseSaveSlot(Misc.saveSlot())
+    Misc.eraseSaveSlot(Misc.saveSlot())
     --Then make the message telling that it's erased.
     littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
 end
