@@ -196,5 +196,5 @@ the names via a table (Actually used when migrating save data).
 - Misc.unlockAnyBrokenPaths(): Unlocks any paths that had stars already
 collected in prior.
 - Misc.overrideLibrary(inlib, outlib): Overrides a library to a new one.
-- Misc.use13Editor(bool): ONLY FOR THE SEE MOD! This is used to open the
-legacy 1.3 Editor after dying.
+- Misc.use13Editor(bool): This is used to open the legacy 1.3 Editor after
+dying.
