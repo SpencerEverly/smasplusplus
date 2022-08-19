@@ -1741,7 +1741,7 @@ ID:821;X:-196640;Y:-197952;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-3
 ID:752;X:-196704;Y:-197952;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-3Path3\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
 ID:821;X:-196224;Y:-197952;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-3CastleEndWarp\"\,\n    \"levelTitle\"\: \"To World 3-9\"\,\n    \"path_left\"\: \"toSMB33-Castle\"\,\n    \"warpName\"\: \"SMB3W-3CastleBeginWarp\"\n}\n";
 ID:752;X:-196256;Y:-197952;D:-1;XTRA:"{\n    \"name\"\: \"toSMB33-Castle\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
-ID:854;X:-196288;Y:-197952;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-3\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #3\: Wendy\"\,\n    \"path_right\"\: \"toSMB33-Castle\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:854;X:-196288;Y:-197952;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-3\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #3\: Wendy\"\,\n    \"path_right\"\: \"toSMB33-Castle\"\,\n    \"path_up\"\: \"toSMB3W-3Path4\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:856;X:-196544;Y:-197920;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-3\, L-Boat.lvlx\"\,\n    \"levelTitle\"\: \"Boat Back to Shore\"\,\n    \"path_left\"\: \"\"\n}\n";
 ID:822;X:-192400;Y:-194912;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"croissantStar\"\,\n    \"levelTitle\"\: \"Star Road\"\,\n    \"warpName\"\: \"starRoadHill\"\n}\n";
 ID:802;X:-192496;Y:-194848;D:-1;XTRA:"{\n    \"levelFilename\"\: \"\"\,\n    \"levelTitle\"\: \"Star Road 1\"\,\n    \"path_down\"\: \"toSMWStarRoad1\"\n}\n";
@@ -1749,8 +1749,8 @@ ID:822;X:-192560;Y:-194752;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"d
 ID:752;X:-192560;Y:-194784;D:-1;XTRA:"{\n    \"name\"\: \"toSMWStarRoad1\"\,\n    \"points\"\: \"0\,32\, 64\,-32\, 64\,-64\"\,\n    \"smoothness\"\: 0.10000000000000003\n}\n";
 ID:753;X:-192736;Y:-195040;D:-1;XTRA:"{\n    \"backgroundColor\"\: \"#383058ff\"\,\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario World/Star Road.spc|0\;g=2.5\"\,\n    \"height\"\: 404\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 668\n}\n";
 ID:753;X:-195328;Y:-198304;D:-1;XTRA:"{\n    \"backgroundName\"\: \"\"\,\n    \"customMusicPath\"\: \"_OST/Lava Lands/World Music/Escape!!!.ogg\"\,\n    \"height\"\: 192\,\n    \"music\"\: 2\,\n    \"width\"\: 192\n}\n";
-ID:752;X:-196288;Y:-197984;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-3Path3\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
-ID:821;X:-196288;Y:-198016;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-4BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 4\"\,\n    \"path_down\"\: \"toSMB3W-3Path3\"\,\n    \"warpName\"\: \"SMB3W-3EndWarp\"\n}\n";
+ID:752;X:-196288;Y:-197984;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-3Path4\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:821;X:-196288;Y:-198016;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-4BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 4\"\,\n    \"path_down\"\: \"toSMB3W-3Path4\"\,\n    \"warpName\"\: \"SMB3W-3EndWarp\"\n}\n";
 ID:753;X:-201600;Y:-200000;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Giant Land.spc|0\;g=2.5\"\,\n    \"height\"\: 864\,\n    \"music\"\: 2\,\n    \"width\"\: 1824\n}\n";
 ID:821;X:-200416;Y:-199744;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-3EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 3\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toSMB34-1\"\,\n    \"warpName\"\: \"SMB3W-4BeginWarp\"\n}\n";
 ID:752;X:-200384;Y:-199744;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
