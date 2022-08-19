@@ -776,40 +776,26 @@ end
 
 local shaketally = 0
 local centeraftershake = false
+local oldx = 0
+local oldy = 0
 
-function Misc.shakeWindow(shakenumber, isCentered, withSFX)
+function Misc.shakeWindow(shakenumber)
     if SMBX_VERSION ~= VER_SEE_MOD then
         error("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
         return
     else
-        if isCentered == nil then
-            isCentered = false
-            centeraftershake = isCentered
-        end
-        if isCentered then
-            centeraftershake = isCentered
-        end
-        if withSFX == nil then
-            withSFX = false
-        end
-        if withSFX then
-            Sound.playSFX("mus_explosion.ogg")
-        end
+        oldx = Misc.getWindowXPosition()
+        oldy = Misc.getWindowYPosition()
+        
         shaketally = shakenumber
     end
 end
 
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
-        Text.printWP(shaketally, 100, 100, 0)
         if shaketally > 0 then
             shaketally = shaketally - 1
-            Misc.setWindowPosition(((Misc.getWindowXPosition() + math.random(((shaketally / 4 + 4))) - math.random((shaketally / 4) + 4))),((Misc.getWindowYPosition() + math.random(((shaketally / 4) + 4))) - math.random(((shaketally / 4) + 4)))) --Thanks Toby Fox!
-            if shaketally <= 1 and shaketally > 0 then
-                if centeraftershake then
-                    Misc.centerWindow()
-                end
-            end
+            Misc.setWindowPosition(((oldx + math.random(((shaketally / 4 + 4))) - math.random((shaketally / 4) + 4))),((oldy + math.random(((shaketally / 4) + 4))) - math.random(((shaketally / 4) + 4)))) --Thanks Toby Fox!
         end
     end
 end
