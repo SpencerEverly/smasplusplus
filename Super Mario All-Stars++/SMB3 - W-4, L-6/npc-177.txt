@@ -1,0 +1,9 @@
+frames=2
+framestyle = 1
+gfxwidth=48
+gfxheight=62
+width=40
+height=48
+
+shellID = 174
+nonWingedKoopaID = 175

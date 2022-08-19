@@ -1,0 +1,15 @@
+gfxwidth=44
+gfxheight=44
+width=32
+height=40
+
+wakeUpTime = 512
+shakeTime = 48
+
+facePlayerAfterWakingUp = true
+
+spinFramesUpsideDown = 4
+eyeFramesNormal = 0
+eyeFramesUpsideDown = 0
+
+hoppedInsideID = 173
