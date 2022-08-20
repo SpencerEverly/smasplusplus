@@ -162,8 +162,11 @@ coordinate of the player from that level.
 coordinate of the player from that level.
 
 NPC FUNCTIONS
-- Npc.harmAll(): Harms every single NPC is the entire level.
-- Npc.harmSpecified(id): Harms a specific NPC ID in the entire level.
+- NPC.harmAll(): Harms every single NPC is the entire level.
+- NPC.harmSpecified(id): Harms a specific NPC ID in the entire level.
+- NPC.saveClass(class): Saves a specified class. Used for regenerating NPCs.
+- NPC.restoreClass(class): Restores a specified class. Used for regenerating
+NPCs.
 
 MISC FUNCTIONS
 - Misc.episodeFilename(): Gets the episode filename for the episode. If under
@@ -198,7 +201,30 @@ collected in prior.
 - Misc.overrideLibrary(inlib, outlib): Overrides a library to a new one.
 - Misc.use13Editor(bool): This is used to open the legacy 1.3 Editor after
 dying.
-- Misc.shakeWindow(shakenumber, isCentered, withSFX): ONLY FOR THE SEE
-MOD! This shakes the window with the specified shakenumber. If isCentered,
-the window will be centered after the shake. If withSFX, the Undertale
-explosion SFX will play as well.
+
+--(SEE MOD-ONLY)--
+- Misc.setWindowPosition(x, y): Sets the window position to the specified
+coordinates.
+- Misc.runWhenUnfocused(bool): Sets to run when unfocused or not.
+- Misc.centerWindow(): Centers the window to the main monitor of the
+screen.
+- Misc.setFullscreen(bool): Sets to enable fullscreen or not.
+- Misc.getWindowXPosition(): Returns the X position of the current window.
+- Misc.getWindowYPosition(): Returns the Y position of the current window.
+- Misc.getCenterWindowXPosition(): Returns the X position of the window,
+except it will return the position of when it's centered.
+- Misc.getCenterWindowYPosition(): Returns the Y position of the window,
+except it will return the position of when it's centered.
+- Misc.isFullscreen(): Returns true or false if the game is in fullscreen.
+- Misc.toggleGIFRecording(): Toggles the state of the GIF recorder, and
+returns true if activated, false if not.
+- Misc.isWindowFocused(): Returns if the window is focused (Will be used
+for a future onTickWithUnfocused global)
+- Misc.getWidthScreenResolution(): Returns the resolution width in pixels.
+- Misc.getHeightScreenResolution(): Returns the resolution height in
+pixels.
+- Misc.disableTestMode(): ONLY EXECUTE IF YOU KNOW WHAT YOU'RE DOING! This
+disables test mode while on test mode. Be advised that things may BREAK when
+using this command!
+- Misc.shakeWindow(shakenumber): This shakes the window with the specified
+shakenumber.

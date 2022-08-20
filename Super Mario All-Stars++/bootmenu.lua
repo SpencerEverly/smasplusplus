@@ -313,7 +313,7 @@ local function theme4()
 end
 
 local function theme4scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(19)
     autoscroll.scrollLeft(15)
@@ -332,7 +332,7 @@ local function theme5()
 end
 
 local function theme5scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(17.3)
     autoscroll.scrollLeft(15)
@@ -351,7 +351,7 @@ local function theme6()
 end
 
 local function theme6scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(19.5)
     autoscroll.scrollLeft(15)
@@ -380,7 +380,7 @@ local function theme8()
 end
 
 local function theme8scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(17.5)
     autoscroll.scrollLeft(15)
@@ -399,7 +399,7 @@ local function theme9()
 end
 
 local function theme9scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(13.8)
     autoscroll.scrollLeft(15)
@@ -428,7 +428,7 @@ local function theme11()
 end
 
 local function theme11scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(16.2)
     autoscroll.scrollLeft(15)
@@ -467,7 +467,7 @@ local function theme14()
 end
 
 local function theme14scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollUp(6)
     Routine.wait(13.6)
     autoscroll.scrollDown(15)
@@ -486,7 +486,7 @@ local function theme15()
 end
 
 local function theme15scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(26.2)
     autoscroll.scrollLeft(15)
@@ -515,7 +515,7 @@ local function theme17()
 end
 
 local function theme17scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(10.6)
     autoscroll.scrollLeft(15)
@@ -534,7 +534,7 @@ local function theme18()
 end
 
 local function theme18scrolling()
-    Npc.restoreClass("NPC")
+    NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(16.6)
     autoscroll.scrollLeft(15)

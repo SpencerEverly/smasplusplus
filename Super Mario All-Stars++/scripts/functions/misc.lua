@@ -12,6 +12,101 @@ function Misk.onInitAPI()
     registerEvent(Misk,"onDraw")
 end
 
+if SMBX_VERSION == VER_SEE_MOD then
+    do
+        ffi.cdef([[
+            void LunaLuaSetWindowPosition(int x, int y);
+            void LunaLuaToggleWindowFocus(bool enable);
+            void LunaLuaCenterWindow();
+            void LunaLuaSetFullscreen(bool enable);
+            double LunaLuaGetXWindowPosition();
+            double LunaLuaGetYWindowPosition();
+            double LunaLuaGetXWindowPositionCenter();
+            double LunaLuaGetYWindowPositionCenter();
+            void LunaLuaSetWindowSize(int width, int height);
+            int LunaLuaGetWindowWidth();
+            int LunaLuaGetWindowHeight();
+            bool LunaLuaIsFullscreen();
+            bool LunaLuaIsRecordingGIF();
+            bool LunaLuaIsFocused();
+            double LunaLuaGetScreenResolutionWidth();
+            double LunaLuaGetScreenResolutionHeight();
+            
+            void LunaLuaTestModeDisable(void);
+        ]])
+        function Misc.setWindowPosition(x, y)
+            if x == nil then
+                return
+            end
+            if y == nil then
+                return
+            end
+            LunaDLL.LunaLuaSetWindowPosition(x, y)
+        end
+        function Misc.runWhenUnfocused(enable)
+            if enable == nil then
+                Misc.warn("Value has not been set.")
+                return
+            end
+            if enable then
+                enable = true
+            else
+                enable = false
+            end
+            LunaDLL.LunaLuaToggleWindowFocus(enable)
+        end
+        function Misc.centerWindow()
+            LunaDLL.LunaLuaCenterWindow()
+        end
+        function Misc.setFullscreen(enable)
+            if enable == nil then
+                Misc.warn("Value has not been set.")
+                return
+            end
+            if enable then
+                enable = true
+            else
+                enable = false
+            end
+            LunaDLL.LunaLuaSetFullscreen(enable)
+        end
+        function Misc.getWindowXPosition()
+            return LunaDLL.LunaLuaGetXWindowPosition()
+        end
+        function Misc.getWindowYPosition()
+            return LunaDLL.LunaLuaGetYWindowPosition()
+        end
+        function Misc.getCenterWindowXPosition()
+            return LunaDLL.LunaLuaGetXWindowPositionCenter()
+        end
+        function Misc.getCenterWindowYPosition()
+            return LunaDLL.LunaLuaGetYWindowPositionCenter()
+        end
+        function Misc.isFullscreen()
+            return LunaDLL.LunaLuaIsFullscreen()
+        end
+        function Misc.toggleGIFRecording()
+            return LunaDLL.LunaLuaIsRecordingGIF()
+        end
+        function Misc.isWindowFocused()
+            return LunaDLL.LunaLuaIsFocused()
+        end
+        function Misc.getWidthScreenResolution()
+            return LunaDLL.LunaLuaGetScreenResolutionWidth()
+        end
+        function Misc.getHeightScreenResolution()
+            return LunaDLL.LunaLuaGetScreenResolutionHeight()
+        end
+        function Misc.disableTestMode()
+            if not Misc.inEditor() then
+                return
+            else
+                return LunaDLL.LunaLuaTestModeDisable()
+            end
+        end
+    end
+end
+
 function Misc.episodeFilename() --Gets the episode filename. If in editor made, it just returns it's in the Editor. Thanks KBM_Quine!
     if not Misc.inEditor then
         local episodeFiles = Misc.listFiles(Misc.episodePath())

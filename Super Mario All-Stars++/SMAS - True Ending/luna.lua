@@ -2,7 +2,7 @@ local level_dependencies_normal= require("level_dependencies_normal")
 local Routine = require("routine")
 local furyinventory = require("furyinventory")
 
-local stars = mem(0x00B251E0, FIELD_WORD)
+local stars = SaveData.totalStarCount
 
 local whiteflash = false
 local blackscreen = false

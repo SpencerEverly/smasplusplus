@@ -194,7 +194,7 @@ Npc.classesToSave = {
 
 Npc.savedClasses = {}
 
-function Npc.harmAll(npc,...) -- npc:harm but it harms all NPCs with a specified HARM_TYPE
+function NPC.harmAll(npc,...) -- npc:harm but it harms all NPCs with a specified HARM_TYPE
     local oldKilled     = npc:mem(0x122,FIELD_WORD)
     local oldProjectile = npc:mem(0x136,FIELD_BOOL)
     local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
@@ -216,7 +216,7 @@ function Npc.harmAll(npc,...) -- npc:harm but it harms all NPCs with a specified
     )
 end
 
-function Npc.harmSpecified(npcid,...) -- npc:harm but it harms all of a specific NPC and not everything with a specified HARM_TYPE
+function NPC.harmSpecified(npcid,...) -- npc:harm but it harms all of a specific NPC and not everything with a specified HARM_TYPE
     if npcid == nil then
         return
     end
@@ -243,11 +243,11 @@ function Npc.harmSpecified(npcid,...) -- npc:harm but it harms all of a specific
     end
 end
 
-function Npc.saveClass(class) --Saves a specific class. Used for NPCs.
+function NPC.saveClass(class) --Saves a specific class. Used for NPCs.
     -- If no class is provided, save all classes
     if class == nil then
         for _,c in ipairs(Npc.classesToSave) do
-            Npc.saveClass(c.name)
+            NPC.saveClass(c.name)
         end
         return
     end
@@ -288,11 +288,11 @@ function Npc.saveClass(class) --Saves a specific class. Used for NPCs.
     end
 end
 
-function Npc.restoreClass(class) --Restores a specific class. Used for NPCs.
+function NPC.restoreClass(class) --Restores a specific class. Used for NPCs.
     -- If no class is provided, restore all classes
     if class == nil then
         for _,c in ipairs(Npc.classesToSave) do
-            Npc.restoreClass(c.name)
+            NPC.restoreClass(c.name)
         end
         return
     end
@@ -356,7 +356,7 @@ end
 function Npc.onTickEnd()
     -- Save classes (this is done after onStart so custom stuff has already been initiated)
     if not Npc.hasSavedClasses then
-        Npc.saveClass()
+        NPC.saveClass()
         Npc.hasSavedClasses = true
     end
 end
