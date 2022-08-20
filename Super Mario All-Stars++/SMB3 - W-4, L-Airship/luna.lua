@@ -9,6 +9,9 @@ function onLoadSection2()
 end
 
 function onEvent(eventName)
+    if eventName == "Airship Begin" then
+        Sound.playSFX(27)
+    end
     if eventName == "Door Appear" then
         Sound.playSFX(20)
     end
