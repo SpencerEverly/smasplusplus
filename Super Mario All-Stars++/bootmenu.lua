@@ -47,6 +47,7 @@ if bootmenu.active then
     datetime.bottomright = true
     datetime.topright = false
     extrasounds.active = false
+    bootmenu.startedmenu = 0
 end
 
 bootmenu.active = false
@@ -93,7 +94,7 @@ local function introExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
-    GameData.startedmenu = 0
+    bootmenu.startedmenu = 0
     Level.load("SMAS - Intro.lvlx", nil, nil)
 end
 
@@ -555,7 +556,7 @@ local function mapExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
-    GameData.startedmenu = 0
+    bootmenu.startedmenu = 0
     Level.load("map.lvlx", nil, nil)
 end
 
@@ -974,10 +975,7 @@ local function ExitDialogueFirstBoot()
     logo = true
     pressjumpwords = true
     if SaveData.firstBootCompleted == true then
-        GameData.startedmenu = GameData.startedmenu - 1
-    end
-    if GameData.startedmenu == nil then
-        GameData.startedmenu = 4
+        bootmenu.startedmenu = 0
     end
     if Time.month() == 03 and Time.day() == 17 then
         stpatricksday = true
@@ -992,7 +990,7 @@ local function ExitDialogue()
     pfpimage = true
     pressjumpwords = true
     if SaveData.firstBootCompleted == true then
-        GameData.startedmenu = GameData.startedmenu - 1
+        bootmenu.startedmenu = 0
     end
     if Time.month() == 03 and Time.day() == 17 then
         stpatricksday = true
@@ -1007,7 +1005,7 @@ local function ExitDialogueMusicReset()
     pfpimage = true
     pressjumpwords = true
     if SaveData.firstBootCompleted == true then
-        GameData.startedmenu = GameData.startedmenu - 1
+        bootmenu.startedmenu = 0
     end
     if Time.month() == 03 and Time.day() == 17 then
         stpatricksday = true
@@ -1133,7 +1131,7 @@ local function PigeonRaca1() --This executes the True Final Battle
     if player.keys.jump == KEYS_PRESSED then
         player.keys.jump = KEYS_UNPRESSED
         Routine.wait(4.5) --Wait until loading the True Final Battle cutscene...
-        GameData.startedmenu = 0
+        bootmenu.startedmenu = 0
         Level.load("SMAS - Raca's World (Part 0).lvlx", nil, nil)
     end
 end
@@ -1152,7 +1150,7 @@ local function foolsinapril() --April Fools event for 4/1 of any year
     active = false
     pressjumpwords = true
     GameData.____holidayMenuEventEnded = true
-    GameData.startedmenu = GameData.startedmenu - 1
+    bootmenu.startedmenu = 0
 end
 
 function bootmenu.onInitAPI() --This requires some libraries to start
@@ -1184,14 +1182,14 @@ function bootmenu.onStart()
         end
         if GameData.saveDataMigrated == false then
             Routine.run(MigrateOldSave1)
-            GameData.startedmenu = 1
+            bootmenu.startedmenu = 1
         end
         if SaveData.firstBootCompleted == nil then
             SaveData.firstBootCompleted = false --If starting for the first time, first boot will happen
         end
         if SaveData.firstBootCompleted == false and GameData.saveDataMigrated == true then
             Routine.run(FirstBoot1)
-            GameData.startedmenu = 1
+            bootmenu.startedmenu = 1
         end
         if SaveData.firstBootCompleted == true and GameData.saveDataMigrated == true then
             GameData.playernameenterfirstboot = false
@@ -1216,9 +1214,9 @@ function bootmenu.onStart()
         hearthover.active = false --No hearthover on the bootmenu
         if Time.month() == 04 and Time.day() == 01 then --BSOD lmao
             if GameData.____holidayMenuEventExecuted == nil or GameData.____holidayMenuEventExecuted == false and GameData.____holidayMenuEventEnded == false then
-                GameData.startedmenu = 1
+                bootmenu.startedmenu = 1
             elseif GameData.____holidayMenuEventEnded == true then
-                GameData.startedmenu = 0
+                bootmenu.startedmenu = 0
             end
         end
         if Time.month() == 03 and Time.day() == 17 then --St. Patrick's Day event
@@ -1278,13 +1276,13 @@ function bootmenu.onTick()
             SaveData.firstBootCompleted = false
         end
         if SaveData.firstBootCompleted == false then
-            GameData.startedmenu = 1
+            bootmenu.startedmenu = 1
         end
         if SaveData.firstBootCompleted == true then
             
         end
-        if GameData.startedmenu == nil then
-            GameData.startedmenu = GameData.startedmenu or 0
+        if bootmenu.startedmenu == nil then
+            bootmenu.startedmenu = 0
         end
         if GameData.reopenmenu == true then
             Routine.run(bootDialogue)
@@ -1463,18 +1461,18 @@ function bootmenu.onInputUpdate()
                 Sound.playSFX("littleDialogue/smbx13/choose.wav")
             end
         end
-        if GameData.startedmenu == 0 then
+        if bootmenu.startedmenu == 0 then
             if player.keys.jump == KEYS_PRESSED then
                 Routine.run(bootDialogue)
-                GameData.startedmenu = GameData.startedmenu + 1
+                bootmenu.startedmenu = 1
             end
         end
-        if GameData.startedmenu == 1 then
+        if bootmenu.startedmenu == 1 then
             if player.keys.jump == KEYS_PRESSED then
                 --Nothing
             end
         end
-        if GameData.startedmenu == 2 then
+        if bootmenu.startedmenu == 2 then
             if player.keys.jump == KEYS_PRESSED then
                 Sound.changeMusic("_OST/All Stars Menu/Boot Menu (Crash SFX).ogg", 0)
                 Section(player.section).effects.weather = WEATHER_NONE
@@ -1495,7 +1493,7 @@ function bootmenu.onInputUpdate()
         if (Time.month() == 04 and Time.day() == 01) then
             if GameData.____holidayMenuEventExecuted == nil or GameData.____holidayMenuEventExecuted == false and GameData.____holidayMenuEventEnded == false then
                 if player.keys.jump == KEYS_PRESSED then
-                    GameData.startedmenu = 1
+                    bootmenu.startedmenu = 1
                     Sound.muteMusic(-1)
                     logo = false
                     datetime.bottomright = false
@@ -1518,15 +1516,13 @@ function bootmenu.onInputUpdate()
                 end
             end
         end
-        if GameData.startedmenu == 4 then
-            player.keys.jump = true
-            player.rawKeys.jump = true
+        if bootmenu.startedmenu == 4 then
             if player.keys.jump == KEYS_PRESSED then
-                Level.load("SMAS - Start.lvlx", nil, nil)
+                Level.load("SMAS - Start.lvlx")
             end
         end
         if SaveData.racaActivated == 1 then
-            GameData.startedmenu = 2
+            bootmenu.startedmenu = 2
         end
     end
 end
@@ -1734,10 +1730,10 @@ function bootmenu.onExit()
         Audio.MusicVolume(nil)
         autoscroll.unlockSection(0, 1)
         if SaveData.firstBootCompleted == true then
-            GameData.startedmenu = 0
+            bootmenu.startedmenu = 0
         end
         if SaveData.firstBootCompleted == false then
-            GameData.startedmenu = 1
+            bootmenu.startedmenu = 1
         end
         Defines.cheat_donthurtme = false
         Defines.cheat_shadowmario = false
