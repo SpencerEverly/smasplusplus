@@ -9,12 +9,12 @@ local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 
 function smascharacterinfo.onInitAPI()
-    registerEvent(smascharacterinfo,"onTick")
+    registerEvent(smascharacterinfo,"onTickEnd")
 end
 
 smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
 
-function smascharacterinfo.onTick()
+function smascharacterinfo.onTickEnd()
     local characters = {}
     
     local character = player.character;
@@ -61,7 +61,7 @@ function smascharacterinfo.onTick()
         starman.duration[996] = 769
         starman.duration[994] = 769
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/Super Mario All-Stars++ (Beta)/MIDIs/PSwitchSMB3-Remastered.mid|s1;"
+        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_2012beta.ogg"
     end
     if currentCostume == "01-SMB1-RETRO" then
         if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
