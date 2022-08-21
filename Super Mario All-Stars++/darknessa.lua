@@ -22,6 +22,7 @@ if isOverworld then
 end
 
 local blockutils = require("blocks/blockutils")
+local olddarkness = require("base/darkness")
 
 local colorparse = Color.parse
     
@@ -252,7 +253,7 @@ function darkness.Create(args)
         shader = Shader(),
         subshaders = {},
         ambient = args.ambient or baseambient,
-        priority = args.priority or 0,
+        priority = args.priority or -5,
         distanceField = args.distanceField or false,
         additiveBrightness = args.additiveBrightness,
         enabled = true
@@ -695,6 +696,13 @@ end
         registerEvent(darkness, "onNPCConfigChange")
         registerEvent(darkness, "onBlockConfigChange")
         registerEvent(darkness, "onBGOConfigChange")
+        
+        unregisterEvent(olddarkness, "onStart")
+        unregisterEvent(olddarkness, "onDraw")
+        unregisterEvent(olddarkness, "onCameraDraw")
+        unregisterEvent(olddarkness, "onNPCConfigChange")
+        unregisterEvent(olddarkness, "onBlockConfigChange")
+        unregisterEvent(olddarkness, "onBGOConfigChange")
     end
     
     local function updateIDMap(list, maxID, config)
@@ -1054,4 +1062,4 @@ end
 
 _G.Darkness = darkness
 
-return darkness;
+return darkness
