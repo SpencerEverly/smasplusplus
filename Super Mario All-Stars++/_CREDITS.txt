@@ -177,11 +177,11 @@ Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 ----Music Credits----
 
 - Some SMB1, SMB2, SMB3, LL, SMW music by LadiesMan217, Lu9, and Nintendo
-- Some other SMB1, SMB2, SMB3, LL, SMW music by The Mario Multiverse Team, with one song recreated by me in All-Stars 16 bit format (EmmaNerd), with other SMAS music by TheLegendofRenegade, Nimbus Cumulus, and some other people (See other music section)
+- Some other SMB1, SMB2, SMB3, LL, SMW music by The Mario Multiverse Team, with a few songs recreated by me in All-Stars 16 bit format (EmmaNerd, Amer1ciuM), with other SMAS music by TheLegendofRenegade, Nimbus Cumulus, and some other people (See other music section)
 - Some music by me:
-     - SMB1, LL, SMBS Map Music
-     - True Ending Music (Heaven Music 1)
-     - Dancing Mushrooms (By Blue Warrior, FL instrument remaster by me)
+    - SMB1 and SMBLL Map Music
+    - True Ending Music (Heaven Music 1)
+    - Dancing Mushrooms (By Blue Warrior, FL instrument remaster by me)
 
 Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research needed):
 
@@ -192,6 +192,7 @@ Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research 
 - NICKtendo DS (Birdo)
 - Pongball (Bonus)
 - Daniel Witt (Bowser)
+- Gigasoft (Land, Subcon)
 - Andrew Shand (Tower)
 
 Extra MIDIs (For theming) are by:
@@ -202,6 +203,7 @@ Extra MIDIs (For theming) are by:
 - LucasGTGamer123 (BeforeBossSMB2)
 - JexuBandicoot527 (BirdoAlt)
 - Name Witheld (JarSMB2)
+- FireMario (EndingSMB2, StarDDP, SubconsSavedSMB2), remastered by Spencer Everly 20 years later (No joke)
 - Lu9
 
 Other music played on the episode are made by:
