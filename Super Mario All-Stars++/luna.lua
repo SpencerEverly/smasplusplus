@@ -63,6 +63,7 @@ _G.smasbooleans = require("smasbooleans")
 _G.smastables = require("smastables")
 _G.smascheats = require("smascheats")
 _G.smashud = require("smashud")
+_G.smasstarsystem = require("starsystem")
 
 --Register some custom global event handlers...
 Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
@@ -183,16 +184,7 @@ if SaveData.clockTheme == nil then --Default clock theme is "normal"
     SaveData.clockTheme = "normal"
 end
 
---**Hud stuff, star counts**
-if SaveData.totalStarCount == nil then --This will make a new star count system that won't corrupt save files
-    SaveData.totalStarCount = 0
-end
-if SaveData.completeLevels == nil then --This will add a table to list completed levels when collecting win states
-    SaveData.completeLevels = {}
-end
-if SaveData.completeLevelsOptional == nil then --This will add a table to list completed levels when collecting win states in optional levels
-    SaveData.completeLevelsOptional = {}
-end
+--**Hud stuff**
 if SaveData.totalcoins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
     SaveData.totalcoins = 0
 end
@@ -207,11 +199,6 @@ if SaveData.totalCoinsClassic == nil then --This will display a classic coin cou
 end
 if SaveData.totalScoreClassic == nil then --This will add a score counter which goes up to a billion, cause why not
     SaveData.totalScoreClassic = 0
-end
-
-
-if SaveData.deathquickoption == true or SaveData.deathquickoption == false then --deathquickoption is unstable, so don't enable it if used before April
-    SaveData.deathquickoption = nil
 end
 
 --**1.3 Mode default setting**
@@ -369,7 +356,6 @@ function yesterdayget()
     SaveData.dateplayedyesterday = yesterdaynumber
 end
 
-local stardoor = Graphics.loadImageResolved("starlock.png")
 local cameratimer = 10
 local cameratimer2 = 10
 if GameData.__gifIsRecording == nil then
@@ -395,12 +381,6 @@ function onDraw()
         player.keys.pause = false
         if Player.count() >= 2 then
             player2.keys.pause = false
-        end
-    end
-    local warps = Warp.get()
-    for _,v in ipairs(warps) do
-        if v.isValid and (not v.isHidden) and v.starsRequired > SaveData.totalStarCount then
-            Graphics.drawImageToSceneWP(stardoor, v.entranceX + 0.5 * v.entranceWidth - 12, v.entranceY - 20, -40) --This will draw the star door locks, since the original image is invisible
         end
     end
     if noItemSound then
@@ -431,7 +411,7 @@ function onDraw()
     if GameData.__gifIsRecording then
         
     end
-    if SaveData.speedrunMode == true then
+    if SaveData.speedrunMode then
         Graphics.drawImageWP(inputhudbg,4,566,-1.9) -- Released Keys
         if player.keys.left == KEYS_DOWN then -- Pressed Left Key
             Graphics.drawImageWP(controlkey,8,578,-1) 
