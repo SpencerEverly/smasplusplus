@@ -6853,7 +6853,7 @@ ID:809;X:-99440;Y:-100384;D:-1;LR:"YoshiBossAddition";
 ID:809;X:-99408;Y:-100384;D:-1;LR:"YoshiBossAddition";
 ID:274;X:-159552;Y:-160146;D:-1;
 ID:165;X:-59840;Y:-60192;D:1;FD:1;NM:1;LR:"Subcon Rescue 1";
-ID:999;X:-59616;Y:-60192;D:-1;LR:"Star";LA:"End Door";
+ID:1000;X:-59616;Y:-60192;D:-1;LR:"Star";LA:"End Door";
 ID:165;X:-59616;Y:-60576;D:-1;FD:1;NM:1;LR:"Subcon Helpers 1";
 ID:165;X:-59568;Y:-60576;D:-1;FD:1;NM:1;LR:"Subcon Helpers 1";
 ID:165;X:-59520;Y:-60576;D:-1;FD:1;NM:1;LR:"Subcon Helpers 1";

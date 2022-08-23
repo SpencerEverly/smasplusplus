@@ -4933,7 +4933,7 @@ ID:767;X:-117424;Y:-120160;D:1;
 ID:178;X:-115136;Y:-120224;D:-1;LR:"Axe";ED:"Bridge Break";EE:"Axe";
 ID:200;X:-115392;Y:-120232;D:-1;ED:"Boss End";
 ID:198;X:-99392;Y:-100096;D:-1;MG:"Why are you reading this you nosy player lol";FD:1;LR:"Raca";
-ID:1000;X:-99632;Y:-100192;D:-1;LR:"Star";
+ID:1000;X:-99632;Y:-100192;D:-1;LR:"Star";XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:465;X:-99840;Y:-100096;D:-1;ED:"Cutscene 1";
 NPC_END
 DOORS

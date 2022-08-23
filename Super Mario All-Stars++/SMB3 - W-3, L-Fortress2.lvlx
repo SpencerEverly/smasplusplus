@@ -4239,7 +4239,7 @@ ID:323;X:-158752;Y:-160160;D:-1;LR:"Stretch Layers";
 ID:324;X:-158848;Y:-160096;D:1;LR:"Stretch Layers";
 ID:323;X:-158720;Y:-160320;D:-1;LR:"Stretch Layers";
 ID:324;X:-158816;Y:-160256;D:1;LR:"Stretch Layers";
-ID:999;X:-138816;Y:-140160;D:-1;LR:"Star";
+ID:1000;X:-138816;Y:-140160;D:-1;LR:"Star";
 ID:79;X:-138530;Y:-140086;D:-1;LR:"Boss Fake";EA:"Boss Start";
 ID:753;X:-138512;Y:-140072;D:-1;LR:"Boss Real";ED:"Boss End";
 NPC_END

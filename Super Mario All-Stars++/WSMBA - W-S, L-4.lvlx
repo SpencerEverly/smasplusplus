@@ -461,7 +461,7 @@ ID:25;X:-199168;Y:-200192;
 BGO_END
 NPC
 ID:94;X:-179520;Y:-180118;D:-1;MG:"Anata ni wa\, sukunakutomo kono hoshi o toru to\, nokosu koto wa dekimasu ka? Arigatogozaimasu.";FD:1;NM:1;
-ID:999;X:-179392;Y:-180160;D:-1;
+ID:1000;X:-179392;Y:-180160;D:-1;
 ID:12;X:-199230;Y:-200064;D:-1;
 ID:12;X:-199358;Y:-200064;D:-1;
 ID:21;X:-196800;Y:-200128;D:-1;

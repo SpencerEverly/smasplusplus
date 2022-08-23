@@ -1475,7 +1475,7 @@ ID:10;X:-197310;Y:-200352;D:-1;
 ID:616;X:-197088;Y:-200304;D:-1;
 ID:230;X:-196304;Y:-200128;D:-1;S1:2;GE:1;GT:2;GD:1;GM:25;
 ID:26;X:-195856;Y:-200256;D:-1;
-ID:1000;X:-177536;Y:-180192;D:-1;LR:"Star";
+ID:1000;X:-177536;Y:-180192;D:-1;LR:"Star";XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:134;X:-196508;Y:-200280;D:-1;GE:1;GT:1;GD:1;GM:20;
 ID:151;X:-195752;Y:-200176;D:-1;MG:"Will extend later. Take the spring to advance to the star for now<page>Also\, boss wip";FD:1;
 NPC_END

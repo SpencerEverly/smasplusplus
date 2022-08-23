@@ -1,0 +1,46 @@
+{
+	"style" : "groupbox",
+	"title" : "Star Settings",
+	"layout": [
+		{
+            "control": "checkbox",
+			"name": "activateFadeIn",
+			"title": "Enable Fade In Transition",
+            "tooltip": "Activate a fade in transition when collecting a star.",
+			"text-visible": false,
+			"value-default": true
+		},
+		{
+			"control": "checkbox",
+			"name": "incrementStarCount",
+			"title": "Increment Star Count",
+            "tooltip": "Will this increment the star count?",
+			"text-visible": false,
+			"value-default": true
+		},
+        {
+			"control": "checkbox",
+			"name": "addToTable",
+			"title": "Add to the Table",
+            "tooltip": "Will this increment the table the stars get collected on?",
+			"text-visible": false,
+			"value-default": true
+		},
+        {
+			"control": "checkbox",
+			"name": "useOptionalTable",
+			"title": "Use the optional table instead",
+            "tooltip": "Will this use the table that has the Optional Stars?",
+			"text-visible": false,
+			"value-default": false
+		},
+        {
+            "control": "comboBox",
+            "name": "winType",
+            "title": "Win Type",
+            "tooltip": "Type of victory to exit the level with.",
+            "elements": ["LEVEL_WIN_TYPE_NONE","LEVEL_WIN_TYPE_ROULETTE","LEVEL_WIN_TYPE_SMB3ORB","LEVEL_WIN_TYPE_OFFSCREEN","LEVEL_WIN_TYPE_KEYHOLE","LEVEL_WIN_TYPE_SMB2ORB","LEVEL_WIN_TYPE_WARP","LEVEL_WIN_TYPE_STAR","LEVEL_WIN_TYPE_TAPE"],
+            "value-default": 7
+        }
+    ]
+}

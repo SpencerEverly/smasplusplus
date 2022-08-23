@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 1\: Mushroom House #2";SZ:1;XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 1\: Mushroom House #2";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Challenge Menu & Toy Box.spc|0\;g=2.7";BG:33;
@@ -484,12 +484,12 @@ ID:60;X:-180128;Y:-180096;
 BGO_END
 NPC
 ID:94;X:-179712;Y:-180118;D:1;MG:"Again\, pick ALL the items you want upstairs! And you know\, the free star to the left.<page>(If you didn't know already...)";FD:1;NM:1;
-ID:999;X:-179776;Y:-180192;D:-1;
 ID:35;X:-179616;Y:-180384;D:-1;
 ID:170;X:-179680;Y:-180416;D:-1;
 ID:264;X:-179552;Y:-180416;D:-1;
 ID:169;X:-179808;Y:-180416;D:-1;
 ID:34;X:-179744;Y:-180384;D:-1;NM:1;
+ID:1000;X:-179776;Y:-180192;D:-1;
 NPC_END
 DOORS
 IX:-199424;IY:-200256;OX:-179600;OY:-180096;DT:2;ID:1;OD:3;

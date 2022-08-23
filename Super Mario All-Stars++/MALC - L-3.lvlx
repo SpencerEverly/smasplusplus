@@ -1795,7 +1795,7 @@ ID:476;X:-138176;Y:-140320;D:-1;
 ID:476;X:-138016;Y:-140384;D:-1;
 ID:476;X:-137920;Y:-140448;D:-1;
 ID:466;X:-137312;Y:-140128;D:-1;MG:"I'm so glad I just got saved. I found this in that reptile's basement. I hope it's useful.";FD:1;NM:1;LR:"But the princess is in another castle!";ET:"Mearian Saved";
-ID:1000;X:-137120;Y:-140192;D:-1;LR:"Star";
+ID:1000;X:-137120;Y:-140192;D:-1;LR:"Star";XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:466;X:-137312;Y:-140128;D:-1;MG:"It isn't much\, but I hope it'll be useful.";FD:1;NM:1;LR:"Failsafe";
 NPC_END
 PHYSICS

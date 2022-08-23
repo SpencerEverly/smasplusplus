@@ -4,15 +4,14 @@ local extrasounds = require("extrasounds")
 local Routine = require("routine")
 local rng = require("base/rng")
 local smasbooleans = require("smasbooleans")
+local smasstarsystem = require("smasstarsystem")
 
-local dudstar = {}
-
-dudstar.fadeIn = false
+local newstar = {}
 
 local npcID = NPC_ID
 local id = 1000
 
-local dudStarSettings = {
+local newstarSettings = {
     id = 1000,
     
     gfxwidth = 32,
@@ -57,7 +56,7 @@ local dudStarSettings = {
     
 }
 
-npcManager.setNpcSettings(dudStarSettings)
+npcManager.setNpcSettings(newstarSettings)
 npcManager.registerHarmTypes(npcID,
     {
         [HARM_TYPE_JUMP]            = 10,
@@ -73,8 +72,8 @@ npcManager.registerHarmTypes(npcID,
 
 local playervuln = false
 local playerwon = false
-dudstar.collectableIDList = {}
-dudstar.collectableIDMap  = {}
+newstar.collectableIDList = {}
+newstar.collectableIDMap  = {}
 
 function muteMusic(sectionid) --Mute all section music, or just mute a specific section
     if sectionid == -1 then --If -1, all section music will be muted
@@ -92,7 +91,7 @@ end
 
 local plr
 
-function starget()
+function starget(v)
     Misc.npcToCoins()
     for _,o in ipairs(Player.get()) do
         if o.idx ~= plr.idx then
@@ -112,29 +111,22 @@ function starget()
     playervuln = true
     playerwon = true
     Routine.wait(3, true)
-    dudstar.fadeIn = true
+    if v.data._settings.activateFadeIn then
+        smasstarsystem.fadeInActive = true
+    end
     Routine.wait(2, true)
     smasbooleans.musicMuted = false
     GameData.winStateActive = false
-    Level.exit(LEVEL_WIN_TYPE_STAR)
+    Level.exit(v.data._settings.winType)
 end
 
-local opacity = 0
-
-function dudstar.onDraw()
-    if dudstar.fadeIn then
-        opacity = opacity + 0.01
-        Graphics.drawScreen{color = Color.black .. opacity, priority = 6}
-    end
-end
-
-function dudstar.onPostNPCKill(v,reason)
-    if dudstar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
+function newstar.onPostNPCKill(v,reason)
+    if newstar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
         Routine.run(starget)
     end
 end
 
-function dudstar.onInputUpdate()
+function newstar.onInputUpdate()
     if playerwon then
         for k,p in ipairs(Player.get()) do
             p.upKeyPressing = false
@@ -151,7 +143,7 @@ function dudstar.onInputUpdate()
     end
 end
 
-function dudstar.animateNPC(v)
+function newstar.animateNPC(v)
     v.data.animationTimer = v.data.animationTimer + 1
     if v.data.animationTimer%NPC.config[v.id].framespeed == 0 then
         v.data.frame = v.data.frame + 1 
@@ -163,21 +155,27 @@ function dudstar.animateNPC(v)
     v.animationFrame = npcutils.getFrameByFramestyle(v, {frame=v.data.frame})
 end
 
-function dudstar.isStarCollected(npc, filename)
+function newstar.isStarCollected(npc, filename)
     local collected = false
-    if table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-        collected = true
+    if npc.data._settings.useOptionalTable then
+        if table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+            collected = true
+        end
+    else
+        if table.icontains(SaveData.completeLevels,Level.filename()) then
+            collected = true
+        end
     end
     return collected
 end
 
-function dudstar.onTickEndNPC(v)
+function newstar.onTickEndNPC(v)
     local data = v.data
  
     if not data.initialized then
         data._settings.starIndex = data._settings.starIndex or 1
         
-        data.collected = dudstar.isStarCollected(v, Level.filename())
+        data.collected = newstar.isStarCollected(v, Level.filename())
         if data.collected then
             data.frameMulti = 1
         else
@@ -190,7 +188,7 @@ function dudstar.onTickEndNPC(v)
  
     if Defines.levelFreeze then return end
  
-    dudstar.animateNPC(v)
+    newstar.animateNPC(v)
  
     if NPC.config[v.id].sparkles then
         v.ai4 = v.ai4 + 1
@@ -228,53 +226,70 @@ function dudstar.onTickEndNPC(v)
  
 end
 
-function dudstar.onPlayerHarm(evt)
+function newstar.onPlayerHarm(evt)
     if playervuln == true then
         evt.cancelled = true
     end
 end
 
-function dudstar.onPlayerKill(evt)
+function newstar.onPlayerKill(evt)
     if playervuln == true then
         evt.cancelled = true
     end
 end
 
-function dudstar.onPostNPCKill(v,reason)
-    if dudstar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
+function newstar.onPostNPCKill(v,reason)
+    if newstar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
         for _,p in ipairs(Player.get()) do
             if Colliders.collide(p, v) then
                 plr = p
             end
         end
-        Routine.run(starget)
+        Routine.run(starget, v)
         if GameData.rushModeActive == false or GameData.rushModeActive == nil then
             if Misc.inMarioChallenge() == false then
-                if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-                    table.insert(SaveData.completeLevelsOptional,Level.filename())
-                    SaveData.totalStarCount = SaveData.totalStarCount
-                elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-                    SaveData.totalStarCount = SaveData.totalStarCount
+                if v.data._settings.useOptionalTable then
+                    if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                        table.insert(SaveData.completeLevelsOptional,Level.filename())
+                        if v.data._settings.incrementStarCount then
+                            SaveData.totalStarCount = SaveData.totalStarCount + 1
+                        else
+                            SaveData.totalStarCount = SaveData.totalStarCount
+                        end
+                    elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
+                else
+                    if not table.icontains(SaveData.completeLevels,Level.filename()) then
+                        table.insert(SaveData.completeLevels,Level.filename())
+                        if v.data._settings.incrementStarCount then
+                            SaveData.totalStarCount = SaveData.totalStarCount + 1
+                        else
+                            SaveData.totalStarCount = SaveData.totalStarCount
+                        end
+                    elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
                 end
             end
         end
     end
 end
 
-function dudstar.onInitAPI()
-    npcManager.registerEvent(npcID,dudstar,"onTickNPC")
-    npcManager.registerEvent(npcID,dudstar,"onTickEndNPC")
-    npcManager.registerEvent(npcID,dudstar,"onDrawNPC")
+function newstar.onInitAPI()
+    npcManager.registerEvent(npcID,newstar,"onTickNPC")
+    npcManager.registerEvent(npcID,newstar,"onTickEndNPC")
+    npcManager.registerEvent(npcID,newstar,"onDrawNPC")
     
-    table.insert(dudstar.collectableIDList,id)
-    dudstar.collectableIDMap[id] = true
+    table.insert(newstar.collectableIDList,id)
+    newstar.collectableIDMap[id] = true
     
-    registerEvent(dudstar,"onPlayerHarm")
-    registerEvent(dudstar,"onPlayerKill")
-    registerEvent(dudstar,"onInputUpdate")
-    registerEvent(dudstar,"onPostNPCKill")
-    registerEvent(dudstar,"onExit")
-    registerEvent(dudstar,"onDraw")
+    registerEvent(newstar,"onPlayerHarm")
+    registerEvent(newstar,"onPlayerKill")
+    registerEvent(newstar,"onInputUpdate")
+    registerEvent(newstar,"onPostNPCKill")
+    registerEvent(newstar,"onExit")
+    registerEvent(newstar,"onDraw")
 end
 
-return dudstar
+return newstar

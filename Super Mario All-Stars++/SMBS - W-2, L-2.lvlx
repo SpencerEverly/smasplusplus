@@ -3407,7 +3407,7 @@ ID:151;X:-199784;Y:-200112;D:-1;MG:"Need help? Talk to me\, the Red Spiny withou
 ID:753;X:-199472;Y:-200128;D:-1;MG:"<boxStyle dr><portrait sans>hey <characterName>. who's this with ya?";FD:1;NM:1;LR:"SansTalkable";ET:"Cutscene 2 - 0";
 ID:754;X:-199488;Y:-200128;D:-1;FD:1;NM:1;LR:"SansShrug";
 ID:753;X:-199472;Y:-200128;D:-1;FD:1;NM:1;LR:"SansIdle";
-ID:999;X:-179392;Y:-180192;D:-1;
+ID:1000;X:-179392;Y:-180192;D:-1;
 ID:751;X:-199352;Y:-200104;D:-1;MG:"If you asked me what happened just now\, I'll just mumble incoherient blabble... in other words\, me neither.";FD:1;NM:1;LR:"RedSpinyTalk";
 ID:465;X:-199872;Y:-200096;D:-1;ED:"Cutscene 1";
 ID:1;X:-159584;Y:-160256;D:-1;

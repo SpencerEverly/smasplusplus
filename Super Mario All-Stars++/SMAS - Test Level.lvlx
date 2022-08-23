@@ -1385,8 +1385,7 @@ ID:151;X:-179392;Y:-180176;D:-1;MG:"Section 6\: SMB3 Exit";FD:1;NM:1;
 ID:175;X:-199456;Y:-200096;D:-1;GE:1;GT:1;GD:1;GM:10;
 ID:151;X:-179776;Y:-180176;D:-1;MG:"Section 7\: Green Screen";FD:1;NM:1;
 ID:985;X:-79040;Y:-80160;D:-1;
-ID:999;X:-79136;Y:-80160;D:-1;
-ID:1000;X:-79776;Y:-80160;D:-1;
+ID:1000;X:-79776;Y:-80160;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:151;X:-79792;Y:-80080;D:-1;MG:"Dud Goals";FD:1;
 ID:151;X:-79104;Y:-80080;D:-1;MG:"Real Goals";FD:1;
 ID:89;X:-119376;Y:-120192;D:-1;
@@ -1398,6 +1397,7 @@ ID:986;X:-79616;Y:-80352;D:-1;
 ID:984;X:-78280;Y:-80272;D:1;XTRA:"{\n    \"exitType\"\: 7\,\n    \"stopBehind\"\: false\n}\n";
 ID:614;X:-159552;Y:-160080;D:1;
 ID:45;X:-199744;Y:-200096;D:-1;
+ID:1000;X:-79136;Y:-80160;D:-1;XTRA:"{\n    \"incrementStarCount\"\: true\,\n    \"useOptionalTable\"\: false\n}\n";
 NPC_END
 DOORS
 IX:-179472;IY:-180064;OX:-159296;OY:-160064;DT:2;ID:1;OD:1;TW:1;

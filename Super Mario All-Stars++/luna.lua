@@ -63,7 +63,7 @@ _G.smasbooleans = require("smasbooleans")
 _G.smastables = require("smastables")
 _G.smascheats = require("smascheats")
 _G.smashud = require("smashud")
-_G.smasstarsystem = require("starsystem")
+_G.smasstarsystem = require("smasstarsystem")
 
 --Register some custom global event handlers...
 Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
@@ -168,7 +168,7 @@ Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/
 Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
 Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
 
---First time SaveData setting, for resolutions and other settings
+--First time SaveData settings, for resolutions and other settings
 
 --**Themes, resolutions**
 if SaveData.resolution == nil then --By default, the resolution will be set as fullscreen.

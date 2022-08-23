@@ -4409,7 +4409,7 @@ ID:203;X:-197536;Y:-200096;
 BGO_END
 NPC
 ID:198;X:80640;Y:79872;D:-1;FD:1;EA:"SMB End Sequence Walk";
-ID:999;X:80704;Y:79840;D:-1;LR:"Hidden";
+ID:1000;X:-39600;Y:-40288;D:-1;LR:"Hidden";
 ID:86;X:61713;Y:59792;D:-1;EA:"Real Bowser Start";ED:"Real Bowser Dead";
 ID:178;X:40576;Y:39776;D:-1;LR:"Axe";ED:"Axed";
 ID:200;X:40480;Y:39768;D:-1;ED:"Fake Bowser Dead";
