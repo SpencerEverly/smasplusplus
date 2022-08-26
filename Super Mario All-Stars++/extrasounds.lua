@@ -89,6 +89,8 @@ extrasounds.useOriginalBlockSproutInstead = false
 --**NPC SETTINGS**
 --Whenever to use the original NPC fireball sound instead of using the other custom sounds.
 extrasounds.useOriginalBowserFireballInstead = false
+--Whenever to enable ice block freezing or not.
+extrasounds.enableIceBlockFreezing = true
 --Whenever to enable ice block breaking or not.
 extrasounds.enableIceBlockBreaking = true
 --Whenever to enable the enemy stomping SFX.
@@ -312,8 +314,44 @@ extrasounds.stockSoundNumbersInOrder = table.map{2,3,5,6,9,11,12,13,16,17,19,20,
 
 extrasounds.allVanillaSoundNumbersInOrder = table.map{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91}
 
-function extrasounds.isExtraSoundsActive()
-    return extrasounds.active
+function extrasounds.playSFX(name, volume, loops, delay) --If you want to play any sound, you can use extrasounds.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
+    if unexpected_condition then error("That sound doesn't exist. Play something else.") end
+    
+    if name == nil then
+        error("That sound doesn't exist. Play something else.")
+        return
+    end
+    
+    if volume == nil then
+        volume = extrasounds.volume
+    end
+    if extrasounds.volume == nil then
+        volume = 1
+    end
+    if loops == nil then
+        loops = 1
+    end
+    if delay == nil then
+        delay = 4
+    end
+    
+    if extrasounds.active then
+        if extrasounds.sound.sfx[name] and not extrasounds.stockSoundNumbersInOrder[name] then
+            SFX.play(extrasounds.sound.sfx[name], volume, loops, delay)
+        elseif extrasounds.stockSoundNumbersInOrder[name] then
+            SFX.play(name, volume, loops, delay)
+        elseif name then
+            local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+            SFX.play(file, volume, loops, delay) --Then play it afterward
+        end
+    elseif not extrasounds.active then
+        if extrasounds.allVanillaSoundNumbersInOrder[name] then
+            SFX.play(name, volume, loops, delay)
+        elseif name then
+            local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+            SFX.play(file, volume, loops, delay) --Then play it afterward
+        end
+    end
 end
 
 local spinjumpablebricks = table.map{90,526}
@@ -435,7 +473,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 if p:isOnGround() or p:isClimbing() or isInQuicksand(p) then
                     if (p:mem(0x11E, FIELD_BOOL) and p.keys.jump == KEYS_PRESSED) then
                         if extrasounds.enableJumpingSFX then
-                            Sound.playSFX(1)
+                            extrasounds.playSFX(1)
                         end
                     end
                 end
@@ -450,11 +488,11 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 if (p:mem(0x11E, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then
                     if not extrasounds.useJumpSoundInsteadWhenUnmountingYoshi then
                         if extrasounds.enableBootSFX then
-                            Sound.playSFX(35)
+                            extrasounds.playSFX(35)
                         end
                     elseif extrasounds.useJumpSoundInsteadWhenUnmountingYoshi then
                         if extrasounds.enableJumpingSFX then
-                            Sound.playSFX(1)
+                            extrasounds.playSFX(1)
                         end
                     end
                 end
@@ -469,9 +507,9 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             if (p:mem(0x00, FIELD_BOOL) and p:mem(0x174, FIELD_BOOL) and p.keys.jump == KEYS_PRESSED) then
                 if extrasounds.enableDoubleJumpingSFX then
                     if extrasounds.useOriginalJumpForDoubleJump then
-                        Sound.playSFX(1)
+                        extrasounds.playSFX(1)
                     elseif not extrasounds.useOriginalJumpForDoubleJump then
-                        Sound.playSFX(158)
+                        extrasounds.playSFX(158)
                     end
                 end
             end
@@ -484,7 +522,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             if p:isOnGround() then
                 if (p.speedX < 0 and p.keys.right) or (p.speedX > 0 and p.keys.left) then --Is the player sliding?
                     if extrasounds.enableSlidingSFX then
-                        Sound.playSFX(10, extrasounds.volume, 1, extrasounds.playerSlidingDelay) --Sliding SFX
+                        extrasounds.playSFX(10, extrasounds.volume, 1, extrasounds.playerSlidingDelay) --Sliding SFX
                     end
                 end
             end
@@ -496,7 +534,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             if p.powerup == 4 or p.powerup == 5 then
                 if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0) and not p.keys.down then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking?
                     if extrasounds.enableTailAttackSFX then
-                        Sound.playSFX(33)
+                        extrasounds.playSFX(33)
                     end
                 end
             end
@@ -509,7 +547,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             if p:isOnGround() then --If on the ground...
                 if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
                     if extrasounds.enableSpinjumpingSFX then
-                        Sound.playSFX(33)
+                        extrasounds.playSFX(33)
                     end
                 end
             end
@@ -528,15 +566,15 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 if spinballtimer == 1 then --If the timer is 0...
                     if p.powerup == 3 then --Fireball sound
                         if extrasounds.enableFireFlowerSFX then
-                            Sound.playSFX(18)
+                            extrasounds.playSFX(18)
                         end
                     end
                     if p.powerup == 7 then --Iceball sound
                         if extrasounds.enableIceFlowerSFX then
                             if not extrasounds.useFireSoundForIce then
-                                Sound.playSFX(93)
+                                extrasounds.playSFX(93)
                             elseif extrasounds.useFireSoundForIce then
-                                Sound.playSFX(18)
+                                extrasounds.playSFX(18)
                             end
                         end
                     end
@@ -560,7 +598,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                     if p.holdingNPC == v and p.keys.run then
                         if holdingtimer == 1 then
                             if extrasounds.enableGrabShellSFX then
-                                Sound.playSFX(156)
+                                extrasounds.playSFX(156)
                             end
                         end
                     end
@@ -574,7 +612,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 if Level.endState() <= 0 then --Make sure to not activate when the endState is greater than 1
                     if not GameData.winStateActive or GameData.winStateActive == nil then --SMAS++ episode specific, you don't need this for anything outside of SMAS++
                         if extrasounds.playPSwitchTimerSFX then
-                            Sound.playSFX(118, extrasounds.volume, 1, extrasounds.pSwitchTimerDelay)
+                            extrasounds.playSFX(118, extrasounds.volume, 1, extrasounds.pSwitchTimerDelay)
                         end
                     end
                 end
@@ -582,7 +620,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 if Level.endState() <= 0 then --Make sure to not activate when the endState is greater than 1
                     if not GameData.winStateActive or GameData.winStateActive == nil then --SMAS++ episode specific, you don't need this for anything outside of SMAS++
                         if extrasounds.playPSwitchTimerSFX then
-                            Sound.playSFX(118, extrasounds.volume, 1, extrasounds.pSwitchTimerDelayFast)
+                            extrasounds.playSFX(118, extrasounds.volume, 1, extrasounds.pSwitchTimerDelayFast)
                         end
                     end
                 end
@@ -595,12 +633,12 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 if p:mem(0x66, FIELD_BOOL) == false and p.deathTimer <= 0 and p.forcedState == FORCEDSTATE_NONE and Level.endState() <= 0 then
                     if p:mem(0x16C, FIELD_BOOL) == true then
                         if extrasounds.enablePWingSFX then
-                            Sound.playSFX(121, extrasounds.volume, 1, extrasounds.pWingDelay)
+                            extrasounds.playSFX(121, extrasounds.volume, 1, extrasounds.pWingDelay)
                         end
                     end
                     if p:mem(0x170, FIELD_WORD) >= 1 then
                         if extrasounds.enablePWingSFX then
-                            Sound.playSFX(121, extrasounds.volume, 1, extrasounds.pWingDelay)
+                            extrasounds.playSFX(121, extrasounds.volume, 1, extrasounds.pWingDelay)
                         end
                     end
                 end
@@ -615,7 +653,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             for k,v in ipairs(NPC.get(45)) do --Throw blocks/ice blocks, used for when they melt
                 if v.ai2 == 449 then
                     if extrasounds.enableIceMeltingSFX then
-                        Sound.playSFX(157)
+                        extrasounds.playSFX(157)
                     end
                 end
             end
@@ -627,9 +665,9 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 if v.ai4 == 4 then
                     if v.ai3 == 25 then
                         if not extrasounds.useOriginalBowserFireballInstead then
-                            Sound.playSFX(115)
+                            extrasounds.playSFX(115)
                         elseif extrasounds.useOriginalBowserFireballInstead then
-                            Sound.playSFX(42)
+                            extrasounds.playSFX(42)
                         end
                     end
                 end
@@ -638,22 +676,22 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             for k,v in ipairs(NPC.get(200)) do --Make sure the seperate Bowser fire sound plays when SMB1 Bowser actually fires up a fireball
                 if v.ai3 == 40 then
                     if not extrasounds.useOriginalBowserFireballInstead then
-                        Sound.playSFX(115)
+                        extrasounds.playSFX(115)
                     elseif extrasounds.useOriginalBowserFireballInstead then
-                        Sound.playSFX(42)
+                        extrasounds.playSFX(42)
                     end
                 end
             end
             --*SMW Ludwig Koopa*
             for k,v in ipairs(NPC.get(280)) do --Make sure the actual fire sound plays when Ludwig Koopa actually fires up a fireball
                 if v.ai1 == 2 then
-                    Sound.playSFX(42, extrasounds.volume, 1, 35)
+                    extrasounds.playSFX(42, extrasounds.volume, 1, 35)
                 end
             end
             --*SMB3 Boom Boom*
             for k,v in ipairs(NPC.get(15)) do --Adding a hurt sound for Boom Boom cause why not lol
                 if v.ai1 == 4 then
-                    Sound.playSFX(39, extrasounds.volume, 1, 100)
+                    extrasounds.playSFX(39, extrasounds.volume, 1, 100)
                 end
             end
             
@@ -665,7 +703,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             --*Toad's Boomerang*
             for k,v in ipairs(NPC.get(292)) do --Boomerang sounds! (Toad's Boomerang)
                 if extrasounds.enableToadBoomerangSFX then
-                    Sound.playSFX(116, extrasounds.volume, 1, 12)
+                    extrasounds.playSFX(116, extrasounds.volume, 1, 12)
                 end
             end
             --*Boomerang Bro. Projectile*
@@ -676,7 +714,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                     if boomerangbrox <= -800 or boomerangbrox <= 800 then
                         if boomerangbroy <= -600 or boomerangbroy <= 600 then
                             --Text.print(boomerangbrox, 100, 100)
-                            Sound.playSFX(116, extrasounds.volume, 1, 12)
+                            extrasounds.playSFX(116, extrasounds.volume, 1, 12)
                         end
                     end
                 end
@@ -688,27 +726,27 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             if not isOverworld then
                 for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
                     if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
-                        Sound.playSFX(15)
+                        extrasounds.playSFX(15)
                     end
                     if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
                         if not extrasounds.use1UPSoundForAll1UPs then
-                            Sound.playSFX(96)
+                            extrasounds.playSFX(96)
                         elseif extrasounds.use1UPSoundForAll1UPs then
-                            Sound.playSFX(15)
+                            extrasounds.playSFX(15)
                         end
                     end
                     if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
                         if not extrasounds.use1UPSoundForAll1UPs then
-                            Sound.playSFX(97)
+                            extrasounds.playSFX(97)
                         elseif extrasounds.use1UPSoundForAll1UPs then
-                            Sound.playSFX(15)
+                            extrasounds.playSFX(15)
                         end
                     end
                     if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
                         if not extrasounds.use1UPSoundForAll1UPs then
-                            Sound.playSFX(98)
+                            extrasounds.playSFX(98)
                         elseif extrasounds.use1UPSoundForAll1UPs then
-                            Sound.playSFX(15)
+                            extrasounds.playSFX(15)
                         end
                     end
                 end
@@ -720,14 +758,14 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 for index,explosion in ipairs(Animation.get(69)) do --Explosions!
                     if extrasounds.enableSMB2ExplosionSFX then
                         if not extrasounds.useFireworksInsteadOfOtherExplosions then
-                            Sound.playSFX(104, extrasounds.volume, 1, 70)
+                            extrasounds.playSFX(104, extrasounds.volume, 1, 70)
                         elseif extrasounds.useFireworksInsteadOfOtherExplosions then
-                            Sound.playSFX(43, extrasounds.volume, 1, 70)
+                            extrasounds.playSFX(43, extrasounds.volume, 1, 70)
                         end
                     end
                 end
                 for index,explosion in ipairs(Animation.get(71)) do
-                    Sound.playSFX(43, extrasounds.volume, 1, 70)
+                    extrasounds.playSFX(43, extrasounds.volume, 1, 70)
                 end
             end
             
@@ -742,7 +780,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 npctocointimer = npctocointimer + 1
                 if extrasounds.enableNPCtoCoin then
                     if npctocointimer == 1 then
-                        Sound.playSFX(14)
+                        extrasounds.playSFX(14)
                     end
                 end
             end
@@ -787,7 +825,7 @@ function bricksmashsound(block, fromUpper, playerornil) --This will smash bricks
     Routine.waitFrames(2, true)
     if block.isHidden and block.layerName == "Destroyed Blocks" then
         if extrasounds.enableBrickSmashing then
-            Sound.playSFX(blockSmashTable[block.id])
+            extrasounds.playSFX(blockSmashTable[block.id])
         end
     end
 end
@@ -796,7 +834,7 @@ function brickkillsound(block, hitter) --Alternative way to play the sound. Used
     Routine.waitFrames(2, true)
     if block.isHidden and block.layerName == "Destroyed Blocks" then
         if extrasounds.enableBrickSmashing then
-            Sound.playSFX(blockSmashTable[block.id])
+            extrasounds.playSFX(blockSmashTable[block.id])
         end
     end
 end
@@ -834,37 +872,37 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
                 end
                 if block.contentID == 1225 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
                     if not extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(92)
+                        extrasounds.playSFX(92)
                     elseif extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(7)
+                        extrasounds.playSFX(7)
                     end
                 elseif block.contentID == 1226 then
                     if not extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(92)
+                        extrasounds.playSFX(92)
                     elseif extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(7)
+                        extrasounds.playSFX(7)
                     end
                 elseif block.contentID == 1227 then
                     if not extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(92)
+                        extrasounds.playSFX(92)
                     elseif extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(7)
+                        extrasounds.playSFX(7)
                     end
                 elseif block.contentID == 1997 then
                     if not extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(149)
+                        extrasounds.playSFX(149)
                     elseif extrasounds.useOriginalBlockSproutInstead then
-                        Sound.playSFX(7)
+                        extrasounds.playSFX(7)
                     end
                 elseif block.contentID == 0 then --This is to prevent a coin sound from playing when hitting an nonexistant block
                     
                 elseif block.contentID == 1000 then --Same as last
                     
                 elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
-                    Sound.playSFX(7)
+                    extrasounds.playSFX(7)
                 elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
                     if extrasounds.enableBlockCoinCollecting then
-                        Sound.playSFX(14)
+                        extrasounds.playSFX(14)
                     end
                 end
                 
@@ -873,7 +911,7 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
                 
                 --**BOWSER BRICKS**
                 if block.id == 186 then --SMB3 Bowser Brick detection, thanks to looking at the source code
-                    Sound.playSFX(43)
+                    extrasounds.playSFX(43)
                 end
                 
                 
@@ -900,9 +938,9 @@ function extrasounds.onPostPlayerKill()
     
             --**PLAYER DYING**
             if p.character == CHARACTER_LINK then
-                Sound.playSFX(80)
+                extrasounds.playSFX(80)
             else
-                Sound.playSFX(8)
+                extrasounds.playSFX(8)
             end
         
         
@@ -927,24 +965,24 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 local isShootingIce = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and p.powerup == 7)
                 if isShootingFire then --Fireball sound
                     if extrasounds.enableFireFlowerSFX then
-                        Sound.playSFX(18, extrasounds.volume, 1, 25)
+                        extrasounds.playSFX(18, extrasounds.volume, 1, 25)
                     end
                 end
                 if isShootingHammer then --Hammer Throw sound
                     if extrasounds.enableHammerSuitSFX then
                         if not extrasounds.useFireSoundForHammerSuit then
-                            Sound.playSFX(105, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(105, extrasounds.volume, 1, 25)
                         elseif extrasounds.useFireSoundForHammerSuit then
-                            Sound.playSFX(18, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(18, extrasounds.volume, 1, 25)
                         end
                     end
                 end
                 if isShootingIce then --Iceball sound
                     if extrasounds.enableIceFlowerSFX then
                         if not extrasounds.useFireSoundForIce then
-                            Sound.playSFX(93, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(93, extrasounds.volume, 1, 25)
                         elseif extrasounds.useFireSoundForIce then
-                            Sound.playSFX(18, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(18, extrasounds.volume, 1, 25)
                         end
                     end
                 end
@@ -954,7 +992,7 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 --*YOSHI FIRE SPITTING*
                 if p:mem(0x68, FIELD_BOOL) == true then --If it's detected that Yoshi has the fire ability...
                     if p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED then --Then if it's spit out...
-                        Sound.playSFX(42) --Play the sound
+                        extrasounds.playSFX(42) --Play the sound
                     end
                 end
                 
@@ -981,31 +1019,31 @@ function extrasounds.onPostNPCHarm(npc, harmtype, player)
                 --*SMB1 Bowser*
                 if harmtype ~= HARM_TYPE_VANISH then
                     if npc.id == 200 then --Play the hurt sound when hurting SMB1 Bowser
-                        Sound.playSFX(39)
+                        extrasounds.playSFX(39)
                     end
                     --*SMB3 Bowser*
                     if npc.id == 86 then --Play the hurt sound when hurting SMB3 Bowser
-                        Sound.playSFX(39)
+                        extrasounds.playSFX(39)
                     end
                     --*SMB3 Boom Boom*
                     if npc.id == 15 then --Play the hurt sound when hurting SMB3 Boom Boom
-                        Sound.playSFX(39)
+                        extrasounds.playSFX(39)
                     end
                     --*SMB3 Larry Koopa*
                     if npc.id == 267 or npc.id == 268 then --Play the hurt sound when hurting SMB3 Larry Koopa
-                        Sound.playSFX(39)
+                        extrasounds.playSFX(39)
                     end
                     --*SMB2 Birdo*
                     if npc.id == 39 then --Play the hurt sound when hurting SMB2 Birdo
-                        Sound.playSFX(39)
+                        extrasounds.playSFX(39)
                     end
                     --*SMB2 Mouser*
                     if npc.id == 262 then --Play the hurt sound when hurting SMB2 Mouser
-                        Sound.playSFX(39)
+                        extrasounds.playSFX(39)
                     end
                     --*SMB2 Wart*
                     if npc.id == 201 then --Play the hurt sound when hurting SMB2 Wart
-                        Sound.playSFX(39)
+                        extrasounds.playSFX(39)
                     end
                 end
                 
@@ -1029,7 +1067,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 --**STOMPING**
                 if harmtype == HARM_TYPE_JUMP then
                     if extrasounds.enableEnemyStompingSFX then
-                        --Sound.playSFX(2)
+                        --extrasounds.playSFX(2)
                     end
                 end
                 
@@ -1040,7 +1078,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 --**FIREBALL HIT**
                 if npc.id == 13 and harmtype ~= HARM_TYPE_VANISH then
                     if extrasounds.enableFireFlowerHitting then
-                        Sound.playSFX(155)
+                        extrasounds.playSFX(155)
                     end
                 end
                 
@@ -1051,7 +1089,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 --**ICE BREAKING**
                 if npc.id == 263 and harmtype ~= HARM_TYPE_VANISH then
                     if extrasounds.enableIceBlockBreaking then
-                        Sound.playSFX(95)
+                        extrasounds.playSFX(95)
                     end
                 end
                 
@@ -1064,11 +1102,11 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                     if p.character == CHARACTER_PEACH or p.character == CHARACTER_TOAD or p.character == CHARACTER_LINK or p.character == CHARACTER_KLONOA or p.character == CHARACTER_ROSALINA or p.character == CHARACTER_ULTIMATERINKA or p.character == CHARACTER_STEVE then
                         if p:mem(0x16, FIELD_WORD) <= 2 then
                             if extrasounds.enableHPCollecting then
-                                Sound.playSFX(131)
+                                extrasounds.playSFX(131)
                             end
                         elseif p:mem(0x16, FIELD_WORD) == 3 then
                             if extrasounds.enableHPCollecting then
-                                Sound.playSFX(132)
+                                extrasounds.playSFX(132)
                             end
                         end
                     end
@@ -1078,16 +1116,16 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 
                 --**PLAYER SMASHING**
                 if allsmallenemies[npc.id] and harmtype == HARM_TYPE_SPINJUMP then
-                    Sound.playSFX(36)
+                    extrasounds.playSFX(36)
                 end
                 if npc.id >= 751 and harmtype == HARM_TYPE_SPINJUMP then
-                    Sound.playSFX(36)
+                    extrasounds.playSFX(36)
                 end
                 if allbigenemies[npc.id] and harmtype == HARM_TYPE_SPINJUMP then
                     if not extrasounds.useOriginalSpinJumpForBigEnemies then
-                        Sound.playSFX(125)
+                        extrasounds.playSFX(125)
                     elseif extrasounds.useOriginalSpinJumpForBigEnemies then
-                        Sound.playSFX(36)
+                        extrasounds.playSFX(36)
                     end
                 end
                 
@@ -1097,7 +1135,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 --**COIN COLLECTING**
                 if coins[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
                     if extrasounds.enableCoinCollecting then
-                        Sound.playSFX(14)
+                        extrasounds.playSFX(14)
                     end
                 end
                 
@@ -1107,7 +1145,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 --**CHERRY COLLECTING**
                 if npc.id == 558 and Colliders.collide(p, npc) then --Cherry sound effect
                     if extrasounds.enableCherryCollecting then
-                        Sound.playSFX(103)
+                        extrasounds.playSFX(103)
                     end
                 end
                 
@@ -1117,7 +1155,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 --**ICE BLOCKS (THROW BLOCKS)**
                 if npc.id == 45 and npc.ai2 < 449 then
                     if extrasounds.enableBrickSmashing then
-                        Sound.playSFX(4)
+                        extrasounds.playSFX(4)
                     end
                 end
                 
@@ -1126,7 +1164,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 --**SMW POWER STARS**
                 if npc.id == 196 then
                     if extrasounds.enableStarCollecting then
-                        Sound.playSFX(59)
+                        extrasounds.playSFX(59)
                     end
                 end
                 
@@ -1137,27 +1175,27 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 if npc.id == 274 and Colliders.collide(p, npc) then --Dragon coin counter sounds
                     if not extrasounds.useOriginalDragonCoinSounds then
                         if NPC.config[npc.id].score == 7 then
-                            Sound.playSFX(59)
+                            extrasounds.playSFX(59)
                         elseif NPC.config[npc.id].score == 8 then
-                            Sound.playSFX(99)
+                            extrasounds.playSFX(99)
                         elseif NPC.config[npc.id].score == 9 then
-                            Sound.playSFX(100)
+                            extrasounds.playSFX(100)
                         elseif NPC.config[npc.id].score == 10 then
-                            Sound.playSFX(101)
+                            extrasounds.playSFX(101)
                         elseif NPC.config[npc.id].score == 11 then
-                            Sound.playSFX(102)
+                            extrasounds.playSFX(102)
                         end
                     elseif extrasounds.useOriginalDragonCoinSounds then
                         if NPC.config[npc.id].score == 7 then
-                            Sound.playSFX(59)
+                            extrasounds.playSFX(59)
                         elseif NPC.config[npc.id].score == 8 then
-                            Sound.playSFX(59)
+                            extrasounds.playSFX(59)
                         elseif NPC.config[npc.id].score == 9 then
-                            Sound.playSFX(59)
+                            extrasounds.playSFX(59)
                         elseif NPC.config[npc.id].score == 10 then
-                            Sound.playSFX(59)
+                            extrasounds.playSFX(59)
                         elseif NPC.config[npc.id].score == 11 then
-                            Sound.playSFX(59)
+                            extrasounds.playSFX(59)
                         end
                     end
                 end
@@ -1168,7 +1206,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 for k,v in ipairs(NPC.get({19,20,25,130,131,132,470,471,129,345,346,347,371,372,373,272,350,530,374,247,206})) do --SMB2 Enemies
                     if (v.killFlag ~= 0) and not (v.killFlag == HARM_TYPE_VANISH) then
                         if extrasounds.enableSMB2EnemyKillSounds then
-                            Sound.playSFX(126)
+                            extrasounds.playSFX(126)
                         end
                     end
                 end
