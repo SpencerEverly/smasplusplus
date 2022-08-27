@@ -870,25 +870,13 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
                 if block.contentID == nil then --For blocks that are already used
                     
                 end
-                if block.contentID == 1225 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
+                if block.contentID == 1225 or block.contentID == 1226 or block.contentID == 1227 then --Add 1000 to get an actual content ID number. The first three are vine blocks.
                     if not extrasounds.useOriginalBlockSproutInstead then
                         extrasounds.playSFX(92)
                     elseif extrasounds.useOriginalBlockSproutInstead then
                         extrasounds.playSFX(7)
                     end
-                elseif block.contentID == 1226 then
-                    if not extrasounds.useOriginalBlockSproutInstead then
-                        extrasounds.playSFX(92)
-                    elseif extrasounds.useOriginalBlockSproutInstead then
-                        extrasounds.playSFX(7)
-                    end
-                elseif block.contentID == 1227 then
-                    if not extrasounds.useOriginalBlockSproutInstead then
-                        extrasounds.playSFX(92)
-                    elseif extrasounds.useOriginalBlockSproutInstead then
-                        extrasounds.playSFX(7)
-                    end
-                elseif block.contentID == 1997 then
+                elseif block.contentID == 1997 or block.contentID == 1425 then --Megashroom block, also compatible with SMAS++
                     if not extrasounds.useOriginalBlockSproutInstead then
                         extrasounds.playSFX(149)
                     elseif extrasounds.useOriginalBlockSproutInstead then
