@@ -2,9 +2,9 @@ HEAD
 TL:"Super Mario Bros. 1\: World 6-2";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-192544;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Athletic.spc|0\;g=2.5";BG:8;
-SC:1;L:-180000;R:-176896;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Staff Roll.spc|0\;g=2.5";BG:8;
-SC:2;L:-160000;R:-157920;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;
+SC:0;L:-200000;R:-192544;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Athletic.spc|0\;g=2.5";BG:8;SR:1;
+SC:1;L:-180000;R:-176896;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Staff Roll.spc|0\;g=2.5";BG:8;SR:1;
+SC:2;L:-160000;R:-157920;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;SR:1;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;
 SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;
 SC:5;L:-100000;R:-99200;T:-100600;B:-100000;MZ:0;MF:"";BG:0;

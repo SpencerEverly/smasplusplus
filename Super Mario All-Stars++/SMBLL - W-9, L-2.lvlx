@@ -2,7 +2,8 @@ HEAD
 TL:"Super Mario Bros. Lost Levels\: World 9-2";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-194784;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;
+SC:0;L:-200000;R:-194784;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;SR:1;
+SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
 ID:1;X:-199900;Y:-200118;D:1;

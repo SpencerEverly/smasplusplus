@@ -2,8 +2,8 @@ HEAD
 TL:"Super Mario Bros. Lost Levels\: World 1-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-194240;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:1;L:-180000;R:-177472;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Album.spc|0\;g=2.5";BG:10;
+SC:0;L:-200000;R:-194240;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;SR:1;
+SC:1;L:-180000;R:-177472;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Album.spc|0\;g=2.5";BG:10;SR:1;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
@@ -2322,6 +2322,6 @@ ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Boss End";SSS:["ID\:0\;SL\:-195104\;ST\:-200600\;SB\:-200000\;SR\:-194240\;MI\:0\;"];AS:0;AX:0;AY:0;
-ET:"Boss Start";SSS:["ID\:0\;SL\:-195872\;ST\:-200600\;SB\:-200000\;SR\:-195040\;MI\:21\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";SSS:["ID\:0\;SL\:-195872\;ST\:-200600\;SB\:-200000\;SR\:-195040\;"];AS:0;AX:0;AY:0;
 ET:"Bridge Disappear";LH:["Bridge"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

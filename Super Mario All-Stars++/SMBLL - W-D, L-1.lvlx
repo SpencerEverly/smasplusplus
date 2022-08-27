@@ -2,8 +2,9 @@ HEAD
 TL:"Super Mario Bros. Lost Levels\: World D-1";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-193184;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Ghost House.spc|0\;g=2.5";BG:11;XTRA:"{\n    \"effects\"\: {\n        \"weather\"\: 2\n    }\n}\n";
+SC:0;L:-200000;R:-193184;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Ghost House.spc|0\;g=2.5";BG:11;SR:1;XTRA:"{\n    \"effects\"\: {\n        \"weather\"\: 2\n    }\n}\n";
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
 ID:1;X:-199884;Y:-200118;D:1;

@@ -2434,6 +2434,6 @@ ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Boss End";SSS:["ID\:1\;SL\:-175104\;ST\:-180600\;SB\:-180000\;SR\:-174144\;MI\:0\;"];AS:0;AX:0;AY:0;
-ET:"Boss Start";SSS:["ID\:1\;SL\:-175904\;ST\:-180600\;SB\:-180000\;SR\:-175040\;MI\:21\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";SSS:["ID\:1\;SL\:-175904\;ST\:-180600\;SB\:-180000\;SR\:-175040\;"];AS:0;AX:0;AY:0;
 ET:"Axe Break";LH:["Bridge"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

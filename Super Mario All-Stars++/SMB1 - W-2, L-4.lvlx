@@ -2805,8 +2805,8 @@ LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
 LR:"Bridge";
 LR:"Key";
-LR:"SMB1 Easy Mode";HD:1;
-LR:"SMB1 Hard Mode";
+LR:"SMB1 Easy Mode";
+LR:"SMB1 Hard Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

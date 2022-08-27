@@ -2,8 +2,21 @@ local level_dependencies_normal = require("level_dependencies_normal")
 local pauseplus = require("pauseplus")
 
 function onEvent(eventName)
+    if eventName == ("Axed") then
+        Sound.playSFX(4)
+        for k,v in ipairs(NPC.get(87)) do
+            if v.isValid then
+                v:kill(HARM_TYPE_VANISH)
+            end
+        end
+    end
     if eventName == ("Fake Bowser Dead") then
         Sound.playSFX(138)
+        for k,v in ipairs(NPC.get(87)) do
+            if v.isValid then
+                v:kill(HARM_TYPE_VANISH)
+            end
+        end
     end
     if eventName == ("Real Bowser Dead") then
         Sound.playSFX(138)

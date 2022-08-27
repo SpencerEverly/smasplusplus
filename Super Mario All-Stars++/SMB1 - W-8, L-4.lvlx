@@ -2,14 +2,14 @@ HEAD
 TL:"Super Mario Bros. 1\: World 8-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 600\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-195584;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:1;L:-181216;R:-176800;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:2;L:-161312;R:-156864;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:3;L:-140032;R:-137376;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:23;
-SC:4;L:-120000;R:-117856;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:5;L:-100000;R:-90880;T:-100600;B:-100000;MZ:24;MF:"_OST/All Stars Secrets/Escape! (Pigeon Raca's Theme).ogg";BG:41;
-SC:6;L:-80000;R:-74144;T:-80600;B:-80000;MZ:24;MF:"_OST/All Stars Secrets/Escape! (Pigeon Raca's Theme).ogg";BG:14;
-SC:7;L:-60000;R:-58304;T:-60600;B:-60000;MZ:24;MF:"_OST/All Stars Secrets/Escape! (Pigeon Raca's Theme).ogg";BG:11;
+SC:0;L:-200000;R:-195584;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;SR:1;
+SC:1;L:-181216;R:-176800;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;SR:1;
+SC:2;L:-161312;R:-156864;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;SR:1;
+SC:3;L:-140032;R:-137376;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:23;SR:1;
+SC:4;L:-120000;R:-117856;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;SR:1;
+SC:5;L:-100000;R:-90880;T:-100600;B:-100000;MZ:24;MF:"_OST/All Stars Secrets/Escape! (Pigeon Raca's Theme).ogg";BG:41;SR:1;
+SC:6;L:-80000;R:-74144;T:-80600;B:-80000;MZ:24;MF:"_OST/All Stars Secrets/Escape! (Pigeon Raca's Theme).ogg";BG:14;SR:1;
+SC:7;L:-60000;R:-58304;T:-60600;B:-60000;MZ:24;MF:"_OST/All Stars Secrets/Escape! (Pigeon Raca's Theme).ogg";BG:11;SR:1;
 SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:0;MF:"";BG:7;
 SC:9;L:-20000;R:-19200;T:-20600;B:-20000;MZ:0;MF:"";BG:0;
 SC:10;L:0;R:800;T:-600;B:0;MZ:0;MF:"";BG:0;
@@ -9059,7 +9059,7 @@ LR:"Cage Closed";HD:1;
 LR:"Cage Opened";
 LR:"Bridge Ending";
 LR:"Cutscene Moving Layer";
-LR:"SMB1 Easy Mode";HD:1;
+LR:"SMB1 Easy Mode";
 LR:"SMB1 Hard Mode";HD:1;
 LAYERS_END
 EVENTS_CLASSIC

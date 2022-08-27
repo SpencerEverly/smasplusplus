@@ -3,8 +3,9 @@ TL:"Super Mario Bros. Lost Levels\: World B-2";XTRA:"{\n    \"timer\"\: {\n     
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:33;
-SC:1;L:-180000;R:-173984;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;
-SC:2;L:-160000;R:-158592;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Desert.spc|0\;g=2.5";BG:51;
+SC:1;L:-180000;R:-173984;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;SR:1;
+SC:2;L:-160000;R:-158592;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Desert.spc|0\;g=2.5";BG:51;SR:1;
+SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
 ID:1;X:-199852;Y:-200118;D:1;

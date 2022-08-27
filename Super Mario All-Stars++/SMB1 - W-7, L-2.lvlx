@@ -3,8 +3,8 @@ TL:"Super Mario Bros. 1\: World 7-2";XTRA:"{\n    \"timer\"\: {\n        \"enabl
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:0;MF:"";BG:62;
-SC:1;L:-180000;R:-173600;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 5\,\n        \"weather\"\: 0\n    }\n}\n";
-SC:2;L:-160000;R:-158720;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Forest.spc|0\;g=2.5";BG:62;
+SC:1;L:-180000;R:-173600;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Swimming.spc|0\;g=2.5";BG:23;SR:1;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 5\,\n        \"weather\"\: 0\n    }\n}\n";
+SC:2;L:-160000;R:-158720;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Forest.spc|0\;g=2.5";BG:62;SR:1;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
 SC:7;L:-60000;R:-59200;T:-60600;B:-60000;MZ:0;MF:"";BG:0;
 SECTION_END
