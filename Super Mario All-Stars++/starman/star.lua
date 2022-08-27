@@ -67,10 +67,12 @@ local function startMusic()
             if smasbooleans.musicMuted then
                 Audio.MusicVolume(0)
             end
-            smasbooleans.musicMuted = true
-            Sound.refreshMusic(-1)
-            Audio.MusicVolume(0)
-            Sound.muteMusic(-1)
+            if not smasbooleans.pSwitchActive then
+                smasbooleans.musicMuted = true
+                Sound.refreshMusic(-1)
+                Audio.MusicVolume(0)
+                Sound.muteMusic(-1)
+            end
         end
     end
 end
@@ -87,7 +89,7 @@ local function stopMusic(idx)
         --starSoundObject:Stop()
         starSoundObject:FadeOut(200)
         Audio.MusicVolume(musicvolcache);
-        if p.deathTimer == 0 then
+        if p.deathTimer == 0 and not smasbooleans.pSwitchActive then
             smasbooleans.musicMuted = false
             Sound.restoreMusic(-1)
         end

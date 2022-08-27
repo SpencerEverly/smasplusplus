@@ -186,7 +186,7 @@ function mega2.StopMega(pobj, useShrink)
     if soundObject ~= nil then
         soundObject:Stop()
         for _,p in ipairs(Player.get()) do
-            if p.deathTimer == 0 then
+            if p.deathTimer == 0 and not smasbooleans.pSwitchActive then
                 Sound.restoreMusic(-1)
             end
         end
@@ -479,9 +479,11 @@ local function UpdateMegaState()
                         mega2.StopMega(p,true)
                     end
                 elseif(growing[p] == 0) then
-                    Sound.refreshMusic(-1)
-                    Sound.muteMusic(-1)
-                    smasbooleans.musicMuted = true
+                    if not smasbooleans.pSwitchActive then
+                        Sound.refreshMusic(-1)
+                        Sound.muteMusic(-1)
+                        smasbooleans.musicMuted = true
+                    end
                     soundObject = SFX.play(mega2.sfxFile, 0.6, 0)
                 end
         end

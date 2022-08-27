@@ -8,5 +8,6 @@ smasbooleans.introModeActivated = false
 smasbooleans.multiplayeractive = false
 smasbooleans.musicMuted = false
 smasbooleans.overrideMusicVolume = false
+smasbooleans.pSwitchActive = false
 
 return smasbooleans
