@@ -575,10 +575,12 @@ function globalgenerals.onTick()
         end
         --P-Switch code
         if mem(0x00B2C62C, FIELD_WORD) == 776 or mem(0x00B2C62E, FIELD_WORD) == 776 then
-            Sound.muteMusic(-1)
-            smasbooleans.musicMuted = true
+            if not p.hasStarman and not p.isMega then
+                Sound.muteMusic(-1)
+                smasbooleans.musicMuted = true
+                pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, 0.6, 0)
+            end
             smasbooleans.pSwitchActive = true
-            pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, 0.6, 0)
         end
         if p.hasStarman or p.isMega or GameData.winStateActive or Level.endState() > 0 then
             if pSwitchMusic ~= nil then
@@ -588,9 +590,11 @@ function globalgenerals.onTick()
         end
         if mem(0x00B2C62C, FIELD_WORD) == 1 or mem(0x00B2C62E, FIELD_WORD) == 1 then
             smasbooleans.pSwitchActive = false
-            if pSwitchMusic ~= nil and not p.hasStarman and not p.isMega then
-                smasbooleans.musicMuted = false
+            if pSwitchMusic ~= nil then
                 pSwitchMusic:Stop()
+            end
+            if not p.hasStarman and not p.isMega then
+                smasbooleans.musicMuted = false
                 Sound.restoreMusic(-1)
             end
         end
