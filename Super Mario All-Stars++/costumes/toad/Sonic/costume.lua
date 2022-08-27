@@ -151,16 +151,6 @@ function costume.onTick()
         elseif not isJumping then
             balled = false
         end
-        for k,block in ipairs(Block.get()) do
-            if block:collidesWith(player) then
-                if block.contentID <= 99 then
-                    for k,v in ipairs(NPC.get(138)) do
-                        v.x = player.x
-                        v.y = player.y
-                    end
-                end
-            end
-        end
         --plr.powerup = PLAYER_BIG
         player:mem(0x160, FIELD_WORD, 0) --Fireballs are now less delayed!
         local hitNPCs = Colliders.getColliding{a = player, b = hitNPCs, btype = Colliders.NPC}
