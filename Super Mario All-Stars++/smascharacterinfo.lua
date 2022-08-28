@@ -606,6 +606,15 @@ function smascharacterinfo.onTickEnd()
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
         smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
+    if currentCostume == "DIGDUG-DIGGINGSTRIKE" then
+        littleDialogue.characterNames[4] = "Taizo"
+        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+        starman.sfxFile = Misc.resolveSoundFile("starman")
+        starman.duration[996] = 769
+        starman.duration[994] = 769
+        extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
+        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+    end
     
     
     

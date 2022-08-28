@@ -1007,6 +1007,9 @@ function pausemenu2.onDraw()
     if currentCostume == "CAPTAINTOAD" then
         costtext = "Captain Toad (SNES)"
     end
+    if currentCostume == "DIGDUG-DIGGINGSTRIKE" then
+        costtext = "Taizo (Dig Dug: Digging Strike)"
+    end
     if currentCostume == "HAMTARO" then
         costtext = "Hamtaro"
     end
