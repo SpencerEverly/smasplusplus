@@ -127,7 +127,7 @@ Costumes:
 - SMBDDX Mario by Guinea
 - 10 Second Run Red Stickfigure by G-MODE
 - Super Mario Bros. Special by Hudson and Nintendo
-- PAC-MAN by BANDAI NAMCO
+- PAC-MAN and Dig Dug by BANDAI NAMCO
 - Modern Mario #2 by DarSonic55
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
