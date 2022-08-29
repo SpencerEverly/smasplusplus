@@ -31,6 +31,7 @@ if SMBX_VERSION == VER_SEE_MOD then
             bool LunaLuaIsFocused();
             double LunaLuaGetScreenResolutionWidth();
             double LunaLuaGetScreenResolutionHeight();
+            bool LunaLuaIsSetToRunWhenUnfocused();
             
             void LunaLuaTestModeDisable(void);
         ]])
@@ -103,6 +104,9 @@ if SMBX_VERSION == VER_SEE_MOD then
             else
                 return LunaDLL.LunaLuaTestModeDisable()
             end
+        end
+        function Misc.isSetToRunWhenUnfocused()
+            return LunaDLL.LunaLuaIsSetToRunWhenUnfocused()
         end
     end
 end

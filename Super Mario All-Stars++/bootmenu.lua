@@ -1310,17 +1310,6 @@ function bootmenu.onTick()
             twoplayercheck = active
             twoplayercheckactive = not active
         end
-        if not bootmenu.intromodeactive then
-            for _,p in ipairs(Player.get()) do
-                p:setFrame(50) --Prevent any player from showing up on the boot menu
-                p:mem(0x140, FIELD_BOOL, 150)
-                if p:mem(0x140, FIELD_BOOL) == 0 then
-                    p:mem(0x140, FIELD_BOOL, 150)
-                end
-                p.x = camera.x + 450 - (p.width / 2) --Force all players somewhere to prevent deaths
-                p.y = camera.y - 1 - (p.height / 2)
-            end
-        end
         if Player.count() >= 2 then
             twoplayercheck = not active
             twoplayercheckactive = active
@@ -1551,6 +1540,17 @@ end
 
 function bootmenu.onDraw()
     if bootmenu.active then
+        if not bootmenu.intromodeactive then
+            for _,p in ipairs(Player.get()) do
+                p:setFrame(50) --Prevent any player from showing up on the boot menu
+                p:mem(0x140, FIELD_BOOL, 150)
+                if p:mem(0x140, FIELD_BOOL) == 0 then
+                    p:mem(0x140, FIELD_BOOL, 150)
+                end
+                p.x = camera.x + 450 - (p.width / 2) --Force all players somewhere to prevent deaths
+                p.y = camera.y - 1 - (p.height / 2)
+            end
+        end
         local smaslogo = Graphics.loadImageResolved("smaslogo.png")
         local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
         local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
