@@ -4621,7 +4621,7 @@ ID:437;X:-179480;Y:-180512;D:1;
 ID:437;X:-179160;Y:-180256;D:1;
 ID:437;X:-178936;Y:-180160;D:1;
 ID:589;X:-179358;Y:-179936;D:-1;XTRA:"{\n    \"jumpHeight\"\: 400\,\n    \"useFixed\"\: true\n}\n";
-ID:465;X:-139920;Y:-140256;D:-1;ED:"Moving Platforms";
+ID:465;X:-139920;Y:-140256;D:-1;LR:"Moving Activator";ED:"Moving Platforms";
 ID:26;X:-139840;Y:-141376;D:-1;
 ID:189;X:-139744;Y:-141408;D:-1;
 NPC_END
@@ -4637,6 +4637,7 @@ LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
 LR:"Moving Platforms";
 LR:"Non-Moving Platforms";
+LR:"Moving Activator";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
