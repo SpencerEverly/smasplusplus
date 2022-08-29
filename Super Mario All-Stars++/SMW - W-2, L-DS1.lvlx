@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario World\: Donut Secret 1";CPID:"SMBX2";
+TL:"Super Mario World\: Donut Secret 1";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-192000;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Swimming.spc|0\;g=2.5";BG:55;UW:1;
