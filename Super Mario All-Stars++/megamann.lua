@@ -1118,7 +1118,7 @@ function megaman.onInputUpdate()
                         p.powerup = 2;
                         menuPosition = 1;
                     end
-                    smasbooleans.toggleoffinventory = not smasbooleans.toggleoffinventory
+                    smasbooleans.toggleOffInventory = not smasbooleans.toggleOffInventory
                     inPause = not inPause
                 end
                 

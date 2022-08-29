@@ -25,7 +25,7 @@ local modernReserveItems = require("modernReserveItems")
 local smasbooleans = require("smasbooleans")
 
 furyinventory.furyinventoryopened = false
-smasbooleans.toggleoffinventory = false
+smasbooleans.toggleOffInventory = false
 
 local cooldown = 0
 
@@ -123,7 +123,7 @@ end
 
 function furyinventory.onDraw()
     if player.deathTimer > 0 then
-        smasbooleans.toggleoffinventory = true
+        smasbooleans.toggleOffInventory = true
     end
     if furyinventory.hidden == false then
         --player.reservePowerup = 0 -- disables the item box
@@ -411,16 +411,16 @@ function furyinventory.onInputUpdate()
             furyinventory.activatefuryinventory = false
         end
     end
-    if smasbooleans.toggleoffinventory then
+    if smasbooleans.toggleOffInventory then
         furyinventory.activatefuryinventory = false
         furyinventory.activated = false
         furyinventory.hidden = true
     end
-    if not smasbooleans.toggleoffinventory then
+    if not smasbooleans.toggleOffInventory then
         furyinventory.activated = true
         furyinventory.hidden = false
     end
-    if furyinventory.activated == true or furyinventory.hidden == false or smasbooleans.toggleoffinventory == false then
+    if furyinventory.activated == true or furyinventory.hidden == false or smasbooleans.toggleOffInventory == false then
         if player.rawKeys.dropItem == KEYS_PRESSED and furyinventory.activated == true then -- toggle furyinventory menu
             furyinventory.activatefuryinventory = true
             furyinventory.furyinventoryopened = not furyinventory.furyinventoryopened
@@ -432,7 +432,7 @@ function furyinventory.onInputUpdate()
             if furyinventory.furyinventoryopened == false and player.rawKeys.dropItem == KEYS_PRESSED then
                 furyinventoryopen = false
                 furyinventory.furyinventoryopened = false
-                if smasbooleans.toggleoffinventory == false then
+                if smasbooleans.toggleOffInventory == false then
                     Audio.playSFX(Misc.resolveFile("inventorystuff/invclose.wav"))
                 end
                 Misc.unpause()
@@ -440,7 +440,7 @@ function furyinventory.onInputUpdate()
             elseif furyinventory.furyinventoryopened == true and player.rawKeys.dropItem == KEYS_PRESSED then
                 furyinventoryopen = true
                 furyinventory.furyinventoryopened = true
-                if smasbooleans.toggleoffinventory == false then
+                if smasbooleans.toggleOffInventory == false then
                     Audio.playSFX(Misc.resolveFile("inventorystuff/invopen.wav"))
                 end
                 Misc.pause()

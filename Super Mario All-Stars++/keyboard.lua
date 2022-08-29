@@ -40,7 +40,7 @@ function keyboard.cmd()
             GameData.enablekeyboard = false
             GameData.reopenmenu = true
             GameData.toggleoffkeys = false
-            smasbooleans.toggleoffinventory = false
+            smasbooleans.toggleOffInventory = false
             GameData.playernameenter = false
             GameData.firstbootkeyboardconfig = false
         end
@@ -59,7 +59,7 @@ function keyboard.cmd()
             GameData.enablekeyboard = false
             GameData.reopenmenu = true
             GameData.toggleoffkeys = false
-            smasbooleans.toggleoffinventory = false
+            smasbooleans.toggleOffInventory = false
             GameData.playernameenter = false
             GameData.firstbootkeyboardconfig = false
         end
@@ -74,7 +74,7 @@ function keyboard.cmd()
             GameData.enablekeyboard = false
             GameData.firstbootkeyboardconfig = true
             GameData.toggleoffkeys = false
-            smasbooleans.toggleoffinventory = false
+            smasbooleans.toggleOffInventory = false
             GameData.playernameenter = false
         end
     end
@@ -90,7 +90,7 @@ function keyboard.cmd()
                 GameData.enablekeyboard = false
                 GameData.reopenmenu = true
                 GameData.toggleoffkeys = false
-                smasbooleans.toggleoffinventory = false
+                smasbooleans.toggleOffInventory = false
                 GameData.saveslotswitchenter = false
                 GameData.firstbootkeyboardconfig = false
             elseif keyboard.buffer ~= "" then
@@ -101,7 +101,7 @@ function keyboard.cmd()
                 GameData.enablekeyboard = false
                 GameData.reopenmenu = true
                 GameData.toggleoffkeys = false
-                smasbooleans.toggleoffinventory = false
+                smasbooleans.toggleOffInventory = false
                 GameData.saveslotswitchenter = false
                 GameData.firstbootkeyboardconfig = false
             end
@@ -120,7 +120,7 @@ end
 
 function keyboard.onTick()
     if GameData.enablekeyboard == true then
-        smasbooleans.toggleoffinventory = true
+        smasbooleans.toggleOffInventory = true
         GameData.toggleoffkeys = true
         keyboard.active = true
     end
@@ -158,7 +158,7 @@ function keyboard.onControllerButtonPress(button)
     if (button == inputConfig1.jump) then
         if GameData.playernameenterfirstboot == false then
             Sound.playSFX("console/console_resetfont.ogg")
-            smasbooleans.toggleoffinventory = false
+            smasbooleans.toggleOffInventory = false
             GameData.toggleoffkeys = false
             keyboard.active = false
             GameData.enablekeyboard = false
@@ -170,7 +170,7 @@ function keyboard.onControllerButtonPress(button)
             GameData.enablekeyboard = false
             GameData.firstbootkeyboardconfig = true
             GameData.toggleoffkeys = false
-            smasbooleans.toggleoffinventory = false
+            smasbooleans.toggleOffInventory = false
             GameData.playernameenter = false
         end
     end
@@ -185,7 +185,7 @@ function keyboard.onKeyboardPressDirect(vk, repeated, char)
         if (not repeated) then
             if GameData.playernameenterfirstboot == false then
                 Sound.playSFX("console/console_resetfont.ogg")
-                smasbooleans.toggleoffinventory = false
+                smasbooleans.toggleOffInventory = false
                 GameData.toggleoffkeys = false
                 keyboard.active = false
                 GameData.enablekeyboard = false
@@ -197,7 +197,7 @@ function keyboard.onKeyboardPressDirect(vk, repeated, char)
                 GameData.enablekeyboard = false
                 GameData.firstbootkeyboardconfig = true
                 GameData.toggleoffkeys = false
-                smasbooleans.toggleoffinventory = false
+                smasbooleans.toggleOffInventory = false
                 GameData.playernameenter = false
             end
         end

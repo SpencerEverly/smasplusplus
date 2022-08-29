@@ -3,18 +3,18 @@ local costume = {}
 local extrasounds = require("extrasounds")
 
 local plr
-local musictimer = 0
-local harpoonxcoordinate = 0
-local harpoonshowingcoordinate = 96
-local harpoonxcoordinatemover = 96
-local harpoongraphic = Graphics.loadImageResolved("costumes/toad/DigDug-DiggingStrike/harpoon.png")
-local harpoonblockspawned = false
-local harpoonplayerdirection = 0
+local musicTimer = 0
+local harpoonXCoordinate = 0
+local harpoonShowingCoordinate = 96
+local harpoonXCoordinateMover = 96
+local harpoonGraphic = Graphics.loadImageResolved("costumes/toad/DigDug-DiggingStrike/harpoon.png")
+local harpoonBlockSpawned = false
+local harpoonPlayerDirection = 0
 
 costume.muteMusicWhenNotMoving = false
 costume.enableHarpoon = true
 
-local harpoonactive = false
+local harpoonActive = false
 
 function costume.onInit(p)
     plr = p
@@ -40,13 +40,13 @@ function costume.onDrawEnd()
         if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
             if Level.endState() == 0 and plr.deathTimer == 0 and not Misc.isPaused() then
                 if plr.speedX == 0 and plr.speedY == 0 then
-                    Audio.MusicSetPos(musictimer)
+                    Audio.MusicSetPos(musicTimer)
                     Audio.MusicPause()
                     if not plr.hasStarman and not plr.isMega and not smasbooleans.pSwitchActive then
                         smasbooleans.musicMuted = true
                     end
                 else
-                    musictimer = Audio.MusicGetPos()
+                    musicTimer = Audio.MusicGetPos()
                     Audio.MusicResume()
                     if not plr.hasStarman and not plr.isMega and not smasbooleans.pSwitchActive then
                         smasbooleans.musicMuted = false
@@ -58,10 +58,10 @@ function costume.onDrawEnd()
 end
 
 function costume.harpoonAttack()
-    harpoonactive = true
+    harpoonActive = true
     Sound.playSFX("toad/DigDug-DiggingStrike/harpoon-shoot.ogg")
     Routine.wait(0.6)
-    harpoonactive = false
+    harpoonActive = false
 end
 
 function costume.onDraw()
@@ -72,7 +72,7 @@ function costume.onInputUpdate()
     if Level.endState() == 0 and plr.deathTimer == 0 and not Misc.isPaused() then
         if costume.enableHarpoon then
             if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                if plr.keys.run == KEYS_PRESSED and not harpoonactive then
+                if plr.keys.run == KEYS_PRESSED and not harpoonActive then
                     Routine.run(costume.harpoonAttack)
                 end
             end
@@ -89,13 +89,13 @@ function costume.onTick()
         elseif plr.keys.right then
             plr.speedX = 2.5
         end
-        if harpoonactive then
+        if harpoonActive then
             plr:setFrame(23)
-            harpoonshowingcoordinate = harpoonshowingcoordinate - 3
-            harpoonxcoordinatemover = harpoonxcoordinatemover + 3
-            if not harpoonblockspawned then
-                Block.spawn(1000, plr.x + harpoonshowingcoordinate * plr.direction, plr.y)
-                harpoonblockspawned = true
+            harpoonShowingCoordinate = harpoonShowingCoordinate - 3
+            harpoonXCoordinateMover = harpoonXCoordinateMover + 3
+            if not harpoonBlockSpawned then
+                Block.spawn(1000, plr.x + harpoonShowingCoordinate * plr.direction, plr.y)
+                harpoonBlockSpawned = true
             end
             for k,block in ipairs(Block.get(1000)) do
                 if plr.speedX == 0 and plr.speedY == 0 then --Standing
@@ -114,15 +114,15 @@ function costume.onTick()
                 end
             end
             if plr.direction == 1 then
-                Graphics.drawImageToSceneWP(harpoongraphic, (plr.x + 12 * plr.direction), (plr.y + 12), (96 + harpoonshowingcoordinate), 0, (96 - harpoonshowingcoordinate), 12, -26)
+                Graphics.drawImageToSceneWP(harpoonGraphic, (plr.x + 12 * plr.direction), (plr.y + 12), (96 + harpoonShowingCoordinate), 0, (96 - harpoonShowingCoordinate), 12, -26)
             elseif plr.direction == -1 then
-                Graphics.drawImageToSceneWP(harpoongraphic, (plr.x + 100 + harpoonxcoordinatemover * plr.direction), (plr.y + 12), 0, 12, (harpoonshowingcoordinate * plr.direction), 12, -26)
+                Graphics.drawImageToSceneWP(harpoonGraphic, (plr.x + 100 + harpoonXCoordinateMover * plr.direction), (plr.y + 12), 0, 12, (harpoonShowingCoordinate * plr.direction), 12, -26)
             end
-        elseif not harpoonactive then
+        elseif not harpoonActive then
             plr:setFrame(nil)
-            harpoonxcoordinatemover = 96
-            harpoonshowingcoordinate = 0
-            harpoonblockspawned = false
+            harpoonXCoordinateMover = 96
+            harpoonShowingCoordinate = 0
+            harpoonBlockSpawned = false
             for k,block in ipairs(Block.get(1000)) do
                 block:delete()
             end

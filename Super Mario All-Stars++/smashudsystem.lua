@@ -573,7 +573,7 @@ function smashudsystem.onTick()
         killed1 = true --killed1 detects to see if the 1st player is dead.
     end
     if Player.count() >= 2 then --2nd player compability
-        smasbooleans.multiplayeractive = true --This makes sure the death animation doesn't play when on multiplayer
+        smasbooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
         if battledependencies.battlemodeactive then
             if(not killed2 and player2:mem(0x13E,FIELD_BOOL)) then
                 killed2 = true --killed2 detects to see if the 2nd player is dead.
@@ -581,7 +581,7 @@ function smashudsystem.onTick()
         end
     end
     if Player.count() == 1 then
-        smasbooleans.multiplayeractive = false
+        smasbooleans.multiplayerActive = false
     end
     if SaveData.totalLives >= 1110 then
         SaveData.totalLives = 1110 --The max amount of lives in the episode is 1110, used for the crown hud easter egg that was from Super Mario 3D Land.

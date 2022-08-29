@@ -71,7 +71,7 @@ function onEvent(eventName)
         player.keys.altJump = false
         Sound.muteMusic(-1)
         Graphics.activateHud(false)
-        smasbooleans.toggleoffinventory = true
+        smasbooleans.toggleOffInventory = true
         Sound.playSFX("mus_explosion.ogg")
         if SMBX_VERSION == VER_SEE_MOD then
             Misc.shakeWindow(35, false, false)

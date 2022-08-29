@@ -108,7 +108,7 @@ end
 function battlediedanimation()
     if bootmenu.active == false then
         if not Misc.inMarioChallenge() then
-            if smasbooleans.multiplayeractive then
+            if smasbooleans.multiplayerActive then
                 if battledependencies.battlemodeactive then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
                     if killed1 == true then
                         battledependencies.p1lives = battledependencies.p1lives - 1
@@ -525,7 +525,7 @@ function battledependencies.onTick()
             killed1 = true --killed1 detects to see if the 1st player is dead.
         end
         if Player.count() >= 2 then --2nd player compability
-            smasbooleans.multiplayeractive = true --This makes sure the death animation doesn't play when on multiplayer
+            smasbooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
             if battledependencies.battlemodeactive == true then
                 if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then
                     killed2 = true --killed2 detects to see if the 2nd player is dead.
