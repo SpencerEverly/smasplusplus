@@ -350,9 +350,9 @@ end
 function sampleNPC.onDrawNPC(v)
 	if v.despawnTimer <= 0 then return end
 	
-	Text.print(v.ai1, 100, 100)
-	Text.print(v.speedX, 100, 116)
-	Text.print(v.ai2, 100, 132)
+	--Text.print(v.ai1, 100, 100)
+	--Text.print(v.speedX, 100, 116)
+	--Text.print(v.ai2, 100, 132)
 	
 	imagic.Draw{
 		texture = Graphics.sprites.npc[v.id].img,
