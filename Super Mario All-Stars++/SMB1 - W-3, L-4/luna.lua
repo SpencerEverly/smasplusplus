@@ -2,7 +2,7 @@ local level_dependencies_normal= require("level_dependencies_normal")
 
 function onEvent(eventName)
     if eventName == ("Boss Start") then
-        Sound.changeMusic("_OST/Super Mario Bros/Bowser.spc|0;g=2.5", 0)
+        Sound.changeMusic("_OST/Super Mario Bros/Bowser.spc|0;g=2.5", 1)
     end
     if eventName == ("Axe") then
         Sound.playSFX(4)

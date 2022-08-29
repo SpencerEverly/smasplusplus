@@ -1042,7 +1042,7 @@ ID:821;X:-194944;Y:-199200;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB1W-3
 ID:752;X:-194944;Y:-199168;D:-1;XTRA:"{\n    \"name\"\: \"toSMB14-1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:802;X:-194944;Y:-199136;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-4\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"4-1\: The Lakitu Grounds\"\,\n    \"path_down\"\: \"toSMB14-2\"\,\n    \"path_left\"\: \"toWarpCentralSMB1-4\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB14-1\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
 ID:802;X:-194912;Y:-199072;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-4\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"4-2\: Under the Ground Once More\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMB14-3\"\,\n    \"path_up\"\: \"toSMB14-2\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
-ID:752;X:-194944;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB14-2\"\,\n    \"points\"\: \"0\, -24\, 0\, -32\, 32\, 32\"\n}\n";
+ID:752;X:-194944;Y:-199104;D:-1;XTRA:"{\n    \"name\"\: \"toSMB14-2\"\,\n    \"points\"\: \"0\, -32\, 0\, -32\, 32\, 32\"\n}\n";
 ID:752;X:-194880;Y:-199072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB14-3\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:802;X:-194816;Y:-199072;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB1 - W-4\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"4-3\: Mushy Platforms\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB14-3\"\,\n    \"path_right\"\: \"toSMB14-4\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-194784;Y:-199072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB14-4\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";

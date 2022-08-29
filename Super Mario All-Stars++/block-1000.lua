@@ -13,7 +13,7 @@ blockmanager.setBlockSettings({
 
 function block.onCollideBlock(v,n)
     if(n.__type == "NPC") then
-        n:kill()
+        n:kill(HARM_TYPE_NPC)
     end
 end
 

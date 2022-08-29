@@ -65,7 +65,9 @@ function costume.harpoonAttack()
 end
 
 function costume.onDraw()
-    plr.powerup = 2
+    if plr.powerup >= 3 then
+        plr.powerup = 2
+    end
 end
 
 function costume.onInputUpdate()
@@ -90,7 +92,7 @@ function costume.onTick()
             plr.speedX = 2.5
         end
         if harpoonActive then
-            plr:setFrame(23)
+            plr:setFrame(30)
             harpoonShowingCoordinate = harpoonShowingCoordinate - 3
             harpoonXCoordinateMover = harpoonXCoordinateMover + 3
             if not harpoonBlockSpawned then
