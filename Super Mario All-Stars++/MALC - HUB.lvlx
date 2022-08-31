@@ -12706,6 +12706,7 @@ ID:466;X:-195648;Y:-200128;D:-1;MG:"Most Mearians are having fun with Easter Egg
 ID:995;X:-194224;Y:-200096;D:-1;MG:"We're sorry to inform that we are closed today for a special holiday. Come by tomorrow! - The Shopkeeper";FD:1;NM:1;LR:"BusinessesClosed";
 ID:466;X:-119808;Y:-120128;D:-1;MG:"Welcome to the Tourist Center! Happy Easter\, <characterName>!<page>What fun Easter is! We're about to start an Easter Egg hunt.<page>Check back at 3 PM (Real time!) for the hunt that'll change the world!<page>You wouldn't wanna miss it!";FD:1;NM:1;LR:"Stage Extra - Easter";
 ID:151;X:-200064;Y:-200112;D:-1;MG:"It's 3 PM! We're about to start an Easter Egg hunt.<page>Take the pipe to start the hunt!<page>You only got until 7 PM\, so be there\, and be square!";FD:1;LR:"Stage Extra - Easter (3 PM)";
+ID:466;X:-199600;Y:-200128;D:-1;MG:"Well hi there\, <characterName>! Happy Labor Day!<page>If you're looking around for some Mearian's out today\, they've gone home to take a break.<page>I'm only here to give you a heads up\, and well...<page>I gotta protect the town some way or another...<page>please help me get out of here";FD:1;NM:1;LR:"Stage Extra - Labor Day";
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;
@@ -12818,6 +12819,7 @@ LR:"Stage Extra - Christmas";HD:1;
 LR:"Stage Extra - St Patricks Day";HD:1;
 LR:"Stage Extra - Easter";HD:1;
 LR:"Stage Extra - Easter (3 PM)";HD:1;
+LR:"Stage Extra - Labor Day";HD:1;
 LR:"Stage Extra - UT Chara Genoside";HD:1;
 LR:"True Ending - Fail Safe 1";
 LR:"True Ending - Fail Safe Ladder";HD:1;
@@ -12906,6 +12908,7 @@ ET:"Weed";LH:["Stage 0 - 0 Stars (TC)","Stage 0 - 0 Stars","Stage 0.5 - 4 Stars"
 ET:"Christmas";LH:["Stage 0 - 0 Stars (TC)","Stage 0 - 0 Stars","Stage 0.5 - 4 Stars","Stage 1 - 10 Stars","Stage 2 - 16 Stars","Stage 3 - 22 Stars","Stage 4 - 28 Stars","Stage 5 - 32 Stars","Stage Extra - UT Chara Genoside","Stage 5 - Renovation","Stage 5 - Construct Stage 1","Stage 6 - 38 Stars","Stage 6 - Yoshi Rooms Unfinished 1","Stage 6 - Construct Stage 2"];LS:["Stage All - Mandatories","Stage 5 - Construction","Stage Extra - Christmas","BusinessesOpen"];DS:1;AS:0;AX:0;AY:0;
 ET:"StPatricksDay";LH:["Stage 0 - 0 Stars (TC)","Stage 0 - 0 Stars","Stage 0.5 - 4 Stars","Stage 1 - 10 Stars","Stage 2 - 16 Stars","Stage 3 - 22 Stars","Stage 4 - 28 Stars","Stage 5 - 32 Stars","Stage Extra - UT Chara Genoside","Stage 5 - Renovation","Stage 5 - Construct Stage 1","Stage 6 - 38 Stars","Stage 6 - Yoshi Rooms Unfinished 1","Stage 6 - Construct Stage 2"];LS:["Stage All - Mandatories","Stage 5 - Construction","BusinessesOpen","Stage Extra - St Patricks Day","Stage 2 and Beyond - Mayor"];DS:1;AS:0;AX:0;AY:0;
 ET:"Easter";LH:["Stage 0 - 0 Stars (TC)","Stage 0 - 0 Stars","Stage 0.5 - 4 Stars","Stage 1 - 10 Stars","Stage 2 - 16 Stars","Stage 3 - 22 Stars","Stage 4 - 28 Stars","Stage 5 - 32 Stars","Stage Extra - UT Chara Genoside","Stage 5 - Renovation","Stage 5 - Construct Stage 1","Stage 6 - 38 Stars","Stage 6 - Yoshi Rooms Unfinished 1","Stage 6 - Construct Stage 2","BusinessesOpen","Stage 7 - 44 Stars","Stage 6 - Murderer"];LS:["Stage All - Mandatories","Stage 2 and Beyond - Mayor","BusinessesClosed","Stage Extra - Easter","Stage 5 - Construction"];DS:1;AS:0;AX:0;AY:0;
+ET:"LaborDay";LH:["Stage 0 - 0 Stars (TC)","Stage 0 - 0 Stars","Stage 0.5 - 4 Stars","Stage 1 - 10 Stars","Stage 2 - 16 Stars","Stage 3 - 22 Stars","Stage 4 - 28 Stars","Stage 5 - 32 Stars","Stage Extra - UT Chara Genoside","Stage 5 - Renovation","Stage 5 - Construct Stage 1","Stage 6 - 38 Stars","Stage 6 - Yoshi Rooms Unfinished 1","Stage 6 - Construct Stage 2","BusinessesOpen","Stage All - Mandatories"];LS:["Stage 5 - Construction","Stage Extra - St Patricks Day","Stage 2 and Beyond - Mayor","BusinessesClosed"];DS:1;AS:0;AX:0;AY:0;
 ET:"HideX2Stuff";LH:["X2Stuff","YI Glitch Prevention"];LS:["XStuff"];DS:1;AS:0;AX:0;AY:0;
 ET:"ShowX2Stuff";LH:["XStuff"];LS:["X2Stuff","YI Glitch Prevention"];DS:1;AS:0;AX:0;AY:0;
 ET:"CharX2OptionsPreload";TE:"CharX2Options";AS:0;AX:0;AY:0;

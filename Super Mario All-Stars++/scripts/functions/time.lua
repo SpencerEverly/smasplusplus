@@ -16,6 +16,10 @@ function Time.year()
     return os.date("*t").year
 end
 
+function Time.yearDay()
+    return os.date("*t").yday
+end
+
 function Time.hour()
     return os.date("*t").hour
 end
@@ -28,6 +32,10 @@ function Time.second()
     return os.date("*t").sec
 end
 
+function Time.week()
+    return tonumber(os.date("%W"))
+end
+
 function Time.tomorrow()
     return os.date("*t").day + 1
 end
@@ -38,6 +46,36 @@ end
 
 function Time.weekend()
     return os.date("%A")
+end
+
+function Time.weekendOrder(weekend, week, month, year) --Returns the order that the weekend is at of the specified month and week.
+    if week == nil then --If any of these are nil, specify today's weekends and dates...
+        week = Time.week()
+    end
+    if month == nil then
+        month = Time.month()
+    end
+    if year == nil then
+        year = Time.year()
+    end
+    if weekend == nil then
+        weekend = Time.weekend()
+    end
+    --Now we will autodetect the leap year.
+    local monthLength = {31,28,31,30,31,30,31,31,30,31,30,31}
+    if Time.leapYear(year) then
+        monthLength[2] = 29
+    end
+    --Create the table for the allweekendlist...
+    local allweekendlist = {}
+    --Now do a for loop and add any days that have this specified weekend.
+    for i = 1, tonumber(monthLength[month]) do
+        if Time.dayOfWeek(month, i, year) == weekend then
+            table.insert(allweekendlist, i)
+        end
+    end
+    --Finally, return the final table.
+    return allweekendlist
 end
 
 function Time.dayJulian() --Converts Gregorian day to the Julian day.
@@ -97,9 +135,13 @@ end
 
 function Time.lastWeekday(wday, month, year) --Returns the last weekday of the month and year.
     local monthLength, day = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
-    if Time.leapYear(year) then monthLength[2] = 29 end
+    if Time.leapYear(year) then
+        monthLength[2] = 29
+    end
     day = monthLength[month]
-    while Time.dayOfWeek(month, day, year) ~= wday do day = day - 1 end
+    while Time.dayOfWeek(month, day, year) ~= wday do
+        day = day - 1
+    end
     return day
 end
 

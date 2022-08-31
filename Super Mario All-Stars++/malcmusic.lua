@@ -91,7 +91,7 @@ function malcmusic.onStart()
                 SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
                 triggerEvent("Easter")
                 for i = 15,19 do
-                    if os.date("*t").hour == i then
+                    if Time.hour() == i then
                         triggerEvent("EasterHunt")
                     end
                 end
@@ -99,11 +99,20 @@ function malcmusic.onStart()
         end
         
         
-        if Time.month() == 04 and Time.day() == 20 then --Weed Day
+        if Time.month() == 4 and Time.day() == 20 then --Weed Day
             malcmusic.holiday = true
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
                 triggerEvent("Weed")
+            end
+        end
+        
+        
+        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", nil, 9)[1] then --Labor Day
+            malcmusic.holiday = true
+            if malcmusic.holiday == true then
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
+                triggerEvent("LaborDay")
             end
         end
         
@@ -130,14 +139,14 @@ end
 function malcmusic.onTick()
     for i = 0,20 do
         local SectionAll = Section(i)
-        if Time.month() == 03 and Time.day() == 17 then --St Patrick's Day
+        if Time.month() == 3 and Time.day() == 17 then --St Patrick's Day
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
             end
         end
         
         
-        if Time.month() == 04 and Time.day() == 04 then --Spencer Everly Day (Foundation of my YouTube channel)
+        if Time.month() == 4 and Time.day() == 4 then --Spencer Everly Day (Foundation of my YouTube channel)
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
             end
@@ -151,7 +160,14 @@ function malcmusic.onTick()
         end
         
         
-        if Time.month() == 04 and Time.day() == 20 then --Weed day (420)
+        if Time.month() == 4 and Time.day() == 20 then --Weed day (420)
+            if malcmusic.holiday == true then
+                SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
+            end
+        end
+        
+        
+        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", nil, 9)[1] then --Labor Day
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
             end
