@@ -48,11 +48,8 @@ function Time.weekend()
     return os.date("%A")
 end
 
-function Time.weekendOrder(weekend, week, month, year) --Returns the order that the weekend is at of the specified month and week.
-    if week == nil then --If any of these are nil, specify today's weekends and dates...
-        week = Time.week()
-    end
-    if month == nil then
+function Time.weekendOrder(weekend, month, year) --Returns the order that the weekend is at of the specified month and week.
+    if month == nil then --If any of these are nil, specify today's weekends and dates...
         month = Time.month()
     end
     if year == nil then

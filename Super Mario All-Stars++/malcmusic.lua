@@ -108,7 +108,7 @@ function malcmusic.onStart()
         end
         
         
-        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", nil, 9)[1] then --Labor Day
+        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", 9)[1] then --Labor Day
             malcmusic.holiday = true
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
@@ -167,7 +167,7 @@ function malcmusic.onTick()
         end
         
         
-        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", nil, 9)[1] then --Labor Day
+        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", 9)[1] then --Labor Day
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
             end
