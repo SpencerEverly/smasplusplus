@@ -67,7 +67,7 @@ function malcmusic.onStart()
     --Daily weather, no rng intended anymore unless the day is tomorrow
     for i = 0,20 do
         local SectionAll = Section(i)
-        if Time.month() == 03 and Time.day() == 17 then --St. Patrick's Day
+        if Time.month() == 3 and Time.day() == 17 then --St. Patrick's Day
             malcmusic.holiday = true
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
@@ -76,7 +76,7 @@ function malcmusic.onStart()
         end
         
         
-        if Time.month() == 04 and Time.day() == 04 then --Spencer Everly Day
+        if Time.month() == 4 and Time.day() == 4 then --Spencer Everly Day
             malcmusic.holiday = true
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
