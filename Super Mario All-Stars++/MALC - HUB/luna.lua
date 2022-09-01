@@ -240,7 +240,7 @@ littleDialogue.registerAnswer("strike1",{text = "Sure",addText = "That's one sig
 littleDialogue.registerAnswer("mayoradvice",{text = "My name is wrong (Or something isn't right).",addText = "If you're name is wrong, don't direct it to me! Direct it to Spencer Everly. They'll fix the issue on the next update.<page>Spencer should be able to reach you on Discord at Spencer Everly#1997.<page>Or use their email at spencer.everly@gmail.com.<page>Or you can report bugs on the official GitHub page.<page>Reporting bugs makes the player experience a lot better if you do these things!"})
 littleDialogue.registerAnswer("mayoradvice",{text = "Give me advice.",addText = "Sure thing! Here is what you need to know:<page>Unfinished advice is the advice that's never gonna get answered until the game's first version is released.<page>That means wait until the full release."})
 littleDialogue.registerAnswer("mayoradvice",{text = "Why is everyone orange guns?",addText = "Because Spencer Everly was a dumb kid who made this species. I don't have anything else to say."})
-littleDialogue.registerAnswer("mayoradvice",{text = "Is life even good anymore?",addText = "If you feel suicidal, call 998.<page>I can't see another life taken away from me, and NOT right here."})
+littleDialogue.registerAnswer("mayoradvice",{text = "Is life even good anymore?",addText = "If you feel suicidal, call 988.<page>I can't see another life taken away from me, and NOT right here."})
 littleDialogue.registerAnswer("mayoradvice",{text = "Where am I?",addText = "You're in Mars, in the biggest city of the planet, Me and Larry City.<page>Filled with tall buildings and many areas, us Mearians roam through life trying to live and survive like any other human does.<page>Where did we come from? Why are we here? Why can't we live with humans in peace?<page>Nobody knows..."})
 littleDialogue.registerAnswer("mayoradvice",{text = "Nevermind.",addText = "Gotcha. Let me know if you need anything."})
 
@@ -251,7 +251,7 @@ littleDialogue.registerAnswer("mayoradvice",{text = "Nevermind.",addText = "Gotc
 littleDialogue.registerAnswer("mayoradvicehigh",{text = "My name is wrong (Or something isn't right).",addText = "Do a... email...<page>spencer.everly@outloo... uh, yahoo... uh...<page>No... it's gmail.com... yeah.<page>Email that."})
 littleDialogue.registerAnswer("mayoradvicehigh",{text = "Give me advice.",addText = "Advise 1: I want more weed.<page>Advise 2: Then give me more weed.<page>Advise 3: Uh... I forgot, what again?"})
 littleDialogue.registerAnswer("mayoradvicehigh",{text = "Why is everyone orange guns?",addText = "Because tomatoes talk in... a show... I forgot."})
-littleDialogue.registerAnswer("mayoradvicehigh",{text = "Is life even good anymore?",addText = "Call the 998 number.<page>It's a number... weed, ack!"})
+littleDialogue.registerAnswer("mayoradvicehigh",{text = "Is life even good anymore?",addText = "Call the 988 number.<page>It's a number... weed, ack!"})
 littleDialogue.registerAnswer("mayoradvicehigh",{text = "Where am I?",addText = "You... are in some planet...<page>Gee, I forgot where I even am... stupid weed..."})
 littleDialogue.registerAnswer("mayoradvicehigh",{text = "Nevermind.",addText = "Ah okay..."})
 
