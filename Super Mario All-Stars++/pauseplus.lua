@@ -16,7 +16,7 @@
 ]]
 
 local textplus = require("textplus")
-
+local bootmenu = require("bootmenu")
 
 local pauseplus = {}
 
