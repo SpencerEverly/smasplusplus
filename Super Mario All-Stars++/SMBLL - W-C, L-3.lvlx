@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. Lost Levels\: World C-3";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-188736;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Athletic.spc|0\;g=2.5";BG:8;SR:1;
+SC:0;L:-200000;R:-188736;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Athletic.spc|0\;g=2.5";BG:8;
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
