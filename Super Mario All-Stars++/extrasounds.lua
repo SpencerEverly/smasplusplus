@@ -532,7 +532,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**TAIL ATTACK**
             if p.powerup == 4 or p.powerup == 5 then
-                if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0) and not p.keys.down then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking?
+                if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0) and not p.keys.down and not p:mem(0x50, FIELD_BOOL) then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking?
                     if extrasounds.enableTailAttackSFX then
                         extrasounds.playSFX(33)
                     end
@@ -546,8 +546,10 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             --**SPINJUMPING**
             if p:isOnGround() then --If on the ground...
                 if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
-                    if extrasounds.enableSpinjumpingSFX then
-                        extrasounds.playSFX(33)
+                    if p:mem(0x50, FIELD_BOOL) == false then
+                        if extrasounds.enableSpinjumpingSFX then
+                            extrasounds.playSFX(33)
+                        end
                     end
                 end
             end

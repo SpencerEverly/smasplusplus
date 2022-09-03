@@ -45,6 +45,17 @@ if SMBX_VERSION == VER_SEE_MOD then
 end
 
 --Now, before we get started, we require the most important libraries on the top.
+
+--SMAS specific functions need to be required first:
+_G.smasfunctions = require("smasfunctions")
+_G.smasverbosemode = require("smasverbosemode")
+_G.smasbooleans = require("smasbooleans")
+_G.smastables = require("smastables")
+_G.smascheats = require("smascheats")
+_G.smashud = require("smashud")
+_G.smasstarsystem = require("smasstarsystem")
+
+--Then we do everything else.
 GameData.levelMusicTemporary = {}
 GameData.levelMusic = {}
 _G.smwMap = require("smwMap")
@@ -55,15 +66,7 @@ _G.darkness = require("darknessa")
 _G.events = require("editorevents_mod")
 _G.extraNPCProperties = require("extraNPCProperties")
 _G.cursor = require("cursor")
-
---SMAS specific functions need to be required as well:
-_G.smasfunctions = require("smasfunctions")
-_G.smasverbosemode = require("smasverbosemode")
-_G.smasbooleans = require("smasbooleans")
-_G.smastables = require("smastables")
-_G.smascheats = require("smascheats")
-_G.smashud = require("smashud")
-_G.smasstarsystem = require("smasstarsystem")
+_G.lazyprint = require("lazyprint")
 
 --Register some custom global event handlers...
 Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true

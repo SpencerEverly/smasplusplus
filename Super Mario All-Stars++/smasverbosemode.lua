@@ -2,6 +2,8 @@
 --By Spencer Everly
 
 local textplus = require("textplus")
+local lazyprint = require("lazyprint")
+local inspect = require("ext/inspect")
 
 local smasverbosemode = {}
 
@@ -65,30 +67,37 @@ function smasverbosemode.onInitAPI()
 end
 
 function smasverbosemode.onStart()
-    if smasverbosemode.activated == true then
-        Routine.run(startLevel)
+    if smasverbosemode.activated then
+        --Routine.run(startLevel)
+    end
+    lazyprint.monitor(player, {"x", "y", "powerup", "width", "height", "character"})
+    lazyprint.monitor(player, {"mount", "mountColor", "mountType", "forcedState", "forcedTimer"})
+    lazyprint.monitor(Playur, {"isJumping(player)", "underwater(player)", "grabbing(player)", "ducking(player)", "getBattleLives(1)"})
+    lazyprint.monitor(camera, {"x", "y", "width", "height"})
+    for i = 0,20 do
+        lazyprint.monitor(Section(i), {"music", "underwater", "noTurnBack"})
     end
 end
 
 function smasverbosemode.onEvent(eventName)
-    if smasverbosemode.activated == true then
+    if smasverbosemode.activated then
         if eventName then
-            _storeVerboseString("Event "..eventName.." has executed.")
+            --_storeVerboseString("Event "..eventName.." has executed.")
         end
     end
 end
 
 function startLevel()
     Routine.wait(0.1, true)
-    _storeVerboseString("Level has officially started.")
+    --_storeVerboseString("Level has officially started.")
 end
 
 function smasverbosemode.onDraw()
-    if smasverbosemode.activated == true then
+    if smasverbosemode.activated then
         _printVerboseList()
         for _,p in ipairs(Player.get()) do
             if p:mem(0x11C, FIELD_WORD) == 1 then
-                _storeVerboseString("Player "..p.idx.." has jumped.")
+                --_storeVerboseString("Player "..p.idx.." has jumped.")
             end
         end
     end

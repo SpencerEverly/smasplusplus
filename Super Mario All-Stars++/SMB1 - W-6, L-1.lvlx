@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. 1\: World 6-1";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-193440;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Race.spc|0\;g=2.5";BG:9;SR:1;
+SC:0;L:-200000;R:-193440;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Race.spc|0\;g=2.5";BG:9;
 SC:1;L:-180000;R:-178528;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 2/Title (Alternative).spc|0\;g=2.7";BG:48;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END

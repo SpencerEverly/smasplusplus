@@ -2,9 +2,9 @@ HEAD
 TL:"Super Mario Bros. 1\: World 2-1";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-192992;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Desert.spc|0\;g=2.5";BG:33;SR:1;
-SC:1;L:-180000;R:-177152;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Staff Roll.spc|0\;g=2.5";BG:62;SR:1;
-SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;SR:1;
+SC:0;L:-200000;R:-192992;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Desert.spc|0\;g=2.5";BG:33;
+SC:1;L:-180000;R:-177152;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Staff Roll.spc|0\;g=2.5";BG:62;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
