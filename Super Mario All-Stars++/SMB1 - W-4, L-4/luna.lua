@@ -5,3 +5,19 @@ function onEvent(eventName)
         Sound.playSFX(138)
     end
 end
+
+function onLoadSection0()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection1()
+    smasnoturnback.overrideSection = true
+end
+
+function onLoadSection2()
+    smasnoturnback.overrideSection = true
+end
+
+function onLoadSection3()
+    smasnoturnback.overrideSection = true
+end

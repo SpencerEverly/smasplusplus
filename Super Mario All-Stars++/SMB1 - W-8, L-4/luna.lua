@@ -58,3 +58,51 @@ function onEvent(eventName)
         pauseplus.canPause = true
     end
 end
+
+function onLoadSection0()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection1()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection2()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection3()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection4()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection5()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection6()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection7()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection8()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection12()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection13()
+    smasnoturnback.overrideSection = true
+end
+
+function onLoadSection14()
+    smasnoturnback.overrideSection = false
+end

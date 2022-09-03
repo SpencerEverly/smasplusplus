@@ -21,3 +21,15 @@ function onEvent(eventName)
         end
     end
 end
+
+function onLoadSection0()
+    smasnoturnback.overrideSection = true
+end
+
+function onLoadSection1()
+    smasnoturnback.overrideSection = false
+end
+
+function onLoadSection2()
+    smasnoturnback.overrideSection = true
+end

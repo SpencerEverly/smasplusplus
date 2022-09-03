@@ -20,6 +20,8 @@ local textplus = require("textplus")
 
 local pauseplus = {}
 
+if bootmenu.active then return end
+
 
 pauseplus.SELECTION_CHECKBOX = 0
 pauseplus.SELECTION_NUMBERS  = 1

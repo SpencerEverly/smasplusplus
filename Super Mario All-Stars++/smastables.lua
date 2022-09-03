@@ -278,6 +278,14 @@ smastables.__wsmbaLevels = {
     "WSMBA - W-S, L-5.lvlx",
 }
 
+--All SMB Special levels, for many reasons.
+smastables.__smbspecialLevels = {
+    "SMBSp - W-1, L-1.lvlx",
+    "SMBSp - W-1, L-2.lvlx",
+    "SMBSp - W-1, L-3.lvlx",
+    "SMBSp - W-1, L-4.lvlx",
+}
+
 --Friendly place table for Mother Brain Rinka
 smastables._friendlyPlaces = {
     "SMAS - Start.lvlx",
