@@ -11,9 +11,6 @@ local warpTransition = require("warpTransition")
 local playerManager = require("playerManager")
 local Routine = require("routine")
 local bootmenu = require("bootmenu")
-if not bootmenu.active then
-    local pauseplus = require("pauseplus")
-end
 
 if SaveData.currentCostume == nil then
     SaveData.currentCostume = "TBD"
@@ -67,6 +64,9 @@ local currentCostume = player:getCostume()
 local costumes
 
 function smascharacterintros.onStart()
+    if not bootmenu.active then
+        pauseplus = require("pauseplus")
+    end
     local characters = {}
     
     local character = player.character;

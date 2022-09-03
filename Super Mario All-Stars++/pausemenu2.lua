@@ -939,6 +939,9 @@ function pausemenu2.onDraw()
     if currentCostume == "LARRYTHECUCUMBER" then
         costtext = "Larry (VeggieTales)"
     end
+    if currentCostume == "SHANTAE" then
+        costtext = "Shantae (Shantae's Galaxy, SMBX)"
+    end
     if currentCostume == "UNDERTALE-FRISK" then
         costtext = "Frisk (Undertale)"
     end

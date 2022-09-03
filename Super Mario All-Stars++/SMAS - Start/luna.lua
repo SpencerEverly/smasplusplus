@@ -10,6 +10,8 @@ local bootmenu = require("bootmenu")
 local battledependencies = require("classicbattlemode")
 battledependencies.battlemodeactive = false
 
+smasbooleans.disablePauseMenu = true
+
 bootmenu.active = false
 debugbox.bootactive = false
 GameData.rushModeActive = false
