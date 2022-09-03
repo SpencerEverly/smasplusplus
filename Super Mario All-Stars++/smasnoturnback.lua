@@ -1,6 +1,9 @@
 local smasnoturnback = {}
 
+local customCamera = require("customCamera")
+
 smasnoturnback.enabled = false
+smasnoturnback.overrideSection = false
 
 local GM_CAMERA_X = mem(0x00B2B984, FIELD_DWORD)
 local GM_CAMERA_Y = mem(0x00B2B9A0, FIELD_DWORD)
@@ -39,11 +42,16 @@ end
 function smasnoturnback.onInitAPI()
     registerEvent(smasnoturnback,"onCameraDraw")
     registerEvent(smasnoturnback,"onCameraUpdate")
+    registerEvent(smasnoturnback,"onDraw")
 end
 
 function smasnoturnback.onCameraUpdate()
-    if smasnoturnback.enabled then
-        
+    if smasnoturnback.enabled and not smasnoturnback.overrideSection then
+        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+        if camera.x >= player.sectionObj.boundary.left then
+            local x1 = fullX
+            smasnoturnback.setSectionBounds(player.section, x1, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
+        end
     end
 end
 

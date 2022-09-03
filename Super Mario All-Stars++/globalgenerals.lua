@@ -510,6 +510,15 @@ function globalgenerals.onTick()
         warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
         warpTransition.activateOnInstantWarps = false
     end
+    if table.icontains(smastables.__smb1Levels,Level.filename()) and not smasnoturnback.overrideSection then
+        smasnoturnback.enabled = true
+    end
+    if table.icontains(smastables.__smb1Levels,Level.filename()) and not smasnoturnback.overrideSection then
+        smasnoturnback.enabled = true
+    end
+    if smasnoturnback.overrideSection then
+        smasnoturnback.enabled = false
+    end
     if player.character == CHARACTER_SNAKE then
         smashud.visible.keys = true
         smashud.visible.itembox = true
