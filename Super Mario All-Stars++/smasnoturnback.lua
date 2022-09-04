@@ -43,8 +43,8 @@ function smasnoturnback.onCameraUpdate()
     for i = 0,20 do
         if not autoscroll.isSectionScrolling(i) then
             if smasnoturnback.enabled and not smasnoturnback.overrideSection then
-                for i = 1,4 do
-                    if smasnoturnback.turnBack ~= smasnoturnback.failsafeTable[i] then --Failsafe is the turnBack argument is anything else but the things in this script
+                for itwo = 1,4 do
+                    if smasnoturnback.turnBack ~= smasnoturnback.failsafeTable[itwo] then --Failsafe if the turnBack argument is anything else but the things in this script
                         smasnoturnback.turnBack = "left"
                     end
                 end
