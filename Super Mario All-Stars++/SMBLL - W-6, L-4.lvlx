@@ -1945,7 +1945,7 @@ ID:796;X:-193216;Y:-200232;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:94;X:-192544;Y:-200118;D:-1;MG:"Thank you\, <characterName>! But our princess is in another castle!";FD:1;
 ID:767;X:-199152;Y:-200208;D:-1;
 ID:767;X:-198544;Y:-200128;D:1;
-ID:29;X:-198208;Y:-200112;D:-1;
+ID:857;X:-198208;Y:-200112;D:-1;
 ID:589;X:-197886;Y:-200096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:767;X:-197168;Y:-200208;D:-1;
 ID:767;X:-196784;Y:-200240;D:-1;

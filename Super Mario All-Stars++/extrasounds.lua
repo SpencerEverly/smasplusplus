@@ -67,6 +67,8 @@ extrasounds.useOriginalJumpForDoubleJump = false
 extrasounds.enableBootSFX = true
 --Whenever to use the jump sound instead of the boot sound when unmounting a Yoshi.
 extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = false
+--Whenever to enable the death sound used by players.
+extrasounds.enableDeathSFX = true
 
 --**1UP SETTINGS**
 --Whenever to use the original 1UP sound instead of using the other custom sounds.
@@ -444,7 +446,7 @@ function extrasounds.onDraw()
 end
 
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
-    if extrasounds.active == true then --Only mute when active
+    if extrasounds.active then --Only mute when active
         Audio.sounds[1].muted = true --player-jump.ogg
         Audio.sounds[4].muted = true --block-smash.ogg
         Audio.sounds[7].muted = true --mushroom.ogg
@@ -692,8 +694,8 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             end
             --*SMB3 Boom Boom*
             for k,v in ipairs(NPC.get(15)) do --Adding a hurt sound for Boom Boom cause why not lol
-                if v.ai1 == 4 then
-                    extrasounds.playSFX(39, extrasounds.volume, 1, 100)
+                if v.ai1 == 4 and v.ai2 == 1 then
+                    extrasounds.playSFX(39, extrasounds.volume)
                 end
             end
             
@@ -794,7 +796,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
         end
     end
-    if extrasounds.active == false then --Unmute when not active
+    if not extrasounds.active then --Unmute when not active
         Audio.sounds[1].muted = false --player-jump.ogg
         Audio.sounds[4].muted = false --block-smash.ogg
         Audio.sounds[7].muted = false --mushroom.ogg
@@ -860,7 +862,7 @@ end
 function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
     local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
     local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
-    if extrasounds.active == true then --If it's true, play them
+    if extrasounds.active then --If it's true, play them
         if not Misc.isPaused() then --Making sure the sound only plays when not paused...
             for _,p in ipairs(Player.get()) do --This will get actions regarding all players
             
@@ -920,17 +922,17 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
 end
 
 function extrasounds.onPostPlayerKill()
-    if extrasounds.active == true then
+    if extrasounds.active then
         for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
     
     
     
     
             --**PLAYER DYING**
-            if p.character == CHARACTER_LINK then
-                extrasounds.playSFX(80)
-            else
-                extrasounds.playSFX(8)
+            if extrasounds.enableDeathSFX then
+                if p.character ~= CHARACTER_LINK or p.character ~= CHARACTER_SNAKE then
+                    extrasounds.playSFX(8)
+                end
             end
         
         
@@ -941,7 +943,7 @@ end
 
 function extrasounds.onInputUpdate() --Button pressing for such commands
     if not Misc.isPaused() then
-        if extrasounds.active == true then
+        if extrasounds.active then
             for _,p in ipairs(Player.get()) do --Get all players
             
             
@@ -999,7 +1001,7 @@ end
 
 function extrasounds.onPostNPCHarm(npc, harmtype, player)
     if not Misc.isPaused() then
-        if extrasounds.active == true then
+        if extrasounds.active then
             for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
                 
                 
@@ -1048,7 +1050,7 @@ end
 
 function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom coin sounds and etc.
     if not Misc.isPaused() then
-        if extrasounds.active == true then
+        if extrasounds.active then
             for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
                 
                 

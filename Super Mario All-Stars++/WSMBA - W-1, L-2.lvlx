@@ -2038,7 +2038,7 @@ ID:222;X:-138008;Y:-140096;D:-1;
 ID:222;X:-138008;Y:-140064;D:-1;
 ID:222;X:-138008;Y:-140032;D:-1;
 ID:178;X:-137920;Y:-140352;D:-1;ED:"Test Done!";
-ID:41;X:-157152;Y:-160064;D:-1;LR:"Orb";
+ID:999;X:-157152;Y:-160064;D:-1;LR:"Orb";XTRA:"{\n    \"addToTable\"\: false\,\n    \"incrementStarCount\"\: false\n}\n";
 ID:267;X:-157350;Y:-160082;D:-1;FD:1;NM:1;LR:"Igggy Fake";EA:"Boss Start";
 NPC_END
 DOORS

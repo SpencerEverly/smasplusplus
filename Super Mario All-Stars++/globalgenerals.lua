@@ -935,6 +935,12 @@ function globalgenerals.onExitLevel(winType)
             end
         elseif winType == LEVEL_END_STATE_GAMEEND then
             Level.load("SMAS - Credits.lvlx")
+        elseif winType == LEVEL_END_STATE_SMB2ORB then
+            if not Misc.inEditor() then
+                Level.load("map.lvlx")
+            elseif Misc.inEditor() then
+                Level.load(SaveData.editorWinnerLevelReload)
+            end
         end
     end
 end
@@ -947,7 +953,7 @@ function globalgenerals.onExit()
         end
     end
     if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
-        Level.load("SMAS - Credits.lvlx", nil, nil)
+        Level.load("SMAS - Credits.lvlx")
     end
     if table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
         SaveData.lastLevelPlayed = Level.filename()
