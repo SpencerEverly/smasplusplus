@@ -191,7 +191,9 @@ function neworb.onPostNPCKill(v,reason)
             if Misc.inMarioChallenge() == false then
                 if v.data._settings.useOptionalTable then
                     if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-                        table.insert(SaveData.completeLevelsOptional,Level.filename())
+                        if v.data._settings.addToTable then
+                            table.insert(SaveData.completeLevelsOptional,Level.filename())
+                        end
                         if v.data._settings.incrementStarCount then
                             SaveData.totalStarCount = SaveData.totalStarCount + 1
                         else
@@ -202,7 +204,9 @@ function neworb.onPostNPCKill(v,reason)
                     end
                 else
                     if not table.icontains(SaveData.completeLevels,Level.filename()) then
-                        table.insert(SaveData.completeLevels,Level.filename())
+                        if v.data._settings.addToTable then
+                            table.insert(SaveData.completeLevels,Level.filename())
+                        end
                         if v.data._settings.incrementStarCount then
                             SaveData.totalStarCount = SaveData.totalStarCount + 1
                         else

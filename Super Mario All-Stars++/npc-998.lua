@@ -141,11 +141,32 @@ function customNPC.onTickNPC(v)
                 data.state = 2
                 if GameData.rushModeActive == false or GameData.rushModeActive == nil then
                     if Misc.inMarioChallenge() == false then
-                        if not table.icontains(SaveData.completeLevels,Level.filename()) then
-                            SaveData.totalStarCount = SaveData.totalStarCount + 1
-                            table.insert(SaveData.completeLevels,Level.filename())
-                        elseif table.icontains(SaveData.completeLevels,Level.filename()) then
-                            SaveData.totalStarCount = SaveData.totalStarCount
+                        if v.data._settings.useOptionalTable then
+                            if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                                if v.data._settings.incrementStarCount then
+                                    SaveData.totalStarCount = SaveData.totalStarCount + 1
+                                else
+                                    SaveData.totalStarCount = SaveData.totalStarCount
+                                end
+                                if v.data._settings.addToTable then
+                                    table.insert(SaveData.completeLevelsOptional,Level.filename())
+                                end
+                            elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                                SaveData.totalStarCount = SaveData.totalStarCount
+                            end
+                        else
+                            if not table.icontains(SaveData.completeLevels,Level.filename()) then
+                                if v.data._settings.incrementStarCount then
+                                    SaveData.totalStarCount = SaveData.totalStarCount + 1
+                                else
+                                    SaveData.totalStarCount = SaveData.totalStarCount
+                                end
+                                if v.data._settings.addToTable then
+                                    table.insert(SaveData.completeLevels,Level.filename())
+                                end
+                            elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+                                SaveData.totalStarCount = SaveData.totalStarCount
+                            end
                         end
                     end
                 end
@@ -206,7 +227,7 @@ function customNPC.onTickNPC(v)
                 smasbooleans.musicMuted = false
                 GameData.winStateActive = false
                 if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-                    Level.exit(LEVEL_WIN_TYPE_STAR)
+                    Level.exit(v.data._settings.winType)
                 elseif GameData.rushModeActive == true and GameData.rushModeWon == true then
                     Level.load("SMAS - Rush Mode Results.lvlx")
                 end
