@@ -984,6 +984,12 @@ function pausemenu2.onDraw()
     if currentCostume == "SMW-PEACH" then
         costtext = "Super Mario World (SNES)"
     end
+    if currentCostume == "TUX" then
+        costtext = "Tux (Linux)"
+    end
+    if currentCostume == "SMB3-PEACH" then
+        costtext = "Super Mario Advance 4 (GBA)"
+    end
     
     
     
