@@ -82,7 +82,11 @@ function dependencies.onStart()
         anotherPowerDownLibrary = require("anotherPowerDownLibrary")
         playerphysicspatch = require("playerphysicspatch")
         kindHurtBlock = require("kindHurtBlock")
-        furyinventory = require("furyinventory")
+        if SaveData.accessibilityInventory then
+            furyinventory = require("furyinventory")
+        else
+            modernReserveItems = require("modernReserveItems")
+        end
         warpTransition.musicFadeOut = false
         warpTransition.levelStartTransition = warpTransition.TRANSITION_FADE
         warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE

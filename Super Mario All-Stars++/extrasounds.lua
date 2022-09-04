@@ -534,7 +534,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**TAIL ATTACK**
             if p.powerup == 4 or p.powerup == 5 then
-                if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0) and not p.keys.down and not p:mem(0x50, FIELD_BOOL) then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking?
+                if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0 and not p.keys.down and not p:mem(0x50, FIELD_BOOL) and p:mem(0x172, FIELD_BOOL)) then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking?
                     if extrasounds.enableTailAttackSFX then
                         extrasounds.playSFX(33)
                     end
@@ -561,13 +561,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**SPINJUMP FIRE/ICEBALLS**
             if p:mem(0x50, FIELD_BOOL) then --Is the player spinjumping?
-                if p:mem(0x160, FIELD_WORD) == 0 then --Set the cooldown number with the spinballtimer
-                    spinballtimer = 0
-                end
-                if p:mem(0x160, FIELD_WORD) >= 1 then --Add up when the cooldown is over 1
-                    spinballtimer = spinballtimer + 1
-                end
-                if spinballtimer == 1 then --If the timer is 0...
+                if p:mem(0x160, FIELD_WORD) == 0 then --Is the cooldown on this number?
                     if p.powerup == 3 then --Fireball sound
                         if extrasounds.enableFireFlowerSFX then
                             extrasounds.playSFX(18)
@@ -952,29 +946,29 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 
                 
                 --**FIREBALLS**
-                local isShootingFire = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and p.powerup == 3)
-                local isShootingHammer = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and p.powerup == 6)
-                local isShootingIce = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and p.powerup == 7)
+                local isShootingFire = (p:mem(0x160, FIELD_WORD) == 0 and p.powerup == 3 and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED and p:mem(0x160, FIELD_WORD, 0))
+                local isShootingHammer = (p:mem(0x160, FIELD_WORD) == 0 and p.powerup == 6 and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED and p:mem(0x160, FIELD_WORD, 0))
+                local isShootingIce = (p:mem(0x160, FIELD_WORD) == 0 and p.powerup == 7 and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED)
                 if isShootingFire then --Fireball sound
                     if extrasounds.enableFireFlowerSFX then
-                        extrasounds.playSFX(18, extrasounds.volume, 1, 25)
+                        extrasounds.playSFX(18, extrasounds.volume)
                     end
                 end
                 if isShootingHammer then --Hammer Throw sound
                     if extrasounds.enableHammerSuitSFX then
                         if not extrasounds.useFireSoundForHammerSuit then
-                            extrasounds.playSFX(105, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(105, extrasounds.volume)
                         elseif extrasounds.useFireSoundForHammerSuit then
-                            extrasounds.playSFX(18, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(18, extrasounds.volume)
                         end
                     end
                 end
                 if isShootingIce then --Iceball sound
                     if extrasounds.enableIceFlowerSFX then
                         if not extrasounds.useFireSoundForIce then
-                            extrasounds.playSFX(93, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(93, extrasounds.volume)
                         elseif extrasounds.useFireSoundForIce then
-                            extrasounds.playSFX(18, extrasounds.volume, 1, 25)
+                            extrasounds.playSFX(18, extrasounds.volume)
                         end
                     end
                 end

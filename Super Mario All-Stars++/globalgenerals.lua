@@ -37,9 +37,13 @@ local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
 if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
     if SaveData.disableX2char == false then
-        local twirl = require("Twirl")
-        local aw = require("anotherwalljump")
-        aw.registerAllPlayersDefault()
+        if SaveData.accessibilityTwirl then
+            twirl = require("Twirl")
+        end
+        if SaveData.accessibilityWallJump then
+            aw = require("anotherwalljump")
+            aw.registerAllPlayersDefault()
+        end
     end
 end
 

@@ -45,7 +45,7 @@ local defaultNPCPowerupMap = {
 }
 
 local players = {
-    "mario", "luigi", "peach", "toad", "link"
+    "mario", "luigi", "peach", "toad", "link", "megaman", "wario", "bowser", "klonoa", "ninjabomberman", "rosalina", "snake", "zelda", "ultimaterinka", "unclebroadsword", "samus",
 }
 
 local function registerItemsInternal(powerup, ids)
@@ -74,11 +74,11 @@ end
 
 
 local function loadPowerupAssets(thisPlayer,basePowerup)
-    if currentPowerup == nil or player.character > 5 then --Players beyond 5 won't be supported for custom powerups. At least, not yet...
+    if currentPowerup == nil then --Players beyond 5 won't be supported for custom powerups. At least, not yet...
         return
     end
     
-    local iniFile = Misc.resolveFile("anotherPowerup/"..players[thisPlayer.character] .. "-" .. currentPowerup.name .. ".ini")
+    local iniFile = Misc.resolveFile("graphics/"..players[thisPlayer.character].."/"..players[thisPlayer.character].."-"..currentPowerup.name..".ini")
     
     if (iniFile == nil) then
         iniFile = playerManager.getHitboxPath(thisPlayer.character, basePowerup);
@@ -113,8 +113,7 @@ end
 
 -- Replacement powerups
 ap.powerReplacements = {}
-ap.powerReplacements[3] = ap.registerPowerup("ap_fireflower")
-ap.powerReplacements[7] = ap.registerPowerup("ap_iceflower")
+ap.powerReplacements[2] = ap.registerPowerup("ap_big")
 
 -- registerItemTier registers a new tier chain for items.
 -- spawnedItem: number - The item that spawns from a block.
@@ -133,7 +132,7 @@ end
 
 -- Returns the player's current powerup, accounting for anotherpowerup powerups
 function ap.getPowerup()
-    if player.powerup == 3 or player.powerup == 7 then
+    if player.powerup == 2 then
         return currentPowerup.name
     else
         return player.powerup
@@ -181,7 +180,7 @@ function ap.onDraw()
     end
     
     -- Handle test mode menu, and reload hitboxes after a bit
-    if not Misc.inEditor() or lunatime.tick() == 1 then
+    if lunatime.tick() == 1 then
         loadPowerupAssets(player,player.powerup)
     end
 end

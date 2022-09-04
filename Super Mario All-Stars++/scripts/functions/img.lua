@@ -13,6 +13,19 @@ function Img.load(name) --This will not only check the main SMBX2 folders, but w
     return nil
 end
 
+function Img.loadCharacter(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
+    local file = File.load(name) or File.load(name..".png")
+    if file and SaveData.currentCostume == "N/A" then
+        return Graphics.loadImageResolved(name)
+            or Graphics.loadImageResolved("costumes/" .. name)
+            or Graphics.loadImageResolved("graphics/" .. name)
+            or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
+    elseif file and SaveData.currentCostume ~= "N/A" then
+        return Graphics.loadImageResolved("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
+    end
+    return nil
+end
+
 --Img.draw(ImageName, x coordinate, y coordinate, true/false if it's with the priority, true/false if using scene coordinates, priority, opacity)
 function Img.draw(name, x, y, withPriority, sceneCoords, arg6, arg7) --Drawing graphics got a lot better.
     local fileImage = Graphics.loadImageResolved(name)

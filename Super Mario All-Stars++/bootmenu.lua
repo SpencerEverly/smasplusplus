@@ -688,10 +688,6 @@ local function menuDialogue()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
-local function gamebootDialogue()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question GameBoot>", speakerName = "Start Game", pauses = false, updatesInPause = true})
-end
-
 local function battleModeDialogue()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.5><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
@@ -751,6 +747,37 @@ local function ResolutionChangeScale3()
         SaveData.letterbox = true
     end
     littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Scaling toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+end
+
+local function AccessibilityOptions1()
+    littleDialogue.create({text = "<setPos 400 32 0.5 -1.2><question AccessibilityStuff>", speakerName = "Accessibility Options", pauses = false, updatesInPause = true})
+end
+
+local function AccessibilityOptionToggle1()
+    SaveData.accessibilityTwirl = not SaveData.accessibilityTwirl
+    if SaveData.accessibilityTwirl then
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    else
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    end
+end
+
+local function AccessibilityOptionToggle2()
+    SaveData.accessibilityWallJump = not SaveData.accessibilityWallJump
+    if SaveData.accessibilityWallJump then
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    else
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    end
+end
+
+local function AccessibilityOptionToggle3()
+    SaveData.accessibilityInventory = not SaveData.accessibilityInventory
+    if SaveData.accessibilityInventory then
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    else
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    end
 end
 
 local function ClockChange1()
@@ -1778,8 +1805,17 @@ littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFuncti
 littleDialogue.registerAnswer("Options",{text = "Toggle Letterbox Scaling",chosenFunction = function() Routine.run(ResolutionChangeScale3) end})
 littleDialogue.registerAnswer("Options",{text = "Toggle Resolution Border",chosenFunction = function() Routine.run(ResolutionChangeBorder2) end})
 littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
+littleDialogue.registerAnswer("Options",{text = "Accessibility Options",chosenFunction = function() Routine.run(AccessibilityOptions1) end})
 littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
 littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
+
+
+
+littleDialogue.registerAnswer("AccessibilityStuff",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Twirling",chosenFunction = function() Routine.run(AccessibilityOptionToggle1) end})
+littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Wall Jumping",chosenFunction = function() Routine.run(AccessibilityOptionToggle2) end})
+littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Additional Inventory",chosenFunction = function() Routine.run(AccessibilityOptionToggle3) end})
+
 
 
 
@@ -1829,18 +1865,19 @@ littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",cho
 
 
 littleDialogue.registerAnswer("ClockSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("ClockSelect",{text = "Disable Clock",chosenFunction = function() SaveData.clockTheme = "disabled" Routine.run(ClockChange1) end})
 littleDialogue.registerAnswer("ClockSelect",{text = "Default (Normal)",chosenFunction = function() SaveData.clockTheme = "normal" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Vintage",chosenFunction = function() SaveData.clockTheme = "vintage" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "Vintage",chosenFunction = function() SaveData.clockTheme = "vintage" Routine.run(ClockChange1) end})
 littleDialogue.registerAnswer("ClockSelect",{text = "Homedics SS-4000",chosenFunction = function() SaveData.clockTheme = "homedics" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "R.O.B. Clock",chosenFunction = function() SaveData.clockTheme = "rob" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Modern",chosenFunction = function() SaveData.clockTheme = "modern" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Windows 98",chosenFunction = function() SaveData.clockTheme = "windows98" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "R.O.B. Clock",chosenFunction = function() SaveData.clockTheme = "rob" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "Modern",chosenFunction = function() SaveData.clockTheme = "modern" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "Windows 98",chosenFunction = function() SaveData.clockTheme = "windows98" Routine.run(ClockChange1) end})
 littleDialogue.registerAnswer("ClockSelect",{text = "Windows XP",chosenFunction = function() SaveData.clockTheme = "windowsxp" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Windows 7",chosenFunction = function() SaveData.clockTheme = "windows7" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "Windows 7",chosenFunction = function() SaveData.clockTheme = "windows7" Routine.run(ClockChange1) end})
 littleDialogue.registerAnswer("ClockSelect",{text = "Windows 10",chosenFunction = function() SaveData.clockTheme = "windows10" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Windows 11",chosenFunction = function() SaveData.clockTheme = "windows11" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Mac OS X",chosenFunction = function() SaveData.clockTheme = "macosx" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Ubuntu",chosenFunction = function() SaveData.clockTheme = "ubuntu" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "Windows 11",chosenFunction = function() SaveData.clockTheme = "windows11" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "Mac OS X",chosenFunction = function() SaveData.clockTheme = "macosx" Routine.run(ClockChange1) end})
+--littleDialogue.registerAnswer("ClockSelect",{text = "Ubuntu",chosenFunction = function() SaveData.clockTheme = "ubuntu" Routine.run(ClockChange1) end})
 littleDialogue.registerAnswer("ClockSelect",{text = "Disable Clock",chosenFunction = function() SaveData.clockTheme = "disabled" Routine.run(ClockChange1) end})
 littleDialogue.registerAnswer("ClockSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 

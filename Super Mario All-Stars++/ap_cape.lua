@@ -14,23 +14,24 @@
 
 local ai = require("ap_cape_ai")
 local extrasounds = require("extrasounds")
+local smasfunctions = require("smasfunctions")
 
 local apt = {}
 
 apt.spritesheets = {
-    Graphics.loadImageResolved("anotherPowerup/mario-ap_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/luigi-ap_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/peach-ap_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/toad-ap_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/link-ap_cape.png"),
+    Img.loadCharacter("mario-8.png"),
+    Img.loadCharacter("luigi-8.png"),
+    Img.loadCharacter("peach-8.png"),
+    Img.loadCharacter("toad-8.png"),
+    Img.loadCharacter("link-8.png"),
 }
 
 apt.capeSpritesheets = {
-    Graphics.loadImageResolved("anotherPowerup/mario-ap_cape_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/luigi-ap_cape_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/peach-ap_cape_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/toad-ap_cape_cape.png"),
-    Graphics.loadImageResolved("anotherPowerup/link-ap_cape_cape.png"),
+    Img.loadCharacter("mario-8-cape.png"),
+    Img.loadCharacter("luigi-8-cape.png"),
+    Img.loadCharacter("peach-8-cape.png"),
+    Img.loadCharacter("toad-8-cape.png"),
+    Img.loadCharacter("link-8-cape.png"),
 }
 
 apt.apSounds = {

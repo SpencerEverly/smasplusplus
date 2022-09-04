@@ -203,6 +203,7 @@ end
 
 function modernReserveItems.onInitAPI()
     registerEvent (modernReserveItems, "onTick", "onTick", true)
+    registerEvent(modernReserveItems,"onStart")
 end
 
 function modernReserveItems.getThrowSettings(npcID)
@@ -373,10 +374,24 @@ function modernReserveItems.onTick()
     if not isOverworld and modernReserveItems.enabled then
         for _, p in ipairs(Player.get()) do
             p:mem(0x130,FIELD_BOOL,false) -- "DropRelease" from source, via MrDoubleA
-            if p.reservePowerup ~= 0 and modernReserveItems.dropped == true and not Misc.isPaused() then
-                modernReserveItems.drop(p.reservePowerup, p)
+            if SaveData.accessibilityInventory then
+                if p.reservePowerup ~= 0 and modernReserveItems.dropped == true and not Misc.isPaused() then
+                    modernReserveItems.drop(p.reservePowerup, p)
+                end
+            elseif not SaveData.accessibilityInventory then
+                if p.reservePowerup ~= 0 and p.keys.dropItem and not Misc.isPaused() then
+                    modernReserveItems.drop(p.reservePowerup, p)
+                end
             end
         end
+    end
+end
+
+function modernReserveItems.onStart()
+    if SaveData.accessibilityInventory then
+        modernReserveItems.playSounds = false
+    elseif not SaveData.accessibilityInventory then
+        modernReserveItems.playSounds = true
     end
 end
 

@@ -248,6 +248,17 @@ if GameData.____sfxVolume == nil then
     GameData.____sfxVolume = 1
 end
 
+--Accessibility options
+if SaveData.accessibilityTwirl == nil then
+    SaveData.accessibilityTwirl = false
+end
+if SaveData.accessibilityWallJump == nil then
+    SaveData.accessibilityWallJump = false
+end
+if SaveData.accessibilityInventory == nil then
+    SaveData.accessibilityInventory = false
+end
+
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 
 if SaveData.playerName == nil then --This is for adding the player name to the launcher, aside from the total stars used
