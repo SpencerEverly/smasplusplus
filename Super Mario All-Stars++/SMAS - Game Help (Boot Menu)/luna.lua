@@ -318,7 +318,7 @@ end
 Cheats.register("fcommandssuck",{
     onActivate = (function()
         Defines.player_hasCheated = false
-        spartaremix = require("spartaremix")
+        --spartaremix = require("spartaremix")
         malcwarp = require("malcwarp")
         thecostume = require("thecostume")
         exitcommands = require("exitcommands")

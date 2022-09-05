@@ -25,13 +25,8 @@ function hearthover.onTick()
 end
 
 function hearthover.onDraw()
-    local characters = {}
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
-    local costumes
     if hearthover.active == true then
-        if currentCostume == "SPONGEBOBSQUAREPANTS" then
+        if SaveData.currentCostume == "SPONGEBOBSQUAREPANTS" then
             local heartfull = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/heartfull.png")
             local heartempty = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/heartempty.png")
             local leaficon = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/leafhud.png")
@@ -81,7 +76,7 @@ function hearthover.onDraw()
                 Graphics.drawImageWP(heartfull, player.x - camera.x + 22,  player.y - camera.y - 55, -24)
             end
         end
-        if currentCostume == "SEE-TANGENT" then
+        if SaveData.currentCostume == "SEE-TANGENT" then
             local heartfull2 = Graphics.loadImageResolved("costumes/toad/SEE-Tangent/heartfull.png")
             local heartempty2 = Graphics.loadImageResolved("costumes/toad/SEE-Tangent/heartempty.png")
             if player.deathTimer >= 0 then
@@ -105,7 +100,7 @@ function hearthover.onDraw()
                 Graphics.drawImageWP(heartfull2, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
             end
         end
-        if currentCostume == "GA-CAILLOU" then
+        if SaveData.currentCostume == "GA-CAILLOU" then
             local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
             if player.deathTimer >= 0 then
                 

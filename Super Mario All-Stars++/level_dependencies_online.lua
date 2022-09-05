@@ -60,16 +60,12 @@ function dependencies.onStart()
     if SaveData.ut_enabled == nil then
         SaveData.ut_enabled = SaveData.ut_enabled or 0
     end
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
     
     if player.character == CHARACTER_NINJABOMBERMAN then
         Defines.player_walkspeed = 6
         Defines.player_runspeed = 6
     end
     
-    local costumes
     if SaveData.disableX2char == false then
         mm = require("megamann");
         mm.playIntro = false;
@@ -145,11 +141,6 @@ function dependencies.onTick()
     if player.character == CHARACTER_NINJABOMBERMAN then
         Graphics.activateHud(true)
     end
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
-
-    local costumes
     if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
         if NPC.config[274].score == 11 then
             Sound.playSFX(147)

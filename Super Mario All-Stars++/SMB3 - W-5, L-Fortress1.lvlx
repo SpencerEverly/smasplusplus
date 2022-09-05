@@ -102,7 +102,7 @@ BLOCK_END
 NPC
 ID:37;X:-199288;Y:-200288;D:-1;
 ID:259;X:-199456;Y:-200128;D:-1;
-ID:589;X:-199582;Y:-200064;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
+ID:589;X:-199582;Y:-200064;D:-1;XTRA:"{\n    \"jumpHeight\"\: 200\,\n    \"useFixed\"\: true\n}\n";
 NPC_END
 LAYERS
 LR:"Default";

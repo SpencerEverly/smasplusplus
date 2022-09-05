@@ -1,7 +1,8 @@
 --[[
 
-    Cape for anotherpowerup.lua
+    Cape for smaspowerupsystem.lua
     by MrDoubleA
+    Modified by Spencer Everly
 
     Credit to JDaster64 for making a SMW physics guide and ripping SMA4 Mario/Luigi sprites
     Custom Toad and Link sprites by Legend-Tony980 (https://www.deviantart.com/legend-tony980/art/SMBX-Toad-s-sprites-Fourth-Update-724628909, https://www.deviantart.com/legend-tony980/art/SMBX-Link-s-sprites-Sixth-Update-672269804)

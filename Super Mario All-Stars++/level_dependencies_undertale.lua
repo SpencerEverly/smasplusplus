@@ -16,12 +16,7 @@ function delayedMusicChange(killedNPC)
 end
 
 function undertaledepends.onTick()
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
-    
-    local costumes
-    if currentCostume == "UNDERTALE-FRISK" then
+    if SaveData.currentCostume == "UNDERTALE-FRISK" then
         stats.enabled = true
         stats.alwaysBig = true
         --Tables aren't detecting anything, so we have to manually put everything in a for loop...
@@ -32,7 +27,7 @@ function undertaledepends.onTick()
         if #NPC.get(smastables.allBaseGameKillableEnemyIDs) == 0 and table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
             Routine.run(delayedMusicChange, killedNPC)
         end
-    elseif currentCostume then
+    elseif SaveData.currentCostume then
         stats.enabled = false
         stats.alwaysBig = false
     end

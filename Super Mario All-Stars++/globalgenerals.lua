@@ -395,7 +395,7 @@ littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "No",chosenFunction 
 local cooldown = 0
 
 function globalgenerals.checkSpecialAbilityMessage()
-    if currentCostume == "GA-BORIS" then
+    if SaveData.currentCostume == "GA-BORIS" then
         if not Misc.isPaused() then
             if SaveData.toggleCostumeAbilities == true then
                 if player.keys.altRun == KEYS_PRESSED and GameData.activateAbilityMessage == false or GameData.activateAbilityMessage == nil then
@@ -552,10 +552,8 @@ function globalgenerals.onTick()
             blockidx5000check = true
         end
     end
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
     
-    if currentCostume == "SMB3-WALUIGI" then
+    if SaveData.currentCostume == "SMB3-WALUIGI" then
         Player.setCostume(10, nil)
     end
     

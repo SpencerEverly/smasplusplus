@@ -66,16 +66,12 @@ function dependencies.onStart()
     if SaveData.ut_enabled == nil then
         SaveData.ut_enabled = SaveData.ut_enabled or 0
     end
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
     
     if player.character == CHARACTER_NINJABOMBERMAN then
         Defines.player_walkspeed = 6
         Defines.player_runspeed = 6
     end
     
-    local costumes
     if SaveData.disableX2char == false then
         undertaledepends = require("level_dependencies_undertale")
         warpTransition = require("warpTransition")

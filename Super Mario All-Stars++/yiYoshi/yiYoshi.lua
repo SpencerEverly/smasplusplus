@@ -1108,11 +1108,6 @@ do
 
 
     function handleFlutterJump()
-        local character = player.character;
-        local costumes = playerManager.getCostumes(player.character)
-        local currentCostume = player:getCostume()
-
-        local costumes
         if not canUseFlutterJump() then
             resetFlutterJump()
             return
@@ -1708,7 +1703,6 @@ do
         p:mem(0x12,FIELD_BOOL,false)
 
         SFX.play(yoshi.tongueSettings.spitSound)
-        local currentCostume = player:getCostume()
         if (SaveData.currentCostume == "SMA3") then
             Sound.playSFX("ninjabomberman/SMA3/SFX/spit-out.ogg")
         end
@@ -2264,7 +2258,6 @@ do
         -- Update the trail
         local followingEggCount = #data.followingEggs
         local trailLength = 0
-        local currentCostume = player:getCostume()
         
         if followingEggCount > 0 then
             local maxTrailSize = (followingEggCount+1)*yoshi.tongueSettings.eggDelay

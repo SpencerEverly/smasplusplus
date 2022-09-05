@@ -58,11 +58,6 @@ function musicalchairs.onDraw()
     --Example: if section.musicPath == "_OST/(music folder)/(music-file)(.ogg)" then
     --section.musicPath == "_OST/(music folder)/(music-file)(.ogg)" --Replace the file with this instead
     
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
-    local costumeIdx = table.ifind(costumes,currentCostume)
-    
     if started and not SaveData.disableX2char then
         for i = 0,20 do
             for _,p in ipairs(Player.get()) do

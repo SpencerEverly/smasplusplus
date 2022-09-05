@@ -1,7 +1,7 @@
 --SMAS++ MAIN MENU
 --Code by Spencer Everly, MrDoubleA, and others
 
-local versionnumber = "Open Source Edition" --This is the version number of this episode. It can be changed to any version we're on.
+local versionnumber = "v0.0.0.0" --This is the version number of this episode. It can be changed to any version we're on.
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
 local datetime = require("datetime")
@@ -26,6 +26,39 @@ local menufontwebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-we
 runPressedState = false
 
 local bootmenu = {}
+
+if SaveData.turnOnMainMenuMusicRng == nil then
+    SaveData.turnOnMainMenuMusicRng = false
+end
+
+bootmenu.musicRng = {
+    [1] = "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg",
+    [2] = "_OST/Donkey Kong Country/20 Gang-Plank Galleon.spc|0;g=2.5",
+    [3] = "_OST/Kirby Air Ride/3d_machine.ogg",
+    [4] = "_OST/Dig Dug - Digging Strike/Horivalou.ogg",
+    [5] = "_OST/New Super Mario Bros. DS/Walking the Plains.ogg",
+    [6] = "_OST/Mario Kart 8 (Deluxe)/Wii Mushroom Gorge.ogg",
+    [7] = "_OST/Super Mario 64/Title Theme.ogg",
+    [8] = "_OST/Super Mario Bros/Underground.ogg",
+    [9] = "_OST/Nintendo Land/J_Blf_night.w.48.dspadpcm.ogg",
+    [10] = "_OST/Super Mario All-Stars++ (Beta)/Battle Plains.ogg",
+    [11] = "_OST/Super Smash Bros. Brawl/W24 - Temple - Super Smash Bros. Melee.ogg",
+    [12] = "_OST/Super Mario Bros. 3 (NES, VRC6 by skydev) - OST.nsf|0;g=2.2",
+    [13] = "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2",
+    [14] = "_OST/Takeshi no Chousenjou - OST.nsf|0;g=1.7",
+    [15] = "_OST/Shovel Knight - OST.nsf|3;g=2",
+    [16] = "_OST/Mega Man 10 - OST.nsf|8;g=2",
+    [17] = "_OST/Super Smash Bros. Ultimate/Mario/a76_smo_finaldungeon.ogg",
+    [18] = "_OST/Super Mario Bros 2/Albatrosses.ogg",
+    [19] = "_OST/Super Mario Bros 2/Desert.ogg",
+    [20] = "_OST/Super Mario Bros 3/Sky Horizons.ogg",
+    [21] = "_OST/Satellaview BS-X/05 Town.spc|0;g=2.5",
+    [22] = "_OST/New Super Mario Bros. U (Deluxe)/STRM_BGM_CHIJOU.ogg",
+    [23] = "_OST/All Stars Menu/Boot Menu.ogg",
+    [24] = "_OST/Photo Channel (Wii)/Slideshow (Scenic).ogg",
+    [25] = "_OST/Star Fox/109 Corneria.spc|0;g=2.5",
+    [26] = "_OST/Super Mario Bros/Castle.ogg",
+}
 
 if bootmenu.active then
     aw.enabled = false
@@ -561,6 +594,10 @@ local function mapExit()
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
+    Routine.wait(0.1, true)
+    if SaveData.turnOnMainMenuMusicRng then
+        Sound.changeMusic(bootmenu.musicRng[rng.randomInt(1,#bootmenu.musicRng)], 0)
+    end
     Routine.wait(900, true)
     smasbooleans.overrideMusicVolume = true
     Audio.MusicFadeOut(player.section, 4000)
@@ -800,6 +837,17 @@ local function X2Char()
         SaveData.disableX2char = false
         littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
     end
+end
+
+local function turnOnRngMusic()
+    SaveData.turnOnMainMenuMusicRng = not SaveData.turnOnMainMenuMusicRng
+    if SaveData.turnOnMainMenuMusicRng then
+        Sound.changeMusic(bootmenu.musicRng[rng.randomInt(1,#bootmenu.musicRng)], 0)
+    end
+    if not SaveData.turnOnMainMenuMusicRng then
+        Sound.restoreOriginalMusic(-1)
+    end
+    littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function InputConfig1()
@@ -1249,13 +1297,6 @@ function bootmenu.onStart()
         if Time.month() == 03 and Time.day() == 17 then --St. Patrick's Day event
             stpatricksday = true
         end
-        if Level.filename() == "intro_SMAS.lvlx" then
-            if not SaveData.firstBootCompleted then
-                --Nothing
-            elseif SaveData.firstBootCompleted then
-                Sound.changeMusic("_OST/All Stars Menu/Boot Menu.ogg", 0)
-            end
-        end
         if Level.filename() == "intro_SMBX1.2.lvlx" then
             Routine.run(theme4scrolling)
         end
@@ -1681,12 +1722,12 @@ function bootmenu.onDraw()
             
         end
         if versionactive then
-            Graphics.drawBox{x=660, y=5, width=136, height=20, color=Color.black..0.5, priority=-7}
-            textplus.print{x=667, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree} --Version number of the episode
+            Graphics.drawBox{x=710, y=5, width=84, height=28, color=Color.black..0.5, priority=-7}
+            textplus.print{x=718, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree, xscale = 1.6, yscale = 1.6} --Version number of the episode
         end
         if escquit then
-            textplus.print{x=10, y=10, text = "Press pause to quit.", priority=-6, color=Color.yellow}
-            Graphics.drawBox{x=5, y=5, width=95, height=20, color=Color.red..0.5, priority=-7}
+            textplus.print{x=12, y=12, text = "Press pause to quit.", priority=-6, color=Color.yellow, xscale = 1.6, yscale = 1.6}
+            Graphics.drawBox{x=5, y=5, width=148, height=28, color=Color.red..0.5, priority=-7}
         end
         if pressjumpwords then
             textplus.print{x=210, y=390, text = "Press jump to start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufont}
@@ -1705,16 +1746,16 @@ function bootmenu.onDraw()
             --nothing
         end
         if twoplayercheck then
-            textplus.print{x=295, y=10, text = "Two player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
+            textplus.print{x=243, y=10, text = "2 player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
         end
         if twoplayercheckactive then
-            textplus.print{x=300, y=10, text = "Two player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
+            textplus.print{x=248, y=10, text = "2 player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
         end
         if x2noticecheck then
-            textplus.print{x=303, y=20, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont}
+            textplus.print{x=243, y=26, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
         end
         if x2noticecheckactive then
-            textplus.print{x=308, y=20, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont}
+            textplus.print{x=248, y=26, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
         end
         if charactercheck then
             textplus.print{x=303, y=20, text = "P1's Active Character: ", priority=-7, color=Color.yellow, font=statusFont}
@@ -1723,16 +1764,16 @@ function bootmenu.onDraw()
             --nothing
         end
         if not active then
-            textplus.print{x=290, y=500, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red}
-            textplus.print{x=286, y=497, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow}
-            textplus.print{x=286, y=510, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red}
-            textplus.print{x=282, y=507, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow}
+            textplus.print{x=180, y=480, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red, xscale = 2, yscale = 2}
+            textplus.print{x=178, y=477, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
+            textplus.print{x=170, y=500, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red, xscale = 2, yscale = 2}
+            textplus.print{x=168, y=497, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
         end
         if active then
             --nothing
         end
         if active3 then
-            textplus.print{x=160, y=500, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont}
+            textplus.print{x=40, y=450, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont, xscale = 1.5, yscale = 1.5}
         end
         if active4 then
             textplus.print{x=150, y=550, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
@@ -1798,6 +1839,7 @@ littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunctio
 littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
 littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
 littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
+littleDialogue.registerAnswer("Options",{text = "Toggle Main Menu Music Shuffle Mode",chosenFunction = function() Routine.run(turnOnRngMusic) end})
 littleDialogue.registerAnswer("Options",{text = "Change Player Name",chosenFunction = function() Routine.run(ChangeName1) end})
 littleDialogue.registerAnswer("Options",{text = "Change Profile Picture",chosenFunction = function() Routine.run(ChangePFP1) end})
 littleDialogue.registerAnswer("Options",{text = "Change Clock Theme",chosenFunction = function() Routine.run(ClockSelect1) end})

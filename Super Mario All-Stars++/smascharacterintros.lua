@@ -90,14 +90,7 @@ function smascharacterintros.onStart()
 end
 
 function smascharacterintros.onDraw()
-    local characters = {}
-    
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
     local currentCostume = player:getCostume()
-
-    local costumes
-    
     SaveData.currentCostume = currentCostume
     
     if currentCostume == nil then
