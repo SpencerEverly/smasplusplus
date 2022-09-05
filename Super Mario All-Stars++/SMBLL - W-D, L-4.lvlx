@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. Lost Levels\: World D-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-196448;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
+SC:0;L:-200000;R:-196448;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
 SC:1;L:-180000;R:-177120;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Ghost House.spc|0\;g=2.5";BG:11;
 SC:2;L:-160000;R:-158944;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Bonus.spc|0\;g=2.5";BG:7;
 SC:3;L:-140000;R:-135328;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Last Battle.spc|0\;g=2.5";BG:41;

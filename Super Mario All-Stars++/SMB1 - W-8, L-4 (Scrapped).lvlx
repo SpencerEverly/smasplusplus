@@ -2,11 +2,11 @@ HEAD
 TL:"Super Mario Bros. 1\: World 8-4 (Scrapped)";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: false\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-195584;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:24;
-SC:1;L:-181216;R:-176800;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:24;
-SC:2;L:-161312;R:-156864;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:24;
-SC:3;L:-140000;R:-137408;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:56;UW:1;
-SC:4;L:-120000;R:-118560;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:24;
+SC:0;L:-200000;R:-195584;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.ogg";BG:24;
+SC:1;L:-181216;R:-176800;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Castle.ogg";BG:24;
+SC:2;L:-161312;R:-156864;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Castle.ogg";BG:24;
+SC:3;L:-140000;R:-137408;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Castle.ogg";BG:56;UW:1;
+SC:4;L:-120000;R:-118560;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Castle.ogg";BG:24;
 SC:5;L:-100000;R:-99200;T:-101088;B:-100000;MZ:44;MF:"_OST/Z - Super Metroid - Continue.spc";BG:47;
 SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:24;MF:"_OST/Super Mario Bros 2/Boss.spc|0\;g=2.5";BG:57;
 SC:7;L:-60000;R:-58624;T:-60600;B:-60000;MZ:24;MF:"_OST/Super Mario Bros 2/Scrapped/King Wart (Original).spc|0\;g=2.7";BG:54;

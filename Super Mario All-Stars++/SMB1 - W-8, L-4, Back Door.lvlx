@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. 1\: World 8-4 (Back Door)";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;OE:1;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.ogg";BG:41;OE:1;
 SECTION_END
 STARTPOINT
 ID:1;X:-199900;Y:-200246;D:1;

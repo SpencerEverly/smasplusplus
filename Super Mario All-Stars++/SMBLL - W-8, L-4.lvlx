@@ -2,10 +2,10 @@ HEAD
 TL:"Super Mario Bros. Lost Levels\: World 8-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-196256;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:1;L:-180000;R:-178336;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
-SC:3;L:-140000;R:-135264;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
+SC:0;L:-200000;R:-196256;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
+SC:1;L:-180000;R:-178336;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
+SC:3;L:-140000;R:-135264;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
 SC:4;L:-120000;R:-114208;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Last Battle.spc|0\;g=2.5";BG:41;
 SC:5;L:-100000;R:-99200;T:-100600;B:-100000;MZ:0;MF:"";BG:41;
 SC:6;L:-80000;R:-79200;T:-80600;B:-80000;MZ:0;MF:"";BG:0;

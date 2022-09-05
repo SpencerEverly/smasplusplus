@@ -3,7 +3,7 @@ TL:"Super Mario Bros. 1\: World 7-4";XTRA:"{\n    \"timer\"\: {\n        \"enabl
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-197664;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Album.spc|0\;g=2.5";BG:62;
-SC:1;L:-180000;R:-172704;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Castle.spc|0\;g=2.5";BG:41;
+SC:1;L:-180000;R:-172704;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Castle.ogg";BG:41;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Bowser.spc|0\;g=2.6";BG:41;
 SC:3;L:-140000;R:-137120;T:-140600;B:-139072;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/Battle Plains.ogg";BG:10;
 SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:0;MF:"";BG:0;
