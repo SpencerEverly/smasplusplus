@@ -2128,7 +2128,7 @@ ID:21;X:-157376;Y:-160192;D:-1;
 ID:754;X:-157312;Y:-160128;D:-1;XTRA:"{\n    \"aOptions\"\: {\n        \"roundDelay\"\: 4\,\n        \"shootDelay\"\: 4\n    }\,\n    \"bOptions\"\: {\n        \"shootAngle\"\: 45\,\n        \"shootSpeed\"\: 1.5\n    }\n}\n";
 ID:267;X:-139430;Y:-140178;D:-1;LR:"bossreal";ED:"Boss Death";
 ID:267;X:-139430;Y:-140178;D:-1;FD:1;NM:1;LR:"bossnotmoving";EA:"Boss Begin";
-ID:1000;X:-139712;Y:-140288;D:-1;LR:"star";
+ID:1000;X:-139712;Y:-140288;D:-1;LR:"star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-139608;Y:-140176;D:-1;MG:"WIP for now";FD:1;LR:"star";
 ID:224;X:-159608;Y:-160064;D:-1;
 ID:224;X:-159608;Y:-160032;D:-1;

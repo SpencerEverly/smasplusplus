@@ -2401,7 +2401,7 @@ ID:808;X:-175584;Y:-180256;D:-1;
 ID:808;X:-175456;Y:-180256;D:-1;
 ID:756;X:-159648;Y:-160348;D:-1;ED:"Boss End";
 ID:808;X:-159456;Y:-160192;D:-1;
-ID:1000;X:-159200;Y:-160192;D:-1;LR:"Star";
+ID:1000;X:-159200;Y:-160192;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:350;X:-177280;Y:-180032;D:-1;XTRA:"{\n    \"jumpHeight\"\: 450\,\n    \"useFixed\"\: true\n}\n";
 ID:350;X:-176480;Y:-180032;D:-1;XTRA:"{\n    \"jumpHeight\"\: 500\,\n    \"useFixed\"\: true\n}\n";
 ID:761;X:-179008;Y:-180368;D:-1;GE:1;GT:1;GD:1;GM:12;

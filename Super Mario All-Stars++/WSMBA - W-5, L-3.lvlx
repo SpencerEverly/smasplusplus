@@ -596,7 +596,7 @@ ID:397;X:-176736;Y:-180064;W:32;H:32;
 BLOCK_END
 NPC
 ID:94;X:-177312;Y:-180118;D:-1;MG:"YAWWWNNN... I keep tired of saying this... TEH PRINZESS IS IN ME AND LARRY CITYZ!!!";FD:1;NM:1;
-ID:1000;X:-177152;Y:-180192;D:-1;
+ID:1000;X:-177152;Y:-180192;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:86;X:-178479;Y:-180368;D:-1;EA:"Bowser Start";ED:"Bowser End";
 ID:17;X:-199232;Y:-198716;D:-1;
 ID:17;X:-199232;Y:-198748;D:-1;

@@ -2400,7 +2400,7 @@ ID:151;X:-179624;Y:-180112;D:-1;MG:"TO ELEVATOR";FD:1;
 ID:75;X:-179363;Y:-180118;D:-1;MG:"I got some bad news!";FD:1;LR:"Didn't know";ET:"Message 0";
 ID:94;X:-179360;Y:-180118;D:-1;MG:"Oh\, the elevator is locked? Sorry about that.";FD:1;LR:"Elevator locked";ET:"Message 2.1";
 ID:267;X:-99366;Y:-100114;D:-1;LR:"Boss";ED:"Boss Clear 1";
-ID:1000;X:-99328;Y:-100160;D:-1;LR:"Boss Clear";
+ID:1000;X:-99328;Y:-100160;D:-1;LR:"Boss Clear";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:403;X:-99424;Y:-100100;D:-1;MG:"Thanks for saving me. I'll... stay here until you leave.";FD:1;NM:1;LR:"Boss Clear";
 ID:178;X:-99840;Y:-100096;D:-1;ED:"Message 4";
 NPC_END

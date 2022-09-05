@@ -489,7 +489,7 @@ ID:170;X:-179680;Y:-180416;D:-1;
 ID:264;X:-179552;Y:-180416;D:-1;
 ID:169;X:-179808;Y:-180416;D:-1;
 ID:34;X:-179744;Y:-180384;D:-1;NM:1;
-ID:1000;X:-179776;Y:-180192;D:-1;
+ID:1000;X:-179776;Y:-180192;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-199424;IY:-200256;OX:-179600;OY:-180096;DT:2;ID:1;OD:3;

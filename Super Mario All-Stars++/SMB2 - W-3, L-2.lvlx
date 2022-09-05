@@ -3143,7 +3143,7 @@ ID:23;X:-138592;Y:-140160;
 ID:24;X:-138528;Y:-140160;
 BGO_END
 NPC
-ID:1000;X:-160128;Y:-160352;D:-1;LR:"Star";
+ID:1000;X:-160128;Y:-160352;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:805;X:-160832;Y:-160384;D:-1;NM:1;LR:"MushroomBlocksBoss";
 ID:805;X:-160800;Y:-160384;D:-1;NM:1;LR:"MushroomBlocksBoss";
 ID:805;X:-160864;Y:-160384;D:-1;NM:1;LR:"MushroomBlocksBoss";

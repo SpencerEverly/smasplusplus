@@ -316,7 +316,7 @@ ID:212;X:-179712;Y:-180416;D:-1;
 ID:93;X:-179952;Y:-180464;D:-1;
 ID:93;X:-179280;Y:-180464;D:-1;
 ID:93;X:-179600;Y:-180656;D:-1;
-ID:1000;X:-179601;Y:-180988;D:-1;
+ID:1000;X:-179601;Y:-180988;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-199424;IY:-200064;OX:-179600;OY:-180128;DT:1;ID:4;OD:3;

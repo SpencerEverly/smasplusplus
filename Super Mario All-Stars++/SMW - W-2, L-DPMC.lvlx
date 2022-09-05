@@ -6186,7 +6186,7 @@ ID:33;X:-139356;Y:-141728;D:-1;LR:"Non-Moving Platforms";
 ID:33;X:-139324;Y:-141728;D:-1;LR:"Non-Moving Platforms";
 ID:26;X:-139840;Y:-141376;D:-1;LR:"Non-Moving Platforms";
 ID:812;X:-119424;Y:-120176;D:-1;EA:"Boss Start";ED:"Boss End";
-ID:1000;X:-119616;Y:-120256;D:-1;LR:"Star";
+ID:1000;X:-119616;Y:-120256;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-198560;IY:-200704;OX:-178784;OY:-179904;DT:2;ID:1;OD:1;

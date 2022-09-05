@@ -1081,6 +1081,7 @@ function smwMap.onTickEnd()
     if lunatime.tick() == 1 then
         smwMap.startTransition(nil,nil,smwMap.transitionSettings.enterMapSettings)
     end
+    Graphics.activateHud(false)
 end
 
 

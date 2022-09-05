@@ -4294,7 +4294,7 @@ ID:589;X:-199422;Y:-200064;D:-1;XTRA:"{\n    \"jumpHeight\"\: 220\,\n    \"useFi
 ID:259;X:-197088;Y:-200224;D:1;
 ID:15;X:-158542;Y:-160118;D:-1;LR:"boss";ED:"Boss End";
 ID:79;X:-158546;Y:-160118;D:-1;NM:1;LR:"beforeboss";EA:"Boss Start";
-ID:1000;X:-158816;Y:-160192;D:-1;LR:"starnotmoving";
+ID:1000;X:-158816;Y:-160192;D:-1;LR:"starnotmoving";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:465;X:-179968;Y:-180096;D:-1;EA:"Spikes Down";
 NPC_END
 DOORS

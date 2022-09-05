@@ -4831,7 +4831,7 @@ ID:638;X:-119264;Y:-120224;D:-1;XTRA:"{\n    \"enabled\"\: false\n}\n";
 ID:151;X:-139640;Y:-138672;D:-1;MG:"I put in a block somewhere to unlock my room. Don't let any trespassers hit that block.<page>You'll be in BIG TROUBLE if you do! Protect me at all costs! - Magic Mystery Blargo";FD:1;
 ID:424;X:-139232;Y:-139168;D:-1;S1:9;
 ID:39;X:-99392;Y:-100348;D:-1;EA:"Boss Start";ED:"Boss End";
-ID:1000;X:-99424;Y:-100192;D:-1;LR:"Star";
+ID:1000;X:-99424;Y:-100192;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-99792;Y:-100112;D:-1;MG:"Not the real boss\, just a placeholder. Just beat her and get the star for now";FD:1;
 NPC_END
 DOORS

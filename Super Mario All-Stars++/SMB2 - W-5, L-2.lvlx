@@ -4483,7 +4483,7 @@ ID:215;X:-139576;Y:-141664;D:-1;
 ID:350;X:-119663;Y:-117216;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:350;X:-119563;Y:-117216;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:755;X:-99040;Y:-100220;D:-1;EA:"Boss Begin";ED:"Boss Dead";
-ID:1000;X:-98464;Y:-100384;D:-1;LR:"Star";
+ID:1000;X:-98464;Y:-100384;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:350;X:-99264;Y:-100032;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:753;X:-177792;Y:-180096;D:-1;
 ID:753;X:-175712;Y:-180352;D:-1;

@@ -1332,7 +1332,7 @@ ID:94;X:-158976;Y:-160246;D:-1;MG:"Hi\, <characterName>! Glad to see you in our 
 ID:101;X:-159326;Y:-160126;D:-1;MG:"Hey <characterName>! Great to see you.<page>You and Spencer gotta figure out this situation here!<page>I wish I can come\, but I'm currently in the middle of this city watching every activity!<page>A town needs a hero to guard the place\, you know.";FD:1;
 ID:31;X:-198336;Y:-200128;D:-1;
 ID:476;X:-199552;Y:-200224;D:-1;
-ID:1000;X:-119648;Y:-119680;D:-1;
+ID:1000;X:-119648;Y:-119680;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-178888;Y:-180208;D:-1;MG:"Are you done visiting? Head into the door to exit. Have a nice day!";FD:1;
 ID:94;X:-179200;Y:-180118;D:-1;MG:"Welcome to our town! It's... not the best way to get in\, I know...<page>But we're in an financial crisis to get a bridge.<page>Yes\, due to that we aren't making any money... I apologize.";FD:1;
 ID:94;X:-179104;Y:-180118;D:-1;MG:"Exactly what he's saying... who would even walk through that platform to get here...?<page>I would rather cross a bridge than risk my life.";FD:1;

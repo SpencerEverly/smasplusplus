@@ -3282,7 +3282,7 @@ ID:151;X:-178464;Y:-180208;D:-1;MG:"Unfinished boss. Keep walking to get the sta
 ID:589;X:-199582;Y:-200064;D:-1;XTRA:"{\n    \"jumpHeight\"\: 150\,\n    \"useFixed\"\: true\n}\n";
 ID:1;X:-199328;Y:-200096;D:-1;
 ID:1;X:-199392;Y:-200096;D:-1;
-ID:1000;X:-177344;Y:-180160;D:-1;
+ID:1000;X:-177344;Y:-180160;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-159632;Y:-160112;D:-1;MG:"Raswobb's Castle Area 1";FD:1;LR:"Sign 1";ET:"Wait Timer 1";
 ID:151;X:-159632;Y:-160112;D:-1;MG:"Raswobb's Castle Area 1";FD:1;LR:"Sign 2";
 ID:589;X:-138750;Y:-140192;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";

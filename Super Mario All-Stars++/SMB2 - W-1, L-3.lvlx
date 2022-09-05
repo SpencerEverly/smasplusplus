@@ -8147,7 +8147,7 @@ ID:753;X:-196800;Y:-200384;D:-1;
 ID:558;X:-196736;Y:-200224;D:-1;
 ID:754;X:-195136;Y:-200224;D:-1;XTRA:"{\n    \"behaviour\"\: 2\n}\n";
 ID:165;X:-59840;Y:-60192;D:1;FD:1;NM:1;
-ID:1000;X:-59616;Y:-60192;D:-1;LR:"Star";
+ID:1000;X:-59616;Y:-60192;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:400;X:-119616;Y:-118784;D:-1;
 ID:558;X:-196064;Y:-200352;D:-1;
 ID:91;X:-159552;Y:-160128;D:-1;CN:134;

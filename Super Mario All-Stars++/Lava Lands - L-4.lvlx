@@ -5859,7 +5859,7 @@ ID:212;X:-136512;Y:-141856;D:-1;
 ID:212;X:-136544;Y:-141856;D:-1;
 ID:212;X:-136480;Y:-141952;D:-1;
 ID:212;X:-136448;Y:-141952;D:-1;
-ID:1000;X:-118624;Y:-120352;D:-1;
+ID:1000;X:-118624;Y:-120352;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-197952;IY:-200160;OX:-179616;OY:-180544;DT:1;ID:3;OD:1;

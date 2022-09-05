@@ -1123,7 +1123,7 @@ ID:91;X:-175488;Y:-180192;D:-1;CN:142;
 ID:810;X:-158880;Y:-160288;D:-1;
 ID:810;X:-159072;Y:-160096;D:-1;
 ID:756;X:-158848;Y:-160156;D:-1;EA:"Boss Begin";ED:"Boss Dead";
-ID:1000;X:-158304;Y:-160432;D:-1;LR:"Star";
+ID:1000;X:-158304;Y:-160432;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:400;X:-175808;Y:-180096;D:-1;
 ID:804;X:-177183;Y:-180192;D:1;GE:1;GT:1;GD:4;GM:20;
 ID:804;X:-179551;Y:-180096;D:1;GE:1;GT:1;GD:4;GM:10;

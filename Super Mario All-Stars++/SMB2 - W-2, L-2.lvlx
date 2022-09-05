@@ -6106,7 +6106,7 @@ ID:216;X:-174744;Y:-180352;D:-1;
 ID:216;X:-174744;Y:-180352;D:-1;
 ID:216;X:-174744;Y:-180352;D:-1;
 ID:216;X:-174744;Y:-180352;D:-1;
-ID:1000;X:-138368;Y:-140384;D:-1;LR:"Ball";
+ID:1000;X:-138368;Y:-140384;D:-1;LR:"Ball";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:346;X:-175326;Y:-180316;D:-1;
 ID:346;X:-175198;Y:-180316;D:-1;
 ID:39;X:-139104;Y:-140348;D:1;EA:"Boss Begin";ED:"Boss Dead";

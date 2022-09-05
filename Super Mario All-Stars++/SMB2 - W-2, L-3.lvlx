@@ -12788,7 +12788,7 @@ ID:91;X:-79872;Y:-80224;D:-1;CN:147;
 ID:91;X:-79424;Y:-80224;D:-1;CN:147;
 ID:165;X:640;Y:-224;D:-1;FD:1;NM:1;
 ID:165;X:0;Y:-448;D:1;FD:1;NM:1;LR:"Subcon #1";
-ID:1000;X:352;Y:-192;D:-1;LR:"Orb";
+ID:1000;X:352;Y:-192;D:-1;LR:"Orb";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:372;X:-195392;Y:-200224;D:-1;
 NPC_END
 PHYSICS

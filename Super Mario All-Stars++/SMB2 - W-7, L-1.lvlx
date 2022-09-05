@@ -1615,7 +1615,7 @@ ID:91;X:-79744;Y:-78144;D:-1;CN:462;
 ID:165;X:-78976;Y:-78208;D:-1;MG:"Good luck\, bretheren.";FD:1;NM:1;
 ID:165;X:-79392;Y:-78272;D:-1;MG:"We're just a mere 150 meters to the castle.<page>Since it's really close\, good luck.";FD:1;NM:1;
 ID:165;X:-79296;Y:-78272;D:-1;MG:"Our last 8 of our Subcon bretherens are in the castle!<page>Make haste and save our world from the wretched Wart!";FD:1;NM:1;
-ID:1000;X:-78576;Y:-78288;D:-1;
+ID:1000;X:-78576;Y:-78288;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:674;X:-98848;Y:-100512;D:-1;XTRA:"{\n    \"brightness\"\: 1\,\n    \"radius\"\: 412\,\n    \"spotangle\"\: 30\n}\n";
 ID:400;X:-119424;Y:-121088;D:-1;
 ID:400;X:-139360;Y:-140288;D:-1;

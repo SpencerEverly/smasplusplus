@@ -3563,35 +3563,37 @@ do
     local charToNumberConversion = {["0"] = 0,["1"] = 1,["2"] = 2,["3"] = 3,["4"] = 4,["5"] = 5,["6"] = 6,["7"] = 7,["8"] = 8,["9"] = 9}
 
     function yoshi.drawStarCounter(playerIdx,camObj,playerObj,priority,isSplit,playerCount)
-        local backImage = yoshi.generalSettings.starCounterBackImage
-        local numbersImage = yoshi.generalSettings.starCounterNumbersImage
+        if Graphics.isHudActivated() then
+            local backImage = yoshi.generalSettings.starCounterBackImage
+            local numbersImage = yoshi.generalSettings.starCounterNumbersImage
 
-        local numberHeight = (numbersImage.height/20)
+            local numberHeight = (numbersImage.height/20)
 
-        local baseX = (camObj.width*0.5)
-        local baseY = (12 + math.max(backImage.height,numberHeight)*0.5)
-        
-        Graphics.drawImageWP(backImage,baseX - backImage.width*0.5,baseY - backImage.height*0.5,-1.991)
+            local baseX = (camObj.width*0.5)
+            local baseY = (12 + math.max(backImage.height,numberHeight)*0.5)
+            
+            Graphics.drawImageWP(backImage,baseX - backImage.width*0.5,baseY - backImage.height*0.5,-1.991)
 
 
-        local numbersString = tostring(data.starCounter)
-        local numbersLength = #numbersString
-        
-        for i = 1, numbersLength do
-            local sourceY = (charToNumberConversion[string.sub(numbersString,i,i)] or 0) * numberHeight
-            local width = numbersImage.width
+            local numbersString = tostring(data.starCounter)
+            local numbersLength = #numbersString
+            
+            for i = 1, numbersLength do
+                local sourceY = (charToNumberConversion[string.sub(numbersString,i,i)] or 0) * numberHeight
+                local width = numbersImage.width
 
-            if numbersLength > 1 then
-                sourceY = sourceY + numbersImage.height*0.5
-                width = width*0.5
+                if numbersLength > 1 then
+                    sourceY = sourceY + numbersImage.height*0.5
+                    width = width*0.5
+                end
+                Graphics.drawImageWP(numbersImage,baseX - numbersLength*width*0.5 + (i-1)*width,baseY - numberHeight*0.5,0,sourceY,numbersImage.width,numberHeight,-1.99)
             end
-            Graphics.drawImageWP(numbersImage,baseX - numbersLength*width*0.5 + (i-1)*width,baseY - numberHeight*0.5,0,sourceY,numbersImage.width,numberHeight,-1.99)
         end
     end
 
 
     function initHUD()
-        if not isOverworld then
+        if not isOverworld or not isOnSMWMap then
             Graphics.activateHud(true)
         end
         local type = Graphics.HUD_HEARTS

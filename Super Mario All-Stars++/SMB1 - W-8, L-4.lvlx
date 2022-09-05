@@ -8955,7 +8955,7 @@ ID:93;X:-58704;Y:-60112;D:-1;
 ID:176;X:-58560;Y:-60288;D:-1;S1:1;
 ID:93;X:-58768;Y:-60240;D:-1;
 ID:198;X:-39456;Y:-40192;D:-1;FD:1;
-ID:1000;X:-39600;Y:-40288;D:-1;LR:"Hidden";
+ID:1000;X:-39600;Y:-40288;D:-1;LR:"Hidden";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:465;X:-39936;Y:-40168;D:-1;ED:"Pigeon Cutscene Sequel 0";
 ID:400;X:60224;Y:59712;D:-1;
 ID:857;X:-119280;Y:-120112;D:-1;LR:"SMB1 Hard Mode";

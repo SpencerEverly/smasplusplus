@@ -330,7 +330,7 @@ ID:16;X:-195360;Y:-200032;W:32;H:32;
 ID:3;X:-195360;Y:-200064;W:32;H:32;
 BLOCK_END
 NPC
-ID:1000;X:-196064;Y:-200192;D:-1;
+ID:1000;X:-196064;Y:-200192;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:1;X:-199680;Y:-200064;D:-1;
 ID:1;X:-199616;Y:-200064;D:-1;
 ID:72;X:-199144;Y:-200080;D:-1;

@@ -871,7 +871,7 @@ ID:104;X:-199840;Y:-200032;D:1;LR:"Bridge";
 ID:22;X:-199632;Y:-200064;D:-1;GE:1;GT:1;GD:1;GM:180;LR:"Bowser Real";
 ID:198;X:-199392;Y:-200096;D:-1;
 ID:86;X:-199823;Y:-200112;D:-1;FD:1;NM:1;LR:"Bowser Fake 1";
-ID:1000;X:-199456;Y:-200160;D:-1;LR:"Star";
+ID:1000;X:-199456;Y:-200160;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:86;X:-199407;Y:-200528;D:-1;LR:"Bowser Real";ED:"Bowser Die";
 NPC_END
 DOORS

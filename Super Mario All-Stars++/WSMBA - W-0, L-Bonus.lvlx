@@ -299,7 +299,7 @@ ID:60;X:-198944;Y:-200192;
 ID:60;X:-198944;Y:-200064;
 BGO_END
 NPC
-ID:1000;X:-199424;Y:-200224;D:-1;
+ID:1000;X:-199424;Y:-200224;D:-1;XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:94;X:-199360;Y:-200214;D:-1;MG:"Pick an item! The items will help you along the way.";FD:1;NM:1;
 ID:9;X:-199776;Y:-200128;D:-1;NM:1;
 ID:169;X:-199712;Y:-200128;D:-1;NM:1;

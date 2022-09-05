@@ -7705,7 +7705,7 @@ ID:274;X:-79904;Y:-80370;D:-1;
 ID:91;X:-79104;Y:-80160;D:-1;CN:462;
 ID:91;X:-59680;Y:-60064;D:-1;CN:462;
 ID:91;X:-59552;Y:-60064;D:-1;CN:462;
-ID:1000;X:-19616;Y:-20192;D:-1;LR:"Star";
+ID:1000;X:-19616;Y:-20192;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:165;X:-19392;Y:-20192;D:-1;FD:1;NM:1;LR:"Subcon Rescue 1";
 ID:165;X:-19840;Y:-20576;D:1;FD:1;NM:1;LR:"Subcon Savers 1";
 ID:165;X:-19648;Y:-20576;D:1;FD:1;NM:1;LR:"Subcon Savers 2";

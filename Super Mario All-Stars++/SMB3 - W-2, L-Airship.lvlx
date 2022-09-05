@@ -2141,7 +2141,7 @@ ID:224;X:-159608;Y:-159968;D:-1;
 ID:224;X:-159608;Y:-160480;D:-1;
 ID:267;X:-139400;Y:-140124;D:-1;FD:1;NM:1;LR:"Boss Not Moving";EA:"Boss Start";
 ID:267;X:-139400;Y:-140124;D:-1;LR:"Real Boss";ED:"Boss End";
-ID:1000;X:-139680;Y:-140224;D:-1;LR:"Star";
+ID:1000;X:-139680;Y:-140224;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-139560;Y:-140112;D:-1;MG:"WIP for now";FD:1;LR:"Star";
 ID:231;X:-176768;Y:-180160;D:-1;
 ID:770;X:-158848;Y:-160448;D:-1;

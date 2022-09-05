@@ -2430,7 +2430,7 @@ ID:395;X:-156608;Y:-160384;D:-1;
 ID:395;X:-156672;Y:-160384;D:-1;
 ID:803;X:-139430;Y:-140116;D:-1;FD:1;NM:1;LR:"Wendy 1";EA:"Boss Start";
 ID:803;X:-139430;Y:-140116;D:-1;LR:"Wendy 2";ED:"Boss End";
-ID:1000;X:-139712;Y:-140224;D:-1;LR:"Star";
+ID:1000;X:-139712;Y:-140224;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-139616;Y:-140112;D:-1;MG:"WIP for now";FD:1;LR:"Star";
 ID:764;X:-157504;Y:-160192;D:-1;
 ID:763;X:-157152;Y:-160224;D:-1;

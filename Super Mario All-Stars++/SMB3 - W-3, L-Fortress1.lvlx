@@ -5440,7 +5440,7 @@ ID:10;X:-176414;Y:-180288;D:-1;
 ID:229;X:-178944;Y:-180160;D:1;
 ID:229;X:-178144;Y:-180128;D:1;
 ID:229;X:-177568;Y:-180128;D:1;
-ID:1000;X:-159008;Y:-160192;D:-1;LR:"Star";
+ID:1000;X:-159008;Y:-160192;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:79;X:-158722;Y:-160118;D:-1;FD:1;NM:1;LR:"Boss Not Moving";EA:"Boss Start";
 ID:751;X:-158704;Y:-160104;D:-1;LR:"Real Boss";ED:"Boss End";
 NPC_END
