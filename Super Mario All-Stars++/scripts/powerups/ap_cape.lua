@@ -19,19 +19,19 @@ local smasfunctions = require("smasfunctions")
 local apt = {}
 
 apt.spritesheets = {
-    Img.loadCharacter("mario-8.png"),
-    Img.loadCharacter("luigi-8.png"),
-    Img.loadCharacter("peach-8.png"),
-    Img.loadCharacter("toad-8.png"),
-    Img.loadCharacter("link-8.png"),
+    Img.loadCharacter("mario-cape.png"),
+    Img.loadCharacter("luigi-cape.png"),
+    Img.loadCharacter("peach-cape.png"),
+    Img.loadCharacter("toad-cape.png"),
+    Img.loadCharacter("link-cape.png"),
 }
 
 apt.capeSpritesheets = {
-    Img.loadCharacter("mario-8-cape.png"),
-    Img.loadCharacter("luigi-8-cape.png"),
-    Img.loadCharacter("peach-8-cape.png"),
-    Img.loadCharacter("toad-8-cape.png"),
-    Img.loadCharacter("link-8-cape.png"),
+    Img.loadCharacter("mario-cape-cape.png"),
+    Img.loadCharacter("luigi-cape-cape.png"),
+    Img.loadCharacter("peach-cape-cape.png"),
+    Img.loadCharacter("toad-cape-cape.png"),
+    Img.loadCharacter("link-cape-cape.png"),
 }
 
 apt.apSounds = {

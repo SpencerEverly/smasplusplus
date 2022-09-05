@@ -37,6 +37,7 @@ local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
 if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
     if SaveData.disableX2char == false then
+        --_G.ap = require("scripts/powerups/anotherpowerup")
         if SaveData.accessibilityTwirl then
             twirl = require("Twirl")
         end

@@ -7,7 +7,7 @@
 --- Define custom powerup tiers!
 -- Limitations:
 --- Every powerup will behave as if the player is 'big'
---- Will be applicable to all SMBX characters in the near future.
+--- Only applicable to Mario, Peach, Luigi, Toad. Not Link. Not SMBX2 Characters.
 
 local playerManager = require("playerManager")
 local npcManager = require("npcManager")
@@ -74,12 +74,16 @@ end
 
 
 local function loadPowerupAssets(thisPlayer,basePowerup)
-    if currentPowerup == nil then --Players beyond 5 won't be supported for custom powerups. At least, not yet...
+    if currentPowerup == nil or thisPlayer.character > 5 then
         return
     end
     
-    local iniFile = Misc.resolveFile("graphics/"..players[thisPlayer.character].."/"..players[thisPlayer.character].."-"..currentPowerup.name..".ini")
-    
+    if SaveData.currentCostume == "N/A" then
+        local iniFile = Misc.resolveFile("graphics/"..players[thisPlayer.character].."/"..players[thisPlayer.character].."-"..currentPowerup.name..".ini") or Misc.resolveFile("graphics/"..players[thisPlayer.character].."-"..currentPowerup.name..".ini") or Misc.resolveFile(players[thisPlayer.character] .."-"..currentPowerup.name..".ini")
+    else
+        local iniFile = Misc.resolveFile("costumes/"..playerManager.getName(thisPlayer.character).."/"..SaveData.currentCostume.."/"..players[thisPlayer.character] .."-"..currentPowerup.name..".ini")
+    end
+	
     if (iniFile == nil) then
         iniFile = playerManager.getHitboxPath(thisPlayer.character, basePowerup);
     end
@@ -94,7 +98,7 @@ end
 
 -- Returns the library table for the powerup
 function ap.registerPowerup(libraryName)
-    local entry = require(libraryName)
+    local entry = require("scripts/powerups/"..libraryName)
     entry.registerItems = registerItemsInternal
     entry.name = libraryName
     entry.items = entry.items or {}
@@ -141,7 +145,6 @@ end
 
 function ap.onInitAPI()
     registerEvent(ap, "onPostNPCKill")
-    registerEvent(ap, "onPlayerHarm")
     registerEvent(ap, "onTickEnd")
     registerEvent(ap, "onTick")
     registerEvent(ap, "onExit")
@@ -158,7 +161,7 @@ function ap.onTick()
     if currentPowerup then
         if player.mount < 2 then
             if player.character ~= CHARACTER_LINK then
-                player:mem(0x160, FIELD_WORD, 3) -- Disable the nomral projectile timer. Powerups need to implement their own.
+                player:mem(0x160, FIELD_WORD, 3) -- Disable the normal projectile timer. Powerups need to implement their own.
             else                
                 player:mem(0x162, FIELD_WORD, 29) -- Disable the link projectile timer. Powerups need to implement their own.
             end
@@ -249,10 +252,7 @@ end
 
 function ap.setPlayerPowerup(appower, silent, reservePowerup, thisPlayer)
     thisPlayer = thisPlayer or player
-    local nextPower = 7
-    if thisPlayer.powerup == 3 then
-        nextPower = 3
-    end
+    local nextPower = 2
 
     if currentPowerup and appower.name ~= currentPowerup.name then
         currentPowerup.onDisable()
@@ -274,7 +274,7 @@ function ap.setPlayerPowerup(appower, silent, reservePowerup, thisPlayer)
                 SFX.play(appower.apSounds.upgrade)
             end
 
-            if nextPower == 3 then
+            if nextPower == 2 then
                 thisPlayer:mem(0x122, FIELD_WORD, 4)
             else
                 thisPlayer:mem(0x122, FIELD_WORD, 41)
@@ -347,12 +347,5 @@ function ap.onPostNPCKill(v, r)
         v:kill(9)
     end
 end
-
-function ap.onPlayerHarm(event, p)
-    if p.powerup > 1 and p.mount == MOUNT_NONE and not p:mem(0x0C, FIELD_BOOL) and not p.hasStarman then
-        SaveData._ap.lastPowerupItem = nil
-    end
-end
-
 
 return ap
