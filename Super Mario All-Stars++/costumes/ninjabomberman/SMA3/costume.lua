@@ -2,14 +2,17 @@ local playerManager = require("playerManager")
 local npcManager = require("npcManager")
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
+local rng = require("base/rng")
 
 local costume = {}
 
 local eventsRegistered = false
+local ready = false
 
 function costume.onInit(p)
     Routine = require("routine")
     Routine.run(costumechange)
+    registerEvent(costume,"onTickEnd")
     Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/stomped.ogg")
     Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-hit.ogg")
     extrasounds.sound.sfx[4]  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-smash.ogg")
@@ -81,13 +84,17 @@ function costumechange()
     yoshi.customExitSettings.passOnMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Goal (SFX).ogg"))
     yoshi.customExitSettings.keyMusic = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
     yoshi.customExitSettings.keyMusicStar = SFX.open(Misc.resolveSoundFile("_OST/Super Mario Advance 3/Big Boss Clear (SFX).ogg"))
-
-    yoshi.generalSettings.jumpSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/jump2"))
+    
+    local rngjump = rng.randomInt(0,1)
+    if rngjump == 0 then
+        yoshi.generalSettings.jumpSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/jump"))
+    elseif rngjump == 1 then
+        yoshi.generalSettings.jumpSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/jump2"))
+    end
     yoshi.generalSettings.hurtSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/hurt"))
     yoshi.generalSettings.deathSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/dieswithmusic"))
     yoshi.generalSettings.coinSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/coin"))
     
-    extrasounds.sound.sfx[1]  = yoshi.generalSettings.jumpSound
     Audio.sounds[5].sfx  = yoshi.generalSettings.hurtSound
     extrasounds.sound.sfx[8]  = yoshi.generalSettings.deathSound
     extrasounds.sound.sfx[14] = yoshi.generalSettings.coinSound
@@ -133,6 +140,17 @@ function costumechange()
     yoshi.groundPoundSettings.startSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/plying"))
     yoshi.groundPoundSettings.landSound = SFX.open(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/pound-withrumble"))
     yoshi.initCharacter()
+    
+    ready = true
+end
+
+function costume.onTickEnd()
+    local rngjump = rng.randomInt(0,1)
+    if rngjump == 0 then
+        extrasounds.sound.sfx[1] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/jump"))
+    elseif rngjump == 1 then
+        extrasounds.sound.sfx[1] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/jump2"))
+    end
 end
 
 function costume.onCleanup(p)
