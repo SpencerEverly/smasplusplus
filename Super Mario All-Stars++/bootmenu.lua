@@ -1,7 +1,7 @@
 --SMAS++ MAIN MENU
 --Code by Spencer Everly, MrDoubleA, and others
 
-local versionnumber = "v0.0.0.0" --This is the version number of this episode. It can be changed to any version we're on.
+local versionnumber = "v0.0.0.3" --This is the version number of this episode. It can be changed to any version we're on.
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
 local datetime = require("datetime")
