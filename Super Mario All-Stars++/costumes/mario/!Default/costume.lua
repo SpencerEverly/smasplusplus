@@ -115,10 +115,11 @@ local function canDuck(p)
         and not p:mem(0x50,FIELD_BOOL) -- spin jumping
         and p:mem(0x26,FIELD_WORD) == 0 -- picking up something from the top
         and (p:mem(0x34,FIELD_WORD) == 0 or isOnGround(p)) -- underwater or on ground
+        and p.holdingNPC == nil
 
         and (
             p:mem(0x48,FIELD_WORD) == 0 -- not on a slope (ducking on a slope is weird due to sliding)
-            or (p.powerup == PLAYER_SMALL) -- small and holding an NPC
+            or (p.powerup == PLAYER_SMALL and p.holdingNPC == nil) -- small and not holding an NPC
             or p:mem(0x34,FIELD_WORD) > 0 -- underwater
         )
     )
