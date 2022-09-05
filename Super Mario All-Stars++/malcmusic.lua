@@ -111,7 +111,7 @@ function malcmusic.onStart()
         if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", nil, 9)[1] then --Labor Day
             malcmusic.holiday = true
             if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
                 triggerEvent("LaborDay")
             end
         end
@@ -139,7 +139,7 @@ end
 function malcmusic.onTick()
     for i = 0,20 do
         local SectionAll = Section(i)
-        if Time.month() == 3 and Time.day() == 17 then --St Patrick's Day
+        if Time.month() == 3 and Time.day() == 17 then --St. Patrick's Day
             if malcmusic.holiday == true then
                 SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
             end
@@ -169,7 +169,7 @@ function malcmusic.onTick()
         
         if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", nil, 9)[1] then --Labor Day
             if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
             end
         end
         
