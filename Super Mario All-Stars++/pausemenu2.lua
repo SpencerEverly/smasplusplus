@@ -121,6 +121,28 @@ local function smb1hardmodetoggle()
     else
         SaveData.SMB1HardModeActivated = false
     end
+    if table.icontains(smastables.__smb1Levels,Level.filename()) == true then
+        for k,v in NPC.iterate{89,23,27,24,173,175,176,177,172,174,612} do
+            if SaveData.SMB1HardModeActivated == true then
+                if v.id == 89 or v.id == 27 then
+                    v:transform(23, true)
+                end
+            elseif SaveData.SMB1HardModeActivated == false then
+                if v.id == 23 or v.id == 24 then
+                    v:transform(89, true)
+                end
+            end
+        end
+        local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
+        local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
+        if SaveData.SMB1HardModeActivated == true then
+            SMB1HardModeLayer:show(true)
+            SMB1EasyModeLayer:hide(true)
+        elseif SaveData.SMB1HardModeActivated == false then
+            SMB1HardModeLayer:hide(true)
+            SMB1EasyModeLayer:show(true)
+        end
+    end
 end
 
 local function smb1allnightnipponoggle()

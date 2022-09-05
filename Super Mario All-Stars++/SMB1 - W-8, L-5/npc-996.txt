@@ -1,3 +1,0 @@
-framestyle=0
-framespeed=6
-frames=4

@@ -18,6 +18,10 @@ function bros.onTickNPC(v)
 	if Defines.levelFreeze then return end
 	
 	local data = v.data
+    
+    if data.hammerTimer == nil then
+        data.hammerTimer = NPC.config[v.id].thrownDelay - math.random(20, 100)
+    end
 	
 	--If despawned
 	if v.despawnTimer <= 0 then
