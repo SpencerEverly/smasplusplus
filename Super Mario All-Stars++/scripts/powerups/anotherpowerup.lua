@@ -11,8 +11,11 @@
 
 local playerManager = require("playerManager")
 local npcManager = require("npcManager")
+local inspect = require("ext/inspect")
 
 local ap = {}
+
+if SaveData.disableX2char then return end
 
 SaveData._ap = SaveData._ap or {}
 
@@ -78,11 +81,7 @@ local function loadPowerupAssets(thisPlayer,basePowerup)
         return
     end
     
-    if SaveData.currentCostume == "N/A" then
-        local iniFile = Misc.resolveFile("graphics/"..players[thisPlayer.character].."/"..players[thisPlayer.character].."-"..currentPowerup.name..".ini") or Misc.resolveFile("graphics/"..players[thisPlayer.character].."-"..currentPowerup.name..".ini") or Misc.resolveFile(players[thisPlayer.character] .."-"..currentPowerup.name..".ini")
-    else
-        local iniFile = Misc.resolveFile("costumes/"..playerManager.getName(thisPlayer.character).."/"..SaveData.currentCostume.."/"..players[thisPlayer.character] .."-"..currentPowerup.name..".ini")
-    end
+    local iniFile = Img.loadCharacterHitBoxes(players[thisPlayer.character] .. "-" .. currentPowerup.name .. ".ini")
 	
     if (iniFile == nil) then
         iniFile = playerManager.getHitboxPath(thisPlayer.character, basePowerup);
@@ -112,12 +111,14 @@ function ap.registerPowerup(libraryName)
             itemMap[v] = libraryName
         end
     end
+    
     return entry
 end
 
 -- Replacement powerups
 ap.powerReplacements = {}
-ap.powerReplacements[2] = ap.registerPowerup("ap_big")
+ap.powerReplacements[3] = ap.registerPowerup("ap_fireflower")
+ap.powerReplacements[7] = ap.registerPowerup("ap_iceflower")
 
 -- registerItemTier registers a new tier chain for items.
 -- spawnedItem: number - The item that spawns from a block.
@@ -136,7 +137,7 @@ end
 
 -- Returns the player's current powerup, accounting for anotherpowerup powerups
 function ap.getPowerup()
-    if player.powerup == 2 then
+    if player.powerup == 3 or player.powerup == 7 then
         return currentPowerup.name
     else
         return player.powerup
@@ -161,7 +162,7 @@ function ap.onTick()
     if currentPowerup then
         if player.mount < 2 then
             if player.character ~= CHARACTER_LINK then
-                player:mem(0x160, FIELD_WORD, 3) -- Disable the normal projectile timer. Powerups need to implement their own.
+                player:mem(0x160, FIELD_WORD, 3) -- Disable the nomral projectile timer. Powerups need to implement their own.
             else                
                 player:mem(0x162, FIELD_WORD, 29) -- Disable the link projectile timer. Powerups need to implement their own.
             end
@@ -182,7 +183,6 @@ function ap.onDraw()
         currentPowerup.onDraw()
     end
     
-    -- Handle test mode menu, and reload hitboxes after a bit
     if lunatime.tick() == 1 then
         loadPowerupAssets(player,player.powerup)
     end
@@ -252,7 +252,10 @@ end
 
 function ap.setPlayerPowerup(appower, silent, reservePowerup, thisPlayer)
     thisPlayer = thisPlayer or player
-    local nextPower = 2
+    local nextPower = 7
+    if thisPlayer.powerup == 3 then
+        nextPower = 3
+    end
 
     if currentPowerup and appower.name ~= currentPowerup.name then
         currentPowerup.onDisable()
@@ -274,7 +277,7 @@ function ap.setPlayerPowerup(appower, silent, reservePowerup, thisPlayer)
                 SFX.play(appower.apSounds.upgrade)
             end
 
-            if nextPower == 2 then
+            if nextPower == 3 then
                 thisPlayer:mem(0x122, FIELD_WORD, 4)
             else
                 thisPlayer:mem(0x122, FIELD_WORD, 41)
@@ -291,12 +294,6 @@ function ap.setPlayerPowerup(appower, silent, reservePowerup, thisPlayer)
 
     currentPowerup = appower
     SaveData._ap.cp = appower.name
-    
-    --thisPlayer.forcedState = 0
-    --if thisPlayer.character > 5 then
-        --error("Character IDs above 5 are unsupported.")
-        --return
-    --end
 
     loadPowerupAssets(thisPlayer,nextPower)
 

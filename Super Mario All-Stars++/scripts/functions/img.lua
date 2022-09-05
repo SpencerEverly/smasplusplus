@@ -13,6 +13,18 @@ function Img.load(name) --This will not only check the main SMBX2 folders, but w
     return nil
 end
 
+function Img.loadCharacterHitBoxes(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
+    if SaveData.currentCostume == "N/A" then
+        return File.load(name)
+            or File.load("costumes/" .. name)
+            or File.load("graphics/" .. name)
+            or File.load("___MainUserDirectory/" .. name)
+    elseif SaveData.currentCostume ~= "N/A" then
+        return File.load("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
+    end
+    return nil
+end
+
 function Img.loadCharacter(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
     local file = File.load(name) or File.load(name..".png")
     if file and SaveData.currentCostume == "N/A" then
