@@ -27,6 +27,14 @@ runPressedState = false
 
 local bootmenu = {}
 
+local smaslogo = Graphics.loadImageResolved("smaslogo.png")
+local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
+local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
+local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
+local orangecurtains = Graphics.loadImageResolved("theming_smbxcurtainsorange.png")
+local smaslogowide = Graphics.loadImageResolved("smaslogo-wide.png")
+local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
+
 if SaveData.turnOnMainMenuMusicRng == nil then
     SaveData.turnOnMainMenuMusicRng = false
 end
@@ -1248,6 +1256,26 @@ function bootmenu.onStart()
     if bootmenu.active then
         cursor.create()
         cursor.showCursor = true
+        aw.enabled = false
+        littleDialogue.cursorEnabled = false
+        Graphics.activateHud(false)
+        smashud.visible.keys = false
+        smashud.visible.itembox = false
+        smashud.visible.bombs = false
+        smashud.visible.coins = false
+        smashud.visible.score = false
+        smashud.visible.lives = false
+        smashud.visible.stars = false
+        smashud.visible.starcoins = false
+        smashud.visible.timer = false
+        smashud.visible.levelname = false
+        smashud.visible.overworldPlayer = false
+        smashud.visible.deathcount = false
+        smashud.visible.customitembox = false
+        datetime.bottomright = true
+        datetime.topright = false
+        extrasounds.active = false
+        bootmenu.startedmenu = 0
         Audio.MusicVolume(nil) --Let the music volume reset
         if mem(0x00B251E0, FIELD_WORD) >= 1 then
             GameData.saveDataMigrated = false
@@ -1619,13 +1647,6 @@ function bootmenu.onDraw()
                 p.y = camera.y - 1 - (p.height / 2)
             end
         end
-        local smaslogo = Graphics.loadImageResolved("smaslogo.png")
-        local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
-        local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
-        local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
-        local orangecurtains = Graphics.loadImageResolved("theming_smbxcurtainsorange.png")
-        local smaslogowide = Graphics.loadImageResolved("smaslogo-wide.png")
-        local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
         
         local stpatricksday = false
         local hitNPCs = Colliders.getColliding{a = cursor.scenepos, b = hitNPCs, btype = Colliders.NPC}
