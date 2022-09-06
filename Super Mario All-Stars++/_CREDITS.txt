@@ -64,6 +64,7 @@ Packs/Sprites are by:
 - litchh (SKL)
 - Turca
 - larsenv
+- bredi
 
 ----Costume/Character Credits----
 

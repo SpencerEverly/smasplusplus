@@ -410,6 +410,28 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
     )
 end
 
+local function isShootingFire(p)
+    return (p:mem(0x160, FIELD_WORD) == 0
+        and p.powerup == 3
+        and not p.keys.down
+        and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
+    )
+end
+local function isShootingHammer(p)
+    return (p:mem(0x160, FIELD_WORD) == 0
+        and p.powerup == 6
+        and not p.keys.down
+        and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
+    )
+end
+local function isShootingIce(p)
+    return (p:mem(0x160, FIELD_WORD) == 0
+        and p.powerup == 7
+        and not p.keys.down
+        and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
+    )
+end
+
 local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKI}
 local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
 
@@ -946,15 +968,12 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 
                 
                 --**FIREBALLS**
-                local isShootingFire = (p:mem(0x160, FIELD_WORD) == 0 and p.powerup == 3 and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED and p:mem(0x160, FIELD_WORD, 0))
-                local isShootingHammer = (p:mem(0x160, FIELD_WORD) == 0 and p.powerup == 6 and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED and p:mem(0x160, FIELD_WORD, 0))
-                local isShootingIce = (p:mem(0x160, FIELD_WORD) == 0 and p.powerup == 7 and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED)
-                if isShootingFire then --Fireball sound
+                if isShootingFire(p) then --Fireball sound
                     if extrasounds.enableFireFlowerSFX then
                         extrasounds.playSFX(18, extrasounds.volume)
                     end
                 end
-                if isShootingHammer then --Hammer Throw sound
+                if isShootingHammer(p) then --Hammer Throw sound
                     if extrasounds.enableHammerSuitSFX then
                         if not extrasounds.useFireSoundForHammerSuit then
                             extrasounds.playSFX(105, extrasounds.volume)
@@ -963,7 +982,7 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                         end
                     end
                 end
-                if isShootingIce then --Iceball sound
+                if isShootingIce(p) then --Iceball sound
                     if extrasounds.enableIceFlowerSFX then
                         if not extrasounds.useFireSoundForIce then
                             extrasounds.playSFX(93, extrasounds.volume)
