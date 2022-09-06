@@ -161,9 +161,7 @@ function musicalchairs.onDraw()
                         section.musicPath = "_OST/Super Mario Bros Spencer/Tower.ogg"
                     elseif section.musicPath == "_OST/Super Mario Bros Spencer/Another World (Yoshi).ogg" then
                         section.musicPath = "_OST/Super Mario Bros Spencer/Another World.ogg"
-                    --[[elseif section.musicPath == "_OST/Super Mario Bros Spencer/Water.ogg" then
-                        section.musicPath = "_OST/Super Mario Bros Spencer/Water.ogg"
-                    elseif section.musicPath == "_OST/Super Mario Bros Spencer/Forest.ogg" then
+                    --[[elseif section.musicPath == "_OST/Super Mario Bros Spencer/Forest.ogg" then
                         section.musicPath = "_OST/Super Mario Bros Spencer/Forest.ogg"
                     elseif section.musicPath == "_OST/Super Mario Bros Spencer/Town.ogg" then
                         section.musicPath = "_OST/Super Mario Bros Spencer/Town.ogg"
