@@ -292,6 +292,7 @@ Levels made by:
 - Spencer Everly
 - barkers
 - FireSeraphim
+- Wowsie
 
 ----Boot Menu Theming Credits----
 
