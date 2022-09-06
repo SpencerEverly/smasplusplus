@@ -820,6 +820,9 @@ function pausemenu2.onDraw()
     if currentCostume == "09-SMW-PIRATE" then
         costtext = "Super Mario World (NES, Bootleg)"
     end
+    if currentCostume == "10-HOTELMARIO" then
+        costtext = "Hotel Mario (Philips CD-i)"
+    end
     if currentCostume == "11-SMA1" then
         costtext = "Super Mario Advance 1 (GBA)"
     end

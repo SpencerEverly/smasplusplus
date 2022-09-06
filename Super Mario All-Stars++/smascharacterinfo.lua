@@ -151,6 +151,15 @@ function smascharacterinfo.onTickEnd()
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
         smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
+    if currentCostume == "10-HOTELMARIO" then
+        littleDialogue.characterNames[1] = "Mario"
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_hotelmario.ogg")
+        starman.sfxFile = Misc.resolveSoundFile("starman/starman_hotelmario.ogg")
+        starman.duration[996] = 769
+        starman.duration[994] = 769
+        extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/door-close.ogg"))
+        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+    end
     if currentCostume == "11-SMA1" then
         littleDialogue.characterNames[1] = "Mario"
         mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_gba.ogg")

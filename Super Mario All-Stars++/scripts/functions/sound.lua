@@ -2,6 +2,7 @@ local Sound = {}
 
 local extrasounds = require("extrasounds")
 local playerManager = require("playermanager")
+local smastables = require("smastables")
 
 function Sound.openSFX(name) --Opening SFXs
     return SFX.open(name)
