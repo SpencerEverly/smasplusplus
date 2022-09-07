@@ -123,7 +123,7 @@ function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coin
     local coins = table.map{10,33,88,103,138,152,251,252,253,258,528}
     if bootmenu.active == false then
         for _,p in ipairs(Player.get()) do 
-            if coins[npc.id] and Colliders.collide(p, npc) then
+            if coins[npc.id] and (npc:mem(0x138,FIELD_WORD) == 5 and p:mem(0x108,FIELD_WORD) == 3 and p:mem(0xB6,FIELD_BOOL) and not p:mem(0x10C,FIELD_BOOL)) or (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1 --One coin collected
             end
         end
