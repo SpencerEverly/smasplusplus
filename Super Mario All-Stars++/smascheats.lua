@@ -28,11 +28,12 @@ Cheats.deregister("supermario128") --This will be deregistered because we're gon
 Cheats.deregister("1player") --This will be deregistered because we're gonna remake this for customCamera target detection
 Cheats.deregister("2player") --This will be deregistered because we're gonna remake this for customCamera target detection
 
+function smascheats.onInitAPI()
+    registerEvent(smascheats,"onDraw")
+    registerEvent(smascheats,"onTick")
+end
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
-
-
-
 
 --**Episode-specific cheats**
 
@@ -463,10 +464,19 @@ Cheats.register("supermario2",{ --Remaking this, for no reason at all...
         if SaveData.disableX2char then
             Defines.player_hasCheated = false
             Playur.toggleSingleCoOp(true)
+            local rngbomb = rng.randomEntry({69,71})
+            Effect.spawn(rngbomb, player.x, player.y, player.section)
         else
             Sound.playSFX(152)
         end
         return true -- this makes the cheat not toggleable
+    end),
+    onDeactivate = (function()
+        Defines.player_hasCheated = false
+        Playur.setCount(1)
+        Playur.toggleSingleCoOp(false)
+        local rngbomb = rng.randomEntry({69,71})
+        Effect.spawn(rngbomb, player.x, player.y, player.section)
     end),
     flashPlayer = true,activateSFX = nil,
 })
@@ -474,6 +484,7 @@ Cheats.register("supermario2",{ --Remaking this, for no reason at all...
 if SaveData.disableX2char then
     Cheats.register("supermario4",{ --Remaking this, for no reason at all...
         onActivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(4)
             if Player.count() >= 2 then
                 for i = 1,4 do
@@ -492,6 +503,7 @@ if SaveData.disableX2char then
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
         onDeactivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(1)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
@@ -501,6 +513,7 @@ if SaveData.disableX2char then
 
     Cheats.register("supermario8",{ --Remaking this, for no reason at all...
         onActivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(8)
             if Player.count() >= 2 then
                 for i = 1,8 do
@@ -519,6 +532,7 @@ if SaveData.disableX2char then
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
         onDeactivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(1)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
@@ -528,6 +542,7 @@ if SaveData.disableX2char then
 
     Cheats.register("supermario16",{ --Remaking this, for no reason at all...
         onActivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(16)
             if Player.count() >= 2 then
                 for i = 1,16 do
@@ -546,6 +561,7 @@ if SaveData.disableX2char then
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
         onDeactivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(1)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
@@ -555,6 +571,7 @@ if SaveData.disableX2char then
 
     Cheats.register("supermario32",{ --Remaking this, for no reason at all...
         onActivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(32)
             if Player.count() >= 2 then
                 for i = 1,32 do
@@ -573,6 +590,7 @@ if SaveData.disableX2char then
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
         onDeactivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(1)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
@@ -582,6 +600,7 @@ if SaveData.disableX2char then
 
     Cheats.register("supermario64",{ --Remaking this, for no reason at all...
         onActivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(64)
             if Player.count() >= 2 then
                 for i = 1,64 do
@@ -600,6 +619,7 @@ if SaveData.disableX2char then
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
         onDeactivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(1)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
@@ -609,6 +629,7 @@ if SaveData.disableX2char then
 
     Cheats.register("supermario128",{ --Remaking this, for no reason at all...
         onActivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(128)
             if Player.count() >= 2 then
                 for i = 1,128 do
@@ -627,6 +648,7 @@ if SaveData.disableX2char then
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
         onDeactivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(1)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
@@ -636,6 +658,7 @@ if SaveData.disableX2char then
 
     --[[Cheats.register("supermario200",{ --New cheat to comply with the supermario fad lol (This would crash when a player above 128 touches a moving block, don't use)
         onActivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(200)
             if Player.count() >= 2 then
                 for i = 1,200 do
@@ -654,6 +677,7 @@ if SaveData.disableX2char then
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
         onDeactivate = (function()
+            Defines.player_hasCheated = false
             Playur.setCount(1)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
@@ -662,22 +686,43 @@ if SaveData.disableX2char then
     })]]
 end
 
-Cheats.register("redigitiscool",{ --A message box pops up, referencing 38A's password screen, but will have a hint on guessing the password below it. When guessed correctly, you will enter to the very first SpencerlyEverly video of the level that was shown on Levels of NSMBDS, Level Editor! After clearing, you'll be taken back to where you were before.
-    onActivate = (function()
-        Defines.player_hasCheated = false
-        --WIP, will be implemented later
-        return true -- this makes the cheat not toggleable
-    end),
-    flashPlayer = true,activateSFX = 69,
-})
+local iscoolstrings = {
+    "redigitiscool",
+    "spencereverlyiscool",
+}
 
-Cheats.register("spencereverlyiscool",{ --The cheat will be the same as above
-    onActivate = (function()
-        Defines.player_hasCheated = false
-        --WIP, will be implemented later
-        return true -- this makes the cheat not toggleable
-    end),
-    flashPlayer = true,activateSFX = 69,
-})
+for i = 1,2 do
+    Cheats.register(iscoolstrings[i],{ --A message box pops up, referencing 38A's password screen, but will have a hint on guessing the password below it. When guessed correctly, you will enter to the very first SpencerlyEverly video of the level that was shown on Levels of NSMBDS, Level Editor! After clearing, you'll be taken back to where you were before.
+        onActivate = (function()
+            Defines.player_hasCheated = false
+            Routine.run(easteregggoodnessyeah)
+        end),
+        flashPlayer = true,activateSFX = 69,
+    })
+end
+
+function easteregggoodnessyeah()
+    Sound.playSFX(92)
+    Routine.wait(3, true)
+    if Cheats.get("redigitiscool").active == true then
+        Cheats.trigger("redigitiscool")
+    elseif Cheats.get("spencereverlyiscool").active == true then
+        Cheats.trigger("spencereverlyiscool")
+    end
+    if Level.filename() == "LONSMBDSLE - W-1, L-2.lvlx" then
+        Level.load(SaveData.lastLevelPlayed)
+    else
+        Level.load("LONSMBDSLE - W-1, L-2.lvlx")
+    end
+end
+
+function smascheats.onDraw()
+    if Cheats.get("redigitiscool").active == true or Cheats.get("spencereverlyiscool").active == true then
+        Misc.cheatBuffer("")
+        for _,p in ipairs(Player.get()) do
+            p.forcedState = FORCEDSTATE_INVISIBLE
+        end
+    end
+end
 
 return smascheats

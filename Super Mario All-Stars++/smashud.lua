@@ -99,7 +99,11 @@ smashud.visible.itembox = true
 smashud.visible.bombs = true
 smashud.visible.coins = true
 smashud.visible.score = true
-smashud.visible.lives = true
+if SaveData.enableLives then
+    smashud.visible.lives = true
+else
+    smashud.visible.lives = false
+end
 if SaveData.disableX2char == false then
     smashud.visible.deathcount = true
 else

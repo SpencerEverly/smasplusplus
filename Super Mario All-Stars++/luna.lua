@@ -258,6 +258,9 @@ end
 if SaveData.accessibilityInventory == nil then
     SaveData.accessibilityInventory = false
 end
+if SaveData.enableLives == nil then
+    SaveData.enableLives = true
+end
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 

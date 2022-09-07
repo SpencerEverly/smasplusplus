@@ -74,6 +74,7 @@ function smashudsystem.onInitAPI() --This requires all the libraries that will b
 end
 
 local gameoveractivate = false
+local gameoveractivate2 = false
 local gameovershow = false
 local blackscreenonly = false
 
@@ -138,15 +139,20 @@ end
 function thirteenmodedeath()
     smasbooleans.musicMuted = true
     Audio.MusicVolume(0)
-    if SaveData.totalLives < 0 then
+    if SaveData.totalLives < 0 and SaveData.enableLives then
         gameoveractivate = true
         SaveData.totalLives = 0
+    elseif not SaveData.enableLives then
+        gameoveractivate2 = true
     end
     Routine.waitFrames(196)
     if not gameoveractivate then
         blackscreenonly = true
         Misc.pause()
         Routine.waitFrames(45, true)
+        if gameoveractivate2 then
+            SaveData.totalLives = 5
+        end
         Misc.unpause() --Unpause afterward
     end
     if gameoveractivate then --Quick game over screen stuff.
@@ -273,9 +279,11 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 Audio.MusicVolume(0)
                                 SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                                 SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
-                                if SaveData.totalLives < 0 then --If less than 0, the quick game over screen will activate
+                                if SaveData.totalLives < 0 and SaveData.enableLives then --If less than 0, the quick game over screen will activate
                                     gameoveractivate = true
                                     SaveData.totalLives = 0
+                                elseif not SaveData.enableLives then
+                                    gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
                                 Routine.waitFrames(165)
@@ -288,12 +296,14 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     fadeoutcompleted = true --...when waited enough time, unpause and reload the level
                                 end
                                 if fadeoutcompleted then
+                                    if gameoveractivate2 then
+                                        SaveData.totalLives = 5
+                                    end
                                     smashudsystem.hasDied = true
                                     if smashudsystem.exittomap == false then --Reload the level from here
                                         Level.load(Level.filename())
                                     elseif smashudsystem.exittomap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
-                                        Level.load("map.lvlx", nil, nil)
-                                        --Level.load("map.lvlx") --Only if you're using the vanilla map
+                                        Level.load("map.lvlx")
                                     end
                                 end
                                 if gameoveractivate then --Quick game over screen stuff.
@@ -411,9 +421,11 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 Audio.MusicVolume(0)
                                 SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                                 SaveData.totalLives = SaveData.totalLives - 1
-                                if SaveData.totalLives < 0 then
+                                if SaveData.totalLives < 0 and SaveData.enableLives then
                                     gameoveractivate = true
                                     SaveData.totalLives = 0
+                                elseif not SaveData.enableLives then
+                                    gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
                                 Routine.waitFrames(360, true)
@@ -423,6 +435,9 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     fadeoutcompleted = true --When waited enough time, unpause and reload the level
                                 end
                                 if fadeoutcompleted then --Or else, just exit the level
+                                    if gameoveractivate2 then
+                                        SaveData.totalLives = 5
+                                    end
                                     smashudsystem.hasDied = true
                                     if smashudsystem.exittomap == false then
                                         Level.load(Level.filename())
@@ -566,7 +581,11 @@ function smashudsystem.onTick()
     end
     if SaveData.totalCoinsClassic > 99 then --This is to give the player a life when reaching 100 coins
         SaveData.totalCoinsClassic = 0
-        Sound.playSFX(15)
+        if SaveData.enableLives then
+            Sound.playSFX(15)
+        else
+            Sound.playSFX(150)
+        end
         SaveData.totalLives = SaveData.totalLives + 1 --If 100, increase the lives by one
     end
     if SaveData.disableX2char == true then

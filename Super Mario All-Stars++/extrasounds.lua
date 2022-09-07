@@ -128,6 +128,10 @@ extrasounds.enableGrabShellSFX = true
 --Whenever to enable the P-Wing SFX.
 extrasounds.enablePWingSFX = true
 
+if SaveData.enableLives == nil then
+    SaveData.enableLives = true --Episode specific, but you can set this to false if you aren't using the lives system, which will play the 0up sound instead when retrieving lives.
+end
+
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 local inspect = require("ext/inspect")
 
@@ -734,27 +738,55 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             if not isOverworld then
                 for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
                     if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
-                        extrasounds.playSFX(15)
+                        if SaveData.enableLives then
+                            extrasounds.playSFX(15)
+                        else
+                            extrasounds.playSFX(150)
+                        end
                     end
                     if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
                         if not extrasounds.use1UPSoundForAll1UPs then
-                            extrasounds.playSFX(96)
+                            if SaveData.enableLives then
+                                extrasounds.playSFX(96)
+                            else
+                                extrasounds.playSFX(150)
+                            end
                         elseif extrasounds.use1UPSoundForAll1UPs then
-                            extrasounds.playSFX(15)
+                            if SaveData.enableLives then
+                                extrasounds.playSFX(15)
+                            else
+                                extrasounds.playSFX(150)
+                            end
                         end
                     end
                     if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
                         if not extrasounds.use1UPSoundForAll1UPs then
-                            extrasounds.playSFX(97)
+                            if SaveData.enableLives then
+                                extrasounds.playSFX(97)
+                            else
+                                extrasounds.playSFX(150)
+                            end
                         elseif extrasounds.use1UPSoundForAll1UPs then
-                            extrasounds.playSFX(15)
+                            if SaveData.enableLives then
+                                extrasounds.playSFX(15)
+                            else
+                                extrasounds.playSFX(150)
+                            end
                         end
                     end
                     if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
                         if not extrasounds.use1UPSoundForAll1UPs then
-                            extrasounds.playSFX(98)
+                            if SaveData.enableLives then
+                                extrasounds.playSFX(98)
+                            else
+                                extrasounds.playSFX(150)
+                            end
                         elseif extrasounds.use1UPSoundForAll1UPs then
-                            extrasounds.playSFX(15)
+                            if SaveData.enableLives then
+                                extrasounds.playSFX(15)
+                            else
+                                extrasounds.playSFX(150)
+                            end
                         end
                     end
                 end
