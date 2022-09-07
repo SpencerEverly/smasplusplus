@@ -89,18 +89,22 @@ function addsmashpoints(block, fromUpper, playerornil) --This will add 50 points
     end
 end
 
-function detecttopcoin(block, fromUpper, playerornil) --This will detect whenever there was a coin on top of the block or not.
-    local coins = table.map{10,33,88,103,138,152,251,252,253,258,528}
-    for k,v in Block.iterateIntersecting(block.x + block.speedX, block.y - block.speedY, block.x - block.width - block.speedX, block.y - block.height - block.speedY) do
-        if not (v.isHidden or v:mem(0x5A, FIELD_BOOL)) then
-            Misc.dialog("coin detected")
-            SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+function detecttopcoin(block, fromUpper, playerornil)
+    Routine.waitFrames(2, true)
+    for k,effect in ipairs(Effect.get(11)) do
+        local effectcoord = Effect.getIntersecting(effect.x, effect.y, block.x, effect.y - block.y)
+        if effectcoord ~= {} then
+            if extrasounds.enableBlockCoinCollecting then
+                extrasounds.playSFX(14)
+                SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+            end
         end
     end
 end
 
 function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
     local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
+    local questionblocks = table.map{5,88,193,224} --A list of question mark blocks
     if bootmenu.active == false then
         if playerornil then
             if block.contentID == 1000 or block.contentID == 0 or playerornil.character == CHARACTER_TOAD or playerornil.character == CHARACTER_KLONOA then
@@ -109,12 +113,13 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
             end
         end
-        --if Colliders.getColliding({a=playerornil,b=bricksnormal[block],btype=Colliders.BLOCK}) then
-            --Routine.run(detecttopcoin, block, fromUpper, playerornil)
-        --end
         --**BRICK SMASHING**
         if bricksnormal[block.id] then
             Routine.run(addsmashpoints, block, fromUpper, playerornil)
+        end
+        --**COIN TOP DETECTION**
+        if bricksnormal[block.id] or questionblocks[block.id] then
+            Routine.run(detecttopcoin, block, fromUpper, playerornil)
         end
     end
 end
@@ -123,7 +128,7 @@ function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coin
     local coins = table.map{10,33,88,103,138,152,251,252,253,258,528}
     if bootmenu.active == false then
         for _,p in ipairs(Player.get()) do 
-            if coins[npc.id] and (npc:mem(0x138,FIELD_WORD) == 5 and p:mem(0x108,FIELD_WORD) == 3 and p:mem(0xB6,FIELD_BOOL) and not p:mem(0x10C,FIELD_BOOL)) or (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
+            if coins[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1 --One coin collected
             end
         end

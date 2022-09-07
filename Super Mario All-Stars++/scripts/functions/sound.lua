@@ -4,6 +4,10 @@ local extrasounds = require("extrasounds")
 local playerManager = require("playermanager")
 local smastables = require("smastables")
 
+function Sound.onInitAPI()
+    registerEvent(Sound,"onDraw")
+end
+
 function Sound.openSFX(name) --Opening SFXs
     return SFX.open(name)
         or SFX.open("_OST/" .. name)
@@ -174,5 +178,16 @@ function Sound.restoreOriginalMusic(sectionid) --Restore all original section mu
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
     end
 end
+
+
+
+
+
+function Sound.onDraw()
+    
+end
+
+
+
 
 return Sound

@@ -129,6 +129,7 @@ extrasounds.enableGrabShellSFX = true
 extrasounds.enablePWingSFX = true
 
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
+local inspect = require("ext/inspect")
 
 local npctocointimer = 0 --This is used for the NPC to Coin sound.
 local spinballtimer = 0 --This is used when spinjumping and shooting fireballs/iceballs.
@@ -410,23 +411,10 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
     )
 end
 
-local function isShootingFire(p)
+local function isShooting(p)
     return (p:mem(0x160, FIELD_WORD) == 0
-        and p.powerup == 3
-        and not p.keys.down
-        and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
-    )
-end
-local function isShootingHammer(p)
-    return (p:mem(0x160, FIELD_WORD) == 0
-        and p.powerup == 6
-        and not p.keys.down
-        and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
-    )
-end
-local function isShootingIce(p)
-    return (p:mem(0x160, FIELD_WORD) == 0
-        and p.powerup == 7
+        and Level.endState() == 0
+        and p.deathTimer == 0
         and not p.keys.down
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
     )
@@ -859,6 +847,18 @@ function brickkillsound(block, hitter) --Alternative way to play the sound. Used
     end
 end
 
+function brickcointopdetection(block, fromUpper, playerornil)
+    Routine.waitFrames(2, true)
+    for k,effect in ipairs(Effect.get(11)) do
+        local effectcoord = Effect.getIntersecting(effect.x, effect.y, block.x, effect.y - block.y)
+        if effectcoord ~= {} then
+            if extrasounds.enableBlockCoinCollecting then
+                extrasounds.playSFX(14)
+            end
+        end
+    end
+end
+
 function extrasoundsblock90.onCollideBlock(block, hitter) --SMW BLock
     if type(hitter) == "Player" then
         if (hitter.y+hitter.height) <= (block.y+4) then
@@ -878,6 +878,7 @@ end
 function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
     local bricks = table.map{4,60,90,188,226,293,526} --These are a list of breakable bricks
     local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
+    local questionblocks = table.map{5,88,193,224}
     if extrasounds.active then --If it's true, play them
         if not Misc.isPaused() then --Making sure the sound only plays when not paused...
             for _,p in ipairs(Player.get()) do --This will get actions regarding all players
@@ -932,6 +933,16 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
                 
                 
                 
+                
+                --**COIN TOP DETECTION**
+                if bricksnormal[block.id] or questionblocks[block.id] then
+                    Routine.run(brickcointopdetection, block, fromUpper, playerornil)
+                end
+                
+                
+                
+                
+                
             end
         end
     end
@@ -967,27 +978,29 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 
                 
                 
-                --**FIREBALLS**
-                if isShootingFire(p) then --Fireball sound
-                    if extrasounds.enableFireFlowerSFX then
-                        extrasounds.playSFX(18, extrasounds.volume)
-                    end
-                end
-                if isShootingHammer(p) then --Hammer Throw sound
-                    if extrasounds.enableHammerSuitSFX then
-                        if not extrasounds.useFireSoundForHammerSuit then
-                            extrasounds.playSFX(105, extrasounds.volume)
-                        elseif extrasounds.useFireSoundForHammerSuit then
+                --**FIREBALLS/HAMMERS/ICEBALLS**
+                if isShooting(p) then
+                    if p.powerup == 3 then --Fireball sound
+                        if extrasounds.enableFireFlowerSFX then
                             extrasounds.playSFX(18, extrasounds.volume)
                         end
                     end
-                end
-                if isShootingIce(p) then --Iceball sound
-                    if extrasounds.enableIceFlowerSFX then
-                        if not extrasounds.useFireSoundForIce then
-                            extrasounds.playSFX(93, extrasounds.volume)
-                        elseif extrasounds.useFireSoundForIce then
-                            extrasounds.playSFX(18, extrasounds.volume)
+                    if p.powerup == 6 then --Hammer throw sound
+                        if extrasounds.enableHammerSuitSFX then
+                            if not extrasounds.useFireSoundForHammerSuit then
+                                extrasounds.playSFX(105, extrasounds.volume)
+                            elseif extrasounds.useFireSoundForHammerSuit then
+                                extrasounds.playSFX(18, extrasounds.volume)
+                            end
+                        end
+                    end
+                    if p.powerup == 7 then --Iceball sound
+                        if extrasounds.enableIceFlowerSFX then
+                            if not extrasounds.useFireSoundForIce then
+                                extrasounds.playSFX(93, extrasounds.volume)
+                            elseif extrasounds.useFireSoundForIce then
+                                extrasounds.playSFX(18, extrasounds.volume)
+                            end
                         end
                     end
                 end
