@@ -93,7 +93,12 @@ end
 function costume.onDraw()
     if SaveData.toggleCostumeAbilities == true then
         --Health system
-        player.powerup = 2
+        if plr.powerup <= 1 then
+            plr.powerup = 2
+        end
+        if plr.powerup >= 4 then --Until we get all powerups implemented, this'll do for now
+            plr.powerup = 3
+        end
         if mariohp > 3 then
             mariohp = 3
         end
