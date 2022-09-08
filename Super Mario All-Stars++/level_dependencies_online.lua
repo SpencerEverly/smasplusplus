@@ -77,7 +77,7 @@ function dependencies.onStart()
         furyinventory = require("furyinventory")
         warpTransition.musicFadeOut = false
         warpTransition.levelStartTransition = warpTransition.TRANSITION_FADE
-        warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
+        warpTransition.sameSectionTransition = warpTransition.TRANSITION_PAN
         warpTransition.crossSectionTransition = warpTransition.TRANSITION_FADE
         warpTransition.activateOnInstantWarps = false
         warpTransition.TRANSITION_FADE = 1
