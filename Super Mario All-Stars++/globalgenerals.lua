@@ -497,10 +497,6 @@ function globalgenerals.onTickEnd()
     mem(0x00B250D4,FIELD_BOOL,false)
 end
 
---if SMBX_VERSION == VER_SEE_MOD then
-    --Misc.setWindowPosition(0,400)
---end
-
 local pSwitchMusic
 
 function globalgenerals.onTick()
@@ -720,8 +716,8 @@ function globalgenerals.onDraw()
             end
         end
     end
-    if Timer.getValue() <= 100 then
-        if SMBX_VERSION == VER_SEE_MOD then
+    if SMBX_VERSION == VER_SEE_MOD then
+        if Timer.getValue() <= 100 and Timer.getValue() >= 1 then
             Audio.MusicSetTempo(1.5)
         end
     end
