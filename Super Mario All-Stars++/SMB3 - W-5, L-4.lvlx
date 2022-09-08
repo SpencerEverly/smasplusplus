@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 3\: World 5-3";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 3\: World 5-4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-195680;T:-201152;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Sky Horizons.ogg";BG:20;
