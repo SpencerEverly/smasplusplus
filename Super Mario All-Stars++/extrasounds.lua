@@ -838,7 +838,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
     end
 end
 
-function onPostExplosion(explosion, playerSource)
+function extrasounds.onPostExplosion(explosion, playerSource)
     if explosion.id == 69 then
         if not extrasounds.useFireworksInsteadOfOtherExplosions then
             if extrasounds.enableSMB2ExplosionSFX then
