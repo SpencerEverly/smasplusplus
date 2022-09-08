@@ -792,10 +792,30 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                         end
                     end
                 end
+                
+                
+                
+                
+            --**EXPLOSIONS**
+                for index,explosion in ipairs(Effect.get(69)) do --Explosions!
+                    if explosion.timer == 59 then
+                        if not extrasounds.useFireworksInsteadOfOtherExplosions then
+                            if extrasounds.enableSMB2ExplosionSFX then
+                                extrasounds.playSFX(104, extrasounds.volume)
+                            end
+                        elseif extrasounds.useFireworksInsteadOfOtherExplosions then
+                            if extrasounds.enableFireworksSFX then
+                                extrasounds.playSFX(43, extrasounds.volume)
+                            end
+                        end
+                    end
+                end
+                for index2,explosion2 in ipairs(Effect.get(71)) do
+                    if extrasounds.enableFireworksSFX then
+                        extrasounds.playSFX(43, extrasounds.volume, 1)
+                    end
+                end
             end
-                
-                
-            
             
             
             
@@ -838,24 +858,6 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
     end
 end
 
-function extrasounds.onPostExplosion(explosion, playerSource)
-    if explosion.id == 69 then
-        if not extrasounds.useFireworksInsteadOfOtherExplosions then
-            if extrasounds.enableSMB2ExplosionSFX then
-                extrasounds.playSFX(104, extrasounds.volume)
-            end
-        elseif extrasounds.useFireworksInsteadOfOtherExplosions then
-            if extrasounds.enableFireworksSFX then
-                extrasounds.playSFX(43, extrasounds.volume)
-            end
-        end
-    end
-    if explosion.id == 71 then
-        if extrasounds.enableFireworksSFX then
-            extrasounds.playSFX(43, extrasounds.volume)
-        end
-    end
-end
 local blockSmashTable = {
     [4] = 4,
     [60] = 4,
