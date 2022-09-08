@@ -136,7 +136,11 @@ local function introExit()
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
     bootmenu.startedmenu = 0
-    Level.load("SMAS - Intro.lvlx", nil, nil)
+    if SaveData.openingComplete then
+        Level.load("SMAS - Intro.lvlx")
+    else
+        Level.load("SMAS - Opening Cutscene.lvlx")
+    end
 end
 
 local function BattleRandomLevelSelect()
@@ -597,8 +601,7 @@ local function mapExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
-    bootmenu.startedmenu = 0
-    Level.load("map.lvlx", nil, nil)
+    ExitToMap()
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
@@ -1136,11 +1139,15 @@ local function SaveEraseStart()
 end
 
 local function ExitToIntro() --This command will auto load the intro
-    Level.load("SMAS - Intro.lvlx", nil, nil)
+    Level.load("SMAS - Intro.lvlx")
 end
 
 local function ExitToMap() --This command will exit to the main map
-    Level.load("map.lvlx", nil, nil)
+    if not SaveData.openingComplete then
+        Level.load("SMAS - Opening Cutscene.lvlx")
+    else
+        Level.load("map.lvlx")
+    end
 end
 
 local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
@@ -1803,7 +1810,9 @@ function bootmenu.onDraw()
             --nothing
         end
         if active3 then
-            textplus.print{x=40, y=450, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont, xscale = 1.5, yscale = 1.5}
+            if SaveData.openingComplete then
+                textplus.print{x=40, y=450, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont, xscale = 1.5, yscale = 1.5}
+            end
         end
         if active4 then
             textplus.print{x=150, y=550, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}

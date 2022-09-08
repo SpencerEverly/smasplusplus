@@ -340,6 +340,7 @@ smastables._friendlyPlaces = {
     "SMW - W-0, L-Yellow Switch.lvlx",
     "SMW - W-0, L-Blue Switch.lvlx",
     "SMAS - Rush Mode Results.lvlx",
+    "SMAS - Opening Cutscene.lvlx",
 }
 
 --Menu table for any costume with troublesome sounds
@@ -368,6 +369,7 @@ smastables._noLevelPlaces = {
     "SMAS - Online (Menu).lvlx",
     "SMB2 - Ending.lvlx",
     "SMAS - Rush Mode Results.lvlx",
+    "SMAS - Opening Cutscene.lvlx",
 }
 
 smastables._noLevelPlacesPlusOtherLevels = {
@@ -438,6 +440,7 @@ smastables._noLevelPlacesPlusOtherLevels = {
     "battle_nsmbds1.lvlx",
     "battle_nsmbds2.lvlx",
     "battle_nsmbds3.lvlx",
+    "SMAS - Opening Cutscene.lvlx",
 }
 
 smastables._noTransitionLevels = { --This one will prevent transitions from happening via warpTransition
@@ -466,6 +469,7 @@ smastables._noTransitionLevels = { --This one will prevent transitions from happ
     "intro_sunsetbeach.lvlx",
     "intro_WSMBA.lvlx",
     "intro_metroidprime2.lvlx",
+    "SMAS - Opening Cutscene.lvlx",
 }
 
 smastables.__classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.

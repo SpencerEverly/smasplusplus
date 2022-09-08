@@ -262,6 +262,11 @@ if SaveData.enableLives == nil then
     SaveData.enableLives = true
 end
 
+--Other stuff
+if SaveData.openingComplete == nil then
+    SaveData.openingComplete = false
+end
+
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 
 if SaveData.playerName == nil then --This is for adding the player name to the launcher, aside from the total stars used
