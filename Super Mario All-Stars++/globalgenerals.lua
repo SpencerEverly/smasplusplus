@@ -720,6 +720,11 @@ function globalgenerals.onDraw()
             end
         end
     end
+    if Timer.getValue() <= 100 then
+        if SMBX_VERSION == VER_SEE_MOD then
+            Audio.MusicSetTempo(1.5)
+        end
+    end
     if SaveData.disableX2char == false then
         if player.character <= 5 then
             local costumes = playerManager.getCostumes(player.character)
