@@ -20,7 +20,7 @@ smwMap.setObjSettings(npcID,{
     spawnSpeedY = 10,
 
     onTickObj = (function(v)
-        v.frameY = smwMap.doBasicAnimation(v,smwMap.getObjectConfig(v.id).framesY,6)
+        v.frameY = smwMap.doBasicAnimation(v,smwMap.getObjectConfig(v.id).framesY,10)
     end),
 
     isLevel = true,

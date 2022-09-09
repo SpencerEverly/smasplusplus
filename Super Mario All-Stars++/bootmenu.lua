@@ -601,7 +601,11 @@ local function mapExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
-    ExitToMap()
+    if not SaveData.openingComplete then
+        Level.load("SMAS - Opening Cutscene.lvlx")
+    else
+        Level.load("map.lvlx")
+    end
 end
 
 local function easterEgg() --SnooPINGAS I see? ._.
@@ -1140,14 +1144,6 @@ end
 
 local function ExitToIntro() --This command will auto load the intro
     Level.load("SMAS - Intro.lvlx")
-end
-
-local function ExitToMap() --This command will exit to the main map
-    if not SaveData.openingComplete then
-        Level.load("SMAS - Opening Cutscene.lvlx")
-    else
-        Level.load("map.lvlx")
-    end
 end
 
 local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.

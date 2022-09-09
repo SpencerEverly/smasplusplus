@@ -142,7 +142,7 @@ function thirteenmodedeath()
     if SaveData.totalLives < 0 and SaveData.enableLives then
         gameoveractivate = true
         SaveData.totalLives = 0
-    elseif not SaveData.enableLives then
+    if SaveData.totalLives < 0 and SaveData.enableLives then
         gameoveractivate2 = true
     end
     Routine.waitFrames(196)
@@ -282,7 +282,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 if SaveData.totalLives < 0 and SaveData.enableLives then --If less than 0, the quick game over screen will activate
                                     gameoveractivate = true
                                     SaveData.totalLives = 0
-                                elseif not SaveData.enableLives then
+                                elseif SaveData.totalLives < 0 and not SaveData.enableLives then
                                     gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
@@ -424,7 +424,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 if SaveData.totalLives < 0 and SaveData.enableLives then
                                     gameoveractivate = true
                                     SaveData.totalLives = 0
-                                elseif not SaveData.enableLives then
+                                elseif SaveData.totalLives < 0 and not SaveData.enableLives then
                                     gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
