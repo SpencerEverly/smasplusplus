@@ -550,7 +550,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**TAIL ATTACK**
             if p.powerup == 4 or p.powerup == 5 then
-                if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0 and not p.keys.down and not p:mem(0x50, FIELD_BOOL) and p:mem(0x172, FIELD_BOOL)) then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking?
+                if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0 and not p.keys.down and not p:mem(0x50, FIELD_BOOL) and p:mem(0x172, FIELD_BOOL) and p.deathTimer == 0) then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking (And not dead)?
                     if extrasounds.enableTailAttackSFX then
                         extrasounds.playSFX(33)
                     end
