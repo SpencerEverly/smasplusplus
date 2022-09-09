@@ -189,7 +189,7 @@ local animations = {
     duckSmall = {8},
 
     -- Small only animation
-    walkSmall = {2,1,   frameDelay = 4},
+    walkSmall = {2,1,   frameDelay = 3},
     runSmall  = {16,17, frameDelay = 4},
     walkHoldingSmall = {6,5, frameDelay = 4},
     
