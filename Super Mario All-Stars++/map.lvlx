@@ -934,6 +934,7 @@ ID:786;X:-197440;Y:-198144;
 ID:780;X:-200768;Y:-201120;
 ID:784;X:-192736;Y:-195040;
 ID:787;X:-201600;Y:-200000;
+ID:788;X:-201600;Y:-198784;
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -1771,13 +1772,39 @@ ID:834;X:-200704;Y:-199744;D:-1;XTRA:"{\n    \"path_down\"\: \"toSMB34-5\"\,\n  
 ID:802;X:-200832;Y:-199680;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"4-5\: Missile Bills\, Oh No!\"\,\n    \"path_right\"\: \"toSMB34-5\"\,\n    \"path_up\"\: \"toSMB3W-4Dungeon2-Path1\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:802;X:-200832;Y:-199808;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"4-6\: Big to Small to Big\"\,\n    \"path_down\"\: \"toSMB3W-4Dungeon2-Path2\"\,\n    \"path_right\"\: \"toSMB34-6\"\,\n    \"unlock_down\"\: 9\n}\n";
 ID:849;X:-200832;Y:-199744;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-Fortress2.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #6\: Boom Boom the 2nd\"\,\n    \"path_down\"\: \"toSMB3W-4Dungeon2-Path1\"\,\n    \"path_left\"\: \"toSMB34-Castle\"\,\n    \"path_up\"\: \"toSMB3W-4Dungeon2-Path2\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_left\"\: 9\,\n    \"unlock_up\"\: 0\n}\n";
-ID:854;X:-200960;Y:-199744;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #4\: Iggy\"\,\n    \"path_right\"\: \"toSMB34-Castle\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:854;X:-200960;Y:-199744;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-4\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #4\: Iggy\"\,\n    \"path_right\"\: \"toSMB34-Castle\"\,\n    \"path_up\"\: \"toSMB3W-4Path3\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-200608;Y:-199680;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-4Path2\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -32\, -32\, -96\, -64\"\n}\n";
 ID:752;X:-200704;Y:-199712;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-5\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -128\, 32\"\n}\n";
 ID:752;X:-200704;Y:-199776;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-6\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, -128\, -32\"\n}\n";
 ID:752;X:-200832;Y:-199712;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-4Dungeon2-Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:752;X:-200832;Y:-199776;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-4Dungeon2-Path2\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
 ID:752;X:-200864;Y:-199744;D:-1;XTRA:"{\n    \"name\"\: \"toSMB34-Castle\"\,\n    \"points\"\: \"32\, 0\, -96\, 0\"\n}\n";
+ID:753;X:-201600;Y:-198784;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Sky Land.spc|0\;g=2.5\"\,\n    \"height\"\: 448\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 668\n}\n";
+ID:752;X:-200960;Y:-199776;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-4Path3\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:821;X:-200960;Y:-199808;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 5\"\,\n    \"path_down\"\: \"toSMB3W-4Path3\"\,\n    \"warpName\"\: \"SMB3W-4EndWarp\"\n}\n";
+ID:821;X:-201568;Y:-198400;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-4EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 4\"\,\n    \"path_down\"\: \"\"\,\n    \"path_up\"\: \"toSMB35-1\"\,\n    \"warpName\"\: \"SMB3W-5BeginWarp\"\n}\n";
+ID:752;X:-201568;Y:-198432;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-1\"\,\n    \"points\"\: \"0\, 32\, 0\, -128\"\n}\n";
+ID:802;X:-201568;Y:-198560;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"5-1\: The Sky Horizons\"\,\n    \"path_down\"\: \"toSMB35-1\"\,\n    \"path_up\"\: \"toSMB35-2\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-201568;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 64\, -32\"\n}\n";
+ID:802;X:-201504;Y:-198624;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"5-2\: Deep into The Surface\"\,\n    \"path_down\"\: \"toSMB3W-5Path1\"\,\n    \"path_left\"\: \"toSMB35-2\"\,\n    \"path_right\"\: \"toSMB3W-5Path2\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-201504;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:752;X:-201472;Y:-198624;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:850;X:-201440;Y:-198624;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-0\, L-TH2.lvlx\"\,\n    \"levelTitle\"\: \"Toad House\"\,\n    \"path_left\"\: \"toSMB3W-5Path2\"\n}\n";
+ID:821;X:-201504;Y:-198560;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5Warp1Destination\"\,\n    \"levelTitle\"\: \"To the Other Side\"\,\n    \"path_up\"\: \"toSMB3W-5Path1\"\,\n    \"warpName\"\: \"SMB3W-5Warp1Target\"\n}\n";
+ID:821;X:-201408;Y:-198528;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5Warp1Target\"\,\n    \"levelTitle\"\: \"To the Main Side\"\,\n    \"path_down\"\: \"toSMB35-Fortress1\"\,\n    \"path_right\"\: \"toSMB35-3\"\,\n    \"warpName\"\: \"SMB3W-5Warp1Destination\"\n}\n";
+ID:752;X:-201408;Y:-198496;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-Fortress1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -64\, 32\"\n}\n";
+ID:752;X:-201376;Y:-198528;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, -64\"\n}\n";
+ID:802;X:-201344;Y:-198592;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"5-3\: Bites Ahead!\"\,\n    \"path_down\"\: \"toSMB35-3\"\,\n    \"path_right\"\: \"toSMB35-TowerPath2\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:861;X:-201216;Y:-198560;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-Tower.lvlx\"\,\n    \"levelTitle\"\: \"The Sky Tower\"\,\n    \"path_left\"\: \"toSMB35-Tower\"\,\n    \"path_up\"\: \"toSMB3W-5Path4\"\n}\n";
+ID:852;X:-201312;Y:-198400;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Bonus Challenge! #4\"\,\n    \"path_left\"\: \"toSMB3W-5Path3\"\,\n    \"path_right\"\: \"toSMB35-TowerPath1\"\n}\n";
+ID:849;X:-201472;Y:-198464;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-Fortress1.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #7\: Winger Boom Boom\"\,\n    \"path_right\"\: \"toSMB35-Fortress1\"\,\n    \"unlock_down\"\: 9\n}\n";
+ID:752;X:-201472;Y:-198432;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path3\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, 160\, 32\"\n}\n";
+ID:752;X:-201280;Y:-198400;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-TowerPath1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 0\, -160\"\n}\n";
+ID:843;X:-201280;Y:-198560;D:-1;XTRA:"{\n    \"path_down\"\: \"toSMB35-TowerPath1\"\,\n    \"path_right\"\: \"toSMB35-Tower\"\,\n    \"path_up\"\: \"toSMB35-TowerPath2\"\n}\n";
+ID:752;X:-201312;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-TowerPath2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, 32\"\n}\n";
+ID:752;X:-201248;Y:-198560;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-Tower\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:752;X:-201216;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path4\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:821;X:-201216;Y:-198624;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5bBeginWarp\"\,\n    \"levelTitle\"\: \"To the Skies\"\,\n    \"path_down\"\: \"toSMB3W-5Path4\"\,\n    \"warpName\"\: \"SMB3W-5EndWarp\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
