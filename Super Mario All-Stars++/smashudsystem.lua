@@ -142,7 +142,7 @@ function thirteenmodedeath()
     if SaveData.totalLives < 0 and SaveData.enableLives then
         gameoveractivate = true
         SaveData.totalLives = 0
-    if SaveData.totalLives < 0 and SaveData.enableLives then
+    elseif SaveData.totalLives < 0 and not SaveData.enableLives then
         gameoveractivate2 = true
     end
     Routine.waitFrames(196)
