@@ -976,7 +976,7 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
                 
                 --**COIN TOP DETECTION**
                 if bricksnormal[block.id] or questionblocks[block.id] then
-                    Routine.run(brickcointopdetection, block, fromUpper, playerornil)
+                    --Routine.run(brickcointopdetection, block, fromUpper, playerornil)
                 end
                 
                 

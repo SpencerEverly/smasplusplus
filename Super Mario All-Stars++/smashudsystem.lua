@@ -120,7 +120,7 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
         end
         --**COIN TOP DETECTION**
         if bricksnormal[block.id] or questionblocks[block.id] then
-            Routine.run(detecttopcoin, block, fromUpper, playerornil)
+            --Routine.run(detecttopcoin, block, fromUpper, playerornil)
         end
     end
 end
