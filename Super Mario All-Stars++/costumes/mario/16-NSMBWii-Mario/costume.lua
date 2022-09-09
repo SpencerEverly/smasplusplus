@@ -253,6 +253,7 @@ end
 local animations = {
     -- Big only animations
     standing = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47, frameDelay = 3},
+    standingLeaf = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38, frameDelay = 3},
     walk = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27, frameDelay = 2},
     halfrun  = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18, frameDelay = 2},
     run  = {1,2,3,4,5,6,7,8,9,10,11,12,13, frameDelay = 2},
@@ -561,6 +562,8 @@ local function findAnimation(p)
                 Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup..".png")
                 if p.powerup == PLAYER_SMALL then
                     return "standingSmall"
+                elseif p.powerup == PLAYER_LEAF then
+                    return "standingLeaf"
                 else
                     return "standing"
                 end

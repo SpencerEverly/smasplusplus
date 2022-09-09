@@ -11,5 +11,6 @@ smasbooleans.overrideMusicVolume = false
 smasbooleans.pSwitchActive = false
 smasbooleans.skipUpdater = true
 smasbooleans.disablePauseMenu = false
+smasbooleans.enableInGameSpring = false
 
 return smasbooleans

@@ -9,6 +9,7 @@ local smashudsystem = require("smashudsystem")
 local comboSounds = require("comboSounds")
 
 littleDialogue.defaultStyleName = "smbx13"
+smasbooleans.enableInGameSpring = true
 
 function onStart()
     if SMBX_VERSION == VER_SEE_MOD then
