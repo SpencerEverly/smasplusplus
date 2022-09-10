@@ -30,7 +30,7 @@ function costume.onInit(p)
     --Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/10-HotelMario/has-item.ogg")
     --Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/10-HotelMario/camera-change.ogg")
     extrasounds.sound.sfx[14] = Audio.SfxOpen("costumes/mario/10-HotelMario/coin.ogg")
-    --extrasounds.sound.sfx[15] = Audio.SfxOpen("costumes/mario/10-HotelMario/1up.ogg")
+    extrasounds.sound.sfx[15] = Audio.SfxOpen("costumes/mario/10-HotelMario/1up.ogg")
     --Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/10-HotelMario/lava.ogg")
     --Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/10-HotelMario/warp.ogg")
     extrasounds.sound.sfx[18] = Audio.SfxOpen("costumes/mario/10-HotelMario/fireball.ogg")
@@ -77,6 +77,18 @@ function costume.onInit(p)
     --Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/10-HotelMario/smb2-throw.ogg")
     --Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/10-HotelMario/smb2-hit.ogg")
     --Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/10-HotelMario/bubble.ogg")
+    --extrasounds.sound.sfx[92] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/sprout-vine.ogg")) --Vine sprout
+    extrasounds.sound.sfx[93] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/iceball.ogg")) --Iceball
+    extrasounds.sound.sfx[96] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/2up.ogg")) --2UP
+    extrasounds.sound.sfx[97] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/3up.ogg")) --3UP
+    extrasounds.sound.sfx[98] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/5up.ogg")) --5UP
+    --extrasounds.sound.sfx[99] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get2.ogg")) --Dragon Coin #2
+    --extrasounds.sound.sfx[100] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get3.ogg")) --Dragon Coin #3
+    --extrasounds.sound.sfx[101] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get4.ogg")) --Dragon Coin #4
+    --extrasounds.sound.sfx[102] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get5.ogg")) --Dragon Coin #5
+    --extrasounds.sound.sfx[103] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/cherry.ogg")) --Cherry
+    extrasounds.sound.sfx[104] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/explode.ogg")) --SMB2 Explosion
+    extrasounds.sound.sfx[105] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/hammerthrow.ogg")) --Player hammer throw
     
     smashud.visible.itembox = false
     mariohp = 2

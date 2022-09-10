@@ -377,7 +377,7 @@ local function findAnimation(p)
 
     if p.mount == MOUNT_YOSHI then
         if canHitYoshi(p) then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-yoshihit.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-yoshihit.png") end)
             -- Hitting yoshi in the back of the head
             if data.yoshiHitTimer == 1 then
                 if p.powerup == PLAYER_SMALL then
@@ -391,7 +391,7 @@ local function findAnimation(p)
         end
         
         if data.yoshiHitTimer == 0 then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-yoshi.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-yoshi.png") end)
         end
         if p.powerup == PLAYER_SMALL then
             return "yoshiidleSmall"
@@ -414,14 +414,14 @@ local function findAnimation(p)
         end
 
         if direction == 2 or direction == 4 then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-walk.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-walk.png") end)
             if p.powerup == PLAYER_SMALL then
                 return "walkSmall",0.5
             else
                 return "walk",0.5
             end
         elseif direction == 1 or direction == 3 then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-pipe.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-pipe.png") end)
             if p.powerup == PLAYER_SMALL then
                 return "pipeSmall",0.5
             else
@@ -431,7 +431,7 @@ local function findAnimation(p)
     elseif p.forcedState == FORCEDSTATE_DOOR then
         -- Clear pipe stuff (it's weird)
         local frame = data.frameInOnDraw
-        Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup..".png")
+        pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup..".png") end)
 
         if clearPipeHorizontalFrames[frame] then
             return "clearPipeHorizontal"
@@ -451,7 +451,7 @@ local function findAnimation(p)
     
     --Grabbing from below
     if p:mem(0x26,FIELD_WORD) > 0 then
-        Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-grab.png")
+        pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-grab.png") end)
         return "grabbing"
     end
 
@@ -460,13 +460,13 @@ local function findAnimation(p)
         if smb2Characters[p.character] then
             return nil
         elseif p.holdingNPC ~= nil then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-duckgrab.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-duckgrab.png") end)
             return "duckHolding"
         elseif p.powerup == PLAYER_SMALL then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-duck.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-duck.png") end)
             return "duckSmall"
         else
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-duck.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-duck.png") end)
             return "duck"
         end
     end
@@ -483,14 +483,14 @@ local function findAnimation(p)
 
     if p.climbing then
         if p.speedX == 0 and p.speedY == 0 or p.speedY >= 0 then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-climbstill.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-climbstill.png") end)
             if p.powerup == PLAYER_SMALL then
                 return "climbingstillSmall"
             else
                 return "climbingstill"
             end
         elseif p.speedX ~= 0 or p.speedY <= 0 then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-climb.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-climb.png") end)
             if p.powerup == PLAYER_SMALL then
                 return "climbingSmall"
             else
@@ -501,7 +501,7 @@ local function findAnimation(p)
     
     
     if p:mem(0x50,FIELD_BOOL) then -- spin jumping
-        Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-spinjump.png")
+        pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-spinjump.png") end)
         if smb2Characters[p.character] and p.frame == 5 then -- dumb bug
             return "spinjumpSidwaysToad"
         elseif p.powerup == PLAYER_SMALL then
@@ -519,7 +519,7 @@ local function findAnimation(p)
     if data.currentAnimation == "kick" and not data.animationFinished then
         return data.currentAnimation
     elseif p.holdingNPC == nil and data.wasHoldingNPC and costume.kickAnimationEnabled then -- stopped holding an NPC
-        Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-throw.png")
+        pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-throw.png") end)
         if not smb2Characters[p.character] then
             local e = Effect.spawn(75, p.x + p.width*0.5 + p.width*0.5*p.direction,p.y + p.height*0.5)
 
@@ -540,14 +540,14 @@ local function findAnimation(p)
         
         --Shooting fire/ice
         if isShooting then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-shoot.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-shoot.png") end)
             return "shootGround"
         end
 
 
         -- Skidding
         if (p.speedX < 0 and p.keys.right) or (p.speedX > 0 and p.keys.left) or p:mem(0x136,FIELD_BOOL) then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-skid.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-skid.png") end)
             if p.powerup == PLAYER_SMALL then
                 return "skidSmall"
             else
@@ -559,7 +559,7 @@ local function findAnimation(p)
         --Standing
         if p.speedX == 0 and not isSlidingOnIce(p) and not isShooting and not p:mem(0x12E,FIELD_BOOL) then
             if p.holdingNPC == nil then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup..".png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup..".png") end)
                 if p.powerup == PLAYER_SMALL then
                     return "standingSmall"
                 elseif p.powerup == PLAYER_LEAF then
@@ -568,7 +568,7 @@ local function findAnimation(p)
                     return "standing"
                 end
             elseif p.holdingNPC ~= nil then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-hold.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-hold.png") end)
                  if p.powerup == PLAYER_SMALL then
                     return "standingholdSmall"
                 else
@@ -584,17 +584,17 @@ local function findAnimation(p)
 
             local animationName
             if atPSpeed then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-run.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-run.png") end)
                 animationName = "run"
             elseif atHalfPSpeed then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-halfrun.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-halfrun.png") end)
                 animationName = "halfrun"
             else
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-walk.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-walk.png") end)
                 animationName = "walk"
 
                 if p.holdingNPC ~= nil then
-                    Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-holdwalk.png")
+                    pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-holdwalk.png") end)
                     animationName = animationName.. "Holding"
                 end
             end
@@ -613,7 +613,7 @@ local function findAnimation(p)
 
         -- Looking up
         if p.keys.up then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup..".png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup..".png") end)
             if p.holdingNPC == nil then
                 return "lookUp"
             else
@@ -632,7 +632,7 @@ local function findAnimation(p)
         
 
         if p:mem(0x38,FIELD_WORD) == 15 then
-            Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-swimjump.png")
+            pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-swimjump.png") end)
             if p.powerup == PLAYER_SMALL then
                 return "swimStrokeSmall"
             else
@@ -642,7 +642,7 @@ local function findAnimation(p)
             return data.currentAnimation
         end
         
-        Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-swim.png")
+        pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..player.powerup.."-swim.png") end)
         if p.powerup == PLAYER_SMALL then
             return "swimIdleSmall"
         else
@@ -668,7 +668,7 @@ local function findAnimation(p)
             elseif leafPowerups[p.powerup] and p.speedY > 0 then
                 return "runJumpLeafDown"
             elseif isJumping(p) then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png") end)
                 if p.powerup == 1 then
                     return "jumpSmall"
                 else
@@ -676,14 +676,14 @@ local function findAnimation(p)
                 end
             elseif isFalling(p) then
                 if p.holdingNPC == nil then
-                    Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png")
+                    pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png") end)
                     if p.powerup == 1 then
                         return "fallSmall"
                     else
                        return "fall"
                     end
                 elseif p.holdingNPC ~= nil then
-                    Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png")
+                    pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png") end)
                     if p.powerup == 1 then
                         return "jumpholdSmall"
                     else
@@ -696,14 +696,14 @@ local function findAnimation(p)
         --JUMPING
         if isJumping(p) then
             if p.holdingNPC == nil then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png") end)
                 if p.powerup == 1 then
                     return "jumpSmall"
                 else
                     return "jump"
                 end
             elseif p.holdingNPC ~= nil then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-holdjump.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-holdjump.png") end)
                 if p.powerup == 1 then
                     return "jumpholdSmall"
                 else
@@ -715,14 +715,14 @@ local function findAnimation(p)
         --FALLING
         if isFalling(p) then
             if p.holdingNPC == nil then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-jump.png") end)
                 if p.powerup == 1 then
                     return "fallSmall"
                 else
                     return "fall"
                 end
             elseif p.holdingNPC ~= nil then
-                Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-holdjump.png")
+                pcall(function() Graphics.sprites.mario[p.powerup].img = Graphics.loadImageResolved("costumes/"..characterList[p.character].."/"..p:getCostume().."/"..characterList[p.character].."-"..p.powerup.."-holdjump.png") end)
                 if p.powerup == 1 then
                     return "jumpholdSmall"
                 else

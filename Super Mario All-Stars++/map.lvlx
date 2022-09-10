@@ -1785,7 +1785,7 @@ ID:821;X:-200960;Y:-199808;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5
 ID:821;X:-201568;Y:-198400;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-4EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 4\"\,\n    \"path_down\"\: \"\"\,\n    \"path_up\"\: \"toSMB35-1\"\,\n    \"warpName\"\: \"SMB3W-5BeginWarp\"\n}\n";
 ID:752;X:-201568;Y:-198432;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-1\"\,\n    \"points\"\: \"0\, 32\, 0\, -128\"\n}\n";
 ID:802;X:-201568;Y:-198560;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"5-1\: The Sky Horizons\"\,\n    \"path_down\"\: \"toSMB35-1\"\,\n    \"path_up\"\: \"toSMB35-2\"\,\n    \"unlock_up\"\: 9\n}\n";
-ID:752;X:-201568;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 64\, -32\"\n}\n";
+ID:752;X:-201568;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-2\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 64\, -32\"\,\n    \"smoothness\"\: 0.6\n}\n";
 ID:802;X:-201504;Y:-198624;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"5-2\: Deep into The Surface\"\,\n    \"path_down\"\: \"toSMB3W-5Path1\"\,\n    \"path_left\"\: \"toSMB35-2\"\,\n    \"path_right\"\: \"toSMB3W-5Path2\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-201504;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
 ID:752;X:-201472;Y:-198624;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
@@ -1797,11 +1797,11 @@ ID:752;X:-201376;Y:-198528;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-3\"\,\n    \"p
 ID:802;X:-201344;Y:-198592;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"5-3\: Bites Ahead!\"\,\n    \"path_down\"\: \"toSMB35-3\"\,\n    \"path_right\"\: \"toSMB35-TowerPath2\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:861;X:-201216;Y:-198560;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-Tower.lvlx\"\,\n    \"levelTitle\"\: \"The Sky Tower\"\,\n    \"path_left\"\: \"toSMB35-Tower\"\,\n    \"path_up\"\: \"toSMB3W-5Path4\"\n}\n";
 ID:852;X:-201312;Y:-198400;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Bonus Challenge! #4\"\,\n    \"path_left\"\: \"toSMB3W-5Path3\"\,\n    \"path_right\"\: \"toSMB35-TowerPath1\"\n}\n";
-ID:849;X:-201472;Y:-198464;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-Fortress1.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #7\: Winger Boom Boom\"\,\n    \"path_right\"\: \"toSMB35-Fortress1\"\,\n    \"unlock_down\"\: 9\n}\n";
+ID:849;X:-201472;Y:-198464;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-Fortress1.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #7\: Winger Boom Boom\"\,\n    \"path_down\"\: \"toSMB3W-5Path3\"\,\n    \"path_right\"\: \"toSMB35-Fortress1\"\,\n    \"unlock_down\"\: 9\n}\n";
 ID:752;X:-201472;Y:-198432;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path3\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, 160\, 32\"\n}\n";
-ID:752;X:-201280;Y:-198400;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-TowerPath1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 0\, -160\"\n}\n";
+ID:752;X:-201280;Y:-198400;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-TowerPath1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 0\, -160\"\,\n    \"smoothness\"\: 2.7755575615628914e-17\n}\n";
 ID:843;X:-201280;Y:-198560;D:-1;XTRA:"{\n    \"path_down\"\: \"toSMB35-TowerPath1\"\,\n    \"path_right\"\: \"toSMB35-Tower\"\,\n    \"path_up\"\: \"toSMB35-TowerPath2\"\n}\n";
-ID:752;X:-201312;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-TowerPath2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, 32\"\n}\n";
+ID:752;X:-201312;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-TowerPath2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, 32\"\,\n    \"smoothness\"\: 2.7755575615628914e-17\n}\n";
 ID:752;X:-201248;Y:-198560;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-Tower\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 ID:752;X:-201216;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path4\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:821;X:-201216;Y:-198624;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5bBeginWarp\"\,\n    \"levelTitle\"\: \"To the Skies\"\,\n    \"path_down\"\: \"toSMB3W-5Path4\"\,\n    \"warpName\"\: \"SMB3W-5EndWarp\"\n}\n";
