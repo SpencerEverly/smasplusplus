@@ -9,8 +9,15 @@
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
+local textplus = require("textplus")
+local smashud = require("smashud")
 
 local costume = {}
+
+local marioHead = Graphics.loadImageResolved("costumes/mario/16-NSMBWii-Mario/hud/lifehead.png")
+local coinCounter = Graphics.loadImageResolved("costumes/mario/16-NSMBWii-Mario/hud/coin.png")
+local timeCounter = Graphics.loadImageResolved("costumes/mario/16-NSMBWii-Mario/hud/timer.png")
+local nsmbWiiFont = textplus.loadFont("littleDialogue/font/nsmbwii-font.ini")
 
 costume.pSpeedAnimationsEnabled = true
 costume.yoshiHitAnimationEnabled = true
@@ -794,6 +801,8 @@ function costume.onInit(p)
     Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/16-NSMBWii-Mario/player-died2.ogg")
     Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/16-NSMBWii-Mario/dry-bones.ogg")
     
+    Graphics.overrideHUD(costume.drawHUD)
+    
     -- If events have not been registered yet, do so
     if not eventsRegistered then
         registerEvent(costume,"onStart")
@@ -930,6 +939,8 @@ function costume.onCleanup(p)
     extrasounds.sound.sfx[110] = nil
     extrasounds.sound.sfx[111] = nil
     extrasounds.sound.sfx[112] = nil
+    
+    Graphics.overrideHUD(Graphics.drawVanillaHUD)
     
     -- Remove the player from the list
     if costume.playerData[p] ~= nil then
@@ -1137,6 +1148,29 @@ function costume.onTickEnd()
         -- For kicking
         data.wasHoldingNPC = (p.holdingNPC ~= nil)
     end
+end
+
+function costume.drawHUD(camIdx,priority,isSplit)
+    --Lives
+    Graphics.drawImageWP(marioHead, 30, 30, -4.3)
+    textplus.print{text = tostring(SaveData.totalLives), font = nsmbWiiFont, priority = -4.3, x = 68, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    
+    --Coins
+    Graphics.drawImageWP(coinCounter, 30, 70, -4.3)
+    --textplus.print{text = "x", font = minFont, priority = -4.3, x = 225, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.totalCoinsClassic), font = nsmbWiiFont, priority = -4.2, x = 44, y = 100, color = Color.fromHexRGBA(0xFFFFFFFF)}
+
+    --Stars
+    --Graphics.drawImageWP(starCounter, 305, 26, -4.3)
+    --textplus.print{text = "x", font = minFont, priority = -4.3, x = 335, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.totalStarCount), font = nsmbWiiFont, priority = -4.3, x = 300, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
+
+    --Score
+    textplus.print{text = tostring(SaveData.totalScoreClassic), font = nsmbWiiFont, priority = -4.3, x = 432, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
+
+    --Time
+    Graphics.drawImageWP(timeCounter, 682, 40, -4.3)
+    textplus.print{text = tostring(Timer.getValue()), font = nsmbWiiFont, priority = -4.3, x = 710, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)} 
 end
 
 function costume.onDraw()
