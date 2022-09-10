@@ -138,7 +138,7 @@ end
 
 local function handleSpeed()
 	if GP.stopPlayer then
-		if player.keys.down then
+		if player.keys.altJump then
 			player.speedY = 0.05
 		else
 			player.speedY = 0
@@ -230,7 +230,7 @@ local function poundBlock(v)
 			end
 
 			player.speedY = 10
-			if not player.keys.down then
+			if not player.keys.altJump then
 				GP.cancelPound()
 			else
 				canHit = false
@@ -238,7 +238,7 @@ local function poundBlock(v)
 		elseif v.contentID >= 1001 then
 			SFX.play(3)
 			if not checkRoom(v.contentID - 1000, v) then
-				player.keys.down = false
+				player.keys.altJump = false
 				GP.cancelPound()
 				v:hit(false, player)
 				canPoundAfterBlck = false
@@ -322,7 +322,7 @@ function GP.onTick()
 		
 		canPressAltJump = false
 	else
-		if not canPressAltJump and not player.keys.down then
+		if not canPressAltJump and not player.keys.altJump then
 			canPressAltJump = true
 		end
 	end
@@ -377,7 +377,7 @@ function GP.onTick()
 			if player:mem(0x48, FIELD_WORD) ~= 0 then
 				player.keys.down = true
 				player:mem(0x3C, FIELD_BOOL, true)
-				--player.keys.altJump = false
+				player.keys.altJump = false
 
 				if Block.SLOPE_LR_FLOOR_MAP[v.id] then
 					player.speedX = -GP.slopeSpeed
@@ -416,13 +416,13 @@ function GP.onTick()
 
 		if player.powerup == 4 or player.powerup == 5 then
 			if noBeneathBlocks() and player:mem(0x48, FIELD_WORD) == 0 then
-				player.keys.down = false
+				player.keys.altJump = false
 			end
 		end
 
 		if player.speedY < GP.poundSpeed then
 			player.speedY = player.speedY + GP.yAccel
-			player.keys.down = false -- trampolines!!
+			player.keys.altJump = false -- trampolines!!
 		elseif player.speedY > GP.poundSpeed then
 			player.speedY = GP.poundSpeed
 		end
@@ -580,13 +580,13 @@ function GP.onDraw()
 end
 
 function GP.onInputUpdate()
-	if player.keys.up == KEYS_PRESSED and not player.keys.down then
+	if player.keys.up == KEYS_PRESSED and not player.keys.altJump then
 		if GP.state == GP.STATE_POUND then
 			GP.cancelPound()
 		end
 	end
 
-	if player.keys.down == KEYS_PRESSED and not player.keys.up then
+	if player.keys.altJump == KEYS_PRESSED and player.keys.down and not player.keys.up then
 		if canPound() and not GP.isPounding then
 			GP.startPound()
 		end
