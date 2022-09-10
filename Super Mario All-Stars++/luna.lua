@@ -262,6 +262,9 @@ end
 if SaveData.enableLives == nil then
     SaveData.enableLives = true
 end
+if SaveData.accessibilityGroundPound == nil then
+    SaveData.accessibilityGroundPound = false
+end
 
 --Other stuff
 if SaveData.openingComplete == nil then

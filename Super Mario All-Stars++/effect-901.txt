@@ -1,0 +1,7 @@
+[1]
+frames=6
+framespeed=2.5
+lifetime=15
+framestyle = 1
+xAlign=MID
+yAlign=MID

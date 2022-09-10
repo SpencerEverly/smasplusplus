@@ -1,0 +1,6 @@
+[1]
+frames=7
+framespeed=4
+lifetime=28
+xAlign=MID
+yAlign=MID

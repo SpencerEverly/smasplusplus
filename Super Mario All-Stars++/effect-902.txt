@@ -1,0 +1,23 @@
+[first]
+frames=1
+framespeed=1
+xAlign=MID
+yAlign=MID
+lifetime = 18
+speedX=2
+speedY=1
+
+[2]
+template=first
+speedX=-2
+
+
+[3]
+template=first
+speedY=-1
+
+
+[4]
+template=first
+speedX=-2
+speedY=-1

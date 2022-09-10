@@ -306,6 +306,8 @@ extrasounds.soundNamesInOrder = {
     "shell-grab", --156
     "ice-melt", --157
     "player-jump2", --158
+    "ground-pound", --159
+    "ground-pound-hit", --160
 }
 
 extrasounds.sound.sfx[0] = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really

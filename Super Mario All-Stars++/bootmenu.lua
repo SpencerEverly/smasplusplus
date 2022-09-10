@@ -802,7 +802,7 @@ local function ResolutionChangeScale3()
 end
 
 local function AccessibilityOptions1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question AccessibilityStuff>", speakerName = "Accessibility Options", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = "<setPos 400 32 0.5 -1.2><question AccessibilityStuff>", speakerName = "Accessibility Options", pauses = false, updatesInPause = true})
 end
 
 local function AccessibilityOptionToggle1()
@@ -835,6 +835,15 @@ end
 local function AccessibilityOptionToggle4()
     SaveData.enableLives = not SaveData.enableLives
     if SaveData.enableLives then
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    else
+        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+    end
+end
+
+local function AccessibilityOptionToggle5()
+    SaveData.accessibilityGroundPound = not SaveData.accessibilityGroundPound
+    if SaveData.accessibilityGroundPound then
         littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
     else
         littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
@@ -1891,6 +1900,7 @@ littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = funct
 littleDialogue.registerAnswer("AccessibilityStuff",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Twirling",chosenFunction = function() Routine.run(AccessibilityOptionToggle1) end})
 littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Wall Jumping",chosenFunction = function() Routine.run(AccessibilityOptionToggle2) end})
+littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Ground Pound",chosenFunction = function() Routine.run(AccessibilityOptionToggle5) end})
 littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Additional Inventory",chosenFunction = function() Routine.run(AccessibilityOptionToggle3) end})
 littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Lives",chosenFunction = function() Routine.run(AccessibilityOptionToggle4) end})
 littleDialogue.registerAnswer("AccessibilityStuff",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})

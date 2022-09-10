@@ -44,6 +44,10 @@ if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
             aw = require("anotherwalljump")
             aw.registerAllPlayersDefault()
         end
+        if SaveData.accessibilityGroundPound then
+            GP = require("GroundPound")
+            GP.enabled = true
+        end
     end
 end
 
