@@ -106,13 +106,15 @@ local timeddelay = 0
 
 function costume.onDraw()
     if SaveData.toggleCostumeAbilities == true then
-        if Timer.getValue() == 100 and Level.endState() == 0 and not GameData.winStateActive or GameData.winStateActive == nil then
-            timeddelay = timeddelay + 1
-            if timeddelay == 1 then
-                Sound.playSFX("mario/10-HotelMario/hm-gottabequick")
+        if Level.endState() == 0 and not GameData.winStateActive or GameData.winStateActive == nil then
+            if Timer.getValue() == 100 then
+                timeddelay = timeddelay + 1
+                if timeddelay == 1 then
+                    Sound.playSFX("mario/10-HotelMario/hm-gottabequick")
+                end
+            else
+                timeddelay = 0
             end
-        else
-            timeddelay = 0
         end
         --Health system
         if plr.powerup <= 1 then
