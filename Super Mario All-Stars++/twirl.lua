@@ -84,7 +84,7 @@ function twirl.onTick() for k, p in ipairs(Player.get()) do
             SaveData.currentCostume ~= "DEMO-XMASPILY"
 	) end
 
-	if p.keys.altJump and cooldown[k] > twirl.cooldown then
+	if p.keys.altJump and p.keys.up and cooldown[k] > twirl.cooldown then
 		isTwirling[k] = true
 	elseif canTwirl() then
 		isTwirling[k] = false
@@ -122,9 +122,9 @@ function twirl.onTick() for k, p in ipairs(Player.get()) do
 	if isOnMount() then
 		unmounting[k] = true
 	end
-	if unmounting[k] and p.keys.altJump then
+	if unmounting[k] and p.keys.altJump and p.keys.up then
 		unmounting[k] = true
-	elseif not p.keys.altJump then
+	elseif not p.keys.altJump and not p.keys.up then
 		unmounting[k] = false
 	end
 
