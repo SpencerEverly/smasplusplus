@@ -103,7 +103,7 @@ function costume.onTick()
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-justwhatineeded.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-gotcha.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-wahah.ogg")
-    Audio.sounds[81].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-lucky.ogg")
+    extrasounds.sound.sfx[81] = Audio.SfxOpen("costumes/mario/12-SMA2/mario-lucky.ogg")
     Audio.sounds[82].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-hereigo.ogg")
     Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/bubble.ogg")
 
@@ -204,7 +204,7 @@ function costume.onCleanup(p)
         Audio.sounds[78].sfx = nil
         Audio.sounds[79].sfx = nil
         Audio.sounds[80].sfx = nil
-        Audio.sounds[81].sfx = nil
+        extrasounds.sound.sfx[81] = nil
         Audio.sounds[82].sfx = nil
         Audio.sounds[91].sfx = nil
         costume.playerData[p] = nil

@@ -91,13 +91,11 @@ function addsmashpoints(block, fromUpper, playerornil) --This will add 50 points
 end
 
 function detecttopcoin(block, fromUpper, playerornil)
-    Routine.waitFrames(2, true)
-    for k,effect in ipairs(Effect.get(11)) do
-        local effectcoord = Effect.getIntersecting(effect.x, effect.y, block.x, effect.y - block.y)
-        if effectcoord ~= {} then
-            if extrasounds.enableBlockCoinCollecting then
-                extrasounds.playSFX(14)
+    if not fromUpper then
+        for k,v in NPC.iterateIntersecting(block.x, block.y - 32, block.x + 32, block.y) do
+            if NPC.config[v.id].iscoin and not v.isHidden and not v.isGenerator then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+                break
             end
         end
     end
@@ -120,7 +118,7 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
         end
         --**COIN TOP DETECTION**
         if bricksnormal[block.id] or questionblocks[block.id] then
-            --Routine.run(detecttopcoin, block, fromUpper, playerornil)
+            Routine.run(detecttopcoin, block, fromUpper, playerornil)
         end
     end
 end

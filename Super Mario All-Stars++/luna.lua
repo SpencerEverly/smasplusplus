@@ -55,6 +55,7 @@ _G.smascheats = require("smascheats")
 _G.smashud = require("smashud")
 _G.smasstarsystem = require("smasstarsystem")
 _G.smasnoturnback = require("smasnoturnback")
+_G.smasspencerfollower = require("smasspencerfollower")
 
 --Then we do everything else.
 GameData.levelMusicTemporary = {}

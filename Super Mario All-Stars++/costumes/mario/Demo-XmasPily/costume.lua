@@ -1320,7 +1320,7 @@ function costume.onCleanup(playerObj, p)
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil
-    Audio.sounds[81].sfx = nil
+    extrasounds.sound.sfx[81] = nil
     Audio.sounds[82].sfx = nil
     Audio.sounds[91].sfx = nil
     extrasounds.sound.sfx[92] = Audio.SfxOpen(Misc.resolveSoundFile("sprout-vine.ogg"))

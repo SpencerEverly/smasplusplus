@@ -64,7 +64,7 @@ function costume.onInit(p)
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-hurt.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-heart.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-died.ogg")
-    Audio.sounds[81].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-rupee.ogg")
+    extrasounds.sound.sfx[81] = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-rupee.ogg")
     Audio.sounds[82].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-fire.ogg")
     Audio.sounds[83].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-item.ogg")
     Audio.sounds[84].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-key.ogg")
@@ -142,7 +142,7 @@ function costume.onCleanup(p)
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil
-    Audio.sounds[81].sfx = nil
+    extrasounds.sound.sfx[81] = nil
     Audio.sounds[82].sfx = nil
     Audio.sounds[91].sfx = nil
     extrasounds.sound.sfx92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
