@@ -16,16 +16,13 @@ function File.writeToFile(name, text) --Write to a file using io. This will over
     if name == nil then
         error("You need to specify the name of the file.")
     end
-    if not "string" then
-        error("That needs to be a string.")
-    end
 
     local f = io.open(name,"w")
     if f == nil then
         return
     end
 
-    f:write(text)
+    f:write(tostring(text))
     f:close()
 end
 
@@ -34,16 +31,13 @@ function File.addToFile(name, text) --Add to a file using io. This won't overwri
     if name == nil then
         error("You need to specify the name of the file.")
     end
-    if not "string" then
-        error("That needs to be a string.")
-    end
 
     local f = io.open(name,"a")
     if f == nil then
         return
     end
 
-    f:write(text)
+    f:write(tostring(text))
     f:close()
 end
 
@@ -61,6 +55,33 @@ function File.readFile(name) --Read a file using io. This won't overwrite everyt
     end
     
     return f:read("*all")
+end
+
+function File.stringToHex(str)
+    return (str:gsub('.', function (c)
+        return string.format('%02X', string.byte(c))
+    end))
+end
+
+function File.cdataToString(ffidata)
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        return
+    else
+        return ffi.string(ffi.cast("void*",ffidata),ffi.sizeof(ffidata))
+    end
+end
+
+function File.stringToCData(stringdata)
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        return
+    else
+        local text = stringdata
+        local c_str = ffi.new("char[?]", #text + 1)
+        ffi.copy(c_str, text)
+        return c_str
+    end
 end
 
 return File

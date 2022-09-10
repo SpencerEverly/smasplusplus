@@ -880,7 +880,7 @@ local oldy = 0
 
 function Misc.shakeWindow(shakenumber)
     if SMBX_VERSION ~= VER_SEE_MOD then
-        error("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
         return
     else
         if Misc.isFullscreen() then
@@ -890,6 +890,52 @@ function Misc.shakeWindow(shakenumber)
             oldy = Misc.getWindowYPosition()
             
             shaketally = shakenumber
+        end
+    end
+end
+
+function Misc.testModeSetSettings(player, powerup, mountType, mountColor, playerCount, showFPS, godMode, entranceIndex)
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        return
+    else
+        if Misc.inEditor() then
+            if player == nil then
+                player = 1
+            end
+            if powerup == nil then
+                powerup = 1
+            end
+            if mountType == nil then
+                mountType = 0
+            end
+            if mountColor == nil then
+                mountColor = 0
+            end
+            if playerCount == nil then
+                playerCount = 1
+            end
+            if showFPS == nil then
+                showFPS = false
+            end
+            if godMode == nil then
+                godMode = false
+            end
+            if entranceIndex == nil then
+                entranceIndex = 0
+            end
+            local settings = LunaDLL.LunaLuaGetTestModeSettings()
+            
+            --settings.identity = player
+            --settings.powerup = powerup
+            --settings.mountType = mountType
+            --settings.mountColor = mountColor
+            settings.playerCount = playerCount
+            settings.showFPS = showFPS
+            settings.godMode = godMode
+            settings.entranceIndex = entranceIndex
+            
+            LunaDLL.LunaLuaSetTestModeSettings(settings)
         end
     end
 end

@@ -106,7 +106,7 @@ local timeddelay = 0
 
 function costume.onDraw()
     if SaveData.toggleCostumeAbilities == true then
-        if Timer.getValue() == 100 then
+        if Timer.getValue() == 100 and Level.endState() == 0 and not GameData.winStateActive or GameData.winStateActive == nil then
             timeddelay = timeddelay + 1
             if timeddelay == 1 then
                 Sound.playSFX("mario/10-HotelMario/hm-gottabequick")

@@ -8854,6 +8854,12 @@ ID:169;X:-137280;Y:-140256;
 ID:169;X:-137280;Y:-140192;
 ID:169;X:-137280;Y:-140128;
 ID:169;X:-137280;Y:-140064;
+ID:136;X:-99968;Y:-100160;
+ID:135;X:-99968;Y:-100128;
+ID:134;X:-99968;Y:-100096;
+ID:138;X:-99904;Y:-100160;
+ID:137;X:-99904;Y:-100128;
+ID:137;X:-99904;Y:-100096;
 BGO_END
 NPC
 ID:198;X:80544;Y:79808;D:-1;MG:"Thank you\, <characterName>!<page>Your quest on the game 'Super Mario Bros' is now over.<page>Play the other games if you haven't!<page>I also heard that if you play all the games\, you'll unlock something special!<page>Keep collecting until you find out\, and here's your star!";FD:1;NM:1;
@@ -8967,6 +8973,7 @@ ID:176;X:-92032;Y:-100192;D:-1;S1:2;LR:"SMB1 Hard Mode";
 ID:857;X:-77248;Y:-80112;D:-1;LR:"SMB1 Hard Mode";
 ID:857;X:-74752;Y:-80240;D:-1;LR:"SMB1 Hard Mode";
 ID:176;X:-58656;Y:-60288;D:-1;S1:1;LR:"SMB1 Hard Mode";
+ID:400;X:-99936;Y:-100128;D:-1;
 NPC_END
 PHYSICS
 ET:0;X:-139968;Y:-140400;W:2592;H:496;
