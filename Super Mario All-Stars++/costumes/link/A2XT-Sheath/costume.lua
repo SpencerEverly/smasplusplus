@@ -60,7 +60,7 @@ function costume.onInit(p)
     --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/saw.ogg")
     Audio.sounds[75].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/smb2-throw.ogg")
     Audio.sounds[76].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/smb2-hit.ogg")
-    Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-stab.ogg")
+    extrasounds.sound.sfx[77] = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-stab.ogg")
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-hurt.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-heart.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/A2XT-Sheath/zelda-died.ogg")
@@ -138,7 +138,7 @@ function costume.onCleanup(p)
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    Audio.sounds[77].sfx = nil
+    extrasounds.sound.sfx[77] = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil

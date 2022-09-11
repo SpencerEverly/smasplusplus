@@ -136,7 +136,7 @@ function costume.onCleanup(p)
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    Audio.sounds[77].sfx = nil
+    extrasounds.sound.sfx[77] = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil

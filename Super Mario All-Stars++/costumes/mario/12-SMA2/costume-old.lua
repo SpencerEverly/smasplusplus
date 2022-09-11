@@ -99,7 +99,7 @@ function costume.onTick()
     --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/saw.ogg")
     Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smb2-throw.ogg")
     Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smb2-hit.ogg")
-    Audio.sounds[77].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-hurt.ogg")
+    extrasounds.sound.sfx[77] = Audio.SfxOpen("costumes/mario/12-SMA2/mario-hurt.ogg")
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-justwhatineeded.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-gotcha.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-wahah.ogg")
@@ -200,7 +200,7 @@ function costume.onCleanup(p)
         --Audio.sounds[74].sfx = nil
         Audio.sounds[75].sfx = nil
         Audio.sounds[76].sfx = nil
-        Audio.sounds[77].sfx = nil
+        extrasounds.sound.sfx[77] = nil
         Audio.sounds[78].sfx = nil
         Audio.sounds[79].sfx = nil
         Audio.sounds[80].sfx = nil

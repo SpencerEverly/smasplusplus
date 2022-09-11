@@ -12,7 +12,7 @@ function costume.onInit(p)
     registerEvent(costume,"onKeyboardPress")
     registerEvent(costume,"onControllerButtonPress")
     Audio.sounds[52].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/got-star.ogg")
-    Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-stab.ogg")
+    extrasounds.sound.sfx[77] = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-stab.ogg")
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-hurt.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-heart.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/SEE-SherbertLussieback/zelda-died.ogg")
@@ -228,14 +228,14 @@ function costume.onCleanup(p)
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    Audio.sounds[77].sfx = nil
+    extrasounds.sound.sfx[77] = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[71].sfx = nil
     Audio.sounds[72].sfx = nil
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    Audio.sounds[77].sfx = nil
+    extrasounds.sound.sfx[77] = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil

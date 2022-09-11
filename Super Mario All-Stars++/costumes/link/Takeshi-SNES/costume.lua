@@ -17,7 +17,7 @@ function costume.onInit(p)
     Audio.sounds[52].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/got-star.ogg")
     Audio.sounds[54].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/player-died2.ogg")
     extrasounds.sound.sfx[59]  = Audio.SfxOpen("costumes/link/Takeshi-SNES/dragon-coin.ogg")
-    Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-stab.ogg")
+    extrasounds.sound.sfx[77] = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-stab.ogg")
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-hurt.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-heart.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/Takeshi-SNES/zelda-died.ogg")
@@ -108,7 +108,7 @@ function costume.onCleanup(p)
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    Audio.sounds[77].sfx = nil
+    extrasounds.sound.sfx[77] = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil

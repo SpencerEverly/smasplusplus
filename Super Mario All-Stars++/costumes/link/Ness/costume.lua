@@ -21,7 +21,7 @@ function costume.onInit(p)
     Audio.sounds[46].sfx = Audio.SfxOpen("costumes/link/Ness/door.ogg")
     Audio.sounds[52].sfx = Audio.SfxOpen("costumes/link/Ness/got-star.ogg")
     Audio.sounds[54].sfx = Audio.SfxOpen("costumes/link/Ness/player-died2.ogg")
-    Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-stab.ogg")
+    extrasounds.sound.sfx[77] = Audio.SfxOpen("costumes/link/Ness/zelda-stab.ogg")
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-hurt.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-heart.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/Ness/zelda-died.ogg")
@@ -117,7 +117,7 @@ function costume.onCleanup(p)
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    Audio.sounds[77].sfx = nil
+    extrasounds.sound.sfx[77] = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil

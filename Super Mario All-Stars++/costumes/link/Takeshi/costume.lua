@@ -62,7 +62,7 @@ function costume.onInit(p)
     --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/link/Takeshi/saw.ogg")
     Audio.sounds[75].sfx = Audio.SfxOpen("costumes/link/Takeshi/smb2-throw.ogg")
     Audio.sounds[76].sfx = Audio.SfxOpen("costumes/link/Takeshi/smb2-hit.ogg")
-    Audio.sounds[77].sfx = Audio.SfxOpen("costumes/link/Takeshi/zelda-stab.ogg")
+    extrasounds.sound.sfx[77] = Audio.SfxOpen("costumes/link/Takeshi/zelda-stab.ogg")
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/link/Takeshi/zelda-hurt.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/link/Takeshi/zelda-heart.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/link/Takeshi/zelda-died.ogg")
@@ -159,7 +159,7 @@ function costume.onCleanup(p)
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    Audio.sounds[77].sfx = nil
+    extrasounds.sound.sfx[77] = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil
