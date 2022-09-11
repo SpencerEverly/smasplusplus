@@ -721,8 +721,10 @@ function globalgenerals.onDraw()
         end
     end
     if SMBX_VERSION == VER_SEE_MOD then
-        if Timer.getValue() <= 100 and Timer.getValue() >= 1 then
-            Audio.MusicSetTempo(1.5)
+        if not GameData.winStateActive and Level.endState() == 0 then
+            if Timer.getValue() <= 100 and Timer.getValue() >= 1 then
+                Audio.MusicSetTempo(1.5)
+            end
         end
     end
     if SaveData.disableX2char == false then
