@@ -87,7 +87,7 @@ function costume.onInit(p)
     --extrasounds.sound.sfx[101] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/dragon-coin-get4.ogg")) --Dragon Coin #4
     --extrasounds.sound.sfx[102] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/dragon-coin-get5.ogg")) --Dragon Coin #5
     --extrasounds.sound.sfx[103] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/cherry.ogg")) --Cherry
-    extrasounds.sound.sfx[104] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/explode.ogg")) --SMB2 Explosion
+    --extrasounds.sound.sfx[104] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/explode.ogg")) --SMB2 Explosion
     extrasounds.sound.sfx[105] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/hammerthrow.ogg")) --Player hammer throw
     
     smashud.visible.itembox = false
