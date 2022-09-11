@@ -447,6 +447,7 @@ local function isShooting(p)
     return (p:mem(0x160, FIELD_WORD) == 0
         and Level.endState() == 0
         and p.deathTimer == 0
+        and p.forcedState == 0
         and not p.keys.down
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
     )
@@ -457,6 +458,7 @@ local function isShootingLink(p)
         and p:mem(0x162, FIELD_WORD) == 0
         and Level.endState() == 0
         and p.deathTimer == 0
+        and p.forcedState == 0
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
     )
 end
@@ -609,7 +611,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                     end
                 end
             elseif linkCharacters[p.character] then
-                if p:isOnGround() and not p.keys.down then --If on the ground...
+                if p:isOnGround() then --If on the ground...
                     if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
                         if p:mem(0x50, FIELD_BOOL) == false then
                             if extrasounds.enableJumpingSFX then
