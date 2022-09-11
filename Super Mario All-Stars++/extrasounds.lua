@@ -71,6 +71,10 @@ extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = false
 extrasounds.enableDeathSFX = true
 --Whenever to enable the Link slashing used by Link characters.
 extrasounds.enableLinkSlashSFX = true
+--Whenever to enable the Link fireball slashing used by Link characters.
+extrasounds.enableLinkSlashFireballSFX = true
+--Whenever to enable the Link iceball slashing used by Link characters.
+extrasounds.enableLinkSlashIceballSFX = true
 
 --**1UP SETTINGS**
 --Whenever to use the original 1UP sound instead of using the other custom sounds.
@@ -1119,11 +1123,11 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 if isShootingLink(p) then
                     if linkCharacters[p.character] then
                         if p.powerup == 3 then --Fireball sound
-                            if extrasounds.enableFireFlowerSFX then
+                            if extrasounds.enableLinkSlashFireballSFX then
                                 extrasounds.playSFX(161, extrasounds.volume)
                             end
                         elseif p.powerup == 7 then --Iceball sound
-                            if extrasounds.enableIceFlowerSFX then
+                            if extrasounds.enableLinkSlashIceballSFX then
                                 extrasounds.playSFX(162, extrasounds.volume)
                             end
                         else
