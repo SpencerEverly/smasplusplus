@@ -894,7 +894,7 @@ function Misc.shakeWindow(shakenumber)
     end
 end
 
-function Misc.testModeSetSettings(player, powerup, mountType, mountColor, playerCount, showFPS, godMode, entranceIndex)
+function Misc.testModeSetSettings(player, powerup, mountType, mountColor, playerCount, showFPS, godMode, entranceIndex, player2, powerup2, mountType2, mountColor2)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
         return
@@ -904,13 +904,25 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
                 player = 1
             end
             if powerup == nil then
-                powerup = 1
+                powerup = 2
             end
             if mountType == nil then
                 mountType = 0
             end
             if mountColor == nil then
                 mountColor = 0
+            end
+            if player2 == nil then
+                player2 = 2
+            end
+            if powerup2 == nil then
+                powerup2 = 2
+            end
+            if mountType2 == nil then
+                mountType2 = 0
+            end
+            if mountColor2 == nil then
+                mountColor2 = 0
             end
             if playerCount == nil then
                 playerCount = 1
@@ -926,10 +938,14 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
             end
             local settings = LunaDLL.LunaLuaGetTestModeSettings()
             
-            --settings.identity = player
-            --settings.powerup = powerup
-            --settings.mountType = mountType
-            --settings.mountColor = mountColor
+            settings.players[1].identity = player
+            settings.players[1].powerup = powerup
+            settings.players[1].mountType = mountType
+            settings.players[1].mountColor = mountColor
+            settings.players[2].identity = player2
+            settings.players[2].powerup = powerup2
+            settings.players[2].mountType = mountType2
+            settings.players[2].mountColor = mountColor2
             settings.playerCount = playerCount
             settings.showFPS = showFPS
             settings.godMode = godMode
