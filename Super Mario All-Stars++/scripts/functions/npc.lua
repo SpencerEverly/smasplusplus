@@ -347,6 +347,22 @@ function NPC.restoreClass(class) --Restores a specific class. Used for NPCs.
     end
 end
 
+function NPC.isOnScreen(npc)
+    -- Get camera boundaries
+    local left = camera.x;
+    local right = left + camera.width;
+    local top = camera.y;
+    local bottom = top + camera.height;
+    -- Check if offscreen
+    if npc.x + npc.width < left or npc.x > right then
+        return false
+    elseif npc.y + npc.height < top or npc.y > bottom then
+        return false
+    else
+        return true
+    end
+end
+
 
 
 function Npc.onInitAPI()

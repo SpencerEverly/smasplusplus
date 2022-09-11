@@ -8,12 +8,14 @@ And then Enjl took the shop out.
 And then Enjl attempted to make the character more playable
 
 Things to do:
+- Make fireball sounds actually work
 ]]
 
 local colliders = require("colliders")
 local rng = require("rng")
 local pm = require("playerManager")
 local expandedDefines = require("expandedDefines")
+local extrasounds = require("extrasounds")
 local wario = {}
 
 local chars = pm.getCharacters();
@@ -93,18 +95,20 @@ function wario.onInputUpdate()
         if player.powerup > 1 then
             if not isGroundPounding then
                 if player.keys.altRun == KEYS_PRESSED and player.forcedState == 0 and dashtimer == 0 then
-                    if player:isGroundTouching() then dashtimer = DASHCHARGETIME end
+                    if player:isGroundTouching() then
+                        dashtimer = DASHCHARGETIME
+                    end
                     lockedDirection = player.direction
                 end
                 if player.keys.altJump == KEYS_PRESSED then
                     if ducking then
-                        player.jumpKeyPressing = true
+                        player.keys.jump = true
                         player.keys.altJump = nil
                     else
                         if not player:mem(0x36, FIELD_BOOL) and player.mount == 0 then
                             if player:isGroundTouching() or ducking or crawling then
                                 player.keys.altJump = nil
-                                player.jumpKeyPressing = true
+                                player.keys.jump = true
                             else
                                 lockedDirection = player.direction
                                 isGroundPounding = true
@@ -120,7 +124,9 @@ function wario.onInputUpdate()
             end
         end
         -- If holding something or on a mount, prevent dashing
-        if player:mem(0x154, FIELD_WORD) ~= 0 or player:mem(0x108, FIELD_WORD) ~= 0 then dashtimer = 0 end
+        if player:mem(0x154, FIELD_WORD) ~= 0 or player:mem(0x108, FIELD_WORD) ~= 0 then
+            dashtimer = 0
+        end
     end
 end
 
@@ -128,23 +134,33 @@ end
 -- Determines value of a coin NPC
 local function coinval(id)
     if id == 152 or id == 88 or id == 138 or id == 10 or id == 33 or id == 251 or id == 274 then
-                                        return 1
-    elseif id == 103 then                 return 2
-    elseif id == 252 or id == 258 then     return 5
-    elseif id == 253 then                 return 20
-    else                                 return 0
+        return 1
+    elseif id == 103 then
+        return 2
+    elseif id == 252 or id == 258 then
+        return 5
+    elseif id == 253 then
+        return 20
+    else
+        return 0
     end
 end
 
 -- Checks if an NPC is onscreen
 local function onscreen(npc)
     -- Get camera boundaries
-    local left = camera.x;        local right = left + camera.width;
-    local top = camera.y;        local bottom = top + camera.height;
+    local left = camera.x;
+    local right = left + camera.width;
+    local top = camera.y;
+    local bottom = top + camera.height;
     -- Check if offscreen
-    if npc.x + npc.width < left or npc.x > right then return false
-    elseif npc.y + npc.height < top or npc.y > bottom then return false
-    else return true end
+    if npc.x + npc.width < left or npc.x > right then
+        return false
+    elseif npc.y + npc.height < top or npc.y > bottom then
+        return false
+    else
+        return true
+    end
 end
 
 -- Spawn coins when killing an enemy, coin counter management, and monitor Lakitu helper crates
@@ -245,18 +261,18 @@ function wario.onTick()
     end
 
     if player:mem(0x40, FIELD_WORD) > 0 or player:mem(0x36, FIELD_WORD) > 0 then
-        player.jumpKeyPressing = player.jumpKeyPressing or player.altJumpKeyPressing
+        player.keys.jump = player.keys.jump or player.keys.altJump
         player.keys.altJump = nil
     end
     
     -- Dash mechanic
     if isGroundPounding then
         player:mem(0x164, FIELD_WORD, 0)
-        player.leftKeyPressing = false
-        player.rightKeyPressing = false
-        player.altRunKeyPressing = false
-        player.runKeyPressing = true
-        player.downKeyPressing = false
+        player.keys.left = false
+        player.keys.right = false
+        player.keys.altRun = false
+        player.keys.run = true
+        player.keys.down = false
         player.speedX = 0
     
         Defines.gravity = 13
@@ -274,7 +290,7 @@ function wario.onTick()
             player.speedY = -4
             Defines.gravity = 12
             Defines.player_grav = 0.4
-            playSFX(37)
+            Sound.playSFX(37)
         end
         if player.speedY > 0 then
             drawFX(fx_groundpound, {x = -41, y = -16})
@@ -295,7 +311,7 @@ function wario.onTick()
                             isGroundPounding = false
                             Defines.earthquake = 4
                             player.speedY = -4
-                            playSFX(37)
+                            Sound.playSFX(37)
                             Defines.gravity = 12
                             Defines.player_grav = 0.4
                         elseif (expandedDefines.BLOCK_SOLID_MAP[block.id] or (expandedDefines.BLOCK_SEMISOLID_MAP[block.id] and player.y + player.height <= block.y + 4) or expandedDefines.BLOCK_PLAYERSOLID_MAP[block.id]) and not expandedDefines.BLOCK_SLOPE_MAP[block.id] then
@@ -305,7 +321,7 @@ function wario.onTick()
                             player.speedY = -4
                             Defines.gravity = 12
                             Defines.player_grav = 0.4
-                            playSFX(37)
+                            Sound.playSFX(37)
                         end
                     end
             end
@@ -323,11 +339,11 @@ function wario.onTick()
     end
     if dashtimer > 0 then
         player:mem(0x164, FIELD_WORD, 0)
-        player.leftKeyPressing = false
-        player.rightKeyPressing = false
-        player.runKeyPressing = true
-        player.downKeyPressing = false
-        if (not player.altRunKeyPressing) or player:mem(0x40, FIELD_WORD) > 0 then
+        player.keys.left = false
+        player.keys.right = false
+        player.keys.run = true
+        player.keys.down = false
+        if (not player.keys.altRun) or player:mem(0x40, FIELD_WORD) > 0 then
             dashtimer = 0
             lockedDirection = 0
         end
@@ -387,7 +403,7 @@ function wario.onTick()
                     player.speedX = -2 * lockedDirection
                     player.speedY = -5
                     Defines.earthquake = 4
-                    playSFX(37)
+                    Sound.playSFX(37)
                 end
             end
             
@@ -405,8 +421,8 @@ function wario.onTick()
         local h = ps.hitboxHeight;
 
         local speedXMod = 0
-        if player.leftKeyPressing then speedXMod = -CRAWLSPEED
-        elseif player.rightKeyPressing then speedXMod = CRAWLSPEED
+        if player.keys.left then speedXMod = -CRAWLSPEED
+        elseif player.keys.right then speedXMod = CRAWLSPEED
         end
         player.keys.altJump = nil
 
@@ -414,7 +430,7 @@ function wario.onTick()
         for k,v in ipairs(overheadBlocks) do
             if Block.SOLID_MAP[v.id] and (not v.isHidden) and v:mem(0x5A, FIELD_WORD) == 0 then
                 player:mem(0x12e, FIELD_WORD, -1)
-                player.downKeyPressing = true
+                player.keys.down = true
                 break
             end
         end
@@ -423,14 +439,14 @@ function wario.onTick()
     -- Crawling
     crawling = false
     ducking = false
-    if player:mem(0x12e, FIELD_WORD) == -1 and player.downKeyPressing and player:mem(0x108, FIELD_WORD) == 0 then
+    if player:mem(0x12e, FIELD_WORD) == -1 and player.keys.down and player:mem(0x108, FIELD_WORD) == 0 then
         dashtimer = 0
         if player:isGroundTouching() then
             player.speedX = player.speedX * 0.95
-            if player.leftKeyPressing then
+            if player.keys.left then
                 player.speedX = -CRAWLSPEED
                 crawling = true
-            elseif player.rightKeyPressing then
+            elseif player.keys.right then
                 player.speedX = CRAWLSPEED
                 crawling = true
             end
@@ -450,7 +466,7 @@ function wario.onTick()
         crawling = false
         ducking = false
         if player.mount == 0 then
-            player.jumpKeyPressing = player.jumpKeyPressing or player.altJumpKeyPressing
+            player.keys.jump = player.keys.jump or player.keys.altJump
             player.keys.altJump = nil
         end
         isGroundPounding = false
@@ -508,20 +524,28 @@ function wario.DebugDraw()
         end
         if dashtimer > 0 and player:mem(0x108, FIELD_WORD) == 0 then
             player:mem(0x114, FIELD_WORD, 32 + math.floor(lunatime.tick()*0.2)%2)
-            if not player:isGroundTouching() then player:mem(0x114, FIELD_WORD, 33) end
-            if player:isGroundTouching() and (lunatime.tick())%8 == 0 then Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_WARIO, rng.irandomEntry(sfx.footstep))), 0) end
+            if not player:isGroundTouching() then
+                player:mem(0x114, FIELD_WORD, 33)
+            end
+            if player:isGroundTouching() and (lunatime.tick())%8 == 0 then
+                Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_WARIO, rng.irandomEntry(sfx.footstep))), 0)
+            end
         end
         
         -- Show crawling frames
         if crawling then
-            if crawltimer < 10 then player:mem(0x114, FIELD_WORD, 22)
-            elseif crawltimer < 10*2 then player:mem(0x114, FIELD_WORD, 23)
+            if crawltimer < 10 then
+                player:mem(0x114, FIELD_WORD, 22)
+            elseif crawltimer < 10*2 then
+                player:mem(0x114, FIELD_WORD, 23)
             else
                 crawltimer = 0
                 player:mem(0x114, FIELD_WORD, 22)
             end
             crawltimer = crawltimer + 1
-        else crawltimer = 0 end
+        else
+            crawltimer = 0
+        end
     end
 
     if debugmode and Graphics.isOpenGLEnabled() then

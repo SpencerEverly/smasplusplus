@@ -142,6 +142,8 @@ end
 
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 local inspect = require("ext/inspect")
+local customCamera
+pcall(function() customCamera = require("customCamera") end)
 
 local npctocointimer = 0 --This is used for the NPC to Coin sound.
 local spinballtimer = 0 --This is used when spinjumping and shooting fireballs/iceballs.
@@ -456,6 +458,7 @@ local function isShooting(p)
         and p.forcedState == 0
         and not p.keys.down
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
+        and p:mem(0x172, FIELD_BOOL)
     )
 end
 
@@ -466,7 +469,41 @@ local function isShootingLink(p)
         and p.deathTimer == 0
         and p.forcedState == 0
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
+        and p:mem(0x172, FIELD_BOOL)
     )
+end
+
+local function isOnScreen(npc)
+    if customCamera then
+        -- Get camera boundaries
+        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+        local left = fullX;
+        local right = left + fullWidth;
+        local top = fullY;
+        local bottom = top + fullHeight;
+        -- Check if offscreen
+        if npc.x + npc.width < left or npc.x > right then
+            return false
+        elseif npc.y + npc.height < top or npc.y > bottom then
+            return false
+        else
+            return true
+        end
+    else
+        -- Get camera boundaries
+        local left = camera.x;
+        local right = left + camera.width;
+        local top = camera.y;
+        local bottom = top + camera.height;
+        -- Check if offscreen
+        if npc.x + npc.width < left or npc.x > right then
+            return false
+        elseif npc.y + npc.height < top or npc.y > bottom then
+            return false
+        else
+            return true
+        end
+    end
 end
 
 local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKI}
@@ -774,19 +811,16 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             --*Toad's Boomerang*
             for k,v in ipairs(NPC.get(292)) do --Boomerang sounds! (Toad's Boomerang)
                 if extrasounds.enableToadBoomerangSFX then
-                    extrasounds.playSFX(116, extrasounds.volume, 1, 12)
+                    if isOnScreen(v) then
+                        extrasounds.playSFX(116, extrasounds.volume, 1, 12)
+                    end
                 end
             end
             --*Boomerang Bro. Projectile*
             for k,v in ipairs(NPC.get(615)) do --Boomerang sounds! (Boomerang Bros.)
                 if extrasounds.enableBoomerangBroBoomerangSFX then
-                    local boomerangbrox = v.x - camera.x
-                    local boomerangbroy = v.y + camera.y
-                    if boomerangbrox <= -800 or boomerangbrox <= 800 then
-                        if boomerangbroy <= -600 or boomerangbroy <= 600 then
-                            --Text.print(boomerangbrox, 100, 100)
-                            extrasounds.playSFX(116, extrasounds.volume, 1, 12)
-                        end
+                    if isOnScreen(v) then
+                        extrasounds.playSFX(116, extrasounds.volume, 1, 12)
                     end
                 end
             end
@@ -1089,7 +1123,7 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 
                 --**FIREBALLS/HAMMERS/ICEBALLS**
                 if isShooting(p) then
-                    if normalCharacters[p.character] then
+                    if normalCharacters[p.character] and not normalCharacters[CHARACTER_MEGAMAN] then
                         if p.powerup == 3 then --Fireball sound
                             if extrasounds.enableFireFlowerSFX then
                                 extrasounds.playSFX(18, extrasounds.volume)
