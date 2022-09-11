@@ -308,6 +308,8 @@ extrasounds.soundNamesInOrder = {
     "player-jump2", --158
     "ground-pound", --159
     "ground-pound-hit", --160
+    "zelda-fireball", --161
+    "zelda-iceball", --162
 }
 
 extrasounds.sound.sfx[0] = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really
@@ -364,6 +366,28 @@ function extrasounds.playSFX(name, volume, loops, delay) --If you want to play a
         end
     end
 end
+
+local normalCharacters = {
+    [CHARACTER_MARIO] = true,
+    [CHARACTER_LUIGI] = true,
+    [CHARACTER_PEACH] = true,
+    [CHARACTER_TOAD] = true,
+    [CHARACTER_MEGAMAN] = true,
+    [CHARACTER_WARIO] = true,
+    [CHARACTER_BOWSER] = true,
+    [CHARACTER_KLONOA] = true,
+    [CHARACTER_NINJABOMBERMAN] = true,
+    [CHARACTER_ROSALINA] = true,
+    [CHARACTER_ZELDA] = true,
+    [CHARACTER_ULTIMATERINKA] = true,
+    [CHARACTER_UNCLEBROADSWORD] = true,
+    [CHARACTER_SAMUS] = true
+}
+
+local linkCharacters = {
+    [CHARACTER_LINK] = true,
+    [CHARACTER_SNAKE] = true,
+}
 
 local spinjumpablebricks = table.map{90,526}
 
@@ -424,6 +448,15 @@ local function isShooting(p)
         and Level.endState() == 0
         and p.deathTimer == 0
         and not p.keys.down
+        and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
+    )
+end
+
+local function isShootingLink(p)
+    return (p:mem(0x160, FIELD_WORD) == 0
+        and p:mem(0x162, FIELD_WORD) == 0
+        and Level.endState() == 0
+        and p.deathTimer == 0
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
     )
 end
@@ -565,11 +598,23 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             
             --**SPINJUMPING**
-            if p:isOnGround() and not p.keys.down then --If on the ground...
-                if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
-                    if p:mem(0x50, FIELD_BOOL) == false then
-                        if extrasounds.enableSpinjumpingSFX then
-                            extrasounds.playSFX(33)
+            if normalCharacters[p.character] then
+                if p:isOnGround() and not p.keys.down then --If on the ground...
+                    if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
+                        if p:mem(0x50, FIELD_BOOL) == false then
+                            if extrasounds.enableSpinjumpingSFX then
+                                extrasounds.playSFX(33)
+                            end
+                        end
+                    end
+                end
+            elseif linkCharacters[p.character] then
+                if p:isOnGround() and not p.keys.down then --If on the ground...
+                    if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
+                        if p:mem(0x50, FIELD_BOOL) == false then
+                            if extrasounds.enableJumpingSFX then
+                                extrasounds.playSFX(1)
+                            end
                         end
                     end
                 end
@@ -958,8 +1003,14 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
                 elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
                     extrasounds.playSFX(7)
                 elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
-                    if extrasounds.enableBlockCoinCollecting then
-                        extrasounds.playSFX(14)
+                    if normalCharacters[playerornil.character] then
+                        if extrasounds.enableBlockCoinCollecting then
+                            extrasounds.playSFX(14)
+                        end
+                    elseif linkCharacters[playerornil.character] then
+                        if extrasounds.enableBlockCoinCollecting then
+                            extrasounds.playSFX(81)
+                        end
                     end
                 end
                 
@@ -1028,26 +1079,42 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 
                 --**FIREBALLS/HAMMERS/ICEBALLS**
                 if isShooting(p) then
-                    if p.powerup == 3 then --Fireball sound
-                        if extrasounds.enableFireFlowerSFX then
-                            extrasounds.playSFX(18, extrasounds.volume)
-                        end
-                    end
-                    if p.powerup == 6 then --Hammer throw sound
-                        if extrasounds.enableHammerSuitSFX then
-                            if not extrasounds.useFireSoundForHammerSuit then
-                                extrasounds.playSFX(105, extrasounds.volume)
-                            elseif extrasounds.useFireSoundForHammerSuit then
+                    if normalCharacters[p.character] then
+                        if p.powerup == 3 then --Fireball sound
+                            if extrasounds.enableFireFlowerSFX then
                                 extrasounds.playSFX(18, extrasounds.volume)
                             end
                         end
+                        if p.powerup == 6 then --Hammer throw sound
+                            if extrasounds.enableHammerSuitSFX then
+                                if not extrasounds.useFireSoundForHammerSuit then
+                                    extrasounds.playSFX(105, extrasounds.volume)
+                                elseif extrasounds.useFireSoundForHammerSuit then
+                                    extrasounds.playSFX(18, extrasounds.volume)
+                                end
+                            end
+                        end
+                        if p.powerup == 7 then --Iceball sound
+                            if extrasounds.enableIceFlowerSFX then
+                                if not extrasounds.useFireSoundForIce then
+                                    extrasounds.playSFX(93, extrasounds.volume)
+                                elseif extrasounds.useFireSoundForIce then
+                                    extrasounds.playSFX(18, extrasounds.volume)
+                                end
+                            end
+                        end
                     end
-                    if p.powerup == 7 then --Iceball sound
-                        if extrasounds.enableIceFlowerSFX then
-                            if not extrasounds.useFireSoundForIce then
-                                extrasounds.playSFX(93, extrasounds.volume)
-                            elseif extrasounds.useFireSoundForIce then
-                                extrasounds.playSFX(18, extrasounds.volume)
+                end
+                if isShootingLink(p) then
+                    if linkCharacters[p.character] then
+                        if p.powerup == 3 then --Fireball sound
+                            if extrasounds.enableFireFlowerSFX then
+                                extrasounds.playSFX(161, extrasounds.volume)
+                            end
+                        end
+                        if p.powerup == 7 then --Iceball sound
+                            if extrasounds.enableIceFlowerSFX then
+                                extrasounds.playSFX(162, extrasounds.volume)
                             end
                         end
                     end
@@ -1202,6 +1269,11 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 if coins[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
                     if extrasounds.enableCoinCollecting then
                         extrasounds.playSFX(14)
+                    end
+                end
+                if otherCoinSoundsMap[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
+                    if extrasounds.enableCoinCollecting then
+                        extrasounds.playSFX(81)
                     end
                 end
                 
