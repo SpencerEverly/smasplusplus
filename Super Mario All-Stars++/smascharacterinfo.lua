@@ -189,7 +189,7 @@ function smascharacterinfo.onTickEnd()
     end
     if currentCostume == "14-NSMBDS-SMBX" then
         littleDialogue.characterNames[1] = "Mario"
-        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_nsmbds")
         starman.sfxFile = Misc.resolveSoundFile("starman/starman_nsmbds")
         starman.duration[996] = lunatime.toTicks(9.9996)
         starman.duration[994] = lunatime.toTicks(9.9996)
@@ -198,7 +198,7 @@ function smascharacterinfo.onTickEnd()
     end
     if currentCostume == "15-NSMBDS-ORIGINAL" then
         littleDialogue.characterNames[1] = "Mario"
-        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_nsmbds")
         starman.sfxFile = Misc.resolveSoundFile("starman/starman_nsmbds")
         starman.duration[996] = lunatime.toTicks(9.9996)
         starman.duration[994] = lunatime.toTicks(9.9996)
@@ -207,7 +207,7 @@ function smascharacterinfo.onTickEnd()
     end
     if currentCostume == "16-NSMBWII-MARIO" then
         littleDialogue.characterNames[1] = "Mario"
-        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_nsmbwii")
         starman.sfxFile = Misc.resolveSoundFile("starman/starman_nsmbwii")
         starman.duration[996] = lunatime.toTicks(9.9996)
         starman.duration[994] = lunatime.toTicks(9.9996)
