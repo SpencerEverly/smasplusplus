@@ -1063,14 +1063,18 @@ function extrasounds.onPostBlockHit(block, fromUpper, playerornil) --Let's start
                 elseif block.contentID >= 1001 then --Greater than blocks, exceptional to vine blocks, will play a mushroom spawn sound
                     extrasounds.playSFX(7)
                 elseif block.contentID <= 99 then --Elseif, we'll play a coin sound with things less than 99, the coin block limit
-                    if normalCharacters[playerornil.character] then
-                        if extrasounds.enableBlockCoinCollecting then
-                            extrasounds.playSFX(14)
+                    if playerornil then
+                        if normalCharacters[playerornil.character] then
+                            if extrasounds.enableBlockCoinCollecting then
+                                extrasounds.playSFX(14)
+                            end
+                        elseif linkCharacters[playerornil.character] then
+                            if extrasounds.enableBlockCoinCollecting then
+                                extrasounds.playSFX(81)
+                            end
                         end
-                    elseif linkCharacters[playerornil.character] then
-                        if extrasounds.enableBlockCoinCollecting then
-                            extrasounds.playSFX(81)
-                        end
+                    else
+                        extrasounds.playSFX(14)
                     end
                 end
                 
