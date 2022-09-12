@@ -779,7 +779,7 @@ function rooms.onTick()
                     player:mem(0x176,FIELD_WORD,0) -- Reset standing NPC
                     player:mem(0x11C,FIELD_WORD,0) -- Reset jump force
 
-                    player.speedY = -10
+                    --player.speedY = -10
                 end
             end
 

@@ -23,9 +23,9 @@ local rng = require("base/rng")
 local costume = {}
 
 
-costume.pSpeedAnimationsEnabled = true
-costume.yoshiHitAnimationEnabled = true
-costume.kickAnimationEnabled = true
+costume.pSpeedAnimationsEnabled = false
+costume.yoshiHitAnimationEnabled = false
+costume.kickAnimationEnabled = false
 
 costume.hammerID = 171
 costume.hammerConfig = {
@@ -687,13 +687,15 @@ function costume.onPostPlayerKill()
 end
 
 function costume.onPostPlayerHarm()
-    local hurtVoice = rng.randomInt(1,3)
-    if hurtVoice == 1 then
-        Sound.playSFX("luigi/14-SMA1/luigi-waaahaha.ogg")
-    elseif hurtVoice == 2 then
-        Sound.playSFX("luigi/14-SMA1/luigi-yyaaguuwouuaahaha.ogg")
-    elseif hurtVoice == 3 then
-        Sound.playSFX("luigi/14-SMA1/luigi-iieeehaaa.ogg")
+    if not player.hasStarman or player.isMega then
+        local hurtVoice = rng.randomInt(1,3)
+        if hurtVoice == 1 then
+            Sound.playSFX("luigi/14-SMA1/luigi-waaahaha.ogg")
+        elseif hurtVoice == 2 then
+            Sound.playSFX("luigi/14-SMA1/luigi-yyaaguuwouuaahaha.ogg")
+        elseif hurtVoice == 3 then
+            Sound.playSFX("luigi/14-SMA1/luigi-iieeehaaa.ogg")
+        end
     end
 end
 
@@ -808,7 +810,7 @@ end
 function costume.onTick()
     for _,p in ipairs(costume.playersList) do
         local data = costume.playerData[p]
-
+        
         if p.forcedState == FORCEDSTATE_DOOR then
             if p.forcedTimer == 1 then
                 Sound.playSFX("luigi/14-SMA1/luigi-pieceofacake.ogg")

@@ -472,6 +472,8 @@ local function isShooting(p)
         and Level.endState() == 0
         and p.deathTimer == 0
         and p.forcedState == 0
+        and p.holdingNPC == nil
+        and not p.climbing
         and not p.keys.down
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
         and p:mem(0x172, FIELD_BOOL)
@@ -484,6 +486,8 @@ local function isShootingLink(p)
         and Level.endState() == 0
         and p.deathTimer == 0
         and p.forcedState == 0
+        and p.holdingNPC == nil
+        and not p.climbing
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
         and p:mem(0x172, FIELD_BOOL)
     )
@@ -686,7 +690,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             
             --**SPINJUMP FIRE/ICEBALLS**
-            if p:mem(0x50, FIELD_BOOL) then --Is the player spinjumping?
+            if p:mem(0x50, FIELD_BOOL) and p.holdingNPC == nil then --Is the player spinjumping while not holding an item?
                 if p:mem(0x160, FIELD_WORD) == 0 then --Is the cooldown on this number?
                     if p.powerup == 3 then --Fireball sound
                         if extrasounds.enableFireFlowerSFX then
