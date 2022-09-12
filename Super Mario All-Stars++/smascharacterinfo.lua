@@ -409,6 +409,24 @@ function smascharacterinfo.onTickEnd()
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
         smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
+    if currentCostume == "09-SMB3-MARIOCLOTHES" then
+        littleDialogue.characterNames[2] = "Marigi"
+        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+        starman.sfxFile = Misc.resolveSoundFile("starman")
+        starman.duration[996] = lunatime.toTicks(12)
+        starman.duration[994] = lunatime.toTicks(12)
+        extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
+        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+    end
+    if currentCostume == "14-SMA1" then
+        littleDialogue.characterNames[2] = "Luigi"
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_gba.ogg")
+        starman.sfxFile = Misc.resolveSoundFile("costumes/mario/11-SMA1/starman")
+        starman.duration[996] = lunatime.toTicks(9.0012)
+        starman.duration[994] = lunatime.toTicks(9.0012)
+        extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
+        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_sma2.ogg"
+    end
     if currentCostume == "LARRYTHECUCUMBER" then
         littleDialogue.characterNames[2] = "Larry"
         mega2.sfxFile = Misc.resolveSoundFile("megashroom")
@@ -443,15 +461,6 @@ function smascharacterinfo.onTickEnd()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/luigi/Undertale-Frisk/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
-    end
-    if currentCostume == "09-SMB3-MARIOCLOTHES" then
-        littleDialogue.characterNames[2] = "Marigi"
-        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-        starman.sfxFile = Misc.resolveSoundFile("starman")
-        starman.duration[996] = lunatime.toTicks(12)
-        starman.duration[994] = lunatime.toTicks(12)
-        extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
         smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "GA-BORIS" then
