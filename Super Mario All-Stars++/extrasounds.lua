@@ -392,6 +392,22 @@ local normalCharacters = {
     [CHARACTER_SAMUS] = true
 }
 
+local normalCharactersWithoutMegaman = {
+    [CHARACTER_MARIO] = true,
+    [CHARACTER_LUIGI] = true,
+    [CHARACTER_PEACH] = true,
+    [CHARACTER_TOAD] = true,
+    [CHARACTER_WARIO] = true,
+    [CHARACTER_BOWSER] = true,
+    [CHARACTER_KLONOA] = true,
+    [CHARACTER_NINJABOMBERMAN] = true,
+    [CHARACTER_ROSALINA] = true,
+    [CHARACTER_ZELDA] = true,
+    [CHARACTER_ULTIMATERINKA] = true,
+    [CHARACTER_UNCLEBROADSWORD] = true,
+    [CHARACTER_SAMUS] = true
+}
+
 local linkCharacters = {
     [CHARACTER_LINK] = true,
     [CHARACTER_SNAKE] = true,
@@ -1123,7 +1139,7 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
                 
                 --**FIREBALLS/HAMMERS/ICEBALLS**
                 if isShooting(p) then
-                    if normalCharacters[p.character] and not normalCharacters[CHARACTER_MEGAMAN] then
+                    if normalCharactersWithoutMegaman[p.character] then
                         if p.powerup == 3 then --Fireball sound
                             if extrasounds.enableFireFlowerSFX then
                                 extrasounds.playSFX(18, extrasounds.volume)
