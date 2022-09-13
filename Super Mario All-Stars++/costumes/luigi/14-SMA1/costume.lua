@@ -254,12 +254,12 @@ local animations = {
     duckSmall = {8},
 
     -- Small only animation
-    walkSmall = {2,1,   frameDelay = 6},
+    walkSmall = {2,9,1,   frameDelay = 6},
     runSmall  = {16,17, frameDelay = 6},
-    walkHoldingSmall = {6,5, frameDelay = 6},
+    walkHoldingSmall = {6,10,5, frameDelay = 6},
     
-    jumpSmall = {4,5,14, frameDelay = 4},
-    fallSmall = {7},
+    jumpSmall = {3,7,14, frameDelay = 4},
+    fallSmall = {2,9,1, frameDelay = 4},
 
     -- SMB2 characters (like toad)
     walkSmallSMB2 = {2,1,   frameDelay = 6},
@@ -713,11 +713,11 @@ function costume.onCleanup(p)
     Audio.sounds[11].sfx = nil
     Audio.sounds[12].sfx = nil
     Audio.sounds[13].sfx = nil
-    extrasounds.sound.sfx[14] = Audio.SfxOpen(Misc.resolveSoundFile("sound/coin.ogg"))
-    extrasounds.sound.sfx[15] = Audio.SfxOpen(Misc.resolveSoundFile("sound/1up.ogg"))
+    extrasounds.sound.sfx[14] = nil
+    extrasounds.sound.sfx[15] = nil
     Audio.sounds[16].sfx = nil
     Audio.sounds[17].sfx = nil
-    extrasounds.sound.sfx[18] = Audio.SfxOpen(Misc.resolveSoundFile("sound/fireball.ogg"))
+    extrasounds.sound.sfx[18] = nil
     Audio.sounds[19].sfx = nil
     Audio.sounds[20].sfx = nil
     Audio.sounds[21].sfx = nil
@@ -725,7 +725,11 @@ function costume.onCleanup(p)
     Audio.sounds[23].sfx = nil
     Audio.sounds[24].sfx = nil
     Audio.sounds[25].sfx = nil
+    Audio.sounds[26].sfx = nil
+    Audio.sounds[27].sfx = nil
+    Audio.sounds[28].sfx = nil
     Audio.sounds[29].sfx = nil
+    Audio.sounds[30].sfx = nil
     Audio.sounds[31].sfx = nil
     Audio.sounds[32].sfx = nil
     extrasounds.sound.sfx[33] = nil

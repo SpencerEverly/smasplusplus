@@ -131,7 +131,7 @@ Costumes:
 - PAC-MAN and Dig Dug by BANDAI NAMCO
 - Modern Mario #2 by DarSonic55
 - Shantae by Raul Hedgebomber (Calibration redone by Spencer Everly)
-- SMA1 Luigi by Nate-O (Big poses)
+- SMA1 Luigi by Nate-O (Small, big, fire, and ice poses)
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
