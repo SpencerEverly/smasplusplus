@@ -16,11 +16,11 @@ local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
 local musicalchairs = require("musicalchairs")
 
-local smasacecoins = require("smasacecoins")
-local smascharacterinfo = require("smascharacterinfo")
-local smascharacterintros = require("smascharacterintros")
-local smasextraactions = require("smasextraactions")
-local smascoinblocksystem = require("smascoinblocksystem")
+_G.smasacecoins = require("smasacecoins")
+_G.smascharacterinfo = require("smascharacterinfo")
+_G.smascharacterintros = require("smascharacterintros")
+_G.smasextraactions = require("smasextraactions")
+_G.smasblocksystem = require("smasblocksystem")
 
 if SMBX_VERSION == VER_SEE_MOD then
     smasonlineplay = require("smasonlineplay")
