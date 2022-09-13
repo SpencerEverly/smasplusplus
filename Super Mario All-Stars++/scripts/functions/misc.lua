@@ -10,6 +10,7 @@ local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 
 function Misk.onInitAPI()
     registerEvent(Misk,"onDraw")
+    registerEvent(Misk,"onCameraUpdate")
 end
 
 if SMBX_VERSION == VER_SEE_MOD then
@@ -956,7 +957,104 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
     end
 end
 
+local oldBoundaryLeft,oldBoundaryRight,oldBoundaryTop,oldBoundaryBottom = 0,0,0,0
+local boundaryLeft,boundaryRight,boundaryTop,boundaryBottom = 0,0,0,0
+local setCameraPosition = false
+local cameraPanSpeed = 5
+local positionDirection = "right"
+
+function Misc.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,position) --This is used to set the camera boundaries for the specific section. This is also animated as well ("left" and "right" moving are only supported atm)
+    local plr = player
+    local section = plr.sectionObj
+    local bounds = section.boundary
+    local bounds2 = {left = camera.x, top = camera.y, right = camera.x + camera.width, bottom = camera.y + camera.height}
+    if leftbound == nil then
+        leftbound = bounds.left
+    end
+    if rightbound == nil then
+        rightbound = bounds.right
+    end
+    if upbound == nil then
+        upbound = bounds.top
+    end
+    if downbound == nil then
+        downbound = bounds.bottom
+    end
+    
+    if speed == nil then
+        speed = 5
+    end
+    
+    boundaryLeft = leftbound
+    boundaryRight = rightbound
+    boundaryTop = upbound
+    boundaryBottom = downbound
+    
+    oldBoundaryLeft = bounds.left
+    oldBoundaryRight = bounds.right
+    oldBoundaryTop = bounds.up
+    oldBoundaryBottom = bounds.down
+    
+    cameraPanSpeed = speed
+    positionDirection = position
+    
+    section.boundary = bounds2
+    
+    setCameraPosition = true
+    
+    for _,p in ipairs(Player.get()) do
+        
+    end
+end
+
 function Misk.onDraw()
+    if setCameraPosition then --Camera position stuff
+        local section = player.sectionObj
+        local bounds = section.boundary
+        
+        if positionDirection == "right" then
+            Misc.pause()
+            smasbooleans.toggleOffInventory = true
+            smasbooleans.disablePauseMenu = true
+            bounds.right = bounds.right + cameraPanSpeed
+            bounds.left = bounds.left + cameraPanSpeed
+            section.boundary = bounds
+            if bounds.right > boundaryRight or boundaryLeft < bounds.left then
+                Misc.unpause()
+                bounds.left = boundaryLeft
+                bounds.right = boundaryRight
+                bounds.top = boundaryTop
+                bounds.bottom = boundaryBottom
+                section.boundary = bounds
+                smasbooleans.disablePauseMenu = false
+                smasbooleans.toggleOffInventory = false
+                setCameraPosition = false
+            end
+        end
+        if positionDirection == "left" then
+            Misc.pause()
+            smasbooleans.toggleOffInventory = true
+            smasbooleans.disablePauseMenu = true
+            bounds.right = bounds.right - cameraPanSpeed
+            bounds.left = bounds.left - cameraPanSpeed
+            section.boundary = bounds
+            if bounds.right < boundaryRight or boundaryLeft > bounds.left then
+                Misc.unpause()
+                bounds.left = boundaryLeft
+                bounds.right = boundaryRight
+                bounds.top = boundaryTop
+                bounds.bottom = boundaryBottom
+                section.boundary = bounds
+                smasbooleans.disablePauseMenu = false
+                smasbooleans.toggleOffInventory = false
+                setCameraPosition = false
+            end
+        end
+        
+    end
+    if positionDirection ~= "left" or positionDirection ~= "right" then
+        positionDirection = "right"
+    end
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then
             shaketally = shaketally - 1

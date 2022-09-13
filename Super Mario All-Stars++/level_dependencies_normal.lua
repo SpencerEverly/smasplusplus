@@ -81,15 +81,13 @@ function dependencies.onStart()
         local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
         local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
         if SaveData.SMB1HardModeActivated then
-            SMB1HardModeLayer:show(true)
             SMB1EasyModeLayer:hide(true)
-        elseif not SaveData.SMB1HardModeActivated then
-            SMB1HardModeLayer:hide(true)
-            SMB1EasyModeLayer:show(true)
+            SMB1HardModeLayer:show(true)
         end
-    end
-    if SaveData.ut_enabled == nil then
-        SaveData.ut_enabled = SaveData.ut_enabled or 0
+        if not SaveData.SMB1HardModeActivated then
+            SMB1EasyModeLayer:show(true)
+            SMB1HardModeLayer:hide(true)
+        end
     end
     
     if player.character == CHARACTER_NINJABOMBERMAN then

@@ -17,6 +17,22 @@ npcManager.setNpcSettings({
     fireId = 87
 })
 
+function isOnScreen(npc)
+    -- Get camera boundaries
+    local left = camera.x;
+    local right = left + camera.width;
+    local top = camera.y;
+    local bottom = top + camera.height;
+    -- Check if offscreen
+    if npc.x + npc.width < left or npc.x > right then
+        return false
+    elseif npc.y + npc.height < top or npc.y > bottom then
+        return false
+    else
+        return true
+    end
+end
+
 local function animation(v)
     local data = v.data._basegame
     
@@ -53,6 +69,7 @@ function npc.onTickEndNPC(v)
     --Don't act during time freeze, or when camera is moving when changing area
     if Defines.levelFreeze then return end
     if mem(0x00B2B9E4, FIELD_BOOL) == true then return end
+    if not isOnScreen(v) then return end
     
     local config = NPC.config[id]
     local data = v.data._basegame

@@ -7136,6 +7136,7 @@ ID:2;X:-199904;Y:-205504;D:1;
 ID:79;X:-179392;Y:-180512;D:-1;LR:"Boss Starting Point";EA:"Boss Start 1";
 ID:751;X:-179392;Y:-180192;D:-1;LR:"Boss Begin";ED:"Boss Dead";
 ID:91;X:-199488;Y:-203936;D:-1;CN:31;GE:1;GT:1;GD:1;GM:250;
+ID:151;X:-199632;Y:-200144;D:-1;MG:"Find the hidden block somewhere in the level. Puzzles are key in this Tower to progress through!";FD:1;
 NPC_END
 PHYSICS
 ET:0;X:-199840;Y:-200880;W:480;H:240;
