@@ -79,16 +79,16 @@ function smasblocksystem.onPostNPCKill(npc, harmType)
             end
         end
     end
-    if not SaveData.SMB1Invisible1UPBlockMet then
-        if table.icontains(smastables.__smb1Dash3Levels,Level.filename()) then
-            for _,p in ipairs(Player.get()) do
-                if npc.id == 88 and Colliders.collide(p, npc) then --SMB1 Coin
-                    smasblocksystem.invisibleCoinsCollected = smasblocksystem.invisibleCoinsCollected + 1 --Collect one
-                    local levelIncrementation = table.ifind(smastables.__smb1Dash3LevelsNumbered, Level.filename())
-                    if smasblocksystem.invisibleCoinsCollected >= smasblocksystem.invisibleCoinsToCollect[levelIncrementation] then --If greater than the one found in the table, set the goal-met to true
-                        --Sound.playSFX(1001) --Debug purposes
-                        SaveData.SMB1Invisible1UPBlockMet = true
-                    end
+    if table.icontains(smastables.__smb1Dash3Levels,Level.filename()) then
+        for _,p in ipairs(Player.get()) do
+            if npc.id == 88 and Colliders.collide(p, npc) then --SMB1 Coin
+                smasblocksystem.invisibleCoinsCollected = smasblocksystem.invisibleCoinsCollected + 1 --Collect one
+                local levelIncrementation = table.ifind(smastables.__smb1Dash3LevelsNumbered, Level.filename())
+                if smasblocksystem.invisibleCoinsCollected == smasblocksystem.invisibleCoinsToCollect[levelIncrementation] then --If equal to the one found in the table, set the goal-met to true
+                    --Sound.playSFX(1001) --Debug purposes
+                    SaveData.SMB1Invisible1UPBlockMet = true
+                elseif smasblocksystem.invisibleCoinsCollected > smasblocksystem.invisibleCoinsToCollect[levelIncrementation] then --Else if any higher, don't set it
+                    SaveData.SMB1Invisible1UPBlockMet = false
                 end
             end
         end
