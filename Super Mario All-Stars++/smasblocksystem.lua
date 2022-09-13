@@ -14,8 +14,6 @@ smasblocksystem.invisibleCoinsToCollect = {
     [5] = 23,
     [6] = 24,
     [7] = 35,
-    [8] = 99,
-    [9] = 99,
 }
 --Then you'll get an invisible 1UP block to collect at your disposal.
 --If you don't collect the require coins in those Athletic levels, then you basically don't get the block hittable to collect.
