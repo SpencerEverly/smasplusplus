@@ -65,6 +65,40 @@ end
 
 local smb1buzzyswitch = false
 
+function hardModeStuff()
+    local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
+    local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
+    if table.icontains(smastables.__smb1Levels,Level.filename()) == true then
+        Routine.wait(0.1, true)
+        if SaveData.SMB1HardModeActivated then
+            SMB1EasyModeLayer:hide(true)
+            SMB1HardModeLayer:show(true)
+        end
+        if not SaveData.SMB1HardModeActivated then
+            SMB1EasyModeLayer:show(true)
+            SMB1HardModeLayer:hide(true)
+        end
+        Routine.wait(0.1, true)
+        if SaveData.SMB1HardModeActivated then
+            SMB1EasyModeLayer:hide(true)
+            SMB1HardModeLayer:show(true)
+        end
+        if not SaveData.SMB1HardModeActivated then
+            SMB1EasyModeLayer:show(true)
+            SMB1HardModeLayer:hide(true)
+        end
+        Routine.wait(0.1, true)
+        if SaveData.SMB1HardModeActivated then
+            SMB1EasyModeLayer:hide(true)
+            SMB1HardModeLayer:show(true)
+        end
+        if not SaveData.SMB1HardModeActivated then
+            SMB1EasyModeLayer:show(true)
+            SMB1HardModeLayer:hide(true)
+        end
+    end
+end
+
 function dependencies.onStart()
     if table.icontains(smastables.__smb1Levels,Level.filename()) == true then
         for k,v in NPC.iterate{89,23,27,24,173,175,176,177,172,174,612} do
@@ -78,16 +112,8 @@ function dependencies.onStart()
                 end
             end
         end
-        local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
-        local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
-        if SaveData.SMB1HardModeActivated then
-            SMB1EasyModeLayer:hide(true)
-            SMB1HardModeLayer:show(true)
-        end
-        if not SaveData.SMB1HardModeActivated then
-            SMB1EasyModeLayer:show(true)
-            SMB1HardModeLayer:hide(true)
-        end
+        Routine.run(hardModeStuff)
+        
     end
     
     if player.character == CHARACTER_NINJABOMBERMAN then

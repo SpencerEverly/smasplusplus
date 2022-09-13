@@ -14,6 +14,7 @@ one is fine.
 - File.readFile('path/to/file.extension'): Reads a file using io. This will
 return the entire file in text format (Newlines will be with a
 'backslash-n').
+- File.stringToHex(str): Converts a string to an Hex value.
 
 IMAGES
 - Img.load('path/to/file.extension'): Loads an image from any of the
@@ -167,6 +168,8 @@ NPC FUNCTIONS
 - NPC.saveClass(class): Saves a specified class. Used for regenerating NPCs.
 - NPC.restoreClass(class): Restores a specified class. Used for regenerating
 NPCs.
+- NPC.isOnScreen(npc): Checks to see if a specific NPC is on the screen. If
+so, it returns true.
 
 MISC FUNCTIONS
 - Misc.episodeFilename(): Gets the episode filename for the episode. If under
@@ -201,8 +204,21 @@ collected in prior.
 - Misc.overrideLibrary(inlib, outlib): Overrides a library to a new one.
 - Misc.use13Editor(bool): This is used to open the legacy 1.3 Editor after
 dying.
+- Misc.setCameraPosition(leftbounds, upbounds, downbounds, rightbounds,
+speed, positionString): This moves the camera and resizes the room to the
+specified bounds. You can set a speed for how long the movement lasts,
+and you can set which direction it should go. Defaults are 'left' and
+'right', for now.
 
 --(SEE MOD-ONLY)--
+
+FILE MANAGEMENT
+- File.cdataToString(ffidata): Converts a DLL portion to a string. Some
+cdata's may crash the game if converted to a string.
+- File.stringToCData(stringdata): Converts a string to cdata. This
+function serves as more of an work in progress though.
+
+MISC FUNCTIONS
 - Misc.setWindowPosition(x, y): Sets the window position to the specified
 coordinates.
 - Misc.runWhenUnfocused(bool): Sets to run when unfocused or not.
@@ -228,3 +244,8 @@ disables test mode while on test mode. Be advised that things may BREAK when
 using this command!
 - Misc.shakeWindow(shakenumber): This shakes the window with the specified
 shakenumber.
+- Misc.testModeSetSettings(player, powerup, mountType, mountColor,
+playerCount, showFPS, godMode, entranceIndex, player2, powerup2,
+mountType2, mountColor2): Sets the test mode settings to these settings
+above. This will be used for reimplementing the Test Mode Pause Menu for
+the SEE Mod.

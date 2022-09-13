@@ -72,15 +72,15 @@ function File.cdataToString(ffidata)
     end
 end
 
-function File.stringToCData(stringdata)
+function File.stringToCData(stringdata, ffidata)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
         return
     else
         local text = stringdata
-        local c_str = ffi.new("char[?]", #text + 1)
-        ffi.copy(c_str, text)
-        return c_str
+        --local c_str = ffi.new("char[?]", #text + 1)
+        ffi.copy(ffidata, text)
+        return ffidata
     end
 end
 
