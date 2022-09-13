@@ -41,19 +41,6 @@ function smasblocksystem.onInitAPI()
     registerEvent(smasblocksystem,"onExit")
 end
 
-function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
-    if not SaveData.disableX2char then
-        if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateblockcountdown then
-            activateblockcountdown = true
-            table.insert(blocklistwithcoins, block)
-        elseif block.contentID <= 1 or block.contentID == 1000 or not block.isValid then
-            activateblockcountdown = false
-            blockcountdown = 0
-            subtractblockcontentid = false
-        end
-    end
-end
-
 function smasblocksystem.onStart()
     if table.icontains(smastables.__smb1Dash1Levels,Level.filename()) then
         if not SaveData.SMB1Invisible1UPBlockMet then
@@ -66,17 +53,36 @@ function smasblocksystem.onStart()
     end
 end
 
-function smasblocksystem.onPostNPCKill(npc, harmType)
-    --Life detection, for the system
+function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
+    --Life detection, for the SMB1 system
+    local hidden1UPLayer = Layer.get("Hidden 1UP Block")
     if SaveData.SMB1Invisible1UPBlockMet then
         if table.icontains(smastables.__smb1Dash1Levels,Level.filename()) then
             for _,p in ipairs(Player.get()) do --Get all players in case
-                if npc.id == 186 and Colliders.collide(p, npc) then --SMB1 1UP
+                if block.layerObj == hidden1UPLayer and block.contentID == 1186 then --SMB1 1UP
                     SaveData.SMB1Invisible1UPBlockMet = false --Reset this to false, in case
                 end
             end
         end
     end
+    
+    
+    
+    
+    --Block coin hit detection
+    if not SaveData.disableX2char then
+        if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateblockcountdown then
+            activateblockcountdown = true
+            table.insert(blocklistwithcoins, block)
+        elseif block.contentID <= 1 or block.contentID == 1000 or not block.isValid then
+            activateblockcountdown = false
+            blockcountdown = 0
+            subtractblockcontentid = false
+        end
+    end
+end
+
+function smasblocksystem.onPostNPCKill(npc, harmType)
     if table.icontains(smastables.__smb1Dash3Levels,Level.filename()) then
         for _,p in ipairs(Player.get()) do
             if npc.id == 88 and Colliders.collide(p, npc) then --SMB1 Coin
@@ -94,10 +100,7 @@ function smasblocksystem.onPostNPCKill(npc, harmType)
 end
 
 function smasblocksystem.onTick()
-
-    if table.icontains(smastables.__smb1Dash3Levels,Level.filename()) then
-        --Text.print(smasblocksystem.invisibleCoinsCollected, 100, 100) --Debug purposes
-    end
+    --Text.print(SaveData.SMB1Invisible1UPBlockMet, 100, 100) --Debug purposes
     
     
     
