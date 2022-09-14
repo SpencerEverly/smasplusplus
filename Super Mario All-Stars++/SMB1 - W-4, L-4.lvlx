@@ -3744,6 +3744,6 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss End";LS:["Appear"];SSS:["ID\:2\;MI\:0\;"];TE:"Boss End 2";AS:0;AX:0;AY:0;
+ET:"Boss End";LS:["Appear"];TE:"Boss End 2";AS:0;AX:0;AY:0;
 ET:"Boss End 2";SSS:["ID\:1\;MI\:0\;"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

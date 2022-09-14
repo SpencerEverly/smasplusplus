@@ -332,8 +332,8 @@ function globalgenerals.onStart()
         Playur.activate1stPlayer()
     end
     if Misc.inEditor() then
-        --debugbox = require("debugbox")
-        --debugbox.bootactive = true
+        debugbox = require("debugbox")
+        debugbox.bootactive = true
     end
     if GameData.____mainMenuComplete == true then
         if (mem(0xB25724, FIELD_STRING) == "SMAS - Start.lvlx") then

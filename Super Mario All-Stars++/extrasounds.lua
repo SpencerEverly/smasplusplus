@@ -1,4 +1,4 @@
---extrasounds.lua by Spencer Everly (v0.3.0)
+--extrasounds.lua by Spencer Everly (v0.3.5)
 --
 --To use this everywhere, you can simply put this under luna.lua:
 --_G.extrasounds = require("extrasounds")

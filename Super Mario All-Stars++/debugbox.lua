@@ -74,7 +74,7 @@ end
 
 function debugbox.onKeyboardPress(k, repeated)
     if debugbox.bootactive == true then
-        if k == VK_F9 then
+        if k == VK_F4 then
             Sound.playSFX("cheating_victory.ogg")
             littleDialogue.create({text = "<boxStyle smbx13>NNW SMSK? (What shall you do?)<page><question DEBUG>", updatesInPause = true})
         end
@@ -82,7 +82,7 @@ function debugbox.onKeyboardPress(k, repeated)
 end
 
 
-littleDialogue.registerAnswer("DEBUG",{text = "Exit Menu",addText = "Press jump to exit. Press F9 to revisit the DEBUG MENU."})
+littleDialogue.registerAnswer("DEBUG",{text = "Exit Menu",addText = "Press jump to exit. Press F4 to revisit the DEBUG MENU."})
 littleDialogue.registerAnswer("DEBUG",{text = "IDU (Warp to level/area)",addText = "IDU<question AREA>"})
 littleDialogue.registerAnswer("DEBUG",{text = "GtZStTI (Goods Edit/Powerup Menu)",addText = "GtZKWER<question POWERUP>"})
 littleDialogue.registerAnswer("DEBUG",{text = "FST PLYR (Toggle 1st Player)", chosenFunction = function() Playur.activate1stPlayer() end})
