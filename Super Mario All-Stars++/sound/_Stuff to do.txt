@@ -1,0 +1,37 @@
+The following will need these sounds in cubic form:
+
+- 0up
+- ace-coins-5
+- boomerang
+- boss-fall
+- boss-lava
+- boss-shrink-done
+- bowser-fire
+- cape-feather
+- cape-fly
+- castle-destroy
+- combo1
+- combo2
+- combo3
+- combo4
+- combo5
+- combo6
+- combo7
+- door-reveal
+- goaltape-countdown-end
+- goaltape-countdown-loop
+- got-star-nosfx
+- hop
+- score-tally
+- score-tally-end
+- smash-big
+- smb1-exit
+- smb1-world-clear
+- smb2-clear
+- smw-exit-orb
+- stopwatch
+- wand-moving
+- wand-whoosh
+- whale-spout
+
+Some sounds were excluded (i.e. the going underground tunes)
