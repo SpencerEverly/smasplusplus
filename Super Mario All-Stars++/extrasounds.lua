@@ -318,6 +318,9 @@ extrasounds.soundNamesInOrder = {
     "ground-pound-hit", --160
     "zelda-fireball", --161
     "zelda-iceball", --162
+    "pballoon", --163
+    "peach-cry", --164
+    "timeout", --165
 }
 
 extrasounds.sound.sfx[0] = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really
