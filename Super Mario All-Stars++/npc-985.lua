@@ -93,6 +93,7 @@ end
 local plr
 local newboundary
 local oldboundary
+local endRoomToScroll = 0
 
 function starget()
     Misc.npcToCoins()
@@ -128,7 +129,7 @@ end
 
 function roulettestar.onCameraUpdate()
     if collectactive then
-        if newboundary.right > oldboundary.right then
+        if camera.x > oldboundary.left then
             camera.x = oldboundary.right - camera.width
         end
     end
@@ -148,7 +149,7 @@ function roulettestar.onDraw()
     if collectactive then
         for _,p in ipairs(Player.get()) do
             if p:isOnGround() then
-                p.speedX = Defines.player_walkspeed
+                p.speedX = 3
                 playerwon = false
                 inactivekeysonly = true
                 p.direction = DIR_RIGHT
