@@ -111,6 +111,7 @@ function customNPC.onTickNPC(v)
             if data.tick > 2 then
                 data.state = 1.1
             end
+            exiting = true
         end
         if data.state == 1.1 then
             if Player.count() == 1 then
@@ -131,6 +132,7 @@ function customNPC.onTickNPC(v)
             p.direction = 1
             p:setFrame(3)
             v.speedY = 3
+            exiting = true
 
             if data.tick > 65 * 1.5 then
                 p.x = p.x + p.width
@@ -178,6 +180,7 @@ function customNPC.onTickNPC(v)
             if GameData.rushModeActive == true then
                 GameData.rushModeWon = true
             end
+            exiting = true
             p.speedX = 3
             p.direction = 1
 
@@ -201,7 +204,9 @@ function customNPC.onTickNPC(v)
             smasbooleans.musicMuted = true
             p.x = castlePlayerX
             p.y = castlePlayerY
-
+            
+            exiting = true
+            
             if Timer.getValue() > 0 and data.countTime then
                 SFX.play(extrasounds.sound.sfx[113])
                 if Timer.getValue() >= 100 then

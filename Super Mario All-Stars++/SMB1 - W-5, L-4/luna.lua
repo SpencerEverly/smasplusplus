@@ -4,6 +4,7 @@ function onEvent(eventName)
     if eventName == ("Boss End") then
         Sound.playSFX(138)
         Sound.changeMusic(0, 2)
+        Sound.changeMusic("_OST/Super Mario Bros/Album.spc|0;g=2.5", 1)
     end
 end
 

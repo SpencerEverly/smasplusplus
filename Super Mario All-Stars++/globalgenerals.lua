@@ -798,7 +798,7 @@ function globalgenerals.onDraw()
         end
     end
     if SaveData.resolution == "nes" then
-        customCamera.defaultScreenWidth = 700
+        customCamera.defaultScreenWidth = 520
         customCamera.defaultScreenHeight = 612
         customCamera.defaultZoom = 0.60
         customCamera.defaultScreenOffsetY = 0

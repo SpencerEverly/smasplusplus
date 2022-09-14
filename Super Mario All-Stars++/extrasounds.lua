@@ -592,11 +592,13 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             
             --**JUMPING**
-            if not isPlayerUnderwater(p) then
-                if p:isOnGround() or p:isClimbing() or isInQuicksand(p) then
-                    if (p:mem(0x11E, FIELD_BOOL) and p.keys.jump == KEYS_PRESSED) then
-                        if extrasounds.enableJumpingSFX then
-                            extrasounds.playSFX(1)
+            if p.deathTimer == 0 then
+                if not isPlayerUnderwater(p) then
+                    if p:isOnGround() or p:isClimbing() or isInQuicksand(p) then
+                        if (p:mem(0x11E, FIELD_BOOL) and p.keys.jump == KEYS_PRESSED) then
+                            if extrasounds.enableJumpingSFX then
+                                extrasounds.playSFX(1)
+                            end
                         end
                     end
                 end
