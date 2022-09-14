@@ -15,7 +15,7 @@ function onEvent(eventName)
     end
     if eventName == ("Boss End") then
         Sound.playSFX(138)
-        Sound.changeMusic(0, 0)
+        Sound.changeMusic(0, 1)
         Misc.setCameraPosition(-175104,-180600,-180000,-174144,5,"right")
         for k,v in ipairs(NPC.get(87)) do
             if v.isValid then

@@ -3034,8 +3034,8 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Start";SSS:["ID\:3\;SL\:-136960\;ST\:-140600\;SB\:-140000\;SR\:-136160\;"];AS:0;AX:0;AY:0;
-ET:"Boss End";SSS:["ID\:3\;SL\:-136224\;ST\:-140600\;SB\:-140000\;SR\:-135328\;MI\:0\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End";AS:0;AX:0;AY:0;
 ET:"Bridge";LH:["Bridge"];DS:1;AS:0;AX:0;AY:0;
 ET:"Ending 1";TE:"Ending 2";TD:30;PC:000010000000;AS:0;AX:0;AY:0;
 ET:"Ending 2";MG:"<boxStyle dr><characterName>.<page>Why did you do it?<page>Why did you beat something that is SPECIFICALLY optional to play?<page>It's like you want to play by your own rules.<page>MOMMY! I'M SCARED OF THIS BIRD!<page>I WANNA PLAY THE LOST LEVELS TO CALM ME DOWN!!!<page>Hmmmph. You don't even know what you're getting into here.<page>By the time you reach the True Ending\, you'll see what I mean.<page>Now\, just take this \"optional\" star\, and get away from this game.<page>I think you'll like this star... right?";TE:"Ending 3";TD:1;AS:0;AX:0;AY:0;

@@ -4962,9 +4962,9 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Start";SSS:["ID\:4\;SL\:-120000\;ST\:-120600\;SB\:-120000\;SR\:-115072\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
 ET:"Bridge Break";SD:4;LH:["Bridge"];DS:1;AS:0;AX:0;AY:0;
-ET:"Boss End";SSS:["ID\:4\;SL\:-115104\;ST\:-120600\;SB\:-120000\;SR\:-114208\;MI\:0\;"];AS:0;AX:0;AY:0;
+ET:"Boss End";AS:0;AX:0;AY:0;
 ET:"Cutscene 1";TE:"Cutscene 2";TD:5;PC:000010000000;AS:0;AX:0;AY:0;
 ET:"Cutscene 2";MG:"<boxStyle dr>Clever\, <characterName>. Verrrry clever.<page>So. You played the Lost Levels\, and you beat it.<page>Don't you realize this is an OPTIONAL game?<page>An optional land to collect stars... for the TRUE ENDING?<page>...what? Why am I pressuring you for completing the FIRST HALF of this game?<page>...the ending will tell all...";TE:"Cutscene 3";TD:4;AS:0;AX:0;AY:0;
 ET:"Cutscene 3";MG:"<boxStyle dr>See me on SMB3 or SMW if you haven't completed those yet. PIGEON RACA\, OUT!";TE:"Cutscene 4";TD:2;AS:0;AX:0;AY:0;
