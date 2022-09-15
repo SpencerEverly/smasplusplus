@@ -935,6 +935,8 @@ ID:780;X:-200768;Y:-201120;
 ID:784;X:-192736;Y:-195040;
 ID:787;X:-201600;Y:-200000;
 ID:788;X:-201600;Y:-198784;
+ID:789;X:-201824;Y:-198560;
+ID:790;X:-201600;Y:-198016;
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -1805,6 +1807,10 @@ ID:752;X:-201312;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-TowerPath2\"\,
 ID:752;X:-201248;Y:-198560;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-Tower\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 ID:752;X:-201216;Y:-198592;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path4\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:821;X:-201216;Y:-198624;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5bBeginWarp\"\,\n    \"levelTitle\"\: \"To the Skies\"\,\n    \"path_down\"\: \"toSMB3W-5Path4\"\,\n    \"warpName\"\: \"SMB3W-5EndWarp\"\n}\n";
+ID:753;X:-201600;Y:-198016;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Sky Horizons - On the Skies.ogg\"\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\n}\n";
+ID:821;X:-201344;Y:-197952;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5EndWarp\"\,\n    \"levelTitle\"\: \"To the Ground\"\,\n    \"path_down\"\: \"toSMB35-4\"\,\n    \"warpName\"\: \"SMB3W-5bBeginWarp\"\n}\n";
+ID:752;X:-201344;Y:-197920;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-4\"\,\n    \"points\"\: \"0\, -32\, 0\, 64\, 64\, 64\"\n}\n";
+ID:802;X:-201280;Y:-197856;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"5-4\: On Top of the Skies\"\,\n    \"path_left\"\: \"toSMB35-4\"\,\n    \"path_right\"\: \"toSMB35-5\"\,\n    \"unlock_right\"\: 9\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
