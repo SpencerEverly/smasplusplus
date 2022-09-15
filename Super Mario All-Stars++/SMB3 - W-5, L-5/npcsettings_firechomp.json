@@ -1,0 +1,16 @@
+{
+    "style": "groupbox",
+    "title": "Flame Chomp Settings",
+    "layout": [
+        {
+            "control": "spinBox",
+            "name": "length",
+            "title": "Length",
+            "tooltip": "Number of the initial firebal tails. If it reach 0, the Flame Chomp explodes.",
+			"type": "int",
+			"value-default": 4,
+			"value-min": 0,
+			"value-max": 30
+        }
+    ]
+}
