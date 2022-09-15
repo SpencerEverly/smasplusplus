@@ -215,7 +215,7 @@ function inputconfigurator.onKeyboardPress(k, repeated)
     
     if inputconfigurator.keyConfigOpen then
         if not Misc.inEditor() then
-            if k == VK_RETURN and not dontRunReturn then
+            if k == VK_RETURN and not dontRunReturn and not (k ~= VK_RETURN) then
                 currentKeyboard = { k, pnumkey }
                 keyConfigCount = 1
                 dontRunReturn = true
@@ -252,7 +252,7 @@ function inputconfigurator.onKeyboardPress(k, repeated)
                 end
             end
         else
-            if k == VK_RETURN and not dontRunReturn then
+            if k == VK_RETURN and not dontRunReturn and not (k ~= VK_RETURN) then
                 currentKeyboard = { k, pnumkey }
                 keyConfigCount = 1
                 dontRunReturn = true
