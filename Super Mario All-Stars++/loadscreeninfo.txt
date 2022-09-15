@@ -1,1 +1,1 @@
-nes
+fullscreen
