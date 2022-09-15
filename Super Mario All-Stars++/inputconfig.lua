@@ -227,7 +227,7 @@ function inputconfigurator.onKeyboardPress(k, repeated)
                 currentConfig2[keyConfigCount] = k
                 Sound.playSFX("inputconfig/input_switchpressed.ogg")
                 keyConfigCount = keyConfigCount + 1
-            elseif not dontRunReturn and keyConfigCount >= #keyConfigs then
+            elseif dontRunReturn and keyConfigCount >= #keyConfigs then
                 runEndingConfig = true
                 if inputconfigurator.assigningToPlayer1 then
                     inputconfigurator.keyConfigOpen = false
