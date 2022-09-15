@@ -205,6 +205,7 @@ local function writeButtonConfigs()
 end
 
 local dontRunReturn = false
+local runEndingConfig = false
 
 function inputconfigurator.onKeyboardPress(k, repeated)
     if repeated then return end
@@ -215,7 +216,7 @@ function inputconfigurator.onKeyboardPress(k, repeated)
     
     if inputconfigurator.keyConfigOpen then
         if not Misc.inEditor() then
-            if k == VK_RETURN and not dontRunReturn and not (k ~= VK_RETURN) then
+            if k == VK_RETURN and not dontRunReturn then
                 currentKeyboard = { k, pnumkey }
                 keyConfigCount = 1
                 dontRunReturn = true
@@ -226,7 +227,8 @@ function inputconfigurator.onKeyboardPress(k, repeated)
                 currentConfig2[keyConfigCount] = k
                 Sound.playSFX("inputconfig/input_switchpressed.ogg")
                 keyConfigCount = keyConfigCount + 1
-            else
+            elseif not dontRunReturn and keyConfigCount == #keyConfigs then
+                runEndingConfig = true
                 if inputconfigurator.assigningToPlayer1 then
                     inputconfigurator.keyConfigOpen = false
                     Sound.playSFX("inputconfig/input_success.ogg")
@@ -250,9 +252,10 @@ function inputconfigurator.onKeyboardPress(k, repeated)
                     GameData.reopenmenu = true
                     inputconfigurator.assigningToPlayer2 = false
                 end
+                runEndingConfig = false
             end
         else
-            if k == VK_RETURN and not dontRunReturn and not (k ~= VK_RETURN) then
+            if k == VK_RETURN and not dontRunReturn then
                 currentKeyboard = { k, pnumkey }
                 keyConfigCount = 1
                 dontRunReturn = true
