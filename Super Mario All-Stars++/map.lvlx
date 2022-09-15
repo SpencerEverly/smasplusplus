@@ -1811,6 +1811,12 @@ ID:753;X:-201600;Y:-198016;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic
 ID:821;X:-201344;Y:-197952;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-5EndWarp\"\,\n    \"levelTitle\"\: \"To the Ground\"\,\n    \"path_down\"\: \"toSMB35-4\"\,\n    \"warpName\"\: \"SMB3W-5bBeginWarp\"\n}\n";
 ID:752;X:-201344;Y:-197920;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-4\"\,\n    \"points\"\: \"0\, -32\, 0\, 64\, 64\, 64\"\n}\n";
 ID:802;X:-201280;Y:-197856;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"5-4\: On Top of the Skies\"\,\n    \"path_left\"\: \"toSMB35-4\"\,\n    \"path_right\"\: \"toSMB35-5\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-201248;Y:-197856;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-5\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\, 160\, -64\"\n}\n";
+ID:802;X:-201088;Y:-197920;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"5-5\: Donuts Ahoy\"\,\n    \"path_down\"\: \"toSMB35-6Path2\"\,\n    \"path_left\"\: \"toSMB35-5\"\,\n    \"path_up\"\: \"toSMB35-6Path1\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_up\"\: 9\n}\n";
+ID:859;X:-201088;Y:-197984;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-0\, L-TH2.lvlx\"\,\n    \"levelTitle\"\: \"Toad House\"\,\n    \"path_down\"\: \"toSMB35-6Path1\"\n}\n";
+ID:752;X:-201088;Y:-197952;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-6Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:802;X:-201152;Y:-197728;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"5-6\: Parabeetles in the Sky\"\,\n    \"path_right\"\: \"toSMB35-6Path2\"\n}\n";
+ID:752;X:-201088;Y:-197888;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-6Path2\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -64\, 160\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
