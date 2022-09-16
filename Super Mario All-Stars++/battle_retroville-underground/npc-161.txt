@@ -9,4 +9,4 @@ framestyle = 1
 framespeed = 4
 
 shellID = 7
-nonWingedKoopaID = 5
+nonWingedKoopaID = 6
