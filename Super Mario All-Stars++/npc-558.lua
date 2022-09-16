@@ -58,7 +58,7 @@ function cherries.onNPCKill(_, v, reason)
                 end
                 cherryCounters[p] = cherryCounters[p] + 1
                 if cherryCounters[p] == NPC.config[v.id].limit then
-                    Audio.playSFX("cherry-5.ogg")
+                    Sound.playSFX("cherry-5.ogg")
                     local cameraPlayer = player
                     if camera2.isSplit and (p.idx == 2) then
                         cameraPlayer = p

@@ -1,5 +1,5 @@
 local npcManager = require("npcManager")
-local starman = require("starman/star") --WIP
+local starman = require("starman/star")
 
 local star = {}
 
