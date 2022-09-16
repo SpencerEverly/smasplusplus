@@ -3,7 +3,8 @@
 ]]
 
 local playerManager = require("playerManager")
-local extrasounds = package.loaded["extrasounds"]
+local extrasounds
+pcall(function() extrasounds = require("extrasounds") end)
 
 local costume = {}
 
