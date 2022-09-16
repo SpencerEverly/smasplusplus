@@ -39,12 +39,6 @@ local yoshibrown =      myShop:RegisterItem{NPCid = 992, inEgg = true, price = 7
 
 mushroom.description = "<tremble 1>Mmm.. a tasty mushroom!</tremble>"
 
-local hour = os.date("%H")
-local day = os.date("%d")
-local month = os.date("%m")
-local exacttime = os.date("%X")
-local minute = os.date("%M")
-local second = os.date("%S")
 local stars = SaveData.totalStarCount
 local infobooth1 = textplus.loadFont("littleDialogue/font/smb3-c.ini")
 
@@ -86,6 +80,124 @@ areaNames.sectionNames = {
     [14] = "Building 6: Shop Area",
 }
 
+function Stage0()
+    local layer1 = Layer.get("Stage 0.5 - 4 Stars")
+    local layer2 = Layer.get("Stage 5 - Construction")
+    local layer3 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer4 = Layer.get("Stage 2 and Beyond - Mayor")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+end
+
+function Stage1()
+    local layer1 = Layer.get("Stage 1 - 10 Stars")
+    local layer2 = Layer.get("Stage 5 - Construction")
+    local layer3 = Layer.get("Stage 0 - 0 Stars")
+    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+    layer5:hide(true)
+end
+
+function Stage2()
+    local layer1 = Layer.get("Stage 2 - 16 Stars")
+    local layer2 = Layer.get("Stage 5 - Construction")
+    local layer3 = Layer.get("Stage 0 - 0 Stars")
+    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+    layer5:show(true)
+end
+
+function Stage3()
+    local layer1 = Layer.get("Stage 3 - 22 Stars")
+    local layer2 = Layer.get("Stage 5 - Construction")
+    local layer3 = Layer.get("Stage 0 - 0 Stars")
+    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+    layer5:show(true)
+end
+
+function Stage4()
+    local layer1 = Layer.get("Stage 4 - 28 Stars")
+    local layer2 = Layer.get("Stage 5 - Construction")
+    local layer3 = Layer.get("Stage 0 - 0 Stars")
+    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+    layer5:show(true)
+end
+
+function Stage5()
+    local layer1 = Layer.get("Stage 5 - 32 Stars")
+    local layer2 = Layer.get("Stage 5 - Renovation")
+    local layer3 = Layer.get("Stage 0 - 0 Stars")
+    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
+    local layer6 = Layer.get("Stage 5 - Construct Stage 1")
+    local layer7 = Layer.get("Stage 5 - Construction")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+    layer5:show(true)
+    layer6:show(true)
+    layer7:hide(true)
+end
+
+function Stage6()
+    local layer1 = Layer.get("Stage 6 - 38 Stars")
+    local layer2 = Layer.get("Stage 5 - Renovation")
+    local layer3 = Layer.get("Stage 0 - 0 Stars")
+    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
+    local layer6 = Layer.get("Stage 6 - Construct Stage 2")
+    local layer7 = Layer.get("Stage 5 - Construction")
+    local layer8 = Layer.get("Stage 6 - Yoshi Rooms Unfinished 1")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+    layer5:show(true)
+    layer6:show(true)
+    layer7:hide(true)
+    layer8:show(true)
+end
+
+function Stage7()
+    local layer1 = Layer.get("Stage 7 - 44 Stars")
+    local layer2 = Layer.get("Stage 5 - Renovation")
+    local layer3 = Layer.get("Stage 0 - 0 Stars")
+    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
+    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
+    local layer6 = Layer.get("Stage 6 - Construct Stage 2")
+    local layer7 = Layer.get("Stage 5 - Construction")
+    local layer8 = Layer.get("Stage 7 - Yoshi Rooms Finished")
+    layer1:show(true)
+    layer2:show(true)
+    layer3:hide(true)
+    layer4:hide(true)
+    layer5:show(true)
+    layer6:show(true)
+    layer7:hide(true)
+    layer8:show(true)
+end
+
 function onStart()
     if SaveData.disableX2char == nil then
         SaveData.disableX2char = false
@@ -103,27 +215,29 @@ function onStart()
             p.setCostume(5, nil)
         end
     end
-    Audio.MusicVolume(nil)
-    if stars >= 4 and malcmusic.holiday == false then
-        triggerEvent("Stage0.5")
+    if stars >= 4 and stars <= 9 and malcmusic.holiday == false then
+        Routine.run(Stage0)
     end
-    if stars >= 10 and malcmusic.holiday == false then
-        triggerEvent("Stage1")
+    if stars >= 10 and stars <= 15 and malcmusic.holiday == false then
+        Routine.run(Stage1)
     end
-    if stars >= 16 and malcmusic.holiday == false then
-        triggerEvent("Stage2")
+    if stars >= 16 and stars <= 21 and malcmusic.holiday == false then
+        Routine.run(Stage2)
     end
-    if stars >= 22 and malcmusic.holiday == false then
-        triggerEvent("Stage3")
+    if stars >= 22 and stars <= 27 and malcmusic.holiday == false then
+        Routine.run(Stage3)
     end
-    if stars >= 28 and malcmusic.holiday == false then
-        triggerEvent("Stage4")
+    if stars >= 28 and stars <= 31 and malcmusic.holiday == false then
+        Routine.run(Stage4)
     end
-    if stars >= 32 and malcmusic.holiday == false then
-        triggerEvent("Stage5")
+    if stars >= 32 and stars <= 37 and malcmusic.holiday == false then
+        Routine.run(Stage5)
     end
-    if stars >= 38 and malcmusic.holiday == false then
-        triggerEvent("Stage6")
+    if stars >= 38 and stars <= 43 and malcmusic.holiday == false then
+        Routine.run(Stage6)
+    end
+    if stars >= 44 and malcmusic.holiday == false then
+        Routine.run(Stage7)
     end
     --if stars >= 100 then
     --    triggerEvent("StageGenoside")
@@ -152,16 +266,16 @@ end
 
 function onEvent(eventName)
     if eventName == "SideQuestWarpOpen" then
-        SFX.play(27)
+        Sound.playSFX(27)
     end
     if eventName == "DLCWarpOpen" then
-        SFX.play(27)
+        Sound.playSFX(27)
     end
     if eventName == "ShopOpen2" then
         myShop:open()
     end
     if eventName == "StarList" then
-        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE AT LEAST "..stars.." STARS IN YOUR GAME PROGRESSION.<page>THE STARS YOU HAVE COLLECTED IN THE MANDATORY LEVELS IS "..#SaveData.completeLevels..". THE STARS YOU HAVE COLLECTED IN ALL OTHER LEVELS IS "..#SaveData.completeLevelsOptional..".<page>THE STAR COUNT OF EVERY STAR YOU COLLECTED OVERALL IS "..SaveData.starsgrabbed..".<page>TO FINISH YOUR GAME AND UNLOCK THE TRUE ENDING, YOU'LL NEED TO COLLECT "..(999 - #SaveData.completeLevels).." MORE.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
+        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE AT LEAST "..stars.." STARS IN YOUR GAME PROGRESSION.<page>THE STARS YOU HAVE COLLECTED IN THE MANDATORY LEVELS IS "..#SaveData.completeLevels..". THE STARS YOU HAVE COLLECTED IN ALL OTHER LEVELS IS "..#SaveData.completeLevelsOptional..".<page>THE STAR COUNT OF EVERY STAR YOU COLLECTED OVERALL IS "..SaveData.starsgrabbed..".<page>TO FINISH YOUR GAME AND UNLOCK THE TRUE ENDING, YOU'LL NEED TO COLLECT "..(999 - SaveData.totalStarCount).." MORE.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
     end
     if eventName == "GeneralList" then
         littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE GOT "..SaveData.GameOverCount.." GAME OVERS IN YOUR GAME PROGRESSION.<page>YOU ALSO HAVE RECENTLY WENT IN (number) LEVELS.<page>THE SCORE COUNT IS "..SaveData.totalScoreClassic.." AND THE COIN COUNT IS "..SaveData.totalCoinsClassic..".<page>YOU HAVE ALSO STOMPED ON "..SaveData.goombaStomps.." GOOMBAS, AND "..SaveData.koopaStomps.." KOOPA TROOPAS.<page>THE TOTAL AMOUNT OF COINS COLLECTED OVERALL IS "..SaveData.totalcoins..".<page>OVERALL, YOU HAVE USED "..SaveData.totalmushrooms.." MUSHROOMS, "..SaveData.totalfireflowers.." FIRE FLOWERS, "..SaveData.totalleafs.." SUPER LEAFS, "..SaveData.totaltanookis.." TANOOKI SUITS, "..SaveData.totalhammersuits.." HAMMER SUITS, AND "..SaveData.totaliceflowers.." ICE FLOWERS.<page>YOU ALSO GRABBED "..SaveData.starsgrabbed.." TOTAL STARS REGARDLESS OF COMPLETION OR NOT, USED "..SaveData.starmansused.." STARMANS, "..SaveData.megamushroomssused.." MEGA MUSHROOMS,<page>AND I HOPE YOU'VE HAD A FUN TIME.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
@@ -195,7 +309,7 @@ function onEvent(eventName)
         Defines.player_hasCheated = false
     end
     if eventName == "HourChange" then
-        SFX.play("hour-change.ogg")
+        Sound.playSFX("hour-change.ogg")
     end
 end
 
