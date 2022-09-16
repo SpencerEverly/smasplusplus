@@ -1,11 +1,8 @@
 The following are sounds I will need in cubic form:
 
 - 0up
-- door-reveal
-- hop
 - smb1-exit
 - smb1-world-clear
-- smb2-clear
 - smw-exit-orb
 - wand-moving
 - wand-whoosh
