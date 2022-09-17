@@ -23,11 +23,13 @@ function Screen.height() --Actual height, with resolution support
 end
 
 function Screen.cursorX() --Cursor X position with full resolution support (Used for Steve and cursor.lua)
-    return mem(0x00B2D6BC, FIELD_DFLOAT) + (camera.width - Screen.width())*customCamera.defaultZoom*0.5
+    local zoom = customCamera.defaultZoom + 1 / 2 - 1
+    return mem(0x00B2D6BC, FIELD_DFLOAT) + (Screen.width() - Screen.x())*0.5
 end
 
 function Screen.cursorY() --Cursor Y position with full resolution support (Used for Steve and cursor.lua)
-    return mem(0x00B2D6C4, FIELD_DFLOAT) + (customCamera.screenHeight - Screen.height())*customCamera.defaultZoom*0.5
+    local zoom = customCamera.defaultZoom + 1 / 2 - 1
+    return mem(0x00B2D6C4, FIELD_DFLOAT) + (Screen.height() - Screen.y())*0.5
 end
 
 function Screen.isOnScreen(x,y,width,height) --Checks to see if something is on screen
