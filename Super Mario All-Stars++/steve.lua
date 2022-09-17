@@ -16,6 +16,7 @@ local configFileReader = require("configFileReader")
 local textplus = require("textplus")
 
 local lib3d = require("lib3d")
+local customCamera = require("customCamera")
 
 local steve = {}
 
@@ -182,6 +183,7 @@ local function getClosestObj(objs,x,y)
 end
 
 local function getObjectClickedOn(colliderType,filter,maxDistance)
+    local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
     local mouseX = mem(MOUSE_X,FIELD_DFLOAT)+camera.x
     local mouseY = mem(MOUSE_Y,FIELD_DFLOAT)+camera.y
 

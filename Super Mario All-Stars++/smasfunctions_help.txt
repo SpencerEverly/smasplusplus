@@ -210,6 +210,22 @@ specified bounds. You can set a speed for how long the movement lasts,
 and you can set which direction it should go. Defaults are 'left' and
 'right', for now.
 
+CAMERA FUNCTIONS
+- Screen.x(): Returns the X position of the camera, also includes
+resolution support.
+- Screen.y(): Returns the Y position of the camera, also includes
+resolution support. 
+- Screen.width(): Returns the width of the camera, also includes
+resolution support.
+- Screen.height(): Returns the height of the camera, also includes
+resolution support.
+- Screen.cursorX(): Returns the X position of the cursor, also
+includes resolution support (WIP).
+- Screen.cursorY(): Returns the Y position of the cursor, also
+includes resolution support (WIP).
+- Screen.isOnScreen(x,y,width,height): With the arguments of an
+X, Y, width, and height, checks to see if something is on screen.
+
 --(SEE MOD-ONLY)--
 
 FILE MANAGEMENT

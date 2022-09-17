@@ -1,5 +1,7 @@
 local cursor = {}
 
+local customCamera = require("customCamera")
+
 ----------------------
 -- cursor.lua v0.1 BETA
 -- By SetaYoshi
@@ -89,6 +91,7 @@ end
 
 
 function cursor.update()
+    local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
     -- Gather data
     local left_state = mem(0x00B2D6CC, FIELD_BOOL)
     local right_state = mem(0x00B2D6CE, FIELD_BOOL)

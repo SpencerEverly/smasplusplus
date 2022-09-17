@@ -13,6 +13,7 @@ _G.Time = require("scripts/functions/time")
 _G.Playur = require("scripts/functions/player")
 _G.Npc = require("scripts/functions/npc")
 _G.Misk = require("scripts/functions/misc")
+_G.Screen = require("scripts/functions/camera")
 
 function smasfunctions.help()
     Misc.richDialog("SMASFunctions Help Dialog Box", File.readFile("smasfunctions_help.txt"), true)
