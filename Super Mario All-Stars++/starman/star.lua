@@ -61,7 +61,7 @@ local function startMusic()
     if(starman.active() and starSoundObject ~= nil) then
         return
     else
-    starSoundObject = SFX.play(starman.sfxFile, 0.65, 0)
+    starSoundObject = SFX.play(starman.sfxFile, Audio.MusicVolume() / 100, 0)
         if(musicvolcache == nil) then
             musicvolcache = Audio.MusicVolume();
             if smasbooleans.musicMuted then

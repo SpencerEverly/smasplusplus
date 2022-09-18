@@ -580,7 +580,7 @@ function globalgenerals.onTick()
             if not p.hasStarman and not p.isMega then
                 Sound.muteMusic(-1)
                 smasbooleans.musicMuted = true
-                pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, 0.6, 0)
+                pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, Audio.MusicVolume() / 100, 0)
             end
             smasbooleans.pSwitchActive = true
         end

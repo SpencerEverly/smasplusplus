@@ -484,7 +484,7 @@ local function UpdateMegaState()
                         Sound.muteMusic(-1)
                         smasbooleans.musicMuted = true
                     end
-                    soundObject = SFX.play(mega2.sfxFile, 0.65, 0)
+                    soundObject = SFX.play(mega2.sfxFile, Audio.MusicVolume() / 100, 0)
                 end
         end
         --Delay turning off invincibility for a frame to allow resizing to happen, in case we're intersecting lava or something

@@ -1,1 +1,1 @@
-widescreen
+fullscreen
