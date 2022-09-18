@@ -586,7 +586,7 @@ function smascharacterinfo.onTickEnd()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_starwars.ogg"
     end
     if currentCostume == "MOTHERBRAINRINKA" then
         littleDialogue.characterNames[4] = "Mother Brain Rinka"
