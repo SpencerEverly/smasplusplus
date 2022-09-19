@@ -478,6 +478,10 @@ local function isShooting(p)
         and p.holdingNPC == nil
         and not p.climbing
         and not p.keys.down
+        and (
+            p.mount == MOUNT_NONE
+            or p.mount == MOUNT_BOOT
+        )
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
         and p:mem(0x172, FIELD_BOOL)
     )
@@ -491,6 +495,10 @@ local function isShootingLink(p)
         and p.forcedState == 0
         and p.holdingNPC == nil
         and not p.climbing
+        and (
+            p.mount == MOUNT_NONE
+            or p.mount == MOUNT_BOOT
+        )
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
         and p:mem(0x172, FIELD_BOOL)
     )
