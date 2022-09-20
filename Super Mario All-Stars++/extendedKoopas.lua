@@ -36,7 +36,7 @@ local function launchShell(v,culprit,upsideDown)
     else
         v.direction = -v.direction
     end
-
+    
     v.speedX = 1 * v.direction
     v.speedY = -8
 

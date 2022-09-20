@@ -75,6 +75,7 @@ customCamera.lastSection = nil
 customCamera.lastWarpCooldown = 0
 
 customCamera.maxPriority = 0
+customCamera.maxHudPriority = -4.9999
 
 customCamera.debug = false
 

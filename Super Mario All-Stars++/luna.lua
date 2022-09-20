@@ -69,6 +69,7 @@ _G.darkness = require("darknessa")
 _G.events = require("editorevents_mod")
 _G.extraNPCProperties = require("extraNPCProperties")
 _G.cursor = require("cursor")
+_G.Timer = require("timer-mod")
 _G.lazyprint = require("lazyprint")
 
 --Register some custom global event handlers...

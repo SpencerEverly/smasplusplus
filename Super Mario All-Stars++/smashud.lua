@@ -230,7 +230,7 @@ function smashud.onInitAPI()
     pm = require("playerManager")
     if not isOverworld then
         starcoin = require("npcs/ai/starcoin")
-        timer = require("timer")
+        timer = require("timer-mod")
     end
 end
 

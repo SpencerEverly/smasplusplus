@@ -1,7 +1,6 @@
 local screenFlip = {}
 
-local handycam = require("handycam")
-local cam1 = handycam[1]
+local customCamera = require("customCamera")
 
 local flip = 0
 local fliptimer = 0
@@ -10,10 +9,10 @@ local flipwarningopacity = 0
 
 function screenFlip.onTick()
     if screenFlip.enabled then
-        cam1.rotation = flip
+        customCamera.defaultRotation = flip
         fliptimer = fliptimer + 1
         if screenFlip.warnBeforeFlip then
-            if fliptimer == (screenFlip.flipDelay - 64) then --Warm before flipping
+            if fliptimer == (screenFlip.flipDelay - 64) then --Warn before flipping
                 flipwarningopacity = 0.65
                 SFX.play("screenFlip/light.wav")
             elseif fliptimer >= (screenFlip.flipDelay - 64) then
@@ -56,7 +55,7 @@ function screenFlip.onTick()
         
         
     elseif screenFlip.enabledfourway then
-        cam1.rotation = flip
+        customCamera.defaultRotation = flip
         fliptimer = fliptimer + 1
         if screenFlip.warnBeforeFlip then
             if fliptimer == (screenFlip.flipDelay - 64) then --Warm before flipping
@@ -143,7 +142,7 @@ function screenFlip.onTick()
             fliptimer = 0
         end
     else
-        cam1.rotation = 0
+        customCamera.defaultRotation = 0
         flip = 0
         fliptimer = 0
         flipphase = 0
