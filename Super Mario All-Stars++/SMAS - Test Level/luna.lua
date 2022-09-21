@@ -6,7 +6,6 @@ local pauseplus = require("pauseplus")
 local debugbox = require("debugbox")
 local extrasounds = require("extrasounds")
 local smashudsystem = require("smashudsystem")
-local comboSounds = require("comboSounds")
 
 littleDialogue.defaultStyleName = "smbx13"
 smasbooleans.enableInGameSpring = true

@@ -733,6 +733,9 @@ function globalgenerals.onDraw()
     if not smasbooleans.targetPlayers and not smasbooleans.overrideTargets then
         customCamera.targets = {}
     end
+    if SaveData._basegame.hud.score > 9999900 then
+        SaveData._basegame.hud.score = 9990000
+    end
     if SaveData.resolution == "fullscreen" then
         customCamera.defaultScreenWidth = 800
         customCamera.defaultScreenHeight = 600

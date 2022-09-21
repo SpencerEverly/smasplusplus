@@ -9,7 +9,6 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local smashudsystem = require("smashudsystem")
-local comboSounds = require("comboSounds")
 
 extrasounds.active = false
 

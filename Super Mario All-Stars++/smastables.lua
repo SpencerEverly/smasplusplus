@@ -995,6 +995,13 @@ smastables.soundNamesInOrder = {
     "shell-grab", --156
     "ice-melt", --157
     "player-jump2", --158
+    "ground-pound", --159
+    "ground-pound-hit", --160
+    "zelda-fireball", --161
+    "zelda-iceball", --162
+    "pballoon", --163
+    "peach-cry", --164
+    "timeout", --165
 }
 
 smastables.keyboardMap = {

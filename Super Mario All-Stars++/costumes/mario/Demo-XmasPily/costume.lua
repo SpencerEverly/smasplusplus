@@ -1169,6 +1169,9 @@ function costume.onInit(playerObj, pDat)
     Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/bubble.ogg")
     extrasounds.sound.sfx[92] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/vine-sprout.ogg"))
     extrasounds.sound.sfx[93] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/iceball.ogg"))
+    extrasounds.sound.sfx[96] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/2up.ogg")) --2UP
+    extrasounds.sound.sfx[97] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/3up.ogg")) --3UP
+    extrasounds.sound.sfx[98] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Demo-XmasPily/5up.ogg")) --5UP
     Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_NONE)
     coyotetime = require("coyotetime");
     ppp = require("playerphysicspatch");

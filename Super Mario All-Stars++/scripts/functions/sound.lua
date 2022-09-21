@@ -8,6 +8,19 @@ function Sound.onInitAPI()
     registerEvent(Sound,"onDraw")
 end
 
+Sound.resolvePaths = {
+    Misc.levelPath(),
+    Misc.episodePath(),
+    getSMBXPath().."\\scripts\\",
+    getSMBXPath().."\\",
+    Misc.episodePath().."\\_OST\\",
+    Misc.episodePath().."\\_OST\\_Sound Effects\\",
+    Misc.episodePath().."\\costumes\\",
+    Misc.episodePath().."\\scripts\\",
+    Misc.episodePath().."\\sound\\",
+    Misc.episodePath().."\\___MainUserDirectory\\",
+}
+
 function Sound.openSFX(name) --Opening SFXs
     return SFX.open(name)
         or SFX.open("_OST/" .. name)
@@ -67,18 +80,78 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
     EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
 end
 
+function Sound.resolveSoundFile(path) --Resolves a sound file, with a failsafe.
+    local validAudioFiles = {".ogg", ".mp3", ".wav", ".voc", ".flac", ".spc"}
+	
+	local validFilesMap = {};
+	for _,v in ipairs(validAudioFiles) do
+		validFilesMap[v] = true;
+	end
+    local p,e = string.match(string.lower(path), "^(.+)(%..+)$")
+    local t = {}
+    local idx = 1
+    local typeslist = validAudioFiles
+    if e and validFilesMap[e] then
+        --Re-arrange type list to prioritise type that was provided to the resolve function
+        if e ~= validAudioFiles[1] then
+            typeslist = { e }
+            for _,v in ipairs(validAudioFiles) do
+                if v ~= e then
+                    table.insert(typeslist, v)
+                end
+            end
+        end
+        path = p
+    end
+    for _,typ in ipairs(typeslist) do
+        t[idx] = path..typ
+        t[idx+#typeslist] = "sound/"..path..typ
+        t[idx+2*#typeslist] = "sound/extended/"..path..typ
+        idx = idx+1
+    end
+    
+    local t = {path}
+	
+	--If passed a complete path, just return it as-is (as long as the file exists)
+	for _,path in ipairs(t) do
+		if string.match(v, "^%a:[\\/]") and io.exists(path) then
+			return path
+        else
+            return Misc.episodePath().."sound/player-jump"
+		end
+	end
+
+	for _,p in ipairs(Sound.resolvePaths) do
+		for _,path in ipairs(t) do
+			if io.exists(p..path) then
+				return p..path
+			else
+                return Misc.episodePath().."sound/player-jump"
+            end
+		end
+	end
+	return nil
+end
+
 function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being worn.
     local costumesounddir
-    if player:getCostume() == nil then
-        costumesounddir = Misc.resolveSoundFile(name)
+    if SaveData.currentCostume == "N/A" then
+        costumesounddir = Sound.resolveSoundFile(name)
     else
-        costumesounddir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
+        costumesounddir = Sound.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
     end
     if costumesounddir == nil then
-        --Sound could not be found
-        return nil
+        for k,v in ipairs(smastables.soundNamesInOrder) do
+            if smastables.extrasoundsNumbersInOrder[k] then
+                --Sound could not be found
+                costumesounddir = Sound.resolveSoundFile(name)
+            else
+                return nil
+            end
+        end
+    else
+        return Audio.SfxOpen(costumesounddir)
     end
-    return Audio.SfxOpen(costumesounddir)
 end
 
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.

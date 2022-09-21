@@ -9,13 +9,13 @@ local comboSounds = {}
 local SCORE_ADDR = 0x00B2C8E4
 local LIVES_ADDR = 0x00B2C5AC
 
-comboSounds.kick1 = extrasounds.sound.sfx106
-comboSounds.kick2 = extrasounds.sound.sfx107
-comboSounds.kick3 = extrasounds.sound.sfx108
-comboSounds.kick4 = extrasounds.sound.sfx109
-comboSounds.kick5 = extrasounds.sound.sfx110
-comboSounds.kick6 = extrasounds.sound.sfx111
-comboSounds.kick7 = extrasounds.sound.sfx112
+comboSounds.kick1 = extrasounds.sound.sfx[106]
+comboSounds.kick2 = extrasounds.sound.sfx[107]
+comboSounds.kick3 = extrasounds.sound.sfx[108]
+comboSounds.kick4 = extrasounds.sound.sfx[109]
+comboSounds.kick5 = extrasounds.sound.sfx[110]
+comboSounds.kick6 = extrasounds.sound.sfx[111]
+comboSounds.kick7 = extrasounds.sound.sfx[112]
 
 comboSounds.sounds = {
     extrasounds.sound.sfx[9],
