@@ -1,8 +1,0 @@
-The following are sounds I will need in cubic form:
-
-- smb1-exit
-- smb1-world-clear
-- wand-moving
-- wand-whoosh
-
-Some sounds were excluded (i.e. the going underground tunes)
