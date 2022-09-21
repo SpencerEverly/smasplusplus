@@ -473,6 +473,10 @@ end
 local function isShooting(p)
     return (p:mem(0x160, FIELD_WORD) == 0
         and Level.endState() == 0
+        and (
+            not GameData.winStateActive
+            or GameData.winStateActive == nil
+        )
         and p.deathTimer == 0
         and p.forcedState == 0
         and p.holdingNPC == nil
@@ -491,6 +495,10 @@ local function isShootingLink(p)
     return (p:mem(0x160, FIELD_WORD) == 0
         and p:mem(0x162, FIELD_WORD) == 0
         and Level.endState() == 0
+        and (
+            not GameData.winStateActive
+            or GameData.winStateActive == nil
+        )
         and p.deathTimer == 0
         and p.forcedState == 0
         and p.holdingNPC == nil
