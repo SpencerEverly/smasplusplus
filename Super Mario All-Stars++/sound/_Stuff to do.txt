@@ -1,6 +1,5 @@
 The following are sounds I will need in cubic form:
 
-- 0up
 - smb1-exit
 - smb1-world-clear
 - wand-moving
