@@ -42,7 +42,7 @@ yoshi.onTickEnd = function(v)
         end
         
         v:mem(0x64, FIELD_BOOL, true)
-        v:mem(0x68,    FIELD_BOOL, true)
+        --v:mem(0x68, FIELD_BOOL, true)
     end
 end
 
