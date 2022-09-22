@@ -18,8 +18,8 @@ comboSounds.kick6 = extrasounds.sound.sfx[111]
 comboSounds.kick7 = extrasounds.sound.sfx[112]
 
 comboSounds.sounds = {
-    extrasounds.sound.sfx[9],
-    extrasounds.sound.sfx[9],
+    9,
+    9,
     extrasounds.sound.sfx[106], --Combo sounds 1-7, found under extrasounds
     extrasounds.sound.sfx[107],
     extrasounds.sound.sfx[108],
@@ -61,7 +61,7 @@ local function getCombo(oldScore,oldLives)
 end
 
 
-local harmTypesWithoutComboSounds = table.map{HARM_TYPE_PROJECTILE_USED,HARM_TYPE_LAVA,HARM_TYPE_SPINJUMP,HARM_TYPE_VANISH,HARM_TYPE_SWORD}
+local harmTypesWithoutComboSounds = table.map{HARM_TYPE_JUMP,HARM_TYPE_PROJECTILE_USED,HARM_TYPE_LAVA,HARM_TYPE_SPINJUMP,HARM_TYPE_VANISH,HARM_TYPE_SWORD}
 
 local hurtSounds = {2,9}
 

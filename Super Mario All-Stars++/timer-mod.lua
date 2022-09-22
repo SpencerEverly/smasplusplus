@@ -150,12 +150,7 @@ function timer.onTick()
 	
 	if timer_deathTimer <= timer.hurryTime * second and not timer_hurry then
 		SFX.play(timer.audio_hurryup)
-        Sound.muteMusic(-1)
 		timer_hurry = true
-	end
-    if timer_deathTimer <= timer.hurryTimeToUnmute * second and not timer_hurry_unmutemusic then
-        Sound.restoreMusic(-1)
-		timer_hurry_unmutemusic = true
 	end
 end
 
