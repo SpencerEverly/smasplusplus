@@ -184,8 +184,8 @@ end
 
 local function getObjectClickedOn(colliderType,filter,maxDistance)
     local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-    local mouseX = mem(MOUSE_X,FIELD_DFLOAT)+camera.x
-    local mouseY = mem(MOUSE_Y,FIELD_DFLOAT)+camera.y
+    local mouseX = Screen.cursorX()+camera.x
+    local mouseY = Screen.cursorY()+camera.y
 
     colBox.width = 8
     colBox.height = 8
