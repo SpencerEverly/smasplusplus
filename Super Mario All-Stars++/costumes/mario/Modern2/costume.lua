@@ -132,6 +132,8 @@ function costume.onInit(playerObj)
     Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Modern2/bubble.ogg")
     extrasounds.sound.sfx[92] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/sprout-vine.ogg")) --Vine sprout
     extrasounds.sound.sfx[93] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/iceball.ogg")) --Iceball
+    extrasounds.sound.sfx[94] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/yi-freeze.ogg")) --Ice Freezing
+    extrasounds.sound.sfx[95] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/yi-icebreak.ogg")) --Ice Breaking
     extrasounds.sound.sfx[96] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/2up.ogg")) --2UP
     extrasounds.sound.sfx[97] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/3up.ogg")) --3UP
     extrasounds.sound.sfx[98] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/5up.ogg")) --5UP
@@ -142,6 +144,7 @@ function costume.onInit(playerObj)
     extrasounds.sound.sfx[103] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/cherry.ogg")) --Cherry
     extrasounds.sound.sfx[104] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/explode.ogg")) --SMB2 Explosion
     extrasounds.sound.sfx[105] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/hammerthrow.ogg")) --Player hammer
+    extrasounds.sound.sfx[118] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/stopwatch.ogg")) --Stopwatch
     extrasounds.sound.sfx[126] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/smb2-hitenemy.ogg")) --SMB2 Hit Enemy
     extrasounds.sound.sfx[136] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/smb1-exit.ogg")) --SMB1 Exit
     extrasounds.sound.sfx[155] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/fireball-hit.ogg")) --Fireball hit
