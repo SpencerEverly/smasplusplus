@@ -1,6 +1,7 @@
 --smasblocksystem.lua v1.0
 --By Spencer Everly
 --Makes the coin hit system more accurate to Mario games, and also adds the not-known-as-much invisible 1UP block system from SMB1
+--Note that this only works with 1 block each. In the future hopefully this'll support multiple blocks, but for now this'll have to do.
 
 local smasblocksystem = {}
 
@@ -16,14 +17,15 @@ smasblocksystem.invisibleCoinsToCollect = {
     [7] = 35,
 }
 --Then you'll get an invisible 1UP block to collect at your disposal.
---If you don't collect the require coins in those Athletic levels, then you basically don't get the block hittable to collect.
---Warp zones 
+--If you don't collect the required coins in those Athletic levels, then you basically don't get the block hittable to collect.
+--Depending on if you got the 1UP from 1-1 yet or not and you use the warp zone on 1-2, you can collect the hidden 1UP from 2-1, 3-1, or 4-1 if you haven't collected the one from 1-1.
+--That's why on speedruns, the 4-1 block is not hidden, due to speedrunners skipping the 1UP block during their runs.
 
 smasblocksystem.countDownMarker = 11 --Set this to any number to set the coin block timer when hitting multi-coin blocks.
 smasblocksystem.showInvisible1UPBlock = true --Set it to true to show the invisible 1UP block, from SMB1 -1 levels. Only set to true if certain coin count checks are met.
 smasblocksystem.invisibleCoinsCollected = 0 --This only increments when coins are collected in -3 levels, and will be reset on onExit
 smasblocksystem.debug = false --Activates debug messages shown on the screen
-smasblocksystem.frameRuleCounter = 20 --Adds a frame rule system
+smasblocksystem.frameRuleCounter = 20 --Adds a frame rule system, similar to SMB1's system
 
 if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
@@ -46,10 +48,10 @@ end
 
 function smasblocksystem.onStart()
     if table.icontains(smastables.__smb1Dash1Levels,Level.filename()) then
-        if not SaveData.SMB1Invisible1UPBlockMet then
+        if not SaveData.SMB1Invisible1UPBlockMet then --If already collected the block, set the layer with the invisible block to hide it.
             local lifeBlock = Layer.get("Hidden 1UP Block")
             lifeBlock:hide(true)
-        else
+        else --If true, then show it
             local lifeBlock = Layer.get("Hidden 1UP Block")
             lifeBlock:show(true)
         end
@@ -58,12 +60,12 @@ end
 
 function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
     --Life detection, for the SMB1 system
-    local hidden1UPLayer = Layer.get("Hidden 1UP Block")
+    local hidden1UPLayer = Layer.get("Hidden 1UP Block") --The hidden block layer.
     if SaveData.SMB1Invisible1UPBlockMet then
-        if table.icontains(smastables.__smb1Dash1Levels,Level.filename()) then
+        if table.icontains(smastables.__smb1Dash1Levels,Level.filename()) then --If we're on any -1 level...
             for _,p in ipairs(Player.get()) do --Get all players in case
-                if block.layerObj == hidden1UPLayer and block.contentID == 1186 then --SMB1 1UP
-                    SaveData.SMB1Invisible1UPBlockMet = false --Reset this to false, in case
+                if block.layerObj == hidden1UPLayer and block.contentID == 1186 then --If we hit the block layer and the ID is the 1UP itself...
+                    SaveData.SMB1Invisible1UPBlockMet = false --Set this to false.
                 end
             end
         end
@@ -121,21 +123,21 @@ function smasblocksystem.onTick()
     
     --Coin block timer
     if activateblockcountdown then
-        if smasblocksystem.frameRuleCounter == 20 then
+        if smasblocksystem.frameRuleCounter == 20 then --If 20, then subtract the marker
             smasblocksystem.countDownMarker = smasblocksystem.countDownMarker - 1
             subtractblockcontentid = true
-        else
+        else --Else just don't
             subtractblockcontentid = false
         end
         if subtractblockcontentid then
             for i=#blocklistwithcoins, 1, -1 do
                 local v = blocklistwithcoins[i]
                 if v.isValid and smasblocksystem.countDownMarker > 0 then
-                    --v.contentID = v.contentID - 1
+                    --This is here just in case
                 else
-                    v.contentID = 1
-                    smasblocksystem.countDownMarker = 11
-                    table.remove(blocklistwithcoins, i)
+                    v.contentID = 1 --Set the block to only one coin
+                    smasblocksystem.countDownMarker = 11 --Reset the counter
+                    table.remove(blocklistwithcoins, i) --Remove the block from the table
                 end
             end
         end
@@ -143,10 +145,6 @@ function smasblocksystem.onTick()
     if not activateblockcountdown then
         subtractblockcontentid = false
     end
-end
-
-function smasblocksystem.onExit()
-    smasblocksystem.invisibleCoinsCollected = 0
 end
 
 return smasblocksystem
