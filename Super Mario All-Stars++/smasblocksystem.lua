@@ -19,9 +19,11 @@ smasblocksystem.invisibleCoinsToCollect = {
 --If you don't collect the require coins in those Athletic levels, then you basically don't get the block hittable to collect.
 --Warp zones 
 
-smasblocksystem.countDownMarker = 50 --Set this to any number that you want it to subtract coins from.
+smasblocksystem.countDownMarker = 11 --Set this to any number to set the coin block timer when hitting multi-coin blocks.
 smasblocksystem.showInvisible1UPBlock = true --Set it to true to show the invisible 1UP block, from SMB1 -1 levels. Only set to true if certain coin count checks are met.
 smasblocksystem.invisibleCoinsCollected = 0 --This only increments when coins are collected in -3 levels, and will be reset on onExit
+smasblocksystem.debug = false --Activates debug messages shown on the screen
+smasblocksystem.frameRuleCounter = 20 --Adds a frame rule system
 
 if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
@@ -38,6 +40,7 @@ function smasblocksystem.onInitAPI()
     registerEvent(smasblocksystem,"onPostNPCKill")
     registerEvent(smasblocksystem,"onPostBlockHit")
     registerEvent(smasblocksystem,"onTick")
+    registerEvent(smasblocksystem,"onDraw")
     registerEvent(smasblocksystem,"onExit")
 end
 
@@ -89,7 +92,9 @@ function smasblocksystem.onPostNPCKill(npc, harmType)
                 smasblocksystem.invisibleCoinsCollected = smasblocksystem.invisibleCoinsCollected + 1 --Collect one
                 local levelIncrementation = table.ifind(smastables.__smb1Dash3LevelsNumbered, Level.filename())
                 if smasblocksystem.invisibleCoinsCollected == smasblocksystem.invisibleCoinsToCollect[levelIncrementation] then --If equal to the one found in the table, set the goal-met to true
-                    --Sound.playSFX(1001) --Debug purposes
+                    if smasblocksystem.debug then
+                        Sound.playSFX(1001) --Debug purposes
+                    end
                     SaveData.SMB1Invisible1UPBlockMet = true
                 elseif smasblocksystem.invisibleCoinsCollected > smasblocksystem.invisibleCoinsToCollect[levelIncrementation] then --Else if any higher, don't set it
                     SaveData.SMB1Invisible1UPBlockMet = false
@@ -100,26 +105,36 @@ function smasblocksystem.onPostNPCKill(npc, harmType)
 end
 
 function smasblocksystem.onTick()
-    --Text.print(SaveData.SMB1Invisible1UPBlockMet, 100, 100) --Debug purposes
+    if smasblocksystem.debug then
+        Text.printWP(SaveData.SMB1Invisible1UPBlockMet, 100, 100, 0) --Debug purposes
+        Text.printWP(smasblocksystem.frameRuleCounter, 100, 120, 0)
+        Text.printWP(smasblocksystem.countDownMarker, 100, 140, 0)
+    end
+    
+    smasblocksystem.frameRuleCounter = smasblocksystem.frameRuleCounter - 1
+    if smasblocksystem.frameRuleCounter <= 0 then
+        smasblocksystem.frameRuleCounter = 20
+    end
     
     
     
     
-    
-    --Block countdown
+    --Coin block timer
     if activateblockcountdown then
-        blockcountdown = blockcountdown + 1
-        if blockcountdown % smasblocksystem.countDownMarker == smasblocksystem.countDownMarker - 1 then
+        if smasblocksystem.frameRuleCounter == 20 then
+            smasblocksystem.countDownMarker = smasblocksystem.countDownMarker - 1
             subtractblockcontentid = true
-        elseif blockcountdown % smasblocksystem.countDownMarker == 0 then
+        else
             subtractblockcontentid = false
         end
         if subtractblockcontentid then
             for i=#blocklistwithcoins, 1, -1 do
                 local v = blocklistwithcoins[i]
-                if v.isValid and v.contentID > 1 and v.contentID < 100 then
-                    v.contentID = v.contentID - 1
+                if v.isValid and smasblocksystem.countDownMarker > 0 then
+                    --v.contentID = v.contentID - 1
                 else
+                    v.contentID = 1
+                    smasblocksystem.countDownMarker = 11
                     table.remove(blocklistwithcoins, i)
                 end
             end
