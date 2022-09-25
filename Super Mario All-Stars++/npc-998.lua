@@ -172,8 +172,7 @@ function customNPC.onTickNPC(v)
                         end
                     end
                 end
-                SFX.play(extrasounds.sound.sfx[136])
-                SFX.play(58)
+                SFX.play(52)
             end
         elseif data.state == 2 then
             GameData.stopStarman = false
@@ -229,7 +228,7 @@ function customNPC.onTickNPC(v)
                 SFX.play(extrasounds.sound.sfx[114], 1, 1, 2500)
             end
             
-            if data.tick > 65 * 3.5 then
+            if data.tick > 65 * 2 then
                 smasbooleans.musicMuted = false
                 GameData.winStateActive = false
                 if GameData.rushModeActive == false or GameData.rushModeActive == nil then

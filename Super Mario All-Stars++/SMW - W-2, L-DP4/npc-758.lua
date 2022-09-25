@@ -76,7 +76,7 @@ npcManager.registerDefines(npcID, {NPC.HITTABLE})
 npcManager.registerHarmTypes(npcID,
 	{
 		--HARM_TYPE_JUMP,
-		--HARM_TYPE_FROMBELOW,
+		HARM_TYPE_FROMBELOW,
 		--HARM_TYPE_NPC,
 		--HARM_TYPE_PROJECTILE_USED,
 		--HARM_TYPE_LAVA,
@@ -108,7 +108,17 @@ function HbPlatform.onInitAPI()
 	npcManager.registerEvent(npcID, HbPlatform, "onTickNPC")
 	--npcManager.registerEvent(npcID, HbPlatform, "onTickEndNPC")
 	--npcManager.registerEvent(npcID, HbPlatform, "onDrawNPC")
-	--registerEvent(HbPlatform, "onNPCKill")
+	registerEvent(HbPlatform, "onNPCHarm")
+end
+
+function HbPlatform.onNPCHarm(eventToken, npc, harmType)
+    if npc.id == npcID then
+        if harmType == HARM_TYPE_FROMBELOW then
+            for k,v in NPC.iterateIntersecting(npc.x, npc.y - 32, npc.x + 32, npc.y) do
+                v:kill(HARM_TYPE_FROMBELOW)
+            end
+        end
+    end
 end
 
 function HbPlatform.onTickNPC(v)
