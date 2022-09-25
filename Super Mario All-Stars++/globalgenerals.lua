@@ -64,6 +64,10 @@ end
 if SaveData.WSMBAOriginalGraphicsActivated == nil then
     SaveData.WSMBAOriginalGraphicsActivated = false
 end
+if SaveData.SMA1ModeActivated == nil then
+    SaveData.SMA1ModeActivated = false
+end
+
 if SaveData.framerateEnabled == nil then
     SaveData.framerateEnabled = false
 end

@@ -161,6 +161,23 @@ local function wsmbaoriginalgraphicsoggle()
     end
 end
 
+local function sma1ModeToggle()
+    if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+        pauseplus.canControlMenu = false
+        Sound.playSFX(1001)
+        startFadeOut()
+        Routine.wait(1, true)
+        Misc.unpause()
+        SaveData.SMA1ModeActivated = not SaveData.SMA1ModeActivated
+        exitFadeActive = false
+        exitFadeActiveDone = true
+        Level.load(Level.fileName())
+    else
+        Sound.playSFX(1001)
+        SaveData.SMA1ModeActivated = not SaveData.SMA1ModeActivated
+    end
+end
+
 local function changeresolution()
     Sound.playSFX("resolution-set.ogg")
     screenModes = pauseplus.getSelectionValue("resolutionsettings","Switch Resolution")
@@ -1612,6 +1629,7 @@ function pausemenu2.onStart()
                 pauseplus.createOption("miscsettings",{text = "Enable SMB1 Hard Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable SMB1 Hard Mode. This will only apply to SMB1 levels.", action = function() smb1hardmodetoggle() end})
                 pauseplus.createOption("miscsettings",{text = "Enable All Night Nippon Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable the All Night Nippon Mode. This will only apply to SMB1 and SMBLL levels.", action = function() smb1allnightnipponoggle() end})
                 pauseplus.createOption("miscsettings",{text = "Enable Original WSMBA Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable the original Where SMB Attacks mode. This will only apply to WSMBA levels.", action = function() wsmbaoriginalgraphicsoggle() end})
+                pauseplus.createOption("miscsettings",{text = "Toggle SMA1 Mode",description = "Toggle the SMA1 Mode state. This will switch level designs from SMB2/SMAS to SMA1 and back. If you're on any SMB2 level, THIS WILL RESTART THE LEVEL!",pauseplus.save,closeMenu = true, actions = {function() Routine.run(sma1ModeToggle) end}})
                 
                 --Sound Settings
                 pauseplus.createOption("soundsettings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})

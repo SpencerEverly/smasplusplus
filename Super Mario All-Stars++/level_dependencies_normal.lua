@@ -65,7 +65,7 @@ end
 
 local smb1buzzyswitch = false
 
-function hardModeStuff()
+function SMB1HardModeToggle()
     local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
     local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
     if table.icontains(smastables.__smb1Levels,Level.filename()) == true then
@@ -73,8 +73,7 @@ function hardModeStuff()
         if SaveData.SMB1HardModeActivated then
             SMB1EasyModeLayer:hide(true)
             SMB1HardModeLayer:show(true)
-        end
-        if not SaveData.SMB1HardModeActivated then
+        else
             SMB1EasyModeLayer:show(true)
             SMB1HardModeLayer:hide(true)
         end
@@ -82,8 +81,7 @@ function hardModeStuff()
         if SaveData.SMB1HardModeActivated then
             SMB1EasyModeLayer:hide(true)
             SMB1HardModeLayer:show(true)
-        end
-        if not SaveData.SMB1HardModeActivated then
+        else
             SMB1EasyModeLayer:show(true)
             SMB1HardModeLayer:hide(true)
         end
@@ -91,11 +89,22 @@ function hardModeStuff()
         if SaveData.SMB1HardModeActivated then
             SMB1EasyModeLayer:hide(true)
             SMB1HardModeLayer:show(true)
-        end
-        if not SaveData.SMB1HardModeActivated then
+        else
             SMB1EasyModeLayer:show(true)
             SMB1HardModeLayer:hide(true)
         end
+    end
+end
+
+function SMA1ModeToggle()
+    --local SMA1ModeLayer = Layer.get("SMA1 Mode")
+    --local SMB2ModeLayer = Layer.get("SMB2 Mode")
+    if SaveData.SMA1ModeActivated then
+        --SMB2ModeLayer:hide(true)
+        --SMA1ModeLayer:show(true)
+    else
+        --SMB2ModeLayer:show(true)
+        --SMA1ModeLayer:hide(true)
     end
 end
 
@@ -112,7 +121,9 @@ function dependencies.onStart()
                 end
             end
         end
-        Routine.run(hardModeStuff)
+        Routine.run(SMB1HardModeToggle)
+    end
+    if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
         
     end
     
