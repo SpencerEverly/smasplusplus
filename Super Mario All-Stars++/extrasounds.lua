@@ -609,7 +609,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             
             --**JUMPING**
-            if p.deathTimer == 0 then
+            if p.deathTimer == 0 and (not GameData.winStateActive or GameData.winStateActive == nil) then
                 if not isPlayerUnderwater(p) then
                     if p:isOnGround() or p:isClimbing() or isInQuicksand(p) then
                         if (p:mem(0x11E, FIELD_BOOL) and p.keys.jump == KEYS_PRESSED) then
@@ -687,7 +687,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**SPINJUMPING**
             if normalCharacters[p.character] then
-                if p:isOnGround() and not p.keys.down and p.mount == 0 then --If on the ground, not holding down, and not on a mount...
+                if p:isOnGround() and not p.keys.down and p.mount == 0 and (not GameData.winStateActive or GameData.winStateActive == nil) then --If on the ground, not holding down, and not on a mount...
                     if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
                         if p:mem(0x50, FIELD_BOOL) == false then
                             if extrasounds.enableSpinjumpingSFX then
