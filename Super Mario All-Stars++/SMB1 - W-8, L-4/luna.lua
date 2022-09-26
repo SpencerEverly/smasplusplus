@@ -24,7 +24,7 @@ function onEvent(eventName)
     if eventName == ("Pigeon Cutscene") then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                furyinventory.activated = false
+                smasbooleans.toggleOffInventory = true
             end
         end
         pauseplus.canPause = false
@@ -35,7 +35,7 @@ function onEvent(eventName)
     if eventName == ("Pigeon Cutscene 5") then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                furyinventory.activated = true
+                smasbooleans.toggleOffInventory = false
             end
         end
         pauseplus.canPause = true
@@ -48,7 +48,7 @@ function onEvent(eventName)
         Sound.playSFX("is-the-pool-clean.ogg")
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                furyinventory.activated = false
+                smasbooleans.toggleOffInventory = true
             end
         end
         pauseplus.canPause = false
@@ -60,7 +60,7 @@ function onEvent(eventName)
     if eventName == ("Pigeon Cutscene Sequel 3") then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                furyinventory.activated = true
+                smasbooleans.toggleOffInventory = false
             end
         end
         pauseplus.canPause = true

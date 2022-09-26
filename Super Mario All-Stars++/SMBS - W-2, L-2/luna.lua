@@ -1,5 +1,4 @@
 local level_dependencies_normal= require("level_dependencies_normal")
-local furyinventory = require("furyinventory")
 local flipperino = require("flipperino")
 local pauseplus = require("pauseplus")
 
@@ -11,13 +10,12 @@ function onEvent(eventName)
         SFX.play("ender_portal.ogg")
     end
     if eventName == "Cutscene 1" then
-        if SaveData.disableX2char == false then
-            pauseplus.canPause = false
-            furyinventory.activated = false
+        if not SaveData.disableX2char then
+            if SaveData.accessibilityInventory then
+                smasbooleans.toggleOffInventory = true
+            end
         end
-        if SaveData.disableX2char == true then
-            pauseplus.canPause = false
-        end
+        pauseplus.canPause = false
     end
     if eventName == "Cutscene 2 - 5" then
         SFX.play("_OST/Undertale/mus_rimshot_smbxsfx.ogg")
@@ -29,12 +27,11 @@ function onEvent(eventName)
         SFX.play("ut_noise.ogg")
     end
     if eventName == "Cutscene 2 - 13" then
-        if SaveData.disableX2char == false then
-            pauseplus.canPause = true
-            furyinventory.activated = true
+        if not SaveData.disableX2char then
+            if SaveData.accessibilityInventory then
+                smasbooleans.toggleOffInventory = false
+            end
         end
-        if SaveData.disableX2char == true then
-            pauseplus.canPause = true
-        end
+        pauseplus.canPause = true
     end
 end
