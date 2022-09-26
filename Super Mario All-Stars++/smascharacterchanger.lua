@@ -41,8 +41,8 @@ end
 function smascharacterchanger.shutdownChanger()
     started = false
     ending = true
-    Sound.playSFX(1001)
     smascharacterchanger.animationActive = true
+    Sound.playSFX(1001)
     Routine.waitFrames(35, true)
     Misc.unpause()
     Sound.restoreMusic(-1)
@@ -70,15 +70,15 @@ function smascharacterchanger.onDraw()
             end
             if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 64 then
                 smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber + 9.2
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -2)
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -0.5)
             end
             if smascharacterchanger.animationTimer >= 65 then
                 smascharacterchanger.tvScrollNumber = 0
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -2)
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -0.5)
             end
         end
         if not smascharacterchanger.animationActive and started then
-            Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -2)
+            Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -0.5)
         end
     elseif not smascharacterchanger.menuActive and started then
         if menuBGMObject ~= nil then
@@ -90,7 +90,7 @@ function smascharacterchanger.onDraw()
             smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1
             if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 34 then
                 smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber - 20
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -2)
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -0.5)
             end
         end
     end

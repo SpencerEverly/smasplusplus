@@ -649,7 +649,11 @@ function ep3Playables.onDraw()
         local costDat = v.costume
         if p.character == v.costume.baseCharID then-- Initialize the instance
             if  v.inst == nil  then
-                v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=2, state="idle", yAlign=animatx.ALIGN.BOTTOM, sceneCoords=false, visible=true}
+                if costDat.scaleDisabled then
+                    v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=1, state="idle", yAlign=animatx.ALIGN.BOTTOM, sceneCoords=false, visible=true}
+                else
+                    v.inst = costDat.set:Instance{x=0,y=0, xScale=1, scale=2, state="idle", yAlign=animatx.ALIGN.BOTTOM, sceneCoords=false, visible=true}
+                end
             end
     
             local inst = v.inst
@@ -669,7 +673,11 @@ function ep3Playables.onDraw()
                 inst.x = screen.left + 0.5*p.width
                 inst.y = screen.bottom + 2
                 inst.angle = 0
-                inst.scale = v.scaleOverride  or  2
+                if costDat.scaleDisabled then
+                    inst.scale = v.scaleOverride or 1
+                else
+                    inst.scale = v.scaleOverride or 2
+                end
                 if  p.forcedState ~= 2  then
                     v.lastPowerup = p.powerup
                 end
@@ -678,7 +686,11 @@ function ep3Playables.onDraw()
             if  p.isMega  then
                 v.maxScale = math.max(v.maxScale, 2*(p.width/v.width))
                 if  v.megaStartFrame < lunatime.tick() - 5  then
-                    inst.scale = 2*(p.width/v.width)
+                    if costDat.scaleDisabled then
+                        inst.scale = 1*(p.width/v.width)
+                    else
+                        inst.scale = 2*(p.width/v.width)
+                    end
                 end
             else
                 v.megaStartFrame = lunatime.tick()

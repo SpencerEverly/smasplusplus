@@ -7,6 +7,7 @@ smasbooleans.overrideTargets = false
 smasbooleans.introModeActivated = false
 smasbooleans.multiplayerActive = false
 smasbooleans.musicMuted = false
+smasbooleans.musicMutedTemporary = false
 smasbooleans.overrideMusicVolume = false
 smasbooleans.pSwitchActive = false
 smasbooleans.skipUpdater = true

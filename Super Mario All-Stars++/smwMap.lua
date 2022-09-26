@@ -4475,6 +4475,11 @@ function smwMap.onDraw()
         Misc.unlockAnyBrokenPaths()
         SaveData.firstBootMapPathFixed = true
     end
+    if not smasbooleans.musicMutedTemporary then
+        smwMap.forceMutedMusic = false
+    else
+        smwMap.forceMutedMusic = true
+    end
     --Text.printWP(smwMap.unlockingCurrentPath, 100, 100, 8)
 end
 
@@ -4532,7 +4537,7 @@ function smwMap.lifeCrownCounter()
         return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
     elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
         return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
-    elseif SaveData.totalLives == 1110 then
+    elseif SaveData.totalLives >= 1110 then
         return "!!!"
     end
 end

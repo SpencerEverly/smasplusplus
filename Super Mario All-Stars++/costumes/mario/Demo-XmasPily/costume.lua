@@ -30,9 +30,7 @@ local costume = {
 
     namespace = ACTOR_XMASPILY,
     keepPowerupOnHit = true,
-    paletteenabled = true,
-    emittersenabled = true,
-    scaledisabled = false
+    scaleDisabled = false
 }
 
 costume.playerData = {}
