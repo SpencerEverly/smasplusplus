@@ -132,6 +132,8 @@ function costume.onInit(playerObj)
     Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/Modern2/bubble.ogg")
     extrasounds.sound.sfx[92] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/sprout-vine.ogg")) --Vine sprout
     extrasounds.sound.sfx[93] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/iceball.ogg")) --Iceball
+    extrasounds.sound.sfx[94] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/yi-freeze.ogg"))
+    extrasounds.sound.sfx[95] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/yi-icebreak.ogg"))
     extrasounds.sound.sfx[96] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/2up.ogg")) --2UP
     extrasounds.sound.sfx[97] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/3up.ogg")) --3UP
     extrasounds.sound.sfx[98] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/5up.ogg")) --5UP
