@@ -193,7 +193,7 @@ function costume.onInit(playerObj)
     extrasounds.sound.sfx[152] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/wrong.ogg"))
     extrasounds.sound.sfx[153] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/castle-destroy.ogg"))
     extrasounds.sound.sfx[154] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/twirl.ogg"))
-    extrasounds.sound.sfx[155] = Audio.SfxOpen(Misc.resolveSoundFile("fireball-hit.ogg")) --Fireball hit
+    extrasounds.sound.sfx[155] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/fireball-hit.ogg")) --Fireball hit
     extrasounds.sound.sfx[156] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/shell-grab.ogg")) --Shell grab
     extrasounds.sound.sfx[157] = Audio.SfxOpen(Misc.resolveSoundFile("ice-melt.ogg"))
     extrasounds.sound.sfx[158] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Modern2/player-jump2.ogg"))
