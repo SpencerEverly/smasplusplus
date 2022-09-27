@@ -256,6 +256,13 @@ function Sound.restoreOriginalMusic(sectionid) --Restore all original section mu
     end
 end
 
+function Sound.getMusicID(sectionNumber)
+    return mem(mem(0x00B25828, FIELD_DWORD) + 2*sectionNumber, FIELD_WORD)
+end
+
+function Sound.getCustomMusicFromSection(sectionNumber)
+    return mem(mem(0x00B257B8, FIELD_DWORD) + 4*sectionNumber, FIELD_STRING)
+end
 
 
 
