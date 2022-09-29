@@ -513,6 +513,54 @@ local function isShootingLink(p)
     )
 end
 
+local function isTailSwiping(p)
+    return (p.keys.run == KEYS_PRESSED
+        and p:mem(0x172, FIELD_BOOL)
+        and p.forcedState == FORCEDSTATE_NONE
+        and not p.climbing
+        and p.mount == 0
+        and not p.keys.down
+        and not p:mem(0x50, FIELD_BOOL)
+        and p:mem(0x172, FIELD_BOOL)
+        and p.deathTimer == 0
+    )
+end
+
+local function isPlayerUnderwater(p) --Returns true if the specified player is underwater.
+    return (
+        p:mem(0x34,FIELD_WORD) > 0
+        and p:mem(0x06,FIELD_WORD) == 0
+    )
+end
+
+local function isInQuicksand(p) --Returns true if the specified player is in quicksand.
+    return (
+        p:mem(0x34, FIELD_WORD) == 2
+        and p:mem(0x06, FIELD_WORD) > 0
+    )
+end
+
+local function hasJumped(p)
+    return (p.deathTimer == 0
+        and Level.endState() == 0
+        and (
+            not GameData.winStateActive
+            or GameData.winStateActive == nil
+        )
+        and p.forcedState == 0
+        and not isPlayerUnderwater(p)
+        and (
+            p:isOnGround()
+            or p:isClimbing()
+            or isInQuicksand(p)
+        )
+        and (
+            p:mem(0x11E, FIELD_BOOL)
+            and p.keys.jump == KEYS_PRESSED
+        )
+    )
+end
+
 local function isOnScreen(npc)
     if customCamera then
         -- Get camera boundaries
@@ -559,20 +607,6 @@ local allenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29
 local allsmallenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,42,43,44,47,48,51,52,53,54,55,59,61,63,65,73,74,76,77,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,180,189,199,200,201,203,204,205,206,207,209,210,229,230,231,232,233,234,235,236,242,243,244,245,247,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,321,323,324,333,345,346,347,350,351,352,357,360,365,368,369,371,372,373,374,375,377,379,380,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,431,437,446,447,448,449,459,460,461,463,464,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,418,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,619,624,666} --Every single small X2 enemy.
 local allbigenemies = table.map{71,72,466,467,618} --Every single big X2 enemy.
 
-function isPlayerUnderwater(p) --Returns true if the specified player is underwater.
-    return (
-        p:mem(0x34,FIELD_WORD) > 0
-        and p:mem(0x06,FIELD_WORD) == 0
-    )
-end
-
-function isInQuicksand(p) --Returns true if the specified player is in quicksand.
-    return (
-        p:mem(0x34, FIELD_WORD) == 2
-        and p:mem(0x06, FIELD_WORD) > 0
-    )
-end
-
 function extrasounds.onDraw()
     for k,v in ipairs(extrasounds.soundNamesInOrder) do
         if extrasounds.sound.sfx[k] == nil then --If nil, roll back to the original sound...
@@ -609,15 +643,9 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             
             --**JUMPING**
-            if p.deathTimer == 0 and (not GameData.winStateActive or GameData.winStateActive == nil) then
-                if not isPlayerUnderwater(p) then
-                    if p:isOnGround() or p:isClimbing() or isInQuicksand(p) then
-                        if (p:mem(0x11E, FIELD_BOOL) and p.keys.jump == KEYS_PRESSED) then
-                            if extrasounds.enableJumpingSFX then
-                                extrasounds.playSFX(1)
-                            end
-                        end
-                    end
+            if hasJumped(p) then
+                if extrasounds.enableJumpingSFX then
+                    extrasounds.playSFX(1)
                 end
             end
             
@@ -674,7 +702,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**TAIL ATTACK**
             if p.powerup == 4 or p.powerup == 5 then
-                if (p.keys.run == KEYS_PRESSED and p:mem(0x172, FIELD_BOOL) and p.forcedState == FORCEDSTATE_NONE and not p.climbing and p.mount == 0 and not p.keys.down and not p:mem(0x50, FIELD_BOOL) and p:mem(0x172, FIELD_BOOL) and p.deathTimer == 0) then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking (And not dead)?
+                if isTailSwiping(p) then --Is the key pressed, and active, and the forced state is none, while not climbing and not on a mount and not ducking (And not dead)?
                     if extrasounds.enableTailAttackSFX then
                         extrasounds.playSFX(33)
                     end

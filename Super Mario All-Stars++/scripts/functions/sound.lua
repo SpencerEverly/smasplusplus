@@ -264,6 +264,16 @@ function Sound.getCustomMusicFromSection(sectionNumber)
     return mem(mem(0x00B257B8, FIELD_DWORD) + 4*sectionNumber, FIELD_STRING)
 end
 
+function Sound.enablePSwitchMusic(bool)
+    if bool == nil then
+        return
+    elseif bool == true then
+        mem(0x00B25888, FIELD_DWORD, -1)
+    else
+        mem(0x00B25888, FIELD_DWORD, Sound.getMusicID(player.sectionObj.idx))
+    end
+end
+
 
 
 

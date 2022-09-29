@@ -124,7 +124,7 @@ function dependencies.onStart()
         Routine.run(SMB1HardModeToggle)
     end
     if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
-        
+        Routine.run(SMA1ModeToggle)
     end
     
     if player.character == CHARACTER_NINJABOMBERMAN then
