@@ -329,6 +329,9 @@ function globalgenerals.onStart()
     for i = 0,20 do
         GameData.levelMusic[i] = Section(i).music
     end
+    for i = 0,20 do
+        GameData.levelMusicTemporary[i] = Section(i).music
+    end
     if Player.count() <= 0 then
         Playur.activate1stPlayer()
     end
