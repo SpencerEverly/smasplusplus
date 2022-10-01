@@ -14,7 +14,7 @@ local npcutils = require("npcs/npcutils")
 local extendedKoopas = {}
 
 local shellKickKoopas = {}
-local shellKickPoints = 0
+local shellKickPoints = 1
 
 local THROWN_NPC_COOLDOWN    = 0x00B2C85C
 local SHELL_HORIZONTAL_SPEED = 0x00B2C860
@@ -36,11 +36,7 @@ local function launchShell(v,culprit,upsideDown)
         v:mem(0x12E,FIELD_WORD,100) -- can't hurt timer
         v:mem(0x130,FIELD_WORD,culprit.idx) -- can't hurt player
         
-        table.insert(shellKickKoopas, v.idx)
-        for i=#shellKickKoopas, 1, -1 do
-            local v = shellKickKoopas[i]
-            shellKickPoints = shellKickPoints + 1
-        end
+        shellKickPoints = shellKickPoints + 1
     else
         v.direction = -v.direction
     end
@@ -325,7 +321,7 @@ do
         end
         for _,p in ipairs(Player.get()) do
             if p:isOnGround() then
-                shellKickPoints = 0
+                shellKickPoints = 1
             end
         end
     end
