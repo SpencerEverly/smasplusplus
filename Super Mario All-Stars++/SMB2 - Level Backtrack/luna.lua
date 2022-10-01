@@ -1,5 +1,28 @@
 local level_dependencies_normal= require("level_dependencies_normal")
 
+function generateAreas()
+    Routine.wait(0.1, true)
+    if table.icontains(smastables.__smb2Levels,"SMB2 - W-3, L-1.lvlx") then
+        Misc.setCameraPosition(-200000,-200600,-200000,-197600)
+    end
+    if table.icontains(smastables.__smb2Levels,"SMB2 - W-4, L-1.lvlx") then
+        Misc.setCameraPosition(-200000,-200600,-200000,-196800)
+    end
+    if table.icontains(smastables.__smb2Levels,"SMB2 - W-5, L-1.lvlx") then
+        Misc.setCameraPosition(-200000,-200600,-200000,-196000)
+    end
+    if table.icontains(smastables.__smb2Levels,"SMB2 - W-6, L-1.lvlx") then
+        Misc.setCameraPosition(-200000,-200600,-200000,-195200)
+    end
+    if table.icontains(smastables.__smb2Levels,"SMB2 - W-7, L-1.lvlx") then
+        Misc.setCameraPosition(-200000,-200600,-200000,-194400)
+    end
+end
+
+function onStart()
+    Routine.run(generateAreas)
+end
+
 function onExit()
     for _,p in ipairs(Player.get()) do
         if p:mem(0x15E, FIELD_WORD) == 1 and p.forcedState == FORCEDSTATE_INVISIBLE then --SMB2 World 1

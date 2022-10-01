@@ -514,7 +514,7 @@ function globalgenerals.onTick()
     if smasbooleans.compatibilityMode13Mode then
         mem(0x00B2C860, FIELD_FLOAT, 7.0999999046326)
     else
-        mem(0x00B2C860, FIELD_FLOAT, 5.8)
+        mem(0x00B2C860, FIELD_FLOAT, 6.2)
     end
     if table.icontains(smastables.__wsmbaLevels,Level.filename()) then
         if SaveData.disableX2char == false then

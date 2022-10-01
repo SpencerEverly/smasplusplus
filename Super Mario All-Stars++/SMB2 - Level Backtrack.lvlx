@@ -1,8 +1,8 @@
 HEAD
-TL:"SMB2 - Level Backtrack 6";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 2\: Warp Central";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-194400;T:-200600;B:-200000;MZ:24;MF:"_OST/Shovel Knight - OST.nsf|1\;g=2.7";BG:46;
+SC:0;L:-200000;R:-198400;T:-200600;B:-200000;MZ:24;MF:"_OST/Shovel Knight - OST.nsf|1\;g=2.7";BG:46;
 SECTION_END
 STARTPOINT
 ID:1;X:-199900;Y:-200118;D:1;

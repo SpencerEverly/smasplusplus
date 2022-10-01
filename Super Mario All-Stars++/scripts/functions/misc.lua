@@ -963,7 +963,7 @@ local setCameraPosition = false
 local cameraPanSpeed = 5
 local positionDirection = "right"
 
-function Misc.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,position) --This is used to set the camera boundaries for the specific section. This is also animated as well ("left" and "right" moving are only supported atm)
+function Misc.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,position) --This is used to set the camera boundaries for the specific section. This is also animated as well ("left", "right", and "none" moving are only supported atm)
     local plr = player
     local section = plr.sectionObj
     local bounds = section.boundary
@@ -984,6 +984,9 @@ function Misc.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,pos
     if speed == nil then
         speed = 5
     end
+    if position == nil then
+        position = "none"
+    end
     
     boundaryLeft = leftbound
     boundaryRight = rightbound
@@ -1003,6 +1006,7 @@ function Misc.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,pos
     setCameraPosition = true
     
     for _,p in ipairs(Player.get()) do
+        local tempBool = false
         
     end
 end
@@ -1012,6 +1016,14 @@ function Misk.onDraw()
         local section = player.sectionObj
         local bounds = section.boundary
         
+        if positionDirection == "none" then
+            bounds.left = boundaryLeft
+            bounds.right = boundaryRight
+            bounds.top = boundaryTop
+            bounds.bottom = boundaryBottom
+            section.boundary = bounds
+            setCameraPosition = false
+        end
         if positionDirection == "right" then
             Misc.pause()
             smasbooleans.toggleOffInventory = true
@@ -1052,8 +1064,8 @@ function Misk.onDraw()
         end
         
     end
-    if positionDirection ~= "left" or positionDirection ~= "right" then
-        positionDirection = "right"
+    if positionDirection ~= "left" or positionDirection ~= "right" or positionDirection ~= "none" then
+        positionDirection = "none"
     end
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then
