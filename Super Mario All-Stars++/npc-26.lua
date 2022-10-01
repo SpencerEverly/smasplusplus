@@ -9,10 +9,10 @@ function spring.onInitAPI()
 end
 
 function spring.onTickNPC(v)
-    if smasbooleans.enableInGameSpring then
-        mem(0x00B2C6E4, FIELD_WORD, 38)
-    else
+    if smasbooleans.compatibilityMode13Mode then
         mem(0x00B2C6E4, FIELD_WORD, 55)
+    else
+        mem(0x00B2C6E4, FIELD_WORD, 38)
     end
 end
 

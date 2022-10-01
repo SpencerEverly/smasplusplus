@@ -58,6 +58,7 @@ _G.smasnoturnback = require("smasnoturnback")
 _G.smasspencerfollower = require("smasspencerfollower")
 _G.smascharacterchanger = require("smascharacterchanger")
 _G.smasfireballs = require("smasfireballs")
+_G.smaspwing = require("smaspwing")
 
 --Then we do everything else.
 GameData.levelMusicTemporary = {}

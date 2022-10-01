@@ -24,7 +24,7 @@ local costumes = {}
 
 local battledependencies = {}
 
-smasbooleans.enableInGameSpring = false
+smasbooleans.compatibilityMode13Mode = true
 
 if battledependencies.battlemodeactive then
     warpTransition.musicFadeOut = false

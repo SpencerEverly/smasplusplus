@@ -33,7 +33,7 @@ local dependencies = {}
 local battledependencies = require("classicbattlemode")
 battledependencies.battlemodeactive = false
 
-smasbooleans.enableInGameSpring = true
+smasbooleans.compatibilityMode13Mode = false
 
 function p1teleportdoor()
     Routine.waitFrames(30)

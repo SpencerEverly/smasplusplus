@@ -20,6 +20,8 @@ local THROWN_NPC_COOLDOWN    = 0x00B2C85C
 local SHELL_HORIZONTAL_SPEED = 0x00B2C860
 local SHELL_VERTICAL_SPEED   = 0x00B2C864
 
+extendedKoopas.shellSpeed = 4.8
+
 
 local colBox = Colliders.Box(0,0,0,0)
 local colBox2 = Colliders.Box(0,0,0,0)
@@ -41,7 +43,7 @@ local function launchShell(v,culprit,upsideDown)
         v.direction = -v.direction
     end
     
-    v.speedX = 1 * v.direction
+    v.speedX = 0.5 * v.direction
     v.speedY = -8
 
     v:mem(0x136,FIELD_BOOL,true)
