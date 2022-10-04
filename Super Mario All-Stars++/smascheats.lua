@@ -27,11 +27,14 @@ Cheats.deregister("supermario64") --This will be deregistered because we're gonn
 Cheats.deregister("supermario128") --This will be deregistered because we're gonna remake this for customCamera target detection
 Cheats.deregister("1player") --This will be deregistered because we're gonna remake this for customCamera target detection
 Cheats.deregister("2player") --This will be deregistered because we're gonna remake this for customCamera target detection
+Cheats.deregister("moneytree") --This will be deregistered because I'm going to remake this since the coin system was remade
 
 function smascheats.onInitAPI()
     registerEvent(smascheats,"onDraw")
     registerEvent(smascheats,"onTick")
 end
+
+smascheats.moneytreeActive = false
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
 
@@ -701,6 +704,20 @@ for i = 1,2 do
     })
 end
 
+Cheats.register("moneytree",{ --This will be reregistered because the coin system was remade and needs to be redone here
+    onActivate = (function()
+        Defines.player_hasCheated = false
+        smascheats.moneytreeActive = true
+        Sound.playSFX(6)
+    end),
+    onDeactivate = (function()
+        Defines.player_hasCheated = false
+        smascheats.moneytreeActive = false
+        Sound.playSFX(5)
+    end),
+    flashPlayer = true,activateSFX = nil,
+})
+
 function easteregggoodnessyeah()
     Sound.playSFX(92)
     Routine.wait(3, true)
@@ -722,6 +739,14 @@ function smascheats.onDraw()
         for _,p in ipairs(Player.get()) do
             p.forcedState = FORCEDSTATE_INVISIBLE
         end
+    end
+end
+
+function smascheats.onTick()
+    if Cheats.get("moneytree").active == true then
+        Sound.playSFX(14)
+        SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+        SaveData.totalcoins = SaveData.totalcoins + 1
     end
 end
 
