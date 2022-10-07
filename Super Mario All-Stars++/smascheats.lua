@@ -100,6 +100,18 @@ if not SaveData.disableX2char then --Same as above
     })
 end
 
+if not SaveData.disableX2char then --Same as above
+    Cheats.register("itsamespencer",{
+        onActivate = (function()
+            Defines.player_hasCheated = false
+            player:transform(2, false)
+            playerManager.setCostume(CHARACTER_LUIGI, "00-SpencerEverly")
+            return true -- this makes the cheat not toggleable
+        end),
+        flashPlayer = true,activateSFX = 12,
+    })
+end
+
 if not SaveData.disableX2char then
     Cheats.register("itsametakeshi",{ --Turns the player into Takeshi (NES)
         onActivate = (function()
