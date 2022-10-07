@@ -19,8 +19,8 @@ local rain
 local snow
 local sunny
 
-local rainoutsidesfx = SFX.open("_OST/_Sound Effects/rain_outside.ogg", 1, 0)
-local raininsidesfx = SFX.open("_OST/_Sound Effects/rain_inside.ogg", 1, 0)
+local rainoutsidesfx = SFX.open("_OST/_Sound Effects/rain_outside.ogg")
+local raininsidesfx = SFX.open("_OST/_Sound Effects/rain_inside.ogg")
 
 local prevSection = nil
 local rainState = false

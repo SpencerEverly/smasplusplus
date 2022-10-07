@@ -16,7 +16,7 @@ local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
 local smashudsystem = require("smashudsystem")
---local musicalchairs = require("musicalchairs")
+local smascharacterinfo = require("smascharacterinfo")
 local extrasounds = require("extrasounds")
 local sprite = require("base/sprite")
 local smascharacterintros = require("smascharacterintros")
@@ -720,7 +720,7 @@ local function costumechangeright()
     end
     Sound.playSFX("charcost_costume.ogg")
     Sound.playSFX("charcost-selected.ogg")
-    --Routine.run(musicalchairs.switcher)
+    smascharacterinfo.setCostumeSpecifics()
 end
 
 local function costumechangeleft()
@@ -748,7 +748,7 @@ local function costumechangeleft()
     end
     Sound.playSFX("charcost_costume.ogg")
     Sound.playSFX("charcost-selected.ogg")
-    --Routine.run(musicalchairs.switcher)
+    smascharacterinfo.setCostumeSpecifics()
 end
 
 local function enable2player()

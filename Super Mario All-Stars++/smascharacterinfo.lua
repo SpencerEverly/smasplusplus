@@ -8,20 +8,22 @@ local playerManager = require("playermanager")
 local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 
+if SaveData.currentCostume == nil then
+    SaveData.currentCostume = "N/A"
+end
+
 function smascharacterinfo.onInitAPI()
-    registerEvent(smascharacterinfo,"onTickEnd")
+    registerEvent(smascharacterinfo,"onStart")
 end
 
 smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
 
-function smascharacterinfo.onTickEnd()
-    local characters = {}
-    
-    local character = player.character;
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
+function smascharacterinfo.onStart()
+    smascharacterinfo.setCostumeSpecifics()
+end
 
-    local costumes
+function smascharacterinfo.setCostumeSpecifics()
+    local currentCostume = SaveData.currentCostume
     
     if SaveData.disableX2char == true then
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
