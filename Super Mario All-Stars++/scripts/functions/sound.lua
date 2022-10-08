@@ -3,6 +3,7 @@ local Sound = {}
 local extrasounds = require("extrasounds")
 local playerManager = require("playermanager")
 local smastables = require("smastables")
+_G.SFX = require("base/audiomaster")
 
 function Sound.onInitAPI()
     registerEvent(Sound,"onDraw")
@@ -81,25 +82,27 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
 end
 
 function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being worn.
-    local costumesounddir
+    local costumeSoundDir
     if SaveData.currentCostume == "N/A" then
-        costumesounddir = Misc.resolveSoundFile(name)
+        costumeSoundDir = Misc.resolveSoundFile(name)
     else
-        costumesounddir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
+        costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
     end
-    if costumesounddir ~= nil then
-        return Audio.SfxOpen(costumesounddir)
+    if costumeSoundDir ~= nil then
+        return SFX.open(costumeSoundDir)
     else
-        return Audio.SfxOpen(Misc.resolveSoundFile(name))
+        return SFX.open(Misc.resolveSoundFile(name))
     end
 end
 
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
+    local costumeCachedSounds = {}
     for k,v in ipairs(smastables.soundNamesInOrder) do
+        costumeCachedSounds[k] = Sound.resolveCostumeSound(v)
         if smastables.extrasoundsNumbersInOrder[k] then
-            extrasounds.sound.sfx[k] = Sound.resolveCostumeSound(v)
+            extrasounds.sound.sfx[k] = costumeCachedSounds[k]
         else
-            Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
+            Audio.sounds[k].sfx = costumeCachedSounds[k]
         end
     end
 end
