@@ -17,8 +17,13 @@
 ]]
 
 local playerManager = require("playerManager")
+local extrasounds = require("extrasounds")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local costume = {}
+
+costume.loadedSounds = false
 
 
 costume.pSpeedAnimationsEnabled = true
@@ -545,14 +550,16 @@ end
 
 
 function costume.onInit(p)
+    if not costume.loadedSounds then
+        Sound.loadCostumeSounds()
+        costume.loadedSounds = true
+    end
+    
     -- If events have not been registered yet, do so
     if not eventsRegistered then
         registerEvent(costume,"onTick")
         registerEvent(costume,"onTickEnd")
         registerEvent(costume,"onDraw")
-        
-        Audio.sounds[30].sfx = Audio.SfxOpen("costumes/luigi/SMW-Luigi/pause.ogg")
-        Audio.sounds[52].sfx = Audio.SfxOpen("costumes/luigi/SMW-Luigi/got-star.ogg")
         
         eventsRegistered = true
     end
@@ -592,6 +599,13 @@ function costume.onInit(p)
 end
 
 function costume.onCleanup(p)
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
+        extrasounds.sound.sfx[i] = nil
+    end
+    
     -- Remove the player from the list
     if costume.playerData[p] ~= nil then
         costume.playerData[p] = nil

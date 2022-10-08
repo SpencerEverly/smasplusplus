@@ -18,8 +18,12 @@
 
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local costume = {}
+
+costume.loadedSounds = false
 
 
 costume.pSpeedAnimationsEnabled = true
@@ -546,139 +550,10 @@ function costume.onInit(p)
     elseif p.powerup >= 2 then
         extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump.ogg")
     end
-    Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/stomped.ogg")
-    Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/block-hit.ogg")
-    extrasounds.sound.sfx[4]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/block-smash.ogg"))
-    Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-shrink.ogg")
-    Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-grow.ogg")
-    extrasounds.sound.sfx[7]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/mushroom.ogg"))
-    extrasounds.sound.sfx[8]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/player-died.ogg"))
-    Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/shell-hit.ogg")
-    extrasounds.sound.sfx[10] = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-slide.ogg")
-    Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/item-dropped.ogg")
-    Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/has-item.ogg")
-    Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/camera-change.ogg")
-    extrasounds.sound.sfx[14] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/coin.ogg"))
-    extrasounds.sound.sfx[15] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/1up.ogg"))
-    Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/lava.ogg")
-    Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/warp.ogg")
-    extrasounds.sound.sfx[18] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/fireball.ogg"))
-    Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/level-win.ogg")
-    Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/boss-beat.ogg")
-    Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/dungeon-win.ogg")
-    Audio.sounds[22].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/bullet-bill.ogg")
-    Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/grab.ogg")
-    Audio.sounds[24].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/spring.ogg")
-    Audio.sounds[25].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/hammer.ogg")
-    Audio.sounds[29].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/do.ogg")
-    Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/key.ogg")
-    Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/pswitch.ogg")
-    extrasounds.sound.sfx[33] = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/tail.ogg")
-    Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/racoon.ogg")
-    Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/boot.ogg")
-    extrasounds.sound.sfx[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/smash.ogg"))
-    Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/thwomp.ogg")
-    Audio.sounds[38].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/birdo-spit.ogg")
-    extrasounds.sound.sfx[39] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/birdo-hit.ogg"))
-    Audio.sounds[41].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/birdo-beat.ogg")
-    extrasounds.sound.sfx[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/npc-fireball.ogg"))
-    extrasounds.sound.sfx[43] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/fireworks.ogg"))
-    Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/bowser-killed.ogg")
-    Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/door.ogg")
-    Audio.sounds[47].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/message.ogg")
-    Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/yoshi.ogg")
-    Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/yoshi-hurt.ogg")
-    Audio.sounds[50].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/yoshi-tongue.ogg")
-    Audio.sounds[51].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/yoshi-egg.ogg")
-    Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/got-star.ogg")
-    Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-died2.ogg")
-    Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/yoshi-swallow.ogg")
-    Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/dry-bones.ogg")
-    Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/smw-checkpoint.ogg")
-    extrasounds.sound.sfx[59] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin.ogg"))
-    Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/smw-blaarg.ogg")
-    Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/wart-bubble.ogg")
-    Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/wart-die.ogg")
-    Audio.sounds[71].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/climbing.ogg")
-    Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/swim.ogg")
-    Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/grab2.ogg")
-    --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/saw.ogg")
-    Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/smb2-throw.ogg")
-    Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/smb2-hit.ogg")
-    Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/bubble.ogg")
-    extrasounds.sound.sfx[92] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/sprout-vine.ogg")) --Vine sprout
-    extrasounds.sound.sfx[93] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/iceball.ogg")) --Iceball
-    extrasounds.sound.sfx[96] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/2up.ogg")) --2UP
-    extrasounds.sound.sfx[97] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/3up.ogg")) --3UP
-    extrasounds.sound.sfx[98] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/5up.ogg")) --5UP
-    extrasounds.sound.sfx[99] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get2.ogg")) --Dragon Coin #2
-    extrasounds.sound.sfx[100] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get3.ogg")) --Dragon Coin #3
-    extrasounds.sound.sfx[101] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get4.ogg")) --Dragon Coin #4
-    extrasounds.sound.sfx[102] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/dragon-coin-get5.ogg")) --Dragon Coin #5
-    extrasounds.sound.sfx[103] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/cherry.ogg")) --Cherry
-    extrasounds.sound.sfx[104] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/explode.ogg")) --SMB2 Explosion
-    extrasounds.sound.sfx[105] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/hammerthrow.ogg")) --Player hammer throw
-    extrasounds.sound.sfx[106] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/combo1.ogg")) --Combo 1
-    extrasounds.sound.sfx[107] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/combo2.ogg")) --Combo 2
-    extrasounds.sound.sfx[108] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/combo3.ogg")) --Combo 3
-    extrasounds.sound.sfx[109] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/combo4.ogg")) --Combo 4
-    extrasounds.sound.sfx[110] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/combo5.ogg")) --Combo 5
-    extrasounds.sound.sfx[111] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/combo6.ogg")) --Combo 6
-    extrasounds.sound.sfx[112] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/combo7.ogg")) --Combo 7
-    extrasounds.sound.sfx[113] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/score-tally.ogg")) --Score tally
-    extrasounds.sound.sfx[114] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/score-tally-end.ogg")) --Score tally end
-    extrasounds.sound.sfx[115] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/bowser-fire.ogg")) --Bowser fire
-    extrasounds.sound.sfx[116] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/boomerang.ogg")) --Boomerang
-    extrasounds.sound.sfx[117] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/smb2-charge.ogg")) --SMB2 Charge
-    extrasounds.sound.sfx[118] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/stopwatch.ogg")) --Stopwatch
-    extrasounds.sound.sfx[119] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/whale-spout.ogg"))
-    extrasounds.sound.sfx[120] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/door-reveal.ogg"))
-    extrasounds.sound.sfx[121] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/p-wing.ogg"))
-    extrasounds.sound.sfx[122] = Audio.SfxOpen(Misc.resolveSoundFile("wand-moving.ogg"))
-    extrasounds.sound.sfx[123] = Audio.SfxOpen(Misc.resolveSoundFile("wand-whoosh.ogg"))
-    extrasounds.sound.sfx[124] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/hop.ogg"))
-    extrasounds.sound.sfx[125] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/smash-big.ogg"))
-    extrasounds.sound.sfx[126] = Audio.SfxOpen(Misc.resolveSoundFile("smb2-hitenemy.ogg")) --SMB2 Hit Enemy
-    extrasounds.sound.sfx[127] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/boss-fall.ogg"))
-    extrasounds.sound.sfx[128] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/boss-lava.ogg"))
-    extrasounds.sound.sfx[129] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/boss-shrink.ogg"))
-    extrasounds.sound.sfx[130] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/boss-shrink-done.ogg"))
-    extrasounds.sound.sfx[131] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/hp-get.ogg"))
-    extrasounds.sound.sfx[132] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/hp-max.ogg"))
-    extrasounds.sound.sfx[133] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/cape-feather.ogg"))
-    extrasounds.sound.sfx[134] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/cape-fly.ogg"))
-    extrasounds.sound.sfx[135] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/flag-slide.ogg"))
-    extrasounds.sound.sfx[136] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/smb1-exit.ogg")) --SMB1 Exit
-    extrasounds.sound.sfx[137] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/smb2-clear.ogg"))
-    extrasounds.sound.sfx[138] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/smb1-world-clear.ogg"))
-    extrasounds.sound.sfx[139] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-overworld.ogg"))
-    extrasounds.sound.sfx[140] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-desert.ogg"))
-    extrasounds.sound.sfx[141] = Audio.SfxOpen(Misc.resolveSoundFile("smb1-underground-sky.ogg"))
-    extrasounds.sound.sfx[142] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/goaltape-countdown-start.ogg"))
-    extrasounds.sound.sfx[143] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/goaltape-countdown-loop.ogg"))
-    extrasounds.sound.sfx[144] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/goaltape-countdown-end.ogg"))
-    extrasounds.sound.sfx[145] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/goaltape-irisout.ogg"))
-    extrasounds.sound.sfx[146] = Audio.SfxOpen(Misc.resolveSoundFile("smw-exit-orb.ogg"))
-    extrasounds.sound.sfx[147] = Audio.SfxOpen(Misc.resolveSoundFile("ace-coins-5.ogg"))
-    extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/door-close.ogg"))
-    extrasounds.sound.sfx[149] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/sprout-megashroom.ogg"))
-    extrasounds.sound.sfx[150] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/0up.ogg"))
-    extrasounds.sound.sfx[151] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/correct.ogg"))
-    extrasounds.sound.sfx[152] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/wrong.ogg"))
-    extrasounds.sound.sfx[153] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/castle-destroy.ogg"))
-    extrasounds.sound.sfx[154] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/twirl.ogg"))
-    extrasounds.sound.sfx[155] = Audio.SfxOpen(Misc.resolveSoundFile("fireball-hit.ogg")) --Fireball hit
-    extrasounds.sound.sfx[156] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/shell-grab.ogg")) --Shell grab
-    extrasounds.sound.sfx[157] = Audio.SfxOpen(Misc.resolveSoundFile("ice-melt.ogg"))
-    extrasounds.sound.sfx[158] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/player-jump2.ogg"))
-    extrasounds.sound.sfx[159] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/ground-pound.ogg"))
-    extrasounds.sound.sfx[160] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/ground-pound-hit.ogg"))
-    extrasounds.sound.sfx[161] = Audio.SfxOpen(Misc.resolveSoundFile("zelda-fireball.ogg"))
-    extrasounds.sound.sfx[162] = Audio.SfxOpen(Misc.resolveSoundFile("zelda-iceball.ogg"))
-    extrasounds.sound.sfx[163] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/pballoon.ogg"))
-    extrasounds.sound.sfx[164] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/peach-cry.ogg"))
-    extrasounds.sound.sfx[165] = Audio.SfxOpen(Misc.resolveSoundFile("timeout.ogg"))
-    extrasounds.sound.sfx[166] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/01-SMB1-Retro/flyinghammer-throw.ogg"))
+    if not costume.loadedSounds then
+        Sound.loadCostumeSounds()
+        costume.loadedSounds = true
+    end
     
     -- If events have not been registered yet, do so
     if not eventsRegistered then
@@ -724,81 +599,19 @@ function costume.onInit(p)
 end
 
 function costume.onCleanup(p)
-    extrasounds.sound.sfx[1] = nil
-    Audio.sounds[2].sfx  = nil
-    Audio.sounds[3].sfx  = nil
-    extrasounds.sound.sfx[4] = nil
-    Audio.sounds[5].sfx  = nil
-    Audio.sounds[6].sfx  = nil
-    extrasounds.sound.sfx[7] = nil
-    extrasounds.sound.sfx[8] = nil
-    Audio.sounds[9].sfx  = nil
-    extrasounds.sound.sfx[10] = nil
-    Audio.sounds[11].sfx = nil
-    Audio.sounds[12].sfx = nil
-    Audio.sounds[13].sfx = nil
-    extrasounds.sound.sfx[14] = nil
-    extrasounds.sound.sfx[15] = nil
-    Audio.sounds[16].sfx = nil
-    Audio.sounds[17].sfx = nil
-    extrasounds.sound.sfx[18] = nil
-    Audio.sounds[19].sfx = nil
-    Audio.sounds[20].sfx = nil
-    Audio.sounds[21].sfx = nil
-    Audio.sounds[22].sfx = nil
-    Audio.sounds[23].sfx = nil
-    Audio.sounds[24].sfx = nil
-    Audio.sounds[25].sfx = nil
-    Audio.sounds[29].sfx = nil
-    Audio.sounds[31].sfx = nil
-    Audio.sounds[32].sfx = nil
-    extrasounds.sound.sfx[33] = nil
-    Audio.sounds[34].sfx = nil
-    Audio.sounds[35].sfx = nil
-    extrasounds.sound.sfx[36] = nil
-    Audio.sounds[37].sfx = nil
-    Audio.sounds[38].sfx = nil
-    extrasounds.sound.sfx[39] = nil
-    Audio.sounds[41].sfx = nil
-    extrasounds.sound.sfx[42] = nil
-    extrasounds.sound.sfx[43] = nil
-    Audio.sounds[44].sfx = nil
-    Audio.sounds[46].sfx = nil
-    Audio.sounds[47].sfx = nil
-    Audio.sounds[48].sfx = nil
-    Audio.sounds[49].sfx = nil
-    Audio.sounds[50].sfx = nil
-    Audio.sounds[51].sfx = nil
-    Audio.sounds[52].sfx = nil
-    Audio.sounds[54].sfx = nil
-    Audio.sounds[55].sfx = nil
-    Audio.sounds[56].sfx = nil
-    Audio.sounds[57].sfx = nil
-    Audio.sounds[58].sfx = nil
-    extrasounds.sound.sfx[59] = nil
-    Audio.sounds[61].sfx = nil
-    Audio.sounds[62].sfx = nil
-    Audio.sounds[63].sfx = nil
-    Audio.sounds[71].sfx = nil
-    Audio.sounds[72].sfx = nil
-    Audio.sounds[73].sfx = nil
-    Audio.sounds[75].sfx = nil
-    Audio.sounds[76].sfx = nil
-    extrasounds.sound.sfx[77] = nil
-    Audio.sounds[78].sfx = nil
-    Audio.sounds[79].sfx = nil
-    Audio.sounds[80].sfx = nil
-    extrasounds.sound.sfx[81] = nil
-    Audio.sounds[82].sfx = nil
-    Audio.sounds[91].sfx = nil
-    for i = 92,165 do
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
         extrasounds.sound.sfx[i] = nil
     end
+    
     Defines.jumpheight = 20
     Defines.player_walkspeed = 3
     Defines.player_runspeed = 6
     Defines.jumpheight_bounce = 32
     Defines.player_grav = 0.4
+    
     -- Remove the player from the list
     if costume.playerData[p] ~= nil then
         costume.playerData[p] = nil

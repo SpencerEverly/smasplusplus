@@ -1230,6 +1230,10 @@ end
 function costume.onCleanup(p)
     -- Remove the player from the list
     if costume.playerData[p] ~= nil then
+        
+        Audio.sounds[30].sfx = nil
+        Audio.sounds[52].sfx = nil
+        
         costume.playerData[p] = nil
 
         local spot = table.ifind(costume.playersList,p)

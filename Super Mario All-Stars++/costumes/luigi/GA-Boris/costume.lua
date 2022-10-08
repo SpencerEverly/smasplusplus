@@ -4,8 +4,12 @@ local smashud = require("smashud")
 local rng = require("base/rng")
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local costume = {}
+
+costume.loadedSounds = false
 
 costume.grenade = false
 local eventsRegistered = false
@@ -31,24 +35,10 @@ function costume.onInit(p)
     
     npcManager.registerEvent(291, costume, "onTickEndNPC")
     
-    extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/luigi/GA-Boris/player-jump.ogg")
-    Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/stomped.ogg")
-    Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-shrink.ogg")
-    Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-grow.ogg")
-    extrasounds.sound.sfx[8]  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-died.ogg")
-    Audio.sounds[10].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/player-slide.ogg")
-    extrasounds.sound.sfx[14]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/luigi/GA-Boris/coin.ogg"))
-    extrasounds.sound.sfx[18]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/luigi/GA-Boris/fireball.ogg"))
-    Audio.sounds[21].sfx  = Audio.SfxOpen("costumes/luigi/GA-Boris/dungeon-win.ogg")
-    Audio.sounds[23].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/grab.ogg")
-    extrasounds.sound.sfx[33] = Audio.SfxOpen("costumes/luigi/GA-Boris/tail.ogg")
-    Audio.sounds[34].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/racoon.ogg")
-    extrasounds.sound.sfx[43] = Audio.SfxOpen("costumes/luigi/GA-Boris/fireworks.ogg")
-    Audio.sounds[46].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/door.ogg")
-    Audio.sounds[52].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/got-star.ogg")
-    Audio.sounds[54].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/player-died2.ogg")
-    Audio.sounds[73].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/grab2.ogg")
-    Audio.sounds[75].sfx = Audio.SfxOpen("costumes/luigi/GA-Boris/smb2-throw.ogg")
+    if not costume.loadedSounds then
+        Sound.loadCostumeSounds()
+        costume.loadedSounds = true
+    end
     
     Graphics.sprites.effect[998].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/effect-998.png")
     
@@ -384,95 +374,12 @@ function costume.onPlayerHarm()
 end
 
 function costume.onCleanup(p)
-    extrasounds.sound.sfx[1] = nil    
-    Audio.sounds[2].sfx  = nil
-    Audio.sounds[3].sfx  = nil
-    extrasounds.sound.sfx[4] = nil
-    Audio.sounds[5].sfx  = nil
-    Audio.sounds[6].sfx  = nil
-    extrasounds.sound.sfx[7] = nil
-    extrasounds.sound.sfx[8] = nil
-    Audio.sounds[9].sfx  = nil
-    extrasounds.sound.sfx[10] = nil
-    Audio.sounds[11].sfx = nil
-    Audio.sounds[12].sfx = nil
-    Audio.sounds[13].sfx = nil
-    extrasounds.sound.sfx[14] = nil
-    extrasounds.sound.sfx[15] = nil
-    Audio.sounds[16].sfx = nil
-    Audio.sounds[17].sfx = nil
-    extrasounds.sound.sfx[18] = nil
-    Audio.sounds[19].sfx = nil
-    Audio.sounds[20].sfx = nil
-    Audio.sounds[21].sfx = nil
-    Audio.sounds[22].sfx = nil
-    Audio.sounds[23].sfx = nil
-    Audio.sounds[24].sfx = nil
-    Audio.sounds[25].sfx = nil
-    Audio.sounds[29].sfx = nil
-    Audio.sounds[31].sfx = nil
-    Audio.sounds[32].sfx = nil
-    extrasounds.sound.sfx[33] = nil
-    Audio.sounds[34].sfx = nil
-    Audio.sounds[35].sfx = nil
-    extrasounds.sound.sfx[36] = nil
-    Audio.sounds[37].sfx = nil
-    Audio.sounds[38].sfx = nil
-    extrasounds.sound.sfx[39] = nil
-    Audio.sounds[41].sfx = nil
-    extrasounds.sound.sfx[42] = nil
-    extrasounds.sound.sfx[43] = nil
-    Audio.sounds[44].sfx = nil
-    Audio.sounds[46].sfx = nil
-    Audio.sounds[47].sfx = nil
-    Audio.sounds[48].sfx = nil
-    Audio.sounds[49].sfx = nil
-    Audio.sounds[50].sfx = nil
-    Audio.sounds[51].sfx = nil
-    Audio.sounds[52].sfx = nil
-    Audio.sounds[54].sfx = nil
-    Audio.sounds[55].sfx = nil
-    Audio.sounds[56].sfx = nil
-    Audio.sounds[57].sfx = nil
-    Audio.sounds[58].sfx = nil
-    extrasounds.sound.sfx[59] = nil
-    Audio.sounds[61].sfx = nil
-    Audio.sounds[62].sfx = nil
-    Audio.sounds[63].sfx = nil
-    Audio.sounds[71].sfx = nil
-    Audio.sounds[72].sfx = nil
-    Audio.sounds[73].sfx = nil
-    Audio.sounds[75].sfx = nil
-    Audio.sounds[76].sfx = nil
-    extrasounds.sound.sfx[77] = nil
-    Audio.sounds[78].sfx = nil
-    Audio.sounds[79].sfx = nil
-    Audio.sounds[80].sfx = nil
-    extrasounds.sound.sfx[81] = nil
-    Audio.sounds[82].sfx = nil
-    Audio.sounds[91].sfx = nil
-    extrasounds.sound.sfx[92] = nil
-    extrasounds.sound.sfx[93] = nil
-    extrasounds.sound.sfx[94] = nil
-    extrasounds.sound.sfx[95] = nil
-    extrasounds.sound.sfx[96] = nil
-    extrasounds.sound.sfx[97] = nil
-    extrasounds.sound.sfx[98] = nil
-    extrasounds.sound.sfx[99] = nil
-    extrasounds.sound.sfx[100] = nil
-    extrasounds.sound.sfx[101] = nil
-    extrasounds.sound.sfx[102] = nil
-    extrasounds.sound.sfx[103] = nil
-    extrasounds.sound.sfx[104] = nil
-    extrasounds.sound.sfx[105] = nil
-    extrasounds.sound.sfx[106] = nil
-    extrasounds.sound.sfx[107] = nil
-    extrasounds.sound.sfx[108] = nil
-    extrasounds.sound.sfx[109] = nil
-    extrasounds.sound.sfx[110] = nil
-    extrasounds.sound.sfx[111] = nil
-    extrasounds.sound.sfx[112] = nil
-    costume.abilitiesenabled = false
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
+        extrasounds.sound.sfx[i] = nil
+    end
     costume.grenade = false
     --smashud.visible.itembox = true
 end

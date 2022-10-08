@@ -18,8 +18,12 @@
 
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local costume = {}
+
+costume.loadedSounds = false
 
 
 costume.pSpeedAnimationsEnabled = true
@@ -552,64 +556,10 @@ function costume.onInit(p)
         registerEvent(costume,"onTick")
         registerEvent(costume,"onTickEnd")
         registerEvent(costume,"onDraw")
-        extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/player-jump.ogg")
-        Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/stomped.ogg")
-        Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/block-hit.ogg")
-        extrasounds.sound.sfx[4]  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/block-smash.ogg")
-        Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/player-shrink.ogg")
-        Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/player-grow.ogg")
-        extrasounds.sound.sfx[7]  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/mushroom.ogg")
-        extrasounds.sound.sfx[8]  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/player-died.ogg")
-        Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/shell-hit.ogg")
-        --extrasounds.sound.sfx[10] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/player-slide.ogg")
-        Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/item-dropped.ogg")
-        Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/has-item.ogg")
-        --Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/camera-change.ogg")
-        extrasounds.sound.sfx[14] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/coin.ogg")
-        extrasounds.sound.sfx[15] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/1up.ogg")
-        Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/lava.ogg")
-        Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/warp.ogg")
-        extrasounds.sound.sfx[18] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/fireball.ogg")
-        --Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/level-win.ogg")
-        --Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/boss-beat.ogg")
-        --Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/dungeon-win.ogg")
-        Audio.sounds[22].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/bullet-bill.ogg")
-        Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/grab.ogg")
-        Audio.sounds[24].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/spring.ogg")
-        --Audio.sounds[25].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/hammer.ogg")
-        Audio.sounds[29].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/do.ogg")
-        Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/key.ogg")
-        Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/pswitch.ogg")
-        extrasounds.sound.sfx[33] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/tail.ogg")
-        Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/racoon.ogg")
-        --Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/boot.ogg")
-        --extrasounds.sound.sfx[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/09-SMW-Pirate/smash.ogg"))
-        Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/thwomp.ogg")
-        extrasounds.sound.sfx[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/09-SMW-Pirate/npc-fireball.ogg"))
-        extrasounds.sound.sfx[43] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/fireworks.ogg")
-        --Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/bowser-killed.ogg")
-        Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/door.ogg")
-        Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/yoshi.ogg")
-        Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/yoshi-hurt.ogg")
-        Audio.sounds[50].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/yoshi-tongue.ogg")
-        Audio.sounds[51].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/yoshi-egg.ogg")
-        Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/got-star.ogg")
-        Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/player-died2.ogg")
-        Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/yoshi-swallow.ogg")
-        Audio.sounds[56].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/ring.ogg")
-        --Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/dry-bones.ogg")
-        Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/smw-checkpoint.ogg")
-        extrasounds.sound.sfx[59] = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/dragon-coin.ogg")
-        --Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/smw-blaarg.ogg")
-        --Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/wart-bubble.ogg")
-        --Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/wart-die.ogg")
-        Audio.sounds[71].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/climbing.ogg")
-        Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/swim.ogg")
-        Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/grab2.ogg")
-        --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/saw.ogg")
-        --Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/smb2-throw.ogg")
-        --Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/smb2-hit.ogg")
-        --Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/09-SMW-Pirate/bubble.ogg")
+        if not costume.loadedSounds then
+            Sound.loadCostumeSounds()
+            costume.loadedSounds = true
+        end
 
         eventsRegistered = true
     end
@@ -649,87 +599,14 @@ function costume.onInit(p)
 end
 
 function costume.onCleanup(p)
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
+        extrasounds.sound.sfx[i] = nil
+    end
     -- Remove the player from the list
     if costume.playerData[p] ~= nil then
-        extrasounds.sound.sfx[1] = nil    
-        Audio.sounds[2].sfx  = nil
-        Audio.sounds[3].sfx  = nil
-        extrasounds.sound.sfx[4] = nil
-        Audio.sounds[5].sfx  = nil
-        Audio.sounds[6].sfx  = nil
-        extrasounds.sound.sfx[7] = nil
-        extrasounds.sound.sfx[8] = nil
-        Audio.sounds[9].sfx  = nil
-        extrasounds.sound.sfx[10] = nil
-        Audio.sounds[11].sfx = nil
-        Audio.sounds[12].sfx = nil
-        Audio.sounds[13].sfx = nil
-        extrasounds.sound.sfx[14] = nil
-        extrasounds.sound.sfx[15] = nil
-        Audio.sounds[16].sfx = nil
-        Audio.sounds[17].sfx = nil
-        extrasounds.sound.sfx[18] = nil
-        Audio.sounds[19].sfx = nil
-        Audio.sounds[20].sfx = nil
-        Audio.sounds[21].sfx = nil
-        Audio.sounds[22].sfx = nil
-        Audio.sounds[23].sfx = nil
-        Audio.sounds[24].sfx = nil
-        Audio.sounds[25].sfx = nil
-        Audio.sounds[29].sfx = nil
-        Audio.sounds[31].sfx = nil
-        Audio.sounds[32].sfx = nil
-        extrasounds.sound.sfx[33] = nil
-        Audio.sounds[34].sfx = nil
-        Audio.sounds[35].sfx = nil
-        extrasounds.sound.sfx[36] = nil
-        Audio.sounds[37].sfx = nil
-        Audio.sounds[38].sfx = nil
-        extrasounds.sound.sfx[39] = nil
-        Audio.sounds[41].sfx = nil
-        extrasounds.sound.sfx[42] = nil
-        extrasounds.sound.sfx[43] = nil
-        Audio.sounds[44].sfx = nil
-        Audio.sounds[46].sfx = nil
-        Audio.sounds[47].sfx = nil
-        Audio.sounds[48].sfx = nil
-        Audio.sounds[49].sfx = nil
-        Audio.sounds[50].sfx = nil
-        Audio.sounds[51].sfx = nil
-        Audio.sounds[52].sfx = nil
-        Audio.sounds[54].sfx = nil
-        Audio.sounds[55].sfx = nil
-        Audio.sounds[56].sfx = nil
-        Audio.sounds[57].sfx = nil
-        Audio.sounds[58].sfx = nil
-        extrasounds.sound.sfx[59] = nil
-        Audio.sounds[61].sfx = nil
-        Audio.sounds[62].sfx = nil
-        Audio.sounds[63].sfx = nil
-        Audio.sounds[71].sfx = nil
-        Audio.sounds[72].sfx = nil
-        Audio.sounds[73].sfx = nil
-        Audio.sounds[75].sfx = nil
-        Audio.sounds[76].sfx = nil
-        extrasounds.sound.sfx[77] = nil
-        Audio.sounds[78].sfx = nil
-        Audio.sounds[79].sfx = nil
-        Audio.sounds[80].sfx = nil
-        extrasounds.sound.sfx[81] = nil
-        Audio.sounds[82].sfx = nil
-        Audio.sounds[91].sfx = nil
-        extrasounds.sound.sfx92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
-        extrasounds.sound.sfx93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
-        extrasounds.sound.sfx94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-freeze.ogg"))
-        extrasounds.sound.sfx95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-icebreak.ogg"))
-        extrasounds.sound.sfx96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
-        extrasounds.sound.sfx97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
-        extrasounds.sound.sfx98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
-        extrasounds.sound.sfx99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
-        extrasounds.sound.sfx100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
-        extrasounds.sound.sfx101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
-        extrasounds.sound.sfx102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
-        extrasounds.sound.sfx103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
         costume.playerData[p] = nil
 
         local spot = table.ifind(costume.playersList,p)

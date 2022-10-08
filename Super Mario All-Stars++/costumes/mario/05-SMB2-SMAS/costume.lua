@@ -1,7 +1,11 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local costume = {}
+
+costume.loadedSounds = false
 
 local jumphighertimer = 0
 local jumphigherframeactive = false
@@ -34,8 +38,10 @@ end
 
 function costume.onInit(p)
     registerEvent(costume,"onTick")
-    Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/05-SMB2-SMAS/player-grow.ogg")
-    extrasounds.sound.sfx[8]  = Audio.SfxOpen("costumes/mario/05-SMB2-SMAS/player-died.ogg")
+    if not costume.loadedSounds then
+        Sound.loadCostumeSounds()
+        costume.loadedSounds = true
+    end
 end
 
 function costume.onTick()
@@ -83,8 +89,12 @@ function costume.onTick()
 end
 
 function costume.onCleanup(p)
-    Audio.sounds[6].sfx  = nil
-    extrasounds.sound.sfx[8] = nil
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
+        extrasounds.sound.sfx[i] = nil
+    end
 end
 
 return costume

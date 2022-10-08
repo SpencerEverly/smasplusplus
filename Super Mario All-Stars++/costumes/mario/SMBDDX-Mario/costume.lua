@@ -2,8 +2,12 @@ local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local textplus = require("textplus")
 local smashud = require("smashud")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local costume = {}
+
+costume.loadedSounds = false
 
 local smbddxfont = textplus.loadFont("littleDialogue/font/verdana.ini")
 local coinCounter = Graphics.loadImageResolved("costumes/mario/SMBDDX-Mario/coincounter.png")
@@ -16,67 +20,10 @@ function costume.onInit(p)
     plr = p
     registerEvent(costume,"onTick")
     registerEvent(costume,"onDraw")
-    extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/player-jump.ogg")
-    Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/stomped.ogg")
-    Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/block-hit.ogg")
-    extrasounds.sound.sfx[4]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/block-smash.ogg"))
-    Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/player-shrink.ogg")
-    Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/player-grow.ogg")
-    extrasounds.sound.sfx[7]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/mushroom.ogg"))
-    extrasounds.sound.sfx[8]  = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/player-died.ogg"))
-    Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/shell-hit.ogg")
-    --extrasounds.sound.sfx[10] = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/player-slide.ogg")
-    --Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/item-dropped.ogg")
-    --Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/has-item.ogg")
-    --Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/camera-change.ogg")
-    extrasounds.sound.sfx[14] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/coin.ogg"))
-    extrasounds.sound.sfx[15] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/1up.ogg"))
-    Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/lava.ogg")
-    Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/warp.ogg")
-    extrasounds.sound.sfx[18] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/fireball.ogg"))
-    --Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/level-win.ogg")
-    --Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/boss-beat.ogg")
-    --Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/dungeon-win.ogg")
-    Audio.sounds[22].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/bullet-bill.ogg")
-    --Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/grab.ogg")
-    Audio.sounds[24].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/spring.ogg")
-    --Audio.sounds[25].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/hammer.ogg")
-    --Audio.sounds[29].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/do.ogg")
-    --Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/key.ogg")
-    Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/pswitch.ogg")
-    --extrasounds.sound.sfx[33] = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/tail.ogg")
-    --Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/racoon.ogg")
-    --Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/boot.ogg")
-    --extrasounds.sound.sfx[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/smash.ogg"))
-    Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/thwomp.ogg")
-    --Audio.sounds[38].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/birdo-spit.ogg")
-    --extrasounds.sound.sfx[39] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/birdo-hit.ogg")
-    --Audio.sounds[41].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/birdo-beat.ogg")
-    --extrasounds.sound.sfx[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/npc-fireball.ogg"))
-    extrasounds.sound.sfx[43] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/fireworks.ogg"))
-    --Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/bowser-killed.ogg")
-    --Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/door.ogg")
-    --Audio.sounds[47].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/message.ogg")
-    --Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/yoshi.ogg")
-    --Audio.sounds[49].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/yoshi-hurt.ogg")
-    --Audio.sounds[50].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/yoshi-tongue.ogg")
-    --Audio.sounds[51].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/yoshi-egg.ogg")
-    Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/got-star.ogg")
-    --Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/player-died2.ogg")
-    --Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/yoshi-swallow.ogg")
-    --Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/dry-bones.ogg")
-    --Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/smw-checkpoint.ogg")
-    --extrasounds.sound.sfx[59] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SMBDDX-Mario/dragon-coin.ogg"))
-    --Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/smw-blaarg.ogg")
-    --Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/wart-bubble.ogg")
-    --Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/wart-die.ogg")
-    --Audio.sounds[71].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/climbing.ogg")
-    Audio.sounds[72].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/swim.ogg")
-    --Audio.sounds[73].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/grab2.ogg")
-    --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/saw.ogg")
-    --Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/smb2-throw.ogg")
-    --Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/smb2-hit.ogg")
-    --Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/SMBDDX-Mario/bubble.ogg")
+    if not costume.loadedSounds then
+        Sound.loadCostumeSounds()
+        costume.loadedSounds = true
+    end
     
     Graphics.overrideHUD(costume.drawHUD)
     costume.abilitesenabled = true
@@ -156,94 +103,12 @@ function costume.onDraw()
 end
 
 function costume.onCleanup(p)
-    extrasounds.sound.sfx[1] = nil    
-    Audio.sounds[2].sfx  = nil
-    Audio.sounds[3].sfx  = nil
-    extrasounds.sound.sfx[4] = nil
-    Audio.sounds[5].sfx  = nil
-    Audio.sounds[6].sfx  = nil
-    extrasounds.sound.sfx[7] = nil
-    extrasounds.sound.sfx[8] = nil
-    Audio.sounds[9].sfx  = nil
-    extrasounds.sound.sfx[10] = nil
-    Audio.sounds[11].sfx = nil
-    Audio.sounds[12].sfx = nil
-    Audio.sounds[13].sfx = nil
-    extrasounds.sound.sfx[14] = nil
-    extrasounds.sound.sfx[15] = nil
-    Audio.sounds[16].sfx = nil
-    Audio.sounds[17].sfx = nil
-    extrasounds.sound.sfx[18] = nil
-    Audio.sounds[19].sfx = nil
-    Audio.sounds[20].sfx = nil
-    Audio.sounds[21].sfx = nil
-    Audio.sounds[22].sfx = nil
-    Audio.sounds[23].sfx = nil
-    Audio.sounds[24].sfx = nil
-    Audio.sounds[25].sfx = nil
-    Audio.sounds[29].sfx = nil
-    Audio.sounds[31].sfx = nil
-    Audio.sounds[32].sfx = nil
-    extrasounds.sound.sfx[33] = nil
-    Audio.sounds[34].sfx = nil
-    Audio.sounds[35].sfx = nil
-    extrasounds.sound.sfx[36] = nil
-    Audio.sounds[37].sfx = nil
-    Audio.sounds[38].sfx = nil
-    extrasounds.sound.sfx[39] = nil
-    Audio.sounds[41].sfx = nil
-    extrasounds.sound.sfx[42] = nil
-    extrasounds.sound.sfx[43] = nil
-    Audio.sounds[44].sfx = nil
-    Audio.sounds[46].sfx = nil
-    Audio.sounds[47].sfx = nil
-    Audio.sounds[48].sfx = nil
-    Audio.sounds[49].sfx = nil
-    Audio.sounds[50].sfx = nil
-    Audio.sounds[51].sfx = nil
-    Audio.sounds[52].sfx = nil
-    Audio.sounds[54].sfx = nil
-    Audio.sounds[55].sfx = nil
-    Audio.sounds[56].sfx = nil
-    Audio.sounds[57].sfx = nil
-    Audio.sounds[58].sfx = nil
-    extrasounds.sound.sfx[59] = nil
-    Audio.sounds[61].sfx = nil
-    Audio.sounds[62].sfx = nil
-    Audio.sounds[63].sfx = nil
-    Audio.sounds[71].sfx = nil
-    Audio.sounds[72].sfx = nil
-    Audio.sounds[73].sfx = nil
-    Audio.sounds[75].sfx = nil
-    Audio.sounds[76].sfx = nil
-    extrasounds.sound.sfx[77] = nil
-    Audio.sounds[78].sfx = nil
-    Audio.sounds[79].sfx = nil
-    Audio.sounds[80].sfx = nil
-    extrasounds.sound.sfx[81] = nil
-    Audio.sounds[82].sfx = nil
-    Audio.sounds[91].sfx = nil
-    extrasounds.sound.sfx[92] = nil
-    extrasounds.sound.sfx[93] = nil
-    extrasounds.sound.sfx[94] = nil
-    extrasounds.sound.sfx[95] = nil
-    extrasounds.sound.sfx[96] = nil
-    extrasounds.sound.sfx[97] = nil
-    extrasounds.sound.sfx[98] = nil
-    extrasounds.sound.sfx[99] = nil
-    extrasounds.sound.sfx[100] = nil
-    extrasounds.sound.sfx[101] = nil
-    extrasounds.sound.sfx[102] = nil
-    extrasounds.sound.sfx[103] = nil
-    extrasounds.sound.sfx[104] = nil
-    extrasounds.sound.sfx[105] = nil
-    extrasounds.sound.sfx[106] = nil
-    extrasounds.sound.sfx[107] = nil
-    extrasounds.sound.sfx[108] = nil
-    extrasounds.sound.sfx[109] = nil
-    extrasounds.sound.sfx[110] = nil
-    extrasounds.sound.sfx[111] = nil
-    extrasounds.sound.sfx[112] = nil
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
+        extrasounds.sound.sfx[i] = nil
+    end
     
     Graphics.overrideHUD(Graphics.drawVanillaHUD)
     costume.abilitesenabled = false

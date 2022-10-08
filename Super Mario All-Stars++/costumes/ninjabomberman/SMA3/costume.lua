@@ -6,6 +6,8 @@ local rng = require("base/rng")
 
 local costume = {}
 
+costume.loadedSounds = false
+
 local eventsRegistered = false
 local ready = false
 
@@ -13,62 +15,65 @@ function costume.onInit(p)
     Routine = require("routine")
     Routine.run(costumechange)
     registerEvent(costume,"onTickEnd")
-    Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/stomped.ogg")
-    Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-hit.ogg")
-    extrasounds.sound.sfx[4]  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-smash.ogg")
-    Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-shrink.ogg")
-    Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-grow.ogg")
-    extrasounds.sound.sfx[7]  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/mushroom.ogg")
-    Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/shell-hit.ogg")
-    extrasounds.sound.sfx[10] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-slide.ogg")
-    Audio.sounds[11].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/item-dropped.ogg")
-    Audio.sounds[12].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/has-item.ogg")
-    Audio.sounds[13].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/camera-change.ogg")
-    extrasounds.sound.sfx[15] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/1up.ogg")
-    Audio.sounds[16].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/lava.ogg")
-    Audio.sounds[17].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/warp.ogg")
-    extrasounds.sound.sfx[18] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/fireball.ogg")
-    Audio.sounds[20].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/boss-beat.ogg")
-    Audio.sounds[22].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bullet-bill.ogg")
-    Audio.sounds[23].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/grab.ogg")
-    Audio.sounds[24].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/spring.ogg")
-    Audio.sounds[25].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/hammer.ogg")
-    Audio.sounds[29].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/do.ogg")
-    Audio.sounds[31].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/key.ogg")
-    Audio.sounds[32].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/pswitch.ogg")
-    extrasounds.sound.sfx[33] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/tail.ogg")
-    Audio.sounds[34].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/racoon.ogg")
-    Audio.sounds[35].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/boot.ogg")
-    extrasounds.sound.sfx[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/smash.ogg"))
-    Audio.sounds[37].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/thwomp.ogg")
-    Audio.sounds[38].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-spit.ogg")
-    extrasounds.sound.sfx[39] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/birdo-hit.ogg"))
-    Audio.sounds[41].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-beat.ogg")
-    extrasounds.sound.sfx[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/npc-fireball.ogg"))
-    extrasounds.sound.sfx[43] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/fireworks.ogg")
-    Audio.sounds[44].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bowser-killed.ogg")
-    Audio.sounds[46].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/door.ogg")
-    Audio.sounds[47].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/message.ogg")
-    Audio.sounds[48].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi.ogg")
-    Audio.sounds[49].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-hurt.ogg")
-    Audio.sounds[50].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-tongue.ogg")
-    Audio.sounds[51].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-egg.ogg")
-    --Audio.sounds[52].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/got-star.ogg")
-    Audio.sounds[54].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-died2.ogg")
-    Audio.sounds[55].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-swallow.ogg")
-    Audio.sounds[57].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/dry-bones.ogg")
-    Audio.sounds[58].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smw-checkpoint.ogg")
-    extrasounds.sound.sfx[59] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/dragon-coin.ogg")
-    Audio.sounds[61].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smw-blaarg.ogg")
-    Audio.sounds[62].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/wart-bubble.ogg")
-    Audio.sounds[63].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/wart-die.ogg")
-    Audio.sounds[71].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/climbing.ogg")
-    Audio.sounds[72].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/swim.ogg")
-    Audio.sounds[73].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/grab2.ogg")
-    --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/saw.ogg")
-    Audio.sounds[75].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-throw.ogg")
-    Audio.sounds[76].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-hit.ogg")
-    Audio.sounds[91].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bubble.ogg")
+    if not costume.loadedSounds then
+        Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/stomped.ogg")
+        Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-hit.ogg")
+        extrasounds.sound.sfx[4]  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-smash.ogg")
+        Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-shrink.ogg")
+        Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-grow.ogg")
+        extrasounds.sound.sfx[7]  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/mushroom.ogg")
+        Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/shell-hit.ogg")
+        extrasounds.sound.sfx[10] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-slide.ogg")
+        Audio.sounds[11].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/item-dropped.ogg")
+        Audio.sounds[12].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/has-item.ogg")
+        Audio.sounds[13].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/camera-change.ogg")
+        extrasounds.sound.sfx[15] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/1up.ogg")
+        Audio.sounds[16].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/lava.ogg")
+        Audio.sounds[17].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/warp.ogg")
+        extrasounds.sound.sfx[18] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/fireball.ogg")
+        Audio.sounds[20].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/boss-beat.ogg")
+        Audio.sounds[22].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bullet-bill.ogg")
+        Audio.sounds[23].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/grab.ogg")
+        Audio.sounds[24].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/spring.ogg")
+        Audio.sounds[25].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/hammer.ogg")
+        Audio.sounds[29].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/do.ogg")
+        Audio.sounds[31].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/key.ogg")
+        Audio.sounds[32].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/pswitch.ogg")
+        extrasounds.sound.sfx[33] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/tail.ogg")
+        Audio.sounds[34].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/racoon.ogg")
+        Audio.sounds[35].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/boot.ogg")
+        extrasounds.sound.sfx[36] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/smash.ogg"))
+        Audio.sounds[37].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/thwomp.ogg")
+        Audio.sounds[38].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-spit.ogg")
+        extrasounds.sound.sfx[39] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/birdo-hit.ogg"))
+        Audio.sounds[41].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/birdo-beat.ogg")
+        extrasounds.sound.sfx[42] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/npc-fireball.ogg"))
+        extrasounds.sound.sfx[43] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/fireworks.ogg")
+        Audio.sounds[44].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bowser-killed.ogg")
+        Audio.sounds[46].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/door.ogg")
+        Audio.sounds[47].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/message.ogg")
+        Audio.sounds[48].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi.ogg")
+        Audio.sounds[49].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-hurt.ogg")
+        Audio.sounds[50].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-tongue.ogg")
+        Audio.sounds[51].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-egg.ogg")
+        --Audio.sounds[52].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/got-star.ogg")
+        Audio.sounds[54].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/player-died2.ogg")
+        Audio.sounds[55].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/yoshi-swallow.ogg")
+        Audio.sounds[57].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/dry-bones.ogg")
+        Audio.sounds[58].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smw-checkpoint.ogg")
+        extrasounds.sound.sfx[59] = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/dragon-coin.ogg")
+        Audio.sounds[61].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smw-blaarg.ogg")
+        Audio.sounds[62].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/wart-bubble.ogg")
+        Audio.sounds[63].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/wart-die.ogg")
+        Audio.sounds[71].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/climbing.ogg")
+        Audio.sounds[72].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/swim.ogg")
+        Audio.sounds[73].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/grab2.ogg")
+        --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/saw.ogg")
+        Audio.sounds[75].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-throw.ogg")
+        Audio.sounds[76].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-hit.ogg")
+        Audio.sounds[91].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bubble.ogg")
+        costume.loadedSounds = true
+    end
     eventsRegistered = true
 end
 
@@ -287,31 +292,12 @@ function costume.onCleanup(p)
     Defines.player_grabTopEnabled = nil
     Defines.player_grabShellEnabled = nil
 
-    extrasounds.sound.sfx[1] = nil
-    Audio.sounds[5].sfx  = nil
-    extrasounds.sound.sfx[8] = nil
-    Audio.sounds[14].sfx = nil
-    Audio.sounds[19].sfx = nil
-    Audio.sounds[60].sfx = nil
-    Audio.sounds[21].sfx = nil
-    Audio.sounds[40].sfx = nil
-    
-    extrasounds.sound.sfx[14] = nil
-    extrasounds.sound.sfx[15] = nil
-    extrasounds.sound.sfx[18] = nil
-    
-    extrasounds.sound.sfx92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
-    extrasounds.sound.sfx93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
-    extrasounds.sound.sfx94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-freeze.ogg"))
-    extrasounds.sound.sfx95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-icebreak.ogg"))
-    extrasounds.sound.sfx96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
-    extrasounds.sound.sfx97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
-    extrasounds.sound.sfx98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
-    extrasounds.sound.sfx99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
-    extrasounds.sound.sfx100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
-    extrasounds.sound.sfx101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
-    extrasounds.sound.sfx102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
-    extrasounds.sound.sfx103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
+        extrasounds.sound.sfx[i] = nil
+    end
     
     yoshi.cleanupCharacter()
     

@@ -7,14 +7,14 @@ function smascharacterchanger.onInitAPI()
 end
 
 smascharacterchanger.tvImage = Img.load("graphics/characterchangermenu/tv.png")
-smascharacterchanger.scrollSFX = Sound.openSFX("_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg")
-smascharacterchanger.stopSFX = Sound.openSFX("_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg")
-smascharacterchanger.turnOnSFX = Sound.openSFX("_OST/_Sound Effects/characterchangermenu/turn-on-tv.ogg")
+smascharacterchanger.scrollSFX = SFX.open("_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg")
+smascharacterchanger.stopSFX = SFX.open("_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg")
+smascharacterchanger.turnOnSFX = SFX.open("_OST/_Sound Effects/characterchangermenu/turn-on-tv.ogg")
 smascharacterchanger.menuActive = false
 smascharacterchanger.animationActive = false
 smascharacterchanger.animationTimer = 0
 smascharacterchanger.tvScrollNumber = -600
-smascharacterchanger.menuBGM = Sound.openSFX("_OST/All Stars Menu/Character Changer Menu.ogg")
+smascharacterchanger.menuBGM = SFX.open("_OST/All Stars Menu/Character Changer Menu.ogg")
 
 local soundObject1
 local menuBGMObject
