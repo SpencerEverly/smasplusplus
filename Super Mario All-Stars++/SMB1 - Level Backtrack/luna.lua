@@ -3,22 +3,22 @@ local level_dependencies_normal= require("level_dependencies_normal")
 function generateAreas()
     Routine.wait(0.1, true)
     if table.icontains(smastables.__smb1Levels,"SMB1 - W-3, L-1.lvlx") then
-        Misc.setCameraPosition(-200000,-200600,-200000,-197600)
+        Screen.setCameraPosition(-200000,-200600,-200000,-197600)
     end
     if table.icontains(smastables.__smb1Levels,"SMB1 - W-4, L-1.lvlx") then
-        Misc.setCameraPosition(-200000,-200600,-200000,-196800)
+        Screen.setCameraPosition(-200000,-200600,-200000,-196800)
     end
     if table.icontains(smastables.__smb1Levels,"SMB1 - W-5, L-1.lvlx") then
-        Misc.setCameraPosition(-200000,-200600,-200000,-196000)
+        Screen.setCameraPosition(-200000,-200600,-200000,-196000)
     end
     if table.icontains(smastables.__smb1Levels,"SMB1 - W-6, L-1.lvlx") then
-        Misc.setCameraPosition(-200000,-200600,-200000,-195200)
+        Screen.setCameraPosition(-200000,-200600,-200000,-195200)
     end
     if table.icontains(smastables.__smb1Levels,"SMB1 - W-7, L-1.lvlx") then
-        Misc.setCameraPosition(-200000,-200600,-200000,-194400)
+        Screen.setCameraPosition(-200000,-200600,-200000,-194400)
     end
     if table.icontains(smastables.__smb1Levels,"SMB1 - W-8, L-1.lvlx") then
-        Misc.setCameraPosition(-200000,-200600,-200000,-193600)
+        Screen.setCameraPosition(-200000,-200600,-200000,-193600)
     end
 end
 

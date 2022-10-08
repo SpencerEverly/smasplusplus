@@ -219,18 +219,18 @@ function costume.onCleanup(p)
     extrasounds.sound.sfx[81] = nil
     Audio.sounds[82].sfx = nil
     Audio.sounds[91].sfx = nil
-    extrasounds.sound.sfx92 = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
-    extrasounds.sound.sfx93 = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
-    extrasounds.sound.sfx94 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-freeze.ogg"))
-    extrasounds.sound.sfx95 = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-icebreak.ogg"))
-    extrasounds.sound.sfx96 = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
-    extrasounds.sound.sfx97 = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
-    extrasounds.sound.sfx98 = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
-    extrasounds.sound.sfx99 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
-    extrasounds.sound.sfx100 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
-    extrasounds.sound.sfx101 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
-    extrasounds.sound.sfx102 = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
-    extrasounds.sound.sfx103 = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
+    extrasounds.sound.sfx[92] = Audio.SfxOpen(Misc.resolveSoundFile("sound/sprout-vine.ogg"))
+    extrasounds.sound.sfx[93] = Audio.SfxOpen(Misc.resolveSoundFile("sound/iceball.ogg"))
+    extrasounds.sound.sfx[94] = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-freeze.ogg"))
+    extrasounds.sound.sfx[95] = Audio.SfxOpen(Misc.resolveSoundFile("sound/yi-icebreak.ogg"))
+    extrasounds.sound.sfx[96] = Audio.SfxOpen(Misc.resolveSoundFile("sound/2up.ogg"))
+    extrasounds.sound.sfx[97] = Audio.SfxOpen(Misc.resolveSoundFile("sound/3up.ogg"))
+    extrasounds.sound.sfx[98] = Audio.SfxOpen(Misc.resolveSoundFile("sound/5up.ogg"))
+    extrasounds.sound.sfx[99] = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get2.ogg"))
+    extrasounds.sound.sfx[100] = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get3.ogg"))
+    extrasounds.sound.sfx[101] = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get4.ogg"))
+    extrasounds.sound.sfx[102] = Audio.SfxOpen(Misc.resolveSoundFile("sound/dragon-coin-get5.ogg"))
+    extrasounds.sound.sfx[103] = Audio.SfxOpen(Misc.resolveSoundFile("sound/cherry.ogg"))
 end
 
 return costume
