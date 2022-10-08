@@ -2,8 +2,13 @@ local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local smashud = require("smashud")
 local rng = require("base/rng")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local costume = {}
+
+costume.loadedSounds = false
+
 local characterhp
 local plr
 
@@ -12,7 +17,10 @@ function costume.onInit(p)
     registerEvent(costume,"onTick")
     registerEvent(costume,"onDraw")
     registerEvent(costume,"onPostPlayerHarm")
-    extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/toad/Jasmine/player-jump.ogg")
+    if not costume.loadedSounds then
+        Sound.loadCostumeSounds()
+        costume.loadedSounds = true
+    end
     
     smashud.visible.itembox = false
     characterhp = 3
@@ -108,7 +116,12 @@ function costume.onPostPlayerHarm()
 end
 
 function costume.onCleanup(p)
-    extrasounds.sound.sfx[1] = nil
+    for i = 1,91 do
+        Audio.sounds[i].sfx = nil
+    end
+    for i = 1,165 do
+        extrasounds.sound.sfx[i] = nil
+    end
 end
 
 return costume
