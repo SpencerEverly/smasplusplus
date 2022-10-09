@@ -3,6 +3,7 @@ local smascheats = {}
 local starman = require("starman/star")
 local megashroom = require("mega/megashroom")
 local rng = require("base/rng")
+local playerManager = require("playerManager")
 
 --Some cheats will be disabled until I rework them to make them compatible with my episode. All win NPCs will be remade entirely to be compatible with the episode-specific star system, this is why.
 
@@ -28,6 +29,8 @@ Cheats.deregister("supermario128") --This will be deregistered because we're gon
 Cheats.deregister("1player") --This will be deregistered because we're gonna remake this for customCamera target detection
 Cheats.deregister("2player") --This will be deregistered because we're gonna remake this for customCamera target detection
 Cheats.deregister("moneytree") --This will be deregistered because I'm going to remake this since the coin system was remade
+Cheats.deregister("densenuclearenergy") --This will be deregistered because I'm going to remake this since UR has been switched to a costume
+Cheats.deregister("itsameultimaterinka") --This will be deregistered because I'm going to remake this since UR has been switched to a costume
 
 function smascheats.onInitAPI()
     registerEvent(smascheats,"onDraw")
@@ -190,6 +193,42 @@ if not SaveData.disableX2char then
             Defines.player_hasCheated = false
             player:transform(4, false)
             playerManager.setCostume(CHARACTER_TOAD, "LEGOStarWars-RebelTrooper")
+            return true -- this makes the cheat not toggleable
+        end),
+        flashPlayer = true,activateSFX = 12,
+    })
+end
+
+if not SaveData.disableX2char then
+    Cheats.register("itsameultimaterinka",{ --Turns the player into Ultimate Rinka. This was recoded.
+        onActivate = (function()
+            Defines.player_hasCheated = false
+            player:transform(4, false)
+            playerManager.setCostume(CHARACTER_TOAD, "UltimateRinka")
+            return true -- this makes the cheat not toggleable
+        end),
+        flashPlayer = true,activateSFX = 12,
+    })
+end
+
+if not SaveData.disableX2char then
+    Cheats.register("densenuclearenergy",{ --Turns the player into Ultimate Rinka. This was recoded.
+        onActivate = (function()
+            Defines.player_hasCheated = false
+            player:transform(4, false)
+            playerManager.setCostume(CHARACTER_TOAD, "UltimateRinka")
+            return true -- this makes the cheat not toggleable
+        end),
+        flashPlayer = true,activateSFX = 12,
+    })
+end
+
+if not SaveData.disableX2char then
+    Cheats.register("itsameninjabomberman",{ --Turns the player into Ninja Bomberman
+        onActivate = (function()
+            Defines.player_hasCheated = false
+            player:transform(3, false)
+            playerManager.setCostume(CHARACTER_PEACH, "NinjaBomberman")
             return true -- this makes the cheat not toggleable
         end),
         flashPlayer = true,activateSFX = 12,

@@ -89,9 +89,9 @@ function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being w
         costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
     end
     if costumeSoundDir ~= nil then
-        return SFX.open(costumeSoundDir)
+        return costumeSoundDir
     else
-        return SFX.open(Misc.resolveSoundFile(name))
+        return Misc.resolveSoundFile(name)
     end
 end
 
@@ -100,9 +100,9 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
     for k,v in ipairs(smastables.soundNamesInOrder) do
         costumeCachedSounds[k] = Sound.resolveCostumeSound(v)
         if smastables.extrasoundsNumbersInOrder[k] then
-            extrasounds.sound.sfx[k] = costumeCachedSounds[k]
+            extrasounds.sound.sfx[k] = SFX.open(costumeCachedSounds[k])
         else
-            Audio.sounds[k].sfx = costumeCachedSounds[k]
+            Audio.sounds[k].sfx = SFX.open(costumeCachedSounds[k])
         end
     end
 end

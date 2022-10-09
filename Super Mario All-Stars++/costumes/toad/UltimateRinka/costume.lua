@@ -17,6 +17,7 @@ local rng = require("rng")
 local pm = require("playerManager")
 local imagic = require("imagic")
 local smashud = require("smashud")
+local smastables = require("smastables")
 
 -- Load events
 function costume.onInit(p)
@@ -139,21 +140,23 @@ function costume.onTick()
 
         -- Hovering
         if player.forcedState == 0 then
-            if (player.jumpKeyPressing and floatTimer < 56) then
+            if (player.jumpKeyPressing and floatTimer < 180) then
                 player.speedY = -floatFactor;
                 player:mem(0x44,FIELD_WORD,0)
             end
         end
-        if floatTimer < 56 and (not player:isGroundTouching()) and player:mem(0x13E,FIELD_WORD) == 0 and player.jumpKeyPressing and player:mem(0x40, FIELD_WORD) == 0 then
+        if floatTimer < 180 and (not player:isGroundTouching()) and player:mem(0x13E,FIELD_WORD) == 0 and player.jumpKeyPressing and player:mem(0x40, FIELD_WORD) == 0 then
             local butt = Animation.spawn(12,player.x+rng.randomInt(8,player.width-8) - 16, player.y + player.height - 48)
             butt.speedY = 2;
-            playSFX(16)
+            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                playSFX(16)
+            end
         end
     
         -- Prevent actual jumping
         if player:mem(0x108,FIELD_WORD) == 0 and player:mem(0x44,FIELD_WORD) == 0 then
-            player:mem(0x11E,FIELD_WORD,1)
-            player:mem(0x120,FIELD_WORD,1)
+            player:mem(0x11E,FIELD_BOOL,false)
+            player:mem(0x120,FIELD_BOOL,false)
         end
     
         -- Stop from using normal powerups
@@ -250,7 +253,9 @@ function costume.onInputUpdate()
                 -- Regular rinka attack
                 if player.keys.altRun == KEYS_PRESSED and player:mem(0x26,FIELD_WORD) == 0 then
                     if numberOfRinkas > 0 then
-                        SFX.play(sfx_metalblade)
+                        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                            SFX.play(sfx_metalblade)
+                        end
                         spawnRinka()
                         numberOfRinkas = numberOfRinkas - 1;
                     end
@@ -258,7 +263,9 @@ function costume.onInputUpdate()
 
                 -- Fire flower
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 3 and specialCooldown == 0 then
-                    SFX.play(sfx_fireflower)
+                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                        SFX.play(sfx_fireflower)
+                    end
                     specialCooldown = 250;
                     for i=1,10 do
                         butts = NPC.spawn(13,player.x+(player.width/2),player.y,player.section, false, true)
@@ -270,7 +277,9 @@ function costume.onInputUpdate()
                 -- Ice flower
 
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 7 and specialCooldown == 0 then
-                    SFX.play(sfx_iceflower)
+                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                        SFX.play(sfx_iceflower)
+                    end
                     ice = NPC.spawn(237,player.x+(player.width/2),player.y,player.section, false, true)
                     ice.speedX = 6 * direction;
                     specialCooldown = 150;
@@ -279,7 +288,9 @@ function costume.onInputUpdate()
                 -- Leaf
                 
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 4 and specialCooldown == 0 then
-                    SFX.play(sfx_claw)
+                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                        SFX.play(sfx_claw)
+                    end
                     rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
                     rrr.speedX = 8 * direction;
                     rrr.speedY = 4;
@@ -297,7 +308,9 @@ function costume.onInputUpdate()
 
                 -- Tanooki
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 5 and specialCooldown == 0 then
-                    SFX.play(sfx_claw)
+                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                        SFX.play(sfx_claw)
+                    end
                     for i=-1,1,2 do
                         for q=-1,1,2 do
                         rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
@@ -315,7 +328,9 @@ function costume.onInputUpdate()
                 end
 
                 if player.keys.run == KEYS_PRESSED and player.powerup == 5 then
-                    SFX.play(sfx_invin)
+                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                        SFX.play(sfx_invin)
+                    end
                     butts = NPC.spawn(13,player.x + player.width/2,player.y,player.section, false, true)
                     butts.speedX = rng.randomInt(-6,6)
                     butts.speedY = rng.randomInt(-13,-7)
@@ -323,7 +338,9 @@ function costume.onInputUpdate()
 
                 -- Hammer suit
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 6 and specialCooldown == 0 then
-                    SFX.play(sfx_powerstone)
+                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                        SFX.play(sfx_powerstone)
+                    end
                     for i = 1, 2 do
                         for j = -1, 1 do
                         local rrr = NPC.spawn(171,player.x+(player.width/2),player.y,player.section, false, true)
@@ -388,11 +405,11 @@ function costume.onDraw()
         --flight timer
         
         
-        local floatTimerMod = floatTimer/56 * 46
-        if floatTimerMod > 48 then
-            floatTimerMod = 48
+        local floatTimerMod = floatTimer/180 * 96
+        if floatTimerMod > 98 then
+            floatTimerMod = 98
         end
-        local p = (floatTimerMod/48);
+        local p = (floatTimerMod/98);
         local c = math.ceil(#flightColor*0.25);
         c = math.min(4*math.floor(p*c + 0.5) + 1, #flightColor-3);
         p = 1-p;
