@@ -101,7 +101,7 @@ function costume.onPostNPCKill(npc, harmType)
         local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
         local rngkey = rng.randomInt(1,12)
         if items[npc.id] and Colliders.collide(plr, npc) then
-            SFX.play("costumes/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
+            SFX.play("costumes/mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
         end
     end
 end

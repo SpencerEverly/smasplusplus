@@ -98,14 +98,21 @@ end
 local cachedSounds = {}
 
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
+    for k,v in ipairs(smastables.soundNamesInOrder) do
+        if not smastables.stockSoundNumbersInOrder[k] then
+            extrasounds.sound.sfx[k] = Sound.resolveCostumeSound(v)
+        elseif smastables.stockSoundNumbersInOrder[k] then
+            Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
+        end
+    end
     for i = 1, #smastables.soundNamesInOrder do
-        if cachedSounds[i] == nil then
+        --[[if cachedSounds[i] == nil then
             cachedSounds[i] = Sound.resolveCostumeSound(smastables.soundNamesInOrder[i])
         end
         extrasounds.sound.sfx[i] = cachedSounds[i]
         if i <= 91 then
             Audio.sounds[i].sfx = cachedSounds[i]
-        end
+        end]]
     end
 end
 
