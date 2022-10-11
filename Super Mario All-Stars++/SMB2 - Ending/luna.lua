@@ -111,7 +111,7 @@ function onEvent(eventName)
         whiteflashpre2 = true
     end
     if eventName == "Cutscene 16" then
-        Audio.MusicChange(3, "_OST/Super Mario Bros 2/Ending Cutscene (Part 3).ogg")
+        Sound.changeMusic("_OST/Super Mario Bros 2/Ending Cutscene (Part 3).ogg", 3)
         whiteflashpre2 = false
         whiteflashpre2 = nil
         time = 0

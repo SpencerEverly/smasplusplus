@@ -734,9 +734,9 @@ local actualframecount
 function globalgenerals.onDraw()
     if smasbooleans.targetPlayers then
         for _,p in ipairs(Player.get()) do
-            if p.isValid then
+            if p.isValid and not table.icontains(customCamera.targets,p) then
                 table.insert(customCamera.targets,p)
-            elseif not p.isValid then
+            elseif not p.isValid and table.icontains(customCamera.targets,p) then
                 table.remove(customCamera.targets,p)
             end
         end
