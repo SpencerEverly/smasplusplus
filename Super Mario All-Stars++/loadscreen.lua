@@ -8,6 +8,49 @@ local letterWidths = {
     {52,16,16,16,8, 20,16,10,10,46},
 }
 
+--[[do
+    local function exists(path)
+        local f = io.open(path,"r")
+
+        if f ~= nil then
+            f:close()
+            return true
+        else
+            return false
+        end
+    end
+
+    Misc.resolveFile = (function(path)
+        local inScriptPath = getSMBXPath().. "\\scripts\\".. path
+        local inEpisodePath = _episodePath.. path
+
+        return (exists(path) and path) or (exists(inEpisodePath) and inEpisodePath) or (exists(inScriptPath) and inScriptPath) or nil
+    end)
+
+    -- Make require work better
+    local oldRequire = require
+
+    function require(path)
+        local inScriptPath = getSMBXPath().. "\\scripts\\".. path.. ".lua"
+        local inScriptBasePath = getSMBXPath().. "\\scripts\\base\\".. path.. ".lua"
+        local inEpisodePath = _episodePath.. path.. ".lua"
+
+        local path = (exists(inEpisodePath) and inEpisodePath) or (exists(inScriptPath) and inScriptPath) or (exists(inScriptBasePath) and inScriptBasePath)
+        assert(path ~= nil,"module '".. path.. "' not found.")
+
+        return oldRequire(path)
+    end
+
+    -- lunatime
+    _G.lunatime = require("engine/lunatime")
+
+    -- Color
+    _G.Color = require("engine/color")
+    
+    -- Textplus
+    _G.textplus = require("textplus")
+end]]
+
 package.path = package.path .. ";./scripts/?.lua"
 -- Address of the first player's character. Equivalent to 'player.character', except the player class doesn't exist in loading screens
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0

@@ -21,8 +21,12 @@ smascharacterchanger.tvScrollNumber = -600 --This is used for the TV animation s
 smascharacterchanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
 smascharacterchanger.selectionNumber = 1 --For scrolling left and right
 smascharacterchanger.selectionNumberUpDown = 1 --For scrolling up and down
-smascharacterchanger.maxCharacters = 20 --The max characters from left and right to choose from
+smascharacterchanger.maxCharacters = 24 --The max characters from left and right to choose from
 smascharacterchanger.maxVariants = { --The max variants from up and down to choose from. This is chosen depending on what is chosen from left to right.
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -66,6 +70,10 @@ smascharacterchanger.namesSide = {
     "Tangent",
     "SpongeBob",
     "Eric Cartman",
+    "Pily",
+    "Taizo",
+    "Rebel Trooper",
+    "PAC-MAN",
 }
 
 smascharacterchanger.namesSideGame = {
@@ -89,9 +97,13 @@ smascharacterchanger.namesSideGame = {
     "Spencer Everly (SEE)",
     "SpongeBob SquarePants",
     "South Park",
+    "A2XT2: Gaiden 2",
+    "Dig Dug: Digging Strike",
+    "LEGO Star Wars",
+    "PAC-MAN Arrangement",
 }
     
-
+local changed = false
 
 local soundObject1
 local menuBGMObject
@@ -129,6 +141,10 @@ function smascharacterchanger.shutdownChanger()
     Sound.playSFX(1001)
     Routine.waitFrames(35, true)
     Misc.unpause()
+    if changed then
+        smascharacterinfo.setCostumeSpecifics()
+        changed = false
+    end
     Sound.restoreMusic(-1)
     smascharacterchanger.animationActive = false
     smascharacterchanger.tvScrollNumber = -600
@@ -185,8 +201,21 @@ function smascharacterchanger.onInputUpdate()
             elseif smascharacterchanger.selectionNumber == 20 and smascharacterchanger.selectionNumberUpDown == 1 then
                 player:transform(CHARACTER_MARIO, false)
                 player.setCostume(CHARACTER_MARIO, "SP-1-ERICCARTMAN", false)
+            elseif smascharacterchanger.selectionNumber == 21 and smascharacterchanger.selectionNumberUpDown == 1 then
+                player:transform(CHARACTER_MARIO, false)
+                player.setCostume(CHARACTER_MARIO, "DEMO-XMASPILY", false)
+            elseif smascharacterchanger.selectionNumber == 22 and smascharacterchanger.selectionNumberUpDown == 1 then
+                player:transform(CHARACTER_TOAD, false)
+                player.setCostume(CHARACTER_TOAD, "DIGDUG-DIGGINGSTRIKE", false)
+            elseif smascharacterchanger.selectionNumber == 23 and smascharacterchanger.selectionNumberUpDown == 1 then
+                player:transform(CHARACTER_TOAD, false)
+                player.setCostume(CHARACTER_TOAD, "LEGOSTARWARS-REBELTROOPER", false)
+            elseif smascharacterchanger.selectionNumber == 24 and smascharacterchanger.selectionNumberUpDown == 1 then
+                player:transform(CHARACTER_TOAD, false)
+                player.setCostume(CHARACTER_TOAD, "PACMAN-ARRANGEMENT-PACMAN", false)
             end
             if smascharacterchanger.selectionNumber then
+                changed = true
                 smascharacterchanger.menuActive = false
             end
         end

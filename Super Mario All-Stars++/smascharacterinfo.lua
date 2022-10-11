@@ -44,16 +44,16 @@ function smascharacterinfo.setCostumeSpecifics()
         littleDialogue.characterNames[5] = "Link"
         littleDialogue.characterNames[9] = "Klonoa"
         littleDialogue.characterNames[14] = "Steve"
-        if table.icontains(smastables.__smb3Levels,Level.filename()) == true then
+        if table.icontains(smastables.__smb3Levels,Level.filename()) then
             smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smas.ogg"
-        elseif table.icontains(smastables.__smwLevels,Level.filename()) == true then
+        elseif table.icontains(smastables.__smwLevels,Level.filename()) then
             smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smw.ogg"
         else
             smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
         end
     end
     if currentCostume == "00-SMASPLUSPLUS-BETA" then
-        if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+        if table.icontains(smastables.__smb2Levels,Level.filename()) then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_smb2.ogg")
         elseif Level.filename() then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta.ogg")
@@ -66,7 +66,7 @@ function smascharacterinfo.setCostumeSpecifics()
         smascharacterinfo.pSwitchMusic = "pswitch/pswitch_2012beta.ogg"
     end
     if currentCostume == "01-SMB1-RETRO" then
-        if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+        if table.icontains(smastables.__smb2Levels,Level.filename()) then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1_smb2.ogg")
         elseif Level.filename() then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_smb1.ogg")
@@ -619,8 +619,8 @@ function smascharacterinfo.setCostumeSpecifics()
     end
     if currentCostume == "A2XT-RAOCOW" then
         littleDialogue.characterNames[4] = "Raocow"
-        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt.ogg")
-        starman.sfxFile = Misc.resolveSoundFile("starman/starman_a2xt.ogg")
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_a2xt")
+        starman.sfxFile = Misc.resolveSoundFile("starman/starman_a2xt")
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
@@ -637,8 +637,8 @@ function smascharacterinfo.setCostumeSpecifics()
     end
     if currentCostume == "DIGDUG-DIGGINGSTRIKE" then
         littleDialogue.characterNames[4] = "Taizo"
-        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-        starman.sfxFile = Misc.resolveSoundFile("starman")
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_digdug")
+        starman.sfxFile = Misc.resolveSoundFile("starman/starman_digdug")
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
