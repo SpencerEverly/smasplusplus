@@ -1037,15 +1037,15 @@ pauseplus.backgroundDarkness = 0
 pauseplus.priority = 6
 
 -- The sound effects used when opening the menu, moving around it, changing submenus, or toggling a checkbox.
-pauseplus.openSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu.ogg"))
-pauseplus.closeSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu-closed.ogg"))
-pauseplus.moveSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/pausemenu_cursor.ogg"))
-pauseplus.actionSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/quitmenu.ogg"))
-pauseplus.saveSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/save_dismiss.ogg"))
-pauseplus.checkboxSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/paused_on.ogg"))
-pauseplus.quitgameSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/savequit.ogg"))
-pauseplus.checkbox2SFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/paused_off.ogg"))
-pauseplus.backSFX = SFX.open(Misc.resolveFile("_OST/_Sound Effects/quitmenu_close.ogg"))
+pauseplus.openSFX = "_OST/_Sound Effects/pausemenu.ogg"
+pauseplus.closeSFX = "_OST/_Sound Effects/pausemenu-closed.ogg"
+pauseplus.moveSFX = "_OST/_Sound Effects/pausemenu_cursor.ogg"
+pauseplus.actionSFX = "_OST/_Sound Effects/quitmenu.ogg"
+pauseplus.saveSFX = "_OST/_Sound Effects/save_dismiss.ogg"
+pauseplus.checkboxSFX = "_OST/_Sound Effects/paused_on.ogg"
+pauseplus.quitgameSFX = "_OST/_Sound Effects/savequit.ogg"
+pauseplus.checkbox2SFX = "_OST/_Sound Effects/paused_off.ogg"
+pauseplus.backSFX = "_OST/_Sound Effects/quitmenu_close.ogg"
 
 -- How much space there is on any side of the "box". To mimic the default box, use 59 and 37
 pauseplus.horizontalSpace = 30

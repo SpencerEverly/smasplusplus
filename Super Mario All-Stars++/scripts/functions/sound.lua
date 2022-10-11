@@ -89,20 +89,22 @@ function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being w
         costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
     end
     if costumeSoundDir ~= nil then
-        return costumeSoundDir
+        return SFX.open(costumeSoundDir)
     else
-        return Misc.resolveSoundFile(name)
+        return SFX.open(Misc.resolveSoundFile(name))
     end
 end
 
+local cachedSounds = {}
+
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
-    local costumeCachedSounds = {}
-    for k,v in ipairs(smastables.soundNamesInOrder) do
-        costumeCachedSounds[k] = Sound.resolveCostumeSound(v)
-        if smastables.extrasoundsNumbersInOrder[k] then
-            extrasounds.sound.sfx[k] = SFX.open(costumeCachedSounds[k])
-        else
-            Audio.sounds[k].sfx = SFX.open(costumeCachedSounds[k])
+    for i = 1, #smastables.soundNamesInOrder do
+        if cachedSounds[i] == nil then
+            cachedSounds[i] = Sound.resolveCostumeSound(smastables.soundNamesInOrder[i])
+        end
+        extrasounds.sound.sfx[i] = cachedSounds[i]
+        if i <= 91 then
+            Audio.sounds[i].sfx = cachedSounds[i]
         end
     end
 end
@@ -133,6 +135,7 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
         end
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
+        return
     end
     EventManager.callEvent("onPostChangeMusic", name, sectionid)
 end
@@ -152,6 +155,7 @@ function Sound.muteMusic(sectionid) --Mute all section music, or just mute a spe
         smasbooleans.musicMutedTemporary = true
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
+        return
     end
 end
 
@@ -168,6 +172,7 @@ function Sound.restoreMusic(sectionid) --Restore all section music, or just rest
         smasbooleans.musicMutedTemporary = false
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
+        return
     end
 end
 
@@ -182,6 +187,7 @@ function Sound.refreshMusic(sectionid) --Refresh the music that's currently play
         GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
+        return
     end
 end
 
@@ -196,15 +202,26 @@ function Sound.restoreOriginalMusic(sectionid) --Restore all original section mu
         Section(sectionid).music = songname
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
+        return
     end
 end
 
 function Sound.getMusicID(sectionNumber)
-    return mem(mem(0x00B25828, FIELD_DWORD) + 2*sectionNumber, FIELD_WORD)
+    if sectionNumber >= 0 or sectionNumber <= 20 then
+        return mem(mem(0x00B25828, FIELD_DWORD) + 2*sectionNumber, FIELD_WORD)
+    elseif sectionNumber >= 21 then
+        error("That's higher than SMBX2 can go. Go to a lower section than that.")
+        return
+    end
 end
 
 function Sound.getCustomMusicFromSection(sectionNumber)
-    return mem(mem(0x00B257B8, FIELD_DWORD) + 4*sectionNumber, FIELD_STRING)
+    if sectionNumber >= 0 or sectionNumber <= 20 then
+        return mem(mem(0x00B257B8, FIELD_DWORD) + 4*sectionNumber, FIELD_STRING)
+    elseif sectionNumber >= 21 then
+        error("That's higher than SMBX2 can go. Go to a lower section than that.")
+        return
+    end
 end
 
 function Sound.enablePSwitchMusic(bool)

@@ -713,10 +713,22 @@ local function costumechangeright()
     local currentCostume = player:getCostume()
     local costumeIdx = table.ifind(costumes,currentCostume)
     
-    if costumeIdx ~= nil then
-        player:setCostume(costumes[costumeIdx + 1])
+    if player.character <= 5 then
+        if costumeIdx >= 1 then
+            player:setCostume(costumes[costumeIdx + 1])
+        elseif costumeIdx ~= nil then
+            player:setCostume(costumes[1])
+        elseif costumeIdx == nil then
+            player:setCostume(costumes[1])
+        else
+            player:setCostume(costumes[costumeIdx + 1])
+        end
     else
-        player:setCostume(costumes[1])
+        if costumeIdx ~= nil then
+            player:setCostume(costumes[costumeIdx + 1])
+        else
+            player:setCostume(costumes[1])
+        end
     end
     Sound.playSFX("charcost_costume.ogg")
     Sound.playSFX("charcost-selected.ogg")

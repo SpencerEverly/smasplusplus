@@ -326,6 +326,15 @@ function globalgenerals.onStart()
             end
         end
     end
+    if GameData.respringActive and GameData.respringActive ~= nil then
+        if GameData.savedXCoordinate ~= nil and GameData.savedYCoordinate ~= nil then
+            player:teleport(GameData.savedXCoordinate,GameData.savedYCoordinate)
+        end
+        player:mem(0x140, FIELD_WORD, 250)
+        GameData.respringActive = nil
+        GameData.savedXCoordinate = nil
+        GameData.savedYCoordinate = nil
+    end
     for i = 0,20 do
         GameData.levelMusic[i] = Section(i).music
     end
@@ -732,18 +741,16 @@ function globalgenerals.onDraw()
             end
         end
     end
-    if SaveData.disableX2char == false then
-        if player.character <= 5 then
+    if not smasbooleans.targetPlayers and not smasbooleans.overrideTargets then
+        customCamera.targets = {}
+    end
+    if player.character <= 5 then
+        if SaveData.currentCostume == "N/A" then
             local costumes = playerManager.getCostumes(player.character)
             local currentCostume = player:getCostume()
             local costumeIdx = table.ifind(costumes,currentCostume)
-            if costumeIdx == nil then
-                playerManager.setCostume(player.character, "!Default")
-            end
+            player:setCostume(costumes[1])
         end
-    end
-    if not smasbooleans.targetPlayers and not smasbooleans.overrideTargets then
-        customCamera.targets = {}
     end
     if SaveData._basegame.hud.score > 9999900 then
         SaveData._basegame.hud.score = 9990000
