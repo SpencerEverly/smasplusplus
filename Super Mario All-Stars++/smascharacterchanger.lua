@@ -23,6 +23,7 @@ smascharacterchanger.selectionNumber = 1 --For scrolling left and right
 smascharacterchanger.selectionNumberUpDown = 1 --For scrolling up and down
 smascharacterchanger.maxCharacters = 24 --The max characters from left and right to choose from
 smascharacterchanger.maxVariants = { --The max variants from up and down to choose from. This is chosen depending on what is chosen from left to right.
+    2,
     1,
     1,
     1,
@@ -46,7 +47,16 @@ smascharacterchanger.maxVariants = { --The max variants from up and down to choo
     1,
     1,
     1,
-    1,
+}
+
+smascharacterchanger.namesTop = {
+    mario = {"Mario","Mario"},
+    luigi = {"Luigi","Luigi"},
+}
+
+smascharacterchanger.namesTopGame = {
+    mario = {"SMAS++ 2012 Beta","SMAS++ 2012 Beta"},
+    luigi = {"Super Mario Bros. 1 (NES)","Super Mario Bros. 1 (NES)"},
 }
 
 smascharacterchanger.namesSide = {
@@ -214,6 +224,15 @@ function smascharacterchanger.onInputUpdate()
                 player:transform(CHARACTER_TOAD, false)
                 player.setCostume(CHARACTER_TOAD, "PACMAN-ARRANGEMENT-PACMAN", false)
             end
+            
+            
+            if smascharacterchanger.selectionNumber == 1 and smascharacterchanger.selectionNumberUpDown == 2 then
+                player:transform(CHARACTER_MARIO, false)
+                player.setCostume(CHARACTER_MARIO, "00-SMASPLUSPLUS-BETA", false)
+            end
+            
+            
+            
             if smascharacterchanger.selectionNumber then
                 changed = true
                 smascharacterchanger.menuActive = false
@@ -250,6 +269,10 @@ function smascharacterchanger.onDraw()
             if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown == 1 then
                 textPrintCentered(smascharacterchanger.namesSide[smascharacterchanger.selectionNumber], 400, 200)
                 textPrintCentered(smascharacterchanger.namesSideGame[smascharacterchanger.selectionNumber], 400, 250)
+            end
+            if smascharacterchanger.selectionNumber == 1 and smascharacterchanger.selectionNumberUpDown >= 2 then
+                textPrintCentered(smascharacterchanger.namesTop.mario[smascharacterchanger.selectionNumberUpDown], 400, 200)
+                textPrintCentered(smascharacterchanger.namesTopGame.mario[smascharacterchanger.selectionNumberUpDown], 400, 250)
             end
         end
         if not smascharacterchanger.animationActive and started then
