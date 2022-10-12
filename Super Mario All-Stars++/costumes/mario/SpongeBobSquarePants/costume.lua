@@ -23,8 +23,8 @@ function costume.onInit(p)
     plr = p
     registerEvent(costume,"onStart")
     registerEvent(costume,"onDraw")
-    registerEvent(costume,"onPlayerHarm")
-    registerEvent(costume,"onPlayerKill")
+    registerEvent(costume,"onPostPlayerHarm")
+    registerEvent(costume,"onPostPlayerKill")
     registerEvent(costume,"onPostNPCKill")
     registerEvent(costume,"onTick")
     registerEvent(costume,"onTickEnd")
@@ -161,11 +161,11 @@ function costume.onTick(repeated)
     end
 end
 
-function costume.onPlayerHarm()
+function costume.onPostPlayerHarm()
     
 end
 
-function costume.onPlayerKill()
+function costume.onPostPlayerKill()
     local rngkey = rng.randomInt(1,7)
     Sound.playSFX("mario/SpongeBobSquarePants/spongebob-dead"..rngkey..".ogg")
 end

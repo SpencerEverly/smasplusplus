@@ -618,11 +618,11 @@ local inputEvent = function(playerData, p)
                     pilyData.cannonballTimer = 0
     
                     if  playerData.powerup == 6  then
-                        SFX.play("sound/character/ur_claw.ogg")
+                        Sound.playSFX("sound/character/ur_claw.ogg")
                     elseif  playerData.powerup == 3  then
-                        Sound.playSFX("mario/Demo-XmasPily/sound/extended/flame-shield-dash.ogg")
+                        Sound.playSFX("sound/extended/flame-shield-dash.ogg")
                     else
-                        SFX.play("sound/boot.ogg")
+                        Sound.playSFX("sound/boot.ogg")
                     end
                     p:mem(0x50, FIELD_BOOL, true)
                     isSpinjumping = true
