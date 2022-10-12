@@ -618,7 +618,7 @@ local inputEvent = function(playerData, p)
                     pilyData.cannonballTimer = 0
     
                     if  playerData.powerup == 6  then
-                        Sound.playSFX("sound/character/ur_claw.ogg")
+                        SFX.play("sound/character/ur_claw.ogg")
                     elseif  playerData.powerup == 3  then
                         Sound.playSFX("sound/extended/flame-shield-dash.ogg")
                     else
