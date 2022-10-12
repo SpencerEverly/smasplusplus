@@ -1656,14 +1656,12 @@ function pausemenu2.onStart()
                 
                 --Character Menu
                 if SaveData.disableX2char == false then
+                    pauseplus.createOption("charactermenu",{text = "Change Character (New, WIP)",closeMenu = true,description = "Switch the player's character to anything of your choice!", action =  function() smascharacterchanger.menuActive = true smascharacterchanger.animationActive = true end})
                     pauseplus.createSubmenu("costumeoptions",{headerText = "<size 1.5>Costume Specific Options</size>"})
                     pauseplus.createOption("charactermenu",{text = "Change Character (Previous)",description = "Switch the player's character to anything of your choice!", action =  function() characterchangeleft() end})
                     pauseplus.createOption("charactermenu",{text = "Change Character (Next)",description = "Switch the player's character to anything of your choice!", action =  function() characterchange() end})
                     pauseplus.createOption("charactermenu",{text = "Change Costumes (Previous)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeleft() end})
                     pauseplus.createOption("charactermenu",{text = "Change Costumes (Next)",description = "Switch the player's costume to anything of your choice!", action =  function() costumechangeright() end})
-                    if Misc.inEditor() then
-                        pauseplus.createOption("charactermenu",{text = "Change Character (WIP)",closeMenu = true,description = "Switch the player's character to anything of your choice!", action =  function() smascharacterchanger.menuActive = true smascharacterchanger.animationActive = true end})
-                    end
                     pauseplus.createOption("charactermenu",{text = "Costume Specific Options",goToSubmenu = "costumeoptions",description = "Change settings regarding the costume that is currently being worn."})
                     if (Level.filename() == "map.lvlx") == false then
                         pauseplus.createOption("charactermenu",{text = "Enable/Disable Multiplayer",closeMenu = true,description = "Toggle the status of multiplayer. This will only work on 1.3 Mode (If in Normal Mode this won't do anything).",action = function() checkingplayerstatus() end})
