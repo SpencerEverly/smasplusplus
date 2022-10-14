@@ -46,9 +46,35 @@ function smascharacterchanger.addCharacter(name,game,character,costume)
     end
     
     table.insert(smascharacterchanger.names, name)
-    table.insert(smascharacterchanger.namesGame, game)
+    table.insert(smascharacterchanger.namesGame, {game})
     table.insert(smascharacterchanger.namesCharacter, character)
-    table.insert(smascharacterchanger.namesCostume, costume)
+    table.insert(smascharacterchanger.namesCostume, {costume})
+end
+
+function smascharacterchanger.addVariant(nameToFind,game,costume)
+    if nameToFind == nil then
+        error("You must add a name to find who to add this to.")
+        return
+    end
+    if game == nil then
+        error("You must add a game as a string to this character.")
+        return
+    end
+    if costume == nil then
+        error("You must add a costume as a string to this character (All caps). If specifying nil, make sure that nil is a string.")
+        return
+    end
+    if nameToFind ~= nil then
+        local foundName = table.ifind(smascharacterchanger.names, nameToFind)
+        if foundName == nil then
+            error("Name wasn't found! You need to specify a valid name.")
+            return
+        else
+            --Misc.dialog(tostring(foundName))
+            table.insert(smascharacterchanger.namesGame[foundName], game)
+            table.insert(smascharacterchanger.namesCostume[foundName], costume)
+        end
+    end
 end
 
 smascharacterchanger.addCharacter("Mario","Super Mario Bros. 3",1,"!DEFAULT")
@@ -91,6 +117,13 @@ smascharacterchanger.addCharacter("JC Foster","JC Foster Takes it to the Moon",1
 smascharacterchanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHECUCUMBER")
 smascharacterchanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
 smascharacterchanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
+
+smascharacterchanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
+smascharacterchanger.addVariant("Mario","Default (SMBX 1.3)","!DEFAULT-ORIGINAL")
+smascharacterchanger.addVariant("Mario","SMAS++ 2012 Beta","00-SMASPLUSPLUS-BETA")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. (SNES)","03-SMB1-SMAS")
 
 local changed = false
 
@@ -155,7 +188,7 @@ function smascharacterchanger.onInputUpdate()
         if player.keys.run == KEYS_PRESSED then
             smascharacterchanger.menuActive = false
         end
-        --[[if player.keys.up == KEYS_PRESSED then
+        if player.keys.up == KEYS_PRESSED then
             Sound.playSFX(26)
             smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown + 1
             if smascharacterchanger.selectionNumberUpDown > #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber] then
@@ -167,7 +200,7 @@ function smascharacterchanger.onInputUpdate()
             if smascharacterchanger.selectionNumberUpDown < 1 then
                 smascharacterchanger.selectionNumberUpDown = 1
             end
-        end]]
+        end
         if player.keys.left == KEYS_PRESSED then
             Sound.playSFX(26)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
@@ -186,7 +219,7 @@ function smascharacterchanger.onInputUpdate()
             if smascharacterchanger.selectionNumber then
                 if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
-                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber], false)
+                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
                 else
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
@@ -226,13 +259,9 @@ function smascharacterchanger.onDraw()
             elseif smascharacterchanger.selectionNumber > #smascharacterchanger.names then
                 smascharacterchanger.selectionNumber = 1
             end
-            if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown == 1 then
+            if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown then
                 textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 400, 200)
-                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber], 400, 250)
-            end
-            if smascharacterchanger.selectionNumber == 1 and smascharacterchanger.selectionNumberUpDown >= 2 then
-                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 400, 200)
-                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber], 400, 250)
+                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], 400, 250)
             end
         end
         if not smascharacterchanger.animationActive and started then
