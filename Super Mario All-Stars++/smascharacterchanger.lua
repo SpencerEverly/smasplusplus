@@ -77,12 +77,14 @@ function smascharacterchanger.addVariant(nameToFind,game,costume)
     end
 end
 
-smascharacterchanger.addCharacter("Mario","Super Mario Bros. 3",1,"!DEFAULT")
+smascharacterchanger.addCharacter("Mario","Default (SMAS++)",1,"!DEFAULT")
 smascharacterchanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
 smascharacterchanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
 smascharacterchanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
+smascharacterchanger.addCharacter("Yoshi (SMW2)","SMW2: Yoshi's Island",10,"nil")
+smascharacterchanger.addCharacter("Yoshi (SMW)","Super Mario World",2,"SMW1-YOSHI")
 smascharacterchanger.addCharacter("Wario","Super Mario Bros. X2",7,"nil")
-smascharacterchanger.addCharacter("Waluigi","Mario Tennis",2,"WALUIGI")
+smascharacterchanger.addCharacter("Waluigi (SMW)","Mario Tennis",2,"WALUIGI")
 smascharacterchanger.addCharacter("Bowser","Super Mario Bros. X2",8,"nil")
 smascharacterchanger.addCharacter("Goomba","Super Mario Bros. 3",1,"Goomba")
 smascharacterchanger.addCharacter("Link","Zelda II",5,"!DEFAULT")
@@ -96,7 +98,6 @@ smascharacterchanger.addCharacter("Zelda","Super Mario Bros. X2",13,"nil")
 smascharacterchanger.addCharacter("Ultimate Rinka","Super Mario Bros. X2",4,"ULTIMATERINKA")
 smascharacterchanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
 smascharacterchanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
-smascharacterchanger.addCharacter("Yoshi","SMW2: Yoshi's Island",10,"nil")
 smascharacterchanger.addCharacter("Steve","Minecraft",14,"nil")
 smascharacterchanger.addCharacter("Demo","A2XT",1,"A2XT-DEMO")
 smascharacterchanger.addCharacter("Iris","A2XT",2,"A2XT-IRIS")
@@ -119,6 +120,7 @@ smascharacterchanger.addCharacter("JC Foster","JC Foster Takes it to the Moon",1
 smascharacterchanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHECUCUMBER")
 smascharacterchanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
 smascharacterchanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
+smascharacterchanger.addCharacter("Wohlstand","TheXTech",2,"WOHLSTAND")
 
 --**Mario variants**
 smascharacterchanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
@@ -155,6 +157,11 @@ smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Luigi)","SMM2-
 smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Blue Toad)","SMM2-TOAD")
 smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Yellow Toad)","SMM2-YELLOWTOAD")
 smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Toadette)","SMM2-TOADETTE")
+
+--**Luigi variants**
+smascharacterchanger.addVariant("Luigi","Spencer Everly (SMBSE)","00-SPENCEREVERLY")
+smascharacterchanger.addVariant("Luigi","Super Mario Bros. (NES)","01-SMB1-RETRO")
+smascharacterchanger.addVariant("Luigi","Super Mario World (SNES)","SMW-LUIGI")
 
 local changed = false
 
