@@ -107,9 +107,13 @@ end
 function smascharacterchanger.startupChanger()
     Misc.pause()
     Sound.muteMusic(-1)
+    if pauseplus then
+        pauseplus.canPause = false
+    end
     soundObject1 = SFX.play(smascharacterchanger.scrollSFX)
     Routine.waitFrames(10, true)
     Misc.pause()
+    smasbooleans.toggleOffInventory = true
     Routine.waitFrames(54, true)
     if soundObject1 ~= nil then
         soundObject1:FadeOut(10)
@@ -136,6 +140,10 @@ function smascharacterchanger.shutdownChanger()
         changed = false
     end
     Sound.restoreMusic(-1)
+    if pauseplus then
+        pauseplus.canPause = true
+    end
+    smasbooleans.toggleOffInventory = false
     smascharacterchanger.animationActive = false
     smascharacterchanger.tvScrollNumber = -600
     smascharacterchanger.animationTimer = 0
