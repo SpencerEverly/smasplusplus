@@ -2,7 +2,7 @@ local smascharacterchanger = {}
 
 local playerManager = require("playerManager")
 local textplus = require("textplus")
-local smbx13font = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
+local smbx13font = textplus.loadFont("littleDialogue/font/smilebasic.ini")
 
 function smascharacterchanger.onInitAPI()
     registerEvent(smascharacterchanger,"onDraw")
@@ -81,17 +81,19 @@ smascharacterchanger.addCharacter("Mario","Super Mario Bros. 3",1,"!DEFAULT")
 smascharacterchanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
 smascharacterchanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
 smascharacterchanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
-smascharacterchanger.addCharacter("Wario","SMBX2",7,"nil")
+smascharacterchanger.addCharacter("Wario","Super Mario Bros. X2",7,"nil")
 smascharacterchanger.addCharacter("Waluigi","Mario Tennis",2,"WALUIGI")
-smascharacterchanger.addCharacter("Bowser","SMBX2",8,"nil")
+smascharacterchanger.addCharacter("Bowser","Super Mario Bros. X2",8,"nil")
+smascharacterchanger.addCharacter("Goomba","Super Mario Bros. 3",1,"Goomba")
 smascharacterchanger.addCharacter("Link","Zelda II",5,"!DEFAULT")
 smascharacterchanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
 smascharacterchanger.addCharacter("Klonoa","Klonoa 2 (GBA)",9,"nil")
 smascharacterchanger.addCharacter("Plunder Bomber","Super Bomberman 5",3,"NINJABOMBERMAN")
-smascharacterchanger.addCharacter("Rosalina","SMBX2",11,"nil")
-smascharacterchanger.addCharacter("Snake","SMBX2",12,"nil")
-smascharacterchanger.addCharacter("Zelda","SMBX2",13,"nil")
-smascharacterchanger.addCharacter("Ultimate Rinka","SMBX2",4,"ULTIMATERINKA")
+smascharacterchanger.addCharacter("Rosalina","Super Mario Bros. X2",11,"nil")
+smascharacterchanger.addCharacter("Rosalina (Alt)","Super Mario Bros. X2",1,"ROSALINA")
+smascharacterchanger.addCharacter("Snake","Super Mario Bros. X2",12,"nil")
+smascharacterchanger.addCharacter("Zelda","Super Mario Bros. X2",13,"nil")
+smascharacterchanger.addCharacter("Ultimate Rinka","Super Mario Bros. X2",4,"ULTIMATERINKA")
 smascharacterchanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
 smascharacterchanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
 smascharacterchanger.addCharacter("Yoshi","SMW2: Yoshi's Island",10,"nil")
@@ -118,12 +120,41 @@ smascharacterchanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHE
 smascharacterchanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
 smascharacterchanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
 
+--**Mario variants**
 smascharacterchanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
 smascharacterchanger.addVariant("Mario","Default (SMBX 1.3)","!DEFAULT-ORIGINAL")
 smascharacterchanger.addVariant("Mario","SMAS++ 2012 Beta","00-SMASPLUSPLUS-BETA")
 smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
 smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
 smascharacterchanger.addVariant("Mario","Super Mario Bros. (SNES)","03-SMB1-SMAS")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. 2 (NES)","04-SMB2-RETRO")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. 2 (SNES)","05-SMB2-SMAS")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. 3 (NES)","06-SMB3-RETRO")
+smascharacterchanger.addVariant("Mario","Super Mario World (SNES)","SMW-MARIO")
+smascharacterchanger.addVariant("Mario","Super Mario World 2 (SNES)","Z-SMW2-ADULTMARIO")
+smascharacterchanger.addVariant("Mario","Super Mario Land 2 (GB)","07-SML2")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. Special (PC-8801/Sharp X1)","08-SMBSPECIAL")
+smascharacterchanger.addVariant("Mario","Super Mario World (NES, Pirate)","09-SMW-PIRATE")
+smascharacterchanger.addVariant("Mario","Hotel Mario (Philips CD-i)","10-HOTELMARIO")
+smascharacterchanger.addVariant("Mario","Super Mario Advance 1 (GBA)","11-SMA1")
+smascharacterchanger.addVariant("Mario","Super Mario Advance 2 (GBA)","12-SMA2")
+smascharacterchanger.addVariant("Mario","Super Mario Advance 4 (GBA)","13-SMA4")
+smascharacterchanger.addVariant("Mario","New Super Mario Bros. (SMBX)","14-NSMBDS-SMBX")
+smascharacterchanger.addVariant("Mario","New Super Mario Bros. (NDS)","15-NSMBDS-ORIGINAL")
+smascharacterchanger.addVariant("Mario","New Super Mario Bros. Wii (Wii)","16-NSMBWII-MARIO")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. DDX (PC)","SMBDDX-MARIO")
+smascharacterchanger.addVariant("Mario","Princess Rescue (Atari 2600)","PRINCESSRESCUE")
+
+smascharacterchanger.addVariant("Mario","Golden Mario","GOLDENMARIO")
+smascharacterchanger.addVariant("Mario","Marink","MARINK")
+smascharacterchanger.addVariant("Mario","Modern Mario","MODERN")
+smascharacterchanger.addVariant("Mario","Super Mario World: Mario Enhanced","MODERN2")
+
+smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Mario)","SMM2-MARIO")
+smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Luigi)","SMM2-LUIGI")
+smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Blue Toad)","SMM2-TOAD")
+smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Yellow Toad)","SMM2-YELLOWTOAD")
+smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Toadette)","SMM2-TOADETTE")
 
 local changed = false
 
@@ -134,7 +165,7 @@ local started = false
 local ending = false
 
 local function textPrintCentered(t, x, y, color)
-    textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=2, yscale=2, color=color, priority = -0.7, font = smbx13font}
+    textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = -1.7, font = smbx13font}
 end
 
 function smascharacterchanger.startupChanger()
@@ -198,7 +229,7 @@ function smascharacterchanger.onInputUpdate()
             Sound.playSFX(26)
             smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown - 1
             if smascharacterchanger.selectionNumberUpDown < 1 then
-                smascharacterchanger.selectionNumberUpDown = 1
+                smascharacterchanger.selectionNumberUpDown = #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber]
             end
         end
         if player.keys.left == KEYS_PRESSED then
@@ -243,11 +274,11 @@ function smascharacterchanger.onDraw()
             end
             if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 64 then
                 smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber + 9.2
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -0.5)
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -1.5)
             end
             if smascharacterchanger.animationTimer >= 65 then
                 smascharacterchanger.tvScrollNumber = 0
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -0.5)
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
             end
         end
         if started then
@@ -265,7 +296,7 @@ function smascharacterchanger.onDraw()
             end
         end
         if not smascharacterchanger.animationActive and started then
-            Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -0.5)
+            Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
         end
     elseif not smascharacterchanger.menuActive and started then
         if menuBGMObject ~= nil then
