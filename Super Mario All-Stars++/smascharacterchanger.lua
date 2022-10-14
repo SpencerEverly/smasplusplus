@@ -55,28 +55,42 @@ smascharacterchanger.addCharacter("Mario","Super Mario Bros. 3",1,"!DEFAULT")
 smascharacterchanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
 smascharacterchanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
 smascharacterchanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
+smascharacterchanger.addCharacter("Wario","SMBX2",7,"nil")
+smascharacterchanger.addCharacter("Waluigi","Mario Tennis",2,"WALUIGI")
+smascharacterchanger.addCharacter("Bowser","SMBX2",8,"nil")
 smascharacterchanger.addCharacter("Link","Zelda II",5,"!DEFAULT")
 smascharacterchanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
-smascharacterchanger.addCharacter("Wario","SMBX2",7,"nil")
-smascharacterchanger.addCharacter("Bowser","SMBX2",8,"nil")
 smascharacterchanger.addCharacter("Klonoa","Klonoa 2 (GBA)",9,"nil")
-smascharacterchanger.addCharacter("Yoshi","SMW2: Yoshi's Island",10,"nil")
+smascharacterchanger.addCharacter("Plunder Bomber","Super Bomberman 5",3,"NINJABOMBERMAN")
 smascharacterchanger.addCharacter("Rosalina","SMBX2",11,"nil")
 smascharacterchanger.addCharacter("Snake","SMBX2",12,"nil")
 smascharacterchanger.addCharacter("Zelda","SMBX2",13,"nil")
-smascharacterchanger.addCharacter("Steve","Minecraft",14,"nil")
-smascharacterchanger.addCharacter("Uncle Broadsword","A2XT",15,"nil")
+smascharacterchanger.addCharacter("Ultimate Rinka","SMBX2",4,"ULTIMATERINKA")
 smascharacterchanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
 smascharacterchanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
+smascharacterchanger.addCharacter("Yoshi","SMW2: Yoshi's Island",10,"nil")
+smascharacterchanger.addCharacter("Steve","Minecraft",14,"nil")
+smascharacterchanger.addCharacter("Demo","A2XT",1,"A2XT-DEMO")
+smascharacterchanger.addCharacter("Iris","A2XT",2,"A2XT-IRIS")
+smascharacterchanger.addCharacter("Kood","A2XT",3,"A2XT-KOOD")
+smascharacterchanger.addCharacter("Raocow","A2XT/YouTube",4,"A2XT-RAOCOW")
+smascharacterchanger.addCharacter("Sheath","A2XT",5,"A2XT-SHEATH")
+smascharacterchanger.addCharacter("Uncle Broadsword","A2XT",15,"nil")
+smascharacterchanger.addCharacter("Pily","A2XT2: Gaiden 2",1,"DEMO-XMASPILY")
 smascharacterchanger.addCharacter("Tangent","Spencer Everly (SEE)",4,"SEE-TANGENT")
 smascharacterchanger.addCharacter("SpongeBob","SpongeBob SquarePants",1,"SPONGEBOBSQUAREPANTS")
 smascharacterchanger.addCharacter("Eric Cartman","South Park",1,"SP-1-ERICCARTMAN")
-smascharacterchanger.addCharacter("Pily","A2XT2: Gaiden 2",1,"DEMO-XMASPILY")
-smascharacterchanger.addCharacter("Taizo","Dig Dug: Digging Strike",4,"DIGDUG-DIGGINGSTRIKE")
 smascharacterchanger.addCharacter("Rebel Trooper","LEGO Star Wars",4,"LEGOSTARWARS-REBELTROOPER")
+smascharacterchanger.addCharacter("SMG4","SMG4 (YouTube)",1,"SMG4")
 smascharacterchanger.addCharacter("PAC-MAN","PAC-MAN Arrangement",4,"PACMAN-ARRANGEMENT-PACMAN")
+smascharacterchanger.addCharacter("Taizo","Dig Dug: Digging Strike",4,"DIGDUG-DIGGINGSTRIKE")
 smascharacterchanger.addCharacter("Caillou","GoAnimate/Vyond",1,"GA-CAILLOU")
 smascharacterchanger.addCharacter("Boris","GoAnimate/Vyond",2,"GA-BORIS")
+smascharacterchanger.addCharacter("Runner Red","10 Second Run (DSi)",1,"GO-10SECONDRUN")
+smascharacterchanger.addCharacter("JC Foster","JC Foster Takes it to the Moon",1,"JCFOSTERTAKESITTOTHEMOON")
+smascharacterchanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHECUCUMBER")
+smascharacterchanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
+smascharacterchanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
 
 local changed = false
 
@@ -133,7 +147,7 @@ function smascharacterchanger.onInputUpdate()
         if player.keys.run == KEYS_PRESSED then
             smascharacterchanger.menuActive = false
         end
-        if player.keys.up == KEYS_PRESSED then
+        --[[if player.keys.up == KEYS_PRESSED then
             Sound.playSFX(26)
             smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown + 1
             if smascharacterchanger.selectionNumberUpDown > #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber] then
@@ -145,7 +159,7 @@ function smascharacterchanger.onInputUpdate()
             if smascharacterchanger.selectionNumberUpDown < 1 then
                 smascharacterchanger.selectionNumberUpDown = 1
             end
-        end
+        end]]
         if player.keys.left == KEYS_PRESSED then
             Sound.playSFX(26)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
