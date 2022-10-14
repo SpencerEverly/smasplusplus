@@ -21,98 +21,63 @@ smascharacterchanger.tvScrollNumber = -600 --This is used for the TV animation s
 smascharacterchanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
 smascharacterchanger.selectionNumber = 1 --For scrolling left and right
 smascharacterchanger.selectionNumberUpDown = 1 --For scrolling up and down
-smascharacterchanger.maxCharacters = 24 --The max characters from left and right to choose from
-smascharacterchanger.maxVariants = { --The max variants from up and down to choose from. This is chosen depending on what is chosen from left to right.
-    2,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-}
 
-smascharacterchanger.namesTop = {
-    mario = {"Mario","Mario"},
-    luigi = {"Luigi","Luigi"},
-}
+smascharacterchanger.names = {}
+smascharacterchanger.namesGame = {}
+smascharacterchanger.namesCharacter = {}
+smascharacterchanger.namesCostume = {}
 
-smascharacterchanger.namesTopGame = {
-    mario = {"SMAS++ 2012 Beta","SMAS++ 2012 Beta"},
-    luigi = {"Super Mario Bros. 1 (NES)","Super Mario Bros. 1 (NES)"},
-}
-
-smascharacterchanger.namesSide = {
-    "Mario",
-    "Luigi",
-    "Peach",
-    "Toad",
-    "Link",
-    "Mega Man",
-    "Wario",
-    "Bowser",
-    "Klonoa",
-    "Yoshi",
-    "Rosalina",
-    "Snake",
-    "Zelda",
-    "Steve",
-    "Uncle Broadsword",
-    "Samus",
-    "Frisk",
-    "Tangent",
-    "SpongeBob",
-    "Eric Cartman",
-    "Pily",
-    "Taizo",
-    "Rebel Trooper",
-    "PAC-MAN",
-}
-
-smascharacterchanger.namesSideGame = {
-    "Super Mario Bros. 3",
-    "Super Mario Bros. 3",
-    "Super Mario Bros. 2",
-    "Super Mario Bros. 2",
-    "Zelda II",
-    "Mega Man X7",
-    "SMBX2",
-    "SMBX2",
-    "Klonoa 2 (GBA)",
-    "SMW2: Yoshi's Island",
-    "SMBX2",
-    "SMBX2",
-    "SMBX2",
-    "Minecraft",
-    "A2XT",
-    "Metroid (SMBX2)",
-    "Undertale",
-    "Spencer Everly (SEE)",
-    "SpongeBob SquarePants",
-    "South Park",
-    "A2XT2: Gaiden 2",
-    "Dig Dug: Digging Strike",
-    "LEGO Star Wars",
-    "PAC-MAN Arrangement",
-}
+function smascharacterchanger.addCharacter(name,game,character,costume)
+    if name == nil then
+        error("You must add a name as a string to this character.")
+        return
+    end
+    if game == nil then
+        error("You must add a game as a string to this character.")
+        return
+    end
+    if character == nil then
+        error("You must add a character as a string or a number, which specifies the first 16 characters.")
+        return
+    end
+    if costume == nil then
+        error("You must add a costume as a string to this character (All caps). If specifying nil, make sure that nil is a string.")
+        return
+    end
     
+    table.insert(smascharacterchanger.names, name)
+    table.insert(smascharacterchanger.namesGame, game)
+    table.insert(smascharacterchanger.namesCharacter, character)
+    table.insert(smascharacterchanger.namesCostume, costume)
+end
+
+smascharacterchanger.addCharacter("Mario","Super Mario Bros. 3",1,"!DEFAULT")
+smascharacterchanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
+smascharacterchanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
+smascharacterchanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
+smascharacterchanger.addCharacter("Link","Zelda II",5,"!DEFAULT")
+smascharacterchanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
+smascharacterchanger.addCharacter("Wario","SMBX2",7,"nil")
+smascharacterchanger.addCharacter("Bowser","SMBX2",8,"nil")
+smascharacterchanger.addCharacter("Klonoa","Klonoa 2 (GBA)",9,"nil")
+smascharacterchanger.addCharacter("Yoshi","SMW2: Yoshi's Island",10,"nil")
+smascharacterchanger.addCharacter("Rosalina","SMBX2",11,"nil")
+smascharacterchanger.addCharacter("Snake","SMBX2",12,"nil")
+smascharacterchanger.addCharacter("Zelda","SMBX2",13,"nil")
+smascharacterchanger.addCharacter("Steve","Minecraft",14,"nil")
+smascharacterchanger.addCharacter("Uncle Broadsword","A2XT",15,"nil")
+smascharacterchanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
+smascharacterchanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
+smascharacterchanger.addCharacter("Tangent","Spencer Everly (SEE)",4,"SEE-TANGENT")
+smascharacterchanger.addCharacter("SpongeBob","SpongeBob SquarePants",1,"SPONGEBOBSQUAREPANTS")
+smascharacterchanger.addCharacter("Eric Cartman","South Park",1,"SP-1-ERICCARTMAN")
+smascharacterchanger.addCharacter("Pily","A2XT2: Gaiden 2",1,"DEMO-XMASPILY")
+smascharacterchanger.addCharacter("Taizo","Dig Dug: Digging Strike",4,"DIGDUG-DIGGINGSTRIKE")
+smascharacterchanger.addCharacter("Rebel Trooper","LEGO Star Wars",4,"LEGOSTARWARS-REBELTROOPER")
+smascharacterchanger.addCharacter("PAC-MAN","PAC-MAN Arrangement",4,"PACMAN-ARRANGEMENT-PACMAN")
+smascharacterchanger.addCharacter("Caillou","GoAnimate/Vyond",1,"GA-CAILLOU")
+smascharacterchanger.addCharacter("Boris","GoAnimate/Vyond",2,"GA-BORIS")
+
 local changed = false
 
 local soundObject1
@@ -150,6 +115,7 @@ function smascharacterchanger.shutdownChanger()
     smascharacterchanger.animationActive = true
     Sound.playSFX(1001)
     Routine.waitFrames(35, true)
+    smascharacterchanger.selectionNumberUpDown = 1
     Misc.unpause()
     if changed then
         smascharacterinfo.setCostumeSpecifics()
@@ -170,7 +136,7 @@ function smascharacterchanger.onInputUpdate()
         if player.keys.up == KEYS_PRESSED then
             Sound.playSFX(26)
             smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown + 1
-            if smascharacterchanger.selectionNumberUpDown > smascharacterchanger.maxVariants[smascharacterchanger.selectionNumber] then
+            if smascharacterchanger.selectionNumberUpDown > #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber] then
                 smascharacterchanger.selectionNumberUpDown = 1
             end
         elseif player.keys.down == KEYS_PRESSED then
@@ -192,51 +158,23 @@ function smascharacterchanger.onInputUpdate()
         if player.keys.jump == KEYS_PRESSED then
             Sound.playSFX("charcost_costume.ogg")
             Sound.playSFX("charcost-selected.ogg")
-            if smascharacterchanger.selectionNumber >= 1 and smascharacterchanger.selectionNumber <= 5 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(smascharacterchanger.selectionNumber, false)
-                player.setCostume(smascharacterchanger.selectionNumber, "!DEFAULT", false)
-            elseif smascharacterchanger.selectionNumber >= 6 and smascharacterchanger.selectionNumber <= 16 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(smascharacterchanger.selectionNumber, false)
-                player.setCostume(smascharacterchanger.selectionNumber, nil, false)
-            end
-            if smascharacterchanger.selectionNumber == 17 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_LUIGI, false)
-                player.setCostume(CHARACTER_LUIGI, "UNDERTALE-FRISK", false)
-            elseif smascharacterchanger.selectionNumber == 18 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_TOAD, false)
-                player.setCostume(CHARACTER_TOAD, "SEE-TANGENT", false)
-            elseif smascharacterchanger.selectionNumber == 19 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_MARIO, false)
-                player.setCostume(CHARACTER_MARIO, "SPONGEBOBSQUAREPANTS", false)
-            elseif smascharacterchanger.selectionNumber == 20 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_MARIO, false)
-                player.setCostume(CHARACTER_MARIO, "SP-1-ERICCARTMAN", false)
-            elseif smascharacterchanger.selectionNumber == 21 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_MARIO, false)
-                player.setCostume(CHARACTER_MARIO, "DEMO-XMASPILY", false)
-            elseif smascharacterchanger.selectionNumber == 22 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_TOAD, false)
-                player.setCostume(CHARACTER_TOAD, "DIGDUG-DIGGINGSTRIKE", false)
-            elseif smascharacterchanger.selectionNumber == 23 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_TOAD, false)
-                player.setCostume(CHARACTER_TOAD, "LEGOSTARWARS-REBELTROOPER", false)
-            elseif smascharacterchanger.selectionNumber == 24 and smascharacterchanger.selectionNumberUpDown == 1 then
-                player:transform(CHARACTER_TOAD, false)
-                player.setCostume(CHARACTER_TOAD, "PACMAN-ARRANGEMENT-PACMAN", false)
-            end
-            
-            
-            if smascharacterchanger.selectionNumber == 1 and smascharacterchanger.selectionNumberUpDown == 2 then
-                player:transform(CHARACTER_MARIO, false)
-                player.setCostume(CHARACTER_MARIO, "00-SMASPLUSPLUS-BETA", false)
-            end
             
             
             
             if smascharacterchanger.selectionNumber then
+                if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then
+                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
+                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber], false)
+                else
+                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
+                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
+                end
                 changed = true
                 smascharacterchanger.menuActive = false
             end
+            
+            
+            
         end
     end
 end
@@ -262,17 +200,17 @@ function smascharacterchanger.onDraw()
             Text.print(smascharacterchanger.selectionNumber, 100, 100)
             Text.print(smascharacterchanger.selectionNumberUpDown, 100, 120)
             if smascharacterchanger.selectionNumber < 1 then
-                smascharacterchanger.selectionNumber = smascharacterchanger.maxCharacters
-            elseif smascharacterchanger.selectionNumber > smascharacterchanger.maxCharacters then
+                smascharacterchanger.selectionNumber = #smascharacterchanger.names
+            elseif smascharacterchanger.selectionNumber > #smascharacterchanger.names then
                 smascharacterchanger.selectionNumber = 1
             end
             if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown == 1 then
-                textPrintCentered(smascharacterchanger.namesSide[smascharacterchanger.selectionNumber], 400, 200)
-                textPrintCentered(smascharacterchanger.namesSideGame[smascharacterchanger.selectionNumber], 400, 250)
+                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 400, 200)
+                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber], 400, 250)
             end
             if smascharacterchanger.selectionNumber == 1 and smascharacterchanger.selectionNumberUpDown >= 2 then
-                textPrintCentered(smascharacterchanger.namesTop.mario[smascharacterchanger.selectionNumberUpDown], 400, 200)
-                textPrintCentered(smascharacterchanger.namesTopGame.mario[smascharacterchanger.selectionNumberUpDown], 400, 250)
+                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 400, 200)
+                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber], 400, 250)
             end
         end
         if not smascharacterchanger.animationActive and started then
