@@ -77,6 +77,163 @@ function smascharacterchanger.addVariant(nameToFind,game,costume)
     end
 end
 
+local changed = false
+
+local soundObject1
+local menuBGMObject
+
+local started = false
+local ending = false
+
+local function textPrintCentered(t, x, y, color)
+    textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = -1.7, font = smbx13font}
+end
+
+function smascharacterchanger.startupChanger()
+    Misc.pause()
+    Sound.muteMusic(-1)
+    if pauseplus then
+        pauseplus.canPause = false
+    end
+    soundObject1 = SFX.play(smascharacterchanger.scrollSFX)
+    Routine.waitFrames(10, true)
+    Misc.pause()
+    smasbooleans.toggleOffInventory = true
+    Routine.waitFrames(54, true)
+    if soundObject1 ~= nil then
+        soundObject1:FadeOut(10)
+    end
+    SFX.play(smascharacterchanger.stopSFX)
+    Routine.waitFrames(14, true)
+    SFX.play(smascharacterchanger.turnOnSFX)
+    Routine.waitFrames(14, true)
+    smascharacterchanger.animationActive = false
+    menuBGMObject = SFX.play(smascharacterchanger.menuBGM, Audio.MusicVolume() / 100, 0)
+    started = true
+end
+
+function smascharacterchanger.shutdownChanger()
+    started = false
+    ending = true
+    smascharacterchanger.animationActive = true
+    Sound.playSFX(1001)
+    Routine.waitFrames(35, true)
+    smascharacterchanger.selectionNumberUpDown = 1
+    Misc.unpause()
+    if changed then
+        smascharacterinfo.setCostumeSpecifics()
+        changed = false
+    end
+    Sound.restoreMusic(-1)
+    if pauseplus then
+        pauseplus.canPause = true
+    end
+    smasbooleans.toggleOffInventory = false
+    smascharacterchanger.animationActive = false
+    smascharacterchanger.tvScrollNumber = -600
+    smascharacterchanger.animationTimer = 0
+    ending = false
+end
+
+function smascharacterchanger.onInputUpdate()
+    if smascharacterchanger.menuActive and started then
+        if player.keys.run == KEYS_PRESSED then
+            smascharacterchanger.menuActive = false
+        end
+        if player.keys.up == KEYS_PRESSED then
+            Sound.playSFX(26)
+            smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown + 1
+            if smascharacterchanger.selectionNumberUpDown > #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber] then
+                smascharacterchanger.selectionNumberUpDown = 1
+            end
+        elseif player.keys.down == KEYS_PRESSED then
+            Sound.playSFX(26)
+            smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown - 1
+            if smascharacterchanger.selectionNumberUpDown < 1 then
+                smascharacterchanger.selectionNumberUpDown = #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber]
+            end
+        end
+        if player.keys.left == KEYS_PRESSED then
+            Sound.playSFX(26)
+            smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
+            smascharacterchanger.selectionNumberUpDown = 1
+        elseif player.keys.right == KEYS_PRESSED then
+            Sound.playSFX(26)
+            smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
+            smascharacterchanger.selectionNumberUpDown = 1
+        end
+        if player.keys.jump == KEYS_PRESSED then
+            Sound.playSFX("charcost_costume.ogg")
+            Sound.playSFX("charcost-selected.ogg")
+            
+            
+            
+            if smascharacterchanger.selectionNumber then
+                if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then
+                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
+                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
+                else
+                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
+                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
+                end
+                changed = true
+                smascharacterchanger.menuActive = false
+            end
+            
+            
+            
+        end
+    end
+end
+
+function smascharacterchanger.onDraw()
+    if smascharacterchanger.menuActive then
+        if smascharacterchanger.animationActive then
+            smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1
+            if smascharacterchanger.animationTimer == 1 then
+                Routine.run(smascharacterchanger.startupChanger)
+            end
+            if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 64 then
+                smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber + 9.2
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -1.5)
+            end
+            if smascharacterchanger.animationTimer >= 65 then
+                smascharacterchanger.tvScrollNumber = 0
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
+            end
+        end
+        if started then
+            textPrintCentered("Select your character!", 400, 100)
+            if smascharacterchanger.selectionNumber < 1 then
+                smascharacterchanger.selectionNumber = #smascharacterchanger.names
+            elseif smascharacterchanger.selectionNumber > #smascharacterchanger.names then
+                smascharacterchanger.selectionNumber = 1
+            end
+            if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown then
+                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 400, 200)
+                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], 400, 250)
+            end
+        end
+        if not smascharacterchanger.animationActive and started then
+            Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
+        end
+    elseif not smascharacterchanger.menuActive and started then
+        if menuBGMObject ~= nil then
+            menuBGMObject:FadeOut(2000)
+        end
+        Routine.run(smascharacterchanger.shutdownChanger)
+    elseif not smascharacterchanger.menuActive and ending then
+        if smascharacterchanger.animationActive then
+            smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1
+            if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 34 then
+                smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber - 20
+                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -0.5)
+            end
+        end
+    end
+end
+
+--***CHARACTERS***
 smascharacterchanger.addCharacter("Mario","Default (SMAS++)",1,"!DEFAULT")
 smascharacterchanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
 smascharacterchanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
@@ -93,7 +250,7 @@ smascharacterchanger.addCharacter("Professor E. Gadd","Luigi's Mansion",13,"E. G
 smascharacterchanger.addCharacter("Bowser","Super Mario Bros. X2",8,"nil")
 smascharacterchanger.addCharacter("Goomba","Super Mario Bros. 3",1,"Goomba")
 smascharacterchanger.addCharacter("King Boo","Luigi's Mansion",11,"KING BOO")
-smascharacterchanger.addCharacter("Link","Zelda II",5,"!DEFAULT")
+smascharacterchanger.addCharacter("Link","Zelda II (SMBX)",5,"!DEFAULT")
 smascharacterchanger.addCharacter("Zelda","Super Mario Bros. X2",13,"nil")
 smascharacterchanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
 smascharacterchanger.addCharacter("Bass","Mega Man",6,"BASS")
@@ -107,6 +264,7 @@ smascharacterchanger.addCharacter("Rosalina (Alt)","Super Mario Bros. X2",1,"ROS
 smascharacterchanger.addCharacter("Snake","Super Mario Bros. X2",12,"nil")
 smascharacterchanger.addCharacter("Ultimate Rinka","Super Mario Bros. X2",4,"ULTIMATERINKA")
 smascharacterchanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
+smascharacterchanger.addCharacter("Sonic","Sonic the Hedgehog",4,"SONIC")
 smascharacterchanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
 smascharacterchanger.addCharacter("Minecraft","Steve (Default)",14,"nil")
 smascharacterchanger.addCharacter("Demo","A2XT",1,"A2XT-DEMO")
@@ -143,6 +301,8 @@ smascharacterchanger.addCharacter("Tux","SuperTux",3,"TUX")
 smascharacterchanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
 smascharacterchanger.addCharacter("Ness","EarthBound",5,"NESS")
 smascharacterchanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
+
+--***VERIANTS***
 
 --**Mario variants**
 smascharacterchanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
@@ -300,161 +460,5 @@ smascharacterchanger.addVariant("Wario","Super Mario Bros. 3","SMB3-WARIO")
 
 --**Takeshi variants**
 smascharacterchanger.addVariant("Takeshi","Takeshi's Challenge (SNES)","TAKESHI-SNES")
-
-local changed = false
-
-local soundObject1
-local menuBGMObject
-
-local started = false
-local ending = false
-
-local function textPrintCentered(t, x, y, color)
-    textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = -1.7, font = smbx13font}
-end
-
-function smascharacterchanger.startupChanger()
-    Misc.pause()
-    Sound.muteMusic(-1)
-    if pauseplus then
-        pauseplus.canPause = false
-    end
-    soundObject1 = SFX.play(smascharacterchanger.scrollSFX)
-    Routine.waitFrames(10, true)
-    Misc.pause()
-    smasbooleans.toggleOffInventory = true
-    Routine.waitFrames(54, true)
-    if soundObject1 ~= nil then
-        soundObject1:FadeOut(10)
-    end
-    SFX.play(smascharacterchanger.stopSFX)
-    Routine.waitFrames(14, true)
-    SFX.play(smascharacterchanger.turnOnSFX)
-    Routine.waitFrames(14, true)
-    smascharacterchanger.animationActive = false
-    menuBGMObject = SFX.play(smascharacterchanger.menuBGM, Audio.MusicVolume() / 100, 0)
-    started = true
-end
-
-function smascharacterchanger.shutdownChanger()
-    started = false
-    ending = true
-    smascharacterchanger.animationActive = true
-    Sound.playSFX(1001)
-    Routine.waitFrames(35, true)
-    smascharacterchanger.selectionNumberUpDown = 1
-    Misc.unpause()
-    if changed then
-        smascharacterinfo.setCostumeSpecifics()
-        changed = false
-    end
-    Sound.restoreMusic(-1)
-    if pauseplus then
-        pauseplus.canPause = true
-    end
-    smasbooleans.toggleOffInventory = false
-    smascharacterchanger.animationActive = false
-    smascharacterchanger.tvScrollNumber = -600
-    smascharacterchanger.animationTimer = 0
-    ending = false
-end
-
-function smascharacterchanger.onInputUpdate()
-    if smascharacterchanger.menuActive and started then
-        if player.keys.run == KEYS_PRESSED then
-            smascharacterchanger.menuActive = false
-        end
-        if player.keys.up == KEYS_PRESSED then
-            Sound.playSFX(26)
-            smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown + 1
-            if smascharacterchanger.selectionNumberUpDown > #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber] then
-                smascharacterchanger.selectionNumberUpDown = 1
-            end
-        elseif player.keys.down == KEYS_PRESSED then
-            Sound.playSFX(26)
-            smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown - 1
-            if smascharacterchanger.selectionNumberUpDown < 1 then
-                smascharacterchanger.selectionNumberUpDown = #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber]
-            end
-        end
-        if player.keys.left == KEYS_PRESSED then
-            Sound.playSFX(26)
-            smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
-            smascharacterchanger.selectionNumberUpDown = 1
-        elseif player.keys.right == KEYS_PRESSED then
-            Sound.playSFX(26)
-            smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
-            smascharacterchanger.selectionNumberUpDown = 1
-        end
-        if player.keys.jump == KEYS_PRESSED then
-            Sound.playSFX("charcost_costume.ogg")
-            Sound.playSFX("charcost-selected.ogg")
-            
-            
-            
-            if smascharacterchanger.selectionNumber then
-                if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then
-                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
-                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
-                else
-                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
-                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
-                end
-                changed = true
-                smascharacterchanger.menuActive = false
-            end
-            
-            
-            
-        end
-    end
-end
-
-function smascharacterchanger.onDraw()
-    if smascharacterchanger.menuActive then
-        if smascharacterchanger.animationActive then
-            smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1
-            if smascharacterchanger.animationTimer == 1 then
-                Routine.run(smascharacterchanger.startupChanger)
-            end
-            if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 64 then
-                smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber + 9.2
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -1.5)
-            end
-            if smascharacterchanger.animationTimer >= 65 then
-                smascharacterchanger.tvScrollNumber = 0
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
-            end
-        end
-        if started then
-            textPrintCentered("Select your character!", 400, 100)
-            if smascharacterchanger.selectionNumber < 1 then
-                smascharacterchanger.selectionNumber = #smascharacterchanger.names
-            elseif smascharacterchanger.selectionNumber > #smascharacterchanger.names then
-                smascharacterchanger.selectionNumber = 1
-            end
-            if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown then
-                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 400, 200)
-                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], 400, 250)
-            end
-        end
-        if not smascharacterchanger.animationActive and started then
-            Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
-        end
-    elseif not smascharacterchanger.menuActive and started then
-        if menuBGMObject ~= nil then
-            menuBGMObject:FadeOut(2000)
-        end
-        Routine.run(smascharacterchanger.shutdownChanger)
-    elseif not smascharacterchanger.menuActive and ending then
-        if smascharacterchanger.animationActive then
-            smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1
-            if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 34 then
-                smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber - 20
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -0.5)
-            end
-        end
-    end
-end
 
 return smascharacterchanger
