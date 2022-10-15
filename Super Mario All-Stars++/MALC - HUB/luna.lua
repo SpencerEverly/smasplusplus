@@ -158,6 +158,7 @@ function Stage5()
     layer5:show(true)
     layer6:show(true)
     layer7:hide(true)
+    Sound.changeMusic("_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg", 4)
 end
 
 function Stage6()
@@ -177,6 +178,7 @@ function Stage6()
     layer6:show(true)
     layer7:hide(true)
     layer8:show(true)
+    Sound.changeMusic("_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg", 4)
 end
 
 function Stage7()

@@ -324,7 +324,7 @@ smascharacterchanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
 smascharacterchanger.addCharacter("Ness","EarthBound",5,"NESS")
 smascharacterchanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
 
---***VERIANTS***
+--***VARIANTS***
 
 --**Mario variants**
 smascharacterchanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
