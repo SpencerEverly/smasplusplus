@@ -278,7 +278,9 @@ function onTick()
     if timer <= 0 then
         if SMBX_VERSION ~= VER_SEE_MOD then
             preboot()
-        else
+        elseif Misc.inEditor() and SMBX_VERSION == VER_SEE_MOD then
+            preboot()
+        elseif not Misc.inEditor() and SMBX_VERSION == VER_SEE_MOD then
             if not smasbooleans.skipUpdater then
                 Routine.run(startupdater)
             else

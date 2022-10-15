@@ -9,10 +9,10 @@ pcall(function() smasfunctions = require("smasfunctions") end)
 costume.loadedSounds = false
 
 function costume.onInit()
-    registerEvent(costume, "onDraw");
-    registerEvent(costume, "onTick");
-    klonoa.flapAnimSpeed=3;
-    ringbox = colliders.Box(0, 0, 32, 32);
+    registerEvent(costume, "onDraw")
+    registerEvent(costume, "onTick")
+    klonoa.flapAnimSpeed=3
+    ringbox = colliders.Box(0, 0, 32, 32)
     if not costume.loadedSounds then
         Sound.loadCostumeSounds()
         costume.loadedSounds = true
@@ -20,17 +20,17 @@ function costume.onInit()
 end
 
 function costume.onTick()
-    ringbox.y = player.y + 0;
+    ringbox.y = player.y + 0
 end
 
 function costume.onDraw()
     for _,v in ipairs(Animation.get(152)) do
-        v.height = 64;
+        v.height = 64
     end
     
     if(player.holdingNPC) then
-        player.holdingNPC.x = player.x-65536;
-        player.holdingNPC.y = player.y-65536;
+        player.holdingNPC.x = player.x-65536
+        player.holdingNPC.y = player.y-65536
     end
 end
 
@@ -42,9 +42,9 @@ function costume.onCleanup(playerObject)
         extrasounds.sound.sfx[i] = nil
     end
     
-    klonoa.flapAnimSpeed = 6;
-    ringbox = colliders.Box(0, 0, 32, 32);
+    klonoa.flapAnimSpeed = 6
+    ringbox = colliders.Box(0, 0, 32, 32)
     ringbox.y = player.y + 16
 end
 
-return costume;
+return costume

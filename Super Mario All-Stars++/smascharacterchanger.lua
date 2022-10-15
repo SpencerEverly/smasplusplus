@@ -1,8 +1,11 @@
+--smascharacterchanger.lua
+--By Spencer Everly
+
 local smascharacterchanger = {}
 
 local playerManager = require("playerManager")
 local textplus = require("textplus")
-local smbx13font = textplus.loadFont("littleDialogue/font/smilebasic.ini")
+local smbx13font = textplus.loadFont("littleDialogue/font/smilebasic.ini") --The font for the changer menu.
 
 function smascharacterchanger.onInitAPI()
     registerEvent(smascharacterchanger,"onDraw")
@@ -22,12 +25,17 @@ smascharacterchanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
 smascharacterchanger.selectionNumber = 1 --For scrolling left and right
 smascharacterchanger.selectionNumberUpDown = 1 --For scrolling up and down
 
+local colorChange1 = 0
+local colorChange2 = 0
+local colorChange3 = 0
+
+--These tables below will be used for the system.
 smascharacterchanger.names = {}
 smascharacterchanger.namesGame = {}
 smascharacterchanger.namesCharacter = {}
 smascharacterchanger.namesCostume = {}
 
-function smascharacterchanger.addCharacter(name,game,character,costume)
+function smascharacterchanger.addCharacter(name,game,character,costume) --Adds a character to the tables above. Example: smascharacterchanger.addCharacter("My Character","Game Information",CHARACTER_NUMBERGOESHERE,"COSTUMEGOESHERE, else nil")
     if name == nil then
         error("You must add a name as a string to this character.")
         return
@@ -51,7 +59,7 @@ function smascharacterchanger.addCharacter(name,game,character,costume)
     table.insert(smascharacterchanger.namesCostume, {costume})
 end
 
-function smascharacterchanger.addVariant(nameToFind,game,costume)
+function smascharacterchanger.addVariant(nameToFind,game,costume) --Adds a variant to the character table. Example: smascharacterchanger.addVariant("My Character","Game Information of the 2nd character","COSTUMEGOESHERE of the 2nd character variant")
     if nameToFind == nil then
         error("You must add a name to find who to add this to.")
         return
@@ -64,14 +72,13 @@ function smascharacterchanger.addVariant(nameToFind,game,costume)
         error("You must add a costume as a string to this character (All caps). If specifying nil, make sure that nil is a string.")
         return
     end
-    if nameToFind ~= nil then
-        local foundName = table.ifind(smascharacterchanger.names, nameToFind)
-        if foundName == nil then
-            error("Name wasn't found! You need to specify a valid name.")
+    if nameToFind ~= nil then --If not nil...
+        local foundName = table.ifind(smascharacterchanger.names, nameToFind) --The name ID will then be added here.
+        if foundName == nil then --But if nil...
+            error("Name wasn't found! You need to specify a valid name.") --Error and return it
             return
-        else
-            --Misc.dialog(tostring(foundName))
-            table.insert(smascharacterchanger.namesGame[foundName], game)
+        else --Or if not...
+            table.insert(smascharacterchanger.namesGame[foundName], game) --Add the info to the tables
             table.insert(smascharacterchanger.namesCostume[foundName], costume)
         end
     end
@@ -79,17 +86,17 @@ end
 
 local changed = false
 
-local soundObject1
-local menuBGMObject
+local soundObject1 --Used for the TV scroll SFX
+local menuBGMObject --Used for the menu BGM
 
 local started = false
 local ending = false
 
-local function textPrintCentered(t, x, y, color)
+local function textPrintCentered(t, x, y, color) --Taken from the input config menu from the editor and edited slightly. Thanks Hoeloe lol
     textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = -1.7, font = smbx13font}
 end
 
-function smascharacterchanger.startupChanger()
+function smascharacterchanger.startupChanger() --The animation that starts the menu up.
     Misc.pause()
     Sound.muteMusic(-1)
     if pauseplus then
@@ -112,7 +119,7 @@ function smascharacterchanger.startupChanger()
     started = true
 end
 
-function smascharacterchanger.shutdownChanger()
+function smascharacterchanger.shutdownChanger() --The animation that shuts the menu down.
     started = false
     ending = true
     smascharacterchanger.animationActive = true
@@ -169,7 +176,7 @@ function smascharacterchanger.onInputUpdate()
             
             
             if smascharacterchanger.selectionNumber then
-                if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then
+                if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
                 else
@@ -203,19 +210,34 @@ function smascharacterchanger.onDraw()
             end
         end
         if started then
-            textPrintCentered("Select your character!", 400, 100)
+            textPrintCentered("Select your character!", 410, 100)
             if smascharacterchanger.selectionNumber < 1 then
                 smascharacterchanger.selectionNumber = #smascharacterchanger.names
             elseif smascharacterchanger.selectionNumber > #smascharacterchanger.names then
                 smascharacterchanger.selectionNumber = 1
             end
             if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown then
-                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 400, 200)
-                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], 400, 250)
+                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 410, 200)
+                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], 410, 250)
             end
+            colorChange1 = colorChange1 + 0.001
+            colorChange2 = colorChange2 + 0.0005
+            colorChange3 = colorChange3 + 0.0001
+            if colorChange1 > 1 then
+                colorChange1 = 0
+            end
+            if colorChange2 > 1 then
+                colorChange2 = 0
+            end
+            if colorChange3 > 1 then
+                colorChange3 = 0
+            end
+            local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
+            Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
         end
         if not smascharacterchanger.animationActive and started then
             Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
+            smascharacterchanger.animationTimer = 0
         end
     elseif not smascharacterchanger.menuActive and started then
         if menuBGMObject ~= nil then
