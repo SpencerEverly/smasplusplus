@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 3\: World 1 (Fortress)";SZ:1;XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
+TL:"Super Mario Bros. 3\: World 1 (Fortress)";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-196032;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Fortress.spc|0\;g=1.6";BG:3;
@@ -4300,6 +4300,7 @@ NPC_END
 DOORS
 IX:-196512;IY:-200096;OX:-179968;OY:-180096;DT:2;ID:1;OD:1;
 IX:-179072;IY:-180096;OX:-159840;OY:-160096;DT:2;ID:1;OD:1;
+OX:-196864;OY:-200192;DT:2;ID:1;OD:1;ET:1;
 DOORS_END
 LAYERS
 LR:"Default";

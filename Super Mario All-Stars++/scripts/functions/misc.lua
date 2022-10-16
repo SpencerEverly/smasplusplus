@@ -7,6 +7,7 @@ local customCamera = require("customCamera")
 local smascharacterinfo = require("smascharacterinfo")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
+local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)
 
 function Misk.onInitAPI()
     registerEvent(Misk,"onDraw")
@@ -113,7 +114,7 @@ if SMBX_VERSION == VER_SEE_MOD then
 end
 
 function Misc.episodeFilename() --Gets the episode filename. If in editor made, it just returns it's in the Editor. Thanks KBM_Quine!
-    if not Misc.inEditor then
+    if not Misc.inEditor() then
         local episodeFiles = Misc.listFiles(Misc.episodePath())
         local worldFile
         for _,v in ipairs(episodeFiles) do
@@ -955,6 +956,20 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
             LunaDLL.LunaLuaSetTestModeSettings(settings)
         end
     end
+end
+
+function Misc.getLegacyCreditString(index)
+    return readmem(GM_CREDITS+index*0x34+0x30, FIELD_STRING)
+end
+
+function Misc.setLegacyCreditString(index, string)
+    writemem(GM_CREDITS+index*0x34+0x30, FIELD_STRING, string)
+end
+
+function Misc.getActualLevelName()
+    local headerData = FileFormats.openLevelHeader(Level.filename())
+    local levelName = headerData.levelName
+    return levelName
 end
 
 function Misk.onDraw()

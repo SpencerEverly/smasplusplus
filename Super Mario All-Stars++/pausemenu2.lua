@@ -1169,7 +1169,8 @@ function pausemenu2.onDraw()
     
     if pauseplus.currentSubmenu then
         if not isOverworld then
-            textplus.print{x = 20, y = 570, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = -1.4, xscale = 1.5, yscale = 1.5}
+            textplus.print{x = 20, y = 564, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = -1.4, xscale = 1.2, yscale = 1.2}
+            textplus.print{x = 20, y = 582, text = "<color yellow>"..Misc.getActualLevelName().."</color>", font = pausefont3, priority = -1.4, xscale = 1.2, yscale = 1.2}
             if SaveData.playerPfp == nil then
                 sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = -1.7}
             elseif SaveData.playerPfp then

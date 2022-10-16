@@ -285,12 +285,12 @@ function onEvent(eventName)
     if eventName == "OtherList" then
         littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE DIED "..SaveData.deathCount.." TIMES.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
     end
-    if eventName == "Stage5" then
-        Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
-    end
-    if eventName == "Stage6" then
-        Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
-    end
+    --if eventName == "Stage5" then
+        --Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
+    --end
+    --if eventName == "Stage6" then
+        --Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
+    --end
     if eventName == ("DisEnabledX2Char") then
         if SaveData.disableX2char == false then
             triggerEvent("HUBDisableX2")

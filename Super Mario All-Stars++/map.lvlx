@@ -1838,4 +1838,5 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
+ET:"cheese";SD:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

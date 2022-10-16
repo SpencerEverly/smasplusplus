@@ -57,6 +57,23 @@ function File.readFile(name) --Read a file using io. This won't overwrite everyt
     return f:read("*all")
 end
 
+function File.readSpecificAreaFromFile(name, linenumber) --Read a file using io. This won't overwrite everything, just reads a file, so this one is fine.
+    name = Misc.resolveFile(name)
+    if name == nil then
+        error("You need to specify the name of the file.")
+    end
+    
+    local text
+
+    local f = io.open(name,"r")
+    if f == nil then
+        return
+    end
+    for c in f:lines(linenumber) do
+        return f:read(c)
+    end
+end
+
 function File.stringToHex(str)
     return (str:gsub('.', function (c)
         return string.format('%02X', string.byte(c))
