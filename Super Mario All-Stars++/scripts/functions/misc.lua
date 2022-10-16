@@ -11,7 +11,6 @@ local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)
 
 function Misk.onInitAPI()
     registerEvent(Misk,"onDraw")
-    registerEvent(Misk,"onCameraUpdate")
 end
 
 if SMBX_VERSION == VER_SEE_MOD then
@@ -166,7 +165,9 @@ function Misc.doPSwitchUntimed(bool)
     elseif bool == false then
         Misc.doPSwitchRaw(false)
         smasbooleans.musicMuted = false
-        pSwitchMusic:Stop()
+        if pSwitchMusic ~= nil then
+            pSwitchMusic:Stop()
+        end
         Sound.restoreMusic(-1)
     end
 end
@@ -183,7 +184,7 @@ function Misc.checkCameraTransitionStatus() --Checks to see if the legacy camera
     end
 end
 
-function Misc.checkTargetStatus() --Checks to see if the legacy camera transition is on.
+function Misc.checkTargetStatus() --Returns the current targets from the camera.
     return customCamera.targets
 end
 
@@ -209,8 +210,14 @@ function Misc.moveSaveSlot(slot, destination)
         error("You must specify a target save slot.")
         return
     end
-    if destination > 32767 then
-        error("You can't move to a save slot greater than 32767.")
+    if destination < 0 then
+        error("You can't move to a save slot that's less than 0.")
+        return
+    elseif destination == 0 then
+        Misc.warn("You can't move to an editor save file. Please try moving to another save slot.")
+        return
+    elseif destination > 32767 then
+        error("You can't move to a save slot that's greater than 32767.")
         return
     end
     local filename = "save"..slot.."-ext.dat"
@@ -255,8 +262,12 @@ function Misc.eraseMainSaveSlot(slot) --This only erases the main save in the sa
 end
 
 function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific slot.
+    if slot < 0 then
+        error("You can't erase a save slot that's less than 0.")
+        return
+    end
     if slot > 32767 then
-        error("You can't erase a save slot greater than 32767.")
+        error("You can't erase a save slot that's greater than 32767.")
         return
     end
     local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
@@ -954,6 +965,9 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
             settings.entranceIndex = entranceIndex
             
             LunaDLL.LunaLuaSetTestModeSettings(settings)
+        else
+            Misc.warn("You're not on the editor to execute this command!")
+            return
         end
     end
 end

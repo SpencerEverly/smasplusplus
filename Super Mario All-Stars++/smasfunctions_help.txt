@@ -204,11 +204,12 @@ collected in prior.
 - Misc.overrideLibrary(inlib, outlib): Overrides a library to a new one.
 - Misc.use13Editor(bool): This is used to open the legacy 1.3 Editor after
 dying.
-- Misc.setCameraPosition(leftbounds, upbounds, downbounds, rightbounds,
-speed, positionString): This moves the camera and resizes the room to the
-specified bounds. You can set a speed for how long the movement lasts,
-and you can set which direction it should go. Defaults are 'left' and
-'right', for now.
+- Misc.getLegacyCreditString(index): Gets a legacy SMBX credits string.
+If not on the outro, this is usually blank.
+- Misc.setLegacyCreditString(index, string): Writes a legacy credit
+to the legacy credits.
+- Misc.getActualLevelName(): Gets the actual level name according
+to the editor.
 
 CAMERA FUNCTIONS
 - Screen.x(): Returns the X position of the camera, also includes
@@ -225,6 +226,14 @@ includes resolution support (WIP).
 includes resolution support (WIP).
 - Screen.isOnScreen(x,y,width,height): With the arguments of an
 X, Y, width, and height, checks to see if something is on screen.
+- Screen.setCameraPosition(leftbounds, upbounds, downbounds,
+rightbounds, speed): This moves the camera and resizes the room
+to the specified bounds. You can set a speed for how long the
+movement lasts as well.
+
+EVENT FUNCTIONS
+- Evento.getPendingEvents(): Gets information about the next
+possible event as a table.
 
 --(SEE MOD-ONLY)--
 
