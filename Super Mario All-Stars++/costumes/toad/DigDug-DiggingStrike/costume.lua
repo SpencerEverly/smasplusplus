@@ -64,8 +64,8 @@ function costume.harpoonAttack()
 end
 
 function costume.onDraw()
-    if plr.powerup >= 3 then
-        plr.powerup = 2
+    if plr.powerup >= 4 then
+        plr.powerup = 3
     end
 end
 
@@ -73,7 +73,7 @@ function costume.onInputUpdate()
     if Level.endState() == 0 and plr.deathTimer == 0 and not Misc.isPaused() then
         if costume.enableHarpoon then
             if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                if plr.keys.run == KEYS_PRESSED and not harpoonActive then
+                if plr.keys.run == KEYS_PRESSED and not harpoonActive and plr.powerup <= 2 then
                     Routine.run(costume.harpoonAttack)
                 end
             end
