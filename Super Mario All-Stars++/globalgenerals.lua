@@ -629,6 +629,11 @@ function globalgenerals.onTick()
     if SaveData.goombaStomps == nil then
         SaveData.goombaStomps = SaveData.goombaStomps or 0
     end
+    
+    if SaveData.goombaStomps >= 10 then
+        Achievements.get(1):collect()
+    end
+    
     if SaveData.koopaStomps == nil then
         SaveData.koopaStomps = SaveData.koopaStomps or 0
     end

@@ -183,12 +183,13 @@ function smascharacterintros.onDraw()
 end
 
 function pacmanstartinganimation()
+    Routine.wait(0.1, true)
     Sound.muteMusic(-1)
     smascharacterintros.animationactive = true
     dontshowplayer = true
     playerwhooshpacman = false
     Sound.playSFX("toad/PacMan-Arrangement-PacMan/level-starting.ogg")
-    Routine.wait(0.4, true)
+    Routine.wait(0.3, true)
     Misc.pause()
     
     
@@ -257,10 +258,11 @@ function pacmanstartinganimation()
 end
 
 function tensecondrunstartinganimation()
+    Routine.wait(0.1, true)
     Sound.muteMusic(-1)
     smascharacterintros.animationactive = true
     dontshowplayer = true
-    Routine.wait(0.4, true)
+    Routine.wait(0.3, true)
     Misc.pause()
     SFX.play("costumes/mario/GO-10SecondRun/countdown/entrance.ogg")
     Routine.waitFrames(10, true)
