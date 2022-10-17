@@ -50,11 +50,6 @@ if SaveData.totalScoreClassic == nil then
     SaveData.totalScoreClassic = 0
 end
 
---Don't change this, this is used to unlock multi-paths.
-smwMap.unlockingCurrentPath = "false"
---Whenever to draw the player on the map or not.
-smwMap.drawPlayerOnMap = true
-
 --This is the name of the level file that the map is on.
 smwMap.levelFilename = "map.lvlx"
 
@@ -112,6 +107,11 @@ local SCREEN_HEIGHT = 600
 smwMap.freeCamera = false
 -- Debug thing: if true, disables the HUD and lets you see the entirety of the main buffer
 smwMap.fullBufferView = false
+
+--Don't change this, this is used to unlock multi-paths.
+smwMap.unlockingCurrentPath = "false"
+--Whenever to draw the player on the map or not.
+smwMap.drawPlayerOnMap = true
 
 
 

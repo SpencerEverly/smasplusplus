@@ -2,7 +2,7 @@
 --By Spencer Everly
 
 local textplus = require("textplus")
-local lazyprint = require("lazyprint")
+local lazyprintSMAS = require("lazyprintSMAS")
 local inspect = require("ext/inspect")
 
 local smasverbosemode = {}
@@ -70,12 +70,11 @@ function smasverbosemode.onStart()
     if smasverbosemode.activated then
         --Routine.run(startLevel)
     end
-    lazyprint.monitor(player, {"x", "y", "powerup", "width", "height", "character"})
-    lazyprint.monitor(player, {"mount", "mountColor", "mountType", "forcedState", "forcedTimer"})
-    lazyprint.monitor(Playur, {"isJumping(player)", "underwater(player)", "grabbing(player)", "ducking(player)", "getBattleLives(1)"})
-    lazyprint.monitor(camera, {"x", "y", "width", "height"})
+    lazyprintSMAS.monitor(player, {"x", "y", "powerup", "width", "height", "character"})
+    lazyprintSMAS.monitor(player, {"mount", "mountColor", "mountType", "forcedState", "forcedTimer"})
+    lazyprintSMAS.monitor(camera, {"x", "y", "width", "height"})
     for i = 0,20 do
-        lazyprint.monitor(Section(i), {"music", "underwater", "noTurnBack"})
+        lazyprintSMAS.monitor(Section(i), {"music", "underwater", "noTurnBack"})
     end
 end
 

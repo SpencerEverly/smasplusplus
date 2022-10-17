@@ -54,75 +54,77 @@ function smasnoturnback.onStart()
 end
 
 function smasnoturnback.onCameraUpdate()
-    for k,v in ipairs(Section.getActiveIndices()) do
-        if not autoscroll.isSectionScrolling(v) then
-            if smasnoturnback.enabled and not smasnoturnback.overrideSection then
-                for itwo = 1,4 do
-                    if smasnoturnback.turnBack ~= smasnoturnback.failsafeTable[itwo] then --Failsafe if the turnBack argument is anything else but the things in this script
-                        smasnoturnback.turnBack = "left"
+    if not SaveData.disableX2char then
+        for k,v in ipairs(Section.getActiveIndices()) do
+            if not autoscroll.isSectionScrolling(v) then
+                if smasnoturnback.enabled and not smasnoturnback.overrideSection then
+                    for itwo = 1,4 do
+                        if smasnoturnback.turnBack ~= smasnoturnback.failsafeTable[itwo] then --Failsafe if the turnBack argument is anything else but the things in this script
+                            smasnoturnback.turnBack = "left"
+                        end
+                    end
+                    if smasnoturnback.turnBack == "left" then
+                        if customCamera then
+                            local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+                            if fullX >= player.sectionObj.boundary.left then
+                                local x1 = fullX
+                                smasnoturnback.setSectionBounds(player.section, x1, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
+                            end
+                        else
+                            local fullX = camera.x
+                            if camera.x >= player.sectionObj.boundary.left then
+                                local x1 = fullX
+                                smasnoturnback.setSectionBounds(player.section, x1, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
+                            end
+                        end
+                    elseif smasnoturnback.turnBack == "right" then
+                        if customCamera then
+                            local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+                            if fullX <= player.sectionObj.boundary.right then
+                                local x1 = fullX + 800
+                                smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, x1)
+                            end
+                        else
+                            local fullX = camera.x
+                            if camera.x <= player.sectionObj.boundary.right then
+                                local x1 = fullX + 800
+                                smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, x1)
+                            end
+                        end
+                    elseif smasnoturnback.turnBack == "up" then
+                        if customCamera then
+                            local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+                            if fullY >= player.sectionObj.boundary.top then
+                                local x1 = fullY
+                                smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, x1, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
+                            end
+                        else
+                            local fullY = camera.y
+                            if camera.y >= player.sectionObj.boundary.top then
+                                local x1 = fullY
+                                smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, x1, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
+                            end
+                        end
+                    elseif smasnoturnback.turnBack == "down" then
+                        if customCamera then
+                            local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+                            if fullY <= player.sectionObj.boundary.bottom then
+                                local x1 = fullY + 600
+                                smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, x1, player.sectionObj.boundary.right)
+                            end
+                        else
+                            local fullY = camera.y
+                            if camera.y <= player.sectionObj.boundary.bottom then
+                                local x1 = fullY + 600
+                                smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, x1, player.sectionObj.boundary.right)
+                            end
+                        end
                     end
                 end
-                if smasnoturnback.turnBack == "left" then
-                    if customCamera then
-                        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-                        if fullX >= player.sectionObj.boundary.left then
-                            local x1 = fullX
-                            smasnoturnback.setSectionBounds(player.section, x1, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
-                        end
-                    else
-                        local fullX = camera.x
-                        if camera.x >= player.sectionObj.boundary.left then
-                            local x1 = fullX
-                            smasnoturnback.setSectionBounds(player.section, x1, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
-                        end
-                    end
-                elseif smasnoturnback.turnBack == "right" then
-                    if customCamera then
-                        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-                        if fullX <= player.sectionObj.boundary.right then
-                            local x1 = fullX + 800
-                            smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, x1)
-                        end
-                    else
-                        local fullX = camera.x
-                        if camera.x <= player.sectionObj.boundary.right then
-                            local x1 = fullX + 800
-                            smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, player.sectionObj.boundary.bottom, x1)
-                        end
-                    end
-                elseif smasnoturnback.turnBack == "up" then
-                    if customCamera then
-                        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-                        if fullY >= player.sectionObj.boundary.top then
-                            local x1 = fullY
-                            smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, x1, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
-                        end
-                    else
-                        local fullY = camera.y
-                        if camera.y >= player.sectionObj.boundary.top then
-                            local x1 = fullY
-                            smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, x1, player.sectionObj.boundary.bottom, player.sectionObj.boundary.right)
-                        end
-                    end
-                elseif smasnoturnback.turnBack == "down" then
-                    if customCamera then
-                        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-                        if fullY <= player.sectionObj.boundary.bottom then
-                            local x1 = fullY + 600
-                            smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, x1, player.sectionObj.boundary.right)
-                        end
-                    else
-                        local fullY = camera.y
-                        if camera.y <= player.sectionObj.boundary.bottom then
-                            local x1 = fullY + 600
-                            smasnoturnback.setSectionBounds(player.section, player.sectionObj.boundary.left, player.sectionObj.boundary.top, x1, player.sectionObj.boundary.right)
-                        end
-                    end
-                end
+            else
+                smasnoturnback.enabled = false
+                smasnoturnback.overrideSection = true
             end
-        else
-            smasnoturnback.enabled = false
-            smasnoturnback.overrideSection = true
         end
     end
 end

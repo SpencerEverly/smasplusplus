@@ -72,7 +72,7 @@ _G.events = require("editorevents_mod")
 _G.extraNPCProperties = require("extraNPCProperties")
 _G.cursor = require("cursor")
 _G.Timer = require("timer-mod")
-_G.lazyprint = require("lazyprint")
+_G.lazyprintSMAS = require("lazyprintSMAS")
 
 --Register some custom global event handlers...
 Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true

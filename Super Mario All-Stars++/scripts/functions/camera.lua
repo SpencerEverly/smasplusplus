@@ -1,6 +1,7 @@
 local Screen = {}
 
 local customCamera = require("customCamera")
+local inspect = require("ext/inspect")
 
 Screen.debug = false
 
@@ -72,6 +73,8 @@ local oldBoundaryLeft,oldBoundaryRight,oldBoundaryTop,oldBoundaryBottom = 0,0,0,
 local boundaryLeft,boundaryRight,boundaryTop,boundaryBottom = 0,0,0,0
 local setCameraPosition = false
 local cameraPanSpeed = 5
+local playersOutOfBounds = {}
+local tempBool = false
 
 function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed) --This is used to set the camera boundaries for the specific section.
     local plr = player
@@ -110,11 +113,6 @@ function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed) 
     section.boundary = bounds2
     
     setCameraPosition = true
-    
-    for _,p in ipairs(Player.get()) do
-        local tempBool = false
-        
-    end
 end
 
 function Screen.onDraw()
@@ -126,8 +124,20 @@ function Screen.onDraw()
         bounds.top = boundaryTop
         bounds.bottom = boundaryBottom
         section.boundary = bounds
+        for i = 1,Player.count() do
+            if Player(i).x + Player(i).width >= bounds.right then
+                if Player(i).y <= bounds.bottom then
+                    tempBool = true
+                    table.insert(playersOutOfBounds, Player(i))
+                end
+            end
+        end
+        if tempBool == false then
+            
+        end
         setCameraPosition = false
     end
+    Text.print(inspect(playersOutOfBounds), 100, 100)
     if Screen.debug then
         Text.printWP("CURSOR X/Y POS:", 100, 80, 0)
         Text.printWP(Screen.cursorX(), 100, 100, 0)

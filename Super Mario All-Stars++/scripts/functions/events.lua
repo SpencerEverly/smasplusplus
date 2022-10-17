@@ -14,6 +14,9 @@ local GM_NEWEVENTDELAY = mem(0x00B2D704, FIELD_DWORD)
 local GM_EVENT = mem(0x00B2C6CC, FIELD_DWORD)
 local GM_EVENTNUM = 0x00B2D710
 
+local EVENTS_STRUCT_SIZE = 0x588
+local MAX_EVENTS = 255
+
 function Evento.getPendingEvents()
     local eventNum = mem(GM_EVENTNUM, FIELD_WORD)
     local out = {}
@@ -26,6 +29,16 @@ function Evento.getPendingEvents()
         }
     end
     return out
+end
+
+function Evento.getSoundID(eventName)
+    local idxNumber
+    local name = {}
+    for idx=0,MAX_EVENTS-1 do
+        table.insert(name, mem(GM_EVENT+(idx*EVENTS_STRUCT_SIZE)+0x04,FIELD_STRING))
+    end
+    idxNumber = table.find(name, eventName) - 1
+    return mem(GM_EVENT+(idxNumber*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
 end
 
 return Evento

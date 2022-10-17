@@ -440,6 +440,7 @@ function extrasounds.onInitAPI() --This'll require a bunch of events to start
     registerEvent(extrasounds, "onExplosion")
     registerEvent(extrasounds, "onPostBlockHit")
     registerEvent(extrasounds, "onPlayerKill")
+    registerEvent(extrasounds, "onEvent")
     
     blockManager.registerEvent(90, extrasoundsblock90, "onCollideBlock")
     blockManager.registerEvent(668, extrasoundsblock668, "onCollideBlock")
@@ -1479,6 +1480,35 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 
                 
             end
+        end
+    end
+end
+
+--New event stuff
+local GM_NEWEVENT = mem(0x00B2D6E8, FIELD_DWORD)
+local GM_NEWEVENTDELAY = mem(0x00B2D704, FIELD_DWORD)
+
+--Event stuff
+local GM_EVENT = mem(0x00B2C6CC, FIELD_DWORD)
+local GM_EVENTNUM = 0x00B2D710
+
+local EVENTS_STRUCT_SIZE = 0x588
+local MAX_EVENTS = 255
+
+function extrasounds.getSoundID(eventName)
+    local idxNumber
+    local name = {}
+    for idx=0,MAX_EVENTS-1 do
+        table.insert(name, mem(GM_EVENT+(idx*EVENTS_STRUCT_SIZE)+0x04,FIELD_STRING))
+    end
+    idxNumber = table.find(name, eventName) - 1
+    return mem(GM_EVENT+(idxNumber*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
+end
+
+function extrasounds.onEvent(eventName)
+    if eventName then --Fixes vanilla events from not playing extrasounds sounds
+        if extrasounds.getSoundID(eventName) >= 1 and not extrasounds.stockSoundNumbersInOrder[extrasounds.getSoundID(eventName)] then
+            extrasounds.playSFX(extrasounds.getSoundID(eventName))
         end
     end
 end
