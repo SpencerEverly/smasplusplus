@@ -78,7 +78,10 @@ local gameoveractivate2 = false
 local gameovershow = false
 local blackscreenonly = false
 
---SaveData.gameOverCount = 0 --This is only when the library publically releases for the wild to use
+--if SaveData.GameOverCount == nil then
+    --SaveData.GameOverCount = 0 --This is only when the library publically releases for the wild to use
+--end
+
 smashudsystem.hasDied = false --If the player died or not
 smashudsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
 smashudsystem.activated = true --Whenever the death animation is activated

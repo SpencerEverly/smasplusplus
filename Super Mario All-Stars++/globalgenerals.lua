@@ -624,10 +624,10 @@ function globalgenerals.onTick()
     end
     
     if SaveData.GameOverCount == nil then
-        SaveData.GameOverCount = SaveData.GameOverCount or 0
+        SaveData.GameOverCount = 0
     end
     if SaveData.goombaStomps == nil then
-        SaveData.goombaStomps = SaveData.goombaStomps or 0
+        SaveData.goombaStomps = 0
     end
     
     if SaveData.goombaStomps >= 10 then
@@ -635,40 +635,40 @@ function globalgenerals.onTick()
     end
     
     if SaveData.koopaStomps == nil then
-        SaveData.koopaStomps = SaveData.koopaStomps or 0
+        SaveData.koopaStomps = 0
     end
     if SaveData.starmansused == nil then
-        SaveData.starmansused = SaveData.starmansused or 0
+        SaveData.starmansused = 0
     end
     if SaveData.megamushroomssused == nil then
-        SaveData.megamushroomssused = SaveData.megamushroomssused or 0
+        SaveData.megamushroomssused = 0
     end
     if SaveData.starsgrabbed == nil then
-        SaveData.starsgrabbed = SaveData.starsgrabbed or 0
+        SaveData.starsgrabbed = 0
     end
     if SaveData.totalmushrooms == nil then
-        SaveData.totalmushrooms = SaveData.totalmushrooms or 0
+        SaveData.totalmushrooms = 0
     end
     if SaveData.totalfireflowers == nil then
-        SaveData.totalfireflowers = SaveData.totalfireflowers or 0
+        SaveData.totalfireflowers = 0
     end
     if SaveData.totalleafs == nil then
-        SaveData.totalleafs = SaveData.totalleafs or 0
+        SaveData.totalleafs = 0
     end
     if SaveData.totaltanookis == nil then
-        SaveData.totaltanookis = SaveData.totaltanookis or 0
+        SaveData.totaltanookis = 0
     end
     if SaveData.totalhammersuits == nil then
-        SaveData.totalhammersuits = SaveData.totalhammersuits or 0
+        SaveData.totalhammersuits = 0
     end
     if SaveData.totaliceflowers == nil then
-        SaveData.totaliceflowers = SaveData.totaliceflowers or 0
+        SaveData.totaliceflowers = 0
     end
     if SaveData.mandatoryStars == nil then
-        SaveData.mandatoryStars = SaveData.mandatoryStars or 0
+        SaveData.mandatoryStars = 0
     end
-    --if SaveData.totalmandatoryStars == nil then
-        --SaveData.mandatoryStars = SaveData.mandatoryStars or 999 --Value isn't final, until all levels are made
+    --if SaveData.totalMandatoryStars == nil then
+        --SaveData.totalMandatoryStars = 999 --Value isn't final, until all levels are made
     --end
 end
 
