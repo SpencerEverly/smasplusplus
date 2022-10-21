@@ -2,7 +2,7 @@ FRAME LIST:
 
 Name: Description (Powerup states done)
 
-mario-1: Standing poses (1, 2, 3)
+mario-1: Standing poses (1, 2, 3, 4)
 mario-1-climb: Climbing (1, 2, 3)
 mario-1-climbstill: Climb Stance (1, 2, 3)
 mario-1-duck: Ducking (1, 2, 3)

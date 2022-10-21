@@ -1,7 +1,7 @@
 --[[
 
     NSMBWii Mario
-    By Spencer Everly (Sprites from Mario Multiverse, originally by Keira)
+    By Spencer Everly (Sprites from Mario Multiverse, originally by Keira, and Racoon poses by me)
     Original code by MrDoubleA + Cpt. Mono
 
 ]]
@@ -1106,8 +1106,10 @@ function costume.onDraw()
 
         data.frameInOnDraw = p.frame
         
-        if p.powerup >= 4 then --Until it fully works, this'll do for now.
-            p.powerup = 3
+        if not Misc.inEditor() then
+            if p.powerup >= 4 then --Until it fully works, this'll do for now.
+                p.powerup = 3
+            end
         end
 
         local animationData = animations[data.currentAnimation]

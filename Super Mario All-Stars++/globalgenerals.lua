@@ -626,17 +626,14 @@ function globalgenerals.onTick()
     if SaveData.GameOverCount == nil then
         SaveData.GameOverCount = 0
     end
+    
     if SaveData.goombaStomps == nil then
         SaveData.goombaStomps = 0
     end
-    
-    if SaveData.goombaStomps >= 10 then
-        Achievements.get(1):collect()
-    end
-    
     if SaveData.koopaStomps == nil then
         SaveData.koopaStomps = 0
     end
+    
     if SaveData.starmansused == nil then
         SaveData.starmansused = 0
     end
@@ -670,6 +667,13 @@ function globalgenerals.onTick()
     --if SaveData.totalMandatoryStars == nil then
         --SaveData.totalMandatoryStars = 999 --Value isn't final, until all levels are made
     --end
+    
+    
+    
+    --Achievements
+    if SaveData.goombaStomps >= 10 then
+        Achievements.get(1):collect()
+    end
 end
 
 function globalgenerals.onPostNPCKill(npc, harmType)

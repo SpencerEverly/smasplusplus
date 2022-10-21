@@ -330,10 +330,8 @@ smascharacterchanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-D
 smascharacterchanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
 smascharacterchanger.addVariant("Mario","Default (SMBX 1.3)","!DEFAULT-ORIGINAL")
 smascharacterchanger.addVariant("Mario","SMAS++ 2012 Beta","00-SMASPLUSPLUS-BETA")
-if Achievements.get(1).collected then
-    smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
-    smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
-end
+smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
+smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
 smascharacterchanger.addVariant("Mario","Super Mario Bros. (SNES)","03-SMB1-SMAS")
 smascharacterchanger.addVariant("Mario","Super Mario Bros. 2 (NES)","04-SMB2-RETRO")
 smascharacterchanger.addVariant("Mario","Super Mario Bros. 2 (SNES)","05-SMB2-SMAS")
@@ -462,9 +460,9 @@ smascharacterchanger.addVariant("Minecraft","Impostor (Among Us)","MC-IMPOSTOR")
 smascharacterchanger.addVariant("Minecraft","Ed (Ed Edd and Eddy)","ED-EDEDDANDEDDY")
 smascharacterchanger.addVariant("Minecraft","Spiderman","MC-SPIDERMAN")
 
-smascharacterchanger.addVariant("Minecraft","Cubix Tron","DJCTRE-CUBIXTRON")
-smascharacterchanger.addVariant("Minecraft","Cubix Tron Dad","DJCTRE-CUBIXTRONDAD")
-smascharacterchanger.addVariant("Minecraft","Stultus","DJCTRE-STULTUS")
+smascharacterchanger.addVariant("Minecraft","Cubix Tron (C!TS!)","DJCTRE-CUBIXTRON")
+smascharacterchanger.addVariant("Minecraft","Cubix Tron Dad (C!TS!)","DJCTRE-CUBIXTRONDAD")
+smascharacterchanger.addVariant("Minecraft","Stultus (C!TS!)","DJCTRE-STULTUS")
 
 smascharacterchanger.addVariant("Minecraft","Spencer (S!TS! REBOOT)","SEE-MC-SPENCEREVERLY")
 smascharacterchanger.addVariant("Minecraft","Spencer 2 (S!TS! REBOOT)","SEE-MC-SPENCER2")
