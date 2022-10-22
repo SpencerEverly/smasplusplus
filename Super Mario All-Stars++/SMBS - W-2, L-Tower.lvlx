@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. Spencer\: World 2 (Tower)";SZ:1;CPID:"SMBX2";
+TL:"Super Mario Bros. Spencer\: World 2 (Tower)";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-202528;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg";BG:13;CS:1;CSV:1;
@@ -4698,10 +4698,10 @@ ID:166;X:-99008;Y:-99968;W:32;H:32;
 ID:166;X:-99008;Y:-100416;W:32;H:32;
 BLOCK_END
 BGO
-ID:216;X:-199600;Y:-201440;
-ID:215;X:-199664;Y:-201440;
-ID:218;X:-199600;Y:-201376;
-ID:217;X:-199664;Y:-201376;
+ID:216;X:-199712;Y:-201568;
+ID:215;X:-199776;Y:-201568;
+ID:218;X:-199712;Y:-201504;
+ID:217;X:-199776;Y:-201504;
 ID:216;X:-199664;Y:-201104;
 ID:215;X:-199728;Y:-201104;
 ID:218;X:-199664;Y:-201040;
@@ -4806,15 +4806,19 @@ ID:60;X:-198880;Y:-200512;
 ID:60;X:-198880;Y:-200384;
 ID:60;X:-198880;Y:-200256;
 ID:60;X:-198880;Y:-200128;
+ID:216;X:-199488;Y:-201440;
+ID:215;X:-199552;Y:-201440;
+ID:218;X:-199488;Y:-201376;
+ID:217;X:-199552;Y:-201376;
 BGO_END
 NPC
 ID:6;X:-199361;Y:-200292;D:-1;
 ID:6;X:-199745;Y:-200484;D:-1;
 ID:424;X:-199296;Y:-201984;D:-1;S1:20;
 ID:71;X:-199464;Y:-200982;D:-1;
-ID:26;X:-199664;Y:-201472;D:-1;
-ID:424;X:-199936;Y:-201632;D:1;S1:20;
-ID:339;X:-199680;Y:-201440;D:1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
+ID:26;X:-199776;Y:-201600;D:-1;
+ID:424;X:-199936;Y:-201408;D:1;S1:20;
+ID:339;X:-199792;Y:-201568;D:1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:339;X:-199664;Y:-201088;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:339;X:-199536;Y:-201216;D:1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 ID:162;X:-199389;Y:-201830;D:-1;
@@ -4833,6 +4837,7 @@ ID:424;X:-139232;Y:-139168;D:-1;S1:9;
 ID:39;X:-99392;Y:-100348;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:1000;X:-99424;Y:-100192;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-99792;Y:-100112;D:-1;MG:"Not the real boss\, just a placeholder. Just beat her and get the star for now";FD:1;
+ID:339;X:-199504;Y:-201440;D:-1;XTRA:"{\n    \"activeByDefault\"\: 1\n}\n";
 NPC_END
 DOORS
 IX:-199360;IY:-202112;OX:-179936;OY:-180096;DT:2;ID:1;OD:1;

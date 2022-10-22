@@ -92,7 +92,7 @@ function restartLastLevel()
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(SaveData.lastLevelPlayed, nil, nil)
+    Level.load(SaveData.lastLevelPlayed)
 end
 
 function exitRushMode()

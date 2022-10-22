@@ -357,7 +357,7 @@ function globalgenerals.onStart()
         end
     end
     if SaveData.lastLevelPlayed == nil then
-        SaveData.lastLevelPlayed = SaveData.lastLevelPlayed or Level.filename()
+        SaveData.lastLevelPlayed = Level.filename()
     end
     if SaveData.disablePWingSFX then
         extrasounds.enablePWingSFX = false
@@ -722,12 +722,12 @@ function globalgenerals.onPostNPCKill(npc, harmType)
             SaveData.totaliceflowers = SaveData.totaliceflowers + 1
         end
         local interactable = table.map{9,10,14,31,33,34,35,88,90,92,139,140,141,142,143,144,145,146,147,153,154,155,156,157,169,170,184,185,186,187,188,191,193,249,250,258,274,293,425,462,559,994,996,997}
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             if interactable[npc.id] then
-                if blockidx5000check == true then
+                if blockidx5000check then
                     if harmType == HARM_TYPE_LAVA then
                         eastercrash = true
-                        if eastercrashprevload == false then
+                        if not eastercrashprevload then
                             Routine.run(lavashroomeasteregg)
                         end
                     end

@@ -247,9 +247,13 @@ function smascharacterinfo.setCostumeSpecifics()
     if currentCostume == "MODERN2" then
         littleDialogue.characterNames[1] = "Mario"
         mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-        starman.sfxFile = Misc.resolveSoundFile("starman")
-        starman.duration[996] = lunatime.toTicks(12)
-        starman.duration[994] = lunatime.toTicks(12)
+        if table.icontains(smastables.__smb2Levels,Level.filename()) then
+            starman.sfxFile = Misc.resolveSoundFile("starman/starman_darsonic55_smb2")
+        elseif Level.filename() then
+            starman.sfxFile = Misc.resolveSoundFile("starman/starman_darsonic55")
+        end
+        starman.duration[996] = lunatime.toTicks(25)
+        starman.duration[994] = lunatime.toTicks(25)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
         smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end

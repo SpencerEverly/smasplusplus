@@ -1293,7 +1293,7 @@ function returntolastlevel()
     Misc.unpause()
     exitFadeActive = false
     exitFadeActiveDone = true
-    Level.load(SaveData.lastLevelPlayed, nil, nil)
+    Level.load(SaveData.lastLevelPlayed)
 end
 
 local function exitlevel2()
