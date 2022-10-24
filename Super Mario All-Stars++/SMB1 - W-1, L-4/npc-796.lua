@@ -69,7 +69,6 @@ function npc.onTickEndNPC(v)
     --Don't act during time freeze, or when camera is moving when changing area
     if Defines.levelFreeze then return end
     if mem(0x00B2B9E4, FIELD_BOOL) == true then return end
-    if not isOnScreen(v) then return end
     
     local config = NPC.config[id]
     local data = v.data._basegame
@@ -85,44 +84,46 @@ function npc.onTickEndNPC(v)
         v.direction = -1
     end
     
-    if math.random(300) > 297 and v.ai1 == 0 then
-        v.ai1 = 1
-    end
-    
-    if v.ai1 > 0 then
-        v.ai3 = v.ai3 + 1
-        
-        if v.ai3 < 40 then
+    if isOnScreen(v) then
+        if math.random(300) > 297 and v.ai1 == 0 then
             v.ai1 = 1
-        elseif v.ai3 < 70 then
-            if v.ai3 == 40 then
-                local fire = NPC.spawn(config.fireId, v.x, v.y + 19)
-                fire.despawnTimer = 100
-                fire.direction = v.direction
-                
-                if v.direction == 1 then
-                    fire.x = fire.x + 54
-                    fire.animationFrame = 4
-                else
-                    fire.x = fire.x - 40
+        end
+        
+        if v.ai1 > 0 then
+            v.ai3 = v.ai3 + 1
+            
+            if v.ai3 < 40 then
+                v.ai1 = 1
+            elseif v.ai3 < 70 then
+                if v.ai3 == 40 then
+                    local fire = NPC.spawn(config.fireId, v.x, v.y + 19)
+                    fire.despawnTimer = 100
+                    fire.direction = v.direction
+                    
+                    if v.direction == 1 then
+                        fire.x = fire.x + 54
+                        fire.animationFrame = 4
+                    else
+                        fire.x = fire.x - 40
+                    end
+                    
+                    fire.layerName = "Spawned NPCs"
+                    fire.speedX = 4 * fire.direction
+                    
+                    C = (fire.x + fire.width / 2) - (p.x + p.width / 2)
+                    D = (fire.y + fire.height / 2) - (p.y + p.height / 2)
+                    
+                    fire.speedY = D / C * fire.speedX
+                    fire.speedY = math.clamp(fire.speedY, -1, 1)
+                    
+                    SFX.play(extrasounds.sound.sfx[42])
                 end
                 
-                fire.layerName = "Spawned NPCs"
-                fire.speedX = 4 * fire.direction
-                
-                C = (fire.x + fire.width / 2) - (p.x + p.width / 2)
-                D = (fire.y + fire.height / 2) - (p.y + p.height / 2)
-                
-                fire.speedY = D / C * fire.speedX
-                fire.speedY = math.clamp(fire.speedY, -1, 1)
-                
-                SFX.play(extrasounds.sound.sfx[42])
+                v.ai1 = 2
+            else
+                v.ai1 = 0
+                v.ai3 = 0
             end
-            
-            v.ai1 = 2
-        else
-            v.ai1 = 0
-            v.ai3 = 0
         end
     end
     

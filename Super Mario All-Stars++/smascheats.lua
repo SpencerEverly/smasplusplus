@@ -38,6 +38,7 @@ function smascheats.onInitAPI()
 end
 
 smascheats.moneytreeActive = false
+smascheats.lavaplayerActive = false
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
 
@@ -764,6 +765,20 @@ Cheats.register("moneytree",{ --This will be reregistered because the coin syste
     onDeactivate = (function()
         Defines.player_hasCheated = false
         smascheats.moneytreeActive = false
+        Sound.playSFX(5)
+    end),
+    flashPlayer = true,activateSFX = nil,
+})
+
+Cheats.register("lavaplayer",{ --Lets the player swim in lava.
+    onActivate = (function()
+        Defines.player_hasCheated = false
+        smascheats.lavaplayerActive = true
+        Sound.playSFX(6)
+    end),
+    onDeactivate = (function()
+        Defines.player_hasCheated = false
+        smascheats.lavaplayerActive = false
         Sound.playSFX(5)
     end),
     flashPlayer = true,activateSFX = nil,

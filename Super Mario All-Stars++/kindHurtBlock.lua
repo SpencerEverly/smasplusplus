@@ -22,7 +22,8 @@ kindHurtBlock.directions = {
     --ID     top bottom left right
     --[404]  = {0,  0,  0,  0 },
 
-    [371]  = {1,  0,  0,  0 }, -- SMB lava top
+    [371]  = {1,  0,  0,  0 }, -- SMB1 lava top
+    [999]  = {1,  0,  0,  0 }, -- SMB1 lava top (SMAS++)
 
     [511]  = {1,  0,  0,  0 }, -- SMB2 spikes
 

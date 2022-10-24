@@ -1,6 +1,7 @@
 local Screen = {}
 
-local customCamera = require("customCamera")
+local customCamera 
+pcall(function() customCamera = require("customCamera") end)
 local inspect = require("ext/inspect")
 
 Screen.debug = false
@@ -10,63 +11,72 @@ function Screen.onInitAPI()
 end
 
 function Screen.x() --Actual X position, with resolution support
-    local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-    return fullX
+    if customCamera then
+        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+        return fullX
+    else
+        return camera.x
+    end
 end
 
 function Screen.y() --Actual Y position, with resolution support
-    local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-    return fullY
+    if customCamera then
+        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+        return fullY
+    else
+        return camera.y
+    end
 end
 
 function Screen.width() --Actual width, with resolution support
-    local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-    return fullWidth
+    if customCamera then
+        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+        return fullWidth
+    else
+        return camera.width
+    end
 end
 
 function Screen.height() --Actual height, with resolution support
-    local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-    return fullHeight
+    if customCamera then
+        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+        return fullHeight
+    else
+        return camera.height
+    end
 end
 
-function Screen.cursorX() --Cursor X position with full resolution support (Used for Steve and cursor.lua)
-    local zoom = customCamera.defaultZoom + 1 / 2 - 1
+function Screen.cursorX() --Cursor X position (Used for Steve and cursor.lua). Resolution support coming later
     return mem(0x00B2D6BC, FIELD_DFLOAT)
-    --[[elseif SaveData.resolution == "widescreen" then
-        return mem(0x00B2D6BC, FIELD_DFLOAT) - (Screen.width()*zoom)*0.5
-    else
-        return mem(0x00B2D6BC, FIELD_DFLOAT)
-    end]]
 end
 
-function Screen.cursorY() --Cursor Y position with full resolution support (Used for Steve and cursor.lua)
-    local zoom = customCamera.defaultZoom + 1 / 2 - 1
+function Screen.cursorY() --Cursor Y position (Used for Steve and cursor.lua). Resolution support coming later
     return mem(0x00B2D6C4, FIELD_DFLOAT)
-    --[[elseif SaveData.resolution == "widescreen" then
-        return mem(0x00B2D6C4, FIELD_DFLOAT) + (Screen.height()*zoom)*0.5
-    else
-        return mem(0x00B2D6BC, FIELD_DFLOAT)
-    end]]
 end
 
 function Screen.isOnScreen(x,y,width,height) --Checks to see if something is on screen
-    if x == nil then
-        error("You must return an X coordinate.")
+    if customCamera then
+        if x == nil then
+            error("You must return an X coordinate.")
+            return
+        end
+        if y == nil then
+            error("You must return an Y coordinate.")
+            return
+        end
+        if width == nil then
+            error("You must return the width.")
+            return
+        end
+        if height == nil then
+            error("You must return the height.")
+            return
+        end
+        return customCamera.isOnScreen(x,y,width,height)
+    else
+        error("customCamera not required.")
         return
     end
-    if y == nil then
-        error("You must return an Y coordinate.")
-        return
-    end
-    if width == nil then
-        error("You must return the width.")
-        return
-    end
-    if height == nil then
-        error("You must return the height.")
-        return
-    end
-    return customCamera.isOnScreen(x,y,width,height)
 end
 
 local oldBoundaryLeft,oldBoundaryRight,oldBoundaryTop,oldBoundaryBottom = 0,0,0,0

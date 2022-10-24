@@ -5,6 +5,7 @@
 
 local smasfunctions = {}
 
+_G.Misk = require("scripts/functions/misc")
 _G.File = require("scripts/functions/file")
 _G.Img = require("scripts/functions/img")
 _G.Sound = require("scripts/functions/sound")
@@ -12,7 +13,6 @@ _G.SysManager = require("scripts/functions/sysmanager")
 _G.Time = require("scripts/functions/time")
 _G.Playur = require("scripts/functions/player")
 _G.Npc = require("scripts/functions/npc")
-_G.Misk = require("scripts/functions/misc")
 _G.Screen = require("scripts/functions/camera")
 _G.Evento = require("scripts/functions/events")
 

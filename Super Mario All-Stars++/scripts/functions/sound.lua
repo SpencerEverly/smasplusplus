@@ -1,9 +1,22 @@
 local Sound = {}
 
-local extrasounds = require("extrasounds")
+local extrasounds
+pcall(function() extrasounds = require("extrasounds") end)
+
 local playerManager = require("playermanager")
-local smastables = require("smastables")
+
+local smastables
+pcall(function() smastables = require("smastables") end)
+
 _G.SFX = require("base/audiomaster")
+
+if GameData.levelMusicTemporary == nil then
+    GameData.levelMusicTemporary = {}
+end
+
+if GameData.levelMusic == nil then
+    GameData.levelMusic = {}
+end
 
 function Sound.onInitAPI()
     registerEvent(Sound,"onDraw")
@@ -116,7 +129,11 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
 end
 
 function Sound.isExtraSoundsActive()
-    return extrasounds.active
+    if extrasounds then
+        return extrasounds.active
+    else
+        return false
+    end
 end
 
 function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
@@ -199,13 +216,21 @@ end
 
 function Sound.restoreOriginalMusic(sectionid) --Restore all original section music, or just restore a specific section
     if sectionid == -1 then --If -1, all section music will be restored
-        for i = 0,20 do
-            songname = GameData.levelMusic[i]
-            Section(i).music = songname
+        if GameData.levelMusic ~= {} then
+            for i = 0,20 do
+                songname = GameData.levelMusic[i]
+                Section(i).music = songname
+            end
+        else
+            return
         end
     elseif sectionid >= 0 or sectionid <= 20 then
-        songname = GameData.levelMusic[sectionid]
-        Section(sectionid).music = songname
+        if GameData.levelMusic ~= {} then
+            songname = GameData.levelMusic[sectionid]
+            Section(sectionid).music = songname
+        else
+            return
+        end
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
         return
@@ -215,7 +240,7 @@ end
 function Sound.getMusicID(sectionNumber)
     if sectionNumber >= 0 or sectionNumber <= 20 then
         return mem(mem(0x00B25828, FIELD_DWORD) + 2*sectionNumber, FIELD_WORD)
-    elseif sectionNumber >= 21 then
+    elseif sectionNumber >= 21 or sectionNumber <= -1 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
         return
     end
@@ -224,7 +249,7 @@ end
 function Sound.getCustomMusicFromSection(sectionNumber)
     if sectionNumber >= 0 or sectionNumber <= 20 then
         return mem(mem(0x00B257B8, FIELD_DWORD) + 4*sectionNumber, FIELD_STRING)
-    elseif sectionNumber >= 21 then
+    elseif sectionNumber >= 21 or sectionNumber <= -1 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
         return
     end
