@@ -4,6 +4,12 @@ local segoeui = textplus.loadFont("littleDialogue/font/segoeui.ini")
 local verdana = textplus.loadFont("littleDialogue/font/verdana.ini")
 local alarmclockfont = textplus.loadFont("littleDialogue/font/alarmclock.ini")
 
+local homedicsamimg = Graphics.loadImageResolved("graphics/datetime/time-homedics-am.png")
+local homedicspmimg = Graphics.loadImageResolved("graphics/datetime/time-homedics-pm.png")
+
+local winxpimg = Graphics.loadImageResolved("graphics/datetime/time-winxp.png")
+local win10img = Graphics.loadImageResolved("graphics/datetime/time-win10.png")
+
 local ready = false
 
 local datetime = {}
@@ -62,9 +68,9 @@ function datetime.onDraw()
     if SaveData.clockTheme == "homedics" then
         if datetime.bottomright then
             if os.date("%p") == "am" then
-                Img.draw("graphics/datetime/time-homedics-am.png", 0, 0, true, false, -1.1, 1)
+                Graphics.drawImageWP(homedicsamimg, 0, 0, -1.1)
             else
-                Img.draw("graphics/datetime/time-homedics-pm.png", 0, 0, true, false, -1.1, 1)
+                Graphics.drawImageWP(homedicspmimg, 0, 0, -1.1)
             end
             textplus.print{x=717, y=563, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=-1, color=Color.green, font=alarmclockfont, xscale=0.8, yscale=0.8} --What time is it...!?
         end
@@ -80,7 +86,7 @@ function datetime.onDraw()
     end
     if SaveData.clockTheme == "windowsxp" then
         if datetime.bottomright then
-            Img.draw("graphics/datetime/time-winxp.png", 615, 570, true, false, -1.1, 1)
+            Graphics.drawImageWP(winxpimg, 615, 570, -1.1)
             textplus.print{x=745, y=581, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=-1, color=Color.white, font=verdana} --What time is it...!?
         end
     end
@@ -89,7 +95,7 @@ function datetime.onDraw()
     end
     if SaveData.clockTheme == "windows10" then
         if datetime.bottomright then
-            Img.draw("graphics/datetime/time-win10.png", 661, 560, true, false, -1.1, 1)
+            Graphics.drawImageWP(win10img, 661, 560, -1.1)
             textplus.print{x=726, y=564, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=-1, color=Color.white, font=segoeui} --What time is it...!?
             textplus.print{x=722, y=582, text = os.date("%m").."/"..os.date("%d").."/"..os.date("%Y"), priority=-1, color=Color.white, font=segoeui} --What's the day, sir?!
         end

@@ -4,9 +4,7 @@ function Img.load(name) --This will not only check the main SMBX2 folders, but w
     local file = File.load(name) or File.load(name..".png")
     if file then
         return Graphics.loadImageResolved(name)
-            or Graphics.loadImageResolved("_OST/" .. name)
             or Graphics.loadImageResolved("costumes/" .. name)
-            or Graphics.loadImageResolved("scripts/" .. name)
             or Graphics.loadImageResolved("graphics/" .. name)
             or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
     end
@@ -39,7 +37,7 @@ function Img.loadCharacter(name) --This will not only check the main SMBX2 folde
 end
 
 --Img.draw(ImageName, x coordinate, y coordinate, true/false if it's with the priority, true/false if using scene coordinates, priority, opacity)
-function Img.draw(name, x, y, withPriority, sceneCoords, arg6, arg7) --Drawing graphics got a lot better.
+function Img.draw(name, x, y, withPriority, sceneCoords, arg6, arg7) --PLEASE DO NOT USE! This is outdated and is recommended to use Graphics.drawImage INSTEAD!
     local fileImage = Graphics.loadImageResolved(name)
     if fileImage == nil then
         fileImage = Graphics.loadImageResolved("noimage.png")

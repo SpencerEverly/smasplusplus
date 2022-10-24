@@ -145,16 +145,20 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
     if sectionid == -1 then --If -1, all section music will change to the specified song
         for i = 0,20 do
             Section(i).music = name
-            if smasbooleans.musicMuted then
-                Sound.refreshMusic(i)
-                Sound.muteMusic(i)
+            if smasbooleans then
+                if smasbooleans.musicMuted then
+                    Sound.refreshMusic(i)
+                    Sound.muteMusic(i)
+                end
             end
         end
     elseif sectionid >= 0 or sectionid <= 20 then
         Section(sectionid).music = name
-        if smasbooleans.musicMuted then
-            Sound.refreshMusic(sectionid)
-            Sound.muteMusic(sectionid)
+        if smasbooleans then
+            if smasbooleans.musicMuted then
+                Sound.refreshMusic(sectionid)
+                Sound.muteMusic(sectionid)
+            end
         end
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
@@ -170,12 +174,16 @@ function Sound.muteMusic(sectionid) --Mute all section music, or just mute a spe
             GameData.levelMusicTemporary[i] = Section(i).music
             Audio.MusicChange(i, 0)
         end
-        smasbooleans.musicMutedTemporary = true
+        if smasbooleans then
+            smasbooleans.musicMutedTemporary = true
+        end
     elseif sectionid >= 0 or sectionid <= 20 then
         musiclist = {Section(sectionid).music}
         GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
         Audio.MusicChange(sectionid, 0)
-        smasbooleans.musicMutedTemporary = true
+        if smasbooleans then
+            smasbooleans.musicMutedTemporary = true
+        end
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
         return
@@ -188,11 +196,15 @@ function Sound.restoreMusic(sectionid) --Restore all section music, or just rest
             songname = GameData.levelMusicTemporary[i]
             Section(i).music = songname
         end
-        smasbooleans.musicMutedTemporary = false
+        if smasbooleans then
+            smasbooleans.musicMutedTemporary = false
+        end
     elseif sectionid >= 0 or sectionid <= 20 then
         songname = GameData.levelMusicTemporary[sectionid]
         Section(sectionid).music = songname
-        smasbooleans.musicMutedTemporary = false
+        if smasbooleans then
+            smasbooleans.musicMutedTemporary = false
+        end
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
         return

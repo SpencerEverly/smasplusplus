@@ -2,10 +2,6 @@ local Evento = {}
 
 local inspect = require("ext/inspect")
 
-function Evento.onInitAPI()
-    registerEvent(Evento,"onDraw")
-end
-
 --New event stuff
 local GM_NEWEVENT = mem(0x00B2D6E8, FIELD_DWORD)
 local GM_NEWEVENTDELAY = mem(0x00B2D704, FIELD_DWORD)

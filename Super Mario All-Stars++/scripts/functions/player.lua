@@ -256,13 +256,13 @@ function Playur.isJumping(p)
 end
 
 function Playur.countEveryPlayer(p)
+    local playertable = {}
     for _,p in ipairs(Player.get()) do
-        local playertable = {}
         for i = 1,Player.count() do
             table.insert(playertable, i)
         end
-        return playertable
     end
+    return playertable
 end
 
 function Playur.checkLivingIndex() --Code to check the isAnyPlayerAlive() code.
@@ -429,16 +429,23 @@ function Playur.startPointCoordinateY(index) --Gets the Y coordinate starting po
 end
 
 function Playur.sectionsWithNoPlayers() --Lists a table with sections with no players in them.
-    local sectionNumbers = {}
     local nonPlayeredSections = {}
     local playeredSections = Section.getActiveIndices()
     for i = 0,20 do
-        table.insert(sectionNumbers, i)
         if playeredSections[i] ~= i then
             table.insert(nonPlayeredSections, i)
         end
     end
     return nonPlayeredSections
+end
+
+function Playur.runInInactiveSections(func) --Runs anything in player inactive sections.
+    local playeredSections = Section.getActiveIndices()
+    for i = 0,20 do
+        if playeredSections[i] ~= i then
+            func(i)
+        end
+    end
 end
 
 return Playur

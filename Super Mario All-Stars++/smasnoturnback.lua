@@ -1,4 +1,4 @@
---smasnoturnback.lua (v1.0.1)
+--smasnoturnback.lua (v1.2)
 --By Spencer Everly
 --This script provides a remake of the noTurnBack option, but with additional things like going left but not turning back right, and other things!
 
@@ -162,11 +162,9 @@ function smasnoturnback.onTick() --If you want a certain level or more, make a t
 end
 
 function smasnoturnback.sectionsWithNoPlayers()
-    local sectionNumbers = {}
     local nonPlayeredSections = {}
     local playeredSections = Section.getActiveIndices()
     for i = 0,20 do
-        table.insert(sectionNumbers, i)
         if playeredSections[i] ~= i then
             table.insert(nonPlayeredSections, i)
         end

@@ -116,7 +116,7 @@ if SMBX_VERSION == VER_SEE_MOD then
     end
 end
 
-function Misc.episodeFilename() --Gets the episode filename. Thanks KBM_Quine!
+function Misc.worldFilename() --Gets the world filename. Thanks KBM_Quine!
     local episodeFiles = Misc.listFiles(Misc.episodePath())
     local worldFile
     for _,v in ipairs(episodeFiles) do
@@ -128,7 +128,7 @@ function Misc.episodeFilename() --Gets the episode filename. Thanks KBM_Quine!
 end
 
 function Misc.inSuperMarioAllStarsPlusPlus() --Checks and sees if SMAS++ is being run. If not, some functions won't run. Idk if this is a reliable check but oh well, I tried.
-    return (Misc.episodeFilename() == "__World Map.wld" --Checks to see if the world map is this...
+    return (Misc.worldFilename() == "__World Map.wld" --Checks to see if the world map is this...
         and io.exists(Misc.episodePath().."SMB1 - W-1, L-1.lvlx") --Then checks the first levels of each mandatory game (+ SMBLL).
         and io.exists(Misc.episodePath().."SMBLL - W-1, L-1.lvlx")
         and io.exists(Misc.episodePath().."SMB2 - W-1, L-1.lvlx")
@@ -759,6 +759,10 @@ function Misc.checkTargetStatus() --Returns the current targets from the camera.
 end
 
 function Misc.saveSaveSlot(slot)
+    if slot < 0 then
+        error("You can't save to a save slot less than 0.")
+        return
+    end
     if slot > 32767 then
         error("You can't save to a save slot greater than 32767.")
         return
@@ -877,7 +881,7 @@ function Misc.getLegacyStarsCollectedNameOnly() --This is for the Demo 3 save mi
     return t
 end
 
-function Misc.overrideLibrary(inlib, outlib)
+function Misc.overrideLibrary(inlib, outlib) --Unfinished override library code. Was gonna be used for... something, but I forgot. Still being kept here until it gets used somewhere.
     local loadedTable = package.loaded
     
     clearEvents(inlib)
