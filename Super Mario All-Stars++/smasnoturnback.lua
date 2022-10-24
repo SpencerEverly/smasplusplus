@@ -46,10 +46,10 @@ smasnoturnback.failsafeTable = {
 
 function smasnoturnback.onStart()
     for i = 0,20 do
-        table.insert(smasnoturnback.originalBoundariesTop, {[i] = Section(i).origBoundary.top})
-        table.insert(smasnoturnback.originalBoundariesBottom, {[i] = Section(i).origBoundary.bottom})
-        table.insert(smasnoturnback.originalBoundariesLeft, {[i] = Section(i).origBoundary.left})
-        table.insert(smasnoturnback.originalBoundariesRight, {[i] = Section(i).origBoundary.right})
+        table.insert(smasnoturnback.originalBoundariesTop, Section(i).origBoundary.top)
+        table.insert(smasnoturnback.originalBoundariesBottom, Section(i).origBoundary.bottom)
+        table.insert(smasnoturnback.originalBoundariesLeft, Section(i).origBoundary.left)
+        table.insert(smasnoturnback.originalBoundariesRight, Section(i).origBoundary.right)
     end
 end
 
@@ -161,24 +161,37 @@ function smasnoturnback.onTick() --If you want a certain level or more, make a t
     end
 end
 
+function smasnoturnback.sectionsWithNoPlayers()
+    local sectionNumbers = {}
+    local nonPlayeredSections = {}
+    local playeredSections = Section.getActiveIndices()
+    for i = 0,20 do
+        table.insert(sectionNumbers, i)
+        if playeredSections[i] ~= i then
+            table.insert(nonPlayeredSections, i)
+        end
+    end
+    return nonPlayeredSections
+end
+
 function smasnoturnback.onDraw()
-    --[[for k,v in ipairs(Section.getActiveIndices()) do
+    for k,v in ipairs(smasnoturnback.sectionsWithNoPlayers()) do
         if not autoscroll.isSectionScrolling(v) then
             if smasnoturnback.enabled and not smasnoturnback.overrideSection then
                 for _,p in ipairs(Player.get()) do
                     if p.sectionObj.idx ~= v then
                         local sectionObj = Section(v)
                         local bounds = sectionObj.boundary
-                        bounds.left = smasnoturnback.originalBoundariesLeft[v]
-                        bounds.top = smasnoturnback.originalBoundariesTop[v]
-                        bounds.bottom = smasnoturnback.originalBoundariesBottom[v]
-                        bounds.right = smasnoturnback.originalBoundariesRight[v]
+                        bounds.left = smasnoturnback.originalBoundariesLeft[v + 1]
+                        bounds.top = smasnoturnback.originalBoundariesTop[v + 1]
+                        bounds.bottom = smasnoturnback.originalBoundariesBottom[v + 1]
+                        bounds.right = smasnoturnback.originalBoundariesRight[v + 1]
                         sectionObj.boundary = bounds
                     end
                 end
             end
         end
-    end]]
+    end
 end
 
 return smasnoturnback

@@ -428,4 +428,17 @@ function Playur.startPointCoordinateY(index) --Gets the Y coordinate starting po
     return y + height
 end
 
+function Playur.sectionsWithNoPlayers() --Lists a table with sections with no players in them.
+    local sectionNumbers = {}
+    local nonPlayeredSections = {}
+    local playeredSections = Section.getActiveIndices()
+    for i = 0,20 do
+        table.insert(sectionNumbers, i)
+        if playeredSections[i] ~= i then
+            table.insert(nonPlayeredSections, i)
+        end
+    end
+    return nonPlayeredSections
+end
+
 return Playur
