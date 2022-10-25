@@ -124,6 +124,10 @@ function musicalchairs.onDraw()
                         section.musicPath = "_OST/Super Mario Bros Spencer/Tower (Yoshi).ogg"
                     elseif section.musicPath == "_OST/Super Mario Bros Spencer/Another World.ogg" then
                         section.musicPath = "_OST/Super Mario Bros Spencer/Another World (Yoshi).ogg"
+                    
+                    
+                    elseif section.musicPath == "_OST/Super Mario Bros Spencer/Ice Cream Desert (Missing Creams).ogg" then
+                        section.musicPath = "_OST/Super Mario Bros Spencer/Ice Cream Desert (Missing Creams, Yoshi).ogg"
                     end
                 else
                     if section.musicPath == "_OST/Super Mario World/Here We Go (Advance) (Yoshi).spc|0;g=2.5" then
@@ -167,6 +171,8 @@ function musicalchairs.onDraw()
                         section.musicPath = "_OST/Super Mario Bros Spencer/Town.ogg"
                     elseif section.musicPath == "_OST/Super Mario Bros Spencer/Castle.ogg" then
                         section.musicPath = "_OST/Super Mario Bros Spencer/Castle.ogg"]]
+                    elseif section.musicPath == "_OST/Super Mario Bros Spencer/Ice Cream Desert (Missing Creams, Yoshi).ogg" then
+                        section.musicPath = "_OST/Super Mario Bros Spencer/Ice Cream Desert (Missing Creams).ogg"
                     end
                 end
             end
