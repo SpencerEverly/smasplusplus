@@ -48,7 +48,7 @@ function musicalchairs.checkYoshiStatus(musicName, formatName, arguments)
         return
     end
     if formatName == nil then
-        formatName == "ogg"
+        formatName = "ogg"
     end
     if arguments == nil then
         arguments = ""
