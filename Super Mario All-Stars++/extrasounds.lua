@@ -151,9 +151,7 @@ local holdingtimer = 0 --To count a timer on how long a player has held an item.
 local ready = false --This library isn't ready until onInit is finished
 
 extrasounds.sound = {}
-
-local d = extrasounds.sound
-d.sfx = {}
+extrasounds.sound.sfx = {}
 
 extrasounds.soundNamesInOrder = {
     "player-jump", --1
@@ -323,6 +321,8 @@ extrasounds.soundNamesInOrder = {
     "timeout", --165
     "flyinghammer-throw", --166
 }
+
+
 
 extrasounds.sound.sfx[0] = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really
 

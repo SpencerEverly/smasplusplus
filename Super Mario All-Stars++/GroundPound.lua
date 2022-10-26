@@ -1,6 +1,6 @@
 --[[
 	Groundpound.lua
-	By Marioman2007 - v1
+	By Marioman2007 - v1.1
 ]]
 
 local pm = require("playermanager")
@@ -33,8 +33,8 @@ GP.animation = { -- table for frames and framespeed for separate states
 
 GP.playerFrames = { -- table for frames when here is no ground pound image
     -- character         -- spin frames    pound frames  poundAfter frames
-    [CHARACTER_MARIO] = {{1, 2, 3, 4},     {24},         {7}},
-	[CHARACTER_LUIGI] = {{1, 2, 3, 4},     {24},         {7}},
+    [CHARACTER_MARIO] = {{1, 2, 3, 2},     {24},         {7}},
+	[CHARACTER_LUIGI] = {{1, 2, 3, 2},     {24},         {7}},
 	[CHARACTER_PEACH] = {{7, 7, 7, 7},      {7},         {7}},
 	[CHARACTER_TOAD]  = {{7, 7, 7, 7},      {7},         {7}},
 }
@@ -117,7 +117,7 @@ local function noBeneathBlocks()
 end
 
 local function canHitNPC(v)
-	if v.isValid and (NPC.HITTABLE_MAP[v.id]) and (not v.friendly) and (not v.isHidden) and (not NPC.config[v.id].jumphurt) then
+	if v.isValid and (NPC.HITTABLE_MAP[v.id]) and (not v.friendly) and (not v.isGenerator) and (not v.isHidden) and (not NPC.config[v.id].jumphurt) then
 		return true
 	end
 end
@@ -194,8 +194,18 @@ local function poundNPC(v)
 			v:harm(HARM_TYPE_JUMP, 5)
 		else
 			v:kill(HARM_TYPE_NPC)
+			local correctScore = player:mem(0x56, FIELD_WORD) + 2
+
+			if player:mem(0x56, FIELD_WORD) < 9 then
+				player:mem(0x56, FIELD_WORD, player:mem(0x56,FIELD_WORD) + 1)
+			else
+				player:mem(0x56, FIELD_WORD, 8)
+			end
+
+			if (correctScore) >= 2 then
+				Misc.givePoints(correctScore, vector(player.x, player.y))
+			end
 		end
-		EventManager.callEvent("onPostNPCPound", v)
 		if NPC.config[v.id].gpBounce > 0 then
 			GP.cancelPound()
 			player.speedY = NPC.config[v.id].gpBounce
@@ -223,7 +233,7 @@ local function poundBlock(v)
 	EventManager.callEvent("onBlockPound", eventObj, v)
 
 	if validBlock(v) and (not eventObj.cancelled) then
-		if (v.contentID > 0 and v.contentID <= 99) then
+		if (v.contentID > 0 and v.contentID <= 99) then -- coins
 			if canHit then
 				v:hit(true, player)
 				SFX.play(3)
@@ -235,7 +245,7 @@ local function poundBlock(v)
 			else
 				canHit = false
 			end
-		elseif v.contentID >= 1001 then
+		elseif v.contentID >= 1001 then -- other npcs
 			SFX.play(3)
 			if not checkRoom(v.contentID - 1000, v) then
 				player.keys.altJump = false
@@ -247,7 +257,7 @@ local function poundBlock(v)
 				v:hit(true, player)
 				player.speedY = 10
 			end
-		elseif v.contentID == 0 then
+		elseif v.contentID == 0 then -- empty
 			if player.powerup == 1 then
 				SFX.play(3)
 				v:hit(true, player)
@@ -292,14 +302,14 @@ function GP.onStart()
 end
 
 function GP.onTick()
-	if player.speedY >= 4 then
+	if player.speedY > 4 then
 		belowBoxHeight = player.speedY
 	else
 		belowBoxHeight = 4
 	end
 
-	if belowBoxHeight > GP.poundSpeed then
-		belowBoxHeight = GP.poundSpeed -- once upon a time, I saw belowBoxHeight reach 1000 pixels
+	if belowBoxHeight > math.max(GP.poundSpeed, 32) then
+		belowBoxHeight = math.max(GP.poundSpeed, 32) -- once upon a time, I saw belowBoxHeight reach 1000 pixels
 	end
 
 	bottomTouchingNPCs = NPC.getIntersecting(player.x, player.y + player.height, player.x + player.width, player.y + player.height+belowBoxHeight)
