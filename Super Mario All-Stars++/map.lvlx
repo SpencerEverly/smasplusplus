@@ -1823,6 +1823,12 @@ ID:752;X:-201280;Y:-197728;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-Fortress2\"\,\
 ID:849;X:-201344;Y:-197728;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-Fortress2.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #8\: Boom Boom the 2nd\"\,\n    \"path_down\"\: \"toSMB35-8\"\,\n    \"path_right\"\: \"toSMB35-Fortress2\"\,\n    \"unlock_down\"\: 9\n}\n";
 ID:752;X:-201344;Y:-197696;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-8\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, -64\, 32\"\n}\n";
 ID:802;X:-201408;Y:-197664;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-8.lvlx\"\,\n    \"levelTitle\"\: \"5-8\: Lakitu Strikes Again\"\,\n    \"path_left\"\: \"toSMB35-9\"\,\n    \"path_right\"\: \"toSMB35-8\"\,\n    \"unlock_left\"\: 9\n}\n";
+ID:752;X:-201440;Y:-197664;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-9\"\,\n    \"points\"\: \"32\, 0\, -64\, 0\"\n}\n";
+ID:802;X:-201504;Y:-197664;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-9.lvlx\"\,\n    \"levelTitle\"\: \"5-9\: Clouds and Platforms\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toSMB35-9\"\,\n    \"path_up\"\: \"toSMB35-Airship\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-201504;Y:-197696;D:-1;XTRA:"{\n    \"name\"\: \"toSMB35-Airship\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
+ID:854;X:-201504;Y:-197760;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-5\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #5\: Roy\"\,\n    \"path_down\"\: \"toSMB35-Airship\"\,\n    \"path_up\"\: \"toSMB3W-5Path5\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-201504;Y:-197792;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-5Path5\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:821;X:-201504;Y:-197824;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-6BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"toSMB3W-5Path5\"\,\n    \"warpName\"\: \"SMB3W-5bEndWarp\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
