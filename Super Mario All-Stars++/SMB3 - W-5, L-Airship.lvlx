@@ -838,7 +838,7 @@ ID:91;X:-199040;Y:-200224;
 ID:91;X:-199040;Y:-200192;
 ID:91;X:-199040;Y:-200160;
 ID:91;X:-199040;Y:-200128;
-ID:107;X:-199648;Y:-200128;LR:"Door";
+ID:107;X:-199616;Y:-200128;LR:"Door";
 ID:107;X:-179904;Y:-181248;
 BGO_END
 NPC
@@ -914,7 +914,7 @@ ID:614;X:-176352;Y:-180240;D:-1;LR:"Hammer Bros";EE:"Airship Begin";
 ID:614;X:-176256;Y:-180368;D:-1;LR:"Hammer Bros";EE:"Airship Begin";
 NPC_END
 DOORS
-IX:-199648;IY:-200096;OX:-179904;OY:-181216;DT:2;ID:1;OD:1;LR:"Door";
+IX:-199616;IY:-200096;OX:-179904;OY:-181216;DT:2;ID:1;OD:1;LR:"Door";
 DOORS_END
 LAYERS
 LR:"Default";
@@ -932,7 +932,7 @@ ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"Beginning Message 1";MG:"<setPos 400 32 0.5 -1.5>Can't these Koopalings catch a break?! <characterName>! They've done it once more!<page>These pesky Koopaling Kids have turned this king into a some bird! It's pecking my head off like crazy!";TE:"Toad Not Shocked";TD:1;AS:0;AX:0;AY:0;
 ET:"Toad Not Shocked";LH:["Toad 1"];LS:["Toad 2"];TE:"Beginning Message 2";TD:1;DS:1;AS:0;AX:0;AY:0;
 ET:"Beginning Message 2";MG:"<setPos 400 32 0.5 -1.8>If you want to know\, our henchmen saw them heading to the Snowy Fields\, so you may wanna head there.<page>Good luck! Save this king for us\, will ya?";TE:"Door Appear";TD:1;AS:0;AX:0;AY:0;
-ET:"Door Appear";SD:20;LS:["Door"];AS:0;AX:0;AY:0;
-ET:"Airship Begin";SD:27;AS:0;AX:0;AY:0;
+ET:"Door Appear";LS:["Door"];AS:0;AX:0;AY:0;
+ET:"Airship Begin";AS:0;AX:0;AY:0;
 ET:"Airship Stop";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
