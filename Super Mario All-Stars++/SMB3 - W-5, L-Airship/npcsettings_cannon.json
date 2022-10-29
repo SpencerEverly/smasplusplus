@@ -1,0 +1,87 @@
+{
+	"style" : "groupbox",
+	"title" : "Directional Cannon Settings",
+	"layout": [
+		{
+			"control": "group",
+			"name": "bOptions",
+            "title": "Basic Options",
+            "children": [
+				{
+					"control": "spinBox",
+					"name": "shootAngle",
+					"title": "Shooting Angle",
+					"type": "int",
+					"tooltip": "The angle that defines the direction the cannon will shoot at.",
+					"value-default": 0,
+					"value-min": 0,
+					"value-max": 360
+				},
+				{
+					"control": "spinBox",
+					"name": "shootSpeed",
+					"title": "Shooting Speed",
+					"type": "double",
+					"tooltip": "The speed that the cannonball will have after getting shot.",
+					"value-default": 1,
+					"value-min": 0.1,
+					"value-max": 20
+				}
+			]
+		},
+		{
+			"control": "group",
+			"name": "aOptions",
+            "title": "Advanced Options",
+            "children": [
+				{
+					"control": "spinBox",
+					"name": "roundDelay",
+					"title": "Delay Between Rounds",
+					"type": "double",
+					"tooltip": "The amount of time that the cannon will wait before shooting another round of cannonballs, measured in seconds.",
+					"value-default": 2,
+					"value-min": 0,
+					"value-max": 60
+				},
+				{
+					"control": "spinBox",
+					"name": "shootDelay",
+					"title": "Delay Between Shots",
+					"type": "double",
+					"tooltip": "The amount of time that the cannon will wait before shooting in the same round, measured in seconds.",
+					"value-default": 1,
+					"value-min": 0,
+					"value-max": 60
+				},
+				{
+					"control": "spinBox",
+					"name": "shotsPerRound",
+					"title": "Shots per Round",
+					"type": "int",
+					"tooltip": "The amount of cannonballs that the cannon will shoot every round.",
+					"value-default": 1,
+					"value-min": 1,
+					"value-max": 10
+				},
+				{
+					"control": "spinBox",
+					"name": "constantRotation",
+					"title": "Constant Rotation",
+					"type": "double",
+					"tooltip": "The cannon will constantly rotate if this option is higher than 0.",
+					"value-default": 0,
+					"value-min": 0,
+					"value-max": 360
+				},
+				{
+					"control": "checkBox",
+					"name": "pAim",
+					"title": "Aims at Player?",
+					"tooltip": "Enabling this will make the cannon aim at the nearest player (Will disable constant rotation).",
+					"value-default": false
+				}
+			]
+		}
+	]
+}
