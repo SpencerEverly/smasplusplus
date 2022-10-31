@@ -117,6 +117,15 @@ function malcmusic.onStart()
         end
         
         
+        if Time.month() == 10  and Time.day() == 31 then --Halloween
+            malcmusic.holiday = true
+            if malcmusic.holiday == true then
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
+                triggerEvent("Halloween")
+            end
+        end
+        
+        
         if Time.month() == 12 and Time.day() == 25 then --Christmas Day
             malcmusic.holiday = true
             if malcmusic.holiday == true then

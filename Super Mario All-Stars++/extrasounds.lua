@@ -1502,11 +1502,15 @@ function extrasounds.getSoundID(eventName)
         table.insert(name, mem(GM_EVENT+(idx*EVENTS_STRUCT_SIZE)+0x04,FIELD_STRING))
     end
     idxNumber = table.find(name, eventName) - 1
-    return mem(GM_EVENT+(idxNumber*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
+    if idxNumber == nil then
+        return 0
+    else
+        return mem(GM_EVENT+(idxNumber*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
+    end
 end
 
 function extrasounds.onEvent(eventName)
-    if eventName then --Fixes vanilla events from not playing extrasounds sounds
+    if eventName ~= nil then --Fixes vanilla events from not playing extrasounds sounds
         if extrasounds.getSoundID(eventName) >= 1 and not extrasounds.stockSoundNumbersInOrder[extrasounds.getSoundID(eventName)] then
             extrasounds.playSFX(extrasounds.getSoundID(eventName))
         end

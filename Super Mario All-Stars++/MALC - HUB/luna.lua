@@ -39,7 +39,6 @@ local yoshibrown =      myShop:RegisterItem{NPCid = 992, inEgg = true, price = 7
 
 mushroom.description = "<tremble 1>Mmm.. a tasty mushroom!</tremble>"
 
-local stars = SaveData.totalStarCount
 local infobooth1 = textplus.loadFont("littleDialogue/font/smb3-c.ini")
 
 littleDialogue.registerStyle("endingtextone",{
@@ -204,10 +203,9 @@ function onStart()
     if SaveData.disableX2char == nil then
         SaveData.disableX2char = false
     end
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         triggerEvent("ShowX2Stuff")
-    end
-    if SaveData.disableX2char == true then
+    elseif SaveData.disableX2char then
         triggerEvent("HideX2Stuff")
         for _,p in ipairs(Player.get()) do
             p.setCostume(1, nil)
@@ -217,31 +215,33 @@ function onStart()
             p.setCostume(5, nil)
         end
     end
-    if stars >= 4 and stars <= 9 and malcmusic.holiday == false then
-        Routine.run(Stage0)
+    if not malcmusic.holiday then --and SaveData.genosideStage <= 2 and SaveData.currentCostume ~= "UNDERTALE-FRISK" then
+        if SaveData.totalStarCount >= 4 and SaveData.totalStarCount <= 9 then
+            Routine.run(Stage0)
+        end
+        if SaveData.totalStarCount >= 10 and SaveData.totalStarCount <= 15 then
+            Routine.run(Stage1)
+        end
+        if SaveData.totalStarCount >= 16 and SaveData.totalStarCount <= 21 then
+            Routine.run(Stage2)
+        end
+        if SaveData.totalStarCount >= 22 and SaveData.totalStarCount <= 27 then
+            Routine.run(Stage3)
+        end
+        if SaveData.totalStarCount >= 28 and SaveData.totalStarCount <= 31 then
+            Routine.run(Stage4)
+        end
+        if SaveData.totalStarCount >= 32 and SaveData.totalStarCount <= 37 then
+            Routine.run(Stage5)
+        end
+        if SaveData.totalStarCount >= 38 and SaveData.totalStarCount <= 43 then
+            Routine.run(Stage6)
+        end
+        if SaveData.totalStarCount >= 44 then
+            Routine.run(Stage7)
+        end
     end
-    if stars >= 10 and stars <= 15 and malcmusic.holiday == false then
-        Routine.run(Stage1)
-    end
-    if stars >= 16 and stars <= 21 and malcmusic.holiday == false then
-        Routine.run(Stage2)
-    end
-    if stars >= 22 and stars <= 27 and malcmusic.holiday == false then
-        Routine.run(Stage3)
-    end
-    if stars >= 28 and stars <= 31 and malcmusic.holiday == false then
-        Routine.run(Stage4)
-    end
-    if stars >= 32 and stars <= 37 and malcmusic.holiday == false then
-        Routine.run(Stage5)
-    end
-    if stars >= 38 and stars <= 43 and malcmusic.holiday == false then
-        Routine.run(Stage6)
-    end
-    if stars >= 44 and malcmusic.holiday == false then
-        Routine.run(Stage7)
-    end
-    --if stars >= 100 then
+    --if SaveData.genosideStage >= 3 and SaveData.currentCostume == "UNDERTALE-FRISK" then
     --    triggerEvent("StageGenoside")
     --end
 end
@@ -277,7 +277,7 @@ function onEvent(eventName)
         myShop:open()
     end
     if eventName == "StarList" then
-        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE AT LEAST "..stars.." STARS IN YOUR GAME PROGRESSION.<page>THE STARS YOU HAVE COLLECTED IN THE MANDATORY LEVELS IS "..#SaveData.completeLevels..". THE STARS YOU HAVE COLLECTED IN ALL OTHER LEVELS IS "..#SaveData.completeLevelsOptional..".<page>THE STAR COUNT OF EVERY STAR YOU COLLECTED OVERALL IS "..SaveData.starsgrabbed..".<page>TO FINISH YOUR GAME AND UNLOCK THE TRUE ENDING, YOU'LL NEED TO COLLECT "..(999 - SaveData.totalStarCount).." MORE.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
+        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE AT LEAST "..SaveData.totalStarCount.." STARS IN YOUR GAME PROGRESSION.<page>THE STARS YOU HAVE COLLECTED IN THE MANDATORY LEVELS IS "..#SaveData.completeLevels..". THE STARS YOU HAVE COLLECTED IN ALL OTHER LEVELS IS "..#SaveData.completeLevelsOptional..".<page>THE STAR COUNT OF EVERY STAR YOU COLLECTED OVERALL IS "..SaveData.starsgrabbed..".<page>TO FINISH YOUR GAME AND UNLOCK THE TRUE ENDING, YOU'LL NEED TO COLLECT "..(999 - SaveData.totalStarCount).." MORE.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
     end
     if eventName == "GeneralList" then
         littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE GOT "..SaveData.GameOverCount.." GAME OVERS IN YOUR GAME PROGRESSION.<page>YOU ALSO HAVE RECENTLY WENT IN (number) LEVELS.<page>THE SCORE COUNT IS "..SaveData.totalScoreClassic.." AND THE COIN COUNT IS "..SaveData.totalCoinsClassic..".<page>YOU HAVE ALSO STOMPED ON "..SaveData.goombaStomps.." GOOMBAS, AND "..SaveData.koopaStomps.." KOOPA TROOPAS.<page>THE TOTAL AMOUNT OF COINS COLLECTED OVERALL IS "..SaveData.totalcoins..".<page>OVERALL, YOU HAVE USED "..SaveData.totalmushrooms.." MUSHROOMS, "..SaveData.totalfireflowers.." FIRE FLOWERS, "..SaveData.totalleafs.." SUPER LEAFS, "..SaveData.totaltanookis.." TANOOKI SUITS, "..SaveData.totalhammersuits.." HAMMER SUITS, AND "..SaveData.totaliceflowers.." ICE FLOWERS.<page>YOU ALSO GRABBED "..SaveData.starsgrabbed.." TOTAL STARS REGARDLESS OF COMPLETION OR NOT, USED "..SaveData.starmansused.." STARMANS, "..SaveData.megamushroomssused.." MEGA MUSHROOMS,<page>AND I HOPE YOU'VE HAD A FUN TIME.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
