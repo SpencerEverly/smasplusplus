@@ -1,0 +1,8 @@
+gfxoffsety=4
+gfxwidth=36
+gfxheight=36
+width=36
+height=36
+frames=1
+framestyle=1
+grid=8
