@@ -5,6 +5,8 @@ local Routine = require("routine")
 local rng = require("base/rng")
 local customCamera = require("customCamera")
 local smasbooleans = require("smasbooleans")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 
 local roulettestar = {}
 
@@ -76,24 +78,13 @@ npcManager.registerHarmTypes(npcID,
     }
 )
 
-function muteMusic(sectionid) --Mute all section music, or just mute a specific section
-    if sectionid == -1 then --If -1, all section music will be muted
-        for i = 0,20 do
-            musiclist = {Section(i).music}
-            GameData.levelMusicTemporary[i] = Section(i).music
-            Audio.MusicChange(i, 0)
-        end
-    elseif sectionid >= 0 or sectionid <= 20 then
-        musiclist = {Section(sectionid).music}
-        GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
-        Audio.MusicChange(sectionid, 0)
-    end
-end
-
 local plr
 local newboundary
 local oldboundary
 local endRoomToScroll = 0
+
+local customFanfareCharacters = {}
+table.insert(customFanfareCharacters, "MODERN2")
 
 function starget()
     Misc.npcToCoins()
@@ -111,8 +102,12 @@ function starget()
     inactivekeysonly = true
     playervuln = true
     playerwon = true
-    SFX.play(52)
-    muteMusic(-1)
+    if SaveData.currentCostume == "MODERN2" then
+        SFX.play("costumes/mario/Modern2/smb1-exit.ogg")
+    else
+        SFX.play(52)
+    end
+    Sound.muteMusic(-1)
     Audio.SeizeStream(-1)
     Audio.MusicStop()
     smasbooleans.musicMuted = true
@@ -122,7 +117,11 @@ function starget()
     newboundary = plr.sectionObj.boundary
     newboundary.right = newboundary.right + 350
     plr.sectionObj.boundary = newboundary
-    Routine.wait(5, true)
+    if SaveData.currentCostume == "MODERN2" then
+        Routine.wait(7.2, true)
+    else
+        Routine.wait(5, true)
+    end
     GameData.winStateActive = false
     Level.exit(LEVEL_WIN_TYPE_STAR)
 end

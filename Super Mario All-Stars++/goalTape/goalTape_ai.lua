@@ -228,8 +228,12 @@ function goalTape.startExit(args)
     info.fadeOut = 0
 
     info.startX = args.startX or (p.x + p.width*0.5)
-
-    info.mainSound = SFX.play(info.mainSFX)
+    
+    if SaveData.currentCostume == "MODERN2" then
+        info.mainSound = SFX.play("costumes/mario/Modern2/smb1-exit.ogg")
+    else
+        info.mainSound = SFX.play(info.mainSFX)
+    end
 
     -- Mute music
     info.originalSection = p.section
