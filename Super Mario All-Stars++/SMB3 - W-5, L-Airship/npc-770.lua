@@ -64,14 +64,14 @@ function DownSideCannon.onTickNPC(v)
     if data.waitingframe > NPC.config[npcID].shootrate then
         v1 = NPC.spawn(765,v.x+16+((NPC.config[npcID].width-32)/2)*v.direction,v.y+NPC.config[npcID].height/2,player.section)
         v1.direction = v.direction
-        v1.speedX = 3*v.direction
-        v1.speedY = 3
+        v1.speedX = 1*v.direction
+        v1.speedY = 1
         if Player.count() >= 2 then
             if player.section ~= player2.section then
                 v2 = NPC.spawn(765,v.x+16+((NPC.config[npcID].width-32)/2)*v.direction,v.y+NPC.config[npcID].height/2,player2.section)
                 v2.direction = v.direction
-                v2.speedX = 3*v.direction
-                v2.speedY = 3
+                v2.speedX = 1*v.direction
+                v2.speedY = 1
             end
         end
         Animation.spawn(10,v.x+16+((NPC.config[npcID].width-32)/2)*v.direction,v.y+NPC.config[npcID].height/2)
