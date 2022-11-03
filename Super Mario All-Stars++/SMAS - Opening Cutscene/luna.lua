@@ -20,7 +20,13 @@ local bgtwo = false
 local timer = 0
 local array = timer % 3
 local frame = 1
-local framearray
+local frameImages = {}
+
+function onStart()
+    for i = 1,2744 do
+        table.insert(frameImages, Graphics.loadImageResolved("SMAS - Opening Cutscene/openingframes/"..string.format("%05d", i)..".png"))
+    end
+end
 
 function onInputUpdate()
     for _,p in ipairs(Player.get()) do
@@ -52,16 +58,7 @@ function onDraw()
     if frame >= 2743 then
         frame = 2743
     end
-    if frame <= 9 then
-        framearray = string.format("%0004d",tostring(frame))
-    elseif frame <= 99 then
-        framearray = string.format("%004d",tostring(frame))
-    elseif frame <= 999 then
-        framearray = string.format("%04d",tostring(frame))
-    elseif frame <= 9999 then
-        framearray = string.format("%4d",tostring(frame))
-    end
-    Img.draw("openingframes/0"..framearray..".png", 0, 0, true, false, -5, 1)
+    Graphics.drawImageWP(frameImages[frame], 0, 0, -5)
     if timer >= 19700 then
         if not SaveData.openingComplete then
             SaveData.openingComplete = true
