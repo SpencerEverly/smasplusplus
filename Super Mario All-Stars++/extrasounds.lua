@@ -716,7 +716,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**SPINJUMPING**
             if normalCharacters[p.character] then
-                if p:isOnGround() and not p.keys.down and p.mount == 0 and (not GameData.winStateActive or GameData.winStateActive == nil) then --If on the ground, not holding down, and not on a mount...
+                if (p:isOnGround() and not p.keys.down and p.mount == 0 and (not GameData.winStateActive or GameData.winStateActive == nil) and Level.endState() == 0) then --If on the ground, not holding down, and not on a mount...
                     if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
                         if p:mem(0x50, FIELD_BOOL) == false then
                             if extrasounds.enableSpinjumpingSFX then
@@ -726,7 +726,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                     end
                 end
             elseif linkCharacters[p.character] then
-                if p:isOnGround() then --If on the ground...
+                if (p:isOnGround() and Level.endState() == 0) then --If on the ground...
                     if (p:mem(0x120, FIELD_BOOL) and p.keys.altJump == KEYS_PRESSED) then --If alt jump is pressed and jump has been activated...
                         if p:mem(0x50, FIELD_BOOL) == false then
                             if extrasounds.enableJumpingSFX then
@@ -787,7 +787,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
         
             --**PSWITCH/STOPWATCH TIMER**
-            if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < 750 or mem(0x00B2C62E, FIELD_WORD) >= 150 and mem(0x00B2C62E, FIELD_WORD) < 750 then --Are the P-Switch/Stopwatch timers activate and on these number values?
+            if mem(0x00B2C62C, FIELD_WORD) >= 150 and mem(0x00B2C62C, FIELD_WORD) < mem(0x00B2C87C, FIELD_WORD) - 27 or mem(0x00B2C62E, FIELD_WORD) >= 150 and mem(0x00B2C62E, FIELD_WORD) < mem(0x00B2C87C, FIELD_WORD) - 27 then --Are the P-Switch/Stopwatch timers activate and on these number values?
                 if Level.endState() <= 0 then --Make sure to not activate when the endState is greater than 1
                     if not GameData.winStateActive or GameData.winStateActive == nil then --SMAS++ episode specific, you don't need this for anything outside of SMAS++
                         if extrasounds.playPSwitchTimerSFX then

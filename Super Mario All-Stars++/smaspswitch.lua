@@ -10,7 +10,7 @@ function smaspswitch.onDraw()
     Defines.pswitch_music = false
     for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
         --P-Switch code
-        if mem(0x00B2C62C, FIELD_WORD) == 776 or mem(0x00B2C62E, FIELD_WORD) == 776 then
+        if mem(0x00B2C62C, FIELD_WORD) == mem(0x00B2C87C, FIELD_WORD) - 1 or mem(0x00B2C62E, FIELD_WORD) == mem(0x00B2C87C, FIELD_WORD) - 1 then
             if not p.hasStarman and not p.isMega then
                 Sound.muteMusic(-1)
                 smasbooleans.musicMuted = true
