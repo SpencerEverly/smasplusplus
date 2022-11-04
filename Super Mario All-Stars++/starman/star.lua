@@ -284,6 +284,7 @@ function starman.onNPCKill(event,npc,reason)
         local t = npcManager.collected(npc, reason);
         if(t) then
             SFX.play(6)
+            Misc.givePoints(SCORE_1000,{x = t.x+t.width*0.5,y = t.y+t.height*0.5},true)
             starman.start(t, npc.id)
         end
     end

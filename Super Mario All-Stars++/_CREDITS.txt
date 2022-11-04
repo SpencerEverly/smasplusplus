@@ -187,7 +187,7 @@ Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
     - True Ending Music (Heaven Music 1)
     - Dancing Mushrooms (By Blue Warrior, FL instrument remaster by me)
 
-Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research needed. If you see an "TBA" that means the name still needs research):
+Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research needed. If you see a "TBA" that means the name still needs research):
 
 - ac_1700 - Jordan Bortner
 - Airship - TheUltimateKoopa

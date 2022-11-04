@@ -252,8 +252,8 @@ function smascharacterinfo.setCostumeSpecifics()
         elseif Level.filename() then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_darsonic55")
         end
-        starman.duration[996] = lunatime.toTicks(25)
-        starman.duration[994] = lunatime.toTicks(25)
+        starman.duration[996] = lunatime.toTicks(25.7)
+        starman.duration[994] = lunatime.toTicks(25.7)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
         smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
