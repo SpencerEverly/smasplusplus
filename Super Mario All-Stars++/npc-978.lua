@@ -26,7 +26,7 @@ local coinToBlock = {
 
 local snake = {}
 
-snake.sfxFile = SFX.open(Misc.resolveSoundFile(smascharacterinfo.pSwitchMusic))
+snake.sfxFile = SFX.open(Misc.resolveSoundFile("pswitch/pswitch_smw.ogg"))
 
 npcManager.setNpcSettings{
 	id = npcID,
