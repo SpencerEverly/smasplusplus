@@ -1501,20 +1501,20 @@ function extrasounds.getSoundID(eventName)
     for idx=0,MAX_EVENTS-1 do
         table.insert(name, mem(GM_EVENT+(idx*EVENTS_STRUCT_SIZE)+0x04,FIELD_STRING))
     end
-    idxNumber = table.find(name, eventName) - 1
+    idxNumber = table.ifind(name, eventName) - 1
     if idxNumber == nil then
         return 0
-    else
+    elseif idxNumber ~= nil then
         return mem(GM_EVENT+(idxNumber*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
     end
 end
 
 function extrasounds.onEvent(eventName)
-    if eventName ~= nil then --Fixes vanilla events from not playing extrasounds sounds
-        if extrasounds.getSoundID(eventName) >= 1 and not extrasounds.stockSoundNumbersInOrder[extrasounds.getSoundID(eventName)] then
-            extrasounds.playSFX(extrasounds.getSoundID(eventName))
-        end
-    end
+    --if eventName then --Fixes vanilla events from not playing extrasounds sounds
+        --if extrasounds.getSoundID(eventName) >= 1 and not extrasounds.stockSoundNumbersInOrder[extrasounds.getSoundID(eventName)] then
+            --extrasounds.playSFX(extrasounds.getSoundID(eventName))
+        --end
+    --end
 end
 
 return extrasounds --This ends the library
