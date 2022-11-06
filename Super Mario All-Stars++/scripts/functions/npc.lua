@@ -363,6 +363,31 @@ function NPC.isOnScreen(npc)
     end
 end
 
+function NPC.getPlayerHarmedNPC(p)
+    local touchedNPCs = {}
+    local forcedStates = {}
+    if anotherPowerDownLibrary then
+        forcedStates = {
+            [2] = FORCEDSTATE_POWERDOWN_SMALL,
+            [227] = FORCEDSTATE_POWERDOWN_FIRE,
+            [228] = FORCEDSTATE_POWERDOWN_ICE,
+            [751] = 751,
+        }
+    else
+        forcedStates = {
+            [2] = FORCEDSTATE_POWERDOWN_SMALL,
+            [227] = FORCEDSTATE_POWERDOWN_FIRE,
+            [228] = FORCEDSTATE_POWERDOWN_ICE,
+        }
+    end
+    for k,v in ipairs(NPC.getIntersecting(p.x,p.y,p.x + p.width,p.y + p.height)) do
+        if v.isValid and not v.isHidden and forcedStates[p.forcedState] then
+            table.insert(touchedNPCs, v.id)
+        end
+    end
+    return touchedNPCs
+end
+
 
 
 function Npc.onInitAPI()
