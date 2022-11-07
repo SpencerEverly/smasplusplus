@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 2\: World 1-2";SZ:1;CPID:"SMBX2";
+TL:"Super Mario Bros. 2\: World 1-2";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-195680;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 2/Overworld.spc|0\;g=2.5";BG:5;
@@ -3284,7 +3284,7 @@ ID:91;X:-159968;Y:-160064;D:-1;CN:138;
 ID:91;X:-159936;Y:-160064;D:-1;CN:138;
 ID:91;X:-159872;Y:-160064;D:-1;CN:138;
 ID:249;X:-159744;Y:-160096;D:-1;
-ID:39;X:-178912;Y:-180252;D:-1;EA:"Boss Begin";ED:"Boss End 1";
+ID:39;X:-178912;Y:-180252;D:-1;EA:"Boss Start";ED:"Boss End 1";
 ID:91;X:-197664;Y:-200064;D:-1;CN:141;
 ID:91;X:-197696;Y:-200064;D:-1;CN:141;
 ID:25;X:-197568;Y:-200096;D:-1;
@@ -3376,9 +3376,9 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Begin";SSS:["ID\:1\;MI\:15\;"];AS:0;AX:0;AY:0;
-ET:"Boss End 1";SD:40;LS:["Star"];SSS:["ID\:1\;MI\:0\;"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
-ET:"Boss End 2";SSS:["ID\:1\;MI\:15\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End 1";LS:["Star"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
+ET:"Boss End 2";AS:0;AX:0;AY:0;
 ET:"Subspace Door 1";SD:41;LS:["Subspace Door 1"];AS:0;AX:0;AY:0;
 ET:"Subspace Door 2";SD:41;LS:["Subspace Door 2"];AS:0;AX:0;AY:0;
 ET:"Pidget Dead";SD:20;LH:["Carpet Floor 1"];LS:["Carpet Floor Unlocked"];AS:0;AX:0;AY:0;

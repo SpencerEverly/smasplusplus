@@ -6109,7 +6109,7 @@ ID:216;X:-174744;Y:-180352;D:-1;
 ID:1000;X:-138368;Y:-140384;D:-1;LR:"Ball";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:346;X:-175326;Y:-180316;D:-1;
 ID:346;X:-175198;Y:-180316;D:-1;
-ID:39;X:-139104;Y:-140348;D:1;EA:"Boss Begin";ED:"Boss Dead";
+ID:39;X:-139104;Y:-140348;D:1;EA:"Boss Start";ED:"Boss End";
 ID:19;X:-179520;Y:-180096;D:-1;
 ID:19;X:-179584;Y:-180096;D:-1;
 ID:19;X:-179616;Y:-180096;D:-1;
@@ -6293,7 +6293,7 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Begin";SSS:["ID\:3\;MI\:15\;"];AS:0;AX:0;AY:0;
-ET:"Boss Dead";SD:40;LS:["Ball"];SSS:["ID\:3\;MI\:0\;"];TE:"Boss Dead 2";TD:28;AS:0;AX:0;AY:0;
-ET:"Boss Dead 2";SSS:["ID\:3\;MI\:15\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End";LS:["Ball"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
+ET:"Boss End 2";AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

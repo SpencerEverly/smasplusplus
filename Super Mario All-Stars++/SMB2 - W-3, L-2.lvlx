@@ -3511,7 +3511,7 @@ ID:91;X:-195456;Y:-200352;D:-1;CN:141;
 ID:91;X:-195392;Y:-200352;D:-1;CN:141;
 ID:132;X:-196352;Y:-200352;D:-1;NM:1;
 ID:249;X:-195296;Y:-200384;D:-1;
-ID:755;X:-160640;Y:-160444;D:1;EA:"Boss Begin";ED:"Boss End";
+ID:755;X:-160640;Y:-160444;D:1;EA:"Boss Start";ED:"Boss End";
 ID:753;X:-182880;Y:-180192;D:-1;
 ID:400;X:-198688;Y:-200128;D:-1;
 ID:221;X:-179288;Y:-180704;D:-1;
@@ -3772,8 +3772,8 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Begin";SSS:["ID\:2\;MI\:15\;"];AS:0;AX:0;AY:0;
-ET:"Boss End";SD:40;LS:["Star"];SSS:["ID\:2\;MI\:0\;"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End";LS:["Star"];SSS:["ID\:2\;MI\:0\;"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
 ET:"Boss End 2";SSS:["ID\:2\;MI\:15\;"];AS:0;AX:0;AY:0;
 ET:"YoshiSoftlockPrevention";LH:["MushroomBlocksBoss"];DS:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

@@ -6933,7 +6933,7 @@ ID:60;X:-137824;Y:-140224;
 ID:60;X:-137824;Y:-140096;
 BGO_END
 NPC
-ID:39;X:-138976;Y:-140252;D:-1;EA:"Boss Begin";ED:"Boss Dead";
+ID:39;X:-138976;Y:-140252;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:221;X:-159800;Y:-158656;D:-1;
 ID:221;X:-159800;Y:-158656;D:-1;
 ID:221;X:-159800;Y:-158656;D:-1;
@@ -7096,8 +7096,8 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Begin";SSS:["ID\:3\;MI\:15\;"];AS:0;AX:0;AY:0;
-ET:"Boss Dead";SD:40;LS:["Exit"];SSS:["ID\:3\;MI\:0\;"];TE:"Boss Dead 2";TD:28;AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End";LS:["Exit"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
+ET:"Boss End 2";AS:0;AX:0;AY:0;
 ET:"Subspace Door 1";SD:41;LS:["Subspace Door 1"];AS:0;AX:0;AY:0;
-ET:"Boss Dead 2";SSS:["ID\:3\;MI\:15\;"];AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

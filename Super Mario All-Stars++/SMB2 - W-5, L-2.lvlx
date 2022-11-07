@@ -4482,7 +4482,7 @@ ID:215;X:-139576;Y:-141632;D:-1;
 ID:215;X:-139576;Y:-141664;D:-1;
 ID:350;X:-119663;Y:-117216;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:350;X:-119563;Y:-117216;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
-ID:755;X:-99040;Y:-100220;D:-1;EA:"Boss Begin";ED:"Boss Dead";
+ID:755;X:-99040;Y:-100220;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:1000;X:-98464;Y:-100384;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:350;X:-99264;Y:-100032;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:753;X:-177792;Y:-180096;D:-1;
@@ -4560,7 +4560,8 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Boss Begin";SSS:["ID\:5\;MI\:15\;"];AS:0;AX:0;AY:0;
-ET:"Boss Dead";SD:40;LS:["Star"];SSS:["ID\:5\;MI\:0\;"];AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End";LS:["Star"];TE:"Boss End 2";TD:28;AS:0;AX:0;AY:0;
+ET:"Boss End 2";AS:0;AX:0;AY:0;
 ET:"POWFailsafe";LH:["POWNoYoshi"];LS:["POWYoshi"];DS:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END
