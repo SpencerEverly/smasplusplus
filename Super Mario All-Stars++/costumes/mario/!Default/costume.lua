@@ -700,7 +700,6 @@ function costume.onDraw()
 
         data.frameInOnDraw = p.frame
 
-
         local animationData = animations[data.currentAnimation]
 
         if (animationData ~= nil and animationData.setFrameInOnDraw) and data.forcedFrame ~= nil then
