@@ -196,46 +196,47 @@ Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research 
 - Battle Plains - Blue Warrior
 - Birdo - NICKtendo DS
 - Bonus - Pongball/Hello Fangaming
-- Bowser - Daniel Witt
-- BowserBattle - TBA
-- BowserSMW - TBA
-- Cannons - TBA
-- Castle - TBA
-- CastleSMB4 - TBA
-- Caves - TBA
-- CavesSMB2 - TBA
-- CavesSMB4 - TBA
-- Classic - TBA
-- Clear! - TBA
-- Desert - TBA
-- Final Battle - TBA
+- BowserBattle - Isaiah K.
+- BowserSMW - Erik
+- Cannons - SonicMaster
+- Castle - Hello Fangaming
+- CastleSMB4 - Blue Warrior
+- Caves - Matthew Collinson
+- CavesSMB2 - Joe Cortez
+- CavesSMB4 - Blue Warrior
+- Classic - Jorge D. Fuentes
+- Clear! - Philipp Strahl aka. texx sound
+- Desert - SonicMaster
+- Final Battle - Blue Warrior
 - Fort - Hello Fangaming
-- Game Over - TBA
-- Game_Cube_intro - TBA
-- gamecube_menu_looped - TBA
-- Ghost - TBA
-- Hammer - TBA
+- Game Over - Andrea "AndywinXp"
+- Game_Cube_intro - Vincius/Music Master/RPS
+- gamecube_menu_looped - Ricky Russell
+- Ghost - Mark7
+- Hammer - Jay Reichard
 - King - John N. Engelmann
 - Land - Gigasoft
-- Lava - TBA
+- Lava - Daniel Witt
 - Lineland - Hello Fangaming
-- Mini Boss - TBA
-- Overworld - TBA
-- Prologue - TBA
-- secret1 - TBA
-- smasselect - TBA
-- smastitle - TBA
-- SMBDDX - Last Bowser Battle - TBA
-- SMW_Castle-KM - TBA
-- SMWAthletic - TBA
-- SMWOverworld - TBA
-- Special Stage - TBA
+- Mini Boss - 辰
+- Overworld - Blue Warrior
+- Prologue - Philipp Strahl aka. texx sound
+- secret1 - Tony Thai
+- smasselect - Pongball
+- smastitle - Pongball
+- SMBDDX - Bowser Battle - Dave Phaneuf
+- SMBDDX - Last Bowser Battle - The Ultimate Koopa
+- SMW_Castle-KM - King Meteor
+- SMWAthletic - Erik
+- SMWOverworld - SevenChaos
+- Special Stage - Philipp Strahl aka. texx sound
+- Star - Mikeymo88/Spencer Everly
 - Subcon - Gigasoft/Hello Fangaming
 - Tower - Andrew Shand
-- WarpZoneSMB3 - TBA
-- Wart - TBA
-- Water - TBA
-- WaterSMB4 - TBA
+- WarpZoneSMB3 - Zero Beats
+- Wart - The Jade Emperor
+- Water - Hello Fangaming
+- WaterSMB4 - 辰
 
 Extra MIDIs are by:
 
@@ -250,7 +251,7 @@ Extra MIDIs are by:
 - BeforeBossSMB2 - LucasGTGamer123
 - BeforeCastleSMB1 - TBA
 - BirdoAlt - JexuBandicoot527
-- BonusSMB3 - TBA
+- BonusSMB3 - Lu9
 - BossBattleSMBS - Spencer Everly
 - BossSMW - TBA
 - BowsersLandSMB1 - TBA
@@ -291,7 +292,6 @@ Extra MIDIs are by:
 - SMB3World2 - TBA
 - SM-StudiopolisZoneAct1 - TBA
 - Special World - TBA
-- Star - TBA/Spencer Everly
 - Star Road - TBA
 - StarDDP - FireMario/Spencer Everly
 - Starman - TBA
