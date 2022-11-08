@@ -1,0 +1,34 @@
+---         Boom Boom         ---
+--- from MrDoubleA's NPC Pack ---
+---       (Give credit!)      ---
+
+
+
+The non-hiding boom booms (note that the hiding boom booms inherit the configs of their parent NPC ID) have the following properties for NPC configs and npc-n.txt files:
+
+
+- health (Default: 3)
+How much health the NPC has.
+- hitSFX (Default: 39)
+The sound effect played when hurting the NPC. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
+
+- chaseDistance (Defaults: 512, 768)
+The maximum distance away from the player that the NPC can be in order to chase the player.
+
+- chaseSpeed (Defaults: 4, 6)
+The max speed that the NPC can chase the player at.
+- chaseAcceleration (Default: 0.15)
+How fast the NPC accelerates when chasing the player.
+- chaseTime (Defaults: 96, 128)
+How fast the NPC accelerates when chasing the player.
+
+- attackPrepareTime (Default: 24)
+How long the NPC will be preparing an attack before executing it.
+
+- hurtTime (Default: 48)
+How long the NPC will do its hurt animation before hiding.
+
+- hideTime (Default: 96)
+How long the NPC will be hiding for.
+- hideID (Defaults: 752, 754)
+The ID that the NPC will transform into when hiding. Can also be nil for no transformation.
