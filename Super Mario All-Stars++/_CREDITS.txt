@@ -202,7 +202,7 @@ Original 2012 Beta Music (MIDIs) are by:
 - Castle - Hello Fangaming
 - CastleSMB4 - Blue Warrior
 - Caves - Matthew Collinson
-- CavesSMB2 - Joe Cortez
+- CavesSMB2 - Joe Bickley
 - CavesSMB4 - Blue Warrior
 - Classic - Jorge D. Fuentes
 - Clear! - Philipp Strahl aka. texx sound
@@ -240,7 +240,6 @@ Original 2012 Beta Music (MIDIs) are by:
 
 Extra MIDIs are by (Some names are still unknown, research needed. If you see a "TBA" that means the name still needs research):
 
-- Various mods, and other things - Spencer Everly
 - AirshipBossSMB3 - JexuBandicoot527
 - AirshipSMB1 - m9blayke
 - Albatosses - Spencer Everly/Nimbus Cumulus/MadNyle
@@ -249,42 +248,42 @@ Extra MIDIs are by (Some names are still unknown, research needed. If you see a 
 - AthleticSMBS - Spencer Everly
 - BeforeAirshipSMB3 - Unknown (No name listed)
 - BeforeBossSMB2 - LucasGTGamer123
-- BeforeCastleSMB1 - TBA
+- BeforeCastleSMB1 - Merit Celaire
 - BirdoAlt - JexuBandicoot527
 - BonusAreaSMB3 - Lu9
 - BossBattleSMBS - Spencer Everly
 - BossSMW - TBA
-- BowsersLandSMB1 - TBA
+- BowsersLandSMB1 - KBY30
 - CastleSMB2 - Spencer Everly/EmmaNerd
 - CastleSMBS - Spencer Everly
-- CavesSMB2Beta - TBA
+- CavesSMB2Beta - Matthew Collinson/Spencer Everly
 - CavesSMBS - Spencer Everly/Koji Kondo
-- CavesSMW - TBA/Spencer Everly
-- Clear! SMB1 - TBA
-- Credits - TBA
-- Dead - TBA
-- DeadSMB3 - TBA/Spencer Everly
+- CavesSMW - The Ultimate Koopa/Spencer Everly
+- Clear! SMB1 - MIDI225368
+- Credits - max
+- Dead - John N. Engelmann
+- DeadSMB3 - John N. Engelmann/Spencer Everly
 - DesertCaveMM - Nimbus Cumulus/Spencer Everly
-- DesertSMB1 - TBA
-- Donut Plains - TBA
+- DesertSMB1 - m9blayke
+- Donut Plains - Jkiub & J450N
 - EndingSMB2 - FireMario/Spencer Everly
-- FlagSMB1 - TBA
-- FlagSMB1-Remastered - TBA/Spencer Everly
+- FlagSMB1 - MIDI225368
+- FlagSMB1-Remastered - MIDI225368/Spencer Everly
 - Flourish - Nathan Grigg/Microsoft
-- Forest of Illusion - TBA
+- Forest of Illusion - SwordBolt
 - ForestSMBS - Spencer Everly
-- FortClear - TBA
-- FoxWins - TBA
-- FoxWins-Remastered - TBA/Spencer Everly
-- Ice Cream Desert (OG Version) - TBA
-- IceCreamDesertCavesSMBS - Spencer Everly/Koji Kondo
+- FortClear - Gigasoft
+- FoxWins - Dr. Fruitcake
+- FoxWins-Remastered - Dr. Fruitcake/Spencer Everly
+- Ice Cream Desert (OG Version) - Erin Thweatt
+- IceCreamDesertCavesSMBS - Koji Kondo/Spencer Everly
 - IceCreamDesertSMBS - Spencer Everly
 - JarSMB2 - Name Witheld
-- MegaMushroom - TBA/Spencer Everly
-- Metrma - TBA
+- MegaMushroom - Asuka Ota/Hajime Wakai/Koji Kondo/Spencer Everly
+- Metrma - Johan Fall
 - Onestop - David Yackley/Microsoft
-- OverworldSMBS - TBA
-- OverworldSML - TBA
+- OverworldSMBS - Spencer Everly
+- OverworldSML - Preebster
 - PSwitchSMB3 - TBA
 - PSwitchSMB3-Remastered - TBA/Spencer Everly
 - SkiesSMB1 - ElPapiOfItay/Dublincalif/Spencer Everly
@@ -307,7 +306,7 @@ Extra MIDIs are by (Some names are still unknown, research needed. If you see a 
 - WarpZoneAny - TBA
 - Wart (New) - Koji Kondo/Spencer Everly
 - WaterSMBS - Spencer Everly
-- WaterSMW - TBA
+- WaterSMW - SwordBolt
 - WorldClearSMB1 - TBA
 - YI-Jazzy! - TBA
 - Yoshi's Island - TBA
