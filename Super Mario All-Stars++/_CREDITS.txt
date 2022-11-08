@@ -187,7 +187,7 @@ Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
     - True Ending Music (Heaven Music 1)
     - Dancing Mushrooms (By Blue Warrior, FL instrument remaster by me)
 
-Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research needed. If you see a "TBA" that means the name still needs research):
+Original 2012 Beta Music (MIDIs) are by:
 
 - ac_1700 - Jordan Bortner
 - Airship - TheUltimateKoopa
@@ -238,7 +238,7 @@ Original 2012 Beta Music (MIDIs) are by (Some names are still unknown, research 
 - Water - Hello Fangaming
 - WaterSMB4 - 辰
 
-Extra MIDIs are by:
+Extra MIDIs are by (Some names are still unknown, research needed. If you see a "TBA" that means the name still needs research):
 
 - Various mods, and other things - Spencer Everly
 - AirshipBossSMB3 - JexuBandicoot527
@@ -251,7 +251,7 @@ Extra MIDIs are by:
 - BeforeBossSMB2 - LucasGTGamer123
 - BeforeCastleSMB1 - TBA
 - BirdoAlt - JexuBandicoot527
-- BonusSMB3 - Lu9
+- BonusAreaSMB3 - Lu9
 - BossBattleSMBS - Spencer Everly
 - BossSMW - TBA
 - BowsersLandSMB1 - TBA
