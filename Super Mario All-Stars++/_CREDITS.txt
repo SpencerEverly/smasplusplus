@@ -252,7 +252,7 @@ Extra MIDIs are by (Some names are still unknown, research needed. If you see a 
 - BirdoAlt - JexuBandicoot527
 - BonusAreaSMB3 - Lu9
 - BossBattleSMBS - Spencer Everly
-- BossSMW - TBA
+- BossSMW - Matmax14
 - BowsersLandSMB1 - KBY30
 - CastleSMB2 - Spencer Everly/EmmaNerd
 - CastleSMBS - Spencer Everly
@@ -288,12 +288,12 @@ Extra MIDIs are by (Some names are still unknown, research needed. If you see a 
 - PSwitchSMB3-Remastered - TBA/Spencer Everly
 - SkiesSMB1 - ElPapiOfItay/Dublincalif/Spencer Everly
 - SMB3World1 - TBA
-- SMB3World2 - TBA
-- SM-StudiopolisZoneAct1 - TBA
-- Special World - TBA
-- Star Road - TBA
+- SMB3World2 - Princess Toadstool
+- SM-StudiopolisZoneAct1 - !!!!!
+- Special World - Unknown (No name listed)
+- Star Road - jrlepage
 - StarDDP - FireMario/Spencer Everly
-- Starman - TBA
+- Starman - MachRider/Markykku
 - StarSMBS - Spencer Everly/Koji Kondo
 - SubconsSavedSMB2 - FireMario/Spencer Everly
 - SubspaceDDP - FireMario/Spencer Everly
@@ -301,15 +301,15 @@ Extra MIDIs are by (Some names are still unknown, research needed. If you see a 
 - TowerSMBS - Spencer Everly
 - Town - Nathan Grigg/Microsoft
 - TownSMBS - Spencer Everly
-- Valley of Bowser - TBA
-- Vanilla Dome - TBA
-- WarpZoneAny - TBA
+- Valley of Bowser - King Meteor
+- Vanilla Dome - Sword-Bolt
+- WarpZoneAny - SevenChaos
 - Wart (New) - Koji Kondo/Spencer Everly
 - WaterSMBS - Spencer Everly
 - WaterSMW - SwordBolt
-- WorldClearSMB1 - TBA
-- YI-Jazzy! - TBA
-- Yoshi's Island - TBA
+- WorldClearSMB1 - John Engelmann
+- YI-Jazzy! - Jorge D. Fuentes
+- Yoshi's Island - Sword-Bolt
 
 Other music played on the episode are made by:
 
