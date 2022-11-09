@@ -9,7 +9,6 @@ end
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local comboSounds = require("comboSounds")
 local pausemenu2 = require("pausemenu2")
 if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
     rooms = require("rooms")

@@ -148,6 +148,16 @@ pcall(function() customCamera = require("customCamera") end)
 local npctocointimer = 0 --This is used for the NPC to Coin sound.
 local spinballtimer = 0 --This is used when spinjumping and shooting fireballs/iceballs.
 local holdingtimer = 0 --To count a timer on how long a player has held an item.
+local comboMuteTally = 0 --To enable combo sounds
+
+extrasounds.harmableComboTypes = {
+    HARM_TYPE_JUMP,
+    HARM_TYPE_NPC,
+    HARM_TYPE_PROJECTILE_USED,
+    HARM_TYPE_TAIL,
+    HARM_TYPE_HELD
+}
+
 local ready = false --This library isn't ready until onInit is finished
 
 extrasounds.sound = {}
@@ -425,6 +435,7 @@ local extrasoundsblock668 = {}
 function extrasounds.onInitAPI() --This'll require a bunch of events to start
     registerEvent(extrasounds, "onKeyboardPress")
     registerEvent(extrasounds, "onDraw")
+    registerEvent(extrasounds, "onDrawEnd")
     registerEvent(extrasounds, "onLevelExit")
     registerEvent(extrasounds, "onTick")
     registerEvent(extrasounds, "onTickEnd")
@@ -612,6 +623,15 @@ function extrasounds.onDraw()
     for k,v in ipairs(extrasounds.soundNamesInOrder) do
         if extrasounds.sound.sfx[k] == nil then --If nil, roll back to the original sound...
             extrasounds.sound.sfx[k] = Audio.SfxOpen(Misc.resolveSoundFile(v))
+        end
+    end
+end
+
+function extrasounds.onDrawEnd()
+    if comboMuteTally > 0 then
+        comboMuteTally = comboMuteTally - 1
+        if comboMuteTally == 0 then
+            Audio.sounds[9].muted = false
         end
     end
 end
@@ -1267,6 +1287,41 @@ function extrasounds.onInputUpdate() --Button pressing for such commands
     end
 end
 
+
+function extrasounds.comboSoundRoutine()
+    Routine.waitFrames(1, true)
+    for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+        if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --100 Points
+            extrasounds.playSFX(9)
+        end
+        if scoreboard.animationFrame == 2 and scoreboard.speedY == -1.94 then --200 Points
+            extrasounds.playSFX(106)
+        end
+        if scoreboard.animationFrame == 3 and scoreboard.speedY == -1.94 then --400 Points
+            extrasounds.playSFX(107)
+        end
+        if scoreboard.animationFrame == 4 and scoreboard.speedY == -1.94 then --800 Points
+            extrasounds.playSFX(108)
+        end
+        if scoreboard.animationFrame == 5 and scoreboard.speedY == -1.94 then --1000 Points
+            extrasounds.playSFX(109)
+        end
+        if scoreboard.animationFrame == 6 and scoreboard.speedY == -1.94 then --2000 Points
+            extrasounds.playSFX(110)
+        end
+        if scoreboard.animationFrame == 7 and scoreboard.speedY == -1.94 then --4000 Points
+            extrasounds.playSFX(111)
+        end
+        if scoreboard.animationFrame == 8 and scoreboard.speedY == -1.94 then --8000 Points
+            extrasounds.playSFX(112)
+        end
+        if scoreboard.animationFrame >= 9 and scoreboard.speedY == -1.94 then --1UP -> 5UP
+            extrasounds.playSFX(112)
+        end
+    end
+end
+
+
 function extrasounds.onPostNPCHarm(npc, harmtype, player)
     if not Misc.isPaused() then
         if extrasounds.active then
@@ -1307,6 +1362,17 @@ function extrasounds.onPostNPCHarm(npc, harmtype, player)
                     end
                 end
                 
+                
+                
+                
+                --**COMBO SOUNDS**
+                if not isOverworld then
+                    if extrasounds.harmableComboTypes[harmtype] then
+                        Audio.sounds[9].muted = true
+                        comboMuteTally = 2
+                        Routine.run(extrasounds.comboSoundRoutine)
+                    end
+                end
                 
                 
                 
@@ -1475,7 +1541,6 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                         end
                     end
                 end
-                
                 
                 
                 
