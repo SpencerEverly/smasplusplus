@@ -2,12 +2,12 @@
 local npcManager = require("npcManager")
 
 --Create the library table
-local sampleNPC = {}
+local SMB3BowserNPC = {}
 --NPC_ID is dynamic based on the name of the library file
 local npcID = NPC_ID
 
 --Defines NPC config for our NPC. You can remove superfluous definitions.
-local sampleNPCSettings = {
+local SMB3BowserNPCSettings = {
 	id = npcID,
 	--Sprite size
 	gfxheight = 80,
@@ -71,7 +71,7 @@ local sampleNPCSettings = {
 }
 
 --Applies NPC settings
-npcManager.setNpcSettings(sampleNPCSettings)
+npcManager.setNpcSettings(SMB3BowserNPCSettings)
 
 --Register the vulnerable harm types for this NPC. The first table defines the harm types the NPC should be affected by, while the second maps an effect to each, if desired.
 npcManager.registerHarmTypes(npcID,
@@ -105,15 +105,17 @@ npcManager.registerHarmTypes(npcID,
 
 
 --Register events
-function sampleNPC.onInitAPI()
-	npcManager.registerEvent(npcID, sampleNPC, "onTickEndNPC")
-	--npcManager.registerEvent(npcID, sampleNPC, "onTickEndNPC")
-	--npcManager.registerEvent(npcID, sampleNPC, "onDrawNPC")
-	--registerEvent(sampleNPC, "onNPCKill")
+function SMB3BowserNPC.onInitAPI()
+	npcManager.registerEvent(npcID, SMB3BowserNPC, "onTickEndNPC")
+	--npcManager.registerEvent(npcID, SMB3BowserNPC, "onTickEndNPC")
+	--npcManager.registerEvent(npcID, SMB3BowserNPC, "onDrawNPC")
+	--registerEvent(SMB3BowserNPC, "onNPCKill")
 end
 
 local followSpeed = 14 -- OUTSIDE of any functions
 local nearPlayer
+
+SMB3BowserNPC.lookAroundFrames = {4,3,12,9,8,9,12,3}
 
 function fireballAI(v)
     SFX.play("sound/bowser-fire.ogg")
@@ -124,7 +126,7 @@ function fireballAI(v)
     fire.speedY = 0
 end
 
-function sampleNPC.onTickEndNPC(v)
+function SMB3BowserNPC.onTickEndNPC(v)
 	--Don't act during time freeze
 	if Defines.levelFreeze then return end
 	
@@ -147,7 +149,9 @@ function sampleNPC.onTickEndNPC(v)
         data.dontJump = false
         data.fireCount = 2 --Set to fire fireballs 2-3 times per spit
         data.hitBlocks = false --Making sure get get only one frame of hitting Bowser bricks
-        
+        data.animationFramed = 1
+        data.animationArray = 0
+        data.timer = 0
         
         nearPlayer = Player.getNearest(v.x, v.y)
 
@@ -260,15 +264,21 @@ function sampleNPC.onTickEndNPC(v)
             end
         end
         if data.bossStage == 4 then
-            data.dontJump = true
             data.ai2 = data.ai2 + 1
+            if data.ai2 == 1 then
+                data.dontJump = true
+            end
             if data.ai2 >= 0 and data.ai2 < 35 then
                 v.animationFrame = 1
             end
             if data.ai2 == 35 then
                 nearPlayer = Player.getNearest(v.x, v.y)
-
-                data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) - (v.x + 0.5 * v.height)
+                
+                if v.direction == -1 then
+                    data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) - (v.x + 0.5 * v.height)
+                else
+                    data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) + (v.x + 0.5 * v.height)
+                end
                 data.opposite = (nearPlayer.y + (nearPlayer.height / 2)) - (v.y + 0.5 * v.width) - 250
                 data.radian     = math.atan2(data.opposite, data.adjacent)
                 data.finalAngle = math.floor(math.deg(data.radian) + 0.5) + 180
@@ -300,15 +310,31 @@ function sampleNPC.onTickEndNPC(v)
                 v.animationFrame = 11
             end
             if data.ai2 >= 190 then
+                data.hitBlocks = false
                 data.bossStage = 5
                 data.ai2 = 0
             end
         end
         if data.bossStage == 5 then
-            
+            data.ai2 = data.ai2 + 1
+            data.timer = data.timer + 1
+            data.animationArray = data.timer % 4
+            if data.animationArray >= 3 then
+                data.animationFramed = data.animationFramed + 1
+            end
+            if data.animationFramed > 8 then
+                data.animationFramed = 1
+            end
+            if data.ai2 >= 0 and data.ai2 <= 35 then
+                v.animationFrame = SMB3BowserNPC.lookAroundFrames[data.animationFramed]
+            end
+            if data.ai2 >= 36 then
+                data.dontJump = false
+                data.bossStage = 1
+            end
         end
     end
 end
 
 --Gotta return the library table!
-return sampleNPC
+return SMB3BowserNPC
