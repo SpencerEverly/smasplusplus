@@ -10,11 +10,22 @@ local smashudsystem = require("smashudsystem")
 littleDialogue.defaultStyleName = "smbx13"
 smasbooleans.compatibilityMode13Mode = false
 
+local warps
+local effect
+
+function effectSpawn()
+    Routine.wait(0, true)
+    warps = Warp.get()
+    effect = Effect.spawn(105,warps[11].exitX - 20,warps[11].exitY - 85)
+end
+
 function onStart()
+    Routine.run(effectSpawn)
+    
     if SMBX_VERSION == VER_SEE_MOD then
         
     end
-end
+end 
 
 function onEvent(eventName)
     if eventName == "pauseenable" then

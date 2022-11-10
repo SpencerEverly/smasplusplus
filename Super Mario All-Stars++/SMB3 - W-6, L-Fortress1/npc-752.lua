@@ -108,6 +108,8 @@ boomBoom.hurtFrames = {7,8}
 boomBoom.flyingFrames = {9,10,11,12,13,14}
 boomBoom.hurtFlightFrames = {15,16}
 
+local followSpeed = 15
+
 --Register events
 function boomBoom.onInitAPI()
     --npcManager.registerEvent(npcID, boomBoom, "onStartNPC")
@@ -154,6 +156,7 @@ function boomBoom.onTickEndNPC(v)
 	if Defines.levelFreeze then return end
 	
 	local data = v.data
+    local nearPlayer = Player.getNearest(v.x, v.y)
 	
 	--If despawned
 	if v.despawnTimer <= 0 then
@@ -176,6 +179,16 @@ function boomBoom.onTickEndNPC(v)
         data.flightEnabled = false --Used to indicate flight
         data.animationArray = 0
         data.timer = 0
+        
+        data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) - (v.x + 0.5 * v.height)
+        data.opposite = (nearPlayer.y + (nearPlayer.height / 2)) - (v.y + 0.5 * v.width)
+        data.radian     = math.atan2(data.opposite, data.adjacent)
+        data.finalAngle = math.floor(math.deg(data.radian) + 0.5) + 180
+        data.direction = -vector.right2:rotate(data.finalAngle)
+
+        data.forceX = data.direction.x * followSpeed
+        data.forceY = data.direction.y * followSpeed
+        
 		data.initialized = true
 	end
 
@@ -293,7 +306,7 @@ function boomBoom.onTickEndNPC(v)
     end
     if data.bossStage == 6 then --Stage 6: Flying
         data.ai1 = data.ai1 + 1
-        v.speedY = -0.3
+        v.speedY = -0.25
         v.speedX = 5 * v.direction
         if data.ai1 > 360 then
             data.ai1 = 0
@@ -303,20 +316,32 @@ function boomBoom.onTickEndNPC(v)
     end
     if data.bossStage == 7 then --Stage 7: Gliding
         data.ai1 = data.ai1 + 1
+        if data.ai1 == 1 then
+            nearPlayer = Player.getNearest(v.x, v.y)
+            
+            data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) - (v.x + 0.5 * v.height)
+            data.opposite = (nearPlayer.y + (nearPlayer.height / 2)) - (v.y + 0.5 * v.width)
+            data.radian     = math.atan2(data.opposite, data.adjacent)
+            data.finalAngle = math.floor(math.deg(data.radian) + 0.5) + 180
+            data.direction = -vector.right2:rotate(data.finalAngle)
+
+            data.forceX = data.direction.x * followSpeed
+            data.forceY = data.direction.y * followSpeed
+        end
         if data.ai1 > 0 and data.ai1 < 45 then
-            v.speedY = -0.3
+            v.speedY = -0.25
             v.speedX = 0
         end
         if data.ai1 > 46 and data.ai1 < 68 then
-            v.speedY = 8.3
-            v.speedX = 3 * v.direction
+            v.speedX = data.forceX
+            v.speedY = data.forceY
         end
         if data.ai1 > 68 and data.ai1 < 89 then
             v.speedY = -8.3
             v.speedX = 3 * v.direction
         end
         if data.ai1 > 89 and data.ai1 < 100 then
-            v.speedY = -0.3
+            v.speedY = -0.25
             v.speedX = 0
         end
         if data.ai1 > 100 then
