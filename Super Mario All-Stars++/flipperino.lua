@@ -1,35 +1,57 @@
 --[[
 
-    flipperino.lua
+    flipperino.lua v2.1
 
     Written by Zeus guy
     A few lines of code taken from MrDoubleA's One-Way Walls and maybe from the default libraries.
 
-    Known issues:
-    -In vertical sections, dropped items move wildly while jumping. Not much I can do there, at least it still works.
-    -When interacting with an NPC, the icon appears under the npc instead of above it. Again, not much I can do there.
-    -Effects aren't flipped.
+    Changelog:
+    -Blocks don't need to have a flipped graphic anymore (sizeables do... for now)
+    -Backgrounds don't need to have a flipped graphic anymore
+        -However, a txt file with the following settings is recommended:
+            [BG]
+            img="background2-x.png"
+            name="BG"
+            parallaxX=1
+            parallaxY=1
+            alignY=CENTRE
+            alignX=CENTRE
+            repeatX = true
+            repeatY = true
+
 ]]
 
 local cb = Graphics.CaptureBuffer(800, 600);
+local bgcb = Graphics.CaptureBuffer(800, 600);
 local blockmanager = require("blockmanager");
 local blockutils = require("blocks/blockutils");
 local cp = require("blocks/ai/clearpipe");
 
+
 local flipperino = {}
+
+local cpOdb = cp.onDrawBlock;
+function flipperino.cpOdb(b)
+    if (not flipperino.flipped) then
+        cpOdb(b);
+    end
+end
+
+cp.onDrawBlock = flipperino.cpOdb;
 
 function flipperino.onInitAPI()
     registerEvent(flipperino, "onStart", "onStart", false);
     registerEvent(flipperino, "onTick", "onTick", false);
     registerEvent(flipperino, "onDraw", "onDraw", false);
+    registerEvent(flipperino, "onDrawEnd", "onDrawEnd", false);
     registerEvent(flipperino, "onEvent", "onEvent", false);
     registerEvent(flipperino, "onCameraUpdate", "onCameraUpdate", false);
 end
 
+
 --Init stuff
 flipperino.flipped = false;      --If the level is flipped or not.
 flipperino.flipNpcs = {};        --Used for when an NPC should turn into another when the level is flipped. Values can be added in your level file if needed.
-flipperino.parallaxFlipBgs = {}; --Used for storing the background layers that will be shown when the level is flipped.
 flipperino.showMirrored = true;  --If set to false, the camera doesn't flip while the level is upside-down.
 flipperino.flipBgos = {};        --When the player touches one of these BGOs, the level will turn upside-down.
 flipperino.unflipBgos = {};      --When the player touches one of these BGOS, the level will return to normal.
@@ -40,9 +62,6 @@ function flipperino.onStart()
     --Stretch and Ceiling Stretch. There's no situation where you wouldn't want these to turn into each other. Mainly because they'd break.
     flipperino.flipNpcs[323] = 324;
     flipperino.flipNpcs[324] = 323;
-
-    --Background layer "FLIP" should only appear when the level is flipped. You can add more layers on your luna.lua file.
-    flipperino.parallaxFlipBgs["FLIP"] = true;
 
     --Search for all blocks in the level and store their flipped graphic, if it exists.
     flipperino.flippedBlocks = {};
@@ -77,11 +96,9 @@ end
 function flipperino.onCameraUpdate(camIdx)
     --Horizontal splitscreen fix
     if (flipperino.flipped and flipperino.showMirrored and camera2 ~= nil and camera2.isSplit and camera.height == 300) then
-        if Player.count() >= 2 then
-            if (Player(1).y > Player(2).y) then
-                camera.renderY = -0.5;
-                camera2.renderY = 301;
-            end
+        if (Player(1).y > Player(2).y) then
+            camera.renderY = -0.5;
+            camera2.renderY = 301;
         else
             camera2.renderY = -0.5;
             camera.renderY = 301;
@@ -94,6 +111,7 @@ function drawFlipped()
     --If the level is flipped and showMirrored is true, then draw the camera upside-down.
     if (flipperino.flipped and flipperino.showMirrored) then 
         cb:captureAt(-5);
+        bgcb:captureAt(-100);
         
         if (camera2 ~= nil  and camera2.isSplit and camera.height == 300) then
             Graphics.glDraw {
@@ -110,6 +128,22 @@ function drawFlipped()
                 primitive = Graphics.GL_TRIANGLE, 
                 priority = -5
             };
+            --Not perfect, idk if it's fixable.
+            --It's been 7 months since I wrote that comment, not sure what I was referring to.
+            Graphics.glDraw {
+                vertexCoords = {
+                    0,   -300,
+                    800, -300, 
+                    0,   300, 
+                    0,   300, 
+                    800, 300, 
+                    800, -300
+                }, 
+                texture = bgcb, 
+                textureCoords = {0,1, 1,1, 0,0, 0,0, 1,0, 1,1}, 
+                primitive = Graphics.GL_TRIANGLE, 
+                priority = -100
+            };
         else
             Graphics.glDraw {
                 vertexCoords = {
@@ -125,12 +159,91 @@ function drawFlipped()
                 primitive = Graphics.GL_TRIANGLE, 
                 priority = -5
             };
+
+            Graphics.glDraw{
+                vertexCoords = {
+                    0,   0,
+                    800, 0, 
+                    0,   600,
+                    0,   600, 
+                    800, 600, 
+                    800, 0
+                }, 
+                texture = bgcb,
+                textureCoords = {0,1, 1,1, 0,0, 0,0, 1,0, 1,1}, 
+                primitive = Graphics.GL_TRIANGLE,
+                priority = -100;
+            };
         end
     end
 end
 
 function flipperino.onDraw()
+
     drawFlipped();
+
+    redrawBlocks();
+    
+    
+end
+
+function redrawBlocks();
+    flipperino.visibleBlocks = {};
+    for _,c in ipairs(Camera.get()) do
+        c = camera;
+        if (flipperino.flipped and flipperino.showMirrored) then 
+
+            for k,v in ipairs(Block.getIntersecting(c.x, c.y, c.x+c.width, c.y+c.height)) do
+                if (not v.invisible and not Block.config[v.id].sizeable) then 
+                    flipperino.visibleBlocks[#flipperino.visibleBlocks+1] = v;
+                    v.invisible = true;
+
+                    frame = blockutils.getBlockFrame(v.id);
+                    priority = -65;
+                    if (Block.config[v.id].sizeable) then --not working (for now)
+                        priority = -90;
+                    elseif (Block.config[v.id].lava) then
+                        priority = -10;
+                    elseif (cp.PIPES[v.id] ~= nil) then
+                        priority = -22.5;
+                    end
+
+                    x0 = v.x-c.x;
+                    x1 = v.x+v.width-c.x;
+                    y0 = v.y-c.y;
+                    y1 = v.y+v.height-c.y;
+
+                    h0 = v.height * frame / Graphics.sprites.block[v.id].img.height;
+                    h1 = h0 + (v.height / Graphics.sprites.block[v.id].img.height);
+
+
+                    Graphics.glDraw {
+                        vertexCoords = {
+                            x0, y0,
+                            x1, y0, 
+                            x0, y1, 
+                            x0, y1, 
+                            x1, y1, 
+                            x1, y0
+                        }, 
+                        texture = Graphics.sprites.block[v.id].img, 
+                        textureCoords = {0,h1, 1,h1, 0,h0, 0,h0, 1,h0, 1,h1}, 
+                        primitive = Graphics.GL_TRIANGLE, 
+                        priority = priority
+                    };
+
+                end
+            end
+        end
+    end
+end
+
+function flipperino.onDrawEnd()
+    if (flipperino.flipped and flipperino.showMirrored) then 
+        for k,v in ipairs(flipperino.visibleBlocks) do
+            v.invisible = false;
+        end
+    end
 end
 
 function flipperino.onTick()
@@ -160,10 +273,6 @@ function flipperino.onTick()
 
                 pBox = Colliders.Box(p.x, py - p.height / 2, p.width, p.height);
                 nBox = Colliders.Box(n.x, n.y, n.width, n.height);
-
-                Text.print("PY:  "..py, 20, 20);
-                Text.print("APY: "..py - p.height / 2, 20, 40);
-                Text.print("IY:  "..n.y, 20, 60);
 
                 if (Colliders.collide(pBox, nBox)) then
                     n:mem(0x13C,FIELD_DFLOAT, 2);
@@ -215,9 +324,11 @@ function flipperino.performFlip()
         sec = Section(i);
 
         --Switch backgrounds
-        for v in pairs(flipperino.parallaxFlipBgs) do
-            if (sec.background ~= nil and sec.background:get(v) ~= nil) then
-                sec.background:get(v).opacity = flipperino.flipped and 1 or 0;
+        if (sec.background ~= nil) then 
+            for k,v in ipairs(sec.background:get()) do
+                if (v.parallaxY ~= nil) then
+                    v.parallaxY = -v.parallaxY;
+                end 
             end
         end
 
@@ -262,7 +373,7 @@ function flipperino.performFlip()
         end
 
         --Change NPC sprites.
-        for _,v in pairs(flipperino.flippedNpcs) do
+        for v in pairs(flipperino.flippedNpcs) do
             if (flipperino.flipped) then 
                 Graphics.sprites.npc[v].img = flipperino.flippedNpcs[v];
             else 
