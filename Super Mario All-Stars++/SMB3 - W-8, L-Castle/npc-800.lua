@@ -1,5 +1,6 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
+local inspect = require("ext/inspect")
 
 --Create the library table
 local SMB3BowserNPC = {}
@@ -112,18 +113,26 @@ function SMB3BowserNPC.onInitAPI()
 	--registerEvent(SMB3BowserNPC, "onNPCKill")
 end
 
-local followSpeed = 14 -- OUTSIDE of any functions
+local followSpeed = 12 -- OUTSIDE of any functions
 local nearPlayer
 
 SMB3BowserNPC.lookAroundFrames = {4,3,12,9,8,9,12,3}
 
 function fireballAI(v)
     SFX.play("sound/bowser-fire.ogg")
-    local fire = NPC.spawn(87, v.x, v.y)
-    fire.speedX = -1.5
-    fire.speedY = 1.5
-    Routine.waitFrames(45, false)
-    fire.speedY = 0
+    if v.direction == -1 then
+        local fire = NPC.spawn(87, v.x, v.y)
+        fire.speedX = -1.5
+        fire.speedY = 1.5
+        Routine.waitFrames(45, false)
+        fire.speedY = 0
+    else
+        local fire = NPC.spawn(87, v.x + 16, v.y)
+        fire.speedX = 1.5
+        fire.speedY = 1.5
+        Routine.waitFrames(45, false)
+        fire.speedY = 0
+    end
 end
 
 function SMB3BowserNPC.onTickEndNPC(v)
@@ -185,7 +194,7 @@ function SMB3BowserNPC.onTickEndNPC(v)
     if data.startBattle then
         Text.print(data.bossStage, 100, 100)
         Text.print(data.ai1, 100, 120)
-        Text.print(v.animationFrame, 100, 140)
+        Text.print(data.ai2, 100, 140)
         
         
         
@@ -207,13 +216,25 @@ function SMB3BowserNPC.onTickEndNPC(v)
         
         if data.bossStage == 1 then --Stage 1: Jumping
             if data.ai1 > -1 and data.ai1 < 20 then
-                v.animationFrame = 1
+                if v.direction == -1 then
+                    v.animationFrame = 1
+                else
+                    v.animationFrame = 6
+                end
             end
             if data.ai1 > 20 and data.ai1 < 70 then
-                v.animationFrame = 0
+                if v.direction == -1 then
+                    v.animationFrame = 0
+                else
+                    v.animationFrame = 5
+                end
             end
             if data.ai1 > 62 and data.ai1 < 76 then
-                v.animationFrame = 1
+                if v.direction == -1 then
+                    v.animationFrame = 1
+                else
+                    v.animationFrame = 6
+                end
             end
             if data.ai1 >= 75 then
                 data.bossStage = 2
@@ -222,7 +243,11 @@ function SMB3BowserNPC.onTickEndNPC(v)
         end
         if data.bossStage == 2 then --Stage 2: Firing
             if data.ai1 > 0 and data.ai1 < 20 then
-                v.animationFrame = 2
+                if v.direction == -1 then
+                    v.animationFrame = 2
+                else
+                    v.animationFrame = 7
+                end
             end
             if data.ai1 > 20 and data.ai1 < 62 then
                 if v.direction == -1 then
@@ -235,7 +260,11 @@ function SMB3BowserNPC.onTickEndNPC(v)
                 Routine.run(fireballAI, v)
             end
             if data.ai1 > 62 and data.ai1 <= 75 then
-                v.animationFrame = 1
+                if v.direction == -1 then
+                    v.animationFrame = 1
+                else
+                    v.animationFrame = 6
+                end
             end
             if data.ai1 >= 75 then
                 if data.fireCount <= 0 then
@@ -249,13 +278,25 @@ function SMB3BowserNPC.onTickEndNPC(v)
         end
         if data.bossStage == 3 then --Stage 3: Jumping before Smashing
             if data.ai1 > -1 and data.ai1 < 20 then
-                v.animationFrame = 1
+                if v.direction == -1 then
+                    v.animationFrame = 1
+                else
+                    v.animationFrame = 6
+                end
             end
             if data.ai1 > 20 and data.ai1 < 70 then
-                v.animationFrame = 0
+                if v.direction == -1 then
+                    v.animationFrame = 0
+                else
+                    v.animationFrame = 5
+                end
             end
             if data.ai1 > 62 and data.ai1 < 76 then
-                v.animationFrame = 1
+                if v.direction == -1 then
+                    v.animationFrame = 1
+                else
+                    v.animationFrame = 6
+                end
             end
             if data.ai1 >= 75 then
                 data.fireCount = 2
@@ -267,23 +308,34 @@ function SMB3BowserNPC.onTickEndNPC(v)
             data.ai2 = data.ai2 + 1
             if data.ai2 == 1 then
                 data.dontJump = true
+                data.ai1 = 0
             end
             if data.ai2 >= 0 and data.ai2 < 35 then
-                v.animationFrame = 1
+                if v.direction == -1 then
+                    v.animationFrame = 1
+                else
+                    v.animationFrame = 6
+                end
             end
             if data.ai2 == 35 then
                 nearPlayer = Player.getNearest(v.x, v.y)
                 
                 if v.direction == -1 then
                     data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) - (v.x + 0.5 * v.height)
+                    data.opposite = (nearPlayer.y + (nearPlayer.height / 2)) - (v.y + 0.5 * v.width) - 200
+                    data.radian     = math.atan2(data.opposite, data.adjacent)
+                    data.finalAngle = math.floor(math.deg(data.radian) + 0.5) + 180
+                    data.direction = -vector.right2:rotate(data.finalAngle)
+                    data.forceX = data.direction.x * followSpeed
                 else
-                    data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) + (v.x + 0.5 * v.height)
+                    data.adjacent = (nearPlayer.x + (nearPlayer.width / 2)) - (v.x + 0.5 * v.height)
+                    data.opposite = (nearPlayer.y + (nearPlayer.height / 2)) - (v.y + 0.5 * v.width) - 200
+                    data.radian     = math.atan2(data.opposite, data.adjacent)
+                    data.finalAngle = math.floor(math.deg(data.radian) + 0.5) + 180
+                    data.direction = -vector.right2:rotate(data.finalAngle)
+                    data.forceX = -data.direction.x * followSpeed
                 end
-                data.opposite = (nearPlayer.y + (nearPlayer.height / 2)) - (v.y + 0.5 * v.width) - 250
-                data.radian     = math.atan2(data.opposite, data.adjacent)
-                data.finalAngle = math.floor(math.deg(data.radian) + 0.5) + 180
-                data.direction = -vector.right2:rotate(data.finalAngle)
-
+                
                 data.forceX = data.direction.x * followSpeed
                 data.forceY = data.direction.y * followSpeed
             end
@@ -304,6 +356,11 @@ function SMB3BowserNPC.onTickEndNPC(v)
             if data.ai2 > 100 and v.collidesBlockBottom and not data.hitBlocks then
                 Defines.earthquake = 6
                 SFX.play("sound/explode.ogg")
+                for k,v in ipairs(Block.getIntersecting(v.x, v.y + 8, v.x + v.width, v.y + v.height + 8)) do
+                    if v.id == 186 then
+                        v:remove(false)
+                    end
+                end
                 data.hitBlocks = true
             end
             if data.ai2 > 100 and data.ai2 < 190 and v.collidesBlockBottom and data.hitBlocks then
@@ -311,8 +368,8 @@ function SMB3BowserNPC.onTickEndNPC(v)
             end
             if data.ai2 >= 190 then
                 data.hitBlocks = false
-                data.bossStage = 5
                 data.ai2 = 0
+                data.bossStage = 5
             end
         end
         if data.bossStage == 5 then
@@ -329,7 +386,17 @@ function SMB3BowserNPC.onTickEndNPC(v)
                 v.animationFrame = SMB3BowserNPC.lookAroundFrames[data.animationFramed]
             end
             if data.ai2 >= 36 then
+                local nearestPlayer = Player.getNearest(v.x, v.y)
+                local calculation = v.x - nearestPlayer.x
+                if calculation <= 1 then
+                    v.direction = 1
+                elseif calculation >= 1 then
+                    v.direction = -1
+                elseif calculation == 0 then
+                    v.direction = 1
+                end
                 data.dontJump = false
+                data.ai2 = 0
                 data.bossStage = 1
             end
         end
