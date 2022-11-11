@@ -1929,10 +1929,12 @@ ID:802;X:-201280;Y:-194432;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, 
 ID:802;X:-201280;Y:-194304;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-3.lvlx\"\,\n    \"levelTitle\"\: \"6-3\: Slippery Platforms\"\,\n    \"path_down\"\: \"toSMB36-Fortress1\"\,\n    \"path_up\"\: \"toSMB36-3\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-201440;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 160\, -64\"\n}\n";
 ID:752;X:-201280;Y:-194400;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-3\"\,\n    \"points\"\: \"0\, -32\, 0\, 96\"\n}\n";
-ID:849;X:-201216;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-Fortress1.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #9\: Flying Boom Boom\"\,\n    \"path_down\"\: \"toSMB36-Fortress1\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:849;X:-201216;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-Fortress1.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #9\: Flying Boom Boom\"\,\n    \"path_down\"\: \"toSMB36-Fortress1\"\,\n    \"path_right\"\: \"toSMB36-4\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-201248;Y:-194304;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-Fortress1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, -64\"\n}\n";
 ID:752;X:-201280;Y:-194464;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-6ToadHouse1\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 64\, -32\"\n}\n";
 ID:859;X:-201216;Y:-194496;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-0\, L-TH2.lvlx\"\,\n    \"levelTitle\"\: \"Toad House\"\,\n    \"path_left\"\: \"toSMB3W-6ToadHouse1\"\n}\n";
+ID:752;X:-201184;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-4\"\,\n    \"points\"\: \"-32\, 0\, 96\, 0\"\n}\n";
+ID:802;X:-201088;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-4.lvlx\"\,\n    \"levelTitle\"\: \"6-4\: Snowy Platforms\"\,\n    \"path_left\"\: \"toSMB36-4\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
