@@ -117,7 +117,7 @@ end
 
 function bowserKilled(npc, harmType)
     SFX.play(44)
-    Routine.wait(7, true)
+    Routine.wait(4, true)
     SFX.play(37)
     Defines.earthquake = 6
 end
