@@ -1938,7 +1938,9 @@ ID:802;X:-201088;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, 
 ID:752;X:-201088;Y:-194336;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-5\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\, 96\, 32\"\n}\n";
 ID:802;X:-200992;Y:-194304;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"6-5\: Under the Coldness\"\,\n    \"path_left\"\: \"toSMB36-5\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB36-6\"\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-200992;Y:-194336;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-6\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
-ID:802;X:-200992;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"6-6\: Cold and Under\"\,\n    \"path_down\"\: \"toSMB36-6\"\n}\n";
+ID:802;X:-200992;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"6-6\: Cold and Under\"\,\n    \"path_down\"\: \"toSMB36-6\"\,\n    \"path_right\"\: \"toSMB36-7\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-200960;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-7\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:802;X:-200928;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-7.lvlx\"\,\n    \"levelTitle\"\: \"6-7\: Athletic Coldness\"\,\n    \"path_left\"\: \"toSMB36-7\"\,\n    \"unlock_right\"\: 9\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
