@@ -144,6 +144,7 @@ local blockManager = require("blockManager") --Used to detect brick breaks when 
 local inspect = require("ext/inspect")
 local customCamera
 pcall(function() customCamera = require("customCamera") end)
+local rng = require("base/rng")
 
 local npctocointimer = 0 --This is used for the NPC to Coin sound.
 local spinballtimer = 0 --This is used when spinjumping and shooting fireballs/iceballs.
@@ -155,7 +156,7 @@ extrasounds.harmableComboTypes = {
     HARM_TYPE_NPC,
     HARM_TYPE_PROJECTILE_USED,
     HARM_TYPE_TAIL,
-    HARM_TYPE_HELD
+    HARM_TYPE_HELD,
 }
 
 local ready = false --This library isn't ready until onInit is finished
@@ -330,6 +331,8 @@ extrasounds.soundNamesInOrder = {
     "peach-cry", --164
     "timeout", --165
     "flyinghammer-throw", --166
+    "fireball2", --167
+    "fireball3", --168
 }
 
 
@@ -857,6 +860,15 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 end
             end
             
+            --*ENEMIES*
+            --
+            --*Venus Fire Trap*
+            for k,v in ipairs(NPC.get(245)) do
+                if (v.ai2 == 2 and v.ai1 == 50) and isOnScreen(v) then
+                    extrasounds.playSFX(167)
+                end
+            end
+            
             --*BOSSES*
             --
             --*SMB3 Bowser*
@@ -1195,7 +1207,7 @@ function extrasounds.onPostPlayerKill()
     
             --**PLAYER DYING**
             if extrasounds.enableDeathSFX then
-                if p.character ~= CHARACTER_LINK or p.character ~= CHARACTER_SNAKE then
+                if player.character ~= CHARACTER_LINK and player.character ~= CHARACTER_SNAKE then
                     extrasounds.playSFX(8)
                 end
             end
@@ -1291,6 +1303,9 @@ end
 function extrasounds.comboSoundRoutine()
     Routine.waitFrames(1, true)
     for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
+        if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --10 Points
+            extrasounds.playSFX(9)
+        end
         if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --100 Points
             extrasounds.playSFX(9)
         end

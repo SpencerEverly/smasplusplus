@@ -80,7 +80,7 @@ end
 
 function costume.onPostBlockHit(block, fromUpper)
     local bricks = table.map{4,60,90,186,188,226,293,668} --These are a list of breakable bricks.
-    if bricks[block.id] and block.contentID == nil or block.contentID == 0 or block.contentID == 1000 then
+    if bricks[block.id] and (block.contentID == nil or block.contentID == 0 or block.contentID == 1000) then
         block:remove(true)
     end
 end

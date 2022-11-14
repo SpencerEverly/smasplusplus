@@ -10,6 +10,15 @@ costume.loadedSounds = false
 local jumphighertimer = 0
 local jumphigherframeactive = false
 
+-- Detects if the player is on the ground, the redigit way. Sometimes more reliable than just p:isOnGround().
+local function isOnGround(p)
+    return (
+        player.speedY == 0 -- "on a block"
+        or player:mem(0x176,FIELD_WORD) ~= 0 -- on an NPC
+        or player:mem(0x48,FIELD_WORD) ~= 0 -- on a slope
+    )
+end
+
 function isPlayerDucking(p) --Returns if the player is ducking.
     return (
         p.forcedState == FORCEDSTATE_NONE
