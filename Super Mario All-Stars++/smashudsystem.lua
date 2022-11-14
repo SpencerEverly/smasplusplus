@@ -25,6 +25,9 @@ end
 if SaveData.totalScoreClassic == nil then --The score, since I wanna remake it because why not
     SaveData.totalScoreClassic = 0
 end
+if SaveData.totalCherries == nil then
+    SaveData.totalCherries = 0
+end
 
 if SaveData.thirteenmodelives == nil then --This is stuff specific for my episode. You can remove it if you want to
     if SaveData.disableX2char == true then
@@ -61,6 +64,7 @@ local killed1 = false
 local killed2 = false
 
 function smashudsystem.onInitAPI() --This requires all the libraries that will be used
+    registerEvent(smashudsystem, "onStart")
     registerEvent(smashudsystem, "onDraw")
     registerEvent(smashudsystem, "onExit")
     registerEvent(smashudsystem, "onTick")
@@ -104,6 +108,10 @@ function detecttopcoin(block, fromUpper, playerornil)
     end
 end
 
+function smashudsystem.onStart()
+    SaveData.totalCherries = 0 --Reset cherry count because each level has a different cherry count
+end
+
 function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
     local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
     local questionblocks = table.map{5,88,193,224} --A list of question mark blocks
@@ -129,9 +137,16 @@ end
 function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
     local coins = table.map{10,33,88,103,138,152,251,252,253,258,528}
     if bootmenu.active == false then
-        for _,p in ipairs(Player.get()) do 
+        for _,p in ipairs(Player.get()) do
+            
+            
             if coins[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1 --One coin collected
+            end
+            
+            
+            if npc.id == 558 and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
+                SaveData.totalCherries = SaveData.totalCherries + 1 --One cherry collected
             end
         end
     end
@@ -589,6 +604,11 @@ function smashudsystem.onTick()
         end
         SaveData.totalLives = SaveData.totalLives + 1 --If 100, increase the lives by one
     end
+    
+    if SaveData.totalCherries >= 5 then
+        SaveData.totalCherries = 0
+    end
+    
     if SaveData.disableX2char == true then
         if Playur.checkLivingIndex() == nil then
             Routine.run(thirteenmodedeath)

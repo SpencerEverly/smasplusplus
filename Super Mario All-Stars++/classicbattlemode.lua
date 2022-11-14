@@ -26,21 +26,25 @@ local battledependencies = {}
 
 smasbooleans.compatibilityMode13Mode = true
 
+battledependencies.p1lives = 3
+battledependencies.p2lives = 3
+
 if battledependencies.battlemodeactive then
     warpTransition.musicFadeOut = false
     warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
     warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
     warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
     warpTransition.activateOnInstantWarps = false
-    battledependencies.p1lives = 3
-    battledependencies.p2lives = 3
-    pauseplus.canPause = true
 end
 
 local killed1 = false
 local killed2 = false
 
-battledependencies.battlemodeactive = false
+if not GameData.enableBattleMode or GameData.enableBattleMode == nil then
+    battledependencies.battlemodeactive = false
+else
+    battledependencies.battlemodeactive = true
+end
 
 local player1vuln = false
 local player2vuln = false
@@ -108,17 +112,15 @@ function exitbattlemode()
 end
 
 function battlediedanimation()
-    if bootmenu.active == false then
-        if not Misc.inMarioChallenge() then
-            if smasbooleans.multiplayerActive then
-                if battledependencies.battlemodeactive then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
-                    if killed1 == true then
-                        battledependencies.p1lives = battledependencies.p1lives - 1
-                        killed1 = false
-                    elseif killed2 == true then
-                        battledependencies.p2lives = battledependencies.p2lives - 1
-                        killed2 = false
-                    end
+    if not Misc.inMarioChallenge() then
+        if smasbooleans.multiplayerActive then
+            if battledependencies.battlemodeactive then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
+                if killed1 == true then
+                    battledependencies.p1lives = battledependencies.p1lives - 1
+                    killed1 = false
+                elseif killed2 == true then
+                    battledependencies.p2lives = battledependencies.p2lives - 1
+                    killed2 = false
                 end
             end
         end

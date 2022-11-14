@@ -1,0 +1,32 @@
+{
+	"style" : "groupbox",
+	"title" : "Boom Boom Settings",
+	"layout": [
+        {
+            "control": "checkbox",
+			"name": "canFly",
+			"title": "Flying Boom Boom",
+            "tooltip": "Whenever to enable the Flying Boom Boom instead.",
+			"text-visible": false,
+			"value-default": false
+		},
+		{
+            "control": "checkbox",
+			"name": "orbExitActivator",
+			"title": "Enable Orb Exit",
+            "tooltip": "Whenever to enable the orb after defeating the boss.",
+			"text-visible": false,
+			"value-default": false
+		},
+		{
+			"control": "spinBox",
+			"type": "double",
+			"name": "HPAmount",
+			"title": "HP Amount",
+			"tooltip": "The amount of HP used for this Boom Boom.",
+			"value-default": 3,
+            "single-step": 1,
+            "value-min": 1
+		}
+    ]
+}

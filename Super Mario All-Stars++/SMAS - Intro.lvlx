@@ -894,7 +894,7 @@ EVENTS_CLASSIC
 ET:"Level - Start";LS:["Head Spin Floor"];TE:"Logo Stage 1 - Head Movement";TD:3;DS:1;PC:000010000000;AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Logo Stage 1 - Head Movement";LS:["Head Spin","Head Spin Floor"];SSS:["ID\:0\;MI\:24\;"];TE:"Logo Stage 2 - Bump";TD:6;DS:1;ML:"Head Spin Floor";MX:-14.66;MY:0;AS:0;AX:0;AY:0;
+ET:"Logo Stage 1 - Head Movement";LS:["Head Spin","Head Spin Floor"];TE:"Logo Stage 2 - Bump";TD:6;DS:1;ML:"Head Spin Floor";MX:-14.66;MY:0;AS:0;AX:0;AY:0;
 ET:"Logo Stage 2 - Bump";LH:["Head Spin","Head Spin Floor"];LS:["Bump","Bump Floor"];TE:"Logo Stage 3 - Zoom Out (Part 1)";TD:2;DS:1;ML:"Bump Floor";MX:3.47;MY:0;AS:0;AX:0;AY:0;
 ET:"Logo Stage 3 - Zoom Out (Part 1)";LH:["Bump","Bump Floor"];LS:["Still Head 1","Still Floor 1"];TE:"Logo Stage 4 - Zoom Out (Part 2)";TD:2;DS:1;AS:0;AX:0;AY:0;
 ET:"Logo Stage 4 - Zoom Out (Part 2)";LH:["Still Floor 1","Still Head 1"];LS:["Zoom Out Floor"];TE:"Logo Stage 5 - Words (Fade In 1)";TD:7;DS:1;ML:"Zoom Out Floor";MX:0;MY:-1.40659;AS:0;AX:0;AY:0;

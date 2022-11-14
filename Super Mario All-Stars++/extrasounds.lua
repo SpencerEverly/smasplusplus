@@ -107,6 +107,8 @@ extrasounds.enableIceBlockBreaking = true
 extrasounds.enableEnemyStompingSFX = true
 --Whenever to enable the ice melting SFX used for throw blocks.
 extrasounds.enableIceMeltingSFX = true
+--Whenever to enable Venus Fire Trap fireballs.
+extrasounds.enableVenusFireball = true
 
 --**COIN SETTINGS**
 --Whenever to enable the coin collecting SFX.
@@ -865,7 +867,9 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             --*Venus Fire Trap*
             for k,v in ipairs(NPC.get(245)) do
                 if (v.ai2 == 2 and v.ai1 == 50) and isOnScreen(v) then
-                    extrasounds.playSFX(167)
+                    if extrasounds.enableVenusFireball then
+                        extrasounds.playSFX(167)
+                    end
                 end
             end
             

@@ -82,6 +82,7 @@ end
 function onEvent(eventName)
     if eventName == "Logo Stage 1 - Head Movement" then
         SFX.play("SMAS - Intro/sounds/head-spin.ogg")
+        Sound.changeMusic("_OST/Intro.ogg", 0)
     end
     if eventName == "Logo Stage 2 - Bump" then
         SFX.play("SMAS - Intro/sounds/head-stop.ogg")

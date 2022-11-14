@@ -16,6 +16,10 @@ local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
 local musicalchairs = require("musicalchairs")
 
+if GameData.enableBattleMode then
+    pausemenu2 = require("pausemenu2")
+end
+
 _G.smasacecoins = require("smasacecoins")
 _G.smascharacterinfo = require("smascharacterinfo")
 _G.smascharacterintros = require("smascharacterintros")

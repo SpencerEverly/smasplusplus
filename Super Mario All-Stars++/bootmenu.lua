@@ -148,6 +148,7 @@ local function BattleRandomLevelSelect()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = true
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load(smastables.__classicBattleModeLevels[rng.randomInt(1,#smastables.__classicBattleModeLevels)], nil, nil)
@@ -158,6 +159,7 @@ local function Battle1()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_battleshrooms.lvlx", nil, nil)
@@ -168,6 +170,7 @@ local function Battle2()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_battle-zone.lvlx", nil, nil)
@@ -178,6 +181,7 @@ local function Battle3()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_classic-castle-battle.lvlx", nil, nil)
@@ -188,6 +192,7 @@ local function Battle4()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_dry-dry-desert.lvlx", nil, nil)
@@ -198,6 +203,7 @@ local function Battle5()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_hyrule-temple.lvlx", nil, nil)
@@ -208,6 +214,7 @@ local function Battle6()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_invasion-battlehammer.lvlx", nil, nil)
@@ -218,6 +225,7 @@ local function Battle7()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_lakitu-mechazone.lvlx", nil, nil)
@@ -228,6 +236,7 @@ local function Battle8()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_lethal-lava-level.lvlx", nil, nil)
@@ -238,6 +247,7 @@ local function Battle9()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_retroville-underground.lvlx", nil, nil)
@@ -248,6 +258,7 @@ local function Battle10()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_slippy-slap-snowland.lvlx", nil, nil)
@@ -258,6 +269,7 @@ local function Battle11()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_woody-warzone.lvlx", nil, nil)
@@ -268,6 +280,7 @@ local function Battle12()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_testlevel.lvlx", nil, nil)
@@ -278,6 +291,7 @@ local function Battle13()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_nsmbds1.lvlx", nil, nil)
@@ -288,6 +302,7 @@ local function Battle14()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_nsmbds2.lvlx", nil, nil)
@@ -298,6 +313,7 @@ local function Battle15()
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
+    GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
     Level.load("battle_nsmbds3.lvlx", nil, nil)

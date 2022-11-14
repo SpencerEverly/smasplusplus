@@ -284,7 +284,6 @@ function starman.onNPCKill(event,npc,reason)
         local t = npcManager.collected(npc, reason);
         if(t) then
             SFX.play(6)
-            Misc.givePoints(SCORE_1000,{x = t.x+t.width*0.5,y = t.y+t.height*0.5},true)
             starman.start(t, npc.id)
         end
     end
@@ -300,6 +299,9 @@ function starman.onPostNPCKill(npc, harmType)
     local stars = table.map{97,196,985,998,999,1000}
     if stars[npc.id] then
         starman.stop(p)
+    end
+    if (npc.id == 994) or (npc.id == 996) then
+        Misc.givePoints(SCORE_1000,{x = npc.x+npc.width*0.5,y = npc.y+npc.height*0.5},true)
     end
 end
 
