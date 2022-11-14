@@ -1,0 +1,38 @@
+{
+	"style" : "groupbox",
+	"title" : "Cheep Cheep Settings",
+	"layout": [
+		{
+			
+			"control": "checkbox",
+			"name": "turns",
+			"title": "Turns Around",
+			"tooltip": "Does the NPC turn around after every jump? (Creates a back-forth movement). Only affects the cheep cheep if using dolphin movement.",
+			"text-visible": false,
+			"value-default": false
+		},
+		{
+			"control": "spinBox",
+			"name": "jumpHeight",
+			"title": "Jump Height",
+			"type": "int",
+			"tooltip": "If using <b>Dolphin Vertical, Dolphin Horizontal (Short) or Dolphin Horizontal (Long)</b> then this will influence its jump height.",
+			"value-default": 6,
+			"value-min": 0,
+			"value-max": 100
+		},
+		{
+            "control": "lineEdit",
+            "name": "moveNumbers",
+            "title": "Move Distance Per Jump",
+            "tooltip": "A set of numbers will determine how far it will jump when using <b>Pond Hop</b>.",
+            "value-default": "0"
+		},
+		{
+			"control": "lineEdit",
+			"title": "Example",
+			"value-default": "4,2,3,1",
+			"read-only": true
+        }
+	]
+}

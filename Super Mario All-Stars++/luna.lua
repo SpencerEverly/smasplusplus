@@ -158,6 +158,13 @@ if SaveData.speedrunMode == true then
     inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
 end
 
+local npc_APIs = {
+    "waternpcplusExt",
+};
+for _,v in ipairs(npc_APIs) do
+    require("extra-settings/"..v);
+end
+
 local loadactivate = true
 local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
