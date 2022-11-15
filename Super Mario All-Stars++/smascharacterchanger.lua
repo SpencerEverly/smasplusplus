@@ -127,7 +127,7 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
     started = false
     ending = true
     smascharacterchanger.animationActive = true
-    Sound.playSFX(1001)
+    Sound.playSFX("menu/dialog-confirm.ogg")
     Routine.waitFrames(35, true)
     smascharacterchanger.selectionNumberUpDown = 1
     Misc.unpause()
@@ -144,6 +144,9 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
     smascharacterchanger.tvScrollNumber = -600
     smascharacterchanger.animationTimer = 0
     ending = false
+    if smasbooleans.mainMenuActive then
+        GameData.reopenmenu = true
+    end
 end
 
 function smascharacterchanger.onInputUpdate()

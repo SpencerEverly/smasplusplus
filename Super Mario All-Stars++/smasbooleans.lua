@@ -31,5 +31,7 @@ smasbooleans.musicMuted = false
 smasbooleans.musicMutedTemporary = false
 --This is set to true when 1.3 Mode multiplayer is on.
 smasbooleans.multiplayerActive = false
+--This is set when the main menu is active.
+smasbooleans.mainMenuActive = false
 
 return smasbooleans

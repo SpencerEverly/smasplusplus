@@ -20,8 +20,6 @@ local fontthree = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.in
 local menufont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
 local menufontwebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-website-textplus-1x.ini")
 
-local runPressedState = false
-
 local bootmenu = {}
 
 local smaslogo = Graphics.loadImageResolved("smaslogo.png")
@@ -86,6 +84,7 @@ if bootmenu.active then
     datetime.bottomright = true
     datetime.topright = false
     extrasounds.active = false
+    smasbooleans.mainMenuActive = true
     bootmenu.startedmenu = 0
 end
 
@@ -126,6 +125,7 @@ local function introExit()
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
     bootmenu.startedmenu = 0
+    smasbooleans.mainMenuActive = false
     if SaveData.openingComplete then
         Level.load("SMAS - Intro.lvlx")
     else
@@ -677,15 +677,11 @@ local function FailsafeMessage1()
     --SaveData.totalLives = SaveData.totalLives + 1
 end
 
-local function PathFix1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.6>Would you like to fix the world map paths? Only do this if future updates break the map.<question ToBeAddedSoon>", pauses = false, updatesInPause = true})
-end
-
 local function ChangeChar1()
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
+        --smascharacterchanger.startupChanger()
         littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change into?<question CharacterListX2>", pauses = false, updatesInPause = true})
-    end
-    if SaveData.disableX2char == true then
+    elseif SaveData.disableX2char then
         if Player.count() == 2 then
             littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
         elseif Player.count() == 1 then
@@ -1141,10 +1137,6 @@ function bootmenu.onTick()
         for i = 1,91 do
             Audio.sounds[i].muted = true
         end
-        
-        if runPressedState == true then
-            player.keys.run = false
-        end
     end
 end
 
@@ -1157,7 +1149,6 @@ end
 
 function bootmenu.onInputUpdate()
     if bootmenu.active then
-        player.keys.run = false
         player.keys.altJump = false
         player.keys.altRun = false
         player.keys.dropItem = false
@@ -1434,10 +1425,9 @@ function bootmenu.onExit()
     if bootmenu.active then
         Audio.MusicVolume(nil)
         autoscroll.unlockSection(0, 1)
-        if SaveData.firstBootCompleted == true then
+        if SaveData.firstBootCompleted then
             bootmenu.startedmenu = 0
-        end
-        if SaveData.firstBootCompleted == false then
+        elseif not SaveData.firstBootCompleted then
             bootmenu.startedmenu = 1
         end
         Defines.cheat_donthurtme = false
