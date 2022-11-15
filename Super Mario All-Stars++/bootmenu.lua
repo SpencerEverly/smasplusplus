@@ -1046,14 +1046,6 @@ function bootmenu.onStart()
     end
 end
 
-function bootmenu.onPlayerHarm(eventToken, harmedPlayer)
-    if bootmenu.active then
-        if stateVar == 1 then
-            eventToken.cancelled = true
-        end
-    end
-end
-
 function bootmenu.onTick()
     if bootmenu.active then
         if SaveData.firstBootCompleted == nil then
