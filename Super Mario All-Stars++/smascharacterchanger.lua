@@ -13,6 +13,10 @@ function smascharacterchanger.onInitAPI()
     registerEvent(smascharacterchanger,"onKeyboardPressDirect")
 end
 
+if SaveData.currentCharacter == nil then
+    SaveData.currentCharacter = player.character
+end
+
 smascharacterchanger.tvImage = Img.load("graphics/characterchangermenu/tv.png") --The image for the TV.
 smascharacterchanger.scrollSFX = "_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg"
 smascharacterchanger.stopSFX = "_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg"
@@ -194,6 +198,8 @@ function smascharacterchanger.onInputUpdate()
 end
 
 function smascharacterchanger.onDraw()
+    SaveData.currentCharacter = player.character
+    
     if smascharacterchanger.menuActive then
         if smascharacterchanger.animationActive then
             smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1

@@ -614,7 +614,7 @@ function battledependencies.onTick()
 end
 
 function battledependencies.onExit()
-    if battledependencies.battlemodeactive then --Reset the lives on Classic Battle Mode back to 5 when exiting...
+    if battledependencies.battlemodeactive then --Reset the lives on Classic Battle Mode back to 3 when exiting...
         battledependencies.p1lives = 3
         battledependencies.p2lives = 3
     end

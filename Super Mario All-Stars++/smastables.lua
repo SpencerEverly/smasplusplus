@@ -509,6 +509,28 @@ smastables.__classicBattleModeLevels = { --All Classic Battle Mode levels, used 
     "battle_nsmbds3.lvlx",
 }
 
+smastables.__mainMenuThemes = {
+    "intro_SMAS.lvlx",
+    "intro_SMBX1.0.lvlx",
+    "intro_SMBX1.1.lvlx",
+    "intro_SMBX1.2.lvlx",
+    "intro_SMBX1.3.lvlx",
+    "intro_WSMBA.lvlx",
+    "intro_SMBX2.lvlx",
+    "intro_theeditedboss.lvlx",
+    "intro_SMBX1.3og.lvlx",
+    "intro_SMBX2b3.lvlx",
+    "intro_8bit.lvlx",
+    "intro_S!TS!.lvlx",
+    "intro_sunsetbeach.lvlx",
+    "intro_scrollingheights.lvlx",
+    "intro_jakebrito1.lvlx",
+    "intro_marioforever.lvlx",
+    "intro_jakebrito2.lvlx",
+    "intro_circuitcity.lvlx",
+    "intro_metroidprime2.lvlx",
+}
+
 smastables.__allMandatoryLevels = { --All Rush Mode levels.
     "SMB1 - W-1, L-1.lvlx",
     "SMB1 - W-1, L-2.lvlx",

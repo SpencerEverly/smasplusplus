@@ -116,12 +116,13 @@ smashud.visible.levelname = true
 smashud.visible.overworldPlayer = true
 
 smashud.visible.customitembox = true
+smashud.visible.pWing = true
 
-smashud.priority = -4.2;
+smashud.priority = -4.2
 
-smashud.ALIGN_LEFT = 0;
-smashud.ALIGN_RIGHT = 1;
-smashud.ALIGN_MID = 0.5;
+smashud.ALIGN_LEFT = 0
+smashud.ALIGN_RIGHT = 1
+smashud.ALIGN_MID = 0.5
 
 smashud.offsets = {}
 

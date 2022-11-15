@@ -1,13 +1,10 @@
 --SMAS++ MAIN MENU
 --Code by Spencer Everly, MrDoubleA, and others
 
-local versionnumber = "v0.0.0.3" --This is the version number of this episode. It can be changed to any version we're on.
+local versionnumber = "Demo 3" --This is the version number of this episode. It can be changed to any version we're on.
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
 local datetime = require("datetime")
---if Misc.inEditor() then
-    --Misc.showRichDialog("SMAS++ Boot Menu Level", "Hello!\n\nYou are trying to access the boot level through the editor. What are YOU doing here?\nI bet you just wanna snoop around and mess with the episode, eh?\n\nOh well, I don't blame you. Everything is open, so go right ahead!", true)
---end
 local extrasounds = require("extrasounds")
 local autoscroll = require("autoscrolla")
 local rng = require("base/rng")
@@ -23,7 +20,7 @@ local fontthree = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.in
 local menufont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
 local menufontwebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-website-textplus-1x.ini")
 
-runPressedState = false
+local runPressedState = false
 
 local bootmenu = {}
 
@@ -85,6 +82,7 @@ if bootmenu.active then
     smashud.visible.overworldPlayer = false
     smashud.visible.deathcount = false
     smashud.visible.customitembox = false
+    smashud.visible.pWing = false
     datetime.bottomright = true
     datetime.topright = false
     extrasounds.active = false
@@ -94,11 +92,13 @@ end
 bootmenu.active = false
 bootmenu.menuactive = false
 bootmenu.intromodeactive = false
+bootmenu.battleModeLevel = 0
+bootmenu.themeSelected = 0
 
 GameData.____holidayMenuEventEnded = false
 
-local aprilfools = false
-local aprilfoolserror = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
+local aprilFools = false
+local aprilFoolsErrorImg = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
 
 local Routine = require("routine")
 
@@ -119,17 +119,7 @@ local escquit = true
 local playernamebyImg = false
 local pfpimage = false
 
-local cooldown = 0
-
-local middle = 0
-
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
-
-local day = os.date("%d")
-
-local month = os.date("%m")
-
-local exacttime = os.date("%X")
 
 local function introExit()
     GameData.____mainMenuComplete = true
@@ -143,7 +133,7 @@ local function introExit()
     end
 end
 
-local function BattleRandomLevelSelect()
+local function battleRandomLevelSelect()
     exitscreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -151,10 +141,10 @@ local function BattleRandomLevelSelect()
     GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(smastables.__classicBattleModeLevels[rng.randomInt(1,#smastables.__classicBattleModeLevels)], nil, nil)
+    Level.load(smastables.__classicBattleModeLevels[rng.randomInt(1,#smastables.__classicBattleModeLevels)])
 end
 
-local function Battle1()
+local function battleLevelSelected()
     exitscreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -162,161 +152,7 @@ local function Battle1()
     GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load("battle_battleshrooms.lvlx", nil, nil)
-end
-
-local function Battle2()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_battle-zone.lvlx", nil, nil)
-end
-
-local function Battle3()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_classic-castle-battle.lvlx", nil, nil)
-end
-
-local function Battle4()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_dry-dry-desert.lvlx", nil, nil)
-end
-
-local function Battle5()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_hyrule-temple.lvlx", nil, nil)
-end
-
-local function Battle6()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_invasion-battlehammer.lvlx", nil, nil)
-end
-
-local function Battle7()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_lakitu-mechazone.lvlx", nil, nil)
-end
-
-local function Battle8()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_lethal-lava-level.lvlx", nil, nil)
-end
-
-local function Battle9()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_retroville-underground.lvlx", nil, nil)
-end
-
-local function Battle10()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_slippy-slap-snowland.lvlx", nil, nil)
-end
-
-local function Battle11()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_woody-warzone.lvlx", nil, nil)
-end
-
-local function Battle12()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_testlevel.lvlx", nil, nil)
-end
-
-local function Battle13()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_nsmbds1.lvlx", nil, nil)
-end
-
-local function Battle14()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_nsmbds2.lvlx", nil, nil)
-end
-
-local function Battle15()
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    GameData.battlemoderngactive = false
-    GameData.enableBattleMode = true
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("battle_nsmbds3.lvlx", nil, nil)
+    Level.load(smastables.__classicBattleModeLevels[bootmenu.battleModeLevel])
 end
 
 
@@ -333,44 +169,14 @@ end
 
 
 
-local function theme1()
-    SaveData.introselect = 1
+local function themeSelected()
+    SaveData.introselect = bootmenu.themeSelected
     exitscreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load("intro_SMAS.lvlx", nil, nil)
-end
-
-local function theme2()
-    SaveData.introselect = 2
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_SMBX1.0.lvlx", nil, nil)
-end
-
-local function theme3()
-    SaveData.introselect = 3
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_SMBX1.1.lvlx", nil, nil)
-end
-
-local function theme4()
-    SaveData.introselect = 4
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_SMBX1.2.lvlx", nil, nil)
+    Level.load(smastables.__mainMenuThemes[SaveData.introselect])
 end
 
 local function theme4scrolling()
@@ -382,16 +188,6 @@ local function theme4scrolling()
     Routine.loop(1768, theme4scrolling, true)
 end
 
-local function theme5()
-    SaveData.introselect = 5
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_SMBX1.3.lvlx", nil, nil)
-end
-
 local function theme5scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
@@ -399,16 +195,6 @@ local function theme5scrolling()
     autoscroll.scrollLeft(15)
     Routine.wait(7.2)
     Routine.loop(1571, theme5scrolling, true)
-end
-
-local function theme6()
-    SaveData.introselect = 6
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_WSMBA.lvlx", nil, nil)
 end
 
 local function theme6scrolling()
@@ -420,26 +206,6 @@ local function theme6scrolling()
     Routine.loop(1787, theme6scrolling, true)
 end
 
-local function theme7()
-    SaveData.introselect = 7
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_SMBX2.lvlx", nil, nil)
-end
-
-local function theme8()
-    SaveData.introselect = 8
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_theeditedboss.lvlx", nil, nil)
-end
-
 local function theme8scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
@@ -447,16 +213,6 @@ local function theme8scrolling()
     autoscroll.scrollLeft(15)
     Routine.wait(7.5)
     Routine.loop(1625, theme8scrolling, true)
-end
-
-local function theme9()
-    SaveData.introselect = 9
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_SMBX1.3og.lvlx", nil, nil)
 end
 
 local function theme9scrolling()
@@ -468,26 +224,6 @@ local function theme9scrolling()
     Routine.loop(1265, theme9scrolling, true)
 end
 
-local function theme10()
-    SaveData.introselect = 10
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_SMBX2b3.lvlx", nil, nil)
-end
-
-local function theme11()
-    SaveData.introselect = 11
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_8bit.lvlx", nil, nil)
-end
-
 local function theme11scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
@@ -495,36 +231,6 @@ local function theme11scrolling()
     autoscroll.scrollLeft(15)
     Routine.wait(7.2)
     Routine.loop(1521, theme11scrolling, true)
-end
-
-local function theme12()
-    SaveData.introselect = 12
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_S!TS!.lvlx", nil, nil)
-end
-
-local function theme13()
-    SaveData.introselect = 13
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_sunsetbeach.lvlx", nil, nil)
-end
-
-local function theme14()
-    SaveData.introselect = 14
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_scrollingheights.lvlx", nil, nil)
 end
 
 local function theme14scrolling()
@@ -536,16 +242,6 @@ local function theme14scrolling()
     Routine.loop(1300, theme14scrolling, true)
 end
 
-local function theme15()
-    SaveData.introselect = 15
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_jakebrito1.lvlx", nil, nil)
-end
-
 local function theme15scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
@@ -553,26 +249,6 @@ local function theme15scrolling()
     autoscroll.scrollLeft(15)
     Routine.wait(11.0)
     Routine.loop(2418, theme15scrolling, true)
-end
-
-local function theme16()
-    SaveData.introselect = 16
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_marioforever.lvlx", nil, nil)
-end
-
-local function theme17()
-    SaveData.introselect = 17
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_jakebrito2.lvlx", nil, nil)
 end
 
 local function theme17scrolling()
@@ -584,16 +260,6 @@ local function theme17scrolling()
     Routine.loop(lunatime.toTicks(15.2), theme17scrolling, true)
 end
 
-local function theme18()
-    SaveData.introselect = 18
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_circuitcity.lvlx", nil, nil)
-end
-
 local function theme18scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
@@ -601,16 +267,6 @@ local function theme18scrolling()
     autoscroll.scrollLeft(15)
     Routine.wait(7)
     Routine.loop(lunatime.toTicks(23.6), theme18scrolling, true)
-end
-
-local function theme19()
-    SaveData.introselect = 19
-    exitscreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("intro_metroidprime2.lvlx", nil, nil)
 end
 
 local function mapExit()
@@ -669,14 +325,12 @@ local function MigrateOldSave2()
     littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Please note that before you do this, a final reminder that this save data will be upgraded, and the data will not be compatible with older releases.<page>Be sure you want to proceed before doing so.<question MigrateSaveMenuTwo>", pauses = false, updatesInPause = true})
 end
 
-local starList
-local starListOptional
-
 local function MigrateOldSave3()
     SaveData.totalCoinsClassic = mem(0x00B2C5A8, FIELD_WORD)
     SaveData.totalLives = mem(0x00B2C5AC, FIELD_FLOAT)
     SaveData.totalScoreClassic = Misc.score()
     GameData.temporaryPowerupStored = player.powerup
+    GameData.temporaryReserveStored = player.reservePowerup
     for k,v in ipairs(smastables.__allLevels) do
         if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) == true then
             table.insert(SaveData.completeLevels, v)
@@ -1263,7 +917,7 @@ local function foolsinapril() --April Fools event for 4/1 of any year
     Sound.playSFX("aprilfools.ogg")
     Routine.wait(2, true)
     Misc.unpause()
-    aprilfools = false
+    aprilFools = false
     GameData.musreset = true
     logo = true
     datetime.bottomright = true
@@ -1551,7 +1205,7 @@ function bootmenu.onInputUpdate()
                     datetime.bottomright = false
                     active = true
                     pressjumpwords = false
-                    aprilfools = true
+                    aprilFools = true
                     Sound.playSFX("windows_error.ogg")
                     GameData.holidayrun = true
                     if GameData.holidayrun == true then
@@ -1714,9 +1368,6 @@ function bootmenu.onDraw()
                 end
             end
         end
-        if cursor.left == KEYS_UP then
-            
-        end
         if versionactive then
             Graphics.drawBox{x=710, y=5, width=84, height=28, color=Color.black..0.5, priority=-7}
             textplus.print{x=718, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree, xscale = 1.6, yscale = 1.6} --Version number of the episode
@@ -1738,9 +1389,6 @@ function bootmenu.onDraw()
         if exitscreen then
             Graphics.drawScreen{color = Color.black, priority = 10}
         end
-        if not logo then
-            --nothing
-        end
         if twoplayercheck then
             textplus.print{x=243, y=10, text = "2 player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
         end
@@ -1756,17 +1404,11 @@ function bootmenu.onDraw()
         if charactercheck then
             textplus.print{x=303, y=20, text = "P1's Active Character: ", priority=-7, color=Color.yellow, font=statusFont}
         end
-        if not charactercheck then
-            --nothing
-        end
         if not active then
             textplus.print{x=180, y=480, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red, xscale = 2, yscale = 2}
             textplus.print{x=178, y=477, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
             textplus.print{x=170, y=500, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red, xscale = 2, yscale = 2}
             textplus.print{x=168, y=497, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
-        end
-        if active then
-            --nothing
         end
         if active3 then
             if SaveData.openingComplete then
@@ -1779,11 +1421,8 @@ function bootmenu.onDraw()
         if keyinput1 then
             textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=0, color=Color.lightred, font=statusFont}
         end
-        if aprilfools then    
-            Graphics.drawImageWP(aprilfoolserror, 0, 0, 0)
-        end
-        if not aprilfools then
-            
+        if aprilFools then    
+            Graphics.drawImageWP(aprilFoolsErrorImg, 0, 0, 0)
         end
         if stpatricksday then
             textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=0, color=Color.green, font=statusFont}
@@ -1863,46 +1502,46 @@ littleDialogue.registerAnswer("AccessibilityStuff",{text = "Return to Previous M
 
 
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() Routine.run(theme1) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() Routine.run(theme6) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() Routine.run(theme2) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() Routine.run(theme3) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() Routine.run(theme4) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() Routine.run(theme9) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() Routine.run(theme5) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() Routine.run(theme10) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() Routine.run(theme7) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() Routine.run(theme8) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() Routine.run(theme11) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() Routine.run(theme12) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() Routine.run(theme13) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() Routine.run(theme14) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() Routine.run(theme15) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() Routine.run(theme16) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() Routine.run(theme17) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Circuit Central (By RvBNut91)",chosenFunction = function() Routine.run(theme18) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Metroid Prime 2 (By SilverDeoxys)",chosenFunction = function() Routine.run(theme19) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() bootmenu.themeSelected = 1 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() bootmenu.themeSelected = 6 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() bootmenu.themeSelected = 2 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() bootmenu.themeSelected = 3 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() bootmenu.themeSelected = 4 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() bootmenu.themeSelected = 9 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() bootmenu.themeSelected = 5 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() bootmenu.themeSelected = 10 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() bootmenu.themeSelected = 7 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() bootmenu.themeSelected = 8 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() bootmenu.themeSelected = 11 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() bootmenu.themeSelected = 12 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() bootmenu.themeSelected = 13 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() bootmenu.themeSelected = 14 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() bootmenu.themeSelected = 15 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() bootmenu.themeSelected = 16 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() bootmenu.themeSelected = 17 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Circuit Central (By RvBNut91)",chosenFunction = function() bootmenu.themeSelected = 18 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Metroid Prime 2 (By SilverDeoxys)",chosenFunction = function() bootmenu.themeSelected = 19 Routine.run(themeSelected) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
 
 littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Random Level",chosenFunction = function() Routine.run(BattleRandomLevelSelect) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battle Zone (SMBX 1.3)",chosenFunction = function() Routine.run(Battle1) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battleshrooms (SMBX 1.3)",chosenFunction = function() Routine.run(Battle2) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Classic Castle Battle (SMBX 1.3)",chosenFunction = function() Routine.run(Battle3) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Dry Dry Desert (SMBX 1.3)",chosenFunction = function() Routine.run(Battle4) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Hyrule Temple (SMBX 1.3)",chosenFunction = function() Routine.run(Battle5) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Invasion Battlehammer (SMBX 1.3)",chosenFunction = function() Routine.run(Battle6) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lakitu Mechazone (SMBX 1.3)",chosenFunction = function() Routine.run(Battle7) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lethal Lava Level (SMBX 1.3)",chosenFunction = function() Routine.run(Battle8) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Retroville Underground (SMBX 1.3.0.1)",chosenFunction = function() Routine.run(Battle9) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Slippy Slap Snowland (SMBX 1.3)",chosenFunction = function() Routine.run(Battle10) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Woody Warzone (SMBX 1.3)",chosenFunction = function() Routine.run(Battle11) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Sky High Into the Skies",chosenFunction = function() Routine.run(Battle12) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 1 (By hrthrdh)",chosenFunction = function() Routine.run(Battle13) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 2 (By hrthrdh)",chosenFunction = function() Routine.run(Battle14) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 3 (By hrthrdh)",chosenFunction = function() Routine.run(Battle15) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Random Level",chosenFunction = function() Routine.run(battleRandomLevelSelect) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battle Zone (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 1 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battleshrooms (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 2 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Classic Castle Battle (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 3 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Dry Dry Desert (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 4 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Hyrule Temple (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 5 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Invasion Battlehammer (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 6 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lakitu Mechazone (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 7 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lethal Lava Level (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 8 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Retroville Underground (SMBX 1.3.0.1)",chosenFunction = function() bootmenu.battleModeLevel = 9 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Slippy Slap Snowland (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 10 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Woody Warzone (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 11 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Sky High Into the Skies",chosenFunction = function() bootmenu.battleModeLevel = 12 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 1 (By hrthrdh)",chosenFunction = function() bootmenu.battleModeLevel = 13 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 2 (By hrthrdh)",chosenFunction = function() bootmenu.battleModeLevel = 14 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 3 (By hrthrdh)",chosenFunction = function() bootmenu.battleModeLevel = 15 Routine.run(battleLevelSelected) end})
 littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 
 

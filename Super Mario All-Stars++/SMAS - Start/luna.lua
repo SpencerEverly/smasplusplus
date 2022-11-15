@@ -311,6 +311,10 @@ function onStart()
         player.powerup = GameData.temporaryPowerupStored
         GameData.temporaryPowerupStored = nil
     end
+    if GameData.temporaryReserveStored ~= nil then
+        player.reservePowerup = GameData.temporaryReserveStored
+        GameData.temporaryReserveStored = nil
+    end
     Misc.saveGame()
 end
 

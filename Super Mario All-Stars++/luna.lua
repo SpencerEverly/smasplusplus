@@ -334,7 +334,7 @@ function onStart() --Now do onStart...
     end
     --Below will start the star door system
     warpstaractive = true
-    if Misc.inMarioChallenge() then
+    if Misc.inMarioChallenge() then --Just in case if the Mario Challenge is active, do these things to update the Challenge...
         SaveData.totalCoinsClassic = mem(0x00B2C5A8, FIELD_WORD)
         SaveData.totalScoreClassic = Misc.score()
         SaveData.totalLives = mem(0x00B2C5AC, FIELD_FLOAT)
@@ -381,6 +381,10 @@ function onStart() --Now do onStart...
     if SaveData.firstBootCompleted == 1 then
         SaveData.firstBootCompleted = true
     end
+    if not Misc.inMarioChallenge() and (not SaveData.disableX2char) and not Misc.inEditor() then
+        player.character = SaveData.currentCharacter
+        player.setCostume(SaveData.currentCharacter, SaveData.currentCostume, false)
+    end
     Audio.MusicVolume(nil) --Reset the music volume on onStart, just in case
 end
 
@@ -407,12 +411,6 @@ local altjumpkey = Graphics.loadImage(Misc.resolveFile("inputhud/altjump.png"))
 local runkey = Graphics.loadImage(Misc.resolveFile("inputhud/run.png"))
 local altrunkey = Graphics.loadImage(Misc.resolveFile("inputhud/altrun.png"))
 local bottomkeys = Graphics.loadImage(Misc.resolveFile("inputhud/bottomkey.png"))
-
-function onPlaySFX(eventToken, sfx)
-    if sfx == 1 then
-        eventToken.cancelled = true
-    end
-end
 
 function onDraw()
     if Misc.inEditor() then
