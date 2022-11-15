@@ -4,7 +4,7 @@ function onEvent(eventName)
     if eventName == "Boss Start" then
         Sound.changeMusic("_OST/Super Mario Bros 2/Boss.spc|0;g=2.5", 1)
     end
-    if eventName == "Boss End" then
+    if eventName == "Boss End 1" then
         Sound.changeMusic(0, 1)
         Sound.playSFX(40)
     end
