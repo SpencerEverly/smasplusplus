@@ -59,6 +59,7 @@ function onDraw()
     end
     if debugtext then
         textplus.print{x = 0, y = 0, text = "1234567890", font = fonttester, priority = -0.5, xscale = 2, yscale = 2}
+        textplus.print{x = 0, y = 25, text = "abcdefghijklmnopqrstuvwxyz", font = fonttester, priority = -0.5, xscale = 2, yscale = 2}
         textplus.print{x = 0, y = 50, text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", font = fonttester, priority = -0.5, xscale = 2, yscale = 2}
     end
 end
