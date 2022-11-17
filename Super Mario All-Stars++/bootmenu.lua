@@ -423,7 +423,7 @@ local function themeMenu1()
 end
 
 local function ResolutionSelect1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.2><question ResolutionSelect>", speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question ResolutionSelect>", speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
 end
 
 local function ClockSelect1()
