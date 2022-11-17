@@ -142,6 +142,11 @@ function onDraw()
         Graphics.drawImage(knowledge, 0, -140, 1, 0, 800, 600, opacity)
         Graphics.drawImage(datetimeunavailable, 0, -140, 1, 0, 800, 600, opacity)
     end
+    if loadinfo == "steamdeck" then
+        Graphics.drawImage(loadicon, 672, 505, 1, frame2 * 64, 128, 64, opacity)
+        Graphics.drawImage(knowledge, 0, -35, 1, 0, 800, 600, opacity)
+        Graphics.drawImage(datetimeunavailable, 0, 35, 1, 0, 800, 600, opacity)
+    end
     if loadinfo == "nes" then
         Graphics.drawImageWP(nesborder, 0, 0, 1, 0, 800, 600, opacity, 2)
         Graphics.drawImage(loadicon, 572, 455, 1, frame2 * 64, 128, 64, opacity)

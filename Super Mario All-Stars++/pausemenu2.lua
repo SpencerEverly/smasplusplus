@@ -62,6 +62,7 @@ local RESOLUTION_GB = "Gameboy/Gameboy Color"
 local RESOLUTION_GBA = "Gameboy Advance"
 local RESOLUTION_IPHONEONE = "iPhone (1st Generation)"
 local RESOLUTION_THREEDS = "Nintendo 3DS (Top Screen)"
+local RESOLUTION_STEAMDECK = "Steam Deck"
 
 local COSTUME_NAME = player:getCostume() or "N/A"
 
@@ -90,6 +91,7 @@ local screenModes = {
     [RESOLUTION_GBA] = {resolutions = "gba"},
     [RESOLUTION_IPHONEONE] = {resolutions = "iphone1st"},
     [RESOLUTION_THREEDS] = {resolutions = "3ds"},
+    [RESOLUTION_STEAMDECK] = {resolutions = "steamdeck"},
 }
 
 local powerupStates = {
@@ -187,6 +189,8 @@ local function changeresolution()
         SaveData.resolution = "widescreen"
     elseif screenModes == RESOLUTION_ULTRAWIDE then
         SaveData.resolution = "ultrawide"
+    elseif screenModes == RESOLUTION_STEAMDECK then
+        SaveData.resolution = "steamdeck"
     elseif screenModes == RESOLUTION_NES then
         SaveData.resolution = "nes"
     elseif screenModes == RESOLUTION_GBA then
@@ -1638,7 +1642,7 @@ function pauseSpecifics()
         pauseplus.createOption("soundsettings",{text = "Use the Original SMBX Sound System",selectionType = pauseplus.SELECTION_CHECKBOX,description = "This options disables all the new sounds (Except P-Wing) and reverts back to the original sound system.",action = function() smbxdefaultsoundsystem() end})
         
         --Resolution Settings
-        pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_NES,RESOLUTION_GBA,RESOLUTION_THREEDS}, action = function() changeresolution() end})
+        pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA,RESOLUTION_THREEDS}, action = function() changeresolution() end})
         pauseplus.createOption("resolutionsettings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
         pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() changeresolutionborder() end})
         

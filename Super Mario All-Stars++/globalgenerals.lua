@@ -35,6 +35,7 @@ customCamera.transitionSpeed = 5
 
 local widebars = Graphics.loadImageResolved("graphics/resolutions/widescreen.png")
 local ultrawidebars = Graphics.loadImageResolved("graphics/resolutions/ultrawide.png")
+local steamdeckbars = Graphics.loadImageResolved("graphics/resolutions/steamdeck.png")
 local nesbars = Graphics.loadImageResolved("graphics/resolutions/nes.png")
 local threedsbars = Graphics.loadImageResolved("graphics/resolutions/3ds.png")
 
@@ -787,6 +788,25 @@ function globalgenerals.onDraw()
             smallScreen.priority = 10
             smallScreen.scaleX = 1
             smallScreen.scaleY = 1.80
+            smallScreen.offsetX = 0
+            smallScreen.offsetY = 0
+        elseif SaveData.letterbox == true then
+            smallScreen.priority = 4
+            smallScreen.scaleX = 1
+            smallScreen.scaleY = 1
+            smallScreen.offsetX = 0
+            smallScreen.offsetY = 0
+        end
+    elseif SaveData.resolution == "steamdeck" then
+        customCamera.defaultScreenWidth = 800
+        customCamera.defaultScreenHeight = 500
+        customCamera.defaultZoom = 0.84
+        customCamera.defaultScreenOffsetY = 0
+        Graphics.drawImageWP(steamdeckbars, 0, 0, 7)
+        if SaveData.letterbox == false then
+            smallScreen.priority = 10
+            smallScreen.scaleX = 1
+            smallScreen.scaleY = 1.2
             smallScreen.offsetX = 0
             smallScreen.offsetY = 0
         elseif SaveData.letterbox == true then
