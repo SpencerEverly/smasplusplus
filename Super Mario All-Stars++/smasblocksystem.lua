@@ -31,11 +31,11 @@ if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
 end
 
-local blockcountdown = 0
-local activateblockcountdown = false
-local subtractblockcontentid = false
+local blockCountdown = 0
+local activateBlockCountdown = false
+local subtractBlockContentID = false
 
-local blocklistwithcoins = {}
+local blockListWithCoins = {}
 
 function smasblocksystem.onInitAPI()
     registerEvent(smasblocksystem,"onStart")
@@ -76,13 +76,14 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
     
     --Block coin hit detection
     if not SaveData.disableX2char then
-        if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateblockcountdown then
-            activateblockcountdown = true
-            table.insert(blocklistwithcoins, block)
+        if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateBlockCountdown then
+            activateBlockCountdown = true
+            table.insert(blockListWithCoins, block)
+            block.data.multiCoinTimer = smasblocksystem.countDownMarker
         elseif block.contentID <= 1 or block.contentID == 1000 or not block.isValid then
-            activateblockcountdown = false
-            blockcountdown = 0
-            subtractblockcontentid = false
+            activateBlockCountdown = false
+            blockCountdown = 0
+            subtractBlockContentID = false
         end
     end
 end
@@ -122,28 +123,30 @@ function smasblocksystem.onTick()
     
     
     --Coin block timer
-    if activateblockcountdown then
+    if activateBlockCountdown then
         if smasblocksystem.frameRuleCounter == 20 then --If 20, then subtract the marker
-            smasblocksystem.countDownMarker = smasblocksystem.countDownMarker - 1
-            subtractblockcontentid = true
+            subtractBlockContentID = true
         else --Else just don't
-            subtractblockcontentid = false
+            subtractBlockContentID = false
         end
-        if subtractblockcontentid then
-            for i=#blocklistwithcoins, 1, -1 do
-                local v = blocklistwithcoins[i]
-                if v.isValid and smasblocksystem.countDownMarker > 0 then
-                    --This is here just in case
+        if subtractBlockContentID then
+            for i=#blockListWithCoins, 1, -1 do
+                local v = blockListWithCoins[i]
+                if v.isValid and v.data.multiCoinTimer > 0 then
+                    if smasblocksystem.frameRuleCounter == 20 then
+                        v.data.multiCoinTimer = v.data.multiCoinTimer - 1
+                    end
                 else
                     v.contentID = 1 --Set the block to only one coin
+                    v.data.multiCoinTimer = 0
                     smasblocksystem.countDownMarker = 11 --Reset the counter
-                    table.remove(blocklistwithcoins, i) --Remove the block from the table
+                    table.remove(blockListWithCoins, i) --Remove the block from the table
                 end
             end
         end
     end
-    if not activateblockcountdown then
-        subtractblockcontentid = false
+    if not activateBlockCountdown then
+        subtractBlockContentID = false
     end
 end
 
