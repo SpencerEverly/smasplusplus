@@ -26,6 +26,7 @@ smasblocksystem.showInvisible1UPBlock = true --Set it to true to show the invisi
 smasblocksystem.invisibleCoinsCollected = 0 --This only increments when coins are collected in -3 levels, and will be reset on onExit
 smasblocksystem.debug = false --Activates debug messages shown on the screen
 smasblocksystem.frameRuleCounter = 20 --Adds a frame rule system, similar to SMB1's system
+smasblocksystem.blockListWithCoins = {} --Table for a list of blocks set with more than 1 coin
 
 if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
@@ -34,8 +35,6 @@ end
 local blockCountdown = 0
 local activateBlockCountdown = false
 local subtractBlockContentID = false
-
-local blockListWithCoins = {}
 
 function smasblocksystem.onInitAPI()
     registerEvent(smasblocksystem,"onStart")
@@ -78,7 +77,7 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
     if not SaveData.disableX2char then
         if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateBlockCountdown then
             activateBlockCountdown = true
-            table.insert(blockListWithCoins, block)
+            table.insert(smasblocksystem.blockListWithCoins, block)
             block.data.multiCoinTimer = smasblocksystem.countDownMarker
         elseif block.contentID <= 1 or block.contentID == 1000 or not block.isValid then
             activateBlockCountdown = false
@@ -130,8 +129,8 @@ function smasblocksystem.onTick()
             subtractBlockContentID = false
         end
         if subtractBlockContentID then
-            for i=#blockListWithCoins, 1, -1 do
-                local v = blockListWithCoins[i]
+            for i=#smasblocksystem.blockListWithCoins, 1, -1 do
+                local v = smasblocksystem.blockListWithCoins[i]
                 if v.isValid and v.data.multiCoinTimer > 0 then
                     if smasblocksystem.frameRuleCounter == 20 then
                         v.data.multiCoinTimer = v.data.multiCoinTimer - 1
@@ -140,7 +139,7 @@ function smasblocksystem.onTick()
                     v.contentID = 1 --Set the block to only one coin
                     v.data.multiCoinTimer = 0
                     smasblocksystem.countDownMarker = 11 --Reset the counter
-                    table.remove(blockListWithCoins, i) --Remove the block from the table
+                    table.remove(smasblocksystem.blockListWithCoins, i) --Remove the block from the table
                 end
             end
         end
