@@ -26,6 +26,7 @@ _G.smascharacterintros = require("smascharacterintros")
 _G.smasextraactions = require("smasextraactions")
 _G.smasblocksystem = require("smasblocksystem")
 _G.smaspswitch = require("smaspswitch")
+_G.smasenemysystem = require("smasenemysystem")
 
 if SMBX_VERSION == VER_SEE_MOD then
     smasonlineplay = require("smasonlineplay")
