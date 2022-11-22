@@ -117,13 +117,15 @@ if table.icontains(smastables._noTransitionLevels,Level.filename()) or GameData.
     warpTransition.activateOnInstantWarps = false
 end
 
-if SaveData.disableX2char == true then
+if SaveData.disableX2char then
     warpTransition.musicFadeOut = false
     warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
     warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
     warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
     warpTransition.activateOnInstantWarps = false
     extrasounds.enableFireFlowerHitting = false
+    local keyhole = require("tweaks/keyhole") --Disable X2 keyhole effect
+    keyhole.onCameraDraw = function() end
     mega2.sfxFile = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom13.ogg")
     mega2.megagrowsfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-grow-1.3.ogg")
     mega2.megashrinksfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-shrink-1.3.ogg")
