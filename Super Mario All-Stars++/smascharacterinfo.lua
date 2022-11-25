@@ -36,7 +36,7 @@ function smascharacterinfo.setCostumeSpecifics()
         end
     end
     
-    if (currentCostume == nil or currentCostume == "!DEFAULT") then
+    if (currentCostume == "N/A" or currentCostume == "!DEFAULT") then
         littleDialogue.characterNames[1] = "Mario"
         littleDialogue.characterNames[2] = "Luigi"
         littleDialogue.characterNames[3] = "Peach"
@@ -54,7 +54,7 @@ function smascharacterinfo.setCostumeSpecifics()
             smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
         end
         
-        --Starman/Megashroom/P-Switch themes for default characters
+        --Starman/Megashroom themes for default characters
         if not SaveData.disableX2char then
             if player.character == CHARACTER_YOSHI then
                 mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_smw2")
@@ -65,6 +65,8 @@ function smascharacterinfo.setCostumeSpecifics()
             end
         end
     end
+    
+    
     if currentCostume == "00-SMASPLUSPLUS-BETA" then
         if table.icontains(smastables.__smb2Levels,Level.filename()) then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_2012beta_ddp.ogg")
@@ -948,7 +950,7 @@ function smascharacterinfo.setCostumeSpecifics()
     
     
     
-    if currentCostume == nil and SaveData.disableX2char == false then
+    if currentCostume == "N/A" and SaveData.disableX2char == false then
         steve.skinSettings.name = "steve"
         if Cheats.get("waitinginthesky").active == false then
             mega2.sfxFile = Misc.resolveSoundFile("megashroom")
