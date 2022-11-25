@@ -8627,7 +8627,7 @@ ID:69;X:-118784;Y:-119936;W:32;H:32;LR:"Stage 7 - Yoshi Rooms Finished";
 ID:69;X:-118592;Y:-119936;W:32;H:32;LR:"Stage 7 - Yoshi Rooms Finished";
 ID:69;X:-118624;Y:-119936;W:32;H:32;LR:"Stage 7 - Yoshi Rooms Finished";
 ID:69;X:-118560;Y:-119936;W:32;H:32;LR:"Stage 7 - Yoshi Rooms Finished";
-ID:997;X:40592;Y:39808;W:32;H:32;
+ID:997;X:40592;Y:39808;W:32;H:32;LR:"X2Stuff";
 BLOCK_END
 BGO
 ID:202;X:-179456;Y:-180160;
