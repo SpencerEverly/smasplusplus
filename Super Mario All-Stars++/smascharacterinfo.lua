@@ -25,7 +25,7 @@ end
 function smascharacterinfo.setCostumeSpecifics()
     local currentCostume = SaveData.currentCostume
     
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
         for _,p in ipairs(Player.get()) do
             p.setCostume(1, nil)
@@ -36,7 +36,7 @@ function smascharacterinfo.setCostumeSpecifics()
         end
     end
     
-    if currentCostume == nil or currentCostume == "!DEFAULT" then
+    if (currentCostume == nil or currentCostume == "!DEFAULT") then
         littleDialogue.characterNames[1] = "Mario"
         littleDialogue.characterNames[2] = "Luigi"
         littleDialogue.characterNames[3] = "Peach"
@@ -44,12 +44,25 @@ function smascharacterinfo.setCostumeSpecifics()
         littleDialogue.characterNames[5] = "Link"
         littleDialogue.characterNames[9] = "Klonoa"
         littleDialogue.characterNames[14] = "Steve"
+        
+        --P-Switch themes for default characters
         if table.icontains(smastables.__smb3Levels,Level.filename()) then
             smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smas.ogg"
         elseif table.icontains(smastables.__smwLevels,Level.filename()) then
             smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smw.ogg"
         else
             smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        end
+        
+        --Starman/Megashroom/P-Switch themes for default characters
+        if not SaveData.disableX2char then
+            if player.character == CHARACTER_YOSHI then
+                mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_smw2")
+                starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw2")
+            else
+                mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+                starman.sfxFile = Misc.resolveSoundFile("starman")
+            end
         end
     end
     if currentCostume == "00-SMASPLUSPLUS-BETA" then
@@ -543,7 +556,7 @@ function smascharacterinfo.setCostumeSpecifics()
     if currentCostume == "NINJABOMBERMAN" then
         littleDialogue.characterNames[3] = "Plunder Bomber"
         mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-        starman.sfxFile = Misc.resolveSoundFile("starman")
+        starman.sfxFile = Misc.resolveSoundFile("starman/starman_superbomberman5")
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
