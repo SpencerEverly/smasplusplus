@@ -6,7 +6,7 @@ datetime.bottomleft = false
 datetime.topright = false
 datetime.topleft = false
 
-local bootmenu = require("bootmenu")
+_G.bootmenu = require("bootmenu")
 local battledependencies = require("classicbattlemode")
 battledependencies.battlemodeactive = false
 

@@ -10,7 +10,7 @@ local countdowngogfx = Graphics.loadImageResolved("costumes/mario/GO-10SecondRun
 local warpTransition = require("warpTransition")
 local playerManager = require("playerManager")
 local Routine = require("routine")
-local bootmenu = require("bootmenu")
+_G.bootmenu = require("bootmenu")
 
 if SaveData.currentCostume == nil then
     SaveData.currentCostume = "TBD"

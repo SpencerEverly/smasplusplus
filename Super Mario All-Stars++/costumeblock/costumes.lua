@@ -3,26 +3,21 @@ local costumeblock = {}
 local blockmanager = require("blockmanager")
 local blockutils = require("blocks/blockutils")
 local playerManager = require("playerManager")
-if SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
-    steve = require("steve")
-end
+local smascharacterchanger = require("smascharacterchanger")
 
 local oldCostume = {}
 local costumes = {}
 local idMap = {}
 
 function costumeblock.onPostBlockHit(v, fromUpper, playerOrNil)
-    local costumes = playerManager.getCostumes(player.character)
-    local currentCostume = player:getCostume()
+	if not idMap[v.id] then return end
+	if v:mem(0x56, FIELD_WORD) ~= 0 then return end
+	if playerOrNil == nil or type(playerOrNil) ~= "Player" then return end
     
-    local costumeIdx = table.ifind(costumes,currentCostume)
-
-    if costumeIdx ~= nil then
-        player:setCostume(costumes[costumeIdx - 1])
-    else
-        player:setCostume(costumes[1])
-    end
-    SFX.play(32)
+	Animation.spawn(10,playerOrNil.x+playerOrNil.width*0.5-16,playerOrNil.y+playerOrNil.height*0.5);
+	SFX.play(32)
+    smascharacterchanger.menuActive = true
+    smascharacterchanger.animationActive = true
 end
 
 function costumeblock.register(id)

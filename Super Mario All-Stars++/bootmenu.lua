@@ -406,7 +406,7 @@ local function bootDialogue()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
-local function menuDialogue()
+function menuDialogue()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
@@ -414,7 +414,7 @@ local function battleModeDialogue()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.5><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
-local function optionsMenu1()
+function optionsMenu1()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
 end
 
@@ -679,8 +679,9 @@ end
 
 local function ChangeChar1()
     if not SaveData.disableX2char then
-        --smascharacterchanger.startupChanger()
-        littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change into?<question CharacterListX2>", pauses = false, updatesInPause = true})
+        smascharacterchanger.menuActive = true
+        smascharacterchanger.animationActive = true
+        --littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change into?<question CharacterListX2>", pauses = false, updatesInPause = true})
     elseif SaveData.disableX2char then
         if Player.count() == 2 then
             littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
@@ -960,9 +961,11 @@ function bootmenu.onStart()
         smashud.visible.overworldPlayer = false
         smashud.visible.deathcount = false
         smashud.visible.customitembox = false
+        smashud.visible.pWing = false
         datetime.bottomright = true
         datetime.topright = false
         extrasounds.active = false
+        smasbooleans.mainMenuActive = true
         bootmenu.startedmenu = 0
         Audio.MusicVolume(nil) --Let the music volume reset
         if mem(0x00B251E0, FIELD_WORD) >= 1 then
@@ -1060,11 +1063,11 @@ function bootmenu.onTick()
         if bootmenu.startedmenu == nil then
             bootmenu.startedmenu = 0
         end
-        if GameData.reopenmenu == true then
+        if GameData.reopenmenu then
             Routine.run(bootDialogue)
             GameData.reopenmenu = false
         end
-        if GameData.firstbootfive == true then
+        if GameData.firstbootfive then
             Routine.run(FirstBoot5)
             GameData.firstbootfive = false
         end

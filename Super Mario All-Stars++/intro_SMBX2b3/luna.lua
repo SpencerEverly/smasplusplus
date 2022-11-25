@@ -1,4 +1,4 @@
-local bootmenu = require("bootmenu")
+_G.bootmenu = require("bootmenu")
 bootmenu.active = true
 
 local rng = require("base/rng")

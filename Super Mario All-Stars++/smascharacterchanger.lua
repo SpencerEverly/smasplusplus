@@ -145,7 +145,7 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
     smascharacterchanger.animationTimer = 0
     ending = false
     if smasbooleans.mainMenuActive then
-        GameData.reopenmenu = true
+        optionsMenu1()
     end
 end
 

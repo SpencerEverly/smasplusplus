@@ -54,16 +54,6 @@ function smascharacterinfo.setCostumeSpecifics()
             smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
         end
         
-        --Starman/Megashroom themes for default characters
-        if not SaveData.disableX2char then
-            if player.character == CHARACTER_YOSHI then
-                mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_smw2")
-                starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw2")
-            else
-                mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-                starman.sfxFile = Misc.resolveSoundFile("starman")
-            end
-        end
     end
     
     
@@ -949,12 +939,17 @@ function smascharacterinfo.setCostumeSpecifics()
     
     
     
-    
-    if currentCostume == "N/A" and SaveData.disableX2char == false then
+    --Starman/Megashroom themes/default settings for default characters
+    if (currentCostume == "N/A" or currentCostume == "!DEFAULT") and not SaveData.disableX2char then
         steve.skinSettings.name = "steve"
-        if Cheats.get("waitinginthesky").active == false then
-            mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-            starman.sfxFile = Misc.resolveSoundFile("starman")
+        if not Cheats.get("waitinginthesky").active then
+            if player.character == CHARACTER_YOSHI then
+                mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_smw2")
+                starman.sfxFile = Misc.resolveSoundFile("starman/starman_smw2")
+            else
+                mega2.sfxFile = Misc.resolveSoundFile("megashroom")
+                starman.sfxFile = Misc.resolveSoundFile("starman")
+            end
             starman.duration[996] = lunatime.toTicks(12)
             starman.duration[994] = lunatime.toTicks(12)
         end

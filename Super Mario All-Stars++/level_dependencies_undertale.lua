@@ -1,7 +1,7 @@
 local undertaledepends = {}
 
 local stats = require("Stats")
-local bootmenu = require("bootmenu")
+_G.bootmenu = require("bootmenu")
 local playerManager = require("playerManager")
 local textplus = require("textplus")
 

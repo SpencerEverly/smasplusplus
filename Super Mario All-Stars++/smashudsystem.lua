@@ -5,7 +5,7 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
-local bootmenu = require("bootmenu")
+_G.bootmenu = require("bootmenu")
 local battledependencies = require("classicbattlemode")
 battledependencies.battlemodeactive = false
 
