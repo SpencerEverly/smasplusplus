@@ -337,7 +337,10 @@ extrasounds.soundNamesInOrder = {
     "fireball3", --168
 }
 
-
+for i = 1,#extrasounds.soundNamesInOrder do
+    extrasounds.sound[i] = {}
+    extrasounds.sound[i].sfx = {}
+end
 
 extrasounds.sound.sfx[0] = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really
 
