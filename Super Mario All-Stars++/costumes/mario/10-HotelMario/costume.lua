@@ -55,8 +55,8 @@ function costume.onDraw()
         if plr.powerup <= 1 then
             plr.powerup = 2
         end
-        if plr.powerup >= 5 then --Until we get all powerups implemented, this'll do for now
-            plr.powerup = 4
+        if plr.powerup >= 6 then --Until we get all powerups implemented, this'll do for now
+            plr.powerup = 5
         end
         if mariohp > 3 then
             mariohp = 3
