@@ -38,6 +38,8 @@ function costume.onPostNPCKill(npc, harmType)
 end
 
 local timeddelay = 0
+local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
+local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
 
 function costume.onDraw()
     if SaveData.toggleCostumeAbilities == true then
@@ -66,8 +68,6 @@ function costume.onDraw()
             player:mem(0x140, FIELD_WORD, 150)
         end
         if smashud.visible.customitembox == true then
-            local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
-            local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
             if mariohp <= 0 then
                 Graphics.drawImageWP(heartempty, 357,  16, -4.2)
                 Graphics.drawImageWP(heartempty, 388,  16, -4.2)
