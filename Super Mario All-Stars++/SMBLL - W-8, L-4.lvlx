@@ -3,7 +3,7 @@ TL:"Super Mario Bros. Lost Levels\: World 8-4";XTRA:"{\n    \"timer\"\: {\n     
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-196256;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
-SC:1;L:-180000;R:-178336;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
+SC:1;L:-180000;R:-178336;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:23;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
 SC:3;L:-140000;R:-135264;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros/Final Castle.ogg";BG:41;
 SC:4;L:-120000;R:-114208;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros/Last Battle.spc|0\;g=2.5";BG:41;
@@ -4908,10 +4908,8 @@ ID:767;X:-198448;Y:-200176;D:-1;
 ID:767;X:-198064;Y:-200304;D:-1;
 ID:767;X:-197808;Y:-200176;D:-1;
 ID:770;X:-179488;Y:-180256;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
-ID:920;X:-179488;Y:-180160;D:-1;
 ID:770;X:-179104;Y:-180192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-178720;Y:-180320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
-ID:920;X:-178528;Y:-180256;D:-1;
 ID:767;X:-179888;Y:-180176;D:-1;
 ID:767;X:-159824;Y:-160176;D:-1;
 ID:767;X:-159600;Y:-160176;D:-1;
@@ -4935,7 +4933,12 @@ ID:200;X:-115392;Y:-120232;D:-1;ED:"Boss End";
 ID:198;X:-99392;Y:-100096;D:-1;MG:"Why are you reading this you nosy player lol";FD:1;LR:"Raca";
 ID:1000;X:-99632;Y:-100192;D:-1;LR:"Star";XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:465;X:-99840;Y:-100096;D:-1;ED:"Cutscene 1";
+ID:235;X:-179488;Y:-180160;D:-1;
+ID:235;X:-178528;Y:-180256;D:-1;
 NPC_END
+PHYSICS
+ET:0;X:-179984;Y:-180432;W:1616;H:432;
+PHYSICS_END
 DOORS
 IX:-196800;IY:-200096;OX:-199936;OY:-200096;DT:3;ID:1;OD:1;
 IX:-196800;IY:-200128;OX:-199936;OY:-200128;DT:3;ID:1;OD:1;

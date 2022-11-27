@@ -364,9 +364,9 @@ function globalgenerals.onTick()
     
     
     --Achievements
-    if SaveData.goombaStomps >= 10 then
+    --[[if SaveData.goombaStomps >= 10 then
         Achievements.get(1):collect()
-    end
+    end]]
 end
 
 function globalgenerals.onPostNPCKill(npc, harmType)

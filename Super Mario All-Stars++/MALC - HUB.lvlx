@@ -12005,7 +12005,7 @@ ID:151;X:20144;Y:19888;D:-1;MG:"Welcome to the warp zone!<page>Left to right\:<p
 ID:151;X:20824;Y:19888;D:-1;MG:"Welcome to the warp zone!<page>Left to right\:<page>Downtown<page>Side Quest Levels 1-6<page>Side Quest Levels 7-10 and Mearian Ocean";FD:1;
 ID:602;X:-78752;Y:-80608;D:-1;XTRA:"{\n    \"power\"\: 20\n}\n";
 ID:602;X:1696;Y:-224;D:-1;XTRA:"{\n    \"power\"\: 20\n}\n";
-ID:151;X:40216;Y:39888;D:-1;MG:"Hi <characterName>. This is the character switch room!<page>This is useful for switching between other characters and costumes throughout the game.<page>If you want to switch characters on the map\,<page>Pause the game and use the Character Options menu to switch between characters.<page>If you want to switch variants\, go to the Changer Menu and use up and down.<page>Because of stabllity and really compilcated reasons\,<page>2 player mode is not supported unless you disable the X2 characters outside of this room.<page>Sorry about that!<page>If you want to go back to the boot menu\, pause and use the Save and Reset Game option.<page>You can also\ntype up the code -iwannabootbackhome- at any time. This won't disable saving.";FD:1;LR:"X2Stuff";
+ID:151;X:40216;Y:39888;D:-1;MG:"Hi <characterName>. This is the Character Changer Room!<page>To change characters\, hit the block at the middle of the room to bring in a big TV to change.<page>Please note\: You are on Normal Mode currently. To change during multiplayer\, please enable 1.3 Mode before entering this room.<page>Have fun!";FD:1;LR:"X2Stuff";
 ID:91;X:60672;Y:59936;D:-1;CN:147;GE:1;GT:1;GD:1;GM:20;LR:"Test Room Veggies";
 ID:91;X:60736;Y:59936;D:-1;CN:147;GE:1;GT:1;GD:1;GM:20;LR:"Test Room Veggies";
 ID:91;X:60800;Y:59936;D:-1;CN:147;GE:1;GT:1;GD:1;GM:20;LR:"Test Room Veggies";
@@ -12224,7 +12224,7 @@ ID:221;X:61160;Y:59552;D:-1;
 ID:221;X:61160;Y:59520;D:-1;
 ID:221;X:61160;Y:59488;D:-1;
 ID:221;X:61160;Y:59456;D:-1;
-ID:151;X:40216;Y:39888;D:-1;MG:"Hi <characterName>. This is the character switch room!<page>This is useful for switching between other characters throughout the game.<page>If you want to switch characters on the map\, pause the game and use the Character Options menu to switch between characters.<page>Because you disabled the X2 characters\, 2 player mode is partially supported. Enable 2 player mode in the boot menu!<page>If you want to go back to the boot menu\, Save\, Quit\, and reset the game.<page>You can also\ntype up the code -iwannabootbackhome- at any time. This won't disable saving.";FD:1;LR:"XStuff";
+ID:151;X:40216;Y:39888;D:-1;MG:"Hi <characterName>. This is the Character Changer Room!<page>To change characters\, hit any specified block depending on what character you want to change to.<page>Please note\: You are on 1.3 Mode currently. You can change during multiplayer\, but restrictions are applied to prevent breaking compatibility.<page>Have fun!";FD:1;LR:"XStuff";
 ID:32;X:61792;Y:59904;D:-1;
 ID:6;X:62720;Y:59552;D:-1;NM:1;
 ID:222;X:-98680;Y:-101696;D:-1;LR:"True Ending - Fail Safe Ladder";

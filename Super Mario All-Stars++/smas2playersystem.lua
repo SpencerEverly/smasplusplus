@@ -80,6 +80,9 @@ function smas2playersystem.onTick()
                 end
             end
         end
+        if Player.count() == 2 then
+            
+        end
     end
 end
 
@@ -87,7 +90,7 @@ end
 
 if SaveData.disableX2char then --These will be 1.3 Mode specific
     function smas2playersystem.teleport2PlayerModeController(button, playerIdx) --Using the Special button to teleport within each other, same goes for the other two below except for keyboards
-        if Player.count() >= 2 then
+        if Player.count() == 2 then
             if playerIdx == 1 then
                 if not Misc.isPaused() then
                     player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
@@ -104,7 +107,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
     end
 
     function smas2playersystem.teleport2PlayerMode1P() --1st Player teleport, uses the keyboard key instead
-        if Player.count() >= 2 then
+        if Player.count() == 2 then
             if not Misc.isPaused() then
                 player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
                 Sound.playSFX("player-tp-2player.ogg")
@@ -113,7 +116,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
     end
 
     function smas2playersystem.teleport2PlayerMode2P()--2nd Player teleport, uses the keyboard key instead
-        if Player.count() >= 2 then
+        if Player.count() == 2 then
             if not Misc.isPaused() then
                 player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
                 Sound.playSFX("player-tp-2player.ogg")
@@ -124,7 +127,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
 
 
     function smas2playersystem.onKeyboardPress(keyCode, repeated) --Now for the keyboard press detection code...
-        if Player.count() >= 2 then
+        if Player.count() == 2 then
             if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
                 smas2playersystem.teleport2PlayerMode1P()
             elseif keyCode == smastables.keyboardMap[SaveData.specialkey2ndplayer] and not repeated then
@@ -136,7 +139,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
 
 
     function smas2playersystem.onControllerButtonPress(button, playerIdx) --...along with the controller press detection code
-        if Player.count() >= 2 then
+        if Player.count() == 2 then
             smas2playersystem.teleport2PlayerModeController(button, playerIdx)
         end
     end
