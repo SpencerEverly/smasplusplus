@@ -150,9 +150,9 @@ function classicEvents.doEvents() --To prevent the plObject a nil value error, t
 end
 
 --Now that everything has been loaded, start loading the medium important stuff
-local globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
-local repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
-local rng = require("base/rng") --Load up rng for etc. things
+_G.globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
+_G.repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
+_G.rng = require("base/rng") --Load up rng for etc. things
 if SaveData.speedrunMode == true then
     speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
     inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
