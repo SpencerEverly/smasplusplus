@@ -82,10 +82,8 @@ end
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
-smashud.priority = -4.2
 smashud.visible.starcoins = false
 GameData.activateAbilityMessage = false
-GameData.forcedStateActive = false
 
 local eastercrash = false
 local eastercrashdone = false

@@ -89,8 +89,8 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
         
         
         --Yoshi egg to 1UP conversion
-        for _,p in ipairs(Player.get()) do
-            if p.mount == MOUNT_YOSHI and yoshinpcs[block.contentID] then
+        if playerornil ~= nil then
+            if playerornil.mount == MOUNT_YOSHI and smasblocksystem.yoshiNPCs[block.contentID] then
                 block.contentID = 1187
             end
         end
