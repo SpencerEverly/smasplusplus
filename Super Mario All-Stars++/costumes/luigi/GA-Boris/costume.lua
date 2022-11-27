@@ -4,8 +4,11 @@ local smashud = require("smashud")
 local rng = require("base/rng")
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
+local smastables = require("smastables")
 local smasfunctions
 pcall(function() smasfunctions = require("smasfunctions") end)
+local littleDialogue
+pcall(function() littleDialogue = require("littleDialogue") end)
 
 local costume = {}
 
@@ -83,6 +86,70 @@ end
 
 costume.grenadeID = 291
 costume.goanimateExplosionID = 998
+
+function costume.CheckStarAvailability()
+    GameData.activateAbilityMessage = false
+end
+
+function costume.ExitFeature()
+    GameData.activateAbilityMessage = false
+end
+
+local cooldown = 0
+local answersRegistered = false
+
+function costume.checkSpecialAbilityMessage()
+    if not Misc.isPaused() then
+        if SaveData.toggleCostumeAbilities then
+            if (not GameData.activateAbilityMessage or GameData.activateAbilityMessage == nil) then
+                if not table.icontains(smastables._friendlyPlaces,Level.filename()) then
+                    player:mem(0x172, FIELD_BOOL, false)
+                    cooldown = 5
+                    GameData.activateAbilityMessage = true
+                    if littleDialogue then
+                        if not answersRegistered then
+                            littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "Yes",chosenFunction = function() Routine.run(costume.CheckStarAvailability) end})
+                            littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "No",chosenFunction = function() Routine.run(costume.ExitFeature) end})
+                            answersRegistered = true
+                        end
+                        littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Would you like to use The Wall of Weapons? You can only use this every 5 stars you collect.<question WallOfWeaponsDialog>", pauses = true, updatesInPause = true})
+                    else
+                        GameData.activateAbilityMessage = false
+                    end
+                    if cooldown <= 0 then
+                        player:mem(0x172, FIELD_BOOL, true)
+                    end
+                else
+                    player:mem(0x172, FIELD_BOOL, false)
+                    cooldown = 10
+                    if cooldown <= 0 then
+                        player:mem(0x172, FIELD_BOOL, true)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function costume.onKeyboardPress(keyCode, repeated)
+    if SaveData.toggleCostumeAbilities then
+        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+            costume.checkSpecialAbilityMessage()
+        end
+    end
+end
+
+function costume.onControllerButtonPress(button, playerIdx)
+    if not SaveData.disableX2char then
+        if SaveData.toggleCostumeAbilities then
+            if playerIdx == 1 then
+                if button == SaveData.specialbutton1stplayer then
+                    costume.checkSpecialAbilityMessage()
+                end
+            end
+        end
+    end
+end
 
 function costume.shootGun1()
     --plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case

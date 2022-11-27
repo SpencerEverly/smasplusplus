@@ -249,45 +249,6 @@ function globalgenerals.onStart()
     end
 end
 
-function CheckStarAvailability()
-    GameData.activateAbilityMessage = false
-end
-
-function ExitFeature()
-    GameData.activateAbilityMessage = false
-end
-
-littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "Yes",chosenFunction = function() Routine.run(CheckStarAvailability) end})
-littleDialogue.registerAnswer("WallOfWeaponsDialog",{text = "No",chosenFunction = function() Routine.run(ExitFeature) end})
-
-local cooldown = 0
-
-function globalgenerals.checkSpecialAbilityMessage()
-    if SaveData.currentCostume == "GA-BORIS" then
-        if not Misc.isPaused() then
-            if SaveData.toggleCostumeAbilities == true then
-                if player.keys.altRun == KEYS_PRESSED and GameData.activateAbilityMessage == false or GameData.activateAbilityMessage == nil then
-                    if table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
-                        player:mem(0x172, FIELD_BOOL, false)
-                        cooldown = 5
-                        GameData.activateAbilityMessage = true
-                        littleDialogue.create({text = "<boxStyle smbx13><setPos 400 32 0.5 -1.4>Would you like to use The Wall of Weapons? You can only use this every 5 stars you collect.<question WallOfWeaponsDialog>", pauses = true, updatesInPause = true})
-                        if cooldown <= 0 then
-                            player:mem(0x172, FIELD_BOOL, true)
-                        end
-                    else
-                        player:mem(0x172, FIELD_BOOL, false)
-                        cooldown = 10
-                        if cooldown <= 0 then
-                            player:mem(0x172, FIELD_BOOL, true)
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
 function globalgenerals.onTickEnd()
     -- Fix blinking when starting the level/changing sections (Thanks MDA!)
     mem(0x00B250D4,FIELD_BOOL,false)
@@ -507,26 +468,6 @@ function globalgenerals.onDraw()
     end
 end
 
-function globalgenerals.onKeyboardPress(keyCode, repeated)
-    if SaveData.toggleCostumeAbilities == true then
-        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
-            globalgenerals.checkSpecialAbilityMessage()
-        end
-    end
-end
-
-function globalgenerals.onControllerButtonPress(button, playerIdx)
-    if not SaveData.disableX2char then
-        if SaveData.toggleCostumeAbilities then
-            if playerIdx == 1 then
-                if button == SaveData.specialbutton1stplayer then
-                    globalgenerals.checkSpecialAbilityMessage()
-                end
-            end
-        end
-    end
-end
-
 function globalgenerals.onExitLevel(winType)
     if not Misc.inMarioChallenge() then
         if winType >= 1 and winType ~= LEVEL_END_STATE_GAMEEND then
@@ -550,8 +491,8 @@ end
 function globalgenerals.onExit()
     if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then
         if (killed == true or killed2 == true) then
-            Level.load(Level.filename())
             mem(0x00B2C5AC,FIELD_FLOAT,1)
+            Level.load(Level.filename())
         end
     end
     if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
