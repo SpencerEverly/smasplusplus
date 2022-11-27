@@ -337,10 +337,10 @@ extrasounds.soundNamesInOrder = {
     "fireball3", --168
 }
 
-for i = 1,#extrasounds.soundNamesInOrder do
+--[[for i = 0,#extrasounds.soundNamesInOrder do
     extrasounds.sound[i] = {}
     extrasounds.sound[i].sfx = {}
-end
+end]]
 
 extrasounds.sound.sfx[0] = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really
 
@@ -536,6 +536,11 @@ end
 local function isTailSwiping(p)
     return (p.keys.run == KEYS_PRESSED
         and p:mem(0x172, FIELD_BOOL)
+        and Level.endState() == 0
+        and (
+            not GameData.winStateActive
+            or GameData.winStateActive == nil
+        )
         and p.forcedState == FORCEDSTATE_NONE
         and not p.climbing
         and p.mount == 0
@@ -719,7 +724,7 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**SLIDING**
             if p:isOnGround() then
-                if (p.speedX < 0 and p.keys.right) or (p.speedX > 0 and p.keys.left) then --Is the player sliding?
+                if (p.speedX < 0 and p.rightKeyPressing) or (p.speedX > 0 and p.leftKeyPressing) then --Is the player sliding?
                     if extrasounds.enableSlidingSFX then
                         extrasounds.playSFX(10, extrasounds.volume, 1, extrasounds.playerSlidingDelay) --Sliding SFX
                     end

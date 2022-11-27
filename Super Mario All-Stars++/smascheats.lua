@@ -812,7 +812,7 @@ function smascheats.onTick()
     if Cheats.get("moneytree").active == true then
         Sound.playSFX(14)
         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
-        SaveData.totalcoins = SaveData.totalcoins + 1
+        SaveData.totalCoins = SaveData.totalCoins + 1
     end
 end
 

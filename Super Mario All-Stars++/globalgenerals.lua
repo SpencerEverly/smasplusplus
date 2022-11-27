@@ -107,7 +107,7 @@ local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds
 
 --customCamera.transitionSpeed = 0.25
 
-SaveData._anothercurrency = {SaveData.totalcoins}
+SaveData._anothercurrency = {SaveData.totalCoins}
 
 if table.icontains(smastables._noTransitionLevels,Level.filename()) or GameData.rushModeActive == true then
     warpTransition.musicFadeOut = false
@@ -533,7 +533,7 @@ function globalgenerals.onTick()
         mem(0x00B2C860, FIELD_FLOAT, 6.2)
     end
     if table.icontains(smastables.__wsmbaLevels,Level.filename()) then
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             littleDialogue.defaultStyleName = "smbx13"
         end
         warpTransition.musicFadeOut = false
@@ -679,7 +679,7 @@ function globalgenerals.onPostNPCKill(npc, harmType)
         end
         local coins = table.map{10,33,88,103,138,251,252,253,258,528}
         if coins[npc.id] and Colliders.collide(p, npc) then
-            SaveData.totalcoins = SaveData.totalcoins + 1
+            SaveData.totalCoins = SaveData.totalCoins + 1
         end
         local mushrooms = table.map{9,184,185,249}
         if mushrooms[npc.id] and Colliders.collide(p, npc) then
@@ -733,15 +733,23 @@ function globalgenerals.onDraw()
     if not smasbooleans.targetPlayers and not smasbooleans.overrideTargets then
         customCamera.targets = {}
     end
-    if player.character <= 5 then
-        if SaveData.currentCostume == "N/A" then
-            local costumes = playerManager.getCostumes(player.character)
-            local currentCostume = player:getCostume()
-            local costumeIdx = table.ifind(costumes,currentCostume)
-            player:setCostume(costumes[1])
+    if not SaveData.disableX2char then
+        if player.character <= 5 then
+            if SaveData.currentCostume == "N/A" then
+                local costumes = playerManager.getCostumes(player.character)
+                local currentCostume = player:getCostume()
+                local costumeIdx = table.ifind(costumes,currentCostume)
+                player:setCostume(costumes[1])
+            end
+        end
+    elseif SaveData.disableX2char then
+        if player.character <= 5 then
+            if SaveData.currentCostume ~= "N/A" then
+                player:setCostume(nil)
+            end
         end
     end
-    if SaveData._basegame.hud.score > 9999900 then
+    if SaveData._basegame.hud.score >= 9999900 then
         SaveData._basegame.hud.score = 9990000
     end
     if SaveData.resolution == "fullscreen" then
@@ -888,11 +896,8 @@ function globalgenerals.onDraw()
             Graphics.drawImageWP(threedsborder, 0, 0, 8)
         end
     end
-    if Misc.inEditor() then
-        for k,p in ipairs(Player.get()) do
-            p.keys.pause = false
-        end
-    end
+    
+    --Framerate timer stuff
     frametimer = frametimer + 1
     if actualframecount == nil then
         actualframecount = tostring(0)
@@ -906,6 +911,7 @@ function globalgenerals.onDraw()
     if SaveData.framerateEnabled then
         textplus.print{x = 8, y = 8, text = actualframecount, font = numberfont, priority = 0, xscale = 1, yscale = 1}
     end
+    
     if Player.count() >= 2 then
         local playerboundaryx = Player(2).x - player.x
         local playerboundaryy = Player(2).y - player.y
@@ -979,7 +985,7 @@ end
 
 function globalgenerals.onExit()
     if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then
-        if killed == true or killed2 == true then
+        if (killed == true or killed2 == true) then
             Level.load(Level.filename())
             mem(0x00B2C5AC,FIELD_FLOAT,1)
         end
@@ -987,7 +993,7 @@ function globalgenerals.onExit()
     if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
         Level.load("SMAS - Credits.lvlx")
     end
-    if table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
+    if not table.icontains(smastables._friendlyPlaces,Level.filename()) then
         SaveData.lastLevelPlayed = Level.filename()
     end
     if not Misc.inMarioChallenge() then

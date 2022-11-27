@@ -537,7 +537,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 326, 554, 3)
         Graphics.drawImageWP(coinicon, 330, 558, 2)
         Graphics.drawImageWP(times, 348, 560, 2)
-        textplus.print{x=367, y=558, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+        textplus.print{x=367, y=558, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
         textplus.print{x=64, y=70, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
         
         
@@ -590,7 +590,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 326, 496, 3)
         Graphics.drawImageWP(coinicon, 330, 500, 2)
         Graphics.drawImageWP(times, 348, 502, 2)
-        textplus.print{x=367, y=500, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+        textplus.print{x=367, y=500, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
         textplus.print{x=150, y=124, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
         if world.levelTitle then
             textplus.print{x=150, y=159, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.8, yscale=0.8} --Level title
@@ -631,7 +631,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 326, 436, 3)
         Graphics.drawImageWP(coinicon, 330, 440, 2)
         Graphics.drawImageWP(times, 348, 442, 2)
-        textplus.print{x=367, y=440, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+        textplus.print{x=367, y=440, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
         textplus.print{x=212, y=164, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1, yscale=1}
         if world.levelTitle then
             textplus.print{x=212, y=189, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.6, yscale=0.6} --Level title
@@ -674,7 +674,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 411, 496, 3)
         Graphics.drawImageWP(coinicon, 415, 500, 2)
         Graphics.drawImageWP(times, 433, 502, 2)
-        textplus.print{x=452, y=500, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+        textplus.print{x=452, y=500, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
         
         
         textplus.print{x=185, y=140, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1.5, yscale=1.5}
@@ -727,7 +727,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 364, 396, 0, 0, 6, 6, 3)
         Graphics.drawImageWP(coinicon, 368, 400, 0, 0, 6, 6, 2)
         Graphics.drawImageWP(times, 379, 401, 0, 0, 6, 6, 2)
-        textplus.print{x=389, y=403, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
+        textplus.print{x=389, y=403, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
         
         
         
@@ -781,7 +781,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 388, 436, 3)
         Graphics.drawImageWP(coinicon, 392, 440, 2)
         Graphics.drawImageWP(times, 410, 442, 2)
-        textplus.print{x=430, y=445, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+        textplus.print{x=430, y=445, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
         
         
         
@@ -836,7 +836,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 426, 456, 3)
         Graphics.drawImageWP(coinicon, 430, 460, 2)
         Graphics.drawImageWP(times, 448, 462, 2)
-        textplus.print{x=467, y=460, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
+        textplus.print{x=467, y=460, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
         textplus.print{x=295, y=222, text = "Selected level/warp:", priority=2, color=Color.yellow, font=font2, xscale=1, yscale=1}
         if world.levelTitle then
             textplus.print{x=295, y=245, text = world.levelTitle, priority=2, color=Color.yellow, font=font1, xscale=0.35, yscale=0.35} --Level title
@@ -882,7 +882,7 @@ function onDraw()
         Graphics.drawImageWP(coinicon, 388, 516, 3)
         Graphics.drawImageWP(coinicon, 392, 510, 2)
         Graphics.drawImageWP(times, 410, 512, 2)
-        textplus.print{x=430, y=515, text = ""..SaveData.totalcoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
+        textplus.print{x=430, y=515, text = ""..SaveData.totalCoins.."", priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
         
         
         

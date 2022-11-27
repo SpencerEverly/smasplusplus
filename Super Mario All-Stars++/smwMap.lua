@@ -34,8 +34,8 @@ end
 if SaveData.completeLevels == nil then --This will add a table to list completed levels
     SaveData.completeLevels = {}
 end
-if SaveData.totalcoins == nil then
-    SaveData.totalcoins = 0
+if SaveData.totalCoins == nil then
+    SaveData.totalCoins = 0
 end
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
     SaveData.deathCount = 0
@@ -3769,7 +3769,7 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalcoins
+                        return SaveData.totalCoins
                     end),
                 },
                 -- Stars
@@ -3803,7 +3803,7 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalcoins
+                        return SaveData.totalCoins
                     end),
                 },
                 -- Stars
@@ -3895,7 +3895,7 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalcoins
+                        return SaveData.totalCoins
                     end),
                 },
                 -- Stars
@@ -3929,7 +3929,7 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalcoins
+                        return SaveData.totalCoins
                     end),
                 },
                 -- Stars

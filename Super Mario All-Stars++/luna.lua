@@ -201,9 +201,15 @@ if SaveData.clockTheme == nil then --Default clock theme is "normal"
 end
 
 --**Hud stuff**
-if SaveData.totalcoins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
-    SaveData.totalcoins = 0
+if SaveData.totalCoins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
+    SaveData.totalCoins = 0
 end
+
+if SaveData.totalcoins then --If using the old SaveData function, use the new one and nil the original out
+    SaveData.totalCoins = SaveData.totalcoins
+    SaveData.totalcoins = nil
+end
+
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
     SaveData.deathCount = 0
 end
@@ -220,17 +226,6 @@ end
 --**1.3 Mode default setting**
 if SaveData.disableX2char == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
     SaveData.disableX2char = false
-end
-
---**Date/time stuffs**
-if SaveData.dateplayedmonth == nil then
-    SaveData.dateplayedmonth = os.date("%m")
-end
-if SaveData.dateplayedday == nil then
-    SaveData.dateplayedday = os.date("%d")
-end
-if SaveData.dateplayedyear == nil then
-    SaveData.dateplayedyear = os.date("%Y")
 end
 
 --**This is for the upgrade save thing**
@@ -289,11 +284,6 @@ if SaveData.playerName == nil then --This is for adding the player name to the l
 else
     Progress.savename = SaveData.playerName --Or else just use the SaveData variable if it exists
 end
-
---Get some day/month/year stuff for the weather changing...
-SaveData.dateplayedday = os.date("%d")
-SaveData.dateplayedmonth = os.date("%m")
-SaveData.dateplayedyear = os.date("%Y")
 
 --Make sure the warp door system doesn't get active until onStart saves the original count first...
 local warpstaractive = false
@@ -367,8 +357,6 @@ function onStart() --Now do onStart...
             loadactivate = false
         end
     end
-    tomorrowget()
-    yesterdayget()
     if SaveData.disableX2char == 0 then --Migrate old saves from pre-March 2022 if there are any.
         SaveData.disableX2char = false
     end
@@ -388,21 +376,12 @@ function onStart() --Now do onStart...
     Audio.MusicVolume(nil) --Reset the music volume on onStart, just in case
 end
 
-function tomorrowget()
-    tomorrownumber = os.date("*t").day + 1
-    SaveData.dateplayedtomorrow = tomorrownumber
-end
-
-function yesterdayget()
-    yesterdaynumber = os.date("*t").day - 1
-    SaveData.dateplayedyesterday = yesterdaynumber
-end
-
 local cameratimer = 10
 local cameratimer2 = 10
 if GameData.__gifIsRecording == nil then
     GameData.__gifIsRecording = false
 end
+local gifRecordTimer = 0
 
 local inputhudbg = Graphics.loadImage(Misc.resolveFile("inputhud/inputhud.png"))
 local controlkey = Graphics.loadImage(Misc.resolveFile("inputhud/control.png"))
@@ -428,24 +407,44 @@ function onDraw()
             noItemSound = false
         end
     end
-    if noSoundGif then
-        Audio.sounds[12].muted = true
-        Audio.sounds[24].muted = true
-        cameratimer = cameratimer - 1
-        if not GameData.__gifIsRecording then
-            GameData.__gifIsRecording = true
-        else
-            GameData.__gifIsRecording = false
+
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        if noSoundGif then
+            Audio.sounds[12].muted = true
+            Audio.sounds[24].muted = true
+            cameratimer = cameratimer - 1
+            if not GameData.__gifIsRecording then
+                GameData.__gifIsRecording = true
+            else
+                GameData.__gifIsRecording = false
+            end
+            if cameratimer <= 0 then
+                cameratimer = 10
+                Audio.sounds[12].muted = false
+                Audio.sounds[24].muted = false
+                noItemSoundGif = false
+            end
         end
-        if cameratimer <= 0 then
-            cameratimer = 10
-            Audio.sounds[12].muted = false
-            Audio.sounds[24].muted = false
-            noItemSoundGif = false
+        if GameData.__gifIsRecording then
+            
         end
-    end
-    if GameData.__gifIsRecording then
-        
+    else
+        if Misc.isGIFRecording() then
+            gifRecordTimer = gifRecordTimer + 1
+            if gifRecordTimer <= 5 then
+                Audio.sounds[12].muted = true
+                Audio.sounds[24].muted = true
+            end
+            if gifRecordTimer == 1 then
+                
+            end
+            if gifRecordTimer == 6 then
+                Audio.sounds[12].muted = false
+                Audio.sounds[24].muted = false
+            end
+        elseif not Misc.isGIFRecording() then
+            gifRecordTimer = 0
+        end
     end
     if SaveData.speedrunMode then
         Graphics.drawImageWP(inputhudbg,4,566,-1.9) -- Released Keys
@@ -487,10 +486,18 @@ function onKeyboardPressDirect(k, repeated) --This will replace the GIF recordin
         Audio.sounds[12].muted = true
         Audio.sounds[24].muted = true
         noSoundGif = true
-        if not GameData.__gifIsRecording then
-            Sound.playSFX("gif-start.ogg")
-        elseif GameData.__gifIsRecording then
-            Sound.playSFX("gif-end.ogg")
+        if SMBX_VERSION ~= VER_SEE_MOD then
+            if not GameData.__gifIsRecording then
+                Sound.playSFX("gif-start.ogg")
+            elseif GameData.__gifIsRecording then
+                Sound.playSFX("gif-end.ogg")
+            end
+        else
+            if Misc.isGIFRecording() then
+                Sound.playSFX("gif-end.ogg")
+            elseif not Misc.isGIFRecording() then
+                Sound.playSFX("gif-start.ogg")
+            end
         end
     end
     if k == VK_F12 then
