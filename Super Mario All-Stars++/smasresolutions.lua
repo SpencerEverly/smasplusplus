@@ -9,6 +9,12 @@ local steamdeckbars = Graphics.loadImageResolved("graphics/resolutions/steamdeck
 local nesbars = Graphics.loadImageResolved("graphics/resolutions/nes.png")
 local threedsbars = Graphics.loadImageResolved("graphics/resolutions/3ds.png")
 
+local nesborder = Graphics.loadImageResolved("graphics/resolutionborders/nes.png")
+local gbborder = Graphics.loadImageResolved("graphics/resolutionborders/gb.png")
+local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png")
+local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
+local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
+
 function smasresolutions.onInitAPI()
     registerEvent(smasresolutions,"onDraw")
 end

@@ -1,4 +1,4 @@
---smascharacterchanger.lua
+--smascharacterchanger.lua (v1.0)
 --By Spencer Everly
 
 local smascharacterchanger = {}
@@ -16,11 +16,17 @@ end
 if SaveData.currentCharacter == nil then
     SaveData.currentCharacter = player.character
 end
+if SaveData.currentCharacter2 == nil then
+    if Player.count() >= 2 then
+        SaveData.currentCharacter2 = player2.character
+    end
+end
 
 smascharacterchanger.tvImage = Img.load("graphics/characterchangermenu/tv.png") --The image for the TV.
 smascharacterchanger.scrollSFX = "_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg"
 smascharacterchanger.stopSFX = "_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg"
 smascharacterchanger.turnOnSFX = "_OST/_Sound Effects/characterchangermenu/turn-on-tv.ogg"
+smascharacterchanger.moveSFX = 26 --Sound effects used for the menu
 smascharacterchanger.menuActive = false --True if the menu is active.
 smascharacterchanger.animationActive = false --True if the animation is active.
 smascharacterchanger.animationTimer = 0 --Timer for the animation, both for the start and end sequences.
@@ -105,6 +111,10 @@ function smascharacterchanger.startChanger() --This is the command that starts t
     smascharacterchanger.animationActive = true
 end
 
+function smascharacterchanger.stopChanger() --This is the command that stops the menu. Use this to disable the menu.
+    smascharacterchanger.menuActive = false
+end
+
 function smascharacterchanger.startupChanger() --The animation that starts the menu up.
     Misc.pause()
     Sound.muteMusic(-1)
@@ -160,24 +170,24 @@ function smascharacterchanger.onInputUpdate()
             smascharacterchanger.menuActive = false
         end
         if player.keys.up == KEYS_PRESSED then
-            Sound.playSFX(26)
+            Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown + 1
             if smascharacterchanger.selectionNumberUpDown > #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber] then
                 smascharacterchanger.selectionNumberUpDown = 1
             end
         elseif player.keys.down == KEYS_PRESSED then
-            Sound.playSFX(26)
+            Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown - 1
             if smascharacterchanger.selectionNumberUpDown < 1 then
                 smascharacterchanger.selectionNumberUpDown = #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber]
             end
         end
         if player.keys.left == KEYS_PRESSED then
-            Sound.playSFX(26)
+            Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
             smascharacterchanger.selectionNumberUpDown = 1
         elseif player.keys.right == KEYS_PRESSED then
-            Sound.playSFX(26)
+            Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
             smascharacterchanger.selectionNumberUpDown = 1
         end
@@ -207,6 +217,9 @@ end
 
 function smascharacterchanger.onDraw()
     SaveData.currentCharacter = player.character
+    if Player.count() == 2 then
+        SaveData.currentCharacter2 = player2.character
+    end
     
     if smascharacterchanger.menuActive then
         if smascharacterchanger.animationActive then

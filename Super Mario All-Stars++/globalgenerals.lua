@@ -91,12 +91,6 @@ local eastercrashmsg = false
 local eastercrashprevload = false
 local blockidx5000check = false
 
-local nesborder = Graphics.loadImageResolved("graphics/resolutionborders/nes.png")
-local gbborder = Graphics.loadImageResolved("graphics/resolutionborders/gb.png")
-local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png")
-local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
-local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
-
 SaveData._anothercurrency = {SaveData.totalCoins}
 
 if (table.icontains(smastables._noTransitionLevels,Level.filename())) or (GameData.rushModeActive) then

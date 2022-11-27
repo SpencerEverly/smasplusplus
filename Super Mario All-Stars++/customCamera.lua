@@ -74,8 +74,9 @@ customCamera.blockerID = 0
 customCamera.lastSection = nil
 customCamera.lastWarpCooldown = 0
 
-customCamera.maxPriority = 0
-customCamera.maxHudPriority = -4.9999
+customCamera.minPriority = -100
+customCamera.maxPriority = 1
+customCamera.maxHudPriority = -4.999
 
 customCamera.debug = false
 
@@ -637,7 +638,7 @@ do
 
 
     function customCamera.drawScene(args)
-        args.minPriority = args.minPriority or -100
+        args.minPriority = args.minPriority or customCamera.minPriority
         args.maxPriority = args.maxPriority or customCamera.maxPriority
 
         args.rotation = args.rotation or 0
@@ -1463,7 +1464,9 @@ function customCamera.onCameraDraw()
         customCamera.zoomedBuffer:clear(-100)
         
         customCamera.drawScene{
-            target = customCamera.zoomedBuffer,useScreen = true,drawBackgroundToScreen = true,
+            minPriority = customCamera.minPriority,maxPriority = customCamera.maxPriority,
+            target = customCamera.zoomedBuffer,
+            useScreen = true,drawBackgroundToScreen = true,
             scale = customCamera.currentZoom,rotation = customCamera.currentRotation,
             x = fullX,y = fullY,width = fullWidth,zoomHeight = fullHeight,
         }
@@ -1483,13 +1486,13 @@ function customCamera.onCameraDraw()
             sourceX = borderHor*0.5
             sourceY = borderVer*0.5
         end
-
+        
         customCamera.zoomedBuffer:captureAt(customCamera.maxPriority + .001)
-
         Graphics.drawScreen{color = Color.black,priority = customCamera.maxPriority + .001}
-
+        
         Graphics.drawBox{
-            texture = customCamera.zoomedBuffer,priority = customCamera.maxPriority + .001,
+            texture = customCamera.zoomedBuffer,
+            priority = customCamera.maxPriority + .001,
             x = borderHor*0.5 + customCamera.screenOffsetX,
             y = borderVer*0.5 + customCamera.screenOffsetY,
             sourceX = sourceX,
