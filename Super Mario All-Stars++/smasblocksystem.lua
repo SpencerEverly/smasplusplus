@@ -1,7 +1,6 @@
 --smasblocksystem.lua v1.0
 --By Spencer Everly
---Makes the coin hit system more accurate to Mario games, and also adds the not-known-as-much invisible 1UP block system from SMB1
---Note that this only works with 1 block each. In the future hopefully this'll support multiple blocks, but for now this'll have to do.
+--Makes the coin hit system more accurate to Mario games, adds the not-known-as-much invisible 1UP block system from SMB1, and some other stuff
 
 local smasblocksystem = {}
 
@@ -27,6 +26,7 @@ smasblocksystem.invisibleCoinsCollected = 0 --This only increments when coins ar
 smasblocksystem.debug = false --Activates debug messages shown on the screen
 smasblocksystem.frameRuleCounter = 20 --Adds a frame rule system, similar to SMB1's system
 smasblocksystem.blockListWithCoins = {} --Table for a list of blocks set with more than 1 coin
+smasblocksystem.yoshiNPCs = table.map{1095,1100,1098,1099,1149,1150,1228,1148,1325,1326,1327,1328,1329,1330,1331,1332} --Yoshi NPCs to use, for activating a 1UP instead of getting another Yoshi egg.
 
 if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
@@ -73,8 +73,10 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
     
     
     
-    --Block coin hit detection
     if not SaveData.disableX2char then
+        
+        
+        --Block coin hit detection
         if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateBlockCountdown then
             activateBlockCountdown = true
             table.insert(smasblocksystem.blockListWithCoins, block)
@@ -84,6 +86,16 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
             blockCountdown = 0
             subtractBlockContentID = false
         end
+        
+        
+        --Yoshi egg to 1UP conversion
+        for _,p in ipairs(Player.get()) do
+            if p.mount == MOUNT_YOSHI and yoshinpcs[block.contentID] then
+                block.contentID = 1187
+            end
+        end
+        
+        
     end
 end
 

@@ -448,4 +448,13 @@ function Playur.runInInactiveSections(func) --Runs anything in player inactive s
     end
 end
 
+function Playur.failsafeStartupPlayerCheck() --Checks to see if Player.count() isn't set to 0, and auto-enables 1st player mode on Normal Mode
+    if Player.count() <= 0 then
+        Playur.activate1stPlayer()
+    end
+    if not SaveData.disableX2char then
+        Playur.activate1stPlayer()
+    end
+end
+
 return Playur

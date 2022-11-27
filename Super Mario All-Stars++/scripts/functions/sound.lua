@@ -22,6 +22,8 @@ function Sound.onInitAPI()
     registerEvent(Sound,"onDraw")
 end
 
+local started = false
+
 Sound.resolvePaths = {
     Misc.levelPath(),
     Misc.episodePath(),
@@ -96,10 +98,14 @@ end
 
 function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being worn.
     local costumeSoundDir
-    if SaveData.currentCostume == "N/A" then
-        costumeSoundDir = Misc.resolveSoundFile(name)
+    if not SaveData.disableX2char then
+        if SaveData.currentCostume == "N/A" then
+            costumeSoundDir = Misc.resolveSoundFile(name)
+        else
+            costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
+        end
     else
-        costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
+        costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
     end
     if costumeSoundDir ~= nil then
         return SFX.open(costumeSoundDir)
@@ -277,6 +283,20 @@ function Sound.enablePSwitchMusic(bool)
     end
 end
 
+function Sound.startupRefreshSystem()
+    if started then
+        error("This function can only be started once!")
+        return
+    elseif not started then
+        for i = 0,20 do
+            GameData.levelMusic[i] = Section(i).music
+        end
+        for i = 0,20 do
+            GameData.levelMusicTemporary[i] = Section(i).music
+        end
+        started = true
+    end
+end
 
 
 

@@ -15,6 +15,10 @@ function smasextraactions.onInputUpdate()
                         p.x = p.x - 1.5
                     elseif p.keys.right then
                         p.x = p.x + 1.5
+                    elseif p.keys.up then
+                        p.y = p.y - 1.5
+                    elseif p.keys.down then
+                        p.y = p.y + 1.5
                     end
                 end
             end

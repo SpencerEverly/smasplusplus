@@ -100,6 +100,11 @@ local function textPrintCentered(t, x, y, color) --Taken from the input config m
     textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = -1.7, font = smbx13font}
 end
 
+function smascharacterchanger.startChanger() --This is the command that starts the menu up. Use this to enable the menu.
+    smascharacterchanger.menuActive = true
+    smascharacterchanger.animationActive = true
+end
+
 function smascharacterchanger.startupChanger() --The animation that starts the menu up.
     Misc.pause()
     Sound.muteMusic(-1)
