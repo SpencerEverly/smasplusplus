@@ -46,6 +46,7 @@ function smasblocksystem.onInitAPI()
 end
 
 function smasblocksystem.onStart()
+    --Hidden 1UP Block spawner
     if table.icontains(smastables.__smb1Dash1Levels,Level.filename()) then
         if not SaveData.SMB1Invisible1UPBlockMet then --If already collected the block, set the layer with the invisible block to hide it.
             local lifeBlock = Layer.get("Hidden 1UP Block")
@@ -53,6 +54,15 @@ function smasblocksystem.onStart()
         else --If true, then show it
             local lifeBlock = Layer.get("Hidden 1UP Block")
             lifeBlock:show(true)
+        end
+    end
+    
+    --16 coin block to 10 coin block conversion when on 1.3 Mode
+    if SaveData.disableX2char then
+        for k,v in ipairs(Block.get()) do
+            if v.contentID == 16 then --Set the coin count from each block to 10 if on 1.3 Mode on the start of the level
+                v.contentID = 10
+            end
         end
     end
 end

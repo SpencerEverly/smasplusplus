@@ -193,7 +193,6 @@ function globalgenerals.onEvent(eventName)
 end
 
 function globalgenerals.onStart()
-    Sound.loadCostumeSounds()
     Sound.startupRefreshSystem()
     Playur.failsafeStartupPlayerCheck()
     if Misc.inEditor() then
@@ -463,6 +462,9 @@ local frametimer = 0
 local actualframecount
 
 function globalgenerals.onDraw()
+    if lunatime.tick() == 1 then
+        Sound.loadCostumeSounds()
+    end
     if not SaveData.disableX2char then
         if player.character <= 5 then
             if SaveData.currentCostume == "N/A" then
