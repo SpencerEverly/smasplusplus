@@ -294,6 +294,9 @@ function globalgenerals.onTickEnd()
 end
 
 function globalgenerals.onTick()
+    if lunatime.tick() == 1 then
+        Sound.loadCostumeSounds()
+    end
     if smasbooleans.compatibilityMode13Mode then
         mem(0x00B2C860, FIELD_FLOAT, 7.0999999046326)
     else
@@ -462,9 +465,6 @@ local frametimer = 0
 local actualframecount
 
 function globalgenerals.onDraw()
-    if lunatime.tick() == 1 then
-        Sound.loadCostumeSounds()
-    end
     if not SaveData.disableX2char then
         if player.character <= 5 then
             if SaveData.currentCostume == "N/A" then
