@@ -63,6 +63,28 @@ function smas2playersystem.onDraw()
     end
 end
 
+function smas2playersystem.onTick()
+    for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
+        if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then --If 0, do these things...
+            if(not killed and p:mem(0x13E,FIELD_BOOL)) then --Checks to see if the player actually died...
+                killed = true --If so, this is true.
+                mem(0x00B2C5AC,FIELD_FLOAT, 1) --Increase the life to 1 to prevent being kicked to the broken SMBX launcher after dying
+            end
+            if Player.count() >= 2 then --Player(2) compability! This one is a bit of a mess, but I tried
+                if(not killed2 and p.deathTimer >= 1 and p:mem(0x13C, FIELD_BOOL)) then --Because 0X13E doesn't check in multiplayer, use the death timer instead.
+                    killed2 = true --This one has a different variable set for player2
+                    mem(0x00B2C5AC,FIELD_FLOAT, 1) --Also same as above
+                    if p.deathTimer >= 199 then --If player2's death timer is almost 200, do a failsafe and load the level again, when setting the legacy lives to 1
+                        Level.load(Level.filename())
+                    end
+                end
+            end
+        end
+    end
+end
+
+
+
 if SaveData.disableX2char then --These will be 1.3 Mode specific
     function smas2playersystem.teleport2PlayerModeController(button, playerIdx) --Using the Special button to teleport within each other, same goes for the other two below except for keyboards
         if Player.count() >= 2 then
@@ -98,28 +120,6 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
             end
         end
     end
-    
-    
-    
-    function smas2playersystem.onTick()
-        for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
-            if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then --If 0, do these things...
-                if(not killed and p:mem(0x13E,FIELD_BOOL)) then --Checks to see if the player actually died...
-                    killed = true --If so, this is true.
-                    mem(0x00B2C5AC,FIELD_FLOAT, 1) --Increase the life to 1 to prevent being kicked to the broken SMBX launcher after dying
-                end
-                if Player.count() >= 2 then --Player(2) compability! This one is a bit of a mess, but I tried
-                    if(not killed2 and p.deathTimer >= 1 and p:mem(0x13C, FIELD_BOOL)) then --Because 0X13E doesn't check in multiplayer, use the death timer instead.
-                        killed2 = true --This one has a different variable set for player2
-                        mem(0x00B2C5AC,FIELD_FLOAT, 1) --Also same as above
-                        if p.deathTimer >= 199 then --If player2's death timer is almost 200, do a failsafe and load the level again, when setting the legacy lives to 1
-                            Level.load(Level.filename())
-                        end
-                    end
-                end
-            end
-        end
-    end
 
 
 
@@ -141,5 +141,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
         end
     end
 end
+
+
 
 return smas2playersystem
