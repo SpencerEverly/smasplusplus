@@ -3,6 +3,12 @@ local smasresolutions = {}
 local customCamera = require("customCamera")
 customCamera.transitionSpeed = 5
 
+local widebars = Graphics.loadImageResolved("graphics/resolutions/widescreen.png")
+local ultrawidebars = Graphics.loadImageResolved("graphics/resolutions/ultrawide.png")
+local steamdeckbars = Graphics.loadImageResolved("graphics/resolutions/steamdeck.png")
+local nesbars = Graphics.loadImageResolved("graphics/resolutions/nes.png")
+local threedsbars = Graphics.loadImageResolved("graphics/resolutions/3ds.png")
+
 function smasresolutions.onInitAPI()
     registerEvent(smasresolutions,"onDraw")
 end

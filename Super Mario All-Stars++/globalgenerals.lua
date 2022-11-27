@@ -34,12 +34,6 @@ if SMBX_VERSION == VER_SEE_MOD then
     smasonlineplay = require("smasonlineplay")
 end
 
-local widebars = Graphics.loadImageResolved("graphics/resolutions/widescreen.png")
-local ultrawidebars = Graphics.loadImageResolved("graphics/resolutions/ultrawide.png")
-local steamdeckbars = Graphics.loadImageResolved("graphics/resolutions/steamdeck.png")
-local nesbars = Graphics.loadImageResolved("graphics/resolutions/nes.png")
-local threedsbars = Graphics.loadImageResolved("graphics/resolutions/3ds.png")
-
 local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
 if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
