@@ -3314,12 +3314,14 @@ ID:259;X:-196032;Y:-200256;D:1;
 ID:38;X:-179392;Y:-180160;D:-1;LR:"Boos";
 ID:38;X:-179424;Y:-180256;D:-1;LR:"Boos";
 ID:38;X:-179712;Y:-180256;D:-1;LR:"Boos";
-ID:752;X:-158528;Y:-160120;D:-1;EA:"Boss Start";ED:"Boss End";XTRA:"{\n    \"canFly\"\: true\n}\n";
+ID:752;X:-158528;Y:-160120;D:-1;EA:"Boss Start";ED:"Boss End";XTRA:"{\n    \"canFly\"\: false\n}\n";
 ID:1000;X:-158816;Y:-160192;D:-1;LR:"Star";
+ID:465;X:-179616;Y:-180768;D:-1;ED:"Floor Movement 1";
 NPC_END
 DOORS
 IX:-195488;IY:-200192;OX:-179616;OY:-180768;DT:2;ID:1;OD:1;
 IX:-179360;IY:-180640;OX:-159808;OY:-160096;DT:2;ID:1;OD:1;LR:"Door";
+OX:-195552;OY:-200192;DT:2;ID:1;OD:1;ET:1;
 DOORS_END
 LAYERS
 LR:"Default";
@@ -3335,10 +3337,9 @@ EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Floor Movement 1";TE:"Floor Movement 2";TD:50;AU:1;ML:"Floor";MX:0;MY:0;AS:0;AX:0;AY:0;
+ET:"Floor Movement 1";TE:"Floor Movement 2";TD:50;ML:"Floor";MX:0;MY:0;AS:0;AX:0;AY:0;
 ET:"Floor Movement 2";TE:"Floor Movement 3";TD:85;ML:"Floor";MX:0;MY:-0.984615;AS:0;AX:0;AY:0;
-ET:"Floor Movement 3";TE:"Floor Movement 4";TD:50;ML:"Floor";MX:0;MY:0;AS:0;AX:0;AY:0;
-ET:"Floor Movement 4";TE:"Floor Movement 1";TD:85;ML:"Floor";MX:0;MY:0.984615;AS:0;AX:0;AY:0;
+ET:"Floor Movement 3";ML:"Floor";MX:0;MY:0;AS:0;AX:0;AY:0;
 ET:"Boss Start";LS:["Trap"];TE:"Boss Start 2";TD:3;DS:1;AS:0;AX:0;AY:0;
 ET:"Boss Start 2";AS:0;AX:0;AY:0;
 ET:"Boss End";TE:"Boss End 2";TD:18;AS:0;AX:0;AY:0;

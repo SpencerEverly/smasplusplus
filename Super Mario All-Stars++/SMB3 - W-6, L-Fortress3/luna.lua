@@ -2,6 +2,10 @@ local level_dependencies_normal= require("level_dependencies_normal")
 local bottombound = -180000
 
 function onEvent(eventName)
+    if eventName == "Floor Movement 3" then
+        Sound.playSFX(22)
+        Defines.earthquake = 10
+    end
     if eventName == "Boss Start" then
         Screen.setCameraPosition(-159200,-160600,-160000,-158400,1)
         Sound.playSFX(22)
@@ -21,12 +25,12 @@ end
 function onTick()
     --[[if Evento.getPendingEvents()[1].name == "Floor Movement 3" then
         if Section.getActiveIndices() == 1 then
-            bottombound = bottombound - 0.984615384615385
+            bottombound = bottombound - 1
             Screen.setCameraPosition(-180000,-181152,bottombound,-179200,1)
         end
     elseif Evento.getPendingEvents()[1].name == "Floor Movement 1" then
         if Section.getActiveIndices() == 1 then
-            bottombound = bottombound + 0.984615384615385
+            bottombound = bottombound + 1
             Screen.setCameraPosition(-180000,-181152,bottombound,-179200,1)
         end
     end]]
