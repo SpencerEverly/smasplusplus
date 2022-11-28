@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. 3\: World 6-10";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-194304;T:-200864;B:-200000;MZ:0;MF:"";BG:37;
+SC:0;L:-200000;R:-194304;T:-200864;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Snow.spc|0\;g=2.5";BG:37;
 SC:1;L:-179984;R:-179184;T:-180600;B:-179744;MZ:24;MF:"_OST/Super Mario Bros 3/Bonus Level.spc|0\;g=2.5";BG:6;
 SECTION_END
 STARTPOINT
