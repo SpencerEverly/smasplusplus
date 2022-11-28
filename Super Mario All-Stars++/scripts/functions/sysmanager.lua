@@ -198,4 +198,64 @@ function SysManager.coinCountClassicWith99Limit() --Returns the classic coin cou
     end
 end
 
+function SysManager.loadIntroTheme() --Loads the theme after execution. If setting a new intro, set the intro number first before executing. 
+    if SaveData.introselect == 1 then
+        Level.load("intro_SMAS.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 2 then
+        Level.load("intro_SMBX1.0.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 3 then
+        Level.load("intro_SMBX1.1.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 4 then
+        Level.load("intro_SMBX1.2.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 5 then
+        Level.load("intro_SMBX1.3.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 6 then
+        Level.load("intro_WSMBA.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 7 then
+        Level.load("intro_SMBX2.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 8 then
+        Level.load("intro_theeditedboss.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 9 then
+        Level.load("intro_SMBX1.3og.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 10 then
+        Level.load("intro_SMBX2b3.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 11 then
+        Level.load("intro_8bit.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 12 then
+        Level.load("intro_S!TS!.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 13 then
+        Level.load("intro_sunsetbeach.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 14 then
+        Level.load("intro_scrollingheights.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 15 then
+        Level.load("intro_jakebrito1.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 16 then
+        Level.load("intro_marioforever.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 17 then
+        Level.load("intro_jakebrito2.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 18 then
+        Level.load("intro_circuitcity.lvlx", nil, nil)
+    end
+    if SaveData.introselect == 19 then
+        Level.load("intro_metroidprime2.lvlx", nil, nil)
+    end
+end
+
 return SysManager
