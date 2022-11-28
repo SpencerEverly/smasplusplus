@@ -152,11 +152,11 @@ end
 
 function screenFlip.onInputUpdate()
     if (flip == 90 or flip == -90) then
-        local oldLeft = player.keys.left
-        local oldRight = player.keys.right
-        local oldUp = player.keys.up
-        local oldDown = player.keys.down
-        
+        local oldLeft = player.keys.right
+        local oldRight = player.keys.left
+        local oldUp = player.keys.down
+        local oldDown = player.keys.up
+
         player.keys.up = oldLeft
         player.keys.down = oldRight
         player.keys.left = oldDown
@@ -197,20 +197,20 @@ function screenFlip.onInputUpdate()
         local oldUp = player.keys.down
         local oldDown = player.keys.up
 
-        player.keys.up = oldLeft
-        player.keys.down = oldRight
-        player.keys.left = oldDown
-        player.keys.right = oldUp
+        player.keys.up = oldRight
+        player.keys.down = oldLeft
+        player.keys.left = oldUp
+        player.keys.right = oldDown
         if Player.count() >= 2 then
             local oldLeft2 = player2.keys.left
             local oldRight2 = player2.keys.right
             local oldUp2 = player2.keys.up
             local oldDown2 = player2.keys.down
 
-            player2.keys.up = oldLeft2
-            player2.keys.down = oldRight2
-            player2.keys.left = oldDown2
-            player2.keys.right = oldUp2
+            player2.keys.up = oldRight2
+            player2.keys.down = oldLeft2
+            player2.keys.left = oldUp2
+            player2.keys.right = oldDown2
         end
     end
 end
