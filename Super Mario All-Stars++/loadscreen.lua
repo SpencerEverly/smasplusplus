@@ -8,10 +8,15 @@ local letterWidths = {
     {52,16,16,16,8, 20,16,10,10,46},
 }
 
---[[do
+local EP_LIST_PTR = mem(0x00B250FC, FIELD_DWORD)
+local episodePath = _episodePath
+ 
+do
+    -- The following code makes the loading screen slightly less restricted
+ 
     local function exists(path)
         local f = io.open(path,"r")
-
+ 
         if f ~= nil then
             f:close()
             return true
@@ -19,37 +24,163 @@ local letterWidths = {
             return false
         end
     end
+    
+    Misc.episodePath = (function()
+        return Native.getEpisodePath()
+    end)
+    
+    Misc.episodeName = (function()
+        local idx = mem(0x00B2C628, FIELD_WORD) - 1
+        if(idx < 0) then
+            return "SMBX2"
+        end
+        return tostring(mem(EP_LIST_PTR + (idx * 0x18), FIELD_STRING))
+    end)
+    
+    local resolvePaths = {
+				Misc.episodePath(),
+				getSMBXPath().."\\scripts\\",
+				getSMBXPath().."\\"
+			}
+    
+    Misc.multiResolveFile = (function(...)
+        local t = {...}
+        
+        --If passed a complete path, just return it as-is (as long as the file exists)
+        for _,v in ipairs(t) do
+            if string.match(v, "^%a:[\\/]") and io.exists(v) then
+                return v
+            end
+        end
 
+        for _,p in ipairs(resolvePaths) do
+            for _,v in ipairs(t) do
+                if io.exists(p..v) then
+                    return p..v
+                end
+            end
+        end
+        return nil
+    end)
+    
     Misc.resolveFile = (function(path)
         local inScriptPath = getSMBXPath().. "\\scripts\\".. path
-        local inEpisodePath = _episodePath.. path
-
+        local inEpisodePath = episodePath.. path
+ 
         return (exists(path) and path) or (exists(inEpisodePath) and inEpisodePath) or (exists(inScriptPath) and inScriptPath) or nil
     end)
-
+ 
+    Misc.resolveGraphicsFile = Misc.resolveFile -- good enough lol
+    
     -- Make require work better
     local oldRequire = require
-
+ 
     function require(path)
         local inScriptPath = getSMBXPath().. "\\scripts\\".. path.. ".lua"
         local inScriptBasePath = getSMBXPath().. "\\scripts\\base\\".. path.. ".lua"
-        local inEpisodePath = _episodePath.. path.. ".lua"
-
+        local inEpisodePath = episodePath.. path.. ".lua"
+ 
         local path = (exists(inEpisodePath) and inEpisodePath) or (exists(inScriptPath) and inScriptPath) or (exists(inScriptBasePath) and inScriptBasePath)
         assert(path ~= nil,"module '".. path.. "' not found.")
-
+ 
         return oldRequire(path)
     end
-
-    -- lunatime
-    _G.lunatime = require("engine/lunatime")
-
-    -- Color
-    _G.Color = require("engine/color")
+ 
+ 
+    -- classexpender stuff
+    function string.split(s, p, exclude, plain)
+        if  exclude == nil  then  exclude = false; end;
+        if  plain == nil  then  plain = true; end;
+ 
+        local t = {};
+        local i = 0;
     
-    -- Textplus
+        if(#s <= 1) then
+            return {s};
+        end
+    
+        while true do
+            local ls,le = s:find(p, i, plain);  --find next split pattern
+            if (ls ~= nil) then
+                table.insert(t, string.sub(s, i,le-1));
+                i = ls+1;
+                if  exclude  then
+                    i = le+1;
+                end
+            else
+                table.insert(t, string.sub(s, i));
+                break;
+            end
+        end
+        
+        return t;
+    end
+ 
+    function table.clone(t)
+        local rt = {};
+        for k,v in pairs(t) do
+            rt[k] = v;
+        end
+        setmetatable(rt, getmetatable(t));
+        return rt;
+    end
+ 
+    function table.ishuffle(t)
+        for i=#t,2,-1 do 
+            local j = RNG.randomInt(1,i)
+            t[i], t[j] = t[j], t[i]
+        end
+        return t
+    end
+ 
+    function math.clamp(a,mi,ma)
+        mi = mi or 0;
+        ma = ma or 1;
+        return math.min(ma,math.max(mi,a));
+    end
+ 
+    
+    local validAudioFiles = {".ogg", ".mp3", ".wav", ".voc", ".flac", ".spc"}
+	
+	--table.map doesn't exist yet
+	local validFilesMap = {};
+	for _,v in ipairs(validAudioFiles) do
+		validFilesMap[v] = true;
+	end
+	
+	Misc.resolveSoundFile = (function(path)
+		local p,e = string.match(string.lower(path), "^(.+)(%..+)$")
+		local t = {}
+		local idx = 1
+		local typeslist = validAudioFiles
+		if e and validFilesMap[e] then
+			--Re-arrange type list to prioritise type that was provided to the resolve function
+			if e ~= validAudioFiles[1] then
+				typeslist = { e }
+				for _,v in ipairs(validAudioFiles) do
+					if v ~= e then
+						table.insert(typeslist, v)
+					end
+				end
+			end
+			path = p
+		end
+		for _,typ in ipairs(typeslist) do
+			t[idx] = path..typ
+			t[idx+#typeslist] = "sound/"..path..typ
+			t[idx+2*#typeslist] = "sound/extended/"..path..typ
+			idx = idx+1
+		end
+		
+		return Misc.multiResolveFile(table.unpack(t))
+	end)
+ 
+    
+    _G.lunatime = require("engine/lunatime")
+    _G.Color = require("engine/color")
+    _G.RNG = require("rng")
     _G.textplus = require("textplus")
-end]]
+end
 
 package.path = package.path .. ";./scripts/?.lua"
 -- Address of the first player's character. Equivalent to 'player.character', except the player class doesn't exist in loading screens
@@ -92,6 +223,7 @@ loadtextfile()
 local letterData = {}
 
 local time = 0
+local loadingTimer = 0
 
 --loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
 
@@ -105,6 +237,14 @@ function onDraw()
     if image == nil then -- this sometimes happens?
         return
     end
+    
+    loadingTimer = loadingTimer + 1
+    
+    textplus.print{
+        x = 0,
+        y = 0,
+        text = tostring(loadingTimer)
+    }
 
     local message = mem(FIRST_PLAYER_CHARACTER_ADDR,FIELD_WORD)
     local widths = letterWidths[message]
