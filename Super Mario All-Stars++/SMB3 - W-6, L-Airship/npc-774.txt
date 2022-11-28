@@ -1,0 +1,8 @@
+gfxwidth=50
+gfxheight=58
+width=50
+height=58
+nogravity=1
+frames=2
+framespeed=14
+framestyle=0
