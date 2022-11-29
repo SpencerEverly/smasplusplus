@@ -39,12 +39,14 @@ local characterNeededPSpeeds = {
     [CHARACTER_LUIGI] = 40,
     [CHARACTER_PEACH] = 80,
     [CHARACTER_TOAD]  = 60,
+    [CHARACTER_LINK]  = 10,
 }
 local characterDeathEffects = {
     [CHARACTER_MARIO] = 3,
     [CHARACTER_LUIGI] = 5,
     [CHARACTER_PEACH] = 129,
     [CHARACTER_TOAD]  = 130,
+    [CHARACTER_LINK]  = 134,
 }
 
 local deathEffectFrames = 2
@@ -53,6 +55,7 @@ local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKIE}
 local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
 
 local smb2Characters = table.map{CHARACTER_PEACH,CHARACTER_TOAD}
+local linkCharacters = table.map{CHARACTER_LINK}
 
 
 -- Detects if the player is on the ground, the redigit way. Sometimes more reliable than just p:isOnGround().
@@ -522,6 +525,7 @@ function costume.onInit(p)
         registerEvent(costume,"onTick")
         registerEvent(costume,"onTickEnd")
         registerEvent(costume,"onDraw")
+        registerEvent(costume,"onInputUpdate")
         
         eventsRegistered = true
     end
@@ -561,6 +565,16 @@ function costume.onCleanup(p)
         if spot ~= nil then
             table.remove(costume.playersList,spot)
         end
+    end
+end
+
+
+
+function costume.onInputUpdate()
+    for _,p in ipairs(costume.playersList) do
+        local data = costume.playerData[p]
+        
+        
     end
 end
 
