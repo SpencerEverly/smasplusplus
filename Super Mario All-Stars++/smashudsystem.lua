@@ -152,6 +152,103 @@ function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coin
     end
 end
 
+function smashudsystem.gameOverSequences() --These are all the game over sequences that get RNG'ed. ONLY use this on a Routine call!!!!
+    local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
+    Sound.playSFX("gameover/gameover-"..rngkey..".ogg")
+    
+    --If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
+    if rngkey == 1 then
+        Routine.wait(3, true)
+        
+    elseif rngkey == 2 then
+        Routine.wait(5, true)
+        
+    elseif rngkey == 3 then
+        Routine.wait(3, true)
+        
+    elseif rngkey == 4 then
+        Routine.wait(3, true)
+        
+    elseif rngkey == 5 then
+        Routine.wait(5, true)
+        
+    elseif rngkey == 6 then
+        Routine.wait(4, true)
+        
+    elseif rngkey == 7 then
+        Routine.wait(2, true)
+        
+    elseif rngkey == 8 then
+        Routine.wait(6, true)
+        
+    elseif rngkey == 9 then
+        Routine.wait(3, true)
+        
+    elseif rngkey == 10 then
+        Routine.wait(14, true)
+        
+    elseif rngkey == 11 then
+        Routine.wait(10, true)
+        
+    elseif rngkey == 12 then
+        Routine.wait(10, true)
+        
+    elseif rngkey == 13 then
+        Routine.wait(5, true)
+        
+    elseif rngkey == 14 then
+        Routine.wait(6, true)
+    
+    elseif rngkey == 15 then
+        Routine.wait(6, true)
+        
+    elseif rngkey == 16 then
+        Routine.wait(7, true)
+        
+    elseif rngkey == 17 then
+        Routine.wait(3, true)
+        
+    elseif rngkey == 18 then
+        Routine.wait(4, true)
+        
+    elseif rngkey == 19 then
+        Routine.wait(7, true)
+        
+    elseif rngkey == 20 then
+        Routine.wait(9, true)
+        
+    elseif rngkey == 21 then
+        Routine.wait(3, true)
+        
+    elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
+        Sound.playSFX("gameover/gameover-22-voice.ogg")
+        Routine.wait(17, true)
+        
+    elseif rngkey == 23 then
+        Routine.wait(4, true)
+        
+    elseif rngkey == 24 then
+        Routine.wait(6, true)
+        
+    elseif rngkey == 25 then
+        Routine.wait(6, true)
+        
+    elseif rngkey == 26 then
+        Routine.wait(5, true)
+        
+    elseif rngkey == 27 then
+        Routine.wait(8, true)
+        
+    elseif rngkey == 28 then
+        Routine.wait(8, true)
+    
+    elseif rngkey == 29 then
+        Routine.wait(6, true)
+        
+        
+    end
+end
+
 function thirteenmodedeath()
     smasbooleans.musicMuted = true
     Audio.MusicVolume(0)
@@ -177,100 +274,7 @@ function thirteenmodedeath()
         Routine.waitFrames(45, true)
         gameovershow = true --Show the GAME OVER text
         SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-        local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
-        Sound.playSFX("gameover/gameover-"..rngkey..".ogg")
-        
-        --If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
-        if rngkey == 1 then
-            Routine.wait(3, true)
-            
-        elseif rngkey == 2 then
-            Routine.wait(5, true)
-            
-        elseif rngkey == 3 then
-            Routine.wait(3, true)
-            
-        elseif rngkey == 4 then
-            Routine.wait(3, true)
-            
-        elseif rngkey == 5 then
-            Routine.wait(5, true)
-            
-        elseif rngkey == 6 then
-            Routine.wait(4, true)
-            
-        elseif rngkey == 7 then
-            Routine.wait(2, true)
-            
-        elseif rngkey == 8 then
-            Routine.wait(6, true)
-            
-        elseif rngkey == 9 then
-            Routine.wait(3, true)
-            
-        elseif rngkey == 10 then
-            Routine.wait(14, true)
-            
-        elseif rngkey == 11 then
-            Routine.wait(10, true)
-            
-        elseif rngkey == 12 then
-            Routine.wait(10, true)
-            
-        elseif rngkey == 13 then
-            Routine.wait(5, true)
-            
-        elseif rngkey == 14 then
-            Routine.wait(6, true)
-        
-        elseif rngkey == 15 then
-            Routine.wait(6, true)
-            
-        elseif rngkey == 16 then
-            Routine.wait(7, true)
-            
-        elseif rngkey == 17 then
-            Routine.wait(3, true)
-            
-        elseif rngkey == 18 then
-            Routine.wait(4, true)
-            
-        elseif rngkey == 19 then
-            Routine.wait(7, true)
-            
-        elseif rngkey == 20 then
-            Routine.wait(9, true)
-            
-        elseif rngkey == 21 then
-            Routine.wait(3, true)
-            
-        elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
-            Sound.playSFX("gameover/gameover-22-voice.ogg")
-            Routine.wait(17, true)
-            
-        elseif rngkey == 23 then
-            Routine.wait(4, true)
-            
-        elseif rngkey == 24 then
-            Routine.wait(6, true)
-            
-        elseif rngkey == 25 then
-            Routine.wait(6, true)
-            
-        elseif rngkey == 26 then
-            Routine.wait(5, true)
-            
-        elseif rngkey == 27 then
-            Routine.wait(8, true)
-            
-        elseif rngkey == 28 then
-            Routine.wait(8, true)
-        
-        elseif rngkey == 29 then
-            Routine.wait(6, true)
-            
-            
-        end
+        smashudsystem.gameOverSequences()
         Misc.unpause() --Unpause afterward
         SaveData.totalLives = 5 --Refill the lives back to 5
     end
@@ -326,100 +330,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     Misc.pause()
                                     gameovershow = true --Show the GAME OVER text
                                     SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-                                    local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
-                                    Sound.playSFX("gameover/gameover-"..rngkey..".ogg")
-                                    
-                                    --If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
-                                    if rngkey == 1 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 2 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 3 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 4 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 5 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 6 then
-                                        Routine.wait(4, true)
-                                        
-                                    elseif rngkey == 7 then
-                                        Routine.wait(2, true)
-                                        
-                                    elseif rngkey == 8 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 9 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 10 then
-                                        Routine.wait(14, true)
-                                        
-                                    elseif rngkey == 11 then
-                                        Routine.wait(10, true)
-                                        
-                                    elseif rngkey == 12 then
-                                        Routine.wait(10, true)
-                                        
-                                    elseif rngkey == 13 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 14 then
-                                        Routine.wait(6, true)
-                                    
-                                    elseif rngkey == 15 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 16 then
-                                        Routine.wait(7, true)
-                                        
-                                    elseif rngkey == 17 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 18 then
-                                        Routine.wait(4, true)
-                                        
-                                    elseif rngkey == 19 then
-                                        Routine.wait(7, true)
-                                        
-                                    elseif rngkey == 20 then
-                                        Routine.wait(9, true)
-                                        
-                                    elseif rngkey == 21 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
-                                        Sound.playSFX("gameover/gameover-22-voice.ogg")
-                                        Routine.wait(17, true)
-                                        
-                                    elseif rngkey == 23 then
-                                        Routine.wait(4, true)
-                                        
-                                    elseif rngkey == 24 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 25 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 26 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 27 then
-                                        Routine.wait(8, true)
-                                        
-                                    elseif rngkey == 28 then
-                                        Routine.wait(8, true)
-                                    
-                                    elseif rngkey == 29 then
-                                        Routine.wait(6, true)
-                                        
-                                        
-                                    end
+                                    smashudsystem.gameOverSequences()
                                     Misc.unpause() --Unpause afterward
                                     SaveData.totalLives = 5 --Refill the lives back to 5
                                     smashudsystem.hasDied = true --The player has now died
@@ -465,100 +376,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     Misc.pause()
                                     gameovershow = true --Show the GAME OVER text
                                     SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-                                    local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
-                                    Sound.playSFX("gameover/gameover-"..rngkey..".ogg")
-                                    
-                                    --If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
-                                    if rngkey == 1 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 2 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 3 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 4 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 5 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 6 then
-                                        Routine.wait(4, true)
-                                        
-                                    elseif rngkey == 7 then
-                                        Routine.wait(2, true)
-                                        
-                                    elseif rngkey == 8 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 9 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 10 then
-                                        Routine.wait(14, true)
-                                        
-                                    elseif rngkey == 11 then
-                                        Routine.wait(10, true)
-                                        
-                                    elseif rngkey == 12 then
-                                        Routine.wait(10, true)
-                                        
-                                    elseif rngkey == 13 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 14 then
-                                        Routine.wait(6, true)
-                                    
-                                    elseif rngkey == 15 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 16 then
-                                        Routine.wait(7, true)
-                                        
-                                    elseif rngkey == 17 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 18 then
-                                        Routine.wait(4, true)
-                                        
-                                    elseif rngkey == 19 then
-                                        Routine.wait(7, true)
-                                        
-                                    elseif rngkey == 20 then
-                                        Routine.wait(9, true)
-                                        
-                                    elseif rngkey == 21 then
-                                        Routine.wait(3, true)
-                                        
-                                    elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
-                                        Sound.playSFX("gameover/gameover-22-voice.ogg")
-                                        Routine.wait(17, true)
-                                        
-                                    elseif rngkey == 23 then
-                                        Routine.wait(4, true)
-                                        
-                                    elseif rngkey == 24 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 25 then
-                                        Routine.wait(6, true)
-                                        
-                                    elseif rngkey == 26 then
-                                        Routine.wait(5, true)
-                                        
-                                    elseif rngkey == 27 then
-                                        Routine.wait(8, true)
-                                        
-                                    elseif rngkey == 28 then
-                                        Routine.wait(8, true)
-                                        
-                                    elseif rngkey == 29 then
-                                        Routine.wait(6, true)
-                                    
-                                        
-                                    end
+                                    smashudsystem.gameOverSequences()
                                     Misc.unpause() --Unpause afterward
                                     SaveData.totalLives = 5 --Refill the lives back to 5
                                     smashudsystem.hasDied = true --The player has now died
