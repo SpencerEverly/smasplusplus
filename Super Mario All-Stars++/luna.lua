@@ -512,10 +512,8 @@ function onTick()
         mem(0x00B25130,FIELD_WORD, 2) --This will prevent split screen, again (Just in case)
     end
     --Let's not get game overs/broken launcher kicking (These are life global memories).
-    if mem(0x00B2C5AC,FIELD_FLOAT) <= 2 then --If lower or equal to two, go to 3...
-        mem(0x00B2C5AC,FIELD_FLOAT,3)
-    elseif mem(0x00B2C5AC,FIELD_FLOAT) >= 99 then --Else if greater than or equal to 99, go to 98...
-        mem(0x00B2C5AC,FIELD_FLOAT,98)
+    if mem(0x00B2C5AC, FIELD_FLOAT) < 1 then --This is to prevent the old Game Over system
+        mem(0x00B2C5AC, FIELD_FLOAT, 1)
     end
     if table.icontains(smastables._friendlyPlaces,Level.filename()) == true then
         GameData.friendlyArea = true --Set this to prevent Mother Brain Rinka from getting killed in places such as the boot screen, intro, or the Hub

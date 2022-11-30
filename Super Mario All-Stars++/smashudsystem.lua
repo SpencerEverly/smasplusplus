@@ -410,7 +410,7 @@ function smashudsystem.onPostPlayerKill(plr) --To cancel the death entirely
 end
 
 function smashudsystem.onTick()
-    if mem(0x00B2C5AC, FIELD_FLOAT) <= 0 then --This is to prevent the old Game Over system
+    if mem(0x00B2C5AC, FIELD_FLOAT) < 1 then --This is to prevent the old Game Over system
         mem(0x00B2C5AC, FIELD_FLOAT, 1)
     end
     if SaveData.totalCoinsClassic > 99 then --This is to give the player a life when reaching 100 coins
@@ -447,7 +447,7 @@ function smashudsystem.onTick()
         smasbooleans.multiplayerActive = false
     end
     if SaveData.totalLives >= 1110 then
-        SaveData.totalLives = 1110 --The max amount of lives in the episode is 1110, used for the crown hud easter egg that was from Super Mario 3D Land.
+        SaveData.totalLives = 1110 --The max amount of lives in the episode is 1110, used for the crown hud easter egg that was from Super Mario 3D Land/New Super Mario Bros. 2/Super Mario 3D World.
     end
     if SaveData.totalScoreClassic >= 999999999 then --The max score is NSMBU's score tally, which is 999 trillion.
         SaveData.totalScoreClassic = 999999999

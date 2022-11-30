@@ -959,6 +959,27 @@ ID:828;X:-200928;Y:-194432;W:32;H:32;
 ID:828;X:-200224;Y:-194336;W:32;H:32;
 ID:828;X:-200224;Y:-194400;W:32;H:32;
 ID:847;X:-200320;Y:-194496;W:32;H:32;
+ID:810;X:-192176;Y:-194384;W:14;H:14;
+ID:810;X:-192208;Y:-194416;W:14;H:14;
+ID:810;X:-192176;Y:-194432;W:14;H:14;
+ID:810;X:-192208;Y:-194464;W:14;H:14;
+ID:810;X:-192448;Y:-194448;W:14;H:14;
+ID:810;X:-192416;Y:-194416;W:14;H:14;
+ID:810;X:-192400;Y:-194320;W:14;H:14;
+ID:810;X:-192352;Y:-194320;W:14;H:14;
+ID:810;X:-192288;Y:-194288;W:14;H:14;
+ID:810;X:-192320;Y:-194320;W:14;H:14;
+ID:810;X:-192496;Y:-194272;W:14;H:14;
+ID:810;X:-192512;Y:-194304;W:14;H:14;
+ID:810;X:-192560;Y:-194256;W:14;H:14;
+ID:810;X:-192576;Y:-194272;W:14;H:14;
+ID:810;X:-192496;Y:-194384;W:14;H:14;
+ID:810;X:-192544;Y:-194368;W:14;H:14;
+ID:810;X:-192576;Y:-194400;W:14;H:14;
+ID:810;X:-192608;Y:-194384;W:14;H:14;
+ID:810;X:-192608;Y:-194432;W:14;H:14;
+ID:810;X:-192656;Y:-194400;W:14;H:14;
+ID:810;X:-192656;Y:-194448;W:14;H:14;
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -1029,6 +1050,8 @@ ID:788;X:-201600;Y:-198784;
 ID:789;X:-201824;Y:-198560;
 ID:790;X:-201600;Y:-198016;
 ID:791;X:-201600;Y:-194560;
+ID:792;X:-192736;Y:-194496;
+ID:793;X:-192480;Y:-194160;LR:"Vanilla Dome Entrance";
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -1632,7 +1655,7 @@ ID:752;X:-192896;Y:-195936;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"na
 ID:752;X:-192832;Y:-195680;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutSecretStar\"\,\n    \"points\"\: \"0\,-32\, 0\,32\"\n}\n";
 ID:812;X:-192640;Y:-195840;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destroyAfterWin\"\: true\,\n    \"levelFilename\"\: \"SMW - W-2\, L-DPMC.lvlx\"\,\n    \"levelTitle\"\: \"#2\: Morton's Castle\"\,\n    \"path_left\"\: \"toSMWDonutPlainsCastle\"\,\n    \"path_up\"\: \"toSMWVanillaDomeMain\"\n}\n";
 ID:821;X:-192768;Y:-195712;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"ds2ToDSH\"\,\n    \"levelTitle\"\: \"Warp to Valley of Bowser\"\,\n    \"path_left\"\: \"toSMWDonutSecretPipe\"\,\n    \"warpName\"\: \"dshToDS2\"\n}\n";
-ID:752;X:-192640;Y:-195872;D:-1;XTRA:"{\n    \"hideIfLocked\"\: false\,\n    \"name\"\: \"toSMWVanillaDomeMain\"\,\n    \"points\"\: \"0\,32\, 0\,-64\"\n}\n";
+ID:752;X:-192640;Y:-195872;D:-1;XTRA:"{\n    \"hideIfLocked\"\: false\,\n    \"name\"\: \"toSMWVanillaDomeMain\"\,\n    \"points\"\: \"0\,32\, 0\,-72\"\n}\n";
 ID:804;X:-192960;Y:-195808;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMW - W-2\, L-DP2.lvlx\"\,\n    \"levelTitle\"\: \"Donut Plains 2\"\,\n    \"path_down\"\: \"toSMWDonutPlains2\"\,\n    \"path_left\"\: \"toSMWGreenSwitchPalace\"\,\n    \"path_up\"\: \"toSMWDonutGhostHouse\"\,\n    \"unlock_left\"\: 6\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-192800;Y:-195712;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutSecretPipe\"\,\n    \"points\"\: \"-32\,0\, 32\,0\"\n}\n";
 ID:821;X:-192736;Y:-195776;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"destinationWarpName\"\: \"ds2ToDP3\"\,\n    \"levelTitle\"\: \"To Valley of Bowser\"\,\n    \"path_left\"\: \"toSMWDonutPlains3FromPipe\"\,\n    \"warpName\"\: \"dp3ToDS2\"\n}\n";
@@ -1646,7 +1669,7 @@ ID:815;X:-192832;Y:-195712;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"l
 ID:762;X:-192832;Y:-195904;D:-1;
 ID:752;X:-192960;Y:-195840;D:-1;XTRA:"{\n    \"name\"\: \"toSMWDonutGhostHouse\"\,\n    \"points\"\: \"0\,32\, 0\,-32\, 32\,-64\, 64\,-64\"\n}\n";
 ID:752;X:-192992;Y:-195808;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWGreenSwitchPalace\"\,\n    \"points\"\: \"32\,0\, -32\,0\"\n}\n";
-ID:830;X:-192640;Y:-195936;D:-1;XTRA:"{\n    \"destinationPathName\"\: \"toVanillaDomeCC\"\,\n    \"warpName\"\: \"toSMWVanillaDomeMain\"\n}\n";
+ID:830;X:-192640;Y:-195936;D:-1;XTRA:"{\n    \"destinationPathName\"\: \"toSMWVanillaDomeCC\"\,\n    \"warpName\"\: \"toSMWVanillaDomeMain\"\n}\n";
 ID:807;X:-192896;Y:-195968;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMW - W-2\, L-TSA.lvlx\"\,\n    \"levelTitle\"\: \"Top Secret Area\"\,\n    \"path_down\"\: \"toSMWTopSecretArea\"\,\n    \"path_right\"\: \"toSMWSuperSecretArea\"\,\n    \"unlock_right\"\: 6\n}\n";
 ID:815;X:-192896;Y:-195904;D:-1;XTRA:"{\n    \"alwaysVisible\"\: true\,\n    \"levelFilename\"\: \"SMW - W-2\, L-DPGH.lvlx\"\,\n    \"levelTitle\"\: \"Donut Ghost House\"\,\n    \"path_down\"\: \"toSMWDonutGhostHouseSecret\"\,\n    \"path_left\"\: \"toSMWDonutGhostHouse\"\,\n    \"path_right\"\: \"toSMWDonutPlains3\"\,\n    \"path_up\"\: \"toSMWTopSecretArea\"\,\n    \"unlock_down\"\: 0\,\n    \"unlock_right\"\: 9\,\n    \"unlock_up\"\: 6\n}\n";
 ID:823;X:-192896;Y:-195552;D:-1;XTRA:"{\n    \"destinationPathName\"\: \"toSMWDonutPlainsYI\"\,\n    \"pathWalkingDirection\"\: 1\,\n    \"warpName\"\: \"toSMWDonutPlainsMain\"\n}\n";
@@ -1655,7 +1678,6 @@ ID:818;X:-193024;Y:-195808;D:-1;XTRA:"{\n    \"destroyAfterWin\"\: true\,\n    \
 ID:753;X:-193056;Y:-196224;D:-1;XTRA:"{\n    \"customMusicPath\"\: \"_OST/Super Mario World/Wandering The Plains (Advance).spc|0\;g=2.5\"\,\n    \"height\"\: 1024\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 1024\n}\n";
 ID:752;X:-192896;Y:-195712;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutSecret1\"\,\n    \"points\"\: \"0\,32\, 0\,-16\, 0\,-64\"\,\n    \"types\"\: \"normal\, waterTrail\"\n}\n";
 ID:752;X:-192992;Y:-195584;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWYellowSwitchMain\"\,\n    \"points\"\: \"0\,0\, 0\,-48\, 0\,-96\"\,\n    \"types\"\: \"invisibleLadder\, invisible\"\n}\n";
-ID:752;X:-192896;Y:-195552;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutPlainsMain\"\,\n    \"points\"\: \"0\,16\, 0\,-80\, 0\,-128\"\,\n    \"types\"\: \"bridge\, normal\"\n}\n";
 ID:752;X:-194944;Y:-200384;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-3WarpCentral\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 ID:848;X:-194912;Y:-200384;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMBLL - Level Backtrack 2.lvlx\"\,\n    \"levelTitle\"\: \"Warp Central\"\,\n    \"path_left\"\: \"toSMBLLW-3WarpCentral\"\n}\n";
 ID:752;X:-194016;Y:-200736;D:-1;XTRA:"{\n    \"name\"\: \"toSMBLLW-4WarpCentral\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
@@ -1941,6 +1963,11 @@ ID:752;X:-200992;Y:-194336;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-6\"\,\n    \"p
 ID:802;X:-200992;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"6-6\: Cold and Under\"\,\n    \"path_down\"\: \"toSMB36-6\"\,\n    \"path_right\"\: \"toSMB36-7\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-200960;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-7\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 ID:802;X:-200928;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-7.lvlx\"\,\n    \"levelTitle\"\: \"6-7\: Athletic Coldness\"\,\n    \"path_left\"\: \"toSMB36-7\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:753;X:-192736;Y:-194496;D:-1;XTRA:"{\n    \"backgroundColor\"\: \"#030303ff\"\,\n    \"backgroundName\"\: \"water\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario World/Vanilla Dome.spc|0\;g=2.5\"\,\n    \"height\"\: 404\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 668\n}\n";
+ID:802;X:-192464;Y:-194208;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMW - W-3\, L-VD1.lvlx\"\,\n    \"levelTitle\"\: \"Vanilla Dome 1\"\,\n    \"path_down\"\: \"toSMWVanillaDomeCC\"\n}\n";
+ID:823;X:-192464;Y:-194144;D:-1;XTRA:"{\n    \"destinationPathName\"\: \"toSMWVanillaDomeMain\"\,\n    \"pathWalkingDirection\"\: 1\,\n    \"warpName\"\: \"toSMWVanillaDomeCC\"\n}\n";
+ID:752;X:-192896;Y:-195552;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutPlainsMain\"\,\n    \"points\"\: \"0\,16\, 0\,-80\, 0\,-128\"\,\n    \"types\"\: \"bridge\, normal\"\n}\n";
+ID:752;X:-192464;Y:-194176;D:-1;XTRA:"{\n    \"name\"\: \"toSMWVanillaDomeCC\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
@@ -1951,6 +1978,7 @@ LR:"Sceneries";
 LR:"Signs";
 LR:"Paths";
 LR:"donut plains 3 thing";HD:1;
+LR:"Vanilla Dome Entrance";
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;

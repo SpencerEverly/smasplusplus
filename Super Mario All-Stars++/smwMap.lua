@@ -112,6 +112,8 @@ smwMap.fullBufferView = false
 smwMap.unlockingCurrentPath = "false"
 --Whenever to draw the player on the map or not.
 smwMap.drawPlayerOnMap = true
+--Whenever to enable music or not.
+smwMap.enableMusic = true
 
 
 
@@ -4475,10 +4477,14 @@ function smwMap.onDraw()
         Misc.unlockAnyBrokenPaths()
         SaveData.firstBootMapPathFixed = true
     end
-    if not smasbooleans.musicMutedTemporary then
+    if smwMap.enableMusic and not smasbooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = false
-    else
+    elseif not smwMap.enableMusic or smasbooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = true
+    elseif smwMap.enableMusic and not smasbooleans.musicMutedTemporary then
+        smwMap.forceMutedMusic = true
+    elseif not smwMap.enableMusic and smasbooleans.musicMutedTemporary then
+        smwMap.forceMutedMusic = false
     end
     --Text.printWP(smwMap.unlockingCurrentPath, 100, 100, 8)
 end
