@@ -1,8 +1,7 @@
-gfxwidth=50
+gfxwidth=32
 gfxheight=58
-width=50
+width=32
 height=58
-nogravity=1
-frames=2
-framespeed=14
 framestyle=0
+frames=6
+nogravity=1
