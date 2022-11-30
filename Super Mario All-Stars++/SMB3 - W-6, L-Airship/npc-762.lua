@@ -36,7 +36,7 @@ local burnerBottomSettings = {
 
 	fireID = 775,
 	fireDirection = 1,
-	cooldown = 256,
+	cooldown = 95,
 	burnerType = 1,
 	notcointransformable = true,
 }

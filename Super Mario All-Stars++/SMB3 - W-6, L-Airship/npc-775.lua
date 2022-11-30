@@ -34,7 +34,7 @@ local fireSettings = {
 	lightradius = 64,
 	lightbrightness = 2,
 	lightcolor = Color.orange,
-	duration = 256
+	duration = 120
 }
 
 local configFile = npcManager.setNpcSettings(fireSettings)

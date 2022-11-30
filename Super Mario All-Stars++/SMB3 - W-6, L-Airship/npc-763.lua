@@ -36,7 +36,7 @@ local burnerLeftSettings = {
 
 	fireID = 776,
 	fireDirection = -1,
-	cooldown = 256,
+	cooldown = 95,
 	fire_xOffset = 0,
 	fire_yOffset = 0,
 	burnerType = 2,

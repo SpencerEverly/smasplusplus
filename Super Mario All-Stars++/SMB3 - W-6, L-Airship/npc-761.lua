@@ -36,8 +36,8 @@ local burnerTopSettings = {
 
 	fireID = 775,
 	fireDirection = -1,
-	cooldown = 256,
-	globalCooldown = 256,
+	cooldown = 95,
+	globalCooldown = 95,
 	burnerType = 0,
 	notcointransformable = true,
 }
