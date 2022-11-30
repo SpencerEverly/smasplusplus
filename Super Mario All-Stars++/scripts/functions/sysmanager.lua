@@ -258,4 +258,81 @@ function SysManager.loadIntroTheme() --Loads the theme after execution. If setti
     end
 end
 
+function SysManager.parseSMBX64Bool(string) --Parses a bool from a save file (Thanks KBM_Quine!)
+    if string.match(string, "#TRUE#") then return true end
+    if string.match(string, "#FALSE#") then return false end
+end
+
+function SysManager.parseSaveFile(slot) --Parses a save file (Thanks KBM_Quine!)
+    local t = {}
+    local savFile = Misc.resolveFile("save" .. slot ..".sav")
+    local lines = io.readFileLines(savFile)
+    local currentLine = 0
+    local objectIndex = 1
+
+    t.fileVersion = tonumber(lines[1])
+    t.lives = tonumber(lines[2])
+    t.coins = tonumber(lines[3])
+    t.worldPlayerX = tonumber(lines[4])
+    t.worldPlayerY = tonumber(lines[5])
+
+    t.character = {}
+    currentLine = 5
+    for i=1,5 do
+        t.character[i] = {}
+        t.character[i].powerup = tonumber(lines[currentLine+1])
+        t.character[i].reservePowerup = tonumber(lines[currentLine+2])
+        t.character[i].mount = tonumber(lines[currentLine+3])
+        t.character[i].mountColor = tonumber(lines[currentLine+4])
+        t.character[i].hearts = tonumber(lines[currentLine+5])
+        currentLine = currentLine + 5
+    end
+
+    t.overworldMusicID = tonumber(lines[31])
+    t.gameCompleted = parseSMBX64Bool(lines[32])
+
+    t.levelVisiblity = {}
+    currentLine = 33
+    while (lines[currentLine] ~= '"next"') do
+        t.levelVisiblity[objectIndex] = parseSMBX64Bool(lines[currentLine])
+        objectIndex = objectIndex + 1
+        currentLine = currentLine + 1
+    end
+
+    t.pathVisiblity = {}
+    currentLine = currentLine + 1
+    objectIndex = 1
+    while (lines[currentLine] ~= '"next"') do
+        t.pathVisiblity[objectIndex] = parseSMBX64Bool(lines[currentLine])
+        objectIndex = objectIndex + 1
+        currentLine = currentLine + 1
+    end
+
+    t.sceneryVisiblity = {}
+    currentLine = currentLine + 1
+    objectIndex = 1
+    while (lines[currentLine] ~= '"next"') do
+        t.sceneryVisiblity[objectIndex] = parseSMBX64Bool(lines[currentLine])
+        objectIndex = objectIndex + 1
+        currentLine = currentLine + 1
+    end
+
+    t.stars = {}
+    currentLine = currentLine + 1
+    objectIndex = 1
+    while (lines[currentLine] ~= '"next"') do
+        t.stars[objectIndex] = {}
+        t.stars[objectIndex].levelName = lines[currentLine]
+        t.stars[objectIndex].section = tonumber(lines[currentLine + 1]) 
+        objectIndex = objectIndex + 1
+        currentLine = currentLine + 2
+    end
+
+    currentLine = currentLine + 1
+    objectIndex = 1
+    t.mapStarTotal = tonumber(lines[currentLine])
+
+    return t
+end
+
 return SysManager
