@@ -1052,6 +1052,7 @@ ID:790;X:-201600;Y:-198016;
 ID:791;X:-201600;Y:-194560;
 ID:792;X:-192736;Y:-194496;
 ID:793;X:-192480;Y:-194160;LR:"Vanilla Dome Entrance";
+ID:794;X:-201600;Y:-195136;
 BGO_END
 NPC
 ID:753;X:-199904;Y:-197056;D:-1;XTRA:"{\n    \"backgroundName\"\: \"sky\"\,\n    \"customMusicPath\"\: \"_OST/Mario Forever/World 1 (Original).mod\"\,\n    \"height\"\: 1200\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: false\,\n    \"width\"\: 1500\n}\n";
@@ -1984,6 +1985,22 @@ ID:821;X:-200128;Y:-194368;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-7
 ID:752;X:-200160;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-6Path1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 ID:852;X:-200832;Y:-194496;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Bonus Challenge! #5\"\,\n    \"path_down\"\: \"toSMB3W-6Path2\"\n}\n";
 ID:752;X:-200832;Y:-194400;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-6Path2\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
+ID:753;X:-201600;Y:-195136;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Pipe Land.spc|0\;g=2.5\"\,\n    \"height\"\: 416\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 1152\n}\n";
+ID:821;X:-201440;Y:-195104;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-6EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 6\"\,\n    \"path_down\"\: \"toSMB37-1\"\,\n    \"path_left\"\: \"\"\,\n    \"warpName\"\: \"SMB3W-7BeginWarp\"\n}\n";
+ID:802;X:-201440;Y:-195040;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-7\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"7-1\: The Pipe Directories\"\,\n    \"path_right\"\: \"toSMB3W-7Pipe1\"\,\n    \"path_up\"\: \"toSMB37-1\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-201440;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB37-1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:821;X:-201376;Y:-195040;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"toSMB3W-7PipeWarpB2\"\,\n    \"levelTitle\"\: \"Warp B\"\,\n    \"path_left\"\: \"toSMB3W-7Pipe1\"\,\n    \"warpName\"\: \"toSMB3W-7PipeWarpB1\"\n}\n";
+ID:821;X:-201376;Y:-194976;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"toSMB3W-7PipeWarpC2\"\,\n    \"levelTitle\"\: \"Warp C\"\,\n    \"path_left\"\: \"toSMB3W-7Pipe2\"\,\n    \"warpName\"\: \"toSMB3W-7PipeWarpC1\"\n}\n";
+ID:821;X:-201440;Y:-194976;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"toSMB3W-7PipeWarpB1\"\,\n    \"levelTitle\"\: \"Warp B\"\,\n    \"path_down\"\: \"toSMB37-2\"\,\n    \"path_right\"\: \"toSMB3W-7Pipe2\"\,\n    \"warpName\"\: \"toSMB3W-7PipeWarpB2\"\n}\n";
+ID:802;X:-201440;Y:-194912;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-7\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"7-2\: Pipe Blocks\"\,\n    \"path_right\"\: \"toSMB3W-7Pipe3\"\,\n    \"path_up\"\: \"toSMB37-2\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:850;X:-201248;Y:-195040;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-0\, L-TH2.lvlx\"\,\n    \"levelTitle\"\: \"Toad House\"\,\n    \"path_up\"\: \"toSMB3W-7ToadHouse1\"\n}\n";
+ID:821;X:-201248;Y:-195104;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"toSMB3W-7PipeWarpC1\"\,\n    \"levelTitle\"\: \"Warp C\"\,\n    \"path_down\"\: \"toSMB3W-7ToadHouse1\"\,\n    \"warpName\"\: \"toSMB3W-7PipeWarpC2\"\n}\n";
+ID:752;X:-201440;Y:-194944;D:-1;XTRA:"{\n    \"name\"\: \"toSMB37-2\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:752;X:-201408;Y:-195040;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-7Pipe1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:752;X:-201408;Y:-194976;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-7Pipe2\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:752;X:-201408;Y:-194912;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-7Pipe3\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:752;X:-201248;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-7ToadHouse1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:821;X:-201376;Y:-194912;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"toSMB3W-7PipeWarpD2\"\,\n    \"levelTitle\"\: \"Warp D\"\,\n    \"path_left\"\: \"toSMB3W-7Pipe3\"\,\n    \"warpName\"\: \"toSMB3W-7PipeWarpD1\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
