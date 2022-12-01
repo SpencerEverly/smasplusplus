@@ -1962,12 +1962,26 @@ ID:802;X:-200992;Y:-194304;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, 
 ID:752;X:-200992;Y:-194336;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-6\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
 ID:802;X:-200992;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"6-6\: Cold and Under\"\,\n    \"path_down\"\: \"toSMB36-6\"\,\n    \"path_right\"\: \"toSMB36-7\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-200960;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-7\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
-ID:802;X:-200928;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-7.lvlx\"\,\n    \"levelTitle\"\: \"6-7\: Athletic Coldness\"\,\n    \"path_left\"\: \"toSMB36-7\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:802;X:-200928;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-7.lvlx\"\,\n    \"levelTitle\"\: \"6-7\: Athletic Coldness\"\,\n    \"path_left\"\: \"toSMB36-7\"\,\n    \"path_right\"\: \"toSMB36-Fortress2\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:753;X:-192736;Y:-194496;D:-1;XTRA:"{\n    \"backgroundColor\"\: \"#030303ff\"\,\n    \"backgroundName\"\: \"water\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario World/Vanilla Dome.spc|0\;g=2.5\"\,\n    \"height\"\: 404\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 668\n}\n";
 ID:802;X:-192464;Y:-194208;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMW - W-3\, L-VD1.lvlx\"\,\n    \"levelTitle\"\: \"Vanilla Dome 1\"\,\n    \"path_down\"\: \"toSMWVanillaDomeCC\"\n}\n";
 ID:823;X:-192464;Y:-194144;D:-1;XTRA:"{\n    \"destinationPathName\"\: \"toSMWVanillaDomeMain\"\,\n    \"pathWalkingDirection\"\: 1\,\n    \"warpName\"\: \"toSMWVanillaDomeCC\"\n}\n";
 ID:752;X:-192896;Y:-195552;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutPlainsMain\"\,\n    \"points\"\: \"0\,16\, 0\,-80\, 0\,-128\"\,\n    \"types\"\: \"bridge\, normal\"\n}\n";
 ID:752;X:-192464;Y:-194176;D:-1;XTRA:"{\n    \"name\"\: \"toSMWVanillaDomeCC\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:849;X:-200832;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-Fortress2.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #10\: Boom Boom\"\,\n    \"path_down\"\: \"toSMB36-8\"\,\n    \"path_left\"\: \"toSMB36-Fortress2\"\,\n    \"unlock_down\"\: 9\n}\n";
+ID:752;X:-200896;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-Fortress2\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
+ID:752;X:-200832;Y:-194336;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-8\"\,\n    \"points\"\: \"0\, -32\, 0\, 64\"\n}\n";
+ID:802;X:-200832;Y:-194272;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-8.lvlx\"\,\n    \"levelTitle\"\: \"6-8\: Grassy Area\"\,\n    \"path_right\"\: \"toSMB36-9\"\,\n    \"path_up\"\: \"toSMB36-8\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:849;X:-200512;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-Fortress3.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #11\: Boom Boom\"\,\n    \"path_left\"\: \"toSMB36-Fortress3\"\,\n    \"path_right\"\: \"toSMB36-Airship\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:854;X:-200192;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #6\: Lemmy\"\,\n    \"path_left\"\: \"toSMB36-Airship\"\,\n    \"path_right\"\: \"toSMB3W-6Path1\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-200800;Y:-194272;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-9\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 96\, -32\"\,\n    \"smoothness\"\: 0.01\n}\n";
+ID:802;X:-200704;Y:-194304;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-9.lvlx\"\,\n    \"levelTitle\"\: \"6-9\: Under the Cold Waters\"\,\n    \"path_left\"\: \"toSMB36-9\"\,\n    \"path_up\"\: \"toSMB36-10\"\,\n    \"unlock_up\"\: 9\n}\n";
+ID:802;X:-200704;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-10.lvlx\"\,\n    \"levelTitle\"\: \"6-10\: Ice Skating\"\,\n    \"path_down\"\: \"toSMB36-10\"\,\n    \"path_right\"\: \"toSMB36-Fortress3\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:752;X:-200704;Y:-194336;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-10\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:752;X:-200672;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-Fortress3\"\,\n    \"points\"\: \"-32\, 0\, 160\, 0\"\n}\n";
+ID:752;X:-200480;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-Airship\"\,\n    \"points\"\: \"-32\, 0\, 288\, 0\"\n}\n";
+ID:821;X:-200128;Y:-194368;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-7BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 7\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB3W-6Path1\"\,\n    \"warpName\"\: \"SMB3W-6EndWarp\"\n}\n";
+ID:752;X:-200160;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-6Path1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
