@@ -289,12 +289,12 @@ function SysManager.parseSaveFile(slot) --Parses a save file (Thanks KBM_Quine!)
     end
 
     t.overworldMusicID = tonumber(lines[31])
-    t.gameCompleted = parseSMBX64Bool(lines[32])
+    t.gameCompleted = SysManager.parseSMBX64Bool(lines[32])
 
     t.levelVisiblity = {}
     currentLine = 33
     while (lines[currentLine] ~= '"next"') do
-        t.levelVisiblity[objectIndex] = parseSMBX64Bool(lines[currentLine])
+        t.levelVisiblity[objectIndex] = SysManager.parseSMBX64Bool(lines[currentLine])
         objectIndex = objectIndex + 1
         currentLine = currentLine + 1
     end
@@ -303,7 +303,7 @@ function SysManager.parseSaveFile(slot) --Parses a save file (Thanks KBM_Quine!)
     currentLine = currentLine + 1
     objectIndex = 1
     while (lines[currentLine] ~= '"next"') do
-        t.pathVisiblity[objectIndex] = parseSMBX64Bool(lines[currentLine])
+        t.pathVisiblity[objectIndex] = SysManager.parseSMBX64Bool(lines[currentLine])
         objectIndex = objectIndex + 1
         currentLine = currentLine + 1
     end
@@ -312,7 +312,7 @@ function SysManager.parseSaveFile(slot) --Parses a save file (Thanks KBM_Quine!)
     currentLine = currentLine + 1
     objectIndex = 1
     while (lines[currentLine] ~= '"next"') do
-        t.sceneryVisiblity[objectIndex] = parseSMBX64Bool(lines[currentLine])
+        t.sceneryVisiblity[objectIndex] = SysManager.parseSMBX64Bool(lines[currentLine])
         objectIndex = objectIndex + 1
         currentLine = currentLine + 1
     end
