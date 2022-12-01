@@ -3,7 +3,7 @@ TL:"Super Mario Bros. 3\: World 7-1";XTRA:"{\n    \"timer\"\: {\n        \"enabl
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:2;
-SC:1;L:-180000;R:-179200;T:-183840;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/Pipe Maze.ogg";BG:4;
+SC:1;L:-180000;R:-179200;T:-183840;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/Pipe Maze.ogg";BG:4;CS:1;
 SC:2;L:-160000;R:-158560;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:2;
 SECTION_END
 STARTPOINT
