@@ -1968,7 +1968,7 @@ ID:802;X:-192464;Y:-194208;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMW - W-3\, L
 ID:823;X:-192464;Y:-194144;D:-1;XTRA:"{\n    \"destinationPathName\"\: \"toSMWVanillaDomeMain\"\,\n    \"pathWalkingDirection\"\: 1\,\n    \"warpName\"\: \"toSMWVanillaDomeCC\"\n}\n";
 ID:752;X:-192896;Y:-195552;D:-1;XTRA:"{\n    \"hideIfLocked\"\: true\,\n    \"name\"\: \"toSMWDonutPlainsMain\"\,\n    \"points\"\: \"0\,16\, 0\,-80\, 0\,-128\"\,\n    \"types\"\: \"bridge\, normal\"\n}\n";
 ID:752;X:-192464;Y:-194176;D:-1;XTRA:"{\n    \"name\"\: \"toSMWVanillaDomeCC\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
-ID:849;X:-200832;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-Fortress2.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #10\: Boom Boom\"\,\n    \"path_down\"\: \"toSMB36-8\"\,\n    \"path_left\"\: \"toSMB36-Fortress2\"\,\n    \"unlock_down\"\: 9\n}\n";
+ID:849;X:-200832;Y:-194368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-Fortress2.lvlx\"\,\n    \"levelTitle\"\: \"Fortress #10\: Boom Boom\"\,\n    \"path_down\"\: \"toSMB36-8\"\,\n    \"path_left\"\: \"toSMB36-Fortress2\"\,\n    \"path_up\"\: \"toSMB3W-6Path2\"\,\n    \"unlock_down\"\: 9\,\n    \"unlock_up\"\: 9\n}\n";
 ID:752;X:-200896;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-Fortress2\"\,\n    \"points\"\: \"-32\, 0\, 64\, 0\"\n}\n";
 ID:752;X:-200832;Y:-194336;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-8\"\,\n    \"points\"\: \"0\, -32\, 0\, 64\"\n}\n";
 ID:802;X:-200832;Y:-194272;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-6\, L-8.lvlx\"\,\n    \"levelTitle\"\: \"6-8\: Grassy Area\"\,\n    \"path_right\"\: \"toSMB36-9\"\,\n    \"path_up\"\: \"toSMB36-8\"\,\n    \"unlock_right\"\: 9\n}\n";
@@ -1982,6 +1982,8 @@ ID:752;X:-200672;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-Fortress3\"\,\
 ID:752;X:-200480;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB36-Airship\"\,\n    \"points\"\: \"-32\, 0\, 288\, 0\"\n}\n";
 ID:821;X:-200128;Y:-194368;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-7BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 7\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB3W-6Path1\"\,\n    \"warpName\"\: \"SMB3W-6EndWarp\"\n}\n";
 ID:752;X:-200160;Y:-194368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-6Path1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\"\n}\n";
+ID:852;X:-200832;Y:-194496;D:-1;XTRA:"{\n    \"levelTitle\"\: \"Bonus Challenge! #5\"\,\n    \"path_down\"\: \"toSMB3W-6Path2\"\n}\n";
+ID:752;X:-200832;Y:-194400;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-6Path2\"\,\n    \"points\"\: \"0\, 32\, 0\, -96\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
