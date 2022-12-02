@@ -76,4 +76,8 @@ function onDraw()
         smwMap.unlockPath("toSMB35-TowerPath1")
         smwMap.unlockPath("toSMB35-Tower")
     end
+    if smwMap.unlockingCurrentPath == "toSMB3W-7Path1" then
+        smwMap.unlockPath("toSMB37-4")
+        smwMap.unlockPath("toSMB37-5")
+    end
 end
