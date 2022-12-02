@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. 3\: World 7-3";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-193280;T:-200600;B:-200000;MZ:0;MF:"";BG:2;
+SC:0;L:-200000;R:-193280;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Athletic.spc|0\;g=2.5";BG:2;
 SECTION_END
 STARTPOINT
 ID:1;X:-199932;Y:-200214;D:1;
