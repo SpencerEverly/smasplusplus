@@ -66,6 +66,7 @@ Packs/Sprites are by:
 - Turca
 - larsenv
 - bredi
+- Link
 
 ----Costume/Character Credits----
 
