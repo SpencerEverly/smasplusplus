@@ -549,8 +549,8 @@ function onExit()
     if Misc.inMarioChallenge() then
         local oldpoints = Misc.score()
         mem(0x00B2C5A8, FIELD_WORD, SaveData.totalCoinsClassic)
-        if SaveData.totalScoreClassic > 9999999 then
-            SaveData.totalScoreClassic = 9999999
+        if SaveData.totalScoreClassic > 9999990 then
+            SaveData.totalScoreClassic = 9999990
         end
         Misc.score(oldpoints - SaveData.totalScoreClassic)
         if SaveData.totalLives > 99 then
