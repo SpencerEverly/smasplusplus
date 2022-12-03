@@ -179,6 +179,9 @@ end
 
 if GameData.tempReserve == nil then
     GameData.tempReserve = {}
+    for i = 1,200 do
+        GameData.tempReserve[i] = 0
+    end
 end
 
 function globalgenerals.onStart()
@@ -204,7 +207,9 @@ function globalgenerals.onStart()
     Sound.checkSMBXSoundSystemStatus()
     for _,p in ipairs(Player.get()) do
         if Misc.inEditor() then
-            p.reservePowerup = GameData.tempReserve[p.idx]
+            if GameData.tempReserve ~= {} and GameData.tempReserve ~= nil then
+                p.reservePowerup = GameData.tempReserve[p.idx]
+            end
         end
     end
 end
