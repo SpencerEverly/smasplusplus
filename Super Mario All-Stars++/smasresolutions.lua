@@ -19,7 +19,7 @@ function smasresolutions.onInitAPI()
     registerEvent(smasresolutions,"onDraw")
 end
 
-function smasresolutions.onDraw()
+function smasresolutions.changeResolution()
     if SaveData.resolution == "fullscreen" then
         customCamera.defaultScreenWidth = 800
         customCamera.defaultScreenHeight = 600
@@ -43,7 +43,6 @@ function smasresolutions.onDraw()
         customCamera.defaultScreenHeight = 450
         customCamera.defaultZoom = 0.75
         customCamera.defaultScreenOffsetY = 0
-        Graphics.drawImageWP(widebars, 0, 0, 7)
         if not SaveData.letterbox then
             smallScreen.priority = 10
             smallScreen.scaleX = 1
@@ -62,7 +61,6 @@ function smasresolutions.onDraw()
         customCamera.defaultScreenHeight = 337
         customCamera.defaultZoom = 0.562
         customCamera.defaultScreenOffsetY = 0
-        Graphics.drawImageWP(ultrawidebars, 0, 0, 7)
         if not SaveData.letterbox then
             smallScreen.priority = 10
             smallScreen.scaleX = 1
@@ -81,7 +79,6 @@ function smasresolutions.onDraw()
         customCamera.defaultScreenHeight = 500
         customCamera.defaultZoom = 0.84
         customCamera.defaultScreenOffsetY = 0
-        Graphics.drawImageWP(steamdeckbars, 0, 0, 7)
         if not SaveData.letterbox then
             smallScreen.priority = 10
             smallScreen.scaleX = 1
@@ -101,7 +98,6 @@ function smasresolutions.onDraw()
         customCamera.defaultScreenHeight = 612
         customCamera.defaultZoom = 0.60
         customCamera.defaultScreenOffsetY = 0
-        Graphics.drawImageWP(nesbars, 0, 0, 7)
         if not SaveData.letterbox then
             smallScreen.priority = 10
             smallScreen.scaleX = 1.56
@@ -114,9 +110,6 @@ function smasresolutions.onDraw()
             smallScreen.scaleY = 1.08
             smallScreen.offsetX = 0
             smallScreen.offsetY = 0
-        end
-        if SaveData.borderEnabled == true then
-            Graphics.drawImageWP(nesborder, 0, 0, 8)
         end
     end
     if SaveData.resolution == "gba" then
@@ -137,16 +130,12 @@ function smasresolutions.onDraw()
             smallScreen.offsetX = 0
             smallScreen.offsetY = 0
         end
-        if SaveData.borderEnabled == true then
-            Graphics.drawImageWP(gbaborder, 0, 0, 8)
-        end
     end
     if SaveData.resolution == "3ds" then
         customCamera.defaultScreenWidth = 700
         customCamera.defaultScreenHeight = 419
         customCamera.defaultZoom = 0.58
         customCamera.defaultScreenOffsetY = 70
-        Graphics.drawImageWP(threedsbars, 0, 0, 7)
         if not SaveData.letterbox then
             smallScreen.priority = 10
             smallScreen.scaleX = 1.50
@@ -160,7 +149,29 @@ function smasresolutions.onDraw()
             smallScreen.offsetX = 0
             smallScreen.offsetY = 0
         end
-        if SaveData.borderEnabled == true then
+    end
+end
+
+function smasresolutions.onDraw()
+    if SaveData.resolution == "widescreen" then
+        Graphics.drawImageWP(widebars, 0, 0, 7)
+    elseif SaveData.resolution == "ultrawide" then
+        Graphics.drawImageWP(ultrawidebars, 0, 0, 7)
+    elseif SaveData.resolution == "steamdeck" then
+        Graphics.drawImageWP(steamdeckbars, 0, 0, 7)
+    elseif SaveData.resolution == "nes" then
+        Graphics.drawImageWP(nesbars, 0, 0, 7)
+        if SaveData.borderEnabled then
+            Graphics.drawImageWP(nesborder, 0, 0, 8)
+        end
+    elseif SaveData.resolution == "gba" then
+        if SaveData.borderEnabled then
+            Graphics.drawImageWP(gbaborder, 0, 0, 8)
+        end
+    end
+    if SaveData.resolution == "3ds" then
+        Graphics.drawImageWP(threedsbars, 0, 0, 7)
+        if SaveData.borderEnabled then
             Graphics.drawImageWP(threedsborder, 0, 0, 8)
         end
     end

@@ -65,9 +65,6 @@ end
 if SaveData.WSMBAOriginalGraphicsActivated == nil then
     SaveData.WSMBAOriginalGraphicsActivated = false
 end
-if SaveData.SMA1ModeActivated == nil then
-    SaveData.SMA1ModeActivated = false
-end
 
 if SaveData.framerateEnabled == nil then
     SaveData.framerateEnabled = false
@@ -85,11 +82,11 @@ local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 smashud.visible.starcoins = false
 GameData.activateAbilityMessage = false
 
-local eastercrash = false
-local eastercrashdone = false
-local eastercrashmsg = false
-local eastercrashprevload = false
-local blockidx5000check = false
+local easterCrash = false
+local easterCrashDone = false
+local easterCrashMsg = false
+local easterCrashPrevLoad = false
+local blockIdx5000Check = false
 
 SaveData._anothercurrency = {SaveData.totalCoins}
 
@@ -120,12 +117,6 @@ end
 local killed = false
 local killed2 = false
 
-local pipecounter = 0
-local pipecounter2 = 0
-local doorcounter = 0
-local doorcounter2 = 0
-local fadetolevel = false
-
 local ready = false
 
 local globalgenerals = {}
@@ -155,16 +146,16 @@ function globalgenerals.onInitAPI()
 end
 
 function lavaShroomEasterEgg()
-    eastercrashprevload = true
+    easterCrashPrevLoad = true
     smasbooleans.musicMuted = true
     Sound.playSFX("easteregg_smbx13crash.ogg")
-    eastercrashmsg = true
+    easterCrashMsg = true
     Routine.wait(2, true)
     smasbooleans.musicMuted = false
     Routine.wait(20, true)
-    eastercrashmsg = false
-    eastercrashdone = true
-    eastercrash = false
+    easterCrashMsg = false
+    easterCrashDone = true
+    easterCrash = false
 end
 
 --New pause menu was made, this is to prevent the old pause menu from opening
@@ -189,6 +180,7 @@ end
 function globalgenerals.onStart()
     Sound.startupRefreshSystem()
     Playur.failsafeStartupPlayerCheck()
+    smasresolutions.changeResolution()
     if Misc.inEditor() then
         debugbox = require("debugbox")
         debugbox.bootactive = true
@@ -201,45 +193,10 @@ function globalgenerals.onStart()
     if SaveData.lastLevelPlayed == nil then
         SaveData.lastLevelPlayed = Level.filename()
     end
-    if SaveData.disablePWingSFX then
-        extrasounds.enablePWingSFX = false
-    elseif not SaveData.disablePWingSFX then
-        extrasounds.enablePWingSFX = true
-    end
-    if SaveData.SMBXSoundSystem then
-        extrasounds.enableGrabShellSFX = false
-        extrasounds.playPSwitchTimerSFX = false
-        extrasounds.enableSMB2EnemyKillSounds = false
-        extrasounds.useOriginalSpinJumpForBigEnemies = true
-        extrasounds.enableHPCollecting = false
-        extrasounds.useOriginalDragonCoinSounds = true
-        extrasounds.useOriginalBowserFireballInstead = true
-        extrasounds.enableIceBlockBreaking = false
-        extrasounds.useOriginalBlockSproutInstead = true
-        extrasounds.useFireworksInsteadOfOtherExplosions = true
-        extrasounds.use1UPSoundForAll1UPs = true
-        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = true
-        extrasounds.enableBoomerangBroBoomerangSFX = false
-        extrasounds.enableToadBoomerangSFX = false
-        extrasounds.useFireSoundForHammerSuit = true
-        extrasounds.useFireSoundForIce = true
-    elseif not SaveData.SMBXSoundSystem then
-        extrasounds.enableGrabShellSFX = true
-        extrasounds.playPSwitchTimerSFX = true
-        extrasounds.enableSMB2EnemyKillSounds = true
-        extrasounds.useOriginalSpinJumpForBigEnemies = false
-        extrasounds.enableHPCollecting = true
-        extrasounds.useOriginalDragonCoinSounds = false
-        extrasounds.useOriginalBowserFireballInstead = false
-        extrasounds.enableIceBlockBreaking = true
-        extrasounds.useOriginalBlockSproutInstead = false
-        extrasounds.useFireworksInsteadOfOtherExplosions = false
-        extrasounds.use1UPSoundForAll1UPs = false
-        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = false
-        extrasounds.enableBoomerangBroBoomerangSFX = true
-        extrasounds.enableToadBoomerangSFX = true
-        extrasounds.useFireSoundForHammerSuit = false
-        extrasounds.useFireSoundForIce = false
+    Sound.checkPWingSoundStatus()
+    Sound.checkSMBXSoundSystemStatus()
+    if Misc.inEditor() then
+        Misc.switchTestLevelToCurrentLevel()
     end
 end
 
@@ -302,7 +259,7 @@ function globalgenerals.onTick()
     end
     for k,block in ipairs(Block.get(smastables.allLavaBlockIDs)) do
         if block.idx >= 5000 then --Easter egg block IDX detection, for the epic 1.3 mode crash thingy
-            blockidx5000check = true
+            blockIdx5000Check = true
         end
     end
     
@@ -403,10 +360,10 @@ function globalgenerals.onPostNPCKill(npc, harmType)
         end
         if SaveData.disableX2char then
             if smastables.allInteractableNPCIDs[npc.id] then
-                if blockidx5000check then
+                if blockIdx5000Check then
                     if harmType == HARM_TYPE_LAVA then
-                        eastercrash = true
-                        if not eastercrashprevload then
+                        easterCrash = true
+                        if not easterCrashPrevLoad then
                             Routine.run(lavaShroomEasterEgg)
                         end
                     end
@@ -455,7 +412,7 @@ function globalgenerals.onDraw()
         textplus.print{x = 8, y = 8, text = actualframecount, font = numberfont, priority = 0, xscale = 1, yscale = 1}
     end
     
-    if eastercrashmsg then
+    if easterCrashMsg then
         textplus.print{x=145, y=80, text = "Congrats! You reached more than the 5000th block idx and burned a ", priority=-3, color=Color.yellow, font=statusFont}
         textplus.print{x=155, y=90, text = "collectable in the lava. This would've crashed SMBX 1.3!", priority=-3, color=Color.yellow, font=statusFont}
         textplus.print{x=195, y=100, text = "You're really good at finding secrets, player ;)", priority=-3, color=Color.yellow, font=statusFont}

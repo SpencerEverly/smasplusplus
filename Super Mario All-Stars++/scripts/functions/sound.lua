@@ -298,6 +298,51 @@ function Sound.startupRefreshSystem()
     end
 end
 
+function Sound.checkPWingSoundStatus()
+    if SaveData.disablePWingSFX then
+        extrasounds.enablePWingSFX = false
+    elseif not SaveData.disablePWingSFX then
+        extrasounds.enablePWingSFX = true
+    end
+end
+
+function Sound.checkSMBXSoundSystemStatus()
+    if SaveData.SMBXSoundSystem then
+        extrasounds.enableGrabShellSFX = false
+        extrasounds.playPSwitchTimerSFX = false
+        extrasounds.enableSMB2EnemyKillSounds = false
+        extrasounds.useOriginalSpinJumpForBigEnemies = true
+        extrasounds.enableHPCollecting = false
+        extrasounds.useOriginalDragonCoinSounds = true
+        extrasounds.useOriginalBowserFireballInstead = true
+        extrasounds.enableIceBlockBreaking = false
+        extrasounds.useOriginalBlockSproutInstead = true
+        extrasounds.useFireworksInsteadOfOtherExplosions = true
+        extrasounds.use1UPSoundForAll1UPs = true
+        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = true
+        extrasounds.enableBoomerangBroBoomerangSFX = false
+        extrasounds.enableToadBoomerangSFX = false
+        extrasounds.useFireSoundForHammerSuit = true
+        extrasounds.useFireSoundForIce = true
+    elseif not SaveData.SMBXSoundSystem then
+        extrasounds.enableGrabShellSFX = true
+        extrasounds.playPSwitchTimerSFX = true
+        extrasounds.enableSMB2EnemyKillSounds = true
+        extrasounds.useOriginalSpinJumpForBigEnemies = false
+        extrasounds.enableHPCollecting = true
+        extrasounds.useOriginalDragonCoinSounds = false
+        extrasounds.useOriginalBowserFireballInstead = false
+        extrasounds.enableIceBlockBreaking = true
+        extrasounds.useOriginalBlockSproutInstead = false
+        extrasounds.useFireworksInsteadOfOtherExplosions = false
+        extrasounds.use1UPSoundForAll1UPs = false
+        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = false
+        extrasounds.enableBoomerangBroBoomerangSFX = true
+        extrasounds.enableToadBoomerangSFX = true
+        extrasounds.useFireSoundForHammerSuit = false
+        extrasounds.useFireSoundForIce = false
+    end
+end
 
 
 function Sound.onDraw()

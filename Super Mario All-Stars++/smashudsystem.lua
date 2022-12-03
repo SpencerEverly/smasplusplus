@@ -29,12 +29,6 @@ if SaveData.totalCherries == nil then
     SaveData.totalCherries = 0
 end
 
-if SaveData.thirteenmodelives == nil then --This is stuff specific for my episode. You can remove it if you want to
-    if SaveData.disableX2char then
-        SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT) --When false, the lives won't be stored in it's own SaveData variable. If true, the lives will update.
-    end
-end
-
 local deathFrames = {
     [CHARACTER_MARIO] = 3,
     [CHARACTER_LUIGI] = 5,

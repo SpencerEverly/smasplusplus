@@ -332,12 +332,12 @@ local function MigrateOldSave3()
     GameData.temporaryPowerupStored = player.powerup
     GameData.temporaryReserveStored = player.reservePowerup
     for k,v in ipairs(smastables.__allLevels) do
-        if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) == true then
+        if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) then
             table.insert(SaveData.completeLevels, v)
         end
     end
     for k,v in ipairs(smastables.__allLevelsOptional) do
-        if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) == true then
+        if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) then
             table.insert(SaveData.completeLevelsOptional, v)
         end
     end
@@ -370,7 +370,7 @@ end
 local function FirstBoot6()
     Sound.changeMusic("_OST/All Stars Menu/Boot Menu (First Boot).ogg", 0)
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
-    if SaveData.firstBootCompleted == false then
+    if not SaveData.firstBootCompleted then
         SaveData.firstBootCompleted = true
         GameData.playernameenterfirstboot = false
     end
@@ -446,27 +446,37 @@ end
 
 local function ResolutionChange1()
     Sound.playSFX("resolution-set.ogg")
+    Routine.waitFrames(1, true)
+    smasresolutions.changeResolution()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
 end
 
 local function ResolutionChangeBorder2()
-    if SaveData.borderEnabled == true then
+    if SaveData.borderEnabled then
         Sound.playSFX("resolutionborder-disable.ogg")
         SaveData.borderEnabled = false
-    elseif SaveData.borderEnabled == false then
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
+    elseif not SaveData.borderEnabled then
         Sound.playSFX("resolutionborder-enable.ogg")
         SaveData.borderEnabled = true
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     end
     littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>Border toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
 end
 
 local function ResolutionChangeScale3()
-    if SaveData.letterbox == true then
+    if SaveData.letterbox then
         Sound.playSFX("letterbox-disable.ogg")
         SaveData.letterbox = false
-    elseif SaveData.letterbox == false then
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
+    elseif not SaveData.letterbox then
         Sound.playSFX("letterbox-enable.ogg")
         SaveData.letterbox = true
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     end
     littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Scaling toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
 end
@@ -530,12 +540,11 @@ local function credits1()
 end
 
 local function X2Char()
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         Sound.playSFX("1.3Mode/bowser-killed.ogg")
         SaveData.disableX2char = true
-        SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT)
         littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
-    elseif SaveData.disableX2char == true then
+    elseif SaveData.disableX2char then
         Sound.playSFX("x2-mode-enabled.ogg")
         SaveData.disableX2char = false
         littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})

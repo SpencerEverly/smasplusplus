@@ -163,40 +163,37 @@ local function wsmbaoriginalgraphicsoggle()
     end
 end
 
-local function sma1ModeToggle()
-    if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
-        pauseplus.canControlMenu = false
-        Sound.playSFX(1001)
-        startFadeOut()
-        Routine.wait(1, true)
-        Misc.unpause()
-        SaveData.SMA1ModeActivated = not SaveData.SMA1ModeActivated
-        exitFadeActive = false
-        exitFadeActiveDone = true
-        Level.load(Level.fileName())
-    else
-        Sound.playSFX(1001)
-        SaveData.SMA1ModeActivated = not SaveData.SMA1ModeActivated
-    end
-end
-
 local function changeresolution()
     Sound.playSFX("resolution-set.ogg")
     screenModes = pauseplus.getSelectionValue("resolutionsettings","Switch Resolution")
     if screenModes == RESOLUTION_FULL then
         SaveData.resolution = "fullscreen"
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     elseif screenModes == RESOLUTION_WIDE then
         SaveData.resolution = "widescreen"
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     elseif screenModes == RESOLUTION_ULTRAWIDE then
         SaveData.resolution = "ultrawide"
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     elseif screenModes == RESOLUTION_STEAMDECK then
         SaveData.resolution = "steamdeck"
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     elseif screenModes == RESOLUTION_NES then
         SaveData.resolution = "nes"
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     elseif screenModes == RESOLUTION_GBA then
         SaveData.resolution = "gba"
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     elseif screenModes == RESOLUTION_THREEDS then
         SaveData.resolution = "3ds"
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     end
 end
 
@@ -204,9 +201,13 @@ local function changeresolutionborder()
     if pauseplus.getSelectionValue("resolutionsettings","Disable Resolution Border") then
         Sound.playSFX("resolutionborder-disable.ogg")
         SaveData.borderEnabled = false
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     else
         Sound.playSFX("resolutionborder-enable.ogg")
         SaveData.borderEnabled = true
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     end
 end
 
@@ -278,9 +279,13 @@ local function changeletterbox()
     if pauseplus.getSelectionValue("resolutionsettings","Enable Letterbox Scaling") then
         Sound.playSFX("letterbox-disable.ogg")
         SaveData.letterbox = false
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     else
         Sound.playSFX("letterbox-enable.ogg")
         SaveData.letterbox = true
+        Routine.waitFrames(1, true)
+        smasresolutions.changeResolution()
     end
 end
 
@@ -297,42 +302,10 @@ end
 local function smbxdefaultsoundsystem()
     if pauseplus.getSelectionValue("soundsettings","Use the Original SMBX Sound System") then
         SaveData.SMBXSoundSystem = true
-        extrasounds.enableGrabShellSFX = false
-        extrasounds.playPSwitchTimerSFX = false
-        extrasounds.enableSMB2EnemyKillSounds = false
-        extrasounds.useOriginalSpinJumpForBigEnemies = true
-        extrasounds.enableHPCollecting = false
-        extrasounds.useOriginalDragonCoinSounds = true
-        extrasounds.useOriginalBowserFireballInstead = true
-        extrasounds.enableIceBlockBreaking = false
-        extrasounds.useOriginalBlockSproutInstead = true
-        extrasounds.useFireworksInsteadOfOtherExplosions = true
-        extrasounds.use1UPSoundForAll1UPs = true
-        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = true
-        extrasounds.enableBoomerangBroBoomerangSFX = false
-        extrasounds.enableToadBoomerangSFX = false
-        extrasounds.useFireSoundForHammerSuit = true
-        extrasounds.useFireSoundForIce = true
-        extrasounds.enableIceMeltingSFX = false
+        Sound.checkSMBXSoundSystemStatus()
     else
         SaveData.SMBXSoundSystem = false
-        extrasounds.enableGrabShellSFX = true
-        extrasounds.playPSwitchTimerSFX = true
-        extrasounds.enableSMB2EnemyKillSounds = true
-        extrasounds.useOriginalSpinJumpForBigEnemies = false
-        extrasounds.enableHPCollecting = true
-        extrasounds.useOriginalDragonCoinSounds = false
-        extrasounds.useOriginalBowserFireballInstead = false
-        extrasounds.enableIceBlockBreaking = true
-        extrasounds.useOriginalBlockSproutInstead = false
-        extrasounds.useFireworksInsteadOfOtherExplosions = false
-        extrasounds.use1UPSoundForAll1UPs = false
-        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = false
-        extrasounds.enableBoomerangBroBoomerangSFX = true
-        extrasounds.enableToadBoomerangSFX = true
-        extrasounds.useFireSoundForHammerSuit = false
-        extrasounds.useFireSoundForIce = false
-        extrasounds.enableIceMeltingSFX = true
+        Sound.checkSMBXSoundSystemStatus()
     end
 end
 
@@ -1633,7 +1606,6 @@ function pauseSpecifics()
         pauseplus.createOption("miscsettings",{text = "Enable SMB1 Hard Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable SMB1 Hard Mode. This will only apply to SMB1 levels.", action = function() smb1hardmodetoggle() end})
         pauseplus.createOption("miscsettings",{text = "Enable All Night Nippon Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable the All Night Nippon Mode. This will only apply to SMB1 and SMBLL levels.", action = function() smb1allnightnipponoggle() end})
         pauseplus.createOption("miscsettings",{text = "Enable Original WSMBA Mode",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable the original Where SMB Attacks mode. This will only apply to WSMBA levels.", action = function() wsmbaoriginalgraphicsoggle() end})
-        --pauseplus.createOption("miscsettings",{text = "Toggle SMA1 Mode",description = "Toggle the SMA1 Mode state. This will switch level designs from SMB2/SMAS to SMA1 and back. If you're on any SMB2 level, THIS WILL RESTART THE LEVEL!",pauseplus.save,closeMenu = true, actions = {function() Routine.run(sma1ModeToggle) end}})
         
         --Sound Settings
         pauseplus.createOption("soundsettings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
@@ -1642,9 +1614,9 @@ function pauseSpecifics()
         pauseplus.createOption("soundsettings",{text = "Use the Original SMBX Sound System",selectionType = pauseplus.SELECTION_CHECKBOX,description = "This options disables all the new sounds (Except P-Wing) and reverts back to the original sound system.",action = function() smbxdefaultsoundsystem() end})
         
         --Resolution Settings
-        pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA,RESOLUTION_THREEDS}, action = function() changeresolution() end})
-        pauseplus.createOption("resolutionsettings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() changeletterbox() end})
-        pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() changeresolutionborder() end})
+        pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA,RESOLUTION_THREEDS}, action = function() Routine.run(changeresolution) end})
+        pauseplus.createOption("resolutionsettings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() Routine.run(changeletterbox) end})
+        pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() Routine.run(changeresolutionborder) end})
         
         --Character Menu
         if not SaveData.disableX2char then
