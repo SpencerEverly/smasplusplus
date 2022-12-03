@@ -912,18 +912,6 @@ function Misc.getActualLevelName()
     return levelName
 end
 
-function Misc.switchTestLevelToCurrentLevel()
-    if SMBX_VERSION == VER_SEE_MOD then
-        if Misc.inEditor() then
-            Misc.setNewTestModeLevelData(Level.filename())
-        else
-            return
-        end
-    else
-        return
-    end
-end
-
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then

@@ -184,6 +184,9 @@ function globalgenerals.onStart()
     if Misc.inEditor() then
         debugbox = require("debugbox")
         debugbox.bootactive = true
+        if SMBX_VERSION == VER_SEE_MOD then
+            Misc.setNewTestModeLevelData(Level.filename())
+        end
     end
     if GameData.____mainMenuComplete == true then
         if (mem(0x00B25724, FIELD_STRING) == "SMAS - Start.lvlx") then
@@ -195,9 +198,6 @@ function globalgenerals.onStart()
     end
     Sound.checkPWingSoundStatus()
     Sound.checkSMBXSoundSystemStatus()
-    if Misc.inEditor() then
-        Misc.switchTestLevelToCurrentLevel()
-    end
 end
 
 function globalgenerals.onTickEnd()
