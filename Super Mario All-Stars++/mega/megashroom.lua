@@ -380,8 +380,8 @@ local function UpdateMegaState()
                     if(growing[p] == 1) then
                         updateHitbox(p);
                         breakBlocks(p);
+                        p:setFrame(Playur.jumpPose(p))
                     end
-                    p:setFrame(Playur.jumpPose(p))
                 elseif(growing[p] < 0) then --shrinking
                     growing[p] = growing[p]+1;
                     growthScale[p] = math.abs(growing[p])/growthTime;

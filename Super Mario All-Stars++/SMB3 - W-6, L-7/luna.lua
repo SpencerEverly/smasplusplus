@@ -9,5 +9,5 @@ function onEvent(eventName)
 end
 
 function onLoadSection0()
-    autoscroll.scrollRight(1)
+    autoscrolla.scrollRight(1)
 end

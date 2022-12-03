@@ -3,5 +3,5 @@ local autoscroll = require("autoscroll")
 local inventory = require("customInventory")
 
 function onLoadSection0()
-    autoscroll.scrollRight(1)
+    autoscrolla.scrollRight(1)
 end

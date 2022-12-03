@@ -565,25 +565,44 @@ local function isInQuicksand(p) --Returns true if the specified player is in qui
     )
 end
 
-local function hasJumped(p)
-    return (p.deathTimer == 0
-        and Level.endState() == 0
-        and (
-            not GameData.winStateActive
-            or GameData.winStateActive == nil
+local function hasJumped(p, ahippinandahoppinactive)
+    if ahippinandahoppinactive == nil then
+        ahippinandahoppinactive = false
+    end
+    if not ahippinandahoppinactive then
+        return (p.deathTimer == 0
+            and Level.endState() == 0
+            and (
+                not GameData.winStateActive
+                or GameData.winStateActive == nil
+            )
+            and p.forcedState == 0
+            and not isPlayerUnderwater(p)
+            and (
+                p:isOnGround()
+                or p:isClimbing()
+                or isInQuicksand(p)
+            )
+            and (
+                p:mem(0x11E, FIELD_BOOL)
+                and p.keys.jump == KEYS_PRESSED
+            )
         )
-        and p.forcedState == 0
-        and not isPlayerUnderwater(p)
-        and (
-            p:isOnGround()
-            or p:isClimbing()
-            or isInQuicksand(p)
+    elseif ahippinandahoppinactive then
+        return (p.deathTimer == 0
+            and Level.endState() == 0
+            and (
+                not GameData.winStateActive
+                or GameData.winStateActive == nil
+            )
+            and p.forcedState == 0
+            and not Playur.underwater(p)
+            and (
+                p:mem(0x11E, FIELD_BOOL)
+                and p.keys.jump == KEYS_PRESSED
+            )
         )
-        and (
-            p:mem(0x11E, FIELD_BOOL)
-            and p.keys.jump == KEYS_PRESSED
-        )
-    )
+    end
 end
 
 local function isOnScreen(npc)
@@ -677,7 +696,11 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             
             --**JUMPING**
-            if hasJumped(p) then
+            if hasJumped(p, false) and not Cheats.get("ahippinandahoppin").active then
+                if extrasounds.enableJumpingSFX then
+                    extrasounds.playSFX(1)
+                end
+            elseif hasJumped(p, true) and Cheats.get("ahippinandahoppin").active then
                 if extrasounds.enableJumpingSFX then
                     extrasounds.playSFX(1)
                 end

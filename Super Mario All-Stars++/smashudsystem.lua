@@ -30,7 +30,7 @@ if SaveData.totalCherries == nil then
 end
 
 if SaveData.thirteenmodelives == nil then --This is stuff specific for my episode. You can remove it if you want to
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         SaveData.thirteenmodelives = mem(0x00B2C5AC,FIELD_FLOAT) --When false, the lives won't be stored in it's own SaveData variable. If true, the lives will update.
     end
 end
@@ -135,12 +135,11 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
 end
 
 function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
-    local coins = table.map{10,33,88,103,138,152,251,252,253,258,528}
     if bootmenu.active == false then
         for _,p in ipairs(Player.get()) do
             
             
-            if coins[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
+            if smastables.allCoinNPCIDs[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1 --One coin collected
             end
             
@@ -249,7 +248,7 @@ function smashudsystem.gameOverSequences() --These are all the game over sequenc
     end
 end
 
-function thirteenmodedeath()
+function thirteenModeDeath()
     smasbooleans.musicMuted = true
     Audio.MusicVolume(0)
     if SaveData.totalLives < 0 and SaveData.enableLives then
@@ -291,7 +290,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
     if smashudsystem.activated == true then
         if bootmenu.active == false then
             if not Misc.inMarioChallenge() then
-                if SaveData.disableX2char == false then
+                if not SaveData.disableX2char then
                     if not battledependencies.battlemodeactive then
                         if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
                             if player.deathTimer == 0 then
@@ -390,7 +389,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                         end
                     end
                 end
-                if SaveData.disableX2char == true then
+                if SaveData.disableX2char then
                     if not battledependencies.battlemodeactive then
                         SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                         SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
@@ -427,9 +426,9 @@ function smashudsystem.onTick()
         SaveData.totalCherries = 0
     end
     
-    if SaveData.disableX2char == true then
-        if Playur.checkLivingIndex() == nil then
-            Routine.run(thirteenmodedeath)
+    if SaveData.disableX2char then
+        if not Playur.isAnyPlayerAlive() then
+            Routine.run(thirteenModeDeath)
         end
     end
     if(not killed1 and player:mem(0x13E,FIELD_BOOL)) then

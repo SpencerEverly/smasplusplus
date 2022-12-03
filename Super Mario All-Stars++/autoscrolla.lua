@@ -74,28 +74,30 @@ function autoscroll.onTick()
     if shouldDiscardOnCameraDraw then
         shouldDiscardOnCameraDraw = false
     end
-
-    for section, state in pairs(active_scrolls) do
-        local x1, y1, y2, x2 = getSectionBounds(section)
-        
-        local dX1 = state.x1 - x1
-        local dY1 = state.y1 - y1
-        local dX2 = state.x2 - x2
-        local dY2 = state.y2 - y2
-        
-        if (dX1 == 0) and (dX2 == 0) and (dY1 == 0) and (dY2 == 0) then
-            active_scrolls[section] = nil
-        else        
-            dX1 = math.min(math.max(-state.xs, dX1), state.xs)
-            dX2 = math.min(math.max(-state.xs, dX2), state.xs)
-            dY1 = math.min(math.max(-state.ys, dY1), state.ys)
-            dY2 = math.min(math.max(-state.ys, dY2), state.ys)
+    
+    if not Playur.inForcedState() then
+        for section, state in pairs(active_scrolls) do
+            local x1, y1, y2, x2 = getSectionBounds(section)
             
-            x1 = x1 + dX1
-            x2 = x2 + dX2
-            y1 = y1 + dY1
-            y2 = y2 + dY2
-            setSectionBounds(section, x1, y1, y2, x2)
+            local dX1 = state.x1 - x1
+            local dY1 = state.y1 - y1
+            local dX2 = state.x2 - x2
+            local dY2 = state.y2 - y2
+            
+            if (dX1 == 0) and (dX2 == 0) and (dY1 == 0) and (dY2 == 0) then
+                active_scrolls[section] = nil
+            else        
+                dX1 = math.min(math.max(-state.xs, dX1), state.xs)
+                dX2 = math.min(math.max(-state.xs, dX2), state.xs)
+                dY1 = math.min(math.max(-state.ys, dY1), state.ys)
+                dY2 = math.min(math.max(-state.ys, dY2), state.ys)
+                
+                x1 = x1 + dX1
+                x2 = x2 + dX2
+                y1 = y1 + dY1
+                y2 = y2 + dY2
+                setSectionBounds(section, x1, y1, y2, x2)
+            end
         end
     end
 end

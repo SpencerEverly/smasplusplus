@@ -17,6 +17,12 @@ local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local PLAYER_START_POINT_ADDR = mem(0x00B25148,FIELD_DWORD)
 
+local threePlayersOnSEEModActive = false
+
+function Playur.onInitAPI()
+    registerEvent(Playur,"onDraw")
+end
+
 function Playur.execute(index, func) --Better player/player2 detection, for simplifying mem functions, or detecting either player for any code-related function. Example: Playur.execute(1, function(p) p:kill() end)
     if index == nil then
         index = 1
@@ -41,6 +47,19 @@ function Playur.setCount(count) --Sets the total count of the players in the lev
         return
     end
     return mem(GM_PLAYERS_COUNT_ADDR, FIELD_WORD, count)
+end
+
+function Playur.threePlayersOrAboveActiveWithNoCheats()
+    return (Player.count() > 2
+        and not Cheats.get("supermario2").active
+        and not Cheats.get("supermario4").active
+        and not Cheats.get("supermario8").active
+        and not Cheats.get("supermario16").active
+        and not Cheats.get("supermario32").active
+        and not Cheats.get("supermario64").active
+        and not Cheats.get("supermario128").active
+        --and not Cheats.get("supermario200").active
+    )
 end
 
 function Playur.activate1stPlayer(enablexplosion) --Activates 1st player mode
@@ -116,6 +135,11 @@ end
 
 if Misc.inSuperMarioAllStarsPlusPlus() then
     function Playur.activate3rdPlayer() --Activates 3rd player mode (TBD)
+        if SMBX_VERSION == VER_SEE_MOD then
+            if Playur.threePlayersOrAboveActiveWithNoCheats() then
+                Misc.disable1stPlayerInputsOn3rdPlayerAndMore(true)
+            end
+        end
         Playur.setCount(3)
         if Player.count() >= 2 then
             player2.x = player.x - player.width * 0.5
@@ -141,6 +165,11 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
 
     function Playur.activate4thPlayer() --Activates 4th player mode (TBD)
+        if Playur.threePlayersOrAboveActiveWithNoCheats() then
+            if SMBX_VERSION == VER_SEE_MOD then
+                Misc.disable1stPlayerInputsOn3rdPlayerAndMore(true)
+            end
+        end
         Playur.setCount(4)
         if Player.count() >= 2 then
             player2.x = player.x - player.width * 0.5
@@ -175,6 +204,11 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
 
     function Playur.activatePlayerIntroMode() --Activates the player intro mode
+        if Playur.threePlayersOrAboveActiveWithNoCheats() then
+            if SMBX_VERSION == VER_SEE_MOD then
+                Misc.disable1stPlayerInputsOn3rdPlayerAndMore(true)
+            end
+        end
         Playur.setCount(6)
         if Player.count() >= 2 then
             player2.x = player.x
@@ -296,6 +330,15 @@ function Playur.grabbing(p) --Returns true if the specified player is grabbing s
     end
 end
 
+-- Detects if the player is on the ground, the redigit way. Sometimes more reliable than just p:isOnGround().
+function Playur.isOnGround(p)
+    return (
+        p.speedY == 0 -- "on a block"
+        or p:mem(0x176,FIELD_WORD) ~= 0 -- on an NPC
+        or p:mem(0x48,FIELD_WORD) ~= 0 -- on a slope
+    )
+end
+
 function Playur.ducking(p) --Returns if the player is ducking.
     return (
         p.forcedState == FORCEDSTATE_NONE
@@ -308,7 +351,7 @@ function Playur.ducking(p) --Returns if the player is ducking.
         and not p:mem(0x4A,FIELD_BOOL) -- statue
         and not p:mem(0x50,FIELD_BOOL) -- spin jumping
         and p:mem(0x26,FIELD_WORD) == 0 -- picking up something from the top
-        and (p:mem(0x34,FIELD_WORD) == 0 or isOnGround(p)) -- underwater or on ground
+        and (p:mem(0x34,FIELD_WORD) == 0 or Playur.isOnGround(p)) -- underwater or on ground
 
         and (
             p:mem(0x48,FIELD_WORD) == 0 -- not on a slope (ducking on a slope is weird due to sliding)
@@ -380,12 +423,11 @@ function Playur.jumpPose(p) --Gets the frame of the jump pose this specified cha
 end
 
 function Playur.hasCharacter(p, characterid)  --Checks if a specified player has a specific character
-    local plr = Player(p)
-    if plr.character == characterid then
-        local chartable = {[true] = plr.idx}
+    if p.character == characterid then
+        local chartable = {[true] = p.idx}
         return chartable
     else
-        local chartable = {[false] = plr.idx}
+        local chartable = {[false] = p.idx}
         return chartable
     end
 end
@@ -393,9 +435,7 @@ end
 function Playur.characterList() --Returns the players that have a specified character.
     local characterTable = {}
     for i = 1,16 do
-        for players,plr in ipairs(Player.get()) do
-            table.insert(characterTable, Playur.hasCharacter(players, i))
-        end
+        table.insert(characterTable, Playur:hasCharacter(player, i))
     end
     return characterTable
 end
@@ -454,6 +494,16 @@ function Playur.failsafeStartupPlayerCheck() --Checks to see if Player.count() i
     end
     if not SaveData.disableX2char then
         Playur.activate1stPlayer()
+    end
+end
+
+function Playur.inForcedState()
+    for _,p in ipairs(Player.get()) do
+        if p.forcedState == 0 then
+            return false
+        else
+            return true
+        end
     end
 end
 

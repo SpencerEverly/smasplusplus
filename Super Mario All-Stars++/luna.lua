@@ -47,6 +47,7 @@ end
 --Now, before we get started, we require the most important libraries on the top.
 
 --SMAS specific functions need to be required first:
+_G.smasmemoryaddresses = require("smasmemoryaddresses")
 _G.smasfunctions = require("smasfunctions")
 _G.smasverbosemode = require("smasverbosemode")
 _G.smasbooleans = require("smasbooleans")
@@ -73,6 +74,7 @@ _G.extraNPCProperties = require("extraNPCProperties")
 _G.cursor = require("cursor")
 _G.Timer = require("timer-mod")
 _G.lazyprintSMAS = require("lazyprintSMAS")
+_G.autoscrolla = require("autoscrolla")
 
 --Register some custom global event handlers...
 Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
