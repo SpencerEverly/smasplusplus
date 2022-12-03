@@ -355,6 +355,7 @@ smascharacterchanger.addCharacter("Tux","SuperTux",3,"TUX")
 smascharacterchanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
 smascharacterchanger.addCharacter("Ness","EarthBound",5,"NESS")
 smascharacterchanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
+smascharacterchanger.addCharacter("Baldi","Baldi's Basics (PC)",2,"BALDISBASICS")
 
 --***VARIANTS***
 

@@ -88,9 +88,6 @@ if Misc.inMarioChallenge() then
 end
 
 --This will add multiple player arguments.
---for _,p in ipairs(Player.get()) do
-    --_G["player".. p.idx] = p
---end
 for i = 1,200 do
     _G["player".. i] = Player(i)
 end
@@ -518,12 +515,10 @@ function onKeyboardPressDirect(k, repeated) --This will replace the GIF recordin
 end
 
 function onTick()
-    if mem(0x00B25130,FIELD_WORD) == 5 then
-        mem(0x00B25130,FIELD_WORD, 2) --This will prevent split screen, again (Just in case)
-    end
+    mem(0x00B25130,FIELD_WORD,2) --This will prevent split screen, again (Just in case)
     --Let's not get game overs/broken launcher kicking (These are life global memories).
-    if mem(0x00B2C5AC, FIELD_FLOAT) < 1 then --This is to prevent the old Game Over system
-        mem(0x00B2C5AC, FIELD_FLOAT, 1)
+    if mem(0x00B2C5AC,FIELD_FLOAT) < 1 then --This is to prevent the old Game Over system
+        mem(0x00B2C5AC,FIELD_FLOAT,1)
     end
     if table.icontains(smastables._friendlyPlaces,Level.filename()) then
         GameData.friendlyArea = true --Set this to prevent Mother Brain Rinka from getting killed in places such as the boot screen, intro, or the Hub
