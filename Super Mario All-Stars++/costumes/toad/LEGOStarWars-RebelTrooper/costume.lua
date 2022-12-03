@@ -2,8 +2,7 @@ local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local smashud = require("smashud")
 local rng = require("base/rng")
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+_G.smasfunctions = require("smasfunctions")
 
 local costume = {}
 
@@ -22,6 +21,8 @@ function costume.onInit(p)
     registerEvent(costume,"onPostNPCKill")
     registerEvent(costume,"onPlayerKill")
     registerEvent(costume,"onInputUpdate")
+    registerEvent(costume,"onKeyboardPress")
+    registerEvent(costume,"onControllerButtonPress")
     
     if not costume.loadedSounds then
         Sound.loadCostumeSounds()
@@ -68,7 +69,7 @@ end
 local shootingframe = 10
 
 function costume.shootLaser1()
-    plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
+    --plr:mem(0x172, FIELD_BOOL, false) --Make sure run isn't pressed again until cooldown is over, in case
     local x = plr.x
     local y = plr.y + plr.height/2 - 5
     if (plr.direction == 1) then
@@ -101,10 +102,24 @@ function costume.onPostNPCKill(npc, harmType)
     end
 end
 
-function costume.onInputUpdate()
-    if player.keys.altRun == KEYS_PRESSED then
-        if (player.powerup == 5) == false then
-            costume.shootLaser1()
+function costume.onKeyboardPress(keyCode, repeated)
+    if SaveData.toggleCostumeAbilities then
+        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+            if (player.powerup == 5) == false then
+                costume.shootLaser1()
+            end
+        end
+    end
+end
+
+function costume.onControllerButtonPress(button, playerIdx)
+    if SaveData.toggleCostumeAbilities then
+        if playerIdx == 1 then
+            if button == SaveData.specialbutton1stplayer then
+                if (player.powerup == 5) == false then
+                    costume.shootLaser1()
+                end
+            end
         end
     end
 end

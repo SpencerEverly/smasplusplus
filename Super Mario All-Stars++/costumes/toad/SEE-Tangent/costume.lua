@@ -1,7 +1,6 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+_G.smasfunctions = require("smasfunctions")
 
 local costume = {}
 
@@ -133,7 +132,7 @@ function costume.onPlayerHarm(e, p)
 end
 
 function costume.onKeyboardPress(keyCode, repeated)
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
             costume.lungeattack()
         end
@@ -141,7 +140,7 @@ function costume.onKeyboardPress(keyCode, repeated)
 end
 
 function costume.onControllerButtonPress(button, playerIdx)
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         if playerIdx == 1 then
             if button == SaveData.specialbutton1stplayer then
                 costume.lungeattack()

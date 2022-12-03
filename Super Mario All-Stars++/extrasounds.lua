@@ -414,6 +414,16 @@ local normalCharacters = {
     [CHARACTER_SAMUS] = true
 }
 
+local normalCharactersToad = {
+    [CHARACTER_PEACH] = true,
+    [CHARACTER_TOAD] = true,
+    [CHARACTER_MEGAMAN] = true,
+    [CHARACTER_KLONOA] = true,
+    [CHARACTER_NINJABOMBERMAN] = true,
+    [CHARACTER_ROSALINA] = true,
+    [CHARACTER_ULTIMATERINKA] = true,
+}
+
 local normalCharactersWithoutMegaman = {
     [CHARACTER_MARIO] = true,
     [CHARACTER_LUIGI] = true,
@@ -831,9 +841,11 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                 end
                 for k,v in ipairs(NPC.get({5,7,24,73,113,114,115,116,172,174,194})) do
                     if p.holdingNPC == v and p.keys.run then
-                        if holdingtimer == 1 then
-                            if extrasounds.enableGrabShellSFX then
-                                extrasounds.playSFX(156)
+                        if not normalCharactersToad[p.character] then
+                            if holdingtimer == 1 then
+                                if extrasounds.enableGrabShellSFX then
+                                    extrasounds.playSFX(156)
+                                end
                             end
                         end
                     end

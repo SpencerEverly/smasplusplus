@@ -1,5 +1,4 @@
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+_G.smasfunctions = require("smasfunctions")
 
 local costume = {}
 

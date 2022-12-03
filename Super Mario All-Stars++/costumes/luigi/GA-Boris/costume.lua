@@ -5,8 +5,7 @@ local rng = require("base/rng")
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
 local smastables = require("smastables")
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+_G.smasfunctions = require("smasfunctions")
 local littleDialogue
 pcall(function() littleDialogue = require("littleDialogue") end)
 

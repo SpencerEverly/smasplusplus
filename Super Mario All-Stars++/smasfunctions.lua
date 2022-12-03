@@ -5,6 +5,11 @@
 
 local smasfunctions = {}
 
+--If loading it with a costume, load these libraries here to prevent errors
+_G.SFX = require("base/audiomaster")
+_G.Cheats = require("base/game/newcheats")
+
+--Now for the base functions!
 _G.Misk = require("scripts/functions/misc")
 _G.File = require("scripts/functions/file")
 _G.Img = require("scripts/functions/img")
@@ -16,6 +21,7 @@ _G.Npc = require("scripts/functions/npc")
 _G.Screen = require("scripts/functions/camera")
 _G.Evento = require("scripts/functions/events")
 
+--This is used for spitting out help documentation for these scripts.
 function smasfunctions.help()
     Misc.richDialog("SMASFunctions Help Dialog Box", File.readFile("smasfunctions_help.txt"), true)
 end

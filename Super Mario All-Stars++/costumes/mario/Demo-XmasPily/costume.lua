@@ -12,8 +12,7 @@ local customCamera = require("customCamera")
 local players = {}
 local playerCount = 0
 
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+_G.smasfunctions = require("smasfunctions")
 
 -- Library table for the costume, config for default ep3Playables behavior goes here
 local costume = {
