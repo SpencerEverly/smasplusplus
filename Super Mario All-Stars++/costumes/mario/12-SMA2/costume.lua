@@ -20,7 +20,7 @@ local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
 
 local starman = require("starman/star")
-_G.smasfunctions = require("smasfunctions")
+local smasfunctions = require("smasfunctions")
 
 local costume = {}
 

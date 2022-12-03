@@ -103,17 +103,23 @@ local SCREEN_WIDTH = 800
 local SCREEN_HEIGHT = 600
 
 
--- Debug thing: if true, an area's "restrict camera" setting won't do anything and the look around mode will always work.
-smwMap.freeCamera = false
--- Debug thing: if true, disables the HUD and lets you see the entirety of the main buffer
-smwMap.fullBufferView = false
-
 --Don't change this, this is used to unlock multi-paths.
 smwMap.unlockingCurrentPath = "false"
 --Whenever to draw the player on the map or not.
 smwMap.drawPlayerOnMap = true
+--Whenever to draw the tiles/BGOs on the map or not.
+smwMap.drawBGOsOnMap = true
+--Whenever to draw the objects on the map or not.
+smwMap.drawObjectsOnMap = true
+--Whenever to draw the sceneries on the map or not.
+smwMap.drawSceneriesOnMap = true
 --Whenever to enable music or not.
 smwMap.enableMusic = true
+
+-- Debug thing: if true, an area's "restrict camera" setting won't do anything and the look around mode will always work.
+smwMap.freeCamera = false
+-- Debug thing: if true, disables the HUD and lets you see the entirety of the main buffer
+smwMap.fullBufferView = false
 
 
 
@@ -2904,155 +2910,161 @@ do
 
 
     function smwMap.drawObject(v)
-        local config = smwMap.getObjectConfig(v.id)
-        
-        local texture = config.texture
+        if smwMap.drawObjectsOnMap then
+            local config = smwMap.getObjectConfig(v.id)
+            
+            local texture = config.texture
 
-        if texture == nil or v.toRemove or (v.lockedFade >= 1 and v.hideIfLocked) or (config.hidden and not (Misc.inEditor() and Misc.GetKeyState(VK_T))) then
-            return
-        end
-
-
-        local sourceWidth  = texture.width  / config.framesX
-        local sourceHeight = texture.height / config.framesY
-
-        local width,height = sourceWidth,sourceHeight
-
-        local x = v.x - width*0.5 + v.graphicsOffsetX + config.gfxoffsetx
-        local y = v.y + v.height*0.5 + v.graphicsOffsetY - height + config.gfxoffsety
-
-        
-        if not isOnCamera(x,y,width,height) then
-            v.isOffScreen = true
-            return
-        else
-            v.isOffScreen = false
-        end
-
-        local priority = v.priority or getSceneOrPlayerPriority(v.x + config.gfxoffsetx,v.y + height*0.5 + config.gfxoffsety)
-
-        local sourceX = v.frameX * sourceWidth
-        local sourceY = v.frameY * sourceHeight
+            if texture == nil or v.toRemove or (v.lockedFade >= 1 and v.hideIfLocked) or (config.hidden and not (Misc.inEditor() and Misc.GetKeyState(VK_T))) then
+                return
+            end
 
 
-        -- Water
-        if v.isUnderwater then
-            local waterImage = smwMap.playerSettings.waterImage
-            local waterHeight = waterImage.height*0.5
-            local waterFrame = math.floor(lunatime.tick() / 8) % 2
+            local sourceWidth  = texture.width  / config.framesX
+            local sourceHeight = texture.height / config.framesY
 
-            y = y + 10
+            local width,height = sourceWidth,sourceHeight
+
+            local x = v.x - width*0.5 + v.graphicsOffsetX + config.gfxoffsetx
+            local y = v.y + v.height*0.5 + v.graphicsOffsetY - height + config.gfxoffsety
+
+            
+            if not isOnCamera(x,y,width,height) then
+                v.isOffScreen = true
+                return
+            else
+                v.isOffScreen = false
+            end
+
+            local priority = v.priority or getSceneOrPlayerPriority(v.x + config.gfxoffsetx,v.y + height*0.5 + config.gfxoffsety)
+
+            local sourceX = v.frameX * sourceWidth
+            local sourceY = v.frameY * sourceHeight
+
+
+            -- Water
+            if v.isUnderwater then
+                local waterImage = smwMap.playerSettings.waterImage
+                local waterHeight = waterImage.height*0.5
+                local waterFrame = math.floor(lunatime.tick() / 8) % 2
+
+                y = y + 10
+
+                basicGlDrawArgs.priority = priority
+
+                doBasicGlDrawSetup(waterImage, x + width*0.5 - waterImage.width*0.5 - smwMap.camera.x,y + height - waterHeight - smwMap.camera.y,waterImage.width,waterHeight,0,waterFrame*waterHeight,waterImage.width,waterHeight)
+
+                Graphics.glDraw(basicGlDrawArgs)
+                
+
+                height = height - waterHeight
+                sourceHeight = sourceHeight - waterHeight
+            end
+
+
+            -- Handle cutoff
+            x,width ,sourceX,sourceWidth  = handleCutoff(x,width ,sourceX,sourceWidth , v.cutoffLeftX,v.cutoffRightX)
+            y,height,sourceY,sourceHeight = handleCutoff(y,height,sourceY,sourceHeight, v.cutoffTopY,v.cutoffBottomY)
+
+
+            doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,sourceX,sourceY,sourceWidth,sourceHeight)
 
             basicGlDrawArgs.priority = priority
 
-            doBasicGlDrawSetup(waterImage, x + width*0.5 - waterImage.width*0.5 - smwMap.camera.x,y + height - waterHeight - smwMap.camera.y,waterImage.width,waterHeight,0,waterFrame*waterHeight,waterImage.width,waterHeight)
+
+            if v.lockedFade >= 1 then -- fully locked, so put it in the special buffer
+                basicGlDrawArgs.target = smwMap.lockedBuffer
+                basicGlDrawArgs.priority = -99
+            elseif v.lockedFade > 0 then
+                basicGlDrawArgs.shader = lockedShader
+                basicGlDrawArgs.uniforms = {
+                    hideIfLocked = (v.hideIfLocked and 1) or 0,
+                    lockedFade = v.lockedFade,
+
+                    lockedPathColor = smwMap.pathSettings.lockedColor,
+                }
+            end
+
 
             Graphics.glDraw(basicGlDrawArgs)
-            
 
-            height = height - waterHeight
-            sourceHeight = sourceHeight - waterHeight
+            basicGlDrawArgs.target = smwMap.mainBuffer
+
+            basicGlDrawArgs.shader = nil
+            basicGlDrawArgs.uniforms = nil
         end
-
-
-        -- Handle cutoff
-        x,width ,sourceX,sourceWidth  = handleCutoff(x,width ,sourceX,sourceWidth , v.cutoffLeftX,v.cutoffRightX)
-        y,height,sourceY,sourceHeight = handleCutoff(y,height,sourceY,sourceHeight, v.cutoffTopY,v.cutoffBottomY)
-
-
-        doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,sourceX,sourceY,sourceWidth,sourceHeight)
-
-        basicGlDrawArgs.priority = priority
-
-
-        if v.lockedFade >= 1 then -- fully locked, so put it in the special buffer
-            basicGlDrawArgs.target = smwMap.lockedBuffer
-            basicGlDrawArgs.priority = -99
-        elseif v.lockedFade > 0 then
-            basicGlDrawArgs.shader = lockedShader
-            basicGlDrawArgs.uniforms = {
-                hideIfLocked = (v.hideIfLocked and 1) or 0,
-                lockedFade = v.lockedFade,
-
-                lockedPathColor = smwMap.pathSettings.lockedColor,
-            }
-        end
-
-
-        Graphics.glDraw(basicGlDrawArgs)
-
-        basicGlDrawArgs.target = smwMap.mainBuffer
-
-        basicGlDrawArgs.shader = nil
-        basicGlDrawArgs.uniforms = nil
     end
 
 
     function smwMap.drawTile(v)
-        local config = smwMap.getTileConfig(v.id)
-        local texture = config.texture
+        if smwMap.drawBGOsOnMap then
+            local config = smwMap.getTileConfig(v.id)
+            local texture = config.texture
 
-        if texture == nil then
-            return
+            if texture == nil then
+                return
+            end
+
+
+            local width = v.width
+            local height = v.height
+
+            local x = v.x - width *0.5
+            local y = v.y - height*0.5
+
+            if not isOnCamera(x,y,width,height) then
+                return
+            end
+
+
+            local frame = math.floor(lunatime.tick() / config.framespeed) % config.frames
+
+            doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
+
+            basicGlDrawArgs.priority = -90
+
+            Graphics.glDraw(basicGlDrawArgs)
         end
-
-
-        local width = v.width
-        local height = v.height
-
-        local x = v.x - width *0.5
-        local y = v.y - height*0.5
-
-        if not isOnCamera(x,y,width,height) then
-            return
-        end
-
-
-        local frame = math.floor(lunatime.tick() / config.framespeed) % config.frames
-
-        doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
-
-        basicGlDrawArgs.priority = -90
-
-        Graphics.glDraw(basicGlDrawArgs)
     end
 
 
     function smwMap.drawScenery(v)
-        local config = smwMap.getSceneryConfig(v.id)
-        local texture = config.texture
+        if smwMap.drawSceneriesOnMap then
+            local config = smwMap.getSceneryConfig(v.id)
+            local texture = config.texture
 
-        if texture == nil or v.opacity <= 0 then
-            return
+            if texture == nil or v.opacity <= 0 then
+                return
+            end
+
+
+            local width = v.width
+            local height = v.height
+
+            local x = v.x - width *0.5
+            local y = v.y - height*0.5
+
+            if not isOnCamera(x,y,width,height) then
+                return
+            end
+
+
+            --[[if v.priorityFindY ~= nil then
+                Text.printWP(v.priorityFindY - v.y,v.x - v.width*0.5 - smwMap.camera.x + smwMap.camera.renderX,v.y - v.height*0.5 - smwMap.camera.y + smwMap.camera.renderY,10)
+            end]]
+
+
+            local frame = math.floor(lunatime.tick() / config.framespeed) % config.frames
+
+            doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
+
+            basicGlDrawArgs.priority = config.priority or getSceneOrPlayerPriority(v.x,v.priorityFindY or (v.y + v.height*0.5))
+            basicGlDrawArgs.color = Color.white.. v.opacity
+
+            Graphics.glDraw(basicGlDrawArgs)
+
+            basicGlDrawArgs.color = nil
         end
-
-
-        local width = v.width
-        local height = v.height
-
-        local x = v.x - width *0.5
-        local y = v.y - height*0.5
-
-        if not isOnCamera(x,y,width,height) then
-            return
-        end
-
-
-        --[[if v.priorityFindY ~= nil then
-            Text.printWP(v.priorityFindY - v.y,v.x - v.width*0.5 - smwMap.camera.x + smwMap.camera.renderX,v.y - v.height*0.5 - smwMap.camera.y + smwMap.camera.renderY,10)
-        end]]
-
-
-        local frame = math.floor(lunatime.tick() / config.framespeed) % config.frames
-
-        doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
-
-        basicGlDrawArgs.priority = config.priority or getSceneOrPlayerPriority(v.x,v.priorityFindY or (v.y + v.height*0.5))
-        basicGlDrawArgs.color = Color.white.. v.opacity
-
-        Graphics.glDraw(basicGlDrawArgs)
-
-        basicGlDrawArgs.color = nil
     end
 
 

@@ -30,7 +30,7 @@ if not Misc.inMarioChallenge() then
         if GameData.warnUserAboutOldStars == nil then
             GameData.warnUserAboutOldStars = true
         end
-        if GameData.warnUserAboutOldStars == true then
+        if GameData.warnUserAboutOldStars then
             Misc.richDialog("It looks like your using a legacy save file from before Demo 3 (Or before April 10th, 2022).\n\nYou'll need to migrate your save data as soon as you boot the game!\nThat way your data can still be used in the future.\nPlease migrate your save while you can!")
             GameData.warnUserAboutOldStars = false
         end
@@ -155,7 +155,7 @@ end
 _G.globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 _G.repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
 _G.rng = require("base/rng") --Load up rng for etc. things
-if SaveData.speedrunMode == true then
+if SaveData.speedrunMode then
     speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
     inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
 end
@@ -311,7 +311,7 @@ smastables._noLoadingSoundLevels = {
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-    if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and loadactivate == true then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+    if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and loadactivate then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
         loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
         loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
         fadetolevel = true
@@ -354,7 +354,7 @@ function onStart() --Now do onStart...
         tomorrownumber = os.date("*t").day + 1
         SaveData.dateplayedtomorrow = tomorrownumber
     end
-    if GameData.weatherset == true then --This'll be better in the future. For now, it just loads the weather when restarting the game to the start preboot screen, or starting it up every time
+    if GameData.weatherset then --This'll be better in the future. For now, it just loads the weather when restarting the game to the start preboot screen, or starting it up every time
         possibleWeather = {"sunny","rain","snow"}
         weatherControl = rng.randomEntry(possibleWeather)
         SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
@@ -362,7 +362,7 @@ function onStart() --Now do onStart...
     end
     if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
         fadetolevel = false
-        if loadactivate == true then
+        if loadactivate then
             loadingSoundObject:FadeOut(800)
             loadactivate = false
         end
@@ -525,11 +525,11 @@ function onTick()
     if mem(0x00B2C5AC, FIELD_FLOAT) < 1 then --This is to prevent the old Game Over system
         mem(0x00B2C5AC, FIELD_FLOAT, 1)
     end
-    if table.icontains(smastables._friendlyPlaces,Level.filename()) == true then
+    if table.icontains(smastables._friendlyPlaces,Level.filename()) then
         GameData.friendlyArea = true --Set this to prevent Mother Brain Rinka from getting killed in places such as the boot screen, intro, or the Hub
     end
     --Now we'll overhaul the door star required system
-    if warpstaractive == true then
+    if warpstaractive then
         for _,warp in ipairs(Warp.get()) do
             if warp.starsRequired <= SaveData.totalStarCount then
                 warp.starsRequired = 0

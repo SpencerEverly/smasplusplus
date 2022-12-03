@@ -2,9 +2,9 @@ local Misk = {}
 
 local rng = require("base/rng")
 local smasverbosemode = require("smasverbosemode")
-local smwMap = require("smwMap") 
 local customCamera = require("customCamera")
 local smascharacterinfo = require("smascharacterinfo")
+local smwMap = require("smwMap")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)
@@ -45,564 +45,568 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
 
     function Misc.toggleVerboseMode() --This, when activated, will spit out a verbose list of things you have done/executed. Toggle again to turn off.
-        if smasverbosemode.activated == true then
+        if smasverbosemode.activated then
             smasverbosemode.activated = false
-        elseif smasverbosemode.activated == false then
+        elseif not smasverbosemode.activated then
             smasverbosemode.activated = true
         end
     end
     
     function Misc.unlockAnyBrokenPaths() --WIP function that will unlock any path if any star has been collected prior.
-        --**Super Mario Bros. 1**
-        --World 1
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB11-1")
-            smwMap.unlockPath("toSMB11-2")
+        if Level.filename() == "map.lvlx" then
+            --**Super Mario Bros. 1**
+            --World 1
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-1.lvlx") then
+                smwMap.unlockPath("toSMB11-1")
+                smwMap.unlockPath("toSMB11-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-2.lvlx") then
+                smwMap.unlockPath("toSMB11-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-3.lvlx") then
+                smwMap.unlockPath("toSMB11-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-2")
+                smwMap.unlockPath("toSMB1W-1FromW2")
+            end
+            --World 2
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-1.lvlx") then
+                smwMap.unlockPath("toSMB1W-2Path1")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-2.lvlx") then
+                smwMap.unlockPath("toSMB12-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-3.lvlx") then
+                smwMap.unlockPath("toSMB12-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-2Path3")
+                smwMap.unlockPath("toSMB13-1")
+            end
+            --World 3
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-1.lvlx") then
+                smwMap.unlockPath("toSMB13-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-2.lvlx") then
+                smwMap.unlockPath("toSMB13-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-3.lvlx") then
+                smwMap.unlockPath("toSMB13-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-3Path2")
+                smwMap.unlockPath("toSMB14-1")
+            end
+            --World 4
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-1.lvlx") then
+                smwMap.unlockPath("toSMB14-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-2.lvlx") then
+                smwMap.unlockPath("toSMB14-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-3.lvlx") then
+                smwMap.unlockPath("toSMB14-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-4Path1")
+                smwMap.unlockPath("toSMB15-1")
+            end
+            --World 5
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-1.lvlx") then
+                smwMap.unlockPath("toSMB15-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-2.lvlx") then
+                smwMap.unlockPath("toSMB15-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-3.lvlx") then
+                smwMap.unlockPath("toSMB15-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-5Path1")
+                smwMap.unlockPath("toSMB16-1")
+            end
+            --World 6
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-1.lvlx") then
+                smwMap.unlockPath("toSMB16-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-2.lvlx") then
+                smwMap.unlockPath("toSMB16-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-3.lvlx") then
+                smwMap.unlockPath("toSMB16-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-6Path1")
+                smwMap.unlockPath("toSMB17-1")
+            end
+            --World 7
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-1.lvlx") then
+                smwMap.unlockPath("toSMB17-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-2.lvlx") then
+                smwMap.unlockPath("toSMB17-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-3.lvlx") then
+                smwMap.unlockPath("toSMB17-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-7Path1")
+                smwMap.unlockPath("toSMB18-1")
+            end
+            --World 8
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-1.lvlx") then
+                smwMap.unlockPath("toSMB18-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-2.lvlx") then
+                smwMap.unlockPath("toSMB18-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-3.lvlx") then
+                smwMap.unlockPath("toSMB18-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-8Path1")
+                smwMap.unlockPath("toSMB19-1")
+            end
+            --World 9
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-1.lvlx") then
+                smwMap.unlockPath("toSMB19-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-2.lvlx") then
+                smwMap.unlockPath("toSMB19-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-3.lvlx") then
+                smwMap.unlockPath("toSMB19-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-4.lvlx") then
+                smwMap.unlockPath("toSMB1W-9Path1")
+                smwMap.unlockPath("toSMB1W-9Path2")
+                smwMap.unlockPath("toSMB1W-9Path3")
+            end
+            
+            --**Super Mario Bros. 2**
+            --World 1
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-1, L-1.lvlx") then
+                smwMap.unlockPath("toSMB21-1")
+                smwMap.unlockPath("toSMB21-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-1, L-2.lvlx") then
+                smwMap.unlockPath("toSMB21-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-1, L-3.lvlx") then
+                smwMap.unlockPath("toSMB22-1")
+            end
+            --World 2
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-2, L-1.lvlx") then
+                smwMap.unlockPath("toSMB22-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-2, L-2.lvlx") then
+                smwMap.unlockPath("toSMB22-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-2, L-3.lvlx") then
+                smwMap.unlockPath("toSMB23-1")
+            end
+            --World 3
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-3, L-1.lvlx") then
+                smwMap.unlockPath("toSMB23-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-3, L-2.lvlx") then
+                smwMap.unlockPath("toSMB23-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-3, L-3.lvlx") then
+                smwMap.unlockPath("toSMB24-1")
+            end
+            --World 4
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-4, L-1.lvlx") then
+                smwMap.unlockPath("toSMB24-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-4, L-2.lvlx") then
+                smwMap.unlockPath("toSMB24-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-4, L-3.lvlx") then
+                smwMap.unlockPath("toSMB25-1")
+            end
+            --World 5
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-5, L-1.lvlx") then
+                smwMap.unlockPath("toSMB25-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-5, L-2.lvlx") then
+                smwMap.unlockPath("toSMB25-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-5, L-3.lvlx") then
+                smwMap.unlockPath("toSMB26-1")
+            end
+            --World 6
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-6, L-1.lvlx") then
+                smwMap.unlockPath("toSMB26-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-6, L-2.lvlx") then
+                smwMap.unlockPath("toSMB26-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-6, L-3.lvlx") then
+                smwMap.unlockPath("toSMB27-1")
+            end
+            --World 7
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-7, L-1.lvlx") then
+                smwMap.unlockPath("toSMB27-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - W-7, L-2.lvlx") then
+                smwMap.unlockPath("toSMB2Ending1")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB2 - Ending.lvlx") then
+                smwMap.unlockPath("toSMB2End")
+            end
+            
+            --**Super Mario Bros. 3**
+            --World 1
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-1.lvlx") then
+                smwMap.unlockPath("toSMB31-1")
+                smwMap.unlockPath("toSMB31-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-2.lvlx") then
+                smwMap.unlockPath("toSMB21-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-3.lvlx") then
+                smwMap.unlockPath("toSMB31-Toad1Path1")
+                smwMap.unlockPath("toSMB31-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-4.lvlx") then
+                smwMap.unlockPath("toSMB31-Bonus1")
+                smwMap.unlockPath("toSMB31-Fortress1")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-Fortress.lvlx") then
+                smwMap.unlockPath("toSMB31-5")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-5.lvlx") then
+                smwMap.unlockPath("toSMB31-6")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-6.lvlx") then
+                smwMap.unlockPath("toSMB31-Castle")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-Airship.lvlx") then
+                smwMap.unlockPath("toSMB3W-2Warp1")
+                smwMap.unlockPath("toSMB32-1")
+            end
+            --World 2
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-1.lvlx") then
+                smwMap.unlockPath("toSMB32-Bonus1")
+                smwMap.unlockPath("toSMB32-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-2.lvlx") then
+                smwMap.unlockPath("toSMB32-Fortress1")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Fortress.lvlx") then
+                smwMap.unlockPath("toSMB32-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-3.lvlx") then
+                smwMap.unlockPath("toSMB32-Quicksand")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Quicksand.lvlx") then
+                smwMap.unlockPath("toSMB32-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-4.lvlx") then
+                smwMap.unlockPath("toSMB32-5")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-5.lvlx") then
+                smwMap.unlockPath("toSMB32-Pyramid")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Pyramid.lvlx") then
+                smwMap.unlockPath("toSMB32-Castle")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Airship.lvlx") then
+                smwMap.unlockPath("toSMB3W-2Path1")
+                smwMap.unlockPath("toSMB33-1")
+            end
+            --World 3
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-1.lvlx") then
+                smwMap.unlockPath("toSMB33-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-2.lvlx") then
+                smwMap.unlockPath("toSMB3W-3Path1")
+                smwMap.unlockPath("toSMB33-ToadHouse1")
+                smwMap.unlockPath("toSMB33-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-3.lvlx") then
+                smwMap.unlockPath("toSMB33-Fortress1")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-Fortress1.lvlx") then
+                smwMap.unlockPath("toSMB3W-3Path4")
+                smwMap.unlockPath("toSMB33-4")
+                smwMap.unlockPath("toSMB33-5")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-4.lvlx") then
+                smwMap.unlockPath("toSMB33-6")
+            end
+            if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-5.lvlx") then
+                smwMap.unlockPath("toSMB33-Boat1")
+            end
+            --*TBD*
+            
+            --**Super Mario Bros. Lost Levels**
+            --World 1
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL1-1")
+                smwMap.unlockPath("toSMBLL1-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL1-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL1-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-1Path1")
+                smwMap.unlockPath("toSMBLL2-1")
+            end
+            --World 2
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL2-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL2-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL2-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-2Path1")
+                smwMap.unlockPath("toSMBLL3-1")
+            end
+            --World 3
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL3-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL3-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL3-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-3Path1")
+                smwMap.unlockPath("toSMBLL4-1")
+            end
+            --World 4
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL4-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL4-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL4-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-4Path1")
+                smwMap.unlockPath("toSMBLL5-1")
+            end
+            --World 5
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL5-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL5-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL5-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-5Path1")
+                smwMap.unlockPath("toSMBLL6-1")
+            end
+            --World 6
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL6-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL6-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL6-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-6Path1")
+                smwMap.unlockPath("toSMBLL7-1")
+            end
+            --World 7
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL7-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL7-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL7-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-7Path1")
+                smwMap.unlockPath("toSMBLL8-1")
+            end
+            --World 8
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL8-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL8-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL8-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-8Path1")
+                smwMap.unlockPath("toSMBLL9-1")
+            end
+            --World 9
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLL9-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLL9-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLL9-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-9Path1")
+                smwMap.unlockPath("toSMBLLW-9Path2")
+                smwMap.unlockPath("toSMBLLW-9Path3")
+            end
+            --World A
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLLW-9Path2")
+                smwMap.unlockPath("toSMBLLA-1")
+                smwMap.unlockPath("toSMBLLA-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLLA-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLLA-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLB-1")
+            end
+            --World B
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLLB-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLLB-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLLB-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLC-1")
+            end
+            --World C
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLLC-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLLC-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLLC-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLD-1")
+            end
+            --World D
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-1.lvlx") then
+                smwMap.unlockPath("toSMBLLD-2")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-2.lvlx") then
+                smwMap.unlockPath("toSMBLLD-3")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-3.lvlx") then
+                smwMap.unlockPath("toSMBLLD-4")
+            end
+            if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-4.lvlx") then
+                smwMap.unlockPath("toSMBLLW-ADPath2")
+            end
+            
+            --**Super Mario World**
+            --Yoshi's Island
+            if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI1.lvlx") then
+                smwMap.unlockPath("toSMWYellowSwitchYI")
+                smwMap.unlockPath("toSMWBeginningPipe")
+            end
+            if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI2.lvlx") then
+                smwMap.unlockPath("toSMWYoshisIsland3")
+                smwMap.unlockPath("toSMWBeginningPipe")
+            end
+            if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI3.lvlx") then
+                smwMap.unlockPath("toSMWYoshisIsland4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI4.lvlx") then
+                smwMap.unlockPath("toSMWYoshisIslandCastle")
+            end
+            if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YIIC.lvlx") then
+                smwMap.unlockPath("toSMWDonutPlainsYI")
+                smwMap.unlockPath("toSMWDonutPlainsMain")
+            end
+            --Donut Plains
+            if table.icontains(SaveData.completeLevels,"SMW - W-1, L-DP1.lvlx") then
+                smwMap.unlockPath("toSMWDonutPlains2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMW - W-1, L-DP2.lvlx") then
+                smwMap.unlockPath("toSMWDonutGhostHouse")
+            end
+            
+            if table.icontains(SaveData.completeLevels,"SMW - W-2, L-DS1.lvlx") then
+                smwMap.unlockPath("toSMWDonutGhostHouseSecret")
+            end
+            --TBD
+            
+            --**Super Mario Bros. Spencer**
+            --World 1
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-1.lvlx") then
+                smwMap.unlockPath("toSMBS1-1")
+                smwMap.unlockPath("toSMBS1-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-2.lvlx") then
+                smwMap.unlockPath("toSMBS1-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-3.lvlx") then
+                smwMap.unlockPath("toSMBS1-Tower")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-Tower.lvlx") then
+                smwMap.unlockPath("toSMBS1-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-4.lvlx") then
+                smwMap.unlockPath("toSMBS1-5")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-5.lvlx") then
+                smwMap.unlockPath("toSMBS1-6")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-6.lvlx") then
+                smwMap.unlockPath("toSMBS1-Castle")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-Castle.lvlx") then
+                smwMap.unlockPath("toSMBSW-1Path3")
+                smwMap.unlockPath("toSMBS2-1")
+            end
+            --World 2
+            if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-1.lvlx") then
+                smwMap.unlockPath("toSMBS2-2")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-2.lvlx") then
+                smwMap.unlockPath("toSMBS2-3")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-3.lvlx") then
+                smwMap.unlockPath("toSMBS2-Tower1")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-Tower.lvlx") then
+                smwMap.unlockPath("toSMBS2-4")
+            end
+            if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-4.lvlx") then
+                --smwMap.unlockPath("toSMBS2-5")
+            end
+            --TBD
+        else
+            return
         end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB11-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB11-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-2")
-            smwMap.unlockPath("toSMB1W-1FromW2")
-        end
-        --World 2
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-2Path1")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB12-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB12-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-2, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-2Path3")
-            smwMap.unlockPath("toSMB13-1")
-        end
-        --World 3
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB13-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB13-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB13-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-3, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-3Path2")
-            smwMap.unlockPath("toSMB14-1")
-        end
-        --World 4
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB14-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB14-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB14-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-4, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-4Path1")
-            smwMap.unlockPath("toSMB15-1")
-        end
-        --World 5
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB15-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB15-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB15-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-5, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-5Path1")
-            smwMap.unlockPath("toSMB16-1")
-        end
-        --World 6
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB16-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB16-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB16-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-6, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-6Path1")
-            smwMap.unlockPath("toSMB17-1")
-        end
-        --World 7
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB17-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB17-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB17-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-7, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-7Path1")
-            smwMap.unlockPath("toSMB18-1")
-        end
-        --World 8
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB18-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB18-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB18-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-8, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-8Path1")
-            smwMap.unlockPath("toSMB19-1")
-        end
-        --World 9
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB19-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB19-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB19-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB1 - W-9, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB1W-9Path1")
-            smwMap.unlockPath("toSMB1W-9Path2")
-            smwMap.unlockPath("toSMB1W-9Path3")
-        end
-        
-        --**Super Mario Bros. 2**
-        --World 1
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-1, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB21-1")
-            smwMap.unlockPath("toSMB21-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-1, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB21-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-1, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB22-1")
-        end
-        --World 2
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-2, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB22-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-2, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB22-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-2, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB23-1")
-        end
-        --World 3
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-3, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB23-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-3, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB23-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-3, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB24-1")
-        end
-        --World 4
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-4, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB24-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-4, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB24-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-4, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB25-1")
-        end
-        --World 5
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-5, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB25-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-5, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB25-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-5, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB26-1")
-        end
-        --World 6
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-6, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB26-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-6, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB26-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-6, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB27-1")
-        end
-        --World 7
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-7, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB27-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - W-7, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB2Ending1")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB2 - Ending.lvlx") == true then
-            smwMap.unlockPath("toSMB2End")
-        end
-        
-        --**Super Mario Bros. 3**
-        --World 1
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB31-1")
-            smwMap.unlockPath("toSMB31-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB21-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB31-Toad1Path1")
-            smwMap.unlockPath("toSMB31-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB31-Bonus1")
-            smwMap.unlockPath("toSMB31-Fortress1")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-Fortress.lvlx") == true then
-            smwMap.unlockPath("toSMB31-5")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-5.lvlx") == true then
-            smwMap.unlockPath("toSMB31-6")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-6.lvlx") == true then
-            smwMap.unlockPath("toSMB31-Castle")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-1, L-Airship.lvlx") == true then
-            smwMap.unlockPath("toSMB3W-2Warp1")
-            smwMap.unlockPath("toSMB32-1")
-        end
-        --World 2
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB32-Bonus1")
-            smwMap.unlockPath("toSMB32-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB32-Fortress1")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Fortress.lvlx") == true then
-            smwMap.unlockPath("toSMB32-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB32-Quicksand")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Quicksand.lvlx") == true then
-            smwMap.unlockPath("toSMB32-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB32-5")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-5.lvlx") == true then
-            smwMap.unlockPath("toSMB32-Pyramid")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Pyramid.lvlx") == true then
-            smwMap.unlockPath("toSMB32-Castle")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-2, L-Airship.lvlx") == true then
-            smwMap.unlockPath("toSMB3W-2Path1")
-            smwMap.unlockPath("toSMB33-1")
-        end
-        --World 3
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMB33-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMB3W-3Path1")
-            smwMap.unlockPath("toSMB33-ToadHouse1")
-            smwMap.unlockPath("toSMB33-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMB33-Fortress1")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-Fortress1.lvlx") == true then
-            smwMap.unlockPath("toSMB3W-3Path4")
-            smwMap.unlockPath("toSMB33-4")
-            smwMap.unlockPath("toSMB33-5")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMB33-6")
-        end
-        if table.icontains(SaveData.completeLevels,"SMB3 - W-3, L-5.lvlx") == true then
-            smwMap.unlockPath("toSMB33-Boat1")
-        end
-        --*TBD*
-        
-        --**Super Mario Bros. Lost Levels**
-        --World 1
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL1-1")
-            smwMap.unlockPath("toSMBLL1-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL1-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL1-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-1, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-1Path1")
-            smwMap.unlockPath("toSMBLL2-1")
-        end
-        --World 2
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL2-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL2-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL2-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-2, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-2Path1")
-            smwMap.unlockPath("toSMBLL3-1")
-        end
-        --World 3
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL3-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL3-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL3-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-3, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-3Path1")
-            smwMap.unlockPath("toSMBLL4-1")
-        end
-        --World 4
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL4-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL4-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL4-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-4, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-4Path1")
-            smwMap.unlockPath("toSMBLL5-1")
-        end
-        --World 5
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL5-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL5-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL5-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-5, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-5Path1")
-            smwMap.unlockPath("toSMBLL6-1")
-        end
-        --World 6
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL6-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL6-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL6-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-6, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-6Path1")
-            smwMap.unlockPath("toSMBLL7-1")
-        end
-        --World 7
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL7-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL7-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL7-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-7, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-7Path1")
-            smwMap.unlockPath("toSMBLL8-1")
-        end
-        --World 8
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL8-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL8-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL8-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-8, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-8Path1")
-            smwMap.unlockPath("toSMBLL9-1")
-        end
-        --World 9
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLL9-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLL9-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLL9-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-9, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-9Path1")
-            smwMap.unlockPath("toSMBLLW-9Path2")
-            smwMap.unlockPath("toSMBLLW-9Path3")
-        end
-        --World A
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-9Path2")
-            smwMap.unlockPath("toSMBLLA-1")
-            smwMap.unlockPath("toSMBLLA-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLLA-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLLA-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-A, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLB-1")
-        end
-        --World B
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLLB-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLLB-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLLB-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-B, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLC-1")
-        end
-        --World C
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLLC-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLLC-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLLC-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-C, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLD-1")
-        end
-        --World D
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBLLD-2")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBLLD-3")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBLLD-4")
-        end
-        if table.icontains(SaveData.completeLevelsOptional,"SMBLL - W-D, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBLLW-ADPath2")
-        end
-        
-        --**Super Mario World**
-        --Yoshi's Island
-        if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI1.lvlx") == true then
-            smwMap.unlockPath("toSMWYellowSwitchYI")
-            smwMap.unlockPath("toSMWBeginningPipe")
-        end
-        if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI2.lvlx") == true then
-            smwMap.unlockPath("toSMWYoshisIsland3")
-            smwMap.unlockPath("toSMWBeginningPipe")
-        end
-        if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI3.lvlx") == true then
-            smwMap.unlockPath("toSMWYoshisIsland4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YI4.lvlx") == true then
-            smwMap.unlockPath("toSMWYoshisIslandCastle")
-        end
-        if table.icontains(SaveData.completeLevels,"SMW - W-1, L-YIIC.lvlx") == true then
-            smwMap.unlockPath("toSMWDonutPlainsYI")
-            smwMap.unlockPath("toSMWDonutPlainsMain")
-        end
-        --Donut Plains
-        if table.icontains(SaveData.completeLevels,"SMW - W-1, L-DP1.lvlx") == true then
-            smwMap.unlockPath("toSMWDonutPlains2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMW - W-1, L-DP2.lvlx") == true then
-            smwMap.unlockPath("toSMWDonutGhostHouse")
-        end
-        
-        if table.icontains(SaveData.completeLevels,"SMW - W-2, L-DS1.lvlx") == true then
-            smwMap.unlockPath("toSMWDonutGhostHouseSecret")
-        end
-        --TBD
-        
-        --**Super Mario Bros. Spencer**
-        --World 1
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBS1-1")
-            smwMap.unlockPath("toSMBS1-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBS1-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBS1-Tower")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-Tower.lvlx") == true then
-            smwMap.unlockPath("toSMBS1-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-4.lvlx") == true then
-            smwMap.unlockPath("toSMBS1-5")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-5.lvlx") == true then
-            smwMap.unlockPath("toSMBS1-6")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-6.lvlx") == true then
-            smwMap.unlockPath("toSMBS1-Castle")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-1, L-Castle.lvlx") == true then
-            smwMap.unlockPath("toSMBSW-1Path3")
-            smwMap.unlockPath("toSMBS2-1")
-        end
-        --World 2
-        if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-1.lvlx") == true then
-            smwMap.unlockPath("toSMBS2-2")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-2.lvlx") == true then
-            smwMap.unlockPath("toSMBS2-3")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-3.lvlx") == true then
-            smwMap.unlockPath("toSMBS2-Tower1")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-Tower.lvlx") == true then
-            smwMap.unlockPath("toSMBS2-4")
-        end
-        if table.icontains(SaveData.completeLevels,"SMBS - W-2, L-4.lvlx") == true then
-            --smwMap.unlockPath("toSMBS2-5")
-        end
-        --TBD
     end
 end
 

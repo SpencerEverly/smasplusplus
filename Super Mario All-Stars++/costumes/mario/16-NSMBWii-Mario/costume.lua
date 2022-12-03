@@ -11,7 +11,7 @@ local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
 local smashud = require("smashud")
-_G.smasfunctions = require("smasfunctions")
+local smasfunctions = require("smasfunctions")
 
 local costume = {}
 

@@ -2,7 +2,7 @@ local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local smashud = require("smashud")
 local particles = require('particles')
-_G.smasfunctions = require("smasfunctions")
+local smasfunctions = require("smasfunctions")
 
 local costume = {}
 
