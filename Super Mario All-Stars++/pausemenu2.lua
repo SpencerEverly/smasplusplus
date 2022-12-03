@@ -302,9 +302,11 @@ end
 local function smbxdefaultsoundsystem()
     if pauseplus.getSelectionValue("soundsettings","Use the Original SMBX Sound System") then
         SaveData.SMBXSoundSystem = true
+        Routine.waitFrames(1, true)
         Sound.checkSMBXSoundSystemStatus()
     else
         SaveData.SMBXSoundSystem = false
+        Routine.waitFrames(1, true)
         Sound.checkSMBXSoundSystemStatus()
     end
 end
@@ -1611,7 +1613,7 @@ function pauseSpecifics()
         pauseplus.createOption("soundsettings",{text = "Music Volume",description = "Turn the music volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 60,selectionMin = 0,selectionMax = 100,selectionStep = 5,selectionFormat = "%d%%"})
         pauseplus.createOption("soundsettings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
         pauseplus.createOption("soundsettings",{text = "Disable P-Wing Sound",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disables the P-Wing sound. Toggle again to turn on.",action = function() togglepwingsfx() end})
-        pauseplus.createOption("soundsettings",{text = "Use the Original SMBX Sound System",selectionType = pauseplus.SELECTION_CHECKBOX,description = "This options disables all the new sounds (Except P-Wing) and reverts back to the original sound system.",action = function() smbxdefaultsoundsystem() end})
+        pauseplus.createOption("soundsettings",{text = "Use the Original SMBX Sound System",selectionType = pauseplus.SELECTION_CHECKBOX,description = "This options disables all the new sounds (Except P-Wing) and reverts back to the original sound system.",action = function() Routine.run(smbxdefaultsoundsystem) end})
         
         --Resolution Settings
         pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA,RESOLUTION_THREEDS}, action = function() Routine.run(changeresolution) end})

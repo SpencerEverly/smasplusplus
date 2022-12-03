@@ -194,40 +194,6 @@ Npc.classesToSave = {
 
 Npc.savedClasses = {}
 
-local dragonCoins = {274} -- add/remove coin ids here, comma-separated
-
-local function checkNPCSection(n)
-	if(n:mem(0x12C, FIELD_WORD) > 0) then
-		n.section = Player(n:mem(0x12C, FIELD_WORD)).section
-		return
-	end
-	for i = 0, Section.count() - 1 do
-		if(n.x >= Section(i).boundary.left and 
-		n.x + n.width <= Section(i).boundary.right and
-		n.y >= Section(i).boundary.top and
-		n.y + n.height <= Section(i).boundary.bottom) then
-			n.section = i
-			return
-		end
-	end
-	local min_section = -1
-	local min_dist = -1
-	
-	local nch = (n.x + n.width * 0.5)
-	local ncv = (n.y + n.height * 0.5)
-	
-	for i = 0, Section.count() - 1 do
-		local disth = 0.5 * (Section(i).boundary.left + Section(i).boundary.right) - nch
-		local distv = 0.5 * (Section(i).boundary.top + Section(i).boundary.bottom) - ncv
-		local cdist = disth*disth + distv*distv
-		if(min_dist == -1 or cdist < min_dist) then
-			min_section = i
-			min_dist = cdist
-		end
-	end
-	n.section = min_section
-end
-
 function NPC.harmAll(npc,...) -- npc:harm but it harms all NPCs with a specified HARM_TYPE
     local oldKilled     = npc:mem(0x122,FIELD_WORD)
     local oldProjectile = npc:mem(0x136,FIELD_BOOL)
@@ -424,6 +390,41 @@ end
 
 
 
+
+local dragonCoins = {274} -- add/remove coin ids here, comma-separated
+
+function Npc.checkNPCSection(n)
+	if(n:mem(0x12C, FIELD_WORD) > 0) then
+		n.section = Player(n:mem(0x12C, FIELD_WORD)).section
+		return
+	end
+	for i = 0, Section.count() - 1 do
+		if(n.x >= Section(i).boundary.left and 
+		n.x + n.width <= Section(i).boundary.right and
+		n.y >= Section(i).boundary.top and
+		n.y + n.height <= Section(i).boundary.bottom) then
+			n.section = i
+			return
+		end
+	end
+	local min_section = -1
+	local min_dist = -1
+	
+	local nch = (n.x + n.width * 0.5)
+	local ncv = (n.y + n.height * 0.5)
+	
+	for i = 0, Section.count() - 1 do
+		local disth = 0.5 * (Section(i).boundary.left + Section(i).boundary.right) - nch
+		local distv = 0.5 * (Section(i).boundary.top + Section(i).boundary.bottom) - ncv
+		local cdist = disth*disth + distv*distv
+		if(min_dist == -1 or cdist < min_dist) then
+			min_section = i
+			min_dist = cdist
+		end
+	end
+	n.section = min_section
+end
+
 function Npc.onInitAPI()
     registerEvent(Npc,"onTickEnd")
     registerEvent(Npc,"onPostEventDirect")
@@ -435,7 +436,7 @@ function Npc.onPostEventDirect(eventName)
 		    for _, cid in ipairs(dragonCoins) do
 				if(v.isValid and v.layerName ~= "Destroyed Blocks" and v:mem(0x5C, FIELD_WORD) == cid) then
 					local newnpc = NPC.spawn(cid, v.x, v.y, 0, true)
-					checkNPCSection(newnpc)
+					Npc.checkNPCSection(newnpc)
 					newnpc.layerName = v.layerName
 					newnpc.deathEventName = v:mem(0x10, FIELD_STRING)
 					newnpc.noMoreObjInLayer = v:mem(0x14, FIELD_STRING)
