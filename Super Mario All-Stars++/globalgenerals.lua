@@ -177,6 +177,10 @@ function globalgenerals.onEvent(eventName)
     end
 end
 
+if GameData.tempReserve == nil then
+    GameData.tempReserve = {}
+end
+
 function globalgenerals.onStart()
     Sound.startupRefreshSystem()
     Playur.failsafeStartupPlayerCheck()
@@ -198,6 +202,11 @@ function globalgenerals.onStart()
     end
     Sound.checkPWingSoundStatus()
     Sound.checkSMBXSoundSystemStatus()
+    for _,p in ipairs(Player.get()) do
+        if Misc.inEditor() then
+            p.reservePowerup = GameData.tempReserve[p.idx]
+        end
+    end
 end
 
 function globalgenerals.onTickEnd()
@@ -208,6 +217,9 @@ end
 function globalgenerals.onTick()
     if lunatime.tick() == 1 then
         Sound.loadCostumeSounds()
+    end
+    for _,p in ipairs(Player.get()) do
+        SaveData.reserveBoxItem[p.idx] = p.reservePowerup
     end
     if smasbooleans.compatibilityMode13Mode then
         mem(0x00B2C860, FIELD_FLOAT, 7.0999999046326)
@@ -453,6 +465,11 @@ function globalgenerals.onExit()
         SaveData.lastLevelPlayed = Level.filename()
     end
     if not Misc.inMarioChallenge() then
+        for _,p in ipairs(Player.get()) do
+            if Misc.inEditor() then
+                GameData.tempReserve[p.idx] = p.reservePowerup
+            end
+        end
         File.writeToFile("loadscreeninfo.txt", SaveData.resolution)
     elseif Misc.inMarioChallenge() then
         File.writeToFile("loadscreeninfo.txt", "mariochallenge")

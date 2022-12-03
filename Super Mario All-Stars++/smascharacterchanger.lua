@@ -39,6 +39,8 @@ local colorChange1 = 0
 local colorChange2 = 0
 local colorChange3 = 0
 
+local reserveChange = 0
+
 --These tables below will be used for the system.
 smascharacterchanger.names = {}
 smascharacterchanger.namesGame = {}
@@ -199,13 +201,16 @@ function smascharacterchanger.onInputUpdate()
             
             if smascharacterchanger.selectionNumber then
                 if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
+                    reserveChange = player.reservePowerup --Keep the reserve for the old character, in case if we're switching to a different character
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
                 else
+                    reserveChange = player.reservePowerup --Reapply the reserve to the player
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
                 end
                 changed = true
+                player.reservePowerup = reserveChange
                 smascharacterchanger.menuActive = false
             end
             

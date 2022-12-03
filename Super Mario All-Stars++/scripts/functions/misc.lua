@@ -1,14 +1,10 @@
 local Misk = {}
 
 local rng = require("base/rng")
-local smasverbosemode
-pcall(function() smasverbosemode = require("smasverbosemode") end)
-local smwMap
-pcall(function() smwMap = require("smwMap") end)
-local customCamera
-pcall(function() customCamera = require("customCamera") end)
-local smascharacterinfo
-pcall(function() smascharacterinfo = require("smascharacterinfo") end)
+local smasverbosemode = require("smasverbosemode")
+local smwMap = require("smwMap") 
+local customCamera = require("customCamera")
+local smascharacterinfo = require("smascharacterinfo")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)

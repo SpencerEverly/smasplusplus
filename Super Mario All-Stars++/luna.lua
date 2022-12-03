@@ -224,6 +224,14 @@ end
 if SaveData.totalScoreClassic == nil then --This will add a score counter which goes up to a billion, cause why not
     SaveData.totalScoreClassic = 0
 end
+if SaveData.reserveBoxItem == nil then
+    SaveData.reserveBoxItem = {}
+end
+for i = 1,200 do
+    if SaveData.reserveBoxItem[i] == nil then
+        SaveData.reserveBoxItem[i] = 0
+    end
+end
 
 --**1.3 Mode default setting**
 if SaveData.disableX2char == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
