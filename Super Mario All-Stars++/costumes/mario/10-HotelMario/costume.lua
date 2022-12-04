@@ -24,7 +24,6 @@ function costume.onInit(p)
         costume.loadedSounds = true
     end
     
-    smashud.visible.itembox = false
     mariohp = 2
 end
 
@@ -66,26 +65,26 @@ function costume.onDraw()
             player.forcedState = FORCEDSTATE_NONE
             player:mem(0x140, FIELD_WORD, 150)
         end
-        if smashud.visible.customitembox == true then
+        if smashud.visible.customitembox then
             if mariohp <= 0 then
-                Graphics.drawImageWP(heartempty, 357,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                Graphics.drawImageWP(heartempty, 357,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 388,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 421,  80, -4.2)
             end
             if mariohp == 1 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                Graphics.drawImageWP(heartfull, 357,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 388,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 421,  80, -4.2)
             end
             if mariohp == 2 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                Graphics.drawImageWP(heartfull, 357,  80, -4.2)
+                Graphics.drawImageWP(heartfull, 388,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 421,  80, -4.2)
             end
             if mariohp >= 3 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 421,  16, -4.2)
+                Graphics.drawImageWP(heartfull, 357,  80, -4.2)
+                Graphics.drawImageWP(heartfull, 388,  80, -4.2)
+                Graphics.drawImageWP(heartfull, 421,  80, -4.2)
             end
         end
     end
@@ -116,8 +115,6 @@ function costume.onCleanup(p)
     for i = 1,165 do
         extrasounds.sound.sfx[i] = nil
     end
-    
-    smashud.visible.itembox = true
 end
 
 return costume

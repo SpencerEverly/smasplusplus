@@ -24,7 +24,6 @@ function costume.onInit(p)
         costume.loadedSounds = true
     end
     
-    smashud.visible.itembox = false
     baldihp = 2
 end
 
@@ -57,24 +56,24 @@ function costume.onDraw()
         end
         if smashud.visible.customitembox == true then
             if baldihp <= 0 then
-                Graphics.drawImageWP(heartempty, 357,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                Graphics.drawImageWP(heartempty, 357,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 388,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 421,  80, -4.2)
             end
             if baldihp == 1 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                Graphics.drawImageWP(heartfull, 357,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 388,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 421,  80, -4.2)
             end
             if baldihp == 2 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                Graphics.drawImageWP(heartfull, 357,  80, -4.2)
+                Graphics.drawImageWP(heartfull, 388,  80, -4.2)
+                Graphics.drawImageWP(heartempty, 421,  80, -4.2)
             end
             if baldihp >= 3 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 421,  16, -4.2)
+                Graphics.drawImageWP(heartfull, 357,  80, -4.2)
+                Graphics.drawImageWP(heartfull, 388,  80, -4.2)
+                Graphics.drawImageWP(heartfull, 421,  80, -4.2)
             end
         end
     end
@@ -105,8 +104,6 @@ function costume.onCleanup(p)
     for i = 1,165 do
         extrasounds.sound.sfx[i] = nil
     end
-    
-    smashud.visible.itembox = true
 end
 
 return costume

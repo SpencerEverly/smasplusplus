@@ -37,11 +37,14 @@ if not Misc.inMarioChallenge() then
     end
 end
 
---For SEE Mod users, where they have a definite version of LunaLua.
+--For SEE Mod users, where they have a definite version of LunaLua (And for Patch 5 users, when it eventually releases).
 if SMBX_VERSION == VER_SEE_MOD then
     Misc.setWindowTitle("Super Mario All-Stars++")
     Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
     _G.LunaDLL = ffi.load("LunaDll.dll")
+elseif SMBX_VERSION >= VER_BETA4_PATCH_5 then
+    Misc.setWindowTitle("Super Mario All-Stars++")
+    Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 end
 
 --Now, before we get started, we require the most important libraries on the top.
@@ -93,20 +96,22 @@ for i = 1,200 do
 end
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
-function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport. This will be removed after a few months when the next SMBX2 patch releases (The next patch will fix this), to make sure people upgrade on time.
-    -- If using bottom center aligned coordinates, handle that sensibly
-    if bottomCenterAligned then
-        x = x - (self.width * 0.5)
-        y = y - self.height
-    end
+if SMBX_VERSION <= VER_BETA4_PATCH_4_1 or SMBX_VERSION == VER_SEE_MOD then
+    function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport. This will be removed after a few months when the next SMBX2 patch releases (The next patch will fix this), to make sure people upgrade on time.
+        -- If using bottom center aligned coordinates, handle that sensibly
+        if bottomCenterAligned then
+            x = x - (self.width * 0.5)
+            y = y - self.height
+        end
 
-    -- Move the player and update section, including music
-    local oldSection = self.section
-    local newSection = Section.getIdxFromCoords(x, y)
-    self.x, self.y = x, y
-    if (newSection ~= oldSection) then
-        self.section = newSection
-        playMusic(newSection)
+        -- Move the player and update section, including music
+        local oldSection = self.section
+        local newSection = Section.getIdxFromCoords(x, y)
+        self.x, self.y = x, y
+        if (newSection ~= oldSection) then
+            self.section = newSection
+            playMusic(newSection)
+        end
     end
 end
 
