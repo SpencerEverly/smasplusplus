@@ -13,10 +13,15 @@ local rng = require("rng")
 local pm = require("playerManager")
 local blockutils = require("blocks/blockutils")
 
+if SMBX_VERSION == VER_SEE_MOD then
+    springs = require("npcs/AI/springs")
+end
+
 local unclebroadsword = {}
 
 unclebroadsword.debugMode = false
-unclebroadsword.costumeActive = false
+unclebroadsword.costumeActive = false --This code will be used to clone the code for other costumes
+unclebroadsword.noUpwardStab = false --Whenever to enable the upward stab attack. Used to cancel it for certain actions, such as for bouncing on X2 springs
 
 local inputBlockingForcedStates = table.map{
     FORCEDSTATE_POWERUP_BIG,
@@ -26,7 +31,6 @@ local inputBlockingForcedStates = table.map{
     FORCEDSTATE_POWERUP_LEAF,
     FORCEDSTATE_RESPAWN,
     --FORCEDSTATE_DOOR, clear pipes use this
-    FORCEDSTATE_INVISIBLE,
     FORCEDSTATE_ONTONGUE,
     FORCEDSTATE_SWALLOWED,
     FORCEDSTATE_POWERUP_TANOOKI,
@@ -152,7 +156,7 @@ local function ducking()            -- In ducking state
     if player.powerup == PLAYER_SMALL then
         return ducking_ext()
     else
-        return (player:mem(0x12e, FIELD_WORD) ~= 0)
+        return (player:mem(0x12E, FIELD_BOOL))
     end
 end
 local function submerged()            -- In quicksand or water
@@ -162,7 +166,7 @@ return (player:mem(0x3c, FIELD_WORD) ~= 0) end
 local function climbing()            -- Climbing ladder/fence
 return (player:mem(0x40, FIELD_WORD) ~= 0) end
 local function spinjumping()        -- Spinjumping
-return (player:mem(0x50, FIELD_WORD) ~= 0) end
+return (player:mem(0x50, FIELD_BOOL)) end
 local function mounted()            -- On a mount
 return (player:mem(0x108, FIELD_WORD) > 0) end
 local function holding()            -- Holding an object
@@ -172,7 +176,7 @@ return player:isGroundTouching(); end
 local function pickingup()            -- Currently picking something up
 return (player:mem(0x26, FIELD_WORD) > 0) end
 local function standing()            -- On the ground, not ducking, not on a mount, and not sliding
-return (not ducking() and grounded() and player:mem(0x108, FIELD_WORD) == 0 and player:mem(0x3c, FIELD_WORD) == 0) end
+return (not ducking() and grounded() and player.mount == 0 and not player:mem(0x3C, FIELD_BOOL)) end
 local function airborne()            -- In the air and not ducking
 return not (grounded() or submerged() or climbing()) end
 local function inforcedanim()        -- In a forced animation
@@ -226,11 +230,11 @@ local function BlockMovement() -------------------------------------------------
     for k,v in ipairs(bufferedInputs) do
         inputBuffer[v] = player.keys[v]
     end
-    player.leftKeyPressing = false
-    player.rightKeyPressing = false
-    player.jumpKeyPressing = false
-    player.altJumpKeyPressing = false
-    player.altRunKeyPressing = false
+    player.keys.left = false
+    player.keys.right = false
+    player.keys.jump = false
+    player.keys.altJump = false
+    player.keys.altRun = false
 end
 
 local function RemoveInputBuffer()
@@ -238,7 +242,7 @@ local function RemoveInputBuffer()
         if inputBuffer[v] then
             if player.keys[v] then
                 player.keys[v] = KEYS_UP
-                player[v .. "KeyPressing"] = false
+                player[".keys."..v] = false
             else
                 inputBuffer[v] = false
             end
@@ -254,64 +258,7 @@ local function SetCooldown() ---------------------------------------------------
     unclebroadsword.attackState = ATKSTATE.COOLDOWN
     attack_timer = DURATION[ATKSTATE.COOLDOWN]
 end
-function unclebroadsword.onKeyDown(keycode, playerIndex)
-    if player.character == CHARACTER_UNCLEBROADSWORD and not is_hurt and not inforcedanim() and not unclebroadsword.costumeActive then
-        -- If pressing the attack key
-        if keycode == KEY_X and not (is_hurt or statued()) then
-            -- Prevent attacking when submerged, sliding, climbing, spinjumping, mounted, holding, or picking up something
-            if inforcedanim() or submerged() or sliding() or climbing() or spinjumping() or mounted() or holding() or pickingup() then return end
-            -- Prevent attacking in air if you already have
-            if airborne() and not can_aerial then return end
-            -- Alter attack combo state
-            if        unclebroadsword.attackState == ATKSTATE.NONE    then
-                unclebroadsword.attackState = ATKSTATE.SWIPE1                -- Swipe upward
-                attack_timer = DURATION[ATKSTATE.SWIPE1]*3
-                Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.swipe)), 0)
-            elseif    unclebroadsword.attackState == ATKSTATE.SWIPE1 and attack_timer <= DURATION[ATKSTATE.SWIPE1]*3/2 then
-                queue_state = ATKSTATE.SWIPE2                -- Queue up second swipe if during first swipe
-            elseif    unclebroadsword.attackState == ATKSTATE.PAUSE1    then
-                unclebroadsword.attackState = ATKSTATE.SWIPE2                -- Swipe downward
-                attack_timer = DURATION[ATKSTATE.SWIPE2]*3
-                Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.swipe)), 0)
-            elseif    unclebroadsword.attackState == ATKSTATE.SWIPE2 and attack_timer <= DURATION[ATKSTATE.SWIPE2]*3/2 and not ducking() and player.powerup > PLAYER_SMALL then
-                queue_state = ATKSTATE.LUNGE_COMBO            -- Queue up combo lunge if during second swipe
-            elseif    unclebroadsword.attackState == ATKSTATE.PAUSE2 and not ducking() and player.powerup > PLAYER_SMALL then
-                unclebroadsword.attackState = ATKSTATE.LUNGE_COMBO            -- Combo lunge forward
-                attack_timer = DURATION[ATKSTATE.LUNGE_COMBO] + LUNGELAG_COMBO
-                Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.lunge)), 0)
-            end
-        -- Stall-and-fall
-        elseif keycode == KEY_DOWN and player.powerup > PLAYER_SMALL and airborne() and can_stallnfall then
-            unclebroadsword.attackState = ATKSTATE.STALLANDFALL
-            can_stallnfall = false
-        -- Cancel charge when moving
-        elseif (keycode == KEY_LEFT or keycode == KEY_RIGHT) and (unclebroadsword.attackState == ATKSTATE.CHARGING or unclebroadsword.attackState == ATKSTATE.CHARGED) then
-            SetCooldown()
-        -- Falling statue
-        elseif player.powerup == PLAYER_TANOOKIE and keycode == KEY_RUN and not grounded() and not mounted() then
-            unclebroadsword.attackState = ATKSTATE.STATUEFALL
-            can_stallnfall = false
-        -- Double jump
-        elseif (player.powerup == PLAYER_LEAF or player.powerup == PLAYER_TANOOKIE) and (keycode == KEY_JUMP or keycode == KEY_SPINJUMP) and doublejump_ready and player:mem(0x60, FIELD_WORD) == -1 then
-            colliders.bounceResponse(player, nil, false)
-            doublejump_ready = false
-            if keycode == KEY_JUMP then
-                playSFX(1)
-                player:mem(0x50, FIELD_WORD, 0)
-            else
-                playSFX(33)
-                player:mem(0x50, FIELD_WORD, -1)
-            end
-            -- Spawn visual effects
-            for i = 1,6 do
-                local star = Animation.spawn(80, player.x + player.width/2 + player.speedX, player.y + player.height/2 + player.speedY)
-                local angle = rng.random(2)*math.pi
-                star.speedX = math.cos(angle)*rng.random(0.2,1.2)
-                star.speedY = math.sin(angle)*rng.random(0.2,1.2)
-            end
-        end
-    end
-end
+
 function unclebroadsword.onInputUpdate()
     if player.character == CHARACTER_UNCLEBROADSWORD and not unclebroadsword.costumeActive then
         pm.winStateCheck()
@@ -342,13 +289,13 @@ function unclebroadsword.onInputUpdate()
         player:mem(0x174, FIELD_WORD, 0)
         
         -- Force statue form
-        if unclebroadsword.attackState == ATKSTATE.STATUEFALL then player.altRunKeyPressing = true end
+        if unclebroadsword.attackState == ATKSTATE.STATUEFALL then player.keys.altRun = true end
         
         -- Prevent movement while ducking
         if player.powerup == PLAYER_SMALL then
             if ducking_ext() then
-                player.leftKeyPressing = false
-                player.rightKeyPressing = false
+                player.keys.left = false
+                player.keys.right = false
                 -- Alter hitbox
                 player.character = CHARACTER_MARIO
                 player:getCurrentPlayerSetting().hitboxHeight = 44
@@ -357,6 +304,61 @@ function unclebroadsword.onInputUpdate()
                 player.character = CHARACTER_MARIO
                 player:getCurrentPlayerSetting().hitboxHeight = 54
                 player.character = CHARACTER_UNCLEBROADSWORD
+            end
+        end
+        
+        -- If pressing the attack key
+        if player.keys.altRun == KEYS_DOWN and not (is_hurt or statued()) then
+            -- Prevent attacking when submerged, sliding, climbing, spinjumping, mounted, holding, or picking up something
+            if inforcedanim() or submerged() or sliding() or climbing() or spinjumping() or mounted() or holding() or pickingup() then return end
+            -- Prevent attacking in air if you already have
+            if airborne() and not can_aerial then return end
+            -- Alter attack combo state
+            if        unclebroadsword.attackState == ATKSTATE.NONE    then
+                unclebroadsword.attackState = ATKSTATE.SWIPE1                -- Swipe upward
+                attack_timer = DURATION[ATKSTATE.SWIPE1]*3
+                Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.swipe)), 0)
+            elseif    unclebroadsword.attackState == ATKSTATE.SWIPE1 and attack_timer <= DURATION[ATKSTATE.SWIPE1]*3/2 then
+                queue_state = ATKSTATE.SWIPE2                -- Queue up second swipe if during first swipe
+            elseif    unclebroadsword.attackState == ATKSTATE.PAUSE1    then
+                unclebroadsword.attackState = ATKSTATE.SWIPE2                -- Swipe downward
+                attack_timer = DURATION[ATKSTATE.SWIPE2]*3
+                Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.swipe)), 0)
+            elseif    unclebroadsword.attackState == ATKSTATE.SWIPE2 and attack_timer <= DURATION[ATKSTATE.SWIPE2]*3/2 and not ducking() and player.powerup > PLAYER_SMALL then
+                queue_state = ATKSTATE.LUNGE_COMBO            -- Queue up combo lunge if during second swipe
+            elseif    unclebroadsword.attackState == ATKSTATE.PAUSE2 and not ducking() and player.powerup > PLAYER_SMALL then
+                unclebroadsword.attackState = ATKSTATE.LUNGE_COMBO            -- Combo lunge forward
+                attack_timer = DURATION[ATKSTATE.LUNGE_COMBO] + LUNGELAG_COMBO
+                Audio.SfxPlayCh(-1, Audio.SfxOpen(pm.getSound(CHARACTER_UNCLEBROADSWORD, sfx.lunge)), 0)
+            end
+        -- Stall-and-fall
+        elseif player.keys.down == KEYS_DOWN and player.powerup > PLAYER_SMALL and airborne() and can_stallnfall then
+            unclebroadsword.attackState = ATKSTATE.STALLANDFALL
+            can_stallnfall = false
+        -- Cancel charge when moving
+        elseif (player.keys.left == KEYS_DOWN or keycode == player.keys.right == KEYS_DOWN) and (unclebroadsword.attackState == ATKSTATE.CHARGING or unclebroadsword.attackState == ATKSTATE.CHARGED) then
+            SetCooldown()
+        -- Falling statue
+        elseif player.powerup == PLAYER_TANOOKIE and player.keys.run == KEYS_DOWN and not grounded() and not mounted() then
+            unclebroadsword.attackState = ATKSTATE.STATUEFALL
+            can_stallnfall = false
+        -- Double jump
+        elseif (player.powerup == PLAYER_LEAF or player.powerup == PLAYER_TANOOKIE) and (player.keys.jump == KEYS_DOWN or player.keys.altJump == KEYS_DOWN) and doublejump_ready and player:mem(0x60, FIELD_WORD) == -1 then
+            colliders.bounceResponse(player, nil, false)
+            doublejump_ready = false
+            if player.keys.jump == KEYS_DOWN then
+                playSFX(1)
+                player:mem(0x50, FIELD_WORD, 0)
+            else
+                playSFX(33)
+                player:mem(0x50, FIELD_WORD, -1)
+            end
+            -- Spawn visual effects
+            for i = 1,6 do
+                local star = Animation.spawn(80, player.x + player.width/2 + player.speedX, player.y + player.height/2 + player.speedY)
+                local angle = rng.random(2)*math.pi
+                star.speedX = math.cos(angle)*rng.random(0.2,1.2)
+                star.speedY = math.sin(angle)*rng.random(0.2,1.2)
             end
         end
     end
@@ -476,7 +478,7 @@ local function UpdateAttackState() ---------------------------------------------
             end
         end
         if (unclebroadsword.attackState == ATKSTATE.CHARGING or unclebroadsword.attackState == ATKSTATE.CHARGED)
-        and (not standing() or statued() or player.leftKeyPressing or player.rightKeyPressing) then
+        and (not standing() or statued() or player.keys.left or player.keys.right) then
             -- Cancel the charge if not standing on the ground
             SetCooldown()
             charge_timer = 0
@@ -526,10 +528,10 @@ local function UpdateAttackState() ---------------------------------------------
     
     
     -- Cancel state if necessary
-    if submerged() or sliding() or climbing() or (statued() and mounted())--[[or mounted() or holding() or pickingup() or warping()--]] then
+    if unclebroadsword.noUpwardStab or (submerged() or sliding() or climbing() or (statued() and mounted())) --[[or mounted() or holding() or pickingup() or warping()--]] then
         unclebroadsword.attackState = ATKSTATE.NONE
         if(statued() and mounted()) then
-            player:mem(0x4a, FIELD_WORD, 0)
+            player:mem(0x4A, FIELD_BOOL, false)
         end
         can_aerial = true
         can_stallnfall = true
@@ -831,6 +833,16 @@ function unclebroadsword.onTick()
         end
         -- Draw visual effects
         SpawnAttackGFX()
+        
+        for k,v in ipairs(NPC.get(457)) do
+            if SMBX_VERSION == VER_SEE_MOD then
+                if springs.boing then
+                    unclebroadsword.noUpwardStab = true
+                else
+                    unclebroadsword.noUpwardStab = false
+                end
+            end
+        end
         
         if unclebroadsword.debugMode then PrintAttackState(20, 500) end
     end
