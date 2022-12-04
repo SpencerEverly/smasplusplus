@@ -200,14 +200,14 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
     pDat.Talk = function (self, args)
         local n = table.clone(args)
         n.target = self.p
-        return message.showMessageBox (n)
+        --return message.showMessageBox (n)
     end
 
     pDat.Emote = function (self, icon)
         if  icon == nil  then
             icon = "blank"
         end
-        emote[icon](self.p, self.costume.namespace.talkOffsetY)
+        --emote[icon](self.p, self.costume.namespace.talkOffsetY)
     end
 
     pDat.LookAt = function(self, target)

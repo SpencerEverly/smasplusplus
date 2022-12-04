@@ -3,11 +3,11 @@
 -- ###########################################
 local particles = require("particles")
 
-local actorsys = require("a2xt_actor")
-local ep3Playables = require("a2xt_ep3playables")
 local extrasounds = require("extrasounds")
 local RNG = require("rng")
-local customCamera = require("customCamera")
+
+local actorsys = require("a2xt_actor")
+local ep3Playables = require("a2xt_ep3playables")
 
 local players = {}
 local playerCount = 0
@@ -357,30 +357,26 @@ local inputEvent = function(playerData, p)
     local chargeMin = pilyData.chargeShotMin
     local chargeMax = pilyData.chargeShotMax
 
-    if  playerData.powerup == 6 and (not isFairy) and not Misc.isPaused() then
-        
+    if playerData.powerup == 6 and (not isFairy) and not Misc.isPaused() then
+        Text.print(tostring(pilyData.chargeShotTimer),100,100)
         -- Hold the charge
-        if  (p.keys.run == KEYS_PRESSED  or  p.keys.run == KEYS_DOWN  or  p.forcedState == 2  or  (pilyData.chargeShotTimer > chargeMin))  then
+        if (p.keys.run == KEYS_PRESSED or p.keys.run == KEYS_DOWN or p.forcedState == 2 or (pilyData.chargeShotTimer > chargeMin)) then
             pilyData.chargeShotTimer = math.min(chargeMax+1, pilyData.chargeShotTimer+1)
 
-            if  pilyData.chargeShotTimer == 0  then
-                SFX.play(costume.path .. "/charge1.ogg")
+            if pilyData.chargeShotTimer == 0 then
+                SFX.play(costume.path.."/charge1.ogg")
             end
 
-            if  pilyData.chargeShotTimer == chargeMax  then
-                SFX.play(costume.path .. "/charge2.ogg")
+            if pilyData.chargeShotTimer == chargeMax then
+                SFX.play(costume.path.."/charge2.ogg")
             end
 
         -- Start the charge
-        elseif  p.keys.run == KEYS_PRESSED  and  pilyData.chargeShotTimer == chargeMin  then
+        elseif p.keys.run == KEYS_PRESSED and pilyData.chargeShotTimer == chargeMin then
             pilyData.chargeShotTimer = pilyData.chargeShotTimer+1
-
         -- Release the charge
         else
-            if   pilyData.chargeShotTimer >= chargeMax
-            and  (p.forcedState == 0)
-            and  not Misc.isPaused()
-            then
+            if pilyData.chargeShotTimer >= chargeMax and (p.forcedState == 0) and not Misc.isPaused() then
                 shootFireball{
                     playerData=playerData,
                     offset=vector(16,4), speed=vector(8+math.abs(p.speedX),0),
@@ -393,7 +389,7 @@ local inputEvent = function(playerData, p)
             pilyData.chargeShotTimer = chargeMin
         end
 
-    else 
+    else
         pilyData.chargeShotTimer = chargeMin
     end
 
