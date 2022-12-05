@@ -335,4 +335,27 @@ function SysManager.parseSaveFile(slot) --Parses a save file (Thanks KBM_Quine!)
     return t
 end
 
+function SysManager.loadMap() --Loads the map, or the editor-specified area.
+    if not Misc.inEditor() then
+        Level.load("map.lvlx")
+    elseif Misc.inEditor() then
+        Level.load(SaveData.editorWinnerLevelReload)
+    end
+end
+
+function SysManager.exitLevel(winType) --Exits a level with the win type specified.
+    if not Misc.inMarioChallenge() then
+        if winType >= 1 then
+            SysManager.loadMap()
+        end
+        for _,p in ipairs(Player.get()) do
+            if p:mem(0x15E, FIELD_WORD) >= 1 and p.forcedState == FORCEDSTATE_INVISIBLE then
+                if Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == "" then
+                    SysManager.loadMap()
+                end
+            end
+        end
+    end
+end
+
 return SysManager

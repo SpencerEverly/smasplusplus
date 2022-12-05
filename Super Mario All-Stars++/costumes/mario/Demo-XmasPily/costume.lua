@@ -283,7 +283,7 @@ local function initPilyData(pDat)
                     end
                 else
                     -- Aiming upward
-                    if  p.keys.up == KEYS_DOWN and not Misc.isPaused() then
+                    if p.keys.up == KEYS_DOWN and not Misc.isPaused() then
                         args.speed = vector(3,-6)
                     end
                 end

@@ -437,23 +437,7 @@ function globalgenerals.onDraw()
 end
 
 function globalgenerals.onExitLevel(winType)
-    if not Misc.inMarioChallenge() then
-        if winType >= 1 and winType ~= LEVEL_END_STATE_GAMEEND then
-            if not Misc.inEditor() then
-                Level.load("map.lvlx")
-            elseif Misc.inEditor() then
-                Level.load(SaveData.editorWinnerLevelReload)
-            end
-        elseif winType == LEVEL_END_STATE_GAMEEND then
-            Level.load("SMAS - Credits.lvlx")
-        elseif winType == LEVEL_END_STATE_SMB2ORB then
-            if not Misc.inEditor() then
-                Level.load("map.lvlx")
-            elseif Misc.inEditor() then
-                Level.load(SaveData.editorWinnerLevelReload)
-            end
-        end
-    end
+    SysManager.exitLevel(winType)
 end
 
 function globalgenerals.onExit()
