@@ -2,7 +2,6 @@ local animatx = require("animatx2")
 local particles = require("particles")
 local megashroom = require("mega/megashroom")
 local starman = require("starman/star")
-local customCamera = require("customCamera")
 local spintrail = require ("a2xt_spintrail")
 
 ep3Playables = {}

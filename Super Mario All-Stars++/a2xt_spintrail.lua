@@ -1,5 +1,5 @@
-local particles = API.load("particles");
-local rng = API.load("rng");
+local particles = require("particles");
+local rng = require("rng");
 
 local trail = {visible=true};
 

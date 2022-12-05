@@ -303,10 +303,6 @@ local function initPilyData(pDat)
     end
 end
 
-local function uninitPilyData(pDat)
-    pDat.pily = false
-end
-
 local function getInitialPlayerKeys(playerObj)
     local pkeys = {}
     for  k,v in pairs(playerObj.keys)  do
@@ -341,12 +337,12 @@ local inputEvent = function(playerData, p)
     local isHoldingFlight = not p:mem(0x174, FIELD_BOOL)
     local isDucking = p:mem(0x12E, FIELD_BOOL)
     local isUnderwater = p:mem(0x34, FIELD_WORD) == 2
-    local isCarrying = (p.holdingNPC ~= nil  and  p.holdingNPC ~= 0)
+    local isCarrying = (p.holdingNPC ~= nil and p.holdingNPC ~= 0)
     local isSpinjumping = p:mem(0x50, FIELD_BOOL)
     local isRainbowRiding = p:mem(0x44, FIELD_BOOL)
     local isClimbing = p:isClimbing()
     local canFly = p:mem(0x16E, FIELD_BOOL)
-    local isFlying = p:mem(0x16E, FIELD_BOOL)  and  isHoldingFlight
+    local isFlying = p:mem(0x16E, FIELD_BOOL) and isHoldingFlight
     local isStatue = p:mem(0x4A, FIELD_BOOL)
     local isFairy = p:mem(0x0C,FIELD_BOOL)
 
@@ -613,7 +609,7 @@ local inputEvent = function(playerData, p)
                     pilyData.cannonballTimer = 0
     
                     if  playerData.powerup == 6  then
-                        SFX.play("sound/character/ur_claw.ogg")
+                        Sound.playSFX("sound/character/ur_claw.ogg")
                     elseif  playerData.powerup == 3  then
                         Sound.playSFX("sound/extended/flame-shield-dash.ogg")
                     else
@@ -881,7 +877,7 @@ local animEvent = function(playerData, p, inst)
     em_charge:draw{priority=inst.z+0.01, nocull=true}
     
     
-    if player.deathTimer >= 0 then
+    if p.deathTimer >= 0 then
         onehp = false
         twohp = false
         threehp = false
@@ -1101,9 +1097,8 @@ local coyotetime
 local ppp
 local lastCt
 local spintrail
-local pDat
 
-function costume.onInit(playerObj, pDat)
+function costume.onInit(playerObj)
     if not costume.loadedSounds then
         Sound.loadCostumeSounds()
         costume.loadedSounds = true
@@ -1157,9 +1152,10 @@ function costume.onInit(playerObj, pDat)
     playerCount = playerCount+1
 end
 
+local heartfull2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot.png")
+local heartempty2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot_empty.png")
+
 function costume.onDraw()
-    local heartfull2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot.png")
-    local heartempty2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot_empty.png")
     if onehp then
         Graphics.drawImageWP(heartfull2, 357,  16, -4.2)
         Graphics.drawImageWP(heartempty2, 388,  16, -4.2)
@@ -1201,6 +1197,7 @@ function costume.onCleanup(playerObj, p)
     for i = 1,165 do
         extrasounds.sound.sfx[i] = nil
     end
+    players[playerObj] = nil
     spintrail.colorOverride[CHARACTER_MARIO] = nil
     spintrail.resetParam("colTime")
     spintrail.resetParam("lifetime")
