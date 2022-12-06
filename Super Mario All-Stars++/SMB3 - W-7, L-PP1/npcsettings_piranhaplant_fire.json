@@ -1,0 +1,148 @@
+{
+	"style" : "groupbox",
+	"title" : "Piranha Plant Settings",
+	"layout": [
+		{
+			"control": "checkbox",
+			"name": "changeSize",
+			"title": "Change Size",
+			"tooltip": "Whether or not the size of the NPC is changed while it comes out and retracts.",
+			"text-visible": false,
+			"value-default": true
+		},
+		{
+			"control" : "group",
+			"title" : "Per-NPC Settings",
+			"name" : "config",
+			"children": [
+				{
+					"control": "checkbox",
+					"name": "override",
+					"title": "Use Per-NPC Settings",
+					"tooltip": "When checked, per-NPC settings will be used for these settings in place of NPC config values.",
+					"text-visible": false,
+					"value-default": false
+				},
+				{
+					"control": "spinBox",
+					"type": "double",
+					"name": "movementSpeed",
+					"title": "Movement Speed",
+					"tooltip": "How fast the NPC moves when coming out or retracting back.",
+					"value-default": 1.5,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 0.1
+				},
+				{
+					"control": "spinBox",
+					"type": "int",
+					"name": "hideTime",
+					"title": "Hide Time",
+					"tooltip": "How long the NPC rests before coming out.",
+					"value-default": 50,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 1
+				},
+				{
+					"control": "spinBox",
+					"type": "int",
+					"name": "restTime",
+					"title": "Rest Time",
+					"tooltip": "How long the NPC rests before retracting back.",
+					"value-default": 50,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 1
+				},
+				{
+					"control": "checkbox",
+					"name": "ignorePlayers",
+					"title": "Ignore Players",
+					"tooltip": "Whether or not the NPC can come out, even if there's a player in the way.",
+					"text-visible": false,
+					"value-default": false
+				}
+			]
+		},
+		{
+			"control" : "group",
+			"title" : "Per-NPC Fire Settings",
+			"name" : "fire",
+			"children": [
+				{
+					"control": "checkbox",
+					"name": "override",
+					"title": "Use Per-NPC Settings",
+					"tooltip": "When checked, per-NPC settings will be used for these settings in place of NPC config values.",
+					"text-visible": false,
+					"value-default": false
+				},
+				{
+					"control": "itemSelect",
+					"type": "npc",
+					"name": "fireID",
+					"title": "Fire ID",
+					"tooltip": "The NPC ID of the fire shot by the NPC. If nil or 0, no fire will be shot.",
+					"value-default": 751
+				},
+				{
+					"control": "spinBox",
+					"type": "int",
+					"name": "fireSpurts",
+					"title": "Fire Spurts",
+					"tooltip": "How many \"spurts\" of fire the NPC will shoot before retracting.",
+					"value-default": 1,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 1
+				},
+				{
+					"control": "spinBox",
+					"type": "int",
+					"name": "firePerSpurt",
+					"title": "Fire Per Spurts",
+					"tooltip": "How many fire NPCs are shot in each \"spurt\".",
+					"value-default": 2,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 1
+				},
+				{
+					"control": "spinBox",
+					"type": "int",
+					"name": "fireSpurtDelay",
+					"title": "Fire Spurt Delay",
+					"tooltip": "How many frames of delay there are between each \"spurt\".",
+					"value-default": 16,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 1
+				},
+				{
+					"control": "spinBox",
+					"type": "double",
+					"name": "fireSpeed",
+					"title": "Fire Speed",
+					"tooltip": "The speed of each fire NPC shot by the NPC.",
+					"value-default": 5,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 0.1
+				},
+				{
+					"control": "spinBox",
+					"type": "double",
+					"name": "fireAngle",
+					"title": "Fire Angle",
+					"tooltip": "The angle of each fire NPC shot by the NPC. Increases with each spurt.",
+					"value-default": 25,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 0.1
+				}
+			]
+		}
+	]
+}
