@@ -596,7 +596,7 @@ ET:"3";TE:"2";TD:10;AS:0;AX:0;AY:0;
 ET:"2";TE:"1";TD:10;AS:0;AX:0;AY:0;
 ET:"1";TE:"GO";TD:10;AS:0;AX:0;AY:0;
 ET:"GO";TE:"START";TD:8;AS:0;AX:0;AY:0;
-ET:"START";LS:["Arena"];SSS:["ID\:0\;SL\:-200000\;ST\:-200600\;SB\:-200000\;SR\:-194688\;"];DS:1;AS:0;AX:0;AY:0;
+ET:"START";LS:["Arena"];DS:1;AS:0;AX:0;AY:0;
 ET:"Finish!";SD:21;SSS:["ID\:0\;SL\:-195488\;ST\:-200600\;SB\:-200000\;SR\:-194688\;MI\:0\;"];TE:"Finish 2";TD:47;AS:0;AX:0;AY:0;
 ET:"Finish 2";MG:"Hey\, thanks for bringing the item back\, <characterName>!<page>No\, really\, I don't need it anymore. It's all yours! Use it when you're ready.";TE:"Finish 3";TD:4;AS:0;AX:0;AY:0;
 ET:"Finish 3";LS:["Item Recieved"];TE:"End Level";TD:25;DS:1;AS:0;AX:0;AY:0;

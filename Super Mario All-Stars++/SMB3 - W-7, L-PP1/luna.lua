@@ -6,7 +6,7 @@ function onEvent(eventName)
         Sound.playSFX(22)
         Defines.earthquake = 5
     end
-    if eventName == "Reward Recieved" then
+    if eventName == "Reward Received" then
         inventory.addPowerUp(6, 1)
         Sound.playSFX("chest.ogg")
         Sound.playSFX("_OST/Super Mario Bros 3/Battle Mode Win.ogg")
