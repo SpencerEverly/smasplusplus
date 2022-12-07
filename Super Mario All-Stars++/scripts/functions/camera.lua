@@ -84,6 +84,7 @@ local boundaryLeft,boundaryRight,boundaryTop,boundaryBottom = 0,0,0,0
 local setCameraPosition = false
 local cameraPanSpeed = 5
 Screen.playersOutOfBounds = {}
+Screen.activeCameraScrolls = {}
 local tempBool = false
 
 function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed) --This is used to set the camera boundaries for the specific section.
@@ -141,9 +142,9 @@ function Screen.onDraw()
                     table.insert(Screen.playersOutOfBounds, Player(i))
                 end
             end
-        end
-        if tempBool == false then
-            
+            if not tempBool then
+                
+            end
         end
         setCameraPosition = false
     end

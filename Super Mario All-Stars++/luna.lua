@@ -71,7 +71,6 @@ GameData.levelMusic = {}
 _G.smwMap = require("smwMap")
 _G.extrasounds = require("extrasounds")
 _G.classicEvents = require("classiceventsmod")
-_G.EventManager = require("main_events_mod")
 _G.darkness = require("darknessa")
 _G.events = require("editorevents_mod")
 _G.extraNPCProperties = require("extraNPCProperties")

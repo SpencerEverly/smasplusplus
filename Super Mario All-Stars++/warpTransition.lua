@@ -349,6 +349,11 @@ function warpTransition.onInitAPI()
     registerEvent(warpTransition,"onCameraDraw")
 
     registerEvent(warpTransition,"onCameraUpdate")
+    
+    if SMBX_VERSION == VER_SEE_MOD then
+        registerEvent(warpTransition,"onWarp")
+        registerEvent(warpTransition,"onWarpEnter")
+    end
 end
 
 function warpTransition.onStart()
@@ -469,6 +474,35 @@ function warpTransition.onCameraUpdate()
     end
 end
 
+if SMBX_VERSION == VER_SEE_MOD then
+    function warpTransition.onWarp(warp,playerObj)
+        if warpTransition.currentTransitionType == warpTransition.TRANSITION_NONE and warp then
+            Routine.run(warpPlayerToOther, warp, playerObj)
+        end
+    end
+    function warpTransition.onWarpEnter(eventObj,warp,playerObj)
+        if SaveData.disableX2char then
+            if warpTransition.currentTransitionType == warpTransition.TRANSITION_NONE and warp then
+                if playerObj.idx > 1 then --Just to be safe
+                    eventObj.cancelled = true
+                end
+            end
+        end
+    end
+    function warpPlayerToOther(warp,playerObj)
+        if SaveData.disableX2char then
+            player:mem(0x140,FIELD_WORD,100)
+            if Player.count() >= 2 then
+                for i = 2,200 do
+                    if Player(i).isValid then
+                        Player(i):mem(0x140,FIELD_WORD,100)
+                        Player(i):teleport(playerObj.x - 32, playerObj.y - 32)
+                    end
+                end
+            end
+        end
+    end
+end
 
 -- The type of transition used when using a warp that leads to somewhere else in the same section. Can be 'warpTransition.TRANSITION_NONE', 'warpTransition.TRANSITION_FADE', 'warpTransition.TRANSITION_PAN', 'warpTransition.TRANSITION_IRIS_OUT', 'warpTransition.TRANSITION_MOSAIC', 'warpTransition.TRANSITION_CROSSFADE', 'warpTransition.TRANSITION_MELT', or 'warpTransition.TRANSITION_SWIRL'.
 warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE

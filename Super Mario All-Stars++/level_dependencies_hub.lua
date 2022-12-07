@@ -141,30 +141,30 @@ end
 
 function dependencies2.onTick()
     if Player.count() >= 2 then
-        if Player(1).forcedState == FORCEDSTATE_PIPE then
-            if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
-                player:mem(0x140,FIELD_WORD,100)
-                Player(2):mem(0x140,FIELD_WORD,100)
-                Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+        if SMBX_VERSION ~= VER_SEE_MOD then
+            if Player(1).forcedState == FORCEDSTATE_PIPE then
+                if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
+                    player:mem(0x140,FIELD_WORD,100)
+                    Player(2):mem(0x140,FIELD_WORD,100)
+                    Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+                end
             end
-        end
-        if Player(2).forcedState == FORCEDSTATE_PIPE then
-            if Player(2).forcedTimer >= 70 and not Misc.isPaused() then
-                player:mem(0x140,FIELD_WORD,100)
-                Player(2):mem(0x140,FIELD_WORD,100)
-                Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
+            if Player(2).forcedState == FORCEDSTATE_PIPE then
+                if Player(2).forcedTimer >= 70 and not Misc.isPaused() then
+                    player:mem(0x140,FIELD_WORD,100)
+                    Player(2):mem(0x140,FIELD_WORD,100)
+                    Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
+                end
             end
-        end
-    end
-    if Player.count() >= 2 then
-        if Player(1).forcedState == FORCEDSTATE_DOOR then
-            if Player(1).forcedTimer == 1 then
-                Routine.run(p1teleportdoor)
+            if Player(1).forcedState == FORCEDSTATE_DOOR then
+                if Player(1).forcedTimer == 1 then
+                    Routine.run(p1teleportdoor)
+                end
             end
-        end
-        if Player(2).forcedState == FORCEDSTATE_DOOR then
-            if Player(2).forcedTimer == 1 then
-                Routine.run(p2teleportdoor)
+            if Player(2).forcedState == FORCEDSTATE_DOOR then
+                if Player(2).forcedTimer == 1 then
+                    Routine.run(p2teleportdoor)
+                end
             end
         end
     end
