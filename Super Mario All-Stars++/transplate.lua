@@ -1,15 +1,19 @@
 local transplate = {}
 
+if SaveData.currentLanguage == nil then
+    SaveData.currentLanguage = "english"
+end
+
 local path = "transplate"
 
 --[[settings]]
     -- main 
-    local preCache = false
+    local preCache = true
     local preLoad = true
-    local saveLanguage = false
+    local saveLanguage = true
 
     -- littleDialogue
-    local littleDialogue_loadFonts = true
+    local littleDialogue_loadFonts = false
     
     -- restmenu
     -- local restmenu_loadFont = true
@@ -24,9 +28,6 @@ local textplus = require("textplus")
 
 local littleDialogue
 pcall(function() littleDialogue = require("littleDialogue") end)
-
--- local restmenuGUI
--- pcall(function() restmenuGUI = require("restmenuGUI") end)
 
 do
     local function unpackTabledStrings(langFile)
@@ -53,7 +54,7 @@ do
             
             fonts[langName] = {}
             
-            local _dir = path .. [[/]] .. langName .. [[/littleDialogue]]
+            local _dir = path..[[/littleDialogue]]
             local _path = Misc.resolveDirectory(_dir)
             -- Misc.dialog(_path)
             
@@ -76,20 +77,21 @@ do
     function transplate.loadLanguage(langName)
         langs[langName] = {}
         
-        local langFile = require(path .. [[/]] .. langName .. [[/lang]])
+        local langFile = require(path.."/"..langName.."/lang")
+        
         unpackTabledStrings(langFile)
-        littleDialogueFonts(langName)
+        --littleDialogueFonts(langName)
         
         langs[langName].strings = langFile
 
         if preCache then
-            SaveData._transplateCache = langs
+            SaveData.currentLanguageCache = langs
         end
     end
 end
 
 function transplate.getLanguage()
-    return currentLanguage
+    return SaveData.currentLanguage
 end
 
 do
@@ -120,44 +122,40 @@ do
     function transplate.setLanguage(new)
         currentLanguage = new
         
-        littleDialogue_changeFonts(new)
+        --littleDialogue_changeFonts(new)
         
         if saveLanguage then
-            SaveData._transplateLang = currentLanguage
+            SaveData.currentLanguage = currentLanguage
         end
     end
 end
 
 function transplate.getTranslation(text, lang)
-    if not currentLanguage then return text end
+    if SaveData.currentLanguage == "english" then return text end
 
-    return langs[lang or currentLanguage].strings[text] or text
+    return langs[SaveData.currentLanguage or lang].strings[text] or text
 end
 
 function transplate.setTranslation(text, new, lang)
     if not currentLanguage then return end
 
-    langs[lang or currentLanguage].strings[text] = new
+    langs[lang or SaveData.currentLanguage].strings[text] = new
 end
 
 function transplate.onInitAPI()
     if saveLanguage then
-        transplate.setLanguage(SaveData._transplateLang)
+        transplate.setLanguage(SaveData.currentLanguage)
+        transplate.loadLanguage(SaveData.currentLanguage)
     end
     
-    if preCache and SaveData._transplateCache then
-        langs = SaveData._transplateCache
+    if preCache and SaveData.currentLanguageCache then
+        langs = SaveData.currentLanguageCache
         return
     end
     
     if not preLoad then return end
     
-    local _path = Misc.resolveDirectory(path)
-    
-    if not _path then return end
-    
-    local dirs = Misc.listDirectories(_path)
-    
+    local dirs = Misc.listDirectories(Misc.resolveDirectory("transplate"))
     for _, langName in ipairs(dirs) do
         transplate.loadLanguage(langName)
     end

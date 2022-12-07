@@ -157,6 +157,7 @@ end
 _G.globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 _G.repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
 _G.rng = require("base/rng") --Load up rng for etc. things
+_G.transplate = require("transplate")
 if SaveData.speedrunMode then
     speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
     inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
@@ -287,6 +288,9 @@ end
 --Other stuff
 if SaveData.openingComplete == nil then
     SaveData.openingComplete = false
+end
+if SaveData.currentLanguage == nil then
+    SaveData.currentLanguage = "english"
 end
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
