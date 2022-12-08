@@ -385,6 +385,7 @@ local function FailsafeMessage1() --You died on the main menu
     if SaveData.failsafeMessageOne then
         SaveData.failsafeMessageOne = false
     end
+    SaveData.totalLives = SaveData.totalLives + 1
     Sound.muteMusic(-1)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000013"), speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
@@ -403,48 +404,48 @@ function menuDialogue() --Main menu
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
-local function battleModeDialogue()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.5><question BattleSelect>", speakerName = "Minigames", pauses = false, updatesInPause = true})
+local function battleModeDialogue() --Minigames
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000015"), speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
-function optionsMenu1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question Options>", speakerName = "Options", pauses = false, updatesInPause = true})
+function optionsMenu1() --Options
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000016"), speakerName = "Options", pauses = false, updatesInPause = true})
 end
 
-local function themeMenu1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question IntroTheme>", speakerName = "Themes", pauses = false, updatesInPause = true})
+local function themeMenu1() --Intro theme menu
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000017"), speakerName = "Themes", pauses = false, updatesInPause = true})
 end
 
-local function ResolutionSelect1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question ResolutionSelect>", speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
+local function ResolutionSelect1() --Resolution settings
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000018"), speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
 end
 
-local function ClockSelect1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question ClockSelect>", speakerName = "Clock Theme Selection", pauses = false, updatesInPause = true})
+local function ClockSelect1() --Clock settings
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000019"), speakerName = "Clock Theme Selection", pauses = false, updatesInPause = true})
 end
 
 
 
-local function classicBattleSelect()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>Select level.<question BattleLevelSelect>", pauses = false, updatesInPause = true})
+local function classicBattleSelect() --Select level.
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000020"), pauses = false, updatesInPause = true})
 end
 
-local function ChangeName1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>To change your name in the game, please select Begin to get started (Keyboard only).<question StartNameChange>", pauses = false, updatesInPause = true})
+local function ChangeName1() --To change your name...
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000021"), pauses = false, updatesInPause = true})
 end
 
-local function ChangePFP1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>To change your profile picture in the game, please select Begin to get started (Keyboard only).<question StartPFPChange>", pauses = false, updatesInPause = true})
+local function ChangePFP1() --To change your PFP...
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000022"), pauses = false, updatesInPause = true})
 end
 
-local function ResolutionChange1()
+local function ResolutionChange1() --Resolution changed.
     Sound.playSFX("resolution-set.ogg")
     Routine.waitFrames(1, true)
     smasresolutions.changeResolution()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000023"), pauses = false, updatesInPause = true})
 end
 
-local function ResolutionChangeBorder2()
+local function ResolutionChangeBorder2() --Border toggled on/off.
     if SaveData.borderEnabled then
         Sound.playSFX("resolutionborder-disable.ogg")
         SaveData.borderEnabled = false
@@ -456,7 +457,7 @@ local function ResolutionChangeBorder2()
         Routine.waitFrames(1, true)
         smasresolutions.changeResolution()
     end
-    littleDialogue.create({text = "<setPos 400 32 0.5 -2.1>Border toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000024"), pauses = false, updatesInPause = true})
 end
 
 local function ResolutionChangeScale3()
@@ -471,80 +472,80 @@ local function ResolutionChangeScale3()
         Routine.waitFrames(1, true)
         smasresolutions.changeResolution()
     end
-    littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Scaling toggled on/off. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000025"), pauses = false, updatesInPause = true})
 end
 
-local function AccessibilityOptions1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.2><question AccessibilityStuff>", speakerName = "Accessibility Options", pauses = false, updatesInPause = true})
+local function AccessibilityOptions1() --Accessibility Options
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000026"), speakerName = "Accessibility Options", pauses = false, updatesInPause = true})
 end
 
-local function AccessibilityOptionToggle1()
+local function AccessibilityOptionToggle1() --Accessibility turned on/off
     SaveData.accessibilityTwirl = not SaveData.accessibilityTwirl
     if SaveData.accessibilityTwirl then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
     end
 end
 
-local function AccessibilityOptionToggle2()
+local function AccessibilityOptionToggle2() --Accessibility turned on/off
     SaveData.accessibilityWallJump = not SaveData.accessibilityWallJump
     if SaveData.accessibilityWallJump then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
     end
 end
 
-local function AccessibilityOptionToggle3()
+local function AccessibilityOptionToggle3() --Accessibility turned on/off
     SaveData.accessibilityInventory = not SaveData.accessibilityInventory
     if SaveData.accessibilityInventory then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
     end
 end
 
-local function AccessibilityOptionToggle4()
+local function AccessibilityOptionToggle4() --Accessibility turned on/off
     SaveData.enableLives = not SaveData.enableLives
     if SaveData.enableLives then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
     end
 end
 
-local function AccessibilityOptionToggle5()
+local function AccessibilityOptionToggle5() --Accessibility turned on/off
     SaveData.accessibilityGroundPound = not SaveData.accessibilityGroundPound
     if SaveData.accessibilityGroundPound then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled on.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.2>Accessibility option toggled off.<question ReturnMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
     end
 end
 
-local function ClockChange1()
+local function ClockChange1() --Clock theme changed.
     Sound.playSFX("hour-change.ogg")
-    littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Clock theme changed. Check it out right now!<question ReturnMenu>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000029"), pauses = false, updatesInPause = true})
 end
 
-local function credits1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.1>For information on everything that made this episode possible,<page>It wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder,<page>the SMAS folder, and redirect to the CREDITS.txt file in the folder.<question ReturnMenu>", speakerName = "Credits", pauses = false, updatesInPause = true})
+local function credits1() --Credits
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000030"), speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
-local function X2Char()
+local function X2Char() --Game settings applied
     if not SaveData.disableX2char then
         Sound.playSFX("1.3Mode/bowser-killed.ogg")
         SaveData.disableX2char = true
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
     elseif SaveData.disableX2char then
         Sound.playSFX("x2-mode-enabled.ogg")
         SaveData.disableX2char = false
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
     end
 end
 
-local function turnOnRngMusic()
+local function turnOnRngMusic() --Game settings applied
     SaveData.turnOnMainMenuMusicRng = not SaveData.turnOnMainMenuMusicRng
     if SaveData.turnOnMainMenuMusicRng then
         Sound.changeMusic(bootmenu.musicRng[rng.randomInt(1,#bootmenu.musicRng)], 0)
@@ -552,19 +553,19 @@ local function turnOnRngMusic()
     if not SaveData.turnOnMainMenuMusicRng then
         Sound.restoreOriginalMusic(-1)
     end
-    littleDialogue.create({text = "<setPos 400 32 0.5 -2.3>Game settings have been applied.<question OkayToMenu>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
 end
 
-local function InputConfig1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>To begin configuring the inputs of the game,<page>please select an option depending on the controls currently being used.<question StartInputs>", pauses = false, updatesInPause = true})
+local function InputConfig1() --Config inputs
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000032"), pauses = false, updatesInPause = true})
 end
 
 local function startConfigurator()
     inputconfigurator.controlConfigOpen = true
 end
 
-local function startPreConfiguratorKeyboard()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Which player would you like to assign keys to?<question StartInputPlayers>", pauses = false, updatesInPause = true})
+local function startPreConfiguratorKeyboard() --Which player?
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000033"), pauses = false, updatesInPause = true})
 end
 
 local function startConfiguratorKeyboard()
@@ -601,135 +602,128 @@ local function startSaveSwitcher1()
     GameData.saveslotswitchenter = true
 end
 
-local function PFPinfo1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>Your profile picture can be used when you launch Online Multiplayer, or to see who is running the game at this session.<page>Your profile picture will also be used during the story, along with your name.<page>To specify the profile picture using the keyboard, please type up the path from '___MainUserDirectory' to the profile picture you are going to use.<page>'___MainUserDirectory' is a user modifiable directory that can be used for files you specify for the episode, such as a profile picture (PNG only).<page>Don't worry if you don't want to specify one, there's already a default profile picture for you already set up.<page>But if you want to go ahead and set one up, please specify to begin anytime on that menu.<page>With that out of the way, that's how you set up a profile picture for the episode!<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+local function PFPinfo1() --PFP information
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000034"), pauses = false, updatesInPause = true})
 end
 
 local function X2DisableCheck1()
     if Player.count() == 1 then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Would you like to enable/disable SMBX 1.3 mode?<page>If enabled, certain features will be disabled and some compatibility for 2 player mode will be restored.<page>Costumes will reset, so be careful enabling this option!<question X2CharacterDisableOne>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000035"), pauses = false, updatesInPause = true})
     end
-    if Player.count() == 2 then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>You can't use 2 player mode on X2 mode. Please disable SMBX 1.3 mode first before proceeding.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+    if Player.count() >= 2 then
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000036"), pauses = false, updatesInPause = true})
     end
 end
 
 local function TwoPlayerDisEnable1()
-    if SaveData.disableX2char == true then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use 2 player mode!<page>Would you like to enable/disable 2 player mode?<question TwoPlayerDisableOne>", pauses = false, updatesInPause = true})
-    elseif SaveData.disableX2char == false then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to turn on 1.3 Mode to toggle this on and off.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+    if SaveData.disableX2char then
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000037"), pauses = false, updatesInPause = true})
+    elseif not SaveData.disableX2char then
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000038"), pauses = false, updatesInPause = true})
     end
 end
 
 local function BattleModeDisEnable1()
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         if Player.count() == 1 then
-            littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? We'll need to enable 2 player mode first.<question BattleTwoPlayerCheckOne>", pauses = false, updatesInPause = true})
+            littleDialogue.create({text = transplate.getTranslation("0x0000000000000039"), pauses = false, updatesInPause = true})
+        elseif Player.count() >= 2 then
+            if Player.count() >= 3 then
+                Playur.activate2ndPlayer()
+            end
+            littleDialogue.create({text = transplate.getTranslation("0x0000000000000040"), pauses = false, updatesInPause = true})
         end
-        if Player.count() == 2 then
-            littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? You already have 2 player mode enabled for this.<question BattleTwoPlayerCheckTwo>", pauses = false, updatesInPause = true})
-        end
-    elseif SaveData.disableX2char == false then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>Unfortunately, you'll need to turn on 1.3 Mode to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+    elseif not SaveData.disableX2char then
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000041"), pauses = false, updatesInPause = true})
     end
 end
 
 local function RushModeMenu1()
     if Player.count() == 1 then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>It looks like you can use Rush Mode!<page>Would you like to start Rush Mode?<question RushModeSelectionOne>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000042"), pauses = false, updatesInPause = true})
     end
-    if Player.count() == 2 then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>You'll need to disable 2 player mode before continuing. To disable 2 player mode, head into Settings and select 2 Player Mode.<question OkayToMenuTwoOptions>", pauses = false, updatesInPause = true})
+    if Player.count() >= 2 then
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000043"), pauses = false, updatesInPause = true})
     end
 end
 
 local function FramerateToggle1()
     SaveData.framerateEnabled = not SaveData.framerateEnabled
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Framerate has been toggled either on or off. You can see it on the top-left corner of the screen.<question OkayToMenu>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000044"), pauses = false, updatesInPause = true})
 end
 
 local function TwoPlayerCheck()
     Playur.activate2ndPlayer()
     Defines.player_hasCheated = false
-    littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000045").."<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function TwoPlayerCheckBattle()
     Playur.activate2ndPlayer()
     Defines.player_hasCheated = false
-    littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>2 player mode activated.<question OkayToBattle>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000045").."<question OkayToBattle>", pauses = false, updatesInPause = true})
 end
 
 local function ExitClassicBattle()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>Exiting battle mode activated. You'll need to manually turn off 2 player mode in the settings tab.<question OkayToMenu>", pauses = false, updatesInPause = true})
-end
-
-local function OnePlayerCheckWarning()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Please note that there are errors and bugs that occur when switching back to 1 player mode within this option.<page>To prevent errors, we need you to press 'No' and restart the game by closing it.<page>But, if you wanna REALLY make sure you wanna error out the episode for debugging if you are smart enough to report a fix, please press 'Yes' instead.<question OnePlayerChoosing>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000046"), pauses = false, updatesInPause = true})
 end
 
 local function OnePlayerCheck()
     Playur.activate1stPlayer()
     Defines.player_hasCheated = false
-    littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>1 player mode activated.<question OkayToMenu>", pauses = false, updatesInPause = true})
-end
-
-local function FailsafeMessage1()
-    --SaveData.totalLives = SaveData.totalLives + 1
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000047").."<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
 local function ChangeChar1()
     if not SaveData.disableX2char then
         smascharacterchanger.menuActive = true
         smascharacterchanger.animationActive = true
-        --littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change into?<question CharacterListX2>", pauses = false, updatesInPause = true})
     elseif SaveData.disableX2char then
         if Player.count() == 2 then
-            littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Which player do you want to change characters to?<question PlayerChoosingOne>", pauses = false, updatesInPause = true})
+            littleDialogue.create({text = transplate.getTranslation("0x0000000000000048"), pauses = false, updatesInPause = true})
         elseif Player.count() == 1 then
-            littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into?<question CharacterList1>", pauses = false, updatesInPause = true})
+            littleDialogue.create({text = transplate.getTranslation("0x0000000000000049"), pauses = false, updatesInPause = true})
         end
     end
 end
 
 local function ChangeChar1P()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 1 into?<question CharacterList1>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000049"), pauses = false, updatesInPause = true})
 end
 
 local function ChangeChar2P()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>Who shall you change Player 2 into?<question CharacterList2>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000050"), pauses = false, updatesInPause = true})
 end
 
 local function ChangedCharacter()
     Sound.playSFX("charcost-selected.ogg")
     if Player.count() == 1 then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.5>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000051"), pauses = false, updatesInPause = true})
     end
     if Player.count() == 2 then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -2.5>Character changing succeeded.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000051"), pauses = false, updatesInPause = true})
     end
 end
 
 local function SaveOptions1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question SavingMenuOne>", speakerName = "Saving Options", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000052"), speakerName = "Saving Options", pauses = false, updatesInPause = true})
 end
 
 local function SaveSlot1()
     if not Misc.inEditor() then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.2>To begin switching the save slot, please select Begin to get started (Keyboard only).<page>THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!<question StartSaveSwitcher>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000053"), pauses = false, updatesInPause = true})
     elseif Misc.inEditor() then
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.5>You can't do this while in the editor mode.<page>Please start an actual game to switch saves.<page>You can also manually do this yourself by renaming save slots in the episode folder.<question OkayToMenuOptions>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = transplate.getTranslation("0x0000000000000054"), pauses = false, updatesInPause = true})
     end
 end
 
 local function EraseSave1()
     Sound.muteMusic(-1)
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.<question SaveErasePreChoice>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000055"), pauses = false, updatesInPause = true})
 end
 
 local function EraseSave2()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.8>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000056"), pauses = false, updatesInPause = true})
 end
 
 local function BootDialogueMusicReset()
@@ -740,7 +734,7 @@ local function BootDialogueMusicReset()
     stpatricksday = false
     playernamebyImg = false
     pfpimage = false
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
     Sound.restoreMusic(-1)
 end
 
@@ -751,7 +745,7 @@ local function ExitDialogueFirstBoot()
     active = false
     logo = true
     pressjumpwords = true
-    if SaveData.firstBootCompleted == true then
+    if SaveData.firstBootCompleted then
         bootmenu.startedmenu = 0
     end
     if Time.month() == 03 and Time.day() == 17 then
@@ -766,7 +760,7 @@ local function ExitDialogue()
     playernamebyImg = true
     pfpimage = true
     pressjumpwords = true
-    if SaveData.firstBootCompleted == true then
+    if SaveData.firstBootCompleted then
         bootmenu.startedmenu = 0
     end
     if Time.month() == 03 and Time.day() == 17 then
@@ -781,7 +775,7 @@ local function ExitDialogueMusicReset()
     playernamebyImg = true
     pfpimage = true
     pressjumpwords = true
-    if SaveData.firstBootCompleted == true then
+    if SaveData.firstBootCompleted then
         bootmenu.startedmenu = 0
     end
     if Time.month() == 03 and Time.day() == 17 then
@@ -817,7 +811,7 @@ local function SaveEraseStart()
     --Start opening SMAS++'s save files. From there, write default data to the files.
     Misc.eraseSaveSlot(Misc.saveSlot())
     --Then make the message telling that it's erased.
-    littleDialogue.create({text = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000057"), pauses = false, updatesInPause = true})
 end
 
 local function ExitToIntro() --This command will auto load the intro
