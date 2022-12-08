@@ -8,7 +8,7 @@ local path = "transplate"
 
 --[[settings]]
     -- main 
-    local preCache = true
+    local preCache = false
     local preLoad = true
     local saveLanguage = true
 
@@ -131,7 +131,7 @@ do
 end
 
 function transplate.getTranslation(text, lang)
-    if SaveData.currentLanguage == "english" then return text end
+    if SaveData.currentLanguage == nil then return text end
 
     return langs[SaveData.currentLanguage or lang].strings[text] or text
 end

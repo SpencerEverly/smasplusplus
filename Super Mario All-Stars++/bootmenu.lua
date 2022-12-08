@@ -294,38 +294,31 @@ local function easterEgg() --SnooPINGAS I see? ._.
     active4 = true
 end
 
-local function SaveDataError2()
-    Sound.muteMusic(-1)
-    Audio.SeizeStream(0)
-    Routine.wait(1.5)
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>It looks like SavaData couldn't be read or corrupted.<page>If that is happening, you probably loaded this episode on the broken X2 launcher found in the actual SMBX2 program.<page>Unfortunately, this means that SaveData could be corrupted.<page>Next time, please launch the game using the X2 launch menu found on SMBX2.exe.<page>Please close this dialogue box by pressing jump, then press pause to exit the game.", speakerName = "Whoops!", pauses = false, updatesInPause = true})
-end
-
-local function FirstBoot1()
+local function FirstBoot1() --Welcome to SMAS++
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
     Routine.wait(1.5)
     active = true
     logo = false
     pressjumpwords = false
     Sound.changeMusic("_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg", 0)
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Welcome to Super Mario All-Stars++.<page>This game combines Super Mario Bros. 1-3, The Lost Levels, World,<page>And also includes a new game, along with extra content.<page>Please note that this is an Open Source project.<page>So please understand that BUGS may occur! Don't hesitate to report them on the GitHub page.<page>You can find it at https://github.com/SpencerEverly/smasplusplus/.<page>Other than that, please enjoy the game!<page>But, before we get started, this game needs to set up some prerequisite options.<question FirstBootMenuOne>", speakerName = "Welcome!", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000001"), speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
 
-local function MigrateOldSave1()
+local function MigrateOldSave1() --Migration message
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
     Routine.wait(1.5)
     active = true
     logo = false
     pressjumpwords = false
     Sound.changeMusic("_OST/Photo Channel (Wii)/Slideshow (Scenic).ogg", 0)
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>It looks like you have an old save you'll need to migrate immediately.<page>The reason why you'll need to migrate your save is because your current save is outdated and needs to be refreshed for this Demo,<page>and beyond for future releases. Please note that, once you migrate your data, it will be imcompatible with old releases.<page>So please do this if you are actually willing to upgrade to Demo 3 and beyond.<question MigrateSaveMenuOne>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000009"), pauses = false, updatesInPause = true})
 end
 
-local function MigrateOldSave2()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Please note that before you do this, a final reminder that this save data will be upgraded, and the data will not be compatible with older releases.<page>Be sure you want to proceed before doing so.<question MigrateSaveMenuTwo>", pauses = false, updatesInPause = true})
+local function MigrateOldSave2() --Migration Warning
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000010"), pauses = false, updatesInPause = true})
 end
 
-local function MigrateOldSave3()
+local function MigrateOldSave3() --Migration started + completed
     SaveData.totalCoinsClassic = mem(0x00B2C5A8, FIELD_WORD)
     SaveData.totalLives = mem(0x00B2C5AC, FIELD_FLOAT)
     SaveData.totalScoreClassic = Misc.score()
@@ -343,33 +336,33 @@ local function MigrateOldSave3()
     end
     SaveData.totalStarCount = #SaveData.completeLevels
     Misc.eraseMainSaveSlot(Misc.saveSlot())
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Save has been officially migrated! Please go ahead and restart the game to successfully migrate your entire data.<question RestartOptionNoSaveErase>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000011"), pauses = false, updatesInPause = true})
 end
 
 local function MigrateOldSaveCancelled()
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.7>Please note that you need to upgrade your save data to use Demo 3. Try again next time when you are ready to do so.<question MigrateSaveMenuCancel>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000012"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot3()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.6>Check the date and time below (It should be on the bottom-right corner). Is that time, and the system date correct?<question FirstBootMenuTwo>", pauses = false, updatesInPause = true})
+local function FirstBoot3() --Check the data/time
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000002"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot4()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.6>And now, we need to know your name. What is your name? Press Begin and type up your name (You'll need to use a keyboard for this).<question FirstBootMenuThree>", pauses = false, updatesInPause = true})
+local function FirstBoot4() --Know your name
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000003"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBootKeyboardConfig()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.3>Finally, we need you to configurate your inputs for the game. To start configuring the controls, please select start. You'll want to configurate Player 2's controls later if you're playing in 1.3 Mode.<question FirstBootMenuKeyboard>", pauses = false, updatesInPause = true})
+local function FirstBootKeyboardConfig() --Config inputs
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000004"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot5()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.8>Looks like you're good! Before you begin, do you know how to play the game?<page>If you already know how to play, you can select Skip.<question FirstBootMenuFour>", pauses = false, updatesInPause = true})
+local function FirstBoot5() --Game help?
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000005"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot6()
+local function FirstBoot6() --Without further ado, SMAS++!
     Sound.changeMusic("_OST/All Stars Menu/Boot Menu (First Boot).ogg", 0)
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.4>Without further ado, Super Mario All-Stars++!<question FirstBootMenuFive>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000006"), pauses = false, updatesInPause = true})
     if not SaveData.firstBootCompleted then
         SaveData.firstBootCompleted = true
         GameData.playernameenterfirstboot = false
@@ -378,22 +371,22 @@ local function FirstBoot6()
     Misc.saveGame()
 end
     
-local function FirstBootGameHelp()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.3>To get help in playing the game, you'll need to redirect to the Game Help level. Would you like to enter the level, or skip? You can load Game Help again on the title screen later if you want to.<question FirstBootMenuGameHelp>", pauses = false, updatesInPause = true})
+local function FirstBootGameHelp() --Get game help or nah?
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000007"), pauses = false, updatesInPause = true})
     Misc.saveGame()
 end
 
 local function TimeFixInfo1()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.6>Depending on the issue, please visit sites like https://support.kaspersky.com/common/windows/3508<page>Or use Google/DuckDuckGo and search up -fixing system time-.<page>Please fix the time first, then after fixing the time should automatically update. Press -Recheck- to recheck the time again.<question FirstBootMenuTimeFix>", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000008"), pauses = false, updatesInPause = true})
 end
 
-local function FailsafeMessage1()
+local function FailsafeMessage1() --You died on the main menu
     active = true
-    if SaveData.failsafeMessageOne == 1 then
-        SaveData.failsafeMessageOne = SaveData.failsafeMessageOne - 1
+    if SaveData.failsafeMessageOne then
+        SaveData.failsafeMessageOne = false
     end
     Sound.muteMusic(-1)
-    littleDialogue.create({text = "<setPos 400 32 0.5 -0.9>It looks like the menu restarted.<page>When that happened, you probably died here in the boot screen.<page>If there are any problems, don't hesitate to email spencer.everly at gmail.com or contact them on Discord at Spencer Everly#1997.<question ToMenuResetTwo>", speakerName = "Whoops!", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000013"), speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
 local function bootDialogue()
@@ -403,11 +396,11 @@ local function bootDialogue()
     pressjumpwords = false
     playernamebyImg = false
     pfpimage = false
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
-function menuDialogue()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.0><question MainMenu>", speakerName = "Main Menu", pauses = false, updatesInPause = true})
+function menuDialogue() --Main menu
+    littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
 end
 
 local function battleModeDialogue()
@@ -977,37 +970,50 @@ function bootmenu.onStart()
         smasbooleans.mainMenuActive = true
         bootmenu.startedmenu = 0
         Audio.MusicVolume(nil) --Let the music volume reset
+        
+        if SaveData.failsafeMessageOne == 1 then --Change these values for users after 12/7/2022
+            SaveData.failsafeMessageOne = true
+        elseif SaveData.failsafeMessageOne == 0 then
+            SaveData.failsafeMessageOne = false
+        end
+        if SaveData.failsafeMessageOne == nil then
+            SaveData.failsafeMessageOne = false
+        end
+        
         if mem(0x00B251E0, FIELD_WORD) >= 1 then
             GameData.saveDataMigrated = false
         end
         if mem(0x00B251E0, FIELD_WORD) == 0 then
             GameData.saveDataMigrated = true
         end
-        if GameData.saveDataMigrated == false then
+        if not GameData.saveDataMigrated then
             Routine.run(MigrateOldSave1)
             bootmenu.startedmenu = 1
         end
         if SaveData.firstBootCompleted == nil then
             SaveData.firstBootCompleted = false --If starting for the first time, first boot will happen
         end
-        if SaveData.firstBootCompleted == false and GameData.saveDataMigrated == true then
+        if not SaveData.firstBootCompleted and GameData.saveDataMigrated and not SaveData.failsafeMessageOne then
             Routine.run(FirstBoot1)
             bootmenu.startedmenu = 1
         end
-        if SaveData.firstBootCompleted == true and GameData.saveDataMigrated == true then
+        if SaveData.firstBootCompleted and GameData.saveDataMigrated and not SaveData.failsafeMessageOne then
             GameData.playernameenterfirstboot = false
             Routine.run(easterEgg, true)
             playernamebyImg = true
             pfpimage = true
         end
+        if SaveData.failsafeMessageOne then
+            Routine.run(FailsafeMessage1)
+        end
         if Time.month() == 12 and Time.day() == 25 then --Change the weather on Christmas Day to snow
             Section(0).effects.weather = WEATHER_SNOW
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             x2noticecheck = active
             x2noticecheckactive = not active
         end
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             x2noticecheck = not active
             x2noticecheckactive = active
         end
@@ -1016,7 +1022,7 @@ function bootmenu.onStart()
         Defines.cheat_shadowmario = true
         hearthover.active = false --No hearthover on the bootmenu
         if Time.month() == 04 and Time.day() == 01 then --BSOD lmao
-            if GameData.____holidayMenuEventExecuted == nil or GameData.____holidayMenuEventExecuted == false and GameData.____holidayMenuEventEnded == false then
+            if GameData.____holidayMenuEventExecuted == nil or not GameData.____holidayMenuEventExecuted and not GameData.____holidayMenuEventEnded then
                 bootmenu.startedmenu = 1
             elseif GameData.____holidayMenuEventEnded == true then
                 bootmenu.startedmenu = 0
@@ -1102,18 +1108,14 @@ function bootmenu.onTick()
             twoplayercheck = not active
             twoplayercheckactive = active
         end
-        if SaveData == nil then
-            Routine.run(SaveDataError1)
-        end
         if SaveData.disableX2char == nil then
             SaveData.disableX2char = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             x2noticecheck = active
             x2noticecheckactive = not active
             smashud.visible.lives = false
-        end
-        if SaveData.disableX2char == true then
+        elseif SaveData.disableX2char then
             smashud.visible.lives = false
             x2noticecheck = not active
             x2noticecheckactive = active
@@ -1125,18 +1127,10 @@ function bootmenu.onTick()
                 p.setCostume(5, nil)
             end
         end
-        if(not killed and player:mem(0x13E,FIELD_BOOL)) then
+        if (not killed and player:mem(0x13E,FIELD_BOOL)) then
             killed = true
-            SaveData.failsafeMessageOne = SaveData.failsafeMessageOne + 1
-        end
-        if SaveData.failsafeMessageOne == nil then
-            SaveData.failsafeMessageOne = SaveData.failsafeMessageOne or 0
-        end
-        if SaveData.failsafeMessageOne == 0 then
-            --Nothing happens
-        end
-        if SaveData.failsafeMessageOne == 1 then
-            Routine.run(FailsafeMessage1)
+            SaveData.failsafeMessageOne = true
+            Level.load(Level.filename())
         end
         for i = 1,91 do
             Audio.sounds[i].muted = true
