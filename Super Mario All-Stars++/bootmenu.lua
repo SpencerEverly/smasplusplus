@@ -23,11 +23,11 @@ local menufontwebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-we
 local bootmenu = {}
 
 local smaslogo = Graphics.loadImageResolved("smaslogo.png")
+local smaslogojpn = Graphics.loadImageResolved("smaslogo-jpn.png")
 local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
 local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
 local orangecurtains = Graphics.loadImageResolved("theming_smbxcurtainsorange.png")
-local smaslogowide = Graphics.loadImageResolved("smaslogo-wide.png")
 local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
 
 if SaveData.turnOnMainMenuMusicRng == nil then
@@ -1367,7 +1367,13 @@ function bootmenu.onDraw()
             textplus.print{x=30, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufontwebsite}
         end
         if logo then
-            Graphics.drawImageWP(smaslogo, 176, 16, -4)
+            if SaveData.currentLanguage == "english" then
+                Graphics.drawImageWP(smaslogo, 176, 16, -4)
+            elseif SaveData.currentLanguage == "japanese" then
+                Graphics.drawImageWP(smaslogojpn, 106, 20, -4)
+            else
+                Graphics.drawImageWP(smaslogo, 176, 16, -4)
+            end
         end
         if exitscreen then
             Graphics.drawScreen{color = Color.black, priority = 10}
