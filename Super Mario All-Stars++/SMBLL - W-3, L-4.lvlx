@@ -2207,7 +2207,7 @@ ID:94;X:-173760;Y:-180118;D:-1;MG:"Thank you\, <characterName>! But our princess
 ID:770;X:-176000;Y:-180320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-175680;Y:-180320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-175360;Y:-180192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
-ID:986;X:-198016;Y:-200384;D:-1;
+ID:998;X:-198016;Y:-200384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-199424;IY:-200096;OX:-179936;OY:-180288;DT:2;ID:1;OD:1;

@@ -394,7 +394,7 @@ ID:88;X:-194170;Y:-200224;D:-1;
 ID:177;X:-193888;Y:-200320;D:-1;S1:3;
 ID:177;X:-193280;Y:-200384;D:-1;S1:3;
 ID:639;X:-194048;Y:-200576;D:-1;XTRA:"{\n    \"delay\"\: 220\,\n    \"enabled\"\: false\n}\n";
-ID:986;X:-193216;Y:-200384;D:-1;
+ID:998;X:-193216;Y:-200384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 LAYERS
 LR:"Default";

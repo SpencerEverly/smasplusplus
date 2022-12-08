@@ -1954,7 +1954,7 @@ ID:767;X:-196912;Y:-200128;D:1;
 ID:589;X:-195678;Y:-200096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:767;X:-194928;Y:-200256;D:1;
 ID:589;X:-193630;Y:-200096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
-ID:986;X:-178016;Y:-180384;D:-1;
+ID:998;X:-178016;Y:-180384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-179424;IY:-180096;OX:-199968;OY:-200288;DT:2;ID:1;OD:1;

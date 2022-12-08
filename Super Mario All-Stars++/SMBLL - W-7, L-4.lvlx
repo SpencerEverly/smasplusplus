@@ -2991,7 +2991,7 @@ ID:770;X:-173600;Y:-180064;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:200;X:-172416;Y:-180264;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:178;X:-172160;Y:-180256;D:-1;LR:"Axe";ED:"Axe Break";EE:"Axe";
 ID:94;X:-171776;Y:-180118;D:-1;MG:"Thank you\, <characterName>! But the princess is in another castle!";FD:1;
-ID:986;X:-198016;Y:-200384;D:-1;
+ID:998;X:-198016;Y:-200384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-199424;IY:-200096;OX:-179968;OY:-180320;DT:2;ID:1;OD:1;

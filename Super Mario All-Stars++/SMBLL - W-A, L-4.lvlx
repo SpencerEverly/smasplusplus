@@ -2306,7 +2306,7 @@ ID:21;X:-195392;Y:-200096;D:-1;
 ID:94;X:-193888;Y:-200118;D:-1;MG:"Thank you\, <characterName>! But the princess is in another castle!";FD:1;
 ID:200;X:-194528;Y:-200232;D:-1;EA:"Boss Start";ED:"Boss End";
 ID:178;X:-194272;Y:-200224;D:-1;LR:"Axe";ED:"Axe Break";EE:"Axe";
-ID:986;X:-178016;Y:-180384;D:-1;
+ID:998;X:-178016;Y:-180384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-179424;IY:-180096;OX:-199968;OY:-200288;DT:2;ID:1;OD:1;

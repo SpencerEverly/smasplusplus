@@ -2985,7 +2985,7 @@ ID:60;X:-173088;Y:-180704;
 ID:60;X:-173088;Y:-180576;
 BGO_END
 NPC
-ID:986;X:-198016;Y:-200384;D:-1;
+ID:998;X:-198016;Y:-200384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:767;X:-179344;Y:-180176;D:-1;
 ID:770;X:-178784;Y:-180224;D:-1;XTRA:"{\n    \"angle\"\: 180\,\n    \"speed\"\: 3\n}\n";
 ID:770;X:-178432;Y:-180192;D:-1;XTRA:"{\n    \"angle\"\: 180\,\n    \"speed\"\: 3\n}\n";

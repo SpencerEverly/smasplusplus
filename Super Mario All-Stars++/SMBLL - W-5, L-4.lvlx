@@ -2530,7 +2530,7 @@ ID:589;X:-176670;Y:-180096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:589;X:-175646;Y:-180096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:589;X:-175230;Y:-180096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
 ID:589;X:-173694;Y:-180096;D:-1;XTRA:"{\n    \"useFixed\"\: true\n}\n";
-ID:986;X:-198016;Y:-200384;D:-1;
+ID:998;X:-198016;Y:-200384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-172224;IY:-180096;OX:-198784;OY:-200096;DT:1;ID:4;OD:2;

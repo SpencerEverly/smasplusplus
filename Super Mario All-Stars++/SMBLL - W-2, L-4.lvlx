@@ -2417,7 +2417,7 @@ ID:770;X:-177280;Y:-180192;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-177056;Y:-180320;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-176640;Y:-180096;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
 ID:770;X:-176448;Y:-180096;D:-1;XTRA:"{\n    \"speed\"\: 3\n}\n";
-ID:986;X:-198016;Y:-200384;D:-1;
+ID:998;X:-198016;Y:-200384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 DOORS
 IX:-199424;IY:-200096;OX:-179968;OY:-180288;DT:2;ID:1;OD:1;

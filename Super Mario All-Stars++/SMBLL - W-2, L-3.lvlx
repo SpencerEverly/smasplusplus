@@ -410,7 +410,7 @@ ID:28;X:-196192;Y:-200256;D:-1;S1:2;
 ID:28;X:-195264;Y:-200320;D:-1;S1:2;
 ID:28;X:-195008;Y:-200288;D:-1;S1:2;
 ID:28;X:-195104;Y:-200416;D:-1;S1:2;
-ID:986;X:-194304;Y:-200384;D:-1;
+ID:998;X:-194304;Y:-200384;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 NPC_END
 LAYERS
 LR:"Default";
