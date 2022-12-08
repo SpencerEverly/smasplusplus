@@ -1,245 +1,164 @@
-local npcManager = require("npcManager")
-local colliders = require("colliders")
-local extrasounds = require("extrasounds")
-local starman = require("starman/star")
-local smasbooleans = require("smasbooleans")
+local arrowLift = {}
 
-local customNPC = {}
+local npcManager = require("npcManager")
+local lineguide = require("lineguide")
+local npcutils = require("npcs/npcutils")
+
 local npcID = NPC_ID
 
-local exiting = false
+local config = npcManager.setNpcSettings({
+	id = npcID,
+	gfxwidth = 0,
+	gfxheight = 0,
+	width = 64,
+	height = 32,
+	frames = 4,
+	framespeed = 8,
+	framestyle = 0,
+	score = 0,
+	blocknpctop = true,
+	playerblocktop = true,
+	nohurt = true,
+	nogravity = true,
+	noblockcollision = true,
+	noiceball = true,
+	noyoshi = true,
+	blocknpc = false,
+	notcointransformable = true,
+	nospecialanimation = false,
+	spawnid = 418,
+	life = 500,
+	speed = 1
+})
 
-local drawCastlePlayer = false
-local castlePlayerTicks = 65
-local castlePlayerX = 0
-local castlePlayerY = 0
-
-local customNPCSettings = {
-    id = npcID,
-    gfxheight = 32,
-    gfxwidth = 32,
-    width = 32,
-    height = 32,
-    gfxoffsetx = 16,
-    gfxoffsety = 0,
-    frames = 3,
-    framestyle = 0,
-    framespeed = 8,
-    nohurt = true,
-    nogravity = true,
-    jumphurt = true,
-}
-
-local castles = {16, 17}
-
-npcManager.setNpcSettings(customNPCSettings)
-
-function customNPC.onInitAPI()
-    npcManager.registerEvent(npcID, customNPC, "onTickNPC")
-    registerEvent(customNPC, "onPlayerHarm")
-    registerEvent(customNPC, "onPlayerKill")
-    registerEvent(customNPC, "onDraw")
+function arrowLift.baseDataCheck(npc)
+	local data = npc.data._basegame
+	local settings = npc.data._settings
+	if data.onLand == nil then
+		data.onLand = {}
+		data.type = settings.type or 0
+		data.child = nil
+		if not settings.override then
+			settings.life = config.life
+			settings.speed = config.speed
+		end
+	end
 end
 
-local plr
-
-function customNPC.onTickNPC(v)
-    if Defines.levelFreeze then return end
-
-    local data = v.data
-
-    if v.despawnTimer <= 0 then
-        data.initialized = false
-        return
-    end
-
-    if not data.initialized then
-        data.state = 0
-        data.tick = 0
-        data.countTime = false
-        data.castleX = math.huge
-        data.castleWidth = 0
-        data.initialized = true
-    end
-    for _,p in ipairs(Player.get()) do
-        if p.y >= v.y
-        and p.x >= v.x
-        and p.x <= v.x + v.width
-        and p.section == v.section
-        and data.state == 0 then
-            data.state = 1
-            smasbooleans.musicMuted = true
-            Audio.MusicVolume(0)
-            Audio.SeizeStream(-1)
-            Audio.MusicStop()
-            GameData.winStateActive = true
-            SFX.play(extrasounds.sound.sfx[135])
-            exiting = true
-            data.countTime = Timer.isActive()
-            --Timer.toggle()
-            Timer.isVisible = true
-
-            local score = 10 - math.floor((p.y - v.y) / 32)
-            Misc.givePoints(score, vector(p.x, p.y))
-        end
-
-        if data.state ~= 0 then
-            p.keys.up = false
-            p.keys.down = false
-            p.keys.left = false
-            p.keys.right = false
-            p.keys.jump = false
-            p.keys.altJump = false
-            p.keys.run = false
-            p.keys.altRun = false
-            p.keys.pause = false
-            p.keys.dropItem = false
-        end
-
-        if data.state == 1 then
-            Misc.npcToCoins()
-            starman.stop(p)
-            smasbooleans.musicMuted = true
-            if p.y >= v.y and p.x >= v.x and p.x <= v.x + v.width and p.section == v.section then
-                plr = p
-            end
-            if Player.count() == 1 then
-                data.tick = data.tick + 1
-            else
-                data.tick = data.tick + 1 / Player.count()
-            end
-            if data.tick > 2 then
-                data.state = 1.1
-            end
-        end
-        if data.state == 1.1 then
-            if Player.count() == 1 then
-                data.tick = data.tick + 1
-            else
-                data.tick = data.tick + 1 / Player.count()
-            end
-            if p.idx ~= plr.idx then
-                p.section = plr.section
-                p.x = (plr.x+(plr.width/2)-(p.width/2))
-                p.y = (plr.y+plr.height-p.height)
-                p.speedX,p.speedY = 0,0
-                p.forcedState,p.forcedTimer = 8,-plr.idx
-            end
-            p.x = v.x - p.width + 16
-            p.speedX = 0
-            p.speedY = 3 - Defines.player_grav
-            p.direction = 1
-            p:setFrame(3)
-            v.speedY = 3
-
-            if data.tick > 65 * 1.5 then
-                p.x = p.x + p.width
-                p.direction = -1
-            end
-            if data.tick > 65 * 2 then
-                data.tick = 0
-                data.state = 2
-                if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-                    if Misc.inMarioChallenge() == false then
-                        if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-                            table.insert(SaveData.completeLevelsOptional,Level.filename())
-                            SaveData.totalStarCount = SaveData.totalStarCount
-                        elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-                            SaveData.totalStarCount = SaveData.totalStarCount
-                        end
-                    end
-                end
-                SFX.play(52)
-            end
-        elseif data.state == 2 then
-            GameData.stopStarman = false
-            smasbooleans.musicMuted = true
-            if GameData.rushModeActive == true then
-                GameData.rushModeWon = true
-            end
-            p.speedX = 3
-            p.direction = 1
-
-            for _, castleid in ipairs(castles) do
-                for _, bgo in ipairs(BGO.get(castleid)) do
-                    if colliders.collide(p, bgo) then
-                        data.castleX = bgo.x
-                        data.castleWidth = bgo.width
-                    end
-                end
-            end
-            
-            if p.x >= data.castleX + data.castleWidth / 2 - p.width / 2 then
-                data.state = 3
-                drawCastlePlayer = true
-                castlePlayerX = data.castleX + data.castleWidth / 2 - p.width / 2
-                castlePlayerY = p.y
-                Timer.hurryTime = -1
-            end
-        elseif data.state == 3 then
-            smasbooleans.musicMuted = true
-            p.x = castlePlayerX
-            p.y = castlePlayerY
-
-            if Timer.getValue() > 0 and data.countTime then
-                SFX.play(extrasounds.sound.sfx[113])
-                if Timer.getValue() >= 100 then
-                    Timer.add(-10)
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
-                else
-                    Timer.add(-1)
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
-                end
-            else
-                if Player.count() == 1 then
-                    data.tick = data.tick + 1
-                else
-                    data.tick = data.tick + 1 / Player.count()
-                end
-            end
-            
-            if Timer.getValue() == 0 and data.countTime then
-                SFX.play(extrasounds.sound.sfx[114], 1, 1, 2500)
-            end
-            
-            if data.tick > 65 * 1.5 then
-                smasbooleans.musicMuted = false
-                GameData.winStateActive = false
-                if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-                    Level.exit(LEVEL_WIN_TYPE_STAR)
-                elseif GameData.rushModeActive == true and GameData.rushModeWon == true then
-                    Level.load("SMAS - Rush Mode Results.lvlx")
-                end
-            end
-        end
-    end
+function arrowLift.ghostDataCheck(npc)
+	local data = npc.data._basegame
+	local settings = npc.data._settings
+	if data.onLand == nil then
+		data.onLand = {}
+		settings.type = settings.type or 0
+		settings.sp = settings.sp or false
+		data.spdir = 1
+		data.animation = 0
+		data.timer = 0
+		data.parent = nil
+		if not settings.override then
+			settings.life = config.life
+			settings.speed = config.speed
+		end
+	end
 end
 
-function customNPC.onPlayerKill(eventToken, p)
-    if exiting then
-        eventToken.cancelled = true
-    end
+lineguide.registerNpcs(npcID)
+
+function arrowLift.onTickEndNPC(npc)
+	if Defines.levelFreeze or npc:mem(0x12A, FIELD_WORD) <= 0 then return end
+	arrowLift.baseDataCheck(npc)
+	local data = npc.data._basegame
+
+	npc.speedX = 0
+	npc.speedY = 0
+
+	local settings = npc.data._settings
+
+	local pjump = {}
+	for _, p in ipairs(Player.get()) do
+		if p.standingNPC then
+			pjump[p.idx] = p.standingNPC == npc
+		end
+		-- This is true the first frame the player jumps on the NPC
+		if pjump[p.idx] and not data.onLand[p.idx] then
+			p.y = p.y - 1
+			if data.child and data.child.isValid then
+				data.child:kill()
+			end
+
+			local ghost = NPC.spawn(config.spawnid, npc.x + npc.width*0.5, npc.y - 1, p.section, false, false)
+			data.child = ghost
+			local ghostdata = ghost.data._basegame
+			local ghostsettings = ghost.data._settings
+			arrowLift.ghostDataCheck(ghost)
+			ghost.x = ghost.x - ghost.width*0.5
+			ghost.dontMove = npc.dontMove
+			ghost.layerName = "Spawned NPCs"
+			ghostdata.parent = npc
+			ghostsettings.life = settings.life
+			ghostsettings.speed = settings.speed
+			if settings.type == 0 then
+				ghostsettings.type = -1
+				ghostsettings.sp = true
+			else
+				ghostsettings.type = data.type - 1
+				ghostsettings.sp = false
+			end
+		end
+	end
+	data.onLand = pjump
+
+	if not arrowLift.nospecialanimation then
+		local t = settings.type + 1
+		local tf = config.frames * 0.25
+		local offset = (t-1) * tf
+		local gap = config.frames - (4-t) * tf
+		npcutils.restoreAnimation(npc)
+		npc.animationFrame = npcutils.getFrameByFramestyle(npc, {
+			frames = tf,
+			offset = offset,
+			gap = gap
+		})
+	end
 end
 
-function customNPC.onPlayerHarm(e, p)
-    if exiting then
-        e.cancelled = true
-    end
+function arrowLift.onInitAPI()
+	npcManager.registerEvent(npcID, arrowLift, "onTickEndNPC")
 end
 
-function customNPC.onDraw()
-    if drawCastlePlayer then
-        castlePlayerTicks = math.max(castlePlayerTicks - 1, 0)
-        for _,p in ipairs(Player.get()) do
-            p.frame = 50
-            p:render{
-                frame = 15,
-                x = castlePlayerX,
-                y = castlePlayerY,
-                color = Color(1, 1, 1, castlePlayerTicks / 65)
-            }
-        end
-    end
-end
+return arrowLift
 
-return customNPC
+--BASE
+-- npc.data.type {
+-- 	/What Type?
+--    0 = !
+-- 	  1 = Up
+-- 	  2 = Left
+-- 	  3 = Right
+--   }
+-- npc.data.life {
+--   /How long should the ghost created last?
+--   }
+-- npc.data.speed {
+--   /He speed
+-- }
+
+--Ghost
+-- npc.data.type {
+-- 	/Direction?
+-- 	0 = up
+-- 	1 = Left
+-- 	2 = Right
+-- }
+-- npc.data.sp {
+-- 	/Should change direction when jumped on?
+-- 	true = Yes
+-- 	false = No
+-- }
+-- npc.data.life {
+--   /How long should the ghost last?
+-- }
+-- npc.data.speed {
+--   /He speed
+-- }

@@ -1,0 +1,52 @@
+{
+	"style" : "groupbox",
+	"title" : "Arrow Lift Settings",
+	"layout": [
+		{
+			"control": "comboBox",
+			"name": "type",
+			"title": "Type",
+			"type": "int",
+			"tooltip": "What direction should the Ghost Platform travel?",
+			"value-default": 0,
+			"elements": ["Direction Cycle", "Up", "Left", "Right"]
+		},
+		{
+		"control" : "group",
+		"title" : "",
+		"name" : "..",
+		"children": [
+			{
+				"control": "checkbox",
+				"name": "override",
+				"title": "Use Per-NPC Settings",
+				"tooltip": "When checked, per-NPC settings will be used for these settings in place of NPC config values.",
+				"text-visible": false,
+				"value-default": false
+			},		
+			{
+				"control": "spinBox",
+				"type": "int",
+				"name": "life",
+				"title": "Life Time",
+				"tooltip": "How many frames should the Ghost Platform live for? Set to 0 for infinite life time.",
+				"value-default": 500,
+				"value-min": 0,
+				"value-max": 9999,
+				"single-step": 1
+			},
+			{
+				"control": "spinBox",
+				"name": "speed",
+				"title": "Speed",
+				"type": "double",
+				"tooltip": "How fast the Ghost Platform travels in pixels/frame.",
+				"value-default": 1,
+				"value-min": 0.01,
+				"value-max": 999,
+				"single-step": 0.01
+			}]
+		}
+	]
+}
+
