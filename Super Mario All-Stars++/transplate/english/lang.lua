@@ -113,4 +113,34 @@ return{
     ["0x0000000000000056"] = "<setPos 400 32 0.5 -1.8>ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?<question SaveEraseChoice>",
     --SMAS++ MAIN MENU: Main Menu Dialog (Save Erasing: Erase complete)
     ["0x0000000000000057"] = "<setPos 400 32 0.5 -3.1>Erasing complete.<question RestartOption>",
+    --SMAS++ GAME HELP: Beginning Message
+    ["0x0000000000000058"] = "<speakerName 'Introduction'><setPos 400 32 0.5 -1.2>Hello! Welcome to the guide on how to play Super Mario All-Stars Plus Plus!<page>Depending on your controls and how you selected them, keys and buttons will be different.<page>Without further ado, let's get started!<page>Move by using left and right. And also, press up when your at a ? sign.<page>If you already know how to play, you can skip the tutorial by exiting the door behind you.",
+    --SMAS++ GAME HELP: Sign: Ledge
+    ["0x0000000000000059"] = "Oh no, there is a ledge! To get across it, press Z to jump! (Or if you changed it, press the key you associated it with.)<page>And don't worry about dying, there's a floor patched up so you can practice.",
+    --SMAS++ GAME HELP: Sign: Goomba
+    ["0x0000000000000060"] = "Some jump physics can be used to stomp on enemies and progress through.<page>Like, for example, a Goomba!<page>Use your jump button to stomp it on it's head. Don't walk into it in normal gameplay or else you'll die!<page>Thankfully, this Goomba doesn't hurt anyone.",
+    --SMAS++ GAME HELP: Sign: Ladder
+    ["0x0000000000000061"] = "There is now a ladder right in front of you. How do you get through that? By climbing it!<page>To climb a ladder, vine, or any other climbable object, use the up and down keys.<page>Press the jump button to jump to the top of the platform when you get to the top.",
+    --SMAS++ GAME HELP: Sign: Running
+    ["0x0000000000000062"] = "Now you know some basic movements!<page>Is it getting pretty boring moving slow... or is it normal for you? I think so too.<page>You can move fast by running! Just hold run and use left and right.<page>Try it!",
+    --SMAS++ GAME HELP: Sign: Sliding
+    ["0x0000000000000063"] = "Looks like there's a downhill path below! And there are some Goombas on it!<page>You can actually slide down hills by holding down when on a downhill part of the floor.<page>Try it!",
+    --SMAS++ GAME HELP: Sign: Semigrounds
+    ["0x0000000000000064"] = "Those things over there are called semi-grounds.<page>They can be used to progress the level by jumping throughout.<page>Try jumping and see how they work!",
+    --SMAS++ GAME HELP: Sign: Blocks
+    ["0x0000000000000065"] = "Those things are called blocks.<page>They are used for health, abilities, and even recieving coins!<page>Coins are the currency here that runs throughout the game, as you can collect and use them for many rare things!<page>What rare things? We'll let you know later at the end of the tutorial.",
+    --SMAS++ GAME HELP: Sign: Subcon Enemies
+    ["0x0000000000000066"] = "Enemies like these can be picked up and thrown.<page>This only can happen with rare types of enemies outside of Super Mario Bros. 2 though!<page>Try picking them up and throwing them by using down and run.",
+    --SMAS++ GAME HELP: Sign: Bowser
+    ["0x0000000000000067"] = "That's Bowser, a villian who kidnaps Princesses for fun.<page>You'll get to verse him later in the game. Be weary of his actions though!",
+    --SMAS++ GAME HELP: Sign: Doors
+    ["0x0000000000000068"] = "This is a door. It leads to inside this house.<page>Doors are used to travel to other areas.<page>Walk up to it and press up. That's how you can go inside doors!",
+    --SMAS++ GAME HELP: Sign: Toad
+    ["0x0000000000000069"] = "It looks like there is a frightened Toad over there.<page>Just like reading signs, NPCs (Non-Playable Characters) can also be talked to, provided that there is a question mark over their heads.<page>Why don't you talk to the Toad? Go over there and press up and see what he has to say.",
+    --SMAS++ GAME HELP: Toad
+    ["0x0000000000000070"] = "Oh it's terrible! The world has random characters popping up from portals and it made a paradox where you have to rescue Princess Peach 6 times!<page>Why? I have no idea! You need to stop this threat and save her!<page>You're our only hope!<page>(I think Bowser is causing this, I assume)",
+    --SMAS++ GAME HELP: Sign: Pipes
+    ["0x0000000000000071"] = "It's looks like a pipe...<page>That's because it is! Pipes are useful for going to other areas, and even secret areas as well!<page>Use your jumping, and when you get to the top of the pipe press up.<page>Other pipes can also be in other directions.<page>If the pipe is enterable at the bottom, press down.<page>If the pipe is enterable at the left, press left.<page>If the pipe is enterable at the right, press right.<page>It may be confusing at first, but you'll get the gist of it later on.",
+    --SMAS++ GAME HELP: Sign: Ending (Normal)
+    ["0x0000000000000072"] = "Thank you for following the tutorial on how to play Super Mario All-Stars Plus Plus.<page>Before we end the tutorial, let's talk about some important features.<page>First, in this game you need to collect stars.<page>The stars can not only be used to unlock new levels, but it can also be used for other secrets and Hub progression!<page>Collecting all of the required stars unlocks the end of the game (The Lost Levels, Side Quest, and DLC Levels/Other Games are optional to collect stars).<page>It'll be a surprise, so you'll have to get the stars in this game first to experience it!<page>Second thing, there is a Hub located at the left of the map, Me and Larry City.<page>There, you can change your character to anything you want, use free powerups, and shop for rare things as you collect stars!<page>And you can meet up with the locals and talk to them as you collect stars.<page>Everything changes as you collect stars, so come back to the Hub often to see what they're up to!<page>And ONE LAST THING! Sorry to annoy you so much.<page>Over at the left is a ?-Sphere.<page>These are only used for levels that don't have specific stars to complete the level, like this one.<page>To end the tutorial, just walk into the ?-Sphere.<page>Thank you for playing the tutorial, and I hope to see you again at the end of the game!<page>- Spencer Everly",
 }
