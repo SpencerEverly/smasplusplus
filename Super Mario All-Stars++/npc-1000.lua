@@ -128,17 +128,13 @@ end
 
 function newstar.onInputUpdate()
     if playerwon then
-        for k,p in ipairs(Player.get()) do
-            p.upKeyPressing = false
-            p.downKeyPressing = false
-            p.leftKeyPressing = false
-            p.rightKeyPressing = false
-            p.altJumpKeyPressing = false
-            p.runKeyPressing = false
-            p.altRunKeyPressing = false
-            p.dropItemKeyPressing = false
-            p.jumpKeyPressing = false
-            p.pauseKeyPressing = false
+        for k,_ in pairs(player.keys) do
+            player.keys[k] = false
+        end
+        if Player.count() >= 2 then
+            for k,_ in pairs(player2.keys) do
+                player2.keys[k] = false
+            end
         end
     end
 end

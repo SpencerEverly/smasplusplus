@@ -7,6 +7,7 @@ local customCamera = require("customCamera")
 local smasbooleans = require("smasbooleans")
 local smasfunctions
 pcall(function() smasfunctions = require("smasfunctions") end)
+local smasstarsystem = require("smasstarsystem")
 
 local roulettestar = {}
 
@@ -86,7 +87,7 @@ local endRoomToScroll = 0
 local customFanfareCharacters = {}
 table.insert(customFanfareCharacters, "MODERN2")
 
-function starget()
+function starget(v)
     Misc.npcToCoins()
     for _,o in ipairs(Player.get()) do
         if o.idx ~= plr.idx then
@@ -118,12 +119,20 @@ function starget()
     newboundary.right = newboundary.right + 350
     plr.sectionObj.boundary = newboundary
     if SaveData.currentCostume == "MODERN2" then
-        Routine.wait(7.2, true)
+        Routine.wait(5.2, true)
+        if v.data._settings.activateFadeIn then
+            smasstarsystem.fadeInActive = true
+        end
+        Routine.wait(2, true)
     else
-        Routine.wait(5, true)
+        Routine.wait(3, true)
+        if v.data._settings.activateFadeIn then
+            smasstarsystem.fadeInActive = true
+        end
+        Routine.wait(2, true)
     end
     GameData.winStateActive = false
-    Level.exit(LEVEL_WIN_TYPE_STAR)
+    Level.exit(v.data._settings.winType)
 end
 
 function roulettestar.onCameraUpdate()
@@ -175,16 +184,37 @@ function roulettestar.onPostNPCKill(v,reason)
         end
     end
     if roulettestar.collectableIDMap[v.id] and npcManager.collected(v,reason) then
-        Routine.run(starget)
+        Routine.run(starget, v)
         GameData.winStateActive = true
         collectactive = true
         if GameData.rushModeActive == false or GameData.rushModeActive == nil then
             if Misc.inMarioChallenge() == false then
-                if not table.icontains(SaveData.completeLevels,Level.filename()) then
-                    SaveData.totalStarCount = SaveData.totalStarCount + 1
-                    table.insert(SaveData.completeLevels,Level.filename())
-                elseif table.icontains(SaveData.completeLevels,Level.filename()) then
-                    SaveData.totalStarCount = SaveData.totalStarCount
+                if v.data._settings.useOptionalTable then
+                    if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                        if v.data._settings.addToTable then
+                            table.insert(SaveData.completeLevelsOptional,Level.filename())
+                        end
+                        if v.data._settings.incrementStarCount then
+                            SaveData.totalStarCount = SaveData.totalStarCount + 1
+                        else
+                            SaveData.totalStarCount = SaveData.totalStarCount
+                        end
+                    elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
+                else
+                    if not table.icontains(SaveData.completeLevels,Level.filename()) then
+                        if v.data._settings.addToTable then
+                            table.insert(SaveData.completeLevels,Level.filename())
+                        end
+                        if v.data._settings.incrementStarCount then
+                            SaveData.totalStarCount = SaveData.totalStarCount + 1
+                        else
+                            SaveData.totalStarCount = SaveData.totalStarCount
+                        end
+                    elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
                 end
             end
         end
@@ -193,51 +223,23 @@ end
 
 function roulettestar.onInputUpdate()
     if playerwon then
-        player.upKeyPressing = false
-        player.downKeyPressing = false
-        player.leftKeyPressing = false
-        player.rightKeyPressing = false
-        player.altJumpKeyPressing = false
-        player.runKeyPressing = false
-        player.altRunKeyPressing = false
-        player.dropItemKeyPressing = false
-        player.jumpKeyPressing = false
-        player.pauseKeyPressing = false
+        for k,_ in pairs(player.keys) do
+            player.keys[k] = false
+        end
         if Player.count() >= 2 then
-            player2.upKeyPressing = false
-            player2.downKeyPressing = false
-            player2.leftKeyPressing = false
-            player2.rightKeyPressing = false
-            player2.altJumpKeyPressing = false
-            player2.runKeyPressing = false
-            player2.altRunKeyPressing = false
-            player2.dropItemKeyPressing = false
-            player2.jumpKeyPressing = false
-            player2.pauseKeyPressing = false
+            for k,_ in pairs(player2.keys) do
+                player2.keys[k] = false
+            end
         end
     end
     if inactivekeysonly then
-        player.upKeyPressing = false
-        player.downKeyPressing = false
-        player.leftKeyPressing = false
-        player.rightKeyPressing = false
-        player.altJumpKeyPressing = false
-        player.runKeyPressing = false
-        player.altRunKeyPressing = false
-        player.dropItemKeyPressing = false
-        player.jumpKeyPressing = false
-        player.pauseKeyPressing = false
+        for k,_ in pairs(player.keys) do
+            player.keys[k] = false
+        end
         if Player.count() >= 2 then
-            player2.upKeyPressing = false
-            player2.downKeyPressing = false
-            player2.leftKeyPressing = false
-            player2.rightKeyPressing = false
-            player2.altJumpKeyPressing = false
-            player2.runKeyPressing = false
-            player2.altRunKeyPressing = false
-            player2.dropItemKeyPressing = false
-            player2.jumpKeyPressing = false
-            player2.pauseKeyPressing = false
+            for k,_ in pairs(player2.keys) do
+                player2.keys[k] = false
+            end
         end
     end
 end
