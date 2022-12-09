@@ -6,3 +6,7 @@ function onEvent(eventName)
         Defines.earthquake = 5
     end
 end
+
+function onLoadSection2()
+    autoscrolla.scrollRight(1)
+end
