@@ -26,9 +26,7 @@ local config = npcManager.setNpcSettings({
 	blocknpc = false,
 	notcointransformable = true,
 	nospecialanimation = false,
-	spawnid = 418,
-	life = 500,
-	speed = 1
+	spawnid = 418
 })
 
 function arrowLift.baseDataCheck(npc)
@@ -39,8 +37,8 @@ function arrowLift.baseDataCheck(npc)
 		data.type = settings.type or 0
 		data.child = nil
 		if not settings.override then
-			settings.life = config.life
-			settings.speed = config.speed
+			settings.life = npc.data._settings.life
+			settings.speed = npc.data._settings.speed
 		end
 	end
 end
@@ -57,8 +55,8 @@ function arrowLift.ghostDataCheck(npc)
 		data.timer = 0
 		data.parent = nil
 		if not settings.override then
-			settings.life = config.life
-			settings.speed = config.speed
+			settings.life = npc.data._settings.life
+			settings.speed = npc.data._settings.speed
 		end
 	end
 end
@@ -96,8 +94,8 @@ function arrowLift.onTickEndNPC(npc)
 			ghost.dontMove = npc.dontMove
 			ghost.layerName = "Spawned NPCs"
 			ghostdata.parent = npc
-			ghostsettings.life = settings.life
-			ghostsettings.speed = settings.speed
+			ghostsettings.life = npc.data._settings.life
+			ghostsettings.speed = npc.data._settings.speed
 			if settings.type == 0 then
 				ghostsettings.type = -1
 				ghostsettings.sp = true
