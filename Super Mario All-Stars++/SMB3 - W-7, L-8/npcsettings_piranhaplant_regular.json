@@ -1,0 +1,70 @@
+{
+	"style" : "groupbox",
+	"title" : "Piranha Plant Settings",
+	"layout": [
+		{
+			"control": "checkbox",
+			"name": "changeSize",
+			"title": "Change Size",
+			"tooltip": "Whether or not the size of the NPC is changed while it comes out and retracts.",
+			"text-visible": false,
+			"value-default": true
+		},
+		{
+			"control" : "group",
+			"title" : "Per-NPC Settings",
+			"name" : "config",
+			"children": [
+				{
+					"control": "checkbox",
+					"name": "override",
+					"title": "Use Per-NPC Settings",
+					"tooltip": "When checked, per-NPC settings will be used for these settings in place of NPC config values.",
+					"text-visible": false,
+					"value-default": false
+				},
+				{
+					"control": "spinBox",
+					"type": "double",
+					"name": "movementSpeed",
+					"title": "Movement Speed",
+					"tooltip": "How fast the NPC moves when coming out or retracting back.",
+					"value-default": 1.5,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 0.1
+				},
+				{
+					"control": "spinBox",
+					"type": "int",
+					"name": "hideTime",
+					"title": "Hide Time",
+					"tooltip": "How long the NPC rests before coming out.",
+					"value-default": 50,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 1
+				},
+				{
+					"control": "spinBox",
+					"type": "int",
+					"name": "restTime",
+					"title": "Rest Time",
+					"tooltip": "How long the NPC rests before retracting back.",
+					"value-default": 50,
+					"value-min": 0,
+					"value-max": 1000,
+					"single-step": 1
+				},
+				{
+					"control": "checkbox",
+					"name": "ignorePlayers",
+					"title": "Ignore Players",
+					"tooltip": "Whether or not the NPC can come out, even if there's a player in the way.",
+					"text-visible": false,
+					"value-default": false
+				}
+			]
+		}
+	]
+}
