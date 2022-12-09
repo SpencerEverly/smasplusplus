@@ -93,14 +93,18 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
         if Player.count() == 2 then
             if playerIdx == 1 then
                 if not Misc.isPaused() then
-                    player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
-                    Sound.playSFX("player-tp-2player.ogg")
+                    if button == SaveData.specialbutton1stplayer then
+                        player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
+                        Sound.playSFX("player-tp-2player.ogg")
+                    end
                 end
             end
             if playerIdx == 2 then
                 if not Misc.isPaused() then
-                    player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
-                    Sound.playSFX("player-tp-2player.ogg")
+                    if button == SaveData.specialbutton2ndplayer then
+                        player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+                        Sound.playSFX("player-tp-2player.ogg")
+                    end
                 end
             end
         end
