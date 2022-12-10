@@ -3999,7 +3999,7 @@ ID:998;X:-192672;Y:-200384;D:-1;
 ID:610;X:-178992;Y:-180480;D:-1;LR:"SMB1 Hard Mode";
 ID:176;X:-177136;Y:-180224;D:-1;S1:1;LR:"SMB1 Hard Mode";
 ID:176;X:-177056;Y:-180224;D:-1;S1:1;LR:"SMB1 Hard Mode";
-ID:982;X:-159360;Y:-160288;D:-1;
+ID:982;X:-159360;Y:-160288;D:-1;XTRA:"{\n    \"addToTable\"\: false\,\n    \"incrementStarCount\"\: false\,\n    \"winType\"\: 2\n}\n";
 NPC_END
 DOORS
 IX:-190816;IY:-200624;OX:-179904;OY:-180048;DT:3;ID:1;OD:1;

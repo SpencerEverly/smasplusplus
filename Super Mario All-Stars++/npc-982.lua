@@ -109,10 +109,14 @@ function starget()
     GameData.winStateActive = true
     playervuln = true
     playerwon = true
-    Routine.wait(5, true)
+    Routine.wait(3, true)
+    if v.data._settings.activateFadeIn then
+        smasstarsystem.fadeInActive = true
+    end
+    Routine.wait(2, true)
     smasbooleans.musicMuted = false
     GameData.winStateActive = false
-    Level.exit(LEVEL_WIN_TYPE_SMB3ORB)
+    Level.exit(v.data._settings.winType)
 end
 
 function dudstar.onPostNPCKill(v,reason)
@@ -158,16 +162,37 @@ function dudstar.onPostNPCKill(v,reason)
             end
         end
         Routine.run(starget)
-        --if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-            --if Misc.inMarioChallenge() == false then
-                --if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-                    --table.insert(SaveData.completeLevelsOptional,Level.filename())
-                    --SaveData.totalStarCount = SaveData.totalStarCount
-                --elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
-                    --SaveData.totalStarCount = SaveData.totalStarCount
-                --end
-            --end
-        --end
+        if GameData.rushModeActive == false or GameData.rushModeActive == nil then
+            if Misc.inMarioChallenge() == false then
+                if v.data._settings.useOptionalTable then
+                    if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                        if v.data._settings.addToTable then
+                            table.insert(SaveData.completeLevelsOptional,Level.filename())
+                        end
+                        if v.data._settings.incrementStarCount then
+                            SaveData.totalStarCount = SaveData.totalStarCount + 1
+                        else
+                            SaveData.totalStarCount = SaveData.totalStarCount
+                        end
+                    elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
+                else
+                    if not table.icontains(SaveData.completeLevels,Level.filename()) then
+                        if v.data._settings.addToTable then
+                            table.insert(SaveData.completeLevels,Level.filename())
+                        end
+                        if v.data._settings.incrementStarCount then
+                            SaveData.totalStarCount = SaveData.totalStarCount + 1
+                        else
+                            SaveData.totalStarCount = SaveData.totalStarCount
+                        end
+                    elseif table.icontains(SaveData.completeLevels,Level.filename()) then
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
+                end
+            end
+        end
     end
 end
 

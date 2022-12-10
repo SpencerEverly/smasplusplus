@@ -4565,7 +4565,7 @@ ID:60;X:-177344;Y:-180608;
 BGO_END
 NPC
 ID:92;X:-38864;Y:-40224;D:-1;GE:1;GT:1;GD:1;GM:50;
-ID:982;X:-38336;Y:-40224;D:-1;
+ID:982;X:-38336;Y:-40224;D:-1;XTRA:"{\n    \"addToTable\"\: false\,\n    \"incrementStarCount\"\: false\,\n    \"winType\"\: 2\n}\n";
 ID:92;X:-38736;Y:-40224;D:-1;GE:1;GT:1;GD:1;GM:50;
 ID:92;X:-38992;Y:-40224;D:-1;GE:1;GT:1;GD:1;GM:50;
 ID:92;X:-38672;Y:-40256;D:-1;GE:1;GT:1;GD:1;GM:50;

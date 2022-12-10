@@ -1736,7 +1736,7 @@ ID:104;X:-199424;Y:-200256;
 ID:104;X:-179936;Y:-180192;
 BGO_END
 NPC
-ID:982;X:-159264;Y:-160064;D:-1;LR:"Orb";
+ID:982;X:-159264;Y:-160064;D:-1;LR:"Orb";XTRA:"{\n    \"addToTable\"\: false\,\n    \"incrementStarCount\"\: false\,\n    \"winType\"\: 2\n}\n";
 ID:267;X:-159334;Y:-160082;D:-1;EA:"Lemey Start";ED:"Lemey End";
 ID:29;X:-179488;Y:-180144;D:-1;
 NPC_END

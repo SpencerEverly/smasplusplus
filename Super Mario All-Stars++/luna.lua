@@ -14,8 +14,14 @@
 --Side Quest (Optional) = TBD (WIP)
 --True Ending = 1 (WIP)
 
+--Since we're adding stuff like new NPC slots, the original LunaLua may be incompatible.
+--[[if SMBX_VERSION ~= VER_SEE_MOD then
+    Misc.dialog("Hey wait a minute! The LunaLua SEE Mod is required to play this game. Please download it from GitHub by going to https://github.com/SpencerEverly/smbx2-seemod/. Until then, you can't run this episode. Sorry about that!")
+    Misc.exitEngine()
+end]]
+
 --Make sure we aren't running Beta 3 and below before we actually start...
-if (VER_BETA4_PATCH_3 == nil) or (SMBX_VERSION < VER_BETA4_PATCH_3) then
+if (SMBX_VERSION < VER_BETA4_PATCH_3) then
     Misc.dialog("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")
     Misc.exitEngine()
 end

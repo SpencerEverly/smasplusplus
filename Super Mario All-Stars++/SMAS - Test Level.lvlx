@@ -224,8 +224,8 @@ ID:69;X:-139776;Y:-140032;W:32;H:32;
 ID:69;X:-139808;Y:-140032;W:32;H:32;
 ID:69;X:-139840;Y:-140032;W:32;H:32;
 ID:69;X:-139872;Y:-140032;W:32;H:32;
-ID:281;X:-139616;Y:-140160;W:32;H:32;EH:"pausedisable";
-ID:281;X:-139776;Y:-140160;W:32;H:32;EH:"pauseenable";
+ID:281;X:-139264;Y:-140160;W:32;H:32;EH:"pausedisable";
+ID:281;X:-139968;Y:-140160;W:32;H:32;EH:"pauseenable";
 ID:65;X:-119296;Y:-120512;W:32;H:32;
 ID:65;X:-119296;Y:-120480;W:32;H:32;
 ID:65;X:-119296;Y:-120448;W:32;H:32;
@@ -1499,8 +1499,9 @@ ID:26;X:-59424;Y:-60064;D:-1;
 ID:1000;X:-79776;Y:-80160;D:-1;XTRA:"{\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:998;X:-79616;Y:-80352;D:-1;XTRA:"{\n    \"incrementStarCount\"\: false\,\n    \"useOptionalTable\"\: true\n}\n";
 ID:999;X:-78336;Y:-80064;D:-1;XTRA:"{\n    \"useOptionalTable\"\: false\n}\n";
-ID:982;X:-78208;Y:-80064;D:-1;
+ID:982;X:-78208;Y:-80064;D:-1;XTRA:"{\n    \"addToTable\"\: false\,\n    \"incrementStarCount\"\: false\,\n    \"winType\"\: 2\n}\n";
 ID:151;X:-179584;Y:-180176;D:-1;MG:"Section 8\: Mega Mushroom and Parallax BG Test";FD:1;NM:1;
+ID:1001;X:-99776;Y:-100080;D:-1;
 NPC_END
 DOORS
 IX:-179472;IY:-180064;OX:-159296;OY:-160064;DT:2;ID:1;OD:1;TW:1;
