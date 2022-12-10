@@ -17,6 +17,30 @@
 			"tootip": "Whether or not the player will stop behind the goal post.",
 			"text-visible": false,
 			"value-default": false
+		},
+        {
+			"control": "checkbox",
+			"name": "incrementStarCount",
+			"title": "Increment Star Count",
+            "tooltip": "Will this increment the star count?",
+			"text-visible": false,
+			"value-default": true
+		},
+        {
+			"control": "checkbox",
+			"name": "addToTable",
+			"title": "Add to the Table",
+            "tooltip": "Will this increment the table the stars get collected on?",
+			"text-visible": false,
+			"value-default": true
+		},
+        {
+			"control": "checkbox",
+			"name": "useOptionalTable",
+			"title": "Use the optional table instead",
+            "tooltip": "Will this use the table that has the Optional Stars?",
+			"text-visible": false,
+			"value-default": false
 		}
 	]
 }

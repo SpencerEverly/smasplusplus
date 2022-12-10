@@ -49,7 +49,7 @@ local sampleNPCSettings = {
 	grabside=false,
 	grabtop=false,
 	
-	thrownNPC = 1002,
+	thrownNPC = 974,
 	thrownDelay = 60,
 	thrownHold = 20,
 	

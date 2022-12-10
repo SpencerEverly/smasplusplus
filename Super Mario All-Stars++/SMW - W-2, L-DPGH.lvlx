@@ -1838,8 +1838,8 @@ ID:43;X:-179648;Y:-180096;D:1;
 ID:43;X:-179104;Y:-180192;D:-1;
 ID:43;X:-179264;Y:-180416;D:-1;
 ID:43;X:-159264;Y:-160416;D:-1;
-ID:979;X:-139528;Y:-140336;D:1;XTRA:"{\n    \"exitType\"\: 4\,\n    \"stopBehind\"\: false\n}\n";
-ID:984;X:-119528;Y:-120336;D:1;XTRA:"{\n    \"exitType\"\: 7\,\n    \"stopBehind\"\: false\n}\n";
+ID:984;X:-139528;Y:-140336;D:1;XTRA:"{\n    \"addToTable\"\: false\,\n    \"exitType\"\: 4\,\n    \"incrementStarCount\"\: false\,\n    \"stopBehind\"\: false\n}\n";
+ID:984;X:-119528;Y:-120336;D:1;XTRA:"{\n    \"addToTable\"\: true\,\n    \"exitType\"\: 7\,\n    \"incrementStarCount\"\: true\,\n    \"stopBehind\"\: false\n}\n";
 NPC_END
 DOORS
 IX:-197536;IY:-200128;OX:-159968;OY:-160128;DT:2;ID:1;OD:1;

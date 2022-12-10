@@ -185,7 +185,7 @@ local configSettingsToCopy = {
     "doDarken","doIrisOut","victoryPose","victoryPoseOnYoshi","mainSFX","irisOutSFX","heldNPCsTransform",
     "displayCharacterName","displayCourseClear","doTimerCountdown","timerScoreMultiplier","timerCountdownSpeed",
     "countdownStartSFX","countdownLoopSFX","countdownEndSFX",
-    "poseTime","startExitTime","pausesGame","isOrb","incrementstar",
+    "poseTime","startExitTime","pausesGame","isOrb","incrementStarCount","addToTable","useOptionalTable",
 }
 
 function goalTape.startExit(args)
@@ -290,12 +290,31 @@ function goalTape.startExit(args)
     megashroom.StopMega(p,true)
     starman.stop(p)
     
-    if GameData.rushModeActive == false or GameData.rushModeActive == nil then
-        if Misc.inMarioChallenge() == false then
-            if info.incrementstar then
+    if not GameData.rushModeActive or GameData.rushModeActive == nil then
+        if not Misc.inMarioChallenge() then
+            if args.useOptionalTable then
+                if not table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                    if args.addToTable then
+                        table.insert(SaveData.completeLevelsOptional,Level.filename())
+                    end
+                    if args.incrementStarCount then
+                        SaveData.totalStarCount = SaveData.totalStarCount + 1
+                    else
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
+                elseif table.icontains(SaveData.completeLevelsOptional,Level.filename()) then
+                    SaveData.totalStarCount = SaveData.totalStarCount
+                end
+            else
                 if not table.icontains(SaveData.completeLevels,Level.filename()) then
-                    SaveData.totalStarCount = SaveData.totalStarCount + 1
-                    table.insert(SaveData.completeLevels,Level.filename())
+                    if args.addToTable then
+                        table.insert(SaveData.completeLevels,Level.filename())
+                    end
+                    if args.incrementStarCount then
+                        SaveData.totalStarCount = SaveData.totalStarCount + 1
+                    else
+                        SaveData.totalStarCount = SaveData.totalStarCount
+                    end
                 elseif table.icontains(SaveData.completeLevels,Level.filename()) then
                     SaveData.totalStarCount = SaveData.totalStarCount
                 end
@@ -707,7 +726,7 @@ function goalTape.onTickNPC(v)
     for k,p in ipairs(Player.get()) do
         if (p.forcedState == 0 and p.deathTimer == 0 and not p:mem(0x13C,FIELD_BOOL)) then
             if not config.isOrb and (collisionTypes[config.requiredCollisionType] and collisionTypes[config.requiredCollisionType](v,p,data)) or config.isOrb and Colliders.collide(v,p) then
-                goalTape.startExit{id = v.id,direction = v.direction,player = p,startX = v.x + v.width*0.5,stopBehind = settings.stopBehind,exitType = settings.exitType}
+                goalTape.startExit{id = v.id,direction = v.direction,player = p,startX = v.x + v.width*0.5,stopBehind = settings.stopBehind,exitType = settings.exitType, incrementStarCount = v.data._settings.incrementStarCount, addToTable = v.data._settings.addToTable, useOptionalTable = v.data._settings.useOptionalTable}
 
                 if not config.isOrb and not config.pausesGame then
                     -- Turn into a coin

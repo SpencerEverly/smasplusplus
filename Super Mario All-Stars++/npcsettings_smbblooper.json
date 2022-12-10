@@ -1,0 +1,14 @@
+{
+	"style" : "groupbox",
+	"title" : "Blooper Settings",
+	"layout": [
+		{
+            "control": "checkbox",
+			"name": "aquatic",
+			"title": "Enable Aquatic Physics",
+            "tooltip": "Whether to enable aquatic physics or not. Uncheck to set this blooper on land.",
+			"text-visible": false,
+			"value-default": true
+		}
+    ]
+}
