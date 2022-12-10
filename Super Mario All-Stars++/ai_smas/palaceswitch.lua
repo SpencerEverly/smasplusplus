@@ -250,7 +250,7 @@ function bigSwitch.onTick()
                 SFX.play(32)
             end
         end
-        if pressed then
+        if pressed and data.effect ~= nil then
             smasbooleans.musicMuted = true
         end
     end
