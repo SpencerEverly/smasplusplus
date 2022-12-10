@@ -132,10 +132,12 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
 
     function smas2playersystem.onKeyboardPress(keyCode, repeated) --Now for the keyboard press detection code...
         if Player.count() == 2 then
-            if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
-                smas2playersystem.teleport2PlayerMode1P()
-            elseif keyCode == smastables.keyboardMap[SaveData.specialkey2ndplayer] and not repeated then
-                smas2playersystem.teleport2PlayerMode2P()
+            if not Misc.isPaused() then
+                if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+                    smas2playersystem.teleport2PlayerMode1P()
+                elseif keyCode == smastables.keyboardMap[SaveData.specialkey2ndplayer] and not repeated then
+                    smas2playersystem.teleport2PlayerMode2P()
+                end
             end
         end
     end
