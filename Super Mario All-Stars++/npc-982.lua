@@ -90,7 +90,7 @@ end
 
 local plr
 
-function starget()
+function starget(v)
     Misc.npcToCoins()
     for _,o in ipairs(Player.get()) do
         if o.idx ~= plr.idx then
@@ -161,7 +161,7 @@ function dudstar.onPostNPCKill(v,reason)
                 plr = p
             end
         end
-        Routine.run(starget)
+        Routine.run(starget, v)
         if GameData.rushModeActive == false or GameData.rushModeActive == nil then
             if Misc.inMarioChallenge() == false then
                 if v.data._settings.useOptionalTable then
