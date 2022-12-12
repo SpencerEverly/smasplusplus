@@ -367,7 +367,7 @@ local function findAnimation(p)
 
     
     if p.climbing then
-        if (p.keys.up or p.keys.down or p.keys.left or p.keys.right) then
+        if (p.keys.up or p.keys.left or p.keys.right) then
             return "climbing"
         else
             return "climbingStill"
