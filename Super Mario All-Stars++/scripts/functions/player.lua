@@ -12,10 +12,36 @@ else
 end
 
 local rng = require("base/rng")
+local inspect = require("ext/inspect")
 
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
 local PLAYER_START_POINT_ADDR = mem(0x00B25148,FIELD_DWORD)
+
+Playur.characterSpeedModifiers = {
+    [CHARACTER_PEACH] = 0.93,
+    [CHARACTER_TOAD]  = 1.07,
+}
+
+Playur.characterNeededPSpeeds = {
+    [CHARACTER_MARIO] = 35,
+    [CHARACTER_LUIGI] = 40,
+    [CHARACTER_PEACH] = 80,
+    [CHARACTER_TOAD]  = 60,
+    [CHARACTER_LINK]  = 10,
+}
+
+Playur.characterDeathEffects = {
+    [CHARACTER_MARIO] = 3,
+    [CHARACTER_LUIGI] = 5,
+    [CHARACTER_PEACH] = 129,
+    [CHARACTER_TOAD]  = 130,
+    [CHARACTER_LINK]  = 134,
+}
+
+Playur.leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKIE}
+Playur.shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
+Playur.smb2Characters = table.map{CHARACTER_PEACH,CHARACTER_TOAD}
 
 local threePlayersOnSEEModActive = false
 
@@ -330,6 +356,14 @@ function Playur.grabbing(p) --Returns true if the specified player is grabbing s
     end
 end
 
+function Playur.isSlidingOnIce(p)
+    return (p:mem(0x0A,FIELD_BOOL) and (not p.keys.left and not p.keys.right))
+end
+
+function Playur.isSlowFalling(p)
+    return (Playur.leafPowerups[p.powerup] and p.speedY > 0 and (p.keys.jump or p.keys.altJump))
+end
+
 -- Detects if the player is on the ground, the redigit way. Sometimes more reliable than just p:isOnGround().
 function Playur.isOnGround(p)
     return (
@@ -504,6 +538,219 @@ function Playur.inForcedState()
         else
             return true
         end
+    end
+end
+
+function Playur.findAnimation(p) --This function returns the name of the custom animation currently playing.
+    -- What P-Speed values gets used is dependent on if the player has a leaf powerup
+    local atPSpeed = (p.holdingNPC == nil)
+
+    if atPSpeed then
+        if Playur.leafPowerups[p.powerup] then
+            atPSpeed = p:mem(0x16C,FIELD_BOOL) or p:mem(0x16E,FIELD_BOOL)
+        end
+    end
+
+
+    if p.deathTimer > 0 then
+        return "dead"
+    end
+
+
+    if p.mount == MOUNT_YOSHI then
+        return "mountedOnYoshi"
+    elseif p.mount ~= MOUNT_NONE then
+        return nil
+    end
+
+
+    if p.forcedState == FORCEDSTATE_PIPE then
+        local warp = Warp(p:mem(0x15E,FIELD_WORD) - 1)
+
+        local direction
+        if p.forcedTimer == 0 then
+            direction = warp.entranceDirection
+        else
+            direction = warp.exitDirection
+        end
+
+        if direction == 2 or direction == 4 then
+            if p.powerup == PLAYER_SMALL then
+                return "walkSmall"
+            else
+                return "walk"
+            end
+        elseif direction == 1 then
+            return "warpUp"
+        elseif direction == 3 then
+            return "warpDown"
+        end
+        
+        return nil
+    elseif p.forcedState == FORCEDSTATE_DOOR then
+        return "door"
+    elseif p.forcedState ~= FORCEDSTATE_NONE then
+        return nil
+    end
+
+
+    if p:mem(0x26,FIELD_WORD) > 0 then
+        return "grabFromTop"
+    end
+
+
+    if p:mem(0x12E,FIELD_BOOL) then
+        if Playur.smb2Characters[p.character] then
+            return "duck"
+        elseif p.holdingNPC ~= nil then
+            return "duckHolding"
+        elseif p.powerup == PLAYER_SMALL then
+            return "duckSmall"
+        else
+            return "duck"
+        end
+    end
+
+
+    
+    if p.climbing then
+        return "climbing"
+    end
+    
+    if p:mem(0x3C,FIELD_BOOL) then
+        return "sliding"
+    end
+    
+    if p:mem(0x44,FIELD_BOOL) then
+        return "shellSurfing"
+    end
+    
+    if p:mem(0x4A,FIELD_BOOL) then
+        return "statue"
+    end
+    
+    if p:mem(0x164,FIELD_WORD) ~= 0 then
+        return "tailAttack"
+    end
+
+
+    if p:mem(0x50,FIELD_BOOL) then -- spin jumping
+        if Playur.smb2Characters[p.character] and p.frame == 5 then -- dumb bug
+            return "spinjumpSidwaysToad"
+        else
+            return "spinJump"
+        end
+    end
+
+
+    local isShooting = (p:mem(0x118,FIELD_FLOAT) >= 100 and p:mem(0x118,FIELD_FLOAT) <= 118 and Playur.shootingPowerups[p.powerup])
+
+    local walkSpeed = math.max(0.35,math.abs(p.speedX)/Defines.player_walkspeed)
+    if Playur.isOnGround(p) then
+        -- GROUNDED ANIMATIONS --
+        if p.speedX == 0 and p.speedY == 0 then
+            return "stance"
+        end
+
+        if isShooting then
+            return "shootGround"
+        end
+
+
+        -- Skidding
+        if (p.speedX < 0 and p.keys.right) or (p.speedX > 0 and p.keys.left) or p:mem(0x136,FIELD_BOOL) then
+            return "skidding"
+        end
+
+
+        -- Walking
+        if p.speedX ~= 0 and not Playur.isSlidingOnIce(p) then
+            local animationName
+
+            if walkSpeed >= 2 then
+                animationName = "run"
+            else
+                animationName = "walk"
+
+                if p.holdingNPC ~= nil then
+                    animationName = animationName.. "Holding"
+                end
+            end
+
+            if p.powerup == PLAYER_SMALL then
+                animationName = animationName.. "Small"
+
+                if Playur.smb2Characters[p.character] then
+                    animationName = animationName.. "SMB2"
+                end
+            end
+
+
+            return animationName,walkSpeed
+        end
+
+        -- Looking up
+        if p.keys.up then
+            if p.holdingNPC == nil then
+                return "lookUp"
+            else
+                return "lookUpHolding"
+            end
+        end
+
+        return nil
+    elseif (p:mem(0x34,FIELD_WORD) > 0 and p:mem(0x06,FIELD_WORD) == 0) and p.holdingNPC == nil then -- swimming
+        -- SWIMMING ANIMATIONS --
+
+
+        if isShooting then
+            return "shootWater"
+        end
+        
+
+        if p:mem(0x38,FIELD_WORD) == 15 then
+            if p.powerup == PLAYER_SMALL then
+                return "swimStrokeSmall"
+            else
+                return "swimStroke"
+            end
+        end
+
+        return "swimIdle"
+    else
+        -- AIR ANIMATIONS --
+
+
+        if isShooting then
+            return "shootAir"
+        end
+        
+
+        if p:mem(0x16E,FIELD_BOOL) then -- flying with leaf
+            return "leafFly"
+        end
+
+        
+        if atPSpeed then
+            if Playur.isSlowFalling(p) then
+                return "runSlowFall"
+            elseif Playur.leafPowerups[p.powerup] and p.speedY > 0 then
+                return "runJumpLeafDown"
+            elseif walkSpeed >= 2 then
+                return "runJump"
+            else
+                return "jump"
+            end
+        end
+
+
+        if p.holdingNPC == nil then
+            if Playur.isSlowFalling(p) then
+                return "slowFall"
+            end
+        end
+        
+        return nil
     end
 end
 

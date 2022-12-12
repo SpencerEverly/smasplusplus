@@ -2048,6 +2048,8 @@ do
     local function getPriority()
         if player.forcedState == FORCEDSTATE_PIPE then
             return -70
+        elseif smasbooleans.activateWarpWhistleRoomWarp[1] then
+            return -70
         else
             return -25
         end
@@ -2204,9 +2206,9 @@ steve.generalSettings = {
     crouchingMaxSpeed = 1,
 
     -- The number of hearts the player starts with.
-    startingHealth = 2,
+    startingHealth = 5,
     -- The maximum number of hearts the player can have.
-    maxHealth = 3,
+    maxHealth = 5,
 
 
     -- The Y rotation that the player usually has.

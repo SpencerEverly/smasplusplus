@@ -671,6 +671,7 @@ ID:10;X:-178558;Y:-180800;D:-1;
 ID:10;X:-178558;Y:-180832;D:-1;
 ID:10;X:-178526;Y:-180832;D:-1;
 ID:985;X:-195104;Y:-200192;D:-1;
+ID:995;X:-196656;Y:-200224;D:-1;FD:1;NM:1;LR:"White Sizable Ducking Area";
 NPC_END
 DOORS
 IX:-198880;IY:-201024;OX:-179808;OY:-180096;DT:3;ID:1;OD:1;
@@ -680,6 +681,7 @@ LAYERS
 LR:"Default";
 LR:"Destroyed Blocks";HD:1;
 LR:"Spawned NPCs";
+LR:"White Sizable Ducking Area";
 LAYERS_END
 EVENTS_CLASSIC
 ET:"Level - Start";AS:0;AX:0;AY:0;
