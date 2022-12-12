@@ -531,7 +531,7 @@ function Playur.failsafeStartupPlayerCheck() --Checks to see if Player.count() i
     end
 end
 
-function Playur.inForcedState()
+function Playur.inForcedState() --Returns true if the forced state is set to 0 on all players, else it's false.
     for _,p in ipairs(Player.get()) do
         if p.forcedState == 0 then
             return false
@@ -686,7 +686,7 @@ function Playur.findAnimation(p) --This function returns the name of the custom 
             end
 
 
-            return animationName,walkSpeed
+            return animationName
         end
 
         -- Looking up
@@ -750,7 +750,7 @@ function Playur.findAnimation(p) --This function returns the name of the custom 
             end
         end
         
-        return nil
+        return "none"
     end
 end
 

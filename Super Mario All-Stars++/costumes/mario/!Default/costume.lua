@@ -3,6 +3,8 @@
 ]]
 
 local playerManager = require("playerManager")
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
 local extrasounds
 pcall(function() extrasounds = require("extrasounds") end)
 
@@ -49,7 +51,7 @@ local characterDeathEffects = {
     [CHARACTER_LINK]  = 134,
 }
 
-local deathEffectFrames = 2
+local deathEffectFrames = 1
 
 local leafPowerups = table.map{PLAYER_LEAF,PLAYER_TANOOKIE}
 local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
@@ -197,17 +199,24 @@ end
 -- This table contains all the custom animations that this costume has.
 -- Properties are: frameDelau, loops, setFrameInOnDraw
 local animations = {
+    standing = {1},
+    
     -- Big only animations
     walk = {2,3,2,1, frameDelay = 6},
     run  = {17,18,17,16, frameDelay = 6},
+    standingHolding = {8},
     walkHolding = {9,10,9,8, frameDelay = 6},
     fall = {5},
-    duckSmall = {8},
+    skid = {6},
+    duck = {7},
 
     -- Small only animation
     walkSmall = {9,2,9,1,   frameDelay = 6},
     runSmall  = {16,17, frameDelay = 6},
+    duckSmall = {8},
+    skidSmall = {4},
     walkHoldingSmall = {6,5, frameDelay = 6},
+    standingHoldingSmall = {5},
     
     runLeaf  = {17,18,17,16, frameDelay = 6},
     fallSmall = {7},
@@ -219,6 +228,14 @@ local animations = {
 
 
     -- Some other animations
+    climbing = {25,26, frameDelay = 6},
+    climbingStill = {25},
+    
+    sliding = {24},
+    
+    shellSurf = {16},
+    statue = {0},
+    
     duckHolding = {31},
 
     kick = {20, frameDelay = 12,loops = false},
@@ -240,6 +257,8 @@ local animations = {
     slowFall = {5,3,11,3, frameDelay = 5},
     slowFallDuck = {7,27,28,27, frameDelay = 5},
     slowFallHold = {29,10,33,10, frameDelay = 5},
+    
+    tailAttack = {12,15,14,13, frameDelay = 5},
     
     runSlowFall = {19,20,21,20, frameDelay = 5},
     fallLeafUp = {11},
@@ -341,19 +360,34 @@ local function findAnimation(p)
         elseif p:mem(0x16E,FIELD_BOOL) then
             return "slowFallDuck"
         else
-            return nil
+            return "duck"
         end
     end
 
 
     
-    if p.climbing
-    or p:mem(0x3C,FIELD_BOOL) -- sliding
-    or p:mem(0x44,FIELD_BOOL) -- shell surfing
-    or p:mem(0x4A,FIELD_BOOL) -- statue
-    or p:mem(0x164,FIELD_WORD) ~= 0 -- tail attack
-    then
-        return nil
+    if p.climbing then
+        if (p.keys.up or p.keys.down or p.keys.left or p.keys.right) then
+            return "climbing"
+        else
+            return "climbingStill"
+        end
+    end
+    
+    if p:mem(0x3C,FIELD_BOOL) then -- sliding
+        return "sliding"
+    end
+    
+    if p:mem(0x44,FIELD_BOOL) then -- shell surfing
+        return "shellSurf"
+    end
+    
+    if p:mem(0x4A,FIELD_BOOL) then -- statue
+        return "statue"
+    end
+    
+    if p:mem(0x164,FIELD_WORD) ~= 0 then -- tail attack
+        return "tailAttack"
     end
 
 
@@ -391,8 +425,19 @@ local function findAnimation(p)
 
     if isOnGround(p) then
         -- GROUNDED ANIMATIONS --
-
-
+        if p.speedX == 0 and p.speedY == 0 then
+            if p.holdingNPC == nil then
+                return "standing"
+            else
+                if p.powerup == PLAYER_SMALL then
+                    return "standingHoldingSmall"
+                else
+                    return "standingHolding"
+                end
+            end
+        end
+        
+        
         if isShooting then
             return "shootGround"
         end
@@ -400,7 +445,11 @@ local function findAnimation(p)
 
         -- Skidding
         if (p.speedX < 0 and p.keys.right) or (p.speedX > 0 and p.keys.left) or p:mem(0x136,FIELD_BOOL) then
-            return nil
+            if p.powerup == PLAYER_SMALL then
+                return "skidSmall"
+            else
+                return "skid"
+            end
         end
 
 
@@ -442,7 +491,11 @@ local function findAnimation(p)
 
 
         if isShooting then
-            return nil
+            if p.powerup == PLAYER_SMALL then
+                return "swimStrokeSmall"
+            else
+                return "swimStroke"
+            end
         end
         
 
@@ -466,7 +519,7 @@ local function findAnimation(p)
 
 
         if isShooting then
-            return nil
+            return "shootGround"
         end
         
 
@@ -693,7 +746,7 @@ function costume.onTickEnd()
 
                 data.animationFinished = true
             end
-
+            
             p.frame = animationData[frameIndex + 1]
             data.forcedFrame = p.frame
 
@@ -713,9 +766,9 @@ function costume.onDraw()
         local data = costume.playerData[p]
 
         data.frameInOnDraw = p.frame
-
+        
         local animationData = animations[data.currentAnimation]
-
+        
         if (animationData ~= nil and animationData.setFrameInOnDraw) and data.forcedFrame ~= nil then
             p.frame = data.forcedFrame
         end

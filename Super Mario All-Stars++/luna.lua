@@ -59,6 +59,7 @@ end
 --SMAS specific functions need to be required first:
 _G.smasmemoryaddresses = require("smasmemoryaddresses")
 _G.smasfunctions = require("smasfunctions")
+_G.smasanimationsystem = require("smasanimationsystem")
 _G.smasverbosemode = require("smasverbosemode")
 _G.smasbooleans = require("smasbooleans")
 _G.smastables = require("smastables")
