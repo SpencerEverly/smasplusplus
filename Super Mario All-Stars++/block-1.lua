@@ -15,7 +15,12 @@ function woodBlock.onTickEndBlock(v)
     
     if v.contentID > 0 then
         for _,p in ipairs(Player.get()) do
-            if (v:collidesWith(p) == 2 or v:collidesWith(p) == 4) then
+            if v:collidesWith(p) == 4 then
+                p.speedX = -1
+            elseif v:collidesWith(p) == 2 then
+                p.speedX = 1
+            end
+            if (v:collidesWith(p) == 2 or v:collidesWith(p) == 3 or v:collidesWith(p) == 4) then
                 v:hit()
                 v:transform(1)
             end
