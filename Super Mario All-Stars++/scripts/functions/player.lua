@@ -533,10 +533,18 @@ end
 
 function Playur.inForcedState() --Returns true if the forced state is set to 0 on all players, else it's false.
     for _,p in ipairs(Player.get()) do
-        if p.forcedState == 0 then
-            return false
-        else
-            return true
+        if not smasbooleans.mainMenuActive then
+            if p.forcedState == 0 then
+                return false
+            else
+                return true
+            end
+        elseif smasbooleans.mainMenuActive then
+            if p.forcedState == 0 or p.forcedState == 8 then
+                return false
+            else
+                return true
+            end
         end
     end
 end

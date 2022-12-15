@@ -1,2 +1,1 @@
-_G.bootmenu = require("bootmenu")
-bootmenu.active = true
+local bootmenu = require("bootmenu")

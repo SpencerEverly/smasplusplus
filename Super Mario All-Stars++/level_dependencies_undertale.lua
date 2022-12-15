@@ -1,14 +1,13 @@
 local undertaledepends = {}
 
 local stats = require("Stats")
-_G.bootmenu = require("bootmenu")
 local playerManager = require("playerManager")
 local textplus = require("textplus")
 
 function undertaledepends.onInitAPI()
     registerEvent(undertaledepends,"onTick")
     registerEvent(undertaledepends,"onDraw")
-    if bootmenu.active == true then return end
+    if smasbooleans.mainMenuActive then return end
 end
 
 function delayedMusicChange(killedNPC)
@@ -19,15 +18,15 @@ function undertaledepends.onTick()
     if SaveData.currentCostume == "UNDERTALE-FRISK" then
         stats.enabled = true
         stats.alwaysBig = true
-        --Tables aren't detecting anything, so we have to manually put everything in a for loop...
-        for i = 1, NPC_MAX_ID do
+        --Tables aren't detecting anything, so we have to manually put everything in a for loop... tis broken, so omit it for now
+        --[[for i = 1, NPC_MAX_ID do
             stats.registerNPC(i, 2, 3, 2) --NPCid, pow, def, xpdrop
             stats.xpDrop(i, 1) --NPCID, reward
-        end
-        if #NPC.get(smastables.allBaseGameKillableEnemyIDs) == 0 and table.icontains(smastables._friendlyPlaces,Level.filename()) == false then
+        end]]
+        if #NPC.get(smastables.allBaseGameKillableEnemyIDs) == 0 and not table.icontains(smastables._friendlyPlaces,Level.filename()) then
             Routine.run(delayedMusicChange, killedNPC)
         end
-    elseif SaveData.currentCostume then
+    elseif SaveData.currentCostume ~= "UNDERTALE-FRISK" then
         stats.enabled = false
         stats.alwaysBig = false
     end

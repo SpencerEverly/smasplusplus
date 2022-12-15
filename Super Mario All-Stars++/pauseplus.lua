@@ -16,7 +16,6 @@
 ]]
 
 local textplus = require("textplus")
-_G.bootmenu = require("bootmenu")
 
 local pauseplus = {}
 
@@ -998,7 +997,7 @@ end
 function pauseplus.onPause(eventObj,playerObj)
     eventObj.cancelled = true
 
-    if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) and not bootmenu.active and not smasbooleans.disablePauseMenu then
+    if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) and not smasbooleans.mainMenuActive and not smasbooleans.disablePauseMenu then
         pauseplus.open(nil,nil,playerObj)
     end
 end

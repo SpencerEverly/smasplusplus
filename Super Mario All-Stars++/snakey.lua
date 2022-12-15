@@ -480,17 +480,11 @@ function snake.onDraw()
 end
 
 function snake.initCharacter()
-    -- CLEANUP NOTE: This is not safe if a level makes it's own use of activateHud
-    --Graphics.activateHud(false)
-    
     -- CLEANUP NOTE: This is not quite safe in various cases
     Defines.player_link_shieldEnabled = false
 end
 
 function snake.cleanupCharacter()
-    -- CLEANUP NOTE: This is not safe if a level makes it's own use of activateHud
-    --Graphics.activateHud(true)
-    
     -- CLEANUP NOTE: This is not quite safe in various cases
     Defines.player_link_shieldEnabled = true
 end

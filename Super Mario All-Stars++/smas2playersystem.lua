@@ -80,8 +80,33 @@ function smas2playersystem.onTick()
                 end
             end
         end
-        if Player.count() == 2 then
-            
+        if Player.count() == 2 and SaveData.disableX2char then
+            if SMBX_VERSION ~= VER_SEE_MOD then
+                if Player(1).forcedState == FORCEDSTATE_PIPE then
+                    if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
+                        player:mem(0x140,FIELD_WORD,100)
+                        Player(2):mem(0x140,FIELD_WORD,100)
+                        Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
+                    end
+                end
+                if Player(2).forcedState == FORCEDSTATE_PIPE then
+                    if Player(2).forcedTimer >= 70 and not Misc.isPaused() then
+                        player:mem(0x140,FIELD_WORD,100)
+                        Player(2):mem(0x140,FIELD_WORD,100)
+                        Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
+                    end
+                end
+                if Player(1).forcedState == FORCEDSTATE_DOOR then
+                    if Player(1).forcedTimer == 1 then
+                        Routine.run(smas2playersystem.doorTeleportP2toP1)
+                    end
+                end
+                if Player(2).forcedState == FORCEDSTATE_DOOR then
+                    if Player(2).forcedTimer == 1 then
+                        Routine.run(smas2playersystem.doorTeleportP1toP2)
+                    end
+                end
+            end
         end
     end
 end
@@ -89,6 +114,24 @@ end
 
 
 if SaveData.disableX2char then --These will be 1.3 Mode specific
+    function smas2playersystem.doorTeleportP1toP2()
+        Routine.waitFrames(30)
+        player:mem(0x140,FIELD_WORD,100)
+        Player(2):mem(0x140,FIELD_WORD,100)
+        if Player.count() >= 2 then
+            Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
+        end
+    end
+    
+    function smas2playersystem.doorTeleportP2toP1()
+        Routine.waitFrames(30)
+        player:mem(0x140,FIELD_WORD,100)
+        if Player.count() >= 2 then
+            Player(2):mem(0x140,FIELD_WORD,100)
+            Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
+        end
+    end
+    
     function smas2playersystem.teleport2PlayerModeController(button, playerIdx) --Using the Special button to teleport within each other, same goes for the other two below except for keyboards
         if Player.count() == 2 then
             if playerIdx == 1 then

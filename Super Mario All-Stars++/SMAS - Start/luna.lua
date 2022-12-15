@@ -6,13 +6,9 @@ datetime.bottomleft = false
 datetime.topright = false
 datetime.topleft = false
 
-_G.bootmenu = require("bootmenu")
-local battledependencies = require("classicbattlemode")
-battledependencies.battlemodeactive = false
-
 smasbooleans.disablePauseMenu = true
 
-bootmenu.active = false
+smasbooleans.mainMenuActive = false
 debugbox.bootactive = false
 GameData.rushModeActive = false
 
@@ -238,14 +234,7 @@ function onInputUpdate()
                     end
                     if activeselected == 7 then
                         Misc.eraseSaveSlot(Misc.saveSlot())
-                        Misc.dialog("There WILL be a few errors before restarting. This is normal. Just click okay (Or press ENTER) on all dialog boxes that pop up, and the episode will restart.")
-                        SaveData.clear()
-                        GameData.clear()
-                        SaveData.flush()
-                        if Misc.loadEpisode("Super Mario All-Stars++") == false then
-                            SFX.play("wrong.ogg")
-                            error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
-                        end
+                        SysManager.clearSaveDataAndGameDataAndRestart()
                     end
                 end
             elseif SaveData.racaActivated >= 1 then
@@ -255,14 +244,7 @@ function onInputUpdate()
                     end
                     if activeselected == 2 then
                         Misc.eraseSaveSlot(Misc.saveSlot())
-                        Misc.dialog("There WILL be a few errors before restarting. This is normal. Just click okay (Or press ENTER) on all dialog boxes that pop up, and the episode will restart.")
-                        SaveData.clear()
-                        GameData.clear()
-                        SaveData.flush()
-                        if Misc.loadEpisode("Super Mario All-Stars++") == false then
-                            SFX.play("wrong.ogg")
-                            error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
-                        end
+                        SysManager.clearSaveDataAndGameDataAndRestart()
                     end
                 end
             end

@@ -10,7 +10,6 @@ local countdowngogfx = Graphics.loadImageResolved("costumes/mario/GO-10SecondRun
 local warpTransition = require("warpTransition")
 local playerManager = require("playerManager")
 local Routine = require("routine")
-_G.bootmenu = require("bootmenu")
 
 if SaveData.currentCostume == nil then
     SaveData.currentCostume = "TBD"
@@ -64,7 +63,7 @@ local currentCostume = player:getCostume()
 local costumes
 
 function smascharacterintros.onStart()
-    if not bootmenu.active then
+    if not smasbooleans.mainMenuActive then
         pauseplus = require("pauseplus")
     end
     local characters = {}

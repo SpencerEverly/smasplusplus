@@ -1,5 +1,4 @@
-_G.bootmenu = require("bootmenu")
-bootmenu.active = true
+local bootmenu = require("bootmenu")
 
 local m = RNG.randomInt(1,56-1)
 

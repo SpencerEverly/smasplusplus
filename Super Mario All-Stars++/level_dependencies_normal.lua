@@ -10,47 +10,15 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local pausemenu2 = require("pausemenu2")
-if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+if table.icontains(smastables.__smb2Levels,Level.filename()) then
     rooms = require("rooms")
 end
 local smashudsystem = require("smashudsystem")
 
-local dying = false;
-local deathVisibleCount = 198;
-local deathTimer = deathVisibleCount;
-local earlyDeathCheck = 3;
-local cooldown = 0
-local timer_deathTimer;
-local deltaTime = Routine.deltaTime
-local deathDelay = lunatime.toTicks(1.2)
-local deathTimer = deathDelay
-
 local costumes = {}
-
 local dependencies = {}
 
-local battledependencies = require("classicbattlemode")
-battledependencies.battlemodeactive = false
-
 smasbooleans.compatibilityMode13Mode = false
-
-function p1teleportdoor()
-    Routine.waitFrames(30)
-    player:mem(0x140,FIELD_WORD,100)
-    if Player.count() >= 2 then
-        Player(2):mem(0x140,FIELD_WORD,100)
-        Player(2):teleport(Player(1).x - 32, Player(1).y - 32, bottomCenterAligned)
-    end
-end
-
-function p2teleportdoor()
-    Routine.waitFrames(30)
-    player:mem(0x140,FIELD_WORD,100)
-    Player(2):mem(0x140,FIELD_WORD,100)
-    if Player.count() >= 2 then
-        Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
-    end
-end
 
 function dependencies.onInitAPI()
     registerEvent(dependencies, "onStart")
@@ -67,8 +35,8 @@ local smb1buzzyswitch = false
 function SMB1HardModeToggle()
     local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
     local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
-    if table.icontains(smastables.__smb1Levels,Level.filename()) == true then
-        Routine.wait(0.1, true)
+    if table.icontains(smastables.__smb1Levels,Level.filename()) then
+        Routine.wait(0.3, true)
         if SaveData.SMB1HardModeActivated then
             SMB1EasyModeLayer:hide(true)
             SMB1HardModeLayer:show(true)
@@ -76,34 +44,6 @@ function SMB1HardModeToggle()
             SMB1EasyModeLayer:show(true)
             SMB1HardModeLayer:hide(true)
         end
-        Routine.wait(0.1, true)
-        if SaveData.SMB1HardModeActivated then
-            SMB1EasyModeLayer:hide(true)
-            SMB1HardModeLayer:show(true)
-        else
-            SMB1EasyModeLayer:show(true)
-            SMB1HardModeLayer:hide(true)
-        end
-        Routine.wait(0.1, true)
-        if SaveData.SMB1HardModeActivated then
-            SMB1EasyModeLayer:hide(true)
-            SMB1HardModeLayer:show(true)
-        else
-            SMB1EasyModeLayer:show(true)
-            SMB1HardModeLayer:hide(true)
-        end
-    end
-end
-
-function SMA1ModeToggle()
-    --local SMA1ModeLayer = Layer.get("SMA1 Mode")
-    --local SMB2ModeLayer = Layer.get("SMB2 Mode")
-    if SaveData.SMA1ModeActivated then
-        --SMB2ModeLayer:hide(true)
-        --SMA1ModeLayer:show(true)
-    else
-        --SMB2ModeLayer:show(true)
-        --SMA1ModeLayer:hide(true)
     end
 end
 
@@ -122,16 +62,13 @@ function dependencies.onStart()
         end
         Routine.run(SMB1HardModeToggle)
     end
-    if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
-        Routine.run(SMA1ModeToggle)
-    end
     
     if player.character == CHARACTER_NINJABOMBERMAN then
         Defines.player_walkspeed = 6
         Defines.player_runspeed = 6
     end
     
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         undertaledepends = require("level_dependencies_undertale")
         warpTransition = require("warpTransition")
         anotherPowerDownLibrary = require("anotherPowerDownLibrary")
@@ -167,45 +104,8 @@ function dependencies.onStart()
     end
 end
 
-function dependencies.onTick()
-    if Player.count() >= 2 then
-        if SMBX_VERSION ~= VER_SEE_MOD then
-            if Player(1).forcedState == FORCEDSTATE_PIPE then
-                if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
-                    player:mem(0x140,FIELD_WORD,100)
-                    Player(2):mem(0x140,FIELD_WORD,100)
-                    Player(2):teleport(player.x - 32, player.y - 32, bottomCenterAligned)
-                end
-            end
-            if Player(2).forcedState == FORCEDSTATE_PIPE then
-                if Player(2).forcedTimer >= 70 and not Misc.isPaused() then
-                    player:mem(0x140,FIELD_WORD,100)
-                    Player(2):mem(0x140,FIELD_WORD,100)
-                    Player(1):teleport(Player(2).x - 32, Player(2).y - 32, bottomCenterAligned)
-                end
-            end
-            if Player(1).forcedState == FORCEDSTATE_DOOR then
-                if Player(1).forcedTimer == 1 then
-                    Routine.run(p1teleportdoor)
-                end
-            end
-            if Player(2).forcedState == FORCEDSTATE_DOOR then
-                if Player(2).forcedTimer == 1 then
-                    Routine.run(p2teleportdoor)
-                end
-            end
-        end
-    end
-    if player.character == CHARACTER_SNAKE then
-        Graphics.activateHud(true)
-    end
-    if player.character == CHARACTER_NINJABOMBERMAN then
-        Graphics.activateHud(true)
-    end
-end
-
 function dependencies.onTickEnd()
-    if SaveData.SMB1LLAllNightNipponActivated == true then
+    if SaveData.SMB1LLAllNightNipponActivated then
         if table.icontains(smastables.__smb1Levels,Level.filename()) == true or table.icontains(smastables.__smbllLevels,Level.filename()) == true then
             Graphics.sprites.background[21].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/background-21.png")
             Graphics.sprites.background[22].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/background-22.png")
@@ -219,10 +119,10 @@ function dependencies.onTickEnd()
             Graphics.sprites.npc[97].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/npc-97.png")
             Graphics.sprites.npc[996].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/npc-996.png")
         end
-        if table.icontains(smastables.__smb1Levels,"SMB1 - W-1, L-4.lvlx") == true or table.icontains(smastables.__smbllLevels,"SMBLL - W-1, L-4.lvlx") == true then
+        if table.icontains(smastables.__smb1Levels,"SMB1 - W-1, L-4.lvlx") or table.icontains(smastables.__smbllLevels,"SMBLL - W-1, L-4.lvlx") then
             Graphics.sprites.npc[94].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/toads/world1.png")
         end
-    elseif SaveData.SMB1LLAllNightNipponActivated == false then
+    elseif not SaveData.SMB1LLAllNightNipponActivated then
         Graphics.sprites.background[21].img =  nil
         Graphics.sprites.background[22].img = nil
         Graphics.sprites.effect[22].img = nil

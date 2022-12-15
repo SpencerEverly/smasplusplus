@@ -63,7 +63,14 @@ bootmenu.musicRng = {
     [26] = "_OST/Super Mario Bros/Castle.ogg",
 }
 
+bootmenu.active = true
+bootmenu.menuactive = false
+bootmenu.intromodeactive = false
+bootmenu.battleModeLevel = 0
+bootmenu.themeSelected = 0
+
 if bootmenu.active then
+    smasbooleans.mainMenuActive = true
     aw.enabled = false
     littleDialogue.cursorEnabled = false
     Graphics.activateHud(false)
@@ -84,15 +91,8 @@ if bootmenu.active then
     datetime.bottomright = true
     datetime.topright = false
     extrasounds.active = false
-    smasbooleans.mainMenuActive = true
     bootmenu.startedmenu = 0
 end
-
-bootmenu.active = false
-bootmenu.menuactive = false
-bootmenu.intromodeactive = false
-bootmenu.battleModeLevel = 0
-bootmenu.themeSelected = 0
 
 GameData.____holidayMenuEventEnded = false
 
@@ -125,7 +125,6 @@ local function introExit()
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
     bootmenu.startedmenu = 0
-    smasbooleans.mainMenuActive = false
     if SaveData.openingComplete then
         Level.load("SMAS - Intro.lvlx")
     else
@@ -836,10 +835,10 @@ local function BootSMASPlusPlusPreExecute() --This is the routine animation to e
     Sound.muteMusic(-1) --Change the music to nothing
     Routine.wait(0.5)
     Misc.saveGame()
-    if (player.keys.down == KEYS_DOWN) == true then --Either one when holding down or not, executes a routine on which one to execute
+    if (player.keys.down == KEYS_DOWN) then --Either one when holding down or not, executes a routine on which one to execute
         Routine.run(mapExit)
     end
-    if (player.keys.down == KEYS_DOWN) == false then 
+    if not (player.keys.down == KEYS_DOWN) then 
         Routine.run(introExit)
     end
 end
@@ -849,29 +848,21 @@ local function BootCredits() --The credits lvl will probably be scrapped or not,
     exitscreen = true
     SFX.play(14)
     Routine.wait(0.5)
-    Level.load("SMAS - Credits.lvlx", nil, nil)
+    Level.load("SMAS - Credits.lvlx")
 end
 
 local function RestartSMASPlusPlusResetSave() --This restarts SMAS++ entirely, when erasing the save data
     Sound.muteMusic(-1)
     exitscreen = true
     Routine.wait(0.5)
-    Misc.dialog("There WILL be a few errors before restarting. This is normal. Just click okay (Or press ENTER) on all dialog boxes that pop up, and the episode will restart.")
-    SaveData.clear()
-    GameData.clear()
-    SaveData.flush()
-    if Misc.loadEpisode("Super Mario All-Stars++") == false then
-        SFX.play("wrong.ogg")
-        error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
-    end
+    SysManager.clearSaveDataAndGameDataAndRestart()
 end
 
 local function RestartSMASPlusPlus() --This restarts SMAS++ entirely
     Sound.muteMusic(-1)
     exitscreen = true
     Routine.wait(0.5)
-    if Misc.loadEpisode("Super Mario All-Stars++") == false then
-        SFX.play("wrong.ogg")
+    if not Misc.loadEpisode("Super Mario All-Stars++") then
         error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
     end
 end
@@ -941,28 +932,6 @@ function bootmenu.onStart()
     if bootmenu.active then
         cursor.create()
         cursor.showCursor = true
-        aw.enabled = false
-        littleDialogue.cursorEnabled = false
-        Graphics.activateHud(false)
-        smashud.visible.keys = false
-        smashud.visible.itembox = false
-        smashud.visible.bombs = false
-        smashud.visible.coins = false
-        smashud.visible.score = false
-        smashud.visible.lives = false
-        smashud.visible.stars = false
-        smashud.visible.starcoins = false
-        smashud.visible.timer = false
-        smashud.visible.levelname = false
-        smashud.visible.overworldPlayer = false
-        smashud.visible.deathcount = false
-        smashud.visible.customitembox = false
-        smashud.visible.pWing = false
-        datetime.bottomright = true
-        datetime.topright = false
-        extrasounds.active = false
-        smasbooleans.mainMenuActive = true
-        bootmenu.startedmenu = 0
         Audio.MusicVolume(nil) --Let the music volume reset
         
         if SaveData.failsafeMessageOne == 1 then --Change these values for users after 12/7/2022

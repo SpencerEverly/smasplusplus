@@ -5,7 +5,6 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
-_G.bootmenu = require("bootmenu")
 local battledependencies = require("classicbattlemode")
 battledependencies.battlemodeactive = false
 
@@ -109,7 +108,7 @@ end
 function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
     local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
     local questionblocks = table.map{5,88,193,224} --A list of question mark blocks
-    if bootmenu.active == false then
+    if not smasbooleans.mainMenuActive then
         if playerornil then
             if block.contentID == 1000 or block.contentID == 0 or playerornil.character == CHARACTER_TOAD or playerornil.character == CHARACTER_KLONOA then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
@@ -129,7 +128,7 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
 end
 
 function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
-    if bootmenu.active == false then
+    if not smasbooleans.mainMenuActive then
         for _,p in ipairs(Player.get()) do
             
             
@@ -281,8 +280,8 @@ function thirteenModeDeath()
 end
 
 function diedanimation(plr) --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
-    if smashudsystem.activated == true then
-        if bootmenu.active == false then
+    if smashudsystem.activated then
+        if not smasbooleans.mainMenuActive then
             if not Misc.inMarioChallenge() then
                 if not SaveData.disableX2char then
                     if not battledependencies.battlemodeactive then
@@ -446,7 +445,7 @@ function smashudsystem.onTick()
         SaveData.totalScoreClassic = 999999999
     end
     if not battledependencies.battlemodeactive then
-        if bootmenu.active == false then
+        if not smasbooleans.mainMenuActive then
             for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
                 if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --Score 10
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10

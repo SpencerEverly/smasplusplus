@@ -22,7 +22,7 @@ end]]
 
 --Make sure we aren't running Beta 3 and below before we actually start...
 if (SMBX_VERSION < VER_BETA4_PATCH_3) then
-    Misc.dialog("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")
+    Text.windowDebugSimple("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")
     Misc.exitEngine()
 end
 
@@ -37,7 +37,7 @@ if not Misc.inMarioChallenge() then
             GameData.warnUserAboutOldStars = true
         end
         if GameData.warnUserAboutOldStars then
-            Misc.richDialog("It looks like your using a legacy save file from before Demo 3 (Or before April 10th, 2022).\n\nYou'll need to migrate your save data as soon as you boot the game!\nThat way your data can still be used in the future.\nPlease migrate your save while you can!")
+            Text.windowDebugSimple("It looks like your using a legacy save file from before Demo 3 (Or before April 10th, 2022). You'll need to migrate your save data as soon as you boot the game! That way your data can still be used in the future. Please migrate your save while you can!")
             GameData.warnUserAboutOldStars = false
         end
     end
