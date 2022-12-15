@@ -244,6 +244,9 @@ function smascharacterchanger.onDraw()
     end
     
     currentSelection = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]
+    if currentSelection == nil then
+        currentSelection = 1
+    end
     
     if smascharacterchanger.menuActive then
         if smascharacterchanger.animationActive then
@@ -286,7 +289,12 @@ function smascharacterchanger.onDraw()
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
             
-            --Graphics.sprites[currentSelection][player.powerup].img = Graphics.loadImageResolved("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..playerManager.getName(player.character).."-"..player.powerup..".png")
+            --[[if currentSelectionCostume == "nil" then
+                Graphics.sprites[playerManager.getName(currentSelection)][player.powerup].img = Img.loadDefaultCharacterImage()
+            else
+                Graphics.sprites[playerManager.getName(currentSelection)][player.powerup].img = Graphics.loadImageResolved("costumes/"..playerManager.getName(currentSelection).."/"..currentSelectionCostume.."/"..playerManager.getName(currentSelection).."-"..player.powerup..".png")
+            end]]
+            
             
             player:render{frame = 1, direction = 1, character = currentSelection, x = 400, y = 350, priority = -1.7, sceneCoords = false}
         end

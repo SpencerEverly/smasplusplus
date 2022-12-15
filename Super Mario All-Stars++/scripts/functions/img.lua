@@ -23,6 +23,12 @@ function Img.loadCharacterHitBoxes(name) --This will not only check the main SMB
     return nil
 end
 
+function Img.loadDefaultCharacterImage()
+    return (Graphics.loadImageResolved(playerManager.getName(player.character).."-"..player.powerup..".png")
+        or Graphics.loadImageResolved("config/character_defaults/"..playerManager.getName(player.character).."-"..player.powerup..".png")
+    )
+end
+
 function Img.loadCharacter(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
     local file = File.load(name) or File.load(name..".png")
     if file and SaveData.currentCostume == "N/A" then
