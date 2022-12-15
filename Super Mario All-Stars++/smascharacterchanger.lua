@@ -100,6 +100,7 @@ local changed = false
 
 local soundObject1 --Used for the TV scroll SFX
 local menuBGMObject --Used for the menu BGM
+local oldIniFile --Used for reverting to the old ini file when exiting the menu without changing to a character
 
 local started = false
 local ending = false
@@ -122,6 +123,11 @@ function smascharacterchanger.startupChanger() --The animation that starts the m
     Sound.muteMusic(-1)
     if pauseplus then
         pauseplus.canPause = false
+    end
+    if SaveData.currentCostume ~= "N/A" then
+        oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini")
+    else
+        oldIniFile = Misc.resolveFile("config/character_defaults/"..player.character.."-"..player.powerup..".ini")
     end
     soundObject1 = SFX.play(smascharacterchanger.scrollSFX)
     Routine.waitFrames(10, true)
@@ -169,6 +175,7 @@ end
 function smascharacterchanger.onInputUpdate()
     if smascharacterchanger.menuActive and started then
         if player.keys.run == KEYS_PRESSED then
+            Misc.loadCharacterHitBoxes(player.character, player.powerup, oldIniFile)
             smascharacterchanger.menuActive = false
         end
         if player.keys.up == KEYS_PRESSED then
@@ -266,6 +273,9 @@ function smascharacterchanger.onDraw()
             end
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
+            local iniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini")
+            Misc.loadCharacterHitBoxes(player.character, player.powerup, iniFile)
+            player:render{frame = 1, direction = 1, x = 400, y = 450, priority = -1.7}
         end
         if not smascharacterchanger.animationActive and started then
             Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
