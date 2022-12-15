@@ -1,5 +1,7 @@
 local SysManager = {}
 
+local playerManager = require("playerManager")
+
 --Lives
 
 function SysManager.lifeCount() --This lists the current life count
@@ -366,6 +368,13 @@ function SysManager.clearSaveDataAndGameDataAndRestart()
     if not Misc.loadEpisode("Super Mario All-Stars++") then
         error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
     end
+end
+
+function SysManager.loadDefaultCharacterIni()
+    return (Misc.episodePath()..playerManager.getName(player.character).."-"..player.powerup..".ini"
+        or Misc.levelPath()..playerManager.getName(player.character).."-"..player.powerup..".ini"
+        or getSMBXPath().."config/character_defaults/"..playerManager.getName(player.character).."-"..player.powerup..".ini"
+    )
 end
 
 return SysManager

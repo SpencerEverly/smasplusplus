@@ -101,6 +101,8 @@ local changed = false
 local soundObject1 --Used for the TV scroll SFX
 local menuBGMObject --Used for the menu BGM
 local oldIniFile --Used for reverting to the old ini file when exiting the menu without changing to a character
+local iniFile --Used to update the ini format when showing the character on screen
+local currentSelection --For the character's current selection
 
 local started = false
 local ending = false
@@ -125,9 +127,9 @@ function smascharacterchanger.startupChanger() --The animation that starts the m
         pauseplus.canPause = false
     end
     if SaveData.currentCostume ~= "N/A" then
-        oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini")
+        oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
     else
-        oldIniFile = Misc.resolveFile("config/character_defaults/"..player.character.."-"..player.powerup..".ini")
+        oldIniFile = playerManager.getHitboxPath(player, player.powerup)
     end
     soundObject1 = SFX.play(smascharacterchanger.scrollSFX)
     Routine.waitFrames(10, true)
@@ -194,10 +196,12 @@ function smascharacterchanger.onInputUpdate()
         if player.keys.left == KEYS_PRESSED then
             Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
+            --Misc.loadCharacterHitBoxes(currentSelection, player.powerup, iniFile)
             smascharacterchanger.selectionNumberUpDown = 1
         elseif player.keys.right == KEYS_PRESSED then
             Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
+            --Misc.loadCharacterHitBoxes(currentSelection, player.powerup, iniFile)
             smascharacterchanger.selectionNumberUpDown = 1
         end
         if player.keys.jump == KEYS_PRESSED then
@@ -232,6 +236,14 @@ function smascharacterchanger.onDraw()
     if Player.count() == 2 then
         SaveData.currentCharacter2 = player2.character
     end
+    
+    if SaveData.currentCostume ~= "N/A" then
+        iniFile = Misc.episodePath().."costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini"
+    else
+        iniFile = playerManager.getHitboxPath(player, player.powerup)
+    end
+    
+    currentSelection = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]
     
     if smascharacterchanger.menuActive then
         if smascharacterchanger.animationActive then
@@ -273,9 +285,10 @@ function smascharacterchanger.onDraw()
             end
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
-            local iniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini")
-            Misc.loadCharacterHitBoxes(player.character, player.powerup, iniFile)
-            player:render{frame = 1, direction = 1, x = 400, y = 450, priority = -1.7}
+            
+            Graphics.sprites[currentSelection][player.powerup].img = Graphics.loadImageResolved("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..playerManager.getName(player.character).."-"..player.powerup..".png")
+            
+            player:render{frame = 1, direction = 1, character = currentSelection, x = 400, y = 350, priority = -1.7, sceneCoords = false}
         end
         if not smascharacterchanger.animationActive and started then
             Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
