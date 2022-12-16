@@ -343,6 +343,10 @@ function keyboard.onInputUpdate()
                 end
             end
         elseif buttonSel > 0 then
+            local rngkey = rng.randomInt(1,7)
+            if player.keys.up == KEYS_PRESSED or player.keys.down == KEYS_PRESSED or player.keys.left == KEYS_PRESSED or player.keys.right == KEYS_PRESSED then
+                Sound.playSFX("console/console_keypress"..rngkey..".ogg")
+            end
             if player.keys.left == KEYS_PRESSED then
                 if buttonSel == 1 then
                     buttonSel = 6
@@ -360,31 +364,38 @@ function keyboard.onInputUpdate()
             elseif player.keys.down == KEYS_PRESSED then
                 setkeySel(1)
             elseif player.keys.jump == KEYS_PRESSED then
-                if buttonSel == 1 then
+                if buttonSel == 1 then --Space bar
                     actBoard.text = actBoard.text .. " "
+                    Sound.playSFX("console/console_keypressenter.ogg")
                     blinker = 1
-                elseif buttonSel == 2 then
+                elseif buttonSel == 2 then --Back space
                     Sound.playSFX("console/console_keypressbackspace.ogg")
                     actBoard.text = actBoard.text:sub(1, -2)
-                elseif buttonSel == 3 then
+                elseif buttonSel == 3 then --Caps Lock
                     actBoard.upper = not actBoard.upper
-                elseif buttonSel == 4 then
+                    Sound.playSFX("console/console_keypressenter.ogg")
+                elseif buttonSel == 4 then --Clear
                     actBoard.text = ""
-                elseif buttonSel == 5 then
+                    Sound.playSFX("console/console_resetfont.ogg")
+                elseif buttonSel == 5 then --Done!
                     if actBoard.isImportant and actBoard.text:find("[^ ]") then
                         actBoard.setVariable = actBoard.text
+                        Sound.playSFX("console/console_success.ogg")
                         actBoard:close()
                     else
+                        Sound.playSFX("console/console_error.ogg")
                         warningText = "Please enter something!"
                         warningOpacity = 5
                     end
-                elseif buttonSel == 6 then
+                elseif buttonSel == 6 then --Exit
                     if not actBoard.isImportant then
                         actBoard.text = ""
                         actBoard.setVariable = actBoard.text
+                        Sound.playSFX("console/console_success.ogg")
                         actBoard:close()
                     else
                         warningText = "You can't exit!"
+                        Sound.playSFX("console/console_error.ogg")
                         warningOpacity = 5
                     end
                 end
