@@ -30,7 +30,7 @@ end
 
 function keyboard.cmd()
     printString("" .. keyboard.buffer:gsub("\n", "\n "))
-    if GameData.playernameenter == true then
+    if GameData.playernameenter then
         if keyboard.buffer ~= "" then
             SaveData.playerName = keyboard.buffer
             keyboard.buffer = ""
@@ -45,7 +45,7 @@ function keyboard.cmd()
             GameData.firstbootkeyboardconfig = false
         end
     end
-    if GameData.playerpfpenter == true then
+    if GameData.playerpfpenter then
         if keyboard.buffer ~= "" then
             if SaveData.playerPfp == nil then
                 SaveData.playerPfp = keyboard.buffer
@@ -64,7 +64,7 @@ function keyboard.cmd()
             GameData.firstbootkeyboardconfig = false
         end
     end
-    if GameData.playernameenterfirstboot == true then
+    if GameData.playernameenterfirstboot then
         if keyboard.buffer ~= "" then
             SaveData.playerName = keyboard.buffer
             keyboard.buffer = ""
@@ -78,7 +78,7 @@ function keyboard.cmd()
             GameData.playernameenter = false
         end
     end
-    if GameData.saveslotswitchenter == true then
+    if GameData.saveslotswitchenter then
         if keyboard.buffer ~= "" then
             if keyboard.buffer >= "1" or keyboard.buffer <= "32767" then
                 Misc.moveSaveSlot(Misc.saveSlot(), tonumber(keyboard.buffer))

@@ -10,6 +10,7 @@ local autoscroll = require("autoscrolla")
 local rng = require("base/rng")
 local inputconfigurator = require("inputconfig")
 local keyboard = require("keyboard")
+local newkeyboard = require("newkeyboard")
 local hearthover = require("hearthover") --Require hearthover to disable it
 local sprite = require("base/sprite")
 local aw = require("anotherwalljump")
@@ -577,21 +578,24 @@ local function startConfiguratorKeyboardP2()
     inputconfigurator.assigningToPlayer2 = true
 end
 
+local nameBoard = newkeyboard.create{isImportant = true, clear = true, setVariable = SaveData.playerName, pause = false}
+local pfpBoard = newkeyboard.create{isImportant = true, clear = true, setVariable = SaveData.playerPfp, pause = false}
+
 local function startKeyboard()
-    keyboard.active = true
-    GameData.enablekeyboard = true
+    newkeyboard.setVariable = SaveData.playerName
+    nameBoard:open()
     GameData.playernameenter = true
 end
 
 local function startKeyboardFirstBoot()
-    keyboard.active = true
-    GameData.enablekeyboard = true
+    newkeyboard.setVariable = SaveData.playerName
+    nameBoard:open()
     GameData.playernameenterfirstboot = true
 end
 
 local function startKeyboardPFP()
-    keyboard.active = true
-    GameData.enablekeyboard = true
+    newkeyboard.setVariable = SaveData.playerPfp
+    pfpBoard:open()
     GameData.playerpfpenter = true
 end
 
