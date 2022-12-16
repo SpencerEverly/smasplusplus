@@ -232,8 +232,8 @@ extrasounds.soundNamesInOrder = {
     "wart-die", --63
     "sm-block-hit", --64
     "sm-killed", --65
-    "sm-glass", --66
-    "sm-hurt", --67
+    "sm-hurt", --66
+    "sm-glass", --67
     "sm-boss-hit", --68
     "sm-cry", --69
     "sm-explosion", --70
