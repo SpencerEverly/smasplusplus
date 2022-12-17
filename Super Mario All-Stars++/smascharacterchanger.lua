@@ -240,7 +240,7 @@ function smascharacterchanger.onDraw()
     if SaveData.currentCostume ~= "N/A" then
         iniFile = Misc.episodePath().."costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini"
     else
-        iniFile = playerManager.getHitboxPath(player, player.powerup)
+        iniFile = SysManager.loadDefaultCharacterIni()
     end
     
     currentSelection = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]
