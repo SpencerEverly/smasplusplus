@@ -3,6 +3,9 @@
 
 local smascharacterchanger = {}
 
+local smasfunctions
+pcall(function() smasfunctions = require("smasfunctions") end)
+
 local playerManager = require("playerManager")
 local textplus = require("textplus")
 local smbx13font = textplus.loadFont("littleDialogue/font/smilebasic.ini") --The font for the changer menu.
@@ -22,7 +25,7 @@ if SaveData.currentCharacter2 == nil then
     end
 end
 
-smascharacterchanger.tvImage = Img.load("graphics/characterchangermenu/tv.png") --The image for the TV.
+smascharacterchanger.tvImage = Graphics.loadImageResolved("graphics/characterchangermenu/tv.png") --The image for the TV.
 smascharacterchanger.scrollSFX = "_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg"
 smascharacterchanger.stopSFX = "_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg"
 smascharacterchanger.turnOnSFX = "_OST/_Sound Effects/characterchangermenu/turn-on-tv.ogg"

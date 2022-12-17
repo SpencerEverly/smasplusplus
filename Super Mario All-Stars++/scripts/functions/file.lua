@@ -101,4 +101,29 @@ function File.stringToCData(stringdata, ffidata)
     end
 end
 
+function File.splitCharacters(stringg)
+    local t = {}
+    stringg:gsub(".",function(c) table.insert(t,c) end)
+    return t
+end
+
+function File.fileToByteSize(file)
+    local input = io.readFileLines(Misc.resolveFile(file))
+    if input == nil then
+        return
+    end
+    
+    local outputtext = {}
+    local output = 0
+    
+    for i = 1,#input do
+        outputtext[i] = File.splitCharacters(input[i])
+        for k,v in ipairs(outputtext[i]) do
+            output = output + 1
+        end
+    end
+    
+    return output
+end
+
 return File
