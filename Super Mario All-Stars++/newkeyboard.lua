@@ -282,7 +282,6 @@ function keyb:close()
     if not keyboard.closedWithoutValues then
         keyboard.closed = true
     end
-    keyboard.closedWithoutValues = false
 end
 
 registerEvent(keyboard, "onInputUpdate")
