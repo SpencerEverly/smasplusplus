@@ -1,7 +1,10 @@
 --SMAS++ MAIN MENU
 --Code by Spencer Everly, MrDoubleA, and others
 
-local versionnumber = "Demo 3" --This is the version number of this episode. It can be changed to any version we're on.
+local bootmenu = {}
+
+bootmenu.versionnumber = "Demo 3" --This is the version number of this episode. It can be changed to any version we're on.
+
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
 local datetime = require("datetime")
@@ -21,8 +24,6 @@ local fontthree = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.in
 local menufont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
 local menufontwebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-website-textplus-1x.ini")
 
-local bootmenu = {}
-
 local smaslogo = Graphics.loadImageResolved("smaslogo.png")
 local smaslogojpn = Graphics.loadImageResolved("smaslogo-jpn.png")
 local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
@@ -30,10 +31,6 @@ local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
 local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
 local orangecurtains = Graphics.loadImageResolved("theming_smbxcurtainsorange.png")
 local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
-
-if SaveData.turnOnMainMenuMusicRng == nil then
-    SaveData.turnOnMainMenuMusicRng = false
-end
 
 bootmenu.musicRng = {
     [1] = "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg",
@@ -282,9 +279,6 @@ end
 
 local function easterEgg() --SnooPINGAS I see? ._.
     Routine.wait(0.1, true)
-    if SaveData.turnOnMainMenuMusicRng then
-        Sound.changeMusic(bootmenu.musicRng[rng.randomInt(1,#bootmenu.musicRng)], 0)
-    end
     Routine.wait(900, true)
     smasbooleans.overrideMusicVolume = true
     Audio.MusicFadeOut(player.section, 4000)
@@ -390,7 +384,10 @@ local function FailsafeMessage1() --You died on the main menu
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000013"), speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
-local function bootDialogue()
+local function bootDialogue(resetMusic)
+    if resetMusic == nil then
+        resetMusic = false
+    end
     bootmenu.menuactive = true
     active = true
     active4 = false
@@ -398,6 +395,9 @@ local function bootDialogue()
     playernamebyImg = false
     pfpimage = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
+    if resetMusic then
+        Sound.restoreMusic(-1)
+    end
 end
 
 function menuDialogue() --Main menu
@@ -546,13 +546,13 @@ local function X2Char() --Game settings applied
 end
 
 local function turnOnRngMusic() --Game settings applied
-    SaveData.turnOnMainMenuMusicRng = not SaveData.turnOnMainMenuMusicRng
+    --[[SaveData.turnOnMainMenuMusicRng = not SaveData.turnOnMainMenuMusicRng
     if SaveData.turnOnMainMenuMusicRng then
         Sound.changeMusic(bootmenu.musicRng[rng.randomInt(1,#bootmenu.musicRng)], 0)
     end
     if not SaveData.turnOnMainMenuMusicRng then
         Sound.restoreOriginalMusic(-1)
-    end
+    end]]
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
 end
 
@@ -578,8 +578,8 @@ local function startConfiguratorKeyboardP2()
     inputconfigurator.assigningToPlayer2 = true
 end
 
-local nameBoard = newkeyboard.create{isImportant = true, clear = true, setVariable = SaveData.playerName, pause = false}
-local pfpBoard = newkeyboard.create{isImportant = true, clear = true, setVariable = SaveData.playerPfp, pause = false}
+local nameBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCancelled = true, clear = true, setVariable = SaveData.playerName, pause = false}
+local pfpBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCancelled = true, clear = true, setVariable = SaveData.playerPfp, pause = false}
 
 local function startKeyboard()
     newkeyboard.setVariable = SaveData.playerName
@@ -729,62 +729,46 @@ local function EraseSave2()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000056"), pauses = false, updatesInPause = true})
 end
 
-local function BootDialogueMusicReset()
-    bootmenu.menuactive = true
-    active = true
-    active4 = false
-    pressjumpwords = false
-    stpatricksday = false
-    playernamebyImg = false
-    pfpimage = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
-    Sound.restoreMusic(-1)
-end
-
-local function ExitDialogueFirstBoot()
-    bootmenu.menuactive = false
-    playernamebyImg = true
-    pfpimage = true
-    active = false
-    logo = true
-    pressjumpwords = true
-    if SaveData.firstBootCompleted then
-        bootmenu.startedmenu = 0
+local function ExitDialogue(resetMusic, firstBootActive)
+    if resetMusic == nil then
+        resetMusic = false
     end
-    if Time.month() == 03 and Time.day() == 17 then
-        stpatricksday = true
+    if firstBootActive == nil then
+        firstBootActive = false
     end
-end
-
-local function ExitDialogue()
-    bootmenu.menuactive = false
-    active = false
-    logo = true
-    playernamebyImg = true
-    pfpimage = true
-    pressjumpwords = true
-    if SaveData.firstBootCompleted then
-        bootmenu.startedmenu = 0
+    if not firstBootActive then
+        bootmenu.menuactive = false
+        active = false
+        logo = true
+        playernamebyImg = true
+        pfpimage = true
+        pressjumpwords = true
+        if SaveData.firstBootCompleted then
+            bootmenu.startedmenu = 0
+        end
+        if Time.month() == 03 and Time.day() == 17 then
+            stpatricksday = true
+        end
+        if resetMusic then
+            Sound.restoreMusic(-1)
+        end
+    else
+        bootmenu.menuactive = false
+        playernamebyImg = true
+        pfpimage = true
+        active = false
+        logo = true
+        pressjumpwords = true
+        if SaveData.firstBootCompleted then
+            bootmenu.startedmenu = 0
+        end
+        if Time.month() == 03 and Time.day() == 17 then
+            stpatricksday = true
+        end
+        if resetMusic then
+            Sound.restoreMusic(-1)
+        end
     end
-    if Time.month() == 03 and Time.day() == 17 then
-        stpatricksday = true
-    end
-end
-
-local function ExitDialogueMusicReset()
-    bootmenu.menuactive = false
-    active = false
-    logo = true
-    playernamebyImg = true
-    pfpimage = true
-    pressjumpwords = true
-    if SaveData.firstBootCompleted then
-        bootmenu.startedmenu = 0
-    end
-    if Time.month() == 03 and Time.day() == 17 then
-        stpatricksday = true
-    end
-    Sound.restoreMusic(-1)
 end
 
 local function MusicReset()
@@ -815,10 +799,6 @@ local function SaveEraseStart()
     Misc.eraseSaveSlot(Misc.saveSlot())
     --Then make the message telling that it's erased.
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000057"), pauses = false, updatesInPause = true})
-end
-
-local function ExitToIntro() --This command will auto load the intro
-    Level.load("SMAS - Intro.lvlx")
 end
 
 local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
@@ -855,19 +835,19 @@ local function BootCredits() --The credits lvl will probably be scrapped or not,
     Level.load("SMAS - Credits.lvlx")
 end
 
-local function RestartSMASPlusPlusResetSave() --This restarts SMAS++ entirely, when erasing the save data
+local function RestartSMASPlusPlus(clearSave) --This restarts SMAS++ entirely
+    if clearSave == nil then
+        clearSave = false
+    end
     Sound.muteMusic(-1)
     exitscreen = true
     Routine.wait(0.5)
-    SysManager.clearSaveDataAndGameDataAndRestart()
-end
-
-local function RestartSMASPlusPlus() --This restarts SMAS++ entirely
-    Sound.muteMusic(-1)
-    exitscreen = true
-    Routine.wait(0.5)
-    if not Misc.loadEpisode("Super Mario All-Stars++") then
-        error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
+    if clearSave then
+        SysManager.clearSaveDataAndGameDataAndRestart()
+    else
+        if not Misc.loadEpisode("Super Mario All-Stars++") then
+            error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
+        end
     end
 end
 
@@ -877,7 +857,8 @@ local function BootGameHelpPreExecute() --Boot the game help level, the boot men
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load("SMAS - Game Help (Boot Menu).lvlx", nil, nil)
+    --GameData.gameHelpIntroActive = true
+    Level.load("SMAS - Game Help (Boot Menu).lvlx")
 end
 
 local function BootOnlinePreExecute() --Boot the Online Menu level
@@ -886,7 +867,7 @@ local function BootOnlinePreExecute() --Boot the Online Menu level
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load("SMAS - Online (Menu).lvlx", nil, nil)
+    Level.load("SMAS - Online (Menu).lvlx")
 end
 
 local function PigeonRaca1() --This executes the True Final Battle
@@ -894,7 +875,7 @@ local function PigeonRaca1() --This executes the True Final Battle
         player.keys.jump = KEYS_UNPRESSED
         Routine.wait(4.5) --Wait until loading the True Final Battle cutscene...
         bootmenu.startedmenu = 0
-        Level.load("SMAS - Raca's World (Part 0).lvlx", nil, nil)
+        Level.load("SMAS - Raca's World (Part 0).lvlx")
     end
 end
 
@@ -914,6 +895,29 @@ local function foolsinapril() --April Fools event for 4/1 of any year
     GameData.____holidayMenuEventEnded = true
     bootmenu.startedmenu = 0
 end
+
+local function SettingsSubmenu1()
+    littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question OptionsSubmenuOne>", speakerName = "Manage Settings", pauses = false, updatesInPause = true})
+end
+
+local function SettingsSubmenu2()
+    littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question OptionsSubmenuTwo>", speakerName = "Resolution Settings", pauses = false, updatesInPause = true})
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function bootmenu.onInitAPI() --This requires some libraries to start
     registerEvent(bootmenu,"onExit")
@@ -1058,7 +1062,7 @@ function bootmenu.onTick()
             GameData.firstbootkeyboardconfig = false
         end
         if GameData.reopenmenumusreset == true then
-            Routine.run(BootDialogueMusicReset)
+            Routine.run(BootDialogue, true)
             GameData.reopenmenumusreset = false
         end
         if GameData.musreset == true then
@@ -1326,7 +1330,7 @@ function bootmenu.onDraw()
         end
         if versionactive then
             Graphics.drawBox{x=710, y=5, width=84, height=28, color=Color.black..0.5, priority=-7}
-            textplus.print{x=718, y=10, text = versionnumber, priority=-6, color=Color.white, font=fontthree, xscale = 1.6, yscale = 1.6} --Version number of the episode
+            textplus.print{x=718, y=10, text = bootmenu.versionnumber, priority=-6, color=Color.white, font=fontthree, xscale = 1.6, yscale = 1.6} --Version number of the episode
         end
         if escquit then
             textplus.print{x=12, y=12, text = "Press pause to quit.", priority=-6, color=Color.yellow, xscale = 1.6, yscale = 1.6}
@@ -1423,6 +1427,7 @@ if SMBX_VERSION == VER_SEE_MOD then
 end
 littleDialogue.registerAnswer("MainMenu",{text = "Main Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
 littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("MainMenu",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
 littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
 littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
 
@@ -1433,21 +1438,28 @@ littleDialogue.registerAnswer("BattleSelect",{text = "Rush Mode (1P)",chosenFunc
 
 
 littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("Options",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
 littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
 littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
 littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
-littleDialogue.registerAnswer("Options",{text = "Toggle Main Menu Music Shuffle Mode",chosenFunction = function() Routine.run(turnOnRngMusic) end})
-littleDialogue.registerAnswer("Options",{text = "Change Player Name",chosenFunction = function() Routine.run(ChangeName1) end})
-littleDialogue.registerAnswer("Options",{text = "Change Profile Picture",chosenFunction = function() Routine.run(ChangePFP1) end})
-littleDialogue.registerAnswer("Options",{text = "Change Clock Theme",chosenFunction = function() Routine.run(ClockSelect1) end})
-littleDialogue.registerAnswer("Options",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionSelect1) end})
-littleDialogue.registerAnswer("Options",{text = "Toggle Letterbox Scaling",chosenFunction = function() Routine.run(ResolutionChangeScale3) end})
-littleDialogue.registerAnswer("Options",{text = "Toggle Resolution Border",chosenFunction = function() Routine.run(ResolutionChangeBorder2) end})
-littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
 littleDialogue.registerAnswer("Options",{text = "Accessibility Options",chosenFunction = function() Routine.run(AccessibilityOptions1) end})
-littleDialogue.registerAnswer("Options",{text = "Save Options",chosenFunction = function() Routine.run(SaveOptions1) end})
-littleDialogue.registerAnswer("Options",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
+littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
+littleDialogue.registerAnswer("Options",{text = "Manage Settings",chosenFunction = function() Routine.run(SettingsSubmenu1) end})
+littleDialogue.registerAnswer("Options",{text = "Resolution Settings",chosenFunction = function() Routine.run(SettingsSubmenu2) end})
+littleDialogue.registerAnswer("Options",{text = "Save Data Settings",chosenFunction = function() Routine.run(SaveOptions1) end})
+
+
+littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
+littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Player Name",chosenFunction = function() Routine.run(ChangeName1) end})
+littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Profile Picture",chosenFunction = function() Routine.run(ChangePFP1) end})
+littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Clock Theme",chosenFunction = function() Routine.run(ClockSelect1) end})
+
+
+
+littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionSelect1) end})
+littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Toggle Letterbox Scaling",chosenFunction = function() Routine.run(ResolutionChangeScale3) end})
+littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Toggle Resolution Border",chosenFunction = function() Routine.run(ResolutionChangeBorder2) end})
 
 
 
@@ -1547,14 +1559,14 @@ littleDialogue.registerAnswer("SavingMenuOne",{text = "Erase Save Data",chosenFu
 
 
 
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
+littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(BootDialogue, true) end})
 littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() Routine.run(SaveEraseStart) end})
 
 
 
 
 littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogueMusicReset) end})
+littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogue, true) end})
 
 
 
@@ -1590,7 +1602,7 @@ littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = funct
 
 
 
-littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlusResetSave) end})
+littleDialogue.registerAnswer("RestartOption",{text = "Restart",chosenFunction = function() Routine.run(RestartSMASPlusPlus, true) end})
 
 
 
@@ -1645,7 +1657,7 @@ littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Skip",chosenFunct
 
 
 
-littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogueFirstBoot) end})
+littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogue, false, true) end})
 
 
 
@@ -1716,7 +1728,7 @@ littleDialogue.registerAnswer("OkayToMenuTheme",{text = "Oh yeah, right.",chosen
 
 
 
-littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() Routine.run(ExitDialogueMusicReset) end})
+littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() Routine.run(ExitDialogue, true) end})
 
 
 

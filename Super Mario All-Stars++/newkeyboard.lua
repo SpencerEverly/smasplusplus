@@ -13,6 +13,7 @@ keyboard.movement.board   = {type = 0, position = -450, origin = -450, goal = 17
 keyboard.movement.buttons = {type = 0, position = 600,  origin = 600,  goal = 395, speed = -10}
 
 keyboard.closed = false
+keyboard.closedWithoutValues = false
 keyboard.timer = 2
 
 -- Image table
@@ -237,6 +238,7 @@ function keyboard.create(args)
         draw = args.draw or drawBoard,                        -- function that draw this kboard
         limit = args.limit or 22,                             -- how many characters of text can be typed
         isImportant = args.isImportant,                       -- if set to true, players will not be able to close it without putting something
+        isImportantButCanBeCancelled = args.isImportantButCanBeCancelled, --If true, the keyboard can be closed without saving changes if it's important
         clear = args.clear,                                   -- some things will be cleared if set to true
         setVariable = args.setVariable or SaveData.savedText, -- set variable for where the text gets entered, e.g. SaveData can be used
         pause = args.pause,                                   -- whether to pause when typing or not
@@ -277,7 +279,10 @@ function keyb:close()
     mov.buttons.type = 2
     opacityFadeType = 2
     movementOver = false
-    keyboard.closed = true
+    if not keyboard.closedWithoutValues then
+        keyboard.closed = true
+    end
+    keyboard.closedWithoutValues = false
 end
 
 registerEvent(keyboard, "onInputUpdate")
@@ -388,12 +393,13 @@ function keyboard.onInputUpdate()
                         warningOpacity = 5
                     end
                 elseif buttonSel == 6 then --Exit
-                    if not actBoard.isImportant then
+                    if (not actBoard.isImportant or actBoard.isImportantButCanBeCancelled) then
                         actBoard.text = ""
                         actBoard.setVariable = actBoard.text
                         Sound.playSFX("console/console_success.ogg")
+                        keyboard.closedWithoutValues = true
                         actBoard:close()
-                    else
+                    elseif actBoard.isImportant and not actBoard.isImportantButCanBeCancelled then
                         warningText = "You can't exit!"
                         Sound.playSFX("console/console_error.ogg")
                         warningOpacity = 5
@@ -442,6 +448,28 @@ function keyboard.onDraw()
             end
             keyboard.timer = 2
             keyboard.closed = false
+        end
+    end
+    if keyboard.closedWithoutValues then
+        keyboard.timer = keyboard.timer - 1
+        if keyboard.timer <= 0 then
+            if GameData.playernameenter then
+                if smasbooleans.mainMenuActive then
+                    GameData.reopenmenu = true
+                end
+            end
+            if GameData.playerpfpenter then
+                if smasbooleans.mainMenuActive then
+                    GameData.reopenmenu = true
+                end
+            end
+            if GameData.playernameenterfirstboot then
+                if smasbooleans.mainMenuActive then
+                    GameData.firstbootkeyboardconfig = true
+                end
+            end
+            keyboard.timer = 2
+            keyboard.closedWithoutValues = false
         end
     end
 end
