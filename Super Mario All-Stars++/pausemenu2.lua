@@ -190,10 +190,10 @@ local function changeresolution()
         SaveData.resolution = "gba"
         Routine.waitFrames(1, true)
         smasresolutions.changeResolution()
-    elseif screenModes == RESOLUTION_THREEDS then
+    --[[elseif screenModes == RESOLUTION_THREEDS then
         SaveData.resolution = "3ds"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasresolutions.changeResolution()]]
     end
 end
 
@@ -1616,7 +1616,7 @@ function pauseSpecifics()
         pauseplus.createOption("soundsettings",{text = "Use the Original SMBX Sound System",selectionType = pauseplus.SELECTION_CHECKBOX,description = "This options disables all the new sounds (Except P-Wing) and reverts back to the original sound system.",action = function() Routine.run(smbxdefaultsoundsystem) end})
         
         --Resolution Settings
-        pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA,RESOLUTION_THREEDS}, action = function() Routine.run(changeresolution) end})
+        pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA--[[,RESOLUTION_THREEDS]]}, action = function() Routine.run(changeresolution) end})
         pauseplus.createOption("resolutionsettings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() Routine.run(changeletterbox) end})
         pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() Routine.run(changeresolutionborder) end})
         

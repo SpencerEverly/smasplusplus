@@ -131,7 +131,7 @@ function smasresolutions.changeResolution()
             smallScreen.offsetY = 0
         end
     end
-    if SaveData.resolution == "3ds" then
+    --[[if SaveData.resolution == "3ds" then
         customCamera.defaultScreenWidth = 700
         customCamera.defaultScreenHeight = 419
         customCamera.defaultZoom = 0.58
@@ -149,7 +149,7 @@ function smasresolutions.changeResolution()
             smallScreen.offsetX = 0
             smallScreen.offsetY = 0
         end
-    end
+    end]]
 end
 
 function smasresolutions.onDraw()
@@ -169,12 +169,12 @@ function smasresolutions.onDraw()
             Graphics.drawImageWP(gbaborder, 0, 0, 8)
         end
     end
-    if SaveData.resolution == "3ds" then
+    --[[if SaveData.resolution == "3ds" then
         Graphics.drawImageWP(threedsbars, 0, 0, 7)
         if SaveData.borderEnabled then
             Graphics.drawImageWP(threedsborder, 0, 0, 8)
         end
-    end
+    end]]
 end
 
 return smasresolutions

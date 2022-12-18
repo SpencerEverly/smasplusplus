@@ -18,7 +18,7 @@ npcManager.setNpcSettings{
     gfxwidth=12,
     gfxheight=12,
     
-    effect = 774,
+    effect = 995,
     noyoshi = true,
 }
 

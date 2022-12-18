@@ -216,12 +216,6 @@ end
 if SaveData.totalCoins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
     SaveData.totalCoins = 0
 end
-
-if SaveData.totalcoins then --If using the old SaveData function, use the new one and nil the original out
-    SaveData.totalCoins = SaveData.totalcoins
-    SaveData.totalcoins = nil
-end
-
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
     SaveData.deathCount = 0
 end
@@ -231,7 +225,7 @@ end
 if SaveData.totalCoinsClassic == nil then --This will display a classic coin count for the episode
     SaveData.totalCoinsClassic = 0
 end
-if SaveData.totalScoreClassic == nil then --This will add a score counter which goes up to a billion, cause why not
+if SaveData.totalScoreClassic == nil then --This will add a score counter which goes up to a trillion, cause why not
     SaveData.totalScoreClassic = 0
 end
 if SaveData.reserveBoxItem == nil then
@@ -322,6 +316,16 @@ smastables._noLoadingSoundLevels = {
     "map.lvlx"
 }
 
+--Fixes in case if edits occur throughout to prevent errors
+if SaveData.resolution == "3ds" then
+    SaveData.resolution = "fullscreen"
+end
+
+if SaveData.totalcoins then --If using the old SaveData function, use the new one and nil the original out
+    SaveData.totalCoins = SaveData.totalcoins
+    SaveData.totalcoins = nil
+end
+
 --Now use onLoad to play the loading sound...
 function onLoad()
     if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and loadactivate then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
@@ -392,11 +396,10 @@ function onStart() --Now do onStart...
     if SaveData.firstBootCompleted == 1 then
         SaveData.firstBootCompleted = true
     end
-    if not Misc.inMarioChallenge() and (not SaveData.disableX2char) and not Misc.inEditor() then
+    if not Misc.inMarioChallenge() and (not SaveData.disableX2char) and not Misc.inEditor() and (SaveData.currentCharacter ~= nil and SaveData.currentCostume ~= nil) then
         player.character = SaveData.currentCharacter
         player.setCostume(SaveData.currentCharacter, SaveData.currentCostume, false)
     end
-    Audio.MusicVolume(nil) --Reset the music volume on onStart, just in case
 end
 
 local cameratimer = 10
@@ -406,13 +409,13 @@ if GameData.__gifIsRecording == nil then
 end
 local gifRecordTimer = 0
 
-local inputhudbg = Graphics.loadImage(Misc.resolveFile("inputhud/inputhud.png"))
-local controlkey = Graphics.loadImage(Misc.resolveFile("inputhud/control.png"))
-local jumpkey = Graphics.loadImage(Misc.resolveFile("inputhud/jump.png"))
-local altjumpkey = Graphics.loadImage(Misc.resolveFile("inputhud/altjump.png"))
-local runkey = Graphics.loadImage(Misc.resolveFile("inputhud/run.png"))
-local altrunkey = Graphics.loadImage(Misc.resolveFile("inputhud/altrun.png"))
-local bottomkeys = Graphics.loadImage(Misc.resolveFile("inputhud/bottomkey.png"))
+local inputhudbg = Graphics.loadImageResolved("inputhud/inputhud.png")
+local controlkey = Graphics.loadImageResolved("inputhud/control.png")
+local jumpkey = Graphics.loadImageResolved("inputhud/jump.png")
+local altjumpkey = Graphics.loadImageResolved("inputhud/altjump.png")
+local runkey = Graphics.loadImageResolved("inputhud/run.png")
+local altrunkey = Graphics.loadImageResolved("inputhud/altrun.png")
+local bottomkeys = Graphics.loadImageResolved("inputhud/bottomkey.png")
 
 function onDraw()
     if Misc.inEditor() then
@@ -552,7 +555,7 @@ function onTick()
 end
 
 function onPause(evt)
-    evt.cancelled = true;
+    evt.cancelled = true
     isPauseMenuOpen = not isPauseMenuOpen
 end
 
