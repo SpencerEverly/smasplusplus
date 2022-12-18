@@ -126,4 +126,9 @@ function File.fileToByteSize(file)
     return output
 end
 
+function File.fileToKilobyteSize(file)
+    local bytesize = File.fileToByteSize(file)
+    return bytesize / 1024
+end
+
 return File
