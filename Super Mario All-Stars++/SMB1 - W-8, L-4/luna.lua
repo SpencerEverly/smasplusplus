@@ -1,6 +1,12 @@
 local level_dependencies_normal = require("level_dependencies_normal")
 local pauseplus = require("pauseplus")
 
+function onStart()
+    if Checkpoint.getActive() == Checkpoint(3) then
+        Timer.activate(150)
+    end
+end
+
 function onEvent(eventName)
     if eventName == ("Axed") then
         Sound.playSFX(4)

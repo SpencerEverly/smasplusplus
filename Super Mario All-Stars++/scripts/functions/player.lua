@@ -762,4 +762,8 @@ function Playur.findAnimation(p) --This function returns the name of the custom 
     end
 end
 
+function Playur.currentWarp(plr)
+    return plr:mem(0x15E, FIELD_WORD)
+end
+
 return Playur
