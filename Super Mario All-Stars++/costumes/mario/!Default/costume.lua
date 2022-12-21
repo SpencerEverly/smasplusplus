@@ -387,7 +387,7 @@ local function findAnimation(p)
     end
     
     if p:mem(0x164,FIELD_WORD) ~= 0 then -- tail attack
-        return "tailAttack"
+        return nil
     end
 
 

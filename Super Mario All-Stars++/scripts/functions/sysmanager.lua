@@ -377,4 +377,12 @@ function SysManager.loadDefaultCharacterIni()
     )
 end
 
+function SysManager.getEnteredCheckpointID()
+    if Checkpoint.getActive() ~= nil then
+        return Checkpoint.getActive().id
+    else
+        return 0
+    end
+end
+
 return SysManager

@@ -1,4 +1,4 @@
-local level_dependencies_normal= require("level_dependencies_normal")
+local level_dependencies_normal = require("level_dependencies_normal")
 
 function onEvent(eventName)
     if eventName == "Floor Movement 3" then
@@ -6,7 +6,7 @@ function onEvent(eventName)
         Defines.earthquake = 10
     end
     if eventName == "Boss Start" then
-        Screen.setCameraPosition(-159200,-160600,-160000,-158400,1)
+        --Screen.setCameraPosition(-159200,-160600,-160000,-158400,1)
         Sound.playSFX(22)
         Sound.changeMusic("_OST/Super Mario Bros 3/Boss.spc|0;g=2.5", 2)
     end
@@ -22,14 +22,5 @@ function onEvent(eventName)
     if eventName == "Shake Screen" then
         Sound.playSFX(22)
         Defines.earthquake = 5
-    end
-end
-
-function onTick()
-    for k,v in ipairs(NPC.get(38)) do
-        if v.layerObj ~= nil and not Layer.isPaused() then
-            v.x = v.x + v.layerObj.speedX
-            v.y = v.y + v.layerObj.speedY
-        end
     end
 end

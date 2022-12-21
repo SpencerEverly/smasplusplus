@@ -2,7 +2,7 @@ local level_dependencies_normal = require("level_dependencies_normal")
 local pauseplus = require("pauseplus")
 
 function onStart()
-    if Checkpoint.getActive() == Checkpoint(3) then
+    if SysManager.getEnteredCheckpointID() == 3 then
         Timer.activate(150)
     end
 end
