@@ -57,10 +57,6 @@ littleDialogue.registerStyle("endingtextone",{
     selectorImageEnabled = false,
 })
 
-littleDialogue.registerStyle("smwjapanese",{
-
-})
-
 areaNames.sectionNames = {
     [0] = "Me and Larry City (Main City)",
     [1] = "Building 3: ???",
@@ -79,124 +75,127 @@ areaNames.sectionNames = {
     [14] = "Building 6: Shop Area",
 }
 
+function StageNegative1()
+    local ZeroStars = Layer.get("Stage 0 - 0 Stars")
+    local Construction = Layer.get("Stage 5 - Construction")
+    ZeroStars:show(true)
+    Construction:show(true)
+end
+
 function Stage0()
-    local layer1 = Layer.get("Stage 0.5 - 4 Stars")
-    local layer2 = Layer.get("Stage 5 - Construction")
-    local layer3 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer4 = Layer.get("Stage 2 and Beyond - Mayor")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
+    local FourStars = Layer.get("Stage 0.5 - 4 Stars")
+    local Construction = Layer.get("Stage 5 - Construction")
+    FourStars:show(true)
+    Construction:show(true)
 end
 
 function Stage1()
-    local layer1 = Layer.get("Stage 1 - 10 Stars")
-    local layer2 = Layer.get("Stage 5 - Construction")
-    local layer3 = Layer.get("Stage 0 - 0 Stars")
-    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
-    layer5:hide(true)
+    local TenStars = Layer.get("Stage 1 - 10 Stars")
+    local Construction = Layer.get("Stage 5 - Construction")
+    TenStars:show(true)
+    Construction:show(true)
 end
 
 function Stage2()
-    local layer1 = Layer.get("Stage 2 - 16 Stars")
-    local layer2 = Layer.get("Stage 5 - Construction")
-    local layer3 = Layer.get("Stage 0 - 0 Stars")
-    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
-    layer5:show(true)
+    local SixteenStars = Layer.get("Stage 2 - 16 Stars")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    SixteenStars:show(true)
+    Construction:show(true)
+    Mayor:show(true)
 end
 
 function Stage3()
-    local layer1 = Layer.get("Stage 3 - 22 Stars")
-    local layer2 = Layer.get("Stage 5 - Construction")
-    local layer3 = Layer.get("Stage 0 - 0 Stars")
-    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
-    layer5:show(true)
+    local TwentyTwoStars = Layer.get("Stage 3 - 22 Stars")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    TwentyTwoStars:show(true)
+    Construction:show(true)
+    Mayor:show(true)
 end
 
 function Stage4()
-    local layer1 = Layer.get("Stage 4 - 28 Stars")
-    local layer2 = Layer.get("Stage 5 - Construction")
-    local layer3 = Layer.get("Stage 0 - 0 Stars")
-    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
-    layer5:show(true)
+    local TwentyEightStars = Layer.get("Stage 4 - 28 Stars")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    TwentyEightStars:show(true)
+    Construction:show(true)
+    Mayor:show(true)
 end
 
 function Stage5()
-    local layer1 = Layer.get("Stage 5 - 32 Stars")
-    local layer2 = Layer.get("Stage 5 - Renovation")
-    local layer3 = Layer.get("Stage 0 - 0 Stars")
-    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
-    local layer6 = Layer.get("Stage 5 - Construct Stage 1")
-    local layer7 = Layer.get("Stage 5 - Construction")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
-    layer5:show(true)
-    layer6:show(true)
-    layer7:hide(true)
+    local ThirtyTwoStars = Layer.get("Stage 5 - 32 Stars")
+    local Renovation = Layer.get("Stage 5 - Renovation")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    local ConstructionWIP = Layer.get("Stage 5 - Construct Stage 1")
+    ThirtyTwoStars:show(true)
+    Renovation:show(true)
+    Mayor:show(true)
+    ConstructionWIP:show(true)
     Sound.changeMusic("_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg", 4)
 end
 
 function Stage6()
-    local layer1 = Layer.get("Stage 6 - 38 Stars")
-    local layer2 = Layer.get("Stage 5 - Renovation")
-    local layer3 = Layer.get("Stage 0 - 0 Stars")
-    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
-    local layer6 = Layer.get("Stage 6 - Construct Stage 2")
-    local layer7 = Layer.get("Stage 5 - Construction")
-    local layer8 = Layer.get("Stage 6 - Yoshi Rooms Unfinished 1")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
-    layer5:show(true)
-    layer6:show(true)
-    layer7:hide(true)
-    layer8:show(true)
+    local ThirtyEightStars = Layer.get("Stage 6 - 38 Stars")
+    local Renovation = Layer.get("Stage 5 - Renovation")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    local ConstructionWIP2 = Layer.get("Stage 6 - Construct Stage 2")
+    local YoshiRoomsWIP = Layer.get("Stage 6 - Yoshi Rooms Unfinished 1")
+    ThirtyEightStars:show(true)
+    Renovation:show(true)
+    Mayor:show(true)
+    ConstructionWIP2:show(true)
+    YoshiRoomsWIP:show(true)
     Sound.changeMusic("_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg", 4)
 end
 
 function Stage7()
-    local layer1 = Layer.get("Stage 7 - 44 Stars")
-    local layer2 = Layer.get("Stage 5 - Renovation")
-    local layer3 = Layer.get("Stage 0 - 0 Stars")
-    local layer4 = Layer.get("Stage 0 - 0 Stars (TC)")
-    local layer5 = Layer.get("Stage 2 and Beyond - Mayor")
-    local layer6 = Layer.get("Stage 6 - Construct Stage 2")
-    local layer7 = Layer.get("Stage 5 - Construction")
-    local layer8 = Layer.get("Stage 7 - Yoshi Rooms Finished")
-    layer1:show(true)
-    layer2:show(true)
-    layer3:hide(true)
-    layer4:hide(true)
-    layer5:show(true)
-    layer6:show(true)
-    layer7:hide(true)
-    layer8:show(true)
+    local FourtyFourStars = Layer.get("Stage 7 - 44 Stars")
+    local Renovation = Layer.get("Stage 5 - Renovation")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    local Construction2 = Layer.get("Stage 6 - Construct Stage 2")
+    local YoshiRooms = Layer.get("Stage 7 - Yoshi Rooms Finished")
+    FourtyFourStars:show(true)
+    Renovation:show(true)
+    Mayor:show(true)
+    Construction2:show(true)
+    YoshiRooms:show(true)
+end
+
+function runHubUpdate()
+    Routine.waitFrames(1, true)
+    if not malcmusic.holiday then --and SaveData.genosideStage <= 2 then
+        if SaveData.totalStarCount <= 3 or SaveData.totalStarCount == nil then
+            StageNegative1()
+        end
+        if SaveData.totalStarCount >= 4 and SaveData.totalStarCount <= 9 then
+            Stage0()
+        end
+        if SaveData.totalStarCount >= 10 and SaveData.totalStarCount <= 15 then
+            Stage1()
+        end
+        if SaveData.totalStarCount >= 16 and SaveData.totalStarCount <= 21 then
+            Stage2()
+        end
+        if SaveData.totalStarCount >= 22 and SaveData.totalStarCount <= 27 then
+            Stage3()
+        end
+        if SaveData.totalStarCount >= 28 and SaveData.totalStarCount <= 31 then
+            Stage4()
+        end
+        if SaveData.totalStarCount >= 32 and SaveData.totalStarCount <= 37 then
+            Stage5()
+        end
+        if SaveData.totalStarCount >= 38 and SaveData.totalStarCount <= 43 then
+            Stage6()
+        end
+        if SaveData.totalStarCount >= 44 then
+            Stage7()
+        end
+    end
+    --if SaveData.genosideStage >= 3 and SaveData.currentCostume == "UNDERTALE-FRISK" then
+    --    triggerEvent("StageGenoside")
+    --end
 end
 
 function onStart()
@@ -215,35 +214,7 @@ function onStart()
             p.setCostume(5, nil)
         end
     end
-    if not malcmusic.holiday then --and SaveData.genosideStage <= 2 and SaveData.currentCostume ~= "UNDERTALE-FRISK" then
-        if SaveData.totalStarCount >= 4 and SaveData.totalStarCount <= 9 then
-            Routine.run(Stage0)
-        end
-        if SaveData.totalStarCount >= 10 and SaveData.totalStarCount <= 15 then
-            Routine.run(Stage1)
-        end
-        if SaveData.totalStarCount >= 16 and SaveData.totalStarCount <= 21 then
-            Routine.run(Stage2)
-        end
-        if SaveData.totalStarCount >= 22 and SaveData.totalStarCount <= 27 then
-            Routine.run(Stage3)
-        end
-        if SaveData.totalStarCount >= 28 and SaveData.totalStarCount <= 31 then
-            Routine.run(Stage4)
-        end
-        if SaveData.totalStarCount >= 32 and SaveData.totalStarCount <= 37 then
-            Routine.run(Stage5)
-        end
-        if SaveData.totalStarCount >= 38 and SaveData.totalStarCount <= 43 then
-            Routine.run(Stage6)
-        end
-        if SaveData.totalStarCount >= 44 then
-            Routine.run(Stage7)
-        end
-    end
-    --if SaveData.genosideStage >= 3 and SaveData.currentCostume == "UNDERTALE-FRISK" then
-    --    triggerEvent("StageGenoside")
-    --end
+    Routine.run(runHubUpdate)
 end
 
 function onDraw()
