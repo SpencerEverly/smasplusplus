@@ -123,6 +123,7 @@ function bowserKilled(npc, harmType)
 end
 
 function SMB3BowserNPC.onNPCKill(eventToken, npc, harmType)
+    if npc.id ~= npcID then return end
     if npc.id == NPC_ID then
         local data = npc.data
         if harmType == HARM_TYPE_OFFSCREEN and not data.dead then

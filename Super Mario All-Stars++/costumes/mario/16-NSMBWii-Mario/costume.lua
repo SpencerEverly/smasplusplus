@@ -35,7 +35,7 @@ costume.hammerConfig = {
     framestyle = 1,
 }
 
-
+costume.shellHoldTimer = 0
 
 costume.playersList = {}
 costume.playerData = {}
@@ -794,11 +794,9 @@ function costume.onPostNPCKill(npc, harmType)
     for _,p in ipairs(Player.get()) do
         local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
         local starman = table.map{996,994}
-        for k,v in ipairs(NPC.get({996,994})) do
-            if starman[npc.id] and Colliders.collide(p, v) then
-                local rngkey = rng.randomInt(1,3)
-                Sound.playSFX("mario/16-NSMBWii-Mario/mario-gotstar"..rngkey..".ogg")
-            end
+        if starman[npc.id] and Colliders.collide(p, npc) then
+            local rngkey = rng.randomInt(1,3)
+            Sound.playSFX("mario/16-NSMBWii-Mario/mario-gotstar"..rngkey..".ogg")
         end
     end
 end
@@ -901,8 +899,18 @@ function costume.onTick()
         handleDucking(p)
         
         --Shell kick voice
+        if p.holdingNPC ~= nil and p.keys.run then
+            costume.shellHoldTimer = costume.shellHoldTimer + 1
+            if costume.shellHoldTimer == 1 then
+                local rngshellkick = rng.randomInt(1,3)
+                if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    Sound.playSFX("mario/16-NSMBWii-Mario/mario-shellkick"..rngshellkick..".ogg")
+                end
+            end
+        end
         if p.holdingNPC ~= nil and p.keys.run == KEYS_UNPRESSED then
-            local rngshellkick = rng.randomInt(1,6)
+            costume.shellHoldTimer = 0
+            local rngshellkick = rng.randomInt(3,6)
             if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
                 Sound.playSFX("mario/16-NSMBWii-Mario/mario-shellkick"..rngshellkick..".ogg")
             end

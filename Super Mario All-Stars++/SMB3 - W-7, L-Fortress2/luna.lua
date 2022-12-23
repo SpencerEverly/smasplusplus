@@ -6,9 +6,9 @@ function onEvent(eventName)
         Defines.earthquake = 10
     end
     if eventName == "Boss Start" then
-        --Screen.setCameraPosition(-159200,-160600,-160000,-158400,1)
+        Screen.setCameraPosition(-178528,-180600,-180000,-177728,1)
         Sound.playSFX(22)
-        Sound.changeMusic("_OST/Super Mario Bros 3/Boss.spc|0;g=2.5", 2)
+        Sound.changeMusic("_OST/Super Mario Bros 3/Boss.spc|0;g=2.5", 1)
     end
     if eventName == "Boss Start 2" then
         --Sound.playSFX("true-reveal.ogg")

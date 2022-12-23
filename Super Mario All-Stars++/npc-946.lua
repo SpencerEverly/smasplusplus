@@ -120,6 +120,7 @@ function boomBoom.onInitAPI()
 end
 
 function boomBoom.onNPCHarm(eventToken, v, killReason, culprit)
+    if v.id ~= npcID then return end
     local data = v.data
     if v.id == npcID and killReason == HARM_TYPE_JUMP or killReason == HARM_TYPE_SPINJUMP then
         if data.bossHP > 0 then
