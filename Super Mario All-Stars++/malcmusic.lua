@@ -64,127 +64,48 @@ end
 
 function malcmusic.onStart()
     weatherControlDay = SaveData.dateplayedweather
-    --Daily weather, no rng intended anymore unless the day is tomorrow
-    for i = 0,20 do
-        local SectionAll = Section(i)
-        if Time.month() == 3 and Time.day() == 17 then --St. Patrick's Day
-            malcmusic.holiday = true
-            if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
-                triggerEvent("StPatricksDay")
-            end
-        end
-        
-        
-        if Time.month() == 4 and Time.day() == 4 then --Spencer Everly Day
-            malcmusic.holiday = true
-            if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
-                triggerEvent("SEDay")
-            end
-        end
-        
-        
-        if Time.month() == SaveData.eastermonth and Time.day() == SaveData.easterday then --Easter Sunday
-            malcmusic.holiday = true
-            if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
-                triggerEvent("Easter")
-                for i = 15,19 do
-                    if Time.hour() == i then
-                        triggerEvent("EasterHunt")
-                    end
-                end
-            end
-        end
-        
-        
-        if Time.month() == 4 and Time.day() == 20 then --Weed Day
-            malcmusic.holiday = true
-            if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
-                triggerEvent("Weed")
-            end
-        end
-        
-        
-        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", 9)[1] then --Labor Day
-            malcmusic.holiday = true
-            if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
-                triggerEvent("LaborDay")
-            end
-        end
-        
-        
-        if Time.month() == 10  and Time.day() == 31 then --Halloween
-            malcmusic.holiday = true
-            if malcmusic.holiday == true then
-                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
-                triggerEvent("Halloween")
-            end
-        end
-        
-        
-        if Time.month() == 12 and Time.day() == 25 then --Christmas Day
-            malcmusic.holiday = true
-            if malcmusic.holiday == true then
-                if player.section == 0 then
-                    Section(player.section).effects.weather = WEATHER_SNOW
-                end
-                if player.section == 6 then
-                    Section(player.section).effects.weather = WEATHER_SNOW
-                end
-                if player.section == 10 then
-                    Section(player.section).effects.weather = WEATHER_SNOW
-                end
-                SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
-                triggerEvent("Christmas")
-            end
-        end
-    end
 end
 
 function malcmusic.onTick()
     for i = 0,20 do
         local SectionAll = Section(i)
-        if Time.month() == 3 and Time.day() == 17 then --St. Patrick's Day
-            if malcmusic.holiday == true then
+        --[[if Time.month() == 3 and Time.day() == 17 then --St. Patrick's Day
+            if malcmusic.holiday then
                 SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
             end
         end
         
         
         if Time.month() == 4 and Time.day() == 4 then --Spencer Everly Day (Foundation of my YouTube channel)
-            if malcmusic.holiday == true then
+            if malcmusic.holiday then
                 SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
             end
         end
         
         
         if Time.month() == SaveData.eastermonth and Time.day() == SaveData.easterday then --Easter Sunday
-            if malcmusic.holiday == true then
+            if malcmusic.holiday then
                 SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
             end
         end
         
         
         if Time.month() == 4 and Time.day() == 20 then --Weed day (420)
-            if malcmusic.holiday == true then
+            if malcmusic.holiday then
                 SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
             end
         end
         
         
         if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", 9)[1] then --Labor Day
-            if malcmusic.holiday == true then
+            if malcmusic.holiday then
                 SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
             end
-        end
+        end]]
         
         
         if Time.month() == 12 and Time.day() == 25 then --Christmas
-            if malcmusic.holiday == true then
+            if malcmusic.holiday then
                 if player.section == 0 then
                     snowState = true
                     prevState = false

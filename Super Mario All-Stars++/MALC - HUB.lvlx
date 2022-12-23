@@ -12463,7 +12463,7 @@ LR:"hubbricks";
 LR:"steveblocks";HD:1;
 LR:"Painting";HD:1;
 LR:"Snake Block Stuff";
-LR:"BusinessesOpen";
+LR:"BusinessesOpen";HD:1;
 LR:"BusinessesClosed";HD:1;
 LR:"X2Stuff";
 LR:"XStuff";HD:1;

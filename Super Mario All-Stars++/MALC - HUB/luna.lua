@@ -75,55 +75,154 @@ areaNames.sectionNames = {
     [14] = "Building 6: Shop Area",
 }
 
-function StageNegative1()
+--HOLIDAYS
+
+local function HolidayStPatricksDay()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local StPatricksDay = Layer.get("Stage Extra - St Patricks Day")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    OpenBusinesses:show(true)
+    Construction:show(true)
+    StPatricksDay:show(true)
+    Mayor:show(true)
+end
+
+local function HolidaySEDay()
+    local OpenBusinesses = Layer.get("BusinessesClosed")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local SEDay = Layer.get("Stage Extra - SE Day")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    OpenBusinesses:show(true)
+    Construction:show(true)
+    SEDay:show(true)
+    Mayor:show(true)
+end
+
+local function HolidayEaster()
+    local ClosedBusinesses = Layer.get("BusinessesClosed")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local EasterSunday = Layer.get("Stage Extra - Easter")
+    local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
+    ClosedBusinesses:show(true)
+    Construction:show(true)
+    EasterSunday:show(true)
+    Mayor:show(true)
+end
+
+local function HolidayWeed()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local SmokeWeed = Layer.get("Stage Extra - Somke Weed Everyday")
+    OpenBusinesses:show(true)
+    Construction:show(true)
+    SmokeWeed:show(true)
+end
+
+local function HolidayLaborDay()
+    local ClosedBusinesses = Layer.get("BusinessesClosed")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local LaborDay = Layer.get("Stage Extra - Labor Day")
+    ClosedBusinesses:show(true)
+    Construction:show(true)
+    LaborDay:show(true)
+end
+
+local function HolidayHalloween()
+    local ClosedBusinesses = Layer.get("BusinessesClosed")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local Halloween = Layer.get("Stage Extra - Halloween")
+    ClosedBusinesses:show(true)
+    Construction:show(true)
+    Halloween:show(true)
+end
+
+local function HolidayChristmas()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local Christmas = Layer.get("Stage Extra - Christmas")
+    OpenBusinesses:show(true)
+    Construction:show(true)
+    Christmas:show(true)
+end
+
+
+--EVENTS
+
+local function HolidayEasterHuntEvent()
+    local Pipe = Layer.get("CelebratoryPipe")
+    local EasterSundayEvent = Layer.get("Stage Extra - Easter (3 PM)")
+    Pipe:show(true)
+    EasterSundayEvent:show(true)
+end
+
+
+
+
+--STAGES
+
+local function StageNegative1()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local ZeroStars = Layer.get("Stage 0 - 0 Stars")
     local Construction = Layer.get("Stage 5 - Construction")
     ZeroStars:show(true)
     Construction:show(true)
+    OpenBusinesses:show(true)
 end
 
-function Stage0()
+local function Stage0()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local FourStars = Layer.get("Stage 0.5 - 4 Stars")
     local Construction = Layer.get("Stage 5 - Construction")
     FourStars:show(true)
     Construction:show(true)
+    OpenBusinesses:show(true)
 end
 
-function Stage1()
+local function Stage1()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local TenStars = Layer.get("Stage 1 - 10 Stars")
     local Construction = Layer.get("Stage 5 - Construction")
     TenStars:show(true)
     Construction:show(true)
+    OpenBusinesses:show(true)
 end
 
-function Stage2()
+local function Stage2()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local SixteenStars = Layer.get("Stage 2 - 16 Stars")
     local Construction = Layer.get("Stage 5 - Construction")
     local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
     SixteenStars:show(true)
     Construction:show(true)
     Mayor:show(true)
+    OpenBusinesses:show(true)
 end
 
-function Stage3()
+local function Stage3()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local TwentyTwoStars = Layer.get("Stage 3 - 22 Stars")
     local Construction = Layer.get("Stage 5 - Construction")
     local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
     TwentyTwoStars:show(true)
     Construction:show(true)
     Mayor:show(true)
+    OpenBusinesses:show(true)
 end
 
-function Stage4()
+local function Stage4()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local TwentyEightStars = Layer.get("Stage 4 - 28 Stars")
     local Construction = Layer.get("Stage 5 - Construction")
     local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
     TwentyEightStars:show(true)
     Construction:show(true)
     Mayor:show(true)
+    OpenBusinesses:show(true)
 end
 
-function Stage5()
+local function Stage5()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local ThirtyTwoStars = Layer.get("Stage 5 - 32 Stars")
     local Renovation = Layer.get("Stage 5 - Renovation")
     local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
@@ -132,10 +231,12 @@ function Stage5()
     Renovation:show(true)
     Mayor:show(true)
     ConstructionWIP:show(true)
+    OpenBusinesses:show(true)
     Sound.changeMusic("_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg", 4)
 end
 
-function Stage6()
+local function Stage6()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local ThirtyEightStars = Layer.get("Stage 6 - 38 Stars")
     local Renovation = Layer.get("Stage 5 - Renovation")
     local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
@@ -146,10 +247,12 @@ function Stage6()
     Mayor:show(true)
     ConstructionWIP2:show(true)
     YoshiRoomsWIP:show(true)
+    OpenBusinesses:show(true)
     Sound.changeMusic("_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg", 4)
 end
 
-function Stage7()
+local function Stage7()
+    local OpenBusinesses = Layer.get("BusinessesOpen")
     local FourtyFourStars = Layer.get("Stage 7 - 44 Stars")
     local Renovation = Layer.get("Stage 5 - Renovation")
     local Mayor = Layer.get("Stage 2 and Beyond - Mayor")
@@ -160,9 +263,91 @@ function Stage7()
     Mayor:show(true)
     Construction2:show(true)
     YoshiRooms:show(true)
+    OpenBusinesses:show(true)
 end
 
 function runHubUpdate()
+    --Daily weather, no rng intended anymore unless the day is tomorrow
+    for i = 0,20 do
+        local SectionAll = Section(i)
+        if Time.month() == 3 and Time.day() == 17 then --St. Patrick's Day
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
+                HolidayStPatricksDay()
+            end
+        end
+        
+        
+        if Time.month() == 4 and Time.day() == 4 then --Spencer Everly Day
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
+                HolidaySEDay()
+            end
+        end
+        
+        
+        if Time.month() == SaveData.eastermonth and Time.day() == SaveData.easterday then --Easter Sunday
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
+                HolidayEaster()
+                for j = 15,19 do
+                    if Time.hour() == j then
+                        HolidayEasterHuntEvent()
+                    end
+                end
+            end
+        end
+        
+        
+        if Time.month() == 4 and Time.day() == 20 then --Weed Day
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
+                HolidayWeed()
+            end
+        end
+        
+        
+        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", 9)[1] then --Labor Day
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
+                HolidayLaborDay()
+            end
+        end
+        
+        
+        if Time.month() == 10  and Time.day() == 31 then --Halloween
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
+                HolidayHalloween()
+            end
+        end
+        
+        
+        if Time.month() == 12 and Time.day() == 25 then --Christmas Day
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                for _,p in ipairs(Player.get()) do
+                    if p.section == 0 then
+                        Section(p.section).effects.weather = WEATHER_SNOW
+                    end
+                    if p.section == 6 then
+                        Section(p.section).effects.weather = WEATHER_SNOW
+                    end
+                    if p.section == 10 then
+                        Section(p.section).effects.weather = WEATHER_SNOW
+                    end
+                end
+                SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
+                HolidayChristmas()
+            end
+        end
+    end
     Routine.waitFrames(1, true)
     if not malcmusic.holiday then --and SaveData.genosideStage <= 2 then
         if SaveData.totalStarCount <= 3 or SaveData.totalStarCount == nil then
