@@ -63,7 +63,7 @@ function rainrefresh()
 end
 
 function malcmusic.onStart()
-    weatherControlDay = SaveData.dateplayedweather
+    
 end
 
 function malcmusic.onTick()

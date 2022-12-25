@@ -12325,6 +12325,13 @@ ID:466;X:-198560;Y:-200128;D:-1;MG:"I'm too old for Halloween\, but at least I c
 ID:466;X:-197328;Y:-200128;D:-1;MG:"It's great to scare people!<page>Like you! RAWR!";FD:1;NM:1;LR:"Stage Extra - Halloween";
 ID:466;X:-195904;Y:-200128;D:-1;MG:"Great holiday\, great free candy.<page>Hey\, can't argue with free.";FD:1;NM:1;LR:"Stage Extra - Halloween";
 ID:466;X:-194688;Y:-200128;D:-1;MG:"I don't know why trick or treating is a kid thing.<page>Maybe they just don't wanna give free candy to strange big figures...";FD:1;NM:1;LR:"Stage Extra - Halloween";
+ID:466;X:-199632;Y:-200128;D:-1;MG:"MERRY CHRISTMAS <characterName>!!!!!!<page>Our present this year is that you'll save the world from the inpending doom\, and that's what you're doing!<page>Good luck\, as usual!";FD:1;NM:1;LR:"Stage Extra - Christmas";
+ID:466;X:-198880;Y:-200128;D:-1;MG:"For Christmas\, I asked for a new phone.<page>Why? Because mine broke recently.";FD:1;NM:1;LR:"Stage Extra - Christmas";
+ID:466;X:-197888;Y:-200128;D:-1;MG:"Brrrr\, it's CHILLY out here!<page>Why are people out here in the snow anyway?";FD:1;NM:1;LR:"Stage Extra - Christmas";
+ID:466;X:-196944;Y:-200128;D:-1;MG:"Great to see you\, <characterName>!<page>Have a Merry Christmas to ya!";FD:1;NM:1;LR:"Stage Extra - Christmas";
+ID:466;X:-196208;Y:-200128;D:-1;MG:"It's gonna rain after this\, sccording to my weather app.<page>Sooooooo I'm gonna stay here until the snow lasts.";FD:1;NM:1;LR:"Stage Extra - Christmas";
+ID:466;X:-195312;Y:-200128;D:-1;MG:"If you're here for the True Ending\, great!<page>If you're here just to say Merry Christmas\, well...<page>MERRY CHRISTMAS!";FD:1;NM:1;LR:"Stage Extra - Christmas";
+ID:466;X:-194336;Y:-200128;D:-1;MG:"I'm glad to shop for some Christmas supplies recently.<page>It's too cold\, so I'm gonna wait here until my ride arrives.";FD:1;NM:1;LR:"Stage Extra - Christmas";
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;
