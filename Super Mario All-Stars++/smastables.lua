@@ -855,6 +855,7 @@ smastables.allCollectableStarNPCIDs = table.map{97,196,1000}
 smastables.allCoinNPCIDs = table.map{10,33,88,103,138,152,251,252,253,258,528}
 smastables.allMushroomNPCIDs = table.map{9,184,185,249}
 smastables.allFireFlowerNPCIDs = table.map{14,182,183}
+smastables.allThwompNPCIDs = table.map{37,180,437,295,435,432,301}
 
 smastables.allInteractableNPCIDs = table.map{9,10,14,31,33,34,35,88,90,92,139,140,141,142,143,144,145,146,147,153,154,155,156,157,169,170,184,185,186,187,188,191,193,249,250,258,274,293,425,462,559,994,996,997}
 

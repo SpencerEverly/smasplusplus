@@ -998,7 +998,7 @@ local function settingsAreDifferent(a,b)
     return false
 end
 
-local function copyBounds(t)
+function customCamera.copyBounds(t)
     local b = {}
 
     for i = 1,4 do
@@ -1073,7 +1073,7 @@ local function targetsAreDifferent(listA,listB)
     return false
 end
 
-local function getTargets()
+function customCamera.getTargets()
     -- Use customCamera.targets if possible
     local targets = {}
     local count = 0
@@ -1106,7 +1106,7 @@ local function getTargets()
     return targets
 end
 
-local function getCameraFocusFromTargets(targets)
+function customCamera.getCameraFocusFromTargets(targets)
     local total = vector.zero2
     local count = 0
 
@@ -1140,7 +1140,7 @@ local function getCameraFocusFromTargets(targets)
 end
 
 
-local function getCurrentSettings()
+function customCamera.getCurrentSettings()
     local settings = makeDefaultSettings()
 
     if customCamera.controllerID > 0 and EventManager.onStartRan then
@@ -1228,8 +1228,8 @@ local function getBlockerDirection(b,fullX,fullY,fullWidth,fullHeight)
     return 0
 end
 
-local function getExtraBounds()
-    local bounds = copyBounds(customCamera.currentSettings.bounds)
+function customCamera.getExtraBounds()
+    local bounds = customCamera.copyBounds(customCamera.currentSettings.bounds)
 
     if customCamera.blockerID == 0 then
         return bounds
@@ -1285,7 +1285,7 @@ function customCamera.updateHandycamUse()
 end
 
 function customCamera.resetCameraState()
-    customCamera.currentSettings = getCurrentSettings()
+    customCamera.currentSettings = customCamera.getCurrentSettings()
     customCamera.previousSettings = customCamera.currentSettings
     customCamera.settingsTransition = 0
     
@@ -1301,11 +1301,11 @@ function customCamera.resetCameraState()
     customCamera.screenOffsetY = customCamera.currentSettings.screenOffsetY
 
 
-    customCamera.currentTargets = getTargets()
+    customCamera.currentTargets = customCamera.getTargets()
     customCamera.previousTargetsFous = vector.zero2
     customCamera.targetsTransition = 0
 
-    customCamera.currentBounds = copyBounds(customCamera.currentSettings.bounds)
+    customCamera.currentBounds = customCamera.copyBounds(customCamera.currentSettings.bounds)
 
     customCamera.updateHandycamUse()
 end
@@ -1315,7 +1315,7 @@ end
 
 function customCamera.onDraw()
     -- Update settings
-    local newSettings = getCurrentSettings()
+    local newSettings = customCamera.getCurrentSettings()
 
     if settingsAreDifferent(customCamera.currentSettings,newSettings) then
         if customCamera.settingsTransition > 0 and not settingsAreDifferent(customCamera.previousSettings,newSettings) then
@@ -1329,7 +1329,7 @@ function customCamera.onDraw()
     end
 
     -- Update targets
-    local newTargets = getTargets()
+    local newTargets = customCamera.getTargets()
 
     if targetsAreDifferent(customCamera.currentTargets,newTargets) then
         customCamera.previousTargetsFous = vector(camera.x + camera.width*0.5,camera.y + camera.height*0.5)
@@ -1364,7 +1364,7 @@ function customCamera.onDraw()
         local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
         local boundsCurrent = customCamera.currentBounds
 
-        local bounds = getExtraBounds()
+        local bounds = customCamera.getExtraBounds()
 
         for i = 1,4 do
             local boundSetting = bounds[i]
@@ -1416,7 +1416,7 @@ function customCamera.onDraw()
 end
 
 
-local function shouldUseCustomFocus()
+function customCamera.shouldUseCustomFocus()
     return (
         customCamera.targetsTransition > 0 or (customCamera.currentTargets[1] ~= player or customCamera.currentTargets[2] ~= nil) -- not just targetting player
         or customCamera.screenWidth < camera.width or customCamera.screenHeight < camera.height -- smaller screen
@@ -1435,8 +1435,8 @@ function customCamera.onCameraUpdate()
 
     local focus
 
-    if shouldUseCustomFocus() then -- not just targetting player
-        focus = getCameraFocusFromTargets(customCamera.currentTargets)
+    if customCamera.shouldUseCustomFocus() then -- not just targetting player
+        focus = customCamera.getCameraFocusFromTargets(customCamera.currentTargets)
 
         if customCamera.targetsTransition > 0 then
             focus = math.lerp(focus,customCamera.previousTargetsFous,customCamera.targetsTransition)
@@ -1457,6 +1457,10 @@ end
 function customCamera.onCameraDraw()
     local settingsNeedDrawScene = (customCamera.currentZoom < 1 or customCamera.currentRotation%360 > 0) and not customCamera.usingHandycam
     local settingsNeedCrop = (customCamera.screenWidth < camera.width or customCamera.screenHeight < camera.height or customCamera.screenOffsetX ~= 0 or customCamera.screenOffsetY ~= 0)
+    
+    --[[if Player.count() == 2 then
+        Graphics.drawBox{width = 2, height = 600, x = 400, y = 0, color = Color.black}
+    end]]
 
     if settingsNeedDrawScene then
         local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
