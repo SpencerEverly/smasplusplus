@@ -1,9 +1,9 @@
 HEAD
-TL:"Super Mario Bros. 3\: World 7 (Piranha Plant)";CPID:"SMBX2";
+TL:"Super Mario Bros. 3\: World 7 (Piranha Plant 1)";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 200\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-197984;T:-200600;B:-200000;MZ:0;MF:"";BG:2;
-SC:1;L:-180000;R:-179200;T:-180600;B:-179712;MZ:0;MF:"";BG:4;
+SC:0;L:-200000;R:-197984;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/Overworld.spc|0\;g=2.5";BG:2;
+SC:1;L:-180000;R:-179200;T:-180600;B:-179712;MZ:24;MF:"_OST/Super Mario Bros/Underground.spc|0\;g=2.5";BG:4;
 SECTION_END
 STARTPOINT
 ID:1;X:-199932;Y:-200118;D:1;
@@ -951,6 +951,7 @@ ID:22;X:-180320;Y:-180320;W:64;H:32;
 ID:22;X:-180320;Y:-180096;W:64;H:32;
 ID:22;X:-180384;Y:-180000;W:64;H:32;
 ID:5;X:-179552;Y:-180032;W:32;H:32;CN:-1;EH:"Reward Received";
+ID:1007;X:-179552;Y:-180064;W:32;H:32;LR:"Item Reward";
 BLOCK_END
 BGO
 ID:13;X:-179564;Y:-180108;LR:"Item Reward";
