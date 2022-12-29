@@ -56,6 +56,8 @@ local fadeoutcompleted = false
 local killed1 = false
 local killed2 = false
 
+local deathTimer = 0
+
 function smashudsystem.onInitAPI() --This requires all the libraries that will be used
     registerEvent(smashudsystem, "onStart")
     registerEvent(smashudsystem, "onDraw")
@@ -250,7 +252,7 @@ function thirteenModeDeath()
     elseif SaveData.totalLives < 0 and not SaveData.enableLives then
         gameoveractivate2 = true
     end
-    Routine.waitFrames(196)
+    Routine.waitFrames(195)
     if not gameoveractivate then
         blackscreenonly = true
         Misc.pause()
@@ -275,7 +277,7 @@ function thirteenModeDeath()
     if smashudsystem.exittomap == false then
         Level.load(Level.filename())
     elseif smashudsystem.exittomap == true then
-        Level.load("map.lvlx", nil, nil)
+        Level.load("map.lvlx")
     end
 end
 
@@ -361,7 +363,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     if smashudsystem.exittomap == false then
                                         Level.load(Level.filename())
                                     elseif smashudsystem.exittomap == true then
-                                        Level.load("map.lvlx", nil, nil)
+                                        Level.load("map.lvlx")
                                     end
                                 end
                                 if gameoveractivate then --Quick game over screen stuff.
@@ -375,7 +377,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     if smashudsystem.exittomap == false then
                                         Level.load(Level.filename())
                                     elseif smashudsystem.exittomap == true then
-                                        Level.load("map.lvlx", nil, nil)
+                                        Level.load("map.lvlx")
                                     end
                                 end
                             end
@@ -421,7 +423,10 @@ function smashudsystem.onTick()
     
     if SaveData.disableX2char then
         if not Playur.isAnyPlayerAlive() then
-            Routine.run(thirteenModeDeath)
+            deathTimer = deathTimer + 1
+            if deathTimer == 1 then
+                Routine.run(thirteenModeDeath)
+            end
         end
     end
     if(not killed1 and player:mem(0x13E,FIELD_BOOL)) then
@@ -515,10 +520,10 @@ end
 function smashudsystem.onExit()
     smasbooleans.musicMuted = false --This is specific for my episode. Remove this if you wanna use this yourself.
     Audio.MusicVolume(64) --Reset the music exiting the level
-    if smashudsystem.hasDied == true and smashudsystem.exittomap == false then
+    if smashudsystem.hasDied and not smashudsystem.exittomap then
         Level.load(Level.filename())
-    elseif smashudsystem.hasDied == true and smashudsystem.exittomap == true then
-        Level.load("map.lvlx", nil, nil)
+    elseif smashudsystem.hasDied and smashudsystem.exittomap then
+        Level.load("map.lvlx")
     end
 end
 
