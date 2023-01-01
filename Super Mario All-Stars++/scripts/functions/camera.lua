@@ -82,14 +82,60 @@ end
 local oldBoundaryLeft,oldBoundaryRight,oldBoundaryTop,oldBoundaryBottom = 0,0,0,0
 local boundaryLeft,boundaryRight,boundaryTop,boundaryBottom = 0,0,0,0
 local setCameraPosition = false
-local cameraPanSpeed = 5
+local cameraPanSpeed = 2 --Default speed for camera control
+local cameraPausedWhileScrolling = true
 Screen.playersOutOfBounds = {}
-Screen.activeCameraScrolls = {}
+Screen.activeCameraScrolls = {} --Adds to a table whether any is active
 local tempBool = false
 
-function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed) --This is used to set the camera boundaries for the specific section.
+function Screen.getSectionBounds(section)
+    local bounds = Section(section).boundary
+    return bounds.left, bounds.top, bounds.bottom, bounds.right
+end
+
+function Screen.setSectionBounds(section, left, top, bottom, right)
+    local sectionObj = Section(section)
+    local bounds = sectionObj.boundary
+    bounds.left = left
+    bounds.top = top
+    bounds.bottom = bottom
+    bounds.right = right
+    sectionObj.boundary = bounds
+end
+
+local function setScrollToArguments(section)
+    if section == nil then
+        section = player.section
+    end
+    
+    if cameraPanSpeed == nil or cameraPanSpeed <= 0 then    
+        Screen.activeCameraScrolls[section] = nil
+        return
+    end
+    
+    local x1, y1, y2, x2 = Screen.getSectionBounds(section)
+    local dX1 = boundaryLeft - x1
+    local dY1 = boundaryTop - y1
+    local dX2 = boundaryRight - x2
+    local dY2 = boundaryBottom - y2
+    local avgDX = (math.abs(dX1) + math.abs(dX2)) * 0.5
+    local avgDY = (math.abs(dY1) + math.abs(dY2)) * 0.5
+    local avgD = math.sqrt(avgDX * avgDX + avgDY * avgDY)
+    if (avgD > cameraPanSpeed) then
+        local factor = cameraPanSpeed / avgD
+        avgDX = factor * avgDX
+        avgDY = factor * avgDY
+    end
+    
+    Screen.activeCameraScrolls[section] = {x1=boundaryLeft, y1=boundaryTop, x2=boundaryRight, y2=boundaryBottom, xs=avgDX, ys=avgDY}
+    
+    setCameraPosition = true
+end
+
+function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,isPausedWhileScrolling) --This is used to set the camera boundaries for the specific section.
     local plr = player
     local section = plr.sectionObj
+    local sectionidx = plr.section
     local bounds = section.boundary
     local bounds2 = {left = camera.x, top = camera.y, right = camera.x + camera.width, bottom = camera.y + camera.height}
     if leftbound == nil then
@@ -106,7 +152,10 @@ function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed) 
     end
     
     if speed == nil then
-        speed = 5
+        speed = cameraPanSpeed
+    end
+    if isPausedWhileScrolling == nil then
+        isPausedWhileScrolling = true
     end
     
     boundaryLeft = leftbound
@@ -120,24 +169,21 @@ function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed) 
     oldBoundaryBottom = bounds.down
     
     cameraPanSpeed = speed
+    cameraPausedWhileScrolling = isPausedWhileScrolling
     
     section.boundary = bounds2
     
-    setCameraPosition = true
+    setScrollToArguments(sectionidx)
 end
 
 function Screen.onDraw()
     if setCameraPosition then --Camera position stuff
-        local section = player.sectionObj
-        local bounds = section.boundary
-        bounds.left = boundaryLeft
-        bounds.right = boundaryRight
-        bounds.top = boundaryTop
-        bounds.bottom = boundaryBottom
-        section.boundary = bounds
-        for i = 1,Player.count() do
-            if Player(i).x + Player(i).width >= bounds.right then
-                if Player(i).y <= bounds.bottom then
+        if cameraPausedWhileScrolling then
+            Misc.pause()
+        end
+        --[[for i = 1,Player.count() do
+            if Player(i).x + Player(i).width >= boundaryRight then
+                if Player(i).y <= boundaryBottom then
                     tempBool = true
                     table.insert(Screen.playersOutOfBounds, Player(i))
                 end
@@ -145,8 +191,44 @@ function Screen.onDraw()
             if not tempBool then
                 
             end
+        end]]
+        for section, state in pairs(Screen.activeCameraScrolls) do
+            local x1, y1, y2, x2 = Screen.getSectionBounds(section)
+            
+            local dX1 = state.x1 - x1
+            local dY1 = state.y1 - y1
+            local dX2 = state.x2 - x2
+            local dY2 = state.y2 - y2
+            
+            if (dX1 == 0) and (dX2 == 0) and (dY1 == 0) and (dY2 == 0) then
+                Screen.activeCameraScrolls[section] = nil
+            else        
+                dX1 = math.min(math.max(-state.xs, dX1), state.xs)
+                dX2 = math.min(math.max(-state.xs, dX2), state.xs)
+                dY1 = math.min(math.max(-state.ys, dY1), state.ys)
+                dY2 = math.min(math.max(-state.ys, dY2), state.ys)
+                
+                x1 = x1 + dX1
+                x2 = x2 + dX2
+                y1 = y1 + dY1
+                y2 = y2 + dY2
+                Screen.setSectionBounds(section, x1, y1, y2, x2)
+            end
         end
-        setCameraPosition = false
+        if camera.x == boundaryLeft then
+            local section = player.sectionObj
+            local bounds = section.boundary
+            bounds.left = boundaryLeft
+            bounds.right = boundaryRight
+            bounds.top = boundaryTop
+            bounds.bottom = boundaryBottom
+            section.boundary = bounds
+            cameraPanTimer = 0
+            if cameraPausedWhileScrolling then
+                Misc.unpause()
+            end
+            setCameraPosition = false
+        end
     end
     if Screen.debug then
         Text.printWP("CURSOR X/Y POS:", 100, 80, 0)
