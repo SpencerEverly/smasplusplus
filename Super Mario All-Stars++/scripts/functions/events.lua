@@ -41,4 +41,18 @@ function Evento.getSoundID(eventName)
     end
 end
 
+function Evento.count()
+    local name = {}
+    local finalname = {}
+    for idx=0,MAX_EVENTS-1 do
+        table.insert(name, mem(GM_EVENT+(idx*EVENTS_STRUCT_SIZE)+0x04,FIELD_STRING))
+    end
+    for k,v in ipairs(name) do
+        if v ~= "" then
+            table.insert(finalname, v)
+        end
+    end
+    return #finalname
+end
+
 return Evento

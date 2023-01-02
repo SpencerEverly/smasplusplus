@@ -23,10 +23,12 @@ end
 _G.smasacecoins = require("smasacecoins")
 _G.smascharacterinfo = require("smascharacterinfo")
 _G.smascharacterintros = require("smascharacterintros")
+_G.smaslayersystem = require("smaslayersystem")
 _G.smasextraactions = require("smasextraactions")
 _G.smasblocksystem = require("smasblocksystem")
 _G.smaspswitch = require("smaspswitch")
 _G.smasenemysystem = require("smasenemysystem")
+_G.smasnpcsystem = require("smasnpcsystem")
 _G.smas2playersystem = require("smas2playersystem")
 _G.smasresolutions = require("smasresolutions")
 

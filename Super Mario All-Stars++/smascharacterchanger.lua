@@ -130,7 +130,7 @@ function smascharacterchanger.startupChanger() --The animation that starts the m
         pauseplus.canPause = false
     end
     if SaveData.currentCostume ~= "N/A" then
-        oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
+        oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
     else
         oldIniFile = playerManager.getHitboxPath(player, player.powerup)
     end
