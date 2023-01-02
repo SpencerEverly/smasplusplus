@@ -37,6 +37,8 @@ smascharacterchanger.tvScrollNumber = -600 --This is used for the TV animation s
 smascharacterchanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
 smascharacterchanger.selectionNumber = 1 --For scrolling left and right
 smascharacterchanger.selectionNumberUpDown = 1 --For scrolling up and down
+smascharacterchanger.oldIniFile = SysManager.loadDefaultCharacterIni() --Used for reverting to the old ini file when exiting the menu without changing to a character
+smascharacterchanger.iniFile = SysManager.loadDefaultCharacterIni() --Used to update the ini format when showing the character on screen
 
 local colorChange1 = 0
 local colorChange2 = 0
@@ -103,9 +105,6 @@ local changed = false
 
 local soundObject1 --Used for the TV scroll SFX
 local menuBGMObject --Used for the menu BGM
-local oldIniFile --Used for reverting to the old ini file when exiting the menu without changing to a character
-local iniFile --Used to update the ini format when showing the character on screen
-local currentSelection --For the character's current selection
 
 local started = false
 local ending = false
@@ -130,9 +129,9 @@ function smascharacterchanger.startupChanger() --The animation that starts the m
         pauseplus.canPause = false
     end
     if SaveData.currentCostume ~= "N/A" then
-        oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
+        smascharacterchanger.oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
     else
-        oldIniFile = playerManager.getHitboxPath(player, player.powerup)
+        smascharacterchanger.oldIniFile = SysManager.loadDefaultCharacterIni()
     end
     soundObject1 = SFX.play(smascharacterchanger.scrollSFX)
     Routine.waitFrames(10, true)
@@ -177,10 +176,12 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
     end
 end
 
+local chars = playerManager.getCharacters()
+
 function smascharacterchanger.onInputUpdate()
     if smascharacterchanger.menuActive and started then
         if player.keys.run == KEYS_PRESSED then
-            Misc.loadCharacterHitBoxes(player.character, player.powerup, oldIniFile)
+            --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smascharacterchanger.oldIniFile)
             smascharacterchanger.menuActive = false
         end
         if player.keys.up == KEYS_PRESSED then
@@ -199,32 +200,40 @@ function smascharacterchanger.onInputUpdate()
         if player.keys.left == KEYS_PRESSED then
             Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
-            --Misc.loadCharacterHitBoxes(currentSelection, player.powerup, iniFile)
+            --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smascharacterchanger.iniFile)
             smascharacterchanger.selectionNumberUpDown = 1
         elseif player.keys.right == KEYS_PRESSED then
             Sound.playSFX(smascharacterchanger.moveSFX)
             smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
-            --Misc.loadCharacterHitBoxes(currentSelection, player.powerup, iniFile)
+            --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smascharacterchanger.iniFile)
             smascharacterchanger.selectionNumberUpDown = 1
         end
         if player.keys.jump == KEYS_PRESSED then
+            --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smascharacterchanger.oldIniFile)
             Sound.playSFX("charcost_costume.ogg")
             Sound.playSFX("charcost-selected.ogg")
             
             
             
             if smascharacterchanger.selectionNumber then
+                local charac = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]
                 if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
-                    reserveChange = player.reservePowerup --Keep the reserve for the old character, in case if we're switching to a different character
+                    if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
+                        reserveChange = player.reservePowerup --Keep the reserve for the old character, in case if we're switching to a different character
+                    end
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
                 else
-                    reserveChange = player.reservePowerup --Reapply the reserve to the player
+                    if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
+                        reserveChange = player.reservePowerup --Reapply the reserve to the player
+                    end
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
                 end
                 changed = true
-                player.reservePowerup = reserveChange
+                if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
+                    player.reservePowerup = reserveChange
+                end
                 smascharacterchanger.menuActive = false
             end
             
@@ -241,14 +250,9 @@ function smascharacterchanger.onDraw()
     end
     
     if SaveData.currentCostume ~= "N/A" then
-        pcall(function() iniFile = Misc.episodePath().."costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini" end)
+        pcall(function() smascharacterchanger.iniFile = Misc.episodePath().."costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini" end)
     else
-        pcall(function() iniFile = SysManager.loadDefaultCharacterIni() end)
-    end
-    
-    currentSelection = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]
-    if currentSelection == nil then
-        currentSelection = 1
+        pcall(function() smascharacterchanger.iniFile = SysManager.loadDefaultCharacterIni() end)
     end
     
     if smascharacterchanger.menuActive then
@@ -292,14 +296,14 @@ function smascharacterchanger.onDraw()
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
             
-            --[[if currentSelectionCostume == "nil" then
-                Graphics.sprites[playerManager.getName(currentSelection)][player.powerup].img = Img.loadDefaultCharacterImage()
+            if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown] == "nil" then
+                Graphics.sprites[playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])][2].img = Img.loadDefaultCharacterImage()
             else
-                Graphics.sprites[playerManager.getName(currentSelection)][player.powerup].img = Graphics.loadImageResolved("costumes/"..playerManager.getName(currentSelection).."/"..currentSelectionCostume.."/"..playerManager.getName(currentSelection).."-"..player.powerup..".png")
-            end]]
+                Graphics.sprites[playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])][2].img = Graphics.loadImageResolved("costumes/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."/"..smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown].."/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."-2.png")
+            end
             
             
-            player:render{frame = 1, direction = 1, character = currentSelection, x = 400, y = 350, priority = -1.7, sceneCoords = false}
+            player:render{frame = 1, direction = 1, powerup = 2, character = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], x = 400, y = 350, priority = -1.7, sceneCoords = false}
         end
         if not smascharacterchanger.animationActive and started then
             Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
