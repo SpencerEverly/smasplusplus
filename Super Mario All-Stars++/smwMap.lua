@@ -3087,8 +3087,6 @@ do
             return mountImages[mountType]
         end
     end
-    
-    local currentCostume = player:getCostume()
 
     function smwMap.drawPlayer(v)
         if smwMap.drawPlayerOnMap then

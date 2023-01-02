@@ -4,12 +4,12 @@ local rng = require("base/rng")
 local smasverbosemode = require("smasverbosemode")
 local customCamera = require("customCamera")
 local smascharacterinfo = require("smascharacterinfo")
-local smwMap = require("smwMap")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)
 
 function Misk.onInitAPI()
+    registerEvent(Misk,"onStart")
     registerEvent(Misk,"onDraw")
 end
 
@@ -53,7 +53,7 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
     
     function Misc.unlockAnyBrokenPaths() --WIP function that will unlock any path if any star has been collected prior.
-        if Level.filename() == "map.lvlx" then
+        if Level.filename() == "map.lvlx" and smwMap then
             --**Super Mario Bros. 1**
             --World 1
             if table.icontains(SaveData.completeLevels,"SMB1 - W-1, L-1.lvlx") then

@@ -43,14 +43,14 @@ if not Misc.inMarioChallenge() then
     end
 end
 
---For SEE Mod users, where they have a definite version of LunaLua (And for Patch 5 users, when it eventually releases).
+--For SEE Mod users, where they have a definite version of LunaLua.
 if SMBX_VERSION == VER_SEE_MOD then
-    Misc.setWindowTitle("Super Mario All-Stars++")
-    Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
     _G.LunaDLL = ffi.load("LunaDll.dll")
 end
-if SMBX_VERSION == VER_BETA4_PATCH_5 then
+if Misc.setWindowTitle ~= nil then
     Misc.setWindowTitle("Super Mario All-Stars++")
+end
+if Misc.setWindowIcon ~= nil then
     Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 end
 
