@@ -391,6 +391,8 @@ end
 
 
 
+
+
 local dragonCoins = {274} -- add/remove coin ids here, comma-separated
 
 function Npc.checkNPCSection(n)
@@ -426,6 +428,7 @@ function Npc.checkNPCSection(n)
 end
 
 function Npc.onInitAPI()
+    registerEvent(Npc,"onTick")
     registerEvent(Npc,"onTickEnd")
     registerEvent(Npc,"onPostEventDirect")
 end
