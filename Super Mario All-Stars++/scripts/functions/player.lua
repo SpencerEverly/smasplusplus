@@ -49,6 +49,53 @@ function Playur.onInitAPI()
     registerEvent(Playur,"onDraw")
 end
 
+function Playur.setupPlayers()
+    for i = 1,200 do
+        if Player(i).character == 0 then
+            Player(i).character = 1;
+            if Player.count() == 2 and i == 2 then
+                Player(i).character = 2;
+            end
+        end
+        if Player(i).powerup == 0 then
+            Player(i).powerup = 1;
+        end
+        if Player(i).character == 3 or Player(i).character == 4 or Player(i).character == 5 then
+            if Player(i):mem(PLR_HEARTS, FIELD_WORD) <= 0 then
+                Player(i):mem(PLR_HEARTS, FIELD_WORD, 1);
+            end
+            
+            if (Player(i):mem(PLR_HEARTS, FIELD_WORD) <= 1 and Player(i).powerup > 1 and Player(i).character ~= 5) then
+                Player(i):mem(PLR_HEARTS, FIELD_WORD, 2);
+            end
+            
+            if(Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD) > 0) then
+                Player(i):mem(PLR_HEARTS, FIELD_WORD, Player(i):mem(PLR_HEARTS, FIELD_WORD) + 1);
+                Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD, 0);
+            end
+            if(Player(i).powerup == 1 and Player(i):mem(PLR_HEARTS, FIELD_WORD) > 1) then
+                Player(i).powerup = 2;
+            end
+            if (Player(i):mem(PLR_HEARTS, FIELD_WORD) > 3) then
+                Player(i):mem(PLR_HEARTS, FIELD_WORD, 3)
+            end
+            if Player(i).mount == 3 then
+                Player(i).mount = 0
+            end
+        else
+            if (Player(i):mem(PLR_HEARTS, FIELD_WORD) == 3 and Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD) == 0) then
+                Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD, 9);
+                Player(i):mem(PLR_HEARTS, FIELD_WORD, 0)
+            end
+        end
+        if Player(i).character == 5 then
+            Player(i).mount = 0
+        end
+        Player(i).direction = 1;
+        
+    end
+end
+
 function Playur.execute(index, func) --Better player/player2 detection, for simplifying mem functions, or detecting either player for any code-related function. Example: Playur.execute(1, function(p) p:kill() end)
     if index == nil then
         index = 1
