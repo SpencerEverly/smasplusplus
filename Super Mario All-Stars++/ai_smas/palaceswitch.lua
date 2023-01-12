@@ -160,9 +160,9 @@ local idMap = {}
 
 function bigSwitch.registerSwitch(settings)
     local customSettings = table.join(settings,bigSwitch.sharedSettings)
-    if bigSwitch.charms[customSettings.color] ~= nil then --use npc.txt to change settings of existing switches
-        error("Use npc.txt to change settings of existing switches.")
-    end
+    --if bigSwitch.charms[customSettings.color] ~= nil then --use npc.txt to change settings of existing switches
+        --error("Use npc.txt to change settings of existing switches.")
+    --end
     npcManager.setNpcSettings(customSettings)
     npcManager.registerEvent(customSettings.id,bigSwitch,"onTickNPC")
     npcManager.registerEvent(customSettings.id,bigSwitch,"onDrawNPC")
