@@ -4,7 +4,8 @@ HEAD_END
 SECTION
 SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros 3/King's Chamber.spc|0\;g=2.5";BG:27;
 SC:1;L:-180000;R:-174688;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros 3/Before Airship.spc|0\;g=2.2";BG:1;
-SC:2;L:-160000;R:-157696;T:-160600;B:-160000;MZ:0;MF:"";BG:31;
+SC:2;L:-160000;R:-157696;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros 3/Airship.spc";BG:31;XTRA:"{\n    \"darkness\"\: {\n        \"falloff\"\: 0\n    }\n}\n";
+SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros 3/Airship Boss.spc|0\;g=2.6";BG:17;
 SECTION_END
 STARTPOINT
 ID:2;X:-199916;Y:-200124;D:1;
