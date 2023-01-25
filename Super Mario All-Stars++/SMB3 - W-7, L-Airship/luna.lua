@@ -10,6 +10,10 @@ function onStart()
     end
 end
 
+function onLoadSection1()
+    autoscrolla.scrollRight(1)
+end
+
 function onLoadSection2()
     autoscrolla.scrollRight(1)
 end
