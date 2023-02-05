@@ -234,6 +234,7 @@ function smascharacterchanger.onInputUpdate()
                 if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
                     player.reservePowerup = reserveChange
                 end
+                Sound.loadCostumeSounds()
                 smascharacterchanger.menuActive = false
             end
             
