@@ -162,6 +162,7 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
         smascharacterinfo.setCostumeSpecifics()
         changed = false
     end
+    Sound.loadCostumeSounds()
     Sound.restoreMusic(-1)
     if pauseplus then
         pauseplus.canPause = true
@@ -234,7 +235,6 @@ function smascharacterchanger.onInputUpdate()
                 if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
                     player.reservePowerup = reserveChange
                 end
-                Sound.loadCostumeSounds()
                 smascharacterchanger.menuActive = false
             end
             

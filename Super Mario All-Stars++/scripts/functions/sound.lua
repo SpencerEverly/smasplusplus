@@ -100,12 +100,12 @@ function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being w
     local costumeSoundDir
     if not SaveData.disableX2char then
         if SaveData.currentCostume == "N/A" then
-            pcall(function() costumeSoundDir = Misc.resolveSoundFile(name) end)
+            costumeSoundDir = Misc.resolveSoundFile(name)
         else
-            pcall(function() costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name) end)
+            costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
         end
     elseif SaveData.disableX2char then
-        pcall(function() costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name) end)
+        costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
     end
     if costumeSoundDir ~= nil then
         return SFX.open(costumeSoundDir)
