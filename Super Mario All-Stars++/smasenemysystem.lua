@@ -39,13 +39,14 @@ function smasenemysystem.onTick()
             for _,p in ipairs(Player.get()) do
                 if p.powerup == 5 and p:mem(0x4A, FIELD_BOOL) then
                     for k,v in ipairs(NPC.getIntersecting(p.x, p.y, p.x + p.width, p.y + p.height - 20)) do
-                        if smastables.allThwompNPCIDs[v.id] or v.id == 259 then
+                        if v.id == 259 then
                             v:kill(HARM_TYPE_VANISH)
                             Effect.spawn(10, v.x, v.y)
                             Sound.playSFX(2)
                             p.speedY = -1
                         end
                     end
+                    --smastables.allThwompNPCIDs[v.id] support coming later
                 end
             end
         end
