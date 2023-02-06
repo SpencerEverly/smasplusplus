@@ -297,14 +297,14 @@ function smascharacterchanger.onDraw()
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
             
-            if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown] == "nil" then
+            --[[if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown] == "nil" then
                 Graphics.sprites[playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])][2].img = Img.loadDefaultCharacterImage()
             else
                 Graphics.sprites[playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])][2].img = Graphics.loadImageResolved("costumes/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."/"..smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown].."/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."-2.png")
-            end
+            end]]
             
             
-            player:render{frame = 1, direction = 1, powerup = 2, character = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], x = 400, y = 350, priority = -1.7, sceneCoords = false}
+            --player:render{frame = 1, direction = 1, powerup = 2, character = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], x = 400, y = 350, priority = -1.7, sceneCoords = false}
         end
         if not smascharacterchanger.animationActive and started then
             Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
