@@ -1557,6 +1557,7 @@ function pauseSpecifics()
         pauseplus.createSubmenu("miscsettings",{headerText = "<size 1.5>Miscellaneous Settings</size>"})
         pauseplus.createSubmenu("soundsettings",{headerText = "<size 1.5>Sound Settings</size>"})
         pauseplus.createSubmenu("resolutionsettings",{headerText = "<size 1.5>Resolution Settings</size>"})
+        pauseplus.createSubmenu("savingsettings",{headerText = "<size 1.5>Saving Options</size>"})
         pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
         pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
         if (Level.filename() == "map.lvlx") == true then
@@ -1566,11 +1567,12 @@ function pauseSpecifics()
         elseif (Level.filename() == "MALC - HUB.lvlx") == false then
             pauseplus.createOption("main",{text = "Teleportation Options",goToSubmenu = "teleportmenu",description = "Teleport to many places with this option (Select areas)."})
         end
-        pauseplus.createOption("main",{text = "Save and Continue",description = "Save and continue your game.",pauseplus.save,closeMenu = true,action = function() Sound.playSFX("save_dismiss.ogg") end})
+        pauseplus.createOption("main",{text = "Saving Options",goToSubmenu = "savingsettings",description = "Options to either save and continue, save and reset, or save and quit the game."})
+        pauseplus.createOption("savingsettings",{text = "Save and Continue",description = "Save and continue your game.",pauseplus.save,closeMenu = true,action = function() Sound.playSFX("save_dismiss.ogg") end})
         if not isOverworld then
-            pauseplus.createOption("main",{text = "Save and Reset Game",description = "Saves and resets the game back to the preboot menu. Useful for setting options you can't set in the pause menu.",pauseplus.save,closeMenu = true,action = function() Routine.run(mainmenu) end})
+            pauseplus.createOption("savingsettings",{text = "Save and Reset Game",description = "Saves and resets the game back to the preboot menu. Useful for setting options you can't set in the pause menu.",pauseplus.save,closeMenu = true,action = function() Routine.run(mainmenu) end})
         end
-        pauseplus.createOption("main",{text = "Save and Quit",description = "Save and exit. You can continue later at any point. Remember to take breaks!",action = function() Routine.run(saveAndQuitRoutine) end})
+        pauseplus.createOption("savingsettings",{text = "Save and Quit",description = "Save and exit. You can continue later at any point. Remember to take breaks!",action = function() Routine.run(saveAndQuitRoutine) end})
         
         --Editor Menu
         if Misc.inEditor() then
