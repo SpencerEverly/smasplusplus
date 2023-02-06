@@ -39,6 +39,8 @@ smascharacterchanger.selectionNumber = 1 --For scrolling left and right
 smascharacterchanger.selectionNumberUpDown = 1 --For scrolling up and down
 smascharacterchanger.oldIniFile = SysManager.loadDefaultCharacterIni() --Used for reverting to the old ini file when exiting the menu without changing to a character
 smascharacterchanger.iniFile = SysManager.loadDefaultCharacterIni() --Used to update the ini format when showing the character on screen
+smascharacterchanger.characterPreviewImagesCostume = {} --Will be used to add character preview images throughout the menu
+smascharacterchanger.characterPreviewImagesCharacter = {} --Will be used to add character preview images throughout the menu
 
 local colorChange1 = 0
 local colorChange2 = 0
@@ -99,6 +101,21 @@ function smascharacterchanger.addVariant(nameToFind,game,costume) --Adds a varia
             table.insert(smascharacterchanger.namesCostume[foundName], costume)
         end
     end
+end
+
+function smascharacterchanger.drawPreviewImage() --Simple function to draw images for the current character added to the roster.
+    local numberOfCostumes = #smascharacterchanger.namesCostume
+    local tempImg
+    if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown] ~= "nil" then
+        pcall(function() tempImg = Graphics.loadImageResolved("costumes/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."/"..smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown].."/character-preview.png") end)
+    else
+        pcall(function() tempImg = Graphics.loadImageResolved("costumes/character-preview.png") end) --Temporary solution for now
+    end
+    
+    if tempImg == nil then
+        pcall(function() tempImg = Graphics.loadImageResolved("costumes/character-preview.png") end)
+    end
+    return tempImg
 end
 
 local changed = false
@@ -297,14 +314,7 @@ function smascharacterchanger.onDraw()
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
             
-            --[[if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown] == "nil" then
-                Graphics.sprites[playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])][2].img = Img.loadDefaultCharacterImage()
-            else
-                Graphics.sprites[playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])][2].img = Graphics.loadImageResolved("costumes/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."/"..smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown].."/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."-2.png")
-            end]]
-            
-            
-            --player:render{frame = 1, direction = 1, powerup = 2, character = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], x = 400, y = 350, priority = -1.7, sceneCoords = false}
+            Graphics.drawImageWP(smascharacterchanger.drawPreviewImage(), 360, 320, -1.7)
         end
         if not smascharacterchanger.animationActive and started then
             Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
