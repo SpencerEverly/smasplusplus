@@ -14,7 +14,7 @@
     <a href="https://www.youtube.com/c/SpencerEverly1"><strong>YouTube Channel</strong></a>
     <br />
     <br />
-    <a href="https://www.supermariobrosx.org/forums/viewtopic.php?f=90&t=27456">SMBX2 Forum Page</a>
+    <a href="https://www.smbxgame.com/forums/viewtopic.php?t=27456">SMBX2 Forum Page</a>
     ·
     <a href="https://www.youtube.com/playlist?list=PL1JV-WgowEYajO0r3LHs88fZPkRejOJdl">View Dev Updates</a>
     ·
