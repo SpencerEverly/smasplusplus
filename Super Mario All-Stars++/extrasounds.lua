@@ -32,111 +32,113 @@ extrasounds.pWingDelay = 7
 extrasounds.playerSlidingDelay = 8
 
 --**FIRE/ICE/HAMMER SETTINGS**
---Whenever to enable the Fire Flower sound.
+--Whether to enable the Fire Flower sound.
 extrasounds.enableFireFlowerSFX = true
---Whenever to enable the Ice Flower sound.
+--Whether to enable the Ice Flower sound.
 extrasounds.enableIceFlowerSFX = true
---Whenever to enable the Hammer Suit sound.
+--Whether to enable the Hammer Suit sound.
 extrasounds.enableHammerSuitSFX = true
 
---Whenever to revert to the fire flower sound when using an ice flower instead of using the custom sound.
+--Whether to revert to the fire flower sound when using an ice flower instead of using the custom sound.
 extrasounds.useFireSoundForIce = false
---Whenever to revert to the fire flower sound when using a hammer suit instead of using the custom sound.
+--Whether to revert to the fire flower sound when using a hammer suit instead of using the custom sound.
 extrasounds.useFireSoundForHammerSuit = false
 
 --**PROJECTILE SETTINGS**
---Whenever to enable the boomerang SFX for Toad.
+--Whether to enable the boomerang SFX for Toad.
 extrasounds.enableToadBoomerangSFX = true
---Whenever to enable the boomerang SFX for the Boomerang Bros.
+--Whether to enable the boomerang SFX for the Boomerang Bros.
 extrasounds.enableBoomerangBroBoomerangSFX = true
 
 --**PLAYER SETTINGS**
---Whenever to enable the jumping SFX used by players.
+--Whether to enable the jumping SFX used by players.
 extrasounds.enableJumpingSFX = true
---Whenever to enable the spinjumping SFX used by players.
+--Whether to enable the spinjumping SFX used by players.
 extrasounds.enableSpinjumpingSFX = true
---Whenever to enable the tail attack SFX used by players.
+--Whether to enable the tail attack SFX used by players.
 extrasounds.enableTailAttackSFX = true
---Whenever to enable the sliding SFX used by players.
+--Whether to enable the sliding SFX used by players.
 extrasounds.enableSlidingSFX = true
---Whenever to enable the double jumping SFX used by players.
+--Whether to enable the double jumping SFX used by players.
 extrasounds.enableDoubleJumpingSFX = true
---Whenever to use the jump sound instead of the double jump sound.
+--Whether to use the jump sound instead of the double jump sound.
 extrasounds.useOriginalJumpForDoubleJump = false
---Whenever to enable the boot SFX used by players.
+--Whether to enable the boot SFX used by players.
 extrasounds.enableBootSFX = true
---Whenever to use the jump sound instead of the boot sound when unmounting a Yoshi.
+--Whether to use the jump sound instead of the boot sound when unmounting a Yoshi.
 extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = false
---Whenever to enable the death sound used by players.
+--Whether to enable the death sound used by players.
 extrasounds.enableDeathSFX = true
---Whenever to enable the Link slashing used by Link characters.
+--Whether to enable the Link slashing used by Link characters.
 extrasounds.enableLinkSlashSFX = true
---Whenever to enable the Link fireball slashing used by Link characters.
+--Whether to enable the Link fireball slashing used by Link characters.
 extrasounds.enableLinkSlashFireballSFX = true
---Whenever to enable the Link iceball slashing used by Link characters.
+--Whether to enable the Link iceball slashing used by Link characters.
 extrasounds.enableLinkSlashIceballSFX = true
 
 --**1UP SETTINGS**
---Whenever to use the original 1UP sound instead of using the other custom sounds.
+--Whether to use the original 1UP sound instead of using the other custom sounds.
 extrasounds.use1UPSoundForAll1UPs = false
 
 --**EXPLOSION SETTINGS**
---Whenever to enable the SMB2 explosion SFX.
+--Whether to enable the SMB2 explosion SFX.
 extrasounds.enableSMB2ExplosionSFX = true
---Whenever to enable the fireworks SFX.
+--Whether to enable the fireworks SFX.
 extrasounds.enableFireworksSFX = true
---Whenever to use the original explosion sound instead of using the other custom sounds.
+--Whether to use the original explosion sound instead of using the other custom sounds.
 extrasounds.useFireworksInsteadOfOtherExplosions = false
 
 --**BLOCK SETTINGS**
---Whenever to enable all normal brick smashing SFXs.
+--Whether to enable all normal brick smashing SFXs.
 extrasounds.enableBrickSmashing = true
---Whenever to enable coin SFXs when hitting blocks.
+--Whether to enable coin SFXs when hitting blocks.
 extrasounds.enableBlockCoinCollecting = true
---Whenever to use the original sprout sound instead of using the other custom sounds.
+--Whether to use the original sprout sound instead of using the other custom sounds.
 extrasounds.useOriginalBlockSproutInstead = false
 
 --**NPC SETTINGS**
---Whenever to use the original NPC fireball sound instead of using the other custom sounds.
+--Whether to use the original NPC fireball sound instead of using the other custom sounds.
 extrasounds.useOriginalBowserFireballInstead = false
---Whenever to enable ice block freezing or not.
+--Whether to enable ice block freezing or not.
 extrasounds.enableIceBlockFreezing = true
---Whenever to enable ice block breaking or not.
+--Whether to enable ice block breaking or not.
 extrasounds.enableIceBlockBreaking = true
---Whenever to enable the enemy stomping SFX.
+--Whether to enable the enemy stomping SFX.
 extrasounds.enableEnemyStompingSFX = true
---Whenever to enable the ice melting SFX used for throw blocks.
+--Whether to enable the ice melting SFX used for throw blocks.
 extrasounds.enableIceMeltingSFX = true
---Whenever to enable Venus Fire Trap fireballs.
+--Whether to enable Venus Fire Trap fireballs.
 extrasounds.enableVenusFireball = true
 
 --**COIN SETTINGS**
---Whenever to enable the coin collecting SFX.
+--Whether to enable the coin collecting SFX.
 extrasounds.enableCoinCollecting = true
---Whenever to enable the cherry collecting SFX.
+--Whether to enable the cherry collecting SFX.
 extrasounds.enableCherryCollecting = true
---Whenever to use the original dragon coin sounds instead of the other custom sounds.
+--Whether to use the original dragon coin sounds instead of the other custom sounds.
 extrasounds.useOriginalDragonCoinSounds = false
 
 --**MISC SETTINGS**
---Whenever to enable the NPC to Coin SFX.
+--Whether to enable the NPC to Coin SFX.
 extrasounds.enableNPCtoCoin = true
---Whenever to enable the HP get SFXs.
+--Whether to enable the HP get SFXs.
 extrasounds.enableHPCollecting = true
---Whenever to use the original spinjumping SFX for big enemies instead.
+--Whether to use the original spinjumping SFX for big enemies instead.
 extrasounds.useOriginalSpinJumpForBigEnemies = false
---Whenever to enable the SMB2 enemy kill sounds.
+--Whether to enable the SMB2 enemy kill sounds.
 extrasounds.enableSMB2EnemyKillSounds = true
---Whenever to enable star collecting sounds.
+--Whether to enable star collecting sounds.
 extrasounds.enableStarCollecting = true
---Whenever to play the P-Switch/Stopwatch timer when a P-Switch/Stopwatch is active.
+--Whether to play the P-Switch/Stopwatch timer when a P-Switch/Stopwatch is active.
 extrasounds.playPSwitchTimerSFX = true
---Whenever to enable fire flower block sound hitting.
+--Whether to enable fire flower block sound hitting.
 extrasounds.enableFireFlowerHitting = false --Let's only use this for characters that really need it
---Whenever to enable the shell grabbing SFX.
+--Whether to enable the shell grabbing SFX.
 extrasounds.enableGrabShellSFX = true
---Whenever to enable the P-Wing SFX.
+--Whether to enable the P-Wing SFX.
 extrasounds.enablePWingSFX = true
+--Whether to use the time out sound for the P-Switch/Stopwatch or not.
+extrasounds.enablePSwitchTimeOutSFX = true
 
 if SaveData.enableLives == nil then
     SaveData.enableLives = true --Episode specific, but you can set this to false if you aren't using the lives system, which will play the 0up sound instead when retrieving lives.
@@ -863,11 +865,20 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                         end
                     end
                 end
-            elseif mem(0x00B2C62C, FIELD_WORD) <= 300 and mem(0x00B2C62C, FIELD_WORD) >= 1 or mem(0x00B2C62E, FIELD_WORD) <= 300 and mem(0x00B2C62E, FIELD_WORD) >= 1 then --Are the P-Switch/Stopwatch timers activate and on these number values?
+            elseif mem(0x00B2C62C, FIELD_WORD) <= 150 and mem(0x00B2C62C, FIELD_WORD) >= 1 or mem(0x00B2C62E, FIELD_WORD) <= 150 and mem(0x00B2C62E, FIELD_WORD) >= 1 then --Are the P-Switch/Stopwatch timers activate and on these number values?
                 if Level.endState() <= 0 then --Make sure to not activate when the endState is greater than 1
                     if not GameData.winStateActive or GameData.winStateActive == nil then --SMAS++ episode specific, you don't need this for anything outside of SMAS++
                         if extrasounds.playPSwitchTimerSFX then
                             extrasounds.playSFX(118, extrasounds.volume, 1, extrasounds.pSwitchTimerDelayFast)
+                        end
+                    end
+                end
+            end
+            if mem(0x00B2C62C, FIELD_WORD) == 150 or mem(0x00B2C62E, FIELD_WORD) == 150 then --Time out sound effect
+                if Level.endState() <= 0 then --Make sure to not activate when the endState is greater than 1
+                    if not GameData.winStateActive or GameData.winStateActive == nil then --SMAS++ episode specific, you don't need this for anything outside of SMAS++
+                        if extrasounds.enablePSwitchTimeOutSFX then
+                            extrasounds.playSFX(165, extrasounds.volume, 1)
                         end
                     end
                 end
