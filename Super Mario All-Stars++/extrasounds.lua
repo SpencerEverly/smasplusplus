@@ -170,6 +170,8 @@ local ready = false --This library isn't ready until onInit is finished
 extrasounds.sound = {}
 extrasounds.sound.sfx = {}
 
+extrasounds.disableSoundMarker = false
+
 extrasounds.soundNamesInOrder = {
     "player-jump", --1
     "stomped", --2
@@ -522,6 +524,7 @@ local function isShooting(p)
             p.mount == MOUNT_NONE
             or p.mount == MOUNT_BOOT
         )
+        and not p:mem(0x50, FIELD_BOOL)
         and p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED
         and p:mem(0x172, FIELD_BOOL)
     )
@@ -665,7 +668,7 @@ local healitems = table.map{9,184,185,249,14,182,183,34,169,170,277,264}
 local allenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,42,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,180,189,199,200,201,203,204,205,206,207,209,210,229,230,231,232,233,234,235,236,242,243,244,245,247,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,321,323,324,333,345,346,347,350,351,352,357,360,365,368,369,371,372,373,374,375,377,379,380,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,431,437,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,418,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,618,619,624,666} --Every single X2 enemy.
 local allsmallenemies = table.map{1,2,3,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,42,43,44,47,48,51,52,53,54,55,59,61,63,65,73,74,76,77,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,180,189,199,200,201,203,204,205,206,207,209,210,229,230,231,232,233,234,235,236,242,243,244,245,247,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,321,323,324,333,345,346,347,350,351,352,357,360,365,368,369,371,372,373,374,375,377,379,380,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,431,437,446,447,448,449,459,460,461,463,464,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,418,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,619,624,666} --Every single small X2 enemy.
 local allbigenemies = table.map{71,72,466,467,618} --Every single big X2 enemy.
-local enemyfireballs = table.map{246,390,87,85}
+local enemyfireballs = table.map{246,390,87,85} --All enemy fireballs.
 
 function extrasounds.onDraw()
     for k,v in ipairs(extrasounds.soundNamesInOrder) do
@@ -686,6 +689,7 @@ end
 
 function extrasounds.onTick() --This is a list of sounds that'll need to be replaced within each costume. They're muted here for obivious reasons.
     if extrasounds.active then --Only mute when active
+        extrasounds.disableSoundMarker = false --Make sure, when disabled, it only unmutes once when disabled
         Audio.sounds[1].muted = true --player-jump.ogg
         Audio.sounds[4].muted = true --block-smash.ogg
         Audio.sounds[7].muted = true --mushroom.ogg
@@ -1101,22 +1105,25 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
         end
     end
     if not extrasounds.active then --Unmute when not active
-        Audio.sounds[1].muted = false --player-jump.ogg
-        Audio.sounds[4].muted = false --block-smash.ogg
-        Audio.sounds[7].muted = false --mushroom.ogg
-        Audio.sounds[8].muted = false --player-dead.ogg
-        Audio.sounds[10].muted = false --player-slide.ogg
-        Audio.sounds[14].muted = false --coin.ogg
-        Audio.sounds[15].muted = false --1up.ogg
-        Audio.sounds[18].muted = false --fireball.ogg
-        Audio.sounds[33].muted = false --tail.ogg
-        Audio.sounds[36].muted = false --smash.ogg
-        Audio.sounds[39].muted = false --birdo-hit.ogg
-        Audio.sounds[42].muted = false --npc-fireball.ogg
-        Audio.sounds[43].muted = false --fireworks.ogg
-        Audio.sounds[59].muted = false --dragon-coin.ogg
-        Audio.sounds[77].muted = false --zelda-stab.ogg
-        Audio.sounds[81].muted = false --zelda-rupee.ogg
+        if not extrasounds.disableSoundMarker then
+            Audio.sounds[1].muted = false --player-jump.ogg
+            Audio.sounds[4].muted = false --block-smash.ogg
+            Audio.sounds[7].muted = false --mushroom.ogg
+            Audio.sounds[8].muted = false --player-dead.ogg
+            Audio.sounds[10].muted = false --player-slide.ogg
+            Audio.sounds[14].muted = false --coin.ogg
+            Audio.sounds[15].muted = false --1up.ogg
+            Audio.sounds[18].muted = false --fireball.ogg
+            Audio.sounds[33].muted = false --tail.ogg
+            Audio.sounds[36].muted = false --smash.ogg
+            Audio.sounds[39].muted = false --birdo-hit.ogg
+            Audio.sounds[42].muted = false --npc-fireball.ogg
+            Audio.sounds[43].muted = false --fireworks.ogg
+            Audio.sounds[59].muted = false --dragon-coin.ogg
+            Audio.sounds[77].muted = false --zelda-stab.ogg
+            Audio.sounds[81].muted = false --zelda-rupee.ogg
+            extrasounds.disableSoundMarker = true
+        end
     end
 end
 
@@ -1462,6 +1469,37 @@ function extrasounds.onPostNPCHarm(npc, harmtype, player)
     end
 end
 
+function extrasounds.tempMuteBlockHit()
+    Routine.waitFrames(1, true)
+    Audio.sounds[3].muted = false
+end
+
+function extrasounds.onNPCKill(eventToken, npc, harmtype)
+    if not Misc.isPaused() then
+        if extrasounds.active then
+            for _,p in ipairs(Player.get()) do --This will get actions regards to the player itself
+                
+                
+                
+                --**FIREBALL HAMMER SUIT SHIELD HIT (Block Hit Muting)**
+                if (enemyfireballs[npc.id] and p.powerup == 6 and harmtype == HARM_TYPE_VANISH and p:mem(0x12E,FIELD_BOOL)) then
+                    local onShell = Player.getIntersecting(npc.x, npc.y + 15, npc.x + npc.width, npc.y + npc.height + 15)
+                    if onShell then
+                        if extrasounds.enableFireballHammerShieldHitSFX then
+                            Audio.sounds[3].muted = true
+                            Routine.run(extrasounds.tempMuteBlockHit)
+                        end
+                    end
+                end
+                
+                
+                
+                
+            end
+        end
+    end
+end
+
 function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom coin sounds and etc.
     if not Misc.isPaused() then
         if extrasounds.active then
@@ -1491,8 +1529,8 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 
                 
                 
-                --**FIREBALL HAMMER SUIT SHIELD HIT**
-                if (enemyfireballs[npc.id] and p.powerup == 6 and harmtype == HARM_TYPE_VANISH) then
+                --**FIREBALL HAMMER SUIT SHIELD HIT (SFX)**
+                if (enemyfireballs[npc.id] and p.powerup == 6 and harmtype == HARM_TYPE_VANISH and p:mem(0x12E,FIELD_BOOL)) then
                     local onShell = Player.getIntersecting(npc.x, npc.y + 15, npc.x + npc.width, npc.y + npc.height + 15)
                     if onShell then
                         if extrasounds.enableFireballHammerShieldHitSFX then
