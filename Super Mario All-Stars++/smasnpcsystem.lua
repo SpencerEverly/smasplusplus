@@ -160,7 +160,7 @@ end
 
 function smasnpcsystem.onStart()
     if Level.filename() == "MALC - HUB.lvlx" then
-        smasnpcsystem.createNPC{image = testNPC2, frameCount = 17, x = -200752, y = -200128, width = 68, height = 54, direction = -1, messageToSpeak = "Test", isFriendly = true, cantMove = true, useVanillaLayers = false, attachToLayer = "Default", movementSpeed = 2, frameSpeed = 3}
+        --smasnpcsystem.createNPC{image = testNPC2, frameCount = 17, x = -200752, y = -200128, width = 68, height = 54, direction = -1, messageToSpeak = "Test", isFriendly = true, cantMove = true, useVanillaLayers = false, attachToLayer = "Default", movementSpeed = 2, frameSpeed = 3}
     end
 end
 
