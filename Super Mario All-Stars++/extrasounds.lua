@@ -874,6 +874,10 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                     end
                 end
             end
+            
+            
+            
+            --**PSWITCH/STOPWATCH TIMEOUT**
             if mem(0x00B2C62C, FIELD_WORD) == 150 or mem(0x00B2C62E, FIELD_WORD) == 150 then --Time out sound effect
                 if Level.endState() <= 0 then --Make sure to not activate when the endState is greater than 1
                     if not GameData.winStateActive or GameData.winStateActive == nil then --SMAS++ episode specific, you don't need this for anything outside of SMAS++
