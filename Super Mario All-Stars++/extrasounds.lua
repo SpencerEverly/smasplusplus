@@ -1280,7 +1280,7 @@ function extrasounds.onPostPlayerKill()
     
             --**PLAYER DYING**
             if extrasounds.enableDeathSFX then
-                if player.character ~= CHARACTER_LINK and player.character ~= CHARACTER_SNAKE then
+                if p.character ~= CHARACTER_LINK and p.character ~= CHARACTER_SNAKE then
                     extrasounds.playSFX(8)
                 end
             end
@@ -1482,7 +1482,7 @@ function extrasounds.onNPCKill(eventToken, npc, harmtype)
                 
                 
                 --**FIREBALL HAMMER SUIT SHIELD HIT (Block Hit Muting)**
-                if (enemyfireballs[npc.id] and p.powerup == 6 and harmtype == HARM_TYPE_VANISH and p:mem(0x12E,FIELD_BOOL) and p.character ~= 5) then
+                if (enemyfireballs[npc.id] and p.powerup == 6 and harmtype == HARM_TYPE_VANISH and p:mem(0x12E,FIELD_BOOL) and p.character ~= CHARACTER_LINK and p.character ~= CHARACTER_SNAKE) then
                     local onShell = Player.getIntersecting(npc.x, npc.y + 15, npc.x + npc.width, npc.y + npc.height + 15)
                     if onShell then
                         if extrasounds.enableFireballHammerShieldHitSFX then
@@ -1530,7 +1530,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 
                 
                 --**FIREBALL HAMMER SUIT SHIELD HIT (SFX)**
-                if (enemyfireballs[npc.id] and p.powerup == 6 and harmtype == HARM_TYPE_VANISH and p:mem(0x12E,FIELD_BOOL) and p.character ~= 5) then
+                if (enemyfireballs[npc.id] and p.powerup == 6 and harmtype == HARM_TYPE_VANISH and p:mem(0x12E,FIELD_BOOL) and p.character ~= CHARACTER_LINK and p.character ~= CHARACTER_SNAKE) then
                     local onShell = Player.getIntersecting(npc.x, npc.y + 15, npc.x + npc.width, npc.y + npc.height + 15)
                     if onShell then
                         if extrasounds.enableFireballHammerShieldHitSFX then
