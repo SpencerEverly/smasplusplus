@@ -912,6 +912,10 @@ function Misc.getActualLevelName()
     return levelName
 end
 
+function Misc.dialogSimple(stringd)
+    return Text.windowDebugSimple(tostring(stringd))
+end
+
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then
