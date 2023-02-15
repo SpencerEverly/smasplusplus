@@ -3753,7 +3753,7 @@ do
     end
 
 
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         if SaveData.enableLives then
             smwMap.hudCounters = {
                 -- Lives
@@ -3830,7 +3830,7 @@ do
                 }
             }
         end
-    elseif SaveData.disableX2char == true then
+    elseif SaveData.disableX2char then
         if SaveData.enableLives then
             smwMap.hudCounters = {
                 -- Lives
@@ -3989,7 +3989,7 @@ do
 
         if hudSettings.borderEnabled and hudSettings.borderImage ~= nil then
             Graphics.drawImageWP(hudSettings.borderImage,0,0,-3)
-            Graphics.drawImageWP(hudSettings.borderImageBG,-1000,0,-100)
+            Graphics.drawImageWP(hudSettings.borderImageBG,0,0,-100)
         end
 
 
@@ -4634,7 +4634,7 @@ smwMap.encounterSettings = {
 
 smwMap.hudSettings = {
     borderImage = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-solidcoloronly.png"),
-    borderImageBG = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-bg-solid.png"),
+    borderImageBG = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-33-4-tp-bg-solid-full.png"),
 
     borderLeftWidth = 66,
     borderRightWidth = 66,
