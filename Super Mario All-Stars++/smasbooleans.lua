@@ -24,8 +24,9 @@ smasbooleans.cantTwirl = false
 smasbooleans.toggleOffInventory = false
 --Alternative way to disable the pause menu if pauseplus can't be required due to stack overflows.
 smasbooleans.disablePauseMenu = false
---This is an indicator whenever the P-Switch is active or not.
+--This is an indicator whenever the P-Switch/Stopwatch is active or not.
 smasbooleans.pSwitchActive = false
+smasbooleans.stopWatchActive = false
 --Music muting booleans, used when muting music via Sound.muteMusic(section)
 smasbooleans.musicMuted = false
 smasbooleans.musicMutedTemporary = false
