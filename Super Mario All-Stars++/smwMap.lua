@@ -2809,7 +2809,7 @@ do
         textureCoords = {},
     }
 
-    local function doBasicGlDrawSetup(texture,x,y,width,height,sourceX,sourceY,sourceWidth,sourceHeight)
+    function smwMap.doBasicGlDrawSetup(texture,x,y,width,height,sourceX,sourceY,sourceWidth,sourceHeight)
         basicGlDrawArgs.texture = texture
 
         -- Vertex coords
@@ -2952,7 +2952,7 @@ do
 
                 basicGlDrawArgs.priority = priority
 
-                doBasicGlDrawSetup(waterImage, x + width*0.5 - waterImage.width*0.5 - smwMap.camera.x,y + height - waterHeight - smwMap.camera.y,waterImage.width,waterHeight,0,waterFrame*waterHeight,waterImage.width,waterHeight)
+                smwMap.doBasicGlDrawSetup(waterImage, x + width*0.5 - waterImage.width*0.5 - smwMap.camera.x,y + height - waterHeight - smwMap.camera.y,waterImage.width,waterHeight,0,waterFrame*waterHeight,waterImage.width,waterHeight)
 
                 Graphics.glDraw(basicGlDrawArgs)
                 
@@ -2967,7 +2967,7 @@ do
             y,height,sourceY,sourceHeight = handleCutoff(y,height,sourceY,sourceHeight, v.cutoffTopY,v.cutoffBottomY)
 
 
-            doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,sourceX,sourceY,sourceWidth,sourceHeight)
+            smwMap.doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,sourceX,sourceY,sourceWidth,sourceHeight)
 
             basicGlDrawArgs.priority = priority
 
@@ -3019,7 +3019,7 @@ do
 
             local frame = math.floor(lunatime.tick() / config.framespeed) % config.frames
 
-            doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
+            smwMap.doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
 
             basicGlDrawArgs.priority = -90
 
@@ -3056,7 +3056,7 @@ do
 
             local frame = math.floor(lunatime.tick() / config.framespeed) % config.frames
 
-            doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
+            smwMap.doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
 
             basicGlDrawArgs.priority = config.priority or getSceneOrPlayerPriority(v.x,v.priorityFindY or (v.y + v.height*0.5))
             basicGlDrawArgs.color = Color.white.. v.opacity
@@ -3125,7 +3125,7 @@ do
                 local mountWidth  = mountImage.width  / smwMap.playerSettings.framesX
                 local mountHeight = mountImage.height / smwMap.playerSettings.bootFrames
 
-                doBasicGlDrawSetup(mountImage,v.buffer.width*0.5 + mainXOffset - mountWidth*0.5,v.buffer.height*0.5 + mainYOffset + height*0.5 - mountHeight,mountWidth,mountHeight,v.direction*mountWidth,v.mountFrame*mountHeight,mountWidth,mountHeight)
+                smwMap.doBasicGlDrawSetup(mountImage,v.buffer.width*0.5 + mainXOffset - mountWidth*0.5,v.buffer.height*0.5 + mainYOffset + height*0.5 - mountHeight,mountWidth,mountHeight,v.direction*mountWidth,v.mountFrame*mountHeight,mountWidth,mountHeight)
 
                 basicGlDrawArgs.priority = -98.5
 
@@ -3144,7 +3144,7 @@ do
                 local mountWidth  = mountImage.width
                 local mountHeight = mountImage.height / smwMap.playerSettings.clownCarFrames
 
-                doBasicGlDrawSetup(mountImage,v.buffer.width*0.5 + mainXOffset - mountWidth*0.5,v.buffer.height*0.5 + clownCarOffset + height*0.5 - mountHeight,mountWidth,mountHeight,0,v.mountFrame*mountHeight,mountWidth,mountHeight)
+                smwMap.doBasicGlDrawSetup(mountImage,v.buffer.width*0.5 + mainXOffset - mountWidth*0.5,v.buffer.height*0.5 + clownCarOffset + height*0.5 - mountHeight,mountWidth,mountHeight,0,v.mountFrame*mountHeight,mountWidth,mountHeight)
 
                 basicGlDrawArgs.priority = -98.5
 
@@ -3175,7 +3175,7 @@ do
                 local mountWidth  = mountImage.width  / smwMap.playerSettings.framesX
                 local mountHeight = mountImage.height / smwMap.playerSettings.yoshiFrames
 
-                doBasicGlDrawSetup(mountImage,v.buffer.width*0.5 - mountWidth*0.5,v.buffer.height*0.5 + smwMap.playerSettings.gfxYOffset + height*0.5 - mountHeight,mountWidth,mountHeight,v.direction*mountWidth,v.mountFrame*mountHeight,mountWidth,mountHeight)
+                smwMap.doBasicGlDrawSetup(mountImage,v.buffer.width*0.5 - mountWidth*0.5,v.buffer.height*0.5 + smwMap.playerSettings.gfxYOffset + height*0.5 - mountHeight,mountWidth,mountHeight,v.direction*mountWidth,v.mountFrame*mountHeight,mountWidth,mountHeight)
 
                 Graphics.glDraw(basicGlDrawArgs)
             end
@@ -3191,7 +3191,7 @@ do
                 basicGlDrawArgs.color = Color.black.. shadowOpacity
                 basicGlDrawArgs.target = smwMap.mainBuffer
 
-                doBasicGlDrawSetup(shadowTexture, x,y, shadowTexture.width,shadowTexture.height, 0,0, shadowTexture.width,shadowTexture.height)
+                smwMap.doBasicGlDrawSetup(shadowTexture, x,y, shadowTexture.width,shadowTexture.height, 0,0, shadowTexture.width,shadowTexture.height)
 
                 Graphics.glDraw(basicGlDrawArgs)
 
@@ -3201,7 +3201,7 @@ do
 
 
             -- Draw main player to the buffer
-            doBasicGlDrawSetup(texture,v.buffer.width*0.5 + mainXOffset - width*0.5,v.buffer.height*0.5 + mainYOffset - height*0.5,width,height,v.direction*width,v.frame*height,width,height)
+            smwMap.doBasicGlDrawSetup(texture,v.buffer.width*0.5 + mainXOffset - width*0.5,v.buffer.height*0.5 + mainYOffset - height*0.5,width,height,v.direction*width,v.frame*height,width,height)
 
             basicGlDrawArgs.priority = -99
 
@@ -3222,14 +3222,14 @@ do
                 bufferDrawHeight = bufferDrawHeight*0.5 + 8 - waterImage.height*0.5 - v.zOffset
                 bufferDrawY = bufferDrawY + 10
 
-                doBasicGlDrawSetup(waterImage,v.x - waterImage.width*0.5 - smwMap.camera.x,v.y - smwMap.camera.y,waterImage.width,waterImage.height*0.5,0,waterFrame*waterImage.height*0.5,waterImage.width,waterImage.height*0.5)
+                smwMap.doBasicGlDrawSetup(waterImage,v.x - waterImage.width*0.5 - smwMap.camera.x,v.y - smwMap.camera.y,waterImage.width,waterImage.height*0.5,0,waterFrame*waterImage.height*0.5,waterImage.width,waterImage.height*0.5)
 
                 basicGlDrawArgs.priority = priority+0.0001
 
                 Graphics.glDraw(basicGlDrawArgs)
             end
 
-            doBasicGlDrawSetup(v.buffer,bufferDrawX,bufferDrawY,v.buffer.width,bufferDrawHeight,0,0,v.buffer.width,bufferDrawHeight)
+            smwMap.doBasicGlDrawSetup(v.buffer,bufferDrawX,bufferDrawY,v.buffer.width,bufferDrawHeight,0,0,v.buffer.width,bufferDrawHeight)
 
             basicGlDrawArgs.priority = priority
 
@@ -3654,7 +3654,7 @@ do
 
 
         -- Set up for path buffer
-        doBasicGlDrawSetup(smwMap.pathBuffer,cameraX - smwMap.camera.x,cameraY - smwMap.camera.y,smwMap.pathBuffer.width,smwMap.pathBuffer.height,0,0,smwMap.pathBuffer.width * renderScale,smwMap.pathBuffer.height * renderScale)
+        smwMap.doBasicGlDrawSetup(smwMap.pathBuffer,cameraX - smwMap.camera.x,cameraY - smwMap.camera.y,smwMap.pathBuffer.width,smwMap.pathBuffer.height,0,0,smwMap.pathBuffer.width * renderScale,smwMap.pathBuffer.height * renderScale)
 
         --Text.printWP(cameraX - smwMap.camera.x,32,32,10)
         --Text.printWP(cameraY - smwMap.camera.y,32,64,10)
@@ -4352,7 +4352,7 @@ do
 
 
         -- Draw the locked buffer to the main buffer
-        doBasicGlDrawSetup(smwMap.lockedBuffer,0,0,smwMap.lockedBuffer.width,smwMap.lockedBuffer.height,0,0,smwMap.lockedBuffer.width,smwMap.lockedBuffer.height)
+        smwMap.doBasicGlDrawSetup(smwMap.lockedBuffer,0,0,smwMap.lockedBuffer.width,smwMap.lockedBuffer.height,0,0,smwMap.lockedBuffer.width,smwMap.lockedBuffer.height)
 
         basicGlDrawArgs.priority = -80
 
