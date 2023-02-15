@@ -1090,8 +1090,10 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
                     end
                 end
                 for index2,explosion2 in ipairs(Effect.get(71)) do
-                    if extrasounds.enableFireworksSFX then
-                        extrasounds.playSFX(43, extrasounds.volume, 1)
+                    if explosion2.timer == 59 then
+                        if extrasounds.enableFireworksSFX then
+                            extrasounds.playSFX(43, extrasounds.volume, 1)
+                        end
                     end
                 end
             end
