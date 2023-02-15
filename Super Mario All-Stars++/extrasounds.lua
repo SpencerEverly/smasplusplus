@@ -614,7 +614,7 @@ local function hasJumped(p, ahippinandahoppinactive)
                 or GameData.winStateActive == nil
             )
             and p.forcedState == 0
-            and not Playur.underwater(p)
+            and not isPlayerUnderwater(p)
             and (
                 p:mem(0x11E, FIELD_BOOL)
                 and p.keys.jump == KEYS_PRESSED
