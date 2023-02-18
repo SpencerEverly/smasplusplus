@@ -56,6 +56,7 @@ function costume.onInit(p)
     for i = 2,7 do
         smasextraactions.longJumpAnimationFrames[i] = {4}
     end
+    smasextraactions.longJumpAnimationMaxFrames = 1
 end
 
 function costume.onCleanup(p)
@@ -70,6 +71,7 @@ function costume.onCleanup(p)
     for i = 2,7 do
         smasextraactions.longJumpAnimationFrames[i] = {4}
     end
+    smasextraactions.longJumpAnimationMaxFrames = 1
 end
 
 return costume
