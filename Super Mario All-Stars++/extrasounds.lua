@@ -867,11 +867,12 @@ function extrasounds.onTick() --This is a list of sounds that'll need to be repl
             
             --**FIREBALL HAMMER SUIT SHIELD HIT (Block Hit Muting Detection)**
             if ((p.powerup == 6 and p:mem(0x12E,FIELD_BOOL) and p.mount == 0 and not linkCharacters[p.character]) or (p.mount == 1 and p.mountColor == 2)) then
-                local onShell = NPC.getIntersecting(p.x, p.y, p.x + p.width + 30, p.y + p.height + 30)
-                if onShell and enemyfireballs[onShell.id] then
-                    if extrasounds.enableFireballHammerShieldHitSFX then
-                        Audio.sounds[3].muted = true
-                        Routine.run(extrasounds.tempMuteBlockHit)
+                for k,v in ipairs(NPC.getIntersecting(p.x - 15, p.y - 15, p.x + p.width + 30, p.y + p.height + 30)) do
+                    if enemyfireballs[v.id] then
+                        if extrasounds.enableFireballHammerShieldHitSFX then
+                            Audio.sounds[3].muted = true
+                            Routine.run(extrasounds.tempMuteBlockHit)
+                        end
                     end
                 end
             end
@@ -1487,7 +1488,7 @@ function extrasounds.onPostNPCHarm(npc, harmtype, player)
 end
 
 function extrasounds.tempMuteBlockHit()
-    Routine.waitFrames(3, true)
+    Routine.waitFrames(3)
     Audio.sounds[3].muted = false
 end
 
@@ -1534,7 +1535,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 
                 --**FIREBALL HAMMER SUIT SHIELD HIT (SFX)**
                 if ((p.powerup == 6 and p:mem(0x12E,FIELD_BOOL) and p.mount == 0 and not linkCharacters[p.character]) or (p.mount == 1 and p.mountColor == 2) and enemyfireballs[npc.id] and harmtype == HARM_TYPE_VANISH) then
-                    local onShell = Player.getIntersecting(npc.x, npc.y + 15, npc.x + npc.width, npc.y + npc.height + 15)
+                    local onShell = Player.getIntersecting(npc.x - 15, npc.y - 15, npc.x + npc.width, npc.y + npc.height + 15)
                     if onShell then
                         if extrasounds.enableFireballHammerShieldHitSFX then
                             extrasounds.playSFX(169)
