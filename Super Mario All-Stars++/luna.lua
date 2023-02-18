@@ -57,6 +57,7 @@ end
 --Now, before we get started, we require the most important libraries on the top.
 
 --SMAS specific functions need to be required first:
+_G.smasglobals = require("smasglobals")
 _G.smasmemoryaddresses = require("smasmemoryaddresses")
 _G.smasfunctions = require("smasfunctions")
 _G.smasanimationsystem = require("smasanimationsystem")

@@ -1,7 +1,8 @@
 local smasextraactions = {}
 
---LONG JUMP (Configurations)
-smasextraactions.enableLongJump = false --This is only enabled when certain characters have the long jump ability
+smasextraactions.enableLongJump = false --Enable this to add a long jump ability for your character. Default is false.
+
+--**Long Jump (Settings)**
 smasextraactions.isLongJumping = false --Enabled when the long jump was executed, disabled when the jump ends
 smasextraactions.isLongJumpingFirstFrame = false --Only enabled on the first frame the long jump was executed.
 smasextraactions.longJumpFullTimer = 0 --Used for the first frame calculation. Reset when on the ground.
@@ -16,7 +17,7 @@ smasextraactions.longJumpSmallDuckFrame = 8 --Used for small characters when duc
 smasextraactions.longJumpAnimationTimer = 0
 smasextraactions.longJumpAnimationArray = 0
 smasextraactions.longJumpAnimationFrames[1] = {3} --This is a table which has the animation frames for the long jump. The first one is a frame of 3 (For small jumps), the rest uses a frame of 4. If multiple frames are specified, the frames will animate with the speed specified until the end frames, which will stay on that frame until the jump ends when landed.
-for i = 2,7 do
+for i = 2,MAX_POWERUP_ID do
     smasextraactions.longJumpAnimationFrames[i] = {4}
 end
 
@@ -48,7 +49,7 @@ function smasextraactions.onTick()
                             end
                         end
                         if Playur.isJumping(p) and smasextraactions.longJumpTimer >= smasextraactions.longJumpWhenToStart then
-                            for i = 1,7 do
+                            for i = 1, MAX_POWERUP_ID do
                                 if p.powerup == i then
                                     p:setFrame(smasextraactions.longJumpAnimationFrames[i][smasextraactions.longJumpAnimationFrameActive] * player.direction)
                                 end
@@ -82,7 +83,7 @@ function smasextraactions.onTick()
                     end
                     
                     if p.speedY < 0 or not p.climbing then
-                        for i = 1,7 do
+                        for i = 1, MAX_POWERUP_ID do
                             if p.powerup == i then
                                 p:setFrame(smasextraactions.longJumpAnimationFrames[i][smasextraactions.longJumpAnimationFrameActive] * player.direction)
                             end
