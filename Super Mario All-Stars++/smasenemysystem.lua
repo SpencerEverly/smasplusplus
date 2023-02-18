@@ -8,10 +8,15 @@ end
 
 local heldNPC
 
-smasenemysystem.enableWallNPCFix = false
-smasenemysystem.enableTanookiThwompAndDiscKilling = true
+smasenemysystem.enableWallNPCFix = false --Enable this to prevent killing NPCs when held and let go right smack by a wall.
+smasenemysystem.enableTanookiThwompAndDiscKilling = true --Enable this to kill Thwomps and/or Roto-Discs while active as a statue.
+smasenemysystem.enableShellCoinGrabbing = true --Enable to let shells collect coins, dragon coins, cherries, etc.
 
 function smasenemysystem.onTick()
+    
+    
+    
+    --**WALL NPC FIX**
     if smasenemysystem.enableWallNPCFix then
         if player.holdingNPC ~= nil then
             heldNPC = player.holdingNPC
@@ -34,6 +39,9 @@ function smasenemysystem.onTick()
             end
         end
     end
+    
+    
+    --**TANOOKI THWOMP AND DISC KILLING**
     if smasenemysystem.enableTanookiThwompAndDiscKilling then
         if not SaveData.disableX2char then
             for _,p in ipairs(Player.get()) do
@@ -51,6 +59,32 @@ function smasenemysystem.onTick()
             end
         end
     end
+    
+    
+    
+    
+    
+    --**SHELL COIN GRABBING**
+    if smasenemysystem.enableShellCoinGrabbing then
+        if not SaveData.disableX2char then
+            for k,v in ipairs(NPC.get{5,7,24,73,113,114,115,116,172,174,194,195}) do --Shells
+                for j,l in ipairs(NPC.get{10,33,88,103,138,152,251,252,253,258,528}) do --Coins
+                    if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
+                        l.killFlag = HARM_TYPE_VANISH --Kills the coin
+                        Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
+                        Effect.spawn(79, l.x, l.y, 1) --Spawns 10 score effect
+                        SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+                        if extrasounds.enableCoinCollecting then
+                            extrasounds.playSFX(14)
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    
+    
 end
 
 return smasenemysystem

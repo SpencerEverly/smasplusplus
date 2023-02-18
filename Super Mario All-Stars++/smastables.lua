@@ -850,6 +850,7 @@ smastables.__smb1Dash1LevelsNumbered = {
 
 smastables.allGoombaNPCIDs = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
 smastables.allKoopaNPCIDs = table.map{4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
+smastables.allShellNPCIDs = table.map{5,7,24,73,113,114,115,116,172,174,194,195}
 smastables.allStarmanNPCIDs = table.map{293,559,994,996}
 smastables.allCollectableStarNPCIDs = table.map{97,196,1000}
 smastables.allCoinNPCIDs = table.map{10,33,88,103,138,152,251,252,253,258,528}
