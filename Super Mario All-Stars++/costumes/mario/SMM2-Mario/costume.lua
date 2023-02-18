@@ -1274,7 +1274,7 @@ function costume.onTick()
                 handleVictoryLeniency(p)
             end
         end
-        handleSpinBounce(p)
+        --handleSpinBounce(p)
         handleSpinJumping(p)
         
         -- Yoshi hitting (creates a small delay between hitting the run button and yoshi actually sticking his tongue out)

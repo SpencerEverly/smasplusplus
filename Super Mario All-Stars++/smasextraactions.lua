@@ -3,6 +3,8 @@ local smasextraactions = {}
 local maxPowerupID = 7 --Used for to make sure we're using powerup slots up to 7
 
 smasextraactions.enableLongJump = false --Enable this to add a long jump ability for your character. Default is false.
+smasextraactions.enableFasterClimbing = true --Enable this to add faster climbing. In order to climb faster, just hold run while you climb!
+smasextraactions.enableSpinjumpBounce = true --Enable this to add spinjump bouncing, like when holding jump when stomping on an enemy, except you're spinjumping. This ability is similar to the one found in the Super Mario World Super Mario Maker 2 theme.
 
 --**Long Jump (Settings)**
 smasextraactions.isLongJumping = false --Enabled when the long jump was executed, disabled when the jump ends
@@ -22,19 +24,31 @@ smasextraactions.longJumpAnimationFrames[1] = {3} --This is a table which has th
 for i = 2,maxPowerupID do
     smasextraactions.longJumpAnimationFrames[i] = {4}
 end
-
 smasextraactions.longJumpAnimationMaxFrames = 1 --Change this to set the maximum frames used.
+
+--**Spin Bounce (Settings)**
+smasextraactions.spinBounceHasStompedNPC = {} --Used for detecting the player that has stomped an NPC while spin jumping.
 
 function smasextraactions.onInitAPI()
     registerEvent(smasextraactions,"onInputUpdate")
-    registerEvent(smasextraactions,"onPostNPCKill")
+    registerEvent(smasextraactions,"onPostNPCHarm")
     registerEvent(smasextraactions,"onTick")
-    registerEvent(smasextraactions,"onDraw")
+end
+
+function smasextraactions.handleSpinBounce(p)
+    if smasextraactions.spinBounceHasStompedNPC[p] and smasextraactions.enableSpinjumpBounce then
+        p:mem(0x11C, FIELD_WORD, Defines.jumpheight_bounce)
+        smasextraactions.spinBounceHasStompedNPC[p] = nil
+    end
 end
 
 function smasextraactions.onTick()
     if not SaveData.disableX2char then
         for _,p in ipairs(Player.get()) do
+            
+            
+            
+            --**LONG JUMP**
             if smasextraactions.enableLongJump then
                 --[[Text.print(smasextraactions.longJumpAnimationTimer, 100, 100)
                 Text.print(smasextraactions.longJumpAnimationSpeed, 100, 120)
@@ -103,24 +117,40 @@ function smasextraactions.onTick()
                     smasextraactions.longJumpFullTimer = 0
                 end
             end
+            
+            
+            
+            
+            
+            --**SPIN BOUNCE**
+            if smasextraactions.enableSpinjumpBounce then
+                smasextraactions.handleSpinBounce(p)
+            end
+            
+            
+            
+            
+            
         end
     end
 end
 
 function smasextraactions.onInputUpdate()
     if not SaveData.disableX2char then
-        for _,p in ipairs(Player.get()) do
-            --Faster climbing when holding run
-            if p.climbing and p.forcedState == 0 and p.deathTimer == 0 then
-                if p.keys.run then
-                    if p.keys.left then
-                        p.x = p.x - 1.5
-                    elseif p.keys.right then
-                        p.x = p.x + 1.5
-                    elseif p.keys.up then
-                        p.y = p.y - 1.5
-                    elseif p.keys.down then
-                        p.y = p.y + 1.5
+        if smasextraactions.enableFasterClimbing then
+            for _,p in ipairs(Player.get()) do
+                --Faster climbing when holding run
+                if p.climbing and p.forcedState == 0 and p.deathTimer == 0 then
+                    if p.keys.run then
+                        if p.keys.left then
+                            p.x = p.x - 1.5
+                        elseif p.keys.right then
+                            p.x = p.x + 1.5
+                        elseif p.keys.up then
+                            p.y = p.y - 1.5
+                        elseif p.keys.down then
+                            p.y = p.y + 1.5
+                        end
                     end
                 end
             end
@@ -128,11 +158,15 @@ function smasextraactions.onInputUpdate()
     end
 end
 
-function smasextraactions.onPostNPCKill(killedNPC, harmType, culprit)
+function smasextraactions.onPostNPCHarm(npc, harmType, culprit)
     if not SaveData.disableX2char then
-        if harmType == HARM_TYPE_SPINJUMP and type(culprit) == "Player" then
-            if culprit.keys.jump or culprit.keys.altJump then
-                culprit.speedY = -Defines.jumpheight_bounce
+        if smasextraactions.enableSpinjumpBounce then
+            if harmType == HARM_TYPE_SPINJUMP then
+                if type(culprit) == "Player" then
+                    if (culprit.keys.jump or culprit.keys.altJump) then
+                        smasextraactions.spinBounceHasStompedNPC[culprit] = true
+                    end
+                end
             end
         end
     end
