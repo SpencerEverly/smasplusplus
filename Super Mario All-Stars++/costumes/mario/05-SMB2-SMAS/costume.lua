@@ -1,6 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local smasfunctions = require("smasfunctions")
+local smasextraactions = require("smasextraactions")
 
 local costume = {}
 
@@ -50,49 +51,10 @@ function costume.onInit(p)
         Sound.loadCostumeSounds()
         costume.loadedSounds = true
     end
-end
-
-function costume.onTick()
-    for _,p in ipairs(Player.get()) do
-        if p.keys.down == KEYS_DOWN then
-            if isPlayerDucking(p) then
-                if p.powerup == 1 then
-                    p:setFrame(8 * player.direction)
-                end
-                jumphighertimer = jumphighertimer + 1
-                if jumphighertimer == 120 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                        Sound.playSFX(117)
-                    end
-                end
-                if isJumping(p) and jumphighertimer >= 120 then
-                    if p.powerup == 1 then
-                        p:setFrame(3 * player.direction)
-                    else
-                        p:setFrame(4 * player.direction)
-                    end
-                    p.speedY = -16
-                    jumphigherframeactive = true
-                    jumphighertimer = 0
-                end
-            end
-        end
-        if not isPlayerDucking(p) then
-            jumphighertimer = 0
-        end
-        if jumphigherframeactive then
-            p.keys.down = false
-            if p.speedY < 0 and not p.climbing then
-                if p.powerup == 1 then
-                    p:setFrame(3 * player.direction)
-                else
-                    p:setFrame(4 * player.direction)
-                end
-            end
-            if p.speedY > 0 and p.climbing then
-                jumphigherframeactive = false
-            end
-        end
+    smasextraactions.enableLongJump = true
+    smasextraactions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
+    for i = 2,7 do
+        smasextraactions.longJumpAnimationFrames[i] = {4}
     end
 end
 
@@ -102,6 +64,11 @@ function costume.onCleanup(p)
     end
     for i = 1,165 do
         extrasounds.sound.sfx[i] = nil
+    end
+    smasextraactions.enableLongJump = false
+    smasextraactions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
+    for i = 2,7 do
+        smasextraactions.longJumpAnimationFrames[i] = {4}
     end
 end
 

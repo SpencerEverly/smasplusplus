@@ -3,6 +3,8 @@ local Time = {}
 local fiveweekendmonths={"January","March","May","July","August","October","December"}
 local daysPerMonth={31+28,31+30,31+30,31,31+30,31+30,0}
 
+Time.frameTimerSlots = {}
+
 --Below are the usual day/month/year counts
 function Time.day()
     return os.date("*t").day
@@ -142,7 +144,7 @@ function Time.lastWeekday(wday, month, year) --Returns the last weekday of the m
     return day
 end
 
-function Time.findFiveWeekendsOfMonth(year)
+function Time.findFiveWeekendsOfMonth(year) --Finds the five weekends of the month.
     local list={}
     local startday=((year-1)*365+math.floor((year-1)/4)-math.floor((year-1)/100)+math.floor((year-1)/400))%7
  
@@ -154,6 +156,28 @@ function Time.findFiveWeekendsOfMonth(year)
         startday=(startday+v)%7
     end
     return list
+end
+
+function Time.frameTimer(speed, numberChanger, frameSlot) --This will spit out a number that grows depending on the speed and number to grow the number to. frameSlot is used to determine which number on the Time.frameTimerSlots table to grow on.
+    if speed == nil then
+        speed = 1
+    end
+    if numberChanger == nil then
+        numberChanger = 2
+    end
+    
+    local timer = 0
+    local array
+    local frame = 1
+    
+    timer = timer + speed
+    array = timer % numberChanger
+    
+    if array >= numberChanger - 1 then
+        frame = frame + 1
+    end
+    
+    Time.frameTimerSlots[frameSlot] = frame
 end
 
 return Time

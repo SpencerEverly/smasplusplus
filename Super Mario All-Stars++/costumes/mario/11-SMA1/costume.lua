@@ -1,6 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local smasfunctions = require("smasfunctions")
+local smasextraactions = require("smasextraactions")
 
 local costume = {}
 
@@ -50,6 +51,12 @@ function costume.onInit(p)
         costume.loadedSounds = true
     end
     registerEvent(costume,"onTick")
+    smasextraactions.enableLongJump = true
+    smasextraactions.longJumpAnimationFrames[1] = {32,33,34,35} --SMA1 Defaults
+    for i = 2,7 do
+        smasextraactions.longJumpAnimationFrames[i] = {32,33,34,35}
+    end
+    smasextraactions.longJumpAnimationMaxFrames = 4
 end
 
 function costume.onTick()
@@ -61,49 +68,12 @@ function costume.onTick()
     if player:mem(0x26,FIELD_WORD) == 1 then
         Sound.playSFX("mario/11-SMA1/mario-yah.ogg")
     end
-    --[[for _,p in ipairs(Player.get()) do
-        if p.keys.down == KEYS_DOWN then
-            if isPlayerDucking(p) then
-                if p.powerup == 1 then
-                    p:setFrame(8 * player.direction)
-                end
-                jumphighertimer = jumphighertimer + 1
-                if jumphighertimer == 120 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                        Sound.playSFX(117)
-                        Sound.playSFX("mario/11-SMA1/mario-hummmm.ogg")
-                    end
-                end
-                if isJumping(p) and jumphighertimer >= 120 then
-                    Sound.playSFX("mario/11-SMA1/mario-yahoo.ogg")
-                    if p.powerup == 1 then
-                        p:setFrame(3 * player.direction)
-                    else
-                        p:setFrame(4 * player.direction)
-                    end
-                    p.speedY = -16
-                    jumphigherframeactive = true
-                    jumphighertimer = 0
-                end
-            end
-        end
-        if not isPlayerDucking(p) then
-            jumphighertimer = 0
-        end
-        if jumphigherframeactive then
-            p.keys.down = false
-            if p.speedY < 0 and not p.climbing then
-                if p.powerup == 1 then
-                    p:setFrame(3 * player.direction)
-                else
-                    p:setFrame(4 * player.direction)
-                end
-            end
-            if p.speedY > 0 and p.climbing then
-                jumphigherframeactive = false
-            end
-        end
-    end]]
+    if smasextraactions.isLongJumpingFirstFrame then
+        Sound.playSFX("mario/11-SMA1/mario-yahoo.ogg")
+    end
+    if smasextraactions.longJumpTimer == smasextraactions.longJumpWhenToStart then
+        Sound.playSFX("mario/11-SMA1/mario-hummmm.ogg")
+    end
 end
 
 function costume.onCleanup(p)
@@ -113,6 +83,12 @@ function costume.onCleanup(p)
     for i = 1,165 do
         extrasounds.sound.sfx[i] = nil
     end
+    smasextraactions.enableLongJump = false
+    smasextraactions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
+    for i = 2,7 do
+        smasextraactions.longJumpAnimationFrames[i] = {4}
+    end
+    smasextraactions.longJumpAnimationMaxFrames = 1
 end
 
 return costume
