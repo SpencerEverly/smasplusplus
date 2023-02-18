@@ -1534,9 +1534,8 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 
                 
                 --**FIREBALL HAMMER SUIT SHIELD HIT (SFX)**
-                if ((p.powerup == 6 and p:mem(0x12E,FIELD_BOOL) and p.mount == 0 and not linkCharacters[p.character]) or (p.mount == 1 and p.mountColor == 2) and enemyfireballs[npc.id] and harmtype == HARM_TYPE_VANISH) then
-                    local onShell = Player.getIntersecting(npc.x - 15, npc.y - 15, npc.x + npc.width, npc.y + npc.height + 15)
-                    if onShell then
+                for k,v in ipairs(NPC.getIntersecting(p.x - 15, p.y - 15, p.x + p.width + 30, p.y + p.height + 30)) do
+                    if ((p.powerup == 6 and p:mem(0x12E,FIELD_BOOL) and p.mount == 0 and not linkCharacters[p.character]) or (p.mount == 1 and p.mountColor == 2) and enemyfireballs[v.id] and harmtype == HARM_TYPE_VANISH) then
                         if extrasounds.enableFireballHammerShieldHitSFX then
                             extrasounds.playSFX(169)
                         end

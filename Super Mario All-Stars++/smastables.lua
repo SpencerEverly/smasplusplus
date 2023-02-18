@@ -1038,6 +1038,10 @@ smastables.soundNamesInOrder = {
     "pballoon", --163
     "peach-cry", --164
     "timeout", --165
+    "flyinghammer-throw", --166
+    "fireball2", --167
+    "fireball3", --168
+    "fireball-hit-hammershield", --169
 }
 
 smastables.keyboardMap = {
