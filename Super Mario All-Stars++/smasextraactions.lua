@@ -1,5 +1,7 @@
 local smasextraactions = {}
 
+local maxPowerupID = 7 --Used for to make sure we're using powerup slots up to 7
+
 smasextraactions.enableLongJump = false --Enable this to add a long jump ability for your character. Default is false.
 
 --**Long Jump (Settings)**
@@ -17,7 +19,7 @@ smasextraactions.longJumpSmallDuckFrame = 8 --Used for small characters when duc
 smasextraactions.longJumpAnimationTimer = 0
 smasextraactions.longJumpAnimationArray = 0
 smasextraactions.longJumpAnimationFrames[1] = {3} --This is a table which has the animation frames for the long jump. The first one is a frame of 3 (For small jumps), the rest uses a frame of 4. If multiple frames are specified, the frames will animate with the speed specified until the end frames, which will stay on that frame until the jump ends when landed.
-for i = 2,MAX_POWERUP_ID do
+for i = 2,maxPowerupID do
     smasextraactions.longJumpAnimationFrames[i] = {4}
 end
 
@@ -49,7 +51,7 @@ function smasextraactions.onTick()
                             end
                         end
                         if Playur.isJumping(p) and smasextraactions.longJumpTimer >= smasextraactions.longJumpWhenToStart then
-                            for i = 1, MAX_POWERUP_ID do
+                            for i = 1,maxPowerupID do
                                 if p.powerup == i then
                                     p:setFrame(smasextraactions.longJumpAnimationFrames[i][smasextraactions.longJumpAnimationFrameActive] * player.direction)
                                 end
@@ -83,7 +85,7 @@ function smasextraactions.onTick()
                     end
                     
                     if p.speedY < 0 or not p.climbing then
-                        for i = 1, MAX_POWERUP_ID do
+                        for i = 1,maxPowerupID do
                             if p.powerup == i then
                                 p:setFrame(smasextraactions.longJumpAnimationFrames[i][smasextraactions.longJumpAnimationFrameActive] * player.direction)
                             end
