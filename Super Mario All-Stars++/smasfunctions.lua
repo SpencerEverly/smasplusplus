@@ -20,6 +20,7 @@ _G.Playur = require("scripts/functions/player")
 _G.Npc = require("scripts/functions/npc")
 _G.Screen = require("scripts/functions/camera")
 _G.Evento = require("scripts/functions/events")
+_G.Effectx = require("scripts/functions/effect")
 
 --This is used for spitting out help documentation for these scripts.
 function smasfunctions.help()

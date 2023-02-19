@@ -85,7 +85,7 @@ function smasenemysystem.onTick()
             for k,v in ipairs(NPC.get{5,7,24,73,113,114,115,116,172,174,194,195}) do --Shells
                 for j,l in ipairs(NPC.get{251,252,253}) do --Rupees
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
-                        l.killFlag = HARM_TYPE_VANISH --Kills the coin
+                        l.killFlag = HARM_TYPE_VANISH --Kills the rupee
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
                         Effect.spawn(79, l.x, l.y, 1) --Spawns 10 score effect
                         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
@@ -99,14 +99,14 @@ function smasenemysystem.onTick()
             for k,v in ipairs(NPC.get{5,7,24,73,113,114,115,116,172,174,194,195}) do --Shells
                 for j,l in ipairs(NPC.get(274)) do --Dragon coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
-                        l.killFlag = HARM_TYPE_VANISH --Kills the coin
-                        Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
-                        Effect.spawn(79, l.x, l.y, 1) --Spawns 10 score effect
+                        l.killFlag = HARM_TYPE_VANISH --Kills the dragon coin
                         local c = NPC.config[l.id]
                         c.score = c.score + 1 --Replicate basegame point combo
                         if c.score > 14 then
                             c.score = 14
                         end
+                        Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
+                        Effectx.spawnScoreEffect(c.score, l.x, l.y) --Spawns score effect
                         extrasounds.playDragonCoinSFX(l)
                     end
                 end
