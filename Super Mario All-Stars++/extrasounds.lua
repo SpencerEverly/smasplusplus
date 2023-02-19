@@ -117,6 +117,8 @@ extrasounds.enableVenusFireball = true
 extrasounds.enableCoinCollecting = true
 --Whether to enable the cherry collecting SFX.
 extrasounds.enableCherryCollecting = true
+--Whether to enable the rupee collecting SFX.
+extrasounds.enableRupeeCollecting = true
 --Whether to use the original dragon coin sounds instead of the other custom sounds.
 extrasounds.useOriginalDragonCoinSounds = false
 
@@ -1504,6 +1506,34 @@ function extrasounds.onNPCKill(eventToken, npc, harmtype)
     end
 end
 
+function extrasounds.playDragonCoinSFX(npc)
+    if not extrasounds.useOriginalDragonCoinSounds then
+        if NPC.config[npc.id].score == 7 then
+            extrasounds.playSFX(59)
+        elseif NPC.config[npc.id].score == 8 then
+            extrasounds.playSFX(99)
+        elseif NPC.config[npc.id].score == 9 then
+            extrasounds.playSFX(100)
+        elseif NPC.config[npc.id].score == 10 then
+            extrasounds.playSFX(101)
+        elseif NPC.config[npc.id].score == 11 then
+            extrasounds.playSFX(102)
+        end
+    elseif extrasounds.useOriginalDragonCoinSounds then
+        if NPC.config[npc.id].score == 7 then
+            extrasounds.playSFX(59)
+        elseif NPC.config[npc.id].score == 8 then
+            extrasounds.playSFX(59)
+        elseif NPC.config[npc.id].score == 9 then
+            extrasounds.playSFX(59)
+        elseif NPC.config[npc.id].score == 10 then
+            extrasounds.playSFX(59)
+        elseif NPC.config[npc.id].score == 11 then
+            extrasounds.playSFX(59)
+        end
+    end
+end
+
 function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom coin sounds and etc.
     if not Misc.isPaused() then
         if extrasounds.active then
@@ -1598,7 +1628,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                     end
                 end
                 if otherCoinSoundsMap[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
-                    if extrasounds.enableCoinCollecting then
+                    if extrasounds.enableRupeeCollecting then
                         extrasounds.playSFX(81)
                     end
                 end
@@ -1637,31 +1667,7 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                 
                 --**DRAGON COINS**
                 if npc.id == 274 and Colliders.collide(p, npc) then --Dragon coin counter sounds
-                    if not extrasounds.useOriginalDragonCoinSounds then
-                        if NPC.config[npc.id].score == 7 then
-                            extrasounds.playSFX(59)
-                        elseif NPC.config[npc.id].score == 8 then
-                            extrasounds.playSFX(99)
-                        elseif NPC.config[npc.id].score == 9 then
-                            extrasounds.playSFX(100)
-                        elseif NPC.config[npc.id].score == 10 then
-                            extrasounds.playSFX(101)
-                        elseif NPC.config[npc.id].score == 11 then
-                            extrasounds.playSFX(102)
-                        end
-                    elseif extrasounds.useOriginalDragonCoinSounds then
-                        if NPC.config[npc.id].score == 7 then
-                            extrasounds.playSFX(59)
-                        elseif NPC.config[npc.id].score == 8 then
-                            extrasounds.playSFX(59)
-                        elseif NPC.config[npc.id].score == 9 then
-                            extrasounds.playSFX(59)
-                        elseif NPC.config[npc.id].score == 10 then
-                            extrasounds.playSFX(59)
-                        elseif NPC.config[npc.id].score == 11 then
-                            extrasounds.playSFX(59)
-                        end
-                    end
+                    extrasounds.playDragonCoinSFX(npc)
                 end
                 
                 
