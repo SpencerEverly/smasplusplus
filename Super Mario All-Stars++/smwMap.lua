@@ -17,6 +17,7 @@
 local smwMap = {}
 
 local extrasounds = require("extrasounds")
+local inspect = require("ext/inspect")
 
 --In case if first time boot recieves an weird error message with ipairs, I put every SaveData generation from luna.lua into here.
 if SaveData.resolution == nil then
@@ -1047,6 +1048,7 @@ function smwMap.onStart()
     --if not GameData.____mainMenuComplete then
         --Level.load("SMAS - Start.lvlx")
     --end
+    
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
         p.forcedTimer = 0

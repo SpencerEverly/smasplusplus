@@ -85,4 +85,54 @@ function Img.draw(name, x, y, withPriority, sceneCoords, arg6, arg7) --PLEASE DO
     end
 end
 
+function Img.registerSceneDraw(image,xPos,yPos,widthPos,heightPos,sourceWidthPos,sourceHeightPos,priorityNum)
+    if image == nil then
+        return false
+    end
+    if xPos == nil then
+        return false
+    end
+    if yPos == nil then
+        return false
+    end
+    if widthPos == nil then
+        return false
+    end
+    if heightPos == nil then
+        return false
+    end
+    if sourceWidthPos == nil then
+        return false
+    end
+    if sourceHeightPos == nil then
+        return false
+    end
+    if priorityNum == nil then
+        return false
+    end
+    customCamera.registerSceneDraw(
+        function(args)
+            local X,Y,scale,rotation = customCamera.convertPosToScreen(args,xPos,yPos)
+            Graphics.drawBox{
+                texture        = image,	
+                sceneCoords    = false,
+                x              = X,
+                y              = Y,
+                width          = widthPos * scale,
+                height         = heightPos * scale,
+                sourceX        = 0,
+                sourceY        = 0,
+                sourceWidth    = sourceWidthPos,
+                sourceHeight   = sourceHeightPos,
+                centered       = true,
+                priority       = customCamera.convertPriority(args,priorityNum),
+                rotation       = rotation,
+                target         = args.target,
+                linearFiltered = args.linearFiltered,
+            }
+        end
+    )
+    return true
+end
+
 return Img
