@@ -645,8 +645,8 @@ function smascharacterinfo.setCostumeSpecifics()
     end
     if currentCostume == "PACMAN-ARRANGEMENT-PACMAN" then
         littleDialogue.characterNames[4] = "Pac-Man"
-        mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-        starman.sfxFile = Misc.resolveSoundFile("starman")
+        mega2.sfxFile = Misc.resolveSoundFile("mega/megashroom_pacmanarrangement")
+        starman.sfxFile = Misc.resolveSoundFile("starman/starman_pacmanarrangement")
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sound.sfx[148] = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
