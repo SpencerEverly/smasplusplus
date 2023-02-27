@@ -1304,4 +1304,12 @@ smastables.keyboardMap = {
     "" -- [255]
 }
 
+--This will be used for an SEE Mod-only feature where it'll compare what sounds were in the previously cached sound file table when changing sounds. If anything that's currently changed isn't matching the sounds on the previously cached sound file table, it'll clear the unmatched sounds that are specified from the SMBX2 cache.
+for k,v in ipairs(smastables.soundNamesInOrder) do
+    smastables.previouslyCachedSoundFiles = {}
+    smastables.currentlyCachedSoundFiles = {}
+    smastables.previouslyCachedSoundFiles[k] = v
+    smastables.currentlyCachedSoundFiles[k] = v
+end
+
 return smastables

@@ -96,31 +96,54 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
     EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
 end
 
-function Sound.resolveCostumeSound(name) --Resolve a sound for a costume being worn.
-    local costumeSoundDir
-    if not SaveData.disableX2char then
-        if SaveData.currentCostume == "N/A" then
-            costumeSoundDir = Misc.resolveSoundFile(name)
-        else
-            costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
-        end
-    elseif SaveData.disableX2char then
-        costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
+function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a costume being worn.
+    if stringOnly == nil then
+        stringOnly = false
     end
-    if costumeSoundDir ~= nil then
-        return SFX.open(costumeSoundDir)
+    if not stringOnly then
+        local costumeSoundDir
+        if not SaveData.disableX2char then
+            if SaveData.currentCostume == "N/A" then
+                costumeSoundDir = Misc.resolveSoundFile(name)
+            else
+                costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
+            end
+        elseif SaveData.disableX2char then
+            costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
+        end
+        if costumeSoundDir ~= nil then
+            return SFX.open(costumeSoundDir)
+        else
+            return SFX.open(Misc.resolveSoundFile(name))
+        end
     else
-        return SFX.open(Misc.resolveSoundFile(name))
+        local costumeSoundDir
+        if not SaveData.disableX2char then
+            if SaveData.currentCostume == "N/A" then
+                costumeSoundDir = Misc.resolveSoundFile(name)
+            else
+                costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
+            end
+        elseif SaveData.disableX2char then
+            costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
+        end
+        if costumeSoundDir ~= nil then
+            return costumeSoundDir
+        else
+            return Misc.resolveSoundFile(name)
+        end
     end
 end
 
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
     for k,v in ipairs(smastables.soundNamesInOrder) do
+        smastables.previouslyCachedSoundFiles[k] = smastables.currentlyCachedSoundFiles[k]
         if not smastables.stockSoundNumbersInOrder[k] then
             extrasounds.sound.sfx[k] = Sound.resolveCostumeSound(v)
         elseif smastables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
         end
+        smastables.currentlyCachedSoundFiles[k] = Sound.resolveCostumeSound(v, true)
     end
     --[[for i = 1, #smastables.soundNamesInOrder do
         local cachedSounds = {}
