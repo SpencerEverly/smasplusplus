@@ -6,8 +6,12 @@
 local smasfunctions = {}
 
 --If loading it with a costume, load these libraries here to prevent errors
-_G.SFX = require("base/audiomaster")
-_G.Cheats = require("base/game/newcheats")
+if SFX == nil then
+    _G.SFX = require("base/audiomaster")
+end
+if Cheats == nil then
+    _G.Cheats = require("base/game/newcheats")
+end
 
 --Now for the base functions!
 _G.Misk = require("scripts/functions/misc")
