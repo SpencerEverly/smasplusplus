@@ -494,6 +494,9 @@ smascharacterchanger.addVariant("Mega Man","Mega Man 1-6 (NES)","MEGAMAN-NES")
 smascharacterchanger.addVariant("Mega Man","Bad Box Art Mega Man","BAD BOX ART MEGA MAN")
 
 --**Yoshi (SMW2) variants**
+smascharacterchanger.addVariant("Yoshi (SMW2)","Super Mario Advance 3","SMA3")
+
+--**Yoshi (SMW2, Alt) variants**
 smascharacterchanger.addVariant("Yoshi (SMW2, Alt)","Yoshi's Story","YS-GREEN")
 
 --**Rosalina variants**
