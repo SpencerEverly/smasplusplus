@@ -100,33 +100,23 @@ function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a cos
     if stringOnly == nil then
         stringOnly = false
     end
-    if not stringOnly then
-        local costumeSoundDir
-        if not SaveData.disableX2char then
-            if SaveData.currentCostume == "N/A" then
-                costumeSoundDir = Misc.resolveSoundFile(name)
-            else
-                costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
-            end
-        elseif SaveData.disableX2char then
-            costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
+    local costumeSoundDir
+    if not SaveData.disableX2char then
+        if SaveData.currentCostume == "N/A" then
+            costumeSoundDir = Misc.resolveSoundFile(name)
+        else
+            costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
         end
+    elseif SaveData.disableX2char then
+        costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
+    end
+    if not stringOnly then
         if costumeSoundDir ~= nil then
             return SFX.open(costumeSoundDir)
         else
             return SFX.open(Misc.resolveSoundFile(name))
         end
     else
-        local costumeSoundDir
-        if not SaveData.disableX2char then
-            if SaveData.currentCostume == "N/A" then
-                costumeSoundDir = Misc.resolveSoundFile(name)
-            else
-                costumeSoundDir = Misc.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
-            end
-        elseif SaveData.disableX2char then
-            costumeSoundDir = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
-        end
         if costumeSoundDir ~= nil then
             return costumeSoundDir
         else

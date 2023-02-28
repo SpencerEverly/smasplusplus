@@ -11,17 +11,9 @@ local warpTransition = require("warpTransition")
 local playerManager = require("playerManager")
 local Routine = require("routine")
 
-if SaveData.currentCostume == nil then
-    SaveData.currentCostume = "TBD"
-end
-
 function smascharacterintros.onInitAPI()
     registerEvent(smascharacterintros,"onStart")
     registerEvent(smascharacterintros,"onDraw")
-end
-
-if SaveData.enableIntros == nil then
-    SaveData.enableIntros = true --Enable the intro here, or not
 end
 
 smascharacterintros.animationactive = false --This is used to animate the intro
@@ -89,13 +81,6 @@ function smascharacterintros.onStart()
 end
 
 function smascharacterintros.onDraw()
-    local currentCostume = player:getCostume()
-    SaveData.currentCostume = currentCostume
-    
-    if currentCostume == nil then
-        SaveData.currentCostume = "N/A"
-    end
-    
     if SaveData.toggleCostumeAbilities == true then
         if SaveData.currentCostume == "GO-10SECONDRUN" then
             if SaveData.enableIntros == true then

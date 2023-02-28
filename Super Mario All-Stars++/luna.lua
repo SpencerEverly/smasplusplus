@@ -199,6 +199,14 @@ Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved(
 
 --First time SaveData settings, for resolutions and other settings
 
+--**Player-related data**
+if SaveData.currentCostume == nil then
+    SaveData.currentCostume = "N/A"
+end
+if SaveData.currentCharacterAlteration == nil then
+    SaveData.currentCharacterAlteration = "N/A"
+end
+
 --**Themes, resolutions**
 if SaveData.resolution == nil then --By default, the resolution will be set as fullscreen.
     SaveData.resolution = "fullscreen"
@@ -293,6 +301,9 @@ if SaveData.openingComplete == nil then
 end
 if SaveData.currentLanguage == nil then
     SaveData.currentLanguage = "english"
+end
+if SaveData.enableIntros == nil then
+    SaveData.enableIntros = true --Enable the intro here, or not
 end
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
@@ -505,6 +516,17 @@ function onDraw()
         if player.keys.pause == KEYS_DOWN then -- Pressed Pause Key
             Graphics.drawImageWP(bottomkeys,44,588,-1)
         end
+    end
+    
+    --This'll update the costume throughout the game
+    local currentCostume = player:getCostume()
+    SaveData.currentCostume = currentCostume
+    
+    --This'll update the path for costumes
+    if SaveData.currentCostume ~= "N/A" then
+        SaveData.currentCostumePath = "costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume
+    else
+        SaveData.currentCostumePath = "N/A"
     end
 end
 
