@@ -352,7 +352,7 @@ function SysManager.exitLevel(winType) --Exits a level with the win type specifi
         end
         for _,p in ipairs(Player.get()) do
             if p:mem(0x15E, FIELD_WORD) >= 1 and p.forcedState == FORCEDSTATE_INVISIBLE then
-                if Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == "" then
+                if (Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == "" or Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == nil) then
                     SysManager.loadMap()
                 end
             end
