@@ -8,6 +8,9 @@ local costume = {}
 
 costume.loadedSounds = false
 
+--**SPINDASH SETTINGS**
+costume.spinRev = 0 --The amount a spindash has been charged
+
 local eventsRegistered = false
 local plr
 local balled
