@@ -1,149 +1,88 @@
---NPCManager is required for setting basic NPC properties
+local npc = {}
 local npcManager = require("npcManager")
+local extrasounds = require("extrasounds")
 
---Create the library table
-local boltLifts = {}
---NPC_ID is dynamic based on the name of the library file
-local npcID = NPC_ID
+local id = NPC_ID
 
---Defines NPC config for our NPC. You can remove superfluous definitions.
-local boltLiftsSettings = {
-	id = npcID,
-	--Sprite size
-    gfxwidth = 64,
-	gfxheight = 32,
-	--Hitbox size. Bottom-center-bound to sprite size.
+npcManager.setNpcSettings({
+	id = id,
+	
 	width = 64,
+	gfxwidth = 64,
+	gfxheight = 32,
 	height = 32,
-	--Sprite offset from hitbox for adjusting hitbox anchor on sprite.
-	gfxoffsetx = 0,
-	gfxoffsety = 0,
-	--Frameloop-related
+	
 	frames = 4,
-	framestyle = 0,
-	framespeed = 8, --# frames between frame change
-	--Movement speed. Only affects speedX by default.
-	speed = 1,
-	--Collision-related
-	npcblock = false,
-	npcblocktop = false, --Misnomer, affects whether thrown NPCs bounce off the NPC.
-	playerblock = false,
-	playerblocktop = false, --Also handles other NPCs walking atop this NPC.
-
-	nohurt=true,
+	framespeed = 4,
+	
+	jumphurt = true,
+	nohurt = true,
+	
+	noyoshi = true,
+	noiceball = true,
+	
 	nogravity = true,
 	noblockcollision = true,
-	nofireball = true,
-	noiceball = true,
-	noyoshi= true,
-	nowaterphysics = true,
-	--Various interactions
-	jumphurt = false, --If true, spiny-like
-	spinjumpsafe = false, --If true, prevents player hurt when spinjumping
-	harmlessgrab = false, --Held NPC hurts other NPCs if false
-	harmlessthrown = false, --Thrown NPC hurts other NPCs if false
+	
+	boltBGO = 251,
+    boltBGO2 = 998,
+})
 
-	grabside=false,
-	grabtop=false,
+function npc.onTickEndNPC(v)
+	local config = NPC.config[id]
+	local count = 0
+	
+	for k,p in ipairs(Player.getIntersecting(v.x, v.y, v.x + v.width, v.y + v.height)) do
+		p.speedY = 1
 
-	--Identity-related flags. Apply various vanilla AI based on the flag:
-	--iswalker = false,
-	--isbot = false,
-	--isvegetable = false,
-	--isshoe = false,
-	--isyoshi = false,
-	--isinteractable = false,
-	--iscoin = false,
-	--isvine = false,
-	--iscollectablegoal = false,
-	--isflying = false,
-	--iswaternpc = false,
-	--isshell = false,
-
-	--Emits light if the Darkness feature is active:
-	--lightradius = 100,
-	--lightbrightness = 1,
-	--lightoffsetx = 0,
-	--lightoffsety = 0,
-	--lightcolor = Color.white,
-
-	--Define custom properties below
-}
-
---Applies NPC settings
-npcManager.setNpcSettings(boltLiftsSettings)
-
---Register the vulnerable harm types for this NPC. The first table defines the harm types the NPC should be affected by, while the second maps an effect to each, if desired.
-npcManager.registerHarmTypes(npcID,
-	{
-		--HARM_TYPE_JUMP,
-		--HARM_TYPE_FROMBELOW,
-		--HARM_TYPE_NPC,
-		--HARM_TYPE_PROJECTILE_USED,
-		--HARM_TYPE_LAVA,
-		--HARM_TYPE_HELD,
-		--HARM_TYPE_TAIL,
-		--HARM_TYPE_SPINJUMP,
-		--HARM_TYPE_OFFSCREEN,
-		--HARM_TYPE_SWORD
-	}, 
-	{
-		--[HARM_TYPE_JUMP]=10,
-		--[HARM_TYPE_FROMBELOW]=10,
-		--[HARM_TYPE_NPC]=10,
-		--[HARM_TYPE_PROJECTILE_USED]=10,
-		--[HARM_TYPE_LAVA]={id=13, xoffset=0.5, xoffsetBack = 0, yoffset=1, yoffsetBack = 1.5},
-		--[HARM_TYPE_HELD]=10,
-		--[HARM_TYPE_TAIL]=10,
-		--[HARM_TYPE_SPINJUMP]=10,
-		--[HARM_TYPE_OFFSCREEN]=10,
-		--[HARM_TYPE_SWORD]=10,
-	}
-);
-
---Custom local definitions below
-
-
---Register events
-function boltLifts.onInitAPI()
-	npcManager.registerEvent(npcID, boltLifts, "onTickNPC")
-	--npcManager.registerEvent(npcID, boltLifts, "onTickEndNPC")
-	--npcManager.registerEvent(npcID, boltLifts, "onDrawNPC")
-	--registerEvent(boltLifts, "onNPCKill")
+		if (p.keys.jump or p.keys.altJump) and p.speedY > 0 and p:mem(0x11C, FIELD_WORD) <= 0 then
+			SFX.play((p:mem(0x50, FIELD_BOOL) and extrasounds.sound.sfx[33]) or extrasounds.sound.sfx[1])
+			
+			p:mem(0x11C, FIELD_WORD, 20)
+			p.speedY = -6
+		end
+		
+		count = 1
+		
+		v.ai1 = 1
+	end
+	
+	if count == 0 then
+		v.animationTimer = 0
+		
+		if v.speedX > 0 then
+			v.speedX = v.speedX - 0.1
+		else
+			v.speedX = v.speedX + 0.1
+		end
+		
+		if v.speedX >= -0.1 and v.speedX <= 0.1 then
+			v.speedX = 0
+		end
+	else
+		v.speedX = 2 * v.direction
+	end
+	
+	if v.ai1 == 1 then
+		local fall = true
+		
+		for k,b in BGO.iterateIntersecting(v.x, v.y, v.x + v.width, v.y + v.height) do
+			if b.id == config.boltBGO or b.id == config.boltBGO2 and v.y > b.y then
+				fall = false
+				v.y = b.y
+			end
+		end
+		
+		if fall then
+			v.speedY = v.speedY + 0.3
+		else
+			v.speedY = 0
+		end
+	end
 end
 
-function boltLifts.onTickNPC(v)
-	--Don't act during time freeze
-	if Defines.levelFreeze then return end
-	
-	local data = v.data
-	
-	--If despawned
-	if v.despawnTimer <= 0 then
-		--Reset our properties, if necessary
-		data.initialized = false
-		return
-	end
-
-	--Initialize
-	if not data.initialized then
-		--Initialize necessary data.
-		data.initialized = true
-	end
-
-	--Depending on the NPC, these checks must be handled differently
-	if v:mem(0x12C, FIELD_WORD) > 0    --Grabbed
-	or v:mem(0x136, FIELD_BOOL)        --Thrown
-	or v:mem(0x138, FIELD_WORD) > 0    --Contained within
-	then
-		--Handling
-	end
-	
-	--Execute main AI. This template just jumps when it touches the ground.
-	--[[if v.collidesBlockBottom then
-		v.speedY = -6
-	end]]
+function npc.onInitAPI()
+	npcManager.registerEvent(id, npc, 'onTickEndNPC')
 end
 
---Gotta return the library table!
-return boltLifts
+return npc

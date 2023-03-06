@@ -31,4 +31,8 @@ function smasfunctions.help()
     Misc.richDialog("SMASFunctions Help Dialog Box", File.readFile("smasfunctions_help.txt"), true)
 end
 
+if Misc.inSuperMarioAllStarsPlusPlus() then --Easy-to-require SMAS++-specific globals, to load early on boot
+    _G.smascharacterglobals = require("smascharacterglobals")
+end
+
 return smasfunctions

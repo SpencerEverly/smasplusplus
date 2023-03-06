@@ -88,7 +88,7 @@ local function isOnGround()
 end
 
 function costume.onTick()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         if plr.holdingNPC == nil then
             if isSlowFalling() and not isOnGround() and not player:mem(0x12E, FIELD_BOOL) then
                 plr:playAnim({5,37,11,37}, 4, false, -25)

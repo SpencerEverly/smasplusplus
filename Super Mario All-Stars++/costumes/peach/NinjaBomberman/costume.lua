@@ -231,14 +231,14 @@ end
 --onjump
 
 function costume.onJump()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         canJump = true
         hasJumped = true
     end
 end
 
 function costume.onJumpEnd()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         canJump = false
         for _, j in pairs(hitBoxArray) do
             j.hasBeenHit = false

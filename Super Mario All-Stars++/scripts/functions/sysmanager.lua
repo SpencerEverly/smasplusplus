@@ -385,4 +385,16 @@ function SysManager.getEnteredCheckpointID()
     end
 end
 
+function SysManager.startingAtStartPoint()
+    if Checkpoint.getActive() ~= nil then
+        return false
+    elseif Checkpoint.getActive() == nil then
+        for _,p in ipairs(Player.get()) do
+            if Playur.currentWarp(p) == 0 then
+                return true
+            end
+        end
+    end
+end
+
 return SysManager

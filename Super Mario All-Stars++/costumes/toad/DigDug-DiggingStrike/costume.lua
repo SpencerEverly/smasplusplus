@@ -14,9 +14,6 @@ local harpoonGraphic = Graphics.loadImageResolved("costumes/toad/DigDug-DiggingS
 local harpoonBlockSpawned = false
 local harpoonPlayerDirection = 0
 
-costume.muteMusicWhenNotMoving = false
-costume.enableHarpoon = true
-
 local harpoonActive = false
 
 function costume.onInit(p)
@@ -34,7 +31,7 @@ function costume.onInit(p)
 end
 
 function costume.onDrawEnd()
-    if costume.muteMusicWhenNotMoving then
+    if smascharacterglobals.abilitySettings.taizoMuteMusicWhenNotMoving then
         if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
             if Level.endState() == 0 and plr.deathTimer == 0 and not Misc.isPaused() then
                 if plr.speedX == 0 and plr.speedY == 0 then
@@ -57,7 +54,7 @@ end
 
 function costume.harpoonAttack()
     harpoonActive = true
-    Sound.playSFX("toad/DigDug-DiggingStrike/harpoon-shoot.ogg")
+    Sound.playSFX(smascharacterglobals.soundSettings.taizoHarpoonShootSFX)
     Routine.wait(0.6)
     harpoonActive = false
 end
@@ -70,7 +67,7 @@ end
 
 function costume.onInputUpdate()
     if Level.endState() == 0 and plr.deathTimer == 0 and not Misc.isPaused() then
-        if costume.enableHarpoon then
+        if smascharacterglobals.abilitySettings.taizoCanUseHarpoon then
             if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
                 if plr.keys.run == KEYS_PRESSED and not harpoonActive and plr.powerup <= 2 then
                     Routine.run(costume.harpoonAttack)

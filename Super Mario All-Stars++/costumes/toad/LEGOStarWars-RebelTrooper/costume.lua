@@ -77,7 +77,7 @@ function costume.shootLaser1()
     end
     local gunid = 266
     local gunNpc = NPC.spawn(gunid, x, y, player.section, false, true)
-    Sound.playSFX("toad/LEGOStarWars-RebelTrooper/blaster.ogg")
+    Sound.playSFX(smascharacterglobals.soundSettings.rebelTrooperBlasterSFX)
     costume.useLaser1 = true
     gunNpc.frames = 1
     if (plr.direction == 1) then
@@ -106,7 +106,9 @@ function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities then
         if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
             if (player.powerup == 5) == false then
-                costume.shootLaser1()
+                if smascharacterglobals.abilitySettings.rebelTrooperCanShootBlaster then
+                    costume.shootLaser1()
+                end
             end
         end
     end
@@ -117,7 +119,9 @@ function costume.onControllerButtonPress(button, playerIdx)
         if playerIdx == 1 then
             if button == SaveData.specialbutton1stplayer then
                 if (player.powerup == 5) == false then
-                    costume.shootLaser1()
+                    if smascharacterglobals.abilitySettings.rebelTrooperCanShootBlaster then
+                        costume.shootLaser1()
+                    end
                 end
             end
         end
@@ -125,69 +129,73 @@ function costume.onControllerButtonPress(button, playerIdx)
 end
 
 function costume.onTick()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasfunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
             hasJumped = false
         elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not Playur.underwater(player) then
-            hasJumped = true
-            player:mem(0x11C, FIELD_WORD, 10)
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                Sound.playSFX("toad/LEGOStarWars-RebelTrooper/player-doublejump.ogg")
+            if smascharacterglobals.abilitySettings.rebelTrooperCanDoubleJump then
+                hasJumped = true
+                player:mem(0x11C, FIELD_WORD, 10)
+                if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    Sound.playSFX(smascharacterglobals.soundSettings.rebelTrooperDoubleJumpSFX)
+                end
             end
         end
     end
 end
 
 function costume.onDraw()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         --Health system
-        if plr.powerup <= 1 then
-            plr.powerup = 2
-        end
-        if characterhp > 3 then
-            characterhp = 3
-        end
-        if player.forcedState == FORCEDSTATE_POWERDOWN_SMALL or player.forcedState == FORCEDSTATE_POWERDOWN_FIRE or player.forcedState == FORCEDSTATE_POWERDOWN_ICE then
-            player.forcedState = FORCEDSTATE_NONE
-            player:mem(0x140, FIELD_WORD, 150)
-        end
-        if smashud.visible.customitembox == true then
-            local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
-            local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
-            if characterhp <= 0 then
-                Graphics.drawImageWP(heartempty, 357,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+        if smascharacterglobals.abilitySettings.rebelTrooperCanUseCustomHurtSystem then
+            if plr.powerup <= 1 then
+                plr.powerup = 2
             end
-            if characterhp == 1 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+            if characterhp > 3 then
+                characterhp = 3
             end
-            if characterhp == 2 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-                Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+            if player.forcedState == FORCEDSTATE_POWERDOWN_SMALL or player.forcedState == FORCEDSTATE_POWERDOWN_FIRE or player.forcedState == FORCEDSTATE_POWERDOWN_ICE then
+                player.forcedState = FORCEDSTATE_NONE
+                player:mem(0x140, FIELD_WORD, 150)
             end
-            if characterhp >= 3 then
-                Graphics.drawImageWP(heartfull, 357,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 388,  16, -4.2)
-                Graphics.drawImageWP(heartfull, 421,  16, -4.2)
-            end
-            if player.powerup == 3 then
-                Text.printWP("FIRE FLOWER", 310, 60, -4.2)
-            end
-            if player.powerup == 4 then
-                Text.printWP("SUPER LEAF", 310, 60, -4.2)
-            end
-            if player.powerup == 5 then
-                Text.printWP("TANOOKI SUIT", 290, 60, -4.2)
-            end
-            if player.powerup == 6 then
-                Text.printWP("HAMMER SUIT", 302, 60, -4.2)
-            end
-            if player.powerup == 7 then
-                Text.printWP("ICE FLOWER", 316, 60, -4.2)
+            if smashud.visible.customitembox == true then
+                local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
+                local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
+                if characterhp <= 0 then
+                    Graphics.drawImageWP(heartempty, 357,  16, -4.2)
+                    Graphics.drawImageWP(heartempty, 388,  16, -4.2)
+                    Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                end
+                if characterhp == 1 then
+                    Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+                    Graphics.drawImageWP(heartempty, 388,  16, -4.2)
+                    Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                end
+                if characterhp == 2 then
+                    Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+                    Graphics.drawImageWP(heartfull, 388,  16, -4.2)
+                    Graphics.drawImageWP(heartempty, 421,  16, -4.2)
+                end
+                if characterhp >= 3 then
+                    Graphics.drawImageWP(heartfull, 357,  16, -4.2)
+                    Graphics.drawImageWP(heartfull, 388,  16, -4.2)
+                    Graphics.drawImageWP(heartfull, 421,  16, -4.2)
+                end
+                if player.powerup == 3 then
+                    Text.printWP("FIRE FLOWER", 310, 60, -4.2)
+                end
+                if player.powerup == 4 then
+                    Text.printWP("SUPER LEAF", 310, 60, -4.2)
+                end
+                if player.powerup == 5 then
+                    Text.printWP("TANOOKI SUIT", 290, 60, -4.2)
+                end
+                if player.powerup == 6 then
+                    Text.printWP("HAMMER SUIT", 302, 60, -4.2)
+                end
+                if player.powerup == 7 then
+                    Text.printWP("ICE FLOWER", 316, 60, -4.2)
+                end
             end
         end
         if costume.useLaser1 then
@@ -206,16 +214,20 @@ function costume.onDraw()
 end
 
 function costume.hphit()
-    if SaveData.toggleCostumeAbilities == true then
-        if not player.hasStarman and not player.isMega then
-            local hurtsoundrng = rng.randomInt(1,9)
-            Sound.playSFX("toad/LEGOStarWars-RebelTrooper/hit/"..hurtsoundrng..".ogg")
-            hit = true
-            if hit then
-                characterhp = characterhp - 1
-            end
-            if characterhp < 1 then
-                player:kill()
+    if SaveData.toggleCostumeAbilities then
+        if smascharacterglobals.abilitySettings.rebelTrooperCanUseCustomHurtSystem then
+            if not player.hasStarman and not player.isMega then
+                local hurtsoundrng = rng.randomInt(1,9)
+                if smascharacterglobals.soundSettings.rebelTrooperCanUseHurtSFX then
+                    Sound.playSFX("toad/LEGOStarWars-RebelTrooper/hit/"..hurtsoundrng..".ogg")
+                end
+                hit = true
+                if hit then
+                    characterhp = characterhp - 1
+                end
+                if characterhp < 1 then
+                    player:kill()
+                end
             end
         end
     end

@@ -54,7 +54,7 @@ function costume.onDraw()
             player.forcedState = FORCEDSTATE_NONE
             player:mem(0x140, FIELD_WORD, 150)
         end
-        if smashud.visible.customitembox == true then
+        if smashud.visible.customitembox then
             if baldihp <= 0 then
                 Graphics.drawImageWP(heartempty, 357,  80, -4.2)
                 Graphics.drawImageWP(heartempty, 388,  80, -4.2)

@@ -26,21 +26,23 @@ function costume.onInit(p)
 end
 
 function costume.onTick()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasfunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
             hasJumped = false
         elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not isPlayerUnderwater(player) then
-            hasJumped = true
-            player:mem(0x11C, FIELD_WORD, 14)
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                Sound.playSFX("toad/Jasmine/player-doublejump.ogg")
+            if smascharacterglobals.abilitySettings.jasmineCanDoubleJump then
+                hasJumped = true
+                player:mem(0x11C, FIELD_WORD, 14)
+                if not table.icontains(smastables._noLevelPlaces,Level.filename()) then
+                    Sound.playSFX(smascharacterglobals.soundSettings.jasmineDoubleJumpSFX)
+                end
             end
         end
     end
 end
 
 function costume.onDraw()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         --Health system
         if plr.powerup <= 1 then
             plr.powerup = 2
@@ -95,7 +97,7 @@ function costume.onDraw()
 end
 
 function costume.hphit()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         if not player.hasStarman and not player.isMega then
             local hurtsoundrng = rng.randomInt(1,9)
             Sound.playSFX("toad/Jasmine/hit/"..hurtsoundrng..".ogg")

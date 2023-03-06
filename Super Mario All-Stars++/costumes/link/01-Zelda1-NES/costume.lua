@@ -44,7 +44,7 @@ local function isOnGround(p)
 end
 
 function costume.onTick()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         local isJumping = player:mem(0x11C, FIELD_WORD) and not isOnGround(p) --Jumping detection
         local isUnderwater = plr:mem(0x36, FIELD_BOOL) --Underwater detection
         if isJumping and plr:mem(0x14, FIELD_WORD) <= 0 and not isUnderwater and not isOnGround(p) then --Checks to see if the player is jumping...
@@ -85,7 +85,7 @@ function costume.onPostBlockHit(block, fromUpper)
 end
 
 function costume.onInputUpdate()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         if player.keys.run == KEYS_DOWN then
             plr:mem(0x168, FIELD_FLOAT, 10)
         else

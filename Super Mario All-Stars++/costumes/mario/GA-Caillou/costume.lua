@@ -28,15 +28,15 @@ function costume.onPostNPCKill(npc, harmType)
     local specialitems = table.map{34,169,170}
     local rngkey
     if items[npc.id] and Colliders.collide(player, npc) then
-        Sound.playSFX("mario/GA-Caillou/voices/kayloo-timetodieenemies.ogg", 1, 1, 80)
+        Sound.playSFX(smascharacterglobals.soundSettings.kaylooPowerupVoiceSFX, 1, 1, smascharacterglobals.soundSettings.kaylooPowerupVoiceSFXDelay)
     end
     if specialitems[npc.id] and Colliders.collide(player, npc) then
-        Sound.playSFX("mario/GA-Caillou/voices/kayloo-aspecialitem.ogg", 1, 1, 80)
+        Sound.playSFX(smascharacterglobals.soundSettings.kaylooSpecialPowerupVoiceSFX, 1, 1, smascharacterglobals.soundSettings.kaylooSpecialPowerupVoiceSFXDelay)
     end
 end
 
 function costume.onPostPlayerHarm()
-    --Sound.playSFX("mario/GA-Caillou/voices/kayloo-owthathurt.ogg")
+    --Sound.playSFX(smascharacterglobals.soundSettings.kaylooHurtVoiceSFX)
 end
 
 function costume.onCleanup(p)

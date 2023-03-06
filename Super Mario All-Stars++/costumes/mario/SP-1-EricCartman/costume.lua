@@ -63,7 +63,9 @@ end
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities == true then
         if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
-            costume.throwSnowball()
+            if smascharacterglobals.abilitySettings.southParkEricCanThrowSnowballs then
+                costume.throwSnowball()
+            end
         end
     end
 end
@@ -72,7 +74,9 @@ function costume.onControllerButtonPress(button, playerIdx)
     if SaveData.toggleCostumeAbilities == true then
         if playerIdx == 1 then
             if button == SaveData.specialbutton1stplayer then
-                costume.throwSnowball()
+                if smascharacterglobals.abilitySettings.southParkEricCanThrowSnowballs then
+                    costume.throwSnowball()
+                end
             end
         end
     end
@@ -99,7 +103,7 @@ function costume.throwSnowball()
             snowballNpc.speedY = 1
         end
         if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-            Sound.playSFX("mario/SP-1-EricCartman/snowball_throw.ogg")
+            Sound.playSFX(smascharacterglobals.soundSettings.southParkEricSnowballThrowSFX)
         end
         costume.usesnowball = false
         cooldown = 35
@@ -120,7 +124,9 @@ function costume.onPostNPCKill(npc, harmType)
     end
     if costume.abilitesenabled then
         if items[npc.id] and Colliders.collide(plr, npc) then
-            SFX.play("costumes/mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
+            if smascharacterglobals.soundSettings.southParkEricCanUseVoice then
+                SFX.play("costumes/mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
+            end
         end
     end
 end
@@ -134,7 +140,9 @@ function costume.onPlayerHarm()
             else
                 hurtvoicerng = rng.randomInt(7,8)
             end
-            Sound.playSFX("mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
+            if smascharacterglobals.soundSettings.southParkEricCanUseVoice then
+                Sound.playSFX("mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
+            end
         end
     end
 end
@@ -147,7 +155,9 @@ function costume.onPlayerKill()
         dyingvoicerng = rng.randomInt(3,5)
     end
     if costume.abilitesenabled then
-        Sound.playSFX("mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
+        if smascharacterglobals.soundSettings.southParkEricCanUseVoice then
+            Sound.playSFX("mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
+        end
     end
 end
 
