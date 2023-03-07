@@ -183,6 +183,8 @@ Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
 ----Music Credits----
 
+(Can we better sort/retype how the main music credits are set up? Maybe we can do main music credits, specific game credits, etc...)
+
 - Some SMB1, SMB2, SMB3, LL, SMW music by LadiesMan217, Lu9, and Nintendo
 - Some other SMB1, SMB2, SMB3, LL, SMW music by The Mario Multiverse Team, with a few songs recreated by me in All-Stars 16 bit format (EmmaNerd, Amer1ciuM), with other SMAS music by TheLegendofRenegade, Nimbus Cumulus, and some other people (See other music section)
 - Some music by me:
@@ -314,7 +316,58 @@ Extra MIDIs are by (Some names are still unknown, research needed. If you see a 
 - YI-Jazzy! - Jorge D. Fuentes
 - Yoshi's Island - Sword-Bolt
 
-Other music played on the episode are made by:
+Invincibility theme music for all characters made by:
+
+- starman_2012beta - MachRider/Markykku
+- starman_2012beta_ddp - FireMario/Spencer Everly
+- starman_a2xt - Nintendo/The Tetris Company (Tetris DS)
+- starman_a2xt2 - Lamaze-P/Hoeloe
+- starman_darsonic55 - Nintendo/DarSonic55
+- starman_darsonic55_ddp - FireMario/Spencer Everly/DarSonic55
+- starman_ddp - Nintendo
+- starman_digdug - NAMCO/Spencer Everly
+- starman_earthbound - Nintendo/HAL Labratories/Spencer Everly
+- starman_goanimate - GoAnimate (Vyond)
+- starman_hotelmario - Spencer Everly
+- starman_jcfoster - JC Foster Takes it to the Moon (Jelly Song, https://www.youtube.com/watch?v=ly-WInK0EUg)
+- starman_nintendogs - Nintendo/Spencer Everly
+- starman_nsmbds - Nintendo
+- starman_nsmbwii - Nintendo
+- starman_pacmanarrangement - NAMCO/Spencer Everly
+- starman_peanuts - Charles M. Schulz/Square Enix/Spencer Everly
+- starman_pitfall - David Crane/Spencer Everly
+- starman_princessrescue - Chris Spry
+- starman_sm64 - Nintendo/Spencer Everly
+- starman_sma1 - Nintendo/Spencer Everly
+- starman_sma2 - Nintendo
+- starman_sma3 - Nintendo
+- starman_sma4 - Nintendo
+- starman_smas - Nintendo/Spencer Everly (Slowed down to fit the original NES BPM)
+- starman_smas_smb2 - Nintendo/LadiesMan217
+- starman_smb1 - Nintendo
+- starman_smb1_ddp - Nintendo/Spencer Everly
+- starman_smb2 - Nintendo
+- starman_smb2_ddp - Nintendo/Spencer Everly
+- starman_smb3 - Nintendo
+- starman_smb3_ddp - Nintendo/Spencer Everly
+- starman_smbs - Nintendo/Spencer Everly
+- starman_smbspecial - Nintendo/Hudson Soft
+- starman_sml2 - Nintendo
+- starman_smw - Nintendo
+- starman_smw_pirate - Nintendo/Hummer Team
+- starman_smw_pirate_alt - Nintendo/Hummer Team/Master Jonald
+- starman_smw2 - Nintendo
+- starman_sonic - SEGA/JX
+- starman_southpark - Darren Mitchell/Acclaim Entertainment/Spencer Everly
+- starman_spongebob - Paramount/Nickelodeon/THQ/Lu9/Spencer Everly
+- starman_spongebob_alt - Paramount/Nickelodeon/THQ/Nintendo/Spencer Everly
+- starman_starwars - Traveller's Tales Games/LucasArts/Amaze Entertainment/Disney/Nintendo/Spencer Everly
+- starman_superbomberman5 - Hudson Soft/Nintendo/Spencer Everly
+- starman_supertux - wansti
+- starman_undertale - Toby Fox/Nintendo/Spencer Everly
+- starmanmegashroom_smbddx - Phillip Haynes/Spencer Everly (I adjusted the loud volume/some panning)
+
+Other music played on the episode are made by (This will need better sorting sometime, so that we can credit an author with a music listing instead of just shoving an author's name without putting whatever the creator made. Also remove any author that has music now unused, but keep the other author credits on another file):
 
 - Maxodex
 - Gamma V
