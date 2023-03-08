@@ -183,6 +183,8 @@ Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 
 ----Music Credits----
 
+Main music credits:
+
 (Can we better sort/retype how the main music credits are set up? Maybe we can do main music credits, specific game credits, etc...)
 
 - Some SMB1, SMB2, SMB3, LL, SMW music by LadiesMan217, Lu9, and Nintendo
