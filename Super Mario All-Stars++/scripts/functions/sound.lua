@@ -8,7 +8,9 @@ local playerManager = require("playermanager")
 local smastables
 pcall(function() smastables = require("smastables") end)
 
-_G.SFX = require("base/audiomaster")
+if SFX == nil then
+    _G.SFX = require("base/audiomaster")
+end
 
 if GameData.levelMusicTemporary == nil then
     GameData.levelMusicTemporary = {}
