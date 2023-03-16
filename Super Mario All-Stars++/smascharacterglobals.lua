@@ -104,6 +104,17 @@ smascharacterglobals.soundSettings.rebelTrooperCanUseHurtSFX = true
 
 --**MISCELLANEOUS SETTINGS**
 
+
+--*SMBX38A CHARACTERS*
+--The powerup-to-big forced state ID for 38A characters.
+smascharacterglobals.miscellaneousSettings.smbx38APowerupBigForcedStateID = 752
+--The powerup-to-fire forced state ID for 38A characters.
+smascharacterglobals.miscellaneousSettings.smbx38APowerupFireForcedStateID = 753
+--The powerup-to-ice forced state ID for 38A characters.
+smascharacterglobals.miscellaneousSettings.smbx38APowerupIceForcedStateID = 754
+--The powerdown-to-small forced state ID for 38A characters.
+smascharacterglobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID = 755
+
 --*SONIC THE HEDGEHOG*
 --This is used for Sonic's spin dash, which is the amount a spindash has been charged.
 smascharacterglobals.miscellaneousSettings.sonicSpinRev = 0
