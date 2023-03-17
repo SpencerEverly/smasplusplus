@@ -286,6 +286,8 @@ function NPC.saveClass(class) --Saves a specific class. Used for NPCs.
 
         table.insert(Npc.savedClasses[class.name],fields)
     end
+    
+    console:println("Class "..tostring(class).." was saved.")
 end
 
 function NPC.restoreClass(class) --Restores a specific class. Used for NPCs.
@@ -345,6 +347,8 @@ function NPC.restoreClass(class) --Restores a specific class. Used for NPCs.
             end
         end
     end
+    
+    console:println("Class "..tostring(class).." was restored.")
 end
 
 function NPC.isOnScreen(npc)
@@ -457,6 +461,7 @@ function Npc.onTickEnd()
     -- Save classes (this is done after onStart so custom stuff has already been initiated)
     if not Npc.hasSavedClasses then
         NPC.saveClass()
+        console:println("Initial classes saved and ready to go!")
         Npc.hasSavedClasses = true
     end
 end

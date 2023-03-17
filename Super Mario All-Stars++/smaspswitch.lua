@@ -12,6 +12,7 @@ smaspswitch.pSwitchMusicStarted = false
 function smaspswitch.startPSwitchMusic() --Starts the P-Switch music.
     if not smaspswitch.pSwitchMusicStarted then
         if not smaspswitch.inNoPSwitchMusicPlayingSituations() then
+            console:println("P-Switch music activated!")
             Sound.muteMusic(-1)
             smasbooleans.musicMuted = true
             pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, Audio.MusicVolume() / 100, 0)
@@ -35,6 +36,7 @@ function smaspswitch.stopPSwitchMusic(resetLevelMusic) --Stops the P-Switch musi
     
     if not smaspswitch.inNoPSwitchMusicPlayingSituations() then
         if resetLevelMusic then
+            console:println("P-Switch music deactivated!")
             smasbooleans.musicMuted = false
             Sound.restoreMusic(-1)
         end

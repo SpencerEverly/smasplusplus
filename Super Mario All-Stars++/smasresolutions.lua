@@ -20,6 +20,7 @@ function smasresolutions.onInitAPI()
 end
 
 function smasresolutions.changeResolution()
+    console:println("Changing resolution settings set for "..SaveData.resolution.."...")
     if SaveData.resolution == "fullscreen" then
         customCamera.defaultScreenWidth = 800
         customCamera.defaultScreenHeight = 600

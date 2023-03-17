@@ -23,6 +23,8 @@ function smascharacterinfo.onStart()
 end
 
 function smascharacterinfo.setCostumeSpecifics()
+    console:println("Character information will now be changed.")
+    
     local currentCostume = SaveData.currentCostume
     
     if SaveData.disableX2char then

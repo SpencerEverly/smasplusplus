@@ -20,6 +20,8 @@
     Misc.exitEngine()
 end]]
 
+console:println("Super Mario All-Stars++ loading initated.")
+
 --Make sure we aren't running Beta 3 and below before we actually start...
 if (SMBX_VERSION < VER_BETA4_PATCH_3) then
     Text.windowDebugSimple("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")
@@ -45,16 +47,21 @@ end
 
 --For SEE Mod users, where they have a definite version of LunaLua.
 if SMBX_VERSION == VER_SEE_MOD then
+    console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
     _G.LunaDLL = ffi.load("LunaDll.dll")
 end
 if Misc.setWindowTitle ~= nil then
+    console:println("Window title set.")
     Misc.setWindowTitle("Super Mario All-Stars++")
 end
 if Misc.setWindowIcon ~= nil then
+    console:println("Window icon set.")
     Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 end
 
 --Now, before we get started, we require the most important libraries on the top.
+
+console:println("Loading important libraries...")
 
 --SMAS specific functions need to be required first:
 _G.smasglobals = require("smasglobals")
@@ -95,6 +102,7 @@ Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
 
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then
+    console:println("Mario Challenge detected! Loading game in minimal mode...")
     SaveData.disableX2char = false
 end
 
@@ -162,11 +170,15 @@ function classicEvents.doEvents() --To prevent the plObject a nil value error, t
 end
 
 --Now that everything has been loaded, start loading the medium important stuff
+
+console:println("Loading medium important libraries...")
+
 _G.transplate = require("transplate")
 _G.globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 _G.repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
 _G.rng = require("base/rng") --Load up rng for etc. things
 if SaveData.speedrunMode then
+    console:println("Speedrun mode enabled! Loading speedrun libraries...")
     speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
     inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
 end
@@ -179,10 +191,12 @@ for _,v in ipairs(npc_APIs) do
 end
 
 local loadactivate = true
+console:println("Loading Steve and SMW2 Yoshi characters...")
 local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
 --These will need to be overwritten over the original libraries, because we're fixing graphics/bugs from these characters.
+console:println("Overriding original character libraries...")
 playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
 playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
 playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
@@ -341,6 +355,7 @@ end
 --Now use onLoad to play the loading sound...
 function onLoad()
     if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and loadactivate then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+        console:println("Loading sound playing!")
         loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
         loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
         fadetolevel = true
@@ -523,10 +538,12 @@ function onDraw()
     SaveData.currentCostume = currentCostume
     
     --This'll update the path for costumes
-    if SaveData.currentCostume ~= "N/A" then
-        SaveData.currentCostumePath = "costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume
-    else
-        SaveData.currentCostumePath = "N/A"
+    if SaveData.currentCostume ~= nil then
+        if SaveData.currentCostume ~= "N/A" then
+            SaveData.currentCostumePath = "costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume
+        else
+            SaveData.currentCostumePath = "N/A"
+        end
     end
 end
 

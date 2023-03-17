@@ -604,7 +604,9 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
                 --smwMap.unlockPath("toSMBS2-5")
             end
             --TBD
+            console:println("Unlocked any map paths that were completed prior.")
         else
+            console:println("Unlocking map paths require you to be on the map.")
             return
         end
     end
@@ -612,8 +614,10 @@ end
 
 function Misc.toggleWindowOnly() --This, when fullscreen, will only toggle a window instead of being in fullscreen. Toggle again to turn off.
     if mem(0x00B250D8, FIELD_BOOL) then
+        console:println("Window-only mode disabled.")
         return mem(0x00B250D8, FIELD_BOOL, false)
     elseif not mem(0x00B250D8, FIELD_BOOL) then
+        console:println("Window-only mode enabled.")
         return mem(0x00B250D8, FIELD_BOOL, true)
     end
 end
@@ -622,6 +626,7 @@ local pSwitchMusic
 
 function Misc.doPSwitchUntimed(bool)
     if bool == nil then
+        console:println("Bool on P-Switch Untimed is nil! Returning...")
         return
     end
     if bool == true then
@@ -631,6 +636,7 @@ function Misc.doPSwitchUntimed(bool)
             smasbooleans.musicMuted = true
             pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, 0.6, 0)
         end
+        console:println("Enabled P-Switch untimed.")
     elseif bool == false then
         Misc.doPSwitchRaw(false)
         if Misc.inSuperMarioAllStarsPlusPlus() then
@@ -640,6 +646,7 @@ function Misc.doPSwitchUntimed(bool)
             end
         end
         Sound.restoreMusic(-1)
+        console:println("Disabled P-Switch untimed.")
     end
 end
 
@@ -695,10 +702,12 @@ function Misc.moveSaveSlot(slot, destination)
         error("You can't move to a save slot that's greater than 32767.")
         return
     end
+    console:println("Beginning save moving...")
     local filename = "save"..slot.."-ext.dat"
     local filenamesav = "save"..slot..".sav"
     local filename2 = "save"..destination.."-ext.dat"
     local filename2sav = "save"..destination..".sav"
+    console:println("Opening all save files...")
     local f = io.open(Misc.episodePath()..filename, "a+")
     local f2 = io.open(Misc.episodePath()..filename2, "w")
     local f3 = io.open(Misc.episodePath()..filenamesav, "a+")
@@ -717,9 +726,11 @@ function Misc.moveSaveSlot(slot, destination)
             f4:close()
         end
     end
+    console:println("Switching save slot to new slot...")
     Misc.saveSlot(destination)
     Misc.eraseSaveSlot(slot)
     Misc.saveGame()
+    console:println("Save moved.")
 end
 
 function Misc.eraseMainSaveSlot(slot) --This only erases the main save in the save slot.
@@ -735,9 +746,13 @@ function Misc.eraseMainSaveSlot(slot) --This only erases the main save in the sa
     if f == nil then
         return
     end
-
+    
+    console:println("Erasing .sav data...")
+    
     f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
     f:close()
+    
+    console:println("Erased .sav data.")
 end
 
 function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific slot.
@@ -754,6 +769,8 @@ function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific 
         return
     end
 
+    console:println("Erasing all save data...")
+
     f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
     f:close()
     
@@ -764,6 +781,8 @@ function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific 
 
     f2:write('{ \r--[1]-- \r{ \r   ["__costumes"]={2}, \r   ["__launcher"]={3}, \r   ["_basegame"]={4} \r}, \r--[2]-- \r{ \r \r}, \r--[3]-- \r{ \r \r}, \r--[4]-- \r{ \r   ["bigSwitch"]={5}, \r   ["_characterdata"]={6}, \r   ["starcoin"]={7}, \r   ["hud"]={8}, \r   ["starcoinCounter"]=0 \r}, \r--[5]-- \r{ \r \r}, \r--[6]-- \r{ \r   ["8"]={9}, \r   ["10"]={10}, \r   ["9"]={11}, \r   ["6"]={12}, \r   ["16"]={13}, \r   ["11"]={14}, \r   ["12"]={15}, \r   ["7"]={16}, \r   ["15"]={17}, \r   ["13"]={18}, \r   ["14"]={19} \r}, \r--[7]-- \r{ \r \r}, \r--[8]-- \r{ \r   ["score"]=0 \r}, \r--[9]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[10]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[11]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[12]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[13]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[14]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[15]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[16]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[17]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[18]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[19]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[20]-- \r{ \r   ["maxID"]=0, \r   ["alive"]={21} \r}, \r--[21]-- \r{ \r \r} \r}')
     f2:close()
+    
+    console:println("Erased all save data.")
 end
 
 function Misc.getLegacyStarsCollected() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
@@ -803,10 +822,12 @@ function Misc.use13Editor(bool)
         end
         if bool == true then
             mem(0x00B253C4, FIELD_BOOL, true)
+            console:println("Legacy 1.3 Editor enabled. Opening shortly...")
             for _,p in ipairs(Player.get()) do
                 p:kill()
             end
         else
+            console:println("Legacy 1.3 Editor disabled.")
             mem(0x00B253C4, FIELD_BOOL, false)
         end
     end
@@ -820,15 +841,19 @@ local oldy = 0
 function Misc.shakeWindow(shakenumber)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        console:println("NOT USING SEE MOD! Shake window command has stopped.")
         return
     else
         if Misc.isFullscreen() then
+            console:println("IN FULLSCREEN! Shake window command has stopped.")
             return
         else
             oldx = Misc.getWindowXPosition()
             oldy = Misc.getWindowYPosition()
             
             shaketally = shakenumber
+            
+            console:println("Shake window command has executed with a shake tally of "..tostring(shakenumber)..".")
         end
     end
 end
@@ -836,6 +861,7 @@ end
 function Misc.testModeSetSettings(player, powerup, mountType, mountColor, playerCount, showFPS, godMode, entranceIndex, player2, powerup2, mountType2, mountColor2)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        console:println("NOT USING SEE MOD! Test mode setting changer has stopped.")
         return
     else
         if Misc.inEditor() then
@@ -891,8 +917,11 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
             settings.entranceIndex = entranceIndex
             
             LunaDLL.LunaLuaSetTestModeSettings(settings)
+            
+            console:println("Test mode setting changer completed successfully.")
         else
             Misc.warn("You're not on the editor to execute this command!")
+            console:println("NOT ON THE EDITOR! Test mode setting changer has stopped executing.")
             return
         end
     end

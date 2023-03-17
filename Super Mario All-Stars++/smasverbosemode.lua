@@ -64,40 +64,79 @@ function smasverbosemode.onInitAPI()
     registerEvent(smasverbosemode,"onStart")
     registerEvent(smasverbosemode,"onEvent")
     registerEvent(smasverbosemode,"onDraw")
+    registerEvent(smasverbosemode,"onInputUpdate")
 end
 
 function smasverbosemode.onStart()
-    if smasverbosemode.activated then
-        --Routine.run(startLevel)
+    console:println("Level has officially started.")
+    console:println("Level filename: "..Level.filename())
+    console:println("Level name: "..Misc.getActualLevelName())
+    if Playur.currentWarp(player) == 0 then
+        console:println("Player 1 starting point (X/Y): "..tostring(Playur.startPointCoordinateX(1)).."/"..tostring(Playur.startPointCoordinateY(1)))
+        if Player.count() >= 2 then
+            console:println("Player 2 starting point (X/Y): "..tostring(Playur.startPointCoordinateX(2)).."/"..tostring(Playur.startPointCoordinateY(2)))
+        end
     end
-    lazyprintSMAS.monitor(player, {"x", "y", "powerup", "width", "height", "character"})
-    lazyprintSMAS.monitor(player, {"mount", "mountColor", "mountType", "forcedState", "forcedTimer"})
-    lazyprintSMAS.monitor(camera, {"x", "y", "width", "height"})
-    for i = 0,20 do
-        lazyprintSMAS.monitor(Section(i), {"music", "underwater", "noTurnBack"})
-    end
+    --lazyprintSMAS.monitor(player, {"x", "y", "powerup", "width", "height", "character"})
+    --lazyprintSMAS.monitor(player, {"mount", "mountColor", "mountType", "forcedState", "forcedTimer"})
+    --lazyprintSMAS.monitor(camera, {"x", "y", "width", "height"})
+    --for i = 0,20 do
+        --lazyprintSMAS.monitor(Section(i), {"music", "underwater", "noTurnBack"})
+    --end
 end
 
 function smasverbosemode.onEvent(eventName)
-    if smasverbosemode.activated then
-        if eventName then
-            --_storeVerboseString("Event "..eventName.." has executed.")
-        end
+    if eventName then
+        console:println("Event "..eventName.." has executed.")
     end
 end
 
 function startLevel()
-    Routine.wait(0.1, true)
-    --_storeVerboseString("Level has officially started.")
+    
 end
 
 function smasverbosemode.onDraw()
-    if smasverbosemode.activated then
-        _printVerboseList()
-        for _,p in ipairs(Player.get()) do
-            if p:mem(0x11C, FIELD_WORD) == 1 then
-                --_storeVerboseString("Player "..p.idx.." has jumped.")
-            end
+    for _,p in ipairs(Player.get()) do
+        if Playur.isJumping(p) then
+            console:println("Player "..p.idx.." has jumped.")
+        end
+        if p:mem(0x26, FIELD_WORD) == 1 then
+            console:println("Player "..p.idx.." is grabbing something.")
+        end
+    end
+end
+
+function smasverbosemode.onInputUpdate()
+    for _,p in ipairs(Player.get()) do
+        if p.keys.left == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the left button.")
+        end
+        if p.keys.right == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the right button.")
+        end
+        if p.keys.up == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the up button.")
+        end
+        if p.keys.down == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the down button.")
+        end
+        if p.keys.jump == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the jump button.")
+        end
+        if p.keys.run == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the run button.")
+        end
+        if p.keys.altJump == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the alt-jump button.")
+        end
+        if p.keys.altRun == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the alt-run button.")
+        end
+        if p.keys.pause == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the pause button.")
+        end
+        if p.keys.dropItem == KEYS_PRESSED then
+            console:println("Player "..p.idx.." has pressed the drop item button.")
         end
     end
 end

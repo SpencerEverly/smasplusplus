@@ -74,6 +74,7 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
         if table.icontains(smastables.__smb1Dash1Levels,Level.filename()) then --If we're on any -1 level...
             for _,p in ipairs(Player.get()) do --Get all players in case
                 if block.layerObj == hidden1UPLayer and block.contentID == 1186 then --If we hit the block layer and the ID is the 1UP itself...
+                    console:println("SMB1 1UP block hit. Collect the required coins on a -3 level to reactivate.")
                     SaveData.SMB1Invisible1UPBlockMet = false --Set this to false.
                 end
             end
@@ -88,6 +89,7 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
         
         --Block coin hit detection
         if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateBlockCountdown then
+            console:println("Activated multi-coin block system on block "..tostring(block.idx)..".")
             activateBlockCountdown = true
             table.insert(smasblocksystem.blockListWithCoins, block)
             block.data.multiCoinTimer = smasblocksystem.countDownMarker
@@ -101,6 +103,7 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
         --Yoshi egg to 1UP conversion
         if playerornil ~= nil then
             if playerornil.mount == MOUNT_YOSHI and smasblocksystem.yoshiNPCs[block.contentID] then
+                console:println("Yoshi already mounted on Player "..tostring(playerornil.idx)..", changed to 1UP mushroom.")
                 block.contentID = 1187
             end
         end
@@ -119,8 +122,10 @@ function smasblocksystem.onPostNPCKill(npc, harmType)
                     if smasblocksystem.debug then
                         Sound.playSFX(1001) --Debug purposes
                     end
+                    console:println("SMB1 -3 coin requirement matches. 1UP blocks will now show on -1 levels.")
                     SaveData.SMB1Invisible1UPBlockMet = true
                 elseif smasblocksystem.invisibleCoinsCollected > smasblocksystem.invisibleCoinsToCollect[levelIncrementation] then --Else if any higher, don't set it
+                    console:println("SMB1 -3 coin requirement is over the amount set. 1UP blocks will not show on -1 levels.")
                     SaveData.SMB1Invisible1UPBlockMet = false
                 end
             end

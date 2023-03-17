@@ -40,6 +40,7 @@ Sound.resolvePaths = {
 }
 
 function Sound.openSFX(name) --Opening SFXs
+    console:println("Opening '"..name.."'...")
     return SFX.open(name)
         or SFX.open("_OST/" .. name)
         or SFX.open("_OST/_Sound Effects/"..name)
@@ -50,6 +51,8 @@ function Sound.openSFX(name) --Opening SFXs
 end
 
 function Sound.playSFX(name, volume, loops, delay) --If you want to play any sound, you can use Sound.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
+    console:println("Playing sound '"..name.."'...")
+    
     if unexpected_condition then error("That sound doesn't exist. Play something else.") end
     
     if name == nil then
@@ -125,6 +128,12 @@ function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a cos
             return Misc.resolveSoundFile(name)
         end
     end
+    
+    if costumeSoundDir ~= nil then
+        console:println("Character sound '"..costumeSoundDir.."' loaded.")
+    else
+        console:println("Character sound '"..name.."' loaded.")
+    end
 end
 
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
@@ -164,6 +173,7 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
     if eventObj.cancelled then return end
     
     if sectionid == -1 then --If -1, all section music will change to the specified song
+        console:println("All music will be changed to '"..tostring(name).."'.")
         for i = 0,20 do
             Section(i).music = name
             if smasbooleans then
@@ -174,6 +184,7 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
             end
         end
     elseif sectionid >= 0 or sectionid <= 20 then
+        console:println("Music from section "..tostring(sectionid).." will be changed to '"..tostring(name).."'.")
         Section(sectionid).music = name
         if smasbooleans then
             if smasbooleans.musicMuted then
@@ -190,19 +201,23 @@ end
 
 function Sound.muteMusic(sectionid) --Mute all section music, or just mute a specific section
     if sectionid == -1 then --If -1, all section music will be muted
+        console:println("Muting music on all sections...")
         for i = 0,20 do
             musiclist = {Section(i).music}
             GameData.levelMusicTemporary[i] = Section(i).music
             Audio.MusicChange(i, 0)
         end
         if smasbooleans then
+            console:println("smasbooleans music muted boolean set to true.")
             smasbooleans.musicMutedTemporary = true
         end
     elseif sectionid >= 0 or sectionid <= 20 then
+        console:println("Muting music on section "..tostring(sectionid).."...")
         musiclist = {Section(sectionid).music}
         GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
         Audio.MusicChange(sectionid, 0)
         if smasbooleans then
+            console:println("smasbooleans music muted boolean set to true.")
             smasbooleans.musicMutedTemporary = true
         end
     elseif sectionid >= 21 then
@@ -213,17 +228,21 @@ end
 
 function Sound.restoreMusic(sectionid) --Restore all section music, or just restore a specific section
     if sectionid == -1 then --If -1, all section music will be restored
+        console:println("Restoring music on all sections...")
         for i = 0,20 do
             songname = GameData.levelMusicTemporary[i]
             Section(i).music = songname
         end
         if smasbooleans then
+            console:println("smasbooleans music muted boolean set to false.")
             smasbooleans.musicMutedTemporary = false
         end
     elseif sectionid >= 0 or sectionid <= 20 then
+        console:println("Restoring music on section "..tostring(sectionid).."...")
         songname = GameData.levelMusicTemporary[sectionid]
         Section(sectionid).music = songname
         if smasbooleans then
+            console:println("smasbooleans music muted boolean set to false.")
             smasbooleans.musicMutedTemporary = false
         end
     elseif sectionid >= 21 then
@@ -234,11 +253,13 @@ end
 
 function Sound.refreshMusic(sectionid) --Refresh the music that's currently playing by updating the music table
     if sectionid == -1 then --If -1, all section music will be counted
+        console:println("Refreshing music on all sections...")
         for i = 0,20 do
             musiclist = {Section(i).music}
             GameData.levelMusicTemporary[i] = Section(i).music
         end
     elseif sectionid >= 0 or sectionid <= 20 then
+        console:println("Refreshing music on section "..tostring(sectionid).."...")
         musiclist = {Section(sectionid).music}
         GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
     elseif sectionid >= 21 then
@@ -250,6 +271,7 @@ end
 function Sound.restoreOriginalMusic(sectionid) --Restore all original section music, or just restore a specific section
     if sectionid == -1 then --If -1, all section music will be restored
         if GameData.levelMusic ~= {} then
+            console:println("Refreshing originally stored music on all sections...")
             for i = 0,20 do
                 songname = GameData.levelMusic[i]
                 Section(i).music = songname
@@ -259,6 +281,7 @@ function Sound.restoreOriginalMusic(sectionid) --Restore all original section mu
         end
     elseif sectionid >= 0 or sectionid <= 20 then
         if GameData.levelMusic ~= {} then
+            console:println("Refreshing originally stored music on section "..tostring(sectionid).."...")
             songname = GameData.levelMusic[sectionid]
             Section(sectionid).music = songname
         else
@@ -309,20 +332,24 @@ function Sound.startupRefreshSystem()
         for i = 0,20 do
             GameData.levelMusicTemporary[i] = Section(i).music
         end
+        console:println("Music refresh system has been set up.")
         started = true
     end
 end
 
 function Sound.checkPWingSoundStatus()
     if SaveData.disablePWingSFX then
+        console:println("P-Wing sound effect setting has been set to disabled.")
         extrasounds.enablePWingSFX = false
     elseif not SaveData.disablePWingSFX then
+        console:println("P-Wing sound effect setting has been set to enabled.")
         extrasounds.enablePWingSFX = true
     end
 end
 
 function Sound.checkSMBXSoundSystemStatus()
     if SaveData.SMBXSoundSystem then
+        console:println("Original SMBX sound system setting has been set to disabled.")
         extrasounds.enableGrabShellSFX = false
         extrasounds.playPSwitchTimerSFX = false
         extrasounds.enableSMB2EnemyKillSounds = false
@@ -340,6 +367,7 @@ function Sound.checkSMBXSoundSystemStatus()
         extrasounds.useFireSoundForHammerSuit = true
         extrasounds.useFireSoundForIce = true
     elseif not SaveData.SMBXSoundSystem then
+        console:println("Original SMBX sound system setting has been set to enabled.")
         extrasounds.enableGrabShellSFX = true
         extrasounds.playPSwitchTimerSFX = true
         extrasounds.enableSMB2EnemyKillSounds = true

@@ -50,6 +50,7 @@ function Playur.onInitAPI()
 end
 
 function Playur.setupPlayers()
+    console:println("Setting up players...")
     for i = 1,200 do
         if Player(i).character == 0 then
             Player(i).character = 1;
@@ -101,17 +102,20 @@ function Playur.execute(index, func) --Better player/player2 detection, for simp
         index = 1
     end
     if index == -1 then
+        console:println("Next player function will be executed on all players.")
         for i = 1,200 do
             if Player(i).isValid then
                 func(Player(i))
             end
         end
     else
+        console:println("Next player function will be executed on player "..tostring(index)..".")
         local p = Player(index)
         if p.isValid then
             func(plr)
         end
     end
+    console:println("Executed a player function with Playur.execute.")
 end
 
 function Playur.setCount(count) --Sets the total count of the players in the level.
@@ -119,6 +123,7 @@ function Playur.setCount(count) --Sets the total count of the players in the lev
         error("You cannot set the player count at this number.")
         return
     end
+    console:println("Player count has been set to "..tostring(count)..".")
     return mem(GM_PLAYERS_COUNT_ADDR, FIELD_WORD, count)
 end
 
@@ -142,11 +147,14 @@ function Playur.activate1stPlayer(enablexplosion) --Activates 1st player mode
     Playur.setCount(1)
     if smasbooleans then
         smasbooleans.introModeActivated = false
+        console:println("Player intro mode disabled to prevent any issues.")
     end
     if enableexplosion then
         local rngbomb = rng.randomEntry({69,71})
         Effect.spawn(rngbomb, player.x, player.y, player.section)
+        console:println("Explosion has been activated for changing player count.")
     end
+    console:println("1 player mode activated.")
 end
 
 function Playur.toggleSingleCoOp(enableexplosion) --Activates/deactivates single Co-Op mode, which is the cheat supermario2
@@ -168,11 +176,14 @@ function Playur.toggleSingleCoOp(enableexplosion) --Activates/deactivates single
         end
         if smasbooleans then
             smasbooleans.introModeActivated = false
+            console:println("Player intro mode disabled to prevent any issues.")
         end
         if enableexplosion then
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
+            console:println("Explosion has been activated for changing player count.")
         end
+        console:println("Single Co-Op enabled.")
     elseif mem(0x00B2C896, FIELD_WORD) == 1 then
         if enableexplosion then
             local rngbomb = rng.randomEntry({69,71})
@@ -180,6 +191,7 @@ function Playur.toggleSingleCoOp(enableexplosion) --Activates/deactivates single
         end
         Playur.activate1stPlayer()
         mem(0x00B2C896, FIELD_WORD, 0) --Reupdate SingleCoop to 0, according to the source code
+        console:println("Single Co-Op disabled.")
     end
 end
 
@@ -194,16 +206,20 @@ function Playur.activate2ndPlayer(enablexplosion) --Activates 2nd player mode
         player2.character = 2
         player2.frame = 1
         if player2.powerup == 0 then
+            console:println("Player 2 was without powerup, so the game will set it to state 2 (Big).")
             player2.powerup = 2
         end
     end
     if smasbooleans then
         smasbooleans.introModeActivated = false
+        console:println("Player intro mode disabled to prevent any issues.")
     end
     if enableexplosion then
         local rngbomb = rng.randomEntry({69,71})
         Effect.spawn(rngbomb, player.x, player.y, player.section)
+        console:println("Explosion has been activated for changing player count.")
     end
+    console:println("2 player mode activated.")
 end
 
 if Misc.inSuperMarioAllStarsPlusPlus() then
@@ -234,7 +250,10 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
         end
         if smasbooleans then
             smasbooleans.introModeActivated = false
+            console:println("Player intro mode disabled to prevent any issues.")
         end
+        
+        console:println("3 player mode activated.")
     end
 
     function Playur.activate4thPlayer() --Activates 4th player mode (TBD)
@@ -273,7 +292,10 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
         end
         if smasbooleans then
             smasbooleans.introModeActivated = false
+            console:println("Player intro mode disabled to prevent any issues.")
         end
+        
+        console:println("4 player mode activated.")
     end
 
     function Playur.activatePlayerIntroMode() --Activates the player intro mode
@@ -355,6 +377,8 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
         if smasbooleans then
             smasbooleans.introModeActivated = true
         end
+        
+        console:println("Player intro mode activated.")
     end
 end
 
@@ -467,11 +491,13 @@ end
 
 function Playur.setBattleLives(playerIdx, value) --This will set lives for the Battle Mode system to any player and value specified.
     mem(mem(0xB2D754, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD, value)
+    console:println("Battle lives for player "..tostring(playerIdx).." has been set to "..tostring(value)..".")
 end
 
 function Playur.activateStarman(p) --Starts the starman as the specified player.
     if(starman) then
         starman.start(p)
+        
     end
 end
 

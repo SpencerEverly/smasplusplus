@@ -133,9 +133,11 @@ end
 function smascharacterchanger.startChanger() --This is the command that starts the menu up. Use this to enable the menu.
     smascharacterchanger.menuActive = true
     smascharacterchanger.animationActive = true
+    console:println("Character changer menu starting...")
 end
 
 function smascharacterchanger.stopChanger() --This is the command that stops the menu. Use this to disable the menu.
+    console:println("Character changer menu stopping...")
     smascharacterchanger.menuActive = false
 end
 

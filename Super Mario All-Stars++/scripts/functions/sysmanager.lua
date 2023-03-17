@@ -64,11 +64,13 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     function SysManager.maxOutLives() --This maxes out the lives to 1110 (All three crowns).
         Sound.playSFX(98)
         SaveData.totalLives = 1110
+        console:println("Lives are now maxed out.")
     end
 
     function SysManager.resetLives() --This resets the lives back to 5
         Sound.playSFX(67)
         SaveData.totalLives = 5
+        console:println("Lives have been reset.")
     end
 
     --Death Count
@@ -84,17 +86,20 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     function SysManager.maxOutDeathCount() --This maxes out the death count to 999
         Sound.playSFX(67)
         SaveData.deathCount = 999
+        console:println("Death count is now maxed out.")
     end
 
     function SysManager.resetDeathCount() --This resets the death count back to 0
         Sound.playSFX(98)
         SaveData.deathCount = 0
+        console:println("Death count has been reset.")
     end
     
     --Star Count
     
     function SysManager.maxOutStars() --This maxs the star count to 9999
         SaveData.totalStarCount = 9999
+        console:println("Star count is now maxed out.")
     end
     
     function SysManager.clearAllStars() --This clears all the stars, and even all the level tables
@@ -108,6 +113,7 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
         end
         SaveData.completeLevels = {}
         SaveData.completeLevelsOptional = {}
+        console:println("Star count has been reset and cleared. All level completion status has also been deleted.")
     end
     
     function SysManager.manageStars(arg1, arg2) --arg1 = Number of stars, arg2 = To add or subtract them
@@ -200,7 +206,8 @@ function SysManager.coinCountClassicWith99Limit() --Returns the classic coin cou
     end
 end
 
-function SysManager.loadIntroTheme() --Loads the theme after execution. If setting a new intro, set the intro number first before executing. 
+function SysManager.loadIntroTheme() --Loads the theme after execution. If setting a new intro, set the intro number first before executing.
+    console:println("Loading intro theme...")
     if SaveData.introselect == 1 then
         Level.load("intro_SMAS.lvlx", nil, nil)
     end
@@ -338,6 +345,7 @@ function SysManager.parseSaveFile(slot) --Parses a save file (Thanks KBM_Quine!)
 end
 
 function SysManager.loadMap() --Loads the map, or the editor-specified area.
+    console:println("Loading world map...")
     if not Misc.inEditor() then
         Level.load("map.lvlx")
     elseif Misc.inEditor() then
@@ -354,6 +362,8 @@ function SysManager.exitLevel(winType) --Exits a level with the win type specifi
             if p:mem(0x15E, FIELD_WORD) >= 1 and p.forcedState == FORCEDSTATE_INVISIBLE then
                 if (Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == "" or Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == nil) then
                     SysManager.loadMap()
+                else
+                    console:println("This warp has a level warp point. Warping to "..Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename.."...")
                 end
             end
         end
@@ -365,6 +375,7 @@ function SysManager.clearSaveDataAndGameDataAndRestart()
     SaveData.clear()
     GameData.clear()
     SaveData.flush()
+    console:println("All SaveData/GameData values are cleared. Initating game restart...")
     if not Misc.loadEpisode("Super Mario All-Stars++") then
         error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
     end

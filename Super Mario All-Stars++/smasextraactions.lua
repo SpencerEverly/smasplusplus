@@ -61,6 +61,7 @@ function smasextraactions.onTick()
                         smasextraactions.longJumpTimer = smasextraactions.longJumpTimer + 1
                         if smasextraactions.longJumpTimer == smasextraactions.longJumpWhenToStart then
                             if not table.icontains(smastables._noLevelPlaces,Level.filename()) then
+                                console:println("Long jump can now be started using jump.")
                                 Sound.playSFX(117)
                             end
                         end
@@ -165,6 +166,7 @@ function smasextraactions.onPostNPCHarm(npc, harmType, culprit)
                 if type(culprit) == "Player" then
                     if (culprit.keys.jump or culprit.keys.altJump) then
                         smasextraactions.spinBounceHasStompedNPC[culprit] = true
+                        console:println("Spin jump bounce can be executed.")
                     end
                 end
             end

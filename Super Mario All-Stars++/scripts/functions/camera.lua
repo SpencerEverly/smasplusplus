@@ -174,6 +174,8 @@ function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,i
     section.boundary = bounds2
     
     setScrollToArguments(sectionidx)
+    
+    console:println("Camera scroll activated! Will scroll to the following bounds: "..tostring(leftbound).." (Left) , "..tostring(upbound).." (Up) , "..tostring(downbound).." (Down), "..tostring(rightbound).." (Right).")
 end
 
 function Screen.onDraw()

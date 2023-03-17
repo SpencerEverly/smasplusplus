@@ -68,6 +68,7 @@ function smascharacterintros.onStart()
     if SaveData.toggleCostumeAbilities == true then
         if SaveData.enableIntros then
             if table.icontains(smastables._noLevelPlacesPlusOtherLevels,Level.filename()) == false then
+                console:println("Character intro will now be played.")
                 if SaveData.currentCostume == "GO-10SECONDRUN" then
                     Routine.run(tensecondrunstartinganimation)
                     pauseplus.canPause = false

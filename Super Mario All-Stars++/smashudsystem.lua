@@ -88,6 +88,7 @@ smashudsystem.activated = true --Whenever the death animation is activated
 function addsmashpoints(block, fromUpper, playerornil) --This will add 50 points from smashing bricks, as said from the source code.
     Routine.waitFrames(2, true)
     if block.isHidden and block.layerName == "Destroyed Blocks" then
+        console:println("Brick "..tostring(block.idx).." was smashed.")
         SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50
     end
 end
@@ -96,6 +97,7 @@ function detecttopcoin(block, fromUpper, playerornil)
     if not fromUpper then
         for k,v in NPC.iterateIntersecting(block.x, block.y - 32, block.x + 32, block.y) do
             if NPC.config[v.id].iscoin and not v.isHidden and not v.isGenerator then
+                console:println("Coin from a top of a block was collected.")
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
                 break
             end
@@ -115,6 +117,7 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
             if block.contentID == 1000 or block.contentID == 0 or playerornil.character == CHARACTER_TOAD or playerornil.character == CHARACTER_KLONOA then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
             elseif block.contentID <= 99 and block.contentID >= 1 then
+                console:println("One coin from a block collected.")
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
             end
         end
@@ -135,11 +138,13 @@ function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coin
             
             
             if smastables.allCoinNPCIDs[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
+                console:println("One coin from colliding collected.")
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1 --One coin collected
             end
             
             
             if npc.id == 558 and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
+                console:println("One cherry from colliding collected.")
                 SaveData.totalCherries = SaveData.totalCherries + 1 --One cherry collected
             end
         end
@@ -148,6 +153,9 @@ end
 
 function smashudsystem.gameOverSequences() --These are all the game over sequences that get RNG'ed. ONLY use this on a Routine call!!!!
     local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
+    
+    console:println("Game over "..tostring(rngkey).." will now be played.")
+    
     Sound.playSFX("gameover/gameover-"..rngkey..".ogg")
     
     --If any rng'ed number is any numbers below, do an specific routine timer which plays the whole thing
@@ -215,6 +223,7 @@ function smashudsystem.gameOverSequences() --These are all the game over sequenc
         Routine.wait(3, true)
         
     elseif rngkey == 22 then --This one is exceptional, since it's the GoAnimate Grounded game over screen, feat. Boris
+        console:println("Kayloo how dare you read this that's it you're grounded grounded grounded grounded for 43904568949 years go to bed now")
         Sound.playSFX("gameover/gameover-22-voice.ogg")
         Routine.wait(17, true)
         
@@ -244,6 +253,7 @@ function smashudsystem.gameOverSequences() --These are all the game over sequenc
 end
 
 function thirteenModeDeath()
+    console:println("Everyone has died.")
     smasbooleans.musicMuted = true
     Audio.MusicVolume(0)
     if SaveData.totalLives < 0 and SaveData.enableLives then
@@ -287,6 +297,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
             if not Misc.inMarioChallenge() then
                 if not SaveData.disableX2char then
                     if not battledependencies.battlemodeactive then
+                        console:println("The player has died.")
                         if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
                             if player.deathTimer == 0 then
                                 smasbooleans.musicMuted = true
@@ -294,6 +305,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                                 SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
                                 if SaveData.totalLives < 0 and SaveData.enableLives then --If less than 0, the quick game over screen will activate
+                                    console:println("A game over screen will occur.")
                                     gameoveractivate = true
                                     SaveData.totalLives = 0
                                 elseif SaveData.totalLives < 0 and not SaveData.enableLives then
@@ -386,12 +398,14 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                 end
                 if SaveData.disableX2char then
                     if not battledependencies.battlemodeactive then
+                        console:println("A player has died.")
                         SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                         SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
                     end
                 end
             end
             if Misc.inMarioChallenge() then
+                console:println("The player has died.")
                 SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                 SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
             end
@@ -408,6 +422,7 @@ function smashudsystem.onTick()
         mem(0x00B2C5AC, FIELD_FLOAT, 1)
     end
     if SaveData.totalCoinsClassic > 99 then --This is to give the player a life when reaching 100 coins
+        console:println("100 coins reached! Gaining an extra life...")
         SaveData.totalCoinsClassic = 0
         if SaveData.enableLives then
             Sound.playSFX(15)
@@ -453,48 +468,61 @@ function smashudsystem.onTick()
         if not smasbooleans.mainMenuActive then
             for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
                 if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --Score 10
+                    console:println("10 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
                 end
                 if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --Score 100
+                    console:println("100 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
                 end
                 if scoreboard.animationFrame == 2 and scoreboard.speedY == -1.94 then --Score 200
+                    console:println("200 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 200
                 end
                 if scoreboard.animationFrame == 3 and scoreboard.speedY == -1.94 then --Score 400
+                    console:println("400 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 400
                 end
                 if scoreboard.animationFrame == 4 and scoreboard.speedY == -1.94 then --Score 800
+                    console:println("800 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 800
                 end
                 if scoreboard.animationFrame == 5 and scoreboard.speedY == -1.94 then --Score 1000
+                    console:println("1000 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
                 end
                 if scoreboard.animationFrame == 6 and scoreboard.speedY == -1.94 then --Score 2000
+                    console:println("2000 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 2000
                 end
                 if scoreboard.animationFrame == 7 and scoreboard.speedY == -1.94 then --Score 4000
+                    console:println("4000 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
                 end
                 if scoreboard.animationFrame == 8 and scoreboard.speedY == -1.94 then --Score 8000
+                    console:println("8000 points earned.")
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 8000
                 end
                 if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP, Score 10000
+                    console:println("1UP and 10000 points earned.")
                     SaveData.totalLives = SaveData.totalLives + 1
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10000
                     Misc.score(10000) --Just in case if the Mario Challenge is active
                 end
                 if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP, Score 20000
+                    console:println("2UP and 20000 points earned.")
                     SaveData.totalLives = SaveData.totalLives + 2
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 20000
                     Misc.score(20000)
                 end
                 if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP, Score 30000
+                    console:println("3UP and 30000 points earned.")
                     SaveData.totalLives = SaveData.totalLives + 3
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 30000
                     Misc.score(30000)
                 end
                 if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP, Score 50000
+                    console:println("5UP and 50000 points earned.")
                     SaveData.totalLives = SaveData.totalLives + 5
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50000
                     Misc.score(50000)
