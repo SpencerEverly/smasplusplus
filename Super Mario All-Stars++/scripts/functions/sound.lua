@@ -389,6 +389,7 @@ end
 function Sound.changeMusicRNG(songTable, sectionNumber)
     if songTable == nil then
         error("Must have a table to RNG music!")
+        return
     end
     local musicCount = #songtable
     if sectionNumber == -1 then
@@ -399,6 +400,7 @@ function Sound.changeMusicRNG(songTable, sectionNumber)
         Sound.changeMusic(songTable[RNG.randomInt(1,musicCount)], sectionNumber)
     else
         error("Section ID is invalid.")
+        return
     end
 end
 
