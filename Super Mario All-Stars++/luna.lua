@@ -102,6 +102,8 @@ Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
 Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
+Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
 
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then
@@ -619,9 +621,7 @@ function onExit()
 end
 
 function onPostPOW(shakeNumber, soundSuppressed, coinsCanFall, eventName)
-    if eventName == "Default" then
-        --Misc.dialogSimple("POW has executed on a default POW event")
-    end
+    
 end
 
 --That's the end of this file!

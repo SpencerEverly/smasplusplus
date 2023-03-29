@@ -4,6 +4,7 @@ local rng = require("base/rng")
 local smasverbosemode = require("smasverbosemode")
 local customCamera = require("customCamera")
 local smascharacterinfo = require("smascharacterinfo")
+local smastables = require("smastables")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)
@@ -973,10 +974,12 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
         end
         
         if letCoinsFall then
-            for k,v in ipairs(NPC.get{10,33,88,103,138,152,251,252,253,258,411,528}) do
-                if v.isValid then
-                    v.ai1 = 1
-                    v.speedX = RNG.random() * 1 - 0.5
+            for k,v in ipairs(NPC.get()) do
+                if smastables.allCoinNPCIDs[v.id] then
+                    if v.isValid then
+                        v.ai1 = 1
+                        v.speedX = RNG.random() * 1 - 0.5
+                    end
                 end
             end
         end
@@ -984,6 +987,25 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
         screenShakeTally = shakeNumber
         
         EventManager.callEvent("onPostPOW",shakeNumber,supressSound,letCoinsFall,eventName)
+    end
+end
+
+function Misc.doEarthquake(shakeNumber, eventName) --This is a replacement of Defines.earthquake. This is also similar to doPOW, except this one only has a shake number and the eventName option.
+    if shakeNumber == nil then
+        shakeNumber = 20 --Default screen shake value
+    end
+    if eventName == nil then
+        eventName = "Default"
+    end
+    
+    local eventObj = {cancelled = false}
+    
+    EventManager.callEvent("onEarthquake",eventObj,shakeNumber,eventName)
+    
+    if not eventObj.cancelled then
+        screenShakeTally = shakeNumber
+        
+        EventManager.callEvent("onPostEarthquake",shakeNumber,eventName)
     end
 end
 
