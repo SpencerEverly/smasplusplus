@@ -948,7 +948,8 @@ end
 
 local screenShakeTally = -1
 
-function Misc.doPOW(shakeNumber, supressSound, letCoinsFall) --Redoing doPOW to correspond to other doPOWs that Lua uses
+function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoing doPOW to extend the POW system. shakeNumber is how much to shake the screen, supressSound is for to play the default thwomp sound or not, letCoinsFall is if you want coins to fall or not when executed, and eventName is for if you want to specify a custom name for the POW you're executing on code. eventName is very useful, as that you can use onPOW/onPostPOW for executing certain things when executing a POW.
+    
     if shakeNumber == nil then
         shakeNumber = 20 --Default screen shake value, according to the source code
     end
@@ -958,21 +959,32 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall) --Redoing doPOW to 
     if letCoinsFall == nil then
         letCoinsFall = true --If false, the coins won't fall from the air.
     end
-    
-    if not supressSound then
-        Sound.playSFX(37)
+    if eventName == nil then
+        eventName = "Default"
     end
     
-    if letCoinsFall then
-        for k,v in ipairs(NPC.get{10,33,88,103,138,152,251,252,253,258,411,528}) do
-            if v.isValid then
-                v.ai1 = 1
-                v.speedX = RNG.random() * 1 - 0.5
+    local eventObj = {cancelled = false}
+    
+    EventManager.callEvent("onPOW",eventObj,shakeNumber,supressSound,letCoinsFall,eventName)
+    
+    if not eventObj.cancelled then
+        if not supressSound then
+            Sound.playSFX(37)
+        end
+        
+        if letCoinsFall then
+            for k,v in ipairs(NPC.get{10,33,88,103,138,152,251,252,253,258,411,528}) do
+                if v.isValid then
+                    v.ai1 = 1
+                    v.speedX = RNG.random() * 1 - 0.5
+                end
             end
         end
+        
+        screenShakeTally = shakeNumber
+        
+        EventManager.callEvent("onPostPOW",shakeNumber,supressSound,letCoinsFall,eventName)
     end
-    
-    screenShakeTally = shakeNumber
 end
 
 function Misk.onDraw()

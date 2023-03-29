@@ -60,13 +60,6 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
         return
     end
     
-    local eventObj = {cancelled = false}
-    EventManager.callEvent("onPlaySFX", eventObj, name, volume, loops, delay)
-    
-    if eventObj.cancelled then
-        return
-    end
-    
     if volume == nil then
         volume = extrasounds.volume
     end
@@ -80,25 +73,30 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
         delay = 4
     end
     
-    if Sound.isExtraSoundsActive() then
-        if extrasounds.sound.sfx[name] and not smastables.stockSoundNumbersInOrder[name] then
-            SFX.play(extrasounds.sound.sfx[name], volume, loops, delay)
-        elseif smastables.stockSoundNumbersInOrder[name] then
-            SFX.play(name, volume, loops, delay)
-        elseif name then
-            local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-            SFX.play(file, volume, loops, delay) --Then play it afterward
-        end
-    elseif not Sound.isExtraSoundsActive() then
-        if extrasounds.allVanillaSoundNumbersInOrder[name] then
-            SFX.play(name, volume, loops, delay)
-        elseif name then
-            local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-            SFX.play(file, volume, loops, delay) --Then play it afterward
-        end
-    end
+    local eventObj = {cancelled = false}
+    EventManager.callEvent("onPlaySFX", eventObj, name, volume, loops, delay)
     
-    EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
+    if not eventObj.cancelled then
+        if Sound.isExtraSoundsActive() then
+            if extrasounds.sound.sfx[name] and not smastables.stockSoundNumbersInOrder[name] then
+                SFX.play(extrasounds.sound.sfx[name], volume, loops, delay)
+            elseif smastables.stockSoundNumbersInOrder[name] then
+                SFX.play(name, volume, loops, delay)
+            elseif name then
+                local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+                SFX.play(file, volume, loops, delay) --Then play it afterward
+            end
+        elseif not Sound.isExtraSoundsActive() then
+            if extrasounds.allVanillaSoundNumbersInOrder[name] then
+                SFX.play(name, volume, loops, delay)
+            elseif name then
+                local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+                SFX.play(file, volume, loops, delay) --Then play it afterward
+            end
+        end
+        
+        EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
+    end
 end
 
 function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a costume being worn.
@@ -170,33 +168,34 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
     local eventObj = {cancelled = false}
     
     EventManager.callEvent("onChangeMusic", eventObj, name, sectionid)
-    if eventObj.cancelled then return end
     
-    if sectionid == -1 then --If -1, all section music will change to the specified song
-        console:println("All music will be changed to '"..tostring(name).."'.")
-        for i = 0,20 do
-            Section(i).music = name
-            if smasbooleans then
-                if smasbooleans.musicMuted then
-                    Sound.refreshMusic(i)
-                    Sound.muteMusic(i)
+    if not eventObj.cancelled then
+        if sectionid == -1 then --If -1, all section music will change to the specified song
+            console:println("All music will be changed to '"..tostring(name).."'.")
+            for i = 0,20 do
+                Section(i).music = name
+                if smasbooleans then
+                    if smasbooleans.musicMuted then
+                        Sound.refreshMusic(i)
+                        Sound.muteMusic(i)
+                    end
                 end
             end
-        end
-    elseif sectionid >= 0 or sectionid <= 20 then
-        console:println("Music from section "..tostring(sectionid).." will be changed to '"..tostring(name).."'.")
-        Section(sectionid).music = name
-        if smasbooleans then
-            if smasbooleans.musicMuted then
-                Sound.refreshMusic(sectionid)
-                Sound.muteMusic(sectionid)
+        elseif sectionid >= 0 or sectionid <= 20 then
+            console:println("Music from section "..tostring(sectionid).." will be changed to '"..tostring(name).."'.")
+            Section(sectionid).music = name
+            if smasbooleans then
+                if smasbooleans.musicMuted then
+                    Sound.refreshMusic(sectionid)
+                    Sound.muteMusic(sectionid)
+                end
             end
+        elseif sectionid >= 21 then
+            error("That's higher than SMBX2 can go. Go to a lower section than that.")
+            return
         end
-    elseif sectionid >= 21 then
-        error("That's higher than SMBX2 can go. Go to a lower section than that.")
-        return
+        EventManager.callEvent("onPostChangeMusic", name, sectionid)
     end
-    EventManager.callEvent("onPostChangeMusic", name, sectionid)
 end
 
 function Sound.muteMusic(sectionid) --Mute all section music, or just mute a specific section
@@ -387,13 +386,11 @@ function Sound.checkSMBXSoundSystemStatus()
     end
 end
 
-function Sound.changeMusicRNG(songTable, musicCount, sectionNumber)
+function Sound.changeMusicRNG(songTable, sectionNumber)
     if songTable == nil then
         error("Must have a table to RNG music!")
     end
-    if musicCount == nil then
-        musicCount = #songtable
-    end
+    local musicCount = #songtable
     if sectionNumber == -1 then
         for i = 0,20 do
             Sound.changeMusic(songTable[RNG.randomInt(1,musicCount)], i)
