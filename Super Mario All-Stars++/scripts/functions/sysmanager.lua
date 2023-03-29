@@ -408,4 +408,9 @@ function SysManager.startingAtStartPoint()
     end
 end
 
+function SysManager.numberTableToNumbersWithCommas(tablel)
+    local epic = table.concat(tablel,",")
+    return epic
+end
+
 return SysManager

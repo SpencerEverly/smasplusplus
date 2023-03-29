@@ -387,6 +387,23 @@ function Sound.checkSMBXSoundSystemStatus()
     end
 end
 
+function Sound.changeMusicRNG(songTable, musicCount, sectionNumber)
+    if songTable == nil then
+        error("Must have a table to RNG music!")
+    end
+    if musicCount == nil then
+        musicCount = #songtable
+    end
+    if sectionNumber == -1 then
+        for i = 0,20 do
+            Sound.changeMusic(songTable[RNG.randomInt(1,musicCount)], i)
+        end
+    elseif sectionNumber >= 0 or sectionNumber <= 20 then
+        Sound.changeMusic(songTable[RNG.randomInt(1,musicCount)], sectionNumber)
+    else
+        error("Section ID is invalid.")
+    end
+end
 
 function Sound.onDraw()
     

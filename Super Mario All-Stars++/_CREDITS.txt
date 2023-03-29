@@ -369,6 +369,31 @@ Invincibility theme music for all characters made by:
 - starman_undertale - Toby Fox/Nintendo/Spencer Everly
 - starmanmegashroom_smbddx - Phillip Haynes/Spencer Everly (I adjusted the loud volume/some panning)
 
+Mario 3: Around the World Music made by:
+
+- 01: Intro - Alone Coder
+- 02: Title - Augusto Ruiz/Shiru/Mojon Twins
+- 03: Music 1 (Forget Him) - Linde
+- 04: Music 2 (Through the Night) - Groovemaster303
+- 05: Music 3 (Quick Fix) - Groovermaster303
+- 06: Music 4 (Lost Forest) - Groovemaster303
+- 07: Music 5 (Lame Bells) - Linde
+- 08: Music 6 (FM Acid) - Groovemaster303
+- 09: Music 7 (SMB Tepples) - Tepples
+- 10: Music 8 (Uzhos) - Alone Coder
+- 11: Music 9 (Space Standart) - Shiru
+- 12: Music 10 (Another It) - Pinball Wizzard/Shiru
+- 13: Music 11 (Nonamed) - Karbofos
+- 14: Music 12 (Class11.Time Flies) - Maktone
+- 15: Music 13 (Wizardry) - 4mat
+- 16: Music 14 (Ending Theme) - Arkanoid
+- 17: Music 15 (SMB) - Nighthawk
+- 18: Continue (Uwol - Menu) - Augusto Ruiz/Shiru/Mojon Twins
+- 19: Ending (See You Next Year) - Kulor
+- 20: Game Over (Uwol - Game Over) - Augusto Ruiz/Shiru/Mojo Twins
+- 21: Ne4to Strrrrashnoe!!! (Unused, is used on SMAS++) - Alone Coder
+- 22: Final Battle (Battle of the North) - Cancer of Snow Crash
+
 Other music played on the episode are made by (This will need better sorting sometime, so that we can credit an author with a music listing instead of just shoving an author's name without putting whatever the creator made. Also remove any author that has music now unused, but keep the other author credits on another file):
 
 - Maxodex

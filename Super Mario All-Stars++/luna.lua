@@ -35,6 +35,7 @@ GameData.__SaveSlot = Misc.saveSlot()
 --Make sure we warn the user to upgrade the legacy save data while we can...
 if not Misc.inMarioChallenge() then
     if mem(0x00B251E0, FIELD_WORD) >= 1 then
+        console:println("Legacy star count greater than 1! Assuming we're loading a save file from Demo 2 and below...")
         if GameData.warnUserAboutOldStars == nil then
             GameData.warnUserAboutOldStars = true
         end

@@ -1304,6 +1304,24 @@ smastables.keyboardMap = {
     "" -- [255]
 }
 
+smastables.mario3AroundTheWorldMusicRng = {
+    "_OST/Mario 3 - Around the World (Bootleg)/03 - Music 1 (Forget Him).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/04 - Music 2 (Through the Night).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/05 - Music 3 (Quick Fix).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/06 - Music 4 (Lost Forest).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/07 - Music 5 (Lame Bells).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/08 - Music 6 (FM Acid).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/09 - Music 7 (SMB Tepples).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/10 - Music 8 (Uzhos).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/11 - Music 9 (Space Standart).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/12 - Music 10 (Another It).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/13 - Music 11 (Nonamed).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/14 - Music 12 (Class11.Time Flies).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/15 - Music 13 (Wizardry).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/16 - Music 14 (Ending Theme).vgm",
+    "_OST/Mario 3 - Around the World (Bootleg)/17 - Music 15 (SMB).vgm",
+}
+
 --This will be used for an SEE Mod-only feature where it'll compare what sounds were in the previously cached sound file table when changing sounds. If anything that's currently changed isn't matching the sounds on the previously cached sound file table, it'll clear the unmatched sounds that are specified from the SMBX2 cache.
 for k,v in ipairs(smastables.soundNamesInOrder) do
     smastables.previouslyCachedSoundFiles = {}

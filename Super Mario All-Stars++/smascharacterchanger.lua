@@ -3,8 +3,7 @@
 
 local smascharacterchanger = {}
 
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+local smasfunctions = require("smasfunctions")
 
 local playerManager = require("playerManager")
 local textplus = require("textplus")

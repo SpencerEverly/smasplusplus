@@ -11,6 +11,7 @@ local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)
 function Misk.onInitAPI()
     registerEvent(Misk,"onStart")
     registerEvent(Misk,"onDraw")
+    registerEvent(Misk,"onCameraDraw")
 end
 
 function Misc.worldFilename() --Gets the world filename. Thanks KBM_Quine!
@@ -945,12 +946,55 @@ function Misc.dialogSimple(stringd)
     return Text.windowDebugSimple(tostring(stringd))
 end
 
+local screenShakeTally = -1
+
+function Misc.doPOW(shakeNumber, supressSound, letCoinsFall) --Redoing doPOW to correspond to other doPOWs that Lua uses
+    if shakeNumber == nil then
+        shakeNumber = 20 --Default screen shake value, according to the source code
+    end
+    if supressSound == nil then
+        supressSound = false --To suppress the sound, make sure you set it as true
+    end
+    if letCoinsFall == nil then
+        letCoinsFall = true --If false, the coins won't fall from the air.
+    end
+    
+    if not supressSound then
+        Sound.playSFX(37)
+    end
+    
+    if letCoinsFall then
+        for k,v in ipairs(NPC.get{10,33,88,103,138,152,251,252,253,258,411,528}) do
+            if v.isValid then
+                v.ai1 = 1
+                v.speedX = RNG.random() * 1 - 0.5
+            end
+        end
+    end
+    
+    screenShakeTally = shakeNumber
+end
+
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then
             shaketally = shaketally - 1
             Misc.setWindowPosition(((oldx + math.random(((shaketally / 4 + 4))) - math.random((shaketally / 4) + 4))),((oldy + math.random(((shaketally / 4) + 4))) - math.random(((shaketally / 4) + 4)))) --Thanks Toby Fox!
         end
+    end
+end
+
+function Misk.onCameraDraw()
+    if screenShakeTally > -1 then
+        screenShakeTally = screenShakeTally - 1
+        if screenShakeTally > 0 then
+            customCamera.defaultScreenOffsetX = ((0 + math.random(((screenShakeTally / 32 + 32))) - math.random((screenShakeTally / 32) + 32)))
+            customCamera.defaultScreenOffsetY = ((0 + math.random(((screenShakeTally / 32) + 32))) - math.random(((screenShakeTally / 32) + 32)))
+        end
+    end
+    if screenShakeTally == 0 then
+        customCamera.defaultScreenOffsetX = 0
+        customCamera.defaultScreenOffsetY = 0
     end
 end
 
