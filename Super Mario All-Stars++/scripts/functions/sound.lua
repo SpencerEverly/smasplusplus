@@ -106,9 +106,7 @@ function Sound.clearUnusedCostumeSounds()
         return
     else
         for k,v in ipairs(smastables.soundNamesInOrder) do
-            if (smastables.previouslyCachedSoundFiles[k] == smastables.currentlyCachedSoundFiles[k]) then
-                
-            else
+            if (smastables.previouslyCachedSoundFiles[k] ~= smastables.currentlyCachedSoundFiles[k]) then
                 console:println("Unmatched sound detected: "..smastables.previouslyCachedSoundFiles[k]..", will clear off from cache until next reload...")
                 CacheSystem.ClearSpecifiedSoundFromCache(smastables.previouslyCachedSoundFiles[k])
             end

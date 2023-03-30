@@ -514,29 +514,29 @@ Cheats.register("framerate",{ --This needs to be reregistered because it uses a 
     flashPlayer = true,activateSFX = nil,
 })
 
-Cheats.register("supermario2",{ --Remaking this, for no reason at all...
-    onActivate = (function()
-        if SaveData.disableX2char then
+if SaveData.disableX2char then
+    Cheats.register("supermario2",{ --Remaking this, for no reason at all...
+        onActivate = (function()
+            if SaveData.disableX2char then
+                Defines.player_hasCheated = false
+                Playur.toggleSingleCoOp(true)
+                local rngbomb = rng.randomEntry({69,71})
+                Effect.spawn(rngbomb, player.x, player.y, player.section)
+            else
+                Sound.playSFX(152)
+            end
+            return true -- this makes the cheat not toggleable
+        end),
+        onDeactivate = (function()
             Defines.player_hasCheated = false
-            Playur.toggleSingleCoOp(true)
+            Playur.setCount(1)
+            Playur.toggleSingleCoOp(false)
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
-        else
-            Sound.playSFX(152)
-        end
-        return true -- this makes the cheat not toggleable
-    end),
-    onDeactivate = (function()
-        Defines.player_hasCheated = false
-        Playur.setCount(1)
-        Playur.toggleSingleCoOp(false)
-        local rngbomb = rng.randomEntry({69,71})
-        Effect.spawn(rngbomb, player.x, player.y, player.section)
-    end),
-    flashPlayer = true,activateSFX = nil,
-})
-
-if SaveData.disableX2char then
+        end),
+        flashPlayer = true,activateSFX = nil,
+    })
+    
     Cheats.register("supermario4",{ --Remaking this, for no reason at all...
         onActivate = (function()
             Defines.player_hasCheated = false
