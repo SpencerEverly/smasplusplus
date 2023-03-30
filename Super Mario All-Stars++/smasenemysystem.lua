@@ -73,7 +73,7 @@ function smasenemysystem.onTick()
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the coin
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
-                        Effect.spawn(79, l.x, l.y, 1) --Spawns 10 score effect
+                        Effectx.spawnScoreEffect(1, l.x, l.y) --Spawns 10 score effect
                         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
                         if extrasounds.enableCoinCollecting then
                             extrasounds.playSFX(14)
@@ -87,7 +87,7 @@ function smasenemysystem.onTick()
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the rupee
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
-                        Effect.spawn(79, l.x, l.y, 1) --Spawns 10 score effect
+                        Effectx.spawnScoreEffect(1, l.x, l.y) --Spawns 10 score effect
                         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
                         if extrasounds.enableRupeeCollecting then
                             extrasounds.playSFX(81)

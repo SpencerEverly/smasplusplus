@@ -41,8 +41,10 @@ local killed1 = false
 local killed2 = false
 
 if not GameData.enableBattleMode or GameData.enableBattleMode == nil then
+    smasbooleans.classicBattleModeActive = false
     battledependencies.battlemodeactive = false
 else
+    smasbooleans.classicBattleModeActive = true
     battledependencies.battlemodeactive = true
 end
 

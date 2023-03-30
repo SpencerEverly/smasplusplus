@@ -5,8 +5,6 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
-local battledependencies = require("classicbattlemode")
-battledependencies.battlemodeactive = false
 
 local hudfont = textplus.loadFont("littleDialogue/font/1.ini")
 
@@ -296,7 +294,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
         if not smasbooleans.mainMenuActive then
             if not Misc.inMarioChallenge() then
                 if not SaveData.disableX2char then
-                    if not battledependencies.battlemodeactive then
+                    if not smasbooleans.classicBattleModeActive then
                         console:println("The player has died.")
                         if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
                             if player.deathTimer == 0 then
@@ -397,7 +395,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                     end
                 end
                 if SaveData.disableX2char then
-                    if not battledependencies.battlemodeactive then
+                    if not smasbooleans.classicBattleModeActive then
                         console:println("A player has died.")
                         SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                         SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
@@ -449,7 +447,7 @@ function smashudsystem.onTick()
     end
     if Player.count() >= 2 then --2nd player compability
         smasbooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
-        if battledependencies.battlemodeactive then
+        if smasbooleans.classicBattleModeActive then
             if(not killed2 and player2:mem(0x13E,FIELD_BOOL)) then
                 killed2 = true --killed2 detects to see if the 2nd player is dead.
             end
@@ -464,69 +462,28 @@ function smashudsystem.onTick()
     if SaveData.totalScoreClassic >= 999999999 then --The max score is NSMBU's score tally, which is 999 trillion.
         SaveData.totalScoreClassic = 999999999
     end
-    if not battledependencies.battlemodeactive then
+    if not smasbooleans.classicBattleModeActive then
         if not smasbooleans.mainMenuActive then
-            for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
-                if scoreboard.animationFrame == 0 and scoreboard.speedY == -1.94 then --Score 10
-                    console:println("10 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
-                end
-                if scoreboard.animationFrame == 1 and scoreboard.speedY == -1.94 then --Score 100
-                    console:println("100 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
-                end
-                if scoreboard.animationFrame == 2 and scoreboard.speedY == -1.94 then --Score 200
-                    console:println("200 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 200
-                end
-                if scoreboard.animationFrame == 3 and scoreboard.speedY == -1.94 then --Score 400
-                    console:println("400 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 400
-                end
-                if scoreboard.animationFrame == 4 and scoreboard.speedY == -1.94 then --Score 800
-                    console:println("800 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 800
-                end
-                if scoreboard.animationFrame == 5 and scoreboard.speedY == -1.94 then --Score 1000
-                    console:println("1000 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 1000
-                end
-                if scoreboard.animationFrame == 6 and scoreboard.speedY == -1.94 then --Score 2000
-                    console:println("2000 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 2000
-                end
-                if scoreboard.animationFrame == 7 and scoreboard.speedY == -1.94 then --Score 4000
-                    console:println("4000 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 4000
-                end
-                if scoreboard.animationFrame == 8 and scoreboard.speedY == -1.94 then --Score 8000
-                    console:println("8000 points earned.")
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 8000
-                end
-                if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP, Score 10000
-                    console:println("1UP and 10000 points earned.")
-                    SaveData.totalLives = SaveData.totalLives + 1
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10000
-                    Misc.score(10000) --Just in case if the Mario Challenge is active
-                end
-                if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP, Score 20000
-                    console:println("2UP and 20000 points earned.")
-                    SaveData.totalLives = SaveData.totalLives + 2
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 20000
+            if Misc.score() ~= 0 then
+                SaveData.totalScoreClassic = SaveData.totalScoreClassic + Misc.score()
+                console:println(tostring(Misc.score()).." points earned.")
+                Misc.score(-Misc.score())
+            end
+            if mem(0x00B2C5AC,FIELD_FLOAT) ~= 1 then
+                SaveData.totalLives = SaveData.totalLives + (mem(0x00B2C5AC,FIELD_FLOAT) - 1)
+                console:println(tostring(mem(0x00B2C5AC,FIELD_FLOAT) - 1).." lives earned.")
+                if (mem(0x00B2C5AC,FIELD_FLOAT) - 1) == 1 then
+                    Misc.score(10000)
+                elseif (mem(0x00B2C5AC,FIELD_FLOAT) - 1) == 2 then
                     Misc.score(20000)
-                end
-                if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP, Score 30000
-                    console:println("3UP and 30000 points earned.")
-                    SaveData.totalLives = SaveData.totalLives + 3
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 30000
+                elseif (mem(0x00B2C5AC,FIELD_FLOAT) - 1) == 3 then
                     Misc.score(30000)
-                end
-                if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP, Score 50000
-                    console:println("5UP and 50000 points earned.")
-                    SaveData.totalLives = SaveData.totalLives + 5
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50000
+                elseif (mem(0x00B2C5AC,FIELD_FLOAT) - 1) == 4 then
+                    Misc.score(40000)
+                elseif (mem(0x00B2C5AC,FIELD_FLOAT) - 1) == 5 then
                     Misc.score(50000)
                 end
+                mem(0x00B2C5AC,FIELD_FLOAT,1)
             end
         end
     end

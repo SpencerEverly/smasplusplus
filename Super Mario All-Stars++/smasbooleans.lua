@@ -34,6 +34,8 @@ smasbooleans.musicMutedTemporary = false
 smasbooleans.multiplayerActive = false
 --This is set when the main menu is active.
 smasbooleans.mainMenuActive = false
+--This is set when Classic Battle Mode is active.
+smasbooleans.classicBattleModeActive = false
 --Whether a specified player has passed through the white sizable in SMB3 1-3. This only works on that level.
 smasbooleans.activateWarpWhistleRoomWarp = {}
 for i = 1,200 do
