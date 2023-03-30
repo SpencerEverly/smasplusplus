@@ -21,6 +21,8 @@ end
 
 local mapimage
 
+GameData.gameFirstLoaded = false
+
 function onDraw()
     --Costume map images
     if SaveData.currentCostume ~= "N/A" then
