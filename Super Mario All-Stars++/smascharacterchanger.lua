@@ -181,6 +181,7 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
         changed = false
     end
     Sound.loadCostumeSounds()
+    Sound.clearUnusedCostumeSounds()
     Sound.restoreMusic(-1)
     if pauseplus then
         pauseplus.canPause = true

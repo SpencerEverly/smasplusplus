@@ -99,6 +99,20 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
     end
 end
 
+function Sound.clearUnusedCostumeSounds()
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        console:println("NOT USING SEE MOD! Costume sound refresher has stopped.")
+        return
+    else
+        for k,v in ipairs(smastables.soundNamesInOrder) do
+            if smastables.previouslyCachedSoundFiles[k] ~= smastables.currentlyCachedSoundFiles[k] then
+                CacheSystem.ClearSpecifiedSoundFromCache(smastables.previouslyCachedSoundFiles[k])
+            end
+        end
+    end
+end
+
 function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a costume being worn.
     if stringOnly == nil then
         stringOnly = false
@@ -137,18 +151,16 @@ end
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
     for k,v in ipairs(smastables.soundNamesInOrder) do
         smastables.previouslyCachedSoundFiles[k] = smastables.currentlyCachedSoundFiles[k]
+        
         if not smastables.stockSoundNumbersInOrder[k] then
             extrasounds.sound.sfx[k] = Sound.resolveCostumeSound(v)
         elseif smastables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
         end
+        
         smastables.currentlyCachedSoundFiles[k] = Sound.resolveCostumeSound(v, true)
-        if SMBX_VERSION == VER_SEE_MOD then --Cache sound-removing support
-            if smastables.previouslyCachedSoundFiles[k] ~= smastables.currentlyCachedSoundFiles[k] then
-                CacheSystem.ClearSpecifiedSoundFromCache(smastables.previouslyCachedSoundFiles[k])
-            end
-        end
     end
+    
     --[[for i = 1, #smastables.soundNamesInOrder do
         local cachedSounds = {}
         if cachedSounds[i] == nil then
