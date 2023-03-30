@@ -2,7 +2,7 @@ local level_dependencies_normal = require("level_dependencies_normal")
 
 function onEvent(eventName)
     if eventName == ("Boss Start") then
-        Screen.setCameraPosition(-120000,-120600,-120000,-115072)
+        Screen.setCameraPosition(-115872,-120600,-120000,-115072)
     end
     if eventName == ("Bridge Break") then
         Sound.playSFX(4)
