@@ -385,6 +385,7 @@ function onStart() --Now do onStart...
         Misc.dialog("Uh oh... it looks like you launched the episode using the broken SMBX 1.3 Launcher. Please use the SMBX2 launcher to launch the episode. Until then, you can't run this episode. Sorry about that!")
         Misc.exitEngine()
     end
+    Sound.loadCostumeSounds()
     --Below will start the star door system
     warpstaractive = true
     if Misc.inMarioChallenge() then --Just in case if the Mario Challenge is active, do these things to update the Challenge...
