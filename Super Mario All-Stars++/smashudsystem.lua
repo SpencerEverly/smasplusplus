@@ -5,6 +5,7 @@ local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
+local smaspswitch = require("smaspswitch")
 
 local hudfont = textplus.loadFont("littleDialogue/font/1.ini")
 

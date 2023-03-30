@@ -7,6 +7,8 @@ end
 local pSwitchMusic
 smaspswitch.pSwitchMusicStarted = false
 
+local deathTimerPSwitch = 0
+
 
 
 function smaspswitch.startPSwitchMusic() --Starts the P-Switch music.
@@ -94,6 +96,15 @@ function smaspswitch.onDraw()
         if mem(0x00B2C62E, FIELD_WORD) == 1 then --Stopwatch
             smasbooleans.stopWatchActive = false
             smaspswitch.stopPSwitchMusic()
+        end
+        
+        
+        --Player death P-Switch stop codes
+        if not Playur.isAnyPlayerAlive() then
+            deathTimerPSwitch = deathTimerPSwitch + 1
+            if deathTimerPSwitch == 1 then
+                smaspswitch.stopPSwitchMusic(false)
+            end
         end
         
         
