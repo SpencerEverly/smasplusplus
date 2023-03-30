@@ -1,6 +1,7 @@
 local textplus = require("textplus")
 local cutsceneenabled = false
 Graphics.activateHud(false)
+smasbooleans.disablePauseMenu = true
 
 local timer1 = 0
 local speed = 0
@@ -20,7 +21,7 @@ function onInputUpdate()
     player.runKeyPressing = false
     player.altRunKeyPressing = false
     player.dropItemKeyPressing = false
-    if player.rawKeys.pause == KEYS_PRESSED then
+    if player.keys.pause == KEYS_PRESSED then
         player:teleport(-179648, -180320)
         if Player.count() >= 2 then
             player2:teleport(-179584, -180320)
