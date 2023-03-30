@@ -1369,7 +1369,8 @@ function mainmenu()
     Misc.unpause()
     exitFadeActive = false
     exitFadeActiveDone = true
-    Level.load("SMAS - Start.lvlx", nil, nil)
+    GameData.gameFirstLoaded = true
+    Level.load("SMAS - Start.lvlx")
 end
 
 local function warpzonehub()

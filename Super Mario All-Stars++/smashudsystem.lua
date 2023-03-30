@@ -463,7 +463,7 @@ function smashudsystem.onTick()
         SaveData.totalScoreClassic = 999999999
     end
     if not smasbooleans.classicBattleModeActive then
-        if not smasbooleans.mainMenuActive then
+        if (not smasbooleans.mainMenuActive and not GameData.gameFirstLoaded) then
             if Misc.score() ~= 0 then
                 SaveData.totalScoreClassic = SaveData.totalScoreClassic + Misc.score()
                 console:println(tostring(Misc.score()).." points earned.")

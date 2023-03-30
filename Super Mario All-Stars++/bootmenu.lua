@@ -818,6 +818,7 @@ local function BootSMASPlusPlusPreExecute() --This is the routine animation to e
     autoscroll.scrollLeft(5000) --Make sure that autoscroll doesn't move the player when loading any other level by accident
     Sound.muteMusic(-1) --Change the music to nothing
     Routine.wait(0.5)
+    GameData.gameFirstLoaded = false
     Misc.saveGame()
     if (player.keys.down == KEYS_DOWN) then --Either one when holding down or not, executes a routine on which one to execute
         Routine.run(mapExit)

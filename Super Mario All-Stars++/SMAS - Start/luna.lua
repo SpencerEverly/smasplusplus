@@ -8,6 +8,8 @@ datetime.topleft = false
 
 smasbooleans.disablePauseMenu = true
 
+GameData.gameFirstLoaded = true
+
 smasbooleans.mainMenuActive = false
 debugbox.bootactive = false
 GameData.rushModeActive = false
@@ -192,6 +194,7 @@ function onInputUpdate()
                     end
                     if activeselected == 2 then
                         GameData.____mainMenuComplete = true
+                        GameData.gameFirstLoaded = false
                         Level.load("map.lvlx")
                     end
                     if activeselected == 3 then
@@ -200,6 +203,7 @@ function onInputUpdate()
                         if not SaveData.firstBootCompleted then
                             SaveData.firstBootCompleted = true
                         end
+                        GameData.gameFirstLoaded = false
                         Misc.saveGame()
                         Level.load("map.lvlx")
                     end

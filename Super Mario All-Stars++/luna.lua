@@ -22,6 +22,10 @@ end]]
 
 console:println("Super Mario All-Stars++ loading initated.")
 
+if GameData.gameFirstLoaded == nil then
+    GameData.gameFirstLoaded = true
+end
+
 --Make sure we aren't running Beta 3 and below before we actually start...
 if (SMBX_VERSION < VER_BETA4_PATCH_3) then
     Text.windowDebugSimple("Hey wait a minute! At least SMBX2 Beta 4 Patch 3 is required to play this game. Please download it from the official site by going to https://codehaus.wohlsoft.ru/. Until then, you can't run this episode. Sorry about that!")
