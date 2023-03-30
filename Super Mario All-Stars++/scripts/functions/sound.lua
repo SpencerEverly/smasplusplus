@@ -143,6 +143,11 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
             Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
         end
         smastables.currentlyCachedSoundFiles[k] = Sound.resolveCostumeSound(v, true)
+        if SMBX_VERSION == VER_SEE_MOD then --Cache sound-removing support
+            if smastables.previouslyCachedSoundFiles[k] ~= smastables.currentlyCachedSoundFiles[k] then
+                CacheSystem.ClearSpecifiedSoundFromCache(smastables.previouslyCachedSoundFiles[k])
+            end
+        end
     end
     --[[for i = 1, #smastables.soundNamesInOrder do
         local cachedSounds = {}
