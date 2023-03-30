@@ -976,7 +976,7 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
         if letCoinsFall then
             for k,v in ipairs(NPC.get()) do
                 if smastables.allCoinNPCIDs[v.id] then
-                    if v.isValid then
+                    if (v.isValid and not v.isHidden and NPC.isOnScreen(v)) then
                         v.ai1 = 1
                         v.speedX = RNG.random() * 1 - 0.5
                     end
