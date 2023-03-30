@@ -544,7 +544,11 @@ function onDraw()
     
     --This'll update the costume throughout the game
     local currentCostume = player:getCostume()
-    SaveData.currentCostume = currentCostume
+    if currentCostume ~= nil then
+        SaveData.currentCostume = currentCostume
+    elseif currentCostume == nil then
+        SaveData.currentCostume = "N/A"
+    end
     
     --This'll update the path for costumes
     if SaveData.currentCostume ~= nil then
