@@ -68,8 +68,8 @@ function smasenemysystem.onTick()
     if smasenemysystem.enableShellCoinGrabbing then
         if not SaveData.disableX2char then
             --Coins, first thing
-            for k,v in ipairs(NPC.get{5,7,24,73,113,114,115,116,172,174,194,195}) do --Shells
-                for j,l in ipairs(NPC.get{10,33,88,103,138,152,251,252,253,258,528}) do --Coins
+            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smastables.allCoinNPCIDs)) do --Coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the coin
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
@@ -82,8 +82,8 @@ function smasenemysystem.onTick()
                 end
             end
             --Now we're gonna get rupees
-            for k,v in ipairs(NPC.get{5,7,24,73,113,114,115,116,172,174,194,195}) do --Shells
-                for j,l in ipairs(NPC.get{251,252,253}) do --Rupees
+            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smastables.allRupeeNPCIDs)) do --Rupees
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the rupee
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
@@ -96,8 +96,8 @@ function smasenemysystem.onTick()
                 end
             end
             --And now, Dragon Coins
-            for k,v in ipairs(NPC.get{5,7,24,73,113,114,115,116,172,174,194,195}) do --Shells
-                for j,l in ipairs(NPC.get(274)) do --Dragon coins
+            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smastables.allDragonCoinNPCIDs)) do --Dragon coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the dragon coin
                         local c = NPC.config[l.id]
@@ -112,8 +112,8 @@ function smasenemysystem.onTick()
                 end
             end
             --And finally, star coins
-            for k,v in ipairs(NPC.get{5,7,24,73,113,114,115,116,172,174,194,195}) do --Shells
-                for j,l in ipairs(NPC.get(310)) do --Star coins
+            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smastables.allStarCoinNPCIDs)) do --Star coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         starcoin.collect(l)
                     end
