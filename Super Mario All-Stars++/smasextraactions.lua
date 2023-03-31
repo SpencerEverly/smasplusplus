@@ -141,16 +141,18 @@ function smasextraactions.onInputUpdate()
         if smasextraactions.enableFasterClimbing then
             for _,p in ipairs(Player.get()) do
                 --Faster climbing when holding run
-                if p.climbing and p.forcedState == 0 and p.deathTimer == 0 then
-                    if p.keys.run then
-                        if p.keys.left then
-                            p.x = p.x - 1.5
-                        elseif p.keys.right then
-                            p.x = p.x + 1.5
-                        elseif p.keys.up then
-                            p.y = p.y - 1.5
-                        elseif p.keys.down then
-                            p.y = p.y + 1.5
+                if not Misc.isPaused() then
+                    if p.climbing and p.forcedState == 0 and p.deathTimer == 0 then
+                        if p.keys.run then
+                            if p.keys.left then
+                                p.x = p.x - 1.5
+                            elseif p.keys.right then
+                                p.x = p.x + 1.5
+                            elseif p.keys.up then
+                                p.y = p.y - 1.5
+                            elseif p.keys.down then
+                                p.y = p.y + 1.5
+                            end
                         end
                     end
                 end

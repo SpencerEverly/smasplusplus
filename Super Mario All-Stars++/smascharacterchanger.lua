@@ -407,6 +407,8 @@ smascharacterchanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
 smascharacterchanger.addCharacter("Ness","EarthBound",5,"NESS")
 smascharacterchanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
 smascharacterchanger.addCharacter("Baldi","Baldi's Basics (PC)",2,"BALDISBASICS")
+smascharacterchanger.addCharacter("Rosa (Isabella)","The Rosa Game (Working Title)",1,"ROSA-ISABELLA")
+smascharacterchanger.addCharacter("Zero (SMBX OC)","Zero Unhope",1,"ZERO-SONIC")
 
 --***VARIANTS***
 
