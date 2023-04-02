@@ -108,6 +108,10 @@ Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
 Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
+if SMBX_VERSION == VER_SEE_MOD then
+    Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
+    Misc.LUNALUA_EVENTS_TBL["onCheatDeactivate"] = true
+end
 
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then
@@ -267,6 +271,9 @@ for i = 1,200 do
     if SaveData.reserveBoxItem[i] == nil then
         SaveData.reserveBoxItem[i] = 0
     end
+end
+if SaveData.totalCheatCount == nil then --A tally number of cheats you have executed since the first cheat. This'll be an SEE Mod-only feature for now.
+    SaveData.totalCheatCount = 0
 end
 
 --**1.3 Mode default setting**
@@ -552,7 +559,7 @@ function onDraw()
     end
     
     --This'll update the path for costumes
-    if SaveData.currentCostume ~= nil then
+    if currentCostume ~= nil then
         if SaveData.currentCostume ~= "N/A" then
             SaveData.currentCostumePath = "costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume
         else
@@ -631,6 +638,14 @@ end
 
 function onPostPOW(shakeNumber, soundSuppressed, coinsCanFall, eventName)
     
+end
+
+if SMBX_VERSION == VER_SEE_MOD then
+    function onCheatActivate(cheat)
+        if cheat.id then
+            SaveData.totalCheatCount = SaveData.totalCheatCount + 1
+        end
+    end
 end
 
 --That's the end of this file!
