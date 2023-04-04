@@ -368,7 +368,7 @@ do
     }
 
 
-    local function resetPartAnimationData()
+    function resetPartAnimationData()
         for _,partData in ipairs(steve.bodyParts) do
             data.partAnimationData[partData.name] = {offset = vector.zero3,rotation = vector.zero3}
         end
@@ -451,7 +451,7 @@ do
     
     local twoPi = (math.pi*2)
 
-    local function handleAnimation()
+    function handleAnimation()
         local newAnimation,newSpeed = getCurrentAnimation()
 
         if data.currentAnimation ~= newAnimation and newAnimation ~= nil then
@@ -696,7 +696,7 @@ do
     local hudElementsToMove = {"lives",1, "deathcount",1}
     local originalHUDOffsets = {}
 
-    local function initHUD()
+    function initHUD()
         for i=1,#hudElementsToMove,2 do
             local name = hudElementsToMove[i]
             local direction = hudElementsToMove[i+1]
@@ -706,7 +706,7 @@ do
             smashud.offsets[name].y = smashud.offsets[name].y + (steve.hudSettings.moveHUDElementsDistance*direction)
         end
     end
-    local function cleanupHUD()
+    function cleanupHUD()
         for _,data in ipairs(originalHUDOffsets) do
             local name = data[1]
             local offset = data[2]
@@ -952,7 +952,7 @@ do
     local numberKeys = {[VK_1] = 1,[VK_2] = 2,[VK_3] = 3,[VK_4] = 4,[VK_5] = 5,[VK_6] = 6,[VK_7] = 7,[VK_8] = 8,[VK_9] = 9,[VK_0] = 10}
 
 
-    local function resetInventoryData()
+    function resetInventoryData()
         data.inventoryItems = {}
         for i=1,steve.inventorySettings.slots do
             local item = savedData.items[i] or steve.inventorySettings.defaultItems[i] or {}
@@ -1079,7 +1079,7 @@ do
     end
     
 
-    local function handleInventory()
+    function handleInventory()
         if canChangeSelectedSlot() then
             if player.rawKeys.altJump == KEYS_PRESSED then
                 steve.setSelectedInventorySlot(data.selectedInventorySlot-1)
@@ -1260,7 +1260,7 @@ do
 
 
 
-    local function resetPowerupData()
+    function resetPowerupData()
         data.upgradingItemSlot = nil
         data.hitRedTimer = 0
 
@@ -1269,7 +1269,7 @@ do
         end
     end
 
-    local function handlePowerups()
+    function handlePowerups()
         data.hitRedTimer = math.max(0,data.hitRedTimer-1)
 
         if player.forcedState == FORCEDSTATE_POWERDOWN_SMALL then
@@ -1334,7 +1334,7 @@ do
     end
 
 
-    local function handleCrouchingMovement()
+    function handleCrouchingMovement()
         if not canCrouchMove() then
             return
         end
@@ -1452,14 +1452,14 @@ do
     end
 
 
-    local function resetMiningData()
+    function resetMiningData()
         data.miningBlock = nil
         data.miningTime = 0
 
         data.miningSound = nil
     end
 
-    local function handleMining()
+    function handleMining()
         if not canMine() then
             resetMiningData()
             return
@@ -1573,14 +1573,14 @@ do
 
 
 
-    local function resetCombatData()
+    function resetCombatData()
         data.swingingAtPosition = nil
         data.swingingAtTimer = 0
         
         data.wasLeftClicking = mem(MOUSE_LEFT_PRESSED,FIELD_BOOL)
     end
 
-    local function handleCombat()
+    function handleCombat()
         if not canSwing() then
             resetCombatData()
             return
@@ -1735,12 +1735,12 @@ do
     end
 
 
-    local function resetPlacingBlockData()
+    function resetPlacingBlockData()
         data.placingBlockID = nil
         data.placingBlockPosition = nil
     end
 
-    local function handleBlockPlacing()
+    function handleBlockPlacing()
         -- Right click detection is weird
         local rightPressed = mem(MOUSE_RIGHT_PRESSED,FIELD_BOOL)
         mem(MOUSE_RIGHT_PRESSED,FIELD_BOOL,false)
