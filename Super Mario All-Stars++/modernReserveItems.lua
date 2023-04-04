@@ -375,11 +375,11 @@ function modernReserveItems.onTick()
         for _, p in ipairs(Player.get()) do
             p:mem(0x130,FIELD_BOOL,false) -- "DropRelease" from source, via MrDoubleA
             if SaveData.accessibilityInventory then
-                if p.reservePowerup ~= 0 and modernReserveItems.dropped == true and not Misc.isPaused() and (not GameData.winStateActive or GameData.winStateActive == nil) then
+                if SaveData.reserveBoxItem[p.idx] ~= 0 and modernReserveItems.dropped == true and not Misc.isPaused() and (not GameData.winStateActive or GameData.winStateActive == nil) then
                     modernReserveItems.drop(SaveData.reserveBoxItem[_], p)
                 end
             elseif not SaveData.accessibilityInventory then
-                if p.reservePowerup ~= 0 and p.keys.dropItem and not Misc.isPaused() and (not GameData.winStateActive or GameData.winStateActive == nil) then
+                if SaveData.reserveBoxItem[p.idx] ~= 0 and p.keys.dropItem and not Misc.isPaused() and (not GameData.winStateActive or GameData.winStateActive == nil) then
                     modernReserveItems.drop(SaveData.reserveBoxItem[_], p)
                 end
             end
