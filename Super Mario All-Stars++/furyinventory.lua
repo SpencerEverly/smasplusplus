@@ -126,7 +126,6 @@ function furyinventory.onDraw()
         smasbooleans.toggleOffInventory = true
     end
     if furyinventory.hidden == false then
-        --player.reservePowerup = 0 -- disables the item box
         if furyinventory.activatefuryinventory == true then
             if furyinventory.furyinventoryopened == true then
                 numx = 54
@@ -313,8 +312,8 @@ function furyinventory.onPostNPCKill(v,reason)
         if pUpsTable[v.id] then
             SaveData.furyinventory.ice = SaveData.furyinventory.ice + 1
         end
-    elseif player.reservePowerup then
-        SaveData.furyinventory.reserve = player.reservePowerup
+    elseif SaveData.reserveBoxItem[1] then
+        SaveData.furyinventory.reserve = SaveData.reserveBoxItem[1]
     end
 end
 
@@ -324,7 +323,7 @@ function furyinventory.onTick()
     numx = 40
     numy = 570
     
-    SaveData.furyinventory.reserve = player.reservePowerup
+    SaveData.furyinventory.reserve = SaveData.reserveBoxItem[1]
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
     if warpTransition.transitionTimer >= 0.1 then
         furyinventory.activated = false
@@ -566,7 +565,7 @@ function furyinventory.onInputUpdate()
                     if SaveData.furyinventory.reserve >= 1 then
                         p = player
                         Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                        modernReserveItems.drop(p.reservePowerup, p)
+                        modernReserveItems.drop(SaveData.reserveBoxItem[1], p)
                         cooldown = 5
                         state = 1
                         furyinventory.furyinventoryopened = false

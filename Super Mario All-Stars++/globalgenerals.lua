@@ -459,6 +459,13 @@ function globalgenerals.onDraw()
         textplus.print{x=155, y=90, text = "collectable in the lava. This would've crashed SMBX 1.3!", priority=-3, color=Color.yellow, font=statusFont}
         textplus.print{x=195, y=100, text = "You're really good at finding secrets, player ;)", priority=-3, color=Color.yellow, font=statusFont}
     end
+    
+    for _,p in ipairs(Player.get()) do --Custom reserve storage
+        if p.reservePowerup ~= 0 then
+            SaveData.reserveBoxItem[_] = p.reservePowerup
+            p.reservePowerup = 0
+        end
+    end
 end
 
 function globalgenerals.onExitLevel(winType)

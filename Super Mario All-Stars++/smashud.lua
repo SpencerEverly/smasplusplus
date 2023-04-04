@@ -682,18 +682,20 @@ function smashud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
         end
 
     end
-    if thisPlayer.reservePowerup > 0 and reserve2p then
+    if SaveData.reserveBoxItem[thisPlayer.idx] > 0 and reserve2p then
+        
+        local reserveItem = SaveData.reserveBoxItem[thisPlayer.idx]
+        
+        local reserve = Graphics.sprites.npc[reserveItem].img
 
-        local reserve = Graphics.sprites.npc[thisPlayer.reservePowerup].img
-
-        local w = NPC.config[thisPlayer.reservePowerup].gfxwidth
+        local w = NPC.config[reserveItem].gfxwidth
         if w == 0 then
-            w = NPC.config[thisPlayer.reservePowerup].width
+            w = NPC.config[reserveItem].width
         end
 
-        local h = NPC.config[thisPlayer.reservePowerup].gfxheight
+        local h = NPC.config[reserveItem].gfxheight
         if h == 0 then
-            h = NPC.config[thisPlayer.reservePowerup].height
+            h = NPC.config[reserveItem].height
         end
 
         local reserveBox = GetSprite("reserveBox", thisPlayer.character);
@@ -710,7 +712,7 @@ function smashud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
         local sourcey = 0;
 
         --Special case for megashroom (TODO: Maybe make this a table for config?)
-        if(thisPlayer.reservePowerup == 425) then
+        if(reserveItem == 425) then
             sourcey = 5*h;
         end
 
