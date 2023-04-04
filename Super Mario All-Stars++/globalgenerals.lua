@@ -236,9 +236,6 @@ function globalgenerals.onTick()
     if lunatime.tick() == 1 then
         Sound.loadCostumeSounds()
     end
-    for _,p in ipairs(Player.get()) do
-        SaveData.reserveBoxItem[p.idx] = p.reservePowerup
-    end
     if smasbooleans.compatibilityMode13Mode then
         mem(0x00B2C860, FIELD_FLOAT, 7.0999999046326)
     else
@@ -470,6 +467,13 @@ end
 
 function globalgenerals.onExitLevel(winType)
     SysManager.exitLevel(winType)
+    if Misc.inEditor() then
+        for _,p in ipairs(Player.get()) do
+            if SaveData.reserveBoxItem[_] ~= 0 then
+                GameData.tempReserve[_] = SaveData.reserveBoxItem[_]
+            end
+        end
+    end
 end
 
 function globalgenerals.onExit()
