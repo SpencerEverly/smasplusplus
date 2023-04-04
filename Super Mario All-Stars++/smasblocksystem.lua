@@ -28,6 +28,8 @@ smasblocksystem.frameRuleCounter = 20 --Adds a frame rule system, similar to SMB
 smasblocksystem.blockListWithCoins = {} --Table for a list of blocks set with more than 1 coin
 smasblocksystem.yoshiNPCs = table.map{1095,1100,1098,1099,1149,1150,1228,1148,1325,1326,1327,1328,1329,1330,1331,1332} --Yoshi NPCs to use, for activating a 1UP instead of getting another Yoshi egg.
 
+smasblocksystem.enableMultiplayerPowerupBlockSystem = false
+
 if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
 end
@@ -65,6 +67,117 @@ function smasblocksystem.onStart()
             end
         end
     end
+end
+
+local spawnedIDs = {}
+
+function smasblocksystem.sproutMultiplayerBlockItem(playerPowerup, block, fromUpper, playerornil)
+    Routine.waitFrames(2, false)
+    if playerPowerup == nil then
+        playerPowerup = 1
+    end
+    for k,v in ipairs(NPC.get(smastables.allMushroomNPCIDs)) do
+        if playerPowerup == 1 and block.contentID == v.id + 1000 then
+            v:kill(HARM_TYPE_VANISH)
+        end
+    end
+    for k,v in ipairs(NPC.get(smastables.allFireFlowerNPCIDs)) do
+        if playerPowerup == 2 and block.contentID == v.id + 1000 then
+            v:kill(HARM_TYPE_VANISH)
+        end
+    end
+    for _,p in ipairs(Player.get()) do --Get all players in case
+        if p.powerup == 1 then
+            spawnedIDs[_] = NPC.spawn(9, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+            spawnedIDs[_].speedY = -3
+            spawnedIDs[_].direction = RNG.randomInt(-1,1)
+            if spawnedIDs[_].direction == 0 then
+                spawnedIDs[_].direction = 1
+            end
+        end
+        for k,v in ipairs(NPC.get(smastables.allFireFlowerNPCIDs)) do
+            if p.powerup == 2 and block.contentID == v.id + 1000 then
+                spawnedIDs[_] = NPC.spawn(14, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            elseif p.powerup == 3 and block.contentID == v.id + 1000 then
+                spawnedIDs[_] = NPC.spawn(14, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            end
+        end
+        for k,v in ipairs(NPC.get(34)) do --Super leaf
+            if p.powerup == 2 and block.contentID == 34 + 1000 then
+                spawnedIDs[_] = NPC.spawn(34, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            elseif p.powerup == 4 then
+                spawnedIDs[_] = NPC.spawn(34, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            end
+        end
+        for k,v in ipairs(NPC.get(169)) do --Tanooki suit
+            if p.powerup == 2 and block.contentID == 169 + 1000 then
+                spawnedIDs[_] = NPC.spawn(169, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            elseif p.powerup == 5 then
+                spawnedIDs[_] = NPC.spawn(169, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            end
+        end
+        for k,v in ipairs(NPC.get(170)) do --Hammer suit
+            if p.powerup == 2 and block.contentID == 170 + 1000 then
+                spawnedIDs[_] = NPC.spawn(170, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+            elseif p.powerup == 6 then
+                spawnedIDs[_] = NPC.spawn(170, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            end
+        end
+        for k,v in ipairs(NPC.get(smastables.allIceFlowerNPCIDs)) do --Ice flower
+            if p.powerup == 2 and block.contentID == v.id + 1000 then
+                spawnedIDs[_] = NPC.spawn(277, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            elseif p.powerup == 7 then
+                spawnedIDs[_] = NPC.spawn(277, block.x - RNG.randomInt(10,35), block.y - 32, playerornil.section, false, true)
+                spawnedIDs[_].speedY = -3
+                spawnedIDs[_].direction = RNG.randomInt(-1,1)
+                if spawnedIDs[_].direction == 0 then
+                    spawnedIDs[_].direction = 1
+                end
+            end
+        end
+    end
+    spawnedIDs = {}
 end
 
 function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
@@ -105,6 +218,23 @@ function smasblocksystem.onPostBlockHit(block, fromUpper, playerornil)
             if playerornil.mount == MOUNT_YOSHI and smasblocksystem.yoshiNPCs[block.contentID] then
                 console:println("Yoshi already mounted on Player "..tostring(playerornil.idx)..", changed to 1UP mushroom.")
                 block.contentID = 1187
+            end
+        end
+        
+        
+    end
+    
+    if SaveData.disableX2char then
+        
+        
+        --Multi-powerup sprouting on multiplayer (NSMBWii)
+        if smasblocksystem.enableMultiplayerPowerupBlockSystem then
+            if playerornil ~= nil and not fromUpper then
+                for k,v in ipairs(smastables.allPowerupNPCIDs) do
+                    if Player.count() >= 2 and block.contentID == v + 1000 then
+                        Routine.run(smasblocksystem.sproutMultiplayerBlockItem, playerornil.powerup, block, fromUpper, playerornil)
+                    end
+                end
             end
         end
         

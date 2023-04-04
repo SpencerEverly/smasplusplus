@@ -851,11 +851,19 @@ smastables.__smb1Dash1LevelsNumbered = {
 smastables.allGoombaNPCIDs = {1,2,27,71,89,242,243,379,392,393,466,467}
 smastables.allKoopaNPCIDs = {4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
 smastables.allShellNPCIDs = {5,7,24,73,113,114,115,116,172,174,194,195}
+
 smastables.allStarmanNPCIDs = {293,559,994,996}
 smastables.allCollectableStarNPCIDs = {97,196,1000}
 smastables.allCoinNPCIDs = {10,33,88,103,138,152,251,252,253,258,411,528} --378 is a dash coin. Perhaps we should make it compatible with it soon...?
+
 smastables.allMushroomNPCIDs = {9,184,185,249}
 smastables.allFireFlowerNPCIDs = {14,182,183}
+smastables.allSuperLeafNPCIDs = {34}
+smastables.allTanookiSuitNPCIDs = {169}
+smastables.allHammerSuitNPCIDs = {170}
+smastables.allIceFlowerNPCIDs = {277,264}
+smastables.allPowerupNPCIDs = {9,184,185,249,14,182,183,34,169,170,277,264}
+
 smastables.allThwompNPCIDs = {37,180,437,295,435,432,301}
 smastables.allEnemyFireballs = {85,87,246,276}
 smastables.allRupeeNPCIDs = {251,252,253}

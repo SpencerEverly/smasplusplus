@@ -197,6 +197,7 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
 end
 
 local chars = playerManager.getCharacters()
+local selectionAutoTimer = 0
 
 function smascharacterchanger.onInputUpdate()
     if smascharacterchanger.menuActive and started then
@@ -228,6 +229,7 @@ function smascharacterchanger.onInputUpdate()
             --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smascharacterchanger.iniFile)
             smascharacterchanger.selectionNumberUpDown = 1
         end
+        
         if player.keys.jump == KEYS_PRESSED then
             --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smascharacterchanger.oldIniFile)
             Sound.playSFX("charcost_costume.ogg")
@@ -291,6 +293,24 @@ function smascharacterchanger.onDraw()
             end
         end
         if started then
+            if (player.keys.left or player.keys.right) then
+                selectionAutoTimer = selectionAutoTimer + 1
+            end
+            if not (player.keys.left or player.keys.right) then
+                selectionAutoTimer = 0
+            end
+            if selectionAutoTimer >= 25 then
+                if player.keys.left == KEYS_DOWN then
+                    Sound.playSFX(smascharacterchanger.moveSFX)
+                    smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
+                    smascharacterchanger.selectionNumberUpDown = 1
+                elseif player.keys.right == KEYS_DOWN then
+                    Sound.playSFX(smascharacterchanger.moveSFX)
+                    smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
+                    smascharacterchanger.selectionNumberUpDown = 1
+                end
+                selectionAutoTimer = 15
+            end
             textPrintCentered("Select your character!", 410, 100)
             if smascharacterchanger.selectionNumber < 1 then
                 smascharacterchanger.selectionNumber = #smascharacterchanger.names
@@ -324,7 +344,11 @@ function smascharacterchanger.onDraw()
         end
     elseif not smascharacterchanger.menuActive and started then
         if menuBGMObject ~= nil then
-            menuBGMObject:FadeOut(2000)
+            if Audio.MusicVolume() ~= 0 then
+                menuBGMObject:FadeOut(2000)
+            else
+                menuBGMObject:Stop()
+            end
         end
         Routine.run(smascharacterchanger.shutdownChanger)
     elseif not smascharacterchanger.menuActive and ending then

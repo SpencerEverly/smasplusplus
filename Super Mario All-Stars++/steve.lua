@@ -16,7 +16,6 @@ local configFileReader = require("configFileReader")
 local textplus = require("textplus")
 
 local lib3d = require("lib3d")
-local customCamera = require("customCamera")
 
 local steve = {}
 
@@ -183,7 +182,6 @@ local function getClosestObj(objs,x,y)
 end
 
 local function getObjectClickedOn(colliderType,filter,maxDistance)
-    local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
     local mouseX = Screen.cursorX()+camera.x
     local mouseY = Screen.cursorY()+camera.y
 
@@ -249,11 +247,13 @@ do
 
     function steve.destroyMeshes()
         for _,partData in ipairs(steve.bodyParts) do
-            local mesh = data.bodyMeshes[partData.name]
-    
-            if mesh ~= nil and mesh.isValid then
-                mesh:destroy()
-                data.bodyMeshes[partData.name] = nil
+            if data.bodyMeshes ~= nil then
+                local mesh = data.bodyMeshes[partData.name]
+        
+                if mesh ~= nil and mesh.isValid then
+                    mesh:destroy()
+                    data.bodyMeshes[partData.name] = nil
+                end
             end
         end
 
@@ -368,7 +368,7 @@ do
     }
 
 
-    function resetPartAnimationData()
+    local function resetPartAnimationData()
         for _,partData in ipairs(steve.bodyParts) do
             data.partAnimationData[partData.name] = {offset = vector.zero3,rotation = vector.zero3}
         end
@@ -451,7 +451,7 @@ do
     
     local twoPi = (math.pi*2)
 
-    function handleAnimation()
+    local function handleAnimation()
         local newAnimation,newSpeed = getCurrentAnimation()
 
         if data.currentAnimation ~= newAnimation and newAnimation ~= nil then
@@ -696,7 +696,7 @@ do
     local hudElementsToMove = {"lives",1, "deathcount",1}
     local originalHUDOffsets = {}
 
-    function initHUD()
+    local function initHUD()
         for i=1,#hudElementsToMove,2 do
             local name = hudElementsToMove[i]
             local direction = hudElementsToMove[i+1]
@@ -706,7 +706,7 @@ do
             smashud.offsets[name].y = smashud.offsets[name].y + (steve.hudSettings.moveHUDElementsDistance*direction)
         end
     end
-    function cleanupHUD()
+    local function cleanupHUD()
         for _,data in ipairs(originalHUDOffsets) do
             local name = data[1]
             local offset = data[2]
@@ -952,7 +952,7 @@ do
     local numberKeys = {[VK_1] = 1,[VK_2] = 2,[VK_3] = 3,[VK_4] = 4,[VK_5] = 5,[VK_6] = 6,[VK_7] = 7,[VK_8] = 8,[VK_9] = 9,[VK_0] = 10}
 
 
-    function resetInventoryData()
+    local function resetInventoryData()
         data.inventoryItems = {}
         for i=1,steve.inventorySettings.slots do
             local item = savedData.items[i] or steve.inventorySettings.defaultItems[i] or {}
@@ -1079,7 +1079,7 @@ do
     end
     
 
-    function handleInventory()
+    local function handleInventory()
         if canChangeSelectedSlot() then
             if player.rawKeys.altJump == KEYS_PRESSED then
                 steve.setSelectedInventorySlot(data.selectedInventorySlot-1)
@@ -1260,7 +1260,7 @@ do
 
 
 
-    function resetPowerupData()
+    local function resetPowerupData()
         data.upgradingItemSlot = nil
         data.hitRedTimer = 0
 
@@ -1269,7 +1269,7 @@ do
         end
     end
 
-    function handlePowerups()
+    local function handlePowerups()
         data.hitRedTimer = math.max(0,data.hitRedTimer-1)
 
         if player.forcedState == FORCEDSTATE_POWERDOWN_SMALL then
@@ -1334,7 +1334,7 @@ do
     end
 
 
-    function handleCrouchingMovement()
+    local function handleCrouchingMovement()
         if not canCrouchMove() then
             return
         end
@@ -1452,14 +1452,14 @@ do
     end
 
 
-    function resetMiningData()
+    local function resetMiningData()
         data.miningBlock = nil
         data.miningTime = 0
 
         data.miningSound = nil
     end
 
-    function handleMining()
+    local function handleMining()
         if not canMine() then
             resetMiningData()
             return
@@ -1573,14 +1573,14 @@ do
 
 
 
-    function resetCombatData()
+    local function resetCombatData()
         data.swingingAtPosition = nil
         data.swingingAtTimer = 0
         
         data.wasLeftClicking = mem(MOUSE_LEFT_PRESSED,FIELD_BOOL)
     end
 
-    function handleCombat()
+    local function handleCombat()
         if not canSwing() then
             resetCombatData()
             return
@@ -1735,12 +1735,12 @@ do
     end
 
 
-    function resetPlacingBlockData()
+    local function resetPlacingBlockData()
         data.placingBlockID = nil
         data.placingBlockPosition = nil
     end
 
-    function handleBlockPlacing()
+    local function handleBlockPlacing()
         -- Right click detection is weird
         local rightPressed = mem(MOUSE_RIGHT_PRESSED,FIELD_BOOL)
         mem(MOUSE_RIGHT_PRESSED,FIELD_BOOL,false)
