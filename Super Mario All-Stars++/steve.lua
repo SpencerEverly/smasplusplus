@@ -320,11 +320,13 @@ do
 
     function steve.destroyHeldItemMeshes()
         for _,name in ipairs(steve.itemTypes) do
-            local mesh = data.heldItemMeshes[name]
+            if heldItemMeshes ~= nil then
+                local mesh = data.heldItemMeshes[name]
 
-            if mesh ~= nil and mesh.isValid then
-                mesh:destroy()
-                data.heldItemMeshes[name] = nil
+                if mesh ~= nil and mesh.isValid then
+                    mesh:destroy()
+                    data.heldItemMeshes[name] = nil
+                end
             end
         end
     end
