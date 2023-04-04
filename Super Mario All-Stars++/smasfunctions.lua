@@ -8,10 +8,10 @@ local smasfunctions = {}
 --If loading it with a costume, load these libraries here to prevent errors
 if SMBX_VERSION ~= VER_SEE_MOD then
     if SFX == nil then
-        _G.SFX = require("base/audiomaster")
+        require("base/audiomaster")
     end
     if Cheats == nil then
-        _G.Cheats = require("base/game/newcheats")
+        require("base/game/newcheats")
     end
 end
 
