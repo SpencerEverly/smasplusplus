@@ -6,13 +6,11 @@
 local smasfunctions = {}
 
 --If loading it with a costume, load these libraries here to prevent errors
-if SMBX_VERSION ~= VER_SEE_MOD then
-    if SFX == nil then
-        require("base/audiomaster")
-    end
-    if Cheats == nil then
-        require("base/game/newcheats")
-    end
+if SFX == nil then
+    require("base/audiomaster")
+end
+if Cheats == nil then
+    require("base/game/newcheats")
 end
 
 --Now for the base functions!
