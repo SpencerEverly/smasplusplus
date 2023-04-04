@@ -1854,7 +1854,11 @@ function steve.onInitAPI()
     registerEvent(steve,"onExitLevel")
 
     registerEvent(steve,"onKeyboardPressDirect")
-        
+    
+    if player.character == CHARACTER_STEVE then
+        steve.initCharacter()
+    end
+    
     ready = true
 end
 
