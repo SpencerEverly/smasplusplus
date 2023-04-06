@@ -1,5 +1,8 @@
 local Img = {}
 
+Img.loadedImages = {}
+Img.loadedImagesRegistered = {}
+
 function Img.load(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
     local file = File.load(name) or File.load(name..".png")
     if file then
@@ -42,50 +45,117 @@ function Img.loadCharacter(name) --This will not only check the main SMBX2 folde
     return nil
 end
 
---Img.draw(ImageName, x coordinate, y coordinate, true/false if it's with the priority, true/false if using scene coordinates, priority, opacity)
-function Img.draw(name, x, y, withPriority, sceneCoords, arg6, arg7) --PLEASE DO NOT USE! This is outdated and is recommended to use Graphics.drawImage INSTEAD!
-    local fileImage = Graphics.loadImageResolved(name)
-    if fileImage == nil then
-        fileImage = Graphics.loadImageResolved("noimage.png")
+function Img.saveImageData(name)
+    if Img.loadedImages[name] == nil then --Only load it once
+        local imgpath = Misc.resolveFile(name) or "graphics/stock-0.png"
+        Img.loadedImages[name] = Img.load(imgpath) --Try loading the image, but if nil then load the stock-0.png file
+    end
+end
+
+function Img.saveAndRegisterSceneDraw(name)
+    local imgFile = Img.loadedImages[name]
+    if Img.loadedImagesRegistered[name] == nil then
+        --Img.registerSceneDraw(Img.loadedImages[name])
+        Img.loadedImagesRegistered[name] = true
+    end
+end
+
+--Img.draw(ImageName, x coordinate, y coordinate, opacity)
+function Img.draw(name, x, y, arg6)
+    if x == nil or y == nil then
+        error("You didn't specify the image with any coordinates. Try specifiying coordinates and try again.")
     end
     
+    if opacity == nil then
+        opacity = 1
+    end
+    
+    if (arg6 ~= nil) then
+        opacity = arg6
+    end
+    
+    Img.saveImageData(name)
+    Graphics.drawImage(Img.loadedImages[name], x, y, arg6)
+end
+
+--Img.drawWP(ImageName, x coordinate, y coordinate, priority, opacity)
+function Img.drawWP(name, x, y, arg6, arg7)
+    Img.saveImageData(name)
+    
     if priority == nil then
-        local priority = -1
+        priority = -1
     end
     if opacity == nil then
-        local opacity = 1
+        opacity = 1
     end
     
     if x == nil or y == nil then
         error("You didn't specify the image with any coordinates. Try specifiying coordinates and try again.")
     end
-    if withPriority == nil or sceneCoords == nil then
-        error("You didn't specify if the image is with a priority, or with scene coordinates. Try setting the booleans and try again.")
+    
+    if (arg6 ~= nil) and (arg7 ~= nil) then
+        priority = arg6
+        opacity = arg7
+    elseif (arg7 ~= nil) then
+        opacity = arg6
+    elseif (arg6 ~= nil) then
+        priority = arg6
+    else
+        
+    end
+    
+    Graphics.drawImageWP(Img.loadedImages[name], x, y, arg7, arg6)
+end
+
+--Img.drawToScene(ImageName, x coordinate, y coordinate, opacity)
+function Img.drawToScene(name, x, y, arg6)
+    Img.saveImageData(name)
+    
+    if x == nil or y == nil then
+        error("You didn't specify the image with any coordinates. Try specifiying coordinates and try again.")
+    end
+    
+    if opacity == nil then
+        opacity = 1
+    end
+    
+    if (arg6 ~= nil) then
+        opacity = arg6
+    end
+    
+    Graphics.drawImageToScene(Img.loadedImages[name], x, y, arg6)
+end
+
+--Img.drawToScene(ImageName, x coordinate, y coordinate, priority, opacity)
+function Img.drawToSceneWP(name, x, y, arg6, arg7)
+    Img.saveImageData(name)
+    
+    if priority == nil then
+        priority = -1
+    end
+    if opacity == nil then
+        opacity = 1
+    end
+    
+    if x == nil or y == nil then
+        error("You didn't specify the image with any coordinates. Try specifiying coordinates and try again.")
     end
     
     if (arg6 ~= nil) and (arg7 ~= nil) then
-        if (withPriority) then
-            priority = arg6
-        end
+        priority = arg6
         opacity = arg7
-    elseif (arg7 ~= nil) and ((not withPriority) or (arg6 ~= nil)) then
+    elseif (arg7 ~= nil) then
         opacity = arg6
-    elseif (withPriority) then
+    elseif (arg6 ~= nil) then
         priority = arg6
     else
+        
     end
-    if (withPriority) and (sceneCoords) then
-        Graphics.drawImageToSceneWP(fileImage, x, y, true, true, arg7, arg6)
-    elseif (withPriority) and (not sceneCoords) then
-        Graphics.drawImageWP(fileImage, x, y, true, false, arg7, arg6)
-    elseif (not withPriority) and (sceneCoords) then
-        Graphics.drawImageToScene(fileImage, x, y, false, true, arg6)
-    elseif (not withPriority) and (not sceneCoords) then
-        Graphics.drawImage(fileImage, x, y, false, false, arg6)
-    end
+
+    Graphics.drawImageToSceneWP(Img.loadedImages[name], x, y, arg7, arg6)
 end
 
-function Img.registerSceneDraw(image,xPos,yPos,widthPos,heightPos,sourceWidthPos,sourceHeightPos,priorityNum)
+function Img.registerSceneDraw(image,xPos,yPos,widthPos,heightPos,sourceWidthPos,sourceHeightPos,priorityNum,opacityNum)
     if image == nil then
         return false
     end
@@ -110,6 +180,9 @@ function Img.registerSceneDraw(image,xPos,yPos,widthPos,heightPos,sourceWidthPos
     if priorityNum == nil then
         return false
     end
+    if opacityNum == nil then
+        opacityNum = 1
+    end
     customCamera.registerSceneDraw(
         function(args)
             local X,Y,scale,rotation = customCamera.convertPosToScreen(args,xPos,yPos)
@@ -129,6 +202,7 @@ function Img.registerSceneDraw(image,xPos,yPos,widthPos,heightPos,sourceWidthPos
                 rotation       = rotation,
                 target         = args.target,
                 linearFiltered = args.linearFiltered,
+                opacity        = opacityNum,
             }
         end
     )

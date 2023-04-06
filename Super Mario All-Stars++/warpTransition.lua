@@ -12,7 +12,7 @@ local extrasounds = require("extrasounds")
 
 local warpTransition = {}
 
-warpTransition.doorclose = extrasounds.sound.sfx[148]
+warpTransition.doorclose = extrasounds.sounds[148].sfx
 
 warpTransition.currentTransitionType = nil
 warpTransition.transitionTimer = 0

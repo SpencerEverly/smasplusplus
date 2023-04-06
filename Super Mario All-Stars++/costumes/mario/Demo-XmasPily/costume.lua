@@ -1183,7 +1183,7 @@ end
 
 function costume.onTickEnd()
     jumprng = RNG.randomInt(1,6)
-    extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/Demo-XmasPily/jumps/jump-"..jumprng..".ogg")
+    extrasounds.sounds[1] = Audio.SfxOpen("costumes/mario/Demo-XmasPily/jumps/jump-"..jumprng..".ogg")
 end
 
 function costume.onCleanup(playerObj, p)
@@ -1191,12 +1191,7 @@ function costume.onCleanup(playerObj, p)
     onehp = false
     twohp = false
     threehp = false
-    for i = 1,91 do
-        Audio.sounds[i].sfx = nil
-    end
-    for i = 1,165 do
-        extrasounds.sound.sfx[i] = nil
-    end
+    Sound.cleanupCostumeSounds()
     players[playerObj] = nil
     spintrail.colorOverride[CHARACTER_MARIO] = nil
     spintrail.resetParam("colTime")

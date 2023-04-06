@@ -370,7 +370,7 @@ end
 
 function costume.unmutehammer()
     Routine.wait(0.1)
-    extrasounds.sound.sfx[105].volume = 1
+    extrasounds.sounds[105].sfx.volume = 1
     Audio.sounds[25].muted = false
 end
 
@@ -420,7 +420,7 @@ function costume.onTick(p)
         end
         for index,explosion in ipairs(NPC.get(291)) do --Throw SFX
             Audio.sounds[25].muted = true
-            extrasounds.sound.sfx[105].volume = 0
+            extrasounds.sounds[105].sfx.volume = 0
             SFX.play(smascharacterglobals.soundSettings.borisGrenadeLaunchSFX, 1, 1, 500)
             Routine.run(costume.unmutehammer)
         end
@@ -446,12 +446,7 @@ function costume.onPlayerHarm()
 end
 
 function costume.onCleanup(p)
-    for i = 1,91 do
-        Audio.sounds[i].sfx = nil
-    end
-    for i = 1,165 do
-        extrasounds.sound.sfx[i] = nil
-    end
+    Sound.cleanupCostumeSounds()
     costume.grenade = false
     --smashud.visible.itembox = true
 end

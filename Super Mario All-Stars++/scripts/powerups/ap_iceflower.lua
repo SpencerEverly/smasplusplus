@@ -74,7 +74,7 @@ function apt.onTick()
                     v.ai1 = player.character
                     player:mem(0x154, FIELD_WORD, v.idx+1)
                     player:mem(0x62, FIELD_WORD, 42)
-                    SFX.play(extrasounds.sound.sfx[93])
+                    SFX.play(extrasounds.sounds[93].sfx)
                     apt.projectileTimer = apt.projectileTimerMax[player.character]
                 end
             else
@@ -89,7 +89,7 @@ function apt.onTick()
                         end
                         v.speedY = -8 + speedYMod
                     end
-                    SFX.play(extrasounds.sound.sfx[93])
+                    SFX.play(extrasounds.sounds[93].sfx)
                 end
                 if v then
                     v.ai1 = player.character

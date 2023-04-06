@@ -148,7 +148,7 @@ function AFHB.onTickEndNPC(v)
 		v.animationFrame = 0
 		if data.t % 64 == 15 then
 			local h1 = NPC.spawn(30,v.x-12,v.y-16,player.section)
-            SFX.play(extrasounds.sound.sfx[166])
+            SFX.play(extrasounds.sounds[166].sfx)
 			h1.speedX = -3
 			h1.speedY = -5
 		end
@@ -156,7 +156,7 @@ function AFHB.onTickEndNPC(v)
 		v.animationFrame = 1
 		if data.t % 64 == 47 then
 			local h2 = NPC.spawn(30,v.x+v.width-20,v.y-16,player.section)
-            SFX.play(extrasounds.sound.sfx[166])
+            SFX.play(extrasounds.sounds[166].sfx)
 			h2.speedX = 3
 			h2.speedY = -5
 		end

@@ -76,7 +76,7 @@ local function doBeePerk(v)
     if configFile.score < 10 then
         SFX.play(6)
     elseif configFile.score >= 10 then
-        --SFX.play(extrasounds.sound.sfx[15])
+        --SFX.play(extrasounds.sounds[15].sfx)
     end
 end
 

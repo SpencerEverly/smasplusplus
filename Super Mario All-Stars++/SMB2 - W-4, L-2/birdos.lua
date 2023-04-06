@@ -63,7 +63,7 @@ function birdos.onNPCHarm(e, v, r, c)
                 data.hp = data.hp + 1
                 v.direction = -v.direction
                     
-                SFX.play(extrasounds.sound.sfx[39])
+                SFX.play(extrasounds.sounds[39].sfx)
             end
         end
         

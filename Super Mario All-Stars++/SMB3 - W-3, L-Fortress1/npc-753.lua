@@ -57,7 +57,7 @@ local boomBoomSettings = {
     harmlessthrown = false,
 
     health = 3,  -- How much health the NPC has.
-    hitSFX = extrasounds.sound.sfx[39], -- The sound effect played when hurting the NPC. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
+    hitSFX = extrasounds.sounds[39].sfx, -- The sound effect played when hurting the NPC. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
 
     chaseDistance = 1024, -- The maximum distance away from the player that the NPC can be in order to chase the player.
 

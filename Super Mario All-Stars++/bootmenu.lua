@@ -8,7 +8,6 @@ bootmenu.versionnumber = "Demo 3" --This is the version number of this episode. 
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
 local datetime = require("datetime")
-local extrasounds = require("extrasounds")
 local autoscroll = require("autoscrolla")
 local rng = require("base/rng")
 local inputconfigurator = require("inputconfig")

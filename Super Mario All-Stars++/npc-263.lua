@@ -101,7 +101,7 @@ end
 do
     function iceBlockSFX(v,data)
         if extrasounds.enableIceBlockFreezing then
-            SFX.play(extrasounds.sound.sfx[94])
+            SFX.play(extrasounds.sounds[94].sfx)
         end
     end
 end

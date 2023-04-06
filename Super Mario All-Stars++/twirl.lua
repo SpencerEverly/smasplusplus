@@ -13,7 +13,7 @@ function twirl.onInitAPI()
 end
 
 twirl.showMeDebug = false
-local twirlSfx = extrasounds.sound.sfx[154]
+local twirlSfx = extrasounds.sounds[154].sfx
 
 local isTwirling = {false,false}
 local timeline = {0,0}

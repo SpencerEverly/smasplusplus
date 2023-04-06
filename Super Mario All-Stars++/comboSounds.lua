@@ -9,25 +9,25 @@ local comboSounds = {}
 local SCORE_ADDR = 0x00B2C8E4
 local LIVES_ADDR = 0x00B2C5AC
 
-comboSounds.kick1 = extrasounds.sound.sfx[106]
-comboSounds.kick2 = extrasounds.sound.sfx[107]
-comboSounds.kick3 = extrasounds.sound.sfx[108]
-comboSounds.kick4 = extrasounds.sound.sfx[109]
-comboSounds.kick5 = extrasounds.sound.sfx[110]
-comboSounds.kick6 = extrasounds.sound.sfx[111]
-comboSounds.kick7 = extrasounds.sound.sfx[112]
+comboSounds.kick1 = extrasounds.sounds[106].sfx
+comboSounds.kick2 = extrasounds.sounds[107].sfx
+comboSounds.kick3 = extrasounds.sounds[108].sfx
+comboSounds.kick4 = extrasounds.sounds[109].sfx
+comboSounds.kick5 = extrasounds.sounds[110].sfx
+comboSounds.kick6 = extrasounds.sounds[111].sfx
+comboSounds.kick7 = extrasounds.sounds[112].sfx
 
 comboSounds.sounds = {
     9,
     9,
-    extrasounds.sound.sfx[106], --Combo sounds 1-7, found under extrasounds
-    extrasounds.sound.sfx[107],
-    extrasounds.sound.sfx[108],
-    extrasounds.sound.sfx[109],
-    extrasounds.sound.sfx[110],
-    extrasounds.sound.sfx[111],
-    extrasounds.sound.sfx[112],
-    extrasounds.sound.sfx[112],
+    extrasounds.sounds[106].sfx, --Combo sounds 1-7, found under extrasounds
+    extrasounds.sounds[107].sfx,
+    extrasounds.sounds[108].sfx,
+    extrasounds.sounds[109].sfx,
+    extrasounds.sounds[110].sfx,
+    extrasounds.sounds[111].sfx,
+    extrasounds.sounds[112].sfx,
+    extrasounds.sounds[112].sfx,
 }
 
 

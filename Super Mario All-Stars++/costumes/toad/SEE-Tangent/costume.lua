@@ -151,12 +151,7 @@ end
 
 function costume.onCleanup(p)
     Graphics.registerCharacterHUD(CHARACTER_TOAD, Graphics.HUD_HEARTS)
-    for i = 1,91 do
-        Audio.sounds[i].sfx = nil
-    end
-    for i = 1,165 do
-        extrasounds.sound.sfx[i] = nil
-    end
+    Sound.cleanupCostumeSounds()
         
     Defines.jumpheight = 20
     Defines.player_walkspeed = 3

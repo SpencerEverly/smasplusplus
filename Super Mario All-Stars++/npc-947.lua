@@ -135,7 +135,7 @@ function npc.onTickEndNPC(v)
                     fire.speedY = D / C * fire.speedX
                     fire.speedY = math.clamp(fire.speedY, -1, 1)
                     
-                    SFX.play(extrasounds.sound.sfx[42])
+                    SFX.play(extrasounds.sounds[42].sfx)
                 end
                 
                 v.ai1 = 2
@@ -185,7 +185,7 @@ function npc.onNPCHarm(e, v, r, c)
             
             if c then
                 if c.id ~= 13 then
-                    SFX.play(extrasounds.sound.sfx[39])
+                    SFX.play(extrasounds.sounds[39].sfx)
                     data.hp = data.hp - 3
                 else
                     SFX.play(9)
@@ -193,7 +193,7 @@ function npc.onNPCHarm(e, v, r, c)
                 end
             end
         elseif r == 10 then
-            SFX.play(extrasounds.sound.sfx[39])
+            SFX.play(extrasounds.sounds[39].sfx)
             v.ai5 = 20
             data.hp = data.hp - 1
         end

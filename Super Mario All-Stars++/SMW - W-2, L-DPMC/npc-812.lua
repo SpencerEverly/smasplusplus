@@ -110,8 +110,8 @@ npcManager.registerHarmTypes(npcID,
 );
 
 --Custom local definitions below
-local smwbossdefeat = extrasounds.sound.sfx[129]
-local smwbosspoof = extrasounds.sound.sfx[130]
+local smwbossdefeat = extrasounds.sounds[129].sfx
+local smwbosspoof = extrasounds.sounds[130].sfx
 
 --Register events
 function sampleNPC.onInitAPI()

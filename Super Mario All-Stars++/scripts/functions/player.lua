@@ -128,16 +128,20 @@ function Playur.setCount(count) --Sets the total count of the players in the lev
 end
 
 function Playur.threePlayersOrAboveActiveWithNoCheats()
-    return (Player.count() > 2
-        and not Cheats.get("supermario2").active
-        and not Cheats.get("supermario4").active
-        and not Cheats.get("supermario8").active
-        and not Cheats.get("supermario16").active
-        and not Cheats.get("supermario32").active
-        and not Cheats.get("supermario64").active
-        and not Cheats.get("supermario128").active
-        --and not Cheats.get("supermario200").active
-    )
+    if EventManager.onStartRan then
+        return (Player.count() > 2
+            and not Cheats.get("supermario2").active
+            and not Cheats.get("supermario4").active
+            and not Cheats.get("supermario8").active
+            and not Cheats.get("supermario16").active
+            and not Cheats.get("supermario32").active
+            and not Cheats.get("supermario64").active
+            and not Cheats.get("supermario128").active
+            --and not Cheats.get("supermario200").active
+        )
+    else
+        return false
+    end
 end
 
 function Playur.activate1stPlayer(enablexplosion) --Activates 1st player mode

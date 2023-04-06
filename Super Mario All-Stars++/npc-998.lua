@@ -71,7 +71,7 @@ function customNPC.onTickNPC(v)
             smasbooleans.musicMuted = true
             Audio.MusicVolume(0)
             GameData.winStateActive = true
-            SFX.play(extrasounds.sound.sfx[135])
+            SFX.play(extrasounds.sounds[135].sfx)
             exiting = true
             data.countTime = Timer.isActive()
             --Timer.toggle()
@@ -209,7 +209,7 @@ function customNPC.onTickNPC(v)
             exiting = true
             
             if Timer.getValue() > 0 and data.countTime then
-                SFX.play(extrasounds.sound.sfx[113])
+                SFX.play(extrasounds.sounds[113].sfx)
                 if Timer.getValue() >= 100 then
                     Timer.add(-10)
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
@@ -226,7 +226,7 @@ function customNPC.onTickNPC(v)
             end
             
             if Timer.getValue() == 0 and data.countTime then
-                SFX.play(extrasounds.sound.sfx[114], 1, 1, 2500)
+                SFX.play(extrasounds.sounds[114].sfx, 1, 1, 2500)
             end
             
             if data.tick > 65 * 4.5 then --if data.tick > 65 * 2 then

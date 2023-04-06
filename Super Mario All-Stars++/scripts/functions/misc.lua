@@ -636,7 +636,7 @@ function Misc.doPSwitchUntimed(bool)
         Sound.muteMusic(-1)
         if Misc.inSuperMarioAllStarsPlusPlus() then
             smasbooleans.musicMuted = true
-            pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, 0.6, 0)
+            pSwitchMusic = Audio.SfxPlayObjVol(smascharacterinfo.pSwitchMusic, 0, Audio.MusicVolume() / 100)
         end
         console:println("Enabled P-Switch untimed.")
     elseif bool == false then

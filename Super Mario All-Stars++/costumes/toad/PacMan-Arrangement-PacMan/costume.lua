@@ -121,10 +121,10 @@ function costume.onPostNPCKill(npc, harmType)
     if coins[npc.id] and Colliders.collide(player, npc) then
         if pelletnumber == 1 then
             pelletnumber = 2
-            extrasounds.sound.sfx[14] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-2.ogg"))
+            extrasounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-2.ogg"))
         elseif pelletnumber == 2 then
             pelletnumber = 1
-            extrasounds.sound.sfx[14] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-1.ogg"))
+            extrasounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-1.ogg"))
         end
         if player.powerup == 7 then
             SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
@@ -231,12 +231,7 @@ function costume.onControllerButtonPress(button, playerIdx)
 end
 
 function costume.onCleanup(p)
-    for i = 1,91 do
-        Audio.sounds[i].sfx = nil
-    end
-    for i = 1,165 do
-        extrasounds.sound.sfx[i] = nil
-    end
+    Sound.cleanupCostumeSounds()
     
     Defines.jumpheight = 20
     Defines.player_walkspeed = 3

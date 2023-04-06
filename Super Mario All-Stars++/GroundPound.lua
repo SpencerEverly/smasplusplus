@@ -46,9 +46,9 @@ GP.effects = {
 }
 
 GP.SFX = {
-	poundStart = {id = extrasounds.sound.sfx[159],  volume = extrasounds.volume},
-	poundJump  = {id = extrasounds.sound.sfx[59], volume = extrasounds.volume},
-	poundHit   = {id = extrasounds.sound.sfx[160], volume = extrasounds.volume},
+	poundStart = {id = extrasounds.sounds[159].sfx,  volume = extrasounds.volume},
+	poundJump  = {id = extrasounds.sounds[59].sfx, volume = extrasounds.volume},
+	poundHit   = {id = extrasounds.sounds[160].sfx, volume = extrasounds.volume},
 }
 
 local bottomTouchingNPCs

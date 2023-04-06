@@ -1,16 +1,8 @@
 local Sound = {}
 
-local extrasounds
-pcall(function() extrasounds = require("extrasounds") end)
-
+local extrasounds = require("extrasounds")
 local playerManager = require("playermanager")
-
-local smastables
-pcall(function() smastables = require("smastables") end)
-
-if SFX == nil then
-    _G.SFX = require("base/audiomaster")
-end
+local smastables = require("smastables")
 
 if GameData.levelMusicTemporary == nil then
     GameData.levelMusicTemporary = {}
@@ -26,6 +18,8 @@ end
 
 local started = false
 
+Sound.soundDelays = {}
+Sound.soundDelayArray = {}
 Sound.resolvePaths = {
     Misc.levelPath(),
     Misc.episodePath(),
@@ -39,15 +33,70 @@ Sound.resolvePaths = {
     Misc.episodePath().."\\___MainUserDirectory\\",
 }
 
+function Sound.multiResolveFile(...)
+	local t = {...}
+	
+	--If passed a complete path, just return it as-is (as long as the file exists)
+	for _,v in ipairs(t) do
+		if string.match(v, "^%a:[\\/]") and io.exists(v) then
+			return v
+		end
+	end
+
+	for _,p in ipairs(Sound.resolvePaths) do
+		for _,v in ipairs(t) do
+			if io.exists(p..v) then
+				return p..v
+			end
+		end
+	end
+	return nil
+end
+
+local validAudioFiles = {".ogg", ".mp3", ".wav", ".voc", ".flac", ".spc"}
+	
+--table.map doesn't exist yet
+local validFilesMap = {};
+for _,v in ipairs(validAudioFiles) do
+    validFilesMap[v] = true;
+end
+
+function Sound.resolveSoundFile(path)
+    local p,e = string.match(string.lower(path), "^(.+)(%..+)$")
+    local t = {}
+    local idx = 1
+    local typeslist = validAudioFiles
+    if e and validFilesMap[e] then
+        --Re-arrange type list to prioritise type that was provided to the resolve function
+        if e ~= validAudioFiles[1] then
+            typeslist = { e }
+            for _,v in ipairs(validAudioFiles) do
+                if v ~= e then
+                    table.insert(typeslist, v)
+                end
+            end
+        end
+        path = p
+    end
+    for _,typ in ipairs(typeslist) do
+        t[idx] = path..typ
+        t[idx+#typeslist] = "sound/"..path..typ
+        t[idx+2*#typeslist] = "sound/extended/"..path..typ
+        idx = idx+1
+    end
+    
+    return Sound.multiResolveFile(table.unpack(t))
+end
+
 function Sound.openSFX(name) --Opening SFXs
     console:println("Opening '"..name.."'...")
-    return SFX.open(name)
-        or SFX.open("_OST/" .. name)
-        or SFX.open("_OST/_Sound Effects/"..name)
-        or SFX.open("costumes/" .. name)
-        or SFX.open("scripts/" .. name)
-        or SFX.open("sound/" .. name)
-        or SFX.open("___MainUserDirectory/" .. name)
+    return Audio.SfxOpen(Misc.resolveSoundFile(name))
+        or Audio.SfxOpen(Misc.resolveSoundFile("_OST/" .. name))
+        or Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/"..name))
+        or Audio.SfxOpen(Misc.resolveSoundFile("costumes/" .. name))
+        or Audio.SfxOpen(Misc.resolveSoundFile("scripts/" .. name))
+        or Audio.SfxOpen(Misc.resolveSoundFile("sound/" .. name))
+        or Audio.SfxOpen(Misc.resolveSoundFile("___MainUserDirectory/" .. name))
 end
 
 function Sound.playSFX(name, volume, loops, delay) --If you want to play any sound, you can use Sound.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
@@ -73,29 +122,45 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
         delay = 4
     end
     
+    if loops ~= nil then
+        loops = loops - 1
+    end
+    
+    local obj
+    
     local eventObj = {cancelled = false}
     EventManager.callEvent("onPlaySFX", eventObj, name, volume, loops, delay)
     
     if not eventObj.cancelled then
+        Sound.soundDelays[name] = delay
+        table.insert(Sound.soundDelayArray, name)
         if Sound.isExtraSoundsActive() then
-            if extrasounds.sound.sfx[name] and not smastables.stockSoundNumbersInOrder[name] then
-                SFX.play(extrasounds.sound.sfx[name], volume, loops, delay)
+            if not smastables.stockSoundNumbersInOrder[name] and extrasounds.sounds[name] then
+                obj = Audio.SfxPlayObjVol(extrasounds.sounds[name].sfx, loops, math.min(volume*128,128))
             elseif smastables.stockSoundNumbersInOrder[name] then
-                SFX.play(name, volume, loops, delay)
+                obj = Audio.SfxPlayObjVol(Audio.sounds[name].sfx, loops, math.min(volume*128,128))
             elseif name then
-                local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-                SFX.play(file, volume, loops, delay) --Then play it afterward
+                local file = Sound.resolveSoundFile(name) --Common sound directories, see above for the entire list
+                if file ~= nil then
+                    finalFile = Audio.SfxOpen(file)
+                    obj = Audio.SfxPlayObjVol(finalFile, loops, math.min(volume*128,128)) --Then play it afterward
+                end
             end
         elseif not Sound.isExtraSoundsActive() then
             if extrasounds.allVanillaSoundNumbersInOrder[name] then
-                SFX.play(name, volume, loops, delay)
+                obj = Audio.SfxPlayObjVol(Audio.sounds[name].sfx, loops, math.min(volume*128,128))
             elseif name then
-                local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-                SFX.play(file, volume, loops, delay) --Then play it afterward
+                local file = Sound.resolveSoundFile(name) --Common sound directories, see above for the entire list
+                if file ~= nil then
+                    finalFile = Audio.SfxOpen(file)
+                    obj = Audio.SfxPlayObjVol(finalFile, loops, math.min(volume*128,128)) --Then play it afterward
+                end
             end
         end
         
         EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
+        
+        return obj
     end
 end
 
@@ -130,9 +195,9 @@ function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a cos
     end
     if not stringOnly then
         if costumeSoundDir ~= nil then
-            return SFX.open(costumeSoundDir)
+            return Audio.SfxOpen(costumeSoundDir)
         else
-            return SFX.open(Misc.resolveSoundFile(name))
+            return Audio.SfxOpen(Misc.resolveSoundFile(name))
         end
     else
         if costumeSoundDir ~= nil then
@@ -154,7 +219,7 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
         smastables.previouslyCachedSoundFiles[k] = smastables.currentlyCachedSoundFiles[k]
         
         if not smastables.stockSoundNumbersInOrder[k] then
-            extrasounds.sound.sfx[k] = Sound.resolveCostumeSound(v)
+            extrasounds.sounds[k].sfx = Sound.resolveCostumeSound(v)
         elseif smastables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
         end
@@ -167,11 +232,21 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
         if cachedSounds[i] == nil then
             cachedSounds[i] = Sound.resolveCostumeSound(smastables.soundNamesInOrder[i])
         end
-        extrasounds.sound.sfx[i] = cachedSounds[i]
+        extrasounds.sounds[i].sfx = cachedSounds[i]
         if i <= 91 then
             Audio.sounds[i].sfx = cachedSounds[i]
         end
     end]]
+end
+
+function Sound.cleanupCostumeSounds()
+    for k,v in ipairs(smastables.soundNamesInOrder) do
+        if not smastables.stockSoundNumbersInOrder[k] then
+            extrasounds.sounds[k].sfx = nil
+        elseif smastables.stockSoundNumbersInOrder[k] then
+            Audio.sounds[k].sfx = nil
+        end
+    end
 end
 
 function Sound.isExtraSoundsActive()
@@ -423,7 +498,15 @@ function Sound.changeMusicRNG(songTable, sectionNumber)
 end
 
 function Sound.onDraw()
-    
+    for i = #Sound.soundDelayArray,1,-1 do
+        local s = Sound.soundDelayArray[i]
+        if(Sound.soundDelays[s] > 0) then
+            Sound.soundDelays[s] = Sound.soundDelays[s] - 1
+        else
+            Sound.soundDelays[s] = nil;
+            table.remove(Sound.soundDelayArray, i)
+        end
+    end
 end
 
 

@@ -36,7 +36,7 @@ function npc.onTickEndNPC(v)
 		p.speedY = 1
 
 		if (p.keys.jump or p.keys.altJump) and p.speedY > 0 and p:mem(0x11C, FIELD_WORD) <= 0 then
-			SFX.play((p:mem(0x50, FIELD_BOOL) and extrasounds.sound.sfx[33]) or extrasounds.sound.sfx[1])
+			SFX.play((p:mem(0x50, FIELD_BOOL) and extrasounds.sounds[33].sfx) or extrasounds.sounds[1].sfx)
 			
 			p:mem(0x11C, FIELD_WORD, 20)
 			p.speedY = -6

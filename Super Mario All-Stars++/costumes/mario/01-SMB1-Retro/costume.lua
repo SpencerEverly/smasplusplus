@@ -545,9 +545,9 @@ end
 
 function costume.onInit(p)
     if p.powerup == 1 then
-        extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump-small.ogg")
+        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump-small.ogg")
     elseif p.powerup >= 2 then
-        extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump.ogg")
+        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump.ogg")
     end
     if not costume.loadedSounds then
         Sound.loadCostumeSounds()
@@ -598,12 +598,7 @@ function costume.onInit(p)
 end
 
 function costume.onCleanup(p)
-    for i = 1,91 do
-        Audio.sounds[i].sfx = nil
-    end
-    for i = 1,165 do
-        extrasounds.sound.sfx[i] = nil
-    end
+    Sound.cleanupCostumeSounds()
     
     Defines.jumpheight = 20
     Defines.player_walkspeed = 3
@@ -671,9 +666,9 @@ end
 
 function costume.onTickEnd()
     if player.powerup == 1 then
-        extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump-small.ogg")
+        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump-small.ogg")
     elseif player.powerup >= 2 then
-        extrasounds.sound.sfx[1] = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump.ogg")
+        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump.ogg")
     end
     for _,p in ipairs(costume.playersList) do
         local data = costume.playerData[p]

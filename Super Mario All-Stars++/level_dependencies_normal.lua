@@ -7,7 +7,6 @@ if not Misc.inMarioChallenge() then
     datetime = require("datetime")
 end
 local Routine = require("routine")
-local extrasounds = require("extrasounds")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local pausemenu2 = require("pausemenu2")
 if table.icontains(smastables.__smb2Levels,Level.filename()) then

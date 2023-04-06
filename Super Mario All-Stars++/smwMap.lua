@@ -4572,7 +4572,7 @@ smwMap.playerSettings = {
     waterImage = Graphics.loadImageResolved("smwMap/water.png"),
 
     levelSelectedSound = 28,
-    levelDestroyedSound = extrasounds.sound.sfx[153],
+    levelDestroyedSound = extrasounds.sounds[153].sfx,
     switchBlockReleasedSound = SFX.open(Misc.resolveSoundFile("smwMap/switchBlockReleased")),
 
 

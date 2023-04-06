@@ -1248,7 +1248,7 @@ apt.flightSettings = {
     -- The frames used when flying.
     frames = {37,38,39,47,48,49},
     -- The sound played when catching air.
-    catchAirSFX = extrasounds.sound.sfx[134],
+    catchAirSFX = extrasounds.sounds[134].sfx,
 
 
     -- The sound played when hit while flying.

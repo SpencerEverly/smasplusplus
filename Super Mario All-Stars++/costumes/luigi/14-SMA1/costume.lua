@@ -644,12 +644,7 @@ function costume.onPostPlayerHarm()
 end
 
 function costume.onCleanup(p)
-    for i = 1,91 do
-        Audio.sounds[i].sfx = nil
-    end
-    for i = 1,165 do
-        extrasounds.sound.sfx[i] = nil
-    end
+    Sound.cleanupCostumeSounds()
     
     Defines.player_grav = 0.4
     Defines.jumpheight = 20

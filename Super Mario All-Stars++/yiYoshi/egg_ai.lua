@@ -185,7 +185,7 @@ local function doBouncing(v,data,config,mimicConfig)
             elseif obj.id == 370 or obj.contentID == 0 and Block.MEGA_SMASH_MAP[obj.id] then
                 obj:remove(true)
                 isSolid = false
-                SFX.play(extrasounds.sound.sfx[4])
+                SFX.play(extrasounds.sounds[4].sfx)
             else
                 obj:hit()
             end
@@ -279,7 +279,7 @@ local function doBigEggPOW(v)
                 combo = math.min(10,combo + 1)
 
                 if combo >= 10 then
-                    SFX.play(extrasounds.sound.sfx[15])
+                    SFX.play(extrasounds.sounds[15].sfx)
                 end
             end
         end

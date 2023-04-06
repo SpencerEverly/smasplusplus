@@ -684,11 +684,11 @@ function rooms.onStart()
         if not rooms.deathSoundEffect then
             Audio.sounds[8].muted = true
         elseif type(rooms.deathSoundEffect) == "number" then
-            extrasounds.sound.sfx[8] = Audio.sounds[rooms.deathSoundEffect].sfx
+            extrasounds.sounds[8].sfx = Audio.sounds[rooms.deathSoundEffect].sfx
         elseif type(rooms.deathSoundEffect) == "string" then
-            extrasounds.sound.sfx[8] = SFX.open(Misc.resolveSoundFile(rooms.deathSoundEffect))
+            extrasounds.sounds[8].sfx = SFX.open(Misc.resolveSoundFile(rooms.deathSoundEffect))
         else
-            extrasounds.sound.sfx[8] = rooms.deathSoundEffect
+            extrasounds.sounds[8].sfx = rooms.deathSoundEffect
         end
 
         if not rooms.dontPlayMusicThroughLua then

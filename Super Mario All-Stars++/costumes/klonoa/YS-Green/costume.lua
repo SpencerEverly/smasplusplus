@@ -34,12 +34,7 @@ function costume.onDraw()
 end
 
 function costume.onCleanup(playerObject)
-    for i = 1,91 do
-        Audio.sounds[i].sfx = nil
-    end
-    for i = 1,165 do
-        extrasounds.sound.sfx[i] = nil
-    end
+    Sound.cleanupCostumeSounds()
     
     klonoa.flapAnimSpeed = 6
     ringbox = colliders.Box(0, 0, 32, 32)

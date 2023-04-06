@@ -35,7 +35,7 @@ apt.capeSpritesheets = {
 }
 
 apt.apSounds = {
-    upgrade = extrasounds.sound.sfx[133],
+    upgrade = extrasounds.sounds[133].sfx,
     reserve = 12
 }
 

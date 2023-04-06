@@ -106,7 +106,7 @@ npcManager.registerHarmTypes(npcID,
 --Custom local definitions below
 local cameralock = nil
 local direction = 0
-local bridgecollapse = extrasounds.sound.sfx[153]
+local bridgecollapse = extrasounds.sounds[153].sfx
 
 --Register events
 function sampleNPC.onInitAPI()

@@ -74,7 +74,7 @@ local goalTapeSettings = {
     victoryPoseOnYoshi = nil, -- The "victory pose" used when on a yoshi.
 
     mainSFX = 52,       -- The sound played when hitting the goal tape. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
-    irisOutSFX = extrasounds.sound.sfx[145], -- The sound used for the iris out. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
+    irisOutSFX = extrasounds.sounds[145].sfx, -- The sound used for the iris out. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
 
     heldNPCsTransform = false, -- Whether or not an NPC being held will transform when hitting the goal.
     
@@ -87,9 +87,9 @@ local goalTapeSettings = {
     timerCountdownSpeed = 128, -- How many frames it takes to count down the timer.
 
     -- The sound effects using for the timer countdown. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
-    countdownStartSFX = extrasounds.sound.sfx[142],
-    countdownLoopSFX  = extrasounds.sound.sfx[143],
-    countdownEndSFX   = extrasounds.sound.sfx[144],
+    countdownStartSFX = extrasounds.sounds[142].sfx,
+    countdownLoopSFX  = extrasounds.sounds[143].sfx,
+    countdownEndSFX   = extrasounds.sounds[144].sfx,
     
     incrementstar = true,
 }

@@ -87,7 +87,7 @@ local bigBooBossSettings = {
 	legacyBossMusic = 51,
 
 	-- Sounds
-	fallSound = extrasounds.sound.sfx[127],
+	fallSound = extrasounds.sounds[127].sfx,
 }
 
 npcManager.setNpcSettings(bigBooBossSettings)

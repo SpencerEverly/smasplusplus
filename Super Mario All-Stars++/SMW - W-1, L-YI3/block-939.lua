@@ -65,11 +65,11 @@ function bonusBlock.onPostBlockHit(v,fromTop,playerObj)
     if levelCoins >= data.coinGoal then
         -- True NPC ID is contentID - 1000. Example: 1187 - 1000 = 187... the SMW 1-Up.
         v.contentID = data.bonusNPC + 1000
-        SFX.play(extrasounds.sound.sfx[151])
+        SFX.play(extrasounds.sounds[151].sfx)
     else
         -- Contains a single coin.
         v.contentID = 1
-        SFX.play(extrasounds.sound.sfx[152])
+        SFX.play(extrasounds.sounds[152].sfx)
     end
 end
 

@@ -1,4 +1,4 @@
---extrasounds.lua by Spencer Everly (v0.3.5)
+--extrasounds.lua by Spencer Everly (v0.4.0)
 --
 --To use this everywhere, you can simply put this under luna.lua:
 --_G.extrasounds = require("extrasounds")
@@ -7,10 +7,10 @@
 --
 --Audio.sounds[14].sfx = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
 --to
---extrasounds.sound.sfx[14] = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
+--extrasounds.sounds[14].sfx = Audio.SfxOpen("costumes/(character)/(costume)/coin.ogg")
 --
 --or this if that one doesn't work:
---extrasounds.sound.sfx[14] = Audio.SfxOpen(Misc.resolveSoundFile("costumes/(character)/(costume)/coin.ogg"))
+--extrasounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/(character)/(costume)/coin.ogg"))
 --
 --Check the lua file for info on which things does what
 
@@ -150,8 +150,7 @@ end
 
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 local inspect = require("ext/inspect")
-local customCamera
-pcall(function() customCamera = require("customCamera") end)
+local customCamera = require("customCamera")
 local rng = require("base/rng")
 
 local npctocointimer = 0 --This is used for the NPC to Coin sound.
@@ -169,9 +168,7 @@ extrasounds.harmableComboTypes = {
 
 local ready = false --This library isn't ready until onInit is finished
 
-extrasounds.sound = {}
-extrasounds.sound.sfx = {}
-
+extrasounds.sounds = {}
 extrasounds.disableSoundMarker = false
 
 extrasounds.soundNamesInOrder = {
@@ -240,8 +237,8 @@ extrasounds.soundNamesInOrder = {
     "wart-die", --63
     "sm-block-hit", --64
     "sm-killed", --65
-    "sm-hurt", --66
-    "sm-glass", --67
+    "sm-glass", --66
+    "sm-hurt", --67
     "sm-boss-hit", --68
     "sm-cry", --69
     "sm-explosion", --70
@@ -346,65 +343,23 @@ extrasounds.soundNamesInOrder = {
     "fireball-hit-hammershield", --169
 }
 
---[[for i = 0,#extrasounds.soundNamesInOrder do
-    extrasounds.sound[i] = {}
-    extrasounds.sound[i].sfx = {}
-end]]
+extrasounds.stockSoundNumbersInOrder = table.map{2,3,5,6,9,11,12,13,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,37,38,40,41,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,78,79,80,82,83,84,85,86,87,88,89,90,91}
 
-extrasounds.sound.sfx[0] = Audio.SfxOpen(Misc.resolveSoundFile("nothing.ogg")) --General sound to mute anything, really
-
---This is to require every sound and load it altogether
 for k,v in ipairs(extrasounds.soundNamesInOrder) do
-    extrasounds.sound.sfx[k] = Audio.SfxOpen(Misc.resolveSoundFile(v))
+    if not extrasounds.stockSoundNumbersInOrder[k] then --Will decrease sound RAM since we're only using what's replaceable via extrasounds
+        extrasounds.sounds[k] = {}
+        extrasounds.sounds[k].sfx = Audio.SfxOpen(Misc.resolveSoundFile(v)) --Sound effect file
+        extrasounds.sounds[k].muted = false --SFX muting, will replace the variables that mute SFX
+    end
 end
 
 --Non-Changable Sounds (Specific to SMAS++, which doesn't necessarily use any character utilizing to use these sounds)
-extrasounds.sound.sfx[1000] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
-extrasounds.sound.sfx[1001] = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog-confirm.ogg")) --Dialog Menu Choosing Confirmed
-
-extrasounds.stockSoundNumbersInOrder = table.map{2,3,5,6,9,11,12,13,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,37,38,40,41,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,78,79,80,82,83,84,85,86,87,88,89,90,91}
-
-extrasounds.allVanillaSoundNumbersInOrder = table.map{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91}
-
-function extrasounds.playSFX(name, volume, loops, delay) --If you want to play any sound, you can use extrasounds.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
-    if unexpected_condition then error("That sound doesn't exist. Play something else.") end
-    
-    if name == nil then
-        error("That sound doesn't exist. Play something else.")
-        return
-    end
-    
-    if volume == nil then
-        volume = extrasounds.volume
-    end
-    if extrasounds.volume == nil then
-        volume = 1
-    end
-    if loops == nil then
-        loops = 1
-    end
-    if delay == nil then
-        delay = 4
-    end
-    
-    if extrasounds.active then
-        if extrasounds.sound.sfx[name] and not extrasounds.stockSoundNumbersInOrder[name] then
-            SFX.play(extrasounds.sound.sfx[name], volume, loops, delay)
-        elseif extrasounds.stockSoundNumbersInOrder[name] then
-            SFX.play(name, volume, loops, delay)
-        elseif name then
-            local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-            SFX.play(file, volume, loops, delay) --Then play it afterward
-        end
-    elseif not extrasounds.active then
-        if extrasounds.allVanillaSoundNumbersInOrder[name] then
-            SFX.play(name, volume, loops, delay)
-        elseif name then
-            local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-            SFX.play(file, volume, loops, delay) --Then play it afterward
-        end
-    end
-end
+extrasounds.sounds[1000] = {}
+extrasounds.sounds[1000].sfx = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog.ogg")) --Dialog Menu Picker
+extrasounds.sounds[1000].muted = false
+extrasounds.sounds[1001] = {}
+extrasounds.sounds[1001].sfx = Audio.SfxOpen(Misc.resolveSoundFile("menu/dialog-confirm.ogg")) --Dialog Menu Choosing Confirmed
+extrasounds.sounds[1001].muted = false
 
 local normalCharacters = {
     [CHARACTER_MARIO] = true,
@@ -453,6 +408,55 @@ local linkCharacters = {
     [CHARACTER_LINK] = true,
     [CHARACTER_SNAKE] = true,
 }
+
+function extrasounds.playSFX(name, volume, loops, delay) --If you want to play any sound, you can use extrasounds.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
+    console:println("Playing sound '"..name.."'...")
+    
+    if unexpected_condition then error("That sound doesn't exist. Play something else.") end
+    
+    if name == nil then
+        error("That sound doesn't exist. Play something else.")
+        return
+    end
+    
+    if volume == nil then
+        volume = extrasounds.volume
+    end
+    if extrasounds.volume == nil then
+        volume = 1
+    end
+    if loops == nil then
+        loops = 1
+    end
+    if delay == nil then
+        delay = 4
+    end
+    
+    local eventObj = {cancelled = false}
+    EventManager.callEvent("onPlaySFX", eventObj, name, volume, loops, delay)
+    
+    if not eventObj.cancelled then
+        if Sound.isExtraSoundsActive() then
+            if extrasounds.sounds[name].sfx and not smastables.stockSoundNumbersInOrder[name] then
+                SFX.play(extrasounds.sounds[name].sfx, volume, loops, delay)
+            elseif smastables.stockSoundNumbersInOrder[name] then
+                SFX.play(name, volume, loops, delay)
+            elseif name then
+                local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+                SFX.play(file, volume, loops, delay) --Then play it afterward
+            end
+        elseif not Sound.isExtraSoundsActive() then
+            if extrasounds.allVanillaSoundNumbersInOrder[name] then
+                SFX.play(name, volume, loops, delay)
+            elseif name then
+                local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
+                SFX.play(file, volume, loops, delay) --Then play it afterward
+            end
+        end
+        
+        EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
+    end
+end
 
 local spinjumpablebricks = table.map{90,526}
 
@@ -674,8 +678,10 @@ local enemyfireballs = table.map{85,87,246,276} --All enemy fireballs.
 
 function extrasounds.onDraw()
     for k,v in ipairs(extrasounds.soundNamesInOrder) do
-        if extrasounds.sound.sfx[k] == nil then --If nil, roll back to the original sound...
-            extrasounds.sound.sfx[k] = Audio.SfxOpen(Misc.resolveSoundFile(v))
+        if not extrasounds.stockSoundNumbersInOrder[k] then
+            if extrasounds.sounds[k].sfx == nil then --If nil, roll back to the original sound...
+                extrasounds.sounds[k].sfx = Audio.SfxOpen(Misc.resolveSoundFile(v))
+            end
         end
     end
 end
@@ -1681,6 +1687,14 @@ function extrasounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for custom c
                     end
                 end
                 
+                
+                
+                --**SLIDING COMBO KILLS**
+                if p:mem(0x3C, FIELD_BOOL) and extrasounds.harmableComboTypes[harmtype] then
+                    Audio.sounds[9].muted = true
+                    comboMuteTally = 2
+                    Routine.run(extrasounds.comboSoundRoutine)
+                end
                 
                 
             end

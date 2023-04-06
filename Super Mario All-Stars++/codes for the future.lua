@@ -147,5 +147,5 @@ for k,v in ipairs({
     "combo6", --111
     "combo7", --112
 }) do
-    extrasounds.sound.sfx[k] = Audio.SfxOpen(Misc.resolveSoundFile(v))
+    extrasounds.sounds[k].sfx = Audio.SfxOpen(Misc.resolveSoundFile(v))
 end
