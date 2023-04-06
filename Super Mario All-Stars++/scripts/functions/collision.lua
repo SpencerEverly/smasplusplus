@@ -135,6 +135,7 @@ function Collisionz.EasyModeCollision(Loc1, Loc2, StandOn)
             tempEasyModeCollision = Collisionz.CollisionSpot.COLLISION_BOTTOM
         else
             tempEasyModeCollision = Collisionz.CollisionSpot.COLLISION_CENTER
+        end
     end
 
     return tempEasyModeCollision
