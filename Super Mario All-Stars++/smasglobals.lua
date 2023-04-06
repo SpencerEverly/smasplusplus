@@ -133,8 +133,6 @@ _G.NPC_Globals = {
     
     despawnTimer = 0, --Timer until NPC despawns. (TimeLeft?)
     
-    HoldingPlayer
-    
     bouce = false, --Unknown(?)
     
     blockSlope = 0, --The block that the NPC is on a slope with
