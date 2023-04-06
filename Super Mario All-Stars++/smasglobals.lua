@@ -76,40 +76,103 @@ _G.AppPath = Misc.episodePath()
 
 _G.numSavedEvents = 0
 
---*UNUSED, FOR NOW*
+_G.numCredits = 0
+_G.numBlock = 0
+_G.numBackground = 0
+_G.numNPCs = 0
+_G.numEffects = 0
+_G.numPlayers = 0
+_G.numWorldLevels = 0
+_G.numWorldMusic = 0
 
 _G.NPC_Globals = {
-    AttLayer = Layer_Globals.LAYER_NONE,
-    Quicksand = 0,
-    RespawnDelay = 0,
-    Bouce = false,
-    RealSpeedX = 0,
-    Wet = false, --True if in water
-    NoLavaSplash = false, --True for no lava splash
-    BlockSlope = 0, --The block that the NPC is on a slope with
-    ScoreMultiplier = 0, --For upping the points the player recieves
-    CanTailHit = true, --If false, the player can't hit the NPC with it's tail
-    Shadow = false, --If true, then the NPC is black and will allow it to pass through walls. Only used for the cheat code "shadowstar".
-    TriggerActivate = Event_Globals.EVENT_NONE, --For events: Triggers when NPC gets activated
-    TriggerDeath = Event_Globals.EVENT_NONE, --Triggers when NPC dies
-    TriggerTalk = Event_Globals.EVENT_NONE, --Triggers when you talk to the NPC
-    TriggerLast = Event_Globals.EVENT_NONE, --Trigger when this is the last NPC in a layer to die
-    Layer = Layer_Globals.LAYER_NONE, --The layer name that the NPC is in
-    Hidden = false, --If the NPC is hidden or not
-    Legacy = false, --Legacy Boss
-    Chat = false, --For talking to the NPC
-    Inert = false, --The friendly toggle. makes the NPC not do anything
-    Stuck = false, --The 'don't move' toggle. forces the NPC not to move
-    DefaultStuck = false,
-    Text = "", --The text that is displayed when you talk to the NPC
-    BeltSpeed = 0, --The speed of the object this NPC is standing on
-    Generator = false, --For spawning new NPCs
-    GeneratorTimeMax = 0,
-    GeneratorTime = 0,
-    GeneratorDirection = 0,
-    GeneratorEffect = 0,
-    GeneratorActive = false,
+    id = 0, --ID of the NPC (Type)
+    x = 0, --X Position for the NPC
+    y = 0, --Y position for the NPC
+    width = 0, --Width of the NPC.
+    height = 0, --Height of the NPC.
+    speedX = 0, --Speed X for the NPC
+    speedY = 0, --Speed Y for the NPC
+    direction = 0, --The direction of the NPC.
+    ai1 = 0, --The AIs of the NPC.
+    ai2 = 0,
+    ai3 = 0,
+    ai4 = 0,
+    ai5 = 0,
+    ai6 = 0,
+    ai7 = 0,
     
+    spawnId = 0, --ID of the NPC when spawning
+    spawnX = 0, --X position when it originally spawned
+    spawnY = 0, --Y position when it originally spawned
+    spawnWidth = 0, --Width when it originally spawned
+    spawnHeight = 0, --Height when it originally spawned
+    spawnSpeedX = 0, --Speed X when it originally spawned
+    spawnSpeedY = 0, --Speed Y when it originally spawned
+    spawnDirection = 0, --Direction when it originally spawned
+    spawnAi1 = 0, --The AIs of the NPC when it originally spawned.
+    spawnAi2 = 0,
+    spawnAi3 = 0,
+    spawnAi4 = 0,
+    spawnAi5 = 0,
+    spawnAi6 = 0,
+    spawnAi7 = 0,
+    
+    animationFrame = 0, --Frame to show
+    animationTimer = 0, --The timer of each frame.
+    
+    isValid = false, --Whether valid on the level or not.
+    isOnScreen = false, --Whether on the screen or not.
+    
+    canTurnAround = false, --Whether to turn around or not.
+    
+    killFlag = 0, --Whether the NPC should die or not
+    
+    quicksand = 0, --Is the NPC in quicksand?
+    underwater = false, --Is the NPC in water?
+    
+    despawnTimer = 0, --Timer until NPC despawns. (TimeLeft?)
+    
+    HoldingPlayer
+    
+    bouce = false, --Unknown(?)
+    
+    blockSlope = 0, --The block that the NPC is on a slope with
+    isSemiSlope = false, --Whether the slope is a semi-solid or not
+    
+    noLavaSplash = false, --True for no lava splash when dying
+    canGetHitByTail = true, --If false, the player can't hit the NPC with it's tail
+    
+    isShadowStarred = false, --If true, then the NPC is black and will allow it to pass through walls. Only used for the cheat code "shadowstar".
+    
+    activateEventName = Event_Globals.EVENT_NONE, --For events: Triggers when NPC gets activated
+    deathEventName = Event_Globals.EVENT_NONE, --Triggers when NPC dies
+    talkEventName = Event_Globals.EVENT_NONE, --Triggers when you talk to the NPC
+    noMoreObjInLayer = Event_Globals.EVENT_NONE, --Trigger when this is the last NPC in a layer to die
+    
+    attachedLayerName = Layer_Globals.LAYER_NONE, --The name of the NPC's attached layer.
+    layerName = Layer_Globals.LAYER_NONE, --The layer name that the NPC is in
+    layerObj = Layer_Globals.LAYER_NONE, --The layer for the NPC.
+    isHidden = false, --If the NPC is hidden or not
+    
+    legacyBoss = false, --Legacy Boss
+    
+    hasMessage = false, --For talking to the NPC
+    friendly = false, --The friendly toggle. makes the NPC not do anything (Inert)
+    dontMove = false, --The 'don't move' toggle. forces the NPC not to move (Stuck)
+    defaultFriendly = false, --The friendly toggle, which this one will be true when it was originally toggled on start (DefaultStuck).
+    msg = "", --The text that is displayed when you talk to the NPC
+    
+    beltSpeed = 0, --The speed of the object this NPC is standing on
+    
+    isGenerator = false, --For spawning new NPCs with generators.
+    generatorInterval = 0, --Generator time before execution.
+    generatorTimer = 0, --The timer of the generator.
+    generatorDirection = 0, --The direction the generator is firing.
+    generatorType = 0, --The type of the generator.
+    generatorActive = false, --Whether the generator is active or not.
+    
+    scoreMultiplier = 0, --For upping the points the player recieves
 }
 
 return smasglobals

@@ -17,6 +17,7 @@ _G.Npc = require("scripts/functions/npc")
 _G.Screen = require("scripts/functions/camera")
 _G.Evento = require("scripts/functions/events")
 _G.Effectx = require("scripts/functions/effect")
+_G.Collisionz = require("scripts/functions/collision")
 
 --This is used for spitting out help documentation for these scripts.
 function smasfunctions.help()

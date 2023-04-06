@@ -1105,6 +1105,17 @@ ID:843;X:-197216;Y:-200448;W:32;H:32;
 ID:839;X:-197216;Y:-200192;W:32;H:32;
 ID:843;X:-197216;Y:-200416;W:32;H:32;
 ID:839;X:-197280;Y:-200320;W:32;H:32;
+ID:828;X:-197344;Y:-197920;W:32;H:32;
+ID:828;X:-197344;Y:-197888;W:32;H:32;
+ID:828;X:-197344;Y:-197856;W:32;H:32;
+ID:828;X:-197376;Y:-197856;W:32;H:32;
+ID:828;X:-197376;Y:-197888;W:32;H:32;
+ID:828;X:-197376;Y:-197920;W:32;H:32;
+ID:839;X:-197248;Y:-197728;W:32;H:32;
+ID:839;X:-197184;Y:-197728;W:32;H:32;
+ID:839;X:-197216;Y:-197760;W:32;H:32;
+ID:839;X:-197184;Y:-197792;W:32;H:32;
+ID:828;X:-197120;Y:-197824;W:32;H:32;
 BLOCK_END
 BGO
 ID:751;X:-195584;Y:-197984;
@@ -1922,7 +1933,7 @@ ID:862;X:-197952;Y:-194240;D:-1;XTRA:"{\n    \"levelFilename\"\: \"WSMBA - W-7\,
 ID:752;X:-197856;Y:-194240;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBA7-4\"\,\n    \"points\"\: \"32\, 0\, -96\, 0\"\n}\n";
 ID:821;X:-197952;Y:-194336;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"WSMBABeginWarp\"\,\n    \"levelTitle\"\: \"Warp to Game Select\"\,\n    \"path_down\"\: \"toWSMBAW-7Path1\"\,\n    \"warpName\"\: \"WSMBAEndingPipeFinale\"\n}\n";
 ID:752;X:-197952;Y:-194272;D:-1;XTRA:"{\n    \"name\"\: \"toWSMBAW-7Path1\"\,\n    \"points\"\: \"0\, 32\, 0\, -64\"\n}\n";
-ID:753;X:-197600;Y:-198176;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Ocean Land.spc|0\;g=2.5\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"width\"\: 1600\n}\n";
+ID:753;X:-197600;Y:-198176;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Ocean Land.spc|0\;g=2.5\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 1600\n}\n";
 ID:821;X:-197344;Y:-197728;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-2EndWarp\"\,\n    \"levelTitle\"\: \"Warp to World 2\"\,\n    \"path_down\"\: \"\"\,\n    \"path_right\"\: \"toSMB33-1\"\,\n    \"warpName\"\: \"SMB3W-3BeginWarp\"\n}\n";
 ID:752;X:-197312;Y:-197728;D:-1;XTRA:"{\n    \"name\"\: \"toSMB33-1\"\,\n    \"points\"\: \"-32\, 0\, 32\, 0\, 32\, -160\"\n}\n";
 ID:802;X:-197280;Y:-197888;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-3\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"3-1\: Entering the Waters\"\,\n    \"path_down\"\: \"toSMB33-1\"\,\n    \"path_up\"\: \"toSMB33-2\"\,\n    \"unlock_up\"\: 9\n}\n";
