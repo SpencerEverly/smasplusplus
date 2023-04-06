@@ -147,7 +147,7 @@ function Sound.playSFX(name, volume, loops, delay) --If you want to play any sou
                 end
             end
         elseif not Sound.isExtraSoundsActive() then
-            if extrasounds.allVanillaSoundNumbersInOrder[name] then
+            if smastables.allVanillaSoundNumbersInOrder[name] then
                 obj = Audio.SfxPlayObjVol(Audio.sounds[name].sfx, loops, math.min(volume*128,128))
             elseif name then
                 local file = Sound.resolveSoundFile(name) --Common sound directories, see above for the entire list
