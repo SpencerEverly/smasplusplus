@@ -438,7 +438,9 @@ function extrasounds.playSFX(name, volume, loops, delay) --If you want to play a
     if not eventObj.cancelled then
         if Sound.isExtraSoundsActive() then
             if extrasounds.sounds[name] and not smastables.stockSoundNumbersInOrder[name] then
-                SFX.play(extrasounds.sounds[name].sfx, volume, loops, delay)
+                if not extrasounds.sounds[name].muted then
+                    SFX.play(extrasounds.sounds[name].sfx, volume, loops, delay)
+                end
             elseif smastables.stockSoundNumbersInOrder[name] then
                 SFX.play(name, volume, loops, delay)
             elseif name then

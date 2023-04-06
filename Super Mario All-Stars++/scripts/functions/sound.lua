@@ -124,7 +124,9 @@ function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play an
     if not eventObj.cancelled then
         if Sound.isExtraSoundsActive() then
             if not smastables.stockSoundNumbersInOrder[name] and extrasounds.sounds[name] then
-                audiomasterSMAS.PlaySound({sound = extrasounds.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
+                if not extrasounds.sounds[name].muted then
+                    audiomasterSMAS.PlaySound({sound = extrasounds.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
+                end
             elseif smastables.stockSoundNumbersInOrder[name] then
                 audiomasterSMAS.PlaySound({sound = Audio.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
             elseif name then
