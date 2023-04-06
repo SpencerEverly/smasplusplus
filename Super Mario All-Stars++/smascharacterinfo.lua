@@ -1,6 +1,7 @@
 local smascharacterinfo = {}
 
-local littleDialogue = require("littleDialogue")
+local littleDialogue
+pcall(function() littleDialogue = require("littleDialogue") end)
 local starman = require("starman/star")
 local mega2 = require("mega/megashroom")
 local playerManager = require("playermanager")

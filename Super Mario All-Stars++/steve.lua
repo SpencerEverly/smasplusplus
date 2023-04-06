@@ -2246,18 +2246,18 @@ steve.generalSettings = {
     glintFrameDelay = 3,
 
     -- The sound played when upgrading a tool.
-    upgradeToolSound = SFX.open(Misc.resolveSoundFile("steve/upgradeTool")),
+    upgradeToolSound = Audio.SfxOpen(Misc.resolveSoundFile("steve/upgradeTool")),
     -- The sound played when a tool runs out of durability.
-    breakToolSound = SFX.open(Misc.resolveSoundFile("steve/breakTool")),
+    breakToolSound = Audio.SfxOpen(Misc.resolveSoundFile("steve/breakTool")),
 
     -- The sounds played when the player gets hurt.
     hitSounds = {
-        SFX.open(Misc.resolveSoundFile("steve/hurt_1")),
-        SFX.open(Misc.resolveSoundFile("steve/hurt_2")),
-        SFX.open(Misc.resolveSoundFile("steve/hurt_3")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/hurt_1")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/hurt_2")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/hurt_3")),
     },
     -- The sound played when dying due to a bottomless pit.
-    dieOffScreenSound = SFX.open(Misc.resolveSoundFile("steve/fall")),
+    dieOffScreenSound = Audio.SfxOpen(Misc.resolveSoundFile("steve/fall")),
     -- The amount of ticks that the player goes red for when getting hit.
     hitRedTime = 16,
     -- The knockback recieved by the player upon getting hit.
@@ -2369,10 +2369,10 @@ steve.miningSettings = {
 
     -- The sounds played while mining a block.
     sounds = {
-        SFX.open(Misc.resolveSoundFile("steve/mine_1")),
-        SFX.open(Misc.resolveSoundFile("steve/mine_2")),
-        SFX.open(Misc.resolveSoundFile("steve/mine_3")),
-        SFX.open(Misc.resolveSoundFile("steve/mine_4")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/mine_1")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/mine_2")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/mine_3")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/mine_4")),
     },
     -- The number of ticks between each sound.
     soundDelay = 12,
@@ -2406,20 +2406,20 @@ steve.combatSettings = {
 
     -- The sounds played when successfully hitting an enemy.
     hitSounds = {
-        SFX.open(Misc.resolveSoundFile("steve/attack_1")),
-        SFX.open(Misc.resolveSoundFile("steve/attack_2")),
-        SFX.open(Misc.resolveSoundFile("steve/attack_3")),
-        SFX.open(Misc.resolveSoundFile("steve/attack_4")),
-        SFX.open(Misc.resolveSoundFile("steve/attack_5")),
-        SFX.open(Misc.resolveSoundFile("steve/attack_6")),
-        SFX.open(Misc.resolveSoundFile("steve/attack_7")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/attack_1")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/attack_2")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/attack_3")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/attack_4")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/attack_5")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/attack_6")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/attack_7")),
     },
     -- The sounds played when missing an enemy.
     missSounds = {
-        SFX.open(Misc.resolveSoundFile("steve/miss_1")),
-        SFX.open(Misc.resolveSoundFile("steve/miss_2")),
-        SFX.open(Misc.resolveSoundFile("steve/miss_3")),
-        SFX.open(Misc.resolveSoundFile("steve/miss_4")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/miss_1")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/miss_2")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/miss_3")),
+        Audio.SfxOpen(Misc.resolveSoundFile("steve/miss_4")),
     },
 }
 

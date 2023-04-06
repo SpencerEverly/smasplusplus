@@ -3,7 +3,6 @@ local Misk = {}
 local rng = require("base/rng")
 local smasverbosemode = require("smasverbosemode")
 local customCamera = require("customCamera")
-local smascharacterinfo = require("smascharacterinfo")
 local smastables = require("smastables")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
@@ -621,34 +620,6 @@ function Misc.toggleWindowOnly() --This, when fullscreen, will only toggle a win
     elseif not mem(0x00B250D8, FIELD_BOOL) then
         console:println("Window-only mode enabled.")
         return mem(0x00B250D8, FIELD_BOOL, true)
-    end
-end
-
-local pSwitchMusic
-
-function Misc.doPSwitchUntimed(bool)
-    if bool == nil then
-        console:println("Bool on P-Switch Untimed is nil! Returning...")
-        return
-    end
-    if bool == true then
-        Misc.doPSwitchRaw(true)
-        Sound.muteMusic(-1)
-        if Misc.inSuperMarioAllStarsPlusPlus() then
-            smasbooleans.musicMuted = true
-            pSwitchMusic = Audio.SfxPlayObjVol(smascharacterinfo.pSwitchMusic, 0, Audio.MusicVolume() / 100)
-        end
-        console:println("Enabled P-Switch untimed.")
-    elseif bool == false then
-        Misc.doPSwitchRaw(false)
-        if Misc.inSuperMarioAllStarsPlusPlus() then
-            smasbooleans.musicMuted = false
-            if pSwitchMusic ~= nil then
-                pSwitchMusic:Stop()
-            end
-        end
-        Sound.restoreMusic(-1)
-        console:println("Disabled P-Switch untimed.")
     end
 end
 
