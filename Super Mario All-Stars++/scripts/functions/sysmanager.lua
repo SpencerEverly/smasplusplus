@@ -421,4 +421,13 @@ function SysManager.getDefaultPlayerUsername()
     return name
 end
 
+function SysManager.totalStarsLeftForTrueEnding()
+    local stars = (200 - SaveData.totalStarCount)
+    if stars < 0 then
+        return 0
+    else
+        return stars
+    end
+end
+
 return SysManager

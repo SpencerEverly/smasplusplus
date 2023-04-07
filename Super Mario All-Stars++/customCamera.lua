@@ -1146,10 +1146,11 @@ function customCamera.getCurrentSettings()
     if customCamera.controllerID > 0 and EventManager.onStartRan then
         -- Collect active controllers, then sort
         local controllers = {}
-
-        for _,b in Block.iterateIntersecting(player.x,player.y,player.x+player.width,player.y+player.height) do
-            if b.id == customCamera.controllerID and not b.isHidden and not b:mem(0x5A,FIELD_BOOL) then
-                table.insert(controllers,b)
+        for j,p in ipairs(Player.get()) do
+            for _,b in Block.iterateIntersecting(p.x,p.y,p.x+p.width,p.y+p.height) do
+                if b.id == customCamera.controllerID and not b.isHidden and not b:mem(0x5A,FIELD_BOOL) then
+                    table.insert(controllers,b)
+                end
             end
         end
 
@@ -1358,58 +1359,59 @@ function customCamera.onDraw()
 
     customCamera.updateHandycamUse()
 
+    for _,p in ipairs(Player.get()) do
+        if customCamera.lastSection == p.section then
+            -- Update bounds
+            local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
+            local boundsCurrent = customCamera.currentBounds
 
-    if customCamera.lastSection == player.section then
-        -- Update bounds
-        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-        local boundsCurrent = customCamera.currentBounds
+            local bounds = customCamera.getExtraBounds()
 
-        local bounds = customCamera.getExtraBounds()
+            for i = 1,4 do
+                local boundSetting = bounds[i]
 
-        for i = 1,4 do
-            local boundSetting = bounds[i]
+                local isVertical = (i > 2)
+                local direction = (i - 1)%2
+                local sign = direction*2 - 1
 
-            local isVertical = (i > 2)
-            local direction = (i - 1)%2
-            local sign = direction*2 - 1
+                local cameraSide = (isVertical and (fullY + fullHeight*direction)) or (fullX + fullWidth*direction)
 
-            local cameraSide = (isVertical and (fullY + fullHeight*direction)) or (fullX + fullWidth*direction)
+                if boundSetting ~= nil then
+                    boundsCurrent[i] = boundsCurrent[i] or cameraSide
 
-            if boundSetting ~= nil then
-                boundsCurrent[i] = boundsCurrent[i] or cameraSide
+                    if direction == 0 then
+                        boundsCurrent[i] = math.min(boundSetting,math.max(cameraSide,boundsCurrent[i]) + customCamera.boundaryEnterSpeed)
+                    else
+                        boundsCurrent[i] = math.max(boundSetting,math.min(cameraSide,boundsCurrent[i]) - customCamera.boundaryEnterSpeed)
+                    end
+                elseif boundsCurrent[i] ~= nil then
+                    boundsCurrent[i] = boundsCurrent[i] + sign*customCamera.boundaryExitSpeed
 
-                if direction == 0 then
-                    boundsCurrent[i] = math.min(boundSetting,math.max(cameraSide,boundsCurrent[i]) + customCamera.boundaryEnterSpeed)
+                    if (direction == 0 and boundsCurrent[i] <= cameraSide-32) or (direction == 1 and boundsCurrent[i] >= cameraSide+32) then
+                        boundsCurrent[i] = nil
+                    end
+                end
+            end
+
+            -- Treat as a physical border
+            if customCamera.currentSettings.treatCameraBoundsAsPhysical and p.deathTimer == 0 and p.forcedState == FORCEDSTATE_NONE then
+                if p.x <= fullX then
+                    p.speedX = math.max(0,p.speedX)
+                    p.x = fullX
+
+                    p:mem(0x148,FIELD_WORD,2)
+                elseif p.x >= fullX + fullWidth - p.width then
+                    p.speedX = math.min(0,p.speedX)
+                    p.x = fullX + fullWidth - p.width
+
+                    p:mem(0x14C,FIELD_WORD,2)
+                end
+        
+                if p.y >= fullY + fullHeight + 64 then
+                    p:kill()
                 else
-                    boundsCurrent[i] = math.max(boundSetting,math.min(cameraSide,boundsCurrent[i]) - customCamera.boundaryEnterSpeed)
+                    p.y = math.max(p.y,fullY - p.height - 32)
                 end
-            elseif boundsCurrent[i] ~= nil then
-                boundsCurrent[i] = boundsCurrent[i] + sign*customCamera.boundaryExitSpeed
-
-                if (direction == 0 and boundsCurrent[i] <= cameraSide-32) or (direction == 1 and boundsCurrent[i] >= cameraSide+32) then
-                    boundsCurrent[i] = nil
-                end
-            end
-        end
-
-        -- Treat as a physical border
-        if customCamera.currentSettings.treatCameraBoundsAsPhysical and player.deathTimer == 0 and player.forcedState == FORCEDSTATE_NONE then
-            if player.x <= fullX then
-                player.speedX = math.max(0,player.speedX)
-                player.x = fullX
-
-                player:mem(0x148,FIELD_WORD,2)
-            elseif player.x >= fullX + fullWidth - player.width then
-                player.speedX = math.min(0,player.speedX)
-                player.x = fullX + fullWidth - player.width
-
-                player:mem(0x14C,FIELD_WORD,2)
-            end
-    
-            if player.y >= fullY + fullHeight + 64 then
-                player:kill()
-            else
-                player.y = math.max(player.y,fullY - player.height - 32)
             end
         end
     end
@@ -1448,10 +1450,10 @@ function customCamera.onCameraUpdate()
     focus.x = focus.x + customCamera.currentOffsetX
     focus.y = focus.y + customCamera.currentOffsetY
 
-    focus = customCamera.clampFocusToBounds(focus)
+    focus2 = customCamera.clampFocusToBounds(focus)
 
-    camera.x = focus.x - camera.width*0.5
-    camera.y = focus.y - camera.height*0.5
+    camera.x = focus2.x - camera.width*0.5
+    camera.y = focus2.y - camera.height*0.5
 end
 
 function customCamera.onCameraDraw()

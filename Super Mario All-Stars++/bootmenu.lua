@@ -1187,7 +1187,7 @@ function bootmenu.onInputUpdate()
                 Level.load("SMAS - Start.lvlx")
             end
         end
-        if SaveData.racaActivated == 1 then
+        if SaveData.racaActivated then
             bootmenu.startedmenu = 2
         end
     end

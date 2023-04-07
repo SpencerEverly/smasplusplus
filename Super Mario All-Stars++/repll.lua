@@ -229,23 +229,25 @@ end
 repll.active = false
 repll.activeInEpisode = false
 repll.background = Color(0,0,0,0.5)
---repll.backgroundImg = Graphics.loadImageResolved("graphics/colors/black-repl.png")
+repll.backgroundImg = Graphics.loadImageResolved("graphics/colors/black-repl.png")
 
 --[[customCamera.registerSceneDraw(
 function(args)
     local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
     local X,Y,scale,rotation = customCamera.convertPosToScreen(args,fullX,fullY)
+    local priority = customCamera.convertPriority(args,-1)
     if repll.active then
         Graphics.drawBox{
             texture = repll.backgroundImg,
             sceneCoords = false,
-            priority = customCamera.convertPriority(args,-1),
+            priority = priority,
             x = X,
             y = Y,
             width = fullWidth,
             height = fullHeight,
         }
     end
+    customCamera.drawQuadToScene(args,repll.backgroundImg,priority,X,Y,fullWidth,fullHeight,0,0,1,0)
 end
 )]]
 

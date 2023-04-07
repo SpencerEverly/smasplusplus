@@ -178,6 +178,14 @@ function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,i
     console:println("Camera scroll activated! Will scroll to the following bounds: "..tostring(leftbound).." (Left) , "..tostring(upbound).." (Up) , "..tostring(downbound).." (Down), "..tostring(rightbound).." (Right).")
 end
 
+function Screen.viewPortCoordinateX(x,width)
+    return x / 2 - (width * 0.5)
+end
+
+function Screen.viewPortCoordinateY(y,height)
+    return y / 2 - (height * 0.5)
+end
+
 function Screen.onDraw()
     if setCameraPosition then --Camera position stuff
         if cameraPausedWhileScrolling then

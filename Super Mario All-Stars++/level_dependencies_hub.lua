@@ -11,6 +11,10 @@ local anothercurrency = require("ShopSystem/anothercurrency")
 local smashudsystem = require("smashudsystem")
 local pausemenu2 = require("pausemenu2")
 
+if SaveData.disableX2char then
+    pausemenu13 = require("pausemenu13/pausemenu13")
+end
+
 local costumes = {}
 
 local dying = false;

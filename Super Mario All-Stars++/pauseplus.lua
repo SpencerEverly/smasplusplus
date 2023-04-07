@@ -997,7 +997,7 @@ end
 function pauseplus.onPause(eventObj,playerObj)
     eventObj.cancelled = true
 
-    if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) and not smasbooleans.mainMenuActive and not smasbooleans.disablePauseMenu then
+    if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) and not smasbooleans.mainMenuActive and not smasbooleans.disablePauseMenu and not SaveData.disableX2char then
         pauseplus.open(nil,nil,playerObj)
     end
 end
@@ -1005,7 +1005,7 @@ end
 function pauseplus.onKeyboardPressDirect(keycode,repeated,character) -- for shift+P shortcut
     if not Misc.inEditor() or pauseplus.currentSubmenu ~= nil then return end
     
-    if not repeated and (keycode == VK_P) and Misc.GetKeyState(VK_RETURN) and pauseplus.canPause and not smasbooleans.mainMenuActive and not smasbooleans.disablePauseMenu then
+    if not repeated and (keycode == VK_P) and Misc.GetKeyState(VK_RETURN) and pauseplus.canPause and not smasbooleans.mainMenuActive and not smasbooleans.disablePauseMenu and not SaveData.disableX2char then
         pauseplus.open()
     end
 end

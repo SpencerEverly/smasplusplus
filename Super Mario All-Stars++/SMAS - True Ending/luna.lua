@@ -102,9 +102,9 @@ function onEvent(eventName)
     end
     if eventName == "NormalCutscene6" then
         if SaveData.racaActivated == nil then
-            SaveData.racaActivated = 0
+            SaveData.racaActivated = true
         end
-        SaveData.racaActivated = 1
+        SaveData.racaActivated = true
         SaveData.introselect = 1
         SaveData.resolution = "fullscreen"
         SaveData.letterbox = true

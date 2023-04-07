@@ -1,5 +1,6 @@
 local Routine = require("routine")
 local littleDialogue = require("littleDialogue")
+local smasTrueFinalBossSystem = require("smasTrueFinalBossSystem")
 
 littleDialogue.registerStyle("endingtextone",{
     openSpeed = 1,
@@ -44,7 +45,7 @@ function onDraw()
 end
 
 function onTick()
-    if invisible == true then
+    if invisible then
         player:setFrame(50)
     end
 end

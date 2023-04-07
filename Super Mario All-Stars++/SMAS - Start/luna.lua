@@ -20,9 +20,9 @@ local timer = 128
 local activeselected = 1
 local activeselecty = 32
 
-if SaveData.racaActivated == nil or SaveData.racaActivated == 0 then
+if SaveData.racaActivated == nil or not SaveData.racaActivated then
     activeselecty = 32
-elseif SaveData.racaActivated >= 1 then
+elseif SaveData.racaActivated then
     activeselecty = 44
 end
 
@@ -103,7 +103,7 @@ function onDraw()
         Graphics.drawScreen{color = Color.black, priority = -5}
     end
     if active then
-        if SaveData.racaActivated == nil or SaveData.racaActivated == 0 then
+        if SaveData.racaActivated == nil or not SaveData.racaActivated then
             if cooldown > 0 then
                 cooldown = cooldown - 1
             end
@@ -126,7 +126,7 @@ function onDraw()
                 activeselecty = 32
                 activeselected = 1
             end
-        elseif SaveData.racaActivated >= 1 then
+        elseif SaveData.racaActivated then
             if cooldown > 0 then
                 cooldown = cooldown - 1
             end
@@ -187,7 +187,7 @@ function onInputUpdate()
             activeselecty = activeselecty - 12
         end
         if cooldown == 0 then
-            if SaveData.racaActivated == nil or SaveData.racaActivated == 0 then
+            if SaveData.racaActivated == nil or not SaveData.racaActivated then
                 if player.keys.jump == KEYS_PRESSED then
                     if activeselected == 1 then
                         SysManager.loadIntroTheme()
@@ -241,7 +241,7 @@ function onInputUpdate()
                         SysManager.clearSaveDataAndGameDataAndRestart()
                     end
                 end
-            elseif SaveData.racaActivated >= 1 then
+            elseif SaveData.racaActivated then
                 if player.keys.jump == KEYS_PRESSED then
                     if activeselected == 1 then
                         SysManager.loadIntroTheme()

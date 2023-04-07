@@ -5,6 +5,14 @@
 local smas2playersystem = {}
 
 local customCamera = require("customCamera")
+local handycam = require("handycam")
+
+local player1Camera = Graphics.CaptureBuffer(800,600)
+local player2Camera = Graphics.CaptureBuffer(800,600)
+smas2playersystem.player1CameraEdgeX = 0
+smas2playersystem.player1CameraEdgeY = 0
+smas2playersystem.player2CameraEdgeX = 0
+smas2playersystem.player2CameraEdgeY = 0
 
 local pipecounter1p = 0
 local pipecounter2p = 0
@@ -15,6 +23,7 @@ function smas2playersystem.onInitAPI()
     registerEvent(smas2playersystem,"onStart")
     registerEvent(smas2playersystem,"onDraw")
     registerEvent(smas2playersystem,"onTick")
+    registerEvent(smas2playersystem,"onCameraDraw")
 end
 
 function smas2playersystem.onStart()
@@ -58,9 +67,52 @@ function smas2playersystem.onDraw()
                 elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
                     Player(2):kill()
                 end
+            end]
+        end
+        if Player.count() == 2 then
+            if player.deathTimer == 0 then
+                smas2playersystem.player1CameraEdgeX = Screen.viewPortCoordinateX(player.x - camera.x, player.width)
+                smas2playersystem.player1CameraEdgeY = 0
+                smas2playersystem.player2CameraEdgeX = Screen.viewPortCoordinateX(player2.x - camera.x, player2.width)
+                smas2playersystem.player2CameraEdgeY = 0 --player.y - camera.y - player.height
             end]]
         end
     end
+end
+
+function smas2playersystem.onCameraDraw(camIdx)
+    --[[if Player.count() == 2 then
+        if player.deathTimer == 0 then
+            player1Camera:captureAt(-4.9999)
+            player2Camera:captureAt(-4.9999)
+            Graphics.drawBox{
+                texture = player1Camera,
+                x = 0,
+                y = 0,
+                priority = -4.98,
+                width = 400,
+                height = 600,
+                sourceX = smas2playersystem.player1CameraEdgeX,
+                sourceY = smas2playersystem.player1CameraEdgeY,
+                sourceWidth = 400,
+                sourceHeight = 600,
+            }
+        end
+        if player2.deathTimer == 0 then
+            Graphics.drawBox{
+                texture = player2Camera,
+                x = 400,
+                y = 0,
+                priority = -4.98,
+                width = 400,
+                height = 600,
+                sourceX = smas2playersystem.player2CameraEdgeX,
+                sourceY = smas2playersystem.player2CameraEdgeY,
+                sourceWidth = 400,
+                sourceHeight = 600,
+            }
+        end
+    end]]
 end
 
 function smas2playersystem.onTick()

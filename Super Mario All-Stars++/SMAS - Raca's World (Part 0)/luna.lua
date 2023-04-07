@@ -127,10 +127,6 @@ function onInputUpdate()
 end
 
 function onTick()
-    if SaveData.racaActvated == 1 then
-        SaveData.racaActvated = SaveData.racaActvated - 1
-        Misc.saveGame()
-    end
     if invisible == true then
         player:setFrame(50)
     end

@@ -9,6 +9,11 @@ end
 local Routine = require("routine")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local pausemenu2 = require("pausemenu2")
+
+if SaveData.disableX2char then
+    pausemenu13 = require("pausemenu13/pausemenu13")
+end
+
 if table.icontains(smastables.__smb2Levels,Level.filename()) then
     rooms = require("rooms")
 end
