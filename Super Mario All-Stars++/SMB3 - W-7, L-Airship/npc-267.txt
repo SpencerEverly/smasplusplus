@@ -1,4 +1,5 @@
-height=96
-gfxheight=96
-width=36
-gfxwidth=96
+width=48
+gfxwidth=100
+height=64
+gfxheight=70
+gfxoffsety=3

@@ -1,8 +1,0 @@
-width=36
-height=36
-gfxwidth=36
-gfxheight=36
-frames=4
-framespeed=8
-npcblock=0
-

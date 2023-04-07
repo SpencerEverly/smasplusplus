@@ -116,6 +116,8 @@ smwMap.drawObjectsOnMap = true
 smwMap.drawSceneriesOnMap = true
 --Whenever to enable music or not.
 smwMap.enableMusic = true
+--Only true when teleporting.
+smwMap.isTeleporting = false
 
 -- Debug thing: if true, an area's "restrict camera" setting won't do anything and the look around mode will always work.
 smwMap.freeCamera = false
@@ -2385,6 +2387,25 @@ do
 
         updateActiveAreas(smwMap.mainPlayer,0)
     end
+    
+    function smwMap.refreshMapCoordinates()
+        local levelObj
+        if saveData.playerX ~= nil and saveData.playerY ~= nil then
+            levelObj = findLevel(smwMap.mainPlayer,saveData.playerX,saveData.playerY)
+        end
+
+        levelObj = levelObj or findLevel(smwMap.mainPlayer,smwMap.mainPlayer.x,smwMap.mainPlayer.y)
+
+        setLevel(smwMap.mainPlayer,levelObj)
+        smwMap.mainPlayer.state = PLAYER_STATE.NORMAL
+        updateNonMainPlayerCounts()
+
+        updateActiveAreas(smwMap.mainPlayer,0)
+        
+        smwMap.isTeleporting = true
+        
+        smwMap.updateMusic()
+    end
 end
 
 
@@ -4455,6 +4476,18 @@ do
             end
 
             smwMap.currentlyPlayingMusic = newMusic
+        end
+        
+        if smwMap.currentlyPlayingMusic == newMusic and smwMap.isTeleporting then
+            if newMusic ~= 0 then
+                Audio.MusicOpen(getMusicPath(newMusic))
+                Audio.MusicPlay()
+            else
+                Audio.MusicStop()
+            end
+            
+            smwMap.currentlyPlayingMusic = newMusic
+            smwMap.isTeleporting = false
         end
 
         if smwMap.mainPlayer.state == PLAYER_STATE.SELECTED then

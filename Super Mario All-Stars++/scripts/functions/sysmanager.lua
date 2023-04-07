@@ -413,4 +413,12 @@ function SysManager.numberTableToNumbersWithCommas(tablel)
     return epic
 end
 
+function SysManager.getDefaultPlayerUsername()
+    local name = string.match(getSMBXPath(),[[^C:\Users\([^%\]+)\]])
+    if name == nil then
+        name = "Player"
+    end
+    return name
+end
+
 return SysManager

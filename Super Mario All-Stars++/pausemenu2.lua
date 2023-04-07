@@ -1453,7 +1453,7 @@ local function startteleport()
     Sound.playSFX("hub_travelactivated.ogg")
     SaveData.smwMap.playerX = -195072
     SaveData.smwMap.playerY = -197760
-    smwMap.initPlayers()
+    smwMap.refreshMapCoordinates()
     Sound.playSFX("world_warp.ogg")
     Misc.unpause()
 end
@@ -1471,7 +1471,7 @@ local function sideteleport()
     SaveData.smwMap.playerX = -195616
     SaveData.smwMap.playerY = -196736
     Sound.playSFX("world_warp.ogg")
-    smwMap.initPlayers()
+    smwMap.refreshMapCoordinates()
     Misc.unpause()
 end
 
@@ -1488,7 +1488,7 @@ local function hubmapteleport()
     SaveData.smwMap.playerX = -195232
     SaveData.smwMap.playerY = -197856
     Sound.playSFX("world_warp.ogg")
-    smwMap.initPlayers()
+    smwMap.refreshMapCoordinates()
     Misc.unpause()
 end
 
@@ -1505,7 +1505,7 @@ local function dlcteleport()
     SaveData.smwMap.playerX = -199584
     SaveData.smwMap.playerY = -196768
     Sound.playSFX("world_warp.ogg")
-    smwMap.initPlayers()
+    smwMap.refreshMapCoordinates()
     Misc.unpause()
 end
 
