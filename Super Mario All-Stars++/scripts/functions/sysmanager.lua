@@ -377,7 +377,7 @@ function SysManager.exitLevelToWarpPoint(warp)
             if (Warp.get()[warp].levelFilename == "" or Warp.get()[warp].levelFilename == nil) then
                 SysManager.loadMap()
             else
-                Level.load(Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename)
+                Level.load(Warp.get()[warp].levelFilename)
             end
         end
     end
