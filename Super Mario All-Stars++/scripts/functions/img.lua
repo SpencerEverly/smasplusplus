@@ -47,8 +47,11 @@ end
 
 function Img.saveImageData(name)
     if Img.loadedImages[name] == nil then --Only load it once
-        local imgpath = Misc.resolveFile(name) or "graphics/stock-0.png"
-        Img.loadedImages[name] = Img.load(imgpath) --Try loading the image, but if nil then load the stock-0.png file
+        local imgpath = Misc.resolveFile(name) 
+        if imgpath == nil then
+            imgpath = "graphics/stock-0.png"
+        end
+        Img.loadedImages[name] = Graphics.loadImage(imgpath) --Try loading the image, but if nil then load the stock-0.png file
     end
 end
 
@@ -62,6 +65,8 @@ end
 
 --Img.draw(ImageName, x coordinate, y coordinate, opacity)
 function Img.draw(name, x, y, arg6)
+    Img.saveImageData(name)
+    
     if x == nil or y == nil then
         error("You didn't specify the image with any coordinates. Try specifiying coordinates and try again.")
     end
@@ -74,7 +79,6 @@ function Img.draw(name, x, y, arg6)
         opacity = arg6
     end
     
-    Img.saveImageData(name)
     Graphics.drawImage(Img.loadedImages[name], x, y, arg6)
 end
 

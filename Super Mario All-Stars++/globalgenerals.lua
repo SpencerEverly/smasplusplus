@@ -500,6 +500,19 @@ function globalgenerals.onExit()
     elseif Misc.inMarioChallenge() then
         File.writeToFile("loadscreeninfo.txt", "mariochallenge")
     end
+    for _,p in ipairs(Player.get()) do
+        if p:mem(0x15E, FIELD_WORD) and p.forcedState == FORCEDSTATE_INVISIBLE then
+            local warp = p:mem(0x15E, FIELD_WORD)
+            EventManager.callEvent("onWarpToOtherLevel", warp, p)
+        end
+    end
+end
+
+function onWarpToOtherLevel(warp, plr)
+    if warp then
+        Misc.dialog("Warping from "..tostring(warp).." to "..Warp.get()[warp].levelFilename..".")
+        SysManager.exitLevelToWarpPoint(warp)
+    end
 end
 
 return globalgenerals

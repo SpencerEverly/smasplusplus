@@ -112,6 +112,7 @@ if SMBX_VERSION == VER_SEE_MOD then
     Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
     Misc.LUNALUA_EVENTS_TBL["onCheatDeactivate"] = true
 end
+Misc.LUNALUA_EVENTS_TBL["onWarpToOtherLevel"] = true
 
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then

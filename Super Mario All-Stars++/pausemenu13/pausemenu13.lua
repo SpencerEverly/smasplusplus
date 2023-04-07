@@ -235,8 +235,8 @@ function pausemenu13.onDraw()
         if (isOverworld or isOnSMWMap) then
             textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
             textplus.print{text = pausemenu13.menuText[6], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 3 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
         elseif pausemenu13.addExitLevelOption then
             textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
             textplus.print{text = pausemenu13.menuText[5], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}

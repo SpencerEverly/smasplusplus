@@ -2,6 +2,11 @@ local smwMap = require("smwMap")
 local inventory = require("customInventory")
 local littleDialogue = require("littleDialogue")
 local pausemenu = require("pausemenu2")
+
+if SaveData.disableX2char then
+    pausemenu13 = require("pausemenu13/pausemenu13")
+end
+
 local playerManager = require("playermanager")
 if not Misc.inMarioChallenge() then
     datetime = require("datetime")

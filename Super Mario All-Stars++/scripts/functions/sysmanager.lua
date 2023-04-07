@@ -355,16 +355,29 @@ end
 
 function SysManager.exitLevel(winType) --Exits a level with the win type specified.
     if not Misc.inMarioChallenge() then
-        if winType >= 1 then
-            SysManager.loadMap()
-        end
         for _,p in ipairs(Player.get()) do
-            if p:mem(0x15E, FIELD_WORD) >= 1 and p.forcedState == FORCEDSTATE_INVISIBLE then
-                if (Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == "" or Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename == nil) then
+            if not (p:mem(0x15E, FIELD_WORD) >= 1 and p.forcedState == FORCEDSTATE_INVISIBLE) then
+                if winType >= 1 then
+                    console:println("You won! You got the win type "..tostring(winType)..".")
                     SysManager.loadMap()
-                else
-                    console:println("This warp has a level warp point. Warping to "..Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename.."...")
                 end
+            else
+                console:println("This warp has a level warp point. Warping to "..Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename.."...")
+                local warp = p:mem(0x15E, FIELD_WORD)
+                EventManager.callEvent("onWarpToOtherLevel", warp, p)
+                SysManager.exitLevelToWarpPoint(warp)
+            end
+        end
+    end
+end
+
+function SysManager.exitLevelToWarpPoint(warp)
+    for _,p in ipairs(Player.get()) do
+        if p:mem(0x15E, FIELD_WORD) >= warp and p.forcedState == FORCEDSTATE_INVISIBLE then
+            if (Warp.get()[warp].levelFilename == "" or Warp.get()[warp].levelFilename == nil) then
+                SysManager.loadMap()
+            else
+                Level.load(Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename)
             end
         end
     end
