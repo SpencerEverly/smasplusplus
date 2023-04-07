@@ -787,9 +787,9 @@ Cheats.register("lavaplayer",{ --Lets the player swim in lava.
 function easteregggoodnessyeah()
     Sound.playSFX(92)
     Routine.wait(3, true)
-    if Cheats.get("redigitiscool").active == true then
+    if Cheats.get("redigitiscool").active then
         Cheats.trigger("redigitiscool")
-    elseif Cheats.get("spencereverlyiscool").active == true then
+    elseif Cheats.get("spencereverlyiscool").active then
         Cheats.trigger("spencereverlyiscool")
     end
     if Level.filename() == "LONSMBDSLE - W-1, L-2.lvlx" then
@@ -799,17 +799,35 @@ function easteregggoodnessyeah()
     end
 end
 
+smascheats.timeWhenCheatExecuted = {}
+
+for k,v in ipairs(Cheats.listCheats()) do
+    smascheats.timeWhenCheatExecuted[v] = 0
+end
+
 function smascheats.onDraw()
-    if Cheats.get("redigitiscool").active == true or Cheats.get("spencereverlyiscool").active == true then
+    if Cheats.get("redigitiscool").active or Cheats.get("spencereverlyiscool").active then
         Misc.cheatBuffer("")
         for _,p in ipairs(Player.get()) do
             p.forcedState = FORCEDSTATE_INVISIBLE
         end
     end
+    for k,v in ipairs(Cheats.listCheats()) do
+        if Cheats.get(v).active then
+            smascheats.timeWhenCheatExecuted[v] = smascheats.timeWhenCheatExecuted[v] + 1
+        else
+            smascheats.timeWhenCheatExecuted[v] = 0
+        end
+        if SMBX_VERSION ~= VER_SEE_MOD then
+            if smascheats.timeWhenCheatExecuted[v] == 1 then
+                EventManager.callEvent("onCheatActivate",v)
+            end
+        end
+    end
 end
 
 function smascheats.onTick()
-    if Cheats.get("moneytree").active == true then
+    if Cheats.get("moneytree").active then
         Sound.playSFX(14)
         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
         SaveData.totalCoins = SaveData.totalCoins + 1

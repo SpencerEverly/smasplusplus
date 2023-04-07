@@ -108,8 +108,8 @@ Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
 Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
+Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
 if SMBX_VERSION == VER_SEE_MOD then
-    Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
     Misc.LUNALUA_EVENTS_TBL["onCheatDeactivate"] = true
 end
 Misc.LUNALUA_EVENTS_TBL["onWarpToOtherLevel"] = true
