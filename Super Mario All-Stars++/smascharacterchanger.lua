@@ -240,21 +240,18 @@ function smascharacterchanger.onInputUpdate()
             if smascharacterchanger.selectionNumber then
                 local charac = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]
                 if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
-                    if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
-                        reserveChange = player.reservePowerup --Keep the reserve for the old character, in case if we're switching to a different character
-                    end
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
                 else
-                    if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
-                        reserveChange = player.reservePowerup --Reapply the reserve to the player
-                    end
                     player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
                     player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
+                    if SMBX_VERSION == VER_SEE_MOD then
+                        Misc.testModeSetPlayerSetting(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])
+                    end
                 end
                 changed = true
                 if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
-                    player.reservePowerup = reserveChange
+                    player.reservePowerup = SaveData.reserveBoxItem[1]
                 end
                 smascharacterchanger.menuActive = false
             end

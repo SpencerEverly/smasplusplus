@@ -900,6 +900,29 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
     end
 end
 
+function Misc.testModeSetPlayerSetting(plr)
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        console:println("NOT USING SEE MOD! Test mode setting changer has stopped.")
+        return
+    else
+        if Misc.inEditor() then
+            if plr == nil then
+                plr = 1
+            end
+            settings.players[1].identity = plr
+            
+            LunaDLL.LunaLuaSetTestModeSettings(settings)
+            
+            console:println("Test mode setting changer completed successfully.")
+        else
+            Misc.warn("You're not on the editor to execute this command!")
+            console:println("NOT ON THE EDITOR! Test mode setting changer has stopped executing.")
+            return
+        end
+    end
+end
+
 function Misc.getLegacyCreditString(index)
     return readmem(GM_CREDITS+index*0x34+0x30, FIELD_STRING)
 end
