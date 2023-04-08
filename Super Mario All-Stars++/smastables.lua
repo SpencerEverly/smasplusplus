@@ -864,7 +864,7 @@ smastables.allSuperLeafNPCIDs = {34}
 smastables.allTanookiSuitNPCIDs = {169}
 smastables.allHammerSuitNPCIDs = {170}
 smastables.allIceFlowerNPCIDs = {277,264}
-smastables.allPowerupNPCIDs = {9,184,185,249,14,182,183,34,169,170,277,264}
+smastables.allPowerupNPCIDs = {9,182,183,184,185,249,14,34,169,170,277,264}
 
 smastables.allThwompNPCIDs = {37,180,437,295,435,432,301}
 smastables.allEnemyFireballs = {85,87,246,276}

@@ -55,4 +55,15 @@ function Evento.count()
     return #finalname
 end
 
+local function setCheckpointPath(v)
+	mem(0x00B250B0, FIELD_STRING, v);
+end
+
+function Evento.clearAllCheckpoints()
+    for k,v in ipairs(GameData.__checkpoints) do
+        setCheckpointPath("")
+        GameData.__checkpoints[v].current = nil
+    end
+end
+
 return Evento
