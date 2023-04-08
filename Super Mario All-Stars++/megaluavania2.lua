@@ -3,8 +3,11 @@
 
 local megaluavania2 = {}
 
+local textplus = require("textplus")
+
 --**NORMAL SETTINGS**
 megaluavania2.enabled = true --Whether the system is enabled or not.
+megaluavania2.nameOfCharacter = "Frisk" --The name of the character.
 megaluavania2.battleEnemies = {} --For putting together enemies to start battles with
 --For setting the battle themes, we will conduct a table below.
 megaluavania2.battleThemes = {
@@ -22,6 +25,7 @@ megaluavania2.heartBlinkTimer = 0 --Timer for heart blinking
 megaluavania2.heartBlinkChanger = 1 --Time changer for heart blinking
 
 megaluavania2.exitFadeOut = 1 --For the exit fade out screen
+megaluavania2.battleFadeOut = 1 --For the battle fade out sequence
 
 local enemyInVersusWith --NPC to verse with
 
@@ -37,9 +41,27 @@ megaluavania2.phase = {
     BATTLE_RAN = 5,
     BATTLE_FADEOUTEXIT = 6,
 }
+
+megaluavania2.choiceMarker = {
+    CHOICE_FIGHT = 1,
+    CHOICE_ACT = 2,
+    CHOICE_ITEM = 3,
+    CHOICE_MERCY = 4,
+}
+
 megaluavania2.phaseInitated = megaluavania2.phase.BATTLE_NONE --Phase initated for several things
 megaluavania2.timer1 = 0 --Timer for events=
 megaluavania2.minimalPriority = -3 --Minimum priority for drawing stuff
+
+--**FONTS**
+
+megaluavania2.font = {}
+
+megaluavania2.font.determination = textplus.loadFont("littleDialogue/font/determination.ini")
+megaluavania2.font.determinationYellow = textplus.loadFont("littleDialogue/font/determinationYellow.ini")
+megaluavania2.font.dotumChe = textplus.loadFont("littleDialogue/font/dotumChe.ini")
+megaluavania2.font.damage = textplus.loadFont("littleDialogue/font/damage.ini")
+megaluavania2.font.name = textplus.loadFont("littleDialogue/font/name.ini")
 
 --**GRAPHICS**
 megaluavania2.graphics = {} --To let graphics be in it's own table
@@ -141,15 +163,23 @@ function megaluavania2.onInitAPI()
     registerEvent(megaluavania2,"onDraw")
     registerEvent(megaluavania2,"onInputUpdate")
     registerEvent(megaluavania2,"onPlayerHarm")
+    registerEvent(megaluavania2,"onNPCHarm")
 end
 
 --[[createBattle:
 
-- 
+- enemyID = The ID used to for the enemy. This is how you detect which enemy is being used.
+- enemyImage = The image used for the enemy, shown in the middle of the screen.
+- battleTheme = The theme used for the battle.
 
 ]]
 function megaluavania2.createBattle(args)
-    
+    args.enemyID = args.enemyID or 1
+    args.enemyImage = args.enemyImage or "graphics/stock-0.png"
+    args.battleTheme = args.battleTheme or megaluavania2.battleThemes[1]
+    megaluavania2.battleEnemies[args.enemyID] = {}
+    table.insert(megaluavania2.battleEnemies[args.enemyID], {enemyImage = Graphics.loadImageResolved(args.enemyImage)})
+    table.insert(megaluavania2.battleEnemies[args.enemyID], {battleTheme = args.battleTheme})
 end
 
 function megaluavania2.startBattle(v)
@@ -167,6 +197,8 @@ function megaluavania2.endBattle(killedEnemy)
     megaluavania2.inBattle = false
     megaluavania2.isHeartBlinking = false
     megaluavania2.blackScreenActive = false
+    megaluavania2.battleFadeOut = 1
+    megaluavania2.exitFadeOut = 1
     if killedEnemy then
         enemyInVersusWith:kill(HARM_TYPE_VANISH)
         --SaveData.frisk.killCount = SaveData.frisk.killCount + 1
@@ -176,7 +208,20 @@ function megaluavania2.endBattle(killedEnemy)
     player:mem(0x140, FIELD_WORD, 150)
 end
 
+function megaluavania2.drawUI()
+    Graphics.drawImageWP(megaluavania2.graphics.background,0,0,1,megaluavania2.minimalPriority + .005) --Background
+    textplus.print{text = megaluavania2.nameOfCharacter, x = 63, y = 523, font = megaluavania2.font.name, priority = megaluavania2.minimalPriority + .010} --Character name
+    textplus.print{text = SaveData.frisk.hp.." / "..SaveData.frisk.hpMax, x = 369, y = 523, font = megaluavania2.font.name, priority = megaluavania2.minimalPriority + .010} --HP Counter
+    textplus.print{text = "LV "..SaveData.frisk.LV, x = 169, y = 523, font = megaluavania2.font.name, priority = megaluavania2.minimalPriority + .010} --LV Counter
+end
+
 function megaluavania2.onPlayerHarm(eventObj)
+    if megaluavania2.enabled then
+        eventObj.cancelled = true
+    end
+end
+
+function megaluavania2.onNPCHarm(eventObj)
     if megaluavania2.enabled then
         eventObj.cancelled = true
     end
@@ -220,7 +265,22 @@ function megaluavania2.onDraw()
                 Graphics.drawImageWP(megaluavania2.graphics.heart[0], megaluavania2.battleStartHeartCoordinateX, megaluavania2.battleStartHeartCoordinateY, megaluavania2.heartOpacity, megaluavania2.minimalPriority + .001)
             end
             if megaluavania2.timer1 >= 64 then
-                megaluavania2.timer1 = 64
+                megaluavania2.phaseInitated = megaluavania2.phase.BATTLE_ACTIVE
+                megaluavania2.timer1 = 0
+            end
+        end
+        if megaluavania2.phaseInitated == megaluavania2.phase.BATTLE_ACTIVE then
+            megaluavania2.drawUI()
+            megaluavania2.timer1 = megaluavania2.timer1 + 1
+            if megaluavania2.timer1 == 1 then
+                Sound.changeMusic(megaluavania2.battleThemes[1], -1, false)
+            end
+            if megaluavania2.timer1 <= 20 then
+                megaluavania2.battleFadeOut = math.max(0, megaluavania2.battleFadeOut - 0.05)
+                Graphics.drawScreen{color = Color.black.. megaluavania2.battleFadeOut,priority = megaluavania2.minimalPriority + .500}
+            end
+            if megaluavania2.timer1 >= 21 then
+                megaluavania2.timer1 = 21
             end
         end
         if megaluavania2.phaseInitated == megaluavania2.phase.BATTLE_FADEOUTEXIT then
@@ -260,7 +320,7 @@ end
 
 function megaluavania2.onInputUpdate()
     if megaluavania2.enabled then
-        if megaluavania2.phaseInitated == megaluavania2.phase.BATTLE_INTRO2 then
+        if megaluavania2.phaseInitated == megaluavania2.phase.BATTLE_ACTIVE then
             if player.keys.down == KEYS_PRESSED then
                 megaluavania2.endBattle(true)
             end

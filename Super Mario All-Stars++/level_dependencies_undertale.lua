@@ -2,15 +2,16 @@ if smasbooleans.mainMenuActive then return end
 
 local undertaledepends = {}
 
-if SaveData.frisk == nil then
-    SaveData.frisk = {}
-    SaveData.frisk.killCount = 0
-    SaveData.frisk.itemPockets = {}
-    SaveData.frisk.genocidePhase = 0
-    SaveData.frisk.isNeutral = false
-    SaveData.frisk.isPacifist = true
-    SaveData.frisk.cantChangeCharacters = false
-end
+SaveData.frisk = SaveData.frisk or {}
+SaveData.frisk.hp = SaveData.frisk.hp or 20
+SaveData.frisk.hpMax = SaveData.frisk.hpMax or 20
+SaveData.frisk.LV = SaveData.frisk.LV or 1
+SaveData.frisk.killCount = SaveData.frisk.killCount or 0
+SaveData.frisk.itemPockets = SaveData.frisk.itemPockets or {}
+SaveData.frisk.genocidePhase = SaveData.frisk.genocidePhase or 0
+SaveData.frisk.isNeutral = SaveData.frisk.isNeutral or false
+SaveData.frisk.isPacifist = SaveData.frisk.isPacifist or true
+SaveData.frisk.cantChangeCharacters = SaveData.frisk.cantChangeCharacters or false
 
 local stats = require("Stats")
 local playerManager = require("playerManager")

@@ -238,7 +238,9 @@ function Sound.isExtraSoundsActive()
     end
 end
 
-function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
+function Sound.changeMusic(name, sectionid, canRefreshWhenMuted) --Music changing is now a LOT easier
+    canRefreshWhenMuted = canRefreshWhenMuted or true
+    
     local eventObj = {cancelled = false}
     
     EventManager.callEvent("onChangeMusic", eventObj, name, sectionid)
@@ -249,7 +251,7 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
             for i = 0,20 do
                 Section(i).music = name
                 if smasbooleans then
-                    if smasbooleans.musicMuted then
+                    if smasbooleans.musicMuted and canRefreshWhenMuted then
                         Sound.refreshMusic(i)
                         Sound.muteMusic(i)
                     end
@@ -259,7 +261,7 @@ function Sound.changeMusic(name, sectionid) --Music changing is now a LOT easier
             console:println("Music from section "..tostring(sectionid).." will be changed to '"..tostring(name).."'.")
             Section(sectionid).music = name
             if smasbooleans then
-                if smasbooleans.musicMuted then
+                if smasbooleans.musicMuted and canRefreshWhenMuted then
                     Sound.refreshMusic(sectionid)
                     Sound.muteMusic(sectionid)
                 end
