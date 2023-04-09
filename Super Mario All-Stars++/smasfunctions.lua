@@ -21,7 +21,7 @@ _G.Collisionz = require("scripts/functions/collision")
 
 --This is used for spitting out help documentation for these scripts.
 function smasFunctions.help()
-    Misc.richDialog("SMASFunctions Help Dialog Box", File.readFile("smasfunctions_help.txt"), true)
+    Misc.richDialog("SMASFunctions Help Dialog Box", File.readFile("smasFunctions_help.txt"), true)
 end
 
 if Misc.inSuperMarioAllStarsPlusPlus() then --Easy-to-require SMAS++-specific globals, to load early on boot
