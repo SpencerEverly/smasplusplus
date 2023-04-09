@@ -32,7 +32,7 @@ local patterns = {
         isMega = false,
         doesntMove = false,
         isEgg = false,
-        SFX = 23,
+        SFX = 0,
         yoshiSFX = 50
     },
     thrown = {
@@ -359,11 +359,11 @@ function modernReserveItems.drop(ID, p)
 
     if p.MountType == MOUNT_YOSHI and isHeld then
         if modernReserveItems.playSounds then
-            Audio.playSFX(yoshiSFX)
+            Sound.playSFX(yoshiSFX)
         end
     elseif not isContained then
         if modernReserveItems.playSounds then
-            Audio.playSFX(SFX)
+            Sound.playSFX(SFX)
         end
     end
 

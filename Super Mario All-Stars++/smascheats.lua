@@ -824,7 +824,6 @@ function smasCheats.onDraw()
             end
         end
     end
-    Text.print(Misc.cheatBuffer(), 100, 120)
 end
 
 function smasCheats.onTick()
