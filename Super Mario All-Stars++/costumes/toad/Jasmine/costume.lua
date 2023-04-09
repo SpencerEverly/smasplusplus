@@ -1,8 +1,8 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local rng = require("base/rng")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -21,20 +21,20 @@ function costume.onInit(p)
         costume.loadedSounds = true
     end
     
-    smashud.visible.itembox = false
+    smasHud.visible.itembox = false
     characterhp = 3
 end
 
 function costume.onTick()
     if SaveData.toggleCostumeAbilities then
-        if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasfunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
+        if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasFunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
             hasJumped = false
         elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not isPlayerUnderwater(player) then
-            if smascharacterglobals.abilitySettings.jasmineCanDoubleJump then
+            if smasCharacterGlobals.abilitySettings.jasmineCanDoubleJump then
                 hasJumped = true
                 player:mem(0x11C, FIELD_WORD, 14)
-                if not table.icontains(smastables._noLevelPlaces,Level.filename()) then
-                    Sound.playSFX(smascharacterglobals.soundSettings.jasmineDoubleJumpSFX)
+                if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
+                    Sound.playSFX(smasCharacterGlobals.soundSettings.jasmineDoubleJumpSFX)
                 end
             end
         end
@@ -54,7 +54,7 @@ function costume.onDraw()
             player.forcedState = FORCEDSTATE_NONE
             player:mem(0x140, FIELD_WORD, 150)
         end
-        if smashud.visible.customitembox == true then
+        if smasHud.visible.customitembox == true then
             local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
             local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
             if characterhp <= 0 then

@@ -3,8 +3,8 @@
 --------------------------------------
 
 local npcManager = require("npcManager")
-local smascharacterinfo
-pcall(function() smascharacterinfo = require("smascharacterinfo") end)
+local smasCharacterInfo
+pcall(function() smasCharacterInfo = require("smasCharacterInfo") end)
 local clamp = math.clamp
 local max = math.max
 local v2 = vector.v2

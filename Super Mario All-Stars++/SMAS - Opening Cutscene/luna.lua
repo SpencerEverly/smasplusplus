@@ -3,17 +3,17 @@ local datetime = require("datetime")
 
 datetime.bottomright = false
 
-smashud.visible.keys = false
-smashud.visible.itembox = false
-smashud.visible.bombs = false
-smashud.visible.coins = false
-smashud.visible.score = false
-smashud.visible.lives = false
-smashud.visible.deathcount = false
-smashud.visible.stars = false
-smashud.visible.starcoins = false
-smashud.visible.timer = false
-smashud.visible.customitembox = false
+smasHud.visible.keys = false
+smasHud.visible.itembox = false
+smasHud.visible.bombs = false
+smasHud.visible.coins = false
+smasHud.visible.score = false
+smasHud.visible.lives = false
+smasHud.visible.deathcount = false
+smasHud.visible.stars = false
+smasHud.visible.starcoins = false
+smasHud.visible.timer = false
+smasHud.visible.customitembox = false
 
 Cheats.enabled = false
 

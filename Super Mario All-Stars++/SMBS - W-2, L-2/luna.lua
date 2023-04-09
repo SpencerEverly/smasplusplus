@@ -12,7 +12,7 @@ function onEvent(eventName)
     if eventName == "Cutscene 1" then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                smasbooleans.toggleOffInventory = true
+                smasBooleans.toggleOffInventory = true
             end
         end
         pauseplus.canPause = false
@@ -29,7 +29,7 @@ function onEvent(eventName)
     if eventName == "Cutscene 2 - 13" then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                smasbooleans.toggleOffInventory = false
+                smasBooleans.toggleOffInventory = false
             end
         end
         pauseplus.canPause = true

@@ -1,7 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smashud = require("smashud")
-local smasfunctions = require("smasfunctions")
+local smasHud = require("smasHud")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -28,15 +28,15 @@ function costume.onPostNPCKill(npc, harmType)
     local specialitems = table.map{34,169,170}
     local rngkey
     if items[npc.id] and Colliders.collide(player, npc) then
-        Sound.playSFX(smascharacterglobals.soundSettings.kaylooPowerupVoiceSFX, 1, 1, smascharacterglobals.soundSettings.kaylooPowerupVoiceSFXDelay)
+        Sound.playSFX(smasCharacterGlobals.soundSettings.kaylooPowerupVoiceSFX, 1, 1, smasCharacterGlobals.soundSettings.kaylooPowerupVoiceSFXDelay)
     end
     if specialitems[npc.id] and Colliders.collide(player, npc) then
-        Sound.playSFX(smascharacterglobals.soundSettings.kaylooSpecialPowerupVoiceSFX, 1, 1, smascharacterglobals.soundSettings.kaylooSpecialPowerupVoiceSFXDelay)
+        Sound.playSFX(smasCharacterGlobals.soundSettings.kaylooSpecialPowerupVoiceSFX, 1, 1, smasCharacterGlobals.soundSettings.kaylooSpecialPowerupVoiceSFXDelay)
     end
 end
 
 function costume.onPostPlayerHarm()
-    --Sound.playSFX(smascharacterglobals.soundSettings.kaylooHurtVoiceSFX)
+    --Sound.playSFX(smasCharacterGlobals.soundSettings.kaylooHurtVoiceSFX)
 end
 
 function costume.onCleanup(p)

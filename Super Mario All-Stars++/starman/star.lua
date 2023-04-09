@@ -64,11 +64,11 @@ local function startMusic()
     starSoundObject = SFX.play(starman.sfxFile, Audio.MusicVolume() / 100, 0)
         if(musicvolcache == nil) then
             musicvolcache = Audio.MusicVolume();
-            if smasbooleans.musicMuted then
+            if smasBooleans.musicMuted then
                 Audio.MusicVolume(0)
             end
-            if not smasbooleans.pSwitchActive then
-                smasbooleans.musicMuted = true
+            if not smasBooleans.pSwitchActive then
+                smasBooleans.musicMuted = true
                 Sound.refreshMusic(-1)
                 Audio.MusicVolume(0)
                 Sound.muteMusic(-1)
@@ -89,8 +89,8 @@ local function stopMusic(idx)
         --starSoundObject:Stop()
         starSoundObject:FadeOut(200)
         Audio.MusicVolume(musicvolcache);
-        if p.deathTimer == 0 and not smasbooleans.pSwitchActive then
-            smasbooleans.musicMuted = false
+        if p.deathTimer == 0 and not smasBooleans.pSwitchActive then
+            smasBooleans.musicMuted = false
             Sound.restoreMusic(-1)
         end
         musicvolcache = nil;

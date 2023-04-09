@@ -9,7 +9,7 @@
 ]]
 
 local playerManager = require("playerManager")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local blockutils = require("blocks/blockutils")
 
 local configFileReader = require("configFileReader")
@@ -703,9 +703,9 @@ do
             local name = hudElementsToMove[i]
             local direction = hudElementsToMove[i+1]
 
-            originalHUDOffsets[(i*0.5)+0.5] = {name,smashud.offsets[name].y}
+            originalHUDOffsets[(i*0.5)+0.5] = {name,smasHud.offsets[name].y}
 
-            smashud.offsets[name].y = smashud.offsets[name].y + (steve.hudSettings.moveHUDElementsDistance*direction)
+            smasHud.offsets[name].y = smasHud.offsets[name].y + (steve.hudSettings.moveHUDElementsDistance*direction)
         end
     end
     function cleanupHUD()
@@ -713,7 +713,7 @@ do
             local name = data[1]
             local offset = data[2]
 
-            smashud.offsets[name].y = offset
+            smasHud.offsets[name].y = offset
         end
 
         originalHUDOffsets = {}
@@ -2054,7 +2054,7 @@ do
     local function getPriority()
         if player.forcedState == FORCEDSTATE_PIPE then
             return -70
-        elseif smasbooleans.activateWarpWhistleRoomWarp[1] then
+        elseif smasBooleans.activateWarpWhistleRoomWarp[1] then
             return -70
         else
             return -25

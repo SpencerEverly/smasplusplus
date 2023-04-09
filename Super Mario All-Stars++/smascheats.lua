@@ -1,4 +1,4 @@
-local smascheats = {}
+local smasCheats = {}
 
 local starman = require("starman/star")
 local megashroom = require("mega/megashroom")
@@ -32,13 +32,13 @@ Cheats.deregister("moneytree") --This will be deregistered because I'm going to 
 Cheats.deregister("densenuclearenergy") --This will be deregistered because I'm going to remake this since UR has been switched to a costume
 Cheats.deregister("itsameultimaterinka") --This will be deregistered because I'm going to remake this since UR has been switched to a costume
 
-function smascheats.onInitAPI()
-    registerEvent(smascheats,"onDraw")
-    registerEvent(smascheats,"onTick")
+function smasCheats.onInitAPI()
+    registerEvent(smasCheats,"onDraw")
+    registerEvent(smasCheats,"onTick")
 end
 
-smascheats.moneytreeActive = false
-smascheats.lavaplayerActive = false
+smasCheats.moneytreeActive = false
+smasCheats.lavaplayerActive = false
 
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
 
@@ -553,7 +553,7 @@ if SaveData.disableX2char then
                     end
                 end
             end
-            smasbooleans.introModeActivated = false
+            smasBooleans.introModeActivated = false
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
@@ -582,7 +582,7 @@ if SaveData.disableX2char then
                     end
                 end
             end
-            smasbooleans.introModeActivated = false
+            smasBooleans.introModeActivated = false
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
@@ -611,7 +611,7 @@ if SaveData.disableX2char then
                     end
                 end
             end
-            smasbooleans.introModeActivated = false
+            smasBooleans.introModeActivated = false
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
@@ -640,7 +640,7 @@ if SaveData.disableX2char then
                     end
                 end
             end
-            smasbooleans.introModeActivated = false
+            smasBooleans.introModeActivated = false
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
@@ -669,7 +669,7 @@ if SaveData.disableX2char then
                     end
                 end
             end
-            smasbooleans.introModeActivated = false
+            smasBooleans.introModeActivated = false
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
@@ -698,7 +698,7 @@ if SaveData.disableX2char then
                     end
                 end
             end
-            smasbooleans.introModeActivated = false
+            smasBooleans.introModeActivated = false
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
@@ -727,7 +727,7 @@ if SaveData.disableX2char then
                     end
                 end
             end
-            smasbooleans.introModeActivated = false
+            smasBooleans.introModeActivated = false
             local rngbomb = rng.randomEntry({69,71})
             Effect.spawn(rngbomb, player.x, player.y, player.section)
         end),
@@ -759,12 +759,12 @@ end
 Cheats.register("moneytree",{ --This will be reregistered because the coin system was remade and needs to be redone here
     onActivate = (function()
         Defines.player_hasCheated = false
-        smascheats.moneytreeActive = true
+        smasCheats.moneytreeActive = true
         Sound.playSFX(6)
     end),
     onDeactivate = (function()
         Defines.player_hasCheated = false
-        smascheats.moneytreeActive = false
+        smasCheats.moneytreeActive = false
         Sound.playSFX(5)
     end),
     flashPlayer = true,activateSFX = nil,
@@ -773,12 +773,12 @@ Cheats.register("moneytree",{ --This will be reregistered because the coin syste
 Cheats.register("lavaplayer",{ --Lets the player swim in lava.
     onActivate = (function()
         Defines.player_hasCheated = false
-        smascheats.lavaplayerActive = true
+        smasCheats.lavaplayerActive = true
         Sound.playSFX(6)
     end),
     onDeactivate = (function()
         Defines.player_hasCheated = false
-        smascheats.lavaplayerActive = false
+        smasCheats.lavaplayerActive = false
         Sound.playSFX(5)
     end),
     flashPlayer = true,activateSFX = nil,
@@ -799,13 +799,13 @@ function easteregggoodnessyeah()
     end
 end
 
-smascheats.timeWhenCheatExecuted = {}
+smasCheats.timeWhenCheatExecuted = {}
 
 for k,v in ipairs(Cheats.listCheats()) do
-    smascheats.timeWhenCheatExecuted[v] = 0
+    smasCheats.timeWhenCheatExecuted[v] = 0
 end
 
-function smascheats.onDraw()
+function smasCheats.onDraw()
     if Cheats.get("redigitiscool").active or Cheats.get("spencereverlyiscool").active then
         Misc.cheatBuffer("")
         for _,p in ipairs(Player.get()) do
@@ -814,19 +814,20 @@ function smascheats.onDraw()
     end
     for k,v in ipairs(Cheats.listCheats()) do
         if Cheats.get(v).active then
-            smascheats.timeWhenCheatExecuted[v] = smascheats.timeWhenCheatExecuted[v] + 1
+            smasCheats.timeWhenCheatExecuted[v] = smasCheats.timeWhenCheatExecuted[v] + 1
         else
-            smascheats.timeWhenCheatExecuted[v] = 0
+            smasCheats.timeWhenCheatExecuted[v] = 0
         end
         if SMBX_VERSION ~= VER_SEE_MOD then
-            if smascheats.timeWhenCheatExecuted[v] == 1 then
+            if smasCheats.timeWhenCheatExecuted[v] == 1 then
                 EventManager.callEvent("onCheatActivate",v)
             end
         end
     end
+    Text.print(Misc.cheatBuffer(), 100, 120)
 end
 
-function smascheats.onTick()
+function smasCheats.onTick()
     if Cheats.get("moneytree").active then
         Sound.playSFX(14)
         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
@@ -834,4 +835,4 @@ function smascheats.onTick()
     end
 end
 
-return smascheats
+return smasCheats

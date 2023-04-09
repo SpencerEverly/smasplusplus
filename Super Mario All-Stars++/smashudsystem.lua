@@ -1,15 +1,15 @@
---smashudsystem, or anotherHudSystem by Spencer Everly
+--smasHudSystem, or anotherHudSystem by Spencer Everly
 --Check all the comments, plus the end of the file for more info
 
 local Routine = require("routine")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
-local smaspswitch = require("smaspswitch")
+local smasPSwitch = require("smasPSwitch")
 
 local hudfont = textplus.loadFont("littleDialogue/font/1.ini")
 
-local smashudsystem = {} --This is the old name of the library. Rather than change it, I went ahead and kept the name for compatibility.
+local smasHudSystem = {} --This is the old name of the library. Rather than change it, I went ahead and kept the name for compatibility.
 
 if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
     SaveData.deathCount = 0
@@ -57,16 +57,16 @@ local killed2 = false
 
 local deathTimer = 0
 
-function smashudsystem.onInitAPI() --This requires all the libraries that will be used
-    registerEvent(smashudsystem, "onStart")
-    registerEvent(smashudsystem, "onDraw")
-    registerEvent(smashudsystem, "onExit")
-    registerEvent(smashudsystem, "onTick")
-    registerEvent(smashudsystem, "onPlayerHarm")
-    registerEvent(smashudsystem, "onPlayerKill")
-    registerEvent(smashudsystem, "onPostPlayerKill")
-    registerEvent(smashudsystem, "onPostNPCKill")
-    registerEvent(smashudsystem, "onPostBlockHit")
+function smasHudSystem.onInitAPI() --This requires all the libraries that will be used
+    registerEvent(smasHudSystem, "onStart")
+    registerEvent(smasHudSystem, "onDraw")
+    registerEvent(smasHudSystem, "onExit")
+    registerEvent(smasHudSystem, "onTick")
+    registerEvent(smasHudSystem, "onPlayerHarm")
+    registerEvent(smasHudSystem, "onPlayerKill")
+    registerEvent(smasHudSystem, "onPostPlayerKill")
+    registerEvent(smasHudSystem, "onPostNPCKill")
+    registerEvent(smasHudSystem, "onPostBlockHit")
     
     ready = true
 end
@@ -80,9 +80,9 @@ local blackscreenonly = false
     --SaveData.GameOverCount = 0 --This is only when the library publically releases for the wild to use
 --end
 
-smashudsystem.hasDied = false --If the player died or not
-smashudsystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
-smashudsystem.activated = true --Whenever the death animation is activated
+smasHudSystem.hasDied = false --If the player died or not
+smasHudSystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
+smasHudSystem.activated = true --Whenever the death animation is activated
 
 function addsmashpoints(block, fromUpper, playerornil) --This will add 50 points from smashing bricks, as said from the source code.
     Routine.waitFrames(2, true)
@@ -104,14 +104,14 @@ function detecttopcoin(block, fromUpper, playerornil)
     end
 end
 
-function smashudsystem.onStart()
+function smasHudSystem.onStart()
     SaveData.totalCherries = 0 --Reset cherry count because each level has a different cherry count
 end
 
-function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
+function smasHudSystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
     local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
     local questionblocks = table.map{5,88,193,224} --A list of question mark blocks
-    if not smasbooleans.mainMenuActive then
+    if not smasBooleans.mainMenuActive then
         if playerornil then
             if block.contentID == 1000 or block.contentID == 0 or playerornil.character == CHARACTER_TOAD or playerornil.character == CHARACTER_KLONOA then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
@@ -131,12 +131,12 @@ function smashudsystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
     end
 end
 
-function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
-    if not smasbooleans.mainMenuActive then
+function smasHudSystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
+    if not smasBooleans.mainMenuActive then
         for _,p in ipairs(Player.get()) do
             
             
-            if smastables.allCoinNPCIDs[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
+            if smasTables.allCoinNPCIDs[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
                 console:println("One coin from colliding collected.")
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1 --One coin collected
             end
@@ -150,7 +150,7 @@ function smashudsystem.onPostNPCKill(npc, harmtype, player) --This will add coin
     end
 end
 
-function smashudsystem.gameOverSequences() --These are all the game over sequences that get RNG'ed. ONLY use this on a Routine call!!!!
+function smasHudSystem.gameOverSequences() --These are all the game over sequences that get RNG'ed. ONLY use this on a Routine call!!!!
     local rngkey = rng.randomInt(1,29) --This will randomly sort an rng where it picks a random game over track to play.
     
     console:println("Game over "..tostring(rngkey).." will now be played.")
@@ -253,7 +253,7 @@ end
 
 function thirteenModeDeath()
     console:println("Everyone has died.")
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Audio.MusicVolume(0)
     if SaveData.totalLives < 0 and SaveData.enableLives then
         gameoveractivate = true
@@ -277,29 +277,29 @@ function thirteenModeDeath()
         Routine.waitFrames(45, true)
         gameovershow = true --Show the GAME OVER text
         SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-        smashudsystem.gameOverSequences()
+        smasHudSystem.gameOverSequences()
         Misc.unpause() --Unpause afterward
         SaveData.totalLives = 5 --Refill the lives back to 5
     end
-    smasbooleans.musicMuted = false
-    smashudsystem.hasDied = true --The player has now died
-    if smashudsystem.exittomap == false then
+    smasBooleans.musicMuted = false
+    smasHudSystem.hasDied = true --The player has now died
+    if smasHudSystem.exittomap == false then
         Level.load(Level.filename())
-    elseif smashudsystem.exittomap == true then
+    elseif smasHudSystem.exittomap == true then
         Level.load("map.lvlx")
     end
 end
 
 function diedanimation(plr) --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
-    if smashudsystem.activated then
-        if not smasbooleans.mainMenuActive then
+    if smasHudSystem.activated then
+        if not smasBooleans.mainMenuActive then
             if not Misc.inMarioChallenge() then
                 if not SaveData.disableX2char then
-                    if not smasbooleans.classicBattleModeActive then
+                    if not smasBooleans.classicBattleModeActive then
                         console:println("The player has died.")
                         if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
                             if player.deathTimer == 0 then
-                                smasbooleans.musicMuted = true
+                                smasBooleans.musicMuted = true
                                 Audio.MusicVolume(0)
                                 SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                                 SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
@@ -315,7 +315,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 Misc.pause()
                                 fadeoutdeath = true --This starts the fade out animation
                                 Routine.waitFrames(110, true)
-                                smasbooleans.musicMuted = false
+                                smasBooleans.musicMuted = false
                                 Misc.unpause()
                                 if gameoveractivate == false then --If not in a gameover state...
                                     fadeoutcompleted = true --...when waited enough time, unpause and reload the level
@@ -324,10 +324,10 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     if gameoveractivate2 then
                                         SaveData.totalLives = 5
                                     end
-                                    smashudsystem.hasDied = true
-                                    if smashudsystem.exittomap == false then --Reload the level from here
+                                    smasHudSystem.hasDied = true
+                                    if smasHudSystem.exittomap == false then --Reload the level from here
                                         Level.load(Level.filename())
-                                    elseif smashudsystem.exittomap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
+                                    elseif smasHudSystem.exittomap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
                                         Level.load("map.lvlx")
                                     end
                                 end
@@ -335,13 +335,13 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     Misc.pause()
                                     gameovershow = true --Show the GAME OVER text
                                     SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-                                    smashudsystem.gameOverSequences()
+                                    smasHudSystem.gameOverSequences()
                                     Misc.unpause() --Unpause afterward
                                     SaveData.totalLives = 5 --Refill the lives back to 5
-                                    smashudsystem.hasDied = true --The player has now died
-                                    if smashudsystem.exittomap == false then
+                                    smasHudSystem.hasDied = true --The player has now died
+                                    if smasHudSystem.exittomap == false then
                                         Level.load(Level.filename())
-                                    elseif smashudsystem.exittomap == true then
+                                    elseif smasHudSystem.exittomap == true then
                                         Level.load("map.lvlx", nil, nil)
                                     end
                                 end
@@ -349,7 +349,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                         end
                         if (player.character == CHARACTER_NINJABOMBERMAN) == true then --Do a different death animation with yiYoshi if active
                             if player.deathTimer == 0 then
-                                smasbooleans.musicMuted = true
+                                smasBooleans.musicMuted = true
                                 Audio.MusicVolume(0)
                                 SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                                 SaveData.totalLives = SaveData.totalLives - 1
@@ -361,7 +361,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
                                 Routine.waitFrames(360, true)
-                                smasbooleans.musicMuted = false
+                                smasBooleans.musicMuted = false
                                 Misc.unpause()
                                 if gameoveractivate == false then
                                     fadeoutcompleted = true --When waited enough time, unpause and reload the level
@@ -370,10 +370,10 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     if gameoveractivate2 then
                                         SaveData.totalLives = 5
                                     end
-                                    smashudsystem.hasDied = true
-                                    if smashudsystem.exittomap == false then
+                                    smasHudSystem.hasDied = true
+                                    if smasHudSystem.exittomap == false then
                                         Level.load(Level.filename())
-                                    elseif smashudsystem.exittomap == true then
+                                    elseif smasHudSystem.exittomap == true then
                                         Level.load("map.lvlx")
                                     end
                                 end
@@ -381,13 +381,13 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     Misc.pause()
                                     gameovershow = true --Show the GAME OVER text
                                     SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
-                                    smashudsystem.gameOverSequences()
+                                    smasHudSystem.gameOverSequences()
                                     Misc.unpause() --Unpause afterward
                                     SaveData.totalLives = 5 --Refill the lives back to 5
-                                    smashudsystem.hasDied = true --The player has now died
-                                    if smashudsystem.exittomap == false then
+                                    smasHudSystem.hasDied = true --The player has now died
+                                    if smasHudSystem.exittomap == false then
                                         Level.load(Level.filename())
-                                    elseif smashudsystem.exittomap == true then
+                                    elseif smasHudSystem.exittomap == true then
                                         Level.load("map.lvlx")
                                     end
                                 end
@@ -396,7 +396,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                     end
                 end
                 if SaveData.disableX2char then
-                    if not smasbooleans.classicBattleModeActive then
+                    if not smasBooleans.classicBattleModeActive then
                         console:println("A player has died.")
                         SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                         SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
@@ -412,11 +412,11 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
     end
 end
 
-function smashudsystem.onPostPlayerKill(plr) --To cancel the death entirely
+function smasHudSystem.onPostPlayerKill(plr) --To cancel the death entirely
     Routine.run(diedanimation, plr)
 end
 
-function smashudsystem.onTick()
+function smasHudSystem.onTick()
     if mem(0x00B2C5AC, FIELD_FLOAT) < 1 then --This is to prevent the old Game Over system
         mem(0x00B2C5AC, FIELD_FLOAT, 1)
     end
@@ -447,15 +447,15 @@ function smashudsystem.onTick()
         killed1 = true --killed1 detects to see if the 1st player is dead.
     end
     if Player.count() >= 2 then --2nd player compability
-        smasbooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
-        if smasbooleans.classicBattleModeActive then
+        smasBooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
+        if smasBooleans.classicBattleModeActive then
             if(not killed2 and player2:mem(0x13E,FIELD_BOOL)) then
                 killed2 = true --killed2 detects to see if the 2nd player is dead.
             end
         end
     end
     if Player.count() == 1 then
-        smasbooleans.multiplayerActive = false
+        smasBooleans.multiplayerActive = false
     end
     if SaveData.totalLives >= 1110 then
         SaveData.totalLives = 1110 --The max amount of lives in the episode is 1110, used for the crown hud easter egg that was from Super Mario 3D Land/New Super Mario Bros. 2/Super Mario 3D World.
@@ -463,8 +463,8 @@ function smashudsystem.onTick()
     if SaveData.totalScoreClassic >= 999999999 then --The max score is NSMBU's score tally, which is 999 trillion.
         SaveData.totalScoreClassic = 999999999
     end
-    if not smasbooleans.classicBattleModeActive then
-        if (not smasbooleans.mainMenuActive and not GameData.gameFirstLoaded) then
+    if not smasBooleans.classicBattleModeActive then
+        if (not smasBooleans.mainMenuActive and not GameData.gameFirstLoaded) then
             if Misc.score() ~= 0 then
                 SaveData.totalScoreClassic = SaveData.totalScoreClassic + Misc.score()
                 console:println(tostring(Misc.score()).." points earned.")
@@ -490,7 +490,7 @@ function smashudsystem.onTick()
     end
 end
 
-function smashudsystem.onDraw()
+function smasHudSystem.onDraw()
     if fadeoutdeath then --Fade out related code
         time = time + 1
         Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 6}
@@ -503,14 +503,14 @@ function smashudsystem.onDraw()
     end
 end
 
-function smashudsystem.onExit()
-    smasbooleans.musicMuted = false --This is specific for my episode. Remove this if you wanna use this yourself.
+function smasHudSystem.onExit()
+    smasBooleans.musicMuted = false --This is specific for my episode. Remove this if you wanna use this yourself.
     Audio.MusicVolume(64) --Reset the music exiting the level
-    if smashudsystem.hasDied and not smashudsystem.exittomap then
+    if smasHudSystem.hasDied and not smasHudSystem.exittomap then
         Level.load(Level.filename())
-    elseif smashudsystem.hasDied and smashudsystem.exittomap then
+    elseif smasHudSystem.hasDied and smasHudSystem.exittomap then
         Level.load("map.lvlx")
     end
 end
 
-return smashudsystem
+return smasHudSystem

@@ -1,6 +1,6 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -132,7 +132,7 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities == true then
-        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
             costume.swooshattack()
         end
     end

@@ -1,11 +1,11 @@
---smasverbosemode.lua
+--smasVerboseMode.lua
 --By Spencer Everly
 
 local textplus = require("textplus")
 local lazyprintSMAS = require("lazyprintSMAS")
 local inspect = require("ext/inspect")
 
-local smasverbosemode = {}
+local smasVerboseMode = {}
 
 local gtltrepllace = {["<"] = "<lt>", [">"] = "<gt>", ["\n"] = "<br>"}
 local verbosefont = textplus.loadFont("littleDialogue/font/6.ini")
@@ -15,9 +15,9 @@ local doprint = {font=textplus.loadFont("littleDialogue/font/6.ini"), color=Colo
 doprint.xscale = 1
 doprint.yscale = 1
 
-smasverbosemode.activated = false
+smasVerboseMode.activated = false
 GameData.verboseLog = {}
-smasverbosemode.verboseLog = GameData.verboseLog
+smasVerboseMode.verboseLog = GameData.verboseLog
 
 local function _print(str, x, y)
     local textLayout = textplus.layout(str, nil, doprint)
@@ -40,19 +40,19 @@ local function _storeVerboseString(stringvalue)
     end
     if stringvalue:find("\n") then
         for k,v in ipairs(stringvalue:split("\n")) do
-            table.insert(smasverbosemode.verboseLog, v)
+            table.insert(smasVerboseMode.verboseLog, v)
         end
     elseif stringvalue then
-        table.insert(smasverbosemode.verboseLog, stringvalue)
+        table.insert(smasVerboseMode.verboseLog, stringvalue)
     end
     local y = baseY
-    for i = #smasverbosemode.verboseLog, 1, -1 do
+    for i = #smasVerboseMode.verboseLog, 1, -1 do
         y = y + 10
         addprint("\n")
         if y < 0 then
             break
         end
-        addprint(smasverbosemode.verboseLog[i])
+        addprint(smasVerboseMode.verboseLog[i])
     end
 end
 
@@ -60,14 +60,14 @@ local function _printVerboseList()
     _print(table.concat(printlist), baseX, baseY)
 end
 
-function smasverbosemode.onInitAPI()
-    registerEvent(smasverbosemode,"onStart")
-    registerEvent(smasverbosemode,"onEvent")
-    registerEvent(smasverbosemode,"onDraw")
-    registerEvent(smasverbosemode,"onInputUpdate")
+function smasVerboseMode.onInitAPI()
+    registerEvent(smasVerboseMode,"onStart")
+    registerEvent(smasVerboseMode,"onEvent")
+    registerEvent(smasVerboseMode,"onDraw")
+    registerEvent(smasVerboseMode,"onInputUpdate")
 end
 
-function smasverbosemode.onStart()
+function smasVerboseMode.onStart()
     console:println("Level has officially started.")
     console:println("Level filename: "..Level.filename())
     console:println("Level name: "..Misc.getActualLevelName())
@@ -85,7 +85,7 @@ function smasverbosemode.onStart()
     --end
 end
 
-function smasverbosemode.onEvent(eventName)
+function smasVerboseMode.onEvent(eventName)
     if eventName then
         console:println("Event "..eventName.." has executed.")
     end
@@ -95,7 +95,7 @@ function startLevel()
     
 end
 
-function smasverbosemode.onDraw()
+function smasVerboseMode.onDraw()
     for _,p in ipairs(Player.get()) do
         if Playur.isJumping(p) then
             console:println("Player "..p.idx.." has jumped.")
@@ -106,7 +106,7 @@ function smasverbosemode.onDraw()
     end
 end
 
-function smasverbosemode.onInputUpdate()
+function smasVerboseMode.onInputUpdate()
     for _,p in ipairs(Player.get()) do
         if p.keys.left == KEYS_PRESSED then
             console:println("Player "..p.idx.." has pressed the left button.")
@@ -141,4 +141,4 @@ function smasverbosemode.onInputUpdate()
     end
 end
 
-return smasverbosemode
+return smasVerboseMode

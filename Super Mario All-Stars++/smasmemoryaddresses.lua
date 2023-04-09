@@ -1,4 +1,4 @@
-local smasmemoryaddresses = {}
+local smasMemoryAddresses = {}
 
 
 
@@ -34,4 +34,4 @@ _G.GM_STOPWATCH_COUNTER = 0x00B2C62E --FIELD_WORD
 _G.PLR_HEARTS = 0x16 --FIELD_WORD
 _G.PLR_HOLDINGNPC = 0x154 --FIELD_WORD
 
-return smasmemoryaddresses
+return smasMemoryAddresses

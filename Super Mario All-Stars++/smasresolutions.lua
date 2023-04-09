@@ -1,4 +1,4 @@
-local smasresolutions = {}
+local smasResolutions = {}
 
 local customCamera = require("customCamera")
 customCamera.transitionSpeed = 5
@@ -15,11 +15,11 @@ local gbaborder = Graphics.loadImageResolved("graphics/resolutionborders/gba.png
 local iphoneoneborder = Graphics.loadImageResolved("graphics/resolutionborders/iphone1st.png")
 local threedsborder = Graphics.loadImageResolved("graphics/resolutionborders/3ds.png")
 
-function smasresolutions.onInitAPI()
-    registerEvent(smasresolutions,"onDraw")
+function smasResolutions.onInitAPI()
+    registerEvent(smasResolutions,"onDraw")
 end
 
-function smasresolutions.changeResolution()
+function smasResolutions.changeResolution()
     console:println("Changing resolution settings set for "..SaveData.resolution.."...")
     if SaveData.resolution == "fullscreen" then
         customCamera.defaultScreenWidth = 800
@@ -153,7 +153,7 @@ function smasresolutions.changeResolution()
     end]]
 end
 
-function smasresolutions.onDraw()
+function smasResolutions.onDraw()
     if SaveData.resolution == "widescreen" then
         Graphics.drawImageWP(widebars, 0, 0, 7)
     elseif SaveData.resolution == "ultrawide" then
@@ -178,4 +178,4 @@ function smasresolutions.onDraw()
     end]]
 end
 
-return smasresolutions
+return smasResolutions

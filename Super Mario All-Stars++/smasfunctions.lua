@@ -1,9 +1,9 @@
---smasfunctions.lua
+--smasFunctions.lua
 --v1.0
---For more information on this library, use "smasfunctions.help()",
+--For more information on this library, use "smasFunctions.help()",
 --or read the txt file "smasfunctions_help.txt" in the episode folder.
 
-local smasfunctions = {}
+local smasFunctions = {}
 
 --Now for the base functions!
 _G.Misk = require("scripts/functions/misc")
@@ -20,12 +20,12 @@ _G.Effectx = require("scripts/functions/effect")
 _G.Collisionz = require("scripts/functions/collision")
 
 --This is used for spitting out help documentation for these scripts.
-function smasfunctions.help()
+function smasFunctions.help()
     Misc.richDialog("SMASFunctions Help Dialog Box", File.readFile("smasfunctions_help.txt"), true)
 end
 
 if Misc.inSuperMarioAllStarsPlusPlus() then --Easy-to-require SMAS++-specific globals, to load early on boot
-    _G.smascharacterglobals = require("smascharacterglobals")
+    _G.smasCharacterGlobals = require("smasCharacterGlobals")
 end
 
-return smasfunctions
+return smasFunctions

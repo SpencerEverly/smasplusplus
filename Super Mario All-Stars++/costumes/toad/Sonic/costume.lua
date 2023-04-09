@@ -1,8 +1,8 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local particles = require('particles')
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -64,7 +64,7 @@ function costume.onInit(p)
     Defines.player_grav = 0.5
     
     costume.abilitesenabled = true
-    smashud.visible.itembox = false
+    smasHud.visible.itembox = false
 end
 
 local function isSlidingOnIce()
@@ -383,7 +383,7 @@ function costume.onCleanup(p)
     Defines.player_grav = 0.4
     
     costume.abilitesenabled = false
-    smashud.visible.itembox = true
+    smasHud.visible.itembox = true
 end
 
 return costume

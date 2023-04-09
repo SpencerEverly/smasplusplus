@@ -7,7 +7,7 @@ local Routine = require("routine")
 local battledependencies = require("classicbattlemode")
 battledependencies.battlemodeactive = false
 
-smasbooleans.musicMuted = false
+smasBooleans.musicMuted = false
 local musicmuted = false
 local blackscreen = Graphics.loadImage("blackscreen.png")
 
@@ -114,14 +114,14 @@ function pausemenu.onStart()
 end
 
 local function battlemodenewstage()
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Audio.MusicVolume(0)
     Sound.playSFX("skip-intro.ogg")
     Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load(battlelevelsrng[selecter], nil, nil) end)
 end
 
 local function battlemodeexit()
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Audio.MusicVolume(0)
     Sound.playSFX("world_warp.ogg")
     Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
@@ -205,11 +205,11 @@ local function x2modeenable()
 end
 
 local function mutemusic()
-    smasbooleans.musicMuted = not smasbooleans.musicMuted
-    if smasbooleans.musicMuted then
+    smasBooleans.musicMuted = not smasBooleans.musicMuted
+    if smasBooleans.musicMuted then
         Sound.playSFX("paused_on.ogg")
         musicmuted = true
-    elseif not smasbooleans.musicMuted then
+    elseif not smasBooleans.musicMuted then
         Sound.playSFX("paused_off.ogg")
         musicmuted = false
     end
@@ -225,7 +225,7 @@ local function quitgame()
     Audio.MusicPause()
     Misc.saveGame()
     Sound.playSFX("savequit.ogg")
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -234,7 +234,7 @@ local function quitonly()
     Audio.MusicVolume(0)
     Audio.MusicPause()
     Sound.playSFX("nosave.ogg")
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false pausemenu.paused_other = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -249,7 +249,7 @@ local function quitgamemap()
     Audio.MusicVolume(0)
     Audio.MusicPause()
     Misc.saveGame()
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Sound.playSFX("savequit.ogg")
     Routine.run(function() exitscreen = true Routine.wait(1.8, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
@@ -300,7 +300,7 @@ local function quitonlymap()
     Audio.MusicVolume(0)
     Audio.MusicPause()
     Sound.playSFX("nosave.ogg")
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Routine.run(function() exitscreen = true Routine.wait(0.9, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) Misc.exitEngine() end)
 end
 
@@ -332,26 +332,26 @@ end
 
 local function exitlevel()
     Audio.MusicVolume(0)
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Audio.MusicPause()
     Sound.playSFX("quitmenu_close.ogg")
-    Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) smasbooleans.musicMuted = false Level.load("map.lvlx") end)
+    Routine.run(function() exitscreen = true Routine.wait(0.4, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) smasBooleans.musicMuted = false Level.load("map.lvlx") end)
 end
 
 local function restartlevel()
     Audio.MusicVolume(0)
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Audio.MusicPause()
     Sound.playSFX("skip-intro.ogg")
-    Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) smasbooleans.musicMuted = false Level.load(Level.filename()) end)
+    Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) smasBooleans.musicMuted = false Level.load(Level.filename()) end)
 end
 
 local function restartlevelhub()
     Audio.MusicVolume(0)
     Audio.MusicPause()
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Sound.playSFX("skip-intro.ogg")
-    Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) smasbooleans.musicMuted = false Level.load("MALC - HUB.lvlx", nil, nil) end)
+    Routine.run(function() exitscreen = true Routine.wait(1.5, true) pausemenu.paused = false Misc.unpause() Audio.MusicVolume(nil) smasBooleans.musicMuted = false Level.load("MALC - HUB.lvlx", nil, nil) end)
 end
 
 local function warpzonehub()
@@ -969,8 +969,8 @@ local function mainmenu()
     pausemenu.paused = false
     Misc.unpause()
     Misc.saveGame()
-    smasbooleans.musicMuted = true
-    Routine.run(function() exitscreen = true Audio.MusicVolume(0) Sound.playSFX("shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() smasbooleans.musicMuted = false Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
+    smasBooleans.musicMuted = true
+    Routine.run(function() exitscreen = true Audio.MusicVolume(0) Sound.playSFX("shutdown.ogg") Routine.wait(2.4, true) paused = false Misc.saveGame() Misc.unpause() smasBooleans.musicMuted = false Audio.MusicVolume(65) Level.load("SMAS - Start.lvlx", nil, nil) end)
 end
 
 local function wrong()
@@ -1958,7 +1958,7 @@ function pausemenu.onTick()
         Audio.MusicVolume(0)
     end
     if musicmuted == false then
-        if smasbooleans.musicMuted == true or smasbooleans.musicMuted == true or smasbooleans.musicMuted == true then
+        if smasBooleans.musicMuted == true or smasBooleans.musicMuted == true or smasBooleans.musicMuted == true then
             Audio.MusicVolume(0)
         else
             Audio.MusicVolume(65)

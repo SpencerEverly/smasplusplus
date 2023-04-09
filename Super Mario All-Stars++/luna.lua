@@ -69,21 +69,22 @@ end
 console:println("Loading important libraries...")
 
 --SMAS specific functions need to be required first:
-_G.smasglobals = require("smasglobals")
-_G.smasmemoryaddresses = require("smasmemoryaddresses")
-_G.smasfunctions = require("smasfunctions")
-_G.smasanimationsystem = require("smasanimationsystem")
-_G.smasverbosemode = require("smasverbosemode")
-_G.smasbooleans = require("smasbooleans")
-_G.smastables = require("smastables")
-_G.smascheats = require("smascheats")
-_G.smashud = require("smashud")
-_G.smasstarsystem = require("smasstarsystem")
-_G.smasnoturnback = require("smasnoturnback")
-_G.smasspencerfollower = require("smasspencerfollower")
-_G.smascharacterchanger = require("smascharacterchanger")
-_G.smasfireballs = require("smasfireballs")
-_G.smaspwing = require("smaspwing")
+_G.smasGlobals = require("smasGlobals")
+_G.smasMemoryAddresses = require("smasMemoryAddresses")
+_G.smasKeySystem = require("smasKeySystem")
+_G.smasFunctions = require("smasFunctions")
+_G.smasAnimationSystem = require("smasAnimationSystem")
+_G.smasVerboseMode = require("smasVerboseMode")
+_G.smasBooleans = require("smasBooleans")
+_G.smasTables = require("smasTables")
+_G.smasCheats = require("smasCheats")
+_G.smasHud = require("smasHud")
+_G.smasStarSystem = require("smasStarSystem")
+_G.smasNoTurnBack = require("smasNoTurnBack")
+_G.smasSpencerFollower = require("smasSpencerFollower")
+_G.smasCharacterChanger = require("smasCharacterChanger")
+_G.smasFireballs = require("smasFireballs")
+_G.smasPWing = require("smasPWing")
 
 --Then we do everything else.
 GameData.levelMusicTemporary = {}
@@ -352,7 +353,7 @@ local warpstaractive = false
 local loadingsoundFile = Misc.resolveSoundFile("loadscreen.ogg")
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
-smastables._noLoadingSoundLevels = {
+smasTables._noLoadingSoundLevels = {
     "SMAS - Start.lvlx",
     "SMAS - Raca's World (Part 0).lvlx",
     "SMAS - Raca's World (Part 1).lvlx",
@@ -371,7 +372,7 @@ end
 
 --Now use onLoad to play the loading sound...
 function onLoad()
-    if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) and loadactivate then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
+    if not Misc.inEditor() and not table.icontains(smasTables._noLoadingSoundLevels,Level.filename()) and loadactivate then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
         console:println("Loading sound playing!")
         loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
         loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
@@ -422,7 +423,7 @@ function onStart() --Now do onStart...
         SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
         GameData.weatherset = false
     end
-    if not Misc.inEditor() and not table.icontains(smastables._noLoadingSoundLevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
+    if not Misc.inEditor() and not table.icontains(smasTables._noLoadingSoundLevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
         fadetolevel = false
         if loadactivate then
             loadingSoundObject:FadeOut(800)
@@ -601,7 +602,7 @@ function onTick()
     if mem(0x00B2C5AC,FIELD_FLOAT) < 1 then --This is to prevent the old Game Over system
         mem(0x00B2C5AC,FIELD_FLOAT,1)
     end
-    if table.icontains(smastables._friendlyPlaces,Level.filename()) then
+    if table.icontains(smasTables._friendlyPlaces,Level.filename()) then
         GameData.friendlyArea = true --Set this to prevent Mother Brain Rinka from getting killed in places such as the boot screen, intro, or the Hub
     end
     --Now we'll overhaul the door star required system

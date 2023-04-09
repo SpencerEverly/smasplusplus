@@ -1,4 +1,4 @@
-if smasbooleans.mainMenuActive then return end
+if smasBooleans.mainMenuActive then return end
 
 local undertaledepends = {}
 
@@ -31,7 +31,7 @@ end
 
 function undertaledepends.onTick()
     if SaveData.currentCostume == "UNDERTALE-FRISK" then
-        if #NPC.get(smastables.allBaseGameKillableEnemyIDs) == 0 and not table.icontains(smastables._friendlyPlaces,Level.filename()) and not undertaledepends.killedAll then
+        if #NPC.get(smasTables.allBaseGameKillableEnemyIDs) == 0 and not table.icontains(smasTables._friendlyPlaces,Level.filename()) and not undertaledepends.killedAll then
             Routine.run(delayedMusicChange, killedNPC)
             undertaledepends.killedAll = true
         end

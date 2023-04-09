@@ -23,25 +23,25 @@ if GameData.enableBattleMode then
     pausemenu2 = require("pausemenu2")
 end
 
-_G.smasacecoins = require("smasacecoins")
-_G.smascharacterinfo = require("smascharacterinfo")
-_G.smascharacterintros = require("smascharacterintros")
-_G.smaslayersystem = require("smaslayersystem")
-_G.smasextraactions = require("smasextraactions")
-_G.smasblocksystem = require("smasblocksystem")
-_G.smaspswitch = require("smaspswitch")
-_G.smasenemysystem = require("smasenemysystem")
-_G.smasnpcsystem = require("smasnpcsystem")
-_G.smas2playersystem = require("smas2playersystem")
-_G.smasresolutions = require("smasresolutions")
+_G.smasAceCoins = require("smasAceCoins")
+_G.smasCharacterInfo = require("smasCharacterInfo")
+_G.smasCharacterIntros = require("smasCharacterIntros")
+_G.smasLayerSystem = require("smasLayerSystem")
+_G.smasExtraActions = require("smasExtraActions")
+_G.smasBlockSystem = require("smasBlockSystem")
+_G.smasPSwitch = require("smasPSwitch")
+_G.smasEnemySystem = require("smasEnemySystem")
+_G.smasNPCSystem = require("smasNPCSystem")
+_G.smas2PlayerSystem = require("smas2PlayerSystem")
+_G.smasResolutions = require("smasResolutions")
 
 if SMBX_VERSION == VER_SEE_MOD then
-    smasonlineplay = require("smasonlineplay")
+    smasOnlinePlay = require("smasOnlinePlay")
 end
 
 local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
-if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
     if not SaveData.disableX2char then
         if SaveData.accessibilityTwirl then
             console:println("Twirling activated! Loading twirl library...")
@@ -88,7 +88,7 @@ end
 namehover.active = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
-smashud.visible.starcoins = false
+smasHud.visible.starcoins = false
 GameData.activateAbilityMessage = false
 
 local easterCrash = false
@@ -99,7 +99,7 @@ local blockIdx5000Check = false
 
 SaveData._anothercurrency = {SaveData.totalCoins}
 
-if (table.icontains(smastables._noTransitionLevels,Level.filename())) or (GameData.rushModeActive) then
+if (table.icontains(smasTables._noTransitionLevels,Level.filename())) or (GameData.rushModeActive) then
     warpTransition.musicFadeOut = false
     warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
     warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -158,11 +158,11 @@ end
 function lavaShroomEasterEgg()
     console:println("1.3 Mode Easter Egg found!")
     easterCrashPrevLoad = true
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Sound.playSFX("easteregg_smbx13crash.ogg")
     easterCrashMsg = true
     Routine.wait(2, true)
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     Routine.wait(20, true)
     easterCrashMsg = false
     easterCrashDone = true
@@ -177,7 +177,7 @@ end
 
 function globalgenerals.onEvent(eventName)
     if eventName then --If it executes any event...
-        if smasbooleans.musicMuted then --If the music has been muted for any reason...
+        if smasBooleans.musicMuted then --If the music has been muted for any reason...
             console:println("Event started while music is muted. Storing changed music to the refresh table...")
             for i = 0,20 do
                 if Section(i).music ~= 0 then --If the music is anything but 0...
@@ -199,7 +199,7 @@ end
 function globalgenerals.onStart()
     Sound.startupRefreshSystem()
     Playur.failsafeStartupPlayerCheck()
-    smasresolutions.changeResolution()
+    smasResolutions.changeResolution()
     if Misc.inEditor() then
         debugbox = require("debugbox")
         debugbox.bootactive = true
@@ -236,12 +236,12 @@ function globalgenerals.onTick()
     if lunatime.tick() == 1 then
         Sound.loadCostumeSounds()
     end
-    if smasbooleans.compatibilityMode13Mode then
+    if smasBooleans.compatibilityMode13Mode then
         mem(0x00B2C860, FIELD_FLOAT, 7.0999999046326)
     else
         mem(0x00B2C860, FIELD_FLOAT, 6.2)
     end
-    if table.icontains(smastables.__wsmbaLevels,Level.filename()) then
+    if table.icontains(smasTables.__wsmbaLevels,Level.filename()) then
         if not SaveData.disableX2char then
             littleDialogue.defaultStyleName = "smbx13"
         end
@@ -252,39 +252,39 @@ function globalgenerals.onTick()
         warpTransition.activateOnInstantWarps = false
     end
     if player.character == CHARACTER_SNAKE then
-        smashud.visible.keys = true
-        smashud.visible.itembox = true
-        smashud.visible.bombs = true
-        smashud.visible.coins = true
-        smashud.visible.stars = true
-        smashud.visible.timer = true
-        smashud.visible.levelname = true
-        smashud.visible.overworldPlayer = true
+        smasHud.visible.keys = true
+        smasHud.visible.itembox = true
+        smasHud.visible.bombs = true
+        smasHud.visible.coins = true
+        smasHud.visible.stars = true
+        smasHud.visible.timer = true
+        smasHud.visible.levelname = true
+        smasHud.visible.overworldPlayer = true
     end
     if player.character == CHARACTER_NINJABOMBERMAN then
-        smashud.visible.keys = true
-        smashud.visible.itembox = true
-        smashud.visible.bombs = true
-        smashud.visible.coins = true
-        smashud.visible.stars = true
-        smashud.visible.timer = true
-        smashud.visible.levelname = true
-        smashud.visible.overworldPlayer = true
+        smasHud.visible.keys = true
+        smasHud.visible.itembox = true
+        smasHud.visible.bombs = true
+        smasHud.visible.coins = true
+        smasHud.visible.stars = true
+        smasHud.visible.timer = true
+        smasHud.visible.levelname = true
+        smasHud.visible.overworldPlayer = true
     end
     if player.character == CHARACTER_UNCLEBROADSWORD then
-        --smashud.visible.lives = false
+        --smasHud.visible.lives = false
     end
     if player.character == CHARACTER_ULTIMATERINKA then
-        smashud.visible.keys = true
-        smashud.visible.itembox = true
-        smashud.visible.bombs = true
-        smashud.visible.coins = true
-        smashud.visible.stars = true
-        smashud.visible.timer = true
-        smashud.visible.levelname = true
-        smashud.visible.overworldPlayer = true
+        smasHud.visible.keys = true
+        smasHud.visible.itembox = true
+        smasHud.visible.bombs = true
+        smasHud.visible.coins = true
+        smasHud.visible.stars = true
+        smasHud.visible.timer = true
+        smasHud.visible.levelname = true
+        smasHud.visible.overworldPlayer = true
     end
-    for k,block in ipairs(Block.get(smastables.allLavaBlockIDs)) do
+    for k,block in ipairs(Block.get(smasTables.allLavaBlockIDs)) do
         if block.idx >= 5000 then --Easter egg block IDX detection, for the epic 1.3 mode crash thingy
             blockIdx5000Check = true
         end
@@ -349,15 +349,15 @@ end
 
 function globalgenerals.onPostNPCKill(npc, harmType)
     for _,p in ipairs(Player.get()) do
-        if smastables.allGoombaNPCIDs[npc.id] then
+        if smasTables.allGoombaNPCIDs[npc.id] then
             SaveData.goombaStomps = SaveData.goombaStomps + 1
             console:println(tostring(SaveData.goombaStomps).." Goombas have been stomped in total.")
         end
-        if smastables.allKoopaNPCIDs[npc.id] then
+        if smasTables.allKoopaNPCIDs[npc.id] then
             SaveData.koopaStomps = SaveData.koopaStomps + 1
             console:println(tostring(SaveData.koopaStomps).." Koopas have been stomped in total.")
         end
-        if smastables.allStarmanNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allStarmanNPCIDs[npc.id] and Colliders.collide(p, npc) then
             SaveData.starmansused = SaveData.starmansused + 1
             console:println(tostring(SaveData.starmansused).." Starman's have been used in total.")
         end
@@ -365,19 +365,19 @@ function globalgenerals.onPostNPCKill(npc, harmType)
             SaveData.megamushroomssused = SaveData.megamushroomssused + 1
             console:println(tostring(SaveData.megamushroomssused).." Mega Mushroom's have been used in total.")
         end
-        if smastables.allCollectableStarNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allCollectableStarNPCIDs[npc.id] and Colliders.collide(p, npc) then
             SaveData.starsgrabbed = SaveData.starsgrabbed + 1
             console:println(tostring(SaveData.starsgrabbed).." stars have been grabbed in total.")
         end
-        if smastables.allCoinNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allCoinNPCIDs[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalCoins = SaveData.totalCoins + 1
             console:println(tostring(SaveData.totalCoins).." coins have been collected in total.")
         end
-        if smastables.allMushroomNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allMushroomNPCIDs[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalmushrooms = SaveData.totalmushrooms + 1
             console:println(tostring(SaveData.totalmushrooms).." Mushrooms have been used in total.")
         end
-        if smastables.allFireFlowerNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allFireFlowerNPCIDs[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalfireflowers = SaveData.totalfireflowers + 1
             console:println(tostring(SaveData.totalfireflowers).." Fire Flowers have been used in total.")
         end
@@ -398,7 +398,7 @@ function globalgenerals.onPostNPCKill(npc, harmType)
             console:println(tostring(SaveData.totaliceflowers).." Ice Flowers have been used in total.")
         end
         if SaveData.disableX2char then
-            if smastables.allInteractableNPCIDs[npc.id] then
+            if smasTables.allInteractableNPCIDs[npc.id] then
                 if blockIdx5000Check then
                     if harmType == HARM_TYPE_LAVA then
                         easterCrash = true
@@ -487,7 +487,7 @@ function globalgenerals.onExit()
         console:println("Credits exiting detected! Exiting to the credits level...")
         Level.load("SMAS - Credits.lvlx")
     end
-    if not table.icontains(smastables._friendlyPlaces,Level.filename()) then
+    if not table.icontains(smasTables._friendlyPlaces,Level.filename()) then
         SaveData.lastLevelPlayed = Level.filename()
     end
     if not Misc.inMarioChallenge() then

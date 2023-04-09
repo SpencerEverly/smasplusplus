@@ -1,7 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -98,7 +98,7 @@ function costume.onPostNPCKill(npc, harmType)
         local items = table.map{9,184,185,249,14,182,183,34,169,170,277,264,996,994}
         local rngkey = rng.randomInt(1,12)
         if items[npc.id] and Colliders.collide(plr, npc) then
-            if smascharacterglobals.soundSettings.spongeBobCanUseVoice then
+            if smasCharacterGlobals.soundSettings.spongeBobCanUseVoice then
                 SFX.play("costumes/mario/SpongeBobSquarePants/spongebob-grow"..rngkey..".ogg", 1, 1, 80)
             end
         end
@@ -132,13 +132,13 @@ function costume.onTick(repeated)
                     plr:setFrame(27)
                     timer2 = timer2 - 1
                     if timer2 == 4 then
-                        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                            SFX.play(smascharacterglobals.soundSettings.spongeBobFlyBeginSFX, 1, 1, 10)
+                        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+                            SFX.play(smasCharacterGlobals.soundSettings.spongeBobFlyBeginSFX, 1, 1, 10)
                         end
                     elseif timer2 <= 3 then
-                        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                            if smascharacterglobals.soundSettings.spongeBobFlyBeginSFX.playing then
-                                smascharacterglobals.soundSettings.spongeBobFlyBeginSFX:stop()
+                        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+                            if smasCharacterGlobals.soundSettings.spongeBobFlyBeginSFX.playing then
+                                smasCharacterGlobals.soundSettings.spongeBobFlyBeginSFX:stop()
                             end
                         end
                     end
@@ -148,14 +148,14 @@ function costume.onTick(repeated)
                 timer2 = 5
             end
         end
-        if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasfunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
+        if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasFunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
             hasJumped = false
         elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not Playur.underwater(player) then
-            if smascharacterglobals.abilitySettings.spongeBobCanDoubleJump then
+            if smasCharacterGlobals.abilitySettings.spongeBobCanDoubleJump then
                 hasJumped = true
                 player:mem(0x11C, FIELD_WORD, 16)
-                if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                    Sound.playSFX(smascharacterglobals.soundSettings.spongeBobDoubleJumpSFX)
+                if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+                    Sound.playSFX(smasCharacterGlobals.soundSettings.spongeBobDoubleJumpSFX)
                 end
             end
         end
@@ -168,7 +168,7 @@ end
 
 function costume.onPostPlayerKill()
     local rngkey = rng.randomInt(1,7)
-    if smascharacterglobals.soundSettings.spongeBobCanUseVoice then
+    if smasCharacterGlobals.soundSettings.spongeBobCanUseVoice then
         Sound.playSFX("mario/SpongeBobSquarePants/spongebob-dead"..rngkey..".ogg")
     end
 end

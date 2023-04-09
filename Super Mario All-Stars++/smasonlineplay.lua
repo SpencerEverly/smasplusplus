@@ -1,6 +1,6 @@
 if (SMBX_VERSION == VER_SEE_MOD) == false then return end
 
-local smasonlineplay = {}
+local smasOnlinePlay = {}
 
 local inspect = require("ext/inspect")
 
@@ -16,10 +16,10 @@ if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
     udp:setpeername("25.3.161.35",12345)
 end
 
-function smasonlineplay.onInitAPI()
-    registerEvent(smasonlineplay,"onStart")
-    registerEvent(smasonlineplay,"onTick")
-    registerEvent(smasonlineplay,"onDraw")
+function smasOnlinePlay.onInitAPI()
+    registerEvent(smasOnlinePlay,"onStart")
+    registerEvent(smasOnlinePlay,"onTick")
+    registerEvent(smasOnlinePlay,"onDraw")
 end
 
 local p2specifics
@@ -27,14 +27,14 @@ local p2specificsstring
 local p2finalspecifics
 local p2finalspecificstable = {}
 
-smasonlineplay.onlineactivated = false
+smasOnlinePlay.onlineactivated = false
 
-function smasonlineplay.onStart()
-    smasonlineplay.onlineactivated = false
+function smasOnlinePlay.onStart()
+    smasOnlinePlay.onlineactivated = false
 end
 
-function smasonlineplay.onDraw()
-    if smasonlineplay.onlineactivated then
+function smasOnlinePlay.onDraw()
+    if smasOnlinePlay.onlineactivated then
         if Player.count() >= 2 then
             if socket.dns.gethostname() == "SPENCERLAPTOP2020" then
                 p2specifics = {
@@ -97,4 +97,4 @@ function smasonlineplay.onDraw()
     end
 end
 
-return smasonlineplay
+return smasOnlinePlay

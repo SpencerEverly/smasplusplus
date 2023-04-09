@@ -2,7 +2,7 @@ local Sound = {}
 
 local extrasounds = require("extrasounds")
 local playerManager = require("playermanager")
-local smastables = require("smastables")
+local smasTables = require("smasTables")
 local audiomasterSMAS = require("scripts/audiomasterSMAS")
 
 if GameData.levelMusicTemporary == nil then
@@ -123,18 +123,18 @@ function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play an
     
     if not eventObj.cancelled then
         if Sound.isExtraSoundsActive() then
-            if not smastables.stockSoundNumbersInOrder[name] and extrasounds.sounds[name] then
+            if not smasTables.stockSoundNumbersInOrder[name] and extrasounds.sounds[name] then
                 if not extrasounds.sounds[name].muted then
                     audiomasterSMAS.PlaySound({sound = extrasounds.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
                 end
-            elseif smastables.stockSoundNumbersInOrder[name] then
+            elseif smasTables.stockSoundNumbersInOrder[name] then
                 audiomasterSMAS.PlaySound({sound = Audio.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
             elseif name then
                 local file = Sound.resolveSoundFile(name) --Common sound directories, see above for the entire list
                 audiomasterSMAS.PlaySound({sound = file, volume = volume, loops = loops, delay = delay, pan = pan}) --Then play it afterward
             end
         elseif not Sound.isExtraSoundsActive() then
-            if smastables.allVanillaSoundNumbersInOrder[name] then
+            if smasTables.allVanillaSoundNumbersInOrder[name] then
                 audiomasterSMAS.PlaySound({sound = Audio.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
             elseif name then
                 local file = Sound.resolveSoundFile(name) --Common sound directories, see above for the entire list
@@ -151,10 +151,10 @@ function Sound.clearUnusedCostumeSounds()
         console:println("NOT USING SEE MOD! Costume sound refresher has stopped.")
         return
     else
-        for k,v in ipairs(smastables.soundNamesInOrder) do
-            if (smastables.previouslyCachedSoundFiles[k] ~= smastables.currentlyCachedSoundFiles[k]) then
-                console:println("Unmatched sound detected: "..smastables.previouslyCachedSoundFiles[k]..", will clear off from cache until next reload...")
-                CacheSystem.ClearSpecifiedSoundFromCache(smastables.previouslyCachedSoundFiles[k])
+        for k,v in ipairs(smasTables.soundNamesInOrder) do
+            if (smasTables.previouslyCachedSoundFiles[k] ~= smasTables.currentlyCachedSoundFiles[k]) then
+                console:println("Unmatched sound detected: "..smasTables.previouslyCachedSoundFiles[k]..", will clear off from cache until next reload...")
+                CacheSystem.ClearSpecifiedSoundFromCache(smasTables.previouslyCachedSoundFiles[k])
             end
         end
     end
@@ -196,22 +196,22 @@ function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a cos
 end
 
 function Sound.loadCostumeSounds() --Load up the sounds when a costume is being worn. If there is no costume, it'll load up stock sounds instead.
-    for k,v in ipairs(smastables.soundNamesInOrder) do
-        smastables.previouslyCachedSoundFiles[k] = smastables.currentlyCachedSoundFiles[k]
+    for k,v in ipairs(smasTables.soundNamesInOrder) do
+        smasTables.previouslyCachedSoundFiles[k] = smasTables.currentlyCachedSoundFiles[k]
         
-        if not smastables.stockSoundNumbersInOrder[k] then
+        if not smasTables.stockSoundNumbersInOrder[k] then
             extrasounds.sounds[k].sfx = Sound.resolveCostumeSound(v)
-        elseif smastables.stockSoundNumbersInOrder[k] then
+        elseif smasTables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
         end
         
-        smastables.currentlyCachedSoundFiles[k] = Sound.resolveCostumeSound(v, true)
+        smasTables.currentlyCachedSoundFiles[k] = Sound.resolveCostumeSound(v, true)
     end
     
-    --[[for i = 1, #smastables.soundNamesInOrder do
+    --[[for i = 1, #smasTables.soundNamesInOrder do
         local cachedSounds = {}
         if cachedSounds[i] == nil then
-            cachedSounds[i] = Sound.resolveCostumeSound(smastables.soundNamesInOrder[i])
+            cachedSounds[i] = Sound.resolveCostumeSound(smasTables.soundNamesInOrder[i])
         end
         extrasounds.sounds[i].sfx = cachedSounds[i]
         if i <= 91 then
@@ -221,10 +221,10 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
 end
 
 function Sound.cleanupCostumeSounds()
-    for k,v in ipairs(smastables.soundNamesInOrder) do
-        if not smastables.stockSoundNumbersInOrder[k] then
+    for k,v in ipairs(smasTables.soundNamesInOrder) do
+        if not smasTables.stockSoundNumbersInOrder[k] then
             extrasounds.sounds[k].sfx = nil
-        elseif smastables.stockSoundNumbersInOrder[k] then
+        elseif smasTables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = nil
         end
     end
@@ -250,8 +250,8 @@ function Sound.changeMusic(name, sectionid, canRefreshWhenMuted) --Music changin
             console:println("All music will be changed to '"..tostring(name).."'.")
             for i = 0,20 do
                 Section(i).music = name
-                if smasbooleans then
-                    if smasbooleans.musicMuted and canRefreshWhenMuted then
+                if smasBooleans then
+                    if smasBooleans.musicMuted and canRefreshWhenMuted then
                         Sound.refreshMusic(i)
                         Sound.muteMusic(i)
                     end
@@ -260,8 +260,8 @@ function Sound.changeMusic(name, sectionid, canRefreshWhenMuted) --Music changin
         elseif sectionid >= 0 or sectionid <= 20 then
             console:println("Music from section "..tostring(sectionid).." will be changed to '"..tostring(name).."'.")
             Section(sectionid).music = name
-            if smasbooleans then
-                if smasbooleans.musicMuted and canRefreshWhenMuted then
+            if smasBooleans then
+                if smasBooleans.musicMuted and canRefreshWhenMuted then
                     Sound.refreshMusic(sectionid)
                     Sound.muteMusic(sectionid)
                 end
@@ -282,18 +282,18 @@ function Sound.muteMusic(sectionid) --Mute all section music, or just mute a spe
             GameData.levelMusicTemporary[i] = Section(i).music
             Audio.MusicChange(i, 0)
         end
-        if smasbooleans then
-            console:println("smasbooleans music muted boolean set to true.")
-            smasbooleans.musicMutedTemporary = true
+        if smasBooleans then
+            console:println("smasBooleans music muted boolean set to true.")
+            smasBooleans.musicMutedTemporary = true
         end
     elseif sectionid >= 0 or sectionid <= 20 then
         console:println("Muting music on section "..tostring(sectionid).."...")
         musiclist = {Section(sectionid).music}
         GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
         Audio.MusicChange(sectionid, 0)
-        if smasbooleans then
-            console:println("smasbooleans music muted boolean set to true.")
-            smasbooleans.musicMutedTemporary = true
+        if smasBooleans then
+            console:println("smasBooleans music muted boolean set to true.")
+            smasBooleans.musicMutedTemporary = true
         end
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")
@@ -308,17 +308,17 @@ function Sound.restoreMusic(sectionid) --Restore all section music, or just rest
             songname = GameData.levelMusicTemporary[i]
             Section(i).music = songname
         end
-        if smasbooleans then
-            console:println("smasbooleans music muted boolean set to false.")
-            smasbooleans.musicMutedTemporary = false
+        if smasBooleans then
+            console:println("smasBooleans music muted boolean set to false.")
+            smasBooleans.musicMutedTemporary = false
         end
     elseif sectionid >= 0 or sectionid <= 20 then
         console:println("Restoring music on section "..tostring(sectionid).."...")
         songname = GameData.levelMusicTemporary[sectionid]
         Section(sectionid).music = songname
-        if smasbooleans then
-            console:println("smasbooleans music muted boolean set to false.")
-            smasbooleans.musicMutedTemporary = false
+        if smasBooleans then
+            console:println("smasBooleans music muted boolean set to false.")
+            smasBooleans.musicMutedTemporary = false
         end
     elseif sectionid >= 21 then
         error("That's higher than SMBX2 can go. Go to a lower section than that.")

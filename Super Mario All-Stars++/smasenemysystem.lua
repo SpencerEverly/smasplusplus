@@ -1,23 +1,23 @@
-local smasenemysystem = {}
+local smasEnemySystem = {}
 
 local inspect = require("ext/inspect")
 
-function smasenemysystem.onInitAPI()
-    registerEvent(smasenemysystem,"onTick")
+function smasEnemySystem.onInitAPI()
+    registerEvent(smasEnemySystem,"onTick")
 end
 
 local heldNPC
 
-smasenemysystem.enableWallNPCFix = false --Enable this to prevent killing NPCs when held and let go right smack by a wall.
-smasenemysystem.enableTanookiThwompAndDiscKilling = true --Enable this to kill Thwomps and/or Roto-Discs while active as a statue.
-smasenemysystem.enableShellCoinGrabbing = true --Enable to let shells collect coins, dragon coins, cherries, etc.
+smasEnemySystem.enableWallNPCFix = false --Enable this to prevent killing NPCs when held and let go right smack by a wall.
+smasEnemySystem.enableTanookiThwompAndDiscKilling = true --Enable this to kill Thwomps and/or Roto-Discs while active as a statue.
+smasEnemySystem.enableShellCoinGrabbing = true --Enable to let shells collect coins, dragon coins, cherries, etc.
 
-function smasenemysystem.onTick()
+function smasEnemySystem.onTick()
     
     
     
     --**WALL NPC FIX**
-    if smasenemysystem.enableWallNPCFix then
+    if smasEnemySystem.enableWallNPCFix then
         if player.holdingNPC ~= nil then
             heldNPC = player.holdingNPC
         end
@@ -42,7 +42,7 @@ function smasenemysystem.onTick()
     
     
     --**TANOOKI THWOMP AND DISC KILLING**
-    if smasenemysystem.enableTanookiThwompAndDiscKilling then
+    if smasEnemySystem.enableTanookiThwompAndDiscKilling then
         if not SaveData.disableX2char then
             for _,p in ipairs(Player.get()) do
                 if p.powerup == 5 and p:mem(0x4A, FIELD_BOOL) then
@@ -54,7 +54,7 @@ function smasenemysystem.onTick()
                             p.speedY = -1
                         end
                     end
-                    --smastables.allThwompNPCIDs[v.id] support coming later
+                    --smasTables.allThwompNPCIDs[v.id] support coming later
                 end
             end
         end
@@ -65,11 +65,11 @@ function smasenemysystem.onTick()
     
     
     --**SHELL COIN GRABBING**
-    if smasenemysystem.enableShellCoinGrabbing then
+    if smasEnemySystem.enableShellCoinGrabbing then
         if not SaveData.disableX2char then
             --Coins, first thing
-            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
-                for j,l in ipairs(NPC.get(smastables.allCoinNPCIDs)) do --Coins
+            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smasTables.allCoinNPCIDs)) do --Coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the coin
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
@@ -82,8 +82,8 @@ function smasenemysystem.onTick()
                 end
             end
             --Now we're gonna get rupees
-            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
-                for j,l in ipairs(NPC.get(smastables.allRupeeNPCIDs)) do --Rupees
+            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smasTables.allRupeeNPCIDs)) do --Rupees
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the rupee
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
@@ -96,8 +96,8 @@ function smasenemysystem.onTick()
                 end
             end
             --And now, Dragon Coins
-            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
-                for j,l in ipairs(NPC.get(smastables.allDragonCoinNPCIDs)) do --Dragon coins
+            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smasTables.allDragonCoinNPCIDs)) do --Dragon coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the dragon coin
                         local c = NPC.config[l.id]
@@ -112,8 +112,8 @@ function smasenemysystem.onTick()
                 end
             end
             --And finally, star coins
-            for k,v in ipairs(NPC.get(smastables.allShellNPCIDs)) do --Shells
-                for j,l in ipairs(NPC.get(smastables.allStarCoinNPCIDs)) do --Star coins
+            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+                for j,l in ipairs(NPC.get(smasTables.allStarCoinNPCIDs)) do --Star coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         starcoin.collect(l)
                     end
@@ -126,4 +126,4 @@ function smasenemysystem.onTick()
     
 end
 
-return smasenemysystem
+return smasEnemySystem

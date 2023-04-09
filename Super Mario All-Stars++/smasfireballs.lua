@@ -1,15 +1,15 @@
-local smasfireballs = {}
+local smasFireballs = {}
 
-function smasfireballs.onInitAPI()
-    registerEvent(smasfireballs,"onNPCKill")
-    registerEvent(smasfireballs,"onPostNPCHarm")
-    registerEvent(smasfireballs,"onDrawEnd")
+function smasFireballs.onInitAPI()
+    registerEvent(smasFireballs,"onNPCKill")
+    registerEvent(smasFireballs,"onPostNPCHarm")
+    registerEvent(smasFireballs,"onDrawEnd")
 end
 
 local fireballtimer = 0
 local iceballtimer = 0
 
-function smasfireballs.onPostNPCHarm(npc, harmType)
+function smasFireballs.onPostNPCHarm(npc, harmType)
     if SaveData.currentCostume == "MODERN2" then
         if npc.id == 13 then
             if harmType == HARM_TYPE_PROJECTILE_USED then
@@ -30,7 +30,7 @@ function smasfireballs.onPostNPCHarm(npc, harmType)
     end
 end
 
-function smasfireballs.onDrawEnd()
+function smasFireballs.onDrawEnd()
     if SaveData.currentCostume == "MODERN2" then
         if fireballtimer > 0 then
             fireballtimer = fireballtimer - 1
@@ -50,4 +50,4 @@ function smasfireballs.onDrawEnd()
     end
 end
 
-return smasfireballs
+return smasFireballs

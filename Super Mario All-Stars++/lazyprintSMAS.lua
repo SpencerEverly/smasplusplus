@@ -79,7 +79,7 @@ function lazyprint.print(object, keys)
 end
 
 function lazyprint.onDraw()
-    if smasverbosemode.activated then
+    if smasVerboseMode.activated then
         local xOffset = 0
         local yOffset = 0
         local padX = 4

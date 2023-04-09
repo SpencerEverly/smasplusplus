@@ -1,8 +1,8 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local rng = require("base/rng")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -38,7 +38,7 @@ function costume.onInit(p)
     Defines.projectilespeedx = 7
     Defines.player_grav = 0.38
     
-    smashud.visible.itembox = false
+    smasHud.visible.itembox = false
     characterhp = 3
     costume.useLaser1 = false
     costume.abilitesenabled = true
@@ -77,7 +77,7 @@ function costume.shootLaser1()
     end
     local gunid = 266
     local gunNpc = NPC.spawn(gunid, x, y, player.section, false, true)
-    Sound.playSFX(smascharacterglobals.soundSettings.rebelTrooperBlasterSFX)
+    Sound.playSFX(smasCharacterGlobals.soundSettings.rebelTrooperBlasterSFX)
     costume.useLaser1 = true
     gunNpc.frames = 1
     if (plr.direction == 1) then
@@ -104,9 +104,9 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities then
-        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
             if (player.powerup == 5) == false then
-                if smascharacterglobals.abilitySettings.rebelTrooperCanShootBlaster then
+                if smasCharacterGlobals.abilitySettings.rebelTrooperCanShootBlaster then
                     costume.shootLaser1()
                 end
             end
@@ -119,7 +119,7 @@ function costume.onControllerButtonPress(button, playerIdx)
         if playerIdx == 1 then
             if button == SaveData.specialbutton1stplayer then
                 if (player.powerup == 5) == false then
-                    if smascharacterglobals.abilitySettings.rebelTrooperCanShootBlaster then
+                    if smasCharacterGlobals.abilitySettings.rebelTrooperCanShootBlaster then
                         costume.shootLaser1()
                     end
                 end
@@ -130,14 +130,14 @@ end
 
 function costume.onTick()
     if SaveData.toggleCostumeAbilities then
-        if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasfunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
+        if player:isOnGround() or player:isClimbing() then --Checks to see if the player is on the ground, is climbing, is not underwater (smasFunctions), the death timer is at least 0, the end state is none, or the mount is a clown car
             hasJumped = false
         elseif (not hasJumped) and player.keys.jump == KEYS_PRESSED and player.deathTimer == 0 and Level.endState() == 0 and player.mount == 0 and not Playur.underwater(player) then
-            if smascharacterglobals.abilitySettings.rebelTrooperCanDoubleJump then
+            if smasCharacterGlobals.abilitySettings.rebelTrooperCanDoubleJump then
                 hasJumped = true
                 player:mem(0x11C, FIELD_WORD, 10)
-                if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-                    Sound.playSFX(smascharacterglobals.soundSettings.rebelTrooperDoubleJumpSFX)
+                if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+                    Sound.playSFX(smasCharacterGlobals.soundSettings.rebelTrooperDoubleJumpSFX)
                 end
             end
         end
@@ -147,7 +147,7 @@ end
 function costume.onDraw()
     if SaveData.toggleCostumeAbilities then
         --Health system
-        if smascharacterglobals.abilitySettings.rebelTrooperCanUseCustomHurtSystem then
+        if smasCharacterGlobals.abilitySettings.rebelTrooperCanUseCustomHurtSystem then
             if plr.powerup <= 1 then
                 plr.powerup = 2
             end
@@ -158,7 +158,7 @@ function costume.onDraw()
                 player.forcedState = FORCEDSTATE_NONE
                 player:mem(0x140, FIELD_WORD, 150)
             end
-            if smashud.visible.customitembox == true then
+            if smasHud.visible.customitembox == true then
                 local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
                 local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
                 if characterhp <= 0 then
@@ -215,10 +215,10 @@ end
 
 function costume.hphit()
     if SaveData.toggleCostumeAbilities then
-        if smascharacterglobals.abilitySettings.rebelTrooperCanUseCustomHurtSystem then
+        if smasCharacterGlobals.abilitySettings.rebelTrooperCanUseCustomHurtSystem then
             if not player.hasStarman and not player.isMega then
                 local hurtsoundrng = rng.randomInt(1,9)
-                if smascharacterglobals.soundSettings.rebelTrooperCanUseHurtSFX then
+                if smasCharacterGlobals.soundSettings.rebelTrooperCanUseHurtSFX then
                     Sound.playSFX("toad/LEGOStarWars-RebelTrooper/hit/"..hurtsoundrng..".ogg")
                 end
                 hit = true
@@ -249,7 +249,7 @@ function costume.onCleanup(p)
     Defines.projectilespeedx = 7.1
     Defines.player_grav = 0.4
     
-    smashud.visible.itembox = true
+    smasHud.visible.itembox = true
     costume.abilitesenabled = false
 end
 

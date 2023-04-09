@@ -20,7 +20,7 @@ local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
 
 local starman = require("starman/star")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -549,7 +549,7 @@ local function findAnimation(p)
 end
 
 function costume.onStart()
-    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+    if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
         Audio.playSFX("costumes/mario/12-SMA2/mario-letsago.ogg")
     end
 end

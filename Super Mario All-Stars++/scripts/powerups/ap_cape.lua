@@ -14,7 +14,7 @@
 
 local ai = require("scripts/powerups/ap_cape_ai")
 local extrasounds = require("extrasounds")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local apt = {}
 

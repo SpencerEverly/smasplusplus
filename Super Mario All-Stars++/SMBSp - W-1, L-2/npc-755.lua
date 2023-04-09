@@ -183,7 +183,7 @@ function hammer.onTick()
         
         if configFile.usesfx then
             if hammerSoundObject == nil then
-                smasbooleans.musicMuted = true
+                smasBooleans.musicMuted = true
                 hammerSoundObject = Audio.SfxPlayObj(audioeffect, -1)
             end
         end
@@ -192,7 +192,7 @@ function hammer.onTick()
         
         if configFile.usesfx then
             if hammerSoundObject ~= nil then
-                smasbooleans.musicMuted = false
+                smasBooleans.musicMuted = false
                 hammerSoundObject:Stop()
                 hammerSoundObject = nil
             end

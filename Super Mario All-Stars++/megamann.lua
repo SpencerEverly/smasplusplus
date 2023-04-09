@@ -10,9 +10,9 @@ local particles = require("particles")
 local rng = require("rng")
 local panim = require("playeranim")
 local pm = require("playerManager")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 local barrelAI = require("npcs/ai/launchBarrel")
-local smasbooleans = require("smasbooleans")
+local smasBooleans = require("smasBooleans")
 
 --[[
 Things to fix:
@@ -1118,7 +1118,7 @@ function megaman.onInputUpdate()
                         p.powerup = 2;
                         menuPosition = 1;
                     end
-                    smasbooleans.toggleOffInventory = not smasbooleans.toggleOffInventory
+                    smasBooleans.toggleOffInventory = not smasBooleans.toggleOffInventory
                     inPause = not inPause
                 end
                 

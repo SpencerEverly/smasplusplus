@@ -7,7 +7,7 @@ if not Misc.inMarioChallenge() then
 end
 local Routine = require("routine")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local smashudsystem = require("smashudsystem")
+local smasHudSystem = require("smasHudSystem")
 
 extrasounds.active = false
 
@@ -139,7 +139,7 @@ function dependencies.onTick()
     if player.character == CHARACTER_NINJABOMBERMAN then
         Graphics.activateHud(true)
     end
-    if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+    if table.icontains(smasTables.__smb2Levels,Level.filename()) == true then
         if NPC.config[274].score == 11 then
             Sound.playSFX(147)
             NPC.config[274].score = 6

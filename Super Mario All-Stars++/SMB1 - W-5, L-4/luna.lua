@@ -9,17 +9,17 @@ function onEvent(eventName)
 end
 
 function onLoadSection0()
-    smasnoturnback.overrideSection = true
+    smasNoTurnBack.overrideSection = true
 end
 
 function onLoadSection1()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection2()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection3()
-    smasnoturnback.overrideSection = true
+    smasNoTurnBack.overrideSection = true
 end

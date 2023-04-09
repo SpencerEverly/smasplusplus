@@ -1,4 +1,4 @@
-local smasglobals = {}
+local smasGlobals = {}
 
 --***GLOBAL CONSTANTS***
 
@@ -173,4 +173,4 @@ _G.NPC_Globals = {
     scoreMultiplier = 0, --For upping the points the player recieves
 }
 
-return smasglobals
+return smasGlobals

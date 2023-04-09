@@ -113,7 +113,7 @@ do
     function pauseplus.open(submenu,option,opener,isSilent)
         if pauseplus.currentSubmenu == nil and not isSilent then
             playSFX(pauseplus.openSFX)
-            smasbooleans.toggleOffInventory = true
+            smasBooleans.toggleOffInventory = true
         end
 
         submenuExistanceCheck(submenu or "main")
@@ -141,7 +141,7 @@ do
     function pauseplus.close(isSilent)
         if pauseplus.currentSubmenu ~= nil and not isSilent then
             playSFX(pauseplus.closeSFX)
-            smasbooleans.toggleOffInventory = false
+            smasBooleans.toggleOffInventory = false
         end
         
         if not isOverworld then
@@ -811,7 +811,7 @@ do
             
             if count == 0 then
                 pauseplus.close()
-                smasbooleans.toggleOffInventory = false
+                smasBooleans.toggleOffInventory = false
             else
                 local entry = pauseplus.history[count]
 
@@ -898,7 +898,7 @@ do
 
             if optionObj.closeMenu then
                 pauseplus.close(true)
-                smasbooleans.toggleOffInventory = false
+                smasBooleans.toggleOffInventory = false
             end
 
 
@@ -997,7 +997,7 @@ end
 function pauseplus.onPause(eventObj,playerObj)
     eventObj.cancelled = true
 
-    if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) and not smasbooleans.mainMenuActive and not smasbooleans.disablePauseMenu and not SaveData.disableX2char then
+    if pauseplus.canPause and (isOverworld or (Level.winState() == 0 and playerObj.deathTimer == 0 and not playerObj:mem(0x13C,FIELD_BOOL))) and not smasBooleans.mainMenuActive and not smasBooleans.disablePauseMenu and not SaveData.disableX2char then
         pauseplus.open(nil,nil,playerObj)
     end
 end
@@ -1005,7 +1005,7 @@ end
 function pauseplus.onKeyboardPressDirect(keycode,repeated,character) -- for shift+P shortcut
     if not Misc.inEditor() or pauseplus.currentSubmenu ~= nil then return end
     
-    if not repeated and (keycode == VK_P) and Misc.GetKeyState(VK_RETURN) and pauseplus.canPause and not smasbooleans.mainMenuActive and not smasbooleans.disablePauseMenu and not SaveData.disableX2char then
+    if not repeated and (keycode == VK_P) and Misc.GetKeyState(VK_RETURN) and pauseplus.canPause and not smasBooleans.mainMenuActive and not smasBooleans.disablePauseMenu and not SaveData.disableX2char then
         pauseplus.open()
     end
 end

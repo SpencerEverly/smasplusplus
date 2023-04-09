@@ -18,7 +18,7 @@ local rng = require("rng")
 local pm = require("playerManager")
 local imagic = require("imagic")
 local defs = require("expandedDefines")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 
 local megashroom = require("NPCs/AI/megashroom")
 
@@ -720,16 +720,16 @@ function samus.initCharacter()
     initDataStorage()
     
     -- CLEANUP NOTE: This is not safe if a level makes it's own use of activateHud
-    smashud.visible.keys = true
-    smashud.visible.bombs = true
-    smashud.visible.coins = true
-    smashud.visible.score = true
-    smashud.visible.lives = true
-    smashud.visible.stars = true
-    smashud.visible.starcoins = false
-    smashud.visible.timer = true
-    smashud.visible.levelname = true
-    smashud.visible.overworldPlayer = true
+    smasHud.visible.keys = true
+    smasHud.visible.bombs = true
+    smasHud.visible.coins = true
+    smasHud.visible.score = true
+    smasHud.visible.lives = true
+    smasHud.visible.stars = true
+    smasHud.visible.starcoins = false
+    smasHud.visible.timer = true
+    smasHud.visible.levelname = true
+    smasHud.visible.overworldPlayer = true
     
     -- CLEANUP NOTE: This is not quite safe in various cases
     Defines.player_link_shieldEnabled = false
@@ -747,16 +747,16 @@ end
 function samus.cleanupCharacter()
     initDataStorage()
     
-    smashud.visible.keys = true
-    smashud.visible.bombs = true
-    smashud.visible.coins = true
-    smashud.visible.score = true
-    --smashud.visible.lives = false
-    smashud.visible.stars = true
-    smashud.visible.starcoins = false
-    smashud.visible.timer = true
-    smashud.visible.levelname = true
-    smashud.visible.overworldPlayer = true
+    smasHud.visible.keys = true
+    smasHud.visible.bombs = true
+    smasHud.visible.coins = true
+    smasHud.visible.score = true
+    --smasHud.visible.lives = false
+    smasHud.visible.stars = true
+    smasHud.visible.starcoins = false
+    smasHud.visible.timer = true
+    smasHud.visible.levelname = true
+    smasHud.visible.overworldPlayer = true
     
     -- CLEANUP NOTE: This is not quite safe in various cases
     Defines.player_link_shieldEnabled = true

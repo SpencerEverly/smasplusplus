@@ -15,11 +15,11 @@ local pauseplus = require("pauseplus")
 local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
-local smashudsystem = require("smashudsystem")
-local smascharacterinfo = require("smascharacterinfo")
+local smasHudSystem = require("smasHudSystem")
+local smasCharacterInfo = require("smasCharacterInfo")
 local extrasounds = require("extrasounds")
 local sprite = require("base/sprite")
-local smascharacterintros = require("smascharacterintros")
+local smasCharacterIntros = require("smasCharacterIntros")
 local exitFadeActive = false
 local exitFadeActiveDone = false
 local exitFadeOut = 0
@@ -120,7 +120,7 @@ local function smb1hardmodetoggle()
     else
         SaveData.SMB1HardModeActivated = false
     end
-    if table.icontains(smastables.__smb1Levels,Level.filename()) == true then
+    if table.icontains(smasTables.__smb1Levels,Level.filename()) == true then
         for k,v in NPC.iterate{89,23,27,24,173,175,176,177,172,174,612} do
             if SaveData.SMB1HardModeActivated == true then
                 if v.id == 89 or v.id == 27 then
@@ -166,31 +166,31 @@ local function changeresolution()
     if screenModes == RESOLUTION_FULL then
         SaveData.resolution = "fullscreen"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     elseif screenModes == RESOLUTION_WIDE then
         SaveData.resolution = "widescreen"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     elseif screenModes == RESOLUTION_ULTRAWIDE then
         SaveData.resolution = "ultrawide"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     elseif screenModes == RESOLUTION_STEAMDECK then
         SaveData.resolution = "steamdeck"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     elseif screenModes == RESOLUTION_NES then
         SaveData.resolution = "nes"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     elseif screenModes == RESOLUTION_GBA then
         SaveData.resolution = "gba"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     --[[elseif screenModes == RESOLUTION_THREEDS then
         SaveData.resolution = "3ds"
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()]]
+        smasResolutions.changeResolution()]]
     end
 end
 
@@ -199,12 +199,12 @@ local function changeresolutionborder()
         Sound.playSFX("resolutionborder-disable.ogg")
         SaveData.borderEnabled = false
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     else
         Sound.playSFX("resolutionborder-enable.ogg")
         SaveData.borderEnabled = true
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     end
 end
 
@@ -277,12 +277,12 @@ local function changeletterbox()
         Sound.playSFX("letterbox-disable.ogg")
         SaveData.letterbox = false
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     else
         Sound.playSFX("letterbox-enable.ogg")
         SaveData.letterbox = true
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     end
 end
 
@@ -708,7 +708,7 @@ local function costumechangeright()
     end
     Sound.playSFX("charcost_costume.ogg")
     Sound.playSFX("charcost-selected.ogg")
-    smascharacterinfo.setCostumeSpecifics()
+    smasCharacterInfo.setCostumeSpecifics()
 end
 
 local function costumechangeleft()
@@ -736,23 +736,23 @@ local function costumechangeleft()
     end
     Sound.playSFX("charcost_costume.ogg")
     Sound.playSFX("charcost-selected.ogg")
-    smascharacterinfo.setCostumeSpecifics()
+    smasCharacterInfo.setCostumeSpecifics()
 end
 
 local function enable2player()
     Sound.playSFX(1001)
-    Cheats.trigger("2player")
+    Playur.activate2ndPlayer(false)
 end
 
 local function disable2player()
     Sound.playSFX(1001)
-    mem(0x00B2595E, FIELD_WORD, 1)
+    Playur.activate1stPlayer(false)
 end
 
 function pausemenu2.onDraw()
-    if smasbooleans.musicMuted and not smasbooleans.overrideMusicVolume then
+    if smasBooleans.musicMuted and not smasBooleans.overrideMusicVolume then
         Audio.MusicVolume(0)
-    elseif not smasbooleans.musicMuted and not smasbooleans.overrideMusicVolume then
+    elseif not smasBooleans.musicMuted and not smasBooleans.overrideMusicVolume then
         Audio.MusicVolume(pauseplus.getSelectionValue("soundsettings","Music Volume"))
     end
     GameData.____currentMusicVolume = pauseplus.getSelectionValue("soundsettings","Music Volume")
@@ -1230,7 +1230,7 @@ function battlemodenewstage()
     Misc.unpause()
     exitFadeActive = false
     exitFadeActiveDone = true
-    Level.load(smastables.__classicBattleModeLevels[rng.randomInt(1,#smastables.__classicBattleModeLevels)], nil, nil)
+    Level.load(smasTables.__classicBattleModeLevels[rng.randomInt(1,#smasTables.__classicBattleModeLevels)], nil, nil)
 end
 
 function battlemodeexit()
@@ -1257,7 +1257,7 @@ function rushmodenewstage()
     GameData.rushModeWon = false
     exitFadeActive = false
     exitFadeActiveDone = true
-    Level.load(smastables.__allMandatoryLevels[rng.randomInt(1,#smastables.__allMandatoryLevels)], nil, nil)
+    Level.load(smasTables.__allMandatoryLevels[rng.randomInt(1,#smasTables.__allMandatoryLevels)], nil, nil)
 end
 
 function returntolastlevel()
@@ -1284,7 +1284,7 @@ local function exitlevel2()
     Misc.unpause()
     exitFadeActive = false
     exitFadeActiveDone = true
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     Level.load("map.lvlx")
 end
 
@@ -1354,7 +1354,7 @@ function restartlevel()
     Misc.unpause()
     exitFadeActive = false
     exitFadeActiveDone = true
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     Level.load(Level.filename())
 end
 
@@ -1521,7 +1521,7 @@ function pauseSpecifics()
     pauseplus.backgroundDarkness = 0
     pauseplus.createSubmenu("main",{headerText = "<size 1.5>Paused.</size>"})
     pauseplus.createOption("main",{text = "Continue",closeMenu = true,description = "Continue the game.",action = function() Sound.playSFX("pausemenu-closed.ogg") end})
-    if smasbooleans.classicBattleModeActive then
+    if smasBooleans.classicBattleModeActive then
         pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in Classic Battle Mode. The stage will be picked at random!",action = function() Routine.run(battlemodenewstage) end})
         pauseplus.createOption("main",{text = "Restart this Stage",closeMenu = true,description = "Restarts the same stage over. Useful if you're stuck somewhere and need to restart the match.",action = function() Routine.run(restartlevel) end})
         pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
@@ -1537,7 +1537,7 @@ function pauseSpecifics()
         pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
         pauseplus.createOption("main",{text = "Exit Rush Mode",closeMenu = true,description = "To exit Rush Mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
     end
-    if (not smasbooleans.classicBattleModeActive) and (GameData.rushModeActive == nil or not GameData.rushModeActive) and (not Misc.inMarioChallenge()) then
+    if (not smasBooleans.classicBattleModeActive) and (GameData.rushModeActive == nil or not GameData.rushModeActive) and (not Misc.inMarioChallenge()) then
         pauseplus.createSubmenu("editormenu",{headerText = "<size 1.5>Editor Menu</size>"})
         if Misc.inEditor() then
             pauseplus.createOption("main",{text = "Editor Menu",goToSubmenu = "editormenu",description = "Testing 1-2-3! If testing the game, this menu is for you!"})
@@ -1621,7 +1621,7 @@ function pauseSpecifics()
         
         --Character Menu
         if not SaveData.disableX2char then
-            pauseplus.createOption("charactermenu",{text = "Change Character",closeMenu = true,description = "Switch the player's character to anything of your choice!", action =  function() smascharacterchanger.startChanger() end})
+            pauseplus.createOption("charactermenu",{text = "Change Character",closeMenu = true,description = "Switch the player's character to anything of your choice!", action =  function() smasCharacterChanger.startChanger() end})
             pauseplus.createSubmenu("costumeoptions",{headerText = "<size 1.5>Costume Specific Options</size>"})
             pauseplus.createOption("charactermenu",{text = "Costume Specific Options",goToSubmenu = "costumeoptions",description = "Change settings regarding the costume that is currently being worn."})
             if (Level.filename() == "map.lvlx") == false then

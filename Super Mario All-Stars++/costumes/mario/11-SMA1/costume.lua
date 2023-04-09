@@ -1,7 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smasfunctions = require("smasfunctions")
-local smasextraactions = require("smasextraactions")
+local smasFunctions = require("smasFunctions")
+local smasExtraActions = require("smasExtraActions")
 
 local costume = {}
 
@@ -51,12 +51,12 @@ function costume.onInit(p)
         costume.loadedSounds = true
     end
     registerEvent(costume,"onTick")
-    smasextraactions.enableLongJump = true
-    smasextraactions.longJumpAnimationFrames[1] = {32,33,34,35} --SMA1 Defaults
+    smasExtraActions.enableLongJump = true
+    smasExtraActions.longJumpAnimationFrames[1] = {32,33,34,35} --SMA1 Defaults
     for i = 2,7 do
-        smasextraactions.longJumpAnimationFrames[i] = {32,33,34,35}
+        smasExtraActions.longJumpAnimationFrames[i] = {32,33,34,35}
     end
-    smasextraactions.longJumpAnimationMaxFrames = 4
+    smasExtraActions.longJumpAnimationMaxFrames = 4
 end
 
 function costume.onTick()
@@ -68,22 +68,22 @@ function costume.onTick()
     if player:mem(0x26,FIELD_WORD) == 1 then
         Sound.playSFX("mario/11-SMA1/mario-yah.ogg")
     end
-    if smasextraactions.isLongJumpingFirstFrame then
+    if smasExtraActions.isLongJumpingFirstFrame then
         Sound.playSFX("mario/11-SMA1/mario-yahoo.ogg")
     end
-    if smasextraactions.longJumpTimer == smasextraactions.longJumpWhenToStart then
+    if smasExtraActions.longJumpTimer == smasExtraActions.longJumpWhenToStart then
         Sound.playSFX("mario/11-SMA1/mario-hummmm.ogg")
     end
 end
 
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
-    smasextraactions.enableLongJump = false
-    smasextraactions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
+    smasExtraActions.enableLongJump = false
+    smasExtraActions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
     for i = 2,7 do
-        smasextraactions.longJumpAnimationFrames[i] = {4}
+        smasExtraActions.longJumpAnimationFrames[i] = {4}
     end
-    smasextraactions.longJumpAnimationMaxFrames = 1
+    smasExtraActions.longJumpAnimationMaxFrames = 1
 end
 
 return costume

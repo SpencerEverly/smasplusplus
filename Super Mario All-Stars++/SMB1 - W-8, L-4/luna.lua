@@ -30,7 +30,7 @@ function onEvent(eventName)
     if eventName == ("Pigeon Cutscene") then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                smasbooleans.toggleOffInventory = true
+                smasBooleans.toggleOffInventory = true
             end
         end
         pauseplus.canPause = false
@@ -41,7 +41,7 @@ function onEvent(eventName)
     if eventName == ("Pigeon Cutscene 5") then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                smasbooleans.toggleOffInventory = false
+                smasBooleans.toggleOffInventory = false
             end
         end
         pauseplus.canPause = true
@@ -54,7 +54,7 @@ function onEvent(eventName)
         Sound.playSFX("is-the-pool-clean.ogg")
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                smasbooleans.toggleOffInventory = true
+                smasBooleans.toggleOffInventory = true
             end
         end
         pauseplus.canPause = false
@@ -66,7 +66,7 @@ function onEvent(eventName)
     if eventName == ("Pigeon Cutscene Sequel 3") then
         if not SaveData.disableX2char then
             if SaveData.accessibilityInventory then
-                smasbooleans.toggleOffInventory = false
+                smasBooleans.toggleOffInventory = false
             end
         end
         pauseplus.canPause = true
@@ -74,49 +74,49 @@ function onEvent(eventName)
 end
 
 function onLoadSection0()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection1()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection2()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection3()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection4()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection5()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection6()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection7()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection8()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection12()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end
 
 function onLoadSection13()
-    smasnoturnback.overrideSection = true
+    smasNoTurnBack.overrideSection = true
 end
 
 function onLoadSection14()
-    smasnoturnback.overrideSection = false
+    smasNoTurnBack.overrideSection = false
 end

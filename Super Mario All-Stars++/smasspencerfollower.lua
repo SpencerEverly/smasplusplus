@@ -1,14 +1,14 @@
-local smasspencerfollower = {}
+local smasSpencerFollower = {}
 
-if table.icontains(smastables.__smbspencerLevels,Level.filename()) == false then return end
+if table.icontains(smasTables.__smbspencerLevels,Level.filename()) == false then return end
 
 local playerManager = require("playerManager")
 
-function smasspencerfollower.onInitAPI()
-    registerEvent(smasspencerfollower,"onStart")
+function smasSpencerFollower.onInitAPI()
+    registerEvent(smasSpencerFollower,"onStart")
 end
 
-function smasspencerfollower.onStart()
+function smasSpencerFollower.onStart()
     if not SaveData.disableX2char then
         if not (SaveData.currentCostume == "00-SPENCEREVERLY") then
             if player.direction == 1 then
@@ -20,4 +20,4 @@ function smasspencerfollower.onStart()
     end
 end
 
-return smasspencerfollower
+return smasSpencerFollower

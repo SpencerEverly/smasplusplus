@@ -4,10 +4,10 @@ local extrasounds = require("extrasounds")
 local Routine = require("routine")
 local rng = require("base/rng")
 local customCamera = require("customCamera")
-local smasbooleans = require("smasbooleans")
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
-local smasstarsystem = require("smasstarsystem")
+local smasBooleans = require("smasBooleans")
+local smasFunctions
+pcall(function() smasFunctions = require("smasFunctions") end)
+local smasStarSystem = require("smasStarSystem")
 
 local roulettestar = {}
 
@@ -111,9 +111,9 @@ function starget(v)
     Sound.muteMusic(-1)
     Audio.SeizeStream(-1)
     Audio.MusicStop()
-    smasbooleans.musicMuted = true
-    smasbooleans.targetPlayers = false
-    smasbooleans.overrideTargets = true
+    smasBooleans.musicMuted = true
+    smasBooleans.targetPlayers = false
+    smasBooleans.overrideTargets = true
     local currentSection = Section(plr.section)
     newboundary = plr.sectionObj.boundary
     newboundary.right = newboundary.right + 350
@@ -121,13 +121,13 @@ function starget(v)
     if SaveData.currentCostume == "MODERN2" then
         Routine.wait(5.2, true)
         if v.data._settings.activateFadeIn then
-            smasstarsystem.fadeInActive = true
+            smasStarSystem.fadeInActive = true
         end
         Routine.wait(2, true)
     else
         Routine.wait(3, true)
         if v.data._settings.activateFadeIn then
-            smasstarsystem.fadeInActive = true
+            smasStarSystem.fadeInActive = true
         end
         Routine.wait(2, true)
     end
@@ -257,7 +257,7 @@ function roulettestar.onPlayerKill(evt)
 end
 
 function roulettestar.onExit()
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     GameData.winStateActive = false
     if Level.endState() == LEVEL_END_STATE_ROULETTE then
         GameData.smwMap.winType = 6

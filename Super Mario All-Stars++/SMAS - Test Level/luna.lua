@@ -2,13 +2,18 @@ local warpTransition = require("warpTransition")
 local textplus = require("textplus")
 local littleDialogue = require("littleDialogue")
 local pausemenu = require("pausemenu2")
+
+if SaveData.disableX2char then
+    pausemenu13 = require("pausemenu13/pausemenu13")
+end
+
 local pauseplus = require("pauseplus")
 local debugbox = require("debugbox")
 local extrasounds = require("extrasounds")
-local smashudsystem = require("smashudsystem")
+local smasHudSystem = require("smasHudSystem")
 
 littleDialogue.defaultStyleName = "smbx13"
-smasbooleans.compatibilityMode13Mode = false
+smasBooleans.compatibilityMode13Mode = false
 
 local warps
 local effect

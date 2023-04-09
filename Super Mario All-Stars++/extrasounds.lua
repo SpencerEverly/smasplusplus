@@ -437,11 +437,11 @@ function extrasounds.playSFX(name, volume, loops, delay) --If you want to play a
     
     if not eventObj.cancelled then
         if Sound.isExtraSoundsActive() then
-            if extrasounds.sounds[name] and not smastables.stockSoundNumbersInOrder[name] then
+            if extrasounds.sounds[name] and not smasTables.stockSoundNumbersInOrder[name] then
                 if not extrasounds.sounds[name].muted then
                     SFX.play(extrasounds.sounds[name].sfx, volume, loops, delay)
                 end
-            elseif smastables.stockSoundNumbersInOrder[name] then
+            elseif smasTables.stockSoundNumbersInOrder[name] then
                 SFX.play(name, volume, loops, delay)
             elseif name then
                 local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list

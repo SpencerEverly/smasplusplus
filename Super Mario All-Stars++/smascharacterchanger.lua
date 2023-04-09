@@ -1,18 +1,18 @@
---smascharacterchanger.lua (v1.0)
+--smasCharacterChanger.lua (v1.0)
 --By Spencer Everly
 
-local smascharacterchanger = {}
+local smasCharacterChanger = {}
 
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local playerManager = require("playerManager")
 local textplus = require("textplus")
 local smbx13font = textplus.loadFont("littleDialogue/font/smilebasic.ini") --The font for the changer menu.
 
-function smascharacterchanger.onInitAPI()
-    registerEvent(smascharacterchanger,"onDraw")
-    registerEvent(smascharacterchanger,"onInputUpdate")
-    registerEvent(smascharacterchanger,"onKeyboardPressDirect")
+function smasCharacterChanger.onInitAPI()
+    registerEvent(smasCharacterChanger,"onDraw")
+    registerEvent(smasCharacterChanger,"onInputUpdate")
+    registerEvent(smasCharacterChanger,"onKeyboardPressDirect")
 end
 
 if SaveData.currentCharacter == nil then
@@ -24,22 +24,22 @@ if SaveData.currentCharacter2 == nil then
     end
 end
 
-smascharacterchanger.tvImage = Graphics.loadImageResolved("graphics/characterchangermenu/tv.png") --The image for the TV.
-smascharacterchanger.scrollSFX = "_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg"
-smascharacterchanger.stopSFX = "_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg"
-smascharacterchanger.turnOnSFX = "_OST/_Sound Effects/characterchangermenu/turn-on-tv.ogg"
-smascharacterchanger.moveSFX = 26 --Sound effects used for the menu
-smascharacterchanger.menuActive = false --True if the menu is active.
-smascharacterchanger.animationActive = false --True if the animation is active.
-smascharacterchanger.animationTimer = 0 --Timer for the animation, both for the start and end sequences.
-smascharacterchanger.tvScrollNumber = -600 --This is used for the TV animation sequence.
-smascharacterchanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
-smascharacterchanger.selectionNumber = 1 --For scrolling left and right
-smascharacterchanger.selectionNumberUpDown = 1 --For scrolling up and down
-smascharacterchanger.oldIniFile = SysManager.loadDefaultCharacterIni() --Used for reverting to the old ini file when exiting the menu without changing to a character
-smascharacterchanger.iniFile = SysManager.loadDefaultCharacterIni() --Used to update the ini format when showing the character on screen
-smascharacterchanger.characterPreviewImagesCostume = {} --Will be used to add character preview images throughout the menu
-smascharacterchanger.characterPreviewImagesCharacter = {} --Will be used to add character preview images throughout the menu
+smasCharacterChanger.tvImage = Graphics.loadImageResolved("graphics/characterchangermenu/tv.png") --The image for the TV.
+smasCharacterChanger.scrollSFX = "_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg"
+smasCharacterChanger.stopSFX = "_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg"
+smasCharacterChanger.turnOnSFX = "_OST/_Sound Effects/characterchangermenu/turn-on-tv.ogg"
+smasCharacterChanger.moveSFX = 26 --Sound effects used for the menu
+smasCharacterChanger.menuActive = false --True if the menu is active.
+smasCharacterChanger.animationActive = false --True if the animation is active.
+smasCharacterChanger.animationTimer = 0 --Timer for the animation, both for the start and end sequences.
+smasCharacterChanger.tvScrollNumber = -600 --This is used for the TV animation sequence.
+smasCharacterChanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
+smasCharacterChanger.selectionNumber = 1 --For scrolling left and right
+smasCharacterChanger.selectionNumberUpDown = 1 --For scrolling up and down
+smasCharacterChanger.oldIniFile = SysManager.loadDefaultCharacterIni() --Used for reverting to the old ini file when exiting the menu without changing to a character
+smasCharacterChanger.iniFile = SysManager.loadDefaultCharacterIni() --Used to update the ini format when showing the character on screen
+smasCharacterChanger.characterPreviewImagesCostume = {} --Will be used to add character preview images throughout the menu
+smasCharacterChanger.characterPreviewImagesCharacter = {} --Will be used to add character preview images throughout the menu
 
 local colorChange1 = 0
 local colorChange2 = 0
@@ -48,12 +48,12 @@ local colorChange3 = 0
 local reserveChange = 0
 
 --These tables below will be used for the system.
-smascharacterchanger.names = {}
-smascharacterchanger.namesGame = {}
-smascharacterchanger.namesCharacter = {}
-smascharacterchanger.namesCostume = {}
+smasCharacterChanger.names = {}
+smasCharacterChanger.namesGame = {}
+smasCharacterChanger.namesCharacter = {}
+smasCharacterChanger.namesCostume = {}
 
-function smascharacterchanger.addCharacter(name,game,character,costume) --Adds a character to the tables above. Example: smascharacterchanger.addCharacter("My Character","Game Information",CHARACTER_NUMBERGOESHERE,"COSTUMEGOESHERE, else nil")
+function smasCharacterChanger.addCharacter(name,game,character,costume) --Adds a character to the tables above. Example: smasCharacterChanger.addCharacter("My Character","Game Information",CHARACTER_NUMBERGOESHERE,"COSTUMEGOESHERE, else nil")
     if name == nil then
         error("You must add a name as a string to this character.")
         return
@@ -71,13 +71,13 @@ function smascharacterchanger.addCharacter(name,game,character,costume) --Adds a
         return
     end
     
-    table.insert(smascharacterchanger.names, name)
-    table.insert(smascharacterchanger.namesGame, {game})
-    table.insert(smascharacterchanger.namesCharacter, character)
-    table.insert(smascharacterchanger.namesCostume, {costume})
+    table.insert(smasCharacterChanger.names, name)
+    table.insert(smasCharacterChanger.namesGame, {game})
+    table.insert(smasCharacterChanger.namesCharacter, character)
+    table.insert(smasCharacterChanger.namesCostume, {costume})
 end
 
-function smascharacterchanger.addVariant(nameToFind,game,costume) --Adds a variant to the character table. Example: smascharacterchanger.addVariant("My Character","Game Information of the 2nd character","COSTUMEGOESHERE of the 2nd character variant")
+function smasCharacterChanger.addVariant(nameToFind,game,costume) --Adds a variant to the character table. Example: smasCharacterChanger.addVariant("My Character","Game Information of the 2nd character","COSTUMEGOESHERE of the 2nd character variant")
     if nameToFind == nil then
         error("You must add a name to find who to add this to.")
         return
@@ -91,22 +91,22 @@ function smascharacterchanger.addVariant(nameToFind,game,costume) --Adds a varia
         return
     end
     if nameToFind ~= nil then --If not nil...
-        local foundName = table.ifind(smascharacterchanger.names, nameToFind) --The name ID will then be added here.
+        local foundName = table.ifind(smasCharacterChanger.names, nameToFind) --The name ID will then be added here.
         if foundName == nil then --But if nil...
             error("Name wasn't found! You need to specify a valid name.") --Error and return it
             return
         else --Or if not...
-            table.insert(smascharacterchanger.namesGame[foundName], game) --Add the info to the tables
-            table.insert(smascharacterchanger.namesCostume[foundName], costume)
+            table.insert(smasCharacterChanger.namesGame[foundName], game) --Add the info to the tables
+            table.insert(smasCharacterChanger.namesCostume[foundName], costume)
         end
     end
 end
 
-function smascharacterchanger.drawPreviewImage() --Simple function to draw images for the current character added to the roster.
-    local numberOfCostumes = #smascharacterchanger.namesCostume
+function smasCharacterChanger.drawPreviewImage() --Simple function to draw images for the current character added to the roster.
+    local numberOfCostumes = #smasCharacterChanger.namesCostume
     local tempImg
-    if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown] ~= "nil" then
-        pcall(function() tempImg = Graphics.loadImageResolved("costumes/"..playerManager.getName(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]).."/"..smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown].."/character-preview.png") end)
+    if smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown] ~= "nil" then
+        pcall(function() tempImg = Graphics.loadImageResolved("costumes/"..playerManager.getName(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber]).."/"..smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown].."/character-preview.png") end)
     else
         pcall(function() tempImg = Graphics.loadImageResolved("costumes/character-preview.png") end) --Temporary solution for now
     end
@@ -129,55 +129,55 @@ local function textPrintCentered(t, x, y, color) --Taken from the input config m
     textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = -1.7, font = smbx13font}
 end
 
-function smascharacterchanger.startChanger() --This is the command that starts the menu up. Use this to enable the menu.
-    smascharacterchanger.menuActive = true
-    smascharacterchanger.animationActive = true
+function smasCharacterChanger.startChanger() --This is the command that starts the menu up. Use this to enable the menu.
+    smasCharacterChanger.menuActive = true
+    smasCharacterChanger.animationActive = true
     console:println("Character changer menu starting...")
 end
 
-function smascharacterchanger.stopChanger() --This is the command that stops the menu. Use this to disable the menu.
+function smasCharacterChanger.stopChanger() --This is the command that stops the menu. Use this to disable the menu.
     console:println("Character changer menu stopping...")
-    smascharacterchanger.menuActive = false
+    smasCharacterChanger.menuActive = false
 end
 
-function smascharacterchanger.startupChanger() --The animation that starts the menu up.
+function smasCharacterChanger.startupChanger() --The animation that starts the menu up.
     Misc.pause()
     Sound.muteMusic(-1)
     if pauseplus then
         pauseplus.canPause = false
     end
     if SaveData.currentCostume ~= "N/A" then
-        smascharacterchanger.oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
+        smasCharacterChanger.oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
     else
-        smascharacterchanger.oldIniFile = SysManager.loadDefaultCharacterIni()
+        smasCharacterChanger.oldIniFile = SysManager.loadDefaultCharacterIni()
     end
-    soundObject1 = SFX.play(smascharacterchanger.scrollSFX)
+    soundObject1 = SFX.play(smasCharacterChanger.scrollSFX)
     Routine.waitFrames(10, true)
     Misc.pause()
-    smasbooleans.toggleOffInventory = true
+    smasBooleans.toggleOffInventory = true
     Routine.waitFrames(54, true)
     if soundObject1 ~= nil then
         soundObject1:FadeOut(10)
     end
-    SFX.play(smascharacterchanger.stopSFX)
+    SFX.play(smasCharacterChanger.stopSFX)
     Routine.waitFrames(14, true)
-    SFX.play(smascharacterchanger.turnOnSFX)
+    SFX.play(smasCharacterChanger.turnOnSFX)
     Routine.waitFrames(14, true)
-    smascharacterchanger.animationActive = false
-    menuBGMObject = SFX.play(smascharacterchanger.menuBGM, Audio.MusicVolume() / 100, 0)
+    smasCharacterChanger.animationActive = false
+    menuBGMObject = SFX.play(smasCharacterChanger.menuBGM, Audio.MusicVolume() / 100, 0)
     started = true
 end
 
-function smascharacterchanger.shutdownChanger() --The animation that shuts the menu down.
+function smasCharacterChanger.shutdownChanger() --The animation that shuts the menu down.
     started = false
     ending = true
-    smascharacterchanger.animationActive = true
+    smasCharacterChanger.animationActive = true
     Sound.playSFX("menu/dialog-confirm.ogg")
     Routine.waitFrames(35, true)
-    smascharacterchanger.selectionNumberUpDown = 1
+    smasCharacterChanger.selectionNumberUpDown = 1
     Misc.unpause()
     if changed then
-        smascharacterinfo.setCostumeSpecifics()
+        smasCharacterInfo.setCostumeSpecifics()
         changed = false
     end
     Sound.loadCostumeSounds()
@@ -186,12 +186,12 @@ function smascharacterchanger.shutdownChanger() --The animation that shuts the m
     if pauseplus then
         pauseplus.canPause = true
     end
-    smasbooleans.toggleOffInventory = false
-    smascharacterchanger.animationActive = false
-    smascharacterchanger.tvScrollNumber = -600
-    smascharacterchanger.animationTimer = 0
+    smasBooleans.toggleOffInventory = false
+    smasCharacterChanger.animationActive = false
+    smasCharacterChanger.tvScrollNumber = -600
+    smasCharacterChanger.animationTimer = 0
     ending = false
-    if smasbooleans.mainMenuActive then
+    if smasBooleans.mainMenuActive then
         optionsMenu1()
     end
 end
@@ -199,61 +199,61 @@ end
 local chars = playerManager.getCharacters()
 local selectionAutoTimer = 0
 
-function smascharacterchanger.onInputUpdate()
-    if smascharacterchanger.menuActive and started then
+function smasCharacterChanger.onInputUpdate()
+    if smasCharacterChanger.menuActive and started then
         if player.keys.run == KEYS_PRESSED then
-            --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smascharacterchanger.oldIniFile)
-            smascharacterchanger.menuActive = false
+            --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smasCharacterChanger.oldIniFile)
+            smasCharacterChanger.menuActive = false
         end
         if player.keys.up == KEYS_PRESSED then
-            Sound.playSFX(smascharacterchanger.moveSFX)
-            smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown + 1
-            if smascharacterchanger.selectionNumberUpDown > #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber] then
-                smascharacterchanger.selectionNumberUpDown = 1
+            Sound.playSFX(smasCharacterChanger.moveSFX)
+            smasCharacterChanger.selectionNumberUpDown = smasCharacterChanger.selectionNumberUpDown + 1
+            if smasCharacterChanger.selectionNumberUpDown > #smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber] then
+                smasCharacterChanger.selectionNumberUpDown = 1
             end
         elseif player.keys.down == KEYS_PRESSED then
-            Sound.playSFX(smascharacterchanger.moveSFX)
-            smascharacterchanger.selectionNumberUpDown = smascharacterchanger.selectionNumberUpDown - 1
-            if smascharacterchanger.selectionNumberUpDown < 1 then
-                smascharacterchanger.selectionNumberUpDown = #smascharacterchanger.namesGame[smascharacterchanger.selectionNumber]
+            Sound.playSFX(smasCharacterChanger.moveSFX)
+            smasCharacterChanger.selectionNumberUpDown = smasCharacterChanger.selectionNumberUpDown - 1
+            if smasCharacterChanger.selectionNumberUpDown < 1 then
+                smasCharacterChanger.selectionNumberUpDown = #smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber]
             end
         end
         if player.keys.left == KEYS_PRESSED then
-            Sound.playSFX(smascharacterchanger.moveSFX)
-            smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
-            --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smascharacterchanger.iniFile)
-            smascharacterchanger.selectionNumberUpDown = 1
+            Sound.playSFX(smasCharacterChanger.moveSFX)
+            smasCharacterChanger.selectionNumber = smasCharacterChanger.selectionNumber - 1
+            --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smasCharacterChanger.iniFile)
+            smasCharacterChanger.selectionNumberUpDown = 1
         elseif player.keys.right == KEYS_PRESSED then
-            Sound.playSFX(smascharacterchanger.moveSFX)
-            smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
-            --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smascharacterchanger.iniFile)
-            smascharacterchanger.selectionNumberUpDown = 1
+            Sound.playSFX(smasCharacterChanger.moveSFX)
+            smasCharacterChanger.selectionNumber = smasCharacterChanger.selectionNumber + 1
+            --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smasCharacterChanger.iniFile)
+            smasCharacterChanger.selectionNumberUpDown = 1
         end
         
         if player.keys.jump == KEYS_PRESSED then
-            --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smascharacterchanger.oldIniFile)
+            --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smasCharacterChanger.oldIniFile)
             Sound.playSFX("charcost_costume.ogg")
             Sound.playSFX("charcost-selected.ogg")
             
             
             
-            if smascharacterchanger.selectionNumber then
-                local charac = smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber]
-                if smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
-                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
-                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], smascharacterchanger.namesCostume[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], false)
+            if smasCharacterChanger.selectionNumber then
+                local charac = smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber]
+                if smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
+                    player:transform(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], false)
+                    player.setCostume(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], false)
                 else
-                    player:transform(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], false)
-                    player.setCostume(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber], nil, false)
+                    player:transform(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], false)
+                    player.setCostume(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], nil, false)
                     if SMBX_VERSION == VER_SEE_MOD then
-                        Misc.testModeSetPlayerSetting(smascharacterchanger.namesCharacter[smascharacterchanger.selectionNumber])
+                        Misc.testModeSetPlayerSetting(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber])
                     end
                 end
                 changed = true
                 if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
                     player.reservePowerup = SaveData.reserveBoxItem[1]
                 end
-                smascharacterchanger.menuActive = false
+                smasCharacterChanger.menuActive = false
             end
             
             
@@ -262,31 +262,31 @@ function smascharacterchanger.onInputUpdate()
     end
 end
 
-function smascharacterchanger.onDraw()
+function smasCharacterChanger.onDraw()
     SaveData.currentCharacter = player.character
     if Player.count() == 2 then
         SaveData.currentCharacter2 = player2.character
     end
     
     if SaveData.currentCostume ~= "N/A" then
-        pcall(function() smascharacterchanger.iniFile = Misc.episodePath().."costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini" end)
+        pcall(function() smasCharacterChanger.iniFile = Misc.episodePath().."costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini" end)
     else
-        pcall(function() smascharacterchanger.iniFile = SysManager.loadDefaultCharacterIni() end)
+        pcall(function() smasCharacterChanger.iniFile = SysManager.loadDefaultCharacterIni() end)
     end
     
-    if smascharacterchanger.menuActive then
-        if smascharacterchanger.animationActive then
-            smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1
-            if smascharacterchanger.animationTimer == 1 then
-                Routine.run(smascharacterchanger.startupChanger)
+    if smasCharacterChanger.menuActive then
+        if smasCharacterChanger.animationActive then
+            smasCharacterChanger.animationTimer = smasCharacterChanger.animationTimer + 1
+            if smasCharacterChanger.animationTimer == 1 then
+                Routine.run(smasCharacterChanger.startupChanger)
             end
-            if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 64 then
-                smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber + 9.2
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -1.5)
+            if smasCharacterChanger.animationTimer >= 1 and smasCharacterChanger.animationTimer <= 64 then
+                smasCharacterChanger.tvScrollNumber = smasCharacterChanger.tvScrollNumber + 9.2
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, -1.5)
             end
-            if smascharacterchanger.animationTimer >= 65 then
-                smascharacterchanger.tvScrollNumber = 0
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
+            if smasCharacterChanger.animationTimer >= 65 then
+                smasCharacterChanger.tvScrollNumber = 0
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, -1.5)
             end
         end
         if started then
@@ -298,25 +298,25 @@ function smascharacterchanger.onDraw()
             end
             if selectionAutoTimer >= 25 then
                 if player.keys.left == KEYS_DOWN then
-                    Sound.playSFX(smascharacterchanger.moveSFX)
-                    smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber - 1
-                    smascharacterchanger.selectionNumberUpDown = 1
+                    Sound.playSFX(smasCharacterChanger.moveSFX)
+                    smasCharacterChanger.selectionNumber = smasCharacterChanger.selectionNumber - 1
+                    smasCharacterChanger.selectionNumberUpDown = 1
                 elseif player.keys.right == KEYS_DOWN then
-                    Sound.playSFX(smascharacterchanger.moveSFX)
-                    smascharacterchanger.selectionNumber = smascharacterchanger.selectionNumber + 1
-                    smascharacterchanger.selectionNumberUpDown = 1
+                    Sound.playSFX(smasCharacterChanger.moveSFX)
+                    smasCharacterChanger.selectionNumber = smasCharacterChanger.selectionNumber + 1
+                    smasCharacterChanger.selectionNumberUpDown = 1
                 end
                 selectionAutoTimer = 15
             end
             textPrintCentered("Select your character!", 410, 100)
-            if smascharacterchanger.selectionNumber < 1 then
-                smascharacterchanger.selectionNumber = #smascharacterchanger.names
-            elseif smascharacterchanger.selectionNumber > #smascharacterchanger.names then
-                smascharacterchanger.selectionNumber = 1
+            if smasCharacterChanger.selectionNumber < 1 then
+                smasCharacterChanger.selectionNumber = #smasCharacterChanger.names
+            elseif smasCharacterChanger.selectionNumber > #smasCharacterChanger.names then
+                smasCharacterChanger.selectionNumber = 1
             end
-            if smascharacterchanger.selectionNumber and smascharacterchanger.selectionNumberUpDown then
-                textPrintCentered(smascharacterchanger.names[smascharacterchanger.selectionNumber], 410, 200)
-                textPrintCentered(smascharacterchanger.namesGame[smascharacterchanger.selectionNumber][smascharacterchanger.selectionNumberUpDown], 410, 250)
+            if smasCharacterChanger.selectionNumber and smasCharacterChanger.selectionNumberUpDown then
+                textPrintCentered(smasCharacterChanger.names[smasCharacterChanger.selectionNumber], 410, 200)
+                textPrintCentered(smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], 410, 250)
             end
             colorChange1 = colorChange1 + 0.001
             colorChange2 = colorChange2 + 0.0005
@@ -333,13 +333,13 @@ function smascharacterchanger.onDraw()
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
             
-            Graphics.drawImageWP(smascharacterchanger.drawPreviewImage(), 360, 320, -1.7)
+            Graphics.drawImageWP(smasCharacterChanger.drawPreviewImage(), 360, 320, -1.7)
         end
-        if not smascharacterchanger.animationActive and started then
-            Graphics.drawImageWP(smascharacterchanger.tvImage, 0, 0, -1.5)
-            smascharacterchanger.animationTimer = 0
+        if not smasCharacterChanger.animationActive and started then
+            Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, -1.5)
+            smasCharacterChanger.animationTimer = 0
         end
-    elseif not smascharacterchanger.menuActive and started then
+    elseif not smasCharacterChanger.menuActive and started then
         if menuBGMObject ~= nil then
             if Audio.MusicVolume() ~= 0 then
                 menuBGMObject:FadeOut(2000)
@@ -347,250 +347,250 @@ function smascharacterchanger.onDraw()
                 menuBGMObject:Stop()
             end
         end
-        Routine.run(smascharacterchanger.shutdownChanger)
-    elseif not smascharacterchanger.menuActive and ending then
-        if smascharacterchanger.animationActive then
-            smascharacterchanger.animationTimer = smascharacterchanger.animationTimer + 1
-            if smascharacterchanger.animationTimer >= 1 and smascharacterchanger.animationTimer <= 34 then
-                smascharacterchanger.tvScrollNumber = smascharacterchanger.tvScrollNumber - 20
-                Graphics.drawImageWP(smascharacterchanger.tvImage, 0, smascharacterchanger.tvScrollNumber, -0.5)
+        Routine.run(smasCharacterChanger.shutdownChanger)
+    elseif not smasCharacterChanger.menuActive and ending then
+        if smasCharacterChanger.animationActive then
+            smasCharacterChanger.animationTimer = smasCharacterChanger.animationTimer + 1
+            if smasCharacterChanger.animationTimer >= 1 and smasCharacterChanger.animationTimer <= 34 then
+                smasCharacterChanger.tvScrollNumber = smasCharacterChanger.tvScrollNumber - 20
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, -0.5)
             end
         end
     end
 end
 
 --***CHARACTERS***
-smascharacterchanger.addCharacter("Mario","Default (SMAS++)",1,"!DEFAULT")
-smascharacterchanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
-smascharacterchanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
-smascharacterchanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
-smascharacterchanger.addCharacter("Yoshi (SMB3)","Super Mario Bros. 3",4,"YOSHI-SMB3")
-smascharacterchanger.addCharacter("Yoshi (SMW)","Super Mario World",2,"SMW1-YOSHI")
-smascharacterchanger.addCharacter("Yoshi (SMW2)","SMW2: Yoshi's Island",10,"nil")
-smascharacterchanger.addCharacter("Yoshi (SMW2, Alt)","SMW2: Yoshi's Island",9,"SMW2-YOSHI")
-smascharacterchanger.addCharacter("Wario","Super Mario Bros. X2",7,"nil")
-smascharacterchanger.addCharacter("Waluigi (SMW)","Mario Tennis",2,"WALUIGI")
-smascharacterchanger.addCharacter("Daisy","Super Mario Bros. 3",3,"DAISY")
-smascharacterchanger.addCharacter("Pauline","Super Mario Bros. 3",3,"PAULINE")
-smascharacterchanger.addCharacter("Professor E. Gadd","Luigi's Mansion",13,"E. GADD")
-smascharacterchanger.addCharacter("Bowser","Super Mario Bros. X2",8,"nil")
-smascharacterchanger.addCharacter("Goomba","Super Mario Bros. 3",1,"Goomba")
-smascharacterchanger.addCharacter("King Boo","Luigi's Mansion",11,"KING BOO")
-smascharacterchanger.addCharacter("Link","Zelda II (SMBX)",5,"!DEFAULT")
-smascharacterchanger.addCharacter("Zelda","Super Mario Bros. X2",13,"nil")
-smascharacterchanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
-smascharacterchanger.addCharacter("Bass","Mega Man",6,"BASS")
-smascharacterchanger.addCharacter("Dr. Wily","Mega Man",6,"DR. WILY")
-smascharacterchanger.addCharacter("Proto Man","Mega Man",6,"PROTOMAN")
-smascharacterchanger.addCharacter("Roll","Mega Man",6,"ROLL")
-smascharacterchanger.addCharacter("Klonoa","Klonoa 2 (GBA)",9,"nil")
-smascharacterchanger.addCharacter("Plunder Bomber","Super Bomberman 5",3,"NINJABOMBERMAN")
-smascharacterchanger.addCharacter("Rosalina","Super Mario Bros. X2",11,"nil")
-smascharacterchanger.addCharacter("Rosalina (Alt)","Super Mario Bros. X2",1,"ROSALINA")
-smascharacterchanger.addCharacter("Snake","Super Mario Bros. X2",12,"nil")
-smascharacterchanger.addCharacter("Ultimate Rinka","Super Mario Bros. X2",4,"ULTIMATERINKA")
-smascharacterchanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
-smascharacterchanger.addCharacter("Sonic","Sonic the Hedgehog",4,"SONIC")
-smascharacterchanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
-smascharacterchanger.addCharacter("Minecraft","Steve (Default)",14,"nil")
-smascharacterchanger.addCharacter("Demo","A2XT",1,"A2XT-DEMO")
-smascharacterchanger.addCharacter("Iris","A2XT",2,"A2XT-IRIS")
-smascharacterchanger.addCharacter("Kood","A2XT",3,"A2XT-KOOD")
-smascharacterchanger.addCharacter("Raocow","A2XT/YouTube",4,"A2XT-RAOCOW")
-smascharacterchanger.addCharacter("Sheath","A2XT",5,"A2XT-SHEATH")
-smascharacterchanger.addCharacter("Uncle Broadsword","A2XT",15,"nil")
-smascharacterchanger.addCharacter("Pily","A2XT2: Gaiden 2",1,"DEMO-XMASPILY")
-smascharacterchanger.addCharacter("Tangent","Spencer Everly (SEE)",4,"SEE-TANGENT")
-smascharacterchanger.addCharacter("SpongeBob","SpongeBob SquarePants",1,"SPONGEBOBSQUAREPANTS")
-smascharacterchanger.addCharacter("Imajin","Yume Kojo: Doki Doki Panic",4,"IMAJIN-NES")
-smascharacterchanger.addCharacter("Eric Cartman","South Park",1,"SP-1-ERICCARTMAN")
-smascharacterchanger.addCharacter("Rebel Trooper","LEGO Star Wars",4,"LEGOSTARWARS-REBELTROOPER")
-smascharacterchanger.addCharacter("SMG4","SMG4 (YouTube)",1,"SMG4")
-smascharacterchanger.addCharacter("PAC-MAN","PAC-MAN Arrangement",4,"PACMAN-ARRANGEMENT-PACMAN")
-smascharacterchanger.addCharacter("Mother Brain Rinka","Spencer Everly (SEE, SMBX2)",4,"MOTHERBRAINRINKA")
-smascharacterchanger.addCharacter("Taizo","Dig Dug: Digging Strike",4,"DIGDUG-DIGGINGSTRIKE")
-smascharacterchanger.addCharacter("Caillou","GoAnimate/Vyond",1,"GA-CAILLOU")
-smascharacterchanger.addCharacter("Boris","GoAnimate/Vyond",2,"GA-BORIS")
-smascharacterchanger.addCharacter("Runner Red","10 Second Run (DSi)",1,"GO-10SECONDRUN")
-smascharacterchanger.addCharacter("JC Foster","JC Foster Takes it to the Moon",1,"JCFOSTERTAKESITTOTHEMOON")
-smascharacterchanger.addCharacter("Kirby (SMB3)","Super Mario Bros. 3",3,"KIRBY-SMB3")
-smascharacterchanger.addCharacter("Kirby (SMBX2)","Super Mario Bros. X2",15,"KIRBY-SMBX")
-smascharacterchanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHECUCUMBER")
-smascharacterchanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
-smascharacterchanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
-smascharacterchanger.addCharacter("Marisa Kirisame","Touhou",6,"MARISAKIRISAME")
-smascharacterchanger.addCharacter("Utsuho Reiuji","Touhou",11,"UTSUHOREIUJI")
-smascharacterchanger.addCharacter("Bill Rizer","Contra (NES)",16,"BILLRIZER")
-smascharacterchanger.addCharacter("Wohlstand","TheXTech",2,"WOHLSTAND")
-smascharacterchanger.addCharacter("Shantae","Shantae Galaxy",2,"SHANTAE")
-smascharacterchanger.addCharacter("Tux","SuperTux",3,"TUX")
-smascharacterchanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
-smascharacterchanger.addCharacter("Ness","EarthBound",5,"NESS")
-smascharacterchanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
-smascharacterchanger.addCharacter("Baldi","Baldi's Basics (PC)",2,"BALDISBASICS")
-smascharacterchanger.addCharacter("Rosa (Isabella)","The Rosa Game (Working Title)",1,"ROSA-ISABELLA")
-smascharacterchanger.addCharacter("Zero (SMBX OC)","Zero Unhope",1,"ZERO-SONIC")
+smasCharacterChanger.addCharacter("Mario","Default (SMAS++)",1,"!DEFAULT")
+smasCharacterChanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
+smasCharacterChanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
+smasCharacterChanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
+smasCharacterChanger.addCharacter("Yoshi (SMB3)","Super Mario Bros. 3",4,"YOSHI-SMB3")
+smasCharacterChanger.addCharacter("Yoshi (SMW)","Super Mario World",2,"SMW1-YOSHI")
+smasCharacterChanger.addCharacter("Yoshi (SMW2)","SMW2: Yoshi's Island",10,"nil")
+smasCharacterChanger.addCharacter("Yoshi (SMW2, Alt)","SMW2: Yoshi's Island",9,"SMW2-YOSHI")
+smasCharacterChanger.addCharacter("Wario","Super Mario Bros. X2",7,"nil")
+smasCharacterChanger.addCharacter("Waluigi (SMW)","Mario Tennis",2,"WALUIGI")
+smasCharacterChanger.addCharacter("Daisy","Super Mario Bros. 3",3,"DAISY")
+smasCharacterChanger.addCharacter("Pauline","Super Mario Bros. 3",3,"PAULINE")
+smasCharacterChanger.addCharacter("Professor E. Gadd","Luigi's Mansion",13,"E. GADD")
+smasCharacterChanger.addCharacter("Bowser","Super Mario Bros. X2",8,"nil")
+smasCharacterChanger.addCharacter("Goomba","Super Mario Bros. 3",1,"Goomba")
+smasCharacterChanger.addCharacter("King Boo","Luigi's Mansion",11,"KING BOO")
+smasCharacterChanger.addCharacter("Link","Zelda II (SMBX)",5,"!DEFAULT")
+smasCharacterChanger.addCharacter("Zelda","Super Mario Bros. X2",13,"nil")
+smasCharacterChanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
+smasCharacterChanger.addCharacter("Bass","Mega Man",6,"BASS")
+smasCharacterChanger.addCharacter("Dr. Wily","Mega Man",6,"DR. WILY")
+smasCharacterChanger.addCharacter("Proto Man","Mega Man",6,"PROTOMAN")
+smasCharacterChanger.addCharacter("Roll","Mega Man",6,"ROLL")
+smasCharacterChanger.addCharacter("Klonoa","Klonoa 2 (GBA)",9,"nil")
+smasCharacterChanger.addCharacter("Plunder Bomber","Super Bomberman 5",3,"NINJABOMBERMAN")
+smasCharacterChanger.addCharacter("Rosalina","Super Mario Bros. X2",11,"nil")
+smasCharacterChanger.addCharacter("Rosalina (Alt)","Super Mario Bros. X2",1,"ROSALINA")
+smasCharacterChanger.addCharacter("Snake","Super Mario Bros. X2",12,"nil")
+smasCharacterChanger.addCharacter("Ultimate Rinka","Super Mario Bros. X2",4,"ULTIMATERINKA")
+smasCharacterChanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
+smasCharacterChanger.addCharacter("Sonic","Sonic the Hedgehog",4,"SONIC")
+smasCharacterChanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
+smasCharacterChanger.addCharacter("Minecraft","Steve (Default)",14,"nil")
+smasCharacterChanger.addCharacter("Demo","A2XT",1,"A2XT-DEMO")
+smasCharacterChanger.addCharacter("Iris","A2XT",2,"A2XT-IRIS")
+smasCharacterChanger.addCharacter("Kood","A2XT",3,"A2XT-KOOD")
+smasCharacterChanger.addCharacter("Raocow","A2XT/YouTube",4,"A2XT-RAOCOW")
+smasCharacterChanger.addCharacter("Sheath","A2XT",5,"A2XT-SHEATH")
+smasCharacterChanger.addCharacter("Uncle Broadsword","A2XT",15,"nil")
+smasCharacterChanger.addCharacter("Pily","A2XT2: Gaiden 2",1,"DEMO-XMASPILY")
+smasCharacterChanger.addCharacter("Tangent","Spencer Everly (SEE)",4,"SEE-TANGENT")
+smasCharacterChanger.addCharacter("SpongeBob","SpongeBob SquarePants",1,"SPONGEBOBSQUAREPANTS")
+smasCharacterChanger.addCharacter("Imajin","Yume Kojo: Doki Doki Panic",4,"IMAJIN-NES")
+smasCharacterChanger.addCharacter("Eric Cartman","South Park",1,"SP-1-ERICCARTMAN")
+smasCharacterChanger.addCharacter("Rebel Trooper","LEGO Star Wars",4,"LEGOSTARWARS-REBELTROOPER")
+smasCharacterChanger.addCharacter("SMG4","SMG4 (YouTube)",1,"SMG4")
+smasCharacterChanger.addCharacter("PAC-MAN","PAC-MAN Arrangement",4,"PACMAN-ARRANGEMENT-PACMAN")
+smasCharacterChanger.addCharacter("Mother Brain Rinka","Spencer Everly (SEE, SMBX2)",4,"MOTHERBRAINRINKA")
+smasCharacterChanger.addCharacter("Taizo","Dig Dug: Digging Strike",4,"DIGDUG-DIGGINGSTRIKE")
+smasCharacterChanger.addCharacter("Caillou","GoAnimate/Vyond",1,"GA-CAILLOU")
+smasCharacterChanger.addCharacter("Boris","GoAnimate/Vyond",2,"GA-BORIS")
+smasCharacterChanger.addCharacter("Runner Red","10 Second Run (DSi)",1,"GO-10SECONDRUN")
+smasCharacterChanger.addCharacter("JC Foster","JC Foster Takes it to the Moon",1,"JCFOSTERTAKESITTOTHEMOON")
+smasCharacterChanger.addCharacter("Kirby (SMB3)","Super Mario Bros. 3",3,"KIRBY-SMB3")
+smasCharacterChanger.addCharacter("Kirby (SMBX2)","Super Mario Bros. X2",15,"KIRBY-SMBX")
+smasCharacterChanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHECUCUMBER")
+smasCharacterChanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
+smasCharacterChanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
+smasCharacterChanger.addCharacter("Marisa Kirisame","Touhou",6,"MARISAKIRISAME")
+smasCharacterChanger.addCharacter("Utsuho Reiuji","Touhou",11,"UTSUHOREIUJI")
+smasCharacterChanger.addCharacter("Bill Rizer","Contra (NES)",16,"BILLRIZER")
+smasCharacterChanger.addCharacter("Wohlstand","TheXTech",2,"WOHLSTAND")
+smasCharacterChanger.addCharacter("Shantae","Shantae Galaxy",2,"SHANTAE")
+smasCharacterChanger.addCharacter("Tux","SuperTux",3,"TUX")
+smasCharacterChanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
+smasCharacterChanger.addCharacter("Ness","EarthBound",5,"NESS")
+smasCharacterChanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
+smasCharacterChanger.addCharacter("Baldi","Baldi's Basics (PC)",2,"BALDISBASICS")
+smasCharacterChanger.addCharacter("Rosa (Isabella)","The Rosa Game (Working Title)",1,"ROSA-ISABELLA")
+smasCharacterChanger.addCharacter("Zero (SMBX OC)","Zero Unhope",1,"ZERO-SONIC")
 
 --***VARIANTS***
 
 --**Mario variants**
-smascharacterchanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
-smascharacterchanger.addVariant("Mario","Default (SMBX 1.3)","!DEFAULT-ORIGINAL")
-smascharacterchanger.addVariant("Mario","SMAS++ 2012 Beta","00-SMASPLUSPLUS-BETA")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. (SNES)","03-SMB1-SMAS")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. 2 (NES)","04-SMB2-RETRO")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. 2 (SNES)","05-SMB2-SMAS")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. 3 (NES)","06-SMB3-RETRO")
-smascharacterchanger.addVariant("Mario","Super Mario World (SNES)","SMW-MARIO")
-smascharacterchanger.addVariant("Mario","Super Mario World 2 (SNES)","Z-SMW2-ADULTMARIO")
-smascharacterchanger.addVariant("Mario","Super Mario Land 2 (GB)","07-SML2")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. Special (PC-8801/Sharp X1)","08-SMBSPECIAL")
-smascharacterchanger.addVariant("Mario","Super Mario World (NES, Pirate)","09-SMW-PIRATE")
-smascharacterchanger.addVariant("Mario","Hotel Mario (Philips CD-i)","10-HOTELMARIO")
-smascharacterchanger.addVariant("Mario","Super Mario Advance 1 (GBA)","11-SMA1")
-smascharacterchanger.addVariant("Mario","Super Mario Advance 2 (GBA)","12-SMA2")
-smascharacterchanger.addVariant("Mario","Super Mario Advance 4 (GBA)","13-SMA4")
-smascharacterchanger.addVariant("Mario","New Super Mario Bros. (SMBX)","14-NSMBDS-SMBX")
-smascharacterchanger.addVariant("Mario","New Super Mario Bros. (NDS)","15-NSMBDS-ORIGINAL")
-smascharacterchanger.addVariant("Mario","New Super Mario Bros. Wii (Wii)","16-NSMBWII-MARIO")
-smascharacterchanger.addVariant("Mario","Super Mario Bros. DDX (PC)","SMBDDX-MARIO")
-smascharacterchanger.addVariant("Mario","Princess Rescue (Atari 2600)","PRINCESSRESCUE")
+smasCharacterChanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
+smasCharacterChanger.addVariant("Mario","Default (SMBX 1.3)","!DEFAULT-ORIGINAL")
+smasCharacterChanger.addVariant("Mario","SMAS++ 2012 Beta","00-SMASPLUSPLUS-BETA")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. (SNES)","03-SMB1-SMAS")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. 2 (NES)","04-SMB2-RETRO")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. 2 (SNES)","05-SMB2-SMAS")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. 3 (NES)","06-SMB3-RETRO")
+smasCharacterChanger.addVariant("Mario","Super Mario World (SNES)","SMW-MARIO")
+smasCharacterChanger.addVariant("Mario","Super Mario World 2 (SNES)","Z-SMW2-ADULTMARIO")
+smasCharacterChanger.addVariant("Mario","Super Mario Land 2 (GB)","07-SML2")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. Special (PC-8801/Sharp X1)","08-SMBSPECIAL")
+smasCharacterChanger.addVariant("Mario","Super Mario World (NES, Pirate)","09-SMW-PIRATE")
+smasCharacterChanger.addVariant("Mario","Hotel Mario (Philips CD-i)","10-HOTELMARIO")
+smasCharacterChanger.addVariant("Mario","Super Mario Advance 1 (GBA)","11-SMA1")
+smasCharacterChanger.addVariant("Mario","Super Mario Advance 2 (GBA)","12-SMA2")
+smasCharacterChanger.addVariant("Mario","Super Mario Advance 4 (GBA)","13-SMA4")
+smasCharacterChanger.addVariant("Mario","New Super Mario Bros. (SMBX)","14-NSMBDS-SMBX")
+smasCharacterChanger.addVariant("Mario","New Super Mario Bros. (NDS)","15-NSMBDS-ORIGINAL")
+smasCharacterChanger.addVariant("Mario","New Super Mario Bros. Wii (Wii)","16-NSMBWII-MARIO")
+smasCharacterChanger.addVariant("Mario","Super Mario Bros. DDX (PC)","SMBDDX-MARIO")
+smasCharacterChanger.addVariant("Mario","Princess Rescue (Atari 2600)","PRINCESSRESCUE")
 
-smascharacterchanger.addVariant("Mario","Golden Mario","GOLDENMARIO")
-smascharacterchanger.addVariant("Mario","Marink","MARINK")
-smascharacterchanger.addVariant("Mario","Modern Mario","MODERN")
-smascharacterchanger.addVariant("Mario","Super Mario World: Mario Enhanced","MODERN2")
+smasCharacterChanger.addVariant("Mario","Golden Mario","GOLDENMARIO")
+smasCharacterChanger.addVariant("Mario","Marink","MARINK")
+smasCharacterChanger.addVariant("Mario","Modern Mario","MODERN")
+smasCharacterChanger.addVariant("Mario","Super Mario World: Mario Enhanced","MODERN2")
 
-smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Mario)","SMM2-MARIO")
-smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Luigi)","SMM2-LUIGI")
-smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Blue Toad)","SMM2-TOAD")
-smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Yellow Toad)","SMM2-YELLOWTOAD")
-smascharacterchanger.addVariant("Mario","SMM2: Super Mario World (Toadette)","SMM2-TOADETTE")
+smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Mario)","SMM2-MARIO")
+smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Luigi)","SMM2-LUIGI")
+smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Blue Toad)","SMM2-TOAD")
+smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Yellow Toad)","SMM2-YELLOWTOAD")
+smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Toadette)","SMM2-TOADETTE")
 
 --**Luigi variants**
-smascharacterchanger.addVariant("Luigi","Spencer Everly (SMBSE)","00-SPENCEREVERLY")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. (NES, Modern)","03-SMB1-RETRO-MODERN")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. (SNES)","04-SMB1-SMAS")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. 2 (NES)","05-SMB2-RETRO")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. 2 (SNES)","06-SMB2-SMAS")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. 3 (NES)","07-SMB3-RETRO")
-smascharacterchanger.addVariant("Luigi","Super Mario World (SMAS)","SMW-LUIGI")
-smascharacterchanger.addVariant("Luigi","Super Mario World (SNES)","10-SMW-ORIGINAL")
-smascharacterchanger.addVariant("Luigi","Super Mario Bros. Deluxe (GBC)","13-SMBDX")
-smascharacterchanger.addVariant("Luigi","Super Mario Advance 1 (GBA)","14-SMA1")
-smascharacterchanger.addVariant("Luigi","Super Mario Advance 2 (GBA)","15-SMA2")
-smascharacterchanger.addVariant("Luigi","Super Mario Advance 4 (GBA)","16-SMA4")
-smascharacterchanger.addVariant("Luigi","New Super Mario Bros. DS (SMBX)","17-NSMBDS-SMBX")
+smasCharacterChanger.addVariant("Luigi","Spencer Everly (SMBSE)","00-SPENCEREVERLY")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES)","01-SMB1-RETRO")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES, Modern)","03-SMB1-RETRO-MODERN")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (SNES)","04-SMB1-SMAS")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 2 (NES)","05-SMB2-RETRO")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 2 (SNES)","06-SMB2-SMAS")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 3 (NES)","07-SMB3-RETRO")
+smasCharacterChanger.addVariant("Luigi","Super Mario World (SMAS)","SMW-LUIGI")
+smasCharacterChanger.addVariant("Luigi","Super Mario World (SNES)","10-SMW-ORIGINAL")
+smasCharacterChanger.addVariant("Luigi","Super Mario Bros. Deluxe (GBC)","13-SMBDX")
+smasCharacterChanger.addVariant("Luigi","Super Mario Advance 1 (GBA)","14-SMA1")
+smasCharacterChanger.addVariant("Luigi","Super Mario Advance 2 (GBA)","15-SMA2")
+smasCharacterChanger.addVariant("Luigi","Super Mario Advance 4 (GBA)","16-SMA4")
+smasCharacterChanger.addVariant("Luigi","New Super Mario Bros. DS (SMBX)","17-NSMBDS-SMBX")
 
-smascharacterchanger.addVariant("Luigi","Marigi","09-SMB3-MARIOCLOTHES")
-smascharacterchanger.addVariant("Luigi","Modern Luigi","MODERN")
+smasCharacterChanger.addVariant("Luigi","Marigi","09-SMB3-MARIOCLOTHES")
+smasCharacterChanger.addVariant("Luigi","Modern Luigi","MODERN")
 
 --**Peach variants**
-smascharacterchanger.addVariant("Peach","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smascharacterchanger.addVariant("Peach","Super Mario Bros. (SNES)","02-SMB1-SMAS")
-smascharacterchanger.addVariant("Peach","Super Mario World (SNES)","SMW-PEACH")
-smascharacterchanger.addVariant("Peach","Super Mario Advance 4 (GBA)","SMA4")
+smasCharacterChanger.addVariant("Peach","Super Mario Bros. (NES)","01-SMB1-RETRO")
+smasCharacterChanger.addVariant("Peach","Super Mario Bros. (SNES)","02-SMB1-SMAS")
+smasCharacterChanger.addVariant("Peach","Super Mario World (SNES)","SMW-PEACH")
+smasCharacterChanger.addVariant("Peach","Super Mario Advance 4 (GBA)","SMA4")
 
 --**Toad variants**
-smascharacterchanger.addVariant("Toad","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smascharacterchanger.addVariant("Toad","Super Mario Bros. (SNES)","02-SMB1-SMAS")
-smascharacterchanger.addVariant("Toad","Super Mario Bros. 2 (NES, Blue)","03-SMB2-RETRO")
-smascharacterchanger.addVariant("Toad","Super Mario Bros. 2 (NES, Yellow)","04-SMB2-RETRO-YELLOW")
-smascharacterchanger.addVariant("Toad","Super Mario Bros. 2 (NES, Red)","05-SMB2-RETRO-RED")
-smascharacterchanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Blue)","06-SMB3-BLUE")
-smascharacterchanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Yellow)","07-SMB3-YELLOW")
-smascharacterchanger.addVariant("Toad","Super Mario World (SNES)","SMM2-TOAD")
+smasCharacterChanger.addVariant("Toad","Super Mario Bros. (NES)","01-SMB1-RETRO")
+smasCharacterChanger.addVariant("Toad","Super Mario Bros. (SNES)","02-SMB1-SMAS")
+smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Blue)","03-SMB2-RETRO")
+smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Yellow)","04-SMB2-RETRO-YELLOW")
+smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Red)","05-SMB2-RETRO-RED")
+smasCharacterChanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Blue)","06-SMB3-BLUE")
+smasCharacterChanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Yellow)","07-SMB3-YELLOW")
+smasCharacterChanger.addVariant("Toad","Super Mario World (SNES)","SMM2-TOAD")
 
-smascharacterchanger.addVariant("Toad","Captain Toad (SMW)","CAPTAINTOAD")
-smascharacterchanger.addVariant("Toad","Toadette (SNES)","TOADETTE")
+smasCharacterChanger.addVariant("Toad","Captain Toad (SMW)","CAPTAINTOAD")
+smasCharacterChanger.addVariant("Toad","Toadette (SNES)","TOADETTE")
 
 --**Link variants**
-smascharacterchanger.addVariant("Link","The Legend of Zelda (NES)","01-ZELDA1-NES")
-smascharacterchanger.addVariant("Link","Zelda: Link's Awakening (SNES)","05-LINKWAKE-SNES")
-smascharacterchanger.addVariant("Link","Super Mario Bros. (SNES)","SMB1-SNES")
-smascharacterchanger.addVariant("Link","Super Mario Bros. 2 (SNES)","SMB2-SNES")
+smasCharacterChanger.addVariant("Link","The Legend of Zelda (NES)","01-ZELDA1-NES")
+smasCharacterChanger.addVariant("Link","Zelda: Link's Awakening (SNES)","05-LINKWAKE-SNES")
+smasCharacterChanger.addVariant("Link","Super Mario Bros. (SNES)","SMB1-SNES")
+smasCharacterChanger.addVariant("Link","Super Mario Bros. 2 (SNES)","SMB2-SNES")
 
 --**Mega Man variants**
-smascharacterchanger.addVariant("Mega Man","Mega Man 1-6 (NES)","MEGAMAN-NES")
-smascharacterchanger.addVariant("Mega Man","Bad Box Art Mega Man","BAD BOX ART MEGA MAN")
+smasCharacterChanger.addVariant("Mega Man","Mega Man 1-6 (NES)","MEGAMAN-NES")
+smasCharacterChanger.addVariant("Mega Man","Bad Box Art Mega Man","BAD BOX ART MEGA MAN")
 
 --**Yoshi (SMW2) variants**
-smascharacterchanger.addVariant("Yoshi (SMW2)","Super Mario Advance 3","SMA3")
+smasCharacterChanger.addVariant("Yoshi (SMW2)","Super Mario Advance 3","SMA3")
 
 --**Yoshi (SMW2, Alt) variants**
-smascharacterchanger.addVariant("Yoshi (SMW2, Alt)","Yoshi's Story","YS-GREEN")
+smasCharacterChanger.addVariant("Yoshi (SMW2, Alt)","Yoshi's Story","YS-GREEN")
 
 --**Rosalina variants**
-smascharacterchanger.addVariant("Rosalina","Super Mario Bros. 2 (SNES)","SMB2-SMAS")
+smasCharacterChanger.addVariant("Rosalina","Super Mario Bros. 2 (SNES)","SMB2-SMAS")
 
 --**Samus variants**
-smascharacterchanger.addVariant("Samus","Metroid (NES)","SAMUS-NES")
+smasCharacterChanger.addVariant("Samus","Metroid (NES)","SAMUS-NES")
 
 --**Steve variants**
-smascharacterchanger.addVariant("Minecraft","Alex (Default)","MC-ALEX")
-smascharacterchanger.addVariant("Minecraft","Herobrine","MC-HEROBRINE")
-smascharacterchanger.addVariant("Minecraft","Zombie","MC-ZOMBIE")
-smascharacterchanger.addVariant("Minecraft","Notch","MC-NOTCH")
+smasCharacterChanger.addVariant("Minecraft","Alex (Default)","MC-ALEX")
+smasCharacterChanger.addVariant("Minecraft","Herobrine","MC-HEROBRINE")
+smasCharacterChanger.addVariant("Minecraft","Zombie","MC-ZOMBIE")
+smasCharacterChanger.addVariant("Minecraft","Notch","MC-NOTCH")
 
-smascharacterchanger.addVariant("Minecraft","ExplodingTNT (YouTube)","EXPLODINGTNT")
-smascharacterchanger.addVariant("Minecraft","GeorgeNotFound (YouTube)","GEORGENOTFOUNDYT")
-smascharacterchanger.addVariant("Minecraft","HangoutYoshiGuy (YouTube)","HANGOUTYOSHIGUYYT")
-smascharacterchanger.addVariant("Minecraft","Karl Jacobs (YouTube)","KARLJACOBSYT")
-smascharacterchanger.addVariant("Minecraft","ItsHarry (YouTube)","MC-ITSHARRY")
-smascharacterchanger.addVariant("Minecraft","ItsJerry (YouTube)","MC-ITSJERRY")
-smascharacterchanger.addVariant("Minecraft","Keralis (YouTube)","MC-KERALIS")
-smascharacterchanger.addVariant("Minecraft","Mystery Man Bro (YouTube)","MYSTERYMANBRO")
-smascharacterchanger.addVariant("Minecraft","Quackity (YouTube)","QUACKITYYT")
-smascharacterchanger.addVariant("Minecraft","TechnoBlade (YouTube)","TECHNOBLADE")
-smascharacterchanger.addVariant("Minecraft","TommyInnit (YouTube)","TOMMYINNITYT")
-smascharacterchanger.addVariant("Minecraft","UnofficialStudios (YouTube)","UNOFFICIALSTUDIOSYT")
+smasCharacterChanger.addVariant("Minecraft","ExplodingTNT (YouTube)","EXPLODINGTNT")
+smasCharacterChanger.addVariant("Minecraft","GeorgeNotFound (YouTube)","GEORGENOTFOUNDYT")
+smasCharacterChanger.addVariant("Minecraft","HangoutYoshiGuy (YouTube)","HANGOUTYOSHIGUYYT")
+smasCharacterChanger.addVariant("Minecraft","Karl Jacobs (YouTube)","KARLJACOBSYT")
+smasCharacterChanger.addVariant("Minecraft","ItsHarry (YouTube)","MC-ITSHARRY")
+smasCharacterChanger.addVariant("Minecraft","ItsJerry (YouTube)","MC-ITSJERRY")
+smasCharacterChanger.addVariant("Minecraft","Keralis (YouTube)","MC-KERALIS")
+smasCharacterChanger.addVariant("Minecraft","Mystery Man Bro (YouTube)","MYSTERYMANBRO")
+smasCharacterChanger.addVariant("Minecraft","Quackity (YouTube)","QUACKITYYT")
+smasCharacterChanger.addVariant("Minecraft","TechnoBlade (YouTube)","TECHNOBLADE")
+smasCharacterChanger.addVariant("Minecraft","TommyInnit (YouTube)","TOMMYINNITYT")
+smasCharacterChanger.addVariant("Minecraft","UnofficialStudios (YouTube)","UNOFFICIALSTUDIOSYT")
 
-smascharacterchanger.addVariant("Minecraft","Christmas Tree (DLC)","DLC-DESTIVE-CHRISTMASTREE")
+smasCharacterChanger.addVariant("Minecraft","Christmas Tree (DLC)","DLC-DESTIVE-CHRISTMASTREE")
 
-smascharacterchanger.addVariant("Minecraft","Mario (Super Mario Bros.)","MC-MARIO")
-smascharacterchanger.addVariant("Minecraft","Captain Toad","MC-CAPTAINTOAD")
-smascharacterchanger.addVariant("Minecraft","Koopapanzer","KOOPAPANZER")
-smascharacterchanger.addVariant("Minecraft","Sonic (Sonic the Hedgehog)","MC-SONIC")
-smascharacterchanger.addVariant("Minecraft","Tails (Sonic the Hedgehog)","MC-TAILS")
-smascharacterchanger.addVariant("Minecraft","SpongeBob (SpongeBob)","MC-SPONGEBOB")
-smascharacterchanger.addVariant("Minecraft","Patrick (SpongeBob)","MC-PATRICK")
-smascharacterchanger.addVariant("Minecraft","Squidward (SpongeBob)","MC-SQUIDWARD")
-smascharacterchanger.addVariant("Minecraft","Frisk (Undertale)","MC-FRISK")
-smascharacterchanger.addVariant("Minecraft","Kris (Deltarune)","MC-KRIS")
-smascharacterchanger.addVariant("Minecraft","Susie (Deltarune)","MC-SUSIE-DELTARUNE")
-smascharacterchanger.addVariant("Minecraft","Ralsei (Deltarune)","MC-RALSEI")
-smascharacterchanger.addVariant("Minecraft","Noelle (Deltarune)","MC-NOELLE-DELTARUNE")
-smascharacterchanger.addVariant("Minecraft","Boyfriend (FNF)","MC-FNF-BOYFRIEND")
-smascharacterchanger.addVariant("Minecraft","Girlfriend (FNF)","MC-FNF-GIRLFRIEND")
-smascharacterchanger.addVariant("Minecraft","Impostor (Among Us)","MC-IMPOSTOR")
-smascharacterchanger.addVariant("Minecraft","Ed (Ed Edd and Eddy)","ED-EDEDDANDEDDY")
-smascharacterchanger.addVariant("Minecraft","Spiderman","MC-SPIDERMAN")
+smasCharacterChanger.addVariant("Minecraft","Mario (Super Mario Bros.)","MC-MARIO")
+smasCharacterChanger.addVariant("Minecraft","Captain Toad","MC-CAPTAINTOAD")
+smasCharacterChanger.addVariant("Minecraft","Koopapanzer","KOOPAPANZER")
+smasCharacterChanger.addVariant("Minecraft","Sonic (Sonic the Hedgehog)","MC-SONIC")
+smasCharacterChanger.addVariant("Minecraft","Tails (Sonic the Hedgehog)","MC-TAILS")
+smasCharacterChanger.addVariant("Minecraft","SpongeBob (SpongeBob)","MC-SPONGEBOB")
+smasCharacterChanger.addVariant("Minecraft","Patrick (SpongeBob)","MC-PATRICK")
+smasCharacterChanger.addVariant("Minecraft","Squidward (SpongeBob)","MC-SQUIDWARD")
+smasCharacterChanger.addVariant("Minecraft","Frisk (Undertale)","MC-FRISK")
+smasCharacterChanger.addVariant("Minecraft","Kris (Deltarune)","MC-KRIS")
+smasCharacterChanger.addVariant("Minecraft","Susie (Deltarune)","MC-SUSIE-DELTARUNE")
+smasCharacterChanger.addVariant("Minecraft","Ralsei (Deltarune)","MC-RALSEI")
+smasCharacterChanger.addVariant("Minecraft","Noelle (Deltarune)","MC-NOELLE-DELTARUNE")
+smasCharacterChanger.addVariant("Minecraft","Boyfriend (FNF)","MC-FNF-BOYFRIEND")
+smasCharacterChanger.addVariant("Minecraft","Girlfriend (FNF)","MC-FNF-GIRLFRIEND")
+smasCharacterChanger.addVariant("Minecraft","Impostor (Among Us)","MC-IMPOSTOR")
+smasCharacterChanger.addVariant("Minecraft","Ed (Ed Edd and Eddy)","ED-EDEDDANDEDDY")
+smasCharacterChanger.addVariant("Minecraft","Spiderman","MC-SPIDERMAN")
 
-smascharacterchanger.addVariant("Minecraft","Cubix Tron (C!TS!)","DJCTRE-CUBIXTRON")
-smascharacterchanger.addVariant("Minecraft","Cubix Tron Dad (C!TS!)","DJCTRE-CUBIXTRONDAD")
-smascharacterchanger.addVariant("Minecraft","Stultus (C!TS!)","DJCTRE-STULTUS")
+smasCharacterChanger.addVariant("Minecraft","Cubix Tron (C!TS!)","DJCTRE-CUBIXTRON")
+smasCharacterChanger.addVariant("Minecraft","Cubix Tron Dad (C!TS!)","DJCTRE-CUBIXTRONDAD")
+smasCharacterChanger.addVariant("Minecraft","Stultus (C!TS!)","DJCTRE-STULTUS")
 
-smascharacterchanger.addVariant("Minecraft","Spencer (S!TS! REBOOT)","SEE-MC-SPENCEREVERLY")
-smascharacterchanger.addVariant("Minecraft","Spencer 2 (S!TS! REBOOT)","SEE-MC-SPENCER2")
-smascharacterchanger.addVariant("Minecraft","Sherbert (S!TS! REBOOT)","SEE-MC-SHERBERTLUSSIEBACK")
-smascharacterchanger.addVariant("Minecraft","Lewbert (S!TS! REBOOT)","SEE-MC-LEWBERTLUSSIEBACK")
-smascharacterchanger.addVariant("Minecraft","Evil Me (S!TS! REBOOT)","SEE-MC-EVILME")
-smascharacterchanger.addVariant("Minecraft","Shenicle (S!TS! REBOOT)","SEE-MC-SHENICLE")
-smascharacterchanger.addVariant("Minecraft","Tianely (S!TS! REBOOT)","SEE-MC-TIANELY")
-smascharacterchanger.addVariant("Minecraft","Lili (S!TS! REBOOT)","SEE-MC-LILIJUCIEBACK")
-smascharacterchanger.addVariant("Minecraft","Mimi (S!TS! REBOOT)","SEE-MC-MIMIJUCIEBACK")
-smascharacterchanger.addVariant("Minecraft","Geranium (S!TS! REBOOT)","SEE-MC-GERANIUM")
-smascharacterchanger.addVariant("Minecraft","Shelley (S!TS! REBOOT)","SEE-MC-SHELEYKIRK")
-smascharacterchanger.addVariant("Minecraft","Ron (S!TS! REBOOT)","SEE-MC-RONDAVIS")
+smasCharacterChanger.addVariant("Minecraft","Spencer (S!TS! REBOOT)","SEE-MC-SPENCEREVERLY")
+smasCharacterChanger.addVariant("Minecraft","Spencer 2 (S!TS! REBOOT)","SEE-MC-SPENCER2")
+smasCharacterChanger.addVariant("Minecraft","Sherbert (S!TS! REBOOT)","SEE-MC-SHERBERTLUSSIEBACK")
+smasCharacterChanger.addVariant("Minecraft","Lewbert (S!TS! REBOOT)","SEE-MC-LEWBERTLUSSIEBACK")
+smasCharacterChanger.addVariant("Minecraft","Evil Me (S!TS! REBOOT)","SEE-MC-EVILME")
+smasCharacterChanger.addVariant("Minecraft","Shenicle (S!TS! REBOOT)","SEE-MC-SHENICLE")
+smasCharacterChanger.addVariant("Minecraft","Tianely (S!TS! REBOOT)","SEE-MC-TIANELY")
+smasCharacterChanger.addVariant("Minecraft","Lili (S!TS! REBOOT)","SEE-MC-LILIJUCIEBACK")
+smasCharacterChanger.addVariant("Minecraft","Mimi (S!TS! REBOOT)","SEE-MC-MIMIJUCIEBACK")
+smasCharacterChanger.addVariant("Minecraft","Geranium (S!TS! REBOOT)","SEE-MC-GERANIUM")
+smasCharacterChanger.addVariant("Minecraft","Shelley (S!TS! REBOOT)","SEE-MC-SHELEYKIRK")
+smasCharacterChanger.addVariant("Minecraft","Ron (S!TS! REBOOT)","SEE-MC-RONDAVIS")
 
 --**Wario variants**
-smascharacterchanger.addVariant("Wario","Super Mario Bros. 3","SMB3-WARIO")
+smasCharacterChanger.addVariant("Wario","Super Mario Bros. 3","SMB3-WARIO")
 
 --**Takeshi variants**
-smascharacterchanger.addVariant("Takeshi","Takeshi's Challenge (SNES)","TAKESHI-SNES")
+smasCharacterChanger.addVariant("Takeshi","Takeshi's Challenge (SNES)","TAKESHI-SNES")
 
-return smascharacterchanger
+return smasCharacterChanger

@@ -2,7 +2,7 @@ local npcManager = require("npcManager")
 local colliders = require("colliders")
 local extrasounds = require("extrasounds")
 local starman = require("starman/star")
-local smasbooleans = require("smasbooleans")
+local smasBooleans = require("smasBooleans")
 
 local customNPC = {}
 local npcID = NPC_ID
@@ -68,7 +68,7 @@ function customNPC.onTickNPC(v)
         and p.section == v.section
         and data.state == 0 then
             data.state = 1
-            smasbooleans.musicMuted = true
+            smasBooleans.musicMuted = true
             Audio.MusicVolume(0)
             GameData.winStateActive = true
             SFX.play(extrasounds.sounds[135].sfx)
@@ -97,7 +97,7 @@ function customNPC.onTickNPC(v)
         if data.state == 1 then
             Misc.npcToCoins()
             starman.stop(p)
-            smasbooleans.musicMuted = true
+            smasBooleans.musicMuted = true
             Audio.SeizeStream(-1)
             Audio.MusicStop()
             if p.y >= v.y and p.x >= v.x and p.x <= v.x + v.width and p.section == v.section then
@@ -177,7 +177,7 @@ function customNPC.onTickNPC(v)
             end
         elseif data.state == 2 then
             GameData.stopStarman = false
-            smasbooleans.musicMuted = true
+            smasBooleans.musicMuted = true
             if GameData.rushModeActive == true then
                 GameData.rushModeWon = true
             end
@@ -202,7 +202,7 @@ function customNPC.onTickNPC(v)
                 Timer.hurryTime = -1
             end
         elseif data.state == 3 then
-            smasbooleans.musicMuted = true
+            smasBooleans.musicMuted = true
             p.x = castlePlayerX
             p.y = castlePlayerY
             
@@ -230,7 +230,7 @@ function customNPC.onTickNPC(v)
             end
             
             if data.tick > 65 * 4.5 then --if data.tick > 65 * 2 then
-                smasbooleans.musicMuted = false
+                smasBooleans.musicMuted = false
                 GameData.winStateActive = false
                 if GameData.rushModeActive == false or GameData.rushModeActive == nil then
                     Level.exit(v.data._settings.winType)

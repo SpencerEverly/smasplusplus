@@ -5,7 +5,7 @@ local minHUD = {}
 -- Code made by Hatsune Blake! Please give credit!
 
 local textplus = require("textplus")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local t = 0
 
 -- Star Coin related stuff

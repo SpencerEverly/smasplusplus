@@ -1,9 +1,9 @@
 local Misk = {}
 
 local rng = require("base/rng")
-local smasverbosemode = require("smasverbosemode")
+local smasVerboseMode = require("smasVerboseMode")
 local customCamera = require("customCamera")
-local smastables = require("smastables")
+local smasTables = require("smasTables")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)
@@ -46,10 +46,10 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
 
     function Misc.toggleVerboseMode() --This, when activated, will spit out a verbose list of things you have done/executed. Toggle again to turn off.
-        if smasverbosemode.activated then
-            smasverbosemode.activated = false
-        elseif not smasverbosemode.activated then
-            smasverbosemode.activated = true
+        if smasVerboseMode.activated then
+            smasVerboseMode.activated = false
+        elseif not smasVerboseMode.activated then
+            smasVerboseMode.activated = true
         end
     end
     
@@ -968,7 +968,7 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
         end
         
         if letCoinsFall then
-            for k,v in ipairs(NPC.get(smastables.allCoinNPCIDs)) do
+            for k,v in ipairs(NPC.get(smasTables.allCoinNPCIDs)) do
                 if (v.isValid and not v.isHidden and NPC.isOnScreen(v)) then
                     v.ai1 = 1
                     v.speedX = RNG.random() * 1 - 0.5

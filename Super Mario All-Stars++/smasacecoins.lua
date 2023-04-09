@@ -1,13 +1,13 @@
-local smasacecoins = {}
+local smasAceCoins = {}
 
 local playerManager = require("playermanager")
 
-function smasacecoins.onInitAPI()
-    registerEvent(smasacecoins,"onTick")
+function smasAceCoins.onInitAPI()
+    registerEvent(smasAceCoins,"onTick")
 end
 
-function smasacecoins.onTick()
-    if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+function smasAceCoins.onTick()
+    if table.icontains(smasTables.__smb2Levels,Level.filename()) == true then
         if NPC.config[274].score == 11 then
             Sound.playSFX(147)
             NPC.config[274].score = 6
@@ -19,4 +19,4 @@ function smasacecoins.onTick()
     end
 end
 
-return smasacecoins
+return smasAceCoins

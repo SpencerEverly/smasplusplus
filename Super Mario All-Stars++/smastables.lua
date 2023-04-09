@@ -1,7 +1,7 @@
-local smastables = {}
+local smasTables = {}
 
 --Placing in levels onto a table that'll prevent the loading sound from playing
-smastables._noLoadingSoundLevels = {
+smasTables._noLoadingSoundLevels = {
     "SMAS - Start.lvlx",
     "SMAS - Raca's World (Part 0).lvlx",
     "SMAS - Raca's World (Part 1).lvlx",
@@ -9,7 +9,7 @@ smastables._noLoadingSoundLevels = {
 }
 
 --All SMB1 levels, listed here for many reasons
-smastables.__smb1Levels = {
+smasTables.__smb1Levels = {
     "SMB1 - W-1, L-1.lvlx",
     "SMB1 - W-1, L-2.lvlx",
     "SMB1 - W-1, L-3.lvlx",
@@ -49,7 +49,7 @@ smastables.__smb1Levels = {
 }
 
 --All SMB2 levels, listed here for many reasons
-smastables.__smb2Levels = {
+smasTables.__smb2Levels = {
     "SMB2 - W-1, L-1.lvlx",
     "SMB2 - W-1, L-2.lvlx",
     "SMB2 - W-1, L-3.lvlx",
@@ -73,7 +73,7 @@ smastables.__smb2Levels = {
 }
 
 --All SMBLL levels, listed here for many reasons
-smastables.__smbllLevels = {
+smasTables.__smbllLevels = {
     "SMBLL - W-1, L-1.lvlx",
     "SMBLL - W-1, L-2.lvlx",
     "SMBLL - W-1, L-3.lvlx",
@@ -128,7 +128,7 @@ smastables.__smbllLevels = {
     "SMBLL - W-D, L-4.lvlx",
 }
 
-smastables.__smb3Levels = {
+smasTables.__smb3Levels = {
     "SMB3 - W-1, L-1.lvlx",
     "SMB3 - W-1, L-2.lvlx",
     "SMB3 - W-1, L-3.lvlx",
@@ -222,7 +222,7 @@ smastables.__smb3Levels = {
     "SMB3 - W-e, L-1.lvlx",
 }
 
-smastables.__smwLevels = {
+smasTables.__smwLevels = {
     "SMW - W-1, L-YI1.lvlx",
     "SMW - W-1, L-YI2.lvlx",
     "SMW - W-1, L-YI3.lvlx",
@@ -239,7 +239,7 @@ smastables.__smwLevels = {
     "SMW - W-8, L-BVLC.lvlx",
 }
 
-smastables.__smbspencerLevels = {
+smasTables.__smbspencerLevels = {
     "SMBS - W-1, L-1.lvlx",
     "SMBS - W-1, L-2.lvlx",
     "SMBS - W-1, L-3.lvlx",
@@ -259,7 +259,7 @@ smastables.__smbspencerLevels = {
 }
 
 --All WSMBA levels, listed here for many reasons
-smastables.__wsmbaLevels = {
+smasTables.__wsmbaLevels = {
     "WSMBA - W-0, L-Bonus.lvlx",
     "WSMBA - W-0, L-MALC.lvlx",
     "WSMBA - W-0, L-Mario City.lvlx",
@@ -298,7 +298,7 @@ smastables.__wsmbaLevels = {
 }
 
 --All SMB Special levels, for many reasons.
-smastables.__smbspecialLevels = {
+smasTables.__smbspecialLevels = {
     "SMBSp - W-1, L-1.lvlx",
     "SMBSp - W-1, L-2.lvlx",
     "SMBSp - W-1, L-3.lvlx",
@@ -306,7 +306,7 @@ smastables.__smbspecialLevels = {
 }
 
 --Friendly place table for Mother Brain Rinka
-smastables._friendlyPlaces = {
+smasTables._friendlyPlaces = {
     "SMAS - Start.lvlx",
     "map.lvlx",
     "intro_8bit.lvlx",
@@ -363,7 +363,7 @@ smastables._friendlyPlaces = {
 }
 
 --Menu table for any costume with troublesome sounds
-smastables._noLevelPlaces = {
+smasTables._noLevelPlaces = {
     "SMAS - Start.lvlx",
     "map.lvlx",
     "intro_8bit.lvlx",
@@ -391,7 +391,7 @@ smastables._noLevelPlaces = {
     "SMAS - Opening Cutscene.lvlx",
 }
 
-smastables._noLevelPlacesPlusOtherLevels = {
+smasTables._noLevelPlacesPlusOtherLevels = {
     "SMAS - Start.lvlx",
     "map.lvlx",
     "intro_8bit.lvlx",
@@ -462,7 +462,7 @@ smastables._noLevelPlacesPlusOtherLevels = {
     "SMAS - Opening Cutscene.lvlx",
 }
 
-smastables._noTransitionLevels = { --This one will prevent transitions from happening via warpTransition
+smasTables._noTransitionLevels = { --This one will prevent transitions from happening via warpTransition
     "SMAS - Start.lvlx",
     "SMAS - Intro.lvlx",
     "SMAS - Credits.lvlx",
@@ -491,7 +491,7 @@ smastables._noTransitionLevels = { --This one will prevent transitions from happ
     "SMAS - Opening Cutscene.lvlx",
 }
 
-smastables.__classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.
+smasTables.__classicBattleModeLevels = { --All Classic Battle Mode levels, used for RNG and for a general list.
     "battle_battleshrooms.lvlx",
     "battle_battle-zone.lvlx",
     "battle_classic-castle-battle.lvlx",
@@ -509,7 +509,7 @@ smastables.__classicBattleModeLevels = { --All Classic Battle Mode levels, used 
     "battle_nsmbds3.lvlx",
 }
 
-smastables.__mainMenuThemes = {
+smasTables.__mainMenuThemes = {
     "intro_SMAS.lvlx",
     "intro_SMBX1.0.lvlx",
     "intro_SMBX1.1.lvlx",
@@ -531,7 +531,7 @@ smastables.__mainMenuThemes = {
     "intro_metroidprime2.lvlx",
 }
 
-smastables.__allMandatoryLevels = { --All Rush Mode levels.
+smasTables.__allMandatoryLevels = { --All Rush Mode levels.
     "SMB1 - W-1, L-1.lvlx",
     "SMB1 - W-1, L-2.lvlx",
     "SMB1 - W-1, L-3.lvlx",
@@ -590,7 +590,7 @@ smastables.__allMandatoryLevels = { --All Rush Mode levels.
     "SMB2 - W-7, L-2.lvlx",
 }
 
-smastables.__allLevelsOptional = { --All optional levels.
+smasTables.__allLevelsOptional = { --All optional levels.
     "SMBLL - W-1, L-1.lvlx",
     "SMBLL - W-1, L-2.lvlx",
     "SMBLL - W-1, L-3.lvlx",
@@ -659,7 +659,7 @@ smastables.__allLevelsOptional = { --All optional levels.
     "SMBSp - W-1, L-4.lvlx",
 }
 
-smastables.__allLevels = { --All levels.
+smasTables.__allLevels = { --All levels.
     "SMB1 - W-1, L-1.lvlx",
     "SMB1 - W-1, L-2.lvlx",
     "SMB1 - W-1, L-3.lvlx",
@@ -805,7 +805,7 @@ smastables.__allLevels = { --All levels.
 }
 
 --All SMB1 levels with an -3, listed here for many reasons
-smastables.__smb1Dash3Levels = {
+smasTables.__smb1Dash3Levels = {
     "SMB1 - W-1, L-3.lvlx",
     "SMB1 - W-2, L-3.lvlx",
     "SMB1 - W-3, L-3.lvlx",
@@ -816,7 +816,7 @@ smastables.__smb1Dash3Levels = {
 }
 
 --All SMB1 levels with an -3, listed here for many reasons
-smastables.__smb1Dash3LevelsNumbered = {
+smasTables.__smb1Dash3LevelsNumbered = {
     [1] = "SMB1 - W-1, L-3.lvlx",
     [2] = "SMB1 - W-2, L-3.lvlx",
     [3] = "SMB1 - W-3, L-3.lvlx",
@@ -827,7 +827,7 @@ smastables.__smb1Dash3LevelsNumbered = {
 }
 
 --All SMB1 levels with an -1, listed here for many reasons
-smastables.__smb1Dash1Levels = {
+smasTables.__smb1Dash1Levels = {
     "SMB1 - W-1, L-1.lvlx",
     "SMB1 - W-2, L-1.lvlx",
     "SMB1 - W-3, L-1.lvlx",
@@ -838,7 +838,7 @@ smastables.__smb1Dash1Levels = {
 }
 
 --All SMB1 levels with an -1, listed here for many reasons
-smastables.__smb1Dash1LevelsNumbered = {
+smasTables.__smb1Dash1LevelsNumbered = {
     [1] = "SMB1 - W-1, L-1.lvlx",
     [2] = "SMB1 - W-2, L-1.lvlx",
     [3] = "SMB1 - W-3, L-1.lvlx",
@@ -848,45 +848,45 @@ smastables.__smb1Dash1LevelsNumbered = {
     [7] = "SMB1 - W-7, L-1.lvlx",
 }
 
-smastables.allShakableBlockIDs = {4,625,55,60,90,159,169,170,173,176,179,188,226,281,282,283,622,623,624,625}
+smasTables.allShakableBlockIDs = {4,625,55,60,90,159,169,170,173,176,179,188,226,281,282,283,622,623,624,625}
 
-smastables.allGoombaNPCIDs = {1,2,27,71,89,242,243,379,392,393,466,467}
-smastables.allKoopaNPCIDs = {4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
-smastables.allShellNPCIDs = {5,7,24,73,113,114,115,116,172,174,194,195}
+smasTables.allGoombaNPCIDs = {1,2,27,71,89,242,243,379,392,393,466,467}
+smasTables.allKoopaNPCIDs = {4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
+smasTables.allShellNPCIDs = {5,7,24,73,113,114,115,116,172,174,194,195}
 
-smastables.allStarmanNPCIDs = {293,559,994,996}
-smastables.allCollectableStarNPCIDs = {97,196,1000}
-smastables.allCoinNPCIDs = {10,33,88,103,138,152,251,252,253,258,411,528} --378 is a dash coin. Perhaps we should make it compatible with it soon...?
+smasTables.allStarmanNPCIDs = {293,559,994,996}
+smasTables.allCollectableStarNPCIDs = {97,196,1000}
+smasTables.allCoinNPCIDs = {10,33,88,103,138,152,251,252,253,258,411,528} --378 is a dash coin. Perhaps we should make it compatible with it soon...?
 
-smastables.allMushroomNPCIDs = {9,184,185,249}
-smastables.allFireFlowerNPCIDs = {14,182,183}
-smastables.allSuperLeafNPCIDs = {34}
-smastables.allTanookiSuitNPCIDs = {169}
-smastables.allHammerSuitNPCIDs = {170}
-smastables.allIceFlowerNPCIDs = {277,264}
-smastables.allPowerupNPCIDs = {9,182,183,184,185,249,14,34,169,170,277,264}
+smasTables.allMushroomNPCIDs = {9,184,185,249}
+smasTables.allFireFlowerNPCIDs = {14,182,183}
+smasTables.allSuperLeafNPCIDs = {34}
+smasTables.allTanookiSuitNPCIDs = {169}
+smasTables.allHammerSuitNPCIDs = {170}
+smasTables.allIceFlowerNPCIDs = {277,264}
+smasTables.allPowerupNPCIDs = {9,182,183,184,185,249,14,34,169,170,277,264}
 
-smastables.allThwompNPCIDs = {37,180,437,295,435,432,301}
-smastables.allEnemyFireballs = {85,87,246,276}
-smastables.allRupeeNPCIDs = {251,252,253}
-smastables.allDragonCoinNPCIDs = {274}
-smastables.allStarCoinNPCIDs = {310}
+smasTables.allThwompNPCIDs = {37,180,437,295,435,432,301}
+smasTables.allEnemyFireballs = {85,87,246,276}
+smasTables.allRupeeNPCIDs = {251,252,253}
+smasTables.allDragonCoinNPCIDs = {274}
+smasTables.allStarCoinNPCIDs = {310}
 
-smastables.allInteractableNPCIDs = {9,10,14,31,33,34,35,88,90,92,139,140,141,142,143,144,145,146,147,153,154,155,156,157,169,170,184,185,186,187,188,191,193,249,250,258,274,293,425,462,559,994,996,997}
+smasTables.allInteractableNPCIDs = {9,10,14,31,33,34,35,88,90,92,139,140,141,142,143,144,145,146,147,153,154,155,156,157,169,170,184,185,186,187,188,191,193,249,250,258,274,293,425,462,559,994,996,997}
 
-smastables.allBaseGameKillableEnemyIDs = {1,2,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,43,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,86,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,136,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,179,180,189,194,195,199,200,201,203,204,205,206,207,210,229,230,231,232,233,234,235,236,242,243,244,245,247,256,257,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,297,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,323,324,333,334,345,346,347,350,351,352,357,366,368,369,371,372,373,374,375,376,377,379,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,417,431,432,435,437,444,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,518,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,617,618,623,624,667,920,921} --This is a list of all killable enemies for Frisk, and some etc. stuff
+smasTables.allBaseGameKillableEnemyIDs = {1,2,4,5,6,7,8,12,15,17,18,19,20,23,24,25,27,28,29,36,37,38,39,43,43,44,47,48,51,52,53,54,55,59,61,63,65,71,72,73,74,76,77,86,89,93,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,135,136,137,161,162,163,164,165,166,167,168,172,173,174,175,176,177,179,180,189,194,195,199,200,201,203,204,205,206,207,210,229,230,231,232,233,234,235,236,242,243,244,245,247,256,257,261,262,267,268,270,271,272,275,280,281,284,285,286,294,295,296,297,298,299,301,302,303,304,305,307,309,311,312,313,314,315,316,317,318,323,324,333,334,345,346,347,350,351,352,357,366,368,369,371,372,373,374,375,376,377,379,382,383,386,388,389,392,393,395,401,406,407,408,409,413,415,417,431,432,435,437,444,446,447,448,449,459,460,461,463,464,466,467,469,470,471,472,485,486,487,490,491,492,493,509,510,512,513,514,515,516,517,518,519,520,521,522,523,524,529,530,539,562,563,564,572,578,579,580,586,587,588,589,590,610,611,612,613,614,616,617,618,623,624,667,920,921} --This is a list of all killable enemies for Frisk, and some etc. stuff
 
-smastables.allLavaBlockIDs = {371,405,30,406,1268,404,420,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487}
+smasTables.allLavaBlockIDs = {371,405,30,406,1268,404,420,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487}
 
-smastables.stockSoundNumbersInOrder = table.map{2,3,5,6,9,11,12,13,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,37,38,40,41,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,78,79,80,82,83,84,85,86,87,88,89,90,91}
+smasTables.stockSoundNumbersInOrder = table.map{2,3,5,6,9,11,12,13,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,37,38,40,41,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,78,79,80,82,83,84,85,86,87,88,89,90,91}
 
-smastables.extrasoundsNumbersInOrder = {1,4,7,8,10,14,15,18,33,39,42,43,59,77,81,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169}
+smasTables.extrasoundsNumbersInOrder = {1,4,7,8,10,14,15,18,33,39,42,43,59,77,81,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169}
 
-smastables.allSoundNumbersInOrder = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169}
+smasTables.allSoundNumbersInOrder = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169}
 
-smastables.allVanillaSoundNumbersInOrder = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91}
+smasTables.allVanillaSoundNumbersInOrder = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91}
 
-smastables.soundNamesInOrder = {
+smasTables.soundNamesInOrder = {
     "player-jump", --1
     "stomped", --2
     "block-hit", --3
@@ -1058,7 +1058,7 @@ smastables.soundNamesInOrder = {
     "fireball-hit-hammershield", --169
 }
 
-smastables.keyboardMap = {
+smasTables.keyboardMap = {
     "", -- [1]
     "", -- [2]
     VK_CNCL, -- [3]
@@ -1316,7 +1316,7 @@ smastables.keyboardMap = {
     "" -- [255]
 }
 
-smastables.mario3AroundTheWorldMusicRng = {
+smasTables.mario3AroundTheWorldMusicRng = {
     "_OST/Mario 3 - Around the World (Bootleg)/03 - Music 1 (Forget Him).vgm",
     "_OST/Mario 3 - Around the World (Bootleg)/04 - Music 2 (Through the Night).vgm",
     "_OST/Mario 3 - Around the World (Bootleg)/05 - Music 3 (Quick Fix).vgm",
@@ -1335,11 +1335,11 @@ smastables.mario3AroundTheWorldMusicRng = {
 }
 
 --This will be used for an SEE Mod-only feature where it'll compare what sounds were in the previously cached sound file table when changing sounds. If anything that's currently changed isn't matching the sounds on the previously cached sound file table, it'll clear the unmatched sounds that are specified from the SMBX2 cache.
-for k,v in ipairs(smastables.soundNamesInOrder) do
-    smastables.previouslyCachedSoundFiles = {}
-    smastables.currentlyCachedSoundFiles = {}
-    smastables.previouslyCachedSoundFiles[k] = v
-    smastables.currentlyCachedSoundFiles[k] = v
+for k,v in ipairs(smasTables.soundNamesInOrder) do
+    smasTables.previouslyCachedSoundFiles = {}
+    smasTables.currentlyCachedSoundFiles = {}
+    smasTables.previouslyCachedSoundFiles[k] = v
+    smasTables.currentlyCachedSoundFiles[k] = v
 end
 
-return smastables
+return smasTables

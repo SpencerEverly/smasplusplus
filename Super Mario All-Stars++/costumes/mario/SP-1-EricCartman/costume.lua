@@ -1,7 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -62,8 +62,8 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities == true then
-        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
-            if smascharacterglobals.abilitySettings.southParkEricCanThrowSnowballs then
+        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+            if smasCharacterGlobals.abilitySettings.southParkEricCanThrowSnowballs then
                 costume.throwSnowball()
             end
         end
@@ -74,7 +74,7 @@ function costume.onControllerButtonPress(button, playerIdx)
     if SaveData.toggleCostumeAbilities == true then
         if playerIdx == 1 then
             if button == SaveData.specialbutton1stplayer then
-                if smascharacterglobals.abilitySettings.southParkEricCanThrowSnowballs then
+                if smasCharacterGlobals.abilitySettings.southParkEricCanThrowSnowballs then
                     costume.throwSnowball()
                 end
             end
@@ -102,8 +102,8 @@ function costume.throwSnowball()
             snowballNpc.speedX = -8.5
             snowballNpc.speedY = 1
         end
-        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
-            Sound.playSFX(smascharacterglobals.soundSettings.southParkEricSnowballThrowSFX)
+        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+            Sound.playSFX(smasCharacterGlobals.soundSettings.southParkEricSnowballThrowSFX)
         end
         costume.usesnowball = false
         cooldown = 35
@@ -124,7 +124,7 @@ function costume.onPostNPCKill(npc, harmType)
     end
     if costume.abilitesenabled then
         if items[npc.id] and Colliders.collide(plr, npc) then
-            if smascharacterglobals.soundSettings.southParkEricCanUseVoice then
+            if smasCharacterGlobals.soundSettings.southParkEricCanUseVoice then
                 SFX.play("costumes/mario/SP-1-EricCartman/voices/item/"..itemgetrng..".ogg", 1, 1, 80)
             end
         end
@@ -140,7 +140,7 @@ function costume.onPlayerHarm()
             else
                 hurtvoicerng = rng.randomInt(7,8)
             end
-            if smascharacterglobals.soundSettings.southParkEricCanUseVoice then
+            if smasCharacterGlobals.soundSettings.southParkEricCanUseVoice then
                 Sound.playSFX("mario/SP-1-EricCartman/voices/hurt/"..hurtvoicerng..".ogg")
             end
         end
@@ -155,7 +155,7 @@ function costume.onPlayerKill()
         dyingvoicerng = rng.randomInt(3,5)
     end
     if costume.abilitesenabled then
-        if smascharacterglobals.soundSettings.southParkEricCanUseVoice then
+        if smasCharacterGlobals.soundSettings.southParkEricCanUseVoice then
             Sound.playSFX("mario/SP-1-EricCartman/voices/dying/"..dyingvoicerng..".ogg")
         end
     end

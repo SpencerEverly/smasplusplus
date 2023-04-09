@@ -3,7 +3,7 @@ local npcutils = require("npcs/npcutils")
 local extrasounds = require("extrasounds")
 local Routine = require("routine")
 local rng = require("base/rng")
-local smasbooleans = require("smasbooleans")
+local smasBooleans = require("smasBooleans")
 
 local realstar = {}
 
@@ -110,12 +110,12 @@ function starget()
     muteMusic(-1)
     Audio.SeizeStream(-1)
     Audio.MusicStop()
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     GameData.winStateActive = true
     playervuln = true
     playerwon = true
     Routine.wait(14, true)
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     GameData.winStateActive = false
     Level.exit(LEVEL_END_STATE_GAMEEND)
 end

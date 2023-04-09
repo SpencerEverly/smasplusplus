@@ -10,8 +10,8 @@ local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
-local smashud = require("smashud")
-local smasfunctions = require("smasfunctions")
+local smasHud = require("smasHud")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -783,7 +783,7 @@ function costume.onInputUpdate()
     for _,p in ipairs(costume.playersList) do
         local data = costume.playerData[p]
         if p.keys.down == KEYS_PRESSED and canDuck(p) and not Misc.isPaused() then
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 Sound.playSFX("mario/16-NSMBWii-Mario/player-duck.ogg")
             end
         end
@@ -898,7 +898,7 @@ function costume.onTick()
             costume.shellHoldTimer = costume.shellHoldTimer + 1
             if costume.shellHoldTimer == 1 then
                 local rngshellkick = rng.randomInt(1,3)
-                if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                     Sound.playSFX("mario/16-NSMBWii-Mario/mario-shellkick"..rngshellkick..".ogg")
                 end
             end
@@ -906,7 +906,7 @@ function costume.onTick()
         if p.holdingNPC ~= nil and p.keys.run == KEYS_UNPRESSED then
             costume.shellHoldTimer = 0
             local rngshellkick = rng.randomInt(3,6)
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 Sound.playSFX("mario/16-NSMBWii-Mario/mario-shellkick"..rngshellkick..".ogg")
             end
         end

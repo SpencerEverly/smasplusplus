@@ -1,6 +1,6 @@
-local smasintrorunner = {}
+local smasIntroRunner = {}
 
-local smasbooleans = require("smasbooleans")
+local smasBooleans = require("smasBooleans")
 
 local introtime = 0
 local jumptime = 0
@@ -9,14 +9,14 @@ local activatejump = false
 local threeplayermode = false
 local fourplayermode = false
 
-function smasintrorunner.onInitAPI()
-    registerEvent(smasintrorunner,"onDraw")
-    registerEvent(smasintrorunner,"onInputUpdate")
-    registerEvent(smasintrorunner,"onStart")
+function smasIntroRunner.onInitAPI()
+    registerEvent(smasIntroRunner,"onDraw")
+    registerEvent(smasIntroRunner,"onInputUpdate")
+    registerEvent(smasIntroRunner,"onStart")
 end
 
-function smasintrorunner.onInputUpdate()
-    if smasbooleans.introModeActivated then
+function smasIntroRunner.onInputUpdate()
+    if smasBooleans.introModeActivated then
         local playernumber = rng.randomInt(1,6)
         for i = 2,Player.count() do
             for k,_ in pairs(player.keys) do
@@ -50,8 +50,8 @@ function smasintrorunner.onInputUpdate()
     end
 end
 
-function smasintrorunner.onDraw()
-    if smasbooleans.introModeActivated then
+function smasIntroRunner.onDraw()
+    if smasBooleans.introModeActivated then
         introtime = introtime - 3
         jumptime = 29
         for i = 1,6 do
@@ -71,4 +71,4 @@ function smasintrorunner.onDraw()
     end
 end
 
-return smasintrorunner
+return smasIntroRunner

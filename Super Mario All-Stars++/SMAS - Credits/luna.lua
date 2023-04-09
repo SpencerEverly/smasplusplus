@@ -348,7 +348,7 @@ local creditsScrollY = 0
 local scrollOutroX = 0
 
 function onStart()
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     Audio.MusicVolume(80)
     for i = 1, #credits do
         local text = credits[i]
@@ -400,7 +400,7 @@ function onTick()
 end
 
 function onExit()
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     Audio.MusicVolume(64)
 end
 

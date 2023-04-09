@@ -6,11 +6,11 @@ datetime.bottomleft = false
 datetime.topright = false
 datetime.topleft = false
 
-smasbooleans.disablePauseMenu = true
+smasBooleans.disablePauseMenu = true
 
 GameData.gameFirstLoaded = true
 
-smasbooleans.mainMenuActive = false
+smasBooleans.mainMenuActive = false
 debugbox.bootactive = false
 GameData.rushModeActive = false
 
@@ -265,7 +265,7 @@ function onTick()
         elseif Misc.inEditor() and SMBX_VERSION == VER_SEE_MOD then
             SysManager.loadIntroTheme()
         elseif not Misc.inEditor() and SMBX_VERSION == VER_SEE_MOD then
-            if not smasbooleans.skipUpdater then
+            if not smasBooleans.skipUpdater then
                 Routine.run(startupdater)
             else
                 SysManager.loadIntroTheme()

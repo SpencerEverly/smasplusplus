@@ -67,24 +67,24 @@ bootmenu.battleModeLevel = 0
 bootmenu.themeSelected = 0
 
 if bootmenu.active then
-    smasbooleans.mainMenuActive = true
+    smasBooleans.mainMenuActive = true
     aw.enabled = false
     littleDialogue.cursorEnabled = false
     Graphics.activateHud(false)
-    smashud.visible.keys = false
-    smashud.visible.itembox = false
-    smashud.visible.bombs = false
-    smashud.visible.coins = false
-    smashud.visible.score = false
-    smashud.visible.lives = false
-    smashud.visible.stars = false
-    smashud.visible.starcoins = false
-    smashud.visible.timer = false
-    smashud.visible.levelname = false
-    smashud.visible.overworldPlayer = false
-    smashud.visible.deathcount = false
-    smashud.visible.customitembox = false
-    smashud.visible.pWing = false
+    smasHud.visible.keys = false
+    smasHud.visible.itembox = false
+    smasHud.visible.bombs = false
+    smasHud.visible.coins = false
+    smasHud.visible.score = false
+    smasHud.visible.lives = false
+    smasHud.visible.stars = false
+    smasHud.visible.starcoins = false
+    smasHud.visible.timer = false
+    smasHud.visible.levelname = false
+    smasHud.visible.overworldPlayer = false
+    smasHud.visible.deathcount = false
+    smasHud.visible.customitembox = false
+    smasHud.visible.pWing = false
     datetime.bottomright = true
     datetime.topright = false
     extrasounds.active = false
@@ -137,7 +137,7 @@ local function battleRandomLevelSelect()
     GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(smastables.__classicBattleModeLevels[rng.randomInt(1,#smastables.__classicBattleModeLevels)])
+    Level.load(smasTables.__classicBattleModeLevels[rng.randomInt(1,#smasTables.__classicBattleModeLevels)])
 end
 
 local function battleLevelSelected()
@@ -148,7 +148,7 @@ local function battleLevelSelected()
     GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(smastables.__classicBattleModeLevels[bootmenu.battleModeLevel])
+    Level.load(smasTables.__classicBattleModeLevels[bootmenu.battleModeLevel])
 end
 
 
@@ -160,7 +160,7 @@ local function startRushMode()
     GameData.rushModeActive = true
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(smastables.__allMandatoryLevels[rng.randomInt(1,#smastables.__allMandatoryLevels)], nil, nil)
+    Level.load(smasTables.__allMandatoryLevels[rng.randomInt(1,#smasTables.__allMandatoryLevels)], nil, nil)
 end
 
 
@@ -172,7 +172,7 @@ local function themeSelected()
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(smastables.__mainMenuThemes[SaveData.introselect])
+    Level.load(smasTables.__mainMenuThemes[SaveData.introselect])
 end
 
 local function theme4scrolling()
@@ -279,7 +279,7 @@ end
 local function easterEgg() --SnooPINGAS I see? ._.
     Routine.wait(0.1, true)
     Routine.wait(900, true)
-    smasbooleans.overrideMusicVolume = true
+    smasBooleans.overrideMusicVolume = true
     Audio.MusicFadeOut(player.section, 4000)
     Routine.wait(10, true)
     Sound.changeMusic("_OST/All Stars Secrets/ZZZ_Easter Egg.ogg", 0)
@@ -317,12 +317,12 @@ local function MigrateOldSave3() --Migration started + completed
     SaveData.totalScoreClassic = Misc.score()
     GameData.temporaryPowerupStored = player.powerup
     GameData.temporaryReserveStored = player.reservePowerup
-    for k,v in ipairs(smastables.__allLevels) do
+    for k,v in ipairs(smasTables.__allLevels) do
         if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) then
             table.insert(SaveData.completeLevels, v)
         end
     end
-    for k,v in ipairs(smastables.__allLevelsOptional) do
+    for k,v in ipairs(smasTables.__allLevelsOptional) do
         if table.icontains(Misc.getLegacyStarsCollectedNameOnly(),v) then
             table.insert(SaveData.completeLevelsOptional, v)
         end
@@ -440,7 +440,7 @@ end
 local function ResolutionChange1() --Resolution changed.
     Sound.playSFX("resolution-set.ogg")
     Routine.waitFrames(1, true)
-    smasresolutions.changeResolution()
+    smasResolutions.changeResolution()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000023"), pauses = false, updatesInPause = true})
 end
 
@@ -449,12 +449,12 @@ local function ResolutionChangeBorder2() --Border toggled on/off.
         Sound.playSFX("resolutionborder-disable.ogg")
         SaveData.borderEnabled = false
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     elseif not SaveData.borderEnabled then
         Sound.playSFX("resolutionborder-enable.ogg")
         SaveData.borderEnabled = true
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     end
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000024"), pauses = false, updatesInPause = true})
 end
@@ -464,12 +464,12 @@ local function ResolutionChangeScale3()
         Sound.playSFX("letterbox-disable.ogg")
         SaveData.letterbox = false
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     elseif not SaveData.letterbox then
         Sound.playSFX("letterbox-enable.ogg")
         SaveData.letterbox = true
         Routine.waitFrames(1, true)
-        smasresolutions.changeResolution()
+        smasResolutions.changeResolution()
     end
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000025"), pauses = false, updatesInPause = true})
 end
@@ -678,8 +678,8 @@ end
 
 local function ChangeChar1()
     if not SaveData.disableX2char then
-        smascharacterchanger.menuActive = true
-        smascharacterchanger.animationActive = true
+        smasCharacterChanger.menuActive = true
+        smasCharacterChanger.animationActive = true
     elseif SaveData.disableX2char then
         if Player.count() == 2 then
             littleDialogue.create({text = transplate.getTranslation("0x0000000000000048"), pauses = false, updatesInPause = true})
@@ -1085,9 +1085,9 @@ function bootmenu.onTick()
         if not SaveData.disableX2char then
             x2noticecheck = active
             x2noticecheckactive = not active
-            smashud.visible.lives = false
+            smasHud.visible.lives = false
         elseif SaveData.disableX2char then
-            smashud.visible.lives = false
+            smasHud.visible.lives = false
             x2noticecheck = not active
             x2noticecheckactive = active
             for _,p in ipairs(Player.get()) do

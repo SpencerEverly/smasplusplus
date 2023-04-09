@@ -1,10 +1,10 @@
-local smaspwing = {}
+local smasPWing = {}
 
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 
 local pmeter = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-4.png")
 
-smaspwing.pSpeedCounters = {
+smasPWing.pSpeedCounters = {
     [CHARACTER_MARIO] = 35,
     [CHARACTER_LUIGI] = 40,
     [CHARACTER_PEACH] = 80,
@@ -23,25 +23,25 @@ smaspwing.pSpeedCounters = {
     [CHARACTER_SAMUS] = 10,
 }
 
-function smaspwing.onInitAPI()
-    registerEvent(smaspwing,"onDraw")
+function smasPWing.onInitAPI()
+    registerEvent(smasPWing,"onDraw")
 end
 
-function smaspwing.onDraw()
-    if smashud.visible.pWing then
+function smasPWing.onDraw()
+    if smasHud.visible.pWing then
         if not SaveData.disableX2char then
             if (player.powerup == 4 or player.powerup == 5) and not Misc.isPaused() then
-                if player:mem(0x168, FIELD_FLOAT) >= 0 and (player:mem(0x168, FIELD_FLOAT) <= smaspwing.pSpeedCounters[player.character] * 0.2) then
+                if player:mem(0x168, FIELD_FLOAT) >= 0 and (player:mem(0x168, FIELD_FLOAT) <= smasPWing.pSpeedCounters[player.character] * 0.2) then
                     Graphics.drawImageWP(pmeter, 340, 576, 0, 0, 104, 16, -4.1)
-                elseif player:mem(0x168, FIELD_FLOAT) >= (smaspwing.pSpeedCounters[player.character] * 0.2) and (player:mem(0x168, FIELD_FLOAT) <= smaspwing.pSpeedCounters[player.character] * 0.4) then
+                elseif player:mem(0x168, FIELD_FLOAT) >= (smasPWing.pSpeedCounters[player.character] * 0.2) and (player:mem(0x168, FIELD_FLOAT) <= smasPWing.pSpeedCounters[player.character] * 0.4) then
                     Graphics.drawImageWP(pmeter, 340, 576, 0, 16, 104, 16, -4.1)
-                elseif player:mem(0x168, FIELD_FLOAT) >= (smaspwing.pSpeedCounters[player.character] * 0.4) and (player:mem(0x168, FIELD_FLOAT) <= smaspwing.pSpeedCounters[player.character] * 0.6) then
+                elseif player:mem(0x168, FIELD_FLOAT) >= (smasPWing.pSpeedCounters[player.character] * 0.4) and (player:mem(0x168, FIELD_FLOAT) <= smasPWing.pSpeedCounters[player.character] * 0.6) then
                     Graphics.drawImageWP(pmeter, 340, 576, 0, 32, 104, 16, -4.1)
-                elseif player:mem(0x168, FIELD_FLOAT) >= (smaspwing.pSpeedCounters[player.character] * 0.6) and (player:mem(0x168, FIELD_FLOAT) <= smaspwing.pSpeedCounters[player.character] * 0.8) then
+                elseif player:mem(0x168, FIELD_FLOAT) >= (smasPWing.pSpeedCounters[player.character] * 0.6) and (player:mem(0x168, FIELD_FLOAT) <= smasPWing.pSpeedCounters[player.character] * 0.8) then
                     Graphics.drawImageWP(pmeter, 340, 576, 0, 48, 104, 16, -4.1)
-                elseif player:mem(0x168, FIELD_FLOAT) >= (smaspwing.pSpeedCounters[player.character] * 0.8) and player:mem(0x168, FIELD_FLOAT) < smaspwing.pSpeedCounters[player.character] then
+                elseif player:mem(0x168, FIELD_FLOAT) >= (smasPWing.pSpeedCounters[player.character] * 0.8) and player:mem(0x168, FIELD_FLOAT) < smasPWing.pSpeedCounters[player.character] then
                     Graphics.drawImageWP(pmeter, 340, 576, 0, 64, 104, 16, -4.1)
-                elseif player:mem(0x168, FIELD_FLOAT) == smaspwing.pSpeedCounters[player.character] then
+                elseif player:mem(0x168, FIELD_FLOAT) == smasPWing.pSpeedCounters[player.character] then
                     Graphics.drawImageWP(pmeter, 340, 576, 0, 80, 104, 16, -4.1)
                     --Graphics.drawImageWP(pmeter, 340, 576, 0, 96, 104, 16, -4.1)
                 end
@@ -50,4 +50,4 @@ function smaspwing.onDraw()
     end
 end
 
-return smaspwing
+return smasPWing

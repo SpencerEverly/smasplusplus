@@ -1,6 +1,6 @@
 local littleDialogue = require("littleDialogue")
 local rng = require("base/rng")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local level_dependencies_rushmode = require("level_dependencies_rushmode")
 local mleb = require("multilayeredearthboundbg")
 local title = Graphics.loadImage("title-final-2x.png")
@@ -8,20 +8,20 @@ local title = Graphics.loadImage("title-final-2x.png")
 GameData.rushModeResultsActive = true
 GameData.rushModeWon = false
 
-smashud.visible.keys = false
-smashud.visible.itembox = false
-smashud.visible.bombs = false
-smashud.visible.coins = false
-smashud.visible.score = false
-smashud.visible.lives = false
-smashud.visible.stars = false
-smashud.visible.starcoins = false
-smashud.visible.timer = false
-smashud.visible.levelname = false
-smashud.visible.overworldPlayer = false
-smashud.visible.deathcount = false
+smasHud.visible.keys = false
+smasHud.visible.itembox = false
+smasHud.visible.bombs = false
+smasHud.visible.coins = false
+smasHud.visible.score = false
+smasHud.visible.lives = false
+smasHud.visible.stars = false
+smasHud.visible.starcoins = false
+smasHud.visible.timer = false
+smasHud.visible.levelname = false
+smasHud.visible.overworldPlayer = false
+smasHud.visible.deathcount = false
 if not Misc.inMarioChallenge() then
-    smashud.visible.customitembox = false
+    smasHud.visible.customitembox = false
 end
 
 local exitscreen = false
@@ -83,7 +83,7 @@ function startNextLevel()
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(smastables.__allMandatoryLevels[rng.randomInt(1,#smastables.__allMandatoryLevels)], nil, nil)
+    Level.load(smasTables.__allMandatoryLevels[rng.randomInt(1,#smasTables.__allMandatoryLevels)], nil, nil)
 end
 
 function restartLastLevel()

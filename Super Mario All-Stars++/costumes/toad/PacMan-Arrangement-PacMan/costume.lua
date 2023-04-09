@@ -1,4 +1,4 @@
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -6,7 +6,7 @@ costume.loadedSounds = false
 
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smastables = require("smastables")
+local smasTables = require("smasTables")
 
 function costume.onInit(p)
     registerEvent(costume,"onTick")
@@ -152,7 +152,7 @@ function costume.onInputUpdate()
         end
         --Dash SFX
         if player.powerup == 3 and player.keys.run == KEYS_PRESSED and moving and player:isOnGround() then
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 Sound.playSFX("toad/PacMan-Arrangement-PacMan/dash.ogg")
             end
         end
@@ -160,7 +160,7 @@ function costume.onInputUpdate()
         if player.powerup == 3 and player.keys.run == KEYS_PRESSED and not player.keys.down == KEYS_DOWN then
             player:mem(0x172, FIELD_BOOL, false)
             local fireballnpc = NPC.spawn(13, player.x, player.y, player.section, false, true)
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 Sound.playSFX(18)
             end
             if player.direction == 1 then
@@ -174,7 +174,7 @@ function costume.onInputUpdate()
         --Higher jump
         if player.powerup == 4 and player.keys.jump == KEYS_PRESSED and player:mem(0x00, FIELD_BOOL) == true then
             player:mem(0x00, FIELD_BOOL, false)
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 Sound.playSFX("toad/PacMan-Arrangement-PacMan/double-jump.ogg")
             end
             player.speedY = -12
@@ -183,7 +183,7 @@ function costume.onInputUpdate()
         if player.powerup == 7 and player.keys.run == KEYS_PRESSED and not player.keys.down == KEYS_DOWN then
             player:mem(0x172, FIELD_BOOL, false)
             local iceballnpc = NPC.spawn(265, player.x, player.y, player.section, false, true)
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 Sound.playSFX(93)
             end
             if player.direction == 1 then
@@ -200,7 +200,7 @@ end
 function teleportingability()
     --Teleport (Only active for 2 seconds)
     if player.powerup == 6 then
-        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
             if timetostopteleport >= 1 then
                 Sound.playSFX("toad/PacMan-Arrangement-PacMan/teleport-start.ogg")
                 teleportmode = true
@@ -213,7 +213,7 @@ function teleportingability()
 end
 
 function costume.onKeyboardPress(keyCode, repeated)
-    if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+    if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
         if not teleportmode then
             teleportingability()
         end

@@ -1,11 +1,11 @@
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local rng = require("base/rng")
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
-local smastables = require("smastables")
-local smasfunctions = require("smasfunctions")
+local smasTables = require("smasTables")
+local smasFunctions = require("smasFunctions")
 local littleDialogue
 pcall(function() littleDialogue = require("littleDialogue") end)
 
@@ -48,7 +48,7 @@ function costume.onInit(p)
     costume.useGun1 = false
     costume.useGrenade2 = false
     costume.grenade = true
-    --smashud.visible.itembox = false
+    --smasHud.visible.itembox = false
     borishp = 3
     if costume.grenade then
         local grenade = {
@@ -101,7 +101,7 @@ function costume.checkSpecialAbilityMessage()
     if not Misc.isPaused() then
         if SaveData.toggleCostumeAbilities then
             if (not GameData.activateAbilityMessage or GameData.activateAbilityMessage == nil) then
-                if not table.icontains(smastables._friendlyPlaces,Level.filename()) then
+                if not table.icontains(smasTables._friendlyPlaces,Level.filename()) then
                     player:mem(0x172, FIELD_BOOL, false)
                     cooldown = 5
                     GameData.activateAbilityMessage = true
@@ -132,7 +132,7 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities then
-        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
             costume.checkSpecialAbilityMessage()
         end
     end
@@ -250,7 +250,7 @@ end
 
 function costume.onDraw(p)
     if SaveData.toggleCostumeAbilities then
-        if smascharacterglobals.abilitySettings.borisCanDrawGun then
+        if smasCharacterGlobals.abilitySettings.borisCanDrawGun then
             --Gun states
             if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
                 Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
@@ -313,7 +313,7 @@ end
 function costume.onInputUpdate()
     if SaveData.toggleCostumeAbilities == true then
         if not Misc.isPaused() then
-            if smascharacterglobals.abilitySettings.borisCanUseGun then
+            if smasCharacterGlobals.abilitySettings.borisCanUseGun then
                 if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
                     if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
                         if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
@@ -348,7 +348,7 @@ function costume.onInputUpdate()
                 end
             end
             if player.powerup == 6 then
-                if smascharacterglobals.abilitySettings.borisCanUseGrenade then
+                if smasCharacterGlobals.abilitySettings.borisCanUseGrenade then
                     if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false and (player.keys.up == KEYS_DOWN) == false then
                         Sound.playSFX("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
                         costume.shootGrenade2()
@@ -415,13 +415,13 @@ function costume.onTick(p)
         
         for index,explosion in ipairs(Animation.get(148)) do --Explosion SFX
             Audio.sounds[22].muted = true
-            SFX.play(smascharacterglobals.soundSettings.borisGrenadeExplodeSFX, 1, 1, 25)
+            SFX.play(smasCharacterGlobals.soundSettings.borisGrenadeExplodeSFX, 1, 1, 25)
             Routine.run(costume.unmutebill)
         end
         for index,explosion in ipairs(NPC.get(291)) do --Throw SFX
             Audio.sounds[25].muted = true
             extrasounds.sounds[105].sfx.volume = 0
-            SFX.play(smascharacterglobals.soundSettings.borisGrenadeLaunchSFX, 1, 1, 500)
+            SFX.play(smasCharacterGlobals.soundSettings.borisGrenadeLaunchSFX, 1, 1, 500)
             Routine.run(costume.unmutehammer)
         end
     end
@@ -448,7 +448,7 @@ end
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
     costume.grenade = false
-    --smashud.visible.itembox = true
+    --smasHud.visible.itembox = true
 end
 
 return costume

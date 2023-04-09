@@ -1,3 +1,3 @@
 function onStart()
-    Sound.changeMusicRNG(smastables.mario3AroundTheWorldMusicRng, -1)
+    Sound.changeMusicRNG(smasTables.mario3AroundTheWorldMusicRng, -1)
 end

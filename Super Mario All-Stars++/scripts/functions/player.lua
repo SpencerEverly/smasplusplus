@@ -3,6 +3,10 @@ local Playur = {}
 local starman
 local megashroom
 
+if smasGlobals == nil then
+    smasGlobals = require("smasGlobals")
+end
+
 if Misc.inSuperMarioAllStarsPlusPlus() then
     starman = require("starman/star")
     megashroom = require("mega/megashroom")
@@ -47,6 +51,20 @@ local threePlayersOnSEEModActive = false
 
 function Playur.onInitAPI()
     registerEvent(Playur,"onDraw")
+end
+
+function Playur.getScreenCoords(pl)
+	local cam = camera
+	local px = pl.x
+	local py = pl.y
+	local cx = cam.x
+	local cy = cam.y
+	local r = {}
+	r.left = px - cx
+	r.top = py - cy
+	r.right = (px - cx) + pl.width
+	r.bottom = (py - cy) + pl.height
+	return r
 end
 
 function Playur.setupPlayers()
@@ -149,8 +167,8 @@ function Playur.activate1stPlayer(enablexplosion) --Activates 1st player mode
         enablexplosion = false
     end
     Playur.setCount(1)
-    if smasbooleans then
-        smasbooleans.introModeActivated = false
+    if smasBooleans then
+        smasBooleans.introModeActivated = false
         console:println("Player intro mode disabled to prevent any issues.")
     end
     if enableexplosion then
@@ -178,8 +196,8 @@ function Playur.toggleSingleCoOp(enableexplosion) --Activates/deactivates single
                 player2.powerup = player.powerup
             end
         end
-        if smasbooleans then
-            smasbooleans.introModeActivated = false
+        if smasBooleans then
+            smasBooleans.introModeActivated = false
             console:println("Player intro mode disabled to prevent any issues.")
         end
         if enableexplosion then
@@ -214,8 +232,8 @@ function Playur.activate2ndPlayer(enablexplosion) --Activates 2nd player mode
             player2.powerup = 2
         end
     end
-    if smasbooleans then
-        smasbooleans.introModeActivated = false
+    if smasBooleans then
+        smasBooleans.introModeActivated = false
         console:println("Player intro mode disabled to prevent any issues.")
     end
     if enableexplosion then
@@ -252,8 +270,8 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
                 player3.powerup = 2
             end
         end
-        if smasbooleans then
-            smasbooleans.introModeActivated = false
+        if smasBooleans then
+            smasBooleans.introModeActivated = false
             console:println("Player intro mode disabled to prevent any issues.")
         end
         
@@ -294,8 +312,8 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
                 player4.powerup = 2
             end
         end
-        if smasbooleans then
-            smasbooleans.introModeActivated = false
+        if smasBooleans then
+            smasBooleans.introModeActivated = false
             console:println("Player intro mode disabled to prevent any issues.")
         end
         
@@ -378,12 +396,16 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
         player4.powerup = poweruprng4
         player5.powerup = poweruprng5
         player6.powerup = poweruprng6
-        if smasbooleans then
-            smasbooleans.introModeActivated = true
+        if smasBooleans then
+            smasBooleans.introModeActivated = true
         end
         
         console:println("Player intro mode activated.")
     end
+end
+
+function Playur.stoned(p)
+    return p:mem(0x4A, FIELD_BOOL)
 end
 
 function Playur.isJumping(p)
@@ -421,6 +443,18 @@ function Playur.underwater(p) --Returns true if the specified player is underwat
         p:mem(0x34,FIELD_WORD) > 0
         and p:mem(0x06,FIELD_WORD) == 0
     )
+end
+
+function Playur.getNPCStandingIndex(p)
+    return p:mem(0x176, FIELD_WORD)
+end
+
+function Playur.getSlopeIndex(p)
+    return p:mem(0x48, FIELD_WORD)
+end
+
+function Playur.sliding(p)
+    return p:mem(0x3C, FIELD_BOOL)
 end
 
 function Playur.grabbing(p) --Returns true if the specified player is grabbing something.
@@ -610,13 +644,13 @@ end
 
 function Playur.inForcedState() --Returns true if the forced state is set to 0 on all players, else it's false.
     for _,p in ipairs(Player.get()) do
-        if not smasbooleans.mainMenuActive then
+        if not smasBooleans.mainMenuActive then
             if p.forcedState == 0 then
                 return false
             else
                 return true
             end
-        elseif smasbooleans.mainMenuActive then
+        elseif smasBooleans.mainMenuActive then
             if p.forcedState == 0 or p.forcedState == 8 then
                 return false
             else
@@ -841,6 +875,49 @@ end
 
 function Playur.currentWarp(plr)
     return plr:mem(0x15E, FIELD_WORD)
+end
+
+for i = 1,maxPlayers do
+    Playur[i] = {}
+    Playur[i].x                       = 0
+    Playur[i].y                       = 0
+    Playur[i].width                   = 0
+    Playur[i].height                  = 0
+    Playur[i].speedX                  = 0
+    Playur[i].speedY                  = 0
+
+    Playur[i].idx                     = i
+    Playur[i].isValid                 = false
+    Playur[i].screen                  = Playur.getScreenCoords(Playur[i])
+    Playur[i].isMega                  = false
+    Playur[i].hasStarman              = false
+    Playur[i].keepPowerOnMega         = false
+
+    Playur[i].section                 = 0
+    Playur[i].sectionObj              = Section(Playur[i].section)
+    Playur[i].climbing                = false
+    Playur[i].climbingNPC             = 0 --NOT cleared when player stops climbing
+    Playur[i].powerup                 = 0
+    Playur[i].character               = 0
+    Playur[i].reservePowerup          = 0
+    Playur[i].holdingNPC              = 0
+
+    Playur[i].direction               = 1
+    Playur[i].deathTimer              = 0
+    Playur[i].standingNPC             = 0
+    Playur[i].mount                   = 0
+    Playur[i].mountColor              = 0
+    Playur[i].frame                   = 0
+    Playur[i].forcedState             = 0
+    Playur[i].forcedTimer             = 0
+    Playur[i].warpIndex               = 0
+    
+    Playur[i].underwater              = false
+    Playur[i].slopeBlockIndex         = 0
+    Playur[i].standingNPCIndex        = 0
+    Playur[i].sliding                 = false
+    Playur[i].dead                    = false
+    Playur[i].stoned                  = false
 end
 
 return Playur

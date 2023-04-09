@@ -127,7 +127,7 @@ function levelload()
     nochangecharmap = true
     world.playerWalkingFrame = 1
     Sound.playSFX("levelload.ogg")
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     Audio.MusicVolume(0)
     Misc.pause()
     player:mem(0x17A, FIELD_BOOL, true)
@@ -137,7 +137,7 @@ function levelload()
     Misc.unpause()
     player:mem(0xFA, FIELD_BOOL, true)
     Routine.waitFrames(1, true)
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     loadlevelanimation = nil
     loadlevelanimationin = true
     Audio.MusicVolume(65)
@@ -169,10 +169,10 @@ function onInputUpdate()
 end
 
 function onStart()
-    if not smasbooleans.musicMuted then
+    if not smasBooleans.musicMuted then
         Audio.MusicVolume(65)
     end
-    if smasbooleans.musicMuted then
+    if smasBooleans.musicMuted then
         Audio.MusicVolume(0)
     end
     Graphics.activateHud(false)

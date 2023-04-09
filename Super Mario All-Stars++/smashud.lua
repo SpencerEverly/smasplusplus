@@ -1,10 +1,10 @@
--------------------smashud-------------------
+-------------------smasHud-------------------
 -------Created by Hoeloe and Enjl  - 2017--------
 --SMBX HUD Defaults & Override System Library----
 --------------For Super Mario Bros X-------------
 ----------------------v1.1-----------------------
 -------Edited for SMAS++ by Spencer Everly-------
-local smashud = {}
+local smasHud = {}
 local pm
 local starcoin
 local timer
@@ -47,7 +47,7 @@ function spritesMT.__pairs(tbl)
   end
   return iter, smashudsprites, nil
 end
-smashud.sprites = setmetatable({}, spritesMT)
+smasHud.sprites = setmetatable({}, spritesMT)
 
 local reserveBox2P = {}
 reserveBox2P[1] = Graphics.sprites.hardcoded["48-1"]
@@ -93,114 +93,114 @@ for k,v in pairs(smashudsprites) do
 end
 
 
-smashud.visible = {}
-smashud.visible.keys = true
-smashud.visible.itembox = true
-smashud.visible.bombs = true
-smashud.visible.coins = true
-smashud.visible.score = true
+smasHud.visible = {}
+smasHud.visible.keys = true
+smasHud.visible.itembox = true
+smasHud.visible.bombs = true
+smasHud.visible.coins = true
+smasHud.visible.score = true
 if SaveData.enableLives then
-    smashud.visible.lives = true
+    smasHud.visible.lives = true
 else
-    smashud.visible.lives = false
+    smasHud.visible.lives = false
 end
 if SaveData.disableX2char == false then
-    smashud.visible.deathcount = true
+    smasHud.visible.deathcount = true
 else
-    smashud.visible.deathcount = false
+    smasHud.visible.deathcount = false
 end
-smashud.visible.stars = true
-smashud.visible.starcoins = true
-smashud.visible.timer = true
-smashud.visible.levelname = true
-smashud.visible.overworldPlayer = true
+smasHud.visible.stars = true
+smasHud.visible.starcoins = true
+smasHud.visible.timer = true
+smasHud.visible.levelname = true
+smasHud.visible.overworldPlayer = true
 
-smashud.visible.customitembox = true
-smashud.visible.pWing = true
+smasHud.visible.customitembox = true
+smasHud.visible.pWing = true
 
-smashud.priority = -4.2
+smasHud.priority = -4.2
 
-smashud.ALIGN_LEFT = 0
-smashud.ALIGN_RIGHT = 1
-smashud.ALIGN_MID = 0.5
+smasHud.ALIGN_LEFT = 0
+smasHud.ALIGN_RIGHT = 1
+smasHud.ALIGN_MID = 0.5
 
-smashud.offsets = {}
+smasHud.offsets = {}
 
 --TODO: Replace this with object-level offsets with named fields and alignments
 if SaveData.disableX2char == true then
-    smashud.offsets.keys =         {x = 64,     y = 26, align = smashud.ALIGN_LEFT};
-    smashud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
-    smashud.offsets.hearts =     {x = 5,     y = 16, align = smashud.ALIGN_MID};
-    smashud.offsets.score =     {x = 170,     y = 47, align = smashud.ALIGN_RIGHT};
+    smasHud.offsets.keys =         {x = 64,     y = 26, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
+    smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};
+    smasHud.offsets.score =     {x = 170,     y = 47, align = smasHud.ALIGN_RIGHT};
 
-    smashud.offsets.bombs =     {x = 0,     y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_MID};
-    smashud.offsets.coins =     {x = 88,     y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = smashud.ALIGN_RIGHT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.lives =     {x = -166,     y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.deathcount = {x = -56, y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.stars =     {x = -150,     y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},    value = {x = 45, y = 0, align = smashud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smashud.ALIGN_LEFT},    align = smashud.ALIGN_LEFT}
-    smashud.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},    value = {x = 106, y = 2, align = smashud.ALIGN_RIGHT}, align = smashud.ALIGN_LEFT}
+    smasHud.offsets.bombs =     {x = 0,     y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_MID};
+    smasHud.offsets.coins =     {x = 88,     y = 26, cross = {x = 24, y = 1}, value = {x = 82, y = 1, align = smasHud.ALIGN_RIGHT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.lives =     {x = -166,     y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.deathcount = {x = -56, y = 26, cross = {x = 40, y = 1}, value = {x = 62, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.stars =     {x = -150,     y = 46, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},    value = {x = 45, y = 0, align = smasHud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smasHud.ALIGN_LEFT},    align = smasHud.ALIGN_LEFT}
+    smasHud.offsets.timer = {x = 264, y = 25, cross = {x = 24, y = 2},    value = {x = 106, y = 2, align = smasHud.ALIGN_RIGHT}, align = smasHud.ALIGN_LEFT}
 
-    smashud.overworld = {offsets = {}};
-    smashud.overworld.offsets.lives =         {x = -272,     y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.coins =         {x = -256,     y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.stars =         {x = -256,     y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.levelname =     {x = -156,     y = 109, p2Offset = {x = 48, y = 0}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.player =        {x = -308, y = 124}
-    smashud.overworld.offsets.player2 =        {x = -308+48, y = 124}
+    smasHud.overworld = {offsets = {}};
+    smasHud.overworld.offsets.lives =         {x = -272,     y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.coins =         {x = -256,     y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.stars =         {x = -256,     y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.levelname =     {x = -156,     y = 109, p2Offset = {x = 48, y = 0}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.player =        {x = -308, y = 124}
+    smasHud.overworld.offsets.player2 =        {x = -308+48, y = 124}
 end
 
 if SaveData.disableX2char == false then
-    smashud.offsets.keys =         {x = -268,     y = 26, align = smashud.ALIGN_LEFT};
-    smashud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
-    smashud.offsets.hearts =     {x = 5,     y = 16, align = smashud.ALIGN_MID};
-    smashud.offsets.score =     {x = 370,     y = 27, align = smashud.ALIGN_RIGHT};
+    smasHud.offsets.keys =         {x = -268,     y = 26, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
+    smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};
+    smasHud.offsets.score =     {x = 370,     y = 27, align = smasHud.ALIGN_RIGHT};
 
-    smashud.offsets.bombs =     {x = 0,     y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_MID};
-    smashud.offsets.coins =     {x = -368,     y = 26, cross = {x = 24, y = 1}, value = {x = 46, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.lives =     {x = -160,     y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
-    smashud.offsets.deathcount = {x = 102, y = 40, cross = {x = 25, y = 1}, value = {x = 78, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.stars =     {x = -368,     y = 48, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},    value = {x = 45, y = 0, align = smashud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smashud.ALIGN_LEFT},    align = smashud.ALIGN_LEFT}
-    smashud.offsets.timer = {x = 264, y = 47, cross = {x = 24, y = 2},    value = {x = 106, y = 2, align = smashud.ALIGN_RIGHT}, align = smashud.ALIGN_LEFT}
+    smasHud.offsets.bombs =     {x = 0,     y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_MID};
+    smasHud.offsets.coins =     {x = -368,     y = 26, cross = {x = 24, y = 1}, value = {x = 46, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.lives =     {x = -160,     y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
+    smasHud.offsets.deathcount = {x = 102, y = 40, cross = {x = 25, y = 1}, value = {x = 78, y = 1, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.stars =     {x = -368,     y = 48, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},    value = {x = 45, y = 0, align = smasHud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smasHud.ALIGN_LEFT},    align = smasHud.ALIGN_LEFT}
+    smasHud.offsets.timer = {x = 264, y = 47, cross = {x = 24, y = 2},    value = {x = 106, y = 2, align = smasHud.ALIGN_RIGHT}, align = smasHud.ALIGN_LEFT}
 
-    smashud.overworld = {offsets = {}};
-    smashud.overworld.offsets.lives =         {x = -272,     y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.coins =         {x = -256,     y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.stars =         {x = -256,     y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.levelname =     {x = -156,     y = 109, p2Offset = {x = 48, y = 0}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.player =        {x = -308, y = 124}
-    smashud.overworld.offsets.player2 =        {x = -308+48, y = 124}
+    smasHud.overworld = {offsets = {}};
+    smasHud.overworld.offsets.lives =         {x = -272,     y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.coins =         {x = -256,     y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.stars =         {x = -256,     y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.levelname =     {x = -156,     y = 109, p2Offset = {x = 48, y = 0}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.player =        {x = -308, y = 124}
+    smasHud.overworld.offsets.player2 =        {x = -308+48, y = 124}
 end
 
 if SaveData.disableX2char == nil then
-    smashud.offsets.keys =         {x = -268,     y = 26, align = smashud.ALIGN_LEFT};
-    smashud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smashud.ALIGN_MID}, align = smashud.ALIGN_MID};
-    smashud.offsets.hearts =     {x = 5,     y = 16, align = smashud.ALIGN_MID};
-    smashud.offsets.score =     {x = 370,     y = 27, align = smashud.ALIGN_RIGHT};
+    smasHud.offsets.keys =         {x = -268,     y = 26, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
+    smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};
+    smasHud.offsets.score =     {x = 370,     y = 27, align = smasHud.ALIGN_RIGHT};
 
-    smashud.offsets.bombs =     {x = 0,     y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_MID};
-    smashud.offsets.coins =     {x = -368,     y = 26, cross = {x = 24, y = 1}, value = {x = 46, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.lives =     {x = -102,     y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_RIGHT};
-    smashud.offsets.deathcount = {x = 102, y = 40, cross = {x = 25, y = 1}, value = {x = 78, y = 1, align = smashud.ALIGN_MID}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.stars =     {x = -368,     y = 48, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},    value = {x = 45, y = 0, align = smashud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smashud.ALIGN_LEFT},    align = smashud.ALIGN_LEFT}
-    smashud.offsets.timer = {x = 264, y = 47, cross = {x = 24, y = 2},    value = {x = 106, y = 2, align = smashud.ALIGN_RIGHT}, align = smashud.ALIGN_LEFT}
+    smasHud.offsets.bombs =     {x = 0,     y = 52, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_MID};
+    smasHud.offsets.coins =     {x = -368,     y = 26, cross = {x = 24, y = 1}, value = {x = 46, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.lives =     {x = -102,     y = 40, cross = {x = 42, y = 1}, value = {x = 88, y = 1, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_RIGHT};
+    smasHud.offsets.deathcount = {x = 102, y = 40, cross = {x = 25, y = 1}, value = {x = 78, y = 1, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.stars =     {x = -368,     y = 48, cross = {x = 24, y = 1}, value = {x = 45, y = 1, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.offsets.starcoins = {x = -384, y = 27, cross = {x = 24, y = 0},    value = {x = 45, y = 0, align = smasHud.ALIGN_LEFT}, grid = {x = 0, y = 40, width = 5, height = 3, offset = 0, table = {}, align = smasHud.ALIGN_LEFT},    align = smasHud.ALIGN_LEFT}
+    smasHud.offsets.timer = {x = 264, y = 47, cross = {x = 24, y = 2},    value = {x = 106, y = 2, align = smasHud.ALIGN_RIGHT}, align = smasHud.ALIGN_LEFT}
 
-    smashud.overworld = {offsets = {}};
-    smashud.overworld.offsets.lives =         {x = -272,     y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.coins =         {x = -256,     y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.stars =         {x = -256,     y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smashud.ALIGN_LEFT}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.levelname =     {x = -156,     y = 109, p2Offset = {x = 48, y = 0}, align = smashud.ALIGN_LEFT};
-    smashud.overworld.offsets.player =        {x = -308, y = 124}
-    smashud.overworld.offsets.player2 =        {x = -308+48, y = 124}
+    smasHud.overworld = {offsets = {}};
+    smasHud.overworld.offsets.lives =         {x = -272,     y = 110, cross = {x = 40, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 62, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.coins =         {x = -256,     y = 88, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.stars =         {x = -256,     y = 66, cross = {x = 24, y = 2}, p2Offset = {x = 48, y = 0}, value = {x = 46, y = 2, align = smasHud.ALIGN_LEFT}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.levelname =     {x = -156,     y = 109, p2Offset = {x = 48, y = 0}, align = smasHud.ALIGN_LEFT};
+    smasHud.overworld.offsets.player =        {x = -308, y = 124}
+    smasHud.overworld.offsets.player2 =        {x = -308+48, y = 124}
 end
 
 Graphics.HUD_NONE = 0;
 Graphics.HUD_HEARTS = 1;
 Graphics.HUD_ITEMBOX = 2;
 
-smashud.multiplayerOffsets = {[Graphics.HUD_NONE] = 0, [Graphics.HUD_ITEMBOX] = 40, [Graphics.HUD_HEARTS] = 57}
+smasHud.multiplayerOffsets = {[Graphics.HUD_NONE] = 0, [Graphics.HUD_ITEMBOX] = 40, [Graphics.HUD_HEARTS] = 57}
 
 local isActive = true
 
@@ -209,12 +209,12 @@ local activePlayers = nil
 
 local oldActivate = Graphics.activateHud
 
-function smashud.onInitAPI()
-    registerEvent(smashud, "onExitLevel", "onExitLevel", false)
+function smasHud.onInitAPI()
+    registerEvent(smasHud, "onExitLevel", "onExitLevel", false)
     --TODO: Change onHUDDraw to "true" when onHUDUpdate is implemented
-    registerEvent(smashud, "onHUDDraw", "onHUDDraw", false)
-    registerEvent(smashud, "onDraw", "onDraw", false)
-    registerEvent(smashud, "onTick", "onTick", false)
+    registerEvent(smasHud, "onHUDDraw", "onHUDDraw", false)
+    registerEvent(smasHud, "onDraw", "onDraw", false)
+    registerEvent(smasHud, "onTick", "onTick", false)
     
     if(oldActivate) then
         oldActivate(false)
@@ -296,11 +296,11 @@ local function drawLinkStuff(playerIdx, camObj, playerObj, priority, isSplit, pl
         keyOffset = -132
     end
 
-    if smashud.visible.keys then
-        smashud.drawKey(offset + keyOffset, camObj, playerObj, priority)
+    if smasHud.visible.keys then
+        smasHud.drawKey(offset + keyOffset, camObj, playerObj, priority)
     end
-    if smashud.visible.bombs then
-        smashud.drawBombs(offset, camObj, playerObj, priority)
+    if smasHud.visible.bombs then
+        smasHud.drawBombs(offset, camObj, playerObj, priority)
     end
 end
 
@@ -350,7 +350,7 @@ end
 
 function Graphics.getHUDOffset(playerIdx, isSplit)
     if (#activePlayers > 1 and not isSplit) then
-        local offset = smashud.multiplayerOffsets[Graphics.getHUDType(activePlayers[playerIdx].character)];
+        local offset = smasHud.multiplayerOffsets[Graphics.getHUDType(activePlayers[playerIdx].character)];
         if(playerIdx == 1) then
             offset = -offset;
         end
@@ -367,9 +367,9 @@ function Graphics.drawVanillaHUD(camIndex, priority, isSplit)
     local splitOffset = {0,0}
 
     if #activePlayers > 1 and not isSplit then
-        splitOffset[1] = -smashud.multiplayerOffsets[Graphics.getHUDType(activePlayers[1].character)]
+        splitOffset[1] = -smasHud.multiplayerOffsets[Graphics.getHUDType(activePlayers[1].character)]
         if Player.count() >= 2 then
-            splitOffset[2] = smashud.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
+            splitOffset[2] = smasHud.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
             for i=1, 2 do
                 local acts = Graphics.getHUDActions(activePlayers[i].character)
                 if(acts) then
@@ -384,36 +384,36 @@ function Graphics.drawVanillaHUD(camIndex, priority, isSplit)
         end
     end
 
-    if smashud.visible.itembox then
-        smashud.countItemboxes(splitOffset, camIndex, #activePlayers > 1, isSplit, priority)
+    if smasHud.visible.itembox then
+        smasHud.countItemboxes(splitOffset, camIndex, #activePlayers > 1, isSplit, priority)
     end
-    if smashud.visible.lives then
-        smashud.drawLives(splitOffset[1], thisCam, thisPlayer, priority)
+    if smasHud.visible.lives then
+        smasHud.drawLives(splitOffset[1], thisCam, thisPlayer, priority)
     end
-    if smashud.visible.deathcount then
-        smashud.drawDeathCount(splitOffset[1], thisCam, thisPlayer, priority)
+    if smasHud.visible.deathcount then
+        smasHud.drawDeathCount(splitOffset[1], thisCam, thisPlayer, priority)
     end
-    if smashud.visible.score then
-        smashud.drawScore(splitOffset[2], thisCam, priority)
+    if smasHud.visible.score then
+        smasHud.drawScore(splitOffset[2], thisCam, priority)
     end
-    if smashud.visible.coins then
-        smashud.drawCoins(splitOffset[2], thisCam, thisPlayer, priority)
+    if smasHud.visible.coins then
+        smasHud.drawCoins(splitOffset[2], thisCam, thisPlayer, priority)
     end
-    if smashud.visible.stars then
-        smashud.drawStars(splitOffset[1], thisCam, thisPlayer, priority)
+    if smasHud.visible.stars then
+        smasHud.drawStars(splitOffset[1], thisCam, thisPlayer, priority)
     end
-    if smashud.visible.starcoins then
+    if smasHud.visible.starcoins then
         if isSplit and (activeCameras[camIndex].width < 800) then
-            smashud.drawStarcoins(220, thisCam, thisPlayer, priority)
+            smasHud.drawStarcoins(220, thisCam, thisPlayer, priority)
         else
-            smashud.drawStarcoins(0, thisCam, thisPlayer, priority)
+            smasHud.drawStarcoins(0, thisCam, thisPlayer, priority)
         end
     end
-    if smashud.visible.timer and timer.isActive() then
+    if smasHud.visible.timer and timer.isActive() then
         if isSplit and (activeCameras[camIndex].width < 800) then
-            smashud.drawTimer(-200, thisCam, thisPlayer, priority)
+            smasHud.drawTimer(-200, thisCam, thisPlayer, priority)
         else
-            smashud.drawTimer(0, thisCam, thisPlayer, priority)
+            smasHud.drawTimer(0, thisCam, thisPlayer, priority)
         end
     end
 end
@@ -423,47 +423,47 @@ do
     function Graphics.drawVanillaOverworldHUD(priority)
         local state = Graphics.getOverworldHudState();
         if(state == WHUD_ALL or state == WHUD_ONLY_OVERLAY) then
-            smashud.drawOverworldBox(priority);
+            smasHud.drawOverworldBox(priority);
         end
 
         if(state == WHUD_ALL) then
-            if smashud.visible.lives then
-                smashud.drawDeathCount(player, priority);
+            if smasHud.visible.lives then
+                smasHud.drawDeathCount(player, priority);
             end
-            if smashud.visible.deathcount then
-                smashud.drawHUDLives(player, priority);
-            end
-
-            if smashud.visible.coins then
-                smashud.drawHUDCoins(player, priority);
-            end
-            if smashud.visible.stars then
-                smashud.drawHUDStars(player, priority);
+            if smasHud.visible.deathcount then
+                smasHud.drawHUDLives(player, priority);
             end
 
-            if smashud.visible.overworldPlayer then
-                smashud.drawHUDPlayer(1, priority);
+            if smasHud.visible.coins then
+                smasHud.drawHUDCoins(player, priority);
+            end
+            if smasHud.visible.stars then
+                smasHud.drawHUDStars(player, priority);
+            end
+
+            if smasHud.visible.overworldPlayer then
+                smasHud.drawHUDPlayer(1, priority);
                 if Player.count() >= 2 then
-                    smashud.drawHUDPlayer(2, priority);
+                    smasHud.drawHUDPlayer(2, priority);
                 end
             end
 
-            if(smashud.visible.levelname and world.levelTitle ~= nil and world.levelTitle ~= "") then
-                local offset = -#world.levelTitle*smashud.overworld.offsets.levelname.align*16;
+            if(smasHud.visible.levelname and world.levelTitle ~= nil and world.levelTitle ~= "") then
+                local offset = -#world.levelTitle*smasHud.overworld.offsets.levelname.align*16;
                 local yoffset = 0
                 if Player.count() >= 2 then
-                    offset = offset + smashud.overworld.offsets.levelname.p2Offset.x
-                    yoffset = smashud.overworld.offsets.levelname.p2Offset.y
+                    offset = offset + smasHud.overworld.offsets.levelname.p2Offset.x
+                    yoffset = smasHud.overworld.offsets.levelname.p2Offset.y
                 end
-                Text.printWP(world.levelTitle,2,400+smashud.overworld.offsets.levelname.x+offset,smashud.overworld.offsets.levelname.y+yoffset,priority);
+                Text.printWP(world.levelTitle,2,400+smasHud.overworld.offsets.levelname.x+offset,smasHud.overworld.offsets.levelname.y+yoffset,priority);
             end
         end
     end
 end
 
-function smashud.drawHUDPlayer(plyridx, priority, color, shader, uniforms)
+function smasHud.drawHUDPlayer(plyridx, priority, color, shader, uniforms)
     local plyr = Player(plyridx)
-    local offsets = smashud.overworld.offsets
+    local offsets = smasHud.overworld.offsets
     if plyridx == 1 then
         offsets = offsets.player
     elseif plyridx == 2 then
@@ -492,11 +492,11 @@ local function GetSprite(name, character)
     end
 end
 
-function smashud.drawKey(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawKey(splitOffset, thisCam, thisPlayer, priority)
     if thisPlayer:mem(0x12,FIELD_WORD) ~= 0 then
         local key = GetSprite("keys", thisPlayer.character);
-        local x = smashud.offsets.keys.x - key.width * smashud.offsets.keys.align;
-        Graphics.drawImageWP(key, 0.5 * thisCam.width + x + splitOffset, smashud.offsets.keys.y, priority)
+        local x = smasHud.offsets.keys.x - key.width * smasHud.offsets.keys.align;
+        Graphics.drawImageWP(key, 0.5 * thisCam.width + x + splitOffset, smasHud.offsets.keys.y, priority)
     end
 end
 
@@ -504,7 +504,7 @@ local function drawCounter(splitOffset, thisCam, thisPlayer, obj, sprite, value,
     local v = tostring(value)
     local left = math.min(0, obj.cross.x, obj.value.x - (#v * obj.value.align));
     local cross = GetSprite("cross", thisPlayer.character);
-    local right = math.max(sprite.width, obj.cross.x + cross.width, obj.value.x + (#v * 18 * (smashud.ALIGN_RIGHT-obj.value.align)));
+    local right = math.max(sprite.width, obj.cross.x + cross.width, obj.value.x + (#v * 18 * (smasHud.ALIGN_RIGHT-obj.value.align)));
     local wid = right-left;
     local x = obj.x - wid*(obj.align);
     local y = obj.y
@@ -523,23 +523,23 @@ local function drawCounter(splitOffset, thisCam, thisPlayer, obj, sprite, value,
     end
 end
 
-function smashud.drawBombs(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawBombs(splitOffset, thisCam, thisPlayer, priority)
     local bombs = thisPlayer:mem(0x08, FIELD_WORD)
     if bombs > 0 then
         local sprite = GetSprite("bombs", thisPlayer.character);
-        drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.bombs, sprite, bombs, priority);
+        drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.bombs, sprite, bombs, priority);
     end
 end
 
-function smashud.drawStars(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawStars(splitOffset, thisCam, thisPlayer, priority)
     local stars = (SaveData.totalStarCount)
     if stars > 0 then
         local sprite = GetSprite("stars", thisPlayer.character);
-        drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.stars, sprite, stars, priority)
+        drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.stars, sprite, stars, priority)
     end
 end
 
-function smashud.scoreCounterWithZeroes()
+function smasHud.scoreCounterWithZeroes()
     if SaveData.totalScoreClassic >= 0 then
         string.format("00000000%1d",tostring(SaveData.totalScoreClassic))
     elseif SaveData.totalScoreClassic >= 99 then
@@ -561,7 +561,7 @@ function smashud.scoreCounterWithZeroes()
     end
 end
 
-function smashud.lifeCrownCounter()
+function smasHud.lifeCrownCounter()
     if SaveData.totalLives < 1000 then
         return SaveData.totalLives
     elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
@@ -575,43 +575,43 @@ function smashud.lifeCrownCounter()
     end
 end
 
-function smashud.drawLives(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawLives(splitOffset, thisCam, thisPlayer, priority)
     if not SaveData.disableX2char then
         if SaveData.totalLives <= 999 then
-            drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
         elseif SaveData.totalLives >= 1000 then
-            drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.lives, GetSprite("lives", thisPlayer.character), SysManager.lifeCountWithCrownsAndZeroFailsafe(), priority);
+            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("lives", thisPlayer.character), SysManager.lifeCountWithCrownsAndZeroFailsafe(), priority);
         end
     elseif SaveData.disableX2char then
         if SaveData.totalLives <= 999 then
-            drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SaveData.totalLives, priority);
+            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SaveData.totalLives, priority);
         elseif SaveData.totalLives >= 1000 then
-            drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SysManager.lifeCountWithCrownsAndZeroFailsafe(), priority);
+            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SysManager.lifeCountWithCrownsAndZeroFailsafe(), priority);
         end
     end
 end
 
-function smashud.drawDeathCount(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawDeathCount(splitOffset, thisCam, thisPlayer, priority)
     if SaveData.deathCount >= 1000 then
-        drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), "999+", priority);
+        drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), "999+", priority);
     else
-        drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), SaveData.deathCount, priority);
+        drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), SaveData.deathCount, priority);
     end
 end
 
-function smashud.drawHUDLives(thisPlayer, priority)
-    drawCounter(0, {width = 800}, thisPlayer, smashud.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+function smasHud.drawHUDLives(thisPlayer, priority)
+    drawCounter(0, {width = 800}, thisPlayer, smasHud.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
 end
 
-function smashud.drawHUDCoins(thisPlayer, priority)
-    drawCounter(0, {width = 800}, thisPlayer, smashud.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.totalCoinsClassic, priority);
+function smasHud.drawHUDCoins(thisPlayer, priority)
+    drawCounter(0, {width = 800}, thisPlayer, smasHud.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.totalCoinsClassic, priority);
 end
 
-function smashud.drawHUDStars(thisPlayer, priority)
+function smasHud.drawHUDStars(thisPlayer, priority)
     local stars = (SaveData.totalStarCount)
     if stars > 0 then
         local sprite = GetSprite("stars", thisPlayer.character);
-        drawCounter(0, {width = 800}, thisPlayer, smashud.overworld.offsets.stars, sprite, stars, priority);
+        drawCounter(0, {width = 800}, thisPlayer, smasHud.overworld.offsets.stars, sprite, stars, priority);
     end
 end
 
@@ -632,44 +632,44 @@ do
                             0,0.89,1,0.89,0,1,                            0,1,1,0.89,1,1
                         }
                     };
-    function smashud.drawOverworldBox(priority)
+    function smasHud.drawOverworldBox(priority)
         huddraw.texture = Graphics.sprites.hardcoded["33-4"].img;
         huddraw.priority = priority;
         Graphics.glDraw(huddraw);
     end
 end
 
-function smashud.countItemboxes(splitOffset, camIndex, isMultiplayer, isSplit, priority)
+function smasHud.countItemboxes(splitOffset, camIndex, isMultiplayer, isSplit, priority)
     thisCam = activeCameras[camIndex]
     if isMultiplayer and not isSplit then
         if Player.count() >= 2 then
             for i=1, 2 do
                 thisPlayer = activePlayers[i]
-                smashud.drawItembox(splitOffset[i], thisCam, camIndex, thisPlayer, isMultiplayer, priority)
+                smasHud.drawItembox(splitOffset[i], thisCam, camIndex, thisPlayer, isMultiplayer, priority)
             end
         end
     else
         thisPlayer = activePlayers[camIndex]
-        smashud.drawItembox(splitOffset[1], thisCam, camIndex, thisPlayer, isMultiplayer, priority)
+        smasHud.drawItembox(splitOffset[1], thisCam, camIndex, thisPlayer, isMultiplayer, priority)
     end
 end
 
-function smashud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMultiplayer, priority)
+function smasHud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMultiplayer, priority)
     local reserve2p = ConvertSprite(GetImageFromID(reserveBox2P[thisPlayer.character], thisPlayer.character))
 
     if Graphics.getHUDType(thisPlayer.character) == Graphics.HUD_ITEMBOX then
         local reserveBox = GetSprite("reserveBox", thisPlayer.character);
-        local x1 = smashud.offsets.itembox.x - reserveBox.width * smashud.offsets.itembox.align;
-        local x2 = smashud.offsets.itembox.x - reserve2p.width * smashud.offsets.itembox.align;
+        local x1 = smasHud.offsets.itembox.x - reserveBox.width * smasHud.offsets.itembox.align;
+        local x2 = smasHud.offsets.itembox.x - reserve2p.width * smasHud.offsets.itembox.align;
 
         if isMultiplayer then
-            Graphics.drawImageWP(reserve2p, 0.5 * thisCam.width + x1 + splitOffset, smashud.offsets.itembox.y, priority)
+            Graphics.drawImageWP(reserve2p, 0.5 * thisCam.width + x1 + splitOffset, smasHud.offsets.itembox.y, priority)
         else
-            Graphics.drawImageWP(reserveBox, 0.5 * thisCam.width + x2 + splitOffset, smashud.offsets.itembox.y, priority)
+            Graphics.drawImageWP(reserveBox, 0.5 * thisCam.width + x2 + splitOffset, smasHud.offsets.itembox.y, priority)
         end
 
     elseif(Graphics.getHUDType(thisPlayer.character) == Graphics.HUD_HEARTS) then
-        local x = smashud.offsets.hearts.x - 96 * smashud.offsets.hearts.align;
+        local x = smasHud.offsets.hearts.x - 96 * smasHud.offsets.hearts.align;
 
         local hearts = thisPlayer:mem(0x16, FIELD_WORD)
         for i=1, 3 do
@@ -678,7 +678,7 @@ function smashud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
                 displayedImg = GetSprite("heartFull", thisPlayer.character);
             end
             Graphics.drawImageWP(displayedImg, 0.5 * thisCam.width  +     x + splitOffset + 32 * (i - 1),
-                                                                        smashud.offsets.hearts.y, priority)
+                                                                        smasHud.offsets.hearts.y, priority)
         end
 
     end
@@ -699,8 +699,8 @@ function smashud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
         end
 
         local reserveBox = GetSprite("reserveBox", thisPlayer.character);
-        local x1 = smashud.offsets.itembox.x - reserveBox.width * smashud.offsets.itembox.align;
-        local x2 = smashud.offsets.itembox.x - reserve2p.width * smashud.offsets.itembox.align;
+        local x1 = smasHud.offsets.itembox.x - reserveBox.width * smasHud.offsets.itembox.align;
+        local x2 = smasHud.offsets.itembox.x - reserve2p.width * smasHud.offsets.itembox.align;
         local x;
         if isMultiplayer then
             x = x2;
@@ -717,27 +717,27 @@ function smashud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
         end
 
         Graphics.draw{type = RTYPE_IMAGE, image = reserve, priority = priority, isSceneCoords = false,
-                        x= 0.5 * thisCam.width +     x + smashud.offsets.itembox.item.x + splitOffset - smashud.offsets.itembox.item.align * w,
-                        y=                             smashud.offsets.itembox.y + smashud.offsets.itembox.item.y - 0.5 * h,
+                        x= 0.5 * thisCam.width +     x + smasHud.offsets.itembox.item.x + splitOffset - smasHud.offsets.itembox.item.align * w,
+                        y=                             smasHud.offsets.itembox.y + smasHud.offsets.itembox.item.y - 0.5 * h,
                         sourceWidth = w,
                         sourceHeight = h,
                         sourceX = sourcex, sourceY = sourcey}
     end
 end
 
-function smashud.drawScore(splitOffset, thisCam, priority)
+function smasHud.drawScore(splitOffset, thisCam, priority)
     if SaveData.disableX2char == true then
         local scoreDisplay13 = tostring(SysManager.scoreCount13())
-        Text.printWP(scoreDisplay13, 1, 0.5 * thisCam.width + smashud.offsets.score.x + splitOffset - #scoreDisplay13 * 18 * smashud.offsets.score.align, smashud.offsets.score.y, priority)
+        Text.printWP(scoreDisplay13, 1, 0.5 * thisCam.width + smasHud.offsets.score.x + splitOffset - #scoreDisplay13 * 18 * smasHud.offsets.score.align, smasHud.offsets.score.y, priority)
     elseif SaveData.disableX2char == false then
         local scoreDisplay = SysManager.scoreCountWithZeroes()
-        Text.printWP(scoreDisplay, 1, 0.5 * thisCam.width + smashud.offsets.score.x + splitOffset - #scoreDisplay * 18 * smashud.offsets.score.align, smashud.offsets.score.y, priority)
+        Text.printWP(scoreDisplay, 1, 0.5 * thisCam.width + smasHud.offsets.score.x + splitOffset - #scoreDisplay * 18 * smasHud.offsets.score.align, smasHud.offsets.score.y, priority)
     end
 end
 
-function smashud.drawCoins(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawCoins(splitOffset, thisCam, thisPlayer, priority)
     local s = GetSprite("coins", thisPlayer.character);
-    drawCounter(splitOffset, thisCam, thisPlayer, smashud.offsets.coins, s, tostring(SysManager.coinCountClassicWith99Limit()), priority);
+    drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.coins, s, tostring(SysManager.coinCountClassicWith99Limit()), priority);
 end
 
 
@@ -745,13 +745,13 @@ local function validStarCoin(t, i)
     return t[i] and (not t.alive or t.alive[i])
 end
 
-function smashud.drawStarcoins(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawStarcoins(splitOffset, thisCam, thisPlayer, priority)
     local count = starcoin.count()
     if count > 0 then
     
         local data = starcoin.getLevelList()
         local collNum = starcoin.getLevelCollected()
-        local offset = smashud.offsets.starcoins
+        local offset = smasHud.offsets.starcoins
         local grid = offset.grid
         local img_coll = GetSprite("starcoinCollected", thisPlayer.character)
         local img_uncoll = GetSprite("starcoinUncollected", thisPlayer.character)
@@ -822,10 +822,10 @@ function smashud.drawStarcoins(splitOffset, thisCam, thisPlayer, priority)
     end
 end
 
-function smashud.drawTimer(splitOffset, thisCam, thisPlayer, priority)
+function smasHud.drawTimer(splitOffset, thisCam, thisPlayer, priority)
     local s = GetSprite("timer", thisPlayer.character);
     
-    local offset = smashud.offsets.timer
+    local offset = smasHud.offsets.timer
     
     --hacky workaround to make 2p mode work
     local origoff = {offset.x, offset.y}
@@ -843,7 +843,7 @@ function smashud.drawTimer(splitOffset, thisCam, thisPlayer, priority)
     offset.y = origoff[2]
 end
 
-function smashud.onDraw()
+function smasHud.onDraw()
     local s = mem(0x00B2C8E4, FIELD_DWORD)
     if (s > 0) then
         SaveData._basegame.hud.score = math.min(SaveData._basegame.hud.score + s, 9999990)
@@ -865,7 +865,7 @@ function smashud.onDraw()
     end
 end
 
-function smashud.onTick()
+function smasHud.onTick()
     if SaveData.lifeCrownsComplete == nil then --To make the sound work, this has to be set as a string'd boolean...
         SaveData.lifeCrownsComplete = "false"
     end
@@ -881,21 +881,21 @@ function smashud.onTick()
     end
 end
 
-function smashud.onHUDDraw(camIdx)
+function smasHud.onHUDDraw(camIdx)
     if isActive then
         if(isOverworld) then
-            currentOWRenderFunc(smashud.priority);
+            currentOWRenderFunc(smasHud.priority);
         else
             --TODO: Replace with a better test for splitscreen
             local isSplit = (activeCameras[camIdx].width < 800) or (activeCameras[camIdx].height < 600)
 
-            currentRenderFunc(camIdx, smashud.priority, isSplit)
+            currentRenderFunc(camIdx, smasHud.priority, isSplit)
 
             for _,v in ipairs(customHUDElements) do
-                v(camIdx, smashud.priority, isSplit)
+                v(camIdx, smasHud.priority, isSplit)
             end
         end
     end
 end
 
-return smashud
+return smasHud

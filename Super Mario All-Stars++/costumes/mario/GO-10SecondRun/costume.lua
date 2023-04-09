@@ -1,7 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smashud = require("smashud")
-local smasfunctions = require("smasfunctions")
+local smasHud = require("smasHud")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -34,7 +34,7 @@ function costume.onInit(p)
     Defines.projectilespeedx = 6.2
     Defines.player_grav = 0.28
     
-    smashud.visible.itembox = false
+    smasHud.visible.itembox = false
     tensecondhp = 2 --This can be set, from 1-3 (Loads every level start)
     costume.abilitesenabled = true
     
@@ -64,7 +64,7 @@ function costume.onDraw()
             player.forcedState = FORCEDSTATE_NONE
             player:mem(0x140, FIELD_WORD, 150)
         end
-        if smashud.visible.customitembox == true then
+        if smasHud.visible.customitembox == true then
             local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
             local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
             if tensecondhp <= 0 then
@@ -123,7 +123,7 @@ function costume.onCleanup(p)
     Defines.projectilespeedx = 7.1
     Defines.player_grav = 0.4
     
-    smashud.visible.itembox = true
+    smasHud.visible.itembox = true
     costume.abilitesenabled = false
 end
 

@@ -1,5 +1,5 @@
 local extrasounds = require("extrasounds")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -31,20 +31,20 @@ function costume.onInit(p)
 end
 
 function costume.onDrawEnd()
-    if smascharacterglobals.abilitySettings.taizoMuteMusicWhenNotMoving then
-        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+    if smasCharacterGlobals.abilitySettings.taizoMuteMusicWhenNotMoving then
+        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
             if Level.endState() == 0 and plr.deathTimer == 0 and not Misc.isPaused() then
                 if plr.speedX == 0 and plr.speedY == 0 then
                     Audio.MusicSetPos(musicTimer)
                     Audio.MusicPause()
-                    if not plr.hasStarman and not plr.isMega and not smasbooleans.pSwitchActive then
-                        smasbooleans.musicMuted = true
+                    if not plr.hasStarman and not plr.isMega and not smasBooleans.pSwitchActive then
+                        smasBooleans.musicMuted = true
                     end
                 else
                     musicTimer = Audio.MusicGetPos()
                     Audio.MusicResume()
-                    if not plr.hasStarman and not plr.isMega and not smasbooleans.pSwitchActive then
-                        smasbooleans.musicMuted = false
+                    if not plr.hasStarman and not plr.isMega and not smasBooleans.pSwitchActive then
+                        smasBooleans.musicMuted = false
                     end
                 end
             end
@@ -54,7 +54,7 @@ end
 
 function costume.harpoonAttack()
     harpoonActive = true
-    Sound.playSFX(smascharacterglobals.soundSettings.taizoHarpoonShootSFX)
+    Sound.playSFX(smasCharacterGlobals.soundSettings.taizoHarpoonShootSFX)
     Routine.wait(0.6)
     harpoonActive = false
 end
@@ -67,8 +67,8 @@ end
 
 function costume.onInputUpdate()
     if Level.endState() == 0 and plr.deathTimer == 0 and not Misc.isPaused() then
-        if smascharacterglobals.abilitySettings.taizoCanUseHarpoon then
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+        if smasCharacterGlobals.abilitySettings.taizoCanUseHarpoon then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 if plr.keys.run == KEYS_PRESSED and not harpoonActive and plr.powerup <= 2 then
                     Routine.run(costume.harpoonAttack)
                 end

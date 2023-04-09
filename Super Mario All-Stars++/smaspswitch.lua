@@ -1,31 +1,31 @@
-local smaspswitch = {}
+local smasPSwitch = {}
 
-function smaspswitch.onInitAPI()
-    registerEvent(smaspswitch,"onDraw")
+function smasPSwitch.onInitAPI()
+    registerEvent(smasPSwitch,"onDraw")
 end
 
 local pSwitchMusic
-smaspswitch.pSwitchMusicStarted = false
+smasPSwitch.pSwitchMusicStarted = false
 
 local deathTimerPSwitch = 0
 
 
 
-function smaspswitch.startPSwitchMusic() --Starts the P-Switch music.
-    if not smaspswitch.pSwitchMusicStarted then
-        if not smaspswitch.inNoPSwitchMusicPlayingSituations() then
+function smasPSwitch.startPSwitchMusic() --Starts the P-Switch music.
+    if not smasPSwitch.pSwitchMusicStarted then
+        if not smasPSwitch.inNoPSwitchMusicPlayingSituations() then
             console:println("P-Switch music activated!")
             Sound.muteMusic(-1)
-            smasbooleans.musicMuted = true
-            pSwitchMusic = SFX.play(smascharacterinfo.pSwitchMusic, Audio.MusicVolume() / 100, 0)
-            smaspswitch.pSwitchMusicStarted = true
+            smasBooleans.musicMuted = true
+            pSwitchMusic = SFX.play(smasCharacterInfo.pSwitchMusic, Audio.MusicVolume() / 100, 0)
+            smasPSwitch.pSwitchMusicStarted = true
         end
     end
 end
 
 
 
-function smaspswitch.stopPSwitchMusic(resetLevelMusic) --Stops the P-Switch music.
+function smasPSwitch.stopPSwitchMusic(resetLevelMusic) --Stops the P-Switch music.
     if resetLevelMusic == nil then
         resetLevelMusic = true
     end
@@ -34,12 +34,12 @@ function smaspswitch.stopPSwitchMusic(resetLevelMusic) --Stops the P-Switch musi
         pSwitchMusic:Stop()
     end
     
-    smaspswitch.pSwitchMusicStarted = false
+    smasPSwitch.pSwitchMusicStarted = false
     
-    if not smaspswitch.inNoPSwitchMusicPlayingSituations() then
+    if not smasPSwitch.inNoPSwitchMusicPlayingSituations() then
         if resetLevelMusic then
             console:println("P-Switch music deactivated!")
-            smasbooleans.musicMuted = false
+            smasBooleans.musicMuted = false
             Sound.restoreMusic(-1)
         end
     end
@@ -47,7 +47,7 @@ end
 
 
 
-function smaspswitch.inNoPSwitchMusicPlayingSituations()
+function smasPSwitch.inNoPSwitchMusicPlayingSituations()
     for _,p in ipairs(Player.get()) do
         return (p.hasStarman
             or p.isMega
@@ -59,7 +59,7 @@ end
 
 
 
-function smaspswitch.onDraw()
+function smasPSwitch.onDraw()
     Defines.pswitch_music = false
     for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
         
@@ -68,20 +68,20 @@ function smaspswitch.onDraw()
         
         --Start P-Switch/Stopwatch codes
         if mem(0x00B2C62C, FIELD_WORD) == mem(0x00B2C87C, FIELD_WORD) - 1 then --P-Switch
-            smaspswitch.startPSwitchMusic()
-            smasbooleans.pSwitchActive = true
+            smasPSwitch.startPSwitchMusic()
+            smasBooleans.pSwitchActive = true
         end
         if mem(0x00B2C62E, FIELD_WORD) == mem(0x00B2C87C, FIELD_WORD) - 1 then --Stopwatch
-            smaspswitch.startPSwitchMusic()
-            smasbooleans.stopWatchActive = true
+            smasPSwitch.startPSwitchMusic()
+            smasBooleans.stopWatchActive = true
         end
         
         
         
         --Make sure the music stops when collecting a starman, a megashroom, or winning a level if active
-        if smaspswitch.inNoPSwitchMusicPlayingSituations() then
+        if smasPSwitch.inNoPSwitchMusicPlayingSituations() then
             if pSwitchMusic ~= nil then
-                smasbooleans.musicMuted = false
+                smasBooleans.musicMuted = false
                 pSwitchMusic:Stop()
             end
         end
@@ -90,12 +90,12 @@ function smaspswitch.onDraw()
         
         --Stop P-Switch/Stopwatch codes
         if mem(0x00B2C62C, FIELD_WORD) == 1 then --P-Switch
-            smasbooleans.pSwitchActive = false
-            smaspswitch.stopPSwitchMusic()
+            smasBooleans.pSwitchActive = false
+            smasPSwitch.stopPSwitchMusic()
         end
         if mem(0x00B2C62E, FIELD_WORD) == 1 then --Stopwatch
-            smasbooleans.stopWatchActive = false
-            smaspswitch.stopPSwitchMusic()
+            smasBooleans.stopWatchActive = false
+            smasPSwitch.stopPSwitchMusic()
         end
         
         
@@ -103,7 +103,7 @@ function smaspswitch.onDraw()
         if not Playur.isAnyPlayerAlive() then
             deathTimerPSwitch = deathTimerPSwitch + 1
             if deathTimerPSwitch == 1 then
-                smaspswitch.stopPSwitchMusic(false)
+                smasPSwitch.stopPSwitchMusic(false)
             end
         end
         
@@ -113,4 +113,4 @@ function smaspswitch.onDraw()
     end
 end
 
-return smaspswitch
+return smasPSwitch

@@ -1,4 +1,4 @@
-local smascharacterinfo = {}
+local smasCharacterInfo = {}
 
 local littleDialogue
 pcall(function() littleDialogue = require("littleDialogue") end)
@@ -12,14 +12,14 @@ if SaveData.currentCostume == nil then
     SaveData.currentCostume = "N/A"
 end
 
-function smascharacterinfo.onInitAPI()
-    registerEvent(smascharacterinfo,"onStart")
+function smasCharacterInfo.onInitAPI()
+    registerEvent(smasCharacterInfo,"onStart")
 end
 
-smascharacterinfo.costumeSpecifics = {}
-smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+smasCharacterInfo.costumeSpecifics = {}
+smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
 
-function smascharacterinfo.registerCharacterInfo(costumeName, name, characterID, starmanTheme, DDPStarmanTheme, megashroomTheme, starmanDuration, doorCloseSFX, pSwitchTheme)
+function smasCharacterInfo.registerCharacterInfo(costumeName, name, characterID, starmanTheme, DDPStarmanTheme, megashroomTheme, starmanDuration, doorCloseSFX, pSwitchTheme)
     if costumeName == nil then
         error("Must input costume name for registering this character!")
         return
@@ -49,42 +49,42 @@ function smascharacterinfo.registerCharacterInfo(costumeName, name, characterID,
         doorCloseSFX = "door-close.ogg"
     end
     if pSwitchTheme == nil then
-        if table.icontains(smastables.__smb3Levels,Level.filename()) then
-            smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smas.ogg"
-        elseif table.icontains(smastables.__smwLevels,Level.filename()) then
-            smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smw.ogg"
+        if table.icontains(smasTables.__smb3Levels,Level.filename()) then
+            smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_smas.ogg"
+        elseif table.icontains(smasTables.__smwLevels,Level.filename()) then
+            smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_smw.ogg"
         else
-            smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+            smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
         end
     end
     
-    smascharacterinfo.costumeSpecifics[costumeName] = {}
-    smascharacterinfo.costumeSpecifics[costumeName][characterID] = {}
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].costume = costumeName
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].name = name
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].id = characterID
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].starmanTheme = starmanTheme
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].ddpStarmanTheme = DDPStarmanTheme
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].megashroomTheme = megashroomTheme
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].starmanDuration = starmanDuration
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].doorCloseSFX = doorCloseSFX
-    smascharacterinfo.costumeSpecifics[costumeName][characterID].pSwitchTheme = pSwitchTheme
+    smasCharacterInfo.costumeSpecifics[costumeName] = {}
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID] = {}
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].costume = costumeName
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].name = name
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].id = characterID
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].starmanTheme = starmanTheme
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].ddpStarmanTheme = DDPStarmanTheme
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].megashroomTheme = megashroomTheme
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].starmanDuration = starmanDuration
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].doorCloseSFX = doorCloseSFX
+    smasCharacterInfo.costumeSpecifics[costumeName][characterID].pSwitchTheme = pSwitchTheme
 end
 
-smascharacterinfo.registerCharacterInfo("00-SMASPLUSPLUS-BETA","Mario",1,"starman/starman_2012beta.ogg","starman/starman_2012beta_ddp.ogg","mega/megashroom_2012beta.ogg",12,"door-close.ogg","pswitch/pswitch_2012beta.ogg")
-smascharacterinfo.registerCharacterInfo("01-SMB1-RETRO","Mario",1,"starman/starman_smb1.ogg","starman/starman_smb1_ddp.ogg","mega/megashroom-smb1.ogg",12,"door-close.ogg","pswitch/pswitch_smb1.ogg")
-smascharacterinfo.registerCharacterInfo("02-SMB1-RECOLORED","Mario",1,"starman/starman_smas_smb1.ogg","starman/starman_smas_smb1.ogg","mega/megashroom_snes.ogg",12,"costumes/mario/01-SMB1-Retro/door-close.ogg","_OST/P-Switch (v2).ogg")
-smascharacterinfo.registerCharacterInfo("03-SMB1-SMAS","Mario",1,"starman/starman_smas.ogg","starman/starman_smas.ogg","mega/megashroom_snes.ogg",12,"door-close.ogg","_OST/P-Switch (v2).ogg")
-smascharacterinfo.registerCharacterInfo("04-SMB2-RETRO","Mario",1,"starman/starman_smb2.ogg","starman/starman_smb2_ddp.ogg","mega/megashroom-smb2.ogg",9.0012,"costumes/mario/04-SMB2-Retro/door-close.ogg","pswitch/pswitch_smb2.ogg")
-smascharacterinfo.registerCharacterInfo("05-SMB2-SMAS","Mario",1,"starman/starman_smas_smb2.ogg","starman/starman_smas_smb2.ogg","mega/megashroom_snes.ogg",9.0012,"door-close.ogg","_OST/P-Switch (v2).ogg")
-smascharacterinfo.registerCharacterInfo("06-SMB3-RETRO","Mario",1,"starman/starman_smb3.ogg","starman/starman_smb3_ddp.ogg","mega/megashroom-smb3.ogg",10.998,"costumes/mario/06-SMB3-Retro/door-close.ogg","pswitch/pswitch_smb3.ogg")
-smascharacterinfo.registerCharacterInfo("07-SML2","Mario",1,"starman/starman_sml2.ogg","starman/starman_sml2.ogg","mega/megashroom_sml2.ogg",13.7,"door-close.ogg","_OST/P-Switch (v2).ogg")
+smasCharacterInfo.registerCharacterInfo("00-SMASPLUSPLUS-BETA","Mario",1,"starman/starman_2012beta.ogg","starman/starman_2012beta_ddp.ogg","mega/megashroom_2012beta.ogg",12,"door-close.ogg","pswitch/pswitch_2012beta.ogg")
+smasCharacterInfo.registerCharacterInfo("01-SMB1-RETRO","Mario",1,"starman/starman_smb1.ogg","starman/starman_smb1_ddp.ogg","mega/megashroom-smb1.ogg",12,"door-close.ogg","pswitch/pswitch_smb1.ogg")
+smasCharacterInfo.registerCharacterInfo("02-SMB1-RECOLORED","Mario",1,"starman/starman_smas_smb1.ogg","starman/starman_smas_smb1.ogg","mega/megashroom_snes.ogg",12,"costumes/mario/01-SMB1-Retro/door-close.ogg","_OST/P-Switch (v2).ogg")
+smasCharacterInfo.registerCharacterInfo("03-SMB1-SMAS","Mario",1,"starman/starman_smas.ogg","starman/starman_smas.ogg","mega/megashroom_snes.ogg",12,"door-close.ogg","_OST/P-Switch (v2).ogg")
+smasCharacterInfo.registerCharacterInfo("04-SMB2-RETRO","Mario",1,"starman/starman_smb2.ogg","starman/starman_smb2_ddp.ogg","mega/megashroom-smb2.ogg",9.0012,"costumes/mario/04-SMB2-Retro/door-close.ogg","pswitch/pswitch_smb2.ogg")
+smasCharacterInfo.registerCharacterInfo("05-SMB2-SMAS","Mario",1,"starman/starman_smas_smb2.ogg","starman/starman_smas_smb2.ogg","mega/megashroom_snes.ogg",9.0012,"door-close.ogg","_OST/P-Switch (v2).ogg")
+smasCharacterInfo.registerCharacterInfo("06-SMB3-RETRO","Mario",1,"starman/starman_smb3.ogg","starman/starman_smb3_ddp.ogg","mega/megashroom-smb3.ogg",10.998,"costumes/mario/06-SMB3-Retro/door-close.ogg","pswitch/pswitch_smb3.ogg")
+smasCharacterInfo.registerCharacterInfo("07-SML2","Mario",1,"starman/starman_sml2.ogg","starman/starman_sml2.ogg","mega/megashroom_sml2.ogg",13.7,"door-close.ogg","_OST/P-Switch (v2).ogg")
 
-function smascharacterinfo.onStart()
-    smascharacterinfo.setCostumeSpecifics()
+function smasCharacterInfo.onStart()
+    smasCharacterInfo.setCostumeSpecifics()
 end
 
-function smascharacterinfo.setCostumeSpecifics()
+function smasCharacterInfo.setCostumeSpecifics()
     console:println("Character information will now be changed.")
     
     local currentCostume = SaveData.currentCostume
@@ -110,30 +110,30 @@ function smascharacterinfo.setCostumeSpecifics()
         littleDialogue.characterNames[14] = "Steve"
         
         --P-Switch themes for default characters
-        if table.icontains(smastables.__smb3Levels,Level.filename()) then
-            smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smas.ogg"
-        elseif table.icontains(smastables.__smwLevels,Level.filename()) then
-            smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smw.ogg"
+        if table.icontains(smasTables.__smb3Levels,Level.filename()) then
+            smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_smas.ogg"
+        elseif table.icontains(smasTables.__smwLevels,Level.filename()) then
+            smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_smw.ogg"
         else
-            smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+            smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
         end
     end
     
-    if (smascharacterinfo.costumeSpecifics[currentCostume] ~= nil) then
-        if (smascharacterinfo.costumeSpecifics[currentCostume][player.character] ~= nil) then
-            if currentCostume == smascharacterinfo.costumeSpecifics[currentCostume][player.character].costume then
-                local idNumber = smascharacterinfo.costumeSpecifics[currentCostume][player.character].id
-                littleDialogue.characterNames[idNumber] = smascharacterinfo.costumeSpecifics[currentCostume][player.character].name
-                mega2.sfxFile = Misc.resolveSoundFile(smascharacterinfo.costumeSpecifics[currentCostume][player.character].megashroomTheme)
-                if table.icontains(smastables.__smb2Levels,Level.filename()) then
-                    starman.sfxFile = Misc.resolveSoundFile(smascharacterinfo.costumeSpecifics[currentCostume][player.character].ddpStarmanTheme)
+    if (smasCharacterInfo.costumeSpecifics[currentCostume] ~= nil) then
+        if (smasCharacterInfo.costumeSpecifics[currentCostume][player.character] ~= nil) then
+            if currentCostume == smasCharacterInfo.costumeSpecifics[currentCostume][player.character].costume then
+                local idNumber = smasCharacterInfo.costumeSpecifics[currentCostume][player.character].id
+                littleDialogue.characterNames[idNumber] = smasCharacterInfo.costumeSpecifics[currentCostume][player.character].name
+                mega2.sfxFile = Misc.resolveSoundFile(smasCharacterInfo.costumeSpecifics[currentCostume][player.character].megashroomTheme)
+                if table.icontains(smasTables.__smb2Levels,Level.filename()) then
+                    starman.sfxFile = Misc.resolveSoundFile(smasCharacterInfo.costumeSpecifics[currentCostume][player.character].ddpStarmanTheme)
                 elseif Level.filename() then
-                    starman.sfxFile = Misc.resolveSoundFile(smascharacterinfo.costumeSpecifics[currentCostume][player.character].starmanTheme)
+                    starman.sfxFile = Misc.resolveSoundFile(smasCharacterInfo.costumeSpecifics[currentCostume][player.character].starmanTheme)
                 end
-                starman.duration[996] = lunatime.toTicks(smascharacterinfo.costumeSpecifics[currentCostume][player.character].starmanDuration)
-                starman.duration[994] = lunatime.toTicks(smascharacterinfo.costumeSpecifics[currentCostume][player.character].starmanDuration)
-                extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile(smascharacterinfo.costumeSpecifics[currentCostume][player.character].doorCloseSFX))
-                smascharacterinfo.pSwitchMusic = smascharacterinfo.costumeSpecifics[currentCostume][player.character].pSwitchTheme
+                starman.duration[996] = lunatime.toTicks(smasCharacterInfo.costumeSpecifics[currentCostume][player.character].starmanDuration)
+                starman.duration[994] = lunatime.toTicks(smasCharacterInfo.costumeSpecifics[currentCostume][player.character].starmanDuration)
+                extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile(smasCharacterInfo.costumeSpecifics[currentCostume][player.character].doorCloseSFX))
+                smasCharacterInfo.pSwitchMusic = smasCharacterInfo.costumeSpecifics[currentCostume][player.character].pSwitchTheme
             end
         end
     end
@@ -145,7 +145,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smbspecial.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_smbspecial.ogg"
     end
     if currentCostume == "09-SMW-PIRATE" then
         littleDialogue.characterNames[1] = "Mario"
@@ -154,7 +154,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(22)
         starman.duration[994] = lunatime.toTicks(22)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "10-HOTELMARIO" then
         littleDialogue.characterNames[1] = "Mario"
@@ -163,7 +163,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/10-HotelMario/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "11-SMA1" then
         littleDialogue.characterNames[1] = "Mario"
@@ -172,7 +172,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(9.0012)
         starman.duration[994] = lunatime.toTicks(9.0012)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_sma2.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_sma2.ogg"
     end
     if currentCostume == "12-SMA2" then
         littleDialogue.characterNames[1] = "Mario"
@@ -181,7 +181,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(17.004)
         starman.duration[994] = lunatime.toTicks(17.004)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_sma2.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_sma2.ogg"
     end
     if currentCostume == "13-SMA4" then
         littleDialogue.characterNames[1] = "Mario"
@@ -190,7 +190,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(10.998)
         starman.duration[994] = lunatime.toTicks(10.998)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_sma4.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_sma4.ogg"
     end
     if currentCostume == "14-NSMBDS-SMBX" then
         littleDialogue.characterNames[1] = "Mario"
@@ -199,7 +199,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(9.9996)
         starman.duration[994] = lunatime.toTicks(9.9996)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "15-NSMBDS-ORIGINAL" then
         littleDialogue.characterNames[1] = "Mario"
@@ -208,7 +208,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(9.9996)
         starman.duration[994] = lunatime.toTicks(9.9996)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "16-NSMBWII-MARIO" then
         littleDialogue.characterNames[1] = "Mario"
@@ -217,7 +217,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(9.9996)
         starman.duration[994] = lunatime.toTicks(9.9996)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "A2XT-DEMO" then
         littleDialogue.characterNames[1] = "Demo"
@@ -226,7 +226,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "DEMO-XMASPILY" then
         littleDialogue.characterNames[1] = "Pily"
@@ -235,7 +235,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(26.6)
         starman.duration[994] = lunatime.toTicks(26.6)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "MODERN" then
         littleDialogue.characterNames[1] = "Mario"
@@ -245,12 +245,12 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "MODERN2" then
         littleDialogue.characterNames[1] = "Mario"
         mega2.sfxFile = Misc.resolveSoundFile("megashroom")
-        if table.icontains(smastables.__smb2Levels,Level.filename()) then
+        if table.icontains(smasTables.__smb2Levels,Level.filename()) then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_darsonic55_ddp")
         elseif Level.filename() then
             starman.sfxFile = Misc.resolveSoundFile("starman/starman_darsonic55")
@@ -258,7 +258,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(25.7)
         starman.duration[994] = lunatime.toTicks(25.7)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "JCFOSTERTAKESITTOTHEMOON" then
         littleDialogue.characterNames[1] = "JC Foster"
@@ -267,7 +267,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(16.0056)
         starman.duration[994] = lunatime.toTicks(16.0056)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SP-1-ERICCARTMAN" then
         littleDialogue.characterNames[1] = "Eric"
@@ -276,7 +276,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(15.0072)
         starman.duration[994] = lunatime.toTicks(15.0072)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMG4" then
         littleDialogue.characterNames[1] = "SMG4"
@@ -285,7 +285,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SPONGEBOBSQUAREPANTS" then
         littleDialogue.characterNames[1] = "SpongeBob"
@@ -294,7 +294,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(17.004)
         starman.duration[994] = lunatime.toTicks(17.004)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/SpongeBobSquarePants/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "PRINCESSRESCUE" then
         littleDialogue.characterNames[1] = "Mario"
@@ -303,7 +303,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMB0" then
         littleDialogue.characterNames[1] = "Mario"
@@ -312,7 +312,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smb0.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_smb0.ogg"
     end
     if currentCostume == "SMW-MARIO" then
         littleDialogue.characterNames[1] = "Mario"
@@ -321,7 +321,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(17.004)
         starman.duration[994] = lunatime.toTicks(17.004)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "GA-CAILLOU" then
         littleDialogue.characterNames[1] = "Caillou"
@@ -330,7 +330,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(17.004)
         starman.duration[994] = lunatime.toTicks(17.004)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_goanimate.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_goanimate.ogg"
     end
     if currentCostume == "Z-SMW2-ADULTMARIO" then
         littleDialogue.characterNames[1] = "Mario"
@@ -339,7 +339,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(19.9992)
         starman.duration[994] = lunatime.toTicks(19.9992)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/Z-SMW2-AdultMario/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMBDDX-MARIO" then
         littleDialogue.characterNames[1] = "Mario"
@@ -348,7 +348,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(14)
         starman.duration[994] = lunatime.toTicks(14)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_smbddx.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_smbddx.ogg"
     end
     if currentCostume == "SMM2-LUIGI" then
         littleDialogue.characterNames[1] = "Luigi"
@@ -357,7 +357,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(10)
         starman.duration[994] = lunatime.toTicks(10)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMM2-MARIO" then
         littleDialogue.characterNames[1] = "Mario"
@@ -366,7 +366,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(10)
         starman.duration[994] = lunatime.toTicks(10)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMM2-TOAD" then
         littleDialogue.characterNames[1] = "Toad"
@@ -375,7 +375,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(10)
         starman.duration[994] = lunatime.toTicks(10)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMM2-TOADETTE" then
         littleDialogue.characterNames[1] = "Toadette"
@@ -384,7 +384,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(10)
         starman.duration[994] = lunatime.toTicks(10)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMM2-YELLOWTOAD" then
         littleDialogue.characterNames[1] = "Toad"
@@ -393,7 +393,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(10)
         starman.duration[994] = lunatime.toTicks(10)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "GO-10SECONDRUN" then
         littleDialogue.characterNames[1] = "Runner Red"
@@ -402,7 +402,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "ROSA-ISABELLA" then
         littleDialogue.characterNames[1] = "Rosa"
@@ -411,7 +411,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "ZERO-SONIC" then
         littleDialogue.characterNames[1] = "Zero"
@@ -420,7 +420,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -434,7 +434,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(19.9992)
         starman.duration[994] = lunatime.toTicks(19.9992)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "09-SMB3-MARIOCLOTHES" then
         littleDialogue.characterNames[2] = "Marigi"
@@ -443,7 +443,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "14-SMA1" then
         littleDialogue.characterNames[2] = "Luigi"
@@ -452,7 +452,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(9.0012)
         starman.duration[994] = lunatime.toTicks(9.0012)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_sma2.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_sma2.ogg"
     end
     if currentCostume == "LARRYTHECUCUMBER" then
         littleDialogue.characterNames[2] = "Larry"
@@ -461,7 +461,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/luigi/LarryTheCucumber/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "WALUIGI" then
         littleDialogue.characterNames[2] = "Waluigi"
@@ -470,7 +470,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "A2XT-IRIS" then
         littleDialogue.characterNames[2] = "Iris"
@@ -479,7 +479,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "UNDERTALE-FRISK" then
         littleDialogue.characterNames[2] = "Frisk"
@@ -488,7 +488,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/luigi/Undertale-Frisk/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "GA-BORIS" then
         littleDialogue.characterNames[2] = "Boris"
@@ -497,7 +497,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(17.004)
         starman.duration[994] = lunatime.toTicks(17.004)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SHANTAE" then
         littleDialogue.characterNames[2] = "Shantae"
@@ -506,7 +506,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -524,7 +524,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "DAISY" then
         littleDialogue.characterNames[3] = "Daisy"
@@ -533,7 +533,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "KIRBY-SMB3" then
         littleDialogue.characterNames[3] = "Kirby"
@@ -542,7 +542,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "PAULINE" then
         littleDialogue.characterNames[3] = "Pauline"
@@ -551,7 +551,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "NINJABOMBERMAN" then
         littleDialogue.characterNames[3] = "Plunder Bomber"
@@ -560,7 +560,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "TUX" then
         littleDialogue.characterNames[3] = "Tux"
@@ -569,7 +569,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -586,7 +586,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SONIC" then
         littleDialogue.characterNames[4] = "Sonic"
@@ -595,7 +595,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(19.9992)
         starman.duration[994] = lunatime.toTicks(19.9992)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "IMAJIN-NES" then
         littleDialogue.characterNames[4] = "Imajin"
@@ -604,7 +604,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(8)
         starman.duration[994] = lunatime.toTicks(8)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "JASMINE" then
         littleDialogue.characterNames[4] = "Jasmine"
@@ -613,7 +613,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "LEGOSTARWARS-REBELTROOPER" then
         littleDialogue.characterNames[4] = "Rebel Trooper"
@@ -622,7 +622,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/LEGOStarWars-RebelTrooper/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_starwars.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_starwars.ogg"
     end
     if currentCostume == "MOTHERBRAINRINKA" then
         littleDialogue.characterNames[4] = "Mother Brain Rinka"
@@ -631,7 +631,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "TOADETTE" then
         littleDialogue.characterNames[4] = "Toadette"
@@ -640,7 +640,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "YOSHI-SMB3" then
         littleDialogue.characterNames[4] = "Yoshi"
@@ -649,7 +649,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "A2XT-RAOCOW" then
         littleDialogue.characterNames[4] = "Raocow"
@@ -658,7 +658,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "PACMAN-ARRANGEMENT-PACMAN" then
         littleDialogue.characterNames[4] = "Pac-Man"
@@ -667,7 +667,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "DIGDUG-DIGGINGSTRIKE" then
         littleDialogue.characterNames[4] = "Taizo"
@@ -676,7 +676,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -694,7 +694,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SMB3-BANDANA-DEE" then
         littleDialogue.characterNames[5] = "Bandana Dee"
@@ -703,7 +703,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "NESS" then
         littleDialogue.characterNames[5] = "Ness"
@@ -712,7 +712,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "pswitch/pswitch_earthbound.ogg"
+        smasCharacterInfo.pSwitchMusic = "pswitch/pswitch_earthbound.ogg"
     end
     if currentCostume == "TAKESHI" then
         littleDialogue.characterNames[5] = "Takeshi"
@@ -721,7 +721,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/link/Takeshi/door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "SEE-SHERBERTLUSSIEBACK" then
         littleDialogue.characterNames[5] = "Sherbert"
@@ -730,7 +730,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "TAKESHI-SNES" then
         littleDialogue.characterNames[5] = "Takeshi"
@@ -739,7 +739,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -756,7 +756,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(22.9944)
         starman.duration[994] = lunatime.toTicks(22.9944)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -770,11 +770,11 @@ function smascharacterinfo.setCostumeSpecifics()
     
     if currentCostume == "SMW2-YOSHI" then
         littleDialogue.characterNames[9] = "Yoshi"
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     if currentCostume == "YS-GREEN" then
         littleDialogue.characterNames[9] = "Yoshi"
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -790,7 +790,7 @@ function smascharacterinfo.setCostumeSpecifics()
         starman.duration[996] = lunatime.toTicks(12)
         starman.duration[994] = lunatime.toTicks(12)
         extrasounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("door-close.ogg"))
-        smascharacterinfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
+        smasCharacterInfo.pSwitchMusic = "_OST/P-Switch (v2).ogg"
     end
     
     
@@ -974,4 +974,4 @@ function smascharacterinfo.setCostumeSpecifics()
     end
 end
 
-return smascharacterinfo
+return smasCharacterInfo

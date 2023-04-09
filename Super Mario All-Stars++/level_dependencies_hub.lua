@@ -8,7 +8,7 @@ end
 local Routine = require("routine")
 local warpTransition = require("warpTransition")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local smashudsystem = require("smashudsystem")
+local smasHudSystem = require("smasHudSystem")
 local pausemenu2 = require("pausemenu2")
 
 if SaveData.disableX2char then
@@ -37,7 +37,7 @@ local dependencies2 = {}
 local battledependencies = require("classicbattlemode")
 battledependencies.battlemodeactive = false
 
-smasbooleans.compatibilityMode13Mode = false
+smasBooleans.compatibilityMode13Mode = false
 
 function p1teleportdoor()
     Routine.waitFrames(30)

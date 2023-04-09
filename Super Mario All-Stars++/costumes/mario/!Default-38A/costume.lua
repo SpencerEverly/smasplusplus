@@ -559,17 +559,17 @@ function costume.onTick()
             playerData2[p].curState = p.powerup
         end
         if p.forcedState == FORCEDSTATE_POWERUP_BIG then
-            p.forcedState = smascharacterglobals.miscellaneousSettings.smbx38APowerupBigForcedStateID
+            p.forcedState = smasCharacterGlobals.miscellaneousSettings.smbx38APowerupBigForcedStateID
         elseif p.forcedState == FORCEDSTATE_POWERUP_FIRE then
-            p.forcedState = smascharacterglobals.miscellaneousSettings.smbx38APowerupFireForcedStateID
+            p.forcedState = smasCharacterGlobals.miscellaneousSettings.smbx38APowerupFireForcedStateID
         elseif p.forcedState == FORCEDSTATE_POWERUP_ICE then
-            p.forcedState = smascharacterglobals.miscellaneousSettings.smbx38APowerupIceForcedStateID
+            p.forcedState = smasCharacterGlobals.miscellaneousSettings.smbx38APowerupIceForcedStateID
         elseif p.forcedState == FORCEDSTATE_POWERDOWN_SMALL then
-            p.forcedState = smascharacterglobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID
+            p.forcedState = smasCharacterGlobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID
         elseif p.forcedState == FORCEDSTATE_POWERDOWN_FIRE then
-            p.forcedState = smascharacterglobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID
+            p.forcedState = smasCharacterGlobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID
         elseif p.forcedState == FORCEDSTATE_POWERDOWN_ICE then
-            p.forcedState = smascharacterglobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID
+            p.forcedState = smasCharacterGlobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID
         elseif p.forcedState == 751 then --anotherPowerDownLibrary
             if p.forcedTimer >= 30 then
                 p.BlinkTimer = 150
@@ -579,7 +579,7 @@ function costume.onTick()
                 p.powerup = 2
             end
         end
-        if p.forcedState == smascharacterglobals.miscellaneousSettings.smbx38APowerupBigForcedStateID then --Powerup (Small to big)
+        if p.forcedState == smasCharacterGlobals.miscellaneousSettings.smbx38APowerupBigForcedStateID then --Powerup (Small to big)
             p.forcedTimer = p.forcedTimer + 1
             if p:mem(0x12E, FIELD_BOOL) then --ducking state, seemingly wouldn't work if using player.InDuckingPosition?
                 p:mem(0x132, FIELD_BOOL, true) --standing value?? seems to corrilates to .stand in modPlayer.bas, is player.Unknown132
@@ -609,7 +609,7 @@ function costume.onTick()
                 p.forcedTimer = 0
             end
         end
-        if p.forcedState == smascharacterglobals.miscellaneousSettings.smbx38APowerupFireForcedStateID then --Powerup (Big to Fire)
+        if p.forcedState == smasCharacterGlobals.miscellaneousSettings.smbx38APowerupFireForcedStateID then --Powerup (Big to Fire)
             p.forcedTimer = p.forcedTimer + 1
             if p:mem(0x12E, FIELD_BOOL) then --ducking state, seemingly wouldn't work if using player.InDuckingPosition?
                 p:mem(0x132, FIELD_BOOL, true) --standing value?? seems to corrilates to .stand in modPlayer.bas, is player.Unknown132
@@ -638,7 +638,7 @@ function costume.onTick()
                 p.forcedTimer = 0
             end
         end
-        if p.forcedState == smascharacterglobals.miscellaneousSettings.smbx38APowerupIceForcedStateID then --Powerup (Big to Ice)
+        if p.forcedState == smasCharacterGlobals.miscellaneousSettings.smbx38APowerupIceForcedStateID then --Powerup (Big to Ice)
             p.forcedTimer = p.forcedTimer + 1
             if p:mem(0x12E, FIELD_BOOL) then --ducking state, seemingly wouldn't work if using player.InDuckingPosition?
                 p:mem(0x132, FIELD_BOOL, true) --standing value?? seems to corrilates to .stand in modPlayer.bas, is player.Unknown132
@@ -667,7 +667,7 @@ function costume.onTick()
                 p.forcedTimer = 0
             end
         end
-        if p.forcedState == smascharacterglobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID then --Powerup (Big to small)
+        if p.forcedState == smasCharacterGlobals.miscellaneousSettings.smbx38APowerdownSmallForcedStateID then --Powerup (Big to small)
             p.forcedTimer = p.forcedTimer + 1
             if p:mem(0x12E, FIELD_BOOL) then --ducking state, seemingly wouldn't work if using player.InDuckingPosition?
                 p:mem(0x132, FIELD_BOOL, true) --standing value?? seems to corrilates to .stand in modPlayer.bas, is player.Unknown132

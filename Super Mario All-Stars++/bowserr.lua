@@ -927,7 +927,7 @@ end
 function bowser.onDraw()
     if(player.character == CHARACTER_BOWSER) then
         if Misc.inMarioChallenge() == false then
-            if smashud.visible.customitembox == true then
+            if smasHud.visible.customitembox == true then
                 drawHUD();
             end
         elseif Misc.inMarioChallenge() then

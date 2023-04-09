@@ -4,7 +4,7 @@ local inventory = require("customInventory")
 local textplus = require("textplus")
 local Routine = require("routine")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local smashud = require("smashud")
+local smasHud = require("smasHud")
 local rng = require("base/rng")
 local warpTransition = require("warpTransition")
 
@@ -23,7 +23,7 @@ local costumes = {}
 
 local battledependencies = {}
 
-smasbooleans.compatibilityMode13Mode = true
+smasBooleans.compatibilityMode13Mode = true
 
 battledependencies.p1lives = 3
 battledependencies.p2lives = 3
@@ -40,10 +40,10 @@ local killed1 = false
 local killed2 = false
 
 if not GameData.enableBattleMode or GameData.enableBattleMode == nil then
-    smasbooleans.classicBattleModeActive = false
+    smasBooleans.classicBattleModeActive = false
     battledependencies.battlemodeactive = false
 else
-    smasbooleans.classicBattleModeActive = true
+    smasBooleans.classicBattleModeActive = true
     battledependencies.battlemodeactive = true
 end
 
@@ -86,7 +86,7 @@ function rngrunstate()
     Routine.wait(0.4)
     Misc.saveGame()
     battledependencies.battlemodeactive = true
-    Level.load(smastables.__classicBattleModeLevels[rng.randomInt(1,#smastables.__classicBattleModeLevels)], nil, nil)
+    Level.load(smasTables.__classicBattleModeLevels[rng.randomInt(1,#smasTables.__classicBattleModeLevels)], nil, nil)
 end
 
 function restartmode()
@@ -114,7 +114,7 @@ end
 
 function battlediedanimation()
     if not Misc.inMarioChallenge() then
-        if smasbooleans.multiplayerActive then
+        if smasBooleans.multiplayerActive then
             if battledependencies.battlemodeactive then --If Classic Battle Mode is active, the animation won't be active, but lives will decrease
                 if killed1 == true then
                     battledependencies.p1lives = battledependencies.p1lives - 1
@@ -525,7 +525,7 @@ function battledependencies.onTick()
             killed1 = true --killed1 detects to see if the 1st player is dead.
         end
         if Player.count() >= 2 then --2nd player compability
-            smasbooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
+            smasBooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
             if battledependencies.battlemodeactive == true then
                 if(not killed2 and Player(2):mem(0x13E,FIELD_BOOL)) then
                     killed2 = true --killed2 detects to see if the 2nd player is dead.
@@ -556,15 +556,15 @@ function battledependencies.onTick()
                 Misc.score(50000)
             end
         end
-        smashud.visible.keys = false
-        smashud.visible.itembox = true
-        smashud.visible.bombs = true
-        smashud.visible.coins = false
-        smashud.visible.score = false
-        smashud.visible.lives = false
-        smashud.visible.stars = false
-        smashud.visible.starcoins = false
-        smashud.visible.timer = false
+        smasHud.visible.keys = false
+        smasHud.visible.itembox = true
+        smasHud.visible.bombs = true
+        smasHud.visible.coins = false
+        smasHud.visible.score = false
+        smasHud.visible.lives = false
+        smasHud.visible.stars = false
+        smasHud.visible.starcoins = false
+        smasHud.visible.timer = false
         if Player.count() >= 2 then
             if Player(1).forcedState == FORCEDSTATE_PIPE then
                 if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
@@ -601,7 +601,7 @@ function battledependencies.onTick()
         end
 
         local costumes
-        if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+        if table.icontains(smasTables.__smb2Levels,Level.filename()) == true then
             if NPC.config[274].score == 11 then
                 Sound.playSFX(147)
                 NPC.config[274].score = 6

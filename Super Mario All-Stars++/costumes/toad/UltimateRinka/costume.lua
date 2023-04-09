@@ -16,8 +16,8 @@ local colliders = require("colliders")
 local rng = require("rng")
 local pm = require("playerManager")
 local imagic = require("imagic")
-local smashud = require("smashud")
-local smastables = require("smastables")
+local smasHud = require("smasHud")
+local smasTables = require("smasTables")
 
 -- Load events
 function costume.onInit(p)
@@ -148,7 +148,7 @@ function costume.onTick()
         if floatTimer < 180 and (not player:isGroundTouching()) and player:mem(0x13E,FIELD_WORD) == 0 and player.jumpKeyPressing and player:mem(0x40, FIELD_WORD) == 0 then
             local butt = Animation.spawn(12,player.x+rng.randomInt(8,player.width-8) - 16, player.y + player.height - 48)
             butt.speedY = 2;
-            if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                 playSFX(16)
             end
         end
@@ -253,7 +253,7 @@ function costume.onInputUpdate()
                 -- Regular rinka attack
                 if player.keys.altRun == KEYS_PRESSED and player:mem(0x26,FIELD_WORD) == 0 then
                     if numberOfRinkas > 0 then
-                        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                             SFX.play(sfx_metalblade)
                         end
                         spawnRinka()
@@ -263,7 +263,7 @@ function costume.onInputUpdate()
 
                 -- Fire flower
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 3 and specialCooldown == 0 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                         SFX.play(sfx_fireflower)
                     end
                     specialCooldown = 250;
@@ -277,7 +277,7 @@ function costume.onInputUpdate()
                 -- Ice flower
 
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 7 and specialCooldown == 0 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                         SFX.play(sfx_iceflower)
                     end
                     ice = NPC.spawn(237,player.x+(player.width/2),player.y,player.section, false, true)
@@ -288,7 +288,7 @@ function costume.onInputUpdate()
                 -- Leaf
                 
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 4 and specialCooldown == 0 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                         SFX.play(sfx_claw)
                     end
                     rrr = NPC.spawn(266,player.x+(player.width/2),player.y,player.section, false, true)
@@ -308,7 +308,7 @@ function costume.onInputUpdate()
 
                 -- Tanooki
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 5 and specialCooldown == 0 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                         SFX.play(sfx_claw)
                     end
                     for i=-1,1,2 do
@@ -328,7 +328,7 @@ function costume.onInputUpdate()
                 end
 
                 if player.keys.run == KEYS_PRESSED and player.powerup == 5 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                         SFX.play(sfx_invin)
                     end
                     butts = NPC.spawn(13,player.x + player.width/2,player.y,player.section, false, true)
@@ -338,7 +338,7 @@ function costume.onInputUpdate()
 
                 -- Hammer suit
                 if player.keys.altJump == KEYS_PRESSED and player.powerup == 6 and specialCooldown == 0 then
-                    if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+                    if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
                         SFX.play(sfx_powerstone)
                     end
                     for i = 1, 2 do

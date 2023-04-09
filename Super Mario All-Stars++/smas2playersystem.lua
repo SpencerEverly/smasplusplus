@@ -1,33 +1,33 @@
---smas2playersystem.lua
+--smas2PlayerSystem.lua
 --v1.0
 --By Spencer Everly
 
-local smas2playersystem = {}
+local smas2PlayerSystem = {}
 
 local customCamera = require("customCamera")
 local handycam = require("handycam")
 
 local player1Camera = Graphics.CaptureBuffer(800,600)
 local player2Camera = Graphics.CaptureBuffer(800,600)
-smas2playersystem.player1CameraEdgeX = 0
-smas2playersystem.player1CameraEdgeY = 0
-smas2playersystem.player2CameraEdgeX = 0
-smas2playersystem.player2CameraEdgeY = 0
+smas2PlayerSystem.player1CameraEdgeX = 0
+smas2PlayerSystem.player1CameraEdgeY = 0
+smas2PlayerSystem.player2CameraEdgeX = 0
+smas2PlayerSystem.player2CameraEdgeY = 0
 
 local pipecounter1p = 0
 local pipecounter2p = 0
 
-function smas2playersystem.onInitAPI()
-    registerEvent(smas2playersystem,"onControllerButtonPress")
-    registerEvent(smas2playersystem,"onKeyboardPress")
-    registerEvent(smas2playersystem,"onStart")
-    registerEvent(smas2playersystem,"onDraw")
-    registerEvent(smas2playersystem,"onTick")
-    registerEvent(smas2playersystem,"onCameraDraw")
+function smas2PlayerSystem.onInitAPI()
+    registerEvent(smas2PlayerSystem,"onControllerButtonPress")
+    registerEvent(smas2PlayerSystem,"onKeyboardPress")
+    registerEvent(smas2PlayerSystem,"onStart")
+    registerEvent(smas2PlayerSystem,"onDraw")
+    registerEvent(smas2PlayerSystem,"onTick")
+    registerEvent(smas2PlayerSystem,"onCameraDraw")
 end
 
-function smas2playersystem.onStart()
-    if smasbooleans.targetPlayers then --If targeting players are enabled...
+function smas2PlayerSystem.onStart()
+    if smasBooleans.targetPlayers then --If targeting players are enabled...
         for _,p in ipairs(Player.get()) do --Get all players
             if p.isValid and not table.icontains(customCamera.targets,p) then
                 table.insert(customCamera.targets,p)
@@ -38,8 +38,8 @@ function smas2playersystem.onStart()
     end
 end
 
-function smas2playersystem.onDraw()
-    if smasbooleans.targetPlayers then --If targeting players are enabled...
+function smas2PlayerSystem.onDraw()
+    if smasBooleans.targetPlayers then --If targeting players are enabled...
         for _,p in ipairs(Player.get()) do --Get all players
             if p.isValid and not table.icontains(customCamera.targets,p) then
                 table.insert(customCamera.targets,p)
@@ -48,7 +48,7 @@ function smas2playersystem.onDraw()
             end
         end
     end
-    if not smasbooleans.targetPlayers and not smasbooleans.overrideTargets then
+    if not smasBooleans.targetPlayers and not smasBooleans.overrideTargets then
         customCamera.targets = {}
     end
     
@@ -71,16 +71,16 @@ function smas2playersystem.onDraw()
         end
         if Player.count() == 2 then
             if player.deathTimer == 0 then
-                smas2playersystem.player1CameraEdgeX = Screen.viewPortCoordinateX(player.x - camera.x, player.width)
-                smas2playersystem.player1CameraEdgeY = 0
-                smas2playersystem.player2CameraEdgeX = Screen.viewPortCoordinateX(player2.x - camera.x, player2.width)
-                smas2playersystem.player2CameraEdgeY = 0 --player.y - camera.y - player.height
+                smas2PlayerSystem.player1CameraEdgeX = Screen.viewPortCoordinateX(player.x - camera.x, player.width)
+                smas2PlayerSystem.player1CameraEdgeY = 0
+                smas2PlayerSystem.player2CameraEdgeX = Screen.viewPortCoordinateX(player2.x - camera.x, player2.width)
+                smas2PlayerSystem.player2CameraEdgeY = 0 --player.y - camera.y - player.height
             end]]
         end
     end
 end
 
-function smas2playersystem.onCameraDraw(camIdx)
+function smas2PlayerSystem.onCameraDraw(camIdx)
     --[[if Player.count() == 2 then
         if player.deathTimer == 0 then
             player1Camera:captureAt(-4.9999)
@@ -92,8 +92,8 @@ function smas2playersystem.onCameraDraw(camIdx)
                 priority = -4.98,
                 width = 400,
                 height = 600,
-                sourceX = smas2playersystem.player1CameraEdgeX,
-                sourceY = smas2playersystem.player1CameraEdgeY,
+                sourceX = smas2PlayerSystem.player1CameraEdgeX,
+                sourceY = smas2PlayerSystem.player1CameraEdgeY,
                 sourceWidth = 400,
                 sourceHeight = 600,
             }
@@ -106,8 +106,8 @@ function smas2playersystem.onCameraDraw(camIdx)
                 priority = -4.98,
                 width = 400,
                 height = 600,
-                sourceX = smas2playersystem.player2CameraEdgeX,
-                sourceY = smas2playersystem.player2CameraEdgeY,
+                sourceX = smas2PlayerSystem.player2CameraEdgeX,
+                sourceY = smas2PlayerSystem.player2CameraEdgeY,
                 sourceWidth = 400,
                 sourceHeight = 600,
             }
@@ -115,7 +115,7 @@ function smas2playersystem.onCameraDraw(camIdx)
     end]]
 end
 
-function smas2playersystem.onTick()
+function smas2PlayerSystem.onTick()
     for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...
         if mem(0x00B2C5AC,FIELD_FLOAT) == 0 then --If 0, do these things...
             if(not killed and p:mem(0x13E,FIELD_BOOL)) then --Checks to see if the player actually died...
@@ -150,12 +150,12 @@ function smas2playersystem.onTick()
                 end
                 if Player(1).forcedState == FORCEDSTATE_DOOR then
                     if Player(1).forcedTimer == 1 then
-                        Routine.run(smas2playersystem.doorTeleportP2toP1)
+                        Routine.run(smas2PlayerSystem.doorTeleportP2toP1)
                     end
                 end
                 if Player(2).forcedState == FORCEDSTATE_DOOR then
                     if Player(2).forcedTimer == 1 then
-                        Routine.run(smas2playersystem.doorTeleportP1toP2)
+                        Routine.run(smas2PlayerSystem.doorTeleportP1toP2)
                     end
                 end
             end
@@ -166,7 +166,7 @@ end
 
 
 if SaveData.disableX2char then --These will be 1.3 Mode specific
-    function smas2playersystem.doorTeleportP1toP2()
+    function smas2PlayerSystem.doorTeleportP1toP2()
         Routine.waitFrames(30)
         player:mem(0x140,FIELD_WORD,100)
         Player(2):mem(0x140,FIELD_WORD,100)
@@ -175,7 +175,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
         end
     end
     
-    function smas2playersystem.doorTeleportP2toP1()
+    function smas2PlayerSystem.doorTeleportP2toP1()
         Routine.waitFrames(30)
         player:mem(0x140,FIELD_WORD,100)
         if Player.count() >= 2 then
@@ -184,7 +184,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
         end
     end
     
-    function smas2playersystem.teleport2PlayerModeController(button, playerIdx) --Using the Special button to teleport within each other, same goes for the other two below except for keyboards
+    function smas2PlayerSystem.teleport2PlayerModeController(button, playerIdx) --Using the Special button to teleport within each other, same goes for the other two below except for keyboards
         if Player.count() == 2 then
             if playerIdx == 1 then
                 if not Misc.isPaused() then
@@ -205,7 +205,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
         end
     end
 
-    function smas2playersystem.teleport2PlayerMode1P() --1st Player teleport, uses the keyboard key instead
+    function smas2PlayerSystem.teleport2PlayerMode1P() --1st Player teleport, uses the keyboard key instead
         if Player.count() == 2 then
             if not Misc.isPaused() then
                 player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
@@ -214,7 +214,7 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
         end
     end
 
-    function smas2playersystem.teleport2PlayerMode2P()--2nd Player teleport, uses the keyboard key instead
+    function smas2PlayerSystem.teleport2PlayerMode2P()--2nd Player teleport, uses the keyboard key instead
         if Player.count() == 2 then
             if not Misc.isPaused() then
                 player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
@@ -225,13 +225,13 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
 
 
 
-    function smas2playersystem.onKeyboardPress(keyCode, repeated) --Now for the keyboard press detection code...
+    function smas2PlayerSystem.onKeyboardPress(keyCode, repeated) --Now for the keyboard press detection code...
         if Player.count() == 2 then
             if not Misc.isPaused() then
-                if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
-                    smas2playersystem.teleport2PlayerMode1P()
-                elseif keyCode == smastables.keyboardMap[SaveData.specialkey2ndplayer] and not repeated then
-                    smas2playersystem.teleport2PlayerMode2P()
+                if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+                    smas2PlayerSystem.teleport2PlayerMode1P()
+                elseif keyCode == smasTables.keyboardMap[SaveData.specialkey2ndplayer] and not repeated then
+                    smas2PlayerSystem.teleport2PlayerMode2P()
                 end
             end
         end
@@ -239,13 +239,13 @@ if SaveData.disableX2char then --These will be 1.3 Mode specific
 
 
 
-    function smas2playersystem.onControllerButtonPress(button, playerIdx) --...along with the controller press detection code
+    function smas2PlayerSystem.onControllerButtonPress(button, playerIdx) --...along with the controller press detection code
         if Player.count() == 2 then
-            smas2playersystem.teleport2PlayerModeController(button, playerIdx)
+            smas2PlayerSystem.teleport2PlayerModeController(button, playerIdx)
         end
     end
 end
 
 
 
-return smas2playersystem
+return smas2PlayerSystem

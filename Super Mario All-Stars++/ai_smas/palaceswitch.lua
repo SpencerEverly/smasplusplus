@@ -279,7 +279,7 @@ function bigSwitch.onTickNPC(npc)
                 if data.pressTimer%interval == 0 then
                     charmBurst(data.effect, 16, 210, 12)
                     if settings.exitlevel == 0 and data.pressTimer > 0 and not npc.isHidden then
-                        smasbooleans.musicMuted = true
+                        smasBooleans.musicMuted = true
                         SFX.play(75)
                     end
                 end
@@ -313,7 +313,7 @@ function bigSwitch.onEvent(event)
 end
 
 function bigSwitch.onExit()
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
 end
 
 return bigSwitch

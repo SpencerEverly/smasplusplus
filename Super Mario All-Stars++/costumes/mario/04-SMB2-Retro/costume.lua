@@ -1,7 +1,7 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smasfunctions = require("smasfunctions")
-local smasextraactions = require("smasextraactions")
+local smasFunctions = require("smasFunctions")
+local smasExtraActions = require("smasExtraActions")
 
 local costume = {}
 
@@ -51,22 +51,22 @@ function costume.onInit(p)
         Sound.loadCostumeSounds()
         costume.loadedSounds = true
     end
-    smasextraactions.enableLongJump = true
-    smasextraactions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
+    smasExtraActions.enableLongJump = true
+    smasExtraActions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
     for i = 2,7 do
-        smasextraactions.longJumpAnimationFrames[i] = {4}
+        smasExtraActions.longJumpAnimationFrames[i] = {4}
     end
-    smasextraactions.longJumpAnimationMaxFrames = 1
+    smasExtraActions.longJumpAnimationMaxFrames = 1
 end
 
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
-    smasextraactions.enableLongJump = false
-    smasextraactions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
+    smasExtraActions.enableLongJump = false
+    smasExtraActions.longJumpAnimationFrames[1] = {3} --SMB2 Defaults
     for i = 2,7 do
-        smasextraactions.longJumpAnimationFrames[i] = {4}
+        smasExtraActions.longJumpAnimationFrames[i] = {4}
     end
-    smasextraactions.longJumpAnimationMaxFrames = 1
+    smasExtraActions.longJumpAnimationMaxFrames = 1
 end
 
 return costume

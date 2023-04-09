@@ -3,8 +3,8 @@
 ]]
 
 local playerManager = require("playerManager")
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+local smasFunctions
+pcall(function() smasFunctions = require("smasFunctions") end)
 local extrasounds
 pcall(function() extrasounds = require("extrasounds") end)
 

@@ -322,7 +322,7 @@ function goalTape.startExit(args)
         end
     end
     
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     
     Audio.SeizeStream(-1)
     Audio.MusicStop()
@@ -396,7 +396,7 @@ local function updatePlayerStuff(p,fromOnDraw)
 
             if info.fadeOut >= 1 or (info.doIrisOut and info.irisOutRadius < 2) then
                 -- Exit level
-                smasbooleans.musicMuted = false
+                smasBooleans.musicMuted = false
                 Level.exit(info.exitType)
                 Misc.unpause()
 

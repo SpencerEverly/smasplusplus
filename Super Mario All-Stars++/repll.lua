@@ -293,7 +293,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
             Sound.playSFX("console/console_open.ogg")
             Misc.cheatBuffer("")
             repll.active = true
-            smasbooleans.toggleOffInventory = true
+            smasBooleans.toggleOffInventory = true
         end
         return
     end
@@ -309,7 +309,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
                 Misc.unpause()
                 Sound.playSFX("console/console_close.ogg")
                 repll.active = false
-                smasbooleans.toggleOffInventory = false
+                smasBooleans.toggleOffInventory = false
             end
         elseif vk == VK_RETURN then
             Sound.playSFX("console/console_keypressenter.ogg")

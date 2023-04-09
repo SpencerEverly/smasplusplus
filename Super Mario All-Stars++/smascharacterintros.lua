@@ -1,4 +1,4 @@
-local smascharacterintros = {}
+local smasCharacterIntros = {}
 
 local portalopenergfx = Graphics.loadImageResolved("costumes/mario/GO-10SecondRun/openingportal.png")
 local portalopengfx = Graphics.loadImageResolved("costumes/mario/GO-10SecondRun/portalopen.png")
@@ -11,12 +11,12 @@ local warpTransition = require("warpTransition")
 local playerManager = require("playerManager")
 local Routine = require("routine")
 
-function smascharacterintros.onInitAPI()
-    registerEvent(smascharacterintros,"onStart")
-    registerEvent(smascharacterintros,"onDraw")
+function smasCharacterIntros.onInitAPI()
+    registerEvent(smasCharacterIntros,"onStart")
+    registerEvent(smasCharacterIntros,"onDraw")
 end
 
-smascharacterintros.animationactive = false --This is used to animate the intro
+smasCharacterIntros.animationactive = false --This is used to animate the intro
 
 local dontshowplayer = false
 
@@ -54,8 +54,8 @@ local currentCostume = player:getCostume()
 
 local costumes
 
-function smascharacterintros.onStart()
-    if not smasbooleans.mainMenuActive then
+function smasCharacterIntros.onStart()
+    if not smasBooleans.mainMenuActive then
         pauseplus = require("pauseplus")
     end
     local characters = {}
@@ -67,7 +67,7 @@ function smascharacterintros.onStart()
     local costumes
     if SaveData.toggleCostumeAbilities == true then
         if SaveData.enableIntros then
-            if table.icontains(smastables._noLevelPlacesPlusOtherLevels,Level.filename()) == false then
+            if table.icontains(smasTables._noLevelPlacesPlusOtherLevels,Level.filename()) == false then
                 console:println("Character intro will now be played.")
                 if SaveData.currentCostume == "GO-10SECONDRUN" then
                     Routine.run(tensecondrunstartinganimation)
@@ -81,11 +81,11 @@ function smascharacterintros.onStart()
     end
 end
 
-function smascharacterintros.onDraw()
+function smasCharacterIntros.onDraw()
     if SaveData.toggleCostumeAbilities == true then
         if SaveData.currentCostume == "GO-10SECONDRUN" then
             if SaveData.enableIntros == true then
-                if smascharacterintros.animationactive == true then
+                if smasCharacterIntros.animationactive == true then
                     --Invisible player
                     if dontshowplayer then
                         player:setFrame(50)
@@ -136,7 +136,7 @@ function smascharacterintros.onDraw()
             end
         elseif SaveData.currentCostume == "PACMAN-ARRANGEMENT-PACMAN" then
             if SaveData.enableIntros == true then
-                if smascharacterintros.animationactive == true then
+                if smasCharacterIntros.animationactive == true then
                     --Invisible player
                     if dontshowplayer then
                         player:setFrame(50)
@@ -170,7 +170,7 @@ end
 function pacmanstartinganimation()
     Routine.wait(0.1, true)
     Sound.muteMusic(-1)
-    smascharacterintros.animationactive = true
+    smasCharacterIntros.animationactive = true
     dontshowplayer = true
     playerwhooshpacman = false
     Sound.playSFX("toad/PacMan-Arrangement-PacMan/level-starting.ogg")
@@ -238,14 +238,14 @@ function pacmanstartinganimation()
     playerwhooshpacman = false
     dontshowplayer = false
     Sound.restoreMusic(-1)
-    smascharacterintros.animationactive = false
+    smasCharacterIntros.animationactive = false
     pauseplus.canPause = true
 end
 
 function tensecondrunstartinganimation()
     Routine.wait(0.1, true)
     Sound.muteMusic(-1)
-    smascharacterintros.animationactive = true
+    smasCharacterIntros.animationactive = true
     dontshowplayer = true
     Routine.wait(0.3, true)
     Misc.pause()
@@ -300,8 +300,8 @@ function tensecondrunstartinganimation()
     Sound.restoreMusic(-1)
     Routine.wait(2, true)
     gotext = false
-    smascharacterintros.animationactive = false
+    smasCharacterIntros.animationactive = false
     pauseplus.canPause = true
 end
 
-return smascharacterintros
+return smasCharacterIntros

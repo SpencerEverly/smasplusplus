@@ -4522,13 +4522,13 @@ function smwMap.onDraw()
         Misc.unlockAnyBrokenPaths()
         SaveData.firstBootMapPathFixed = true
     end
-    if smwMap.enableMusic and not smasbooleans.musicMutedTemporary then
+    if smwMap.enableMusic and not smasBooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = false
-    elseif not smwMap.enableMusic or smasbooleans.musicMutedTemporary then
+    elseif not smwMap.enableMusic or smasBooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = true
-    elseif smwMap.enableMusic and not smasbooleans.musicMutedTemporary then
+    elseif smwMap.enableMusic and not smasBooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = true
-    elseif not smwMap.enableMusic and smasbooleans.musicMutedTemporary then
+    elseif not smwMap.enableMusic and smasBooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = false
     end
     --Text.printWP(smwMap.unlockingCurrentPath, 100, 100, 8)

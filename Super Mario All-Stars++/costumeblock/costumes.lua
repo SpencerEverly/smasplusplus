@@ -3,7 +3,7 @@ local costumeblock = {}
 local blockmanager = require("blockmanager")
 local blockutils = require("blocks/blockutils")
 local playerManager = require("playerManager")
-local smascharacterchanger = require("smascharacterchanger")
+local smasCharacterChanger = require("smasCharacterChanger")
 
 local oldCostume = {}
 local costumes = {}
@@ -16,8 +16,8 @@ function costumeblock.onPostBlockHit(v, fromUpper, playerOrNil)
     
 	Animation.spawn(10,playerOrNil.x+playerOrNil.width*0.5-16,playerOrNil.y+playerOrNil.height*0.5);
 	SFX.play(32)
-    smascharacterchanger.menuActive = true
-    smascharacterchanger.animationActive = true
+    smasCharacterChanger.menuActive = true
+    smasCharacterChanger.animationActive = true
 end
 
 function costumeblock.register(id)

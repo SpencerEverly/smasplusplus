@@ -1,7 +1,7 @@
 local textplus = require("textplus")
 local cutsceneenabled = false
 Graphics.activateHud(false)
-smasbooleans.disablePauseMenu = true
+smasBooleans.disablePauseMenu = true
 
 local timer1 = 0
 local speed = 0

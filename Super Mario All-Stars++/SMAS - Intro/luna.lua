@@ -23,7 +23,7 @@ function onStart(p)
     datetime.topright = true
     datetime.bottomright = false
     p = p or player;
-    smasbooleans.overrideMusicVolume = true
+    smasBooleans.overrideMusicVolume = true
     Audio.MusicVolume(80)
     extrasounds.enableTailAttackSFX = false
 end
@@ -136,7 +136,7 @@ end
 Cheats.enabled = false
 
 function onExit()
-    smasbooleans.overrideMusicVolume = false
+    smasBooleans.overrideMusicVolume = false
     Audio.MusicVolume(65)
     datetime.topright = false
     datetime.bottomright = true

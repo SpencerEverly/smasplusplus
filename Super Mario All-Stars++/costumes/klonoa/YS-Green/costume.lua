@@ -3,7 +3,7 @@ local klonoa = require("klonoaa");
 local colliders = require("colliders")
 local playerManager = require("playerManager");
 local extrasounds = require("extrasounds")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 costume.loadedSounds = false
 

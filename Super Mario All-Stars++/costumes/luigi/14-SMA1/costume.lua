@@ -19,7 +19,7 @@
 local playerManager = require("playerManager")
 local extrasounds = require("extrasounds")
 local rng = require("base/rng")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 

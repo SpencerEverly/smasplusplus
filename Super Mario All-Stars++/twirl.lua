@@ -4,8 +4,8 @@ local twirl = {}
 local textplus = require("textplus")
 local playeranim = require("playerAnim")
 local extrasounds = require("extrasounds")
-local smasbooleans = require("smasbooleans")
-local smastables = require("smastables")
+local smasBooleans = require("smasBooleans")
+local smasTables = require("smasTables")
 
 function twirl.onInitAPI()
 	registerEvent(twirl, "onTick", "onTick")
@@ -79,8 +79,8 @@ function twirl.onTick() for k, p in ipairs(Player.get()) do
 			not (p.speedY > 0 and (p.powerup == 4 or p.powerup == 5)) and
 			p.forcedState == 0 and
 			(p.character == 1 or p.character == 2 or p.character == 4 or p.character == 7 or p.character == 15) and
-            smasbooleans.cantTwirl == false and
-            table.icontains(smastables._noLevelPlaces,Level.filename()) == false and
+            smasBooleans.cantTwirl == false and
+            table.icontains(smasTables._noLevelPlaces,Level.filename()) == false and
             SaveData.currentCostume ~= "DEMO-XMASPILY"
 	) end
 

@@ -2,7 +2,7 @@ local littleDialogue = require("littleDialogue")
 local playerManager = require("playerManager")
 local inventory = require("customInventory")
 local textplus = require("textplus")
-local smascharacterintros = require("smascharacterintros")
+local smasCharacterIntros = require("smasCharacterIntros")
 if not Misc.inMarioChallenge() then
     datetime = require("datetime")
 end
@@ -14,15 +14,15 @@ if SaveData.disableX2char then
     pausemenu13 = require("pausemenu13/pausemenu13")
 end
 
-if table.icontains(smastables.__smb2Levels,Level.filename()) then
+if table.icontains(smasTables.__smb2Levels,Level.filename()) then
     rooms = require("rooms")
 end
-local smashudsystem = require("smashudsystem")
+local smasHudSystem = require("smasHudSystem")
 
 local costumes = {}
 local dependencies = {}
 
-smasbooleans.compatibilityMode13Mode = false
+smasBooleans.compatibilityMode13Mode = false
 
 function dependencies.onInitAPI()
     registerEvent(dependencies, "onStart")
@@ -39,7 +39,7 @@ local smb1buzzyswitch = false
 function SMB1HardModeToggle()
     local SMB1HardModeLayer = Layer.get("SMB1 Hard Mode")
     local SMB1EasyModeLayer = Layer.get("SMB1 Easy Mode")
-    if table.icontains(smastables.__smb1Levels,Level.filename()) then
+    if table.icontains(smasTables.__smb1Levels,Level.filename()) then
         Routine.wait(0.3, true)
         if SaveData.SMB1HardModeActivated then
             SMB1EasyModeLayer:hide(true)
@@ -52,7 +52,7 @@ function SMB1HardModeToggle()
 end
 
 function dependencies.onStart()
-    if table.icontains(smastables.__smb1Levels,Level.filename()) == true then
+    if table.icontains(smasTables.__smb1Levels,Level.filename()) == true then
         for k,v in NPC.iterate{89,23,27,24,173,175,176,177,172,174,612} do
             if SaveData.SMB1HardModeActivated then
                 if v.id == 89 or v.id == 27 then
@@ -110,7 +110,7 @@ end
 
 function dependencies.onTickEnd()
     if SaveData.SMB1LLAllNightNipponActivated then
-        if table.icontains(smastables.__smb1Levels,Level.filename()) == true or table.icontains(smastables.__smbllLevels,Level.filename()) == true then
+        if table.icontains(smasTables.__smb1Levels,Level.filename()) == true or table.icontains(smasTables.__smbllLevels,Level.filename()) == true then
             Graphics.sprites.background[21].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/background-21.png")
             Graphics.sprites.background[22].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/background-22.png")
             Graphics.sprites.effect[22].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/effect-22.png")
@@ -123,7 +123,7 @@ function dependencies.onTickEnd()
             Graphics.sprites.npc[97].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/npc-97.png")
             Graphics.sprites.npc[996].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/npc-996.png")
         end
-        if table.icontains(smastables.__smb1Levels,"SMB1 - W-1, L-4.lvlx") or table.icontains(smastables.__smbllLevels,"SMBLL - W-1, L-4.lvlx") then
+        if table.icontains(smasTables.__smb1Levels,"SMB1 - W-1, L-4.lvlx") or table.icontains(smasTables.__smbllLevels,"SMBLL - W-1, L-4.lvlx") then
             Graphics.sprites.npc[94].img = Graphics.loadImageResolved("graphics/customs/AllNightNippon/toads/world1.png")
         end
     elseif not SaveData.SMB1LLAllNightNipponActivated then

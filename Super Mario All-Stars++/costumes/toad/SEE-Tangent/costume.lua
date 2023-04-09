@@ -1,6 +1,6 @@
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
-local smasfunctions = require("smasfunctions")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -71,7 +71,7 @@ function costume.lungeattack()
         plr:mem(0x140, FIELD_WORD, 0) --Blinker is 0
         player:mem(0x120, FIELD_BOOL, false) --Making sure Alt Jump isn't pressed until after the attack
         plr:mem(0x172, FIELD_BOOL, false) --No run either, in case
-        if table.icontains(smastables._noLevelPlaces,Level.filename()) == false then
+        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
             Sound.playSFX("toad/SEE-Tangent/tangent-lunge.ogg")
         end
         if plr.direction == 1 then
@@ -133,7 +133,7 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities then
-        if keyCode == smastables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
             costume.lungeattack()
         end
     end

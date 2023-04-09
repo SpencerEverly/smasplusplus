@@ -3,8 +3,8 @@ local npcutils = require("npcs/npcutils")
 local extrasounds = require("extrasounds")
 local Routine = require("routine")
 local rng = require("base/rng")
-local smasbooleans = require("smasbooleans")
-local smasstarsystem = require("smasstarsystem")
+local smasBooleans = require("smasBooleans")
+local smasStarSystem = require("smasStarSystem")
 
 local neworb = {}
 
@@ -104,16 +104,16 @@ function starget(v)
     muteMusic(-1)
     Audio.SeizeStream(-1)
     Audio.MusicStop()
-    smasbooleans.musicMuted = true
+    smasBooleans.musicMuted = true
     GameData.winStateActive = true
     playervuln = true
     playerwon = true
     Routine.wait(3, true)
     if v.data._settings.activateFadeIn then
-        smasstarsystem.fadeInActive = true
+        smasStarSystem.fadeInActive = true
     end
     Routine.wait(2, true)
-    smasbooleans.musicMuted = false
+    smasBooleans.musicMuted = false
     GameData.winStateActive = false
     Level.exit(v.data._settings.winType)
 end

@@ -11,8 +11,8 @@
 
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
-local smasfunctions
-pcall(function() smasfunctions = require("smasfunctions") end)
+local smasFunctions
+pcall(function() smasFunctions = require("smasFunctions") end)
 local extrasounds = require("extrasounds")
 
 local piranhaPlant = {}

@@ -303,7 +303,7 @@ function dependencies.onTick()
     local currentCostume = player:getCostume()
 
     local costumes
-    if table.icontains(smastables.__smb2Levels,Level.filename()) == true then
+    if table.icontains(smasTables.__smb2Levels,Level.filename()) == true then
         if NPC.config[274].score == 11 then
             Sound.playSFX(147)
             NPC.config[274].score = 6
