@@ -4,6 +4,7 @@ smasKeySystem.disableAllKeys = false --Whether to disable all keys or not.
 
 _G.KEYS_UP = false
 _G.KEYS_RELEASED = nil
+_G.KEYS_UNPRESSED = nil --Alternative to RELEASED
 _G.KEYS_PRESSED = 1
 _G.KEYS_DOWN = true
 
@@ -44,56 +45,28 @@ for i = 1,8 do
     smasKeySystem.keys[i].right = false
     smasKeySystem.keys[i].special = false
 end
-smasKeySystem.tempControllerHeldKey = {}
+smasKeySystem.keyTimer = {}
 for i = 1,8 do
-    smasKeySystem.tempControllerHeldKey[i] = {}
-    smasKeySystem.tempControllerHeldKey[i].jump = false
-    smasKeySystem.tempControllerHeldKey[i].run = false
-    smasKeySystem.tempControllerHeldKey[i].altJump = false
-    smasKeySystem.tempControllerHeldKey[i].altRun = false
-    smasKeySystem.tempControllerHeldKey[i].dropItem = false
-    smasKeySystem.tempControllerHeldKey[i].pause = false
-    smasKeySystem.tempControllerHeldKey[i].up = false
-    smasKeySystem.tempControllerHeldKey[i].down = false
-    smasKeySystem.tempControllerHeldKey[i].left = false
-    smasKeySystem.tempControllerHeldKey[i].right = false
-    smasKeySystem.tempControllerHeldKey[i].special = false
+    smasKeySystem.keyTimer[i] = {}
+    smasKeySystem.keyTimer[i].jump = 0
+    smasKeySystem.keyTimer[i].run = 0
+    smasKeySystem.keyTimer[i].altJump = 0
+    smasKeySystem.keyTimer[i].altRun = 0
+    smasKeySystem.keyTimer[i].dropItem = 0
+    smasKeySystem.keyTimer[i].pause = 0
+    smasKeySystem.keyTimer[i].up = 0
+    smasKeySystem.keyTimer[i].down = 0
+    smasKeySystem.keyTimer[i].left = 0
+    smasKeySystem.keyTimer[i].right = 0
+    smasKeySystem.keyTimer[i].special = 0
 end
+
+
 
 function smasKeySystem.onInitAPI()
-    registerEvent(smasKeySystem,"onKeyboardPressDirect")
     registerEvent(smasKeySystem,"onDraw")
-    registerEvent(smasKeySystem,"onControllerButtonPress")
     if SMBX_VERSION == VER_SEE_MOD then
         registerEvent(smasKeySystem,"onControllerButtonEvent")
-    end
-end
-
-function smasKeySystem.onKeyboardPressDirect(key, repeated)
-    if inputConfig1.inputType == 0 then
-        for i = 1,8 do
-            for k,v in ipairs(smasKeySystem.keysList) do
-                if key == SaveData.controls.keyboard[i][v] then
-                    if not repeated then
-                        smasKeySystem.keys[i][v] = KEYS_PRESSED
-                    elseif repeated then
-                        smasKeySystem.keys[i][v] = KEYS_DOWN
-                    else
-                        smasKeySystem.keys[i][v] = KEYS_UP
-                    end
-                end
-            end
-        end
-    end
-end
-
-function smasKeySystem.onControllerButtonPress(button, playerIdx)
-    for i = 1,8 do
-        for k,v in ipairs(smasKeySystem.keysList) do
-            if button == SaveData.controls.controller[i][v] then
-                --smasKeySystem.keys[i][v] = KEYS_PRESSED
-            end
-        end
     end
 end
 
@@ -141,6 +114,11 @@ function smasKeySystem.onDraw()
                 else
                     smasKeySystem.keys[i][v] = KEYS_UP
                 end
+            end
+            if smasKeySystem.keys[i][v] == KEYS_DOWN then
+                smasKeySystem.keyTimer[i][v] = smasKeySystem.keyTimer[i][v] + 1
+            elseif smasKeySystem.keys[i][v] == KEYS_UP then
+                smasKeySystem.keyTimer[i][v] = 0
             end
         end
     end
