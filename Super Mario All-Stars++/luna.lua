@@ -429,6 +429,7 @@ function onStart() --Now do onStart...
             loadingSoundObject:FadeOut(800)
             loadactivate = false
         end
+        GameData.gameFirstLoaded = false --Because what if we load into a level instead of the boot menu?
     end
     if SaveData.disableX2char == 0 then --Migrate old saves from pre-March 2022 if there are any.
         SaveData.disableX2char = false

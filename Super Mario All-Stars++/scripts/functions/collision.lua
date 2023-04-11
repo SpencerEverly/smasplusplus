@@ -16,6 +16,13 @@ function Collisionz.CheckCollision(Loc1, Loc2) --Checks a collision between two 
            (Loc1.x + Loc1.width >= Loc2.x)
 end
 
+function Collisionz.CheckCollisionNoEntity(x1, y1, width1, height1, x2, y2, width2, height2) --Checks a collision between two things
+    return (y1 + height1 >= y2) and
+           (y1 <= y2 + height2) and
+           (x1 <= x2 + width2) and
+           (x1 + width1 >= x2)
+end
+
 function Collisionz.CheckCollisionIntersect(Loc1, Loc2) --Checks a collision intersection
     if(Loc1.y < Loc2.y) then
         return false
@@ -30,6 +37,26 @@ function Collisionz.CheckCollisionIntersect(Loc1, Loc2) --Checks a collision int
     end
 
     if(Loc1.x + Loc1.width > Loc2.x + Loc2.width) then
+        return false
+    end
+
+    return true
+end
+
+function Collisionz.CheckIntersect(x1, y1, width1, height1, x2, y2, width2, height2) --Checks a collision intersection, without any entity involved
+    if(y1 < y2) then
+        return false
+    end
+
+    if(y1 + height1 > y2 + height2) then
+        return false
+    end
+
+    if(x1 < x2) then
+        return false
+    end
+
+    if(x1 + width1 > x2 + width2) then
         return false
     end
 

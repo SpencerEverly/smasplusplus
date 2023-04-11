@@ -81,14 +81,14 @@ local blackscreenonly = false
 --end
 
 smasHudSystem.hasDied = false --If the player died or not
-smasHudSystem.exittomap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
+smasHudSystem.exitToMap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
 smasHudSystem.activated = true --Whenever the death animation is activated
 
 function addsmashpoints(block, fromUpper, playerornil) --This will add 50 points from smashing bricks, as said from the source code.
     Routine.waitFrames(2, true)
     if block.isHidden and block.layerName == "Destroyed Blocks" then
         console:println("Brick "..tostring(block.idx).." was smashed.")
-        SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50
+        --SaveData.totalScoreClassic = SaveData.totalScoreClassic + 50
     end
 end
 
@@ -136,7 +136,7 @@ function smasHudSystem.onPostNPCKill(npc, harmtype, player) --This will add coin
         for _,p in ipairs(Player.get()) do
             
             
-            if smasTables.allCoinNPCIDs[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
+            if smasTables.allCoinNPCIDsTableMapped[npc.id] and (Colliders.collide(p, npc) or Colliders.speedCollide(p, npc) or Colliders.slash(p, npc) or Colliders.downSlash(p, npc)) then
                 console:println("One coin from colliding collected.")
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1 --One coin collected
             end
@@ -283,9 +283,9 @@ function thirteenModeDeath()
     end
     smasBooleans.musicMuted = false
     smasHudSystem.hasDied = true --The player has now died
-    if smasHudSystem.exittomap == false then
+    if not smasHudSystem.exitToMap then
         Level.load(Level.filename())
-    elseif smasHudSystem.exittomap == true then
+    elseif smasHudSystem.exitToMap then
         Level.load("map.lvlx")
     end
 end
@@ -325,9 +325,9 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                         SaveData.totalLives = 5
                                     end
                                     smasHudSystem.hasDied = true
-                                    if smasHudSystem.exittomap == false then --Reload the level from here
+                                    if smasHudSystem.exitToMap == false then --Reload the level from here
                                         Level.load(Level.filename())
-                                    elseif smasHudSystem.exittomap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
+                                    elseif smasHudSystem.exitToMap == true then --Or else, just exit the level. It can be smwMap, or the vanilla map
                                         Level.load("map.lvlx")
                                     end
                                 end
@@ -339,10 +339,10 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     Misc.unpause() --Unpause afterward
                                     SaveData.totalLives = 5 --Refill the lives back to 5
                                     smasHudSystem.hasDied = true --The player has now died
-                                    if smasHudSystem.exittomap == false then
+                                    if not smasHudSystem.exitToMap then
                                         Level.load(Level.filename())
-                                    elseif smasHudSystem.exittomap == true then
-                                        Level.load("map.lvlx", nil, nil)
+                                    elseif smasHudSystem.exitToMap then
+                                        Level.load("map.lvlx")
                                     end
                                 end
                             end
@@ -371,9 +371,9 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                         SaveData.totalLives = 5
                                     end
                                     smasHudSystem.hasDied = true
-                                    if smasHudSystem.exittomap == false then
+                                    if smasHudSystem.exitToMap == false then
                                         Level.load(Level.filename())
-                                    elseif smasHudSystem.exittomap == true then
+                                    elseif smasHudSystem.exitToMap == true then
                                         Level.load("map.lvlx")
                                     end
                                 end
@@ -385,9 +385,9 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     Misc.unpause() --Unpause afterward
                                     SaveData.totalLives = 5 --Refill the lives back to 5
                                     smasHudSystem.hasDied = true --The player has now died
-                                    if smasHudSystem.exittomap == false then
+                                    if not smasHudSystem.exitToMap then
                                         Level.load(Level.filename())
-                                    elseif smasHudSystem.exittomap == true then
+                                    elseif smasHudSystem.exitToMap then
                                         Level.load("map.lvlx")
                                     end
                                 end
@@ -506,9 +506,9 @@ end
 function smasHudSystem.onExit()
     smasBooleans.musicMuted = false --This is specific for my episode. Remove this if you wanna use this yourself.
     Audio.MusicVolume(64) --Reset the music exiting the level
-    if smasHudSystem.hasDied and not smasHudSystem.exittomap then
+    if smasHudSystem.hasDied and not smasHudSystem.exitToMap then
         Level.load(Level.filename())
-    elseif smasHudSystem.hasDied and smasHudSystem.exittomap then
+    elseif smasHudSystem.hasDied and smasHudSystem.exitToMap then
         Level.load("map.lvlx")
     end
 end
