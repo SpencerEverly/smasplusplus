@@ -79,6 +79,10 @@ function smasSpencerFollower.getAnimation()
         return smasSpencerFollower.animations.grabbing
     elseif Playur.findAnimation(player) == "door" then
         return smasSpencerFollower.animations.back
+    elseif Playur.findAnimation(player) == "swimIdle" then
+        return smasSpencerFollower.animations.idleSwim
+    elseif Playur.findAnimation(player) == "swimStroke" or Playur.findAnimation(player) == "swimStrokeSmall" then
+        return smasSpencerFollower.animations.swimming
     else
         return smasSpencerFollower.animations.standing
     end
