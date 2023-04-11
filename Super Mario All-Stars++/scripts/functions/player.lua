@@ -857,16 +857,23 @@ function Playur.findAnimation(p) --This function returns the name of the custom 
                 return "runJumpLeafDown"
             elseif walkSpeed >= 2 then
                 return "runJump"
+            elseif p.speedY > 0 then
+                return "fall"
             else
                 return "jump"
             end
         end
 
-
         if p.holdingNPC == nil then
             if Playur.isSlowFalling(p) then
                 return "slowFall"
             end
+        end
+        
+        if p.speedY > 0 then
+            return "fall"
+        else
+            return "jump"
         end
         
         return "none"
