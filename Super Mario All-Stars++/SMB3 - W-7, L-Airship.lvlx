@@ -2301,14 +2301,14 @@ ID:944;X:-153536;Y:-160128;D:1;
 ID:944;X:-153408;Y:-160224;D:1;
 ID:944;X:-153312;Y:-160320;D:1;
 ID:267;X:-139432;Y:-140128;D:-1;FD:1;NM:1;LR:"Boss Not Moving";EA:"Boss Start";
-ID:267;X:-139432;Y:-140128;D:-1;LR:"Boss Moving";EA:"Boss Start";
+ID:267;X:-139432;Y:-140128;D:-1;LR:"Boss Moving";ED:"Boss End";
 ID:1000;X:-139712;Y:-140224;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-139608;Y:-140112;D:-1;MG:"WIP for now";FD:1;LR:"Star";
 NPC_END
 DOORS
 IX:-199616;IY:-200096;OX:-179904;OY:-180128;DT:2;ID:1;OD:1;LR:"Door";
 IX:-175040;IY:-180608;OX:-159392;OY:-160032;DT:3;ID:1;OD:1;LR:"Airship Warp";
-IX:-152720;IY:-160480;OX:-139840;OY:-140432;DT:1;ID:3;OD:1;
+IX:-152720;IY:-160480;OX:-139888;OY:-140480;DT:1;ID:3;OD:1;
 DOORS_END
 LAYERS
 LR:"Default";
