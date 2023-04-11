@@ -40,6 +40,20 @@ smasSpencerFollower.animations = {
     back = {9},
 }
 
+function smasSpencerFollower.dontMovePlayerDetection()
+    return (player:mem(0x50,FIELD_BOOL)
+        and player.forcedState == FORCEDSTATE_PIPE
+    )
+end
+
+function smasSpencerFollower.getSpencerPriority()
+    if player.forcedState == FORCEDSTATE_PIPE then
+        return -70
+    else
+        return -25
+    end
+end
+
 function smasSpencerFollower.getAnimation()
     if Playur.findAnimation(player) == "stance" then
         return smasSpencerFollower.animations.standing
@@ -106,7 +120,7 @@ function smasSpencerFollower.onDraw()
                 
                 smasSpencerFollower.playerXActualWidth = player.x + (player.width / 2) - smasSpencerFollower.spencerCoordinateX
                 
-                if not player:mem(0x50,FIELD_BOOL) then
+                if not smasSpencerFollower.dontMovePlayerDetection() then
                     if player.direction == 1 then
                         if player.x - smasSpencerFollower.spencerCoordinateX > player.x - smasSpencerFollower.spencerDistance then
                             smasSpencerFollower.spencerCoordinateX = smasSpencerFollower.spencerCoordinateX + 2
@@ -115,6 +129,18 @@ function smasSpencerFollower.onDraw()
                         if player.x - smasSpencerFollower.spencerCoordinateX < player.x + smasSpencerFollower.spencerDistance then
                             smasSpencerFollower.spencerCoordinateX = smasSpencerFollower.spencerCoordinateX - 2
                         end
+                    end
+                end
+                if player.forcedState == FORCEDSTATE_PIPE then
+                    local warp = Warp(player:mem(0x15E,FIELD_WORD) - 1)
+                    local direction
+                    if player.forcedTimer == 0 then
+                        direction = warp.entranceDirection
+                    else
+                        direction = warp.exitDirection
+                    end
+                    if direction == 1 or direction == 3 then
+                        smasSpencerFollower.spencerCoordinateX = 0
                     end
                 end
                 
@@ -130,7 +156,7 @@ function smasSpencerFollower.onDraw()
                     sourceWidth  = smasSpencerFollower.dimensions.width,
                     sourceHeight = smasSpencerFollower.dimensions.height,
                     centered     = true,
-                    priority     = -25,
+                    priority     = smasSpencerFollower.getSpencerPriority(),
                 }
                 
             end

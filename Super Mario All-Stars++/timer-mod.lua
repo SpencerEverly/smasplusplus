@@ -27,7 +27,6 @@ local timer_visible = false
 timer.hurryTime = 100
 timer.hurryTimeToUnmute = 98
 
-
 function timer.onEnd()
 	if Level.settings.timer.result == LEVEL_TIMER_RESULT_KILL then
 		player:kill()

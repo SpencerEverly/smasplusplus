@@ -180,4 +180,20 @@ function Time.frameTimer(speed, numberChanger, frameSlot) --This will spit out a
     Time.frameTimerSlots[frameSlot] = frame
 end
 
+function Time.isLast2DigitsTheSame(n)
+    if n < 10 then return false end
+    return n % 10 == math.floor(n / 10) % 10
+end
+
+function Time.isLast2DigitsTheSameButWithout00(n)
+    if n < 10 then
+        return false
+    end
+
+    local a = (n % 10)
+    local b = (math.floor(n/10) % 10)
+
+    return (a == b and a ~= 0)
+end
+
 return Time

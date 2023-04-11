@@ -345,6 +345,11 @@ function globalgenerals.onTick()
     --[[if SaveData.goombaStomps >= 10 then
         Achievements.get(1):collect()
     end]]
+    if Time.isLast2DigitsTheSameButWithout00(Timer.getValue()) then
+        smasBooleans.isTimerInDoubleDigits = true
+    elseif not Time.isLast2DigitsTheSameButWithout00(Timer.getValue()) then
+        smasBooleans.isTimerInDoubleDigits = false
+    end
 end
 
 function globalgenerals.onPostNPCKill(npc, harmType)

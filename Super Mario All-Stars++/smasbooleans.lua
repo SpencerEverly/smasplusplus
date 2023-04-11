@@ -41,5 +41,7 @@ smasBooleans.activateWarpWhistleRoomWarp = {}
 for i = 1,200 do
     smasBooleans.activateWarpWhistleRoomWarp[i] = false
 end
+--Whether the timer (At the last 2 digits) is the same or not. This doesn't count 00, but counts 11-99.
+smasBooleans.isTimerInDoubleDigits = false
 
 return smasBooleans
