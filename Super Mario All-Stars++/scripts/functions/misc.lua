@@ -677,6 +677,12 @@ function Misc.moveSaveSlot(slot, destination)
     end
     console:println("Beginning save moving...")
     if SMBX_VERSION == VER_SEE_MOD then
+        if io.exists(Misc.episodePath().."save"..destination..".sav") then
+            os.remove(Misc.episodePath().."save"..destination..".sav")
+        end
+        if io.exists(Misc.episodePath().."save"..destination.."-ext.dat") then
+            os.remove(Misc.episodePath().."save"..destination.."-ext.dat")
+        end
         os.rename(Misc.episodePath().."save"..slot..".sav", Misc.episodePath().."save"..destination..".sav")
         os.rename(Misc.episodePath().."save"..slot.."-ext.dat", Misc.episodePath().."save"..destination.."-ext.dat")
     else
