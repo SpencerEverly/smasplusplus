@@ -172,6 +172,24 @@ function smasNoTurnBack.sectionsWithNoPlayers()
     return nonPlayeredSections
 end
 
+function smasNoTurnBack.reviveOriginalBoundaries()
+    for k,v in ipairs(smasNoTurnBack.sectionsWithNoPlayers()) do
+        if not autoscroll.isSectionScrolling(v) then
+            if smasNoTurnBack.enabled and not smasNoTurnBack.overrideSection then
+                for _,p in ipairs(Player.get()) do
+                    local sectionObj = Section(v)
+                    local bounds = sectionObj.boundary
+                    bounds.left = smasNoTurnBack.originalBoundariesLeft[v + 1]
+                    bounds.top = smasNoTurnBack.originalBoundariesTop[v + 1]
+                    bounds.bottom = smasNoTurnBack.originalBoundariesBottom[v + 1]
+                    bounds.right = smasNoTurnBack.originalBoundariesRight[v + 1]
+                    sectionObj.boundary = bounds
+                end
+            end
+        end
+    end
+end
+
 function smasNoTurnBack.onDraw()
     for k,v in ipairs(smasNoTurnBack.sectionsWithNoPlayers()) do
         if not autoscroll.isSectionScrolling(v) then

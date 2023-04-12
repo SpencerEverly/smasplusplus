@@ -40,6 +40,23 @@ smasSMB1System.checkpointCoordinates = {
     ["SMB1 - W-9, L-4.lvlx"],]]
 }
 
+smasSMB1System.correctPathCoordinates = {
+    ["SMB1 - W-4, L-4.lvlx"] = {
+    rightPath = {
+        [1] = 
+            {x = -179386, y = -180384, sizeY = 96, passed = false},
+        [2] = 
+            {x = -176474, y = -180128, sizeY = 48, passed = false},
+        },
+    wrongPath = {
+        [1] = 
+            {x = -177850, y = -180160, sizeY = 96, playerX = -179546, playerY = -180224},
+        [2] = 
+            {x = -175354, y = -180256, sizeY = 96, playerX = -176762, playerY = -180224},
+        },
+    },
+}
+
 if GameData.smasSMB1System.crossedCheckpoint == Level.filename() then
     smasSMB1System.checkpointCoordinates[Level.filename()].crossed = true
 end
@@ -87,6 +104,23 @@ function smasSMB1System.onTick()
                     smb1Checkpoint:collect()
                     GameData.smasSMB1System.crossedCheckpoint = Level.filename()
                     smasSMB1System.checkpointCoordinates[Level.filename()].crossed = true
+                end
+            end
+            if smasSMB1System.correctPathCoordinates[Level.filename()] ~= nil then
+                for i = 1,#smasSMB1System.correctPathCoordinates[Level.filename()].rightPath do
+                    if Collisionz.CheckCollisionNoEntity(smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].x, smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].y, 32, smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].sizeY, p.x, p.y, p.width, p.height) and not smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].passed then
+                        Sound.playSFX(151)
+                        smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].passed = true
+                    end
+                end
+            end
+            if smasSMB1System.correctPathCoordinates[Level.filename()] ~= nil then
+                for i = 1,#smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath do
+                    if Collisionz.CheckCollisionNoEntity(smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].x, smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].y, 32, smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].sizeY, p.x, p.y, p.width, p.height) then
+                        Sound.playSFX(152)
+                        smasNoTurnBack.reviveOriginalBoundaries()
+                        p:teleport(smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].playerX, smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].playerY, true)
+                    end
                 end
             end
         end
