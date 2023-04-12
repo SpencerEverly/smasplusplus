@@ -676,27 +676,32 @@ function Misc.moveSaveSlot(slot, destination)
         return
     end
     console:println("Beginning save moving...")
-    local filename = "save"..slot.."-ext.dat"
-    local filenamesav = "save"..slot..".sav"
-    local filename2 = "save"..destination.."-ext.dat"
-    local filename2sav = "save"..destination..".sav"
-    console:println("Opening all save files...")
-    local f = io.open(Misc.episodePath()..filename, "a+")
-    local f2 = io.open(Misc.episodePath()..filename2, "w")
-    local f3 = io.open(Misc.episodePath()..filenamesav, "a+")
-    local f4 = io.open(Misc.episodePath()..filename2sav, "w")
-    if f then
-        f:read("*all")
-        if f2 then
-            f2:write("*all")
-            f2:close()
+    if SMBX_VERSION == VER_SEE_MOD then
+        os.rename(Misc.episodePath().."save"..slot..".sav", Misc.episodePath().."save"..destination..".sav")
+        os.rename(Misc.episodePath().."save"..slot.."-ext.dat", Misc.episodePath().."save"..destination.."-ext.dat")
+    else
+        local filename = "save"..slot.."-ext.dat"
+        local filenamesav = "save"..slot..".sav"
+        local filename2 = "save"..destination.."-ext.dat"
+        local filename2sav = "save"..destination..".sav"
+        console:println("Opening all save files...")
+        local f = io.open(Misc.episodePath()..filename, "a+")
+        local f2 = io.open(Misc.episodePath()..filename2, "w")
+        local f3 = io.open(Misc.episodePath()..filenamesav, "a+")
+        local f4 = io.open(Misc.episodePath()..filename2sav, "w")
+        if f then
+            f:read("*all")
+            if f2 then
+                f2:write("*all")
+                f2:close()
+            end
         end
-    end
-    if f3 then
-        f3:read("*all")
-        if f4 then
-            f4:write("*all")
-            f4:close()
+        if f3 then
+            f3:read("*all")
+            if f4 then
+                f4:write("*all")
+                f4:close()
+            end
         end
     end
     console:println("Switching save slot to new slot...")
@@ -715,15 +720,19 @@ function Misc.eraseMainSaveSlot(slot) --This only erases the main save in the sa
         error("You can't erase a save slot greater than 32767.")
         return
     end
-    local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
-    if f == nil then
-        return
+    if SMBX_VERSION == VER_SEE_MOD then
+        os.remove(Misc.episodePath().."save"..slot..".sav")
+    else
+        local f = io.open(Misc.episodePath().."save"..slot..".sav","w")
+        if f == nil then
+            return
+        end
+        
+        console:println("Erasing .sav data...")
+        
+        f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
+        f:close()
     end
-    
-    console:println("Erasing .sav data...")
-    
-    f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
-    f:close()
     
     console:println("Erased .sav data.")
 end
@@ -743,17 +752,22 @@ function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific 
     end
 
     console:println("Erasing all save data...")
-
-    f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
-    f:close()
     
-    local f2 = io.open(Misc.episodePath().."save"..slot.."-ext.dat","w")
-    if f2 == nil then
-        return
-    end
+    if SMBX_VERSION == VER_SEE_MOD then
+        os.remove(Misc.episodePath().."save"..slot..".sav")
+        os.remove(Misc.episodePath().."save"..slot.."-ext.dat")
+    else
+        f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
+        f:close()
+        
+        local f2 = io.open(Misc.episodePath().."save"..slot.."-ext.dat","w")
+        if f2 == nil then
+            return
+        end
 
-    f2:write('{ \r--[1]-- \r{ \r   ["__costumes"]={2}, \r   ["__launcher"]={3}, \r   ["_basegame"]={4} \r}, \r--[2]-- \r{ \r \r}, \r--[3]-- \r{ \r \r}, \r--[4]-- \r{ \r   ["bigSwitch"]={5}, \r   ["_characterdata"]={6}, \r   ["starcoin"]={7}, \r   ["hud"]={8}, \r   ["starcoinCounter"]=0 \r}, \r--[5]-- \r{ \r \r}, \r--[6]-- \r{ \r   ["8"]={9}, \r   ["10"]={10}, \r   ["9"]={11}, \r   ["6"]={12}, \r   ["16"]={13}, \r   ["11"]={14}, \r   ["12"]={15}, \r   ["7"]={16}, \r   ["15"]={17}, \r   ["13"]={18}, \r   ["14"]={19} \r}, \r--[7]-- \r{ \r \r}, \r--[8]-- \r{ \r   ["score"]=0 \r}, \r--[9]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[10]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[11]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[12]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[13]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[14]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[15]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[16]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[17]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[18]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[19]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[20]-- \r{ \r   ["maxID"]=0, \r   ["alive"]={21} \r}, \r--[21]-- \r{ \r \r} \r}')
-    f2:close()
+        f2:write('{ \r--[1]-- \r{ \r   ["__costumes"]={2}, \r   ["__launcher"]={3}, \r   ["_basegame"]={4} \r}, \r--[2]-- \r{ \r \r}, \r--[3]-- \r{ \r \r}, \r--[4]-- \r{ \r   ["bigSwitch"]={5}, \r   ["_characterdata"]={6}, \r   ["starcoin"]={7}, \r   ["hud"]={8}, \r   ["starcoinCounter"]=0 \r}, \r--[5]-- \r{ \r \r}, \r--[6]-- \r{ \r   ["8"]={9}, \r   ["10"]={10}, \r   ["9"]={11}, \r   ["6"]={12}, \r   ["16"]={13}, \r   ["11"]={14}, \r   ["12"]={15}, \r   ["7"]={16}, \r   ["15"]={17}, \r   ["13"]={18}, \r   ["14"]={19} \r}, \r--[7]-- \r{ \r \r}, \r--[8]-- \r{ \r   ["score"]=0 \r}, \r--[9]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[10]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[11]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[12]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[13]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[14]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[15]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[16]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[17]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[18]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[19]-- \r{ \r   ["reservePowerup"]=0, \r   ["0x10A"]=0, \r   ["powerup"]=1, \r   ["0x16"]=1, \r   ["0x108"]=0 \r}, \r--[20]-- \r{ \r   ["maxID"]=0, \r   ["alive"]={21} \r}, \r--[21]-- \r{ \r \r} \r}')
+        f2:close()
+    end
     
     console:println("Erased all save data.")
 end
