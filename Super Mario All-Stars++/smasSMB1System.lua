@@ -2,6 +2,7 @@ local smasSMB1System = {}
 
 smasSMB1System.debug = false --True if debug mode is on
 smasSMB1System.areaToCoverUpwards = 480 --How many tiles up should it be for the player to cross to get the checkpoint?
+smasSMB1System.areaToCoverDownwards = 64 --How many tiles down should it be for the player to cross to get the checkpoint?
 GameData.smasSMB1System = GameData.smasSMB1System or {}
 GameData.smasSMB1System.crossedCheckpoint = GameData.smasSMB1System.crossedCheckpoint or ""
 
@@ -18,42 +19,31 @@ smasSMB1System.checkpointCoordinates = {
     ["SMB1 - W-4, L-1.lvlx"] = {x = -196250, y = -200128, crossed = false},
     ["SMB1 - W-4, L-2.lvlx"] = {x = -176442, y = -180128, crossed = false},
     ["SMB1 - W-4, L-3.lvlx"] = {x = -197818, y = -200128, crossed = false},
-    --[[["SMB1 - W-5, L-1.lvlx"],
-    ["SMB1 - W-5, L-2.lvlx"],
-    ["SMB1 - W-5, L-3.lvlx"],
-    ["SMB1 - W-5, L-4.lvlx"],
-    ["SMB1 - W-6, L-1.lvlx"],
-    ["SMB1 - W-6, L-2.lvlx"],
-    ["SMB1 - W-6, L-3.lvlx"],
-    ["SMB1 - W-6, L-4.lvlx"],
-    ["SMB1 - W-7, L-1.lvlx"],
-    ["SMB1 - W-7, L-2.lvlx"],
-    ["SMB1 - W-7, L-3.lvlx"],
-    ["SMB1 - W-7, L-4.lvlx"],
-    ["SMB1 - W-8, L-1.lvlx"],
-    ["SMB1 - W-8, L-2.lvlx"],
-    ["SMB1 - W-8, L-3.lvlx"],
-    ["SMB1 - W-8, L-4.lvlx"],
-    ["SMB1 - W-9, L-1.lvlx"],
-    ["SMB1 - W-9, L-2.lvlx"],
-    ["SMB1 - W-9, L-3.lvlx"],
-    ["SMB1 - W-9, L-4.lvlx"],]]
+    ["SMB1 - W-5, L-1.lvlx"] = {x = -196730, y = -200128, crossed = false},
+    ["SMB1 - W-5, L-2.lvlx"] = {x = -196794, y = -200128, crossed = false},
+    ["SMB1 - W-5, L-3.lvlx"] = {x = -197946, y = -200128, crossed = false},
+    ["SMB1 - W-6, L-1.lvlx"] = {x = -196826, y = -200128, crossed = false},
+    ["SMB1 - W-6, L-2.lvlx"] = {x = -196890, y = -200128, crossed = false},
+    ["SMB1 - W-6, L-3.lvlx"] = {x = -196922, y = -200096, crossed = false},
+    ["SMB1 - W-7, L-1.lvlx"] = {x = -196858, y = -200128, crossed = false},
+    ["SMB1 - W-7, L-2.lvlx"] = {x = -177370, y = -180128, crossed = false},
+    ["SMB1 - W-7, L-3.lvlx"] = {x = -197050, y = -200224, crossed = false},
 }
 
 smasSMB1System.correctPathCoordinates = {
     ["SMB1 - W-4, L-4.lvlx"] = {
-    rightPath = {
-        [1] = 
-            {x = -179386, y = -180384, sizeY = 96, passed = false},
-        [2] = 
-            {x = -176474, y = -180128, sizeY = 48, passed = false},
-        },
-    wrongPath = {
-        [1] = 
-            {x = -177850, y = -180160, sizeY = 96, playerX = -179546, playerY = -180224},
-        [2] = 
-            {x = -175354, y = -180256, sizeY = 96, playerX = -176762, playerY = -180224},
-        },
+        rightPath = {
+            [1] = 
+                {x = -179386, y = -180384, sizeY = 96, passed = false},
+            [2] = 
+                {x = -176474, y = -180128, sizeY = 48, passed = false},
+            },
+        wrongPath = {
+            [1] = 
+                {x = -177850, y = -180160, sizeY = 96, playerX = -179546, playerY = -180224},
+            [2] = 
+                {x = -175354, y = -180256, sizeY = 96, playerX = -176762, playerY = -180224},
+            },
     },
 }
 
