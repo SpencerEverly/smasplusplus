@@ -1021,6 +1021,15 @@ function Misc.doEarthquake(shakeNumber, eventName) --This is a replacement of De
     end
 end
 
+function Misc.storeLatestCostumeData(costumeLibrary)
+    if smasCharacterCostumes.currentCostume == {} then
+        smasCharacterCostumes.currentCostume = costumeLibrary
+    else
+        smasCharacterCostumes.currentCostume = {}
+        smasCharacterCostumes.currentCostume = costumeLibrary
+    end
+end
+
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then

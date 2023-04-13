@@ -5,16 +5,16 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 function costume.onInit(p)
     plr = p
     registerEvent(costume,"onInputUpdate")
     registerEvent(costume,"onTick")
     registerEvent(costume,"onPostBlockHit")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Defines.player_walkspeed = 3.5
@@ -104,5 +104,7 @@ function costume.onCleanup(p)
     Defines.projectilespeedx = 7.1
     Defines.player_grav = 0.4
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

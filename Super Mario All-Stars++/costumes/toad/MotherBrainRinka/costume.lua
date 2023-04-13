@@ -59,4 +59,6 @@ function costume.onTick()
     end
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume

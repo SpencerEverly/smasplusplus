@@ -14,4 +14,6 @@ end
 function costume.onCleanup(playerObject)
 end
 
-return costume;
+Misc.storeLatestCostumeData(costume)
+
+return costume

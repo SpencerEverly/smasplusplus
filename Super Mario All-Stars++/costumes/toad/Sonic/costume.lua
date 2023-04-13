@@ -6,7 +6,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local eventsRegistered = false
 local plr
@@ -50,9 +50,9 @@ function costume.onInit(p)
     registerEvent(costume,"onInputUpdate")
     registerEvent(costume,"onPostBlockHit")
     local icantswim = require("icantswim")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     --Sonic settings! This is useful for accuracy.
@@ -385,5 +385,7 @@ function costume.onCleanup(p)
     costume.abilitesenabled = false
     smasHud.visible.itembox = true
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

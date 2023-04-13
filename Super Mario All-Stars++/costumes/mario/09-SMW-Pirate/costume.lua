@@ -22,7 +22,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 
 costume.pSpeedAnimationsEnabled = true
@@ -555,9 +555,9 @@ function costume.onInit(p)
         registerEvent(costume,"onTick")
         registerEvent(costume,"onTickEnd")
         registerEvent(costume,"onDraw")
-        if not costume.loadedSounds then
+        if not costume.loaded then
             Sound.loadCostumeSounds()
-            costume.loadedSounds = true
+            costume.loaded = true
         end
 
         eventsRegistered = true
@@ -775,5 +775,7 @@ function costume.onDraw()
     end
 end
 
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

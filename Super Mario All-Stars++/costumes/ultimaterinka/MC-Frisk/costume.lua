@@ -1,4 +1,5 @@
 local pm = require("playerManager")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
@@ -24,5 +25,7 @@ function costume.onCleanup(p)
     steve.skinSettings.name = "steve"
     steve.loadMeshes()
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

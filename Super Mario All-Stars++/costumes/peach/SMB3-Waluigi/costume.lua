@@ -262,4 +262,6 @@ function costume.onCleanup(p)
     costume.abilitiesenabled = false
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume

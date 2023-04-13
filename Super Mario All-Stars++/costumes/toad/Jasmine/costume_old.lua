@@ -295,4 +295,6 @@ function costume.onInputUpdate()
     end
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume

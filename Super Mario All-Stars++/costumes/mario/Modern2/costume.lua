@@ -69,12 +69,12 @@ local function canDuck(p)
     return true
 end
 
-costume.loadedSounds = false
+costume.loaded = false
 
 function costume.onInit(playerObj)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Graphics.sprites.npc[9].img = Graphics.loadImageResolved("costumes/mario/Modern2/npc-9.png")
@@ -294,5 +294,7 @@ function costume.onCleanup(playerObj)
         table.remove(players,spot)
     end
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

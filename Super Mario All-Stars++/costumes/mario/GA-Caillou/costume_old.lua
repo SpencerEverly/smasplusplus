@@ -133,4 +133,6 @@ function costume.onCleanup(playerObj)
     players[playerObj] = nil
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume

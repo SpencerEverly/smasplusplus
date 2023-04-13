@@ -4,7 +4,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local players = {}
 
@@ -71,9 +71,9 @@ function costume.onInit(playerObj)
     registerEvent(costume, "onTick")
     registerEvent(costume, "onTickEnd")
     
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     if not table.ifind(players,playerObj) then
@@ -259,5 +259,7 @@ function costume.onCleanup(playerObj)
         table.remove(players,spot)
     end
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

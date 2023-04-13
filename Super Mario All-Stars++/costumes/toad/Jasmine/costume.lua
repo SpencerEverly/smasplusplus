@@ -6,7 +6,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local characterhp
 local plr
@@ -16,9 +16,9 @@ function costume.onInit(p)
     registerEvent(costume,"onTick")
     registerEvent(costume,"onDraw")
     registerEvent(costume,"onPostPlayerHarm")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     smasHud.visible.itembox = false
@@ -119,5 +119,7 @@ end
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

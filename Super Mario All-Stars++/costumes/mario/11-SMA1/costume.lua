@@ -5,7 +5,7 @@ local smasExtraActions = require("smasExtraActions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local jumphighertimer = 0
 local jumphigherframeactive = false
@@ -46,9 +46,9 @@ function isJumping(p)
 end
 
 function costume.onInit(p)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     registerEvent(costume,"onTick")
     smasExtraActions.enableLongJump = true
@@ -85,5 +85,7 @@ function costume.onCleanup(p)
     end
     smasExtraActions.longJumpAnimationMaxFrames = 1
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

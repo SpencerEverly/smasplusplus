@@ -1675,4 +1675,6 @@ function applyShader(priority,shader,uniforms) --Taken from warpTransition.lua w
     Graphics.drawScreen{texture = buffer,priority = priority or 0,shader = shader,uniforms = uniforms}
 end
     
+Misc.storeLatestCostumeData(costume)
+
 return costume

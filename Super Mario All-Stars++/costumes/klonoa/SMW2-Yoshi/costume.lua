@@ -1,10 +1,14 @@
 local costume = {}
-local klonoa = API.load("klonoaa");
+local klonoa = API.load("characters/klonoaa");
+local smasFunctions = require("smasFunctions")
 
 function costume.onInit()
     registerEvent(costume, "onDraw");
     klonoa.flapAnimSpeed=3;
-    
+    if not costume.loaded then
+        Sound.loadCostumeSounds()
+        costume.loaded = true
+    end
 end
 
 function costume.onDraw()
@@ -22,4 +26,6 @@ function costume.onCleanup(playerObject)
     klonoa.flapAnimSpeed = 6;
 end
 
-return costume;
+Misc.storeLatestCostumeData(costume)
+
+return costume

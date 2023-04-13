@@ -6,7 +6,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local smbddxfont = textplus.loadFont("littleDialogue/font/verdana.ini")
 local coinCounter = Graphics.loadImageResolved("costumes/mario/SMBDDX-Mario/coincounter.png")
@@ -19,9 +19,9 @@ function costume.onInit(p)
     plr = p
     registerEvent(costume,"onTick")
     registerEvent(costume,"onDraw")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Graphics.overrideHUD(costume.drawHUD)
@@ -107,5 +107,7 @@ function costume.onCleanup(p)
     Graphics.overrideHUD(Graphics.drawVanillaHUD)
     costume.abilitesenabled = false
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

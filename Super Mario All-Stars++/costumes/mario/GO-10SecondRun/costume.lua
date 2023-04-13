@@ -5,7 +5,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local plr
 local tensecondhp
@@ -22,9 +22,9 @@ function costume.onInit(p)
     registerEvent(costume,"onPostNPCKill")
     registerEvent(costume,"onPlayerKill")
     registerEvent(costume,"onPostPlayerKill")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Defines.jumpheight = 20
@@ -126,5 +126,7 @@ function costume.onCleanup(p)
     smasHud.visible.itembox = true
     costume.abilitesenabled = false
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

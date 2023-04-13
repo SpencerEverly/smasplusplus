@@ -5,7 +5,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local cooldown = 0
 local snowballymove = 0
@@ -23,9 +23,9 @@ function costume.onInit(p)
     registerEvent(costume,"onInputUpdate")
     registerEvent(costume,"onKeyboardPress")
     registerEvent(costume,"onControllerButtonPress")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     Defines.player_walkspeed = 2
     Defines.player_runspeed = 5
@@ -174,5 +174,7 @@ function costume.onCleanup(p)
     
     costume.abilitesenabled = false
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

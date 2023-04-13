@@ -1,5 +1,7 @@
 local costume = {}
 
+local smasFunctions = require("smasFunctions")
+
 function costume.onInit()
     registerEvent(costume, "onDraw");
     
@@ -24,5 +26,7 @@ function costume.onCleanup()
     npcconfig[13].width = 16;
     npcconfig[13].height = 16;
 end]]
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

@@ -35,7 +35,7 @@ local costume = {
     scaleDisabled = false
 }
 
-costume.loadedSounds = false
+costume.loaded = false
 
 costume.playerData = {}
 costume.playersList = {}
@@ -1099,9 +1099,9 @@ local lastCt
 local spintrail
 
 function costume.onInit(playerObj)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_NONE)
     coyotetime = require("coyotetime");
@@ -1259,5 +1259,7 @@ function costume.onPostNPCKill(killedNPC,harmType)
 end
 
 
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

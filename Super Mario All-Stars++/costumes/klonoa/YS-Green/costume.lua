@@ -1,20 +1,20 @@
 local costume = {}
-local klonoa = require("klonoaa");
+local klonoa = API.load("characters/klonoaa");
 local colliders = require("colliders")
 local playerManager = require("playerManager");
 local extrasounds = require("extrasounds")
 local smasFunctions = require("smasFunctions")
 
-costume.loadedSounds = false
+costume.loaded = false
 
 function costume.onInit()
     registerEvent(costume, "onDraw")
     registerEvent(costume, "onTick")
     klonoa.flapAnimSpeed=3
     ringbox = colliders.Box(0, 0, 32, 32)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
 end
 
@@ -40,5 +40,7 @@ function costume.onCleanup(playerObject)
     ringbox = colliders.Box(0, 0, 32, 32)
     ringbox.y = player.y + 16
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

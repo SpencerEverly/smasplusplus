@@ -5,7 +5,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local eventsRegistered = false
 local plr
@@ -31,9 +31,9 @@ function costume.onInit(p)
     registerEvent(costume,"onInputUpdate")
     local icantswim = require("icantswim")
     icantswim.splashSound = Audio.SfxOpen("costumes/mario/SpongeBobSquarePants/spongebob-splash.ogg")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Graphics.sprites.hardcoded["33-2"].img = Graphics.loadImageResolved("costumes/mario/SpongeBobSquarePants/hardcoded-33-2.png")
@@ -195,5 +195,7 @@ function costume.onCleanup(p)
     
     costume.abilitesenabled = false
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

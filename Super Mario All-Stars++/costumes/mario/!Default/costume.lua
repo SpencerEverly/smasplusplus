@@ -776,4 +776,6 @@ function costume.onDraw()
 end
 
 
+Misc.storeLatestCostumeData(costume)
+
 return costume

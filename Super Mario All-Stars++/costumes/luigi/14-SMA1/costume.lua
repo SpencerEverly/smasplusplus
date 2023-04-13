@@ -23,7 +23,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 costume.pSpeedAnimationsEnabled = false
 costume.yoshiHitAnimationEnabled = false
@@ -573,9 +573,9 @@ end
 
 
 function costume.onInit(p)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Defines.player_grav = 0.2
@@ -836,5 +836,7 @@ function costume.onDraw()
     end
 end
 
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

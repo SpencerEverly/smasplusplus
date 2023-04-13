@@ -584,4 +584,6 @@ end
 
 
 
+Misc.storeLatestCostumeData(costume)
+
 return costume;

@@ -4,17 +4,19 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 function costume.onInit(p)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
 end
 
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

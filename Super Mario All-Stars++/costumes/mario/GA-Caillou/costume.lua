@@ -5,15 +5,15 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 function costume.onInit(p)
     registerEvent(costume,"onTick")
     registerEvent(costume,"onPostPlayerHarm")
     registerEvent(costume,"onPostNPCKill")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     Defines.jumpheight = 19
     Defines.player_walkspeed = 2.6
@@ -48,5 +48,7 @@ function costume.onCleanup(p)
     Defines.jumpheight_bounce = 32
     Defines.player_grav = 0.4
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

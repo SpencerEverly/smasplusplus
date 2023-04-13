@@ -6,7 +6,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local plr
 local characterhp
@@ -24,9 +24,9 @@ function costume.onInit(p)
     registerEvent(costume,"onKeyboardPress")
     registerEvent(costume,"onControllerButtonPress")
     
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/toad/LEGOStarWars-RebelTrooper/laser.png")
@@ -252,5 +252,7 @@ function costume.onCleanup(p)
     smasHud.visible.itembox = true
     costume.abilitesenabled = false
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

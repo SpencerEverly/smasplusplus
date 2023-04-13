@@ -3,7 +3,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local plr
 local musicTimer = 0
@@ -24,9 +24,9 @@ function costume.onInit(p)
     registerEvent(costume,"onTick")
     registerEvent(costume,"onInputUpdate")
     
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
 end
 
@@ -130,5 +130,7 @@ end
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

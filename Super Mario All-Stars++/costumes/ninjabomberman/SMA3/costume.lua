@@ -6,7 +6,7 @@ local rng = require("base/rng")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local eventsRegistered = false
 local ready = false
@@ -15,7 +15,7 @@ function costume.onInit(p)
     Routine = require("routine")
     Routine.run(costumechange)
     registerEvent(costume,"onTickEnd")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/stomped.ogg")
         Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-hit.ogg")
         extrasounds.sounds[4].sfx  = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/block-smash.ogg")
@@ -72,7 +72,7 @@ function costume.onInit(p)
         Audio.sounds[75].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-throw.ogg")
         Audio.sounds[76].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/smb2-hit.ogg")
         Audio.sounds[91].sfx = Audio.SfxOpen("costumes/ninjabomberman/SMA3/SFX/bubble.ogg")
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     eventsRegistered = true
 end
@@ -301,5 +301,7 @@ function costume.onCleanup(p)
         Defines.player_runspeed = nil
     end
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

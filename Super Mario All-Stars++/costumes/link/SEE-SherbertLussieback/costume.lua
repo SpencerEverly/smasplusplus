@@ -4,7 +4,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 function costume.onInit(p)
     plr = p
@@ -14,9 +14,9 @@ function costume.onInit(p)
     registerEvent(costume,"onDraw")
     registerEvent(costume,"onKeyboardPress")
     registerEvent(costume,"onControllerButtonPress")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Defines.player_walkspeed = 4
@@ -169,4 +169,6 @@ function costume.onCleanup(p)
     Defines.player_grav = 0.4
 end
 
-return costume;
+Misc.storeLatestCostumeData(costume)
+
+return costume

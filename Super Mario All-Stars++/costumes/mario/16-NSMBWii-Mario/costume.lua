@@ -15,7 +15,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local marioHead = Graphics.loadImageResolved("costumes/mario/16-NSMBWii-Mario/hud/lifehead.png")
 local coinCounter = Graphics.loadImageResolved("costumes/mario/16-NSMBWii-Mario/hud/coin.png")
@@ -802,9 +802,9 @@ function costume.onPostNPCKill(npc, harmType)
 end
 
 function costume.onInit(p)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Graphics.overrideHUD(costume.drawHUD)
@@ -1141,5 +1141,7 @@ function costume.onDraw()
     end
 end
 
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

@@ -1,6 +1,7 @@
 local costume = {}
 
 local playerManager = require("playerManager")
+local smasFunctions = require("smasFunctions")
 local explosions = Particles.Emitter(0, 0, Misc.resolveFile("costumes/unclebroadsword/Kirby-SMBX/ice_attack.ini"))
 local kirby = require("costumes/unclebroadsword/Kirby-SMBX/kirby")
 
@@ -8,13 +9,13 @@ local BoomerangLock = 0
 local BombLock = 0
 
 function costume.onInit(p)
-    unclebroadsword = require("unclebroadswordd")
+    unclebroadsword = require("characters/unclebroadswordd")
     unclebroadsword.costumeActive = true
     registerEvent(costume,"onTick")
 end
 
 function costume.onCleanup(p)
-    unclebroadsword = require("unclebroadswordd")
+    unclebroadsword = require("characters/unclebroadswordd")
     unclebroadsword.costumeActive = false
 end
 
@@ -150,5 +151,7 @@ function costume.onTick()
         end
     end
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

@@ -211,4 +211,6 @@ function costume.onCleanup(p)
     end
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume;

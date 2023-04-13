@@ -4,12 +4,12 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 function costume.onInit(p)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     Graphics.sprites.hardcoded["48-0"].img = Graphics.loadImageResolved("graphics/customs/AdventuresOfDemo/ui/Container0.png")
     Graphics.sprites.hardcoded["48-1"].img = Graphics.loadImageResolved("graphics/customs/AdventuresOfDemo/ui/Container1.png")
@@ -44,5 +44,7 @@ function costume.onCleanup(p)
     Graphics.sprites.hardcoded["25-2"].img = nil
     Graphics.sprites.hardcoded["25-3"].img = nil
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

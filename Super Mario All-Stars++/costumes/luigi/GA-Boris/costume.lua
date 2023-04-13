@@ -11,7 +11,7 @@ pcall(function() littleDialogue = require("littleDialogue") end)
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 costume.grenade = false
 local eventsRegistered = false
@@ -37,9 +37,9 @@ function costume.onInit(p)
     
     npcManager.registerEvent(291, costume, "onTickEndNPC")
     
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Graphics.sprites.effect[998].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/effect-998.png")
@@ -450,5 +450,7 @@ function costume.onCleanup(p)
     costume.grenade = false
     --smasHud.visible.itembox = true
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

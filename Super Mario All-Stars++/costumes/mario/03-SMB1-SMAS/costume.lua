@@ -28,4 +28,6 @@ function costume.onCleanup(p)
     Graphics.sprites.hardcoded["33-8"].img = nil
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume

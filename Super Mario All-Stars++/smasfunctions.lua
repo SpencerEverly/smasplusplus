@@ -26,6 +26,7 @@ end
 
 if Misc.inSuperMarioAllStarsPlusPlus() then --Easy-to-require SMAS++-specific globals, to load early on boot
     _G.smasCharacterGlobals = require("smasCharacterGlobals")
+    _G.smasCharacterCostumes = require("smasCharacterCostumes")
 end
 
 return smasFunctions

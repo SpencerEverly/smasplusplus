@@ -22,7 +22,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 
 costume.pSpeedAnimationsEnabled = true
@@ -549,9 +549,9 @@ function costume.onInit(p)
     elseif p.powerup >= 2 then
         extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/01-SMB1-Retro/player-jump.ogg")
     end
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     -- If events have not been registered yet, do so
@@ -834,5 +834,7 @@ function costume.onDraw()
     --Text.print(fallingFrame, 100, 132)
 end
 
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

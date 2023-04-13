@@ -21,4 +21,6 @@ function costume.onCleanup(p)
     Player.setCostume(10, nil)
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume

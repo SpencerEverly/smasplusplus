@@ -4,7 +4,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 costume.loadedGraphics = false
 
 function costume.onInit(p)
@@ -31,9 +31,9 @@ function costume.onInit(p)
         Graphics.sprites.npc[14].img = Graphics.loadImageResolved("costumes/mario/00-SMASPlusPlus-Beta/fireflowerbeta.png")
         costume.loadedGraphics = true
     end
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
 end
 
@@ -60,5 +60,7 @@ function costume.onCleanup(p)
     Graphics.sprites.block[1221].img = nil
     Graphics.sprites.npc[14].img = nil
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

@@ -4,7 +4,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local lunging = false
 
@@ -23,9 +23,9 @@ function costume.onInit(p)
     registerEvent(costume,"onControllerButtonPress")
     registerEvent(costume,"onInputUpdate")
     Graphics.registerCharacterHUD(CHARACTER_TOAD, Graphics.HUD_NONE)
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
     
     Defines.player_walkspeed = 5
@@ -159,5 +159,7 @@ function costume.onCleanup(p)
     Defines.jumpheight_bounce = 32
     
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume;

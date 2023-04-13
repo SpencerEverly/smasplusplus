@@ -2,7 +2,7 @@ local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
-costume.loadedSounds = false
+costume.loaded = false
 
 local pm = require("playerManager")
 local extrasounds = require("extrasounds")
@@ -17,9 +17,9 @@ function costume.onInit(p)
     registerEvent(costume,"onPlayerHarm")
     registerEvent(costume,"onKeyboardPress")
     registerEvent(costume,"onControllerButtonPress")
-    if not costume.loadedSounds then
+    if not costume.loaded then
         Sound.loadCostumeSounds()
-        costume.loadedSounds = true
+        costume.loaded = true
     end
 end
 
@@ -240,5 +240,7 @@ function costume.onCleanup(p)
     Defines.projectilespeedx = 7.1
     Defines.player_grav = 0.4
 end
+
+Misc.storeLatestCostumeData(costume)
 
 return costume

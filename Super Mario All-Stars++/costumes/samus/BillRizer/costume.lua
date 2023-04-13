@@ -11,4 +11,6 @@ function costume.onDraw()
     end
 end
 
+Misc.storeLatestCostumeData(costume)
+
 return costume;
