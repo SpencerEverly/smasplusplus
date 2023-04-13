@@ -18,6 +18,7 @@
 
 local playerManager = require("playerManager")
 local minHUD = require("minHUD/minHUD")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 

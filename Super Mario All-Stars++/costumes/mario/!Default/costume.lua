@@ -639,14 +639,6 @@ function costume.onTick()
 
 
         handleDucking(p)
-        
-        if data.atPSpeed and not (leafPowerups[p.powerup])  then
-            if extrasounds and extrasounds.active then
-                if extrasounds.enablePWingSFX then 
-                    Sound.playSFX(121, extrasounds.volume, 1, extrasounds.pWingDelay)
-                end
-            end
-        end
 
         -- Yoshi hitting (creates a small delay between hitting the run button and yoshi actually sticking his tongue out)
         if canHitYoshi(p) then
