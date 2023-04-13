@@ -15,16 +15,78 @@ function smasIntroRunner.onInitAPI()
     registerEvent(smasIntroRunner,"onStart")
 end
 
+local tempBool = false
+local tempLocation = {}
+
 function smasIntroRunner.onInputUpdate()
     if smasBooleans.introModeActivated then
-        local playernumber = rng.randomInt(1,6)
-        for i = 2,Player.count() do
-            for k,_ in pairs(player.keys) do
-                Player(i).keys[k] = not Player(1).keys[k]
+        --[[mem(0x00B2C896, FIELD_WORD, 0)
+        
+        --only restore the level on the first frame that all players are dead
+        local restore_done = false
+        
+        local any_living = Playur.isAnyPlayerAlive()
+        
+        if (not any_living and not restore_done) then
+            local destroyedLayer = Layer.get("Destroyed Blocks")
+            destroyedLayer:show(true)
+            
+            NPC.restoreClass("NPC")
+        elseif(any_living)
+            restore_done = false
+        end
+        
+        for i = 1,Player.count() do
+            if Player(i).deathTimer > 0 then
+                Player(i).deathTimer = 0
+                Player(i):mem(0x13C, FIELD_BOOL, true)
             end
-            Player(i).keys.left = false
+            
+            Player(i).keys.down = false
+            Player(i).keys.dropItem = false
             Player(i).keys.right = true --These keys are force-held like the og intro
+            Player(i).keys.left = false
             Player(i).keys.run = true
+            Player(i).keys.up = false
+            Player(i).keys.altRun = false
+            Player(i).keys.altJump = false
+            
+            if Player(i):mem(0x11C, FIELD_WORD) == 0 or Player(i).y < Player(i).sectionObj.top + 200 then
+                Player(i).keys.jump = false
+            end
+            
+            if (Player(i).speedX < 0.5) then
+                Player(i).keys.jump  = true
+                if (Player(i):mem(0x48, FIELD_WORD) > 0 or Player(i).standingNPC > 0 or Player(i).speedY == 0) then
+                    Player(i):mem(0x11E, FIELD_BOOL, true)
+                end
+            end
+            
+            if Player(i).holdingNPC == 0 then
+                if (Player(i).powerup == 3 or Player(i).powerup == 6 or Player(i).powerup == 7) and RNG.randomInit(1,100) >= 90 then
+                    if Player(i):mem(0x160, FIELD_WORD) == 0 and not Player(i):mem(0x172, FIELD_BOOL) then
+                        Player(i).keys.run = false
+                    end
+                end
+                
+                if (Player(i).powerup == 4 or Player(i).powerup == 5) and Player(i):mem(0x164, FIELD_WORD) == 0 and not Player(i):mem(0x172, FIELD_BOOL) then
+                    tempLocation.width = 24
+                    tempLocation.height = 20
+                    tempLocation.Y = Player(i).y + Player(i).height - 22
+                    tempLocation.X = Player(i).x + Player(i).width
+                    
+                    
+                end
+            end
+        end]]
+        
+        local playernumber = rng.randomInt(1,6)
+        for i = 2,maxPlayers do
+            for k,_ in pairs(player.keys) do
+                if Player(i).isValid then
+                    Player(i).keys[_] = not player.keys[_]
+                end
+            end
         end
         if Player(i).powerup == 4 or Player(i).powerup == 5 then --If leaf or tanooki, fly down when flying
             if Player(i):mem(0x16E, FIELD_BOOL, true) then
