@@ -27,6 +27,8 @@ local smasBooleans = require("smasBooleans")
 furyinventory.furyinventoryopened = false
 smasBooleans.toggleOffInventory = false
 
+furyinventory.priority = 5
+
 local cooldown = 0
 
 local furyinventoryimg = Graphics.loadImage(Misc.resolveFile("inventorystuff/inventory.png"))
@@ -126,52 +128,52 @@ function furyinventory.onDraw()
         smasBooleans.toggleOffInventory = true
     end
     if furyinventory.hidden == false then
-        if furyinventory.activatefuryinventory == true then
-            if furyinventory.furyinventoryopened == true then
+        if furyinventory.activatefuryinventory then
+            if furyinventory.furyinventoryopened then
                 numx = 54
                 numy = 574
 
             
 
                 if SaveData.furyinventory.shroom >= 10 then
-                    Text.printWP(SaveData.furyinventory.shroom, numx-8, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.shroom, numx-8, numy, furyinventory.priority - 0.5)
                 else
-                    Text.printWP(SaveData.furyinventory.shroom, numx, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.shroom, numx, numy, furyinventory.priority - 0.5)
                 end
 
                 if SaveData.furyinventory.fire >= 10 then
-                    Text.printWP(SaveData.furyinventory.fire, numx+64-8, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.fire, numx+64-8, numy, furyinventory.priority - 0.5)
                 else
-                    Text.printWP(SaveData.furyinventory.fire, numx+64, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.fire, numx+64, numy, furyinventory.priority - 0.5)
                 end
 
                 if SaveData.furyinventory.ice >= 10 then
-                    Text.printWP(SaveData.furyinventory.ice, numx+128-8, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.ice, numx+128-8, numy, furyinventory.priority - 0.5)
                 else
-                    Text.printWP(SaveData.furyinventory.ice, numx+128, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.ice, numx+128, numy, furyinventory.priority - 0.5)
                 end
 
                 if SaveData.furyinventory.leaf >= 10 then
-                    Text.printWP(SaveData.furyinventory.leaf, numx+192-8, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.leaf, numx+192-8, numy, furyinventory.priority - 0.5)
                 else
-                    Text.printWP(SaveData.furyinventory.leaf, numx+192, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.leaf, numx+192, numy, furyinventory.priority - 0.5)
                 end
 
                 if SaveData.furyinventory.tanooki >= 10 then
-                    Text.printWP(SaveData.furyinventory.tanooki, numx+256-8, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.tanooki, numx+256-8, numy, furyinventory.priority - 0.5)
                 else
-                    Text.printWP(SaveData.furyinventory.tanooki, numx+256, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.tanooki, numx+256, numy, furyinventory.priority - 0.5)
                 end
 
                 if SaveData.furyinventory.hammer >= 10 then
-                    Text.printWP(SaveData.furyinventory.hammer, numx+320-8, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.hammer, numx+320-8, numy, furyinventory.priority - 0.5)
                 else
-                    Text.printWP(SaveData.furyinventory.hammer, numx+320, numy, -1.5)
+                    Text.printWP(SaveData.furyinventory.hammer, numx+320, numy, furyinventory.priority - 0.5)
                 end
 
 
 
-                if furyinventory.activatefuryinventory == false then
+                if not furyinventory.activatefuryinventory then
                     --Nothing
                 end
             end
@@ -227,27 +229,27 @@ function furyinventory.onDraw()
             SaveData.furyinventory.hammer = minhammer
         end
 
-        if furyinventory.activatefuryinventory == true then
-            if furyinventory.furyinventoryopened == true then
-                Graphics.drawImageWP(furyinventoryimg, 30, 508, -1.4)
-                Graphics.drawImageWP(selector, selectx, selecty, -1.5)
+        if furyinventory.activatefuryinventory then
+            if furyinventory.furyinventoryopened then
+                Graphics.drawImageWP(furyinventoryimg, 30, 508, furyinventory.priority - 0.4)
+                Graphics.drawImageWP(selector, selectx, selecty, furyinventory.priority - 0.5)
                 if SaveData.furyinventory.shroom == 0 then
-                    Graphics.drawImageWP(noshroom, 30, 508, -1.2)
+                    Graphics.drawImageWP(noshroom, 30, 508, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.fire == 0 then
-                    Graphics.drawImageWP(nofire, 94, 508, -1.2)
+                    Graphics.drawImageWP(nofire, 94, 508, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.ice == 0 then
-                    Graphics.drawImageWP(noice, 158, 508, -1.2)
+                    Graphics.drawImageWP(noice, 158, 508, furyinventory.priority - 0.2)
                 end 
                 if SaveData.furyinventory.leaf == 0 then
-                    Graphics.drawImageWP(noleaf, 222, 508, -1.2)
+                    Graphics.drawImageWP(noleaf, 222, 508, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.tanooki == 0 then
-                    Graphics.drawImageWP(notanooki, 286, 508, -1.2)
+                    Graphics.drawImageWP(notanooki, 286, 508, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.hammer == 0 then
-                    Graphics.drawImageWP(nohammer, 350, 508, -1.2)
+                    Graphics.drawImageWP(nohammer, 350, 508, furyinventory.priority - 0.2)
                 end
             end
         end
@@ -336,66 +338,66 @@ function furyinventory.onTick()
     end
     
     if furyinventory.hidden == false then
-        Graphics.drawImageWP(furyinventorysmol, 32, 538, -1.4) -- draws the furyinventory
+        Graphics.drawImageWP(furyinventorysmol, 32, 538, furyinventory.priority - 0.4) -- draws the furyinventory
         
             numx = 40
             numy = 570
 
         if SaveData.furyinventory.shroom >= 10 then
-            Text.printWP(SaveData.furyinventory.shroom, numx-10, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.shroom, numx-10, numy, furyinventory.priority - 0.5)
         else
-            Text.printWP(SaveData.furyinventory.shroom, numx, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.shroom, numx, numy, furyinventory.priority - 0.5)
         end
 
         if SaveData.furyinventory.fire >= 10 then
-            Text.printWP(SaveData.furyinventory.fire, numx-10, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.fire, numx-10, numy, furyinventory.priority - 0.5)
         else
-            Text.printWP(SaveData.furyinventory.fire, numx+32, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.fire, numx+32, numy, furyinventory.priority - 0.5)
         end
 
         if SaveData.furyinventory.ice >= 10 then
-            Text.printWP(SaveData.furyinventory.ice, numx+64-10, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.ice, numx+64-10, numy, furyinventory.priority - 0.5)
         else
-            Text.printWP(SaveData.furyinventory.ice, numx+64, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.ice, numx+64, numy, furyinventory.priority - 0.5)
         end
 
         if SaveData.furyinventory.leaf >= 10 then
-            Text.printWP(SaveData.furyinventory.leaf, numx+96-10, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.leaf, numx+96-10, numy, furyinventory.priority - 0.5)
         else
-            Text.printWP(SaveData.furyinventory.leaf, numx+96, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.leaf, numx+96, numy, furyinventory.priority - 0.5)
         end
 
         if SaveData.furyinventory.tanooki >= 10 then
-            Text.printWP(SaveData.furyinventory.tanooki, numx+128-10, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.tanooki, numx+128-10, numy, furyinventory.priority - 0.5)
         else
-            Text.printWP(SaveData.furyinventory.tanooki, numx+128, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.tanooki, numx+128, numy, furyinventory.priority - 0.5)
         end
 
         if SaveData.furyinventory.hammer >= 10 then
-            Text.printWP(SaveData.furyinventory.hammer, numx+160-10, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.hammer, numx+160-10, numy, furyinventory.priority - 0.5)
         else
-            Text.printWP(SaveData.furyinventory.hammer, numx+160, numy, -1.5)
+            Text.printWP(SaveData.furyinventory.hammer, numx+160, numy, furyinventory.priority - 0.5)
         end
 
 
 
         if SaveData.furyinventory.shroom == 0 then
-            Graphics.drawImageWP(noshroomsmol, 32, 538, -1.5)
+            Graphics.drawImageWP(noshroomsmol, 32, 538, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.fire == 0 then
-            Graphics.drawImageWP(nofiresmol, 64, 538, -1.5)
+            Graphics.drawImageWP(nofiresmol, 64, 538, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.ice == 0 then
-            Graphics.drawImageWP(noicesmol, 96, 538, -1.5)
+            Graphics.drawImageWP(noicesmol, 96, 538, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.leaf == 0 then
-            Graphics.drawImageWP(noleafsmol, 128, 538, -1.5)
+            Graphics.drawImageWP(noleafsmol, 128, 538, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.tanooki == 0 then
-            Graphics.drawImageWP(notanookismol, 160, 538, -1.5)
+            Graphics.drawImageWP(notanookismol, 160, 538, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.hammer == 0 then
-            Graphics.drawImageWP(nohammersmol, 192, 538, -1.5)
+            Graphics.drawImageWP(nohammersmol, 192, 538, furyinventory.priority - 0.5)
         end
     end
 end
