@@ -51,7 +51,6 @@ end
 
 function smasPWing.onDraw()
     if smasHud.visible.pWing then
-        Text.print(player:mem(0x170, FIELD_WORD), 100, 100)
         local pWingFrame = math.floor((lunatime.tick() / smasPWing.frameSpeed) % 2)
         if not SaveData.disableX2char then
             if (player.powerup == 4 or player.powerup == 5) and not Misc.isPaused() then
