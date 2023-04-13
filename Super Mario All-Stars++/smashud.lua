@@ -118,7 +118,7 @@ smasHud.visible.overworldPlayer = true
 smasHud.visible.customitembox = true
 smasHud.visible.pWing = true
 
-smasHud.priority = -4.2
+smasHud.priority = 5
 
 smasHud.ALIGN_LEFT = 0
 smasHud.ALIGN_RIGHT = 1

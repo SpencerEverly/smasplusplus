@@ -436,7 +436,7 @@ function snake.onDraw()
                 climbTimer = climbtime;
             end
             --Draw alertness element
-            Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, -1.99999);
+            Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, snake.HUD_CAMO), 348, 12, smasHud.priority - 3);
             local camo = tostring(math.ceil(100*(snake.alertCooldown-snake.alertTimer)/(snake.alertCooldown)));
             --textblox.printExt("%",{x=774,y=38,font=textblox.FONT_SPRITEDEFAULT3, z=5});
             Text.printWP(camo,1,400-#camo*18 - 8,46,-5)
@@ -463,7 +463,7 @@ function snake.onDraw()
                     power.label = "MK22";
                     power.graphic = snake.HUD_POWER_MK22;
                 end
-                Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 400, 12, -5);
+                Graphics.drawImageWP(pm.getGraphic(CHARACTER_SNAKE, power.graphic), 400, 12, smasHud.priority);
                 FONT.text = power.label
                 FONT.x=398
                 FONT.y=48

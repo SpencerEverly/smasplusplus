@@ -14,6 +14,7 @@ local configFileReader = require("configFileReader")
 local textplus = require("textplus")
 local tplusUtils = require("textplus/tplusutils")
 local cursor = require("cursor")
+local handycam = require("handycam")
 
 local littleDialogue = {}
 
@@ -1783,13 +1784,13 @@ function boxInstanceFunctions:draw()
         y = math.clamp(y,b.top  + self.totalHeight*0.5 + minDistance,b.bottom - self.totalHeight*0.5 - minDistance)
     end
 
-    local scaleX  = math.lerp(self.settings.openStartScaleX,1,self.openingProgress)
-    local scaleY  = math.lerp(self.settings.openStartScaleY,1,self.openingProgress)
-    
+
+    local scaleX  = math.lerp(self.settings.openStartScaleX ,1,self.openingProgress)
+    local scaleY  = math.lerp(self.settings.openStartScaleY ,1,self.openingProgress)
     local opacity = math.lerp(self.settings.openStartOpacity,1,self.openingProgress)
 
     local topNameDarkening = 0
-    
+
     local boxWidth = self.totalWidth * scaleX
     local boxHeight = self.totalHeight * scaleY
 
@@ -2076,7 +2077,7 @@ littleDialogue.defaultBoxSettings = {
 
     -- Other
     borderSize = 8, -- How much is added around the text to get the full size (pixels).
-    priority = 0,   -- The render priority of boxes.
+    priority = 6.5,   -- The render priority of boxes.
 
     minDistanceFromEdge = 16, -- The minimum distance away from the borders of the screen that the box can be while 'keepOnScreen' is enabled.
 

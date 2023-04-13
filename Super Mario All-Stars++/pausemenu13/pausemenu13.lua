@@ -231,22 +231,22 @@ end
 
 function pausemenu13.onDraw()
     if pausemenu13.isPauseMenuOpen then
-        Graphics.drawBox{x = pausemenu13.screenW / 2 - 190, y = pausemenu13.screenH / 2 - menu_box_height / 2, width = 380, height = menu_box_height, color = Color.black, priority = -2.1}
+        Graphics.drawBox{x = pausemenu13.screenW / 2 - 190, y = pausemenu13.screenH / 2 - menu_box_height / 2, width = 380, height = menu_box_height, color = Color.black, priority = 6.9999}
         if (isOverworld or isOnSMWMap) then
-            textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[6], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 3 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[6], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 3 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
         elseif pausemenu13.addExitLevelOption then
-            textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[5], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[6], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 3 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 4 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[5], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[6], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 3 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 4 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
         else
-            textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
-            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = -2, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[1], x = menu_left_X, y = menu_top_Y + 0 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
+            textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
         end
         Graphics.drawImageWP(pausemenu13.pauseCursor, menu_left_X - 20, menu_top_Y + (pausemenu13.menuPosition * 36), -2)
     end

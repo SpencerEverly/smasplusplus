@@ -2,7 +2,7 @@ local Misk = {}
 
 local rng = require("base/rng")
 local smasVerboseMode = require("smasVerboseMode")
-local customCamera = require("customCamera")
+local handycam = require("handycam")
 local smasTables = require("smasTables")
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
@@ -636,7 +636,7 @@ function Misc.checkCameraTransitionStatus() --Checks to see if the legacy camera
 end
 
 function Misc.checkTargetStatus() --Returns the current targets from the camera.
-    return customCamera.targets
+    return handycam[1].targets
 end
 
 function Misc.saveSaveSlot(slot)
@@ -1034,13 +1034,13 @@ function Misk.onCameraDraw()
     if screenShakeTally > -1 then
         screenShakeTally = screenShakeTally - 1
         if screenShakeTally > 0 then
-            customCamera.defaultScreenOffsetX = ((0 + math.random(((screenShakeTally / 32 + 32))) - math.random((screenShakeTally / 32) + 32)))
-            customCamera.defaultScreenOffsetY = ((0 + math.random(((screenShakeTally / 32) + 32))) - math.random(((screenShakeTally / 32) + 32)))
+            handycam.xOffset = ((0 + math.random(((screenShakeTally / 32 + 32))) - math.random((screenShakeTally / 32) + 32)))
+            handycam.yOffset = ((0 + math.random(((screenShakeTally / 32) + 32))) - math.random(((screenShakeTally / 32) + 32)))
         end
     end
     if screenShakeTally == 0 then
-        customCamera.defaultScreenOffsetX = 0
-        customCamera.defaultScreenOffsetY = 0
+        handycam.xOffset = 0
+        handycam.yOffset = 0
     end
 end
 

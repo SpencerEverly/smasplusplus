@@ -55,14 +55,6 @@ function Img.saveImageData(name)
     end
 end
 
-function Img.saveAndRegisterSceneDraw(name)
-    local imgFile = Img.loadedImages[name]
-    if Img.loadedImagesRegistered[name] == nil then
-        --Img.registerSceneDraw(Img.loadedImages[name])
-        Img.loadedImagesRegistered[name] = true
-    end
-end
-
 --Img.draw(ImageName, x coordinate, y coordinate, opacity)
 function Img.draw(name, x, y, arg6)
     Img.saveImageData(name)
@@ -157,60 +149,6 @@ function Img.drawToSceneWP(name, x, y, arg6, arg7)
     end
 
     Graphics.drawImageToSceneWP(Img.loadedImages[name], x, y, arg7, arg6)
-end
-
-function Img.registerSceneDraw(image,xPos,yPos,widthPos,heightPos,sourceWidthPos,sourceHeightPos,priorityNum,opacityNum)
-    if image == nil then
-        return false
-    end
-    if xPos == nil then
-        return false
-    end
-    if yPos == nil then
-        return false
-    end
-    if widthPos == nil then
-        return false
-    end
-    if heightPos == nil then
-        return false
-    end
-    if sourceWidthPos == nil then
-        return false
-    end
-    if sourceHeightPos == nil then
-        return false
-    end
-    if priorityNum == nil then
-        return false
-    end
-    if opacityNum == nil then
-        opacityNum = 1
-    end
-    customCamera.registerSceneDraw(
-        function(args)
-            local X,Y,scale,rotation = customCamera.convertPosToScreen(args,xPos,yPos)
-            Graphics.drawBox{
-                texture        = image,	
-                sceneCoords    = false,
-                x              = X,
-                y              = Y,
-                width          = widthPos * scale,
-                height         = heightPos * scale,
-                sourceX        = 0,
-                sourceY        = 0,
-                sourceWidth    = sourceWidthPos,
-                sourceHeight   = sourceHeightPos,
-                centered       = true,
-                priority       = customCamera.convertPriority(args,priorityNum),
-                rotation       = rotation,
-                target         = args.target,
-                linearFiltered = args.linearFiltered,
-                opacity        = opacityNum,
-            }
-        end
-    )
-    return true
 end
 
 return Img

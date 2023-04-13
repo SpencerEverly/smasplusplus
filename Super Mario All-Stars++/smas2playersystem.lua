@@ -4,8 +4,8 @@
 
 local smas2PlayerSystem = {}
 
-local customCamera = require("customCamera")
 local handycam = require("handycam")
+handycam[1].targets = {}
 
 local player1Camera = Graphics.CaptureBuffer(800,600)
 local player2Camera = Graphics.CaptureBuffer(800,600)
@@ -26,30 +26,18 @@ function smas2PlayerSystem.onInitAPI()
     registerEvent(smas2PlayerSystem,"onCameraDraw")
 end
 
-function smas2PlayerSystem.onStart()
-    if smasBooleans.targetPlayers then --If targeting players are enabled...
-        for _,p in ipairs(Player.get()) do --Get all players
-            if p.isValid and not table.icontains(customCamera.targets,p) then
-                table.insert(customCamera.targets,p)
-            elseif not p.isValid and table.icontains(customCamera.targets,p) then
-                table.remove(customCamera.targets,p)
-            end
-        end
-    end
-end
-
 function smas2PlayerSystem.onDraw()
     if smasBooleans.targetPlayers then --If targeting players are enabled...
         for _,p in ipairs(Player.get()) do --Get all players
-            if p.isValid and not table.icontains(customCamera.targets,p) then
-                table.insert(customCamera.targets,p)
-            elseif not p.isValid and table.icontains(customCamera.targets,p) then
-                table.remove(customCamera.targets,p)
+            if p.isValid and not table.icontains(handycam[1].targets,p) then
+                table.insert(handycam[1].targets,p)
+            elseif not p.isValid and table.icontains(handycam[1].targets,p) then
+                table.remove(handycam[1].targets,p)
             end
         end
     end
     if not smasBooleans.targetPlayers and not smasBooleans.overrideTargets then
-        customCamera.targets = {}
+        handycam[1].targets = {}
     end
     
     if SaveData.disableX2char then

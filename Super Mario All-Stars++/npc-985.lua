@@ -3,7 +3,6 @@ local npcutils = require("npcs/npcutils")
 local extrasounds = require("extrasounds")
 local Routine = require("routine")
 local rng = require("base/rng")
-local customCamera = require("customCamera")
 local smasBooleans = require("smasBooleans")
 local smasFunctions
 pcall(function() smasFunctions = require("smasFunctions") end)

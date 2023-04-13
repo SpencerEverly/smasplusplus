@@ -160,7 +160,7 @@ local function wsmbaoriginalgraphicsoggle()
     end
 end
 
-local function changeresolution()
+--[[local function changeresolution()
     Sound.playSFX("resolution-set.ogg")
     screenModes = pauseplus.getSelectionValue("resolutionsettings","Switch Resolution")
     if screenModes == RESOLUTION_FULL then
@@ -187,14 +187,14 @@ local function changeresolution()
         SaveData.resolution = "gba"
         Routine.waitFrames(1, true)
         smasResolutions.changeResolution()
-    --[[elseif screenModes == RESOLUTION_THREEDS then
+    elseif screenModes == RESOLUTION_THREEDS then
         SaveData.resolution = "3ds"
         Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()]]
+        smasResolutions.changeResolution()
     end
-end
+end]]
 
-local function changeresolutionborder()
+--[[local function changeresolutionborder()
     if pauseplus.getSelectionValue("resolutionsettings","Disable Resolution Border") then
         Sound.playSFX("resolutionborder-disable.ogg")
         SaveData.borderEnabled = false
@@ -206,7 +206,7 @@ local function changeresolutionborder()
         Routine.waitFrames(1, true)
         smasResolutions.changeResolution()
     end
-end
+end]]
 
 local sectionNumberArea
 
@@ -272,7 +272,7 @@ local function toggleeditorpowerupstate()
     end
 end
 
-local function changeletterbox()
+--[[local function changeletterbox()
     if pauseplus.getSelectionValue("resolutionsettings","Enable Letterbox Scaling") then
         Sound.playSFX("letterbox-disable.ogg")
         SaveData.letterbox = false
@@ -284,7 +284,7 @@ local function changeletterbox()
         Routine.waitFrames(1, true)
         smasResolutions.changeResolution()
     end
-end
+end]]
 
 local function togglepwingsfx()
     if pauseplus.getSelectionValue("soundsettings","Disable P-Wing Sound") then
@@ -1145,19 +1145,19 @@ function pausemenu2.onDraw()
     
     if pauseplus.currentSubmenu then
         if not isOverworld then
-            textplus.print{x = 20, y = 564, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = -1.4, xscale = 1.2, yscale = 1.2}
-            textplus.print{x = 20, y = 582, text = "<color yellow>"..Misc.getActualLevelName().."</color>", font = pausefont3, priority = -1.4, xscale = 1.2, yscale = 1.2}
+            textplus.print{x = 20, y = 564, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 7.4, xscale = 1.2, yscale = 1.2}
+            textplus.print{x = 20, y = 582, text = "<color yellow>"..Misc.getActualLevelName().."</color>", font = pausefont3, priority = 7.4, xscale = 1.2, yscale = 1.2}
             if SaveData.playerPfp == nil then
-                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = -1.7}
+                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
             elseif SaveData.playerPfp then
-                sprite.draw{texture = Img.load("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 20, y = 490, priority = -1.7}
+                sprite.draw{texture = Img.load("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
             elseif unexpected_condition then
-                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = -1.7}
+                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
             end
             if SaveData.playerName == nil then
-                textplus.print{x = 105, y = 518, text = "<color rainbow>Player</color>", font = pausefont3, priority = 0, xscale = 1.5, yscale = 1.5}
+                textplus.print{x = 105, y = 518, text = "<color rainbow>Player</color>", font = pausefont3, priority = 7.4, xscale = 1.5, yscale = 1.5}
             else
-                textplus.print{x = 105, y = 518, text = "<color rainbow>"..SaveData.playerName.."</color>", font = pausefont3, priority = -1.4, xscale = 1.5, yscale = 1.5}
+                textplus.print{x = 105, y = 518, text = "<color rainbow>"..SaveData.playerName.."</color>", font = pausefont3, priority = 7.4, xscale = 1.5, yscale = 1.5}
             end
         end
     end
@@ -1512,7 +1512,7 @@ end
 function pauseSpecifics()
     pauseplus.font = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
     pauseplus.scale = 1.5
-    pauseplus.priority = -3.5
+    pauseplus.priority = 7
     pauseplus.doResizing = true
     pauseplus.optionGap = 4
     pauseplus.offset = vector(0,0)
@@ -1589,16 +1589,16 @@ function pauseSpecifics()
         end
         
         -- Settings
-        pauseplus.createOption("settings",{text = "Resolution Settings",goToSubmenu = "resolutionsettings",description = "Set the resolution to enhance your gameplay."})
+        --pauseplus.createOption("settings",{text = "Resolution Settings",goToSubmenu = "resolutionsettings",description = "Set the resolution to enhance your gameplay."})
         pauseplus.createOption("settings",{text = "Sound Settings",goToSubmenu = "soundsettings",description = "Set some sound settings to enhance your gameplay."})
         pauseplus.createOption("settings",{text = "Miscellaneous Settings",goToSubmenu = "miscsettings",description = "Set some other settings to enhance your gameplay."})
-        if (Level.filename() == "map.lvlx") == true then
+        if (Level.filename() == "map.lvlx") then
             pauseplus.createOption("settings",{text = "Unlock Broken Map Paths",description = "If any paths were broken, or you have recovered a save from a very weird error, this option can unlock any paths you already have unlocked prior.",closeMenu = true, actions = {function() Routine.run(unlockbrokenpaths) end}})
         end
-        if (Level.filename() == "map.lvlx") == false then
+        if not (Level.filename() == "map.lvlx") then
             pauseplus.createOption("settings",{text = "Turn ON/OFF 1.3 Mode",description = "Turn off/on 1.3 Mode to enable/disable several features, including multiplayer. COSTUMES WILL BE RESET!",pauseplus.save,closeMenu = true, actions = {function() Routine.run(onethreemodeactivate) end}})
         end
-        if SaveData.speedrunMode == true then
+        if SaveData.speedrunMode then
             pauseplus.createOption("settings",{text = "Purge Save Data",description = "In speedrun mode, you can use this option to erase your save and start over your speedrun. YOU WILL LOSE YOUR SAVE DATA IF YOU SELECT THIS OPTION!",actions = {function() Routine.run(purgesavedata) end}})
         end
         pauseplus.createOption("settings",{text = "Exit without Saving",description = "Exit without saving. YOU WILL LOSE PROGRESS IF YOU SELECT THIS OPTION!",action = function() Routine.run(quitonly) end})
@@ -1615,9 +1615,9 @@ function pauseSpecifics()
         pauseplus.createOption("soundsettings",{text = "Use the Original SMBX Sound System",selectionType = pauseplus.SELECTION_CHECKBOX,description = "This options disables all the new sounds (Except P-Wing) and reverts back to the original sound system.",action = function() Routine.run(smbxdefaultsoundsystem) end})
         
         --Resolution Settings
-        pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA--[[,RESOLUTION_THREEDS]]}, action = function() Routine.run(changeresolution) end})
+        --[[pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA}, action = function() Routine.run(changeresolution) end})
         pauseplus.createOption("resolutionsettings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() Routine.run(changeletterbox) end})
-        pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() Routine.run(changeresolutionborder) end})
+        pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() Routine.run(changeresolutionborder) end})]]
         
         --Character Menu
         if not SaveData.disableX2char then

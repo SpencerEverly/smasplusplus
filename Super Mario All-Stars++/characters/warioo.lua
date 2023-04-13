@@ -217,15 +217,15 @@ end
 
 -- Render dash charge meter
 local function renderDashMeter(xpos, ypos)
-    Graphics.draw {x = xpos, y = ypos, type = RTYPE_IMAGE, priority = -5, image = pm.getGraphic(CHARACTER_WARIO, HUD.meter), sourceHeight = 18}
+    Graphics.draw {x = xpos, y = ypos, type = RTYPE_IMAGE, priority = smasHud.priority, image = pm.getGraphic(CHARACTER_WARIO, HUD.meter), sourceHeight = 18}
     if dashtimer < DASHCHARGETIME then
-        Graphics.draw {x = xpos, y = ypos, type = RTYPE_IMAGE, priority = -5, image = pm.getGraphic(CHARACTER_WARIO, HUD.meter),
+        Graphics.draw {x = xpos, y = ypos, type = RTYPE_IMAGE, priority = smasHud.priority, image = pm.getGraphic(CHARACTER_WARIO, HUD.meter),
             sourceY = 18, sourceWidth = 10*math.floor(dashtimer/DASHCHARGETIME*8), sourceHeight = 18}
     else
-        Graphics.draw {x = xpos, y = ypos, type = RTYPE_IMAGE, priority = -5, image = pm.getGraphic(CHARACTER_WARIO, HUD.meter),
+        Graphics.draw {x = xpos, y = ypos, type = RTYPE_IMAGE, priority = smasHud.priority, image = pm.getGraphic(CHARACTER_WARIO, HUD.meter),
             sourceY = 18, sourceWidth = 70, sourceHeight = 18}
         if math.floor(lunatime.tick()*10)%2 == 0 then
-            Graphics.draw {x = xpos + 70, y = ypos, type = RTYPE_IMAGE, priority = -5, image =pm.getGraphic(CHARACTER_WARIO,  HUD.meter),
+            Graphics.draw {x = xpos + 70, y = ypos, type = RTYPE_IMAGE, priority = smasHud.priority, image =pm.getGraphic(CHARACTER_WARIO,  HUD.meter),
                 sourceX = 70, sourceY = 18, sourceWidth = 26, sourceHeight = 18}
         end
     end

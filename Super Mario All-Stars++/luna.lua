@@ -212,15 +212,15 @@ local yoshi = require("yiYoshi/yiYoshi")
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
 --These will need to be overwritten over the original libraries, because we're fixing graphics/bugs from these characters.
 console:println("Overriding original character libraries...")
-playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("megamann"))
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("snakey"))
-playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("bowserr"))
-playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("rosalinaa"))
-playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("samuss"))
-playerManager.overrideCharacterLib(CHARACTER_WARIO,require("warioo"))
-playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("zeldaa"))
-playerManager.overrideCharacterLib(CHARACTER_KLONOA,require("klonoaa"))
-playerManager.overrideCharacterLib(CHARACTER_UNCLEBROADSWORD,require("unclebroadswordd"))
+playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("characters/megamann"))
+playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("characters/snakey"))
+playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("characters/bowserr"))
+playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("characters/rosalinaa"))
+playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("characters/samuss"))
+playerManager.overrideCharacterLib(CHARACTER_WARIO,require("characters/warioo"))
+playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("characters/zeldaa"))
+playerManager.overrideCharacterLib(CHARACTER_KLONOA,require("characters/klonoaa"))
+playerManager.overrideCharacterLib(CHARACTER_UNCLEBROADSWORD,require("characters/unclebroadswordd"))
 playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
 Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
@@ -238,6 +238,9 @@ end
 
 --**Themes, resolutions**
 if SaveData.resolution == nil then --By default, the resolution will be set as fullscreen.
+    SaveData.resolution = "fullscreen"
+end
+if SaveData.resolution ~= "fullscreen" then --We no longer have resolutions, so remove support for any resolutions that's still toggled.
     SaveData.resolution = "fullscreen"
 end
 if SaveData.letterbox == nil then --Letterbox default is true

@@ -183,7 +183,7 @@ local function drawBar(x, y, powerup, value, priority)
                     align = imagic.ALIGN_CENTRE,
                     x=x,
                     y=115 + y + 80 - (4 * i),
-                    priority=-5,
+                    priority=smasHud.priority,
                     sourceY=12 * (powerup - 1),
                     sourceWidth=2,
                     sourceHeight=12}

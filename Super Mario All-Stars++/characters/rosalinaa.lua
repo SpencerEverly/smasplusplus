@@ -181,7 +181,7 @@ local function drawStarPower()
         local c = math.ceil(#lumacolor*0.25);
         c = math.min(4*math.floor(p*c + 0.5) + 1, #lumacolor-3);
         p = 1-p;
-        Graphics.drawImageWP(pm.getGraphic(CHARACTER_ROSALINA,lumabase), x, y, -5);
+        Graphics.drawImageWP(pm.getGraphic(CHARACTER_ROSALINA,lumabase), x, y, smasHud.priority);
         Graphics.glDraw {
         vertexCoords={x+6,y+6+(32*p),x+32+6,y+6+(32*p),x+32+6,y+32+6,x+6,y+32+6}, 
         primitive=Graphics.GL_TRIANGLE_FAN,
@@ -191,7 +191,7 @@ local function drawStarPower()
         priority=-5
                         }
     if hasStar then
-        Graphics.drawImageWP(pm.getGraphic(CHARACTER_ROSALINA,finalLuma), x+4, y+4, -5);
+        Graphics.drawImageWP(pm.getGraphic(CHARACTER_ROSALINA,finalLuma), x+4, y+4, smasHud.priority);
     else
         --for i, v in pairs(coinTable) do
         --    if coins >= v.coinLowerValue and coins < v.coinUpperValue then

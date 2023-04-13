@@ -1,6 +1,6 @@
 local screenFlip = {}
 
-local customCamera = require("customCamera")
+local handycam = require("handycam")
 
 local flip = 0
 local fliptimer = 0
@@ -9,7 +9,7 @@ local flipwarningopacity = 0
 
 function screenFlip.onTick()
     if screenFlip.enabled then
-        customCamera.defaultRotation = flip
+        handycam[1].rotation = flip
         fliptimer = fliptimer + 1
         if screenFlip.warnBeforeFlip then
             if fliptimer == (screenFlip.flipDelay - 64) then --Warn before flipping
@@ -55,7 +55,7 @@ function screenFlip.onTick()
         
         
     elseif screenFlip.enabledfourway then
-        customCamera.defaultRotation = flip
+        handycam[1].rotation = flip
         fliptimer = fliptimer + 1
         if screenFlip.warnBeforeFlip then
             if fliptimer == (screenFlip.flipDelay - 64) then --Warm before flipping
@@ -142,7 +142,7 @@ function screenFlip.onTick()
             fliptimer = 0
         end
     else
-        customCamera.defaultRotation = 0
+        handycam[1].rotation = 0
         flip = 0
         fliptimer = 0
         flipphase = 0
@@ -157,20 +157,20 @@ function screenFlip.onInputUpdate()
         local oldUp = player.keys.down
         local oldDown = player.keys.up
 
-        player.keys.up = oldLeft
-        player.keys.down = oldRight
-        player.keys.left = oldDown
-        player.keys.right = oldUp
+        player.keys.up = oldRight
+        player.keys.down = oldLeft
+        player.keys.left = oldUp
+        player.keys.right = oldDown
         if Player.count() >= 2 then
             local oldLeft2 = player2.keys.left
             local oldRight2 = player2.keys.right
             local oldUp2 = player2.keys.up
             local oldDown2 = player2.keys.down
 
-            player2.keys.up = oldLeft2
-            player2.keys.down = oldRight2
-            player2.keys.left = oldDown2
-            player2.keys.right = oldUp2
+            player2.keys.up = oldRight2
+            player2.keys.down = oldLeft2
+            player2.keys.left = oldUp2
+            player2.keys.right = oldDown2
         end
     end
     if (flip == 180 or flip == -180) then
@@ -197,27 +197,27 @@ function screenFlip.onInputUpdate()
         local oldUp = player.keys.down
         local oldDown = player.keys.up
 
-        player.keys.up = oldRight
-        player.keys.down = oldLeft
-        player.keys.left = oldUp
-        player.keys.right = oldDown
+        player.keys.up = oldLeft
+        player.keys.down = oldRight
+        player.keys.left = oldDown
+        player.keys.right = oldUp
         if Player.count() >= 2 then
             local oldLeft2 = player2.keys.left
             local oldRight2 = player2.keys.right
             local oldUp2 = player2.keys.up
             local oldDown2 = player2.keys.down
 
-            player2.keys.up = oldRight2
-            player2.keys.down = oldLeft2
-            player2.keys.left = oldUp2
-            player2.keys.right = oldDown2
+            player2.keys.up = oldLeft2
+            player2.keys.down = oldRight2
+            player2.keys.left = oldDown2
+            player2.keys.right = oldUp2
         end
     end
 end
 
 function screenFlip.onDraw()
-    Graphics.drawScreen{color = Color.white .. flipwarningopacity, priority = 5}
-    Text.printWP(lunatime.toSeconds(fliptimer), 340, 80, -4.3)
+    Graphics.drawScreen{color = Color.white .. flipwarningopacity, priority = 2}
+    Text.printWP(lunatime.toSeconds(fliptimer), 340, 80, 5)
 end
 
 function screenFlip.onInitAPI()

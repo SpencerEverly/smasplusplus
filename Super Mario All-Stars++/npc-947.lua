@@ -2,8 +2,6 @@ local npc = {}
 local npcManager = require("npcManager")
 local id = NPC_ID
 local extrasounds = require("extrasounds")
-local customCamera
-pcall(function() customCamera = require("customCamera") end)
 
 npcManager.setNpcSettings({
     id = id,
@@ -20,35 +18,18 @@ npcManager.setNpcSettings({
 })
 
 function isOnScreen(npc)
-    if customCamera then
-        -- Get camera boundaries
-        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-        local left = fullX
-        local right = left + fullWidth
-        local top = fullY
-        local bottom = top + fullHeight
-        -- Check if offscreen
-        if npc.x + npc.width < left or npc.x > right then
-            return false
-        elseif npc.y + npc.height < top or npc.y > bottom then
-            return false
-        else
-            return true
-        end
+    -- Get camera boundaries
+    local left = camera.x
+    local right = left + camera.width
+    local top = camera.y
+    local bottom = top + camera.height
+    -- Check if offscreen
+    if npc.x + npc.width < left or npc.x > right then
+        return false
+    elseif npc.y + npc.height < top or npc.y > bottom then
+        return false
     else
-        -- Get camera boundaries
-        local left = camera.x
-        local right = left + camera.width
-        local top = camera.y
-        local bottom = top + camera.height
-        -- Check if offscreen
-        if npc.x + npc.width < left or npc.x > right then
-            return false
-        elseif npc.y + npc.height < top or npc.y > bottom then
-            return false
-        else
-            return true
-        end
+        return true
     end
 end
 

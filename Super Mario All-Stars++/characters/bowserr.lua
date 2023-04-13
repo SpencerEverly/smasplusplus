@@ -11,6 +11,7 @@ local panim = require("playeranim")
 local followa = require("followa")
 local vectr = require("vectr")
 local defs = require("expandedDefines")
+local smasHud = require("smasHud")
 
 local bowser = {}
 
@@ -881,7 +882,7 @@ end
 
 local function drawHUD()
     --NPC box
-    Graphics.draw{x=405,y=16,type=RTYPE_IMAGE,image=pm.getGraphic(CHARACTER_BOWSER,HUD.npc_box), priority=4.9990};
+    Graphics.draw{x=405,y=16,type=RTYPE_IMAGE,image=pm.getGraphic(CHARACTER_BOWSER,HUD.npc_box), priority=smasHud.priority - 0.01};
     if(#minionQueue > 0 and minionQueue[1].npc.isValid) then
         local gfxw = NPC.config[minionQueue[1].id].gfxwidth;
         local gfxh = NPC.config[minionQueue[1].id].gfxheight;
@@ -891,7 +892,7 @@ local function drawHUD()
         if(gfxh == 0) then
             gfxh = minionQueue[1].npc.height;
         end
-        Graphics.draw{x=433-gfxw*0.5,y=44-gfxh*0.5,type=RTYPE_IMAGE,image=Graphics.sprites.npc[minionQueue[1].id].img,sourceX=0,sourceY=0,sourceWidth=gfxw,sourceHeight=gfxh, priority=4.9990};
+        Graphics.draw{x=433-gfxw*0.5,y=44-gfxh*0.5,type=RTYPE_IMAGE,image=Graphics.sprites.npc[minionQueue[1].id].img,sourceX=0,sourceY=0,sourceWidth=gfxw,sourceHeight=gfxh, priority=smasHud.priority - 0.01};
     end
     
     --HP box
@@ -901,7 +902,7 @@ local function drawHUD()
     else
         hitimg = pm.getGraphic(CHARACTER_BOWSER,HUD.hit_empty);
     end
-    Graphics.draw{x=339,y=16,type=RTYPE_IMAGE,image=hitimg, priority=4.9990};
+    Graphics.draw{x=339,y=16,type=RTYPE_IMAGE,image=hitimg, priority=smasHud.priority - 0.01};
     
     --Life counter
     --Graphics.draw{x=234,y=26,type=RTYPE_IMAGE,image=Graphics.sprites.hardcoded["33-3"].img, priority=-5};
@@ -926,8 +927,8 @@ end
 
 function bowser.onDraw()
     if(player.character == CHARACTER_BOWSER) then
-        if Misc.inMarioChallenge() == false then
-            if smasHud.visible.customitembox == true then
+        if not Misc.inMarioChallenge() then
+            if smasHud.visible.customitembox then
                 drawHUD();
             end
         elseif Misc.inMarioChallenge() then

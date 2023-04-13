@@ -150,7 +150,6 @@ end
 
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 local inspect = require("ext/inspect")
-local customCamera = require("customCamera")
 local rng = require("base/rng")
 
 local npctocointimer = 0 --This is used for the NPC to Coin sound.
@@ -632,35 +631,18 @@ local function hasJumped(p, ahippinandahoppinactive)
 end
 
 local function isOnScreen(npc)
-    if customCamera then
-        -- Get camera boundaries
-        local fullX,fullY,fullWidth,fullHeight = customCamera.getFullCameraPos()
-        local left = fullX;
-        local right = left + fullWidth;
-        local top = fullY;
-        local bottom = top + fullHeight;
-        -- Check if offscreen
-        if npc.x + npc.width < left or npc.x > right then
-            return false
-        elseif npc.y + npc.height < top or npc.y > bottom then
-            return false
-        else
-            return true
-        end
+    -- Get camera boundaries
+    local left = camera.x;
+    local right = left + camera.width;
+    local top = camera.y;
+    local bottom = top + camera.height;
+    -- Check if offscreen
+    if npc.x + npc.width < left or npc.x > right then
+        return false
+    elseif npc.y + npc.height < top or npc.y > bottom then
+        return false
     else
-        -- Get camera boundaries
-        local left = camera.x;
-        local right = left + camera.width;
-        local top = camera.y;
-        local bottom = top + camera.height;
-        -- Check if offscreen
-        if npc.x + npc.width < left or npc.x > right then
-            return false
-        elseif npc.y + npc.height < top or npc.y > bottom then
-            return false
-        else
-            return true
-        end
+        return true
     end
 end
 

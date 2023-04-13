@@ -126,7 +126,7 @@ local started = false
 local ending = false
 
 local function textPrintCentered(t, x, y, color) --Taken from the input config menu from the editor and edited slightly. Thanks Hoeloe lol
-    textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = -1.7, font = smbx13font}
+    textplus.print{text=t, x=x, y=y, plaintext=true, pivot=vector.v2(0.5,0.5), xscale=1.5, yscale=1.5, color=color, priority = 7.4, font = smbx13font}
 end
 
 function smasCharacterChanger.startChanger() --This is the command that starts the menu up. Use this to enable the menu.
@@ -282,11 +282,11 @@ function smasCharacterChanger.onDraw()
             end
             if smasCharacterChanger.animationTimer >= 1 and smasCharacterChanger.animationTimer <= 64 then
                 smasCharacterChanger.tvScrollNumber = smasCharacterChanger.tvScrollNumber + 9.2
-                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, -1.5)
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, 7.5)
             end
             if smasCharacterChanger.animationTimer >= 65 then
                 smasCharacterChanger.tvScrollNumber = 0
-                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, -1.5)
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, 7.5)
             end
         end
         if started then
@@ -331,12 +331,12 @@ function smasCharacterChanger.onDraw()
                 colorChange3 = 0
             end
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
-            Graphics.drawScreen{color = rainbowyColor .. 1, priority = -1.8}
+            Graphics.drawScreen{color = rainbowyColor .. 1, priority = 7.3}
             
-            Graphics.drawImageWP(smasCharacterChanger.drawPreviewImage(), 360, 320, -1.7)
+            Graphics.drawImageWP(smasCharacterChanger.drawPreviewImage(), 360, 320, 7.4)
         end
         if not smasCharacterChanger.animationActive and started then
-            Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, -1.5)
+            Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, 7.5)
             smasCharacterChanger.animationTimer = 0
         end
     elseif not smasCharacterChanger.menuActive and started then
@@ -353,7 +353,7 @@ function smasCharacterChanger.onDraw()
             smasCharacterChanger.animationTimer = smasCharacterChanger.animationTimer + 1
             if smasCharacterChanger.animationTimer >= 1 and smasCharacterChanger.animationTimer <= 34 then
                 smasCharacterChanger.tvScrollNumber = smasCharacterChanger.tvScrollNumber - 20
-                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, -0.5)
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, 7.5)
             end
         end
     end

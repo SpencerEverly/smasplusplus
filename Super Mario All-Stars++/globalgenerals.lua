@@ -14,7 +14,6 @@ local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local inventory = require("customInventory")
 local inputconfigurator = require("inputconfig")
-local customCamera = require("customCamera")
 local smallScreen = require("smallScreen")
 local musicalchairs = require("musicalchairs")
 
@@ -200,7 +199,6 @@ end
 function globalgenerals.onStart()
     Sound.startupRefreshSystem()
     Playur.failsafeStartupPlayerCheck()
-    smasResolutions.changeResolution()
     if Misc.inEditor() then
         debugbox = require("debugbox")
         debugbox.bootactive = true
