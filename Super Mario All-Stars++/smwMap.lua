@@ -1045,11 +1045,31 @@ function smwMap.onInitAPI()
     registerEvent(smwMap,"onInputUpdate")
 end
 
+local hudThingsToHude = {
+    "bombs",
+    "coins",
+    "customitembox",
+    "deathcount",
+    "itembox",
+    "keys",
+    "levelname",
+    "lives",
+    "overworldPlayer",
+    "pWing",
+    "score",
+    "starcoins",
+    "stars",
+    "timer",
+}
 
 function smwMap.onStart()
     --if not GameData.____mainMenuComplete then
         --Level.load("SMAS - Start.lvlx")
     --end
+    
+    for k,v in ipairs(hudThingsToHude) do
+        smasHud.visible[v] = false
+    end
     
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE

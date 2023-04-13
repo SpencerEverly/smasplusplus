@@ -96,42 +96,44 @@ function smasPWing.remainingFlightTimer(p)
 end
 
 function smasPWing.drawPWingHud()
-    local pWingFrame = math.floor((lunatime.tick() / smasPWing.frameSpeed) % 2)
-    if not smasPWing.isFlying(player) then
-        if smasPWing.runningCounter(player) >= 0 and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.2) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 0, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.2) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.4) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.4) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.6) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.6) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.8) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.8) and smasPWing.runningCounter(player) < smasPWing.pSpeedCounters[player.character] then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif smasPWing.runningCounter(player) == smasPWing.pSpeedCounters[player.character] then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+    if smasHud.visible.pWing then
+        local pWingFrame = math.floor((lunatime.tick() / smasPWing.frameSpeed) % 2)
+        if not smasPWing.isFlying(player) then
+            if smasPWing.runningCounter(player) >= 0 and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.2) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 0, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.2) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.4) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.4) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.6) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.6) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.8) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.8) and smasPWing.runningCounter(player) < smasPWing.pSpeedCounters[player.character] then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif smasPWing.runningCounter(player) == smasPWing.pSpeedCounters[player.character] then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            end
+        else
+            if (smasPWing.remainingFlightTimer(player) >= 0 and smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.2) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.2) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.4) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.4) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.6) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.6) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.8) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.8) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character]) then
+                Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+            end
         end
-    else
-        if (smasPWing.remainingFlightTimer(player) >= 0 and smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.2) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.2) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.4) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.4) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.6) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.6) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.8) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.8) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character]) then
-            Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
-        end
-    end
-    if (smasPWing.canStartFlying(player) or smasPWing.isFlying(player)) then
-        if pWingFrame == 1 then
-            Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 80, 24, 16, smasPWing.priority)
+        if (smasPWing.canStartFlying(player) or smasPWing.isFlying(player)) then
+            if pWingFrame == 1 then
+                Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 80, 24, 16, smasPWing.priority)
+            else
+                Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 96, 24, 16, smasPWing.priority)
+            end
         else
             Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 96, 24, 16, smasPWing.priority)
         end
-    else
-        Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 96, 24, 16, smasPWing.priority)
     end
 end
 
@@ -151,18 +153,16 @@ end
 
 function smasPWing.onDraw()
     if not SaveData.disableX2char then
-        if smasHud.visible.pWing then
-            if smasCharacterCostumes.currentCostume.playersList ~= nil then
-                for _,p in ipairs(smasCharacterCostumes.currentCostume.playersList) do
-                    local data = smasCharacterCostumes.currentCostume.playerData[p]
-                    if data.pSpeed ~= nil and not Misc.isPaused() and not smasPWing.leafPowerups[player.powerup] then
-                        smasPWing.drawPWingHud()
-                    end
+        if smasCharacterCostumes.currentCostume.playersList ~= nil then
+            for _,p in ipairs(smasCharacterCostumes.currentCostume.playersList) do
+                local data = smasCharacterCostumes.currentCostume.playerData[p]
+                if data.pSpeed ~= nil and not Misc.isPaused() and not smasPWing.leafPowerups[player.powerup] then
+                    smasPWing.drawPWingHud()
                 end
             end
-            if smasPWing.leafPowerups[player.powerup] and not Misc.isPaused() then
-                smasPWing.drawPWingHud()
-            end
+        end
+        if smasPWing.leafPowerups[player.powerup] and not Misc.isPaused() then
+            smasPWing.drawPWingHud()
         end
     end
 end
