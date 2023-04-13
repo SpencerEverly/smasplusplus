@@ -87,6 +87,16 @@ function smasSMB1System.onTick()
     if table.icontains(smasTables.__smb1Levels,Level.filename()) then
         for _,p in ipairs(Player.get()) do
             if smasSMB1System.checkpointCoordinates[Level.filename()] ~= nil then
+                if smasSMB1System.debug then
+                    Graphics.drawBox{
+                        x = smasSMB1System.checkpointCoordinates[Level.filename()].x,
+                        y = smasSMB1System.checkpointCoordinates[Level.filename()].y - smasSMB1System.areaToCoverUpwards,
+                        width = 32,
+                        height = 600,
+                        sceneCoords = true,
+                        color = Color.lightgreen..0.5,
+                    }
+                end
                 if Collisionz.CheckCollisionNoEntity(smasSMB1System.checkpointCoordinates[Level.filename()].x, smasSMB1System.checkpointCoordinates[Level.filename()].y - smasSMB1System.areaToCoverUpwards, 32, 600, p.x, p.y, p.width, p.height) and not smasSMB1System.checkpointCoordinates[Level.filename()].crossed then
                     if smasSMB1System.debug then
                         Sound.playSFX(58)
@@ -98,6 +108,16 @@ function smasSMB1System.onTick()
             end
             if smasSMB1System.correctPathCoordinates[Level.filename()] ~= nil then
                 for i = 1,#smasSMB1System.correctPathCoordinates[Level.filename()].rightPath do
+                    if smasSMB1System.debug then
+                        Graphics.drawBox{
+                            x = smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].x,
+                            y = smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].y,
+                            width = 32,
+                            height = smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].sizeY,
+                            sceneCoords = true,
+                            color = Color.green..0.5,
+                        }
+                    end
                     if Collisionz.CheckCollisionNoEntity(smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].x, smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].y, 32, smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].sizeY, p.x, p.y, p.width, p.height) and not smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].passed then
                         Sound.playSFX(151)
                         smasSMB1System.correctPathCoordinates[Level.filename()].rightPath[i].passed = true
@@ -106,6 +126,16 @@ function smasSMB1System.onTick()
             end
             if smasSMB1System.correctPathCoordinates[Level.filename()] ~= nil then
                 for i = 1,#smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath do
+                    if smasSMB1System.debug then
+                        Graphics.drawBox{
+                            x = smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].x,
+                            y = smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].y,
+                            width = 32,
+                            height = smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].sizeY,
+                            sceneCoords = true,
+                            color = Color.red..0.5,
+                        }
+                    end
                     if Collisionz.CheckCollisionNoEntity(smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].x, smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].y, 32, smasSMB1System.correctPathCoordinates[Level.filename()].wrongPath[i].sizeY, p.x, p.y, p.width, p.height) then
                         Sound.playSFX(152)
                         smasNoTurnBack.reviveOriginalBoundaries()
