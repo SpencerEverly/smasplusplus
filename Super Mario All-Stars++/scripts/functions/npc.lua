@@ -395,10 +395,8 @@ end
 
 function NPC.countSpecificNPC(id)
     local NPCFinalCount = 0
-    for k,v in ipairs(NPC.get()) do
-        if v.id == id and v.isValid then
-            NPCFinalCount = NPCFinalCount + 1
-        end
+    for k,v in NPC.iterate(id) do
+        NPCFinalCount = NPCFinalCount + 1
     end
     return NPCFinalCount
 end
