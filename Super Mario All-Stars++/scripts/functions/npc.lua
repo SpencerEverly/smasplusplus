@@ -1,6 +1,7 @@
 local Npc = {}
 
 local lineguide = require("lineguide")
+local inspect = require("ext/inspect")
 
 Npc.hasSavedClasses = false
 
@@ -392,6 +393,29 @@ function NPC.getPlayerHarmedNPC(p)
     return touchedNPCs
 end
 
+function NPC.countSpecificNPC(id)
+    local NPCFinalCount = 0
+    for k,v in ipairs(NPC.get()) do
+        if v.id == id and v.isValid then
+            NPCFinalCount = NPCFinalCount + 1
+        end
+    end
+    return NPCFinalCount
+end
+
+function NPC.countAllNPCs()
+    local allNPCCount = {}
+    local npcCount = NPC.count() - 1
+    for i = 1,1000 do
+        if NPC.countSpecificNPC(i) ~= 0 then
+            allNPCCount[i] = 0
+        end
+    end
+    for i = 0,npcCount do
+        allNPCCount[NPC(i).id] = NPC.countSpecificNPC(NPC(i).id)
+    end
+    return allNPCCount
+end
 
 
 

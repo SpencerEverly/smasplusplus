@@ -416,15 +416,9 @@ do
     local split = string.split
     local find = string.find
     local function _print(str, x, y)
-        if not isOverworld then
-            local textLayout = textplus.layout(str, nil, doprint)
-            y = y - textLayout.height
-            textplus.render{x = x, y = y, layout = textLayout, priority = 0}
-        elseif isOverworld then
-            local textLayout = textplus.layout(str, nil, doprint)
-            y = y - textLayout.height
-            textplus.render{x = x, y = y, layout = textLayout, priority = 10}
-        end
+        local textLayout = textplus.layout(str, nil, doprint)
+        y = y - textLayout.height
+        textplus.render{x = x, y = y, layout = textLayout, priority = 9.9}
     end
     local printlist = {}
     local listidx = 1
@@ -442,7 +436,7 @@ do
         if repll.active then
             GameData.toggleoffkeys = true
         end
-        Graphics.drawScreen({color = repll.background, priority = -1})
+        Graphics.drawScreen({color = repll.background, priority = 9.8})
         local buffer
         if find(repll.buffer, "\n") then
             buffer = split(repll.buffer, "\n")
