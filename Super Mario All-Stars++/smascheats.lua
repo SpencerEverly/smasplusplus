@@ -805,6 +805,15 @@ for k,v in ipairs(Cheats.listCheats()) do
     smasCheats.timeWhenCheatExecuted[v] = 0
 end
 
+function smasCheats.checkCheatStatusAndDisable()
+    for k,v in ipairs(Cheats.listCheats()) do
+        if Cheats.get(v).active then
+            Cheats.trigger(v) --To disable them if active
+        end
+    end
+    Cheats.enabled = false
+end
+
 function smasCheats.onDraw()
     if Cheats.get("redigitiscool").active or Cheats.get("spencereverlyiscool").active then
         Misc.cheatBuffer("")

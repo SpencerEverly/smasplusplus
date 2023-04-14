@@ -768,7 +768,11 @@ function Playur.findAnimation(p) --This function returns the name of the custom 
     if Playur.isOnGround(p) then
         -- GROUNDED ANIMATIONS --
         if p.speedX == 0 and p.speedY == 0 then
-            return "stance"
+            if p.holdingNPC ~= nil then
+                return "holding"
+            else
+                return "stance"
+            end
         end
 
         if isShooting then

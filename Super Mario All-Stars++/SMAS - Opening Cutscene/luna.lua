@@ -15,7 +15,7 @@ smasHud.visible.starcoins = false
 smasHud.visible.timer = false
 smasHud.visible.customitembox = false
 
-Cheats.enabled = false
+smasCheats.checkCheatStatusAndDisable()
 
 local bgone = true
 local bgtwo = false

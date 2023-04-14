@@ -133,7 +133,7 @@ end
 
 --The rest will disable most cheats to avoid breaking the intro. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
-Cheats.enabled = false
+smasCheats.checkCheatStatusAndDisable()
 
 function onExit()
     smasBooleans.overrideMusicVolume = false

@@ -1,17 +1,17 @@
 local Img = {}
 
+local playerManager = require("playerManager")
+
 Img.loadedImages = {}
 Img.loadedImagesRegistered = {}
 
 function Img.load(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
-    local file = File.load(name) or File.load(name..".png")
+    local file = File.load(name)
     if file then
-        return Graphics.loadImageResolved(name)
-            or Graphics.loadImageResolved("costumes/" .. name)
-            or Graphics.loadImageResolved("graphics/" .. name)
-            or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
+        return Graphics.loadImageResolved(file)
+    else
+        return Graphics.loadImageResolved("graphics/stock-0.png")
     end
-    return nil
 end
 
 function Img.loadCharacterHitBoxes(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
@@ -23,26 +23,29 @@ function Img.loadCharacterHitBoxes(name) --This will not only check the main SMB
     elseif SaveData.currentCostume ~= "N/A" then
         return File.load("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
     end
-    return nil
 end
 
 function Img.loadDefaultCharacterImage()
-    return (Graphics.loadImageResolved(playerManager.getName(player.character).."-"..player.powerup..".png")
-        or Graphics.loadImageResolved("config/character_defaults/"..playerManager.getName(player.character).."-"..player.powerup..".png")
+    return (File.load(playerManager.getName(player.character).."-"..player.powerup..".png")
+        or File.load("config/character_defaults/"..playerManager.getName(player.character).."-"..player.powerup..".png")
     )
 end
 
-function Img.loadCharacter(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
-    local file = File.load(name) or File.load(name..".png")
-    if file and SaveData.currentCostume == "N/A" then
-        return Graphics.loadImageResolved(name)
-            or Graphics.loadImageResolved("costumes/" .. name)
-            or Graphics.loadImageResolved("graphics/" .. name)
-            or Graphics.loadImageResolved("___MainUserDirectory/" .. name)
-    elseif file and SaveData.currentCostume ~= "N/A" then
-        return Graphics.loadImageResolved("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..name)
+function Img.loadCharacter(name)
+    if SaveData.currentCostume ~= "N/A" then
+        local file = File.load("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
+        if file then
+            return Graphics.loadImage(file)
+        else
+            file = Img.loadDefaultCharacterImage()
+            return Graphics.loadImage(file)
+        end
+    else
+        local file = Img.loadDefaultCharacterImage()
+        if file then
+            return Graphics.loadImage(file)
+        end
     end
-    return nil
 end
 
 function Img.saveImageData(name)
@@ -149,6 +152,14 @@ function Img.drawToSceneWP(name, x, y, arg6, arg7)
     end
 
     Graphics.drawImageToSceneWP(Img.loadedImages[name], x, y, arg7, arg6)
+end
+
+function Img.getImageWidth(image)
+    return image.width
+end
+
+function Img.getImageHeight(image)
+    return image.height
 end
 
 return Img

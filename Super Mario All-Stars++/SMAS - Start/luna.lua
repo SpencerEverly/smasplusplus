@@ -311,7 +311,7 @@ end
 
 --The rest of the code will disable cheats to avoid breaking the pre-boot level. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
-Cheats.enabled = false
+smasCheats.checkCheatStatusAndDisable()
 
 function onExit()
     Audio.MusicVolume(65)

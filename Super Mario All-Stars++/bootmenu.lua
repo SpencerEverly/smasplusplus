@@ -1414,7 +1414,7 @@ end
 --The rest of the code will disable cheats to avoid breaking the main menu. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
 if bootmenu.active then
-    Cheats.enabled = false
+    smasCheats.checkCheatStatusAndDisable()
 end
 
 

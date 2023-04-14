@@ -1,7 +1,7 @@
 local File = {}
 
 function File.load(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
-    return Misc.resolveFile(name)
+    return (Misc.resolveFile(name)
         or Misc.resolveFile("_OST/" .. name)
         or Misc.resolveFile("_OST/_Sound Effects/"..name)
         or Misc.resolveFile("costumes/" .. name)
@@ -9,6 +9,7 @@ function File.load(name) --This will not only check the main SMBX2 folders, but 
         or Misc.resolveFile("graphics/" .. name)
         or Misc.resolveFile("sound/" .. name)
         or Misc.resolveFile("___MainUserDirectory/" .. name)
+    )
 end
 
 function File.writeToFile(name, text) --Write to a file using io. This will overwrite everything with the text specified, so BE CAREFUL!

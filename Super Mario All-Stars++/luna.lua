@@ -85,6 +85,7 @@ _G.smasSpencerFollower = require("smasSpencerFollower")
 _G.smasCharacterChanger = require("smasCharacterChanger")
 _G.smasFireballs = require("smasFireballs")
 _G.smasPWing = require("smasPWing")
+--_G.smasPlayerRendererSystem = require("smasPlayerRendererSystem")
 
 --Then we do everything else.
 GameData.levelMusicTemporary = {}
