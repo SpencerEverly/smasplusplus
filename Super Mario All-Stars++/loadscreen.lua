@@ -186,7 +186,6 @@ package.path = package.path .. ";./scripts/?.lua"
 -- Address of the first player's character. Equivalent to 'player.character', except the player class doesn't exist in loading screens
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = mem(0x00B2C61C, FIELD_STRING)
-Misc.setLoadScreenTimeout(3)
 
 local image = Graphics.loadImage("loadscreen.png")
 local blackscreen = Graphics.loadImage("black-screen.png")

@@ -1242,11 +1242,11 @@ function bootmenu.onDraw()
         
         if pfpimage then
             if SaveData.playerPfp == nil then
-                sprite.draw{texture = Graphics.loadImageResolved("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
+                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
             elseif SaveData.playerPfp then
-                sprite.draw{texture = Graphics.loadImageResolved("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -7}
+                sprite.draw{texture = Img.load("___MainUserDirectory/"..SaveData.playerPfp..""), width = 40, height = 40, x = 10, y = 555, priority = -7}
             elseif unexpected_condition then
-                sprite.draw{texture = Graphics.loadImageResolved("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
+                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
             end
         end
         if playernamebyImg then

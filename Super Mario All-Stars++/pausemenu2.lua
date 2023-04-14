@@ -1148,11 +1148,11 @@ function pausemenu2.onDraw()
             textplus.print{x = 20, y = 564, text = "<color red>Current costume: "..costtext.."</color>", font = pausefont3, priority = 7.4, xscale = 1.2, yscale = 1.2}
             textplus.print{x = 20, y = 582, text = "<color yellow>"..Misc.getActualLevelName().."</color>", font = pausefont3, priority = 7.4, xscale = 1.2, yscale = 1.2}
             if SaveData.playerPfp == nil then
-                sprite.draw{texture = Graphics.loadImageResolved("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
+                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
             elseif SaveData.playerPfp then
-                sprite.draw{texture = Graphics.loadImageResolved("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
+                sprite.draw{texture = Img.load("___MainUserDirectory/"..SaveData.playerPfp..""), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
             elseif unexpected_condition then
-                sprite.draw{texture = Graphics.loadImageResolved("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
+                sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
             end
             if SaveData.playerName == nil then
                 textplus.print{x = 105, y = 518, text = "<color rainbow>Player</color>", font = pausefont3, priority = 7.4, xscale = 1.5, yscale = 1.5}

@@ -1,5 +1,7 @@
 local smasCameraControl = {}
 
+local autoscroll = require("autoscroll")
+
 smasCameraControl.ticksUntilYouCanPressLeftOrRight = lunatime.toTicks(2) --For holding alt-run + alt-jump
 smasCameraControl.timerUpdatable = 0
 smasCameraControl.canPanCamera = false
@@ -75,16 +77,18 @@ end
 
 function smasCameraControl.onTick()
     if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then
-        if player.keys.altJump and player.keys.altRun then
-            smasCameraControl.timerUpdatable = smasCameraControl.timerUpdatable + 1
-            if smasCameraControl.timerUpdatable >= smasCameraControl.ticksUntilYouCanPressLeftOrRight then
-                smasCameraControl.canPanCamera = true
+        for i = 0,20 do
+            if player.keys.altJump and player.keys.altRun then
+                smasCameraControl.timerUpdatable = smasCameraControl.timerUpdatable + 1
+                if smasCameraControl.timerUpdatable >= smasCameraControl.ticksUntilYouCanPressLeftOrRight and not autoscroll.isSectionScrolling(i) then
+                    smasCameraControl.canPanCamera = true
+                else
+                    smasCameraControl.canPanCamera = false
+                end
             else
+                smasCameraControl.timerUpdatable = 0
                 smasCameraControl.canPanCamera = false
             end
-        else
-            smasCameraControl.timerUpdatable = 0
-            smasCameraControl.canPanCamera = false
         end
         if smasCameraControl.isPanningCamera then
             smasCameraControl.panTimer = smasCameraControl.panTimer + 5

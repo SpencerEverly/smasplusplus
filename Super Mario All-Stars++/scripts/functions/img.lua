@@ -6,9 +6,9 @@ Img.loadedImages = {}
 Img.loadedImagesRegistered = {}
 
 function Img.load(name) --This will not only check the main SMBX2 folders, but will also check for other common SMAS++ directories
-    local file = File.load(name)
+    local file = File.load(name) or File.load(name..".png")
     if file then
-        return Graphics.loadImageResolved(file)
+        return Graphics.loadImage(file)
     else
         return Graphics.loadImageResolved("graphics/stock-0.png")
     end
