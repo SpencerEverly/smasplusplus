@@ -52,6 +52,7 @@ function SMB1HardModeToggle()
 end
 
 function dependencies.onStart()
+    smasBooleans.isInLevel = true
     if table.icontains(smasTables.__smb1Levels,Level.filename()) == true then
         for k,v in NPC.iterate{89,23,27,24,173,175,176,177,172,174,612} do
             if SaveData.SMB1HardModeActivated then

@@ -34,6 +34,7 @@ _G.smasNPCSystem = require("smasNPCSystem")
 _G.smas2PlayerSystem = require("smas2PlayerSystem")
 _G.smasResolutions = require("smasResolutions")
 _G.smasSMB1System = require("smasSMB1System")
+_G.smasCameraControl = require("smasCameraControl")
 
 if SMBX_VERSION == VER_SEE_MOD then
     smasOnlinePlay = require("smasOnlinePlay")

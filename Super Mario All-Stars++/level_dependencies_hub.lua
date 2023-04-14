@@ -90,6 +90,7 @@ function dependencies2.onCameraUpdate(c, camIdx)
 end
 
 function dependencies2.onStart()
+    smasBooleans.isInHub = true
     if Misc.inEditor() then
         debugbox = require("debugbox")
     end
