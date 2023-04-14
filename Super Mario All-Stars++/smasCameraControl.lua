@@ -2,7 +2,7 @@ local smasCameraControl = {}
 
 local autoscroll = require("autoscroll")
 
-smasCameraControl.ticksUntilYouCanPressLeftOrRight = lunatime.toTicks(2) --For holding alt-run + alt-jump
+smasCameraControl.ticksUntilYouCanPressLeftOrRight = lunatime.toTicks(1.5) --For holding alt-run + alt-jump
 smasCameraControl.timerUpdatable = 0
 smasCameraControl.canPanCamera = false
 smasCameraControl.camera = {
