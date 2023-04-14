@@ -26,6 +26,58 @@ function smas2PlayerSystem.onInitAPI()
     registerEvent(smas2PlayerSystem,"onCameraDraw")
 end
 
+function smas2PlayerSystem.dropClassicReserve(playerIdx)
+    Sound.playSFX(11)
+    
+    local B = 0
+    
+    if Player.count() >= 2 then
+        if (playerIdx == 1) then
+            B = -40
+        elseif (playerIdx == 2) then
+            B = 40
+        end
+        
+        local ScreenTop = camera.y
+        
+        if (camera.height > 600) then
+            ScreenTop = ScreenTop + camera.height / 2 - 300
+        end
+        
+        local CenterX = camera.x + camera.width / 2
+        
+        local reserveNPC = NPC.spawn(SaveData.reserveBoxItem[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
+        reserveNPC.x = CenterX - reserveNPC.width / 2 + B
+        reserveNPC.y = ScreenTop + 16 + 12
+        reserveNPC.speedX = 0
+        reserveNPC.speedY = 0
+        reserveNPC:mem(0x138, FIELD_WORD, 2)
+    else
+        if (playerIdx == 1) then
+            B = -40
+        elseif (playerIdx == 2) then
+            B = 40
+        end
+        
+        local ScreenTop = camera.y
+        
+        if (camera.height > 600) then
+            ScreenTop = ScreenTop + camera.height / 2 - 300
+        end
+        
+        local CenterX = camera.x + camera.width / 2
+        
+        local reserveNPC = NPC.spawn(SaveData.reserveBoxItem[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
+        reserveNPC.x = CenterX - reserveNPC.width / 2 + B + 40
+        reserveNPC.y = ScreenTop + 16 + 12 - 4
+        reserveNPC.speedX = 0
+        reserveNPC.speedY = 0
+        reserveNPC:mem(0x138, FIELD_WORD, 2)
+    end
+    
+    SaveData.reserveBoxItem[Player(playerIdx).idx] = 0
+end
+
 function smas2PlayerSystem.onDraw()
     if smasBooleans.targetPlayers then --If targeting players are enabled...
         for _,p in ipairs(Player.get()) do --Get all players
@@ -41,6 +93,7 @@ function smas2PlayerSystem.onDraw()
     end
     
     if SaveData.disableX2char then
+        
         if Player.count() >= 2 then
             local playerboundaryx = Player(2).x - player.x
             local playerboundaryy = Player(2).y - player.y
@@ -145,6 +198,13 @@ function smas2PlayerSystem.onTick()
                     if Player(2).forcedTimer == 1 then
                         Routine.run(smas2PlayerSystem.doorTeleportP1toP2)
                     end
+                end
+            end
+        end
+        if SaveData.disableX2char then
+            if smasBooleans.isInLevel or smasBooleans.isInHub then
+                if p.keys.dropItem == KEYS_PRESSED then
+                    smas2PlayerSystem.dropClassicReserve(p.idx)
                 end
             end
         end

@@ -268,7 +268,7 @@ local function drawCounterValue(value, x, y, priority)
 end
 
 local function renderHUD(camIndex, priority, isSplit)
-    if(mem(0x00B2C89C, FIELD_DWORD) ~= -1 and mem(0x00B2C620, FIELD_WORD) ~= -1 and mem(0x00B2C89C, FIELD_WORD) ~= -1) then
+    if(mem(0x00B2C89C, FIELD_DWORD) ~= -1 and mem(0x00B2C620, FIELD_WORD) ~= -1) then
         Graphics.drawVanillaHUD(camIndex, priority, isSplit);
     end
 end

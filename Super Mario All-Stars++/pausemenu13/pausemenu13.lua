@@ -248,7 +248,7 @@ function pausemenu13.onDraw()
             textplus.print{text = pausemenu13.menuText[2], x = menu_left_X, y = menu_top_Y + 1 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
             textplus.print{text = pausemenu13.menuText[3], x = menu_left_X, y = menu_top_Y + 2 * 36, priority = 7, xscale = 2, yscale = 2, font = pausemenu13.pauseFont}
         end
-        Graphics.drawImageWP(pausemenu13.pauseCursor, menu_left_X - 20, menu_top_Y + (pausemenu13.menuPosition * 36), -2)
+        Graphics.drawImageWP(pausemenu13.pauseCursor, menu_left_X - 20, menu_top_Y + (pausemenu13.menuPosition * 36), 7)
     end
     if showBlackScreen then
         Graphics.drawScreen{priority = 10, color = Color.black}

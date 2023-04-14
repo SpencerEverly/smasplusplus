@@ -888,7 +888,15 @@ function Playur.currentWarp(plr)
     return plr:mem(0x15E, FIELD_WORD)
 end
 
-for i = 1,maxPlayers do
+function Playur.isInSplitScreen()
+    return (mem(0x00B25130, FIELD_WORD) == 5)
+end
+
+function Playur.splitScreenType()
+    return mem(0x00B25132, FIELD_WORD)
+end
+
+--[[for i = 1,maxPlayers do
     Playur[i] = {}
     Playur[i].x                       = 0
     Playur[i].y                       = 0
@@ -929,6 +937,6 @@ for i = 1,maxPlayers do
     Playur[i].sliding                 = false
     Playur[i].dead                    = false
     Playur[i].stoned                  = false
-end
+end]]
 
 return Playur
