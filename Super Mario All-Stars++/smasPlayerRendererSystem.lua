@@ -6,23 +6,47 @@ function smasPlayerRendererSystem.onInitAPI()
     registerEvent(smasPlayerRendererSystem,"onDraw")
 end
 
-smasPlayerRendererSystem.playerSettings = player:getCurrentPlayerSetting()
-smasPlayerRendererSystem.frameBoxMax = 100
-smasPlayerRendererSystem.currentCharacterImages = {}
-smasPlayerRendererSystem.currentCharacterImages[player.idx] = {}
+--Each box needs how much a sprite should max out to.
+smasPlayerRendererSystem.frameBoxMaxWidth = 100
+smasPlayerRendererSystem.frameBoxMaxHeight = 100
 
-smasPlayerRendererSystem.frame = 1
-smasPlayerRendererSystem.frameSpeed = 6
-smasPlayerRendererSystem.priority = -25
-smasPlayerRendererSystem.pipePrioirity = -70
+--This here is for how much rows and columns the frame boxes should be.
+smasPlayerRendererSystem.frameBoxRowsTopToBottom = 30
+smasPlayerRendererSystem.frameBoxRowsLeftToRight = 30
 
-smasPlayerRendererSystem.dimensions = {
-    width = 1000,
-    height = 1000,
-    totalFrames = 100,
-}
+--The total frames for the frame box.
+smasPlayerRendererSystem.frameBoxTotalFrames = 300
 
-smasPlayerRendererSystem.animationsSmall = {
+--The total size for the sprite sheet in total.
+smasPlayerRendererSystem.frameBoxTotalSizeWidth = 3000
+smasPlayerRendererSystem.frameBoxTotalSizeHeight = 3000
+
+--The current row and column for the animation frame.
+smasPlayerRendererSystem.currentRow = 1
+smasPlayerRendererSystem.currentColumn = 1
+
+--Create the table for the player info...
+smasPlayerRendererSystem.playerInfo = {}
+
+--The frame to use for the player. Default is 1.
+smasPlayerRendererSystem.playerInfo.frame = 1
+
+--Frame speed for the player. This will be updated automatically.
+smasPlayerRendererSystem.playerInfo.frameSpeed = 4
+
+--For updating the speed of the player.
+smasPlayerRendererSystem.playerInfo.animationFramed = 0
+
+--The priorities for normal uses and pipe warping.
+smasPlayerRendererSystem.playerInfo.priority = -25
+smasPlayerRendererSystem.playerInfo.priorityPipe = -70
+
+--The table where it will store the player images.
+smasPlayerRendererSystem.playerInfo.images = {}
+smasPlayerRendererSystem.playerInfo.images[player.idx] = {}
+
+--Default small animation table for animations.
+smasPlayerRendererSystem.playerInfo.animationsSmall = {
     standing = {1},
     walking = {1,2},
     jumping = {3},
@@ -40,8 +64,8 @@ smasPlayerRendererSystem.animationsSmall = {
     swimming = {41,42,43,42},
     yoshiRideDuck = {31},
 }
-
-smasPlayerRendererSystem.animationsBig = {
+--Default big animation table for animations.
+smasPlayerRendererSystem.playerInfo.animationsBig = {
     standing = {1},
     walking = {1,2,3,2},
     jumping = {4},
@@ -69,7 +93,7 @@ smasPlayerRendererSystem.animationsBig = {
 }
 
 for i = 1,7 do
-    smasPlayerRendererSystem.currentCharacterImages[player.idx][i] = Img.loadCharacter(playerManager.getName(player.character).."-"..tostring(i)..".png")
+    smasPlayerRendererSystem.playerInfo.images[player.idx][i] = Img.loadCharacter("states/"..playerManager.getName(player.character).."-"..tostring(i)..".png")
 end
 
 function smasPlayerRendererSystem.convertPlayerFrameX(f, direction)
@@ -128,11 +152,33 @@ function smasPlayerRendererSystem.getPlayerHitboxHeightWithDucking(plr)
     end
 end
 
+--These will be filled out on smasCharacterInfo.lua
+smasPlayerRendererSystem.playerInfo.playerSettings = {}
+
+--X coordinate of the player.
+smasPlayerRendererSystem.playerInfo.playerSettings.x = 0
+--Y coordinate of the player.
+smasPlayerRendererSystem.playerInfo.playerSettings.y = 0
+--Width of the player's hitbox.
+smasPlayerRendererSystem.playerInfo.playerSettings.width = 0
+--Height of the player's hitbox.
+smasPlayerRendererSystem.playerInfo.playerSettings.height = 0
+--Height (When ducking) of the player's hitbox. In this system, the duck height will be centered along the bottom of the original height hitbox.
+smasPlayerRendererSystem.playerInfo.playerSettings.heightDuck = 0
+--Grab offset (X)
+smasPlayerRendererSystem.playerInfo.playerSettings.grabOffsetX = 0
+--Grab offset (Y)
+smasPlayerRendererSystem.playerInfo.playerSettings.grabOffsetY = 0
+--Player offset (X)
+smasPlayerRendererSystem.playerInfo.playerSettings.offsetX = 0
+--Player offset (Y)
+smasPlayerRendererSystem.playerInfo.playerSettings.offsetY = 0
+
 function smasPlayerRendererSystem.getPlayerPriority()
     if player.forcedState == FORCEDSTATE_PIPE then
-        return smasPlayerRendererSystem.pipePriority
+        return smasPlayerRendererSystem.playerInfo.priorityPipe
     else
-        return smasPlayerRendererSystem.priority
+        return smasPlayerRendererSystem.playerInfo.priority
     end
 end
 
@@ -140,130 +186,116 @@ function smasPlayerRendererSystem.getAnimation()
     if player.character >= 1 and player.character <= 2 then
         if player.powerup == 1 then
             if Playur.findAnimation(player) == "stance" then
-                return smasPlayerRendererSystem.animationsSmall.standing
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.standing
             elseif Playur.findAnimation(player) == "walkSmall" then
-                return smasPlayerRendererSystem.animationsSmall.walking
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.walking
             elseif Playur.findAnimation(player) == "runSmall" then
-                return smasPlayerRendererSystem.animationsSmall.walking
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.walking
             elseif Playur.findAnimation(player) == "holding" then
-                return smasPlayerRendererSystem.animationsSmall.holding
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.holding
             elseif Playur.findAnimation(player) == "walkHolding" or Playur.findAnimation(player) == "runHolding" then
-                return smasPlayerRendererSystem.animationsSmall.holdWalking
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.holdWalking
             elseif Playur.findAnimation(player) == "jump" then
-                return smasPlayerRendererSystem.animationsSmall.jumping
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.jumping
             elseif Playur.findAnimation(player) == "runJump" then
-                return smasPlayerRendererSystem.animationsSmall.jumping
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.jumping
             elseif Playur.findAnimation(player) == "fall" then
-                return smasPlayerRendererSystem.animationsSmall.jumping
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.jumping
             elseif Playur.findAnimation(player) == "skidding" then
-                return smasPlayerRendererSystem.animationsSmall.skidding
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.skidding
             elseif Playur.findAnimation(player) == "lookUp" then
-                return smasPlayerRendererSystem.animationsSmall.standing
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.standing
             elseif Playur.findAnimation(player) == "lookUpHolding" then
-                return smasPlayerRendererSystem.animationsSmall.holding
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.holding
             elseif Playur.findAnimation(player) == "warpUp" or Playur.findAnimation(player) == "warpDown" then
-                return smasPlayerRendererSystem.animationsSmall.front
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.front
             elseif Playur.findAnimation(player) == "mountedOnYoshi" then
-                return smasPlayerRendererSystem.animationsSmall.yoshiRide
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.yoshiRide
             elseif Playur.findAnimation(player) == "spinJump" then
-                return smasPlayerRendererSystem.animationsSmall.spinJump
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.spinJump
             elseif Playur.findAnimation(player) == "climbing" then
-                return smasPlayerRendererSystem.animationsSmall.climb
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.climb
             elseif Playur.findAnimation(player) == "sliding" then
-                return smasPlayerRendererSystem.animationsSmall.slide
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.slide
             elseif Playur.findAnimation(player) == "grabFromTop" then
-                return smasPlayerRendererSystem.animationsSmall.grabbing
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.grabbing
             elseif Playur.findAnimation(player) == "door" then
-                return smasPlayerRendererSystem.animationsSmall.back
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.back
             elseif Playur.findAnimation(player) == "swimIdle" then
-                return smasPlayerRendererSystem.animationsSmall.idleSwim
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.idleSwim
             elseif Playur.findAnimation(player) == "swimStroke" or Playur.findAnimation(player) == "swimStrokeSmall" then
-                return smasPlayerRendererSystem.animationsSmall.swimming
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.swimming
             else
-                return smasPlayerRendererSystem.animationsSmall.standing
+                return smasPlayerRendererSystem.playerInfo.animationsSmall.standing
             end
         else
             if Playur.findAnimation(player) == "stance" then
-                return smasPlayerRendererSystem.animationsBig.standing
+                return smasPlayerRendererSystem.playerInfo.animationsBig.standing
             elseif Playur.findAnimation(player) == "walk" then
-                return smasPlayerRendererSystem.animationsBig.walking
+                return smasPlayerRendererSystem.playerInfo.animationsBig.walking
             elseif Playur.findAnimation(player) == "run" then
                 if player.powerup == 4 or player.powerup == 5 then
-                    return smasPlayerRendererSystem.animationsBig.leafRun
+                    return smasPlayerRendererSystem.playerInfo.animationsBig.leafRun
                 else
-                    return smasPlayerRendererSystem.animationsBig.walking
+                    return smasPlayerRendererSystem.playerInfo.animationsBig.walking
                 end
             elseif Playur.findAnimation(player) == "holding" then
-                return smasPlayerRendererSystem.animationsBig.holding
+                return smasPlayerRendererSystem.playerInfo.animationsBig.holding
             elseif Playur.findAnimation(player) == "walkHolding" or Playur.findAnimation(player) == "runHolding" then
-                return smasPlayerRendererSystem.animationsBig.holdWalking
+                return smasPlayerRendererSystem.playerInfo.animationsBig.holdWalking
             elseif Playur.findAnimation(player) == "jump" then
-                return smasPlayerRendererSystem.animationsBig.jumping
+                return smasPlayerRendererSystem.playerInfo.animationsBig.jumping
             elseif Playur.findAnimation(player) == "runJump" then
                 if player.powerup == 4 or player.powerup == 5 then
-                    return smasPlayerRendererSystem.animationsBig.leafFlyJump
+                    return smasPlayerRendererSystem.playerInfo.animationsBig.leafFlyJump
                 else
-                    return smasPlayerRendererSystem.animationsBig.jumping
+                    return smasPlayerRendererSystem.playerInfo.animationsBig.jumping
                 end
             elseif Playur.findAnimation(player) == "fall" then
-                return smasPlayerRendererSystem.animationsBig.falling
+                return smasPlayerRendererSystem.playerInfo.animationsBig.falling
             elseif Playur.findAnimation(player) == "skidding" then
-                return smasPlayerRendererSystem.animationsBig.skidding
+                return smasPlayerRendererSystem.playerInfo.animationsBig.skidding
             elseif Playur.findAnimation(player) == "lookUp" then
-                return smasPlayerRendererSystem.animationsBig.standing
+                return smasPlayerRendererSystem.playerInfo.animationsBig.standing
             elseif Playur.findAnimation(player) == "lookUpHolding" then
-                return smasPlayerRendererSystem.animationsBig.holding
+                return smasPlayerRendererSystem.playerInfo.animationsBig.holding
             elseif Playur.findAnimation(player) == "warpUp" or Playur.findAnimation(player) == "warpDown" then
-                return smasPlayerRendererSystem.animationsBig.front
+                return smasPlayerRendererSystem.playerInfo.animationsBig.front
             elseif Playur.findAnimation(player) == "mountedOnYoshi" then
-                return smasPlayerRendererSystem.animationsBig.yoshiRide
+                return smasPlayerRendererSystem.playerInfo.animationsBig.yoshiRide
             elseif Playur.findAnimation(player) == "tailAttack" or Playur.findAnimation(player) == "spinJump" or Playur.findAnimation(player) == "spinjumpSidwaysToad" then
-                return smasPlayerRendererSystem.animationsBig.spinJump
+                return smasPlayerRendererSystem.playerInfo.animationsBig.spinJump
             elseif Playur.findAnimation(player) == "climbing" then
-                return smasPlayerRendererSystem.animationsBig.climb
+                return smasPlayerRendererSystem.playerInfo.animationsBig.climb
             elseif Playur.findAnimation(player) == "sliding" then
-                return smasPlayerRendererSystem.animationsBig.slide
+                return smasPlayerRendererSystem.playerInfo.animationsBig.slide
             elseif Playur.findAnimation(player) == "grabFromTop" then
-                return smasPlayerRendererSystem.animationsBig.grabbing
+                return smasPlayerRendererSystem.playerInfo.animationsBig.grabbing
             elseif Playur.findAnimation(player) == "door" then
-                return smasPlayerRendererSystem.animationsBig.back
+                return smasPlayerRendererSystem.playerInfo.animationsBig.back
             elseif Playur.findAnimation(player) == "swimIdle" then
-                return smasPlayerRendererSystem.animationsBig.idleSwim
+                return smasPlayerRendererSystem.playerInfo.animationsBig.idleSwim
             elseif Playur.findAnimation(player) == "swimStroke" or Playur.findAnimation(player) == "swimStrokeSmall" then
-                return smasPlayerRendererSystem.animationsBig.swimming
+                return smasPlayerRendererSystem.playerInfo.animationsBig.swimming
             elseif Playur.findAnimation(player) == "leafFly" then
-                return smasPlayerRendererSystem.animationsBig.leafFly
+                return smasPlayerRendererSystem.playerInfo.animationsBig.leafFly
             elseif Playur.findAnimation(player) == "slowFall" or Playur.findAnimation(player) == "runJumpLeafDown" or Playur.findAnimation(player) == "runSlowFall" then
-                return smasPlayerRendererSystem.animationsBig.leafSlowFall
+                return smasPlayerRendererSystem.playerInfo.animationsBig.leafSlowFall
             elseif Playur.findAnimation(player) == "shootAir" or Playur.findAnimation(player) == "shootWater" or Playur.findAnimation(player) == "shootGround" then
-                return smasPlayerRendererSystem.animationsBig.fireball
+                return smasPlayerRendererSystem.playerInfo.animationsBig.fireball
             else
-                return smasPlayerRendererSystem.animationsBig.standing
+                return smasPlayerRendererSystem.playerInfo.animationsBig.standing
             end
         end
     end
 end
 
-smasPlayerRendererSystem.playerYActualWidth = 0  
-smasPlayerRendererSystem.playerXActualWidth = 0
-smasPlayerRendererSystem.playerSourceX = 0
-smasPlayerRendererSystem.playerSourceY = 0
-
-smasPlayerRendererSystem.animateFramed = 1
-
 function smasPlayerRendererSystem.onDraw()
     if not SaveData.disableX2char then
-        smasPlayerRendererSystem.animateFramed = math.floor((lunatime.tick() / smasPlayerRendererSystem.frameSpeed) % #smasPlayerRendererSystem.getAnimation() + 1)
-        
-        smasPlayerRendererSystem.playerXActualWidth = player.x + (player.width / 2) - (smasPlayerRendererSystem.getPlayerHitboxWidth() / 2)
-        smasPlayerRendererSystem.playerYActualWidth = player.y + (player.height / 2) + (smasPlayerRendererSystem.getPlayerHitboxHeightWithDucking(player) / 2)
-        
-        smasPlayerRendererSystem.playerSourceX = (math.floor(((smasPlayerRendererSystem.getAnimation()[smasPlayerRendererSystem.animateFramed]) - 1) / 10) + 5) * smasPlayerRendererSystem.frameBoxMax
-        smasPlayerRendererSystem.playerSourceY = ((smasPlayerRendererSystem.getAnimation()[smasPlayerRendererSystem.animateFramed]) - 1) % 10* smasPlayerRendererSystem.frameBoxMax
+        smasPlayerRendererSystem.playerInfo.animationFramed = math.floor((lunatime.tick() / smasPlayerRendererSystem.playerInfo.frameSpeed) % #smasPlayerRendererSystem.getAnimation() + 1)
         
         
-        if player.mount == 0 then
-            Graphics.drawBox{
+            --[[Graphics.drawBox{
                 texture             = smasPlayerRendererSystem.currentCharacterImages[player.idx][player.powerup],
                 sceneCoords         = true,
                 x                   = player.x - smasPlayerRendererSystem.convertPlayerFrameX(smasPlayerRendererSystem.getAnimation()[smasPlayerRendererSystem.animateFramed], 1),
@@ -276,8 +308,7 @@ function smasPlayerRendererSystem.onDraw()
                 sourceHeight        = smasPlayerRendererSystem.frameBoxMax,
                 centered            = false,
                 priority            = smasPlayerRendererSystem.getPlayerPriority(),
-            }
-        end
+            }]]
     end
 end
 

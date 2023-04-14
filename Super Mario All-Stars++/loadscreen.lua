@@ -9,7 +9,9 @@ local letterWidths = {
 }
 
 local EP_LIST_PTR = mem(0x00B250FC, FIELD_DWORD)
+local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = _episodePath
+local Player = {}
  
 do
     -- The following code makes the loading screen slightly less restricted
@@ -72,6 +74,21 @@ do
  
     Misc.resolveGraphicsFile = Misc.resolveFile -- good enough lol
     
+    Player.count = (function()
+        return mem(0x00B2595E, FIELD_WORD)
+    end)
+    
+    Player.character = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0xF0),FIELD_WORD) --Player character
+    Player.powerup = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0x112),FIELD_WORD) --Player powerup
+    Player.frame = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0x114),FIELD_WORD) --Player frame
+    Player.direction = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0x106),FIELD_WORD) --Player frame
+    Player.x = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0xC0),FIELD_DFLOAT) --Player x
+    Player.y = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0xC8),FIELD_DFLOAT) --Player y
+    Player.width = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0xD0),FIELD_DFLOAT) --Player width
+    Player.height = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0xD8),FIELD_DFLOAT) --Player height
+    Player.mount = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0x108),FIELD_WORD) --Player mount
+    Player.mountColor = mem(mem(0x00B25A20,FIELD_DWORD) + (0x184 + 0x10A),FIELD_WORD) --Player mount color
+    
     -- Make require work better
     local oldRequire = require
  
@@ -85,7 +102,6 @@ do
  
         return oldRequire(path)
     end
- 
  
     -- classexpender stuff
     function string.split(s, p, exclude, plain)
@@ -183,8 +199,6 @@ do
 end
 
 package.path = package.path .. ";./scripts/?.lua"
--- Address of the first player's character. Equivalent to 'player.character', except the player class doesn't exist in loading screens
-local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = mem(0x00B2C61C, FIELD_STRING)
 
 local image = Graphics.loadImage("loadscreen.png")
@@ -244,7 +258,7 @@ function onDraw()
         text = "Loadtimer: "..tostring(loadingTimer)
     }
 
-    local message = mem(FIRST_PLAYER_CHARACTER_ADDR,FIELD_WORD)
+    local message = Player.character
     local widths = letterWidths[message]
 
     if widths == nil then

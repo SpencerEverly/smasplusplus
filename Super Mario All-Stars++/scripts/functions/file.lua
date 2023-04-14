@@ -12,6 +12,30 @@ function File.load(name) --This will not only check the main SMBX2 folders, but 
     )
 end
 
+function File.readFromDefaultCharacterDirectory(name)
+    return (File.load(name)
+        or File.load("config/character_defaults/"..name)
+    )
+end
+
+function File.readFromCharacterDirectory(name)
+    if SaveData.currentCostume ~= "N/A" then
+        local file = File.load("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/states/"..name)
+        if file then
+            return file
+        else
+            file = File.readFromDefaultCharacterDirectory(name)
+            return file
+        end
+    else
+        local file = File.readFromDefaultCharacterDirectory(name)
+        if file then
+            return file
+        end
+    end
+    return nil
+end
+
 function File.writeToFile(name, text) --Write to a file using io. This will overwrite everything with the text specified, so BE CAREFUL!
     name = Misc.resolveFile(name)
     if name == nil then
