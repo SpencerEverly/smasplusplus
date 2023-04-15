@@ -1,9 +1,7 @@
 --SMAS++ MAIN MENU
 --Code by Spencer Everly, MrDoubleA, and others
 
-local bootmenu = {}
-
-bootmenu.versionnumber = "Demo 3" --This is the version number of this episode. It can be changed to any version we're on.
+local smasMainMenu = {}
 
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
@@ -17,57 +15,30 @@ local hearthover = require("hearthover") --Require hearthover to disable it
 local sprite = require("base/sprite")
 local aw = require("anotherwalljump")
 
+_G.smasMainMenuSystem = require("smasMainMenuSystem")
+
 local ready = false
 
-local fontthree = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
-local menufont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
-local menufontwebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-website-textplus-1x.ini")
+smasMainMenu.sonicManiaFont = textplus.loadFont("littleDialogue/font/sonicMania-smallFont.ini")
+smasMainMenu.mainMenuFont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
+smasMainMenu.mainMenuFontWebsite = textplus.loadFont("littleDialogue/font/hardcoded-45-2-website-textplus-1x.ini")
 
-local smaslogo = Graphics.loadImageResolved("smaslogo.png")
-local smaslogojpn = Graphics.loadImageResolved("smaslogo-jpn.png")
-local pressstart = Graphics.loadImageResolved("pressstarttojump.png")
-local bluecurtains = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
-local redcurtains = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
-local orangecurtains = Graphics.loadImageResolved("theming_smbxcurtainsorange.png")
-local pressstartwide = Graphics.loadImageResolved("pressstarttojump-wide.png")
+smasMainMenu.smasLogoImg = Graphics.loadImageResolved("smaslogo.png")
+smasMainMenu.smasLogoJpnImg = Graphics.loadImageResolved("smaslogo-jpn.png")
 
-bootmenu.musicRng = {
-    [1] = "_OST/Mario & Luigi - Bowser's Inside Story/In the Final.ogg",
-    [2] = "_OST/Donkey Kong Country/20 Gang-Plank Galleon.spc|0;g=2.5",
-    [3] = "_OST/Kirby Air Ride/3d_machine.ogg",
-    [4] = "_OST/Dig Dug - Digging Strike/Horivalou.ogg",
-    [5] = "_OST/New Super Mario Bros. DS/Walking the Plains.ogg",
-    [6] = "_OST/Mario Kart 8 (Deluxe)/Wii Mushroom Gorge.ogg",
-    [7] = "_OST/Super Mario 64/Title Theme.ogg",
-    [8] = "_OST/Super Mario Bros/Underground.ogg",
-    [9] = "_OST/Nintendo Land/J_Blf_night.w.48.dspadpcm.ogg",
-    [10] = "_OST/Super Mario All-Stars++ (Beta)/Battle Plains.ogg",
-    [11] = "_OST/Super Smash Bros. Brawl/W24 - Temple - Super Smash Bros. Melee.ogg",
-    [12] = "_OST/Super Mario Bros. 3 (NES, VRC6 by skydev) - OST.nsf|0;g=2.2",
-    [13] = "_OST/Vs. Super Mario Bros. (NES) - OST.nsf|20;g=2",
-    [14] = "_OST/Takeshi no Chousenjou - OST.nsf|0;g=1.7",
-    [15] = "_OST/Shovel Knight - OST.nsf|3;g=2",
-    [16] = "_OST/Mega Man 10 - OST.nsf|8;g=2",
-    [17] = "_OST/Super Smash Bros. Ultimate/Mario/a76_smo_finaldungeon.ogg",
-    [18] = "_OST/Super Mario Bros 2/Albatrosses.ogg",
-    [19] = "_OST/Super Mario Bros 2/Desert.ogg",
-    [20] = "_OST/Super Mario Bros 3/Sky Horizons.ogg",
-    [21] = "_OST/Satellaview BS-X/05 Town.spc|0;g=2.5",
-    [22] = "_OST/New Super Mario Bros. U (Deluxe)/STRM_BGM_CHIJOU.ogg",
-    [23] = "_OST/All Stars Menu/Boot Menu.ogg",
-    [24] = "_OST/Photo Channel (Wii)/Slideshow (Scenic).ogg",
-    [25] = "_OST/Star Fox/109 Corneria.spc|0;g=2.5",
-    [26] = "_OST/Super Mario Bros/Castle.ogg",
-}
+smasMainMenu.blueCurtainsImage = Graphics.loadImageResolved("theming_smbxcurtainsblue.png")
+smasMainMenu.redCurtainsImage = Graphics.loadImageResolved("theming_smbxcurtainsred.png")
+smasMainMenu.orangeCurtainsImage = Graphics.loadImageResolved("theming_smbxcurtainsorange.png")
 
-bootmenu.active = true
-bootmenu.menuactive = false
-bootmenu.intromodeactive = false
-bootmenu.battleModeLevel = 0
-bootmenu.themeSelected = 0
+smasMainMenu.active = true
+smasMainMenu.menuActive = false
+smasMainMenu.introModeActive = false
+smasMainMenu.battleModeLevel = 0
+smasMainMenu.themeSelected = 0
+smasMainMenu.enableMouseEnemyKilling = true
 
-if bootmenu.active then
-    smasBooleans.mainMenuActive = true
+if smasMainMenu.active then
+    smasBooleans.isOnMainMenu = true
     aw.enabled = false
     littleDialogue.cursorEnabled = false
     Graphics.activateHud(false)
@@ -88,40 +59,41 @@ if bootmenu.active then
     datetime.bottomright = true
     datetime.topright = false
     extrasounds.active = false
-    bootmenu.startedmenu = 0
+    smasMainMenu.startedmenu = 0
 end
 
 GameData.____holidayMenuEventEnded = false
 
-local aprilFools = false
-local aprilFoolsErrorImg = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
+smasMainMenu.aprilFools = false
+smasMainMenu.aprilFoolsErrorImg = Graphics.loadImageResolved("SMAS - Intro/aprilfools1.png")
 
-local Routine = require("routine")
+smasMainMenu.showVersionNumber = true
+smasMainMenu.showEscapeToQuitMessage = true
+smasMainMenu.showPlayerNameOnScreen = false
+smasMainMenu.showPFPImageOnScreen = false
+smasMainMenu.showWebsiteTextOnScreen = true
+smasMainMenu.hideGameSMBXAndSMBX2Credits = false
 
-local level = Level.filename()
-local m = RNG.randomInt(1,56-1)
+smasMainMenu.showLogoOnScreen = true
+smasMainMenu.showPressJumpText = true
 
-local versionactive = true
-local logo = true
-local website = true
-local pressjumpwords = true
-local active = false
-local active3 = false
-local charactercheck = false
-local keyinput1 = false
+smasMainMenu.showEasterEggMessage = false
+smasMainMenu.showP1ActiveCharacterOnScreen = false
+smasMainMenu.showStatusOf13ModeOnScreen = true
+smasMainMenu.showStatusOfMultiplayerOnScreen = true
+
+smasMainMenu.showWorldMapSkipMessage = false
+
+smasMainMenu.showBlackScreen = false
+
 local killed = false
-local active4 = false
-local escquit = true
-local playernamebyImg = false
-local pfpimage = false
-
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
 local function introExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
-    bootmenu.startedmenu = 0
+    smasMainMenu.startedmenu = 0
     if SaveData.openingComplete then
         Level.load("SMAS - Intro.lvlx")
     else
@@ -130,7 +102,7 @@ local function introExit()
 end
 
 local function battleRandomLevelSelect()
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = true
@@ -141,20 +113,20 @@ local function battleRandomLevelSelect()
 end
 
 local function battleLevelSelected()
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.battlemoderngactive = false
     GameData.enableBattleMode = true
     Routine.wait(0.4)
     Misc.saveGame()
-    Level.load(smasTables.__classicBattleModeLevels[bootmenu.battleModeLevel])
+    Level.load(smasTables.__classicBattleModeLevels[smasMainMenu.battleModeLevel])
 end
 
 
 
 local function startRushMode()
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     GameData.rushModeActive = true
@@ -166,8 +138,8 @@ end
 
 
 local function themeSelected()
-    SaveData.introselect = bootmenu.themeSelected
-    exitscreen = true
+    SaveData.introselect = smasMainMenu.themeSelected
+    smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     Routine.wait(0.4)
@@ -284,15 +256,15 @@ local function easterEgg() --SnooPINGAS I see? ._.
     Routine.wait(10, true)
     Sound.changeMusic("_OST/All Stars Secrets/ZZZ_Easter Egg.ogg", 0)
     Routine.wait(4.2, true)
-    active4 = true
+    smasMainMenu.showEasterEggMessage = true
 end
 
 local function FirstBoot1() --Welcome to SMAS++
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
     Routine.wait(1.5)
-    active = true
-    logo = false
-    pressjumpwords = false
+    smasMainMenu.hideGameSMBXAndSMBX2Credits = true
+    smasMainMenu.showLogoOnScreen = false
+    smasMainMenu.showPressJumpText = false
     Sound.changeMusic("_OST/All Stars Menu/Boot Menu (First Time Boot Menu).ogg", 0)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000001"), speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
@@ -300,9 +272,9 @@ end
 local function MigrateOldSave1() --Migration message
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
     Routine.wait(1.5)
-    active = true
-    logo = false
-    pressjumpwords = false
+    smasMainMenu.hideGameSMBXAndSMBX2Credits = true
+    smasMainMenu.showLogoOnScreen = false
+    smasMainMenu.showPressJumpText = false
     Sound.changeMusic("_OST/Photo Channel (Wii)/Slideshow (Scenic).ogg", 0)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000009"), pauses = false, updatesInPause = true})
 end
@@ -374,7 +346,7 @@ local function TimeFixInfo1()
 end
 
 local function FailsafeMessage1() --You died on the main menu
-    active = true
+    smasMainMenu.hideGameSMBXAndSMBX2Credits = true
     if SaveData.failsafeMessageOne then
         SaveData.failsafeMessageOne = false
     end
@@ -387,12 +359,12 @@ local function bootDialogue(resetMusic)
     if resetMusic == nil then
         resetMusic = false
     end
-    bootmenu.menuactive = true
-    active = true
-    active4 = false
-    pressjumpwords = false
-    playernamebyImg = false
-    pfpimage = false
+    smasMainMenu.menuActive = true
+    smasMainMenu.hideGameSMBXAndSMBX2Credits = true
+    smasMainMenu.showEasterEggMessage = false
+    smasMainMenu.showPressJumpText = false
+    smasMainMenu.showPlayerNameOnScreen = false
+    smasMainMenu.showPFPImageOnScreen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
     if resetMusic then
         Sound.restoreMusic(-1)
@@ -542,17 +514,6 @@ local function X2Char() --Game settings applied
         SaveData.disableX2char = false
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
     end
-end
-
-local function turnOnRngMusic() --Game settings applied
-    --[[SaveData.turnOnMainMenuMusicRng = not SaveData.turnOnMainMenuMusicRng
-    if SaveData.turnOnMainMenuMusicRng then
-        Sound.changeMusic(bootmenu.musicRng[rng.randomInt(1,#bootmenu.musicRng)], 0)
-    end
-    if not SaveData.turnOnMainMenuMusicRng then
-        Sound.restoreOriginalMusic(-1)
-    end]]
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
 end
 
 local function InputConfig1() --Config inputs
@@ -736,14 +697,14 @@ local function ExitDialogue(resetMusic, firstBootActive)
         firstBootActive = false
     end
     if not firstBootActive then
-        bootmenu.menuactive = false
-        active = false
-        logo = true
-        playernamebyImg = true
-        pfpimage = true
-        pressjumpwords = true
+        smasMainMenu.menuActive = false
+        smasMainMenu.hideGameSMBXAndSMBX2Credits = false
+        smasMainMenu.showLogoOnScreen = true
+        smasMainMenu.showPlayerNameOnScreen = true
+        smasMainMenu.showPFPImageOnScreen = true
+        smasMainMenu.showPressJumpText = true
         if SaveData.firstBootCompleted then
-            bootmenu.startedmenu = 0
+            smasMainMenu.startedmenu = 0
         end
         if Time.month() == 03 and Time.day() == 17 then
             stpatricksday = true
@@ -752,14 +713,14 @@ local function ExitDialogue(resetMusic, firstBootActive)
             Sound.restoreMusic(-1)
         end
     else
-        bootmenu.menuactive = false
-        playernamebyImg = true
-        pfpimage = true
-        active = false
-        logo = true
-        pressjumpwords = true
+        smasMainMenu.menuActive = false
+        smasMainMenu.showPlayerNameOnScreen = true
+        smasMainMenu.showPFPImageOnScreen = true
+        smasMainMenu.hideGameSMBXAndSMBX2Credits = false
+        smasMainMenu.showLogoOnScreen = true
+        smasMainMenu.showPressJumpText = true
         if SaveData.firstBootCompleted then
-            bootmenu.startedmenu = 0
+            smasMainMenu.startedmenu = 0
         end
         if Time.month() == 03 and Time.day() == 17 then
             stpatricksday = true
@@ -771,7 +732,7 @@ local function ExitDialogue(resetMusic, firstBootActive)
 end
 
 local function MusicReset()
-    bootmenu.menuactive = false
+    smasMainMenu.menuActive = false
     if Time.month() == 03 and Time.day() == 17 then
         stpatricksday = true
     end
@@ -779,7 +740,7 @@ local function MusicReset()
 end
 
 local function ExitGame1()
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     Sound.muteMusic(-1)
     Misc.saveGame()
     Routine.wait(0.4)
@@ -787,7 +748,7 @@ local function ExitGame1()
 end
 
 local function ExitGameNoSave()
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.exitEngine()
@@ -803,17 +764,17 @@ end
 local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
     Sound.playSFX("startsmasboot-executed.ogg")
     Sound.playSFX("startsmasboot-timerbeep.ogg")
-    active3 = true
-    logo = true
+    smasMainMenu.showWorldMapSkipMessage = true
+    smasMainMenu.showLogoOnScreen = true
     Routine.wait(1.0) --Each second play a sound
     Sound.playSFX("startsmasboot-timerbeep.ogg")
     Routine.wait(1.0)
     Sound.playSFX("startsmasboot-timerbeep.ogg")
     Routine.wait(1.0)
     Sound.playSFX("startsmasboot-fullyexecuted.ogg")
-    exitscreen = true --Black out everything
-    logo = false
-    active3 = false
+    smasMainMenu.showBlackScreen = true --Black out everything
+    smasMainMenu.showLogoOnScreen = false
+    smasMainMenu.showWorldMapSkipMessage = false
     autoscroll.scrollLeft(5000) --Make sure that autoscroll doesn't move the player when loading any other level by accident
     Sound.muteMusic(-1) --Change the music to nothing
     Routine.wait(0.5)
@@ -829,7 +790,7 @@ end
 
 local function BootCredits() --The credits lvl will probably be scrapped or not, depends
     Sound.muteMusic(-1)
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     SFX.play(14)
     Routine.wait(0.5)
     Level.load("SMAS - Credits.lvlx")
@@ -840,7 +801,7 @@ local function RestartSMASPlusPlus(clearSave) --This restarts SMAS++ entirely
         clearSave = false
     end
     Sound.muteMusic(-1)
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     Routine.wait(0.5)
     if clearSave then
         SysManager.clearSaveDataAndGameDataAndRestart()
@@ -852,7 +813,7 @@ local function RestartSMASPlusPlus(clearSave) --This restarts SMAS++ entirely
 end
 
 local function BootGameHelpPreExecute() --Boot the game help level, the boot menu version at least
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     Routine.wait(0.4)
@@ -862,7 +823,7 @@ local function BootGameHelpPreExecute() --Boot the game help level, the boot men
 end
 
 local function BootOnlinePreExecute() --Boot the Online Menu level
-    exitscreen = true
+    smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
     Routine.wait(0.4)
@@ -874,7 +835,7 @@ local function PigeonRaca1() --This executes the True Final Battle
     if player.keys.jump == KEYS_PRESSED then
         player.keys.jump = KEYS_UNPRESSED
         Routine.wait(4.5) --Wait until loading the True Final Battle cutscene...
-        bootmenu.startedmenu = 0
+        smasMainMenu.startedmenu = 0
         Level.load("SMAS - Raca's World (Part 0).lvlx")
     end
 end
@@ -886,14 +847,14 @@ local function foolsinapril() --April Fools event for 4/1 of any year
     Sound.playSFX("aprilfools.ogg")
     Routine.wait(2, true)
     Misc.unpause()
-    aprilFools = false
+    smasMainMenu.aprilFools = false
     GameData.musreset = true
-    logo = true
+    smasMainMenu.showLogoOnScreen = true
     datetime.bottomright = true
-    active = false
-    pressjumpwords = true
+    smasMainMenu.hideGameSMBXAndSMBX2Credits = false
+    smasMainMenu.showPressJumpText = true
     GameData.____holidayMenuEventEnded = true
-    bootmenu.startedmenu = 0
+    smasMainMenu.startedmenu = 0
 end
 
 local function SettingsSubmenu1()
@@ -919,25 +880,25 @@ end
 
 
 
-function bootmenu.onInitAPI() --This requires some libraries to start
-    registerEvent(bootmenu,"onExit")
-    registerEvent(bootmenu,"onStart")
-    registerEvent(bootmenu,"onTick")
-    registerEvent(bootmenu,"onTickEnd")
-    registerEvent(bootmenu,"onInputUpdate")
-    registerEvent(bootmenu,"onEvent")
-    registerEvent(bootmenu,"onDraw")
-    registerEvent(bootmenu,"onEvent")
-    registerEvent(bootmenu,"onPlayerHarm")
-    registerEvent(bootmenu,"onPlayerKill")
+function smasMainMenu.onInitAPI() --This requires some libraries to start
+    registerEvent(smasMainMenu,"onExit")
+    registerEvent(smasMainMenu,"onStart")
+    registerEvent(smasMainMenu,"onTick")
+    registerEvent(smasMainMenu,"onTickEnd")
+    registerEvent(smasMainMenu,"onInputUpdate")
+    registerEvent(smasMainMenu,"onEvent")
+    registerEvent(smasMainMenu,"onDraw")
+    registerEvent(smasMainMenu,"onEvent")
+    registerEvent(smasMainMenu,"onPlayerHarm")
+    registerEvent(smasMainMenu,"onPlayerKill")
     
     local Routine = require("routine")
     
     ready = true --We're ready, so we can begin
 end
 
-function bootmenu.onStart()
-    if bootmenu.active then
+function smasMainMenu.onStart()
+    if smasMainMenu.active then
         cursor.create()
         cursor.showCursor = true
         Audio.MusicVolume(nil) --Let the music volume reset
@@ -959,20 +920,20 @@ function bootmenu.onStart()
         end
         if not GameData.saveDataMigrated then
             Routine.run(MigrateOldSave1)
-            bootmenu.startedmenu = 1
+            smasMainMenu.startedmenu = 1
         end
         if SaveData.firstBootCompleted == nil then
             SaveData.firstBootCompleted = false --If starting for the first time, first boot will happen
         end
         if not SaveData.firstBootCompleted and GameData.saveDataMigrated and not SaveData.failsafeMessageOne then
             Routine.run(FirstBoot1)
-            bootmenu.startedmenu = 1
+            smasMainMenu.startedmenu = 1
         end
         if SaveData.firstBootCompleted and GameData.saveDataMigrated and not SaveData.failsafeMessageOne then
             GameData.playernameenterfirstboot = false
             Routine.run(easterEgg, true)
-            playernamebyImg = true
-            pfpimage = true
+            smasMainMenu.showPlayerNameOnScreen = true
+            smasMainMenu.showPFPImageOnScreen = true
         end
         if SaveData.failsafeMessageOne then
             Routine.run(FailsafeMessage1)
@@ -980,23 +941,15 @@ function bootmenu.onStart()
         if Time.month() == 12 and Time.day() == 25 then --Change the weather on Christmas Day to snow
             Section(0).effects.weather = WEATHER_SNOW
         end
-        if not SaveData.disableX2char then
-            x2noticecheck = active
-            x2noticecheckactive = not active
-        end
-        if SaveData.disableX2char then
-            x2noticecheck = not active
-            x2noticecheckactive = active
-        end
         Misc.saveGame()
         Defines.cheat_donthurtme = true --These are to prevent the player from dying
         Defines.cheat_shadowmario = true
-        hearthover.active = false --No hearthover on the bootmenu
+        hearthover.active = false --No hearthover on the smasMainMenu
         if Time.month() == 04 and Time.day() == 01 then --BSOD lmao
             if GameData.____holidayMenuEventExecuted == nil or not GameData.____holidayMenuEventExecuted and not GameData.____holidayMenuEventEnded then
-                bootmenu.startedmenu = 1
+                smasMainMenu.startedmenu = 1
             elseif GameData.____holidayMenuEventEnded == true then
-                bootmenu.startedmenu = 0
+                smasMainMenu.startedmenu = 0
             end
         end
         if Time.month() == 03 and Time.day() == 17 then --St. Patrick's Day event
@@ -1035,19 +988,19 @@ function bootmenu.onStart()
     end
 end
 
-function bootmenu.onTick()
-    if bootmenu.active then
+function smasMainMenu.onTick()
+    if smasMainMenu.active then
         if SaveData.firstBootCompleted == nil then
             SaveData.firstBootCompleted = false
         end
         if SaveData.firstBootCompleted == false then
-            bootmenu.startedmenu = 1
+            smasMainMenu.startedmenu = 1
         end
         if SaveData.firstBootCompleted == true then
             
         end
-        if bootmenu.startedmenu == nil then
-            bootmenu.startedmenu = 0
+        if smasMainMenu.startedmenu == nil then
+            smasMainMenu.startedmenu = 0
         end
         if GameData.reopenmenu then
             Routine.run(bootDialogue)
@@ -1071,25 +1024,13 @@ function bootmenu.onTick()
         end
         Graphics.activateHud(false)
         littleDialogue.defaultStyleName = "bootmenudialog" --Change the text box to the SMBX 1.3 menu textbox format
-        if Player.count() == 1 then
-            twoplayercheck = active
-            twoplayercheckactive = not active
-        end
-        if Player.count() >= 2 then
-            twoplayercheck = not active
-            twoplayercheckactive = active
-        end
         if SaveData.disableX2char == nil then
             SaveData.disableX2char = false
         end
         if not SaveData.disableX2char then
-            x2noticecheck = active
-            x2noticecheckactive = not active
             smasHud.visible.lives = false
         elseif SaveData.disableX2char then
             smasHud.visible.lives = false
-            x2noticecheck = not active
-            x2noticecheckactive = active
             for _,p in ipairs(Player.get()) do
                 p.setCostume(1, nil)
                 p.setCostume(2, nil)
@@ -1109,36 +1050,36 @@ function bootmenu.onTick()
     end
 end
 
-function bootmenu.onPause(evt)
-    if bootmenu.active then
+function smasMainMenu.onPause(evt)
+    if smasMainMenu.active then
         evt.cancelled = true;
         isPauseMenuOpen = not isPauseMenuOpen
     end
 end
 
-function bootmenu.onInputUpdate()
-    if bootmenu.active then
+function smasMainMenu.onInputUpdate()
+    if smasMainMenu.active then
         player.keys.altJump = false
         player.keys.altRun = false
         player.keys.dropItem = false
-        if player.rawKeys.pause == KEYS_PRESSED and bootmenu.menuactive == false then
+        if player.rawKeys.pause == KEYS_PRESSED and smasMainMenu.menuActive == false then
             if SaveData.firstBootCompleted == true then
                 Routine.run(ExitGame1)
                 Sound.playSFX("littleDialogue/smbx13/choose.wav")
             end
         end
-        if bootmenu.startedmenu == 0 then
+        if smasMainMenu.startedmenu == 0 then
             if player.keys.jump == KEYS_PRESSED then
                 Routine.run(bootDialogue)
-                bootmenu.startedmenu = 1
+                smasMainMenu.startedmenu = 1
             end
         end
-        if bootmenu.startedmenu == 1 then
+        if smasMainMenu.startedmenu == 1 then
             if player.keys.jump == KEYS_PRESSED then
                 --Nothing
             end
         end
-        if bootmenu.startedmenu == 2 then
+        if smasMainMenu.startedmenu == 2 then
             if player.keys.jump == KEYS_PRESSED then
                 Sound.changeMusic("_OST/All Stars Menu/Boot Menu (Crash SFX).ogg", 0)
                 Section(player.section).effects.weather = WEATHER_NONE
@@ -1147,11 +1088,11 @@ function bootmenu.onInputUpdate()
                 x2noticecheck = false
                 twoplayercheck = false
                 twoplayercheckactive = false
-                versionactive = false
-                logo = false
+                smasMainMenu.showVersionNumber = false
+                smasMainMenu.showLogoOnScreen = false
                 datetime.bottomright = false
-                active = true
-                pressjumpwords = false
+                smasMainMenu.hideGameSMBXAndSMBX2Credits = true
+                smasMainMenu.showPressJumpText = false
                 Section(0).backgroundID = 6
                 Routine.run(PigeonRaca1)
             end
@@ -1159,13 +1100,13 @@ function bootmenu.onInputUpdate()
         if (Time.month() == 04 and Time.day() == 01) then
             if GameData.____holidayMenuEventExecuted == nil or GameData.____holidayMenuEventExecuted == false and GameData.____holidayMenuEventEnded == false then
                 if player.keys.jump == KEYS_PRESSED then
-                    bootmenu.startedmenu = 1
+                    smasMainMenu.startedmenu = 1
                     Sound.muteMusic(-1)
-                    logo = false
+                    smasMainMenu.showLogoOnScreen = false
                     datetime.bottomright = false
-                    active = true
-                    pressjumpwords = false
-                    aprilFools = true
+                    smasMainMenu.hideGameSMBXAndSMBX2Credits = true
+                    smasMainMenu.showPressJumpText = false
+                    smasMainMenu.aprilFools = true
                     Sound.playSFX("windows_error.ogg")
                     GameData.holidayrun = true
                     if GameData.holidayrun == true then
@@ -1182,13 +1123,13 @@ function bootmenu.onInputUpdate()
                 end
             end
         end
-        if bootmenu.startedmenu == 4 then
+        if smasMainMenu.startedmenu == 4 then
             if player.keys.jump == KEYS_PRESSED then
                 Level.load("SMAS - Start.lvlx")
             end
         end
         if SaveData.racaActivated then
-            bootmenu.startedmenu = 2
+            smasMainMenu.startedmenu = 2
         end
     end
 end
@@ -1215,21 +1156,21 @@ local function harmNPC(npc,...) -- npc:harm but it returns if it actually did an
     )
 end
 
-function bootmenu.onPlayerKill(e)
-    if bootmenu.active then
+function smasMainMenu.onPlayerKill(e)
+    if smasMainMenu.active then
         e.cancelled = true
     end
 end
 
-function bootmenu.onPlayerHarm(e)
-    if bootmenu.active then
+function smasMainMenu.onPlayerHarm(e)
+    if smasMainMenu.active then
         e.cancelled = true
     end
 end
 
-function bootmenu.onDraw()
-    if bootmenu.active then
-        if not bootmenu.intromodeactive then
+function smasMainMenu.onDraw()
+    if smasMainMenu.active then
+        if not smasMainMenu.introModeActive then
             for _,p in ipairs(Player.get()) do
                 p.forcedState = FORCEDSTATE_INVISIBLE --Prevent any player from showing up on the boot menu
                 p.x = camera.x + 450 - (p.width / 2) --Force all players somewhere to prevent deaths
@@ -1240,7 +1181,7 @@ function bootmenu.onDraw()
         local stpatricksday = false
         local hitNPCs = Colliders.getColliding{a = cursor.scenepos, b = hitNPCs, btype = Colliders.NPC}
         
-        if pfpimage then
+        if smasMainMenu.showPFPImageOnScreen then
             if SaveData.playerPfp == nil then
                 sprite.draw{texture = Img.load("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
             elseif SaveData.playerPfp then
@@ -1249,18 +1190,18 @@ function bootmenu.onDraw()
                 sprite.draw{texture = Img.load("pfp/pfp.png"), width = 40, height = 40, x = 10, y = 555, priority = -7}
             end
         end
-        if playernamebyImg then
+        if smasMainMenu.showPlayerNameOnScreen then
             if SaveData.playerName == nil then
-                textplus.print{x = 60, y = 569, text = "<color rainbow>Player</color>", font = fontthree, priority = -7, xscale = 1, yscale = 1}
+                textplus.print{x = 60, y = 569, text = "<color rainbow>"..SysManager.getDefaultPlayerUsername().."</color>", font = smasMainMenu.sonicManiaFont, priority = -7, xscale = 1, yscale = 1}
             else
-                textplus.print{x = 60, y = 569, text = "<color rainbow>"..SaveData.playerName.."</color>", font = fontthree, priority = -7, xscale = 1, yscale = 1}
+                textplus.print{x = 60, y = 569, text = "<color rainbow>"..SaveData.playerName.."</color>", font = smasMainMenu.sonicManiaFont, priority = -7, xscale = 1, yscale = 1}
             end
         end
         if Level.filename() == "intro_8bit.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_theeditedboss.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_S!TS!.lvlx" then
             --No curtains
@@ -1269,125 +1210,142 @@ function bootmenu.onDraw()
             --No curtains
         end
         if Level.filename() == "intro_SMBX1.0.lvlx" then
-            Graphics.drawImageWP(redcurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.redCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.1.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.2.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.3.lvlx" then
-            Graphics.drawImageWP(orangecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.orangeCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.3og.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_SMBX2.lvlx" then
             --No curtains
         end
         if Level.filename() == "intro_SMBX2b3.lvlx" then
-            Graphics.drawImageWP(orangecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.orangeCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_WSMBA.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_sunsetbeach.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_scrollingheights.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_jakebrito1.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_jakebrito2.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         if Level.filename() == "intro_circuitcity.lvlx" then
-            Graphics.drawImageWP(bluecurtains, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
         end
         
-        local rngspark = rng.randomInt(1,20)
-        local rngsparkmovement = rng.randomInt(1,1.2)
-        
-        if cursor.left == KEYS_DOWN then
-            Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedX = rngsparkmovement*0.5
-            Effect.spawn(80, cursor.sceneX + rngspark*0.5, cursor.sceneY + rngspark*0.5, player.section, false, true).speedY = rngsparkmovement*0.5
-            for _,npc in ipairs(hitNPCs) do
-                if npc ~= v and npc.id > 0 then
-                    -- Hurt the NPC, and make sure to not give the automatic score
-                    local oldScore = NPC.config[npc.id].score
-                    NPC.config[npc.id].score = 0
-                    NPC.config[npc.id].score = oldScore
-                    
-                    local hurtNPC = harmNPC(npc,HARM_TYPE_NPC)
-                    if hurtNPC then
-                        Misc.givePoints(0,{x = npc.x+npc.width*1.5,y = npc.y+npc.height*0.5},true)
+        if smasMainMenu.enableMouseEnemyKilling then
+            local rngSpark = rng.randomInt(1,20)
+            local rngSparkMovement = rng.randomInt(1,1.2)
+            
+            local randomValue = RNG.randomInt(1,6) - 1
+            
+            if cursor.left == KEYS_DOWN then
+                if randomValue >= 2 then
+                    local spark = Effect.spawn(80, cursor.sceneX, cursor.sceneY, player.section, false, true)
+                    spark.speedX = RNG.random() * 4 - 2
+                    spark.speedY = RNG.random() * 4 - 2
+                end
+                for _,npc in ipairs(hitNPCs) do
+                    if not NPC.config[npc.id].iscoin then
+                        -- Hurt the NPC, and make sure to not give the automatic score
+                        local oldScore = NPC.config[npc.id].score
+                        NPC.config[npc.id].score = 0
+                        
+                        local hurtNPC = harmNPC(npc,HARM_TYPE_NPC)
+                        
+                        if hurtNPC then
+                            Misc.givePoints(0,{x = npc.x+npc.width*1.5,y = npc.y+npc.height*0.5},true)
+                        end
+                    else
+                        -- Hurt the NPC, and make sure to not give the automatic score
+                        local oldScore = NPC.config[npc.id].score
+                        NPC.config[npc.id].score = 0
+                        
+                        local effect = Effect.spawn(78, npc.x, npc.y, player.section, false, true)
+                        
+                        local hurtNPC = harmNPC(npc,HARM_TYPE_NPC)
+                        
+                        if hurtNPC then
+                            Misc.givePoints(0,{x = npc.x+npc.width*1.5,y = npc.y+npc.height*0.5},true)
+                        end
                     end
                 end
             end
         end
-        if versionactive then
+        if smasMainMenu.showVersionNumber then
             Graphics.drawBox{x=710, y=5, width=84, height=28, color=Color.black..0.5, priority=-7}
-            textplus.print{x=718, y=10, text = bootmenu.versionnumber, priority=-6, color=Color.white, font=fontthree, xscale = 1.6, yscale = 1.6} --Version number of the episode
+            textplus.print{x=718, y=10, text = VersionOfEpisode, priority=-6, color=Color.white, font=smasMainMenu.sonicManiaFont, xscale = 1.6, yscale = 1.6} --Version number of the episode
         end
-        if escquit then
+        if smasMainMenu.showEscapeToQuitMessage then
             textplus.print{x=12, y=12, text = "Press pause to quit.", priority=-6, color=Color.yellow, xscale = 1.6, yscale = 1.6}
             Graphics.drawBox{x=5, y=5, width=148, height=28, color=Color.red..0.5, priority=-7}
         end
-        if pressjumpwords then
-            textplus.print{x=210, y=390, text = "Press jump to start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufont}
-            --Graphics.drawImageWP(pressstart, 150, 552, -4)
+        if smasMainMenu.showPressJumpText then
+            textplus.print{x=210, y=390, text = "Press jump to start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFont}
         end
-        if website then
-            textplus.print{x=30, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=menufontwebsite}
+        if smasMainMenu.showWebsiteTextOnScreen then
+            textplus.print{x=30, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFontWebsite}
         end
-        if logo then
+        if smasMainMenu.showLogoOnScreen then
             if SaveData.currentLanguage == "english" then
-                Graphics.drawImageWP(smaslogo, 176, 16, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoImg, 176, 16, -4)
             elseif SaveData.currentLanguage == "japanese" then
-                Graphics.drawImageWP(smaslogojpn, 106, 20, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoJpnImg, 106, 20, -4)
             else
-                Graphics.drawImageWP(smaslogo, 176, 16, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoImg, 176, 16, -4)
             end
         end
-        if exitscreen then
+        if smasMainMenu.showBlackScreen then
             Graphics.drawScreen{color = Color.black, priority = 10}
         end
-        if twoplayercheck then
-            textplus.print{x=243, y=10, text = "2 player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
+        if smasMainMenu.showStatusOfMultiplayerOnScreen then
+            if Player.count() == 1 then
+                textplus.print{x=243, y=10, text = "2 player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
+            elseif Player.count() >= 2 then
+                textplus.print{x=248, y=10, text = "2 player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
+            end
         end
-        if twoplayercheckactive then
-            textplus.print{x=248, y=10, text = "2 player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
+        if smasMainMenu.showStatusOf13ModeOnScreen then
+            if not SaveData.disableX2char then
+                textplus.print{x=243, y=26, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
+            elseif SaveData.disableX2char then
+                textplus.print{x=248, y=26, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
+            end
         end
-        if x2noticecheck then
-            textplus.print{x=243, y=26, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
-        end
-        if x2noticecheckactive then
-            textplus.print{x=248, y=26, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
-        end
-        if charactercheck then
+        if smasMainMenu.showP1ActiveCharacterOnScreen then
             textplus.print{x=303, y=20, text = "P1's Active Character: ", priority=-7, color=Color.yellow, font=statusFont}
         end
-        if not active then
+        if not smasMainMenu.hideGameSMBXAndSMBX2Credits then
             textplus.print{x=180, y=480, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red, xscale = 2, yscale = 2}
             textplus.print{x=178, y=477, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
             textplus.print{x=170, y=500, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red, xscale = 2, yscale = 2}
             textplus.print{x=168, y=497, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
         end
-        if active3 then
+        if smasMainMenu.showWorldMapSkipMessage then
             if SaveData.openingComplete then
                 textplus.print{x=40, y=450, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont, xscale = 1.5, yscale = 1.5}
             end
         end
-        if active4 then
+        if smasMainMenu.showEasterEggMessage then
             textplus.print{x=150, y=550, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
         end
-        if keyinput1 then
-            textplus.print{x=300, y=400, text = "Press the key that will assign the up button.", priority=0, color=Color.lightred, font=statusFont}
-        end
-        if aprilFools then    
+        if smasMainMenu.aprilFools then    
             Graphics.drawImageWP(aprilFoolsErrorImg, 0, 0, 0)
         end
         if stpatricksday then
@@ -1396,14 +1354,14 @@ function bootmenu.onDraw()
     end
 end
 
-function bootmenu.onExit()
-    if bootmenu.active then
+function smasMainMenu.onExit()
+    if smasMainMenu.active then
         Audio.MusicVolume(nil)
         autoscroll.unlockSection(0, 1)
         if SaveData.firstBootCompleted then
-            bootmenu.startedmenu = 0
+            smasMainMenu.startedmenu = 0
         elseif not SaveData.firstBootCompleted then
-            bootmenu.startedmenu = 1
+            smasMainMenu.startedmenu = 1
         end
         Defines.cheat_donthurtme = false
         Defines.cheat_shadowmario = false
@@ -1413,7 +1371,7 @@ end
 
 --The rest of the code will disable cheats to avoid breaking the main menu. They aren't categorized, but you can see a list here https://docs.codehaus.moe/#/features/cheats
 
-if bootmenu.active then
+if smasMainMenu.active then
     smasCheats.checkCheatStatusAndDisable()
 end
 
@@ -1444,7 +1402,6 @@ littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunc
 littleDialogue.registerAnswer("Options",{text = "Accessibility Options",chosenFunction = function() Routine.run(AccessibilityOptions1) end})
 littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
 littleDialogue.registerAnswer("Options",{text = "Manage Settings",chosenFunction = function() Routine.run(SettingsSubmenu1) end})
-littleDialogue.registerAnswer("Options",{text = "Resolution Settings",chosenFunction = function() Routine.run(SettingsSubmenu2) end})
 littleDialogue.registerAnswer("Options",{text = "Save Data Settings",chosenFunction = function() Routine.run(SaveOptions1) end})
 
 
@@ -1475,46 +1432,46 @@ littleDialogue.registerAnswer("AccessibilityStuff",{text = "Return to Previous M
 
 
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() bootmenu.themeSelected = 1 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() bootmenu.themeSelected = 6 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() bootmenu.themeSelected = 2 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() bootmenu.themeSelected = 3 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() bootmenu.themeSelected = 4 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() bootmenu.themeSelected = 9 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() bootmenu.themeSelected = 5 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() bootmenu.themeSelected = 10 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() bootmenu.themeSelected = 7 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() bootmenu.themeSelected = 8 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() bootmenu.themeSelected = 11 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() bootmenu.themeSelected = 12 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() bootmenu.themeSelected = 13 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() bootmenu.themeSelected = 14 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() bootmenu.themeSelected = 15 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() bootmenu.themeSelected = 16 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() bootmenu.themeSelected = 17 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Circuit Central (By RvBNut91)",chosenFunction = function() bootmenu.themeSelected = 18 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Metroid Prime 2 (By SilverDeoxys)",chosenFunction = function() bootmenu.themeSelected = 19 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() smasMainMenu.themeSelected = 1 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() smasMainMenu.themeSelected = 6 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() smasMainMenu.themeSelected = 2 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() smasMainMenu.themeSelected = 3 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() smasMainMenu.themeSelected = 4 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() smasMainMenu.themeSelected = 9 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() smasMainMenu.themeSelected = 5 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() smasMainMenu.themeSelected = 10 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() smasMainMenu.themeSelected = 7 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() smasMainMenu.themeSelected = 8 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() smasMainMenu.themeSelected = 11 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() smasMainMenu.themeSelected = 12 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() smasMainMenu.themeSelected = 13 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() smasMainMenu.themeSelected = 14 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() smasMainMenu.themeSelected = 15 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() smasMainMenu.themeSelected = 16 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() smasMainMenu.themeSelected = 17 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Circuit Central (By RvBNut91)",chosenFunction = function() smasMainMenu.themeSelected = 18 Routine.run(themeSelected) end})
+littleDialogue.registerAnswer("IntroTheme",{text = "Metroid Prime 2 (By SilverDeoxys)",chosenFunction = function() smasMainMenu.themeSelected = 19 Routine.run(themeSelected) end})
 littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
 
 
 littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 littleDialogue.registerAnswer("BattleLevelSelect",{text = "Random Level",chosenFunction = function() Routine.run(battleRandomLevelSelect) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battle Zone (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 1 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battleshrooms (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 2 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Classic Castle Battle (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 3 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Dry Dry Desert (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 4 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Hyrule Temple (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 5 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Invasion Battlehammer (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 6 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lakitu Mechazone (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 7 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lethal Lava Level (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 8 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Retroville Underground (SMBX 1.3.0.1)",chosenFunction = function() bootmenu.battleModeLevel = 9 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Slippy Slap Snowland (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 10 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Woody Warzone (SMBX 1.3)",chosenFunction = function() bootmenu.battleModeLevel = 11 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Sky High Into the Skies",chosenFunction = function() bootmenu.battleModeLevel = 12 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 1 (By hrthrdh)",chosenFunction = function() bootmenu.battleModeLevel = 13 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 2 (By hrthrdh)",chosenFunction = function() bootmenu.battleModeLevel = 14 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 3 (By hrthrdh)",chosenFunction = function() bootmenu.battleModeLevel = 15 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battle Zone (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 1 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battleshrooms (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 2 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Classic Castle Battle (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 3 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Dry Dry Desert (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 4 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Hyrule Temple (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 5 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Invasion Battlehammer (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 6 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lakitu Mechazone (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 7 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lethal Lava Level (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 8 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Retroville Underground (SMBX 1.3.0.1)",chosenFunction = function() smasMainMenu.battleModeLevel = 9 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Slippy Slap Snowland (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 10 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Woody Warzone (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 11 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "Sky High Into the Skies",chosenFunction = function() smasMainMenu.battleModeLevel = 12 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 1 (By hrthrdh)",chosenFunction = function() smasMainMenu.battleModeLevel = 13 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 2 (By hrthrdh)",chosenFunction = function() smasMainMenu.battleModeLevel = 14 Routine.run(battleLevelSelected) end})
+littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 3 (By hrthrdh)",chosenFunction = function() smasMainMenu.battleModeLevel = 15 Routine.run(battleLevelSelected) end})
 littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 
 
@@ -1775,4 +1732,4 @@ littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 
 littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
-return bootmenu
+return smasMainMenu

@@ -33,7 +33,7 @@ smasBooleans.musicMutedTemporary = false
 --This is set to true when 1.3 Mode multiplayer is on.
 smasBooleans.multiplayerActive = false
 --This is set when the main menu is active.
-smasBooleans.mainMenuActive = false
+smasBooleans.isOnMainMenu = false
 --This is set when Classic Battle Mode is active.
 smasBooleans.classicBattleModeActive = false
 --Whether a specified player has passed through the white sizable in SMB3 1-3. This only works on that level.

@@ -85,6 +85,9 @@ _G.numPlayers = 0
 _G.numWorldLevels = 0
 _G.numWorldMusic = 0
 
+--This is the version number of this episode. It can be changed to any version we're on.
+_G.VersionOfEpisode = "Demo 4"
+
 _G.NPC_Globals = {
     id = 0, --ID of the NPC (Type)
     x = 0, --X Position for the NPC

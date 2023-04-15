@@ -1,4 +1,4 @@
-if smasBooleans.mainMenuActive then return end
+if smasBooleans.isOnMainMenu then return end
 
 local undertaledepends = {}
 

@@ -1,4 +1,4 @@
-local bootmenu = require("bootmenu")
+local smasMainMenu = require("smasMainMenu")
 
 local rng = require("base/rng")
 

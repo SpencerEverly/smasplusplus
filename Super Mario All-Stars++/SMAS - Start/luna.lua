@@ -10,7 +10,7 @@ smasBooleans.disablePauseMenu = true
 
 GameData.gameFirstLoaded = true
 
-smasBooleans.mainMenuActive = false
+smasBooleans.isOnMainMenu = false
 debugbox.bootactive = false
 GameData.rushModeActive = false
 

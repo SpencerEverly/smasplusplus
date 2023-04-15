@@ -1,1 +1,1 @@
-local bootmenu = require("bootmenu")
+local smasMainMenu = require("smasMainMenu")

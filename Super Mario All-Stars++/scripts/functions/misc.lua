@@ -1030,6 +1030,10 @@ function Misc.storeLatestCostumeData(costumeLibrary)
     end
 end
 
+function Misc.checkSaveDataStatus(SaveDataVariable, value)
+    SaveDataVariable = SaveDataVariable or value
+end
+
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then

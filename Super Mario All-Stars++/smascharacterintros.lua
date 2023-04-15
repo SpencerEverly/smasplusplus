@@ -55,7 +55,7 @@ local currentCostume = player:getCostume()
 local costumes
 
 function smasCharacterIntros.onStart()
-    if not smasBooleans.mainMenuActive then
+    if not smasBooleans.isOnMainMenu then
         pauseplus = require("pauseplus")
     end
     local characters = {}

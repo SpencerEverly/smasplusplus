@@ -22,9 +22,7 @@ end]]
 
 console:println("Super Mario All-Stars++ loading initated.")
 
-if GameData.gameFirstLoaded == nil then
-    GameData.gameFirstLoaded = true
-end
+GameData.gameFirstLoaded = GameData.gameFirstLoaded or true
 
 --Make sure we aren't running Beta 3 and below before we actually start...
 if (SMBX_VERSION < VER_BETA4_PATCH_3) then
@@ -65,14 +63,13 @@ if Misc.setWindowIcon ~= nil then
 end
 
 --Now, before we get started, we require the most important libraries on the top.
-
 console:println("Loading important libraries...")
 
 --SMAS specific functions need to be required first:
 _G.smasGlobals = require("smasGlobals")
 _G.smasMemoryAddresses = require("smasMemoryAddresses")
-_G.smasKeySystem = require("smasKeySystem")
 _G.smasFunctions = require("smasFunctions")
+_G.smasKeySystem = require("smasKeySystem")
 _G.smasAnimationSystem = require("smasAnimationSystem")
 _G.smasVerboseMode = require("smasVerboseMode")
 _G.smasBooleans = require("smasBooleans")
@@ -85,7 +82,6 @@ _G.smasSpencerFollower = require("smasSpencerFollower")
 _G.smasCharacterChanger = require("smasCharacterChanger")
 _G.smasFireballs = require("smasFireballs")
 _G.smasPWing = require("smasPWing")
---_G.smasPlayerRendererSystem = require("smasPlayerRendererSystem")
 
 --Then we do everything else.
 GameData.levelMusicTemporary = {}
@@ -230,12 +226,8 @@ Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved(
 --First time SaveData settings, for resolutions and other settings
 
 --**Player-related data**
-if SaveData.currentCostume == nil then
-    SaveData.currentCostume = "N/A"
-end
-if SaveData.currentCharacterAlteration == nil then
-    SaveData.currentCharacterAlteration = "N/A"
-end
+SaveData.currentCostume = SaveData.currentCostume or "N/A"
+SaveData.currentCharacterAlteration = SaveData.currentCharacterAlteration or "N/A"
 
 --**Themes, resolutions**
 if SaveData.resolution == nil then --By default, the resolution will be set as fullscreen.

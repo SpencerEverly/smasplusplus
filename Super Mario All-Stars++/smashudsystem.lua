@@ -111,7 +111,7 @@ end
 function smasHudSystem.onPostBlockHit(block, fromUpper, playerornil) --Let's start off with block hitting.
     local bricksnormal = table.map{4,60,90,188,226,293} --These are a list of breakable bricks, without the Super Metroid breakable.
     local questionblocks = table.map{5,88,193,224} --A list of question mark blocks
-    if not smasBooleans.mainMenuActive then
+    if not smasBooleans.isOnMainMenu then
         if playerornil then
             if block.contentID == 1000 or block.contentID == 0 or playerornil.character == CHARACTER_TOAD or playerornil.character == CHARACTER_KLONOA then
                 SaveData.totalCoinsClassic = SaveData.totalCoinsClassic
@@ -132,7 +132,7 @@ function smasHudSystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
 end
 
 function smasHudSystem.onPostNPCKill(npc, harmtype, player) --This will add coins to the classic counter.
-    if not smasBooleans.mainMenuActive then
+    if not smasBooleans.isOnMainMenu then
         for _,p in ipairs(Player.get()) do
             
             
@@ -292,7 +292,7 @@ end
 
 function diedanimation(plr) --The entire animation when dying. The pause and sound is there to avoid not animating at all, but is IS a nice touch
     if smasHudSystem.activated then
-        if not smasBooleans.mainMenuActive then
+        if not smasBooleans.isOnMainMenu then
             if not Misc.inMarioChallenge() then
                 if not SaveData.disableX2char then
                     if not smasBooleans.classicBattleModeActive then
@@ -464,7 +464,7 @@ function smasHudSystem.onTick()
         SaveData.totalScoreClassic = 999999999
     end
     if not smasBooleans.classicBattleModeActive then
-        if (not smasBooleans.mainMenuActive and not GameData.gameFirstLoaded) then
+        if (not smasBooleans.isOnMainMenu and not GameData.gameFirstLoaded) then
             if Misc.score() ~= 0 then
                 SaveData.totalScoreClassic = SaveData.totalScoreClassic + Misc.score()
                 console:println(tostring(Misc.score()).." points earned.")

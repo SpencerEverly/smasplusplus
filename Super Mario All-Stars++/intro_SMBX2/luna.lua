@@ -1,4 +1,4 @@
-local bootmenu = require("bootmenu")
+local smasMainMenu = require("smasMainMenu")
 
 local m = RNG.randomInt(1,56-1)
 

@@ -1155,7 +1155,7 @@ function pausemenu2.onDraw()
                 sprite.draw{texture = Img.load("pfp/pfp.png"), width = 70, height = 70, x = 20, y = 490, priority = 7.7}
             end
             if SaveData.playerName == nil then
-                textplus.print{x = 105, y = 518, text = "<color rainbow>Player</color>", font = pausefont3, priority = 7.4, xscale = 1.5, yscale = 1.5}
+                textplus.print{x = 105, y = 518, text = "<color rainbow>"..SysManager.getDefaultPlayerUsername().."</color>", font = pausefont3, priority = 7.4, xscale = 1.5, yscale = 1.5}
             else
                 textplus.print{x = 105, y = 518, text = "<color rainbow>"..SaveData.playerName.."</color>", font = pausefont3, priority = 7.4, xscale = 1.5, yscale = 1.5}
             end

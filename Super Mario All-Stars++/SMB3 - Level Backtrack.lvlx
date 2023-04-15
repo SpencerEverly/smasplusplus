@@ -1,5 +1,5 @@
 HEAD
-TL:"Super Mario Bros. 3\: Level Backtrack";CPID:"SMBX2";
+TL:"Super Mario Bros. 3\: Level Backtrack";XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-192800;T:-200600;B:-200000;MZ:24;MF:"_OST/Shovel Knight - OST.nsf|1\;g=2.7";BG:46;

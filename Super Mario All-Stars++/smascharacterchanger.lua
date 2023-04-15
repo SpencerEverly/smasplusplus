@@ -191,7 +191,7 @@ function smasCharacterChanger.shutdownChanger() --The animation that shuts the m
     smasCharacterChanger.tvScrollNumber = -600
     smasCharacterChanger.animationTimer = 0
     ending = false
-    if smasBooleans.mainMenuActive then
+    if smasBooleans.isOnMainMenu then
         optionsMenu1()
     end
 end

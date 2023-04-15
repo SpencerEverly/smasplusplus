@@ -16,6 +16,7 @@ smasCameraControl.panAmount = 150
 smasCameraControl.isPanningCamera = false
 smasCameraControl.panTimer = 0
 smasCameraControl.normalPanTimer = smasCameraControl.panAmount
+smasCameraControl.mathClampedValue = 0
 
 function smasCameraControl.onInitAPI()
     registerEvent(smasCameraControl,"onCameraUpdate")
@@ -100,6 +101,25 @@ function smasCameraControl.onTick()
             if smasCameraControl.normalPanTimer <= 0 then
                 smasCameraControl.normalPanTimer = smasCameraControl.panAmount
                 smasCameraControl.isPanningCamera = false
+            end
+        end
+        if not smasCameraControl.isPanningCamera then
+            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
+                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panAmount, camera.x, camera.x)
+            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then
+                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panAmount, camera.x, camera.x)
+            end
+        else
+            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
+                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panTimer, camera.x, camera.x)
+            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then
+                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panTimer, camera.x, camera.x)
+            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.normal then
+                if smasCameraControl.cameraPreviousPan == smasCameraControl.camera.left then
+                    smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.normalPanTimer, camera.x, camera.x)
+                else
+                    smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.normalPanTimer, camera.x, camera.x)
+                end
             end
         end
     end
