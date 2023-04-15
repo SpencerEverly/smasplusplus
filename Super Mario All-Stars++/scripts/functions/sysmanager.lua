@@ -146,7 +146,7 @@ end
 
 function SysManager.scoreCount() --Returns the score count.
     if SaveData.totalScoreClassic == nil then
-        return Misc.score()
+        return 0
     else
         return SaveData.totalScoreClassic
     end
@@ -154,7 +154,7 @@ end
 
 function SysManager.scoreCountWithZeroes() --Returns the score count with zeroes.
     if SaveData.totalScoreClassic == nil then
-        return Misc.score()
+        return tostring(000000000)
     elseif SaveData.totalScoreClassic >= 0 then
         return string.format("%000000009d",tostring(SaveData.totalScoreClassic))
     elseif SaveData.totalScoreClassic >= 9 then
@@ -174,13 +174,13 @@ function SysManager.scoreCountWithZeroes() --Returns the score count with zeroes
     elseif SaveData.totalScoreClassic >= 99999999 then
         return string.format("%1d",tostring(SaveData.totalScoreClassic))
     elseif SaveData.totalScoreClassic >= 999999999 then
-        return SaveData.totalScoreClassic
+        return tostring(SaveData.totalScoreClassic)
     end
 end
 
 function SysManager.scoreCount13() --Returns the score count limited within 1.3 Mode's digit numbers.
     if SaveData.totalScoreClassic == nil then
-        return Misc.score()
+        return 0000000
     elseif SaveData.totalScoreClassic <= 9999999 then
         return SaveData.totalScoreClassic
     elseif SaveData.totalScoreClassic >= 9999999 then
@@ -190,7 +190,7 @@ end
 
 function SysManager.coinCountClassic() --Returns the classic coin count.
     if SaveData.totalCoinsClassic == nil then
-        return mem(0x00B2C5A8, FIELD_WORD)
+        return 0
     else
         return SaveData.totalCoinsClassic
     end

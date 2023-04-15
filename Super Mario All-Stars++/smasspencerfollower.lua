@@ -103,19 +103,19 @@ function smasSpencerFollower.getAnimation()
 end
 
 smasSpencerFollower.animateFramed = 1
-local animationTable = smasSpencerFollower.getAnimation()
+local animationTable = {}
 smasSpencerFollower.playerYActualWidth = 0
 smasSpencerFollower.playerXActualWidth = 0
 smasSpencerFollower.spencerCoordinateX = 0
 smasSpencerFollower.spencerDistance = 35
 
 function smasSpencerFollower.onDraw()
-    animationTable = smasSpencerFollower.getAnimation()
-    smasSpencerFollower.animateFramed = math.floor((lunatime.tick() / smasSpencerFollower.frameSpeed) % #smasSpencerFollower.getAnimation()) + 1
-    --smasSpencerFollower.playerYActualWidth = (player.y + (player.height / 2))
     if table.icontains(smasTables.__smbspencerLevels,Level.filename()) and smasSpencerFollower.enabled then
         if not SaveData.disableX2char then
             if not (SaveData.currentCostume == "00-SPENCEREVERLY") then
+                animationTable = smasSpencerFollower.getAnimation()
+                smasSpencerFollower.animateFramed = math.floor((lunatime.tick() / smasSpencerFollower.frameSpeed) % #smasSpencerFollower.getAnimation()) + 1
+                
                 smasSpencerFollower.playerYActualWidth = (player.screen.bottom + camera.y) - smasSpencerFollower.dimensions.height
                 
                 smasSpencerFollower.playerXActualWidth = player.x + (player.width / 2) - smasSpencerFollower.spencerCoordinateX

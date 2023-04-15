@@ -13,6 +13,10 @@ if GameData.levelMusic == nil then
     GameData.levelMusic = {}
 end
 
+if SaveData.currentCostume == nil then
+    SaveData.currentCostume = "N/A"
+end
+
 function Sound.onInitAPI()
     registerEvent(Sound,"onDraw")
 end

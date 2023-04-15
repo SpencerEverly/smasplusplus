@@ -14,6 +14,8 @@ local hasDied = false
 local textplus = require("textplus")
 local tplusnumberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
+local smasFunctions = require("smasFunctions")
+
 local textCache = {}
 local textCacheLifetime = 640
 local textCacheList = {}
@@ -726,11 +728,11 @@ function smasHud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
 end
 
 function smasHud.drawScore(splitOffset, thisCam, priority)
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         local scoreDisplay13 = tostring(SysManager.scoreCount13())
         Text.printWP(scoreDisplay13, 1, 0.5 * thisCam.width + smasHud.offsets.score.x + splitOffset - #scoreDisplay13 * 18 * smasHud.offsets.score.align, smasHud.offsets.score.y, priority)
-    elseif SaveData.disableX2char == false then
-        local scoreDisplay = SysManager.scoreCountWithZeroes()
+    elseif not SaveData.disableX2char then
+        local scoreDisplay = tostring(SysManager.scoreCountWithZeroes())
         Text.printWP(scoreDisplay, 1, 0.5 * thisCam.width + smasHud.offsets.score.x + splitOffset - #scoreDisplay * 18 * smasHud.offsets.score.align, smasHud.offsets.score.y, priority)
     end
 end
