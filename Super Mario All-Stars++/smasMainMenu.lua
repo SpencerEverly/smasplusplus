@@ -365,23 +365,26 @@ function bootDialogue(resetMusic)
     smasMainMenu.showPressJumpText = false
     smasMainMenu.showPlayerNameOnScreen = false
     smasMainMenu.showPFPImageOnScreen = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
-    --Sound.playSFX(14)
-    --smasMainMenuSystem.menuOpen = true
+    --littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
+    Sound.playSFX(14)
+    smasMainMenuSystem.menuOpen = true
     if resetMusic then
         Sound.restoreMusic(-1)
     end
 end
 
 function battleModeDialogue() --Minigames
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000015"), speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
 function optionsMenu1() --Options
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000016"), speakerName = "Options", pauses = false, updatesInPause = true})
 end
 
 function themeMenu1() --Intro theme menu
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000017"), speakerName = "Themes", pauses = false, updatesInPause = true})
 end
 
@@ -499,6 +502,7 @@ function ClockChange1() --Clock theme changed.
 end
 
 function credits1() --Credits
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000030"), speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
@@ -688,6 +692,7 @@ function EraseSave2()
 end
 
 function ExitDialogue(resetMusic, firstBootActive)
+    smasMainMenuSystem.menuOpen = false
     if resetMusic == nil then
         resetMusic = false
     end
@@ -738,6 +743,7 @@ function MusicReset()
 end
 
 function ExitGame1()
+    smasMainMenuSystem.menuOpen = false
     smasMainMenu.showBlackScreen = true
     Sound.muteMusic(-1)
     Misc.saveGame()
@@ -760,7 +766,7 @@ function SaveEraseStart()
 end
 
 function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
-    --smasMainMenuSystem.menuOpen = false
+    smasMainMenuSystem.menuOpen = false
     Sound.playSFX("startsmasboot-executed.ogg")
     Sound.playSFX("startsmasboot-timerbeep.ogg")
     smasMainMenu.showWorldMapSkipMessage = true
@@ -812,6 +818,7 @@ function RestartSMASPlusPlus(clearSave) --This restarts SMAS++ entirely
 end
 
 function BootGameHelpPreExecute() --Boot the game help level, the boot menu version at least
+    smasMainMenuSystem.menuOpen = false
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -831,7 +838,7 @@ function BootOnlinePreExecute() --Boot the Online Menu level
         Misc.saveGame()
         Level.load("SMAS - Online (Menu).lvlx")
     else
-        
+        Sound.playSFX(152)
     end
 end
 
@@ -1379,12 +1386,12 @@ if smasMainMenu.active then
     smasCheats.checkCheatStatusAndDisable()
 end
 
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN}
-
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu"}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = 1}
 
 smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
-smasMainMenuSystem.addMenuItem{name = "Minigames", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(battleModeDialogue) end}
+smasMainMenuSystem.addMenuItem{name = "Minigames", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(2, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Online Multiplayer", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootOnlinePreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Main Menu Themes", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(themeMenu1) end}
 smasMainMenuSystem.addMenuItem{name = "Settings/Options", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(optionsMenu1) end}
@@ -1394,17 +1401,11 @@ smasMainMenuSystem.addMenuItem{name = "Exit Game", section = smasMainMenuSystem.
 
 
 
-littleDialogue.registerAnswer("MainMenu",{text = "Start Game",chosenFunction = function() Routine.run(BootSMASPlusPlusPreExecute) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Load Game Help",chosenFunction = function() Routine.run(BootGameHelpPreExecute) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Minigames",chosenFunction = function() Routine.run(battleModeDialogue) end})
-if SMBX_VERSION == VER_SEE_MOD then
-    littleDialogue.registerAnswer("MainMenu",{text = "Online Multiplayer",chosenFunction = function() Routine.run(BootOnlinePreExecute) end})
-end
-littleDialogue.registerAnswer("MainMenu",{text = "Main Menu Themes",chosenFunction = function() Routine.run(themeMenu1) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Settings/Options",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Credits",chosenFunction = function() Routine.run(credits1) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Exit Main Menu",chosenFunction = function() Routine.run(ExitDialogue) end})
-littleDialogue.registerAnswer("MainMenu",{text = "Exit Game",chosenFunction = function() Routine.run(ExitGame1) end})
+
+smasMainMenuSystem.addMenuItem{name = "Classic Battle Mode (2P)", section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BattleModeDisEnable1) end}
+smasMainMenuSystem.addMenuItem{name = "Rush Mode (1P)", section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(RushModeMenu1) end}
+
+
 
 
 littleDialogue.registerAnswer("BattleSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
