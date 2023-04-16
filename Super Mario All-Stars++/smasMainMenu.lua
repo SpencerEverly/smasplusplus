@@ -379,8 +379,7 @@ function battleModeDialogue() --Minigames
 end
 
 function optionsMenu1() --Options
-    smasMainMenuSystem.menuOpen = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000016"), speakerName = "Options", pauses = false, updatesInPause = true})
+    
 end
 
 function themeMenu1() --Intro theme menu
@@ -695,6 +694,7 @@ end
 
 function ExitDialogue(resetMusic, firstBootActive)
     smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     if resetMusic == nil then
         resetMusic = false
     end
@@ -746,6 +746,7 @@ end
 
 function ExitGame1()
     smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     smasMainMenu.showBlackScreen = true
     Sound.muteMusic(-1)
     Misc.saveGame()
@@ -821,6 +822,7 @@ end
 
 function BootGameHelpPreExecute() --Boot the game help level, the boot menu version at least
     smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -833,6 +835,7 @@ end
 function BootOnlinePreExecute() --Boot the Online Menu level
     if SMBX_VERSION == VER_SEE_MOD then
         smasMainMenuSystem.menuOpen = false
+        Sound.playSFX(29)
         smasMainMenu.showBlackScreen = true
         autoscroll.scrollLeft(5000)
         Sound.muteMusic(-1)
@@ -1390,13 +1393,14 @@ end
 
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu"}
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = 1}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = 1}
 
 smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Minigames", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(2, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Online Multiplayer", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootOnlinePreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Main Menu Themes", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(themeMenu1) end}
-smasMainMenuSystem.addMenuItem{name = "Settings/Options", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(optionsMenu1) end}
+smasMainMenuSystem.addMenuItem{name = "Settings/Options", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Credits", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(credits1) end}
 smasMainMenuSystem.addMenuItem{name = "Exit Main Menu", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitDialogue) end}
 smasMainMenuSystem.addMenuItem{name = "Exit Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 9, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitGame1) end}
@@ -1410,19 +1414,16 @@ smasMainMenuSystem.addMenuItem{name = "Rush Mode (1P)", section = smasMainMenuSy
 
 
 
-littleDialogue.registerAnswer("BattleSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("BattleSelect",{text = "Classic Battle Mode (2P)",chosenFunction = function() Routine.run(BattleModeDisEnable1) end})
-littleDialogue.registerAnswer("BattleSelect",{text = "Rush Mode (1P)",chosenFunction = function() Routine.run(RushModeMenu1) end})
+smasMainMenuSystem.addMenuItem{name = "2 Player Mode", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(TwoPlayerDisEnable1) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX 1.3 Mode", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(X2DisableCheck1) end}
+smasMainMenuSystem.addMenuItem{name = "Input Configuration", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(InputConfig1) end}
+smasMainMenuSystem.addMenuItem{name = "Accessibility Options", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(AccessibilityOptions1) end}
+smasMainMenuSystem.addMenuItem{name = "Framerate Toggling", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanValue = SaveData.framerateEnabled}
+smasMainMenuSystem.addMenuItem{name = "Manage Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SettingsSubmenu1) end}
+smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SaveOptions1) end}
 
 
-littleDialogue.registerAnswer("Options",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("Options",{text = "2 Player Mode",chosenFunction = function() Routine.run(TwoPlayerDisEnable1) end})
-littleDialogue.registerAnswer("Options",{text = "SMBX 1.3 Mode",chosenFunction = function() Routine.run(X2DisableCheck1) end})
-littleDialogue.registerAnswer("Options",{text = "Input Configuration",chosenFunction = function() Routine.run(InputConfig1) end})
-littleDialogue.registerAnswer("Options",{text = "Accessibility Options",chosenFunction = function() Routine.run(AccessibilityOptions1) end})
-littleDialogue.registerAnswer("Options",{text = "Framerate Toggling",chosenFunction = function() Routine.run(FramerateToggle1) end})
-littleDialogue.registerAnswer("Options",{text = "Manage Settings",chosenFunction = function() Routine.run(SettingsSubmenu1) end})
-littleDialogue.registerAnswer("Options",{text = "Save Data Settings",chosenFunction = function() Routine.run(SaveOptions1) end})
+
 
 
 littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})

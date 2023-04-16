@@ -19,6 +19,7 @@ smasMainMenuSystem.menuTypes = {
 smasMainMenuSystem.menuSections = {
     SECTION_MAIN = 1,
     SECTION_MINIGAMES = 2,
+    SECTION_SETTINGS_MAIN = 3,
 }
 
 smasMainMenuSystem.menuItems = {}
@@ -80,9 +81,9 @@ function smasMainMenuSystem.addMenuItem(args)
     args.menuType = args.menuType or 1
     args.isFunction = args.isFunction or true
     args.functionToRun = args.functionToRun or (function() end)
-    args.booleanValue = args.booleanValue or nil
-    args.numberValue = args.numberValue or nil
-    args.maxNumber = args.maxNumber or nil
+    args.booleanValue = args.booleanValue or smasMainMenuSystem.noBooleanValue
+    args.numberValue = args.numberValue or 1
+    args.maxNumber = args.maxNumber or 1
     if smasMainMenuSystem.menuItems[args.section][args.sectionItem] == nil then
         smasMainMenuSystem.menuItems[args.section][args.sectionItem] = {}
     end
@@ -95,6 +96,7 @@ function smasMainMenuSystem.addMenuItem(args)
         booleanToUse = args.booleanValue,
         numberToUse = args.numberValue,
         maxNumber = args.maxNumber,
+        sectionItem = args.sectionItem,
     }
 end
 
@@ -232,11 +234,16 @@ function smasMainMenuSystem.onDraw()
                 local named = {}
                 
                 smasMainMenuSystem.layoutText[k] = textplus.layout(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name, 10)
+                local named2 = MenuCursor + 1
                 
                 if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].menuType == smasMainMenuSystem.menuTypes.MENU_SELECTABLE then
                     named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name
                 elseif smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].menuType == smasMainMenuSystem.menuTypes.MENU_BOOLEAN then
-                    named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].booleanToUse)..")"
+                    if not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].booleanToUse then
+                        named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                    elseif smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].booleanToUse then
+                        named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                    end
                 elseif smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].menuType == smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE then
                     named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse)..")"
                 end
