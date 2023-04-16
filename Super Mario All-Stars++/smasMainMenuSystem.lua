@@ -293,7 +293,7 @@ function smasMainMenuSystem.onDraw()
                                     smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].functionIfPossible()
                                     smasMainMenuSystem.ScrollDelay = 10
                                 end
-                                if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse ~= nil then
+                                if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse ~= nil and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
                                     smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse = not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse
                                     Sound.playSFX(32)
                                     smasMainMenuSystem.ScrollDelay = 10
