@@ -447,6 +447,7 @@ function ResolutionChangeScale3()
 end
 
 function AccessibilityOptions1() --Accessibility Options
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000026"), speakerName = "Accessibility Options", pauses = false, updatesInPause = true})
 end
 
@@ -518,6 +519,7 @@ function X2Char() --Game settings applied
 end
 
 function InputConfig1() --Config inputs
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000032"), pauses = false, updatesInPause = true})
 end
 
@@ -571,6 +573,7 @@ function PFPinfo1() --PFP information
 end
 
 function X2DisableCheck1()
+    smasMainMenuSystem.menuOpen = false
     if Player.count() == 1 then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000035"), pauses = false, updatesInPause = true})
     end
@@ -580,6 +583,7 @@ function X2DisableCheck1()
 end
 
 function TwoPlayerDisEnable1()
+    smasMainMenuSystem.menuOpen = false
     if SaveData.disableX2char then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000037"), pauses = false, updatesInPause = true})
     elseif not SaveData.disableX2char then
@@ -672,6 +676,7 @@ function ChangedCharacter()
 end
 
 function SaveOptions1()
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000052"), speakerName = "Saving Options", pauses = false, updatesInPause = true})
 end
 
@@ -874,10 +879,12 @@ function foolsinapril() --April Fools event for 4/1 of any year
 end
 
 function SettingsSubmenu1()
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question OptionsSubmenuOne>", speakerName = "Manage Settings", pauses = false, updatesInPause = true})
 end
 
 function SettingsSubmenu2()
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question OptionsSubmenuTwo>", speakerName = "Resolution Settings", pauses = false, updatesInPause = true})
 end
 

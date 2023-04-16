@@ -239,18 +239,17 @@ function smasMainMenuSystem.onDraw()
                 local named = {}
                 
                 smasMainMenuSystem.layoutText[k] = textplus.layout(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name, 10)
-                local named2 = MenuCursor + 1
+                local namedNum = MenuCursor - smasMainMenuSystem.minShow + 2
                 
-                if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].menuType == smasMainMenuSystem.menuTypes.MENU_SELECTABLE then
-                    named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name
-                elseif smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].menuType == smasMainMenuSystem.menuTypes.MENU_BOOLEAN then
+                named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name
+                if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].menuType == smasMainMenuSystem.menuTypes.MENU_BOOLEAN then
                     if not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].booleanToUse then
-                        named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
                     elseif smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].booleanToUse then
-                        named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
                     end
                 elseif smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].menuType == smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE then
-                    named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse)..")"
+                    named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse)..")"
                 end
                 textplus.print({x = smasMainMenuSystem.MenuX, y = smasMainMenuSystem.MenuY + 30 + (B * 30), text = named[k], priority = smasMainMenuSystem.priority, color = Color.white, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
                 
