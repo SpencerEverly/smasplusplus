@@ -27,12 +27,14 @@ smasMainMenuSystem.menuOpen = false
 smasMainMenuSystem.onMenu = 1
 smasMainMenuSystem.MenuX = 0
 smasMainMenuSystem.MenuY = 0
+smasMainMenuSystem.MenuXCentered = 150
 smasMainMenuSystem.minShow = 1
 smasMainMenuSystem.maxShow = 5
 smasMainMenuSystem.worldCurs = 1
 smasMainMenuSystem.ScrollDelay = 0
 smasMainMenuSystem.PressDelay = 10
 smasMainMenuSystem.cursorMove = true
+smasMainMenuSystem.isCursorOnMenuItem = false
 smasMainMenuSystem.layoutText = {}
 smasMainMenuSystem.noBooleanValue = false
 smasMainMenuSystem.previousMenuCursor = {}
@@ -51,12 +53,14 @@ function smasMainMenuSystem.addSection(args)
     end
     args.title = args.title or ""
     args.menuBackTo = args.menuBackTo or 1
+    args.xCenter = args.xCenter or smasMainMenuSystem.MenuXCentered
     if smasMainMenuSystem.menuItems[args.section] == nil then
         smasMainMenuSystem.menuItems[args.section] = {}
     end
     smasMainMenuSystem.menuItems[args.section] = {
         title = args.title,
-        menuBackTo = args.menuBackTo
+        menuBackTo = args.menuBackTo,
+        xCenter = args.xCenter,
     }
 end
 
@@ -106,7 +110,7 @@ function smasMainMenuSystem.addMenuItem(args)
 end
 
 function smasMainMenuSystem.getMenuPosition()
-    smasMainMenuSystem.MenuX = ScreenW / 2 - 150
+    smasMainMenuSystem.MenuX = ScreenW / 2 - smasMainMenuSystem.MenuXCentered
     smasMainMenuSystem.MenuY = ScreenH - 310
 end
 
@@ -120,6 +124,26 @@ function smasMainMenuSystem.handleMouseMove(items,x,y,maxWidth,itemHeight)
                     break
                 end
             end
+        end
+    end
+end
+
+function smasMainMenuSystem.runMenuFunction(isMouse)
+    if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
+        smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].functionIfPossible()
+        if isMouse then
+            smasMainMenuSystem.ScrollDelay = 10
+        else
+            smasMainMenuSystem.PressDelay = 10
+        end
+    end
+    if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse ~= nil and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
+        smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse = not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse
+        Sound.playSFX(32)
+        if isMouse then
+            smasMainMenuSystem.ScrollDelay = 10
+        else
+            smasMainMenuSystem.PressDelay = 10
         end
     end
 end
@@ -168,15 +192,7 @@ function smasMainMenuSystem.onInputUpdate()
                             end
                         end
                     elseif p.keys.jump == KEYS_PRESSED then
-                        if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
-                            smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].functionIfPossible()
-                            smasMainMenuSystem.PressDelay = 10
-                        end
-                        if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse ~= nil and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
-                            smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse = not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse
-                            Sound.playSFX(32)
-                            smasMainMenuSystem.PressDelay = 10
-                        end
+                        smasMainMenuSystem.runMenuFunction(false)
                     elseif p.keys.run == KEYS_PRESSED then
                         if smasMainMenuSystem.onMenu > 1 then
                             smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].menuBackTo, 0, true)
@@ -193,6 +209,7 @@ end
 
 function smasMainMenuSystem.onDraw()
     smasMainMenuSystem.getMenuPosition()
+    smasMainMenuSystem.MenuXCentered = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].xCenter
     local C = 0
     
     if smasMainMenuSystem.menuOpen then
@@ -287,18 +304,13 @@ function smasMainMenuSystem.onDraw()
                                 Sound.playSFX(26)
                                 MenuCursor = A
                             end
+                            smasMainMenuSystem.isCursorOnMenuItem = true
                             if cursor.left == KEYS_PRESSED then
-                                if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
-                                    smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].functionIfPossible()
-                                    smasMainMenuSystem.ScrollDelay = 10
-                                end
-                                if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse ~= nil and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
-                                    smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse = not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse
-                                    Sound.playSFX(32)
-                                    smasMainMenuSystem.ScrollDelay = 10
-                                end
+                                smasMainMenuSystem.runMenuFunction(true)
                             end
                         end
+                    else
+                        smasMainMenuSystem.isCursorOnMenuItem = false
                     end
                     C = C + 1
                 end

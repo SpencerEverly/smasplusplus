@@ -1398,9 +1398,9 @@ if smasMainMenu.active then
     smasCheats.checkCheatStatusAndDisable()
 end
 
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu"}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = 1}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = 1}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu", xCenter = 150}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = 1, xCenter = 150}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = 1, xCenter = 200}
 
 smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
