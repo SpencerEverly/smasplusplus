@@ -89,7 +89,7 @@ smasMainMenu.showBlackScreen = false
 local killed = false
 local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
 
-local function introExit()
+function introExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
@@ -101,7 +101,7 @@ local function introExit()
     end
 end
 
-local function battleRandomLevelSelect()
+function battleRandomLevelSelect()
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -112,7 +112,7 @@ local function battleRandomLevelSelect()
     Level.load(smasTables.__classicBattleModeLevels[rng.randomInt(1,#smasTables.__classicBattleModeLevels)])
 end
 
-local function battleLevelSelected()
+function battleLevelSelected()
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -125,7 +125,7 @@ end
 
 
 
-local function startRushMode()
+function startRushMode()
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -137,7 +137,7 @@ end
 
 
 
-local function themeSelected()
+function themeSelected()
     SaveData.introselect = smasMainMenu.themeSelected
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
@@ -147,7 +147,7 @@ local function themeSelected()
     Level.load(smasTables.__mainMenuThemes[SaveData.introselect])
 end
 
-local function theme4scrolling()
+function theme4scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(19)
@@ -156,7 +156,7 @@ local function theme4scrolling()
     Routine.loop(1768, theme4scrolling, true)
 end
 
-local function theme5scrolling()
+function theme5scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(17.3)
@@ -165,7 +165,7 @@ local function theme5scrolling()
     Routine.loop(1571, theme5scrolling, true)
 end
 
-local function theme6scrolling()
+function theme6scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(19.5)
@@ -174,7 +174,7 @@ local function theme6scrolling()
     Routine.loop(1787, theme6scrolling, true)
 end
 
-local function theme8scrolling()
+function theme8scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(17.5)
@@ -183,7 +183,7 @@ local function theme8scrolling()
     Routine.loop(1625, theme8scrolling, true)
 end
 
-local function theme9scrolling()
+function theme9scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(13.8)
@@ -192,7 +192,7 @@ local function theme9scrolling()
     Routine.loop(1265, theme9scrolling, true)
 end
 
-local function theme11scrolling()
+function theme11scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(16.2)
@@ -201,7 +201,7 @@ local function theme11scrolling()
     Routine.loop(1521, theme11scrolling, true)
 end
 
-local function theme14scrolling()
+function theme14scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollUp(6)
     Routine.wait(13.6)
@@ -210,7 +210,7 @@ local function theme14scrolling()
     Routine.loop(1300, theme14scrolling, true)
 end
 
-local function theme15scrolling()
+function theme15scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(26.2)
@@ -219,7 +219,7 @@ local function theme15scrolling()
     Routine.loop(2418, theme15scrolling, true)
 end
 
-local function theme17scrolling()
+function theme17scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(10.6)
@@ -228,7 +228,7 @@ local function theme17scrolling()
     Routine.loop(lunatime.toTicks(15.2), theme17scrolling, true)
 end
 
-local function theme18scrolling()
+function theme18scrolling()
     NPC.restoreClass("NPC")
     autoscroll.scrollRight(6)
     Routine.wait(16.6)
@@ -237,7 +237,7 @@ local function theme18scrolling()
     Routine.loop(lunatime.toTicks(23.6), theme18scrolling, true)
 end
 
-local function mapExit()
+function mapExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
@@ -248,7 +248,7 @@ local function mapExit()
     end
 end
 
-local function easterEgg() --SnooPINGAS I see? ._.
+function easterEgg() --SnooPINGAS I see? ._.
     Routine.wait(0.1, true)
     Routine.wait(900, true)
     smasBooleans.overrideMusicVolume = true
@@ -259,7 +259,7 @@ local function easterEgg() --SnooPINGAS I see? ._.
     smasMainMenu.showEasterEggMessage = true
 end
 
-local function FirstBoot1() --Welcome to SMAS++
+function FirstBoot1() --Welcome to SMAS++
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
     Routine.wait(1.5)
     smasMainMenu.hideGameSMBXAndSMBX2Credits = true
@@ -269,7 +269,7 @@ local function FirstBoot1() --Welcome to SMAS++
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000001"), speakerName = "Welcome!", pauses = false, updatesInPause = true})
 end
 
-local function MigrateOldSave1() --Migration message
+function MigrateOldSave1() --Migration message
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
     Routine.wait(1.5)
     smasMainMenu.hideGameSMBXAndSMBX2Credits = true
@@ -279,11 +279,11 @@ local function MigrateOldSave1() --Migration message
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000009"), pauses = false, updatesInPause = true})
 end
 
-local function MigrateOldSave2() --Migration Warning
+function MigrateOldSave2() --Migration Warning
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000010"), pauses = false, updatesInPause = true})
 end
 
-local function MigrateOldSave3() --Migration started + completed
+function MigrateOldSave3() --Migration started + completed
     SaveData.totalCoinsClassic = mem(0x00B2C5A8, FIELD_WORD)
     SaveData.totalLives = mem(0x00B2C5AC, FIELD_FLOAT)
     SaveData.totalScoreClassic = Misc.score()
@@ -304,28 +304,28 @@ local function MigrateOldSave3() --Migration started + completed
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000011"), pauses = false, updatesInPause = true})
 end
 
-local function MigrateOldSaveCancelled()
+function MigrateOldSaveCancelled()
     Sound.changeMusic("_OST/_Sound Effects/nothing.ogg", 0)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000012"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot3() --Check the data/time
+function FirstBoot3() --Check the data/time
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000002"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot4() --Know your name
+function FirstBoot4() --Know your name
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000003"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBootKeyboardConfig() --Config inputs
+function FirstBootKeyboardConfig() --Config inputs
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000004"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot5() --Game help?
+function FirstBoot5() --Game help?
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000005"), pauses = false, updatesInPause = true})
 end
 
-local function FirstBoot6() --Without further ado, SMAS++!
+function FirstBoot6() --Without further ado, SMAS++!
     Sound.changeMusic("_OST/All Stars Menu/Boot Menu (First Boot).ogg", 0)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000006"), pauses = false, updatesInPause = true})
     if not SaveData.firstBootCompleted then
@@ -336,16 +336,16 @@ local function FirstBoot6() --Without further ado, SMAS++!
     Misc.saveGame()
 end
     
-local function FirstBootGameHelp() --Get game help or nah?
+function FirstBootGameHelp() --Get game help or nah?
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000007"), pauses = false, updatesInPause = true})
     Misc.saveGame()
 end
 
-local function TimeFixInfo1()
+function TimeFixInfo1()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000008"), pauses = false, updatesInPause = true})
 end
 
-local function FailsafeMessage1() --You died on the main menu
+function FailsafeMessage1() --You died on the main menu
     smasMainMenu.hideGameSMBXAndSMBX2Credits = true
     if SaveData.failsafeMessageOne then
         SaveData.failsafeMessageOne = false
@@ -355,7 +355,7 @@ local function FailsafeMessage1() --You died on the main menu
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000013"), speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
-local function bootDialogue(resetMusic)
+function bootDialogue(resetMusic)
     if resetMusic == nil then
         resetMusic = false
     end
@@ -366,16 +366,14 @@ local function bootDialogue(resetMusic)
     smasMainMenu.showPlayerNameOnScreen = false
     smasMainMenu.showPFPImageOnScreen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
+    --Sound.playSFX(14)
+    --smasMainMenuSystem.menuOpen = true
     if resetMusic then
         Sound.restoreMusic(-1)
     end
 end
 
-function menuDialogue() --Main menu
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
-end
-
-local function battleModeDialogue() --Minigames
+function battleModeDialogue() --Minigames
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000015"), speakerName = "Minigames", pauses = false, updatesInPause = true})
 end
 
@@ -383,40 +381,40 @@ function optionsMenu1() --Options
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000016"), speakerName = "Options", pauses = false, updatesInPause = true})
 end
 
-local function themeMenu1() --Intro theme menu
+function themeMenu1() --Intro theme menu
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000017"), speakerName = "Themes", pauses = false, updatesInPause = true})
 end
 
-local function ResolutionSelect1() --Resolution settings
+function ResolutionSelect1() --Resolution settings
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000018"), speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
 end
 
-local function ClockSelect1() --Clock settings
+function ClockSelect1() --Clock settings
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000019"), speakerName = "Clock Theme Selection", pauses = false, updatesInPause = true})
 end
 
 
 
-local function classicBattleSelect() --Select level.
+function classicBattleSelect() --Select level.
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000020"), pauses = false, updatesInPause = true})
 end
 
-local function ChangeName1() --To change your name...
+function ChangeName1() --To change your name...
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000021"), pauses = false, updatesInPause = true})
 end
 
-local function ChangePFP1() --To change your PFP...
+function ChangePFP1() --To change your PFP...
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000022"), pauses = false, updatesInPause = true})
 end
 
-local function ResolutionChange1() --Resolution changed.
+function ResolutionChange1() --Resolution changed.
     Sound.playSFX("resolution-set.ogg")
     Routine.waitFrames(1, true)
     smasResolutions.changeResolution()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000023"), pauses = false, updatesInPause = true})
 end
 
-local function ResolutionChangeBorder2() --Border toggled on/off.
+function ResolutionChangeBorder2() --Border toggled on/off.
     if SaveData.borderEnabled then
         Sound.playSFX("resolutionborder-disable.ogg")
         SaveData.borderEnabled = false
@@ -431,7 +429,7 @@ local function ResolutionChangeBorder2() --Border toggled on/off.
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000024"), pauses = false, updatesInPause = true})
 end
 
-local function ResolutionChangeScale3()
+function ResolutionChangeScale3()
     if SaveData.letterbox then
         Sound.playSFX("letterbox-disable.ogg")
         SaveData.letterbox = false
@@ -446,11 +444,11 @@ local function ResolutionChangeScale3()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000025"), pauses = false, updatesInPause = true})
 end
 
-local function AccessibilityOptions1() --Accessibility Options
+function AccessibilityOptions1() --Accessibility Options
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000026"), speakerName = "Accessibility Options", pauses = false, updatesInPause = true})
 end
 
-local function AccessibilityOptionToggle1() --Accessibility turned on/off
+function AccessibilityOptionToggle1() --Accessibility turned on/off
     SaveData.accessibilityTwirl = not SaveData.accessibilityTwirl
     if SaveData.accessibilityTwirl then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
@@ -459,7 +457,7 @@ local function AccessibilityOptionToggle1() --Accessibility turned on/off
     end
 end
 
-local function AccessibilityOptionToggle2() --Accessibility turned on/off
+function AccessibilityOptionToggle2() --Accessibility turned on/off
     SaveData.accessibilityWallJump = not SaveData.accessibilityWallJump
     if SaveData.accessibilityWallJump then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
@@ -468,7 +466,7 @@ local function AccessibilityOptionToggle2() --Accessibility turned on/off
     end
 end
 
-local function AccessibilityOptionToggle3() --Accessibility turned on/off
+function AccessibilityOptionToggle3() --Accessibility turned on/off
     SaveData.accessibilityInventory = not SaveData.accessibilityInventory
     if SaveData.accessibilityInventory then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
@@ -477,7 +475,7 @@ local function AccessibilityOptionToggle3() --Accessibility turned on/off
     end
 end
 
-local function AccessibilityOptionToggle4() --Accessibility turned on/off
+function AccessibilityOptionToggle4() --Accessibility turned on/off
     SaveData.enableLives = not SaveData.enableLives
     if SaveData.enableLives then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
@@ -486,7 +484,7 @@ local function AccessibilityOptionToggle4() --Accessibility turned on/off
     end
 end
 
-local function AccessibilityOptionToggle5() --Accessibility turned on/off
+function AccessibilityOptionToggle5() --Accessibility turned on/off
     SaveData.accessibilityGroundPound = not SaveData.accessibilityGroundPound
     if SaveData.accessibilityGroundPound then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
@@ -495,16 +493,16 @@ local function AccessibilityOptionToggle5() --Accessibility turned on/off
     end
 end
 
-local function ClockChange1() --Clock theme changed.
+function ClockChange1() --Clock theme changed.
     Sound.playSFX("hour-change.ogg")
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000029"), pauses = false, updatesInPause = true})
 end
 
-local function credits1() --Credits
+function credits1() --Credits
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000030"), speakerName = "Credits", pauses = false, updatesInPause = true})
 end
 
-local function X2Char() --Game settings applied
+function X2Char() --Game settings applied
     if not SaveData.disableX2char then
         Sound.playSFX("1.3Mode/bowser-killed.ogg")
         SaveData.disableX2char = true
@@ -516,24 +514,24 @@ local function X2Char() --Game settings applied
     end
 end
 
-local function InputConfig1() --Config inputs
+function InputConfig1() --Config inputs
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000032"), pauses = false, updatesInPause = true})
 end
 
-local function startConfigurator()
+function startConfigurator()
     inputconfigurator.controlConfigOpen = true
 end
 
-local function startPreConfiguratorKeyboard() --Which player?
+function startPreConfiguratorKeyboard() --Which player?
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000033"), pauses = false, updatesInPause = true})
 end
 
-local function startConfiguratorKeyboard()
+function startConfiguratorKeyboard()
     inputconfigurator.keyConfigOpen = true
     inputconfigurator.assigningToPlayer1 = true
 end
 
-local function startConfiguratorKeyboardP2()
+function startConfiguratorKeyboardP2()
     inputconfigurator.keyConfigOpen = true
     inputconfigurator.assigningToPlayer2 = true
 end
@@ -541,35 +539,35 @@ end
 local nameBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCancelled = true, clear = true, setVariable = SaveData.playerName, pause = false}
 local pfpBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCancelled = true, clear = true, setVariable = SaveData.playerPfp, pause = false}
 
-local function startKeyboard()
+function startKeyboard()
     newkeyboard.setVariable = SaveData.playerName
     nameBoard:open()
     GameData.playernameenter = true
 end
 
-local function startKeyboardFirstBoot()
+function startKeyboardFirstBoot()
     newkeyboard.setVariable = SaveData.playerName
     nameBoard:open()
     GameData.playernameenterfirstboot = true
 end
 
-local function startKeyboardPFP()
+function startKeyboardPFP()
     newkeyboard.setVariable = SaveData.playerPfp
     pfpBoard:open()
     GameData.playerpfpenter = true
 end
 
-local function startSaveSwitcher1()
+function startSaveSwitcher1()
     keyboard.active = true
     GameData.enablekeyboard = true
     GameData.saveslotswitchenter = true
 end
 
-local function PFPinfo1() --PFP information
+function PFPinfo1() --PFP information
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000034"), pauses = false, updatesInPause = true})
 end
 
-local function X2DisableCheck1()
+function X2DisableCheck1()
     if Player.count() == 1 then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000035"), pauses = false, updatesInPause = true})
     end
@@ -578,7 +576,7 @@ local function X2DisableCheck1()
     end
 end
 
-local function TwoPlayerDisEnable1()
+function TwoPlayerDisEnable1()
     if SaveData.disableX2char then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000037"), pauses = false, updatesInPause = true})
     elseif not SaveData.disableX2char then
@@ -586,7 +584,7 @@ local function TwoPlayerDisEnable1()
     end
 end
 
-local function BattleModeDisEnable1()
+function BattleModeDisEnable1()
     if SaveData.disableX2char then
         if Player.count() == 1 then
             littleDialogue.create({text = transplate.getTranslation("0x0000000000000039"), pauses = false, updatesInPause = true})
@@ -601,7 +599,7 @@ local function BattleModeDisEnable1()
     end
 end
 
-local function RushModeMenu1()
+function RushModeMenu1()
     if Player.count() == 1 then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000042"), pauses = false, updatesInPause = true})
     end
@@ -610,34 +608,34 @@ local function RushModeMenu1()
     end
 end
 
-local function FramerateToggle1()
+function FramerateToggle1()
     SaveData.framerateEnabled = not SaveData.framerateEnabled
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000044"), pauses = false, updatesInPause = true})
 end
 
-local function TwoPlayerCheck()
+function TwoPlayerCheck()
     Playur.activate2ndPlayer()
     Defines.player_hasCheated = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000045").."<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
-local function TwoPlayerCheckBattle()
+function TwoPlayerCheckBattle()
     Playur.activate2ndPlayer()
     Defines.player_hasCheated = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000045").."<question OkayToBattle>", pauses = false, updatesInPause = true})
 end
 
-local function ExitClassicBattle()
+function ExitClassicBattle()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000046"), pauses = false, updatesInPause = true})
 end
 
-local function OnePlayerCheck()
+function OnePlayerCheck()
     Playur.activate1stPlayer()
     Defines.player_hasCheated = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000047").."<question OkayToMenu>", pauses = false, updatesInPause = true})
 end
 
-local function ChangeChar1()
+function ChangeChar1()
     if not SaveData.disableX2char then
         smasCharacterChanger.menuActive = true
         smasCharacterChanger.animationActive = true
@@ -650,15 +648,15 @@ local function ChangeChar1()
     end
 end
 
-local function ChangeChar1P()
+function ChangeChar1P()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000049"), pauses = false, updatesInPause = true})
 end
 
-local function ChangeChar2P()
+function ChangeChar2P()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000050"), pauses = false, updatesInPause = true})
 end
 
-local function ChangedCharacter()
+function ChangedCharacter()
     Sound.playSFX("charcost-selected.ogg")
     if Player.count() == 1 then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000051"), pauses = false, updatesInPause = true})
@@ -668,11 +666,11 @@ local function ChangedCharacter()
     end
 end
 
-local function SaveOptions1()
+function SaveOptions1()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000052"), speakerName = "Saving Options", pauses = false, updatesInPause = true})
 end
 
-local function SaveSlot1()
+function SaveSlot1()
     if not Misc.inEditor() then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000053"), pauses = false, updatesInPause = true})
     elseif Misc.inEditor() then
@@ -680,16 +678,16 @@ local function SaveSlot1()
     end
 end
 
-local function EraseSave1()
+function EraseSave1()
     Sound.muteMusic(-1)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000055"), pauses = false, updatesInPause = true})
 end
 
-local function EraseSave2()
+function EraseSave2()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000056"), pauses = false, updatesInPause = true})
 end
 
-local function ExitDialogue(resetMusic, firstBootActive)
+function ExitDialogue(resetMusic, firstBootActive)
     if resetMusic == nil then
         resetMusic = false
     end
@@ -731,7 +729,7 @@ local function ExitDialogue(resetMusic, firstBootActive)
     end
 end
 
-local function MusicReset()
+function MusicReset()
     smasMainMenu.menuActive = false
     if Time.month() == 03 and Time.day() == 17 then
         stpatricksday = true
@@ -739,7 +737,7 @@ local function MusicReset()
     Sound.restoreMusic(-1)
 end
 
-local function ExitGame1()
+function ExitGame1()
     smasMainMenu.showBlackScreen = true
     Sound.muteMusic(-1)
     Misc.saveGame()
@@ -747,21 +745,22 @@ local function ExitGame1()
     Misc.exitEngine()
 end
 
-local function ExitGameNoSave()
+function ExitGameNoSave()
     smasMainMenu.showBlackScreen = true
     Sound.muteMusic(-1)
     Routine.wait(0.4)
     Misc.exitEngine()
 end
 
-local function SaveEraseStart()
+function SaveEraseStart()
     --Start opening SMAS++'s save files. From there, write default data to the files.
     Misc.eraseSaveSlot(Misc.saveSlot())
     --Then make the message telling that it's erased.
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000057"), pauses = false, updatesInPause = true})
 end
 
-local function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
+function BootSMASPlusPlusPreExecute() --This is the routine animation to execute the SMAS++ countdown to load either the intro or the map.
+    --smasMainMenuSystem.menuOpen = false
     Sound.playSFX("startsmasboot-executed.ogg")
     Sound.playSFX("startsmasboot-timerbeep.ogg")
     smasMainMenu.showWorldMapSkipMessage = true
@@ -788,15 +787,15 @@ local function BootSMASPlusPlusPreExecute() --This is the routine animation to e
     end
 end
 
-local function BootCredits() --The credits lvl will probably be scrapped or not, depends
+function BootCredits() --The credits lvl will probably be scrapped or not, depends
     Sound.muteMusic(-1)
     smasMainMenu.showBlackScreen = true
-    SFX.play(14)
+    Sound.playSFX(14)
     Routine.wait(0.5)
     Level.load("SMAS - Credits.lvlx")
 end
 
-local function RestartSMASPlusPlus(clearSave) --This restarts SMAS++ entirely
+function RestartSMASPlusPlus(clearSave) --This restarts SMAS++ entirely
     if clearSave == nil then
         clearSave = false
     end
@@ -812,7 +811,7 @@ local function RestartSMASPlusPlus(clearSave) --This restarts SMAS++ entirely
     end
 end
 
-local function BootGameHelpPreExecute() --Boot the game help level, the boot menu version at least
+function BootGameHelpPreExecute() --Boot the game help level, the boot menu version at least
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -822,16 +821,21 @@ local function BootGameHelpPreExecute() --Boot the game help level, the boot men
     Level.load("SMAS - Game Help (Boot Menu).lvlx")
 end
 
-local function BootOnlinePreExecute() --Boot the Online Menu level
-    smasMainMenu.showBlackScreen = true
-    autoscroll.scrollLeft(5000)
-    Sound.muteMusic(-1)
-    Routine.wait(0.4)
-    Misc.saveGame()
-    Level.load("SMAS - Online (Menu).lvlx")
+function BootOnlinePreExecute() --Boot the Online Menu level
+    if SMBX_VERSION == VER_SEE_MOD then
+        smasMainMenuSystem.menuOpen = false
+        smasMainMenu.showBlackScreen = true
+        autoscroll.scrollLeft(5000)
+        Sound.muteMusic(-1)
+        Routine.wait(0.4)
+        Misc.saveGame()
+        Level.load("SMAS - Online (Menu).lvlx")
+    else
+        
+    end
 end
 
-local function PigeonRaca1() --This executes the True Final Battle
+function PigeonRaca1() --This executes the True Final Battle
     if player.keys.jump == KEYS_PRESSED then
         player.keys.jump = KEYS_UNPRESSED
         Routine.wait(4.5) --Wait until loading the True Final Battle cutscene...
@@ -840,7 +844,7 @@ local function PigeonRaca1() --This executes the True Final Battle
     end
 end
 
-local function foolsinapril() --April Fools event for 4/1 of any year
+function foolsinapril() --April Fools event for 4/1 of any year
     GameData.holidayrun = false
     Misc.pause()
     Routine.wait(5.5, true)
@@ -857,11 +861,11 @@ local function foolsinapril() --April Fools event for 4/1 of any year
     smasMainMenu.startedmenu = 0
 end
 
-local function SettingsSubmenu1()
+function SettingsSubmenu1()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.1><question OptionsSubmenuOne>", speakerName = "Manage Settings", pauses = false, updatesInPause = true})
 end
 
-local function SettingsSubmenu2()
+function SettingsSubmenu2()
     littleDialogue.create({text = "<setPos 400 32 0.5 -1.3><question OptionsSubmenuTwo>", speakerName = "Resolution Settings", pauses = false, updatesInPause = true})
 end
 
@@ -1062,8 +1066,8 @@ function smasMainMenu.onInputUpdate()
         player.keys.altJump = false
         player.keys.altRun = false
         player.keys.dropItem = false
-        if player.rawKeys.pause == KEYS_PRESSED and smasMainMenu.menuActive == false then
-            if SaveData.firstBootCompleted == true then
+        if player.rawKeys.pause == KEYS_PRESSED and not smasMainMenu.menuActive then
+            if SaveData.firstBootCompleted then
                 Routine.run(ExitGame1)
                 Sound.playSFX("littleDialogue/smbx13/choose.wav")
             end
@@ -1134,7 +1138,7 @@ function smasMainMenu.onInputUpdate()
     end
 end
 
-local function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
+function harmNPC(npc,...) -- npc:harm but it returns if it actually did anything
     local oldKilled     = npc:mem(0x122,FIELD_WORD)
     local oldProjectile = npc:mem(0x136,FIELD_BOOL)
     local oldHitCount   = npc:mem(0x148,FIELD_FLOAT)
@@ -1374,6 +1378,19 @@ end
 if smasMainMenu.active then
     smasCheats.checkCheatStatusAndDisable()
 end
+
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN}
+
+
+smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
+smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
+smasMainMenuSystem.addMenuItem{name = "Minigames", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(battleModeDialogue) end}
+smasMainMenuSystem.addMenuItem{name = "Online Multiplayer", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootOnlinePreExecute) end}
+smasMainMenuSystem.addMenuItem{name = "Main Menu Themes", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(themeMenu1) end}
+smasMainMenuSystem.addMenuItem{name = "Settings/Options", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(optionsMenu1) end}
+smasMainMenuSystem.addMenuItem{name = "Credits", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(credits1) end}
+smasMainMenuSystem.addMenuItem{name = "Exit Main Menu", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitDialogue) end}
+smasMainMenuSystem.addMenuItem{name = "Exit Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 9, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitGame1) end}
 
 
 
