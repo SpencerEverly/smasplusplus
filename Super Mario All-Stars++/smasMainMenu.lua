@@ -138,6 +138,7 @@ end
 
 
 function themeSelected()
+    Sound.playSFX(29)
     SaveData.introselect = smasMainMenu.themeSelected
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
@@ -366,7 +367,7 @@ function bootDialogue(resetMusic)
     smasMainMenu.showPlayerNameOnScreen = false
     smasMainMenu.showPFPImageOnScreen = false
     --littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
-    Sound.playSFX(14)
+    Sound.playSFX(29)
     smasMainMenuSystem.menuOpen = true
     if resetMusic then
         Sound.restoreMusic(-1)
@@ -809,7 +810,7 @@ end
 function BootCredits() --The credits lvl will probably be scrapped or not, depends
     Sound.muteMusic(-1)
     smasMainMenu.showBlackScreen = true
-    Sound.playSFX(14)
+    Sound.playSFX(29)
     Routine.wait(0.5)
     Level.load("SMAS - Credits.lvlx")
 end
@@ -1407,12 +1408,17 @@ smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 150}
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 200}
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, title = "Manage Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 200}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, title = "Accessibility Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 250}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, title = "Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 170}
+
+
+
 
 smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Minigames", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(2, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Online Multiplayer", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootOnlinePreExecute) end}
-smasMainMenuSystem.addMenuItem{name = "Main Menu Themes", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(themeMenu1) end}
+smasMainMenuSystem.addMenuItem{name = "Main Menu Themes", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Settings/Options", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Credits", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(credits1) end}
 smasMainMenuSystem.addMenuItem{name = "Exit Main Menu", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitDialogue) end}
@@ -1430,7 +1436,7 @@ smasMainMenuSystem.addMenuItem{name = "Rush Mode (1P)", section = smasMainMenuSy
 smasMainMenuSystem.addMenuItem{name = "2 Player Mode", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(TwoPlayerDisEnable1) end}
 smasMainMenuSystem.addMenuItem{name = "SMBX 1.3 Mode", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(X2DisableCheck1) end}
 smasMainMenuSystem.addMenuItem{name = "Input Configuration", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(InputConfig1) end}
-smasMainMenuSystem.addMenuItem{name = "Accessibility Options", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(AccessibilityOptions1) end}
+smasMainMenuSystem.addMenuItem{name = "Accessibility Options", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Framerate Toggling", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "framerateEnabled", isSaveData = true, isGameData = false}
 smasMainMenuSystem.addMenuItem{name = "Manage Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SaveOptions1) end}
@@ -1448,39 +1454,39 @@ smasMainMenuSystem.addMenuItem{name = "Change Clock Theme", section = smasMainMe
 
 
 
-
-littleDialogue.registerAnswer("AccessibilityStuff",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Twirling",chosenFunction = function() Routine.run(AccessibilityOptionToggle1) end})
-littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Wall Jumping",chosenFunction = function() Routine.run(AccessibilityOptionToggle2) end})
-littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Ground Pound",chosenFunction = function() Routine.run(AccessibilityOptionToggle5) end})
-littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Additional Inventory",chosenFunction = function() Routine.run(AccessibilityOptionToggle3) end})
-littleDialogue.registerAnswer("AccessibilityStuff",{text = "Toggle Lives",chosenFunction = function() Routine.run(AccessibilityOptionToggle4) end})
-littleDialogue.registerAnswer("AccessibilityStuff",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+smasMainMenuSystem.addMenuItem{name = "Toggle Twirling", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "accessibilityTwirl", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Toggle Wall Jumping", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "accessibilityWallJump", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Toggle Ground Pound", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "accessibilityGroundPound", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Toggle 2nd Inventory", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "accessibilityInventory", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Toggle Lives", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "enableLives", isSaveData = true, isGameData = false}
 
 
 
 
-littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Super Mario All-Stars++",chosenFunction = function() smasMainMenu.themeSelected = 1 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Where SMB Attacks",chosenFunction = function() smasMainMenu.themeSelected = 6 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.0.0",chosenFunction = function() smasMainMenu.themeSelected = 2 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.1.0",chosenFunction = function() smasMainMenu.themeSelected = 3 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.2.2",chosenFunction = function() smasMainMenu.themeSelected = 4 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0",chosenFunction = function() smasMainMenu.themeSelected = 9 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX 1.3.0.1",chosenFunction = function() smasMainMenu.themeSelected = 5 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 3",chosenFunction = function() smasMainMenu.themeSelected = 10 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "SMBX2 Beta 4",chosenFunction = function() smasMainMenu.themeSelected = 7 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Edited Boss (Eighth Edition)",chosenFunction = function() smasMainMenu.themeSelected = 8 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "8-Bit (By TepigFan101)",chosenFunction = function() smasMainMenu.themeSelected = 11 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Spencer! The Show! REBOOT",chosenFunction = function() smasMainMenu.themeSelected = 12 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Sunset Beach (By IkOshi1)",chosenFunction = function() smasMainMenu.themeSelected = 13 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Scrolling Heights",chosenFunction = function() smasMainMenu.themeSelected = 14 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Firey Castle (By Jake Brito)",chosenFunction = function() smasMainMenu.themeSelected = 15 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Mario Forever (Classic)",chosenFunction = function() smasMainMenu.themeSelected = 16 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "The Watery Airship (By Jake Brito)",chosenFunction = function() smasMainMenu.themeSelected = 17 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Circuit Central (By RvBNut91)",chosenFunction = function() smasMainMenu.themeSelected = 18 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Metroid Prime 2 (By SilverDeoxys)",chosenFunction = function() smasMainMenu.themeSelected = 19 Routine.run(themeSelected) end})
-littleDialogue.registerAnswer("IntroTheme",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+
+
+smasMainMenuSystem.addMenuItem{name = "SMAS++ (Default)", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 1 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Where SMB Attacks", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 6 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX 1.0.0", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 2 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX 1.1.0", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 3 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX 1.2.2", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 4 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX 1.3.0", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 9 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX 1.3.0.1", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 5 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX2 Beta 3", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 10 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "SMBX2 Beta 4", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 9, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 7 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "The Edited Boss", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 10, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 8 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "8-Bit World", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 11, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 11 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "S!TS! REBOOT", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 12, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 11 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Sunset Beach", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 13, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 13 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Scrolling Heights", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 14, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 14 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "The Firey Castle", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 15, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 15 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Mario Forever", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 16, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 16 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "The Watery Airship", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 17, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 17 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Circuit Central", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 18, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 18 Routine.run(themeSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Metroid Prime 2", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 19, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 19 Routine.run(themeSelected) end}
+
+
+
 
 
 

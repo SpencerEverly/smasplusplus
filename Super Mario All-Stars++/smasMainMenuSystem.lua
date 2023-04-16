@@ -21,6 +21,8 @@ smasMainMenuSystem.menuSections = {
     SECTION_MINIGAMES = 2,
     SECTION_SETTINGS_MAIN = 3,
     SECTION_SETTINGS_MANAGE = 4,
+    SECTION_SETTINGS_ACCESSIBILITY = 5,
+    SECTION_THEMESELECTION = 6,
 }
 
 smasMainMenuSystem.menuItems = {}
@@ -191,6 +193,7 @@ function smasMainMenuSystem.onInputUpdate()
                             MenuCursor = MenuCursor - 1
                             Sound.playSFX(26)
                         else
+                            Sound.playSFX(26)
                             MenuCursor = #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] - 1
                         end
                     elseif p.keys.down == KEYS_PRESSED then
@@ -198,6 +201,7 @@ function smasMainMenuSystem.onInputUpdate()
                             MenuCursor = MenuCursor + 1
                             Sound.playSFX(26)
                         else
+                            Sound.playSFX(26)
                             MenuCursor = 0
                         end
                     elseif p.keys.left == KEYS_PRESSED then
