@@ -589,6 +589,7 @@ function TwoPlayerDisEnable1()
 end
 
 function BattleModeDisEnable1()
+    smasMainMenuSystem.menuOpen = false
     if SaveData.disableX2char then
         if Player.count() == 1 then
             littleDialogue.create({text = transplate.getTranslation("0x0000000000000039"), pauses = false, updatesInPause = true})
@@ -604,6 +605,7 @@ function BattleModeDisEnable1()
 end
 
 function RushModeMenu1()
+    smasMainMenuSystem.menuOpen = false
     if Player.count() == 1 then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000042"), pauses = false, updatesInPause = true})
     end
