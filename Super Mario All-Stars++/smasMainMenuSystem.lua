@@ -67,6 +67,9 @@ sectionItem = Which slot this should take place in the menu.
 menuType = The type of the menu.
 isFunction = Should this run as a function when hitting jump?
 functionToRun = The function to run when isFunction is set.
+booleanValue = The boolean variable to use for toggling this option.
+numberValue = The number variable to use for toggling this option.
+maxNumber = The maximum the numberValue can go when changing the setting.
 ]]
 function smasMainMenuSystem.addMenuItem(args)
     args.name = args.name or "nil"
@@ -79,7 +82,9 @@ function smasMainMenuSystem.addMenuItem(args)
         return
     end
     args.menuType = args.menuType or 1
-    args.isFunction = args.isFunction or true
+    if args.isFunction == nil then
+        args.isFunction = true
+    end
     args.functionToRun = args.functionToRun or (function() end)
     args.booleanValue = args.booleanValue or smasMainMenuSystem.noBooleanValue
     args.numberValue = args.numberValue or 1
@@ -167,7 +172,7 @@ function smasMainMenuSystem.onInputUpdate()
                             smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].functionIfPossible()
                             smasMainMenuSystem.PressDelay = 10
                         end
-                        if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse ~= nil then
+                        if smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse ~= nil and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].canRunAsFunction then
                             smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse = not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1].booleanToUse
                             Sound.playSFX(32)
                             smasMainMenuSystem.PressDelay = 10
