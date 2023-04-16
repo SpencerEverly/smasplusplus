@@ -379,7 +379,7 @@ function battleModeDialogue() --Minigames
 end
 
 function optionsMenu1() --Options
-    
+    smasMainMenuSystem.menuOpen = true
 end
 
 function themeMenu1() --Intro theme menu
