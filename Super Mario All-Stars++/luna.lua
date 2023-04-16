@@ -230,12 +230,7 @@ SaveData.currentCostume = SaveData.currentCostume or "N/A"
 SaveData.currentCharacterAlteration = SaveData.currentCharacterAlteration or "N/A"
 
 --**Themes, resolutions**
-if SaveData.resolution == nil then --By default, the resolution will be set as fullscreen.
-    SaveData.resolution = "fullscreen"
-end
-if SaveData.resolution ~= "fullscreen" then --We no longer have resolutions, so remove support for any resolutions that's still toggled.
-    SaveData.resolution = "fullscreen"
-end
+SaveData.resolution = SaveData.resolution or "fullscreen"
 if SaveData.letterbox == nil then --Letterbox default is true
     SaveData.letterbox = true
 end
@@ -332,6 +327,9 @@ if SaveData.currentLanguage == nil then
 end
 if SaveData.enableIntros == nil then
     SaveData.enableIntros = true --Enable the intro here, or not
+end
+if SaveData.framerateEnabled == nil then
+    SaveData.framerateEnabled = false
 end
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher

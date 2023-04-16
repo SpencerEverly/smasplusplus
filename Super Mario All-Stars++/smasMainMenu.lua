@@ -388,10 +388,12 @@ function themeMenu1() --Intro theme menu
 end
 
 function ResolutionSelect1() --Resolution settings
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000018"), speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
 end
 
 function ClockSelect1() --Clock settings
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000019"), speakerName = "Clock Theme Selection", pauses = false, updatesInPause = true})
 end
 
@@ -402,10 +404,12 @@ function classicBattleSelect() --Select level.
 end
 
 function ChangeName1() --To change your name...
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000021"), pauses = false, updatesInPause = true})
 end
 
 function ChangePFP1() --To change your PFP...
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000022"), pauses = false, updatesInPause = true})
 end
 
@@ -645,6 +649,7 @@ function OnePlayerCheck()
 end
 
 function ChangeChar1()
+    smasMainMenuSystem.menuOpen = false
     if not SaveData.disableX2char then
         smasCharacterChanger.menuActive = true
         smasCharacterChanger.animationActive = true
@@ -1399,8 +1404,9 @@ if smasMainMenu.active then
 end
 
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu", xCenter = 150}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = 1, xCenter = 150}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = 1, xCenter = 200}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 150}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 200}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, title = "Manage Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 200}
 
 smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
@@ -1425,26 +1431,21 @@ smasMainMenuSystem.addMenuItem{name = "2 Player Mode", section = smasMainMenuSys
 smasMainMenuSystem.addMenuItem{name = "SMBX 1.3 Mode", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(X2DisableCheck1) end}
 smasMainMenuSystem.addMenuItem{name = "Input Configuration", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(InputConfig1) end}
 smasMainMenuSystem.addMenuItem{name = "Accessibility Options", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(AccessibilityOptions1) end}
-smasMainMenuSystem.addMenuItem{name = "Framerate Toggling", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanValue = SaveData.framerateEnabled}
-smasMainMenuSystem.addMenuItem{name = "Manage Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SettingsSubmenu1) end}
+smasMainMenuSystem.addMenuItem{name = "Framerate Toggling", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "framerateEnabled", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Manage Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SaveOptions1) end}
 
 
 
 
 
-littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Character",chosenFunction = function() Routine.run(ChangeChar1) end})
-littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Player Name",chosenFunction = function() Routine.run(ChangeName1) end})
-littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Profile Picture",chosenFunction = function() Routine.run(ChangePFP1) end})
-littleDialogue.registerAnswer("OptionsSubmenuOne",{text = "Change Clock Theme",chosenFunction = function() Routine.run(ClockSelect1) end})
+smasMainMenuSystem.addMenuItem{name = "Change Character", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeChar1) end}
+smasMainMenuSystem.addMenuItem{name = "Change Player Name", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeName1) end}
+smasMainMenuSystem.addMenuItem{name = "Change Profile Picture", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangePFP1) end}
+smasMainMenuSystem.addMenuItem{name = "Change Clock Theme", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ClockSelect1) end}
 
 
 
-littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Change Resolution",chosenFunction = function() Routine.run(ResolutionSelect1) end})
-littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Toggle Letterbox Scaling",chosenFunction = function() Routine.run(ResolutionChangeScale3) end})
-littleDialogue.registerAnswer("OptionsSubmenuTwo",{text = "Toggle Resolution Border",chosenFunction = function() Routine.run(ResolutionChangeBorder2) end})
 
 
 
