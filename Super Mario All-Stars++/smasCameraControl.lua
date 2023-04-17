@@ -27,23 +27,23 @@ function smasCameraControl.onInitAPI()
 end
 
 function smasCameraControl.onInputUpdate()
-    if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then
-        if smasCameraControl.canPanCamera and player.keys.left == KEYS_PRESSED then
-            Sound.playSFX(13)
-            smasCameraControl.timerUpdatable = 0
-            smasCameraControl.isPanningCamera = true
-            if smasCameraControl.cameraPanned == smasCameraControl.camera.right then
+    if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then --Make sure that these requirements are met...
+        if smasCameraControl.canPanCamera and player.keys.left == KEYS_PRESSED then --If pressing left, do these...
+            Sound.playSFX(13) --Play the camera sound effect
+            smasCameraControl.timerUpdatable = 0 --Make sure this is 0...
+            smasCameraControl.isPanningCamera = true --We're panning baby!
+            if smasCameraControl.cameraPanned == smasCameraControl.camera.right then --Set the settings for panning here
                 smasCameraControl.cameraPreviousPan = smasCameraControl.camera.right
                 smasCameraControl.cameraPanned = smasCameraControl.camera.normal
             else
                 smasCameraControl.cameraPreviousPan = smasCameraControl.camera.normal
                 smasCameraControl.cameraPanned = smasCameraControl.camera.left
             end
-        elseif smasCameraControl.canPanCamera and player.keys.right == KEYS_PRESSED then
+        elseif smasCameraControl.canPanCamera and player.keys.right == KEYS_PRESSED then --Same as above, except we're doing the right button here
             Sound.playSFX(13)
             smasCameraControl.timerUpdatable = 0
             smasCameraControl.isPanningCamera = true
-            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
+            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then --Set the settings for panning here
                 smasCameraControl.cameraPreviousPan = smasCameraControl.camera.left
                 smasCameraControl.cameraPanned = smasCameraControl.camera.normal
             else
@@ -54,14 +54,14 @@ function smasCameraControl.onInputUpdate()
     end
 end
 
-function smasCameraControl.onCameraUpdate(camIdx) --onCameraUpdate is used for the panning
+function smasCameraControl.onCameraUpdate(camIdx) --onCameraUpdate is used for the panning and camera control
     if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then
     smasCameraControl.mathClampedValue = math.clamp(camera.x, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
         for i = 0,20 do
             if player.keys.altJump and player.keys.altRun then --When holding alt-run and alt-jump...
                 smasCameraControl.timerUpdatable = smasCameraControl.timerUpdatable + 1 --Update the ticks for the holding.
                 if smasCameraControl.timerUpdatable >= smasCameraControl.ticksUntilYouCanPressLeftOrRight and not autoscroll.isSectionScrolling(i) then --Make sure we're not autoscrolling before camera controlling...
-                    smasCameraControl.canPanCamera = true --We pan camera baby!
+                    smasCameraControl.canPanCamera = true --We pan camera!
                 else
                     smasCameraControl.canPanCamera = false --Don't do it if not met the requirements
                 end
@@ -81,21 +81,21 @@ function smasCameraControl.onCameraUpdate(camIdx) --onCameraUpdate is used for t
                 smasCameraControl.normalPanTimer = smasCameraControl.panAmount
                 smasCameraControl.isPanningCamera = false
             end
-            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
+            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then --Here we update the camera panning
                 camera.x = camera.x - smasCameraControl.panTimer
-            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then
+            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then --For right...
                 camera.x = camera.x + smasCameraControl.panTimer
-            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.normal then
-                if smasCameraControl.cameraPreviousPan == smasCameraControl.camera.left then
+            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.normal then --If normal and we pressed either left or right, we'll need to pan from there
+                if smasCameraControl.cameraPreviousPan == smasCameraControl.camera.left then --Left panning goes from here
                     camera.x = camera.x - smasCameraControl.normalPanTimer
-                else
+                elseif smasCameraControl.cameraPreviousPan == smasCameraControl.camera.right then --Same for right camera panning
                     camera.x = camera.x + smasCameraControl.normalPanTimer
                 end
             end
         else
-            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
+            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then --Are we already panned? Use the default values
                 camera.x = camera.x - smasCameraControl.panAmount
-            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then
+            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then --Here's the ones for right
                 camera.x = camera.x + smasCameraControl.panAmount
             end
         end
