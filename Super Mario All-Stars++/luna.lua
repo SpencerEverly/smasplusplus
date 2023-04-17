@@ -118,13 +118,6 @@ _G.autoscrolla = require("autoscrolla")
 if Misc.inMarioChallenge() then
     console:println("Mario Challenge detected! Loading game in minimal mode...")
     SaveData.disableX2char = false
-    if player.character == 10 then
-        player:transform(3, false)
-        player.setCostume(3, "NINJABOMBERMAN", false)
-    elseif player.character == 14 then
-        player:transform(4, false)
-        player.setCostume(4, "ULTIMATERINKA", false)
-    end
 end
 
 --This will add multiple player arguments.
@@ -401,8 +394,6 @@ function onStart() --Now do onStart...
     warpstaractive = true
     if Misc.inMarioChallenge() then --Just in case if the Mario Challenge is active, do these things to update the Challenge...
         SaveData.totalCoinsClassic = mem(0x00B2C5A8, FIELD_WORD)
-        SaveData.totalScoreClassic = Misc.score()
-        SaveData.totalLives = mem(0x00B2C5AC, FIELD_FLOAT)
         SaveData.totalStarCount = mem(0x00B251E0, FIELD_WORD)
     end
     --Do the weather SaveData additions
@@ -569,6 +560,18 @@ function onDraw()
             SaveData.currentCostumePath = "costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume
         else
             SaveData.currentCostumePath = "N/A"
+        end
+    end
+    
+    if Misc.inMarioChallenge() then
+        if lunatime.tick() == 2 then
+            if player.character == 10 then
+                playerManager.setCostume(3, "NinjaBomberman", true)
+                player:transform(3, false)
+            elseif player.character == 14 then
+                playerManager.setCostume(4, "UltimateRinka", true)
+                player:transform(4, false)
+            end
         end
     end
 end
