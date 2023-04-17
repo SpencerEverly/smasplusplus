@@ -1047,13 +1047,13 @@ function Misk.onCameraDraw()
     if screenShakeTally > -1 then
         screenShakeTally = screenShakeTally - 1
         if screenShakeTally > 0 then
-            handycam.xOffset = ((0 + math.random(((screenShakeTally / 32 + 32))) - math.random((screenShakeTally / 32) + 32)))
-            handycam.yOffset = ((0 + math.random(((screenShakeTally / 32) + 32))) - math.random(((screenShakeTally / 32) + 32)))
+            handycam[1].xOffset = ((0 + math.random(((screenShakeTally / 32 + 32))) - math.random((screenShakeTally / 32) + 32)))
+            handycam[1].yOffset = ((0 + math.random(((screenShakeTally / 32) + 32))) - math.random(((screenShakeTally / 32) + 32)))
         end
     end
     if screenShakeTally == 0 then
-        handycam.xOffset = 0
-        handycam.yOffset = 0
+        handycam[1].xOffset = 0
+        handycam[1].yOffset = 0
     end
 end
 
