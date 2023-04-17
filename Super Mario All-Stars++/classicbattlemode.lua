@@ -557,7 +557,7 @@ function battledependencies.onTick()
             end
         end
         smasHud.visible.keys = false
-        smasHud.visible.itembox = true
+        smasHud.visible.itemBox = true
         smasHud.visible.bombs = true
         smasHud.visible.coins = false
         smasHud.visible.score = false

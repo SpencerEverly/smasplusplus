@@ -255,7 +255,7 @@ function globalgenerals.onTick()
     end
     if player.character == CHARACTER_SNAKE then
         smasHud.visible.keys = true
-        smasHud.visible.itembox = true
+        smasHud.visible.itemBox = true
         smasHud.visible.bombs = true
         smasHud.visible.coins = true
         smasHud.visible.stars = true
@@ -265,7 +265,7 @@ function globalgenerals.onTick()
     end
     if player.character == CHARACTER_NINJABOMBERMAN then
         smasHud.visible.keys = true
-        smasHud.visible.itembox = true
+        smasHud.visible.itemBox = true
         smasHud.visible.bombs = true
         smasHud.visible.coins = true
         smasHud.visible.stars = true
@@ -278,7 +278,7 @@ function globalgenerals.onTick()
     end
     if player.character == CHARACTER_ULTIMATERINKA then
         smasHud.visible.keys = true
-        smasHud.visible.itembox = true
+        smasHud.visible.itemBox = true
         smasHud.visible.bombs = true
         smasHud.visible.coins = true
         smasHud.visible.stars = true

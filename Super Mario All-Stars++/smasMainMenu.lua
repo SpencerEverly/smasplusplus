@@ -43,7 +43,7 @@ if smasMainMenu.active then
     littleDialogue.cursorEnabled = false
     Graphics.activateHud(false)
     smasHud.visible.keys = false
-    smasHud.visible.itembox = false
+    smasHud.visible.itemBox = false
     smasHud.visible.bombs = false
     smasHud.visible.coins = false
     smasHud.visible.score = false
@@ -53,8 +53,8 @@ if smasMainMenu.active then
     smasHud.visible.timer = false
     smasHud.visible.levelname = false
     smasHud.visible.overworldPlayer = false
-    smasHud.visible.deathcount = false
-    smasHud.visible.customitembox = false
+    smasHud.visible.deathCount = false
+    smasHud.visible.customItemBox = false
     smasHud.visible.pWing = false
     datetime.bottomright = true
     datetime.topright = false

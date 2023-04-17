@@ -7,27 +7,27 @@ GameData.smasSMB1System = GameData.smasSMB1System or {}
 GameData.smasSMB1System.crossedCheckpoint = GameData.smasSMB1System.crossedCheckpoint or ""
 
 smasSMB1System.checkpointCoordinates = {
-    ["SMB1 - W-1, L-1.lvlx"] = {x = -197402, y = -200128, crossed = false},
-    ["SMB1 - W-1, L-2.lvlx"] = {x = -176826, y = -180128, crossed = false},
-    ["SMB1 - W-1, L-3.lvlx"] = {x = -197978, y = -200128, crossed = false},
-    ["SMB1 - W-2, L-1.lvlx"] = {x = -196894, y = -200128, crossed = false},
-    ["SMB1 - W-2, L-2.lvlx"] = {x = -177374, y = -180128, crossed = false},
-    ["SMB1 - W-2, L-3.lvlx"] = {x = -196222, y = -200128, crossed = false},
-    ["SMB1 - W-3, L-1.lvlx"] = {x = -196862, y = -200128, crossed = false},
-    ["SMB1 - W-3, L-2.lvlx"] = {x = -196666, y = -200128, crossed = false},
-    ["SMB1 - W-3, L-3.lvlx"] = {x = -197818, y = -200096, crossed = false},
-    ["SMB1 - W-4, L-1.lvlx"] = {x = -196250, y = -200128, crossed = false},
-    ["SMB1 - W-4, L-2.lvlx"] = {x = -176442, y = -180128, crossed = false},
-    ["SMB1 - W-4, L-3.lvlx"] = {x = -197818, y = -200128, crossed = false},
-    ["SMB1 - W-5, L-1.lvlx"] = {x = -196730, y = -200128, crossed = false},
-    ["SMB1 - W-5, L-2.lvlx"] = {x = -196794, y = -200128, crossed = false},
-    ["SMB1 - W-5, L-3.lvlx"] = {x = -197946, y = -200128, crossed = false},
-    ["SMB1 - W-6, L-1.lvlx"] = {x = -196826, y = -200128, crossed = false},
-    ["SMB1 - W-6, L-2.lvlx"] = {x = -196890, y = -200128, crossed = false},
-    ["SMB1 - W-6, L-3.lvlx"] = {x = -196922, y = -200096, crossed = false},
-    ["SMB1 - W-7, L-1.lvlx"] = {x = -196858, y = -200128, crossed = false},
-    ["SMB1 - W-7, L-2.lvlx"] = {x = -177370, y = -180128, crossed = false},
-    ["SMB1 - W-7, L-3.lvlx"] = {x = -197050, y = -200224, crossed = false},
+    ["SMB1 - W-1, L-1.lvlx"] = {x = -197402, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-1, L-2.lvlx"] = {x = -176826, y = -180128, crossed = false, section = 1},
+    ["SMB1 - W-1, L-3.lvlx"] = {x = -197978, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-2, L-1.lvlx"] = {x = -196894, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-2, L-2.lvlx"] = {x = -177374, y = -180128, crossed = false, section = 1},
+    ["SMB1 - W-2, L-3.lvlx"] = {x = -196222, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-3, L-1.lvlx"] = {x = -196862, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-3, L-2.lvlx"] = {x = -196666, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-3, L-3.lvlx"] = {x = -197818, y = -200096, crossed = false, section = 0},
+    ["SMB1 - W-4, L-1.lvlx"] = {x = -196250, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-4, L-2.lvlx"] = {x = -176442, y = -180128, crossed = false, section = 1},
+    ["SMB1 - W-4, L-3.lvlx"] = {x = -197818, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-5, L-1.lvlx"] = {x = -196730, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-5, L-2.lvlx"] = {x = -196794, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-5, L-3.lvlx"] = {x = -197946, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-6, L-1.lvlx"] = {x = -196826, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-6, L-2.lvlx"] = {x = -196890, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-6, L-3.lvlx"] = {x = -196922, y = -200096, crossed = false, section = 0},
+    ["SMB1 - W-7, L-1.lvlx"] = {x = -196858, y = -200128, crossed = false, section = 0},
+    ["SMB1 - W-7, L-2.lvlx"] = {x = -177370, y = -180128, crossed = false, section = 1},
+    ["SMB1 - W-7, L-3.lvlx"] = {x = -197050, y = -200224, crossed = false, section = 0},
 }
 
 smasSMB1System.correctPathCoordinates = {
@@ -60,7 +60,7 @@ end
 local smb1Checkpoint
 
 if smasSMB1System.checkpointCoordinates[Level.filename()] ~= nil then
-    smb1Checkpoint = Checkpoint({x = smasSMB1System.checkpointCoordinates[Level.filename()].x, y = smasSMB1System.checkpointCoordinates[Level.filename()].y, section = player.section})
+    smb1Checkpoint = Checkpoint({x = smasSMB1System.checkpointCoordinates[Level.filename()].x, y = smasSMB1System.checkpointCoordinates[Level.filename()].y, section = smasSMB1System.checkpointCoordinates[Level.filename()].section})
 end
 
 function smasSMB1System.onExitLevel(winType)

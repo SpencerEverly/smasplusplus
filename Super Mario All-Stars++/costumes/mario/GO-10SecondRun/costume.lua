@@ -34,7 +34,7 @@ function costume.onInit(p)
     Defines.projectilespeedx = 6.2
     Defines.player_grav = 0.28
     
-    smasHud.visible.itembox = false
+    smasHud.visible.itemBox = false
     tensecondhp = 2 --This can be set, from 1-3 (Loads every level start)
     costume.abilitesenabled = true
     
@@ -64,7 +64,7 @@ function costume.onDraw()
             player.forcedState = FORCEDSTATE_NONE
             player:mem(0x140, FIELD_WORD, 150)
         end
-        if smasHud.visible.customitembox == true then
+        if smasHud.visible.customItemBox == true then
             local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
             local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
             if tensecondhp <= 0 then
@@ -123,7 +123,7 @@ function costume.onCleanup(p)
     Defines.projectilespeedx = 7.1
     Defines.player_grav = 0.4
     
-    smasHud.visible.itembox = true
+    smasHud.visible.itemBox = true
     costume.abilitesenabled = false
 end
 

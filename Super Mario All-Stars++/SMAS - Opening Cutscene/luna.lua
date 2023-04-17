@@ -4,16 +4,16 @@ local datetime = require("datetime")
 datetime.bottomright = false
 
 smasHud.visible.keys = false
-smasHud.visible.itembox = false
+smasHud.visible.itemBox = false
 smasHud.visible.bombs = false
 smasHud.visible.coins = false
 smasHud.visible.score = false
 smasHud.visible.lives = false
-smasHud.visible.deathcount = false
+smasHud.visible.deathCount = false
 smasHud.visible.stars = false
 smasHud.visible.starcoins = false
 smasHud.visible.timer = false
-smasHud.visible.customitembox = false
+smasHud.visible.customItemBox = false
 
 smasCheats.checkCheatStatusAndDisable()
 

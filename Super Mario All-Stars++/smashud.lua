@@ -1,4 +1,4 @@
--------------------smasHud-------------------
+-----------smasHud (Former: hudOverride)---------
 -------Created by Hoeloe and Enjl  - 2017--------
 --SMBX HUD Defaults & Override System Library----
 --------------For Super Mario Bros X-------------
@@ -96,8 +96,23 @@ end
 
 
 smasHud.visible = {}
+smasHud.visibleStrings = {  
+    "keys",
+    "itemBox",
+    "bombs",
+    "score",
+    "lives",
+    "deathCount",
+    "stars",
+    "starcoins",
+    "timer",
+    "levelname",
+    "overworldPlayer",
+    "customItemBox",
+    "pWing",
+}
 smasHud.visible.keys = true
-smasHud.visible.itembox = true
+smasHud.visible.itemBox = true
 smasHud.visible.bombs = true
 smasHud.visible.coins = true
 smasHud.visible.score = true
@@ -107,9 +122,9 @@ else
     smasHud.visible.lives = false
 end
 if not SaveData.disableX2char then
-    smasHud.visible.deathcount = true
+    smasHud.visible.deathCount = true
 else
-    smasHud.visible.deathcount = false
+    smasHud.visible.deathCount = false
 end
 smasHud.visible.stars = true
 smasHud.visible.starcoins = true
@@ -117,7 +132,7 @@ smasHud.visible.timer = true
 smasHud.visible.levelname = true
 smasHud.visible.overworldPlayer = true
 
-smasHud.visible.customitembox = true
+smasHud.visible.customItemBox = true
 smasHud.visible.pWing = true
 
 smasHud.priority = 5
@@ -204,7 +219,7 @@ Graphics.HUD_ITEMBOX = 2;
 
 smasHud.multiplayerOffsets = {[Graphics.HUD_NONE] = 0, [Graphics.HUD_ITEMBOX] = 40, [Graphics.HUD_HEARTS] = 57}
 
-local isActive = true
+smasHud.isActive = true
 
 local activeCameras = nil
 local activePlayers = nil
@@ -239,16 +254,16 @@ end
 
 function Graphics.activateHud(setActive)
     if type(setActive) == "boolean" then
-        isActive = setActive
+        smasHud.isActive = setActive
     elseif setActive == nil then
-        isActive = not isActive
+        smasHud.isActive = not smasHud.isActive
     else
         error("No matching overload found. Candidates: Graphics.activateHud(bool setActive), Graphics.activateHud()", 2)
     end
 end
 
 function Graphics.isHudActivated()
-    return isActive
+    return smasHud.isActive
 end
 
 _G["hud"] = Graphics.activateHud
@@ -363,59 +378,61 @@ function Graphics.getHUDOffset(playerIdx, isSplit)
 end
 
 function Graphics.drawVanillaHUD(camIndex, priority, isSplit)
-    local thisPlayer = activePlayers[camIndex]
-    local thisCam = activeCameras[camIndex]
+    if smasHud.isActive then
+        local thisPlayer = activePlayers[camIndex]
+        local thisCam = activeCameras[camIndex]
 
-    local splitOffset = {0,0}
+        local splitOffset = {0,0}
 
-    if #activePlayers > 1 and not isSplit then
-        splitOffset[1] = -smasHud.multiplayerOffsets[Graphics.getHUDType(activePlayers[1].character)]
-        if Player.count() >= 2 then
-            splitOffset[2] = smasHud.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
-            for i=1, 2 do
-                local acts = Graphics.getHUDActions(activePlayers[i].character)
-                if(acts) then
-                    acts(i, thisCam, activePlayers[i], priority, isSplit, #activePlayers);
+        if #activePlayers > 1 and not isSplit then
+            splitOffset[1] = -smasHud.multiplayerOffsets[Graphics.getHUDType(activePlayers[1].character)]
+            if Player.count() >= 2 then
+                splitOffset[2] = smasHud.multiplayerOffsets[Graphics.getHUDType(activePlayers[2].character)]
+                for i=1, 2 do
+                    local acts = Graphics.getHUDActions(activePlayers[i].character)
+                    if(acts) then
+                        acts(i, thisCam, activePlayers[i], priority, isSplit, #activePlayers);
+                    end
                 end
             end
+        else
+            local acts = Graphics.getHUDActions(thisPlayer.character);
+            if(acts) then
+                acts(camIdx, thisCam, thisPlayer, priority, isSplit, #activePlayers);
+            end
         end
-    else
-        local acts = Graphics.getHUDActions(thisPlayer.character);
-        if(acts) then
-            acts(camIdx, thisCam, thisPlayer, priority, isSplit, #activePlayers);
-        end
-    end
 
-    if smasHud.visible.itembox then
-        smasHud.countItemboxes(splitOffset, camIndex, #activePlayers > 1, isSplit, priority)
-    end
-    if smasHud.visible.lives then
-        smasHud.drawLives(splitOffset[1], thisCam, thisPlayer, priority)
-    end
-    if smasHud.visible.deathcount then
-        smasHud.drawDeathCount(splitOffset[1], thisCam, thisPlayer, priority)
-    end
-    if smasHud.visible.score then
-        smasHud.drawScore(splitOffset[2], thisCam, priority)
-    end
-    if smasHud.visible.coins then
-        smasHud.drawCoins(splitOffset[2], thisCam, thisPlayer, priority)
-    end
-    if smasHud.visible.stars then
-        smasHud.drawStars(splitOffset[1], thisCam, thisPlayer, priority)
-    end
-    if smasHud.visible.starcoins then
-        if isSplit and (activeCameras[camIndex].width < 800) then
-            smasHud.drawStarcoins(220, thisCam, thisPlayer, priority)
-        else
-            smasHud.drawStarcoins(0, thisCam, thisPlayer, priority)
+        if smasHud.visible.itemBox then
+            smasHud.countItemboxes(splitOffset, camIndex, #activePlayers > 1, isSplit, priority)
         end
-    end
-    if smasHud.visible.timer and timer.isActive() then
-        if isSplit and (activeCameras[camIndex].width < 800) then
-            smasHud.drawTimer(-200, thisCam, thisPlayer, priority)
-        else
-            smasHud.drawTimer(0, thisCam, thisPlayer, priority)
+        if smasHud.visible.lives then
+            smasHud.drawLives(splitOffset[1], thisCam, thisPlayer, priority)
+        end
+        if smasHud.visible.deathCount then
+            smasHud.drawDeathCount(splitOffset[1], thisCam, thisPlayer, priority)
+        end
+        if smasHud.visible.score then
+            smasHud.drawScore(splitOffset[2], thisCam, priority)
+        end
+        if smasHud.visible.coins then
+            smasHud.drawCoins(splitOffset[2], thisCam, thisPlayer, priority)
+        end
+        if smasHud.visible.stars then
+            smasHud.drawStars(splitOffset[1], thisCam, thisPlayer, priority)
+        end
+        if smasHud.visible.starcoins then
+            if isSplit and (activeCameras[camIndex].width < 800) then
+                smasHud.drawStarcoins(220, thisCam, thisPlayer, priority)
+            else
+                smasHud.drawStarcoins(0, thisCam, thisPlayer, priority)
+            end
+        end
+        if smasHud.visible.timer and timer.isActive() then
+            if isSplit and (activeCameras[camIndex].width < 800) then
+                smasHud.drawTimer(-200, thisCam, thisPlayer, priority)
+            else
+                smasHud.drawTimer(0, thisCam, thisPlayer, priority)
+            end
         end
     end
 end
@@ -432,7 +449,7 @@ do
             if smasHud.visible.lives then
                 smasHud.drawDeathCount(player, priority);
             end
-            if smasHud.visible.deathcount then
+            if smasHud.visible.deathCount then
                 smasHud.drawHUDLives(player, priority);
             end
 
@@ -884,7 +901,7 @@ function smasHud.onTick()
 end
 
 function smasHud.onHUDDraw(camIdx)
-    if isActive then
+    if smasHud.isActive then
         if(isOverworld) then
             currentOWRenderFunc(smasHud.priority);
         else

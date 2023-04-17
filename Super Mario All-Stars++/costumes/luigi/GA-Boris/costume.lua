@@ -48,7 +48,7 @@ function costume.onInit(p)
     costume.useGun1 = false
     costume.useGrenade2 = false
     costume.grenade = true
-    --smasHud.visible.itembox = false
+    --smasHud.visible.itemBox = false
     borishp = 3
     if costume.grenade then
         local grenade = {
@@ -448,7 +448,7 @@ end
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
     costume.grenade = false
-    --smasHud.visible.itembox = true
+    --smasHud.visible.itemBox = true
 end
 
 Misc.storeLatestCostumeData(costume)

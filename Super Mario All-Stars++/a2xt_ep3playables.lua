@@ -75,8 +75,12 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
 
     local pathPrefix = costumeTable.path
 
-    -- Set the player object's powerup state to 2 for the HP system override
-    playerObj.powerup = 2
+    -- Set the player object's powerup state.
+    if playerObj.powerup >= 2 then
+        playerObj.powerup = player.powerup
+    else
+        playerObj.powerup = 2
+    end
 
     -- Initialize costume data
     local costDat = costumeData[costumeTable.index]  or  costumeTable
@@ -105,7 +109,7 @@ function ep3Playables.register(playerObj, costumeTable, extraInputFunct, extraAn
         p = playerObj,
 
         hp = 2,
-        powerup = storedPower[playerObj] or 2,
+        powerup = storedPower[playerObj] or player.powerup,
         lastPowerup = 0,
         lastPower = 2,
         reserveItem = 0,
@@ -518,13 +522,13 @@ function ep3Playables.onTickEnd()
         
         -- Override reserve system
         if  reserveHPIDs[p.reservePowerup]  and  pDat.hp < 3  then
-            p.reservePowerup = 0
+            --p.reservePowerup = 0
             pDat.hp = math.min(3, pDat.hp + 1)
         end
 
         if  p.reservePowerup > 0  then
             pDat.reserveItem = p.reservePowerup
-            p.reservePowerup = 0
+            --p.reservePowerup = 0
         end
 
         -- Override HP/powerup system

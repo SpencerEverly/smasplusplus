@@ -21,7 +21,7 @@ function costume.onInit(p)
         costume.loaded = true
     end
     
-    smasHud.visible.itembox = false
+    smasHud.visible.itemBox = false
     characterhp = 3
 end
 
@@ -54,7 +54,7 @@ function costume.onDraw()
             player.forcedState = FORCEDSTATE_NONE
             player:mem(0x140, FIELD_WORD, 150)
         end
-        if smasHud.visible.customitembox == true then
+        if smasHud.visible.customItemBox == true then
             local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
             local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
             if characterhp <= 0 then

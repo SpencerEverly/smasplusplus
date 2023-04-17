@@ -12,6 +12,7 @@ local ep3Playables = require("a2xt_ep3playables")
 local players = {}
 local playerCount = 0
 
+local smasHud = require("smasHud")
 local smasFunctions = require("smasFunctions")
 
 -- Library table for the costume, config for default ep3Playables behavior goes here
@@ -1103,7 +1104,6 @@ function costume.onInit(playerObj)
         Sound.loadCostumeSounds()
         costume.loaded = true
     end
-    Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_NONE)
     coyotetime = require("coyotetime");
     ppp = require("playerphysicspatch");
     spintrail = require("a2xt_spintrail")
@@ -1156,20 +1156,24 @@ local heartfull2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_c
 local heartempty2 = Graphics.loadImageResolved("costumes/mario/Demo-XmasPily/hp_carrot_empty.png")
 
 function costume.onDraw()
-    if onehp then
-        Graphics.drawImageWP(heartfull2, 357,  16, -4.2)
-        Graphics.drawImageWP(heartempty2, 388,  16, -4.2)
-        Graphics.drawImageWP(heartempty2, 421,  16, -4.2)
-    end
-    if twohp then
-        Graphics.drawImageWP(heartfull2, 357,  16, -4.2)
-        Graphics.drawImageWP(heartfull2,  388,  16, -4.2)
-        Graphics.drawImageWP(heartempty2, 421,  16, -4.2)
-    end
-    if threehp then
-        Graphics.drawImageWP(heartfull2, 357,  16, -4.2)
-        Graphics.drawImageWP(heartfull2, 388,  16, -4.2)
-        Graphics.drawImageWP(heartfull2, 421,  16, -4.2)
+    if Graphics.isHudActivated() then
+        if smasHud.visible.customItemBox then
+            if onehp then
+                Graphics.drawImageWP(heartfull2, 357, 80, 5)
+                Graphics.drawImageWP(heartempty2, 388, 80, 5)
+                Graphics.drawImageWP(heartempty2, 421, 80, 5)
+            end
+            if twohp then
+                Graphics.drawImageWP(heartfull2, 357, 80, 5)
+                Graphics.drawImageWP(heartfull2,  388, 80, 5)
+                Graphics.drawImageWP(heartempty2, 421, 80, 5)
+            end
+            if threehp then
+                Graphics.drawImageWP(heartfull2, 357, 80, 5)
+                Graphics.drawImageWP(heartfull2, 388, 80, 5)
+                Graphics.drawImageWP(heartfull2, 421, 80, 5)
+            end
+        end
     end
 end
 
@@ -1183,11 +1187,10 @@ end
 
 function costume.onTickEnd()
     jumprng = RNG.randomInt(1,6)
-    extrasounds.sounds[1] = Audio.SfxOpen("costumes/mario/Demo-XmasPily/jumps/jump-"..jumprng..".ogg")
+    extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/jumps/jump-"..jumprng..".ogg")
 end
 
 function costume.onCleanup(playerObj, p)
-    Graphics.registerCharacterHUD(CHARACTER_MARIO, Graphics.HUD_ITEMBOX)
     onehp = false
     twohp = false
     threehp = false

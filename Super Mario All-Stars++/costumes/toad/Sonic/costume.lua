@@ -64,7 +64,7 @@ function costume.onInit(p)
     Defines.player_grav = 0.5
     
     costume.abilitesenabled = true
-    smasHud.visible.itembox = false
+    smasHud.visible.itemBox = false
 end
 
 local function isSlidingOnIce()
@@ -383,7 +383,7 @@ function costume.onCleanup(p)
     Defines.player_grav = 0.4
     
     costume.abilitesenabled = false
-    smasHud.visible.itembox = true
+    smasHud.visible.itemBox = true
 end
 
 Misc.storeLatestCostumeData(costume)

@@ -566,10 +566,15 @@ function onDraw()
     if Misc.inMarioChallenge() then
         if lunatime.tick() == 2 then
             if player.character == 10 then
-                playerManager.setCostume(3, "NinjaBomberman", true)
-                player:transform(3, false)
+                if player:getCostume() == "SMB3-WALUIGI" then
+                    player.setCostume(3, "SMB3-WALUIGI", false)
+                    player:transform(3, false)
+                else
+                    player.setCostume(3, "NINJABOMBERMAN", false)
+                    player:transform(3, false)
+                end
             elseif player.character == 14 then
-                playerManager.setCostume(4, "UltimateRinka", true)
+                player.setCostume(4, "ULTIMATERINKA", false)
                 player:transform(4, false)
             end
         end
