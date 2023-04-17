@@ -5,7 +5,7 @@
 local smas2PlayerSystem = {}
 
 local handycam = require("handycam")
-handycam[1].targets = {}
+handycam[1].targets = {player}
 
 local player1Camera = Graphics.CaptureBuffer(800,600)
 local player2Camera = Graphics.CaptureBuffer(800,600)
@@ -80,11 +80,11 @@ end
 
 function smas2PlayerSystem.onDraw()
     if smasBooleans.targetPlayers then --If targeting players are enabled...
-        for _,p in ipairs(Player.get()) do --Get all players
-            if p.isValid and not table.icontains(handycam[1].targets,p) then
-                table.insert(handycam[1].targets,p)
-            elseif not p.isValid and table.icontains(handycam[1].targets,p) then
-                table.remove(handycam[1].targets,p)
+        for i = 1,maxPlayers do --Get all players
+            if Player(i).isValid and not table.icontains(handycam[1].targets,Player(i)) then
+                table.insert(handycam[1].targets,Player(i))
+            elseif not Player(i).isValid and table.icontains(handycam[1].targets,Player(i)) then
+                table.remove(handycam[1].targets,Player(i))
             end
         end
     end

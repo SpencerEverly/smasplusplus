@@ -62,6 +62,23 @@ if Misc.setWindowIcon ~= nil then
     Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 end
 
+--Register some custom global event handlers...
+console:println("Registering global event handlers...")
+Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostPlaySFX"] = true
+Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
+Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
+Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
+Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
+if SMBX_VERSION == VER_SEE_MOD then
+    Misc.LUNALUA_EVENTS_TBL["onCheatDeactivate"] = true
+end
+Misc.LUNALUA_EVENTS_TBL["onWarpToOtherLevel"] = true
+Misc.LUNALUA_EVENTS_TBL["onWarpBegin"] = true
+
 --Now, before we get started, we require the most important libraries on the top.
 console:println("Loading important libraries...")
 
@@ -97,25 +114,13 @@ _G.Timer = require("timer-mod")
 _G.lazyprintSMAS = require("lazyprintSMAS")
 _G.autoscrolla = require("autoscrolla")
 
---Register some custom global event handlers...
-Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostPlaySFX"] = true
-Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
-Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
-Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
-Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
-if SMBX_VERSION == VER_SEE_MOD then
-    Misc.LUNALUA_EVENTS_TBL["onCheatDeactivate"] = true
-end
-Misc.LUNALUA_EVENTS_TBL["onWarpToOtherLevel"] = true
-
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then
     console:println("Mario Challenge detected! Loading game in minimal mode...")
     SaveData.disableX2char = false
+    if player.character == 10 then
+        
+    end
 end
 
 --This will add multiple player arguments.
@@ -609,6 +614,16 @@ function onTick()
             end
         end
     end
+    for i = 1,200 do
+        if Player(i).isValid then
+            if Player(i).forcedState == FORCEDSTATE_PIPE then
+                if Player(i).forcedTimer == 1 then
+                    local warp = Player(i):mem(0x15E, FIELD_WORD) - 1
+                    EventManager.callEvent("onWarpBegin", Warp(warp), Player(i))
+                end
+            end
+        end
+    end
 end
 
 function onPause(evt)
@@ -632,15 +647,9 @@ function onExit()
     end
 end
 
-function onPostPOW(shakeNumber, soundSuppressed, coinsCanFall, eventName)
-    
-end
-
-if SMBX_VERSION == VER_SEE_MOD then
-    function onCheatActivate(cheat)
-        if cheat.id then
-            SaveData.totalCheatCount = SaveData.totalCheatCount + 1
-        end
+function onCheatActivate(cheat)
+    if cheat.id then
+        SaveData.totalCheatCount = SaveData.totalCheatCount + 1
     end
 end
 

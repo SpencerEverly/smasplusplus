@@ -363,7 +363,7 @@ function SysManager.exitLevel(winType) --Exits a level with the win type specifi
                 end
             else
                 console:println("This warp has a level warp point. Warping to "..Warp.get()[p:mem(0x15E, FIELD_WORD)].levelFilename.."...")
-                local warp = p:mem(0x15E, FIELD_WORD)
+                local warp = p:mem(0x15E, FIELD_WORD) - 1
                 EventManager.callEvent("onWarpToOtherLevel", warp, p)
                 SysManager.exitLevelToWarpPoint(warp)
             end
