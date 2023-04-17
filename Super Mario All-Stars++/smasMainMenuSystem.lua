@@ -4,6 +4,7 @@ local textplus = require("textplus")
 
 smasMainMenuSystem.mainMenuFont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
 smasMainMenuSystem.cursorImg = Graphics.loadImageResolved("littleDialogue/bootmenudialog/selector.png")
+smasMainMenuSystem.arrowImg = Graphics.loadImageResolved("littleDialogue/bootmenudialog/scrollArrow.png")
 
 function smasMainMenuSystem.onInitAPI()
     registerEvent(smasMainMenuSystem,"onInputUpdate")
@@ -237,13 +238,14 @@ function smasMainMenuSystem.onDraw()
     smasMainMenuSystem.MenuXCentered = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].xCenter
     local currentOption = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
     local C = 0
+    local original_maxShow = smasMainMenuSystem.maxShow
     
     if smasMainMenuSystem.menuOpen then
         if smasMainMenuSystem.onMenu > 0 then
             smasMainMenuSystem.minShow = 1
             smasMainMenuSystem.maxShow = #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu]
             
-            local original_maxShow = smasMainMenuSystem.maxShow
+            original_maxShow = smasMainMenuSystem.maxShow
             
             if smasMainMenuSystem.PressDelay > 0 then
                 smasMainMenuSystem.PressDelay = smasMainMenuSystem.PressDelay - 1
@@ -276,9 +278,8 @@ function smasMainMenuSystem.onDraw()
             textplus.print({pivot = vector.v2(0.5,0.5), x = 400, y = 310, text = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title, priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
             
             for k = smasMainMenuSystem.minShow, smasMainMenuSystem.maxShow do
-                --for j = 1,#smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] do
                 local B = k - smasMainMenuSystem.minShow + 1
-                local i = 0 --smasMainMenuSystem.MenuY + 30 * (i + j)
+                local i = 0
                 local named = {}
                 
                 smasMainMenuSystem.layoutText[k] = textplus.layout(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name, 10)
@@ -309,11 +310,11 @@ function smasMainMenuSystem.onDraw()
             end
             
             if smasMainMenuSystem.minShow > 1 then
-                --Graphics.drawImageWP(smasMainMenuSystem.cursorImg, smasMainMenuSystem.MenuX - 20, smasMainMenuSystem.MenuY - 20, smasMainMenuSystem.priority)
+                Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 44, 0, 0, smasMainMenuSystem.arrowImg.width / 2, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
             end
             
-            if smasMainMenuSystem.maxShow < smasMainMenuSystem.maxShow then
-                --Graphics.drawImageWP(smasMainMenuSystem.cursorImg, smasMainMenuSystem.MenuX - 20, smasMainMenuSystem.MenuY + 140, smasMainMenuSystem.priority)
+            if smasMainMenuSystem.maxShow < original_maxShow then
+                Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 204, smasMainMenuSystem.arrowImg.width / 2, 0, 20, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
             end
             
             local B = MenuCursor - smasMainMenuSystem.minShow + 1
