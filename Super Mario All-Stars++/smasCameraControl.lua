@@ -26,8 +26,22 @@ function smasCameraControl.onInitAPI()
     registerEvent(smasCameraControl,"onTick")
 end
 
+function smasCameraControl.canDoCameraControlling()
+    return (not SaveData.disableX2char
+        and (
+            smasBooleans.isInLevel
+            or smasBooleans.isInHub
+        )
+        and Level.endState() == 0
+        and (
+            not GameData.winStateActive
+            or GameData.winStateActive == nil
+        )
+    )
+end
+
 function smasCameraControl.onInputUpdate()
-    if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then --Make sure that these requirements are met...
+    if smasCameraControl.canDoCameraControlling() then --Make sure that these requirements are met...
         if smasCameraControl.canPanCamera and player.keys.left == KEYS_PRESSED then --If pressing left, do these...
             Sound.playSFX(13) --Play the camera sound effect
             smasCameraControl.timerUpdatable = 0 --Make sure this is 0...
@@ -55,7 +69,7 @@ function smasCameraControl.onInputUpdate()
 end
 
 function smasCameraControl.onCameraUpdate(camIdx) --onCameraUpdate is used for the panning and camera control
-    if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then
+    if smasCameraControl.canDoCameraControlling() then
         for i = 0,20 do
             if player.keys.altJump and player.keys.altRun then --When holding alt-run and alt-jump...
                 smasCameraControl.timerUpdatable = smasCameraControl.timerUpdatable + 1 --Update the ticks for the holding.

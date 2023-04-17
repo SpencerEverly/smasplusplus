@@ -87,7 +87,6 @@ _G.numWorldMusic = 0
 
 --This is the version number of this episode. It can be changed to any version we're on.
 _G.VersionOfEpisode = "Demo 4"
-
 _G.MenuCursor = 0
 
 _G.NPC_Globals = {
