@@ -119,7 +119,11 @@ if Misc.inMarioChallenge() then
     console:println("Mario Challenge detected! Loading game in minimal mode...")
     SaveData.disableX2char = false
     if player.character == 10 then
-        
+        player:transform(3, false)
+        player.setCostume(3, "NINJABOMBERMAN", false)
+    elseif player.character == 14 then
+        player:transform(4, false)
+        player.setCostume(4, "ULTIMATERINKA", false)
     end
 end
 
@@ -643,6 +647,11 @@ function onExit()
             mem(0x00B2C5AC, FIELD_FLOAT, 99)
         else
             mem(0x00B2C5AC, FIELD_FLOAT, SaveData.totalLives)
+        end
+        if player.character == 3 and SaveData.currentCostume == "NINJABOMBERMAN" then
+            player:transform(10, false)
+        elseif player.character == 4 and SaveData.currentCostume == "ULTIMATERINKA" then
+            player:transform(14, false)
         end
     end
 end
