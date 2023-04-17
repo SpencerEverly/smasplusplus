@@ -185,7 +185,7 @@ local function x2modedisable()
     pausemenu.paused_other = false
     Misc.unpause()
     player:transform(1, false)
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         SaveData.disableX2char = true
         Level.load(Level.filename())
     end
@@ -195,7 +195,7 @@ local function x2modeenable()
     Graphics.activateHud(false)
     Cheats.trigger("1player")
     Defines.player_hasCheated = false
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         SaveData.disableX2char = false
         Level.load(Level.filename())
     end
@@ -1160,41 +1160,41 @@ local function drawCharacterMenu(y, alpha)
         }
         
         table.insert(pause_options_char, {name2="Go Back", action = pausemenureturn});
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             table.insert(pause_options_char, {name2="Change Character (Left)", action = characterchangeleft});
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             table.insert(pause_options_char, {name2="Change Character (Right)", action = characterchange});
         end
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             table.insert(pause_options_char, {name2="Change 1P's Character (Left)", action = characterchange13left});
         end
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             table.insert(pause_options_char, {name2="Change 1P's Character (Right)", action = characterchange13});
         end
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             if Player.count() == 2 then
                 table.insert(pause_options_char, {name2="Change 2P's Character (Left)", action = characterchange13_2pleft});
                 table.insert(pause_options_char, {name2="Change 2P's Character (Right)", action = characterchange13_2p});
             end
         end
         if isOverworld then
-            if SaveData.disableX2char == false then
+            if not SaveData.disableX2char then
                 table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleftmap});
             end
         end
         if isOverworld then
-            if SaveData.disableX2char == false then
+            if not SaveData.disableX2char then
                 table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangerightmap});
             end
         end
         if not isOverworld then
-            if SaveData.disableX2char == false then
+            if not SaveData.disableX2char then
                 table.insert(pause_options_char, {name2="Change Costume (Left)", action = costumechangeleft});
             end
         end
         if not isOverworld then
-            if SaveData.disableX2char == false then
+            if not SaveData.disableX2char then
                 table.insert(pause_options_char, {name2="Change Costume (Right)", action = costumechangeright});
             end
         end
@@ -1520,12 +1520,12 @@ local function drawOtherOptionMenu(y, alpha)
             table.insert(pause_options_other, {name4="Mute/Unmute Music", action = mutemusic});
         end
         if not isOverworld then
-            if SaveData.disableX2char == true then
+            if SaveData.disableX2char then
                 table.insert(pause_options_other, {name4="Turn OFF SMBX 1.3 Mode", action = x2modeenable});
             end
         end
         if not isOverworld then
-            if SaveData.disableX2char == false then
+            if not SaveData.disableX2char then
                 table.insert(pause_options_other, {name4="Turn ON SMBX 1.3 Mode", action = x2modedisable});
             end
         end

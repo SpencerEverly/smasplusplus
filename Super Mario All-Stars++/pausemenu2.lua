@@ -1317,10 +1317,10 @@ end
 
 function onethreemodeactivate()
     pauseplus.canControlMenu = false
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         Sound.playSFX("1.3Mode/dragon-coin.ogg")
         Sound.playSFX("1.3Mode/key.ogg")
-    elseif SaveData.disableX2char == true then
+    elseif SaveData.disableX2char then
         Sound.playSFX("dragon-coin.ogg")
         Sound.playSFX("key.ogg")
     end

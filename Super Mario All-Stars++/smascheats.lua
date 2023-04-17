@@ -19,15 +19,15 @@ Cheats.deregister("mylifegoals") --This gives a a SMW goal exit on the wrong ID
 Cheats.deregister("mysteryball") --This gives a a SMB3 goal orb on the wrong ID
 Cheats.deregister("redigitiscool") --This will be deregistered because I'm going to use this for an misc easter egg.
 Cheats.deregister("framerate") --This will be deregistered because I use a SaveData variable instead.
-Cheats.deregister("supermario2") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("supermario4") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("supermario8") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("supermario16") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("supermario32") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("supermario64") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("supermario128") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("1player") --This will be deregistered because we're gonna remake this for customCamera target detection
-Cheats.deregister("2player") --This will be deregistered because we're gonna remake this for customCamera target detection
+Cheats.deregister("supermario2") --This will be deregistered because we're gonna remake this
+Cheats.deregister("supermario4") --This will be deregistered because we're gonna remake this
+Cheats.deregister("supermario8") --This will be deregistered because we're gonna remake this
+Cheats.deregister("supermario16") --This will be deregistered because we're gonna remake this
+Cheats.deregister("supermario32") --This will be deregistered because we're gonna remake this
+Cheats.deregister("supermario64") --This will be deregistered because we're gonna remake this
+Cheats.deregister("supermario128") --This will be deregistered because we're gonna remake this
+Cheats.deregister("1player") --This will be deregistered because we're gonna remake this
+Cheats.deregister("2player") --This will be deregistered because we're gonna remake this
 Cheats.deregister("moneytree") --This will be deregistered because I'm going to remake this since the coin system was remade
 Cheats.deregister("densenuclearenergy") --This will be deregistered because I'm going to remake this since UR has been switched to a costume
 Cheats.deregister("itsameultimaterinka") --This will be deregistered because I'm going to remake this since UR has been switched to a costume

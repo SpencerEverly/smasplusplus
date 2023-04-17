@@ -184,10 +184,10 @@ function onStart()
     end
     Audio.MusicVolume(nil)
     --mem(0xB25728, FIELD_BOOL, true) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         --inventory = require("customInventory")
     end
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         
     end
 end
@@ -195,10 +195,10 @@ end
 function onTick()
     Defines.player_hasCheated = false
     
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         playerManager.overworldCharacters = {CHARACTER_MARIO, CHARACTER_LUIGI, CHARACTER_PEACH, CHARACTER_TOAD, CHARACTER_LINK, CHARACTER_MEGAMAN, CHARACTER_WARIO, CHARACTER_BOWSER, CHARACTER_YOSHI, CHARACTER_NINJABOMBERMAN, CHARACTER_ROSALINA, CHARACTER_SNAKE, CHARACTER_ZELDA, CHARACTER_ULTIMATERINKA, CHARACTER_UNCLEBROADSWORD, CHARACTER_SAMUS}
     end
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         playerManager.overworldCharacters = {CHARACTER_MARIO, CHARACTER_LUIGI, CHARACTER_PEACH, CHARACTER_TOAD, CHARACTER_LINK}
     end
 end
@@ -249,14 +249,14 @@ function onDraw()
         Graphics.sprites.player[14].img = Graphics.loadImageResolved("graphics/smbx2og/player/player-14.png")
     end
     if SaveData.resolution == "fullscreen" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 92.7 - 0.00872665
             map3d.CameraSettings.distance = 32
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 60
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 300
@@ -265,14 +265,14 @@ function onDraw()
         end
     end
     if SaveData.resolution == "widescreen" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 107.7 - 0.00872665
             map3d.CameraSettings.distance = 32
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 75
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 300
@@ -281,14 +281,14 @@ function onDraw()
         end
     end
     if SaveData.resolution == "ultrawide" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 122.7 - 0.00872665
             map3d.CameraSettings.distance = 32
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 85
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 300
@@ -297,14 +297,14 @@ function onDraw()
         end
     end
     if SaveData.resolution == "nes" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 107.7 - 0.00872665
             map3d.CameraSettings.distance = 32
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 75
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 300
@@ -313,14 +313,14 @@ function onDraw()
         end
     end
     if SaveData.resolution == "gameboy" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 142.7 - 0.00872665
             map3d.CameraSettings.distance = 52
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 110
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 300
@@ -329,14 +329,14 @@ function onDraw()
         end
     end
     if SaveData.resolution == "gba" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 117.7 - 0.00872665
             map3d.CameraSettings.distance = 46
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 85
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 300
@@ -345,14 +345,14 @@ function onDraw()
         end
     end
     if SaveData.resolution == "iphone1st" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 137.7 - 0.00872665
             map3d.CameraSettings.distance = 46
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 105
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 300
@@ -361,14 +361,14 @@ function onDraw()
         end
     end
     if SaveData.resolution == "3ds" then
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             map3d.CameraSettings.fov = 123.7 - 0.00872665
             map3d.CameraSettings.distance = -69
             map3d.CameraSettings.height = 320
             map3d.CameraSettings.angle = 90
             map3d.CameraSettings.heightAdjust = false
         end
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             map3d.CameraSettings.fov = 85
             map3d.CameraSettings.distance = 300
             map3d.CameraSettings.height = 450
@@ -522,7 +522,7 @@ function onDraw()
     
         Graphics.drawImageWP(hudborder, 0, 0, 1)
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 70, 558, 2)
             Graphics.drawImageWP(times, 105, 560, 2)
             textplus.print{x=124, y=558, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -576,7 +576,7 @@ function onDraw()
         Graphics.drawImageWP(hudborderwide, 0, 0, 1)
         Graphics.drawImageWP(wideborder, 0, 0, 6)
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 70, 500, 2)
             Graphics.drawImageWP(times, 105, 502, 2)
             textplus.print{x=124, y=500, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -617,7 +617,7 @@ function onDraw()
         Graphics.drawImageWP(hudborderultrawide, 0, 0, 1)
         Graphics.drawImageWP(ultrawideborder, 0, 0, 6)
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 70, 440, 2)
             Graphics.drawImageWP(times, 105, 442, 2)
             textplus.print{x=124, y=440, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -660,7 +660,7 @@ function onDraw()
             Graphics.drawImageWP(nesborder, 0, 0, 6)
         end
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 155, 500, 2)
             Graphics.drawImageWP(times, 190, 502, 2)
             textplus.print{x=209, y=500, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -713,7 +713,7 @@ function onDraw()
             Graphics.drawImageWP(gbborder, 0, 0, 6)
         end
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 250, 400, 0, 0, 16, 8, 2)
             Graphics.drawImageWP(times, 270, 401, 0, 0, 6, 6, 2)
             textplus.print{x=279, y=403, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=0.4, yscale=0.4}
@@ -767,7 +767,7 @@ function onDraw()
             Graphics.drawImageWP(gbaborder, 0, 0, 6)
         end
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 165, 440, 2)
             Graphics.drawImageWP(times, 200, 442, 2)
             textplus.print{x=220, y=445, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}
@@ -822,7 +822,7 @@ function onDraw()
             Graphics.drawImageWP(iphoneoneborder, 0, 0, 6)
         end
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 360, 430, 2)
             Graphics.drawImageWP(times, 395, 432, 2)
             textplus.print{x=414, y=430, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1.5, yscale=1.5}
@@ -868,7 +868,7 @@ function onDraw()
             Graphics.drawImageWP(threedsborder, 0, 0, 6)
         end
         
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             Graphics.drawImageWP(oneupicon, 165, 510, 2)
             Graphics.drawImageWP(times, 200, 512, 2)
             textplus.print{x=220, y=515, text = tostring(mem(0x00B2C5AC,FIELD_FLOAT)), priority=2, color=Color.white, font=font2, xscale=1, yscale=1}

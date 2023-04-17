@@ -13,10 +13,12 @@ smasCameraControl.camera = {
 smasCameraControl.cameraPanned = smasCameraControl.camera.normal --Normal is the default setting
 smasCameraControl.cameraPreviousPan = smasCameraControl.camera.normal --To make sure we know what the pan should be
 smasCameraControl.panAmount = 150
+smasCameraControl.panAmountFinal = 0
 smasCameraControl.isPanningCamera = false
 smasCameraControl.panTimer = 0
 smasCameraControl.normalPanTimer = smasCameraControl.panAmount
 smasCameraControl.mathClampedValue = 0
+smasCameraControl.offBounds = false
 
 function smasCameraControl.onInitAPI()
     registerEvent(smasCameraControl,"onCameraUpdate")
@@ -52,9 +54,33 @@ function smasCameraControl.onInputUpdate()
     end
 end
 
-function smasCameraControl.onCameraUpdate(camIdx)
+function smasCameraControl.onCameraUpdate(camIdx) --onCameraUpdate is used for the panning
     if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then
+    smasCameraControl.mathClampedValue = math.clamp(camera.x, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
+        for i = 0,20 do
+            if player.keys.altJump and player.keys.altRun then --When holding alt-run and alt-jump...
+                smasCameraControl.timerUpdatable = smasCameraControl.timerUpdatable + 1 --Update the ticks for the holding.
+                if smasCameraControl.timerUpdatable >= smasCameraControl.ticksUntilYouCanPressLeftOrRight and not autoscroll.isSectionScrolling(i) then --Make sure we're not autoscrolling before camera controlling...
+                    smasCameraControl.canPanCamera = true --We pan camera baby!
+                else
+                    smasCameraControl.canPanCamera = false --Don't do it if not met the requirements
+                end
+            else
+                smasCameraControl.timerUpdatable = 0 --Don't update if not holding alt-run and alt-jump
+                smasCameraControl.canPanCamera = false
+            end
+        end
         if smasCameraControl.isPanningCamera then
+            smasCameraControl.panTimer = smasCameraControl.panTimer + 5 --This makes a pan happen, on the right
+            smasCameraControl.normalPanTimer = smasCameraControl.normalPanTimer - 5 --Make sure that this is used for panning to the left
+            if smasCameraControl.panTimer >= smasCameraControl.panAmount then --If met the right pan amount, reset the right pan timer and make panning false...
+                smasCameraControl.panTimer = 0
+                smasCameraControl.isPanningCamera = false
+            end
+            if smasCameraControl.normalPanTimer <= 0 then --If met the left pan amount, reset the left pan timer and make panning false...
+                smasCameraControl.normalPanTimer = smasCameraControl.panAmount
+                smasCameraControl.isPanningCamera = false
+            end
             if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
                 camera.x = camera.x - smasCameraControl.panTimer
             elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then
@@ -73,54 +99,12 @@ function smasCameraControl.onCameraUpdate(camIdx)
                 camera.x = camera.x + smasCameraControl.panAmount
             end
         end
-    end
-end
-
-function smasCameraControl.onTick()
-    if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then
-        for i = 0,20 do
-            if player.keys.altJump and player.keys.altRun then
-                smasCameraControl.timerUpdatable = smasCameraControl.timerUpdatable + 1
-                if smasCameraControl.timerUpdatable >= smasCameraControl.ticksUntilYouCanPressLeftOrRight and not autoscroll.isSectionScrolling(i) then
-                    smasCameraControl.canPanCamera = true
-                else
-                    smasCameraControl.canPanCamera = false
-                end
-            else
-                smasCameraControl.timerUpdatable = 0
-                smasCameraControl.canPanCamera = false
-            end
-        end
-        if smasCameraControl.isPanningCamera then
-            smasCameraControl.panTimer = smasCameraControl.panTimer + 5
-            smasCameraControl.normalPanTimer = smasCameraControl.normalPanTimer - 5
-            if smasCameraControl.panTimer >= smasCameraControl.panAmount then
-                smasCameraControl.panTimer = 0
-                smasCameraControl.isPanningCamera = false
-            end
-            if smasCameraControl.normalPanTimer <= 0 then
-                smasCameraControl.normalPanTimer = smasCameraControl.panAmount
-                smasCameraControl.isPanningCamera = false
-            end
-        end
-        if not smasCameraControl.isPanningCamera then
-            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
-                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panAmount, camera.x, camera.x)
-            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then
-                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panAmount, camera.x, camera.x)
-            end
+        if camera.x < player.sectionObj.boundary.left then
+            smasCameraControl.offBounds = true
+        elseif camera.x > player.sectionObj.boundary.right - camera.width then
+            smasCameraControl.offBounds = true
         else
-            if smasCameraControl.cameraPanned == smasCameraControl.camera.left then
-                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panTimer, camera.x, camera.x)
-            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then
-                smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.panTimer, camera.x, camera.x)
-            elseif smasCameraControl.cameraPanned == smasCameraControl.camera.normal then
-                if smasCameraControl.cameraPreviousPan == smasCameraControl.camera.left then
-                    smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.normalPanTimer, camera.x, camera.x)
-                else
-                    smasCameraControl.mathClampedValue = math.clamp(smasCameraControl.normalPanTimer, camera.x, camera.x)
-                end
-            end
+            smasCameraControl.offBounds = false
         end
     end
 end

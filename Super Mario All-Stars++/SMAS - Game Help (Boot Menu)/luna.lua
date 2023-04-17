@@ -71,7 +71,7 @@ function dependencies.onStart()
     local currentCostume = player:getCostume()
     
     local costumes
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         mm = require("Characters/megaman");
         mm.playIntro = false;
         undertaledepends = require("level_dependencies_undertale")
@@ -81,7 +81,7 @@ function dependencies.onStart()
         comboSounds = require("comboSounds")
         littleDialogue.defaultStyleName = "smw"
     end
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         Cheats.deregister("dressmeup")
         Cheats.deregister("undress")
         Cheats.deregister("laundryday")

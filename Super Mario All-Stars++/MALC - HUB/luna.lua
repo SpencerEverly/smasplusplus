@@ -448,11 +448,11 @@ function onEvent(eventName)
         --Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
     --end
     if eventName == ("DisEnabledX2Char") then
-        if SaveData.disableX2char == false then
+        if not SaveData.disableX2char then
             triggerEvent("HUBDisableX2")
             Level.load(Level.filename())
         end
-        if SaveData.disableX2char == true then
+        if SaveData.disableX2char then
             triggerEvent("HUBEnableX2")
             Level.load(Level.filename())
         end

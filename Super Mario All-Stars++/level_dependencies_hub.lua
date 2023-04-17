@@ -94,11 +94,10 @@ function dependencies2.onStart()
     if Misc.inEditor() then
         debugbox = require("debugbox")
     end
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         anotherPowerDownLibrary = require("anotherPowerDownLibrary")
         playerphysicspatch = require("playerphysicspatch")
         kindHurtBlock = require("kindHurtBlock")
-        comboSounds = require("comboSounds")
         if SaveData.accessibilityInventory then
             furyinventory = require("furyinventory")
         else
@@ -115,12 +114,12 @@ function dependencies2.onStart()
         warpTransition.TRANSITION_PAN = 6
         littleDialogue.defaultStyleName = "smw"
         if currentCostume == nil then
-            if SaveData.disableX2char == false then
+            if not SaveData.disableX2char then
                 warpTransition.doorclose = ("_OST/_Sound Effects/door-close.ogg")
             end
         end
     end
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         Cheats.deregister("dressmeup")
         Cheats.deregister("undress")
         Cheats.deregister("laundryday")

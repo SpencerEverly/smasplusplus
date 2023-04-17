@@ -256,6 +256,8 @@ smasTables.__smbspencerLevels = {
     "SMBS - W-2, L-5.lvlx",
     "SMBS - W-2, L-A.lvlx",
     "SMBS - W-2, L-Tower.lvlx",
+    "SMBS - W-2, L-Castle.lvlx",
+    "SMBS - W-3, L-1.lvlx",
 }
 
 --All WSMBA levels, listed here for many reasons

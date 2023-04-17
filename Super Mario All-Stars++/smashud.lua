@@ -106,7 +106,7 @@ if SaveData.enableLives then
 else
     smasHud.visible.lives = false
 end
-if SaveData.disableX2char == false then
+if not SaveData.disableX2char then
     smasHud.visible.deathcount = true
 else
     smasHud.visible.deathcount = false
@@ -129,7 +129,7 @@ smasHud.ALIGN_MID = 0.5
 smasHud.offsets = {}
 
 --TODO: Replace this with object-level offsets with named fields and alignments
-if SaveData.disableX2char == true then
+if SaveData.disableX2char then
     smasHud.offsets.keys =         {x = 64,     y = 26, align = smasHud.ALIGN_LEFT};
     smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
     smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};
@@ -152,7 +152,7 @@ if SaveData.disableX2char == true then
     smasHud.overworld.offsets.player2 =        {x = -308+48, y = 124}
 end
 
-if SaveData.disableX2char == false then
+if not SaveData.disableX2char then
     smasHud.offsets.keys =         {x = -268,     y = 26, align = smasHud.ALIGN_LEFT};
     smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
     smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};

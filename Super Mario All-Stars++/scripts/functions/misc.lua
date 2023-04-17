@@ -920,7 +920,7 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
     end
 end
 
-function Misc.testModeSetPlayerSetting(plr)
+function Misc.testModeSetPlayerSetting(plr, power)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
         console:println("NOT USING SEE MOD! Test mode setting changer has stopped.")
@@ -930,7 +930,24 @@ function Misc.testModeSetPlayerSetting(plr)
             if plr == nil then
                 plr = 1
             end
+            if power == nil then
+                power = 1
+            end
+            
+            local settings = LunaDLL.LunaLuaGetTestModeSettings()
+            
             settings.players[1].identity = plr
+            settings.players[1].powerup = power
+            settings.players[1].mountType = settings.players[1].mountType
+            settings.players[1].mountColor = settings.players[1].mountColor
+            settings.players[2].identity = settings.players[2].identity
+            settings.players[2].powerup = settings.players[2].powerup
+            settings.players[2].mountType = settings.players[2].mountType
+            settings.players[2].mountColor = settings.players[2].mountColor
+            settings.playerCount = settings.playerCount
+            settings.showFPS = settings.showFPS
+            settings.godMode = settings.godMode
+            settings.entranceIndex = settings.entranceIndex
             
             LunaDLL.LunaLuaSetTestModeSettings(settings)
             

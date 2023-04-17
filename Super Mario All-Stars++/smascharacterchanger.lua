@@ -3,6 +3,12 @@
 
 local smasCharacterChanger = {}
 
+if Misc.inEditor() then
+    smasCharacterChanger.inTestMode = true
+else
+    smasCharacterChanger.inTestMode = false
+end
+
 local smasFunctions = require("smasFunctions")
 
 local playerManager = require("playerManager")
@@ -71,10 +77,12 @@ function smasCharacterChanger.addCharacter(name,game,character,costume) --Adds a
         return
     end
     
-    table.insert(smasCharacterChanger.names, name)
-    table.insert(smasCharacterChanger.namesGame, {game})
-    table.insert(smasCharacterChanger.namesCharacter, character)
-    table.insert(smasCharacterChanger.namesCostume, {costume})
+    if table.ifind(smasCharacterChanger.names, name) == nil then
+        table.insert(smasCharacterChanger.names, name)
+        table.insert(smasCharacterChanger.namesGame, {game})
+        table.insert(smasCharacterChanger.namesCharacter, character)
+        table.insert(smasCharacterChanger.namesCostume, {costume})
+    end
 end
 
 function smasCharacterChanger.addVariant(nameToFind,game,costume) --Adds a variant to the character table. Example: smasCharacterChanger.addVariant("My Character","Game Information of the 2nd character","COSTUMEGOESHERE of the 2nd character variant")
@@ -96,8 +104,10 @@ function smasCharacterChanger.addVariant(nameToFind,game,costume) --Adds a varia
             error("Name wasn't found! You need to specify a valid name.") --Error and return it
             return
         else --Or if not...
-            table.insert(smasCharacterChanger.namesGame[foundName], game) --Add the info to the tables
-            table.insert(smasCharacterChanger.namesCostume[foundName], costume)
+            if table.ifind(smasCharacterChanger.namesCostume[foundName], costume) == nil then
+                table.insert(smasCharacterChanger.namesGame[foundName], game) --Add the info to the tables
+                table.insert(smasCharacterChanger.namesCostume[foundName], costume)
+            end
         end
     end
 end
@@ -264,7 +274,7 @@ end
 
 function smasCharacterChanger.onDraw()
     SaveData.currentCharacter = player.character
-    if Player.count() == 2 then
+    if Player.count() >= 2 then
         SaveData.currentCharacter2 = player2.character
     end
     
@@ -290,10 +300,10 @@ function smasCharacterChanger.onDraw()
             end
         end
         if started then
-            if (player.keys.left or player.keys.right) then
+            if (player.keys.left or player.keys.right or player.keys.up or player.keys.down) then
                 selectionAutoTimer = selectionAutoTimer + 1
             end
-            if not (player.keys.left or player.keys.right) then
+            if not (player.keys.left or player.keys.right or player.keys.up or player.keys.down) then
                 selectionAutoTimer = 0
             end
             if selectionAutoTimer >= 25 then
@@ -305,6 +315,18 @@ function smasCharacterChanger.onDraw()
                     Sound.playSFX(smasCharacterChanger.moveSFX)
                     smasCharacterChanger.selectionNumber = smasCharacterChanger.selectionNumber + 1
                     smasCharacterChanger.selectionNumberUpDown = 1
+                elseif player.keys.up == KEYS_DOWN then
+                    Sound.playSFX(smasCharacterChanger.moveSFX)
+                    smasCharacterChanger.selectionNumberUpDown = smasCharacterChanger.selectionNumberUpDown + 1
+                    if smasCharacterChanger.selectionNumberUpDown > #smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber] then
+                        smasCharacterChanger.selectionNumberUpDown = 1
+                    end
+                elseif player.keys.down == KEYS_DOWN then
+                    Sound.playSFX(smasCharacterChanger.moveSFX)
+                    smasCharacterChanger.selectionNumberUpDown = smasCharacterChanger.selectionNumberUpDown - 1
+                    if smasCharacterChanger.selectionNumberUpDown < 1 then
+                        smasCharacterChanger.selectionNumberUpDown = #smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber]
+                    end
                 end
                 selectionAutoTimer = 15
             end
@@ -357,240 +379,260 @@ function smasCharacterChanger.onDraw()
             end
         end
     end
+    
+    
+    
+    --***CHARACTERS***
+    
+    --SMBX Defaults
+    smasCharacterChanger.addCharacter("Mario","Default (SMAS++)",1,"!DEFAULT")
+    smasCharacterChanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
+    smasCharacterChanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
+    smasCharacterChanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
+    smasCharacterChanger.addCharacter("Link","Zelda II (SMBX)",5,"!DEFAULT")
+    
+    --SMBX2
+    smasCharacterChanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
+    smasCharacterChanger.addCharacter("Wario","Super Mario Bros. X2",7,"nil")
+    smasCharacterChanger.addCharacter("Bowser","Super Mario Bros. X2",8,"nil")
+    smasCharacterChanger.addCharacter("Klonoa","Klonoa 2 (GBA)",9,"nil")
+    smasCharacterChanger.addCharacter("Plunder Bomber","Super Bomberman 5",3,"NINJABOMBERMAN")
+    smasCharacterChanger.addCharacter("Rosalina","Super Mario Bros. X2",11,"nil")
+    smasCharacterChanger.addCharacter("Snake","Super Mario Bros. X2",12,"nil")
+    smasCharacterChanger.addCharacter("Zelda","Super Mario Bros. X2",13,"nil")
+    smasCharacterChanger.addCharacter("Ultimate Rinka","Super Mario Bros. X2",4,"ULTIMATERINKA")
+    smasCharacterChanger.addCharacter("Uncle Broadsword","A2XT",15,"nil")
+    smasCharacterChanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
+    
+    --Custom Characters
+    smasCharacterChanger.addCharacter("Yoshi (SMW2)","SMW2: Yoshi's Island",10,"nil")
+    smasCharacterChanger.addCharacter("Minecraft","Steve (Default)",14,"nil")
+    
+    --SMAS++ Characters (Unlocked on first-boot)
+    smasCharacterChanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
+    smasCharacterChanger.addCharacter("Tangent","Spencer Everly (SEE)",4,"SEE-TANGENT")
+    smasCharacterChanger.addCharacter("SpongeBob","SpongeBob SquarePants",1,"SPONGEBOBSQUAREPANTS")
+    smasCharacterChanger.addCharacter("Eric Cartman","South Park",1,"SP-1-ERICCARTMAN")
+    smasCharacterChanger.addCharacter("Rebel Trooper","LEGO Star Wars",4,"LEGOSTARWARS-REBELTROOPER")
+    smasCharacterChanger.addCharacter("Caillou","GoAnimate/Vyond",1,"GA-CAILLOU")
+    smasCharacterChanger.addCharacter("Sonic","Sonic the Hedgehog",4,"SONIC")
+    
+    --Rest will be unlockables via Achievements, Score Shop (In the future), and other things. Everything is still unlocked untl then, though.
+    smasCharacterChanger.addCharacter("Yoshi (SMB3)","Super Mario Bros. 3",4,"YOSHI-SMB3")
+    smasCharacterChanger.addCharacter("Yoshi (SMW)","Super Mario World",2,"SMW1-YOSHI")
+    smasCharacterChanger.addCharacter("Yoshi (SMW2, Alt)","SMW2: Yoshi's Island",9,"SMW2-YOSHI")
+    smasCharacterChanger.addCharacter("Waluigi (SMW)","Mario Tennis",2,"WALUIGI")
+    smasCharacterChanger.addCharacter("Daisy","Super Mario Bros. 3",3,"DAISY")
+    smasCharacterChanger.addCharacter("Pauline","Super Mario Bros. 3",3,"PAULINE")
+    smasCharacterChanger.addCharacter("Professor E. Gadd","Luigi's Mansion",13,"E. GADD")
+    smasCharacterChanger.addCharacter("Goomba","Super Mario Bros. 3",1,"Goomba")
+    smasCharacterChanger.addCharacter("King Boo","Luigi's Mansion",11,"KING BOO")
+    smasCharacterChanger.addCharacter("Bass","Mega Man",6,"BASS")
+    smasCharacterChanger.addCharacter("Dr. Wily","Mega Man",6,"DR. WILY")
+    smasCharacterChanger.addCharacter("Proto Man","Mega Man",6,"PROTOMAN")
+    smasCharacterChanger.addCharacter("Roll","Mega Man",6,"ROLL")
+    smasCharacterChanger.addCharacter("Rosalina (Alt)","Super Mario Bros. X2",1,"ROSALINA")
+    smasCharacterChanger.addCharacter("Demo","A2XT",1,"A2XT-DEMO")
+    smasCharacterChanger.addCharacter("Iris","A2XT",2,"A2XT-IRIS")
+    smasCharacterChanger.addCharacter("Kood","A2XT",3,"A2XT-KOOD")
+    smasCharacterChanger.addCharacter("Raocow","A2XT/YouTube",4,"A2XT-RAOCOW")
+    smasCharacterChanger.addCharacter("Sheath","A2XT",5,"A2XT-SHEATH")
+    smasCharacterChanger.addCharacter("Pily","A2XT2: Gaiden 2",1,"DEMO-XMASPILY")
+    smasCharacterChanger.addCharacter("Imajin","Yume Kojo: Doki Doki Panic",4,"IMAJIN-NES")
+    smasCharacterChanger.addCharacter("SMG4","SMG4 (YouTube)",1,"SMG4")
+    smasCharacterChanger.addCharacter("PAC-MAN","PAC-MAN Arrangement",4,"PACMAN-ARRANGEMENT-PACMAN")
+    smasCharacterChanger.addCharacter("Mother Brain Rinka","Spencer Everly (SEE, SMBX2)",4,"MOTHERBRAINRINKA")
+    smasCharacterChanger.addCharacter("Taizo","Dig Dug: Digging Strike",4,"DIGDUG-DIGGINGSTRIKE")
+    smasCharacterChanger.addCharacter("Boris","GoAnimate/Vyond",2,"GA-BORIS")
+    smasCharacterChanger.addCharacter("Runner Red","10 Second Run (DSi)",1,"GO-10SECONDRUN")
+    smasCharacterChanger.addCharacter("JC Foster","JC Foster Takes it to the Moon",1,"JCFOSTERTAKESITTOTHEMOON")
+    smasCharacterChanger.addCharacter("Kirby (SMB3)","Super Mario Bros. 3",3,"KIRBY-SMB3")
+    smasCharacterChanger.addCharacter("Kirby (SMBX2)","Super Mario Bros. X2",15,"KIRBY-SMBX")
+    smasCharacterChanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHECUCUMBER")
+    smasCharacterChanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
+    smasCharacterChanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
+    smasCharacterChanger.addCharacter("Marisa Kirisame","Touhou",6,"MARISAKIRISAME")
+    smasCharacterChanger.addCharacter("Utsuho Reiuji","Touhou",11,"UTSUHOREIUJI")
+    smasCharacterChanger.addCharacter("Bill Rizer","Contra (NES)",16,"BILLRIZER")
+    smasCharacterChanger.addCharacter("Wohlstand","TheXTech",2,"WOHLSTAND")
+    smasCharacterChanger.addCharacter("Shantae","Shantae Galaxy",2,"SHANTAE")
+    smasCharacterChanger.addCharacter("Tux","SuperTux",3,"TUX")
+    smasCharacterChanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
+    smasCharacterChanger.addCharacter("Ness","EarthBound",5,"NESS")
+    smasCharacterChanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
+    smasCharacterChanger.addCharacter("Baldi","Baldi's Basics (PC)",2,"BALDISBASICS")
+    smasCharacterChanger.addCharacter("Rosa (Isabella)","The Rosa Game (Working Title)",1,"ROSA-ISABELLA")
+    smasCharacterChanger.addCharacter("Zero (SMBX OC)","Zero Unhope",1,"ZERO-SONIC")
+
+    --***VARIANTS***
+
+    --**Mario variants**
+    smasCharacterChanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
+    smasCharacterChanger.addVariant("Mario","Default (SMBX 1.3)","!DEFAULT-ORIGINAL")
+    smasCharacterChanger.addVariant("Mario","SMAS++ 2012 Beta","00-SMASPLUSPLUS-BETA")
+    if Achievements.get(1).collected then
+        smasCharacterChanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
+    end
+    smasCharacterChanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
+    if Achievements.get(2).collected then
+        smasCharacterChanger.addVariant("Mario","Super Mario Bros. (SNES)","03-SMB1-SMAS")
+    end
+    smasCharacterChanger.addVariant("Mario","Super Mario Bros. 2 (NES)","04-SMB2-RETRO")
+    smasCharacterChanger.addVariant("Mario","Super Mario Bros. 2 (SNES)","05-SMB2-SMAS")
+    smasCharacterChanger.addVariant("Mario","Super Mario Bros. 3 (NES)","06-SMB3-RETRO")
+    smasCharacterChanger.addVariant("Mario","Super Mario World (SNES)","SMW-MARIO")
+    smasCharacterChanger.addVariant("Mario","Super Mario World 2 (SNES)","Z-SMW2-ADULTMARIO")
+    smasCharacterChanger.addVariant("Mario","Super Mario Land 2 (GB)","07-SML2")
+    smasCharacterChanger.addVariant("Mario","Super Mario Bros. Special (PC-8801/Sharp X1)","08-SMBSPECIAL")
+    smasCharacterChanger.addVariant("Mario","Super Mario World (NES, Pirate)","09-SMW-PIRATE")
+    smasCharacterChanger.addVariant("Mario","Hotel Mario (Philips CD-i)","10-HOTELMARIO")
+    smasCharacterChanger.addVariant("Mario","Super Mario Advance 1 (GBA)","11-SMA1")
+    smasCharacterChanger.addVariant("Mario","Super Mario Advance 2 (GBA)","12-SMA2")
+    smasCharacterChanger.addVariant("Mario","Super Mario Advance 4 (GBA)","13-SMA4")
+    smasCharacterChanger.addVariant("Mario","New Super Mario Bros. (SMBX)","14-NSMBDS-SMBX")
+    smasCharacterChanger.addVariant("Mario","New Super Mario Bros. (NDS)","15-NSMBDS-ORIGINAL")
+    smasCharacterChanger.addVariant("Mario","New Super Mario Bros. Wii (Wii)","16-NSMBWII-MARIO")
+    smasCharacterChanger.addVariant("Mario","Super Mario Bros. DDX (PC)","SMBDDX-MARIO")
+    smasCharacterChanger.addVariant("Mario","Princess Rescue (Atari 2600)","PRINCESSRESCUE")
+
+    smasCharacterChanger.addVariant("Mario","Golden Mario","GOLDENMARIO")
+    smasCharacterChanger.addVariant("Mario","Marink","MARINK")
+    smasCharacterChanger.addVariant("Mario","Modern Mario","MODERN")
+    smasCharacterChanger.addVariant("Mario","Super Mario World: Mario Enhanced","MODERN2")
+
+    smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Mario)","SMM2-MARIO")
+    smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Luigi)","SMM2-LUIGI")
+    smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Blue Toad)","SMM2-TOAD")
+    smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Yellow Toad)","SMM2-YELLOWTOAD")
+    smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Toadette)","SMM2-TOADETTE")
+
+    --**Luigi variants**
+    smasCharacterChanger.addVariant("Luigi","Spencer Everly (SMBSE)","00-SPENCEREVERLY")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES)","01-SMB1-RETRO")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES, Modern)","03-SMB1-RETRO-MODERN")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (SNES)","04-SMB1-SMAS")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 2 (NES)","05-SMB2-RETRO")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 2 (SNES)","06-SMB2-SMAS")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 3 (NES)","07-SMB3-RETRO")
+    smasCharacterChanger.addVariant("Luigi","Super Mario World (SMAS)","SMW-LUIGI")
+    smasCharacterChanger.addVariant("Luigi","Super Mario World (SNES)","10-SMW-ORIGINAL")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Bros. Deluxe (GBC)","13-SMBDX")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Advance 1 (GBA)","14-SMA1")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Advance 2 (GBA)","15-SMA2")
+    smasCharacterChanger.addVariant("Luigi","Super Mario Advance 4 (GBA)","16-SMA4")
+    smasCharacterChanger.addVariant("Luigi","New Super Mario Bros. DS (SMBX)","17-NSMBDS-SMBX")
+
+    smasCharacterChanger.addVariant("Luigi","Marigi","09-SMB3-MARIOCLOTHES")
+    smasCharacterChanger.addVariant("Luigi","Modern Luigi","MODERN")
+
+    --**Peach variants**
+    smasCharacterChanger.addVariant("Peach","Super Mario Bros. (NES)","01-SMB1-RETRO")
+    smasCharacterChanger.addVariant("Peach","Super Mario Bros. (SNES)","02-SMB1-SMAS")
+    smasCharacterChanger.addVariant("Peach","Super Mario World (SNES)","SMW-PEACH")
+    smasCharacterChanger.addVariant("Peach","Super Mario Advance 4 (GBA)","SMA4")
+
+    --**Toad variants**
+    smasCharacterChanger.addVariant("Toad","Super Mario Bros. (NES)","01-SMB1-RETRO")
+    smasCharacterChanger.addVariant("Toad","Super Mario Bros. (SNES)","02-SMB1-SMAS")
+    smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Blue)","03-SMB2-RETRO")
+    smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Yellow)","04-SMB2-RETRO-YELLOW")
+    smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Red)","05-SMB2-RETRO-RED")
+    smasCharacterChanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Blue)","06-SMB3-BLUE")
+    smasCharacterChanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Yellow)","07-SMB3-YELLOW")
+    smasCharacterChanger.addVariant("Toad","Super Mario World (SNES)","SMM2-TOAD")
+
+    smasCharacterChanger.addVariant("Toad","Captain Toad (SMW)","CAPTAINTOAD")
+    smasCharacterChanger.addVariant("Toad","Toadette (SNES)","TOADETTE")
+
+    --**Link variants**
+    smasCharacterChanger.addVariant("Link","The Legend of Zelda (NES)","01-ZELDA1-NES")
+    smasCharacterChanger.addVariant("Link","Zelda: Link's Awakening (SNES)","05-LINKWAKE-SNES")
+    smasCharacterChanger.addVariant("Link","Super Mario Bros. (SNES)","SMB1-SNES")
+    smasCharacterChanger.addVariant("Link","Super Mario Bros. 2 (SNES)","SMB2-SNES")
+
+    --**Mega Man variants**
+    smasCharacterChanger.addVariant("Mega Man","Mega Man 1-6 (NES)","MEGAMAN-NES")
+    smasCharacterChanger.addVariant("Mega Man","Bad Box Art Mega Man","BAD BOX ART MEGA MAN")
+
+    --**Yoshi (SMW2) variants**
+    smasCharacterChanger.addVariant("Yoshi (SMW2)","Super Mario Advance 3","SMA3")
+
+    --**Yoshi (SMW2, Alt) variants**
+    smasCharacterChanger.addVariant("Yoshi (SMW2, Alt)","Yoshi's Story","YS-GREEN")
+
+    --**Rosalina variants**
+    smasCharacterChanger.addVariant("Rosalina","Super Mario Bros. 2 (SNES)","SMB2-SMAS")
+
+    --**Samus variants**
+    smasCharacterChanger.addVariant("Samus","Metroid (NES)","SAMUS-NES")
+
+    --**Steve variants**
+    smasCharacterChanger.addVariant("Minecraft","Alex (Default)","MC-ALEX")
+    smasCharacterChanger.addVariant("Minecraft","Herobrine","MC-HEROBRINE")
+    smasCharacterChanger.addVariant("Minecraft","Zombie","MC-ZOMBIE")
+    smasCharacterChanger.addVariant("Minecraft","Notch","MC-NOTCH")
+
+    smasCharacterChanger.addVariant("Minecraft","ExplodingTNT (YouTube)","EXPLODINGTNT")
+    smasCharacterChanger.addVariant("Minecraft","GeorgeNotFound (YouTube)","GEORGENOTFOUNDYT")
+    smasCharacterChanger.addVariant("Minecraft","HangoutYoshiGuy (YouTube)","HANGOUTYOSHIGUYYT")
+    smasCharacterChanger.addVariant("Minecraft","Karl Jacobs (YouTube)","KARLJACOBSYT")
+    smasCharacterChanger.addVariant("Minecraft","ItsHarry (YouTube)","MC-ITSHARRY")
+    smasCharacterChanger.addVariant("Minecraft","ItsJerry (YouTube)","MC-ITSJERRY")
+    smasCharacterChanger.addVariant("Minecraft","Keralis (YouTube)","MC-KERALIS")
+    smasCharacterChanger.addVariant("Minecraft","Mystery Man Bro (YouTube)","MYSTERYMANBRO")
+    smasCharacterChanger.addVariant("Minecraft","Quackity (YouTube)","QUACKITYYT")
+    smasCharacterChanger.addVariant("Minecraft","TechnoBlade (YouTube)","TECHNOBLADE")
+    smasCharacterChanger.addVariant("Minecraft","TommyInnit (YouTube)","TOMMYINNITYT")
+    smasCharacterChanger.addVariant("Minecraft","UnofficialStudios (YouTube)","UNOFFICIALSTUDIOSYT")
+
+    smasCharacterChanger.addVariant("Minecraft","Christmas Tree (DLC)","DLC-DESTIVE-CHRISTMASTREE")
+
+    smasCharacterChanger.addVariant("Minecraft","Mario (Super Mario Bros.)","MC-MARIO")
+    smasCharacterChanger.addVariant("Minecraft","Captain Toad","MC-CAPTAINTOAD")
+    smasCharacterChanger.addVariant("Minecraft","Koopapanzer","KOOPAPANZER")
+    smasCharacterChanger.addVariant("Minecraft","Sonic (Sonic the Hedgehog)","MC-SONIC")
+    smasCharacterChanger.addVariant("Minecraft","Tails (Sonic the Hedgehog)","MC-TAILS")
+    smasCharacterChanger.addVariant("Minecraft","SpongeBob (SpongeBob)","MC-SPONGEBOB")
+    smasCharacterChanger.addVariant("Minecraft","Patrick (SpongeBob)","MC-PATRICK")
+    smasCharacterChanger.addVariant("Minecraft","Squidward (SpongeBob)","MC-SQUIDWARD")
+    smasCharacterChanger.addVariant("Minecraft","Frisk (Undertale)","MC-FRISK")
+    smasCharacterChanger.addVariant("Minecraft","Kris (Deltarune)","MC-KRIS")
+    smasCharacterChanger.addVariant("Minecraft","Susie (Deltarune)","MC-SUSIE-DELTARUNE")
+    smasCharacterChanger.addVariant("Minecraft","Ralsei (Deltarune)","MC-RALSEI")
+    smasCharacterChanger.addVariant("Minecraft","Noelle (Deltarune)","MC-NOELLE-DELTARUNE")
+    smasCharacterChanger.addVariant("Minecraft","Boyfriend (FNF)","MC-FNF-BOYFRIEND")
+    smasCharacterChanger.addVariant("Minecraft","Girlfriend (FNF)","MC-FNF-GIRLFRIEND")
+    smasCharacterChanger.addVariant("Minecraft","Impostor (Among Us)","MC-IMPOSTOR")
+    smasCharacterChanger.addVariant("Minecraft","Ed (Ed Edd and Eddy)","ED-EDEDDANDEDDY")
+    smasCharacterChanger.addVariant("Minecraft","Spiderman","MC-SPIDERMAN")
+
+    smasCharacterChanger.addVariant("Minecraft","Cubix Tron (C!TS!)","DJCTRE-CUBIXTRON")
+    smasCharacterChanger.addVariant("Minecraft","Cubix Tron Dad (C!TS!)","DJCTRE-CUBIXTRONDAD")
+    smasCharacterChanger.addVariant("Minecraft","Stultus (C!TS!)","DJCTRE-STULTUS")
+
+    smasCharacterChanger.addVariant("Minecraft","Spencer (S!TS! REBOOT)","SEE-MC-SPENCEREVERLY")
+    smasCharacterChanger.addVariant("Minecraft","Spencer 2 (S!TS! REBOOT)","SEE-MC-SPENCER2")
+    smasCharacterChanger.addVariant("Minecraft","Sherbert (S!TS! REBOOT)","SEE-MC-SHERBERTLUSSIEBACK")
+    smasCharacterChanger.addVariant("Minecraft","Lewbert (S!TS! REBOOT)","SEE-MC-LEWBERTLUSSIEBACK")
+    smasCharacterChanger.addVariant("Minecraft","Evil Me (S!TS! REBOOT)","SEE-MC-EVILME")
+    smasCharacterChanger.addVariant("Minecraft","Shenicle (S!TS! REBOOT)","SEE-MC-SHENICLE")
+    smasCharacterChanger.addVariant("Minecraft","Tianely (S!TS! REBOOT)","SEE-MC-TIANELY")
+    smasCharacterChanger.addVariant("Minecraft","Lili (S!TS! REBOOT)","SEE-MC-LILIJUCIEBACK")
+    smasCharacterChanger.addVariant("Minecraft","Mimi (S!TS! REBOOT)","SEE-MC-MIMIJUCIEBACK")
+    smasCharacterChanger.addVariant("Minecraft","Geranium (S!TS! REBOOT)","SEE-MC-GERANIUM")
+    smasCharacterChanger.addVariant("Minecraft","Shelley (S!TS! REBOOT)","SEE-MC-SHELEYKIRK")
+    smasCharacterChanger.addVariant("Minecraft","Ron (S!TS! REBOOT)","SEE-MC-RONDAVIS")
+
+    --**Wario variants**
+    smasCharacterChanger.addVariant("Wario","Super Mario Bros. 3","SMB3-WARIO")
+
+    --**Takeshi variants**
+    smasCharacterChanger.addVariant("Takeshi","Takeshi's Challenge (SNES)","TAKESHI-SNES")
+    
+    
+    
+    
 end
-
---***CHARACTERS***
-smasCharacterChanger.addCharacter("Mario","Default (SMAS++)",1,"!DEFAULT")
-smasCharacterChanger.addCharacter("Luigi","Super Mario Bros. 3",2,"!DEFAULT")
-smasCharacterChanger.addCharacter("Peach","Super Mario Bros. 2",3,"!DEFAULT")
-smasCharacterChanger.addCharacter("Toad","Super Mario Bros. 2",4,"!DEFAULT")
-smasCharacterChanger.addCharacter("Yoshi (SMB3)","Super Mario Bros. 3",4,"YOSHI-SMB3")
-smasCharacterChanger.addCharacter("Yoshi (SMW)","Super Mario World",2,"SMW1-YOSHI")
-smasCharacterChanger.addCharacter("Yoshi (SMW2)","SMW2: Yoshi's Island",10,"nil")
-smasCharacterChanger.addCharacter("Yoshi (SMW2, Alt)","SMW2: Yoshi's Island",9,"SMW2-YOSHI")
-smasCharacterChanger.addCharacter("Wario","Super Mario Bros. X2",7,"nil")
-smasCharacterChanger.addCharacter("Waluigi (SMW)","Mario Tennis",2,"WALUIGI")
-smasCharacterChanger.addCharacter("Daisy","Super Mario Bros. 3",3,"DAISY")
-smasCharacterChanger.addCharacter("Pauline","Super Mario Bros. 3",3,"PAULINE")
-smasCharacterChanger.addCharacter("Professor E. Gadd","Luigi's Mansion",13,"E. GADD")
-smasCharacterChanger.addCharacter("Bowser","Super Mario Bros. X2",8,"nil")
-smasCharacterChanger.addCharacter("Goomba","Super Mario Bros. 3",1,"Goomba")
-smasCharacterChanger.addCharacter("King Boo","Luigi's Mansion",11,"KING BOO")
-smasCharacterChanger.addCharacter("Link","Zelda II (SMBX)",5,"!DEFAULT")
-smasCharacterChanger.addCharacter("Zelda","Super Mario Bros. X2",13,"nil")
-smasCharacterChanger.addCharacter("Mega Man","Mega Man X7",6,"nil")
-smasCharacterChanger.addCharacter("Bass","Mega Man",6,"BASS")
-smasCharacterChanger.addCharacter("Dr. Wily","Mega Man",6,"DR. WILY")
-smasCharacterChanger.addCharacter("Proto Man","Mega Man",6,"PROTOMAN")
-smasCharacterChanger.addCharacter("Roll","Mega Man",6,"ROLL")
-smasCharacterChanger.addCharacter("Klonoa","Klonoa 2 (GBA)",9,"nil")
-smasCharacterChanger.addCharacter("Plunder Bomber","Super Bomberman 5",3,"NINJABOMBERMAN")
-smasCharacterChanger.addCharacter("Rosalina","Super Mario Bros. X2",11,"nil")
-smasCharacterChanger.addCharacter("Rosalina (Alt)","Super Mario Bros. X2",1,"ROSALINA")
-smasCharacterChanger.addCharacter("Snake","Super Mario Bros. X2",12,"nil")
-smasCharacterChanger.addCharacter("Ultimate Rinka","Super Mario Bros. X2",4,"ULTIMATERINKA")
-smasCharacterChanger.addCharacter("Samus","Metroid (SMBX2)",16,"nil")
-smasCharacterChanger.addCharacter("Sonic","Sonic the Hedgehog",4,"SONIC")
-smasCharacterChanger.addCharacter("Frisk","Undertale",2,"UNDERTALE-FRISK")
-smasCharacterChanger.addCharacter("Minecraft","Steve (Default)",14,"nil")
-smasCharacterChanger.addCharacter("Demo","A2XT",1,"A2XT-DEMO")
-smasCharacterChanger.addCharacter("Iris","A2XT",2,"A2XT-IRIS")
-smasCharacterChanger.addCharacter("Kood","A2XT",3,"A2XT-KOOD")
-smasCharacterChanger.addCharacter("Raocow","A2XT/YouTube",4,"A2XT-RAOCOW")
-smasCharacterChanger.addCharacter("Sheath","A2XT",5,"A2XT-SHEATH")
-smasCharacterChanger.addCharacter("Uncle Broadsword","A2XT",15,"nil")
-smasCharacterChanger.addCharacter("Pily","A2XT2: Gaiden 2",1,"DEMO-XMASPILY")
-smasCharacterChanger.addCharacter("Tangent","Spencer Everly (SEE)",4,"SEE-TANGENT")
-smasCharacterChanger.addCharacter("SpongeBob","SpongeBob SquarePants",1,"SPONGEBOBSQUAREPANTS")
-smasCharacterChanger.addCharacter("Imajin","Yume Kojo: Doki Doki Panic",4,"IMAJIN-NES")
-smasCharacterChanger.addCharacter("Eric Cartman","South Park",1,"SP-1-ERICCARTMAN")
-smasCharacterChanger.addCharacter("Rebel Trooper","LEGO Star Wars",4,"LEGOSTARWARS-REBELTROOPER")
-smasCharacterChanger.addCharacter("SMG4","SMG4 (YouTube)",1,"SMG4")
-smasCharacterChanger.addCharacter("PAC-MAN","PAC-MAN Arrangement",4,"PACMAN-ARRANGEMENT-PACMAN")
-smasCharacterChanger.addCharacter("Mother Brain Rinka","Spencer Everly (SEE, SMBX2)",4,"MOTHERBRAINRINKA")
-smasCharacterChanger.addCharacter("Taizo","Dig Dug: Digging Strike",4,"DIGDUG-DIGGINGSTRIKE")
-smasCharacterChanger.addCharacter("Caillou","GoAnimate/Vyond",1,"GA-CAILLOU")
-smasCharacterChanger.addCharacter("Boris","GoAnimate/Vyond",2,"GA-BORIS")
-smasCharacterChanger.addCharacter("Runner Red","10 Second Run (DSi)",1,"GO-10SECONDRUN")
-smasCharacterChanger.addCharacter("JC Foster","JC Foster Takes it to the Moon",1,"JCFOSTERTAKESITTOTHEMOON")
-smasCharacterChanger.addCharacter("Kirby (SMB3)","Super Mario Bros. 3",3,"KIRBY-SMB3")
-smasCharacterChanger.addCharacter("Kirby (SMBX2)","Super Mario Bros. X2",15,"KIRBY-SMBX")
-smasCharacterChanger.addCharacter("Larry the Cucumber","VeggieTales",2,"LARRYTHECUCUMBER")
-smasCharacterChanger.addCharacter("Takeshi","Takeshi's Challenge",5,"TAKESHI")
-smasCharacterChanger.addCharacter("Sherbert Lussieback","Spencer! The Show! REBOOT",5,"SEE-SHERBERTLUSSIEBACK")
-smasCharacterChanger.addCharacter("Marisa Kirisame","Touhou",6,"MARISAKIRISAME")
-smasCharacterChanger.addCharacter("Utsuho Reiuji","Touhou",11,"UTSUHOREIUJI")
-smasCharacterChanger.addCharacter("Bill Rizer","Contra (NES)",16,"BILLRIZER")
-smasCharacterChanger.addCharacter("Wohlstand","TheXTech",2,"WOHLSTAND")
-smasCharacterChanger.addCharacter("Shantae","Shantae Galaxy",2,"SHANTAE")
-smasCharacterChanger.addCharacter("Tux","SuperTux",3,"TUX")
-smasCharacterChanger.addCharacter("Hamtaro","Hamtaro",4,"HAMTARO")
-smasCharacterChanger.addCharacter("Ness","EarthBound",5,"NESS")
-smasCharacterChanger.addCharacter("Bandana Dee (SMB3)","Kirby",5,"SMB3-BANDANA-DEE")
-smasCharacterChanger.addCharacter("Baldi","Baldi's Basics (PC)",2,"BALDISBASICS")
-smasCharacterChanger.addCharacter("Rosa (Isabella)","The Rosa Game (Working Title)",1,"ROSA-ISABELLA")
-smasCharacterChanger.addCharacter("Zero (SMBX OC)","Zero Unhope",1,"ZERO-SONIC")
-
---***VARIANTS***
-
---**Mario variants**
-smasCharacterChanger.addVariant("Mario","Default (SMBX 38A)","!DEFAULT-38A")
-smasCharacterChanger.addVariant("Mario","Default (SMBX 1.3)","!DEFAULT-ORIGINAL")
-smasCharacterChanger.addVariant("Mario","SMAS++ 2012 Beta","00-SMASPLUSPLUS-BETA")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. (SNES)","03-SMB1-SMAS")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. 2 (NES)","04-SMB2-RETRO")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. 2 (SNES)","05-SMB2-SMAS")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. 3 (NES)","06-SMB3-RETRO")
-smasCharacterChanger.addVariant("Mario","Super Mario World (SNES)","SMW-MARIO")
-smasCharacterChanger.addVariant("Mario","Super Mario World 2 (SNES)","Z-SMW2-ADULTMARIO")
-smasCharacterChanger.addVariant("Mario","Super Mario Land 2 (GB)","07-SML2")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. Special (PC-8801/Sharp X1)","08-SMBSPECIAL")
-smasCharacterChanger.addVariant("Mario","Super Mario World (NES, Pirate)","09-SMW-PIRATE")
-smasCharacterChanger.addVariant("Mario","Hotel Mario (Philips CD-i)","10-HOTELMARIO")
-smasCharacterChanger.addVariant("Mario","Super Mario Advance 1 (GBA)","11-SMA1")
-smasCharacterChanger.addVariant("Mario","Super Mario Advance 2 (GBA)","12-SMA2")
-smasCharacterChanger.addVariant("Mario","Super Mario Advance 4 (GBA)","13-SMA4")
-smasCharacterChanger.addVariant("Mario","New Super Mario Bros. (SMBX)","14-NSMBDS-SMBX")
-smasCharacterChanger.addVariant("Mario","New Super Mario Bros. (NDS)","15-NSMBDS-ORIGINAL")
-smasCharacterChanger.addVariant("Mario","New Super Mario Bros. Wii (Wii)","16-NSMBWII-MARIO")
-smasCharacterChanger.addVariant("Mario","Super Mario Bros. DDX (PC)","SMBDDX-MARIO")
-smasCharacterChanger.addVariant("Mario","Princess Rescue (Atari 2600)","PRINCESSRESCUE")
-
-smasCharacterChanger.addVariant("Mario","Golden Mario","GOLDENMARIO")
-smasCharacterChanger.addVariant("Mario","Marink","MARINK")
-smasCharacterChanger.addVariant("Mario","Modern Mario","MODERN")
-smasCharacterChanger.addVariant("Mario","Super Mario World: Mario Enhanced","MODERN2")
-
-smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Mario)","SMM2-MARIO")
-smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Luigi)","SMM2-LUIGI")
-smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Blue Toad)","SMM2-TOAD")
-smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Yellow Toad)","SMM2-YELLOWTOAD")
-smasCharacterChanger.addVariant("Mario","SMM2: Super Mario World (Toadette)","SMM2-TOADETTE")
-
---**Luigi variants**
-smasCharacterChanger.addVariant("Luigi","Spencer Everly (SMBSE)","00-SPENCEREVERLY")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES, Recolored)","02-SMB1-RECOLORED")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (NES, Modern)","03-SMB1-RETRO-MODERN")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. (SNES)","04-SMB1-SMAS")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 2 (NES)","05-SMB2-RETRO")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 2 (SNES)","06-SMB2-SMAS")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. 3 (NES)","07-SMB3-RETRO")
-smasCharacterChanger.addVariant("Luigi","Super Mario World (SMAS)","SMW-LUIGI")
-smasCharacterChanger.addVariant("Luigi","Super Mario World (SNES)","10-SMW-ORIGINAL")
-smasCharacterChanger.addVariant("Luigi","Super Mario Bros. Deluxe (GBC)","13-SMBDX")
-smasCharacterChanger.addVariant("Luigi","Super Mario Advance 1 (GBA)","14-SMA1")
-smasCharacterChanger.addVariant("Luigi","Super Mario Advance 2 (GBA)","15-SMA2")
-smasCharacterChanger.addVariant("Luigi","Super Mario Advance 4 (GBA)","16-SMA4")
-smasCharacterChanger.addVariant("Luigi","New Super Mario Bros. DS (SMBX)","17-NSMBDS-SMBX")
-
-smasCharacterChanger.addVariant("Luigi","Marigi","09-SMB3-MARIOCLOTHES")
-smasCharacterChanger.addVariant("Luigi","Modern Luigi","MODERN")
-
---**Peach variants**
-smasCharacterChanger.addVariant("Peach","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smasCharacterChanger.addVariant("Peach","Super Mario Bros. (SNES)","02-SMB1-SMAS")
-smasCharacterChanger.addVariant("Peach","Super Mario World (SNES)","SMW-PEACH")
-smasCharacterChanger.addVariant("Peach","Super Mario Advance 4 (GBA)","SMA4")
-
---**Toad variants**
-smasCharacterChanger.addVariant("Toad","Super Mario Bros. (NES)","01-SMB1-RETRO")
-smasCharacterChanger.addVariant("Toad","Super Mario Bros. (SNES)","02-SMB1-SMAS")
-smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Blue)","03-SMB2-RETRO")
-smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Yellow)","04-SMB2-RETRO-YELLOW")
-smasCharacterChanger.addVariant("Toad","Super Mario Bros. 2 (NES, Red)","05-SMB2-RETRO-RED")
-smasCharacterChanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Blue)","06-SMB3-BLUE")
-smasCharacterChanger.addVariant("Toad","Super Mario Bros. 3 (SNES, Yellow)","07-SMB3-YELLOW")
-smasCharacterChanger.addVariant("Toad","Super Mario World (SNES)","SMM2-TOAD")
-
-smasCharacterChanger.addVariant("Toad","Captain Toad (SMW)","CAPTAINTOAD")
-smasCharacterChanger.addVariant("Toad","Toadette (SNES)","TOADETTE")
-
---**Link variants**
-smasCharacterChanger.addVariant("Link","The Legend of Zelda (NES)","01-ZELDA1-NES")
-smasCharacterChanger.addVariant("Link","Zelda: Link's Awakening (SNES)","05-LINKWAKE-SNES")
-smasCharacterChanger.addVariant("Link","Super Mario Bros. (SNES)","SMB1-SNES")
-smasCharacterChanger.addVariant("Link","Super Mario Bros. 2 (SNES)","SMB2-SNES")
-
---**Mega Man variants**
-smasCharacterChanger.addVariant("Mega Man","Mega Man 1-6 (NES)","MEGAMAN-NES")
-smasCharacterChanger.addVariant("Mega Man","Bad Box Art Mega Man","BAD BOX ART MEGA MAN")
-
---**Yoshi (SMW2) variants**
-smasCharacterChanger.addVariant("Yoshi (SMW2)","Super Mario Advance 3","SMA3")
-
---**Yoshi (SMW2, Alt) variants**
-smasCharacterChanger.addVariant("Yoshi (SMW2, Alt)","Yoshi's Story","YS-GREEN")
-
---**Rosalina variants**
-smasCharacterChanger.addVariant("Rosalina","Super Mario Bros. 2 (SNES)","SMB2-SMAS")
-
---**Samus variants**
-smasCharacterChanger.addVariant("Samus","Metroid (NES)","SAMUS-NES")
-
---**Steve variants**
-smasCharacterChanger.addVariant("Minecraft","Alex (Default)","MC-ALEX")
-smasCharacterChanger.addVariant("Minecraft","Herobrine","MC-HEROBRINE")
-smasCharacterChanger.addVariant("Minecraft","Zombie","MC-ZOMBIE")
-smasCharacterChanger.addVariant("Minecraft","Notch","MC-NOTCH")
-
-smasCharacterChanger.addVariant("Minecraft","ExplodingTNT (YouTube)","EXPLODINGTNT")
-smasCharacterChanger.addVariant("Minecraft","GeorgeNotFound (YouTube)","GEORGENOTFOUNDYT")
-smasCharacterChanger.addVariant("Minecraft","HangoutYoshiGuy (YouTube)","HANGOUTYOSHIGUYYT")
-smasCharacterChanger.addVariant("Minecraft","Karl Jacobs (YouTube)","KARLJACOBSYT")
-smasCharacterChanger.addVariant("Minecraft","ItsHarry (YouTube)","MC-ITSHARRY")
-smasCharacterChanger.addVariant("Minecraft","ItsJerry (YouTube)","MC-ITSJERRY")
-smasCharacterChanger.addVariant("Minecraft","Keralis (YouTube)","MC-KERALIS")
-smasCharacterChanger.addVariant("Minecraft","Mystery Man Bro (YouTube)","MYSTERYMANBRO")
-smasCharacterChanger.addVariant("Minecraft","Quackity (YouTube)","QUACKITYYT")
-smasCharacterChanger.addVariant("Minecraft","TechnoBlade (YouTube)","TECHNOBLADE")
-smasCharacterChanger.addVariant("Minecraft","TommyInnit (YouTube)","TOMMYINNITYT")
-smasCharacterChanger.addVariant("Minecraft","UnofficialStudios (YouTube)","UNOFFICIALSTUDIOSYT")
-
-smasCharacterChanger.addVariant("Minecraft","Christmas Tree (DLC)","DLC-DESTIVE-CHRISTMASTREE")
-
-smasCharacterChanger.addVariant("Minecraft","Mario (Super Mario Bros.)","MC-MARIO")
-smasCharacterChanger.addVariant("Minecraft","Captain Toad","MC-CAPTAINTOAD")
-smasCharacterChanger.addVariant("Minecraft","Koopapanzer","KOOPAPANZER")
-smasCharacterChanger.addVariant("Minecraft","Sonic (Sonic the Hedgehog)","MC-SONIC")
-smasCharacterChanger.addVariant("Minecraft","Tails (Sonic the Hedgehog)","MC-TAILS")
-smasCharacterChanger.addVariant("Minecraft","SpongeBob (SpongeBob)","MC-SPONGEBOB")
-smasCharacterChanger.addVariant("Minecraft","Patrick (SpongeBob)","MC-PATRICK")
-smasCharacterChanger.addVariant("Minecraft","Squidward (SpongeBob)","MC-SQUIDWARD")
-smasCharacterChanger.addVariant("Minecraft","Frisk (Undertale)","MC-FRISK")
-smasCharacterChanger.addVariant("Minecraft","Kris (Deltarune)","MC-KRIS")
-smasCharacterChanger.addVariant("Minecraft","Susie (Deltarune)","MC-SUSIE-DELTARUNE")
-smasCharacterChanger.addVariant("Minecraft","Ralsei (Deltarune)","MC-RALSEI")
-smasCharacterChanger.addVariant("Minecraft","Noelle (Deltarune)","MC-NOELLE-DELTARUNE")
-smasCharacterChanger.addVariant("Minecraft","Boyfriend (FNF)","MC-FNF-BOYFRIEND")
-smasCharacterChanger.addVariant("Minecraft","Girlfriend (FNF)","MC-FNF-GIRLFRIEND")
-smasCharacterChanger.addVariant("Minecraft","Impostor (Among Us)","MC-IMPOSTOR")
-smasCharacterChanger.addVariant("Minecraft","Ed (Ed Edd and Eddy)","ED-EDEDDANDEDDY")
-smasCharacterChanger.addVariant("Minecraft","Spiderman","MC-SPIDERMAN")
-
-smasCharacterChanger.addVariant("Minecraft","Cubix Tron (C!TS!)","DJCTRE-CUBIXTRON")
-smasCharacterChanger.addVariant("Minecraft","Cubix Tron Dad (C!TS!)","DJCTRE-CUBIXTRONDAD")
-smasCharacterChanger.addVariant("Minecraft","Stultus (C!TS!)","DJCTRE-STULTUS")
-
-smasCharacterChanger.addVariant("Minecraft","Spencer (S!TS! REBOOT)","SEE-MC-SPENCEREVERLY")
-smasCharacterChanger.addVariant("Minecraft","Spencer 2 (S!TS! REBOOT)","SEE-MC-SPENCER2")
-smasCharacterChanger.addVariant("Minecraft","Sherbert (S!TS! REBOOT)","SEE-MC-SHERBERTLUSSIEBACK")
-smasCharacterChanger.addVariant("Minecraft","Lewbert (S!TS! REBOOT)","SEE-MC-LEWBERTLUSSIEBACK")
-smasCharacterChanger.addVariant("Minecraft","Evil Me (S!TS! REBOOT)","SEE-MC-EVILME")
-smasCharacterChanger.addVariant("Minecraft","Shenicle (S!TS! REBOOT)","SEE-MC-SHENICLE")
-smasCharacterChanger.addVariant("Minecraft","Tianely (S!TS! REBOOT)","SEE-MC-TIANELY")
-smasCharacterChanger.addVariant("Minecraft","Lili (S!TS! REBOOT)","SEE-MC-LILIJUCIEBACK")
-smasCharacterChanger.addVariant("Minecraft","Mimi (S!TS! REBOOT)","SEE-MC-MIMIJUCIEBACK")
-smasCharacterChanger.addVariant("Minecraft","Geranium (S!TS! REBOOT)","SEE-MC-GERANIUM")
-smasCharacterChanger.addVariant("Minecraft","Shelley (S!TS! REBOOT)","SEE-MC-SHELEYKIRK")
-smasCharacterChanger.addVariant("Minecraft","Ron (S!TS! REBOOT)","SEE-MC-RONDAVIS")
-
---**Wario variants**
-smasCharacterChanger.addVariant("Wario","Super Mario Bros. 3","SMB3-WARIO")
-
---**Takeshi variants**
-smasCharacterChanger.addVariant("Takeshi","Takeshi's Challenge (SNES)","TAKESHI-SNES")
 
 return smasCharacterChanger

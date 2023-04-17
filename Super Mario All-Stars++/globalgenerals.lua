@@ -23,6 +23,7 @@ if GameData.enableBattleMode then
 end
 
 _G.smasAceCoins = require("smasAceCoins")
+_G.smasAchievementsSystem = require("smasAchievementsSystem")
 _G.smasCharacterInfo = require("smasCharacterInfo")
 _G.smasCharacterIntros = require("smasCharacterIntros")
 _G.smasLayerSystem = require("smasLayerSystem")
@@ -35,6 +36,7 @@ _G.smas2PlayerSystem = require("smas2PlayerSystem")
 _G.smasResolutions = require("smasResolutions")
 _G.smasSMB1System = require("smasSMB1System")
 _G.smasCameraControl = require("smasCameraControl")
+_G.smasZoomSystem = require("smasZoomSystem")
 
 if SMBX_VERSION == VER_SEE_MOD then
     smasOnlinePlay = require("smasOnlinePlay")
@@ -336,15 +338,9 @@ function globalgenerals.onTick()
         SaveData.mandatoryStars = 0
     end
     --if SaveData.totalMandatoryStars == nil then
-        --SaveData.totalMandatoryStars = 999 --Value isn't final, until all levels are made
+        --SaveData.totalMandatoryStars = 200 --Value isn't final, until all levels are made
     --end
     
-    
-    
-    --Achievements
-    --[[if SaveData.goombaStomps >= 10 then
-        Achievements.get(1):collect()
-    end]]
     if Time.isLast2DigitsTheSameButWithout00(Timer.getValue()) then
         smasBooleans.isTimerInDoubleDigits = true
     elseif not Time.isLast2DigitsTheSameButWithout00(Timer.getValue()) then

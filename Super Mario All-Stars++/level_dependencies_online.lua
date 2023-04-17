@@ -64,7 +64,7 @@ function dependencies.onStart()
         Defines.player_runspeed = 6
     end
     
-    if SaveData.disableX2char == false then
+    if not SaveData.disableX2char then
         mm = require("megamann");
         mm.playIntro = false;
         pausemenu = require("pausemenu")
@@ -84,7 +84,7 @@ function dependencies.onStart()
         warpTransition.TRANSITION_PAN = 6
         littleDialogue.defaultStyleName = "smw"
     end
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         Cheats.deregister("dressmeup")
         Cheats.deregister("undress")
         Cheats.deregister("laundryday")

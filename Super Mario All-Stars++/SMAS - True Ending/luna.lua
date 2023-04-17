@@ -28,7 +28,7 @@ local function WhiteFadeInSlow()
 end
 
 function onLoad()
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         SaveData.disableX2char = false
     end
 end

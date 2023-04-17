@@ -10,6 +10,8 @@ local Routine = require("routine")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local pausemenu2 = require("pausemenu2")
 
+_G.undertaleDepends = require("level_dependencies_undertale")
+
 if SaveData.disableX2char then
     pausemenu13 = require("pausemenu13/pausemenu13")
 end
@@ -74,7 +76,6 @@ function dependencies.onStart()
     end
     
     if not SaveData.disableX2char then
-        undertaledepends = require("level_dependencies_undertale")
         warpTransition = require("warpTransition")
         anotherPowerDownLibrary = require("anotherPowerDownLibrary")
         playerphysicspatch = require("playerphysicspatch")
@@ -95,7 +96,7 @@ function dependencies.onStart()
         warpTransition.TRANSITION_PAN = 6
         littleDialogue.defaultStyleName = "smw"
     end
-    if SaveData.disableX2char == true then
+    if SaveData.disableX2char then
         Cheats.deregister("dressmeup")
         Cheats.deregister("undress")
         Cheats.deregister("laundryday")

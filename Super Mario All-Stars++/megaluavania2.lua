@@ -138,24 +138,24 @@ end
 --**SOUNDS**
 megaluavania2.soundFX = {} --To let sounds be in it's own table
 
-megaluavania2.soundFX.battleStart = SFX.open("megaluavania/battlestart.ogg")
-megaluavania2.soundFX.block = SFX.open("megaluavania/block.ogg")
-megaluavania2.soundFX.defaultVoice = SFX.open("megaluavania/defaultvoice.ogg")
-megaluavania2.soundFX.dust = SFX.open("megaluavania/dust.ogg")
-megaluavania2.soundFX.flee = SFX.open("megaluavania/flee.ogg")
-megaluavania2.soundFX.heal = SFX.open("megaluavania/heal.ogg")
-megaluavania2.soundFX.heartBoom = SFX.open("megaluavania/heartboom.ogg")
-megaluavania2.soundFX.heartBreak = SFX.open("megaluavania/heartbreak.ogg")
-megaluavania2.soundFX.hit = SFX.open("megaluavania/hit.ogg")
-megaluavania2.soundFX.hurt = SFX.open("megaluavania/hurt.ogg")
-megaluavania2.soundFX.love = SFX.open("megaluavania/love.ogg")
+megaluavania2.soundFX.battleStart = "megaluavania/battlestart.ogg"
+megaluavania2.soundFX.block = "megaluavania/block.ogg"
+megaluavania2.soundFX.defaultVoice = "megaluavania/defaultvoice.ogg"
+megaluavania2.soundFX.dust = "megaluavania/dust.ogg"
+megaluavania2.soundFX.flee = "megaluavania/flee.ogg"
+megaluavania2.soundFX.heal = "megaluavania/heal.ogg"
+megaluavania2.soundFX.heartBoom = "megaluavania/heartboom.ogg"
+megaluavania2.soundFX.heartBreak = "megaluavania/heartbreak.ogg"
+megaluavania2.soundFX.hit = "megaluavania/hit.ogg"
+megaluavania2.soundFX.hurt = "megaluavania/hurt.ogg"
+megaluavania2.soundFX.love = "megaluavania/love.ogg"
 megaluavania2.soundFX.menu = {}
 for i = 1,2 do
-    megaluavania2.soundFX.menu[i] = SFX.open("megaluavania/menu"..tostring(i)..".ogg")
+    megaluavania2.soundFX.menu[i] = "megaluavania/menu"..tostring(i)..".ogg"
 end
-megaluavania2.soundFX.swing = SFX.open("megaluavania/swing.ogg")
-megaluavania2.soundFX.typeWriter = SFX.open("megaluavania/typewriter.ogg")
-megaluavania2.soundFX.beginBattle = SFX.open("_OST/_Sound Effects/snd_tensionhorn_all.ogg")
+megaluavania2.soundFX.swing = "megaluavania/swing.ogg"
+megaluavania2.soundFX.typeWriter = "megaluavania/typewriter.ogg"
+megaluavania2.soundFX.beginBattle = "_OST/_Sound Effects/snd_tensionhorn_all.ogg"
 
 function megaluavania2.onInitAPI()
     registerEvent(megaluavania2,"onStart")
