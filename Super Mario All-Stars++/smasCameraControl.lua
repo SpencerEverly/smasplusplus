@@ -56,7 +56,6 @@ end
 
 function smasCameraControl.onCameraUpdate(camIdx) --onCameraUpdate is used for the panning and camera control
     if not SaveData.disableX2char and (smasBooleans.isInLevel or smasBooleans.isInHub) then
-    smasCameraControl.mathClampedValue = math.clamp(camera.x, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
         for i = 0,20 do
             if player.keys.altJump and player.keys.altRun then --When holding alt-run and alt-jump...
                 smasCameraControl.timerUpdatable = smasCameraControl.timerUpdatable + 1 --Update the ticks for the holding.
@@ -82,21 +81,21 @@ function smasCameraControl.onCameraUpdate(camIdx) --onCameraUpdate is used for t
                 smasCameraControl.isPanningCamera = false
             end
             if smasCameraControl.cameraPanned == smasCameraControl.camera.left then --Here we update the camera panning
-                camera.x = camera.x - smasCameraControl.panTimer
+                camera.x = math.clamp(camera.x - smasCameraControl.panTimer, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
             elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then --For right...
-                camera.x = camera.x + smasCameraControl.panTimer
+                camera.x = math.clamp(camera.x + smasCameraControl.panTimer, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
             elseif smasCameraControl.cameraPanned == smasCameraControl.camera.normal then --If normal and we pressed either left or right, we'll need to pan from there
                 if smasCameraControl.cameraPreviousPan == smasCameraControl.camera.left then --Left panning goes from here
-                    camera.x = camera.x - smasCameraControl.normalPanTimer
+                    camera.x = math.clamp(camera.x - smasCameraControl.normalPanTimer, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
                 elseif smasCameraControl.cameraPreviousPan == smasCameraControl.camera.right then --Same for right camera panning
-                    camera.x = camera.x + smasCameraControl.normalPanTimer
+                    camera.x = math.clamp(camera.x + smasCameraControl.normalPanTimer, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
                 end
             end
         else
             if smasCameraControl.cameraPanned == smasCameraControl.camera.left then --Are we already panned? Use the default values
-                camera.x = camera.x - smasCameraControl.panAmount
+                camera.x = math.clamp(camera.x - smasCameraControl.panAmount, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
             elseif smasCameraControl.cameraPanned == smasCameraControl.camera.right then --Here's the ones for right
-                camera.x = camera.x + smasCameraControl.panAmount
+                camera.x = math.clamp(camera.x + smasCameraControl.panAmount, player.sectionObj.boundary.left, player.sectionObj.boundary.right - camera.width)
             end
         end
         if camera.x < player.sectionObj.boundary.left then
