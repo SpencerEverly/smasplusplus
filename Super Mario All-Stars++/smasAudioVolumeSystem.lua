@@ -23,7 +23,7 @@ function smasAudioVolumeSystem.onDraw()
         end
         GameData.____currentMusicVolume = pauseplus.getSelectionValue("soundsettings","Music Volume")
         GameData.____sfxVolume = pauseplus.getSelectionValue("soundsettings","SFX Volume")
-    else    
+    elseif pausemenu2 == nil and pauseplus == nil then
         if smasBooleans.musicMuted and not smasBooleans.overrideMusicVolume then
             Audio.MusicVolume(0)
         elseif not smasBooleans.musicMuted and not smasBooleans.overrideMusicVolume then
