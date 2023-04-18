@@ -87,6 +87,7 @@ _G.smasGlobals = require("smasGlobals")
 _G.smasMemoryAddresses = require("smasMemoryAddresses")
 _G.smasFunctions = require("smasFunctions")
 _G.smasKeySystem = require("smasKeySystem")
+_G.smasAudioVolumeSystem = require("smasAudioVolumeSystem")
 _G.smasAnimationSystem = require("smasAnimationSystem")
 _G.smasVerboseMode = require("smasVerboseMode")
 _G.smasBooleans = require("smasBooleans")
@@ -126,7 +127,7 @@ for i = 1,200 do
 end
 
 --Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
-if SMBX_VERSION <= VER_BETA4_PATCH_4_1 or SMBX_VERSION == VER_SEE_MOD then
+if (VER_BETA4_PATCH_4_1 ~= nil) and (SMBX_VERSION <= VER_BETA4_PATCH_4_1 or SMBX_VERSION == VER_SEE_MOD) then
     function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport. This will be removed after a few months when the next SMBX2 patch releases (The next patch will fix this), to make sure people upgrade on time.
         -- If using bottom center aligned coordinates, handle that sensibly
         if bottomCenterAligned then

@@ -8,8 +8,8 @@ if not Misc.inMarioChallenge() then
 end
 local Routine = require("routine")
 local anothercurrency = require("ShopSystem/anothercurrency")
-local pausemenu2 = require("pausemenu2")
 
+_G.pausemenu2 = require("pausemenu2")
 _G.undertaleDepends = require("level_dependencies_undertale")
 
 if SaveData.disableX2char then

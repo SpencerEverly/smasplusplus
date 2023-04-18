@@ -19,7 +19,7 @@ local musicalchairs = require("musicalchairs")
 
 if GameData.enableBattleMode then
     console:println("Classic Battle Mode active! Loading the pause menu library...")
-    pausemenu2 = require("pausemenu2")
+    _G.pausemenu2 = require("pausemenu2")
 end
 
 _G.smasAceCoins = require("smasAceCoins")
@@ -63,7 +63,7 @@ if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
     end
 end
 
-if GameData.rushModeActive == true then
+if GameData.rushModeActive then
     console:println("Rush mode active! Loading rush mode dependencies...")
     level_dependencies_rushmode = require("level_dependencies_rushmode")
 end

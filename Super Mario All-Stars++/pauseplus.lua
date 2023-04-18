@@ -65,7 +65,6 @@ local selectionData = SaveData.pauseplus.selectionData
 
 local selectionNames = {}
 
-
 -- Convenience functions
 local function playSFX(sfx)
     if sfx ~= nil then

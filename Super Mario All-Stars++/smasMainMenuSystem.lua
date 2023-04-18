@@ -11,6 +11,12 @@ function smasMainMenuSystem.onInitAPI()
     registerEvent(smasMainMenuSystem,"onDraw")
 end
 
+local selectionData
+
+if SaveData.pauseplus.selectionData.soundsettings ~= nil then
+    selectionData = SaveData.pauseplus.selectionData.soundsettings
+end
+
 smasMainMenuSystem.menuTypes = {
     MENU_SELECTABLE = 1,
     MENU_BOOLEAN = 2,
@@ -27,6 +33,8 @@ smasMainMenuSystem.menuSections = {
     SECTION_THEMESELECTION = 6,
     SECTION_CLOCKTHEMING = 7,
     SECTION_BATTLEMODELEVELSELECT = 8,
+    SECTION_SETTINGS_SAVEDATA = 9,
+    SECTION_SETTINGS_MUSICANDSOUNDS = 10,
 }
 
 smasMainMenuSystem.menuItems = {}
@@ -115,8 +123,13 @@ function smasMainMenuSystem.addMenuItem(args)
     if args.isGameData == nil then
         args.isGameData = false
     end
-    args.numberToUse = args.numberToUse or 1
+    if args.isPauseplusValue == nil then
+        args.isPauseplusValue = false
+    end
+    args.numberToUse = args.numberToUse or ""
+    args.minimumNumber = args.minimumNumber or 1
     args.maxNumber = args.maxNumber or 1
+    args.numberStep = args.numberStep or 1
     args.multiSelectValueToUse = args.multiSelectValueToUse or ""
     args.multiSelectValueToSet = args.multiSelectValueToSet or ""
 
@@ -131,12 +144,15 @@ function smasMainMenuSystem.addMenuItem(args)
         functionIfPossible = args.functionToRun,
         booleanToUse = args.booleanToUse,
         numberToUse = args.numberToUse,
+        minimumNumber = args.minimumNumber,
         maxNumber = args.maxNumber,
+        numberStep = args.numberStep,
         multiSelectValueToUse = args.multiSelectValueToUse,
         multiSelectValueToSet = args.multiSelectValueToSet,
         sectionItem = args.sectionItem,
         isSaveData = args.isSaveData,
         isGameData = args.isGameData,
+        isPauseplusValue = args.isPauseplusValue
     }
 end
 
@@ -176,6 +192,9 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
         if currentOption.isGameData then
             GameData[currentOption.booleanToUse] = not GameData[currentOption.booleanToUse]
         end
+        if currentOption.isPauseplusValue then
+            selectionData[currentOption.booleanToUse] = not selectionData[currentOption.booleanToUse]
+        end
         Sound.playSFX(32)
         if isMouse then
             smasMainMenuSystem.ScrollDelay = 10
@@ -195,6 +214,12 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
                 Sound.playSFX(32)
             end
             GameData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
+        end
+        if currentOption.isPauseplusValue then
+            if selectionData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
+                Sound.playSFX(32)
+            end
+            selectionData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
         end
         if isMouse then
             smasMainMenuSystem.ScrollDelay = 10
@@ -239,15 +264,41 @@ function smasMainMenuSystem.onInputUpdate()
                             MenuCursor = 0
                         end
                     elseif p.keys.left == KEYS_PRESSED then
-                        if currentOption.numberToUse ~= nil then
-                            if currentOption.numberToUse > -1 then
-                                currentOption.numberToUse = currentOption.numberToUse - 1
+                        if currentOption.numberToUse ~= "" then
+                            if currentOption.isSaveData then
+                                if SaveData[currentOption.numberToUse] > currentOption.minimumNumber then
+                                    Sound.playSFX(26)
+                                    SaveData[currentOption.numberToUse] = SaveData[currentOption.numberToUse] - currentOption.numberStep
+                                end
+                            elseif currentOption.isGameData then
+                                if GameData[currentOption.numberToUse] > currentOption.minimumNumber then
+                                    Sound.playSFX(26)
+                                    GameData[currentOption.numberToUse] = GameData[currentOption.numberToUse] - currentOption.numberStep
+                                end
+                            elseif currentOption.isPauseplusValue then
+                                if selectionData[currentOption.numberToUse] > currentOption.minimumNumber then
+                                    Sound.playSFX(26)
+                                    selectionData[currentOption.numberToUse] = selectionData[currentOption.numberToUse] - currentOption.numberStep
+                                end
                             end
                         end
                     elseif p.keys.right == KEYS_PRESSED then
-                        if currentOption.numberToUse ~= nil then
-                            if currentOption.numberToUse < currentOption.maxNumber then
-                                currentOption.numberToUse = currentOption.numberToUse + 1
+                        if currentOption.numberToUse ~= "" then
+                            if currentOption.isSaveData then
+                                if SaveData[currentOption.numberToUse] < currentOption.maxNumber then
+                                    Sound.playSFX(26)
+                                    SaveData[currentOption.numberToUse] = SaveData[currentOption.numberToUse] + currentOption.numberStep
+                                end
+                            elseif currentOption.isGameData then
+                                if GameData[currentOption.numberToUse] < currentOption.maxNumber then
+                                    Sound.playSFX(26)
+                                    GameData[currentOption.numberToUse] = GameData[currentOption.numberToUse] + currentOption.numberStep
+                                end
+                            elseif currentOption.isPauseplusValue then
+                                if selectionData[currentOption.numberToUse] < currentOption.maxNumber then
+                                    Sound.playSFX(26)
+                                    selectionData[currentOption.numberToUse] = selectionData[currentOption.numberToUse] + currentOption.numberStep
+                                end
                             end
                         end
                     elseif p.keys.jump == KEYS_PRESSED then
@@ -334,10 +385,22 @@ function smasMainMenuSystem.onDraw()
                         elseif not GameData[naming.booleanToUse] then
                             named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
                         end
+                    elseif currentOption.isPauseplusValue then
+                        if selectionData[naming.booleanToUse] then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                        elseif not selectionData[naming.booleanToUse] then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                        end
                     end
                     
                 elseif currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE then
-                    named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse)..")"
+                    if currentOption.isSaveData then
+                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(SaveData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
+                    elseif currentOption.isGameData then
+                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(GameData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
+                    elseif currentOption.isPauseplusValue then
+                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(selectionData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
+                    end
                 
                 elseif currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_MULTISELECT then
                     if currentOption.isSaveData then
@@ -350,6 +413,12 @@ function smasMainMenuSystem.onDraw()
                         if GameData[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
                             named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
                         elseif GameData[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                        end
+                    elseif currentOption.isPauseplusValue then
+                        if selectionData[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                        elseif selectionData[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
                             named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
                         end
                     end

@@ -709,7 +709,7 @@ function megaluavania.onInputUpdate()
             inventory.activated = false
             mainblackscreenshow = false
             if not Misc.inMarioChallenge() then
-                datetime.position == 4
+                datetime.position = 4
             end
             textblox.active = true
             hudshow = false

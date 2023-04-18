@@ -9,7 +9,8 @@ local Routine = require("routine")
 local warpTransition = require("warpTransition")
 local anothercurrency = require("ShopSystem/anothercurrency")
 local smasHudSystem = require("smasHudSystem")
-local pausemenu2 = require("pausemenu2")
+
+_G.pausemenu2 = require("pausemenu2")
 
 if SaveData.disableX2char then
     pausemenu13 = require("pausemenu13/pausemenu13")

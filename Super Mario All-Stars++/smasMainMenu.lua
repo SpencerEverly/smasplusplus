@@ -358,7 +358,7 @@ function FailsafeMessage1() --You died on the main menu
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000013"), speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
 
-function bootDialogue(resetMusic)
+function smasMainMenu.bootDialogue(resetMusic)
     if resetMusic == nil then
         resetMusic = false
     end
@@ -376,9 +376,9 @@ function bootDialogue(resetMusic)
     end
 end
 
-function battleModeDialogue() --Minigames
-    smasMainMenuSystem.menuOpen = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000015"), speakerName = "Minigames", pauses = false, updatesInPause = true})
+function smasMainMenu.classicBattleSelect() --Select level.
+    smasMainMenuSystem.menuOpen = true
+    smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, 0, false)
 end
 
 function optionsMenu1() --Options
@@ -388,23 +388,6 @@ end
 function themeMenu1() --Intro theme menu
     smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000017"), speakerName = "Themes", pauses = false, updatesInPause = true})
-end
-
-function ResolutionSelect1() --Resolution settings
-    smasMainMenuSystem.menuOpen = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000018"), speakerName = "Resolution Selection", pauses = false, updatesInPause = true})
-end
-
-function ClockSelect1() --Clock settings
-    smasMainMenuSystem.menuOpen = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000019"), speakerName = "Clock Theme Selection", pauses = false, updatesInPause = true})
-end
-
-
-
-function classicBattleSelect() --Select level.
-    smasMainMenuSystem.menuOpen = true
-    smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, 0, false)
 end
 
 function ChangeName1() --To change your name...
@@ -670,10 +653,12 @@ function ChangeChar1()
 end
 
 function ChangeChar1P()
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000049"), pauses = false, updatesInPause = true})
 end
 
 function ChangeChar2P()
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000050"), pauses = false, updatesInPause = true})
 end
 
@@ -693,6 +678,7 @@ function SaveOptions1()
 end
 
 function SaveSlot1()
+    smasMainMenuSystem.menuOpen = false
     if not Misc.inEditor() then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000053"), pauses = false, updatesInPause = true})
     elseif Misc.inEditor() then
@@ -701,6 +687,7 @@ function SaveSlot1()
 end
 
 function EraseSave1()
+    smasMainMenuSystem.menuOpen = false
     Sound.muteMusic(-1)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000055"), pauses = false, updatesInPause = true})
 end
@@ -1038,7 +1025,7 @@ function smasMainMenu.onTick()
             smasMainMenu.startedmenu = 0
         end
         if GameData.reopenmenu then
-            Routine.run(bootDialogue)
+            Routine.run(smasMainMenu.bootDialogue)
             GameData.reopenmenu = false
         end
         if GameData.firstbootfive then
@@ -1050,7 +1037,7 @@ function smasMainMenu.onTick()
             GameData.firstbootkeyboardconfig = false
         end
         if GameData.reopenmenumusreset == true then
-            Routine.run(BootDialogue, true)
+            Routine.run(smasMainMenu.bootDialogue, true)
             GameData.reopenmenumusreset = false
         end
         if GameData.musreset == true then
@@ -1105,7 +1092,7 @@ function smasMainMenu.onInputUpdate()
         end
         if smasMainMenu.startedmenu == 0 then
             if player.keys.jump == KEYS_PRESSED then
-                Routine.run(bootDialogue)
+                Routine.run(smasMainMenu.bootDialogue)
                 smasMainMenu.startedmenu = 1
             end
         end
@@ -1418,6 +1405,8 @@ smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, title = "Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 170}
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, title = "Clock Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, xCenter = 170}
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, title = "Select level.", xCenter = 160, cantGoBack = true}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, title = "Save Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, title = "Audio Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150}
 
 
 
@@ -1446,8 +1435,9 @@ smasMainMenuSystem.addMenuItem{name = "SMBX 1.3 Mode", section = smasMainMenuSys
 smasMainMenuSystem.addMenuItem{name = "Input Configuration", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(InputConfig1) end}
 smasMainMenuSystem.addMenuItem{name = "Accessibility Options", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Framerate Toggling", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "framerateEnabled", isSaveData = true, isGameData = false}
-smasMainMenuSystem.addMenuItem{name = "Manage Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
-smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SaveOptions1) end}
+smasMainMenuSystem.addMenuItem{name = "Audio Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, 0, false) end}
+smasMainMenuSystem.addMenuItem{name = "Manage Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
+smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, 0, false) end}
 
 
 
@@ -1537,21 +1527,29 @@ smasMainMenuSystem.addMenuItem{name = "Windows 10", section = smasMainMenuSystem
 
 
 
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Move Save to a Different Slot",chosenFunction = function() Routine.run(SaveSlot1) end})
-littleDialogue.registerAnswer("SavingMenuOne",{text = "Erase Save Data",chosenFunction = function() Routine.run(EraseSave1) end})
+smasMainMenuSystem.addMenuItem{name = "Move Save Data", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SaveSlot1) end}
+smasMainMenuSystem.addMenuItem{name = "Erase Save Data", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(EraseSave1) end}
 
 
 
 
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(BootDialogue, true) end})
+
+smasMainMenuSystem.addMenuItem{name = "Music Volume", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE, isFunction = false, isSaveData = false, isGameData = false, isPauseplusValue = true, numberToUse = "music volume", minimumNumber = 0, numberStep = 5, maxNumber = 100}
+smasMainMenuSystem.addMenuItem{name = "SFX Volume", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE, isFunction = false, isSaveData = false, isGameData = false, isPauseplusValue = true, numberToUse = "sfx volume", minimumNumber = 0, numberStep = 0.1, maxNumber = 1}
+smasMainMenuSystem.addMenuItem{name = "Enable P-Wing SFX", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "disable p-wing sound", isSaveData = false, isGameData = false, isPauseplusValue = true}
+smasMainMenuSystem.addMenuItem{name = "Original SMBX Sounds", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "use the original smbx sound system", isSaveData = false, isGameData = false, isPauseplusValue = true}
+
+
+
+
+littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue, true) end})
 littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() Routine.run(SaveEraseStart) end})
 
 
 
 
 littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(BootDialogue, true) end})
+littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue, true) end})
 
 
 
@@ -1583,7 +1581,7 @@ littleDialogue.registerAnswer("StartSaveSwitcher",{text = "Exit",chosenFunction 
 
 
 
-littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("ReturnMenu",{text = "Exit",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 
 
 
@@ -1650,11 +1648,11 @@ littleDialogue.registerAnswer("FirstBootMenuTimeFix",{text = "Recheck",chosenFun
 
 
 
-littleDialogue.registerAnswer("SaveSlotMove1",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("SaveSlotMove1",{text = "WIP",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 
 
 
-littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("InputConfigStart",{text = "Begin",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 
 
 
@@ -1670,13 +1668,13 @@ littleDialogue.registerAnswer("BattleTwoPlayerCheckOne",{text = "No",chosenFunct
 
 
 
-littleDialogue.registerAnswer("BattleTwoPlayerCheckTwo",{text = "Yes",chosenFunction = function() Routine.run(classicBattleSelect) end})
+littleDialogue.registerAnswer("BattleTwoPlayerCheckTwo",{text = "Yes",chosenFunction = function() Routine.run(smasMainMenu.classicBattleSelect) end})
 littleDialogue.registerAnswer("BattleTwoPlayerCheckTwo",{text = "No",chosenFunction = function() Routine.run(ExitClassicBattle) end})
 
 
 
 littleDialogue.registerAnswer("RushModeSelectionOne",{text = "Yes",chosenFunction = function() Routine.run(startRushMode) end})
-littleDialogue.registerAnswer("RushModeSelectionOne",{text = "No",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("RushModeSelectionOne",{text = "No",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 
 
 
@@ -1685,11 +1683,11 @@ littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "Yes (1 Player Mode)
 littleDialogue.registerAnswer("TwoPlayerDisableOne",{text = "No",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
-littleDialogue.registerAnswer("ToBeAddedSoon",{text = "WIP",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("ToBeAddedSoon",{text = "WIP",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 
 
 
-littleDialogue.registerAnswer("OkayToMenuTwo",{text = "Alright.",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("OkayToMenuTwo",{text = "Alright.",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 
 
 
@@ -1697,11 +1695,11 @@ littleDialogue.registerAnswer("OkayToMenuTwoOptions",{text = "Alright.",chosenFu
 
 
 
-littleDialogue.registerAnswer("OkayToBattle",{text = "Alrighty!",chosenFunction = function() Routine.run(classicBattleSelect) end})
+littleDialogue.registerAnswer("OkayToBattle",{text = "Alrighty!",chosenFunction = function() Routine.run(smasMainMenu.classicBattleSelect) end})
 
 
 
-littleDialogue.registerAnswer("OkayToMenu",{text = "Okay!",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("OkayToMenu",{text = "Okay!",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 
 
 
@@ -1719,7 +1717,7 @@ littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction 
 
 
 
-littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
+littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue) end})
 littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 1",chosenFunction = function() Routine.run(ChangeChar1P) end})
 littleDialogue.registerAnswer("PlayerChoosingOne",{text = "Player 2",chosenFunction = function() Routine.run(ChangeChar2P) end})
 
@@ -1740,24 +1738,5 @@ littleDialogue.registerAnswer("CharacterList2",{text = "Peach (Slot 3)",chosenFu
 littleDialogue.registerAnswer("CharacterList2",{text = "Toad (Slot 4)",chosenFunction = function() player2:transform(4, true) Routine.run(ChangedCharacter) end})
 littleDialogue.registerAnswer("CharacterList2",{text = "Link (Slot 5)",chosenFunction = function() player2:transform(5, true) Routine.run(ChangedCharacter) end})
 
-
-littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Mario (Slot 1)",chosenFunction = function() player:transform(1, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Luigi (Slot 2)",chosenFunction = function() player:transform(2, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Peach (Slot 3)",chosenFunction = function() player:transform(3, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Toad (Slot 4)",chosenFunction = function() player:transform(4, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Link (Slot 5)",chosenFunction = function() player:transform(5, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Mega Man (Slot 6)",chosenFunction = function() player:transform(6, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Wario (Slot 7)",chosenFunction = function() player:transform(7, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Bowser (Slot 8)",chosenFunction = function() player:transform(8, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Klonoa (Slot 9)",chosenFunction = function() player:transform(9, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Yoshi (Slot 10)",chosenFunction = function() player:transform(10, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Rosalina (Slot 11)",chosenFunction = function() player:transform(11, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Snake (Slot 12)",chosenFunction = function() player:transform(12, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Zelda (Slot 13)",chosenFunction = function() player:transform(13, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Minecraft Steve (Slot 14)",chosenFunction = function() player:transform(14, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Uncle Broadsword (Slot 15)",chosenFunction = function() player:transform(15, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Samus (Slot 16)",chosenFunction = function() player:transform(16, true) Routine.run(ChangedCharacter) end})
-littleDialogue.registerAnswer("CharacterListX2",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(bootDialogue) end})
 
 return smasMainMenu

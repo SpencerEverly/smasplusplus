@@ -11,7 +11,7 @@ end
 
 local ready = false
 
-local pauseplus = require("pauseplus")
+_G.pauseplus = require("pauseplus")
 local playerManager = require("playerManager")
 local rng = require("rng")
 local textplus = require("textplus")
@@ -51,16 +51,6 @@ function pausemenu2.onInitAPI()
     ready = true
 end
 
-local RESOLUTION_FULL = "Fullscreen (4:3)"
-local RESOLUTION_WIDE = "Widescreen (16:9)"
-local RESOLUTION_ULTRAWIDE = "Ultrawide (21:9)"
-local RESOLUTION_NES = "NES/SNES/Genesis"
-local RESOLUTION_GB = "Gameboy/Gameboy Color"
-local RESOLUTION_GBA = "Gameboy Advance"
-local RESOLUTION_IPHONEONE = "iPhone (1st Generation)"
-local RESOLUTION_THREEDS = "Nintendo 3DS (Top Screen)"
-local RESOLUTION_STEAMDECK = "Steam Deck"
-
 local COSTUME_NAME = player:getCostume() or "N/A"
 
 local POWERUP_SMALL = "Small"
@@ -71,25 +61,8 @@ local POWERUP_TANOOKI = "Tanooki Suit"
 local POWERUP_HAMMER = "Hammer Suit"
 local POWERUP_ICE = "Ice Flower"
 
-local LETTERBOXYES = true
-local LETTERBOXNO = false
-
-resolutions = SaveData.resolution
-letterboxes = SaveData.letterbox
 costumenaming = player:getCostume()
 powerupstate = player.powerup
-
-local screenModes = {
-    [RESOLUTION_FULL] = {resolutions = "fullscreen"},
-    [RESOLUTION_WIDE] = {resolutions = "widescreen"},
-    [RESOLUTION_ULTRAWIDE] = {resolutions = "ultrawide"},
-    [RESOLUTION_NES] = {resolutions = "nes"},
-    [RESOLUTION_GB] = {resolutions = "gameboy"},
-    [RESOLUTION_GBA] = {resolutions = "gba"},
-    [RESOLUTION_IPHONEONE] = {resolutions = "iphone1st"},
-    [RESOLUTION_THREEDS] = {resolutions = "3ds"},
-    [RESOLUTION_STEAMDECK] = {resolutions = "steamdeck"},
-}
 
 local powerupStates = {
     [POWERUP_SMALL] = {powerupstate = 1},
@@ -99,11 +72,6 @@ local powerupStates = {
     [POWERUP_TANOOKI] = {powerupstate = 5},
     [POWERUP_HAMMER] = {powerupstate = 6},
     [POWERUP_ICE] = {powerupstate = 7},
-}
-
-local letterboxModes = {
-    [LETTERBOXYES] = {letterboxes = true},
-    [LETTERBOXNO] = {letterboxes = false},
 }
 
 local costumenames = {
@@ -159,54 +127,6 @@ local function wsmbaoriginalgraphicsoggle()
         SaveData.WSMBAOriginalGraphicsActivated = false
     end
 end
-
---[[local function changeresolution()
-    Sound.playSFX("resolution-set.ogg")
-    screenModes = pauseplus.getSelectionValue("resolutionsettings","Switch Resolution")
-    if screenModes == RESOLUTION_FULL then
-        SaveData.resolution = "fullscreen"
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    elseif screenModes == RESOLUTION_WIDE then
-        SaveData.resolution = "widescreen"
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    elseif screenModes == RESOLUTION_ULTRAWIDE then
-        SaveData.resolution = "ultrawide"
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    elseif screenModes == RESOLUTION_STEAMDECK then
-        SaveData.resolution = "steamdeck"
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    elseif screenModes == RESOLUTION_NES then
-        SaveData.resolution = "nes"
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    elseif screenModes == RESOLUTION_GBA then
-        SaveData.resolution = "gba"
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    elseif screenModes == RESOLUTION_THREEDS then
-        SaveData.resolution = "3ds"
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    end
-end]]
-
---[[local function changeresolutionborder()
-    if pauseplus.getSelectionValue("resolutionsettings","Disable Resolution Border") then
-        Sound.playSFX("resolutionborder-disable.ogg")
-        SaveData.borderEnabled = false
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    else
-        Sound.playSFX("resolutionborder-enable.ogg")
-        SaveData.borderEnabled = true
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    end
-end]]
 
 local sectionNumberArea
 
@@ -750,22 +670,6 @@ local function disable2player()
 end
 
 function pausemenu2.onDraw()
-    if smasBooleans.musicMuted and not smasBooleans.overrideMusicVolume then
-        Audio.MusicVolume(0)
-    elseif not smasBooleans.musicMuted and not smasBooleans.overrideMusicVolume then
-        Audio.MusicVolume(pauseplus.getSelectionValue("soundsettings","Music Volume"))
-    end
-    GameData.____currentMusicVolume = pauseplus.getSelectionValue("soundsettings","Music Volume")
-    GameData.____sfxVolume = pauseplus.getSelectionValue("soundsettings","SFX Volume")
-    for i = 1, 91 do
-        Audio.sounds[i].sfx.volume = math.floor(GameData.____sfxVolume * 128 + 0.5)
-        if extrasounds.active == true then
-            if Audio.sounds[43].muted then
-                Audio.sounds[43].sfx.volume = 0
-            end
-        end
-    end
-    SFX.volume.MASTER = GameData.____sfxVolume
     sectionNumberArea = pauseplus.getSelectionValue("editormenu","Select Area")
     if sectionNumberArea == 0 then
         GameData.editorAreaStartingPoint = 0

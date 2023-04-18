@@ -1,7 +1,7 @@
 local warpTransition = require("warpTransition")
 local textplus = require("textplus")
 local littleDialogue = require("littleDialogue")
-local pausemenu = require("pausemenu2")
+_G.pausemenu2 = require("pausemenu2")
 
 if SaveData.disableX2char then
     pausemenu13 = require("pausemenu13/pausemenu13")
