@@ -14,7 +14,7 @@
 ]]
 
 local playerManager = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local apt = {}
 
@@ -1248,7 +1248,7 @@ apt.flightSettings = {
     -- The frames used when flying.
     frames = {37,38,39,47,48,49},
     -- The sound played when catching air.
-    catchAirSFX = extrasounds.sounds[134].sfx,
+    catchAirSFX = smasExtraSounds.sounds[134].sfx,
 
 
     -- The sound played when hit while flying.

@@ -75,8 +75,8 @@ function smasEnemySystem.onTick()
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
                         Effectx.spawnScoreEffect(1, l.x, l.y) --Spawns 10 score effect
                         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
-                        if extrasounds.enableCoinCollecting then
-                            extrasounds.playSFX(14)
+                        if smasExtraSounds.enableCoinCollecting then
+                            smasExtraSounds.playSFX(14)
                         end
                     end
                 end
@@ -89,8 +89,8 @@ function smasEnemySystem.onTick()
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
                         Effectx.spawnScoreEffect(1, l.x, l.y) --Spawns 10 score effect
                         SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
-                        if extrasounds.enableRupeeCollecting then
-                            extrasounds.playSFX(81)
+                        if smasExtraSounds.enableRupeeCollecting then
+                            smasExtraSounds.playSFX(81)
                         end
                     end
                 end
@@ -107,7 +107,7 @@ function smasEnemySystem.onTick()
                         end
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
                         Effectx.spawnScoreEffect(c.score, l.x, l.y) --Spawns score effect
-                        extrasounds.playDragonCoinSFX(l)
+                        smasExtraSounds.playDragonCoinSFX(l)
                     end
                 end
             end

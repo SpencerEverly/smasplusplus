@@ -2,7 +2,7 @@
 --Check all the comments, plus the end of the file for more info
 
 local Routine = require("routine")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local rng = require("base/rng")
 local textplus = require("textplus")
 local smasPSwitch = require("smasPSwitch")

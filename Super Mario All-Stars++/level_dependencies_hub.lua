@@ -3,7 +3,7 @@ local playerManager = require("playerManager")
 local inventory = require("customInventory")
 local textplus = require("textplus")
 if not Misc.inMarioChallenge() then
-    datetime = require("datetime")
+    smasDateAndTime = require("smasDateAndTime")
 end
 local Routine = require("routine")
 local warpTransition = require("warpTransition")

@@ -1,6 +1,6 @@
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local Routine = require("routine")
 local rng = require("base/rng")
 local smasBooleans = require("smasBooleans")

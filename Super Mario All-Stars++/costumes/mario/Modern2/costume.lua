@@ -8,7 +8,7 @@
 ]]
 
 local playerManager = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasFunctions = require("smasFunctions")
 
 local costume = {}
@@ -88,7 +88,7 @@ function costume.onInit(playerObj)
     Graphics.sprites.npc[265].img = Graphics.loadImageResolved("costumes/mario/Modern2/npc-265.png")
     Graphics.sprites.npc[277].img = Graphics.loadImageResolved("costumes/mario/Modern2/npc-277.png")
     
-    extrasounds.enableFireFlowerHitting = true
+    smasExtraSounds.enableFireFlowerHitting = true
     
     registerEvent(costume, "onDraw")
     registerEvent(costume, "onTick")
@@ -284,7 +284,7 @@ function costume.onCleanup(playerObj)
     Graphics.sprites.npc[265].img = nil
     Graphics.sprites.npc[277].img = nil
     
-    extrasounds.enableFireFlowerHitting = false
+    smasExtraSounds.enableFireFlowerHitting = false
     
     local spot = table.ifind(players,playerObj)
 

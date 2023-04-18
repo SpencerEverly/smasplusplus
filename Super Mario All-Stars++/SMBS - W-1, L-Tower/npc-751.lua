@@ -1,7 +1,7 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
 local rng = require("base/rng")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 --Create the library table
 local sampleNPC = {}
@@ -224,7 +224,7 @@ function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
     if not data.hurtstate2 then
         if killReason ~= HARM_TYPE_VANISH then
             eventObj.cancelled = true
-            SFX.play(extrasounds.sounds[39].sfx)
+            SFX.play(smasExtraSounds.sounds[39].sfx)
             data.hp = data.hp - 1
             if data.hp >= 1 then
                 SFX.play(Misc.resolveSoundFile("robot-hurt"))
@@ -233,7 +233,7 @@ function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
             data.hurtstate = true
         elseif killReason == HARM_TYPE_SWORD then
             eventObj.cancelled = true
-            SFX.play(extrasounds.sounds[39].sfx)
+            SFX.play(smasExtraSounds.sounds[39].sfx)
             data.hp = data.hp - 2
             if data.hp >= 1 then
                 SFX.play(Misc.resolveSoundFile("robot-hurt"))

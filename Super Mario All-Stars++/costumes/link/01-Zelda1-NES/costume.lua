@@ -1,5 +1,5 @@
 local pm = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local sprite = require("base/sprite")
 local smasFunctions = require("smasFunctions")
 

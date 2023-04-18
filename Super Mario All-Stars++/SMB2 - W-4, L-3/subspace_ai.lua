@@ -11,7 +11,7 @@ local playerManager = require("playerManager")
 local blockutils = require("blocks/blockutils")
 local npcutils = require("npcs/npcutils")
 local sizeable = require("game/sizable")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local subspace = {}
 
@@ -603,8 +603,8 @@ function subspace.onTick()
                 and subspace.getNPCSubspaceBehaviour(p.standingNPC) ~= NPC_SUBSPACE_BEHAVIOUR.ONLY_SUBSPACE
                 and grabSpeed ~= nil and p:mem(0x26,FIELD_WORD) >= grabSpeed then
                     -- Give a coin
-                    Misc.coins(1,true)
-                    SFX.play(extrasounds.sounds[14].sfx)
+                    SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+                    SFX.play(smasExtraSounds.sounds[14].sfx)
                     Effect.spawn(11,p.standingNPC.x + p.standingNPC.width*0.5,p.standingNPC.y)
 
                     -- Do normal stuff to end the grabbing animation

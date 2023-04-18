@@ -11,7 +11,7 @@
 
 local npcManager = require("npcManager")
 local ai = require("boomBoom_ai")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local boomBoom = {}
 local npcID = NPC_ID
@@ -57,7 +57,7 @@ local boomBoomSettings = {
     harmlessthrown = false,
 
     health = 3,  -- How much health the NPC has.
-    hitSFX = extrasounds.sounds[39].sfx, -- The sound effect played when hurting the NPC. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
+    hitSFX = smasExtraSounds.sounds[39].sfx, -- The sound effect played when hurting the NPC. Can be nil for none, a number for a vanilla sound, or a sound effect object/string for a custom sound.
 
     chaseDistance = 1024, -- The maximum distance away from the player that the NPC can be in order to chase the player.
 

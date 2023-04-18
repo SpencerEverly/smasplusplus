@@ -17,7 +17,7 @@ local rng = require("rng")
 local textplus = require("textplus")
 local smasHudSystem = require("smasHudSystem")
 local smasCharacterInfo = require("smasCharacterInfo")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local sprite = require("base/sprite")
 local smasCharacterIntros = require("smasCharacterIntros")
 local exitFadeActive = false
@@ -209,10 +209,10 @@ end]]
 local function togglepwingsfx()
     if pauseplus.getSelectionValue("soundsettings","Disable P-Wing Sound") then
         SaveData.disablePWingSFX = true
-        extrasounds.enablePWingSFX = false
+        smasExtraSounds.enablePWingSFX = false
     else
         SaveData.disablePWingSFX = false
-        extrasounds.enablePWingSFX = true
+        smasExtraSounds.enablePWingSFX = true
     end
 end
 

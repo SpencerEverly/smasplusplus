@@ -1,6 +1,6 @@
 local pm = require("playerManager")
 local Routine = require("routine")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasFunctions = require("smasFunctions")
 
 local costume = {}

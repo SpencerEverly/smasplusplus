@@ -1,7 +1,7 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
 local utils = require("npcs/npcutils")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 --Create the library table
 local sampleNPC = {}
 --NPC_ID is dynamic based on the name of the library file
@@ -247,10 +247,10 @@ function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
         if killReason == HARM_TYPE_JUMP or killReason == HARM_TYPE_SPINJUMP then
             SFX.play(2)
         end
-        SFX.play(extrasounds.sounds[39].sfx)
+        SFX.play(smasExtraSounds.sounds[39].sfx)
     end
     if killReason == HARM_TYPE_LAVA then
-        SFX.play(extrasounds.sounds[128].sfx)
+        SFX.play(smasExtraSounds.sounds[128].sfx)
     end
 end
 

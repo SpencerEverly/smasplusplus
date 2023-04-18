@@ -1,7 +1,7 @@
 Graphics.activateHud(false)
 
 local textplus = require("textplus")
-local datetime = require("datetime")
+local smasDateAndTime = require("smasDateAndTime")
 
 local timer1 = 0
 local speed = 0
@@ -20,11 +20,11 @@ function onInitAPI()
 end
 
 function onStart(p)
-    datetime.position = 4
+    smasDateAndTime.position = 4
     p = p or player;
     smasBooleans.overrideMusicVolume = true
     Audio.MusicVolume(80)
-    extrasounds.enableTailAttackSFX = false
+    smasExtraSounds.enableTailAttackSFX = false
 end
 
 function onTick()

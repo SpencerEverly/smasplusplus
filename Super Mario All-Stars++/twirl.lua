@@ -3,7 +3,7 @@ local twirl = {}
 
 local textplus = require("textplus")
 local playeranim = require("playerAnim")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasBooleans = require("smasBooleans")
 local smasTables = require("smasTables")
 
@@ -13,7 +13,7 @@ function twirl.onInitAPI()
 end
 
 twirl.showMeDebug = false
-local twirlSfx = extrasounds.sounds[154].sfx
+local twirlSfx = smasExtraSounds.sounds[154].sfx
 
 local isTwirling = {false,false}
 local timeline = {0,0}

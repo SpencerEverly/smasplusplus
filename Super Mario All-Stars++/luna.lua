@@ -120,12 +120,12 @@ _G.smasSpencerFollower = require("smasSpencerFollower")
 _G.smasCharacterChanger = require("smasCharacterChanger")
 _G.smasFireballs = require("smasFireballs")
 _G.smasPWing = require("smasPWing")
+_G.smasExtraSounds = require("smasExtraSounds")
 
 --Then we do everything else.
 GameData.levelMusicTemporary = {}
 GameData.levelMusic = {}
 _G.smwMap = require("smwMap")
-_G.extrasounds = require("extrasounds")
 _G.classicEvents = require("classiceventsmod")
 _G.darkness = require("darknessa")
 _G.events = require("editorevents_mod")

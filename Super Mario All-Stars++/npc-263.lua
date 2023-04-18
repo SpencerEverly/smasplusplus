@@ -1,6 +1,6 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 --Create the library table
 local sampleNPC = {}
@@ -100,8 +100,8 @@ end
 
 do
     function iceBlockSFX(v,data)
-        if extrasounds.enableIceBlockFreezing then
-            SFX.play(extrasounds.sounds[94].sfx)
+        if smasExtraSounds.enableIceBlockFreezing then
+            SFX.play(smasExtraSounds.sounds[94].sfx)
         end
     end
 end

@@ -1,4 +1,4 @@
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local lightning = {}
 

@@ -8,11 +8,11 @@
 ]]
 
 local playerManager = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local warpTransition = {}
 
-warpTransition.doorclose = extrasounds.sounds[148].sfx
+warpTransition.doorclose = smasExtraSounds.sounds[148].sfx
 
 warpTransition.currentTransitionType = nil
 warpTransition.transitionTimer = 0

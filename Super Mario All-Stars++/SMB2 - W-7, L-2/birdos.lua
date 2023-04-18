@@ -1,6 +1,6 @@
 local birdos = {}
 local npcManager = require("npcManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local idList  = {}
 local canHarm = {}
@@ -63,7 +63,7 @@ function birdos.onNPCHarm(e, v, r, c)
                 data.hp = data.hp + 1
                 v.direction = -v.direction
                     
-                SFX.play(extrasounds.sounds[39].sfx)
+                SFX.play(smasExtraSounds.sounds[39].sfx)
             end
         end
         

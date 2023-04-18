@@ -1,7 +1,7 @@
 local npc = {}
 local id = NPC_ID
 local npcutils = require("npcs/npcutils")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local settings = {
     id = id,
@@ -287,7 +287,7 @@ function npc.onNPCHarm(e, v, r, o)
     
     if hp >= 0 then
         if data.state ~= HURT then
-            SFX.play(extrasounds.sounds[39].sfx)
+            SFX.play(smasExtraSounds.sounds[39].sfx)
             
             if (r == HARM_TYPE_NPC and o and o.id ~= 13) or r == HARM_TYPE_HELD or r == HARM_TYPE_PROJECTILE_USED or r == HARM_TYPE_SWORD then
                 if o and o.id ~= 13 then

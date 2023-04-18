@@ -22,6 +22,7 @@ smasMainMenuSystem.menuTypes = {
     MENU_BOOLEAN = 2,
     MENU_NUMBERVALUE = 3,
     MENU_MULTISELECT = 4,
+    MENU_DIALOG = 5,
 }
 
 smasMainMenuSystem.menuSections = {
@@ -35,6 +36,7 @@ smasMainMenuSystem.menuSections = {
     SECTION_BATTLEMODELEVELSELECT = 8,
     SECTION_SETTINGS_SAVEDATA = 9,
     SECTION_SETTINGS_MUSICANDSOUNDS = 10,
+    DIALOG_SETTINGS_ERASESAVE2 = 11,
 }
 
 smasMainMenuSystem.menuItems = {}
@@ -43,6 +45,7 @@ smasMainMenuSystem.onMenu = 1
 smasMainMenuSystem.MenuX = 0
 smasMainMenuSystem.MenuY = 0
 smasMainMenuSystem.MenuXCentered = 150
+smasMainMenuSystem.MenuYCentered = 310
 smasMainMenuSystem.minShow = 1
 smasMainMenuSystem.maxShow = 5
 smasMainMenuSystem.worldCurs = 1
@@ -58,11 +61,19 @@ smasMainMenuSystem.rememberedMenuCursorPositions = {}
 smasMainMenuSystem.priority = 3
 smasMainMenuSystem.menuLen = 0
 
+smasMainMenuSystem.isOnDialog = false
+smasMainMenuSystem.hideMenuOptions = false
+smasMainMenuSystem.hideArrows = false
+smasMainMenuSystem.hideCursor = false
+smasMainMenuSystem.hideTitle = false
+
 --[[smasMainMenuSystem.addSection(args):
 section = The menu section, basically where this should be added to.
 sectionItem = Which slot this should take place in the menu.
-xCenter = Where to center the menu if needed.
+xCenter = Where to center the menu (In X) if needed.
+yCenter = Where to center the menu (In Y) if needed.
 cantGoBack = Whether to not go back on the section or not.
+dialogMessage = Used for the dialog menu type. Can be a message.
 ]]
 function smasMainMenuSystem.addSection(args)
     if args.section == nil then
@@ -72,6 +83,8 @@ function smasMainMenuSystem.addSection(args)
     args.title = args.title or ""
     args.menuBackTo = args.menuBackTo or 1
     args.xCenter = args.xCenter or smasMainMenuSystem.MenuXCentered
+    args.yCenter = args.yCenter or smasMainMenuSystem.MenuYCentered
+    args.dialogMessage = args.dialogMessage or ""
     if args.cantGoBack == nil then
         args.cantGoBack = false
     end
@@ -82,6 +95,7 @@ function smasMainMenuSystem.addSection(args)
         title = args.title,
         menuBackTo = args.menuBackTo,
         xCenter = args.xCenter,
+        yCenter = args.yCenter,
         cantGoBack = args.cantGoBack,
     }
 end
@@ -118,7 +132,7 @@ function smasMainMenuSystem.addMenuItem(args)
         args.booleanToUse = ""
     end
     if args.isSaveData == nil then
-        args.isSaveData = true
+        args.isSaveData = false
     end
     if args.isGameData == nil then
         args.isGameData = false
@@ -158,7 +172,7 @@ end
 
 function smasMainMenuSystem.getMenuPosition()
     smasMainMenuSystem.MenuX = ScreenW / 2 - smasMainMenuSystem.MenuXCentered
-    smasMainMenuSystem.MenuY = ScreenH - 310
+    smasMainMenuSystem.MenuY = ScreenH - smasMainMenuSystem.MenuYCentered
 end
 
 function smasMainMenuSystem.handleMouseMove(items,x,y,maxWidth,itemHeight)
@@ -320,6 +334,7 @@ end
 function smasMainMenuSystem.onDraw()
     smasMainMenuSystem.getMenuPosition()
     smasMainMenuSystem.MenuXCentered = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].xCenter
+    smasMainMenuSystem.MenuYCentered = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].yCenter
     local currentOption = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
     local C = 0
     local original_maxShow = smasMainMenuSystem.maxShow
@@ -359,7 +374,9 @@ function smasMainMenuSystem.onDraw()
                 smasMainMenuSystem.maxShow = smasMainMenuSystem.minShow + 4
             end
             
-            textplus.print({pivot = vector.v2(0.5,0.5), x = 400, y = 310, text = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title, priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
+            if not smasMainMenuSystem.hideTitle then
+                textplus.print({pivot = vector.v2(0.5,0.5), x = 400, y = 310, text = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title, priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
+            end
             
             for k = smasMainMenuSystem.minShow, smasMainMenuSystem.maxShow do
                 local B = k - smasMainMenuSystem.minShow + 1
@@ -423,22 +440,30 @@ function smasMainMenuSystem.onDraw()
                         end
                     end
                 end
-                textplus.print({x = smasMainMenuSystem.MenuX, y = smasMainMenuSystem.MenuY + 30 + (B * 30), text = named[k], priority = smasMainMenuSystem.priority, color = Color.white, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
+                if not smasMainMenuSystem.hideMenuOptions then
+                    textplus.print({x = smasMainMenuSystem.MenuX, y = smasMainMenuSystem.MenuY + 30 + (B * 30), text = named[k], priority = smasMainMenuSystem.priority, color = Color.white, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
+                end
                 
             end
             
             if smasMainMenuSystem.minShow > 1 then
-                Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 44, 0, 0, smasMainMenuSystem.arrowImg.width / 2, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
+                if not smasMainMenuSystem.hideArrows then
+                    Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 44, 0, 0, smasMainMenuSystem.arrowImg.width / 2, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
+                end
             end
             
             if smasMainMenuSystem.maxShow < original_maxShow then
-                Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 204, smasMainMenuSystem.arrowImg.width / 2, 0, 20, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
+                if not smasMainMenuSystem.hideArrows then
+                    Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 204, smasMainMenuSystem.arrowImg.width / 2, 0, 20, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
+                end
             end
             
             local B = MenuCursor - smasMainMenuSystem.minShow + 1
             
             if(B >= 0 and B < 5) then
-                Graphics.drawImageWP(smasMainMenuSystem.cursorImg, smasMainMenuSystem.MenuX - 20, smasMainMenuSystem.MenuY + 64 + (B * 30), smasMainMenuSystem.priority)
+                if not smasMainMenuSystem.hideCursor then
+                    Graphics.drawImageWP(smasMainMenuSystem.cursorImg, smasMainMenuSystem.MenuX - 20, smasMainMenuSystem.MenuY + 64 + (B * 30), smasMainMenuSystem.priority)
+                end
             end
             
             if smasMainMenuSystem.ScrollDelay > 0 then

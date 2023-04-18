@@ -1,8 +1,8 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
 local inspect = require("ext/inspect")
-local extrasounds
-pcall(function() extrasounds = require("extrasounds") end)
+local smasExtraSounds
+pcall(function() smasExtraSounds = require("smasExtraSounds") end)
 
 --Create the library table
 local SMB3BowserNPC = {}

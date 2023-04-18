@@ -1,7 +1,7 @@
 local smasPWing = {}
 
 local smasHud = require("smasHud")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 smasPWing.pMeter = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-4.png")
 smasPWing.pMeterArrowSizeWidth = 80
@@ -147,9 +147,9 @@ function smasPWing.onTick()
     if not SaveData.disableX2char then
         if smasCharacterCostumes.currentCostume.playersList ~= nil then
             if smasPWing.canStartFlying(player) and not smasPWing.leafPowerups[player.powerup] then
-                if extrasounds.active then
-                    if extrasounds.enablePWingSFX then 
-                        Sound.playSFX(121, extrasounds.volume, 1, extrasounds.pWingDelay)
+                if smasExtraSounds.active then
+                    if smasExtraSounds.enablePWingSFX then 
+                        Sound.playSFX(121, smasExtraSounds.volume, 1, smasExtraSounds.pWingDelay)
                     end
                 end
             end

@@ -11,7 +11,7 @@
 
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local effectconfig = require("game/effectconfig")
 

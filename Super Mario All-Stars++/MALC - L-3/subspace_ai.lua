@@ -602,7 +602,7 @@ function subspace.onTick()
                 and subspace.getNPCSubspaceBehaviour(p.standingNPC) ~= NPC_SUBSPACE_BEHAVIOUR.ONLY_SUBSPACE
                 and grabSpeed ~= nil and p:mem(0x26,FIELD_WORD) >= grabSpeed then
                     -- Give a coin
-                    Misc.coins(1,true)
+                    SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
 
                     Effect.spawn(11,p.standingNPC.x + p.standingNPC.width*0.5,p.standingNPC.y)
 

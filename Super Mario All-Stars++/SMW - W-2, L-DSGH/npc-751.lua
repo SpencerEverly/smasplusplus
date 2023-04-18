@@ -9,7 +9,7 @@
 
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local bigBooBoss = {}
 local npcID = NPC_ID
@@ -87,7 +87,7 @@ local bigBooBossSettings = {
 	legacyBossMusic = 51,
 
 	-- Sounds
-	fallSound = extrasounds.sounds[127].sfx,
+	fallSound = smasExtraSounds.sounds[127].sfx,
 }
 
 npcManager.setNpcSettings(bigBooBossSettings)

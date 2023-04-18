@@ -13,7 +13,7 @@
 ]]
 
 local ai = require("scripts/powerups/ap_cape_ai")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasFunctions = require("smasFunctions")
 
 local apt = {}
@@ -35,7 +35,7 @@ apt.capeSpritesheets = {
 }
 
 apt.apSounds = {
-    upgrade = extrasounds.sounds[133].sfx,
+    upgrade = smasExtraSounds.sounds[133].sfx,
     reserve = 12
 }
 

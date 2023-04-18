@@ -1,5 +1,5 @@
 local playerManager = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasHud = require("smasHud")
 local rng = require("base/rng")
 local npcManager = require("npcManager")
@@ -370,7 +370,7 @@ end
 
 function costume.unmutehammer()
     Routine.wait(0.1)
-    extrasounds.sounds[105].sfx.volume = 1
+    smasExtraSounds.sounds[105].sfx.volume = 1
     Audio.sounds[25].muted = false
 end
 
@@ -420,7 +420,7 @@ function costume.onTick(p)
         end
         for index,explosion in ipairs(NPC.get(291)) do --Throw SFX
             Audio.sounds[25].muted = true
-            extrasounds.sounds[105].sfx.volume = 0
+            smasExtraSounds.sounds[105].sfx.volume = 0
             SFX.play(smasCharacterGlobals.soundSettings.borisGrenadeLaunchSFX, 1, 1, 500)
             Routine.run(costume.unmutehammer)
         end

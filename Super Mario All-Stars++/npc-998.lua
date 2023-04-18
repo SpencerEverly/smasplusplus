@@ -1,6 +1,6 @@
 local npcManager = require("npcManager")
 local colliders = require("colliders")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local starman = require("starman/star")
 local smasBooleans = require("smasBooleans")
 
@@ -71,7 +71,7 @@ function customNPC.onTickNPC(v)
             smasBooleans.musicMuted = true
             Audio.MusicVolume(0)
             GameData.winStateActive = true
-            SFX.play(extrasounds.sounds[135].sfx)
+            SFX.play(smasExtraSounds.sounds[135].sfx)
             exiting = true
             data.countTime = Timer.isActive()
             --Timer.toggle()
@@ -209,7 +209,7 @@ function customNPC.onTickNPC(v)
             exiting = true
             
             if Timer.getValue() > 0 and data.countTime then
-                SFX.play(extrasounds.sounds[113].sfx)
+                SFX.play(smasExtraSounds.sounds[113].sfx)
                 if Timer.getValue() >= 100 then
                     Timer.add(-10)
                     SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
@@ -226,7 +226,7 @@ function customNPC.onTickNPC(v)
             end
             
             if Timer.getValue() == 0 and data.countTime then
-                SFX.play(extrasounds.sounds[114].sfx, 1, 1, 2500)
+                SFX.play(smasExtraSounds.sounds[114].sfx, 1, 1, 2500)
             end
             
             if data.tick > 65 * 4.5 then --if data.tick > 65 * 2 then

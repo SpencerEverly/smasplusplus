@@ -5,7 +5,7 @@ local rng = require("base/rng")
 local colliders = require("colliders")
 local timer = require("timer")
 local handycam = require("handycam")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 --Create the library table
 local sampleNPC = {}
@@ -253,7 +253,7 @@ local function setFrame(v)
                 spawnFire(v)
                 data.alreadySpawned = true
 
-                SFX.play(extrasounds.sounds[115].sfx)
+                SFX.play(smasExtraSounds.sounds[115].sfx)
             end
         end
 
@@ -461,7 +461,7 @@ function sampleNPC.onTickNPC(v)
                 data.invulTimer = settings.invulTime
                 data.alphaTimer = 8
 
-                SFX.play(extrasounds.sounds[39].sfx)
+                SFX.play(smasExtraSounds.sounds[39].sfx)
             else
                 data.invulState = AI_DEAD
 
@@ -702,7 +702,7 @@ function sampleNPC.onNPCHarm(eventToken, v, harmType, culpritOrNil)
             data.invulTimer = settings.invulTime
             data.alphaTimer = 8
 
-            SFX.play(extrasounds.sounds[39].sfx)
+            SFX.play(smasExtraSounds.sounds[39].sfx)
         else
             data.invulState = AI_DEAD
 

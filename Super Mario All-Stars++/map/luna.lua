@@ -9,7 +9,7 @@ end
 
 local playerManager = require("playermanager")
 if not Misc.inMarioChallenge() then
-    datetime = require("datetime")
+    smasDateAndTime = require("smasDateAndTime")
 end
 local debugbox = require("debugbox")
 

@@ -1,7 +1,7 @@
 local debugbox = require("debugbox")
-local datetime = require("datetime")
+local smasDateAndTime = require("smasDateAndTime")
 
-datetime.enabled = false
+smasDateAndTime.enabled = false
 
 smasBooleans.disablePauseMenu = true
 

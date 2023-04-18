@@ -32,7 +32,7 @@ function onDraw()
     Graphics.drawImage(MYIMG, x, 0)
 end
 
---extrasounds ipairs
+--smasExtraSounds ipairs
 for k,v in ipairs({
     "player-jump",
     "stomped",
@@ -147,5 +147,5 @@ for k,v in ipairs({
     "combo6", --111
     "combo7", --112
 }) do
-    extrasounds.sounds[k].sfx = Audio.SfxOpen(Misc.resolveSoundFile(v))
+    smasExtraSounds.sounds[k].sfx = Audio.SfxOpen(Misc.resolveSoundFile(v))
 end

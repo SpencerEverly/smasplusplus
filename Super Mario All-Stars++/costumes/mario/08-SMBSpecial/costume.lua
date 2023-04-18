@@ -17,7 +17,7 @@
 ]]
 
 local playerManager = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasFunctions = require("smasFunctions")
 
 local costume = {}
@@ -545,9 +545,9 @@ end
 
 function costume.onInit(p)
     if p.powerup == 1 then
-        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump-small.ogg")
+        smasExtraSounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump-small.ogg")
     elseif p.powerup >= 2 then
-        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump.ogg")
+        smasExtraSounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump.ogg")
     end
     if not costume.loaded then
         Sound.loadCostumeSounds()
@@ -665,9 +665,9 @@ end
 
 function costume.onTickEnd()
     if player.powerup == 1 then
-        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump-small.ogg")
+        smasExtraSounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump-small.ogg")
     elseif player.powerup >= 2 then
-        extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump.ogg")
+        smasExtraSounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/08-SMBSpecial/player-jump.ogg")
     end
     for _,p in ipairs(costume.playersList) do
         local data = costume.playerData[p]

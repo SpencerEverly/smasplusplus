@@ -9,7 +9,7 @@ end
 
 local pauseplus = require("pauseplus")
 local debugbox = require("debugbox")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasHudSystem = require("smasHudSystem")
 
 littleDialogue.defaultStyleName = "smbx13"

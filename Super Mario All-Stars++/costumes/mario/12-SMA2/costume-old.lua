@@ -44,24 +44,24 @@ function costume.onTickEnd()
 end
     
 function costume.onTick()
-    extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/player-jump.ogg")
+    smasExtraSounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/player-jump.ogg")
     Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/stomped.ogg")
     Audio.sounds[3].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/block-hit.ogg")
-    extrasounds.sounds[4].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/block-smash.ogg")
+    smasExtraSounds.sounds[4].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/block-smash.ogg")
     Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-shrink.ogg")
     Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-grow.ogg")
-    extrasounds.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/mushroom.ogg")
-    extrasounds.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-died.ogg")
+    smasExtraSounds.sounds[7].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/mushroom.ogg")
+    smasExtraSounds.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/player-died.ogg")
     Audio.sounds[9].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/shell-hit.ogg")
-    extrasounds.sounds[10].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/player-slide.ogg")
+    smasExtraSounds.sounds[10].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/player-slide.ogg")
     Audio.sounds[11].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/item-dropped.ogg")
     Audio.sounds[12].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/has-item.ogg")
     Audio.sounds[13].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/camera-change.ogg")
-    extrasounds.sounds[14].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/coin.ogg")
-    extrasounds.sounds[15].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/1up.ogg")
+    smasExtraSounds.sounds[14].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/coin.ogg")
+    smasExtraSounds.sounds[15].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/1up.ogg")
     Audio.sounds[16].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/lava.ogg")
     Audio.sounds[17].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/warp.ogg")
-    extrasounds.sounds[18].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/fireball.ogg")
+    smasExtraSounds.sounds[18].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/fireball.ogg")
     Audio.sounds[19].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/level-win.ogg")
     Audio.sounds[20].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/boss-beat.ogg")
     Audio.sounds[21].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/dungeon-win.ogg")
@@ -72,13 +72,13 @@ function costume.onTick()
     Audio.sounds[29].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/do.ogg")
     Audio.sounds[31].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/key.ogg")
     Audio.sounds[32].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/pswitch.ogg")
-    extrasounds.sounds[33].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/tail.ogg")
+    smasExtraSounds.sounds[33].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/tail.ogg")
     Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/racoon.ogg")
     Audio.sounds[35].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/boot.ogg")
-    extrasounds.sounds[36].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/12-SMA2/smash.ogg"))
+    smasExtraSounds.sounds[36].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/12-SMA2/smash.ogg"))
     Audio.sounds[37].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/thwomp.ogg")
-    extrasounds.sounds[42].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/12-SMA2/npc-fireball.ogg"))
-    extrasounds.sounds[43].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/fireworks.ogg")
+    smasExtraSounds.sounds[42].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/mario/12-SMA2/npc-fireball.ogg"))
+    smasExtraSounds.sounds[43].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/fireworks.ogg")
     Audio.sounds[44].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/bowser-killed.ogg")
     Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/door.ogg")
     Audio.sounds[48].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/yoshi.ogg")
@@ -89,7 +89,7 @@ function costume.onTick()
     Audio.sounds[55].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/yoshi-swallow.ogg")
     Audio.sounds[57].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/dry-bones.ogg")
     Audio.sounds[58].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smw-checkpoint.ogg")
-    extrasounds.sounds[59].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/dragon-coin.ogg")
+    smasExtraSounds.sounds[59].sfx  = Audio.SfxOpen("costumes/mario/12-SMA2/dragon-coin.ogg")
     Audio.sounds[61].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smw-blaarg.ogg")
     Audio.sounds[62].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/wart-bubble.ogg")
     Audio.sounds[63].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/wart-die.ogg")
@@ -99,11 +99,11 @@ function costume.onTick()
     --Audio.sounds[74].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/saw.ogg")
     Audio.sounds[75].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smb2-throw.ogg")
     Audio.sounds[76].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/smb2-hit.ogg")
-    extrasounds.sounds[77].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-hurt.ogg")
+    smasExtraSounds.sounds[77].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-hurt.ogg")
     Audio.sounds[78].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-justwhatineeded.ogg")
     Audio.sounds[79].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-gotcha.ogg")
     Audio.sounds[80].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-wahah.ogg")
-    extrasounds.sounds[81].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-lucky.ogg")
+    smasExtraSounds.sounds[81].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-lucky.ogg")
     Audio.sounds[82].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/mario-hereigo.ogg")
     Audio.sounds[91].sfx = Audio.SfxOpen("costumes/mario/12-SMA2/bubble.ogg")
 
@@ -144,16 +144,16 @@ end
 function costume.onCleanup(p)
     -- Remove the player from the list
     if costume.playerData[p] ~= nil then
-        extrasounds.sounds[1].sfx = nil
+        smasExtraSounds.sounds[1].sfx = nil
         Audio.sounds[2].sfx  = nil
         Audio.sounds[3].sfx  = nil
         Audio.sounds[4].sfx  = nil
         Audio.sounds[5].sfx  = nil
         Audio.sounds[6].sfx  = nil
         Audio.sounds[7].sfx  = nil
-        extrasounds.sounds[8].sfx = nil
+        smasExtraSounds.sounds[8].sfx = nil
         Audio.sounds[9].sfx  = nil
-        extrasounds.sounds[10].sfx = nil
+        smasExtraSounds.sounds[10].sfx = nil
         Audio.sounds[11].sfx = nil
         Audio.sounds[12].sfx = nil
         Audio.sounds[13].sfx = nil
@@ -172,13 +172,13 @@ function costume.onCleanup(p)
         Audio.sounds[29].sfx = nil
         Audio.sounds[31].sfx = nil
         Audio.sounds[32].sfx = nil
-        extrasounds.sounds[33].sfx = nil
+        smasExtraSounds.sounds[33].sfx = nil
         Audio.sounds[34].sfx = nil
         Audio.sounds[35].sfx = nil
-        extrasounds.sounds[36].sfx = nil
+        smasExtraSounds.sounds[36].sfx = nil
         Audio.sounds[37].sfx = nil
-        extrasounds.sounds[42].sfx = nil
-        extrasounds.sounds[43].sfx = nil
+        smasExtraSounds.sounds[42].sfx = nil
+        smasExtraSounds.sounds[43].sfx = nil
         Audio.sounds[44].sfx = nil
         Audio.sounds[46].sfx = nil
         Audio.sounds[48].sfx = nil
@@ -200,11 +200,11 @@ function costume.onCleanup(p)
         --Audio.sounds[74].sfx = nil
         Audio.sounds[75].sfx = nil
         Audio.sounds[76].sfx = nil
-        extrasounds.sounds[77].sfx = nil
+        smasExtraSounds.sounds[77].sfx = nil
         Audio.sounds[78].sfx = nil
         Audio.sounds[79].sfx = nil
         Audio.sounds[80].sfx = nil
-        extrasounds.sounds[81].sfx = nil
+        smasExtraSounds.sounds[81].sfx = nil
         Audio.sounds[82].sfx = nil
         Audio.sounds[91].sfx = nil
         costume.playerData[p] = nil

@@ -2,7 +2,7 @@ local costume = {}
 local klonoa = API.load("characters/klonoaa");
 local colliders = require("colliders")
 local playerManager = require("playerManager");
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasFunctions = require("smasFunctions")
 
 costume.loaded = false

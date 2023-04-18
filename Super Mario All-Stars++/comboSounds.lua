@@ -2,32 +2,32 @@
 --Modded by Spencer Everly for SMAS++
 
 local npcManager = require("npcManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local comboSounds = {}
 
 local SCORE_ADDR = 0x00B2C8E4
 local LIVES_ADDR = 0x00B2C5AC
 
-comboSounds.kick1 = extrasounds.sounds[106].sfx
-comboSounds.kick2 = extrasounds.sounds[107].sfx
-comboSounds.kick3 = extrasounds.sounds[108].sfx
-comboSounds.kick4 = extrasounds.sounds[109].sfx
-comboSounds.kick5 = extrasounds.sounds[110].sfx
-comboSounds.kick6 = extrasounds.sounds[111].sfx
-comboSounds.kick7 = extrasounds.sounds[112].sfx
+comboSounds.kick1 = smasExtraSounds.sounds[106].sfx
+comboSounds.kick2 = smasExtraSounds.sounds[107].sfx
+comboSounds.kick3 = smasExtraSounds.sounds[108].sfx
+comboSounds.kick4 = smasExtraSounds.sounds[109].sfx
+comboSounds.kick5 = smasExtraSounds.sounds[110].sfx
+comboSounds.kick6 = smasExtraSounds.sounds[111].sfx
+comboSounds.kick7 = smasExtraSounds.sounds[112].sfx
 
 comboSounds.sounds = {
     9,
     9,
-    extrasounds.sounds[106].sfx, --Combo sounds 1-7, found under extrasounds
-    extrasounds.sounds[107].sfx,
-    extrasounds.sounds[108].sfx,
-    extrasounds.sounds[109].sfx,
-    extrasounds.sounds[110].sfx,
-    extrasounds.sounds[111].sfx,
-    extrasounds.sounds[112].sfx,
-    extrasounds.sounds[112].sfx,
+    smasExtraSounds.sounds[106].sfx, --Combo sounds 1-7, found under smasExtraSounds
+    smasExtraSounds.sounds[107].sfx,
+    smasExtraSounds.sounds[108].sfx,
+    smasExtraSounds.sounds[109].sfx,
+    smasExtraSounds.sounds[110].sfx,
+    smasExtraSounds.sounds[111].sfx,
+    smasExtraSounds.sounds[112].sfx,
+    smasExtraSounds.sounds[112].sfx,
 }
 
 

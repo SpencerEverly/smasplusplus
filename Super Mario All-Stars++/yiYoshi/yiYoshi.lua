@@ -2468,7 +2468,7 @@ do
         for _,block in ipairs(blocks) do
             if block.id == 370 or block.contentID == 0  and not block:mem(0x5A,FIELD_BOOL) and block.id ~= 90 and Block.MEGA_SMASH_MAP[block.id] then
                 block:remove(true)
-                SFX.play(extrasounds.sounds[4].sfx)
+                SFX.play(smasExtraSounds.sounds[4].sfx)
             else
                 block:hit(true)
             end
@@ -4663,16 +4663,16 @@ end
 function yoshi.initCharacter()
     setMaxSpeed()
     
-    extrasounds.enableSpinjumpingSFX = false
+    smasExtraSounds.enableSpinjumpingSFX = false
     
     Defines.player_grabSideEnabled = false
     Defines.player_grabTopEnabled = false
     Defines.player_grabShellEnabled = false
 
-    extrasounds.sounds[1].sfx  = yoshi.generalSettings.jumpSound
+    smasExtraSounds.sounds[1].sfx  = yoshi.generalSettings.jumpSound
     Audio.sounds[5].sfx  = yoshi.generalSettings.hurtSound
-    extrasounds.sounds[8].sfx  = yoshi.generalSettings.deathSound
-    extrasounds.sounds[14].sfx = yoshi.generalSettings.coinSound
+    smasExtraSounds.sounds[8].sfx  = yoshi.generalSettings.deathSound
+    smasExtraSounds.sounds[14].sfx = yoshi.generalSettings.coinSound
 
     if yoshi.customExitSettings.passOnEnabled[LEVEL_END_STATE_ROULETTE] then
         Audio.sounds[19].sfx = yoshi.customExitSettings.passOnMusic
@@ -4705,10 +4705,10 @@ function yoshi.cleanupCharacter()
     Defines.player_grabTopEnabled = nil
     Defines.player_grabShellEnabled = nil
 
-    extrasounds.sounds[1].sfx = nil
+    smasExtraSounds.sounds[1].sfx = nil
     Audio.sounds[5].sfx  = nil
-    extrasounds.sounds[8].sfx = nil
-    extrasounds.sounds[14].sfx = nil
+    smasExtraSounds.sounds[8].sfx = nil
+    smasExtraSounds.sounds[14].sfx = nil
     Audio.sounds[19].sfx = nil
     Audio.sounds[60].sfx = nil
     Audio.sounds[21].sfx = nil
@@ -4717,7 +4717,7 @@ function yoshi.cleanupCharacter()
     resetData()
 
     data.trail = nil
-    extrasounds.enableSpinjumpingSFX = true
+    smasExtraSounds.enableSpinjumpingSFX = true
 end
 
 

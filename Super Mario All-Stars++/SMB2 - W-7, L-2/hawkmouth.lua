@@ -1,6 +1,6 @@
 local hawk = {}
 
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local idList  = {}
 local canHarm = {}
@@ -316,7 +316,7 @@ function hawk.onNPCHarm(e, v)
     local data = v.data._basegame
     
     if v.ai1 >= 64 and v.ai2 == READY then
-        SFX.play(extrasounds.sounds[39].sfx)
+        SFX.play(smasExtraSounds.sounds[39].sfx)
         
         v.ai1 = 0
         v.ai2 = READY

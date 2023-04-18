@@ -3,7 +3,7 @@ local bigSwitch = {}
 local npcManager = require("npcManager")
 local particles = require("particles")
 local switchcolors = require("switchcolors")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local pSwitched = false
 

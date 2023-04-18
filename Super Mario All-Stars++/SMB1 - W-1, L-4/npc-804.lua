@@ -1,7 +1,7 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
 local bridge = require("bridge")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 --Create the library table
 local sampleNPC = {}
@@ -106,7 +106,7 @@ npcManager.registerHarmTypes(npcID,
 --Custom local definitions below
 local cameralock = nil
 local direction = 0
-local bridgecollapse = extrasounds.sounds[153].sfx
+local bridgecollapse = smasExtraSounds.sounds[153].sfx
 
 --Register events
 function sampleNPC.onInitAPI()

@@ -4,7 +4,7 @@ local inventory = require("customInventory")
 local textplus = require("textplus")
 local smasCharacterIntros = require("smasCharacterIntros")
 if not Misc.inMarioChallenge() then
-    datetime = require("datetime")
+    smasDateAndTime = require("smasDateAndTime")
 end
 local Routine = require("routine")
 local anothercurrency = require("ShopSystem/anothercurrency")

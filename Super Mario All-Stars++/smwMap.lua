@@ -16,7 +16,7 @@
 
 local smwMap = {}
 
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local inspect = require("ext/inspect")
 
 --In case if first time boot recieves an weird error message with ipairs, I put every SaveData generation from luna.lua into here.
@@ -4625,7 +4625,7 @@ smwMap.playerSettings = {
     waterImage = Graphics.loadImageResolved("smwMap/water.png"),
 
     levelSelectedSound = 28,
-    levelDestroyedSound = extrasounds.sounds[153].sfx,
+    levelDestroyedSound = smasExtraSounds.sounds[153].sfx,
     switchBlockReleasedSound = SFX.open(Misc.resolveSoundFile("smwMap/switchBlockReleased")),
 
 

@@ -1,6 +1,6 @@
 local Sound = {}
 
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local playerManager = require("playermanager")
 local smasTables = require("smasTables")
 local audiomasterSMAS = require("scripts/audiomasterSMAS")
@@ -96,7 +96,7 @@ function Sound.openSFX(name) --Opening SFXs
     return Audio.SfxOpen(Sound.resolveSoundFile(name))
 end
 
-function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play any sound, you can use Sound.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with extrasounds support!
+function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play any sound, you can use Sound.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with smasExtraSounds support!
     console:println("Playing sound '"..name.."'...")
     
     if unexpected_condition then error("That sound doesn't exist. Play something else.") end
@@ -107,9 +107,9 @@ function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play an
     end
     
     if volume == nil then
-        volume = extrasounds.volume
+        volume = smasExtraSounds.volume
     end
-    if extrasounds.volume == nil then
+    if smasExtraSounds.volume == nil then
         volume = 1
     end
     if loops == nil then
@@ -129,9 +129,9 @@ function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play an
         if Sound.isExtraSoundsActive() then
             if name == 0 then
                 audiomasterSMAS.PlaySound({sound = "nothing.ogg", volume = volume, loops = loops, delay = delay, pan = pan})
-            elseif not smasTables.stockSoundNumbersInOrder[name] and extrasounds.sounds[name] then
-                if not extrasounds.sounds[name].muted then
-                    audiomasterSMAS.PlaySound({sound = extrasounds.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
+            elseif not smasTables.stockSoundNumbersInOrder[name] and smasExtraSounds.sounds[name] then
+                if not smasExtraSounds.sounds[name].muted then
+                    audiomasterSMAS.PlaySound({sound = smasExtraSounds.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
                 end
             elseif smasTables.stockSoundNumbersInOrder[name] then
                 audiomasterSMAS.PlaySound({sound = Audio.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
@@ -208,7 +208,7 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
         smasTables.previouslyCachedSoundFiles[k] = smasTables.currentlyCachedSoundFiles[k]
         
         if not smasTables.stockSoundNumbersInOrder[k] then
-            extrasounds.sounds[k].sfx = Sound.resolveCostumeSound(v)
+            smasExtraSounds.sounds[k].sfx = Sound.resolveCostumeSound(v)
         elseif smasTables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = Sound.resolveCostumeSound(v)
         end
@@ -221,7 +221,7 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
         if cachedSounds[i] == nil then
             cachedSounds[i] = Sound.resolveCostumeSound(smasTables.soundNamesInOrder[i])
         end
-        extrasounds.sounds[i].sfx = cachedSounds[i]
+        smasExtraSounds.sounds[i].sfx = cachedSounds[i]
         if i <= 91 then
             Audio.sounds[i].sfx = cachedSounds[i]
         end
@@ -231,7 +231,7 @@ end
 function Sound.cleanupCostumeSounds()
     for k,v in ipairs(smasTables.soundNamesInOrder) do
         if not smasTables.stockSoundNumbersInOrder[k] then
-            extrasounds.sounds[k].sfx = nil
+            smasExtraSounds.sounds[k].sfx = nil
         elseif smasTables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = nil
         end
@@ -239,8 +239,8 @@ function Sound.cleanupCostumeSounds()
 end
 
 function Sound.isExtraSoundsActive()
-    if extrasounds then
-        return extrasounds.active
+    if smasExtraSounds then
+        return smasExtraSounds.active
     else
         return false
     end
@@ -423,50 +423,50 @@ end
 function Sound.checkPWingSoundStatus()
     if SaveData.disablePWingSFX then
         console:println("P-Wing sound effect setting has been set to disabled.")
-        extrasounds.enablePWingSFX = false
+        smasExtraSounds.enablePWingSFX = false
     elseif not SaveData.disablePWingSFX then
         console:println("P-Wing sound effect setting has been set to enabled.")
-        extrasounds.enablePWingSFX = true
+        smasExtraSounds.enablePWingSFX = true
     end
 end
 
 function Sound.checkSMBXSoundSystemStatus()
     if SaveData.SMBXSoundSystem then
         console:println("Original SMBX sound system setting has been set to disabled.")
-        extrasounds.enableGrabShellSFX = false
-        extrasounds.playPSwitchTimerSFX = false
-        extrasounds.enableSMB2EnemyKillSounds = false
-        extrasounds.useOriginalSpinJumpForBigEnemies = true
-        extrasounds.enableHPCollecting = false
-        extrasounds.useOriginalDragonCoinSounds = true
-        extrasounds.useOriginalBowserFireballInstead = true
-        extrasounds.enableIceBlockBreaking = false
-        extrasounds.useOriginalBlockSproutInstead = true
-        extrasounds.useFireworksInsteadOfOtherExplosions = true
-        extrasounds.use1UPSoundForAll1UPs = true
-        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = true
-        extrasounds.enableBoomerangBroBoomerangSFX = false
-        extrasounds.enableToadBoomerangSFX = false
-        extrasounds.useFireSoundForHammerSuit = true
-        extrasounds.useFireSoundForIce = true
+        smasExtraSounds.enableGrabShellSFX = false
+        smasExtraSounds.playPSwitchTimerSFX = false
+        smasExtraSounds.enableSMB2EnemyKillSounds = false
+        smasExtraSounds.useOriginalSpinJumpForBigEnemies = true
+        smasExtraSounds.enableHPCollecting = false
+        smasExtraSounds.useOriginalDragonCoinSounds = true
+        smasExtraSounds.useOriginalBowserFireballInstead = true
+        smasExtraSounds.enableIceBlockBreaking = false
+        smasExtraSounds.useOriginalBlockSproutInstead = true
+        smasExtraSounds.useFireworksInsteadOfOtherExplosions = true
+        smasExtraSounds.use1UPSoundForAll1UPs = true
+        smasExtraSounds.useJumpSoundInsteadWhenUnmountingYoshi = true
+        smasExtraSounds.enableBoomerangBroBoomerangSFX = false
+        smasExtraSounds.enableToadBoomerangSFX = false
+        smasExtraSounds.useFireSoundForHammerSuit = true
+        smasExtraSounds.useFireSoundForIce = true
     elseif not SaveData.SMBXSoundSystem then
         console:println("Original SMBX sound system setting has been set to enabled.")
-        extrasounds.enableGrabShellSFX = true
-        extrasounds.playPSwitchTimerSFX = true
-        extrasounds.enableSMB2EnemyKillSounds = true
-        extrasounds.useOriginalSpinJumpForBigEnemies = false
-        extrasounds.enableHPCollecting = true
-        extrasounds.useOriginalDragonCoinSounds = false
-        extrasounds.useOriginalBowserFireballInstead = false
-        extrasounds.enableIceBlockBreaking = true
-        extrasounds.useOriginalBlockSproutInstead = false
-        extrasounds.useFireworksInsteadOfOtherExplosions = false
-        extrasounds.use1UPSoundForAll1UPs = false
-        extrasounds.useJumpSoundInsteadWhenUnmountingYoshi = false
-        extrasounds.enableBoomerangBroBoomerangSFX = true
-        extrasounds.enableToadBoomerangSFX = true
-        extrasounds.useFireSoundForHammerSuit = false
-        extrasounds.useFireSoundForIce = false
+        smasExtraSounds.enableGrabShellSFX = true
+        smasExtraSounds.playPSwitchTimerSFX = true
+        smasExtraSounds.enableSMB2EnemyKillSounds = true
+        smasExtraSounds.useOriginalSpinJumpForBigEnemies = false
+        smasExtraSounds.enableHPCollecting = true
+        smasExtraSounds.useOriginalDragonCoinSounds = false
+        smasExtraSounds.useOriginalBowserFireballInstead = false
+        smasExtraSounds.enableIceBlockBreaking = true
+        smasExtraSounds.useOriginalBlockSproutInstead = false
+        smasExtraSounds.useFireworksInsteadOfOtherExplosions = false
+        smasExtraSounds.use1UPSoundForAll1UPs = false
+        smasExtraSounds.useJumpSoundInsteadWhenUnmountingYoshi = false
+        smasExtraSounds.enableBoomerangBroBoomerangSFX = true
+        smasExtraSounds.enableToadBoomerangSFX = true
+        smasExtraSounds.useFireSoundForHammerSuit = false
+        smasExtraSounds.useFireSoundForIce = false
     end
 end
 

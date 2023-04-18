@@ -3,7 +3,7 @@
 ]]
 
 local playerManager = require("playerManager")
-local extrasounds = package.loaded["extrasounds"]
+local smasExtraSounds = package.loaded["smasExtraSounds"]
 
 local costume = {}
 
@@ -710,9 +710,9 @@ function costume.onTick()
         
         
         if data.atPSpeed and not (leafPowerups[p.powerup])  then
-            if extrasounds and extrasounds.active then
-                if extrasounds.enablePWingSFX then 
-                    Sound.playSFX(121, extrasounds.volume, 1, extrasounds.pWingDelay)
+            if smasExtraSounds and smasExtraSounds.active then
+                if smasExtraSounds.enablePWingSFX then 
+                    Sound.playSFX(121, smasExtraSounds.volume, 1, smasExtraSounds.pWingDelay)
                 end
             end
         end

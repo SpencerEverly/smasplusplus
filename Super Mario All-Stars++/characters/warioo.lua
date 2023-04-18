@@ -15,7 +15,7 @@ local colliders = require("colliders")
 local rng = require("rng")
 local pm = require("playerManager")
 local expandedDefines = require("expandedDefines")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local wario = {}
 
 local chars = pm.getCharacters();

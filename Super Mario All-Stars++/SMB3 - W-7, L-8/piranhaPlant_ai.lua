@@ -13,7 +13,7 @@ local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
 local smasFunctions
 pcall(function() smasFunctions = require("smasFunctions") end)
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local piranhaPlant = {}
 
@@ -192,7 +192,7 @@ local function doFireSpurt(v,spurtNumber)
 
 		local fire = NPC.spawn(fireSettings.fireID,spawnPosition.x,spawnPosition.y,v.section,false,true)
         
-        if extrasounds.enableVenusFireball then
+        if smasExtraSounds.enableVenusFireball then
             Sound.playSFX(167)
         end
 

@@ -4,7 +4,7 @@
 --------------------------------------------------------------------
 
 local npcManager = require("npcManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local huBee = {}
 local npcID = NPC_ID
@@ -76,7 +76,7 @@ local function doBeePerk(v)
     if configFile.score < 10 then
         SFX.play(6)
     elseif configFile.score >= 10 then
-        --SFX.play(extrasounds.sounds[15].sfx)
+        --SFX.play(smasExtraSounds.sounds[15].sfx)
     end
 end
 

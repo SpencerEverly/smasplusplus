@@ -27,7 +27,7 @@ function smasAudioVolumeSystem.onDraw()
         end
         for i = 1,91 do
             pcall(function() Audio.sounds[i].sfx.volume = math.floor(GameData.____sfxVolume * 128 + 0.5) end)
-            if extrasounds.active then
+            if smasExtraSounds.active then
                 if Audio.sounds[43].muted then
                     Audio.sounds[43].sfx.volume = 0
                 end

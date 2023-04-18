@@ -5,7 +5,7 @@ local costume = {}
 costume.loaded = false
 
 local pm = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local smasTables = require("smasTables")
 
 function costume.onInit(p)
@@ -121,10 +121,10 @@ function costume.onPostNPCKill(npc, harmType)
     if coins[npc.id] and Colliders.collide(player, npc) then
         if pelletnumber == 1 then
             pelletnumber = 2
-            extrasounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-2.ogg"))
+            smasExtraSounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-2.ogg"))
         elseif pelletnumber == 2 then
             pelletnumber = 1
-            extrasounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-1.ogg"))
+            smasExtraSounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-1.ogg"))
         end
         if player.powerup == 7 then
             SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1

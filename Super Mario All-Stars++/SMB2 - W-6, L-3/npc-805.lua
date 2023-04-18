@@ -275,13 +275,13 @@ function sampleNPC.onNPCHarm(eventObj, v, killReason, culprit)
     if not data.hurtstate2 then
         if killReason == HARM_TYPE_NPC then
             eventObj.cancelled = true
-            SFX.play(extrasounds.sounds[39].sfx)
+            SFX.play(smasExtraSounds.sounds[39].sfx)
             data.hp = data.hp - 1
             data.hurtstate = true
             data.hurtstate2 = true
         elseif killReason == HARM_TYPE_SWORD then
             eventObj.cancelled = true
-            SFX.play(extrasounds.sounds[39].sfx)
+            SFX.play(smasExtraSounds.sounds[39].sfx)
             data.hp = data.hp - 2
             data.hurtstate = true
             data.hurtstate2 = true

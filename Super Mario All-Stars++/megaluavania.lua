@@ -11,7 +11,7 @@ local textblox = API.load("textblox")
 local particles = API.load("particles")
 local pausemenu = require("pauseplus")
 if not Misc.inMarioChallenge() then
-    datetime = require("datetime")
+    smasDateAndTime = require("smasDateAndTime")
 end
 local inventory = require("furyinventory")
 
@@ -709,7 +709,7 @@ function megaluavania.onInputUpdate()
             inventory.activated = false
             mainblackscreenshow = false
             if not Misc.inMarioChallenge() then
-                datetime.position = 4
+                smasDateAndTime.position = 4
             end
             textblox.active = true
             hudshow = false
@@ -725,8 +725,8 @@ function megaluavania.onInputUpdate()
             inventory.activated = true
             textblox.active = false
             if not Misc.inMarioChallenge() then
-                datetime.topright = false
-                datetime.bottomright = true
+                smasDateAndTime.topright = false
+                smasDateAndTime.bottomright = true
             end
             hudshow = true
             player:mem(0x122,FIELD_WORD,0)

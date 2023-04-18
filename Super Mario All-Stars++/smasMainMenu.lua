@@ -5,7 +5,7 @@ local smasMainMenu = {}
 
 local littleDialogue = require("littleDialogue")
 local textplus = require("textplus")
-local datetime = require("datetime")
+local smasDateAndTime = require("smasDateAndTime")
 local autoscroll = require("autoscrolla")
 local rng = require("base/rng")
 local inputconfigurator = require("inputconfig")
@@ -56,8 +56,8 @@ if smasMainMenu.active then
     smasHud.visible.deathCount = false
     smasHud.visible.customItemBox = false
     smasHud.visible.pWing = false
-    datetime.position = 1
-    extrasounds.active = false
+    smasDateAndTime.position = 1
+    smasExtraSounds.active = false
     smasMainMenu.startedmenu = 0
 end
 
@@ -696,47 +696,26 @@ function EraseSave2()
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000056"), pauses = false, updatesInPause = true})
 end
 
-function ExitDialogue(resetMusic, firstBootActive)
+function smasMainMenuSystem.exitDialogue(resetMusic)
     smasMainMenuSystem.menuOpen = false
     Sound.playSFX(29)
     if resetMusic == nil then
         resetMusic = false
     end
-    if firstBootActive == nil then
-        firstBootActive = false
+    smasMainMenu.menuActive = false
+    smasMainMenu.hideGameSMBXAndSMBX2Credits = false
+    smasMainMenu.showLogoOnScreen = true
+    smasMainMenu.showPlayerNameOnScreen = true
+    smasMainMenu.showPFPImageOnScreen = true
+    smasMainMenu.showPressJumpText = true
+    if SaveData.firstBootCompleted then
+        smasMainMenu.startedmenu = 0
     end
-    if not firstBootActive then
-        smasMainMenu.menuActive = false
-        smasMainMenu.hideGameSMBXAndSMBX2Credits = false
-        smasMainMenu.showLogoOnScreen = true
-        smasMainMenu.showPlayerNameOnScreen = true
-        smasMainMenu.showPFPImageOnScreen = true
-        smasMainMenu.showPressJumpText = true
-        if SaveData.firstBootCompleted then
-            smasMainMenu.startedmenu = 0
-        end
-        if Time.month() == 03 and Time.day() == 17 then
-            stpatricksday = true
-        end
-        if resetMusic then
-            Sound.restoreMusic(-1)
-        end
-    else
-        smasMainMenu.menuActive = false
-        smasMainMenu.showPlayerNameOnScreen = true
-        smasMainMenu.showPFPImageOnScreen = true
-        smasMainMenu.hideGameSMBXAndSMBX2Credits = false
-        smasMainMenu.showLogoOnScreen = true
-        smasMainMenu.showPressJumpText = true
-        if SaveData.firstBootCompleted then
-            smasMainMenu.startedmenu = 0
-        end
-        if Time.month() == 03 and Time.day() == 17 then
-            stpatricksday = true
-        end
-        if resetMusic then
-            Sound.restoreMusic(-1)
-        end
+    if Time.month() == 03 and Time.day() == 17 then
+        stpatricksday = true
+    end
+    if resetMusic then
+        Sound.restoreMusic(-1)
     end
 end
 
@@ -759,6 +738,8 @@ function ExitGame1()
 end
 
 function ExitGameNoSave()
+    smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     smasMainMenu.showBlackScreen = true
     Sound.muteMusic(-1)
     Routine.wait(0.4)
@@ -766,6 +747,8 @@ function ExitGameNoSave()
 end
 
 function SaveEraseStart()
+    Sound.playSFX(29)
+    smasMainMenuSystem.menuOpen = false
     --Start opening SMAS++'s save files. From there, write default data to the files.
     Misc.eraseSaveSlot(Misc.saveSlot())
     --Then make the message telling that it's erased.
@@ -870,7 +853,7 @@ function foolsinapril() --April Fools event for 4/1 of any year
     smasMainMenu.aprilFools = false
     GameData.musreset = true
     smasMainMenu.showLogoOnScreen = true
-    datetime.enabled = true
+    smasDateAndTime.enabled = true
     smasMainMenu.hideGameSMBXAndSMBX2Credits = false
     smasMainMenu.showPressJumpText = true
     GameData.____holidayMenuEventEnded = true
@@ -1112,7 +1095,7 @@ function smasMainMenu.onInputUpdate()
                 twoplayercheckactive = false
                 smasMainMenu.showVersionNumber = false
                 smasMainMenu.showLogoOnScreen = false
-                datetime.enabled = false
+                smasDateAndTime.enabled = false
                 smasMainMenu.hideGameSMBXAndSMBX2Credits = true
                 smasMainMenu.showPressJumpText = false
                 Section(0).backgroundID = 6
@@ -1125,7 +1108,7 @@ function smasMainMenu.onInputUpdate()
                     smasMainMenu.startedmenu = 1
                     Sound.muteMusic(-1)
                     smasMainMenu.showLogoOnScreen = false
-                    datetime.enabled = false
+                    smasDateAndTime.enabled = false
                     smasMainMenu.hideGameSMBXAndSMBX2Credits = true
                     smasMainMenu.showPressJumpText = false
                     smasMainMenu.aprilFools = true
@@ -1397,28 +1380,28 @@ if smasMainMenu.active then
     smasCheats.checkCheatStatusAndDisable()
 end
 
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu", xCenter = 150}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 150}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 200}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, title = "Manage Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 200}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, title = "Accessibility Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 250}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, title = "Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 170}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, title = "Clock Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, xCenter = 170}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, title = "Select level.", xCenter = 160, cantGoBack = true}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, title = "Save Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150}
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, title = "Audio Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu", xCenter = 150, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 150, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 200, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, title = "Manage Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 200, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, title = "Accessibility Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 250, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, title = "Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 170, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, title = "Clock Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, xCenter = 170, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, title = "Select level.", xCenter = 160, yCenter = 310, cantGoBack = true}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, title = "Save Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150, yCenter = 310}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, title = "Audio Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150, yCenter = 310}
 
 
 
 
 smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
-smasMainMenuSystem.addMenuItem{name = "Minigames", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(2, 0, false) end}
+smasMainMenuSystem.addMenuItem{name = "Minigames", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MINIGAMES, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Online Multiplayer", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootOnlinePreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Main Menu Themes", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Settings/Options", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Credits", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(credits1) end}
-smasMainMenuSystem.addMenuItem{name = "Exit Main Menu", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitDialogue) end}
+smasMainMenuSystem.addMenuItem{name = "Exit Main Menu", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.exitDialogue(false) end}
 smasMainMenuSystem.addMenuItem{name = "Exit Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 9, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitGame1) end}
 
 
@@ -1542,8 +1525,15 @@ smasMainMenuSystem.addMenuItem{name = "Original SMBX Sounds", section = smasMain
 
 
 
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, xCenter = 150, yCenter = 310, cantGoBack = true, dialogMessage = "ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?"}
+smasMainMenuSystem.addMenuItem{name = "Do not Erase", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false) Sound.restoreMusic(-1) end}
+smasMainMenuSystem.addMenuItem{name = "ERASE", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() Routine.run(SaveEraseStart) end}
+
+
+
+
 littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue, true) end})
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() Routine.run(SaveEraseStart) end})
+littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() SaveEraseStart() end})
 
 
 
@@ -1640,7 +1630,7 @@ littleDialogue.registerAnswer("FirstBootMenuGameHelp",{text = "Skip",chosenFunct
 
 
 
-littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() Routine.run(ExitDialogue, false, true) end})
+littleDialogue.registerAnswer("FirstBootMenuFive",{text = "Let's get started!",chosenFunction = function() smasMainMenuSystem.exitDialogue(false) end})
 
 
 
@@ -1711,7 +1701,7 @@ littleDialogue.registerAnswer("OkayToMenuTheme",{text = "Oh yeah, right.",chosen
 
 
 
-littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() Routine.run(ExitDialogue, true) end})
+littleDialogue.registerAnswer("ToMenuResetTwo",{text = "Gotcha.",chosenFunction = function() smasMainMenuSystem.exitDialogue(true) end})
 
 
 

@@ -3,7 +3,7 @@ local npcManager = require("npcManager")
 local utils = require("npcs/npcutils")
 local playerStun = require("playerstun")
 local bridge = require("bridge")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 --Create the library table
 local sampleNPC = {}
 --NPC_ID is dynamic based on the name of the library file
@@ -229,7 +229,7 @@ function sampleNPC.onTickEndNPC(v)
                 v.ai2 = 0
             end
             if v.ai1 == 2 and v.ai2 == 1 then
-                SFX.play(extrasounds.sounds[115].sfx)
+                SFX.play(smasExtraSounds.sounds[115].sfx)
             end
             if v.ai1 == 2 and v.ai2 == 30 then
                 v.ai1 = 0

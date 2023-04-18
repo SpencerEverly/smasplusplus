@@ -1,4 +1,4 @@
 local level_dependencies_normal= require("level_dependencies_normal")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
-extrasounds.enableSMB2EnemyKillSounds = false
+smasExtraSounds.enableSMB2EnemyKillSounds = false

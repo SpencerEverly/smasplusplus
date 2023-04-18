@@ -33,19 +33,19 @@ function costume.onInit(playerObj)
 end
 
 function costume.onTick()
-    extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/player-jump.ogg")
+    smasExtraSounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/player-jump.ogg")
     Audio.sounds[2].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/stomped.ogg")
     Audio.sounds[5].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-shrink.ogg")
     Audio.sounds[6].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-grow.ogg")
-    extrasounds.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-died.ogg")
+    smasExtraSounds.sounds[8].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-died.ogg")
     Audio.sounds[10].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/player-slide.ogg")
     Audio.sounds[14].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/coin.ogg")
     Audio.sounds[18].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/fireball.ogg")
     Audio.sounds[21].sfx  = Audio.SfxOpen("costumes/mario/GA-Caillou/dungeon-win.ogg")
     Audio.sounds[23].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/grab.ogg")
-    extrasounds.sounds[33].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/tail.ogg")
+    smasExtraSounds.sounds[33].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/tail.ogg")
     Audio.sounds[34].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/racoon.ogg")
-    extrasounds.sounds[43].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/fireworks.ogg")
+    smasExtraSounds.sounds[43].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/fireworks.ogg")
     Audio.sounds[46].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/door.ogg")
     Audio.sounds[52].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/got-star.ogg")
     Audio.sounds[54].sfx = Audio.SfxOpen("costumes/mario/GA-Caillou/player-died2.ogg")
@@ -57,16 +57,16 @@ function costume.onTick()
 end
 
 function costume.onCleanup(playerObj)
-    extrasounds.sounds[1].sfx = nil    
+    smasExtraSounds.sounds[1].sfx = nil    
     Audio.sounds[2].sfx  = nil
     Audio.sounds[3].sfx  = nil
     Audio.sounds[4].sfx  = nil
     Audio.sounds[5].sfx  = nil
     Audio.sounds[6].sfx  = nil
     Audio.sounds[7].sfx  = nil
-    extrasounds.sounds[8].sfx = nil
+    smasExtraSounds.sounds[8].sfx = nil
     Audio.sounds[9].sfx  = nil
-    extrasounds.sounds[10].sfx = nil
+    smasExtraSounds.sounds[10].sfx = nil
     Audio.sounds[11].sfx = nil
     Audio.sounds[12].sfx = nil
     Audio.sounds[13].sfx = nil
@@ -85,16 +85,16 @@ function costume.onCleanup(playerObj)
     Audio.sounds[29].sfx = nil
     Audio.sounds[31].sfx = nil
     Audio.sounds[32].sfx = nil
-    extrasounds.sounds[33].sfx = nil
+    smasExtraSounds.sounds[33].sfx = nil
     Audio.sounds[34].sfx = nil
     Audio.sounds[35].sfx = nil
-    extrasounds.sounds[36].sfx = nil
+    smasExtraSounds.sounds[36].sfx = nil
     Audio.sounds[37].sfx = nil
     Audio.sounds[38].sfx = nil
-    extrasounds.sounds[39].sfx = nil
+    smasExtraSounds.sounds[39].sfx = nil
     Audio.sounds[41].sfx = nil
-    extrasounds.sounds[42].sfx = nil
-    extrasounds.sounds[43].sfx = nil
+    smasExtraSounds.sounds[42].sfx = nil
+    smasExtraSounds.sounds[43].sfx = nil
     Audio.sounds[44].sfx = nil
     Audio.sounds[46].sfx = nil
     Audio.sounds[47].sfx = nil
@@ -117,11 +117,11 @@ function costume.onCleanup(playerObj)
     Audio.sounds[73].sfx = nil
     Audio.sounds[75].sfx = nil
     Audio.sounds[76].sfx = nil
-    extrasounds.sounds[77].sfx = nil
+    smasExtraSounds.sounds[77].sfx = nil
     Audio.sounds[78].sfx = nil
     Audio.sounds[79].sfx = nil
     Audio.sounds[80].sfx = nil
-    extrasounds.sounds[81].sfx = nil
+    smasExtraSounds.sounds[81].sfx = nil
     Audio.sounds[82].sfx = nil
     Audio.sounds[91].sfx = nil
     Defines.jumpheight = 20

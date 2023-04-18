@@ -6,7 +6,7 @@ local title = Graphics.loadImage("title-final-2x.png")
 if SMBX_VERSION == VER_SEE_MOD then
     local wifiaccess = require("wifiaccess")
 end
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local exitwordswip = false
 
@@ -62,7 +62,7 @@ mleb.addShaderSection(0, {
     })
 
 littleDialogue.defaultStyleName = "smbx13" --Change the text box to the SMBX 1.3 textbox format
-extrasounds.active = false
+smasExtraSounds.active = false
 
 local function ExitToBootMenu()
     exitscreen = true
@@ -99,7 +99,7 @@ function onlineBegin()
 end
     
 function onStart()
-    extrasounds.active = false
+    smasExtraSounds.active = false
     Routine.run(onlineBegin)
     littleDialogue.defaultStyleName = "smbx13" --Change the text box to the SMBX 1.3 textbox format
 end

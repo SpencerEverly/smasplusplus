@@ -4,7 +4,7 @@
 ]]
 
 local pm = require("playermanager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local GP = {}
 
 GP.STATE_NONE = 0
@@ -46,9 +46,9 @@ GP.effects = {
 }
 
 GP.SFX = {
-	poundStart = {id = extrasounds.sounds[159].sfx,  volume = extrasounds.volume},
-	poundJump  = {id = extrasounds.sounds[59].sfx, volume = extrasounds.volume},
-	poundHit   = {id = extrasounds.sounds[160].sfx, volume = extrasounds.volume},
+	poundStart = {id = smasExtraSounds.sounds[159].sfx,  volume = smasExtraSounds.volume},
+	poundJump  = {id = smasExtraSounds.sounds[59].sfx, volume = smasExtraSounds.volume},
+	poundHit   = {id = smasExtraSounds.sounds[160].sfx, volume = smasExtraSounds.volume},
 }
 
 local bottomTouchingNPCs

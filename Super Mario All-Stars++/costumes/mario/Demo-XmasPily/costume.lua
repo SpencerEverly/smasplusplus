@@ -3,7 +3,7 @@
 -- ###########################################
 local particles = require("particles")
 
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 local RNG = require("rng")
 
 local actorsys = require("a2xt_actor")
@@ -1187,7 +1187,7 @@ end
 
 function costume.onTickEnd()
     jumprng = RNG.randomInt(1,6)
-    extrasounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/jumps/jump-"..jumprng..".ogg")
+    smasExtraSounds.sounds[1].sfx = Audio.SfxOpen("costumes/mario/Demo-XmasPily/jumps/jump-"..jumprng..".ogg")
 end
 
 function costume.onCleanup(playerObj, p)

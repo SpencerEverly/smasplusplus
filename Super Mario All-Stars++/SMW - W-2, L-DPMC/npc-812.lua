@@ -3,7 +3,7 @@ local npcManager = require("npcManager")
 local imagic = require("imagic")
 local utils = require("npcs/npcutils")
 local playerStun = require("playerstun")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 --Create the library table
 local sampleNPC = {}
@@ -110,8 +110,8 @@ npcManager.registerHarmTypes(npcID,
 );
 
 --Custom local definitions below
-local smwbossdefeat = extrasounds.sounds[129].sfx
-local smwbosspoof = extrasounds.sounds[130].sfx
+local smwbossdefeat = smasExtraSounds.sounds[129].sfx
+local smwbosspoof = smasExtraSounds.sounds[130].sfx
 
 --Register events
 function sampleNPC.onInitAPI()

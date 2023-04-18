@@ -17,7 +17,7 @@
 ]]
 
 local playerManager = require("playerManager")
-local extrasounds = require("extrasounds")
+local smasExtraSounds = require("smasExtraSounds")
 
 local starman = require("starman/star")
 local smasFunctions = require("smasFunctions")
