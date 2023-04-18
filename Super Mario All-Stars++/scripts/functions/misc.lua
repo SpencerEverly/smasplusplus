@@ -983,7 +983,7 @@ local screenShakeTally = -1
 function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoing doPOW to extend the POW system. shakeNumber is how much to shake the screen, supressSound is for to play the default thwomp sound or not, letCoinsFall is if you want coins to fall or not when executed, and eventName is for if you want to specify a custom name for the POW you're executing on code. eventName is very useful, as that you can use onPOW/onPostPOW for executing certain things when executing a POW.
     
     if shakeNumber == nil then
-        shakeNumber = 15 --Default screen shake value (According to the source code it's 20, but I decided on a less shakey value)
+        shakeNumber = 30 --Default screen shake value (According to the source code it's 20, but this system is different)
     end
     if supressSound == nil then
         supressSound = false --To suppress the sound, make sure you set it as true
