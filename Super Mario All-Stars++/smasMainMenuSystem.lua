@@ -15,6 +15,7 @@ smasMainMenuSystem.menuTypes = {
     MENU_SELECTABLE = 1,
     MENU_BOOLEAN = 2,
     MENU_NUMBERVALUE = 3,
+    MENU_MULTISELECT = 4,
 }
 
 smasMainMenuSystem.menuSections = {
@@ -24,6 +25,8 @@ smasMainMenuSystem.menuSections = {
     SECTION_SETTINGS_MANAGE = 4,
     SECTION_SETTINGS_ACCESSIBILITY = 5,
     SECTION_THEMESELECTION = 6,
+    SECTION_CLOCKTHEMING = 7,
+    SECTION_BATTLEMODELEVELSELECT = 8,
 }
 
 smasMainMenuSystem.menuItems = {}
@@ -42,6 +45,7 @@ smasMainMenuSystem.isCursorOnMenuItem = false
 smasMainMenuSystem.layoutText = {}
 smasMainMenuSystem.noBooleanValue = false
 smasMainMenuSystem.previousMenuCursor = {}
+smasMainMenuSystem.rememberedMenuCursorPositions = {}
 
 smasMainMenuSystem.priority = 3
 smasMainMenuSystem.menuLen = 0
@@ -49,6 +53,8 @@ smasMainMenuSystem.menuLen = 0
 --[[smasMainMenuSystem.addSection(args):
 section = The menu section, basically where this should be added to.
 sectionItem = Which slot this should take place in the menu.
+xCenter = Where to center the menu if needed.
+cantGoBack = Whether to not go back on the section or not.
 ]]
 function smasMainMenuSystem.addSection(args)
     if args.section == nil then
@@ -58,6 +64,9 @@ function smasMainMenuSystem.addSection(args)
     args.title = args.title or ""
     args.menuBackTo = args.menuBackTo or 1
     args.xCenter = args.xCenter or smasMainMenuSystem.MenuXCentered
+    if args.cantGoBack == nil then
+        args.cantGoBack = false
+    end
     if smasMainMenuSystem.menuItems[args.section] == nil then
         smasMainMenuSystem.menuItems[args.section] = {}
     end
@@ -65,6 +74,7 @@ function smasMainMenuSystem.addSection(args)
         title = args.title,
         menuBackTo = args.menuBackTo,
         xCenter = args.xCenter,
+        cantGoBack = args.cantGoBack,
     }
 end
 
@@ -105,8 +115,10 @@ function smasMainMenuSystem.addMenuItem(args)
     if args.isGameData == nil then
         args.isGameData = false
     end
-    args.numberValue = args.numberValue or 1
+    args.numberToUse = args.numberToUse or 1
     args.maxNumber = args.maxNumber or 1
+    args.multiSelectValueToUse = args.multiSelectValueToUse or ""
+    args.multiSelectValueToSet = args.multiSelectValueToSet or ""
 
     if smasMainMenuSystem.menuItems[args.section][args.sectionItem] == nil then
         smasMainMenuSystem.menuItems[args.section][args.sectionItem] = {}
@@ -118,8 +130,10 @@ function smasMainMenuSystem.addMenuItem(args)
         canRunAsFunction = args.isFunction,
         functionIfPossible = args.functionToRun,
         booleanToUse = args.booleanToUse,
-        numberToUse = args.numberValue,
+        numberToUse = args.numberToUse,
         maxNumber = args.maxNumber,
+        multiSelectValueToUse = args.multiSelectValueToUse,
+        multiSelectValueToSet = args.multiSelectValueToSet,
         sectionItem = args.sectionItem,
         isSaveData = args.isSaveData,
         isGameData = args.isGameData,
@@ -163,6 +177,25 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
             GameData[currentOption.booleanToUse] = not GameData[currentOption.booleanToUse]
         end
         Sound.playSFX(32)
+        if isMouse then
+            smasMainMenuSystem.ScrollDelay = 10
+        else
+            smasMainMenuSystem.PressDelay = 10
+        end
+    end
+    if currentOption.multiSelectValueToUse ~= "" then
+        if currentOption.isSaveData then
+            if SaveData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
+                Sound.playSFX(32)
+            end
+            SaveData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
+        end
+        if currentOption.isGameData then
+            if GameData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
+                Sound.playSFX(32)
+            end
+            GameData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
+        end
         if isMouse then
             smasMainMenuSystem.ScrollDelay = 10
         else
@@ -220,7 +253,7 @@ function smasMainMenuSystem.onInputUpdate()
                     elseif p.keys.jump == KEYS_PRESSED then
                         smasMainMenuSystem.runMenuFunction(false)
                     elseif p.keys.run == KEYS_PRESSED then
-                        if smasMainMenuSystem.onMenu > 1 then
+                        if smasMainMenuSystem.onMenu > 1 and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].cantGoBack then
                             smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].menuBackTo, 0, true)
                         elseif smasMainMenuSystem.onMenu == 1 then
                             Sound.playSFX(26)
@@ -287,6 +320,7 @@ function smasMainMenuSystem.onDraw()
                 
                 named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name
                 local naming = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
+                
                 if currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_BOOLEAN then
                     if currentOption.isSaveData then
                         if SaveData[naming.booleanToUse] then
@@ -304,6 +338,21 @@ function smasMainMenuSystem.onDraw()
                     
                 elseif currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE then
                     named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse)..")"
+                
+                elseif currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_MULTISELECT then
+                    if currentOption.isSaveData then
+                        if SaveData[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                        elseif SaveData[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                        end
+                    elseif currentOption.isGameData then
+                        if GameData[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                        elseif GameData[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
+                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                        end
+                    end
                 end
                 textplus.print({x = smasMainMenuSystem.MenuX, y = smasMainMenuSystem.MenuY + 30 + (B * 30), text = named[k], priority = smasMainMenuSystem.priority, color = Color.white, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
                 

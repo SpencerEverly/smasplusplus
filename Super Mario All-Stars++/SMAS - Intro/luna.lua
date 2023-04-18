@@ -20,8 +20,7 @@ function onInitAPI()
 end
 
 function onStart(p)
-    datetime.topright = true
-    datetime.bottomright = false
+    datetime.position = 4
     p = p or player;
     smasBooleans.overrideMusicVolume = true
     Audio.MusicVolume(80)
@@ -138,6 +137,4 @@ smasCheats.checkCheatStatusAndDisable()
 function onExit()
     smasBooleans.overrideMusicVolume = false
     Audio.MusicVolume(65)
-    datetime.topright = false
-    datetime.bottomright = true
 end

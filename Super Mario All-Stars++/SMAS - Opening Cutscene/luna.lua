@@ -1,7 +1,7 @@
 Graphics.activateHud(false)
 local datetime = require("datetime")
 
-datetime.bottomright = false
+datetime.enabled = false
 
 smasHud.visible.keys = false
 smasHud.visible.itemBox = false

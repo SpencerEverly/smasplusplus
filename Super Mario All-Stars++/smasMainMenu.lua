@@ -56,8 +56,7 @@ if smasMainMenu.active then
     smasHud.visible.deathCount = false
     smasHud.visible.customItemBox = false
     smasHud.visible.pWing = false
-    datetime.bottomright = true
-    datetime.topright = false
+    datetime.position = 1
     extrasounds.active = false
     smasMainMenu.startedmenu = 0
 end
@@ -102,6 +101,7 @@ function introExit()
 end
 
 function battleRandomLevelSelect()
+    Sound.playSFX(29)
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -113,6 +113,7 @@ function battleRandomLevelSelect()
 end
 
 function battleLevelSelected()
+    Sound.playSFX(29)
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -126,6 +127,7 @@ end
 
 
 function startRushMode()
+    Sound.playSFX(29)
     smasMainMenu.showBlackScreen = true
     autoscroll.scrollLeft(5000)
     Sound.muteMusic(-1)
@@ -401,7 +403,8 @@ end
 
 
 function classicBattleSelect() --Select level.
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000020"), pauses = false, updatesInPause = true})
+    smasMainMenuSystem.menuOpen = true
+    smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, 0, false)
 end
 
 function ChangeName1() --To change your name...
@@ -515,10 +518,12 @@ function X2Char() --Game settings applied
     if not SaveData.disableX2char then
         Sound.playSFX("1.3Mode/bowser-killed.ogg")
         SaveData.disableX2char = true
+        Sound.loadCostumeSounds()
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
     elseif SaveData.disableX2char then
         Sound.playSFX("x2-mode-enabled.ogg")
         SaveData.disableX2char = false
+        Sound.loadCostumeSounds()
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
     end
 end
@@ -640,6 +645,7 @@ function TwoPlayerCheckBattle()
 end
 
 function ExitClassicBattle()
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000046"), pauses = false, updatesInPause = true})
 end
 
@@ -877,7 +883,7 @@ function foolsinapril() --April Fools event for 4/1 of any year
     smasMainMenu.aprilFools = false
     GameData.musreset = true
     smasMainMenu.showLogoOnScreen = true
-    datetime.bottomright = true
+    datetime.enabled = true
     smasMainMenu.hideGameSMBXAndSMBX2Credits = false
     smasMainMenu.showPressJumpText = true
     GameData.____holidayMenuEventEnded = true
@@ -1119,7 +1125,7 @@ function smasMainMenu.onInputUpdate()
                 twoplayercheckactive = false
                 smasMainMenu.showVersionNumber = false
                 smasMainMenu.showLogoOnScreen = false
-                datetime.bottomright = false
+                datetime.enabled = false
                 smasMainMenu.hideGameSMBXAndSMBX2Credits = true
                 smasMainMenu.showPressJumpText = false
                 Section(0).backgroundID = 6
@@ -1132,7 +1138,7 @@ function smasMainMenu.onInputUpdate()
                     smasMainMenu.startedmenu = 1
                     Sound.muteMusic(-1)
                     smasMainMenu.showLogoOnScreen = false
-                    datetime.bottomright = false
+                    datetime.enabled = false
                     smasMainMenu.hideGameSMBXAndSMBX2Credits = true
                     smasMainMenu.showPressJumpText = false
                     smasMainMenu.aprilFools = true
@@ -1410,6 +1416,8 @@ smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, title = "Manage Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 200}
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, title = "Accessibility Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 250}
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, title = "Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 170}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, title = "Clock Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 170}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, title = "Select level.", xCenter = 160, cantGoBack = true}
 
 
 
@@ -1448,7 +1456,7 @@ smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMe
 smasMainMenuSystem.addMenuItem{name = "Change Character", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeChar1) end}
 smasMainMenuSystem.addMenuItem{name = "Change Player Name", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeName1) end}
 smasMainMenuSystem.addMenuItem{name = "Change Profile Picture", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangePFP1) end}
-smasMainMenuSystem.addMenuItem{name = "Change Clock Theme", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ClockSelect1) end}
+smasMainMenuSystem.addMenuItem{name = "Change Clock Theme", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, 0, false) end}
 
 
 
@@ -1489,58 +1497,43 @@ smasMainMenuSystem.addMenuItem{name = "Metroid Prime 2", section = smasMainMenuS
 
 
 
-
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Random Level",chosenFunction = function() Routine.run(battleRandomLevelSelect) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battle Zone (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 1 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Battleshrooms (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 2 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Classic Castle Battle (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 3 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Dry Dry Desert (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 4 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Hyrule Temple (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 5 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Invasion Battlehammer (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 6 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lakitu Mechazone (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 7 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Lethal Lava Level (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 8 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Retroville Underground (SMBX 1.3.0.1)",chosenFunction = function() smasMainMenu.battleModeLevel = 9 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Slippy Slap Snowland (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 10 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Woody Warzone (SMBX 1.3)",chosenFunction = function() smasMainMenu.battleModeLevel = 11 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Sky High Into the Skies",chosenFunction = function() smasMainMenu.battleModeLevel = 12 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 1 (By hrthrdh)",chosenFunction = function() smasMainMenu.battleModeLevel = 13 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 2 (By hrthrdh)",chosenFunction = function() smasMainMenu.battleModeLevel = 14 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "New Super Mario Bros. DS, Level 3 (By hrthrdh)",chosenFunction = function() smasMainMenu.battleModeLevel = 15 Routine.run(battleLevelSelected) end})
-littleDialogue.registerAnswer("BattleLevelSelect",{text = "Exit Battle Mode",chosenFunction = function() Routine.run(ExitClassicBattle) end})
+smasMainMenuSystem.addMenuItem{name = "Exit Battle Mode", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ExitClassicBattle) end}
+smasMainMenuSystem.addMenuItem{name = "Random Level", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(battleRandomLevelSelect) end}
+smasMainMenuSystem.addMenuItem{name = "Battle Zone", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 1 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Battleshrooms", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 2 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Classic Castle Battle", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 3 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Dry Dry Desert", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 4 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Hyrule Temple", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 5 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Invasion Battlehammer", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 6 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Lakitu Mechazone", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 9, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 7 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Lethal Lava Level", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 10, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 8 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Retroville Underground", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 11, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 9 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Slippy Slap Snowland", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 12, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 10 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Woody Warzone", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 13, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 11 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "Sky High In the Skies", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 14, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 12 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "NSMBDS, Level 1", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 15, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 13 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "NSMBDS, Level 2", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 16, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 14 Routine.run(battleLevelSelected) end}
+smasMainMenuSystem.addMenuItem{name = "NSMBDS, Level 3", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 17, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.battleModeLevel = 15 Routine.run(battleLevelSelected) end}
 
 
 
-littleDialogue.registerAnswer("ClockSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Disable Clock",chosenFunction = function() SaveData.clockTheme = "disabled" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Default (Normal)",chosenFunction = function() SaveData.clockTheme = "normal" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "Vintage",chosenFunction = function() SaveData.clockTheme = "vintage" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Homedics SS-4000",chosenFunction = function() SaveData.clockTheme = "homedics" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "R.O.B. Clock",chosenFunction = function() SaveData.clockTheme = "rob" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "Modern",chosenFunction = function() SaveData.clockTheme = "modern" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "Windows 98",chosenFunction = function() SaveData.clockTheme = "windows98" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Windows XP",chosenFunction = function() SaveData.clockTheme = "windowsxp" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "Windows 7",chosenFunction = function() SaveData.clockTheme = "windows7" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Windows 10",chosenFunction = function() SaveData.clockTheme = "windows10" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "Windows 11",chosenFunction = function() SaveData.clockTheme = "windows11" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "Mac OS X",chosenFunction = function() SaveData.clockTheme = "macosx" Routine.run(ClockChange1) end})
---littleDialogue.registerAnswer("ClockSelect",{text = "Ubuntu",chosenFunction = function() SaveData.clockTheme = "ubuntu" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Disable Clock",chosenFunction = function() SaveData.clockTheme = "disabled" Routine.run(ClockChange1) end})
-littleDialogue.registerAnswer("ClockSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
+smasMainMenuSystem.addMenuItem{name = "Disable Clock", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "disabled", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Default", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "normal", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Homedics SS-4000", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "homedics", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Windows XP", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "windowsxp", isSaveData = true, isGameData = false}
+smasMainMenuSystem.addMenuItem{name = "Windows 10", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 5, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "windows10", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "Vintage", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 6, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "vintage", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "R.O.B.", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 7, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "rob", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "Modern", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 8, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "modern", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "Windows 98", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 9, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "windows98", multiSelectValueToSet = "modern", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "Windows 7", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 10, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "windows7", multiSelectValueToSet = "modern", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "Windows 11", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 11, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "windows11", multiSelectValueToSet = "modern", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "macOS", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 12, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "macosx", multiSelectValueToSet = "modern", isSaveData = true, isGameData = false}
+--smasMainMenuSystem.addMenuItem{name = "Ubuntu", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 13, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "macosx", multiSelectValueToSet = "ubuntu", isSaveData = true, isGameData = false}
 
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Fullscreen (Default)",chosenFunction = function() SaveData.resolution = "fullscreen" Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Widescreen (Most Screens)",chosenFunction = function() SaveData.resolution = "widescreen" Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Ultrawide (Movie Resolution)",chosenFunction = function() SaveData.resolution = "ultrawide" Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Steam Deck (PC Game System)",chosenFunction = function() SaveData.resolution = "steamdeck" Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "NES, SNES, Genesis",chosenFunction = function() SaveData.resolution = "nes" Routine.run(ResolutionChange1) end})
---littleDialogue.registerAnswer("ResolutionSelect",{text = "Gameboy, Gameboy Color",chosenFunction = function() SaveData.resolution = "gameboy" Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Gameboy Advance",chosenFunction = function() SaveData.resolution = "gba" Routine.run(ResolutionChange1) end})
---littleDialogue.registerAnswer("ResolutionSelect",{text = "iPhone (1st Generation)",chosenFunction = function() SaveData.resolution = "iphone1st" Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Nintendo 3DS (Top Screen)",chosenFunction = function() SaveData.resolution = "3ds" Routine.run(ResolutionChange1) end})
-littleDialogue.registerAnswer("ResolutionSelect",{text = "Return to Previous Menu",chosenFunction = function() Routine.run(optionsMenu1) end})
+
 
 
 
