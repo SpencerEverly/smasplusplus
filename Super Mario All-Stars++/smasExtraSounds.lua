@@ -148,17 +148,12 @@ smasExtraSounds.enablePWingSFX = true
 --Whether to use the time out sound for the P-Switch/Stopwatch or not.
 smasExtraSounds.enablePSwitchTimeOutSFX = true
 
-if SaveData.enableLives == nil then
-    SaveData.enableLives = true --Episode specific, but you can set this to false if you aren't using the lives system, which will play the 0up sound instead when retrieving lives.
-end
-
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 local inspect = require("ext/inspect")
 local rng = require("base/rng")
 
-local npctocointimer = 0 --This is used for the NPC to Coin sound.
-local spinballtimer = 0 --This is used when spinjumping and shooting fireballs/iceballs.
-local holdingtimer = 0 --To count a timer on how long a player has held an item.
+local npcToCoinTimer = 0 --This is used for the NPC to Coin sound.
+local holdingTimer = 0 --To count a timer on how long a player has held an item.
 local comboMuteTally = 0 --To enable combo sounds
 
 smasExtraSounds.harmableComboTypes = {
@@ -693,6 +688,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
         Audio.sounds[10].muted = true --player-slide.ogg
         Audio.sounds[14].muted = true --coin.ogg
         Audio.sounds[15].muted = true --1up.ogg
+        --Audio.sounds[17].muted = true --warp.ogg
         Audio.sounds[18].muted = true --fireball.ogg
         Audio.sounds[33].muted = true --tail.ogg
         Audio.sounds[36].muted = true --smash.ogg
@@ -832,7 +828,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                 end
             end
             if not p:mem(0x50, FIELD_BOOL) then --Is the player not spinjumping?
-                spinballtimer = 0
+                
             end
         
         
@@ -841,14 +837,14 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             --**GRABBING SHELLS**
             if Player.count() == 1 then
                 if p.holdingNPC ~= nil then
-                    holdingtimer = holdingtimer + 1
+                    holdingTimer = holdingTimer + 1
                 else
-                    holdingtimer = 0
+                    holdingTimer = 0
                 end
                 for k,v in ipairs(NPC.get({5,7,24,73,113,114,115,116,172,174,194})) do
                     if p.holdingNPC == v and p.keys.run then
                         if not normalCharactersToad[p.character] then
-                            if holdingtimer == 1 then
+                            if holdingTimer == 1 then
                                 if smasExtraSounds.enableGrabShellSFX then
                                     smasExtraSounds.playSFX(156)
                                 end
@@ -1103,9 +1099,9 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             
             --**NPCTOCOIN**
             if mem(0x00A3C87F, FIELD_BYTE) == 14 and Level.endState() == 2 or Level.endState() == 4 then --This plays a coin sound when NpcToCoin happens
-                npctocointimer = npctocointimer + 1
+                npcToCoinTimer = npcToCoinTimer + 1
                 if smasExtraSounds.enableNPCtoCoin then
-                    if npctocointimer == 1 then
+                    if npcToCoinTimer == 1 then
                         smasExtraSounds.playSFX(14)
                     end
                 end
@@ -1127,6 +1123,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             Audio.sounds[10].muted = false --player-slide.ogg
             Audio.sounds[14].muted = false --coin.ogg
             Audio.sounds[15].muted = false --1up.ogg
+            --Audio.sounds[17].muted = false --warp.ogg
             Audio.sounds[18].muted = false --fireball.ogg
             Audio.sounds[33].muted = false --tail.ogg
             Audio.sounds[36].muted = false --smash.ogg

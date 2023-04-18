@@ -192,14 +192,19 @@ end
 function smasMainMenuSystem.runMenuFunction(isMouse)
     local currentOption = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
     if currentOption.canRunAsFunction then
-        currentOption.functionIfPossible()
         if isMouse then
             smasMainMenuSystem.ScrollDelay = 10
         else
             smasMainMenuSystem.PressDelay = 10
         end
+        currentOption.functionIfPossible()
     end
     if currentOption.booleanToUse ~= "" then
+        if isMouse then
+            smasMainMenuSystem.ScrollDelay = 10
+        else
+            smasMainMenuSystem.PressDelay = 10
+        end
         if currentOption.isSaveData then
             SaveData[currentOption.booleanToUse] = not SaveData[currentOption.booleanToUse]
         end
@@ -210,13 +215,13 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
             selectionData[currentOption.booleanToUse] = not selectionData[currentOption.booleanToUse]
         end
         Sound.playSFX(32)
+    end
+    if currentOption.multiSelectValueToUse ~= "" then
         if isMouse then
             smasMainMenuSystem.ScrollDelay = 10
         else
             smasMainMenuSystem.PressDelay = 10
         end
-    end
-    if currentOption.multiSelectValueToUse ~= "" then
         if currentOption.isSaveData then
             if SaveData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
                 Sound.playSFX(32)
@@ -234,11 +239,6 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
                 Sound.playSFX(32)
             end
             selectionData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
-        end
-        if isMouse then
-            smasMainMenuSystem.ScrollDelay = 10
-        else
-            smasMainMenuSystem.PressDelay = 10
         end
     end
 end
@@ -339,16 +339,16 @@ function smasMainMenuSystem.onDraw()
     local C = 0
     local original_maxShow = smasMainMenuSystem.maxShow
     
+    if smasMainMenuSystem.PressDelay > 0 then
+        smasMainMenuSystem.PressDelay = smasMainMenuSystem.PressDelay - 1
+    end
+    
     if smasMainMenuSystem.menuOpen then
         if smasMainMenuSystem.onMenu > 0 then
             smasMainMenuSystem.minShow = 1
             smasMainMenuSystem.maxShow = #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu]
             
             original_maxShow = smasMainMenuSystem.maxShow
-            
-            if smasMainMenuSystem.PressDelay > 0 then
-                smasMainMenuSystem.PressDelay = smasMainMenuSystem.PressDelay - 1
-            end
             
             if #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] > 5 then
                 smasMainMenuSystem.minShow = smasMainMenuSystem.worldCurs

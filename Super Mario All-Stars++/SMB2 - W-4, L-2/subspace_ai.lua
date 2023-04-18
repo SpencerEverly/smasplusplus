@@ -604,6 +604,7 @@ function subspace.onTick()
                 and grabSpeed ~= nil and p:mem(0x26,FIELD_WORD) >= grabSpeed then
                     -- Give a coin
                     SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+                    SaveData.totalCoins = SaveData.totalCoins + 1
                     SFX.play(smasExtraSounds.sounds[14].sfx)
                     Effect.spawn(11,p.standingNPC.x + p.standingNPC.width*0.5,p.standingNPC.y)
 

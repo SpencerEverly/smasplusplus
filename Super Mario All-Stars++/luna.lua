@@ -36,14 +36,6 @@ end
 GameData.__EpisodeFolder = Misc.episodePath()
 GameData.__SaveSlot = Misc.saveSlot()
 
---Default values for Music and SFX if the values are nil...
-if GameData.____sfxVolume == nil then
-    GameData.____sfxVolume = 1
-end
-if GameData.____currentMusicVolume == nil then
-    GameData.____currentMusicVolume = 60
-end
-
 --Make sure we warn the user to upgrade the legacy save data while we can...
 if not Misc.inMarioChallenge() then
     if mem(0x00B251E0, FIELD_WORD) >= 1 then
@@ -248,18 +240,31 @@ Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved(
 
 --First time SaveData settings, for resolutions and other settings
 
+--***This will be used for the future, once we replace each SaveData/GameData variable to ones that look cleaner and are better to use***
+SaveData.SMASPlusPlus = SaveData.SMASPlusPlus or {}
+SaveData.SMASPlusPlus.options = SaveData.SMASPlusPlus.options or {}
+SaveData.SMASPlusPlus.accessibility = SaveData.SMASPlusPlus.accessibility or {}
+SaveData.SMASPlusPlus.hud = SaveData.SMASPlusPlus.hud or {}
+SaveData.SMASPlusPlus.keys = SaveData.SMASPlusPlus.keys or {}
+SaveData.SMASPlusPlus.audio = SaveData.SMASPlusPlus.audio or {}
+SaveData.SMASPlusPlus.game = SaveData.SMASPlusPlus.game or {}
+SaveData.SMASPlusPlus.player = SaveData.SMASPlusPlus.player or {}
+for i = 1,maxPlayers do
+    SaveData.SMASPlusPlus.player[i] = SaveData.SMASPlusPlus.player[i] or {}
+end
+--***End of clean variables***
+
+if SaveData.totalcoins ~= nil then --If using the old SaveData function, use the new one and nil the original out
+    SaveData.totalCoins = SaveData.totalcoins
+    SaveData.totalcoins = nil
+end
+
 --**Player-related data**
 SaveData.currentCostume = SaveData.currentCostume or "N/A"
-SaveData.currentCharacterAlteration = SaveData.currentCharacterAlteration or "N/A"
+SaveData.currentAlteration = SaveData.currentAlteration or "N/A"
 
 --**Themes, resolutions**
 SaveData.resolution = SaveData.resolution or "fullscreen"
-if SaveData.letterbox == nil then --Letterbox default is true
-    SaveData.letterbox = true
-end
-if SaveData.borderEnabled == nil then --Border default is false
-    SaveData.borderEnabled = true
-end
 if SaveData.clockTheme == nil then --Default clock theme is "normal"
     SaveData.clockTheme = "normal"
 end
@@ -354,6 +359,27 @@ end
 if SaveData.framerateEnabled == nil then
     SaveData.framerateEnabled = false
 end
+if SaveData.SMB1HardModeActivated == nil then
+    SaveData.SMB1HardModeActivated = false
+end
+if SaveData.SMB1LLAllNightNipponActivated == nil then
+    SaveData.SMB1LLAllNightNipponActivated = false
+end
+if SaveData.WSMBAOriginalGraphicsActivated == nil then
+    SaveData.WSMBAOriginalGraphicsActivated = false
+end
+if SaveData.framerateEnabled == nil then
+    SaveData.framerateEnabled = false
+end
+if SaveData.disablePWingSFX == nil then
+    SaveData.disablePWingSFX = false
+end
+if SaveData.SMBXSoundSystem == nil then
+    SaveData.SMBXSoundSystem = false
+end
+if SaveData.enableLives == nil then
+    SaveData.enableLives = true
+end
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 
@@ -376,16 +402,6 @@ smasTables._noLoadingSoundLevels = {
     "SMAS - Raca's World (Part 1).lvlx",
     "map.lvlx"
 }
-
---Fixes in case if edits occur throughout to prevent errors
-if SaveData.resolution == "3ds" then
-    SaveData.resolution = "fullscreen"
-end
-
-if SaveData.totalcoins then --If using the old SaveData function, use the new one and nil the original out
-    SaveData.totalCoins = SaveData.totalcoins
-    SaveData.totalcoins = nil
-end
 
 --Now use onLoad to play the loading sound...
 function onLoad()

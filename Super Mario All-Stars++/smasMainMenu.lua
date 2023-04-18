@@ -1074,8 +1074,9 @@ function smasMainMenu.onInputUpdate()
             end
         end
         if smasMainMenu.startedmenu == 0 then
-            if player.keys.jump == KEYS_PRESSED then
+            if player.keys.jump == KEYS_PRESSED and smasMainMenuSystem.PressDelay == 0 then
                 Routine.run(smasMainMenu.bootDialogue)
+                MenuCursor = 0
                 smasMainMenu.startedmenu = 1
             end
         end
