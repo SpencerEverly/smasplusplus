@@ -34,6 +34,14 @@ end
 GameData.__EpisodeFolder = Misc.episodePath()
 GameData.__SaveSlot = Misc.saveSlot()
 
+--Default values for Music and SFX if the values are nil...
+if GameData.____sfxVolume == nil then
+    GameData.____sfxVolume = 1
+end
+if GameData.____currentMusicVolume == nil then
+    GameData.____currentMusicVolume = 60
+end
+
 --Make sure we warn the user to upgrade the legacy save data while we can...
 if not Misc.inMarioChallenge() then
     if mem(0x00B251E0, FIELD_WORD) >= 1 then
@@ -565,7 +573,7 @@ function onDraw()
     end
     
     if Misc.inMarioChallenge() then
-        if lunatime.tick() == 2 then
+        if lunatime.tick() == 6 then
             if player.character == 10 then
                 if player:getCostume() == "SMB3-WALUIGI" then
                     player.setCostume(3, "SMB3-WALUIGI", false)

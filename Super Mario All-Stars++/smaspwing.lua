@@ -58,36 +58,40 @@ function smasPWing.isFlying(p)
 end
 
 function smasPWing.runningCounter(plr)
-    if smasCharacterCostumes.currentCostume.playersList ~= nil then
-        for _,p in ipairs(smasCharacterCostumes.currentCostume.playersList) do
-            local data = smasCharacterCostumes.currentCostume.playerData[p]
-            if data.pSpeed ~= nil then
-                return data.pSpeed
+    if smasCharacterCostumes.currentCostume ~= {} then
+        if smasCharacterCostumes.currentCostume.playersList ~= nil then
+            for _,p in ipairs(smasCharacterCostumes.currentCostume.playersList) do
+                local data = smasCharacterCostumes.currentCostume.playerData[p]
+                if data.pSpeed ~= nil then
+                    return data.pSpeed
+                end
             end
+        else
+            return plr:mem(0x168, FIELD_FLOAT)
         end
-    else
-        return plr:mem(0x168, FIELD_FLOAT)
     end
 end
 
 function smasPWing.canStartFlying(plr)
-    if smasCharacterCostumes.currentCostume.playersList ~= nil then
-        for _,p in ipairs(smasCharacterCostumes.currentCostume.playersList) do
-            local data = smasCharacterCostumes.currentCostume.playerData[p]
-            local atPSpeed = (p.holdingNPC == nil)
+    if smasCharacterCostumes.currentCostume ~= {} then
+        if smasCharacterCostumes.currentCostume.playersList ~= nil then
+            for _,p in ipairs(smasCharacterCostumes.currentCostume.playersList) do
+                local data = smasCharacterCostumes.currentCostume.playerData[p]
+                local atPSpeed = (p.holdingNPC == nil)
 
-            if atPSpeed then
-                if smasPWing.leafPowerups[p.powerup] then
-                    atPSpeed = p:mem(0x16C,FIELD_BOOL) or p:mem(0x16E,FIELD_BOOL)
-                else
-                    atPSpeed = (data.pSpeed >= smasPWing.pSpeedCounters[p.character])
+                if atPSpeed then
+                    if smasPWing.leafPowerups[p.powerup] then
+                        atPSpeed = p:mem(0x16C,FIELD_BOOL) or p:mem(0x16E,FIELD_BOOL)
+                    else
+                        atPSpeed = (data.pSpeed >= smasPWing.pSpeedCounters[p.character])
+                    end
                 end
+                
+                return atPSpeed
             end
-            
-            return atPSpeed
+        else
+            return plr:mem(0x16C, FIELD_BOOL)
         end
-    else
-        return plr:mem(0x16C, FIELD_BOOL)
     end
 end
 
