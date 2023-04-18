@@ -417,7 +417,7 @@ local frametimer = 0
 local actualframecount
 
 function globalgenerals.onDraw()
-    if not SaveData.disableX2char then
+    if not SaveData.disableX2char and not Misc.inMarioChallenge() then
         if player.character <= 5 then
             if SaveData.currentCostume == "N/A" then
                 local costumes = playerManager.getCostumes(player.character)

@@ -62,18 +62,16 @@ local function unFreezePlayer(musicPaused, soundPaused)
 end
 
 function costume.onInit(p)
-    registerEvent(costume, "onTick", "onTick", false)
-    registerEvent(costume, "onInputUpdate", "onInputUpdate", false)
-    registerEvent(costume, "onJump", "onJump", false)
-    registerEvent(costume, "onJumpEnd", "onJumpEnd", false)
-    registerEvent(costume, "onDraw", "onDraw", false)
+    registerEvent(costume,"onTick")
+    registerEvent(costume,"onInputUpdate")
+    registerEvent(costume,"onJump")
+    registerEvent(costume,"onJumpEnd")
+    registerEvent(costume,"onDraw")
     
     Graphics.sprites.npc[291].img = Graphics.loadImageResolved("costumes/peach/NinjaBomberman/npc-291.png")
     
     Defines.jumpheight = 10
     Defines.jumpheight_bounce = 12
-    
-    costume.abilitiesenabled = true
 end
 
 function dyinganimation()
@@ -258,8 +256,6 @@ function costume.onCleanup(p)
     Defines.gravity = 12
     
     Graphics.sprites.npc[291].img = nil
-    
-    costume.abilitiesenabled = false
 end
 
 Misc.storeLatestCostumeData(costume)
