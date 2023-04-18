@@ -14,6 +14,8 @@ smas2PlayerSystem.player1CameraEdgeY = 0
 smas2PlayerSystem.player2CameraEdgeX = 0
 smas2PlayerSystem.player2CameraEdgeY = 0
 
+smas2PlayerSystem.enableSplitScreen = false
+
 local pipecounter1p = 0
 local pipecounter2p = 0
 
@@ -93,67 +95,59 @@ function smas2PlayerSystem.onDraw()
     end
     
     if SaveData.disableX2char then
-        
-        if Player.count() >= 2 then
-            local playerboundaryx = Player(2).x - player.x
-            local playerboundaryy = Player(2).y - player.y
-            --Kill player2 if far away, out of the camera bounds
-            --[[if (player.forcedState == FORCEDSTATE_PIPE) == false or (player.forcedState == FORCEDSTATE_DOOR) == false then
-                if playerboundaryx >= 800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-                    Player(2):kill()
-                elseif playerboundaryx <= -800 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-                    Player(2):kill()
-                elseif playerboundaryy >= 1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-                    Player(2):kill()
-                elseif playerboundaryy <= -1200 and Player(2):mem(0x13C, FIELD_BOOL) == false then
-                    Player(2):kill()
+        if smas2PlayerSystem.enableSplitScreen then
+            if Player.count() == 2 then
+                if player.deathTimer == 0 then
+                    Graphics.drawBox{width = 2, height = 600, x = 400, y = 0, color = Color.black}
+                    smas2PlayerSystem.player1CameraEdgeX = Screen.viewPortCoordinateX(player.x - camera.x + 15, player.width)
+                    smas2PlayerSystem.player1CameraEdgeY = 0
+                    smas2PlayerSystem.player2CameraEdgeX = Screen.viewPortCoordinateX(player2.x - camera.x, player2.width)
+                    smas2PlayerSystem.player2CameraEdgeY = 0 --player2.y - camera.y - player2.height
                 end
-            end]
-        end
-        if Player.count() == 2 then
-            if player.deathTimer == 0 then
-                smas2PlayerSystem.player1CameraEdgeX = Screen.viewPortCoordinateX(player.x - camera.x, player.width)
-                smas2PlayerSystem.player1CameraEdgeY = 0
-                smas2PlayerSystem.player2CameraEdgeX = Screen.viewPortCoordinateX(player2.x - camera.x, player2.width)
-                smas2PlayerSystem.player2CameraEdgeY = 0 --player.y - camera.y - player.height
-            end]]
+            end
         end
     end
 end
 
+function smas2PlayerSystem.getPlayerPriority(p)
+    if p.forcedState == FORCEDSTATE_PIPE then
+        return -70
+    else
+        return -25
+    end
+end
+
+function smas2PlayerSystem.getPlayerMountPriority(p)
+    if p.mount == MOUNT_CLOWNCAR then
+        return -35
+    else
+        return -24.5
+    end
+end
+
 function smas2PlayerSystem.onCameraDraw(camIdx)
-    --[[if Player.count() == 2 then
-        if player.deathTimer == 0 then
-            player1Camera:captureAt(-4.9999)
-            player2Camera:captureAt(-4.9999)
-            Graphics.drawBox{
-                texture = player1Camera,
-                x = 0,
-                y = 0,
-                priority = -4.98,
-                width = 400,
-                height = 600,
-                sourceX = smas2PlayerSystem.player1CameraEdgeX,
-                sourceY = smas2PlayerSystem.player1CameraEdgeY,
-                sourceWidth = 400,
-                sourceHeight = 600,
-            }
+    if smas2PlayerSystem.enableSplitScreen then
+        if Player.count() == 2 then
+            if player.deathTimer == 0 then
+                player1Camera:captureAt(-0.0001)
+                Graphics.drawBox{
+                    texture = player1Camera,
+                    x = 0,
+                    y = 0,
+                    priority = 0,
+                    width = 400,
+                    height = 600,
+                    sourceX = smas2PlayerSystem.player1CameraEdgeX,
+                    sourceY = smas2PlayerSystem.player1CameraEdgeY,
+                    sourceWidth = 400,
+                    sourceHeight = 600,
+                }
+            end
+            if player2.deathTimer == 0 then
+                player2:render{x = smas2PlayerSystem.player2CameraEdgeX, y = 0, sceneCoords = false, frame = player2.frame, direction = player2.direction, powerup = player2.powerup, character = player2.character, mount = player2.mount, mounttype = player2.mountColor, priority = smas2PlayerSystem.getPlayerPriority(player2), mountpriority = smas2PlayerSystem.getPlayerMountPriority(player2)}
+            end
         end
-        if player2.deathTimer == 0 then
-            Graphics.drawBox{
-                texture = player2Camera,
-                x = 400,
-                y = 0,
-                priority = -4.98,
-                width = 400,
-                height = 600,
-                sourceX = smas2PlayerSystem.player2CameraEdgeX,
-                sourceY = smas2PlayerSystem.player2CameraEdgeY,
-                sourceWidth = 400,
-                sourceHeight = 600,
-            }
-        end
-    end]]
+    end
 end
 
 function smas2PlayerSystem.onTick()

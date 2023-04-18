@@ -22,7 +22,9 @@ end]]
 
 console:println("Super Mario All-Stars++ loading initated.")
 
-GameData.gameFirstLoaded = GameData.gameFirstLoaded or true
+if GameData.gameFirstLoaded == nil then
+    GameData.gameFirstLoaded = true
+end
 
 --Make sure we aren't running Beta 3 and below before we actually start...
 if (SMBX_VERSION < VER_BETA4_PATCH_3) then
@@ -53,6 +55,16 @@ if not Misc.inMarioChallenge() then
             Text.windowDebugSimple("It looks like your using a legacy save file from before Demo 3 (Or before April 10th, 2022). You'll need to migrate your save data as soon as you boot the game! That way your data can still be used in the future. Please migrate your save while you can!")
             GameData.warnUserAboutOldStars = false
         end
+    end
+end
+
+if mem(0x00B251E0, FIELD_WORD) == 0 then
+    --Make sure we do these if the star count is set at 0
+    if mem(0x00B2C5AC,FIELD_FLOAT) > 1 then
+        mem(0x00B2C5AC,FIELD_FLOAT,1) --Decrease legacy lives to 1
+    end
+    if Misc.score() > 0 then
+        Misc.score(-Misc.score()) --Decrease legacy score to 0
     end
 end
 
@@ -448,6 +460,9 @@ function onStart() --Now do onStart...
     if not Misc.inMarioChallenge() and (not SaveData.disableX2char) and not Misc.inEditor() and (SaveData.currentCharacter ~= nil and SaveData.currentCostume ~= nil) then
         player.character = SaveData.currentCharacter
         player.setCostume(SaveData.currentCharacter, SaveData.currentCostume, false)
+    end
+    if Misc.inEditor() and SysManager.isOutsideOfUnplayeredAreas() then
+        GameData.gameFirstLoaded = false
     end
 end
 

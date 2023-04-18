@@ -983,7 +983,7 @@ local screenShakeTally = -1
 function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoing doPOW to extend the POW system. shakeNumber is how much to shake the screen, supressSound is for to play the default thwomp sound or not, letCoinsFall is if you want coins to fall or not when executed, and eventName is for if you want to specify a custom name for the POW you're executing on code. eventName is very useful, as that you can use onPOW/onPostPOW for executing certain things when executing a POW.
     
     if shakeNumber == nil then
-        shakeNumber = 20 --Default screen shake value, according to the source code
+        shakeNumber = 15 --Default screen shake value (According to the source code it's 20, but I decided on a less shakey value)
     end
     if supressSound == nil then
         supressSound = false --To suppress the sound, make sure you set it as true
@@ -992,7 +992,7 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
         letCoinsFall = true --If false, the coins won't fall from the air.
     end
     if eventName == nil then
-        eventName = "Default"
+        eventName = "Default" --Event names, for onPOW and onPostPOW
     end
     
     local eventObj = {cancelled = false}
@@ -1006,7 +1006,7 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
         
         if letCoinsFall then
             for k,v in ipairs(NPC.get(smasTables.allCoinNPCIDs)) do
-                if (v.isValid and not v.isHidden and NPC.isOnScreen(v)) then
+                if (not v.isHidden and NPC.isOnScreen(v)) then
                     v.ai1 = 1
                     v.speedX = RNG.random() * 1 - 0.5
                 end
@@ -1051,6 +1051,8 @@ function Misc.checkSaveDataStatus(SaveDataVariable, value)
     SaveDataVariable = SaveDataVariable or value
 end
 
+local screenShakeCaptureBuffer = Graphics.CaptureBuffer(800,600)
+
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
         if shaketally > 0 then
@@ -1058,20 +1060,30 @@ function Misk.onDraw()
             Misc.setWindowPosition(((oldx + math.random(((shaketally / 4 + 4))) - math.random((shaketally / 4) + 4))),((oldy + math.random(((shaketally / 4) + 4))) - math.random(((shaketally / 4) + 4)))) --Thanks Toby Fox!
         end
     end
-end
-
-function Misk.onCameraDraw()
     if screenShakeTally > -1 then
         screenShakeTally = screenShakeTally - 1
         if screenShakeTally > 0 then
-            handycam[1].xOffset = ((0 + math.random(((screenShakeTally / 32 + 32))) - math.random((screenShakeTally / 32) + 32)))
-            handycam[1].yOffset = ((0 + math.random(((screenShakeTally / 32) + 32))) - math.random(((screenShakeTally / 32) + 32)))
+            screenShakeCaptureBuffer:captureAt(0)
+            local zeroed = 0
+            Graphics.drawBox{
+                texture = screenShakeCaptureBuffer,
+                x = 0,
+                y = 0,
+                priority = 0,
+                width = 800,
+                height = 600,
+                sourceX = ((zeroed + math.random(((screenShakeTally / 4 + 4))) - math.random((screenShakeTally / 4) + 4))),
+                sourceY = ((zeroed + math.random(((screenShakeTally / 4) + 4))) - math.random(((screenShakeTally / 4) + 4))),
+            }
         end
     end
     if screenShakeTally == 0 then
-        handycam[1].xOffset = 0
-        handycam[1].yOffset = 0
+        
     end
+end
+
+function Misk.onCameraDraw()
+    
 end
 
 return Misk

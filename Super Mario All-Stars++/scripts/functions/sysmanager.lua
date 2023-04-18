@@ -1,6 +1,7 @@
 local SysManager = {}
 
 local playerManager = require("playerManager")
+local smasBooleans = require("smasBooleans")
 
 --Lives
 
@@ -441,6 +442,21 @@ function SysManager.totalStarsLeftForTrueEnding()
     else
         return stars
     end
+end
+
+function SysManager.isOutsideOfUnplayeredAreas()
+    return (
+        (
+            smasBooleans.isInLevel
+            or smasBooleans.isInHub
+        )
+        and not smasBooleans.isOnMainMenu
+        and not (
+            GameData.gameFirstLoaded
+            or GameData.gameFirstLoaded == nil
+        )
+        and not smasBooleans.isInClassicBattleMode
+    )
 end
 
 return SysManager

@@ -1425,7 +1425,7 @@ function pauseSpecifics()
     pauseplus.backgroundDarkness = 0
     pauseplus.createSubmenu("main",{headerText = "<size 1.5>Paused.</size>"})
     pauseplus.createOption("main",{text = "Continue",closeMenu = true,description = "Continue the game.",action = function() Sound.playSFX("pausemenu-closed.ogg") end})
-    if smasBooleans.classicBattleModeActive then
+    if smasBooleans.isInClassicBattleMode then
         pauseplus.createOption("main",{text = "Start a New Stage",closeMenu = true,description = "Starts a new stage in Classic Battle Mode. The stage will be picked at random!",action = function() Routine.run(battlemodenewstage) end})
         pauseplus.createOption("main",{text = "Restart this Stage",closeMenu = true,description = "Restarts the same stage over. Useful if you're stuck somewhere and need to restart the match.",action = function() Routine.run(restartlevel) end})
         pauseplus.createSubmenu("settings",{headerText = "<size 1.5>Settings/Options</size>"})
@@ -1441,7 +1441,7 @@ function pauseSpecifics()
         pauseplus.createOption("settings",{text = "SFX Volume",description = "Turn the sound effect volume lower or higher. Useful for gameplay while using headphones!",selectionType = pauseplus.SELECTION_NUMBERS,selectionDefault = 1,selectionMin = 0,selectionMax = 1,selectionStep = 0.1,selectionFormat = "%d%%"})
         pauseplus.createOption("main",{text = "Exit Rush Mode",closeMenu = true,description = "To exit Rush Mode, use this option. This will reset the game back to the preboot menu.",action = function() Routine.run(battlemodeexit) end})
     end
-    if (not smasBooleans.classicBattleModeActive) and (GameData.rushModeActive == nil or not GameData.rushModeActive) and (not Misc.inMarioChallenge()) then
+    if (not smasBooleans.isInClassicBattleMode) and (GameData.rushModeActive == nil or not GameData.rushModeActive) and (not Misc.inMarioChallenge()) then
         pauseplus.createSubmenu("editormenu",{headerText = "<size 1.5>Editor Menu</size>"})
         if Misc.inEditor() then
             pauseplus.createOption("main",{text = "Editor Menu",goToSubmenu = "editormenu",description = "Testing 1-2-3! If testing the game, this menu is for you!"})

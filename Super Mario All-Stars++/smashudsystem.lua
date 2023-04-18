@@ -295,7 +295,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
         if not smasBooleans.isOnMainMenu then
             if not Misc.inMarioChallenge() then
                 if not SaveData.disableX2char then
-                    if not smasBooleans.classicBattleModeActive then
+                    if not smasBooleans.isInClassicBattleMode then
                         console:println("The player has died.")
                         if (player.character == CHARACTER_MARIO) == true or (player.character == CHARACTER_LUIGI) == true or (player.character == CHARACTER_PEACH) == true or (player.character == CHARACTER_TOAD) == true or (player.character == CHARACTER_LINK) == true or (player.character == CHARACTER_MEGAMAN) == true or (player.character == CHARACTER_WARIO) == true or (player.character == CHARACTER_BOWSER) == true or (player.character == CHARACTER_KLONOA) == true or (player.character == CHARACTER_ROSALINA) == true or (player.character == CHARACTER_SNAKE) == true or (player.character == CHARACTER_ZELDA) == true or (player.character == CHARACTER_ULTIMATERINKA) == true or (player.character == CHARACTER_UNCLEBROADSWORD) == true or (player.character == CHARACTER_SAMUS) == true then
                             if player.deathTimer == 0 then
@@ -396,7 +396,7 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                     end
                 end
                 if SaveData.disableX2char then
-                    if not smasBooleans.classicBattleModeActive then
+                    if not smasBooleans.isInClassicBattleMode then
                         console:println("A player has died.")
                         SaveData.deathCount = SaveData.deathCount + 1 --This marks a death count, for info regarding how many times you died
                         SaveData.totalLives = SaveData.totalLives - 1 --This marks a life lost
@@ -448,7 +448,7 @@ function smasHudSystem.onTick()
     end
     if Player.count() >= 2 then --2nd player compability
         smasBooleans.multiplayerActive = true --This makes sure the death animation doesn't play when on multiplayer
-        if smasBooleans.classicBattleModeActive then
+        if smasBooleans.isInClassicBattleMode then
             if(not killed2 and player2:mem(0x13E,FIELD_BOOL)) then
                 killed2 = true --killed2 detects to see if the 2nd player is dead.
             end
@@ -457,14 +457,14 @@ function smasHudSystem.onTick()
     if Player.count() == 1 then
         smasBooleans.multiplayerActive = false
     end
-    if SaveData.totalLives >= 1110 then
-        SaveData.totalLives = 1110 --The max amount of lives in the episode is 1110, used for the crown hud easter egg that was from Super Mario 3D Land/New Super Mario Bros. 2/Super Mario 3D World.
+    if SaveData.totalLives >= maxLives then
+        SaveData.totalLives = maxLives --The max amount of lives in the episode is 1110, used for the crown hud easter egg that was from Super Mario 3D Land/New Super Mario Bros. 2/Super Mario 3D World.
     end
-    if SaveData.totalScoreClassic >= 999999999 then --The max score is NSMBU's score tally, which is 999 trillion.
-        SaveData.totalScoreClassic = 999999999
+    if SaveData.totalScoreClassic >= maxScore then --The max score is NSMBU's score tally, which is 999 trillion.
+        SaveData.totalScoreClassic = maxScore
     end
-    if not smasBooleans.classicBattleModeActive then
-        if (not smasBooleans.isOnMainMenu and not GameData.gameFirstLoaded) then
+    if not smasBooleans.isInClassicBattleMode then
+        if SysManager.isOutsideOfUnplayeredAreas() then
             if Misc.score() ~= 0 then
                 SaveData.totalScoreClassic = SaveData.totalScoreClassic + Misc.score()
                 console:println(tostring(Misc.score()).." points earned.")
