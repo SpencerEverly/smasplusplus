@@ -92,7 +92,7 @@ function Collisionz.n00bCollision(Loc1, Loc2) --"Makes the game easier for the p
     return tempn00bCollision
 end
 
---Whats side the collision happened
+--What side the collision happened
 function Collisionz.FindCollision(Loc1, Loc2)
     local tempFindCollision = Collisionz.CollisionSpot.COLLISION_NONE
 
@@ -103,6 +103,25 @@ function Collisionz.FindCollision(Loc1, Loc2)
     elseif(Loc1.x + Loc1.width - Loc1.speedX <= Loc2.x - Loc2.speedX) then
         tempFindCollision = Collisionz.CollisionSpot.COLLISION_LEFT
     elseif(Loc1.y - Loc1.speedY > Loc2.y + Loc2.height - Loc2.speedY - 0.1) then
+        tempFindCollision = Collisionz.CollisionSpot.COLLISION_BOTTOM
+    else
+        tempFindCollision = Collisionz.CollisionSpot.COLLISION_CENTER
+    end
+
+    return tempFindCollision
+end
+
+--What side the collision happened, without any entities involved
+function Collisionz.FindCollisionNoEntities(x1, y1, width1, height1, speedX1, speedY1, x2, y2, width2, height2, speedX2, speedY2)
+    local tempFindCollision = Collisionz.CollisionSpot.COLLISION_NONE
+
+    if(y1 + height1 - speedY1 <= y2 - speedY2) then
+        tempFindCollision = Collisionz.CollisionSpot.COLLISION_TOP
+    elseif(x1 - speedX1 >= x2 + width2 - speedX2) then
+        tempFindCollision = Collisionz.CollisionSpot.COLLISION_RIGHT
+    elseif(x1 + width1 - speedX1 <= x2 - speedX2) then
+        tempFindCollision = Collisionz.CollisionSpot.COLLISION_LEFT
+    elseif(y1 - speedY1 > y2 + height2 - speedY2 - 0.1) then
         tempFindCollision = Collisionz.CollisionSpot.COLLISION_BOTTOM
     else
         tempFindCollision = Collisionz.CollisionSpot.COLLISION_CENTER
@@ -142,7 +161,7 @@ function Collisionz.EasyModeCollision(Loc1, Loc2, StandOn)
             else
                 tempEasyModeCollision = Collisionz.CollisionSpot.COLLISION_NONE
             end
-        elseif(Loc1.X - Loc1.speedX >= Loc2.x + Loc2.width - Loc2.speedX) then
+        elseif(Loc1.x - Loc1.speedX >= Loc2.x + Loc2.width - Loc2.speedX) then
             tempEasyModeCollision = Collisionz.CollisionSpot.COLLISION_RIGHT
         elseif(Loc1.x + Loc1.width - Loc1.speedX <= Loc2.x - Loc2.speedX) then
             tempEasyModeCollision = Collisionz.CollisionSpot.COLLISION_LEFT

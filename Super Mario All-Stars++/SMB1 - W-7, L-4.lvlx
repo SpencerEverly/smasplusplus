@@ -5603,8 +5603,6 @@ NPC
 ID:280;X:-159400;Y:-160144;D:-1;ED:"Boss End";
 ID:94;X:-173376;Y:-180118;D:-1;MG:"Thank you\, <characterName>!<page>This game is about to get harder and harder.<page>Watch out for World 8! The princess is there\, and I mean it this time!<page>Good luck\, hero!";FD:1;
 ID:589;X:-179326;Y:-180096;D:-1;
-ID:476;X:-179424;Y:-180224;D:-1;
-ID:476;X:-179264;Y:-180192;D:-1;
 ID:19;X:-139328;Y:-139168;D:-1;
 ID:19;X:-139232;Y:-139168;D:-1;
 ID:31;X:-137504;Y:-139328;D:-1;
@@ -5647,6 +5645,8 @@ ID:589;X:-159454;Y:-160064;D:-1;XTRA:"{\n    \"jumpHeight\"\: 100\,\n    \"useFi
 ID:998;X:-198208;Y:-200384;D:-1;
 ID:589;X:-159742;Y:-160064;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"jumpHeight\"\: 100\,\n    \"useFixed\"\: true\n}\n";
 ID:770;X:-159616;Y:-160096;D:-1;LR:"SMB1 Hard Mode";XTRA:"{\n    \"length\"\: 8\,\n    \"speed\"\: 3\n}\n";
+ID:943;X:-179424;Y:-180224;D:-1;
+ID:943;X:-179264;Y:-180192;D:-1;
 NPC_END
 DOORS
 IX:-159408;IY:-160128;OX:-173680;OY:-180096;DT:2;ID:1;OD:3;WX:0;WY:0;LR:"Door";
