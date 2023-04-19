@@ -28,6 +28,7 @@ smasSMB1System.checkpointCoordinates = {
     ["SMB1 - W-7, L-1.lvlx"] = {x = -196858, y = -200128, crossed = false, section = 0},
     ["SMB1 - W-7, L-2.lvlx"] = {x = -177370, y = -180128, crossed = false, section = 1},
     ["SMB1 - W-7, L-3.lvlx"] = {x = -197050, y = -200224, crossed = false, section = 0},
+    ["SMBLL - W-1, L-1.lvlx"] = {x = -196058, y = -200128, crossed = false, section = 0},
 }
 
 smasSMB1System.correctPathCoordinates = {
@@ -70,7 +71,7 @@ function smasSMB1System.onExitLevel(winType)
 end
 
 function smasSMB1System.onStart()
-    if table.icontains(smasTables.__smb1Levels,Level.filename()) then 
+    if (table.icontains(smasTables.__smb1Levels,Level.filename()) or table.icontains(smasTables.__smbllLevels,Level.filename())) then 
         if SysManager.getEnteredCheckpointID() ~= 0 then
             for k,v in ipairs(NPC.get()) do
                 if NPC.isOnScreen(v) then
@@ -84,7 +85,7 @@ function smasSMB1System.onStart()
 end
 
 function smasSMB1System.onTick()
-    if table.icontains(smasTables.__smb1Levels,Level.filename()) then
+    if (table.icontains(smasTables.__smb1Levels,Level.filename()) or table.icontains(smasTables.__smbllLevels,Level.filename())) then
         for _,p in ipairs(Player.get()) do
             if smasSMB1System.checkpointCoordinates[Level.filename()] ~= nil then
                 if smasSMB1System.debug then
