@@ -126,10 +126,12 @@ function onTick()
     if smasOnlinePlay.hasEnteredHostIP and smasOnlinePlay.tempBoolean then
         enterIPAddress2()
         smasOnlinePlay.tempBoolean = false
+        smasOnlinePlay.hasEnteredHostIP = false
     end
     if smasOnlinePlay.hasEnteredClientIP and smasOnlinePlay.tempBoolean then
         startConnecting()
         smasOnlinePlay.tempBoolean = false
+        smasOnlinePlay.hasEnteredClientIP = false
     end
     littleDialogue.defaultStyleName = "smbx13" --Change the text box to the SMBX 1.3 textbox format
     player.forcedState = FORCEDSTATE_INVISIBLE
