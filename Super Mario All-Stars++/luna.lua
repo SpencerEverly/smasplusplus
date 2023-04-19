@@ -249,7 +249,7 @@ SaveData.SMASPlusPlus.keys = SaveData.SMASPlusPlus.keys or {}
 SaveData.SMASPlusPlus.audio = SaveData.SMASPlusPlus.audio or {}
 SaveData.SMASPlusPlus.game = SaveData.SMASPlusPlus.game or {}
 SaveData.SMASPlusPlus.player = SaveData.SMASPlusPlus.player or {}
-for i = 1,maxPlayers do
+for i = 1,8 do
     SaveData.SMASPlusPlus.player[i] = SaveData.SMASPlusPlus.player[i] or {}
 end
 --***End of clean variables***
