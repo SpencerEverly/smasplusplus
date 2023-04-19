@@ -29,6 +29,7 @@ smasSMB1System.checkpointCoordinates = {
     ["SMB1 - W-7, L-2.lvlx"] = {x = -177370, y = -180128, crossed = false, section = 1},
     ["SMB1 - W-7, L-3.lvlx"] = {x = -197050, y = -200224, crossed = false, section = 0},
     ["SMBLL - W-1, L-1.lvlx"] = {x = -196058, y = -200128, crossed = false, section = 0},
+    ["SMBLL - W-1, L-2.lvlx"] = {x = -177018, y = -180128, crossed = false, section = 1},
 }
 
 smasSMB1System.correctPathCoordinates = {

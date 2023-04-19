@@ -7,11 +7,22 @@ Collisionz.CollisionSpot = {
     COLLISION_BOTTOM = 3,
     COLLISION_LEFT = 4,
     COLLISION_CENTER = 5,
+    COLLISION_SLOPEUPLEFT = 6,
+    COLLISION_SLOPEUPRIGHT = 7,
+    COLLISION_SLOPEDOWNLEFT = 8,
+    COLLISION_SLOPEDOWNRIGHT = 9,
 }
 
 function Collisionz.CheckCollision(Loc1, Loc2) --Checks a collision between two things
     return (Loc1.y + Loc1.height >= Loc2.y) and
            (Loc1.y <= Loc2.y + Loc2.height) and
+           (Loc1.x <= Loc2.x + Loc2.width) and
+           (Loc1.x + Loc1.width >= Loc2.x)
+end
+
+function Collisionz.CheckCollisionBlock(Loc1, Loc2) --Checks a collision between two things
+    return (Loc1.y + Loc1.height - 0.2 >= Loc2.y) and
+           (Loc1.y <= Loc2.y + Loc2.height + 0.2) and
            (Loc1.x <= Loc2.x + Loc2.width) and
            (Loc1.x + Loc1.width >= Loc2.x)
 end

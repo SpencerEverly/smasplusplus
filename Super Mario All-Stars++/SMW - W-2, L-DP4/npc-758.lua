@@ -1,5 +1,6 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
+local smasFunctions = require("smasFunctions")
 
 --Create the library table
 local HbPlatform = {}
@@ -76,7 +77,7 @@ npcManager.registerDefines(npcID, {NPC.HITTABLE})
 npcManager.registerHarmTypes(npcID,
 	{
 		--HARM_TYPE_JUMP,
-		HARM_TYPE_FROMBELOW,
+		--HARM_TYPE_FROMBELOW,
 		--HARM_TYPE_NPC,
 		--HARM_TYPE_PROJECTILE_USED,
 		--HARM_TYPE_LAVA,
@@ -113,11 +114,7 @@ end
 
 function HbPlatform.onNPCHarm(eventToken, npc, harmType)
     if npc.id == npcID then
-        if harmType == HARM_TYPE_FROMBELOW then
-            for k,v in NPC.iterateIntersecting(npc.x, npc.y - 32, npc.x + 32, npc.y) do
-                v:kill(HARM_TYPE_FROMBELOW)
-            end
-        end
+        
     end
 end
 
@@ -158,6 +155,14 @@ function HbPlatform.onTickNPC(v)
 		v.speedX = 0
 		v.speedY = 0
 	end
+    
+    for _,p in ipairs(Player.get()) do
+        if Collisionz.CheckCollisionBlock(p, v) then
+            for k,j in NPC.iterateIntersecting(v.x, v.y - 32, v.x + 32, v.y) do
+                j:kill(HARM_TYPE_FROMBELOW)
+            end
+        end
+    end
 end
 
 --Gotta return the library table!
