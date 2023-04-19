@@ -60,7 +60,7 @@ function smasBlockSystem.onStart()
     end
     
     --16 coin block to 10 coin block conversion when on 1.3 Mode
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         for k,v in ipairs(Block.get()) do
             if v.contentID == 16 then --Set the coin count from each block to 10 if on 1.3 Mode on the start of the level
                 v.contentID = 10
@@ -128,7 +128,7 @@ function smasBlockSystem.onPostBlockHit(block, fromUpper, playerornil)
     
     
     
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         
         
         --Block coin hit detection
@@ -155,7 +155,7 @@ function smasBlockSystem.onPostBlockHit(block, fromUpper, playerornil)
         
     end
     
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         
         
         --Multi-powerup sprouting on multiplayer (NSMBWii)

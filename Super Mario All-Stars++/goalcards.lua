@@ -77,21 +77,21 @@ function smb3cardRemake.onTick()
             if postLevel >= 65 and not endLives then
                 if SaveData.Card[1] == 1 and SaveData.Card[2] == 1 and SaveData.Card[3] == 1 then
                     doesMatch = true
-                    SaveData.totalLives = SaveData.totalLives + 5
+                    SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives + 5
                     SFX.play(15)
                     howMuchLives = 5
                 elseif SaveData.Card[1] == 2 and SaveData.Card[2] == 2 and SaveData.Card[3] == 2 then
                     doesMatch = true
-                    SaveData.totalLives = SaveData.totalLives + 2
+                    SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives + 2
                     SFX.play(15)
                     howMuchLives = 2
                 elseif SaveData.Card[1] == 3 and SaveData.Card[2] == 3 and SaveData.Card[3] == 3 then
                     doesMatch = true
-                    SaveData.totalLives = SaveData.totalLives + 3
+                    SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives + 3
                     SFX.play(15)
                     howMuchLives = 3
                 else
-                    SaveData.totalLives = SaveData.totalLives + 1
+                    SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives + 1
                     SFX.play(15)
                     howMuchLives = 15
                 end
@@ -181,7 +181,7 @@ function smb3cardRemake.onDraw()
             }
             textplus.print{text=tostring(Timer.getValue()).. " X 50 = ".. tostring(Timer.getValue() * 50), x=240, y=270, font=yFont, priority=5}
             if not addpoints then
-                SaveData.totalScoreClassic = SaveData.totalScoreClassic + Timer.getValue() * 50
+                SaveData.SMASPlusPlus.hud.score = SaveData.SMASPlusPlus.hud.score + Timer.getValue() * 50
                 addpoints = true
             end
         end

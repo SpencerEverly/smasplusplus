@@ -1082,12 +1082,12 @@ end
 function costume.drawHUD(camIdx,priority,isSplit)
     --Lives
     Graphics.drawImageWP(marioHead, 30, 30, -4.3)
-    textplus.print{text = tostring(SaveData.totalLives), font = nsmbWiiFont, priority = -4.3, x = 68, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.lives), font = nsmbWiiFont, priority = -4.3, x = 68, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
     
     --Coins
     Graphics.drawImageWP(coinCounter, 30, 70, -4.3)
     --textplus.print{text = "x", font = minFont, priority = -4.3, x = 225, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
-    textplus.print{text = tostring(SaveData.totalCoinsClassic), font = nsmbWiiFont, priority = -4.2, x = 44, y = 100, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.coinsClassic), font = nsmbWiiFont, priority = -4.2, x = 44, y = 100, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     --Stars
     --Graphics.drawImageWP(starCounter, 305, 26, -4.3)
@@ -1095,7 +1095,7 @@ function costume.drawHUD(camIdx,priority,isSplit)
     textplus.print{text = tostring(SaveData.totalStarCount), font = nsmbWiiFont, priority = -4.3, x = 300, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     --Score
-    textplus.print{text = tostring(SaveData.totalScoreClassic), font = nsmbWiiFont, priority = -4.3, x = 432, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.score), font = nsmbWiiFont, priority = -4.3, x = 432, y = 60, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     --Time
     Graphics.drawImageWP(timeCounter, 682, 40, -4.3)

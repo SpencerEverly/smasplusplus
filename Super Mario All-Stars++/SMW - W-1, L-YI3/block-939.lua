@@ -9,8 +9,8 @@ local blockutils = require("blocks/blockutils")
 local smasExtraSounds = require("smasExtraSounds")
 
 --Locals for the Bonus Block
-local oldCoins = SaveData.totalCoinsClassic
-local oldLives = SaveData.totalLives
+local oldCoins = SaveData.SMASPlusPlus.hud.coinsClassic
+local oldLives = SaveData.SMASPlusPlus.hud.lives
 local levelCoins = 0
 
 --Create the library table
@@ -44,14 +44,14 @@ function bonusBlock.onTickBlock(v)
     data.bonusNPC = data._settings.bonusNPC or 0
     data.coinGoal = data._settings.coinGoal or 0
 
-    if SaveData.totalCoinsClassic > oldCoins then
-        levelCoins = levelCoins + (SaveData.totalCoinsClassic - oldCoins)
-    elseif SaveData.totalLives > oldLives then
-       levelCoins = levelCoins + SaveData.totalCoinsClassic + 1
+    if SaveData.SMASPlusPlus.hud.coinsClassic > oldCoins then
+        levelCoins = levelCoins + (SaveData.SMASPlusPlus.hud.coinsClassic - oldCoins)
+    elseif SaveData.SMASPlusPlus.hud.lives > oldLives then
+       levelCoins = levelCoins + SaveData.SMASPlusPlus.hud.coinsClassic + 1
     end
 
-    oldCoins = SaveData.totalCoinsClassic
-    oldLives = SaveData.totalLives
+    oldCoins = SaveData.SMASPlusPlus.hud.coinsClassic
+    oldLives = SaveData.SMASPlusPlus.hud.lives
 end
 
 -- Defines what happens right after the block is hit.

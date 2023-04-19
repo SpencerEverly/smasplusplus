@@ -35,20 +35,20 @@ end
 if SaveData.completeLevels == nil then --This will add a table to list completed levels
     SaveData.completeLevels = {}
 end
-if SaveData.totalCoins == nil then
-    SaveData.totalCoins = 0
+if SaveData.SMASPlusPlus.hud.coins == nil then
+    SaveData.SMASPlusPlus.hud.coins = 0
 end
-if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
-    SaveData.deathCount = 0
+if SaveData.SMASPlusPlus.hud.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
+    SaveData.SMASPlusPlus.hud.deathCount = 0
 end
-if SaveData.totalLives == nil then --The total lives used the for the episode.
-    SaveData.totalLives = 5
+if SaveData.SMASPlusPlus.hud.lives == nil then --The total lives used the for the episode.
+    SaveData.SMASPlusPlus.hud.lives = 5
 end
-if SaveData.totalCoinsClassic == nil then
-    SaveData.totalCoinsClassic = 0
+if SaveData.SMASPlusPlus.hud.coinsClassic == nil then
+    SaveData.SMASPlusPlus.hud.coinsClassic = 0
 end
-if SaveData.totalScoreClassic == nil then
-    SaveData.totalScoreClassic = 0
+if SaveData.SMASPlusPlus.hud.score == nil then
+    SaveData.SMASPlusPlus.hud.score = 0
 end
 
 --This is the name of the level file that the map is on.
@@ -3796,7 +3796,7 @@ do
     end
 
 
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if SaveData.enableLives then
             smwMap.hudCounters = {
                 -- Lives
@@ -3810,21 +3810,21 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-3.png"),
                     getValue = (function()
-                        return SaveData.deathCount
+                        return SaveData.SMASPlusPlus.hud.deathCount
                     end),
                 },
                 -- Coins
                 {
                     icon = Graphics.sprites.hardcoded["33-2"],
                     getValue = (function()
-                        return SaveData.totalCoinsClassic
+                        return SaveData.SMASPlusPlus.hud.coinsClassic
                     end),
                 },
                 -- Total Coin Count
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalCoins
+                        return SaveData.SMASPlusPlus.hud.coins
                     end),
                 },
                 -- Stars
@@ -3844,21 +3844,21 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-3.png"),
                     getValue = (function()
-                        return SaveData.deathCount
+                        return SaveData.SMASPlusPlus.hud.deathCount
                     end),
                 },
                 -- Coins
                 {
                     icon = Graphics.sprites.hardcoded["33-2"],
                     getValue = (function()
-                        return SaveData.totalCoinsClassic
+                        return SaveData.SMASPlusPlus.hud.coinsClassic
                     end),
                 },
                 -- Total Coin Count
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalCoins
+                        return SaveData.SMASPlusPlus.hud.coins
                     end),
                 },
                 -- Stars
@@ -3873,7 +3873,7 @@ do
                 }
             }
         end
-    elseif SaveData.disableX2char then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if SaveData.enableLives then
             smwMap.hudCounters = {
                 -- Lives
@@ -3887,7 +3887,7 @@ do
                 {
                     icon = Graphics.sprites.hardcoded["33-2"],
                     getValue = (function()
-                        return SaveData.totalCoinsClassic
+                        return SaveData.SMASPlusPlus.hud.coinsClassic
                     end),
                 },
                 -- Stars
@@ -3907,7 +3907,7 @@ do
                 {
                     icon = Graphics.sprites.hardcoded["33-2"],
                     getValue = (function()
-                        return SaveData.totalCoinsClassic
+                        return SaveData.SMASPlusPlus.hud.coinsClassic
                     end),
                 },
                 -- Stars
@@ -3936,21 +3936,21 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-3.png"),
                     getValue = (function()
-                        return SaveData.deathCount
+                        return SaveData.SMASPlusPlus.hud.deathCount
                     end),
                 },
                 -- Coins
                 {
                     icon = Graphics.sprites.hardcoded["33-2"],
                     getValue = (function()
-                        return SaveData.totalCoinsClassic
+                        return SaveData.SMASPlusPlus.hud.coinsClassic
                     end),
                 },
                 -- Total Coin Count
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalCoins
+                        return SaveData.SMASPlusPlus.hud.coins
                     end),
                 },
                 -- Stars
@@ -3970,21 +3970,21 @@ do
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-3.png"),
                     getValue = (function()
-                        return SaveData.deathCount
+                        return SaveData.SMASPlusPlus.hud.deathCount
                     end),
                 },
                 -- Coins
                 {
                     icon = Graphics.sprites.hardcoded["33-2"],
                     getValue = (function()
-                        return SaveData.totalCoinsClassic
+                        return SaveData.SMASPlusPlus.hud.coinsClassic
                     end),
                 },
                 -- Total Coin Count
                 {
                     icon = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-1.png"),
                     getValue = (function()
-                        return SaveData.totalCoins
+                        return SaveData.SMASPlusPlus.hud.coins
                     end),
                 },
                 -- Stars
@@ -4600,15 +4600,15 @@ function smwMap.onExit()
 end
 
 function smwMap.lifeCrownCounter()
-    if SaveData.totalLives < 1000 then
-        return SaveData.totalLives
-    elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
-        return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
-        return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
-        return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
-    elseif SaveData.totalLives >= 1110 then
+    if SaveData.SMASPlusPlus.hud.lives < 1000 then
+        return SaveData.SMASPlusPlus.hud.lives
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1000 and SaveData.SMASPlusPlus.hud.lives <= 1009 then
+        return string.format("!0%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1010 and SaveData.SMASPlusPlus.hud.lives < 1100 then
+        return string.format("!%2d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1100 and SaveData.SMASPlusPlus.hud.lives < 1110 then
+        return string.format("!!%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(4, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1110 then
         return "!!!"
     end
 end

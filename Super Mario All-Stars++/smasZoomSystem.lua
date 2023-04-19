@@ -11,7 +11,7 @@ function smasZoomSystem.onInitAPI()
 end
 
 function smasZoomSystem.onStart()
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if (smasBooleans.isInLevel and not table.icontains(smasTables.__smbspencerLevels,Level.filename())) then
             smasZoomSystem.isOnClassicLevel = true
             --handycam[1].zoom = 1.5625 --SNES resolution

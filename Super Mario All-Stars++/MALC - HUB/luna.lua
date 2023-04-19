@@ -378,18 +378,18 @@ function runHubUpdate()
             Stage7()
         end
     end
-    --if SaveData.genosideStage >= 3 and SaveData.currentCostume == "UNDERTALE-FRISK" then
+    --if SaveData.genosideStage >= 3 and SaveData.SMASPlusPlus.player[1].currentCostume == "UNDERTALE-FRISK" then
     --    triggerEvent("StageGenoside")
     --end
 end
 
 function onStart()
-    if SaveData.disableX2char == nil then
-        SaveData.disableX2char = false
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == nil then
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
     end
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         triggerEvent("ShowX2Stuff")
-    elseif SaveData.disableX2char then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         triggerEvent("HideX2Stuff")
         for _,p in ipairs(Player.get()) do
             p.setCostume(1, nil)
@@ -436,10 +436,10 @@ function onEvent(eventName)
         littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE AT LEAST "..SaveData.totalStarCount.." STARS IN YOUR GAME PROGRESSION.<page>THE STARS YOU HAVE COLLECTED IN THE MANDATORY LEVELS IS "..#SaveData.completeLevels..". THE STARS YOU HAVE COLLECTED IN ALL OTHER LEVELS IS "..#SaveData.completeLevelsOptional..".<page>THE STAR COUNT OF EVERY STAR YOU COLLECTED OVERALL IS "..SaveData.starsgrabbed..".<page>TO FINISH YOUR GAME AND UNLOCK THE TRUE ENDING, YOU'LL NEED TO COLLECT "..SysManager.totalStarsLeftForTrueEnding().." MORE.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
     end
     if eventName == "GeneralList" then
-        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE GOT "..SaveData.GameOverCount.." GAME OVERS IN YOUR GAME PROGRESSION.<page>YOU ALSO HAVE RECENTLY WENT IN (number) LEVELS.<page>THE SCORE COUNT IS "..SaveData.totalScoreClassic.." AND THE COIN COUNT IS "..SaveData.totalCoinsClassic..".<page>YOU HAVE ALSO STOMPED ON "..SaveData.goombaStomps.." GOOMBAS, AND "..SaveData.koopaStomps.." KOOPA TROOPAS.<page>THE TOTAL AMOUNT OF COINS COLLECTED OVERALL IS "..SaveData.totalCoins..".<page>OVERALL, YOU HAVE USED "..SaveData.totalmushrooms.." MUSHROOMS, "..SaveData.totalfireflowers.." FIRE FLOWERS, "..SaveData.totalleafs.." SUPER LEAFS, "..SaveData.totaltanookis.." TANOOKI SUITS, "..SaveData.totalhammersuits.." HAMMER SUITS, AND "..SaveData.totaliceflowers.." ICE FLOWERS.<page>YOU ALSO GRABBED "..SaveData.starsgrabbed.." TOTAL STARS REGARDLESS OF COMPLETION OR NOT, USED "..SaveData.starmansused.." STARMANS, "..SaveData.megamushroomssused.." MEGA MUSHROOMS,<page>AND I HOPE YOU'VE HAD A FUN TIME.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
+        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE GOT "..SaveData.GameOverCount.." GAME OVERS IN YOUR GAME PROGRESSION.<page>YOU ALSO HAVE RECENTLY WENT IN (number) LEVELS.<page>THE SCORE COUNT IS "..SaveData.SMASPlusPlus.hud.score.." AND THE COIN COUNT IS "..SaveData.SMASPlusPlus.hud.coinsClassic..".<page>YOU HAVE ALSO STOMPED ON "..SaveData.goombaStomps.." GOOMBAS, AND "..SaveData.koopaStomps.." KOOPA TROOPAS.<page>THE TOTAL AMOUNT OF COINS COLLECTED OVERALL IS "..SaveData.SMASPlusPlus.hud.coins..".<page>OVERALL, YOU HAVE USED "..SaveData.totalmushrooms.." MUSHROOMS, "..SaveData.totalfireflowers.." FIRE FLOWERS, "..SaveData.totalleafs.." SUPER LEAFS, "..SaveData.totaltanookis.." TANOOKI SUITS, "..SaveData.totalhammersuits.." HAMMER SUITS, AND "..SaveData.totaliceflowers.." ICE FLOWERS.<page>YOU ALSO GRABBED "..SaveData.starsgrabbed.." TOTAL STARS REGARDLESS OF COMPLETION OR NOT, USED "..SaveData.starmansused.." STARMANS, "..SaveData.megamushroomssused.." MEGA MUSHROOMS,<page>AND I HOPE YOU'VE HAD A FUN TIME.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
     end
     if eventName == "OtherList" then
-        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE DIED "..SaveData.deathCount.." TIMES.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
+        littleDialogue.create({text = "<boxStyle infobooth>OUR RECORDS SHOW THAT YOU HAVE DIED "..SaveData.SMASPlusPlus.hud.deathCount.." TIMES.<page>THANKS FOR PROCESSING THE INFORMATION I HAVE EXPLAINED. GOOD DAY."})
     end
     --if eventName == "Stage5" then
         --Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
@@ -448,20 +448,20 @@ function onEvent(eventName)
         --Section(4).musicPath = "_OST/Me and Larry City/Story Mode Hub Theme 3, With Building Sounds (Super Mario Maker 2).ogg"
     --end
     if eventName == ("DisEnabledX2Char") then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             triggerEvent("HUBDisableX2")
             Level.load(Level.filename())
         end
-        if SaveData.disableX2char then
+        if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             triggerEvent("HUBEnableX2")
             Level.load(Level.filename())
         end
     end
     if eventName == "HUBEnableX2" then
-        SaveData.disableX2char = false
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
     end
     if eventName == "HUBDisableX2" then
-        SaveData.disableX2char = true
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = true
         Graphics.activateHud(false)
         Cheats.trigger("1player")
         Defines.player_hasCheated = false

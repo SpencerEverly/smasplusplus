@@ -3,7 +3,7 @@ local textplus = require("textplus")
 local littleDialogue = require("littleDialogue")
 _G.pausemenu2 = require("pausemenu2")
 
-if SaveData.disableX2char then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     pausemenu13 = require("pausemenu13/pausemenu13")
 end
 

@@ -48,7 +48,7 @@ function smas2PlayerSystem.dropClassicReserve(playerIdx)
         
         local CenterX = camera.x + camera.width / 2
         
-        local reserveNPC = NPC.spawn(SaveData.reserveBoxItem[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
+        local reserveNPC = NPC.spawn(SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
         reserveNPC.x = CenterX - reserveNPC.width / 2 + B
         reserveNPC.y = ScreenTop + 16 + 12
         reserveNPC.speedX = 0
@@ -69,7 +69,7 @@ function smas2PlayerSystem.dropClassicReserve(playerIdx)
         
         local CenterX = camera.x + camera.width / 2
         
-        local reserveNPC = NPC.spawn(SaveData.reserveBoxItem[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
+        local reserveNPC = NPC.spawn(SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
         reserveNPC.x = CenterX - reserveNPC.width / 2 + B + 40
         reserveNPC.y = ScreenTop + 16 + 12 - 4
         reserveNPC.speedX = 0
@@ -77,7 +77,7 @@ function smas2PlayerSystem.dropClassicReserve(playerIdx)
         reserveNPC:mem(0x138, FIELD_WORD, 2)
     end
     
-    SaveData.reserveBoxItem[Player(playerIdx).idx] = 0
+    SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx] = 0
 end
 
 function smas2PlayerSystem.onDraw()
@@ -94,7 +94,7 @@ function smas2PlayerSystem.onDraw()
         handycam[1].targets = {}
     end
     
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if smas2PlayerSystem.enableSplitScreen then
             if Player.count() == 2 then
                 if player.deathTimer == 0 then
@@ -167,7 +167,7 @@ function smas2PlayerSystem.onTick()
                 end
             end
         end
-        if Player.count() == 2 and SaveData.disableX2char then
+        if Player.count() == 2 and SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if SMBX_VERSION ~= VER_SEE_MOD then
                 if Player(1).forcedState == FORCEDSTATE_PIPE then
                     if Player(1).forcedTimer >= 70 and not Misc.isPaused() then
@@ -195,7 +195,7 @@ function smas2PlayerSystem.onTick()
                 end
             end
         end
-        if SaveData.disableX2char then
+        if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if smasBooleans.isInLevel or smasBooleans.isInHub then
                 if p.keys.dropItem == KEYS_PRESSED then
                     smas2PlayerSystem.dropClassicReserve(p.idx)
@@ -207,7 +207,7 @@ end
 
 
 
-if SaveData.disableX2char then --These will be 1.3 Mode specific
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then --These will be 1.3 Mode specific
     function smas2PlayerSystem.doorTeleportP1toP2()
         Routine.waitFrames(30)
         player:mem(0x140,FIELD_WORD,100)

@@ -30,18 +30,18 @@ function delayedMusicChange(killedNPC)
 end
 
 function undertaledepends.onTick()
-    if SaveData.currentCostume == "UNDERTALE-FRISK" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "UNDERTALE-FRISK" then
         if #NPC.get(smasTables.allBaseGameKillableEnemyIDs) == 0 and not table.icontains(smasTables._friendlyPlaces,Level.filename()) and not undertaledepends.killedAll then
             Routine.run(delayedMusicChange, killedNPC)
             undertaledepends.killedAll = true
         end
-    elseif SaveData.currentCostume ~= "UNDERTALE-FRISK" then
+    elseif SaveData.SMASPlusPlus.player[1].currentCostume ~= "UNDERTALE-FRISK" then
         
     end
 end
 
 function undertaledepends.onDraw()
-    if SaveData.currentCostume == "UNDERTALE-FRISK" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "UNDERTALE-FRISK" then
         megaluavania2.enabled = true
         if player.powerup == 1 then
             player.powerup = 2
@@ -60,7 +60,7 @@ function undertaledepends.onDraw()
                 SaveData.frisk.cantChangeCharacters = true
             end
         end
-    elseif SaveData.currentCostume ~= "UNDERTALE-FRISK" then
+    elseif SaveData.SMASPlusPlus.player[1].currentCostume ~= "UNDERTALE-FRISK" then
         megaluavania2.enabled = false
     end
     local fontB = textplus.loadFont("littleDialogue/font/name.ini")

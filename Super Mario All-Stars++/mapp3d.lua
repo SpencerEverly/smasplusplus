@@ -1173,7 +1173,7 @@ do
         huddraw.image = Graphics.sprites.hardcoded["33-1"].img;
         Graphics.draw(huddraw);
         
-        Text.printWP(SaveData.totalLives, 1, x+44, y+2, priority);
+        Text.printWP(SaveData.SMASPlusPlus.hud.lives, 1, x+44, y+2, priority);
         
         
         local starcount = mem(0x00B251E0, FIELD_WORD);

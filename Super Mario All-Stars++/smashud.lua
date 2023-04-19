@@ -121,7 +121,7 @@ if SaveData.enableLives then
 else
     smasHud.visible.lives = false
 end
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     smasHud.visible.deathCount = true
 else
     smasHud.visible.deathCount = false
@@ -144,7 +144,7 @@ smasHud.ALIGN_MID = 0.5
 smasHud.offsets = {}
 
 --TODO: Replace this with object-level offsets with named fields and alignments
-if SaveData.disableX2char then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     smasHud.offsets.keys =         {x = 64,     y = 26, align = smasHud.ALIGN_LEFT};
     smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
     smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};
@@ -167,7 +167,7 @@ if SaveData.disableX2char then
     smasHud.overworld.offsets.player2 =        {x = -308+48, y = 124}
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     smasHud.offsets.keys =         {x = -268,     y = 26, align = smasHud.ALIGN_LEFT};
     smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
     smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};
@@ -190,7 +190,7 @@ if not SaveData.disableX2char then
     smasHud.overworld.offsets.player2 =        {x = -308+48, y = 124}
 end
 
-if SaveData.disableX2char == nil then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == nil then
     smasHud.offsets.keys =         {x = -268,     y = 26, align = smasHud.ALIGN_LEFT};
     smasHud.offsets.itembox =     {x = 0,     y = 16, item = {x = 28, y = 28, align = smasHud.ALIGN_MID}, align = smasHud.ALIGN_MID};
     smasHud.offsets.hearts =     {x = 5,     y = 16, align = smasHud.ALIGN_MID};
@@ -559,71 +559,71 @@ function smasHud.drawStars(splitOffset, thisCam, thisPlayer, priority)
 end
 
 function smasHud.scoreCounterWithZeroes()
-    if SaveData.totalScoreClassic >= 0 then
-        string.format("00000000%1d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 99 then
-        return string.format("0000000%2d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 999 then
-        return string.format("000000%3d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 9999 then
-        return string.format("00000%4d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 99999 then
-        return string.format("0000%5d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 999999 then
-        return string.format("000%6d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 9999999 then
-        return string.format("00%7d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 99999999 then
-        return string.format("0%8d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 999999999 then
-        return SaveData.totalScoreClassic
+    if SaveData.SMASPlusPlus.hud.score >= 0 then
+        string.format("00000000%1d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 99 then
+        return string.format("0000000%2d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 999 then
+        return string.format("000000%3d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 9999 then
+        return string.format("00000%4d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 99999 then
+        return string.format("0000%5d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 999999 then
+        return string.format("000%6d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 9999999 then
+        return string.format("00%7d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 99999999 then
+        return string.format("0%8d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 999999999 then
+        return SaveData.SMASPlusPlus.hud.score
     end
 end
 
 function smasHud.lifeCrownCounter()
-    if SaveData.totalLives < 1000 then
-        return SaveData.totalLives
-    elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
-        return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
-        return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
-        return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
-    elseif SaveData.totalLives >= 1110 then
+    if SaveData.SMASPlusPlus.hud.lives < 1000 then
+        return SaveData.SMASPlusPlus.hud.lives
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1000 and SaveData.SMASPlusPlus.hud.lives <= 1009 then
+        return string.format("!0%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1010 and SaveData.SMASPlusPlus.hud.lives < 1100 then
+        return string.format("!%2d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1100 and SaveData.SMASPlusPlus.hud.lives < 1110 then
+        return string.format("!!%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(4, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1110 then
         return "!!!"
     end
 end
 
 function smasHud.drawLives(splitOffset, thisCam, thisPlayer, priority)
-    if not SaveData.disableX2char then
-        if SaveData.totalLives <= 999 then
-            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
-        elseif SaveData.totalLives >= 1000 then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+        if SaveData.SMASPlusPlus.hud.lives <= 999 then
+            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.SMASPlusPlus.hud.lives, priority);
+        elseif SaveData.SMASPlusPlus.hud.lives >= 1000 then
             drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("lives", thisPlayer.character), SysManager.lifeCountWithCrownsAndZeroFailsafe(), priority);
         end
-    elseif SaveData.disableX2char then
-        if SaveData.totalLives <= 999 then
-            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SaveData.totalLives, priority);
-        elseif SaveData.totalLives >= 1000 then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+        if SaveData.SMASPlusPlus.hud.lives <= 999 then
+            drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SaveData.SMASPlusPlus.hud.lives, priority);
+        elseif SaveData.SMASPlusPlus.hud.lives >= 1000 then
             drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.lives, GetSprite("livesClassic", thisPlayer.character), SysManager.lifeCountWithCrownsAndZeroFailsafe(), priority);
         end
     end
 end
 
 function smasHud.drawDeathCount(splitOffset, thisCam, thisPlayer, priority)
-    if SaveData.deathCount >= 1000 then
+    if SaveData.SMASPlusPlus.hud.deathCount >= 1000 then
         drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), "999+", priority);
     else
-        drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), SaveData.deathCount, priority);
+        drawCounter(splitOffset, thisCam, thisPlayer, smasHud.offsets.deathcount, GetSprite("deathcount", thisPlayer.character), SaveData.SMASPlusPlus.hud.deathCount, priority);
     end
 end
 
 function smasHud.drawHUDLives(thisPlayer, priority)
-    drawCounter(0, {width = 800}, thisPlayer, smasHud.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.totalLives, priority);
+    drawCounter(0, {width = 800}, thisPlayer, smasHud.overworld.offsets.lives, GetSprite("lives", thisPlayer.character), SaveData.SMASPlusPlus.hud.lives, priority);
 end
 
 function smasHud.drawHUDCoins(thisPlayer, priority)
-    drawCounter(0, {width = 800}, thisPlayer, smasHud.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.totalCoinsClassic, priority);
+    drawCounter(0, {width = 800}, thisPlayer, smasHud.overworld.offsets.coins, GetSprite("coins", thisPlayer.character), SaveData.SMASPlusPlus.hud.coinsClassic, priority);
 end
 
 function smasHud.drawHUDStars(thisPlayer, priority)
@@ -701,9 +701,9 @@ function smasHud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
         end
 
     end
-    if SaveData.reserveBoxItem[thisPlayer.idx] > 0 and reserve2p then
+    if SaveData.SMASPlusPlus.hud.reserve[thisPlayer.idx] > 0 and reserve2p then
         
-        local reserveItem = SaveData.reserveBoxItem[thisPlayer.idx]
+        local reserveItem = SaveData.SMASPlusPlus.hud.reserve[thisPlayer.idx]
         
         local reserve = Graphics.sprites.npc[reserveItem].img
 
@@ -745,10 +745,10 @@ function smasHud.drawItembox(splitOffset, thisCam, playerIdx, thisPlayer, isMult
 end
 
 function smasHud.drawScore(splitOffset, thisCam, priority)
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         local scoreDisplay13 = tostring(SysManager.scoreCount13())
         Text.printWP(scoreDisplay13, 1, 0.5 * thisCam.width + smasHud.offsets.score.x + splitOffset - #scoreDisplay13 * 18 * smasHud.offsets.score.align, smasHud.offsets.score.y, priority)
-    elseif not SaveData.disableX2char then
+    elseif not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         local scoreDisplay = tostring(SysManager.scoreCountWithZeroes())
         Text.printWP(scoreDisplay, 1, 0.5 * thisCam.width + smasHud.offsets.score.x + splitOffset - #scoreDisplay * 18 * smasHud.offsets.score.align, smasHud.offsets.score.y, priority)
     end
@@ -888,7 +888,7 @@ function smasHud.onTick()
     if SaveData.lifeCrownsComplete == nil then --To make the sound work, this has to be set as a string'd boolean...
         SaveData.lifeCrownsComplete = "false"
     end
-    if SaveData.totalLives == 1110 then --When the lives hit 1110...
+    if SaveData.SMASPlusPlus.hud.lives == 1110 then --When the lives hit 1110...
         if (SaveData.lifeCrownsComplete == "trulyfalse") == false then
             SaveData.lifeCrownsComplete = "true"
         end

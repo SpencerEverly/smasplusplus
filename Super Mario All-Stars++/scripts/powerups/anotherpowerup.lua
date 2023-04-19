@@ -15,7 +15,7 @@ local inspect = require("ext/inspect")
 
 local ap = {}
 
-if SaveData.disableX2char then return end
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then return end
 
 SaveData._ap = SaveData._ap or {}
 

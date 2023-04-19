@@ -6,43 +6,43 @@ local smasBooleans = require("smasBooleans")
 --Lives
 
 function SysManager.lifeCount() --This lists the current life count
-    if SaveData.totalLives == nil then
+    if SaveData.SMASPlusPlus.hud.lives == nil then
         return 0
     else
-        return SaveData.totalLives
+        return SaveData.SMASPlusPlus.hud.lives
     end
 end
 
 function SysManager.lifeCountWithCrowns() --This lists the current life count, with the crown system. Crowns will be with "!" instead of an actual crown symbol.
-    if SaveData.totalLives == nil then
+    if SaveData.SMASPlusPlus.hud.lives == nil then
         return mem(0x00B2C5AC, FIELD_FLOAT)
-    elseif SaveData.totalLives < 1000 then
-        return SaveData.totalLives
-    elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
-        return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
-        return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
-        return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
-    elseif SaveData.totalLives == 1110 then
+    elseif SaveData.SMASPlusPlus.hud.lives < 1000 then
+        return SaveData.SMASPlusPlus.hud.lives
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1000 and SaveData.SMASPlusPlus.hud.lives <= 1009 then
+        return string.format("!0%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1010 and SaveData.SMASPlusPlus.hud.lives < 1100 then
+        return string.format("!%2d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1100 and SaveData.SMASPlusPlus.hud.lives < 1110 then
+        return string.format("!!%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(4, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives == 1110 then
         return "!!!"
     end
 end
 
 function SysManager.lifeCountWithCrownsAndZeroFailsafe() --This lists the current life count (With a less than or equal to 0 value if below -1), with the crown system. Crowns will be with "!" instead of an actual crown symbol.
-    if SaveData.totalLives == nil then
+    if SaveData.SMASPlusPlus.hud.lives == nil then
         return mem(0x00B2C5AC, FIELD_FLOAT)
-    elseif SaveData.totalLives < 0 then
+    elseif SaveData.SMASPlusPlus.hud.lives < 0 then
         return 0
-    elseif SaveData.totalLives < 1000 then
-        return SaveData.totalLives
-    elseif SaveData.totalLives >= 1000 and SaveData.totalLives <= 1009 then
-        return string.format("!0%1d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1010 and SaveData.totalLives < 1100 then
-        return string.format("!%2d",tostring(SaveData.totalLives):sub(3, 4))
-    elseif SaveData.totalLives >= 1100 and SaveData.totalLives < 1110 then
-        return string.format("!!%1d",tostring(SaveData.totalLives):sub(4, 4))
-    elseif SaveData.totalLives >= 1110 then
+    elseif SaveData.SMASPlusPlus.hud.lives < 1000 then
+        return SaveData.SMASPlusPlus.hud.lives
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1000 and SaveData.SMASPlusPlus.hud.lives <= 1009 then
+        return string.format("!0%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1010 and SaveData.SMASPlusPlus.hud.lives < 1100 then
+        return string.format("!%2d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(3, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1100 and SaveData.SMASPlusPlus.hud.lives < 1110 then
+        return string.format("!!%1d",tostring(SaveData.SMASPlusPlus.hud.lives):sub(4, 4))
+    elseif SaveData.SMASPlusPlus.hud.lives >= 1110 then
         return "!!!"
     end
 end
@@ -56,43 +56,43 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
             error("You need to specify whenever to add (true) or subtract (false) the life count.")
         end
         if not mathcount then
-            SaveData.totalLives = SaveData.totalLives - lives
+            SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives - lives
         elseif mathcount then
-            SaveData.totalLives = SaveData.totalLives + lives
+            SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives + lives
         end
     end
 
     function SysManager.maxOutLives() --This maxes out the lives to 1110 (All three crowns).
         Sound.playSFX(98)
-        SaveData.totalLives = 1110
+        SaveData.SMASPlusPlus.hud.lives = 1110
         console:println("Lives are now maxed out.")
     end
 
     function SysManager.resetLives() --This resets the lives back to 5
         Sound.playSFX(67)
-        SaveData.totalLives = 5
+        SaveData.SMASPlusPlus.hud.lives = 5
         console:println("Lives have been reset.")
     end
 
     --Death Count
 
     function SysManager.deathCount() --This lists the current life count
-        if SaveData.deathCount == nil then
+        if SaveData.SMASPlusPlus.hud.deathCount == nil then
             return 0
         else
-            return SaveData.deathCount
+            return SaveData.SMASPlusPlus.hud.deathCount
         end
     end
 
     function SysManager.maxOutDeathCount() --This maxes out the death count to 999
         Sound.playSFX(67)
-        SaveData.deathCount = 999
+        SaveData.SMASPlusPlus.hud.deathCount = 999
         console:println("Death count is now maxed out.")
     end
 
     function SysManager.resetDeathCount() --This resets the death count back to 0
         Sound.playSFX(98)
-        SaveData.deathCount = 0
+        SaveData.SMASPlusPlus.hud.deathCount = 0
         console:println("Death count has been reset.")
     end
     
@@ -146,63 +146,63 @@ function SysManager.starCount() --This lists the count of the stars
 end
 
 function SysManager.scoreCount() --Returns the score count.
-    if SaveData.totalScoreClassic == nil then
+    if SaveData.SMASPlusPlus.hud.score == nil then
         return 0
     else
-        return SaveData.totalScoreClassic
+        return SaveData.SMASPlusPlus.hud.score
     end
 end
 
 function SysManager.scoreCountWithZeroes() --Returns the score count with zeroes.
-    if SaveData.totalScoreClassic == nil then
+    if SaveData.SMASPlusPlus.hud.score == nil then
         return tostring(000000000)
-    elseif SaveData.totalScoreClassic >= 0 then
-        return string.format("%000000009d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 9 then
-        return string.format("%00000008d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 99 then
-        return string.format("%0000007d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 999 then
-        return string.format("%000006d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 9999 then
-        return string.format("%00005d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 99999 then
-        return string.format("%0004d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 999999 then
-        return string.format("%003d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 9999999 then
-        return string.format("%02d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 99999999 then
-        return string.format("%1d",tostring(SaveData.totalScoreClassic))
-    elseif SaveData.totalScoreClassic >= 999999999 then
-        return tostring(SaveData.totalScoreClassic)
+    elseif SaveData.SMASPlusPlus.hud.score >= 0 then
+        return string.format("%000000009d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 9 then
+        return string.format("%00000008d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 99 then
+        return string.format("%0000007d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 999 then
+        return string.format("%000006d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 9999 then
+        return string.format("%00005d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 99999 then
+        return string.format("%0004d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 999999 then
+        return string.format("%003d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 9999999 then
+        return string.format("%02d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 99999999 then
+        return string.format("%1d",tostring(SaveData.SMASPlusPlus.hud.score))
+    elseif SaveData.SMASPlusPlus.hud.score >= 999999999 then
+        return tostring(SaveData.SMASPlusPlus.hud.score)
     end
 end
 
 function SysManager.scoreCount13() --Returns the score count limited within 1.3 Mode's digit numbers.
-    if SaveData.totalScoreClassic == nil then
+    if SaveData.SMASPlusPlus.hud.score == nil then
         return 0000000
-    elseif SaveData.totalScoreClassic <= 9999999 then
-        return SaveData.totalScoreClassic
-    elseif SaveData.totalScoreClassic >= 9999999 then
+    elseif SaveData.SMASPlusPlus.hud.score <= 9999999 then
+        return SaveData.SMASPlusPlus.hud.score
+    elseif SaveData.SMASPlusPlus.hud.score >= 9999999 then
         return 9999999
     end
 end
 
 function SysManager.coinCountClassic() --Returns the classic coin count.
-    if SaveData.totalCoinsClassic == nil then
+    if SaveData.SMASPlusPlus.hud.coinsClassic == nil then
         return 0
     else
-        return SaveData.totalCoinsClassic
+        return SaveData.SMASPlusPlus.hud.coinsClassic
     end
 end
 
 function SysManager.coinCountClassicWith99Limit() --Returns the classic coin count, but with a 99 coin limiter when above 100.
-    if SaveData.totalScoreClassic == nil then
+    if SaveData.SMASPlusPlus.hud.score == nil then
         return mem(0x00B2C5A8, FIELD_WORD)
-    elseif SaveData.totalCoinsClassic < 100 then
-        return SaveData.totalCoinsClassic
-    elseif SaveData.totalCoinsClassic >= 100 then
+    elseif SaveData.SMASPlusPlus.hud.coinsClassic < 100 then
+        return SaveData.SMASPlusPlus.hud.coinsClassic
+    elseif SaveData.SMASPlusPlus.hud.coinsClassic >= 100 then
         return 99
     end
 end

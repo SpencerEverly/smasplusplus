@@ -12,7 +12,7 @@ local anothercurrency = require("ShopSystem/anothercurrency")
 _G.pausemenu2 = require("pausemenu2")
 _G.undertaleDepends = require("level_dependencies_undertale")
 
-if SaveData.disableX2char then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     pausemenu13 = require("pausemenu13/pausemenu13")
 end
 
@@ -75,7 +75,7 @@ function dependencies.onStart()
         Defines.player_runspeed = 6
     end
     
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         warpTransition = require("warpTransition")
         anotherPowerDownLibrary = require("anotherPowerDownLibrary")
         playerphysicspatch = require("playerphysicspatch")
@@ -96,7 +96,7 @@ function dependencies.onStart()
         warpTransition.TRANSITION_PAN = 6
         littleDialogue.defaultStyleName = "smw"
     end
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         Cheats.deregister("dressmeup")
         Cheats.deregister("undress")
         Cheats.deregister("laundryday")

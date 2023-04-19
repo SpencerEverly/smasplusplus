@@ -15,14 +15,15 @@ local gbaCostumes = {
 }
 
 function onStart()
+    local currentCostume = SaveData.SMASPlusPlus.player[1].currentCostume
     if player:mem(0x15E, FIELD_WORD) == 7 then
-        if SaveData.currentCostume == "N/A" then
+        if currentCostume == "N/A" then
             Sound.playSFX("smb2-beginning.ogg")
-        elseif nesCostumes[SaveData.currentCostume] then
+        elseif nesCostumes[currentCostume] then
             Sound.playSFX("smb1-nes-beginning.ogg")
-        elseif gbaCostumes[SaveData.currentCostume] then
+        elseif gbaCostumes[currentCostume] then
             Sound.playSFX("sma1-beginning.ogg")
-        elseif SaveData.currentCostume then
+        elseif currentCostume then
             Sound.playSFX("smb2-beginning.ogg")
         end
     end
@@ -39,12 +40,12 @@ function onEvent(eventName)
     if eventName == "Boss End 2" then
         Sound.changeMusic("_OST/Super Mario Bros 2/Boss.spc|0;g=2.5", 4)
     end
-    --[[if SaveData.currentCostume == "11-SMA1" then
+    --[[if SaveData.SMASPlusPlus.player[1].currentCostume == "11-SMA1" then
         if eventName == "Boss Start" then
             Sound.playSFX("mario/11-SMA1/birdo-thisisasfarasyougo.wav")
         end
     end
-    if SaveData.currentCostume == "11-SMA1" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "11-SMA1" then
         if eventName == "Boss End" then
             Sound.playSFX("mario/11-SMA1/birdo-I'llrememberthis.wav")
         end

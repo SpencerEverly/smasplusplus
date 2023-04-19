@@ -8,10 +8,6 @@ local playerManager = require("playermanager")
 local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 
-if SaveData.currentCostume == nil then
-    SaveData.currentCostume = "N/A"
-end
-
 function smasCharacterInfo.onInitAPI()
     registerEvent(smasCharacterInfo,"onStart")
 end
@@ -87,9 +83,9 @@ end
 function smasCharacterInfo.setCostumeSpecifics()
     console:println("Character information will now be changed.")
     
-    local currentCostume = SaveData.currentCostume
+    local currentCostume = SaveData.SMASPlusPlus.player[1].currentCostume
     
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         smasExtraSounds.sounds[148].sfx = Audio.SfxOpen(Misc.resolveSoundFile("_OST/_Sound Effects/nothing.ogg"))
         for _,p in ipairs(Player.get()) do
             p.setCostume(1, nil)
@@ -957,7 +953,7 @@ function smasCharacterInfo.setCostumeSpecifics()
     
     
     --Starman/Megashroom themes/default settings for default characters
-    if (currentCostume == "N/A" or currentCostume == "!DEFAULT") and not SaveData.disableX2char then
+    if (currentCostume == "N/A" or currentCostume == "!DEFAULT") and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         steve.skinSettings.name = "steve"
         if not Cheats.get("waitinginthesky").active then
             if player.character == CHARACTER_YOSHI then

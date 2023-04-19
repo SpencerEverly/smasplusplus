@@ -139,7 +139,7 @@ function costume.onKeyboardPress(keyCode, repeated)
 end
 
 function costume.onControllerButtonPress(button, playerIdx)
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if SaveData.toggleCostumeAbilities then
             if playerIdx == 1 then
                 if button == SaveData.specialbutton1stplayer then

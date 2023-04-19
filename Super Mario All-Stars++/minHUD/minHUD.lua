@@ -49,7 +49,7 @@ local livesAltStyle = 1
 ---------------------
 
 -- Initialise the death counter to 0 if it hasn't been already
-SaveData.deathCount = SaveData.deathCount or 0
+SaveData.SMASPlusPlus.hud.deathCount = SaveData.SMASPlusPlus.hud.deathCount or 0
 
 -- Graphics
 local hudBarB = Graphics.loadImage(Misc.resolveFile("minHUD/hudBarB.png"))
@@ -114,15 +114,15 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
 
     -- Coins
     Graphics.drawImageWP(coinCounter, 20, 4, -4.3)
-    textplus.print{text = tostring(SaveData.totalCoinsClassic), font = minFont, priority = -4.3, x = 54, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.coinsClassic), font = minFont, priority = -4.3, x = 54, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Lives or Death Counter
     if livesAltStyle == 2 then
         Graphics.drawImageWP(deathCounter, 130, 4, -4.3)
-        textplus.print{text = tostring(SaveData.deathCount), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2} 
+        textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.deathCount), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2} 
     else
         Graphics.drawImageWP(lifeCounter, 114, 4, -4.3)
-        textplus.print{text = tostring(SaveData.totalLives), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.lives), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end
 
     -- Stars
@@ -132,7 +132,7 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
     end
 
     -- Score
-    textplus.print{text = tostring(SaveData.totalScoreClassic), font = minFont, priority = -4.3, x = 544, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.score), font = minFont, priority = -4.3, x = 544, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Time [SMBX Built In]
     if timeCounterSet == 1 then
@@ -203,7 +203,7 @@ end
 -- Track if the player is dying during a level exit
 function minHUD.onExitLevel() 
     if not isOverworld and player:mem(0x13C,FIELD_BOOL) then
-        SaveData.deathCount = SaveData.deathCount + 1
+        SaveData.SMASPlusPlus.hud.deathCount = SaveData.SMASPlusPlus.hud.deathCount + 1
     end
 end
 

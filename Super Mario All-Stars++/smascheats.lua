@@ -80,7 +80,7 @@ Cheats.register("sherbertsmiddlenameistoto",{ --Kills all/any player(s) after ty
     flashPlayer = true,
 })
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("huskiesareamazing",{ --Turns the player into Tangent (Spencer's dog)
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -92,7 +92,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then --Same as above
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then --Same as above
     Cheats.register("itsametangent",{
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -104,7 +104,7 @@ if not SaveData.disableX2char then --Same as above
     })
 end
 
-if not SaveData.disableX2char then --Same as above
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then --Same as above
     Cheats.register("itsamespencer",{
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -116,7 +116,7 @@ if not SaveData.disableX2char then --Same as above
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsametakeshi",{ --Turns the player into Takeshi (NES)
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -128,7 +128,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsamelarry",{ --Turns the player into Larry the Cucumber
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -140,7 +140,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsamepily",{ --Turns the player into Pily from A2XT
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -152,7 +152,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsameeric",{ --Turns the player into Eric Cartman
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -164,7 +164,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsamejcfoster",{ --Turns the player into JC Foster
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -176,7 +176,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsamefrisk",{ --Turns the player into Frisk
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -188,7 +188,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsamerebeltrooper",{ --Turns the player into the LEGO Star Wars II GBA Rebel Trooper
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -200,7 +200,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsameultimaterinka",{ --Turns the player into Ultimate Rinka. This was recoded.
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -212,7 +212,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("densenuclearenergy",{ --Turns the player into Ultimate Rinka. This was recoded.
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -224,7 +224,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("itsameninjabomberman",{ --Turns the player into Ninja Bomberman
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -236,7 +236,7 @@ if not SaveData.disableX2char then
     })
 end
 
-if not SaveData.disableX2char then
+if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("hardmode",{ --Turns the player into Mother Brain Rinka (This is actually a Beta 3 Cheat, which was brought back for this one)
         onActivate = (function()
             Defines.player_hasCheated = false
@@ -514,10 +514,10 @@ Cheats.register("framerate",{ --This needs to be reregistered because it uses a 
     flashPlayer = true,activateSFX = nil,
 })
 
-if SaveData.disableX2char then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     Cheats.register("supermario2",{ --Remaking this, for no reason at all...
         onActivate = (function()
-            if SaveData.disableX2char then
+            if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
                 Defines.player_hasCheated = false
                 Playur.toggleSingleCoOp(true)
                 local rngbomb = rng.randomEntry({69,71})
@@ -838,8 +838,8 @@ end
 function smasCheats.onTick()
     if Cheats.get("moneytree").active then
         Sound.playSFX(14)
-        SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
-        SaveData.totalCoins = SaveData.totalCoins + 1
+        SaveData.SMASPlusPlus.hud.coinsClassic = SaveData.SMASPlusPlus.hud.coinsClassic + 1
+        SaveData.SMASPlusPlus.hud.coins = SaveData.SMASPlusPlus.hud.coins + 1
     end
 end
 

@@ -50,7 +50,7 @@ function smasNoTurnBack.onStart()
 end
 
 function smasNoTurnBack.onCameraUpdate()
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         for k,v in ipairs(Section.getActiveIndices()) do
             if not autoscroll.isSectionScrolling(v) then
                 if smasNoTurnBack.enabled and not smasNoTurnBack.overrideSection then

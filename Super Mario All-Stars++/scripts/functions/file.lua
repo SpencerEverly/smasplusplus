@@ -19,8 +19,8 @@ function File.readFromDefaultCharacterDirectory(name)
 end
 
 function File.readFromCharacterDirectory(name)
-    if SaveData.currentCostume ~= "N/A" then
-        local file = File.load("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/states/"..name)
+    if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
+        local file = File.load("costumes/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentCostume.."/states/"..name)
         if file then
             return file
         else

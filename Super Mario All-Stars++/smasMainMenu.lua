@@ -287,9 +287,9 @@ function MigrateOldSave2() --Migration Warning
 end
 
 function MigrateOldSave3() --Migration started + completed
-    SaveData.totalCoinsClassic = mem(0x00B2C5A8, FIELD_WORD)
-    SaveData.totalLives = mem(0x00B2C5AC, FIELD_FLOAT)
-    SaveData.totalScoreClassic = Misc.score()
+    SaveData.SMASPlusPlus.hud.coinsClassic = mem(0x00B2C5A8, FIELD_WORD)
+    SaveData.SMASPlusPlus.hud.lives = mem(0x00B2C5AC, FIELD_FLOAT)
+    SaveData.SMASPlusPlus.hud.score = Misc.score()
     GameData.temporaryPowerupStored = player.powerup
     GameData.temporaryReserveStored = player.reservePowerup
     for k,v in ipairs(smasTables.__allLevels) do
@@ -353,7 +353,7 @@ function FailsafeMessage1() --You died on the main menu
     if SaveData.failsafeMessageOne then
         SaveData.failsafeMessageOne = false
     end
-    SaveData.totalLives = SaveData.totalLives + 1
+    SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives + 1
     Sound.muteMusic(-1)
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000013"), speakerName = "Whoops!", pauses = false, updatesInPause = true})
 end
@@ -498,14 +498,14 @@ function credits1() --Credits
 end
 
 function X2Char() --Game settings applied
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         Sound.playSFX("1.3Mode/bowser-killed.ogg")
-        SaveData.disableX2char = true
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = true
         Sound.loadCostumeSounds()
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
-    elseif SaveData.disableX2char then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         Sound.playSFX("x2-mode-enabled.ogg")
-        SaveData.disableX2char = false
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
         Sound.loadCostumeSounds()
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000031"), pauses = false, updatesInPause = true})
     end
@@ -577,16 +577,16 @@ end
 
 function TwoPlayerDisEnable1()
     smasMainMenuSystem.menuOpen = false
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000037"), pauses = false, updatesInPause = true})
-    elseif not SaveData.disableX2char then
+    elseif not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000038"), pauses = false, updatesInPause = true})
     end
 end
 
 function BattleModeDisEnable1()
     smasMainMenuSystem.menuOpen = false
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if Player.count() == 1 then
             littleDialogue.create({text = transplate.getTranslation("0x0000000000000039"), pauses = false, updatesInPause = true})
         elseif Player.count() >= 2 then
@@ -595,7 +595,7 @@ function BattleModeDisEnable1()
             end
             littleDialogue.create({text = transplate.getTranslation("0x0000000000000040"), pauses = false, updatesInPause = true})
         end
-    elseif not SaveData.disableX2char then
+    elseif not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000041"), pauses = false, updatesInPause = true})
     end
 end
@@ -640,10 +640,10 @@ end
 
 function ChangeChar1()
     smasMainMenuSystem.menuOpen = false
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         smasCharacterChanger.menuActive = true
         smasCharacterChanger.animationActive = true
-    elseif SaveData.disableX2char then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if Player.count() == 2 then
             littleDialogue.create({text = transplate.getTranslation("0x0000000000000048"), pauses = false, updatesInPause = true})
         elseif Player.count() == 1 then
@@ -1029,12 +1029,12 @@ function smasMainMenu.onTick()
         end
         Graphics.activateHud(false)
         littleDialogue.defaultStyleName = "bootmenudialog" --Change the text box to the SMBX 1.3 menu textbox format
-        if SaveData.disableX2char == nil then
-            SaveData.disableX2char = false
+        if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == nil then
+            SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
         end
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             smasHud.visible.lives = false
-        elseif SaveData.disableX2char then
+        elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             smasHud.visible.lives = false
             for _,p in ipairs(Player.get()) do
                 p.setCostume(1, nil)
@@ -1328,9 +1328,9 @@ function smasMainMenu.onDraw()
             end
         end
         if smasMainMenu.showStatusOf13ModeOnScreen then
-            if not SaveData.disableX2char then
+            if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
                 textplus.print{x=243, y=26, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
-            elseif SaveData.disableX2char then
+            elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
                 textplus.print{x=248, y=26, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
             end
         end

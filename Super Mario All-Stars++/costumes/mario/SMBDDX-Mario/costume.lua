@@ -32,12 +32,12 @@ function costume.drawHUD(camIdx,priority,isSplit)
     --Lives
     Graphics.drawImageWP(marioHead, 107, 30, -4.3)
     textplus.print{text = "x", font = minFont, priority = -4.3, x = 137, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
-    textplus.print{text = tostring(SaveData.totalLives), font = minFont, priority = -4.3, x = 152, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.lives), font = minFont, priority = -4.3, x = 152, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     
     --Coins
     Graphics.drawImageWP(coinCounter, 202, 22, -4.3)
     textplus.print{text = "x", font = minFont, priority = -4.3, x = 225, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
-    textplus.print{text = tostring(SaveData.totalCoinsClassic), font = minFont, priority = -4.3, x = 240, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.coinsClassic), font = minFont, priority = -4.3, x = 240, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     --Stars
     Graphics.drawImageWP(starCounter, 305, 26, -4.3)
@@ -45,7 +45,7 @@ function costume.drawHUD(camIdx,priority,isSplit)
     textplus.print{text = tostring(SaveData.totalStarCount), font = minFont, priority = -4.3, x = 350, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     --Score
-    textplus.print{text = tostring(SaveData.totalScoreClassic), font = minFont, priority = -4.3, x = 432, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.score), font = minFont, priority = -4.3, x = 432, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     --Time
     textplus.print{text = "Time "..tostring(Timer.getValue()), font = minFont, priority = -4.3, x = 590, y = 26, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)} 

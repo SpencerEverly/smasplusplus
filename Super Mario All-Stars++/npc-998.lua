@@ -212,10 +212,10 @@ function customNPC.onTickNPC(v)
                 SFX.play(smasExtraSounds.sounds[113].sfx)
                 if Timer.getValue() >= 100 then
                     Timer.add(-10)
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 100
+                    SaveData.SMASPlusPlus.hud.score = SaveData.SMASPlusPlus.hud.score + 100
                 else
                     Timer.add(-1)
-                    SaveData.totalScoreClassic = SaveData.totalScoreClassic + 10
+                    SaveData.SMASPlusPlus.hud.score = SaveData.SMASPlusPlus.hud.score + 10
                 end
             else
                 if Player.count() == 1 then

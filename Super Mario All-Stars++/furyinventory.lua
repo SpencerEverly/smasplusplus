@@ -314,8 +314,8 @@ function furyinventory.onPostNPCKill(v,reason)
         if pUpsTable[v.id] then
             SaveData.furyinventory.ice = SaveData.furyinventory.ice + 1
         end
-    elseif SaveData.reserveBoxItem[1] then
-        SaveData.furyinventory.reserve = SaveData.reserveBoxItem[1]
+    elseif SaveData.SMASPlusPlus.hud.reserve[1] then
+        SaveData.furyinventory.reserve = SaveData.SMASPlusPlus.hud.reserve[1]
     end
 end
 
@@ -325,7 +325,7 @@ function furyinventory.onTick()
     numx = 40
     numy = 570
     
-    SaveData.furyinventory.reserve = SaveData.reserveBoxItem[1]
+    SaveData.furyinventory.reserve = SaveData.SMASPlusPlus.hud.reserve[1]
     Defines.player_hasCheated = false -- disables the disabling of saving when using a cheat code
     if warpTransition.transitionTimer >= 0.1 then
         furyinventory.activated = false
@@ -567,7 +567,7 @@ function furyinventory.onInputUpdate()
                     if SaveData.furyinventory.reserve >= 1 then
                         p = player
                         Audio.playSFX(Misc.resolveFile("inventorystuff/powerupselect.wav"))
-                        modernReserveItems.drop(SaveData.reserveBoxItem[1], p)
+                        modernReserveItems.drop(SaveData.SMASPlusPlus.hud.reserve[1], p)
                         cooldown = 5
                         state = 1
                         furyinventory.furyinventoryopened = false

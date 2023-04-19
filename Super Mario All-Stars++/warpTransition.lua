@@ -481,7 +481,7 @@ if SMBX_VERSION == VER_SEE_MOD then
         end
     end
     function warpTransition.onWarpEnter(eventObj,warp,playerObj)
-        if SaveData.disableX2char then
+        if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if warpTransition.currentTransitionType == warpTransition.TRANSITION_NONE and warp then
                 if playerObj.idx > 1 then --Just to be safe
                     eventObj.cancelled = true
@@ -490,7 +490,7 @@ if SMBX_VERSION == VER_SEE_MOD then
         end
     end
     function warpPlayerToOther(warp,playerObj)
-        if SaveData.disableX2char then
+        if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             player:mem(0x140,FIELD_WORD,100)
             if Player.count() >= 2 then
                 for i = 2,200 do

@@ -13,10 +13,6 @@ if GameData.levelMusic == nil then
     GameData.levelMusic = {}
 end
 
-if SaveData.currentCostume == nil then
-    SaveData.currentCostume = "N/A"
-end
-
 function Sound.onInitAPI()
     registerEvent(Sound,"onDraw")
 end
@@ -173,13 +169,13 @@ function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a cos
         stringOnly = false
     end
     local costumeSoundDir
-    if not SaveData.disableX2char then
-        if SaveData.currentCostume == "N/A" then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+        if SaveData.SMASPlusPlus.player[1].currentCostume == "N/A" then
             costumeSoundDir = Sound.resolveSoundFile(name)
         else
-            costumeSoundDir = Sound.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..name)
+            costumeSoundDir = Sound.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentCostume.."/"..name)
         end
-    elseif SaveData.disableX2char then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         costumeSoundDir = Sound.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)
     end
     if not stringOnly then

@@ -226,13 +226,13 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
             if SaveData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
                 Sound.playSFX(32)
             end
-            SaveData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
+            SaveData.SMASPlusPlus.options[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
         end
         if currentOption.isGameData then
-            if GameData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
+            if SaveData.SMASPlusPlus.options[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
                 Sound.playSFX(32)
             end
-            GameData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
+            SaveData.SMASPlusPlus.options[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
         end
         if currentOption.isPauseplusValue then
             if selectionData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
@@ -421,15 +421,15 @@ function smasMainMenuSystem.onDraw()
                 
                 elseif currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_MULTISELECT then
                     if currentOption.isSaveData then
-                        if SaveData[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
+                        if SaveData.SMASPlusPlus.options[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
                             named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
-                        elseif SaveData[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
+                        elseif SaveData.SMASPlusPlus.options[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
                             named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
                         end
                     elseif currentOption.isGameData then
-                        if GameData[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
+                        if GameData.SMASPlusPlus.options[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
                             named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
-                        elseif GameData[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
+                        elseif GameData.SMASPlusPlus.options[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
                             named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
                         end
                     elseif currentOption.isPauseplusValue then

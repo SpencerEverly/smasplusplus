@@ -10,7 +10,7 @@ function onEvent(eventName)
         SFX.play("ender_portal.ogg")
     end
     if eventName == "Cutscene 1" then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if SaveData.accessibilityInventory then
                 smasBooleans.toggleOffInventory = true
             end
@@ -27,7 +27,7 @@ function onEvent(eventName)
         SFX.play("ut_noise.ogg")
     end
     if eventName == "Cutscene 2 - 13" then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if SaveData.accessibilityInventory then
                 smasBooleans.toggleOffInventory = false
             end

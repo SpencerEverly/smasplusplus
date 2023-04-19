@@ -229,7 +229,7 @@ function goalTape.startExit(args)
 
     info.startX = args.startX or (p.x + p.width*0.5)
     
-    if SaveData.currentCostume == "MODERN2" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "MODERN2" then
         info.mainSound = SFX.play("costumes/mario/Modern2/smb1-exit.ogg")
     else
         info.mainSound = SFX.play(info.mainSFX)
@@ -434,7 +434,7 @@ local function updatePlayerStuff(p,fromOnDraw)
         local speed = math.ceil(info.timerStart / info.timerCountdownSpeed)
         local score = (info.timerScoreMultiplier*math.min(speed,Timer.getValue()))
 
-        SaveData.totalScoreClassic = SaveData.totalScoreClassic + score
+        SaveData.SMASPlusPlus.hud.score = SaveData.SMASPlusPlus.hud.score + score
         info.timerScore = info.timerScore + score
 
         Timer.set(math.max(0,Timer.getValue()-speed))

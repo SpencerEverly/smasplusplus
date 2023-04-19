@@ -10,7 +10,7 @@ local fireballtimer = 0
 local iceballtimer = 0
 
 function smasFireballs.onPostNPCHarm(npc, harmType)
-    if SaveData.currentCostume == "MODERN2" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "MODERN2" then
         if npc.id == 13 then
             if harmType == HARM_TYPE_PROJECTILE_USED then
                 Audio.sounds[3].muted = true
@@ -31,7 +31,7 @@ function smasFireballs.onPostNPCHarm(npc, harmType)
 end
 
 function smasFireballs.onDrawEnd()
-    if SaveData.currentCostume == "MODERN2" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "MODERN2" then
         if fireballtimer > 0 then
             fireballtimer = fireballtimer - 1
             if fireballtimer == 0 then

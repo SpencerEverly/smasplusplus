@@ -81,7 +81,7 @@ function twirl.onTick() for k, p in ipairs(Player.get()) do
 			(p.character == 1 or p.character == 2 or p.character == 4 or p.character == 7 or p.character == 15) and
             smasBooleans.cantTwirl == false and
             table.icontains(smasTables._noLevelPlaces,Level.filename()) == false and
-            SaveData.currentCostume ~= "DEMO-XMASPILY"
+            SaveData.SMASPlusPlus.player[1].currentCostume ~= "DEMO-XMASPILY"
 	) end
 
 	if p.keys.altJump and p.keys.up and cooldown[k] > twirl.cooldown then

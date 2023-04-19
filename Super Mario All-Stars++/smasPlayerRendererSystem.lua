@@ -291,7 +291,7 @@ function smasPlayerRendererSystem.getAnimation()
 end
 
 function smasPlayerRendererSystem.onDraw()
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         smasPlayerRendererSystem.playerInfo.animationFramed = math.floor((lunatime.tick() / smasPlayerRendererSystem.playerInfo.frameSpeed) % #smasPlayerRendererSystem.getAnimation() + 1)
         
         

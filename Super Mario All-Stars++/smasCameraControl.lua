@@ -27,7 +27,7 @@ function smasCameraControl.onInitAPI()
 end
 
 function smasCameraControl.canDoCameraControlling()
-    return (not SaveData.disableX2char
+    return (not SaveData.SMASPlusPlus.game.onePointThreeModeActivated
         and (
             smasBooleans.isInLevel
             or smasBooleans.isInHub

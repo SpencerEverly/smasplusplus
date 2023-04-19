@@ -12,7 +12,7 @@ local smasHudSystem = require("smasHudSystem")
 
 _G.pausemenu2 = require("pausemenu2")
 
-if SaveData.disableX2char then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     pausemenu13 = require("pausemenu13/pausemenu13")
 end
 
@@ -95,7 +95,7 @@ function dependencies2.onStart()
     if Misc.inEditor() then
         debugbox = require("debugbox")
     end
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         anotherPowerDownLibrary = require("anotherPowerDownLibrary")
         playerphysicspatch = require("playerphysicspatch")
         kindHurtBlock = require("kindHurtBlock")
@@ -115,12 +115,12 @@ function dependencies2.onStart()
         warpTransition.TRANSITION_PAN = 6
         littleDialogue.defaultStyleName = "smw"
         if currentCostume == nil then
-            if not SaveData.disableX2char then
+            if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
                 warpTransition.doorclose = ("_OST/_Sound Effects/door-close.ogg")
             end
         end
     end
-    if SaveData.disableX2char then
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         Cheats.deregister("dressmeup")
         Cheats.deregister("undress")
         Cheats.deregister("laundryday")

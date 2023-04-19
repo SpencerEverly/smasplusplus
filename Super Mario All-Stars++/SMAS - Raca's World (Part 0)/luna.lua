@@ -4,7 +4,7 @@ local littleDialogue = require("littleDialogue")
 SaveData.resolution = "fullscreen"
 SaveData.letterbox = true
 SaveData.borderEnabled = true
-SaveData.disableX2char = false
+SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
 
 local blacklayer = true
 local whitelayer = false

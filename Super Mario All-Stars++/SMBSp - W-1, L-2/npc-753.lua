@@ -71,7 +71,7 @@ local function doBeePerk(v)
     local pos = vector(v.x, v.y)
     
     Misc.givePoints(configFile.score, pos, true)
-    --SaveData.totalScoreClassic = SaveData.totalScoreClassic + 8000
+    --SaveData.SMASPlusPlus.hud.score = SaveData.SMASPlusPlus.hud.score + 8000
         
     if configFile.score < 10 then
         SFX.play(6)

@@ -130,7 +130,7 @@ _G.autoscrolla = require("autoscrolla")
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then
     console:println("Mario Challenge detected! Loading game in minimal mode...")
-    SaveData.disableX2char = false
+    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
 end
 
 --This will add multiple player arguments.
@@ -239,8 +239,6 @@ Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/
 Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
 
 --First time SaveData settings, for resolutions and other settings
-
---***This will be used for the future, once we replace each SaveData/GameData variable to ones that look cleaner and are better to use***
 SaveData.SMASPlusPlus = SaveData.SMASPlusPlus or {}
 SaveData.SMASPlusPlus.options = SaveData.SMASPlusPlus.options or {}
 SaveData.SMASPlusPlus.accessibility = SaveData.SMASPlusPlus.accessibility or {}
@@ -249,57 +247,101 @@ SaveData.SMASPlusPlus.keys = SaveData.SMASPlusPlus.keys or {}
 SaveData.SMASPlusPlus.audio = SaveData.SMASPlusPlus.audio or {}
 SaveData.SMASPlusPlus.game = SaveData.SMASPlusPlus.game or {}
 SaveData.SMASPlusPlus.player = SaveData.SMASPlusPlus.player or {}
+SaveData.SMASPlusPlus.misc = SaveData.SMASPlusPlus.misc or {}
 for i = 1,8 do
     SaveData.SMASPlusPlus.player[i] = SaveData.SMASPlusPlus.player[i] or {}
+    SaveData.SMASPlusPlus.player[i].currentCostume = SaveData.SMASPlusPlus.player[i].currentCostume or "N/A"
+    SaveData.SMASPlusPlus.player[i].currentAlteration = SaveData.SMASPlusPlus.player[i].currentAlteration or "N/A"
 end
---***End of clean variables***
+
+--Bring legacy SaveData values over to the new ones
+if SaveData.currentCostume ~= nil then  
+    SaveData.SMASPlusPlus.player[1].currentCostume = SaveData.currentCostume
+    SaveData.currentCostume = nil
+end
+if SaveData.clockTheme ~= nil then
+    SaveData.SMASPlusPlus.options.clockTheme = SaveData.clockTheme
+    SaveData.clockTheme = nil
+end
+if SaveData.totalCoins ~= nil then
+    SaveData.SMASPlusPlus.hud.coins = SaveData.totalCoins
+    SaveData.totalCoins = nil
+end
+if SaveData.deathCount ~= nil then
+    SaveData.SMASPlusPlus.hud.deathCount = SaveData.deathCount
+    SaveData.deathCount = nil
+end
+if SaveData.totalLives ~= nil then
+    SaveData.SMASPlusPlus.hud.lives = SaveData.totalLives
+    SaveData.totalLives = nil
+end
+if SaveData.totalCoinsClassic ~= nil then
+    SaveData.SMASPlusPlus.hud.coinsClassic = SaveData.totalCoinsClassic
+    SaveData.totalCoinsClassic = nil
+end
+if SaveData.totalScoreClassic ~= nil then
+    SaveData.SMASPlusPlus.hud.score = SaveData.totalScoreClassic
+    SaveData.totalScoreClassic = nil
+end
+if SaveData.reserveBoxItem ~= nil then
+    SaveData.SMASPlusPlus.hud.reserve = {}
+    for i = 1,200 do    
+        SaveData.SMASPlusPlus.hud.reserve[i] = SaveData.reserveBoxItem[i]
+    end
+    SaveData.reserveBoxItem = nil
+end
+if SaveData.totalCheatCount ~= nil then
+    SaveData.SMASPlusPlus.misc.totalCheatsExecuted = SaveData.totalCheatCount
+    SaveData.totalCheatCount = nil
+end
+if SaveData.disableX2char ~= nil then
+    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = SaveData.disableX2char
+    SaveData.disableX2char = nil
+end
 
 if SaveData.totalcoins ~= nil then --If using the old SaveData function, use the new one and nil the original out
-    SaveData.totalCoins = SaveData.totalcoins
+    SaveData.SMASPlusPlus.hud.coins = SaveData.totalcoins
     SaveData.totalcoins = nil
 end
 
 --**Player-related data**
-SaveData.currentCostume = SaveData.currentCostume or "N/A"
-SaveData.currentAlteration = SaveData.currentAlteration or "N/A"
-
 --**Themes, resolutions**
 SaveData.resolution = SaveData.resolution or "fullscreen"
-if SaveData.clockTheme == nil then --Default clock theme is "normal"
-    SaveData.clockTheme = "normal"
+if SaveData.SMASPlusPlus.options.clockTheme == nil then --Default clock theme is "normal"
+    SaveData.SMASPlusPlus.options.clockTheme = "normal"
 end
 
 --**Hud stuff**
-if SaveData.totalCoins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
-    SaveData.totalCoins = 0
+if SaveData.SMASPlusPlus.hud.coins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
+    SaveData.SMASPlusPlus.hud.coins = 0
 end
-if SaveData.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
-    SaveData.deathCount = 0
+if SaveData.SMASPlusPlus.hud.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
+    SaveData.SMASPlusPlus.hud.deathCount = 0
 end
-if SaveData.totalLives == nil then --The total lives used the for the episode.
-    SaveData.totalLives = 5
+if SaveData.SMASPlusPlus.hud.lives == nil then --The total lives used the for the episode.
+    SaveData.SMASPlusPlus.hud.lives = 5
 end
-if SaveData.totalCoinsClassic == nil then --This will display a classic coin count for the episode
-    SaveData.totalCoinsClassic = 0
+if SaveData.SMASPlusPlus.hud.coinsClassic == nil then --This will display a classic coin count for the episode
+    SaveData.SMASPlusPlus.hud.coinsClassic = 0
 end
-if SaveData.totalScoreClassic == nil then --This will add a score counter which goes up to a trillion, cause why not
-    SaveData.totalScoreClassic = 0
+if SaveData.SMASPlusPlus.hud.score == nil then --This will add a score counter which goes up to a trillion, cause why not
+    SaveData.SMASPlusPlus.hud.score = 0
 end
-if SaveData.reserveBoxItem == nil then
-    SaveData.reserveBoxItem = {}
+if SaveData.SMASPlusPlus.hud.reserve == nil then
+    SaveData.SMASPlusPlus.hud.reserve = {}
 end
 for i = 1,200 do
-    if SaveData.reserveBoxItem[i] == nil then
-        SaveData.reserveBoxItem[i] = 0
+    if SaveData.SMASPlusPlus.hud.reserve[i] == nil then
+        SaveData.SMASPlusPlus.hud.reserve[i] = 0
     end
 end
-if SaveData.totalCheatCount == nil then --A tally number of cheats you have executed since the first cheat. This'll be an SEE Mod-only feature for now.
-    SaveData.totalCheatCount = 0
+if SaveData.SMASPlusPlus.misc.totalCheatsExecuted == nil then --A tally number of cheats you have executed since the first cheat. This'll be an SEE Mod-only feature for now.
+    SaveData.SMASPlusPlus.misc.totalCheatsExecuted = 0
 end
 
 --**1.3 Mode default setting**
-if SaveData.disableX2char == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
-    SaveData.disableX2char = false
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
+    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
 end
 
 --**This is for the upgrade save thing**
@@ -430,7 +472,7 @@ function onStart() --Now do onStart...
     --Below will start the star door system
     warpstaractive = true
     if Misc.inMarioChallenge() then --Just in case if the Mario Challenge is active, do these things to update the Challenge...
-        SaveData.totalCoinsClassic = mem(0x00B2C5A8, FIELD_WORD)
+        SaveData.SMASPlusPlus.hud.coinsClassic = mem(0x00B2C5A8, FIELD_WORD)
         SaveData.totalStarCount = mem(0x00B251E0, FIELD_WORD)
     end
     --Do the weather SaveData additions
@@ -461,11 +503,11 @@ function onStart() --Now do onStart...
         end
         GameData.gameFirstLoaded = false --Because what if we load into a level instead of the boot menu?
     end
-    if SaveData.disableX2char == 0 then --Migrate old saves from pre-March 2022 if there are any.
-        SaveData.disableX2char = false
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == 0 then --Migrate old saves from pre-March 2022 if there are any.
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
     end
-    if SaveData.disableX2char == 1 then
-        SaveData.disableX2char = true
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == 1 then
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = true
     end
     if SaveData.firstBootCompleted == 0 then
         SaveData.firstBootCompleted = false
@@ -473,9 +515,9 @@ function onStart() --Now do onStart...
     if SaveData.firstBootCompleted == 1 then
         SaveData.firstBootCompleted = true
     end
-    if not Misc.inMarioChallenge() and (not SaveData.disableX2char) and not Misc.inEditor() and (SaveData.currentCharacter ~= nil and SaveData.currentCostume ~= nil) then
+    if not Misc.inMarioChallenge() and (not SaveData.SMASPlusPlus.game.onePointThreeModeActivated) and not Misc.inEditor() and (SaveData.currentCharacter ~= nil and SaveData.SMASPlusPlus.player[1].currentCostume ~= nil) then
         player.character = SaveData.currentCharacter
-        player.setCostume(SaveData.currentCharacter, SaveData.currentCostume, false)
+        player.setCostume(SaveData.currentCharacter, SaveData.SMASPlusPlus.player[1].currentCostume, false)
     end
     if Misc.inEditor() and SysManager.isOutsideOfUnplayeredAreas() then
         GameData.gameFirstLoaded = false
@@ -589,15 +631,15 @@ function onDraw()
     --This'll update the costume throughout the game
     local currentCostume = player:getCostume()
     if currentCostume ~= nil then
-        SaveData.currentCostume = currentCostume
+        SaveData.SMASPlusPlus.player[1].currentCostume = currentCostume
     elseif currentCostume == nil then
-        SaveData.currentCostume = "N/A"
+        SaveData.SMASPlusPlus.player[1].currentCostume = "N/A"
     end
     
     --This'll update the path for costumes
     if currentCostume ~= nil then
-        if SaveData.currentCostume ~= "N/A" then
-            SaveData.currentCostumePath = "costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume
+        if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
+            SaveData.currentCostumePath = "costumes/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentCostume
         else
             SaveData.currentCostumePath = "N/A"
         end
@@ -686,19 +728,19 @@ end
 function onExit()
     if Misc.inMarioChallenge() then
         local oldpoints = Misc.score()
-        mem(0x00B2C5A8, FIELD_WORD, SaveData.totalCoinsClassic)
-        if SaveData.totalScoreClassic > 9999990 then
-            SaveData.totalScoreClassic = 9999990
+        mem(0x00B2C5A8, FIELD_WORD, SaveData.SMASPlusPlus.hud.coinsClassic)
+        if SaveData.SMASPlusPlus.hud.score > 9999990 then
+            SaveData.SMASPlusPlus.hud.score = 9999990
         end
-        Misc.score(oldpoints - SaveData.totalScoreClassic)
-        if SaveData.totalLives > 99 then
+        Misc.score(oldpoints - SaveData.SMASPlusPlus.hud.score)
+        if SaveData.SMASPlusPlus.hud.lives > 99 then
             mem(0x00B2C5AC, FIELD_FLOAT, 99)
         else
-            mem(0x00B2C5AC, FIELD_FLOAT, SaveData.totalLives)
+            mem(0x00B2C5AC, FIELD_FLOAT, SaveData.SMASPlusPlus.hud.lives)
         end
-        if player.character == 3 and SaveData.currentCostume == "NINJABOMBERMAN" then
+        if player.character == 3 and SaveData.SMASPlusPlus.player[1].currentCostume == "NINJABOMBERMAN" then
             player:transform(10, false)
-        elseif player.character == 4 and SaveData.currentCostume == "ULTIMATERINKA" then
+        elseif player.character == 4 and SaveData.SMASPlusPlus.player[1].currentCostume == "ULTIMATERINKA" then
             player:transform(14, false)
         end
     end
@@ -706,7 +748,7 @@ end
 
 function onCheatActivate(cheat)
     if cheat.id then
-        SaveData.totalCheatCount = SaveData.totalCheatCount + 1
+        SaveData.SMASPlusPlus.misc.totalCheatsExecuted = SaveData.SMASPlusPlus.misc.totalCheatsExecuted + 1
     end
 end
 

@@ -22,7 +22,7 @@ function smasEnemySystem.onTick()
             heldNPC = player.holdingNPC
         end
         --Disable killing NPCs when throwing them close to walls, making it more like the original Mario games
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if heldNPC ~= nil and heldNPC.isValid then
                 if heldNPC:mem(0x134,FIELD_WORD) >= 5 then --Since NPCs get killed when this is higher than 5...
                     heldNPC:mem(0x134,FIELD_WORD,0) --Make it 0 to not kill them
@@ -43,7 +43,7 @@ function smasEnemySystem.onTick()
     
     --**TANOOKI THWOMP AND DISC KILLING**
     if smasEnemySystem.enableTanookiThwompAndDiscKilling then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             for _,p in ipairs(Player.get()) do
                 if p.powerup == 5 and p:mem(0x4A, FIELD_BOOL) then
                     for k,v in ipairs(NPC.getIntersecting(p.x, p.y, p.x + p.width, p.y + p.height - 20)) do
@@ -66,7 +66,7 @@ function smasEnemySystem.onTick()
     
     --**SHELL COIN GRABBING**
     if smasEnemySystem.enableShellCoinGrabbing then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             --Coins, first thing
             for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
                 for j,l in ipairs(NPC.get(smasTables.allCoinNPCIDs)) do --Coins
@@ -74,7 +74,7 @@ function smasEnemySystem.onTick()
                         l.killFlag = HARM_TYPE_VANISH --Kills the coin
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
                         Effectx.spawnScoreEffect(1, l.x, l.y) --Spawns 10 score effect
-                        SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+                        SaveData.SMASPlusPlus.hud.coinsClassic = SaveData.SMASPlusPlus.hud.coinsClassic + 1
                         if smasExtraSounds.enableCoinCollecting then
                             smasExtraSounds.playSFX(14)
                         end
@@ -88,7 +88,7 @@ function smasEnemySystem.onTick()
                         l.killFlag = HARM_TYPE_VANISH --Kills the rupee
                         Effect.spawn(78, l.x, l.y) --Spawns coin sparkle effect
                         Effectx.spawnScoreEffect(1, l.x, l.y) --Spawns 10 score effect
-                        SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+                        SaveData.SMASPlusPlus.hud.coinsClassic = SaveData.SMASPlusPlus.hud.coinsClassic + 1
                         if smasExtraSounds.enableRupeeCollecting then
                             smasExtraSounds.playSFX(81)
                         end

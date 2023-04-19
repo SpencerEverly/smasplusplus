@@ -144,7 +144,7 @@ function smasPWing.drawPWingHud()
 end
 
 function smasPWing.onTick()
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if smasCharacterCostumes.currentCostume.playersList ~= nil then
             if smasPWing.canStartFlying(player) and not smasPWing.leafPowerups[player.powerup] then
                 if smasExtraSounds.active then
@@ -158,7 +158,7 @@ function smasPWing.onTick()
 end
 
 function smasPWing.onDraw()
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if smasCharacterCostumes.currentCostume.playersList ~= nil then
             for _,p in ipairs(smasCharacterCostumes.currentCostume.playersList) do
                 local data = smasCharacterCostumes.currentCostume.playerData[p]

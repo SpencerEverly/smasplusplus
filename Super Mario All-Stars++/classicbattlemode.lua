@@ -413,9 +413,6 @@ function battledependencies.onStart()
         Playur.setBattleLives(1, 99) --To prevent dying and quitting out of the level
         Playur.setBattleLives(2, 99)
         Routine.run(countdownbegin)
-        if SaveData.ut_enabled == nil then
-            SaveData.ut_enabled = SaveData.ut_enabled or 0
-        end
         
         if player.character == CHARACTER_NINJABOMBERMAN then
             Defines.player_walkspeed = 6

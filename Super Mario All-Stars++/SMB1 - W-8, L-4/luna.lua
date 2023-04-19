@@ -28,7 +28,7 @@ function onEvent(eventName)
         Sound.playSFX(138)
     end
     if eventName == ("Pigeon Cutscene") then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if SaveData.accessibilityInventory then
                 smasBooleans.toggleOffInventory = true
             end
@@ -39,7 +39,7 @@ function onEvent(eventName)
         Sound.playSFX("pigeon_attack.ogg")
     end
     if eventName == ("Pigeon Cutscene 5") then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if SaveData.accessibilityInventory then
                 smasBooleans.toggleOffInventory = false
             end
@@ -52,7 +52,7 @@ function onEvent(eventName)
     end
     if eventName == ("Pigeon Cutscene Sequel 0") then
         Sound.playSFX("is-the-pool-clean.ogg")
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if SaveData.accessibilityInventory then
                 smasBooleans.toggleOffInventory = true
             end
@@ -64,7 +64,7 @@ function onEvent(eventName)
         Sound.playSFX("pigeon_attack.ogg")
     end
     if eventName == ("Pigeon Cutscene Sequel 3") then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if SaveData.accessibilityInventory then
                 smasBooleans.toggleOffInventory = false
             end

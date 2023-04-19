@@ -3,7 +3,7 @@ local inventory = require("customInventory")
 local littleDialogue = require("littleDialogue")
 _G.pausemenu2 = require("pausemenu2")
 
-if SaveData.disableX2char then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     pausemenu13 = require("pausemenu13/pausemenu13")
 end
 
@@ -30,7 +30,7 @@ GameData.gameFirstLoaded = false
 
 function onDraw()
     --Costume map images
-    if SaveData.currentCostume ~= "N/A" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
         pcall (function() mapimage = (Graphics.loadImageResolved("costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/player-"..playerManager.getName(player.character)..".png")) end)
         if mapimage then
             smwMap.playerSettings.images[player.character] = mapimage

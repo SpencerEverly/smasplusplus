@@ -102,7 +102,7 @@ function starget(v)
     inactivekeysonly = true
     playervuln = true
     playerwon = true
-    if SaveData.currentCostume == "MODERN2" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "MODERN2" then
         SFX.play("costumes/mario/Modern2/smb1-exit.ogg")
     else
         SFX.play(52)
@@ -117,7 +117,7 @@ function starget(v)
     newboundary = plr.sectionObj.boundary
     newboundary.right = newboundary.right + 350
     plr.sectionObj.boundary = newboundary
-    if SaveData.currentCostume == "MODERN2" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "MODERN2" then
         Routine.wait(5.2, true)
         if v.data._settings.activateFadeIn then
             smasStarSystem.fadeInActive = true

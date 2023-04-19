@@ -28,8 +28,8 @@ local function WhiteFadeInSlow()
 end
 
 function onLoad()
-    if SaveData.disableX2char then
-        SaveData.disableX2char = false
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+        SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
     end
 end
 
@@ -109,7 +109,7 @@ function onEvent(eventName)
         SaveData.resolution = "fullscreen"
         SaveData.letterbox = true
         SaveData.borderEnabled = false
-        SaveData.clockTheme = "normal"
+        SaveData.SMASPlusPlus.options.clockTheme = "normal"
         Misc.saveGame()
         Routine.run(WhiteFadeInSlow)
         Sound.playSFX("raca-chant.ogg")

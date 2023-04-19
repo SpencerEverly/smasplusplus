@@ -156,8 +156,8 @@ function smasCharacterChanger.startupChanger() --The animation that starts the m
     if pauseplus then
         pauseplus.canPause = false
     end
-    if SaveData.currentCostume ~= "N/A" then
-        smasCharacterChanger.oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.currentCostume.."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
+    if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
+        smasCharacterChanger.oldIniFile = Misc.resolveFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentCostume.."/"..playerManager.getName(player.character).."-"..player.powerup..".ini")
     else
         smasCharacterChanger.oldIniFile = SysManager.loadDefaultCharacterIni()
     end
@@ -261,7 +261,7 @@ function smasCharacterChanger.onInputUpdate()
                 end
                 changed = true
                 if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
-                    player.reservePowerup = SaveData.reserveBoxItem[1]
+                    player.reservePowerup = SaveData.SMASPlusPlus.hud.reserve[1]
                 end
                 smasCharacterChanger.menuActive = false
             end
@@ -278,7 +278,7 @@ function smasCharacterChanger.onDraw()
         SaveData.currentCharacter2 = player2.character
     end
     
-    if SaveData.currentCostume ~= "N/A" then
+    if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
         pcall(function() smasCharacterChanger.iniFile = Misc.episodePath().."costumes/"..playerManager.getName(player.character).."/"..player:getCostume().."/"..player.character.."-"..player.powerup..".ini" end)
     else
         pcall(function() smasCharacterChanger.iniFile = SysManager.loadDefaultCharacterIni() end)

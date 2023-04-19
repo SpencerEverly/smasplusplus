@@ -1221,10 +1221,10 @@ end
 
 function onethreemodeactivate()
     pauseplus.canControlMenu = false
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         Sound.playSFX("1.3Mode/dragon-coin.ogg")
         Sound.playSFX("1.3Mode/key.ogg")
-    elseif SaveData.disableX2char then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         Sound.playSFX("dragon-coin.ogg")
         Sound.playSFX("key.ogg")
     end
@@ -1233,7 +1233,7 @@ function onethreemodeactivate()
     startFadeOut()
     Misc.saveGame()
     Routine.wait(2.3,true)
-    SaveData.disableX2char = not SaveData.disableX2char
+    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = not SaveData.SMASPlusPlus.game.onePointThreeModeActivated
     Misc.unpause()
     exitFadeActive = false
     exitFadeActiveDone = true
@@ -1524,7 +1524,7 @@ function pauseSpecifics()
         pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() Routine.run(changeresolutionborder) end})]]
         
         --Character Menu
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             pauseplus.createOption("charactermenu",{text = "Change Character",closeMenu = true,description = "Switch the player's character to anything of your choice!", action =  function() smasCharacterChanger.startChanger() end})
             pauseplus.createSubmenu("costumeoptions",{headerText = "<size 1.5>Costume Specific Options</size>"})
             pauseplus.createOption("charactermenu",{text = "Costume Specific Options",goToSubmenu = "costumeoptions",description = "Change settings regarding the costume that is currently being worn."})
@@ -1532,7 +1532,7 @@ function pauseSpecifics()
                 pauseplus.createOption("charactermenu",{text = "Enable/Disable Multiplayer",closeMenu = true,description = "Toggle the status of multiplayer. This will only work on 1.3 Mode (If in Normal Mode this won't do anything).",action = function() checkingplayerstatus() end})
             end
         end
-        if SaveData.disableX2char then
+        if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             pauseplus.createOption("charactermenu",{text = "Change Character 1P (Previous)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13left() end})
             pauseplus.createOption("charactermenu",{text = "Change Character 1P (Next)",description = "Switch the 1st Player's character to anything of your choice!",action =  function() characterchange13() end})
             pauseplus.createOption("charactermenu",{text = "Change Character 2P (Previous)",description = "Switch the 2nd Player's character to anything of your choice!",action =  function() characterchange13_2pleft() end})
@@ -1543,7 +1543,7 @@ function pauseSpecifics()
         end
         
         --Costume Menu
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             pauseplus.createOption("costumeoptions",{text = "Disable Abilities",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to disable costume abilities or keep them enabled. Default option is enabled.", action =  function() Routine.run(toggleabilitiescost) end})
             pauseplus.createOption("costumeoptions",{text = "Enable Profane Voices",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable specific character profanity or not. Default option is disabled.", action =  function() Routine.run(toggleprofanecostume) end})
             pauseplus.createOption("costumeoptions",{text = "Skip Character Intros",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Whenever to enable character specific intros or not. Default option is enabled.", action =  function() Routine.run(toggleintroscostume) end})

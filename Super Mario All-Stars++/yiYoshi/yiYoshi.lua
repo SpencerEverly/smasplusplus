@@ -1139,7 +1139,7 @@ do
                 endFlutter()
             end
             
-            if (SaveData.currentCostume == "SMA3") then
+            if (SaveData.SMASPlusPlus.player[1].currentCostume == "SMA3") then
                 SFX.play(Misc.resolveSoundFile("costumes/ninjabomberman/SMA3/SFX/flutter.ogg"), 1, 1, 45)
             end
 
@@ -1702,7 +1702,7 @@ do
         p:mem(0x12,FIELD_BOOL,false)
 
         SFX.play(yoshi.tongueSettings.spitSound)
-        if (SaveData.currentCostume == "SMA3") then
+        if (SaveData.SMASPlusPlus.player[1].currentCostume == "SMA3") then
             Sound.playSFX("ninjabomberman/SMA3/SFX/spit-out.ogg")
         end
     end
@@ -1793,7 +1793,7 @@ do
             if behaviour == NPC_TONGUE_BEHAVIOUR.EDIBLE or behaviour == NPC_TONGUE_BEHAVIOUR.BIG_EGG then
                 data.tongueState = TONGUE_STATE.CREATING_EGG
                 data.tongueTimer = 0
-                if (SaveData.currentCostume == "SMA3") then
+                if (SaveData.SMASPlusPlus.player[1].currentCostume == "SMA3") then
                     Sound.playSFX("ninjabomberman/SMA3/SFX/swallow-sfx.ogg")
                 end
 

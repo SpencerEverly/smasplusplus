@@ -45,7 +45,7 @@ end
 local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
 if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if SaveData.accessibilityTwirl then
             console:println("Twirling activated! Loading twirl library...")
             twirl = require("Twirl")
@@ -80,7 +80,7 @@ local easterCrashMsg = false
 local easterCrashPrevLoad = false
 local blockIdx5000Check = false
 
-SaveData._anothercurrency = {SaveData.totalCoins}
+SaveData._anothercurrency = {SaveData.SMASPlusPlus.hud.coins}
 
 if (table.icontains(smasTables._noTransitionLevels,Level.filename())) or (GameData.rushModeActive) then
     warpTransition.musicFadeOut = false
@@ -90,7 +90,7 @@ if (table.icontains(smasTables._noTransitionLevels,Level.filename())) or (GameDa
     warpTransition.activateOnInstantWarps = false
 end
 
-if SaveData.disableX2char then
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     console:println("1.3 Mode active! Changing some settings...")
     warpTransition.musicFadeOut = false
     warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
@@ -224,7 +224,7 @@ function globalgenerals.onTick()
         mem(0x00B2C860, FIELD_FLOAT, 6.2)
     end
     if table.icontains(smasTables.__wsmbaLevels,Level.filename()) then
-        if not SaveData.disableX2char then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             littleDialogue.defaultStyleName = "smbx13"
         end
         warpTransition.musicFadeOut = false
@@ -272,7 +272,7 @@ function globalgenerals.onTick()
         end
     end
     
-    if SaveData.currentCostume == "SMB3-WALUIGI" and SaveData.currentCharacter == CHARACTER_YOSHI then
+    if SaveData.SMASPlusPlus.player[1].currentCostume == "SMB3-WALUIGI" and SaveData.currentCharacter == CHARACTER_YOSHI then
         Player.setCostume(10, nil)
     end
     
@@ -351,8 +351,8 @@ function globalgenerals.onPostNPCKill(npc, harmType)
             console:println(tostring(SaveData.starsgrabbed).." stars have been grabbed in total.")
         end
         if smasTables.allCoinNPCIDs[npc.id] and Colliders.collide(p, npc) then
-            SaveData.totalCoins = SaveData.totalCoins + 1
-            console:println(tostring(SaveData.totalCoins).." coins have been collected in total.")
+            SaveData.SMASPlusPlus.hud.coins = SaveData.SMASPlusPlus.hud.coins + 1
+            console:println(tostring(SaveData.SMASPlusPlus.hud.coins).." coins have been collected in total.")
         end
         if smasTables.allMushroomNPCIDs[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalmushrooms = SaveData.totalmushrooms + 1
@@ -378,7 +378,7 @@ function globalgenerals.onPostNPCKill(npc, harmType)
             SaveData.totaliceflowers = SaveData.totaliceflowers + 1
             console:println(tostring(SaveData.totaliceflowers).." Ice Flowers have been used in total.")
         end
-        if SaveData.disableX2char then
+        if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if smasTables.allInteractableNPCIDs[npc.id] then
                 if blockIdx5000Check then
                     if harmType == HARM_TYPE_LAVA then
@@ -397,18 +397,18 @@ local frametimer = 0
 local actualframecount
 
 function globalgenerals.onDraw()
-    if not SaveData.disableX2char and not Misc.inMarioChallenge() then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated and not Misc.inMarioChallenge() then
         if player.character <= 5 then
-            if SaveData.currentCostume == "N/A" then
+            if SaveData.SMASPlusPlus.player[1].currentCostume == "N/A" then
                 local costumes = playerManager.getCostumes(player.character)
                 local currentCostume = player:getCostume()
                 local costumeIdx = table.ifind(costumes,currentCostume)
                 player:setCostume(costumes[1])
             end
         end
-    elseif SaveData.disableX2char then
+    elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if player.character <= 5 then
-            if SaveData.currentCostume ~= "N/A" then
+            if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
                 player:setCostume(nil)
             end
         end
@@ -440,7 +440,7 @@ function globalgenerals.onDraw()
     
     for _,p in ipairs(Player.get()) do --Custom reserve storage
         if p.reservePowerup ~= 0 then
-            SaveData.reserveBoxItem[_] = p.reservePowerup
+            SaveData.SMASPlusPlus.hud.reserve[_] = p.reservePowerup
             p.reservePowerup = 0
         end
     end
@@ -450,8 +450,8 @@ function globalgenerals.onExitLevel(winType)
     SysManager.exitLevel(winType)
     if Misc.inEditor() then
         for _,p in ipairs(Player.get()) do
-            if SaveData.reserveBoxItem[_] ~= 0 then
-                GameData.tempReserve[_] = SaveData.reserveBoxItem[_]
+            if SaveData.SMASPlusPlus.hud.reserve[_] ~= 0 then
+                GameData.tempReserve[_] = SaveData.SMASPlusPlus.hud.reserve[_]
             end
         end
     end
@@ -477,7 +477,7 @@ function globalgenerals.onExit()
                 GameData.tempReserve[p.idx] = p.reservePowerup
             end
         end
-        File.writeToFile("loadscreeninfo.txt", SaveData.resolution)
+        File.writeToFile("loadscreeninfo.txt", "fullscreen")
     elseif Misc.inMarioChallenge() then
         File.writeToFile("loadscreeninfo.txt", "mariochallenge")
     end

@@ -356,14 +356,14 @@ end
 function costume.onPostPlayerHarm(p)
     if not p.hasStarman or not p.isMega then
         if SaveData.toggleCostumeAbilities then
-            if SaveData.totalCoinsClassic > 0 then
+            if SaveData.SMASPlusPlus.hud.coinsClassic > 0 then
                 hit = true
                 hitTicks = 0
                 plr.speedY = -8
                 plr.speedX = 0
                 Defines.gravity = Defines.gravity / 2
                 SFX.play(5)
-                SaveData.totalCoinsClassic = 0
+                SaveData.SMASPlusPlus.hud.coinsClassic = 0
                 Effect.spawn(11, p.x, p.y)
             else
                 p:kill()

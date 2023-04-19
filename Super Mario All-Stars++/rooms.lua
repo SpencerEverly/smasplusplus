@@ -812,9 +812,9 @@ function rooms.onTick()
         end
     end
     if lifelost == true then
-        SaveData.totalLives = SaveData.totalLives - 1
-        if SaveData.totalLives < 0 then
-            SaveData.totalLives = 5
+        SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives - 1
+        if SaveData.SMASPlusPlus.hud.lives < 0 then
+            SaveData.SMASPlusPlus.hud.lives = 5
         end
         lifelost = false
     end

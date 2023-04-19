@@ -111,8 +111,8 @@ smasSpencerFollower.spencerDistance = 35
 
 function smasSpencerFollower.onDraw()
     if table.icontains(smasTables.__smbspencerLevels,Level.filename()) and smasSpencerFollower.enabled then
-        if not SaveData.disableX2char then
-            if not (SaveData.currentCostume == "00-SPENCEREVERLY") then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+            if not (SaveData.SMASPlusPlus.player[1].currentCostume == "00-SPENCEREVERLY") then
                 animationTable = smasSpencerFollower.getAnimation()
                 smasSpencerFollower.animateFramed = math.floor((lunatime.tick() / smasSpencerFollower.frameSpeed) % #smasSpencerFollower.getAnimation()) + 1
                 

@@ -43,7 +43,7 @@ function smasExtraActions.handleSpinBounce(p)
 end
 
 function smasExtraActions.onTick()
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         for _,p in ipairs(Player.get()) do
             
             
@@ -137,7 +137,7 @@ function smasExtraActions.onTick()
 end
 
 function smasExtraActions.onInputUpdate()
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if smasExtraActions.enableFasterClimbing then
             for _,p in ipairs(Player.get()) do
                 --Faster climbing when holding run
@@ -162,7 +162,7 @@ function smasExtraActions.onInputUpdate()
 end
 
 function smasExtraActions.onPostNPCHarm(npc, harmType, culprit)
-    if not SaveData.disableX2char then
+    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if smasExtraActions.enableSpinjumpBounce then
             if harmType == HARM_TYPE_SPINJUMP then
                 if type(culprit) == "Player" then

@@ -10,10 +10,10 @@ local ac = {}
 local currencies = {}
 
 -- Money saves by default into a subtable in SaveData, so that it can be carried around between levels.
-if SaveData.totalCoins == nil then
-    SaveData.totalCoins = 0
+if SaveData.SMASPlusPlus.hud.coins == nil then
+    SaveData.SMASPlusPlus.hud.coins = 0
 end
-local sd = SaveData.totalCoins
+local sd = SaveData.SMASPlusPlus.hud.coins
 local atLeastOneHijack = false
 
 -- Registration instructions below the local functions.
@@ -44,13 +44,13 @@ end
 local function addMoneyInternal(counter, value)
     counter._value = math.max(counter._value + value, 0)
     checkLimit(counter)
-    SaveData.totalCoins = counter._value
+    SaveData.SMASPlusPlus.hud.coins = counter._value
 end
 
 local function setMoneyInternal(counter, value)
     counter._value = math.max(value, 0)
     checkLimit(counter)
-    SaveData.totalCoins = counter._value
+    SaveData.SMASPlusPlus.hud.coins = counter._value
 end
 
 local function getMoneyInternal(counter)
@@ -84,8 +84,8 @@ function ac.registerCurrency(name, hijackDefaultCounter)
         name = name,
         _id = #currencies + 1
     }
-    if SaveData.totalCoins then
-        currency._value = SaveData.totalCoins
+    if SaveData.SMASPlusPlus.hud.coins then
+        currency._value = SaveData.SMASPlusPlus.hud.coins
     end
     atLeastOneHijack = atLeastOneHijack or currency.hijackDefaultCounter
     table.insert(currencies, currency)
@@ -121,7 +121,7 @@ function ac.onTickEnd()
             mem(0x00B2C5A8, FIELD_WORD, 0)
             for k,v in ipairs(currencies) do
                 if v.hijackDefaultCounter then
-                    v:addMoney(SaveData.totalCoins)
+                    v:addMoney(SaveData.SMASPlusPlus.hud.coins)
                 end
             end
         end

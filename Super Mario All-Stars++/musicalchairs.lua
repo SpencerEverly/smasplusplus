@@ -87,7 +87,7 @@ function musicalchairs.onDraw()
         Text.printWP("YOSHICOUNTER2: "..yoshicounteroff, 100, 180, 0)
     end
     
-    if started and not SaveData.disableX2char then
+    if started and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if player.mount ~= 3 then
             musicposition = Audio.MusicGetPos()
             yoshicounter = 3

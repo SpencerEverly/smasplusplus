@@ -127,7 +127,7 @@ function costume.onPostNPCKill(npc, harmType)
             smasExtraSounds.sounds[14].sfx = Audio.SfxOpen(Misc.resolveSoundFile("costumes/toad/PacMan-Arrangement-PacMan/pellet-1.ogg"))
         end
         if player.powerup == 7 then
-            SaveData.totalCoinsClassic = SaveData.totalCoinsClassic + 1
+            SaveData.SMASPlusPlus.hud.coinsClassic = SaveData.SMASPlusPlus.hud.coinsClassic + 1
         end
     end
 end

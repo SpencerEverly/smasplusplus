@@ -20,10 +20,6 @@ local wario = {}
 
 local chars = pm.getCharacters();
 
--- Debug variables
-local debugmode = false
-if debugmode then SaveData.totalLives = 5 end
-
 local fx_groundpound = pm.registerGraphic(CHARACTER_WARIO, "poundFX.png")
 local fx_charge = {
     [-1] = pm.registerGraphic(CHARACTER_WARIO, "chargeFXL.png"),
@@ -547,11 +543,6 @@ function wario.DebugDraw()
             crawltimer = 0
         end
     end
-
-    if debugmode and Graphics.isOpenGLEnabled() then
-        DrawRect(player.x, player.y, player.x + player.width, player.y + player.height, {0,1,0})
-    end
-    --colliders.getHitbox(player):Draw(0xff00007f)
 end
 
 return wario
