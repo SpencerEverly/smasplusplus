@@ -80,7 +80,7 @@ function smasOnlinePlay.onDraw()
                         [3] = player2.powerup,
                         [4] = player2.frame,
                         [5] = player2.direction,
-                        [6] = player2.character
+                        [6] = player2.character,
                         [7] = player2.speedX,
                         [8] = player2.speedY,
                     }
