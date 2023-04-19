@@ -3,7 +3,7 @@ local keyFont = textplus.loadFont("keyboard/keyboardFont.ini")
 
 local keyboard = {}
 
-keyboard.leastPriority = -0.9
+keyboard.leastPriority = 7
 
 keyboard.activeBoard = {}
 
@@ -444,6 +444,18 @@ function keyboard.onDraw()
                 if smasBooleans.isOnMainMenu then
                     GameData.firstbootkeyboardconfig = true
                 end
+            end
+            if GameData.playerEnteringHostIP then
+                smasOnlinePlay.IPHostAddressEntered = actBoard.text
+                smasOnlinePlay.hasEnteredHostIP = true
+                smasOnlinePlay.tempBoolean = true
+                GameData.playerEnteringHostIP = false
+            end
+            if GameData.playerEnteringClientIP then
+                smasOnlinePlay.IPClientAddressEntered = actBoard.text
+                smasOnlinePlay.hasEnteredClientIP = true
+                smasOnlinePlay.tempBoolean = true
+                GameData.playerEnteringClientIP = false
             end
             keyboard.timer = 2
             keyboard.closed = false

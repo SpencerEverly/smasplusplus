@@ -7,6 +7,7 @@ if SMBX_VERSION == VER_SEE_MOD then
     local wifiaccess = require("wifiaccess")
 end
 local smasExtraSounds = require("smasExtraSounds")
+local newkeyboard = require("newkeyboard")
 
 local exitwordswip = false
 
@@ -81,20 +82,37 @@ local function ExitToBootMenuWithSound()
     Level.load("SMAS - Start.lvlx", nil, nil)
 end
 
-local function ExitMenu()
-    exitwordswip = true
+function startConnecting()
+    smasOnlinePlay.startConnecting()
 end
 
-function NotFinished()
-    littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Currently a work in progress. Please visit again some other time.<question QuitToMenuError>", pauses = false, updatesInPause = true})
+local IPHostBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCancelled = true, clear = true, setVariable = SaveData.playerName, pause = false}
+local IPClientBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCancelled = true, clear = true, setVariable = SaveData.playerName, pause = false}
+
+local function IPAddressHostEnter()
+    GameData.playerEnteringHostIP = true
+    IPHostBoard:open()
+end
+
+local function IPAddressClientEnter()
+    GameData.playerEnteringClientIP = true
+    IPClientBoard:open()
+end
+
+function enterIPAddress()
+    littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>First up, please enter your IP Address.<question IPAddressEntering>", pauses = false, updatesInPause = true})
+end
+
+function enterIPAddress2()
+    littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Now finally, we need the client's IP address. Please enter it after pressing 'Enter'.<question IPAddressEntering2>", pauses = false, updatesInPause = true})
 end
 
 function onlineBegin()
     if SMBX_VERSION == VER_SEE_MOD then
         littleDialogue.create({text = "<setPos 400 32 0.5 -1.7>Welcome to the world of online multiplayer.<page>This is the place to host and connect to other 2 player sessions, and experience the game like never before!<page>Please note that this place is under testing, and things won't be done as of yet.<page>When you see an loading icon, it is connecting to the Internet. Please don't close the game during that sequence.<page>With that being said, welcome to Online Multiplayer.<question StartConnecting>", pauses = false, updatesInPause = true})
-    elseif SMBX_VERSION <= VER_BETA4_PATCH_4_1 then
+    else
         Audio.MusicChange(0, 0)
-        littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>Whoops! It looks like you're using the original LunaLua. Please use the SEE Mod to make online multiplayer work. You can get it here: https://github.com/SpencerEverly/smbx2-seemod<question QuitToMenuError2>", pauses = false, updatesInPause = true})
+        littleDialogue.create({text = "<setPos 400 32 0.5 -1.0>Whoops! It looks like you're using the original LunaLua. Please use the SEE Mod to make online multiplayer work. You can get it here: https://github.com/SpencerEverly/smbx2-seemod<question QuitToMenuError>", pauses = false, updatesInPause = true})
     end
 end
     
@@ -105,13 +123,16 @@ function onStart()
 end
 
 function onTick()
-    littleDialogue.defaultStyleName = "smbx13" --Change the text box to the SMBX 1.3 textbox format
-    player:setFrame(50)
-    player:mem(0x140, FIELD_BOOL, 150)
-    if player:mem(0x140, FIELD_BOOL) == 0 then
-        player:mem(0x140, FIELD_BOOL, 150)
+    if smasOnlinePlay.hasEnteredHostIP and smasOnlinePlay.tempBoolean then
+        enterIPAddress2()
+        smasOnlinePlay.tempBoolean = false
     end
-    Defines.cheat_donthurtme = true --These are to prevent the player from dying
+    if smasOnlinePlay.hasEnteredClientIP and smasOnlinePlay.tempBoolean then
+        startConnecting()
+        smasOnlinePlay.tempBoolean = false
+    end
+    littleDialogue.defaultStyleName = "smbx13" --Change the text box to the SMBX 1.3 textbox format
+    player.forcedState = FORCEDSTATE_INVISIBLE
     Audio.sounds[1].muted = true
     Audio.sounds[2].muted = true
     Audio.sounds[3].muted = true
@@ -194,19 +215,22 @@ function onDraw()
     end
 end
 
-function onKeyboardPress(k)
-    if k == VK_NEXT then
-        Routine.run(ExitToBootMenuWithSound)
+function onKeyboardPressDirect(k, repeated, str)
+    if canEnterIPAddress then
+        if k and str ~= nil then
+            
+        end
     end
 end
 
 function onExit()
-    Defines.cheat_donthurtme = false
-    Defines.cheat_shadowmario = false
+    
 end
 
-littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitMenu) end})
+littleDialogue.registerAnswer("IPAddressEntering",{text = "Enter",chosenFunction = function() IPAddressHostEnter() end})
 
-littleDialogue.registerAnswer("QuitToMenuError2",{text = "Exit",chosenFunction = function() Routine.run(ExitToBootMenu) end})
+littleDialogue.registerAnswer("IPAddressEntering2",{text = "Enter",chosenFunction = function() IPAddressClientEnter() end})
 
-littleDialogue.registerAnswer("StartConnecting",{text = "Let's get started!",chosenFunction = function() Routine.run(NotFinished) end})
+littleDialogue.registerAnswer("QuitToMenuError",{text = "Exit",chosenFunction = function() Routine.run(ExitToBootMenu) end})
+
+littleDialogue.registerAnswer("StartConnecting",{text = "Let's get started!",chosenFunction = function() enterIPAddress() end})
