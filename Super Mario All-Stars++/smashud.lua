@@ -5,6 +5,9 @@
 ----------------------v1.1-----------------------
 -------Edited for SMAS++ by Spencer Everly-------
 local smasHud = {}
+
+if SaveData.SMASPlusPlus == nil then return end
+
 local pm
 local starcoin
 local timer
