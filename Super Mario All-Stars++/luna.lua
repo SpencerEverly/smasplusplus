@@ -253,6 +253,46 @@ for i = 1,8 do
     SaveData.SMASPlusPlus.player[i].currentAlteration = SaveData.SMASPlusPlus.player[i].currentAlteration or "N/A"
 end
 
+--**Player-related data**
+--**Themes, resolutions**
+SaveData.resolution = SaveData.resolution or "fullscreen"
+if SaveData.SMASPlusPlus.options.clockTheme == nil then --Default clock theme is "normal"
+    SaveData.SMASPlusPlus.options.clockTheme = "normal"
+end
+
+--**Hud stuff**
+if SaveData.SMASPlusPlus.hud.coins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
+    SaveData.SMASPlusPlus.hud.coins = 0
+end
+if SaveData.SMASPlusPlus.hud.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
+    SaveData.SMASPlusPlus.hud.deathCount = 0
+end
+if SaveData.SMASPlusPlus.hud.lives == nil then --The total lives used the for the episode.
+    SaveData.SMASPlusPlus.hud.lives = 5
+end
+if SaveData.SMASPlusPlus.hud.coinsClassic == nil then --This will display a classic coin count for the episode
+    SaveData.SMASPlusPlus.hud.coinsClassic = 0
+end
+if SaveData.SMASPlusPlus.hud.score == nil then --This will add a score counter which goes up to a trillion, cause why not
+    SaveData.SMASPlusPlus.hud.score = 0
+end
+if SaveData.SMASPlusPlus.hud.reserve == nil then
+    SaveData.SMASPlusPlus.hud.reserve = {}
+end
+for i = 1,200 do
+    if SaveData.SMASPlusPlus.hud.reserve[i] == nil then
+        SaveData.SMASPlusPlus.hud.reserve[i] = 0
+    end
+end
+if SaveData.SMASPlusPlus.misc.totalCheatsExecuted == nil then --A tally number of cheats you have executed since the first cheat. This'll be an SEE Mod-only feature for now.
+    SaveData.SMASPlusPlus.misc.totalCheatsExecuted = 0
+end
+
+--**1.3 Mode default setting**
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
+    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
+end
+
 --Bring legacy SaveData values over to the new ones
 if SaveData.currentCostume ~= nil then  
     SaveData.SMASPlusPlus.player[1].currentCostume = SaveData.currentCostume
@@ -303,45 +343,7 @@ if SaveData.totalcoins ~= nil then --If using the old SaveData function, use the
     SaveData.totalcoins = nil
 end
 
---**Player-related data**
---**Themes, resolutions**
-SaveData.resolution = SaveData.resolution or "fullscreen"
-if SaveData.SMASPlusPlus.options.clockTheme == nil then --Default clock theme is "normal"
-    SaveData.SMASPlusPlus.options.clockTheme = "normal"
-end
 
---**Hud stuff**
-if SaveData.SMASPlusPlus.hud.coins == nil then --The total coin count, used outside of the classic coin count which counts all coins overall
-    SaveData.SMASPlusPlus.hud.coins = 0
-end
-if SaveData.SMASPlusPlus.hud.deathCount == nil then --Death count! For outside 1.3 mode, and inside it
-    SaveData.SMASPlusPlus.hud.deathCount = 0
-end
-if SaveData.SMASPlusPlus.hud.lives == nil then --The total lives used the for the episode.
-    SaveData.SMASPlusPlus.hud.lives = 5
-end
-if SaveData.SMASPlusPlus.hud.coinsClassic == nil then --This will display a classic coin count for the episode
-    SaveData.SMASPlusPlus.hud.coinsClassic = 0
-end
-if SaveData.SMASPlusPlus.hud.score == nil then --This will add a score counter which goes up to a trillion, cause why not
-    SaveData.SMASPlusPlus.hud.score = 0
-end
-if SaveData.SMASPlusPlus.hud.reserve == nil then
-    SaveData.SMASPlusPlus.hud.reserve = {}
-end
-for i = 1,200 do
-    if SaveData.SMASPlusPlus.hud.reserve[i] == nil then
-        SaveData.SMASPlusPlus.hud.reserve[i] = 0
-    end
-end
-if SaveData.SMASPlusPlus.misc.totalCheatsExecuted == nil then --A tally number of cheats you have executed since the first cheat. This'll be an SEE Mod-only feature for now.
-    SaveData.SMASPlusPlus.misc.totalCheatsExecuted = 0
-end
-
---**1.3 Mode default setting**
-if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
-    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
-end
 
 --**This is for the upgrade save thing**
 if SaveData.firstBootMapPathFixed == nil then
