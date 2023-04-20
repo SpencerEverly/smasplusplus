@@ -60,183 +60,6 @@ if mem(0x00B251E0, FIELD_WORD) == 0 then
     end
 end
 
---For SEE Mod users, where they have a definite version of LunaLua.
-if SMBX_VERSION == VER_SEE_MOD then
-    console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
-    _G.LunaDLL = ffi.load("LunaDll.dll")
-end
-if Misc.setWindowTitle ~= nil then
-    console:println("Window title set.")
-    Misc.setWindowTitle("Super Mario All-Stars++")
-end
-if Misc.setWindowIcon ~= nil then
-    console:println("Window icon set.")
-    Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
-end
-
---Register some custom global event handlers...
-console:println("Registering global event handlers...")
-Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostPlaySFX"] = true
-Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
-Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
-Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
-Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
-if SMBX_VERSION == VER_SEE_MOD then
-    Misc.LUNALUA_EVENTS_TBL["onCheatDeactivate"] = true
-end
-Misc.LUNALUA_EVENTS_TBL["onWarpToOtherLevel"] = true
-Misc.LUNALUA_EVENTS_TBL["onWarpBegin"] = true
-
---Now, before we get started, we require the most important libraries on the top.
-console:println("Loading important libraries...")
-
---SMAS specific functions need to be required first:
-_G.smasGlobals = require("smasGlobals")
-_G.smasMemoryAddresses = require("smasMemoryAddresses")
-_G.smasFunctions = require("smasFunctions")
-_G.smasKeySystem = require("smasKeySystem")
-_G.smasAudioVolumeSystem = require("smasAudioVolumeSystem")
-_G.smasAnimationSystem = require("smasAnimationSystem")
-_G.smasVerboseMode = require("smasVerboseMode")
-_G.smasBooleans = require("smasBooleans")
-_G.smasTables = require("smasTables")
-_G.smasCheats = require("smasCheats")
-_G.smasStarSystem = require("smasStarSystem")
-_G.smasNoTurnBack = require("smasNoTurnBack")
-_G.smasSpencerFollower = require("smasSpencerFollower")
-_G.smasCharacterChanger = require("smasCharacterChanger")
-_G.smasFireballs = require("smasFireballs")
-_G.smasPWing = require("smasPWing")
-_G.smasExtraSounds = require("smasExtraSounds")
-
---Then we do everything else.
-GameData.levelMusicTemporary = {}
-GameData.levelMusic = {}
-_G.smwMap = require("smwMap")
-_G.classicEvents = require("classiceventsmod")
-_G.darkness = require("darknessa")
-_G.events = require("editorevents_mod")
-_G.extraNPCProperties = require("extraNPCProperties")
-_G.cursor = require("cursor")
-_G.Timer = require("timer-mod")
-_G.lazyprintSMAS = require("lazyprintSMAS")
-_G.autoscrolla = require("autoscrolla")
-
---Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
-if Misc.inMarioChallenge() then
-    console:println("Mario Challenge detected! Loading game in minimal mode...")
-    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
-end
-
---This will add multiple player arguments.
-for i = 1,200 do
-    _G["player".. i] = Player(i)
-end
-
---Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
-if (VER_BETA4_PATCH_4_1 ~= nil) and (SMBX_VERSION <= VER_BETA4_PATCH_4_1 or SMBX_VERSION == VER_SEE_MOD) then
-    function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport. This will be removed after a few months when the next SMBX2 patch releases (The next patch will fix this), to make sure people upgrade on time.
-        -- If using bottom center aligned coordinates, handle that sensibly
-        if bottomCenterAligned then
-            x = x - (self.width * 0.5)
-            y = y - self.height
-        end
-
-        -- Move the player and update section, including music
-        local oldSection = self.section
-        local newSection = Section.getIdxFromCoords(x, y)
-        self.x, self.y = x, y
-        if (newSection ~= oldSection) then
-            self.section = newSection
-            playMusic(newSection)
-        end
-    end
-end
-
-function plObjectErrorWorkaround() --To prevent the plObject a nil value error, this needs to be redone here
-    local players = Player.get()
-    for plIndex, plData in ipairs(playerData) do
-        local plObject = players[plIndex]
-        for _,keymapEnumValue in ipairs(playerKeymapKeys) do
-            local keymapPropertyName = playerKeymapProperties[keymapEnumValue]
-            checkKeyboardEvent(plObject, plIndex, plData, keymapPropertyName, keymapEnumValue)
-        end
-        if(plObject:mem(0x60, FIELD_WORD) == -1 and plData.playerJumping == false)then
-            EventManager.callEventInternal("onJump", {plIndex})
-        elseif(plObject:mem(0x60, FIELD_WORD) == 0 and plData.playerJumping == true)then
-            EventManager.callEventInternal("onJumpEnd", {plIndex})
-        end
-        
-        local section = plObject.section
-        if(section ~= plData.currentSection)then
-            local evLoadSecitionName = "onLoadSection"
-            EventManager.callEventInternal(evLoadSecitionName, {plIndex})
-            EventManager.callEventInternal(evLoadSecitionName .. section, {plIndex})
-        end
-        EventManager.callEventInternal("onLoopSection" .. section, {plIndex})
-        
-        -- Copy new data here to plData
-        for _,keymapEnumValue in ipairs(playerKeymapKeys) do
-            local keymapPropertyName = playerKeymapProperties[keymapEnumValue]
-            plData[keymapPropertyName] = plObject[keymapPropertyName]
-        end
-        
-        plData.playerJumping = plObject:mem(0x60, FIELD_WORD) == -1
-        
-        plData.currentSection = section
-    end
-end
-
-function classicEvents.doEvents() --To prevent the plObject a nil value error, this needs to be moved to a pcall function
-    pcall (function() plObjectErrorWorkaround() end)
-end
-
---Now that everything has been loaded, start loading the medium important stuff
-
-console:println("Loading medium important libraries...")
-
-_G.transplate = require("transplate")
-_G.globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
-_G.repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
-_G.rng = require("base/rng") --Load up rng for etc. things
-if SaveData.speedrunMode then
-    console:println("Speedrun mode enabled! Loading speedrun libraries...")
-    speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
-    inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
-end
-
-local npc_APIs = {
-    "waternpcplusExt",
-};
-for _,v in ipairs(npc_APIs) do
-    require("extra-settings/"..v);
-end
-
-local loadactivate = true
-console:println("Loading Steve and SMW2 Yoshi characters...")
-local steve = require("steve")
-local yoshi = require("yiYoshi/yiYoshi")
-local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
---These will need to be overwritten over the original libraries, because we're fixing graphics/bugs from these characters.
-console:println("Overriding original character libraries...")
-playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("characters/megamann"))
-playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("characters/snakey"))
-playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("characters/bowserr"))
-playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("characters/rosalinaa"))
-playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("characters/samuss"))
-playerManager.overrideCharacterLib(CHARACTER_WARIO,require("characters/warioo"))
-playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("characters/zeldaa"))
-playerManager.overrideCharacterLib(CHARACTER_KLONOA,require("characters/klonoaa"))
-playerManager.overrideCharacterLib(CHARACTER_UNCLEBROADSWORD,require("characters/unclebroadswordd"))
-playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
-Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
-Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
-Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
-
 --First time SaveData settings, for resolutions and other settings
 SaveData.SMASPlusPlus = SaveData.SMASPlusPlus or {}
 SaveData.SMASPlusPlus.options = SaveData.SMASPlusPlus.options or {}
@@ -423,6 +246,183 @@ end
 if SaveData.enableLives == nil then
     SaveData.enableLives = true
 end
+
+--For SEE Mod users, where they have a definite version of LunaLua.
+if SMBX_VERSION == VER_SEE_MOD then
+    console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
+    _G.LunaDLL = ffi.load("LunaDll.dll")
+end
+if Misc.setWindowTitle ~= nil then
+    console:println("Window title set.")
+    Misc.setWindowTitle("Super Mario All-Stars++")
+end
+if Misc.setWindowIcon ~= nil then
+    console:println("Window icon set.")
+    Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
+end
+
+--Register some custom global event handlers...
+console:println("Registering global event handlers...")
+Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostPlaySFX"] = true
+Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
+Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
+Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
+Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
+if SMBX_VERSION == VER_SEE_MOD then
+    Misc.LUNALUA_EVENTS_TBL["onCheatDeactivate"] = true
+end
+Misc.LUNALUA_EVENTS_TBL["onWarpToOtherLevel"] = true
+Misc.LUNALUA_EVENTS_TBL["onWarpBegin"] = true
+
+--Now, before we get started, we require the most important libraries on the top.
+console:println("Loading important libraries...")
+
+--SMAS specific functions need to be required first:
+_G.smasGlobals = require("smasGlobals")
+_G.smasMemoryAddresses = require("smasMemoryAddresses")
+_G.smasFunctions = require("smasFunctions")
+_G.smasKeySystem = require("smasKeySystem")
+_G.smasAudioVolumeSystem = require("smasAudioVolumeSystem")
+_G.smasAnimationSystem = require("smasAnimationSystem")
+_G.smasVerboseMode = require("smasVerboseMode")
+_G.smasBooleans = require("smasBooleans")
+_G.smasTables = require("smasTables")
+_G.smasCheats = require("smasCheats")
+_G.smasStarSystem = require("smasStarSystem")
+_G.smasNoTurnBack = require("smasNoTurnBack")
+_G.smasSpencerFollower = require("smasSpencerFollower")
+_G.smasCharacterChanger = require("smasCharacterChanger")
+_G.smasFireballs = require("smasFireballs")
+_G.smasPWing = require("smasPWing")
+_G.smasExtraSounds = require("smasExtraSounds")
+
+--Then we do everything else.
+GameData.levelMusicTemporary = {}
+GameData.levelMusic = {}
+_G.smwMap = require("smwMap")
+_G.classicEvents = require("classiceventsmod")
+_G.darkness = require("darknessa")
+_G.events = require("editorevents_mod")
+_G.extraNPCProperties = require("extraNPCProperties")
+_G.cursor = require("cursor")
+_G.Timer = require("timer-mod")
+_G.lazyprintSMAS = require("lazyprintSMAS")
+_G.autoscrolla = require("autoscrolla")
+
+--Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
+if Misc.inMarioChallenge() then
+    console:println("Mario Challenge detected! Loading game in minimal mode...")
+    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
+end
+
+--This will add multiple player arguments.
+for i = 1,200 do
+    _G["player".. i] = Player(i)
+end
+
+--Then we fix up some functions that the X2 team didn't fix yet (If they released a patch and fixed a certain thing, the code will be removed from here).
+if (VER_BETA4_PATCH_4_1 ~= nil) and (SMBX_VERSION <= VER_BETA4_PATCH_4_1 or SMBX_VERSION == VER_SEE_MOD) then
+    function Player:teleport(x, y, bottomCenterAligned) --This fixes 2nd player teleporting, when using player/player2:teleport. This will be removed after a few months when the next SMBX2 patch releases (The next patch will fix this), to make sure people upgrade on time.
+        -- If using bottom center aligned coordinates, handle that sensibly
+        if bottomCenterAligned then
+            x = x - (self.width * 0.5)
+            y = y - self.height
+        end
+
+        -- Move the player and update section, including music
+        local oldSection = self.section
+        local newSection = Section.getIdxFromCoords(x, y)
+        self.x, self.y = x, y
+        if (newSection ~= oldSection) then
+            self.section = newSection
+            playMusic(newSection)
+        end
+    end
+end
+
+function plObjectErrorWorkaround() --To prevent the plObject a nil value error, this needs to be redone here
+    local players = Player.get()
+    for plIndex, plData in ipairs(playerData) do
+        local plObject = players[plIndex]
+        for _,keymapEnumValue in ipairs(playerKeymapKeys) do
+            local keymapPropertyName = playerKeymapProperties[keymapEnumValue]
+            checkKeyboardEvent(plObject, plIndex, plData, keymapPropertyName, keymapEnumValue)
+        end
+        if(plObject:mem(0x60, FIELD_WORD) == -1 and plData.playerJumping == false)then
+            EventManager.callEventInternal("onJump", {plIndex})
+        elseif(plObject:mem(0x60, FIELD_WORD) == 0 and plData.playerJumping == true)then
+            EventManager.callEventInternal("onJumpEnd", {plIndex})
+        end
+        
+        local section = plObject.section
+        if(section ~= plData.currentSection)then
+            local evLoadSecitionName = "onLoadSection"
+            EventManager.callEventInternal(evLoadSecitionName, {plIndex})
+            EventManager.callEventInternal(evLoadSecitionName .. section, {plIndex})
+        end
+        EventManager.callEventInternal("onLoopSection" .. section, {plIndex})
+        
+        -- Copy new data here to plData
+        for _,keymapEnumValue in ipairs(playerKeymapKeys) do
+            local keymapPropertyName = playerKeymapProperties[keymapEnumValue]
+            plData[keymapPropertyName] = plObject[keymapPropertyName]
+        end
+        
+        plData.playerJumping = plObject:mem(0x60, FIELD_WORD) == -1
+        
+        plData.currentSection = section
+    end
+end
+
+function classicEvents.doEvents() --To prevent the plObject a nil value error, this needs to be moved to a pcall function
+    pcall (function() plObjectErrorWorkaround() end)
+end
+
+--Now that everything has been loaded, start loading the medium important stuff
+
+console:println("Loading medium important libraries...")
+
+_G.transplate = require("transplate")
+_G.globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
+_G.repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
+_G.rng = require("base/rng") --Load up rng for etc. things
+if SaveData.speedrunMode then
+    console:println("Speedrun mode enabled! Loading speedrun libraries...")
+    speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
+    inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
+end
+
+local npc_APIs = {
+    "waternpcplusExt",
+};
+for _,v in ipairs(npc_APIs) do
+    require("extra-settings/"..v);
+end
+
+local loadactivate = true
+console:println("Loading Steve and SMW2 Yoshi characters...")
+local steve = require("steve")
+local yoshi = require("yiYoshi/yiYoshi")
+local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
+--These will need to be overwritten over the original libraries, because we're fixing graphics/bugs from these characters.
+console:println("Overriding original character libraries...")
+playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("characters/megamann"))
+playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("characters/snakey"))
+playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("characters/bowserr"))
+playerManager.overrideCharacterLib(CHARACTER_ROSALINA,require("characters/rosalinaa"))
+playerManager.overrideCharacterLib(CHARACTER_SAMUS,require("characters/samuss"))
+playerManager.overrideCharacterLib(CHARACTER_WARIO,require("characters/warioo"))
+playerManager.overrideCharacterLib(CHARACTER_ZELDA,require("characters/zeldaa"))
+playerManager.overrideCharacterLib(CHARACTER_KLONOA,require("characters/klonoaa"))
+playerManager.overrideCharacterLib(CHARACTER_UNCLEBROADSWORD,require("characters/unclebroadswordd"))
+playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
+Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
+Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
+Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
 
 _G.smasHud = require("smasHud")
 
