@@ -131,35 +131,29 @@ function smasEnemySystem.onTick()
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
                 for j,l in ipairs(Block.get()) do
-                    for _,p in ipairs(Player.get()) do
-                        if Collisionz.IsPlayerCloseToShell(p, v, 16) then
-                            if Collisionz.CheckCollisionBlock(v, l) and Collisionz.CanMoveShell(p, v) and v:mem(0x136, FIELD_BOOL) then
-                                v:mem(0x136, FIELD_BOOL, false)
-                                v.speedX = 0
-                            end
+                    if Collisionz.IsPlayerCloseToShell(player, v, 16) and Collisionz.CheckCollisionBlock(v, l) and Collisionz.CanMoveShell(player, v) and v:mem(0x136, FIELD_BOOL) then
+                        v:mem(0x136, FIELD_BOOL, false)
+                        v.speedX = 0
+                    end
+                    if Collisionz.CheckCollisionBlock(player, v) and Collisionz.FindCollision(player, v) == Collisionz.CollisionSpot.COLLISION_TOP then
+                        player.speedY = -2
+                        if player.keys.jump then
+                            player:mem(0x11C, FIELD_WORD, Defines.jumpheight_bounce)
                         end
-                        if Collisionz.CheckCollisionBlock(p, v) and Collisionz.FindCollision(p, v) == Collisionz.CollisionSpot.COLLISION_TOP then
-                            p.speedY = -2
-                            if p.keys.jump then
-                                p:mem(0x11C, FIELD_WORD, Defines.jumpheight_bounce)
+                        if not Playur.isOnGround(player) then
+                            smasEnemySystem.shellTipPointIndicator = smasEnemySystem.shellTipPointIndicator + 1
+                            if smasEnemySystem.shellTipPointIndicator >= SCORE_2UP then
+                                smasEnemySystem.shellTipPointIndicator = SCORE_1UP
                             end
-                            if not Playur.isOnGround(p) then
-                                smasEnemySystem.shellTipPointIndicator = smasEnemySystem.shellTipPointIndicator + 1
-                                if smasEnemySystem.shellTipPointIndicator >= SCORE_2UP then
-                                    smasEnemySystem.shellTipPointIndicator = SCORE_1UP
-                                end
-                            else
-                                smasEnemySystem.shellTipPointIndicator = 1
-                            end
-                            Effectx.spawnScoreEffect(smasEnemySystem.shellTipPointIndicator, v.x, v.y)
+                        else
+                            smasEnemySystem.shellTipPointIndicator = 1
                         end
+                        Effectx.spawnScoreEffect(smasEnemySystem.shellTipPointIndicator, v.x, v.y)
                     end
                 end
             end
-            for _,p in ipairs(Player.get()) do
-                if Playur.isOnGround(p) then
-                    smasEnemySystem.shellTipPointIndicator = 1
-                end
+            if Playur.isOnGround(player) then
+                smasEnemySystem.shellTipPointIndicator = 1
             end
         end
     end
