@@ -6,6 +6,23 @@
 -------Edited for SMAS++ by Spencer Everly-------
 local smasHud = {}
 
+if SaveData.SMASPlusPlus == nil then
+    SaveData.SMASPlusPlus = {}
+end
+SaveData.SMASPlusPlus.options = SaveData.SMASPlusPlus.options or {}
+SaveData.SMASPlusPlus.accessibility = SaveData.SMASPlusPlus.accessibility or {}
+SaveData.SMASPlusPlus.hud = SaveData.SMASPlusPlus.hud or {}
+SaveData.SMASPlusPlus.keys = SaveData.SMASPlusPlus.keys or {}
+SaveData.SMASPlusPlus.audio = SaveData.SMASPlusPlus.audio or {}
+SaveData.SMASPlusPlus.game = SaveData.SMASPlusPlus.game or {}
+SaveData.SMASPlusPlus.player = SaveData.SMASPlusPlus.player or {}
+SaveData.SMASPlusPlus.misc = SaveData.SMASPlusPlus.misc or {}
+
+--**1.3 Mode default setting**
+if SaveData.SMASPlusPlus.game.onePointThreeModeActivated == nil then --This will make sure 1.3 Mode isn't enabled on first boot, which will also prevent errors
+    SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
+end
+
 local pm
 local starcoin
 local timer
