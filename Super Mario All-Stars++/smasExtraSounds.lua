@@ -1613,12 +1613,12 @@ function smasExtraSounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for cust
                 
                 
                 --**COIN COLLECTING**
-                if coins[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
+                if smasTables.allCoinNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
                     if smasExtraSounds.enableCoinCollecting then
                         smasExtraSounds.playSFX(14)
                     end
                 end
-                if otherCoinSoundsMap[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
+                if smasTables.allRupeeNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
                     if smasExtraSounds.enableRupeeCollecting then
                         smasExtraSounds.playSFX(81)
                     end

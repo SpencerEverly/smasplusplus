@@ -11,7 +11,9 @@ local heldNPC
 smasEnemySystem.enableWallNPCFix = false --Enable this to prevent killing NPCs when held and let go right smack by a wall.
 smasEnemySystem.enableTanookiThwompAndDiscKilling = true --Enable this to kill Thwomps and/or Roto-Discs while active as a statue.
 smasEnemySystem.enableShellCoinGrabbing = true --Enable to let shells collect coins, dragon coins, cherries, etc.
-smasEnemySystem.enableTurtleTipping = false --Enable this to activate the famous Infinite 1UP trick, from SMB1 and onwards
+smasEnemySystem.enableTurtleTipping = true --Enable this to activate the famous Infinite 1UP trick, from SMB1 and onwards
+
+smasEnemySystem.shellTipPointIndicator = 1
 
 function smasEnemySystem.onTick()
     
@@ -130,16 +132,33 @@ function smasEnemySystem.onTick()
             for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
                 for j,l in ipairs(Block.get()) do
                     for _,p in ipairs(Player.get()) do
-                        if Collisionz.CheckCollisionBlock(v, l) and (Collisionz.FindCollision(v, l) == Collisionz.CollisionSpot.COLLISION_RIGHT or Collisionz.FindCollision(v, l) == Collisionz.CollisionSpot.COLLISION_LEFT) then
-                            if Collisionz.ShouldTurnAround(v, p, v.direction) and v:mem(0x136, FIELD_BOOL) then
+                        if p.x <= (v.x + 16) and (p.x + p.width) >= (v.x + v.width - 16) then
+                            if Collisionz.CheckCollisionBlock(v, l) and Collisionz.CanMoveShell(p, v) and v:mem(0x136, FIELD_BOOL) then
                                 v:mem(0x136, FIELD_BOOL, false)
                                 v.speedX = 0
                             end
                         end
-                        if Collisionz.FindCollision(p, v) == Collisionz.CollisionSpot.COLLISION_BOTTOM then
-                           p.speedY = -2
+                        if Collisionz.CheckCollisionBlock(p, v) and Collisionz.FindCollision(p, v) == Collisionz.CollisionSpot.COLLISION_TOP then
+                            p.speedY = -2
+                            if p.keys.jump then
+                                p:mem(0x11C, FIELD_WORD, Defines.jumpheight_bounce)
+                            end
+                            if not Playur.isOnGround(p) then
+                                smasEnemySystem.shellTipPointIndicator = smasEnemySystem.shellTipPointIndicator + 1
+                                if smasEnemySystem.shellTipPointIndicator >= SCORE_2UP then
+                                    smasEnemySystem.shellTipPointIndicator = SCORE_1UP
+                                end
+                            else
+                                smasEnemySystem.shellTipPointIndicator = 1
+                            end
+                            Effectx.spawnScoreEffect(smasEnemySystem.shellTipPointIndicator, v.x, v.y)
                         end
                     end
+                end
+            end
+            for _,p in ipairs(Player.get()) do
+                if Playur.isOnGround(p) then
+                    smasEnemySystem.shellTipPointIndicator = 1
                 end
             end
         end

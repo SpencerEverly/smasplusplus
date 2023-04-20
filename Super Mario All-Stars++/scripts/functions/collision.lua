@@ -26,8 +26,7 @@ function Collisionz.CheckCollisionBlock(Loc1, Loc2) --Checks a collision between
     return (Loc1.y + Loc1.height - 0.2 >= Loc2.y) and
            (Loc1.y <= Loc2.y + Loc2.height + 0.2) and
            (Loc1.x <= Loc2.x + Loc2.width + 0.2) and
-           (Loc1.x + Loc1.width - 0.2 >= Loc2.x) and
-           Misc.dialog("Collided")
+           (Loc1.x + Loc1.width - 0.2 >= Loc2.x)
 end
 
 function Collisionz.CheckCollisionNoEntity(x1, y1, width1, height1, x2, y2, width2, height2) --Checks a collision between two things
@@ -392,13 +391,13 @@ end
 
 --Determines if a shell can move or not
 function Collisionz.CanMoveShell(Loc1, Loc2)
-    local tempCanMoveShell = false
+    local tempCanMoveShell = true
 
-    if (Loc1.x <= Loc2.x + Loc2.width + 32) then
-        if (Loc1.x + Loc1.width >= Loc2.x - 32) then
+    if (Loc1.x >= Loc2.x + Loc2.width + 8) then
+        if (Loc1.x + Loc1.width <= Loc2.x - 8) then
             if (Loc1.y <= Loc2.y + Loc2.height + 300) then
                 if (Loc1.y + Loc1.height >= Loc2.y - 300) then
-                    tempCanMoveShell = true
+                    tempCanMoveShell = false
                 end
             end
         end
