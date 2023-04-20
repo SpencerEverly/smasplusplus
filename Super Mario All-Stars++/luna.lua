@@ -105,7 +105,6 @@ _G.smasVerboseMode = require("smasVerboseMode")
 _G.smasBooleans = require("smasBooleans")
 _G.smasTables = require("smasTables")
 _G.smasCheats = require("smasCheats")
-_G.smasHud = require("smasHud")
 _G.smasStarSystem = require("smasStarSystem")
 _G.smasNoTurnBack = require("smasNoTurnBack")
 _G.smasSpencerFollower = require("smasSpencerFollower")
@@ -422,6 +421,8 @@ end
 if SaveData.enableLives == nil then
     SaveData.enableLives = true
 end
+
+_G.smasHud = require("smasHud")
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 

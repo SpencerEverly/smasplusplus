@@ -11,6 +11,7 @@ local heldNPC
 smasEnemySystem.enableWallNPCFix = false --Enable this to prevent killing NPCs when held and let go right smack by a wall.
 smasEnemySystem.enableTanookiThwompAndDiscKilling = true --Enable this to kill Thwomps and/or Roto-Discs while active as a statue.
 smasEnemySystem.enableShellCoinGrabbing = true --Enable to let shells collect coins, dragon coins, cherries, etc.
+smasEnemySystem.enableTurtleTipping = false --Enable this to activate the famous Infinite 1UP trick, from SMB1 and onwards
 
 function smasEnemySystem.onTick()
     
@@ -68,7 +69,7 @@ function smasEnemySystem.onTick()
     if smasEnemySystem.enableShellCoinGrabbing then
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             --Coins, first thing
-            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+            for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
                 for j,l in ipairs(NPC.get(smasTables.allCoinNPCIDs)) do --Coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the coin
@@ -82,7 +83,7 @@ function smasEnemySystem.onTick()
                 end
             end
             --Now we're gonna get rupees
-            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+            for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
                 for j,l in ipairs(NPC.get(smasTables.allRupeeNPCIDs)) do --Rupees
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the rupee
@@ -96,7 +97,7 @@ function smasEnemySystem.onTick()
                 end
             end
             --And now, Dragon Coins
-            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+            for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
                 for j,l in ipairs(NPC.get(smasTables.allDragonCoinNPCIDs)) do --Dragon coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         l.killFlag = HARM_TYPE_VANISH --Kills the dragon coin
@@ -112,10 +113,32 @@ function smasEnemySystem.onTick()
                 end
             end
             --And finally, star coins
-            for k,v in ipairs(NPC.get(smasTables.allShellNPCIDs)) do --Shells
+            for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
                 for j,l in ipairs(NPC.get(smasTables.allStarCoinNPCIDs)) do --Star coins
                     if Colliders.collide(v, l) and v:mem(0x136, FIELD_BOOL) then
                         starcoin.collect(l)
+                    end
+                end
+            end
+        end
+    end
+    
+    
+    
+    if smasEnemySystem.enableTurtleTipping then
+        if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+            for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
+                for j,l in ipairs(Block.get()) do
+                    for _,p in ipairs(Player.get()) do
+                        if Collisionz.CheckCollisionBlock(v, l) and (Collisionz.FindCollision(v, l) == Collisionz.CollisionSpot.COLLISION_RIGHT or Collisionz.FindCollision(v, l) == Collisionz.CollisionSpot.COLLISION_LEFT) then
+                            if Collisionz.ShouldTurnAround(v, p, v.direction) and v:mem(0x136, FIELD_BOOL) then
+                                v:mem(0x136, FIELD_BOOL, false)
+                                v.speedX = 0
+                            end
+                        end
+                        if Collisionz.FindCollision(p, v) == Collisionz.CollisionSpot.COLLISION_BOTTOM then
+                           p.speedY = -2
+                        end
                     end
                 end
             end

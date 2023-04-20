@@ -853,8 +853,8 @@ smasTables.__smb1Dash1LevelsNumbered = {
 smasTables.allShakableBlockIDs = {4,625,55,60,90,159,169,170,173,176,179,188,226,281,282,283,622,623,624,625}
 
 smasTables.allGoombaNPCIDs = {1,2,27,71,89,242,243,379,392,393,466,467}
-smasTables.allKoopaNPCIDs = {4,5,6,7,55,72,73,76,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,161,172,173,174,175,176,177,194,578,920,921}
-smasTables.allShellNPCIDs = {5,7,24,73,113,114,115,116,172,174,194,195}
+smasTables.allKoopaNPCIDs = {4,6,55,72,76,110,111,112,117,118,119,120,121,122,123,124,161,173,176,177,920,921}
+smasTables.allKoopaShellNPCIDs = {5,7,73,113,114,115,116,172,174,175,194,578}
 
 smasTables.allStarmanNPCIDs = {293,559,994,996}
 smasTables.allCollectableStarNPCIDs = {97,196,1000}
@@ -874,7 +874,29 @@ smasTables.allRupeeNPCIDs = {251,252,253}
 smasTables.allDragonCoinNPCIDs = {274}
 smasTables.allStarCoinNPCIDs = {310}
 
+smasTables.allShakableBlockIDsTableMapped = table.map{4,625,55,60,90,159,169,170,173,176,179,188,226,281,282,283,622,623,624,625}
+
+smasTables.allGoombaNPCIDsTableMapped = table.map{1,2,27,71,89,242,243,379,392,393,466,467}
+smasTables.allKoopaNPCIDsTableMapped = table.map{4,6,55,72,76,110,111,112,117,118,119,120,121,122,123,124,161,173,176,177,920,921}
+smasTables.allKoopaShellNPCIDsTableMapped = table.map{5,7,73,113,114,115,116,172,174,175,194,578}
+
+smasTables.allStarmanNPCIDsTableMapped = table.map{293,559,994,996}
+smasTables.allCollectableStarNPCIDsTableMapped = table.map{97,196,1000}
 smasTables.allCoinNPCIDsTableMapped = table.map{10,33,88,103,138,152,251,252,253,258,411,528} --378 is a dash coin. Perhaps we should make it compatible with it soon...?
+
+smasTables.allMushroomNPCIDsTableMapped = table.map{9,184,185,249}
+smasTables.allFireFlowerNPCIDsTableMapped = table.map{14,182,183}
+smasTables.allSuperLeafNPCIDsTableMapped = table.map{34}
+smasTables.allTanookiSuitNPCIDsTableMapped = table.map{169}
+smasTables.allHammerSuitNPCIDsTableMapped = table.map{170}
+smasTables.allIceFlowerNPCIDsTableMapped = table.map{277,264}
+smasTables.allPowerupNPCIDsTableMapped = table.map{9,182,183,184,185,249,14,34,169,170,277,264}
+
+smasTables.allThwompNPCIDsTableMapped = table.map{37,180,437,295,435,432,301}
+smasTables.allEnemyFireballsTableMapped = table.map{85,87,246,276}
+smasTables.allRupeeNPCIDsTableMapped = table.map{251,252,253}
+smasTables.allDragonCoinNPCIDsTableMapped = table.map{274}
+smasTables.allStarCoinNPCIDsTableMapped = table.map{310}
 
 smasTables.allNPCsToExcludeOnSMASSMB1System = table.map{21,88,476}
 

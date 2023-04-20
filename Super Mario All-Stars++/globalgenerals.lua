@@ -330,15 +330,15 @@ end
 
 function globalgenerals.onPostNPCKill(npc, harmType)
     for _,p in ipairs(Player.get()) do
-        if smasTables.allGoombaNPCIDs[npc.id] then
+        if smasTables.allGoombaNPCIDsTableMapped[npc.id] then
             SaveData.goombaStomps = SaveData.goombaStomps + 1
             console:println(tostring(SaveData.goombaStomps).." Goombas have been stomped in total.")
         end
-        if smasTables.allKoopaNPCIDs[npc.id] then
+        if smasTables.allKoopaNPCIDsTableMapped[npc.id] then
             SaveData.koopaStomps = SaveData.koopaStomps + 1
             console:println(tostring(SaveData.koopaStomps).." Koopas have been stomped in total.")
         end
-        if smasTables.allStarmanNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allStarmanNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.starmansused = SaveData.starmansused + 1
             console:println(tostring(SaveData.starmansused).." Starman's have been used in total.")
         end
@@ -346,19 +346,19 @@ function globalgenerals.onPostNPCKill(npc, harmType)
             SaveData.megamushroomssused = SaveData.megamushroomssused + 1
             console:println(tostring(SaveData.megamushroomssused).." Mega Mushroom's have been used in total.")
         end
-        if smasTables.allCollectableStarNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allCollectableStarNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.starsgrabbed = SaveData.starsgrabbed + 1
             console:println(tostring(SaveData.starsgrabbed).." stars have been grabbed in total.")
         end
-        if smasTables.allCoinNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allCoinNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.SMASPlusPlus.hud.coins = SaveData.SMASPlusPlus.hud.coins + 1
             console:println(tostring(SaveData.SMASPlusPlus.hud.coins).." coins have been collected in total.")
         end
-        if smasTables.allMushroomNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allMushroomNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalmushrooms = SaveData.totalmushrooms + 1
             console:println(tostring(SaveData.totalmushrooms).." Mushrooms have been used in total.")
         end
-        if smasTables.allFireFlowerNPCIDs[npc.id] and Colliders.collide(p, npc) then
+        if smasTables.allFireFlowerNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalfireflowers = SaveData.totalfireflowers + 1
             console:println(tostring(SaveData.totalfireflowers).." Fire Flowers have been used in total.")
         end
