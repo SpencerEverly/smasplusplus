@@ -61,7 +61,9 @@ if mem(0x00B251E0, FIELD_WORD) == 0 then
 end
 
 --First time SaveData settings, for resolutions and other settings
-SaveData.SMASPlusPlus = SaveData.SMASPlusPlus or {}
+if SaveData.SMASPlusPlus == nil then
+    SaveData.SMASPlusPlus = {}
+end
 SaveData.SMASPlusPlus.options = SaveData.SMASPlusPlus.options or {}
 SaveData.SMASPlusPlus.accessibility = SaveData.SMASPlusPlus.accessibility or {}
 SaveData.SMASPlusPlus.hud = SaveData.SMASPlusPlus.hud or {}
@@ -286,6 +288,7 @@ _G.smasGlobals = require("smasGlobals")
 _G.smasMemoryAddresses = require("smasMemoryAddresses")
 _G.smasFunctions = require("smasFunctions")
 _G.smasKeySystem = require("smasKeySystem")
+_G.smasHud = require("smasHud")
 _G.smasAudioVolumeSystem = require("smasAudioVolumeSystem")
 _G.smasAnimationSystem = require("smasAnimationSystem")
 _G.smasVerboseMode = require("smasVerboseMode")
@@ -423,8 +426,6 @@ playerManager.overrideCharacterLib(CHARACTER_ULTIMATERINKA,require("steve"))
 Graphics.sprites.effect[152].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-152.png")
 Graphics.sprites.effect[153].img = Graphics.loadImageResolved("graphics/smbx2og/effect/effect-153.png")
 Graphics.sprites.ultimaterinka[player.powerup].img = Graphics.loadImageResolved("graphics/smbx2og/character/ultimaterinka-2.png")
-
-_G.smasHud = require("smasHud")
 
 Progress.value = SaveData.totalStarCount --Every level load, we will save the total stars used with the launcher
 
