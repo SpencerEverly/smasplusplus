@@ -121,7 +121,7 @@ if SaveData.enableLives then
 else
     smasHud.visible.lives = false
 end
-if SaveData.SMASPlusPlus.game.onePointThreeModeActivated ~= nil then
+if SaveData.SMASPlusPlus ~= nil then
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         smasHud.visible.deathCount = true
     else
