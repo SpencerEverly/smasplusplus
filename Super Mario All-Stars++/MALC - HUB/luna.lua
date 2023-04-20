@@ -113,7 +113,7 @@ end
 local function HolidayWeed()
     local OpenBusinesses = Layer.get("BusinessesOpen")
     local Construction = Layer.get("Stage 5 - Construction")
-    local SmokeWeed = Layer.get("Stage Extra - Somke Weed Everyday")
+    local SmokeWeed = Layer.get("Stage Extra - Smoke Weed Everyday")
     OpenBusinesses:show(true)
     Construction:show(true)
     SmokeWeed:show(true)

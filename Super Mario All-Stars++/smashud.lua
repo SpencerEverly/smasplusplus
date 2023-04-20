@@ -906,18 +906,41 @@ function smasHud.onDraw()
     end
 end
 
+if SaveData.lifeCrownsComplete == nil then --To make the sound work, this has to be set as a string'd boolean...
+    SaveData.lifeCrownsComplete = "false"
+end
+
+if SaveData.lifeCrownsComplete == "trulyfalse" then
+    SaveData.lifeCrownsComplete = "phase3complete"
+end
+
 function smasHud.onTick()
-    if SaveData.lifeCrownsComplete == nil then --To make the sound work, this has to be set as a string'd boolean...
-        SaveData.lifeCrownsComplete = "false"
-    end
-    if SaveData.SMASPlusPlus.hud.lives == 1110 then --When the lives hit 1110...
-        if (SaveData.lifeCrownsComplete == "trulyfalse") == false then
-            SaveData.lifeCrownsComplete = "true"
+    if SaveData.SMASPlusPlus.hud.lives == 1000 then --When the lives hit 1000...
+        if not (SaveData.lifeCrownsComplete == "phase1complete") then
+            SaveData.lifeCrownsComplete = "phase1"
         end
     end
-    if SaveData.lifeCrownsComplete == "true" then
+    if SaveData.lifeCrownsComplete == "phase1" then
+        Sound.playSFX("one-crown-achieved.ogg")
+        SaveData.lifeCrownsComplete = "phase1complete"
+    end
+    if SaveData.SMASPlusPlus.hud.lives == 1100 then --When the lives hit 1100...
+        if not (SaveData.lifeCrownsComplete == "phase2complete") then
+            SaveData.lifeCrownsComplete = "phase2"
+        end
+    end
+    if SaveData.lifeCrownsComplete == "phase2" then
+        Sound.playSFX("two-crowns-achieved.ogg")
+        SaveData.lifeCrownsComplete = "phase2complete"
+    end
+    if SaveData.SMASPlusPlus.hud.lives == 1110 then --When the lives hit 1110...
+        if not (SaveData.lifeCrownsComplete == "phase3complete") then
+            SaveData.lifeCrownsComplete = "phase3"
+        end
+    end
+    if SaveData.lifeCrownsComplete == "phase3" then
         Sound.playSFX("all-crowns-achieved.ogg")
-        SaveData.lifeCrownsComplete = "trulyfalse"
+        SaveData.lifeCrownsComplete = "phase3complete"
         SaveData.allLifeCrownsAchieved = true
     end
 end

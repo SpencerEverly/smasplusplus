@@ -132,7 +132,7 @@ function smasEnemySystem.onTick()
             for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
                 for j,l in ipairs(Block.get()) do
                     for _,p in ipairs(Player.get()) do
-                        if p.x <= (v.x + 16) and (p.x + p.width) >= (v.x + v.width - 16) then
+                        if Collisionz.IsPlayerCloseToShell(p, v, 16) then
                             if Collisionz.CheckCollisionBlock(v, l) and Collisionz.CanMoveShell(p, v) and v:mem(0x136, FIELD_BOOL) then
                                 v:mem(0x136, FIELD_BOOL, false)
                                 v.speedX = 0

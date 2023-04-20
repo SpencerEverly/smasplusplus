@@ -389,6 +389,11 @@ function Collisionz.CanComeOut(Loc1, Loc2)
     return tempCanComeOut
 end
 
+function Collisionz.IsPlayerCloseToShell(Loc1, Loc2, closeCounter)
+    return (Loc1.x <= Loc2.x + closeCounter) and
+        (Loc1.x + Loc1.width >= Loc2.x + Loc2.width - closeCounter)
+end
+
 --Determines if a shell can move or not
 function Collisionz.CanMoveShell(Loc1, Loc2)
     local tempCanMoveShell = true
