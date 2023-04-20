@@ -1,5 +1,7 @@
 local Collisionz = {}
 
+local smasGlobals = require("smasGlobals")
+
 Collisionz.CollisionSpot = {
     COLLISION_NONE = 0,
     COLLISION_TOP = 1,
@@ -274,15 +276,173 @@ function Collisionz.ShakeCollision(Loc1, Loc2, ShakeY3)
 end
 
 --vScreen collisions
---[[function Collisionz.vScreenCollision(A, Loc2)
-    if(A == 0)
+function Collisionz.ScreenCollision(A, Loc2)
+    if(A == 0) then
         return true
     else
-        return (-vScreenX[A] <= Loc2.x + Loc2.width) and
-               (-vScreenX[A] + vScreen[A].width >= Loc2.x) and
-               (-vScreenY[A] <= Loc2.y + Loc2.height) and
-               (-vScreenY[A] + vScreen[A].height >= Loc2.y)
+        return (-camera.x <= Loc2.x + Loc2.width) and
+               (-camera.x + camera.width >= Loc2.x) and
+               (-camera.y <= Loc2.y + Loc2.height) and
+               (-camera.y + camera.height >= Loc2.y)
     end
-end]]
+end
+
+--vScreen collisions 2
+function Collisionz.ScreenCollision2(A, Loc2)
+    return (-camera.x + 64 <= Loc2.X + Loc2.width) and
+           (-camera.x + camera.width - 64 >= Loc2.x) and
+           (-camera.y + 96 <= Loc2.Y + Loc2.height) and
+           (-camera.y + camera.height - 64 >= Loc2.y)
+end
+
+--Collision detection for blocks. Prevents walking on walls.
+function Collisionz.WalkingCollision(Loc1, Loc2)
+    local tempWalkingCollision = false;
+
+    if(Loc1.x <= Loc2.x + Loc2.width + Loc1.speedX) then
+        if(Loc1.x + Loc1.width >= Loc2.x + Loc1.speedX) then
+            tempWalkingCollision = true
+        end
+    end
+
+    return tempWalkingCollision
+end
+
+--Collision detection for blocks. Lets NPCs fall through cracks.
+function Collisionz.WalkingCollision2(Loc1, Loc2)
+    local tempWalkingCollision2 = false
+
+    if (Loc1.x <= Loc2.x + Loc2.width - Loc1.speedX - 1) then
+        if (Loc1.x + Loc1.width >= Loc2.x - Loc1.speedX + 1) then
+            tempWalkingCollision2 = true
+        end
+    end
+
+    return tempWalkingCollision2
+end
+
+--Factors in beltspeed
+function Collisionz.WalkingCollision3(Loc1, Loc2, BeltSpeed)
+    local tempWalkingCollision3 = false;
+
+    if (Loc1.x <= Loc2.x + Loc2.width - (Loc1.speedX + BeltSpeed) - 1) then
+        if(Loc1.x + Loc1.width >= Loc2.x - (Loc1.speedX + BeltSpeed) + 1) then
+            tempWalkingCollision3 = true;
+        end
+    end
+
+    return tempWalkingCollision3
+end
+
+--Helps the player to walk over 1 unit cracks
+function Collisionz.FindRunningCollision(Loc1, Loc2)
+    local tempFindRunningCollision = Collisionz.CollisionSpot.COLLISION_NONE;
+
+    if(Loc1.y + Loc1.height - Loc1.speedY - 2.5 <= Loc2.y - Loc2.speedY) then
+        tempFindRunningCollision = Collisionz.CollisionSpot.COLLISION_TOP
+    elseif(Loc1.x - Loc1.speedX >= Loc2.x + Loc2.width - Loc2.speedX) then
+        tempFindRunningCollision = Collisionz.CollisionSpot.COLLISION_RIGHT
+    elseif(Loc1.x + Loc1.width - Loc1.speedX <= Loc2.x - Loc2.speedX) then
+        tempFindRunningCollision = Collisionz.CollisionSpot.COLLISION_LEFT
+    elseif(Loc1.y - Loc1.speedY >= Loc2.y + Loc2.height - Loc2.speedY) then
+        tempFindRunningCollision = Collisionz.CollisionSpot.COLLISION_BOTTOM
+    else
+        tempFindRunningCollision = Collisionz.CollisionSpot.COLLISION_CENTER
+    end
+
+    return tempFindRunningCollision
+end
+
+--Determines if an NPC should turnaround
+function Collisionz.ShouldTurnAround(Loc1, Loc2, Direction)
+    local tempShouldTurnAround = true
+
+    if(Loc1.y + Loc1.height + 8 <= Loc2.y + Loc2.height) then
+        if(Loc1.y + Loc1.height + 8 >= Loc2.y) then
+            if(Loc1.x + Loc1.width * 0.5 + (8 * Direction) <= Loc2.x + Loc2.width) then
+                if(Loc1.x + Loc1.width * 0.5 + (8 * Direction) >= Loc2.x) then
+                    if(Loc2.y > Loc1.y + Loc1.height - 8) then
+                        tempShouldTurnAround = false
+                    end
+                end
+            end
+        end
+    end
+
+    return tempShouldTurnAround
+end
+
+--Determines if an NPC can come out of a pipe
+function Collisionz.CanComeOut(Loc1, Loc2)
+    local tempCanComeOut = true
+
+    if (Loc1.x <= Loc2.x + Loc2.width + 32) then
+        if (Loc1.x + Loc1.width >= Loc2.x - 32) then
+            if (Loc1.y <= Loc2.y + Loc2.height + 300) then
+                if (Loc1.y + Loc1.height >= Loc2.y - 300) then
+                    tempCanComeOut = false
+                end
+            end
+        end
+    end
+
+    return tempCanComeOut
+end
+
+--Fixes NPCs sinking through the ground
+function Collisionz.CheckHitSpot1(Loc1, Loc2)
+    local tempCheckHitSpot1 = false
+
+    if (Loc1.y + Loc1.height - Loc1.speedY - mem(0x00B2C874, FIELD_FLOAT) <= Loc2.y - Loc2.speedY) then --The memory address is the NPC gravity
+        tempCheckHitSpot1 = true;
+    end
+
+    return tempCheckHitSpot1
+end
+
+function Collisionz.blockGetTopYTouching(block, loc)
+    --Get slope type
+    local blockType = Block.config[block.id].floorslope;
+    local slopeDirection
+
+    if((blockType >= 1) and (blockType <= maxBlockType)) then
+        slopeDirection = blockType
+    else
+        slopeDirection = 0
+    end
+
+    --The simple case, no slope
+    if(slopeDirection == 0) then
+        return block.y
+    end
+
+    --The degenerate case, no width
+    if(block.width <= 0) then
+        return block.y
+    end
+
+    --The following uses a slope calculation like 1.3 does
+
+    --Get right or left x coordinate as relevant for the slope direction
+    local refX = loc.x;
+    if(slopeDirection > 0) then
+        refX = refX + loc.width
+    end
+
+    --Get how far along the slope we are in the x direction
+    local slope = (refX - block.x) / block.width
+    if(slopeDirection > 0) then
+        slope = 1 - slope
+    end
+    if(slope < 0) then
+        slope = 0
+    end
+    if(slope > 1) then
+        slope = 1
+    end
+
+    --Determine the y coordinate
+    return block.y + block.height - (block.height * slope);
+end
 
 return Collisionz

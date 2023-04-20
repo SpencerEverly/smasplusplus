@@ -4,6 +4,9 @@ local rng = require("base/rng")
 local smasVerboseMode = require("smasVerboseMode")
 local handycam = require("handycam")
 local smasTables = require("smasTables")
+if smasCharacterCostumes == nil then
+    smasCharacterCostumes = require("smasCharacterCostumes")
+end
 
 local GM_STAR_ADDR = mem(0x00B25714, FIELD_DWORD)
 local GM_CREDITS = mem(0x00B25948, FIELD_DWORD)

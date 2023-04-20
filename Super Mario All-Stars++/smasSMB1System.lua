@@ -47,6 +47,12 @@ smasSMB1System.correctPathCoordinates = {
                 {x = -175354, y = -180256, sizeY = 96, playerX = -176762, playerY = -180224},
             },
     },
+    ["SMB1 - W-7, L-4.lvlx"] = {
+        rightPath = {
+            [1] = 
+                {x = -178650, y = -180160, sizeY = 96, passed = false},
+            },
+    },
 }
 
 if GameData.smasSMB1System.crossedCheckpoint == Level.filename() then

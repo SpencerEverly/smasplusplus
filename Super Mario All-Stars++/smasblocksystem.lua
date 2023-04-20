@@ -201,7 +201,7 @@ function smasBlockSystem.onTick()
         Text.printWP(smasBlockSystem.countDownMarker, 100, 140, 0)
     end
     
-    smasBlockSystem.frameRuleCounter = smasBlockSystem.frameRuleCounter - 1
+    smasBlockSystem.frameRuleCounter = smasBlockSystem.frameRuleCounter - 0.923076923077 --This is 60 FPS, since SMBX is 65 FPS
     if smasBlockSystem.frameRuleCounter <= 0 then
         smasBlockSystem.frameRuleCounter = 20
     end

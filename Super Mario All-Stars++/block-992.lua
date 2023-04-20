@@ -14,9 +14,9 @@ local sampleBlockSettings = {
     frames = 1,
     framespeed = 8, --# frames between frame change
 
-    semisolid = false, --top-only collision
-
-    floorslope = -1,
+    floorslope = 0,
+    
+    passthrough = true,
 }
 
 --Applies blockID settings
@@ -39,9 +39,15 @@ function sampleBlock.onTickEndBlock(v)
     
     local data = v.data
     
+    local startPosition = v.x + v.width
+    local endPosition = v.y + v.height
+    
     for _,p in ipairs(Player.get()) do
         if Collisionz.WalkingCollision(p, v) and Collisionz.FindCollision(p, v) == Collisionz.CollisionSpot.COLLISION_CENTER then
-            
+            local playerBottomPosition = p.y + p.width
+            Text.print("Works!", 100, 100)
+            p.speedY = 0
+            p:mem(0x48,FIELD_WORD,992)
         end
     end
 end
