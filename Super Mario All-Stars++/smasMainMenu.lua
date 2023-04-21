@@ -371,6 +371,7 @@ function smasMainMenu.bootDialogue(resetMusic)
     --littleDialogue.create({text = transplate.getTranslation("0x0000000000000014"), speakerName = "Main Menu", pauses = false, updatesInPause = true})
     Sound.playSFX(29)
     smasMainMenuSystem.menuOpen = true
+    smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false)
     if resetMusic then
         Sound.restoreMusic(-1)
     end
@@ -383,6 +384,7 @@ end
 
 function optionsMenu1() --Options
     smasMainMenuSystem.menuOpen = true
+    smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, 0, false)
 end
 
 function themeMenu1() --Intro theme menu
@@ -538,24 +540,32 @@ local nameBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCanc
 local pfpBoard = newkeyboard.create{isImportant = true, isImportantButCanBeCancelled = true, clear = true, setVariable = SaveData.playerPfp, pause = false}
 
 function startKeyboard()
+    smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     newkeyboard.setVariable = SaveData.playerName
     nameBoard:open()
     GameData.playernameenter = true
 end
 
 function startKeyboardFirstBoot()
+    smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     newkeyboard.setVariable = SaveData.playerName
     nameBoard:open()
     GameData.playernameenterfirstboot = true
 end
 
 function startKeyboardPFP()
+    smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     newkeyboard.setVariable = SaveData.playerPfp
     pfpBoard:open()
     GameData.playerpfpenter = true
 end
 
 function startSaveSwitcher1()
+    smasMainMenuSystem.menuOpen = false
+    Sound.playSFX(29)
     keyboard.active = true
     GameData.enablekeyboard = true
     GameData.saveslotswitchenter = true
@@ -684,16 +694,6 @@ function SaveSlot1()
     elseif Misc.inEditor() then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000054"), pauses = false, updatesInPause = true})
     end
-end
-
-function EraseSave1()
-    smasMainMenuSystem.menuOpen = false
-    Sound.muteMusic(-1)
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000055"), pauses = false, updatesInPause = true})
-end
-
-function EraseSave2()
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000056"), pauses = false, updatesInPause = true})
 end
 
 function smasMainMenuSystem.exitDialogue(resetMusic)
@@ -1428,7 +1428,7 @@ smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMe
 
 
 smasMainMenuSystem.addMenuItem{name = "Change Character", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeChar1) end}
-smasMainMenuSystem.addMenuItem{name = "Change Player Name", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeName1) end}
+smasMainMenuSystem.addMenuItem{name = "Change Player Name", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Change Profile Picture", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangePFP1) end}
 smasMainMenuSystem.addMenuItem{name = "Change Clock Theme", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, 0, false) end}
 
@@ -1512,7 +1512,7 @@ smasMainMenuSystem.addMenuItem{name = "Windows 10", section = smasMainMenuSystem
 
 
 smasMainMenuSystem.addMenuItem{name = "Move Save Data", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SaveSlot1) end}
-smasMainMenuSystem.addMenuItem{name = "Erase Save Data", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(EraseSave1) end}
+smasMainMenuSystem.addMenuItem{name = "Erase Save Data", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Sound.muteMusic(-1) smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, 0, false) end}
 
 
 
@@ -1526,26 +1526,23 @@ smasMainMenuSystem.addMenuItem{name = "Original SMBX Sounds", section = smasMain
 
 
 
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, xCenter = 150, yCenter = 310, cantGoBack = true, dialogMessage = "ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?"}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, cantGoBack = true, xCenter = 150, yCenter = 250, dialogMessage = "ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
 smasMainMenuSystem.addMenuItem{name = "Do not Erase", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false) Sound.restoreMusic(-1) end}
-smasMainMenuSystem.addMenuItem{name = "ERASE", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() Routine.run(SaveEraseStart) end}
+smasMainMenuSystem.addMenuItem{name = "ERASE", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() Routine.run(SaveEraseStart) end}
 
 
 
 
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "Do not Erase",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue, true) end})
-littleDialogue.registerAnswer("SaveEraseChoice",{text = "ERASE",chosenFunction = function() SaveEraseStart() end})
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, cantGoBack = true, xCenter = 150, yCenter = 230, dialogMessage = "Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
+smasMainMenuSystem.addMenuItem{name = "I understand", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, 0, false) end}
+smasMainMenuSystem.addMenuItem{name = "Nevermind", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false) Sound.restoreMusic(-1) end}
 
 
 
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, cantGoBack = true, xCenter = 150, yCenter = 230, dialogMessage = "To change your name in the game, please select Begin to get started.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
+smasMainMenuSystem.addMenuItem{name = "Begin", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() startKeyboard() end}
+smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
 
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "I understand",chosenFunction = function() Routine.run(EraseSave2) end})
-littleDialogue.registerAnswer("SaveErasePreChoice",{text = "Nevermind",chosenFunction = function() Routine.run(smasMainMenu.bootDialogue, true) end})
-
-
-
-littleDialogue.registerAnswer("StartNameChange",{text = "Begin",chosenFunction = function() Routine.run(startKeyboard) end})
-littleDialogue.registerAnswer("StartNameChange",{text = "Exit",chosenFunction = function() Routine.run(optionsMenu1) end})
 
 
 

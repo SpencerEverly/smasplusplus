@@ -17,6 +17,11 @@ if SaveData.pauseplus.selectionData.soundsettings ~= nil then
     selectionData = SaveData.pauseplus.selectionData.soundsettings
 end
 
+smasMainMenuSystem.menuMainTypes = {
+    MENUMAIN_NORMAL = 1,
+    MENUMAIN_DIALOG = 2,
+}
+
 smasMainMenuSystem.menuTypes = {
     MENU_SELECTABLE = 1,
     MENU_BOOLEAN = 2,
@@ -37,6 +42,8 @@ smasMainMenuSystem.menuSections = {
     SECTION_SETTINGS_SAVEDATA = 9,
     SECTION_SETTINGS_MUSICANDSOUNDS = 10,
     DIALOG_SETTINGS_ERASESAVE2 = 11,
+    DIALOG_SETTINGS_ERASESAVE1 = 12,
+    DIALOG_SETTINGS_CHANGENAME = 13,
 }
 
 smasMainMenuSystem.menuItems = {}
@@ -62,10 +69,16 @@ smasMainMenuSystem.priority = 3
 smasMainMenuSystem.menuLen = 0
 
 smasMainMenuSystem.isOnDialog = false
+smasMainMenuSystem.atEndOfDialog = false
+smasMainMenuSystem.currentPageMarker = 1
+smasMainMenuSystem.currentPageCount = 0
+
 smasMainMenuSystem.hideMenuOptions = false
 smasMainMenuSystem.hideArrows = false
 smasMainMenuSystem.hideCursor = false
 smasMainMenuSystem.hideTitle = false
+smasMainMenuSystem.dontControlMenu = false
+smasMainMenuSystem.dontRunFunctions = false
 
 --[[smasMainMenuSystem.addSection(args):
 section = The menu section, basically where this should be added to.
@@ -85,6 +98,7 @@ function smasMainMenuSystem.addSection(args)
     args.xCenter = args.xCenter or smasMainMenuSystem.MenuXCentered
     args.yCenter = args.yCenter or smasMainMenuSystem.MenuYCentered
     args.dialogMessage = args.dialogMessage or ""
+    args.menuMainType = args.menuMainType or smasMainMenuSystem.menuMainTypes.MENUMAIN_NORMAL
     if args.cantGoBack == nil then
         args.cantGoBack = false
     end
@@ -97,6 +111,8 @@ function smasMainMenuSystem.addSection(args)
         xCenter = args.xCenter,
         yCenter = args.yCenter,
         cantGoBack = args.cantGoBack,
+        menuMainType = args.menuMainType,
+        dialogMessage = args.dialogMessage,
     }
 end
 
@@ -170,6 +186,46 @@ function smasMainMenuSystem.addMenuItem(args)
     }
 end
 
+--smasMainMenuSystem.getDialogMessage{text = "burp<page>excuse me", maxWidth = 370}
+
+local customTags = {}
+function customTags.page(fmt, out, args)
+    out[#out+1] = {page=true} -- Add page tag to stream
+    return fmt
+end
+
+function smasMainMenuSystem.parseTextForDialogMessage(text, args)
+	local formattedText = textplus.parse(text, {font = smasMainMenuSystem.mainMenuFont, xscale=2, yscale=2, color=Color.white}, customTags, {"page"})
+
+	local pages = {}
+	local page = {}
+	for _,seg in ipairs(formattedText) do
+		if seg.page then
+			pages[#pages+1] = page
+			page = {}
+		else
+			page[#page+1] = seg
+		end
+	end
+	pages[#pages+1] = page
+	
+	return pages
+end
+
+function smasMainMenuSystem.getDialogMessage(args)
+    args.text = args.text or ""
+    args.maxWidth = args.maxWidth or 420
+    --Create page list
+    local pages = smasMainMenuSystem.parseTextForDialogMessage(args.text)
+
+    --Layout the pages
+    for i=1,#pages do
+        pages[i] = textplus.layout(pages[i], args.maxWidth)
+    end
+    
+    return pages
+end
+
 function smasMainMenuSystem.getMenuPosition()
     smasMainMenuSystem.MenuX = ScreenW / 2 - smasMainMenuSystem.MenuXCentered
     smasMainMenuSystem.MenuY = ScreenH - smasMainMenuSystem.MenuYCentered
@@ -190,6 +246,7 @@ function smasMainMenuSystem.handleMouseMove(items,x,y,maxWidth,itemHeight)
 end
 
 function smasMainMenuSystem.runMenuFunction(isMouse)
+    smasMainMenuSystem.currentPageMarker = 1
     local currentOption = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
     if currentOption.canRunAsFunction then
         if isMouse then
@@ -258,71 +315,84 @@ end
 function smasMainMenuSystem.onInputUpdate()
     if smasMainMenuSystem.menuOpen then
         if smasMainMenuSystem.onMenu > 0 then
+            local currentSection = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu]
+            local currentDialog = smasMainMenuSystem.getDialogMessage{text = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].dialogMessage}
             if smasMainMenuSystem.PressDelay == 0 then
                 for _,p in ipairs(Player.get()) do
-                    local currentOption = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
-                    if p.keys.up == KEYS_PRESSED then
-                        if MenuCursor > 0 then
-                            MenuCursor = MenuCursor - 1
-                            Sound.playSFX(26)
-                        else
-                            Sound.playSFX(26)
-                            MenuCursor = #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] - 1
-                        end
-                    elseif p.keys.down == KEYS_PRESSED then
-                        if MenuCursor < #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] - 1 then
-                            MenuCursor = MenuCursor + 1
-                            Sound.playSFX(26)
-                        else
-                            Sound.playSFX(26)
-                            MenuCursor = 0
-                        end
-                    elseif p.keys.left == KEYS_PRESSED then
-                        if currentOption.numberToUse ~= "" then
-                            if currentOption.isSaveData then
-                                if SaveData[currentOption.numberToUse] > currentOption.minimumNumber then
-                                    Sound.playSFX(26)
-                                    SaveData[currentOption.numberToUse] = SaveData[currentOption.numberToUse] - currentOption.numberStep
-                                end
-                            elseif currentOption.isGameData then
-                                if GameData[currentOption.numberToUse] > currentOption.minimumNumber then
-                                    Sound.playSFX(26)
-                                    GameData[currentOption.numberToUse] = GameData[currentOption.numberToUse] - currentOption.numberStep
-                                end
-                            elseif currentOption.isPauseplusValue then
-                                if selectionData[currentOption.numberToUse] > currentOption.minimumNumber then
-                                    Sound.playSFX(26)
-                                    selectionData[currentOption.numberToUse] = selectionData[currentOption.numberToUse] - currentOption.numberStep
+                    if not smasMainMenuSystem.dontControlMenu then
+                        local currentOption = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
+                        if p.keys.up == KEYS_PRESSED then
+                            if MenuCursor > 0 then
+                                MenuCursor = MenuCursor - 1
+                                Sound.playSFX(26)
+                            else
+                                Sound.playSFX(26)
+                                MenuCursor = #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] - 1
+                            end
+                        elseif p.keys.down == KEYS_PRESSED then
+                            if MenuCursor < #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] - 1 then
+                                MenuCursor = MenuCursor + 1
+                                Sound.playSFX(26)
+                            else
+                                Sound.playSFX(26)
+                                MenuCursor = 0
+                            end
+                        elseif p.keys.left == KEYS_PRESSED then
+                            if currentOption.numberToUse ~= "" then
+                                if currentOption.isSaveData then
+                                    if SaveData[currentOption.numberToUse] > currentOption.minimumNumber then
+                                        Sound.playSFX(26)
+                                        SaveData[currentOption.numberToUse] = SaveData[currentOption.numberToUse] - currentOption.numberStep
+                                    end
+                                elseif currentOption.isGameData then
+                                    if GameData[currentOption.numberToUse] > currentOption.minimumNumber then
+                                        Sound.playSFX(26)
+                                        GameData[currentOption.numberToUse] = GameData[currentOption.numberToUse] - currentOption.numberStep
+                                    end
+                                elseif currentOption.isPauseplusValue then
+                                    if selectionData[currentOption.numberToUse] > currentOption.minimumNumber then
+                                        Sound.playSFX(26)
+                                        selectionData[currentOption.numberToUse] = selectionData[currentOption.numberToUse] - currentOption.numberStep
+                                    end
                                 end
                             end
-                        end
-                    elseif p.keys.right == KEYS_PRESSED then
-                        if currentOption.numberToUse ~= "" then
-                            if currentOption.isSaveData then
-                                if SaveData[currentOption.numberToUse] < currentOption.maxNumber then
-                                    Sound.playSFX(26)
-                                    SaveData[currentOption.numberToUse] = SaveData[currentOption.numberToUse] + currentOption.numberStep
-                                end
-                            elseif currentOption.isGameData then
-                                if GameData[currentOption.numberToUse] < currentOption.maxNumber then
-                                    Sound.playSFX(26)
-                                    GameData[currentOption.numberToUse] = GameData[currentOption.numberToUse] + currentOption.numberStep
-                                end
-                            elseif currentOption.isPauseplusValue then
-                                if selectionData[currentOption.numberToUse] < currentOption.maxNumber then
-                                    Sound.playSFX(26)
-                                    selectionData[currentOption.numberToUse] = selectionData[currentOption.numberToUse] + currentOption.numberStep
+                        elseif p.keys.right == KEYS_PRESSED then
+                            if currentOption.numberToUse ~= "" then
+                                if currentOption.isSaveData then
+                                    if SaveData[currentOption.numberToUse] < currentOption.maxNumber then
+                                        Sound.playSFX(26)
+                                        SaveData[currentOption.numberToUse] = SaveData[currentOption.numberToUse] + currentOption.numberStep
+                                    end
+                                elseif currentOption.isGameData then
+                                    if GameData[currentOption.numberToUse] < currentOption.maxNumber then
+                                        Sound.playSFX(26)
+                                        GameData[currentOption.numberToUse] = GameData[currentOption.numberToUse] + currentOption.numberStep
+                                    end
+                                elseif currentOption.isPauseplusValue then
+                                    if selectionData[currentOption.numberToUse] < currentOption.maxNumber then
+                                        Sound.playSFX(26)
+                                        selectionData[currentOption.numberToUse] = selectionData[currentOption.numberToUse] + currentOption.numberStep
+                                    end
                                 end
                             end
-                        end
-                    elseif p.keys.jump == KEYS_PRESSED then
-                        smasMainMenuSystem.runMenuFunction(false)
-                    elseif p.keys.run == KEYS_PRESSED then
-                        if smasMainMenuSystem.onMenu > 1 and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].cantGoBack then
-                            smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].menuBackTo, 0, true)
-                        elseif smasMainMenuSystem.onMenu == 1 then
-                            Sound.playSFX(26)
-                            MenuCursor = #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] - 1
+                        elseif p.keys.jump == KEYS_PRESSED then
+                            if not smasMainMenuSystem.dontRunFunctions then
+                                smasMainMenuSystem.runMenuFunction(false)
+                            end
+                            if smasMainMenuSystem.isOnDialog then
+                                if not smasMainMenuSystem.atEndOfDialog then
+                                    smasMainMenuSystem.currentPageMarker = smasMainMenuSystem.currentPageMarker + 1
+                                    Sound.playSFX(26)
+                                    smasMainMenuSystem.PressDelay = 10
+                                end
+                            end
+                        elseif p.keys.run == KEYS_PRESSED then
+                            if smasMainMenuSystem.onMenu > 1 and not smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].cantGoBack then
+                                smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].menuBackTo, 0, true)
+                            elseif smasMainMenuSystem.onMenu == 1 then
+                                Sound.playSFX(26)
+                                MenuCursor = #smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu] - 1
+                            end
                         end
                     end
                 end
@@ -336,11 +406,33 @@ function smasMainMenuSystem.onDraw()
     smasMainMenuSystem.MenuXCentered = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].xCenter
     smasMainMenuSystem.MenuYCentered = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].yCenter
     local currentOption = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
+    local currentSection = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu]
     local C = 0
     local original_maxShow = smasMainMenuSystem.maxShow
+    local currentDialog = smasMainMenuSystem.getDialogMessage{text = currentSection.dialogMessage}
     
     if smasMainMenuSystem.PressDelay > 0 then
         smasMainMenuSystem.PressDelay = smasMainMenuSystem.PressDelay - 1
+    end
+    
+    if currentSection.menuMainType == smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG then
+        smasMainMenuSystem.isOnDialog = true
+        if smasMainMenuSystem.isOnDialog and smasMainMenuSystem.currentPageMarker < #currentDialog then
+            smasMainMenuSystem.atEndOfDialog = false
+            smasMainMenuSystem.hideMenuOptions = true
+            smasMainMenuSystem.hideArrows = true
+            smasMainMenuSystem.hideCursor = true
+            smasMainMenuSystem.dontRunFunctions = true
+        elseif smasMainMenuSystem.currentPageMarker >= #currentDialog then
+            smasMainMenuSystem.atEndOfDialog = true
+            smasMainMenuSystem.hideMenuOptions = false
+            smasMainMenuSystem.hideArrows = false
+            smasMainMenuSystem.hideCursor = false
+            smasMainMenuSystem.dontRunFunctions = false
+        end
+    else
+        smasMainMenuSystem.isOnDialog = false
+        smasMainMenuSystem.atEndOfDialog = false
     end
     
     if smasMainMenuSystem.menuOpen then
@@ -376,6 +468,10 @@ function smasMainMenuSystem.onDraw()
             
             if not smasMainMenuSystem.hideTitle then
                 textplus.print({pivot = vector.v2(0.5,0.5), x = 400, y = 310, text = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title, priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
+            end
+            
+            if smasMainMenuSystem.isOnDialog then
+                textplus.render{x = 200, y = 310, layout = currentDialog[smasMainMenuSystem.currentPageMarker], priority = smasMainMenuSystem.priority}
             end
             
             for k = smasMainMenuSystem.minShow, smasMainMenuSystem.maxShow do
