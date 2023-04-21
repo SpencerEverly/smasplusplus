@@ -392,16 +392,6 @@ function themeMenu1() --Intro theme menu
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000017"), speakerName = "Themes", pauses = false, updatesInPause = true})
 end
 
-function ChangeName1() --To change your name...
-    smasMainMenuSystem.menuOpen = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000021"), pauses = false, updatesInPause = true})
-end
-
-function ChangePFP1() --To change your PFP...
-    smasMainMenuSystem.menuOpen = false
-    littleDialogue.create({text = transplate.getTranslation("0x0000000000000022"), pauses = false, updatesInPause = true})
-end
-
 function ResolutionChange1() --Resolution changed.
     Sound.playSFX("resolution-set.ogg")
     Routine.waitFrames(1, true)
@@ -572,6 +562,7 @@ function startSaveSwitcher1()
 end
 
 function PFPinfo1() --PFP information
+    smasMainMenuSystem.menuOpen = false
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000034"), pauses = false, updatesInPause = true})
 end
 
@@ -1429,7 +1420,7 @@ smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMe
 
 smasMainMenuSystem.addMenuItem{name = "Change Character", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeChar1) end}
 smasMainMenuSystem.addMenuItem{name = "Change Player Name", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, 0, false) end}
-smasMainMenuSystem.addMenuItem{name = "Change Profile Picture", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangePFP1) end}
+smasMainMenuSystem.addMenuItem{name = "Change Profile Picture", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Change Clock Theme", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 4, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, 0, false) end}
 
 
@@ -1539,16 +1530,23 @@ smasMainMenuSystem.addMenuItem{name = "Nevermind", section = smasMainMenuSystem.
 
 
 
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, cantGoBack = true, xCenter = 150, yCenter = 230, dialogMessage = "To change your name in the game, please select Begin to get started.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, cantGoBack = true, xCenter = 150, yCenter = 240, dialogMessage = "To change your name in the game, please select Begin to get started.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
 smasMainMenuSystem.addMenuItem{name = "Begin", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() startKeyboard() end}
 smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
 
 
 
 
-littleDialogue.registerAnswer("StartPFPChange",{text = "Begin",chosenFunction = function() Routine.run(startKeyboardPFP) end})
-littleDialogue.registerAnswer("StartPFPChange",{text = "How do I use this?",chosenFunction = function() Routine.run(PFPinfo1) end})
-littleDialogue.registerAnswer("StartPFPChange",{text = "Exit",chosenFunction = function() Routine.run(optionsMenu1) end})
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, cantGoBack = true, xCenter = 180, yCenter = 260, dialogMessage = "To change your profile picture in the game, please select Begin to get started.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 280}
+smasMainMenuSystem.addMenuItem{name = "Begin", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() startKeyboardPFP() end}
+smasMainMenuSystem.addMenuItem{name = "How do I use this?", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP_INFO, 0, false) end}
+smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, sectionItem = 3, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
+
+
+
+
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP_INFO, cantGoBack = true, xCenter = 180, yCenter = 250, dialogMessage = "Your profile picture can be used when you launch Online Multiplayer, or to see who is running the game at this session.<page>Your profile picture will also be used during the story, along with your name.<page>To specify the profile picture using the keyboard, please type up the path from '___MainUserDirectory' to the profile picture you are going to use.<page>'___MainUserDirectory' is a user modifiable directory that can be used for files you specify for the episode, such as a profile picture (PNG only).<page>Don't worry if you don't want to specify one, there's already a default profile picture for you already set up.<page>But if you want to go ahead and set one up, please specify to begin anytime on that menu.<page>With that out of the way, that's how you set up a profile picture for the episode!", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 280}
+smasMainMenuSystem.addMenuItem{name = "Okay!", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP_INFO, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_DIALOG, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, 0, false) end}
 
 
 

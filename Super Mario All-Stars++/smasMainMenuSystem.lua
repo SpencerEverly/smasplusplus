@@ -44,6 +44,8 @@ smasMainMenuSystem.menuSections = {
     DIALOG_SETTINGS_ERASESAVE2 = 11,
     DIALOG_SETTINGS_ERASESAVE1 = 12,
     DIALOG_SETTINGS_CHANGENAME = 13,
+    DIALOG_SETTINGS_CHANGEPFP = 14,
+    DIALOG_SETTINGS_CHANGEPFP_INFO = 15,
 }
 
 smasMainMenuSystem.menuItems = {}
@@ -99,6 +101,8 @@ function smasMainMenuSystem.addSection(args)
     args.yCenter = args.yCenter or smasMainMenuSystem.MenuYCentered
     args.dialogMessage = args.dialogMessage or ""
     args.menuMainType = args.menuMainType or smasMainMenuSystem.menuMainTypes.MENUMAIN_NORMAL
+    args.dialogMessageX = args.dialogMessageX or 180
+    args.dialogMessageY = args.dialogMessageY or 310
     if args.cantGoBack == nil then
         args.cantGoBack = false
     end
@@ -113,6 +117,8 @@ function smasMainMenuSystem.addSection(args)
         cantGoBack = args.cantGoBack,
         menuMainType = args.menuMainType,
         dialogMessage = args.dialogMessage,
+        dialogMessageX = args.dialogMessageX,
+        dialogMessageY = args.dialogMessageY,
     }
 end
 
@@ -186,8 +192,6 @@ function smasMainMenuSystem.addMenuItem(args)
     }
 end
 
---smasMainMenuSystem.getDialogMessage{text = "burp<page>excuse me", maxWidth = 370}
-
 local customTags = {}
 function customTags.page(fmt, out, args)
     out[#out+1] = {page=true} -- Add page tag to stream
@@ -214,7 +218,7 @@ end
 
 function smasMainMenuSystem.getDialogMessage(args)
     args.text = args.text or ""
-    args.maxWidth = args.maxWidth or 420
+    args.maxWidth = args.maxWidth or 460
     --Create page list
     local pages = smasMainMenuSystem.parseTextForDialogMessage(args.text)
 
@@ -471,7 +475,7 @@ function smasMainMenuSystem.onDraw()
             end
             
             if smasMainMenuSystem.isOnDialog then
-                textplus.render{x = 200, y = 310, layout = currentDialog[smasMainMenuSystem.currentPageMarker], priority = smasMainMenuSystem.priority}
+                textplus.render{x = currentSection.dialogMessageX, y = currentSection.dialogMessageY, layout = currentDialog[smasMainMenuSystem.currentPageMarker], priority = smasMainMenuSystem.priority}
             end
             
             for k = smasMainMenuSystem.minShow, smasMainMenuSystem.maxShow do

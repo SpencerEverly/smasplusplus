@@ -38,11 +38,11 @@ return{
     --SMAS++ MAIN MENU: Main Menu Selection (Clock Settings)
     ["0x0000000000000019"] = "<setPos 400 32 0.5 -1.0><question ClockSelect>",
     --SMAS++ MAIN MENU: Main Menu Selection (Battle Mode: Select Level)
-    ["0x0000000000000020"] = "<setPos 400 32 0.5 -1.1>Select level.<question BattleLevelSelect>",
+    ["0x0000000000000020"] = "Select level.",
     --SMAS++ MAIN MENU: Main Menu Dialog (Change Name)
-    ["0x0000000000000021"] = "<setPos 400 32 0.5 -1.1>To change your name in the game, please select Begin to get started (Keyboard only).<question StartNameChange>",
+    ["0x0000000000000021"] = "To change your name in the game, please select Begin to get started.",
     --SMAS++ MAIN MENU: Main Menu Dialog (Change PFP)
-    ["0x0000000000000022"] = "<setPos 400 32 0.5 -0.8>To change your profile picture in the game, please select Begin to get started (Keyboard only).<question StartPFPChange>",
+    ["0x0000000000000022"] = "To change your profile picture in the game, please select Begin to get started.",
     --SMAS++ MAIN MENU: Main Menu Dialog (Resolution Changed)
     ["0x0000000000000023"] = "<setPos 400 32 0.5 -1.8>Resolution changed. Check it out right now!<question ReturnMenu>",
     --SMAS++ MAIN MENU: Main Menu Dialog (Border Changed)
