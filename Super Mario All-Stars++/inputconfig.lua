@@ -56,33 +56,33 @@ local configButtons =     {
 
 local keyConfigCount = 0
 
-local keyConfigs = {         [0] = "Press ENTER to start.",
-                            "Press a key to assign Jump.",
-                            "Press a key to assign Run.",
-                            "Press a key to assign Alt Jump.",
-                            "Press a key to assign Alt Run.",
-                            "Press a key to assign Drop Item.",
-                            "Press a key to assign Pause.",
-                            "Press a key to assign Up.",
-                            "Press a key to assign Down.",
-                            "Press a key to assign Left.",
-                            "Press a key to assign Right.",
-                            "Press a key to assign Special.",
-                            "Press any key to confirm."
+local keyConfigs = {        [0] = "Press ENTER to start.",
+                            [1] = "Press a key to assign Jump.",
+                            [2] = "Press a key to assign Run.",
+                            [3] = "Press a key to assign Alt Jump.",
+                            [4] = "Press a key to assign Alt Run.",
+                            [5] = "Press a key to assign Drop Item.",
+                            [6] = "Press a key to assign Pause.",
+                            [7] = "Press a key to assign Up.",
+                            [8] = "Press a key to assign Down.",
+                            [9] = "Press a key to assign Left.",
+                            [10] = "Press a key to assign Right.",
+                            [11] = "Press a key to assign Special.",
+                            [12] = "Press any key to confirm."
                         }
                         
 local keyConfigsEditor = {  [0] = "Press ENTER to start.",
-                            "Press a key to assign Jump.",
-                            "Press a key to assign Run.",
-                            "Press a key to assign Alt Jump.",
-                            "Press a key to assign Alt Run.",
-                            "Press a key to assign Drop Item.",
-                            "Press a key to assign Up.",
-                            "Press a key to assign Down.",
-                            "Press a key to assign Left.",
-                            "Press a key to assign Right.",
-                            "Press a key to assign Special.",
-                            "Press any key to confirm."
+                            [1] = "Press a key to assign Jump.",
+                            [2] = "Press a key to assign Run.",
+                            [3] = "Press a key to assign Alt Jump.",
+                            [4] = "Press a key to assign Alt Run.",
+                            [5] = "Press a key to assign Drop Item.",
+                            [6] = "Press a key to assign Up.",
+                            [7] = "Press a key to assign Down.",
+                            [8] = "Press a key to assign Left.",
+                            [9] = "Press a key to assign Right.",
+                            [10] = "Press a key to assign Special.",
+                            [11] = "Press any key to confirm."
                         }
 
 local currentController = nil
@@ -210,11 +210,25 @@ local runEndingConfig = false
 function inputconfigurator.onKeyboardPress(k, repeated)
     if repeated then return end
     
+    if not dontRunReturn and k ~= VK_RETURN and k ~= VK_BACK then
+        return
+    end
+    
     for k,p in ipairs(Player.get()) do
         pnumkey = p.idx
     end
     
     if inputconfigurator.keyConfigOpen then
+        if SaveData.firstBootCompleted then
+            if (k == VK_BACK) then
+                inputconfigurator.backspacePressedState = true
+                Sound.playSFX("inputconfig/input_quit.ogg")
+                inputconfigurator.keyConfigOpen = false
+                inputconfigurator.assigningToPlayer1 = false
+                inputconfigurator.assigningToPlayer2 = false
+                GameData.reopenmenu = true
+            end
+        end
         if not Misc.inEditor() then
             if k == VK_RETURN and not dontRunReturn then
                 currentKeyboard = { k, pnumkey }
@@ -294,7 +308,7 @@ function inputconfigurator.onKeyboardPress(k, repeated)
         end
     end
     if inputconfigurator.controlConfigOpen then
-        if SaveData.firstBootCompleted == true then
+        if SaveData.firstBootCompleted then
             if (k == VK_BACK) then
                 inputconfigurator.backspacePressedState = true
                 Sound.playSFX("inputconfig/input_quit.ogg")

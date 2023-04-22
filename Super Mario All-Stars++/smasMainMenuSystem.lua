@@ -27,7 +27,6 @@ smasMainMenuSystem.menuTypes = {
     MENU_BOOLEAN = 2,
     MENU_NUMBERVALUE = 3,
     MENU_MULTISELECT = 4,
-    MENU_DIALOG = 5,
 }
 
 smasMainMenuSystem.menuSections = {
@@ -46,6 +45,9 @@ smasMainMenuSystem.menuSections = {
     DIALOG_SETTINGS_CHANGENAME = 13,
     DIALOG_SETTINGS_CHANGEPFP = 14,
     DIALOG_SETTINGS_CHANGEPFP_INFO = 15,
+    DIALOG_SETTINGS_INPUTCONFIG = 16,
+    DIALOG_SETTINGS_INPUTCONFIG2 = 17,
+    DIALOG_SETTINGS_SAVESWITCH = 18,
 }
 
 smasMainMenuSystem.menuItems = {}
