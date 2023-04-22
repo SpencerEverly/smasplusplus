@@ -52,6 +52,28 @@ smasSMB1System.correctPathCoordinates = {
             [1] = 
                 {x = -178650, y = -180160, sizeY = 96, passed = false},
             },
+            [2] = 
+                {x = -178074, y = -180256, sizeY = 96, passed = false},
+            },
+            [3] = 
+                {x = -177466, y = -180384, sizeY = 96, passed = false},
+            },
+            [4] = 
+                {x = -176858, y = -180384, sizeY = 128, passed = false},
+            },
+            [5] = 
+                {x = -176090, y = -180256, sizeY = 96, passed = false},
+            },
+            [6] = 
+                {x = -175514, y = -180384, sizeY = 96, passed = false},
+            },
+        wrongPath = {
+            [1] = 
+                {x = -177498, y = -180160, sizeY = 96, playerX = -179066, playerY = -180256},
+            },
+            [2] = 
+                {x = -175546, y = -180256, sizeY = 96, playerX = -177146, playerY = -180256},
+            },
     },
 }
 
