@@ -1,6 +1,6 @@
 local smasSMB1System = {}
 
-smasSMB1System.debug = true --True if debug mode is on
+smasSMB1System.debug = false --True if debug mode is on
 smasSMB1System.areaToCoverUpwards = 480 --How many tiles up should it be for the player to cross to get the checkpoint?
 smasSMB1System.areaToCoverDownwards = 64 --How many tiles down should it be for the player to cross to get the checkpoint?
 GameData.smasSMB1System = GameData.smasSMB1System or {}
