@@ -14,10 +14,11 @@ end
 
 smasAceCoins.dragonCoinIndex = {}
 smasAceCoins.totalDragonCoins = 0
+smasAceCoins.totalDragonCoinsCollected = 0
 smasAceCoins.allDragonCoinsCollected = false
+smasAceCoins.originalDragonCoinScore = NPC.config[274].score
 
 function smasAceCoins.onStart()
-    NPC.config[274].score = 6
     for k,v in ipairs(NPC.get(274)) do
         smasAceCoins.totalDragonCoins = smasAceCoins.totalDragonCoins + 1
         smasAceCoins.dragonCoinIndex[smasAceCoins.totalDragonCoins] = {
@@ -33,23 +34,19 @@ function smasAceCoins.checkDragonCoinStatus(isAceCoin)
     if isAceCoin == nil then
         isAceCoin = false
     end
-    if NPC.config[274].score == 11 then
+    if smasAceCoins.totalDragonCoinsCollected >= smasAceCoins.totalDragonCoins and not smasAceCoins.allDragonCoinsCollected then
         if isAceCoin then
             Sound.playSFX(147)
-        end
-        if not smasAceCoins.allDragonCoinsCollected then
-            if isAceCoin then
-                if not table.icontains(SaveData.SMASPlusPlus.levels.complete.dragonCoins,Level.filename()) then
-                    table.insert(SaveData.SMASPlusPlus.levels.complete.dragonCoins, Level.filename())
-                end
-            else
-                if not table.icontains(SaveData.SMASPlusPlus.levels.complete.aceCoins,Level.filename()) then
-                    table.insert(SaveData.SMASPlusPlus.levels.complete.aceCoins, Level.filename())
-                end
+            if not table.icontains(SaveData.SMASPlusPlus.levels.complete.dragonCoins,Level.filename()) then
+                table.insert(SaveData.SMASPlusPlus.levels.complete.dragonCoins, Level.filename())
             end
-            smasAceCoins.allDragonCoinsCollected = true
+        else
+            if not table.icontains(SaveData.SMASPlusPlus.levels.complete.aceCoins,Level.filename()) then
+                table.insert(SaveData.SMASPlusPlus.levels.complete.aceCoins, Level.filename())
+            end
         end
-        NPC.config[274].score = 6
+        NPC.config[274].score = smasAceCoins.originalDragonCoinScore
+        smasAceCoins.allDragonCoinsCollected = true
     end
 end
 
@@ -62,6 +59,7 @@ function smasAceCoins.onTick()
     for _,p in ipairs(Player.get()) do
         for i = 1,smasAceCoins.totalDragonCoins do
             if not smasAceCoins.dragonCoinIndex[i].collected and Colliders.collide(p, smasAceCoins.dragonCoinIndex[i].npcData) then
+                smasAceCoins.totalDragonCoinsCollected = smasAceCoins.totalDragonCoinsCollected + 1
                 smasAceCoins.dragonCoinIndex[i].collected = true
             end
         end
