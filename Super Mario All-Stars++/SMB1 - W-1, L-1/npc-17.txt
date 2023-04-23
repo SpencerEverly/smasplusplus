@@ -1,6 +1,0 @@
-gfxheight=32
-height=32
-speed=0.7
-frames=4
-framespeed=13
-framestyle=1
