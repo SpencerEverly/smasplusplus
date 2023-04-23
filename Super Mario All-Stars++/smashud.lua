@@ -915,7 +915,7 @@ if SaveData.lifeCrownsComplete == "trulyfalse" then
 end
 
 function smasHud.onTick()
-    if SaveData.SMASPlusPlus.hud.lives == 1000 then --When the lives hit 1000...
+    if SaveData.SMASPlusPlus.hud.lives >= 1000 and SaveData.SMASPlusPlus.hud.lives <= 1099 then --When the lives hit 1000...
         if not (SaveData.lifeCrownsComplete == "phase1complete") then
             SaveData.lifeCrownsComplete = "phase1"
         end
@@ -924,7 +924,7 @@ function smasHud.onTick()
         Sound.playSFX("one-crown-achieved.ogg")
         SaveData.lifeCrownsComplete = "phase1complete"
     end
-    if SaveData.SMASPlusPlus.hud.lives == 1100 then --When the lives hit 1100...
+    if SaveData.SMASPlusPlus.hud.lives >= 1100 and SaveData.SMASPlusPlus.hud.lives <= 1109 then --When the lives hit 1100...
         if not (SaveData.lifeCrownsComplete == "phase2complete") then
             SaveData.lifeCrownsComplete = "phase2"
         end
@@ -933,7 +933,7 @@ function smasHud.onTick()
         Sound.playSFX("two-crowns-achieved.ogg")
         SaveData.lifeCrownsComplete = "phase2complete"
     end
-    if SaveData.SMASPlusPlus.hud.lives == 1110 then --When the lives hit 1110...
+    if SaveData.SMASPlusPlus.hud.lives >= 1110 then --When the lives hit 1110...
         if not (SaveData.lifeCrownsComplete == "phase3complete") then
             SaveData.lifeCrownsComplete = "phase3"
         end

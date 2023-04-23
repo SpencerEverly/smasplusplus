@@ -136,13 +136,13 @@ function smasEnemySystem.onTick()
                         v.speedX = 0
                     end
                     if Collisionz.CheckCollisionBlock(player, v) and Collisionz.FindCollision(player, v) == Collisionz.CollisionSpot.COLLISION_TOP then
-                        player.speedY = -2
+                        player.speedY = -Defines.jumpheight_bounce / 10
                         if player.keys.jump then
                             player:mem(0x11C, FIELD_WORD, Defines.jumpheight_bounce)
                         end
                         if not Playur.isOnGround(player) then
                             smasEnemySystem.shellTipPointIndicator = smasEnemySystem.shellTipPointIndicator + 1
-                            if smasEnemySystem.shellTipPointIndicator >= SCORE_2UP then
+                            if smasEnemySystem.shellTipPointIndicator >= SCORE_3UP then
                                 smasEnemySystem.shellTipPointIndicator = SCORE_1UP
                             end
                         else
