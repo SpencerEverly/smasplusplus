@@ -130,7 +130,7 @@ function smasEnemySystem.onTick()
     if smasEnemySystem.enableTurtleTipping then
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             for k,v in ipairs(NPC.get(smasTables.allKoopaShellNPCIDs)) do --Shells
-                for j,l in ipairs(Block.get()) do
+                for j,l in ipairs(Block.get(Block.SOLID)) do
                     if Collisionz.IsPlayerCloseToShell(player, v, 16) and Collisionz.CheckCollisionBlock(v, l) and Collisionz.CanMoveShell(player, v) and v:mem(0x136, FIELD_BOOL) then
                         v:mem(0x136, FIELD_BOOL, false)
                         v.speedX = 0
