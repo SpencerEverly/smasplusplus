@@ -140,8 +140,9 @@ function timer.onTick()
 		end
 		
         if SMBX_VERSION == VER_SEE_MOD then
-            if timer.getValue() <= 100 and timer.getValue() >= 1 then
+            if timer.getValue() <= 100 and timer.getValue() >= 1 and not smasBooleans.inFuzzyMode then
                 Audio.MusicSetTempo(1.5)
+                Audio.MusicSetSpeed(1.5)
             end
         end
         

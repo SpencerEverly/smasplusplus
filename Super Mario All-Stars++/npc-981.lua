@@ -3,6 +3,7 @@ local fuzzy = {}
 local npcID = NPC_ID
 
 local npcManager = require("npcManager")
+local smasBooleans = require("smasBooleans")
 
 fuzzy.settings = npcManager.setNpcSettings{
     id = npcID,
@@ -40,6 +41,7 @@ npcManager.registerHarmTypes(npcID, harmTypes, harmMap)
 
 fuzzy.dizziness = lunatime.toTicks(15)
 fuzzy.dizzySfx = Misc.resolveSoundFile("fuzzy-dizzy")
+fuzzy.dizzyMusicValue = 1
 
 local function compileShader(filename)
     filename = filename..".frag"
@@ -124,6 +126,25 @@ function fuzzy.onDraw()
                 intensity = intensity
             }
         }
+        smasBooleans.inFuzzyMode = true
+    end
+    if dizzy >= 2 then
+        if SMBX_VERSION == VER_SEE_MOD then
+            fuzzy.dizzyMusicValue = fuzzy.dizzyMusicValue - 0.01
+            if fuzzy.dizzyMusicValue <= 0.75 then
+                fuzzy.dizzyMusicValue = 1
+            end
+            Audio.MusicSetTempo(fuzzy.dizzyMusicValue)
+            Audio.MusicSetSpeed(fuzzy.dizzyMusicValue)
+        end
+    elseif dizzy == 1 then
+        if SMBX_VERSION == VER_SEE_MOD then
+            Audio.MusicSetTempo(1)
+            Audio.MusicSetSpeed(1)
+            fuzzy.dizzyMusicValue = 1
+        end
+    elseif dizzy <= 0 then
+        smasBooleans.inFuzzyMode = false
     end
     if dizzy >= fuzzy.dizziness/2 then
         local d = (dizzy/(fuzzy.dizziness/2) - 1)

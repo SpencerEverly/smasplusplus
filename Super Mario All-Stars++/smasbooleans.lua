@@ -47,6 +47,8 @@ smasBooleans.isInHub = false
 smasBooleans.isOnMainMenu = false
 --This is set when Classic Battle Mode is active.
 smasBooleans.isInClassicBattleMode = false
+--Whether the player is in Fuzzy mode or not.
+smasBooleans.inFuzzyMode = false
 
 
 return smasBooleans
