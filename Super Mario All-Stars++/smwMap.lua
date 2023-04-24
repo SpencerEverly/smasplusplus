@@ -3792,6 +3792,7 @@ do
     if player.character == CHARACTER_MARIO then
         smwMap.walkCycles["01-SMB1-RETRO"] = {[PLAYER_SMALL] = {2,9,10, framespeed = 8},[PLAYER_BIG] = {2,3,36, framespeed = 6}}
         smwMap.walkCycles["08-SMBSPECIAL"] = smwMap.walkCycles["01-SMB1-RETRO"]
+        smwMap.walkCycles["19-SML1"] = smwMap.walkCycles["01-SMB1-RETRO"]
         smwMap.walkCycles["16-NSMBWII-MARIO"] = {[PLAYER_SMALL] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46, framespeed = 3},[PLAYER_BIG] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46, framespeed = 3}}
     end
 

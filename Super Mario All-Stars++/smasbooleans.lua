@@ -51,5 +51,7 @@ smasBooleans.isInClassicBattleMode = false
 smasBooleans.inFuzzyMode = false
 --Whether we should speed up the music if the timer is less than 100. Will be used in case if we need the speed set to something different.
 smasBooleans.canSpeedUpMusicWhenTimerIsLessThan100 = true
+--If the key is activated, this is true.
+smasBooleans.keyholeActivated = false
 
 return smasBooleans
