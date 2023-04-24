@@ -248,6 +248,7 @@ function smasCharacterChanger.onInputUpdate()
             
             
             if smasCharacterChanger.selectionNumber then
+                smasCharacterCostumes.currentCostume = {}
                 local charac = smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber]
                 if smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
                     player:transform(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], false)
