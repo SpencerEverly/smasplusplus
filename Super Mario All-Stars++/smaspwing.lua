@@ -69,6 +69,8 @@ function smasPWing.runningCounter(plr)
         else
             return plr:mem(0x168, FIELD_FLOAT)
         end
+    else
+        return plr:mem(0x168, FIELD_FLOAT)
     end
 end
 
@@ -92,6 +94,8 @@ function smasPWing.canStartFlying(plr)
         else
             return plr:mem(0x16C, FIELD_BOOL)
         end
+    else
+        return plr:mem(0x16C, FIELD_BOOL)
     end
 end
 

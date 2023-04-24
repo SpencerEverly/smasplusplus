@@ -1,22 +1,12 @@
---Theme switching for if you wanna use this system in your episode.
-
-
----------MUSIC REPLACING---------
-
------Replacing music sections-----
-
---For music, first add the requring stuffs:
-
 local playerManager = require("playerManager")
 
 local ready = false
 
 --This is important so that the code will work
-local costumes = {}
-
 local musicalchairs = {}
 
 musicalchairs.debug = false
+musicalchairs.enabled = true
 
 local started = false
 
@@ -42,24 +32,8 @@ function musicalchairs.switcher()
     started = true
 end
 
-function musicalchairs.checkYoshiStatus(musicName, formatName, arguments)
-    if formatName ~= "ogg" or formatName ~= "spc" or formatName ~= "nsf" then
-        error("Music must be ogg, spc, or nsf")
-        return
-    end
-    if formatName == nil then
-        formatName = "ogg"
-    end
-    if arguments == nil then
-        arguments = ""
-    end
-    if formatName == "ogg" then
-        
-    elseif formatName == "spc" then
-        
-    elseif formatName == "nsf" then
-        
-    end
+function musicalchairs.checkYoshiStatus()
+    
 end
 
 function musicalchairs.onStart()
@@ -87,7 +61,7 @@ function musicalchairs.onDraw()
         Text.printWP("YOSHICOUNTER2: "..yoshicounteroff, 100, 180, 0)
     end
     
-    if started and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+    if started and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated and musicalchairs.enabled then
         if player.mount ~= 3 then
             musicposition = Audio.MusicGetPos()
             yoshicounter = 3
