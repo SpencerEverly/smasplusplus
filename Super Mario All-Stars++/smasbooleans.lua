@@ -49,6 +49,7 @@ smasBooleans.isOnMainMenu = false
 smasBooleans.isInClassicBattleMode = false
 --Whether the player is in Fuzzy mode or not.
 smasBooleans.inFuzzyMode = false
-
+--Whether we should speed up the music if the timer is less than 100. Will be used in case if we need the speed set to something different.
+smasBooleans.canSpeedUpMusicWhenTimerIsLessThan100 = true
 
 return smasBooleans
