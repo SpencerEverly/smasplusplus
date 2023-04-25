@@ -5,6 +5,13 @@
 
 local smasFunctions = {}
 
+if SMBX_VERSION == VER_SEE_MOD then
+    console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
+    _G.LunaDLL = ffi.load("LunaDll.dll")
+end
+
+console:println("Loading SMASFunctions...")
+
 --Now for the base functions!
 _G.Misk = require("scripts/functions/misc")
 _G.File = require("scripts/functions/file")

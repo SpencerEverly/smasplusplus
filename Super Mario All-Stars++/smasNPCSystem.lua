@@ -144,13 +144,18 @@ function smasNPCSystem.drawNPC(levelID)
         return
     end
     
-    
-    
-    if smasNPCSystem.createdNPCs[levelID].direction == -1 then --If the direction is -1 (left), draw the NPC to the left
-        Graphics.drawImageToSceneWP(smasNPCSystem.createdNPCs[levelID].image, smasNPCSystem.createdNPCs[levelID].x, smasNPCSystem.createdNPCs[levelID].y, 0, 0, smasNPCSystem.createdNPCs[levelID].width, smasNPCSystem.createdNPCs[levelID].height, smasNPCSystem.createdNPCs[levelID].priority)
-    elseif smasNPCSystem.createdNPCs[levelID].direction == 1 then --If the direction is 1 (right), draw the NPC to the right
-        Graphics.drawImageToSceneWP(smasNPCSystem.createdNPCs[levelID].image, smasNPCSystem.createdNPCs[levelID].x, smasNPCSystem.createdNPCs[levelID].y, 0, smasNPCSystem.createdNPCs[levelID].height, smasNPCSystem.createdNPCs[levelID].width, smasNPCSystem.createdNPCs[levelID].height, smasNPCSystem.createdNPCs[levelID].priority)
-    end
+    Graphics.drawBox{
+        texture = smasNPCSystem.createdNPCs[levelID].image,
+        x = smasNPCSystem.createdNPCs[levelID].x,
+        y = smasNPCSystem.createdNPCs[levelID].y,
+        width = smasNPCSystem.createdNPCs[levelID].width,
+        height = smasNPCSystem.createdNPCs[levelID].height,
+        sourceX = 0,
+        sourceY = 0,
+        sourceWidth = smasNPCSystem.createdNPCs[levelID].width * smasNPCSystem.createdNPCs[levelID].direction,
+        sourceHeight = smasNPCSystem.createdNPCs[levelID].height,
+        priority = smasNPCSystem.createdNPCs[levelID].priority,
+    }
 end
 
 function smasNPCSystem.onStart()
@@ -195,7 +200,7 @@ function smasNPCSystem.onDraw()
                     end
                 end
                 for a,b in ipairs(Block.get(Block.SOLID)) do
-                    if Collisionz.EasyModeCollision(smasNPCSystem.createdNPCs[1], b, false) == Collisionz.CollisionSpot.COLLISION_NONE and Collisionz.CheckCollision(smasNPCSystem.createdNPCs[1], b) then
+                    if Collisionz.EasyModeCollision(smasNPCSystem.createdNPCs[k], b, false) == Collisionz.CollisionSpot.COLLISION_NONE and Collisionz.CheckCollision(smasNPCSystem.createdNPCs[k], b) then
                         smasNPCSystem.createdNPCs[k].speedY = smasNPCSystem.createdNPCs[k].speedY + Defines.npc_grav * 0.05
                     end
                 end
