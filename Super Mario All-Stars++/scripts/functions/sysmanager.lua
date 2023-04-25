@@ -459,4 +459,22 @@ function SysManager.isOutsideOfUnplayeredAreas()
     )
 end
 
+function SysManager.loadLevel(levelFilename, warpIdx)
+    -- 0 means default warp index
+    if warpIdx == nil then
+        warpIdx = 0
+    end
+    
+    -- Set teleport destination
+    mem(0x00B2C6DA, FIELD_WORD, warpIdx)    -- GM_NEXT_LEVEL_WARPIDX
+    mem(0x00B25720, FIELD_STRING, levelFilename) -- GM_NEXT_LEVEL_FILENAME
+    
+    -- Force modes such that we trigger level exit
+    mem(0x00B250B4, FIELD_WORD, 0)  -- GM_IS_EDITOR_TESTING_NON_FULLSCREEN
+    mem(0x00B25134, FIELD_WORD, 0)  -- GM_ISLEVELEDITORMODE
+    mem(0x00B2C89C, FIELD_WORD, 0)  -- GM_CREDITS_MODE
+    mem(0x00B2C620, FIELD_WORD, 0)  -- GM_INTRO_MODE
+    mem(0x00B2C5B4, FIELD_WORD, -1) -- GM_EPISODE_MODE (set to leave level)
+end
+
 return SysManager

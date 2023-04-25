@@ -204,10 +204,4 @@ function smasNPCSystem.onDraw()
     end
 end
 
-for a,b in ipairs(Block.get()) do
-    if Block.SOLID_MAP[b.id] then
-        return Collisionz.FindCollision(smasNPCSystem.createdNPCs[1], b)
-    end
-end
-
 return smasNPCSystem

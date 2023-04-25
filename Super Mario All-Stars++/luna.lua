@@ -255,6 +255,7 @@ end
 if SMBX_VERSION == VER_SEE_MOD then
     console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
     _G.LunaDLL = ffi.load("LunaDll.dll")
+    Misc.setSuperMarioAllStarsPlusPlusEpisodeName()
 end
 if Misc.setWindowTitle ~= nil then
     console:println("Window title set.")

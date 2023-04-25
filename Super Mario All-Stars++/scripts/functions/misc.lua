@@ -29,14 +29,18 @@ function Misc.worldFilename() --Gets the world filename. Thanks KBM_Quine!
 end
 
 function Misc.inSuperMarioAllStarsPlusPlus() --Checks and sees if SMAS++ is being run. If not, some functions won't run. Idk if this is a reliable check but oh well, I tried.
-    return (Misc.worldFilename() == "__World Map.wld" --Checks to see if the world map is this...
-        and io.exists(Misc.episodePath().."SMB1 - W-1, L-1.lvlx") --Then checks the first levels of each mandatory game (+ SMBLL).
-        and io.exists(Misc.episodePath().."SMBLL - W-1, L-1.lvlx")
-        and io.exists(Misc.episodePath().."SMB2 - W-1, L-1.lvlx")
-        and io.exists(Misc.episodePath().."SMB3 - W-1, L-1.lvlx")
-        and io.exists(Misc.episodePath().."SMW - W-1, L-YI1.lvlx")
-        and io.exists(Misc.episodePath().."SMBS - W-1, L-1.lvlx")
-    )
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        return (Misc.worldFilename() == "__World Map.wld" --Checks to see if the world map is this...
+            and io.exists(Misc.episodePath().."SMB1 - W-1, L-1.lvlx") --Then checks the first levels of each mandatory game (+ SMBLL).
+            and io.exists(Misc.episodePath().."SMBLL - W-1, L-1.lvlx")
+            and io.exists(Misc.episodePath().."SMB2 - W-1, L-1.lvlx")
+            and io.exists(Misc.episodePath().."SMB3 - W-1, L-1.lvlx")
+            and io.exists(Misc.episodePath().."SMW - W-1, L-YI1.lvlx")
+            and io.exists(Misc.episodePath().."SMBS - W-1, L-1.lvlx")
+        )
+    elseif SMBX_VERSION == VER_SEE_MOD then
+        return LunaDLL.LunaLuaInSMASPlusPlus()
+    end
 end
 
 if Misc.inSuperMarioAllStarsPlusPlus() then
