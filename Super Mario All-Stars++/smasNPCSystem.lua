@@ -146,21 +146,23 @@ function smasNPCSystem.drawNPC(levelID)
     
     Graphics.drawBox{
         texture = smasNPCSystem.createdNPCs[levelID].image,
-        x = smasNPCSystem.createdNPCs[levelID].x,
-        y = smasNPCSystem.createdNPCs[levelID].y,
-        width = smasNPCSystem.createdNPCs[levelID].width,
+        x = smasNPCSystem.createdNPCs[levelID].x + (smasNPCSystem.createdNPCs[levelID].width * 0.5),
+        y = smasNPCSystem.createdNPCs[levelID].y + (smasNPCSystem.createdNPCs[levelID].height * 0.5),
+        width = smasNPCSystem.createdNPCs[levelID].width * smasNPCSystem.createdNPCs[levelID].direction,
         height = smasNPCSystem.createdNPCs[levelID].height,
         sourceX = 0,
         sourceY = 0,
-        sourceWidth = smasNPCSystem.createdNPCs[levelID].width * smasNPCSystem.createdNPCs[levelID].direction,
+        sourceWidth = smasNPCSystem.createdNPCs[levelID].width,
         sourceHeight = smasNPCSystem.createdNPCs[levelID].height,
         priority = smasNPCSystem.createdNPCs[levelID].priority,
+        sceneCoords = true,
+        centered = true,
     }
 end
 
 function smasNPCSystem.onStart()
     if Level.filename() == "SMB1 - W-1, L-1.lvlx" then
-        --smasNPCSystem.createNPC{id = 1, image = testNPC2, frameCount = 17, x = player.x, y = player.y - 300, width = 68, height = 54, direction = -1, isFriendly = true, cantMove = true, useVanillaLayers = true, attachToLayer = "Default", movementSpeed = 2, frameSpeed = 3}
+        --smasNPCSystem.createNPC{id = 1, image = testNPC2, frameCount = 17, x = player.x, y = player.y - 300, width = 68, height = 54, direction = -1, isFriendly = true, cantMove = true, useVanillaLayers = true, attachToLayer = "Default", movementSpeed = 2, frameSpeed = 3, messageToSpeak = ""}
     end
 end
 
@@ -199,9 +201,17 @@ function smasNPCSystem.onDraw()
                         end
                     end
                 end
-                for a,b in ipairs(Block.get(Block.SOLID)) do
-                    if Collisionz.EasyModeCollision(smasNPCSystem.createdNPCs[k], b, false) == Collisionz.CollisionSpot.COLLISION_NONE and Collisionz.CheckCollision(smasNPCSystem.createdNPCs[k], b) then
-                        smasNPCSystem.createdNPCs[k].speedY = smasNPCSystem.createdNPCs[k].speedY + Defines.npc_grav * 0.05
+                if not Misc.isPaused() then
+                    smasNPCSystem.createdNPCs[k].x = smasNPCSystem.createdNPCs[k].x + smasNPCSystem.createdNPCs[k].speedX
+                    smasNPCSystem.createdNPCs[k].y = smasNPCSystem.createdNPCs[k].y + smasNPCSystem.createdNPCs[k].speedY
+                    for a,b in ipairs(Block.get(Block.SOLID)) do
+                        if not Collisionz.CheckCollision(smasNPCSystem.createdNPCs[k], b) and Collisionz.FindCollision(smasNPCSystem.createdNPCs[k], b) == Collisionz.CollisionSpot.COLLISION_NONE then
+                            if smasNPCSystem.createdNPCs[k].speedY <= 8 then
+                                smasNPCSystem.createdNPCs[k].speedY = smasNPCSystem.createdNPCs[k].speedY + (Defines.npc_grav * 0.0005)
+                            end
+                        elseif Collisionz.CheckCollision(smasNPCSystem.createdNPCs[k], b) and Collisionz.FindCollision(smasNPCSystem.createdNPCs[k], b) == Collisionz.CollisionSpot.COLLISION_TOP then
+                            smasNPCSystem.createdNPCs[k].speedY = 0
+                        end
                     end
                 end
             end
