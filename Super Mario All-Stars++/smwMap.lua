@@ -118,6 +118,8 @@ smwMap.drawSceneriesOnMap = true
 smwMap.enableMusic = true
 --Only true when teleporting.
 smwMap.isTeleporting = false
+--If we should move the player automatically when unlocking one level. Default is false because I wanna make it more like the SMBX 1.3 map.
+smwMap.movePlayerWithOnePathLevelUnlock = false
 
 -- Debug thing: if true, an area's "restrict camera" setting won't do anything and the look around mode will always work.
 smwMap.freeCamera = false
@@ -1640,7 +1642,9 @@ do
                 if eventObj ~= nil then
                     -- The player will only be forced to walk if exactly 1 path was unlocked
                     if noPathsUnlocked then
-                        --forceWalkDirection = directionName
+                        if smwMap.movePlayerWithOnePathLevelUnlock then
+                            forceWalkDirection = directionName
+                        end
                         noPathsUnlocked = false
                     else
                         forceWalkDirection = nil
