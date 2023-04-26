@@ -1518,9 +1518,9 @@ ID:848;X:-198688;Y:-198432;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - Level 
 ID:752;X:-197312;Y:-199712;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-5\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\, -32\, 128\"\n}\n";
 ID:802;X:-197344;Y:-199584;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-5.lvlx\"\,\n    \"levelTitle\"\: \"1-5\: Caverns Below\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMB31-6\"\,\n    \"path_up\"\: \"toSMB31-5\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-197312;Y:-199584;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-6\"\,\n    \"points\"\: \"96\, 0\, -36\, 0\"\n}\n";
-ID:802;X:-197216;Y:-199584;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"1-6\: Wooden Mushrooms\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB31-6\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB31-Castle\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 2\,\n    \"unlock_up\"\: 9\n}\n";
-ID:752;X:-197216;Y:-199616;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-Castle\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\, 128\, -32\"\n}\n";
-ID:854;X:-197088;Y:-199648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #1\: Larry\"\,\n    \"path_left\"\: \"toSMB31-Castle\"\,\n    \"path_right\"\: \"toSMB3W-2Warp1\"\,\n    \"unlock_right\"\: 9\n}\n";
+ID:802;X:-197216;Y:-199584;D:-1;XTRA:"{\n    \"additional_levels_unlocked\"\: \"toSMB31-Toad1Path2\,toSMB31-CastleP2\"\,\n    \"levelFilename\"\: \"SMB3 - W-1\, L-6.lvlx\"\,\n    \"levelTitle\"\: \"1-6\: Wooden Mushrooms\"\,\n    \"path_down\"\: \"\"\,\n    \"path_left\"\: \"toSMB31-6\"\,\n    \"path_right\"\: \"\"\,\n    \"path_up\"\: \"toSMB31-Castle\"\,\n    \"unlock_down\"\: 2\,\n    \"unlock_right\"\: 2\,\n    \"unlock_up\"\: 9\n}\n";
+ID:752;X:-197216;Y:-199616;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-Castle\"\,\n    \"points\"\: \"0\, 32\, 0\, -32\"\n}\n";
+ID:854;X:-197088;Y:-199648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-1\, L-Airship.lvlx\"\,\n    \"levelTitle\"\: \"Airship #1\: Larry\"\,\n    \"path_left\"\: \"toSMB31-CastleP2\"\,\n    \"path_right\"\: \"toSMB3W-2Warp1\"\,\n    \"unlock_right\"\: 9\n}\n";
 ID:821;X:-197024;Y:-199648;D:-1;XTRA:"{\n    \"destinationWarpName\"\: \"SMB3W-2BeginWarp\"\,\n    \"levelTitle\"\: \"Warp to World 2\"\,\n    \"path_left\"\: \"toSMB3W-2Warp1\"\,\n    \"warpName\"\: \"SMB3W-1EndWarp\"\n}\n";
 ID:752;X:-197056;Y:-199648;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W-2Warp1\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
 ID:753;X:-197600;Y:-200608;D:-1;XTRA:"{\n    \"backgroundName\"\: \"waterClassic\"\,\n    \"customMusicPath\"\: \"_OST/Super Mario Bros 3/Desert Land.spc|0\;g=2.5\"\,\n    \"height\"\: 600\,\n    \"music\"\: 2\,\n    \"restrictCamera\"\: true\,\n    \"width\"\: 1600\n}\n";
@@ -2203,6 +2203,10 @@ ID:752;X:-200768;Y:-195072;D:-1;XTRA:"{\n    \"name\"\: \"toSMB37-8\"\,\n    \"p
 ID:840;X:-197216;Y:-199776;D:-1;XTRA:"{\n    \"path_down\"\: \"toSMB31-Bonus1P2\"\,\n    \"path_right\"\: \"toSMB31-Bonus1\"\,\n    \"path_up\"\: \"toSMB3W1Path1\"\n}\n";
 ID:752;X:-197216;Y:-199744;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-Bonus1P2\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
 ID:752;X:-197216;Y:-199808;D:-1;XTRA:"{\n    \"name\"\: \"toSMB3W1Path1\"\,\n    \"points\"\: \"0\, -32\, 0\, 32\"\n}\n";
+ID:850;X:-197280;Y:-199648;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB3 - W-0\, L-TH1.lvlx\"\,\n    \"levelTitle\"\: \"Toad House\"\,\n    \"path_left\"\: \"\"\,\n    \"path_right\"\: \"toSMB31-Toad1Path2\"\,\n    \"path_up\"\: \"\"\,\n    \"unlock_left\"\: 2\n}\n";
+ID:752;X:-197248;Y:-199648;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-Toad1Path2\"\,\n    \"points\"\: \"32\, 0\, -32\, 0\"\n}\n";
+ID:842;X:-197216;Y:-199648;D:-1;XTRA:"{\n    \"path_down\"\: \"toSMB31-Castle\"\,\n    \"path_left\"\: \"toSMB31-Toad1Path2\"\,\n    \"path_right\"\: \"toSMB31-CastleP2\"\n}\n";
+ID:752;X:-197184;Y:-199648;D:-1;XTRA:"{\n    \"name\"\: \"toSMB31-CastleP2\"\,\n    \"points\"\: \"-32\, 0\, 96\, 0\"\n}\n";
 NPC_END
 LAYERS
 LR:"Default";

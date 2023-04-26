@@ -1631,7 +1631,7 @@ do
             if (type(unlockType) == "number" and (unlockType == 2 or unlockType-2 == winType)) or unlockType == true or winType < 0 then
                 local eventObj = smwMap.unlockPath(levelObj.settings["path_".. directionName],levelObj)
                 
-                if smwMap.levelMultiPathsToUnlock(levelObj) ~= "{}" then
+                if smwMap.levelMultiPathsToUnlock(levelObj) ~= {} then
                     for i = 1,#smwMap.levelMultiPathsToUnlock(levelObj) do
                         smwMap.unlockPath(smwMap.levelMultiPathsToUnlock(levelObj)[i],levelObj)
                     end
