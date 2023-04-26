@@ -50,12 +50,6 @@ function onDraw()
     --Text.print(smwMap.unlockingCurrentPath, 100, 100)
     
     --Path unlockers
-    if smwMap.unlockingCurrentPath == "toSMB31-Toad1Path1" then
-        smwMap.unlockPath("toSMB31-4")
-    end
-    if smwMap.unlockingCurrentPath == "toSMB31-Bonus1" then
-        smwMap.unlockPath("toSMB31-Fortress1")
-    end
     if smwMap.unlockingCurrentPath == "toSMB3W-3Path1" then
         smwMap.unlockPath("toSMB33-ToadHouse1")
         smwMap.unlockPath("toSMB33-3")

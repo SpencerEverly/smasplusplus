@@ -279,6 +279,20 @@ local function levelConnectsToPath(pathName,levelObj,directionName)
     return (levelObj.settings["path_".. directionName] == pathName)
 end
 
+function smwMap.levelMultiPathsToUnlock(levelObj)
+    local fakeList = {}
+    if levelObj.settings["additional_levels_unlocked"] ~= nil then
+        local levels = levelObj.settings["additional_levels_unlocked"]
+        local finalizedList = {}
+        for k,v in ipairs(string.split(levels,",",true)) do    
+            table.insert(finalizedList, v)
+        end
+        return finalizedList
+    else
+        return fakeList
+    end
+end
+
 local function unlockConnectedLevels(pathObj)
     for _,levelObj in ipairs(smwMap.objects) do
         if smwMap.getObjectConfig(levelObj.id).isLevel and levelObj.lockedFade > 0 and (
@@ -292,6 +306,7 @@ local function unlockConnectedLevels(pathObj)
                 local sparkle = smwMap.createObject(smwMap.unlockLevelEffectID,levelObj.x,levelObj.y)
 
                 sparkle.data.affectingLevel = levelObj
+                
                 smwMap.unlockingCurrentPath = "false"
             else
                 levelObj.lockedFade = 0
@@ -1609,17 +1624,23 @@ do
     local function unlockLevelPaths(levelObj,winType)
         local noPathsUnlocked = true
         local forceWalkDirection
-
+        
         for _,directionName in ipairs{"up","right","down","left"} do
             local unlockType = (levelObj.settings["unlock_".. directionName])
 
             if (type(unlockType) == "number" and (unlockType == 2 or unlockType-2 == winType)) or unlockType == true or winType < 0 then
                 local eventObj = smwMap.unlockPath(levelObj.settings["path_".. directionName],levelObj)
                 
+                if smwMap.levelMultiPathsToUnlock(levelObj) ~= "{}" then
+                    for i = 1,#smwMap.levelMultiPathsToUnlock(levelObj) do
+                        smwMap.unlockPath(smwMap.levelMultiPathsToUnlock(levelObj)[i],levelObj)
+                    end
+                end
+                
                 if eventObj ~= nil then
                     -- The player will only be forced to walk if exactly 1 path was unlocked
                     if noPathsUnlocked then
-                        forceWalkDirection = directionName
+                        --forceWalkDirection = directionName
                         noPathsUnlocked = false
                     else
                         forceWalkDirection = nil
