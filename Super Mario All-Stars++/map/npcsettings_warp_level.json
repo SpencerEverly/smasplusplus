@@ -91,6 +91,13 @@
 					"title": "Left Path",
 					"tooltip": "Name of the path that is on the level's left.",
 					"value-default": ""
+				},
+                {
+					"control": "lineEdit",
+					"name": "additional_levels_unlocked",
+					"title": "Additional Paths to Unlock",
+					"tooltip": "Name of the paths to also unlock if you want to set multi-paths. Leave blank for no additional paths.",
+					"value-default": ""
 				}
 			]
 		}
