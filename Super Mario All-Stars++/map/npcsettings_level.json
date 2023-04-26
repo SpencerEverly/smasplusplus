@@ -113,6 +113,13 @@
 					"title": "Additional Paths to Unlock",
 					"tooltip": "Name of the paths to also unlock if you want to set multi-paths. Leave blank for no additional paths.",
 					"value-default": ""
+				},
+                {
+					"control": "lineEdit",
+					"name": "unlocking_locked_path",
+					"title": "Locked Path to Unlock",
+					"tooltip": "Name of the path to also unlock if they are locked. Leave blank if there isn't a locked path to unlock.",
+					"value-default": ""
 				}
 			]
 		}

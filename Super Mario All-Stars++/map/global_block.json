@@ -36,6 +36,20 @@
 			"value-min": 1,
 			"value-max": 2048
 		},
+        {
+			"control": "lineEdit",
+			"name": "partOfLockedPath",
+			"title": "Locked Path to Attach To (SMB3)",
+			"tooltip": "The name of the locked path that, when it is unlocked, will vanish this scenery. Blank if not attached to anything.",
+			"value-default": ""
+		},
+        {
+            "control": "levelFile",
+            "name": "partOfLockedLevel",
+            "title": "Level to Attach To (SMB3)",
+            "tooltip": "Filename of the level that will make this scenery disappear if beat with any win type above 0.",
+            "value-default": ""
+        },
 		{
 			"control": "description",
 			"text": "\n<b>What are these?</b>\nThese control when this scenery appears or disappears. For example, if you put 'myCoolPath' into the show path name, the path will be invisible until a path with the name of 'myCoolPath' is unlocked. The higher the delay, the later it actually happens. The hide options are similar, except they hide it instead of showing it."

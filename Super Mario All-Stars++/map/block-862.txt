@@ -1,0 +1,4 @@
+frames=1
+framespeed=12
+priority=-9
+isLockedGate = true

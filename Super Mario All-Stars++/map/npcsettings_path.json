@@ -43,7 +43,36 @@
 			"title": "Hide if Locked",
 			"tooltip": "If ticked, the path will be invisible when locked.",
 			"value-default": false
-		}
-	]
+		},
+        
+        {
+			"control": "group",
+			"name": "smb3settings",
+			"title": "SMB3-Related Settings",
+			"children": [
+                {
+                    "control": "checkBox",
+                    "name": "isLockedSMB3",
+                    "title": "Is Locked (SMB3)",
+                    "tooltip": "Unrelated to the locked system already in place. If checked, the player won't go through this path, even if it's visible. For this path to be unlocked, either a level must be completed, or the player must use a hammer from the map inventory.",
+                    "value-default": false
+                },
+                {
+                    "control": "checkBox",
+                    "name": "canUnlockWhenBeatingLevelSMB3",
+                    "title": "Unlock After Winning a Level (SMB3)",
+                    "tooltip": "If checked, the level (After beating) will unlock the path. This won't affect whether hammers can be used or not.",
+                    "value-default": false
+                },
+                {
+                    "control": "levelFile",
+                    "name": "levelBeatBeforeUnlockedSMB3",
+                    "title": "Unlock Level Filename (SMB3)",
+                    "tooltip": "Filename of the level that will unlock this path if beat with any win type above 0.",
+                    "value-default": ""
+                }
+            ]
+        }
+    ]
 }
 

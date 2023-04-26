@@ -66,6 +66,7 @@ saveData.unlockedPaths       = saveData.unlockedPaths       or {}
 saveData.beatenLevels        = saveData.beatenLevels        or {}
 saveData.encounterData       = saveData.encounterData       or {}
 saveData.unlockedCheckpoints = saveData.unlockedCheckpoints or {}
+saveData.unlockedPathsSMB3   = saveData.unlockedPathsSMB3   or {}
 
 gameData.winType = gameData.winType or 0
 
@@ -120,8 +121,10 @@ smwMap.enableMusic = true
 smwMap.isTeleporting = false
 --If we should move the player automatically when unlocking one level. Default is false because I wanna make it more like the SMBX 1.3 map.
 smwMap.movePlayerWithOnePathLevelUnlock = false
+--Whether the player can look around the map or not. This also affects the free camera mode.
+smwMap.canLookAround = false
 
--- Debug thing: if true, an area's "restrict camera" setting won't do anything and the look around mode will always work.
+-- Debug thing: if true, an area's "restrict camera" setting won't do anything and the look around mode will work when canLookAround is enabled.
 smwMap.freeCamera = false
 -- Debug thing: if true, disables the HUD and lets you see the entirety of the main buffer
 smwMap.fullBufferView = false
@@ -548,6 +551,7 @@ local EVENT_TYPE = {
     SWITCH_PALACE      = 2,
     FORCE_WALK         = 3,
     ENCOUNTER_DEFEATED = 4,
+    PATH_REVEAL = 5,
 }
 
 local updateEvent
@@ -654,6 +658,42 @@ do
             table.remove(smwMap.activeEvents,1)
         end
     end)
+    
+    
+    updateFunctions[EVENT_TYPE.PATH_REVEAL] = (function(eventObj)
+        local pathName = eventObj.levelObj.settings.unlocking_locked_path
+        local pathObj
+        
+        if pathName == "" then
+            table.remove(smwMap.activeEvents,1)
+        end
+        
+        if pathName ~= "" then
+            pathObj = smwMap.pathsMap[pathName]
+        end
+        
+        eventObj.timer = eventObj.timer + 1
+
+        if eventObj.timer == 1 and pathName ~= "" then
+            Sound.playSFX(27)
+            
+            if smwMap.smokeCloudEffectID ~= nil then
+                for index,direction in ipairs(smokeDirections) do
+                    local smoke = smwMap.createObject(smwMap.smokeCloudEffectID, (pathObj.minX + pathObj.maxX) * 0.5, (pathObj.minY + pathObj.maxY) * 0.5)
+                    
+                    smoke.data.direction = direction
+                    smoke.frameX = index-1
+                end
+            end
+            for _,scenery in ipairs(smwMap.sceneries) do
+                if scenery.globalSettings.partOfLockedPath ~= "" then
+                    scenery.opacity = 0
+                end
+            end
+        elseif eventObj.timer >= 50 then
+            table.remove(smwMap.activeEvents,1)
+        end
+    end)
 
 
     -- Switch palacing releasing the blocks
@@ -750,7 +790,7 @@ do
     end
 
 
-    local function isValidPath(pathObj,canWalkOn)
+    function smwMap.isValidPath(levelObj,pathObj,canWalkOn)
         if canWalkOn == CAN_WALK_ON.ANY then
             return true
         end
@@ -800,16 +840,14 @@ do
         for _,directionName in ipairs{"up","right","down","left"} do
             local pathObj = smwMap.pathsMap[data.levelObj.settings["path_".. directionName]]
 
-            if pathObj ~= nil and (not data.alreadyWalkedOnPaths[pathObj.name] or onPlayersLevel) and isValidPath(pathObj,canWalkOn) then
+            if pathObj ~= nil and (not data.alreadyWalkedOnPaths[pathObj.name] or onPlayersLevel) and smwMap.isValidPath(data.levelObj,pathObj,canWalkOn) then
                 table.insert(validPaths,pathObj)
             end
         end
 
-
         if #validPaths == 0 then
             return false
         end
-
 
         -- Walk down one
         local chosenPath = RNG.irandomEntry(validPaths)
@@ -1080,10 +1118,6 @@ local hudThingsToHude = {
 }
 
 function smwMap.onStart()
-    --if not GameData.____mainMenuComplete then
-        --Level.load("SMAS - Start.lvlx")
-    --end
-    
     for k,v in ipairs(hudThingsToHude) do
         smasHud.visible[v] = false
     end
@@ -1448,6 +1482,13 @@ do
         -- Is it unlocked?
         if not smwMap.pathIsUnlocked(pathObj.name) then
             return
+        end
+        
+        if pathObj.originalObj.settings.smb3settings.isLockedSMB3 and smwMap.pathIsUnlocked(pathObj.name) then
+            if saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.levelBeatBeforeUnlockedSMB3] == nil then
+                Sound.playSFX(3)
+                return
+            end
         end
 
 
@@ -2072,12 +2113,33 @@ do
                     setLevelDestroyed(v.levelObj.settings.levelFilename)
                 end
             end
+            
+            
+            -- Unlock any paths if a level is marked to do so (SMB3)
+            for _,directionName in ipairs{"up","right","down","left"} do
+                local pathName = v.levelObj.settings["unlocking_locked_path"]
+                local pathObj = smwMap.pathsMap[pathName]
+                if pathObj ~= nil then
+                    if not saveData.unlockedPathsSMB3[v.levelObj.settings.levelFilename] and v.levelObj.settings["unlocking_locked_path"] ~= "" and pathObj.originalObj.settings.smb3settings.isLockedSMB3 then
+                        local eventObj = {}
+                        local unlockedPath = v.levelObj.settings["unlocking_locked_path"]
+                        
+                        eventObj.type = EVENT_TYPE.PATH_REVEAL
+                        eventObj.timer = 0
+
+                        eventObj.levelObj = v.levelObj
+
+                        table.insert(smwMap.activeEvents,eventObj)
+                        
+                        saveData.unlockedPathsSMB3[v.levelObj.settings.levelFilename] = true
+                    end
+                end
+            end
 
 
             saveData.beatenLevels[v.levelObj.settings.levelFilename] = true
         end
-
-
+        
         -- Unlock any paths
         unlockLevelPaths(v.levelObj,gameData.winType)
         
@@ -2249,11 +2311,11 @@ do
     local cantEnterLookAroundStates = table.map{PLAYER_STATE.SELECTED,PLAYER_STATE.WON,PLAYER_STATE.CUSTOM_WARPING,PLAYER_STATE.SELECT_START}
 
     lookAroundStateFunctions[LOOK_AROUND_STATE.INACTIVE] = (function(v)
-        if v.isMainPlayer and player.keys.altJump == KEYS_PRESSED and #smwMap.activeEvents == 0 and smwMap.movingEncountersCount == 0 and smwMap.transitionDrawFunction == nil and not cantEnterLookAroundStates[v.state] then -- attempt to look around            
+        if v.isMainPlayer and player.keys.altJump == KEYS_PRESSED and #smwMap.activeEvents == 0 and smwMap.movingEncountersCount == 0 and smwMap.transitionDrawFunction == nil and not cantEnterLookAroundStates[v.state] and smwMap.canLookAround then -- attempt to look around            
             -- Is the area big enough?
             local areaObj = smwMap.currentCameraArea
 
-            if areaObj ~= nil and (areaObj.collider.width > smwMap.camera.width+16 or areaObj.collider.height > smwMap.camera.height+16) or smwMap.freeCamera then
+            if areaObj ~= nil and (areaObj.collider.width > smwMap.camera.width+16 or areaObj.collider.height > smwMap.camera.height+16) or smwMap.freeCamera and smwMap.canLookAround then
                 -- Enter the state
                 v.lookAroundState = LOOK_AROUND_STATE.ACTIVE
 
@@ -2440,6 +2502,28 @@ do
         end
 
         levelObj = levelObj or findLevel(smwMap.mainPlayer,smwMap.mainPlayer.x,smwMap.mainPlayer.y)
+
+        setLevel(smwMap.mainPlayer,levelObj)
+        smwMap.mainPlayer.state = PLAYER_STATE.NORMAL
+        updateNonMainPlayerCounts()
+
+        updateActiveAreas(smwMap.mainPlayer,0)
+        
+        smwMap.isTeleporting = true
+        
+        smwMap.updateMusic()
+    end
+    
+    function smwMap.teleportPlayer(x,y)
+        local levelObj
+        if x ~= nil and y ~= nil then
+            levelObj = findLevel(smwMap.mainPlayer,x,y)
+        else
+            error("Must have an X and Y coordinate for teleporting!")
+            return
+        end
+
+        levelObj = levelObj or findLevel(smwMap.mainPlayer,x,y)
 
         setLevel(smwMap.mainPlayer,levelObj)
         smwMap.mainPlayer.state = PLAYER_STATE.NORMAL
@@ -2764,6 +2848,8 @@ do
             config.hillpart = blockConfig.hillpart or ""
 
             config.priority = (blockConfig.priority ~= -1000 and blockConfig.priority) or nil
+            
+            config.isLockedGate = blockConfig.isLockedGate or false
         end
 
         smwMap.sceneryConfig[id].texture = smwMap.sceneryConfig[id].texture or Graphics.sprites.block[id].img
@@ -2800,7 +2886,10 @@ do
         else
             v.opacity = 0
         end
-
+        
+        if (saveData.unlockedPathsSMB3[v.globalSettings.partOfLockedLevel] ~= nil and saveData.unlockedPathsSMB3[v.globalSettings.partOfLockedLevel]) and smwMap.pathIsUnlocked(v.globalSettings.partOfLockedPath) then
+            v.opacity = 0
+        end
 
         table.insert(smwMap.sceneries,v)
 
@@ -4554,7 +4643,7 @@ function smwMap.onTick()
     if #smwMap.activeEvents > 0 then
         updateEvent(smwMap.activeEvents[1])
     end
-    if SaveData.speedrunMode == true then
+    if SaveData.speedrunMode then
         smwMap.playerSettings.walkSpeed = 10
         smwMap.playerSettings.climbSpeed = 5.75
     end
