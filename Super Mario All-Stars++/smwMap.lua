@@ -676,21 +676,20 @@ do
         end
         
         eventObj.timer = eventObj.timer + 1
-
+        
         if eventObj.timer == 1 and pathName ~= "" then
-            Sound.playSFX(27)
-            
-            if smwMap.smokeCloudEffectID ~= nil then
-                for index,direction in ipairs(smokeDirections) do
-                    local smoke = smwMap.createObject(smwMap.smokeCloudEffectID, (pathObj.minX + pathObj.maxX) * 0.5, (pathObj.minY + pathObj.maxY) * 0.5)
-                    
-                    smoke.data.direction = direction
-                    smoke.frameX = index-1
-                end
-            end
             for _,scenery in ipairs(smwMap.sceneries) do
-                if scenery.globalSettings.partOfLockedPath ~= "" then
+                if scenery.globalSettings.partOfLockedPath ~= "" and scenery.globalSettings.partOfLockedLevel ~= "" and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
                     scenery.opacity = 0
+                    Sound.playSFX(27)
+                    if smwMap.smokeCloudEffectID ~= nil then
+                        for index,direction in ipairs(smokeDirections) do
+                            local smoke = smwMap.createObject(smwMap.smokeCloudEffectID, scenery.x, scenery.y)
+                            
+                            smoke.data.direction = direction
+                            smoke.frameX = index-1
+                        end
+                    end
                 end
             end
         elseif eventObj.timer >= 50 then
@@ -1998,12 +1997,11 @@ do
 
                     SFX.play(smwMap.playerSettings.levelSelectedSound)
                 end
-            elseif player.keys.dropItem == KEYS_PRESSED and v.levelObj ~= nil and Misc.inEditor() then -- unlock ALL the things (only works from in editor)
+            elseif Misc.GetKeyState(VK_SHIFT) and v.levelObj ~= nil and Misc.inEditor() then -- unlock one thing (only works from in editor)
+                gameData.winType = 7
                 v.state = PLAYER_STATE.WON
                 v.timer = 1000
                 v.timer2 = 0
-
-                gameData.winType = -1
             elseif player.keys.altJump == KEYS_PRESSED and Misc.inEditor() then
                 v.state = PLAYER_STATE.PARKING_WHERE_I_WANT
                 v.timer = 0
@@ -2191,23 +2189,19 @@ do
             local pathObj = smwMap.pathsMap[pathName]
             if pathObj ~= nil then
                 for _,scenery in ipairs(smwMap.sceneries) do
-                    if not saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] and not saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] then
-                        if v.levelObj.settings["unlocking_locked_path"] ~= "" and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and pathObj.originalObj.settings.smb3settings.canUnlockWhenBeatingLevelSMB3 then
-                            if scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
-                                local eventObj = {}
-                                local unlockedPath = v.levelObj.settings["unlocking_locked_path"]
-                                
-                                eventObj.type = EVENT_TYPE.PATH_REVEAL
-                                eventObj.timer = 0
+                    if saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] == nil and saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] == nil and v.levelObj.settings["unlocking_locked_path"] ~= "" and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and pathObj.originalObj.settings.smb3settings.canUnlockWhenBeatingLevelSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
+                        local eventObj = {}
+                        local unlockedPath = v.levelObj.settings["unlocking_locked_path"]
+                        
+                        eventObj.type = EVENT_TYPE.PATH_REVEAL
+                        eventObj.timer = 0
 
-                                eventObj.levelObj = v.levelObj
+                        eventObj.levelObj = v.levelObj
 
-                                table.insert(smwMap.activeEvents,eventObj)
-                                
-                                saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] = true
-                                saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] = true
-                            end
-                        end
+                        table.insert(smwMap.activeEvents,eventObj)
+                        
+                        saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] = true
+                        saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] = true
                     end
                 end
             end
@@ -2243,7 +2237,7 @@ do
         local pathObj = smwMap.pathsMap[pathName]
         if pathObj ~= nil then
             for _,scenery in ipairs(smwMap.sceneries) do
-                if not saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 and not pathObj.originalObj.settings.smb3settings.cantUnlockWithHammerSMB3 then
+                if saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] == nil and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 and not pathObj.originalObj.settings.smb3settings.cantUnlockWithHammerSMB3 then
                     local eventObj = {}
                     
                     eventObj.type = EVENT_TYPE.PATH_REVEAL_BRICK
@@ -2254,7 +2248,7 @@ do
                     table.insert(smwMap.activeEvents,eventObj)
                     
                     saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] = true
-                elseif not saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 and pathObj.originalObj.settings.smb3settings.cantUnlockWithHammerSMB3 then
+                elseif saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] == nil and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 and pathObj.originalObj.settings.smb3settings.cantUnlockWithHammerSMB3 then
                     local eventObj = {}
                     
                     eventObj.type = EVENT_TYPE.PATH_UNREVEAL_WRONG
