@@ -62,11 +62,12 @@ GameData.smwMap = GameData.smwMap or {}
 local gameData = GameData.smwMap
 
 
-saveData.unlockedPaths       = saveData.unlockedPaths       or {}
-saveData.beatenLevels        = saveData.beatenLevels        or {}
-saveData.encounterData       = saveData.encounterData       or {}
-saveData.unlockedCheckpoints = saveData.unlockedCheckpoints or {}
-saveData.unlockedPathsSMB3   = saveData.unlockedPathsSMB3   or {}
+saveData.unlockedPaths          = saveData.unlockedPaths          or {}
+saveData.beatenLevels           = saveData.beatenLevels           or {}
+saveData.encounterData          = saveData.encounterData          or {}
+saveData.unlockedCheckpoints    = saveData.unlockedCheckpoints    or {}
+saveData.unlockedLevelPathsSMB3 = saveData.unlockedLevelPathsSMB3 or {}
+saveData.unlockedPathsSMB3      = saveData.unlockedPathsSMB3      or {}
 
 gameData.winType = gameData.winType or 0
 
@@ -546,12 +547,14 @@ end
 -- Events system
 -- Handles stuff like paths opening, castle destruction, etc.
 local EVENT_TYPE = {
-    UNLOCK_PATH        = 0,
-    LEVEL_DESTROYED    = 1,
-    SWITCH_PALACE      = 2,
-    FORCE_WALK         = 3,
-    ENCOUNTER_DEFEATED = 4,
-    PATH_REVEAL = 5,
+    UNLOCK_PATH         = 0,
+    LEVEL_DESTROYED     = 1,
+    SWITCH_PALACE       = 2,
+    FORCE_WALK          = 3,
+    ENCOUNTER_DEFEATED  = 4,
+    PATH_REVEAL         = 5,
+    PATH_REVEAL_BRICK   = 6,
+    PATH_UNREVEAL_WRONG = 7,
 }
 
 local updateEvent
@@ -694,7 +697,65 @@ do
             table.remove(smwMap.activeEvents,1)
         end
     end)
+    
+    
+    updateFunctions[EVENT_TYPE.PATH_REVEAL_BRICK] = (function(eventObj)
+        local pathName = eventObj.levelObj.settings.unlocking_locked_path
+        local pathObj
+        
+        if pathName == "" then
+            table.remove(smwMap.activeEvents,1)
+        end
+        
+        if pathName ~= "" then
+            pathObj = smwMap.pathsMap[pathName]
+        end
+        
+        eventObj.timer = eventObj.timer + 1
 
+        if eventObj.timer == 1 and pathName ~= "" then
+            for _,scenery in ipairs(smwMap.sceneries) do
+                if scenery.globalSettings.partOfLockedPath ~= "" and scenery.globalSettings.partOfLockedLevel == "" and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
+                    scenery.opacity = 0
+                    Sound.playSFX(4)
+                    if smwMap.smokeCloudEffectID ~= nil then
+                        for index,direction in ipairs(smokeDirections) do
+                            local smoke = smwMap.createObject(smwMap.smokeCloudEffectID, scenery.x, scenery.y)
+                            
+                            smoke.data.direction = direction
+                            smoke.frameX = index-1
+                        end
+                    end
+                end
+            end
+        elseif eventObj.timer >= 50 then
+            table.remove(smwMap.activeEvents,1)
+        end
+    end)
+    
+    
+    updateFunctions[EVENT_TYPE.PATH_UNREVEAL_WRONG] = (function(eventObj)
+        local pathName = eventObj.levelObj.settings.unlocking_locked_path
+        local pathObj
+        
+        if pathName == "" then
+            table.remove(smwMap.activeEvents,1)
+        end
+        
+        if pathName ~= "" then
+            pathObj = smwMap.pathsMap[pathName]
+        end
+        
+        eventObj.timer = eventObj.timer + 1
+        
+        if eventObj.timer == 1 then
+            Sound.playSFX(152)
+        end
+        
+        if eventObj.timer >= 2 then
+            table.remove(smwMap.activeEvents,1)
+        end
+    end)
 
     -- Switch palacing releasing the blocks
     local blockSpeeds = {
@@ -1098,6 +1159,8 @@ function smwMap.onInitAPI()
     registerEvent(smwMap,"onTickEnd")
     registerEvent(smwMap,"onExit")
     registerEvent(smwMap,"onInputUpdate")
+    
+    registerEvent(smwMap,"onKeyboardPressDirect")
 end
 
 local hudThingsToHude = {
@@ -1170,13 +1233,14 @@ end
 
 -- Player
 local PLAYER_STATE = {
-    NORMAL               = 0, -- just standing there
-    WALKING              = 1, -- walking along a path
-    SELECTED             = 2, -- just picked a level
-    WON                  = 3, -- just returned from a level, and is waiting to unlock some paths
-    CUSTOM_WARPING       = 4, -- using star road warp
-    PARKING_WHERE_I_WANT = 5, -- illparkwhereiwant / debug mode
-    SELECT_START         = 6, -- selecting the start point
+    NORMAL                = 0, -- just standing there
+    WALKING               = 1, -- walking along a path
+    SELECTED              = 2, -- just picked a level
+    WON                   = 3, -- just returned from a level, and is waiting to unlock some paths
+    CUSTOM_WARPING        = 4, -- using star road warp
+    PARKING_WHERE_I_WANT  = 5, -- illparkwhereiwant / debug mode
+    SELECT_START          = 6, -- selecting the start point
+    UNLOCKING_LOCKED_PATH = 7, -- unlocking a locked path
 }
 
 local LOOK_AROUND_STATE = {
@@ -1484,13 +1548,20 @@ do
             return
         end
         
-        if pathObj.originalObj.settings.smb3settings.isLockedSMB3 and smwMap.pathIsUnlocked(pathObj.name) then
-            if saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.levelBeatBeforeUnlockedSMB3] == nil then
+        --Is it not locked (SMB3)?
+        if pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 ~= "" and saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] == nil then
+            if pathObj.originalObj.settings.smb3settings.isLockedSMB3 and smwMap.pathIsUnlocked(pathObj.name) then
                 Sound.playSFX(3)
                 return
             end
         end
-
+        
+        if pathObj.originalObj.settings.smb3settings.levelBeatBeforeUnlockedSMB3 ~= "" and saveData.unlockedLevelPathsSMB3[pathObj.originalObj.settings.smb3settings.levelBeatBeforeUnlockedSMB3] == nil then
+            if pathObj.originalObj.settings.smb3settings.isLockedSMB3 and smwMap.pathIsUnlocked(pathObj.name) then
+                Sound.playSFX(3)
+                return
+            end
+        end
 
         v.pathObj = pathObj
 
@@ -1933,7 +2004,7 @@ do
                 v.timer2 = 0
 
                 gameData.winType = -1
-            elseif player.keys.altRun == KEYS_PRESSED and Misc.inEditor() then
+            elseif player.keys.altJump == KEYS_PRESSED and Misc.inEditor() then
                 v.state = PLAYER_STATE.PARKING_WHERE_I_WANT
                 v.timer = 0
                 v.timer2 = 0
@@ -2116,22 +2187,27 @@ do
             
             
             -- Unlock any paths if a level is marked to do so (SMB3)
-            for _,directionName in ipairs{"up","right","down","left"} do
-                local pathName = v.levelObj.settings["unlocking_locked_path"]
-                local pathObj = smwMap.pathsMap[pathName]
-                if pathObj ~= nil then
-                    if not saveData.unlockedPathsSMB3[v.levelObj.settings.levelFilename] and v.levelObj.settings["unlocking_locked_path"] ~= "" and pathObj.originalObj.settings.smb3settings.isLockedSMB3 then
-                        local eventObj = {}
-                        local unlockedPath = v.levelObj.settings["unlocking_locked_path"]
-                        
-                        eventObj.type = EVENT_TYPE.PATH_REVEAL
-                        eventObj.timer = 0
+            local pathName = v.levelObj.settings["unlocking_locked_path"]
+            local pathObj = smwMap.pathsMap[pathName]
+            if pathObj ~= nil then
+                for _,scenery in ipairs(smwMap.sceneries) do
+                    if not saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] and not saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] then
+                        if v.levelObj.settings["unlocking_locked_path"] ~= "" and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and pathObj.originalObj.settings.smb3settings.canUnlockWhenBeatingLevelSMB3 then
+                            if scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
+                                local eventObj = {}
+                                local unlockedPath = v.levelObj.settings["unlocking_locked_path"]
+                                
+                                eventObj.type = EVENT_TYPE.PATH_REVEAL
+                                eventObj.timer = 0
 
-                        eventObj.levelObj = v.levelObj
+                                eventObj.levelObj = v.levelObj
 
-                        table.insert(smwMap.activeEvents,eventObj)
-                        
-                        saveData.unlockedPathsSMB3[v.levelObj.settings.levelFilename] = true
+                                table.insert(smwMap.activeEvents,eventObj)
+                                
+                                saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] = true
+                                saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] = true
+                            end
+                        end
                     end
                 end
             end
@@ -2147,6 +2223,50 @@ do
         -- End the state
         gameData.winType = LEVEL_WIN_TYPE_NONE
 
+        v.state = PLAYER_STATE.NORMAL
+        v.timer = 0
+        v.timer2 = 0
+        
+        Misc.saveGame()
+    end)
+    
+    -- Unlock any locked paths if necessary
+    stateFunctions[PLAYER_STATE.UNLOCKING_LOCKED_PATH] = (function(v)
+        v.timer = v.timer + 1
+        
+        if v.timer < 24 then
+            return
+        end
+        
+        -- Unlock any paths if a level is marked to do so (SMB3)
+        local pathName = v.levelObj.settings["unlocking_locked_path"]
+        local pathObj = smwMap.pathsMap[pathName]
+        if pathObj ~= nil then
+            for _,scenery in ipairs(smwMap.sceneries) do
+                if not saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 and not pathObj.originalObj.settings.smb3settings.cantUnlockWithHammerSMB3 then
+                    local eventObj = {}
+                    
+                    eventObj.type = EVENT_TYPE.PATH_REVEAL_BRICK
+                    eventObj.timer = 0
+
+                    eventObj.levelObj = v.levelObj
+
+                    table.insert(smwMap.activeEvents,eventObj)
+                    
+                    saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] = true
+                elseif not saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 and pathObj.originalObj.settings.smb3settings.cantUnlockWithHammerSMB3 then
+                    local eventObj = {}
+                    
+                    eventObj.type = EVENT_TYPE.PATH_UNREVEAL_WRONG
+                    eventObj.timer = 0
+
+                    eventObj.levelObj = v.levelObj
+
+                    table.insert(smwMap.activeEvents,eventObj)
+                end
+            end
+        end
+        
         v.state = PLAYER_STATE.NORMAL
         v.timer = 0
         v.timer2 = 0
@@ -2234,6 +2354,7 @@ do
             smwMap.startTransition(middleFunction,nil, smwMap.transitionSettings.selectedLevelSettings)
 
             return
+        
         end
 
 
@@ -2493,6 +2614,12 @@ do
         updateNonMainPlayerCounts()
 
         updateActiveAreas(smwMap.mainPlayer,0)
+    end
+    
+    function smwMap.unlockLockedPath()
+        smwMap.mainPlayer.state = PLAYER_STATE.UNLOCKING_LOCKED_PATH
+        smwMap.mainPlayer.timer = 0
+        smwMap.mainPlayer.timer2 = 0
     end
     
     function smwMap.refreshMapCoordinates()
@@ -2887,7 +3014,7 @@ do
             v.opacity = 0
         end
         
-        if (saveData.unlockedPathsSMB3[v.globalSettings.partOfLockedLevel] ~= nil and saveData.unlockedPathsSMB3[v.globalSettings.partOfLockedLevel]) and smwMap.pathIsUnlocked(v.globalSettings.partOfLockedPath) then
+        if ((saveData.unlockedLevelPathsSMB3[v.globalSettings.partOfLockedLevel] ~= nil or saveData.unlockedPathsSMB3[v.globalSettings.lockedPathEventName] ~= nil)) and smwMap.pathIsUnlocked(v.globalSettings.partOfLockedPath) then
             v.opacity = 0
         end
 
@@ -4712,6 +4839,12 @@ end
 function smwMap.onExit()
     Audio.SeizeStream(-1)
     Audio.MusicStop()
+end
+
+function smwMap.onKeyboardPressDirect(k, repeated, str)
+    if k == VK_Y and not repeated and Misc.inEditor then
+        smwMap.unlockLockedPath()
+    end
 end
 
 function smwMap.lifeCrownCounter()

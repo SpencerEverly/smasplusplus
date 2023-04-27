@@ -70,6 +70,20 @@
                     "title": "Unlock Level Filename (SMB3)",
                     "tooltip": "Filename of the level that will unlock this path if beat with any win type above 0.",
                     "value-default": ""
+                },
+                {
+                    "control": "checkBox",
+                    "name": "cantUnlockWithHammerSMB3",
+                    "title": "Can't Unlock With a Hammer (SMB3)",
+                    "tooltip": "If checked, the path can't be unlocked with a hammer.",
+                    "value-default": false
+                },
+                {
+                    "control": "lineEdit",
+                    "name": "lockedPathEventNameSMB3",
+                    "title": "Locked Path Event Name (SMB3)",
+                    "tooltip": "The event name of the locked path when unlocking.",
+                    "value-default": ""
                 }
             ]
         }
