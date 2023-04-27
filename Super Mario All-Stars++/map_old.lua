@@ -185,7 +185,7 @@ function onStart()
     Audio.MusicVolume(nil)
     --mem(0xB25728, FIELD_BOOL, true) -- Sets the episode back to world map type. Without it, the intro will still play everytime you try to exit the level, rendering SMAS++ unusable
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        --inventory = require("customInventory")
+        
     end
     if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         

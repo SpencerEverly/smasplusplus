@@ -1,5 +1,4 @@
 local smwMap = require("smwMap")
-local inventory = require("customInventory")
 local littleDialogue = require("littleDialogue")
 _G.pausemenu2 = require("pausemenu2")
 

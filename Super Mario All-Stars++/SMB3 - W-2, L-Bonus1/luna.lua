@@ -1,7 +1,5 @@
 local level_dependencies_normal= require("level_dependencies_normal")
 
-local inventory = require("customInventory")
-
 function onEvent(eventName)
     if eventName == "3" then
         Sound.changeMusic("_OST/Super Mario Bros 3/Battle Mode.spc|0;g=2.5", 0)
@@ -24,7 +22,7 @@ function onEvent(eventName)
         Timer.deactivate()
     end
     if eventName == "Finish 3" then
-        inventory.addPowerUp(7, 1)
+        smasMapInventorySystem.addPowerUp(7, 1)
         Sound.playSFX("chest.ogg")
         SFX.play("_OST/Super Mario Bros 3/Battle Mode Win.ogg")
     end

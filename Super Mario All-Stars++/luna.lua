@@ -305,6 +305,7 @@ _G.smasCharacterChanger = require("smasCharacterChanger")
 _G.smasFireballs = require("smasFireballs")
 _G.smasPWing = require("smasPWing")
 _G.smasExtraSounds = require("smasExtraSounds")
+_G.smasMapInventorySystem = require("smasMapInventorySystem")
 
 --Then we do everything else.
 GameData.levelMusicTemporary = {}

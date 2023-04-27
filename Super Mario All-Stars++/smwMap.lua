@@ -16,6 +16,9 @@
 
 local smwMap = {}
 
+local starmanMusicMapped
+local starmanShader = Misc.multiResolveFile("starman.frag", "shaders\\npc\\starman.frag")
+
 local smasExtraSounds = require("smasExtraSounds")
 local inspect = require("ext/inspect")
 
@@ -124,6 +127,12 @@ smwMap.isTeleporting = false
 smwMap.movePlayerWithOnePathLevelUnlock = false
 --Whether the player can look around the map or not. This also affects the free camera mode.
 smwMap.canLookAround = false
+--Will be filled out later when the map loads.
+smwMap.playerMapXCoordinate = 0
+smwMap.playerMapYCoordinate = 0
+smwMap.playerMapCurrentFrame = 0
+_G.starmanMusicMap = SFX.open(Misc.resolveSoundFile("smwMap/invincible-map"))
+smwMap.isPlayingStarmanMapMusic = false
 
 -- Debug thing: if true, an area's "restrict camera" setting won't do anything and the look around mode will work when canLookAround is enabled.
 smwMap.freeCamera = false
@@ -1994,7 +2003,7 @@ do
                         smwMap.startPointSelectedOption = 1
                         smwMap.startSelectLayouts = nil
                     end
-
+                    
                     SFX.play(smwMap.playerSettings.levelSelectedSound)
                 end
             elseif Misc.GetKeyState(VK_SHIFT) and v.levelObj ~= nil and Misc.inEditor() then -- unlock one thing (only works from in editor)
@@ -2094,6 +2103,9 @@ do
         v.timer = v.timer + 1
         Audio.SeizeStream(-1)
         Audio.MusicStop()
+        if starmanMusicMapped:IsPlaying() then
+            starmanMusicMapped:FadeOut(800)
+        end
         smwMap.startPointOpenProgress = math.max(0,smwMap.startPointOpenProgress - v.timer*0.005)
 
         if v.timer == 48 and v.isMainPlayer then
@@ -4284,7 +4296,10 @@ do
 
                     local x = xPosition
                     local y = hudSettings.borderTopHeight - p.height + hudSettings.playerOffsetY
-
+                    
+                    smwMap.playerMapXCoordinate = x
+                    smwMap.playerMapYCoordinate = y
+                    
                     if p.mount == MOUNT_BOOT then -- bouncing along in a boot
                         bootBounceData[idx] = bootBounceData[idx] or {speed = 0,offset = 0}
                         local bounceData = bootBounceData[idx]
@@ -4327,14 +4342,39 @@ do
 
                         frame = walkCycle[(math.floor(lunatime.tick() / walkCycle.framespeed) % #walkCycle) + 1]
                     end
+                    
+                    smwMap.playerMapCurrentFrame = frame
 
                     p.direction = DIR_LEFT
-
-                    p:render{
-                        x = x,y = y,
-                        ignorestate = true,sceneCoords = false,priority = -2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
-                        frame = frame,
-                    }
+                    
+                    if(type(starmanShader) == "string") then
+                        local s = Shader()
+                        s:compileFromFile(nil, shader)
+                        starmanShader = s
+                    end
+                    
+                    
+                    
+                    if not SaveData.SMASPlusPlus.map.inventory.canUseStarman then
+                        p:render{
+                            x = x,y = y,
+                            ignorestate = true,sceneCoords = false,priority = -2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+                            frame = frame,
+                        }
+                    elseif SaveData.SMASPlusPlus.map.inventory.canUseStarman then
+                        p:render{
+                            x = x,y = y,
+                            ignorestate = true,sceneCoords = false,priority = -1.9,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+                            frame = frame,
+                            shader = starmanShader,
+                        }
+                    else
+                        p:render{
+                            x = x,y = y,
+                            ignorestate = true,sceneCoords = false,priority = -2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
+                            frame = frame,
+                        }
+                    end
 
 
                     if idx < Player.count() then
@@ -4785,7 +4825,11 @@ function smwMap.onDraw()
     elseif not smwMap.enableMusic and smasBooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = false
     end
-    --Text.printWP(smwMap.unlockingCurrentPath, 100, 100, 8)
+    
+    if SaveData.SMASPlusPlus.map.inventory.canUseStarman and not smwMap.isPlayingStarmanMapMusic then
+        starmanMusicMapped = SFX.play(starmanMusicMap, Audio.MusicVolume() / 100 - 0.35, 0)
+        smwMap.isPlayingStarmanMapMusic = true
+    end
 end
 
 function smwMap.onInputUpdate()

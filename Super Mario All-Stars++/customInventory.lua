@@ -61,11 +61,11 @@ if SaveData.inventoryTable == nil then
     end
 end
 
-if not SaveData.useStarman then
+if SaveData.useStarman == nil then
     SaveData.useStarman = false
 end
 
-if not SaveData.usePWing then
+if SaveData.usePWing == nil then
     SaveData.usePWing = false
 end
 
@@ -87,7 +87,7 @@ end
 function inventory.onStart()
     pGet = Player.get()
 
-    if not isOverworld and SaveData.useStarman then
+    if Level.filename() ~= "map.lvlx" and SaveData.useStarman then
         NPC.spawn(996, player.x, player.y, player.section)
         if Player.count() >= 2 then
             NPC.spawn(996, player2.x, player2.y, player2.section)
@@ -150,7 +150,11 @@ function inventory.onDraw()
     -- Drawing the Item Icons --
     if bScale >= 1 then
         for i = 0, 7, 1 do
-            if selectedOffset == i then isSelected = 1 else isSelected = 0 end
+            if selectedOffset == i then
+                isSelected = 1
+            else
+                isSelected = 0
+            end
             textplus.print{text=string.format("%02d", SaveData.inventoryTable[i]), x=i*82+94, y=452, font=font, plaintext=true, priority=-1.6}
             Graphics.draw{
                 type = RTYPE_IMAGE,
@@ -203,11 +207,6 @@ function inventory.onDraw()
         local s = Shader()
         s:compileFromFile(nil, shader)
         shader = s
-    end
-
-    if SaveData.useStarman then
-        local x,y = 400+hOverride.overworld.offsets.player.x-(player.width*0.5), hOverride.overworld.offsets.player.y-player.height;
-        player:render{x = x, y = y, ignorestate = true, sceneCoords = false, priority = -1.2, color = Color.white, mountcolor = Color.white, shader = shader, uniforms = {time = lunatime.tick()*2},}
     end
 
     if SaveData.usePWing then
