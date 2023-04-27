@@ -2182,32 +2182,30 @@ do
                     setLevelDestroyed(v.levelObj.settings.levelFilename)
                 end
             end
-            
-            
-            -- Unlock any paths if a level is marked to do so (SMB3)
-            local pathName = v.levelObj.settings["unlocking_locked_path"]
-            local pathObj = smwMap.pathsMap[pathName]
-            if pathObj ~= nil then
-                for _,scenery in ipairs(smwMap.sceneries) do
-                    if saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] == nil and saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] == nil and v.levelObj.settings["unlocking_locked_path"] ~= "" and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and pathObj.originalObj.settings.smb3settings.canUnlockWhenBeatingLevelSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
-                        local eventObj = {}
-                        local unlockedPath = v.levelObj.settings["unlocking_locked_path"]
-                        
-                        eventObj.type = EVENT_TYPE.PATH_REVEAL
-                        eventObj.timer = 0
-
-                        eventObj.levelObj = v.levelObj
-
-                        table.insert(smwMap.activeEvents,eventObj)
-                        
-                        saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] = true
-                        saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] = true
-                    end
-                end
-            end
-
 
             saveData.beatenLevels[v.levelObj.settings.levelFilename] = true
+        end
+        
+        -- Unlock any paths if a level is marked to do so (SMB3)
+        local pathName = v.levelObj.settings["unlocking_locked_path"]
+        local pathObj = smwMap.pathsMap[pathName]
+        if pathObj ~= nil then
+            for _,scenery in ipairs(smwMap.sceneries) do
+                if saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] == nil and saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] == nil and v.levelObj.settings["unlocking_locked_path"] ~= "" and pathObj.originalObj.settings.smb3settings.isLockedSMB3 and pathObj.originalObj.settings.smb3settings.canUnlockWhenBeatingLevelSMB3 and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
+                    local eventObj = {}
+                    local unlockedPath = v.levelObj.settings["unlocking_locked_path"]
+                    
+                    eventObj.type = EVENT_TYPE.PATH_REVEAL
+                    eventObj.timer = 0
+
+                    eventObj.levelObj = v.levelObj
+
+                    table.insert(smwMap.activeEvents,eventObj)
+                    
+                    saveData.unlockedLevelPathsSMB3[v.levelObj.settings.levelFilename] = true
+                    saveData.unlockedPathsSMB3[pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3] = true
+                end
+            end
         end
         
         -- Unlock any paths
