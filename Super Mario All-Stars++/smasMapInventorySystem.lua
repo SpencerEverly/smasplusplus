@@ -106,15 +106,19 @@ function smasMapInventorySystem.executeInventoryItem(inventoryItem)
                 Sound.playSFX(6)
             end
             if inventoryItem == smasMapInventorySystem.itemList.STARMAN then
+                Sound.playSFX(6)
                 SaveData.SMASPlusPlus.map.inventory.canUseStarman = true
             end
             if inventoryItem == smasMapInventorySystem.itemList.PWING then
+                Sound.playSFX(6)
                 SaveData.SMASPlusPlus.map.inventory.canUsePWing = true
             end
             if inventoryItem == smasMapInventorySystem.itemList.HAMMER then
+                Sound.playSFX(27)
                 smwMap.unlockLockedPath()
             end
             if inventoryItem == smasMapInventorySystem.itemList.WARP_WHISTLE then
+                Sound.playSFX(27)
                 --Fill this out later
             end
             SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] = SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] - 1
