@@ -2103,8 +2103,10 @@ do
         v.timer = v.timer + 1
         Audio.SeizeStream(-1)
         Audio.MusicStop()
-        if starmanMusicMapped:IsPlaying() then
-            starmanMusicMapped:FadeOut(800)
+        if starmanMusicMapped ~= nil then
+            if starmanMusicMapped:IsPlaying() then
+                starmanMusicMapped:FadeOut(800)
+            end
         end
         smwMap.startPointOpenProgress = math.max(0,smwMap.startPointOpenProgress - v.timer*0.005)
 
