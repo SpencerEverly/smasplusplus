@@ -228,12 +228,27 @@ function smasMapInventorySystem.onDraw()
     end
 end
 
-function smasMapInventorySystem.addPowerUp(pID, amount)
-    SaveData.SMASPlusPlus.map.inventory.storedItems[pID] = SaveData.SMASPlusPlus.map.inventory.storedItems[pID] + amount
+function smasMapInventorySystem.addPowerUp(pID, amount, isActualValue)
+    if isActualValue == nil then
+        isActualValue = false
+    end
+    if not isActualValue then
+        SaveData.SMASPlusPlus.map.inventory.storedItems[pID + 1] = SaveData.SMASPlusPlus.map.inventory.storedItems[pID + 1] + amount
+    else
+        SaveData.SMASPlusPlus.map.inventory.storedItems[pID] = SaveData.SMASPlusPlus.map.inventory.storedItems[pID] + amount
+    end
+    
 end
 
-function smasMapInventorySystem.setPowerUp(pID, number)
-    SaveData.SMASPlusPlus.map.inventory.storedItems[pID] = number
+function smasMapInventorySystem.setPowerUp(pID, number, isActualValue)
+    if isActualValue == nil then
+        isActualValue = false
+    end
+    if not isActualValue then
+        SaveData.SMASPlusPlus.map.inventory.storedItems[pID + 1] = number
+    else
+        SaveData.SMASPlusPlus.map.inventory.storedItems[pID] = number
+    end
 end
 
 return smasMapInventorySystem
