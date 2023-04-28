@@ -77,21 +77,43 @@ local koopalingShellSettings = {
 
 local idslist = {}
 
-function koopalingShells.register(npcID, transformKoopaID, canJump, koopalingShellConfig)
-    koopalingShells[npcID] = {}
-	koopalingShellSettings.id = npcID
-    koopalingShellSettings.transformKoopaID = transformKoopaID
-    koopalingShellSettings.canJump = canJump
-    koopalingShellSettings.koopalingShellConfig = koopalingShellConfig
-    table.insert(idslist, npcID, {
-        id = npcID,
-        transformKoopaID = transformKoopaID,
-        canJump = canJump,
-        koopalingShellConfig = koopalingShellConfig,
+function koopalingShells.register(args)
+    args.npcID = args.npcID or 941
+    args.transformKoopaID = args.transformKoopaID or 942
+    
+    if args.canJump == nil then
+        args.canJump = true
+    end
+    
+    args.koopalingShellConfig = args.koopalingShellConfig or "larry"
+    
+    args.gfxwidth = args.gfxwidth or 44
+    args.gfxheight = args.gfxheight or 32
+    args.width = args.width or 32
+    args.height = args.height or 28
+    
+    koopalingShells[args.npcID] = {}
+    
+	koopalingShellSettings.id = args.npcID
+    koopalingShellSettings.transformKoopaID = args.transformKoopaID
+    koopalingShellSettings.canJump = args.canJump
+    koopalingShellSettings.koopalingShellConfig = args.koopalingShellConfig
+    
+    koopalingShellSettings.gfxwidth = args.gfxwidth
+    koopalingShellSettings.gfxheight = args.gfxheight
+    koopalingShellSettings.width = args.width
+    koopalingShellSettings.height = args.height
+    
+    table.insert(idslist, args.npcID, {
+        id = args.npcID,
+        transformKoopaID = args.transformKoopaID,
+        canJump = args.canJump,
+        koopalingShellConfig = args.koopalingShellConfig,
         counter = koopalingShellSettings.counter,
     })
-    koopalingShells[npcID].config = npcManager.setNpcSettings(koopalingShellSettings)
-    npcManager.registerHarmTypes(npcID,
+    
+    koopalingShells[args.npcID].config = npcManager.setNpcSettings(koopalingShellSettings)
+    npcManager.registerHarmTypes(args.npcID,
 	{
         HARM_TYPE_JUMP,
         --HARM_TYPE_FROMBELOW,
@@ -117,7 +139,7 @@ function koopalingShells.register(npcID, transformKoopaID, canJump, koopalingShe
         [HARM_TYPE_SWORD]=10,
     })
     
-    npcManager.registerEvent(npcID, koopalingShells, "onTickEndNPC")
+    npcManager.registerEvent(args.npcID, koopalingShells, "onTickEndNPC")
     registerEvent(koopalingShells, "onNPCHarm")
 end
 

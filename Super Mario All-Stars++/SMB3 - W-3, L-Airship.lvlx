@@ -2428,13 +2428,13 @@ ID:151;X:-157544;Y:-160336;D:-1;MG:"Unfinished for now";FD:1;
 ID:395;X:-156544;Y:-160384;D:-1;
 ID:395;X:-156608;Y:-160384;D:-1;
 ID:395;X:-156672;Y:-160384;D:-1;
-ID:803;X:-139430;Y:-140116;D:-1;FD:1;NM:1;LR:"Wendy 1";EA:"Boss Start";
 ID:803;X:-139430;Y:-140116;D:-1;LR:"Wendy 2";ED:"Boss End";
 ID:1000;X:-139712;Y:-140224;D:-1;LR:"Star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-139616;Y:-140112;D:-1;MG:"WIP for now";FD:1;LR:"Star";
 ID:764;X:-157504;Y:-160192;D:-1;
 ID:763;X:-157152;Y:-160224;D:-1;
 ID:763;X:-156416;Y:-160192;D:-1;
+ID:939;X:-139430;Y:-140116;D:-1;EA:"Boss Start";ED:"Boss End";
 NPC_END
 DOORS
 IX:-199616;IY:-200096;OX:-179936;OY:-180096;DT:2;ID:1;OD:1;LR:"Door";
@@ -2455,16 +2455,17 @@ LR:"Wendy 2";HD:1;
 LR:"Star";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
-ET:"Level - Start";TE:"Beginning Message 1";TD:1;AS:0;AX:0;AY:0;
+ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
+ET:"Beginning Message 0";TE:"Beginning Message 1";TD:1;AS:0;AX:0;AY:0;
 ET:"Beginning Message 1";MG:"<setPos 400 32 0.5 -1.5>NOT AGAIN! <characterName>! They've done it once more! These pesky Koopaling Kids have turned this king into something random!<page>Why must this happen?! It's not everyday that the king transformed into something!";TE:"Toad Not Shocked";TD:1;AS:0;AX:0;AY:0;
 ET:"Toad Not Shocked";LH:["Toad 1"];LS:["Toad 2"];TE:"Beginning Message 2";TD:1;DS:1;AS:0;AX:0;AY:0;
 ET:"Beginning Message 2";MG:"<setPos 400 32 0.5 -1.8>If you must know\, our henchmen saw them heading to Giant Hills\, so you may wanna head there.<page>Good luck! Save this king for us\, will ya?";TE:"Door Forms";TD:1;AS:0;AX:0;AY:0;
 ET:"Door Forms";SD:20;LS:["Door"];AS:0;AX:0;AY:0;
 ET:"Airship Begin";SD:27;LS:["Airship Chains"];TE:"Airship Stopped";TD:44;DS:1;ML:"Airship Chains";MX:0;MY:1.42308;AS:0;AX:0;AY:0;
 ET:"Airship Stopped";ML:"Airship Chains";MX:0;MY:0;AS:0;AX:0;AY:0;
-ET:"Boss Start";TE:"Boss Start 2";TD:3;AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
 ET:"Boss Start 2";LH:["Wendy 1"];LS:["Wendy 2"];DS:1;AS:0;AX:0;AY:0;
 ET:"Boss End";TE:"Boss End 2";TD:30;AS:0;AX:0;AY:0;
 ET:"Boss End 2";TE:"Boss End 3";TD:5;AS:0;AX:0;AY:0;

@@ -1092,6 +1092,8 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                         end
                     end
                 end
+                
+                --**KOOAPLING SHELL FLY AWAY EFFECTS**
                 for index,shell in ipairs(Animation.get(140)) do
                     if shell.speedY == 0 then --Good enough
                         if smasExtraSounds.enableBoomerangBroBoomerangSFX then
@@ -1100,6 +1102,13 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                     end
                 end
                 for index2,shell2 in ipairs(bettereffects.getEffectObjects(988)) do
+                    if shell2.speedY == 0 then
+                        if smasExtraSounds.enableBoomerangBroBoomerangSFX then
+                            smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
+                        end
+                    end
+                end
+                for index2,shell2 in ipairs(bettereffects.getEffectObjects(986)) do
                     if shell2.speedY == 0 then
                         if smasExtraSounds.enableBoomerangBroBoomerangSFX then
                             smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)

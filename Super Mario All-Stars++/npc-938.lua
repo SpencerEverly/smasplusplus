@@ -1,16 +1,16 @@
-local larryShell = {}
+local wendyShell = {}
 
 local npcManager = require("npcManager")
 local koopalingShells = require("ai_smas/koopalingShells")
 
 local npcID = NPC_ID
 
-function larryShell.onInitAPI()
+function wendyShell.onInitAPI()
     koopalingShells.register{
         npcID = npcID,
-        transformKoopaID = 942,
+        transformKoopaID = 939,
         canJump = true,
-        koopalingConfig = "larry",
+        koopalingConfig = "wendy",
         gfxwidth = 44,
         gfxheight = 32,
         width = 32,
@@ -18,4 +18,4 @@ function larryShell.onInitAPI()
     }
 end
 
-return larryShell
+return wendyShell

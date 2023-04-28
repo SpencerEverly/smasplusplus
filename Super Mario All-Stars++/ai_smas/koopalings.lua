@@ -85,23 +85,41 @@ local koopalingSettings = {
 
 local idslist = {}
 
-function koopalings.register(npcID, transformShellID, koopalingConfig)
-    koopalings[npcID] = {}
-	koopalingSettings.id = npcID
-    table.insert(idslist, npcID, {
-        id = npcID,
-        transformShellID = transformShellID,
-        koopalingConfig = koopalingConfig,
+function koopalings.register(args)
+    args.npcID = args.npcID or 942
+    args.transformShellID = args.transformShellID or 941
+    args.koopalingConfig = args.koopalingConfig or "larry"
+    
+    args.gfxwidth = args.gfxwidth or 84
+    args.gfxheight = args.gfxheight or 62
+    args.width = args.width or 44
+    args.height = args.height or 50
+    
+    koopalings[args.npcID] = {}
+    
+	koopalingSettings.id = args.npcID
+    koopalingSettings.transformShellID = args.transformShellID
+    koopalingSettings.koopalingConfig = args.koopalingConfig
+    
+    koopalingSettings.gfxwidth = args.gfxwidth
+    koopalingSettings.gfxheight = args.gfxheight
+    koopalingSettings.width = args.width
+    koopalingSettings.height = args.height
+    
+    args.effectID = args.effectID or 988
+    
+    table.insert(idslist, args.npcID, {
+        id = args.npcID,
+        transformShellID = args.transformShellID,
+        koopalingConfig = args.koopalingConfig,
         jumpCounter = koopalingSettings.jumpCounter,
         attackTimer = koopalingSettings.attackTimer,
         attackDelay = koopalingSettings.attackDelay,
         health = koopalingSettings.health,
     })
     
-    koopalingSettings.transformShellID = transformShellID
-    koopalingSettings.koopalingConfig = koopalingConfig
-    koopalings[npcID].config = npcManager.setNpcSettings(koopalingSettings)
-    npcManager.registerHarmTypes(npcID,
+    koopalings[args.npcID].config = npcManager.setNpcSettings(koopalingSettings)
+    npcManager.registerHarmTypes(args.npcID,
 	{
 		HARM_TYPE_JUMP,
 		HARM_TYPE_FROMBELOW,
@@ -115,20 +133,20 @@ function koopalings.register(npcID, transformShellID, koopalingConfig)
 		HARM_TYPE_SWORD
 	}, 
 	{
-		[HARM_TYPE_JUMP]=988,
-		[HARM_TYPE_FROMBELOW]=988,
-		[HARM_TYPE_NPC]=988,
-		[HARM_TYPE_PROJECTILE_USED]=988,
+		[HARM_TYPE_JUMP]=args.effectID,
+		[HARM_TYPE_FROMBELOW]=args.effectID,
+		[HARM_TYPE_NPC]=args.effectID,
+		[HARM_TYPE_PROJECTILE_USED]=args.effectID,
 		[HARM_TYPE_LAVA]={id=13, xoffset=0.5, xoffsetBack = 0, yoffset=1, yoffsetBack = 1.5},
 		[HARM_TYPE_HELD]=10,
 		--[HARM_TYPE_TAIL]=10,
-		[HARM_TYPE_SPINJUMP]=988,
-		[HARM_TYPE_OFFSCREEN]=988,
-		[HARM_TYPE_SWORD]=988,
+		[HARM_TYPE_SPINJUMP]=args.effectID,
+		[HARM_TYPE_OFFSCREEN]=args.effectID,
+		[HARM_TYPE_SWORD]=args.effectID,
 	})
     
-    npcManager.registerEvent(npcID, koopalings, "onTickNPC")
-	npcManager.registerEvent(npcID, koopalings, "onDrawNPC")
+    npcManager.registerEvent(args.npcID, koopalings, "onTickNPC")
+	npcManager.registerEvent(args.npcID, koopalings, "onDrawNPC")
     registerEvent(koopalings, "onNPCHarm")
 end
 
@@ -303,30 +321,55 @@ function koopalings.onTickNPC(v)
             data.special = 2
         end
     elseif data.special == 2 then
+        Text.print(idslist[v.id].koopalingConfig, 100, 100)
         v.speedX = 0
-        if data.attackCount == 0 or data.attackCount == 6 or data.attackCount == 12 then
-            if data.attackCount == 0 then
-                playerX = p.x + p.width / 2
-                playerY = p.y + p.height / 2 + 16
+        if idslist[v.id].koopalingConfig ~= "wendy" then
+            if data.attackCount == 0 or data.attackCount == 6 or data.attackCount == 12 then
+                if data.attackCount == 0 then
+                    playerX = p.x + p.width / 2
+                    playerY = p.y + p.height / 2 + 16
+                end
+                if data.attackCount == 0 then
+                    Audio.playSFX(34)
+                end
+                if v.direction == -1 then
+                    projectile = v.spawn(269, v.x - 18, v.y+39, v:mem(0x146,FIELD_WORD),false,true)
+                else
+                    projectile = v.spawn(269, v.x + v.width - 10 + 22, v.y+39, v:mem(0x146,FIELD_WORD),false,true)
+                end
+                projectile.direction = v.direction
+                projectile.ai2 = data.attackCount
+                projectile.speedX = 3 * projectile.direction
+                C = (projectile.x + projectile.width / 2) - playerX
+                D = (projectile.y + projectile.height / 2) - playerY
+                projectile.speedY = D / C * projectile.speedX
+                if projectile.speedY > 3 then
+                    projectile.speedY = 3
+                elseif projectile.speedY < -3 then
+                    projectile.speedY = -3
+                end
             end
+        elseif idslist[v.id].koopalingConfig == "wendy" then
             if data.attackCount == 0 then
                 Audio.playSFX(34)
-            end
-            if v.direction == -1 then
-                projectile = v.spawn(269, v.x - 18, v.y+39, v:mem(0x146,FIELD_WORD),false,true)
-            else
-                projectile = v.spawn(269, v.x + v.width - 10 + 22, v.y+39, v:mem(0x146,FIELD_WORD),false,true)
-            end
-            projectile.direction = v.direction
-            projectile.ai2 = data.attackCount
-            projectile.speedX = 3 * projectile.direction
-            C = (projectile.x + projectile.width / 2) - playerX
-            D = (projectile.y + projectile.height / 2) - playerY
-            projectile.speedY = D / C * projectile.speedX
-            if projectile.speedY > 3 then
-                projectile.speedY = 3
-            elseif projectile.speedY < -3 then
-                projectile.speedY = -3
+                playerX = p.x + p.width / 2
+                playerY = p.y + p.height / 2 + 16
+                if v.direction == -1 then
+                    projectile = v.spawn(940, v.x - 18, v.y+39, v:mem(0x146,FIELD_WORD),false,true)
+                else
+                    projectile = v.spawn(940, v.x + v.width - 10 + 22, v.y+39, v:mem(0x146,FIELD_WORD),false,true)
+                end
+                projectile.direction = v.direction
+                projectile.ai2 = data.attackCount
+                projectile.speedX = 4 * projectile.direction
+                C = (projectile.x + projectile.width / 2) - playerX
+                D = (projectile.y + projectile.height / 2) - playerY
+                projectile.speedY = D / C * projectile.speedX
+                if projectile.speedY > 3 then
+                    projectile.speedY = 3
+                elseif projectile.speedY < -3 then
+                    projectile.speedY = -3
+                end
             end
         end
         data.attackCount = data.attackCount + 1
