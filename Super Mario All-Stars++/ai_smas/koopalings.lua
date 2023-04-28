@@ -2,6 +2,7 @@ local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
 local rng = require ("rng")
 local playerStun = require("playerstun")
+local inspect = require("ext/inspect")
 
 local playerX
 local playerY
@@ -77,17 +78,28 @@ local koopalingSettings = {
 	jumpCounter = 0,
 	projectile =  269,
     transformShellID = 941,
+    koopalingConfig = "larry",
 }
 
 --Register the vulnerable harm types for this NPC. The first table defines the harm types the NPC should be affected by, while the second maps an effect to each, if desired.
 
 local idslist = {}
 
-function koopalings.register(npcID, transformShellID)
+function koopalings.register(npcID, transformShellID, koopalingConfig)
     koopalings[npcID] = {}
 	koopalingSettings.id = npcID
-    table.insert(idslist, npcID)
+    table.insert(idslist, npcID, {
+        id = npcID,
+        transformShellID = transformShellID,
+        koopalingConfig = koopalingConfig,
+        jumpCounter = koopalingSettings.jumpCounter,
+        attackTimer = koopalingSettings.attackTimer,
+        attackDelay = koopalingSettings.attackDelay,
+        health = koopalingSettings.health,
+    })
+    
     koopalingSettings.transformShellID = transformShellID
+    koopalingSettings.koopalingConfig = koopalingConfig
     koopalings[npcID].config = npcManager.setNpcSettings(koopalingSettings)
     npcManager.registerHarmTypes(npcID,
 	{
@@ -211,10 +223,10 @@ function koopalings.onTickNPC(v)
 	--Initialize
 	if not data.initialized then
 		--Initialize necessary data.
-		data.jumpCount = koopalingSettings.jumpCounter --or 30
-		data.attackTime = koopalingSettings.attackTimer --or 30
-		data.attackDelay = koopalingSettings.attackDelay --or 10
-		data.hp = data.hp or koopalingSettings.health --or 15
+		data.jumpCount = idslist[v.id].jumpCounter --or 30
+		data.attackTime = idslist[v.id].attackTimer --or 30
+		data.attackDelay = idslist[v.id].attackDelay --or 10
+		data.hp = data.hp or idslist[v.id].health --or 15
 		data.frame = 0
 		data.framecount = data.framecount or 0
 		data.special = -1
@@ -236,7 +248,7 @@ function koopalings.onTickNPC(v)
 	--Execute main AI.
     if data.special == -1 then
         data.timer = data.timer + 1
-        if data.timer >= 25 then
+        if data.timer >= 19 then
             data.timer = 0
             data.special = 0
         end
@@ -257,16 +269,13 @@ function koopalings.onTickNPC(v)
             data.jumpCount = 0
         end
         if data.jumping and v.speedY == 0 then
-            --[[if v.collidesBlockBottom then
-                Defines.earthquake = 6
-                data.jumping = false
-                SFX.play(37)
-                for k, p in ipairs(Player.get()) do
-                    if p:isGroundTouching() and not playerStun.isStunned(k) and v:mem(0x146, FIELD_WORD) == player.section then
-                        playerStun.stunPlayer(k, 70)
-                    end
+            if idslist[v.id].koopalingConfig == "roy" or idslist[v.id].koopalingConfig == "ludwig" then
+                if v.collidesBlockBottom then
+                    Misc.doPOW(12, true, false, "SMB3 Koopaling Earthquake")
+                    data.jumping = false
+                    SFX.play(37)
                 end
-            end]]
+            end
         end
         data.attackTime = data.attackTime + 1
         if data.attackTime >= 200 + rng.randomInt(0, 99) and v.speedY == 0 then
@@ -344,72 +353,75 @@ end
 
 function koopalings.onNPCHarm(eventObj, killedNPC, killReason, culprit)
     if killedNPC.friendly then
+        eventObj.cancelled = true
         return
     end
-    if killedNPC.id == koopalingSettings.id and killReason ~= HARM_TYPE_OFFSCREEN then
-        if killReason ~= HARM_TYPE_LAVA then
-            eventObj.cancelled = true
-            local data = killedNPC.data
-            immune = data.immunity
-            if immune == nil then
-                immune = 0
-            end
-            if immune == 0 then
-                if killReason == HARM_TYPE_JUMP or killReason == HARM_TYPE_SPINJUMP or killReason == HARM_TYPE_FROMBELOW then
-                    SFX.play(2)
-                    data.hp = data.hp - 5
-                    data.special = 5
-                    immune = 10
-                elseif killReason == HARM_TYPE_SWORD then
-                    SFX.play(89)
-                    data.hp = data.hp - 2
-                    immune = 10
-                elseif killReason == HARM_TYPE_NPC then
-                    if culprit.id == 13  then
-                        SFX.play(9)
-                        data.hp = data.hp - 1
-                        immune = 10
-                    else
-                        SFX.play(39)
+    if idslist[killedNPC.id] ~= nil then
+        if killedNPC.id == idslist[killedNPC.id].id and killReason ~= HARM_TYPE_OFFSCREEN then
+            if killReason ~= HARM_TYPE_LAVA then
+                eventObj.cancelled = true
+                local data = killedNPC.data
+                immune = data.immunity
+                if immune == nil then
+                    immune = 0
+                end
+                if immune == 0 then
+                    if killReason == HARM_TYPE_JUMP or killReason == HARM_TYPE_SPINJUMP or killReason == HARM_TYPE_FROMBELOW then
+                        SFX.play(2)
                         data.hp = data.hp - 5
                         data.special = 5
                         immune = 10
+                    elseif killReason == HARM_TYPE_SWORD then
+                        SFX.play(89)
+                        data.hp = data.hp - 2
+                        immune = 10
+                    elseif killReason == HARM_TYPE_NPC then
+                        if culprit.id == 13  then
+                            SFX.play(9)
+                            data.hp = data.hp - 1
+                            immune = 10
+                        else
+                            SFX.play(39)
+                            data.hp = data.hp - 5
+                            data.special = 5
+                            immune = 10
+                        end
+                    elseif killReason == HARM_TYPE_LAVA and killedNPC ~= nil then
+                        killedNPC:kill(HARM_TYPE_OFFSCREEN)
                     end
-                elseif killReason == HARM_TYPE_LAVA and killedNPC ~= nil then
-                    killedNPC:kill(HARM_TYPE_OFFSCREEN)
-                end
-                if data.hp <= 0  then
-                    killedNPC:kill(HARM_TYPE_OFFSCREEN)
-                    if killedNPC.legacyBoss then
-                        oldX = killedNPC.x
-                        oldY = killedNPC.y
-                        oldWidth = killedNPC.width
-                        oldSection = killedNPC:mem(0x146,FIELD_WORD)
-                        Routine.run(function()
-                            Routine.wait(1,false)
-                            goal = NPC.spawn(16, oldX, oldY, oldSection,true,true)
-                            goal:mem(0xA8, FIELD_DFLOAT,0)
-                            goal.speedY = -5
-                            end
-                        )
+                    if data.hp <= 0  then
+                        killedNPC:kill(HARM_TYPE_OFFSCREEN)
+                        if killedNPC.legacyBoss then
+                            oldX = killedNPC.x
+                            oldY = killedNPC.y
+                            oldWidth = killedNPC.width
+                            oldSection = killedNPC:mem(0x146,FIELD_WORD)
+                            Routine.run(function()
+                                Routine.wait(1,false)
+                                goal = NPC.spawn(16, oldX, oldY, oldSection,true,true)
+                                goal:mem(0xA8, FIELD_DFLOAT,0)
+                                goal.speedY = -5
+                                end
+                            )
+                        end
+                    elseif data.special == 5 then
+                        data.special = 0
+                        data.dir = 0
+                        data.jumpCount = 0
+                        data.attackTime = 0
+                        p = 0
+                        playerX = 0
+                        local helth = data.hp
+                        local isboss = killedNPC.legacyBoss
+                        killedNPC:transform(idslist[killedNPC.id].transformShellID)
+                        killedNPC.data.hp = helth
+                        killedNPC.legacyBoss = isboss
+                        killedNPC.data.counter = 0
+                        killedNPC.data.immunity = immune
                     end
-                elseif data.special == 5 then
-                    data.special = 0
-                    data.dir = 0
-                    data.jumpCount = 0
-                    data.attackTime = 0
-                    p = 0
-                    playerX = 0
-                    local helth = data.hp
-                    local isboss = killedNPC.legacyBoss
-                    killedNPC:transform(koopalingSettings.transformShellID)
-                    killedNPC.data.hp = helth
-                    killedNPC.legacyBoss = isboss
-                    killedNPC.data.counter = 0
-                    killedNPC.data.immunity = immune
                 end
+                data.immunity = immune
             end
-            data.immunity = immune
         end
     end
 end

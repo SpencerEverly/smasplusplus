@@ -34,6 +34,8 @@ smasExtraSounds.pSwitchTimerDelayFast = 15
 smasExtraSounds.pWingDelay = 7
 --Set this to any number to change how much the player sliding should delay to. Default is 8.
 smasExtraSounds.playerSlidingDelay = 8
+--Set this to any number to change how much the boomerang sound should delay to. Default is 12.
+smasExtraSounds.boomerangDelay = 12
 
 --**FIRE/ICE/HAMMER SETTINGS**
 --Whether to enable the Fire Flower sound.
@@ -151,6 +153,7 @@ smasExtraSounds.enablePSwitchTimeOutSFX = true
 local blockManager = require("blockManager") --Used to detect brick breaks when spinjumping
 local inspect = require("ext/inspect")
 local rng = require("base/rng")
+local bettereffects = require("base/game/bettereffects")
 
 local npcToCoinTimer = 0 --This is used for the NPC to Coin sound.
 local holdingTimer = 0 --To count a timer on how long a player has held an item.
@@ -993,7 +996,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             for k,v in ipairs(NPC.get(292)) do --Boomerang sounds! (Toad's Boomerang)
                 if smasExtraSounds.enableToadBoomerangSFX then
                     if isOnScreen(v) then
-                        smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, 12)
+                        smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
                     end
                 end
             end
@@ -1001,7 +1004,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             for k,v in ipairs(NPC.get(615)) do --Boomerang sounds! (Boomerang Bros.)
                 if smasExtraSounds.enableBoomerangBroBoomerangSFX then
                     if isOnScreen(v) then
-                        smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, 12)
+                        smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
                     end
                 end
             end
@@ -1086,6 +1089,20 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                     if explosion2.timer == 59 then
                         if smasExtraSounds.enableFireworksSFX then
                             smasExtraSounds.playSFX(43, smasExtraSounds.volume, 1)
+                        end
+                    end
+                end
+                for index,shell in ipairs(Animation.get(140)) do
+                    if shell.speedY == 0 then --Good enough
+                        if smasExtraSounds.enableBoomerangBroBoomerangSFX then
+                            smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
+                        end
+                    end
+                end
+                for index2,shell2 in ipairs(bettereffects.getEffectObjects(988)) do
+                    if shell2.speedY == 0 then
+                        if smasExtraSounds.enableBoomerangBroBoomerangSFX then
+                            smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
                         end
                     end
                 end
