@@ -167,7 +167,7 @@ function koopalingShells.onTickEndNPC(v)
 		end
 	end
     
-    SFX.play(smasExtraSounds.sounds[116].sfx, SFX.volume.MASTER, 1, 10)
+    SFX.play(smasExtraSounds.sounds[116].sfx, SFX.volume.MASTER, 1, smasExtraSounds.boomerangDelay)
     
 	--npcutils.faceNearestPlayer(v)
 	if data.special == 0 then
