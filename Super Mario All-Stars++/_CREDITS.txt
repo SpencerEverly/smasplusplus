@@ -179,6 +179,7 @@ Codes for certain parts made by:
 - Core
 - FutureNyanCat2002
 - 8lue Storm
+- King DRACalgar Law357
 
 Codes for LunaLua are also minorly and/or majorly modified by Spencer Everly
 

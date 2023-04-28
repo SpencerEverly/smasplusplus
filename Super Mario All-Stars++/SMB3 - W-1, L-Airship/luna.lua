@@ -8,6 +8,12 @@ local autoscroll = require("autoscroll")
 
 local airshipScroll = require("airshipScroll")
 
+function onStart()
+    if player:mem(0x15E, FIELD_WORD) == 0 and SysManager.getEnteredCheckpointID() == 0 then
+        triggerEvent("Beginning Message 0")
+    end
+end
+
 function onLoadSection2()
     autoscrolla.scrollRight(1)
 end

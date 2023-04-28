@@ -2126,13 +2126,13 @@ ID:754;X:-158400;Y:-160416;D:-1;XTRA:"{\n    \"aOptions\"\: {\n        \"roundDe
 ID:754;X:-157568;Y:-160128;D:-1;XTRA:"{\n    \"aOptions\"\: {\n        \"roundDelay\"\: 4\,\n        \"shootDelay\"\: 4\n    }\,\n    \"bOptions\"\: {\n        \"shootAngle\"\: 45\,\n        \"shootSpeed\"\: 1.5\n    }\n}\n";
 ID:21;X:-157376;Y:-160192;D:-1;
 ID:754;X:-157312;Y:-160128;D:-1;XTRA:"{\n    \"aOptions\"\: {\n        \"roundDelay\"\: 4\,\n        \"shootDelay\"\: 4\n    }\,\n    \"bOptions\"\: {\n        \"shootAngle\"\: 45\,\n        \"shootSpeed\"\: 1.5\n    }\n}\n";
-ID:267;X:-139430;Y:-140178;D:-1;LR:"bossreal";ED:"Boss Death";
-ID:267;X:-139430;Y:-140178;D:-1;FD:1;NM:1;LR:"bossnotmoving";EA:"Boss Begin";
+ID:942;X:-139430;Y:-140178;D:-1;LR:"bossreal";EA:"Boss Start";ED:"Boss End";
 ID:1000;X:-139712;Y:-140288;D:-1;LR:"star";XTRA:"{\n    \"activateFadeIn\"\: true\,\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\n}\n";
 ID:151;X:-139608;Y:-140176;D:-1;MG:"WIP for now";FD:1;LR:"star";
 ID:224;X:-159608;Y:-160064;D:-1;
 ID:224;X:-159608;Y:-160032;D:-1;
 ID:224;X:-159608;Y:-160000;D:-1;
+ID:942;X:-139430;Y:-140178;D:-1;FD:1;NM:1;LR:"bossnotmoving";EA:"Boss Start";
 NPC_END
 DOORS
 IX:-199616;IY:-200096;OX:-179936;OY:-180128;DT:2;ID:1;OD:1;LR:"door";
@@ -2149,23 +2149,23 @@ LR:"door";HD:1;
 LR:"hammerbros";
 LR:"airshipchains";HD:1;
 LR:"warpchains";HD:1;
-LR:"bossreal";HD:1;
-LR:"bossnotmoving";
+LR:"bossreal";
+LR:"bossnotmoving";HD:1;
 LR:"star";HD:1;
 LAYERS_END
 EVENTS_CLASSIC
-ET:"Level - Start";TE:"Beginning Message 1";TD:1;AS:0;AX:0;AY:0;
+ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
-ET:"Beginning Message 1";MG:"<setPos 400 32 0.5 -1.8>Oh <characterName>\, thank goodness you shown up! The King got transformed to this... weird snake thing!<page>I saw this new Koopa clan guy earlier today transform the king\, and I bet something is amiss over at Bowser's Castle!<page>I'm pretty sure the airship that Koopa was in is long gone by now...";TE:"Toad Not Shocked";TD:3;AS:0;AX:0;AY:0;
+ET:"Beginning Message 0";TE:"Beginning Message 1";TD:1;AS:0;AX:0;AY:0;
+ET:"Beginning Message 1";MG:"<setPos 400 32 0.5 -1.2>Oh <characterName>\, thank goodness you shown up! The King got transformed to this... weird snake thing!<page>I saw this new Koopa clan guy earlier today transform the king\, and I bet something is amiss over at Bowser's Castle!<page>I'm pretty sure the airship that Koopa was in is long gone by now...";TE:"Toad Not Shocked";TD:3;AS:0;AX:0;AY:0;
 ET:"Toad Not Shocked";LH:["toad1"];LS:["toad2"];TE:"Beginning Message 2";TD:3;DS:1;AS:0;AX:0;AY:0;
-ET:"Beginning Message 2";MG:"<setPos 400 32 0.5 -2.5>If you DO want to know the direction it went\, it went up North\, about to hit the desert.<page>You gotta get over there\, get the Magic Wand\, and transform the King back at once!";TE:"Door Forms";TD:2;AS:0;AX:0;AY:0;
-ET:"Door Forms";LS:["door"];DS:1;AS:0;AX:0;AY:0;
+ET:"Beginning Message 2";MG:"<setPos 400 32 0.5 -2.0>If you DO want to know the direction it went\, it went up North\, about to hit the desert.<page>You gotta get over there\, get the Magic Wand\, and transform the King back at once!";TE:"Door Forms";TD:2;AS:0;AX:0;AY:0;
+ET:"Door Forms";LS:["door"];AS:0;AX:0;AY:0;
 ET:"Airship Begin";LS:["airshipchains","warpchains"];TE:"Airship Stopped";TD:40;DS:1;ML:"airshipchains";MX:0;MY:1.42308;AS:0;AX:0;AY:0;
 ET:"Airship Stopped";ML:"airshipchains";MX:0;MY:0;AS:0;AX:0;AY:0;
-ET:"Boss Begin";TE:"Boss Begin 2";TD:3;AS:0;AX:0;AY:0;
-ET:"Boss Begin 2";LH:["bossnotmoving"];LS:["bossreal"];DS:1;AS:0;AX:0;AY:0;
-ET:"Boss Death";TE:"Boss Death 2";TD:30;AS:0;AX:0;AY:0;
-ET:"Boss Death 2";TE:"Boss Death 3";TD:5;AS:0;AX:0;AY:0;
-ET:"Boss Death 3";LS:["star"];DS:1;AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
+ET:"Boss End";TE:"Boss End 2";TD:30;AS:0;AX:0;AY:0;
+ET:"Boss End 2";TE:"Boss End 3";TD:5;AS:0;AX:0;AY:0;
+ET:"Boss End 3";LS:["star"];DS:1;AS:0;AX:0;AY:0;
 EVENTS_CLASSIC_END

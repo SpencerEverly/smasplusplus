@@ -1,0 +1,6 @@
+[1]
+import=AI_LARRY
+frames=8
+framestyle=0
+framespeed=4
+gravity = 0
