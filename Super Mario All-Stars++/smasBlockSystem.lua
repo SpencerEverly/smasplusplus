@@ -28,7 +28,10 @@ smasBlockSystem.frameRuleCounter = 20 --Adds a frame rule system, similar to SMB
 smasBlockSystem.blockListWithCoins = {} --Table for a list of blocks set with more than 1 coin
 smasBlockSystem.yoshiNPCs = table.map{1095,1100,1098,1099,1149,1150,1228,1148,1325,1326,1327,1328,1329,1330,1331,1332} --Yoshi NPCs to use, for activating a 1UP instead of getting another Yoshi egg.
 
+smasBlockSystem.enableMultiCoinBlockSystem = true
+smasBlockSystem.enableSMB1Invisible1UPSystem = true
 smasBlockSystem.enableMultiplayerPowerupBlockSystem = true
+smasBlockSystem.enableYoshi1UPBlockSystem = true
 
 if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
@@ -49,13 +52,15 @@ end
 
 function smasBlockSystem.onStart()
     --Hidden 1UP Block spawner
-    if table.icontains(smasTables.__smb1Dash1Levels,Level.filename()) then
-        if not SaveData.SMB1Invisible1UPBlockMet then --If already collected the block, set the layer with the invisible block to hide it.
-            local lifeBlock = Layer.get("Hidden 1UP Block")
-            lifeBlock:hide(true)
-        else --If true, then show it
-            local lifeBlock = Layer.get("Hidden 1UP Block")
-            lifeBlock:show(true)
+    if smasBlockSystem.enableSMB1Invisible1UPSystem then
+        if table.icontains(smasTables.__smb1Dash1Levels,Level.filename()) then
+            if not SaveData.SMB1Invisible1UPBlockMet then --If already collected the block, set the layer with the invisible block to hide it.
+                local lifeBlock = Layer.get("Hidden 1UP Block")
+                lifeBlock:hide(true)
+            else --If true, then show it
+                local lifeBlock = Layer.get("Hidden 1UP Block")
+                lifeBlock:show(true)
+            end
         end
     end
     
@@ -112,14 +117,16 @@ function smasBlockSystem.sproutMultiplayerBlockItem(playerPowerup, block, fromUp
 end
 
 function smasBlockSystem.onPostBlockHit(block, fromUpper, playerornil)
-    --Life detection, for the SMB1 system
-    local hidden1UPLayer = Layer.get("Hidden 1UP Block") --The hidden block layer.
-    if SaveData.SMB1Invisible1UPBlockMet then
-        if table.icontains(smasTables.__smb1Dash1Levels,Level.filename()) then --If we're on any -1 level...
-            for _,p in ipairs(Player.get()) do --Get all players in case
-                if block.layerObj == hidden1UPLayer and block.contentID == 1186 then --If we hit the block layer and the ID is the 1UP itself...
-                    console:println("SMB1 1UP block hit. Collect the required coins on a -3 level to reactivate.")
-                    SaveData.SMB1Invisible1UPBlockMet = false --Set this to false.
+    if smasBlockSystem.enableSMB1Invisible1UPSystem then
+        --Life detection, for the SMB1 system
+        local hidden1UPLayer = Layer.get("Hidden 1UP Block") --The hidden block layer.
+        if SaveData.SMB1Invisible1UPBlockMet then
+            if table.icontains(smasTables.__smb1Dash1Levels,Level.filename()) then --If we're on any -1 level...
+                for _,p in ipairs(Player.get()) do --Get all players in case
+                    if block.layerObj == hidden1UPLayer and block.contentID == 1186 then --If we hit the block layer and the ID is the 1UP itself...
+                        console:println("SMB1 1UP block hit. Collect the required coins on a -3 level to reactivate.")
+                        SaveData.SMB1Invisible1UPBlockMet = false --Set this to false.
+                    end
                 end
             end
         end
@@ -130,25 +137,28 @@ function smasBlockSystem.onPostBlockHit(block, fromUpper, playerornil)
     
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         
-        
-        --Block coin hit detection
-        if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateBlockCountdown then
-            console:println("Activated multi-coin block system on block "..tostring(block.idx)..".")
-            activateBlockCountdown = true
-            table.insert(smasBlockSystem.blockListWithCoins, block)
-            block.data.multiCoinTimer = smasBlockSystem.countDownMarker
-        elseif block.contentID <= 1 or block.contentID == 1000 or not block.isValid then
-            activateBlockCountdown = false
-            blockCountdown = 0
-            subtractBlockContentID = false
+        if smasBlockSystem.enableMultiCoinBlockSystem then
+            --Block coin hit detection
+            if block.contentID >= 2 and block.contentID <= 99 and block.isValid and not activateBlockCountdown then
+                console:println("Activated multi-coin block system on block "..tostring(block.idx)..".")
+                activateBlockCountdown = true
+                table.insert(smasBlockSystem.blockListWithCoins, block)
+                block.data.multiCoinTimer = smasBlockSystem.countDownMarker
+            elseif block.contentID <= 1 or block.contentID == 1000 or not block.isValid then
+                activateBlockCountdown = false
+                blockCountdown = 0
+                subtractBlockContentID = false
+            end
         end
         
         
         --Yoshi egg to 1UP conversion
-        if playerornil ~= nil then
-            if playerornil.mount == MOUNT_YOSHI and smasBlockSystem.yoshiNPCs[block.contentID] then
-                console:println("Yoshi already mounted on Player "..tostring(playerornil.idx)..", changed to 1UP mushroom.")
-                block.contentID = 1187
+        if smasBlockSystem.enableYoshi1UPBlockSystem then
+            if playerornil ~= nil then
+                if playerornil.mount == MOUNT_YOSHI and smasBlockSystem.yoshiNPCs[block.contentID] then
+                    console:println("Yoshi already mounted on Player "..tostring(playerornil.idx)..", changed to 1UP mushroom.")
+                    block.contentID = 1187
+                end
             end
         end
         
@@ -174,20 +184,25 @@ function smasBlockSystem.onPostBlockHit(block, fromUpper, playerornil)
 end
 
 function smasBlockSystem.onPostNPCKill(npc, harmType)
-    if table.icontains(smasTables.__smb1Dash3Levels,Level.filename()) then
-        for _,p in ipairs(Player.get()) do
-            if npc.id == 88 and Colliders.collide(p, npc) then --SMB1 Coin
-                smasBlockSystem.invisibleCoinsCollected = smasBlockSystem.invisibleCoinsCollected + 1 --Collect one
-                local levelIncrementation = table.ifind(smasTables.__smb1Dash3LevelsNumbered, Level.filename())
-                if smasBlockSystem.invisibleCoinsCollected == smasBlockSystem.invisibleCoinsToCollect[levelIncrementation] then --If equal to the one found in the table, set the goal-met to true
-                    if smasBlockSystem.debug then
-                        Sound.playSFX(1001) --Debug purposes
+    if smasBlockSystem.enableSMB1Invisible1UPSystem then
+        if table.icontains(smasTables.__smb1Dash3Levels,Level.filename()) then
+            for _,p in ipairs(Player.get()) do
+                if npc.id == 88 and Colliders.collide(p, npc) then --SMB1 Coin
+                    smasBlockSystem.invisibleCoinsCollected = smasBlockSystem.invisibleCoinsCollected + 1 --Collect one
+                    local levelIncrementation = table.ifind(smasTables.__smb1Dash3LevelsNumbered, Level.filename())
+                    if smasBlockSystem.invisibleCoinsCollected == smasBlockSystem.invisibleCoinsToCollect[levelIncrementation] then --If equal to the one found in the table, set the goal-met to true
+                        if smasBlockSystem.debug then
+                            Sound.playSFX(1001) --Debug purposes
+                        end
+                        console:println("SMB1 -3 coin requirement matches. 1UP blocks will now show on -1 levels.")
+                        SaveData.SMB1Invisible1UPBlockMet = true
+                    elseif smasBlockSystem.invisibleCoinsCollected > smasBlockSystem.invisibleCoinsToCollect[levelIncrementation] then --Else if any higher, don't set it
+                        if smasBlockSystem.debug then
+                            Sound.playSFX(152) --Debug purposes
+                        end
+                        console:println("SMB1 -3 coin requirement is over the amount set. 1UP blocks will not show on -1 levels.")
+                        SaveData.SMB1Invisible1UPBlockMet = false
                     end
-                    console:println("SMB1 -3 coin requirement matches. 1UP blocks will now show on -1 levels.")
-                    SaveData.SMB1Invisible1UPBlockMet = true
-                elseif smasBlockSystem.invisibleCoinsCollected > smasBlockSystem.invisibleCoinsToCollect[levelIncrementation] then --Else if any higher, don't set it
-                    console:println("SMB1 -3 coin requirement is over the amount set. 1UP blocks will not show on -1 levels.")
-                    SaveData.SMB1Invisible1UPBlockMet = false
                 end
             end
         end
@@ -210,30 +225,32 @@ function smasBlockSystem.onTick()
     
     
     --Coin block timer
-    if activateBlockCountdown then
-        if smasBlockSystem.frameRuleCounter == 20 then --If 20, then subtract the marker
-            subtractBlockContentID = true
-        else --Else just don't
-            subtractBlockContentID = false
-        end
-        if subtractBlockContentID then
-            for i=#smasBlockSystem.blockListWithCoins, 1, -1 do
-                local v = smasBlockSystem.blockListWithCoins[i]
-                if v.isValid and v.data.multiCoinTimer > 0 then
-                    if smasBlockSystem.frameRuleCounter == 20 then
-                        v.data.multiCoinTimer = v.data.multiCoinTimer - 1
+    if smasBlockSystem.enableMultiCoinBlockSystem then
+        if activateBlockCountdown then
+            if smasBlockSystem.frameRuleCounter == 20 then --If 20, then subtract the marker
+                subtractBlockContentID = true
+            else --Else just don't
+                subtractBlockContentID = false
+            end
+            if subtractBlockContentID then
+                for i=#smasBlockSystem.blockListWithCoins, 1, -1 do
+                    local v = smasBlockSystem.blockListWithCoins[i]
+                    if v.isValid and v.data.multiCoinTimer > 0 then
+                        if smasBlockSystem.frameRuleCounter == 20 then
+                            v.data.multiCoinTimer = v.data.multiCoinTimer - 1
+                        end
+                    else
+                        v.contentID = 1 --Set the block to only one coin
+                        v.data.multiCoinTimer = 0
+                        smasBlockSystem.countDownMarker = 11 --Reset the counter
+                        table.remove(smasBlockSystem.blockListWithCoins, i) --Remove the block from the table
                     end
-                else
-                    v.contentID = 1 --Set the block to only one coin
-                    v.data.multiCoinTimer = 0
-                    smasBlockSystem.countDownMarker = 11 --Reset the counter
-                    table.remove(smasBlockSystem.blockListWithCoins, i) --Remove the block from the table
                 end
             end
         end
-    end
-    if not activateBlockCountdown then
-        subtractBlockContentID = false
+        if not activateBlockCountdown then
+            subtractBlockContentID = false
+        end
     end
 end
 

@@ -17,6 +17,7 @@ local sampleBlockSettings = {
     floorslope = 0,
     
     passthrough = true,
+    isRightSlope = true
 }
 
 --Applies blockID settings
@@ -33,6 +34,24 @@ function sampleBlock.onInitAPI()
     --registerEvent(sampleBlock, "onBlockHit")
 end
 
+function sampleBlock.checkSlopeCollision(p, v)
+    local playerCameraDistanceX = p.x - camera.x
+    local playerCameraDistanceY = p.y - camera.y
+    local playerBlockDistanceX = p.x - v.x
+    local playerBlockDistanceY = p.y - v.y
+    
+    local distIntoTile = p.x - (v.x * v.width)
+    local percentage = distIntoTile / v.width
+    local riseAtDist = (percentage * v.height)
+    
+    if sampleBlockSettings.isRightSlope then
+        riseAtDist = 32 - riseAtDist
+    end
+    local collisionPointSlope = vector(p.x, ((v.y + 1) * v.height) - riseAtDist)
+    
+    return collisionPointSlope
+end
+
 function sampleBlock.onTickEndBlock(v)
     -- Don't run code for invisible entities
     if v.isHidden or v:mem(0x5A, FIELD_BOOL) then return end
@@ -43,11 +62,12 @@ function sampleBlock.onTickEndBlock(v)
     local endPosition = v.y + v.height
     
     for _,p in ipairs(Player.get()) do
-        if Collisionz.WalkingCollision(p, v) and Collisionz.FindCollision(p, v) == Collisionz.CollisionSpot.COLLISION_CENTER then
-            local playerBottomPosition = p.y + p.width
+        if Collisionz.CheckCollision(p, v) then
+            Text.print(sampleBlock.checkSlopeCollision(p, v).y, 100, 120)
             Text.print("Works!", 100, 100)
-            p.speedY = 0
-            p:mem(0x48,FIELD_WORD,992)
+            p.speedY = -0.4
+            p:mem(0x146, FIELD_WORD, 2)
+            p:mem(0x48, FIELD_WORD, 992)
         end
     end
 end
