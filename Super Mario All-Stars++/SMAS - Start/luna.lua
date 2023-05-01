@@ -62,6 +62,7 @@ local function startupdater()
             Misc.runWhenUnfocused(true)
         end
     end
+    updateractive = true
     Routine.wait(1, true)
     Sound.changeMusic("_OST/All Stars Menu/Updater.ogg", 0)
     if SMBX_VERSION == VER_SEE_MOD then
@@ -277,9 +278,7 @@ function onTick()
     if timer <= 0 then
         if SMBX_VERSION ~= VER_SEE_MOD then
             SysManager.loadIntroTheme()
-        elseif Misc.inEditor() and SMBX_VERSION == VER_SEE_MOD then
-            SysManager.loadIntroTheme()
-        elseif not Misc.inEditor() and SMBX_VERSION == VER_SEE_MOD then
+        elseif SMBX_VERSION == VER_SEE_MOD then
             if not smasBooleans.skipUpdater then
                 Routine.run(startupdater)
             else

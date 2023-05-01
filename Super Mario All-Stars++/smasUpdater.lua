@@ -2,6 +2,9 @@ local smasUpdater = {}
 
 if SMBX_VERSION ~= VER_SEE_MOD then return end
 
+local textplus = require("textplus")
+local statusFont = textplus.loadFont("littleDialogue/font/6.ini")
+
 smasUpdater.doUpdate = false --ONLY toggled on the start level.
 
 smasUpdater.drawUpdateText = false
@@ -164,9 +167,9 @@ if not Misc.inEditor() then
     function smasUpdater.onDraw()
         if smasUpdater.doUpdate then
             if smasUpdater.drawUpdateText then
-                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white}
+                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2}
                 if smasUpdater.drawVersionText then
-                    textplus.print{text = smasUpdater.versionNumber(), pivot = vector.v2(0.5,0.5), x = 400, y = 250, priority = 10, color = Color.white}
+                    textplus.print{text = smasUpdater.versionNumber(), pivot = vector.v2(0.5,0.5), x = 400, y = 250, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2}
                 end
             end
             
@@ -293,7 +296,7 @@ else
             UpdateMessageForUpdater = "On the editor, skipping update..."
             
             if smasUpdater.drawUpdateText then
-                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white}
+                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2}
             end
             
             if not smasUpdater.doneUpdating then
