@@ -129,7 +129,7 @@ end
 
 function smasUpdater.downloadLatestUpdateConfig()
     if not Misc.inEditor() then
-        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/Super%20Mario%20All-Stars%2B%2B/version-latestfiles.txt", "/", "version-latestfiles.txt")
+        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/Super%20Mario%20All-Stars%2B%2B/version-latestfiles.txt", "", "version-latestfiles.txt")
     end
 end
 
