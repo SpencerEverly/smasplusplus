@@ -1373,6 +1373,8 @@ if smasMainMenu.active then
 end
 
 
+
+--SMAS++ MAIN MENU: Main Menu Selection (Main)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MAIN, title = "Main Menu", xCenter = 150, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "Start Game", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootSMASPlusPlusPreExecute) end}
 smasMainMenuSystem.addMenuItem{name = "Load Game Help", section = smasMainMenuSystem.menuSections.SECTION_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BootGameHelpPreExecute) end}
@@ -1387,6 +1389,7 @@ smasMainMenuSystem.addMenuItem{name = "Exit Game", section = smasMainMenuSystem.
 
 
 
+--SMAS++ MAIN MENU: Main Menu Selection (Minigames)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, title = "Minigames", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 150, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "Classic Battle Mode (2P)", section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(BattleModeDisEnable1) end}
 smasMainMenuSystem.addMenuItem{name = "Rush Mode (1P)", section = smasMainMenuSystem.menuSections.SECTION_MINIGAMES, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(RushModeMenu1) end}
@@ -1394,6 +1397,7 @@ smasMainMenuSystem.addMenuItem{name = "Rush Mode (1P)", section = smasMainMenuSy
 
 
 
+--SMAS++ MAIN MENU: Main Menu Selection (Options)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, title = "Settings/Options", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 200, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "2 Player Mode", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(TwoPlayerDisEnable1) end}
 smasMainMenuSystem.addMenuItem{name = "SMBX 1.3 Mode", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(X2DisableCheck1) end}
@@ -1407,7 +1411,7 @@ smasMainMenuSystem.addMenuItem{name = "Save Data Settings", section = smasMainMe
 
 
 
-
+--SMAS++ MAIN MENU: Main Menu Selection (Manage Options)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, title = "Manage Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 200, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "Change Character", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(ChangeChar1) end}
 smasMainMenuSystem.addMenuItem{name = "Change Player Name", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, 0, false) end}
@@ -1418,6 +1422,7 @@ smasMainMenuSystem.addMenuItem{name = "Change Clock Theme", section = smasMainMe
 
 
 
+--SMAS++ MAIN MENU: Main Menu Selection (Accessibility Options)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, title = "Accessibility Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 250, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "Toggle Twirling", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "accessibilityTwirl", isSaveData = true, isGameData = false}
 smasMainMenuSystem.addMenuItem{name = "Toggle Wall Jumping", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_ACCESSIBILITY, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_BOOLEAN, isFunction = false, booleanToUse = "accessibilityWallJump", isSaveData = true, isGameData = false}
@@ -1429,6 +1434,7 @@ smasMainMenuSystem.addMenuItem{name = "Toggle Lives", section = smasMainMenuSyst
 
 
 
+--SMAS++ MAIN MENU: Main Menu Selection (Themes)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, title = "Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_MAIN, xCenter = 170, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "SMAS++ (Default)", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 1 Routine.run(themeSelected) end}
 smasMainMenuSystem.addMenuItem{name = "Where SMB Attacks", section = smasMainMenuSystem.menuSections.SECTION_THEMESELECTION, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.themeSelected = 6 Routine.run(themeSelected) end}
@@ -1454,6 +1460,7 @@ smasMainMenuSystem.addMenuItem{name = "Metroid Prime 2", section = smasMainMenuS
 
 
 
+--SMAS++ MAIN MENU: Main Menu Selection (Battle Mode: Select Level)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, title = "Select level.", xCenter = 160, yCenter = 310, cantGoBack = true}
 smasMainMenuSystem.addMenuItem{name = "Exit Battle Mode", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_EXIT, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Random Level", section = smasMainMenuSystem.menuSections.SECTION_BATTLEMODELEVELSELECT, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(battleRandomLevelSelect) end}
@@ -1477,6 +1484,7 @@ smasMainMenuSystem.addMenuItem{name = "NSMBDS, Level 3", section = smasMainMenuS
 
 
 
+--SMAS++ MAIN MENU: Main Menu Selection (Clock Settings)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, title = "Clock Themes", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, xCenter = 170, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "Disable Clock", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "disabled", isSaveData = true, isGameData = false}
 smasMainMenuSystem.addMenuItem{name = "Default", section = smasMainMenuSystem.menuSections.SECTION_CLOCKTHEMING, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_MULTISELECT, isFunction = false, multiSelectValueToUse = "clockTheme", multiSelectValueToSet = "normal", isSaveData = true, isGameData = false}
@@ -1496,6 +1504,7 @@ smasMainMenuSystem.addMenuItem{name = "Windows 10", section = smasMainMenuSystem
 
 
 
+--SMAS++ MAIN MENU: Main Menu Selection (Save Settings)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, title = "Save Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "Move Save Data", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.changeSaveSlotMenu() end}
 smasMainMenuSystem.addMenuItem{name = "Erase Save Data", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Sound.muteMusic(-1) smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, 0, false) end}
@@ -1503,6 +1512,8 @@ smasMainMenuSystem.addMenuItem{name = "Erase Save Data", section = smasMainMenuS
 
 
 
+
+--SMAS++ MAIN MENU: Main Menu Selection (Audio Settings)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, title = "Audio Settings", menuBackTo = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MAIN, xCenter = 150, yCenter = 310}
 smasMainMenuSystem.addMenuItem{name = "Music Volume", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE, isFunction = false, isSaveData = false, isGameData = false, isPauseplusValue = true, numberToUse = "music volume", minimumNumber = 0, numberStep = 5, maxNumber = 100}
 smasMainMenuSystem.addMenuItem{name = "SFX Volume", section = smasMainMenuSystem.menuSections.SECTION_SETTINGS_MUSICANDSOUNDS, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE, isFunction = false, isSaveData = false, isGameData = false, isPauseplusValue = true, numberToUse = "sfx volume", minimumNumber = 0, numberStep = 0.1, maxNumber = 1}
@@ -1512,6 +1523,18 @@ smasMainMenuSystem.addMenuItem{name = "Original SMBX Sounds", section = smasMain
 
 
 
+
+--SMAS++ MAIN MENU: Main Menu Dialog (Save Erasing: Message 1)
+smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, cantGoBack = true, xCenter = 150, yCenter = 230, dialogMessage = "Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
+smasMainMenuSystem.addMenuItem{name = "I understand", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, 0, false) end}
+smasMainMenuSystem.addMenuItem{name = "Nevermind", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false) Sound.restoreMusic(-1) end}
+
+
+
+
+
+
+--SMAS++ MAIN MENU: Main Menu Dialog (Save Erasing: Message 2)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, cantGoBack = true, xCenter = 150, yCenter = 250, dialogMessage = "ARE YOU SURE YOU WANT TO ERASE YOUR SAVE DATA?", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
 smasMainMenuSystem.addMenuItem{name = "Do not Erase", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false) Sound.restoreMusic(-1) end}
 smasMainMenuSystem.addMenuItem{name = "ERASE", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Routine.run(SaveEraseStart) end}
@@ -1519,12 +1542,8 @@ smasMainMenuSystem.addMenuItem{name = "ERASE", section = smasMainMenuSystem.menu
 
 
 
-smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, cantGoBack = true, xCenter = 150, yCenter = 230, dialogMessage = "Once you erase your save, you CAN NOT go back unless you use tools like Recuva.<page>Erasing your save is for if you want to start over from the beginning.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
-smasMainMenuSystem.addMenuItem{name = "I understand", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE2, 0, false) end}
-smasMainMenuSystem.addMenuItem{name = "Nevermind", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_ERASESAVE1, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false) Sound.restoreMusic(-1) end}
 
-
-
+--SMAS++ MAIN MENU: Main Menu Dialog (Change Name)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, cantGoBack = true, xCenter = 150, yCenter = 240, dialogMessage = "To change your name in the game, please select Begin to get started.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG}
 smasMainMenuSystem.addMenuItem{name = "Begin", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() startKeyboard() end}
 smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGENAME, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_MANAGE, 0, false) end}
@@ -1532,6 +1551,7 @@ smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuS
 
 
 
+--SMAS++ MAIN MENU: Main Menu Dialog (Change Profile Picture)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, cantGoBack = true, xCenter = 180, yCenter = 260, dialogMessage = "To change your profile picture in the game, please select Begin to get started.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 280}
 smasMainMenuSystem.addMenuItem{name = "Begin", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() startKeyboardPFP() end}
 smasMainMenuSystem.addMenuItem{name = "How do I use this?", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP_INFO, 0, false) end}
@@ -1540,6 +1560,8 @@ smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuS
 
 
 
+
+--SMAS++ MAIN MENU: Main Menu Dialog (Change Profile Picture: Information)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP_INFO, cantGoBack = true, xCenter = 180, yCenter = 250, dialogMessage = "Your profile picture can be used when you launch Online Multiplayer, or to see who is running the game at this session.<page>Your profile picture will also be used during the story, along with your name.<page>To specify the profile picture using the keyboard, please type up the path from '___MainUserDirectory' to the profile picture you are going to use.<page>'___MainUserDirectory' is a user modifiable directory that can be used for files you specify for the episode, such as a profile picture (PNG only).<page>Don't worry if you don't want to specify one, there's already a default profile picture for you already set up.<page>But if you want to go ahead and set one up, please specify to begin anytime on that menu.<page>With that out of the way, that's how you set up a profile picture for the episode!", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 280}
 smasMainMenuSystem.addMenuItem{name = "Okay!", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP_INFO, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_CHANGEPFP, 0, false) end}
 
@@ -1547,6 +1569,7 @@ smasMainMenuSystem.addMenuItem{name = "Okay!", section = smasMainMenuSystem.menu
 
 
 
+--SMAS++ MAIN MENU: Main Menu Dialog (Configure Inputs)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_INPUTCONFIG, cantGoBack = true, xCenter = 180, yCenter = 250, dialogMessage = "To begin configuring the inputs of the game,<page>please select an option depending on the controls currently being used.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 280}
 smasMainMenuSystem.addMenuItem{name = "Keyboard", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_INPUTCONFIG, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.DIALOG_SETTINGS_INPUTCONFIG2, 0, false) end}
 smasMainMenuSystem.addMenuItem{name = "Controller", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_INPUTCONFIG, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() startConfigurator() end}
@@ -1555,6 +1578,7 @@ smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuS
 
 
 
+--SMAS++ MAIN MENU: Main Menu Dialog (Configure Inputs: Which Player?)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_INPUTCONFIG2, cantGoBack = true, xCenter = 180, yCenter = 250, dialogMessage = "Which player would you like to assign keys to?", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 320}
 smasMainMenuSystem.addMenuItem{name = "Player 1", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_INPUTCONFIG2, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() startConfiguratorKeyboard() end}
 smasMainMenuSystem.addMenuItem{name = "Player 2", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_INPUTCONFIG2, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() startConfiguratorKeyboardP2() end}
@@ -1563,6 +1587,8 @@ smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuS
 
 
 
+
+--SMAS++ MAIN MENU: Main Menu Dialog (Save Switching Options: Non-Editor)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_SAVESWITCH, cantGoBack = true, xCenter = 180, yCenter = 230, dialogMessage = "To begin switching the save slot, please select Begin to get started (Keyboard only).<page>THIS WILL OVERWRITE ANY SAVES THAT WERE SWITCHED TO ANY SLOT, USE WITH CAUTION!", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 300}
 smasMainMenuSystem.addMenuItem{name = "Begin", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_SAVESWITCH, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() startSaveSwitcher1() end}
 smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_SAVESWITCH, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, 0, false) end}
@@ -1570,17 +1596,24 @@ smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuS
 
 
 
+
+--SMAS++ MAIN MENU: Main Menu Dialog (Save Switching Options: Editor)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_EDITORSAVESWITCH, cantGoBack = true, xCenter = 180, yCenter = 230, dialogMessage = "You can't do this while in the editor.<page>Please start an actual game to switch saves.<page>You can also manually do this yourself by renaming save slots in the episode folder.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 300}
 smasMainMenuSystem.addMenuItem{name = "Okay.", section = smasMainMenuSystem.menuSections.DIALOG_SETTINGS_EDITORSAVESWITCH, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_SETTINGS_SAVEDATA, 0, false) end}
 
 
 
+
+
+--SMAS++ MAIN MENU: Main Menu Dialog (Credits)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_CREDITS, cantGoBack = true, xCenter = 180, yCenter = 230, dialogMessage = "For information on everything that made this episode possible,<page>It wouldn't have been possible without more than 100 people and counting.<page>To see the credits of this episode, go into the worlds folder,<page>the SMAS folder, and redirect to the CREDITS.txt file in the folder.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 300}
 smasMainMenuSystem.addMenuItem{name = "Exit", section = smasMainMenuSystem.menuSections.DIALOG_CREDITS, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MAIN, 0, false) end}
 
 
 
 
+
+--SMAS++ MAIN MENU: Main Menu Dialog (Classic Battle Mode Toggle: You can use!, 2P needs enabling)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_NEED2NDPLAYER, cantGoBack = true, xCenter = 180, yCenter = 230, dialogMessage = "Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? We'll need to enable 2 player mode first.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 300}
 smasMainMenuSystem.addMenuItem{name = "Yes", section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_NEED2NDPLAYER, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() Playur.activate2ndPlayer() smasMainMenu.classicBattleSelect() end}
 smasMainMenuSystem.addMenuItem{name = "No", section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_NEED2NDPLAYER, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MINIGAMES, 0, false) end}
@@ -1589,6 +1622,7 @@ smasMainMenuSystem.addMenuItem{name = "No", section = smasMainMenuSystem.menuSec
 
 
 
+--SMAS++ MAIN MENU: Main Menu Dialog (Classic Battle Mode Toggle: You can use!, 2P is already enabled)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_HAVE2NDPLAYER, cantGoBack = true, xCenter = 180, yCenter = 230, dialogMessage = "Since you have X2 characters disabled, you can use Battle Mode!<page>Would you like to start battle mode? You already have 2 player mode enabled for this.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 300}
 smasMainMenuSystem.addMenuItem{name = "Yes", section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_HAVE2NDPLAYER, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenu.classicBattleSelect() end}
 smasMainMenuSystem.addMenuItem{name = "No", section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_HAVE2NDPLAYER, sectionItem = 2, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MINIGAMES, 0, false) end}
@@ -1596,12 +1630,14 @@ smasMainMenuSystem.addMenuItem{name = "No", section = smasMainMenuSystem.menuSec
 
 
 
+--SMAS++ MAIN MENU: Main Menu Dialog (Classic Battle Mode Toggle: You can't use)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_HAVE13MODEON, cantGoBack = true, xCenter = 180, yCenter = 230, dialogMessage = "Unfortunately, you'll need to turn on 1.3 Mode to start Classic Battle Mode.<page>This is due to stability and game breaking reasons.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 300}
 smasMainMenuSystem.addMenuItem{name = "Okay.", section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_HAVE13MODEON, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MINIGAMES, 0, false) end}
 
 
 
 
+--SMAS++ MAIN MENU: Main Menu Dialog (Classic Battle Mode: Exiting)
 smasMainMenuSystem.addSection{section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_EXIT, cantGoBack = true, xCenter = 180, yCenter = 210, dialogMessage = "Exiting battle mode activated. You'll need to manually turn off 2 player mode in the settings tab.", menuMainType = smasMainMenuSystem.menuMainTypes.MENUMAIN_DIALOG, dialogMessageY = 300}
 smasMainMenuSystem.addMenuItem{name = "Okay.", section = smasMainMenuSystem.menuSections.DIALOG_BATTLEMODE_EXIT, sectionItem = 1, menuType = smasMainMenuSystem.menuTypes.MENU_SELECTABLE, isFunction = true, functionToRun = function() smasMainMenuSystem.goToMenuSection(smasMainMenuSystem.menuSections.SECTION_MINIGAMES, 0, false) end}
 

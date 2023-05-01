@@ -203,7 +203,6 @@ function koopalingShells.onTickEndNPC(v)
 			data.counter = 0
 		end
 	elseif data.special == 1 then
-        --Text.print(data.counter, 100, 100)
 		v.speedX = v.speedX + (0.2 * v.direction)
 		if v.speedX > 5 then
 			v.speedX = 5

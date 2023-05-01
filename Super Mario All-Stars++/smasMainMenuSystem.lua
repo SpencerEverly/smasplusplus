@@ -328,7 +328,7 @@ function smasMainMenuSystem.onInputUpdate()
     if smasMainMenuSystem.menuOpen then
         if smasMainMenuSystem.onMenu > 0 then
             local currentSection = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu]
-            local currentDialog = smasMainMenuSystem.getDialogMessage{text = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].dialogMessage}
+            local currentDialog = smasMainMenuSystem.getDialogMessage{text = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].dialogMessage)}
             if smasMainMenuSystem.PressDelay == 0 then
                 for _,p in ipairs(Player.get()) do
                     if not smasMainMenuSystem.dontControlMenu then
@@ -421,7 +421,7 @@ function smasMainMenuSystem.onDraw()
     local currentSection = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu]
     local C = 0
     local original_maxShow = smasMainMenuSystem.maxShow
-    local currentDialog = smasMainMenuSystem.getDialogMessage{text = currentSection.dialogMessage}
+    local currentDialog = smasMainMenuSystem.getDialogMessage{text = transplate.getTranslation(currentSection.dialogMessage)}
     
     if smasMainMenuSystem.PressDelay > 0 then
         smasMainMenuSystem.PressDelay = smasMainMenuSystem.PressDelay - 1
@@ -479,7 +479,7 @@ function smasMainMenuSystem.onDraw()
             end
             
             if not smasMainMenuSystem.hideTitle then
-                textplus.print({pivot = vector.v2(0.5,0.5), x = 400, y = 310, text = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title, priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
+                textplus.print({pivot = vector.v2(0.5,0.5), x = 400, y = 310, text = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title), priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
             end
             
             if smasMainMenuSystem.isOnDialog then
@@ -494,57 +494,57 @@ function smasMainMenuSystem.onDraw()
                 smasMainMenuSystem.layoutText[k] = textplus.layout(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name, 10)
                 local namedNum = MenuCursor - smasMainMenuSystem.minShow + 2
                 
-                named[k] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name
+                named[k] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name)
                 local naming = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][MenuCursor + 1]
                 
                 if currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_BOOLEAN then
                     if currentOption.isSaveData then
                         if SaveData[naming.booleanToUse] then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (ON)"
                         elseif not SaveData[naming.booleanToUse] then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (OFF)"
                         end
                     elseif currentOption.isGameData then
                         if GameData[naming.booleanToUse] then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (ON)"
                         elseif not GameData[naming.booleanToUse] then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (OFF)"
                         end
                     elseif currentOption.isPauseplusValue then
                         if selectionData[naming.booleanToUse] then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (ON)"
                         elseif not selectionData[naming.booleanToUse] then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (OFF)"
                         end
                     end
                     
                 elseif currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_NUMBERVALUE then
                     if currentOption.isSaveData then
-                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(SaveData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
+                        named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." ("..tostring(SaveData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
                     elseif currentOption.isGameData then
-                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(GameData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
+                        named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." ("..tostring(GameData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
                     elseif currentOption.isPauseplusValue then
-                        named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." ("..tostring(selectionData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
+                        named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." ("..tostring(selectionData[smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].numberToUse])..")"
                     end
                 
                 elseif currentOption.menuType == smasMainMenuSystem.menuTypes.MENU_MULTISELECT then
                     if currentOption.isSaveData then
                         if SaveData.SMASPlusPlus.options[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (ON)"
                         elseif SaveData.SMASPlusPlus.options[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (OFF)"
                         end
                     elseif currentOption.isGameData then
                         if GameData.SMASPlusPlus.options[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (ON)"
                         elseif GameData.SMASPlusPlus.options[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (OFF)"
                         end
                     elseif currentOption.isPauseplusValue then
                         if selectionData[naming.multiSelectValueToUse] == naming.multiSelectValueToSet then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (ON)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (ON)"
                         elseif selectionData[naming.multiSelectValueToUse] ~= naming.multiSelectValueToSet then
-                            named[MenuCursor + 1] = smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name.." (OFF)"
+                            named[MenuCursor + 1] = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu][k].name).." (OFF)"
                         end
                     end
                 end

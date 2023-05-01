@@ -29,6 +29,18 @@ costume.playersList = {}
 costume.playerData = {}
 
 
+costume.enableOptionalThings = false
+
+costume.isSlowFalling = false
+costume.slowFallTimer = 0
+costume.slowFallMaxTime = 25
+
+
+costume.isFlyingClassic = false
+costume.isFlyingClassicTimer = 0
+costume.isFlyingClassicMaxTime = 30
+
+
 local eventsRegistered = false
 
 
@@ -356,8 +368,12 @@ local function findAnimation(p)
         elseif p.powerup == PLAYER_SMALL then
             return "duckSmall"
         elseif isSlowFalling(p) then
+            costume.isSlowFalling = true
+            return "slowFallDuck"
+        elseif costume.slowFallTimer >= 1 and costume.slowFallTimer <= costume.slowFallMaxTime then
             return "slowFallDuck"
         elseif p:mem(0x16E,FIELD_BOOL) then
+            costume.isFlyingClassic = true
             return "slowFallDuck"
         else
             return "duck"
@@ -524,6 +540,7 @@ local function findAnimation(p)
         
 
         if p:mem(0x16E,FIELD_BOOL) then -- flying with leaf
+            costume.isFlyingClassic = true
             if p.holdingNPC == nil then
                 return "runJumpLeaf"
             else
@@ -534,9 +551,12 @@ local function findAnimation(p)
         
         if data.atPSpeed then
             if isSlowFalling(p) then
+                costume.isSlowFalling = true
                 return "runSlowFall"
             elseif leafPowerups[p.powerup] and p.speedY > 0 then
                 return "runJumpLeafDown"
+            elseif costume.slowFallTimer >= 1 and costume.slowFallTimer <= costume.slowFallMaxTime then
+                return "runSlowFall"
             else
                 if p.powerup == PLAYER_SMALL and not leafPowerups[p.powerup] then
                     return "runJumpSmall"
@@ -549,6 +569,7 @@ local function findAnimation(p)
 
         if p.holdingNPC == nil then
             if isSlowFalling(p) then
+                costume.isSlowFalling = true
                 return "slowFall"
             elseif data.useFallingFrame then
                 if p.powerup == PLAYER_SMALL and not smb2Characters[p.character] then
@@ -558,6 +579,9 @@ local function findAnimation(p)
                 else
                     return "fall"
                 end
+            end
+            if costume.slowFallTimer >= 1 and costume.slowFallTimer <= costume.slowFallMaxTime then
+                return "slowFall"
             end
         end
         if p.holdingNPC ~= nil then
@@ -631,14 +655,93 @@ function costume.onInputUpdate()
     end
 end
 
+function costume.handleSlowFalling(p)
+    if costume.isSlowFalling then
+        costume.slowFallTimer = costume.slowFallTimer + 1
+        
+        if not isOnGround(p) and (p:mem(0x34,FIELD_WORD) == 0 and p:mem(0x06,FIELD_WORD) == 0) and not isSlowFalling(p) then
+            p.speedY = Defines.player_grav * 5
+        end
+        
+        if p.keys.jump == KEYS_PRESSED then
+            costume.slowFallTimer = 1
+        end
+        
+        if costume.slowFallTimer == 1 then
+            Sound.playSFX(33, nil, nil, 15)
+        end
+        
+        if costume.slowFallTimer <= costume.slowFallMaxTime then
+            p.y = p.y - 0.3
+        end
+        
+        if costume.slowFallTimer > costume.slowFallMaxTime then
+            p.y = p.y + 3
+            if p:mem(0x12E,FIELD_BOOL) then
+                p.frame = 28
+            elseif p.holdingNPC ~= nil then
+                p.frame = 33
+            else
+                p.frame = 5
+            end
+        end
+    end
+end
 
+function costume.handleFlying(p)
+    if costume.isFlyingClassic then
+        costume.isFlyingClassicTimer = costume.isFlyingClassicTimer + 1
+        
+        if p.keys.jump == KEYS_PRESSED then
+            costume.isFlyingClassicTimer = 1
+        end
+        
+        if costume.isFlyingClassicTimer == 1 then
+            Sound.playSFX(33, nil, nil, 15)
+        end
+        
+        if costume.isFlyingClassicTimer <= costume.isFlyingClassicMaxTime and p.keys.jump then
+            p.y = p.y - 0.5
+        end
+        
+        if costume.isFlyingClassicTimer > costume.isFlyingClassicMaxTime then
+            if p.keys.jump then
+                p.y = p.y + 5.5
+            end
+            if p:mem(0x12E,FIELD_BOOL) then
+                p.frame = 28
+            elseif p.holdingNPC ~= nil then
+                p.frame = 33
+            else
+                p.frame = 19
+            end
+        end
+    end
+end
 
 function costume.onTick()
     for _,p in ipairs(costume.playersList) do
         local data = costume.playerData[p]
 
-
         handleDucking(p)
+        
+        if costume.enableOptionalThings then
+            if not isOnGround(p) and (p:mem(0x34,FIELD_WORD) == 0 and p:mem(0x06,FIELD_WORD) == 0) then
+                if isSlowFalling(p) or (costume.slowFallTimer >= 1 and costume.slowFallTimer <= costume.slowFallMaxTime) then
+                    costume.handleSlowFalling(p)
+                end
+                if p:mem(0x16E,FIELD_BOOL) or (costume.isFlyingClassicTimer >= 1 and costume.isFlyingClassicTimer <= costume.isFlyingClassicMaxTime) then
+                    costume.handleFlying(p)
+                end
+            end
+        end
+        
+        if isOnGround(p) then
+            costume.slowFallTimer = 0
+            costume.isSlowFalling = false
+            costume.isFlyingClassicTimer = 0
+            costume.isFlyingClassic = false
+        end
 
         -- Yoshi hitting (creates a small delay between hitting the run button and yoshi actually sticking his tongue out)
         if canHitYoshi(p) then

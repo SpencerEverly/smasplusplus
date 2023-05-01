@@ -37,12 +37,12 @@ function File.readFromCharacterDirectory(name)
 end
 
 function File.writeToFile(name, text) --Write to a file using io. This will overwrite everything with the text specified, so BE CAREFUL!
-    name = Misc.resolveFile(name)
-    if name == nil then
+    local name2 = Misc.resolveFile(name)
+    if name2 == nil then
         error("You need to specify the name of the file.")
     end
 
-    local f = io.open(name,"w")
+    local f = io.open(name2,"w")
     if f == nil then
         return
     end
@@ -50,16 +50,16 @@ function File.writeToFile(name, text) --Write to a file using io. This will over
     f:write(tostring(text))
     f:close()
     
-    console:println("File "..name.." was overwritten to with text data.")
+    console:println("File "..name2.." was overwritten to with text data.")
 end
 
 function File.addToFile(name, text) --Add to a file using io. This won't overwrite everything, just adds something to the file, so this one is fine (UNLESS you overwrite important data in the episode).
-    name = Misc.resolveFile(name)
-    if name == nil then
+    local name2 = Misc.resolveFile(name)
+    if name2 == nil then
         error("You need to specify the name of the file.")
     end
 
-    local f = io.open(name,"a")
+    local f = io.open(name2,"a")
     if f == nil then
         return
     end
@@ -67,18 +67,18 @@ function File.addToFile(name, text) --Add to a file using io. This won't overwri
     f:write(tostring(text))
     f:close()
     
-    console:println("File "..name.." was written to with text data.")
+    console:println("File "..name2.." was written to with text data.")
 end
 
 function File.readFile(name) --Read a file using io. This won't overwrite everything, just reads a file, so this one is fine.
-    name = Misc.resolveFile(name)
-    if name == nil then
+    local name2 = Misc.resolveFile(name)
+    if name2 == nil then
         error("You need to specify the name of the file.")
     end
     
     local text
 
-    local f = io.open(name,"r")
+    local f = io.open(name2,"r")
     if f == nil then
         return
     end
@@ -141,7 +141,7 @@ function File.splitCharacters(stringg)
 end
 
 function File.fileToByteSize(file)
-    local input = io.readFileLines(Misc.resolveFile(file))
+    local input = io.readFileLines(file)
     if input == nil then
         return
     end

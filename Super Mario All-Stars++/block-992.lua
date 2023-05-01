@@ -17,7 +17,7 @@ local sampleBlockSettings = {
     floorslope = 0,
     
     passthrough = true,
-    isRightSlope = true
+    isRightSlope = false,
 }
 
 --Applies blockID settings
@@ -32,6 +32,13 @@ blockManager.setBlockSettings(sampleBlockSettings)
 function sampleBlock.onInitAPI()
     blockManager.registerEvent(blockID, sampleBlock, "onTickEndBlock")
     --registerEvent(sampleBlock, "onBlockHit")
+end
+
+function sampleBlock.getPlayerPixelCrossing(p, v)
+    local playerBlockDistanceX = p.x - v.x + (v.width - p.width * 0.5)
+    local playerBlockDistanceY = p.y - v.y + (v.height + p.height * 0.5)
+    
+    return playerBlockDistanceX,playerBlockDistanceY
 end
 
 function sampleBlock.checkSlopeCollision(p, v)
@@ -63,8 +70,10 @@ function sampleBlock.onTickEndBlock(v)
     
     for _,p in ipairs(Player.get()) do
         if Collisionz.CheckCollision(p, v) then
-            Text.print(sampleBlock.checkSlopeCollision(p, v).y, 100, 120)
+            local blockX,blockY = sampleBlock.getPlayerPixelCrossing(p, v)
             Text.print("Works!", 100, 100)
+            Text.print(blockX, 100, 120)
+            Text.print(p.speedY, 100, 140)
             p.speedY = -0.4
             p:mem(0x146, FIELD_WORD, 2)
             p:mem(0x48, FIELD_WORD, 992)

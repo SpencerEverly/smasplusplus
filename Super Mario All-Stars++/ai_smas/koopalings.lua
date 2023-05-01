@@ -321,7 +321,6 @@ function koopalings.onTickNPC(v)
             data.special = 2
         end
     elseif data.special == 2 then
-        Text.print(idslist[v.id].koopalingConfig, 100, 100)
         v.speedX = 0
         if idslist[v.id].koopalingConfig ~= "wendy" then
             if data.attackCount == 0 or data.attackCount == 6 or data.attackCount == 12 then
