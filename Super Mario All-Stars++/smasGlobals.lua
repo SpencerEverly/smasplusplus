@@ -90,6 +90,7 @@ _G.VersionOfEpisode = "Demo 4"
 _G.MenuCursor = 0
 _G.maxLives = 1110
 _G.maxScore = 999999999
+_G.UpdateMessageForUpdater = "Checking for updates..."
 
 _G.NPC_Globals = {
     id = 0, --ID of the NPC (Type)

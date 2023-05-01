@@ -58,19 +58,17 @@ local function startupdater()
     bootshow = false
     blackscreen = true
     if SMBX_VERSION == VER_SEE_MOD then
-        Misc.runWhenUnfocused(true)
+        if not Misc.isSetToRunWhenUnfocused() then
+            Misc.runWhenUnfocused(true)
+        end
     end
     Routine.wait(1, true)
     Sound.changeMusic("_OST/All Stars Menu/Updater.ogg", 0)
-    updateractive = true
-    Routine.wait(5, true)
     if SMBX_VERSION == VER_SEE_MOD then
-        if Misc.isSetToRunWhenUnfocused() then
-            Misc.runWhenUnfocused(false)
-        end
+        smasUpdater.doUpdate = true
+        smasUpdater.doneUpdating = false
+        smasUpdater.drawUpdateText = true
     end
-    Routine.wait(0.1, true)
-    SysManager.loadIntroTheme()
 end
 
 function onKeyboardPress(k, v)
@@ -145,12 +143,32 @@ function onDraw()
         end
     end
     if updateractive then
-        textplus.print{x=320, y=290, text = "Updater not implemented yet, skipping...", priority=-2, color=Color.white}
+        
     end
     
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
     end
+end
+
+function restartAfterUpdating()
+    if SMBX_VERSION == VER_SEE_MOD then
+        if Misc.isSetToRunWhenUnfocused() then
+            Misc.runWhenUnfocused(false)
+        end
+    end
+    if not Misc.loadEpisode("Super Mario All-Stars++") then
+        error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
+    end
+end
+
+function launchAfterNoUpdate()
+    if SMBX_VERSION == VER_SEE_MOD then
+        if Misc.isSetToRunWhenUnfocused() then
+            Misc.runWhenUnfocused(false)
+        end
+    end
+    SysManager.loadIntroTheme()
 end
 
 function onInputUpdate()
