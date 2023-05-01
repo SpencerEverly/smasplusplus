@@ -100,9 +100,10 @@ function File.readSpecificAreaFromFile(name, linenumber) --Read a file using io.
     if f == nil then
         return
     end
-    for c in f:lines(linenumber) do
-        return f:read(c)
-    end
+    
+    local linesToRead = io.readFileLines(name)
+    
+    return linesToRead[linenumber]
     
     console:println("File "..name.." was read at line"..tostring(linenumber)..".")
 end
