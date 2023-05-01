@@ -86,7 +86,7 @@ _G.numWorldLevels = 0
 _G.numWorldMusic = 0
 
 --This is the version number of this episode. It can be changed to any version we're on.
-_G.VersionOfEpisode = "Demo 4"
+_G.VersionOfEpisode = "v0.0.0.1"
 _G.MenuCursor = 0
 _G.maxLives = 1110
 _G.maxScore = 999999999
