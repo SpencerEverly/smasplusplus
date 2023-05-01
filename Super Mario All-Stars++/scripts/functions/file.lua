@@ -89,23 +89,16 @@ function File.readFile(name) --Read a file using io. This won't overwrite everyt
 end
 
 function File.readSpecificAreaFromFile(name, linenumber) --Read a file using io. This won't overwrite everything, just reads a file, so this one is fine.
-    name = Misc.resolveFile(name)
-    if name == nil then
+    name2 = Misc.resolveFile(name)
+    if name2 == nil then
         error("You need to specify the name of the file.")
     end
     
-    local text
-
-    local f = io.open(name,"r")
-    if f == nil then
-        return
-    end
-    
-    local linesToRead = io.readFileLines(name)
-    
-    return linesToRead[linenumber]
+    local linesToRead = io.readFileLines(name2)
     
     console:println("File "..name.." was read at line"..tostring(linenumber)..".")
+    
+    return linesToRead[linenumber]
 end
 
 function File.stringToHex(str)
