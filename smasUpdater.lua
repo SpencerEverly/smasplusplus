@@ -167,11 +167,11 @@ if not Misc.inEditor() then
                         smasUpdater.downloadLatestUpdateConfig()
                     end
                     if smasUpdater.updateTimer == 10 then
-                        if smasUpdater.versionNumber() == VersionOfEpisode then
+                        if smasUpdater.checkVersionStatus() then
                             smasUpdater.updateTimer = 0
                             smasUpdater.updateStage = 7
                             smasUpdater.doneUpdating = true
-                        else
+                        elseif not smasUpdater.checkVersionStatus() then
                             smasUpdater.drawVersionText = true
                         end
                     end
