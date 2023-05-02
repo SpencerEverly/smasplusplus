@@ -52,7 +52,7 @@ function smasUpdater.downloadFile(url, folder, file)
 end
 
 function smasUpdater.checkFileSize(file)
-    return Internet.GetFileSize(Misc.episodePath()..file)
+    return Misc.getFileSize(Misc.episodePath()..file)
 end
 
 function smasUpdater.readVersionUpdateList()
