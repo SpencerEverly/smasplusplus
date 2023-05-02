@@ -36,9 +36,9 @@ exeextracted
 Where SMB Attacks (Remake)/save1-ext.dat
 LuaData_Save1_save.txt
 LuaData_Save0_save.txt
-Super Mario All-Stars++/save10.dat
-Super Mario All-Stars++/_OST/Metroid/FLPs/SGM-V2.01.sf2
-Super Mario All-Stars++/_OST/Spencer Everly/Spencer\! The Show\!/Theme Song/SGM-V2.01.sf2
+/save10.dat
+/_OST/Metroid/FLPs/SGM-V2.01.sf2
+/_OST/Spencer Everly/Spencer\! The Show\!/Theme Song/SGM-V2.01.sf2
 /etc
 /Mario Challenge
 /NSMBDS
@@ -53,7 +53,7 @@ Super Mario All-Stars++/_OST/Spencer Everly/Spencer\! The Show\!/Theme Song/SGM-
 cliche/
 Demo Stages/
 2k1x Subzero Heroes/
-Super Mario All-Stars++/___MainUserDirectory/see/pfp.png
+/___MainUserDirectory/see/pfp.png
 ext/
 LuaData_Save3_save.txt
 LuaData_Save4_save.txt
@@ -65,41 +65,41 @@ LuaData_systemData.txt
 README.txt
 *.sfk
 LuaData_Save6_save.txt
-Super Mario All-Stars++/save0_old-ext.dat
-Super Mario All-Stars++/save0_old.sav
-Super Mario All-Stars++/SMB2 - W-5, L-1/LuaData_Save7_save.txt
-Super Mario All-Stars++/_OST/Super Mario Bros/FLPs/SMAS.sf2
-Super Mario All-Stars++/_OST/Super Mario Bros/FLPs/SMAS_Extended_Ver._2.1.sf2
-Super Mario All-Stars++/map.lvlx.bak
-Super Mario All-Stars++/SMAS - Test Level.lvlx.bak
-Super Mario All-Stars++/costumes/mario/7-SML2/SML2-SomeSoundsNormalizedSEE.zip
-Super Mario All-Stars++/costumes/mario/15-NSMBDS-Original/NSMBDS-RippedAndNormalizedSoundsSEE.zip
-Super Mario All-Stars++/costumes/mario/9-SMW-Pirate/SMWNES-HalfNormalizedSEE.zip
-Super Mario All-Stars++/SMBLL - W-5, L-4.lvlx.bak
+/save0_old-ext.dat
+/save0_old.sav
+/SMB2 - W-5, L-1/LuaData_Save7_save.txt
+/_OST/Super Mario Bros/FLPs/SMAS.sf2
+/_OST/Super Mario Bros/FLPs/SMAS_Extended_Ver._2.1.sf2
+/map.lvlx.bak
+/SMAS - Test Level.lvlx.bak
+/costumes/mario/7-SML2/SML2-SomeSoundsNormalizedSEE.zip
+/costumes/mario/15-NSMBDS-Original/NSMBDS-RippedAndNormalizedSoundsSEE.zip
+/costumes/mario/9-SMW-Pirate/SMWNES-HalfNormalizedSEE.zip
+/SMBLL - W-5, L-4.lvlx.bak
 maptesting/
 _commit.bat
 _cleanup.bat
-Super Mario All-Stars++/costumes/mario/JCFosterTakesItToTheMoon/mario-2-head.png
-Super Mario All-Stars++/costumes/mario/SpongeBobSquarePants/mario-1-front.png
-Super Mario All-Stars++/costumes/peach/Tux/peach-2-stance.png
-Super Mario All-Stars++/costumes/toad/Imajin-NES/toad-2-stance.png
-Super Mario All-Stars++/costumes/toad/PacMan-Arrangement-PacMan/toad-2-stance.png
+/costumes/mario/JCFosterTakesItToTheMoon/mario-2-head.png
+/costumes/mario/SpongeBobSquarePants/mario-1-front.png
+/costumes/peach/Tux/peach-2-stance.png
+/costumes/toad/Imajin-NES/toad-2-stance.png
+/costumes/toad/PacMan-Arrangement-PacMan/toad-2-stance.png
 bfg.jar
-Super Mario All-Stars++/testfile.txt
+/testfile.txt
 A2XT Gaiden 2/
-Super Mario All-Stars++/progress.json
+/progress.json
 A2XT2 - Gaiden 2/
 Delightful Adventure - Enhanced/
 Super Mario Bros. 3 Remake - Phil/
-Super Mario All-Stars++/save0-old.sav
-Super Mario All-Stars++/save0-ext-old.dat
+/save0-old.sav
+/save0-ext-old.dat
 Vanilla Contest 2022/
 Testing Grounds/
-Super Mario All-Stars++/SMB3 - W-7, L-Airship.lvlx.bak
+/SMB3 - W-7, L-Airship.lvlx.bak
 Luigi's Lost Memories/
 SMZ Febuary 15 2023, Early Afternoon/
-Super Mario All-Stars++/thefile.txt
+/thefile.txt
 _camelCaseSMASLibraries.bat
-Super Mario All-Stars++/___MainUserDirectory/_run-fileDirectoryVersionSpitter.bat
-Super Mario All-Stars++/___MainUserDirectory/parseFn.bat
-Super Mario All-Stars++/testfile2.txt
+/___MainUserDirectory/_run-fileDirectoryVersionSpitter.bat
+/___MainUserDirectory/parseFn.bat
+/testfile2.txt
