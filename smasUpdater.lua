@@ -112,7 +112,7 @@ end
 
 function smasUpdater.downloadLatestUpdateConfig()
     if not Misc.inEditor() then
-        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/Super%20Mario%20All-Stars%2B%2B/version-latestfiles.txt", "", "version-latestfiles.txt")
+        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/version-latestfiles.txt", "", "version-latestfiles.txt")
     end
 end
 
@@ -131,7 +131,7 @@ function smasUpdater.versionNumber()
 end
 
 function smasUpdater.checkForInternet()
-    smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/Super%20Mario%20All-Stars%2B%2B/version-latestfiles.txt", "/data/temp/", "version-latestfiles-temp.txt")
+    smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/version-latestfiles.txt", "/data/temp/", "version-latestfiles-temp.txt")
     if io.exists(Misc.episodePath().."data/temp/version-latestfiles-temp.txt") then
         os.remove(Misc.episodePath().."data/temp/version-latestfiles-temp.txt")
         return true
@@ -211,7 +211,7 @@ if not Misc.inEditor() then
                 end
                 if smasUpdater.updateStage == 4 then
                     UpdateMessageForUpdater = "Downloading file "..tostring(smasUpdater.checkFileIndicator).." of "..tostring(#smasUpdater.tableOfFilesToDownload).."."
-                    smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/Super%20Mario%20All-Stars%2B%2B/"..smasUpdater.stringToURLPiece(smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload), "/data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].folderToUse, smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
+                    smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/"..smasUpdater.stringToURLPiece(smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload), "/data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].folderToUse, smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
                     if smasUpdater.checkFileIndicator < #smasUpdater.tableOfFilesToDownload then
                         smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
                     elseif smasUpdater.checkFileIndicator >= #smasUpdater.tableOfFilesToDownload then
