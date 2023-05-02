@@ -19,9 +19,8 @@ smasUpdater.fadeToBlackOpacity = 0
 smasUpdater.fadeToBlack = false
 
 smasUpdater.checkFileIndicator = 1
-smasUpdater.checkFileDownloadInficator = 0
+smasUpdater.checkFileDownloadIndicator = 0
 
-smasUpdater.tableOfFilesToCheck = {}
 smasUpdater.tableOfFilesToCheckSizes = {}
 smasUpdater.tableOfFilesToDownload = {}
 
@@ -56,52 +55,36 @@ function smasUpdater.checkFileSize(file)
     return Internet.GetFileSize(Misc.episodePath()..file)
 end
 
-function smasUpdater.readVersionUpdateList(patternToGoThrough)
-    if patternToGoThrough == nil then
-        patternToGoThrough = 1
-    end
-    
-    local fileList = File.readFile("version-latestfiles.txt")
-    
-    local preTable = {}
-    local finalTable = {}
-    
-    for k,v in ipairs(string.split(fileList, "\n", true)) do
-        if k > 1 then
-            table.insert(preTable, v)
+function smasUpdater.readVersionUpdateList()
+    local f = io.open(Misc.episodePath().."version-latestfiles.txt", "r")
+    local contentsTable = {}
+    if f ~= nil then
+        while (true) do
+            local line = f:read("*l")
+
+            if line == nil then
+                break
+            end
+            
+            local contents = line:split("=")
+            table.insert(contentsTable, {
+                folder = contents[1],
+                file = contents[2],
+                extension = contents[3],
+                size = contents[4]
+            })
         end
+        f:close()
     end
-    
-    local startingPoint = 1
-    local endPoint = 4
-    
-    local subtractMarker = patternToGoThrough - 1
-    
-    for i = startingPoint, #preTable do
-        splitstrings = string.split(preTable[patternToGoThrough], "=")
-        
-        if patternToGoThrough > 1 then
-            i = i - subtractMarker
-        end
-        
-        --Check for a pattern. For every 4 of each values in a table, add them to a specific table
-        table.insert(finalTable, {
-            folder = splitstrings[i],
-            file = splitstrings[i + 1],
-            extension = splitstrings[i + 2],
-            size = tonumber(splitstrings[i + 3]),
-        })
-    end
-    
-    return finalTable[patternToGoThrough]
+    return contentsTable
 end
 
 function smasUpdater.findLatestUpdateConfigFileSize(index, file)
     local fileList = File.readFile("version-latestfiles.txt")
     local foundSize = 0
     
-    if file == smasUpdater.readVersionUpdateList(index).folder..smasUpdater.readVersionUpdateList(index).file..smasUpdater.readVersionUpdateList(index).extension then
-        foundSize = smasUpdater.readVersionUpdateList(index).size
+    if file == smasUpdater.readVersionUpdateList()[index + 1].folder..smasUpdater.readVersionUpdateList()[index + 1].file..smasUpdater.readVersionUpdateList()[index + 1].extension then
+        foundSize = smasUpdater.readVersionUpdateList()[index + 1].size
     else
         foundSize = 0
     end
@@ -186,8 +169,10 @@ if not Misc.inEditor() then
                     if smasUpdater.updateTimer == 10 then
                         if smasUpdater.versionNumber() == VersionOfEpisode then
                             smasUpdater.updateTimer = 0
-                            smasUpdater.updateStage = 8
+                            smasUpdater.updateStage = 7
                             smasUpdater.doneUpdating = true
+                        else
+                            smasUpdater.drawVersionText = true
                         end
                     end
                     if smasUpdater.updateTimer == 35 then
@@ -196,53 +181,47 @@ if not Misc.inEditor() then
                     end
                 end
                 if smasUpdater.updateStage == 2 then
-                    UpdateMessageForUpdater = "Checking files... ("..tostring(#smasUpdater.tableOfFilesToCheck)..")"
-                    if smasUpdater.checkFileIndicator < smasUpdater.checkFileAmountUpdateConfig() then
-                        smasUpdater.tableOfFilesToCheck[smasUpdater.checkFileIndicator] = {
-                            folder = smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).folder,
-                            file = smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).file,
-                            extension = smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).extension,
-                            size = smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).size,
-                        }
-                        smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    elseif smasUpdater.checkFileIndicator >= smasUpdater.checkFileAmountUpdateConfig() then
+                    UpdateMessageForUpdater = "Checking files... ("..tostring(#smasUpdater.tableOfFilesToCheckSizes)..")"
+                    smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
+                    smasUpdater.tableOfFilesToCheckSizes[smasUpdater.checkFileIndicator + 1] = {
+                        shouldNotUpdate = smasUpdater.compareFileSize(smasUpdater.checkFileIndicator, smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].file..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].extension),
+                        oldSize = smasUpdater.checkFileSize(smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].file..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].extension),
+                        newSize = smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].size,
+                    }
+                    if smasUpdater.updateTimer == 10 then
                         smasUpdater.checkFileIndicator = 1
                         smasUpdater.updateStage = 3
                     end
                 end
                 if smasUpdater.updateStage == 3 then
-                    UpdateMessageForUpdater = "Checking file sizes... ("..tostring(#smasUpdater.tableOfFilesToCheckSizes)..")"
+                    UpdateMessageForUpdater = "Adding files to update list... ("..tostring(#smasUpdater.tableOfFilesToDownload)..")"
                     if smasUpdater.checkFileIndicator < smasUpdater.checkFileAmountUpdateConfig() then
-                        smasUpdater.tableOfFilesToCheckSizes[smasUpdater.checkFileIndicator] = {
-                            shouldNotUpdate = smasUpdater.compareFileSize(smasUpdater.checkFileIndicator, smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).folder..smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).file..smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).extension),
-                            oldSize = smasUpdater.checkFileSize(smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).folder..smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).file..smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).extension),
-                            newSize = smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).size,
-                        }
+                        if not smasUpdater.tableOfFilesToCheckSizes[smasUpdater.checkFileIndicator].shouldNotUpdate then
+                            table.insert(smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileDownloadIndicator], {
+                                fileToDownload = smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].file..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].extension,
+                                folderToUse = smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder,
+                            })
+                        end
                         smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    elseif smasUpdater.checkFileIndicator >= smasUpdater.checkFileAmountUpdateConfig() then
+                    elseif smasUpdater.checkFileIndicator > smasUpdater.checkFileAmountUpdateConfig() then
+                        smasUpdater.checkFileDownloadIndicator = 1
                         smasUpdater.checkFileIndicator = 1
                         smasUpdater.updateStage = 4
                     end
                 end
                 if smasUpdater.updateStage == 4 then
-                    UpdateMessageForUpdater = "Adding files to update list... ("..tostring(#smasUpdater.tableOfFilesToDownload)..")"
-                    if smasUpdater.checkFileIndicator < smasUpdater.checkFileAmountUpdateConfig() then
-                        if not smasUpdater.tableOfFilesToCheckSizes[smasUpdater.checkFileIndicator].shouldNotUpdate then
-                            smasUpdater.checkFileDownloadInficator = smasUpdater.checkFileDownloadInficator + 1
-                            smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileDownloadInficator] = {
-                                fileToDownload = smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).folder..smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).file..smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).extension,
-                                folderToUse = smasUpdater.readVersionUpdateList(smasUpdater.checkFileIndicator).folder,
-                            }
-                        end
+                    UpdateMessageForUpdater = "Downloading file "..tostring(smasUpdater.checkFileIndicator).." of "..tostring(#smasUpdater.tableOfFilesToDownload).."."
+                    smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/Super%20Mario%20All-Stars%2B%2B/"..smasUpdater.stringToURLPiece(smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload), "/data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].folderToUse, smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
+                    if smasUpdater.checkFileIndicator < #smasUpdater.tableOfFilesToDownload then
                         smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    elseif smasUpdater.checkFileIndicator >= smasUpdater.checkFileAmountUpdateConfig() then
+                    elseif smasUpdater.checkFileIndicator >= #smasUpdater.tableOfFilesToDownload then
                         smasUpdater.checkFileIndicator = 1
                         smasUpdater.updateStage = 5
                     end
                 end
                 if smasUpdater.updateStage == 5 then
-                    UpdateMessageForUpdater = "Downloading file "..tostring(smasUpdater.checkFileIndicator).." of "..tostring(#smasUpdater.tableOfFilesToDownload).."."
-                    smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/Super%20Mario%20All-Stars%2B%2B/"..smasUpdater.stringToURLPiece(smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload), "/data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].folderToUse, smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
+                    UpdateMessageForUpdater = "Patching file "..tostring(smasUpdater.checkFileIndicator).." of "..tostring(#smasUpdater.tableOfFilesToDownload).."."
+                    os.rename(Misc.episodePath().."data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload, Misc.episodePath()..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
                     if smasUpdater.checkFileIndicator < #smasUpdater.tableOfFilesToDownload then
                         smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
                     elseif smasUpdater.checkFileIndicator >= #smasUpdater.tableOfFilesToDownload then
@@ -251,21 +230,11 @@ if not Misc.inEditor() then
                     end
                 end
                 if smasUpdater.updateStage == 6 then
-                    UpdateMessageForUpdater = "Patching file "..tostring(smasUpdater.checkFileIndicator).." of "..tostring(#smasUpdater.tableOfFilesToDownload).."."
-                    os.rename(Misc.episodePath().."data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload, Misc.episodePath()..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
-                    if smasUpdater.checkFileIndicator < #smasUpdater.tableOfFilesToDownload then
-                        smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    elseif smasUpdater.checkFileIndicator >= #smasUpdater.tableOfFilesToDownload then
-                        smasUpdater.checkFileIndicator = 1
-                        smasUpdater.updateStage = 7
-                    end
-                end
-                if smasUpdater.updateStage == 7 then
                     UpdateMessageForUpdater = "Update complete! Restarting episode..."
                     smasUpdater.checkFileIndicator = 1
                     smasUpdater.doneUpdating = true
                 end
-                if smasUpdater.updateStage == 8 then
+                if smasUpdater.updateStage == 7 then
                     UpdateMessageForUpdater = "You are on the latest version!"
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
