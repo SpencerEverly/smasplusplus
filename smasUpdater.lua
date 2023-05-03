@@ -112,7 +112,7 @@ end
 
 function smasUpdater.downloadLatestUpdateConfig()
     if not Misc.inEditor() then
-        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/version-latestfiles.txt", "", "version-latestfiles.txt")
+        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/versionlist-commit.txt", "", "versionlist-commit.txt")
     end
 end
 
@@ -126,7 +126,7 @@ function smasUpdater.checkVersionStatus()
 end
 
 function smasUpdater.versionNumber()
-    local version = File.readSpecificAreaFromFile("version-latestfiles.txt", 1)
+    local version = File.readSpecificAreaFromFile("versionlist-commit.txt", 1)
     return version
 end
 
@@ -140,6 +140,26 @@ function smasUpdater.checkForInternet()
     end
 end
 
+function smasUpdater.checkForGitFolder()
+    local fileExists = false
+    local f = io.open(Misc.episodePath()..".git/HEAD")
+    if f ~= nil then
+        fileExists = true
+        f:close()
+    end
+    return fileExists
+end
+
+function smasUpdater.getLatestHash()
+    local line = {}
+    local f = io.open(Misc.episodePath().."versionlist-commit.txt")
+    if f ~= nil then
+        line = io.readFileLines(f)
+        f:close()
+    end
+    return line[1]
+end
+
 local internetCheck = false
 
 function smasUpdater.onStart()
@@ -150,9 +170,9 @@ if not Misc.inEditor() then
     function smasUpdater.onDraw()
         if smasUpdater.doUpdate then
             if smasUpdater.drawUpdateText then
-                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2}
+                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2, maxwidth = 600}
                 if smasUpdater.drawVersionText then
-                    textplus.print{text = smasUpdater.versionNumber(), pivot = vector.v2(0.5,0.5), x = 400, y = 250, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2}
+                    textplus.print{text = smasUpdater.versionNumber(), pivot = vector.v2(0.5,0.5), x = 400, y = 250, priority = 10, color = Color.white, font = statusFont, xscale = 1.5, yscale = 1.5}
                 end
             end
             
@@ -167,74 +187,55 @@ if not Misc.inEditor() then
                         smasUpdater.downloadLatestUpdateConfig()
                     end
                     if smasUpdater.updateTimer == 10 then
-                        if smasUpdater.checkVersionStatus() then
-                            smasUpdater.updateTimer = 0
-                            smasUpdater.updateStage = 7
-                            smasUpdater.doneUpdating = true
-                        elseif not smasUpdater.checkVersionStatus() then
-                            smasUpdater.drawVersionText = true
-                        end
+                        smasUpdater.drawVersionText = true
                     end
-                    if smasUpdater.updateTimer == 35 then
+                    if smasUpdater.updateTimer >= 35 then
                         smasUpdater.updateTimer = 0
                         smasUpdater.updateStage = 2
                     end
                 end
                 if smasUpdater.updateStage == 2 then
-                    UpdateMessageForUpdater = "Checking files... ("..tostring(#smasUpdater.tableOfFilesToCheckSizes)..")"
-                    smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    smasUpdater.tableOfFilesToCheckSizes[smasUpdater.checkFileIndicator + 1] = {
-                        shouldNotUpdate = smasUpdater.compareFileSize(smasUpdater.checkFileIndicator, smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].file..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].extension),
-                        oldSize = smasUpdater.checkFileSize(smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].file..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].extension),
-                        newSize = smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].size,
-                    }
-                    if smasUpdater.updateTimer == 10 then
-                        smasUpdater.checkFileIndicator = 1
+                    UpdateMessageForUpdater = "Checking for .git..."
+                    smasUpdater.updateTimer = smasUpdater.updateTimer + 1
+                    if smasUpdater.updateTimer == 5 then
+                        if not smasUpdater.checkForGitFolder() then
+                            smasUpdater.updateTimer = 0
+                            smasUpdater.updateStage = 4
+                        end
+                    end
+                    if smasUpdater.updateTimer >= 10 then
+                        smasUpdater.updateTimer = 0
                         smasUpdater.updateStage = 3
                     end
                 end
                 if smasUpdater.updateStage == 3 then
-                    UpdateMessageForUpdater = "Adding files to update list... ("..tostring(#smasUpdater.tableOfFilesToDownload)..")"
-                    if smasUpdater.checkFileIndicator < smasUpdater.checkFileAmountUpdateConfig() then
-                        if not smasUpdater.tableOfFilesToCheckSizes[smasUpdater.checkFileIndicator].shouldNotUpdate then
-                            table.insert(smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileDownloadIndicator], {
-                                fileToDownload = smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].file..smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].extension,
-                                folderToUse = smasUpdater.readVersionUpdateList()[smasUpdater.checkFileIndicator + 1].folder,
-                            })
-                        end
-                        smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    elseif smasUpdater.checkFileIndicator > smasUpdater.checkFileAmountUpdateConfig() then
-                        smasUpdater.checkFileDownloadIndicator = 1
+                    UpdateMessageForUpdater = "Updating to the latest commit. This will freeze the game for a while, please be patient..."
+                    smasUpdater.updateTimer = smasUpdater.updateTimer + 1
+                    if smasUpdater.updateTimer == 5 then
+                        Internet.GitPull(smasUpdater.getLatestHash(), getSMBXPath().."/worlds/Super Mario All-Stars++/")
+                    end
+                    if smasUpdater.updateTimer >= 10 then
                         smasUpdater.checkFileIndicator = 1
-                        smasUpdater.updateStage = 4
+                        smasUpdater.updateStage = 5
                     end
                 end
                 if smasUpdater.updateStage == 4 then
-                    UpdateMessageForUpdater = "Downloading file "..tostring(smasUpdater.checkFileIndicator).." of "..tostring(#smasUpdater.tableOfFilesToDownload).."."
-                    smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/"..smasUpdater.stringToURLPiece(smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload), "/data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].folderToUse, smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
-                    if smasUpdater.checkFileIndicator < #smasUpdater.tableOfFilesToDownload then
-                        smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    elseif smasUpdater.checkFileIndicator >= #smasUpdater.tableOfFilesToDownload then
+                    UpdateMessageForUpdater = "Downloading episode from the Internet. This will freeze the game for a while, please be patient..."
+                    smasUpdater.updateTimer = smasUpdater.updateTimer + 1
+                    if smasUpdater.updateTimer == 5 then
+                        Internet.GitClone("https://github.com/SpencerEverly/smasplusplus/", getSMBXPath().."/worlds/Super Mario All-Stars++/")
+                    end
+                    if smasUpdater.updateTimer >= 10 then
                         smasUpdater.checkFileIndicator = 1
                         smasUpdater.updateStage = 5
                     end
                 end
                 if smasUpdater.updateStage == 5 then
-                    UpdateMessageForUpdater = "Patching file "..tostring(smasUpdater.checkFileIndicator).." of "..tostring(#smasUpdater.tableOfFilesToDownload).."."
-                    os.rename(Misc.episodePath().."data/temp/"..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload, Misc.episodePath()..smasUpdater.tableOfFilesToDownload[smasUpdater.checkFileIndicator].fileToDownload)
-                    if smasUpdater.checkFileIndicator < #smasUpdater.tableOfFilesToDownload then
-                        smasUpdater.checkFileIndicator = smasUpdater.checkFileIndicator + 1
-                    elseif smasUpdater.checkFileIndicator >= #smasUpdater.tableOfFilesToDownload then
-                        smasUpdater.checkFileIndicator = 1
-                        smasUpdater.updateStage = 6
-                    end
-                end
-                if smasUpdater.updateStage == 6 then
                     UpdateMessageForUpdater = "Update complete! Restarting episode..."
                     smasUpdater.checkFileIndicator = 1
                     smasUpdater.doneUpdating = true
                 end
-                if smasUpdater.updateStage == 7 then
+                if smasUpdater.updateStage == 6 then
                     UpdateMessageForUpdater = "You are on the latest version!"
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
