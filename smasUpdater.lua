@@ -250,7 +250,7 @@ if not Misc.inEditor() then
                 end
                 if smasUpdater.updateStage == 5 then
                     smasUpdater.drawVersionText = false
-                    UpdateMessageForUpdater = "Update complete! Restarting episode..."
+                    UpdateMessageForUpdater = "Update complete! Starting episode..."
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
                         Internet.EndGit()
@@ -258,7 +258,7 @@ if not Misc.inEditor() then
                             os.remove(Misc.episodePath().."versionlist-commit-temp.txt")
                         end
                         smasUpdater.fadeToBlack = true
-                        smasUpdater.restartAfterUpdating()
+                        smasUpdater.launchAfterNoUpdate()
                     end
                 end
                 if smasUpdater.updateStage == 6 then
