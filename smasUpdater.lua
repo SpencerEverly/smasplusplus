@@ -178,6 +178,9 @@ if not Misc.inEditor() then
                 
                 if smasUpdater.updateStage == 1 then
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
+                    if smasUpdater.updateTimer == 1 then
+                        Internet.StartGit()
+                    end
                     if smasUpdater.updateTimer == 5 then
                         smasUpdater.downloadLatestUpdateConfig()
                     end
@@ -248,6 +251,7 @@ if not Misc.inEditor() then
                 if UpdateMessageForUpdater == "Update complete! Restarting episode..." then
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
+                        Internet.EndGit()
                         restartAfterUpdating()
                     end
                 end
