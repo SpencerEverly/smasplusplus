@@ -4,7 +4,7 @@ local smasBooleans = {}
 
 --**UPDATER OPTIONS**
 --Whenever to skip the updater or not. If you're running a version of SMAS++ which is used for speedrunning purposes, or are using an archiac version and don't need to update it, tick this to true. This won't affect normal installs of SMBX2 users (Or while being on the Moondust Editor), so it doesn't matter if this is on or not.
-smasBooleans.skipUpdater = true
+smasBooleans.skipUpdater = false
 
 --***DON'T SET WHAT IS BELOW UNLESS YOU KNOW WHAT YOU'RE DOING!!!!!!***
 
