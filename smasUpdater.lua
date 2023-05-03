@@ -151,13 +151,8 @@ function smasUpdater.checkForGitFolder()
 end
 
 function smasUpdater.getLatestHash()
-    local line = {}
-    local f = io.open(Misc.episodePath().."versionlist-commit.txt")
-    if f ~= nil then
-        line = io.readFileLines(f)
-        f:close()
-    end
-    return line[1]
+    local line = File.readSpecificAreaFromFile("versionlist-commit.txt", 1)
+    return line
 end
 
 local internetCheck = false
@@ -170,7 +165,7 @@ if not Misc.inEditor() then
     function smasUpdater.onDraw()
         if smasUpdater.doUpdate then
             if smasUpdater.drawUpdateText then
-                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2, maxwidth = 600}
+                textplus.print{text = UpdateMessageForUpdater, pivot = vector.v2(0.5,0.5), x = 400, y = 290, priority = 10, color = Color.white, font = statusFont, xscale = 2, yscale = 2, maxwidth = 200}
                 if smasUpdater.drawVersionText then
                     textplus.print{text = smasUpdater.versionNumber(), pivot = vector.v2(0.5,0.5), x = 400, y = 250, priority = 10, color = Color.white, font = statusFont, xscale = 1.5, yscale = 1.5}
                 end
