@@ -126,7 +126,7 @@ function smasUpdater.checkVersionStatus()
 end
 
 function smasUpdater.versionNumber()
-    local version = File.readSpecificAreaFromFile("versionlist-commit.txt", 1)
+    local version = File.readSpecificAreaFromFile("versionlist-commit-temp.txt", 1)
     return version
 end
 
@@ -250,6 +250,9 @@ if not Misc.inEditor() then
                 end
                 if smasUpdater.updateStage == 5 then
                     UpdateMessageForUpdater = "Update complete! Restarting episode..."
+                    if io.exists(Misc.episodePath().."versionlist-commit-temp.txt") then
+                        os.remove(Misc.episodePath().."versionlist-commit-temp.txt")
+                    end
                     smasUpdater.doneUpdating = true
                 end
                 if smasUpdater.updateStage == 6 then
