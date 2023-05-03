@@ -155,6 +155,26 @@ function smasUpdater.getLatestHash()
     return line
 end
 
+function smasUpdater.restartAfterUpdating()
+    if SMBX_VERSION == VER_SEE_MOD then
+        if Misc.isSetToRunWhenUnfocused() then
+            Misc.runWhenUnfocused(false)
+        end
+    end
+    if not Misc.loadEpisode("Super Mario All-Stars++") then
+        error("SMAS++ is not found. How is that even possible? Reinstall the game using the SMASUpdater, since something has gone terribly wrong.")
+    end
+end
+
+function smasUpdater.launchAfterNoUpdate()
+    if SMBX_VERSION == VER_SEE_MOD then
+        if Misc.isSetToRunWhenUnfocused() then
+            Misc.runWhenUnfocused(false)
+        end
+    end
+    SysManager.loadIntroTheme()
+end
+
 local internetCheck = false
 
 function smasUpdater.onStart()
@@ -237,7 +257,7 @@ if not Misc.inEditor() then
                     UpdateMessageForUpdater = "You are on the latest version!"
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
-                        launchAfterNoUpdate()
+                        smasUpdater.launchAfterNoUpdate()
                     end
                 end
             else
@@ -245,14 +265,14 @@ if not Misc.inEditor() then
                     UpdateMessageForUpdater = "No internet! Skipping update..."
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
-                        launchAfterNoUpdate()
+                        smasUpdater.launchAfterNoUpdate()
                     end
                 end
                 if UpdateMessageForUpdater == "Update complete! Restarting episode..." then
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
                         Internet.EndGit()
-                        restartAfterUpdating()
+                        smasUpdater.restartAfterUpdating()
                     end
                 end
             end
@@ -271,7 +291,7 @@ else
             if not smasUpdater.doneUpdating then
                 smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                 if smasUpdater.updateTimer >= lunatime.toTicks(5) then
-                    launchAfterNoUpdate()
+                    smasUpdater.launchAfterNoUpdate()
                 end
             end
         end
