@@ -19,7 +19,7 @@ local warps
 local effect
 
 local debugtext = true
-local fonttester = textplus.loadFont("littleDialogue/font/pacman-arrangement.ini")
+local fonttester = textplus.loadFont("littleDialogue/font/press-start.ini")
 
 function effectSpawn()
     Routine.wait(0, true)
@@ -63,8 +63,8 @@ function onDraw()
         Text.printWP(timesnapped, 100, 100, 3)
     end
     if debugtext then
-        textplus.print{x = 0, y = 0, text = "1234567890", font = fonttester, priority = -0.5, xscale = 2, yscale = 2}
-        textplus.print{x = 0, y = 25, text = "abcdefghijklmnopqrstuvwxyz", font = fonttester, priority = -0.5, xscale = 2, yscale = 2}
-        textplus.print{x = 0, y = 50, text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", font = fonttester, priority = -0.5, xscale = 2, yscale = 2}
+        textplus.print{x = 0, y = 0, text = "1234567890", font = fonttester, priority = 6, xscale = 2, yscale = 2}
+        textplus.print{x = 0, y = 25, text = "abcdefghijklmnopqrstuvwxyz", font = fonttester, priority = 6, xscale = 2, yscale = 2}
+        textplus.print{x = 0, y = 50, text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", font = fonttester, priority = 6, xscale = 2, yscale = 2}
     end
 end
