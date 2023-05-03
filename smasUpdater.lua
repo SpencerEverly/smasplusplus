@@ -227,7 +227,7 @@ if not Misc.inEditor() then
                     end
                 end
                 if smasUpdater.updateStage == 3 then
-                    UpdateMessageForUpdater = "Updating to the latest commit. This will freeze the game for a while, please be patient..."
+                    UpdateMessageForUpdater = "Updating to the latest commit. This may freeze the game for a while, so please be patient..."
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer == 5 then
                         Internet.GitPull(smasUpdater.getLatestHash(), getSMBXPath().."/worlds/Super Mario All-Stars++")
