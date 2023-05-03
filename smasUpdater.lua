@@ -249,6 +249,7 @@ if not Misc.inEditor() then
                     end
                 end
                 if smasUpdater.updateStage == 5 then
+                    smasUpdater.drawVersionText = false
                     UpdateMessageForUpdater = "Update complete! Restarting episode..."
                     if io.exists(Misc.episodePath().."versionlist-commit-temp.txt") then
                         os.remove(Misc.episodePath().."versionlist-commit-temp.txt")
@@ -256,6 +257,7 @@ if not Misc.inEditor() then
                     smasUpdater.doneUpdating = true
                 end
                 if smasUpdater.updateStage == 6 then
+                    smasUpdater.drawVersionText = false
                     UpdateMessageForUpdater = "You are on the latest version!"
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
@@ -264,6 +266,7 @@ if not Misc.inEditor() then
                 end
             else
                 if not internetCheck then
+                    smasUpdater.drawVersionText = false
                     UpdateMessageForUpdater = "No internet! Skipping update..."
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
@@ -271,6 +274,7 @@ if not Misc.inEditor() then
                     end
                 end
                 if smasUpdater.updateStage == 5 then
+                    smasUpdater.drawVersionText = false
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
                         Internet.EndGit()
