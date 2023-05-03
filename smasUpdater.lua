@@ -261,7 +261,7 @@ if not Misc.inEditor() then
                         smasUpdater.launchAfterNoUpdate()
                     end
                 end
-            else
+            elseif smasUpdater.doneUpdating then
                 if not internetCheck then
                     smasUpdater.drawVersionText = false
                     UpdateMessageForUpdater = "No internet! Skipping update..."
