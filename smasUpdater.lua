@@ -112,7 +112,7 @@ end
 
 function smasUpdater.downloadLatestUpdateConfig()
     if not Misc.inEditor() then
-        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/versionlist-commit.txt", "", "versionlist-commit.txt")
+        smasUpdater.downloadFile("https://raw.githubusercontent.com/SpencerEverly/smasplusplus/main/versionlist-commit.txt", "", "versionlist-commit-temp.txt")
     end
 end
 
@@ -151,7 +151,7 @@ function smasUpdater.checkForGitFolder()
 end
 
 function smasUpdater.getLatestHash()
-    local line = File.readSpecificAreaFromFile("versionlist-commit.txt", 1)
+    local line = File.readSpecificAreaFromFile("versionlist-commit-temp.txt", 1)
     return line
 end
 
@@ -233,7 +233,7 @@ if not Misc.inEditor() then
                         Internet.GitPull(smasUpdater.getLatestHash(), getSMBXPath().."/worlds/Super Mario All-Stars++")
                     end
                     if smasUpdater.updateTimer >= 10 then
-                        smasUpdater.checkFileIndicator = 1
+                        smasUpdater.updateTimer = 0
                         smasUpdater.updateStage = 5
                     end
                 end
@@ -244,13 +244,12 @@ if not Misc.inEditor() then
                         Internet.GitClone("https://github.com/SpencerEverly/smasplusplus/", getSMBXPath().."/worlds/Super Mario All-Stars++")
                     end
                     if smasUpdater.updateTimer >= 10 then
-                        smasUpdater.checkFileIndicator = 1
+                        smasUpdater.updateTimer = 0
                         smasUpdater.updateStage = 5
                     end
                 end
                 if smasUpdater.updateStage == 5 then
                     UpdateMessageForUpdater = "Update complete! Restarting episode..."
-                    smasUpdater.checkFileIndicator = 1
                     smasUpdater.doneUpdating = true
                 end
                 if smasUpdater.updateStage == 6 then
@@ -268,7 +267,7 @@ if not Misc.inEditor() then
                         smasUpdater.launchAfterNoUpdate()
                     end
                 end
-                if UpdateMessageForUpdater == "Update complete! Restarting episode..." then
+                if smasUpdater.updateStage == 5 then
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
                         Internet.EndGit()
