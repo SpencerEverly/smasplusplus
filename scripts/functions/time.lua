@@ -1,7 +1,11 @@
 local Time = {}
 
-local fiveweekendmonths={"January","March","May","July","August","October","December"}
-local daysPerMonth={31+28,31+30,31+30,31,31+30,31+30,0}
+function Time.onInitAPI()
+    registerEvent(Time,"onDraw")
+end
+
+local fiveweekendmonths={"January", "March", "May", "July", "August", "October", "December"}
+local daysPerMonth = {31 + 28, 31 + 30, 31 + 30, 31, 31 + 30, 31 + 30, 0}
 local monthLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 
 Time.frameTimerSlots = {}
@@ -177,26 +181,31 @@ function Time.findFiveWeekendsOfMonth(year) --Finds the five weekends of the mon
     return list
 end
 
-function Time.frameTimer(speed, numberChanger, frameSlot) --This will spit out a number that grows depending on the speed and number to grow the number to. frameSlot is used to determine which number on the Time.frameTimerSlots table to grow on.
+function Time.frameTimer(speed, numberChanger, maxFrame, frameSlot) --This will spit out a number on a separate table that grows depending on the speed and number to grow the number to. frameSlot is used to determine which number on the Time.frameTimerSlots table to grow on. The maxFrame is used for when to not grow the number anymore.
     if speed == nil then
         speed = 1
     end
     if numberChanger == nil then
-        numberChanger = 2
+        numberChanger = 1
+    end
+    if maxFrame == nil then
+        maxFrame = 1
+    end
+    if frameSlot == nil then
+        error("Must have a frameSlot!")
+        return
     end
     
-    local timer = 0
-    local array
-    local frame = 1
-    
-    timer = timer + speed
-    array = timer % numberChanger
-    
-    if array >= numberChanger - 1 then
-        frame = frame + 1
+    if Time.frameTimerSlots[frameSlot] == nil then
+        Time.frameTimerSlots[frameSlot] = {
+            timer = 0,
+            array = 0,
+            frame = 1,
+            maxFrame = maxFrame,
+            numberChanger = numberChanger,
+            speed = speed,
+        }
     end
-    
-    Time.frameTimerSlots[frameSlot] = frame
 end
 
 function Time.isLast2DigitsTheSame(n)
@@ -214,5 +223,26 @@ function Time.isLast2DigitsTheSameButWithout00(n)
 
     return (a == b and a ~= 0)
 end
+
+
+
+function Time.onDraw()
+    if Time.frameTimerSlots ~= {} then
+        for i = 1,#Time.frameTimerSlots do
+            if Time.frameTimerSlots[i] ~= nil then
+                Time.frameTimerSlots[i].timer = Time.frameTimerSlots[i].timer + Time.frameTimerSlots[i].speed
+                Time.frameTimerSlots[i].array = Time.frameTimerSlots[i].timer % Time.frameTimerSlots[i].numberChanger
+                
+                if Time.frameTimerSlots[i].array >= numberChanger - 1 then
+                    if Time.frameTimerSlots[i].frame < Time.frameTimerSlots[i].maxFrame then
+                        Time.frameTimerSlots[i].frame = Time.frameTimerSlots[i].frame + 1
+                    end
+                end
+            end
+        end
+    end
+end
+
+
 
 return Time
