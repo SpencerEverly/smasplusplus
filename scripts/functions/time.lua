@@ -2,6 +2,7 @@ local Time = {}
 
 local fiveweekendmonths={"January","March","May","July","August","October","December"}
 local daysPerMonth={31+28,31+30,31+30,31,31+30,31+30,0}
+local monthLengths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 
 Time.frameTimerSlots = {}
 
@@ -39,15 +40,29 @@ function Time.week()
 end
 
 function Time.tomorrow()
-    return os.date("*t").day + 1
+    local day = os.date("*t").day + 1
+    if day > monthLengths[Time.month()] then
+        return 1
+    else
+        return day
+    end
 end
 
 function Time.yesterday()
-    return os.date("*t").day - 1
+    local day = os.date("*t").day - 1
+    if day <= 0 then
+        return monthLengths[Time.month() - 1]
+    else
+        return day
+    end
 end
 
 function Time.weekend()
     return os.date("%A")
+end
+
+function Time.meridiem()
+    return os.date("%p")
 end
 
 function Time.weekendOrder(weekend, month, year) --Returns the order that the weekend is at of the specified month and week.
@@ -125,6 +140,10 @@ end
 
 function Time.leapYear(y) --This detects the Leap Year.
     return y % 4 == 0 and y % 100 ~= 0 or y % 400 == 0
+end
+
+if Time.leapYear(Time.year()) then
+    monthLengths[2] = 29
 end
 
 function Time.dayOfWeek(m, d, y) --Returns a the day of the week of the specified date.

@@ -11,6 +11,7 @@ local pauseplus = require("pauseplus")
 local debugbox = require("debugbox")
 local smasExtraSounds = require("smasExtraSounds")
 local smasHudSystem = require("smasHudSystem")
+local smasDateAndTime = require("smasDateAndTime")
 
 littleDialogue.defaultStyleName = "smbx13"
 smasBooleans.compatibilityMode13Mode = false
