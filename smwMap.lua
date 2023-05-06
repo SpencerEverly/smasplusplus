@@ -722,6 +722,7 @@ do
         eventObj.timer = eventObj.timer + 1
 
         if eventObj.timer == 1 and pathName ~= "" then
+            SaveData.SMASPlusPlus.map.inventory.storedItems[smasMapInventorySystem.itemList.HAMMER] = SaveData.SMASPlusPlus.map.inventory.storedItems[smasMapInventorySystem.itemList.HAMMER] - 1
             for _,scenery in ipairs(smwMap.sceneries) do
                 if scenery.globalSettings.partOfLockedPath ~= "" and scenery.globalSettings.partOfLockedLevel == "" and scenery.globalSettings.lockedPathEventName == pathObj.originalObj.settings.smb3settings.lockedPathEventNameSMB3 then
                     scenery.opacity = 0

@@ -102,16 +102,19 @@ function smasMapInventorySystem.executeInventoryItem(inventoryItem)
             if inventoryItem >= smasMapInventorySystem.itemList.MUSHROOM and inventoryItem <= smasMapInventorySystem.itemList.ICE_FLOWER then
                 if not (p.powerup >= 2 and inventoryItem == 1) then
                     p.powerup = inventoryItem + 1
+                    SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] = SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] - 1
                 end
                 Sound.playSFX(6)
             end
             if inventoryItem == smasMapInventorySystem.itemList.STARMAN then
                 Sound.playSFX(6)
                 SaveData.SMASPlusPlus.map.inventory.canUseStarman = true
+                SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] = SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] - 1
             end
             if inventoryItem == smasMapInventorySystem.itemList.PWING then
                 Sound.playSFX(6)
                 SaveData.SMASPlusPlus.map.inventory.canUsePWing = true
+                SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] = SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] - 1
             end
             if inventoryItem == smasMapInventorySystem.itemList.HAMMER then
                 Sound.playSFX(27)
@@ -121,7 +124,6 @@ function smasMapInventorySystem.executeInventoryItem(inventoryItem)
                 Sound.playSFX(27)
                 --Fill this out later
             end
-            SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] = SaveData.SMASPlusPlus.map.inventory.storedItems[inventoryItem] - 1
             smasMapInventorySystem.closeInventory()
         else
             Sound.playSFX(152)
@@ -190,7 +192,10 @@ end
 function smasMapInventorySystem.onDraw()
     for i = 1,smasMapInventorySystem.numberOfItems do
         if SaveData.SMASPlusPlus.map.inventory.storedItems[i] > smasMapInventorySystem.maxItemCount then
-            SaveData.SMASPlusPlus.map.inventory.storedItems[i] = 99
+            SaveData.SMASPlusPlus.map.inventory.storedItems[i] = smasMapInventorySystem.maxItemCount
+        end
+        if SaveData.SMASPlusPlus.map.inventory.storedItems[i] < 0 then
+            SaveData.SMASPlusPlus.map.inventory.storedItems[i] = 0
         end
     end
     
@@ -199,10 +204,6 @@ function smasMapInventorySystem.onDraw()
             Graphics.drawImageWP(smasMapInventorySystem.menuImage, 0, 548, smasMapInventorySystem.minimumPriority)
             
             for i = 1,smasMapInventorySystem.numberOfItems do
-                
-                if SaveData.SMASPlusPlus.map.inventory.storedItems[i] > smasMapInventorySystem.maxItemCount then
-                    SaveData.SMASPlusPlus.map.inventory.storedItems[i] = 99
-                end
                 
                 if smasMapInventorySystem.menuSelectionAt == i then
                     smasMapInventorySystem.menuSelectionIsSelected = 1
