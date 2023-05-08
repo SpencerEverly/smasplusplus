@@ -2017,6 +2017,8 @@ function littleDialogue.onDraw()
 end
 
 function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
+    eventObj.cancelled = true
+    
     if Player.count() >= 2 then
         littleDialogue.create{
             text = text,
@@ -2028,8 +2030,8 @@ function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
             speakerObj = npcObj or playerObj or player
         }
     end
-
-    eventObj.cancelled = true
+    
+    Misc.pause()
 end
 
 

@@ -5,7 +5,9 @@
 local smas2PlayerSystem = {}
 
 local handycam = require("handycam")
-handycam[1].targets = {player}
+handycam[1].targets = {}
+
+local customCamera = require("customCamera")
 
 local player1Camera = Graphics.CaptureBuffer(800,600)
 local player2Camera = Graphics.CaptureBuffer(800,600)
@@ -83,15 +85,15 @@ end
 function smas2PlayerSystem.onDraw()
     if smasBooleans.targetPlayers then --If targeting players are enabled...
         for i = 1,maxPlayers do --Get all players
-            if Player(i).isValid and not table.icontains(handycam[1].targets,Player(i)) then
-                table.insert(handycam[1].targets,Player(i))
-            elseif not Player(i).isValid and table.icontains(handycam[1].targets,Player(i)) then
-                table.remove(handycam[1].targets,Player(i))
+            if Player(i).isValid and not table.icontains(customCamera.targets,Player(i)) then
+                table.insert(customCamera.targets,Player(i))
+            elseif not Player(i).isValid and table.icontains(customCamera.targets,Player(i)) then
+                table.remove(customCamera.targets,Player(i))
             end
         end
     end
     if not smasBooleans.targetPlayers and not smasBooleans.overrideTargets then
-        handycam[1].targets = {}
+        customCamera.targets = {}
     end
     
     if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
@@ -99,7 +101,7 @@ function smas2PlayerSystem.onDraw()
             if Player.count() == 2 then
                 if player.deathTimer == 0 then
                     Graphics.drawBox{width = 2, height = 600, x = 400, y = 0, color = Color.black}
-                    smas2PlayerSystem.player1CameraEdgeX = Screen.viewPortCoordinateX(player.x - camera.x + 15, player.width)
+                    smas2PlayerSystem.player1CameraEdgeX = Screen.viewPortCoordinateX(player.x - camera.x + 40, player.width)
                     smas2PlayerSystem.player1CameraEdgeY = 0
                     smas2PlayerSystem.player2CameraEdgeX = Screen.viewPortCoordinateX(player2.x - camera.x, player2.width)
                     smas2PlayerSystem.player2CameraEdgeY = 0 --player2.y - camera.y - player2.height
@@ -129,12 +131,12 @@ function smas2PlayerSystem.onCameraDraw(camIdx)
     if smas2PlayerSystem.enableSplitScreen then
         if Player.count() == 2 then
             if player.deathTimer == 0 then
-                player1Camera:captureAt(-0.0001)
+                player1Camera:captureAt(0)
                 Graphics.drawBox{
                     texture = player1Camera,
                     x = 0,
                     y = 0,
-                    priority = 0,
+                    priority = 0.0002,
                     width = 400,
                     height = 600,
                     sourceX = smas2PlayerSystem.player1CameraEdgeX,
@@ -144,7 +146,12 @@ function smas2PlayerSystem.onCameraDraw(camIdx)
                 }
             end
             if player2.deathTimer == 0 then
-                player2:render{x = smas2PlayerSystem.player2CameraEdgeX, y = 0, sceneCoords = false, frame = player2.frame, direction = player2.direction, powerup = player2.powerup, character = player2.character, mount = player2.mount, mounttype = player2.mountColor, priority = smas2PlayerSystem.getPlayerPriority(player2), mountpriority = smas2PlayerSystem.getPlayerMountPriority(player2)}
+                player2Camera:captureAt(0)
+                customCamera.drawScene{
+                    target = player2Camera, useScreen = true, drawBackgroundToScreen = false,
+                    scale = customCamera.currentZoom, rotation = customCamera.currentRotation,
+                    x = camera.x + 400, y = camera.y, width = 400, zoomHeight = 600,
+                }
             end
         end
     end
