@@ -1368,7 +1368,7 @@ function customCamera.onCameraUpdate()
             focus = math.lerp(focus,customCamera.previousTargetsFous,customCamera.targetsTransition)
         end
     else
-        focus = vector(camera.x + camera.width*0.5 - customCamera.targetOffsetX,camera.y + camera.height*0.5 - customCamera.targetOffsetY)
+        focus = vector(camera.x + camera.width*0.5, camera.y + camera.height*0.5)
     end
 
     focus.x = focus.x + customCamera.currentOffsetX
