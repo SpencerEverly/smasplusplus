@@ -4411,7 +4411,7 @@ ID:250;X:-159808;Y:-160128;
 BGO_END
 NPC
 ID:198;X:-159520;Y:-160128;D:-1;MG:"Thank you Mario! But the Princess is in another game.<page>I'll get replaced with Raca eventually. For now\, here's your star.";FD:1;NM:1;ET:"Message 1";
-ID:800;X:-179503;Y:-180592;D:-1;ED:"Boss End";
+ID:945;X:-179503;Y:-180592;D:-1;ED:"Boss End";
 ID:212;X:-196512;Y:-200128;D:-1;
 ID:212;X:-196448;Y:-200128;D:-1;
 ID:212;X:-196480;Y:-200128;D:-1;
