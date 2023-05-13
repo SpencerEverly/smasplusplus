@@ -3,7 +3,10 @@
 ]]
 
 local playerManager = require("playerManager")
-local smasExtraSounds = package.loaded["smasExtraSounds"]
+local smasFunctions
+pcall(function() smasFunctions = require("smasFunctions") end)
+local smasExtraSounds
+pcall(function() smasExtraSounds = require("smasExtraSounds") end)
 
 local costume = {}
 
