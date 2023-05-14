@@ -84,16 +84,16 @@ end
 
 function smas2PlayerSystem.onDraw()
     if smasBooleans.targetPlayers then --If targeting players are enabled...
-        --[[for i = 1,maxPlayers do --Get all players
+        for i = 1,maxPlayers do --Get all players
             if Player(i).isValid and not table.icontains(customCamera.targets,Player(i)) then
                 table.insert(customCamera.targets,Player(i))
             elseif not Player(i).isValid and table.icontains(customCamera.targets,Player(i)) then
                 table.remove(customCamera.targets,Player(i))
             end
-        end]]
-        if Player.count() == 2 then
-            customCamera.targets = {player2}
         end
+        --[[if Player.count() == 2 then
+            customCamera.targets = {player2}
+        end]]
     end
     if not smasBooleans.targetPlayers and not smasBooleans.overrideTargets then
         customCamera.targets = {}

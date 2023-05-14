@@ -12414,6 +12414,12 @@ ID:466;X:-196208;Y:-200128;D:-1;MG:"It's gonna rain after this\, sccording to my
 ID:466;X:-195312;Y:-200128;D:-1;MG:"If you're here for the True Ending\, great!<page>If you're here just to say Merry Christmas\, well...<page>MERRY CHRISTMAS!";FD:1;NM:1;LR:"Stage Extra - Christmas";
 ID:466;X:-194336;Y:-200128;D:-1;MG:"I'm glad to shop for some Christmas supplies recently.<page>It's too cold\, so I'm gonna wait here until my ride arrives.";FD:1;NM:1;LR:"Stage Extra - Christmas";
 ID:245;X:62896;Y:59808;D:-1;
+ID:466;X:-199632;Y:-200128;D:-1;MG:"Happy Mother's Day!<page>This day is a day where mothers of the world rejoice with sweets and flowers!<page>I'll still be managing the Tourist Center though\, so you're welcome to come in when you want.";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
+ID:466;X:-198624;Y:-200128;D:-1;MG:"My mom is at home\, but I'm thinking of buying her a flower eventually.<page.Ah\, my sweet mom...";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
+ID:466;X:-197632;Y:-200128;D:-1;MG:"My mom is really cool! I'm glad there's a day where she is recognized.";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
+ID:466;X:-196608;Y:-200128;D:-1;MG:"Show your mom appreciation sometime.<page>She'll love it.";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
+ID:466;X:-195616;Y:-200128;D:-1;MG:"My mom passed away years ago\, but I remember her as a good mom in my memories.<page>*sigh*...";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
+ID:466;X:-194368;Y:-200128;D:-1;MG:"I got her some sweets in the store.<page>Why I'm waiting until the right time to give them to her is beyond my comprehension.";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;
@@ -12538,6 +12544,7 @@ LR:"Stage Extra - St Patricks Day";HD:1;
 LR:"Stage Extra - Easter";HD:1;
 LR:"Stage Extra - Easter (3 PM)";HD:1;
 LR:"Stage Extra - Labor Day";HD:1;
+LR:"Stage Extra - Mother's Day";HD:1;
 LR:"Stage Extra - Halloween";HD:1;
 LR:"Stage Extra - UT Chara Genoside";HD:1;
 LR:"True Ending - Fail Safe 1";

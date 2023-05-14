@@ -128,6 +128,15 @@ local function HolidayLaborDay()
     LaborDay:show(true)
 end
 
+local function HolidayMothersDay()
+    local ClosedBusinesses = Layer.get("BusinessesClosed")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local MothersDay = Layer.get("Stage Extra - Mother's Day")
+    ClosedBusinesses:show(true)
+    Construction:show(true)
+    MothersDay:show(true)
+end
+
 local function HolidayHalloween()
     local ClosedBusinesses = Layer.get("BusinessesClosed")
     local Construction = Layer.get("Stage 5 - Construction")
@@ -307,6 +316,15 @@ function runHubUpdate()
             if malcmusic.holiday then
                 SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
                 HolidayWeed()
+            end
+        end
+        
+        
+        if Time.month() == 5 and Time.day() == Time.weekendOrder("Sunday", 5)[2] then --Mother's Day
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
+                HolidayMothersDay()
             end
         end
         

@@ -9153,7 +9153,7 @@ NPC
 ID:92;X:-179056;Y:-180192;D:-1;GE:1;GT:2;GD:1;GM:50;LR:"Shootin' Veggies";
 ID:92;X:-178928;Y:-180192;D:-1;GE:1;GT:2;GD:1;GM:60;LR:"Shootin' Veggies";
 ID:92;X:-178992;Y:-180224;D:-1;GE:1;GT:2;GD:1;GM:40;LR:"Shootin' Veggies";
-ID:201;X:-178568;Y:-180254;D:-1;LR:"Boss";EA:"BossBegin";ED:"Boss End";
+ID:201;X:-178568;Y:-180254;D:-1;LR:"Boss";EA:"Boss Start";ED:"Boss End";
 ID:14;X:-199808;Y:-200192;D:-1;
 ID:19;X:-199392;Y:-200192;D:-1;
 ID:19;X:-199264;Y:-200192;D:-1;
@@ -9937,7 +9937,7 @@ ET:"Level - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - Start";AS:0;AX:0;AY:0;
 ET:"P Switch - End";AS:0;AX:0;AY:0;
 ET:"End Game";SD:20;EG:1;AS:0;AX:0;AY:0;
-ET:"BossBegin";AS:0;AX:0;AY:0;
+ET:"Boss Start";AS:0;AX:0;AY:0;
 ET:"Boss End";LH:["Shootin' Veggies"];SSS:["ID\:1\;MI\:0\;"];TE:"Boss End 1.5";TD:10;DS:1;AS:0;AX:0;AY:0;
 ET:"Boss End 1.5";LH:["Pillar Disappear"];TE:"Boss End 2";DS:1;AS:0;AX:0;AY:0;
 ET:"Boss End 2";LS:["Boss End Door"];TE:"Boss End 3";TD:50;AS:0;AX:0;AY:0;

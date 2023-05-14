@@ -4,7 +4,7 @@ local nokeys = false
 local nokeysexceptjump = false
 
 function onEvent(eventName)
-    if eventName == "BossBegin" then
+    if eventName == "Boss Start" then
         Sound.changeMusic("_OST/Super Mario Bros 2/King Wart.ogg", 1)
     end
     if eventName == "Boss End" then
