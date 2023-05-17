@@ -6,6 +6,8 @@ local wartsBubbles = {}
 --NPC_ID is dynamic based on the name of the library file
 local npcID = NPC_ID
 
+wartsBubbles.veggieNPCs = {144,92,141,147,139,140,142,145,143,146}
+
 --Defines NPC config for our NPC. You can remove superfluous definitions.
 local wartsBubblesSettings = {
 	id = npcID,
@@ -140,7 +142,12 @@ function wartsBubbles.onTickNPC(v)
 	end
 	
 	--Execute main AI.
-    
+    for k,j in ipairs(NPC.get(wartsBubbles.veggieNPCs)) do
+        if Colliders.collide(j, v) then
+            Effect.spawn(10, j.x, j.y)
+            j:kill(HARM_TYPE_OFFSCREEN)
+        end
+    end
 end
 
 --Gotta return the library table!

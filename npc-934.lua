@@ -92,14 +92,14 @@ npcManager.registerHarmTypes(npcID,
 	{
 		--[HARM_TYPE_JUMP]=10,
 		--[HARM_TYPE_FROMBELOW]=10,
-		--[HARM_TYPE_NPC]=10,
-		--[HARM_TYPE_PROJECTILE_USED]=10,
+		--[HARM_TYPE_NPC]=106,
+		--[HARM_TYPE_PROJECTILE_USED]=106,
 		--[HARM_TYPE_LAVA]={id=13, xoffset=0.5, xoffsetBack = 0, yoffset=1, yoffsetBack = 1.5},
 		--[HARM_TYPE_HELD]=10,
 		--[HARM_TYPE_TAIL]=10,
 		--[HARM_TYPE_SPINJUMP]=10,
 		--[HARM_TYPE_OFFSCREEN]=10,
-		--[HARM_TYPE_SWORD]=10,
+		--[HARM_TYPE_SWORD]=106,
 	}
 );
 
@@ -108,22 +108,48 @@ npcManager.registerHarmTypes(npcID,
 
 --Register events
 function wart.onInitAPI()
-	npcManager.registerEvent(npcID, wart, "onTickEndNPC")
-	--npcManager.registerEvent(npcID, wart, "onDrawNPC")
-	registerEvent(wart, "onNPCKill")
+    npcManager.registerEvent(npcID, wart, "onTickEndNPC")
+    --npcManager.registerEvent(npcID, wart, "onDrawNPC")
+    registerEvent(wart, "onNPCHarm")
+    registerEvent(wart, "onNPCKill")
 end
 
-function wart.onNPCKill(eventObj, npc, killType)
+function wart.onNPCKill(eventObj, npc)
     if npc.id ~= npcID then
         return
     elseif npc.id == npcID then
-        if killType == HARM_TYPE_NPC then
+        local data = npc.data
+        if data.isVulnerable and not data.hurt then
             if data.health > 0 then
+                NPC.config[npcID].score = 0
                 eventObj.cancelled = true
-                data.health = data.health - 6
-                Sound.playSFX(39)
-            else
-                
+            end
+        elseif (data.hurt or not data.isVulnerable) then
+            eventObj.cancelled = true
+        else
+            Sound.playSFX(63)
+            Effect.spawn(106, v.x, v.y, 1)
+        end
+    end
+end
+
+function wart.onNPCHarm(eventObj, npc, killType, culprit)
+    if npc.id ~= npcID then
+        return
+    elseif npc.id == npcID then
+        local data = npc.data
+        if data.health > 0 then
+            if data.isVulnerable and not data.hurt then
+                if killType == HARM_TYPE_NPC then
+                    eventObj.cancelled = true
+                    data.health = data.health - 6
+                    Sound.playSFX(39)
+                    data.isVulnerable = false
+                    data.timer = 0
+                    data.hurt = true
+                end
+            elseif killType == HARM_TYPE_NPC and data.hurt then
+                eventObj.cancelled = true
             end
         end
     end
@@ -132,19 +158,16 @@ end
 function wart.doWalkingAnimation(v)
     local data = v.data
     data.animationTimer = data.animationTimer + 1
-    if data.animationTimer >= 0 and data.animationTimer <= 8 then
-        if v.direction == -1 then
-            v.animationFrame = 0
-        else
-            v.animationFrame = 8
-        end
-    elseif data.animationTimer >= 9 and data.animationTimer <= 16 then
-        if v.direction == -1 then
-            v.animationFrame = 1
-        else
-            v.animationFrame = 9
-        end
+    v.animationFrame = math.floor(data.animationTimer / 8) % 2 + 0 --v.animationFrame = math.floor(data.animationTimer/framespeed) % frames + offset
+    if data.animationTimer >= 16 then
+        data.animationTimer = 0
     end
+end
+
+function wart.doHurtAnimation(v)
+    local data = v.data
+    data.animationTimer = data.animationTimer + 1
+    v.animationFrame = math.floor(data.animationTimer / 4) % 4 + 4 --v.animationFrame = math.floor(data.animationTimer/framespeed) % frames + offset
     if data.animationTimer > 16 then
         data.animationTimer = 0
     end
@@ -172,6 +195,9 @@ function wart.onTickEndNPC(v)
         
         data.stage = 1
         data.ballThrowupDistance = -10
+        data.isVulnerable = false
+        
+        data.hurt = false
         
         data.health = 24
         
@@ -187,52 +213,62 @@ function wart.onTickEndNPC(v)
 	end
 	
 	--Execute main AI.
-	if data.stage == 1 then
-        data.timer = data.timer + 1
-        wart.doWalkingAnimation(v)
-        if data.timer >= 1 and data.timer <= lunatime.toTicks(2.5) then
-            v.speedX = -1
+    if not data.hurt then
+        if data.stage == 1 then
+            data.timer = data.timer + 1
+            wart.doWalkingAnimation(v)
+            if data.timer >= 1 and data.timer <= lunatime.toTicks(2.5) then
+                v.speedX = -1
+            end
+            if data.timer >= lunatime.toTicks(2.5) and data.timer <= lunatime.toTicks(3.5) then
+                v.speedX = 0
+            end
+            if data.timer >= lunatime.toTicks(3.5) and data.timer <= lunatime.toTicks(6) then
+                v.speedX = 1
+            end
+            if data.timer >= lunatime.toTicks(6) then
+                v.speedX = 0
+                data.timer = 0
+                data.stage = 2
+            end
         end
-        if data.timer >= lunatime.toTicks(2.5) and data.timer <= lunatime.toTicks(3.5) then
-            v.speedX = 0
-        end
-        if data.timer >= lunatime.toTicks(3.5) and data.timer <= lunatime.toTicks(6) then
-            v.direction = -1
-            v.speedX = 1
-        end
-        if data.timer >= lunatime.toTicks(6) then
-            v.speedX = 0
-            data.timer = 0
-            data.stage = 2
-        end
-    end
-    if data.stage == 2 then
-        data.timer = data.timer + 1
-        if data.timer >= 1 then
-            if v.direction == -1 then
+        if data.stage == 2 then
+            data.isVulnerable = true
+            data.timer = data.timer + 1
+            if data.timer >= 0 then
                 v.animationFrame = 2
-            else
-                v.animationFrame = 10
+            end
+            if data.timer == lunatime.toTicks(0.5) then
+                Sound.playSFX(115)
+            end
+            if data.timer >= lunatime.toTicks(0.5) and data.timer <= lunatime.toTicks(2) then
+                data.ballThrowupTimer = data.ballThrowupTimer + 1
+                if data.ballThrowupDistance < 0 then
+                    data.ballThrowupDistance = data.ballThrowupDistance + 0.1
+                end
+                if data.ballThrowupTimer == lunatime.toTicks(0.1) or data.ballThrowupTimer == lunatime.toTicks(0.4) or data.ballThrowupTimer == lunatime.toTicks(0.8) or data.ballThrowupTimer == lunatime.toTicks(1.2) or data.ballThrowupTimer == lunatime.toTicks(1.6) then  
+                    local ball = NPC.spawn(935, v.x, v.y + 10, v.section, false, true)
+                    ball.speedX = data.ballThrowupDistance
+                    ball.speedY = -1
+                end
+            end
+            if data.timer >= lunatime.toTicks(2) then
+                data.timer = 0
+                data.isVulnerable = false
+                data.ballThrowupDistance = -10
+                data.ballThrowupTimer = 0
+                data.stage = 1
             end
         end
-        if data.timer == lunatime.toTicks(0.5) then
-            Sound.playSFX(115)
-        end
-        if data.timer >= lunatime.toTicks(0.5) and data.timer <= lunatime.toTicks(2) then
-            data.ballThrowupTimer = data.ballThrowupTimer + 1
-            if data.ballThrowupDistance < 0 then
-                data.ballThrowupDistance = data.ballThrowupDistance + 0.2
-            end
-            if data.ballThrowupTimer == lunatime.toTicks(0.1) or data.ballThrowupTimer == lunatime.toTicks(0.4) or data.ballThrowupTimer == lunatime.toTicks(0.8) or data.ballThrowupTimer == lunatime.toTicks(1.2) or data.ballThrowupTimer == lunatime.toTicks(1.6) then  
-                local ball = NPC.spawn(935, v.x, v.y + 15, v.section, false, true)
-                ball.speedX = data.ballThrowupDistance
-                ball.speedY = -1
-            end
-        end
+    elseif data.hurt then
+        data.ballThrowupDistance = -10
+        data.ballThrowupTimer = 0
+        wart.doHurtAnimation(v)
+        v.speedX = 0
+        data.timer = data.timer + 1
         if data.timer >= lunatime.toTicks(2) then
+            data.hurt = false
             data.timer = 0
-            data.ballThrowupDistance = -10
-            data.ballThrowupTimer = 0
             data.stage = 1
         end
     end
