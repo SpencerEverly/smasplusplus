@@ -301,52 +301,93 @@ Cheats.register("fourthwall",{ --Opens up the new repll console, used using TAB.
     flashPlayer = true,activateSFX = 67,
 })
 
-Cheats.register("getdemstars",{ --This needs to be reregistered because it was using the wrong star ID
-    onActivate = (function()
-        Defines.player_hasCheated = false
-        if(isOverworld) then
-            return;
+local cheat_getdemstars = {}
+
+local function act_getstars()
+    if(isOverworld) then
+        return true;
+    end
+    
+    local cheat = cheat_getdemstars;
+    cheat.start = 
+    {
+        x = player.x;
+        y = player.y;
+        section = player.section;
+        donthurtme = Defines.cheat_donthurtme;
+        shadowstar = Defines.cheat_shadowmario;
+    };
+    
+    
+    for _, block in ipairs(Block.get()) do
+        if block.contentID == 2000 then
+            block:hit()
         end
+    end
+    
+    for _,container in ipairs(NPC.get({91, 263, 283, 284}, -1)) do
+        if container.ai1 == 1000 then
+            NPC.spawn(container.ai1, container.x, container.y, container:mem(0x146, FIELD_WORD))
+        end
+    end
+    
+    for _,v in ipairs(NPC.get({1000}, -1)) do
+        if v:mem(0x64, FIELD_BOOL) then
+            NPC.spawn(v.id, v.x, v.y, v:mem(0x146, FIELD_WORD))
+        end
+    end
+    
+    return false
+end
+
+local function getstars_onTick()
+    Defines.player_hasCheated = false
+    if(isOverworld) then
+        return;
+    end
+    local theNextStar, spawnedBlock;
+    Defines.cheat_donthurtme = true;
+    Defines.cheat_shadowmario = true;
+    
+    local stars = {[1000]={}}
+    
+    for _, v in ipairs(NPC.get({1000}, -1)) do
+        if v:mem(0xF0, FIELD_DFLOAT) ~= 1 and not v:mem(0x64, FIELD_BOOL) and not v.friendly then
+            table.insert(stars[v.id], v)
+        end
+    end
+    
+    if (#stars[1000] >= 1) then
+        local star = table.remove(stars[1000], 1)
+        if tostring(star.layerName) ~= "" then
+            Layer.get(tostring(star.layerName)):show(false)
+        end
+        player:mem(0x15A, FIELD_WORD, star:mem(0x146, FIELD_WORD))
+        player.x = star.x
+        player.y = star.y
         Sound.playSFX("input_success.ogg")
-        local theNextStar, spawnedBlock;
-        Defines.cheat_donthurtme = true;
-        Defines.cheat_shadowmario = true;
-        
-        local stars = {[999]={}, [1000]={}}
-        
-        for _, v in ipairs(NPC.get({999, 1000}, -1)) do
-            if v:mem(0xF0, FIELD_DFLOAT) ~= 1 and not v:mem(0x64, FIELD_BOOL) and not v.friendly then
-                table.insert(stars[v.id], v)
-            end
+        if (#stars[1000] >= 1) then
+            mem(0x00B2C59E, FIELD_WORD, 0) --stop ending level
         end
+    else
+        player.speedX = 0
+        player.speedY = 0
         
-        if (#stars[1000] >= 1 or #stars[999] >= 1) then
-            local star = table.remove(stars[1000], 1) or table.remove(stars[999], 1)
-            if tostring(star.layerName) ~= "" then
-                Layer.get(tostring(star.layerName)):show(false)
-            end
-            player:mem(0x15A, FIELD_WORD, star:mem(0x146, FIELD_WORD))
-            player.x = star.x
-            player.y = star.y
-            if (#stars[999] >= 1) then
-                mem(0x00B2C59E, FIELD_WORD, 0) --stop ending level
-            end
-        else
-            player.speedX = 0
-            player.speedY = 0
-            
-            local cheat = cheat_getdemstars;
-            
-            player:mem(0x15A, FIELD_WORD, cheat.start.section)
-            player.x = cheat.start.x;
-            player.y = cheat.start.y;
-            
-            Defines.cheat_donthurtme = cheat.start.donthurtme;
-            Defines.cheat_shadowmario = cheat.start.shadowstar;
-        end
-        return true -- this makes the cheat not toggleable
-    end),
-    flashPlayer = true,activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",
+        local cheat = cheat_getdemstars;
+        
+        player:mem(0x15A, FIELD_WORD, cheat.start.section)
+        player.x = cheat.start.x;
+        player.y = cheat.start.y;
+        
+        Defines.cheat_donthurtme = cheat.start.donthurtme;
+        Defines.cheat_shadowmario = cheat.start.shadowstar;
+    end
+end
+
+Cheats.register("getdemstars",{ --This needs to be reregistered because it was using the wrong star ID
+    onActivate = act_getstars,
+    flashPlayer = true, activateSFX = "_OST/_Sound Effects/hub_travelactivated.ogg",
+    onTick = getstars_onTick,
 })
 
 Cheats.register("itsvegas",{ --This needs to be reregistered because it was using the wrong roulette ID

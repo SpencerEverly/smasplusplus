@@ -938,13 +938,11 @@ function smasMainMenu.onStart()
             Section(0).effects.weather = WEATHER_SNOW
         end
         Misc.saveGame()
-        Defines.cheat_donthurtme = true --These are to prevent the player from dying
-        Defines.cheat_shadowmario = true
         hearthover.active = false --No hearthover on the smasMainMenu
         if Time.month() == 04 and Time.day() == 01 then --BSOD lmao
             if GameData.____holidayMenuEventExecuted == nil or not GameData.____holidayMenuEventExecuted and not GameData.____holidayMenuEventEnded then
                 smasMainMenu.startedmenu = 1
-            elseif GameData.____holidayMenuEventEnded == true then
+            elseif GameData.____holidayMenuEventEnded then
                 smasMainMenu.startedmenu = 0
             end
         end
@@ -1360,8 +1358,6 @@ function smasMainMenu.onExit()
         elseif not SaveData.firstBootCompleted then
             smasMainMenu.startedmenu = 1
         end
-        Defines.cheat_donthurtme = false
-        Defines.cheat_shadowmario = false
         autoscroll.scrollLeft(5000)
     end
 end

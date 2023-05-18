@@ -11,9 +11,6 @@ function onTick()
     player.leftKeyPressing = false;
     player.rightKeyPressing = false;
     player.pauseKeyPressing = false;
-    --Prevent donthurtme cheat, for obvious reasons
-    Defines.cheat_donthurtme = used_donthurtme;
-    used_donthurtme = nil;
 end
 
 function onPause(evt)

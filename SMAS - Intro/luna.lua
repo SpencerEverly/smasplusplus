@@ -36,9 +36,6 @@ function onTick()
     player.leftKeyPressing = false;
     --player.rightKeyPressing = false;
     
-    --Prevent donthurtme cheat, for obvious reasons
-    Defines.cheat_donthurtme = used_donthurtme;
-    used_donthurtme = nil;
     Audio.sounds[1].sfx  = Audio.SfxOpen("SMAS - Intro/player-jump.ogg")
     if(not killed and player:mem(0x13E,FIELD_BOOL)) then
         killed = true;
