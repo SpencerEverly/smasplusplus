@@ -82,7 +82,7 @@ function smasCharacterHealthSystem.onDraw()
             player:mem(0x140, FIELD_WORD, 150)
         end
         
-        if smasHud.isActive then
+        if Graphics.isHudActivated() then
             if smasHud.visible.customItemBox then
                 if smasCharacterHealthSystem.health <= 0 then
                     Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
