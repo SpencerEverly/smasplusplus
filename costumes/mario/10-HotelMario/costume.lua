@@ -40,8 +40,8 @@ local heartfull = Graphics.loadImageResolved("hardcoded/hardcoded-36-1.png")
 local heartempty = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
 
 function costume.onDraw()
-    if SaveData.toggleCostumeAbilities == true then
-        if Level.endState() == 0 and not GameData.winStateActive or GameData.winStateActive == nil then
+    if SaveData.toggleCostumeAbilities then
+        if Level.endState() == 0 and (not GameData.winStateActive or GameData.winStateActive == nil) then
             if Timer.getValue() == 100 then
                 timeddelay = timeddelay + 1
                 if timeddelay == 1 then
@@ -65,24 +65,24 @@ function costume.onDraw()
         if smasHud.isActive then
             if smasHud.visible.customItemBox then
                 if mariohp <= 0 then
-                    Graphics.drawImageWP(heartempty, 357,  80, -4.2)
-                    Graphics.drawImageWP(heartempty, 388,  80, -4.2)
-                    Graphics.drawImageWP(heartempty, 421,  80, -4.2)
+                    Graphics.drawImageWP(heartempty, 357,  80, 5)
+                    Graphics.drawImageWP(heartempty, 388,  80, 5)
+                    Graphics.drawImageWP(heartempty, 421,  80, 5)
                 end
                 if mariohp == 1 then
-                    Graphics.drawImageWP(heartfull, 357,  80, -4.2)
-                    Graphics.drawImageWP(heartempty, 388,  80, -4.2)
-                    Graphics.drawImageWP(heartempty, 421,  80, -4.2)
+                    Graphics.drawImageWP(heartfull, 357,  80, 5)
+                    Graphics.drawImageWP(heartempty, 388,  80, 5)
+                    Graphics.drawImageWP(heartempty, 421,  80, 5)
                 end
                 if mariohp == 2 then
-                    Graphics.drawImageWP(heartfull, 357,  80, -4.2)
-                    Graphics.drawImageWP(heartfull, 388,  80, -4.2)
-                    Graphics.drawImageWP(heartempty, 421,  80, -4.2)
+                    Graphics.drawImageWP(heartfull, 357,  80, 5)
+                    Graphics.drawImageWP(heartfull, 388,  80, 5)
+                    Graphics.drawImageWP(heartempty, 421,  80, 5)
                 end
                 if mariohp >= 3 then
-                    Graphics.drawImageWP(heartfull, 357,  80, -4.2)
-                    Graphics.drawImageWP(heartfull, 388,  80, -4.2)
-                    Graphics.drawImageWP(heartfull, 421,  80, -4.2)
+                    Graphics.drawImageWP(heartfull, 357,  80, 5)
+                    Graphics.drawImageWP(heartfull, 388,  80, 5)
+                    Graphics.drawImageWP(heartfull, 421,  80, 5)
                 end
             end
         end
