@@ -43,10 +43,10 @@ end
 
 local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
-if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if SaveData.accessibilityTwirl then
-            console:println("Twirling activated! Loading twirl library...")
+            console:println("Twirling activated! Loading the twirl library...")
             twirl = require("Twirl")
         end
         if SaveData.accessibilityWallJump then
@@ -55,7 +55,7 @@ if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
             aw.registerAllPlayersDefault()
         end
         if SaveData.accessibilityGroundPound then
-            console:println("Ground pounding activated! Loading GroundPound library...")
+            console:println("Ground pounding activated! Loading the GroundPound library...")
             GP = require("GroundPound")
             GP.enabled = true
         end
@@ -96,14 +96,13 @@ if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
     warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
     warpTransition.crossSectionTransition = warpTransition.TRANSITION_NONE
     warpTransition.activateOnInstantWarps = false
-    smasExtraSounds.enableFireFlowerHitting = false
     local keyhole = require("tweaks/keyhole") --Disable X2 keyhole effect
     keyhole.onCameraDraw = function() end
-    mega2.sfxFile = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom13.ogg")
-    mega2.megagrowsfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-grow-1.3.ogg")
-    mega2.megashrinksfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-shrink-1.3.ogg")
-    mega2.megarunningoutsfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-runningout-1.3.ogg")
-    starman.sfxFile = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/starman.ogg")
+    --mega2.sfxFile = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom13.ogg")
+    --mega2.megagrowsfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-grow-1.3.ogg")
+    --mega2.megashrinksfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-shrink-1.3.ogg")
+    --mega2.megarunningoutsfx = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/megashroom-runningout-1.3.ogg")
+    --starman.sfxFile = Misc.resolveSoundFile("_OST/_Sound Effects/1.3Mode/starman.ogg")
 end
 
 local killed = false
@@ -214,10 +213,10 @@ function globalgenerals.onTickEnd()
 end
 
 function globalgenerals.onTick()
-    if lunatime.tick() == 1 then
+    if lunatime.tick() == 1 then --Failsafe in case
         Sound.loadCostumeSounds()
     end
-    if smasBooleans.compatibilityMode13Mode then
+    if smasBooleans.compatibilityMode13Mode then --Makes shells a little slower
         mem(0x00B2C860, FIELD_FLOAT, 7.0999999046326)
     else
         mem(0x00B2C860, FIELD_FLOAT, 6.2)
@@ -316,10 +315,11 @@ function globalgenerals.onTick()
     if SaveData.mandatoryStars == nil then
         SaveData.mandatoryStars = 0
     end
-    --if SaveData.totalMandatoryStars == nil then
-        --SaveData.totalMandatoryStars = 200 --Value isn't final, until all levels are made
-    --end
+    if SaveData.totalMandatoryStars == nil then
+        SaveData.totalMandatoryStars = 200 --Value is final, all levels don't have to be beat to end the game
+    end
     
+    --Deals with secret win fanfares
     if Time.isLast2DigitsTheSameButWithout00(Timer.getValue()) then
         smasBooleans.isTimerInDoubleDigits = true
     elseif not Time.isLast2DigitsTheSameButWithout00(Timer.getValue()) then
@@ -399,10 +399,7 @@ function globalgenerals.onDraw()
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated and not Misc.inMarioChallenge() then
         if player.character <= 5 then
             if SaveData.SMASPlusPlus.player[1].currentCostume == "N/A" then
-                local costumes = playerManager.getCostumes(player.character)
-                local currentCostume = player:getCostume()
-                local costumeIdx = table.ifind(costumes,currentCostume)
-                player:setCostume(costumes[1])
+                player:setCostume(playerManager.getCostumes(player.character)[1])
             end
         end
     elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
@@ -428,13 +425,13 @@ function globalgenerals.onDraw()
         end
     end
     if SaveData.framerateEnabled then
-        textplus.print{x = 8, y = 8, text = actualframecount, font = numberfont, priority = 0, xscale = 1, yscale = 1}
+        textplus.print{x = 8, y = 8, text = actualframecount, font = numberfont, priority = 10, xscale = 1, yscale = 1}
     end
     
     if easterCrashMsg then
-        textplus.print{x=145, y=80, text = "Congrats! You reached more than the 5000th block idx and burned a ", priority=-3, color=Color.yellow, font=statusFont}
-        textplus.print{x=155, y=90, text = "collectable in the lava. This would've crashed SMBX 1.3!", priority=-3, color=Color.yellow, font=statusFont}
-        textplus.print{x=195, y=100, text = "You're really good at finding secrets, player ;)", priority=-3, color=Color.yellow, font=statusFont}
+        textplus.print{x=145, y=80, text = "Congrats! You reached more than the 5000th block idx and burned a ", priority=5, color=Color.yellow, font=statusFont}
+        textplus.print{x=155, y=90, text = "collectable in the lava. This would've crashed SMBX 1.3!", priority=5, color=Color.yellow, font=statusFont}
+        textplus.print{x=195, y=100, text = "You're really good at finding secrets, player ;)", priority=5, color=Color.yellow, font=statusFont}
     end
     
     for _,p in ipairs(Player.get()) do --Custom reserve storage
@@ -480,10 +477,6 @@ function globalgenerals.onExit()
     elseif Misc.inMarioChallenge() then
         File.writeToFile("loadscreeninfo.txt", "mariochallenge")
     end
-end
-
-function onWarpToOtherLevel(warp, plr)
-    
 end
 
 return globalgenerals

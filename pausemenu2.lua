@@ -1239,7 +1239,9 @@ function onethreemodeactivate()
     exitFadeActiveDone = true
     Graphics.activateHud(false)
     Playur.activate1stPlayer()
-    player:transform(1, false)
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+        player:transform(1, false)
+    end
     Level.load(Level.filename())
 end
 

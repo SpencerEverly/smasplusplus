@@ -31,55 +31,57 @@ function smas2PlayerSystem.onInitAPI()
 end
 
 function smas2PlayerSystem.dropClassicReserve(playerIdx)
-    Sound.playSFX(11)
-    
-    local B = 0
-    
-    if Player.count() >= 2 then
-        if (playerIdx == 1) then
-            B = -40
-        elseif (playerIdx == 2) then
-            B = 40
+    if SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx] >= 1 then
+        Sound.playSFX(11)
+        
+        local B = 0
+        
+        if Player.count() >= 2 then
+            if (playerIdx == 1) then
+                B = -40
+            elseif (playerIdx == 2) then
+                B = 40
+            end
+            
+            local ScreenTop = camera.y
+            
+            if (camera.height > 600) then
+                ScreenTop = ScreenTop + camera.height / 2 - 300
+            end
+            
+            local CenterX = camera.x + camera.width / 2
+            
+            local reserveNPC = NPC.spawn(SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
+            reserveNPC.x = CenterX - reserveNPC.width / 2 + B
+            reserveNPC.y = ScreenTop + 16 + 12
+            reserveNPC.speedX = 0
+            reserveNPC.speedY = 0
+            reserveNPC:mem(0x138, FIELD_WORD, 2)
+        else
+            if (playerIdx == 1) then
+                B = -40
+            elseif (playerIdx == 2) then
+                B = 40
+            end
+            
+            local ScreenTop = camera.y
+            
+            if (camera.height > 600) then
+                ScreenTop = ScreenTop + camera.height / 2 - 300
+            end
+            
+            local CenterX = camera.x + camera.width / 2
+            
+            local reserveNPC = NPC.spawn(SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
+            reserveNPC.x = CenterX - reserveNPC.width / 2 + B + 40
+            reserveNPC.y = ScreenTop + 16 + 12 - 4
+            reserveNPC.speedX = 0
+            reserveNPC.speedY = 0
+            reserveNPC:mem(0x138, FIELD_WORD, 2)
         end
         
-        local ScreenTop = camera.y
-        
-        if (camera.height > 600) then
-            ScreenTop = ScreenTop + camera.height / 2 - 300
-        end
-        
-        local CenterX = camera.x + camera.width / 2
-        
-        local reserveNPC = NPC.spawn(SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
-        reserveNPC.x = CenterX - reserveNPC.width / 2 + B
-        reserveNPC.y = ScreenTop + 16 + 12
-        reserveNPC.speedX = 0
-        reserveNPC.speedY = 0
-        reserveNPC:mem(0x138, FIELD_WORD, 2)
-    else
-        if (playerIdx == 1) then
-            B = -40
-        elseif (playerIdx == 2) then
-            B = 40
-        end
-        
-        local ScreenTop = camera.y
-        
-        if (camera.height > 600) then
-            ScreenTop = ScreenTop + camera.height / 2 - 300
-        end
-        
-        local CenterX = camera.x + camera.width / 2
-        
-        local reserveNPC = NPC.spawn(SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx], camera.x, camera.y, Player(playerIdx).section, false, true)
-        reserveNPC.x = CenterX - reserveNPC.width / 2 + B + 40
-        reserveNPC.y = ScreenTop + 16 + 12 - 4
-        reserveNPC.speedX = 0
-        reserveNPC.speedY = 0
-        reserveNPC:mem(0x138, FIELD_WORD, 2)
+        SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx] = 0
     end
-    
-    SaveData.SMASPlusPlus.hud.reserve[Player(playerIdx).idx] = 0
 end
 
 function smas2PlayerSystem.onDraw()
