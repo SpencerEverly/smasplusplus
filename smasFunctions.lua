@@ -33,5 +33,6 @@ end
 
 _G.smasCharacterGlobals = require("smasCharacterGlobals")
 _G.smasCharacterCostumes = require("smasCharacterCostumes")
+_G.smasCharacterHealthSystem = require("smasCharacterHealthSystem")
 
 return smasFunctions

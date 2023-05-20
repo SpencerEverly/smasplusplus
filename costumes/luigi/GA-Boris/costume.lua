@@ -16,8 +16,6 @@ costume.loaded = false
 costume.grenade = false
 local eventsRegistered = false
 local plr
-local borishp
-local hit = false
 local cooldown = 0
 
 function costume.onInit(p)
@@ -42,14 +40,17 @@ function costume.onInit(p)
         costume.loaded = true
     end
     
+    smasCharacterHealthSystem.defaultStartingHealth = 3
+    smasCharacterHealthSystem.enabled = true
+    smasCharacterHealthSystem.drawHearts = false
+    
     Graphics.sprites.effect[998].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/effect-998.png")
     
     costume.abilitiesenabled = true
     costume.useGun1 = false
     costume.useGrenade2 = false
     costume.grenade = true
-    --smasHud.visible.itemBox = false
-    borishp = 3
+    
     if costume.grenade then
         local grenade = {
             id = 291,
@@ -238,21 +239,19 @@ function costume.onPostNPCKill(npc, harmType)
             Sound.playSFX("luigi/GA-Boris/voices/items/"..rngkey..".ogg", 1, 1, 80)
         end
     end
-    if healitems[npc.id] and Colliders.collide(plr, npc) then
-        borishp = borishp + 1
-    end
     if npc.id == 291 then
         for _,v in ipairs(NPC.get(291)) do
             local explosion = Effect.spawn(998, v.x, v.y + 35, player.section, false, true)
+            SFX.play(smasCharacterGlobals.soundSettings.borisGrenadeExplodeSFX)
         end
     end
 end
 
-function costume.onDraw(p)
+function costume.onDraw()
     if SaveData.toggleCostumeAbilities then
         if smasCharacterGlobals.abilitySettings.borisCanDrawGun then
             --Gun states
-            if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
+            if smasCharacterHealthSystem.health == 1 or smasCharacterHealthSystem.health == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
                 Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
                 local gun1 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-1.png")
                 if player.direction == -1 then
@@ -262,7 +261,7 @@ function costume.onDraw(p)
                     Graphics.drawImageWP(gun1, player.x - camera.x + 4,  player.y - camera.y + 10, 0, 28, 35, 28, -24)
                 end
             end
-            if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
+            if smasCharacterHealthSystem.health == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and player.powerup == 2 then
                 Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
                 local gun2 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-2.png")
                 if player.direction == -1 then
@@ -283,7 +282,7 @@ function costume.onDraw(p)
                     end
                 end
             end
-            if borishp == 3 and player.powerup == 4 then
+            if smasCharacterHealthSystem.health == 3 and player.powerup == 4 then
                 Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-1.png")
                 local gun3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-3.png")
                 if player.direction == -1 then
@@ -293,7 +292,7 @@ function costume.onDraw(p)
                     Graphics.drawImageWP(gun3, player.x - camera.x - 15,  player.y - camera.y + 10, 0, 25, 91, 25, -24)
                 end
             end
-            if borishp == 3 and player.powerup == 5 and player:mem(0x4A, FIELD_BOOL) == false then
+            if smasCharacterHealthSystem.health == 3 and player.powerup == 5 and player:mem(0x4A, FIELD_BOOL) == false then
                 Graphics.sprites.npc[266].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gunbullet-2.png")
                 local gun5 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/gun-5.png")
                 if player.direction == -1 then
@@ -303,7 +302,7 @@ function costume.onDraw(p)
                     Graphics.drawImageWP(gun5, player.x - camera.x - 10,  player.y - camera.y + 10, 0, 0, 78, 30, -24)
                 end
             end
-            if borishp == 3 and player.powerup == 6 then
+            if smasCharacterHealthSystem.health == 3 and player.powerup == 6 then
                 Graphics.sprites.npc[291].img = Graphics.loadImageResolved("costumes/luigi/GA-Boris/grenade.png")
             end
         end
@@ -314,7 +313,7 @@ function costume.onInputUpdate()
     if SaveData.toggleCostumeAbilities == true then
         if not Misc.isPaused() then
             if smasCharacterGlobals.abilitySettings.borisCanUseGun then
-                if borishp == 1 or borishp == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
+                if smasCharacterHealthSystem.health == 1 or smasCharacterHealthSystem.health == 2 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
                     if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
                         if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
                             Sound.playSFX("costumes/luigi/GA-Boris/gunshot-1.ogg", 1, 1, 35)
@@ -322,7 +321,7 @@ function costume.onInputUpdate()
                         end
                     end
                 end
-                if borishp == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
+                if smasCharacterHealthSystem.health == 3 and (player.powerup == 3) == false and (player.powerup == 7) == false and (player.powerup == 6) == false then
                     if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false then
                         if player:mem(0x26, FIELD_WORD) <= 1 and (player.keys.down == KEYS_PRESSED) == false then
                             Sound.playSFX("costumes/luigi/GA-Boris/gunshot-2.ogg", 1, 1, 35)
@@ -350,11 +349,11 @@ function costume.onInputUpdate()
             if player.powerup == 6 then
                 if smasCharacterGlobals.abilitySettings.borisCanUseGrenade then
                     if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false and (player.keys.up == KEYS_DOWN) == false then
-                        Sound.playSFX("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
+                        Sound.playSFX(smasCharacterGlobals.soundSettings.borisGrenadeLaunchSFX, 1, 1, 35)
                         costume.shootGrenade2()
                     end
                     if player.keys.run == KEYS_PRESSED and (player.keys.altRun == KEYS_PRESSED) == false and player.keys.up == KEYS_DOWN then
-                        Sound.playSFX("costumes/luigi/GA-Boris/grenade-launch.ogg", 1, 1, 35)
+                        Sound.playSFX(smasCharacterGlobals.soundSettings.borisGrenadeLaunchSFX, 1, 1, 35)
                         costume.shootGrenade2Upwards()
                     end
                 end
@@ -374,19 +373,13 @@ function costume.unmutehammer()
     Audio.sounds[25].muted = false
 end
 
+local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
+
 function costume.onTick(p)
     local shootingPowerups = table.map{PLAYER_FIREFLOWER,PLAYER_ICE,PLAYER_HAMMER}
     local isShooting = (plr:mem(0x118,FIELD_FLOAT) >= 100 and plr:mem(0x118,FIELD_FLOAT) <= 118 and shootingPowerups[player.powerup])
     if SaveData.toggleCostumeAbilities == true then
-        --Health system
-        if plr.powerup <= 1 then
-            plr.powerup = 2
-        end
-        if borishp > 3 then
-            borishp = 3
-        end
-        
-        
+
         
         --Switching frames when shooting fireballs as Boris
         if isShooting then
@@ -396,18 +389,14 @@ function costume.onTick(p)
         
         
         --Boris HP Hover System
-        local heartfull3 = Graphics.loadImageResolved("costumes/luigi/GA-Boris/heart.png")
-        if borishp <= 0 then
-            
-        end
-        if borishp == 1 then
+        if smasCharacterHealthSystem.health == 1 then
             Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
         end
-        if borishp == 2 then
+        if smasCharacterHealthSystem.health == 2 then
             Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
             Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
         end
-        if borishp >= 3 then
+        if smasCharacterHealthSystem.health >= 3 then
             Graphics.drawImageWP(heartfull3, player.x - camera.x - 28,  player.y - camera.y - 55, -24)
             Graphics.drawImageWP(heartfull3, player.x - camera.x,  player.y - camera.y - 55, -24)
             Graphics.drawImageWP(heartfull3, player.x - camera.x + 28,  player.y - camera.y - 55, -24)
@@ -415,40 +404,22 @@ function costume.onTick(p)
         
         for index,explosion in ipairs(Animation.get(148)) do --Explosion SFX
             Audio.sounds[22].muted = true
-            SFX.play(smasCharacterGlobals.soundSettings.borisGrenadeExplodeSFX, 1, 1, 25)
             Routine.run(costume.unmutebill)
         end
         for index,explosion in ipairs(NPC.get(291)) do --Throw SFX
             Audio.sounds[25].muted = true
             smasExtraSounds.sounds[105].sfx.volume = 0
-            SFX.play(smasCharacterGlobals.soundSettings.borisGrenadeLaunchSFX, 1, 1, 500)
             Routine.run(costume.unmutehammer)
         end
     end
 end
 
-function costume.hphit()
-    if SaveData.toggleCostumeAbilities then
-        if not player.hasStarman and not player.isMega then
-            hit = true
-            if hit then
-                borishp = borishp - 1
-            end
-            if borishp < 1 then
-                player:kill()
-            end
-        end
-    end
-end
-
-function costume.onPlayerHarm()
-    costume.hphit()
-end
-
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
     costume.grenade = false
-    --smasHud.visible.itemBox = true
+    smasCharacterHealthSystem.defaultStartingHealth = 2
+    smasCharacterHealthSystem.enabled = false
+    smasCharacterHealthSystem.drawHearts = true
 end
 
 Misc.storeLatestCostumeData(costume)

@@ -17,6 +17,8 @@ smasCharacterHealthSystem.heartFullGFX = Graphics.loadImageResolved("hardcoded/h
 smasCharacterHealthSystem.heartEmptyGFX = Graphics.loadImageResolved("hardcoded/hardcoded-36-2.png")
 --The priority for drawing the hearts.
 smasCharacterHealthSystem.drawingPriority = 5
+--Whether we should draw the hearts or not.
+smasCharacterHealthSystem.drawHearts = true
 
 function smasCharacterHealthSystem.onInitAPI()
     registerEvent(smasCharacterHealthSystem,"onPlayerHarm")
@@ -84,25 +86,27 @@ function smasCharacterHealthSystem.onDraw()
         
         if Graphics.isHudActivated() then
             if smasHud.visible.customItemBox then
-                if smasCharacterHealthSystem.health <= 0 then
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                end
-                if smasCharacterHealthSystem.health == 1 then
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                end
-                if smasCharacterHealthSystem.health == 2 then
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                end
-                if smasCharacterHealthSystem.health >= 3 then
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                    Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                if smasCharacterHealthSystem.drawHearts then
+                    if smasCharacterHealthSystem.health <= 0 then
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                    end
+                    if smasCharacterHealthSystem.health == 1 then
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                    end
+                    if smasCharacterHealthSystem.health == 2 then
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                    end
+                    if smasCharacterHealthSystem.health >= 3 then
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                    end
                 end
             end
         end
