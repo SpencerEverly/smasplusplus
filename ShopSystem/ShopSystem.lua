@@ -22,7 +22,7 @@ local ShopMT = {__index = Shop}
 local textplus = require("textplus") -- :))))))))
 
 ShopSystem.font = textplus.loadFont("ShopSystem/shopFont.ini")
-ShopSystem.leastPriority = -1 -- least priority of the shop, the shop will be drawn at priority between (ShopSystem.leastPriority) and (ShopSystem.leastPriority + 0.9)
+ShopSystem.leastPriority = 7 -- least priority of the shop, the shop will be drawn at priority between (ShopSystem.leastPriority) and (ShopSystem.leastPriority + 0.9)
 ShopSystem.selectrFrames = 4 -- frames of the selector
 ShopSystem.selectrFrSpeed = 5.8 -- framespeed of the selector
 ShopSystem.dialogueActive = 0 -- 1 - item out of stock, 2 - not enough coins, 3 - confirmation
