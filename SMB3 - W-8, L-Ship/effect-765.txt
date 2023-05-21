@@ -1,0 +1,5 @@
+[1]
+onTick=TICK_ARC
+gravity=0.45
+maxSpeedY=10
+frames=1

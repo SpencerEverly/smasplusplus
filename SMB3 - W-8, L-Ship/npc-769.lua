@@ -1,10 +1,9 @@
 local npcManager = require("npcManager")
-local npcutils = require("npcs/npcutils")
 
-local DiagCannon = {}
+local DownDiagCannon = {}
 local npcID = NPC_ID
 
-local DiagCannonSettings = {
+local DownDiagCannonSettings = {
 	id = npcID,
 	gfxheight = 32,
 	gfxwidth = 32,
@@ -21,7 +20,7 @@ local DiagCannonSettings = {
 	playerblocktop = true,
 	nohurt=true,
 	nogravity = true,
-	noblockcollision = false,
+	noblockcollision = true,
 	nofireball = false,
 	noiceball = false,
 	noyoshi = true,
@@ -31,24 +30,24 @@ local DiagCannonSettings = {
 	spinjumpsafe = false,
 	harmlessgrab = false,
 	harmlessthrown = true,
-	shootrate = 295
+	shootrate = 195
 }
 
-npcManager.setNpcSettings(DiagCannonSettings)
+npcManager.setNpcSettings(DownDiagCannonSettings)
 npcManager.registerDefines(npcID,{NPC.UNHITTABLE})
 
-function DiagCannon.onInitAPI()
-	npcManager.registerEvent(npcID, DiagCannon,"onTickNPC")
-	npcManager.registerEvent(npcID, DiagCannon,"onStartNPC")
+function DownDiagCannon.onInitAPI()
+	npcManager.registerEvent(npcID, DownDiagCannon,"onTickNPC")
+	npcManager.registerEvent(npcID, DownDiagCannon,"onStartNPC")
 end
 
-function DiagCannon.onStartNPC(v)
+function DownDiagCannon.onStartNPC(v)
 	if v:mem(0xDE,FIELD_WORD) == 0 then
 		v:mem(0xDE,FIELD_WORD,765)
 	end
 end
 
-function DiagCannon.onTickNPC(v)
+function DownDiagCannon.onTickNPC(v)
 	if Defines.levelFreeze then return end
 	
 	local data = v.data
@@ -70,26 +69,24 @@ function DiagCannon.onTickNPC(v)
 	else
 		data.waitingframe = data.waitingframe + 1
 	end
-    
-    npcutils.applyLayerMovement(v)
-    
 	if data.waitingframe > NPC.config[npcID].shootrate then
-		v1 = NPC.spawn(v:mem(0xDE,FIELD_WORD),v.x+(NPC.config[npcID].width*v.direction),v.y-NPC.config[npcID].height,player.section)
+		v1 = NPC.spawn(v:mem(0xDE,FIELD_WORD),v.x+(NPC.config[npcID].width*v.direction),v.y+NPC.config[npcID].height,player.section)
 		v1.direction = v.direction
 		v1.speedX = 3*v.direction
-		v1.speedY = -3
+		v1.speedY = 3
 		if Player.count() >= 2 then
 			if player.section ~= player2.section then
-				v2 = NPC.spawn(v:mem(0xDE,FIELD_WORD),v.x+(NPC.config[npcID].width*v.direction),v.y-NPC.config[npcID].height,player2.section)
+				v2 = NPC.spawn(v:mem(0xDE,FIELD_WORD),v.x+(NPC.config[npcID].width*v.direction),v.y+NPC.config[npcID].height,player2.section)
 				v2.direction = v.direction
 				v2.speedX = 3*v.direction
-				v2.speedY = -3
+				v2.speedY = 3
 			end
 		end
-		Animation.spawn(10,v.x+(NPC.config[npcID].width*v.direction)/2,v.y-NPC.config[npcID].height/2)
+		Animation.spawn(10,v.x+(NPC.config[npcID].width*v.direction)/2,v.y+NPC.config[npcID].height/2)
 		SFX.play(22)
 		data.waitingframe = 0
 	end
+	v.speedY = 0
 end
 
-return DiagCannon
+return DownDiagCannon
