@@ -464,6 +464,8 @@ function smasCharacterChanger.onDraw()
     smasCharacterChanger.addCharacter("Baldi","Baldi's Basics (PC)",2,"BALDISBASICS")
     smasCharacterChanger.addCharacter("Rosa (Isabella)","The Rosa Game (Working Title)",1,"ROSA-ISABELLA")
     smasCharacterChanger.addCharacter("Zero (SMBX OC)","Zero Unhope",1,"ZERO-SONIC")
+    smasCharacterChanger.addCharacter("Homer Simpson","The Simpsons",5,"TS-HOMERSIMPSON")
+    smasCharacterChanger.addCharacter("Peter Griffin","Family Guy",5,"FG-PETERGRIFFIN")
 
     --***VARIANTS***
 

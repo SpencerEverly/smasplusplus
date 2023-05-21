@@ -1,0 +1,3 @@
+Original sprite sheet by MisterMike on TSR, imported by Murphmario
+
+Uniform player offsets originally by MrDoubleA

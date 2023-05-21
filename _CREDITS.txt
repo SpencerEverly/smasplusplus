@@ -134,8 +134,10 @@ Costumes:
 - Modern Mario #2 by DarSonic55
 - Shantae by Raul Hedgebomber (Calibration redone by Spencer Everly)
 - SMA1 Luigi by Nate-O (Small, big, fire, and ice poses)
-- Zero by ℤ𝖊𝖗𝖔 𝖀𝖓𝖍𝖔𝖕𝖊
+- Zero by ℤ𝖊𝖗𝖔 𝖀𝖓𝖍𝖔𝖕𝖊.
 - Rosa by isabella ( https://www.youtube.com/channel/UCKIY7u-Veeunotm7HRcaeGA )
+- Peter Griffin by Disney, FOX, and MisterMike on The Spriters Resource, which was imported by Murphmario.
+- Homer Simpson is by Disney, FOX, and RaguRando on The Spriters Resource, which were based on Peter Griffin by MisterMike.
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
