@@ -1,4 +1,6 @@
 local pm = require("playerManager")
+local smasExtraSounds = require("smasExtraSounds")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 
