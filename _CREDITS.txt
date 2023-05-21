@@ -67,6 +67,7 @@ Packs/Sprites are by:
 - larsenv
 - bredi
 - Link
+- SuperLuigiBros
 
 ----Costume/Character Credits----
 
