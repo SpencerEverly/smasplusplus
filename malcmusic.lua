@@ -223,7 +223,7 @@ function malcmusic.onTick()
                 prevSnowState = snowState
                 prevPreviousState = prevState
             end
-            if malcmusic.holiday == false then
+            if not malcmusic.holiday then
                 if acmusrng == "accf" then
                     if os.date("%H") == "00" then
                         Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_snow.ogg"
@@ -594,9 +594,7 @@ function malcmusic.onTick()
         end
         if SaveData.dateplayedweather == "rain" then
             Routine.run(rainrefresh)
-            if rainactivated == true then
-                local rainSections = {[0] = true,[6] = true,[9] = true,[10] = true,[11] = true}
-                local insideSections = {[1] = true,[2] = true,[3] = true,[4] = true,[5] = true,[7] = true,[8] = true,[12] = true,[13] = true,[14] = true}
+            if rainactivated then
                 if rainSections[player.section] then
                     rainState = true
                     prevState = false
@@ -638,7 +636,7 @@ function malcmusic.onTick()
                     currentSfxOutRain = nil
                 end
             end
-            if malcmusic.holiday == false then
+            if not malcmusic.holiday then
                 if acmusrng == "accf" then
                     if os.date("%H") == "00" then
                         Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am_rain.ogg"
@@ -1008,7 +1006,7 @@ function malcmusic.onTick()
             end
         end
         if SaveData.dateplayedweather == "sunny" then
-            if malcmusic.holiday == false then
+            if not malcmusic.holiday then
                 if acmusrng == "accf" then
                     if os.date("%H") == "00" then
                         Section(0).musicPath = "_OST/Animal Crossing - City Folk/00-00_12_am.ogg"
