@@ -7,7 +7,7 @@ local colliders = require("colliders")
 local savestate = require("savestate")
 local pm = require("playerManager")
 local ed = require("expandedDefines")
---local graphx = require("graphX")
+local smasFunctions = require("smasFunctions")
 
 local costume = {}
 local startedAsBomberman = false

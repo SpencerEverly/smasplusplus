@@ -16,6 +16,7 @@ local colliders = require("colliders")
 local rng = require("rng")
 local pm = require("playerManager")
 local imagic = require("imagic")
+local smasFunctions = require("smasFunctions")
 local smasHud = require("smasHud")
 local smasTables = require("smasTables")
 
