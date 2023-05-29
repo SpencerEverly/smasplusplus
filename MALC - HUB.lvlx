@@ -12420,6 +12420,9 @@ ID:466;X:-197632;Y:-200128;D:-1;MG:"My mom is really cool! I'm glad there's a da
 ID:466;X:-196608;Y:-200128;D:-1;MG:"Show your mom appreciation sometime.<page>She'll love it.";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
 ID:466;X:-195616;Y:-200128;D:-1;MG:"My mom passed away years ago\, but I remember her as a good mom in my memories.<page>*sigh*...";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
 ID:466;X:-194368;Y:-200128;D:-1;MG:"I got her some sweets in the store.<page>Why I'm waiting until the right time to give them to her is beyond my comprehension.";FD:1;NM:1;LR:"Stage Extra - Mother's Day";
+ID:466;X:-199664;Y:-200128;D:-1;MG:"Happy Memorial Day!<page>Businesses are still open\, but other than that it's great to celebrate the veterans back in Earth.";FD:1;NM:1;LR:"Stage Extra - Memorial Day";
+ID:466;X:-197360;Y:-200128;D:-1;MG:"Not a whole lot is in town due to them gathering up and eating with family.<page>I'm just here because I had plans. Oh well.";FD:1;NM:1;LR:"Stage Extra - Memorial Day";
+ID:466;X:-195616;Y:-200128;D:-1;MG:"The True Ending... do you have enough stars yet?<page>If you do then you can end the game at any time!";FD:1;NM:1;LR:"Stage Extra - Memorial Day";
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;
@@ -12545,6 +12548,7 @@ LR:"Stage Extra - Easter";HD:1;
 LR:"Stage Extra - Easter (3 PM)";HD:1;
 LR:"Stage Extra - Labor Day";HD:1;
 LR:"Stage Extra - Mother's Day";HD:1;
+LR:"Stage Extra - Memorial Day";HD:1;
 LR:"Stage Extra - Halloween";HD:1;
 LR:"Stage Extra - UT Chara Genoside";HD:1;
 LR:"True Ending - Fail Safe 1";

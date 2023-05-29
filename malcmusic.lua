@@ -63,6 +63,108 @@ function rainrefresh()
     rainactivated = true
 end
 
+function malcmusic.doRainWeather()
+    Routine.run(rainrefresh)
+    if rainactivated then
+        if rainSections[player.section] then
+            rainState = true
+            prevState = false
+        elseif insideSections[player.section] then
+            rainState = false
+            prevState = true
+        end
+        if (rainState ~= prevRainState) or (prevSection ~= newSection) then
+            if rainState then
+                Section(player.section).effects.weather = WEATHER_RAIN
+                currentSfxOutRain = SFX.play(rainoutsidesfx, 1, 0)
+                
+                if currentSfxInRain then
+                    currentSfxInRain:fadeout(50)
+                    currentSfxInRain = nil
+                end
+            elseif prevState then
+                currentSfxInRain = SFX.play(raininsidesfx, 1, 0)
+                
+                if currentSfxOutRain then
+                    currentSfxOutRain:fadeout(50)
+                    currentSfxOutRain = nil
+                end
+            end
+            prevSection = player.section
+            newSection = Section.getIdxFromCoords(player.x, player.y)
+            prevRainState = rainState
+            prevPreviousState = prevState
+            prevInsideState = insideState
+        end
+    end
+    if not rainactivated then
+        if currentSfxInRain then
+            currentSfxInRain:fadeout(50)
+            currentSfxInRain = nil
+        end
+        if currentSfxOutRain then
+            currentSfxOutRain:fadeout(50)
+            currentSfxOutRain = nil
+        end
+    end
+end
+
+function malcmusic.doSnowWeather()
+    if player.section == 0 then
+        snowState = true
+        prevState = false
+    elseif player.section == 1 then
+        snowState = false
+        prevState = true
+    elseif player.section == 2 then
+        snowState = false
+        prevState = true
+    elseif player.section == 3 then
+        snowState = false
+        prevState = true
+    elseif player.section == 4 then
+        snowState = false
+        prevState = true
+    elseif player.section == 6 then
+        snowState = true
+        prevState = false
+    elseif player.section == 7 then
+        snowState = false
+        prevState = true
+    elseif player.section == 8 then
+        snowState = false
+        prevState = true
+    elseif player.section == 9 then
+        snowState = true
+        prevState = false
+    elseif player.section == 10 then
+        snowState = true
+        prevState = false
+    elseif player.section == 11 then
+        snowState = true
+        prevState = false
+    elseif player.section == 12 then
+        snowState = false
+        prevState = true
+    elseif player.section == 13 then
+        snowState = false
+        prevState = true
+    elseif player.section == 14 then
+        snowState = false
+        prevState = true
+    end
+    if (snowState ~= prevSnowState) or (prevSection ~= player.section) then
+        if snowState then
+            Section(player.section).effects.weather = WEATHER_SNOW
+        elseif prevState then
+            --Nothing
+        end
+        prevSection = player.section
+        prevSnowState = snowState
+        prevPreviousState = prevState
+    end
+end
+
 function malcmusic.onStart()
     
 end
@@ -70,40 +172,6 @@ end
 function malcmusic.onTick()
     for i = 0,20 do
         local SectionAll = Section(i)
-        --[[if Time.month() == 3 and Time.day() == 17 then --St. Patrick's Day
-            if malcmusic.holiday then
-                SectionAll.musicPath = "_OST/Me and Larry City/St. Patrick's Day.ogg"
-            end
-        end
-        
-        
-        if Time.month() == 4 and Time.day() == 4 then --Spencer Everly Day (Foundation of my YouTube channel)
-            if malcmusic.holiday then
-                SectionAll.musicPath = "_OST/Nintendo Land/BGM_TTL_MAIN_EVENING (channels 0 and 1).ogg"
-            end
-        end
-        
-        
-        if Time.month() == SaveData.eastermonth and Time.day() == SaveData.easterday then --Easter Sunday
-            if malcmusic.holiday then
-                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_EASTER (channels 0 and 1).ogg"
-            end
-        end
-        
-        
-        if Time.month() == 4 and Time.day() == 20 then --Weed day (420)
-            if malcmusic.holiday then
-                SectionAll.musicPath = "_OST/All Stars Secrets/smok wed everyda.ogg"
-            end
-        end
-        
-        
-        if Time.month() == 9 and Time.day() == Time.weekendOrder("Monday", 9)[1] then --Labor Day
-            if malcmusic.holiday then
-                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
-            end
-        end]]
-        
         
         if Time.hour() ~= hourChanger[Time.hour()] then
             Sound.playSFX("hour-change.ogg")
@@ -113,116 +181,12 @@ function malcmusic.onTick()
         
         if Time.month() == 12 and Time.day() == 25 then --Christmas
             if malcmusic.holiday then
-                if player.section == 0 then
-                    snowState = true
-                    prevState = false
-                elseif player.section == 1 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 2 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 3 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 4 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 6 then
-                    snowState = true
-                    prevState = false
-                elseif player.section == 7 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 8 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 9 then
-                    snowState = true
-                    prevState = false
-                elseif player.section == 10 then
-                    snowState = true
-                    prevState = false
-                elseif player.section == 11 then
-                    snowState = true
-                    prevState = false
-                elseif player.section == 12 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 13 then
-                    snowState = false
-                    prevState = true
-                elseif player.section == 14 then
-                    snowState = false
-                    prevState = true
-                end
-                if (snowState ~= prevSnowState) or (prevSection ~= player.section) then
-                    if snowState then
-                        Section(player.section).effects.weather = WEATHER_SNOW
-                    elseif prevState then
-                        --Nothing
-                    end
-                    prevSection = player.section
-                    prevSnowState = snowState
-                    prevPreviousState = prevState
-                end
-                SectionAll.musicPath = "_OST/GoAnimate/Old Songs/We Wish You a Merry Christmas (Jazz Classic).mp3"
+                malcmusic.doSnowWeather()
             end
         end
+        
         if SaveData.dateplayedweather == "snow" then
-            if player.section == 0 then
-                snowState = true
-                prevState = false
-            elseif player.section == 1 then
-                snowState = false
-                prevState = true
-            elseif player.section == 2 then
-                snowState = false
-                prevState = true
-            elseif player.section == 3 then
-                snowState = false
-                prevState = true
-            elseif player.section == 4 then
-                snowState = false
-                prevState = true
-            elseif player.section == 6 then
-                snowState = true
-                prevState = false
-            elseif player.section == 7 then
-                snowState = false
-                prevState = true
-            elseif player.section == 8 then
-                snowState = false
-                prevState = true
-            elseif player.section == 9 then
-                snowState = true
-                prevState = false
-            elseif player.section == 10 then
-                snowState = true
-                prevState = false
-            elseif player.section == 11 then
-                snowState = true
-                prevState = false
-            elseif player.section == 12 then
-                snowState = false
-                prevState = true
-            elseif player.section == 13 then
-                snowState = false
-                prevState = true
-            elseif player.section == 14 then
-                snowState = false
-                prevState = true
-            end
-            if (snowState ~= prevSnowState) or (prevSection ~= player.section) then
-                if snowState then
-                    Section(player.section).effects.weather = WEATHER_SNOW
-                elseif prevState then
-                    --Nothing
-                end
-                prevSection = player.section
-                prevSnowState = snowState
-                prevPreviousState = prevState
-            end
+            malcmusic.doSnowWeather()
             if not malcmusic.holiday then
                 if acmusrng == "accf" then
                     if os.date("%H") == "00" then
@@ -593,49 +557,7 @@ function malcmusic.onTick()
             end
         end
         if SaveData.dateplayedweather == "rain" then
-            Routine.run(rainrefresh)
-            if rainactivated then
-                if rainSections[player.section] then
-                    rainState = true
-                    prevState = false
-                elseif insideSections[player.section] then
-                    rainState = false
-                    prevState = true
-                end
-                if (rainState ~= prevRainState) or (prevSection ~= newSection) then
-                    if rainState then
-                        Section(player.section).effects.weather = WEATHER_RAIN
-                        currentSfxOutRain = SFX.play(rainoutsidesfx, 1, 0)
-                        
-                        if currentSfxInRain then
-                            currentSfxInRain:fadeout(50)
-                            currentSfxInRain = nil
-                        end
-                    elseif prevState then
-                        currentSfxInRain = SFX.play(raininsidesfx, 1, 0)
-                        
-                        if currentSfxOutRain then
-                            currentSfxOutRain:fadeout(50)
-                            currentSfxOutRain = nil
-                        end
-                    end
-                    prevSection = player.section
-                    newSection = Section.getIdxFromCoords(player.x, player.y)
-                    prevRainState = rainState
-                    prevPreviousState = prevState
-                    prevInsideState = insideState
-                end
-            end
-            if rainactivated == false then
-                if currentSfxInRain then
-                    currentSfxInRain:fadeout(50)
-                    currentSfxInRain = nil
-                end
-                if currentSfxOutRain then
-                    currentSfxOutRain:fadeout(50)
-                    currentSfxOutRain = nil
-                end
-            end
+            malcmusic.doRainWeather()
             if not malcmusic.holiday then
                 if acmusrng == "accf" then
                     if os.date("%H") == "00" then
