@@ -482,18 +482,18 @@ if SMBX_VERSION == VER_SEE_MOD then
     end
     function warpTransition.onWarpEnter(eventObj,warp,playerObj)
         if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-            if warpTransition.currentTransitionType == warpTransition.TRANSITION_NONE and warp then
+            --[[if warpTransition.currentTransitionType == warpTransition.TRANSITION_NONE and warp then
                 if playerObj.idx > 1 then --Just to be safe
                     eventObj.cancelled = true
                 end
-            end
+            end]]
         end
     end
     function warpPlayerToOther(warp,playerObj)
         if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             player:mem(0x140,FIELD_WORD,100)
             if Player.count() >= 2 then
-                for i = 2,200 do
+                for i = 1,200 do
                     if Player(i).isValid then
                         Player(i):mem(0x140,FIELD_WORD,100)
                         Player(i):teleport(playerObj.x - 32, playerObj.y - 32)

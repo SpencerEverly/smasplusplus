@@ -484,6 +484,26 @@ function Sound.changeMusicRNG(songTable, sectionNumber)
     end
 end
 
+function Sound.muteChannel(channel)
+    if SMBX_VERSION == VER_SEE_MOD then
+        return Audio.MusicTrackMute(channel - 1)
+    else
+        return
+    end
+end
+
+function Sound.unmuteChannel(channel)
+    if SMBX_VERSION == VER_SEE_MOD then
+        return Audio.MusicTrackUnmute(channel - 1)
+    else
+        return
+    end
+end
+
+
+
+
+
 function Sound.onDraw()
     
 end

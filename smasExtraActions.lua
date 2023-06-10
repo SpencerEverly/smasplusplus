@@ -5,6 +5,7 @@ local maxPowerupID = 7 --Used for to make sure we're using powerup slots up to 7
 smasExtraActions.enableLongJump = false --Enable this to add a long jump ability for your character. Default is false.
 smasExtraActions.enableFasterClimbing = true --Enable this to add faster climbing. In order to climb faster, just hold run while you climb!
 smasExtraActions.enableSpinjumpBounce = true --Enable this to add spinjump bouncing, like when holding jump when stomping on an enemy, except you're spinjumping. This ability is similar to the one found in the Super Mario World Super Mario Maker 2 theme.
+smasExtraActions.enableFastWarping = true --Enable this to warp faster when going up or down, similar to Super Mario Bros. 3.
 
 --**Long Jump (Settings)**
 smasExtraActions.isLongJumping = false --Enabled when the long jump was executed, disabled when the jump ends
@@ -28,6 +29,9 @@ smasExtraActions.longJumpAnimationMaxFrames = 1 --Change this to set the maximum
 
 --**Spin Bounce (Settings)**
 smasExtraActions.spinBounceHasStompedNPC = {} --Used for detecting the player that has stomped an NPC while spin jumping.
+
+--**Fast Warping (Settings)**
+smasExtraActions.fastWarpSpeed = 1.2 --Used for speeding up warping when going up/down
 
 function smasExtraActions.onInitAPI()
     registerEvent(smasExtraActions,"onInputUpdate")
@@ -128,6 +132,41 @@ function smasExtraActions.onTick()
                 smasExtraActions.handleSpinBounce(p)
             end
             
+            
+            
+            
+            
+            if smasExtraActions.enableFastWarping then
+                if p.forcedState == FORCEDSTATE_PIPE then
+                    local warp = Warp(p:mem(0x15E,FIELD_WORD) - 1)
+                    
+                    if warp ~= nil then
+                        local direction
+                        local exiting = false
+                        if p.forcedTimer == 0 then
+                            direction = warp.entranceDirection
+                            exiting = false
+                        elseif p.forcedTimer == 2 then
+                            direction = warp.exitDirection
+                            exiting = true
+                        end
+                        
+                        if not exiting then
+                            if direction == 1 then
+                                p.y = p.y - smasExtraActions.fastWarpSpeed
+                            elseif direction == 3 then
+                                p.y = p.y + smasExtraActions.fastWarpSpeed
+                            end
+                        elseif exiting then
+                            if direction == 1 then
+                                p.y = p.y + smasExtraActions.fastWarpSpeed
+                            elseif direction == 3 then
+                                p.y = p.y - smasExtraActions.fastWarpSpeed
+                            end
+                        end
+                    end
+                end
+            end
             
             
             

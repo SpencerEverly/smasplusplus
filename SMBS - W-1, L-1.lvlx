@@ -1,8 +1,8 @@
 HEAD
-TL:"Super Mario Bros. Spencer\: World 1-1";SZ:1;CPID:"SMBX2";
+TL:"Super Mario Bros. Spencer\: World 1-1";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-192832;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Overworld.ogg";BG:34;
+SC:0;L:-200000;R:-192832;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Overworld.ogg|m1\;c2\;r2";BG:34;
 SC:1;L:-180000;R:-178496;T:-180736;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Caves.ogg";BG:39;
 SC:2;L:-160000;R:-158176;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Star.ogg";BG:31;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
