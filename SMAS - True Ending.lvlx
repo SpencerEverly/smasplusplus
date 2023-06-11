@@ -7,7 +7,7 @@ SC:1;L:-180000;R:-179200;T:-183168;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spe
 SC:2;L:-163680;R:-159200;T:-160800;B:-160000;MZ:24;MF:"_OST/Super Mario All-Stars++ (Beta)/Battle Plains.ogg";BG:8;
 SC:3;L:-140000;R:-136000;T:-140608;B:-140000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Caves.ogg";BG:30;
 SC:4;L:-120000;R:-119200;T:-127424;B:-120000;MZ:24;MF:"_OST/All Stars Secrets/Finale.ogg";BG:29;
-SC:5;L:-100000;R:-96224;T:-101600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Overworld.ogg";BG:1;
+SC:5;L:-100000;R:-96224;T:-101600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Overworld.ogg|m1\;c2\;r2";BG:1;
 SC:6;L:-80000;R:-77568;T:-80600;B:-80000;MZ:24;MF:"_OST/Undertale/mus_smallshock.ogg";BG:9;
 SC:7;L:-60000;R:-59200;T:-62208;B:-60000;MZ:24;MF:"_OST/Undertale/mus_smallshock.ogg";BG:54;
 SC:8;L:-40000;R:-39200;T:-40600;B:-40000;MZ:24;MF:"_OST/All Stars Secrets/End Level Music.ogg";BG:8;

@@ -14,7 +14,10 @@ musicalChairs.musicList = {
     },
     
     --Super Mario Bros. Spencer
-    ["Overworld"] = {
+    ["Overworld (SMBSE)"] = {
+        yoshiTrack = 2,
+    },
+    ["Athletic (SMBSE)"] = {
         yoshiTrack = 2,
     },
     
@@ -32,13 +35,11 @@ end
 function musicalChairs.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated and musicalChairs.enabled then
-            for _,p in ipairs(Player.get()) do
-                if musicalChairs.musicList[Audio.MusicTitle()] ~= nil then
-                    if p.mount == MOUNT_YOSHI then
-                        Sound.unmuteChannel(musicalChairs.musicList[Audio.MusicTitle()].yoshiTrack)
-                    else
-                        Sound.muteChannel(musicalChairs.musicList[Audio.MusicTitle()].yoshiTrack)
-                    end
+            if musicalChairs.musicList[Audio.MusicTitle()] ~= nil then
+                if player.mount == MOUNT_YOSHI then
+                    Sound.unmuteChannel(musicalChairs.musicList[Audio.MusicTitle()].yoshiTrack)
+                else
+                    Sound.muteChannel(musicalChairs.musicList[Audio.MusicTitle()].yoshiTrack)
                 end
             end
         end
