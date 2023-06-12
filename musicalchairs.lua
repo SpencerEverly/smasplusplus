@@ -20,6 +20,9 @@ musicalChairs.musicList = {
     ["Athletic (SMBSE)"] = {
         yoshiTrack = 2,
     },
+    ["Boss Battle (SMBSE)"] = {
+        yoshiTrack = 2,
+    },
     
     --Extra tracks
     ["STRM_BGM_CHIJOU.ogg"] = {
