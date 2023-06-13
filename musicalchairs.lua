@@ -5,7 +5,7 @@
 local musicalChairs = {}
 
 --If enabled, Yoshi beats will be active.
-musicalChairs.enabled = false
+musicalChairs.enabled = true
 musicalChairs.musicList = {
     
     --Super Mario World
