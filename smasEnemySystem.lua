@@ -3,6 +3,7 @@ local smasEnemySystem = {}
 local inspect = require("ext/inspect")
 
 function smasEnemySystem.onInitAPI()
+    registerEvent(smasEnemySystem,"onStart")
     registerEvent(smasEnemySystem,"onTick")
 end
 
@@ -11,9 +12,15 @@ local heldNPC
 smasEnemySystem.enableWallNPCFix = false --Enable this to prevent killing NPCs when held and let go right smack by a wall.
 smasEnemySystem.enableTanookiThwompAndDiscKilling = true --Enable this to kill Thwomps and/or Roto-Discs while active as a statue.
 smasEnemySystem.enableShellCoinGrabbing = true --Enable to let shells collect coins, dragon coins, cherries, etc.
-smasEnemySystem.enableTurtleTipping = true --Enable this to activate the famous Infinite 1UP trick, from SMB1 and onwards
+smasEnemySystem.enableTurtleTipping = false --Enable this to activate the famous Infinite 1UP trick, from SMB1 and onwards
 
 smasEnemySystem.shellTipPointIndicator = 1
+
+function smasEnemySystem.onStart()
+    --[[if table.icontains(smasTables.__smb1Levels,Level.filename()) then
+        smasEnemySystem.enableTurtleTipping = true
+    end]]
+end
 
 function smasEnemySystem.onTick()
     
