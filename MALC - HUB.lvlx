@@ -12423,6 +12423,12 @@ ID:466;X:-194368;Y:-200128;D:-1;MG:"I got her some sweets in the store.<page>Why
 ID:466;X:-199664;Y:-200128;D:-1;MG:"Happy Memorial Day!<page>Businesses are still open\, but other than that it's great to celebrate the veterans back in Earth.";FD:1;NM:1;LR:"Stage Extra - Memorial Day";
 ID:466;X:-197360;Y:-200128;D:-1;MG:"Not a whole lot is in town due to them gathering up and eating with family.<page>I'm just here because I had plans. Oh well.";FD:1;NM:1;LR:"Stage Extra - Memorial Day";
 ID:466;X:-195616;Y:-200128;D:-1;MG:"The True Ending... do you have enough stars yet?<page>If you do then you can end the game at any time!";FD:1;NM:1;LR:"Stage Extra - Memorial Day";
+ID:466;X:-199632;Y:-200128;D:-1;MG:"Happy Father's Day!<page>It's nice to celebrate a holiday where father's get their own holiday.";FD:1;NM:1;LR:"Stage Extra - Father's Day";
+ID:466;X:-198624;Y:-200128;D:-1;MG:"I am a father of one child\, and I gotta say\, I love how we get a day off doing things.<page>It's great to have a child that's growing to become a good son.";LR:"Stage Extra - Father's Day";
+ID:466;X:-197264;Y:-200128;D:-1;MG:"My dad... he's good.<page>Don't wanna upset him with what I usually say to him though...";LR:"Stage Extra - Father's Day";
+ID:466;X:-196272;Y:-200128;D:-1;MG:"Daddies are good.";LR:"Stage Extra - Father's Day";
+ID:466;X:-195328;Y:-200128;D:-1;MG:"The True Ending still stands.<page>If you don't have enough stars\, why are you standing here for?";LR:"Stage Extra - Father's Day";
+ID:466;X:-194032;Y:-200128;D:-1;MG:"While the dads have their own Holiday\, why can't we adults who aren't fathers have a holiday?!<page>We can definitely deserve a break too you know!";LR:"Stage Extra - Father's Day";
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;
@@ -12549,6 +12555,7 @@ LR:"Stage Extra - Easter (3 PM)";HD:1;
 LR:"Stage Extra - Labor Day";HD:1;
 LR:"Stage Extra - Mother's Day";HD:1;
 LR:"Stage Extra - Memorial Day";HD:1;
+LR:"Stage Extra - Father's Day";HD:1;
 LR:"Stage Extra - Halloween";HD:1;
 LR:"Stage Extra - UT Chara Genoside";HD:1;
 LR:"True Ending - Fail Safe 1";

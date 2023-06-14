@@ -146,6 +146,15 @@ local function HolidayMemorialDay()
     MothersDay:show(true)
 end
 
+local function HolidayFathersDay()
+    local ClosedBusinesses = Layer.get("BusinessesClosed")
+    local Construction = Layer.get("Stage 5 - Construction")
+    local FathersDay = Layer.get("Stage Extra - Father's Day")
+    ClosedBusinesses:show(true)
+    Construction:show(true)
+    FathersDay:show(true)
+end
+
 local function HolidayHalloween()
     local ClosedBusinesses = Layer.get("BusinessesClosed")
     local Construction = Layer.get("Stage 5 - Construction")
@@ -343,6 +352,15 @@ function runHubUpdate()
             if malcmusic.holiday then
                 SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
                 HolidayMemorialDay()
+            end
+        end
+        
+        
+        if Time.month() == 6 and Time.day() == Time.weekendOrder("Sunday", 6)[3] then --Father's Day
+            malcmusic.holiday = true
+            if malcmusic.holiday then
+                SectionAll.musicPath = "_OST/Animal Crossing - New Leaf/STRM_BGM_EVT_GANTAN.ogg"
+                HolidayFathersDay()
             end
         end
         
