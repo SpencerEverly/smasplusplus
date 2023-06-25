@@ -896,6 +896,29 @@ function Playur.splitScreenType()
     return mem(0x00B25132, FIELD_WORD)
 end
 
+function Playur.setHeldNPCPosition(p, x, y)
+    local holdingNPC = p.holdingNPC
+
+    holdingNPC.x = x
+    holdingNPC.y = y
+
+
+    if holdingNPC.id == 49 and holdingNPC.ai2 > 0 then -- toothy pipe
+        -- You'd think that redigit's pointers work, but nope! this has to be done instead
+        for _,toothy in NPC.iterate(50,p.section) do
+            if toothy.ai1 == p.idx then
+                if p.direction == DIR_LEFT then
+                    toothy.x = holdingNPC.x - toothy.width
+                else
+                    toothy.x = holdingNPC.x + holdingNPC.width
+                end
+
+                toothy.y = holdingNPC.y
+            end
+        end
+    end
+end
+
 --[[for i = 1,maxPlayers do
     Playur[i] = {}
     Playur[i].x                       = 0

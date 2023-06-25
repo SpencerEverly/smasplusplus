@@ -3311,8 +3311,8 @@ do
             local frame = math.floor(lunatime.tick() / config.framespeed) % config.frames
 
             smwMap.doBasicGlDrawSetup(texture,x - smwMap.camera.x,y - smwMap.camera.y,width,height,0,frame*height,width,height)
-
-            basicGlDrawArgs.priority = -90
+            
+            basicGlDrawArgs.priority = BGO.config[v.id].priority
 
             Graphics.glDraw(basicGlDrawArgs)
         end

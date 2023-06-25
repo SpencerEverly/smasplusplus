@@ -47,7 +47,7 @@ function onDraw()
 end
 
 function onTick()
-    for i=1, 91 do
+    for i = 1,91 do
         Audio.sounds[i].muted = true
     end
     player:setFrame(50) --Prevent the player from showing up on the boot menu
