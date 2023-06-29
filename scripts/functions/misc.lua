@@ -1004,7 +1004,7 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
     
     local eventObj = {cancelled = false}
     
-    EventManager.callEvent("onPOW",eventObj,shakeNumber,supressSound,letCoinsFall,eventName)
+    EventManager.callEvent("onPOWSMAS",eventObj,shakeNumber,supressSound,letCoinsFall,eventName)
     
     if not eventObj.cancelled then
         if not supressSound then
@@ -1022,7 +1022,7 @@ function Misc.doPOW(shakeNumber, supressSound, letCoinsFall, eventName) --Redoin
         
         screenShakeTally = shakeNumber
         
-        EventManager.callEvent("onPostPOW",shakeNumber,supressSound,letCoinsFall,eventName)
+        EventManager.callEvent("onPostPOWSMAS",shakeNumber,supressSound,letCoinsFall,eventName)
     end
 end
 

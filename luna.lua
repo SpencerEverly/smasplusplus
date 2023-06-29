@@ -273,8 +273,8 @@ Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostPlaySFX"] = true
 Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostChangeMusic"] = true
-Misc.LUNALUA_EVENTS_TBL["onPOW"] = true
-Misc.LUNALUA_EVENTS_TBL["onPostPOW"] = true
+Misc.LUNALUA_EVENTS_TBL["onPOWSMAS"] = true
+Misc.LUNALUA_EVENTS_TBL["onPostPOWSMAS"] = true
 Misc.LUNALUA_EVENTS_TBL["onEarthquake"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostEarthquake"] = true
 Misc.LUNALUA_EVENTS_TBL["onCheatActivate"] = true
@@ -732,7 +732,7 @@ function onTick()
     end
     --Dumb fix pertaining to ground pounding with a Yoshi and insta-warps not working as intended
     for l,p in ipairs(Player.get()) do
-        --If the warp cooldown is 0 and we're ground pounding with a Yoshi...
+        --If the warp cooldown is less than -1 and we're ground pounding with a Yoshi (With the alternativeInstantWarpCooldown setting being 0)...
         if p:mem(0x15C,FIELD_WORD) <= -1 and p:mem(0x5C,FIELD_BOOL) and alternativeInstantWarpCooldown == 0 then
             -- Instant/portal warps
 

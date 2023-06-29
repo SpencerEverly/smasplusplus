@@ -3,8 +3,9 @@ local colliders = require("colliders")
 local smasExtraSounds = require("smasExtraSounds")
 local starman = require("starman/star")
 local smasBooleans = require("smasBooleans")
+local smasFunctions = require("smasFunctions")
 
-local customNPC = {}
+local flagpoleSMAS = {}
 local npcID = NPC_ID
 
 local exiting = false
@@ -14,7 +15,7 @@ local castlePlayerTicks = 65
 local castlePlayerX = 0
 local castlePlayerY = 0
 
-local customNPCSettings = {
+local flagpoleSMASSettings = {
     id = npcID,
     gfxheight = 32,
     gfxwidth = 32,
@@ -32,18 +33,34 @@ local customNPCSettings = {
 
 local castles = {16, 17}
 
-npcManager.setNpcSettings(customNPCSettings)
+npcManager.setNpcSettings(flagpoleSMASSettings)
 
-function customNPC.onInitAPI()
-    npcManager.registerEvent(npcID, customNPC, "onTickNPC")
-    registerEvent(customNPC, "onPlayerHarm")
-    registerEvent(customNPC, "onPlayerKill")
-    registerEvent(customNPC, "onDraw")
+function flagpoleSMAS.onInitAPI()
+    npcManager.registerEvent(npcID, flagpoleSMAS, "onTickNPC")
+    registerEvent(flagpoleSMAS, "onPlayerHarm")
+    registerEvent(flagpoleSMAS, "onPlayerKill")
+    registerEvent(flagpoleSMAS, "onDraw")
 end
 
 local plr
 
-function customNPC.onTickNPC(v)
+function flagpoleSMAS.activateFlagpole(p, v)
+    local data = v.data
+    data.state = 1
+    smasBooleans.musicMuted = true
+    Audio.MusicVolume(0)
+    GameData.winStateActive = true
+    SFX.play(smasExtraSounds.sounds[135].sfx)
+    exiting = true
+    data.countTime = Timer.isActive()
+    --Timer.toggle()
+    Timer.isVisible = true
+
+    local score = 10 - math.floor((p.y - v.y) / 32)
+    Effectx.spawnScoreEffect(score, p.x, p.y)
+end
+
+function flagpoleSMAS.onTickNPC(v)
     if Defines.levelFreeze then return end
 
     local data = v.data
@@ -67,18 +84,7 @@ function customNPC.onTickNPC(v)
         and p.x <= v.x + v.width
         and p.section == v.section
         and data.state == 0 then
-            data.state = 1
-            smasBooleans.musicMuted = true
-            Audio.MusicVolume(0)
-            GameData.winStateActive = true
-            SFX.play(smasExtraSounds.sounds[135].sfx)
-            exiting = true
-            data.countTime = Timer.isActive()
-            --Timer.toggle()
-            Timer.isVisible = true
-
-            local score = 10 - math.floor((p.y - v.y) / 32)
-            Misc.givePoints(score, vector(p.x, p.y))
+            flagpoleSMAS.activateFlagpole(p, v)
         end
 
         if data.state ~= 0 then
@@ -106,10 +112,13 @@ function customNPC.onTickNPC(v)
             if Player.count() == 1 then
                 data.tick = data.tick + 1
             else
-                data.tick = data.tick + 1 / Player.count()
+                data.tick = data.tick + (1 / Player.count())
             end
             if data.tick > 2 then
                 data.state = 1.1
+            end
+            if plr.mount == 2 then
+                plr.mount = 0
             end
             exiting = true
         end
@@ -117,7 +126,7 @@ function customNPC.onTickNPC(v)
             if Player.count() == 1 then
                 data.tick = data.tick + 1
             else
-                data.tick = data.tick + 1 / Player.count()
+                data.tick = data.tick + (1 / Player.count())
             end
             if p.idx ~= plr.idx then
                 p.section = plr.section
@@ -242,19 +251,19 @@ function customNPC.onTickNPC(v)
     end
 end
 
-function customNPC.onPlayerKill(eventToken, p)
+function flagpoleSMAS.onPlayerKill(eventToken, p)
     if exiting then
         eventToken.cancelled = true
     end
 end
 
-function customNPC.onPlayerHarm(e, p)
+function flagpoleSMAS.onPlayerHarm(e, p)
     if exiting then
         e.cancelled = true
     end
 end
 
-function customNPC.onDraw()
+function flagpoleSMAS.onDraw()
     if drawCastlePlayer then
         castlePlayerTicks = math.max(castlePlayerTicks - 1, 0)
         for _,p in ipairs(Player.get()) do
@@ -269,4 +278,4 @@ function customNPC.onDraw()
     end
 end
 
-return customNPC
+return flagpoleSMAS
