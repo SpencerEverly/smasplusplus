@@ -1,7 +1,14 @@
+--[[smasMainMenuSystem.lua (v1.0)
+By Spencer Everly
+
+For more information, please refer to the comments below.
+]]
+
 local smasMainMenuSystem = {}
 
 local textplus = require("textplus")
 
+--Fonts and images. The main font, along with the cursor and arrows used for navigating the menus.
 smasMainMenuSystem.mainMenuFont = textplus.loadFont("littleDialogue/font/hardcoded-45-2-textplus-1x.ini")
 smasMainMenuSystem.cursorImg = Graphics.loadImageResolved("littleDialogue/bootmenudialog/selector.png")
 smasMainMenuSystem.arrowImg = Graphics.loadImageResolved("littleDialogue/bootmenudialog/scrollArrow.png")
@@ -11,17 +18,21 @@ function smasMainMenuSystem.onInitAPI()
     registerEvent(smasMainMenuSystem,"onDraw")
 end
 
+--Temporary variable for audio settings, since they're adjustable on pauseplus
 local selectionData
 
 if SaveData.pauseplus.selectionData.soundsettings ~= nil then
     selectionData = SaveData.pauseplus.selectionData.soundsettings
 end
 
+--Below are types/sections, all episode-specific.
+--First, the menu types (For normal menus/dialog menus)
 smasMainMenuSystem.menuMainTypes = {
     MENUMAIN_NORMAL = 1,
     MENUMAIN_DIALOG = 2,
 }
 
+--Second, the menu types for a specific menu.
 smasMainMenuSystem.menuTypes = {
     MENU_SELECTABLE = 1,
     MENU_BOOLEAN = 2,
@@ -29,6 +40,7 @@ smasMainMenuSystem.menuTypes = {
     MENU_MULTISELECT = 4,
 }
 
+--Finally, the sections for each menu.
 smasMainMenuSystem.menuSections = {
     SECTION_MAIN = 1,
     SECTION_MINIGAMES = 2,
@@ -56,39 +68,37 @@ smasMainMenuSystem.menuSections = {
     DIALOG_BATTLEMODE_EXIT = 24,
 }
 
-smasMainMenuSystem.menuItems = {}
-smasMainMenuSystem.menuOpen = false
-smasMainMenuSystem.onMenu = 1
-smasMainMenuSystem.MenuX = 0
-smasMainMenuSystem.MenuY = 0
-smasMainMenuSystem.MenuXCentered = 150
-smasMainMenuSystem.MenuYCentered = 310
-smasMainMenuSystem.minShow = 1
-smasMainMenuSystem.maxShow = 5
-smasMainMenuSystem.worldCurs = 1
-smasMainMenuSystem.ScrollDelay = 0
-smasMainMenuSystem.PressDelay = 10
-smasMainMenuSystem.cursorMove = true
-smasMainMenuSystem.isCursorOnMenuItem = false
-smasMainMenuSystem.layoutText = {}
-smasMainMenuSystem.noBooleanValue = false
-smasMainMenuSystem.previousMenuCursor = {}
-smasMainMenuSystem.rememberedMenuCursorPositions = {}
+smasMainMenuSystem.menuItems = {} --Used for all the menu items.
+smasMainMenuSystem.menuOpen = false --True if open, else it's false.
+smasMainMenuSystem.onMenu = smasMainMenuSystem.menuSections.SECTION_MAIN --1 is default. If not 1 then the menu will be on another random menu.
+smasMainMenuSystem.MenuX = 0 --Used for centering the menu options.
+smasMainMenuSystem.MenuY = 0 --Same as above.
+smasMainMenuSystem.MenuXCentered = 150 --The main center calculation for the X position.
+smasMainMenuSystem.MenuYCentered = 310 --The main center calculation for the Y position.
+smasMainMenuSystem.minShow = 1 --The minimum number of menus to show.
+smasMainMenuSystem.maxShow = 5 --We're displaying 5 max, so this is 5.
+smasMainMenuSystem.worldCurs = 1 --Used for calculating the position for the menu.
+smasMainMenuSystem.ScrollDelay = 0 --Used for the mouse when selecting menu items.
+smasMainMenuSystem.PressDelay = 10 --Used for the keyboard/controller when pressing jump on menu items.
+smasMainMenuSystem.cursorMove = true --True if we can use the cursor on the menu.
+smasMainMenuSystem.isCursorOnMenuItem = false --True if the cursor is on a menu item.
+smasMainMenuSystem.layoutText = {} --Textplus layout of the text, when using dialog.
 
-smasMainMenuSystem.priority = 3
-smasMainMenuSystem.menuLen = 0
+smasMainMenuSystem.priority = 3 --The usual drawing priority for the menu.
+smasMainMenuSystem.menuLen = 0 --The length of the selected text. Usually used with the mouse.
 
-smasMainMenuSystem.isOnDialog = false
-smasMainMenuSystem.atEndOfDialog = false
-smasMainMenuSystem.currentPageMarker = 1
-smasMainMenuSystem.currentPageCount = 0
+smasMainMenuSystem.isOnDialog = false --Usually true if the menu type is a dialog and is active
+smasMainMenuSystem.atEndOfDialog = false --Usually true when the dialog text is at the end of the page
+smasMainMenuSystem.currentPageMarker = 1 --The current page marker, for the dialog system
+smasMainMenuSystem.currentPageCount = 0 --The total pages used for the dialog system.
 
-smasMainMenuSystem.hideMenuOptions = false
-smasMainMenuSystem.hideArrows = false
-smasMainMenuSystem.hideCursor = false
-smasMainMenuSystem.hideTitle = false
-smasMainMenuSystem.dontControlMenu = false
-smasMainMenuSystem.dontRunFunctions = false
+--Below are settings for hiding certain things and other stuff
+smasMainMenuSystem.hideMenuOptions = false --Hides the options. Usually used when the dialog system is active.
+smasMainMenuSystem.hideArrows = false --Hides the up/down arrows. Usually used when the dialog system is active.
+smasMainMenuSystem.hideCursor = false --Hides the cursor at the left. Usually used when the dialog system is active.
+smasMainMenuSystem.hideTitle = false --Hides the title of the menu page. Usually used when the dialog system is active.
+smasMainMenuSystem.dontControlMenu = false  --True when the menu can't be controlled.
+smasMainMenuSystem.dontRunFunctions = false --True if the functions on a specific menu item can't be ran as a function. Usually used when the dialog system is active.
 
 --[[smasMainMenuSystem.addSection(args):
 section = The menu section, basically where this should be added to.
@@ -97,6 +107,8 @@ xCenter = Where to center the menu (In X) if needed.
 yCenter = Where to center the menu (In Y) if needed.
 cantGoBack = Whether to not go back on the section or not.
 dialogMessage = Used for the dialog menu type. Can be a message.
+dialogMessageX = The X position for the dialog message.
+dialogMessageY = The Y position for the dialog message.
 ]]
 function smasMainMenuSystem.addSection(args)
     if args.section == nil then
@@ -313,7 +325,9 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
 end
 
 function smasMainMenuSystem.goToMenuSection(sectionNumber, menuCursor, isGoingBack)
-    isGoingBack = isGoingBack or false
+    if isGoingBack == nil then
+        isGoingBack = false
+    end
     if isGoingBack then
         Sound.playSFX(26)
     else
