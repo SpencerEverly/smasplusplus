@@ -634,6 +634,11 @@ function Misc.rngTrueValue()
     return rng.randomInt(1,10)
 end
 
+function Misc.NSMBRNGValue(number)
+    local value = number * 1664525 + 1013904223
+    return bit.rshift(value, 32)
+end
+
 function Misc.checkCameraTransitionStatus() --Checks to see if the legacy camera transition is on.
     if mem(0x00B2B9E4, FIELD_BOOL) then
         return true
