@@ -34,7 +34,7 @@ function Evento.getSoundID(eventName)
         table.insert(name, mem(GM_EVENT+(idx*EVENTS_STRUCT_SIZE)+0x04,FIELD_STRING))
     end
     idxNumber = table.find(name, eventName) - 1
-    if idxNumber == nil then
+    if (idxNumber == nil or idxNumber <= -1) then
         return 0
     else
         return mem(GM_EVENT+(idxNumber*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
@@ -56,7 +56,7 @@ function Evento.count()
 end
 
 local function setCheckpointPath(v)
-	mem(0x00B250B0, FIELD_STRING, v);
+	return mem(0x00B250B0, FIELD_STRING, v)
 end
 
 function Evento.clearAllCheckpoints()
@@ -64,6 +64,11 @@ function Evento.clearAllCheckpoints()
         setCheckpointPath("")
         GameData.__checkpoints[v].current = nil
     end
+end
+
+function Evento.clearSpecificCheckpoint(levelName)
+    setCheckpointPath("")
+    GameData.__checkpoints[levelName].current = nil
 end
 
 return Evento
