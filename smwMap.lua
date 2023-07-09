@@ -4815,7 +4815,7 @@ function smwMap.onDraw()
     if Misc.isPaused() and unlockLoopObj ~= nil and unlockLoopObj:isPlaying() then
         unlockLoopObj:pause()
     end
-    if SaveData.firstBootMapPathFixed == false then
+    if not SaveData.firstBootMapPathFixed then
         Misc.unlockAnyBrokenPaths()
         SaveData.firstBootMapPathFixed = true
     end
