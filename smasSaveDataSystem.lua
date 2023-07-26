@@ -1,0 +1,5 @@
+local smasSaveDataSystem = {}
+
+
+
+return smasSaveDataSystem
