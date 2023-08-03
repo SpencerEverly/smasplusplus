@@ -3122,8 +3122,8 @@ ID:197;X:-97920;Y:-100352;W:64;H:32;
 ID:197;X:-97920;Y:-100320;W:64;H:32;
 ID:197;X:-97920;Y:-100288;W:64;H:32;
 ID:197;X:-97920;Y:-100256;W:64;H:32;
-ID:197;X:-97920;Y:-100224;W:64;H:32;LR:"Debug Stuff (Enable on full release)";
-ID:197;X:-97920;Y:-100192;W:64;H:32;LR:"Debug Stuff (Enable on full release)";
+ID:197;X:-97920;Y:-100224;W:64;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
+ID:197;X:-97920;Y:-100192;W:64;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
 ID:197;X:-97920;Y:-100160;W:64;H:32;
 ID:197;X:-97920;Y:-100128;W:64;H:32;
 ID:197;X:-97920;Y:-100096;W:64;H:32;
@@ -3265,8 +3265,8 @@ ID:160;X:-97856;Y:-100352;W:32;H:32;
 ID:160;X:-97856;Y:-100320;W:32;H:32;
 ID:160;X:-97856;Y:-100288;W:32;H:32;
 ID:160;X:-97856;Y:-100256;W:32;H:32;
-ID:160;X:-97856;Y:-100224;W:32;H:32;LR:"Debug Stuff (Enable on full release)";
-ID:160;X:-97856;Y:-100192;W:32;H:32;LR:"Debug Stuff (Enable on full release)";
+ID:160;X:-97856;Y:-100224;W:32;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
+ID:160;X:-97856;Y:-100192;W:32;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
 ID:160;X:-97856;Y:-100160;W:32;H:32;
 ID:160;X:-97856;Y:-100128;W:32;H:32;
 ID:160;X:-97856;Y:-100096;W:32;H:32;
@@ -3362,8 +3362,8 @@ ID:160;X:-97824;Y:-100352;W:32;H:32;
 ID:160;X:-97824;Y:-100320;W:32;H:32;
 ID:160;X:-97824;Y:-100288;W:32;H:32;
 ID:160;X:-97824;Y:-100256;W:32;H:32;
-ID:160;X:-97824;Y:-100224;W:32;H:32;LR:"Debug Stuff (Enable on full release)";
-ID:160;X:-97824;Y:-100192;W:32;H:32;LR:"Debug Stuff (Enable on full release)";
+ID:160;X:-97824;Y:-100224;W:32;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
+ID:160;X:-97824;Y:-100192;W:32;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
 ID:160;X:-97824;Y:-100160;W:32;H:32;
 ID:160;X:-97824;Y:-100128;W:32;H:32;
 ID:160;X:-97824;Y:-100096;W:32;H:32;
@@ -3520,7 +3520,7 @@ ID:160;X:-97792;Y:-100352;W:32;H:32;
 ID:160;X:-97792;Y:-100320;W:32;H:32;
 ID:160;X:-97792;Y:-100288;W:32;H:32;
 ID:160;X:-97792;Y:-100256;W:32;H:32;
-ID:160;X:-97792;Y:-100224;W:32;H:32;LR:"Debug Stuff (Enable on full release)";
+ID:160;X:-97792;Y:-100224;W:32;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
 ID:160;X:-97792;Y:-100160;W:32;H:32;
 ID:160;X:-97792;Y:-100128;W:32;H:32;
 ID:160;X:-97792;Y:-100096;W:32;H:32;
@@ -7583,7 +7583,7 @@ ID:69;X:41184;Y:39840;W:32;H:32;
 ID:69;X:41184;Y:39648;W:32;H:32;
 ID:69;X:40032;Y:39840;W:32;H:32;
 ID:69;X:40032;Y:39648;W:32;H:32;
-ID:160;X:-97792;Y:-100192;W:32;H:32;LR:"Debug Stuff (Enable on full release)";
+ID:160;X:-97792;Y:-100192;W:32;H:32;LR:"True Ending Debug Entrance (Enable on full release)";
 ID:568;X:-194592;Y:-201312;W:768;H:1344;
 ID:95;X:-194720;Y:-200064;W:32;H:32;
 ID:95;X:-194688;Y:-200064;W:32;H:32;
@@ -8697,6 +8697,14 @@ ID:21;X:63040;Y:59840;W:64;H:32;
 ID:22;X:63040;Y:59872;W:64;H:32;
 ID:22;X:63040;Y:59904;W:64;H:32;
 ID:22;X:62880;Y:59904;W:64;H:32;
+ID:371;X:-200736;Y:-200096;W:32;H:32;LR:"debug";
+ID:371;X:-200768;Y:-200096;W:32;H:32;LR:"debug";
+ID:371;X:-200800;Y:-200096;W:32;H:32;LR:"debug";
+ID:69;X:128;Y:-448;W:32;H:32;LR:"debug";
+ID:69;X:160;Y:-448;W:32;H:32;LR:"debug";
+ID:69;X:192;Y:-448;W:32;H:32;LR:"debug";
+ID:69;X:256;Y:-352;W:32;H:32;LR:"debug";
+ID:69;X:288;Y:-256;W:32;H:32;LR:"debug";
 BLOCK_END
 BGO
 ID:202;X:-179456;Y:-180160;
@@ -11867,6 +11875,8 @@ ID:60;X:62976;Y:59296;
 ID:60;X:63104;Y:59296;
 ID:12;X:63232;Y:59360;
 ID:12;X:63200;Y:59968;
+ID:107;X:-200672;Y:-200128;LR:"debug";
+ID:107;X:-200544;Y:-200224;LR:"debug";
 BGO_END
 NPC
 ID:31;X:-197088;Y:-201344;D:-1;
@@ -12429,6 +12439,7 @@ ID:466;X:-197264;Y:-200128;D:-1;MG:"My dad... he's good.<page>Don't wanna upset 
 ID:466;X:-196272;Y:-200128;D:-1;MG:"Daddies are good.";LR:"Stage Extra - Father's Day";
 ID:466;X:-195328;Y:-200128;D:-1;MG:"The True Ending still stands.<page>If you don't have enough stars\, why are you standing here for?";LR:"Stage Extra - Father's Day";
 ID:466;X:-194032;Y:-200128;D:-1;MG:"While the dads have their own Holiday\, why can't we adults who aren't fathers have a holiday?!<page>We can definitely deserve a break too you know!";LR:"Stage Extra - Father's Day";
+ID:95;X:-200512;Y:-200096;D:-1;LR:"debug";
 NPC_END
 PHYSICS
 ET:0;X:-99296;Y:-102704;W:576;H:624;
@@ -12522,6 +12533,7 @@ IX:-117536;IY:-118944;OX:-118592;OY:-119968;DT:2;ID:1;OD:1;SL:135;LR:"Stage 7 - 
 IX:-119552;IY:-119840;OX:-119264;OY:-118560;DT:2;ID:1;OD:1;SL:140;LR:"Stage 7 - Yoshi Rooms Finished";TW:1;
 IX:-119136;IY:-119840;OX:-118784;OY:-118560;DT:2;ID:1;OD:1;SL:145;LR:"Stage 7 - Yoshi Rooms Finished";TW:1;
 IX:-118304;IY:-118560;OX:-118720;OY:-119840;DT:2;ID:1;OD:1;SL:150;LR:"Stage 7 - Yoshi Rooms Finished";TW:1;
+IX:-200672;IY:-200096;OX:160;OY:-480;DT:2;ID:1;OD:1;LR:"debug";TW:1;
 DOORS_END
 LAYERS
 LR:"Default";
@@ -12577,7 +12589,7 @@ LR:"XStuff";HD:1;
 LR:"SEEModStuff";HD:1;
 LR:"SideQuestPipe";HD:1;
 LR:"DLCContentPipe";HD:1;
-LR:"Debug Stuff (Enable on full release)";HD:1;
+LR:"True Ending Debug Entrance (Enable on full release)";
 LR:"debug";HD:1;
 LR:"CelebratoryPipe";HD:1;
 LR:"ExitPipe";

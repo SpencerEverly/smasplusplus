@@ -19,6 +19,11 @@ function smasCharacterChanger.onInitAPI()
     registerEvent(smasCharacterChanger,"onDraw")
     registerEvent(smasCharacterChanger,"onInputUpdate")
     registerEvent(smasCharacterChanger,"onKeyboardPressDirect")
+    
+    if SMBX_VERSION == VER_SEE_MOD then
+        registerEvent(smasCharacterChanger,"onWindowFocus")
+        registerEvent(smasCharacterChanger,"onWindowUnfocus")
+    end
 end
 
 if SaveData.currentCharacter == nil then
@@ -270,6 +275,18 @@ function smasCharacterChanger.onInputUpdate()
             
             
         end
+    end
+end
+
+function smasCharacterChanger.onWindowUnfocus()
+    if smasCharacterChanger.menuActive and started then
+        --menuBGMObject:pause()
+    end
+end
+
+function smasCharacterChanger.onWindowFocus()
+    if smasCharacterChanger.menuActive and started then
+        --menuBGMObject:resume()
     end
 end
 

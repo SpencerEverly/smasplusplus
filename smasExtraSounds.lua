@@ -1094,6 +1094,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                 end
                 
                 --**KOOAPLING SHELL FLY AWAY EFFECTS**
+                --(Yes, bettereffects doesn't do proper for loops for a table, so it'll have to be duplicated until this probnlem is fixed for Beta 5)
                 for index,shell in ipairs(Animation.get(140)) do
                     if shell.speedY == 0 then --Good enough
                         if smasExtraSounds.enableBoomerangBroBoomerangSFX then

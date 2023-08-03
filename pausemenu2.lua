@@ -192,19 +192,15 @@ local function toggleeditorpowerupstate()
     end
 end
 
---[[local function changeletterbox()
-    if pauseplus.getSelectionValue("resolutionsettings","Enable Letterbox Scaling") then
-        Sound.playSFX("letterbox-disable.ogg")
-        SaveData.letterbox = false
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
-    else
+local function crtChangeSettings()
+    if pauseplus.getSelectionValue("screensettings","Enable CRT Display") then
         Sound.playSFX("letterbox-enable.ogg")
-        SaveData.letterbox = true
-        Routine.waitFrames(1, true)
-        smasResolutions.changeResolution()
+        SaveData.SMASPlusPlus.options.enableCRTFilter = true
+    else
+        Sound.playSFX("letterbox-disable.ogg")
+        SaveData.SMASPlusPlus.options.enableCRTFilter = false
     end
-end]]
+end
 
 local function togglepwingsfx()
     if pauseplus.getSelectionValue("soundsettings","Disable P-Wing Sound") then
@@ -1451,7 +1447,7 @@ function pauseSpecifics()
         pauseplus.createSubmenu("teleportmenu",{headerText = "<size 1.5>Teleportation Options</size>"})
         pauseplus.createSubmenu("miscsettings",{headerText = "<size 1.5>Miscellaneous Settings</size>"})
         pauseplus.createSubmenu("soundsettings",{headerText = "<size 1.5>Sound Settings</size>"})
-        pauseplus.createSubmenu("resolutionsettings",{headerText = "<size 1.5>Resolution Settings</size>"})
+        pauseplus.createSubmenu("screensettings",{headerText = "<size 1.5>Screen Settings</size>"})
         pauseplus.createSubmenu("savingsettings",{headerText = "<size 1.5>Saving Options</size>"})
         pauseplus.createOption("main",{text = "Character Options",goToSubmenu = "charactermenu",description = "Switch characters on the fly!"})
         pauseplus.createOption("main",{text = "Settings/Options",goToSubmenu = "settings",description = "Set some settings to enhance your gameplay."})
@@ -1487,7 +1483,7 @@ function pauseSpecifics()
         end
         
         -- Settings
-        --pauseplus.createOption("settings",{text = "Resolution Settings",goToSubmenu = "resolutionsettings",description = "Set the resolution to enhance your gameplay."})
+        pauseplus.createOption("settings",{text = "Screen Settings",goToSubmenu = "screensettings",description = "Set some screen settings to enhance your gameplay."})
         pauseplus.createOption("settings",{text = "Sound Settings",goToSubmenu = "soundsettings",description = "Set some sound settings to enhance your gameplay."})
         pauseplus.createOption("settings",{text = "Miscellaneous Settings",goToSubmenu = "miscsettings",description = "Set some other settings to enhance your gameplay."})
         if (Level.filename() == "map.lvlx") then
@@ -1512,10 +1508,8 @@ function pauseSpecifics()
         pauseplus.createOption("soundsettings",{text = "Disable P-Wing Sound",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disables the P-Wing sound. Toggle again to turn on.",action = function() togglepwingsfx() end})
         pauseplus.createOption("soundsettings",{text = "Use the Original SMBX Sound System",selectionType = pauseplus.SELECTION_CHECKBOX,description = "This options disables all the new sounds (Except P-Wing) and reverts back to the original sound system.",action = function() Routine.run(smbxdefaultsoundsystem) end})
         
-        --Resolution Settings
-        --[[pauseplus.createOption("resolutionsettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES,description = "Switch between resolutions.",selectionNames = {RESOLUTION_FULL,RESOLUTION_WIDE,RESOLUTION_ULTRAWIDE,RESOLUTION_STEAMDECK,RESOLUTION_NES,RESOLUTION_GBA}, action = function() Routine.run(changeresolution) end})
-        pauseplus.createOption("resolutionsettings",{text = "Enable Letterbox Scaling",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable scaling to display a full resolution while in fullscreen mode (Use F4 while in fullscreen).", action =  function() Routine.run(changeletterbox) end})
-        pauseplus.createOption("resolutionsettings",{text = "Disable Resolution Border",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Disable the border when using other additional resolutions.", action =  function() Routine.run(changeresolutionborder) end})]]
+        --Screen Settings
+        pauseplus.createOption("screensettings",{text = "Enable CRT Display",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable a CRT display when playing the game! Great for TV nostalgia.", action =  function() crtChangeSettings() end})
         
         --Character Menu
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then

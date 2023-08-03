@@ -873,6 +873,7 @@ smasTables.allEnemyFireballs = {85,87,246,276}
 smasTables.allRupeeNPCIDs = {251,252,253}
 smasTables.allDragonCoinNPCIDs = {274}
 smasTables.allStarCoinNPCIDs = {310}
+smasTables.allYoshiMountNPCIDs = {95,100,98,99,149,150,228,148}
 
 smasTables.allShakableBlockIDsTableMapped = table.map{4,625,55,60,90,159,169,170,173,176,179,188,226,281,282,283,622,623,624,625}
 
@@ -897,6 +898,7 @@ smasTables.allEnemyFireballsTableMapped = table.map{85,87,246,276}
 smasTables.allRupeeNPCIDsTableMapped = table.map{251,252,253}
 smasTables.allDragonCoinNPCIDsTableMapped = table.map{274}
 smasTables.allStarCoinNPCIDsTableMapped = table.map{310}
+smasTables.allYoshiMountNPCIDsTableMapped = table.map{95,100,98,99,149,150,228,148}
 
 smasTables.allNPCsToExcludeOnSMASSMB1System = table.map{21,88,476}
 
