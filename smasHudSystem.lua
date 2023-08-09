@@ -259,7 +259,7 @@ end
 
 function smasHudSystem.quickDeathTrigger()
     console:println("Quick death trigger activated.")
-    if currentDeathRoutine.isValid then
+    if currentDeathRoutine and currentDeathRoutine.isValid then
         currentDeathRoutine:abort()
     end
     Misc.pause()
