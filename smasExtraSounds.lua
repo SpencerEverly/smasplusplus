@@ -1,6 +1,6 @@
 --[[
 
-smasExtraSounds.lua (Formely smasExtraSounds.lua) by Spencer Everly (v0.4.0)
+smasExtraSounds.lua (Formerly extrasounds.lua) by Spencer Everly (v0.4.0)
 
 To use this everywhere, you can simply put this under luna.lua:
 _G.smasExtraSounds = require("smasExtraSounds")
@@ -1734,20 +1734,20 @@ function smasExtraSounds.getSoundID(eventName)
     for idx=0,MAX_EVENTS-1 do
         table.insert(name, mem(GM_EVENT+(idx*EVENTS_STRUCT_SIZE)+0x04,FIELD_STRING))
     end
-    idxNumber = table.ifind(name, eventName) - 1
+    idxNumber = table.ifind(name, eventName)
     if idxNumber == nil then
         return 0
     elseif idxNumber ~= nil then
-        return mem(GM_EVENT+(idxNumber*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
+        return mem(GM_EVENT+((idxNumber-1)*EVENTS_STRUCT_SIZE)+0x02,FIELD_WORD)
     end
 end
 
 function smasExtraSounds.onEvent(eventName)
-    --if eventName then --Fixes vanilla events from not playing smasExtraSounds sounds
-        --if smasExtraSounds.getSoundID(eventName) >= 1 and not smasExtraSounds.stockSoundNumbersInOrder[smasExtraSounds.getSoundID(eventName)] then
-            --smasExtraSounds.playSFX(smasExtraSounds.getSoundID(eventName))
-        --end
-    --end
+    if eventName then --Fixes vanilla events from not playing smasExtraSounds sounds
+        if smasExtraSounds.getSoundID(eventName) >= 1 and not smasExtraSounds.stockSoundNumbersInOrder[smasExtraSounds.getSoundID(eventName)] then
+            smasExtraSounds.playSFX(smasExtraSounds.getSoundID(eventName))
+        end
+    end
 end
 
 return smasExtraSounds --This ends the library

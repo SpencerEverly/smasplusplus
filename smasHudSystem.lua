@@ -67,6 +67,7 @@ function smasHudSystem.onInitAPI() --This requires all the libraries that will b
     registerEvent(smasHudSystem, "onPostPlayerKill")
     registerEvent(smasHudSystem, "onPostNPCKill")
     registerEvent(smasHudSystem, "onPostBlockHit")
+    registerEvent(smasHudSystem, "onInputUpdate")
     
     ready = true
 end
@@ -75,6 +76,11 @@ local gameoveractivate = false
 local gameoveractivate2 = false
 local gameovershow = false
 local blackscreenonly = false
+
+local canQuicklyResumeLevelWhenDying = false
+local fadeOutDeathQuick = false
+
+local currentDeathRoutine
 
 --if SaveData.GameOverCount == nil then
     --SaveData.GameOverCount = 0 --This is only when the library publically releases for the wild to use
@@ -251,6 +257,35 @@ function smasHudSystem.gameOverSequences() --These are all the game over sequenc
     end
 end
 
+function smasHudSystem.quickDeathTrigger()
+    console:println("Quick death trigger activated.")
+    if currentDeathRoutine.isValid then
+        currentDeathRoutine:abort()
+    end
+    Misc.pause()
+    Routine.waitFrames(15, true)
+    if not gameoveractivate then
+        if gameoveractivate2 then
+            SaveData.SMASPlusPlus.hud.lives = 5
+        end
+        Misc.unpause() --Unpause afterward
+    end
+    if gameoveractivate then --Quick game over screen stuff.
+        gameovershow = true --Show the GAME OVER text
+        SaveData.GameOverCount = SaveData.GameOverCount + 1 --Increase a game over count marker
+        smasHudSystem.gameOverSequences()
+        Misc.unpause() --Unpause afterward
+        SaveData.SMASPlusPlus.hud.lives = 5 --Refill the lives back to 5
+    end
+    smasBooleans.musicMuted = false
+    smasHudSystem.hasDied = true --The player has now died
+    if not smasHudSystem.exitToMap then
+        Level.load(Level.filename())
+    elseif smasHudSystem.exitToMap then
+        Level.load("map.lvlx")
+    end
+end
+
 function thirteenModeDeath()
     console:println("Everyone has died.")
     smasBooleans.musicMuted = true
@@ -311,7 +346,9 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
+                                canQuicklyResumeLevelWhenDying = true
                                 Routine.waitFrames(165)
+                                canQuicklyResumeLevelWhenDying = false
                                 Misc.pause()
                                 fadeoutdeath = true --This starts the fade out animation
                                 Routine.waitFrames(110, true)
@@ -360,7 +397,9 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                     gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
+                                canQuicklyResumeLevelWhenDying = true
                                 Routine.waitFrames(360, true)
+                                canQuicklyResumeLevelWhenDying = false
                                 smasBooleans.musicMuted = false
                                 Misc.unpause()
                                 if gameoveractivate == false then
@@ -412,8 +451,20 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
     end
 end
 
+function smasHudSystem.onInputUpdate()
+    if canQuicklyResumeLevelWhenDying then
+        for _,p in ipairs(Player.get()) do
+            if p.keys.jump == KEYS_PRESSED then
+                fadeOutDeathQuick = true
+                Routine.run(smasHudSystem.quickDeathTrigger)
+                canQuicklyResumeLevelWhenDying = false
+            end
+        end
+    end
+end
+
 function smasHudSystem.onPostPlayerKill(plr) --To cancel the death entirely
-    Routine.run(diedanimation, plr)
+    currentDeathRoutine = Routine.run(diedanimation, plr)
 end
 
 function smasHudSystem.onTick()
@@ -494,6 +545,10 @@ function smasHudSystem.onDraw()
     if fadeoutdeath then --Fade out related code
         time = time + 1
         Graphics.drawScreen{color = Color.black..math.max(0,time/35),priority = 6}
+    end
+    if fadeOutDeathQuick then --Fade out related code
+        time = time + 1
+        Graphics.drawScreen{color = Color.black..math.max(0,time/15),priority = 6}
     end
     if gameovershow then --Drawing for the quick game over screen
         Text.printWP("GAME OVER", 310, 290, 7)
