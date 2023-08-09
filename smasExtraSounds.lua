@@ -1561,9 +1561,10 @@ function smasExtraSounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for cust
                 
                 
                 --**STOMPING**
-                if harmtype == HARM_TYPE_JUMP then
+                --Dumb fix pertaining to Bullet Bills being stomped and the sound doesn't play at all
+                if (npc.id == 17 or npc.id == 18) and harmtype == HARM_TYPE_JUMP then
                     if smasExtraSounds.enableEnemyStompingSFX then
-                        --smasExtraSounds.playSFX(2)
+                        smasExtraSounds.playSFX(2)
                     end
                 end
                 
@@ -1702,10 +1703,12 @@ function smasExtraSounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for cust
                 
                 
                 --**SLIDING COMBO KILLS**
-                if p:mem(0x3C, FIELD_BOOL) and smasExtraSounds.harmableComboTypes[harmtype] then
-                    Audio.sounds[9].muted = true
-                    comboMuteTally = 2
-                    Routine.run(smasExtraSounds.comboSoundRoutine)
+                if not isOverworld then
+                    if p:mem(0x3C, FIELD_BOOL) and smasExtraSounds.harmableComboTypes[harmtype] then
+                        Audio.sounds[9].muted = true
+                        comboMuteTally = 2
+                        Routine.run(smasExtraSounds.comboSoundRoutine)
+                    end
                 end
                 
                 
