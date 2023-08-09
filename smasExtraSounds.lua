@@ -440,18 +440,18 @@ function smasExtraSounds.playSFX(name, volume, loops, delay) --If you want to pl
     
     if not eventObj.cancelled then
         if Sound.isExtraSoundsActive() then
-            if smasExtraSounds.sounds[name] and not smasTables.stockSoundNumbersInOrder[name] then
+            if smasExtraSounds.sounds[name] and not smasExtraSounds.stockSoundNumbersInOrder[name] then
                 if not smasExtraSounds.sounds[name].muted then
                     SFX.play(smasExtraSounds.sounds[name].sfx, volume, loops, delay)
                 end
-            elseif smasTables.stockSoundNumbersInOrder[name] then
+            elseif smasExtraSounds.stockSoundNumbersInOrder[name] then
                 SFX.play(name, volume, loops, delay)
             elseif name then
                 local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
                 SFX.play(file, volume, loops, delay) --Then play it afterward
             end
         elseif not Sound.isExtraSoundsActive() then
-            if smasTables.allVanillaSoundNumbersInOrder[name] then
+            if smasExtraSounds.allVanillaSoundNumbersInOrder[name] then
                 SFX.play(name, volume, loops, delay)
             elseif name then
                 local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
@@ -462,6 +462,9 @@ function smasExtraSounds.playSFX(name, volume, loops, delay) --If you want to pl
         EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay)
     end
 end
+
+smasExtraSounds.allCoinNPCIDsTableMapped = table.map{10,33,88,103,138,152,251,252,253,258,411,528} --378 is a dash coin. Perhaps we should make it compatible with it soon...?
+smasExtraSounds.allRupeeNPCIDsTableMapped = table.map{251,252,253}
 
 local extrasoundsBlock90 = {}
 local extrasoundsBlock668 = {}
@@ -1641,12 +1644,12 @@ function smasExtraSounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for cust
                 
                 
                 --**COIN COLLECTING**
-                if smasTables.allCoinNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
+                if smasExtraSounds.allCoinNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
                     if smasExtraSounds.enableCoinCollecting then
                         smasExtraSounds.playSFX(14)
                     end
                 end
-                if smasTables.allRupeeNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
+                if smasExtraSounds.allRupeeNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then --Any coin ID that was marked above will play this sound when collected
                     if smasExtraSounds.enableRupeeCollecting then
                         smasExtraSounds.playSFX(81)
                     end
