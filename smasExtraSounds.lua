@@ -1,6 +1,6 @@
 --[[
 
-smasExtraSounds.lua (Formerly extrasounds.lua) by Spencer Everly (v0.4.0)
+smasExtraSounds.lua (Formerly extrasounds.lua) by Spencer Everly (v0.3.6)
 
 To use this everywhere, you can simply put this under luna.lua:
 _G.smasExtraSounds = require("smasExtraSounds")
@@ -439,7 +439,7 @@ function smasExtraSounds.playSFX(name, volume, loops, delay) --If you want to pl
     EventManager.callEvent("onPlaySFX", eventObj, name, volume, loops, delay)
     
     if not eventObj.cancelled then
-        if Sound.isExtraSoundsActive() then
+        if smasExtraSounds.active then
             if smasExtraSounds.sounds[name] and not smasExtraSounds.stockSoundNumbersInOrder[name] then
                 if not smasExtraSounds.sounds[name].muted then
                     SFX.play(smasExtraSounds.sounds[name].sfx, volume, loops, delay)
@@ -450,7 +450,7 @@ function smasExtraSounds.playSFX(name, volume, loops, delay) --If you want to pl
                 local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
                 SFX.play(file, volume, loops, delay) --Then play it afterward
             end
-        elseif not Sound.isExtraSoundsActive() then
+        elseif not smasExtraSounds.active then
             if smasExtraSounds.allVanillaSoundNumbersInOrder[name] then
                 SFX.play(name, volume, loops, delay)
             elseif name then
