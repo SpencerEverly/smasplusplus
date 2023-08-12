@@ -4,10 +4,8 @@
 
 local smas2PlayerSystem = {}
 
-local handycam = require("handycam")
+_G.handycam = require("handycam")
 handycam[1].targets = {}
-
-local customCamera = require("customCamera")
 
 local player1Camera = Graphics.CaptureBuffer(800,600)
 local player2Camera = Graphics.CaptureBuffer(800,600)
@@ -87,18 +85,15 @@ end
 function smas2PlayerSystem.onDraw()
     if smasBooleans.targetPlayers then --If targeting players are enabled...
         for i = 1,maxPlayers do --Get all players
-            if Player(i).isValid and not table.icontains(customCamera.targets,Player(i)) then
-                table.insert(customCamera.targets,Player(i))
-            elseif not Player(i).isValid and table.icontains(customCamera.targets,Player(i)) then
-                table.remove(customCamera.targets,Player(i))
+            if Player(i).isValid and not table.icontains(handycam[1].targets,Player(i)) then
+                table.insert(handycam[1].targets,Player(i))
+            elseif not Player(i).isValid and table.icontains(handycam[1].targets,Player(i)) then
+                table.remove(handycam[1].targets,Player(i))
             end
         end
-        --[[if Player.count() == 2 then
-            customCamera.targets = {player2}
-        end]]
     end
     if not smasBooleans.targetPlayers and not smasBooleans.overrideTargets then
-        customCamera.targets = {}
+        handycam[1].targets = {}
     end
     
     if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
@@ -131,7 +126,7 @@ function smas2PlayerSystem.getPlayerMountPriority(p)
     end
 end
 
-function smas2PlayerSystem.onCameraDraw(camIdx)
+--[[function smas2PlayerSystem.onCameraDraw(camIdx)
     if smas2PlayerSystem.enableSplitScreen then
         if Player.count() == 2 then
             camera.x = math.clamp(player.x - 190, player.sectionObj.boundary.left, player.sectionObj.boundary.right - (camera.width / 2))
@@ -194,10 +189,10 @@ function smas2PlayerSystem.onCameraDraw(camIdx)
                     scale = customCamera.currentZoom, rotation = customCamera.currentRotation,
                     x = camera.x + 400, y = camera.y, width = 400, zoomHeight = 600,
                 }
-            end]]
+            end
         end
     end
-end
+end]]
 
 function smas2PlayerSystem.onTick()
     for _,p in ipairs(Player.get()) do --Make sure all players are counted if i.e. using supermario128...

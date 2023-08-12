@@ -12,6 +12,8 @@ end
 
 console:println("Loading SMASFunctions...")
 
+_G.smasSaveDataSystem = require("smasSaveDataSystem") --Load smasSaveDataSystem as early as smasFunctions because we're wanting this to be a low-level library, when costumes are officially loaded
+
 --Now for the base functions!
 _G.Misk = require("scripts/functions/misc")
 _G.File = require("scripts/functions/file")
