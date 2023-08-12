@@ -83,17 +83,23 @@ function smas2PlayerSystem.dropClassicReserve(playerIdx)
 end
 
 function smas2PlayerSystem.onDraw()
-    if smasBooleans.targetPlayers then --If targeting players are enabled...
-        for i = 1,maxPlayers do --Get all players
-            if Player(i).isValid and not table.icontains(handycam[1].targets,Player(i)) then
-                table.insert(handycam[1].targets,Player(i))
-            elseif not Player(i).isValid and table.icontains(handycam[1].targets,Player(i)) then
-                table.remove(handycam[1].targets,Player(i))
+    local handycamObj = rawget(handycam,1)
+
+    if handycamObj ~= nil then
+        if smasBooleans.targetPlayers then --If targeting players are enabled...
+            for i = 1,maxPlayers do --Get all players
+                if Player(i).isValid and not table.icontains(handycam[1].targets,Player(i)) then
+                    table.insert(handycam[1].targets,Player(i))
+                elseif not Player(i).isValid and table.icontains(handycam[1].targets,Player(i)) then
+                    table.remove(handycam[1].targets,Player(i))
+                end
             end
         end
-    end
-    if not smasBooleans.targetPlayers and not smasBooleans.overrideTargets then
-        handycam[1].targets = {}
+        if not smasBooleans.targetPlayers and not smasBooleans.overrideTargets then
+            handycam[1].targets = {}
+        end
+    elseif handycamObj == nil then
+        
     end
     
     if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
