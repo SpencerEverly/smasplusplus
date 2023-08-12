@@ -2,7 +2,6 @@ local Misk = {}
 
 local rng = require("base/rng")
 local smasVerboseMode = require("smasVerboseMode")
-local handycam = require("handycam")
 local smasTables = require("smasTables")
 if smasCharacterCostumes == nil then
     smasCharacterCostumes = require("smasCharacterCostumes")
@@ -643,10 +642,6 @@ function Misc.checkCameraTransitionStatus() --Checks to see if the legacy camera
     elseif not mem(0x00B2B9E4, FIELD_BOOL) then
         return false
     end
-end
-
-function Misc.checkTargetStatus() --Returns the current targets from the camera.
-    return handycam[1].targets
 end
 
 function Misc.saveSaveSlot(slot)
