@@ -8260,6 +8260,7 @@ ET:"Secet Exit Switch";SD:27;AS:0;AX:0;AY:0;
 ET:"World Clear 1";SD:27;LH:["W1 Event Layer 1"];SSS:["ID\:7\;MI\:24\;"];TE:"World Clear 2";DS:1;AS:0;AX:0;AY:0;
 ET:"World Clear 2";TE:"World Clear 3";TD:20;ML:"W1 Event Layer 2";MX:0;MY:-1.23077;AS:0;AX:0;AY:0;
 ET:"World Clear 3";LH:["W1 Event Layer 2"];LS:["W1 Event Layer 3"];TE:"World Clear 4";TD:20;DS:1;AS:0;AX:0;AY:0;
+ET:"World Clear 3.1";TE:"World Clear 4";TD:1;AS:0;AX:0;AY:0;
 ET:"World Clear 4";MG:"<setPos 400 32 0.5 -2.0>Oh thanks Heavens! You saved me! There's still more of my friends left to save\, take this star while you're at it!";TE:"World Clear 5";TD:1;DS:1;AS:0;AX:0;AY:0;
 ET:"World Clear 5";SD:20;LS:["Star"];TE:"World Clear 6";TD:15;AS:0;AX:0;AY:0;
 ET:"World Clear 6";SSS:["ID\:7\;MI\:0\;"];AS:0;AX:0;AY:0;

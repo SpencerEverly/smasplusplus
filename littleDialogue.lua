@@ -2022,16 +2022,16 @@ function littleDialogue.onMessageBox(eventObj,text,playerObj,npcObj)
     if Player.count() >= 2 then
         littleDialogue.create{
             text = text,
-            speakerObj = npcObj or playerObj or player or player2
+            speakerObj = npcObj or playerObj or player or player2,
         }
     else
         littleDialogue.create{
             text = text,
-            speakerObj = npcObj or playerObj or player
+            speakerObj = npcObj or playerObj or player,
         }
     end
     
-    Misc.pause()
+    Misc.pause(true)
 end
 
 
