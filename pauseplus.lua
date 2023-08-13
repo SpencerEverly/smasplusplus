@@ -964,13 +964,13 @@ function pauseplus.onDraw()
         end
 
         pauseplus.currentMusicVolume = math.max(pauseplus.lowerMusicVolume,pauseplus.currentMusicVolume - 1)
-        Audio.MusicVolume(pauseplus.currentMusicVolume)
+        --Audio.MusicVolume(pauseplus.currentMusicVolume)
     elseif pauseplus.currentMusicVolume ~= nil then
         pauseplus.lowerMusicVolume = nil
 
         pauseplus.currentMusicVolume = math.min(pauseplus.originalMusicVolume,pauseplus.currentMusicVolume + 1)
 
-        Audio.MusicVolume(pauseplus.currentMusicVolume)
+        --Audio.MusicVolume(pauseplus.currentMusicVolume)
 
         if pauseplus.currentMusicVolume == pauseplus.originalMusicVolume then
             pauseplus.currentMusicVolume = nil
