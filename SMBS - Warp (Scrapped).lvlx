@@ -2,7 +2,7 @@ HEAD
 XTRA:"{\n    \"showInMarioChallenge\"\: false\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance).spc|0\;g=2.5";BG:11;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance) (Yoshi).spc|0\;g=2.5";BG:11;
 SC:1;L:-180000;R:-177952;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Overworld.ogg|m1\;c2\;r2";BG:5;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END

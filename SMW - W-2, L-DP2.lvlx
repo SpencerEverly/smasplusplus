@@ -2,9 +2,9 @@ HEAD
 TL:"Super Mario World\: Donut Plains 2";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 400\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-193792;T:-200864;B:-200000;MZ:24;MF:"_OST/Super Mario World/Underground.spc|0\;g=2.5";BG:30;
+SC:0;L:-200000;R:-193792;T:-200864;B:-200000;MZ:24;MF:"_OST/Super Mario World/Underground (Yoshi).spc|0\;g=2.5";BG:30;
 SC:1;L:-180000;R:-177600;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Memory/11 Here We Go.spc|0\;g=2.5";BG:32;
-SC:2;L:-160000;R:-157920;T:-160896;B:-160000;MZ:24;MF:"_OST/Super Mario World/Underground.spc|0\;g=2.5";BG:30;
+SC:2;L:-160000;R:-157920;T:-160896;B:-160000;MZ:24;MF:"_OST/Super Mario World/Underground (Yoshi).spc|0\;g=2.5";BG:30;
 SECTION_END
 STARTPOINT
 ID:1;X:-199964;Y:-200406;D:1;

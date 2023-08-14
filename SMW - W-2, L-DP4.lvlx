@@ -2,8 +2,8 @@ HEAD
 TL:"Super Mario World\: Donut Plains 4";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-188320;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance).spc|0\;g=2.5";BG:32;
-SC:1;L:-180000;R:-177920;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance).spc|0\;g=2.5";BG:32;
+SC:0;L:-200000;R:-188320;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance) (Yoshi).spc|0\;g=2.5";BG:32;
+SC:1;L:-180000;R:-177920;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance) (Yoshi).spc|0\;g=2.5";BG:32;
 SC:2;L:-160064;R:-158880;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario World/Underground 2.spc|0\;g=2.5";BG:30;
 SECTION_END
 STARTPOINT

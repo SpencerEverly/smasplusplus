@@ -85,6 +85,11 @@ smasCharacterInfo.registerCharacterInfo{costumeName = "13-SMA4", name = "Mario",
 
 
 
+smasCharacterInfo.registerCharacterInfo{costumeName = "GRAYTRAP", name = "Graytrap", characterID = 2}
+
+
+
+
 function smasCharacterInfo.onStart()
     smasCharacterInfo.setCostumeSpecifics()
 end

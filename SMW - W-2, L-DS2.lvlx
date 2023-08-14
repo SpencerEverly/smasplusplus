@@ -2,8 +2,8 @@ HEAD
 TL:"Super Mario World\: Donut Secret 2";XTRA:"{\n    \"timer\"\: {\n        \"enable\"\: true\,\n        \"time\"\: 300\n    }\n}\n";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-190400;T:-200928;B:-200000;MZ:24;MF:"_OST/Super Mario World/Underground.spc|0\;g=2.5";BG:30;
-SC:1;L:-180000;R:-177952;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance).spc|0\;g=2.5";BG:11;
+SC:0;L:-200000;R:-190400;T:-200928;B:-200000;MZ:24;MF:"_OST/Super Mario World/Underground (Yoshi).spc|0\;g=2.5";BG:30;
+SC:1;L:-180000;R:-177952;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance) (Yoshi).spc|0\;g=2.5";BG:11;
 SECTION_END
 STARTPOINT
 ID:1;X:-199900;Y:-200150;D:1;

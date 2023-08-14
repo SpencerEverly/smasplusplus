@@ -1,3 +1,5 @@
+local smasFunctions = require("smasFunctions")
+
 local costume = {}
 
 function costume.onInit()

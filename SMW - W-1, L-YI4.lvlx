@@ -3,7 +3,7 @@ TL:"Super Mario World\: Yoshi's Island 4";XTRA:"{\n    \"timer\"\: {\n        \"
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-194208;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario World/Athletic 3.spc|0\;g=2.1";BG:34;
-SC:1;L:-180000;R:-177920;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance).spc|0\;g=2.5";BG:34;
+SC:1;L:-180000;R:-177920;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario World/Here We Go (Advance) (Yoshi).spc|0\;g=2.5";BG:34;
 SC:2;L:-160000;R:-157440;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario World/Athletic 3.spc|0\;g=2.1";BG:34;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
 SECTION_END
