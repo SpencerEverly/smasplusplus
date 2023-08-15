@@ -423,15 +423,17 @@ function Playur.countEveryPlayer(p)
 end
 
 function Playur.checkLivingIndex() --Code to check the isAnyPlayerAlive() code.
+    local playerTable = {}
     for k, p in ipairs(Player.get()) do
-        if p.deathTimer == 0 and p:mem(0x13C, FIELD_BOOL) == false then
-            return p.idx
+        if p.deathTimer == 0 and not p:mem(0x13C, FIELD_BOOL) then
+            table.insert(playerTable, p.idx)
         end
     end
+    return playerTable
 end
 
 function Playur.isAnyPlayerAlive() --Returns if any player is still alive.
-    if Playur.checkLivingIndex() ~= nil then
+    if Playur.checkLivingIndex() ~= {} then
         return true
     else
         return false

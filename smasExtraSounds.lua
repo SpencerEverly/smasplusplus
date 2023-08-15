@@ -36,6 +36,8 @@ smasExtraSounds.pWingDelay = 7
 smasExtraSounds.playerSlidingDelay = 8
 --Set this to any number to change how much the boomerang sound should delay to. Default is 12.
 smasExtraSounds.boomerangDelay = 12
+--Set this to any number to change how much the brick breaking sound should delay to. Default is 4.
+smasExtraSounds.brickBreakDelay = 4
 
 --**FIRE/ICE/HAMMER SETTINGS**
 --Whether to enable the Fire Flower sound.
@@ -465,6 +467,8 @@ end
 
 smasExtraSounds.allCoinNPCIDsTableMapped = table.map{10,33,88,103,138,152,251,252,253,258,411,528} --378 is a dash coin. Perhaps we should make it compatible with it soon...?
 smasExtraSounds.allRupeeNPCIDsTableMapped = table.map{251,252,253}
+smasExtraSounds.allBrickBlockIDsTableMapped = table.map{4,60,188,226,293,526,668}
+smasExtraSounds.allBrickBlockIDs = {4,60,188,226,293,526,668}
 
 local extrasoundsBlock90 = {}
 local extrasoundsBlock668 = {}
@@ -1011,6 +1015,16 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                     end
                 end
             end
+            --*Toothy's Pipe*
+            for k,v in ipairs(NPC.get(50)) do --Toothy brick break issue, fixed
+                for i,j in ipairs(Block.get(smasExtraSounds.allBrickBlockIDs)) do
+                    if j.id ~= 526 and not j.isHidden then
+                        if Colliders.collide(v, j) and (p.holdingNPC and p.holdingNPC.id == 49) then
+                            smasExtraSounds.playSFX(4, smasExtraSounds.volume, 1, smasExtraSounds.brickBreakDelay)
+                        end
+                    end
+                end
+            end
             
             
             
@@ -1183,7 +1197,7 @@ function bricksmashsound(block, fromUpper, playerornil) --This will smash bricks
     Routine.waitFrames(2, true)
     if block.isHidden and block.layerName == "Destroyed Blocks" then
         if smasExtraSounds.enableBrickSmashing then
-            smasExtraSounds.playSFX(blockSmashTable[block.id])
+            smasExtraSounds.playSFX(blockSmashTable[block.id], smasExtraSounds.volume, 1, smasExtraSounds.brickBreakDelay)
         end
     end
 end
@@ -1192,7 +1206,7 @@ function brickkillsound(block, hitter) --Alternative way to play the sound. Used
     Routine.waitFrames(2, true)
     if block.isHidden and block.layerName == "Destroyed Blocks" then
         if smasExtraSounds.enableBrickSmashing then
-            smasExtraSounds.playSFX(blockSmashTable[block.id])
+            smasExtraSounds.playSFX(blockSmashTable[block.id], smasExtraSounds.volume, 1, smasExtraSounds.brickBreakDelay)
         end
     end
 end
@@ -1671,7 +1685,7 @@ function smasExtraSounds.onPostNPCKill(npc, harmtype) --NPC Kill stuff, for cust
                 --**ICE BLOCKS (THROW BLOCKS)**
                 if npc.id == 45 and npc.ai2 < 449 then
                     if smasExtraSounds.enableBrickSmashing then
-                        smasExtraSounds.playSFX(4)
+                        smasExtraSounds.playSFX(4, smasExtraSounds.volume, 1, smasExtraSounds.brickBreakDelay)
                     end
                 end
                 
