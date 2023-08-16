@@ -1091,261 +1091,331 @@ smasTables.soundNamesInOrder = {
 }
 
 smasTables.keyboardMap = {
-    1, -- [1]
-    2, -- [2]
-    3, -- [3]
-    4, -- [4]
-    5, -- [5]
-    6, -- [6]
-    7, -- [7]
-    8, -- [8]
-    VK_TAB, -- [9]
-    10, -- [10]
-    11, -- [11]
-    VK_CLEAR, -- [12]
-    13, -- [13]
-    14, -- [14]
-    15, -- [15]
-    16, -- [16]
-    17, -- [17]
-    VK_MENU, -- [18]
-    19, -- [19]
-    VK_CAPITAL, -- [20]
-    VK_KANA, -- [21]
-    22, -- [22]
-    23, -- [23]
-    24, -- [24]
-    25, -- [25]
-    26, -- [26]
-    27, -- [27]
-    28, -- [28]
-    29, -- [29]
-    30, -- [30]
-    31, -- [31]
-    VK_SPACE, -- [32]
-    33, -- [33]
-    34, -- [34]
-    VK_END, -- [35]
-    VK_HOME, -- [36]
-    VK_LEFT, -- [37]
-    VK_UP, -- [38]
-    VK_RIGHT, -- [39]
-    VK_DOWN, -- [40]
-    41, -- [41]
-    42, -- [42]
-    43, -- [43]
-    44, -- [44]
-    45, -- [45]
-    46, -- [46]
-    VK_HELP, -- [47]
-    VK_0, -- [48]
-    VK_1, -- [49]
-    VK_2, -- [50]
-    VK_3, -- [51]
-    VK_4, -- [52]
-    VK_5, -- [53]
-    VK_6, -- [54]
-    VK_7, -- [55]
-    VK_8, -- [56]
-    VK_9, -- [57]
-    58, -- [58]
-    59, -- [59]
-    60, -- [60]
-    61, -- [61]
-    62, -- [62]
-    63, -- [63]
-    64, -- [64]
-    VK_A, -- [65]
-    VK_B, -- [66]
-    VK_C, -- [67]
-    VK_D, -- [68]
-    VK_E, -- [69]
-    VK_F, -- [70]
-    VK_G, -- [71]
-    VK_H, -- [72]
-    VK_I, -- [73]
-    VK_J, -- [74]
-    VK_K, -- [75]
-    VK_L, -- [76]
-    VK_M, -- [77]
-    VK_N, -- [78]
-    VK_O, -- [79]
-    VK_P, -- [80]
-    VK_Q, -- [81]
-    VK_R, -- [82]
-    VK_S, -- [83]
-    VK_T, -- [84]
-    VK_U, -- [85]
-    VK_V, -- [86]
-    VK_W, -- [87]
-    VK_X, -- [88]
-    VK_Y, -- [89]
-    VK_Z, -- [90]
-    91, -- [91]
-    92, -- [92]
-    93, -- [93]
-    94, -- [94]
-    95, -- [95]
-    VK_0, -- [96]
-    VK_1, -- [97]
-    VK_2, -- [98]
-    VK_3, -- [99]
-    VK_4, -- [100]
-    VK_5, -- [101]
-    VK_6, -- [102]
-    VK_7, -- [103]
-    VK_8, -- [104]
-    VK_9, -- [105]
-    106, -- [106]
-    107, -- [107]
-    108, -- [108]
-    109, -- [109]
-    110, -- [110]
-    111, -- [111]
-    VK_F1, -- [112]
-    VK_F2, -- [113]
-    VK_F3, -- [114]
-    VK_F4, -- [115]
-    VK_F5, -- [116]
-    VK_F6, -- [117]
-    VK_F7, -- [118]
-    VK_F8, -- [119]
-    VK_F9, -- [120]
-    VK_F10, -- [121]
-    VK_F11, -- [122]
-    VK_F12, -- [123]
-    VK_F13, -- [124]
-    VK_F14, -- [125]
-    VK_F15, -- [126]
-    VK_F16, -- [127]
-    VK_F17, -- [128]
-    VK_F18, -- [129]
-    VK_F19, -- [130]
-    VK_F20, -- [131]
-    VK_F21, -- [132]
-    VK_F22, -- [133]
-    VK_F23, -- [134]
-    VK_F24, -- [135]
-    136, -- [136]
-    137, -- [137]
-    138, -- [138]
-    139, -- [139]
-    140, -- [140]
-    141, -- [141]
-    142, -- [142]
-    143, -- [143]
-    144, -- [144]
-    VK_SCROLL, -- [145]
-    146, -- [146]
-    147, -- [147]
-    148, -- [148]
-    149, -- [149]
-    150, -- [150]
-    151, -- [151]
-    152, -- [152]
-    153, -- [153]
-    154, -- [154]
-    155, -- [155]
-    156, -- [156]
-    157, -- [157]
-    158, -- [158]
-    159, -- [159]
-    VK_LSHIFT, -- [160]
-    VK_RSHIFT, -- [161]
-    VK_LCONTROL, -- [162]
-    VK_RCONTROL, -- [163]
-    VK_LMENU, -- [164]
-    VK_RMENU, -- [165]
-    166, -- [166]
-    167, -- [167]
-    168, -- [168]
-    169, -- [169]
-    170, -- [170]
-    171, -- [171]
-    172, -- [172]
-    173, -- [173]
-    174, -- [174]
-    175, -- [175]
-    176, -- [176]
-    177, -- [177]
-    178, -- [178]
-    179, -- [179]
-    180, -- [180]
-    181, -- [181]
-    182, -- [182]
-    183, -- [183]
-    184, -- [184]
-    185, -- [185]
-    186, -- [186]
-    187, -- [187]
-    188, -- [188]
-    189, -- [189]
-    190, -- [190]
-    191, -- [191]
-    192, -- [192]
-    193, -- [193]
-    194, -- [194]
-    195, -- [195]
-    196, -- [196]
-    197, -- [197]
-    198, -- [198]
-    199, -- [199]
-    200, -- [200]
-    201, -- [201]
-    202, -- [202]
-    203, -- [203]
-    204, -- [204]
-    205, -- [205]
-    206, -- [206]
-    207, -- [207]
-    208, -- [208]
-    209, -- [209]
-    210, -- [210]
-    211, -- [211]
-    212, -- [212]
-    213, -- [213]
-    214, -- [214]
-    215, -- [215]
-    216, -- [216]
-    217, -- [217]
-    218, -- [218]
-    219, -- [219]
-    220, -- [220]
-    221, -- [221]
-    222, -- [222]
-    223, -- [223]
-    224, -- [224]
-    225, -- [225]
-    226, -- [226]
-    227, -- [227]
-    228, -- [228]
-    229, -- [229]
-    230, -- [230]
-    231, -- [231]
-    232, -- [232]
-    233, -- [233]
-    234, -- [234]
-    235, -- [235]
-    236, -- [236]
-    237, -- [237]
-    238, -- [238]
-    239, -- [239]
-    240, -- [240]
-    241, -- [241]
-    242, -- [242]
-    243, -- [243]
-    244, -- [244]
-    245, -- [245]
-    246, -- [246]
-    247, -- [247]
-    248, -- [248]
-    249, -- [249]
-    250, -- [250]
-    251, -- [251]
-    252, -- [252]
-    253, -- [253]
-    254, -- [254]
-    255, -- [255]
+    
+    --[[
+    
+    This list was generated and carefully crafted to make sure that even a list makes things much easier to see which key is which.
+    
+    Note that some keys aren't on certain/most keyboards, but whoever is looking at the code I bet already knew that.
+    
+    See https://github.com/MicrosoftDocs/win32/blob/docs/desktop-src/inputdev/virtual-key-codes.md for where I got some of the information for this list.
+    
+    ]]
+    
+    --First 6 is mouse controls, which idk why it's part of this
+    
+    1, -- [1], Left mouse button
+    2, -- [2], Right mouse button
+    3, -- [3], Control-break processing
+    4, -- [4], Middle mouse button
+    5, -- [5], X1 mouse button
+    6, -- [6], X2 mouse button
+    7, -- [7], -Undefined-
+    
+    --Now we get to the juicy stuff!
+    
+    8, -- [8], BACKSPACE Key
+    VK_TAB, -- [9], TAB Key
+    10, -- [10], -Reserved-
+    11, -- [11], -Reserved-
+    VK_CLEAR, -- [12], CLEAR Key
+    13, -- [13], ENTER Key (Also on right numberical side of common Keyboards)
+    14, -- [14], -Undefined-
+    15, -- [15], -Undefined-
+    16, -- [16], SHIFT Key (Left & Right)
+    17, -- [17], CTRL Key (Left & Right)
+    VK_MENU, -- [18], Alt Key (Left & Right)
+    19, -- [19], PAUSE Key
+    VK_CAPITAL, -- [20], CAPS Lock
+    VK_KANA, -- [21], IME Kana mode
+    
+    --Next 5 will be blank, until we figure out which IME keys are for which
+    
+    22, -- [22], --TBA--
+    23, -- [23], --TBA--
+    24, -- [24], --TBA--
+    25, -- [25], --TBA--
+    26, -- [26], --TBA--
+    27, -- [27], ESC Key
+    
+    --Next 4 will be blank, until we figure out which IME keys are for which
+    
+    28, -- [28], --TBA--
+    29, -- [29], --TBA--
+    30, -- [30], --TBA--
+    31, -- [31], --TBA--
+    VK_SPACE, -- [32], SPACE Key
+    33, -- [33], PAGE UP Key
+    34, -- [34], PAGE DOWN Key
+    VK_END, -- [35], END Key
+    VK_HOME, -- [36], HOME Key
+    
+    --Arrow keys, used for moving the player on SMBX2
+    
+    VK_LEFT, -- [37], Left Arrow Key
+    VK_UP, -- [38], Up Arrow Key
+    VK_RIGHT, -- [39], Right Arrow Key
+    VK_DOWN, -- [40], Down Arrow Key
+    
+    --
+    
+    41, -- [41], SELECT Key
+    42, -- [42], PRINT Key
+    43, -- [43], EXECUTE Key
+    44, -- [44], PRINT SCREEN Key
+    45, -- [45], INS Key
+    46, -- [46], DEL Key
+    VK_HELP, -- [47], HELP Key
+    
+    --Number Keys, normal keys (Like on top of the keyboard)
+    
+    VK_0, -- [48], 0 Key/Right parenthesis
+    VK_1, -- [49], 1 Key/Exclaimation Mark
+    VK_2, -- [50], 2 Key/Ampersat
+    VK_3, -- [51], 3 Key/Octothorpe (Hashtag)
+    VK_4, -- [52], 4 Key/Dollar Sign
+    VK_5, -- [53], 5 Key/Percent
+    VK_6, -- [54], 6 Key/Caret
+    VK_7, -- [55], 7 Key/Ampersand
+    VK_8, -- [56], 8 Key/Asterisk
+    VK_9, -- [57], 9 Key/Left parenthesis
+    
+    --Are the next 7 keys undefined? We'll need to search this later
+    
+    58, -- [58], --TBA--
+    59, -- [59], --TBA--
+    60, -- [60], --TBA--
+    61, -- [61], --TBA--
+    62, -- [62], --TBA--
+    63, -- [63], --TBA--
+    64, -- [64], --TBA--
+    
+    --Letter Keys are next.
+    
+    VK_A, -- [65], A Key
+    VK_B, -- [66], B Key
+    VK_C, -- [67], C Key
+    VK_D, -- [68], D Key
+    VK_E, -- [69], E Key
+    VK_F, -- [70], F Key
+    VK_G, -- [71], G Key
+    VK_H, -- [72], H Key
+    VK_I, -- [73], I Key
+    VK_J, -- [74], J Key
+    VK_K, -- [75], K Key
+    VK_L, -- [76], L Key
+    VK_M, -- [77], M Key
+    VK_N, -- [78], N Key
+    VK_O, -- [79], O Key
+    VK_P, -- [80], P Key
+    VK_Q, -- [81], Q Key
+    VK_R, -- [82], R Key
+    VK_S, -- [83], S Key
+    VK_T, -- [84], T Key
+    VK_U, -- [85], U Key
+    VK_V, -- [86], V Key
+    VK_W, -- [87], W Key
+    VK_X, -- [88], X Key
+    VK_Y, -- [89], Y Key
+    VK_Z, -- [90], Z Key
+    
+    --
+    
+    91, -- [91], Windows Key (Left)
+    92, -- [92], Windows Key (Right)
+    93, -- [93], Applications Key
+    94, -- [94], -Reserved-
+    95, -- [95], Computer Sleep Key
+    
+    --Number Keys on Numeric Keypad
+    
+    VK_0, -- [96], 0 Key (Numeric Keypad)
+    VK_1, -- [97], 1 Key (Numeric Keypad)
+    VK_2, -- [98], 2 Key (Numeric Keypad)
+    VK_3, -- [99], 3 Key (Numeric Keypad)
+    VK_4, -- [100], 4 Key (Numeric Keypad)
+    VK_5, -- [101], 5 Key (Numeric Keypads)
+    VK_6, -- [102], 6 Key (Numeric Keypad)
+    VK_7, -- [103], 7 Key (Numeric Keypad)
+    VK_8, -- [104], 8 Key (Numeric Keypad)
+    VK_9, -- [105], 9 Key (Numeric Keypad)
+    
+    --Other Numeric Keypad Keys
+    
+    106, -- [106], Asterisk Key (Numeric Keypad)
+    107, -- [107], Plus Key (Numeric Keypad)
+    108, -- [108], Separator Key (Numeric Keypad?)
+    109, -- [109], Dash (Hyphen) Key (Numeric Keypad)
+    110, -- [110], Decimal Key (Numeric Keypad)
+    111, -- [111], Slash/Divide Key (Numeric Keypad)
+    
+    --F-Keys!
+    
+    VK_F1, -- [112], F1 Key
+    VK_F2, -- [113], F2 Key
+    VK_F3, -- [114], F3 Key
+    VK_F4, -- [115], F4 Key
+    VK_F5, -- [116], F5 Key
+    VK_F6, -- [117], F6 Key
+    VK_F7, -- [118], F7 Key
+    VK_F8, -- [119], F8 Key
+    VK_F9, -- [120], F9 Key
+    VK_F10, -- [121], F10 Key
+    VK_F11, -- [122], F11 Key
+    VK_F12, -- [123], F12 Key
+    
+    --The next 12 F-Keys are used on some keyboards but not the most common ones
+    
+    VK_F13, -- [124], F13 Key
+    VK_F14, -- [125], F14 Key
+    VK_F15, -- [126], F15 Key
+    VK_F16, -- [127], F16 Key
+    VK_F17, -- [128], F17 Key
+    VK_F18, -- [129], F18 Key
+    VK_F19, -- [130], F19 Key
+    VK_F20, -- [131], F20 Key
+    VK_F21, -- [132], F21 Key
+    VK_F22, -- [133], F22 Key
+    VK_F23, -- [134], F23 Key
+    VK_F24, -- [135], F24 Key
+    
+    --
+    
+    136, -- [136], -Unassigned-
+    137, -- [137], -Unassigned-
+    138, -- [138], -Unassigned-
+    139, -- [139], -Unassigned-
+    140, -- [140], -Unassigned-
+    141, -- [141], -Unassigned-
+    142, -- [142], -Unassigned-
+    143, -- [143], -Unassigned-
+    144, -- [144], Number Lock Key
+    VK_SCROLL, -- [145], Scroll Lock Key
+    146, -- [146], -OEM specific-
+    147, -- [147], -OEM specific-
+    148, -- [148], -OEM specific-
+    149, -- [149], -OEM specific-
+    150, -- [150], -OEM specific-
+    151, -- [151], -Unassigned-
+    152, -- [152], -Unassigned-
+    153, -- [153], -Unassigned-
+    154, -- [154], -Unassigned-
+    155, -- [155], -Unassigned-
+    156, -- [156], -Unassigned-
+    157, -- [157], -Unassigned-
+    158, -- [158], -Unassigned-
+    159, -- [159], -Unassigned-
+    VK_LSHIFT, -- [160], Left SHIFT Key (Not used on SMBX2)
+    VK_RSHIFT, -- [161], Right SHIFT Key (Not used on SMBX2)
+    VK_LCONTROL, -- [162], Left CONTROL Key (Not used on SMBX2)
+    VK_RCONTROL, -- [163], Right CONTROL Key (Not used on SMBX2)
+    VK_LMENU, -- [164], Left ALT Key (Not used on SMBX2)
+    VK_RMENU, -- [165], Right ALT Key (Not used on SMBX2)
+    
+    --Are the next 20 keys accurate? Check whenever you can
+    
+    166, -- [166], Browser Back Key
+    167, -- [167], Browser Forward Key
+    168, -- [168], Browser Refresh Key
+    169, -- [169], Browser Stop Key
+    170, -- [170], Browser Search Key
+    171, -- [171], Browser Favorites Key
+    172, -- [172], Browser Start and Home Key
+    173, -- [173], Volume Mute key
+    174, -- [174], Volume Down key
+    175, -- [175], Volume Up key
+    176, -- [176], Next Track key
+    177, -- [177], Previous Track key
+    178, -- [178], Stop Media key
+    179, -- [179], Play/Pause Media key
+    180, -- [180], Start Mail key
+    181, -- [181], Select Media key
+    182, -- [182], Start Application 1 key
+    183, -- [183], Start Application 2 key
+    184, -- [184], -Reserved-
+    185, -- [185], -Reserved-
+    
+    --Some symbol keys
+    
+    186, -- [186], Colon/Semicolon (It can vary by keyboard though)
+    187, -- [187], Plus/Equals
+    188, -- [188], Comma/Less Than
+    189, -- [189], Underscore/Dash (Hyphen)
+    190, -- [190], Period/Greater Than
+    191, -- [191], Question Mark/Slash (It can vary by keyboard though)
+    192, -- [192], Tilde/Acute (It can vary by keyboard though)
+    
+    --Are the next 26 keys accurate? Check whenever you can
+    
+    193, -- [193], -Reserved-
+    194, -- [194], -Reserved-
+    195, -- [195], -Reserved-
+    196, -- [196], -Reserved-
+    197, -- [197], -Reserved-
+    198, -- [198], -Reserved-
+    199, -- [199], -Reserved-
+    200, -- [200], -Reserved-
+    201, -- [201], -Reserved-
+    202, -- [202], -Reserved-
+    203, -- [203], -Reserved-
+    204, -- [204], -Reserved-
+    205, -- [205], -Reserved-
+    206, -- [206], -Reserved-
+    207, -- [207], -Reserved-
+    208, -- [208], -Reserved-
+    209, -- [209], -Reserved-
+    210, -- [210], -Reserved-
+    211, -- [211], -Reserved-
+    212, -- [212], -Reserved-
+    213, -- [213], -Reserved-
+    214, -- [214], -Reserved-
+    215, -- [215], -Reserved-
+    216, -- [216], -Unassigned-
+    217, -- [217], -Unassigned-
+    218, -- [218], -Unassigned-
+    
+    --Some other symbol keys
+    
+    219, -- [219], Left Brace/Left Bracket (It can vary by keyboard though)
+    220, -- [220], Backslash/Pipe (It can vary by keyboard though)
+    221, -- [221], Right Brace/Right Bracket (It can vary by keyboard though)
+    222, -- [222], Quote/Apostrophe (It can vary by keyboard though)
+    
+    --The rest might need a checkup to see if all of them are correct or not
+    
+    223, -- [223], This can vary by keyboard
+    224, -- [224], -Reserved-
+    225, -- [225], -OEM specific-
+    226, -- [226], <> Keys (Or \| on non-US 102-key keyboard)
+    227, -- [227], -OEM specific-
+    228, -- [228], -OEM specific-
+    229, -- [229], IME PROCESS Key
+    230, -- [230], -OEM specific-
+    231, -- [231], Used to pass Unicode characters as if they were keystrokes. For more information, see VK_PACKET on link above.
+    232, -- [232], -Unassigned-
+    233, -- [233], -OEM specific-
+    234, -- [234], -OEM specific-
+    235, -- [235], -OEM specific-
+    236, -- [236], -OEM specific-
+    237, -- [237], -OEM specific-
+    238, -- [238], -OEM specific-
+    239, -- [239], -OEM specific-
+    240, -- [240], -OEM specific-
+    241, -- [241], -OEM specific-
+    242, -- [242], -OEM specific-
+    243, -- [243], -OEM specific-
+    244, -- [244], -OEM specific-
+    245, -- [245], -OEM specific-
+    246, -- [246], -OEM specific-
+    247, -- [247], Attn key
+    248, -- [248], CrSel key
+    249, -- [249], ExSel key
+    250, -- [250], Erase EOF key
+    251, -- [251], Play key
+    252, -- [252], Zoom key
+    253, -- [253], -Reserved-
+    254, -- [254], PA1 key
+    255, -- [255], Clear Key
 }
 
 smasTables.mario3AroundTheWorldMusicRng = {
