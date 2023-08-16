@@ -1136,6 +1136,9 @@ smasTables.keyboardMap = {
     24, -- [24], --TBA--
     25, -- [25], --TBA--
     26, -- [26], --TBA--
+    
+    --
+    
     27, -- [27], ESC Key (Default Pause Button)
     
     --Next 4 will be blank, until we figure out which IME keys are for which
