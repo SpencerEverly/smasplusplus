@@ -1122,7 +1122,7 @@ smasTables.keyboardMap = {
     13, -- [13], ENTER Key (Also on right numberical side of common Keyboards)
     14, -- [14], -Undefined-
     15, -- [15], -Undefined-
-    16, -- [16], SHIFT Key (Left & Right)
+    16, -- [16], SHIFT Key (Left & Right) (Default Drop Item Button)
     17, -- [17], CTRL Key (Left & Right)
     VK_MENU, -- [18], Alt Key (Left & Right)
     19, -- [19], PAUSE Key
@@ -1136,7 +1136,7 @@ smasTables.keyboardMap = {
     24, -- [24], --TBA--
     25, -- [25], --TBA--
     26, -- [26], --TBA--
-    27, -- [27], ESC Key
+    27, -- [27], ESC Key (Default Pause Button)
     
     --Next 4 will be blank, until we figure out which IME keys are for which
     
@@ -1144,6 +1144,9 @@ smasTables.keyboardMap = {
     29, -- [29], --TBA--
     30, -- [30], --TBA--
     31, -- [31], --TBA--
+    
+    --
+    
     VK_SPACE, -- [32], SPACE Key
     33, -- [33], PAGE UP Key
     34, -- [34], PAGE DOWN Key
@@ -1192,10 +1195,10 @@ smasTables.keyboardMap = {
     
     --Letter Keys are next.
     
-    VK_A, -- [65], A Key
+    VK_A, -- [65], A Key (Default Alt-Jump Button)
     VK_B, -- [66], B Key
     VK_C, -- [67], C Key
-    VK_D, -- [68], D Key
+    VK_D, -- [68], D Key (Default Special Button, SMAS++)
     VK_E, -- [69], E Key
     VK_F, -- [70], F Key
     VK_G, -- [71], G Key
@@ -1210,14 +1213,14 @@ smasTables.keyboardMap = {
     VK_P, -- [80], P Key
     VK_Q, -- [81], Q Key
     VK_R, -- [82], R Key
-    VK_S, -- [83], S Key
+    VK_S, -- [83], S Key (Default Alt-Run Button)
     VK_T, -- [84], T Key
     VK_U, -- [85], U Key
     VK_V, -- [86], V Key
     VK_W, -- [87], W Key
-    VK_X, -- [88], X Key
+    VK_X, -- [88], X Key (Default Run Button)
     VK_Y, -- [89], Y Key
-    VK_Z, -- [90], Z Key
+    VK_Z, -- [90], Z Key (Default Jump Button)
     
     --
     
