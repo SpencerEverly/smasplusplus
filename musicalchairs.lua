@@ -18,6 +18,9 @@ musicalChairs.musicList = {
     ["_OST/Super Mario World/Forest (Yoshi).spc|0;g=2.5"] = {
         yoshiTrack = 6,
     },
+    ["_OST/Super Mario World/Athletic (Yoshi).spc|0;g=2.5"] = {
+        yoshiTrack = 6,
+    },
     
     --Super Mario Bros. Spencer
     ["_OST/Super Mario Bros Spencer/Overworld.ogg|m1;c2;r2"] = {
