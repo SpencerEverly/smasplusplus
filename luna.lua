@@ -66,7 +66,7 @@ end
 if SMBX_VERSION == VER_SEE_MOD then
     console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
     _G.LunaDLL = ffi.load("LunaDll.dll")
-    Misc.setSuperMarioAllStarsPlusPlusEpisodeName()
+    Misc.setEpisodeName("Super Mario All-Stars++")
     _G.smasUpdater = require("smasUpdater")
 end
 if Misc.setWindowTitle ~= nil then

@@ -246,11 +246,6 @@ end
 
 if Misc.inSuperMarioAllStarsPlusPlus() then
     function Playur.activate3rdPlayer() --Activates 3rd player mode (TBD)
-        if SMBX_VERSION == VER_SEE_MOD then
-            if Playur.threePlayersOrAboveActiveWithNoCheats() then
-                Misc.disable1stPlayerInputsOn3rdPlayerAndMore(true)
-            end
-        end
         Playur.setCount(3)
         if Player.count() >= 2 then
             player2.x = player.x - player.width * 0.5
@@ -279,11 +274,6 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
 
     function Playur.activate4thPlayer() --Activates 4th player mode (TBD)
-        if Playur.threePlayersOrAboveActiveWithNoCheats() then
-            if SMBX_VERSION == VER_SEE_MOD then
-                Misc.disable1stPlayerInputsOn3rdPlayerAndMore(true)
-            end
-        end
         Playur.setCount(4)
         if Player.count() >= 2 then
             player2.x = player.x - player.width * 0.5
@@ -321,11 +311,6 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
 
     function Playur.activatePlayerIntroMode() --Activates the player intro mode
-        if Playur.threePlayersOrAboveActiveWithNoCheats() then
-            if SMBX_VERSION == VER_SEE_MOD then
-                Misc.disable1stPlayerInputsOn3rdPlayerAndMore(true)
-            end
-        end
         Playur.setCount(6)
         if Player.count() >= 2 then
             player2.x = player.x

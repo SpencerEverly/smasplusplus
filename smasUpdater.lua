@@ -199,7 +199,7 @@ if not Misc.inEditor() then
                 if smasUpdater.updateStage == 1 then
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer == 1 then
-                        Internet.StartGit()
+                        Internet.GitStart()
                     end
                     if smasUpdater.updateTimer == 5 then
                         smasUpdater.downloadLatestUpdateConfig()
@@ -253,7 +253,7 @@ if not Misc.inEditor() then
                     UpdateMessageForUpdater = "Update complete! Starting episode..."
                     smasUpdater.updateTimer = smasUpdater.updateTimer + 1
                     if smasUpdater.updateTimer >= lunatime.toTicks(5) then
-                        Internet.EndGit()
+                        Internet.GitEnd()
                         if io.exists(Misc.episodePath().."versionlist-commit-temp.txt") then
                             os.remove(Misc.episodePath().."versionlist-commit-temp.txt")
                         end
