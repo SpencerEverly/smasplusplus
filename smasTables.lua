@@ -1229,16 +1229,16 @@ smasTables.keyboardMap = {
     
     --Number Keys on Numeric Keypad
     
-    VK_0, -- [96], 0 Key (Numeric Keypad)
-    VK_1, -- [97], 1 Key (Numeric Keypad)
-    VK_2, -- [98], 2 Key (Numeric Keypad)
-    VK_3, -- [99], 3 Key (Numeric Keypad)
-    VK_4, -- [100], 4 Key (Numeric Keypad)
-    VK_5, -- [101], 5 Key (Numeric Keypads)
-    VK_6, -- [102], 6 Key (Numeric Keypad)
-    VK_7, -- [103], 7 Key (Numeric Keypad)
-    VK_8, -- [104], 8 Key (Numeric Keypad)
-    VK_9, -- [105], 9 Key (Numeric Keypad)
+    96, -- [96], 0 Key (Numeric Keypad)
+    97, -- [97], 1 Key (Numeric Keypad)
+    98, -- [98], 2 Key (Numeric Keypad)
+    99, -- [99], 3 Key (Numeric Keypad)
+    100, -- [100], 4 Key (Numeric Keypad)
+    101, -- [101], 5 Key (Numeric Keypads)
+    102, -- [102], 6 Key (Numeric Keypad)
+    103, -- [103], 7 Key (Numeric Keypad)
+    104, -- [104], 8 Key (Numeric Keypad)
+    105, -- [105], 9 Key (Numeric Keypad)
     
     --Other Numeric Keypad Keys
     
