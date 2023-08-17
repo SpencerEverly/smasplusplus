@@ -23,6 +23,7 @@ end]]
 console:println("Super Mario All-Stars++ loading initated.")
 
 _G.smasSaveDataSystem = require("smasSaveDataSystem")
+_G.smasFunctions = require("smasFunctions")
 
 if GameData.gameFirstLoaded == nil then
     GameData.gameFirstLoaded = true
@@ -101,7 +102,6 @@ console:println("Loading important libraries...")
 --SMAS specific functions need to be required first:
 _G.smasGlobals = require("smasGlobals")
 _G.smasMemoryAddresses = require("smasMemoryAddresses")
-_G.smasFunctions = require("smasFunctions")
 _G.smasKeySystem = require("smasKeySystem")
 _G.smasHud = require("smasHud")
 _G.smasAudioVolumeSystem = require("smasAudioVolumeSystem")
@@ -342,6 +342,9 @@ function onStart() --Now do onStart...
     end
     if Misc.inEditor() and SysManager.isOutsideOfUnplayeredAreas() then
         GameData.gameFirstLoaded = false
+    end
+    if SMBX_VERSION == VER_SEE_MOD then
+        --Screen.changeResolution(1066,600)
     end
 end
 

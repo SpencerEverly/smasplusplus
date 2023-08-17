@@ -33,11 +33,11 @@ function smasDateAndTime.onDraw()
     if smasDateAndTime.enabled then
         if SaveData.SMASPlusPlus.options.clockTheme == "normal" then
             if smasDateAndTime.position == smasDateAndTime.positionTable.BOTTOM_RIGHT then
-                Graphics.drawBox{x=695, y=552, width=100, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - .1} --What's the day, sir?!
-                textplus.print{x=700, y=557, text = "Date -  "..os.date("%a").." "..os.date("%x"), priority=smasDateAndTime.priority, color=Color.white}
+                Graphics.drawBox{x = camera.width - 105, y = camera.height - 52, width=100, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - .1} --What's the day, sir?!
+                textplus.print{x = camera.width - 100, y = camera.height - 47, text = "Date -  "..os.date("%a").." "..os.date("%x"), priority=smasDateAndTime.priority, color=Color.white}
                 
-                Graphics.drawBox{x=719, y=575, width=76, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - .1} --What time is it...!?
-                textplus.print{x=724, y=580, text = "Time - "..os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white}
+                Graphics.drawBox{x = camera.width - 81, y = camera.height - 25, width=76, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - .1} --What time is it...!?
+                textplus.print{x = camera.width - 76, y = camera.height - 20, text = "Time - "..os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white}
             elseif smasDateAndTime.position == smasDateAndTime.positionTable.BOTTOM_LEFT then
                 Graphics.drawBox{x=10, y=552, width=100, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - 1} --What's the day, sir?!
                 textplus.print{x=15, y=557, text = "Date -  "..os.date("%a").." "..os.date("%x"), priority=smasDateAndTime.priority, color=Color.white}
@@ -51,11 +51,11 @@ function smasDateAndTime.onDraw()
                 Graphics.drawBox{x=10, y=27, width=76, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - 1} --What time is it...!?
                 textplus.print{x=15, y=32, text = "Time - "..os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white}
             elseif smasDateAndTime.position == smasDateAndTime.positionTable.TOP_RIGHT then
-                Graphics.drawBox{x=695, y=5, width=100, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - 1} --What's the day, sir?!
-                textplus.print{x=700, y=10, text = "Date -  "..os.date("%a").." "..os.date("%x"), priority=smasDateAndTime.priority, color=Color.white}
+                Graphics.drawBox{x=camera.width - 105, y=5, width=100, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - 1} --What's the day, sir?!
+                textplus.print{x=camera.width - 100, y=10, text = "Date -  "..os.date("%a").." "..os.date("%x"), priority=smasDateAndTime.priority, color=Color.white}
                 
-                Graphics.drawBox{x=719, y=27, width=76, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - 1} --What time is it...!?
-                textplus.print{x=724, y=32, text = "Time - "..os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white}
+                Graphics.drawBox{x=camera.width - 81, y=27, width=76, height=20, color=Color.black..0.2, priority=smasDateAndTime.priority - 1} --What time is it...!?
+                textplus.print{x=camera.width - 76, y=32, text = "Time - "..os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white}
             end
         end
         if SaveData.SMASPlusPlus.options.clockTheme == "vintage" then
@@ -64,11 +64,11 @@ function smasDateAndTime.onDraw()
         if SaveData.SMASPlusPlus.options.clockTheme == "homedics" then
             if smasDateAndTime.position == smasDateAndTime.positionTable.BOTTOM_RIGHT then
                 if Time.meridiem() == "AM" then
-                    Graphics.drawImageWP(homedicsamimg, 0, 0, smasDateAndTime.priority - 1)
+                    Graphics.drawImageWP(homedicsamimg, camera.width - 800, 0, smasDateAndTime.priority - 1)
                 else
-                    Graphics.drawImageWP(homedicspmimg, 0, 0, smasDateAndTime.priority - 1)
+                    Graphics.drawImageWP(homedicspmimg, camera.width - 800, 0, smasDateAndTime.priority - 1)
                 end
-                textplus.print{x=717, y=563, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.green, font=alarmclockfont, xscale=0.8, yscale=0.8} --What time is it...!?
+                textplus.print{x = camera.width - 83, y = camera.height - 37, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.green, font=alarmclockfont, xscale=0.8, yscale=0.8} --What time is it...!?
             end
         end
         if SaveData.SMASPlusPlus.options.clockTheme == "rob" then
@@ -82,8 +82,8 @@ function smasDateAndTime.onDraw()
         end
         if SaveData.SMASPlusPlus.options.clockTheme == "windowsxp" then
             if smasDateAndTime.position == smasDateAndTime.positionTable.BOTTOM_RIGHT then
-                Graphics.drawImageWP(winxpimg, 615, 570, smasDateAndTime.priority - 1)
-                textplus.print{x=745, y=581, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white, font=verdana} --What time is it...!?
+                Graphics.drawImageWP(winxpimg, camera.width - 185, 570, smasDateAndTime.priority - 1)
+                textplus.print{x = camera.width - 55, y=581, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white, font=verdana} --What time is it...!?
             end
         end
         if SaveData.SMASPlusPlus.options.clockTheme == "windows7" then
@@ -91,9 +91,9 @@ function smasDateAndTime.onDraw()
         end
         if SaveData.SMASPlusPlus.options.clockTheme == "windows10" then
             if smasDateAndTime.position == smasDateAndTime.positionTable.BOTTOM_RIGHT then
-                Graphics.drawImageWP(win10img, 661, 560, smasDateAndTime.priority - 1)
-                textplus.print{x=726, y=564, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white, font=segoeui} --What time is it...!?
-                textplus.print{x=722, y=582, text = os.date("%m").."/"..os.date("%d").."/"..os.date("%Y"), priority=smasDateAndTime.priority, color=Color.white, font=segoeui} --What's the day, sir?!
+                Graphics.drawImageWP(win10img, camera.width - 139, 560, smasDateAndTime.priority - 1)
+                textplus.print{x=camera.width - 74, y=564, text = os.date("%I")..":"..os.date("%M").." "..os.date("%p"), priority=smasDateAndTime.priority, color=Color.white, font=segoeui} --What time is it...!?
+                textplus.print{x=camera.width - 78, y=582, text = os.date("%m").."/"..os.date("%d").."/"..os.date("%Y"), priority=smasDateAndTime.priority, color=Color.white, font=segoeui} --What's the day, sir?!
             end
         end
         if SaveData.SMASPlusPlus.options.clockTheme == "windows11" then

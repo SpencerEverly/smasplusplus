@@ -139,6 +139,28 @@ function Screen.viewPortCoordinateY(y,height)
     return y / 2 - (height * 0.5)
 end
 
+function Screen.changeResolution(width,height)
+    if SMBX_VERSION ~= VER_SEE_MOD then
+        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+        console:println("NOT USING SEE MOD! Resolution changer has stopped.")
+        return
+    else
+        if width == nil then
+            width = 800
+        end
+        if height == nil then
+            height = 600
+        end
+        Graphics.setFramebufferSize(width,height)
+        camera.width = width
+        camera.height = height
+    end
+end
+
+function Screen.calculateCameraDimensions(value, isWidthOrHeight)
+    
+end
+
 function Screen.onDraw()
     if setCameraPosition then --Camera position stuff
         if cameraPausedWhileScrolling then
