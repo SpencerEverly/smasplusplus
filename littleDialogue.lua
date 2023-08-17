@@ -15,6 +15,7 @@ local textplus = require("textplus")
 local tplusUtils = require("textplus/tplusutils")
 local cursor = require("cursor")
 local handycam = require("handycam")
+local smasFunctions = require("smasFunctions")
 
 local littleDialogue = {}
 
@@ -1730,8 +1731,8 @@ function boxInstanceFunctions:getDrawPosition()
     local forcedPosVerticalPivot = self.forcedPosVerticalPivot or 0.5
     
     if (forcedPosX == nil and forcedPosY == nil) and self.settings.forcedPosEnabled then
-        forcedPosX = self.settings.forcedPosX
-        forcedPosY = self.settings.forcedPosY
+        forcedPosX = Screen.calculateCameraDimensions(self.settings.forcedPosX, 1)
+        forcedPosY = Screen.calculateCameraDimensions(self.settings.forcedPosY, 2)
         forcedPosHorizontalPivot = self.settings.forcedPosHorizontalPivot
         forcedPosVerticalPivot = self.settings.forcedPosVerticalPivot
     end

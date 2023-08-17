@@ -1,33 +1,45 @@
 local smasCollisionSystem = {}
 
+smasCollisionSystem.enabled = true
+smasCollisionSystem.semiSolidEntities = {}
+
 function smasCollisionSystem.onInitAPI()
-    
+    registerEvent(smasCollisionSystem,"onDraw")
 end
 
-function smasCollisionSystem.checkCollision(Loc1, Loc2)
-    if (
-        (Loc1.y + Loc1.height >= Loc2.y) and
-        (Loc1.y <= Loc2.y + Loc2.height) and
-        (Loc1.x <= Loc2.x + Loc2.width) and
-        (Loc1.x + Loc1.width >= Loc2.x)
-    ) then
-        return true
-    else
-        return false
+function smasCollisionSystem.registerSemiSolid(x, y, width, height, isSlope)
+    if x == nil then
+        error("X must be specified!")
+        return
     end
+    if y == nil then
+        error("Y must be specified!")
+        return
+    end
+    if width == nil then
+        error("Width must be specified!")
+        return
+    end
+    if height == nil then
+        error("Height must be specified!")
+        return
+    end
+    if isSlope == nil then
+        isSlope = false
+    end
+    table.insert(smasCollisionSystem.semiSolidEntities, {x = x, y = y, width = width, height = height, isSlope = isSlope})
 end
 
-function smasCollisionSystem.checkCollisionIntersect(Loc1, Loc2)
-    if (Loc1.y < Loc2.y) then
-        return false
-    elseif (Loc1.y + Loc1.height > Loc2.y + Loc2.height)
-        return false
-    elseif(Loc1.x < Loc2.x)
-        return false
-    elseif(Loc1.x + Loc1.width > Loc2.x + Loc2.width)
-        return false
-    else
-        return true
+function smasCollisionSystem.onDraw()
+    if smasCollisionSystem.enabled then
+        for i = 1,#smasCollisionSystem.semiSolidEntities do
+            for _,p in ipairs(Player.get()) do
+                local pBottom = p.y + p.height
+                if pBottom == smasCollisionSystem.semiSolidEntities[i].y then
+                    
+                end
+            end
+        end
     end
 end
 

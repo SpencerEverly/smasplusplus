@@ -6,6 +6,10 @@ local smasExtraSounds = require("smasExtraSounds")
 smasPWing.pMeter = Graphics.loadImageResolved("graphics/hardcoded/hardcoded-100-4.png")
 smasPWing.pMeterArrowSizeWidth = 80
 smasPWing.pMeterArrowSizeHeight = 16
+smasPWing.pMeterXCoordinate = 340
+smasPWing.pMeterYCoordinate = 576
+smasPWing.pMeterPFlashXCoordinate = 420
+smasPWing.pMeterPFlashYCoordinate = 576
 smasPWing.priority = 5
 smasPWing.pSpeedCounters = {
     [CHARACTER_MARIO] = 35,
@@ -106,42 +110,50 @@ end
 function smasPWing.drawPWingHud()
     if smasHud.visible.pWing then
         if Graphics.isHudActivated() then
+            local CenterX = camera.width / 2
+            
+            smasPWing.pMeterXCoordinate = CenterX - 60
+            smasPWing.pMeterYCoordinate = camera.height - 25
+            smasPWing.pMeterPFlashXCoordinate = CenterX + 20
+            smasPWing.pMeterPFlashYCoordinate = camera.height - 25
+            
             local pWingFrame = math.floor((lunatime.tick() / smasPWing.frameSpeed) % 2)
+            
             if not smasPWing.isFlying(player) then
                 if smasPWing.runningCounter(player) >= 0 and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.2) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 0, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 0, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.2) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.4) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.4) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.6) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.6) and (smasPWing.runningCounter(player) <= smasPWing.pSpeedCounters[player.character] * 0.8) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif smasPWing.runningCounter(player) >= (smasPWing.pSpeedCounters[player.character] * 0.8) and smasPWing.runningCounter(player) < smasPWing.pSpeedCounters[player.character] then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif smasPWing.runningCounter(player) == smasPWing.pSpeedCounters[player.character] then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 end
             else
                 if (smasPWing.remainingFlightTimer(player) >= 0 and smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.2) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 16, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.2) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.4) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 32, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.4) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.6) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 48, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.6) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character] * 0.8) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 64, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 elseif (smasPWing.remainingFlightTimer(player) >= smasPWing.pSpeedFlyTimers[player.character] * 0.8) and (smasPWing.remainingFlightTimer(player) <= smasPWing.pSpeedFlyTimers[player.character]) then
-                    Graphics.drawImageWP(smasPWing.pMeter, 340, 576, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterXCoordinate, smasPWing.pMeterYCoordinate, 0, 80, smasPWing.pMeterArrowSizeWidth, smasPWing.pMeterArrowSizeHeight, smasPWing.priority)
                 end
             end
             if (smasPWing.canStartFlying(player) or smasPWing.isFlying(player)) then
                 if pWingFrame == 1 then
-                    Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 80, 24, 16, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterPFlashXCoordinate, smasPWing.pMeterPFlashYCoordinate, 80, 80, 24, 16, smasPWing.priority)
                 else
-                    Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 96, 24, 16, smasPWing.priority)
+                    Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterPFlashXCoordinate, smasPWing.pMeterPFlashYCoordinate, 80, 96, 24, 16, smasPWing.priority)
                 end
             else
-                Graphics.drawImageWP(smasPWing.pMeter, 420, 576, 80, 96, 24, 16, smasPWing.priority)
+                Graphics.drawImageWP(smasPWing.pMeter, smasPWing.pMeterPFlashXCoordinate, smasPWing.pMeterPFlashYCoordinate, 80, 96, 24, 16, smasPWing.priority)
             end
         end
     end

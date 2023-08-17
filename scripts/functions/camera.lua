@@ -154,11 +154,41 @@ function Screen.changeResolution(width,height)
         Graphics.setFramebufferSize(width,height)
         camera.width = width
         camera.height = height
+        camera:mem(0x10, FIELD_DFLOAT, width)
+        camera:mem(0x18, FIELD_DFLOAT, height)
     end
 end
 
 function Screen.calculateCameraDimensions(value, isWidthOrHeight)
-    
+    if value == nil then
+        error("Must have a value for Screen.calculateCameraDimensions!")
+        return
+    else
+        if isWidthOrHeight == nil then
+            error("Must have a width or height for Screen.calculateCameraDimensions! You must use a string value for this (Or a number), like e.g. \"width\" or \"height\", or 1 or 2.")
+            return
+        end
+        local originalWidth = 800
+        local originalHeight = 600
+        
+        local pixelDifferenceWidth = originalWidth / camera.width
+        local pixelDifferenceHeight = originalHeight / camera.height
+        
+        local additionalWidth = camera.width - originalWidth
+        local additionalHeight = camera.height - originalHeight
+        
+        local extendedWidth = additionalWidth / 2
+        local extendedHeight = additionalHeight / 2
+        
+        if (isWidthOrHeight == "width" or isWidthOrHeight == 1) then
+            return value + extendedWidth
+        elseif (isWidthOrHeight == "height" or isWidthOrHeight == 2) then
+            return value + extendedHeight
+        else
+            error("This is not a valid value for isWidthOrHeight. You must use a string value for this (Or a number), like e.g. \"width\" or \"height\", or 1 or 2.")
+            return
+        end
+    end
 end
 
 function Screen.onDraw()
