@@ -14,6 +14,7 @@ SaveData.SMASPlusPlus.player = SaveData.SMASPlusPlus.player or {}
 SaveData.SMASPlusPlus.misc = SaveData.SMASPlusPlus.misc or {}
 SaveData.SMASPlusPlus.levels = SaveData.SMASPlusPlus.levels or {}
 SaveData.SMASPlusPlus.levels.complete = SaveData.SMASPlusPlus.levels.complete or {}
+SaveData.SMASPlusPlus.characters = SaveData.SMASPlusPlus.characters or {}
 for i = 1,8 do
     SaveData.SMASPlusPlus.player[i] = SaveData.SMASPlusPlus.player[i] or {}
     SaveData.SMASPlusPlus.player[i].currentCostume = SaveData.SMASPlusPlus.player[i].currentCostume or "N/A"

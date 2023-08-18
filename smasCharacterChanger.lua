@@ -13,6 +13,7 @@ local smasFunctions = require("smasFunctions")
 
 local playerManager = require("playerManager")
 local textplus = require("textplus")
+local steve = require("steve")
 local smbx13font = textplus.loadFont("littleDialogue/font/smilebasic.ini") --The font for the changer menu.
 
 function smasCharacterChanger.onInitAPI()
@@ -258,11 +259,17 @@ function smasCharacterChanger.onInputUpdate()
                 if smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
                     player:transform(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], false)
                     player.setCostume(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], false)
+                    if player.character == CHARACTER_STEVE then
+                        steve.initCharacter()
+                    end
                 else
                     player:transform(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], false)
                     player.setCostume(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], nil, false)
                     if SMBX_VERSION == VER_SEE_MOD then
                         Misc.testModeSetPlayerSetting(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber])
+                    end
+                    if player.character == CHARACTER_STEVE then
+                        steve.initCharacter()
                     end
                 end
                 changed = true

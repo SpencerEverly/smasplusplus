@@ -21,7 +21,7 @@ local steve = {}
 
 local timer = 0
 
-ready = false
+local ready = false
 
 _G.CHARACTER_STEVE = CHARACTER_ULTIMATERINKA
 
@@ -32,8 +32,8 @@ local MOUSE_LEFT_PRESSED  = 0x00B2D6CC
 local MOUSE_RIGHT_PRESSED = 0x00B2D6CE
 
 
-SaveData.steveData = SaveData.steveData or {}
-local savedData = SaveData.steveData
+SaveData.SMASPlusPlus.characters.steve = SaveData.SMASPlusPlus.characters.steve or {}
+local savedData = SaveData.SMASPlusPlus.characters.steve
 
 savedData.items = savedData.items or {}
 
@@ -182,8 +182,18 @@ local function getClosestObj(objs,x,y)
 end
 
 local function getObjectClickedOn(colliderType,filter,maxDistance)
-    local mouseX = Screen.cursorX()+camera.x
-    local mouseY = Screen.cursorY()+camera.y
+    local mouseX
+    local mouseY
+    
+    if Misc.getCursorPosition == nil then
+        mouseX = Screen.cursorX()+camera.x
+        mouseY = Screen.cursorY()+camera.y
+    else
+        mouseX = Misc.getCursorPosition()[1]+camera.x
+        mouseY = Misc.getCursorPosition()[2]+camera.y
+    end
+    
+    
 
     colBox.width = 8
     colBox.height = 8
@@ -1106,8 +1116,10 @@ do
                 data.inventoryItems[data.selectedInventorySlot] = {}
             end
         end
-
-        data.selectedItemTime = data.selectedItemTime + 1
+        
+        if data.selectedItemTime ~= nil then
+            data.selectedItemTime = data.selectedItemTime + 1
+        end
     end
 
     function steve.onKeyboardPressDirect(keyCode, repeated, character)
@@ -1589,7 +1601,14 @@ do
         end
 
         if mem(MOUSE_LEFT_PRESSED,FIELD_BOOL) and not data.wasLeftClicking then
-            local direction = math.sign((mem(MOUSE_X,FIELD_DFLOAT)+camera.x)-(player.x+(player.width*0.5)))
+            local direction
+            
+            if Misc.getCursorPosition == nil then
+                direction = math.sign((mem(MOUSE_X,FIELD_DFLOAT)+camera.x)-(player.x+(player.width*0.5)))
+            else
+                direction = math.sign((Misc.getCursorPosition()[1]+camera.x)-(player.x+(player.width*0.5)))
+            end
+            
             if direction ~= 0 then
                 player.direction = direction
             end
@@ -1617,7 +1636,11 @@ do
             end
 
             if data.swingingAtPosition == nil then
-                data.swingingAtPosition = vector(mem(MOUSE_X,FIELD_DFLOAT)+camera.x,mem(MOUSE_Y,FIELD_DFLOAT)+camera.y)
+                if Misc.getCursorPosition == nil then
+                    data.swingingAtPosition = vector(mem(MOUSE_X,FIELD_DFLOAT)+camera.x,mem(MOUSE_Y,FIELD_DFLOAT)+camera.y)
+                else
+                    data.swingingAtPosition = vector(Misc.getCursorPosition()[1]+camera.x,Misc.getCursorPosition()[2]+camera.y)
+                end
                 data.swingingAtTimer = 0
 
                 SFX.play(RNG.irandomEntry(steve.combatSettings.missSounds),0.75)
@@ -1665,6 +1688,13 @@ do
     end
 
     local function getPlacingBlockPosition()
+        local position
+        
+        if Misc.getCursorPosition == nil then
+            position = vector(mem(MOUSE_X,FIELD_DFLOAT)+camera.x,mem(MOUSE_Y,FIELD_DFLOAT)+camera.y)
+        else
+            position = vector(Misc.getCursorPosition()[1]+camera.x,Misc.getCursorPosition()[2]+camera.y)
+        end
         local position = vector(mem(MOUSE_X,FIELD_DFLOAT)+camera.x,mem(MOUSE_Y,FIELD_DFLOAT)+camera.y)
         local gridSize = steve.blockPlacingSettings.gridSize
 
@@ -1854,10 +1884,6 @@ function steve.onInitAPI()
     registerEvent(steve,"onExitLevel")
 
     registerEvent(steve,"onKeyboardPressDirect")
-    
-    if player.character == CHARACTER_STEVE then
-        steve.initCharacter()
-    end
     
     ready = true
 end

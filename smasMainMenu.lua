@@ -896,6 +896,11 @@ function smasMainMenu.onStart()
     if smasMainMenu.active then
         cursor.create()
         cursor.showCursor = true
+        
+        if SMBX_VERSION == VER_SEE_MOD then
+            Misc.setCursor(false)
+        end
+        
         Audio.MusicVolume(nil) --Let the music volume reset
         
         if SaveData.failsafeMessageOne == 1 then --Change these values for users after 12/7/2022
@@ -1355,6 +1360,9 @@ function smasMainMenu.onExit()
             smasMainMenu.startedmenu = 1
         end
         autoscroll.scrollLeft(5000)
+        if SMBX_VERSION == VER_SEE_MOD then
+            Misc.setCursor(nil)
+        end
     end
 end
 

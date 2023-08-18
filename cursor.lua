@@ -93,11 +93,16 @@ function cursor.update()
     local left_state = mem(0x00B2D6CC, FIELD_BOOL)
     local right_state = mem(0x00B2D6CE, FIELD_BOOL)
     mem(0x00B2D6CE, FIELD_BOOL, false)
-
-    cursor.x = mem(0x00B2D6BC, FIELD_DFLOAT)
-    cursor.y = mem(0x00B2D6C4, FIELD_DFLOAT)
+    
+    if Misc.getCursorPosition == nil then
+        cursor.x = mem(0x00B2D6BC, FIELD_DFLOAT)
+        cursor.y = mem(0x00B2D6C4, FIELD_DFLOAT)
+    else
+        cursor.x = Misc.getCursorPosition()[1]
+        cursor.y = Misc.getCursorPosition()[2]
+    end
     screenpos.x, screenpos.y = cursor.x, cursor.y
-    if cursor.x >= 0 and cursor.x <= 800 and cursor.y >= 0 and cursor.y <= 600 then
+    if cursor.x >= 0 and cursor.x <= camera.width and cursor.y >= 0 and cursor.y <= camera.height then
         cursor.onscreen = true
     else
         cursor.onscreen = false
