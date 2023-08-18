@@ -107,6 +107,7 @@ function onEvent(eventName)
         SaveData.racaActivated = true
         SaveData.introselect = 1
         SaveData.SMASPlusPlus.options.resolution = "fullscreen"
+        SaveData.SMASPlusPlus.options.enableCRTFilter = false
         SaveData.letterbox = true
         SaveData.borderEnabled = false
         SaveData.SMASPlusPlus.options.clockTheme = "normal"
