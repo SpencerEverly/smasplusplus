@@ -76,6 +76,7 @@ function onKeyboardPress(k, v)
     if not updateractive and not blackscreen then
         if k == VK_F8 then
             f8PressedState = true
+            bootshow = false
             active = true
         end
         if active then
@@ -89,14 +90,14 @@ function onKeyboardPress(k, v)
     end
 end
 
+local bootimage = Graphics.loadImageResolved("SMAS - Start/bootscreen_final.png")
+
 function onDraw()
-    local bootimage = Graphics.loadImageResolved("SMAS - Start/bootscreen_final.png")
-    
     if bootshow then
-        Graphics.drawImageWP(bootimage, 0, 0, -4)
+        Graphics.drawImageWP(bootimage, Screen.calculateCameraDimensions(0, 1), Screen.calculateCameraDimensions(0, 2), 6)
     end
     if blackscreen then
-        Graphics.drawScreen{color = Color.black, priority = -5}
+        Graphics.drawScreen{color = Color.black, priority = 6}
     end
     if active then
         if SaveData.racaActivated == nil or not SaveData.racaActivated then
@@ -190,6 +191,7 @@ function onInputUpdate()
     if not updateractive and not blackscreen then
         if player.keys.jump == KEYS_PRESSED then
             f8PressedState = true
+            bootshow = false
             active = true
             player:mem(0x11E, FIELD_BOOL, false)
         end

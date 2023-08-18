@@ -22,11 +22,11 @@ function smasResolutions.changeResolution()
     end
 end
 
+function smasResolutions.onStart()
+    smasResolutions.changeResolution()
+end
+
 function smasResolutions.onDraw()
-    --Resolutions
-    if lunatime.tick() == 3 then
-        smasResolutions.changeResolution()
-    end
     --CRT Filter
     if SaveData.SMASPlusPlus.options.enableCRTFilter then
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
