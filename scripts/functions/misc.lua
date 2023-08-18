@@ -1060,6 +1060,9 @@ local screenShakeCaptureBuffer = Graphics.CaptureBuffer(800,600)
 
 function Misk.onDraw()
     if SMBX_VERSION == VER_SEE_MOD then
+        if (screenShakeCaptureBuffer.width ~= camera.width or screenShakeCaptureBuffer.height ~= camera.height) then
+            screenShakeCaptureBuffer = Graphics.CaptureBuffer(camera.width, camera.height)
+        end
         if shaketally > 0 then
             shaketally = shaketally - 1
             Misc.setWindowPosition(((oldx + math.random(((shaketally / 4 + 4))) - math.random((shaketally / 4) + 4))),((oldy + math.random(((shaketally / 4) + 4))) - math.random(((shaketally / 4) + 4)))) --Thanks Toby Fox!
@@ -1075,8 +1078,8 @@ function Misk.onDraw()
                 x = 0,
                 y = 0,
                 priority = 0,
-                width = 800,
-                height = 600,
+                width = camera.width,
+                height = camera.height,
                 sourceX = ((zeroed + math.random(((screenShakeTally / 4 + 4))) - math.random((screenShakeTally / 4) + 4))),
                 sourceY = ((zeroed + math.random(((screenShakeTally / 4) + 4))) - math.random(((screenShakeTally / 4) + 4))),
             }

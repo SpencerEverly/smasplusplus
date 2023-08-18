@@ -457,7 +457,7 @@ function onStart()
 end
 
 function onDraw()
-    Graphics.drawImageWP(HUDimage, 0, 0, -4.69)
+    Graphics.drawImageWP(HUDimage, Screen.calculateCameraDimensions(0, 1), Screen.calculateCameraDimensions(0, 2), 4.69)
     
     if player.section == 9 then
         textplus.print{x=-19760, y=-20272, text = "Floor 1: Star List", priority=-86, color=Color.white, sceneCoords=true, font=infobooth1}
