@@ -22,7 +22,9 @@ end
 
 --**Player-related data**
 --**Themes, resolutions**
-SaveData.resolution = SaveData.resolution or "fullscreen"
+if SaveData.SMASPlusPlus.options.resolution == nil then
+    SaveData.SMASPlusPlus.options.resolution = "fullscreen"
+end
 if SaveData.SMASPlusPlus.options.clockTheme == nil then --Default clock theme is "normal"
     SaveData.SMASPlusPlus.options.clockTheme = "normal"
 end
@@ -191,6 +193,10 @@ end
 if SaveData.disableX2char ~= nil then
     SaveData.SMASPlusPlus.game.onePointThreeModeActivated = SaveData.disableX2char
     SaveData.disableX2char = nil
+end
+if SaveData.resolution ~= nil then
+    SaveData.SMASPlusPlus.options.resolution = SaveData.resolution
+    SaveData.resolution = nil
 end
 
 if SaveData.totalcoins ~= nil then --If using the old SaveData function, use the new one and nil the original out

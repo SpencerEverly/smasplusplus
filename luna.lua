@@ -343,9 +343,6 @@ function onStart() --Now do onStart...
     if Misc.inEditor() and SysManager.isOutsideOfUnplayeredAreas() then
         GameData.gameFirstLoaded = false
     end
-    if SMBX_VERSION == VER_SEE_MOD then
-        --Screen.changeResolution(1066,600)
-    end
 end
 
 local cameratimer = 10

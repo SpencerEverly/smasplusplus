@@ -154,8 +154,6 @@ function Screen.changeResolution(width,height)
         Graphics.setFramebufferSize(width,height)
         camera.width = width
         camera.height = height
-        camera:mem(0x10, FIELD_DFLOAT, width)
-        camera:mem(0x18, FIELD_DFLOAT, height)
     end
 end
 

@@ -1,7 +1,7 @@
 local Routine = require("routine")
 local littleDialogue = require("littleDialogue")
 
-SaveData.resolution = "fullscreen"
+SaveData.SMASPlusPlus.options.resolution = "fullscreen"
 SaveData.letterbox = true
 SaveData.borderEnabled = true
 SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false

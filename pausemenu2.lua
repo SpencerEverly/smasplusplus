@@ -202,6 +202,20 @@ local function crtChangeSettings()
     end
 end
 
+local function changeResolutionSettings()
+    Sound.playSFX("resolution-set.ogg")
+    screenModes = pauseplus.getSelectionValue("screensettings","Switch Resolution")
+    if screenModes == "Fullscreen" then
+        SaveData.SMASPlusPlus.options.resolution = "fullscreen"
+    elseif screenModes == "Widescreen" then
+        SaveData.SMASPlusPlus.options.resolution = "widescreen"
+    elseif screenModes == "Ultrawide" then
+        SaveData.SMASPlusPlus.options.resolution = "ultrawide"
+    end
+    Routine.waitFrames(1, false)
+    smasResolutions.changeResolution()
+end
+
 local function togglepwingsfx()
     if pauseplus.getSelectionValue("soundsettings","Disable P-Wing Sound") then
         SaveData.disablePWingSFX = true
@@ -1510,6 +1524,9 @@ function pauseSpecifics()
         
         --Screen Settings
         pauseplus.createOption("screensettings",{text = "Enable CRT Display",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable a CRT display when playing the game! Great for TV nostalgia.", action =  function() crtChangeSettings() end})
+        if SMBX_VERSION == VER_SEE_MOD then
+            pauseplus.createOption("screensettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES, description = "Switch between resolutions.", selectionNames = {"Fullscreen","Widescreen","Ultrawide"}, action = function() Routine.run(changeResolutionSettings) end})
+        end
         
         --Character Menu
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then

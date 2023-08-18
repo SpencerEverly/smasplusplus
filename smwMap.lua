@@ -23,10 +23,7 @@ local smasExtraSounds = require("smasExtraSounds")
 local inspect = require("ext/inspect")
 
 --In case if first time boot recieves an weird error message with ipairs, I put every SaveData generation from luna.lua into here.
-if SaveData.resolution == nil then
-    SaveData.resolution = "fullscreen"
-end
-if SaveData.letterbox == nil then
+--[[if SaveData.letterbox == nil then
     SaveData.letterbox = true
 end
 if SaveData.borderEnabled == nil then
@@ -37,6 +34,10 @@ if SaveData.totalStarCount == nil then --This will make a new star count system 
 end
 if SaveData.completeLevels == nil then --This will add a table to list completed levels
     SaveData.completeLevels = {}
+end
+
+if SaveData.SMASPlusPlus.options.resolution == nil then
+    SaveData.SMASPlusPlus.options.resolution = "fullscreen"
 end
 if SaveData.SMASPlusPlus.hud.coins == nil then
     SaveData.SMASPlusPlus.hud.coins = 0
@@ -52,7 +53,7 @@ if SaveData.SMASPlusPlus.hud.coinsClassic == nil then
 end
 if SaveData.SMASPlusPlus.hud.score == nil then
     SaveData.SMASPlusPlus.hud.score = 0
-end
+end]]
 
 --This is the name of the level file that the map is on.
 smwMap.levelFilename = "map.lvlx"
