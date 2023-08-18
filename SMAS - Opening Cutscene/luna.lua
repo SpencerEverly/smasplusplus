@@ -48,7 +48,7 @@ function skipopening()
 end
 
 function onDraw()
-    Text.printWP("Press jump to skip", 230, 540, 0)
+    Text.printWP("Press jump to skip", Screen.calculateCameraDimensions(230, 1), Screen.calculateCameraDimensions(540, 2), 0)
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
     end
@@ -60,7 +60,7 @@ function onDraw()
     if frame >= 2743 then
         frame = 2743
     end
-    Graphics.drawImageWP(frameImages[frame], 0, 0, -5)
+    Graphics.drawImageWP(frameImages[frame], Screen.calculateCameraDimensions(0, 1), Screen.calculateCameraDimensions(0, 2), 5)
     if timer >= 19700 then
         if not SaveData.openingComplete then
             SaveData.openingComplete = true

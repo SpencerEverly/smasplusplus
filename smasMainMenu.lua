@@ -77,7 +77,6 @@ smasMainMenu.showLogoOnScreen = true
 smasMainMenu.showPressJumpText = true
 
 smasMainMenu.showEasterEggMessage = false
-smasMainMenu.showP1ActiveCharacterOnScreen = false
 smasMainMenu.showStatusOf13ModeOnScreen = true
 smasMainMenu.showStatusOfMultiplayerOnScreen = true
 
@@ -1284,26 +1283,26 @@ function smasMainMenu.onDraw()
             end
         end
         if smasMainMenu.showVersionNumber then
-            Graphics.drawBox{x=710, y=5, width=84, height=28, color=Color.black..0.5, priority=-7}
-            textplus.print{x=718, y=10, text = VersionOfEpisode, priority=-6, color=Color.white, font=smasMainMenu.sonicManiaFont, xscale = 1.6, yscale = 1.6} --Version number of the episode
+            Graphics.drawBox{x = camera.width - 90, y=5, width=84, height=28, color=Color.black..0.5, priority=-7}
+            textplus.print{x = camera.width - 82, y=10, text = VersionOfEpisode, priority=-6, color=Color.white, font=smasMainMenu.sonicManiaFont, xscale = 1.6, yscale = 1.6} --Version number of the episode
         end
         if smasMainMenu.showEscapeToQuitMessage then
             textplus.print{x=12, y=12, text = "Press pause to quit.", priority=-6, color=Color.yellow, xscale = 1.6, yscale = 1.6}
             Graphics.drawBox{x=5, y=5, width=148, height=28, color=Color.red..0.5, priority=-7}
         end
         if smasMainMenu.showPressJumpText then
-            textplus.print{x=210, y=390, text = "Press jump to start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFont}
+            textplus.print{x = (camera.width / 2) - 200, y=390, text = "Press jump to start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFont}
         end
         if smasMainMenu.showWebsiteTextOnScreen then
-            textplus.print{x=30, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFontWebsite}
+            textplus.print{x=(camera.width / 2) - 375, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFontWebsite}
         end
         if smasMainMenu.showLogoOnScreen then
             if SaveData.currentLanguage == "english" then
-                Graphics.drawImageWP(smasMainMenu.smasLogoImg, 176, 16, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 243, 16, -4)
             elseif SaveData.currentLanguage == "japanese" then
-                Graphics.drawImageWP(smasMainMenu.smasLogoJpnImg, 106, 20, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoJpnImg, (camera.width / 2) - 173, 20, -4)
             else
-                Graphics.drawImageWP(smasMainMenu.smasLogoImg, 176, 16, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 243, 16, -4)
             end
         end
         if smasMainMenu.showBlackScreen then
@@ -1311,40 +1310,37 @@ function smasMainMenu.onDraw()
         end
         if smasMainMenu.showStatusOfMultiplayerOnScreen then
             if Player.count() == 1 then
-                textplus.print{x=243, y=10, text = "2 player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
+                textplus.print{x=(camera.width / 2) - 157, y=10, text = "2 player mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
             elseif Player.count() >= 2 then
-                textplus.print{x=248, y=10, text = "2 player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
+                textplus.print{x=(camera.width / 2) - 162, y=10, text = "2 player mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
             end
         end
         if smasMainMenu.showStatusOf13ModeOnScreen then
             if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-                textplus.print{x=243, y=26, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
+                textplus.print{x=(camera.width / 2) - 157, y=26, text = "SMBX 1.3 mode is DISABLED", priority=-7, color=Color.yellow, font=statusFont, xscale = 1.6, yscale = 1.6}
             elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-                textplus.print{x=248, y=26, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
+                textplus.print{x=(camera.width / 2) - 162, y=26, text = "SMBX 1.3 mode is ENABLED", priority=-7, color=Color.lightred, font=statusFont, xscale = 1.6, yscale = 1.6}
             end
         end
-        if smasMainMenu.showP1ActiveCharacterOnScreen then
-            textplus.print{x=303, y=20, text = "P1's Active Character: ", priority=-7, color=Color.yellow, font=statusFont}
-        end
         if not smasMainMenu.hideGameSMBXAndSMBX2Credits then
-            textplus.print{x=180, y=480, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red, xscale = 2, yscale = 2}
-            textplus.print{x=178, y=477, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
-            textplus.print{x=170, y=500, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-7, color=Color.red, xscale = 2, yscale = 2}
-            textplus.print{x=168, y=497, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Enjl", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
+            textplus.print{x=(camera.width / 2) - 220, y=480, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-7, color=Color.red, xscale = 2, yscale = 2}
+            textplus.print{x=(camera.width / 2) - 222, y=477, text = "Game by Spencer Everly, SMBX by redigit, SMBX2 by", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
+            textplus.print{x=(camera.width / 2) - 236, y=500, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Emral", priority=-7, color=Color.red, xscale = 2, yscale = 2}
+            textplus.print{x=(camera.width / 2) - 238, y=497, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Emral", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
         end
         if smasMainMenu.showWorldMapSkipMessage then
             if SaveData.openingComplete then
-                textplus.print{x=40, y=450, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont, xscale = 1.5, yscale = 1.5}
+                textplus.print{x=(camera.width / 2) - 360, y=450, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont, xscale = 1.5, yscale = 1.5}
             end
         end
         if smasMainMenu.showEasterEggMessage then
-            textplus.print{x=150, y=550, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
+            textplus.print{x=(camera.width / 2) - 250, y=550, text = "Welcome to Totaka's Song. Congrats, you found the easter egg ;)", priority=0, color=Color.yellow, font=statusFont}
         end
         if smasMainMenu.aprilFools then    
             Graphics.drawImageWP(aprilFoolsErrorImg, 0, 0, 0)
         end
         if stpatricksday then
-            textplus.print{x=300, y=460, text = "Happy St. Patricks Day!", priority=0, color=Color.green, font=statusFont}
+            textplus.print{x=(camera.width / 2) - 100, y=460, text = "Happy St. Patricks Day!", priority=0, color=Color.green, font=statusFont}
         end
     end
 end

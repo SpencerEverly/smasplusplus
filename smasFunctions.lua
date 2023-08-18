@@ -27,6 +27,7 @@ _G.Screen = require("scripts/functions/camera")
 _G.Evento = require("scripts/functions/events")
 _G.Effectx = require("scripts/functions/effect")
 _G.Collisionz = require("scripts/functions/collision")
+_G.Liquidz = require("scripts/functions/liquid")
 
 --This is used for spitting out help documentation for these scripts.
 function smasFunctions.help()
