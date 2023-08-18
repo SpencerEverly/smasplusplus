@@ -1298,11 +1298,11 @@ function smasMainMenu.onDraw()
         end
         if smasMainMenu.showLogoOnScreen then
             if SaveData.currentLanguage == "english" then
-                Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 243, 16, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 233, 16, -4)
             elseif SaveData.currentLanguage == "japanese" then
-                Graphics.drawImageWP(smasMainMenu.smasLogoJpnImg, (camera.width / 2) - 173, 20, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoJpnImg, (camera.width / 2) - 163, 20, -4)
             else
-                Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 243, 16, -4)
+                Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 233, 16, -4)
             end
         end
         if smasMainMenu.showBlackScreen then

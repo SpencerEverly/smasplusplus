@@ -251,8 +251,8 @@ function smasMainMenuSystem.getDialogMessage(args)
 end
 
 function smasMainMenuSystem.getMenuPosition()
-    smasMainMenuSystem.MenuX = ScreenW / 2 - smasMainMenuSystem.MenuXCentered
-    smasMainMenuSystem.MenuY = ScreenH - smasMainMenuSystem.MenuYCentered
+    smasMainMenuSystem.MenuX = camera.width / 2 - smasMainMenuSystem.MenuXCentered
+    smasMainMenuSystem.MenuY = camera.height - smasMainMenuSystem.MenuYCentered
 end
 
 function smasMainMenuSystem.handleMouseMove(items,x,y,maxWidth,itemHeight)
@@ -493,11 +493,11 @@ function smasMainMenuSystem.onDraw()
             end
             
             if not smasMainMenuSystem.hideTitle then
-                textplus.print({pivot = vector.v2(0.5,0.5), x = 400, y = 310, text = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title), priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
+                textplus.print({pivot = vector.v2(0.5,0.5), x = Screen.calculateCameraDimensions(400, 1), y = Screen.calculateCameraDimensions(310, 2), text = transplate.getTranslation(smasMainMenuSystem.menuItems[smasMainMenuSystem.onMenu].title), priority = smasMainMenuSystem.priority, font = smasMainMenuSystem.mainMenuFont, xscale = 2, yscale = 2})
             end
             
             if smasMainMenuSystem.isOnDialog then
-                textplus.render{x = currentSection.dialogMessageX, y = currentSection.dialogMessageY, layout = currentDialog[smasMainMenuSystem.currentPageMarker], priority = smasMainMenuSystem.priority}
+                textplus.render{x = Screen.calculateCameraDimensions(currentSection.dialogMessageX, 1), y = Screen.calculateCameraDimensions(currentSection.dialogMessageY, 2), layout = currentDialog[smasMainMenuSystem.currentPageMarker], priority = smasMainMenuSystem.priority}
             end
             
             for k = smasMainMenuSystem.minShow, smasMainMenuSystem.maxShow do
@@ -570,13 +570,13 @@ function smasMainMenuSystem.onDraw()
             
             if smasMainMenuSystem.minShow > 1 then
                 if not smasMainMenuSystem.hideArrows then
-                    Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 44, 0, 0, smasMainMenuSystem.arrowImg.width / 2, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
+                    Graphics.drawImageWP(smasMainMenuSystem.arrowImg, camera.width / 2 - 8, smasMainMenuSystem.MenuY + 44, 0, 0, smasMainMenuSystem.arrowImg.width / 2, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
                 end
             end
             
             if smasMainMenuSystem.maxShow < original_maxShow then
                 if not smasMainMenuSystem.hideArrows then
-                    Graphics.drawImageWP(smasMainMenuSystem.arrowImg, ScreenW / 2 - 8, smasMainMenuSystem.MenuY + 204, smasMainMenuSystem.arrowImg.width / 2, 0, 20, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
+                    Graphics.drawImageWP(smasMainMenuSystem.arrowImg, camera.width / 2 - 8, smasMainMenuSystem.MenuY + 204, smasMainMenuSystem.arrowImg.width / 2, 0, 20, smasMainMenuSystem.arrowImg.height, smasMainMenuSystem.priority)
                 end
             end
             
