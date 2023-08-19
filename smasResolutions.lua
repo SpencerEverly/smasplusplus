@@ -16,6 +16,8 @@ function smasResolutions.changeResolution()
             Screen.changeResolution(1066,600)
         elseif SaveData.SMASPlusPlus.options.resolution == "ultrawide" then
             Screen.changeResolution(1424,600)
+        elseif SaveData.SMASPlusPlus.options.resolution == "steamdeck" then
+            Screen.changeResolution(960,600)
         else
             Screen.changeResolution(800,600)
         end

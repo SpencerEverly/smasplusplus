@@ -211,6 +211,8 @@ local function changeResolutionSettings()
         SaveData.SMASPlusPlus.options.resolution = "widescreen"
     elseif screenModes == "Ultrawide" then
         SaveData.SMASPlusPlus.options.resolution = "ultrawide"
+    elseif screenModes == "Steam Deck" then
+        SaveData.SMASPlusPlus.options.resolution = "steamdeck"
     end
     Routine.waitFrames(1, false)
     smasResolutions.changeResolution()
@@ -1525,7 +1527,7 @@ function pauseSpecifics()
         --Screen Settings
         pauseplus.createOption("screensettings",{text = "Enable CRT Display",selectionType = pauseplus.SELECTION_CHECKBOX,description = "Enable a CRT display when playing the game! Great for TV nostalgia.", action =  function() crtChangeSettings() end})
         if SMBX_VERSION == VER_SEE_MOD then
-            pauseplus.createOption("screensettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES, description = "Switch between resolutions.", selectionNames = {"Fullscreen","Widescreen","Ultrawide"}, action = function() Routine.run(changeResolutionSettings) end})
+            pauseplus.createOption("screensettings",{text = "Switch Resolution",selectionType = pauseplus.SELECTION_NAMES, description = "Switch between resolutions.", selectionNames = {"Fullscreen","Widescreen","Ultrawide","Steam Deck"}, action = function() Routine.run(changeResolutionSettings) end})
         end
         
         --Character Menu
