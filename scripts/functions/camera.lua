@@ -189,6 +189,14 @@ function Screen.calculateCameraDimensions(value, isWidthOrHeight)
     end
 end
 
+function Screen.getScreenSize()
+    if SMBX_VERSION == VER_SEE_MOD then
+        return Graphics.getFramebufferSize()
+    else
+        return {800, 600}
+    end
+end
+
 function Screen.onDraw()
     if setCameraPosition then --Camera position stuff
         if cameraPausedWhileScrolling then

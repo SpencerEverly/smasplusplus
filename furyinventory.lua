@@ -110,12 +110,12 @@ local minreserve = 0
 
 
 function furyinventory.onInitAPI()
-    registerEvent(furyinventory , "onStart")
-    registerEvent(furyinventory , "onDraw")
-    registerEvent(furyinventory , "onPostNPCKill")
-    registerEvent(furyinventory , "onTick")
-    registerEvent(furyinventory , "onEvent")
-    registerEvent(furyinventory , "onInputUpdate")
+    registerEvent(furyinventory, "onStart")
+    registerEvent(furyinventory, "onDraw")
+    registerEvent(furyinventory, "onPostNPCKill")
+    registerEvent(furyinventory, "onTick")
+    registerEvent(furyinventory, "onEvent")
+    registerEvent(furyinventory, "onInputUpdate")
 end
 
 function makereservefalse()
