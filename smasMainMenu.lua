@@ -1197,10 +1197,10 @@ function smasMainMenu.onDraw()
             end
         end
         if Level.filename() == "intro_8bit.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_theeditedboss.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_S!TS!.lvlx" then
             --No curtains
@@ -1209,43 +1209,43 @@ function smasMainMenu.onDraw()
             --No curtains
         end
         if Level.filename() == "intro_SMBX1.0.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.redCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.redCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.1.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.2.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.3.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.orangeCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.orangeCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_SMBX1.3og.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_SMBX2.lvlx" then
             --No curtains
         end
         if Level.filename() == "intro_SMBX2b3.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.orangeCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.orangeCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_WSMBA.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_sunsetbeach.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_scrollingheights.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_jakebrito1.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_jakebrito2.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         if Level.filename() == "intro_circuitcity.lvlx" then
-            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, -1000, 0, -12)
+            Graphics.drawImageWP(smasMainMenu.blueCurtainsImage, 0, 0, -12)
         end
         
         if smasMainMenu.enableMouseEnemyKilling then

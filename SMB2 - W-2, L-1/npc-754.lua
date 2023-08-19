@@ -10,7 +10,7 @@
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
 
-local ai = require("subspace_ai")
+local ai = require("ai_smas/subspace_ai")
 
 
 local subspace = {}

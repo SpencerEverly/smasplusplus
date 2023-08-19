@@ -2391,7 +2391,7 @@ do
 
             y = y - height
 
-            Text.printWP(text,x - width*0.5,y,6)
+            Text.printWP(text,Screen.calculateCameraDimensions(x - width*0.5, 1),Screen.calculateCameraDimensions(y, 2),6)
         end
     end)
 
@@ -4496,7 +4496,7 @@ do
                     local x = startX + ((i - 1) % hudSettings.starcoinsMaxPerLine)*width
                     local y = startY + math.floor((i - 1) / hudSettings.starcoinsMaxPerLine)*height
 
-                    Graphics.drawImageWP(image,x,y,priority)
+                    Graphics.drawImageWP(image,Screen.calculateCameraDimensions(x, 1),Screen.calculateCameraDimensions(y, 2),priority)
                 end
             end
         end
@@ -4533,7 +4533,7 @@ do
         for i = 0, 359, 90 do
             local position = halfCameraSize + (vector(0,-1):rotate(i) * (halfCameraSize-24))
 
-            Graphics.drawBox{texture = image,target = smwMap.mainBuffer,priority = -6,centred = true,rotation = i,x = position.x,y = position.y}
+            Graphics.drawBox{texture = image,target = smwMap.mainBuffer,priority = -6,centred = true,rotation = i,x = Screen.calculateCameraDimensions(position.x, 1),y = Screen.calculateCameraDimensions(position.y, 2)}
         end
     end
 
@@ -4635,7 +4635,7 @@ do
         basicGlDrawArgs.target = smwMap.mainBuffer
 
 
-        Graphics.drawBox{color = Color.black,target = smwMap.mainBuffer,x = 0,y = 0,width = smwMap.mainBuffer.width,height = smwMap.mainBuffer.height,priority = -101}
+        Graphics.drawBox{color = Color.black,target = smwMap.mainBuffer,x = Screen.calculateCameraDimensions(0, 1),y = Screen.calculateCameraDimensions(0, 2),width = smwMap.mainBuffer.width,height = smwMap.mainBuffer.height,priority = -101}
 
 
         -- Draw background
@@ -4717,7 +4717,7 @@ do
 
             smwMap.drawHUD()
         else
-            Graphics.drawBox{texture = smwMap.mainBuffer,x = 0,y = 0,priority = -5.01}
+            Graphics.drawBox{texture = smwMap.mainBuffer,x = Screen.calculateCameraDimensions(0, 1),y = Screen.calculateCameraDimensions(0, 2),priority = -5.01}
         end
     end
 

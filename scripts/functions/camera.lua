@@ -139,6 +139,14 @@ function Screen.viewPortCoordinateY(y,height)
     return y / 2 - (height * 0.5)
 end
 
+function Screen.getScreenSize()
+    if SMBX_VERSION == VER_SEE_MOD then
+        return Graphics.getFramebufferSize()
+    else
+        return {800, 600}
+    end
+end
+
 function Screen.changeResolution(width,height)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
@@ -169,11 +177,11 @@ function Screen.calculateCameraDimensions(value, isWidthOrHeight)
         local originalWidth = 800
         local originalHeight = 600
         
-        local pixelDifferenceWidth = originalWidth / camera.width
-        local pixelDifferenceHeight = originalHeight / camera.height
+        local pixelDifferenceWidth = originalWidth / Screen.getScreenSize()[1]
+        local pixelDifferenceHeight = originalHeight / Screen.getScreenSize()[2]
         
-        local additionalWidth = camera.width - originalWidth
-        local additionalHeight = camera.height - originalHeight
+        local additionalWidth = Screen.getScreenSize()[1] - originalWidth
+        local additionalHeight = Screen.getScreenSize()[2] - originalHeight
         
         local extendedWidth = additionalWidth / 2
         local extendedHeight = additionalHeight / 2
@@ -186,14 +194,6 @@ function Screen.calculateCameraDimensions(value, isWidthOrHeight)
             error("This is not a valid value for isWidthOrHeight. You must use a string value for this (Or a number), like e.g. \"width\" or \"height\", or 1 or 2.")
             return
         end
-    end
-end
-
-function Screen.getScreenSize()
-    if SMBX_VERSION == VER_SEE_MOD then
-        return Graphics.getFramebufferSize()
-    else
-        return {800, 600}
     end
 end
 
