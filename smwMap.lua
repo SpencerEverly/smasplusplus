@@ -395,7 +395,12 @@ do
 
 
     function smwMap.TRANSITION_FADE(progress,priority)
-        Graphics.drawBox{priority = priority,color = Color.black.. progress,x = 0,y = 0,width = SCREEN_WIDTH,height = SCREEN_HEIGHT}
+        Graphics.drawBox{priority = priority,color = Color.black.. progress,x = Screen.calculateCameraDimensions(0, 1),y = Screen.calculateCameraDimensions(0, 2),width = SCREEN_WIDTH,height = SCREEN_HEIGHT}
+    end
+    
+    
+    function smwMap.TRANSITION_FADE_FULL(progress,priority)
+        Graphics.drawBox{priority = priority,color = Color.black.. progress,x = 0,y = 0,width = camera.width,height = camera.height}
     end
 
 
@@ -4281,8 +4286,8 @@ do
 
 
         if hudSettings.borderEnabled and hudSettings.borderImage ~= nil then
-            Graphics.drawImageWP(hudSettings.borderImage,0,0,-3)
-            Graphics.drawImageWP(hudSettings.borderImageBG,0,0,-100)
+            Graphics.drawImageWP(hudSettings.borderImage,Screen.calculateCameraDimensions(0, 1),Screen.calculateCameraDimensions(0, 2),-3)
+            Graphics.drawImageWP(hudSettings.borderImageBG,Screen.calculateCameraDimensions(0, 1),Screen.calculateCameraDimensions(0, 2),-100)
         end
 
 
@@ -4361,20 +4366,20 @@ do
                     
                     if not SaveData.SMASPlusPlus.map.inventory.canUseStarman then
                         p:render{
-                            x = x,y = y,
+                            x = Screen.calculateCameraDimensions(x, 1),y = Screen.calculateCameraDimensions(y, 2),
                             ignorestate = true,sceneCoords = false,priority = -2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
                             frame = frame,
                         }
                     elseif SaveData.SMASPlusPlus.map.inventory.canUseStarman then
                         p:render{
-                            x = x,y = y,
+                            x = Screen.calculateCameraDimensions(x, 1),y = Screen.calculateCameraDimensions(y, 2),
                             ignorestate = true,sceneCoords = false,priority = -1.9,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
                             frame = frame,
                             shader = starmanShader,
                         }
                     else
                         p:render{
-                            x = x,y = y,
+                            x = Screen.calculateCameraDimensions(x, 1),y = Screen.calculateCameraDimensions(y, 2),
                             ignorestate = true,sceneCoords = false,priority = -2,color = (Defines.cheat_shadowmario and Color.black) or Color.white,
                             frame = frame,
                         }
@@ -4417,7 +4422,7 @@ do
 
                     if icon ~= nil then
                         --Graphics.drawBox{texture = icon,priority = priority,x = xPosition,y = counterY - icon.height}
-                        Graphics.drawImageWP(icon,xPosition,counterY - icon.height,-2)
+                        Graphics.drawImageWP(icon,Screen.calculateCameraDimensions(xPosition, 1),Screen.calculateCameraDimensions(counterY - icon.height, 2),-2)
                         totalWidth = totalWidth + icon.width
                         tallestElementHeight = math.max(tallestElementHeight,icon.height)
                     end
@@ -4430,7 +4435,7 @@ do
                         counter.oldText = currentText
                     end
 
-                    textplus.render{layout = counter.textLayout,priority = -2,x = xPosition + widestIconWidth,y = counterY - counter.textLayout.height}
+                    textplus.render{layout = counter.textLayout,priority = -2,x = Screen.calculateCameraDimensions(xPosition + widestIconWidth, 1),y = Screen.calculateCameraDimensions(counterY - counter.textLayout.height, 2)}
                     totalWidth = totalWidth + counter.textLayout.width
                     tallestElementHeight = math.max(tallestElementHeight,counter.textLayout.height)
 
@@ -4508,7 +4513,7 @@ do
 
             smwMap.levelTitleLayout = textplus.layout(levelTitle, levelTitleMaxWidth, {font = hudSettings.levelTitleFont,xscale = hudSettings.levelTitleScale,yscale = hudSettings.levelTitleScale})
 
-            textplus.render{layout = smwMap.levelTitleLayout,color = smwMap.hudSettings.levelTitleColor,priority = -2,x = xPosition,y = hudSettings.borderTopHeight + hudSettings.levelTitleOffsetY - smwMap.levelTitleLayout.height}
+            textplus.render{layout = smwMap.levelTitleLayout,color = smwMap.hudSettings.levelTitleColor,priority = -2,x = Screen.calculateCameraDimensions(xPosition, 1),y = Screen.calculateCameraDimensions(hudSettings.borderTopHeight + hudSettings.levelTitleOffsetY - smwMap.levelTitleLayout.height, 2)}
         end
     end
 
@@ -4701,7 +4706,8 @@ do
             Graphics.drawBox{
                 texture = smwMap.mainBuffer,priority = -5.01,
 
-                x = smwMap.camera.renderX,y = smwMap.camera.renderY,
+                x = Screen.calculateCameraDimensions(smwMap.camera.renderX, 1),
+                y = Screen.calculateCameraDimensions(smwMap.camera.renderY, 2),
                 sourceX = 0,sourceY = 0,
 
                 width = smwMap.camera.width,height = smwMap.camera.height,
@@ -4834,6 +4840,8 @@ function smwMap.onDraw()
         starmanMusicMapped = SFX.play(starmanMusicMap, Audio.MusicVolume() / 100 - 0.35, 0)
         smwMap.isPlayingStarmanMapMusic = true
     end
+    
+    Graphics.drawScreen{priority = -99, color = Color.fromHexRGB(0x466B9C)}
 end
 
 function smwMap.onInputUpdate()
@@ -5056,19 +5064,19 @@ smwMap.selectStartPointSettings = {
 
 smwMap.transitionSettings = {
     selectedLevelSettings = {
-        drawFunction = smwMap.TRANSITION_FADE,
+        drawFunction = smwMap.TRANSITION_FADE_FULL,
         progressTime = 28,
         priority = 6,
     },
 
     enterEncounterSettings = {
-        drawFunction = smwMap.TRANSITION_FADE,
+        drawFunction = smwMap.TRANSITION_FADE_FULL,
         progressTime = 28,
         priority = 6,
     },
 
     enterMapSettings = {
-        drawFunction = smwMap.TRANSITION_FADE,
+        drawFunction = smwMap.TRANSITION_FADE_FULL,
         progressTime = 14,
         priority = 6,
         
