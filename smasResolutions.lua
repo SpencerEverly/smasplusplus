@@ -10,17 +10,20 @@ end
 
 function smasResolutions.changeResolution()
     if SMBX_VERSION == VER_SEE_MOD then
-        if SaveData.SMASPlusPlus.options.resolution == "fullscreen" then
-            Screen.changeResolution(800,600)
-        elseif SaveData.SMASPlusPlus.options.resolution == "widescreen" then
-            Screen.changeResolution(1066,600)
-        elseif SaveData.SMASPlusPlus.options.resolution == "ultrawide" then
-            Screen.changeResolution(1424,600)
-        elseif SaveData.SMASPlusPlus.options.resolution == "steamdeck" then
-            Screen.changeResolution(960,600)
-        else
-            Screen.changeResolution(800,600)
-        end
+        Routine.run(function()
+            Routine.waitFrames(1, true)
+            if SaveData.SMASPlusPlus.options.resolution == "fullscreen" then
+                Screen.changeResolution(800,600)
+            elseif SaveData.SMASPlusPlus.options.resolution == "widescreen" then
+                Screen.changeResolution(1066,600)
+            elseif SaveData.SMASPlusPlus.options.resolution == "ultrawide" then
+                Screen.changeResolution(1424,600)
+            elseif SaveData.SMASPlusPlus.options.resolution == "steamdeck" then
+                Screen.changeResolution(960,600)
+            else
+                Screen.changeResolution(800,600)
+            end
+        end)
     end
 end
 

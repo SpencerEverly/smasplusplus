@@ -66,6 +66,7 @@ smasMainMenuSystem.menuSections = {
     DIALOG_BATTLEMODE_HAVE2NDPLAYER = 22,
     DIALOG_BATTLEMODE_HAVE13MODEON = 23,
     DIALOG_BATTLEMODE_EXIT = 24,
+    SECTION_SETTINGS_CHANGERESOLUTION = 25,
 }
 
 smasMainMenuSystem.menuItems = {} --Used for all the menu items.
@@ -154,6 +155,7 @@ isSaveData = If the boolean takes in SaveData.
 isGameData = If the boolean takes in GameData.
 numberValue = The number variable to use for toggling this option.
 maxNumber = The maximum the numberValue can go when changing the setting.
+SaveDataArgs = The number that the SaveData path takes.
 ]]
 function smasMainMenuSystem.addMenuItem(args)
     args.name = args.name or "nil"
@@ -182,6 +184,9 @@ function smasMainMenuSystem.addMenuItem(args)
     if args.isPauseplusValue == nil then
         args.isPauseplusValue = false
     end
+    if args.saveDataArgs == nil then
+        args.saveDataArgs = 0
+    end
     args.numberToUse = args.numberToUse or ""
     args.minimumNumber = args.minimumNumber or 1
     args.maxNumber = args.maxNumber or 1
@@ -208,7 +213,8 @@ function smasMainMenuSystem.addMenuItem(args)
         sectionItem = args.sectionItem,
         isSaveData = args.isSaveData,
         isGameData = args.isGameData,
-        isPauseplusValue = args.isPauseplusValue
+        isPauseplusValue = args.isPauseplusValue,
+        saveDataArgs = args.saveDataArgs,
     }
 end
 
@@ -287,7 +293,11 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
             smasMainMenuSystem.PressDelay = 10
         end
         if currentOption.isSaveData then
-            SaveData[currentOption.booleanToUse] = not SaveData[currentOption.booleanToUse]
+            if currentOption.saveDataArgs == 0 then
+                SaveData[currentOption.booleanToUse] = not SaveData[currentOption.booleanToUse]
+            elseif currentOption.saveDataArgs == 1 then
+                SaveData.SMASPlusPlus.options[currentOption.booleanToUse] = not SaveData.SMASPlusPlus.options[currentOption.booleanToUse]
+            end
         end
         if currentOption.isGameData then
             GameData[currentOption.booleanToUse] = not GameData[currentOption.booleanToUse]
@@ -304,10 +314,17 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
             smasMainMenuSystem.PressDelay = 10
         end
         if currentOption.isSaveData then
-            if SaveData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
-                Sound.playSFX(32)
+            if currentOption.saveDataArgs == 0 then
+                if SaveData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
+                    Sound.playSFX(32)
+                end
+                SaveData[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
+            elseif currentOption.saveDataArgs == 1 then
+                if SaveData[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
+                    Sound.playSFX(32)
+                end
+                SaveData.SMASPlusPlus.options[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
             end
-            SaveData.SMASPlusPlus.options[currentOption.multiSelectValueToUse] = currentOption.multiSelectValueToSet
         end
         if currentOption.isGameData then
             if SaveData.SMASPlusPlus.options[currentOption.multiSelectValueToUse] ~= currentOption.multiSelectValueToSet then
