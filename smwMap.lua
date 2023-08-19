@@ -20,6 +20,7 @@ local starmanMusicMapped
 local starmanShader = Misc.multiResolveFile("starman.frag", "shaders\\npc\\starman.frag")
 
 local smasExtraSounds = require("smasExtraSounds")
+local smasFunctions = require("smasFunctions")
 local inspect = require("ext/inspect")
 
 --In case if first time boot recieves an weird error message with ipairs, I put every SaveData generation from luna.lua into here.

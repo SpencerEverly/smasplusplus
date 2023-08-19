@@ -1,1 +1,1 @@
-fullscreen
+normal,1066,600

@@ -472,9 +472,9 @@ function globalgenerals.onExit()
                 GameData.tempReserve[p.idx] = p.reservePowerup
             end
         end
-        File.writeToFile("loadscreeninfo.txt", "fullscreen")
+        File.writeToFile("loadscreeninfo.txt", "normal,"..tostring(camera.width)..","..tostring(camera.height))
     elseif Misc.inMarioChallenge() then
-        File.writeToFile("loadscreeninfo.txt", "mariochallenge")
+        File.writeToFile("loadscreeninfo.txt", "mariochallenge,"..tostring(camera.width)..","..tostring(camera.height))
     end
 end
 

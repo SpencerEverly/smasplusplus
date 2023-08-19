@@ -12,6 +12,8 @@ local EP_LIST_PTR = mem(0x00B250FC, FIELD_DWORD)
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = _episodePath
 local Player = {}
+local frameBufferWidth = 800
+local frameBufferHeight = 600
  
 do
     -- The following code makes the loading screen slightly less restricted
@@ -218,16 +220,55 @@ local timer = 0
 local speed = 0
 
 local loadinfo = "fullscreen"
+local loadinfoFinal = {}
 
 local didyouknow = {"didyouknow1.png", "didyouknow2.png", "didyouknow3.png", "didyouknow4.png", "didyouknow5.png", "didyouknow6.png", "didyouknow7.png", "didyouknow8.png", "didyouknow9.png", "didyouknow10.png", "didyouknow11.png", "didyouknow12.png", "didyouknow13.png", "didyouknow14.png", "didyouknow15.png", "didyouknow16.png", "didyouknow17.png", "didyouknow18.png", "didyouknow19.png", "didyouknow20.png", "didyouknow21.png", "didyouknow22.png", "didyouknow23.png", "didyouknow24.png", "didyouknow25.png", "didyouknow26.png", "didyouknow27.png", "didyouknow28.png", "didyouknow29.png", "didyouknow30.png", "didyouknow31.png", "didyouknow32.png", "didyouknow33.png", "didyouknow34.png", "didyouknow35.png"}
 
 local selecter = rng.randomInt(1,#didyouknow)
 local knowledge = Graphics.loadImage(episodePath.."graphics/didyouknow/"..didyouknow[selecter]);
 
+--Screen.calculateCameraDimensions doesn't exist yet
+local function calculateCameraDimensions(value, isWidthOrHeight)
+    if value == nil then
+        return 0
+    else
+        if isWidthOrHeight == nil then
+            return 0
+        end
+        local originalWidth = 800
+        local originalHeight = 600
+        
+        local pixelDifferenceWidth = originalWidth / frameBufferWidth
+        local pixelDifferenceHeight = originalHeight / frameBufferHeight
+        
+        local additionalWidth = frameBufferWidth - originalWidth
+        local additionalHeight = frameBufferHeight - originalHeight
+        
+        local extendedWidth = additionalWidth / 2
+        local extendedHeight = additionalHeight / 2
+        
+        if (isWidthOrHeight == "width" or isWidthOrHeight == 1) then
+            return value + extendedWidth
+        elseif (isWidthOrHeight == "height" or isWidthOrHeight == 2) then
+            return value + extendedHeight
+        else
+            return 0
+        end
+    end
+end
+
 local function loadtextfile()
     local file = io.open(episodePath .. "loadscreeninfo.txt", "r")
     loadinfo = file:read("*line")
     file:close()
+    
+    loadinfoFinal = string.split(loadinfo,",")
+    if loadinfoFinal[2] ~= nil then
+        frameBufferWidth = tonumber(loadinfoFinal[2])
+    end
+    if loadinfoFinal[3] ~= nil then
+        frameBufferHeight = tonumber(loadinfoFinal[3])
+    end
 end
 
 loadtextfile()
@@ -236,14 +277,6 @@ local letterData = {}
 
 local time = 0
 local loadingTimer = 0
-
---loadingsoundFile = Misc.resolveSoundFile("_OST/All Stars Menu/Loading Screen.ogg")
-
---function onLoad()
-    --loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
-    --loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
-    --fadetolevel = true
---end
 
 function onDraw()
     if image == nil then -- this sometimes happens?
@@ -279,56 +312,15 @@ function onDraw()
     
     speed = speed - 1
     
-    if loadinfo == "fullscreen" then
-        Graphics.drawImage(loadicon, 672, 535, 1, frame2 * 64, 128, 64, opacity)
+    if loadinfoFinal[1] == "normal" then
+        Graphics.drawImage(loadicon, frameBufferWidth - 128, frameBufferHeight - 65, 1, frame2 * 64, 128, 64, opacity)
         Graphics.drawImage(knowledge, 0, 0, 1, 0, 800, 600, opacity)
-        Graphics.drawImage(datetimeunavailable, 0, 0, 1, 0, 800, 600, opacity)
+        Graphics.drawImage(datetimeunavailable, frameBufferWidth - 800, frameBufferHeight - 600, 1, 0, 800, 600, opacity)
     end
-    if loadinfo == "widescreen" then
-        Graphics.drawImage(loadicon, 672, 465, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(knowledge, 0, -70, 1, 0, 800, 600, opacity)
-        Graphics.drawImage(datetimeunavailable, 0, -70, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "ultrawide" then
-        Graphics.drawImage(loadicon, 672, 395, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(knowledge, 0, -140, 1, 0, 800, 600, opacity)
-        Graphics.drawImage(datetimeunavailable, 0, -140, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "steamdeck" then
-        Graphics.drawImage(loadicon, 672, 505, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(knowledge, 0, -35, 1, 0, 800, 600, opacity)
-        Graphics.drawImage(datetimeunavailable, 0, 35, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "nes" then
-        Graphics.drawImageWP(nesborder, 0, 0, 1, 0, 800, 600, opacity, 2)
-        Graphics.drawImage(loadicon, 572, 455, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(knowledge, 80, -80, 1, 0, 800, 600, opacity)
-        Graphics.drawImage(datetimeunavailable, -100, 85, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "gameboy" then
-        Graphics.drawImageWP(gbborder, 0, 0, 1, 0, 800, 600, opacity, 2)
-        Graphics.drawImage(loadicon, 442, 382, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(datetimeunavailable, -230, 140, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "gba" then
-        Graphics.drawImageWP(gbaborder, 0, 0, 1, 0, 800, 600, opacity, 2)
-        Graphics.drawImage(loadicon, 522, 410, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(datetimeunavailable, -150, 135, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "iphone1st" then
-        Graphics.drawImageWP(iphoneoneborder, 0, 0, 1, 0, 800, 600, opacity, 2)
-        Graphics.drawImage(loadicon, 402, 425, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(datetimeunavailable, -270, 112, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "3ds" then
-        Graphics.drawImageWP(threedsborder, 0, 0, 1, 0, 800, 600, opacity, 2)
-        Graphics.drawImage(loadicon, 555, 485, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(datetimeunavailable, -110, 190, 1, 0, 800, 600, opacity)
-    end
-    if loadinfo == "mariochallenge" then
-        Graphics.drawImageWP(mariochallengemodeimg, 0, 0, 1, 0, 800, 600, opacity, 2)
-        Graphics.drawImage(loadicon, 672, 535, 1, frame2 * 64, 128, 64, opacity)
-        Graphics.drawImage(knowledge, 0, 0, 1, 0, 800, 600, opacity)
+    if loadinfoFinal[1] == "mariochallenge" then
+        Graphics.drawImageWP(mariochallengemodeimg, calculateCameraDimensions(0, 1), calculateCameraDimensions(0, 2), 1, 0, 800, 600, opacity, 2)
+        Graphics.drawImage(loadicon, frameBufferWidth - 128, frameBufferHeight - 65, 1, frame2 * 64, 128, 64, opacity)
+        Graphics.drawImage(knowledge, calculateCameraDimensions(0, 1), calculateCameraDimensions(0, 2), 1, 0, 800, 600, opacity)
     end
     
     
@@ -347,14 +339,11 @@ function onDraw()
         data.speed = data.speed + 0.26
         data.offset = math.min(0,data.offset + data.speed)
         
-        Graphics.drawImage(image,baseX+xOffset,baseY+data.offset,xOffset,sourceY,width,height,opacity)
+        Graphics.drawImage(image,calculateCameraDimensions(baseX+xOffset, 1),calculateCameraDimensions(baseY+data.offset, 2),xOffset,sourceY,width,height,opacity)
         xOffset = xOffset + width
     end
     
     local opacityend = math.min(1,time/42)
-    if Misc.setLoadScreenTimeout(1) then
-        Graphics.drawImage(blackscreen, 0, 0, 1, 0, 800, 600, opacityend)
-    end
 
     time = time + 1
 end
