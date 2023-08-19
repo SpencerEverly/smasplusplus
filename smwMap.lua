@@ -4635,7 +4635,7 @@ do
         basicGlDrawArgs.target = smwMap.mainBuffer
 
 
-        Graphics.drawBox{color = Color.black,target = smwMap.mainBuffer,x = Screen.calculateCameraDimensions(0, 1),y = Screen.calculateCameraDimensions(0, 2),width = smwMap.mainBuffer.width,height = smwMap.mainBuffer.height,priority = -101}
+        Graphics.drawBox{color = Color.black,target = smwMap.mainBuffer,x = 0,y = 0,width = smwMap.mainBuffer.width,height = smwMap.mainBuffer.height,priority = -101}
 
 
         -- Draw background
