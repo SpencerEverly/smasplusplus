@@ -297,6 +297,8 @@ function smasMainMenuSystem.runMenuFunction(isMouse)
                 SaveData[currentOption.booleanToUse] = not SaveData[currentOption.booleanToUse]
             elseif currentOption.saveDataArgs == 1 then
                 SaveData.SMASPlusPlus.options[currentOption.booleanToUse] = not SaveData.SMASPlusPlus.options[currentOption.booleanToUse]
+            elseif currentOption.saveDataArgs == 2 then
+                --Intentionally left blank
             end
         end
         if currentOption.isGameData then
