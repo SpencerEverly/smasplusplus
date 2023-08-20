@@ -165,6 +165,47 @@ function Screen.changeResolution(width,height)
     end
 end
 
+function Screen.onlyCalculateLeftCameraDimensions(value, isWidthOrHeight, addOrSubtract)
+    if value == nil then
+        error("Must have a value for Screen.calculateCameraDimensions!")
+        return
+    else
+        if isWidthOrHeight == nil then
+            error("Must have a width or height for Screen.calculateCameraDimensions! You must use a string value for this (Or a number), like e.g. \"width\" or \"height\", or 1 or 2.")
+            return
+        end
+        if addOrSubtract == nil then
+            addOrSubtract = true
+        end
+        local originalWidth = 800
+        local originalHeight = 600
+        
+        local pixelDifferenceWidth = originalWidth / Screen.getScreenSize()[1]
+        local pixelDifferenceHeight = originalHeight / Screen.getScreenSize()[2]
+        
+        local additionalWidth = Screen.getScreenSize()[1] - originalWidth
+        local additionalHeight = Screen.getScreenSize()[2] - originalHeight
+        
+        if (isWidthOrHeight == "width" or isWidthOrHeight == 1) then
+            if addOrSubtract then
+                return value + additionalWidth
+            else
+                return value - additionalWidth
+            end
+        elseif (isWidthOrHeight == "height" or isWidthOrHeight == 2) then
+            if addOrSubtract then
+                return value + additionalHeight
+            else
+                return value - additionalHeight
+            end
+        else
+            error("This is not a valid value for isWidthOrHeight. You must use a string value for this (Or a number), like e.g. \"width\" or \"height\", or 1 or 2.")
+            return
+        end
+    end
+end
+
+
 function Screen.calculateCameraDimensions(value, isWidthOrHeight)
     if value == nil then
         error("Must have a value for Screen.calculateCameraDimensions!")
@@ -236,7 +277,7 @@ function Screen.onDraw()
                 Screen.setSectionBounds(section, x1, y1, y2, x2)
             end
         end
-        if camera.x == boundaryLeft then
+        if camera.x == Screen.onlyCalculateLeftCameraDimensions(boundaryLeft, 1, false) then
             local section = player.sectionObj
             local bounds = section.boundary
             bounds.left = boundaryLeft
