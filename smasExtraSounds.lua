@@ -467,8 +467,8 @@ end
 
 smasExtraSounds.allCoinNPCIDsTableMapped = table.map{10,33,88,103,138,152,251,252,253,258,411,528} --378 is a dash coin. Perhaps we should make it compatible with it soon...?
 smasExtraSounds.allRupeeNPCIDsTableMapped = table.map{251,252,253}
-smasExtraSounds.allBrickBlockIDsTableMapped = table.map{4,60,188,226,293,526,668}
-smasExtraSounds.allBrickBlockIDs = {4,60,188,226,293,526,668}
+smasExtraSounds.allBrickBlockIDsTableMapped = table.map{4,60,188,226,293,526}
+smasExtraSounds.allBrickBlockIDs = {4,60,188,226,293,526}
 
 local extrasoundsBlock90 = {}
 local extrasoundsBlock668 = {}
