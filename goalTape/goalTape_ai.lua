@@ -507,6 +507,10 @@ end
 
 
 function goalTape.onDraw()
+    if (buffer.width ~= camera.width or buffer.height ~= camera.height) then
+        buffer = Graphics.CaptureBuffer(camera.width,camera.height)
+    end
+    
     for k,v in ipairs(Player.get()) do
         local info = goalTape.playerInfo[k]
 
