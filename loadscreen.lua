@@ -12,8 +12,17 @@ local EP_LIST_PTR = mem(0x00B250FC, FIELD_DWORD)
 local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = _episodePath
 local Player = {}
-local frameBufferWidth = 800
-local frameBufferHeight = 600
+_G.OnSEEMod = true
+
+--Detecting whenever we're on the SEE Mod or not
+if frameBufferWidth == nil then
+    OnSEEMod = false
+    _G.frameBufferWidth = 800
+end
+if frameBufferHeight == nil then
+    OnSEEMod = false
+    _G.frameBufferHeight = 600
+end
  
 do
     -- The following code makes the loading screen slightly less restricted
@@ -276,20 +285,26 @@ loadtextfile()
 local letterData = {}
 
 local time = 0
+local time2 = 1
 local loadingTimer = 0
+local opacity = 0
+
+if OnSEEMod then
+    Misc.setLoadScreenTimeout(11)
+end
 
 function onDraw()
     if image == nil then -- this sometimes happens?
         return
     end
     
-    loadingTimer = loadingTimer + 1
+    --[[loadingTimer = loadingTimer + 1
     
     textplus.print{
         x = 0,
         y = 0,
         text = "Loadtimer: "..tostring(loadingTimer)
-    }
+    }]]
 
     local message = Player.character
     local widths = letterWidths[message]
@@ -299,7 +314,16 @@ function onDraw()
         widths = letterWidths[message]
     end
     
-    local opacity = math.min(1,time/42)
+    if OnSEEMod then
+        if not Misc.getLoadingFinished() then
+            opacity = math.min(1,time/42)
+        elseif Misc.getLoadingFinished() then
+            time2 = time2 - 0.02
+            opacity = time2
+        end
+    else
+        opacity = math.min(1,time/42)
+    end
 
     local height = (image.height/#letterWidths)
     local sourceY = (message-1) * height

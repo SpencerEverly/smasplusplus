@@ -1299,7 +1299,7 @@ function smasMainMenu.onDraw()
             textplus.print{x = (camera.width / 2) - 200, y=390, text = "Press jump to start", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFont}
         end
         if smasMainMenu.showWebsiteTextOnScreen then
-            textplus.print{x=(camera.width / 2) - 375, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFontWebsite}
+            textplus.print{x=(camera.width / 2) - 370, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFontWebsite}
         end
         if smasMainMenu.showLogoOnScreen then
             if SaveData.currentLanguage == "english" then
