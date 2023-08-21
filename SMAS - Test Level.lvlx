@@ -1822,7 +1822,7 @@ ID:89;X:-119408;Y:-120192;D:-1;
 ID:983;X:-78944;Y:-80160;D:-1;XTRA:"{\n    \"exitType\"\: 7\,\n    \"noGravity\"\: true\n}\n";
 ID:998;X:-78784;Y:-80352;D:-1;
 ID:984;X:-78024;Y:-80272;D:1;XTRA:"{\n    \"exitType\"\: 7\,\n    \"stopBehind\"\: false\n}\n";
-ID:614;X:-159840;Y:-160080;D:1;
+ID:389;X:-159840;Y:-160064;D:1;
 ID:45;X:-199744;Y:-200096;D:-1;
 ID:1000;X:-79136;Y:-80160;D:-1;XTRA:"{\n    \"addToTable\"\: true\,\n    \"incrementStarCount\"\: true\,\n    \"useOptionalTable\"\: false\n}\n";
 ID:26;X:-59296;Y:-60064;D:-1;

@@ -48,7 +48,7 @@ function skipopening()
 end
 
 function onDraw()
-    Text.printWP("Press jump to skip", Screen.calculateCameraDimensions(230, 1), Screen.calculateCameraDimensions(540, 2), 0)
+    Text.printWP("Press jump to skip", Screen.calculateCameraDimensions(230, 1), Screen.calculateCameraDimensions(540, 2), 6)
     for _,p in ipairs(Player.get()) do
         p.forcedState = FORCEDSTATE_INVISIBLE
     end

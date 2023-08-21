@@ -711,6 +711,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
         
         
         
+        
         for _,p in ipairs(Player.get()) do
             
             
@@ -953,6 +954,14 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                 if (v.ai2 == 2 and v.ai1 == 50) and isOnScreen(v) then
                     if smasExtraSounds.enableVenusFireball then
                         smasExtraSounds.playSFX(167)
+                    end
+                end
+            end
+            --*Fire Bros.*
+            if SMBX_VERSION == VER_SEE_MOD then
+                if npcGlobalVariables ~= nil then
+                    if npcGlobalVariables[389].soundID == 18 then
+                        npcGlobalVariables[389].soundID = smasExtraSounds.sounds[168].sfx
                     end
                 end
             end
