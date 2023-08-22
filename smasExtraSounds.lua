@@ -959,8 +959,10 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             end
             --*Fire Bros.*
             if SMBX_VERSION == VER_SEE_MOD then
-                if NPC.config[389].soundID ~= nil and NPC.config[389].soundID == 18 then
-                    NPC.config[389].soundID = smasExtraSounds.sounds[168].sfx
+                if npcGlobalVariables ~= nil then
+                    if npcGlobalVariables[389].soundID == 18 then
+                        npcGlobalVariables[389].soundID = smasExtraSounds.sounds[168].sfx
+                    end
                 end
             end
             
