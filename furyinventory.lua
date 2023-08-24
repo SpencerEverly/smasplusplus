@@ -131,7 +131,7 @@ function furyinventory.onDraw()
         if furyinventory.activatefuryinventory then
             if furyinventory.furyinventoryopened then
                 numx = 54
-                numy = 574
+                numy = Screen.getScreenSize()[2] - 26
 
             
 
@@ -231,25 +231,25 @@ function furyinventory.onDraw()
 
         if furyinventory.activatefuryinventory then
             if furyinventory.furyinventoryopened then
-                Graphics.drawImageWP(furyinventoryimg, 30, 508, furyinventory.priority - 0.4)
+                Graphics.drawImageWP(furyinventoryimg, 30, Screen.getScreenSize()[2] - 92, furyinventory.priority - 0.4)
                 Graphics.drawImageWP(selector, selectx, selecty, furyinventory.priority - 0.5)
                 if SaveData.furyinventory.shroom == 0 then
-                    Graphics.drawImageWP(noshroom, 30, 508, furyinventory.priority - 0.2)
+                    Graphics.drawImageWP(noshroom, 30, Screen.getScreenSize()[2] - 92, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.fire == 0 then
-                    Graphics.drawImageWP(nofire, 94, 508, furyinventory.priority - 0.2)
+                    Graphics.drawImageWP(nofire, 94, Screen.getScreenSize()[2] - 92, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.ice == 0 then
-                    Graphics.drawImageWP(noice, 158, 508, furyinventory.priority - 0.2)
+                    Graphics.drawImageWP(noice, 158, Screen.getScreenSize()[2] - 92, furyinventory.priority - 0.2)
                 end 
                 if SaveData.furyinventory.leaf == 0 then
-                    Graphics.drawImageWP(noleaf, 222, 508, furyinventory.priority - 0.2)
+                    Graphics.drawImageWP(noleaf, 222, Screen.getScreenSize()[2] - 92, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.tanooki == 0 then
-                    Graphics.drawImageWP(notanooki, 286, 508, furyinventory.priority - 0.2)
+                    Graphics.drawImageWP(notanooki, 286, Screen.getScreenSize()[2] - 92, furyinventory.priority - 0.2)
                 end
                 if SaveData.furyinventory.hammer == 0 then
-                    Graphics.drawImageWP(nohammer, 350, 508, furyinventory.priority - 0.2)
+                    Graphics.drawImageWP(nohammer, 350, Screen.getScreenSize()[2] - 92, furyinventory.priority - 0.2)
                 end
             end
         end
@@ -321,7 +321,7 @@ end
 
 function furyinventory.onTick()
     selectx = 30
-    selecty = 508
+    selecty = Screen.getScreenSize()[2] - 92
     numx = 40
     numy = 570
     
@@ -338,10 +338,10 @@ function furyinventory.onTick()
     end
     
     if furyinventory.hidden == false then
-        Graphics.drawImageWP(furyinventorysmol, 32, 538, furyinventory.priority - 0.4) -- draws the furyinventory
+        Graphics.drawImageWP(furyinventorysmol, 32, Screen.getScreenSize()[2] - 62, furyinventory.priority - 0.4) -- draws the furyinventory
         
-            numx = 40
-            numy = 570
+        numx = 40
+        numy = Screen.getScreenSize()[2] - 30
 
         if SaveData.furyinventory.shroom >= 10 then
             Text.printWP(SaveData.furyinventory.shroom, numx-10, numy, furyinventory.priority - 0.5)
@@ -382,22 +382,22 @@ function furyinventory.onTick()
 
 
         if SaveData.furyinventory.shroom == 0 then
-            Graphics.drawImageWP(noshroomsmol, 32, 538, furyinventory.priority - 0.5)
+            Graphics.drawImageWP(noshroomsmol, 32, Screen.getScreenSize()[2] - 62, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.fire == 0 then
-            Graphics.drawImageWP(nofiresmol, 64, 538, furyinventory.priority - 0.5)
+            Graphics.drawImageWP(nofiresmol, 64, Screen.getScreenSize()[2] - 62, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.ice == 0 then
-            Graphics.drawImageWP(noicesmol, 96, 538, furyinventory.priority - 0.5)
+            Graphics.drawImageWP(noicesmol, 96, Screen.getScreenSize()[2] - 62, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.leaf == 0 then
-            Graphics.drawImageWP(noleafsmol, 128, 538, furyinventory.priority - 0.5)
+            Graphics.drawImageWP(noleafsmol, 128, Screen.getScreenSize()[2] - 62, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.tanooki == 0 then
-            Graphics.drawImageWP(notanookismol, 160, 538, furyinventory.priority - 0.5)
+            Graphics.drawImageWP(notanookismol, 160, Screen.getScreenSize()[2] - 62, furyinventory.priority - 0.5)
         end
         if SaveData.furyinventory.hammer == 0 then
-            Graphics.drawImageWP(nohammersmol, 192, 538, furyinventory.priority - 0.5)
+            Graphics.drawImageWP(nohammersmol, 192, Screen.getScreenSize()[2] - 62, furyinventory.priority - 0.5)
         end
     end
 end

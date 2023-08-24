@@ -464,6 +464,10 @@ do
     local baseX, baseY = 0, 600
     
     function repll.onDraw()
+        if baseY ~= Screen.getScreenSize()[2] then
+            baseY = Screen.getScreenSize()[2]
+        end
+        
         if not repll.active then
             GameData.toggleoffkeys = false
             return

@@ -17,6 +17,7 @@ end
 
 local rng = require("base/rng")
 local inspect = require("ext/inspect")
+local playerManager = require("playerManager")
 
 local GM_PLAYERS_COUNT_ADDR = 0x00B2595E
 local GM_PLAYERS_ADDR = mem(0x00B25A20, FIELD_DWORD) --For the player adding and removing function
@@ -67,51 +68,95 @@ function Playur.getScreenCoords(pl)
 	return r
 end
 
+function Playur.resetVariables(p)
+    console:println("Resetting variables for Player "..tostring(p.idx).."...")
+    
+    local chars = playerManager.getCharacters()
+    
+    if p.mount == 2 then
+        p.mount = 0
+    end
+    if chars[p.character].base >= 3 and p.mount == 3 then
+        p.mount = 0
+    end
+    
+    p:mem(0x0A, FIELD_BOOL, false) --Slippery ground
+    p:mem(0x00, FIELD_BOOL, false) --Toad double jump
+    p:mem(0x02, FIELD_WORD, 0) --Flying sparks
+    p:mem(0x06, FIELD_WORD, 0) --In quicksand?
+    p:mem(0x08, FIELD_WORD, 0) --Number of Bombs Link has
+    p:mem(0x34, FIELD_WORD, 0) --In water? Greater than 2 when in water/quicksand
+    p:mem(0x44, FIELD_BOOL, false) --In a rainbow shell?
+    p:mem(0x36, FIELD_BOOL, false) --In water?
+    p:mem(0x3C, FIELD_BOOL, false) --Is the player sliding?
+    p:mem(0x40, FIELD_WORD, 0) --Climbing state
+    p:mem(0x2C, FIELD_WORD, 0) --Climbing state (NPC)
+    p:mem(0x0C, FIELD_BOOL, false) --Is a fairy?
+    p:mem(0x28, FIELD_FLOAT, 0) --Grab top momentum
+    p:mem(0x26, FIELD_WORD, 0) --Grab timer
+    p:mem(0x14, FIELD_WORD, 0) --Link slash cooldown
+    p:mem(0x162, FIELD_WORD, 0) --Link projectile cooldown
+    p:mem(0x50, FIELD_BOOL, false) --Is spinjumping?
+    p:mem(0x4A, FIELD_BOOL, false) --Is currently in a Tanooki statue?
+    p:mem(0x48, FIELD_WORD, 0) --Slope index
+    p:mem(0x54, FIELD_WORD, 0) --Fireball spinjump direction
+    p:mem(0x52, FIELD_WORD, 0) --Spinjump timer
+end
+
 function Playur.setupPlayers()
     console:println("Setting up players...")
+    
+    local PLR_HEARTS = 0x16
+    local PLR_HOLDINGNPC = 0x154
+    local PLR_ITEMBOX = 0x158
+    
+    local chars = playerManager.getCharacters()
+    
     for i = 1,200 do
-        if Player(i).character == 0 then
-            Player(i).character = 1;
-            if Player.count() == 2 and i == 2 then
-                Player(i).character = 2;
+        if Player(i).isValid then
+            if Player(i).character == 0 then
+                Player(i).character = 1;
+                if Player.count() == 2 and i == 2 then
+                    Player(i).character = 2;
+                end
             end
-        end
-        if Player(i).powerup == 0 then
-            Player(i).powerup = 1;
-        end
-        if Player(i).character == 3 or Player(i).character == 4 or Player(i).character == 5 then
-            if Player(i):mem(PLR_HEARTS, FIELD_WORD) <= 0 then
-                Player(i):mem(PLR_HEARTS, FIELD_WORD, 1);
+            if Player(i).powerup == 0 then
+                Player(i).powerup = 1;
             end
-            
-            if (Player(i):mem(PLR_HEARTS, FIELD_WORD) <= 1 and Player(i).powerup > 1 and Player(i).character ~= 5) then
-                Player(i):mem(PLR_HEARTS, FIELD_WORD, 2);
+            if chars[Player(i).character].base == 3 or chars[Player(i).character].base == 4 or chars[Player(i).character].base == 5 then
+                if Player(i):mem(PLR_HEARTS, FIELD_WORD) <= 0 then
+                    Player(i):mem(PLR_HEARTS, FIELD_WORD, 1)
+                end
+                
+                if (Player(i):mem(PLR_HEARTS, FIELD_WORD) <= 1 and Player(i).powerup > 1 and Player(i).character ~= 5) then
+                    Player(i):mem(PLR_HEARTS, FIELD_WORD, 2)
+                end
+                
+                if(Player(i):mem(PLR_ITEMBOX, FIELD_WORD) > 0) then
+                    Player(i):mem(PLR_HEARTS, FIELD_WORD, Player(i):mem(PLR_HEARTS, FIELD_WORD) + 1)
+                    Player(i):mem(PLR_ITEMBOX, FIELD_WORD, 0)
+                end
+                if(Player(i).powerup == 1 and Player(i):mem(PLR_HEARTS, FIELD_WORD) > 1) then
+                    Player(i).powerup = 2;
+                end
+                if (Player(i):mem(PLR_HEARTS, FIELD_WORD) > 3) then
+                    Player(i):mem(PLR_HEARTS, FIELD_WORD, 3)
+                end
+                if Player(i).mount == 3 then
+                    Player(i).mount = 0
+                end
+            else
+                if (Player(i):mem(PLR_HEARTS, FIELD_WORD) == 3 and Player(i):mem(PLR_ITEMBOX, FIELD_WORD) == 0) then
+                    Player(i):mem(PLR_ITEMBOX, FIELD_WORD, 9)
+                    Player(i):mem(PLR_HEARTS, FIELD_WORD, 0)
+                end
             end
-            
-            if(Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD) > 0) then
-                Player(i):mem(PLR_HEARTS, FIELD_WORD, Player(i):mem(PLR_HEARTS, FIELD_WORD) + 1);
-                Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD, 0);
-            end
-            if(Player(i).powerup == 1 and Player(i):mem(PLR_HEARTS, FIELD_WORD) > 1) then
-                Player(i).powerup = 2;
-            end
-            if (Player(i):mem(PLR_HEARTS, FIELD_WORD) > 3) then
-                Player(i):mem(PLR_HEARTS, FIELD_WORD, 3)
-            end
-            if Player(i).mount == 3 then
+            if Player(i).character == 5 then
                 Player(i).mount = 0
             end
-        else
-            if (Player(i):mem(PLR_HEARTS, FIELD_WORD) == 3 and Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD) == 0) then
-                Player(i):mem(PLR_HOLDINGNPC, FIELD_WORD, 9);
-                Player(i):mem(PLR_HEARTS, FIELD_WORD, 0)
-            end
+            Player(i).direction = 1;
+            Playur.resetVariables(Player(i))
         end
-        if Player(i).character == 5 then
-            Player(i).mount = 0
-        end
-        Player(i).direction = 1;
-        
     end
 end
 

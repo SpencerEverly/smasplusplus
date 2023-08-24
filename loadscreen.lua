@@ -9,7 +9,6 @@ local letterWidths = {
 }
 
 local EP_LIST_PTR = mem(0x00B250FC, FIELD_DWORD)
-local FIRST_PLAYER_CHARACTER_ADDR = mem(0x00B25A20,FIELD_DWORD) + 0x184 + 0xF0
 local episodePath = _episodePath
 local Player = {}
 _G.OnSEEMod = true
