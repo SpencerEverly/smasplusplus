@@ -159,9 +159,10 @@ function Screen.changeResolution(width,height)
         if height == nil then
             height = 600
         end
-        Graphics.setFramebufferSize(width,height)
+        --These are broken for now on the SEE Mod, don't do this
+        --[[Graphics.setFramebufferSize(width,height)
         camera.width = width
-        camera.height = height
+        camera.height = height]]
     end
 end
 
