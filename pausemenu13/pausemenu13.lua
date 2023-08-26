@@ -230,6 +230,11 @@ function pausemenu13.onInputUpdate()
 end
 
 function pausemenu13.onDraw()
+    pausemenu13.screenW = Screen.getScreenSize()[1]
+    pausemenu13.screenH = Screen.getScreenSize()[2]
+    menu_left_X = pausemenu13.screenW / 2 - 190 + 62
+    menu_top_Y = pausemenu13.screenH / 2 - total_menu_height / 2;
+    
     if pausemenu13.isPauseMenuOpen then
         Graphics.drawBox{x = pausemenu13.screenW / 2 - 190, y = pausemenu13.screenH / 2 - menu_box_height / 2, width = 380, height = menu_box_height, color = Color.black, priority = 6.9999}
         if (isOverworld or isOnSMWMap) then

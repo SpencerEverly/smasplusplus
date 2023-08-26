@@ -428,9 +428,9 @@ function globalgenerals.onDraw()
     end
     
     if easterCrashMsg then
-        textplus.print{x=145, y=80, text = "Congrats! You reached more than the 5000th block idx and burned a ", priority=5, color=Color.yellow, font=statusFont}
-        textplus.print{x=155, y=90, text = "collectable in the lava. This would've crashed SMBX 1.3!", priority=5, color=Color.yellow, font=statusFont}
-        textplus.print{x=195, y=100, text = "You're really good at finding secrets, player ;)", priority=5, color=Color.yellow, font=statusFont}
+        textplus.print{x=Screen.calculateCameraDimensions(145, 1), y=Screen.calculateCameraDimensions(80, 2), text = "Congrats! You reached more than the 5000th block idx and burned a ", priority=5, color=Color.yellow, font=statusFont}
+        textplus.print{x=Screen.calculateCameraDimensions(155, 1), y=Screen.calculateCameraDimensions(90, 2), text = "collectable in the lava. This would've crashed SMBX 1.3!", priority=5, color=Color.yellow, font=statusFont}
+        textplus.print{x=Screen.calculateCameraDimensions(195, 1), y=Screen.calculateCameraDimensions(100, 2), text = "You're really good at finding secrets, player ;)", priority=5, color=Color.yellow, font=statusFont}
     end
     
     for _,p in ipairs(Player.get()) do --Custom reserve storage
