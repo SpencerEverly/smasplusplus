@@ -36,7 +36,7 @@ if SaveData.currentCharacter2 == nil then
     end
 end
 
-smasCharacterChanger.tvImage = Graphics.loadImageResolved("graphics/characterchangermenu/tv.png") --The image for the TV.
+smasCharacterChanger.tvImage = Graphics.loadImageResolved("graphics/characterchangermenu/tv-full.png") --The image for the TV.
 smasCharacterChanger.scrollSFX = "_OST/_Sound Effects/characterchangermenu/scrolling-tv.ogg"
 smasCharacterChanger.stopSFX = "_OST/_Sound Effects/characterchangermenu/scrolled-tv.ogg"
 smasCharacterChanger.turnOnSFX = "_OST/_Sound Effects/characterchangermenu/turn-on-tv.ogg"
@@ -44,7 +44,7 @@ smasCharacterChanger.moveSFX = 26 --Sound effects used for the menu
 smasCharacterChanger.menuActive = false --True if the menu is active.
 smasCharacterChanger.animationActive = false --True if the animation is active.
 smasCharacterChanger.animationTimer = 0 --Timer for the animation, both for the start and end sequences.
-smasCharacterChanger.tvScrollNumber = -600 --This is used for the TV animation sequence.
+smasCharacterChanger.tvScrollNumber = -628 --This is used for the TV animation sequence.
 smasCharacterChanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
 smasCharacterChanger.selectionNumber = 1 --For scrolling left and right
 smasCharacterChanger.selectionNumberUpDown = 1 --For scrolling up and down
@@ -168,10 +168,8 @@ function smasCharacterChanger.startupChanger() --The animation that starts the m
         smasCharacterChanger.oldIniFile = SysManager.loadDefaultCharacterIni()
     end
     soundObject1 = SFX.play(smasCharacterChanger.scrollSFX)
-    Routine.waitFrames(10, true)
-    Misc.pause()
     smasBooleans.toggleOffInventory = true
-    Routine.waitFrames(54, true)
+    Routine.waitFrames(64, true)
     if soundObject1 ~= nil then
         soundObject1:FadeOut(10)
     end
@@ -204,7 +202,7 @@ function smasCharacterChanger.shutdownChanger() --The animation that shuts the m
     end
     smasBooleans.toggleOffInventory = false
     smasCharacterChanger.animationActive = false
-    smasCharacterChanger.tvScrollNumber = -600
+    smasCharacterChanger.tvScrollNumber = -628
     smasCharacterChanger.animationTimer = 0
     ending = false
     if smasBooleans.isOnMainMenu then
@@ -316,12 +314,13 @@ function smasCharacterChanger.onDraw()
                 Routine.run(smasCharacterChanger.startupChanger)
             end
             if smasCharacterChanger.animationTimer >= 1 and smasCharacterChanger.animationTimer <= 64 then
+                Misc.pause()
                 smasCharacterChanger.tvScrollNumber = smasCharacterChanger.tvScrollNumber + 9.2
-                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, 7.5)
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, Screen.calculateCameraDimensions(-20, 1), Screen.calculateCameraDimensions(smasCharacterChanger.tvScrollNumber, 2), 7.5)
             end
             if smasCharacterChanger.animationTimer >= 65 then
                 smasCharacterChanger.tvScrollNumber = 0
-                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, 7.5)
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, Screen.calculateCameraDimensions(-20, 1), Screen.calculateCameraDimensions(-28, 2), 7.5)
             end
         end
         if started then
@@ -355,15 +354,15 @@ function smasCharacterChanger.onDraw()
                 end
                 selectionAutoTimer = 15
             end
-            textPrintCentered("Select your character!", 410, 100)
+            textPrintCentered("Select your character!", Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(100, 2))
             if smasCharacterChanger.selectionNumber < 1 then
                 smasCharacterChanger.selectionNumber = #smasCharacterChanger.names
             elseif smasCharacterChanger.selectionNumber > #smasCharacterChanger.names then
                 smasCharacterChanger.selectionNumber = 1
             end
             if smasCharacterChanger.selectionNumber and smasCharacterChanger.selectionNumberUpDown then
-                textPrintCentered(smasCharacterChanger.names[smasCharacterChanger.selectionNumber], 410, 200)
-                textPrintCentered(smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], 410, 250)
+                textPrintCentered(smasCharacterChanger.names[smasCharacterChanger.selectionNumber], Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(200, 2))
+                textPrintCentered(smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(250, 2))
             end
             colorChange1 = colorChange1 + 0.001
             colorChange2 = colorChange2 + 0.0005
@@ -378,12 +377,12 @@ function smasCharacterChanger.onDraw()
                 colorChange3 = 0
             end
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
-            Graphics.drawScreen{color = rainbowyColor .. 1, priority = 7.3}
+            Graphics.drawBox{x = Screen.calculateCameraDimensions(0, 1), y = Screen.calculateCameraDimensions(0, 2), width = 800, height = 600, color = rainbowyColor .. 1, priority = 7.3}
             
-            Graphics.drawImageWP(smasCharacterChanger.drawPreviewImage(), 360, 320, 7.4)
+            Graphics.drawImageWP(smasCharacterChanger.drawPreviewImage(), Screen.calculateCameraDimensions(360, 1), Screen.calculateCameraDimensions(320, 2), 7.4)
         end
         if not smasCharacterChanger.animationActive and started then
-            Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, 0, 7.5)
+            Graphics.drawImageWP(smasCharacterChanger.tvImage, Screen.calculateCameraDimensions(-20, 1), Screen.calculateCameraDimensions(-28, 2), 7.5)
             smasCharacterChanger.animationTimer = 0
         end
     elseif not smasCharacterChanger.menuActive and started then
@@ -400,7 +399,7 @@ function smasCharacterChanger.onDraw()
             smasCharacterChanger.animationTimer = smasCharacterChanger.animationTimer + 1
             if smasCharacterChanger.animationTimer >= 1 and smasCharacterChanger.animationTimer <= 34 then
                 smasCharacterChanger.tvScrollNumber = smasCharacterChanger.tvScrollNumber - 20
-                Graphics.drawImageWP(smasCharacterChanger.tvImage, 0, smasCharacterChanger.tvScrollNumber, 7.5)
+                Graphics.drawImageWP(smasCharacterChanger.tvImage, Screen.calculateCameraDimensions(-20, 1), Screen.calculateCameraDimensions(smasCharacterChanger.tvScrollNumber, 2), 7.5)
             end
         end
     end

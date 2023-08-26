@@ -63,7 +63,7 @@ function smasResolutions.changeResolution(onMainMenu)
 end
 
 function smasResolutions.onStart()
-    smasResolutions.changeResolution()
+    smasResolutions.changeResolution(false)
 end
 
 function smasResolutions.onDraw()
