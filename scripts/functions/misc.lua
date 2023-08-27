@@ -969,8 +969,8 @@ function Misc.getLegacyCreditString(index)
     return readmem(GM_CREDITS+index*0x34+0x30, FIELD_STRING)
 end
 
-function Misc.setLegacyCreditString(index, string)
-    writemem(GM_CREDITS+index*0x34+0x30, FIELD_STRING, string)
+function Misc.setLegacyCreditString(index, stringd)
+    writemem(GM_CREDITS+index*0x34+0x30, FIELD_STRING, stringd)
 end
 
 function Misc.getActualLevelName()
