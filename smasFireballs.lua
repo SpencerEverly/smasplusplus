@@ -33,7 +33,7 @@ local iceballtimer = 0
 function smasFireballs.onTick()
     if smasFireballs.enableClassicShooting and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         for k,p in ipairs(Player.get()) do
-            if not p:mem(0x50, FIELD_BOOL) and (p.powerup == 3 or p.powerup == 7) then
+            if not p:mem(0x50, FIELD_BOOL) and (p.powerup == 3) then
                 --Assosiate Fireball to Player
                 for kn, n in ipairs(NPC.getIntersecting(p.x-6, p.y-6, p.x+p.width+6, p.y+p.height+6)) do
                     if n.id == 13 and n.ai3 == 0 then --This checks if ai3 is 0, which means it's ownerless.
