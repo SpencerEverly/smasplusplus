@@ -32,7 +32,6 @@ local iceballtimer = 0
 
 function smasFireballs.onTick()
     if smasFireballs.enableClassicShooting and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        Text.print(smasFireballs.fireballCooldownTimer[1], 100, 100)
         for k,p in ipairs(Player.get()) do
             if not p:mem(0x50, FIELD_BOOL) and (p.powerup == 3 or p.powerup == 7) then
                 --Assosiate Fireball to Player
