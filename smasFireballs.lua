@@ -3,7 +3,7 @@
 smasFireballs.lua v1.0
 By SpencerlyEverly
 
-fastFireballs.lua code was also based off and borrowed, so credits goes to MegoZ_ for that.
+fastFireballs.lua code was also based off of, so credits goes to MegoZ_ for that.
 
 ]]
 

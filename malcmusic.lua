@@ -407,37 +407,46 @@ function malcmusic.onTick()
         if Time.hour() ~= hourChanger[Time.hour()] then
             Sound.playSFX("hour-change.ogg")
             hourChanger[Time.hour()] = Time.hour()
+            if SaveData.dateplayedweather == "snow" then
+                if not malcmusic.holiday then
+                    for k,v in ipairs(malcmusic.outsideSections) do
+                        if not smasBooleans.musicMuted or not smasBooleans.musicMutedTemporary then
+                            Section(v).music = malcmusic.hubMusicList[acmusrng][os.date("%H")].snow
+                        end
+                    end
+                end
+            elseif SaveData.dateplayedweather == "rain" then
+                if not malcmusic.holiday then
+                    for k,v in ipairs(malcmusic.outsideSections) do
+                        if not smasBooleans.musicMuted or not smasBooleans.musicMutedTemporary then
+                            Section(v).music = malcmusic.hubMusicList[acmusrng][os.date("%H")].rain
+                        end
+                    end
+                end
+            elseif SaveData.dateplayedweather == "sunny" then
+                if not malcmusic.holiday then
+                    for k,v in ipairs(malcmusic.outsideSections) do
+                        if not smasBooleans.musicMuted or not smasBooleans.musicMutedTemporary then
+                            Section(v).music = malcmusic.hubMusicList[acmusrng][os.date("%H")].sunny
+                        end
+                    end
+                end
+            end
         end
         
         
         if Time.month() == 12 and Time.day() == 25 then --Christmas
-            if malcmusic.holiday then
+            if malcmusic.holiday and not (SaveData.dateplayedweather == "snow") then
                 malcmusic.doSnowWeather()
             end
         end
         
         if SaveData.dateplayedweather == "snow" then
             malcmusic.doSnowWeather()
-            if not malcmusic.holiday then
-                for k,v in ipairs(malcmusic.outsideSections) do
-                    Section(v).music = malcmusic.hubMusicList[acmusrng][os.date("%H")].snow
-                end
-            end
+            
         end
         if SaveData.dateplayedweather == "rain" then
             malcmusic.doRainWeather()
-            if not malcmusic.holiday then
-                for k,v in ipairs(malcmusic.outsideSections) do
-                    Section(v).music = malcmusic.hubMusicList[acmusrng][os.date("%H")].rain
-                end
-            end
-        end
-        if SaveData.dateplayedweather == "sunny" then
-            if not malcmusic.holiday then
-                for k,v in ipairs(malcmusic.outsideSections) do
-                    Section(v).music = malcmusic.hubMusicList[acmusrng][os.date("%H")].sunny
-                end
-            end
         end
     end
 end
