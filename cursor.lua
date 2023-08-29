@@ -11,6 +11,8 @@ local cursor = {}
 
 -- Settings
 cursor.showCursor = false
+cursor.enableItemEditorDropper = true
+
 cursor.defaultcam1 = true
 cursor.debug = false
 
@@ -210,8 +212,117 @@ function cursor.onCameraDraw(x)
     end
 end
 
+cursor.canDeleteObjects = false
+cursor.editorHandModeActivated = false
+
+function cursor.onMouseButtonEvent(button, state)
+    if smasBooleans.enableEditorMagicHand then
+        if SMBX_VERSION == VER_SEE_MOD and Misc.inEditor() and cursor.editorHandModeActivated then
+            if button == 1 and state == 1 then
+                cursor.canDeleteObjects = true
+            elseif button == 1 and state == 0 then
+                cursor.canDeleteObjects = false
+            end
+            
+            if button == 0 and state == 1 then
+                if SysManager.checkEditorEntity().entityType == "NPC" then --NPC
+                    if SysManager.checkEditorEntity().id > 0 then
+                        local spawnedNPC = NPC.spawn(SysManager.checkEditorEntity().id, cursor.sceneX, cursor.sceneY, player.section)
+                        if SysManager.checkEditorEntity().direction ~= nil then
+                            spawnedNPC.direction = SysManager.checkEditorEntity().direction
+                        end
+                    end
+                --[[elseif SysManager.checkEditorEntity().entityType == "Block" then --Block
+                    if SysManager.checkEditorEntity().id > 0 then
+                        local spawnedBlock = Block.spawn(SysManager.checkEditorEntity().id, cursor.sceneX, cursor.sceneY)
+                    end]]
+                end
+            end
+        end
+    end
+end
+
+function cursor.onTick()
+    if smasBooleans.enableEditorMagicHand then
+        if SMBX_VERSION == VER_SEE_MOD and Misc.inEditor() then
+            if lunatime.tick() == 5 and SysManager.isOutsideOfUnplayeredAreas() then
+                cursor.create()
+                Misc.setCursor(false)
+                cursor.editorHandModeActivated = true
+            end
+            if cursor.editorHandModeActivated then
+                cursor.showCursor = true
+                if not cursor.canDeleteObjects then
+                    if SysManager.checkEditorEntity().entityType == "NPC" then
+                        local npcImg = Graphics.sprites.npc[SysManager.checkEditorEntity().id].img
+                        
+                        if npcImg ~= nil then
+                            Graphics.drawImageWP(npcImg, cursor.x, cursor.y, 0, 0, NPC.config[SysManager.checkEditorEntity().id].width, NPC.config[SysManager.checkEditorEntity().id].height, 0.5, 8)
+                        end
+                    end
+                    --[[elseif SysManager.checkEditorEntity().entityType == "Block" then
+                        local blockImg = Graphics.sprites.block[SysManager.checkEditorEntity().id].img
+                        
+                        if blockImg ~= nil then
+                            Graphics.drawImageWP(blockImg, cursor.x, cursor.y, 0, 0, Block.config[SysManager.checkEditorEntity().id].width, Block.config[SysManager.checkEditorEntity().id].height, 0.5, 8)
+                        end
+                    end]]
+                end
+                if cursor.canDeleteObjects then
+                    local rngSpark = rng.randomInt(1,20)
+                    local rngSparkMovement = rng.randomInt(1,1.2)
+                    
+                    local randomValue = RNG.randomInt(1,6) - 1
+                    
+                    if randomValue >= 2 then
+                        local spark = Effect.spawn(80, cursor.sceneX, cursor.sceneY, player.section, false, true)
+                        spark.speedX = RNG.random() * 4 - 2
+                        spark.speedY = RNG.random() * 4 - 2
+                    end
+                    
+                    if SysManager.checkEditorEntity().entityType == "NPC" then
+                        local hitNPCs = Colliders.getColliding{a = cursor.scenepos, b = hitNPCs, btype = Colliders.NPC}
+                        
+                        for _,npc in ipairs(hitNPCs) do
+                            if not NPC.config[npc.id].iscoin then
+                                Sound.playSFX(9)
+                                npc:kill()
+                            else
+                                local effect = Effect.spawn(78, npc.x, npc.y, player.section, false, true)
+                                Sound.playSFX(9)
+                                npc:kill()
+                            end
+                        end
+                    --[[elseif SysManager.checkEditorEntity().entityType == "Block" then
+                        local hitBlocks = Colliders.getColliding{a = cursor.scenepos, b = hitBlocks, btype = Colliders.BLOCK}
+                        
+                        for _,block in ipairs(hitBlocks) do
+                            block:remove(true)
+                            Sound.playSFX(4)
+                        end]]
+                    end
+                end
+            end
+        end
+    end
+end
+
+function cursor.onExit()
+    if smasBooleans.enableEditorMagicHand then
+        if SMBX_VERSION == VER_SEE_MOD and Misc.inEditor() then
+            Misc.setCursor(nil)
+        end
+    end
+end
+
 function cursor.onInitAPI()
-    registerEvent(cursor, "onCameraDraw", "onCameraDraw")
+    registerEvent(cursor, "onStart")
+    registerEvent(cursor, "onCameraDraw")
+    registerEvent(cursor, "onTick")
+    registerEvent(cursor, "onExit")
+    if SMBX_VERSION == VER_SEE_MOD then
+        registerEvent(cursor, "onMouseButtonEvent")
+    end
 end
 
 return cursor

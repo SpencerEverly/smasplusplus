@@ -27,6 +27,9 @@ _G.smasFunctions = require("smasFunctions")
 
 if GameData.gameFirstLoaded == nil then
     GameData.gameFirstLoaded = true
+    if Misc.inEditor() then
+        GameData.gameFirstLoaded = false
+    end
 end
 
 --Make sure we aren't running Beta 3 and below before we actually start...

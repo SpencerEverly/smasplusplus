@@ -943,16 +943,6 @@ function Misc.testModeSetPlayerSetting(plr, power)
             
             settings.players[1].identity = plr
             settings.players[1].powerup = power
-            settings.players[1].mountType = settings.players[1].mountType
-            settings.players[1].mountColor = settings.players[1].mountColor
-            settings.players[2].identity = settings.players[2].identity
-            settings.players[2].powerup = settings.players[2].powerup
-            settings.players[2].mountType = settings.players[2].mountType
-            settings.players[2].mountColor = settings.players[2].mountColor
-            settings.playerCount = settings.playerCount
-            settings.showFPS = settings.showFPS
-            settings.godMode = settings.godMode
-            settings.entranceIndex = settings.entranceIndex
             
             LunaDLL.LunaLuaSetTestModeSettings(settings)
             
@@ -971,6 +961,12 @@ end
 
 function Misc.setLegacyCreditString(index, stringd)
     writemem(GM_CREDITS+index*0x34+0x30, FIELD_STRING, stringd)
+end
+
+function Misc.getLegacyCredits()
+    local worldFile = FileFormats.openWorldHeader(Misc.worldFilename())
+    local authors = worldFile.authors
+    return string.split(authors, "\n", true, true)
 end
 
 function Misc.getActualLevelName()

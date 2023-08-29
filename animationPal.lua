@@ -280,6 +280,10 @@ do
         if p.forcedState == FORCEDSTATE_PIPE and (p.forcedTimer == 1 or p.forcedTimer >= 100) then -- going through a pipe
             return true
         end
+        
+        if not Playur.isVisibleOverride[p.idx] then
+            return true
+        end
 
         return false
     end
@@ -381,15 +385,15 @@ do
         if args.color ~= nil then
             properties.color = args.color
         elseif Defines.cheat_shadowmario then
-            properties.color = Color.black
+            properties.color = Color(0,0,0,Playur.opacityValue[p.idx]) --Color.black
         else
-            properties.color = Color.white
+            properties.color = Color(1,1,1,Playur.opacityValue[p.idx]) --Color.white
         end
 
         if args.priority ~= nil then
             properties.priority = args.priority
         elseif args.ignorestate then
-            properties.priority = -25
+            properties.priority = Playur.priorityValue.ignoreState[p.idx]
         else
             properties.priority = animationPal.utils.getPlayerPriority(p)
 
@@ -654,15 +658,14 @@ do
         return starmanShader,{time = lunatime.tick()*2}
     end
 
-
     -- Returns a player's priority, taking the pipe forced state and the clown car into account.
     function animationPal.utils.getPlayerPriority(p)
         if p.forcedState == FORCEDSTATE_PIPE then
-            return -70
+            return Playur.priorityValue.pipe[p.idx]
         elseif p.mount == MOUNT_CLOWNCAR then
-            return -35
+            return Playur.priorityValue.clownCar[p.idx]
         else
-            return -25
+            return Playur.priorityValue.normal[p.idx]
         end
     end
 

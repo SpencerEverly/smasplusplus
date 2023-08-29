@@ -2,6 +2,7 @@ local SysManager = {}
 
 local playerManager = require("playerManager")
 local smasBooleans = require("smasBooleans")
+local inspect = require("ext/inspect")
 
 SysManager.languageCodes = {
     [1025] = "Arabic (Saudi Arabia)",
@@ -121,6 +122,10 @@ SysManager.languageCodes = {
     [19466] = "Spanish (Nicaragua)",
     [20490] = "Spanish (Puerto Rico)",
 }
+
+function SysManager.onInitAPI()
+    registerEvent(SysManager,"onTick")
+end
 
 --Lives
 
@@ -594,6 +599,122 @@ function SysManager.loadLevel(levelFilename, warpIdx)
     mem(0x00B2C89C, FIELD_WORD, 0)  -- GM_CREDITS_MODE
     mem(0x00B2C620, FIELD_WORD, 0)  -- GM_INTRO_MODE
     mem(0x00B2C5B4, FIELD_WORD, -1) -- GM_EPISODE_MODE (set to leave level)
+end
+
+SysManager.editorValuesNPC = {
+    [1] = {oldStr = "ID:", newStr = "id"},
+    [2] = {oldStr = "X:", newStr = "x"},
+    [3] = {oldStr = "Y:", newStr = "y"},
+    [4] = {oldStr = "D:", newStr = "direction"},
+    [5] = {oldStr = "FD:", newStr = "friendly"},
+    [6] = {oldStr = "NM:", newStr = "dontMove"},
+    [7] = {oldStr = "BS:", newStr = "legacyBoss"},
+    [8] = {oldStr = "MG:", newStr = "message"},
+    [9] = {oldStr = "GE:", newStr = "generatorEnabled"},
+    [10] = {oldStr = "GD:", newStr = "generatorDirection"},
+    [11] = {oldStr = "GM:", newStr = "generatorWaitTime"},
+    [12] = {oldStr = "GT:", newStr = "generatorType"},
+    [13] = {oldStr = "LR:", newStr = "currentLayer"},
+    [14] = {oldStr = "LA:", newStr = "attachToLayer"},
+    [15] = {oldStr = "EA:", newStr = "eventActivate"},
+    [16] = {oldStr = "ED:", newStr = "eventDeath"},
+    [17] = {oldStr = "ET:", newStr = "eventTalk"},
+    [18] = {oldStr = "EE:", newStr = "eventLayerEmpty"},
+}
+
+SysManager.editorMessageValuesToReplace = {
+    [1] = {oldStr = "\\,", newStr = ","},
+    [2] = {oldStr = "\\\"", newStr = "\""},
+    [3] = {oldStr = "\\n", newStr = "/n"},
+    [4] = {oldStr = "\"", newStr = ""},
+}
+
+local function doQuickGSub(value, oldStr, newStr)
+    if value ~= nil then
+        return string.gsub(value, oldStr, newStr)
+    end
+end
+
+function SysManager.checkEditorEntity()
+    if SMBX_VERSION == VER_SEE_MOD and Misc.inEditor() then
+        local placedItem = Misc.getEditorPlacedItem()
+        if placedItem == "nil" then return {} end
+
+        local draftTable = {}
+        local preFinalTable = {}
+        local finalTable = {}
+        
+        local splitValues
+
+        local tbl = json.decode(placedItem)
+        for values in tbl.sendItemPlacing:gmatch("([^\n]+)") do 
+            table.insert(draftTable, values)
+        end
+        
+        if draftTable[1] == "NPC" then
+            splitValues = Tabled.splitString(draftTable[2], ";")
+            
+            for i = 1,#SysManager.editorValuesNPC do
+                local tempValue = SysManager.editorValuesNPC[i]
+                local tempIndex = Tabled.findStringPartFromTable(splitValues, SysManager.editorValuesNPC[i].oldStr, true)
+                if tempIndex ~= nil then
+                    local tempStr = string.gsub(splitValues[tempIndex], SysManager.editorValuesNPC[i].oldStr, "")
+                    draftTable[tempValue.newStr] = tempStr
+                end
+            end
+            
+            for i = 1,#SysManager.editorMessageValuesToReplace do
+                if draftTable.message ~= nil then
+                    draftTable.message = string.gsub(draftTable.message, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                end
+                if draftTable.currentLayer ~= nil then
+                    draftTable.currentLayer = string.gsub(draftTable.currentLayer, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                end
+                if draftTable.attachToLayer ~= nil then
+                    draftTable.attachToLayer = string.gsub(draftTable.attachToLayer, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                end
+                if draftTable.eventActivate ~= nil then
+                    draftTable.eventActivate = string.gsub(draftTable.eventActivate, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                end
+                if draftTable.eventDeath ~= nil then
+                    draftTable.eventDeath = string.gsub(draftTable.eventDeath, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                end
+                if draftTable.eventTalk ~= nil then
+                    draftTable.eventTalk = string.gsub(draftTable.eventTalk, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                end
+                if draftTable.eventLayerEmpty ~= nil then
+                    draftTable.eventLayerEmpty = string.gsub(draftTable.eventLayerEmpty, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                end
+            end
+            
+            finalTable = {
+                entityType = "NPC",
+                id = tonumber(draftTable.id),
+                x = tonumber(draftTable.x),
+                y = tonumber(draftTable.y),
+                direction = tonumber(draftTable.direction),
+                friendly = tonumber(draftTable.friendly),
+                dontMove = tonumber(draftTable.dontMove),
+                legacyBoss = tonumber(draftTable.legacyBoss),
+                message = draftTable.message,
+                generatorEnabled = tonumber(draftTable.generatorEnabled),
+                generatorDirection = tonumber(draftTable.generatorDirection),
+                generatorWaitTime = tonumber(draftTable.generatorWaitTime),
+                generatorType = tonumber(draftTable.generatorType),
+                currentLayer = draftTable.currentLayer,
+                attachToLayer = draftTable.attachToLayer,
+                eventActivate = draftTable.eventActivate,
+                eventDeath = draftTable.eventDeath,
+                eventTalk = draftTable.eventTalk,
+                eventLayerEmpty = draftTable.eventLayerEmpty,
+            }
+        elseif draftTable[1] == "BLOCK" then
+            
+        end
+        return finalTable
+    else
+        return {}
+    end
 end
 
 return SysManager

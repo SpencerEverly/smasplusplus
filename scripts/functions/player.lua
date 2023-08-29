@@ -1,19 +1,33 @@
 local Playur = {}
 
-local starman
-local megashroom
-
 if smasGlobals == nil then
     smasGlobals = require("smasGlobals")
 end
 
-if Misc.inSuperMarioAllStarsPlusPlus() then
-    starman = require("starman/star")
-    megashroom = require("mega/megashroom")
-else
-    starman = require("npcs/AI/starman")
-    megashroom = require("npcs/AI/megashroom")
+Playur.animationState = {}
+Playur.opacityValue = {}
+Playur.isVisibleOverride = {}
+
+Playur.priorityValue = {}
+Playur.priorityValue.normal = {}
+Playur.priorityValue.pipe = {}
+Playur.priorityValue.clownCar = {}
+Playur.priorityValue.ignoreState = {}
+
+for i = 1,200 do
+    Playur.animationState[i] = ""
+    Playur.opacityValue[i] = 1
+    
+    Playur.priorityValue.normal[i] = -25
+    Playur.priorityValue.pipe[i] = -70
+    Playur.priorityValue.clownCar[i] = -35
+    Playur.priorityValue.ignoreState[i] = -25
+    
+    Playur.isVisibleOverride[i] = true
 end
+
+local starman = require("starman/star")
+local megashroom = require("mega/megashroom")
 
 local rng = require("base/rng")
 local inspect = require("ext/inspect")
@@ -34,6 +48,17 @@ Playur.characterNeededPSpeeds = {
     [CHARACTER_PEACH] = 80,
     [CHARACTER_TOAD]  = 60,
     [CHARACTER_LINK]  = 10,
+    [CHARACTER_MEGAMAN] = 60,
+    [CHARACTER_WARIO] = 35,
+    [CHARACTER_BOWSER] = 40,
+    [CHARACTER_KLONOA] = 60,
+    [CHARACTER_NINJABOMBERMAN] = 80,
+    [CHARACTER_ROSALINA] = 80,
+    [CHARACTER_SNAKE] = 10,
+    [CHARACTER_ZELDA] = 40,
+    [CHARACTER_ULTIMATERINKA] = 60,
+    [CHARACTER_UNCLEBROADSWORD] = 35,
+    [CHARACTER_SAMUS] = 10,
 }
 
 Playur.characterDeathEffects = {
@@ -442,32 +467,21 @@ function Playur.isJumping(p)
     return (p:mem(0x11E, FIELD_BOOL) and p.keys.jump == KEYS_PRESSED)
 end
 
-function Playur.countEveryPlayer(p)
+function Playur.countEveryPlayer()
     local playertable = {}
-    for _,p in ipairs(Player.get()) do
-        for i = 1,Player.count() do
-            table.insert(playertable, i)
-        end
+    for i = 1,Player.count() do
+        table.insert(playertable, i)
     end
     return playertable
 end
 
-function Playur.checkLivingIndex() --Code to check the isAnyPlayerAlive() code.
-    local playerTable = {}
+function Playur.isAnyPlayerAlive() --Returns if any player is still alive.
     for k, p in ipairs(Player.get()) do
         if p.deathTimer == 0 and not p:mem(0x13C, FIELD_BOOL) then
-            table.insert(playerTable, p.idx)
+            return true
         end
     end
-    return playerTable
-end
-
-function Playur.isAnyPlayerAlive() --Returns if any player is still alive.
-    if Playur.checkLivingIndex() ~= {} then
-        return true
-    else
-        return false
-    end
+    return false
 end
 
 function Playur.underwater(p) --Returns true if the specified player is underwater.
@@ -690,6 +704,10 @@ function Playur.inForcedState() --Returns true if the forced state is set to 0 o
             end
         end
     end
+end
+
+function Playur.getWalkAnimationSpeed(p)
+    return math.max(0.35,math.abs(p.speedX)/Defines.player_walkspeed)
 end
 
 function Playur.findAnimation(p) --This function returns the name of the custom animation currently playing.

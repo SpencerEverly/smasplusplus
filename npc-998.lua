@@ -10,7 +10,10 @@ local npcID = NPC_ID
 
 local exiting = false
 
-local drawCastlePlayer = false
+local drawCastlePlayer = {}
+for i = 1,200 do
+    drawCastlePlayer[i] = false
+end
 local castlePlayerTicks = 65
 local castlePlayerX = 0
 local castlePlayerY = 0
@@ -140,6 +143,7 @@ function flagpoleSMAS.onTickNPC(v)
             p.speedY = 3 - Defines.player_grav
             p.direction = 1
             p:setFrame(3)
+            Playur.animationState[p.idx] = "flagSlide"
             v.speedY = 3
             exiting = true
 
@@ -185,6 +189,7 @@ function flagpoleSMAS.onTickNPC(v)
                 SFX.play(58)
             end
         elseif data.state == 2 then
+            Playur.animationState[p.idx] = ""
             GameData.stopStarman = false
             smasBooleans.musicMuted = true
             if GameData.rushModeActive == true then
@@ -205,10 +210,11 @@ function flagpoleSMAS.onTickNPC(v)
             
             if p.x >= data.castleX + data.castleWidth / 2 - p.width / 2 then
                 data.state = 3
-                drawCastlePlayer = true
+                drawCastlePlayer[p.idx] = true
                 castlePlayerX = data.castleX + data.castleWidth / 2 - p.width / 2
                 castlePlayerY = p.y
                 Timer.hurryTime = -1
+                Playur.animationState[p.idx] = "victoryPose"
             end
         elseif data.state == 3 then
             smasBooleans.musicMuted = true
@@ -264,9 +270,10 @@ function flagpoleSMAS.onPlayerHarm(e, p)
 end
 
 function flagpoleSMAS.onDraw()
-    if drawCastlePlayer then
-        castlePlayerTicks = math.max(castlePlayerTicks - 1, 0)
-        for _,p in ipairs(Player.get()) do
+    for _,p in ipairs(Player.get()) do
+        if drawCastlePlayer[_] then
+            castlePlayerTicks = math.max(castlePlayerTicks - 1, 0)
+            Playur.opacityValue[_] = (castlePlayerTicks / 65)
             p.frame = 50
             p:render{
                 frame = 15,
