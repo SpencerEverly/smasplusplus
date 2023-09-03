@@ -141,9 +141,6 @@ function Playur.setupPlayers()
         if Player(i).isValid then
             if Player(i).character == 0 then
                 Player(i).character = 1;
-                if Player.count() == 2 and i == 2 then
-                    Player(i).character = 2;
-                end
             end
             if Player(i).powerup == 0 then
                 Player(i).powerup = 1;
@@ -262,9 +259,7 @@ function Playur.toggleSingleCoOp(enableexplosion) --Activates/deactivates single
             player2.character = player.character
             player2.speedY = rng.randomInt() * 24 - 12
             player.speedX = 3
-            if player2.powerup == 0 then
-                player2.powerup = player.powerup
-            end
+            Playur.setupPlayers()
         end
         if smasBooleans then
             smasBooleans.introModeActivated = false
@@ -297,10 +292,7 @@ function Playur.activate2ndPlayer(enablexplosion) --Activates 2nd player mode
         player2.y = player.y - 10
         player2.character = 2
         player2.frame = 1
-        if player2.powerup == 0 then
-            console:println("Player 2 was without powerup, so the game will set it to state 2 (Big).")
-            player2.powerup = 2
-        end
+        Playur.setupPlayers()
     end
     if smasBooleans then
         smasBooleans.introModeActivated = false
@@ -439,13 +431,13 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
         local poweruprng4 = rng.randomInt(1,7)
         local poweruprng5 = rng.randomInt(1,7)
         local poweruprng6 = rng.randomInt(1,7)
-        Player(1):transform(rngcharacter1, false)
+        player:transform(rngcharacter1, false)
         player2:transform(rngcharacter2, false)
         player3:transform(rngcharacter3, false)
         player4:transform(rngcharacter4, false)
         player5:transform(rngcharacter5, false)
         player6:transform(rngcharacter6, false)
-        Player(1).powerup = poweruprng1
+        player.powerup = poweruprng1
         player2.powerup = poweruprng2
         player3.powerup = poweruprng3
         player4.powerup = poweruprng4
