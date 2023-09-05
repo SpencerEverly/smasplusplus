@@ -1128,17 +1128,19 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                         end
                     end
                 end
-                for index2,shell2 in ipairs(bettereffects.getEffectObjects(988)) do
-                    if shell2.speedY == 0 then
-                        if smasExtraSounds.enableBoomerangBroBoomerangSFX then
-                            smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
+                if Misc.inSuperMarioAllStarsPlusPlus ~= nil and Misc.inSuperMarioAllStarsPlusPlus() then
+                    for index2,shell2 in ipairs(bettereffects.getEffectObjects(988)) do
+                        if shell2.speedY == 0 then
+                            if smasExtraSounds.enableBoomerangBroBoomerangSFX then
+                                smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
+                            end
                         end
                     end
-                end
-                for index2,shell2 in ipairs(bettereffects.getEffectObjects(986)) do
-                    if shell2.speedY == 0 then
-                        if smasExtraSounds.enableBoomerangBroBoomerangSFX then
-                            smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
+                    for index2,shell2 in ipairs(bettereffects.getEffectObjects(986)) do
+                        if shell2.speedY == 0 then
+                            if smasExtraSounds.enableBoomerangBroBoomerangSFX then
+                                smasExtraSounds.playSFX(116, smasExtraSounds.volume, 1, smasExtraSounds.boomerangDelay)
+                            end
                         end
                     end
                 end

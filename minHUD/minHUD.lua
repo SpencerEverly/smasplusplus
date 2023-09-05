@@ -6,6 +6,7 @@ local minHUD = {}
 
 local textplus = require("textplus")
 local smasHud = require("smasHud")
+local smasFunctions = require("smasFunctions")
 local t = 0
 
 -- Star Coin related stuff
@@ -98,50 +99,64 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
 
     -- Base HUD Bar
     if hudBarSet == 1 then
-        Graphics.drawImageWP(hudBarB, 0, 0, -4.4)
+        Graphics.drawBox{
+            color = Color.black,
+            x = 0,
+            y = 0,
+            width = camera.width,
+            height = 24,
+            priority = 4.998,
+        }
     else
-        Graphics.drawImageWP(hudBarT, 0, 0, -4.4)
+        Graphics.drawBox{
+            color = Color(0,0,0,0.5),
+            x = 0,
+            y = 0,
+            width = camera.width,
+            height = 24,
+            priority = 4.998,
+        }
     end
 
     -- Reserve Box
-    Graphics.drawImageWP(reserveBox, 400 - reserveBox.width*0.5, 4, -4.3)
+    Graphics.drawImageWP(reserveBox, Screen.calculateCameraDimensions(400 - reserveBox.width*0.5, 1), 4, 4.9999)
 
     local itemImage = reserveItem[player.reservePowerup] or reserveItem[0]
 
     if player.reservePowerup > 0 and itemImage ~= nil then
-        Graphics.drawImageWP(itemImage, 392, 4, -4.3)
+        Graphics.drawImageWP(itemImage, Screen.calculateCameraDimensions(392, 1), 4, 4.9999)
     end
 
     -- Coins
-    Graphics.drawImageWP(coinCounter, 20, 4, -4.3)
-    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.coinsClassic), font = minFont, priority = -4.3, x = 54, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    Graphics.drawImageWP(coinCounter, Screen.calculateCameraDimensions(20, 1), 4, 4.9999)
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.coinsClassic), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(54, 1), y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Lives or Death Counter
     if livesAltStyle == 2 then
-        Graphics.drawImageWP(deathCounter, 130, 4, -4.3)
-        textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.deathCount), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2} 
+        Graphics.drawImageWP(deathCounter, Screen.calculateCameraDimensions(130, 1), 4, 4.9999)
+        textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.deathCount), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(164, 1), y = 4, xscale = 2, yscale = 2} 
     else
-        Graphics.drawImageWP(lifeCounter, 114, 4, -4.3)
-        textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.lives), font = minFont, priority = -4.3, x = 164, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        Graphics.drawImageWP(lifeCounter, Screen.calculateCameraDimensions(114, 1), 4, 4.9999)
+        textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.lives), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(164, 1), y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end
 
     -- Stars
     if starCounterSet == 1 then
-        Graphics.drawImageWP(starCounter, 450, 4, -4.3)
-        textplus.print{text = tostring(SaveData.totalStarCount), font = minFont, priority = -4.3, x = 484, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        Graphics.drawImageWP(starCounter, Screen.calculateCameraDimensions(450, 1), 4, 4.9999)
+        textplus.print{text = tostring(SaveData.totalStarCount), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(484, 1), y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end
 
     -- Score
-    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.score), font = minFont, priority = -4.3, x = 544, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.score), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(544, 1), y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Time [SMBX Built In]
     if timeCounterSet == 1 then
         if timeAltStyle == 2 then
-            Graphics.drawImageWP(timeCounterB, 670, 4, -4.4)
+            Graphics.drawImageWP(timeCounterB, Screen.calculateCameraDimensions(670, 1), 4, 4.9999)
         else
-            Graphics.drawImageWP(timeCounter, 670, 4, -4.4)
+            Graphics.drawImageWP(timeCounter, Screen.calculateCameraDimensions(670, 1), 4, 4.9999)
         end
-        textplus.print{text = tostring(Timer.getValue()), font = minFont, priority = -4.3, x = 702, y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+        textplus.print{text = tostring(Timer.getValue()), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(702, 1), y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
     end    
 
     -- Reserve power-up rendering
@@ -168,42 +183,31 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
             if hudBarSet == 1 then
                 if dragonAltStyle == 2 then
                     if dragonExtra == 2 then
-                        Graphics.drawImageWP(dragonCoinEmptyW, 204 + (index * 36), 4, -4.4)
+                        Graphics.drawImageWP(dragonCoinEmptyW, Screen.calculateCameraDimensions(204 + (index * 36), 1), 4, 4.9999)
                     else
-                        Graphics.drawImageWP(dragonCoinEmptyW, 204 + (index * 18), 4, -4.4)
+                        Graphics.drawImageWP(dragonCoinEmptyW, Screen.calculateCameraDimensions(204 + (index * 18), 1), 4, 4.9999)
                     end
                 else
                     if dragonExtra == 2 then
-                    Graphics.drawImageWP(dragonCoinEmptyB, 204 + (index * 36), 4, -4.4)
+                    Graphics.drawImageWP(dragonCoinEmptyB, Screen.calculateCameraDimensions(204 + (index * 36), 1), 4, 4.9999)
                     else
-                    Graphics.drawImageWP(dragonCoinEmptyB, 204 + (index * 18), 4, -4.4)
+                    Graphics.drawImageWP(dragonCoinEmptyB, Screen.calculateCameraDimensions(204 + (index * 18), 1), 4, 4.9999)
                     end
                 end
             else
                 if dragonExtra == 2 then
-                    Graphics.drawImageWP(dragonCoinEmpty, 204 + (index * 36), 4, -4.4)
+                    Graphics.drawImageWP(dragonCoinEmpty, Screen.calculateCameraDimensions(204 + (index * 36), 1), 4, 4.9999)
                 else
-                    Graphics.drawImageWP(dragonCoinEmpty, 204 + (index * 18), 4, -4.4)
+                    Graphics.drawImageWP(dragonCoinEmpty, Screen.calculateCameraDimensions(204 + (index * 18), 1), 4, 4.9999)
                 end
             end
         else
             if dragonExtra == 2 then
-                Graphics.drawImageWP(dragonCoinCollect, 204 + (index * 36), 4, -4.4)
+                Graphics.drawImageWP(dragonCoinCollect, Screen.calculateCameraDimensions(204 + (index * 36), 1), 4, 4.9999)
             else
-                Graphics.drawImageWP(dragonCoinCollect, 204 + (index * 18), 4, -4.4)
+                Graphics.drawImageWP(dragonCoinCollect, Screen.calculateCameraDimensions(204 + (index * 18), 1), 4, 4.9999)
             end
         end
-    end
-end
-
-if Graphics.isHudActivated() then
-    Graphics.overrideHUD(minHUD.drawHUD)
-end
-
--- Track if the player is dying during a level exit
-function minHUD.onExitLevel() 
-    if not isOverworld and player:mem(0x13C,FIELD_BOOL) then
-        SaveData.SMASPlusPlus.hud.deathCount = SaveData.SMASPlusPlus.hud.deathCount + 1
     end
 end
 

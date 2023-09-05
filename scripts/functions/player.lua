@@ -297,6 +297,7 @@ function Playur.activate2ndPlayer(enablexplosion) --Activates 2nd player mode
         player2.y = player.y - 10
         player2.character = 2
         player2.frame = 1
+        player2.section = player.section
         if player2.powerup == 0 then
             console:println("Player 2 was without powerup, so the game will set it to state 2 (Big).")
             player2.powerup = 2

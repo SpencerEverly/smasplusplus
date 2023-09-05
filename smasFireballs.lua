@@ -65,13 +65,7 @@ function smasFireballs.onTick()
 end
 
 function smasFireballs.onNPCKill(eventObj, npc, harmtype)
-    --[[if smasFireballs.enableClassicShooting and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        for k, p in ipairs(Player.get()) do
-            if npc.ai3 == k then
-                smasFireballs.playerFireballCount[k] = smasFireballs.playerFireballCount[k] - 1
-            end
-        end
-    end]]
+    
 end
 
 function smasFireballs.onPostNPCHarm(npc, harmType)

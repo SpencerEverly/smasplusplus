@@ -1004,7 +1004,7 @@ end
 function pauseplus.onKeyboardPressDirect(keycode,repeated,character) -- for shift+P shortcut
     if not Misc.inEditor() or pauseplus.currentSubmenu ~= nil then return end
     
-    if not repeated and (keycode == VK_P) and Misc.GetKeyState(VK_RETURN) and pauseplus.canPause and not smasBooleans.isOnMainMenu and not smasBooleans.disablePauseMenu and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+    if not repeated and ((keycode == VK_P) and Misc.GetKeyState(VK_RETURN)) or (keycode == VK_F6) and pauseplus.canPause and not smasBooleans.isOnMainMenu and not smasBooleans.disablePauseMenu and not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         pauseplus.open()
     end
 end

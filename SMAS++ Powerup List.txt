@@ -1,0 +1,19 @@
+SMAS++ Powerups (If we coded a brand new system someday):
+
+(List not final)
+
+1: Small
+2: Big
+3: Fire Flower
+4: Super Leaf
+5: Tanooki Suit
+6: Hammer Suit
+7: Ice Flower
+
+8: Cape Feather
+9: Frog Suit
+10: Penguin Suit
+11: Propeller Suit
+12: Super Ball Flower
+13: Bubble Flower
+14: Jumping Louie (Mario Forever)

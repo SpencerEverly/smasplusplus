@@ -228,9 +228,6 @@ function cursor.onMouseButtonEvent(button, state)
                 if SysManager.checkEditorEntity().entityType == "NPC" then --NPC
                     if SysManager.checkEditorEntity().id > 0 then
                         local spawnedNPC = NPC.spawn(SysManager.checkEditorEntity().id, cursor.sceneX, cursor.sceneY, player.section)
-                        if SysManager.checkEditorEntity().direction ~= nil then
-                            spawnedNPC.direction = SysManager.checkEditorEntity().direction
-                        end
                     end
                 --[[elseif SysManager.checkEditorEntity().entityType == "Block" then --Block
                     if SysManager.checkEditorEntity().id > 0 then
@@ -257,7 +254,7 @@ function cursor.onTick()
                         local npcImg = Graphics.sprites.npc[SysManager.checkEditorEntity().id].img
                         
                         if npcImg ~= nil then
-                            Graphics.drawImageWP(npcImg, cursor.x, cursor.y, 0, 0, NPC.config[SysManager.checkEditorEntity().id].width, NPC.config[SysManager.checkEditorEntity().id].height, 0.5, 8)
+                            Graphics.drawImageWP(npcImg, cursor.x, cursor.y, 0, 0, NPC.config[SysManager.checkEditorEntity().id].gfxwidth, NPC.config[SysManager.checkEditorEntity().id].gfxheight, 0.5, 8)
                         end
                     end
                     --[[elseif SysManager.checkEditorEntity().entityType == "Block" then
