@@ -38,7 +38,7 @@ local dragonExtra = 1
 local starCounterSet = 1
 
 -- If you're using the built-in SMBX timer, enter 1. Otherwise enter 2.
-local timeCounterSet = 2
+local timeCounterSet = 1
 -- Enter 2 for an alternative style for the timer graphic. Useful if you're using a solid black bar.
 local timeAltStyle = 1
 
@@ -147,7 +147,7 @@ function minHUD.drawHUD(camIdx,priority,isSplit)
     end
 
     -- Score
-    textplus.print{text = tostring(SaveData.SMASPlusPlus.hud.score), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(544, 1), y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
+    textplus.print{text = tostring(SysManager.scoreCount13()), font = minFont, priority = 4.9999, x = Screen.calculateCameraDimensions(544, 1), y = 4, xscale = 2, yscale = 2, color = Color.fromHexRGBA(0xFFFFFFFF)}
 
     -- Time [SMBX Built In]
     if timeCounterSet == 1 then
