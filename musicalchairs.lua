@@ -23,13 +23,82 @@ musicalChairs.musicList = {
     },
     
     --Super Mario Bros. Spencer
-    ["_OST/Super Mario Bros Spencer/Overworld.ogg|m1;c2;r2"] = {
+    ["_OST/Super Mario Bros Spencer/Another World.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Athletic (Beach).ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Athletic (Desert).ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Athletic (Firey Forest).ogg|m1;c2;r2"] = {
         yoshiTrack = 2,
     },
     ["_OST/Super Mario Bros Spencer/Athletic.ogg|m1;c2;r2"] = {
         yoshiTrack = 2,
     },
+    ["_OST/Super Mario Bros Spencer/Beaches All Around.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Bonus.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
     ["_OST/Super Mario Bros Spencer/Boss Battle.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Castle.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Caves.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Firey Caves.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Firey See-Saws.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Forest.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Going Underground.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Going Underwater.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Ice Cream Desert (Missing Creams).ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Ice Cream Desert (Skies).ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Ice Cream Desert (Underground).ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Icey Deserty Icicles.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Mountain Base of Climbing.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Overworld.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Spinning the Flames.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Star.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Tower.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Town.ogg|m1;c2;r2"] = {
+        yoshiTrack = 2,
+    },
+    ["_OST/Super Mario Bros Spencer/Water.ogg|m1;c2;r2"] = {
         yoshiTrack = 2,
     },
     

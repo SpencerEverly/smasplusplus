@@ -2,10 +2,10 @@ HEAD
 TL:"Super Mario Bros. Spencer\: World 1-4";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Going Underwater.ogg";BG:34;
-SC:1;L:-180000;R:-169600;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Water.ogg";BG:56;
-SC:2;L:-160000;R:-158336;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Forest.ogg";BG:12;
-SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Caves.ogg";BG:39;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Going Underwater.ogg|m1\;c2\;r2";BG:34;
+SC:1;L:-180000;R:-169600;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Water.ogg|m1\;c2\;r2";BG:56;
+SC:2;L:-160000;R:-158336;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Forest.ogg|m1\;c2\;r2";BG:12;
+SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Caves.ogg|m1\;c2\;r2";BG:39;
 SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT

@@ -1,6 +1,7 @@
 --NPCManager is required for setting basic NPC properties
 local npcManager = require("npcManager")
 local npcutils = require("npcs/npcutils")
+local smasExtraSounds = require("smasExtraSounds")
 
 --Create the library table
 local brickGoomba = {}
@@ -215,7 +216,7 @@ function brickGoomba.onNPCKill(eventObj,v,killReason,culprit)
     --If it's killed by these types, spawn extra effect and play proper SFX
     if killReason==HARM_TYPE_JUMP or killReason==HARM_TYPE_FROMBELOW or killReason==HARM_TYPE_NPC
     or killReason==HARM_TYPE_TAIL or killReason==HARM_TYPE_SPINJUMP or killReason==HARM_TYPE_SWORD then
-    SFX.play(4)
+    SFX.play(smasExtraSounds.sounds[4].sfx)
     
     local e = Effect.spawn(goombaEffectID, v.x, v.y)
     e.speedX = 0

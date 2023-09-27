@@ -90,15 +90,17 @@ smasHudSystem.hasDied = false --If the player died or not
 smasHudSystem.exitToMap = false --Whenever to exit to the map after dying instead of reloading the level afterward (Not commonly used as reloading the level is much faster than kicking straight to the map)
 smasHudSystem.activated = true --Whenever the death animation is activated
 
-function addsmashpoints(block, fromUpper, playerornil) --This will add 50 points from smashing bricks, as said from the source code.
+function addSmashPoints(block, fromUpper, playerornil) --This will add 50 points from smashing bricks, as said from the source code.
     Routine.waitFrames(2, true)
-    if block.isHidden and block.layerName == "Destroyed Blocks" then
-        console:println("Brick "..tostring(block.idx).." was smashed.")
-        --SaveData.SMASPlusPlus.hud.score = SaveData.SMASPlusPlus.hud.score + 50
+    if block.isValid then
+        if block.isHidden and block.layerName == "Destroyed Blocks" then
+            console:println("Brick "..tostring(block.idx).." was smashed.")
+            --SaveData.SMASPlusPlus.hud.score = SaveData.SMASPlusPlus.hud.score + 50
+        end
     end
 end
 
-function detecttopcoin(block, fromUpper, playerornil)
+function detectTopCoin(block, fromUpper, playerornil)
     if not fromUpper then
         for k,v in NPC.iterateIntersecting(block.x, block.y - 32, block.x + 32, block.y) do
             if NPC.config[v.id].iscoin and not v.isHidden and not v.isGenerator then
@@ -128,11 +130,11 @@ function smasHudSystem.onPostBlockHit(block, fromUpper, playerornil) --Let's sta
         end
         --**BRICK SMASHING**
         if bricksnormal[block.id] then
-            Routine.run(addsmashpoints, block, fromUpper, playerornil)
+            Routine.run(addSmashPoints, block, fromUpper, playerornil)
         end
         --**COIN TOP DETECTION**
         if bricksnormal[block.id] or questionblocks[block.id] then
-            Routine.run(detecttopcoin, block, fromUpper, playerornil)
+            detectTopCoin(block, fromUpper, playerornil)
         end
     end
 end

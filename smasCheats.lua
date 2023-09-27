@@ -40,6 +40,8 @@ end
 smasCheats.moneytreeActive = false
 smasCheats.lavaplayerActive = false
 
+--local dummyCheckpoint = Checkpoint({x = player.x, y = player.y, section = player.section})
+
 --Here's some cheats specific for the episode (Global cheats, other level specific cheats will be under level_Dependencies_normal/hub):
 
 --**Episode-specific cheats**
@@ -824,6 +826,16 @@ Cheats.register("lavaplayer",{ --Lets the player swim in lava.
     end),
     flashPlayer = true,activateSFX = nil,
 })
+
+--[[Cheats.register("makeacheckpoint",{ --Saves a checkpoint where player 1 is.
+    onActivate = (function()
+        Defines.player_hasCheated = false
+        dummyCheckpoint:collect()
+        Sound.playSFX(58)
+        return true
+    end),
+    flashPlayer = true,activateSFX = nil,
+})]]
 
 function easteregggoodnessyeah()
     Sound.playSFX(92)

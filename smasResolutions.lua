@@ -1,6 +1,7 @@
 local smasResolutions = {}
 
 local CRTShader = Shader()
+CRTShader:compileFromFile(nil, "shaders/crt.frag")
 local filterBuffer = Graphics.CaptureBuffer(800,600)
 
 function smasResolutions.onInitAPI()
@@ -74,9 +75,6 @@ function smasResolutions.onDraw()
                 if (filterBuffer.width ~= camera.width or filterBuffer.height ~= camera.height) then
                     filterBuffer = Graphics.CaptureBuffer(camera.width, camera.height)
                 end
-            end
-            if not CRTShader._isCompiled then
-                CRTShader:compileFromFile(nil, "shaders/crt.frag")
             end
             filterBuffer:captureAt(10)
             Graphics.drawScreen{texture = filterBuffer, shader = CRTShader, uniforms = {iResolution = vector.v3(Screen.getScreenSize()[1],Screen.getScreenSize()[2])}, priority = 10}

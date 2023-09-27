@@ -3,7 +3,7 @@ TL:"Super Mario Bros. Spencer\: World 1-2";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
 SC:0;L:-200000;R:-192128;T:-200832;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Athletic.ogg|m1\;c2\;r2";BG:2;
-SC:1;L:-180000;R:-177344;T:-181216;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Star.ogg";BG:13;
+SC:1;L:-180000;R:-177344;T:-181216;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Star.ogg|m1\;c2\;r2";BG:13;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT

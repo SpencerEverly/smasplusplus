@@ -2,7 +2,7 @@ HEAD
 TL:"Super Mario Bros. Spencer\: World 2-4";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-187200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Icey Deserty Icicles.ogg";BG:33;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 5\,\n        \"weather\"\: 2\n    }\n}\n";
+SC:0;L:-200000;R:-187200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Icey Deserty Icicles.ogg|m1\;c2\;r2";BG:33;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 5\,\n        \"weather\"\: 2\n    }\n}\n";
 SC:1;L:-180000;R:-178080;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Factory Ahead (Pre-Area).ogg";BG:39;
 SECTION_END
 STARTPOINT

@@ -2,8 +2,8 @@ HEAD
 TL:"Super Mario Bros. Spencer\: World 2-A";SZ:1;CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Athletic (Desert).ogg";BG:33;
-SC:1;L:-180000;R:-169024;T:-180768;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Ice Cream Desert (Skies).ogg";BG:31;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Athletic (Desert).ogg|m1\;c2\;r2";BG:33;
+SC:1;L:-180000;R:-169024;T:-180768;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Ice Cream Desert (Skies).ogg|m1\;c2\;r2";BG:31;
 SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT

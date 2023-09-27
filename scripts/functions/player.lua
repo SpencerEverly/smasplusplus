@@ -562,11 +562,11 @@ function Playur.getBattleLives(playerIdx) --This will get the lives for the Batt
     if (playerIdx < 1) or (playerIdx > 200) then
         error("Invalid player index")
     end
-    return mem(mem(0xB2D754, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD)
+    return mem(mem(0x00B2D754, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD)
 end
 
 function Playur.setBattleLives(playerIdx, value) --This will set lives for the Battle Mode system to any player and value specified.
-    mem(mem(0xB2D754, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD, value)
+    mem(mem(0x00B2D754, FIELD_DWORD) + (playerIdx-1)*2, FIELD_WORD, value)
     console:println("Battle lives for player "..tostring(playerIdx).." has been set to "..tostring(value)..".")
 end
 

@@ -2,9 +2,9 @@ HEAD
 TL:"Super Mario Bros. Spencer\: World 2 (Castle)";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Castle.ogg";BG:12;
-SC:1;L:-180000;R:-171680;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Castle.ogg";BG:15;
-SC:2;L:-160000;R:-157984;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Castle.ogg";BG:4;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Castle.ogg|m1\;c2\;r2";BG:12;
+SC:1;L:-180000;R:-171680;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Castle.ogg|m1\;c2\;r2";BG:15;
+SC:2;L:-160000;R:-157984;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Castle.ogg|m1\;c2\;r2";BG:4;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:4;
 SECTION_END
 STARTPOINT

@@ -2,10 +2,10 @@ HEAD
 TL:"Super Mario Bros. Spencer\: World 1-A";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Forest.ogg";BG:12;
-SC:1;L:-180000;R:-170208;T:-180768;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Another World.ogg";BG:40;
-SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Forest.ogg";BG:12;
-SC:3;L:-140000;R:-138176;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Another World.ogg";BG:47;
+SC:0;L:-200000;R:-199200;T:-200600;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Forest.ogg|m1\;c2\;r2";BG:12;
+SC:1;L:-180000;R:-170208;T:-180768;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Another World.ogg|m1\;c2\;r2";BG:40;
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Forest.ogg|m1\;c2\;r2";BG:12;
+SC:3;L:-140000;R:-138176;T:-140600;B:-140000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Another World.ogg|m1\;c2\;r2";BG:47;
 SC:4;L:-120000;R:-119200;T:-120600;B:-120000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT

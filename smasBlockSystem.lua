@@ -4,6 +4,8 @@
 
 local smasBlockSystem = {}
 
+local blockManager = require("blockManager") --Used to detect spinjumping turn block stuff
+
 --How the invisible 1UP block system from SMB1 works (Thanks Kosmic!):
 --If you collect the following coin counts in -3 levels (In order from each -3 level):
 smasBlockSystem.invisibleCoinsToCollect = {
@@ -32,6 +34,9 @@ smasBlockSystem.enableMultiCoinBlockSystem = true
 smasBlockSystem.enableSMB1Invisible1UPSystem = true
 smasBlockSystem.enableMultiplayerPowerupBlockSystem = true
 smasBlockSystem.enableYoshi1UPBlockSystem = true
+smasBlockSystem.enableTurnBlockSpinjumpBlockHits = false
+
+local block90 = {}
 
 if SaveData.SMB1Invisible1UPBlockMet == nil then
     SaveData.SMB1Invisible1UPBlockMet = true --Since we're opening on 1-1, this will need to be set to true
@@ -48,6 +53,8 @@ function smasBlockSystem.onInitAPI()
     registerEvent(smasBlockSystem,"onTick")
     registerEvent(smasBlockSystem,"onDraw")
     registerEvent(smasBlockSystem,"onExit")
+    
+    blockManager.registerEvent(90, block90, "onCollideBlock")
 end
 
 function smasBlockSystem.onStart()
@@ -114,6 +121,18 @@ function smasBlockSystem.sproutMultiplayerBlockItem(playerPowerup, block, fromUp
     
     smasBlockSystem.spawnMultiplayerItem(block, fromUpper, playerornil, blockID, npcEntity.id)
     npcEntity:kill(HARM_TYPE_OFFSCREEN)
+end
+
+function block90.onCollideBlock(block, hitter) --SMW BLock
+    if smasBlockSystem.enableTurnBlockSpinjumpBlockHits then
+        if type(hitter) == "Player" then
+            if (hitter.y+hitter.height) <= (block.y+4) then
+                if (hitter:mem(0x50, FIELD_BOOL) and block.contentID > 0) then --Is the player spinjumping, and we have a content ID greater than 0?
+                    block:hit(true)
+                end
+            end
+        end
+    end
 end
 
 function smasBlockSystem.onPostBlockHit(block, fromUpper, playerornil)

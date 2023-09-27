@@ -2,11 +2,11 @@ HEAD
 TL:"Super Mario Bros. Spencer\: World 2 (Tower)";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-202528;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg";BG:13;CS:1;CSV:1;
-SC:1;L:-180000;R:-175872;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg";BG:13;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\n    }\n}\n";
-SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Bonus.ogg";BG:1;CS:1;CSV:1;
-SC:3;L:-140000;R:-139200;T:-140600;B:-138592;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg";BG:13;CS:1;
-SC:4;L:-121824;R:-119200;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg";BG:13;
+SC:0;L:-200000;R:-199200;T:-202528;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg|m1\;c2\;r2";BG:13;CS:1;CSV:1;
+SC:1;L:-180000;R:-175872;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg|m1\;c2\;r2";BG:13;XTRA:"{\n    \"effects\"\: {\n        \"screenEffects\"\: 0\n    }\n}\n";
+SC:2;L:-160000;R:-159200;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Bonus.ogg|m1\;c2\;r2";BG:1;CS:1;CSV:1;
+SC:3;L:-140000;R:-139200;T:-140600;B:-138592;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg|m1\;c2\;r2";BG:13;CS:1;
+SC:4;L:-121824;R:-119200;T:-120600;B:-120000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg|m1\;c2\;r2";BG:13;
 SC:5;L:-100000;R:-99200;T:-100600;B:-100000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Boss Battle.ogg|m1\;c2\;r2";BG:13;
 SC:20;L:200000;R:200800;T:199400;B:200000;MZ:0;MF:"";BG:0;
 SECTION_END

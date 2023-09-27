@@ -1,0 +1,5 @@
+local smasCheckpoints = {}
+
+
+
+return snasCheckpoints

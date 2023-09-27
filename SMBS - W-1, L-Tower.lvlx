@@ -2,9 +2,9 @@ HEAD
 TL:"Super Mario Bros. Spencer\: World 1 (Tower)";CPID:"SMBX2";
 HEAD_END
 SECTION
-SC:0;L:-200000;R:-199200;T:-206016;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg";BG:54;CS:1;
+SC:0;L:-200000;R:-199200;T:-206016;B:-200000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg|m1\;c2\;r2";BG:54;CS:1;
 SC:1;L:-180000;R:-179200;T:-180600;B:-180000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Boss Battle.ogg|m1\;c2\;r2";BG:3;
-SC:2;L:-160000;R:-158112;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg";BG:44;
+SC:2;L:-160000;R:-158112;T:-160600;B:-160000;MZ:24;MF:"_OST/Super Mario Bros Spencer/Tower.ogg|m1\;c2\;r2";BG:44;
 SC:3;L:-140000;R:-139200;T:-140600;B:-140000;MZ:0;MF:"";BG:0;
 SECTION_END
 STARTPOINT
