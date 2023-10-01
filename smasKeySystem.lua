@@ -9,16 +9,16 @@ _G.KEYS_PRESSED = 1
 _G.KEYS_DOWN = true
 
 smasKeySystem.keysList = {
-	"up",
-	"down",
-	"left",
-	"right",
-	"jump",
-	"altJump",
-	"run",
-	"altRun",
-	"dropItem",
-	"pause",
+    "up",
+    "down",
+    "left",
+    "right",
+    "jump",
+    "altJump",
+    "run",
+    "altRun",
+    "dropItem",
+    "pause",
     "special",
 }
 
