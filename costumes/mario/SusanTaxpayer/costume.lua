@@ -28,11 +28,6 @@ costume.hammerConfig = {
 }
 
 
-
-costume.playersList = {}
-costume.playerData = {}
-
-
 local eventsRegistered = false
 
 
@@ -161,35 +156,42 @@ local function setHeldNPCPosition(p,x,y)
 	end
 end
 
+local function getWalkAnimationSpeed(p)
+    return math.max(0.35,math.abs(p.speedX)/Defines.player_walkspeed)
+end
+
 local animationSet = {
     idle = {1, defaultFrameX = 1},
     lookUp = {11, defaultFrameX = 1},
     walk = {2,3,4,5,6,7,8,9,10, defaultFrameX = 1, frameDelay = 3},
-    run = {1,2,3,4,5, defaultFrameX = 3, frameDelay = 3}
     jump = {1, defaultFrameX = 2,loops = false},
     fall = {2, defaultFrameX = 2},
+    
+    run = {1,2,3,4,5, defaultFrameX = 3, frameDelay = 3},
 
-    holdingIdle = {1, defaultFrameX = 3},
-    holdingWalk = {2,3, defaultFrameX = 3,frameDelay = 6},
-    holdingJump = {1,2, defaultFrameX = 4,loops = false},
-    holdingFall = {1, defaultFrameX = 4},
+    holdingIdle = {1, defaultFrameX = 4},
+    holdingWalk = {2,3,4,5,6,7,8,9, defaultFrameX = 4,frameDelay = 3},
+    holdingJump = {8, defaultFrameX = 4},
+    holdingFall = {9, defaultFrameX = 4},
 
     duck = {1, defaultFrameX = 5},
-    slide = {2, defaultFrameX = 5},
-    pluck = {3,4, defaultFrameX = 5,frameDelay = 6,loops = false},
+    slide = {12, defaultFrameX = 5},
+    pluck = {3,4,5, defaultFrameX = 5,frameDelay = 4},
 
-    front = {1, defaultFrameX = 6},
-    back = {2, defaultFrameX = 6},
+    front = {7, defaultFrameX = 5},
+    back = {9, defaultFrameX = 5},
+    
+    spinJump = {6,7,8,9, defaultFrameX = 5,frameDelay = 4},
 
-    climb = {1,2, defaultFrameX = 7,frameDelay = 8},
+    climb = {10,11, defaultFrameX = 5,frameDelay = 8},
 
-    skid = {1, defaultFrameX = 8},
+    skid = {2, defaultFrameX = 5},
 
-    swimIdle = {1, defaultFrameX = 9},
-    swimStroke = {2,3,2, defaultFrameX = 9,frameDelay = 4,loops = false},
+    swimIdle = {1,2, defaultFrameX = 6},
+    swimStroke = {3,4,3, defaultFrameX = 6,frameDelay = 4,loops = false},
 
-    yoshi = {1, defaultFrameX = 10},
-    yoshiDuck = {2, defaultFrameX = 10},
+    yoshi = {1, defaultFrameX = 7},
+    yoshiDuck = {2, defaultFrameX = 7},
 }
 
 -- This function returns the name of the custom animation currently playing.
@@ -264,7 +266,8 @@ local function findAnimation(p,animator)
 
     -- Spin jumping
     if p:mem(0x50,FIELD_BOOL) or p:mem(0x4A,FIELD_BOOL) then
-        if p:mem(0x52,FIELD_WORD) < 3 then
+        return "spinJump"
+        --[[if p:mem(0x52,FIELD_WORD) < 3 then
             return "idle"
         elseif p:mem(0x52,FIELD_WORD) < 6 then
             return "back"
@@ -272,7 +275,7 @@ local function findAnimation(p,animator)
             return "idle"
         else
             return "front"
-        end
+        end]]
     end
 
 
@@ -297,7 +300,11 @@ local function findAnimation(p,animator)
 
         -- Walking
         if p.speedX ~= 0 and not animationPal.utils.isSlidingOnIce(p) then
-            return "walk"
+            if p.speedX < 5 and p.speedX > -5 then
+                return "walk",getWalkAnimationSpeed(p)
+            else
+                return "run",getWalkAnimationSpeed(p)
+            end
         end
         
         --Looking up
@@ -347,23 +354,47 @@ function costume.onInit(p)
         frameWidth = 100,
         frameHeight = 100,
 
-        offset = vector(0,3),
+        offset = vector(0,17),
         scale = vector(1,1),
 
-        imagePathFormat = "costumes/mario/SusanTaxpayer/mario-%s.png",
+        imagePathFormat = "costumes/mario/SusanTaxpayer/mario-%d.png",
     })
     
-    --smasCharacterHealthSystem.enabled = true --Only for heart-related Mario/Luigi characters!
+    smasCharacterHealthSystem.enabled = true --Only for heart-related Mario/Luigi characters!
 end
 
 function costume.onCleanup(p)
     Sound.cleanupCostumeSounds()
     
     animationPal.deregisterCharacter(CHARACTER_MARIO)
-    --smasCharacterHealthSystem.enabled = false --Only for heart-related Mario/Luigi characters!
+    smasCharacterHealthSystem.enabled = false --Only for heart-related Mario/Luigi characters!
 end
 
+costume.heldNPCTimer = 0
+costume.heldNPCX = 0
+costume.heldNPCY = 0
+
 function costume.onDraw()
+    player.powerup = 2 --For now, until we get the other states done, this'll do for now
+    
+    
+    if player.holdingNPC ~= nil and player.holdingNPC.isValid then
+        local settings = PlayerSettings.get(playerManager.getBaseID(player.character),player.powerup)
+        
+        local heldNPCY = (player.y + player.height - player.holdingNPC.height) - 46
+        local heldNPCX
+
+        if player.direction == DIR_RIGHT then
+            heldNPCX = player.x + settings.grabOffsetX + 12
+        else
+            heldNPCX = player.x + player.width - settings.grabOffsetX - player.holdingNPC.width - 12
+        end
+        
+        setHeldNPCPosition(player,heldNPCX,heldNPCY)
+    else
+        costume.heldNPCTimer = 0
+    end
+    
 	-- Change death effects
     local deathEffectID = characterDeathEffects[CHARACTER_MARIO]
 
@@ -381,5 +412,6 @@ function costume.onDraw()
     end
 end
 
+Misc.storeLatestCostumeData(costume)
 
 return costume

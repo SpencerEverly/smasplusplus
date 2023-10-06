@@ -490,6 +490,7 @@ function smasCharacterChanger.onDraw()
     smasCharacterChanger.addCharacter("Homer Simpson","The Simpsons",5,"TS-HOMERSIMPSON")
     smasCharacterChanger.addCharacter("Peter Griffin","Family Guy",5,"FG-PETERGRIFFIN")
     smasCharacterChanger.addCharacter("Sophia the III","Blaster Master",4,"SOPHIATHETHIRD")
+    --smasCharacterChanger.addCharacter("Susan Taxpayer","Susan Taxpayer (SMBX2)",1,"SUSANTAXPAYER")
     --smasCharacterChanger.addCharacter("Graytrap","Grayson Dietrich",2,"GRAYTRAP")
 
     --***VARIANTS***
