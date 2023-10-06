@@ -152,11 +152,10 @@ Costumes:
 Codes for certain parts made by:
 
 - KBM-Quine
-- Enjl
+- Emral
 - MrDoubleA
 - Chipss
 - Bulby_VR
-- Enjl
 - 9thCore
 - Hatsune Blake/Blake Hatsune
 - CJ_RLushi
@@ -180,7 +179,7 @@ Codes for certain parts made by:
 - IAmPlayer
 - MegoZ_
 - CodeX
-- Core
+- Kate Bulka
 - FutureNyanCat2002
 - 8lue Storm
 - King DRACalgar Law357
