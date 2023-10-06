@@ -292,10 +292,10 @@ function thirteenModeDeath()
     console:println("Everyone has died.")
     smasBooleans.musicMuted = true
     Audio.MusicVolume(0)
-    if SaveData.SMASPlusPlus.hud.lives < 0 and SaveData.enableLives then
+    if SaveData.SMASPlusPlus.hud.lives < 0 and SaveData.SMASPlusPlus.accessibility.enableLives then
         gameoveractivate = true
         SaveData.SMASPlusPlus.hud.lives = 0
-    elseif SaveData.SMASPlusPlus.hud.lives < 0 and not SaveData.enableLives then
+    elseif SaveData.SMASPlusPlus.hud.lives < 0 and not SaveData.SMASPlusPlus.accessibility.enableLives then
         gameoveractivate2 = true
     end
     Routine.waitFrames(195)
@@ -340,11 +340,11 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 Audio.MusicVolume(0)
                                 SaveData.SMASPlusPlus.hud.deathCount = SaveData.SMASPlusPlus.hud.deathCount + 1 --This marks a death count, for info regarding how many times you died
                                 SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives - 1 --This marks a life lost
-                                if SaveData.SMASPlusPlus.hud.lives < 0 and SaveData.enableLives then --If less than 0, the quick game over screen will activate
+                                if SaveData.SMASPlusPlus.hud.lives < 0 and SaveData.SMASPlusPlus.accessibility.enableLives then --If less than 0, the quick game over screen will activate
                                     console:println("A game over screen will occur.")
                                     gameoveractivate = true
                                     SaveData.SMASPlusPlus.hud.lives = 0
-                                elseif SaveData.SMASPlusPlus.hud.lives < 0 and not SaveData.enableLives then
+                                elseif SaveData.SMASPlusPlus.hud.lives < 0 and not SaveData.SMASPlusPlus.accessibility.enableLives then
                                     gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
@@ -392,10 +392,10 @@ function diedanimation(plr) --The entire animation when dying. The pause and sou
                                 Audio.MusicVolume(0)
                                 SaveData.SMASPlusPlus.hud.deathCount = SaveData.SMASPlusPlus.hud.deathCount + 1 --This marks a death count, for info regarding how many times you died
                                 SaveData.SMASPlusPlus.hud.lives = SaveData.SMASPlusPlus.hud.lives - 1
-                                if SaveData.SMASPlusPlus.hud.lives < 0 and SaveData.enableLives then
+                                if SaveData.SMASPlusPlus.hud.lives < 0 and SaveData.SMASPlusPlus.accessibility.enableLives then
                                     gameoveractivate = true
                                     SaveData.SMASPlusPlus.hud.lives = 0
-                                elseif SaveData.SMASPlusPlus.hud.lives < 0 and not SaveData.enableLives then
+                                elseif SaveData.SMASPlusPlus.hud.lives < 0 and not SaveData.SMASPlusPlus.accessibility.enableLives then
                                     gameoveractivate2 = true
                                 end
                                 Misc.saveGame() --Save the game to save what we've added/edited
@@ -476,7 +476,7 @@ function smasHudSystem.onTick()
     if SaveData.SMASPlusPlus.hud.coinsClassic > 99 then --This is to give the player a life when reaching 100 coins
         console:println("100 coins reached! Gaining an extra life...")
         SaveData.SMASPlusPlus.hud.coinsClassic = 0
-        if SaveData.enableLives then
+        if SaveData.SMASPlusPlus.accessibility.enableLives then
             Sound.playSFX(15)
         else
             Sound.playSFX(150)

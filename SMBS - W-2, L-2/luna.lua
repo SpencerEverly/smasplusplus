@@ -11,7 +11,7 @@ function onEvent(eventName)
     end
     if eventName == "Cutscene 1" then
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-            if SaveData.accessibilityInventory then
+            if SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
                 smasBooleans.toggleOffInventory = true
             end
         end
@@ -28,7 +28,7 @@ function onEvent(eventName)
     end
     if eventName == "Cutscene 2 - 13" then
         if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-            if SaveData.accessibilityInventory then
+            if SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
                 smasBooleans.toggleOffInventory = false
             end
         end

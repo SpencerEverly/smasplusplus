@@ -62,7 +62,8 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities == true then
-        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+        local specialKey = SaveData.SMASPlusPlus.player[1].controls.specialKey
+        if keyCode == smasTables.keyboardMap[specialKey] and not repeated then
             if smasCharacterGlobals.abilitySettings.southParkEricCanThrowSnowballs then
                 costume.throwSnowball()
             end
@@ -73,7 +74,7 @@ end
 function costume.onControllerButtonPress(button, playerIdx)
     if SaveData.toggleCostumeAbilities == true then
         if playerIdx == 1 then
-            if button == SaveData.specialbutton1stplayer then
+            if button == SaveData.SMASPlusPlus.player[1].controls.specialButton then
                 if smasCharacterGlobals.abilitySettings.southParkEricCanThrowSnowballs then
                     costume.throwSnowball()
                 end
@@ -83,7 +84,7 @@ function costume.onControllerButtonPress(button, playerIdx)
 end
 
 function costume.throwSnowball()
-    if (plr.powerup == 5) == false then
+    if not (plr.powerup == 5) then
         plr:mem(0x120, FIELD_BOOL, false) --Making sure Alt Jump isn't pressed until after the attack
         plr:mem(0x172, FIELD_BOOL, false) --No run either, in case
         local x = plr.x
@@ -102,7 +103,7 @@ function costume.throwSnowball()
             snowballNpc.speedX = -8.5
             snowballNpc.speedY = 1
         end
-        if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+        if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
             Sound.playSFX(smasCharacterGlobals.soundSettings.southParkEricSnowballThrowSFX)
         end
         costume.usesnowball = false

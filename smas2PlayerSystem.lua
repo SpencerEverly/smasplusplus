@@ -280,7 +280,7 @@ if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then --These will be 1.
         if Player.count() == 2 then
             if playerIdx == 1 then
                 if not Misc.isPaused() then
-                    if button == SaveData.specialbutton1stplayer then
+                    if button == SaveData.SMASPlusPlus.player[1].controls.specialButton then
                         player:teleport(player2.x + 32, player2.y - 32, bottomCenterAligned)
                         Sound.playSFX("player-tp-2player.ogg")
                     end
@@ -288,7 +288,7 @@ if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then --These will be 1.
             end
             if playerIdx == 2 then
                 if not Misc.isPaused() then
-                    if button == SaveData.specialbutton2ndplayer then
+                    if button == SaveData.SMASPlusPlus.player[2].controls.specialButton then
                         player2:teleport(player.x - 32, player.y - 32, bottomCenterAligned)
                         Sound.playSFX("player-tp-2player.ogg")
                     end
@@ -320,9 +320,11 @@ if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then --These will be 1.
     function smas2PlayerSystem.onKeyboardPress(keyCode, repeated) --Now for the keyboard press detection code...
         if Player.count() == 2 then
             if not Misc.isPaused() then
-                if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+                local specialKey = SaveData.SMASPlusPlus.player[1].controls.specialKey
+                local specialKey2 = SaveData.SMASPlusPlus.player[2].controls.specialKey
+                if keyCode == smasTables.keyboardMap[specialKey] and not repeated then
                     smas2PlayerSystem.teleport2PlayerMode1P()
-                elseif keyCode == smasTables.keyboardMap[SaveData.specialkey2ndplayer] and not repeated then
+                elseif keyCode == smasTables.keyboardMap[specialKey2] and not repeated then
                     smas2PlayerSystem.teleport2PlayerMode2P()
                 end
             end

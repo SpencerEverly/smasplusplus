@@ -105,7 +105,7 @@ function smasKeySystem.onDraw()
             SaveData.controls.controller[i].altRun = SaveData.controls.controller[1].altRun or inputConfig1.altrun
             SaveData.controls.controller[i].dropItem = SaveData.controls.controller[1].dropItem or inputConfig1.dropitem
             SaveData.controls.controller[i].pause = SaveData.controls.controller[1].pause or inputConfig1.pause
-            SaveData.controls.controller[i].special = SaveData.controls.controller[1].special or SaveData.specialbutton1stplayer
+            SaveData.controls.controller[i].special = SaveData.controls.controller[1].special or SaveData.SMASPlusPlus.player[1].controls.specialButton
         end
         for k,v in ipairs(smasKeySystem.keysList) do
             if inputConfig1.inputType == 0 then

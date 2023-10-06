@@ -44,16 +44,16 @@ local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 
 if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        if SaveData.accessibilityTwirl then
+        if SaveData.SMASPlusPlus.accessibility.enableTwirl then
             console:println("Twirling activated! Loading the twirl library...")
             twirl = require("Twirl")
         end
-        if SaveData.accessibilityWallJump then
+        if SaveData.SMASPlusPlus.accessibility.enableWallJump then
             console:println("Wall jumping activated! Loading the anotherwalljump library...")
             aw = require("anotherwalljump")
             aw.registerAllPlayersDefault()
         end
-        if SaveData.accessibilityGroundPound then
+        if SaveData.SMASPlusPlus.accessibility.enableGroundPound then
             console:println("Ground pounding activated! Loading the GroundPound library...")
             GP = require("GroundPound")
             GP.enabled = true
@@ -423,7 +423,7 @@ function globalgenerals.onDraw()
             frametimer = 0
         end
     end
-    if SaveData.framerateEnabled then
+    if SaveData.SMASPlusPlus.options.enableFramerateCounter then
         textplus.print{x = 8, y = 8, text = actualframecount, font = numberfont, priority = 10, xscale = 1, yscale = 1}
     end
     

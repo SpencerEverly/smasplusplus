@@ -4053,7 +4053,7 @@ do
 
 
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        if SaveData.enableLives then
+        if SaveData.SMASPlusPlus.accessibility.enableLives then
             smwMap.hudCounters = {
                 -- Lives
                 {
@@ -4130,7 +4130,7 @@ do
             }
         end
     elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        if SaveData.enableLives then
+        if SaveData.SMASPlusPlus.accessibility.enableLives then
             smwMap.hudCounters = {
                 -- Lives
                 {
@@ -4179,7 +4179,7 @@ do
             }
         end
     else
-        if SaveData.enableLives then
+        if SaveData.SMASPlusPlus.accessibility.enableLives then
             smwMap.hudCounters = {
                 -- Lives
                 {
@@ -4802,7 +4802,7 @@ do
                 Audio.MusicPause()
             end
         else
-            Audio.MusicVolume(GameData.____currentMusicVolume)
+            Audio.MusicVolume(GameData.SMASPlusPlus.audio.musicVolume)
         end
     end
 end
@@ -4823,9 +4823,9 @@ function smwMap.onDraw()
     if Misc.isPaused() and unlockLoopObj ~= nil and unlockLoopObj:isPlaying() then
         unlockLoopObj:pause()
     end
-    if not SaveData.firstBootMapPathFixed then
+    if not SaveData.SMASPlusPlus.game.firstBootMapPathFixed then
         Misc.unlockAnyBrokenPaths()
-        SaveData.firstBootMapPathFixed = true
+        SaveData.SMASPlusPlus.game.firstBootMapPathFixed = true
     end
     if smwMap.enableMusic and not smasBooleans.musicMutedTemporary then
         smwMap.forceMutedMusic = false

@@ -1041,7 +1041,7 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             if not isOverworld then
                 for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
                     if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
-                        if SaveData.enableLives then
+                        if SaveData.SMASPlusPlus.accessibility.enableLives then
                             smasExtraSounds.playSFX(15)
                         else
                             smasExtraSounds.playSFX(150)
@@ -1049,13 +1049,13 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                     end
                     if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
                         if not smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.enableLives then
+                            if SaveData.SMASPlusPlus.accessibility.enableLives then
                                 smasExtraSounds.playSFX(96)
                             else
                                 smasExtraSounds.playSFX(150)
                             end
                         elseif smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.enableLives then
+                            if SaveData.SMASPlusPlus.accessibility.enableLives then
                                 smasExtraSounds.playSFX(15)
                             else
                                 smasExtraSounds.playSFX(150)
@@ -1064,13 +1064,13 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                     end
                     if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
                         if not smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.enableLives then
+                            if SaveData.SMASPlusPlus.accessibility.enableLives then
                                 smasExtraSounds.playSFX(97)
                             else
                                 smasExtraSounds.playSFX(150)
                             end
                         elseif smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.enableLives then
+                            if SaveData.SMASPlusPlus.accessibility.enableLives then
                                 smasExtraSounds.playSFX(15)
                             else
                                 smasExtraSounds.playSFX(150)
@@ -1079,13 +1079,13 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                     end
                     if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
                         if not smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.enableLives then
+                            if SaveData.SMASPlusPlus.accessibility.enableLives then
                                 smasExtraSounds.playSFX(98)
                             else
                                 smasExtraSounds.playSFX(150)
                             end
                         elseif smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.enableLives then
+                            if SaveData.SMASPlusPlus.accessibility.enableLives then
                                 smasExtraSounds.playSFX(15)
                             else
                                 smasExtraSounds.playSFX(150)

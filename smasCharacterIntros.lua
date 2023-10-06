@@ -66,7 +66,7 @@ function smasCharacterIntros.onStart()
 
     local costumes
     if SaveData.toggleCostumeAbilities == true then
-        if SaveData.enableIntros then
+        if SaveData.SMASPlusPlus.options.enableIntros then
             if table.icontains(smasTables._noLevelPlacesPlusOtherLevels,Level.filename()) == false then
                 console:println("Character intro will now be played.")
                 if SaveData.SMASPlusPlus.player[1].currentCostume == "GO-10SECONDRUN" then
@@ -84,7 +84,7 @@ end
 function smasCharacterIntros.onDraw()
     if SaveData.toggleCostumeAbilities == true then
         if SaveData.SMASPlusPlus.player[1].currentCostume == "GO-10SECONDRUN" then
-            if SaveData.enableIntros == true then
+            if SaveData.SMASPlusPlus.options.enableIntros == true then
                 if smasCharacterIntros.animationactive == true then
                     --Invisible player
                     if dontshowplayer then
@@ -135,7 +135,7 @@ function smasCharacterIntros.onDraw()
                 end
             end
         elseif SaveData.SMASPlusPlus.player[1].currentCostume == "PACMAN-ARRANGEMENT-PACMAN" then
-            if SaveData.enableIntros == true then
+            if SaveData.SMASPlusPlus.options.enableIntros == true then
                 if smasCharacterIntros.animationactive == true then
                     --Invisible player
                     if dontshowplayer then

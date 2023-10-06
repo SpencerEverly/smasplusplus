@@ -104,8 +104,9 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities then
-        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
-            if (player.powerup == 5) == false then
+        local specialKey = SaveData.SMASPlusPlus.player[1].controls.specialKey
+        if keyCode == smasTables.keyboardMap[specialKey] and not repeated then
+            if not (player.powerup == 5) then
                 if smasCharacterGlobals.abilitySettings.rebelTrooperCanShootBlaster then
                     costume.shootLaser1()
                 end
@@ -117,7 +118,7 @@ end
 function costume.onControllerButtonPress(button, playerIdx)
     if SaveData.toggleCostumeAbilities then
         if playerIdx == 1 then
-            if button == SaveData.specialbutton1stplayer then
+            if button == SaveData.SMASPlusPlus.player[1].controls.specialButton then
                 if (player.powerup == 5) == false then
                     if smasCharacterGlobals.abilitySettings.rebelTrooperCanShootBlaster then
                         costume.shootLaser1()
@@ -136,7 +137,7 @@ function costume.onTick()
             if smasCharacterGlobals.abilitySettings.rebelTrooperCanDoubleJump then
                 hasJumped = true
                 player:mem(0x11C, FIELD_WORD, 10)
-                if table.icontains(smasTables._noLevelPlaces,Level.filename()) == false then
+                if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
                     Sound.playSFX(smasCharacterGlobals.soundSettings.rebelTrooperDoubleJumpSFX)
                 end
             end

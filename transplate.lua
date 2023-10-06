@@ -1,7 +1,7 @@
 local transplate = {}
 
-if SaveData.currentLanguage == nil then
-    SaveData.currentLanguage = "english"
+if SaveData.SMASPlusPlus.options.currentLanguage == nil then
+    SaveData.SMASPlusPlus.options.currentLanguage = "english"
 end
 
 local path = "transplate"
@@ -96,7 +96,7 @@ do
 end
 
 function transplate.getLanguage()
-    return SaveData.currentLanguage
+    return SaveData.SMASPlusPlus.options.currentLanguage
 end
 
 do
@@ -130,27 +130,27 @@ do
         --littleDialogue_changeFonts(new)
         
         if saveLanguage then
-            SaveData.currentLanguage = currentLanguage
+            SaveData.SMASPlusPlus.options.currentLanguage = currentLanguage
         end
     end
 end
 
 function transplate.getTranslation(text, lang)
-    if SaveData.currentLanguage == nil then return text end
+    if SaveData.SMASPlusPlus.options.currentLanguage == nil then return text end
 
-    return langs[SaveData.currentLanguage or lang].strings[text] or text
+    return langs[SaveData.SMASPlusPlus.options.currentLanguage or lang].strings[text] or text
 end
 
 function transplate.setTranslation(text, new, lang)
     if not currentLanguage then return end
 
-    langs[lang or SaveData.currentLanguage].strings[text] = new
+    langs[lang or SaveData.SMASPlusPlus.options.currentLanguage].strings[text] = new
 end
 
 function transplate.onInitAPI()
     if saveLanguage then
-        transplate.setLanguage(SaveData.currentLanguage)
-        transplate.loadLanguage(SaveData.currentLanguage)
+        transplate.setLanguage(SaveData.SMASPlusPlus.options.currentLanguage)
+        transplate.loadLanguage(SaveData.SMASPlusPlus.options.currentLanguage)
     end
     
     if preCache and SaveData.currentLanguageCache then

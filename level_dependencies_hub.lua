@@ -98,7 +98,7 @@ function dependencies2.onStart()
         anotherPowerDownLibrary = require("anotherPowerDownLibrary")
         playerphysicspatch = require("playerphysicspatch")
         kindHurtBlock = require("kindHurtBlock")
-        if SaveData.accessibilityInventory then
+        if SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
             furyinventory = require("furyinventory")
         else
             modernReserveItems = require("modernReserveItems")

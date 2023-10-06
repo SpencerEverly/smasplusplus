@@ -24,6 +24,7 @@ console:println("Super Mario All-Stars++ loading initated.")
 
 _G.smasSaveDataSystem = require("smasSaveDataSystem")
 _G.smasFunctions = require("smasFunctions")
+_G.smasWeather = require("smasWeather")
 
 if GameData.gameFirstLoaded == nil then
     GameData.gameFirstLoaded = true
@@ -313,12 +314,7 @@ function onStart() --Now do onStart...
         tomorrownumber = os.date("*t").day + 1
         SaveData.dateplayedtomorrow = tomorrownumber
     end
-    if GameData.weatherset then --This'll be better in the future. For now, it just loads the weather when restarting the game to the start preboot screen, or starting it up every time
-        possibleWeather = {"sunny","rain","snow"}
-        weatherControl = rng.randomEntry(possibleWeather)
-        SaveData.dateplayedweather = weatherControl --Write in a better onetime day function for this
-        GameData.weatherset = false
-    end
+    smasWeather.doWeatherUpdate()
     if not Misc.inEditor() and not table.icontains(smasTables._noLoadingSoundLevels,Level.filename()) then --Make sure to fade out the loading sound when onStart is active...
         fadetolevel = false
         if loadactivate then

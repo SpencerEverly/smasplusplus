@@ -41,8 +41,8 @@ end
 function skipopening()
     Sound.playSFX(1001)
     Routine.wait(0.3, true)
-    if not SaveData.openingComplete then
-        SaveData.openingComplete = true
+    if not SaveData.SMASPlusPlus.game.openingComplete then
+        SaveData.SMASPlusPlus.game.openingComplete = true
     end
     Level.load("map.lvlx")
 end
@@ -62,8 +62,8 @@ function onDraw()
     end
     Graphics.drawImageWP(frameImages[frame], Screen.calculateCameraDimensions(0, 1), Screen.calculateCameraDimensions(0, 2), 5)
     if timer >= 19700 then
-        if not SaveData.openingComplete then
-            SaveData.openingComplete = true
+        if not SaveData.SMASPlusPlus.game.openingComplete then
+            SaveData.SMASPlusPlus.game.openingComplete = true
         end
         Level.load("map.lvlx")
     end

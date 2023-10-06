@@ -134,7 +134,7 @@ smasHud.visible.itemBox = true
 smasHud.visible.bombs = true
 smasHud.visible.coins = true
 smasHud.visible.score = true
-if SaveData.enableLives then
+if SaveData.SMASPlusPlus.accessibility.enableLives then
     smasHud.visible.lives = true
 else
     smasHud.visible.lives = false

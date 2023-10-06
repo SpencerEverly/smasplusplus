@@ -37,7 +37,7 @@ local sixPressedState = false
 
 local f8PressedState = false
 
-GameData.weatherset = true
+smasWeather.doWeatherUpdate()
 GameData.rushModeActive = false
 
 local cooldown = 3

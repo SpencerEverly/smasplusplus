@@ -213,7 +213,8 @@ function teleportingability()
 end
 
 function costume.onKeyboardPress(keyCode, repeated)
-    if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+    local specialKey = SaveData.SMASPlusPlus.player[1].controls.specialKey
+    if keyCode == smasTables.keyboardMap[specialKey] and not repeated then
         if not teleportmode then
             teleportingability()
         end
@@ -222,7 +223,7 @@ end
 
 function costume.onControllerButtonPress(button, playerIdx)
     if playerIdx == 1 then
-        if button == SaveData.specialbutton1stplayer then
+        if button == SaveData.SMASPlusPlus.player[1].controls.specialButton then
             if not teleportmode then
                 teleportingability()
             end

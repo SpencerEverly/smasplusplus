@@ -552,7 +552,7 @@ Cheats.register("mylifeorbs",{ --This one uses the SMW goal orb, instead of the 
 Cheats.register("framerate",{ --This needs to be reregistered because it uses a SaveData variable instead
     onActivate = (function()
         Defines.player_hasCheated = false
-        SaveData.framerateEnabled = not SaveData.framerateEnabled
+        SaveData.SMASPlusPlus.options.enableFramerateCounter = not SaveData.SMASPlusPlus.options.enableFramerateCounter
     end),
     flashPlayer = true,activateSFX = nil,
 })

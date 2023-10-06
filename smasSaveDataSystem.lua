@@ -1,5 +1,13 @@
 local smasSaveDataSystem = {}
 
+if GameData.SMASPlusPlus == nil then
+    GameData.SMASPlusPlus = {}
+end
+GameData.SMASPlusPlus.options = GameData.SMASPlusPlus.options or {}
+GameData.SMASPlusPlus.audio = GameData.SMASPlusPlus.audio or {}
+GameData.SMASPlusPlus.game = GameData.SMASPlusPlus.game or {}
+GameData.SMASPlusPlus.misc = GameData.SMASPlusPlus.misc or {}
+
 --First time SaveData settings, for resolutions and other settings
 if SaveData.SMASPlusPlus == nil then
     SaveData.SMASPlusPlus = {}
@@ -19,6 +27,7 @@ for i = 1,8 do
     SaveData.SMASPlusPlus.player[i] = SaveData.SMASPlusPlus.player[i] or {}
     SaveData.SMASPlusPlus.player[i].currentCostume = SaveData.SMASPlusPlus.player[i].currentCostume or "N/A"
     SaveData.SMASPlusPlus.player[i].currentAlteration = SaveData.SMASPlusPlus.player[i].currentAlteration or "N/A"
+    SaveData.SMASPlusPlus.player[i].controls = SaveData.SMASPlusPlus.player[i].controls or {}
 end
 
 --**Player-related data**
@@ -69,61 +78,53 @@ end
 
 
 --**This is for the upgrade save thing**
-if SaveData.firstBootMapPathFixed == nil then
-    SaveData.firstBootMapPathFixed = false
+if SaveData.SMASPlusPlus.game.firstBootMapPathFixed == nil then
+    SaveData.SMASPlusPlus.game.firstBootMapPathFixed = false
 end
 
 --**Special button assignments**
-if SaveData.specialbutton1stplayer == nil then --Special button (Controller), 1P
-    SaveData.specialbutton1stplayer = 4
-end
-if SaveData.specialkey1stplayer == nil then --Special button (Keyboard), 1P
-    SaveData.specialkey1stplayer = 68
-end
-if SaveData.specialbutton2ndplayer == nil then --Special button (Controller), 2P
-    SaveData.specialbutton2ndplayer = 4
-end
-if SaveData.specialkey2ndplayer == nil then --Special button (Keyboard), 2P
-    SaveData.specialkey2ndplayer = 68
+for i = 1,8 do
+    SaveData.SMASPlusPlus.player[i].controls.specialKey = SaveData.SMASPlusPlus.player[i].controls.specialKey or 68 --Special button (Keyboard)
+    SaveData.SMASPlusPlus.player[i].controls.specialButton = SaveData.SMASPlusPlus.player[i].controls.specialButton or 4 --Special button (Controller)
 end
 
 --Music volume/SFX specifics
-if GameData.____currentMusicVolume == nil then
-    GameData.____currentMusicVolume = 60
+if GameData.SMASPlusPlus.audio.musicVolume == nil then
+    GameData.SMASPlusPlus.audio.musicVolume = 60
 end
-if GameData.____sfxVolume == nil then
-    GameData.____sfxVolume = 1
+if GameData.SMASPlusPlus.audio.sfxVolume == nil then
+    GameData.SMASPlusPlus.audio.sfxVolume = 1
 end
 
 --Accessibility options
-if SaveData.accessibilityTwirl == nil then
-    SaveData.accessibilityTwirl = false
+if SaveData.SMASPlusPlus.accessibility.enableTwirl == nil then
+    SaveData.SMASPlusPlus.accessibility.enableTwirl = false
 end
-if SaveData.accessibilityWallJump == nil then
-    SaveData.accessibilityWallJump = false
+if SaveData.SMASPlusPlus.accessibility.enableWallJump == nil then
+    SaveData.SMASPlusPlus.accessibility.enableWallJump = false
 end
-if SaveData.accessibilityInventory == nil then
-    SaveData.accessibilityInventory = false
+if SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory == nil then
+    SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory = false
 end
-if SaveData.enableLives == nil then
-    SaveData.enableLives = true
+if SaveData.SMASPlusPlus.accessibility.enableLives == nil then
+    SaveData.SMASPlusPlus.accessibility.enableLives = true
 end
-if SaveData.accessibilityGroundPound == nil then
-    SaveData.accessibilityGroundPound = false
+if SaveData.SMASPlusPlus.accessibility.enableGroundPound == nil then
+    SaveData.SMASPlusPlus.accessibility.enableGroundPound = false
 end
 
 --Other stuff
-if SaveData.openingComplete == nil then
-    SaveData.openingComplete = false
+if SaveData.SMASPlusPlus.game.openingComplete == nil then
+    SaveData.SMASPlusPlus.game.openingComplete = false
 end
-if SaveData.currentLanguage == nil then
-    SaveData.currentLanguage = "english"
+if SaveData.SMASPlusPlus.options.currentLanguage == nil then
+    SaveData.SMASPlusPlus.options.currentLanguage = "english"
 end
-if SaveData.enableIntros == nil then
-    SaveData.enableIntros = true --Enable the intro here, or not
+if SaveData.SMASPlusPlus.options.enableIntros == nil then
+    SaveData.SMASPlusPlus.options.enableIntros = true --Enable the intro here, or not
 end
-if SaveData.framerateEnabled == nil then
-    SaveData.framerateEnabled = false
+if SaveData.SMASPlusPlus.options.enableFramerateCounter == nil then
+    SaveData.SMASPlusPlus.options.enableFramerateCounter = false
 end
 if SaveData.SMB1HardModeActivated == nil then
     SaveData.SMB1HardModeActivated = false
@@ -134,17 +135,17 @@ end
 if SaveData.WSMBAOriginalGraphicsActivated == nil then
     SaveData.WSMBAOriginalGraphicsActivated = false
 end
-if SaveData.framerateEnabled == nil then
-    SaveData.framerateEnabled = false
-end
 if SaveData.disablePWingSFX == nil then
     SaveData.disablePWingSFX = false
 end
 if SaveData.SMBXSoundSystem == nil then
     SaveData.SMBXSoundSystem = false
 end
-if SaveData.enableLives == nil then
-    SaveData.enableLives = true
+if GameData.SMASPlusPlus.misc.weatherIsSet == nil then
+    GameData.SMASPlusPlus.misc.weatherIsSet = true
+end
+if GameData.SMASPlusPlus.misc.weatherSaved == nil then
+    GameData.SMASPlusPlus.misc.weatherSaved = {}
 end
 
 
@@ -198,6 +199,62 @@ end
 if SaveData.resolution ~= nil then
     SaveData.SMASPlusPlus.options.resolution = SaveData.resolution
     SaveData.resolution = nil
+end
+if SaveData.firstBootMapPathFixed ~= nil then
+    SaveData.SMASPlusPlus.game.firstBootMapPathFixed = SaveData.firstBootMapPathFixed
+    SaveData.firstBootMapPathFixed = nil
+end
+if SaveData.specialbutton1stplayer ~= nil then
+    SaveData.SMASPlusPlus.player[1].controls.specialButton = SaveData.specialbutton1stplayer
+    SaveData.specialbutton1stplayer = nil
+end
+if SaveData.specialkey1stplayer ~= nil then
+    SaveData.SMASPlusPlus.player[1].controls.specialKey = SaveData.specialkey1stplayer
+    SaveData.specialkey1stplayer = nil
+end
+if SaveData.specialbutton2ndplayer ~= nil then
+    SaveData.SMASPlusPlus.player[2].controls.specialButton = SaveData.specialkey2ndplayer
+    SaveData.specialkey2ndplayer = nil
+end
+if SaveData.specialkey2ndplayer ~= nil then
+    SaveData.SMASPlusPlus.player[2].controls.specialKey = SaveData.specialkey2ndplayer
+    SaveData.specialkey2ndplayer = nil
+end
+if SaveData.accessibilityTwirl ~= nil then
+    SaveData.SMASPlusPlus.accessibility.enableTwirl = SaveData.accessibilityTwirl
+    SaveData.accessibilityTwirl = nil
+end
+if SaveData.accessibilityWallJump ~= nil then
+    SaveData.SMASPlusPlus.accessibility.enableWallJump = SaveData.accessibilityWallJump
+    SaveData.accessibilityWallJump = nil
+end
+if SaveData.accessibilityInventory ~= nil then
+    SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory = SaveData.accessibilityInventory
+    SaveData.accessibilityInventory = nil
+end
+if SaveData.enableLives ~= nil then
+    SaveData.SMASPlusPlus.accessibility.enableLives = SaveData.enableLives
+    SaveData.enableLives = nil
+end
+if SaveData.accessibilityGroundPound ~= nil then
+    SaveData.SMASPlusPlus.accessibility.enableGroundPound = SaveData.accessibilityGroundPound
+    SaveData.accessibilityGroundPound = nil
+end
+if SaveData.openingComplete ~= nil then
+    SaveData.SMASPlusPlus.game.openingComplete = SaveData.openingComplete
+    SaveData.openingComplete = nil
+end
+if SaveData.currentLanguage ~= nil then
+    SaveData.SMASPlusPlus.options.currentLanguage = SaveData.currentLanguage
+    SaveData.currentLanguage = nil
+end
+if SaveData.enableIntros ~= nil then
+    SaveData.SMASPlusPlus.options.enableIntros = SaveData.enableIntros
+    SaveData.enableIntros = nil
+end
+if SaveData.framerateEnabled ~= nil then
+    SaveData.SMASPlusPlus.options.enableFramerateCounter = SaveData.framerateEnabled
+    SaveData.framerateEnabled = nil
 end
 
 if SaveData.totalcoins ~= nil then --If using the old SaveData function, use the new one and nil the original out

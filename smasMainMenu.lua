@@ -92,7 +92,7 @@ function introExit()
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
     smasMainMenu.startedmenu = 0
-    if SaveData.openingComplete then
+    if SaveData.SMASPlusPlus.game.openingComplete then
         Level.load("SMAS - Intro.lvlx")
     else
         Level.load("SMAS - Opening Cutscene.lvlx")
@@ -243,7 +243,7 @@ function mapExit()
     GameData.____mainMenuComplete = true
     autoscroll.scrollLeft(5000)
     Routine.waitFrames(38)
-    if not SaveData.openingComplete then
+    if not SaveData.SMASPlusPlus.game.openingComplete then
         Level.load("SMAS - Opening Cutscene.lvlx")
     else
         Level.load("map.lvlx")
@@ -434,8 +434,8 @@ function AccessibilityOptions1() --Accessibility Options
 end
 
 function AccessibilityOptionToggle1() --Accessibility turned on/off
-    SaveData.accessibilityTwirl = not SaveData.accessibilityTwirl
-    if SaveData.accessibilityTwirl then
+    SaveData.SMASPlusPlus.accessibility.enableTwirl = not SaveData.SMASPlusPlus.accessibility.enableTwirl
+    if SaveData.SMASPlusPlus.accessibility.enableTwirl then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
@@ -443,8 +443,8 @@ function AccessibilityOptionToggle1() --Accessibility turned on/off
 end
 
 function AccessibilityOptionToggle2() --Accessibility turned on/off
-    SaveData.accessibilityWallJump = not SaveData.accessibilityWallJump
-    if SaveData.accessibilityWallJump then
+    SaveData.SMASPlusPlus.accessibility.enableWallJump = not SaveData.SMASPlusPlus.accessibility.enableWallJump
+    if SaveData.SMASPlusPlus.accessibility.enableWallJump then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
@@ -452,8 +452,8 @@ function AccessibilityOptionToggle2() --Accessibility turned on/off
 end
 
 function AccessibilityOptionToggle3() --Accessibility turned on/off
-    SaveData.accessibilityInventory = not SaveData.accessibilityInventory
-    if SaveData.accessibilityInventory then
+    SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory = not SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory
+    if SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
@@ -461,8 +461,8 @@ function AccessibilityOptionToggle3() --Accessibility turned on/off
 end
 
 function AccessibilityOptionToggle4() --Accessibility turned on/off
-    SaveData.enableLives = not SaveData.enableLives
-    if SaveData.enableLives then
+    SaveData.SMASPlusPlus.accessibility.enableLives = not SaveData.SMASPlusPlus.accessibility.enableLives
+    if SaveData.SMASPlusPlus.accessibility.enableLives then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
@@ -470,8 +470,8 @@ function AccessibilityOptionToggle4() --Accessibility turned on/off
 end
 
 function AccessibilityOptionToggle5() --Accessibility turned on/off
-    SaveData.accessibilityGroundPound = not SaveData.accessibilityGroundPound
-    if SaveData.accessibilityGroundPound then
+    SaveData.SMASPlusPlus.accessibility.enableGroundPound = not SaveData.SMASPlusPlus.accessibility.enableGroundPound
+    if SaveData.SMASPlusPlus.accessibility.enableGroundPound then
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000027"), pauses = false, updatesInPause = true})
     else
         littleDialogue.create({text = transplate.getTranslation("0x0000000000000028"), pauses = false, updatesInPause = true})
@@ -612,7 +612,7 @@ function RushModeMenu1()
 end
 
 function FramerateToggle1()
-    SaveData.framerateEnabled = not SaveData.framerateEnabled
+    SaveData.SMASPlusPlus.options.enableFramerateCounter = not SaveData.SMASPlusPlus.options.enableFramerateCounter
     littleDialogue.create({text = transplate.getTranslation("0x0000000000000044"), pauses = false, updatesInPause = true})
 end
 
@@ -1302,9 +1302,9 @@ function smasMainMenu.onDraw()
             textplus.print{x=(camera.width / 2) - 370, y=522, text = "github.com/SpencerEverly/smasplusplus", priority=-6, xscale = 2, yscale = 2, color=Color.white, font=smasMainMenu.mainMenuFontWebsite}
         end
         if smasMainMenu.showLogoOnScreen then
-            if SaveData.currentLanguage == "english" then
+            if SaveData.SMASPlusPlus.options.currentLanguage == "english" then
                 Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 233, 16, -4)
-            elseif SaveData.currentLanguage == "japanese" then
+            elseif SaveData.SMASPlusPlus.options.currentLanguage == "japanese" then
                 Graphics.drawImageWP(smasMainMenu.smasLogoJpnImg, (camera.width / 2) - 163, 20, -4)
             else
                 Graphics.drawImageWP(smasMainMenu.smasLogoImg, (camera.width / 2) - 233, 16, -4)
@@ -1334,7 +1334,7 @@ function smasMainMenu.onDraw()
             textplus.print{x=(camera.width / 2) - 238, y=497, text = "Horikawa Otane, Kevsoft, Rednaxela, Hoeloe, and Emral", priority=-6, color=Color.yellow, xscale = 2, yscale = 2}
         end
         if smasMainMenu.showWorldMapSkipMessage then
-            if SaveData.openingComplete then
+            if SaveData.SMASPlusPlus.game.openingComplete then
                 textplus.print{x=(camera.width / 2) - 360, y=450, text = "Hold down NOW to instantly skip to the World Map (3 seconds).", priority=0, color=Color.red, font=statusFont, xscale = 1.5, yscale = 1.5}
             end
         end

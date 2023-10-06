@@ -131,8 +131,9 @@ function costume.onPlayerHarm(e, p)
 end
 
 function costume.onKeyboardPress(keyCode, repeated)
-    if SaveData.toggleCostumeAbilities == true then
-        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+    if SaveData.toggleCostumeAbilities then
+        local specialKey = SaveData.SMASPlusPlus.player[1].controls.specialKey
+        if keyCode == smasTables.keyboardMap[specialKey] and not repeated then
             costume.swooshattack()
         end
     end
@@ -141,7 +142,7 @@ end
 function costume.onControllerButtonPress(button, playerIdx)
     if SaveData.toggleCostumeAbilities == true then
         if playerIdx == 1 then
-            if button == SaveData.specialbutton1stplayer then
+            if button == SaveData.SMASPlusPlus.player[1].controls.specialButton then
                 costume.swooshattack()
             end
         end

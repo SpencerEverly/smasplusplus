@@ -107,7 +107,7 @@ local function writeKeyConfigs()
             t.down = currentConfig2[8]
             t.left = currentConfig2[9]
             t.right = currentConfig2[10]
-            SaveData.specialkey1stplayer = currentConfig2[11]
+            SaveData.SMASPlusPlus.player[1].controls.specialKey = currentConfig2[11]
             currentConfig2 = {}
         else
             t = inputConfig1
@@ -120,7 +120,7 @@ local function writeKeyConfigs()
             t.down = currentConfig2Editor[7]
             t.left = currentConfig2Editor[8]
             t.right = currentConfig2Editor[9]
-            SaveData.specialkey1stplayer = currentConfig2Editor[10]
+            SaveData.SMASPlusPlus.player[1].controls.specialKey = currentConfig2Editor[10]
             currentConfig2Editor = {}
         end
     end
@@ -142,7 +142,7 @@ local function writeKeyConfigsP2()
             t.down = currentConfig2[8]
             t.left = currentConfig2[9]
             t.right = currentConfig2[10]
-            SaveData.specialkey2ndplayer = currentConfig2[11]
+            SaveData.SMASPlusPlus.player[2].controls.specialKey = currentConfig2[11]
             currentConfig2 = {}
         else
             t = inputConfig2
@@ -155,7 +155,7 @@ local function writeKeyConfigsP2()
             t.down = currentConfig2Editor[7]
             t.left = currentConfig2Editor[8]
             t.right = currentConfig2Editor[9]
-            SaveData.specialkey2ndplayer = currentConfig2Editor[10]
+            SaveData.SMASPlusPlus.player[2].controls.specialKey = currentConfig2Editor[10]
             currentConfig2Editor = {}
         end
     end
@@ -182,9 +182,9 @@ local function writeButtonConfigs()
                 t.dropitem = currentConfig[5]
                 t.pause = currentConfig[6]
                 if t == inputConfig1 then
-                    SaveData.specialbutton1stplayer = currentConfig[7]
+                    SaveData.SMASPlusPlus.player[1].controls.specialButton = currentConfig[7]
                 elseif t == inputConfig2 then
-                    SaveData.specialbutton2ndplayer = currentConfig[7]
+                    SaveData.SMASPlusPlus.player[2].controls.specialButton = currentConfig[7]
                 end
                 currentConfig = {}
             else
@@ -194,9 +194,9 @@ local function writeButtonConfigs()
                 t.altrun = currentConfigEditor[4]
                 t.dropitem = currentConfigEditor[5]
                 if t == inputConfig1 then
-                    SaveData.specialbutton1stplayer = currentConfigEditor[6]
+                    SaveData.SMASPlusPlus.player[1].controls.specialButton = currentConfigEditor[6]
                 elseif t == inputConfig2 then
-                    SaveData.specialbutton2ndplayer = currentConfigEditor[6]
+                    SaveData.SMASPlusPlus.player[2].controls.specialButton = currentConfigEditor[6]
                 end
                 currentConfigEditor = {}
             end

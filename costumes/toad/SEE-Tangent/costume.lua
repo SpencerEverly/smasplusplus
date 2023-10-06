@@ -90,7 +90,7 @@ function costume.lungeattack()
 end
 
 function costume.onTick()
-    if SaveData.toggleCostumeAbilities == true then
+    if SaveData.toggleCostumeAbilities then
         local hitNPCs = Colliders.getColliding{a = player, b = hitNPCs, btype = Colliders.NPC}
         if lunging then
             plr.keys.left = false
@@ -133,7 +133,8 @@ end
 
 function costume.onKeyboardPress(keyCode, repeated)
     if SaveData.toggleCostumeAbilities then
-        if keyCode == smasTables.keyboardMap[SaveData.specialkey1stplayer] and not repeated then
+        local specialKey = SaveData.SMASPlusPlus.player[1].controls.specialKey
+        if keyCode == smasTables.keyboardMap[specialKey] and not repeated and not lunging then
             costume.lungeattack()
         end
     end
@@ -142,7 +143,7 @@ end
 function costume.onControllerButtonPress(button, playerIdx)
     if SaveData.toggleCostumeAbilities then
         if playerIdx == 1 then
-            if button == SaveData.specialbutton1stplayer then
+            if button == SaveData.SMASPlusPlus.player[1].controls.specialButton and not lunging then
                 costume.lungeattack()
             end
         end

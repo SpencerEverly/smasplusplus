@@ -374,11 +374,11 @@ function modernReserveItems.onTick()
     if not isOverworld and modernReserveItems.enabled then
         for _, p in ipairs(Player.get()) do
             p:mem(0x130,FIELD_BOOL,false) -- "DropRelease" from source, via MrDoubleA
-            if SaveData.accessibilityInventory then
+            if SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
                 if SaveData.SMASPlusPlus.hud.reserve[p.idx] ~= 0 and modernReserveItems.dropped == true and not Misc.isPaused() and (not GameData.winStateActive or GameData.winStateActive == nil) then
                     modernReserveItems.drop(SaveData.SMASPlusPlus.hud.reserve[_], p)
                 end
-            elseif not SaveData.accessibilityInventory then
+            elseif not SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
                 if SaveData.SMASPlusPlus.hud.reserve[p.idx] ~= 0 and p.keys.dropItem and not Misc.isPaused() and (not GameData.winStateActive or GameData.winStateActive == nil) then
                     modernReserveItems.drop(SaveData.SMASPlusPlus.hud.reserve[_], p)
                 end
@@ -388,9 +388,9 @@ function modernReserveItems.onTick()
 end
 
 function modernReserveItems.onStart()
-    if SaveData.accessibilityInventory then
+    if SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
         modernReserveItems.playSounds = false
-    elseif not SaveData.accessibilityInventory then
+    elseif not SaveData.SMASPlusPlus.accessibility.enableAdditionalInventory then
         modernReserveItems.playSounds = true
     end
 end

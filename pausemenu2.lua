@@ -258,9 +258,9 @@ end
 
 local function toggleintroscostume()
     if pauseplus.getSelectionValue("costumeoptions","Skip Character Intros") then
-        SaveData.enableIntros = false
+        SaveData.SMASPlusPlus.options.enableIntros = false
     else
-        SaveData.enableIntros = true
+        SaveData.SMASPlusPlus.options.enableIntros = true
     end
 end
 
