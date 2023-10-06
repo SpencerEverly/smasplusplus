@@ -139,6 +139,7 @@ Costumes:
 - Rosa by isabella ( https://www.youtube.com/channel/UCKIY7u-Veeunotm7HRcaeGA )
 - Peter Griffin by Disney, FOX, and MisterMike on The Spriters Resource, which was imported by Murphmario.
 - Homer Simpson is by Disney, FOX, and RaguRando on The Spriters Resource, which were based on Peter Griffin by MisterMike.
+- Susan Taxpayer by Punkitt
 
 (Some sprites, characters, and costumes are made/edited/compiled by Spencer Everly, which were also packed from Spriters Resource)
 
