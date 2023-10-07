@@ -1937,7 +1937,7 @@ ID:752;X:-198624;Y:-198496;D:-1;XTRA:"{\n    \"name\"\: \"toSMB26-3\"\,\n    \"p
 ID:752;X:-198720;Y:-198496;D:-1;XTRA:"{\n    \"name\"\: \"toSMB27-1\"\,\n    \"points\"\: \"32\, 0\, -128\, 0\, 32\, 128\"\n}\n";
 ID:802;X:-198688;Y:-198368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - W-7\, L-1.lvlx\"\,\n    \"levelTitle\"\: \"7-1\: Onto Wart's Castle\"\,\n    \"path_left\"\: \"toSMB27-1\"\,\n    \"path_right\"\: \"toSMB27-2\"\,\n    \"path_up\"\: \"toSMB2WarpCentral7\"\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 9\,\n    \"unlock_up\"\: 9\n}\n";
 ID:849;X:-198592;Y:-198368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - W-7\, L-2.lvlx\"\,\n    \"levelTitle\"\: \"7-2\: And Now\, the Final Battle\"\,\n    \"path_left\"\: \"toSMB27-2\"\,\n    \"path_right\"\: \"toSMB2Ending1\"\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
-ID:802;X:-198496;Y:-198368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - Ending.lvlx\"\,\n    \"levelTitle\"\: \"Ending (SMB2)\"\,\n    \"path_left\"\: \"toSMB2Ending1\"\,\n    \"path_right\"\: \"toSMB2End\"\,\n    \"unlock_left\"\: 9\,\n    \"unlock_right\"\: 2\n}\n";
+ID:802;X:-198496;Y:-198368;D:-1;XTRA:"{\n    \"levelFilename\"\: \"SMB2 - Ending.lvlx\"\,\n    \"levelTitle\"\: \"Ending (SMB2)\"\,\n    \"path_left\"\: \"toSMB2Ending1\"\,\n    \"path_right\"\: \"toSMB2End\"\,\n    \"unlock_left\"\: 2\,\n    \"unlock_right\"\: 9\n}\n";
 ID:752;X:-198656;Y:-198368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB27-2\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:752;X:-198560;Y:-198368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB2Ending1\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";
 ID:752;X:-198464;Y:-198368;D:-1;XTRA:"{\n    \"name\"\: \"toSMB2End\"\,\n    \"points\"\: \"64\, 0\, -36\, 0\"\n}\n";

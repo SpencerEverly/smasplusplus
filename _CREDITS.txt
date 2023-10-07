@@ -71,13 +71,8 @@ Packs/Sprites are by:
 
 ----Costume/Character Credits----
 
-Characters:
-
 - SMW2: YI Yoshi, and Minecraft Steve made by MrDoubleA
 - A2XT Gaiden 2's Pily made by raocow, and the A2XT2 Team
-
-Costumes:
-
 - NES Toad, NES Mario & Luigi, Toadette, Daisy, Pauline, Luigi with Mario's clothes, and some Toad Colors by IsaacP2003 (SMB1 Mario by Murphmario, Awesomezack & MrDoubleA)
 - Sonic sprites by megamario1500, rodrig0, and Inferno (Also costume code modified by Spencer Everly)
 - Daisy idle sprite by magibowser
