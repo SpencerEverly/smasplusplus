@@ -1245,6 +1245,7 @@ function onethreemodeactivate()
     startFadeOut()
     Misc.saveGame()
     Routine.wait(2.3,true)
+    SaveData.SMASPlusPlus.player[playerID].currentAlteration = "N/A"
     SaveData.SMASPlusPlus.game.onePointThreeModeActivated = not SaveData.SMASPlusPlus.game.onePointThreeModeActivated
     Misc.unpause()
     exitFadeActive = false
