@@ -45,7 +45,7 @@ smasCharacterGlobals.abilitySettings.jasmineCanDoubleJump = true
 --*REBEL TROOPER (LEGO STAR WARS)*
 --Whether the Rebel Trooper can double jump.
 smasCharacterGlobals.abilitySettings.rebelTrooperCanDoubleJump = true
---Whether the Revel Trooper can shoot a blaster.
+--Whether the Rebel Trooper can shoot a blaster.
 smasCharacterGlobals.abilitySettings.rebelTrooperCanShootBlaster = true
 --Whether the Rebel Trooper gets hurt as coded in or not. If false, the Rebel Trooper will get hurt like other characters.
 smasCharacterGlobals.abilitySettings.rebelTrooperCanUseCustomHurtSystem = true

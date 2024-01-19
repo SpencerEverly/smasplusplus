@@ -214,6 +214,7 @@ end
 function globalgenerals.onTick()
     if lunatime.tick() == 1 then --Failsafe in case
         Sound.loadCostumeSounds()
+        smasAlterationSystem.characterAlterationChange(1)
     end
     if smasBooleans.compatibilityMode13Mode then --Makes shells a little slower
         mem(0x00B2C860, FIELD_FLOAT, 7.0999999046326)

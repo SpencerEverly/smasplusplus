@@ -1052,6 +1052,10 @@ function Misc.checkSaveDataStatus(SaveDataVariable, value)
     SaveDataVariable = SaveDataVariable or value
 end
 
+function Misc.smbxPath()
+    return getSMBXPath().."/"
+end
+
 local screenShakeCaptureBuffer = Graphics.CaptureBuffer(800,600)
 
 function Misk.onDraw()

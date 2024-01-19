@@ -17,6 +17,7 @@ local steve = require("steve")
 local smbx13font = textplus.loadFont("littleDialogue/font/smilebasic.ini") --The font for the changer menu.
 
 function smasCharacterChanger.onInitAPI()
+    registerEvent(smasCharacterChanger,"onStart")
     registerEvent(smasCharacterChanger,"onDraw")
     registerEvent(smasCharacterChanger,"onInputUpdate")
     registerEvent(smasCharacterChanger,"onKeyboardPressDirect")
@@ -48,6 +49,7 @@ smasCharacterChanger.tvScrollNumber = -628 --This is used for the TV animation s
 smasCharacterChanger.menuBGM = "_OST/All Stars Menu/Character Changer Menu.ogg"
 smasCharacterChanger.selectionNumber = 1 --For scrolling left and right
 smasCharacterChanger.selectionNumberUpDown = 1 --For scrolling up and down
+smasCharacterChanger.selectionNumberAlteration = 0 --For choosing an alteration
 smasCharacterChanger.oldIniFile = SysManager.loadDefaultCharacterIni() --Used for reverting to the old ini file when exiting the menu without changing to a character
 smasCharacterChanger.iniFile = SysManager.loadDefaultCharacterIni() --Used to update the ini format when showing the character on screen
 smasCharacterChanger.characterPreviewImagesCostume = {} --Will be used to add character preview images throughout the menu
@@ -64,6 +66,7 @@ smasCharacterChanger.names = {}
 smasCharacterChanger.namesGame = {}
 smasCharacterChanger.namesCharacter = {}
 smasCharacterChanger.namesCostume = {}
+smasCharacterChanger.namesAlteration = {}
 
 function smasCharacterChanger.addCharacter(name,game,character,costume) --Adds a character to the tables above. Example: smasCharacterChanger.addCharacter("My Character","Game Information",CHARACTER_NUMBERGOESHERE,"COSTUMEGOESHERE, else nil")
     if name == nil then
@@ -113,6 +116,48 @@ function smasCharacterChanger.addVariant(nameToFind,game,costume) --Adds a varia
             if table.ifind(smasCharacterChanger.namesCostume[foundName], costume) == nil then
                 table.insert(smasCharacterChanger.namesGame[foundName], game) --Add the info to the tables
                 table.insert(smasCharacterChanger.namesCostume[foundName], costume)
+            end
+        end
+    end
+end
+
+function smasCharacterChanger.addAlteration(characterName,characterVariant,alterationFolder,alterationName,alterationInfo)
+    if characterName == nil then
+        error("You must add a name to find who to add this to.")
+        return
+    end
+    if characterVariant == nil then
+        error("You must add a costume as a string to this character (All caps). If specifying nil, make sure that nil is a string.")
+        return
+    end
+    if alterationFolder == nil then
+        error("You must add a alteration folder name as a string to this character.")
+        return
+    end
+    if alterationFolder == nil then
+        error("You must add a alteration character name as a string to this character.")
+        return
+    end
+    if alterationInfo == nil then
+        error("You must add a alteration character game place as a string to this character.")
+        return
+    end
+    if characterName ~= nil then --If not nil...
+        local foundName = table.ifind(smasCharacterChanger.names, characterName) --The name ID will then be added here.
+        if foundName == nil then --But if nil, just return it
+            return
+        else --Or if not...
+            local foundVariant = table.ifind(smasCharacterChanger.namesCostume[foundName], characterVariant) --The variant ID will then be added here.
+            if foundVariant == nil then --But if nil, just return it
+                return
+            else
+                if smasCharacterChanger.namesAlteration[foundName] == nil then
+                    smasCharacterChanger.namesAlteration[foundName] = {}
+                end
+                if smasCharacterChanger.namesAlteration[foundName][foundVariant] == nil then
+                    smasCharacterChanger.namesAlteration[foundName][foundVariant] = {}
+                end
+                table.insert(smasCharacterChanger.namesAlteration[foundName][foundVariant], {folder = alterationFolder, name = alterationName, game = alterationInfo}) --Add the info to the table
             end
         end
     end
@@ -189,6 +234,7 @@ function smasCharacterChanger.shutdownChanger() --The animation that shuts the m
     Sound.playSFX("menu/dialog-confirm.ogg")
     Routine.waitFrames(35, true)
     smasCharacterChanger.selectionNumberUpDown = 1
+    smasCharacterChanger.selectionNumberAlteration = 0
     Misc.unpause()
     if changed then
         smasCharacterInfo.setCostumeSpecifics()
@@ -214,8 +260,8 @@ local chars = playerManager.getCharacters()
 local selectionAutoTimer = 0
 
 function smasCharacterChanger.onInputUpdate()
-    if smasCharacterChanger.menuActive and started then
-        if player.keys.run == KEYS_PRESSED then
+    if smasCharacterChanger.menuActive and started and player.keys.altRun == KEYS_UP then
+        if (player.keys.run == KEYS_PRESSED or Misc.GetKeyState(VK_ESCAPE)) then
             --Misc.loadCharacterHitBoxes(chars[player.character].base, player.powerup, smasCharacterChanger.oldIniFile)
             smasCharacterChanger.menuActive = false
         end
@@ -225,23 +271,27 @@ function smasCharacterChanger.onInputUpdate()
             if smasCharacterChanger.selectionNumberUpDown > #smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber] then
                 smasCharacterChanger.selectionNumberUpDown = 1
             end
+            smasCharacterChanger.selectionNumberAlteration = 0
         elseif player.keys.down == KEYS_PRESSED then
             Sound.playSFX(smasCharacterChanger.moveSFX)
             smasCharacterChanger.selectionNumberUpDown = smasCharacterChanger.selectionNumberUpDown - 1
             if smasCharacterChanger.selectionNumberUpDown < 1 then
                 smasCharacterChanger.selectionNumberUpDown = #smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber]
             end
+            smasCharacterChanger.selectionNumberAlteration = 0
         end
         if player.keys.left == KEYS_PRESSED then
             Sound.playSFX(smasCharacterChanger.moveSFX)
             smasCharacterChanger.selectionNumber = smasCharacterChanger.selectionNumber - 1
             --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smasCharacterChanger.iniFile)
             smasCharacterChanger.selectionNumberUpDown = 1
+            smasCharacterChanger.selectionNumberAlteration = 0
         elseif player.keys.right == KEYS_PRESSED then
             Sound.playSFX(smasCharacterChanger.moveSFX)
             smasCharacterChanger.selectionNumber = smasCharacterChanger.selectionNumber + 1
             --Misc.loadCharacterHitBoxes(chars[currentSelection].base, player.powerup, smasCharacterChanger.iniFile)
             smasCharacterChanger.selectionNumberUpDown = 1
+            smasCharacterChanger.selectionNumberAlteration = 0
         end
         
         if player.keys.jump == KEYS_PRESSED then
@@ -252,34 +302,26 @@ function smasCharacterChanger.onInputUpdate()
             
             
             if smasCharacterChanger.selectionNumber then
-                smasCharacterCostumes.currentCostume = {}
-                local charac = smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber]
-                if smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
-                    player:transform(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], false)
-                    player.setCostume(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], smasCharacterChanger.namesCostume[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], false)
-                    if player.character == CHARACTER_STEVE then
-                        steve.initCharacter()
-                    end
-                else
-                    player:transform(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], false)
-                    player.setCostume(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber], nil, false)
-                    if SMBX_VERSION == VER_SEE_MOD then
-                        Misc.testModeSetPlayerSetting(smasCharacterChanger.namesCharacter[smasCharacterChanger.selectionNumber])
-                    end
-                    if player.character == CHARACTER_STEVE then
-                        steve.initCharacter()
-                    end
-                end
+                Playur.changeCharacter(1, false, smasCharacterChanger.selectionNumber, smasCharacterChanger.selectionNumberUpDown, smasCharacterChanger.selectionNumberAlteration) --One simple function to change the character correctly, for the episode
                 changed = true
-                if chars[charac].base ~= 3 or chars[charac].base ~= 4 or chars[charac].base ~= 5 then
-                    player.reservePowerup = SaveData.SMASPlusPlus.hud.reserve[1]
-                end
                 smasCharacterChanger.menuActive = false
             end
-            
-            
-            
         end
+        
+        if player.keys.altJump == KEYS_PRESSED then
+            Sound.playSFX(smasCharacterChanger.moveSFX)
+            if smasCharacterChanger.namesAlteration[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown] ~= nil then
+                smasCharacterChanger.selectionNumberAlteration = smasCharacterChanger.selectionNumberAlteration + 1
+                if smasCharacterChanger.selectionNumberAlteration > #smasCharacterChanger.namesAlteration[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown] then
+                    smasCharacterChanger.selectionNumberAlteration = 0
+                end
+            else
+                smasCharacterChanger.selectionNumberAlteration = 0
+            end
+        end
+    end
+    if smasCharacterChanger.menuActive and started and player.keys.altRun == KEYS_PRESSED then
+        --Utilize a search function, coming later
     end
 end
 
@@ -361,8 +403,13 @@ function smasCharacterChanger.onDraw()
                 smasCharacterChanger.selectionNumber = 1
             end
             if smasCharacterChanger.selectionNumber and smasCharacterChanger.selectionNumberUpDown then
-                textPrintCentered(smasCharacterChanger.names[smasCharacterChanger.selectionNumber], Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(200, 2))
-                textPrintCentered(smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(250, 2))
+                if smasCharacterChanger.selectionNumberAlteration <= 0 then
+                    textPrintCentered(smasCharacterChanger.names[smasCharacterChanger.selectionNumber], Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(160, 2))
+                    textPrintCentered(smasCharacterChanger.namesGame[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown], Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(210, 2))
+                else
+                    textPrintCentered(smasCharacterChanger.namesAlteration[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown][smasCharacterChanger.selectionNumberAlteration].name, Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(160, 2))
+                    textPrintCentered(smasCharacterChanger.namesAlteration[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown][smasCharacterChanger.selectionNumberAlteration].game, Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(210, 2))
+                end
             end
             colorChange1 = colorChange1 + 0.001
             colorChange2 = colorChange2 + 0.0005
@@ -379,7 +426,9 @@ function smasCharacterChanger.onDraw()
             local rainbowyColor = Color(colorChange1, colorChange2, colorChange3)
             Graphics.drawBox{x = Screen.calculateCameraDimensions(0, 1), y = Screen.calculateCameraDimensions(0, 2), width = 800, height = 600, color = rainbowyColor .. 1, priority = 7.3}
             
-            Graphics.drawImageWP(smasCharacterChanger.drawPreviewImage(), Screen.calculateCameraDimensions(360, 1), Screen.calculateCameraDimensions(320, 2), 7.4)
+            Graphics.drawImageWP(smasCharacterChanger.drawPreviewImage(), Screen.calculateCameraDimensions(360, 1), Screen.calculateCameraDimensions(290, 2), 7.4)
+            
+            textPrintCentered("Press Alt-Jump to change alterations.", Screen.calculateCameraDimensions(410, 1), Screen.calculateCameraDimensions(430, 2))
         end
         if not smasCharacterChanger.animationActive and started then
             Graphics.drawImageWP(smasCharacterChanger.tvImage, Screen.calculateCameraDimensions(-20, 1), Screen.calculateCameraDimensions(-28, 2), 7.5)
@@ -441,7 +490,7 @@ function smasCharacterChanger.onDraw()
     smasCharacterChanger.addCharacter("Caillou","GoAnimate/Vyond",1,"GA-CAILLOU")
     smasCharacterChanger.addCharacter("Sonic","Sonic the Hedgehog",4,"SONIC")
     
-    --Rest will be unlockables via Achievements, Score Shop (In the future), and other things. Everything is still unlocked untl then, though.
+    --Rest will be unlockables via Achievements, Score Shop (In the future), and other things. Everything is still unlocked until then, though.
     smasCharacterChanger.addCharacter("Yoshi (SMB3)","Super Mario Bros. 3",4,"YOSHI-SMB3")
     smasCharacterChanger.addCharacter("Yoshi (SMW)","Super Mario World",2,"SMW1-YOSHI")
     smasCharacterChanger.addCharacter("Yoshi (SMW2, Alt)","SMW2: Yoshi's Island",9,"SMW2-YOSHI")
@@ -660,9 +709,12 @@ function smasCharacterChanger.onDraw()
     --**Takeshi variants**
     smasCharacterChanger.addVariant("Takeshi","Takeshi's Challenge (SNES)","TAKESHI-SNES")
     
+    if lunatime.drawtick() == 1 then --Alterations deal with a complex set of adding values to a table, so to prevent adding multiple values of the same table, we'll need to well, add it on the first tick...
+        --***ALTERATIONS***
     
-    
-    
+        --**Mario alterations**
+        smasCharacterChanger.addAlteration("Mario","!DEFAULT","FlipnoteStudio","Mario","Flipnote Studio (DSi)")
+    end
 end
 
 return smasCharacterChanger

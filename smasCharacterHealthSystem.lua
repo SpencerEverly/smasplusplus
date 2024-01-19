@@ -1,5 +1,9 @@
 local smasCharacterHealthSystem = {}
 
+if Screen == nil then
+    _G.smasFunctions = require("smasFunctions")
+end
+
 --If enabled or not.
 smasCharacterHealthSystem.enabled = false
 --If we should use the small state with the health system. Default is false.
@@ -88,24 +92,24 @@ function smasCharacterHealthSystem.onDraw()
             if smasHud.visible.customItemBox then
                 if smasCharacterHealthSystem.drawHearts then
                     if smasCharacterHealthSystem.health <= 0 then
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, Screen.calculateCameraDimensions(357, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, Screen.calculateCameraDimensions(388, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, Screen.calculateCameraDimensions(420, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
                     end
                     if smasCharacterHealthSystem.health == 1 then
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, Screen.calculateCameraDimensions(357, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, Screen.calculateCameraDimensions(388, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, Screen.calculateCameraDimensions(420, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
                     end
                     if smasCharacterHealthSystem.health == 2 then
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, Screen.calculateCameraDimensions(357, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, Screen.calculateCameraDimensions(388, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartEmptyGFX, Screen.calculateCameraDimensions(420, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
                     end
                     if smasCharacterHealthSystem.health >= 3 then
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 357, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 388, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
-                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, 420, smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, Screen.calculateCameraDimensions(357, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, Screen.calculateCameraDimensions(388, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
+                        Graphics.drawImageWP(smasCharacterHealthSystem.heartFullGFX, Screen.calculateCameraDimensions(420, 1), smasCharacterHealthSystem.heartYPosition, smasCharacterHealthSystem.drawingPriority)
                     end
                 end
             end

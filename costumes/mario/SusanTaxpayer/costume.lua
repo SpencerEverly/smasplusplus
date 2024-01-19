@@ -2,8 +2,6 @@ local playerManager = require("playerManager")
 local smasFunctions = require("smasFunctions")
 local smasExtraSounds = require("smasExtraSounds")
 
-local animationPal = require("animationPal")
-
 local costume = {}
 
 local plr

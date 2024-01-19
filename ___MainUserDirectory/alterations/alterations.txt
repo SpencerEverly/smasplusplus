@@ -1,0 +1,7 @@
+SMAS++ Alteration List (Do not delete this line)
+
+characterName=mario
+costumeName=!DEFAULT
+alterationDirectory=ExampleCharacter
+alterationName=Example Name
+alterationPlace=Example Game

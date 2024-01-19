@@ -26,9 +26,13 @@ function Img.loadCharacterHitBoxes(name) --This will not only check the main SMB
 end
 
 function Img.loadDefaultCharacterImage()
-    return (File.load(playerManager.getName(player.character).."-"..player.powerup..".png")
-        or File.load("config/character_defaults/"..playerManager.getName(player.character).."-"..player.powerup..".png")
-    )
+    if io.exists(Misc.smbxPath()..playerManager.getName(player.character).."-"..player.powerup..".png") then
+        return Misc.smbxPath()..playerManager.getName(player.character).."-"..player.powerup..".png"
+    elseif io.exists(Misc.episodePath()..playerManager.getName(player.character).."-"..player.powerup..".png") then
+        return Misc.episodePath()..playerManager.getName(player.character).."-"..player.powerup..".png"
+    elseif io.exists(Misc.smbxPath().."config/character_defaults/"..playerManager.getName(player.character).."-"..player.powerup..".png") then
+        return Misc.smbxPath().."config/character_defaults/"..playerManager.getName(player.character).."-"..player.powerup..".png"
+    end
 end
 
 function Img.loadCharacter(name)
@@ -38,12 +42,46 @@ function Img.loadCharacter(name)
             return Graphics.loadImage(file)
         else
             file = Img.loadDefaultCharacterImage()
-            return Graphics.loadImage(file)
+            if file then
+                return Graphics.loadImage(file)
+            else
+                return nil
+            end
         end
     else
         local file = Img.loadDefaultCharacterImage()
         if file then
             return Graphics.loadImage(file)
+        else
+            return nil
+        end
+    end
+end
+
+function Img.loadAlterationPose(name)
+    if SaveData.SMASPlusPlus.player[1].currentAlteration ~= "N/A" then
+        local file
+        if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
+            file = File.load("alterations/"..playerManager.getName(player.character).."/!!!costumes/"..SaveData.SMASPlusPlus.player[1].currentCostume.."/"..SaveData.SMASPlusPlus.player[1].currentAlteration.."/"..name)
+        else
+            file = File.load("alterations/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentAlteration.."/"..name)
+        end
+        if file then
+            return Graphics.loadImage(file)
+        else
+            file = Img.loadDefaultCharacterImage()
+            if file then
+                return Graphics.loadImage(file)
+            else
+                return nil
+            end
+        end
+    else
+        local file = Img.loadDefaultCharacterImage()
+        if file then
+            return Graphics.loadImage(file)
+        else
+            return nil
         end
     end
 end

@@ -133,7 +133,7 @@ function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play an
                 audiomasterSMAS.PlaySound({sound = Audio.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
             elseif name then
                 local file = Sound.resolveSoundFile(name) --Common sound directories, see above for the entire list
-                audiomasterSMAS.PlaySound({sound = file, volume = volume, loops = loops, delay = delay, pan = pan}) --Then play it afterward
+                audiomasterSMAS.PlaySound({sound = file, volume = volume, loops = loops, delay = delay, pan = pan}) --Play it afterward
             end
         elseif not Sound.isExtraSoundsActive() then
             if name == 0 then
@@ -142,7 +142,7 @@ function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play an
                 audiomasterSMAS.PlaySound({sound = Audio.sounds[name].sfx, volume = volume, loops = loops, delay = delay, pan = pan})
             elseif name then
                 local file = Sound.resolveSoundFile(name) --Common sound directories, see above for the entire list
-                audiomasterSMAS.PlaySound({sound = file, volume = volume, loops = loops, delay = delay, pan = pan}) --Then play it afterward
+                audiomasterSMAS.PlaySound({sound = file, volume = volume, loops = loops, delay = delay, pan = pan}) --Play it afterward
             end
         end
         EventManager.callEvent("onPostPlaySFX", name, volume, loops, delay, pan)
@@ -170,10 +170,22 @@ function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a cos
     end
     local costumeSoundDir
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        if SaveData.SMASPlusPlus.player[1].currentCostume == "N/A" then
+        if SaveData.SMASPlusPlus.player[1].currentCostume == "N/A" and SaveData.SMASPlusPlus.player[1].currentAlteration == "N/A" then
             costumeSoundDir = Sound.resolveSoundFile(name)
-        else
+        elseif SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" and SaveData.SMASPlusPlus.player[1].currentAlteration == "N/A" then
             costumeSoundDir = Sound.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentCostume.."/"..name)
+        elseif SaveData.SMASPlusPlus.player[1].currentAlteration ~= "N/A" then
+            if SaveData.SMASPlusPlus.player[1].currentCostume ~= "N/A" then
+                costumeSoundDir = Sound.resolveSoundFile("alterations/"..playerManager.getName(player.character).."/!!!costumes/"..SaveData.SMASPlusPlus.player[1].currentCostume.."/"..SaveData.SMASPlusPlus.player[1].currentAlteration.."/"..name)
+                if costumeSoundDir == nil then
+                    costumeSoundDir = Sound.resolveSoundFile("costumes/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentCostume.."/"..name)
+                end
+            else
+                costumeSoundDir = Sound.resolveSoundFile("alterations/"..playerManager.getName(player.character).."/"..SaveData.SMASPlusPlus.player[1].currentAlteration.."/"..name)
+                if costumeSoundDir == nil then
+                    costumeSoundDir = Sound.resolveSoundFile(name)
+                end
+            end
         end
     elseif SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         costumeSoundDir = Sound.resolveSoundFile("_OST/_Sound Effects/1.3Mode/"..name)

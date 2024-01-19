@@ -1,0 +1,1 @@
+This is an example alteration txt file. This file doesn't replace anything, but these files can help out with creating other alterations.

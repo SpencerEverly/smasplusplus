@@ -99,6 +99,8 @@ if SMBX_VERSION == VER_SEE_MOD then
 end
 Misc.LUNALUA_EVENTS_TBL["onWarpToOtherLevel"] = true
 Misc.LUNALUA_EVENTS_TBL["onWarpBegin"] = true
+Misc.LUNALUA_EVENTS_TBL["onCharacterChangeSMAS"] = true
+Misc.LUNALUA_EVENTS_TBL["onCharacterAlterationChange"] = true
 
 --Now, before we get started, we require the most important libraries on the top.
 console:println("Loading important libraries...")
@@ -118,6 +120,7 @@ _G.smasStarSystem = require("smasStarSystem")
 _G.smasNoTurnBack = require("smasNoTurnBack")
 _G.smasSpencerFollower = require("smasSpencerFollower")
 _G.smasCharacterChanger = require("smasCharacterChanger")
+_G.smasAlterationSystem = require("smasAlterationSystem")
 _G.smasFireballs = require("smasFireballs")
 _G.smasPWing = require("smasPWing")
 _G.smasExtraSounds = require("smasExtraSounds")
