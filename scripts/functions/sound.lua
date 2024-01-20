@@ -88,12 +88,12 @@ function Sound.resolveSoundFile(path)
 end
 
 function Sound.openSFX(name) --Opening SFXs
-    console:println("Opening '"..name.."'...")
+    SysManager.sendToConsole("Opening '"..name.."'...")
     return Audio.SfxOpen(Sound.resolveSoundFile(name))
 end
 
 function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play any sound, you can use Sound.playSFX(id), or you can use a string (You can also optionally play the sound with a volume, loop, and/or delay). This is similar to SFX.play, but with smasExtraSounds support!
-    console:println("Playing sound '"..name.."'...")
+    SysManager.sendToConsole("Playing sound '"..name.."'...")
     
     if unexpected_condition then error("That sound doesn't exist. Play something else.") end
     
@@ -152,12 +152,12 @@ end
 function Sound.clearUnusedCostumeSounds()
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
-        console:println("NOT USING SEE MOD! Costume sound refresher has stopped.")
+        SysManager.sendToConsole("NOT USING SEE MOD! Costume sound refresher has stopped.")
         return
     else
         for k,v in ipairs(smasTables.soundNamesInOrder) do
             if (smasTables.previouslyCachedSoundFiles[k] ~= smasTables.currentlyCachedSoundFiles[k]) then
-                console:println("Unmatched sound detected: "..smasTables.previouslyCachedSoundFiles[k]..", will clear off from cache until next reload...")
+                SysManager.sendToConsole("Unmatched sound detected: "..smasTables.previouslyCachedSoundFiles[k]..", will clear off from cache until next reload...")
                 CacheSystem.ClearSpecifiedSoundFromCache(smasTables.previouslyCachedSoundFiles[k])
             end
         end
@@ -205,9 +205,9 @@ function Sound.resolveCostumeSound(name, stringOnly) --Resolve a sound for a cos
     end
     
     if costumeSoundDir ~= nil then
-        console:println("Character sound '"..costumeSoundDir.."' loaded.")
+        SysManager.sendToConsole("Character sound '"..costumeSoundDir.."' loaded.")
     else
-        console:println("Character sound '"..name.."' loaded.")
+        SysManager.sendToConsole("Character sound '"..name.."' loaded.")
     end
 end
 
@@ -263,7 +263,7 @@ function Sound.changeMusic(name, sectionid, canRefreshWhenMuted) --Music changin
     
     if not eventObj.cancelled then
         if sectionid == -1 then --If -1, all section music will change to the specified song
-            console:println("All music will be changed to '"..tostring(name).."'.")
+            SysManager.sendToConsole("All music will be changed to '"..tostring(name).."'.")
             for i = 0,20 do
                 Section(i).music = name
                 if smasBooleans then
@@ -274,7 +274,7 @@ function Sound.changeMusic(name, sectionid, canRefreshWhenMuted) --Music changin
                 end
             end
         elseif sectionid >= 0 or sectionid <= 20 then
-            console:println("Music from section "..tostring(sectionid).." will be changed to '"..tostring(name).."'.")
+            SysManager.sendToConsole("Music from section "..tostring(sectionid).." will be changed to '"..tostring(name).."'.")
             Section(sectionid).music = name
             if smasBooleans then
                 if smasBooleans.musicMuted and canRefreshWhenMuted then
@@ -292,23 +292,23 @@ end
 
 function Sound.muteMusic(sectionid) --Mute all section music, or just mute a specific section
     if sectionid == -1 then --If -1, all section music will be muted
-        console:println("Muting music on all sections...")
+        SysManager.sendToConsole("Muting music on all sections...")
         for i = 0,20 do
             musiclist = {Section(i).music}
             GameData.levelMusicTemporary[i] = Section(i).music
             Audio.MusicChange(i, 0)
         end
         if smasBooleans then
-            console:println("smasBooleans music muted boolean set to true.")
+            SysManager.sendToConsole("smasBooleans music muted boolean set to true.")
             smasBooleans.musicMutedTemporary = true
         end
     elseif sectionid >= 0 or sectionid <= 20 then
-        console:println("Muting music on section "..tostring(sectionid).."...")
+        SysManager.sendToConsole("Muting music on section "..tostring(sectionid).."...")
         musiclist = {Section(sectionid).music}
         GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
         Audio.MusicChange(sectionid, 0)
         if smasBooleans then
-            console:println("smasBooleans music muted boolean set to true.")
+            SysManager.sendToConsole("smasBooleans music muted boolean set to true.")
             smasBooleans.musicMutedTemporary = true
         end
     elseif sectionid >= 21 then
@@ -319,21 +319,21 @@ end
 
 function Sound.restoreMusic(sectionid) --Restore all section music, or just restore a specific section
     if sectionid == -1 then --If -1, all section music will be restored
-        console:println("Restoring music on all sections...")
+        SysManager.sendToConsole("Restoring music on all sections...")
         for i = 0,20 do
             songname = GameData.levelMusicTemporary[i]
             Section(i).music = songname
         end
         if smasBooleans then
-            console:println("smasBooleans music muted boolean set to false.")
+            SysManager.sendToConsole("smasBooleans music muted boolean set to false.")
             smasBooleans.musicMutedTemporary = false
         end
     elseif sectionid >= 0 or sectionid <= 20 then
-        console:println("Restoring music on section "..tostring(sectionid).."...")
+        SysManager.sendToConsole("Restoring music on section "..tostring(sectionid).."...")
         songname = GameData.levelMusicTemporary[sectionid]
         Section(sectionid).music = songname
         if smasBooleans then
-            console:println("smasBooleans music muted boolean set to false.")
+            SysManager.sendToConsole("smasBooleans music muted boolean set to false.")
             smasBooleans.musicMutedTemporary = false
         end
     elseif sectionid >= 21 then
@@ -344,13 +344,13 @@ end
 
 function Sound.refreshMusic(sectionid) --Refresh the music that's currently playing by updating the music table
     if sectionid == -1 then --If -1, all section music will be counted
-        console:println("Refreshing music on all sections...")
+        SysManager.sendToConsole("Refreshing music on all sections...")
         for i = 0,20 do
             musiclist = {Section(i).music}
             GameData.levelMusicTemporary[i] = Section(i).music
         end
     elseif sectionid >= 0 or sectionid <= 20 then
-        console:println("Refreshing music on section "..tostring(sectionid).."...")
+        SysManager.sendToConsole("Refreshing music on section "..tostring(sectionid).."...")
         musiclist = {Section(sectionid).music}
         GameData.levelMusicTemporary[sectionid] = Section(sectionid).music
     elseif sectionid >= 21 then
@@ -362,7 +362,7 @@ end
 function Sound.restoreOriginalMusic(sectionid) --Restore all original section music, or just restore a specific section
     if sectionid == -1 then --If -1, all section music will be restored
         if GameData.levelMusic ~= {} then
-            console:println("Refreshing originally stored music on all sections...")
+            SysManager.sendToConsole("Refreshing originally stored music on all sections...")
             for i = 0,20 do
                 songname = GameData.levelMusic[i]
                 Section(i).music = songname
@@ -372,7 +372,7 @@ function Sound.restoreOriginalMusic(sectionid) --Restore all original section mu
         end
     elseif sectionid >= 0 or sectionid <= 20 then
         if GameData.levelMusic ~= {} then
-            console:println("Refreshing originally stored music on section "..tostring(sectionid).."...")
+            SysManager.sendToConsole("Refreshing originally stored music on section "..tostring(sectionid).."...")
             songname = GameData.levelMusic[sectionid]
             Section(sectionid).music = songname
         else
@@ -423,24 +423,24 @@ function Sound.startupRefreshSystem()
         for i = 0,20 do
             GameData.levelMusicTemporary[i] = Section(i).music
         end
-        console:println("Music refresh system has been set up.")
+        SysManager.sendToConsole("Music refresh system has been set up.")
         started = true
     end
 end
 
 function Sound.checkPWingSoundStatus()
     if SaveData.disablePWingSFX then
-        console:println("P-Wing sound effect setting has been set to disabled.")
+        SysManager.sendToConsole("P-Wing sound effect setting has been set to disabled.")
         smasExtraSounds.enablePWingSFX = false
     elseif not SaveData.disablePWingSFX then
-        console:println("P-Wing sound effect setting has been set to enabled.")
+        SysManager.sendToConsole("P-Wing sound effect setting has been set to enabled.")
         smasExtraSounds.enablePWingSFX = true
     end
 end
 
 function Sound.checkSMBXSoundSystemStatus()
     if SaveData.SMBXSoundSystem then
-        console:println("Original SMBX sound system setting has been set to disabled.")
+        SysManager.sendToConsole("Original SMBX sound system setting has been set to disabled.")
         smasExtraSounds.enableGrabShellSFX = false
         smasExtraSounds.playPSwitchTimerSFX = false
         smasExtraSounds.enableSMB2EnemyKillSounds = false
@@ -458,7 +458,7 @@ function Sound.checkSMBXSoundSystemStatus()
         smasExtraSounds.useFireSoundForHammerSuit = true
         smasExtraSounds.useFireSoundForIce = true
     elseif not SaveData.SMBXSoundSystem then
-        console:println("Original SMBX sound system setting has been set to enabled.")
+        SysManager.sendToConsole("Original SMBX sound system setting has been set to enabled.")
         smasExtraSounds.enableGrabShellSFX = true
         smasExtraSounds.playPSwitchTimerSFX = true
         smasExtraSounds.enableSMB2EnemyKillSounds = true

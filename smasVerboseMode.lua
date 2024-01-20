@@ -68,13 +68,13 @@ function smasVerboseMode.onInitAPI()
 end
 
 function smasVerboseMode.onStart()
-    console:println("Level has officially started.")
-    console:println("Level filename: "..Level.filename())
-    console:println("Level name: "..Misc.getActualLevelName())
+    SysManager.sendToConsole("Level has officially started.")
+    SysManager.sendToConsole("Level filename: "..Level.filename())
+    SysManager.sendToConsole("Level name: "..Misc.getActualLevelName())
     if Playur.currentWarp(player) == 0 then
-        console:println("Player 1 starting point (X/Y): "..tostring(Playur.startPointCoordinateX(1)).."/"..tostring(Playur.startPointCoordinateY(1)))
+        SysManager.sendToConsole("Player 1 starting point (X/Y): "..tostring(Playur.startPointCoordinateX(1)).."/"..tostring(Playur.startPointCoordinateY(1)))
         if Player.count() >= 2 then
-            console:println("Player 2 starting point (X/Y): "..tostring(Playur.startPointCoordinateX(2)).."/"..tostring(Playur.startPointCoordinateY(2)))
+            SysManager.sendToConsole("Player 2 starting point (X/Y): "..tostring(Playur.startPointCoordinateX(2)).."/"..tostring(Playur.startPointCoordinateY(2)))
         end
     end
     --lazyprintSMAS.monitor(player, {"x", "y", "powerup", "width", "height", "character"})
@@ -87,7 +87,7 @@ end
 
 function smasVerboseMode.onEvent(eventName)
     if eventName then
-        console:println("Event "..eventName.." has executed.")
+        SysManager.sendToConsole("Event "..eventName.." has executed.")
     end
 end
 
@@ -98,10 +98,10 @@ end
 function smasVerboseMode.onDraw()
     for _,p in ipairs(Player.get()) do
         if Playur.isJumping(p) then
-            console:println("Player "..p.idx.." has jumped.")
+            SysManager.sendToConsole("Player "..p.idx.." has jumped.")
         end
         if p:mem(0x26, FIELD_WORD) == 1 then
-            console:println("Player "..p.idx.." is grabbing something.")
+            SysManager.sendToConsole("Player "..p.idx.." is grabbing something.")
         end
     end
 end
@@ -109,34 +109,34 @@ end
 function smasVerboseMode.onInputUpdate()
     for _,p in ipairs(Player.get()) do
         if p.keys.left == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the left button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the left button.")
         end
         if p.keys.right == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the right button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the right button.")
         end
         if p.keys.up == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the up button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the up button.")
         end
         if p.keys.down == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the down button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the down button.")
         end
         if p.keys.jump == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the jump button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the jump button.")
         end
         if p.keys.run == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the run button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the run button.")
         end
         if p.keys.altJump == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the alt-jump button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the alt-jump button.")
         end
         if p.keys.altRun == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the alt-run button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the alt-run button.")
         end
         if p.keys.pause == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the pause button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the pause button.")
         end
         if p.keys.dropItem == KEYS_PRESSED then
-            console:println("Player "..p.idx.." has pressed the drop item button.")
+            SysManager.sendToConsole("Player "..p.idx.." has pressed the drop item button.")
         end
     end
 end

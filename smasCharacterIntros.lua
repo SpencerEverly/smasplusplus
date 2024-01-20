@@ -68,7 +68,7 @@ function smasCharacterIntros.onStart()
     if SaveData.toggleCostumeAbilities == true then
         if SaveData.SMASPlusPlus.options.enableIntros then
             if table.icontains(smasTables._noLevelPlacesPlusOtherLevels,Level.filename()) == false then
-                console:println("Character intro will now be played.")
+                SysManager.sendToConsole("Character intro will now be played.")
                 if SaveData.SMASPlusPlus.player[1].currentCostume == "GO-10SECONDRUN" then
                     Routine.run(tensecondrunstartinganimation)
                     pauseplus.canPause = false

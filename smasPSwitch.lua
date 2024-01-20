@@ -14,7 +14,7 @@ local deathTimerPSwitch = 0
 function smasPSwitch.startPSwitchMusic() --Starts the P-Switch music.
     if not smasPSwitch.pSwitchMusicStarted then
         if not smasPSwitch.inNoPSwitchMusicPlayingSituations() then
-            console:println("P-Switch music activated!")
+            SysManager.sendToConsole("P-Switch music activated!")
             Sound.muteMusic(-1)
             smasBooleans.musicMuted = true
             pSwitchMusic = SFX.play(smasCharacterInfo.pSwitchMusic, Audio.MusicVolume() / 100, 0)
@@ -38,7 +38,7 @@ function smasPSwitch.stopPSwitchMusic(resetLevelMusic) --Stops the P-Switch musi
     
     if not smasPSwitch.inNoPSwitchMusicPlayingSituations() then
         if resetLevelMusic then
-            console:println("P-Switch music deactivated!")
+            SysManager.sendToConsole("P-Switch music deactivated!")
             smasBooleans.musicMuted = false
             Sound.restoreMusic(-1)
         end

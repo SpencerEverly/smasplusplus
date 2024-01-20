@@ -50,7 +50,7 @@ function File.writeToFile(name, text) --Write to a file using io. This will over
     f:write(tostring(text))
     f:close()
     
-    console:println("File "..name2.." was overwritten to with text data.")
+    SysManager.sendToConsole("File "..name2.." was overwritten to with text data.")
 end
 
 function File.addToFile(name, text) --Add to a file using io. This won't overwrite everything, just adds something to the file, so this one is fine (UNLESS you overwrite important data in the episode).
@@ -67,7 +67,7 @@ function File.addToFile(name, text) --Add to a file using io. This won't overwri
     f:write(tostring(text))
     f:close()
     
-    console:println("File "..name2.." was written to with text data.")
+    SysManager.sendToConsole("File "..name2.." was written to with text data.")
 end
 
 function File.readFile(name) --Read a file using io. This won't overwrite everything, just reads a file, so this one is fine.
@@ -83,7 +83,7 @@ function File.readFile(name) --Read a file using io. This won't overwrite everyt
         return
     end
     
-    console:println("File "..name.." was recently read.")
+    SysManager.sendToConsole("File "..name.." was recently read.")
     
     return f:read("*all")
 end
@@ -96,7 +96,7 @@ function File.readSpecificAreaFromFile(name, linenumber) --Read a file using io.
     
     local linesToRead = io.readFileLines(name2)
     
-    console:println("File "..name.." was read at line"..tostring(linenumber)..".")
+    SysManager.sendToConsole("File "..name.." was read at line"..tostring(linenumber)..".")
     
     return linesToRead[linenumber]
 end

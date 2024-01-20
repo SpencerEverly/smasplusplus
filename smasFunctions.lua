@@ -5,12 +5,16 @@
 
 local smasFunctions = {}
 
-if SMBX_VERSION == VER_SEE_MOD then
-    console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
-    _G.LunaDLL = ffi.load("LunaDll.dll")
+function smasFunctions.sendToConsole(data)
+    return console:println(tostring(data))
 end
 
-console:println("Loading SMASFunctions...")
+smasFunctions.sendToConsole("Loading SMASFunctions...")
+
+if SMBX_VERSION == VER_SEE_MOD then
+    smasFunctions.sendToConsole("SEE MOD DETECTED! Loading LunaDLL.dll...")
+    _G.LunaDLL = ffi.load("LunaDll.dll")
+end
 
 _G.smasSaveDataSystem = require("smasSaveDataSystem") --Load smasSaveDataSystem as early as smasFunctions because we're wanting this to be a low-level library, when costumes are officially loaded
 
@@ -29,6 +33,8 @@ _G.Evento = require("scripts/functions/events")
 _G.Effectx = require("scripts/functions/effect")
 _G.Collisionz = require("scripts/functions/collision")
 _G.Liquidz = require("scripts/functions/liquid")
+
+SysManager.sendToConsole("Loaded SMASFunctions.")
 
 --This is used for spitting out help documentation for these scripts.
 function smasFunctions.help()

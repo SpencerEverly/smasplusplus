@@ -193,11 +193,11 @@ end
 function smasCharacterChanger.startChanger() --This is the command that starts the menu up. Use this to enable the menu.
     smasCharacterChanger.menuActive = true
     smasCharacterChanger.animationActive = true
-    console:println("Character changer menu starting...")
+    SysManager.sendToConsole("Character changer menu starting...")
 end
 
 function smasCharacterChanger.stopChanger() --This is the command that stops the menu. Use this to disable the menu.
-    console:println("Character changer menu stopping...")
+    SysManager.sendToConsole("Character changer menu stopping...")
     smasCharacterChanger.menuActive = false
 end
 

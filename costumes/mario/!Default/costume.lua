@@ -3,10 +3,9 @@
 ]]
 
 local playerManager = require("playerManager")
-local smasFunctions
-pcall(function() smasFunctions = require("smasFunctions") end)
-local smasExtraSounds
-pcall(function() smasExtraSounds = require("smasExtraSounds") end)
+
+_G.smasFunctions = require("smasFunctions")
+_G.smasExtraSounds = require("smasExtraSounds")
 
 local costume = {}
 

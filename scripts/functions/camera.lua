@@ -128,7 +128,7 @@ function Screen.setCameraPosition(leftbound,upbound,downbound,rightbound,speed,i
     
     setScrollToArguments(sectionidx)
     
-    console:println("Camera scroll activated! Will scroll to the following bounds: "..tostring(leftbound).." (Left) , "..tostring(upbound).." (Up) , "..tostring(downbound).." (Down), "..tostring(rightbound).." (Right).")
+    SysManager.sendToConsole("Camera scroll activated! Will scroll to the following bounds: "..tostring(leftbound).." (Left) , "..tostring(upbound).." (Up) , "..tostring(downbound).." (Down), "..tostring(rightbound).." (Right).")
 end
 
 function Screen.viewPortCoordinateX(x,width)
@@ -150,7 +150,7 @@ end
 function Screen.changeResolution(width,height)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
-        console:println("NOT USING SEE MOD! Resolution changer has stopped.")
+        SysManager.sendToConsole("NOT USING SEE MOD! Resolution changer has stopped.")
         return
     else
         if width == nil then

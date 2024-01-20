@@ -610,19 +610,19 @@ function Misc.unlockAnyBrokenPaths() --WIP function that will unlock any path if
             --smwMap.unlockPath("toSMBS2-5")
         end
         --TBD
-        console:println("Unlocked any map paths that were completed prior.")
+        SysManager.sendToConsole("Unlocked any map paths that were completed prior.")
     else
-        console:println("Unlocking map paths require you to be on the map.")
+        SysManager.sendToConsole("Unlocking map paths require you to be on the map.")
         return
     end
 end
 
 function Misc.toggleWindowOnly() --This, when fullscreen, will only toggle a window instead of being in fullscreen. Toggle again to turn off.
     if mem(0x00B250D8, FIELD_BOOL) then
-        console:println("Window-only mode disabled.")
+        SysManager.sendToConsole("Window-only mode disabled.")
         return mem(0x00B250D8, FIELD_BOOL, false)
     elseif not mem(0x00B250D8, FIELD_BOOL) then
-        console:println("Window-only mode enabled.")
+        SysManager.sendToConsole("Window-only mode enabled.")
         return mem(0x00B250D8, FIELD_BOOL, true)
     end
 end
@@ -680,7 +680,7 @@ function Misc.moveSaveSlot(slot, destination)
         error("You can't move to a save slot that's greater than 32767.")
         return
     end
-    console:println("Beginning save moving...")
+    SysManager.sendToConsole("Beginning save moving...")
     if SMBX_VERSION == VER_SEE_MOD then
         if io.exists(Misc.episodePath().."save"..destination..".sav") then
             os.remove(Misc.episodePath().."save"..destination..".sav")
@@ -695,7 +695,7 @@ function Misc.moveSaveSlot(slot, destination)
         local filenamesav = "save"..slot..".sav"
         local filename2 = "save"..destination.."-ext.dat"
         local filename2sav = "save"..destination..".sav"
-        console:println("Opening all save files...")
+        SysManager.sendToConsole("Opening all save files...")
         local f = io.open(Misc.episodePath()..filename, "a+")
         local f2 = io.open(Misc.episodePath()..filename2, "w")
         local f3 = io.open(Misc.episodePath()..filenamesav, "a+")
@@ -715,11 +715,11 @@ function Misc.moveSaveSlot(slot, destination)
             end
         end
     end
-    console:println("Switching save slot to new slot...")
+    SysManager.sendToConsole("Switching save slot to new slot...")
     Misc.saveSlot(destination)
     Misc.eraseSaveSlot(slot)
     Misc.saveGame()
-    console:println("Save moved.")
+    SysManager.sendToConsole("Save moved.")
 end
 
 function Misc.eraseMainSaveSlot(slot) --This only erases the main save in the save slot.
@@ -739,13 +739,13 @@ function Misc.eraseMainSaveSlot(slot) --This only erases the main save in the sa
             return
         end
         
-        console:println("Erasing .sav data...")
+        SysManager.sendToConsole("Erasing .sav data...")
         
         f:write('64\n3\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n0\n0\n0\n1\n0\n#FALSE#\n"next"\n"next"\n"next"\n"next"\n0\n')
         f:close()
     end
     
-    console:println("Erased .sav data.")
+    SysManager.sendToConsole("Erased .sav data.")
 end
 
 function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific slot.
@@ -762,7 +762,7 @@ function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific 
         return
     end
 
-    console:println("Erasing all save data...")
+    SysManager.sendToConsole("Erasing all save data...")
     
     if SMBX_VERSION == VER_SEE_MOD then
         os.remove(Misc.episodePath().."save"..slot..".sav")
@@ -780,7 +780,7 @@ function Misc.eraseSaveSlot(slot) --This erases all the save data in a specific 
         f2:close()
     end
     
-    console:println("Erased all save data.")
+    SysManager.sendToConsole("Erased all save data.")
 end
 
 function Misc.getLegacyStarsCollected() --This is for the Demo 3 save migration tool which runs when stars were collected from Demo 2 and below. This will be scrapped by the time Demo 4 releases (And/or the full release happens).
@@ -820,12 +820,12 @@ function Misc.use13Editor(bool)
         end
         if bool == true then
             mem(0x00B253C4, FIELD_BOOL, true)
-            console:println("Legacy 1.3 Editor enabled. Opening shortly...")
+            SysManager.sendToConsole("Legacy 1.3 Editor enabled. Opening shortly...")
             for _,p in ipairs(Player.get()) do
                 p:kill()
             end
         else
-            console:println("Legacy 1.3 Editor disabled.")
+            SysManager.sendToConsole("Legacy 1.3 Editor disabled.")
             mem(0x00B253C4, FIELD_BOOL, false)
         end
     end
@@ -839,11 +839,11 @@ local oldy = 0
 function Misc.shakeWindow(shakenumber)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
-        console:println("NOT USING SEE MOD! Shake window command has stopped.")
+        SysManager.sendToConsole("NOT USING SEE MOD! Shake window command has stopped.")
         return
     else
         if Misc.isFullscreen() then
-            console:println("IN FULLSCREEN! Shake window command has stopped.")
+            SysManager.sendToConsole("IN FULLSCREEN! Shake window command has stopped.")
             return
         else
             oldx = Misc.getWindowXPosition()
@@ -851,7 +851,7 @@ function Misc.shakeWindow(shakenumber)
             
             shaketally = shakenumber
             
-            console:println("Shake window command has executed with a shake tally of "..tostring(shakenumber)..".")
+            SysManager.sendToConsole("Shake window command has executed with a shake tally of "..tostring(shakenumber)..".")
         end
     end
 end
@@ -859,7 +859,7 @@ end
 function Misc.testModeSetSettings(player, powerup, mountType, mountColor, playerCount, showFPS, godMode, entranceIndex, player2, powerup2, mountType2, mountColor2)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
-        console:println("NOT USING SEE MOD! Test mode setting changer has stopped.")
+        SysManager.sendToConsole("NOT USING SEE MOD! Test mode setting changer has stopped.")
         return
     else
         if Misc.inEditor() then
@@ -916,10 +916,10 @@ function Misc.testModeSetSettings(player, powerup, mountType, mountColor, player
             
             LunaDLL.LunaLuaSetTestModeSettings(settings)
             
-            console:println("Test mode setting changer completed successfully.")
+            SysManager.sendToConsole("Test mode setting changer completed successfully.")
         else
             Misc.warn("You're not on the editor to execute this command!")
-            console:println("NOT ON THE EDITOR! Test mode setting changer has stopped executing.")
+            SysManager.sendToConsole("NOT ON THE EDITOR! Test mode setting changer has stopped executing.")
             return
         end
     end
@@ -928,7 +928,7 @@ end
 function Misc.testModeSetPlayerSetting(plr, power)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
-        console:println("NOT USING SEE MOD! Test mode setting changer has stopped.")
+        SysManager.sendToConsole("NOT USING SEE MOD! Test mode setting changer has stopped.")
         return
     else
         if Misc.inEditor() then
@@ -946,10 +946,10 @@ function Misc.testModeSetPlayerSetting(plr, power)
             
             LunaDLL.LunaLuaSetTestModeSettings(settings)
             
-            console:println("Test mode setting changer completed successfully.")
+            SysManager.sendToConsole("Test mode setting changer completed successfully.")
         else
             Misc.warn("You're not on the editor to execute this command!")
-            console:println("NOT ON THE EDITOR! Test mode setting changer has stopped executing.")
+            SysManager.sendToConsole("NOT ON THE EDITOR! Test mode setting changer has stopped executing.")
             return
         end
     end

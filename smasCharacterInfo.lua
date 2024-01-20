@@ -95,7 +95,7 @@ function smasCharacterInfo.onStart()
 end
 
 function smasCharacterInfo.setCostumeSpecifics()
-    console:println("Character information will now be changed.")
+    SysManager.sendToConsole("Character information will now be changed.")
     
     local currentCostume = SaveData.SMASPlusPlus.player[1].currentCostume
     

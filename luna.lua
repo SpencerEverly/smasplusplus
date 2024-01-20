@@ -20,10 +20,15 @@
     Misc.exitEngine()
 end]]
 
-console:println("Super Mario All-Stars++ loading initated.")
+function SysManagerSendToConsole(data)
+    return console:println(tostring(data))
+end
+
+SysManagerSendToConsole("Super Mario All-Stars++ loading initated.")
 
 _G.smasSaveDataSystem = require("smasSaveDataSystem")
 _G.smasFunctions = require("smasFunctions")
+
 _G.smasWeather = require("smasWeather")
 
 if GameData.gameFirstLoaded == nil then
@@ -46,7 +51,7 @@ GameData.__SaveSlot = Misc.saveSlot()
 --Make sure we warn the user to upgrade the legacy save data while we can...
 if not Misc.inMarioChallenge() then
     if mem(0x00B251E0, FIELD_WORD) >= 1 then
-        console:println("Legacy star count greater than 1! Assuming we're loading a save file from Demo 2 and below...")
+        SysManager.sendToConsole("Legacy star count greater than 1! Assuming we're loading a save file from Demo 2 and below...")
         if GameData.warnUserAboutOldStars == nil then
             GameData.warnUserAboutOldStars = true
         end
@@ -69,22 +74,22 @@ end
 
 --For SEE Mod users, where they have a definite version of LunaLua.
 if SMBX_VERSION == VER_SEE_MOD then
-    console:println("SEE MOD DETECTED! Loading LunaDLL.dll...")
+    SysManager.sendToConsole("SEE MOD DETECTED! Loading LunaDLL.dll...")
     _G.LunaDLL = ffi.load("LunaDll.dll")
     Misc.setEpisodeName("Super Mario All-Stars++")
     _G.smasUpdater = require("smasUpdater")
 end
 if Misc.setWindowTitle ~= nil then
-    console:println("Window title set.")
+    SysManager.sendToConsole("Window title set.")
     Misc.setWindowTitle("Super Mario All-Stars++")
 end
 if Misc.setWindowIcon ~= nil then
-    console:println("Window icon set.")
+    SysManager.sendToConsole("Window icon set.")
     Misc.setWindowIcon(Graphics.loadImageResolved("graphics/icon/icon.png"))
 end
 
 --Register some custom global event handlers...
-console:println("Registering global event handlers...")
+SysManager.sendToConsole("Registering global event handlers...")
 Misc.LUNALUA_EVENTS_TBL["onPlaySFX"] = true
 Misc.LUNALUA_EVENTS_TBL["onPostPlaySFX"] = true
 Misc.LUNALUA_EVENTS_TBL["onChangeMusic"] = true
@@ -103,7 +108,7 @@ Misc.LUNALUA_EVENTS_TBL["onCharacterChangeSMAS"] = true
 Misc.LUNALUA_EVENTS_TBL["onCharacterAlterationChange"] = true
 
 --Now, before we get started, we require the most important libraries on the top.
-console:println("Loading important libraries...")
+SysManager.sendToConsole("Loading important libraries...")
 
 --SMAS specific functions need to be required first:
 _G.smasGlobals = require("smasGlobals")
@@ -142,7 +147,7 @@ _G.autoscrolla = require("autoscrolla")
 
 --Making sure we're in the Mario Challenge... if so, automatically enable X2 characters.
 if Misc.inMarioChallenge() then
-    console:println("Mario Challenge detected! Loading game in minimal mode...")
+    SysManager.sendToConsole("Mario Challenge detected! Loading game in minimal mode...")
     SaveData.SMASPlusPlus.game.onePointThreeModeActivated = false
 end
 
@@ -211,14 +216,14 @@ end
 
 --Now that everything has been loaded, start loading the medium important stuff
 
-console:println("Loading medium important libraries...")
+SysManager.sendToConsole("Loading medium important libraries...")
 
 _G.transplate = require("transplate")
 _G.globalgenerals = require("globalgenerals") --Most important library of all. This loads general stuff for levels.
 _G.repll = require("repll") --Custom sound command line, for not only testing in the editor, but for an additional clear history command
 _G.rng = require("base/rng") --Load up rng for etc. things
 if SaveData.speedrunMode then
-    console:println("Speedrun mode enabled! Loading speedrun libraries...")
+    SysManager.sendToConsole("Speedrun mode enabled! Loading speedrun libraries...")
     speedruntimer = require("speedruntimer") -- Speedrun Timer Script on World Map (from MaGLX3 episode)
     inputoverlay = require("inputoverlay") -- Input Overlay (GFX by Wohlstand for TheXTech, script by me)
 end
@@ -231,12 +236,12 @@ for _,v in ipairs(npc_APIs) do
 end
 
 local loadactivate = true
-console:println("Loading Steve and SMW2 Yoshi characters...")
+SysManager.sendToConsole("Loading Steve and SMW2 Yoshi characters...")
 local steve = require("steve")
 local yoshi = require("yiYoshi/yiYoshi")
 local playerManager = require("playermanager") --Load up this to change Ultimate Rinka and Ninja Bomberman to Steve and Yoshi (You can still use UR and NB, check out the Toad costumes)
 --These will need to be overwritten over the original libraries, because we're fixing graphics/bugs from these characters.
-console:println("Overriding original character libraries...")
+SysManager.sendToConsole("Overriding original character libraries...")
 playerManager.overrideCharacterLib(CHARACTER_MEGAMAN,require("characters/megamann"))
 playerManager.overrideCharacterLib(CHARACTER_SNAKE,require("characters/snakey"))
 playerManager.overrideCharacterLib(CHARACTER_BOWSER,require("characters/bowserr"))
@@ -276,7 +281,7 @@ smasTables._noLoadingSoundLevels = {
 --Now use onLoad to play the loading sound...
 function onLoad()
     if not Misc.inEditor() and not table.icontains(smasTables._noLoadingSoundLevels,Level.filename()) and loadactivate then --If luna errors during testing in the editor, this will be useful to not load the audio to prevent the audio from still being played until the engine is terminated
-        console:println("Loading sound playing!")
+        SysManager.sendToConsole("Loading sound playing!")
         loadingsoundchunk = Audio.SfxOpen(loadingsoundFile)
         loadingSoundObject = Audio.SfxPlayObj(loadingsoundchunk, -1)
         fadetolevel = true

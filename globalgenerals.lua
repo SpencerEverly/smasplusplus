@@ -1,4 +1,4 @@
-console:println("globalgenerals is now loading...")
+SysManager.sendToConsole("globalgenerals is now loading...")
 
 local starman = require("starman/star")
 local mega2 = require("mega/megashroom")
@@ -16,7 +16,7 @@ local inputconfigurator = require("inputconfig")
 local musicalchairs = require("musicalchairs")
 
 if GameData.enableBattleMode then
-    console:println("Classic Battle Mode active! Loading the pause menu library...")
+    SysManager.sendToConsole("Classic Battle Mode active! Loading the pause menu library...")
     _G.pausemenu2 = require("pausemenu2")
 end
 
@@ -45,16 +45,16 @@ local numberfont = textplus.loadFont("littleDialogue/font/1.ini")
 if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if SaveData.SMASPlusPlus.accessibility.enableTwirl then
-            console:println("Twirling activated! Loading the twirl library...")
+            SysManager.sendToConsole("Twirling activated! Loading the twirl library...")
             twirl = require("Twirl")
         end
         if SaveData.SMASPlusPlus.accessibility.enableWallJump then
-            console:println("Wall jumping activated! Loading the anotherwalljump library...")
+            SysManager.sendToConsole("Wall jumping activated! Loading the anotherwalljump library...")
             aw = require("anotherwalljump")
             aw.registerAllPlayersDefault()
         end
         if SaveData.SMASPlusPlus.accessibility.enableGroundPound then
-            console:println("Ground pounding activated! Loading the GroundPound library...")
+            SysManager.sendToConsole("Ground pounding activated! Loading the GroundPound library...")
             GP = require("GroundPound")
             GP.enabled = true
         end
@@ -62,7 +62,7 @@ if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
 end
 
 if GameData.rushModeActive then
-    console:println("Rush mode active! Loading rush mode dependencies...")
+    SysManager.sendToConsole("Rush mode active! Loading rush mode dependencies...")
     level_dependencies_rushmode = require("level_dependencies_rushmode")
 end
 
@@ -89,7 +89,7 @@ if (table.icontains(smasTables._noTransitionLevels,Level.filename())) or (GameDa
 end
 
 if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-    console:println("1.3 Mode active! Changing some settings...")
+    SysManager.sendToConsole("1.3 Mode active! Changing some settings...")
     warpTransition.musicFadeOut = false
     warpTransition.levelStartTransition = warpTransition.TRANSITION_NONE
     warpTransition.sameSectionTransition = warpTransition.TRANSITION_NONE
@@ -136,7 +136,7 @@ function globalgenerals.onInitAPI()
 end
 
 function lavaShroomEasterEgg()
-    console:println("1.3 Mode Easter Egg found!")
+    SysManager.sendToConsole("1.3 Mode Easter Egg found!")
     easterCrashPrevLoad = true
     smasBooleans.musicMuted = true
     Sound.playSFX("easteregg_smbx13crash.ogg")
@@ -158,7 +158,7 @@ end
 function globalgenerals.onEvent(eventName)
     if eventName then --If it executes any event...
         if smasBooleans.musicMuted then --If the music has been muted for any reason...
-            console:println("Event started while music is muted. Storing changed music to the refresh table...")
+            SysManager.sendToConsole("Event started while music is muted. Storing changed music to the refresh table...")
             for i = 0,20 do
                 if Section(i).music ~= 0 then --If the music is anything but 0...
                     Sound.refreshMusic(i) --Refresh that specific section
@@ -184,7 +184,7 @@ function globalgenerals.onStart()
         debugbox.bootactive = true
         if SMBX_VERSION == VER_SEE_MOD then
             Misc.setNewTestModeLevelData(Level.filename())
-            console:println("SEE MOD ACTIVE! Editor level starter has been set to "..Level.filename()..".")
+            SysManager.sendToConsole("SEE MOD ACTIVE! Editor level starter has been set to "..Level.filename()..".")
         end
     end
     if GameData.____mainMenuComplete == true then
@@ -331,51 +331,51 @@ function globalgenerals.onPostNPCKill(npc, harmType)
     for _,p in ipairs(Player.get()) do
         if smasTables.allGoombaNPCIDsTableMapped[npc.id] then
             SaveData.goombaStomps = SaveData.goombaStomps + 1
-            console:println(tostring(SaveData.goombaStomps).." Goombas have been stomped in total.")
+            SysManager.sendToConsole(tostring(SaveData.goombaStomps).." Goombas have been stomped in total.")
         end
         if smasTables.allKoopaNPCIDsTableMapped[npc.id] then
             SaveData.koopaStomps = SaveData.koopaStomps + 1
-            console:println(tostring(SaveData.koopaStomps).." Koopas have been stomped in total.")
+            SysManager.sendToConsole(tostring(SaveData.koopaStomps).." Koopas have been stomped in total.")
         end
         if smasTables.allStarmanNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.starmansused = SaveData.starmansused + 1
-            console:println(tostring(SaveData.starmansused).." Starman's have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.starmansused).." Starman's have been used in total.")
         end
         if npc.id == 997 and Colliders.collide(p, npc) then
             SaveData.megamushroomssused = SaveData.megamushroomssused + 1
-            console:println(tostring(SaveData.megamushroomssused).." Mega Mushroom's have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.megamushroomssused).." Mega Mushroom's have been used in total.")
         end
         if smasTables.allCollectableStarNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.starsgrabbed = SaveData.starsgrabbed + 1
-            console:println(tostring(SaveData.starsgrabbed).." stars have been grabbed in total.")
+            SysManager.sendToConsole(tostring(SaveData.starsgrabbed).." stars have been grabbed in total.")
         end
         if smasTables.allCoinNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.SMASPlusPlus.hud.coins = SaveData.SMASPlusPlus.hud.coins + 1
-            console:println(tostring(SaveData.SMASPlusPlus.hud.coins).." coins have been collected in total.")
+            SysManager.sendToConsole(tostring(SaveData.SMASPlusPlus.hud.coins).." coins have been collected in total.")
         end
         if smasTables.allMushroomNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalmushrooms = SaveData.totalmushrooms + 1
-            console:println(tostring(SaveData.totalmushrooms).." Mushrooms have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.totalmushrooms).." Mushrooms have been used in total.")
         end
         if smasTables.allFireFlowerNPCIDsTableMapped[npc.id] and Colliders.collide(p, npc) then
             SaveData.totalfireflowers = SaveData.totalfireflowers + 1
-            console:println(tostring(SaveData.totalfireflowers).." Fire Flowers have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.totalfireflowers).." Fire Flowers have been used in total.")
         end
         if npc.id == 34 and Colliders.collide(p, npc) then
             SaveData.totalleafs = SaveData.totalleafs + 1
-            console:println(tostring(SaveData.totalleafs).." Super Leafs have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.totalleafs).." Super Leafs have been used in total.")
         end
         if npc.id == 169 and Colliders.collide(p, npc) then
             SaveData.totaltanookis = SaveData.totaltanookis + 1
-            console:println(tostring(SaveData.totaltanookis).." Tanooki Suits have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.totaltanookis).." Tanooki Suits have been used in total.")
         end
         if npc.id == 170 and Colliders.collide(p, npc) then
             SaveData.totalhammersuits = SaveData.totalhammersuits + 1
-            console:println(tostring(SaveData.totalhammersuits).." Hammer Suits have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.totalhammersuits).." Hammer Suits have been used in total.")
         end
         if npc.id == 277 or npc.id == 264 and Colliders.collide(p, npc) then
             SaveData.totaliceflowers = SaveData.totaliceflowers + 1
-            console:println(tostring(SaveData.totaliceflowers).." Ice Flowers have been used in total.")
+            SysManager.sendToConsole(tostring(SaveData.totaliceflowers).." Ice Flowers have been used in total.")
         end
         if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
             if smasTables.allInteractableNPCIDs[npc.id] then
@@ -461,7 +461,7 @@ function globalgenerals.onExit()
         end
     end
     if mem(0x00B2C89C, FIELD_BOOL) then --Let's prevent the credits from execution.
-        console:println("Credits exiting detected! Exiting to the credits level...")
+        SysManager.sendToConsole("Credits exiting detected! Exiting to the credits level...")
         Level.load("SMAS - Credits.lvlx")
     end
     if not table.icontains(smasTables._friendlyPlaces,Level.filename()) then
