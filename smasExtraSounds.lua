@@ -1,6 +1,6 @@
 --[[
 
-smasExtraSounds.lua (Formerly extrasounds.lua) by Spencer Everly (v0.3.6)
+smasExtraSounds.lua (Formerly extrasounds.lua) by Spencer Everly (v0.4.0)
 
 To use this everywhere, you can simply put this under luna.lua:
 _G.smasExtraSounds = require("smasExtraSounds")
@@ -20,10 +20,26 @@ Check the lua file for info on which things does what
 
 local smasExtraSounds = {}
 
+--Is the script being used on SMAS++? Usually for other episodes you SHOULD make this false, but if this is SMAS++ then it's true. This is local to prevent game-breaking changes.
+local isSMASPlusPlus = true
+
 --Are the extra sounds active? If not, they won't play. If false the library won't be used and will revert to the stock sound system. Useful for muting all sounds for a boot menu, cutscene, or something like that by using Audio.sounds[id].muted = true instead.
 smasExtraSounds.active = true
 --What is the volume limit smasExtraSounds should go? This can be set to any number, which playSoumd will automatically play in that specified volume.
 smasExtraSounds.volume = 1
+
+--(Non-SMAS++ only) The SaveData used for certain things for the episode outside of SMAS++.
+if not isSMASPlusPlus then
+    SaveData.smasExtraSounds = {}
+end
+--(Non-SMAS++ only) Should life sounds be enabled? If false a 0UP sound will play instead. This is an non-SMAS++ specific setting, toggle this for your own episode instead.
+smasExtraSounds.enableLives = true
+--(Non-SMAS++ only) The coin count for the episode outside of SMAS++. This will be updated automatically.
+if not isSMASPlusPlus then
+    if SaveData.smasExtraSounds.coinCount == nil then
+        SaveData.smasExtraSounds.coinCount = 0
+    end
+end
 
 --**DELAY SETTINGS**
 --Set this to any number to change how much the P-Switch Timer should delay to. Default is 50.
@@ -450,14 +466,14 @@ function smasExtraSounds.playSFX(name, volume, loops, delay) --If you want to pl
                 SFX.play(name, volume, loops, delay)
             elseif name then
                 local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-                SFX.play(file, volume, loops, delay) --Then play it afterward
+                SFX.play(file, volume, loops, delay) --Play it afterward
             end
         elseif not smasExtraSounds.active then
             if smasExtraSounds.allVanillaSoundNumbersInOrder[name] then
                 SFX.play(name, volume, loops, delay)
             elseif name then
                 local file = Misc.resolveSoundFile(name) or Misc.resolveSoundFile("_OST/"..name) or Misc.resolveSoundFile("_OST/_Sound Effects/"..name) or Misc.resolveSoundFile("costumes/"..name) or Misc.resolveSoundFile("___MainUserDirectory/"..name) --Common sound directories, see above for the entire list
-                SFX.play(file, volume, loops, delay) --Then play it afterward
+                SFX.play(file, volume, loops, delay) --Play it afterward
             end
         end
         
@@ -1041,54 +1057,110 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
             if not isOverworld then
                 for index,scoreboard in ipairs(Animation.get(79)) do --Score values!
                     if scoreboard.animationFrame == 9 and scoreboard.speedY == -1.94 then --1UP
-                        if SaveData.SMASPlusPlus.accessibility.enableLives then
-                            smasExtraSounds.playSFX(15)
-                        else
-                            smasExtraSounds.playSFX(150)
-                        end
-                    end
-                    if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
-                        if not smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.SMASPlusPlus.accessibility.enableLives then
-                                smasExtraSounds.playSFX(96)
-                            else
-                                smasExtraSounds.playSFX(150)
-                            end
-                        elseif smasExtraSounds.use1UPSoundForAll1UPs then
+                        if isSMASPlusPlus then
                             if SaveData.SMASPlusPlus.accessibility.enableLives then
                                 smasExtraSounds.playSFX(15)
                             else
                                 smasExtraSounds.playSFX(150)
+                            end
+                        else
+                            if smasExtraSounds.enableLives then
+                                smasExtraSounds.playSFX(15)
+                            else
+                                smasExtraSounds.playSFX(150)
+                            end
+                        end
+                    end
+                    if scoreboard.animationFrame == 10 and scoreboard.speedY == -1.94 then --2UP
+                        if isSMASPlusPlus then
+                            if not smasExtraSounds.use1UPSoundForAll1UPs then
+                                if SaveData.SMASPlusPlus.accessibility.enableLives then
+                                    smasExtraSounds.playSFX(96)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
+                            elseif smasExtraSounds.use1UPSoundForAll1UPs then
+                                if SaveData.SMASPlusPlus.accessibility.enableLives then
+                                    smasExtraSounds.playSFX(15)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
+                            end
+                        else
+                            if not smasExtraSounds.use1UPSoundForAll1UPs then
+                                if smasExtraSounds.enableLives then
+                                    smasExtraSounds.playSFX(96)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
+                            elseif smasExtraSounds.use1UPSoundForAll1UPs then
+                                if smasExtraSounds.enableLives then
+                                    smasExtraSounds.playSFX(15)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
                             end
                         end
                     end
                     if scoreboard.animationFrame == 11 and scoreboard.speedY == -1.94 then --3UP
-                        if not smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.SMASPlusPlus.accessibility.enableLives then
-                                smasExtraSounds.playSFX(97)
-                            else
-                                smasExtraSounds.playSFX(150)
+                        if isSMASPlusPlus then
+                            if not smasExtraSounds.use1UPSoundForAll1UPs then
+                                if SaveData.SMASPlusPlus.accessibility.enableLives then
+                                    smasExtraSounds.playSFX(97)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
+                            elseif smasExtraSounds.use1UPSoundForAll1UPs then
+                                if SaveData.SMASPlusPlus.accessibility.enableLives then
+                                    smasExtraSounds.playSFX(15)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
                             end
-                        elseif smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.SMASPlusPlus.accessibility.enableLives then
-                                smasExtraSounds.playSFX(15)
-                            else
-                                smasExtraSounds.playSFX(150)
+                        else
+                            if not smasExtraSounds.use1UPSoundForAll1UPs then
+                                if smasExtraSounds.enableLives then
+                                    smasExtraSounds.playSFX(97)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
+                            elseif smasExtraSounds.use1UPSoundForAll1UPs then
+                                if smasExtraSounds.enableLives then
+                                    smasExtraSounds.playSFX(15)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
                             end
                         end
                     end
                     if scoreboard.animationFrame == 12 and scoreboard.speedY == -1.94 then --5UP
-                        if not smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.SMASPlusPlus.accessibility.enableLives then
-                                smasExtraSounds.playSFX(98)
-                            else
-                                smasExtraSounds.playSFX(150)
+                        if isSMASPlusPlus then
+                            if not smasExtraSounds.use1UPSoundForAll1UPs then
+                                if SaveData.SMASPlusPlus.accessibility.enableLives then
+                                    smasExtraSounds.playSFX(98)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
+                            elseif smasExtraSounds.use1UPSoundForAll1UPs then
+                                if SaveData.SMASPlusPlus.accessibility.enableLives then
+                                    smasExtraSounds.playSFX(15)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
                             end
-                        elseif smasExtraSounds.use1UPSoundForAll1UPs then
-                            if SaveData.SMASPlusPlus.accessibility.enableLives then
-                                smasExtraSounds.playSFX(15)
-                            else
-                                smasExtraSounds.playSFX(150)
+                        else
+                            if not smasExtraSounds.use1UPSoundForAll1UPs then
+                                if smasExtraSounds.enableLives then
+                                    smasExtraSounds.playSFX(98)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
+                            elseif smasExtraSounds.use1UPSoundForAll1UPs then
+                                if smasExtraSounds.enableLives then
+                                    smasExtraSounds.playSFX(15)
+                                else
+                                    smasExtraSounds.playSFX(150)
+                                end
                             end
                         end
                     end
@@ -1162,6 +1234,25 @@ function smasExtraSounds.onTick() --This is a list of sounds that'll need to be 
                 end
             end
             
+            
+            
+            
+            if not isSMASPlusPlus then
+                --**100 COIN 1UP SYSTEM (Non-SMAS++)**
+                --Unfortunately this means that the coin count in the HUD would need to be graphically remade. smasExtraSounds doesn't remake the graphics side of things, so that'll mean that the user would need to remake it instead.
+                if mem(0x00B2C5A8, FIELD_WORD) > 0 then
+                    SaveData.smasExtraSounds.coinCount = SaveData.smasExtraSounds.coinCount + mem(0x00B2C5A8, FIELD_WORD)
+                    mem(0x00B2C5A8, FIELD_WORD, 0)
+                end
+                if SaveData.smasExtraSounds.coinCount > 99 then
+                    if smasExtraSounds.enableLives then
+                        smasExtraSounds.playSFX(15)
+                    else
+                        smasExtraSounds.playSFX(150)
+                    end
+                    SaveData.smasExtraSounds.coinCount = 0
+                end
+            end
             
             
             
@@ -1422,7 +1513,7 @@ function smasExtraSounds.onInputUpdate() --Button pressing for such commands
                 
                 --*YOSHI FIRE SPITTING*
                 if p:mem(0x68, FIELD_BOOL) == true then --If it's detected that Yoshi has the fire ability...
-                    if p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED then --Then if it's spit out...
+                    if p.keys.run == KEYS_PRESSED or p.keys.altRun == KEYS_PRESSED then --If it's spit out...
                         smasExtraSounds.playSFX(42) --Play the sound
                     end
                 end

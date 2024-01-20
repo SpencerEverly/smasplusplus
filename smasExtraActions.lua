@@ -1,5 +1,7 @@
 local smasExtraActions = {}
 
+local inspect = require("ext/inspect")
+
 local maxPowerupID = 7 --Used for to make sure we're using powerup slots up to 7
 
 smasExtraActions.enableLongJump = false --Enable this to add a long jump ability for your character. Default is false.
@@ -31,7 +33,17 @@ smasExtraActions.longJumpAnimationMaxFrames = 1 --Change this to set the maximum
 smasExtraActions.spinBounceHasStompedNPC = {} --Used for detecting the player that has stomped an NPC while spin jumping.
 
 --**Fast Warping (Settings)**
-smasExtraActions.fastWarpSpeed = 1.2 --Used for speeding up warping when going up/down
+smasExtraActions.fastWarpSpeedUp = 1.2 --Used for speeding up warping when going up
+smasExtraActions.fastWarpSpeedDown = 2 --Used for speeding up warping when going down
+
+--**Fast Climbing (Settings)**
+smasExtraActions.fastClimbDirections = { --Used to make sure directions when fast climbing work out well
+    left = vector(-1, 0),
+    right = vector(1, 0),
+    down = vector(0, 1),
+    up = vector(0, -1),
+}
+local lastClimbed = {}
 
 function smasExtraActions.onInitAPI()
     registerEvent(smasExtraActions,"onInputUpdate")
@@ -153,15 +165,15 @@ function smasExtraActions.onTick()
                         
                         if not exiting then
                             if direction == 1 then
-                                p.y = p.y - smasExtraActions.fastWarpSpeed
+                                p.y = p.y - smasExtraActions.fastWarpSpeedUp
                             elseif direction == 3 then
-                                p.y = p.y + smasExtraActions.fastWarpSpeed
+                                p.y = p.y + smasExtraActions.fastWarpSpeedUp
                             end
                         elseif exiting then
                             if direction == 1 then
-                                p.y = p.y + smasExtraActions.fastWarpSpeed
+                                p.y = p.y + smasExtraActions.fastWarpSpeedUp
                             elseif direction == 3 then
-                                p.y = p.y - smasExtraActions.fastWarpSpeed
+                                p.y = p.y - smasExtraActions.fastWarpSpeedDown
                             end
                         end
                     end
@@ -175,26 +187,43 @@ function smasExtraActions.onTick()
     end
 end
 
-function smasExtraActions.onInputUpdate()
-    if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        if smasExtraActions.enableFasterClimbing then
-            for _,p in ipairs(Player.get()) do
-                --Faster climbing when holding run
-                if not Misc.isPaused() then
-                    if p.climbing and p.forcedState == 0 and p.deathTimer == 0 then
-                        if p.keys.run then
-                            if p.keys.left then
-                                p.x = p.x - 1.5
-                            elseif p.keys.right then
-                                p.x = p.x + 1.5
-                            elseif p.keys.up then
-                                p.y = p.y - 1.5
-                            elseif p.keys.down then
-                                p.y = p.y + 1.5
-                            end
-                        end
-                    end
-                end
+function smasExtraActions.onInputUpdate() --More stable fast climbing code, written as of 1/19/2024 (Thanks Emral!)
+    for k,v in ipairs(lastClimbed) do
+        if v and v.isValid then
+            v.speedX = 0
+            v.speedY = 0
+        end
+    end
+    
+    lastClimbed = {}
+    
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+        return --let's get outta here quick
+    end
+
+    if not smasExtraActions.enableFasterClimbing then
+        return --let's quit while we're ahead
+    end
+
+    if Misc.isPaused() then
+        return --paused so nothing else matters anyway
+    end
+
+    for _,p in ipairs(Player.get()) do --uh oh
+        if p.forcedState == 0 and p.keys.run and p.deathTimer <= 0 and p.climbing and p.climbingNPC then
+            local v = p.climbingNPC
+            table.insert(lastClimbed, v)
+
+            if p.keys.left then
+                v.speedX = -1.5
+            elseif p.keys.right then
+                v.speedX = 1.5
+            end
+
+            if p.keys.up then
+                v.speedY = -1.5
+            elseif p.keys.down then
+                v.speedY = 1.5
             end
         end
     end
