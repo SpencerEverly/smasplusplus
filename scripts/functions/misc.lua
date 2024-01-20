@@ -1060,11 +1060,11 @@ function Misc.manuallyRunLunaLuaEvent(runInEverythingOrNot, event, libraryOrNil,
     if runInEverythingOrNot then
         EventManager.callApiListeners(event, false, args)
     end
-    if libraryOrNil ~= nil then
+    if libraryOrNil ~= nil and not runInEverythingOrNot then
         if libraryOrNil[event] ~= nil then
             libraryOrNil[event](args[1], args[2], args[3], args[4])
         end
-    else
+    elseif libraryOrNil == nil and not runInEverythingOrNot then
         event(args[1], args[2], args[3], args[4])
     end
 end

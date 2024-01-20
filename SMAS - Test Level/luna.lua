@@ -60,9 +60,34 @@ function onKeyboardPressDirect(k)
 end
 
 function onNPCHarm(eventToken, npc, harmType, culprit)
-    if harmType == HARM_TYPE_NPC and NPC.config[npc.id].nohammer then
-        if culprit and type(culprit) == "NPC" and culprit.id == 171 then
-            eventToken.cancelled = true
+    if harmType == HARM_TYPE_NPC then
+        --Fireball harm
+        if not NPC.config[npc.id].nofireball then
+            if not eventToken.cancelled then
+                eventToken.cancelled = true
+                NPC:harm(HARM_TYPE_EXT_FIRE)
+                Misc.manuallyRunLunaLuaEvent(true, onNPCHarm, nil, {eventToken, npc, HARM_TYPE_EXT_FIRE, culprit})
+            end
+        end
+        --Iceball harm
+        if not NPC.config[npc.id].noiceball then
+            if not eventToken.cancelled then
+                eventToken.cancelled = true
+                NPC:harm(HARM_TYPE_EXT_ICE)
+                Misc.manuallyRunLunaLuaEvent(true, onNPCHarm, nil, {eventToken, npc, HARM_TYPE_EXT_ICE, culprit})
+            end
+        end
+        --Hammer harm
+        if NPC.config[npc.id].nohammer then
+            if culprit and type(culprit) == "NPC" and culprit.id == 171 then
+                eventToken.cancelled = true
+            end
+        elseif not NPC.config[npc.id].nohammer then
+            if not eventToken.cancelled then
+                eventToken.cancelled = true
+                NPC:harm(HARM_TYPE_EXT_HAMMER)
+                Misc.manuallyRunLunaLuaEvent(true, onNPCHarm, nil, {eventToken, npc, HARM_TYPE_EXT_HAMMER, culprit})
+            end
         end
     end
 end
