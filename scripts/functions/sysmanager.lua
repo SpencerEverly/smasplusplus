@@ -601,6 +601,10 @@ function SysManager.loadLevel(levelFilename, warpIdx)
     mem(0x00B2C5B4, FIELD_WORD, -1) -- GM_EPISODE_MODE (set to leave level)
 end
 
+function SysManager.sendToConsole(data)
+    return console:println(tostring(data))
+end
+
 SysManager.editorValuesNPC = {
     [1] = {oldStr = "ID:", newStr = "id"},
     [2] = {oldStr = "X:", newStr = "x"},
