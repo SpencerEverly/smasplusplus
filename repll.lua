@@ -510,6 +510,7 @@ do
         end
 
         local y = baseY
+        local y2 = repll.maxScreenLength
         for i = #buffer, 1, -1 do
             if (i ~= #buffer) then
                 y = y - 9*doprint.yscale
@@ -554,13 +555,10 @@ do
             blinker = -32
         end
         
-        local originalScreenLength = repll.maxScreenLength
-        
         for i = #repll.log, 1, -1 do
-            repll.maxScreenLength = repll.maxScreenLength - repll.maxLines
+            y2 = y2 - repll.maxLines
             addprint("\n")
-            if repll.maxScreenLength < 0 then
-                repll.maxScreenLength = originalScreenLength
+            if y2 < 0 then
                 break
             end
             addprint(repll.log[i])
