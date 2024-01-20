@@ -384,7 +384,7 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
             if repll.enableSounds then
                 Sound.playSFX("console/console_resetfont.ogg")
             end
-            Routine.run(repll.clearLog)
+            repll.clearLog()
         elseif char ~= nil then
             local left, right = split(repll.buffer, repll.cursorPos)
             repll.buffer = left .. char .. right
@@ -442,8 +442,6 @@ do
         repll.log = {"History cleared!"}
         GameData._repll.log = {"History cleared!"}
         Misc.cheatBuffer("")
-        Routine.wait(4, true)
-        repll.log = {""}
     end
     
     local gsub = string.gsub
