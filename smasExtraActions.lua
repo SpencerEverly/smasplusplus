@@ -58,6 +58,152 @@ function smasExtraActions.handleSpinBounce(p)
     end
 end
 
+function smasExtraActions.handleMainSpinBounceCode(harmType, culprit)
+    if harmType == HARM_TYPE_SPINJUMP then
+        if type(culprit) == "Player" then
+            if (culprit.keys.jump or culprit.keys.altJump) then
+                smasExtraActions.spinBounceHasStompedNPC[culprit] = true
+                SysManager.sendToConsole("Spin jump bounce can be executed.")
+            end
+        end
+    end
+end
+
+function smasExtraActions.handleLongJump(p)
+    if p.keys.down == KEYS_DOWN then
+        if Playur.ducking(p) then
+            if p.powerup == 1 then
+                p:setFrame(smasExtraActions.longJumpSmallDuckFrame * player.direction)
+            end
+            smasExtraActions.longJumpTimer = smasExtraActions.longJumpTimer + 1
+            if smasExtraActions.longJumpTimer == smasExtraActions.longJumpWhenToStart then
+                if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
+                    SysManager.sendToConsole("Long jump can now be started using jump.")
+                    Sound.playSFX(117)
+                end
+            end
+            if Playur.isJumping(p) and smasExtraActions.longJumpTimer >= smasExtraActions.longJumpWhenToStart then
+                for i = 1,maxPowerupID do
+                    if p.powerup == i then
+                        p:setFrame(smasExtraActions.longJumpAnimationFrames[i][smasExtraActions.longJumpAnimationFrameActive] * player.direction)
+                    end
+                end
+                p.speedY = smasExtraActions.longJumpJumpAcceleration
+                smasExtraActions.isLongJumping = true
+                smasExtraActions.isLongJumpingFirstFrame = true
+                smasExtraActions.longJumpTimer = 0
+            end
+        end
+    end
+    if not Playur.ducking(p) then
+        smasExtraActions.longJumpTimer = 0
+    end
+    if smasExtraActions.isLongJumping then
+        p.keys.down = false
+        
+        smasExtraActions.longJumpFullTimer = smasExtraActions.longJumpFullTimer + 1
+        
+        if smasExtraActions.longJumpFullTimer >= 2 then
+            smasExtraActions.isLongJumpingFirstFrame = false
+        end
+        
+        smasExtraActions.longJumpAnimationTimer = smasExtraActions.longJumpAnimationTimer + smasExtraActions.longJumpAnimationSpeed
+        smasExtraActions.longJumpAnimationArray = smasExtraActions.longJumpAnimationTimer % smasExtraActions.longJumpAnimationSpeedFrameChanger
+        
+        if smasExtraActions.longJumpAnimationFrameActive < smasExtraActions.longJumpAnimationMaxFrames then
+            if smasExtraActions.longJumpAnimationArray >= smasExtraActions.longJumpAnimationSpeedFrameChanger - 1 then
+                smasExtraActions.longJumpAnimationFrameActive = smasExtraActions.longJumpAnimationFrameActive + 1
+            end
+        end
+        
+        if p.speedY < 0 or not p.climbing then
+            for i = 1,maxPowerupID do
+                if p.powerup == i then
+                    p:setFrame(smasExtraActions.longJumpAnimationFrames[i][smasExtraActions.longJumpAnimationFrameActive] * player.direction)
+                end
+            end
+        end
+        if p.speedY > 0 or p.climbing then
+            smasExtraActions.isLongJumping = false
+        end
+    end
+    if (Playur.isOnGround(p) and smasExtraActions.isLongJumping) or Playur.isOnGround(p) then
+        smasExtraActions.isLongJumping = false
+        smasExtraActions.longJumpAnimationFrameActive = 1
+        smasExtraActions.longJumpAnimationTimer = 0
+        smasExtraActions.longJumpAnimationArray = 0
+        smasExtraActions.longJumpFullTimer = 0
+    end
+end
+
+function smasExtraActions.handleFastWarp(p)
+    if p.forcedState == FORCEDSTATE_PIPE then
+        local warp = Warp(p:mem(0x15E,FIELD_WORD) - 1)
+        
+        if warp ~= nil then
+            local direction
+            local exiting = false
+            if p.forcedTimer == 0 then
+                direction = warp.entranceDirection
+                exiting = false
+            elseif p.forcedTimer == 2 then
+                direction = warp.exitDirection
+                exiting = true
+            end
+            
+            if not exiting then
+                if direction == 1 then
+                    p.y = p.y - smasExtraActions.fastWarpSpeedUp
+                elseif direction == 3 then
+                    p.y = p.y + smasExtraActions.fastWarpSpeedUp
+                end
+            elseif exiting then
+                if direction == 1 then
+                    p.y = p.y + smasExtraActions.fastWarpSpeedUp
+                elseif direction == 3 then
+                    p.y = p.y - smasExtraActions.fastWarpSpeedDown
+                end
+            end
+        end
+    end
+end
+
+function smasExtraActions.handleFastClimbing(p)
+    for k,v in ipairs(lastClimbed) do
+        if v and v.isValid then
+            v.speedX = 0
+            v.speedY = 0
+        end
+    end
+    
+    lastClimbed = {}
+    
+    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
+        return --let's get outta here quick
+    end
+
+    if Misc.isPaused() then
+        return --paused so nothing else matters anyway
+    end
+
+    if p.forcedState == 0 and p.keys.run and p.deathTimer <= 0 and p.climbing and p.climbingNPC then
+        local v = p.climbingNPC
+        table.insert(lastClimbed, v)
+
+        if p.keys.left then
+            v.speedX = -1.5
+        elseif p.keys.right then
+            v.speedX = 1.5
+        end
+
+        if p.keys.up then
+            v.speedY = -1.5
+        elseif p.keys.down then
+            v.speedY = 1.5
+        end
+    end
+end
+
 function smasExtraActions.onTick()
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         for _,p in ipairs(Player.get()) do
@@ -66,73 +212,7 @@ function smasExtraActions.onTick()
             
             --**LONG JUMP**
             if smasExtraActions.enableLongJump then
-                --[[Text.print(smasExtraActions.longJumpAnimationTimer, 100, 100)
-                Text.print(smasExtraActions.longJumpAnimationSpeed, 100, 120)
-                Text.print(smasExtraActions.longJumpAnimationArray, 100, 140)]]
-                if p.keys.down == KEYS_DOWN then
-                    if Playur.ducking(p) then
-                        if p.powerup == 1 then
-                            p:setFrame(smasExtraActions.longJumpSmallDuckFrame * player.direction)
-                        end
-                        smasExtraActions.longJumpTimer = smasExtraActions.longJumpTimer + 1
-                        if smasExtraActions.longJumpTimer == smasExtraActions.longJumpWhenToStart then
-                            if not table.icontains(smasTables._noLevelPlaces,Level.filename()) then
-                                SysManager.sendToConsole("Long jump can now be started using jump.")
-                                Sound.playSFX(117)
-                            end
-                        end
-                        if Playur.isJumping(p) and smasExtraActions.longJumpTimer >= smasExtraActions.longJumpWhenToStart then
-                            for i = 1,maxPowerupID do
-                                if p.powerup == i then
-                                    p:setFrame(smasExtraActions.longJumpAnimationFrames[i][smasExtraActions.longJumpAnimationFrameActive] * player.direction)
-                                end
-                            end
-                            p.speedY = smasExtraActions.longJumpJumpAcceleration
-                            smasExtraActions.isLongJumping = true
-                            smasExtraActions.isLongJumpingFirstFrame = true
-                            smasExtraActions.longJumpTimer = 0
-                        end
-                    end
-                end
-                if not Playur.ducking(p) then
-                    smasExtraActions.longJumpTimer = 0
-                end
-                if smasExtraActions.isLongJumping then
-                    p.keys.down = false
-                    
-                    smasExtraActions.longJumpFullTimer = smasExtraActions.longJumpFullTimer + 1
-                    
-                    if smasExtraActions.longJumpFullTimer >= 2 then
-                        smasExtraActions.isLongJumpingFirstFrame = false
-                    end
-                    
-                    smasExtraActions.longJumpAnimationTimer = smasExtraActions.longJumpAnimationTimer + smasExtraActions.longJumpAnimationSpeed
-                    smasExtraActions.longJumpAnimationArray = smasExtraActions.longJumpAnimationTimer % smasExtraActions.longJumpAnimationSpeedFrameChanger
-                    
-                    if smasExtraActions.longJumpAnimationFrameActive < smasExtraActions.longJumpAnimationMaxFrames then
-                        if smasExtraActions.longJumpAnimationArray >= smasExtraActions.longJumpAnimationSpeedFrameChanger - 1 then
-                            smasExtraActions.longJumpAnimationFrameActive = smasExtraActions.longJumpAnimationFrameActive + 1
-                        end
-                    end
-                    
-                    if p.speedY < 0 or not p.climbing then
-                        for i = 1,maxPowerupID do
-                            if p.powerup == i then
-                                p:setFrame(smasExtraActions.longJumpAnimationFrames[i][smasExtraActions.longJumpAnimationFrameActive] * player.direction)
-                            end
-                        end
-                    end
-                    if p.speedY > 0 or p.climbing then
-                        smasExtraActions.isLongJumping = false
-                    end
-                end
-                if (Playur.isOnGround(p) and smasExtraActions.isLongJumping) or Playur.isOnGround(p) then
-                    smasExtraActions.isLongJumping = false
-                    smasExtraActions.longJumpAnimationFrameActive = 1
-                    smasExtraActions.longJumpAnimationTimer = 0
-                    smasExtraActions.longJumpAnimationArray = 0
-                    smasExtraActions.longJumpFullTimer = 0
-                end
+                smasExtraActions.handleLongJump(p)
             end
             
             
@@ -149,35 +229,7 @@ function smasExtraActions.onTick()
             
             
             if smasExtraActions.enableFastWarping then
-                if p.forcedState == FORCEDSTATE_PIPE then
-                    local warp = Warp(p:mem(0x15E,FIELD_WORD) - 1)
-                    
-                    if warp ~= nil then
-                        local direction
-                        local exiting = false
-                        if p.forcedTimer == 0 then
-                            direction = warp.entranceDirection
-                            exiting = false
-                        elseif p.forcedTimer == 2 then
-                            direction = warp.exitDirection
-                            exiting = true
-                        end
-                        
-                        if not exiting then
-                            if direction == 1 then
-                                p.y = p.y - smasExtraActions.fastWarpSpeedUp
-                            elseif direction == 3 then
-                                p.y = p.y + smasExtraActions.fastWarpSpeedUp
-                            end
-                        elseif exiting then
-                            if direction == 1 then
-                                p.y = p.y + smasExtraActions.fastWarpSpeedUp
-                            elseif direction == 3 then
-                                p.y = p.y - smasExtraActions.fastWarpSpeedDown
-                            end
-                        end
-                    end
-                end
+                smasExtraActions.handleFastWarp(p)
             end
             
             
@@ -188,58 +240,23 @@ function smasExtraActions.onTick()
 end
 
 function smasExtraActions.onInputUpdate() --More stable fast climbing code, written as of 1/19/2024 (Thanks Emral!)
-    for k,v in ipairs(lastClimbed) do
-        if v and v.isValid then
-            v.speedX = 0
-            v.speedY = 0
+    for _,p in ipairs(Player.get()) do
+        
+        
+        
+        if smasExtraActions.enableFasterClimbing then
+            smasExtraActions.handleFastClimbing(p)
         end
-    end
-    
-    lastClimbed = {}
-    
-    if SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
-        return --let's get outta here quick
-    end
-
-    if not smasExtraActions.enableFasterClimbing then
-        return --let's quit while we're ahead
-    end
-
-    if Misc.isPaused() then
-        return --paused so nothing else matters anyway
-    end
-
-    for _,p in ipairs(Player.get()) do --uh oh
-        if p.forcedState == 0 and p.keys.run and p.deathTimer <= 0 and p.climbing and p.climbingNPC then
-            local v = p.climbingNPC
-            table.insert(lastClimbed, v)
-
-            if p.keys.left then
-                v.speedX = -1.5
-            elseif p.keys.right then
-                v.speedX = 1.5
-            end
-
-            if p.keys.up then
-                v.speedY = -1.5
-            elseif p.keys.down then
-                v.speedY = 1.5
-            end
-        end
+        
+        
+        
     end
 end
 
 function smasExtraActions.onPostNPCHarm(npc, harmType, culprit)
     if not SaveData.SMASPlusPlus.game.onePointThreeModeActivated then
         if smasExtraActions.enableSpinjumpBounce then
-            if harmType == HARM_TYPE_SPINJUMP then
-                if type(culprit) == "Player" then
-                    if (culprit.keys.jump or culprit.keys.altJump) then
-                        smasExtraActions.spinBounceHasStompedNPC[culprit] = true
-                        SysManager.sendToConsole("Spin jump bounce can be executed.")
-                    end
-                end
-            end
+            smasExtraActions.handleMainSpinBounceCode(harmType, culprit)
         end
     end
 end
