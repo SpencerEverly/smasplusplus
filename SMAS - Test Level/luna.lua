@@ -59,6 +59,14 @@ function onKeyboardPressDirect(k)
     end
 end
 
+function onNPCHarm(eventToken, npc, harmType, culprit)
+    if harmType == HARM_TYPE_NPC and NPC.config[npc.id].nohammer then
+        if culprit and type(culprit) == "NPC" and culprit.id == 171 then
+            eventToken.cancelled = true
+        end
+    end
+end
+
 function onDraw()
     if snapshottaken then
         Text.printWP(timesnapped, 100, 100, 3)
