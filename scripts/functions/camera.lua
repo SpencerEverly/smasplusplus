@@ -24,12 +24,20 @@ function Screen.height() --Actual height, with resolution support
     return camera.height
 end
 
-function Screen.cursorX() --Cursor X position (Used for Steve and cursor.lua). Resolution support coming later
-    return mem(0x00B2D6BC, FIELD_DFLOAT)
+function Screen.cursorX() --Cursor X position (Used for Steve and cursor.lua). Resolution support is only on the SEE Mod for now
+    if SMBX_VERSION == VER_SEE_MOD then
+        return Misc.getCursorPosition()[1]
+    else
+        return mem(0x00B2D6BC, FIELD_DFLOAT)
+    end
 end
 
-function Screen.cursorY() --Cursor Y position (Used for Steve and cursor.lua). Resolution support coming later
-    return mem(0x00B2D6C4, FIELD_DFLOAT)
+function Screen.cursorY() --Cursor Y position (Used for Steve and cursor.lua). Resolution support is only on the SEE Mod for now
+    if SMBX_VERSION == VER_SEE_MOD then
+        return Misc.getCursorPosition()[2]
+    else
+        return mem(0x00B2D6C4, FIELD_DFLOAT)
+    end
 end
 
 local oldBoundaryLeft,oldBoundaryRight,oldBoundaryTop,oldBoundaryBottom = 0,0,0,0
@@ -147,6 +155,63 @@ function Screen.getScreenSize()
     end
 end
 
+function Screen.checkScreenTypeForResolution(width,height)
+    if (mem(0x00B25130, FIELD_WORD) <= 0 or mem(0x00B25130, FIELD_WORD) == 2 or mem(0x00B25130, FIELD_WORD) == 3 or mem(0x00B25130, FIELD_WORD) == 6 or mem(0x00B25130, FIELD_WORD) == 7 or mem(0x00B25130, FIELD_WORD) == 8) then --Single player, use the entire screen
+        camera.width = width
+        camera.height = height
+    elseif mem(0x00B25130, FIELD_WORD) == 5 then --Dynamic multiplayer, resize everything based on the values below
+        if camera2 ~= nil then
+            if mem(0x00B25132, FIELD_WORD) == 1 then
+                camera.x = 0
+                camera.y = 0
+                camera.width = width / 2
+                camera.height = height
+                
+                camera2.x = width / 2
+                camera2.y = 0
+                camera2.width = width / 2
+                camera2.height = height
+            elseif mem(0x00B25132, FIELD_WORD) == 2 then
+                camera.x = width / 2
+                camera.y = 0
+                camera.width = width / 2
+                camera.height = height
+                
+                camera2.x = 0
+                camera2.y = 0
+                camera2.width = width / 2
+                camera2.height = height
+            elseif mem(0x00B25132, FIELD_WORD) == 3 then
+                camera.x = 0
+                camera.y = height / 2
+                camera.width = width
+                camera.height = height / 2
+                
+                camera2.x = 0
+                camera2.y = 0
+                camera2.width = width
+                camera2.height = height / 2
+            elseif mem(0x00B25132, FIELD_WORD) == 4 then
+                camera.x = 0
+                camera.y = 0
+                camera.width = width
+                camera.height = height / 2
+                
+                camera2.x = 0
+                camera2.y = height / 2
+                camera2.width = width
+                camera2.height = height / 2
+            end
+        end
+        if mem(0x00B25132, FIELD_WORD) == 5 then
+            camera.x = 0
+            camera.y = 0
+            camera.width = width
+            camera2.height = height
+        end
+    end
+end
+
 function Screen.changeResolution(width,height)
     if SMBX_VERSION ~= VER_SEE_MOD then
         Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
@@ -160,8 +225,7 @@ function Screen.changeResolution(width,height)
             height = 600
         end
         Graphics.setFramebufferSize(width,height)
-        camera.width = width
-        camera.height = height
+        Screen.checkScreenTypeForResolution(width,height)
     end
 end
 

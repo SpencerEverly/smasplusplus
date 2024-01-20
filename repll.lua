@@ -239,11 +239,23 @@ repll.activeInEpisode = false
 repll.background = Color(0,0,0,0.5)
 repll.backgroundImg = Graphics.loadImageResolved("graphics/colors/black-repl.png")
 
+repll.cursorOffsetX = 0
+repll.cursorOffsetY = 0
+repll.textOffsetX = 0
+repll.textOffsetY = 0
+
+repll.maxLines = 18
+repll.maxScreenLength = 3200
+
 function repll.onInitAPI()
     registerEvent(repll, "onKeyboardPressDirect")
     registerEvent(repll, "onDraw")
     registerEvent(repll, "onPasteText")
     registerEvent(repll, "onInputUpdate")
+    
+    if SMBX_VERSION == VER_SEE_MOD then
+        registerEvent(repll, "onMouseWheelEvent")
+    end
 end
 
 function repll.onInputUpdate()
@@ -296,6 +308,8 @@ function repll.onKeyboardPressDirect(vk, repeated, char)
     end
     
     if repll.active then
+        repll.textOffsetY = 0
+        repll.cursorOffsetY = 0
         if vk == VK_TAB or vk == VK_ESCAPE then
             if (not repeated) then
                 Misc.unpause()
@@ -407,11 +421,26 @@ function repll.onPasteText(pastedText)
     blinker = 1
 end
 
+function repll.onMouseWheelEvent(wheel, delta)
+    if repll.active then
+        if wheel == 0 then
+            if delta == 120 then
+                repll.textOffsetY = repll.textOffsetY + 18
+                repll.cursorOffsetY = repll.cursorOffsetY + 18
+            elseif delta == -120 then
+                repll.textOffsetY = repll.textOffsetY - 18
+                repll.cursorOffsetY = repll.cursorOffsetY - 18
+            end
+        end
+    end
+end
+
 do
     local gtltrepllace = {["<"] = "<lt>", [">"] = "<gt>", ["\n"] = "<br>"}
-
-    local doprint = {font=textplus.loadFont("textplus/font/5.ini"), color=Color.white, plaintext=true}
     
+    local baseX, baseY = 0, 600
+    local doprint = {font=textplus.loadFont("textplus/font/5.ini"), color=Color.white, plaintext=true}
+
     doprint.xscale = GameData._repll.fontscale or 2
     doprint.yscale = doprint.xscale
     
@@ -459,7 +488,6 @@ do
         printlist[listidx] = v
         listidx = listidx + 1
     end
-    local baseX, baseY = 0, 600
     
     function repll.onDraw()
         if baseY ~= Screen.getScreenSize()[2] then
@@ -519,17 +547,20 @@ do
             else
                 x = x + (glyphwid * repll.cursorPos)
             end
-            _print("|", x, y)
+            _print("|", x + repll.cursorOffsetX, y + repll.cursorOffsetY)
         end
         blinker = blinker + 1
         if blinker > 32 then
             blinker = -32
         end
         
+        local originalScreenLength = repll.maxScreenLength
+        
         for i = #repll.log, 1, -1 do
-            y = y - 18
+            repll.maxScreenLength = repll.maxScreenLength - repll.maxLines
             addprint("\n")
-            if y < 0 then
+            if repll.maxScreenLength < 0 then
+                repll.maxScreenLength = originalScreenLength
                 break
             end
             addprint(repll.log[i])
@@ -538,7 +569,7 @@ do
         printlist[listidx] = nil
         listidx = 1
         
-        _print(table.concat(table.reverse(printlist)), baseX, baseY)
+        _print(table.concat(table.reverse(printlist)), baseX + repll.textOffsetX, baseY + repll.textOffsetY)
     end
 end
 
