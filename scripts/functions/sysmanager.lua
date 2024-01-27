@@ -605,7 +605,7 @@ function SysManager.sendToConsole(data)
     return console:println(tostring(data))
 end
 
-SysManager.editorValuesNPC = {
+SysManager.editorValues = {
     [1] = {oldStr = "ID:", newStr = "id"},
     [2] = {oldStr = "X:", newStr = "x"},
     [3] = {oldStr = "Y:", newStr = "y"},
@@ -624,9 +624,32 @@ SysManager.editorValuesNPC = {
     [16] = {oldStr = "ED:", newStr = "eventDeath"},
     [17] = {oldStr = "ET:", newStr = "eventTalk"},
     [18] = {oldStr = "EE:", newStr = "eventLayerEmpty"},
+    [19] = {oldStr = "W:", newStr = "width"},
+    [20] = {oldStr = "H:", newStr = "height"},
 }
 
 SysManager.editorValuesNPCAllValues = {
+    ["id"] = 0,
+    ["x"] = 0,
+    ["y"] = 0,
+    ["direction"] = -1,
+    ["friendly"] = 0,
+    ["dontMove"] = 0,
+    ["legacyBoss"] = 0,
+    ["message"] = "",
+    ["generatorEnabled"] = 0,
+    ["generatorDirection"] = 0,
+    ["generatorWaitTime"] = 0,
+    ["generatorType"] = 1,
+    ["currentLayer"] = "Default",
+    ["attachToLayer"] = "",
+    ["eventActivate"] = "",
+    ["eventDeath"] = "",
+    ["eventTalk"] = "",
+    ["eventLayerEmpty"] = "",
+}
+
+SysManager.editorValuesBlockAllValues = {
     ["id"] = 0,
     ["x"] = 0,
     ["y"] = 0,
@@ -671,84 +694,101 @@ function SysManager.checkEditorEntity()
         
         splitValues = Tabled.splitString(draftTable[2], ";")
         
-        if draftTable[1] == "NPC" then
-            for i = 1,#SysManager.editorValuesNPC do
-                local tempValue = SysManager.editorValuesNPC[i]
-                local tempIndex = Tabled.findStringPartFromTable(splitValues, SysManager.editorValuesNPC[i].oldStr, true)
+        if draftTable[1] ~= "nil" then
+            for i = 1,#SysManager.editorValues do
+                local tempValue = SysManager.editorValues[i]
+                local tempIndex = Tabled.findStringPartFromTable(splitValues, SysManager.editorValues[i].oldStr, true)
                 if tempIndex ~= nil then
-                    local tempStr = string.gsub(splitValues[tempIndex], SysManager.editorValuesNPC[i].oldStr, "")
+                    local tempStr = string.gsub(splitValues[tempIndex], SysManager.editorValues[i].oldStr, "")
                     draftTable[tempValue.newStr] = tempStr
                 end
             end
             
-            if draftTable.direction == nil then
-                draftTable.direction = SysManager.editorValuesNPCAllValues["direction"]
+            if draftTable[1] == "NPC" then
+                if draftTable.direction == nil then
+                    draftTable.direction = SysManager.editorValuesNPCAllValues["direction"]
+                end
+                if draftTable.friendly == nil then
+                    draftTable.friendly = SysManager.editorValuesNPCAllValues["friendly"]
+                end
+                if draftTable.dontMove == nil then
+                    draftTable.dontMove = SysManager.editorValuesNPCAllValues["dontMove"]
+                end
+                if draftTable.legacyBoss == nil then
+                    draftTable.legacyBoss = SysManager.editorValuesNPCAllValues["legacyBoss"]
+                end
+                if draftTable.generatorEnabled == nil then
+                    draftTable.generatorEnabled = SysManager.editorValuesNPCAllValues["generatorEnabled"]
+                end
+                if draftTable.generatorDirection == nil then
+                    draftTable.generatorDirection = SysManager.editorValuesNPCAllValues["generatorDirection"]
+                end
+                if draftTable.generatorWaitTime == nil then
+                    draftTable.generatorWaitTime = SysManager.editorValuesNPCAllValues["generatorWaitTime"]
+                end
+                if draftTable.generatorType == nil then
+                    draftTable.generatorType = SysManager.editorValuesNPCAllValues["generatorType"]
+                end
             end
-            if draftTable.friendly == nil then
-                draftTable.friendly = SysManager.editorValuesNPCAllValues["friendly"]
-            end
-            if draftTable.dontMove == nil then
-                draftTable.dontMove = SysManager.editorValuesNPCAllValues["dontMove"]
-            end
-            if draftTable.legacyBoss == nil then
-                draftTable.legacyBoss = SysManager.editorValuesNPCAllValues["legacyBoss"]
-            end
-            if draftTable.generatorEnabled == nil then
-                draftTable.generatorEnabled = SysManager.editorValuesNPCAllValues["generatorEnabled"]
-            end
-            if draftTable.generatorDirection == nil then
-                draftTable.generatorDirection = SysManager.editorValuesNPCAllValues["generatorDirection"]
-            end
-            if draftTable.generatorWaitTime == nil then
-                draftTable.generatorWaitTime = SysManager.editorValuesNPCAllValues["generatorWaitTime"]
-            end
-            if draftTable.generatorType == nil then
-                draftTable.generatorType = SysManager.editorValuesNPCAllValues["generatorType"]
+            
+            if draftTable[1] == "BLOCK" then
+                if draftTable.width == nil then
+                    draftTable.width = SysManager.editorValuesNPCAllValues["width"]
+                end
+                
+                if draftTable.height == nil then
+                    draftTable.height = SysManager.editorValuesNPCAllValues["height"]
+                end
             end
             
             for i = 1,#SysManager.editorMessageValuesToReplace do
-                if draftTable.message ~= nil then
-                    draftTable.message = string.gsub(draftTable.message, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
-                else
-                    draftTable.message = SysManager.editorValuesNPCAllValues["message"]
+                if draftTable[1] == "NPC" then
+                    if draftTable.message ~= nil then
+                        draftTable.message = string.gsub(draftTable.message, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                    else
+                        draftTable.message = SysManager.editorValuesNPCAllValues["message"]
+                    end
+                    if draftTable.eventActivate ~= nil then
+                        draftTable.eventActivate = string.gsub(draftTable.eventActivate, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                    else
+                        draftTable.eventActivate = SysManager.editorValuesNPCAllValues["eventActivate"]
+                    end
+                    if draftTable.eventDeath ~= nil then
+                        draftTable.eventDeath = string.gsub(draftTable.eventDeath, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                    else
+                        draftTable.eventDeath = SysManager.editorValuesNPCAllValues["eventDeath"]
+                    end
+                    if draftTable.eventTalk ~= nil then
+                        draftTable.eventTalk = string.gsub(draftTable.eventTalk, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                    else
+                        draftTable.eventTalk = SysManager.editorValuesNPCAllValues["eventTalk"]
+                    end
+                    if draftTable.eventLayerEmpty ~= nil then
+                        draftTable.eventLayerEmpty = string.gsub(draftTable.eventLayerEmpty, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                    else
+                        draftTable.eventLayerEmpty = SysManager.editorValuesNPCAllValues["eventLayerEmpty"]
+                    end
+                    if draftTable.attachToLayer ~= nil then
+                        draftTable.attachToLayer = string.gsub(draftTable.attachToLayer, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
+                    else
+                        draftTable.attachToLayer = SysManager.editorValuesNPCAllValues["attachToLayer"]
+                    end
                 end
+                
                 if draftTable.currentLayer ~= nil then
                     draftTable.currentLayer = string.gsub(draftTable.currentLayer, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
                 else
                     draftTable.currentLayer = SysManager.editorValuesNPCAllValues["currentLayer"]
                 end
-                if draftTable.attachToLayer ~= nil then
-                    draftTable.attachToLayer = string.gsub(draftTable.attachToLayer, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
-                else
-                    draftTable.attachToLayer = SysManager.editorValuesNPCAllValues["attachToLayer"]
-                end
-                if draftTable.eventActivate ~= nil then
-                    draftTable.eventActivate = string.gsub(draftTable.eventActivate, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
-                else
-                    draftTable.eventActivate = SysManager.editorValuesNPCAllValues["eventActivate"]
-                end
-                if draftTable.eventDeath ~= nil then
-                    draftTable.eventDeath = string.gsub(draftTable.eventDeath, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
-                else
-                    draftTable.eventDeath = SysManager.editorValuesNPCAllValues["eventDeath"]
-                end
-                if draftTable.eventTalk ~= nil then
-                    draftTable.eventTalk = string.gsub(draftTable.eventTalk, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
-                else
-                    draftTable.eventTalk = SysManager.editorValuesNPCAllValues["eventTalk"]
-                end
-                if draftTable.eventLayerEmpty ~= nil then
-                    draftTable.eventLayerEmpty = string.gsub(draftTable.eventLayerEmpty, SysManager.editorMessageValuesToReplace[i].oldStr, SysManager.editorMessageValuesToReplace[i].newStr)
-                else
-                    draftTable.eventLayerEmpty = SysManager.editorValuesNPCAllValues["eventLayerEmpty"]
-                end
             end
             
             finalTable = {
-                entityType = "NPC",
+                entityType = draftTable[1],
                 id = tonumber(draftTable.id),
                 x = tonumber(draftTable.x),
                 y = tonumber(draftTable.y),
+                width = tonumber(draftTable.width),
+                height = tonumber(draftTable.height),
                 direction = tonumber(draftTable.direction),
                 friendly = tonumber(draftTable.friendly),
                 dontMove = tonumber(draftTable.dontMove),
@@ -765,8 +805,6 @@ function SysManager.checkEditorEntity()
                 eventTalk = draftTable.eventTalk,
                 eventLayerEmpty = draftTable.eventLayerEmpty,
             }
-        elseif draftTable[1] == "BLOCK" then
-            
         end
         return finalTable
     else
