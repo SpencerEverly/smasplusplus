@@ -741,6 +741,20 @@ function Playur.startPointCoordinateY(index) --Gets the Y coordinate starting po
     return y + height
 end
 
+function Playur.startPointCoordinate(index) --Gets the coordinate starting points for either player1/2. This returns a vector rather than being separated within each function.
+    if index < 1 or index > 2 then
+        error("Invalid player start point")
+    end
+
+    local addr = PLAYER_START_POINT_ADDR + (index - 1)*48
+    local x      = mem(addr       ,FIELD_DFLOAT)
+    local y      = mem(addr + 0x08,FIELD_DFLOAT)
+    local height = mem(addr + 0x10,FIELD_DFLOAT)
+    local width  = mem(addr + 0x18,FIELD_DFLOAT)
+
+    return vector(x + width, y + height)
+end
+
 function Playur.sectionsWithNoPlayers() --Lists a table with sections with no players in them.
     local nonPlayeredSections = {}
     local playeredSections = Section.getActiveIndices()

@@ -146,7 +146,6 @@ Packs/Sprites are by:
 
 Codes for certain parts made by:
 
-- KBM-Quine
 - Emral
 - MrDoubleA
 - Chipss
@@ -525,7 +524,6 @@ Remake released on February 19th, 2020 (v1.0)
 LunaLua code made by:
 - Spencer Everly
 - MrDoubleA
-- KBM-Quine
 - Enjl
 
 Hotel Mario remix music by Keaton
