@@ -451,7 +451,8 @@ if Misc.inSuperMarioAllStarsPlusPlus() then
     end
 end
 
-function Playur.changeCharacter(playerID, isNumberOrString, characterID, variantID, alterationID) --Changes a character to the specified character, variant, and alteration specified. Example: Playur.changeCharacter(1, false, 1, 1, 1), or Playur.changeCharacter(1, true, "mario", "!DEFAULT", "FlipnoteStudio")
+function Playur.changeCharacter(p, isNumberOrString, characterID, variantID, alterationID) --Changes a character to the specified character, variant, and alteration specified. Example: Playur.changeCharacter(1, false, 1, 1, 1), or Playur.changeCharacter(1, true, "mario", "!DEFAULT", "FlipnoteStudio")
+    local playerID = p.idx
     if isNumberOrString == nil then
         isNumberOrString = false
     end
@@ -473,20 +474,6 @@ function Playur.changeCharacter(playerID, isNumberOrString, characterID, variant
         else
             variantID = 1
         end
-        if smasCharacterChanger.namesAlteration[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown] ~= nil then
-            local foundAlteration = nil
-            for i = 1,#smasCharacterChanger.namesAlteration[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown] do
-                if smasCharacterChanger.namesAlteration[smasCharacterChanger.selectionNumber][smasCharacterChanger.selectionNumberUpDown][smasCharacterChanger.selectionNumberAlteration].folder == alterationID then
-                    foundAlteration = i
-                    break
-                end
-            end
-            if foundAlteration == nil then
-                alterationID = 0
-            else
-                alterationID = foundAlteration
-            end
-        end
     end
     if SaveData.SMASPlusPlus.player[playerID].currentCostume ~= smasCharacterChanger.namesCostume[characterID][variantID] then
         smasCharacterCostumes.currentCostume = {} --Blank this out in case if it has any previous data in it
@@ -495,26 +482,26 @@ function Playur.changeCharacter(playerID, isNumberOrString, characterID, variant
     local charac = smasCharacterChanger.namesCharacter[characterID]
     local chars = playerManager.getCharacters()
     if smasCharacterChanger.namesCostume[characterID] ~= "nil" then --Reason why nil needs to be a string is because anything that's nil isn't really a literal "nil" at all, so putting it as a string fixes that
-        Player(playerID):transform(smasCharacterChanger.namesCharacter[characterID], false)
-        Player(playerID).setCostume(smasCharacterChanger.namesCharacter[characterID], smasCharacterChanger.namesCostume[characterID][variantID], false)
-        if Player(playerID).character == CHARACTER_STEVE then
+        p:transform(smasCharacterChanger.namesCharacter[characterID], false)
+        p.setCostume(smasCharacterChanger.namesCharacter[characterID], smasCharacterChanger.namesCostume[characterID][variantID], false)
+        if p.character == CHARACTER_STEVE then
             smasAlterationSystem.enableGraphicRevertation = false
             steve.initCharacter()
         end
-        if Player(playerID).character == CHARACTER_YOSHI then
+        if p.character == CHARACTER_YOSHI then
             smasAlterationSystem.enableGraphicRevertation = false
         end
     else
-        Player(playerID):transform(smasCharacterChanger.namesCharacter[characterID], false)
-        Player(playerID).setCostume(smasCharacterChanger.namesCharacter[characterID], nil, false)
+        p:transform(smasCharacterChanger.namesCharacter[characterID], false)
+        p.setCostume(smasCharacterChanger.namesCharacter[characterID], nil, false)
         if SMBX_VERSION == VER_SEE_MOD then
             Misc.testModeSetPlayerSetting(smasCharacterChanger.namesCharacter[characterID])
         end
-        if Player(playerID).character == CHARACTER_STEVE then
+        if p.character == CHARACTER_STEVE then
             smasAlterationSystem.enableGraphicRevertation = false
             steve.initCharacter()
         end
-        if Player(playerID).character == CHARACTER_YOSHI then
+        if p.character == CHARACTER_YOSHI then
             smasAlterationSystem.enableGraphicRevertation = false
         end
     end
@@ -531,8 +518,8 @@ function Playur.changeCharacter(playerID, isNumberOrString, characterID, variant
     local finalVariant = smasCharacterChanger.namesCostume[characterID][variantID]
     local finalAlteration = "N/A"
     if (alterationID == nil or alterationID == 0) then
+        smasAlterationSystem.enableGraphicRevertation = false
         SaveData.SMASPlusPlus.player[playerID].currentAlteration = "N/A"
-        smasAlterationSystem.characterAlterationChange(playerID)
         EventManager.callEvent("onCharacterChangeSMAS", Player(playerID), finalCharacter, finalVariant)
     elseif (alterationID ~= nil and alterationID > 0) then
         finalAlteration = smasCharacterChanger.namesAlteration[characterID][variantID][alterationID].folder

@@ -150,15 +150,19 @@ function Sound.playSFX(name, volume, loops, delay, pan) --If you want to play an
 end
 
 function Sound.clearUnusedCostumeSounds()
-    if SMBX_VERSION ~= VER_SEE_MOD then
-        Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
-        SysManager.sendToConsole("NOT USING SEE MOD! Costume sound refresher has stopped.")
-        return
-    else
-        for k,v in ipairs(smasTables.soundNamesInOrder) do
-            if (smasTables.previouslyCachedSoundFiles[k] ~= smasTables.currentlyCachedSoundFiles[k]) then
-                SysManager.sendToConsole("Unmatched sound detected: "..smasTables.previouslyCachedSoundFiles[k]..", will clear off from cache until next reload...")
-                CacheSystem.ClearSpecifiedSoundFromCache(smasTables.previouslyCachedSoundFiles[k])
+    if lunatime.tick() > 10 then
+        if SMBX_VERSION ~= VER_SEE_MOD then
+            Misc.warn("You are using the original LunaLua, and not the SEE Mod for this command. Please retrieve the SEE Mod by downloading it over at this website: https://github.com/SpencerEverly/smbx2-seemod")
+            SysManager.sendToConsole("NOT USING SEE MOD! Costume sound refresher has stopped.")
+            return
+        else
+            for k,v in ipairs(smasTables.soundNamesInOrder) do
+                if (smasTables.previouslyCachedSoundFiles[k] ~= smasTables.currentlyCachedSoundFiles[k]) then
+                    SysManager.sendToConsole("Unmatched sound detected: "..smasTables.previouslyCachedSoundFiles[k]..", will clear off from cache until next reload...")
+                    if Audio.SfxIsInCache(smasTables.previouslyCachedSoundFiles[k]) then
+                        Audio.SfxClearFromCache(smasTables.previouslyCachedSoundFiles[k])
+                    end
+                end
             end
         end
     end
@@ -223,22 +227,15 @@ function Sound.loadCostumeSounds() --Load up the sounds when a costume is being 
         
         smasTables.currentlyCachedSoundFiles[k] = Sound.resolveCostumeSound(v, true)
     end
-    
-    --[[for i = 1, #smasTables.soundNamesInOrder do
-        local cachedSounds = {}
-        if cachedSounds[i] == nil then
-            cachedSounds[i] = Sound.resolveCostumeSound(smasTables.soundNamesInOrder[i])
-        end
-        smasExtraSounds.sounds[i].sfx = cachedSounds[i]
-        if i <= 91 then
-            Audio.sounds[i].sfx = cachedSounds[i]
-        end
-    end]]
+    Sound.clearUnusedCostumeSounds()
 end
 
 function Sound.cleanupCostumeSounds()
     for k,v in ipairs(smasTables.soundNamesInOrder) do
         if not smasTables.stockSoundNumbersInOrder[k] then
+            if SMBX_VERSION == VER_SEE_MOD then
+                Audio.SfxClearFromCache(smasExtraSounds.sounds[k].sfx)
+            end
             smasExtraSounds.sounds[k].sfx = nil
         elseif smasTables.stockSoundNumbersInOrder[k] then
             Audio.sounds[k].sfx = nil

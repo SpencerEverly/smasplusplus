@@ -241,7 +241,6 @@ function smasCharacterChanger.shutdownChanger() --The animation that shuts the m
         changed = false
     end
     Sound.loadCostumeSounds()
-    Sound.clearUnusedCostumeSounds()
     Sound.restoreMusic(-1)
     if pauseplus then
         pauseplus.canPause = true
@@ -302,7 +301,7 @@ function smasCharacterChanger.onInputUpdate()
             
             
             if smasCharacterChanger.selectionNumber then
-                Playur.changeCharacter(1, false, smasCharacterChanger.selectionNumber, smasCharacterChanger.selectionNumberUpDown, smasCharacterChanger.selectionNumberAlteration) --One simple function to change the character correctly, for the episode
+                Playur.changeCharacter(player, false, smasCharacterChanger.selectionNumber, smasCharacterChanger.selectionNumberUpDown, smasCharacterChanger.selectionNumberAlteration) --One simple function to change the character correctly, for the episode
                 changed = true
                 smasCharacterChanger.menuActive = false
             end
